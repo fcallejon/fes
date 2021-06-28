@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docker", "docker", "{F8184F36-9A0E-43C0-9BE2-571AD1C08B1B}"
+ProjectSection(SolutionItems) = preProject
+	docker-compose.yml = docker-compose.yml
+EndProjectSection
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fes", "src\Fes\Fes.fsproj", "{A74AB07D-0AFF-49D3-851B-53816B4DE4FB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "paket", "paket", "{509DDF89-85AD-43DA-9A3B-25C41B21A94C}"
+ProjectSection(SolutionItems) = preProject
+	paket.dependencies = paket.dependencies
+EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution", "Solution", "{0F9E0F70-62EC-41B3-932C-D6CE547D189F}"
+ProjectSection(SolutionItems) = preProject
+	.gitignore = .gitignore
+EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sample", "Sample", "{A6D41FAC-CF2F-4643-9E61-17A3BB3DB33D}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fes.Sample", "src\Fes.Sample\Fes.Sample.fsproj", "{1CD8EB93-5A67-4785-9F67-D851085BDBD4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A74AB07D-0AFF-49D3-851B-53816B4DE4FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A74AB07D-0AFF-49D3-851B-53816B4DE4FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A74AB07D-0AFF-49D3-851B-53816B4DE4FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A74AB07D-0AFF-49D3-851B-53816B4DE4FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CD8EB93-5A67-4785-9F67-D851085BDBD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CD8EB93-5A67-4785-9F67-D851085BDBD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CD8EB93-5A67-4785-9F67-D851085BDBD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CD8EB93-5A67-4785-9F67-D851085BDBD4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1CD8EB93-5A67-4785-9F67-D851085BDBD4} = {A6D41FAC-CF2F-4643-9E61-17A3BB3DB33D}
+	EndGlobalSection
+EndGlobal

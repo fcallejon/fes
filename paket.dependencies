@@ -1,0 +1,8 @@
+source https://api.nuget.org/v3/index.json
+
+storage: none
+framework: net5, netcoreapp3.1
+
+group Main
+    nuget FSharp.Core ~> 5.0.1
+    nuget Fleece.SystemTextJson
