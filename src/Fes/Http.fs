@@ -1,7 +1,6 @@
 ﻿namespace Fes
 
 open Fes
-open Fes.Exceptions
 
 [<RequireQualifiedAccess>]
 module Http =
@@ -57,7 +56,7 @@ module Http =
     module Response =        
         let toResult (response: AsyncResult<ResponseMsg, exn>) =
             response
-            |> AsyncResult.map
+            |> AsyncResult.bind
                 (fun res ->
                     async {
                         let! body = res.Content.ReadAsStringAsync() |> Async.AwaitTask
@@ -71,7 +70,6 @@ module Http =
                                 ElasticsearchException.ofString body
                                 |> ElasticsearchException.withDefaultException fallbackException
                     })
-            |> AsyncResult.bind id
                     
                 
     
