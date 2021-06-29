@@ -8,8 +8,10 @@
     <RootNamespace>Fes</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Http.fs" />
     <Content Include="paket.references" />
+    <Compile Include="Prelude.fs" />
+    <Compile Include="Exceptions.fs" />
+    <Compile Include="Http.fs" />
     <Compile Include="Domain.fs" />
     <Compile Include="Library.fs" />
   </ItemGroup>

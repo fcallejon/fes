@@ -430,12 +430,10 @@ type IndexSettings =
       NumberOfReplicas: option<uint16> }
     static member ToJson settings =
         jobj [
-           "number_of_shards" .=
-                (settings.NumberOfShards |> Option.defaultValue 3us)
-           "number_of_replicas" .=
-                (settings.NumberOfReplicas |> Option.defaultValue 3us) ]
+           "number_of_shards" .=? settings.NumberOfShards
+           "number_of_replicas" .=? settings.NumberOfReplicas ]
 
-type Alias =
+type IndexAlias =
     { Name: string
       Filter: option<string>
       IndexRouting: option<string>
@@ -443,6 +441,17 @@ type Alias =
       IsWriteIndex: option<bool>
       Routing: option<string>
       SearchRouting: option<string> }
+    
+    static member mk name =
+        { Name = name
+          Filter = None
+          IndexRouting = None
+          IsHidden = None
+          IsWriteIndex = None
+          Routing = None
+          SearchRouting = None }
+        
+    
     static member ToJson settings =
         let alias =
             jobj [
@@ -453,6 +462,17 @@ type Alias =
                "routing" .=? settings.Routing
                "search_routing" .=? settings.SearchRouting ]
         jobj [ settings.Name .= alias ]
+        
+    static member asJsonTuple settings =
+        let alias =
+            jobj [
+               "filter" .=? settings.Filter
+               "index_routing" .=? settings.IndexRouting
+               "is_hidden" .=? settings.IsHidden
+               "is_write_index" .=? settings.IsWriteIndex
+               "routing" .=? settings.Routing
+               "search_routing" .=? settings.SearchRouting ]
+        settings.Name, alias
 
 type IndexRequestQueryParams =
     { WaitForActiveShards: option<WaitForActiveShards>
@@ -487,7 +507,7 @@ type IndexRequest =
     { Name: string
       Mappings: option<MappingDefinition []>
       Settings: option<IndexSettings>
-      Aliases: option<Alias[]>
+      Aliases: option<IndexAlias[]>
       Parameters: option<IndexRequestQueryParams> }
     static member ToJson index =
         let mappings =
@@ -503,15 +523,10 @@ type IndexRequest =
             |> Option.map (dict >> mkJson)
             
         let aliases =
-            let mk aliases =
-                jobj [
-                    "aliases" .= aliases
-                ]
             index.Aliases
-            |> Option.map (Array.map Alias.ToJson)
-            |> Option.map mk
+            |> Option.map ((Array.map IndexAlias.asJsonTuple) >> dict >> ReadOnlyDictionary >> dictAsJsonObject)
 
-        jobj [ "aliases" .=? aliases
+        jobj [ "aliases" .=? aliases 
                "settings" .=? index.Settings
                "mappings" .=? mappings ]
         
