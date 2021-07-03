@@ -1,4 +1,5 @@
 ﻿open System
+open Fes
 open Fes.Domain
 
 [<EntryPoint>]
@@ -15,10 +16,13 @@ let main _ =
         Settings = None
         Aliases = Some [| IndexAlias.mk "Test" |]
         Parameters = None }
-    let t =
-        Fes.Http.fromBaseUri <| Uri "http://localhost:9200"
-        |> Fes.Http.run (IndexRequest.ToRequest req)
+      
+    let t : Result<IndexCreateResponse, exn> =
+        Http.fromBaseUri <| Uri "http://localhost:9200"
+        |> Http.run (IndexRequest.ToRequest req)
         |> Async.RunSynchronously
-    printfn $"%A{t}"
-    
+        
+    match t with
+    | Ok o -> printfn $"{o}"
+    | Error e -> printfn $"{e.Message}"
     0

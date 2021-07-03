@@ -75,7 +75,8 @@ module ElasticsearchException =
     let ofString s =
         JsonValue.Parse s
         |> Exceptions.ElasticsearchException.OfJson
+        |> Result.mapError (sprintf "%O" >> exn)
         
     let withDefaultException de = function
-        | Ok esException -> esException :> exn |> Error
-        | Error _ -> Error de
+        | Result.Ok esException -> esException :> exn |> Result.Error
+        | Result.Error _ -> Result.Error de

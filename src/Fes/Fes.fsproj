@@ -10,6 +10,11 @@
   <ItemGroup>
     <Content Include="paket.references" />
     <Compile Include="Prelude.fs" />
+    <Compile Include="ConvertionHelpers.fs" />
+    <Compile Include="Async.fs" />
+    <Compile Include="Result.fs" />
+    <Compile Include="AsyncResult.fs" />
+    <Compile Include="Json.fs" />
     <Compile Include="Exceptions.fs" />
     <Compile Include="Http.fs" />
     <Compile Include="Domain.fs" />

@@ -120,7 +120,7 @@ module Fields =
                     |> Result.map FieldType.Date) |]
                 |> Array.tryPick
                     (function
-                    | Ok ft -> Some ft
+                    | Result.Ok ft -> Some ft
                     | _ -> None)
 
             match fieldType with
@@ -540,5 +540,25 @@ type IndexRequest =
         |> Http.Request.mk
         |> Http.Request.withMethod Http.Put
         |> Http.Request.withJsonBody indexRequest
+        
+type IndexCreateResponse =
+    { Acknowledged: bool
+      ShardsAcknowledged: bool
+      Index: string }
+    
+    with
+        static member OfJson json =
+            match json with
+            | JObject o ->
+                monad {
+                    let! acknowledged =  o .@ "acknowledged"
+                    let! shardsAcknowledged =  o .@ "shards_acknowledged"
+                    let! index =  o .@ "index"
+                        
+                    return { Acknowledged = acknowledged
+                             ShardsAcknowledged = shardsAcknowledged
+                             Index = index }
+                }
+            | x -> Decode.Fail.objExpected x
 
 type Request = { Query: string }
