@@ -50,7 +50,8 @@ module Http =
             let json = toJson body |> string
             request.Content <- new StringContent(json, Encoding.UTF8, "application/json")
             request
-            
+
+    
     module Response =
         
         let inline toJson (response: ResponseMsg) =
@@ -80,8 +81,15 @@ module Http =
       let client = mkClient
       client.BaseAddress <- uri
       client
+
+    let inline toRequest x =
+        (^T : (static member ToRequest: ^T -> Result<RequestMsg, exn>) x)
       
     let inline run req (client: HttpClient) =
-        async {
-            let! res = client.SendAsync req |> Async.AwaitTask
+        let inline _run msg = async {
+            let! res = client.SendAsync msg |> Async.AwaitTask
             return! res |> Response.toResult }
+
+        (toRequest >> Async.retn) req
+        |> AsyncResult.bind _run
+        

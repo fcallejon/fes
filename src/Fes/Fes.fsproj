@@ -10,14 +10,16 @@
   <ItemGroup>
     <Content Include="paket.references" />
     <Compile Include="Prelude.fs" />
-    <Compile Include="ConvertionHelpers.fs" />
+    <Compile Include="ConversionHelpers.fs" />
     <Compile Include="Async.fs" />
     <Compile Include="Result.fs" />
     <Compile Include="AsyncResult.fs" />
     <Compile Include="Json.fs" />
     <Compile Include="Exceptions.fs" />
     <Compile Include="Http.fs" />
-    <Compile Include="Domain.fs" />
+    <Compile Include="Contracts\Fields.fs" />
+    <Compile Include="Contracts\Mappings.fs" />
+    <Compile Include="Contracts\Indices.fs" />
     <Compile Include="Library.fs" />
   </ItemGroup>
   <Import Project="..\..\.paket\Paket.Restore.targets" />
