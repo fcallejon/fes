@@ -9,9 +9,10 @@ module FieldTypes =
         | Wildcard
         static member ToJson value =
             match value with
-            | Keyword -> JString(string "keyword")
-            | ConstantKeyword -> JString(string "constant_keyword")
-            | Wildcard -> JString(string "wildcard")
+            | Keyword -> "keyword"
+            | ConstantKeyword -> "constant_keyword"
+            | Wildcard -> "wildcard"
+            |> JString
 
         static member OfJson value =
             match value with
@@ -33,15 +34,16 @@ module FieldTypes =
         | UnsignedLong
         static member ToJson value =
             match value with
-            | Long -> JString "long"
-            | Integer -> JString "integer"
-            | Short -> JString "short"
-            | Byte -> JString "byte"
-            | Double -> JString "double"
-            | Float -> JString "float"
-            | HalfFloat -> JString "half_float"
-            | ScaledFloat -> JString "scaled_float"
-            | UnsignedLong -> JString "unsigned_long"
+            | Long -> "long"
+            | Integer -> "integer"
+            | Short -> "short"
+            | Byte -> "byte"
+            | Double -> "double"
+            | Float -> "float"
+            | HalfFloat -> "half_float"
+            | ScaledFloat -> "scaled_float"
+            | UnsignedLong -> "unsigned_long"
+            |> JString
 
         static member OfJson value =
             match value with
@@ -69,8 +71,9 @@ module FieldTypes =
 
         static member ToJson value =
             match value with
-            | Date -> JString "date"
-            | DateNanos -> JString "date_nanos"
+            | Date -> "date"
+            | DateNanos -> "date_nanos"
+            |> JString
 
     type TextTypes =
         | Text
@@ -90,11 +93,12 @@ module FieldTypes =
 
         static member ToJson value =
             match value with
-            | Text -> JString "text"
-            | AnnotatedText -> JString "annotated_text"
-            | Completion -> JString "completion"
-            | SearchAsYouType -> JString "search_as_you_type"
-            | TokenCount -> JString "token_count"
+            | Text -> "text"
+            | AnnotatedText -> "annotated_text"
+            | Completion -> "completion"
+            | SearchAsYouType -> "search_as_you_type"
+            | TokenCount -> "token_count"
+            |> JString
 
 module Fields =
     open Fleece.SystemTextJson
