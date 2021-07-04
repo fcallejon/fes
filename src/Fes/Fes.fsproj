@@ -17,10 +17,11 @@
     <Compile Include="Json.fs" />
     <Compile Include="Exceptions.fs" />
     <Compile Include="Http.fs" />
+    <Compile Include="Contracts\Units.fs" />
     <Compile Include="Contracts\Fields.fs" />
     <Compile Include="Contracts\Mappings.fs" />
     <Compile Include="Contracts\Indices.fs" />
-    <Compile Include="Library.fs" />
+    <Compile Include="ElasticsearchClient.fs" />
   </ItemGroup>
   <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>
