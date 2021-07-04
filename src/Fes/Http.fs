@@ -48,7 +48,6 @@ module Http =
           
         let inline withJsonBody body (request: RequestMsg) =
             let json = toJson body |> string
-            printfn $"%s{json}"
             request.Content <- new StringContent(json, Encoding.UTF8, "application/json")
             request
 
