@@ -39,38 +39,77 @@ type ShardCheckOnStartup =
 
 [<RequireQualifiedAccess>]
 type Codec =
-    | Default
-    | BestCompression
+| Default
+| BestCompression
+with
     static member ToJson value =
         match value with
         | Default -> "default"
         | BestCompression -> "best_compression"
         |> JString
+        
+type AutoExpandReplicas =
+| Disabled
+| Delimited of uint16*uint16
+| LowerBoundOnly of uint16
+with
+    static member ToJson value =
+        match value with
+        | Disabled -> "false"
+        | Delimited (min, max) -> $"%i{max}-%i{min}"
+        | LowerBoundOnly min -> $"%i{min}-all"
+        |> JString
 
-type IndexSettings =
-    //TODO: Complete props from
-    // https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules.html#dynamic-index-settings
-    { NumberOfShards: option<uint16>
-      NumberOfReplicas: option<uint16>
-      NumberOfRoutingShards: option<uint16>
+type StaticIndexSettings =
+    { NumberOfRoutingShards: option<uint16>
       ShardCheckOnStartup: option<ShardCheckOnStartup>
       Hidden: option<bool>
       Codec: option<Codec>
-      LoadFixedBitsetFiltersEagerly: option<bool>
       RoutingPartitionSize: option<uint16>
       SoftDeletesRetention: option<TimeoutUnit>
-      RefreshInterval: option<TimeoutUnit> }
+      LoadFixedBitsetFiltersEagerly: option<bool> }
+    
+type DynamicIndexSettings =
+    { RefreshInterval: option<TimeoutUnit>
+      AutoExpandReplicas: option<AutoExpandReplicas>
+      SearchIdleAfter: option<TimeoutUnit>
+      MaxResultWindow: option<uint16>
+      MaxInnerResultWindow: option<uint16>
+      MaxReScoreWindow: option<uint16>
+      MaxDocValueFieldsSearch: option<uint16>
+      MaxScriptFields: option<uint16> }
+
+type IndexSettings =
+    { NumberOfShards: option<uint16>
+      NumberOfReplicas: option<uint16>
+      Static: option<StaticIndexSettings>
+      Dynamic: option<DynamicIndexSettings> }
     static member ToJson settings =
-        jobj [ "number_of_shards" .=? settings.NumberOfShards
-               "number_of_replicas" .=? settings.NumberOfReplicas
-               "number_of_routing_shards" .=? settings.NumberOfRoutingShards
-               "shard.check_on_startup" .=? settings.ShardCheckOnStartup
-               "hidden" .=? settings.Hidden
-               "codec" .=? settings.Codec
-               "load_fixed_bitset_filters_eagerly" .=? settings.LoadFixedBitsetFiltersEagerly
-               "routing_partition_size" .=? settings.RoutingPartitionSize
-               "soft_deletes.retention_lease.period" .=? settings.SoftDeletesRetention
-               "refresh_interval" .=? settings.RefreshInterval ]
+        jobj [ yield "number_of_shards" .=? settings.NumberOfShards
+               yield "number_of_replicas" .=? settings.NumberOfReplicas
+
+               if settings.Static.IsSome then
+                   let staticSettings = settings.Static.Value
+                   yield "number_of_routing_shards" .=? staticSettings.NumberOfRoutingShards
+                   yield "shard.check_on_startup" .=? staticSettings.ShardCheckOnStartup
+                   yield "hidden" .=? staticSettings.Hidden
+                   yield "codec" .=? staticSettings.Codec
+                   yield "load_fixed_bitset_filters_eagerly" .=? staticSettings.LoadFixedBitsetFiltersEagerly
+                   yield "routing_partition_size" .=? staticSettings.RoutingPartitionSize
+                   yield "soft_deletes.retention_lease.period" .=? staticSettings.SoftDeletesRetention
+
+               if settings.Dynamic.IsSome then
+                   let dynamicSettings = settings.Dynamic.Value
+                   yield "refresh_interval" .=? dynamicSettings.RefreshInterval
+                   yield "auto_expand_replicas" .=? dynamicSettings.AutoExpandReplicas
+                   yield "search.idle.after" .=? dynamicSettings.SearchIdleAfter
+                   yield "max_result_window" .=? dynamicSettings.MaxResultWindow
+                   yield "max_inner_result_window" .=? dynamicSettings.MaxInnerResultWindow
+                   yield "max_rescore_window" .=? dynamicSettings.MaxReScoreWindow
+                   yield "max_docvalue_fields_search" .=? dynamicSettings.MaxDocValueFieldsSearch
+                   yield "max_script_fields" .=? dynamicSettings.MaxScriptFields
+                   yield "max_ngram_diff" .=? dynamicSettings.MaxScriptFields
+             ]
 
 type IndexAlias =
     { Name: string
@@ -246,36 +285,10 @@ type UpdateRequestQueryParams =
 
 type UpdateIndexSettingsRequest =
     { Target: option<string>
-      Mappings: option<MappingDefinition []>
       Settings: option<IndexSettings>
-      Aliases: option<IndexAlias []>
       Parameters: option<IndexRequestQueryParams> }
     static member ToJson index =
-        let mappings =
-            let mkMapping (mapping: MappingDefinition) =
-                mapping.Name, jobj [ "type" .= mapping.Type ]
-
-            let mkJson mappings =
-                let rod = ReadOnlyDictionary(mappings)
-                jobj [ "properties" .= (dictAsJsonObject rod) ]
-
-            index.Mappings
-            |> Option.map (Array.map mkMapping)
-            |> Option.map (dict >> mkJson)
-
-        let aliases =
-            index.Aliases
-            |> Option.map (
-                (Array.map IndexAlias.asJsonTuple)
-                >> dict
-                >> ReadOnlyDictionary
-                >> dictAsJsonObject
-            )
-
-        jobj [ // "aliases" .=? aliases
-               "index" .=? index.Settings
-               //"mappings" .=? mappings
-             ]
+        jobj [ "index" .=? index.Settings ]
 
     static member ToRequest(request: UpdateIndexSettingsRequest) =
         let target =
