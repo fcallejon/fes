@@ -45,7 +45,8 @@ module Exceptions =
             
     type ElasticsearchCausedBy =
         { Type: ElasticsearchCauseByType
-          Reason: string }
+          Reason: string
+          Stack: option<string> }
     with
         static member OfJson value =
             match value with
@@ -53,9 +54,11 @@ module Exceptions =
                 monad {
                     let! esType = o .@ "type" 
                     let! reason = o .@ "reason"
+                    let! stack = o .@? "stack_trace"
                     
                     return { ElasticsearchCausedBy.Type = esType
-                             Reason = reason }
+                             Reason = reason
+                             Stack = stack }
                 }
             | x -> Decode.Fail.objExpected x
     
@@ -66,10 +69,11 @@ module Exceptions =
         val status: HttpStatusCode
         val reason: string
         val cause: option<ElasticsearchCausedBy>
+        val stack: option<string>
         val index: string
         val root: ElasticsearchRootCauseInfo[]
         
-        private new (raw', index', esType', status', reason', root': ElasticsearchRootCauseInfo[], cause') = {
+        private new (raw', index', esType', status', reason', root': ElasticsearchRootCauseInfo[], cause', stack') = {
             inherit Exception(reason')
             raw = raw'
             esType = esType'
@@ -77,6 +81,7 @@ module Exceptions =
             reason = reason'
             root = root'
             cause = cause'
+            stack = stack'
             index = index'}
 
         static member OfJson json =            
@@ -90,9 +95,10 @@ module Exceptions =
                         let! reason = error .@ "reason"
                         let! index = error .@ "index"
                         let! cause = error .@? "cause"
+                        let! stack = error .@? "stack_trace"
                         let! root = error .@ "root_cause" |> Result.bind (Array.map ElasticsearchRootCauseInfo.OfJson >> sequence)
                         
-                        return! Decode.Success <| ElasticsearchException(json, index, esType, status, reason, root, cause)
+                        return! Decode.Success <| ElasticsearchException(json, index, esType, status, reason, root, cause, stack)
                     }
                 | _, _ -> Decode.Fail.parseError (exn <| string json) "Invalid error response."
             | x -> Decode.Fail.objExpected x
