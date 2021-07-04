@@ -9,12 +9,22 @@ module Exceptions =
     
     type ElasticsearchExceptions =
     | ResourceAlreadyExistsException
-    
+    | IllegalArgumentException
     with
         static member OfJson value =
             match value with
             | JString "resource_already_exists_exception" -> Decode.Success ResourceAlreadyExistsException
+            | JString "illegal_argument_exception" -> Decode.Success IllegalArgumentException
             | JString x as v -> Decode.Fail.invalidValue v $"Wrong ElasticsearchException value: %s{x}"
+            | x -> Decode.Fail.strExpected x
+    
+    type ElasticsearchCauseByType =
+    | NumberFormatException
+    with
+        static member OfJson value =
+            match value with
+            | JString "number_format_exception" -> Decode.Success NumberFormatException
+            | JString x as v -> Decode.Fail.invalidValue v $"Wrong ElasticsearchCauseByType value: %s{x}"
             | x -> Decode.Fail.strExpected x
             
     type ElasticsearchRootCauseInfo =
@@ -32,6 +42,22 @@ module Exceptions =
                              Reason = reason }
                 }
             | x -> Decode.Fail.objExpected x
+            
+    type ElasticsearchCausedBy =
+        { Type: ElasticsearchCauseByType
+          Reason: string }
+    with
+        static member OfJson value =
+            match value with
+            | JObject o ->
+                monad {
+                    let! esType = o .@ "type" 
+                    let! reason = o .@ "reason"
+                    
+                    return { ElasticsearchCausedBy.Type = esType
+                             Reason = reason }
+                }
+            | x -> Decode.Fail.objExpected x
     
     type ElasticsearchException =
         inherit Exception
@@ -39,16 +65,18 @@ module Exceptions =
         val esType: ElasticsearchExceptions
         val status: HttpStatusCode
         val reason: string
+        val cause: option<ElasticsearchCausedBy>
         val index: string
         val root: ElasticsearchRootCauseInfo[]
         
-        private new (raw', index', esType', status', reason', root': ElasticsearchRootCauseInfo[]) = {
+        private new (raw', index', esType', status', reason', root': ElasticsearchRootCauseInfo[], cause') = {
             inherit Exception(reason')
             raw = raw'
             esType = esType'
             status = status'
             reason = reason'
             root = root'
+            cause = cause'
             index = index'}
 
         static member OfJson json =            
@@ -61,9 +89,10 @@ module Exceptions =
                         let! status = o .@ "status" |> Result.bind JsonEnum.fromInt<HttpStatusCode>
                         let! reason = error .@ "reason"
                         let! index = error .@ "index"
+                        let! cause = error .@? "cause"
                         let! root = error .@ "root_cause" |> Result.bind (Array.map ElasticsearchRootCauseInfo.OfJson >> sequence)
                         
-                        return! Decode.Success <| ElasticsearchException(json, index, esType, status, reason, root)
+                        return! Decode.Success <| ElasticsearchException(json, index, esType, status, reason, root, cause)
                     }
                 | _, _ -> Decode.Fail.parseError (exn <| string json) "Invalid error response."
             | x -> Decode.Fail.objExpected x

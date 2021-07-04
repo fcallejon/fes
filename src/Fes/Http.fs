@@ -48,6 +48,7 @@ module Http =
           
         let inline withJsonBody body (request: RequestMsg) =
             let json = toJson body |> string
+            printfn $"%s{json}"
             request.Content <- new StringContent(json, Encoding.UTF8, "application/json")
             request
 
@@ -72,15 +73,6 @@ module Http =
                 body
                 |> Async.map (Result.bind ElasticsearchException.ofString)
                 |> Async.map (function | Ok e -> e :> exn |> Error | Error e -> Error e)
-
-    let mkClient =
-      let client = new HttpClient()
-      client
-      
-    let fromBaseUri uri =
-      let client = mkClient
-      client.BaseAddress <- uri
-      client
 
     let inline toRequest x =
         (^T : (static member ToRequest: ^T -> Result<RequestMsg, exn>) x)

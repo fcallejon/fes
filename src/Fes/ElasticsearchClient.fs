@@ -12,3 +12,6 @@ type ElasticsearchClient (baseUri: Uri) =
         
     member this.mkIndex (index: IndexRequest) : AsyncResult<IndexCreateResponse, exn> =
         Http.run index localClient
+        
+    member this.updateIndexSettings (update: UpdateIndexSettingsRequest) : AsyncResult<ElasticsearchGenericResponse, exn> =
+        Http.run update localClient
