@@ -19,7 +19,7 @@ module FieldTypes =
             | JString "keyword" -> Decode.Success Keyword
             | JString "constant_keyword" -> Decode.Success ConstantKeyword
             | JString "wildcard" -> Decode.Success Wildcard
-            | JString x as v -> Decode.Fail.invalidValue v $"Wrong Keywords value: %s{x}"
+            | JString x as v -> Decode.Fail.invalidValue v $"Wrong Keyword Type: %s{x}"
             | x -> Decode.Fail.strExpected x
 
     type Numeric =
@@ -56,7 +56,7 @@ module FieldTypes =
             | JString "half_float" -> Decode.Success HalfFloat
             | JString "scaled_float" -> Decode.Success ScaledFloat
             | JString "unsigned_long" -> Decode.Success UnsignedLong
-            | JString x as v -> Decode.Fail.invalidValue v $"Wrong Numeric value: %s{x}"
+            | JString x as v -> Decode.Fail.invalidValue v $"Wrong Numeric Type: %s{x}"
             | x -> Decode.Fail.strExpected x
 
     type DateTypes =
@@ -66,7 +66,7 @@ module FieldTypes =
             match value with
             | JString "date" -> Decode.Success Date
             | JString "date_nanos" -> Decode.Success DateNanos
-            | JString x as v -> Decode.Fail.invalidValue v $"Wrong Date value: %s{x}"
+            | JString x as v -> Decode.Fail.invalidValue v $"Wrong Date Type: %s{x}"
             | x -> Decode.Fail.strExpected x
 
         static member ToJson value =
@@ -88,7 +88,7 @@ module FieldTypes =
             | JString "completion" -> Decode.Success Completion
             | JString "search_as_you_type" -> Decode.Success SearchAsYouType
             | JString "token_count" -> Decode.Success TokenCount
-            | JString x as v -> Decode.Fail.invalidValue v $"Wrong Text value: %s{x}"
+            | JString x as v -> Decode.Fail.invalidValue v $"Wrong Text Type: %s{x}"
             | x -> Decode.Fail.strExpected x
 
         static member ToJson value =
@@ -125,7 +125,7 @@ module Fields =
 
             match fieldType with
             | Some fieldType' -> Decode.Success fieldType'
-            | _ -> Decode.Fail.invalidValue value (sprintf "Wrong Text value: %s" <| string value)
+            | _ -> Decode.Fail.invalidValue value (sprintf "Wrong Field Type: %s" <| string value)
 
         static member ToJson value =
             match value with

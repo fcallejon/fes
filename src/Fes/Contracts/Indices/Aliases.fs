@@ -1,10 +1,11 @@
 ﻿namespace Fes.Contracts
 
 module Aliases =
-    open System
     open FSharpPlus.Operators
     open Fes
     open Fes.Contracts.Units
+    open Fes.QueryParams.Builder.Operators
+    open Fes.QueryParams.Builder
     open Fleece.SystemTextJson
     open Fleece.SystemTextJson.Operators
 
@@ -12,19 +13,10 @@ module Aliases =
         { MasterTimeout: option<TimeoutUnit>
           Timeout: option<TimeoutUnit> }
         static member ToQueryParams queryParams =
-            let masterTimeout =
-                queryParams.MasterTimeout
-                |> Option.map (
-                    TimeoutUnit.ToString
-                    >> sprintf "master_timeout=%s"
-                )
-
-            let timeout =
-                queryParams.Timeout
-                |> Option.map (TimeoutUnit.ToString >> sprintf "timeout=%s")
-
-            [| masterTimeout; timeout |]
-            |> QueryStringBuilder.mk
+            qparams [
+                "master_timeout" &=? (queryParams.MasterTimeout |> Option.map TimeoutUnit.ToString)
+                "timeout" &=? (queryParams.Timeout |> Option.map TimeoutUnit.ToString)
+            ]
 
     type ActionOn =
         | Index of string
@@ -81,10 +73,7 @@ module Aliases =
             jobj [ "actions" .= (command.Actions |> Array.map Action.ToJson) ]
 
         static member ToRequest(request: AliasCommandRequest) =
-            let query =
-                request.Parameters
-                |> Option.map toQueryParams
-                |> Option.defaultValue (Ok String.Empty)
+            let query = queryParamsOfOption request.Parameters
 
             let mk query =
                 $"_aliases{query}"

@@ -80,7 +80,8 @@ let main _ =
     
     let aliasCmd =
         { AliasCommandRequest.Actions = [| addAlias |]
-          Parameters = None }
+          Parameters = Some { AliasQueryParameter.Timeout = Some <| (TimeoutUnit.Seconds 30<TimeUnits.s>)
+                              MasterTimeout = None } }
 
     let aliasCommandResult : Result<ElasticsearchGenericResponse, exn> =
         client.executeCommand aliasCmd |> Async.RunSynchronously

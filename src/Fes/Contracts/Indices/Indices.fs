@@ -1,20 +1,22 @@
 ﻿module Fes.Contracts.Indices
 
-open Fes
-open Fes.Contracts.Mappings
 open FSharpPlus
-open Fes.Contracts.Units
 open Fleece.SystemTextJson
 open Fleece.SystemTextJson.Operators
 open System
 open System.Collections.ObjectModel
+open Fes
+open Fes.Contracts.Mappings
+open Fes.QueryParams.Builder.Operators
+open Fes.QueryParams.Builder
+open Fes.Contracts.Units
 
 [<RequireQualifiedAccess>]
 type WaitForActiveShards =
     | One
     | All
     | Other of uint8
-    static member AsString =
+    static member ToString =
         function
         | One -> "1"
         | All -> "all"
@@ -152,27 +154,11 @@ type IndexRequestQueryParams =
       MasterTimeout: option<TimeoutUnit>
       Timeout: option<TimeoutUnit> }
     static member ToQueryParams queryParams =
-        let waitForActiveShards =
-            queryParams.WaitForActiveShards
-            |> Option.map (
-                WaitForActiveShards.AsString
-                >> sprintf "wait_for_active_shards=%s"
-            )
-
-        let masterTimeout =
-            queryParams.MasterTimeout
-            |> Option.map (
-                TimeoutUnit.ToString
-                >> sprintf "master_timeout=%s"
-            )
-
-        let timeout =
-            queryParams.Timeout
-            |> Option.map (TimeoutUnit.ToString >> sprintf "timeout=%s")
-        [| waitForActiveShards
-           masterTimeout
-           timeout |]
-        |> QueryStringBuilder.mk
+        qparams [
+            "wait_for_active_shards" &=? (queryParams.WaitForActiveShards |> Option.map WaitForActiveShards.ToString)
+            "master_timeout" &=? (queryParams.MasterTimeout |> Option.map TimeoutUnit.ToString)
+            "timeout" &=? (queryParams.Timeout |> Option.map TimeoutUnit.ToString)
+        ]
 
 type IndexRequest =
     { Name: string
@@ -227,7 +213,7 @@ type ExpandWildcardsOptions =
     | Closed
     | Hidden
     | None
-    static member AsString =
+    static member ToString =
         function
         | All -> "all"
         | Open -> "open"
@@ -244,31 +230,11 @@ type UpdateRequestQueryParams =
       MasterTimeout: option<TimeoutUnit>
       Timeout: option<TimeoutUnit> }
     static member ToQueryParams queryParams =
-        let waitForActiveShards =
-            queryParams.ExpandWildcards
-            |> Option.map (
-                ExpandWildcardsOptions.AsString
-                >> sprintf "expand_wildcards=%s"
-            )
-
-        let masterTimeout =
-            queryParams.MasterTimeout
-            |> Option.map (
-                TimeoutUnit.ToString
-                >> sprintf "master_timeout=%s"
-            )
-
-        let timeout =
-            queryParams.Timeout
-            |> Option.map (TimeoutUnit.ToString >> sprintf "timeout=%s")
-
-        let mk (values: string []) =
-            sprintf "?%s" <| String.Join("&", values)
-
-        [| waitForActiveShards
-           masterTimeout
-           timeout |]
-        |> QueryStringBuilder.mk
+        qparams [
+            "expand_wildcards" &=? (queryParams.ExpandWildcards |> Option.map ExpandWildcardsOptions.ToString)
+            "master_timeout" &=? (queryParams.MasterTimeout |> Option.map TimeoutUnit.ToString)
+            "timeout" &=? (queryParams.Timeout |> Option.map TimeoutUnit.ToString)
+        ]
 
 type UpdateIndexSettingsRequest =
     { Target: option<string>
@@ -280,10 +246,8 @@ type UpdateIndexSettingsRequest =
     static member ToRequest(request: UpdateIndexSettingsRequest) =
         let target =
             request.Target |> Option.defaultValue "_all"
-        let query =
-            request.Parameters
-            |> Option.map toQueryParams
-            |> Option.defaultValue (Result.Ok String.Empty)
+        let query = queryParamsOfOption request.Parameters
+            
 
         let mk query =
             $"%s{target}/_settings{query}"
