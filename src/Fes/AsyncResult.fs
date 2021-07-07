@@ -21,6 +21,6 @@ module AsyncResult =
 
     let inline ofChoice x = x |> Async.map Result.ofChoice
     
-    let inline waitOfTask<'a> (t: Task<'a>) : AsyncResult<'a, exn> = async {
+    let inline waitTask<'a> (t: Task<'a>) : AsyncResult<'a, exn> = async {
         let! tr = t
         return! retn tr }

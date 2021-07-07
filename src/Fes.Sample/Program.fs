@@ -3,6 +3,7 @@ open Fes
 open Fes.Contracts
 open Fes.Contracts.Fields
 open Fes.Contracts.Indices
+open Fes.Contracts.Aliases
 open Fes.Contracts.Mappings
 open Fes.Contracts.Units
 
@@ -17,6 +18,7 @@ let main _ =
         | Ok o -> printfn $"OK -> {o}"
         | Error e -> printfn $"Error -> {e.Message}"
 
+    // Create an Index
     let mapping =
         [| { MappingDefinition.Name = "field1"
              Type = FieldTypes.Text |> Fields.Text
@@ -40,7 +42,7 @@ let main _ =
 
     printResult "Create: " createResult
 
-    
+    // Update Index Settings
     let updateSettings =
         { IndexSettings.Dynamic =
             Some { DynamicIndexSettings.RefreshInterval = Some (TimeoutUnit.Seconds 1<TimeUnits.s>)
@@ -63,5 +65,27 @@ let main _ =
         client.updateIndexSettings updateReq |> Async.RunSynchronously
 
     printResult "Update: " updateResult
+    
+    // Create Alias for Index
+    let addAlias =
+        { AliasAction.Names = AliasNames.Alias "alias_test"
+          On = ActionOn.Index "index_test"
+          IsHidden = None
+          MustExists = None
+          IsWriteIndex = None
+          Routing = None
+          IndexRouting = None
+          SearchRouting = None }
+        |> Action.Add 
+    
+    let aliasCmd =
+        { AliasCommandRequest.Actions = [| addAlias |]
+          Parameters = None }
+
+    let aliasCommandResult : Result<ElasticsearchGenericResponse, exn> =
+        client.executeCommand aliasCmd |> Async.RunSynchronously
+
+    printResult "Alias Command: " aliasCommandResult
+    
 
     0

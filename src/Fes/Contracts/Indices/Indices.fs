@@ -9,11 +9,6 @@ open Fleece.SystemTextJson.Operators
 open System
 open System.Collections.ObjectModel
 
-[<AutoOpen>]
-module private QueryParams =
-    let inline toQueryParams x =
-        (^T: (static member ToQueryParams : ^T -> Result<string, exn>) x)
-
 [<RequireQualifiedAccess>]
 type WaitForActiveShards =
     | One
@@ -174,16 +169,10 @@ type IndexRequestQueryParams =
         let timeout =
             queryParams.Timeout
             |> Option.map (TimeoutUnit.ToString >> sprintf "timeout=%s")
-
-        let mk (values: string []) =
-            sprintf "?%s" <| String.Join("&", values)
-
         [| waitForActiveShards
            masterTimeout
            timeout |]
-        |> Array.choose id
-        |> mk
-        |> Result.Ok
+        |> QueryStringBuilder.mk
 
 type IndexRequest =
     { Name: string
@@ -279,26 +268,29 @@ type UpdateRequestQueryParams =
         [| waitForActiveShards
            masterTimeout
            timeout |]
-        |> Array.choose id
-        |> mk
-        |> Result.Ok
+        |> QueryStringBuilder.mk
 
 type UpdateIndexSettingsRequest =
     { Target: option<string>
       Settings: option<IndexSettings>
-      Parameters: option<IndexRequestQueryParams> }
+      Parameters: option<UpdateRequestQueryParams> }
     static member ToJson index =
         jobj [ "index" .=? index.Settings ]
 
     static member ToRequest(request: UpdateIndexSettingsRequest) =
         let target =
             request.Target |> Option.defaultValue "_all"
+        let query =
+            request.Parameters
+            |> Option.map toQueryParams
+            |> Option.defaultValue (Result.Ok String.Empty)
 
-        $"%s{target}/_settings"
-        |> Http.Request.mk
-        |> Http.Request.withMethod Http.Put
-        |> Http.Request.withJsonBody request
-        |> Result.Ok
+        let mk query =
+            $"%s{target}/_settings{query}"
+            |> Http.Request.mk
+            |> Http.Request.withMethod Http.Put
+            |> Http.Request.withJsonBody request
+        mk <!> query
 
 type ElasticsearchGenericResponse =
     { Acknowledged: bool }

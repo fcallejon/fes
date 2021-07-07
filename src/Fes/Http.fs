@@ -56,12 +56,12 @@ module Http =
         
         let inline toJson (response: ResponseMsg) =
             response.Content.ReadAsStringAsync()
-            |> AsyncResult.waitOfTask
+            |> AsyncResult.waitTask
             |> AsyncResult.bind JsonRes.ofString
             
         let inline asString (response: ResponseMsg) =
             response.Content.ReadAsStringAsync()
-            |> AsyncResult.waitOfTask
+            |> AsyncResult.waitTask
         
         let inline toResult (response: ResponseMsg) =
             let body = asString response
@@ -77,10 +77,7 @@ module Http =
         (^T : (static member ToRequest: ^T -> Result<RequestMsg, exn>) x)
       
     let inline run req (client: HttpClient) =
-        let inline _run msg = async {
-            let! res = client.SendAsync msg |> Async.AwaitTask
-            return! res |> Response.toResult }
-
         (toRequest >> Async.retn) req
-        |> AsyncResult.bind _run
+        |> AsyncResult.bind (client.SendAsync >> AsyncResult.waitTask)
+        |> AsyncResult.bind Response.toResult
         
