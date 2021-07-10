@@ -27,7 +27,6 @@
     <Compile Include="Contracts\Query\TermQueries.fs" />
     <Compile Include="Contracts\Query\FullTextQueries.fs" />
     <Compile Include="Contracts\Query\Queries.fs" />
-    <Compile Include="Contracts\Query\BooleanQueries.fs" />
     <Compile Include="ElasticsearchClient.fs" />
   </ItemGroup>
   <Import Project="..\..\.paket\Paket.Restore.targets" />
