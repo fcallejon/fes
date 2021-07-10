@@ -23,6 +23,7 @@
     <Compile Include="Contracts\Mappings.fs" />
     <Compile Include="Contracts\Indices\Indices.fs" />
     <Compile Include="Contracts\Indices\Aliases.fs" />
+    <Compile Include="Contracts\Query\Queries.fs" />
     <Compile Include="Contracts\Query\TermQueries.fs" />
     <Compile Include="Contracts\Query\FullTextQueries.fs" />
     <Compile Include="Contracts\Query\BooleanQueries.fs" />
