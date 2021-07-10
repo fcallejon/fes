@@ -1,4 +1,4 @@
-﻿namespace Fes.Contracts.Units
+﻿namespace Fes.DSL.Units
 
 open Fleece.SystemTextJson
 

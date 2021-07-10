@@ -2,8 +2,8 @@
 
 open System
 open System.Net.Http
-open Fes.Contracts.Aliases
-open Fes.Contracts.Indices
+open Fes.DSL.Aliases
+open Fes.DSL.Indices
 
 type ElasticsearchClient (baseUri: Uri) =
     let localClient =

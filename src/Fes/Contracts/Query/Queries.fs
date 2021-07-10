@@ -1,41 +1,40 @@
-﻿namespace Fes.Contracts.Queries
+﻿namespace Fes.DSL.Query.Queries
 
 open Fleece.SystemTextJson
+open Fleece.SystemTextJson.Operators
+open Fes.DSL.Queries
+open Fes.DSL.Query.FullTextQueries
+open Fes.DSL.Query.TermLevel
 
-type Rewrite =
-| ConstantScore
-| ConstantScoreBoolean
-| ScoringBoolean
-| TopTermsBlendedFreqsN
-| TopTermsBoostN
-| TopTermsN
+type NestedQuery =
+| FullTextQueries of FullTextQueries
+| TermQuery of TermQuery
 with
-    static member ToJson rewrite =
-        match rewrite with
-        | ConstantScore -> "constant_score"
-        | ConstantScoreBoolean -> "constant_score_boolean"
-        | ScoringBoolean -> "scoring_boolean"
-        | TopTermsBlendedFreqsN -> "top_terms_blended_freqs_N"
-        | TopTermsBoostN -> "top_terms_boost_N"
-        | TopTermsN -> "top_terms_N"
-        |> JString
+    static member ToJson query =
+        match query with
+        | FullTextQueries q -> toJson q
+        | TermQuery q -> toJson q
+type Nested =
+    { Path: string
+      Query: NestedQuery
+      ScoreMode: option<ScoreMode>
+      IgnoreUnmapped: option<bool> }
+with
+    static member ToJson nested =
+        jobj [
+            "path" .= nested.Path
+            "query" .= nested.Query
+            "score_mode" .= nested.ScoreMode
+            "ignore_unmapped" .= nested.IgnoreUnmapped
+        ]
 
-type BooleanLogicOperator =
-| And
-| Or
+type Query =
+| FullTextQueries of FullTextQueries
+| TermQuery of TermQuery
+| Nested of Nested
 with
-    static member ToJson op =
-        match op with
-        | And -> "AND"
-        | Or -> "OR"
-        |> JString
-        
-type QueryOperator =
-| And
-| Or
-with
-    static member ToJson op =
-        match op with
-        | And -> "and"
-        | Or -> "or"
-        |> JString
+    static member ToJson query =
+        match query with
+        | FullTextQueries q -> toJson q
+        | TermQuery q -> toJson q
+        | Nested q -> toJson q

@@ -1,9 +1,9 @@
-﻿namespace Fes.Contracts
+﻿namespace Fes.DSL
 
 module Aliases =
     open FSharpPlus.Operators
     open Fes
-    open Fes.Contracts.Units
+    open Fes.DSL.Units
     open Fes.QueryParams.Builder.Operators
     open Fes.QueryParams.Builder
     open Fleece.SystemTextJson
@@ -13,10 +13,12 @@ module Aliases =
         { MasterTimeout: option<TimeoutUnit>
           Timeout: option<TimeoutUnit> }
         static member ToQueryParams queryParams =
-            qparams [
-                "master_timeout" &=? (queryParams.MasterTimeout |> Option.map TimeoutUnit.ToString)
-                "timeout" &=? (queryParams.Timeout |> Option.map TimeoutUnit.ToString)
-            ]
+            qparams [ "master_timeout"
+                      &=? (queryParams.MasterTimeout
+                           |> Option.map TimeoutUnit.ToString)
+                      "timeout"
+                      &=? (queryParams.Timeout
+                           |> Option.map TimeoutUnit.ToString) ]
 
     type ActionOn =
         | Index of string
@@ -67,10 +69,11 @@ module Aliases =
             | RemoveIndex removeIndex -> jobj [ "remove_index" .= (AliasAction.ToJson removeIndex) ]
 
     type AliasCommandRequest =
-        { Actions: Action[]
+        { Actions: Action []
           Parameters: option<AliasQueryParameter> }
         static member ToJson command =
-            jobj [ "actions" .= (command.Actions |> Array.map Action.ToJson) ]
+            jobj [ "actions"
+                   .= (command.Actions |> Array.map Action.ToJson) ]
 
         static member ToRequest(request: AliasCommandRequest) =
             let query = queryParamsOfOption request.Parameters
@@ -80,4 +83,5 @@ module Aliases =
                 |> Http.Request.mk
                 |> Http.Request.withMethod Http.Post
                 |> Http.Request.withJsonBody request
+
             mk <!> query

@@ -1,11 +1,11 @@
 ﻿open System
 open Fes
-open Fes.Contracts
-open Fes.Contracts.Fields
-open Fes.Contracts.Indices
-open Fes.Contracts.Aliases
-open Fes.Contracts.Mappings
-open Fes.Contracts.Units
+open Fes.DSL
+open Fes.DSL.Fields
+open Fes.DSL.Indices
+open Fes.DSL.Aliases
+open Fes.DSL.Mappings
+open Fes.DSL.Units
 
 [<EntryPoint>]
 let main _ =

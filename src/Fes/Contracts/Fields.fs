@@ -1,8 +1,178 @@
-﻿namespace Fes.Contracts.Fields
+﻿namespace Fes.DSL.Fields
+
+open Fleece.SystemTextJson
+
+module Formats =
+    type DateBuiltInFormats =
+        | EpochMillis
+        | EpochSecond
+        | DateOptionalTime
+        | StrictDateOptionalTime
+        | StrictDateOptionalTimeNanos
+        | BasicDate
+        | BasicDateTime
+        | BasicDateTimeNoMillis
+        | BasicOrdinalDate
+        | BasicOrdinalDateTime
+        | BasicOrdinalDateTimeNoMillis
+        | BasicTime
+        | BasicTimeNoMillis
+        | BasicTTime
+        | BasicTTimeNoMillis
+        | BasicWeekDate
+        | StrictBasicWeekDate
+        | BasicWeekDateTime
+        | StrictBasicWeekDateTime
+        | BasicWeekDateTimeNoMillis
+        | StrictBasicWeekDateTimeNoMillis
+        | Date
+        | StrictDate
+        | DateHour
+        | StrictDateHour
+        | DateHourMinute
+        | StrictDateHourMinute
+        | DateHourMinuteSecond
+        | StrictDateHourMinuteSecond
+        | DateHourMinuteSecondFraction
+        | StrictDateHourMinuteSecondFraction
+        | DateHourMinuteSecondMillis
+        | StrictDateHourMinuteSecondMillis
+        | DateTime
+        | StrictDateTime
+        | DateTimeNoMillis
+        | StrictDateTimeNoMillis
+        | Hour
+        | StrictHour
+        | HourMinute
+        | StrictHourMinute
+        | HourMinuteSecond
+        | StrictHourMinuteSecond
+        | HourMinuteSecondFraction
+        | StrictHourMinuteSecondFraction
+        | HourMinuteSecondMillis
+        | StrictHourMinuteSecondMillis
+        | OrdinalDate
+        | StrictOrdinalDate
+        | OrdinalDateTime
+        | StrictOrdinalDateTime
+        | OrdinalDateTimeNoMillis
+        | StrictOrdinalDateTimeNoMillis
+        | Time
+        | StrictTime
+        | TimeNoMillis
+        | StrictTimeNoMillis
+        | TTime
+        | StrictTTime
+        | TTimeNoMillis
+        | StrictTTimeNoMillis
+        | WeekDate
+        | StrictWeekDate
+        | WeekDateTime
+        | StrictWeekDateTime
+        | WeekDateTimeNoMillis
+        | StrictWeekDateTimeNoMillis
+        | WeekYear
+        | StrictWeekYear
+        | WeekYearWeek
+        | StrictWeekYearWeek
+        | WeekYearWeekDay
+        | StrictWeekYearWeekDay
+        | Year
+        | StrictYear
+        | YearMonth
+        | StrictYearMonth
+        | YearMonthDay
+        | StrictYearMonthDay
+
+    type DateFormat =
+        | BuiltInFormats of DateBuiltInFormats
+        | Custom of string
+        static member ToJson format =
+            match format with
+            | Custom value -> value
+            | BuiltInFormats EpochMillis -> "epoch_millis"
+            | BuiltInFormats EpochSecond -> "epoch_second"
+            | BuiltInFormats DateOptionalTime -> "date_optional_time"
+            | BuiltInFormats StrictDateOptionalTime -> "strict_date_optional_time"
+            | BuiltInFormats StrictDateOptionalTimeNanos -> "strict_date_optional_time_nanos"
+            | BuiltInFormats BasicDate -> "basic_date"
+            | BuiltInFormats BasicDateTime -> "basic_date_time"
+            | BuiltInFormats BasicDateTimeNoMillis -> "basic_date_time_no_millis"
+            | BuiltInFormats BasicOrdinalDate -> "basic_ordinal_date"
+            | BuiltInFormats BasicOrdinalDateTime -> "basic_ordinal_date_time"
+            | BuiltInFormats BasicOrdinalDateTimeNoMillis -> "basic_ordinal_date_time_no_millis"
+            | BuiltInFormats BasicTime -> "basic_time"
+            | BuiltInFormats BasicTimeNoMillis -> "basic_time_no_millis"
+            | BuiltInFormats BasicTTime -> "basic_t_time"
+            | BuiltInFormats BasicTTimeNoMillis -> "basic_t_time_no_millis"
+            | BuiltInFormats BasicWeekDate -> "basic_week_date"
+            | BuiltInFormats StrictBasicWeekDate -> "strict_basic_week_date"
+            | BuiltInFormats BasicWeekDateTime -> "basic_week_date_time"
+            | BuiltInFormats StrictBasicWeekDateTime -> "strict_basic_week_date_time"
+            | BuiltInFormats BasicWeekDateTimeNoMillis -> "basic_week_date_time_no_millis"
+            | BuiltInFormats StrictBasicWeekDateTimeNoMillis -> "strict_basic_week_date_time_no_millis"
+            | BuiltInFormats Date -> "date"
+            | BuiltInFormats StrictDate -> "strict_date"
+            | BuiltInFormats DateHour -> "date_hour"
+            | BuiltInFormats StrictDateHour -> "strict_date_hour"
+            | BuiltInFormats DateHourMinute -> "date_hour_minute"
+            | BuiltInFormats StrictDateHourMinute -> "strict_date_hour_minute"
+            | BuiltInFormats DateHourMinuteSecond -> "date_hour_minute_second"
+            | BuiltInFormats StrictDateHourMinuteSecond -> "strict_date_hour_minute_second"
+            | BuiltInFormats DateHourMinuteSecondFraction -> "date_hour_minute_second_fraction"
+            | BuiltInFormats StrictDateHourMinuteSecondFraction -> "strict_date_hour_minute_second_fraction"
+            | BuiltInFormats DateHourMinuteSecondMillis -> "date_hour_minute_second_millis"
+            | BuiltInFormats StrictDateHourMinuteSecondMillis -> "strict_date_hour_minute_second_millis"
+            | BuiltInFormats DateTime -> "date_time"
+            | BuiltInFormats StrictDateTime -> "strict_date_time"
+            | BuiltInFormats DateTimeNoMillis -> "date_time_no_millis"
+            | BuiltInFormats StrictDateTimeNoMillis -> "strict_date_time_no_millis"
+            | BuiltInFormats Hour -> "hour"
+            | BuiltInFormats StrictHour -> "strict_hour"
+            | BuiltInFormats HourMinute -> "hour_minute"
+            | BuiltInFormats StrictHourMinute -> "strict_hour_minute"
+            | BuiltInFormats HourMinuteSecond -> "hour_minute_second"
+            | BuiltInFormats StrictHourMinuteSecond -> "strict_hour_minute_second"
+            | BuiltInFormats HourMinuteSecondFraction -> "hour_minute_second_fraction"
+            | BuiltInFormats StrictHourMinuteSecondFraction -> "strict_hour_minute_second_fraction"
+            | BuiltInFormats HourMinuteSecondMillis -> "hour_minute_second_millis"
+            | BuiltInFormats StrictHourMinuteSecondMillis -> "strict_hour_minute_second_millis"
+            | BuiltInFormats OrdinalDate -> "ordinal_date"
+            | BuiltInFormats StrictOrdinalDate -> "strict_ordinal_date"
+            | BuiltInFormats OrdinalDateTime -> "ordinal_date_time"
+            | BuiltInFormats StrictOrdinalDateTime -> "strict_ordinal_date_time"
+            | BuiltInFormats OrdinalDateTimeNoMillis -> "ordinal_date_time_no_millis"
+            | BuiltInFormats StrictOrdinalDateTimeNoMillis -> "strict_ordinal_date_time_no_millis"
+            | BuiltInFormats Time -> "time"
+            | BuiltInFormats StrictTime -> "strict_time"
+            | BuiltInFormats TimeNoMillis -> "time_no_millis"
+            | BuiltInFormats StrictTimeNoMillis -> "strict_time_no_millis"
+            | BuiltInFormats TTime -> "t_time"
+            | BuiltInFormats StrictTTime -> "strict_t_time"
+            | BuiltInFormats TTimeNoMillis -> "t_time_no_millis"
+            | BuiltInFormats StrictTTimeNoMillis -> "strict_t_time_no_millis"
+            | BuiltInFormats WeekDate -> "week_date"
+            | BuiltInFormats StrictWeekDate -> "strict_week_date"
+            | BuiltInFormats WeekDateTime -> "week_date_time"
+            | BuiltInFormats StrictWeekDateTime -> "strict_week_date_time"
+            | BuiltInFormats WeekDateTimeNoMillis -> "week_date_time_no_millis"
+            | BuiltInFormats StrictWeekDateTimeNoMillis -> "strict_week_date_time_no_millis"
+            | BuiltInFormats WeekYear -> "weekyear"
+            | BuiltInFormats StrictWeekYear -> "strict_weekyear"
+            | BuiltInFormats WeekYearWeek -> "weekyear_week"
+            | BuiltInFormats StrictWeekYearWeek -> "strict_weekyear_week"
+            | BuiltInFormats WeekYearWeekDay -> "weekyear_week_day"
+            | BuiltInFormats StrictWeekYearWeekDay -> "strict_weekyear_week_day"
+            | BuiltInFormats Year -> "year"
+            | BuiltInFormats StrictYear -> "strict_year"
+            | BuiltInFormats YearMonth -> "year_month"
+            | BuiltInFormats StrictYearMonth -> "strict_year_month"
+            | BuiltInFormats YearMonthDay -> "year_month_day"
+            | BuiltInFormats StrictYearMonthDay -> "strict_year_month_day"
+            |> JString
 
 module FieldTypes =
-    open Fleece.SystemTextJson
-    
+
     type Keywords =
         | Keyword
         | ConstantKeyword
@@ -101,7 +271,6 @@ module FieldTypes =
             |> JString
 
 module Fields =
-    open Fleece.SystemTextJson
 
     type FieldType =
         | Keywords of FieldTypes.Keywords
