@@ -5,7 +5,6 @@ module Http =
     open System
     open System.Net.Http
     open System.Text
-    open FSharpPlus
     open Fleece.SystemTextJson
     
     type RequestMsg = HttpRequestMessage
@@ -49,6 +48,10 @@ module Http =
         let inline withJsonBody body (request: RequestMsg) =
             let json = toJson body |> string
             request.Content <- new StringContent(json, Encoding.UTF8, "application/json")
+            request
+            
+        let inline withJson body (request: RequestMsg) =
+            request.Content <- new StringContent(body, Encoding.UTF8, "application/json")
             request
 
     

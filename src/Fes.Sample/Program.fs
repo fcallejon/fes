@@ -1,11 +1,20 @@
 ﻿open System
 open Fes
+open Fes.Contracts.Api
 open Fes.DSL
 open Fes.DSL.Fields
 open Fes.DSL.Indices
 open Fes.DSL.Aliases
 open Fes.DSL.Mappings
 open Fes.DSL.Units
+open Fleece.SystemTextJson
+open Fleece.SystemTextJson.Operators
+   
+type SampleDocument =
+    { Field1: string }
+with
+    static member ToJson doc =
+        jobj [ "field1" .= doc.Field1 ]
 
 [<EntryPoint>]
 let main _ =
@@ -87,6 +96,18 @@ let main _ =
         client.executeCommand aliasCmd |> Async.RunSynchronously
 
     printResult "Alias Command: " aliasCommandResult
-    
+
+    // Index a doc with custom Id
+    let docCustomId = { SampleDocument.Field1 = DateTime.UtcNow.ToString "O" }
+    let indexDocCustomId =
+        { IndexDocument.GetDocumentJson = konst (toJson docCustomId)
+          Target = "index_test"
+          Id = Some <| Guid.NewGuid().ToString("N")
+          Parameters = None }
+
+    let aliasCommandResult : Result<IndexDocumentResponse, exn> =
+        client.indexDocument indexDocCustomId |> Async.RunSynchronously
+
+    printResult "Index Document: " aliasCommandResult
 
     0

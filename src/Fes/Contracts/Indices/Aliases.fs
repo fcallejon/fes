@@ -13,12 +13,8 @@ module Aliases =
         { MasterTimeout: option<TimeoutUnit>
           Timeout: option<TimeoutUnit> }
         static member ToQueryParams queryParams =
-            qparams [ "master_timeout"
-                      &=? (queryParams.MasterTimeout
-                           |> Option.map TimeoutUnit.ToString)
-                      "timeout"
-                      &=? (queryParams.Timeout
-                           |> Option.map TimeoutUnit.ToString) ]
+            qparams [ "master_timeout" &=? queryParams.MasterTimeout
+                      "timeout" &=? queryParams.Timeout ]
 
     type ActionOn =
         | Index of string

@@ -156,8 +156,8 @@ type IndexRequestQueryParams =
     static member ToQueryParams queryParams =
         qparams [
             "wait_for_active_shards" &=? (queryParams.WaitForActiveShards |> Option.map WaitForActiveShards.ToString)
-            "master_timeout" &=? (queryParams.MasterTimeout |> Option.map TimeoutUnit.ToString)
-            "timeout" &=? (queryParams.Timeout |> Option.map TimeoutUnit.ToString)
+            "master_timeout" &=? queryParams.MasterTimeout
+            "timeout" &=? queryParams.Timeout
         ]
 
 type IndexRequest =
@@ -232,8 +232,8 @@ type UpdateRequestQueryParams =
     static member ToQueryParams queryParams =
         qparams [
             "expand_wildcards" &=? (queryParams.ExpandWildcards |> Option.map ExpandWildcardsOptions.ToString)
-            "master_timeout" &=? (queryParams.MasterTimeout |> Option.map TimeoutUnit.ToString)
-            "timeout" &=? (queryParams.Timeout |> Option.map TimeoutUnit.ToString)
+            "master_timeout" &=? queryParams.MasterTimeout
+            "timeout" &=? queryParams.Timeout
         ]
 
 type UpdateIndexSettingsRequest =

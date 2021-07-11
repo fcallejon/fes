@@ -21,17 +21,18 @@ type TimeoutUnit =
 | Nanoseconds of int<TimeUnits.nanos>
 
     with
-        static member ToString =
+        override x.ToString() =
             let inline _format (v, m) = $"%i{v}%s{m}"
-            (function
-            | TimeoutUnit.Days d -> int d, "d"
-            | TimeoutUnit.Hours h -> int h, "h"
-            | TimeoutUnit.Minutes m -> int m, "m"
-            | TimeoutUnit.Seconds s -> int s, "s"
-            | TimeoutUnit.Milliseconds ms -> int ms, "ms"
-            | TimeoutUnit.Microseconds micros -> int micros, "micros"
-            | TimeoutUnit.Nanoseconds nanos -> int nanos, "nanos")
-            >> _format
+            x
+            |> ((function
+               | TimeoutUnit.Days d -> int d, "d"
+               | TimeoutUnit.Hours h -> int h, "h"
+               | TimeoutUnit.Minutes m -> int m, "m"
+               | TimeoutUnit.Seconds s -> int s, "s"
+               | TimeoutUnit.Milliseconds ms -> int ms, "ms"
+               | TimeoutUnit.Microseconds micros -> int micros, "micros"
+               | TimeoutUnit.Nanoseconds nanos -> int nanos, "nanos")
+               >> _format)
         
         static member ToJson value =
-            (TimeoutUnit.ToString >> JString) value
+            value |> (string >> JString)
