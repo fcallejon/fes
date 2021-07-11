@@ -1,11 +1,12 @@
 ﻿namespace Fes.DSL
 
 module Aliases =
-    open FSharpPlus.Operators
     open Fes
+    open Fes.DSL.Query.Queries
     open Fes.DSL.Units
     open Fes.QueryParams.Builder.Operators
     open Fes.QueryParams.Builder
+    open FSharpPlus.Operators
     open Fleece.SystemTextJson
     open Fleece.SystemTextJson.Operators
 
@@ -33,7 +34,8 @@ module Aliases =
           IsWriteIndex: option<bool>
           Routing: option<string>
           IndexRouting: option<string>
-          SearchRouting: option<string> }
+          SearchRouting: option<string>
+          Filter: option<BooleanQuery> }
         static member ToJson aliasAction =
             let on =
                 match aliasAction.On with
@@ -52,7 +54,8 @@ module Aliases =
                    "is_write_index" .=? aliasAction.IsWriteIndex
                    "routing" .=? aliasAction.Routing
                    "index_routing" .=? aliasAction.IndexRouting
-                   "search_routing" .=? aliasAction.SearchRouting ]
+                   "search_routing" .=? aliasAction.SearchRouting
+                   "filter" .=? aliasAction.Filter ]
 
     type Action =
         | Add of AliasAction

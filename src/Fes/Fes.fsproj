@@ -21,12 +21,12 @@
     <Compile Include="Contracts\Units.fs" />
     <Compile Include="Contracts\Fields.fs" />
     <Compile Include="Contracts\Mappings.fs" />
-    <Compile Include="Contracts\Indices\Indices.fs" />
-    <Compile Include="Contracts\Indices\Aliases.fs" />
     <Compile Include="Contracts\Query\QueryOptions.fs" />
     <Compile Include="Contracts\Query\TermQueries.fs" />
     <Compile Include="Contracts\Query\FullTextQueries.fs" />
     <Compile Include="Contracts\Query\Queries.fs" />
+    <Compile Include="Contracts\Indices\Indices.fs" />
+    <Compile Include="Contracts\Indices\Aliases.fs" />
     <Compile Include="Contracts\IndexApi.fs" />
     <Compile Include="ElasticsearchClient.fs" />
   </ItemGroup>

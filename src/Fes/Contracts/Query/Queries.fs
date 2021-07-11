@@ -27,7 +27,7 @@ with
 and NestedQuery =
 | FullTextQueries of FullTextQueries
 | TermQuery of TermQuery
-| Bool of Bool
+| Bool of BooleanQuery
 with
     static member ToJson query =
         match query with
@@ -46,7 +46,7 @@ with
         | TermQuery q -> toJson q
         | Nested q -> toJson q
     
-and Bool =
+and BooleanQuery =
     | Must of (Query * BoolOptions)
     | Filter of (Query * BoolOptions)
     | Should of (Query * BoolOptions)
