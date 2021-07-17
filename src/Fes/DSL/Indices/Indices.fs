@@ -16,8 +16,8 @@ type WaitForActiveShards =
     | One
     | All
     | Other of uint8
-    static member ToString =
-        function
+    member this.ToString =
+        match this with
         | One -> "1"
         | All -> "all"
         | Other other -> string other
@@ -155,7 +155,7 @@ type IndexRequestQueryParams =
       Timeout: option<TimeoutUnit> }
     static member ToQueryParams queryParams =
         qparams [
-            "wait_for_active_shards" &=? (queryParams.WaitForActiveShards |> Option.map WaitForActiveShards.ToString)
+            "wait_for_active_shards" &=? (queryParams.WaitForActiveShards |> Option.map string)
             "master_timeout" &=? queryParams.MasterTimeout
             "timeout" &=? queryParams.Timeout
         ]
@@ -206,21 +206,6 @@ type IndexRequest =
 
         mk <!> query
 
-[<RequireQualifiedAccess>]
-type ExpandWildcardsOptions =
-    | All
-    | Open
-    | Closed
-    | Hidden
-    | None
-    static member ToString =
-        function
-        | All -> "all"
-        | Open -> "open"
-        | Closed -> "closed"
-        | Hidden -> "hidden"
-        | None -> "none"
-
 type UpdateRequestQueryParams =
     { AllowNoIndices: option<bool>
       FlatSettings: option<bool>
@@ -231,7 +216,7 @@ type UpdateRequestQueryParams =
       Timeout: option<TimeoutUnit> }
     static member ToQueryParams queryParams =
         qparams [
-            "expand_wildcards" &=? (queryParams.ExpandWildcards |> Option.map ExpandWildcardsOptions.ToString)
+            "expand_wildcards" &=? (queryParams.ExpandWildcards |> Option.map string)
             "master_timeout" &=? queryParams.MasterTimeout
             "timeout" &=? queryParams.Timeout
         ]

@@ -303,4 +303,5 @@ module Fields =
             | Numeric numeric -> toJson numeric
             | Date date -> toJson date
 
+//TODO: Add parameters for Numeric Types
 //TODO: Add types from https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-types.html#structured-data-types

@@ -21,6 +21,7 @@
     <Compile Include="DSL\Units.fs" />
     <Compile Include="DSL\Fields.fs" />
     <Compile Include="DSL\Mappings.fs" />
+    <Compile Include="DSL\Parameters.fs" />
     <Compile Include="DSL\Query\QueryOptions.fs" />
     <Compile Include="DSL\Query\TermQueries.fs" />
     <Compile Include="DSL\Query\FullTextQueries.fs" />
@@ -28,6 +29,7 @@
     <Compile Include="DSL\Indices\Indices.fs" />
     <Compile Include="DSL\Indices\Aliases.fs" />
     <Compile Include="DSL\IndexApi.fs" />
+    <Compile Include="DSL\Search.fs" />
     <Compile Include="ElasticsearchClient.fs" />
   </ItemGroup>
   <Import Project="..\..\.paket\Paket.Restore.targets" />

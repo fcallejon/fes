@@ -2,10 +2,11 @@
 open Fes
 open Fes.Contracts.Api
 open Fes.DSL
+open Fes.DSL.Aliases
 open Fes.DSL.Fields
 open Fes.DSL.Indices
-open Fes.DSL.Aliases
 open Fes.DSL.Mappings
+open Fes.DSL.Search
 open Fes.DSL.Units
 open Fleece.SystemTextJson
 open Fleece.SystemTextJson.Operators
@@ -19,7 +20,7 @@ with
 [<EntryPoint>]
 let main _ =
     let client =
-        ElasticsearchClient <| Uri "http://localhost:9200"
+        ElasticsearchClient <| Uri "http://localhost:9200/"
         
     let inline printResult title (result: Result<'a, exn>) =
         printf title
@@ -30,7 +31,7 @@ let main _ =
     // Create an Index
     let mapping =
         [| { MappingDefinition.Name = "field1"
-             Type = FieldTypes.Text |> Fields.Text
+             Type = FieldTypes.Keyword |> Fields.Keywords
              Mappings = [| Mapping.FieldMapping.Analyzer "analyzer_name" |] } |]
 
     let settings =
@@ -100,17 +101,34 @@ let main _ =
 
     // Index a doc with custom Id
     let docCustomId = { SampleDocument.Field1 = DateTime.UtcNow.ToString "O" }
+    let indexParams =
+        { IndexDocumentQueryParameters.WaitForActiveShards = Some IndexDocumentWaitForActiveShards.All
+          Refresh = Some IndexDocumentRefresh.True
+          IfSeqNo = None
+          IfPrimaryTerm = None
+          OpType = None
+          Pipeline = None
+          Routing = None
+          Version = None
+          VersionType = None
+          Timeout = None
+          RequireAlias = None }
     let indexDocCustomId =
         { IndexDocument.GetDocumentJson = konst (toJson docCustomId)
           Target = "index_test"
           Id = Some <| Guid.NewGuid().ToString("N")
-          Parameters = None }
+          Parameters = Some indexParams }
 
     let aliasCommandResult : Result<IndexDocumentResponse, exn> =
         client.indexDocument indexDocCustomId |> Async.RunSynchronously
 
     printResult "Index Document: " aliasCommandResult
     
-    // 2021-07-11T21:14:07.4150758Z
+    // Search a doc using field1
+    let searchRequest = Search.mkTermSearch "index_test" "field1" docCustomId.Field1
+    let searchResponse : Result<SearchResponse, exn> =
+        client.search searchRequest |> Async.RunSynchronously
+
+    printResult "Search Document: " searchResponse
 
     0

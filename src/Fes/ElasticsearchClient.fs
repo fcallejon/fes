@@ -5,6 +5,7 @@ open System.Net.Http
 open Fes.Contracts.Api
 open Fes.DSL.Aliases
 open Fes.DSL.Indices
+open Fes.DSL.Search
 
 type ElasticsearchClient (baseUri: Uri) =
     let localClient =
@@ -23,3 +24,6 @@ type ElasticsearchClient (baseUri: Uri) =
         
     member _.indexDocument (indexDocument: IndexDocument) : AsyncResult<IndexDocumentResponse, exn> =
         Http.run indexDocument localClient
+        
+    member _.search (searchCommand: SearchCommandRequest) : AsyncResult<SearchResponse, exn> =
+        Http.run searchCommand localClient

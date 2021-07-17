@@ -1,5 +1,6 @@
 ﻿namespace Fes
 
+open System.Collections.ObjectModel
 open Fleece.SystemTextJson
 
 module Json =
@@ -22,6 +23,8 @@ module JRes =
         member _.Return x = Ok x
         member _.ReturnFrom = id
         member _.Bind (x, f) = bind f x
+    
+    let inline seqPairToJsonObject x = x |> (dict >> ReadOnlyDictionary >> dictAsJsonObject)
 
 [<RequireQualifiedAccess>]
 module JsonRes =

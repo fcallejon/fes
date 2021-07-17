@@ -1,5 +1,7 @@
 ﻿namespace Fes
 
+open System
+
 [<AutoOpen>]
 module Prelude =
     open System.Threading.Tasks
@@ -21,3 +23,8 @@ module Prelude =
     type AsyncBuilder with
         member x.Bind(task: Task<'a>, f: 'a -> Async<'b>) =
             async.Bind((task |> Async.AwaitTask), f)
+            
+[<AutoOpen>]
+module Strings =
+    let joinByChar (sep: char) (x: string[]) =
+        String.Join(sep, x)

@@ -1,6 +1,7 @@
 ﻿namespace Fes
 
 open FSharpPlus
+open FSharpPlus.Data
 open Fleece.SystemTextJson
 
 [<RequireQualifiedAccess>]

@@ -7,13 +7,9 @@ module QueryParameter =
     open System.Web
     
     let inline toString (qp: QueryParameter) =
-        let key =
-            fst qp
-            |> HttpUtility.UrlEncode
-        let value =
-            snd qp
-            |> string
-            |> HttpUtility.UrlEncode
+        let key, value =
+            let k, v = qp
+            HttpUtility.UrlEncode k, v |> (string >> HttpUtility.UrlEncode)
         $"%s{key}=%s{value}"
 
 [<AutoOpen>]

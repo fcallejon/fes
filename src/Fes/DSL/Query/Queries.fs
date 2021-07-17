@@ -67,3 +67,12 @@ with
         jobj [ "bool" .= content
                "boost" .=? options.Boost
                "minimum_should_match" .=? options.MinimumShouldMatch ]
+        
+[<RequireQualifiedAccess>]
+module Query =
+    let mkTermQuery field value =
+        { Term.Field = field
+          Value = string value
+          Boost = Option.None }
+        |> Term
+        |> TermQuery

@@ -1,6 +1,8 @@
 ﻿namespace Fes.DSL.Mappings
 
 open System
+open System.Collections.ObjectModel
+open Fes.DSL.Fields.Fields
 open Fleece.SystemTextJson
 open Fleece.SystemTextJson.Operators
 open Fes.DSL.Fields
@@ -69,7 +71,7 @@ module Mapping =
         | EagerGlobalOrdinals of bool
         | Enabled of bool
         | FieldData of bool
-        | Fields of (string * Fields.FieldType) []
+        | Fields of (string * FieldType) []
         | Format of Formats.DateFormat
         | IgnoreAbove of int
         | IgnoreMalformed of bool
@@ -82,14 +84,14 @@ module Mapping =
         | Norms of bool
         | NullValue of string
         | PositionIncrementGap of int
-        | Properties of (string * Fields.FieldType) []
+        | Properties of (string * FieldType) []
         | SearchAnalyzer of string
         | Similarity of Similarity
         | Store of bool
         | TermVector of TermVector
         static member ToJson fieldMapping =
-            let mkFieldsOrProps (fs: (string * Fields.FieldType) []) =
-                let mkFieldOrProp (key: string, value: Fields.FieldType) = jobj [ key .= value ]
+            let mkFieldsOrProps (fs: (string * FieldType) []) =
+                let mkFieldOrProp (key: string, value: FieldType) = jobj [ key .= value ]
                 fs |> Array.map mkFieldOrProp
 
             match fieldMapping with
@@ -128,5 +130,10 @@ module Mapping =
 
 type MappingDefinition =
     { Name: string
-      Type: Fields.FieldType
+      Type: FieldType
       Mappings: Mapping.FieldMapping [] }
+
+type RuntimeMapping =
+    { Name: string
+      Type: FieldType
+      Script: option<string> }
