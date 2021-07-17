@@ -84,7 +84,8 @@ let main _ =
           IsWriteIndex = None
           Routing = None
           IndexRouting = None
-          SearchRouting = None }
+          SearchRouting = None
+          Filter = None }
         |> Action.Add 
     
     let aliasCmd =
@@ -109,5 +110,7 @@ let main _ =
         client.indexDocument indexDocCustomId |> Async.RunSynchronously
 
     printResult "Index Document: " aliasCommandResult
+    
+    // 2021-07-11T21:14:07.4150758Z
 
     0
