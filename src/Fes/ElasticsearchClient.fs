@@ -2,10 +2,13 @@
 
 open System
 open System.Net.Http
+open FSharpPlus
+open FSharpPlus.Data
 open Fes.Contracts.Api
 open Fes.DSL.Aliases
 open Fes.DSL.Indices
 open Fes.DSL.Search
+open Fleece.SystemTextJson
 
 type ElasticsearchClient (baseUri: Uri) =
     let localClient =
@@ -27,3 +30,22 @@ type ElasticsearchClient (baseUri: Uri) =
         
     member _.search (searchCommand: SearchCommandRequest) : AsyncResult<SearchResponse, exn> =
         Http.run searchCommand localClient
+        
+[<RequireQualifiedAccess>]
+module ElasticsearchResponse =
+    
+    let inline mapResponse (response: SearchResponse) : Result<'a[], exn> =
+        let inline mkElement document : Result<'a, exn> = 
+            match ofJson document.RawSource with
+            | ParseResult.Ok element -> Ok element
+            | ParseResult.Error e -> e.ToString() |> exn |> Error
+
+        response.Hits.Hits
+        |> Array.map mkElement 
+        |> sequence
+    
+    let inline mapResponseTuple (response: SearchResponse) : Result<SearchResponse * 'a[], exn> =
+        let mkTuple values = response, values
+        in response
+        |> mapResponse
+        |> Result.map mkTuple

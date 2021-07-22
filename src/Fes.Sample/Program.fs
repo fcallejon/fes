@@ -1,4 +1,6 @@
 ﻿open System
+open FSharpPlus
+open FSharpPlus.Data
 open Fes
 open Fes.Contracts.Api
 open Fes.DSL
@@ -10,12 +12,23 @@ open Fes.DSL.Search
 open Fes.DSL.Units
 open Fleece.SystemTextJson
 open Fleece.SystemTextJson.Operators
-   
+
 type SampleDocument =
     { Field1: string }
 with
+    override this.ToString() =
+        $"Field1: %s{this.Field1}"
+
     static member ToJson doc =
         jobj [ "field1" .= doc.Field1 ]
+    static member OfJson json =
+        match json with
+        | JObject o ->
+            monad {
+                let! field1 = o .@ "field1"
+                return { SampleDocument.Field1 = field1 }
+            }
+        | x -> Decode.Fail.strExpected x
 
 [<EntryPoint>]
 let main _ =
@@ -126,9 +139,20 @@ let main _ =
     
     // Search a doc using field1
     let searchRequest = Search.mkTermSearch "index_test" "field1" docCustomId.Field1
-    let searchResponse : Result<SearchResponse, exn> =
-        client.search searchRequest |> Async.RunSynchronously
+    let searchResponse : Result<SearchResponse * SampleDocument[], exn> =
+        client.search searchRequest
+        |> Async.RunSynchronously
+        |> Result.bind ElasticsearchResponse.mapResponseTuple
 
     printResult "Search Document: " searchResponse
+    searchResponse
+    |> Result.map snd
+    |> (fun docs ->
+        match docs with
+        | Ok documents ->
+            printfn "Documents:"
+            documents
+            |> Array.iter (fun d -> printfn $"\t%s{d.ToString()}")
+        | Error _ -> ()) 
 
     0

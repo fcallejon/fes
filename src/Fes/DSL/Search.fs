@@ -335,10 +335,47 @@ type SearchHitMaxScore =
         | JNull -> Decode.Success Empty
         | x -> Decode.Fail.strExpected x
 
+type DocumentMetadata =
+    { Index: string
+      Type: string
+      Id: string
+      Score: float
+      Version: int
+      SeqNumber: int }
+    
+type MapDocument<'a> = JsonValue -> 'a
+type Document =
+    { RawSource: JsonValue
+      Metadata: DocumentMetadata }
+with
+    static member OfJson json =
+        match json with
+        | JObject o ->
+            monad {
+                let! source = o .@ "_source" |> Result.map (fun (d: JsonValue) -> d)
+                let! index = o .@ "_index"
+                let! docType = o .@ "_type"
+                let! id = o .@ "_id"
+                let! score = o .@ "_score"
+                let! version = o .@ "_version"
+                let! seqNo = o .@ "_seq_no"
+                
+                return { Document.RawSource = source
+                         Metadata = { DocumentMetadata.Index = index
+                                      Type = docType
+                                      Id = id
+                                      Score = score
+                                      SeqNumber = seqNo
+                                      Version = version }
+                         }
+            }
+        | x -> Decode.Fail.strExpected x
+        
+
 type SearchHits =
     { Total: SearchHitTotal
       MaxScore: SearchHitMaxScore
-      Hits: string }
+      Hits: Document[] }
 with
     static member OfJson json =
         match json with
@@ -346,7 +383,7 @@ with
             monad {
                 let! total = o .@ "total"
                 let! maxScore = o .@ "max_score"
-                let! hits = o .@ "hits" |> Result.map (fun (d: JsonValue) -> string d)
+                let! hits = o .@ "hits"
                 
                 return { SearchHits.Total = total
                          MaxScore = maxScore
@@ -385,6 +422,8 @@ module Search =
     let mkTermSearch target field value =
         { SearchCommandRequest.Target = Some target
           Query = Some <| Query.mkTermQuery field value
+          SeqNoPrimaryTerm = Some true
+          Version = Some true
           DocValueFields = None
           Explain = None
           Fields = None
@@ -393,12 +432,10 @@ module Search =
           MinScore = None
           PointInTime = None
           RuntimeMappings = None
-          SeqNoPrimaryTerm = None
           Size = None
           Source = None
           Stats = None
           TerminateAfter = None
           Timeout = None
-          Version = None
           QueryStringParameters = None }
         
