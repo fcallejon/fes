@@ -415,48 +415,4 @@ with
                       TimedOut = timedOut 
                       ShardsInfo = shards }
             }
-        | x -> Decode.Fail.objExpected x
-        
-[<RequireQualifiedAccess>]
-module Search =
-    let mkTermSearch target field value =
-        { SearchCommandRequest.Target = Some target
-          Query = Some <| Query.mkTermQuery field value
-          SeqNoPrimaryTerm = Some true
-          Version = Some true
-          DocValueFields = None
-          Explain = None
-          Fields = None
-          From = None
-          IndicesBoost = None
-          MinScore = None
-          PointInTime = None
-          RuntimeMappings = None
-          Size = None
-          Source = None
-          Stats = None
-          TerminateAfter = None
-          Timeout = None
-          QueryStringParameters = None }
-        
-    
-    let mkQueryString target field value =
-        { SearchCommandRequest.Target = Some target
-          Query = Some <| Query.mkQueryString field value
-          SeqNoPrimaryTerm = Some true
-          Version = Some true
-          DocValueFields = None
-          Explain = None
-          Fields = None
-          From = None
-          IndicesBoost = None
-          MinScore = None
-          PointInTime = None
-          RuntimeMappings = None
-          Size = None
-          Source = None
-          Stats = None
-          TerminateAfter = None
-          Timeout = None
-          QueryStringParameters = None }
-        
+        | x -> Decode.Fail.objExpected x        

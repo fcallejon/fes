@@ -13,6 +13,8 @@ open Fes.DSL.Units
 open Fleece.SystemTextJson
 open Fleece.SystemTextJson.Operators
 
+open Fes.Sample
+
 type SampleDocument =
     { Field1: string
       Field2: string }
@@ -39,7 +41,7 @@ with
 let main _ =
     let client =
         ElasticsearchClient <| Uri "http://localhost:9200/"
-    let indexName = "index_test_2"
+    let indexName = "index_test_3"
         
     let inline printResult title (result: Result<'a, exn>) =
         printf title
@@ -64,7 +66,7 @@ let main _ =
     // Create an Index
     let mapping =
         [| { MappingDefinition.Name = "field1"
-             Type = FieldTypes.Keyword |> Fields.Keywords
+             Type = FieldTypes.DateTypes.Date |> Fields.Date
              Mappings = [|  |] }
            { MappingDefinition.Name = "field2"
              Type = FieldTypes.Keyword |> Fields.Keywords
