@@ -6,11 +6,11 @@ open Fleece.SystemTextJson
 open Fleece.SystemTextJson.Operators
 
 type ZeroTermsQueries =
-    | None
+    | NoneTermsQuery
     | All
     static member ToJson zeroTermsQueries =
         match zeroTermsQueries with
-        | None -> "none"
+        | NoneTermsQuery -> "none"
         | All -> "all"
         |> JString
 
@@ -165,7 +165,7 @@ module MatchQueries =
                    "operator" .=? commonQuery.Operator
                    "minimum_should_match"
                    .=? commonQuery.MinimumShouldMatch
-                   "zero_terms_query" .=? commonQuery.ZeroTermsQuery ]
+                   "zero_terms_query" .=? commonQuery.ZeroTermsQuery ]   
 
     type MatchCommonQuery =
         { Field: string
@@ -399,36 +399,39 @@ type QueryString =
       EnablePositionIncrements: option<bool>
       TimeZone: option<string> }
     static member ToJson queryString =
-        jobj [ "query" .= queryString.Query
-               "fields" .= queryString.Fields
-               "default_operator" .=? queryString.DefaultOperator
-               "default_field" .=? queryString.DefaultField
-               "allow_leading_wildcard"
-               .=? queryString.AllowLeadingWildcard
-               "analyze_wildcard" .=? queryString.AnalyzeWildcard
-               "analyzer" .=? queryString.Analyzer
-               "auto_generate_synonyms_phrase_query"
-               .=? queryString.AutoGenerateSynonymsPhraseQuery
-               "boost" .=? queryString.Boost
-               "enable_position_increments"
-               .=? queryString.EnablePositionIncrements
-               "fields" .=? queryString.Fields
-               "fuzziness" .=? queryString.Fuzziness
-               "fuzzy_max_expansions"
-               .=? queryString.FuzzyMaxExpansions
-               "fuzzy_prefix_length"
-               .=? queryString.FuzzyPrefixLength
-               "fuzzy_transpositions"
-               .=? queryString.FuzzyTransportations
-               "lenient" .=? queryString.Lenient
-               "max_determinized_states"
-               .=? queryString.MaxDeterminizedStates
-               "quote_analyzer" .=? queryString.QuoteAnalyzer
-               "phrase_slop" .=? queryString.PhraseSlop
-               "quote_field_suffix"
-               .=? queryString.QuoteFieldSuffix
-               "rewrite" .=? queryString.Rewrite
-               "time_zone" .=? queryString.TimeZone ]
+        let inner =
+            jobj [ "query" .= queryString.Query
+                   "fields" .=? queryString.Fields
+                   "default_operator" .=? queryString.DefaultOperator
+                   "default_field" .=? queryString.DefaultField
+                   "allow_leading_wildcard"
+                   .=? queryString.AllowLeadingWildcard
+                   "analyze_wildcard" .=? queryString.AnalyzeWildcard
+                   "analyzer" .=? queryString.Analyzer
+                   "auto_generate_synonyms_phrase_query"
+                   .=? queryString.AutoGenerateSynonymsPhraseQuery
+                   "boost" .=? queryString.Boost
+                   "enable_position_increments"
+                   .=? queryString.EnablePositionIncrements
+                   "fields" .=? queryString.Fields
+                   "fuzziness" .=? queryString.Fuzziness
+                   "fuzzy_max_expansions"
+                   .=? queryString.FuzzyMaxExpansions
+                   "fuzzy_prefix_length"
+                   .=? queryString.FuzzyPrefixLength
+                   "fuzzy_transpositions"
+                   .=? queryString.FuzzyTransportations
+                   "lenient" .=? queryString.Lenient
+                   "max_determinized_states"
+                   .=? queryString.MaxDeterminizedStates
+                   "quote_analyzer" .=? queryString.QuoteAnalyzer
+                   "phrase_slop" .=? queryString.PhraseSlop
+                   "quote_field_suffix"
+                   .=? queryString.QuoteFieldSuffix
+                   "rewrite" .=? queryString.Rewrite
+                   "time_zone" .=? queryString.TimeZone ]
+        in
+        jobj [ "query_string" .= inner ]
 
 type SimpleQueryStringLimitOperator =
     | All
@@ -436,7 +439,7 @@ type SimpleQueryStringLimitOperator =
     | Escape
     | Fuzzy
     | Near
-    | None
+    | NoneOp
     | Not
     | Or
     | Phrase
@@ -451,7 +454,7 @@ type SimpleQueryStringLimitOperator =
         | Escape -> "ESCAPE"
         | Fuzzy -> "FUZZY"
         | Near -> "NEAR"
-        | None -> "NONE"
+        | NoneOp -> "NONE"
         | Not -> "NOT"
         | Or -> "OR"
         | Phrase -> "PHRASE"

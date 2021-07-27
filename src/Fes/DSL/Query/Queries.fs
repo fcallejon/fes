@@ -76,3 +76,36 @@ module Query =
           Boost = Option.None }
         |> Term
         |> TermQuery
+        
+    let mkQueryString field value =
+        let fields =
+            match field with
+            | Some f -> Some [| f |]
+            | None -> None
+        in
+        { QueryString.Query = value
+          DefaultField = None
+          Fields = fields
+          DefaultOperator = None
+          AllowLeadingWildcard = None
+          AnalyzeWildcard = None
+          Analyzer = None
+          AutoGenerateSynonymsPhraseQuery = None
+          Boost = None
+          MinimumShouldMatch = None
+          ZeroTermsQuery = None
+          FuzzyTransportations = None
+          FuzzyRewrite = None
+          Fuzziness = None
+          FuzzyMaxExpansions = None
+          FuzzyPrefixLength = None
+          Lenient = None
+          PhraseSlop = None
+          Rewrite = None
+          QuoteFieldSuffix = None
+          QuoteAnalyzer = None
+          MaxDeterminizedStates = None
+          EnablePositionIncrements = None
+          TimeZone = None }
+        |> QueryString
+        |> FullTextQueries

@@ -38,7 +38,7 @@ module QueryParams =
                 |> Seq.choose id
                 |> Seq.map QueryParameter.toString
             in String.Join("&", v) |> sprintf "?%s"
-            |> Result.Ok
+            |> Ok
             
         module Operators =
             let inline (&=) k v = qparam k v

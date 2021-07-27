@@ -34,7 +34,7 @@ type ElasticsearchClient (baseUri: Uri) =
 [<RequireQualifiedAccess>]
 module ElasticsearchResponse =
     
-    let inline mapResponse (response: SearchResponse) : Result<'a[], exn> =
+    let inline parseDocument (response: SearchResponse) : Result<'a[], exn> =
         let inline mkElement document : Result<'a, exn> = 
             match ofJson document.RawSource with
             | ParseResult.Ok element -> Ok element
@@ -44,8 +44,14 @@ module ElasticsearchResponse =
         |> Array.map mkElement 
         |> sequence
     
-    let inline mapResponseTuple (response: SearchResponse) : Result<SearchResponse * 'a[], exn> =
+    let inline documentWithResponse (response: SearchResponse) : Result<SearchResponse * 'a[], exn> =
         let mkTuple values = response, values
         in response
-        |> mapResponse
+        |> parseDocument
         |> Result.map mkTuple
+        
+[<RequireQualifiedAccess>]
+module ElasticsearchClient =
+    let inline search (client: ElasticsearchClient) (searchCommand: SearchCommandRequest) =
+        client.search searchCommand
+        |> Async.map (Result.bind ElasticsearchResponse.documentWithResponse)

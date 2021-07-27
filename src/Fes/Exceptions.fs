@@ -35,22 +35,26 @@ module Exceptions =
         | IllegalArgumentException
         | SearchPhaseExecutionException
         | ContentParseException
+        | ParsingException
         static member OfJson value =
             match value with
             | JString "resource_already_exists_exception" -> Decode.Success ResourceAlreadyExistsException
             | JString "illegal_argument_exception" -> Decode.Success IllegalArgumentException
             | JString "search_phase_execution_exception" -> Decode.Success SearchPhaseExecutionException
             | JString "x_content_parse_exception" -> Decode.Success ContentParseException
+            | JString "parsing_exception" -> Decode.Success ParsingException
             | JString x as v -> Decode.Fail.invalidValue v $"Wrong ElasticsearchException value: %s{x}"
             | x -> Decode.Fail.strExpected x
 
     and ElasticsearchCauseByType =
         | NumberFormatException
         | ContentParseException
+        | ParsingException
         static member OfJson value =
             match value with
             | JString "number_format_exception" -> Decode.Success NumberFormatException
             | JString "x_content_parse_exception" -> Decode.Success ContentParseException
+            | JString "parsing_exception" -> Decode.Success ParsingException
             | JString x as v -> Decode.Fail.invalidValue v $"Wrong ElasticsearchCauseByType value: %s{x}"
             | x -> Decode.Fail.strExpected x
 

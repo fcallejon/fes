@@ -24,3 +24,12 @@ module AsyncResult =
     let inline waitTask<'a> (t: Task<'a>) : AsyncResult<'a, exn> = async {
         let! tr = t
         return! retn tr }
+
+    let mapOut (f: Result<'b, exn> -> Result<'c, exn>) (a:'a -> AsyncResult<'b, exn>) : 'a -> AsyncResult<'c, exn> =
+        a >> Async.map f
+        
+    let bindOut (f: 'c -> Async<'a>) (a:'a -> AsyncResult<'b, exn>) : 'c -> AsyncResult<'b, exn> =
+        f >> Async.bind a
+        
+    let mapIn (f:'a2 -> 'a) (a:'a -> AsyncResult<'b, exn>) : 'a2 -> AsyncResult<'b, exn> =
+        f >> a

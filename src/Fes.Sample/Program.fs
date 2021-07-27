@@ -14,19 +14,24 @@ open Fleece.SystemTextJson
 open Fleece.SystemTextJson.Operators
 
 type SampleDocument =
-    { Field1: string }
+    { Field1: string
+      Field2: string }
 with
     override this.ToString() =
-        $"Field1: %s{this.Field1}"
+        $"Field1: %s{this.Field1}\tField2: %s{this.Field2}"
 
     static member ToJson doc =
-        jobj [ "field1" .= doc.Field1 ]
+        jobj [ "field1" .= doc.Field1
+               "field2" .= doc.Field2 ]
+        
     static member OfJson json =
         match json with
         | JObject o ->
             monad {
                 let! field1 = o .@ "field1"
-                return { SampleDocument.Field1 = field1 }
+                let! field2 = o .@ "field2"
+                return { SampleDocument.Field1 = field1
+                         Field2 = field2 }
             }
         | x -> Decode.Fail.strExpected x
 
@@ -34,18 +39,36 @@ with
 let main _ =
     let client =
         ElasticsearchClient <| Uri "http://localhost:9200/"
+    let indexName = "index_test_2"
         
     let inline printResult title (result: Result<'a, exn>) =
         printf title
         match result with
         | Ok o -> printfn $"OK -> {o}"
         | Error e -> printfn $"Error -> {e.Message}"
+        
+    let inline printSearchResult response = 
+        printfn "--------------------------------------------"
+        printResult "Search Document: " response
+        response
+        |> Result.map snd
+        |> (fun docs ->
+            match docs with
+            | Ok documents ->
+                printfn "Documents:"
+                documents
+                |> Array.iter (fun d -> printfn $"\t%s{d.ToString()}")
+            | Error _ -> ())
+        printfn "--------------------------------------------"
 
     // Create an Index
     let mapping =
         [| { MappingDefinition.Name = "field1"
              Type = FieldTypes.Keyword |> Fields.Keywords
-             Mappings = [| Mapping.FieldMapping.Analyzer "analyzer_name" |] } |]
+             Mappings = [|  |] }
+           { MappingDefinition.Name = "field2"
+             Type = FieldTypes.Keyword |> Fields.Keywords
+             Mappings = [|  |] } |]
 
     let settings =
         { IndexSettings.NumberOfShards = Some 3us
@@ -54,7 +77,7 @@ let main _ =
           Dynamic = None }
 
     let req =
-        { IndexRequest.Name = "index_test"
+        { IndexRequest.Name = indexName
           Mappings = Some mapping
           Settings = Some settings
           Aliases = Some [| IndexAlias.mk "Test" |]
@@ -80,7 +103,7 @@ let main _ =
           NumberOfReplicas = None
           Static = None }
     let updateReq =
-      { UpdateIndexSettingsRequest.Target = Some "index_test"
+      { UpdateIndexSettingsRequest.Target = Some indexName
         Settings = Some updateSettings
         Parameters = None }
 
@@ -92,7 +115,7 @@ let main _ =
     // Create Alias for Index
     let addAlias =
         { AliasAction.Names = AliasNames.Alias "alias_test"
-          On = ActionOn.Index "index_test"
+          On = ActionOn.Index indexName
           IsHidden = None
           MustExists = None
           IsWriteIndex = None
@@ -113,7 +136,8 @@ let main _ =
     printResult "Alias Command: " aliasCommandResult
 
     // Index a doc with custom Id
-    let docCustomId = { SampleDocument.Field1 = DateTime.UtcNow.ToString "O" }
+    let email = $"fer_mail_%i{DateTime.UtcNow.Ticks}@myemailserver.com"
+    let docCustomId = { SampleDocument.Field1 = DateTime.UtcNow.ToString "O"; Field2 = email }
     let indexParams =
         { IndexDocumentQueryParameters.WaitForActiveShards = Some IndexDocumentWaitForActiveShards.All
           Refresh = Some IndexDocumentRefresh.True
@@ -128,7 +152,7 @@ let main _ =
           RequireAlias = None }
     let indexDocCustomId =
         { IndexDocument.GetDocumentJson = konst (toJson docCustomId)
-          Target = "index_test"
+          Target = indexName
           Id = Some <| Guid.NewGuid().ToString("N")
           Parameters = Some indexParams }
 
@@ -138,21 +162,19 @@ let main _ =
     printResult "Index Document: " aliasCommandResult
     
     // Search a doc using field1
-    let searchRequest = Search.mkTermSearch "index_test" "field1" docCustomId.Field1
+    let searchRequest = Search.mkTermSearch indexName "field1" docCustomId.Field1
     let searchResponse : Result<SearchResponse * SampleDocument[], exn> =
-        client.search searchRequest
+        ElasticsearchClient.search client searchRequest
         |> Async.RunSynchronously
-        |> Result.bind ElasticsearchResponse.mapResponseTuple
 
-    printResult "Search Document: " searchResponse
-    searchResponse
-    |> Result.map snd
-    |> (fun docs ->
-        match docs with
-        | Ok documents ->
-            printfn "Documents:"
-            documents
-            |> Array.iter (fun d -> printfn $"\t%s{d.ToString()}")
-        | Error _ -> ()) 
+    printSearchResult searchResponse
+    
+    // Search a doc using field2
+    let searchRequest2 = Search.mkQueryString indexName None "fer_mail*"
+    let searchResponse2 : Result<SearchResponse * SampleDocument[], exn> =
+        ElasticsearchClient.search client searchRequest2
+        |> Async.RunSynchronously
 
+    printSearchResult searchResponse2
+    
     0

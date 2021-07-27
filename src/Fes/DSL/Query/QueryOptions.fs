@@ -42,13 +42,13 @@ type ScoreMode =
 | Average
 | Max
 | Min
-| None
+| NoScore
 | Sum
     static member ToJson op =
         match op with
         | Average -> "avg"
         | Max -> "max"
         | Min -> "min"
-        | None -> "none"
+        | NoScore -> "none"
         | Sum -> "sum"
         |> JString
