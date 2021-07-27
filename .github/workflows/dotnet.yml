@@ -20,6 +20,8 @@ jobs:
         
     - name: Restore tools
       run: dotnet tool restore
+    - name: Restore nuget
+      run: dotnet restore
     - name: Restore dependencies
       run: dotnet paket install
     - name: Build
