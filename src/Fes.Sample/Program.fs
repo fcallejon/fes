@@ -41,7 +41,7 @@ with
 let main _ =
     let client =
         ElasticsearchClient <| Uri "http://localhost:9200/"
-    let indexName = "index_test_3"
+    let indexName = "index_test_4"
         
     let inline printResult title (result: Result<'a, exn>) =
         printf title
@@ -64,13 +64,20 @@ let main _ =
         printfn "--------------------------------------------"
 
     // Create an Index
+    let properties =
+        [| ("innerField1", FieldTypes.Integer |> Fields.Numeric)
+           ("innerField2", FieldTypes.Keyword |> Fields.Keywords ) |]
+        |> Mapping.FieldMapping.Properties
     let mapping =
         [| { MappingDefinition.Name = "field1"
              Type = FieldTypes.DateTypes.Date |> Fields.Date
              Mappings = [|  |] }
            { MappingDefinition.Name = "field2"
              Type = FieldTypes.Keyword |> Fields.Keywords
-             Mappings = [|  |] } |]
+             Mappings = [|  |] }
+           { MappingDefinition.Name = "nestedField1"
+             Type = Fields.Nested
+             Mappings = [| properties |] } |]
 
     let settings =
         { IndexSettings.NumberOfShards = Some 3us

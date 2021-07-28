@@ -91,8 +91,12 @@ module Mapping =
         | TermVector of TermVector
         static member ToJson fieldMapping =
             let mkFieldsOrProps (fs: (string * FieldType) []) =
-                let mkFieldOrProp (key: string, value: FieldType) = jobj [ key .= value ]
-                fs |> Array.map mkFieldOrProp
+                let mkFieldOrProp (key: string, value: FieldType) = key, jobj [ "type" .= (toJson value) ]
+                fs
+                |> Seq.map mkFieldOrProp
+                |> dict
+                |> ReadOnlyDictionary
+                |> dictAsJsonObject
 
             match fieldMapping with
             | Analyzer value -> jobj [ "analyzer" .= value ]

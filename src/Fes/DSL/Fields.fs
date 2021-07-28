@@ -277,7 +277,13 @@ module Fields =
         | Text of FieldTypes.TextTypes
         | Numeric of FieldTypes.Numeric
         | Date of FieldTypes.DateTypes
+        | Nested
         static member OfJson value =
+            let nestedFromJson value =
+                match value with
+                | JString "nested" -> Decode.Success Nested
+                | x -> Decode.Fail.strExpected x
+            
             let fieldType =
                 [| (FieldTypes.Keywords.OfJson value
                     |> Result.map FieldType.Keywords)
@@ -286,7 +292,8 @@ module Fields =
                    (FieldTypes.Numeric.OfJson value
                     |> Result.map FieldType.Numeric)
                    (FieldTypes.DateTypes.OfJson value
-                    |> Result.map FieldType.Date) |]
+                    |> Result.map FieldType.Date)
+                   nestedFromJson value |]
                 |> Array.tryPick
                     (function
                     | Result.Ok ft -> Some ft
@@ -302,6 +309,7 @@ module Fields =
             | Keywords keywords -> toJson keywords
             | Numeric numeric -> toJson numeric
             | Date date -> toJson date
+            | Nested -> JString "nested"
 
 //TODO: Add parameters for Numeric Types
 //TODO: Add types from https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-types.html#structured-data-types
