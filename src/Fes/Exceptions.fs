@@ -36,6 +36,10 @@ module Exceptions =
         | SearchPhaseExecutionException
         | ContentParseException
         | ParsingException
+        | ClassCastException
+        | IndexNotFoundException
+        | MapperParsingException
+        | ParseException
         static member OfJson value =
             match value with
             | JString "resource_already_exists_exception" -> Decode.Success ResourceAlreadyExistsException
@@ -43,18 +47,24 @@ module Exceptions =
             | JString "search_phase_execution_exception" -> Decode.Success SearchPhaseExecutionException
             | JString "x_content_parse_exception" -> Decode.Success ContentParseException
             | JString "parsing_exception" -> Decode.Success ParsingException
+            | JString "class_cast_exception" -> Decode.Success ClassCastException
+            | JString "index_not_found_exception" -> Decode.Success IndexNotFoundException
+            | JString "mapper_parsing_exception" -> Decode.Success MapperParsingException
+            | JString "parse_exception" -> Decode.Success ParseException
             | JString x as v -> Decode.Fail.invalidValue v $"Wrong ElasticsearchException value: %s{x}"
             | x -> Decode.Fail.strExpected x
 
     and ElasticsearchCauseByType =
-        | NumberFormatException
-        | ContentParseException
-        | ParsingException
+        | NumberFormat
+        | ContentParse
+        | Parsing
+        | Parse
         static member OfJson value =
             match value with
-            | JString "number_format_exception" -> Decode.Success NumberFormatException
-            | JString "x_content_parse_exception" -> Decode.Success ContentParseException
-            | JString "parsing_exception" -> Decode.Success ParsingException
+            | JString "number_format_exception" -> Decode.Success NumberFormat
+            | JString "x_content_parse_exception" -> Decode.Success ContentParse
+            | JString "parsing_exception" -> Decode.Success Parsing
+            | JString "parse_exception" -> Decode.Success Parse
             | JString x as v -> Decode.Fail.invalidValue v $"Wrong ElasticsearchCauseByType value: %s{x}"
             | x -> Decode.Fail.strExpected x
 
@@ -104,7 +114,7 @@ module Exceptions =
         val reason: string
         val cause: option<ElasticsearchCausedBy>
         val stack: option<string>
-        val index: string
+        val index: option<string>
         val root: ElasticsearchRootCauseInfo []
         val phase: option<string>
         val grouped: option<bool>
@@ -147,7 +157,7 @@ module Exceptions =
                             |> Result.bind JsonEnum.fromInt<HttpStatusCode>
 
                         let! reason = error .@ "reason"
-                        let! index = error .@ "index"
+                        let! index = error .@? "index"
                         let! cause = error .@? "cause"
                         let! stack = error .@? "stack_trace"
 
