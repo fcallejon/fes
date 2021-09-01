@@ -23,6 +23,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sample", "Sample", "{A6D41F
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fes.Sample", "src\Fes.Sample\Fes.Sample.fsproj", "{1CD8EB93-5A67-4785-9F67-D851085BDBD4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GitHub", "GitHub", "{C5F6F2A8-FB1F-43A8-808C-304514BB59BD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Workflows", "Workflows", "{5C849617-49F7-440F-A3D0-9B3C7DE895E9}"
+ProjectSection(SolutionItems) = preProject
+	.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
+EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,5 +47,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{1CD8EB93-5A67-4785-9F67-D851085BDBD4} = {A6D41FAC-CF2F-4643-9E61-17A3BB3DB33D}
+		{5C849617-49F7-440F-A3D0-9B3C7DE895E9} = {C5F6F2A8-FB1F-43A8-808C-304514BB59BD}
 	EndGlobalSection
 EndGlobal

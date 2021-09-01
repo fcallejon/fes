@@ -36,12 +36,26 @@ with
                          Field2 = field2 }
             }
         | x -> Decode.Fail.strExpected x
+        
+let getEsServer _ =
+    let fromEnv = Environment.GetEnvironmentVariable("FES_ES_SERVER")
+    match fromEnv with
+    | _ when String.IsNullOrWhiteSpace(fromEnv) -> Uri "http://localhost:9200/"
+    | server -> Uri server
+    
+let getIndexName _ =
+    let fromEnv = Environment.GetEnvironmentVariable("FES_ES_INDEX_NAME")
+    match fromEnv with
+    | _ when String.IsNullOrWhiteSpace(fromEnv) -> "index_test_4"
+    | indexName -> indexName
 
 [<EntryPoint>]
 let main _ =
     let client =
-        ElasticsearchClient <| Uri "http://localhost:9200/"
-    let indexName = "index_test_4"
+        getEsServer()
+        |> ElasticsearchClient
+
+    let indexName = getIndexName ()
         
     let inline printResult title (result: Result<'a, exn>) =
         printf title
