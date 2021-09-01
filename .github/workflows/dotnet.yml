@@ -46,7 +46,6 @@ jobs:
           export FES_ES_SERVER=http://es1:9200/
           export FES_ES_INDEX_NAME=gh_index_$(date +%s)
           dotnet run --project ./src/Fes.Sample/Fes.Sample.fsproj --no-build
-        uses: Elasticsearch
 
       - name: Run Sample Local
         if: ${{ env.ACT }}
