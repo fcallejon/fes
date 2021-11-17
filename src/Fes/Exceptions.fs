@@ -40,6 +40,7 @@ module Exceptions =
         | IndexNotFoundException
         | MapperParsingException
         | ParseException
+        | InvalidIndexNameException
         static member OfJson value =
             match value with
             | JString "resource_already_exists_exception" -> Decode.Success ResourceAlreadyExistsException
@@ -51,6 +52,7 @@ module Exceptions =
             | JString "index_not_found_exception" -> Decode.Success IndexNotFoundException
             | JString "mapper_parsing_exception" -> Decode.Success MapperParsingException
             | JString "parse_exception" -> Decode.Success ParseException
+            | JString "invalid_index_name_exception" -> Decode.Success InvalidIndexNameException
             | JString x as v -> Decode.Fail.invalidValue v $"Wrong ElasticsearchException value: %s{x}"
             | x -> Decode.Fail.strExpected x
 

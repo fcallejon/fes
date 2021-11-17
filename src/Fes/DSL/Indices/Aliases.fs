@@ -79,7 +79,7 @@ module Aliases =
 
             let mk query =
                 $"_aliases{query}"
-                |> Http.Request.mk
+                |> Http.Request.fromPath
                 |> Http.Request.withMethod Http.Post
                 |> Http.Request.withJsonBody request
 

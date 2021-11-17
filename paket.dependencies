@@ -4,5 +4,5 @@ storage: none
 framework: net5, netcoreapp3.1
 
 group Main
-    nuget FSharp.Core ~> 5.0.1
+    nuget FSharp.Core ~> 6.0.1
     nuget Fleece.SystemTextJson

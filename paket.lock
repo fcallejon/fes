@@ -6,7 +6,7 @@ NUGET
       FSharp.Core (>= 4.6.2)
       FSharpPlus (>= 1.1.1)
       System.Text.Json (>= 4.7.1)
-    FSharp.Core (5.0.2)
+    FSharp.Core (6.0.1)
     FSharpPlus (1.2)
       FSharp.Core (>= 4.6.2)
     System.Runtime.CompilerServices.Unsafe (5.0) - restriction: || (&& (== net50) (>= monotouch)) (&& (== net50) (>= net461)) (&& (== net50) (< netcoreapp2.0)) (&& (== net50) (< netcoreapp2.1)) (&& (== net50) (< netcoreapp3.0)) (&& (== net50) (< netstandard2.0) (>= xamarintvos)) (&& (== net50) (< netstandard2.0) (>= xamarinwatchos)) (&& (== net50) (>= uap10.1)) (== netcoreapp3.1)

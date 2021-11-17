@@ -65,7 +65,8 @@ type Range<'a> =
       Operators: RangeOperator<'a> []
       Format: option<string>
       Boost: option<double>
-      TimeZone: option<string> }
+      TimeZone: option<string>
+      RangeRelation: option<RangeRelation> }
     static member inline ToJson range =
         let getOperator =
             function
@@ -78,6 +79,7 @@ type Range<'a> =
             let inner =
                 jobj [ yield "boost" .=? range.Boost
                        yield "time_zone" .=? range.TimeZone
+                       yield "relation" .=? range.RangeRelation
                        for operator in range.Operators do
                            let op, value = getOperator operator
                            yield op .= value ]
@@ -188,12 +190,16 @@ type Wildcard =
 
 type TermQueryRange =
     | IntegerRange of Range<int>
+    | LongRange of Range<int64>
     | DateTimeRange of Range<DateTime>
+    | TermRange of Range<string>
 with
     static member ToJson query =
         match query with
         | IntegerRange q -> toJson q
+        | LongRange q -> toJson q
         | DateTimeRange q -> toJson q
+        | TermRange q -> toJson q
 
 type TermQuery =
     | Exists of Exists

@@ -32,7 +32,7 @@ module Http =
     
     [<AutoOpen>]
     module Request =
-        let mk (path: string) =
+        let fromPath (path: string) =
             let request = new RequestMsg()
             request.RequestUri <- Uri(path, UriKind.Relative)
             request

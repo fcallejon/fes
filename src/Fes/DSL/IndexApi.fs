@@ -71,13 +71,13 @@ type IndexDocumentQueryParameters =
 
 type IndexDocumentGetBody = unit -> JsonValue
 
-type IndexDocument =
-    { GetDocumentJson: IndexDocumentGetBody
+type IndexDocument<'TDocument> =
+    { Document: 'TDocument
       Target: string
       Id: option<string>
       Parameters: option<IndexDocumentQueryParameters> }
 
-    static member ToRequest (request: IndexDocument) =
+    static member inline ToRequest request =
         let query =
             request.Parameters
             |> Option.map toQueryParams
@@ -85,10 +85,11 @@ type IndexDocument =
 
         let id = request.Id |> Option.defaultValue String.Empty
         let mk query =
+            let jsonDoc = toJson request.Document
             $"%s{request.Target}/_doc/%s{id}%s{query}"
-            |> (Http.Request.mk
-                >> (Http.Request.withMethod Http.Put)
-                >> (request.GetDocumentJson() |> string |> Http.Request.withJson))
+            |> Http.Request.fromPath
+            |> Http.Request.withMethod Http.Put
+            |> (jsonDoc |> string |> Http.Request.withJson)
 
         mk <!> query
 
