@@ -12,7 +12,8 @@ open Fes.DSL.Search
 open Fes.DSL.Units
 open Fleece.SystemTextJson
 open Fleece.SystemTextJson.Operators
-
+open Fes.Builders
+open Fes.Builders.Indices
 open Fes.Sample
 
 type SampleDocument =
@@ -46,7 +47,7 @@ let getEsServer _ =
 let getIndexName _ =
     let fromEnv = Environment.GetEnvironmentVariable("FES_ES_INDEX_NAME")
     match fromEnv with
-    | _ when String.IsNullOrWhiteSpace(fromEnv) -> "index_test_4"
+    | _ when String.IsNullOrWhiteSpace(fromEnv) -> "index_test_using_ce"
     | indexName -> indexName
 
 [<EntryPoint>]
@@ -67,7 +68,7 @@ let main _ =
         printfn "--------------------------------------------"
         printResult "Search Document: " response
         response
-        |> Result.map snd
+        |> Result.map (fun x -> x.Hits.Hits)
         |> (fun docs ->
             match docs with
             | Ok documents ->
@@ -77,58 +78,52 @@ let main _ =
             | Error _ -> ())
         printfn "--------------------------------------------"
 
-    // Create an Index
-    let properties =
-        [| ("innerField1", FieldTypes.Integer |> Fields.Numeric)
-           ("innerField2", FieldTypes.Keyword |> Fields.Keywords ) |]
-        |> Mapping.FieldMapping.Properties
-    let mapping =
-        [| { MappingDefinition.Name = "field1"
-             Type = FieldTypes.DateTypes.Date |> Fields.Date
-             Mappings = [|  |] }
-           { MappingDefinition.Name = "field2"
-             Type = FieldTypes.Keyword |> Fields.Keywords
-             Mappings = [|  |] }
-           { MappingDefinition.Name = "nestedField1"
-             Type = Fields.Nested
-             Mappings = [| properties |] } |]
-
-    let settings =
-        { IndexSettings.NumberOfShards = Some 3us
-          NumberOfReplicas = Some 0us
-          Static = None
-          Dynamic = None }
-
     let req =
-        { IndexRequest.Name = indexName
-          Mappings = Some mapping
-          Settings = Some settings
-          Aliases = Some [| IndexAlias.mk "Test" |]
-          Parameters = None }
+        createIndexRequest {
+            name indexName
+            mappings
+                [|
+                    mappingDefinition {
+                        name "field1"
+                        fieldType (FieldTypes.DateTypes.Date |> Fields.Date)
+                    }
+                    mappingDefinition {
+                        name "field2"
+                        fieldType (FieldTypes.Keyword |> Fields.Keywords)
+                    }
+                    mappingDefinition {
+                        name "nestedField1"
+                        fieldType Fields.Nested
+                        mappings
+                            [| ([| ("innerField1", FieldTypes.Integer |> Fields.Numeric)
+                                   ("innerField2", FieldTypes.Keyword |> Fields.Keywords ) |]
+                                |> Mapping.FieldMapping.Properties) |]
+                    }
+                |]
+            settings (
+                indexSettings {
+                    shards 3us
+                    replicas 0us
+                })
+            aliases [| indexAlias { name "Test" } |]
+        }
+        
 
     let createResult : Result<IndexCreateResponse, exn> =
-        client.mkIndex req |> Async.RunSynchronously
+        client.createIndex req |> Async.RunSynchronously
 
     printResult "Create: " createResult
 
     // Update Index Settings
-    let updateSettings =
-        { IndexSettings.Dynamic =
-            Some { DynamicIndexSettings.RefreshInterval = Some (TimeoutUnit.Seconds 1<TimeUnits.s>)
-                   AutoExpandReplicas = None
-                   SearchIdleAfter = None
-                   MaxResultWindow = None
-                   MaxInnerResultWindow = None
-                   MaxReScoreWindow = None
-                   MaxDocValueFieldsSearch = None
-                   MaxScriptFields = None }
-          NumberOfShards = None
-          NumberOfReplicas = None
-          Static = None }
     let updateReq =
-      { UpdateIndexSettingsRequest.Target = Some indexName
-        Settings = Some updateSettings
-        Parameters = None }
+        updateIndexSettingsRequest {
+            target indexName
+            settings (
+                indexSettings{
+                    dynamic (dynamicIndexSettings {
+                            refreshInterval (TimeoutUnit.Seconds 1<TimeUnits.s>) })
+                })
+        }
 
     let updateResult : Result<ElasticsearchGenericResponse, exn> =
         client.updateIndexSettings updateReq |> Async.RunSynchronously
@@ -136,22 +131,18 @@ let main _ =
     printResult "Update: " updateResult
     
     // Create Alias for Index
-    let addAlias =
-        { AliasAction.Names = AliasNames.Alias "alias_test"
-          On = ActionOn.Index indexName
-          IsHidden = None
-          MustExists = None
-          IsWriteIndex = None
-          Routing = None
-          IndexRouting = None
-          SearchRouting = None
-          Filter = None }
-        |> Action.Add 
-    
     let aliasCmd =
-        { AliasCommandRequest.Actions = [| addAlias |]
-          Parameters = Some { AliasQueryParameter.Timeout = Some <| (TimeoutUnit.Seconds 30<TimeUnits.s>)
-                              MasterTimeout = None } }
+        aliasCommandRequest {
+            add (
+                aliasAction {
+                    names (AliasNames.Alias "alias_test")
+                    on (ActionOn.Index indexName)
+                })
+            parameters (
+                aliasQueryParameter {
+                    timeout (TimeoutUnit.Seconds 30<TimeUnits.s>)
+                })
+        }
 
     let aliasCommandResult : Result<ElasticsearchGenericResponse, exn> =
         client.executeCommand aliasCmd |> Async.RunSynchronously
@@ -161,32 +152,27 @@ let main _ =
     // Index a doc with custom Id
     let email = $"fer_mail_%i{DateTime.UtcNow.Ticks}@myemailserver.com"
     let docCustomId = { SampleDocument.Field1 = DateTime.UtcNow.ToString "O"; Field2 = email }
-    let indexParams =
-        { IndexDocumentQueryParameters.WaitForActiveShards = Some IndexDocumentWaitForActiveShards.All
-          Refresh = Some IndexDocumentRefresh.True
-          IfSeqNo = None
-          IfPrimaryTerm = None
-          OpType = None
-          Pipeline = None
-          Routing = None
-          Version = None
-          VersionType = None
-          Timeout = None
-          RequireAlias = None }
+        
     let indexDocCustomId =
-        { IndexDocument.GetDocumentJson = konst (toJson docCustomId)
-          Target = indexName
-          Id = Some <| Guid.NewGuid().ToString("N")
-          Parameters = Some indexParams }
+        indexDocument<SampleDocument> {
+            document docCustomId
+            id (Guid.NewGuid().ToString())
+            target indexName
+            parameters (
+                indexDocumentParameters {
+                    waitForActiveShards IndexDocumentWaitForActiveShards.All
+                    refresh IndexDocumentRefresh.True
+                })
+        }
 
-    let aliasCommandResult : Result<IndexDocumentResponse, exn> =
-        client.indexDocument indexDocCustomId |> Async.RunSynchronously
+    let indexDocCustomIdResult : Result<IndexDocumentResponse, exn> =
+        ElasticsearchClient.indexDocument client indexDocCustomId |> Async.RunSynchronously
 
-    printResult "Index Document: " aliasCommandResult
+    printResult "Index Document: " indexDocCustomIdResult
     
     // Search a doc using field1
     let searchRequest = Search.mkTermSearch indexName "field1" docCustomId.Field1
-    let searchResponse : Result<SearchResponse * SampleDocument[], exn> =
+    let searchResponse : Result<SearchResponse<SampleDocument>, exn> =
         ElasticsearchClient.search client searchRequest
         |> Async.RunSynchronously
 
@@ -194,7 +180,7 @@ let main _ =
     
     // Search a doc using field2
     let searchRequest2 = Search.mkQueryString indexName None "fer_mail*"
-    let searchResponse2 : Result<SearchResponse * SampleDocument[], exn> =
+    let searchResponse2 : Result<SearchResponse<SampleDocument>, exn> =
         ElasticsearchClient.search client searchRequest2
         |> Async.RunSynchronously
 

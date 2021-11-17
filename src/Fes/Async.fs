@@ -14,4 +14,3 @@ module Async =
         
     let mapIn (f:'a2 -> 'a) (a:'a -> Async<'b>) : 'a2 -> Async<'b> =
         f >> a
-    

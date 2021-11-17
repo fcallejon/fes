@@ -269,7 +269,7 @@ type SearchCommandRequest =
 
         let mk query =
             $"{target}_search{query}"
-            |> Http.Request.mk
+            |> Http.Request.fromPath
             |> Http.Request.withMethod Http.Post
             |> Http.Request.withJsonBody request
 
@@ -281,22 +281,16 @@ type SearchShardsInfoResponse =
       Successful: int
       Failed: int }
 with
-    static member OfJson json =
-        match json with
-        | JObject o ->
-            monad {
-                let! total = o .@ "total"
-                let! successful = o .@ "successful"
-                let! skipped = o .@ "skipped"
-                let! failed = o .@ "failed"
-
-                return
-                    { SearchShardsInfoResponse.Total = total
-                      Skipped = skipped
-                      Successful = successful 
-                      Failed = failed }
-            }
-        | x -> Decode.Fail.objExpected x
+    static member JsonObjCodec =
+        fun t s ok f ->
+                { SearchShardsInfoResponse.Total = t
+                  Skipped = s
+                  Successful = ok 
+                  Failed = f }
+        <!> jreq "total" (Some << fun x -> x.Total)
+        <*> jreq "skipped" (Some << fun x -> x.Skipped)
+        <*> jreq "successful" (Some << fun x -> x.Successful)
+        <*> jreq "failed" (Some << fun x -> x.Failed)
 
 type SearchHitTotalRelation =
 | Equal
@@ -308,23 +302,24 @@ with
         | JString "gte" -> Decode.Success GreaterThanOrEqual
         | JString x as v -> Decode.Fail.invalidValue v $"Wrong SearchHitTotalRelation value: %s{x}"
         | x -> Decode.Fail.strExpected x
+        
+    static member ToJson relation =
+        match relation with
+        | Equal -> "eq"
+        | GreaterThanOrEqual -> "gte"
+        |> JString
     
 
 type SearchHitTotal =
     { Value: int
       Relation: SearchHitTotalRelation }
 with
-    static member OfJson json =
-        match json with
-        | JObject o ->
-            monad {
-                let! value = o .@ "value"
-                let! relation = o .@ "relation"
-                
-                return { SearchHitTotal.Value = value
-                         Relation = relation }
-            }
-        | x -> Decode.Fail.strExpected x
+    static member JsonObjCodec =
+        fun v r ->
+                { SearchHitTotal.Value = v
+                  Relation = r }
+        <!> jreq "value" (Some << fun x -> x.Value)
+        <*> jreq "relation" (Some << fun x -> x.Relation)
 
 type SearchHitMaxScore =
 | Empty
@@ -334,6 +329,11 @@ type SearchHitMaxScore =
         | JNumber number -> number |> string |> float |> Value |> Decode.Success
         | JNull -> Decode.Success Empty
         | x -> Decode.Fail.strExpected x
+        
+    static member ToJson relation =
+        match relation with
+        | Empty -> JNull
+        | Value v -> v |> decimal |> JNumber
 
 type DocumentMetadata =
     { Index: string
@@ -342,42 +342,40 @@ type DocumentMetadata =
       Score: float
       Version: int
       SeqNumber: int }
-    
-type MapDocument<'a> = JsonValue -> 'a
-type Document =
-    { RawSource: JsonValue
+
+type Document<'TDocument> =
+    { Item:'TDocument
       Metadata: DocumentMetadata }
 with
-    static member OfJson json =
+    static member inline OfJson json =
         match json with
         | JObject o ->
             monad {
-                let! source = o .@ "_source" |> Result.map (fun (d: JsonValue) -> d)
-                let! index = o .@ "_index"
                 let! docType = o .@ "_type"
                 let! id = o .@ "_id"
-                let! score = o .@ "_score"
                 let! version = o .@ "_version"
-                let! seqNo = o .@ "_seq_no"
+                let! score = o .@ "_score"
+                let! seq_no = o .@ "_seq_no"
+                let! source = o .@ "_source"
+                let! index = o .@ "_index"
                 
-                return { Document.RawSource = source
-                         Metadata = { DocumentMetadata.Index = index
-                                      Type = docType
-                                      Id = id
-                                      Score = score
-                                      SeqNumber = seqNo
-                                      Version = version }
-                         }
+                return { Item = source
+                         Metadata =
+                             { DocumentMetadata.Index = index
+                               Type = docType
+                               Id = id
+                               Score = score
+                               Version = version
+                               SeqNumber = seq_no } }
             }
-        | x -> Decode.Fail.strExpected x
-        
+        | x -> Decode.Fail.objExpected x
 
-type SearchHits =
+type SearchHits<'TDocument> =
     { Total: SearchHitTotal
       MaxScore: SearchHitMaxScore
-      Hits: Document[] }
+      Hits: Document<'TDocument>[] }
 with
-    static member OfJson json =
+    static member inline OfJson json =
         match json with
         | JObject o ->
             monad {
@@ -385,34 +383,33 @@ with
                 let! maxScore = o .@ "max_score"
                 let! hits = o .@ "hits"
                 
-                return { SearchHits.Total = total
+                return { Total = total
                          MaxScore = maxScore
                          Hits = hits }
             }
-        | x -> Decode.Fail.strExpected x
+        | x -> Decode.Fail.objExpected x
 
-type SearchResponse =
-    { Hits: SearchHits
+type SearchResponse<'TDocument> =
+    { Hits: SearchHits<'TDocument>
       ScrollId: option<string>
       Took: int
       TimedOut: bool
       ShardsInfo: SearchShardsInfoResponse }
 with
-    static member OfJson json =
+    static member inline OfJson json =
         match json with
         | JObject o ->
             monad {
-                let! scrollId = o .@? "_scroll_id"
                 let! took = o .@ "took"
+                let! scrollId = o .@? "_scroll_id"
                 let! timedOut = o .@ "timed_out"
                 let! shards = o .@ "_shards"
                 let! hits = o .@ "hits"
-
-                return
-                    { SearchResponse.Hits = hits
-                      ScrollId = scrollId
-                      Took = took
-                      TimedOut = timedOut 
-                      ShardsInfo = shards }
+                
+                return { Hits = hits
+                         ScrollId = scrollId
+                         Took = took
+                         TimedOut = timedOut
+                         ShardsInfo = shards }
             }
-        | x -> Decode.Fail.objExpected x        
+        | x -> Decode.Fail.objExpected x

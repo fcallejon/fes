@@ -219,7 +219,7 @@ type IndexRequest =
 
         let mk query =
             $"%s{request.Name}%s{query}"
-            |> (Http.Request.mk
+            |> (Http.Request.fromPath
                 >> (Http.Request.withMethod Http.Put)
                 >> (Http.Request.withJsonBody request))
 
@@ -255,7 +255,7 @@ type UpdateIndexSettingsRequest =
 
         let mk query =
             $"%s{target}/_settings{query}"
-            |> Http.Request.mk
+            |> Http.Request.fromPath
             |> Http.Request.withMethod Http.Put
             |> Http.Request.withJsonBody request
         mk <!> query
