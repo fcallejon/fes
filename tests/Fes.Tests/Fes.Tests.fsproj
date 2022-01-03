@@ -7,8 +7,9 @@
   <ItemGroup>
     <Content Include="paket.references" />
     <Compile Include="AssertRequestCommands.fs" />
-    <Compile Include="IndexCommands.fs" />
-    <Compile Include="IndexDocumentCommands.fs" />
+    <Compile Include="Commands\IndexDocumentCommands.fs" />
+    <Compile Include="Commands\IndexCommands.fs" />
+    <Compile Include="Responses\ErrorDeserialization.fs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Fes\Fes.fsproj" />

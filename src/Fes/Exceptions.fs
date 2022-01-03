@@ -155,7 +155,7 @@ module Exceptions =
                         let! esType = error .@ "type"
                         let! reason = error .@ "reason"
                         let! index = error .@? "index"
-                        let! cause = error .@? "cause"
+                        let! cause = error .@? "caused_by"
                         let! stack = error .@? "stack_trace"
 
                         let! root =
