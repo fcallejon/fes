@@ -24,7 +24,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: 5.0.x
+          dotnet-version: 6.0.x
       - name: Restore tools
         run: dotnet tool restore
       - name: Restore dependencies
@@ -34,24 +34,24 @@ jobs:
       - name: Run Tests
         run: dotnet test --no-build --no-restore
 
-      - name: Runs Elasticsearch
-        if: ${{ !env.ACT }}
-        uses: elastic/elastic-github-actions/elasticsearch@master
-        with:
-          stack-version: 7.6.0
-          port: 9200
-          nodes: 1
-
-      - name: Run Sample GitHub
-        if: ${{ !env.ACT }}
-        run: |
-          export FES_ES_SERVER=http://es1:9200/
-          export FES_ES_INDEX_NAME=gh_index_$(date +%s)
-          dotnet run --project ./src/Fes.Sample/Fes.Sample.fsproj --no-build
-
-      - name: Run Sample Local
-        if: ${{ env.ACT }}
-        run: |
-          export FES_ES_SERVER=http://localhost:9200/
-          export FES_ES_INDEX_NAME=index_$(date +%s)
-          dotnet run --project ./src/Fes.Sample/Fes.Sample.fsproj --no-build
+#      - name: Runs Elasticsearch
+#        if: ${{ !env.ACT }}
+#        uses: elastic/elastic-github-actions/elasticsearch@master
+#        with:
+#          stack-version: 7.6.0
+#          port: 9200
+#          nodes: 1
+#
+#      - name: Run Sample GitHub
+#        if: ${{ !env.ACT }}
+#        run: |
+#          export FES_ES_SERVER=http://es1:9200/
+#          export FES_ES_INDEX_NAME=gh_index_$(date +%s)
+#          dotnet run --project ./src/Fes.Sample/Fes.Sample.fsproj --no-build
+#
+#      - name: Run Sample Local
+#        if: ${{ env.ACT }}
+#        run: |
+#          export FES_ES_SERVER=http://localhost:9200/
+#          export FES_ES_INDEX_NAME=index_$(date +%s)
+#          dotnet run --project ./src/Fes.Sample/Fes.Sample.fsproj --no-build
