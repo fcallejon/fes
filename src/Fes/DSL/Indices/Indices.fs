@@ -2,6 +2,7 @@
 
 open System.Collections.Generic
 open FSharpPlus
+open Fleece
 open Fleece.SystemTextJson
 open Fleece.SystemTextJson.Operators
 open System
@@ -170,41 +171,37 @@ type IndexRequest =
     static member ToJson index =
         let mappings =
             let mkMapping (mapping: MappingDefinition) =
-                let mappingRoot (extra: JsonValue[]) =
-                    let extraAsDict =
-                        let unwrapDict =
+                let mappingRoot (extra: Encoding[]) =
+                    let extras =
+                        let removeNonObjects =
                             function
-                            | JObject e -> e
-                            | _ -> failwith "There should only be JObjects here, better check why is not the case."
-                        let innerDict = Dictionary<string, JsonValue>()
+                            | JObject _ -> true
+                            | _ -> false
                         extra
                         |> Array.append [| jobj [ "type" .= mapping.Type ] |]
-                        |> Seq.map unwrapDict
-                        |> Seq.iter (fun current -> current.Keys |> Seq.iter (fun k -> innerDict.Add(k, current.[k])))
-                        ReadOnlyDictionary(innerDict)
-                        
-                    mapping.Name, ((extraAsDict |> dictAsJsonObject) |> JObject)
+                        |> Array.filter removeNonObjects
+                    
+                    let asRol =
+                        (extras |> List<Encoding>).AsReadOnly()
+                        :> IReadOnlyList<Encoding>
+                        |> JArray
+                    (mapping.Name, asRol)
                 
                 mapping.Mappings
                 |> Array.map toJson
                 |> mappingRoot
 
-            
             let mkJson mappings =
-                let rod = ReadOnlyDictionary(mappings)
-                jobj [ "properties" .= (dictAsJsonObject rod) ]
+                jobj [ "properties" .= mappings ]
             
             index.Mappings
-            |> Option.map (Array.map mkMapping)
-            |> Option.map (dict >> mkJson)
+            |> Option.map (Array.map mkMapping >> mkJson)
 
         let aliases =
             index.Aliases
             |> Option.map (
                 (Array.map IndexAlias.asJsonTuple)
-                >> dict
-                >> ReadOnlyDictionary
-                >> dictAsJsonObject
+                >> JsonObject
             )
 
         jobj [ "aliases" .=? aliases

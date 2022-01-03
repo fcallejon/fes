@@ -1,6 +1,6 @@
 ﻿namespace Fes.DSL.Units
 
-open Fleece.SystemTextJson
+open Fleece
 
 module TimeUnits =
     [<Measure>] type d

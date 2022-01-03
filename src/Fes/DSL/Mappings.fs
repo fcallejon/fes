@@ -1,7 +1,6 @@
 ﻿namespace Fes.DSL.Mappings
 
 open System
-open System.Collections.ObjectModel
 open Fes.DSL.Fields.Fields
 open Fleece.SystemTextJson
 open Fleece.SystemTextJson.Operators
@@ -79,7 +78,7 @@ module Mapping =
         | IndexPhrases of bool
         | IndexPrefixes of int * int
         | Index of bool
-        | Meta of seq<string * JsonValue>
+        | Meta of seq<string * Encoding>
         | Normalizer of string
         | Norms of bool
         | NullValue of string
@@ -94,9 +93,7 @@ module Mapping =
                 let mkFieldOrProp (key: string, value: FieldType) = key, jobj [ "type" .= (toJson value) ]
                 fs
                 |> Seq.map mkFieldOrProp
-                |> dict
-                |> ReadOnlyDictionary
-                |> dictAsJsonObject
+                |> JsonObject
 
             match fieldMapping with
             | Analyzer value -> jobj [ "analyzer" .= value ]
@@ -122,9 +119,7 @@ module Mapping =
             | Similarity value -> jobj [ "similarity" .= value ]
             | Store value -> jobj [ "store" .= value ]
             | TermVector value -> jobj [ "term_vector" .= value ]
-            | Meta value ->
-                jobj [ "meta"
-                       .= (value |> readOnlyDict |> dictAsJsonObject) ]
+            | Meta value -> jobj [ "meta" .= (Array.ofSeq value) ]
             | IndexPrefixes (min, max) ->
                 jobj [ "index_prefixes"
                        .= jobj [ "min_chars" .= min

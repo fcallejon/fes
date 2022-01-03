@@ -5,7 +5,7 @@ ProjectSection(SolutionItems) = preProject
 	docker-compose.yml = docker-compose.yml
 EndProjectSection
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fes", "src\Fes\Fes.fsproj", "{A74AB07D-0AFF-49D3-851B-53816B4DE4FB}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fes", "src/Fes/Fes.fsproj", "{A74AB07D-0AFF-49D3-851B-53816B4DE4FB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "paket", "paket", "{509DDF89-85AD-43DA-9A3B-25C41B21A94C}"
 ProjectSection(SolutionItems) = preProject
@@ -17,22 +17,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution", "Solution", "{0F
 ProjectSection(SolutionItems) = preProject
 	.gitignore = .gitignore
 	README.md = README.md
+	Directory.Build.props = Directory.Build.props
 EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sample", "Sample", "{A6D41FAC-CF2F-4643-9E61-17A3BB3DB33D}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fes.Sample", "src\Fes.Sample\Fes.Sample.fsproj", "{1CD8EB93-5A67-4785-9F67-D851085BDBD4}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fes.Sample", "src/Fes.Sample/Fes.Sample.fsproj", "{1CD8EB93-5A67-4785-9F67-D851085BDBD4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GitHub", "GitHub", "{C5F6F2A8-FB1F-43A8-808C-304514BB59BD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Workflows", "Workflows", "{5C849617-49F7-440F-A3D0-9B3C7DE895E9}"
 ProjectSection(SolutionItems) = preProject
-	.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
+	.github/workflows/dotnet.yml = .github/workflows/dotnet.yml
 EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{5B492656-E1D0-40B5-B350-FB924D10C2BE}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fes.Tests", "tests\Fes.Tests\Fes.Tests.fsproj", "{293A5326-154F-47B8-917F-C7A2635387F1}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fes.Tests", "tests\Fes.Tests\Fes.Tests.fsproj", "{521005C1-A719-4E8D-8856-D417558EE12B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{9F69195B-2353-48A6-A03D-6986CBCE5C32}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,14 +49,14 @@ Global
 		{1CD8EB93-5A67-4785-9F67-D851085BDBD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1CD8EB93-5A67-4785-9F67-D851085BDBD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1CD8EB93-5A67-4785-9F67-D851085BDBD4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{521005C1-A719-4E8D-8856-D417558EE12B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{521005C1-A719-4E8D-8856-D417558EE12B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{521005C1-A719-4E8D-8856-D417558EE12B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{521005C1-A719-4E8D-8856-D417558EE12B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{293A5326-154F-47B8-917F-C7A2635387F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{293A5326-154F-47B8-917F-C7A2635387F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{293A5326-154F-47B8-917F-C7A2635387F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{293A5326-154F-47B8-917F-C7A2635387F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{1CD8EB93-5A67-4785-9F67-D851085BDBD4} = {A6D41FAC-CF2F-4643-9E61-17A3BB3DB33D}
 		{5C849617-49F7-440F-A3D0-9B3C7DE895E9} = {C5F6F2A8-FB1F-43A8-808C-304514BB59BD}
-		{521005C1-A719-4E8D-8856-D417558EE12B} = {5B492656-E1D0-40B5-B350-FB924D10C2BE}
+		{293A5326-154F-47B8-917F-C7A2635387F1} = {9F69195B-2353-48A6-A03D-6986CBCE5C32}
 	EndGlobalSection
 EndGlobal

@@ -28,3 +28,17 @@ module Prelude =
 module Strings =
     let joinByChar (sep: char) (x: string[]) =
         String.Join(sep, x)
+        
+[<AutoOpen>]
+module FleeceOperators =
+    open Fleece
+    open Fleece.SystemTextJson
+
+    /// Creates a new Json key-value pair for a Json object if the value option is present
+    let inline jpairOptWith toJson (key: string) value = match value with Some value -> (key, toJson value) | _ -> (null, JNull)
+
+    /// Creates a new Json key-value pair for a Json object if the value option is present
+    let inline jpairOpt (key: string) value = jpairOptWith toJson key value
+    
+    /// Creates a new Json key-value pair for a Json object if the value is present in the option
+    let inline (.=?) (key: string) value = jpairOpt key value

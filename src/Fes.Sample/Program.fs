@@ -58,13 +58,18 @@ let main _ =
 
     let indexName = getIndexName ()
         
-    let inline printResult title (result: Result<'a, exn>) =
+    let printResult title (result: Result<'a, exn>) =
         printf title
         match result with
         | Ok o -> printfn $"OK -> {o}"
-        | Error e -> printfn $"Error -> {e.Message}"
+        | Error e ->
+            match e with
+            | :? AggregateException as ae ->
+                ae.InnerExceptions
+                |> Seq.iter (fun ie -> printfn $"Error -> {ie.Message} \r\n{ie.InnerException.Message}")
+            | _ -> printfn $"Error -> {e.Message}"
         
-    let inline printSearchResult response = 
+    let printSearchResult response = 
         printfn "--------------------------------------------"
         printResult "Search Document: " response
         response

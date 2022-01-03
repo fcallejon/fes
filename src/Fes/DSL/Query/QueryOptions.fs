@@ -1,6 +1,7 @@
 ﻿namespace Fes.DSL.Queries
 
 open FSharpPlus.Control
+open Fleece
 open Fleece.SystemTextJson
 
 type Rewrite =

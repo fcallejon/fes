@@ -1,5 +1,6 @@
 ﻿namespace Fes.DSL.Query.TermLevel
 
+open Fes
 open System
 open Fes.DSL.Queries
 open Fleece.SystemTextJson
@@ -22,8 +23,8 @@ type Fuzzy =
         let element =
             let inner =
                 jobj [ "value" .= fuzzy.Value
-                       "fuzziness" .=? fuzzy.Fuzziness
                        "max_expansions" .=? fuzzy.MaxExpansions
+                       "fuzziness" .=? fuzzy.Fuzziness
                        "prefix_length" .=? fuzzy.PrefixLength
                        "transpositions" .=? fuzzy.Transpositions
                        "rewrite" .=? fuzzy.Rewrite ]

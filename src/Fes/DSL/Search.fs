@@ -241,7 +241,7 @@ type SearchCommandRequest =
                            "script" .=? x.Script ]
             
             command.RuntimeMappings
-            |> Option.map ((Array.map mkPair) >> seqPairToJsonObject)
+            |> Option.map ((Array.map mkPair) >> JsonObject)
             
         jobj [ "docvalue_fields" .=? command.DocValueFields
                "explain" .=? command.Explain
