@@ -30,6 +30,10 @@ ProjectSection(SolutionItems) = preProject
 	.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
 EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{5B492656-E1D0-40B5-B350-FB924D10C2BE}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fes.Tests", "tests\Fes.Tests\Fes.Tests.fsproj", "{521005C1-A719-4E8D-8856-D417558EE12B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,9 +48,14 @@ Global
 		{1CD8EB93-5A67-4785-9F67-D851085BDBD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1CD8EB93-5A67-4785-9F67-D851085BDBD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1CD8EB93-5A67-4785-9F67-D851085BDBD4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{521005C1-A719-4E8D-8856-D417558EE12B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{521005C1-A719-4E8D-8856-D417558EE12B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{521005C1-A719-4E8D-8856-D417558EE12B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{521005C1-A719-4E8D-8856-D417558EE12B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{1CD8EB93-5A67-4785-9F67-D851085BDBD4} = {A6D41FAC-CF2F-4643-9E61-17A3BB3DB33D}
 		{5C849617-49F7-440F-A3D0-9B3C7DE895E9} = {C5F6F2A8-FB1F-43A8-808C-304514BB59BD}
+		{521005C1-A719-4E8D-8856-D417558EE12B} = {5B492656-E1D0-40B5-B350-FB924D10C2BE}
 	EndGlobalSection
 EndGlobal

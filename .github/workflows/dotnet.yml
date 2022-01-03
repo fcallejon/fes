@@ -31,6 +31,8 @@ jobs:
         run: dotnet restore
       - name: Build
         run: dotnet build --no-restore
+      - name: Run Tests
+        run: dotnet test --no-build --no-restore
 
       - name: Runs Elasticsearch
         if: ${{ !env.ACT }}
