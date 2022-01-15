@@ -35,17 +35,19 @@ module IndexDocumentCommands =
     [<Fact>]
     let ``Index Document command return correct HTTP call`` () =
         let docId = Guid.NewGuid().ToString()
+        let dateTime = DateTime.UtcNow.ToString "O"
+        let email =
+            $"fer_mail_%i{DateTime.UtcNow.Ticks}@myemailserver.com"
         let expected =
             $"""Method: PUT, RequestUri: 'indexName/_doc/{docId}?refresh=true&wait_for_active_shards=all', Version: 1.1, Content: System.Net.Http.StringContent, Headers:
 {{
   Content-Type: application/json; charset=utf-8
-}}"""
-
-        let email =
-            $"fer_mail_%i{DateTime.UtcNow.Ticks}@myemailserver.com"
+  Content-Length: 98
+}}
+{{"field1":"{dateTime}","field2":"{email}"}}"""
 
         let docCustomId =
-            { SampleDocument.Field1 = DateTime.UtcNow.ToString "O"
+            { SampleDocument.Field1 = dateTime
               Field2 = email }
 
         indexDocument<SampleDocument> {

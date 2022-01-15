@@ -16,7 +16,9 @@ module IndexCommands =
             """Method: PUT, RequestUri: 'indexName', Version: 1.1, Content: System.Net.Http.StringContent, Headers:
 {
   Content-Type: application/json; charset=utf-8
-}"""
+  Content-Length: 275
+}
+{"aliases":{"Test":{}},"settings":{"number_of_shards":3,"number_of_replicas":0},"mappings":{"properties":{"field1":{"type":"date"},"field2":{"type":"keyword"},"nestedField1":{"properties":{"innerField1":{"type":"integer"},"innerField2":{"type":"keyword"}},"type":"nested"}}}}"""
 
         createIndexRequest {
             name "indexName"
@@ -56,7 +58,9 @@ module IndexCommands =
             """Method: POST, RequestUri: '_aliases?timeout=30s', Version: 1.1, Content: System.Net.Http.StringContent, Headers:
 {
   Content-Type: application/json; charset=utf-8
-}"""
+  Content-Length: 64
+}
+{"actions":[{"add":{"index":"indexName","alias":"alias_test"}}]}"""
             
         aliasCommandRequest {
             add (
@@ -76,7 +80,9 @@ module IndexCommands =
         let expected = """Method: PUT, RequestUri: 'indexName/_settings', Version: 1.1, Content: System.Net.Http.StringContent, Headers:
 {
   Content-Type: application/json; charset=utf-8
-}"""
+  Content-Length: 35
+}
+{"index":{"refresh_interval":"1s"}}"""
         
         updateIndexSettingsRequest {
             target "indexName"
