@@ -4,7 +4,6 @@ open System
 open Fes.DSL.Fields.Fields
 open Fleece
 open Fleece.SystemTextJson
-open Fleece.SystemTextJson.Operators
 open Fes.DSL.Fields
 
 module IdentityMetadata =
@@ -89,48 +88,49 @@ module Mapping =
         | Similarity of Similarity
         | Store of bool
         | TermVector of TermVector
-        static member ToJson fieldMapping =
+        static member ToPropertyList fieldMapping =
             let mkFieldsOrProps (fs: (string * FieldType) []) =
                 let mkFieldOrProp (key: string, value: FieldType) =
                     (key, jobj [ "type" .= (toJson value) ])
+
                 fs
                 |> Seq.map mkFieldOrProp
                 |> Array.ofSeq
                 |> PropertyList
 
             match fieldMapping with
-            | Analyzer value -> jobj [ "analyzer" .= value ]
-            | Boost value -> jobj [ "boost" .= value ]
-            | Coerce value -> jobj [ "coerce" .= value ]
-            | CopyTo value -> jobj [ "copy_to" .= value ]
-            | DocValues value -> jobj [ "doc_values" .= value ]
-            | Dynamic value -> jobj [ "dynamic" .= value ]
-            | EagerGlobalOrdinals value -> jobj [ "eager_global_ordinals" .= value ]
-            | Enabled value -> jobj [ "enabled" .= value ]
-            | FieldData value -> jobj [ "fieldata" .= value ]
-            | Format value -> jobj [ "format" .= value ]
-            | IgnoreAbove value -> jobj [ "ignore_above" .= value ]
-            | IgnoreMalformed value -> jobj [ "ignore_malformed" .= value ]
-            | IndexOptions value -> jobj [ "index_options" .= value ]
-            | IndexPhrases value -> jobj [ "index_phrases" .= value ]
-            | Index value -> jobj [ "index" .= value ]
-            | Normalizer value -> jobj [ "normalizer" .= value ]
-            | Norms value -> jobj [ "norms" .= value ]
-            | NullValue value -> jobj [ "null_value" .= value ]
-            | PositionIncrementGap value -> jobj [ "position_increment_gap" .= value ]
-            | SearchAnalyzer value -> jobj [ "search_analyzer" .= value ]
-            | Similarity value -> jobj [ "similarity" .= value ]
-            | Store value -> jobj [ "store" .= value ]
-            | TermVector value -> jobj [ "term_vector" .= value ]
-            | Meta value -> jobj [ "meta" .= (Array.ofSeq value) ]
+            | Analyzer value -> ("analyzer", toJson value)
+            | Boost value -> ("boost", toJson value)
+            | Coerce value -> ("coerce", toJson value)
+            | CopyTo value -> ("copy_to", toJson value)
+            | DocValues value -> ("doc_values", toJson value)
+            | Dynamic value -> ("dynamic", toJson value)
+            | EagerGlobalOrdinals value -> ("eager_global_ordinals", toJson value)
+            | Enabled value -> ("enabled", toJson value)
+            | FieldData value -> ("fieldata", toJson value)
+            | Format value -> ("format", toJson value)
+            | IgnoreAbove value -> ("ignore_above", toJson value)
+            | IgnoreMalformed value -> ("ignore_malformed", toJson value)
+            | IndexOptions value -> ("index_options", toJson value)
+            | IndexPhrases value -> ("index_phrases", toJson value)
+            | Index value -> ("index", toJson value)
+            | Normalizer value -> ("normalizer", toJson value)
+            | Norms value -> ("norms", toJson value)
+            | NullValue value -> ("null_value", toJson value)
+            | PositionIncrementGap value -> ("position_increment_gap", toJson value)
+            | SearchAnalyzer value -> ("search_analyzer", toJson value)
+            | Similarity value -> ("similarity", toJson value)
+            | Store value -> ("store", toJson value)
+            | TermVector value -> ("term_vector", toJson value)
+            | Meta value -> ("meta", toJson (Array.ofSeq value))
             | IndexPrefixes (min, max) ->
-                jobj [ "index_prefixes"
-                       .= jobj [ "min_chars" .= min
-                                 "max_chars" .= max ] ]
-            | Fields value ->
-                jobj [ "fields" .= (mkFieldsOrProps value) ]
-            | Properties value ->
-                jobj [ "properties" .= (mkFieldsOrProps value) ]
+                ("index_prefixes",
+                 jobj [ "min_chars" .= min
+                        "max_chars" .= max ])
+            | Fields value -> ("fields", toJson (mkFieldsOrProps value))
+            | Properties value -> ("properties", toJson (mkFieldsOrProps value))
+            |> Array.singleton
+            |> PropertyList
 
 type MappingDefinition =
     { Name: string

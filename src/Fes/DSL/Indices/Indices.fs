@@ -1,6 +1,7 @@
 ﻿module Fes.DSL.Indices
 
 open FSharpPlus
+open Fes.DSL.Mappings.Mapping
 open Fleece
 open Fleece.SystemTextJson
 open Fleece.SystemTextJson.Operators
@@ -170,9 +171,17 @@ type IndexRequest =
         let mappings =
             let mkFieldOrProp =
                 let f (x: MappingDefinition) =
-                    [|
-                      (x.Name, (jobj [ "type" .= (toJson x.Type) ]))
-                    |]
+                    let typeProp =
+                        ("type", (toJson x.Type))
+                        |> Array.singleton
+                        |> PropertyList
+                    let properties =
+                        x.Mappings
+                        |> Seq.map FieldMapping.ToPropertyList
+                        |> Seq.fold (++) typeProp
+
+                    (x.Name, (toJson properties))
+                    |> Array.singleton
                     |> PropertyList
                 
                 Array.map f
