@@ -1,12 +1,10 @@
 ﻿module Fes.DSL.Indices
 
-open System.Collections.Generic
 open FSharpPlus
 open Fleece
 open Fleece.SystemTextJson
 open Fleece.SystemTextJson.Operators
 open System
-open System.Collections.ObjectModel
 open Fes
 open Fes.DSL.Mappings
 open Fes.QueryParams.Builder.Operators
@@ -170,32 +168,19 @@ type IndexRequest =
       Parameters: option<IndexRequestQueryParams> }
     static member ToJson index =
         let mappings =
-            let mkMapping (mapping: MappingDefinition) =
-                let mappingRoot (extra: Encoding[]) =
-                    let extras =
-                        let removeNonObjects =
-                            function
-                            | JObject _ -> true
-                            | _ -> false
-                        extra
-                        |> Array.append [| jobj [ "type" .= mapping.Type ] |]
-                        |> Array.filter removeNonObjects
-                    
-                    let asRol =
-                        (extras |> List<Encoding>).AsReadOnly()
-                        :> IReadOnlyList<Encoding>
-                        |> JArray
-                    (mapping.Name, asRol)
+            let mkFieldOrProp =
+                let f (x: MappingDefinition) =
+                    [|
+                      (x.Name, (jobj [ "type" .= (toJson x.Type) ]))
+                    |]
+                    |> PropertyList
                 
-                mapping.Mappings
-                |> Array.map toJson
-                |> mappingRoot
+                Array.map f
+                >> Array.fold (+) (PropertyList <| Array.empty)
+                >> (fun m -> jobj [ "properties" .= toJson m ])
 
-            let mkJson mappings =
-                jobj [ "properties" .= mappings ]
-            
             index.Mappings
-            |> Option.map (Array.map mkMapping >> mkJson)
+            |> Option.map mkFieldOrProp
 
         let aliases =
             index.Aliases

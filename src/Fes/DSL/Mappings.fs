@@ -2,6 +2,7 @@
 
 open System
 open Fes.DSL.Fields.Fields
+open Fleece
 open Fleece.SystemTextJson
 open Fleece.SystemTextJson.Operators
 open Fes.DSL.Fields
@@ -90,10 +91,12 @@ module Mapping =
         | TermVector of TermVector
         static member ToJson fieldMapping =
             let mkFieldsOrProps (fs: (string * FieldType) []) =
-                let mkFieldOrProp (key: string, value: FieldType) = key, jobj [ "type" .= (toJson value) ]
+                let mkFieldOrProp (key: string, value: FieldType) =
+                    (key, jobj [ "type" .= (toJson value) ])
                 fs
                 |> Seq.map mkFieldOrProp
-                |> JsonObject
+                |> Array.ofSeq
+                |> PropertyList
 
             match fieldMapping with
             | Analyzer value -> jobj [ "analyzer" .= value ]
@@ -124,8 +127,10 @@ module Mapping =
                 jobj [ "index_prefixes"
                        .= jobj [ "min_chars" .= min
                                  "max_chars" .= max ] ]
-            | Fields value -> jobj [ "fields" .= (mkFieldsOrProps value) ]
-            | Properties value -> jobj [ "properties" .= (mkFieldsOrProps value) ]
+            | Fields value ->
+                jobj [ "fields" .= (mkFieldsOrProps value) ]
+            | Properties value ->
+                jobj [ "properties" .= (mkFieldsOrProps value) ]
 
 type MappingDefinition =
     { Name: string
