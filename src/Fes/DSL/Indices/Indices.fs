@@ -170,7 +170,7 @@ type IndexRequest =
     static member ToJson index =
         let mappings =
             let mkFieldOrProp =
-                let f (x: MappingDefinition) =
+                let mergeExtrasWithType (x: MappingDefinition) =
                     let typeProp =
                         ("type", (toJson x.Type))
                         |> Array.singleton
@@ -184,7 +184,7 @@ type IndexRequest =
                     |> Array.singleton
                     |> PropertyList
                 
-                Array.map f
+                Array.map mergeExtrasWithType
                 >> Array.fold (+) (PropertyList <| Array.empty)
                 >> (fun m -> jobj [ "properties" .= toJson m ])
 
@@ -242,7 +242,6 @@ type UpdateIndexSettingsRequest =
         let target =
             request.Target |> Option.defaultValue "_all"
         let query = queryParamsOfOption request.Parameters
-            
 
         let mk query =
             $"%s{target}/_settings{query}"
