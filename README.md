@@ -8,6 +8,10 @@ Although both [Elasticsearch.Net](https://www.elastic.co/guide/en/elasticsearch/
 
 Also using [Fleece](https://github.com/fsprojects/fleece) to decode/encode JSON gives better control over documents going back and forth.
 
+#### About Fleece
+
+I'm in the process of updating it to the [future version](https://github.com/fsprojects/Fleece/tree/gusty/redesign) therefore there are some warnings been output by the build.
+
 ## How to use it
 
 There is no nuget yet sadly, meaning to use this library it will have to be clone/downloaded, build and use the output.
@@ -51,7 +55,7 @@ There is no nuget yet sadly, meaning to use this library it will have to be clon
             aliases [| indexAlias { name "Test" } |]
         }
    ```
-4. Make se call:
+4. Make the call:
    ```f#
       let createResult : Result<IndexCreateResponse, exn> =
         executeElasticsearchCall req |> Async.RunSynchronously
