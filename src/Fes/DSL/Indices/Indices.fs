@@ -1,16 +1,14 @@
 ﻿module Fes.DSL.Indices
 
 open FSharpPlus
-open Fes.DSL.Mappings.Mapping
+open Fes.DSL.Mapping
 open Fleece
 open Fleece.SystemTextJson
 open Fleece.SystemTextJson.Operators
 open System
 open Fes
-open Fes.DSL.Mappings
 open Fes.QueryParams.Builder.Operators
 open Fes.QueryParams.Builder
-open Fes.DSL.Units
 
 [<RequireQualifiedAccess>]
 type WaitForActiveShards =

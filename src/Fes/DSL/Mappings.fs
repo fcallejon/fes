@@ -1,21 +1,9 @@
-﻿namespace Fes.DSL.Mappings
+﻿namespace Fes.DSL
 
 open System
-open Fes.DSL.Fields.Fields
 open Fleece
 open Fleece.SystemTextJson
 open Fes.DSL.Fields
-
-module IdentityMetadata =
-    type Index = string
-    type Type = string
-    type Id = string
-
-module DocumentMetadata =
-    type Source = string
-    type Size = int64
-    type DocCount = int64
-    type Meta = string
 
 module Mapping =
 

@@ -1,4 +1,4 @@
-﻿namespace Fes.DSL.Units
+﻿namespace Fes.DSL
 
 open Fleece
 

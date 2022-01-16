@@ -2,19 +2,15 @@
 open System.Net.Http
 open FSharpPlus
 open FSharpPlus.Data
-open Fes
-open Fes.Contracts.Api
-open Fes.DSL
-open Fes.DSL.Aliases
-open Fes.DSL.Fields
-open Fes.DSL.Indices
-open Fes.DSL.Mappings
-open Fes.DSL.Search
-open Fes.DSL.Units
 open Fleece.SystemTextJson
 open Fleece.SystemTextJson.Operators
+open Fes
+open Fes.DSL
+open Fes.DSL.Aliases
+open Fes.DSL.Indices
 open Fes.Builders
 open Fes.Builders.Indices
+open Fes.Contracts.Api
 open Fes.Sample
 
 type SampleDocument =
@@ -128,7 +124,7 @@ let main _ =
         updateIndexSettingsRequest {
             target indexName
             settings (
-                indexSettings{
+                indexSettings {
                     dynamic (dynamicIndexSettings {
                             refreshInterval (TimeoutUnit.Seconds 1<TimeUnits.s>) })
                 })

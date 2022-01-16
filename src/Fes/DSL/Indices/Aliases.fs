@@ -2,7 +2,6 @@
     
 open Fes
 open Fes.DSL.Query.Queries
-open Fes.DSL.Units
 open Fes.QueryParams.Builder.Operators
 open Fes.QueryParams.Builder
 open FSharpPlus.Operators

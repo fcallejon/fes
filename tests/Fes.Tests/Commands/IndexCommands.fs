@@ -1,9 +1,7 @@
 namespace Fes.Tests
 
+open Fes.DSL
 open Fes.DSL.Aliases
-open Fes.DSL.Fields
-open Fes.DSL.Mappings
-open Fes.DSL.Units
 open Xunit
 open Fes.Builders.Indices.IndexRequestBuilder
 open Fes.Builders.AliasCommandRequestBuilder

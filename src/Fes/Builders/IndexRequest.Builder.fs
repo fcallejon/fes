@@ -1,13 +1,13 @@
 ﻿namespace Fes.Builders.Indices
 
-open Fes.DSL.Fields.FieldTypes
-open Fes.DSL.Fields.Fields
+open Fes.DSL
+open Fes.DSL.FieldTypes
+open Fes.DSL.Fields
 
 [<AutoOpen>]
 module IndexRequestBuilder =
     open System
     open Fes.DSL.Indices
-    open Fes.DSL.Mappings
 
     type IndexRequestBuilder () =
         member _.Yield _ =

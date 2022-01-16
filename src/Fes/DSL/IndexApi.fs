@@ -3,7 +3,7 @@
 open FSharpPlus
 open System
 open Fes
-open Fes.DSL.Units
+open Fes.DSL
 open Fes.QueryParams.Builder
 open Fes.QueryParams.Builder.Operators
 open Fleece.SystemTextJson

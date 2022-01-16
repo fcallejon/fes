@@ -1,4 +1,4 @@
-﻿namespace Fes.DSL.Fields
+﻿namespace Fes.DSL
 
 open Fleece.SystemTextJson
 open Fleece.SystemTextJson.Operators
