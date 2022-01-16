@@ -118,7 +118,7 @@ type IndexAlias =
       Routing: option<string>
       SearchRouting: option<string> }
 
-    static member mk name =
+    static member Create name =
         { Name = name
           Filter = None
           IndexRouting = None

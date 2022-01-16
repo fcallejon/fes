@@ -37,7 +37,6 @@
     <Compile Include="Builders\UpdateIndexRequest.Builder.fs" />
     <Compile Include="Builders\IndexDocument.Builder.fs" />
     <Compile Include="Builders\AliasCommandRequest.Builder.fs" />
-    <Compile Include="ElasticsearchClient.fs" />
   </ItemGroup>
   <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>

@@ -1,4 +1,5 @@
 ﻿open System
+open System.Net.Http
 open FSharpPlus
 open FSharpPlus.Data
 open Fes
@@ -53,8 +54,11 @@ let getIndexName _ =
 [<EntryPoint>]
 let main _ =
     let client =
-        getEsServer()
-        |> ElasticsearchClient
+        let client = new HttpClient()
+        client.BaseAddress <- getEsServer()
+        client
+    let inline executeElasticsearchCall (req: 'a) =
+        ElasticsearchClient.execute client req
 
     let indexName = getIndexName ()
         
@@ -115,7 +119,7 @@ let main _ =
         
 
     let createResult : Result<IndexCreateResponse, exn> =
-        client.createIndex req |> Async.RunSynchronously
+        executeElasticsearchCall req |> Async.RunSynchronously
 
     printResult "Create: " createResult
 
@@ -131,7 +135,7 @@ let main _ =
         }
 
     let updateResult : Result<ElasticsearchGenericResponse, exn> =
-        client.updateIndexSettings updateReq |> Async.RunSynchronously
+        executeElasticsearchCall updateReq |> Async.RunSynchronously
 
     printResult "Update: " updateResult
     
@@ -150,7 +154,7 @@ let main _ =
         }
 
     let aliasCommandResult : Result<ElasticsearchGenericResponse, exn> =
-        client.executeCommand aliasCmd |> Async.RunSynchronously
+        executeElasticsearchCall aliasCmd |> Async.RunSynchronously
 
     printResult "Alias Command: " aliasCommandResult
 
@@ -171,23 +175,21 @@ let main _ =
         }
 
     let indexDocCustomIdResult : Result<IndexDocumentResponse, exn> =
-        ElasticsearchClient.indexDocument client indexDocCustomId |> Async.RunSynchronously
+        executeElasticsearchCall indexDocCustomId |> Async.RunSynchronously
 
     printResult "Index Document: " indexDocCustomIdResult
     
     // Search a doc using field1
     let searchRequest = Search.mkTermSearch indexName "field1" docCustomId.Field1
     let searchResponse : Result<SearchResponse<SampleDocument>, exn> =
-        ElasticsearchClient.search client searchRequest
-        |> Async.RunSynchronously
+        executeElasticsearchCall searchRequest |> Async.RunSynchronously
 
     printSearchResult searchResponse
     
     // Search a doc using field2
     let searchRequest2 = Search.mkQueryString indexName None "fer_mail*"
     let searchResponse2 : Result<SearchResponse<SampleDocument>, exn> =
-        ElasticsearchClient.search client searchRequest2
-        |> Async.RunSynchronously
+        executeElasticsearchCall searchRequest2 |> Async.RunSynchronously
 
     printSearchResult searchResponse2
     
