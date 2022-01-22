@@ -10,7 +10,7 @@ Also using [Fleece](https://github.com/fsprojects/fleece) to decode/encode JSON 
 
 #### About Fleece
 
-I'm in the process of updating it to the [future version](https://github.com/fsprojects/Fleece/tree/gusty/redesign) therefore there are some warnings been output by the build.
+I'm in the process of updating it to the [future version](https://github.com/fsprojects/Fleece/tree/gusty/redesign). For this reason there are a few warnings that will be output by the build.
 
 ## How to use it
 
@@ -56,7 +56,27 @@ There is no nuget yet sadly, meaning to use this library it will have to be clon
         }
    ```
 4. Make the call:
+   At the moment any Http Client will work.
+   The following is just an example using some Http functions from Fes that I'm planning to move outside of the "core" library.
+   Both `Http.toRequest` and `Http.Response.toResult` would map from and to `HttpRequestMessage` and `HttpResponseMessage` respectively.
+   
    ```f#
+      [<RequireQualifiedAccess>]
+      module ElasticsearchClient =
+          open System.Net.Http
+
+          let inline execute (client: HttpClient) req =
+              (Http.toRequest >> Async.retn) req
+              |> AsyncResult.bind (client.SendAsync >> AsyncResult.waitTask)
+              |> AsyncResult.bind Http.Response.toResult
+
+    let client =
+        let client = new HttpClient()
+        client.BaseAddress <- getEsServer()
+        client
+    let inline executeElasticsearchCall (req: 'a) =
+        ElasticsearchClient.execute client req
+
       let createResult : Result<IndexCreateResponse, exn> =
         executeElasticsearchCall req |> Async.RunSynchronously
    ```
