@@ -178,13 +178,11 @@ type IndexRequest =
                         |> Seq.map FieldMapping.ToPropertyList
                         |> Seq.fold (++) typeProp
 
-                    (x.Name, (toJson properties))
-                    |> Array.singleton
-                    |> PropertyList
+                    PropertyList [| (x.Name, (toJson properties))|] 
                 
                 Array.map mergeExtrasWithType
-                >> Array.fold (+) (PropertyList <| Array.empty)
-                >> (fun m -> jobj [ "properties" .= toJson m ])
+                >> Array.sum
+                >> (fun m -> jobj [ "properties" .= m ])
 
             index.Mappings
             |> Option.map mkFieldOrProp

@@ -79,7 +79,7 @@ module Mapping =
         static member ToPropertyList fieldMapping =
             let mkFieldsOrProps (fs: (string * FieldType) []) =
                 let mkFieldOrProp (key: string, value: FieldType) =
-                    (key, jobj [ "type" .= (toJson value) ])
+                    (key, jobj [ "type" .= value ])
 
                 fs
                 |> Seq.map mkFieldOrProp
