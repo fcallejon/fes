@@ -110,7 +110,7 @@ module Exceptions =
 
     and ElasticsearchException =
         inherit Exception
-        val raw: JsonValue
+        val raw: Encoding
         val esType: ElasticsearchExceptions
         val status: HttpStatusCode
         val reason: string
@@ -149,18 +149,13 @@ module Exceptions =
         static member OfJson json =
             match json with
             | JObject o ->
-                match o.TryGetValue "error" with
-                | true, JObject error ->
+                match o .@? "error" with
+                | Ok (Some error) ->
                     monad {
                         let! esType = error .@ "type"
-
-                        let! status =
-                            o .@ "status"
-                            |> Result.bind JsonEnum.fromInt<HttpStatusCode>
-
                         let! reason = error .@ "reason"
                         let! index = error .@? "index"
-                        let! cause = error .@? "cause"
+                        let! cause = error .@? "caused_by"
                         let! stack = error .@? "stack_trace"
 
                         let! root =
@@ -174,6 +169,10 @@ module Exceptions =
                         let! grouped = o .@? "grouped"
                         let! failedShards = o .@? "failed_shards"
 
+                        let! status =
+                            o .@ "status"
+                            |> Result.bind JsonEnum.fromInt<HttpStatusCode>
+                            
                         return!
                             Decode.Success
                             <| ElasticsearchException(
@@ -190,15 +189,16 @@ module Exceptions =
                                 failedShards
                             )
                     }
-                | _, _ -> Decode.Fail.parseError (exn <| string json) "Invalid error response."
-            | x -> Decode.Fail.objExpected x
+                | Ok None -> Decode.Fail.parseError (exn <| string json) "Invalid error response."
+                | Error e -> Error e
+            | _ -> Decode.Fail.parseError (exn <| string json) "Invalid error response."
 
 [<RequireQualifiedAccess>]
 module ElasticsearchException =
     open Fleece.SystemTextJson
 
     let ofString s =
-        JsonValue.Parse s
+        Encoding.Parse s
         |> Exceptions.ElasticsearchException.OfJson
         |> Result.mapError (sprintf "%O" >> exn)
 

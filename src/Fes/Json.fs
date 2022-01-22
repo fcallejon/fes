@@ -1,12 +1,19 @@
 ﻿namespace Fes
 
-open System.Collections.ObjectModel
 open Fleece.SystemTextJson
 
 module Json =
     type JRes<'a> =
         | Ok of 'a
         | Error of string
+
+    open Fleece
+    let inline tryGetValue k (from: Encoding) =
+        match from with
+        | JObject o ->
+            o.Properties
+            |> Seq.tryFind (fun (key, _) -> key = k)
+        | _ -> None
     
 [<AutoOpen>]
 module JRes =
@@ -23,16 +30,15 @@ module JRes =
         member _.Return x = Ok x
         member _.ReturnFrom = id
         member _.Bind (x, f) = bind f x
-    
-    let inline seqPairToJsonObject x = x |> (dict >> ReadOnlyDictionary >> dictAsJsonObject)
 
 [<RequireQualifiedAccess>]
 module JsonRes =
+    open Fleece
     open Json
     let inline from json =
         let inline _from (_: ^a, b: ^b) =
             ((^a or ^b): (static member OfJson: ^b -> (JsonValue -> ^b JRes)) b)
-        _from (JType, Unchecked.defaultof<'a>) json
+        _from (Encoding, Unchecked.defaultof<'a>) json
         
     let inline ofString s =
         let _map =
@@ -40,6 +46,6 @@ module JsonRes =
             | ParseResult.Ok o -> Result.Ok o
             | ParseResult.Error e -> Result.Error <| exn $"%O{e}"
         
-        JsonValue.Parse s
+        Encoding.Parse s
         |> (ofJson >> _map)
         |> Async.retn

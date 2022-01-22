@@ -1,9 +1,7 @@
 namespace Fes.Tests
 
+open Fes.DSL
 open Fes.DSL.Aliases
-open Fes.DSL.Fields
-open Fes.DSL.Mappings
-open Fes.DSL.Units
 open Xunit
 open Fes.Builders.Indices.IndexRequestBuilder
 open Fes.Builders.AliasCommandRequestBuilder
@@ -18,7 +16,7 @@ module IndexCommands =
   Content-Type: application/json; charset=utf-8
   Content-Length: 275
 }
-{"aliases":{"Test":{}},"settings":{"number_of_shards":3,"number_of_replicas":0},"mappings":{"properties":{"field1":{"type":"date"},"field2":{"type":"keyword"},"nestedField1":{"properties":{"innerField1":{"type":"integer"},"innerField2":{"type":"keyword"}},"type":"nested"}}}}"""
+{"aliases":{"Test":{}},"settings":{"number_of_shards":3,"number_of_replicas":0},"mappings":{"properties":{"field1":{"type":"date"},"field2":{"type":"keyword"},"nestedField1":{"type":"nested","properties":{"innerField1":{"type":"integer"},"innerField2":{"type":"keyword"}}}}}}"""
 
         createIndexRequest {
             name "indexName"

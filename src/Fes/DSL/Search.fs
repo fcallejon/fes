@@ -1,12 +1,9 @@
-﻿namespace Fes.DSL.Search
+﻿namespace Fes.DSL
 
 open FSharpPlus
 open Fes
 open Fes.DSL
-open Fes.DSL.Fields
-open Fes.DSL.Mappings
 open Fes.DSL.Query.Queries
-open Fes.DSL.Units
 open Fes.QueryParams.Builder
 open Fes.QueryParams.Builder.Operators
 open Fleece.SystemTextJson
@@ -241,7 +238,7 @@ type SearchCommandRequest =
                            "script" .=? x.Script ]
             
             command.RuntimeMappings
-            |> Option.map ((Array.map mkPair) >> seqPairToJsonObject)
+            |> Option.map ((Array.map mkPair) >> JsonObject)
             
         jobj [ "docvalue_fields" .=? command.DocValueFields
                "explain" .=? command.Explain

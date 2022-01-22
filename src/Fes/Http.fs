@@ -79,8 +79,11 @@ module Http =
     let inline toRequest x =
         (^T : (static member ToRequest: ^T -> Result<RequestMsg, exn>) x)
       
-    let inline run req (client: HttpClient) =
-        (toRequest >> Async.retn) req
+[<RequireQualifiedAccess>]
+module ElasticsearchClient =
+    open System.Net.Http
+    
+    let inline execute (client: HttpClient) req =
+        (Http.toRequest >> Async.retn) req
         |> AsyncResult.bind (client.SendAsync >> AsyncResult.waitTask)
-        |> AsyncResult.bind Response.toResult
-        
+        |> AsyncResult.bind Http.Response.toResult

@@ -1,19 +1,16 @@
 ﻿open System
+open System.Net.Http
 open FSharpPlus
 open FSharpPlus.Data
-open Fes
-open Fes.Contracts.Api
-open Fes.DSL
-open Fes.DSL.Aliases
-open Fes.DSL.Fields
-open Fes.DSL.Indices
-open Fes.DSL.Mappings
-open Fes.DSL.Search
-open Fes.DSL.Units
 open Fleece.SystemTextJson
 open Fleece.SystemTextJson.Operators
+open Fes
+open Fes.DSL
+open Fes.DSL.Aliases
+open Fes.DSL.Indices
 open Fes.Builders
 open Fes.Builders.Indices
+open Fes.Contracts.Api
 open Fes.Sample
 
 type SampleDocument =
@@ -53,18 +50,26 @@ let getIndexName _ =
 [<EntryPoint>]
 let main _ =
     let client =
-        getEsServer()
-        |> ElasticsearchClient
+        let client = new HttpClient()
+        client.BaseAddress <- getEsServer()
+        client
+    let inline executeElasticsearchCall (req: 'a) =
+        ElasticsearchClient.execute client req
 
     let indexName = getIndexName ()
         
-    let inline printResult title (result: Result<'a, exn>) =
+    let printResult title (result: Result<'a, exn>) =
         printf title
         match result with
         | Ok o -> printfn $"OK -> {o}"
-        | Error e -> printfn $"Error -> {e.Message}"
+        | Error e ->
+            match e with
+            | :? AggregateException as ae ->
+                ae.InnerExceptions
+                |> Seq.iter (fun ie -> printfn $"Error -> {ie.Message} \r\n{ie.InnerException.Message}")
+            | _ -> printfn $"Error -> {e.Message}"
         
-    let inline printSearchResult response = 
+    let printSearchResult response = 
         printfn "--------------------------------------------"
         printResult "Search Document: " response
         response
@@ -110,7 +115,7 @@ let main _ =
         
 
     let createResult : Result<IndexCreateResponse, exn> =
-        client.createIndex req |> Async.RunSynchronously
+        executeElasticsearchCall req |> Async.RunSynchronously
 
     printResult "Create: " createResult
 
@@ -119,14 +124,14 @@ let main _ =
         updateIndexSettingsRequest {
             target indexName
             settings (
-                indexSettings{
+                indexSettings {
                     dynamic (dynamicIndexSettings {
                             refreshInterval (TimeoutUnit.Seconds 1<TimeUnits.s>) })
                 })
         }
 
     let updateResult : Result<ElasticsearchGenericResponse, exn> =
-        client.updateIndexSettings updateReq |> Async.RunSynchronously
+        executeElasticsearchCall updateReq |> Async.RunSynchronously
 
     printResult "Update: " updateResult
     
@@ -145,7 +150,7 @@ let main _ =
         }
 
     let aliasCommandResult : Result<ElasticsearchGenericResponse, exn> =
-        client.executeCommand aliasCmd |> Async.RunSynchronously
+        executeElasticsearchCall aliasCmd |> Async.RunSynchronously
 
     printResult "Alias Command: " aliasCommandResult
 
@@ -166,23 +171,21 @@ let main _ =
         }
 
     let indexDocCustomIdResult : Result<IndexDocumentResponse, exn> =
-        ElasticsearchClient.indexDocument client indexDocCustomId |> Async.RunSynchronously
+        executeElasticsearchCall indexDocCustomId |> Async.RunSynchronously
 
     printResult "Index Document: " indexDocCustomIdResult
     
     // Search a doc using field1
     let searchRequest = Search.mkTermSearch indexName "field1" docCustomId.Field1
     let searchResponse : Result<SearchResponse<SampleDocument>, exn> =
-        ElasticsearchClient.search client searchRequest
-        |> Async.RunSynchronously
+        executeElasticsearchCall searchRequest |> Async.RunSynchronously
 
     printSearchResult searchResponse
     
     // Search a doc using field2
     let searchRequest2 = Search.mkQueryString indexName None "fer_mail*"
     let searchResponse2 : Result<SearchResponse<SampleDocument>, exn> =
-        ElasticsearchClient.search client searchRequest2
-        |> Async.RunSynchronously
+        executeElasticsearchCall searchRequest2 |> Async.RunSynchronously
 
     printSearchResult searchResponse2
     

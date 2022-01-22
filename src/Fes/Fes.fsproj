@@ -1,10 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <WarnOn>3390;$(WarnOn)</WarnOn>
-    <LangVersion>preview</LangVersion>
     <RootNamespace>Fes</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
@@ -39,7 +37,6 @@
     <Compile Include="Builders\UpdateIndexRequest.Builder.fs" />
     <Compile Include="Builders\IndexDocument.Builder.fs" />
     <Compile Include="Builders\AliasCommandRequest.Builder.fs" />
-    <Compile Include="ElasticsearchClient.fs" />
   </ItemGroup>
   <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>

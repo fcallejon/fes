@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
     <IsPackable>false</IsPackable>
     <GenerateProgramFile>true</GenerateProgramFile>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="paket.references" />
     <Compile Include="AssertRequestCommands.fs" />
-    <Compile Include="IndexCommands.fs" />
-    <Compile Include="IndexDocumentCommands.fs" />
+    <Compile Include="Commands\IndexDocumentCommands.fs" />
+    <Compile Include="Commands\IndexCommands.fs" />
+    <Compile Include="Responses\ErrorDeserialization.fs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Fes\Fes.fsproj" />

@@ -2,24 +2,21 @@ group Main
     source https://api.nuget.org/v3/index.json
     
     storage: none
-    framework: net5, netcoreapp3.1
-
+    framework: net6, netcoreapp3.1
+    
     nuget FSharp.Core ~> 6.0.1
-    nuget Fleece.SystemTextJson
-    nuget System.Text.Json ~> 5.0
+    nuget Fleece == 0.10.0-RC11
+    nuget Fleece.SystemTextJson == 0.10.0-RC11
     
 group Tests
     source https://api.nuget.org/v3/index.json
     
     storage: none
-    framework: net5, netcoreapp3.1
-    strategy: min
+    framework: net6, netcoreapp3.1
     
     nuget FSharp.Core ~> 6.0.1
-    nuget Microsoft.NET.Test.Sdk ~> 16.10
+    nuget Microsoft.NET.Test.Sdk ~> 16.11.0
     nuget xunit ~> 2.4.1
     nuget xunit.runner.visualstudio ~> 2.4.3
     nuget coverlet.collector ~> 3.1.0
     nuget FsUnit.xUnit
-    nuget System.Reflection.Metadata ~> 5.0
-    nuget Microsoft.NETCore.Platforms ~> 5.0

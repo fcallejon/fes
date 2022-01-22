@@ -1,5 +1,6 @@
 ﻿namespace Fes.DSL.Query.Queries
 
+open Fes
 open Fleece.SystemTextJson
 open Fleece.SystemTextJson.Operators
 open Fes.DSL.Queries

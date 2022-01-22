@@ -13,6 +13,7 @@ module Enum =
     
 [<RequireQualifiedAccess>]
 module JsonEnum =
+    open Fleece
     let inline fromInt<'a> (v: int) =
         let toDecodeError e = Decode.Fail.parseError e "While parsing enum value."
         Enum.fromInt<'a> v

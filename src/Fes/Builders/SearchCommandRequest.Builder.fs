@@ -2,7 +2,7 @@
 
 [<AutoOpen>]
 module SearchCommandRequestBuilder =
-    open Fes.DSL.Search
+    open Fes.DSL
 
     type SearchCommandRequestBuilder() =
         member _.Yield _ =

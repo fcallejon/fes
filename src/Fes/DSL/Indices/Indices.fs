@@ -1,16 +1,14 @@
 ﻿module Fes.DSL.Indices
 
-open System.Collections.Generic
 open FSharpPlus
+open Fes.DSL.Mapping
+open Fleece
 open Fleece.SystemTextJson
 open Fleece.SystemTextJson.Operators
 open System
-open System.Collections.ObjectModel
 open Fes
-open Fes.DSL.Mappings
 open Fes.QueryParams.Builder.Operators
 open Fes.QueryParams.Builder
-open Fes.DSL.Units
 
 [<RequireQualifiedAccess>]
 type WaitForActiveShards =
@@ -118,7 +116,7 @@ type IndexAlias =
       Routing: option<string>
       SearchRouting: option<string> }
 
-    static member mk name =
+    static member Create name =
         { Name = name
           Filter = None
           IndexRouting = None
@@ -169,42 +167,31 @@ type IndexRequest =
       Parameters: option<IndexRequestQueryParams> }
     static member ToJson index =
         let mappings =
-            let mkMapping (mapping: MappingDefinition) =
-                let mappingRoot (extra: JsonValue[]) =
-                    let extraAsDict =
-                        let unwrapDict =
-                            function
-                            | JObject e -> e
-                            | _ -> failwith "There should only be JObjects here, better check why is not the case."
-                        let innerDict = Dictionary<string, JsonValue>()
-                        extra
-                        |> Array.append [| jobj [ "type" .= mapping.Type ] |]
-                        |> Seq.map unwrapDict
-                        |> Seq.iter (fun current -> current.Keys |> Seq.iter (fun k -> innerDict.Add(k, current.[k])))
-                        ReadOnlyDictionary(innerDict)
-                        
-                    mapping.Name, ((extraAsDict |> dictAsJsonObject) |> JObject)
-                
-                mapping.Mappings
-                |> Array.map toJson
-                |> mappingRoot
+            let mkFieldOrProp =
+                let mergeExtrasWithType (x: MappingDefinition) =
+                    let typeProp =
+                        ("type", (toJson x.Type))
+                        |> Array.singleton
+                        |> PropertyList
+                    let properties =
+                        x.Mappings
+                        |> Seq.map FieldMapping.ToPropertyList
+                        |> Seq.fold (++) typeProp
 
-            
-            let mkJson mappings =
-                let rod = ReadOnlyDictionary(mappings)
-                jobj [ "properties" .= (dictAsJsonObject rod) ]
-            
+                    PropertyList [| (x.Name, (toJson properties))|] 
+                
+                Array.map mergeExtrasWithType
+                >> Array.sum
+                >> (fun m -> jobj [ "properties" .= m ])
+
             index.Mappings
-            |> Option.map (Array.map mkMapping)
-            |> Option.map (dict >> mkJson)
+            |> Option.map mkFieldOrProp
 
         let aliases =
             index.Aliases
             |> Option.map (
                 (Array.map IndexAlias.asJsonTuple)
-                >> dict
-                >> ReadOnlyDictionary
-                >> dictAsJsonObject
+                >> JsonObject
             )
 
         jobj [ "aliases" .=? aliases
@@ -251,7 +238,6 @@ type UpdateIndexSettingsRequest =
         let target =
             request.Target |> Option.defaultValue "_all"
         let query = queryParamsOfOption request.Parameters
-            
 
         let mk query =
             $"%s{target}/_settings{query}"

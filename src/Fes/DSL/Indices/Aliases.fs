@@ -1,14 +1,15 @@
 ﻿namespace Fes.DSL
-
+    
+open Fes
+open Fes.DSL.Query.Queries
+open Fes.QueryParams.Builder.Operators
+open Fes.QueryParams.Builder
+open FSharpPlus.Operators
+open Fleece.SystemTextJson
+open Fleece.SystemTextJson.Operators
+    
 module Aliases =
-    open Fes
-    open Fes.DSL.Query.Queries
-    open Fes.DSL.Units
-    open Fes.QueryParams.Builder.Operators
-    open Fes.QueryParams.Builder
-    open FSharpPlus.Operators
-    open Fleece.SystemTextJson
-    open Fleece.SystemTextJson.Operators
+
 
     type AliasQueryParameter =
         { MasterTimeout: option<TimeoutUnit>
