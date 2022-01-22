@@ -4,13 +4,18 @@ FEs tries to be an F# client for Elasticsearch.
 
 ### Motivation
 
-Although both [Elasticsearch.Net](https://www.elastic.co/guide/en/elasticsearch/client/net-api/current/elasticsearch-net.html) and [NEST](https://www.elastic.co/guide/en/elasticsearch/client/net-api/current/nest.html) are great to use from C#, using them from F# means doing weird stuff around lambdas and such.
+Although
+both [Elasticsearch.Net](https://www.elastic.co/guide/en/elasticsearch/client/net-api/current/elasticsearch-net.html)
+and [NEST](https://www.elastic.co/guide/en/elasticsearch/client/net-api/current/nest.html) are great to use from C#,
+using them from F# means doing weird stuff around lambdas and such.
 
-Also using [Fleece](https://github.com/fsprojects/fleece) to decode/encode JSON gives better control over documents going back and forth.
+Also using [Fleece](https://github.com/fsprojects/fleece) to decode/encode JSON gives better control over documents
+going back and forth.
 
 #### About Fleece
 
-I'm in the process of updating it to the [future version](https://github.com/fsprojects/Fleece/tree/gusty/redesign). For this reason there are a few warnings that will be output by the build.
+I'm in the process of updating it to the [future version](https://github.com/fsprojects/Fleece/tree/gusty/redesign). For
+this reason there are a few warnings that will be output by the build.
 
 ## How to use it
 
@@ -56,19 +61,19 @@ There is no nuget yet sadly, meaning to use this library it will have to be clon
         }
    ```
 4. Make the call:
-   At the moment any Http Client will work.
-   The following is just an example using some Http functions from Fes that I'm planning to move outside of the "core" library.
-   Both `Http.toRequest` and `Http.Response.toResult` would map from and to `HttpRequestMessage` and `HttpResponseMessage` respectively.
-   
-   ```f#
-      [<RequireQualifiedAccess>]
-      module ElasticsearchClient =
-          open System.Net.Http
+   At the moment any Http Client will work. The following is just an example using some Http functions from Fes that I'm
+   planning to move outside of the "core" library. Both `Http.toRequest` and `Http.Response.toResult` would map from and
+   to `HttpRequestMessage` and `HttpResponseMessage` respectively.
 
-          let inline execute (client: HttpClient) req =
-              (Http.toRequest >> Async.retn) req
-              |> AsyncResult.bind (client.SendAsync >> AsyncResult.waitTask)
-              |> AsyncResult.bind Http.Response.toResult
+   ```f#
+    [<RequireQualifiedAccess>]
+    module ElasticsearchClient =
+    open System.Net.Http
+   
+    let inline execute (client: HttpClient) req =
+        (Http.toRequest >> Async.retn) req
+        |> AsyncResult.bind (client.SendAsync >> AsyncResult.waitTask)
+        |> AsyncResult.bind Http.Response.toResult
 
     let client =
         let client = new HttpClient()
@@ -76,11 +81,14 @@ There is no nuget yet sadly, meaning to use this library it will have to be clon
         client
     let inline executeElasticsearchCall (req: 'a) =
         ElasticsearchClient.execute client req
-
-      let createResult : Result<IndexCreateResponse, exn> =
+    let createResult : Result<IndexCreateResponse, exn> =
         executeElasticsearchCall req |> Async.RunSynchronously
    ```
 
 ## Contributing
 
-I'm doing this as a weekend-only project, if you are interested in contributing please do. Adding tests would be a great place to help, but [ES Rest API](https://www.elastic.co/guide/en/elasticsearch/reference/7.13/rest-apis.html) it's really big so help there will also be appreciated.
+I'm doing this as a weekend-only project, if you are interested in contributing please do. Adding tests would be a great
+place to help, but [ES Rest API](https://www.elastic.co/guide/en/elasticsearch/reference/7.13/rest-apis.html) it's
+really big so help there will also be appreciated.
+
+Also moving and rethinking the Http Client is welcome 😁.
