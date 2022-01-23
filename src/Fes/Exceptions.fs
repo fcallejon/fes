@@ -200,9 +200,4 @@ module ElasticsearchException =
     let ofString s =
         Encoding.Parse s
         |> Exceptions.ElasticsearchException.OfJson
-        |> Result.mapError (sprintf "%O" >> exn)
-
-    let withDefaultException de =
-        function
-        | Result.Ok esException -> esException :> exn |> Result.Error
-        | Result.Error _ -> Result.Error de
+        |> Result.mapError ((sprintf "Server Raw Error: %s\r\nParsing Error: %O" s) >> exn)
