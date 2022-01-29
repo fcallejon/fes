@@ -84,7 +84,23 @@ There is no nuget yet sadly, meaning to use this library it will have to be clon
     let createResult : Result<IndexCreateResponse, exn> =
         executeElasticsearchCall req |> Async.RunSynchronously
    ```
+## Road map (WIP)
 
+- [ ] Update Fleece (WIP)
+- [ ] DSL for Indices
+  - [X] DSL to Create Indices
+  - [ ] DSL to Update Indices
+  - [ ] DSL to Manage Aliases
+- [ ] DSL to Index Documents
+- [ ] DSL for Search
+  - [ ] Initial Implementation for Queries
+- [ ] Http Client
+  - [X] Initial Exceptions/Errors handling
+  - [ ] Rethink Http Client
+    - [X] Http Client independent
+    - [X] Improve Exceptions/Errors handling
+  - [ ] Add retries
+ 
 ## Contributing
 
 I'm doing this as a weekend-only project, if you are interested in contributing please do. Adding tests would be a great
