@@ -87,13 +87,17 @@ There is no nuget yet sadly, meaning to use this library it will have to be clon
 ## Road map (WIP)
 
 - [ ] Update Fleece (WIP)
-- [ ] DSL for Indices
+- [X] DSL for Indices
   - [X] DSL to Create Indices
-  - [ ] DSL to Update Indices
-  - [ ] DSL to Manage Aliases
+  - [X] DSL to Update Indices
+  - [X] DSL to Manage Aliases
+  - [X] Add CE constructs
 - [ ] DSL to Index Documents
+  - [X] Initial Implementation to index Documents
+  - [X] Add CE constructs for initial implementations
 - [ ] DSL for Search
-  - [ ] Initial Implementation for Queries
+  - [X] Initial Implementation for Queries
+  - [X] Add CE constructs for initial implementations
 - [ ] Http Client
   - [X] Initial Exceptions/Errors handling
   - [ ] Rethink Http Client
@@ -107,4 +111,4 @@ I'm doing this as a weekend-only project, if you are interested in contributing 
 place to help, but [ES Rest API](https://www.elastic.co/guide/en/elasticsearch/reference/7.13/rest-apis.html) it's
 really big so help there will also be appreciated.
 
-Also moving and rethinking the Http Client is welcome 😁.
+Also moving and rethinking the Http Client or anything in [Roadmap](#road-map-wip) is welcome 😁.
