@@ -30,6 +30,7 @@ module Strings =
         String.Join(sep, x)
         
 [<AutoOpen>]
+[<Obsolete("Will be removed once Fleece Codecs are implemented.", false)>]
 module FleeceOperators =
     open Fleece
     open Fleece.SystemTextJson

@@ -87,13 +87,17 @@ There is no nuget yet sadly, meaning to use this library it will have to be clon
 ## Road map (WIP)
 
 - [ ] Update Fleece (WIP)
-- [ ] DSL for Indices
+- [X] DSL for Indices
   - [X] DSL to Create Indices
-  - [ ] DSL to Update Indices
-  - [ ] DSL to Manage Aliases
+  - [X] DSL to Update Indices
+  - [X] DSL to Manage Aliases
+  - [X] Add CE constructs
 - [ ] DSL to Index Documents
+  - [X] Initial Implementation to index Documents
+  - [X] Add CE constructs for initial implementations
 - [ ] DSL for Search
-  - [ ] Initial Implementation for Queries
+  - [X] Initial Implementation for Queries
+  - [X] Add CE constructs for initial implementations
 - [ ] Http Client
   - [X] Initial Exceptions/Errors handling
   - [ ] Rethink Http Client
