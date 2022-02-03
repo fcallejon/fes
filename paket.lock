@@ -2,11 +2,11 @@ STORAGE: NONE
 RESTRICTION: || (== net6.0) (== netcoreapp3.1)
 NUGET
   remote: https://api.nuget.org/v3/index.json
-    Fleece (0.10.0-RC11)
+    Fleece (0.10.0-RC14)
       FSharp.Core (>= 5.0.2)
       FSharpPlus (>= 1.2.2)
-    Fleece.SystemTextJson (0.10.0-RC11)
-      Fleece (>= 0.10.0-RC11)
+    Fleece.SystemTextJson (0.10.0-RC14)
+      Fleece (>= 0.10.0-RC14)
       FSharp.Core (>= 5.0.2)
       System.Text.Json (>= 4.7.1)
     FSharp.Core (6.0.1)
