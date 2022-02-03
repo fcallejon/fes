@@ -5,8 +5,8 @@ group Main
     framework: net6, netcoreapp3.1
     
     nuget FSharp.Core ~> 6.0.1
-    nuget Fleece == 0.10.0-RC11
-    nuget Fleece.SystemTextJson == 0.10.0-RC11
+    nuget Fleece == 0.10.0-RC14
+    nuget Fleece.SystemTextJson == 0.10.0-RC14
     
 group Tests
     source https://api.nuget.org/v3/index.json
