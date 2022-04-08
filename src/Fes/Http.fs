@@ -74,9 +74,8 @@ module Http =
 module ElasticsearchClient =
     type HttpCall = HttpRequestMessage -> AsyncResult<HttpResponseMessage, exn>
     
-    let inline execute (httpCall: HttpCall) req =
-        req
-        |> Http.toRequest
-        |> Async.retn
-        |> AsyncResult.bind httpCall
-        |> AsyncResult.bind Http.Response.toResult
+    let inline execute (httpCall: HttpCall) : 'fesRequest -> AsyncResult<'fesResponse, exn> =
+        let inReq = fun (req: 'fesRequest) -> Http.toRequest req |> Async.retn
+        httpCall
+        |> AsyncResult.bindOut Http.Response.toResult
+        |> AsyncResult.bindIn inReq

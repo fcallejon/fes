@@ -53,8 +53,11 @@ let main _ =
         let client = new HttpClient()
         client.BaseAddress <- getEsServer()
         client
-    let inline executeElasticsearchCall (req: 'a) =
-        ElasticsearchClient.execute (client.SendAsync >> AsyncResult.waitTask) req
+    let inline executeElasticsearchCall req =
+        let arrow =
+            client.SendAsync >> AsyncResult.waitTask
+            |> ElasticsearchClient.execute
+        arrow req
 
     let indexName = getIndexName ()
         

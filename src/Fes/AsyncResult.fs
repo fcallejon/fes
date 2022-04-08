@@ -32,9 +32,18 @@ module AsyncResult =
             | e -> return Error e
         }
 
-    let mapOut (f: Result<'b, exn> -> Result<'c, exn>) (a: 'a -> AsyncResult<'b, exn>) : 'a -> AsyncResult<'c, exn> =
-        a >> Async.map f
 
-    let bindOut (f: 'c -> Async<'a>) (a: 'a -> AsyncResult<'b, exn>) : 'c -> AsyncResult<'b, exn> = f >> Async.bind a
-
-    let mapIn (f: 'a2 -> 'a) (a: 'a -> AsyncResult<'b, exn>) : 'a2 -> AsyncResult<'b, exn> = f >> a
+    let mapIn (f: 'a2 -> 'a) (a: 'a -> AsyncResult<'b, exn>) : 'a2 -> AsyncResult<'b, exn> =
+        f >> a
+    
+    let mapOut (f: 'b -> 'c) (a: 'a -> AsyncResult<'b, exn>) : 'a -> AsyncResult<'c, exn> =
+        a >> map f
+    
+    let bindIn (f: 'a2 -> AsyncResult<'a, exn>) (a: 'a -> AsyncResult<'b, exn>) : 'a2 -> AsyncResult<'b, exn> =
+        f >> bind a
+        
+    let bindOut (f:'b -> AsyncResult<'c, exn>) (a:'a -> AsyncResult<'b, exn>) : 'a -> AsyncResult<'c, exn> =
+        a >> bind f
+      
+    let after (f:'a * 'b -> _) (g:'a -> AsyncResult<'b, exn>) : 'a -> AsyncResult<'b, exn> =
+        fun a -> g a |> map (fun b -> let _ = f (a,b) in b)
