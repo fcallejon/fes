@@ -1,7 +1,6 @@
 ﻿namespace Fes.DSL
 
-open Fleece.SystemTextJson
-open Fleece.SystemTextJson.Operators
+open Fleece
 
 module Formats =
     type DateBuiltInFormats =
@@ -88,7 +87,8 @@ module Formats =
     type DateFormat =
         | BuiltInFormats of DateBuiltInFormats
         | Custom of string
-        static member ToJson format =
+        
+        static member AsJString format =
             match format with
             | Custom value -> value
             | BuiltInFormats EpochMillis -> "epoch_millis"
@@ -192,6 +192,7 @@ module FieldTypes =
             | JString "wildcard" -> Decode.Success Wildcard
             | JString x as v -> Decode.Fail.invalidValue v $"Wrong Keyword Type: %s{x}"
             | x -> Decode.Fail.strExpected x
+        
 
     type Numeric =
         | Long
@@ -271,13 +272,15 @@ module FieldTypes =
             | TokenCount -> "token_count"
             |> JString
 
+open FieldTypes
+
 module Fields =
 
     type FieldType =
         | Keywords of FieldTypes.Keywords
-        | Text of FieldTypes.TextTypes
+        | Text of TextTypes
         | Numeric of FieldTypes.Numeric
-        | Date of FieldTypes.DateTypes
+        | Date of DateTypes
         | Nested
         static member OfJson value =
             let nestedFromJson value =
@@ -288,11 +291,11 @@ module Fields =
             let fieldType =
                 [| (FieldTypes.Keywords.OfJson value
                     |> Result.map FieldType.Keywords)
-                   (FieldTypes.TextTypes.OfJson value
+                   (TextTypes.OfJson value
                     |> Result.map FieldType.Text)
                    (FieldTypes.Numeric.OfJson value
                     |> Result.map FieldType.Numeric)
-                   (FieldTypes.DateTypes.OfJson value
+                   (DateTypes.OfJson value
                     |> Result.map FieldType.Date)
                    nestedFromJson value |]
                 |> Array.tryPick
@@ -306,11 +309,16 @@ module Fields =
 
         static member ToJson value =
             match value with
-            | Text text -> toJson text
-            | Keywords keywords -> toJson keywords
-            | Numeric numeric -> toJson numeric
-            | Date date -> toJson date
+            | Text text -> TextTypes.ToJson text
+            | Keywords keywords -> Keywords.ToJson keywords
+            | Numeric numeric -> Numeric.ToJson numeric
+            | Date date -> DateTypes.ToJson date
             | Nested -> JString "nested"
+
+        static member Codec () =
+            ofObjCodec (
+                Text <!> jreq "text" (function Text t -> Some t | _ -> None)
+                )
 
 //TODO: Add parameters for Numeric Types
 //TODO: Add types from https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-types.html#structured-data-types

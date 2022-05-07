@@ -77,9 +77,9 @@ module Mapping =
         | Store of bool
         | TermVector of TermVector
         static member ToPropertyList fieldMapping =
-            let mkFieldsOrProps (fs: (string * FieldType) []) =
+            let inline mkFieldsOrProps (fs: (string * FieldType) []) =
                 let mkFieldOrProp (key: string, value: FieldType) =
-                    (key, jobj [ "type" .= value ])
+                    (key, PropertyList [| "type", value |])
 
                 fs
                 |> Seq.map mkFieldOrProp
@@ -87,36 +87,33 @@ module Mapping =
                 |> PropertyList
 
             match fieldMapping with
-            | Analyzer value -> ("analyzer", toJson value)
-            | Boost value -> ("boost", toJson value)
-            | Coerce value -> ("coerce", toJson value)
-            | CopyTo value -> ("copy_to", toJson value)
-            | DocValues value -> ("doc_values", toJson value)
-            | Dynamic value -> ("dynamic", toJson value)
-            | EagerGlobalOrdinals value -> ("eager_global_ordinals", toJson value)
-            | Enabled value -> ("enabled", toJson value)
-            | FieldData value -> ("fieldata", toJson value)
-            | Format value -> ("format", toJson value)
-            | IgnoreAbove value -> ("ignore_above", toJson value)
-            | IgnoreMalformed value -> ("ignore_malformed", toJson value)
-            | IndexOptions value -> ("index_options", toJson value)
-            | IndexPhrases value -> ("index_phrases", toJson value)
-            | Index value -> ("index", toJson value)
-            | Normalizer value -> ("normalizer", toJson value)
-            | Norms value -> ("norms", toJson value)
-            | NullValue value -> ("null_value", toJson value)
-            | PositionIncrementGap value -> ("position_increment_gap", toJson value)
-            | SearchAnalyzer value -> ("search_analyzer", toJson value)
-            | Similarity value -> ("similarity", toJson value)
-            | Store value -> ("store", toJson value)
-            | TermVector value -> ("term_vector", toJson value)
-            | Meta value -> ("meta", toJson (Array.ofSeq value))
-            | IndexPrefixes (min, max) ->
-                ("index_prefixes",
-                 jobj [ "min_chars" .= min
-                        "max_chars" .= max ])
-            | Fields value -> ("fields", toJson (mkFieldsOrProps value))
-            | Properties value -> ("properties", toJson (mkFieldsOrProps value))
+            | Analyzer value -> ("analyzer", value :> obj)
+            | Boost value -> ("boost", value :> obj)
+            | Coerce value -> ("coerce", value :> obj)
+            | CopyTo value -> ("copy_to", value :> obj)
+            | DocValues value -> ("doc_values", value :> obj)
+            | Dynamic value -> ("dynamic", value :> obj)
+            | EagerGlobalOrdinals value -> ("eager_global_ordinals", value :> obj)
+            | Enabled value -> ("enabled", value :> obj)
+            | FieldData value -> ("fieldata", value :> obj)
+            | Format value -> ("format", value :> obj)
+            | IgnoreAbove value -> ("ignore_above", value :> obj)
+            | IgnoreMalformed value -> ("ignore_malformed", value :> obj)
+            | IndexOptions value -> ("index_options", value :> obj)
+            | IndexPhrases value -> ("index_phrases", value :> obj)
+            | Index value -> ("index", value :> obj)
+            | Normalizer value -> ("normalizer", value :> obj)
+            | Norms value -> ("norms", value :> obj)
+            | NullValue value -> ("null_value", value :> obj)
+            | PositionIncrementGap value -> ("position_increment_gap", value :> obj)
+            | SearchAnalyzer value -> ("search_analyzer", value :> obj)
+            | Similarity value -> ("similarity", value :> obj)
+            | Store value -> ("store", value :> obj)
+            | TermVector value -> ("term_vector", value :> obj)
+            | Meta value ->  ("meta", (Array.ofSeq value) :> obj)
+            | IndexPrefixes (min, max) -> ("index_prefixes", PropertyList [| "min_chars", min; "max_chars", max |])
+            | Fields value -> ("fields", (mkFieldsOrProps value))
+            | Properties value -> ("properties", (mkFieldsOrProps value))
             |> Array.singleton
             |> PropertyList
 

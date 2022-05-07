@@ -111,4 +111,4 @@ I'm doing this as a weekend-only project, if you are interested in contributing 
 place to help, but [ES Rest API](https://www.elastic.co/guide/en/elasticsearch/reference/7.13/rest-apis.html) it's
 really big so help there will also be appreciated.
 
-Also moving and rethinking the Http Client is welcome 😁.
+Also moving and rethinking the Http Client or anything in [Roadmap](#road-map-wip) is welcome 😁.

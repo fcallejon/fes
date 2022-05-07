@@ -1,10 +1,10 @@
 ﻿module Fes.DSL.Indices
 
+open System.Text.RegularExpressions
 open FSharpPlus
 open Fes.DSL.Mapping
 open Fleece
 open Fleece.SystemTextJson
-open Fleece.SystemTextJson.Operators
 open System
 open Fes
 open Fes.QueryParams.Builder.Operators
@@ -33,6 +33,16 @@ type ShardCheckOnStartup =
         | Checksum -> "checksum"
         |> JString
 
+    static member OfJson value =
+        match value with
+        | JString "false" -> False |> Decode.Success
+        | JString "true" -> True |> Decode.Success
+        | JString "checksum" -> Checksum |> Decode.Success
+        | JString x as v -> Decode.Fail.invalidValue v $"Invalid ShardCheckOnStartup: %s{x}"
+        | x -> Decode.Fail.strExpected x
+        
+    static member get_Codec () = ShardCheckOnStartup.OfJson <-> ShardCheckOnStartup.ToJson
+
 [<RequireQualifiedAccess>]
 type Codec =
 | Default
@@ -44,17 +54,62 @@ with
         | BestCompression -> "best_compression"
         |> JString
         
+    static member OfJson value =
+        match value with
+        | JString "default" -> Default |> Decode.Success
+        | JString "best_compression" -> BestCompression |> Decode.Success
+        | JString x as v -> Decode.Fail.invalidValue v $"Invalid Codec: %s{x}"
+        | x -> Decode.Fail.strExpected x
+        
+    static member get_Codec () = Codec.OfJson <-> Codec.ToJson
+        
 type AutoExpandReplicas =
 | Disabled
 | Delimited of uint16*uint16
 | LowerBoundOnly of uint16
+
+[<RequireQualifiedAccess>]
+module private AutoExpandReplicas =
+    let private delimitedRegex = Regex("^(\d*)-(\d{1,})$", RegexOptions.Compiled ||| RegexOptions.Singleline)
+    let private lowerBoundOnlyRegex = Regex("^(\d*)-all$", RegexOptions.Compiled ||| RegexOptions.Singleline)
+    let (|IsDelimited|_|) value =
+        let rxMatch = delimitedRegex.Match(value)
+        if rxMatch.Success
+        then
+            let min = UInt16.Parse(rxMatch.Groups[0].Value)
+            let max = UInt16.Parse(rxMatch.Groups[1].Value)
+            (min, max)
+            |> Delimited
+            |> Some
+        else None
+
+    let (|IsLowerBoundOnly|_|) value =
+        let rxMatch = lowerBoundOnlyRegex.Match(value)
+        if rxMatch.Success
+        then
+            UInt16.Parse(rxMatch.Groups[0].Value)
+            |> LowerBoundOnly
+            |> Some
+        else None
+
+type AutoExpandReplicas
 with
     static member ToJson value =
         match value with
         | Disabled -> "false"
-        | Delimited (min, max) -> $"%i{max}-%i{min}"
+        | Delimited (min, max) -> $"%i{min}-%i{max}"
         | LowerBoundOnly min -> $"%i{min}-all"
         |> JString
+        
+    static member OfJson value =
+        match value with
+        | JString "false" -> Disabled |> Decode.Success
+        | JString (AutoExpandReplicas.IsDelimited del) -> del |> Decode.Success
+        | JString (AutoExpandReplicas.IsLowerBoundOnly lower) -> lower |> Decode.Success
+        | JString x as v -> Decode.Fail.invalidValue v $"Invalid Codec: %s{x}"
+        | x -> Decode.Fail.strExpected x
+        
+    static member get_Codec () = AutoExpandReplicas.OfJson <-> AutoExpandReplicas.ToJson
 
 type StaticIndexSettings =
     { NumberOfRoutingShards: option<uint16>
@@ -79,33 +134,7 @@ type IndexSettings =
     { NumberOfShards: option<uint16>
       NumberOfReplicas: option<uint16>
       Static: option<StaticIndexSettings>
-      Dynamic: option<DynamicIndexSettings> }
-    static member ToJson settings =
-        jobj [ yield "number_of_shards" .=? settings.NumberOfShards
-               yield "number_of_replicas" .=? settings.NumberOfReplicas
-
-               if settings.Static.IsSome then
-                   let staticSettings = settings.Static.Value
-                   yield "number_of_routing_shards" .=? staticSettings.NumberOfRoutingShards
-                   yield "shard.check_on_startup" .=? staticSettings.ShardCheckOnStartup
-                   yield "hidden" .=? staticSettings.Hidden
-                   yield "codec" .=? staticSettings.Codec
-                   yield "load_fixed_bitset_filters_eagerly" .=? staticSettings.LoadFixedBitsetFiltersEagerly
-                   yield "routing_partition_size" .=? staticSettings.RoutingPartitionSize
-                   yield "soft_deletes.retention_lease.period" .=? staticSettings.SoftDeletesRetention
-
-               if settings.Dynamic.IsSome then
-                   let dynamicSettings = settings.Dynamic.Value
-                   yield "refresh_interval" .=? dynamicSettings.RefreshInterval
-                   yield "auto_expand_replicas" .=? dynamicSettings.AutoExpandReplicas
-                   yield "search.idle.after" .=? dynamicSettings.SearchIdleAfter
-                   yield "max_result_window" .=? dynamicSettings.MaxResultWindow
-                   yield "max_inner_result_window" .=? dynamicSettings.MaxInnerResultWindow
-                   yield "max_rescore_window" .=? dynamicSettings.MaxReScoreWindow
-                   yield "max_docvalue_fields_search" .=? dynamicSettings.MaxDocValueFieldsSearch
-                   yield "max_script_fields" .=? dynamicSettings.MaxScriptFields
-                   yield "max_ngram_diff" .=? dynamicSettings.MaxScriptFields
-             ]
+      Dynamic: option<DynamicIndexSettings> }        
 
 type IndexAlias =
     { Name: string
@@ -170,7 +199,7 @@ type IndexRequest =
             let mkFieldOrProp =
                 let mergeExtrasWithType (x: MappingDefinition) =
                     let typeProp =
-                        ("type", (toJson x.Type))
+                        ("type", x.Type :> obj)
                         |> Array.singleton
                         |> PropertyList
                     let properties =
@@ -178,11 +207,11 @@ type IndexRequest =
                         |> Seq.map FieldMapping.ToPropertyList
                         |> Seq.fold (++) typeProp
 
-                    PropertyList [| (x.Name, (toJson properties))|] 
+                    PropertyList [| (x.Name, properties) |] 
                 
                 Array.map mergeExtrasWithType
                 >> Array.sum
-                >> (fun m -> jobj [ "properties" .= m ])
+                >> (fun m -> PropertyList [| ("properties", m) |])
 
             index.Mappings
             |> Option.map mkFieldOrProp
@@ -194,9 +223,24 @@ type IndexRequest =
                 >> JsonObject
             )
 
-        jobj [ "aliases" .=? aliases
-               "settings" .=? index.Settings
-               "mappings" .=? mappings ]
+        let g =
+            codec {
+                let! gf = jopt "aliases" () aliases
+                return gf
+            }
+        g
+        
+    static member get_Codec () : Codec<'Encoding, _> =
+        codec {
+            let! name     = jreq "name"     (fun x -> Some x.Name)
+            and! settings = jreq "settings" (fun x -> Some x.Settings)
+            return
+                { Name = name
+                  Settings = settings
+                  Mappings = maappings
+                  Aliases = failwith "todo"
+                  Parameters = failwith "todo" }
+        } |> ofObjCodec
 
     static member ToRequest(request: IndexRequest) =
         let query =
