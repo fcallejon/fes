@@ -4,31 +4,27 @@ open System
 open System.Net
 
 module Exceptions =
-    open FSharpPlus
-    open Fleece.SystemTextJson
-    open Fleece.SystemTextJson.Operators
+    open Fleece
 
     type FailedShards =
         { Shard: int
           Index: string
           Node: string
           Reason: ElasticsearchCausedBy }
-        static member OfJson json =
-            match json with
-            | JObject o ->
-                monad {
-                    let! shard = o .@ "shard"
-                    let! index = o .@ "index"
-                    let! node = o .@ "node"
-                    let! reason = o .@ "reason"
 
-                    return
-                        { FailedShards.Shard = shard
-                          Index = index
-                          Node = node
-                          Reason = reason }
-                }
-            | x -> Decode.Fail.objExpected x
+        static member get_Codec () =
+            codec {
+                let! shard = jreq "shard" (fun x -> Some x.Shard)
+                and! index = jreq "index" (fun x -> Some x.Index)
+                and! node = jreq "node" (fun x -> Some x.Node)
+                and! reason = jreq "reason" (fun x -> Some x.Reason)
+
+                return
+                    { FailedShards.Shard = shard
+                      Index = index
+                      Node = node
+                      Reason = reason }
+            } |> ofObjCodec
 
     and ElasticsearchExceptions =
         | ResourceAlreadyExistsException
@@ -56,6 +52,21 @@ module Exceptions =
             | JString x as v -> Decode.Fail.invalidValue v $"Wrong ElasticsearchException value: %s{x}"
             | x -> Decode.Fail.strExpected x
 
+        static member ToJson value =
+            match value with
+            | ResourceAlreadyExistsException -> JString "resource_already_exists_exception"
+            | IllegalArgumentException -> JString "illegal_argument_exception"
+            | SearchPhaseExecutionException -> JString "search_phase_execution_exception"
+            | ContentParseException -> JString "x_content_parse_exception"
+            | ParsingException -> JString "parsing_exception"
+            | ClassCastException -> JString "class_cast_exception"
+            | IndexNotFoundException -> JString "index_not_found_exception"
+            | MapperParsingException -> JString "mapper_parsing_exception"
+            | ParseException -> JString "parse_exception"
+            | InvalidIndexNameException -> JString "invalid_index_name_exception"
+
+        static member get_Codec () = ElasticsearchExceptions.OfJson <-> ElasticsearchExceptions.ToJson
+
     and ElasticsearchCauseByType =
         | NumberFormat
         | ContentParse
@@ -70,128 +81,112 @@ module Exceptions =
             | JString x as v -> Decode.Fail.invalidValue v $"Wrong ElasticsearchCauseByType value: %s{x}"
             | x -> Decode.Fail.strExpected x
 
+        static member ToJson value =
+            match value with
+            | NumberFormat -> JString "number_format_exception"
+            | ContentParse -> JString "x_content_parse_exception"
+            | Parsing -> JString "parsing_exception"
+            | Parse -> JString "parse_exception"
+
+        static member get_Codec () = ElasticsearchCauseByType.OfJson <-> ElasticsearchCauseByType.ToJson
+
     and ElasticsearchRootCauseInfo =
         { Type: ElasticsearchExceptions
           Reason: string }
-        static member OfJson value =
-            match value with
-            | JObject o ->
-                monad {
-                    let! esType = o .@ "type"
-                    let! reason = o .@ "reason"
 
-                    return
-                        { ElasticsearchRootCauseInfo.Type = esType
-                          Reason = reason }
-                }
-            | x -> Decode.Fail.objExpected x
+        static member get_Codec () : Codec<'Encoding, _> =
+            codec {
+                let! esType = jreq "type" (fun x -> Some x.Type)
+                and! reason = jreq "reason" (fun x -> Some x.Reason)
+
+                return
+                    { ElasticsearchRootCauseInfo.Type = esType
+                      Reason = reason }
+            } |> ofObjCodec
 
     and ElasticsearchCausedBy =
         { Type: ElasticsearchCauseByType
           Reason: string
           Stack: option<string>
           CausedBy: option<ElasticsearchCausedBy> }
-        static member OfJson value =
-            match value with
-            | JObject o ->
-                monad {
-                    let! esType = o .@ "type"
-                    let! reason = o .@ "reason"
-                    let! stack = o .@? "stack_trace"
-                    let! causedBy = o .@? "caused_by"
 
-                    return
-                        { ElasticsearchCausedBy.Type = esType
-                          Reason = reason
-                          Stack = stack
-                          CausedBy = causedBy }
-                }
-            | x -> Decode.Fail.objExpected x
+        static member get_Codec () : Codec<'Encoding, _> =
+            codec {
+                let! esType = jreq "type" (fun x -> Some x.Type)
+                and! reason = jreq "reason" (fun x -> Some x.Reason)
+                and! stack = jopt "stack_trace" (fun x -> x.Stack)
+                and! causedBy = jopt "caused_by" (fun x -> x.CausedBy)
+
+                return
+                    { ElasticsearchCausedBy.Type = esType
+                      Reason = reason
+                      Stack = stack
+                      CausedBy = causedBy }
+            } |> ofObjCodec
+
+
+    and ElasticsearchError =
+        { Type: ElasticsearchExceptions
+          Reason: string
+          Index: option<string>
+          CausedBy: option<ElasticsearchCausedBy>
+          Stack: option<string>
+          RootCauses: ElasticsearchRootCauseInfo []}
+
+        static member get_Codec () : Codec<'Encoding, _> =
+            codec {
+                let! esType = jreq "type" (fun x -> Some x.Type)
+                and! reason = jreq "reason" (fun x -> Some x.Reason)
+                and! root = jreq "root_cause" (fun x -> Some x.RootCauses)
+                and! index = jopt "index" (fun x -> x.Index)
+                and! causedBy = jopt "caused_by" (fun x -> x.CausedBy)
+                and! stack = jopt "stack_trace" (fun x -> x.Stack)
+
+                return
+                 { ElasticsearchError.CausedBy = causedBy
+                   Type = esType
+                   Reason = reason
+                   Index = index
+                   Stack = stack
+                   RootCauses = root }
+            } |> ofObjCodec
 
     and ElasticsearchException =
         inherit Exception
-        val raw: Encoding
-        val esType: ElasticsearchExceptions
-        val status: HttpStatusCode
-        val reason: string
-        val cause: option<ElasticsearchCausedBy>
-        val stack: option<string>
-        val index: option<string>
-        val root: ElasticsearchRootCauseInfo []
-        val phase: option<string>
-        val grouped: option<bool>
-        val failedShards: option<FailedShards>
+        val Error: ElasticsearchError
+        val Phase: option<string>
+        val Grouped: option<bool>
+        val FailedShards: option<FailedShards>
+        val StatusCode: HttpStatusCode
 
-        private new(raw',
-                    index',
-                    esType',
-                    status',
-                    reason',
-                    root': ElasticsearchRootCauseInfo [],
-                    cause',
-                    stack',
+        private new(error',
                     phase',
                     grouped',
+                    status',
                     failedShards') =
-            { inherit Exception(reason')
-              raw = raw'
-              esType = esType'
-              status = status'
-              reason = reason'
-              root = root'
-              cause = cause'
-              stack = stack'
-              index = index'
-              phase = phase'
-              grouped = grouped'
-              failedShards = failedShards' }
+            { inherit Exception(error'.Reason)
+              Error = error'
+              Phase = phase'
+              Grouped = grouped'
+              StatusCode = status'
+              FailedShards = failedShards' }
 
-        static member OfJson json =
-            match json with
-            | JObject o ->
-                match o .@? "error" with
-                | Ok (Some error) ->
-                    monad {
-                        let! esType = error .@ "type"
-                        let! reason = error .@ "reason"
-                        let! index = error .@? "index"
-                        let! cause = error .@? "caused_by"
-                        let! stack = error .@? "stack_trace"
+        static member Codec () =
+            codec {
+                let! error = jreq "error" (fun (x: ElasticsearchException) -> Some x.Error)
+                and! phase = jopt "phase" (fun x -> x.Phase)
+                and! grouped = jopt "grouped" (fun x -> x.Grouped)
+                and! failedShards = jopt "failed_shards" (fun x -> x.FailedShards)
+                and! status = jreq "status" (fun x -> Some x.StatusCode)
 
-                        let! root =
-                            error .@ "root_cause"
-                            |> Result.bind (
-                                Array.map ElasticsearchRootCauseInfo.OfJson
-                                >> sequence
-                            )
-
-                        let! phase = o .@? "phase"
-                        let! grouped = o .@? "grouped"
-                        let! failedShards = o .@? "failed_shards"
-
-                        let! status =
-                            o .@ "status"
-                            |> Result.bind JsonEnum.fromInt<HttpStatusCode>
-                            
-                        return!
-                            Decode.Success
-                            <| ElasticsearchException(
-                                json,
-                                index,
-                                esType,
-                                status,
-                                reason,
-                                root,
-                                cause,
-                                stack,
-                                phase,
-                                grouped,
-                                failedShards
-                            )
-                    }
-                | Ok None -> Decode.Fail.parseError (exn <| string json) "Invalid error response."
-                | Error e -> Error e
-            | _ -> Decode.Fail.parseError (exn <| string json) "Invalid error response."
+                return ElasticsearchException(
+                        error,
+                        phase,
+                        grouped,
+                        status,
+                        failedShards
+                    )
+            } |> ofObjCodec
 
 [<RequireQualifiedAccess>]
 module ElasticsearchException =
@@ -199,5 +194,5 @@ module ElasticsearchException =
 
     let ofString s =
         Encoding.Parse s
-        |> Exceptions.ElasticsearchException.OfJson
+        |> Exceptions.ElasticsearchException.Codec().Decoder
         |> Result.mapError ((sprintf "Server Raw Error: %s\r\nParsing Error: %O" s) >> exn)

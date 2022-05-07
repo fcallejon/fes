@@ -318,6 +318,10 @@ module Fields =
         static member Codec () =
             ofObjCodec (
                 Text <!> jreq "text" (function Text t -> Some t | _ -> None)
+                <|> (Keywords <!> jreq "keywords" (function Keywords t -> Some t | _ -> None))
+                <|> (Numeric <!> jreq "numeric" (function Numeric t -> Some t | _ -> None))
+                <|> (Date <!> jreq "date" (function Date t -> Some t | _ -> None))
+                // <|> (Nested <!> jreq "nested" (function FieldType.Nested t -> Some t | _ -> None))
                 )
 
 //TODO: Add parameters for Numeric Types

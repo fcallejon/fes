@@ -237,7 +237,7 @@ type IndexRequest =
             return
                 { Name = name
                   Settings = settings
-                  Mappings = maappings
+                  Mappings = mappings
                   Aliases = failwith "todo"
                   Parameters = failwith "todo" }
         } |> ofObjCodec
