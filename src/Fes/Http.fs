@@ -1,16 +1,16 @@
-﻿namespace Fes
+namespace Fes
 
 open System.Net.Http
+open System.Threading.Tasks
 
 [<RequireQualifiedAccess>]
 module Http =
     open System
     open System.Text
-    open Fleece.SystemTextJson
-    
+
     type RequestMsg = HttpRequestMessage
     type ResponseMsg = HttpResponseMessage
-    
+
     type Method =
     | Get
     | Post
@@ -36,46 +36,45 @@ module Http =
             let request = new RequestMsg()
             request.RequestUri <- Uri(path, UriKind.Relative)
             request
-            
+
         let inline withMethod method (request: RequestMsg) =
             request.Method <- Method.toNetMethod method
             request
-            
+
         let inline withJson body (request: RequestMsg) =
             request.Content <- new StringContent(body, Encoding.UTF8, "application/json")
             request
-          
+
         let inline withJsonBody body =
-            toJson body
-            |> string
+            Json.serialize body
             |> withJson
 
-    
+
     module Response =
-            
+
         let inline asString (response: ResponseMsg) =
             response.Content.ReadAsStringAsync()
-            |> AsyncResult.waitTask
-        
+            |> TaskResult.ofTask
+
         let inline toResult (response: ResponseMsg) =
             let body = asString response
             if response.IsSuccessStatusCode then
                 body
-                |> AsyncResult.bind JsonRes.ofString
+                |> TaskResult.bind JsonRes.ofString
             else
                 body
-                |> Async.map (Result.bind ElasticsearchException.ofString)
-                |> Async.map (function | Ok e -> e :> exn |> Error | Error e -> Error e)
+                |> TaskHelpers.map (Result.bind ElasticsearchException.ofString)
+                |> TaskHelpers.map (function | Ok e -> e :> exn |> Error | Error e -> Error e)
 
     let inline toRequest x =
         (^T : (static member ToRequest: ^T -> Result<RequestMsg, exn>) x)
-      
+
 [<RequireQualifiedAccess>]
 module ElasticsearchClient =
-    type HttpCall = HttpRequestMessage -> AsyncResult<HttpResponseMessage, exn>
-    
-    let inline execute (httpCall: HttpCall) : 'fesRequest -> AsyncResult<'fesResponse, exn> =
-        let inReq = fun (req: 'fesRequest) -> Http.toRequest req |> Async.retn
+    type HttpCall = HttpRequestMessage -> TaskResult<HttpResponseMessage, exn>
+
+    let inline execute (httpCall: HttpCall) : 'fesRequest -> TaskResult<'fesResponse, exn> =
+        let inReq = fun (req: 'fesRequest) -> Http.toRequest req |> TaskHelpers.retn
         httpCall
-        |> AsyncResult.bindOut Http.Response.toResult
-        |> AsyncResult.bindIn inReq
+        |> TaskResult.bindOut Http.Response.toResult
+        |> TaskResult.bindIn inReq

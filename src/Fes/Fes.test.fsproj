@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <WarnOn>3390;$(WarnOn)</WarnOn>
+        <RootNamespace>Fes</RootNamespace>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="FSharp.Core"/>
+        <PackageReference Include="FSharp.SystemTextJson"/>
+        <PackageReference Include="FSharpPlus"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="QueryStringBuilder.fs"/>
+        <Compile Include="Prelude.fs"/>
+        <Compile Include="ConversionHelpers.fs"/>
+        <Compile Include="Task.fs" />
+        <Compile Include="Result.fs"/>
+        <Compile Include="TaskResult.fs" />
+        <Compile Include="DSL\Units.fs"/>
+        <!-- Auto-generated DTO/Model types from ES OpenAPI spec -->
+        <!-- Auto-generated model files (ordered by dependencies) -->
+        <Compile Include="DSL\Models\Types.g.fs"/>
+        <!-- Exceptions before Json so converters are available -->
+        <Compile Include="Exceptions.fs"/>
+        <!-- Json.fs after models and exceptions so it can reference all converters -->
+        <Compile Include="Json.fs"/>
+        <Compile Include="Http.fs"/>
+        <!-- Auto-generated operation files (must be after Http.fs) -->
+        <Compile Include="DSL\Fields.fs"/>
+        <Compile Include="DSL\Mappings.fs"/>
+        <Compile Include="DSL\Parameters.fs"/>
+        <!-- Manual Query files removed - using generated QueryDsl types instead -->
+        <Compile Include="DSL\Indices\Indices.fs"/>
+        <Compile Include="DSL\Indices\Aliases.fs"/>
+        <Compile Include="DSL\IndexApi.fs"/>
+        <Compile Include="DSL\Search.fs"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Builders\SearchCommandRequest.Builder.fs"/>
+        <!-- Manual query builders removed - using generated QueryDsl builders instead -->
+        <Compile Include="Builders\IndexRequest.Builder.fs"/>
+        <Compile Include="Builders\UpdateIndexRequest.Builder.fs"/>
+        <Compile Include="Builders\IndexDocument.Builder.fs"/>
+        <Compile Include="Builders\AliasCommandRequest.Builder.fs"/>
+    </ItemGroup>
+</Project>

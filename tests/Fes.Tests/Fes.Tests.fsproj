@@ -2,10 +2,22 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <IsPackable>false</IsPackable>
-    <GenerateProgramFile>true</GenerateProgramFile>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="paket.references" />
+    <PackageReference Include="FSharp.Core" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="xunit" />
+    <PackageReference Include="xunit.runner.visualstudio">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="coverlet.collector">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="FsUnit.xUnit" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="AssertRequestCommands.fs" />
     <Compile Include="Commands\IndexDocumentCommands.fs" />
     <Compile Include="Commands\IndexCommands.fs" />
@@ -14,5 +26,4 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Fes\Fes.fsproj" />
   </ItemGroup>
-  <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>

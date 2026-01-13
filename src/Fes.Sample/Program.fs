@@ -1,50 +1,27 @@
-﻿open System
+open System
 open System.Net.Http
+open System.Text.Json.Serialization
 open FSharpPlus
-open FSharpPlus.Data
-open Fleece.SystemTextJson
-open Fleece.SystemTextJson.Operators
 open Fes
-open Fes.DSL
-open Fes.DSL.Aliases
-open Fes.DSL.Indices
-open Fes.Builders
-open Fes.Builders.Indices
-open Fes.Contracts.Api
-open Fes.Sample
+open Fes.DSL.Models.Types
+open Fes.DSL.Operations
 
 type SampleDocument =
-    { Field1: string
-      Field2: string }
-with
+    { [<JsonPropertyName("field1")>] Field1: string
+      [<JsonPropertyName("field2")>] Field2: string }
     override this.ToString() =
         $"Field1: %s{this.Field1}\tField2: %s{this.Field2}"
 
-    static member ToJson doc =
-        jobj [ "field1" .= doc.Field1
-               "field2" .= doc.Field2 ]
-        
-    static member OfJson json =
-        match json with
-        | JObject o ->
-            monad {
-                let! field1 = o .@ "field1"
-                let! field2 = o .@ "field2"
-                return { SampleDocument.Field1 = field1
-                         Field2 = field2 }
-            }
-        | x -> Decode.Fail.strExpected x
-        
 let getEsServer _ =
     let fromEnv = Environment.GetEnvironmentVariable("FES_ES_SERVER")
     match fromEnv with
     | _ when String.IsNullOrWhiteSpace(fromEnv) -> Uri "http://localhost:9200/"
     | server -> Uri server
-    
+
 let getIndexName _ =
     let fromEnv = Environment.GetEnvironmentVariable("FES_ES_INDEX_NAME")
     match fromEnv with
-    | _ when String.IsNullOrWhiteSpace(fromEnv) -> "index_test_using_ce"
+    | _ when String.IsNullOrWhiteSpace(fromEnv) -> "index_test_generated"
     | indexName -> indexName
 
 [<EntryPoint>]
@@ -53,143 +30,122 @@ let main _ =
         let client = new HttpClient()
         client.BaseAddress <- getEsServer()
         client
+
+    // Debug helper to print request JSON
+    let debugRequest (req: HttpRequestMessage) =
+        printfn "=== REQUEST DEBUG ==="
+        printfn $"Method: {req.Method}"
+        printfn $"URI: {req.RequestUri}"
+        if req.Content <> null then
+            let json = req.Content.ReadAsStringAsync().GetAwaiter().GetResult()
+            printfn $"Body:\n{json}"
+        printfn "====================="
+
     let inline executeElasticsearchCall req =
+        match Http.toRequest req with
+        | Result.Ok httpReq -> debugRequest httpReq
+        | Result.Error e -> printfn $"Failed to create request: {e.Message}"
+
         let arrow =
-            client.SendAsync >> AsyncResult.waitTask
+            client.SendAsync >> TaskResult.ofTask
             |> ElasticsearchClient.execute
         arrow req
 
     let indexName = getIndexName ()
-        
+
     let printResult title (result: Result<'a, exn>) =
         printf title
         match result with
-        | Ok o -> printfn $"OK -> {o}"
-        | Error e ->
+        | Result.Ok o -> printfn $"OK -> {o}"
+        | Result.Error e ->
             match e with
             | :? AggregateException as ae ->
                 ae.InnerExceptions
-                |> Seq.iter (fun ie -> printfn $"Error -> {ie.Message} \r\n{ie.InnerException.Message}")
+                |> Seq.iter (fun ie -> printfn $"Error -> {ie.Message}")
             | _ -> printfn $"Error -> {e.Message}"
-        
-    let printSearchResult response = 
-        printfn "--------------------------------------------"
-        printResult "Search Document: " response
-        response
-        |> Result.map (fun x -> x.Hits.Hits)
-        |> (fun docs ->
-            match docs with
-            | Ok documents ->
-                printfn "Documents:"
-                documents
-                |> Array.iter (fun d -> printfn $"\t%s{d.ToString()}")
-            | Error _ -> ())
-        printfn "--------------------------------------------"
 
-    let req =
-        createIndexRequest {
-            name indexName
-            mappings
-                [|
-                    mappingDefinition {
-                        name "field1"
-                        fieldType (FieldTypes.DateTypes.Date |> Fields.Date)
-                    }
-                    mappingDefinition {
-                        name "field2"
-                        fieldType (FieldTypes.Keyword |> Fields.Keywords)
-                    }
-                    mappingDefinition {
-                        name "nestedField1"
-                        fieldType Fields.Nested
-                        mappings
-                            [| ([| ("innerField1", FieldTypes.Integer |> Fields.Numeric)
-                                   ("innerField2", FieldTypes.Keyword |> Fields.Keywords ) |]
-                                |> Mapping.FieldMapping.Properties) |]
-                    }
-                |]
-            settings (
-                indexSettings {
-                    shards 3us
-                    replicas 0us
-                })
-            aliases [| indexAlias { name "Test" } |]
-        }
-        
+    // =========================================================================
+    // Create Index using auto-generated operation builder
+    // =========================================================================
 
-    let createResult : Result<IndexCreateResponse, exn> =
-        executeElasticsearchCall req |> Async.RunSynchronously
+    // Create mappings using generated types - initialize all fields explicitly
+    let indexMappings : MappingTypeMapping =
+        { AllField = Option.None
+          DateDetection = Option.None
+          Dynamic = Option.None
+          DynamicDateFormats = Option.None
+          DynamicTemplates = Option.None
+          FieldNames = Option.None
+          IndexField = Option.None
+          Meta = Option.None
+          NumericDetection = Option.None
+          Properties = Option.Some (Map.ofList [
+              "field1", box {| ``type`` = "text" |}
+              "field2", box {| ``type`` = "text" |}
+          ])
+          Routing = Option.None
+          Size = Option.None
+          Source = Option.None
+          Runtime = Option.None
+          Enabled = Option.None
+          Subobjects = Option.None
+          DataStreamTimestamp = Option.None }
 
-    printResult "Create: " createResult
-
-    // Update Index Settings
-    let updateReq =
-        updateIndexSettingsRequest {
-            target indexName
-            settings (
-                indexSettings {
-                    dynamic (dynamicIndexSettings {
-                            refreshInterval (TimeoutUnit.Seconds 1<TimeUnits.s>) })
-                })
+    let createReq =
+        indicesCreateRequest {
+            index indexName
+            mappings indexMappings
         }
 
-    let updateResult : Result<ElasticsearchGenericResponse, exn> =
-        executeElasticsearchCall updateReq |> Async.RunSynchronously
+    let createResult : Result<IndicesCreateResponse, exn> =
+        (executeElasticsearchCall createReq).GetAwaiter().GetResult()
 
-    printResult "Update: " updateResult
-    
-    // Create Alias for Index
-    let aliasCmd =
-        aliasCommandRequest {
-            add (
-                aliasAction {
-                    names (AliasNames.Alias "alias_test")
-                    on (ActionOn.Index indexName)
-                })
-            parameters (
-                aliasQueryParameter {
-                    timeout (TimeoutUnit.Seconds 30<TimeUnits.s>)
-                })
+    printResult "Create Index (generated): " createResult
+
+    // =========================================================================
+    // Update Aliases using auto-generated operation builder
+    // =========================================================================
+
+    let addAction : UpdateAliasesAddAction =
+        { Alias = Option.Some "alias_test_generated"
+          Aliases = Option.None
+          Filter = Option.None
+          Index = Option.Some indexName
+          Indices = Option.None
+          IndexRouting = Option.None
+          IsHidden = Option.None
+          IsWriteIndex = Option.None
+          Routing = Option.None
+          SearchRouting = Option.None
+          MustExist = Option.None }
+
+    let aliasAction : UpdateAliasesAction =
+        { Add = Option.Some addAction
+          Remove = Option.None
+          RemoveIndex = Option.None }
+
+    let aliasReq =
+        indicesUpdateAliasesRequest {
+            actions [| aliasAction |]
         }
 
-    let aliasCommandResult : Result<ElasticsearchGenericResponse, exn> =
-        executeElasticsearchCall aliasCmd |> Async.RunSynchronously
+    let aliasResult : Result<AcknowledgedResponseBase, exn> =
+        (executeElasticsearchCall aliasReq).GetAwaiter().GetResult()
 
-    printResult "Alias Command: " aliasCommandResult
+    printResult "Update Aliases (generated): " aliasResult
 
-    // Index a doc with custom Id
-    let email = $"fer_mail_%i{DateTime.UtcNow.Ticks}@myemailserver.com"
-    let docCustomId = { SampleDocument.Field1 = DateTime.UtcNow.ToString "O"; Field2 = email }
-        
-    let indexDocCustomId =
-        indexDocument<SampleDocument> {
-            document docCustomId
-            id (Guid.NewGuid().ToString())
-            target indexName
-            parameters (
-                indexDocumentParameters {
-                    waitForActiveShards IndexDocumentWaitForActiveShards.All
-                    refresh IndexDocumentRefresh.True
-                })
+    // =========================================================================
+    // Delete Index using auto-generated operation builder
+    // =========================================================================
+
+    let deleteReq =
+        indicesDeleteRequest {
+            index (box indexName)
         }
 
-    let indexDocCustomIdResult : Result<IndexDocumentResponse, exn> =
-        executeElasticsearchCall indexDocCustomId |> Async.RunSynchronously
+    let deleteResult : Result<IndicesDeleteResponse, exn> =
+        (executeElasticsearchCall deleteReq).GetAwaiter().GetResult()
 
-    printResult "Index Document: " indexDocCustomIdResult
-    
-    // Search a doc using field1
-    let searchRequest = Search.mkTermSearch indexName "field1" docCustomId.Field1
-    let searchResponse : Result<SearchResponse<SampleDocument>, exn> =
-        executeElasticsearchCall searchRequest |> Async.RunSynchronously
+    printResult "Delete Index (generated): " deleteResult
 
-    printSearchResult searchResponse
-    
-    // Search a doc using field2
-    let searchRequest2 = Search.mkQueryString indexName None "fer_mail*"
-    let searchResponse2 : Result<SearchResponse<SampleDocument>, exn> =
-        executeElasticsearchCall searchRequest2 |> Async.RunSynchronously
-
-    printSearchResult searchResponse2
-    
     0

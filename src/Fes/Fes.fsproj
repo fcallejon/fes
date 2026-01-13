@@ -1,42 +1,71 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <WarnOn>3390;$(WarnOn)</WarnOn>
-    <RootNamespace>Fes</RootNamespace>
-  </PropertyGroup>
-  <ItemGroup>
-    <Content Include="paket.references" />
-    <Compile Include="QueryStringBuilder.fs" />
-    <Compile Include="Prelude.fs" />
-    <Compile Include="ConversionHelpers.fs" />
-    <Compile Include="Async.fs" />
-    <Compile Include="Result.fs" />
-    <Compile Include="AsyncResult.fs" />
-    <Compile Include="Json.fs" />
-    <Compile Include="Exceptions.fs" />
-    <Compile Include="Http.fs" />
-    <Compile Include="DSL\Units.fs" />
-    <Compile Include="DSL\Fields.fs" />
-    <Compile Include="DSL\Mappings.fs" />
-    <Compile Include="DSL\Parameters.fs" />
-    <Compile Include="DSL\Query\QueryOptions.fs" />
-    <Compile Include="DSL\Query\TermQueries.fs" />
-    <Compile Include="DSL\Query\FullTextQueries.fs" />
-    <Compile Include="DSL\Query\Queries.fs" />
-    <Compile Include="DSL\Indices\Indices.fs" />
-    <Compile Include="DSL\Indices\Aliases.fs" />
-    <Compile Include="DSL\IndexApi.fs" />
-    <Compile Include="DSL\Search.fs" />
-    <Compile Include="Builders\Defaults.fs" />
-    <Compile Include="Builders\SearchCommandRequest.Builder.fs" />
-    <Compile Include="Builders\SimpleQueryString.Builder.fs" />
-    <Compile Include="Builders\QueryString.Builder.fs" />
-    <Compile Include="Builders\TermQueries.Builder.fs" />
-    <Compile Include="Builders\IndexRequest.Builder.fs" />
-    <Compile Include="Builders\UpdateIndexRequest.Builder.fs" />
-    <Compile Include="Builders\IndexDocument.Builder.fs" />
-    <Compile Include="Builders\AliasCommandRequest.Builder.fs" />
-  </ItemGroup>
-  <Import Project="..\..\.paket\Paket.Restore.targets" />
+    <PropertyGroup>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <WarnOn>3390;$(WarnOn)</WarnOn>
+        <RootNamespace>Fes</RootNamespace>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="FSharp.Core"/>
+        <PackageReference Include="FSharp.SystemTextJson"/>
+        <PackageReference Include="FSharpPlus"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Prelude.fs"/>
+        <Compile Include="Task.fs" />
+        <Compile Include="Result.fs"/>
+        <Compile Include="TaskResult.fs" />
+        <!-- Auto-generated DTO/Model types from ES OpenAPI spec -->
+        <!-- Auto-generated model files (ordered by dependencies) -->
+        <Compile Include="DSL\Models\Types.g.fs"/>
+        <!-- Exceptions before Json so converters are available -->
+        <Compile Include="Exceptions.fs"/>
+        <!-- Json.fs after models and exceptions so it can reference all converters -->
+        <Compile Include="Json.fs"/>
+        <Compile Include="Http.fs"/>
+        <!-- Auto-generated operation files (must be after Http.fs) -->
+        <Compile Include="DSL\Operations\Analytics.Operations.g.fs"/>
+        <Compile Include="DSL\Operations\Cat.Operations.g.fs"/>
+        <Compile Include="DSL\Operations\Ccr.Operations.g.fs"/>
+        <Compile Include="DSL\Operations\Cluster.Operations.g.fs"/>
+        <Compile Include="DSL\Operations\Connector.Operations.g.fs"/>
+        <Compile Include="DSL\Operations\DataStream.Operations.g.fs"/>
+        <Compile Include="DSL\Operations\Document.Operations.g.fs"/>
+        <Compile Include="DSL\Operations\Enrich.Operations.g.fs"/>
+        <Compile Include="DSL\Operations\Eql.Operations.g.fs"/>
+        <Compile Include="DSL\Operations\Esql.Operations.g.fs"/>
+        <Compile Include="DSL\Operations\Features.Operations.g.fs"/>
+        <Compile Include="DSL\Operations\Fleet.Operations.g.fs"/>
+        <Compile Include="DSL\Operations\Graph.Operations.g.fs"/>
+        <Compile Include="DSL\Operations\HealthReport.Operations.g.fs"/>
+        <Compile Include="DSL\Operations\Ilm.Operations.g.fs"/>
+        <Compile Include="DSL\Operations\Indices.Operations.g.fs"/>
+        <Compile Include="DSL\Operations\Inference.Operations.g.fs"/>
+        <Compile Include="DSL\Operations\Info.Operations.g.fs"/>
+        <Compile Include="DSL\Operations\Ingest.Operations.g.fs"/>
+        <Compile Include="DSL\Operations\License.Operations.g.fs"/>
+        <Compile Include="DSL\Operations\Logstash.Operations.g.fs"/>
+        <Compile Include="DSL\Operations\Migration.Operations.g.fs"/>
+        <Compile Include="DSL\Operations\Ml.Operations.g.fs"/>
+        <Compile Include="DSL\Operations\MlAnomaly.Operations.g.fs"/>
+        <Compile Include="DSL\Operations\MlDataFrame.Operations.g.fs"/>
+        <Compile Include="DSL\Operations\MlTrainedModel.Operations.g.fs"/>
+        <Compile Include="DSL\Operations\QueryRules.Operations.g.fs"/>
+        <Compile Include="DSL\Operations\Rollup.Operations.g.fs"/>
+        <Compile Include="DSL\Operations\Script.Operations.g.fs"/>
+        <Compile Include="DSL\Operations\Search.Operations.g.fs"/>
+        <Compile Include="DSL\Operations\SearchApplication.Operations.g.fs"/>
+        <Compile Include="DSL\Operations\SearchableSnapshots.Operations.g.fs"/>
+        <Compile Include="DSL\Operations\Security.Operations.g.fs"/>
+        <Compile Include="DSL\Operations\Slm.Operations.g.fs"/>
+        <Compile Include="DSL\Operations\Snapshot.Operations.g.fs"/>
+        <Compile Include="DSL\Operations\Sql.Operations.g.fs"/>
+        <Compile Include="DSL\Operations\Synonyms.Operations.g.fs"/>
+        <Compile Include="DSL\Operations\Tasks.Operations.g.fs"/>
+        <Compile Include="DSL\Operations\TextStructure.Operations.g.fs"/>
+        <Compile Include="DSL\Operations\Transform.Operations.g.fs"/>
+        <Compile Include="DSL\Operations\Watcher.Operations.g.fs"/>
+        <Compile Include="DSL\Operations\Xpack.Operations.g.fs"/>
+        <!-- Manual Query files removed - using generated QueryDsl types instead -->
+    </ItemGroup>
 </Project>

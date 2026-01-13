@@ -1,36 +1,13 @@
-﻿namespace Fes
+namespace Fes
 
 open System
 open System.Net
+open System.Text.Json
+open System.Text.Json.Serialization
 
 module Exceptions =
-    open FSharpPlus
-    open Fleece.SystemTextJson
-    open Fleece.SystemTextJson.Operators
-
-    type FailedShards =
-        { Shard: int
-          Index: string
-          Node: string
-          Reason: ElasticsearchCausedBy }
-        static member OfJson json =
-            match json with
-            | JObject o ->
-                monad {
-                    let! shard = o .@ "shard"
-                    let! index = o .@ "index"
-                    let! node = o .@ "node"
-                    let! reason = o .@ "reason"
-
-                    return
-                        { FailedShards.Shard = shard
-                          Index = index
-                          Node = node
-                          Reason = reason }
-                }
-            | x -> Decode.Fail.objExpected x
-
-    and ElasticsearchExceptions =
+    [<JsonConverter(typeof<ElasticsearchExceptionsConverter>)>]
+    type ElasticsearchExceptions =
         | ResourceAlreadyExistsException
         | IllegalArgumentException
         | SearchPhaseExecutionException
@@ -41,163 +18,132 @@ module Exceptions =
         | MapperParsingException
         | ParseException
         | InvalidIndexNameException
-        static member OfJson value =
-            match value with
-            | JString "resource_already_exists_exception" -> Decode.Success ResourceAlreadyExistsException
-            | JString "illegal_argument_exception" -> Decode.Success IllegalArgumentException
-            | JString "search_phase_execution_exception" -> Decode.Success SearchPhaseExecutionException
-            | JString "x_content_parse_exception" -> Decode.Success ContentParseException
-            | JString "parsing_exception" -> Decode.Success ParsingException
-            | JString "class_cast_exception" -> Decode.Success ClassCastException
-            | JString "index_not_found_exception" -> Decode.Success IndexNotFoundException
-            | JString "mapper_parsing_exception" -> Decode.Success MapperParsingException
-            | JString "parse_exception" -> Decode.Success ParseException
-            | JString "invalid_index_name_exception" -> Decode.Success InvalidIndexNameException
-            | JString x as v -> Decode.Fail.invalidValue v $"Wrong ElasticsearchException value: %s{x}"
-            | x -> Decode.Fail.strExpected x
+        | Unknown of string
 
-    and ElasticsearchCauseByType =
+    and ElasticsearchExceptionsConverter() =
+        inherit JsonConverter<ElasticsearchExceptions>()
+
+        override _.Write(writer: Utf8JsonWriter, value: ElasticsearchExceptions, _options: JsonSerializerOptions) =
+            let str =
+                match value with
+                | ResourceAlreadyExistsException -> "resource_already_exists_exception"
+                | IllegalArgumentException -> "illegal_argument_exception"
+                | SearchPhaseExecutionException -> "search_phase_execution_exception"
+                | ContentParseException -> "x_content_parse_exception"
+                | ParsingException -> "parsing_exception"
+                | ClassCastException -> "class_cast_exception"
+                | IndexNotFoundException -> "index_not_found_exception"
+                | MapperParsingException -> "mapper_parsing_exception"
+                | ParseException -> "parse_exception"
+                | InvalidIndexNameException -> "invalid_index_name_exception"
+                | Unknown s -> s
+            writer.WriteStringValue(str)
+
+        override _.Read(reader: byref<Utf8JsonReader>, _typeToConvert: Type, _options: JsonSerializerOptions) =
+            match reader.GetString() with
+            | "resource_already_exists_exception" -> ResourceAlreadyExistsException
+            | "illegal_argument_exception" -> IllegalArgumentException
+            | "search_phase_execution_exception" -> SearchPhaseExecutionException
+            | "x_content_parse_exception" -> ContentParseException
+            | "parsing_exception" -> ParsingException
+            | "class_cast_exception" -> ClassCastException
+            | "index_not_found_exception" -> IndexNotFoundException
+            | "mapper_parsing_exception" -> MapperParsingException
+            | "parse_exception" -> ParseException
+            | "invalid_index_name_exception" -> InvalidIndexNameException
+            | s -> Unknown s
+
+    [<JsonConverter(typeof<ElasticsearchCauseByTypeConverter>)>]
+    type ElasticsearchCauseByType =
         | NumberFormat
         | ContentParse
         | Parsing
         | Parse
-        static member OfJson value =
-            match value with
-            | JString "number_format_exception" -> Decode.Success NumberFormat
-            | JString "x_content_parse_exception" -> Decode.Success ContentParse
-            | JString "parsing_exception" -> Decode.Success Parsing
-            | JString "parse_exception" -> Decode.Success Parse
-            | JString x as v -> Decode.Fail.invalidValue v $"Wrong ElasticsearchCauseByType value: %s{x}"
-            | x -> Decode.Fail.strExpected x
+        | Unknown of string
 
-    and ElasticsearchRootCauseInfo =
-        { Type: ElasticsearchExceptions
-          Reason: string }
-        static member OfJson value =
-            match value with
-            | JObject o ->
-                monad {
-                    let! esType = o .@ "type"
-                    let! reason = o .@ "reason"
+    and ElasticsearchCauseByTypeConverter() =
+        inherit JsonConverter<ElasticsearchCauseByType>()
 
-                    return
-                        { ElasticsearchRootCauseInfo.Type = esType
-                          Reason = reason }
-                }
-            | x -> Decode.Fail.objExpected x
+        override _.Write(writer: Utf8JsonWriter, value: ElasticsearchCauseByType, _options: JsonSerializerOptions) =
+            let str =
+                match value with
+                | NumberFormat -> "number_format_exception"
+                | ContentParse -> "x_content_parse_exception"
+                | Parsing -> "parsing_exception"
+                | Parse -> "parse_exception"
+                | Unknown s -> s
+            writer.WriteStringValue(str)
 
-    and ElasticsearchCausedBy =
-        { Type: ElasticsearchCauseByType
-          Reason: string
-          Stack: option<string>
-          CausedBy: option<ElasticsearchCausedBy> }
-        static member OfJson value =
-            match value with
-            | JObject o ->
-                monad {
-                    let! esType = o .@ "type"
-                    let! reason = o .@ "reason"
-                    let! stack = o .@? "stack_trace"
-                    let! causedBy = o .@? "caused_by"
+        override _.Read(reader: byref<Utf8JsonReader>, _typeToConvert: Type, _options: JsonSerializerOptions) =
+            match reader.GetString() with
+            | "number_format_exception" -> NumberFormat
+            | "x_content_parse_exception" -> ContentParse
+            | "parsing_exception" -> Parsing
+            | "parse_exception" -> Parse
+            | s -> Unknown s
 
-                    return
-                        { ElasticsearchCausedBy.Type = esType
-                          Reason = reason
-                          Stack = stack
-                          CausedBy = causedBy }
-                }
-            | x -> Decode.Fail.objExpected x
+    type ElasticsearchCausedBy =
+        { [<JsonPropertyName("type")>] Type: ElasticsearchCauseByType
+          [<JsonPropertyName("reason")>] Reason: string
+          [<JsonPropertyName("stack_trace")>] Stack: string option
+          [<JsonPropertyName("caused_by")>] CausedBy: ElasticsearchCausedBy option }
 
-    and ElasticsearchException =
-        inherit Exception
-        val raw: Encoding
-        val esType: ElasticsearchExceptions
-        val status: HttpStatusCode
-        val reason: string
-        val cause: option<ElasticsearchCausedBy>
-        val stack: option<string>
-        val index: option<string>
-        val root: ElasticsearchRootCauseInfo []
-        val phase: option<string>
-        val grouped: option<bool>
-        val failedShards: option<FailedShards>
+    type ElasticsearchRootCauseInfo =
+        { [<JsonPropertyName("type")>] Type: ElasticsearchExceptions
+          [<JsonPropertyName("reason")>] Reason: string }
 
-        private new(raw',
-                    index',
-                    esType',
-                    status',
-                    reason',
-                    root': ElasticsearchRootCauseInfo [],
-                    cause',
-                    stack',
-                    phase',
-                    grouped',
-                    failedShards') =
-            { inherit Exception(reason')
-              raw = raw'
-              esType = esType'
-              status = status'
-              reason = reason'
-              root = root'
-              cause = cause'
-              stack = stack'
-              index = index'
-              phase = phase'
-              grouped = grouped'
-              failedShards = failedShards' }
+    type FailedShards =
+        { [<JsonPropertyName("shard")>] Shard: int
+          [<JsonPropertyName("index")>] Index: string
+          [<JsonPropertyName("node")>] Node: string
+          [<JsonPropertyName("reason")>] Reason: ElasticsearchCausedBy }
 
-        static member OfJson json =
-            match json with
-            | JObject o ->
-                match o .@? "error" with
-                | Ok (Some error) ->
-                    monad {
-                        let! esType = error .@ "type"
-                        let! reason = error .@ "reason"
-                        let! index = error .@? "index"
-                        let! cause = error .@? "caused_by"
-                        let! stack = error .@? "stack_trace"
+    type ElasticsearchErrorInfo =
+        { [<JsonPropertyName("type")>] Type: ElasticsearchExceptions
+          [<JsonPropertyName("reason")>] Reason: string
+          [<JsonPropertyName("index")>] Index: string option
+          [<JsonPropertyName("caused_by")>] CausedBy: ElasticsearchCausedBy option
+          [<JsonPropertyName("stack_trace")>] StackTrace: string option
+          [<JsonPropertyName("root_cause")>] RootCause: ElasticsearchRootCauseInfo[] }
 
-                        let! root =
-                            error .@ "root_cause"
-                            |> Result.bind (
-                                Array.map ElasticsearchRootCauseInfo.OfJson
-                                >> sequence
-                            )
+    type ElasticsearchErrorResponse =
+        { [<JsonPropertyName("error")>] Error: ElasticsearchErrorInfo
+          [<JsonPropertyName("status")>] Status: int
+          [<JsonPropertyName("phase")>] Phase: string option
+          [<JsonPropertyName("grouped")>] Grouped: bool option
+          [<JsonPropertyName("failed_shards")>] FailedShards: FailedShards option }
 
-                        let! phase = o .@? "phase"
-                        let! grouped = o .@? "grouped"
-                        let! failedShards = o .@? "failed_shards"
+    type ElasticsearchException(response: ElasticsearchErrorResponse, rawJson: string) =
+        inherit Exception(response.Error.Reason)
 
-                        let! status =
-                            o .@ "status"
-                            |> Result.bind JsonEnum.fromInt<HttpStatusCode>
-                            
-                        return!
-                            Decode.Success
-                            <| ElasticsearchException(
-                                json,
-                                index,
-                                esType,
-                                status,
-                                reason,
-                                root,
-                                cause,
-                                stack,
-                                phase,
-                                grouped,
-                                failedShards
-                            )
-                    }
-                | Ok None -> Decode.Fail.parseError (exn <| string json) "Invalid error response."
-                | Error e -> Error e
-            | _ -> Decode.Fail.parseError (exn <| string json) "Invalid error response."
+        member _.RawJson = rawJson
+        member _.ErrorType = response.Error.Type
+        member _.Status = enum<HttpStatusCode> response.Status
+        member _.Reason = response.Error.Reason
+        member _.Cause = response.Error.CausedBy
+        member _.StackTrace = response.Error.StackTrace
+        member _.Index = response.Error.Index
+        member _.RootCause = response.Error.RootCause
+        member _.Phase = response.Phase
+        member _.Grouped = response.Grouped
+        member _.FailedShards = response.FailedShards
 
 [<RequireQualifiedAccess>]
 module ElasticsearchException =
-    open Fleece.SystemTextJson
+    open Exceptions
 
-    let ofString s =
-        Encoding.Parse s
-        |> Exceptions.ElasticsearchException.OfJson
-        |> Result.mapError ((sprintf "Server Raw Error: %s\r\nParsing Error: %O" s) >> exn)
+    // Note: Can't use Json.deserialize here due to circular dependency (Json.fs references this file's converters)
+    // Use inline deserialization with minimal options instead
+    let private deserializeOptions =
+        let opts = JsonSerializerOptions()
+        opts.Converters.Add(ElasticsearchExceptionsConverter())
+        opts.Converters.Add(ElasticsearchCauseByTypeConverter())
+        opts.PropertyNamingPolicy <- JsonNamingPolicy.SnakeCaseLower
+        opts
+
+    let ofString (s: string) : Result<ElasticsearchException, exn> =
+        try
+            let response = JsonSerializer.Deserialize<ElasticsearchErrorResponse>(s, deserializeOptions)
+            Ok (ElasticsearchException(response, s))
+        with ex ->
+            Error (exn ($"Server Raw Error: {s}\r\nParsing Error: {ex.Message}", ex))
