@@ -11,8 +11,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-          
+      - uses: actions/checkout@v4
+
       - name: Configure sysctl limits
         if: ${{ !env.ACT }}
         run: |
@@ -20,11 +20,11 @@ jobs:
           sudo sysctl -w vm.swappiness=1
           sudo sysctl -w fs.file-max=262144
           sudo sysctl -w vm.max_map_count=262144
-          
+
       - name: Setup .NET
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 6.0.x
+          dotnet-version: 10.0.x
       - name: Restore tools
         run: dotnet tool restore
       - name: Restore dependencies
