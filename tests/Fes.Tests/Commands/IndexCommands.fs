@@ -24,15 +24,8 @@ module IndexCommands =
               Meta = Option.None
               NumericDetection = Option.None
               Properties = Option.Some (Map.ofList [
-                  "field1", box {| ``type`` = "date" |}
-                  "field2", box {| ``type`` = "keyword" |}
-                  "nestedField1", box {|
-                      ``type`` = "nested"
-                      properties = {|
-                          innerField1 = {| ``type`` = "integer" |}
-                          innerField2 = {| ``type`` = "keyword" |}
-                      |}
-                  |}
+                  "field1", MappingPropertyBuilders.date()
+                  "field2", MappingPropertyBuilders.keyword()
               ])
               Routing = Option.None
               Size = Option.None
@@ -86,9 +79,8 @@ module IndexCommands =
             "\"properties\""
             "\"field1\""
             "\"field2\""
-            "\"nestedField1\""
-            "\"inner_field1\""
-            "\"inner_field2\""
+            "\"type\":\"date\""
+            "\"type\":\"keyword\""
         ] result
 
 

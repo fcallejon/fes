@@ -500,26 +500,18 @@ let generateTypeAlias (typeName: string) (targetType: string) (description: stri
     sb.AppendLine() |> ignore
     sb.ToString()
 
-let generateDiscriminatorEnum (typeName: string) (discriminator: string * Map<string, string>) (isFirst: bool) =
-    let (_, mapping) = discriminator
-    let values =
-        mapping |> Map.toList |> List.map fst
-        |> List.filter (fun v -> not (v.StartsWith("{")) && not (String.IsNullOrWhiteSpace(v)))
-    if values.IsEmpty then None
-    else
-        // Generate both the enum type AND the main type as obj alias
-        let enumCode = generateEnumWithConverter (typeName + "Type") values isFirst
-        match enumCode with
-        | Some code ->
-            let sb = StringBuilder()
-            sb.Append(code) |> ignore
-            // Also generate the main type as obj (since oneOf types can't be fully represented)
-            sb.AppendLine($"    and {typeName} = obj") |> ignore
-            sb.AppendLine() |> ignore
-            Some (sb.ToString())
-        | None -> None
+/// Store information needed for smart constructor generation
+type DiscriminatorInfo = {
+    TypeName: string
+    PropName: string
+    Cases: (string * string * string * string) list  // discValue, caseName, refTypeName, fullName
+}
 
-let resolveAllOfProperties (schemaMap: Map<string, SchemaDefinition>) (typeRef: TypeRef) : PropertyInfo list =
+/// Mutable list to collect discriminator info during type generation
+let mutable discriminatorInfos: DiscriminatorInfo list = []
+
+/// Resolve all properties from an AllOf type, following references
+let rec resolveAllOfProperties (schemaMap: Map<string, SchemaDefinition>) (typeRef: TypeRef) : PropertyInfo list =
     let rec resolve (tr: TypeRef) =
         match tr with
         | AllOf refs -> refs |> List.collect resolve
@@ -531,6 +523,145 @@ let resolveAllOfProperties (schemaMap: Map<string, SchemaDefinition>) (typeRef: 
         | _ -> []
     resolve typeRef
 
+/// Get default value expression for a type
+let getDefaultValue (typeRef: TypeRef) (required: bool) : string =
+    if not required then "Option.None"  // Use fully qualified to avoid shadowing by DU cases named "None"
+    else
+        match typeRef with
+        | Primitive "string" -> "\"\""
+        | Primitive "number" -> "0.0"
+        | Primitive "integer" -> "0"
+        | Primitive "boolean" -> "false"
+        | Array _ -> "[||]"
+        | Dictionary _ -> "Map.empty"
+        | _ -> "Unchecked.defaultof<_>"
+
+let generateDiscriminatorUnion (typeName: string) (discriminator: string * Map<string, string>) (schemaMap: Map<string, SchemaDefinition>) (isFirst: bool) =
+    let (propName, mapping) = discriminator
+    let validCases =
+        mapping
+        |> Map.toList
+        |> List.filter (fun (k, _) -> not (k.StartsWith("{")) && not (String.IsNullOrWhiteSpace(k)))
+        |> List.map (fun (discValue, refPath) ->
+            let caseName = toPascalCase discValue
+            // Extract full name and type name from reference path like "#/components/schemas/_types.mapping.TextProperty"
+            let fullName, refTypeName =
+                if refPath.Contains("/") then
+                    let parts = refPath.Split('/')
+                    let fullName = parts.[parts.Length - 1]
+                    fullName, getTypeName fullName
+                else
+                    refPath, refPath
+            (discValue, caseName, refTypeName, fullName))
+    if validCases.IsEmpty then None
+    else
+        let sb = StringBuilder()
+        let typeKeyword = if isFirst then "type" else "and"
+
+        // Generate the converter
+        sb.AppendLine($"    {typeKeyword} {typeName}Converter() =") |> ignore
+        sb.AppendLine($"        inherit JsonConverter<{typeName}>()") |> ignore
+        sb.AppendLine() |> ignore
+
+        // Write method - serialize the inner value directly
+        sb.AppendLine($"        override _.Write(writer: Utf8JsonWriter, value: {typeName}, options: JsonSerializerOptions) =") |> ignore
+        sb.AppendLine($"            match value with") |> ignore
+        for (_, caseName, refTypeName, _) in validCases do
+            sb.AppendLine($"            | {typeName}.{caseName} v -> JsonSerializer.Serialize(writer, v, options)") |> ignore
+        sb.AppendLine() |> ignore
+
+        // Read method - parse to JsonDocument, check discriminator, then deserialize to appropriate type
+        sb.AppendLine($"        override _.Read(reader: byref<Utf8JsonReader>, _typeToConvert: Type, options: JsonSerializerOptions) =") |> ignore
+        sb.AppendLine($"            use doc = JsonDocument.ParseValue(&reader)") |> ignore
+        sb.AppendLine($"            let root = doc.RootElement") |> ignore
+        sb.AppendLine($"            let discValue =") |> ignore
+        sb.AppendLine($"                match root.TryGetProperty(\"{propName}\") with") |> ignore
+        sb.AppendLine($"                | true, prop -> prop.GetString()") |> ignore
+        sb.AppendLine($"                | false, _ -> \"\"") |> ignore
+        sb.AppendLine($"            let json = root.GetRawText()") |> ignore
+        sb.AppendLine($"            match discValue with") |> ignore
+        for (discValue, caseName, refTypeName, _) in validCases do
+            sb.AppendLine($"            | \"{discValue}\" -> {typeName}.{caseName} (JsonSerializer.Deserialize<{refTypeName}>(json, options))") |> ignore
+        sb.AppendLine($"            | s -> failwith $\"Unknown {typeName} type: {{s}}\"") |> ignore
+        sb.AppendLine() |> ignore
+
+        // Generate the DU type
+        sb.AppendLine($"    and [<JsonConverter(typeof<{typeName}Converter>)>]") |> ignore
+        sb.AppendLine($"        {typeName} =") |> ignore
+        for (_, caseName, refTypeName, _) in validCases do
+            sb.AppendLine($"        | {caseName} of {refTypeName}") |> ignore
+        sb.AppendLine() |> ignore
+
+        // Also generate the type enum for backwards compatibility
+        let enumValues = validCases |> List.map (fun (d, _, _, _) -> d)
+        match generateEnumWithConverter (typeName + "Type") enumValues false with
+        | Some enumCode -> sb.Append(enumCode) |> ignore
+        | None -> ()
+
+        // Store discriminator info for later smart constructor generation
+        discriminatorInfos <- { TypeName = typeName; PropName = propName; Cases = validCases } :: discriminatorInfos
+
+        Some (sb.ToString())
+
+/// F# reserved keywords that need backtick escaping
+let fsharpKeywords = Set.ofList [
+    "abstract"; "and"; "as"; "assert"; "base"; "begin"; "class"; "default"
+    "delegate"; "do"; "done"; "downcast"; "downto"; "elif"; "else"; "end"
+    "exception"; "extern"; "false"; "finally"; "fixed"; "for"; "fun"; "function"
+    "global"; "if"; "in"; "inherit"; "inline"; "interface"; "internal"; "lazy"
+    "let"; "match"; "member"; "module"; "mutable"; "namespace"; "new"; "not"
+    "null"; "of"; "open"; "or"; "override"; "private"; "public"; "rec"
+    "return"; "select"; "static"; "struct"; "then"; "to"; "true"; "try"
+    "type"; "upcast"; "use"; "val"; "void"; "when"; "while"; "with"; "yield"
+]
+
+/// Escape identifier if it's a reserved keyword
+let escapeKeyword (name: string) =
+    if fsharpKeywords.Contains name then $"``{name}``"
+    else name
+
+/// Generate smart constructors module for a discriminated union
+let generateSmartConstructorsModule (info: DiscriminatorInfo) (schemaMap: Map<string, SchemaDefinition>) : string =
+    let sb = StringBuilder()
+    sb.AppendLine($"    /// Smart constructors for {info.TypeName}") |> ignore
+    sb.AppendLine($"    [<RequireQualifiedAccess>]") |> ignore
+    sb.AppendLine($"    module {info.TypeName}Builders =") |> ignore
+
+    for (discValue, caseName, refTypeName, fullName) in info.Cases do
+        // Look up the schema for this type to get its properties
+        match schemaMap.TryFind fullName with
+        | Some schema ->
+            let props = resolveAllOfProperties schemaMap schema.Type
+            if props.Length > 0 then
+                let baseFuncName = caseName.Substring(0, 1).ToLower() + caseName.Substring(1)
+                let funcName = escapeKeyword baseFuncName
+                sb.AppendLine($"        /// Creates a {caseName} with default values") |> ignore
+                sb.AppendLine($"        let {funcName} () : {info.TypeName} =") |> ignore
+                sb.AppendLine($"            {info.TypeName}.{caseName} {{") |> ignore
+
+                let usedNames = HashSet<string>()
+                for prop in props do
+                    let baseName = toPascalCase prop.Name
+                    let mutable fsharpName = baseName
+                    let mutable suffix = 2
+                    while usedNames.Contains(fsharpName) do
+                        fsharpName <- $"{baseName}{suffix}"
+                        suffix <- suffix + 1
+                    usedNames.Add(fsharpName) |> ignore
+
+                    // Use the discriminator value for the "type" field
+                    let defaultVal =
+                        if prop.Name = info.PropName then
+                            // If the discriminator field is optional, wrap in Some
+                            if prop.Required then $"\"{discValue}\""
+                            else $"Some \"{discValue}\""
+                        else getDefaultValue prop.Type prop.Required
+                    sb.AppendLine($"                {fsharpName} = {defaultVal}") |> ignore
+                sb.AppendLine($"            }}") |> ignore
+        | None -> ()
+    sb.AppendLine() |> ignore
+    sb.ToString()
+
 /// Generate a single type code (without file header)
 let generateTypeCode (schema: SchemaDefinition) (allSchemas: Map<string, SchemaDefinition>) (isFirst: bool) : string option =
     let typeName = schema.TypeName
@@ -538,7 +669,7 @@ let generateTypeCode (schema: SchemaDefinition) (allSchemas: Map<string, SchemaD
     else
         let typeCode =
             match schema.Discriminator with
-            | Some disc -> generateDiscriminatorEnum typeName disc isFirst
+            | Some disc -> generateDiscriminatorUnion typeName disc allSchemas isFirst
             | None ->
                 match schema.Type with
                 | Enum values when values.Length > 0 ->
@@ -603,6 +734,9 @@ let generateModuleFile (moduleName: string) (schemas: SchemaDefinition list) (al
 
 /// Generate a single consolidated file with all types using mutual recursion (and keyword)
 let generateConsolidatedTypesFile (allSchemas: SchemaDefinition list) (schemaMap: Map<string, SchemaDefinition>) : string =
+    // Reset discriminator info collection
+    discriminatorInfos <- []
+
     // Deduplicate schemas by TypeName (some OpenAPI namespaces have same type names)
     let deduplicatedSchemas =
         allSchemas
@@ -642,6 +776,15 @@ let generateConsolidatedTypesFile (allSchemas: SchemaDefinition list) (schemaMap
             sb.Append(code) |> ignore
             isFirst <- false
         | None -> ()
+
+    // Generate smart constructor modules after all types
+    sb.AppendLine("    // ==========================================================================") |> ignore
+    sb.AppendLine("    // Smart Constructors for Discriminated Unions") |> ignore
+    sb.AppendLine("    // ==========================================================================") |> ignore
+    sb.AppendLine() |> ignore
+    for info in discriminatorInfos |> List.rev do
+        let moduleCode = generateSmartConstructorsModule info schemaMap
+        sb.Append(moduleCode) |> ignore
 
     sb.ToString()
 

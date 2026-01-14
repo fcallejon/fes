@@ -134,11 +134,11 @@ let main _ =
           FieldNames = Option.None; IndexField = Option.None; Meta = Option.None
           NumericDetection = Option.None
           Properties = Option.Some (Map.ofList [
-              "name", box {| ``type`` = "text" |}
-              "category", box {| ``type`` = "keyword" |}
-              "price", box {| ``type`` = "float" |}
-              "in_stock", box {| ``type`` = "boolean" |}
-              "description", box {| ``type`` = "text" |}
+              "name", MappingPropertyBuilders.text()
+              "category", MappingPropertyBuilders.keyword()
+              "price", MappingPropertyBuilders.float()
+              "in_stock", MappingPropertyBuilders.boolean()
+              "description", MappingPropertyBuilders.text()
           ])
           Routing = Option.None; Size = Option.None; Source = Option.None
           Runtime = Option.None; Enabled = Option.None; Subobjects = Option.None

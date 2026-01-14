@@ -7732,6 +7732,41 @@ module Types =
         Settings: EmptyObject
     }
 
+    and AggregationsMovingAverageAggregationConverter() =
+        inherit JsonConverter<AggregationsMovingAverageAggregation>()
+
+        override _.Write(writer: Utf8JsonWriter, value: AggregationsMovingAverageAggregation, options: JsonSerializerOptions) =
+            match value with
+            | AggregationsMovingAverageAggregation.Ewma v -> JsonSerializer.Serialize(writer, v, options)
+            | AggregationsMovingAverageAggregation.Holt v -> JsonSerializer.Serialize(writer, v, options)
+            | AggregationsMovingAverageAggregation.HoltWinters v -> JsonSerializer.Serialize(writer, v, options)
+            | AggregationsMovingAverageAggregation.Linear v -> JsonSerializer.Serialize(writer, v, options)
+            | AggregationsMovingAverageAggregation.Simple v -> JsonSerializer.Serialize(writer, v, options)
+
+        override _.Read(reader: byref<Utf8JsonReader>, _typeToConvert: Type, options: JsonSerializerOptions) =
+            use doc = JsonDocument.ParseValue(&reader)
+            let root = doc.RootElement
+            let discValue =
+                match root.TryGetProperty("model") with
+                | true, prop -> prop.GetString()
+                | false, _ -> ""
+            let json = root.GetRawText()
+            match discValue with
+            | "ewma" -> AggregationsMovingAverageAggregation.Ewma (JsonSerializer.Deserialize<AggregationsEwmaMovingAverageAggregation>(json, options))
+            | "holt" -> AggregationsMovingAverageAggregation.Holt (JsonSerializer.Deserialize<AggregationsHoltMovingAverageAggregation>(json, options))
+            | "holt_winters" -> AggregationsMovingAverageAggregation.HoltWinters (JsonSerializer.Deserialize<AggregationsHoltWintersMovingAverageAggregation>(json, options))
+            | "linear" -> AggregationsMovingAverageAggregation.Linear (JsonSerializer.Deserialize<AggregationsLinearMovingAverageAggregation>(json, options))
+            | "simple" -> AggregationsMovingAverageAggregation.Simple (JsonSerializer.Deserialize<AggregationsSimpleMovingAverageAggregation>(json, options))
+            | s -> failwith $"Unknown AggregationsMovingAverageAggregation type: {s}"
+
+    and [<JsonConverter(typeof<AggregationsMovingAverageAggregationConverter>)>]
+        AggregationsMovingAverageAggregation =
+        | Ewma of AggregationsEwmaMovingAverageAggregation
+        | Holt of AggregationsHoltMovingAverageAggregation
+        | HoltWinters of AggregationsHoltWintersMovingAverageAggregation
+        | Linear of AggregationsLinearMovingAverageAggregation
+        | Simple of AggregationsSimpleMovingAverageAggregation
+
     and AggregationsMovingAverageAggregationTypeConverter() =
         inherit JsonConverter<AggregationsMovingAverageAggregationType>()
 
@@ -7769,8 +7804,6 @@ module Types =
             | HoltWinters -> "holt_winters"
             | Linear -> "linear"
             | Simple -> "simple"
-
-    and AggregationsMovingAverageAggregation = obj
 
     and AggregationsMovingFunctionAggregation = {
         [<JsonPropertyName("buckets_path")>]
@@ -11832,6 +11865,173 @@ module Types =
         Version: VersionString option
     }
 
+    and AnalysisAnalyzerConverter() =
+        inherit JsonConverter<AnalysisAnalyzer>()
+
+        override _.Write(writer: Utf8JsonWriter, value: AnalysisAnalyzer, options: JsonSerializerOptions) =
+            match value with
+            | AnalysisAnalyzer.Arabic v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisAnalyzer.Armenian v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisAnalyzer.Basque v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisAnalyzer.Bengali v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisAnalyzer.Brazilian v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisAnalyzer.Bulgarian v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisAnalyzer.Catalan v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisAnalyzer.Chinese v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisAnalyzer.Cjk v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisAnalyzer.Custom v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisAnalyzer.Czech v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisAnalyzer.Danish v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisAnalyzer.Dutch v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisAnalyzer.English v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisAnalyzer.Estonian v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisAnalyzer.Fingerprint v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisAnalyzer.Finnish v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisAnalyzer.French v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisAnalyzer.Galician v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisAnalyzer.German v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisAnalyzer.Greek v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisAnalyzer.Hindi v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisAnalyzer.Hungarian v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisAnalyzer.IcuAnalyzer v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisAnalyzer.Indonesian v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisAnalyzer.Irish v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisAnalyzer.Italian v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisAnalyzer.Keyword v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisAnalyzer.Kuromoji v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisAnalyzer.Latvian v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisAnalyzer.Lithuanian v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisAnalyzer.Nori v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisAnalyzer.Norwegian v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisAnalyzer.Pattern v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisAnalyzer.Persian v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisAnalyzer.Portuguese v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisAnalyzer.Romanian v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisAnalyzer.Russian v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisAnalyzer.Serbian v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisAnalyzer.Simple v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisAnalyzer.Snowball v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisAnalyzer.Sorani v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisAnalyzer.Spanish v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisAnalyzer.Standard v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisAnalyzer.Stop v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisAnalyzer.Swedish v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisAnalyzer.Thai v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisAnalyzer.Turkish v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisAnalyzer.Whitespace v -> JsonSerializer.Serialize(writer, v, options)
+
+        override _.Read(reader: byref<Utf8JsonReader>, _typeToConvert: Type, options: JsonSerializerOptions) =
+            use doc = JsonDocument.ParseValue(&reader)
+            let root = doc.RootElement
+            let discValue =
+                match root.TryGetProperty("type") with
+                | true, prop -> prop.GetString()
+                | false, _ -> ""
+            let json = root.GetRawText()
+            match discValue with
+            | "arabic" -> AnalysisAnalyzer.Arabic (JsonSerializer.Deserialize<AnalysisArabicAnalyzer>(json, options))
+            | "armenian" -> AnalysisAnalyzer.Armenian (JsonSerializer.Deserialize<AnalysisArmenianAnalyzer>(json, options))
+            | "basque" -> AnalysisAnalyzer.Basque (JsonSerializer.Deserialize<AnalysisBasqueAnalyzer>(json, options))
+            | "bengali" -> AnalysisAnalyzer.Bengali (JsonSerializer.Deserialize<AnalysisBengaliAnalyzer>(json, options))
+            | "brazilian" -> AnalysisAnalyzer.Brazilian (JsonSerializer.Deserialize<AnalysisBrazilianAnalyzer>(json, options))
+            | "bulgarian" -> AnalysisAnalyzer.Bulgarian (JsonSerializer.Deserialize<AnalysisBulgarianAnalyzer>(json, options))
+            | "catalan" -> AnalysisAnalyzer.Catalan (JsonSerializer.Deserialize<AnalysisCatalanAnalyzer>(json, options))
+            | "chinese" -> AnalysisAnalyzer.Chinese (JsonSerializer.Deserialize<AnalysisChineseAnalyzer>(json, options))
+            | "cjk" -> AnalysisAnalyzer.Cjk (JsonSerializer.Deserialize<AnalysisCjkAnalyzer>(json, options))
+            | "custom" -> AnalysisAnalyzer.Custom (JsonSerializer.Deserialize<AnalysisCustomAnalyzer>(json, options))
+            | "czech" -> AnalysisAnalyzer.Czech (JsonSerializer.Deserialize<AnalysisCzechAnalyzer>(json, options))
+            | "danish" -> AnalysisAnalyzer.Danish (JsonSerializer.Deserialize<AnalysisDanishAnalyzer>(json, options))
+            | "dutch" -> AnalysisAnalyzer.Dutch (JsonSerializer.Deserialize<AnalysisDutchAnalyzer>(json, options))
+            | "english" -> AnalysisAnalyzer.English (JsonSerializer.Deserialize<AnalysisEnglishAnalyzer>(json, options))
+            | "estonian" -> AnalysisAnalyzer.Estonian (JsonSerializer.Deserialize<AnalysisEstonianAnalyzer>(json, options))
+            | "fingerprint" -> AnalysisAnalyzer.Fingerprint (JsonSerializer.Deserialize<AnalysisFingerprintAnalyzer>(json, options))
+            | "finnish" -> AnalysisAnalyzer.Finnish (JsonSerializer.Deserialize<AnalysisFinnishAnalyzer>(json, options))
+            | "french" -> AnalysisAnalyzer.French (JsonSerializer.Deserialize<AnalysisFrenchAnalyzer>(json, options))
+            | "galician" -> AnalysisAnalyzer.Galician (JsonSerializer.Deserialize<AnalysisGalicianAnalyzer>(json, options))
+            | "german" -> AnalysisAnalyzer.German (JsonSerializer.Deserialize<AnalysisGermanAnalyzer>(json, options))
+            | "greek" -> AnalysisAnalyzer.Greek (JsonSerializer.Deserialize<AnalysisGreekAnalyzer>(json, options))
+            | "hindi" -> AnalysisAnalyzer.Hindi (JsonSerializer.Deserialize<AnalysisHindiAnalyzer>(json, options))
+            | "hungarian" -> AnalysisAnalyzer.Hungarian (JsonSerializer.Deserialize<AnalysisHungarianAnalyzer>(json, options))
+            | "icu_analyzer" -> AnalysisAnalyzer.IcuAnalyzer (JsonSerializer.Deserialize<AnalysisIcuAnalyzer>(json, options))
+            | "indonesian" -> AnalysisAnalyzer.Indonesian (JsonSerializer.Deserialize<AnalysisIndonesianAnalyzer>(json, options))
+            | "irish" -> AnalysisAnalyzer.Irish (JsonSerializer.Deserialize<AnalysisIrishAnalyzer>(json, options))
+            | "italian" -> AnalysisAnalyzer.Italian (JsonSerializer.Deserialize<AnalysisItalianAnalyzer>(json, options))
+            | "keyword" -> AnalysisAnalyzer.Keyword (JsonSerializer.Deserialize<AnalysisKeywordAnalyzer>(json, options))
+            | "kuromoji" -> AnalysisAnalyzer.Kuromoji (JsonSerializer.Deserialize<AnalysisKuromojiAnalyzer>(json, options))
+            | "latvian" -> AnalysisAnalyzer.Latvian (JsonSerializer.Deserialize<AnalysisLatvianAnalyzer>(json, options))
+            | "lithuanian" -> AnalysisAnalyzer.Lithuanian (JsonSerializer.Deserialize<AnalysisLithuanianAnalyzer>(json, options))
+            | "nori" -> AnalysisAnalyzer.Nori (JsonSerializer.Deserialize<AnalysisNoriAnalyzer>(json, options))
+            | "norwegian" -> AnalysisAnalyzer.Norwegian (JsonSerializer.Deserialize<AnalysisNorwegianAnalyzer>(json, options))
+            | "pattern" -> AnalysisAnalyzer.Pattern (JsonSerializer.Deserialize<AnalysisPatternAnalyzer>(json, options))
+            | "persian" -> AnalysisAnalyzer.Persian (JsonSerializer.Deserialize<AnalysisPersianAnalyzer>(json, options))
+            | "portuguese" -> AnalysisAnalyzer.Portuguese (JsonSerializer.Deserialize<AnalysisPortugueseAnalyzer>(json, options))
+            | "romanian" -> AnalysisAnalyzer.Romanian (JsonSerializer.Deserialize<AnalysisRomanianAnalyzer>(json, options))
+            | "russian" -> AnalysisAnalyzer.Russian (JsonSerializer.Deserialize<AnalysisRussianAnalyzer>(json, options))
+            | "serbian" -> AnalysisAnalyzer.Serbian (JsonSerializer.Deserialize<AnalysisSerbianAnalyzer>(json, options))
+            | "simple" -> AnalysisAnalyzer.Simple (JsonSerializer.Deserialize<AnalysisSimpleAnalyzer>(json, options))
+            | "snowball" -> AnalysisAnalyzer.Snowball (JsonSerializer.Deserialize<AnalysisSnowballAnalyzer>(json, options))
+            | "sorani" -> AnalysisAnalyzer.Sorani (JsonSerializer.Deserialize<AnalysisSoraniAnalyzer>(json, options))
+            | "spanish" -> AnalysisAnalyzer.Spanish (JsonSerializer.Deserialize<AnalysisSpanishAnalyzer>(json, options))
+            | "standard" -> AnalysisAnalyzer.Standard (JsonSerializer.Deserialize<AnalysisStandardAnalyzer>(json, options))
+            | "stop" -> AnalysisAnalyzer.Stop (JsonSerializer.Deserialize<AnalysisStopAnalyzer>(json, options))
+            | "swedish" -> AnalysisAnalyzer.Swedish (JsonSerializer.Deserialize<AnalysisSwedishAnalyzer>(json, options))
+            | "thai" -> AnalysisAnalyzer.Thai (JsonSerializer.Deserialize<AnalysisThaiAnalyzer>(json, options))
+            | "turkish" -> AnalysisAnalyzer.Turkish (JsonSerializer.Deserialize<AnalysisTurkishAnalyzer>(json, options))
+            | "whitespace" -> AnalysisAnalyzer.Whitespace (JsonSerializer.Deserialize<AnalysisWhitespaceAnalyzer>(json, options))
+            | s -> failwith $"Unknown AnalysisAnalyzer type: {s}"
+
+    and [<JsonConverter(typeof<AnalysisAnalyzerConverter>)>]
+        AnalysisAnalyzer =
+        | Arabic of AnalysisArabicAnalyzer
+        | Armenian of AnalysisArmenianAnalyzer
+        | Basque of AnalysisBasqueAnalyzer
+        | Bengali of AnalysisBengaliAnalyzer
+        | Brazilian of AnalysisBrazilianAnalyzer
+        | Bulgarian of AnalysisBulgarianAnalyzer
+        | Catalan of AnalysisCatalanAnalyzer
+        | Chinese of AnalysisChineseAnalyzer
+        | Cjk of AnalysisCjkAnalyzer
+        | Custom of AnalysisCustomAnalyzer
+        | Czech of AnalysisCzechAnalyzer
+        | Danish of AnalysisDanishAnalyzer
+        | Dutch of AnalysisDutchAnalyzer
+        | English of AnalysisEnglishAnalyzer
+        | Estonian of AnalysisEstonianAnalyzer
+        | Fingerprint of AnalysisFingerprintAnalyzer
+        | Finnish of AnalysisFinnishAnalyzer
+        | French of AnalysisFrenchAnalyzer
+        | Galician of AnalysisGalicianAnalyzer
+        | German of AnalysisGermanAnalyzer
+        | Greek of AnalysisGreekAnalyzer
+        | Hindi of AnalysisHindiAnalyzer
+        | Hungarian of AnalysisHungarianAnalyzer
+        | IcuAnalyzer of AnalysisIcuAnalyzer
+        | Indonesian of AnalysisIndonesianAnalyzer
+        | Irish of AnalysisIrishAnalyzer
+        | Italian of AnalysisItalianAnalyzer
+        | Keyword of AnalysisKeywordAnalyzer
+        | Kuromoji of AnalysisKuromojiAnalyzer
+        | Latvian of AnalysisLatvianAnalyzer
+        | Lithuanian of AnalysisLithuanianAnalyzer
+        | Nori of AnalysisNoriAnalyzer
+        | Norwegian of AnalysisNorwegianAnalyzer
+        | Pattern of AnalysisPatternAnalyzer
+        | Persian of AnalysisPersianAnalyzer
+        | Portuguese of AnalysisPortugueseAnalyzer
+        | Romanian of AnalysisRomanianAnalyzer
+        | Russian of AnalysisRussianAnalyzer
+        | Serbian of AnalysisSerbianAnalyzer
+        | Simple of AnalysisSimpleAnalyzer
+        | Snowball of AnalysisSnowballAnalyzer
+        | Sorani of AnalysisSoraniAnalyzer
+        | Spanish of AnalysisSpanishAnalyzer
+        | Standard of AnalysisStandardAnalyzer
+        | Stop of AnalysisStopAnalyzer
+        | Swedish of AnalysisSwedishAnalyzer
+        | Thai of AnalysisThaiAnalyzer
+        | Turkish of AnalysisTurkishAnalyzer
+        | Whitespace of AnalysisWhitespaceAnalyzer
+
     and AnalysisAnalyzerTypeConverter() =
         inherit JsonConverter<AnalysisAnalyzerType>()
 
@@ -12046,8 +12246,6 @@ module Types =
             | Turkish -> "turkish"
             | Whitespace -> "whitespace"
 
-    and AnalysisAnalyzer = obj
-
     and AnalysisCharFilter = obj
 
     and AnalysisCustomNormalizer = {
@@ -12063,6 +12261,32 @@ module Types =
         [<JsonPropertyName("type")>]
         Type: string
     }
+
+    and AnalysisNormalizerConverter() =
+        inherit JsonConverter<AnalysisNormalizer>()
+
+        override _.Write(writer: Utf8JsonWriter, value: AnalysisNormalizer, options: JsonSerializerOptions) =
+            match value with
+            | AnalysisNormalizer.Custom v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisNormalizer.Lowercase v -> JsonSerializer.Serialize(writer, v, options)
+
+        override _.Read(reader: byref<Utf8JsonReader>, _typeToConvert: Type, options: JsonSerializerOptions) =
+            use doc = JsonDocument.ParseValue(&reader)
+            let root = doc.RootElement
+            let discValue =
+                match root.TryGetProperty("type") with
+                | true, prop -> prop.GetString()
+                | false, _ -> ""
+            let json = root.GetRawText()
+            match discValue with
+            | "custom" -> AnalysisNormalizer.Custom (JsonSerializer.Deserialize<AnalysisCustomNormalizer>(json, options))
+            | "lowercase" -> AnalysisNormalizer.Lowercase (JsonSerializer.Deserialize<AnalysisLowercaseNormalizer>(json, options))
+            | s -> failwith $"Unknown AnalysisNormalizer type: {s}"
+
+    and [<JsonConverter(typeof<AnalysisNormalizerConverter>)>]
+        AnalysisNormalizer =
+        | Custom of AnalysisCustomNormalizer
+        | Lowercase of AnalysisLowercaseNormalizer
 
     and AnalysisNormalizerTypeConverter() =
         inherit JsonConverter<AnalysisNormalizerType>()
@@ -12089,8 +12313,6 @@ module Types =
             match this with
             | Custom -> "custom"
             | Lowercase -> "lowercase"
-
-    and AnalysisNormalizer = obj
 
     and AnalysisTokenFilter = obj
 
@@ -12171,6 +12393,41 @@ module Types =
         Replacement: string option
     }
 
+    and AnalysisCharFilterDefinitionConverter() =
+        inherit JsonConverter<AnalysisCharFilterDefinition>()
+
+        override _.Write(writer: Utf8JsonWriter, value: AnalysisCharFilterDefinition, options: JsonSerializerOptions) =
+            match value with
+            | AnalysisCharFilterDefinition.HtmlStrip v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisCharFilterDefinition.IcuNormalizer v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisCharFilterDefinition.KuromojiIterationMark v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisCharFilterDefinition.Mapping v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisCharFilterDefinition.PatternReplace v -> JsonSerializer.Serialize(writer, v, options)
+
+        override _.Read(reader: byref<Utf8JsonReader>, _typeToConvert: Type, options: JsonSerializerOptions) =
+            use doc = JsonDocument.ParseValue(&reader)
+            let root = doc.RootElement
+            let discValue =
+                match root.TryGetProperty("type") with
+                | true, prop -> prop.GetString()
+                | false, _ -> ""
+            let json = root.GetRawText()
+            match discValue with
+            | "html_strip" -> AnalysisCharFilterDefinition.HtmlStrip (JsonSerializer.Deserialize<AnalysisHtmlStripCharFilter>(json, options))
+            | "icu_normalizer" -> AnalysisCharFilterDefinition.IcuNormalizer (JsonSerializer.Deserialize<AnalysisIcuNormalizationCharFilter>(json, options))
+            | "kuromoji_iteration_mark" -> AnalysisCharFilterDefinition.KuromojiIterationMark (JsonSerializer.Deserialize<AnalysisKuromojiIterationMarkCharFilter>(json, options))
+            | "mapping" -> AnalysisCharFilterDefinition.Mapping (JsonSerializer.Deserialize<AnalysisMappingCharFilter>(json, options))
+            | "pattern_replace" -> AnalysisCharFilterDefinition.PatternReplace (JsonSerializer.Deserialize<AnalysisPatternReplaceCharFilter>(json, options))
+            | s -> failwith $"Unknown AnalysisCharFilterDefinition type: {s}"
+
+    and [<JsonConverter(typeof<AnalysisCharFilterDefinitionConverter>)>]
+        AnalysisCharFilterDefinition =
+        | HtmlStrip of AnalysisHtmlStripCharFilter
+        | IcuNormalizer of AnalysisIcuNormalizationCharFilter
+        | KuromojiIterationMark of AnalysisKuromojiIterationMarkCharFilter
+        | Mapping of AnalysisMappingCharFilter
+        | PatternReplace of AnalysisPatternReplaceCharFilter
+
     and AnalysisCharFilterDefinitionTypeConverter() =
         inherit JsonConverter<AnalysisCharFilterDefinitionType>()
 
@@ -12208,8 +12465,6 @@ module Types =
             | KuromojiIterationMark -> "kuromoji_iteration_mark"
             | Mapping -> "mapping"
             | PatternReplace -> "pattern_replace"
-
-    and AnalysisCharFilterDefinition = obj
 
     and AnalysisTokenFilterBase = {
         [<JsonPropertyName("version")>]
@@ -13617,6 +13872,248 @@ module Types =
         Type: string
     }
 
+    and AnalysisTokenFilterDefinitionConverter() =
+        inherit JsonConverter<AnalysisTokenFilterDefinition>()
+
+        override _.Write(writer: Utf8JsonWriter, value: AnalysisTokenFilterDefinition, options: JsonSerializerOptions) =
+            match value with
+            | AnalysisTokenFilterDefinition.Apostrophe v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.ArabicNormalization v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.ArabicStem v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.Asciifolding v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.BengaliNormalization v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.BrazilianStem v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.CjkBigram v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.CjkWidth v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.Classic v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.CommonGrams v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.Condition v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.CzechStem v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.DecimalDigit v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.DelimitedPayload v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.DictionaryDecompounder v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.DutchStem v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.EdgeNgram v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.Elision v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.Fingerprint v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.FlattenGraph v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.FrenchStem v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.GermanNormalization v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.GermanStem v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.HindiNormalization v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.Hunspell v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.HyphenationDecompounder v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.IcuCollation v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.IcuFolding v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.IcuNormalizer v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.IcuTransform v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.IndicNormalization v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.JaStop v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.Keep v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.KeepTypes v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.KeywordMarker v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.KeywordRepeat v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.Kstem v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.KuromojiPartOfSpeech v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.KuromojiReadingform v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.KuromojiStemmer v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.Length v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.Limit v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.Lowercase v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.MinHash v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.Multiplexer v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.Ngram v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.NoriPartOfSpeech v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.PatternCapture v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.PatternReplace v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.PersianNormalization v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.PersianStem v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.Phonetic v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.PorterStem v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.PredicateTokenFilter v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.RemoveDuplicates v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.Reverse v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.RussianStem v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.ScandinavianFolding v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.ScandinavianNormalization v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.SerbianNormalization v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.Shingle v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.Snowball v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.SoraniNormalization v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.Stemmer v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.StemmerOverride v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.Stop v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.Synonym v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.SynonymGraph v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.Trim v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.Truncate v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.Unique v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.Uppercase v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.WordDelimiter v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenFilterDefinition.WordDelimiterGraph v -> JsonSerializer.Serialize(writer, v, options)
+
+        override _.Read(reader: byref<Utf8JsonReader>, _typeToConvert: Type, options: JsonSerializerOptions) =
+            use doc = JsonDocument.ParseValue(&reader)
+            let root = doc.RootElement
+            let discValue =
+                match root.TryGetProperty("type") with
+                | true, prop -> prop.GetString()
+                | false, _ -> ""
+            let json = root.GetRawText()
+            match discValue with
+            | "apostrophe" -> AnalysisTokenFilterDefinition.Apostrophe (JsonSerializer.Deserialize<AnalysisApostropheTokenFilter>(json, options))
+            | "arabic_normalization" -> AnalysisTokenFilterDefinition.ArabicNormalization (JsonSerializer.Deserialize<AnalysisArabicNormalizationTokenFilter>(json, options))
+            | "arabic_stem" -> AnalysisTokenFilterDefinition.ArabicStem (JsonSerializer.Deserialize<AnalysisArabicStemTokenFilter>(json, options))
+            | "asciifolding" -> AnalysisTokenFilterDefinition.Asciifolding (JsonSerializer.Deserialize<AnalysisAsciiFoldingTokenFilter>(json, options))
+            | "bengali_normalization" -> AnalysisTokenFilterDefinition.BengaliNormalization (JsonSerializer.Deserialize<AnalysisBengaliNormalizationTokenFilter>(json, options))
+            | "brazilian_stem" -> AnalysisTokenFilterDefinition.BrazilianStem (JsonSerializer.Deserialize<AnalysisBrazilianStemTokenFilter>(json, options))
+            | "cjk_bigram" -> AnalysisTokenFilterDefinition.CjkBigram (JsonSerializer.Deserialize<AnalysisCjkBigramTokenFilter>(json, options))
+            | "cjk_width" -> AnalysisTokenFilterDefinition.CjkWidth (JsonSerializer.Deserialize<AnalysisCjkWidthTokenFilter>(json, options))
+            | "classic" -> AnalysisTokenFilterDefinition.Classic (JsonSerializer.Deserialize<AnalysisClassicTokenFilter>(json, options))
+            | "common_grams" -> AnalysisTokenFilterDefinition.CommonGrams (JsonSerializer.Deserialize<AnalysisCommonGramsTokenFilter>(json, options))
+            | "condition" -> AnalysisTokenFilterDefinition.Condition (JsonSerializer.Deserialize<AnalysisConditionTokenFilter>(json, options))
+            | "czech_stem" -> AnalysisTokenFilterDefinition.CzechStem (JsonSerializer.Deserialize<AnalysisCzechStemTokenFilter>(json, options))
+            | "decimal_digit" -> AnalysisTokenFilterDefinition.DecimalDigit (JsonSerializer.Deserialize<AnalysisDecimalDigitTokenFilter>(json, options))
+            | "delimited_payload" -> AnalysisTokenFilterDefinition.DelimitedPayload (JsonSerializer.Deserialize<AnalysisDelimitedPayloadTokenFilter>(json, options))
+            | "dictionary_decompounder" -> AnalysisTokenFilterDefinition.DictionaryDecompounder (JsonSerializer.Deserialize<AnalysisDictionaryDecompounderTokenFilter>(json, options))
+            | "dutch_stem" -> AnalysisTokenFilterDefinition.DutchStem (JsonSerializer.Deserialize<AnalysisDutchStemTokenFilter>(json, options))
+            | "edge_ngram" -> AnalysisTokenFilterDefinition.EdgeNgram (JsonSerializer.Deserialize<AnalysisEdgeNGramTokenFilter>(json, options))
+            | "elision" -> AnalysisTokenFilterDefinition.Elision (JsonSerializer.Deserialize<AnalysisElisionTokenFilter>(json, options))
+            | "fingerprint" -> AnalysisTokenFilterDefinition.Fingerprint (JsonSerializer.Deserialize<AnalysisFingerprintTokenFilter>(json, options))
+            | "flatten_graph" -> AnalysisTokenFilterDefinition.FlattenGraph (JsonSerializer.Deserialize<AnalysisFlattenGraphTokenFilter>(json, options))
+            | "french_stem" -> AnalysisTokenFilterDefinition.FrenchStem (JsonSerializer.Deserialize<AnalysisFrenchStemTokenFilter>(json, options))
+            | "german_normalization" -> AnalysisTokenFilterDefinition.GermanNormalization (JsonSerializer.Deserialize<AnalysisGermanNormalizationTokenFilter>(json, options))
+            | "german_stem" -> AnalysisTokenFilterDefinition.GermanStem (JsonSerializer.Deserialize<AnalysisGermanStemTokenFilter>(json, options))
+            | "hindi_normalization" -> AnalysisTokenFilterDefinition.HindiNormalization (JsonSerializer.Deserialize<AnalysisHindiNormalizationTokenFilter>(json, options))
+            | "hunspell" -> AnalysisTokenFilterDefinition.Hunspell (JsonSerializer.Deserialize<AnalysisHunspellTokenFilter>(json, options))
+            | "hyphenation_decompounder" -> AnalysisTokenFilterDefinition.HyphenationDecompounder (JsonSerializer.Deserialize<AnalysisHyphenationDecompounderTokenFilter>(json, options))
+            | "icu_collation" -> AnalysisTokenFilterDefinition.IcuCollation (JsonSerializer.Deserialize<AnalysisIcuCollationTokenFilter>(json, options))
+            | "icu_folding" -> AnalysisTokenFilterDefinition.IcuFolding (JsonSerializer.Deserialize<AnalysisIcuFoldingTokenFilter>(json, options))
+            | "icu_normalizer" -> AnalysisTokenFilterDefinition.IcuNormalizer (JsonSerializer.Deserialize<AnalysisIcuNormalizationTokenFilter>(json, options))
+            | "icu_transform" -> AnalysisTokenFilterDefinition.IcuTransform (JsonSerializer.Deserialize<AnalysisIcuTransformTokenFilter>(json, options))
+            | "indic_normalization" -> AnalysisTokenFilterDefinition.IndicNormalization (JsonSerializer.Deserialize<AnalysisIndicNormalizationTokenFilter>(json, options))
+            | "ja_stop" -> AnalysisTokenFilterDefinition.JaStop (JsonSerializer.Deserialize<AnalysisJaStopTokenFilter>(json, options))
+            | "keep" -> AnalysisTokenFilterDefinition.Keep (JsonSerializer.Deserialize<AnalysisKeepWordsTokenFilter>(json, options))
+            | "keep_types" -> AnalysisTokenFilterDefinition.KeepTypes (JsonSerializer.Deserialize<AnalysisKeepTypesTokenFilter>(json, options))
+            | "keyword_marker" -> AnalysisTokenFilterDefinition.KeywordMarker (JsonSerializer.Deserialize<AnalysisKeywordMarkerTokenFilter>(json, options))
+            | "keyword_repeat" -> AnalysisTokenFilterDefinition.KeywordRepeat (JsonSerializer.Deserialize<AnalysisKeywordRepeatTokenFilter>(json, options))
+            | "kstem" -> AnalysisTokenFilterDefinition.Kstem (JsonSerializer.Deserialize<AnalysisKStemTokenFilter>(json, options))
+            | "kuromoji_part_of_speech" -> AnalysisTokenFilterDefinition.KuromojiPartOfSpeech (JsonSerializer.Deserialize<AnalysisKuromojiPartOfSpeechTokenFilter>(json, options))
+            | "kuromoji_readingform" -> AnalysisTokenFilterDefinition.KuromojiReadingform (JsonSerializer.Deserialize<AnalysisKuromojiReadingFormTokenFilter>(json, options))
+            | "kuromoji_stemmer" -> AnalysisTokenFilterDefinition.KuromojiStemmer (JsonSerializer.Deserialize<AnalysisKuromojiStemmerTokenFilter>(json, options))
+            | "length" -> AnalysisTokenFilterDefinition.Length (JsonSerializer.Deserialize<AnalysisLengthTokenFilter>(json, options))
+            | "limit" -> AnalysisTokenFilterDefinition.Limit (JsonSerializer.Deserialize<AnalysisLimitTokenCountTokenFilter>(json, options))
+            | "lowercase" -> AnalysisTokenFilterDefinition.Lowercase (JsonSerializer.Deserialize<AnalysisLowercaseTokenFilter>(json, options))
+            | "min_hash" -> AnalysisTokenFilterDefinition.MinHash (JsonSerializer.Deserialize<AnalysisMinHashTokenFilter>(json, options))
+            | "multiplexer" -> AnalysisTokenFilterDefinition.Multiplexer (JsonSerializer.Deserialize<AnalysisMultiplexerTokenFilter>(json, options))
+            | "ngram" -> AnalysisTokenFilterDefinition.Ngram (JsonSerializer.Deserialize<AnalysisNGramTokenFilter>(json, options))
+            | "nori_part_of_speech" -> AnalysisTokenFilterDefinition.NoriPartOfSpeech (JsonSerializer.Deserialize<AnalysisNoriPartOfSpeechTokenFilter>(json, options))
+            | "pattern_capture" -> AnalysisTokenFilterDefinition.PatternCapture (JsonSerializer.Deserialize<AnalysisPatternCaptureTokenFilter>(json, options))
+            | "pattern_replace" -> AnalysisTokenFilterDefinition.PatternReplace (JsonSerializer.Deserialize<AnalysisPatternReplaceTokenFilter>(json, options))
+            | "persian_normalization" -> AnalysisTokenFilterDefinition.PersianNormalization (JsonSerializer.Deserialize<AnalysisPersianNormalizationTokenFilter>(json, options))
+            | "persian_stem" -> AnalysisTokenFilterDefinition.PersianStem (JsonSerializer.Deserialize<AnalysisPersianStemTokenFilter>(json, options))
+            | "phonetic" -> AnalysisTokenFilterDefinition.Phonetic (JsonSerializer.Deserialize<AnalysisPhoneticTokenFilter>(json, options))
+            | "porter_stem" -> AnalysisTokenFilterDefinition.PorterStem (JsonSerializer.Deserialize<AnalysisPorterStemTokenFilter>(json, options))
+            | "predicate_token_filter" -> AnalysisTokenFilterDefinition.PredicateTokenFilter (JsonSerializer.Deserialize<AnalysisPredicateTokenFilter>(json, options))
+            | "remove_duplicates" -> AnalysisTokenFilterDefinition.RemoveDuplicates (JsonSerializer.Deserialize<AnalysisRemoveDuplicatesTokenFilter>(json, options))
+            | "reverse" -> AnalysisTokenFilterDefinition.Reverse (JsonSerializer.Deserialize<AnalysisReverseTokenFilter>(json, options))
+            | "russian_stem" -> AnalysisTokenFilterDefinition.RussianStem (JsonSerializer.Deserialize<AnalysisRussianStemTokenFilter>(json, options))
+            | "scandinavian_folding" -> AnalysisTokenFilterDefinition.ScandinavianFolding (JsonSerializer.Deserialize<AnalysisScandinavianFoldingTokenFilter>(json, options))
+            | "scandinavian_normalization" -> AnalysisTokenFilterDefinition.ScandinavianNormalization (JsonSerializer.Deserialize<AnalysisScandinavianNormalizationTokenFilter>(json, options))
+            | "serbian_normalization" -> AnalysisTokenFilterDefinition.SerbianNormalization (JsonSerializer.Deserialize<AnalysisSerbianNormalizationTokenFilter>(json, options))
+            | "shingle" -> AnalysisTokenFilterDefinition.Shingle (JsonSerializer.Deserialize<AnalysisShingleTokenFilter>(json, options))
+            | "snowball" -> AnalysisTokenFilterDefinition.Snowball (JsonSerializer.Deserialize<AnalysisSnowballTokenFilter>(json, options))
+            | "sorani_normalization" -> AnalysisTokenFilterDefinition.SoraniNormalization (JsonSerializer.Deserialize<AnalysisSoraniNormalizationTokenFilter>(json, options))
+            | "stemmer" -> AnalysisTokenFilterDefinition.Stemmer (JsonSerializer.Deserialize<AnalysisStemmerTokenFilter>(json, options))
+            | "stemmer_override" -> AnalysisTokenFilterDefinition.StemmerOverride (JsonSerializer.Deserialize<AnalysisStemmerOverrideTokenFilter>(json, options))
+            | "stop" -> AnalysisTokenFilterDefinition.Stop (JsonSerializer.Deserialize<AnalysisStopTokenFilter>(json, options))
+            | "synonym" -> AnalysisTokenFilterDefinition.Synonym (JsonSerializer.Deserialize<AnalysisSynonymTokenFilter>(json, options))
+            | "synonym_graph" -> AnalysisTokenFilterDefinition.SynonymGraph (JsonSerializer.Deserialize<AnalysisSynonymGraphTokenFilter>(json, options))
+            | "trim" -> AnalysisTokenFilterDefinition.Trim (JsonSerializer.Deserialize<AnalysisTrimTokenFilter>(json, options))
+            | "truncate" -> AnalysisTokenFilterDefinition.Truncate (JsonSerializer.Deserialize<AnalysisTruncateTokenFilter>(json, options))
+            | "unique" -> AnalysisTokenFilterDefinition.Unique (JsonSerializer.Deserialize<AnalysisUniqueTokenFilter>(json, options))
+            | "uppercase" -> AnalysisTokenFilterDefinition.Uppercase (JsonSerializer.Deserialize<AnalysisUppercaseTokenFilter>(json, options))
+            | "word_delimiter" -> AnalysisTokenFilterDefinition.WordDelimiter (JsonSerializer.Deserialize<AnalysisWordDelimiterTokenFilter>(json, options))
+            | "word_delimiter_graph" -> AnalysisTokenFilterDefinition.WordDelimiterGraph (JsonSerializer.Deserialize<AnalysisWordDelimiterGraphTokenFilter>(json, options))
+            | s -> failwith $"Unknown AnalysisTokenFilterDefinition type: {s}"
+
+    and [<JsonConverter(typeof<AnalysisTokenFilterDefinitionConverter>)>]
+        AnalysisTokenFilterDefinition =
+        | Apostrophe of AnalysisApostropheTokenFilter
+        | ArabicNormalization of AnalysisArabicNormalizationTokenFilter
+        | ArabicStem of AnalysisArabicStemTokenFilter
+        | Asciifolding of AnalysisAsciiFoldingTokenFilter
+        | BengaliNormalization of AnalysisBengaliNormalizationTokenFilter
+        | BrazilianStem of AnalysisBrazilianStemTokenFilter
+        | CjkBigram of AnalysisCjkBigramTokenFilter
+        | CjkWidth of AnalysisCjkWidthTokenFilter
+        | Classic of AnalysisClassicTokenFilter
+        | CommonGrams of AnalysisCommonGramsTokenFilter
+        | Condition of AnalysisConditionTokenFilter
+        | CzechStem of AnalysisCzechStemTokenFilter
+        | DecimalDigit of AnalysisDecimalDigitTokenFilter
+        | DelimitedPayload of AnalysisDelimitedPayloadTokenFilter
+        | DictionaryDecompounder of AnalysisDictionaryDecompounderTokenFilter
+        | DutchStem of AnalysisDutchStemTokenFilter
+        | EdgeNgram of AnalysisEdgeNGramTokenFilter
+        | Elision of AnalysisElisionTokenFilter
+        | Fingerprint of AnalysisFingerprintTokenFilter
+        | FlattenGraph of AnalysisFlattenGraphTokenFilter
+        | FrenchStem of AnalysisFrenchStemTokenFilter
+        | GermanNormalization of AnalysisGermanNormalizationTokenFilter
+        | GermanStem of AnalysisGermanStemTokenFilter
+        | HindiNormalization of AnalysisHindiNormalizationTokenFilter
+        | Hunspell of AnalysisHunspellTokenFilter
+        | HyphenationDecompounder of AnalysisHyphenationDecompounderTokenFilter
+        | IcuCollation of AnalysisIcuCollationTokenFilter
+        | IcuFolding of AnalysisIcuFoldingTokenFilter
+        | IcuNormalizer of AnalysisIcuNormalizationTokenFilter
+        | IcuTransform of AnalysisIcuTransformTokenFilter
+        | IndicNormalization of AnalysisIndicNormalizationTokenFilter
+        | JaStop of AnalysisJaStopTokenFilter
+        | Keep of AnalysisKeepWordsTokenFilter
+        | KeepTypes of AnalysisKeepTypesTokenFilter
+        | KeywordMarker of AnalysisKeywordMarkerTokenFilter
+        | KeywordRepeat of AnalysisKeywordRepeatTokenFilter
+        | Kstem of AnalysisKStemTokenFilter
+        | KuromojiPartOfSpeech of AnalysisKuromojiPartOfSpeechTokenFilter
+        | KuromojiReadingform of AnalysisKuromojiReadingFormTokenFilter
+        | KuromojiStemmer of AnalysisKuromojiStemmerTokenFilter
+        | Length of AnalysisLengthTokenFilter
+        | Limit of AnalysisLimitTokenCountTokenFilter
+        | Lowercase of AnalysisLowercaseTokenFilter
+        | MinHash of AnalysisMinHashTokenFilter
+        | Multiplexer of AnalysisMultiplexerTokenFilter
+        | Ngram of AnalysisNGramTokenFilter
+        | NoriPartOfSpeech of AnalysisNoriPartOfSpeechTokenFilter
+        | PatternCapture of AnalysisPatternCaptureTokenFilter
+        | PatternReplace of AnalysisPatternReplaceTokenFilter
+        | PersianNormalization of AnalysisPersianNormalizationTokenFilter
+        | PersianStem of AnalysisPersianStemTokenFilter
+        | Phonetic of AnalysisPhoneticTokenFilter
+        | PorterStem of AnalysisPorterStemTokenFilter
+        | PredicateTokenFilter of AnalysisPredicateTokenFilter
+        | RemoveDuplicates of AnalysisRemoveDuplicatesTokenFilter
+        | Reverse of AnalysisReverseTokenFilter
+        | RussianStem of AnalysisRussianStemTokenFilter
+        | ScandinavianFolding of AnalysisScandinavianFoldingTokenFilter
+        | ScandinavianNormalization of AnalysisScandinavianNormalizationTokenFilter
+        | SerbianNormalization of AnalysisSerbianNormalizationTokenFilter
+        | Shingle of AnalysisShingleTokenFilter
+        | Snowball of AnalysisSnowballTokenFilter
+        | SoraniNormalization of AnalysisSoraniNormalizationTokenFilter
+        | Stemmer of AnalysisStemmerTokenFilter
+        | StemmerOverride of AnalysisStemmerOverrideTokenFilter
+        | Stop of AnalysisStopTokenFilter
+        | Synonym of AnalysisSynonymTokenFilter
+        | SynonymGraph of AnalysisSynonymGraphTokenFilter
+        | Trim of AnalysisTrimTokenFilter
+        | Truncate of AnalysisTruncateTokenFilter
+        | Unique of AnalysisUniqueTokenFilter
+        | Uppercase of AnalysisUppercaseTokenFilter
+        | WordDelimiter of AnalysisWordDelimiterTokenFilter
+        | WordDelimiterGraph of AnalysisWordDelimiterGraphTokenFilter
+
     and AnalysisTokenFilterDefinitionTypeConverter() =
         inherit JsonConverter<AnalysisTokenFilterDefinitionType>()
 
@@ -13931,8 +14428,6 @@ module Types =
             | WordDelimiter -> "word_delimiter"
             | WordDelimiterGraph -> "word_delimiter_graph"
 
-    and AnalysisTokenFilterDefinition = obj
-
     and AnalysisTokenizerBase = {
         [<JsonPropertyName("version")>]
         Version: VersionString option
@@ -14180,6 +14675,80 @@ module Types =
         MaxTokenLength: float option
     }
 
+    and AnalysisTokenizerDefinitionConverter() =
+        inherit JsonConverter<AnalysisTokenizerDefinition>()
+
+        override _.Write(writer: Utf8JsonWriter, value: AnalysisTokenizerDefinition, options: JsonSerializerOptions) =
+            match value with
+            | AnalysisTokenizerDefinition.CharGroup v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenizerDefinition.Classic v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenizerDefinition.EdgeNgram v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenizerDefinition.IcuTokenizer v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenizerDefinition.Keyword v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenizerDefinition.KuromojiTokenizer v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenizerDefinition.Letter v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenizerDefinition.Lowercase v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenizerDefinition.Ngram v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenizerDefinition.NoriTokenizer v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenizerDefinition.PathHierarchy v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenizerDefinition.Pattern v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenizerDefinition.SimplePattern v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenizerDefinition.SimplePatternSplit v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenizerDefinition.Standard v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenizerDefinition.Thai v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenizerDefinition.UaxUrlEmail v -> JsonSerializer.Serialize(writer, v, options)
+            | AnalysisTokenizerDefinition.Whitespace v -> JsonSerializer.Serialize(writer, v, options)
+
+        override _.Read(reader: byref<Utf8JsonReader>, _typeToConvert: Type, options: JsonSerializerOptions) =
+            use doc = JsonDocument.ParseValue(&reader)
+            let root = doc.RootElement
+            let discValue =
+                match root.TryGetProperty("type") with
+                | true, prop -> prop.GetString()
+                | false, _ -> ""
+            let json = root.GetRawText()
+            match discValue with
+            | "char_group" -> AnalysisTokenizerDefinition.CharGroup (JsonSerializer.Deserialize<AnalysisCharGroupTokenizer>(json, options))
+            | "classic" -> AnalysisTokenizerDefinition.Classic (JsonSerializer.Deserialize<AnalysisClassicTokenizer>(json, options))
+            | "edge_ngram" -> AnalysisTokenizerDefinition.EdgeNgram (JsonSerializer.Deserialize<AnalysisEdgeNGramTokenizer>(json, options))
+            | "icu_tokenizer" -> AnalysisTokenizerDefinition.IcuTokenizer (JsonSerializer.Deserialize<AnalysisIcuTokenizer>(json, options))
+            | "keyword" -> AnalysisTokenizerDefinition.Keyword (JsonSerializer.Deserialize<AnalysisKeywordTokenizer>(json, options))
+            | "kuromoji_tokenizer" -> AnalysisTokenizerDefinition.KuromojiTokenizer (JsonSerializer.Deserialize<AnalysisKuromojiTokenizer>(json, options))
+            | "letter" -> AnalysisTokenizerDefinition.Letter (JsonSerializer.Deserialize<AnalysisLetterTokenizer>(json, options))
+            | "lowercase" -> AnalysisTokenizerDefinition.Lowercase (JsonSerializer.Deserialize<AnalysisLowercaseTokenizer>(json, options))
+            | "ngram" -> AnalysisTokenizerDefinition.Ngram (JsonSerializer.Deserialize<AnalysisNGramTokenizer>(json, options))
+            | "nori_tokenizer" -> AnalysisTokenizerDefinition.NoriTokenizer (JsonSerializer.Deserialize<AnalysisNoriTokenizer>(json, options))
+            | "path_hierarchy" -> AnalysisTokenizerDefinition.PathHierarchy (JsonSerializer.Deserialize<AnalysisPathHierarchyTokenizer>(json, options))
+            | "pattern" -> AnalysisTokenizerDefinition.Pattern (JsonSerializer.Deserialize<AnalysisPatternTokenizer>(json, options))
+            | "simple_pattern" -> AnalysisTokenizerDefinition.SimplePattern (JsonSerializer.Deserialize<AnalysisSimplePatternTokenizer>(json, options))
+            | "simple_pattern_split" -> AnalysisTokenizerDefinition.SimplePatternSplit (JsonSerializer.Deserialize<AnalysisSimplePatternSplitTokenizer>(json, options))
+            | "standard" -> AnalysisTokenizerDefinition.Standard (JsonSerializer.Deserialize<AnalysisStandardTokenizer>(json, options))
+            | "thai" -> AnalysisTokenizerDefinition.Thai (JsonSerializer.Deserialize<AnalysisThaiTokenizer>(json, options))
+            | "uax_url_email" -> AnalysisTokenizerDefinition.UaxUrlEmail (JsonSerializer.Deserialize<AnalysisUaxEmailUrlTokenizer>(json, options))
+            | "whitespace" -> AnalysisTokenizerDefinition.Whitespace (JsonSerializer.Deserialize<AnalysisWhitespaceTokenizer>(json, options))
+            | s -> failwith $"Unknown AnalysisTokenizerDefinition type: {s}"
+
+    and [<JsonConverter(typeof<AnalysisTokenizerDefinitionConverter>)>]
+        AnalysisTokenizerDefinition =
+        | CharGroup of AnalysisCharGroupTokenizer
+        | Classic of AnalysisClassicTokenizer
+        | EdgeNgram of AnalysisEdgeNGramTokenizer
+        | IcuTokenizer of AnalysisIcuTokenizer
+        | Keyword of AnalysisKeywordTokenizer
+        | KuromojiTokenizer of AnalysisKuromojiTokenizer
+        | Letter of AnalysisLetterTokenizer
+        | Lowercase of AnalysisLowercaseTokenizer
+        | Ngram of AnalysisNGramTokenizer
+        | NoriTokenizer of AnalysisNoriTokenizer
+        | PathHierarchy of AnalysisPathHierarchyTokenizer
+        | Pattern of AnalysisPatternTokenizer
+        | SimplePattern of AnalysisSimplePatternTokenizer
+        | SimplePatternSplit of AnalysisSimplePatternSplitTokenizer
+        | Standard of AnalysisStandardTokenizer
+        | Thai of AnalysisThaiTokenizer
+        | UaxUrlEmail of AnalysisUaxEmailUrlTokenizer
+        | Whitespace of AnalysisWhitespaceTokenizer
+
     and AnalysisTokenizerDefinitionTypeConverter() =
         inherit JsonConverter<AnalysisTokenizerDefinitionType>()
 
@@ -14269,8 +14838,6 @@ module Types =
             | Thai -> "thai"
             | UaxUrlEmail -> "uax_url_email"
             | Whitespace -> "whitespace"
-
-    and AnalysisTokenizerDefinition = obj
 
     and TypesIndexSettingsTimeSeries = {
         [<JsonPropertyName("end_time")>]
@@ -14553,6 +15120,50 @@ module Types =
         WeightScript: Script option
     }
 
+    and TypesSettingsSimilarityConverter() =
+        inherit JsonConverter<TypesSettingsSimilarity>()
+
+        override _.Write(writer: Utf8JsonWriter, value: TypesSettingsSimilarity, options: JsonSerializerOptions) =
+            match value with
+            | TypesSettingsSimilarity.BM25 v -> JsonSerializer.Serialize(writer, v, options)
+            | TypesSettingsSimilarity.DFI v -> JsonSerializer.Serialize(writer, v, options)
+            | TypesSettingsSimilarity.DFR v -> JsonSerializer.Serialize(writer, v, options)
+            | TypesSettingsSimilarity.IB v -> JsonSerializer.Serialize(writer, v, options)
+            | TypesSettingsSimilarity.LMDirichlet v -> JsonSerializer.Serialize(writer, v, options)
+            | TypesSettingsSimilarity.LMJelinekMercer v -> JsonSerializer.Serialize(writer, v, options)
+            | TypesSettingsSimilarity.Boolean v -> JsonSerializer.Serialize(writer, v, options)
+            | TypesSettingsSimilarity.Scripted v -> JsonSerializer.Serialize(writer, v, options)
+
+        override _.Read(reader: byref<Utf8JsonReader>, _typeToConvert: Type, options: JsonSerializerOptions) =
+            use doc = JsonDocument.ParseValue(&reader)
+            let root = doc.RootElement
+            let discValue =
+                match root.TryGetProperty("type") with
+                | true, prop -> prop.GetString()
+                | false, _ -> ""
+            let json = root.GetRawText()
+            match discValue with
+            | "BM25" -> TypesSettingsSimilarity.BM25 (JsonSerializer.Deserialize<TypesSettingsSimilarityBm25>(json, options))
+            | "DFI" -> TypesSettingsSimilarity.DFI (JsonSerializer.Deserialize<TypesSettingsSimilarityDfi>(json, options))
+            | "DFR" -> TypesSettingsSimilarity.DFR (JsonSerializer.Deserialize<TypesSettingsSimilarityDfr>(json, options))
+            | "IB" -> TypesSettingsSimilarity.IB (JsonSerializer.Deserialize<TypesSettingsSimilarityIb>(json, options))
+            | "LMDirichlet" -> TypesSettingsSimilarity.LMDirichlet (JsonSerializer.Deserialize<TypesSettingsSimilarityLmd>(json, options))
+            | "LMJelinekMercer" -> TypesSettingsSimilarity.LMJelinekMercer (JsonSerializer.Deserialize<TypesSettingsSimilarityLmj>(json, options))
+            | "boolean" -> TypesSettingsSimilarity.Boolean (JsonSerializer.Deserialize<TypesSettingsSimilarityBoolean>(json, options))
+            | "scripted" -> TypesSettingsSimilarity.Scripted (JsonSerializer.Deserialize<TypesSettingsSimilarityScripted>(json, options))
+            | s -> failwith $"Unknown TypesSettingsSimilarity type: {s}"
+
+    and [<JsonConverter(typeof<TypesSettingsSimilarityConverter>)>]
+        TypesSettingsSimilarity =
+        | BM25 of TypesSettingsSimilarityBm25
+        | DFI of TypesSettingsSimilarityDfi
+        | DFR of TypesSettingsSimilarityDfr
+        | IB of TypesSettingsSimilarityIb
+        | LMDirichlet of TypesSettingsSimilarityLmd
+        | LMJelinekMercer of TypesSettingsSimilarityLmj
+        | Boolean of TypesSettingsSimilarityBoolean
+        | Scripted of TypesSettingsSimilarityScripted
+
     and TypesSettingsSimilarityTypeConverter() =
         inherit JsonConverter<TypesSettingsSimilarityType>()
 
@@ -14602,8 +15213,6 @@ module Types =
             | LMJelinekMercer -> "LMJelinekMercer"
             | Boolean -> "boolean"
             | Scripted -> "scripted"
-
-    and TypesSettingsSimilarity = obj
 
     and TypesMappingLimitSettingsDepth = {
         [<JsonPropertyName("limit")>]
@@ -17763,6 +18372,182 @@ module Types =
         NullValue: string option
     }
 
+    and MappingPropertyConverter() =
+        inherit JsonConverter<MappingProperty>()
+
+        override _.Write(writer: Utf8JsonWriter, value: MappingProperty, options: JsonSerializerOptions) =
+            match value with
+            | MappingProperty.AggregateMetricDouble v -> JsonSerializer.Serialize(writer, v, options)
+            | MappingProperty.Alias v -> JsonSerializer.Serialize(writer, v, options)
+            | MappingProperty.Binary v -> JsonSerializer.Serialize(writer, v, options)
+            | MappingProperty.Boolean v -> JsonSerializer.Serialize(writer, v, options)
+            | MappingProperty.Byte v -> JsonSerializer.Serialize(writer, v, options)
+            | MappingProperty.Completion v -> JsonSerializer.Serialize(writer, v, options)
+            | MappingProperty.ConstantKeyword v -> JsonSerializer.Serialize(writer, v, options)
+            | MappingProperty.CountedKeyword v -> JsonSerializer.Serialize(writer, v, options)
+            | MappingProperty.Date v -> JsonSerializer.Serialize(writer, v, options)
+            | MappingProperty.DateNanos v -> JsonSerializer.Serialize(writer, v, options)
+            | MappingProperty.DateRange v -> JsonSerializer.Serialize(writer, v, options)
+            | MappingProperty.DenseVector v -> JsonSerializer.Serialize(writer, v, options)
+            | MappingProperty.Double v -> JsonSerializer.Serialize(writer, v, options)
+            | MappingProperty.DoubleRange v -> JsonSerializer.Serialize(writer, v, options)
+            | MappingProperty.ExponentialHistogram v -> JsonSerializer.Serialize(writer, v, options)
+            | MappingProperty.Flattened v -> JsonSerializer.Serialize(writer, v, options)
+            | MappingProperty.Float v -> JsonSerializer.Serialize(writer, v, options)
+            | MappingProperty.FloatRange v -> JsonSerializer.Serialize(writer, v, options)
+            | MappingProperty.GeoPoint v -> JsonSerializer.Serialize(writer, v, options)
+            | MappingProperty.GeoShape v -> JsonSerializer.Serialize(writer, v, options)
+            | MappingProperty.HalfFloat v -> JsonSerializer.Serialize(writer, v, options)
+            | MappingProperty.Histogram v -> JsonSerializer.Serialize(writer, v, options)
+            | MappingProperty.IcuCollationKeyword v -> JsonSerializer.Serialize(writer, v, options)
+            | MappingProperty.Integer v -> JsonSerializer.Serialize(writer, v, options)
+            | MappingProperty.IntegerRange v -> JsonSerializer.Serialize(writer, v, options)
+            | MappingProperty.Ip v -> JsonSerializer.Serialize(writer, v, options)
+            | MappingProperty.IpRange v -> JsonSerializer.Serialize(writer, v, options)
+            | MappingProperty.Join v -> JsonSerializer.Serialize(writer, v, options)
+            | MappingProperty.Keyword v -> JsonSerializer.Serialize(writer, v, options)
+            | MappingProperty.Long v -> JsonSerializer.Serialize(writer, v, options)
+            | MappingProperty.LongRange v -> JsonSerializer.Serialize(writer, v, options)
+            | MappingProperty.MatchOnlyText v -> JsonSerializer.Serialize(writer, v, options)
+            | MappingProperty.Murmur3 v -> JsonSerializer.Serialize(writer, v, options)
+            | MappingProperty.Nested v -> JsonSerializer.Serialize(writer, v, options)
+            | MappingProperty.Object v -> JsonSerializer.Serialize(writer, v, options)
+            | MappingProperty.Passthrough v -> JsonSerializer.Serialize(writer, v, options)
+            | MappingProperty.Percolator v -> JsonSerializer.Serialize(writer, v, options)
+            | MappingProperty.Point v -> JsonSerializer.Serialize(writer, v, options)
+            | MappingProperty.RankFeature v -> JsonSerializer.Serialize(writer, v, options)
+            | MappingProperty.RankFeatures v -> JsonSerializer.Serialize(writer, v, options)
+            | MappingProperty.RankVectors v -> JsonSerializer.Serialize(writer, v, options)
+            | MappingProperty.ScaledFloat v -> JsonSerializer.Serialize(writer, v, options)
+            | MappingProperty.SearchAsYouType v -> JsonSerializer.Serialize(writer, v, options)
+            | MappingProperty.SemanticText v -> JsonSerializer.Serialize(writer, v, options)
+            | MappingProperty.Shape v -> JsonSerializer.Serialize(writer, v, options)
+            | MappingProperty.Short v -> JsonSerializer.Serialize(writer, v, options)
+            | MappingProperty.SparseVector v -> JsonSerializer.Serialize(writer, v, options)
+            | MappingProperty.Text v -> JsonSerializer.Serialize(writer, v, options)
+            | MappingProperty.TokenCount v -> JsonSerializer.Serialize(writer, v, options)
+            | MappingProperty.UnsignedLong v -> JsonSerializer.Serialize(writer, v, options)
+            | MappingProperty.Version v -> JsonSerializer.Serialize(writer, v, options)
+            | MappingProperty.Wildcard v -> JsonSerializer.Serialize(writer, v, options)
+
+        override _.Read(reader: byref<Utf8JsonReader>, _typeToConvert: Type, options: JsonSerializerOptions) =
+            use doc = JsonDocument.ParseValue(&reader)
+            let root = doc.RootElement
+            let discValue =
+                match root.TryGetProperty("type") with
+                | true, prop -> prop.GetString()
+                | false, _ -> ""
+            let json = root.GetRawText()
+            match discValue with
+            | "aggregate_metric_double" -> MappingProperty.AggregateMetricDouble (JsonSerializer.Deserialize<MappingAggregateMetricDoubleProperty>(json, options))
+            | "alias" -> MappingProperty.Alias (JsonSerializer.Deserialize<MappingFieldAliasProperty>(json, options))
+            | "binary" -> MappingProperty.Binary (JsonSerializer.Deserialize<MappingBinaryProperty>(json, options))
+            | "boolean" -> MappingProperty.Boolean (JsonSerializer.Deserialize<MappingBooleanProperty>(json, options))
+            | "byte" -> MappingProperty.Byte (JsonSerializer.Deserialize<MappingByteNumberProperty>(json, options))
+            | "completion" -> MappingProperty.Completion (JsonSerializer.Deserialize<MappingCompletionProperty>(json, options))
+            | "constant_keyword" -> MappingProperty.ConstantKeyword (JsonSerializer.Deserialize<MappingConstantKeywordProperty>(json, options))
+            | "counted_keyword" -> MappingProperty.CountedKeyword (JsonSerializer.Deserialize<MappingCountedKeywordProperty>(json, options))
+            | "date" -> MappingProperty.Date (JsonSerializer.Deserialize<MappingDateProperty>(json, options))
+            | "date_nanos" -> MappingProperty.DateNanos (JsonSerializer.Deserialize<MappingDateNanosProperty>(json, options))
+            | "date_range" -> MappingProperty.DateRange (JsonSerializer.Deserialize<MappingDateRangeProperty>(json, options))
+            | "dense_vector" -> MappingProperty.DenseVector (JsonSerializer.Deserialize<MappingDenseVectorProperty>(json, options))
+            | "double" -> MappingProperty.Double (JsonSerializer.Deserialize<MappingDoubleNumberProperty>(json, options))
+            | "double_range" -> MappingProperty.DoubleRange (JsonSerializer.Deserialize<MappingDoubleRangeProperty>(json, options))
+            | "exponential_histogram" -> MappingProperty.ExponentialHistogram (JsonSerializer.Deserialize<MappingExponentialHistogramProperty>(json, options))
+            | "flattened" -> MappingProperty.Flattened (JsonSerializer.Deserialize<MappingFlattenedProperty>(json, options))
+            | "float" -> MappingProperty.Float (JsonSerializer.Deserialize<MappingFloatNumberProperty>(json, options))
+            | "float_range" -> MappingProperty.FloatRange (JsonSerializer.Deserialize<MappingFloatRangeProperty>(json, options))
+            | "geo_point" -> MappingProperty.GeoPoint (JsonSerializer.Deserialize<MappingGeoPointProperty>(json, options))
+            | "geo_shape" -> MappingProperty.GeoShape (JsonSerializer.Deserialize<MappingGeoShapeProperty>(json, options))
+            | "half_float" -> MappingProperty.HalfFloat (JsonSerializer.Deserialize<MappingHalfFloatNumberProperty>(json, options))
+            | "histogram" -> MappingProperty.Histogram (JsonSerializer.Deserialize<MappingHistogramProperty>(json, options))
+            | "icu_collation_keyword" -> MappingProperty.IcuCollationKeyword (JsonSerializer.Deserialize<MappingIcuCollationProperty>(json, options))
+            | "integer" -> MappingProperty.Integer (JsonSerializer.Deserialize<MappingIntegerNumberProperty>(json, options))
+            | "integer_range" -> MappingProperty.IntegerRange (JsonSerializer.Deserialize<MappingIntegerRangeProperty>(json, options))
+            | "ip" -> MappingProperty.Ip (JsonSerializer.Deserialize<MappingIpProperty>(json, options))
+            | "ip_range" -> MappingProperty.IpRange (JsonSerializer.Deserialize<MappingIpRangeProperty>(json, options))
+            | "join" -> MappingProperty.Join (JsonSerializer.Deserialize<MappingJoinProperty>(json, options))
+            | "keyword" -> MappingProperty.Keyword (JsonSerializer.Deserialize<MappingKeywordProperty>(json, options))
+            | "long" -> MappingProperty.Long (JsonSerializer.Deserialize<MappingLongNumberProperty>(json, options))
+            | "long_range" -> MappingProperty.LongRange (JsonSerializer.Deserialize<MappingLongRangeProperty>(json, options))
+            | "match_only_text" -> MappingProperty.MatchOnlyText (JsonSerializer.Deserialize<MappingMatchOnlyTextProperty>(json, options))
+            | "murmur3" -> MappingProperty.Murmur3 (JsonSerializer.Deserialize<MappingMurmur3HashProperty>(json, options))
+            | "nested" -> MappingProperty.Nested (JsonSerializer.Deserialize<MappingNestedProperty>(json, options))
+            | "object" -> MappingProperty.Object (JsonSerializer.Deserialize<MappingObjectProperty>(json, options))
+            | "passthrough" -> MappingProperty.Passthrough (JsonSerializer.Deserialize<MappingPassthroughObjectProperty>(json, options))
+            | "percolator" -> MappingProperty.Percolator (JsonSerializer.Deserialize<MappingPercolatorProperty>(json, options))
+            | "point" -> MappingProperty.Point (JsonSerializer.Deserialize<MappingPointProperty>(json, options))
+            | "rank_feature" -> MappingProperty.RankFeature (JsonSerializer.Deserialize<MappingRankFeatureProperty>(json, options))
+            | "rank_features" -> MappingProperty.RankFeatures (JsonSerializer.Deserialize<MappingRankFeaturesProperty>(json, options))
+            | "rank_vectors" -> MappingProperty.RankVectors (JsonSerializer.Deserialize<MappingRankVectorProperty>(json, options))
+            | "scaled_float" -> MappingProperty.ScaledFloat (JsonSerializer.Deserialize<MappingScaledFloatNumberProperty>(json, options))
+            | "search_as_you_type" -> MappingProperty.SearchAsYouType (JsonSerializer.Deserialize<MappingSearchAsYouTypeProperty>(json, options))
+            | "semantic_text" -> MappingProperty.SemanticText (JsonSerializer.Deserialize<MappingSemanticTextProperty>(json, options))
+            | "shape" -> MappingProperty.Shape (JsonSerializer.Deserialize<MappingShapeProperty>(json, options))
+            | "short" -> MappingProperty.Short (JsonSerializer.Deserialize<MappingShortNumberProperty>(json, options))
+            | "sparse_vector" -> MappingProperty.SparseVector (JsonSerializer.Deserialize<MappingSparseVectorProperty>(json, options))
+            | "text" -> MappingProperty.Text (JsonSerializer.Deserialize<MappingTextProperty>(json, options))
+            | "token_count" -> MappingProperty.TokenCount (JsonSerializer.Deserialize<MappingTokenCountProperty>(json, options))
+            | "unsigned_long" -> MappingProperty.UnsignedLong (JsonSerializer.Deserialize<MappingUnsignedLongNumberProperty>(json, options))
+            | "version" -> MappingProperty.Version (JsonSerializer.Deserialize<MappingVersionProperty>(json, options))
+            | "wildcard" -> MappingProperty.Wildcard (JsonSerializer.Deserialize<MappingWildcardProperty>(json, options))
+            | s -> failwith $"Unknown MappingProperty type: {s}"
+
+    and [<JsonConverter(typeof<MappingPropertyConverter>)>]
+        MappingProperty =
+        | AggregateMetricDouble of MappingAggregateMetricDoubleProperty
+        | Alias of MappingFieldAliasProperty
+        | Binary of MappingBinaryProperty
+        | Boolean of MappingBooleanProperty
+        | Byte of MappingByteNumberProperty
+        | Completion of MappingCompletionProperty
+        | ConstantKeyword of MappingConstantKeywordProperty
+        | CountedKeyword of MappingCountedKeywordProperty
+        | Date of MappingDateProperty
+        | DateNanos of MappingDateNanosProperty
+        | DateRange of MappingDateRangeProperty
+        | DenseVector of MappingDenseVectorProperty
+        | Double of MappingDoubleNumberProperty
+        | DoubleRange of MappingDoubleRangeProperty
+        | ExponentialHistogram of MappingExponentialHistogramProperty
+        | Flattened of MappingFlattenedProperty
+        | Float of MappingFloatNumberProperty
+        | FloatRange of MappingFloatRangeProperty
+        | GeoPoint of MappingGeoPointProperty
+        | GeoShape of MappingGeoShapeProperty
+        | HalfFloat of MappingHalfFloatNumberProperty
+        | Histogram of MappingHistogramProperty
+        | IcuCollationKeyword of MappingIcuCollationProperty
+        | Integer of MappingIntegerNumberProperty
+        | IntegerRange of MappingIntegerRangeProperty
+        | Ip of MappingIpProperty
+        | IpRange of MappingIpRangeProperty
+        | Join of MappingJoinProperty
+        | Keyword of MappingKeywordProperty
+        | Long of MappingLongNumberProperty
+        | LongRange of MappingLongRangeProperty
+        | MatchOnlyText of MappingMatchOnlyTextProperty
+        | Murmur3 of MappingMurmur3HashProperty
+        | Nested of MappingNestedProperty
+        | Object of MappingObjectProperty
+        | Passthrough of MappingPassthroughObjectProperty
+        | Percolator of MappingPercolatorProperty
+        | Point of MappingPointProperty
+        | RankFeature of MappingRankFeatureProperty
+        | RankFeatures of MappingRankFeaturesProperty
+        | RankVectors of MappingRankVectorProperty
+        | ScaledFloat of MappingScaledFloatNumberProperty
+        | SearchAsYouType of MappingSearchAsYouTypeProperty
+        | SemanticText of MappingSemanticTextProperty
+        | Shape of MappingShapeProperty
+        | Short of MappingShortNumberProperty
+        | SparseVector of MappingSparseVectorProperty
+        | Text of MappingTextProperty
+        | TokenCount of MappingTokenCountProperty
+        | UnsignedLong of MappingUnsignedLongNumberProperty
+        | Version of MappingVersionProperty
+        | Wildcard of MappingWildcardProperty
+
     and MappingPropertyTypeConverter() =
         inherit JsonConverter<MappingPropertyType>()
 
@@ -17988,8 +18773,6 @@ module Types =
             | UnsignedLong -> "unsigned_long"
             | Version -> "version"
             | Wildcard -> "wildcard"
-
-    and MappingProperty = obj
 
     and MappingDynamicTemplate = {
         [<JsonPropertyName("match")>]
@@ -18765,6 +19548,32 @@ module Types =
         Seeds: string array
     }
 
+    and RemoteInfoClusterRemoteInfoConverter() =
+        inherit JsonConverter<RemoteInfoClusterRemoteInfo>()
+
+        override _.Write(writer: Utf8JsonWriter, value: RemoteInfoClusterRemoteInfo, options: JsonSerializerOptions) =
+            match value with
+            | RemoteInfoClusterRemoteInfo.Proxy v -> JsonSerializer.Serialize(writer, v, options)
+            | RemoteInfoClusterRemoteInfo.Sniff v -> JsonSerializer.Serialize(writer, v, options)
+
+        override _.Read(reader: byref<Utf8JsonReader>, _typeToConvert: Type, options: JsonSerializerOptions) =
+            use doc = JsonDocument.ParseValue(&reader)
+            let root = doc.RootElement
+            let discValue =
+                match root.TryGetProperty("mode") with
+                | true, prop -> prop.GetString()
+                | false, _ -> ""
+            let json = root.GetRawText()
+            match discValue with
+            | "proxy" -> RemoteInfoClusterRemoteInfo.Proxy (JsonSerializer.Deserialize<RemoteInfoClusterRemoteProxyInfo>(json, options))
+            | "sniff" -> RemoteInfoClusterRemoteInfo.Sniff (JsonSerializer.Deserialize<RemoteInfoClusterRemoteSniffInfo>(json, options))
+            | s -> failwith $"Unknown RemoteInfoClusterRemoteInfo type: {s}"
+
+    and [<JsonConverter(typeof<RemoteInfoClusterRemoteInfoConverter>)>]
+        RemoteInfoClusterRemoteInfo =
+        | Proxy of RemoteInfoClusterRemoteProxyInfo
+        | Sniff of RemoteInfoClusterRemoteSniffInfo
+
     and RemoteInfoClusterRemoteInfoTypeConverter() =
         inherit JsonConverter<RemoteInfoClusterRemoteInfoType>()
 
@@ -18790,8 +19599,6 @@ module Types =
             match this with
             | Proxy -> "proxy"
             | Sniff -> "sniff"
-
-    and RemoteInfoClusterRemoteInfo = obj
 
     and RerouteCommandAllocatePrimaryAction = {
         [<JsonPropertyName("index")>]
@@ -20019,6 +20826,41 @@ module Types =
         Constraint: string
     }
 
+    and TypesValidationConverter() =
+        inherit JsonConverter<TypesValidation>()
+
+        override _.Write(writer: Utf8JsonWriter, value: TypesValidation, options: JsonSerializerOptions) =
+            match value with
+            | TypesValidation.GreaterThan v -> JsonSerializer.Serialize(writer, v, options)
+            | TypesValidation.IncludedIn v -> JsonSerializer.Serialize(writer, v, options)
+            | TypesValidation.LessThan v -> JsonSerializer.Serialize(writer, v, options)
+            | TypesValidation.ListType v -> JsonSerializer.Serialize(writer, v, options)
+            | TypesValidation.Regex v -> JsonSerializer.Serialize(writer, v, options)
+
+        override _.Read(reader: byref<Utf8JsonReader>, _typeToConvert: Type, options: JsonSerializerOptions) =
+            use doc = JsonDocument.ParseValue(&reader)
+            let root = doc.RootElement
+            let discValue =
+                match root.TryGetProperty("type") with
+                | true, prop -> prop.GetString()
+                | false, _ -> ""
+            let json = root.GetRawText()
+            match discValue with
+            | "greater_than" -> TypesValidation.GreaterThan (JsonSerializer.Deserialize<TypesGreaterThanValidation>(json, options))
+            | "included_in" -> TypesValidation.IncludedIn (JsonSerializer.Deserialize<TypesIncludedInValidation>(json, options))
+            | "less_than" -> TypesValidation.LessThan (JsonSerializer.Deserialize<TypesLessThanValidation>(json, options))
+            | "list_type" -> TypesValidation.ListType (JsonSerializer.Deserialize<TypesListTypeValidation>(json, options))
+            | "regex" -> TypesValidation.Regex (JsonSerializer.Deserialize<TypesRegexValidation>(json, options))
+            | s -> failwith $"Unknown TypesValidation type: {s}"
+
+    and [<JsonConverter(typeof<TypesValidationConverter>)>]
+        TypesValidation =
+        | GreaterThan of TypesGreaterThanValidation
+        | IncludedIn of TypesIncludedInValidation
+        | LessThan of TypesLessThanValidation
+        | ListType of TypesListTypeValidation
+        | Regex of TypesRegexValidation
+
     and TypesValidationTypeConverter() =
         inherit JsonConverter<TypesValidationType>()
 
@@ -20056,8 +20898,6 @@ module Types =
             | LessThan -> "less_than"
             | ListType -> "list_type"
             | Regex -> "regex"
-
-    and TypesValidation = obj
 
     and TypesConnectorConfigProperties = {
         [<JsonPropertyName("category")>]
@@ -22153,6 +22993,32 @@ module Types =
         Managed: string
     }
 
+    and ExplainLifecycleLifecycleExplainConverter() =
+        inherit JsonConverter<ExplainLifecycleLifecycleExplain>()
+
+        override _.Write(writer: Utf8JsonWriter, value: ExplainLifecycleLifecycleExplain, options: JsonSerializerOptions) =
+            match value with
+            | ExplainLifecycleLifecycleExplain.False v -> JsonSerializer.Serialize(writer, v, options)
+            | ExplainLifecycleLifecycleExplain.True v -> JsonSerializer.Serialize(writer, v, options)
+
+        override _.Read(reader: byref<Utf8JsonReader>, _typeToConvert: Type, options: JsonSerializerOptions) =
+            use doc = JsonDocument.ParseValue(&reader)
+            let root = doc.RootElement
+            let discValue =
+                match root.TryGetProperty("managed") with
+                | true, prop -> prop.GetString()
+                | false, _ -> ""
+            let json = root.GetRawText()
+            match discValue with
+            | "false" -> ExplainLifecycleLifecycleExplain.False (JsonSerializer.Deserialize<ExplainLifecycleLifecycleExplainUnmanaged>(json, options))
+            | "true" -> ExplainLifecycleLifecycleExplain.True (JsonSerializer.Deserialize<ExplainLifecycleLifecycleExplainManaged>(json, options))
+            | s -> failwith $"Unknown ExplainLifecycleLifecycleExplain type: {s}"
+
+    and [<JsonConverter(typeof<ExplainLifecycleLifecycleExplainConverter>)>]
+        ExplainLifecycleLifecycleExplain =
+        | False of ExplainLifecycleLifecycleExplainUnmanaged
+        | True of ExplainLifecycleLifecycleExplainManaged
+
     and ExplainLifecycleLifecycleExplainTypeConverter() =
         inherit JsonConverter<ExplainLifecycleLifecycleExplainType>()
 
@@ -22178,8 +23044,6 @@ module Types =
             match this with
             | False -> "false"
             | True -> "true"
-
-    and ExplainLifecycleLifecycleExplain = obj
 
     and GetLifecycleLifecycle = {
         [<JsonPropertyName("modified_date")>]
@@ -36712,6 +37576,44 @@ module Types =
         Settings: TypesSourceOnlyRepositorySettings
     }
 
+    and TypesRepositoryConverter() =
+        inherit JsonConverter<TypesRepository>()
+
+        override _.Write(writer: Utf8JsonWriter, value: TypesRepository, options: JsonSerializerOptions) =
+            match value with
+            | TypesRepository.Azure v -> JsonSerializer.Serialize(writer, v, options)
+            | TypesRepository.Fs v -> JsonSerializer.Serialize(writer, v, options)
+            | TypesRepository.Gcs v -> JsonSerializer.Serialize(writer, v, options)
+            | TypesRepository.S3 v -> JsonSerializer.Serialize(writer, v, options)
+            | TypesRepository.Source v -> JsonSerializer.Serialize(writer, v, options)
+            | TypesRepository.Url v -> JsonSerializer.Serialize(writer, v, options)
+
+        override _.Read(reader: byref<Utf8JsonReader>, _typeToConvert: Type, options: JsonSerializerOptions) =
+            use doc = JsonDocument.ParseValue(&reader)
+            let root = doc.RootElement
+            let discValue =
+                match root.TryGetProperty("type") with
+                | true, prop -> prop.GetString()
+                | false, _ -> ""
+            let json = root.GetRawText()
+            match discValue with
+            | "azure" -> TypesRepository.Azure (JsonSerializer.Deserialize<TypesAzureRepository>(json, options))
+            | "fs" -> TypesRepository.Fs (JsonSerializer.Deserialize<TypesSharedFileSystemRepository>(json, options))
+            | "gcs" -> TypesRepository.Gcs (JsonSerializer.Deserialize<TypesGcsRepository>(json, options))
+            | "s3" -> TypesRepository.S3 (JsonSerializer.Deserialize<TypesS3Repository>(json, options))
+            | "source" -> TypesRepository.Source (JsonSerializer.Deserialize<TypesSourceOnlyRepository>(json, options))
+            | "url" -> TypesRepository.Url (JsonSerializer.Deserialize<TypesReadOnlyUrlRepository>(json, options))
+            | s -> failwith $"Unknown TypesRepository type: {s}"
+
+    and [<JsonConverter(typeof<TypesRepositoryConverter>)>]
+        TypesRepository =
+        | Azure of TypesAzureRepository
+        | Fs of TypesSharedFileSystemRepository
+        | Gcs of TypesGcsRepository
+        | S3 of TypesS3Repository
+        | Source of TypesSourceOnlyRepository
+        | Url of TypesReadOnlyUrlRepository
+
     and TypesRepositoryTypeConverter() =
         inherit JsonConverter<TypesRepositoryType>()
 
@@ -36753,8 +37655,6 @@ module Types =
             | S3 -> "s3"
             | Source -> "source"
             | Url -> "url"
-
-    and TypesRepository = obj
 
     and TypesSnapshotSortConverter() =
         inherit JsonConverter<TypesSnapshotSort>()
@@ -40092,4 +40992,2418 @@ module Types =
         [<JsonPropertyName("sparse_vector_fields_count")>]
         SparseVectorFieldsCount: float option
     }
+
+    // ==========================================================================
+    // Smart Constructors for Discriminated Unions
+    // ==========================================================================
+
+    /// Smart constructors for AggregationsMovingAverageAggregation
+    [<RequireQualifiedAccess>]
+    module AggregationsMovingAverageAggregationBuilders =
+        /// Creates a Ewma with default values
+        let ewma () : AggregationsMovingAverageAggregation =
+            AggregationsMovingAverageAggregation.Ewma {
+                BucketsPath = Option.None
+                Format = Option.None
+                GapPolicy = Option.None
+                Minimize = Option.None
+                Predict = Option.None
+                Window = Option.None
+                Model = "ewma"
+                Settings = Unchecked.defaultof<_>
+            }
+        /// Creates a Holt with default values
+        let holt () : AggregationsMovingAverageAggregation =
+            AggregationsMovingAverageAggregation.Holt {
+                BucketsPath = Option.None
+                Format = Option.None
+                GapPolicy = Option.None
+                Minimize = Option.None
+                Predict = Option.None
+                Window = Option.None
+                Model = "holt"
+                Settings = Unchecked.defaultof<_>
+            }
+        /// Creates a HoltWinters with default values
+        let holtWinters () : AggregationsMovingAverageAggregation =
+            AggregationsMovingAverageAggregation.HoltWinters {
+                BucketsPath = Option.None
+                Format = Option.None
+                GapPolicy = Option.None
+                Minimize = Option.None
+                Predict = Option.None
+                Window = Option.None
+                Model = "holt_winters"
+                Settings = Unchecked.defaultof<_>
+            }
+        /// Creates a Linear with default values
+        let linear () : AggregationsMovingAverageAggregation =
+            AggregationsMovingAverageAggregation.Linear {
+                BucketsPath = Option.None
+                Format = Option.None
+                GapPolicy = Option.None
+                Minimize = Option.None
+                Predict = Option.None
+                Window = Option.None
+                Model = "linear"
+                Settings = Unchecked.defaultof<_>
+            }
+        /// Creates a Simple with default values
+        let simple () : AggregationsMovingAverageAggregation =
+            AggregationsMovingAverageAggregation.Simple {
+                BucketsPath = Option.None
+                Format = Option.None
+                GapPolicy = Option.None
+                Minimize = Option.None
+                Predict = Option.None
+                Window = Option.None
+                Model = "simple"
+                Settings = Unchecked.defaultof<_>
+            }
+
+    /// Smart constructors for AnalysisAnalyzer
+    [<RequireQualifiedAccess>]
+    module AnalysisAnalyzerBuilders =
+        /// Creates a Arabic with default values
+        let arabic () : AnalysisAnalyzer =
+            AnalysisAnalyzer.Arabic {
+                Type = "arabic"
+                Stopwords = Option.None
+                StopwordsPath = Option.None
+                StemExclusion = Option.None
+            }
+        /// Creates a Armenian with default values
+        let armenian () : AnalysisAnalyzer =
+            AnalysisAnalyzer.Armenian {
+                Type = "armenian"
+                Stopwords = Option.None
+                StopwordsPath = Option.None
+                StemExclusion = Option.None
+            }
+        /// Creates a Basque with default values
+        let basque () : AnalysisAnalyzer =
+            AnalysisAnalyzer.Basque {
+                Type = "basque"
+                Stopwords = Option.None
+                StopwordsPath = Option.None
+                StemExclusion = Option.None
+            }
+        /// Creates a Bengali with default values
+        let bengali () : AnalysisAnalyzer =
+            AnalysisAnalyzer.Bengali {
+                Type = "bengali"
+                Stopwords = Option.None
+                StopwordsPath = Option.None
+                StemExclusion = Option.None
+            }
+        /// Creates a Brazilian with default values
+        let brazilian () : AnalysisAnalyzer =
+            AnalysisAnalyzer.Brazilian {
+                Type = "brazilian"
+                Stopwords = Option.None
+                StopwordsPath = Option.None
+            }
+        /// Creates a Bulgarian with default values
+        let bulgarian () : AnalysisAnalyzer =
+            AnalysisAnalyzer.Bulgarian {
+                Type = "bulgarian"
+                Stopwords = Option.None
+                StopwordsPath = Option.None
+                StemExclusion = Option.None
+            }
+        /// Creates a Catalan with default values
+        let catalan () : AnalysisAnalyzer =
+            AnalysisAnalyzer.Catalan {
+                Type = "catalan"
+                Stopwords = Option.None
+                StopwordsPath = Option.None
+                StemExclusion = Option.None
+            }
+        /// Creates a Chinese with default values
+        let chinese () : AnalysisAnalyzer =
+            AnalysisAnalyzer.Chinese {
+                Type = "chinese"
+                Stopwords = Option.None
+                StopwordsPath = Option.None
+            }
+        /// Creates a Cjk with default values
+        let cjk () : AnalysisAnalyzer =
+            AnalysisAnalyzer.Cjk {
+                Type = "cjk"
+                Stopwords = Option.None
+                StopwordsPath = Option.None
+            }
+        /// Creates a Custom with default values
+        let custom () : AnalysisAnalyzer =
+            AnalysisAnalyzer.Custom {
+                Type = "custom"
+                CharFilter = Option.None
+                Filter = Option.None
+                PositionIncrementGap = Option.None
+                PositionOffsetGap = Option.None
+                Tokenizer = ""
+            }
+        /// Creates a Czech with default values
+        let czech () : AnalysisAnalyzer =
+            AnalysisAnalyzer.Czech {
+                Type = "czech"
+                Stopwords = Option.None
+                StopwordsPath = Option.None
+                StemExclusion = Option.None
+            }
+        /// Creates a Danish with default values
+        let danish () : AnalysisAnalyzer =
+            AnalysisAnalyzer.Danish {
+                Type = "danish"
+                Stopwords = Option.None
+                StopwordsPath = Option.None
+            }
+        /// Creates a Dutch with default values
+        let dutch () : AnalysisAnalyzer =
+            AnalysisAnalyzer.Dutch {
+                Type = "dutch"
+                Stopwords = Option.None
+                StopwordsPath = Option.None
+                StemExclusion = Option.None
+            }
+        /// Creates a English with default values
+        let english () : AnalysisAnalyzer =
+            AnalysisAnalyzer.English {
+                Type = "english"
+                Stopwords = Option.None
+                StopwordsPath = Option.None
+                StemExclusion = Option.None
+            }
+        /// Creates a Estonian with default values
+        let estonian () : AnalysisAnalyzer =
+            AnalysisAnalyzer.Estonian {
+                Type = "estonian"
+                Stopwords = Option.None
+                StopwordsPath = Option.None
+            }
+        /// Creates a Fingerprint with default values
+        let fingerprint () : AnalysisAnalyzer =
+            AnalysisAnalyzer.Fingerprint {
+                Type = "fingerprint"
+                Version = Option.None
+                MaxOutputSize = Option.None
+                Separator = Option.None
+                Stopwords = Option.None
+                StopwordsPath = Option.None
+            }
+        /// Creates a Finnish with default values
+        let finnish () : AnalysisAnalyzer =
+            AnalysisAnalyzer.Finnish {
+                Type = "finnish"
+                Stopwords = Option.None
+                StopwordsPath = Option.None
+                StemExclusion = Option.None
+            }
+        /// Creates a French with default values
+        let french () : AnalysisAnalyzer =
+            AnalysisAnalyzer.French {
+                Type = "french"
+                Stopwords = Option.None
+                StopwordsPath = Option.None
+                StemExclusion = Option.None
+            }
+        /// Creates a Galician with default values
+        let galician () : AnalysisAnalyzer =
+            AnalysisAnalyzer.Galician {
+                Type = "galician"
+                Stopwords = Option.None
+                StopwordsPath = Option.None
+                StemExclusion = Option.None
+            }
+        /// Creates a German with default values
+        let german () : AnalysisAnalyzer =
+            AnalysisAnalyzer.German {
+                Type = "german"
+                Stopwords = Option.None
+                StopwordsPath = Option.None
+                StemExclusion = Option.None
+            }
+        /// Creates a Greek with default values
+        let greek () : AnalysisAnalyzer =
+            AnalysisAnalyzer.Greek {
+                Type = "greek"
+                Stopwords = Option.None
+                StopwordsPath = Option.None
+            }
+        /// Creates a Hindi with default values
+        let hindi () : AnalysisAnalyzer =
+            AnalysisAnalyzer.Hindi {
+                Type = "hindi"
+                Stopwords = Option.None
+                StopwordsPath = Option.None
+                StemExclusion = Option.None
+            }
+        /// Creates a Hungarian with default values
+        let hungarian () : AnalysisAnalyzer =
+            AnalysisAnalyzer.Hungarian {
+                Type = "hungarian"
+                Stopwords = Option.None
+                StopwordsPath = Option.None
+                StemExclusion = Option.None
+            }
+        /// Creates a IcuAnalyzer with default values
+        let icuAnalyzer () : AnalysisAnalyzer =
+            AnalysisAnalyzer.IcuAnalyzer {
+                Type = "icu_analyzer"
+                Method = Unchecked.defaultof<_>
+                Mode = Unchecked.defaultof<_>
+            }
+        /// Creates a Indonesian with default values
+        let indonesian () : AnalysisAnalyzer =
+            AnalysisAnalyzer.Indonesian {
+                Type = "indonesian"
+                Stopwords = Option.None
+                StopwordsPath = Option.None
+                StemExclusion = Option.None
+            }
+        /// Creates a Irish with default values
+        let irish () : AnalysisAnalyzer =
+            AnalysisAnalyzer.Irish {
+                Type = "irish"
+                Stopwords = Option.None
+                StopwordsPath = Option.None
+                StemExclusion = Option.None
+            }
+        /// Creates a Italian with default values
+        let italian () : AnalysisAnalyzer =
+            AnalysisAnalyzer.Italian {
+                Type = "italian"
+                Stopwords = Option.None
+                StopwordsPath = Option.None
+                StemExclusion = Option.None
+            }
+        /// Creates a Keyword with default values
+        let keyword () : AnalysisAnalyzer =
+            AnalysisAnalyzer.Keyword {
+                Type = "keyword"
+                Version = Option.None
+            }
+        /// Creates a Kuromoji with default values
+        let kuromoji () : AnalysisAnalyzer =
+            AnalysisAnalyzer.Kuromoji {
+                Type = "kuromoji"
+                Mode = Option.None
+                UserDictionary = Option.None
+            }
+        /// Creates a Latvian with default values
+        let latvian () : AnalysisAnalyzer =
+            AnalysisAnalyzer.Latvian {
+                Type = "latvian"
+                Stopwords = Option.None
+                StopwordsPath = Option.None
+                StemExclusion = Option.None
+            }
+        /// Creates a Lithuanian with default values
+        let lithuanian () : AnalysisAnalyzer =
+            AnalysisAnalyzer.Lithuanian {
+                Type = "lithuanian"
+                Stopwords = Option.None
+                StopwordsPath = Option.None
+                StemExclusion = Option.None
+            }
+        /// Creates a Nori with default values
+        let nori () : AnalysisAnalyzer =
+            AnalysisAnalyzer.Nori {
+                Type = "nori"
+                Version = Option.None
+                DecompoundMode = Option.None
+                Stoptags = Option.None
+                UserDictionary = Option.None
+            }
+        /// Creates a Norwegian with default values
+        let norwegian () : AnalysisAnalyzer =
+            AnalysisAnalyzer.Norwegian {
+                Type = "norwegian"
+                Stopwords = Option.None
+                StopwordsPath = Option.None
+                StemExclusion = Option.None
+            }
+        /// Creates a Pattern with default values
+        let pattern () : AnalysisAnalyzer =
+            AnalysisAnalyzer.Pattern {
+                Type = "pattern"
+                Version = Option.None
+                Flags = Option.None
+                Lowercase = Option.None
+                Pattern = Option.None
+                Stopwords = Option.None
+                StopwordsPath = Option.None
+            }
+        /// Creates a Persian with default values
+        let persian () : AnalysisAnalyzer =
+            AnalysisAnalyzer.Persian {
+                Type = "persian"
+                Stopwords = Option.None
+                StopwordsPath = Option.None
+            }
+        /// Creates a Portuguese with default values
+        let portuguese () : AnalysisAnalyzer =
+            AnalysisAnalyzer.Portuguese {
+                Type = "portuguese"
+                Stopwords = Option.None
+                StopwordsPath = Option.None
+                StemExclusion = Option.None
+            }
+        /// Creates a Romanian with default values
+        let romanian () : AnalysisAnalyzer =
+            AnalysisAnalyzer.Romanian {
+                Type = "romanian"
+                Stopwords = Option.None
+                StopwordsPath = Option.None
+                StemExclusion = Option.None
+            }
+        /// Creates a Russian with default values
+        let russian () : AnalysisAnalyzer =
+            AnalysisAnalyzer.Russian {
+                Type = "russian"
+                Stopwords = Option.None
+                StopwordsPath = Option.None
+                StemExclusion = Option.None
+            }
+        /// Creates a Serbian with default values
+        let serbian () : AnalysisAnalyzer =
+            AnalysisAnalyzer.Serbian {
+                Type = "serbian"
+                Stopwords = Option.None
+                StopwordsPath = Option.None
+                StemExclusion = Option.None
+            }
+        /// Creates a Simple with default values
+        let simple () : AnalysisAnalyzer =
+            AnalysisAnalyzer.Simple {
+                Type = "simple"
+                Version = Option.None
+            }
+        /// Creates a Snowball with default values
+        let snowball () : AnalysisAnalyzer =
+            AnalysisAnalyzer.Snowball {
+                Type = "snowball"
+                Version = Option.None
+                Language = Unchecked.defaultof<_>
+                Stopwords = Option.None
+            }
+        /// Creates a Sorani with default values
+        let sorani () : AnalysisAnalyzer =
+            AnalysisAnalyzer.Sorani {
+                Type = "sorani"
+                Stopwords = Option.None
+                StopwordsPath = Option.None
+                StemExclusion = Option.None
+            }
+        /// Creates a Spanish with default values
+        let spanish () : AnalysisAnalyzer =
+            AnalysisAnalyzer.Spanish {
+                Type = "spanish"
+                Stopwords = Option.None
+                StopwordsPath = Option.None
+                StemExclusion = Option.None
+            }
+        /// Creates a Standard with default values
+        let standard () : AnalysisAnalyzer =
+            AnalysisAnalyzer.Standard {
+                Type = "standard"
+                MaxTokenLength = Option.None
+                Stopwords = Option.None
+                StopwordsPath = Option.None
+            }
+        /// Creates a Stop with default values
+        let stop () : AnalysisAnalyzer =
+            AnalysisAnalyzer.Stop {
+                Type = "stop"
+                Version = Option.None
+                Stopwords = Option.None
+                StopwordsPath = Option.None
+            }
+        /// Creates a Swedish with default values
+        let swedish () : AnalysisAnalyzer =
+            AnalysisAnalyzer.Swedish {
+                Type = "swedish"
+                Stopwords = Option.None
+                StopwordsPath = Option.None
+                StemExclusion = Option.None
+            }
+        /// Creates a Thai with default values
+        let thai () : AnalysisAnalyzer =
+            AnalysisAnalyzer.Thai {
+                Type = "thai"
+                Stopwords = Option.None
+                StopwordsPath = Option.None
+            }
+        /// Creates a Turkish with default values
+        let turkish () : AnalysisAnalyzer =
+            AnalysisAnalyzer.Turkish {
+                Type = "turkish"
+                Stopwords = Option.None
+                StopwordsPath = Option.None
+                StemExclusion = Option.None
+            }
+        /// Creates a Whitespace with default values
+        let whitespace () : AnalysisAnalyzer =
+            AnalysisAnalyzer.Whitespace {
+                Type = "whitespace"
+                Version = Option.None
+            }
+
+    /// Smart constructors for AnalysisNormalizer
+    [<RequireQualifiedAccess>]
+    module AnalysisNormalizerBuilders =
+        /// Creates a Custom with default values
+        let custom () : AnalysisNormalizer =
+            AnalysisNormalizer.Custom {
+                Type = "custom"
+                CharFilter = Option.None
+                Filter = Option.None
+            }
+        /// Creates a Lowercase with default values
+        let lowercase () : AnalysisNormalizer =
+            AnalysisNormalizer.Lowercase {
+                Type = "lowercase"
+            }
+
+    /// Smart constructors for AnalysisCharFilterDefinition
+    [<RequireQualifiedAccess>]
+    module AnalysisCharFilterDefinitionBuilders =
+        /// Creates a HtmlStrip with default values
+        let htmlStrip () : AnalysisCharFilterDefinition =
+            AnalysisCharFilterDefinition.HtmlStrip {
+                Version = Option.None
+                Type = "html_strip"
+                EscapedTags = Option.None
+            }
+        /// Creates a IcuNormalizer with default values
+        let icuNormalizer () : AnalysisCharFilterDefinition =
+            AnalysisCharFilterDefinition.IcuNormalizer {
+                Version = Option.None
+                Type = "icu_normalizer"
+                Mode = Option.None
+                Name = Option.None
+                UnicodeSetFilter = Option.None
+            }
+        /// Creates a KuromojiIterationMark with default values
+        let kuromojiIterationMark () : AnalysisCharFilterDefinition =
+            AnalysisCharFilterDefinition.KuromojiIterationMark {
+                Version = Option.None
+                Type = "kuromoji_iteration_mark"
+                NormalizeKana = false
+                NormalizeKanji = false
+            }
+        /// Creates a Mapping with default values
+        let mapping () : AnalysisCharFilterDefinition =
+            AnalysisCharFilterDefinition.Mapping {
+                Version = Option.None
+                Type = "mapping"
+                Mappings = Option.None
+                MappingsPath = Option.None
+            }
+        /// Creates a PatternReplace with default values
+        let patternReplace () : AnalysisCharFilterDefinition =
+            AnalysisCharFilterDefinition.PatternReplace {
+                Version = Option.None
+                Type = "pattern_replace"
+                Flags = Option.None
+                Pattern = ""
+                Replacement = Option.None
+            }
+
+    /// Smart constructors for AnalysisTokenFilterDefinition
+    [<RequireQualifiedAccess>]
+    module AnalysisTokenFilterDefinitionBuilders =
+        /// Creates a Apostrophe with default values
+        let apostrophe () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.Apostrophe {
+                Version = Option.None
+                Type = "apostrophe"
+            }
+        /// Creates a ArabicNormalization with default values
+        let arabicNormalization () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.ArabicNormalization {
+                Version = Option.None
+                Type = "arabic_normalization"
+            }
+        /// Creates a ArabicStem with default values
+        let arabicStem () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.ArabicStem {
+                Version = Option.None
+                Type = "arabic_stem"
+            }
+        /// Creates a Asciifolding with default values
+        let asciifolding () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.Asciifolding {
+                Version = Option.None
+                Type = "asciifolding"
+                PreserveOriginal = Option.None
+            }
+        /// Creates a BengaliNormalization with default values
+        let bengaliNormalization () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.BengaliNormalization {
+                Version = Option.None
+                Type = "bengali_normalization"
+            }
+        /// Creates a BrazilianStem with default values
+        let brazilianStem () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.BrazilianStem {
+                Version = Option.None
+                Type = "brazilian_stem"
+            }
+        /// Creates a CjkBigram with default values
+        let cjkBigram () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.CjkBigram {
+                Version = Option.None
+                Type = "cjk_bigram"
+                IgnoredScripts = Option.None
+                OutputUnigrams = Option.None
+            }
+        /// Creates a CjkWidth with default values
+        let cjkWidth () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.CjkWidth {
+                Version = Option.None
+                Type = "cjk_width"
+            }
+        /// Creates a Classic with default values
+        let classic () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.Classic {
+                Version = Option.None
+                Type = "classic"
+            }
+        /// Creates a CommonGrams with default values
+        let commonGrams () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.CommonGrams {
+                Version = Option.None
+                Type = "common_grams"
+                CommonWords = Option.None
+                CommonWordsPath = Option.None
+                IgnoreCase = Option.None
+                QueryMode = Option.None
+            }
+        /// Creates a Condition with default values
+        let condition () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.Condition {
+                Version = Option.None
+                Type = "condition"
+                Filter = [||]
+                Script = Unchecked.defaultof<_>
+            }
+        /// Creates a CzechStem with default values
+        let czechStem () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.CzechStem {
+                Version = Option.None
+                Type = "czech_stem"
+            }
+        /// Creates a DecimalDigit with default values
+        let decimalDigit () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.DecimalDigit {
+                Version = Option.None
+                Type = "decimal_digit"
+            }
+        /// Creates a DelimitedPayload with default values
+        let delimitedPayload () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.DelimitedPayload {
+                Version = Option.None
+                Type = "delimited_payload"
+                Delimiter = Option.None
+                Encoding = Option.None
+            }
+        /// Creates a DictionaryDecompounder with default values
+        let dictionaryDecompounder () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.DictionaryDecompounder {
+                Version = Option.None
+                MaxSubwordSize = Option.None
+                MinSubwordSize = Option.None
+                MinWordSize = Option.None
+                OnlyLongestMatch = Option.None
+                WordList = Option.None
+                WordListPath = Option.None
+                Type = "dictionary_decompounder"
+            }
+        /// Creates a DutchStem with default values
+        let dutchStem () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.DutchStem {
+                Version = Option.None
+                Type = "dutch_stem"
+            }
+        /// Creates a EdgeNgram with default values
+        let edgeNgram () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.EdgeNgram {
+                Version = Option.None
+                Type = "edge_ngram"
+                MaxGram = Option.None
+                MinGram = Option.None
+                Side = Option.None
+                PreserveOriginal = Option.None
+            }
+        /// Creates a Elision with default values
+        let elision () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.Elision {
+                Version = Option.None
+                Type = "elision"
+                Articles = Option.None
+                ArticlesPath = Option.None
+                ArticlesCase = Option.None
+            }
+        /// Creates a Fingerprint with default values
+        let fingerprint () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.Fingerprint {
+                Version = Option.None
+                Type = "fingerprint"
+                MaxOutputSize = Option.None
+                Separator = Option.None
+            }
+        /// Creates a FlattenGraph with default values
+        let flattenGraph () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.FlattenGraph {
+                Version = Option.None
+                Type = "flatten_graph"
+            }
+        /// Creates a FrenchStem with default values
+        let frenchStem () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.FrenchStem {
+                Version = Option.None
+                Type = "french_stem"
+            }
+        /// Creates a GermanNormalization with default values
+        let germanNormalization () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.GermanNormalization {
+                Version = Option.None
+                Type = "german_normalization"
+            }
+        /// Creates a GermanStem with default values
+        let germanStem () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.GermanStem {
+                Version = Option.None
+                Type = "german_stem"
+            }
+        /// Creates a HindiNormalization with default values
+        let hindiNormalization () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.HindiNormalization {
+                Version = Option.None
+                Type = "hindi_normalization"
+            }
+        /// Creates a Hunspell with default values
+        let hunspell () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.Hunspell {
+                Version = Option.None
+                Type = "hunspell"
+                Dedup = Option.None
+                Dictionary = Option.None
+                Locale = ""
+                LongestOnly = Option.None
+            }
+        /// Creates a HyphenationDecompounder with default values
+        let hyphenationDecompounder () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.HyphenationDecompounder {
+                Version = Option.None
+                MaxSubwordSize = Option.None
+                MinSubwordSize = Option.None
+                MinWordSize = Option.None
+                OnlyLongestMatch = Option.None
+                WordList = Option.None
+                WordListPath = Option.None
+                Type = "hyphenation_decompounder"
+                HyphenationPatternsPath = ""
+                NoSubMatches = Option.None
+                NoOverlappingMatches = Option.None
+            }
+        /// Creates a IcuCollation with default values
+        let icuCollation () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.IcuCollation {
+                Version = Option.None
+                Type = "icu_collation"
+                Alternate = Option.None
+                CaseFirst = Option.None
+                CaseLevel = Option.None
+                Country = Option.None
+                Decomposition = Option.None
+                HiraganaQuaternaryMode = Option.None
+                Language = Option.None
+                Numeric = Option.None
+                Rules = Option.None
+                Strength = Option.None
+                VariableTop = Option.None
+                Variant = Option.None
+            }
+        /// Creates a IcuFolding with default values
+        let icuFolding () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.IcuFolding {
+                Version = Option.None
+                Type = "icu_folding"
+                UnicodeSetFilter = ""
+            }
+        /// Creates a IcuNormalizer with default values
+        let icuNormalizer () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.IcuNormalizer {
+                Version = Option.None
+                Type = "icu_normalizer"
+                Name = Unchecked.defaultof<_>
+            }
+        /// Creates a IcuTransform with default values
+        let icuTransform () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.IcuTransform {
+                Version = Option.None
+                Type = "icu_transform"
+                Dir = Option.None
+                Id = ""
+            }
+        /// Creates a IndicNormalization with default values
+        let indicNormalization () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.IndicNormalization {
+                Version = Option.None
+                Type = "indic_normalization"
+            }
+        /// Creates a JaStop with default values
+        let jaStop () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.JaStop {
+                Version = Option.None
+                Type = "ja_stop"
+                Stopwords = Option.None
+            }
+        /// Creates a Keep with default values
+        let keep () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.Keep {
+                Version = Option.None
+                Type = "keep"
+                KeepWords = Option.None
+                KeepWordsCase = Option.None
+                KeepWordsPath = Option.None
+            }
+        /// Creates a KeepTypes with default values
+        let keepTypes () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.KeepTypes {
+                Version = Option.None
+                Type = "keep_types"
+                Mode = Option.None
+                Types = [||]
+            }
+        /// Creates a KeywordMarker with default values
+        let keywordMarker () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.KeywordMarker {
+                Version = Option.None
+                Type = "keyword_marker"
+                IgnoreCase = Option.None
+                Keywords = Option.None
+                KeywordsPath = Option.None
+                KeywordsPattern = Option.None
+            }
+        /// Creates a KeywordRepeat with default values
+        let keywordRepeat () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.KeywordRepeat {
+                Version = Option.None
+                Type = "keyword_repeat"
+            }
+        /// Creates a Kstem with default values
+        let kstem () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.Kstem {
+                Version = Option.None
+                Type = "kstem"
+            }
+        /// Creates a KuromojiPartOfSpeech with default values
+        let kuromojiPartOfSpeech () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.KuromojiPartOfSpeech {
+                Version = Option.None
+                Type = "kuromoji_part_of_speech"
+                Stoptags = [||]
+            }
+        /// Creates a KuromojiReadingform with default values
+        let kuromojiReadingform () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.KuromojiReadingform {
+                Version = Option.None
+                Type = "kuromoji_readingform"
+                UseRomaji = false
+            }
+        /// Creates a KuromojiStemmer with default values
+        let kuromojiStemmer () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.KuromojiStemmer {
+                Version = Option.None
+                Type = "kuromoji_stemmer"
+                MinimumLength = 0.0
+            }
+        /// Creates a Length with default values
+        let length () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.Length {
+                Version = Option.None
+                Type = "length"
+                Max = Option.None
+                Min = Option.None
+            }
+        /// Creates a Limit with default values
+        let limit () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.Limit {
+                Version = Option.None
+                Type = "limit"
+                ConsumeAllTokens = Option.None
+                MaxTokenCount = Option.None
+            }
+        /// Creates a Lowercase with default values
+        let lowercase () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.Lowercase {
+                Version = Option.None
+                Type = "lowercase"
+                Language = Option.None
+            }
+        /// Creates a MinHash with default values
+        let minHash () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.MinHash {
+                Version = Option.None
+                Type = "min_hash"
+                BucketCount = Option.None
+                HashCount = Option.None
+                HashSetSize = Option.None
+                WithRotation = Option.None
+            }
+        /// Creates a Multiplexer with default values
+        let multiplexer () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.Multiplexer {
+                Version = Option.None
+                Type = "multiplexer"
+                Filters = [||]
+                PreserveOriginal = Option.None
+            }
+        /// Creates a Ngram with default values
+        let ngram () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.Ngram {
+                Version = Option.None
+                Type = "ngram"
+                MaxGram = Option.None
+                MinGram = Option.None
+                PreserveOriginal = Option.None
+            }
+        /// Creates a NoriPartOfSpeech with default values
+        let noriPartOfSpeech () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.NoriPartOfSpeech {
+                Version = Option.None
+                Type = "nori_part_of_speech"
+                Stoptags = Option.None
+            }
+        /// Creates a PatternCapture with default values
+        let patternCapture () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.PatternCapture {
+                Version = Option.None
+                Type = "pattern_capture"
+                Patterns = [||]
+                PreserveOriginal = Option.None
+            }
+        /// Creates a PatternReplace with default values
+        let patternReplace () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.PatternReplace {
+                Version = Option.None
+                Type = "pattern_replace"
+                All = Option.None
+                Flags = Option.None
+                Pattern = ""
+                Replacement = Option.None
+            }
+        /// Creates a PersianNormalization with default values
+        let persianNormalization () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.PersianNormalization {
+                Version = Option.None
+                Type = "persian_normalization"
+            }
+        /// Creates a PersianStem with default values
+        let persianStem () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.PersianStem {
+                Version = Option.None
+                Type = "persian_stem"
+            }
+        /// Creates a Phonetic with default values
+        let phonetic () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.Phonetic {
+                Version = Option.None
+                Type = "phonetic"
+                Encoder = Unchecked.defaultof<_>
+                Languageset = Option.None
+                MaxCodeLen = Option.None
+                NameType = Option.None
+                Replace = Option.None
+                RuleType = Option.None
+            }
+        /// Creates a PorterStem with default values
+        let porterStem () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.PorterStem {
+                Version = Option.None
+                Type = "porter_stem"
+            }
+        /// Creates a PredicateTokenFilter with default values
+        let predicateTokenFilter () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.PredicateTokenFilter {
+                Version = Option.None
+                Type = "predicate_token_filter"
+                Script = Unchecked.defaultof<_>
+            }
+        /// Creates a RemoveDuplicates with default values
+        let removeDuplicates () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.RemoveDuplicates {
+                Version = Option.None
+                Type = "remove_duplicates"
+            }
+        /// Creates a Reverse with default values
+        let reverse () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.Reverse {
+                Version = Option.None
+                Type = "reverse"
+            }
+        /// Creates a RussianStem with default values
+        let russianStem () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.RussianStem {
+                Version = Option.None
+                Type = "russian_stem"
+            }
+        /// Creates a ScandinavianFolding with default values
+        let scandinavianFolding () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.ScandinavianFolding {
+                Version = Option.None
+                Type = "scandinavian_folding"
+            }
+        /// Creates a ScandinavianNormalization with default values
+        let scandinavianNormalization () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.ScandinavianNormalization {
+                Version = Option.None
+                Type = "scandinavian_normalization"
+            }
+        /// Creates a SerbianNormalization with default values
+        let serbianNormalization () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.SerbianNormalization {
+                Version = Option.None
+                Type = "serbian_normalization"
+            }
+        /// Creates a Shingle with default values
+        let shingle () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.Shingle {
+                Version = Option.None
+                Type = "shingle"
+                FillerToken = Option.None
+                MaxShingleSize = Option.None
+                MinShingleSize = Option.None
+                OutputUnigrams = Option.None
+                OutputUnigramsIfNoShingles = Option.None
+                TokenSeparator = Option.None
+            }
+        /// Creates a Snowball with default values
+        let snowball () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.Snowball {
+                Version = Option.None
+                Type = "snowball"
+                Language = Option.None
+            }
+        /// Creates a SoraniNormalization with default values
+        let soraniNormalization () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.SoraniNormalization {
+                Version = Option.None
+                Type = "sorani_normalization"
+            }
+        /// Creates a Stemmer with default values
+        let stemmer () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.Stemmer {
+                Version = Option.None
+                Type = "stemmer"
+                Language = Option.None
+            }
+        /// Creates a StemmerOverride with default values
+        let stemmerOverride () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.StemmerOverride {
+                Version = Option.None
+                Type = "stemmer_override"
+                Rules = Option.None
+                RulesPath = Option.None
+            }
+        /// Creates a Stop with default values
+        let stop () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.Stop {
+                Version = Option.None
+                Type = "stop"
+                IgnoreCase = Option.None
+                RemoveTrailing = Option.None
+                Stopwords = Option.None
+                StopwordsPath = Option.None
+            }
+        /// Creates a Synonym with default values
+        let synonym () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.Synonym {
+                Version = Option.None
+                Expand = Option.None
+                Format = Option.None
+                Lenient = Option.None
+                Synonyms = Option.None
+                SynonymsPath = Option.None
+                SynonymsSet = Option.None
+                Tokenizer = Option.None
+                Updateable = Option.None
+                Type = "synonym"
+            }
+        /// Creates a SynonymGraph with default values
+        let synonymGraph () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.SynonymGraph {
+                Version = Option.None
+                Expand = Option.None
+                Format = Option.None
+                Lenient = Option.None
+                Synonyms = Option.None
+                SynonymsPath = Option.None
+                SynonymsSet = Option.None
+                Tokenizer = Option.None
+                Updateable = Option.None
+                Type = "synonym_graph"
+            }
+        /// Creates a Trim with default values
+        let trim () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.Trim {
+                Version = Option.None
+                Type = "trim"
+            }
+        /// Creates a Truncate with default values
+        let truncate () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.Truncate {
+                Version = Option.None
+                Type = "truncate"
+                Length = Option.None
+            }
+        /// Creates a Unique with default values
+        let unique () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.Unique {
+                Version = Option.None
+                Type = "unique"
+                OnlyOnSamePosition = Option.None
+            }
+        /// Creates a Uppercase with default values
+        let uppercase () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.Uppercase {
+                Version = Option.None
+                Type = "uppercase"
+            }
+        /// Creates a WordDelimiter with default values
+        let wordDelimiter () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.WordDelimiter {
+                Version = Option.None
+                CatenateAll = Option.None
+                CatenateNumbers = Option.None
+                CatenateWords = Option.None
+                GenerateNumberParts = Option.None
+                GenerateWordParts = Option.None
+                PreserveOriginal = Option.None
+                ProtectedWords = Option.None
+                ProtectedWordsPath = Option.None
+                SplitOnCaseChange = Option.None
+                SplitOnNumerics = Option.None
+                StemEnglishPossessive = Option.None
+                TypeTable = Option.None
+                TypeTablePath = Option.None
+                Type = "word_delimiter"
+            }
+        /// Creates a WordDelimiterGraph with default values
+        let wordDelimiterGraph () : AnalysisTokenFilterDefinition =
+            AnalysisTokenFilterDefinition.WordDelimiterGraph {
+                Version = Option.None
+                CatenateAll = Option.None
+                CatenateNumbers = Option.None
+                CatenateWords = Option.None
+                GenerateNumberParts = Option.None
+                GenerateWordParts = Option.None
+                PreserveOriginal = Option.None
+                ProtectedWords = Option.None
+                ProtectedWordsPath = Option.None
+                SplitOnCaseChange = Option.None
+                SplitOnNumerics = Option.None
+                StemEnglishPossessive = Option.None
+                TypeTable = Option.None
+                TypeTablePath = Option.None
+                Type = "word_delimiter_graph"
+                AdjustOffsets = Option.None
+                IgnoreKeywords = Option.None
+            }
+
+    /// Smart constructors for AnalysisTokenizerDefinition
+    [<RequireQualifiedAccess>]
+    module AnalysisTokenizerDefinitionBuilders =
+        /// Creates a CharGroup with default values
+        let charGroup () : AnalysisTokenizerDefinition =
+            AnalysisTokenizerDefinition.CharGroup {
+                Version = Option.None
+                Type = "char_group"
+                TokenizeOnChars = [||]
+                MaxTokenLength = Option.None
+            }
+        /// Creates a Classic with default values
+        let classic () : AnalysisTokenizerDefinition =
+            AnalysisTokenizerDefinition.Classic {
+                Version = Option.None
+                Type = "classic"
+                MaxTokenLength = Option.None
+            }
+        /// Creates a EdgeNgram with default values
+        let edgeNgram () : AnalysisTokenizerDefinition =
+            AnalysisTokenizerDefinition.EdgeNgram {
+                Version = Option.None
+                Type = "edge_ngram"
+                CustomTokenChars = Option.None
+                MaxGram = Option.None
+                MinGram = Option.None
+                TokenChars = Option.None
+            }
+        /// Creates a IcuTokenizer with default values
+        let icuTokenizer () : AnalysisTokenizerDefinition =
+            AnalysisTokenizerDefinition.IcuTokenizer {
+                Version = Option.None
+                Type = "icu_tokenizer"
+                RuleFiles = ""
+            }
+        /// Creates a Keyword with default values
+        let keyword () : AnalysisTokenizerDefinition =
+            AnalysisTokenizerDefinition.Keyword {
+                Version = Option.None
+                Type = "keyword"
+                BufferSize = Option.None
+            }
+        /// Creates a KuromojiTokenizer with default values
+        let kuromojiTokenizer () : AnalysisTokenizerDefinition =
+            AnalysisTokenizerDefinition.KuromojiTokenizer {
+                Version = Option.None
+                Type = "kuromoji_tokenizer"
+                DiscardPunctuation = Option.None
+                Mode = Unchecked.defaultof<_>
+                NbestCost = Option.None
+                NbestExamples = Option.None
+                UserDictionary = Option.None
+                UserDictionaryRules = Option.None
+                DiscardCompoundToken = Option.None
+            }
+        /// Creates a Letter with default values
+        let letter () : AnalysisTokenizerDefinition =
+            AnalysisTokenizerDefinition.Letter {
+                Version = Option.None
+                Type = "letter"
+            }
+        /// Creates a Lowercase with default values
+        let lowercase () : AnalysisTokenizerDefinition =
+            AnalysisTokenizerDefinition.Lowercase {
+                Version = Option.None
+                Type = "lowercase"
+            }
+        /// Creates a Ngram with default values
+        let ngram () : AnalysisTokenizerDefinition =
+            AnalysisTokenizerDefinition.Ngram {
+                Version = Option.None
+                Type = "ngram"
+                CustomTokenChars = Option.None
+                MaxGram = Option.None
+                MinGram = Option.None
+                TokenChars = Option.None
+            }
+        /// Creates a NoriTokenizer with default values
+        let noriTokenizer () : AnalysisTokenizerDefinition =
+            AnalysisTokenizerDefinition.NoriTokenizer {
+                Version = Option.None
+                Type = "nori_tokenizer"
+                DecompoundMode = Option.None
+                DiscardPunctuation = Option.None
+                UserDictionary = Option.None
+                UserDictionaryRules = Option.None
+            }
+        /// Creates a PathHierarchy with default values
+        let pathHierarchy () : AnalysisTokenizerDefinition =
+            AnalysisTokenizerDefinition.PathHierarchy {
+                Version = Option.None
+                Type = "path_hierarchy"
+                BufferSize = Option.None
+                Delimiter = Option.None
+                Replacement = Option.None
+                Reverse = Option.None
+                Skip = Option.None
+            }
+        /// Creates a Pattern with default values
+        let pattern () : AnalysisTokenizerDefinition =
+            AnalysisTokenizerDefinition.Pattern {
+                Version = Option.None
+                Type = "pattern"
+                Flags = Option.None
+                Group = Option.None
+                Pattern = Option.None
+            }
+        /// Creates a SimplePattern with default values
+        let simplePattern () : AnalysisTokenizerDefinition =
+            AnalysisTokenizerDefinition.SimplePattern {
+                Version = Option.None
+                Type = "simple_pattern"
+                Pattern = Option.None
+            }
+        /// Creates a SimplePatternSplit with default values
+        let simplePatternSplit () : AnalysisTokenizerDefinition =
+            AnalysisTokenizerDefinition.SimplePatternSplit {
+                Version = Option.None
+                Type = "simple_pattern_split"
+                Pattern = Option.None
+            }
+        /// Creates a Standard with default values
+        let standard () : AnalysisTokenizerDefinition =
+            AnalysisTokenizerDefinition.Standard {
+                Version = Option.None
+                Type = "standard"
+                MaxTokenLength = Option.None
+            }
+        /// Creates a Thai with default values
+        let thai () : AnalysisTokenizerDefinition =
+            AnalysisTokenizerDefinition.Thai {
+                Version = Option.None
+                Type = "thai"
+            }
+        /// Creates a UaxUrlEmail with default values
+        let uaxUrlEmail () : AnalysisTokenizerDefinition =
+            AnalysisTokenizerDefinition.UaxUrlEmail {
+                Version = Option.None
+                Type = "uax_url_email"
+                MaxTokenLength = Option.None
+            }
+        /// Creates a Whitespace with default values
+        let whitespace () : AnalysisTokenizerDefinition =
+            AnalysisTokenizerDefinition.Whitespace {
+                Version = Option.None
+                Type = "whitespace"
+                MaxTokenLength = Option.None
+            }
+
+    /// Smart constructors for TypesSettingsSimilarity
+    [<RequireQualifiedAccess>]
+    module TypesSettingsSimilarityBuilders =
+        /// Creates a BM25 with default values
+        let bM25 () : TypesSettingsSimilarity =
+            TypesSettingsSimilarity.BM25 {
+                Type = "BM25"
+                B = Option.None
+                DiscountOverlaps = Option.None
+                K1 = Option.None
+            }
+        /// Creates a DFI with default values
+        let dFI () : TypesSettingsSimilarity =
+            TypesSettingsSimilarity.DFI {
+                Type = "DFI"
+                IndependenceMeasure = Unchecked.defaultof<_>
+            }
+        /// Creates a DFR with default values
+        let dFR () : TypesSettingsSimilarity =
+            TypesSettingsSimilarity.DFR {
+                Type = "DFR"
+                AfterEffect = Unchecked.defaultof<_>
+                BasicModel = Unchecked.defaultof<_>
+                Normalization = Unchecked.defaultof<_>
+            }
+        /// Creates a IB with default values
+        let iB () : TypesSettingsSimilarity =
+            TypesSettingsSimilarity.IB {
+                Type = "IB"
+                Distribution = Unchecked.defaultof<_>
+                Lambda = Unchecked.defaultof<_>
+                Normalization = Unchecked.defaultof<_>
+            }
+        /// Creates a LMDirichlet with default values
+        let lMDirichlet () : TypesSettingsSimilarity =
+            TypesSettingsSimilarity.LMDirichlet {
+                Type = "LMDirichlet"
+                Mu = Option.None
+            }
+        /// Creates a LMJelinekMercer with default values
+        let lMJelinekMercer () : TypesSettingsSimilarity =
+            TypesSettingsSimilarity.LMJelinekMercer {
+                Type = "LMJelinekMercer"
+                Lambda = Option.None
+            }
+        /// Creates a Boolean with default values
+        let boolean () : TypesSettingsSimilarity =
+            TypesSettingsSimilarity.Boolean {
+                Type = "boolean"
+            }
+        /// Creates a Scripted with default values
+        let scripted () : TypesSettingsSimilarity =
+            TypesSettingsSimilarity.Scripted {
+                Type = "scripted"
+                Script = Unchecked.defaultof<_>
+                WeightScript = Option.None
+            }
+
+    /// Smart constructors for MappingProperty
+    [<RequireQualifiedAccess>]
+    module MappingPropertyBuilders =
+        /// Creates a AggregateMetricDouble with default values
+        let aggregateMetricDouble () : MappingProperty =
+            MappingProperty.AggregateMetricDouble {
+                Meta = Option.None
+                Properties = Option.None
+                IgnoreAbove = Option.None
+                Dynamic = Option.None
+                Fields = Option.None
+                SyntheticSourceKeep = Option.None
+                Type = "aggregate_metric_double"
+                DefaultMetric = ""
+                IgnoreMalformed = Option.None
+                Metrics = [||]
+                TimeSeriesMetric = Option.None
+            }
+        /// Creates a Alias with default values
+        let alias () : MappingProperty =
+            MappingProperty.Alias {
+                Meta = Option.None
+                Properties = Option.None
+                IgnoreAbove = Option.None
+                Dynamic = Option.None
+                Fields = Option.None
+                SyntheticSourceKeep = Option.None
+                Path = Option.None
+                Type = "alias"
+            }
+        /// Creates a Binary with default values
+        let binary () : MappingProperty =
+            MappingProperty.Binary {
+                Meta = Option.None
+                Properties = Option.None
+                IgnoreAbove = Option.None
+                Dynamic = Option.None
+                Fields = Option.None
+                SyntheticSourceKeep = Option.None
+                CopyTo = Option.None
+                Store = Option.None
+                DocValues = Option.None
+                Type = "binary"
+            }
+        /// Creates a Boolean with default values
+        let boolean () : MappingProperty =
+            MappingProperty.Boolean {
+                Meta = Option.None
+                Properties = Option.None
+                IgnoreAbove = Option.None
+                Dynamic = Option.None
+                Fields = Option.None
+                SyntheticSourceKeep = Option.None
+                CopyTo = Option.None
+                Store = Option.None
+                DocValues = Option.None
+                Boost = Option.None
+                Fielddata = Option.None
+                Index = Option.None
+                NullValue = Option.None
+                IgnoreMalformed = Option.None
+                Script = Option.None
+                OnScriptError = Option.None
+                TimeSeriesDimension = Option.None
+                Type = "boolean"
+            }
+        /// Creates a Byte with default values
+        let byte () : MappingProperty =
+            MappingProperty.Byte {
+                Meta = Option.None
+                Properties = Option.None
+                IgnoreAbove = Option.None
+                Dynamic = Option.None
+                Fields = Option.None
+                SyntheticSourceKeep = Option.None
+                CopyTo = Option.None
+                Store = Option.None
+                DocValues = Option.None
+                Boost = Option.None
+                Coerce = Option.None
+                IgnoreMalformed = Option.None
+                Index = Option.None
+                OnScriptError = Option.None
+                Script = Option.None
+                TimeSeriesMetric = Option.None
+                TimeSeriesDimension = Option.None
+                Type = "byte"
+                NullValue = Option.None
+            }
+        /// Creates a Completion with default values
+        let completion () : MappingProperty =
+            MappingProperty.Completion {
+                Meta = Option.None
+                Properties = Option.None
+                IgnoreAbove = Option.None
+                Dynamic = Option.None
+                Fields = Option.None
+                SyntheticSourceKeep = Option.None
+                CopyTo = Option.None
+                Store = Option.None
+                DocValues = Option.None
+                Analyzer = Option.None
+                Contexts = Option.None
+                MaxInputLength = Option.None
+                PreservePositionIncrements = Option.None
+                PreserveSeparators = Option.None
+                SearchAnalyzer = Option.None
+                Type = "completion"
+            }
+        /// Creates a ConstantKeyword with default values
+        let constantKeyword () : MappingProperty =
+            MappingProperty.ConstantKeyword {
+                Meta = Option.None
+                Properties = Option.None
+                IgnoreAbove = Option.None
+                Dynamic = Option.None
+                Fields = Option.None
+                SyntheticSourceKeep = Option.None
+                Value = Option.None
+                Type = "constant_keyword"
+            }
+        /// Creates a CountedKeyword with default values
+        let countedKeyword () : MappingProperty =
+            MappingProperty.CountedKeyword {
+                Meta = Option.None
+                Properties = Option.None
+                IgnoreAbove = Option.None
+                Dynamic = Option.None
+                Fields = Option.None
+                SyntheticSourceKeep = Option.None
+                Type = "counted_keyword"
+                Index = Option.None
+            }
+        /// Creates a Date with default values
+        let date () : MappingProperty =
+            MappingProperty.Date {
+                Meta = Option.None
+                Properties = Option.None
+                IgnoreAbove = Option.None
+                Dynamic = Option.None
+                Fields = Option.None
+                SyntheticSourceKeep = Option.None
+                CopyTo = Option.None
+                Store = Option.None
+                DocValues = Option.None
+                Boost = Option.None
+                Fielddata = Option.None
+                Format = Option.None
+                IgnoreMalformed = Option.None
+                Index = Option.None
+                Script = Option.None
+                OnScriptError = Option.None
+                NullValue = Option.None
+                PrecisionStep = Option.None
+                Locale = Option.None
+                Type = "date"
+            }
+        /// Creates a DateNanos with default values
+        let dateNanos () : MappingProperty =
+            MappingProperty.DateNanos {
+                Meta = Option.None
+                Properties = Option.None
+                IgnoreAbove = Option.None
+                Dynamic = Option.None
+                Fields = Option.None
+                SyntheticSourceKeep = Option.None
+                CopyTo = Option.None
+                Store = Option.None
+                DocValues = Option.None
+                Boost = Option.None
+                Format = Option.None
+                IgnoreMalformed = Option.None
+                Index = Option.None
+                Script = Option.None
+                OnScriptError = Option.None
+                NullValue = Option.None
+                PrecisionStep = Option.None
+                Type = "date_nanos"
+            }
+        /// Creates a DateRange with default values
+        let dateRange () : MappingProperty =
+            MappingProperty.DateRange {
+                Meta = Option.None
+                Properties = Option.None
+                IgnoreAbove = Option.None
+                Dynamic = Option.None
+                Fields = Option.None
+                SyntheticSourceKeep = Option.None
+                CopyTo = Option.None
+                Store = Option.None
+                DocValues = Option.None
+                Boost = Option.None
+                Coerce = Option.None
+                Index = Option.None
+                Format = Option.None
+                Type = "date_range"
+            }
+        /// Creates a DenseVector with default values
+        let denseVector () : MappingProperty =
+            MappingProperty.DenseVector {
+                Meta = Option.None
+                Properties = Option.None
+                IgnoreAbove = Option.None
+                Dynamic = Option.None
+                Fields = Option.None
+                SyntheticSourceKeep = Option.None
+                Type = "dense_vector"
+                Dims = Option.None
+                ElementType = Option.None
+                Index = Option.None
+                IndexOptions = Option.None
+                Similarity = Option.None
+            }
+        /// Creates a Double with default values
+        let double () : MappingProperty =
+            MappingProperty.Double {
+                Meta = Option.None
+                Properties = Option.None
+                IgnoreAbove = Option.None
+                Dynamic = Option.None
+                Fields = Option.None
+                SyntheticSourceKeep = Option.None
+                CopyTo = Option.None
+                Store = Option.None
+                DocValues = Option.None
+                Boost = Option.None
+                Coerce = Option.None
+                IgnoreMalformed = Option.None
+                Index = Option.None
+                OnScriptError = Option.None
+                Script = Option.None
+                TimeSeriesMetric = Option.None
+                TimeSeriesDimension = Option.None
+                Type = "double"
+                NullValue = Option.None
+            }
+        /// Creates a DoubleRange with default values
+        let doubleRange () : MappingProperty =
+            MappingProperty.DoubleRange {
+                Meta = Option.None
+                Properties = Option.None
+                IgnoreAbove = Option.None
+                Dynamic = Option.None
+                Fields = Option.None
+                SyntheticSourceKeep = Option.None
+                CopyTo = Option.None
+                Store = Option.None
+                DocValues = Option.None
+                Boost = Option.None
+                Coerce = Option.None
+                Index = Option.None
+                Type = "double_range"
+            }
+        /// Creates a ExponentialHistogram with default values
+        let exponentialHistogram () : MappingProperty =
+            MappingProperty.ExponentialHistogram {
+                Meta = Option.None
+                Properties = Option.None
+                IgnoreAbove = Option.None
+                Dynamic = Option.None
+                Fields = Option.None
+                SyntheticSourceKeep = Option.None
+                TimeSeriesMetric = Option.None
+                Type = "exponential_histogram"
+            }
+        /// Creates a Flattened with default values
+        let flattened () : MappingProperty =
+            MappingProperty.Flattened {
+                Meta = Option.None
+                Properties = Option.None
+                IgnoreAbove = Option.None
+                Dynamic = Option.None
+                Fields = Option.None
+                SyntheticSourceKeep = Option.None
+                Boost = Option.None
+                DepthLimit = Option.None
+                DocValues = Option.None
+                EagerGlobalOrdinals = Option.None
+                Index = Option.None
+                IndexOptions = Option.None
+                NullValue = Option.None
+                Similarity = Option.None
+                SplitQueriesOnWhitespace = Option.None
+                TimeSeriesDimensions = Option.None
+                Type = "flattened"
+            }
+        /// Creates a Float with default values
+        let float () : MappingProperty =
+            MappingProperty.Float {
+                Meta = Option.None
+                Properties = Option.None
+                IgnoreAbove = Option.None
+                Dynamic = Option.None
+                Fields = Option.None
+                SyntheticSourceKeep = Option.None
+                CopyTo = Option.None
+                Store = Option.None
+                DocValues = Option.None
+                Boost = Option.None
+                Coerce = Option.None
+                IgnoreMalformed = Option.None
+                Index = Option.None
+                OnScriptError = Option.None
+                Script = Option.None
+                TimeSeriesMetric = Option.None
+                TimeSeriesDimension = Option.None
+                Type = "float"
+                NullValue = Option.None
+            }
+        /// Creates a FloatRange with default values
+        let floatRange () : MappingProperty =
+            MappingProperty.FloatRange {
+                Meta = Option.None
+                Properties = Option.None
+                IgnoreAbove = Option.None
+                Dynamic = Option.None
+                Fields = Option.None
+                SyntheticSourceKeep = Option.None
+                CopyTo = Option.None
+                Store = Option.None
+                DocValues = Option.None
+                Boost = Option.None
+                Coerce = Option.None
+                Index = Option.None
+                Type = "float_range"
+            }
+        /// Creates a GeoPoint with default values
+        let geoPoint () : MappingProperty =
+            MappingProperty.GeoPoint {
+                Meta = Option.None
+                Properties = Option.None
+                IgnoreAbove = Option.None
+                Dynamic = Option.None
+                Fields = Option.None
+                SyntheticSourceKeep = Option.None
+                CopyTo = Option.None
+                Store = Option.None
+                DocValues = Option.None
+                IgnoreMalformed = Option.None
+                IgnoreZValue = Option.None
+                NullValue = Option.None
+                Index = Option.None
+                OnScriptError = Option.None
+                Script = Option.None
+                Type = "geo_point"
+                TimeSeriesMetric = Option.None
+            }
+        /// Creates a GeoShape with default values
+        let geoShape () : MappingProperty =
+            MappingProperty.GeoShape {
+                Meta = Option.None
+                Properties = Option.None
+                IgnoreAbove = Option.None
+                Dynamic = Option.None
+                Fields = Option.None
+                SyntheticSourceKeep = Option.None
+                CopyTo = Option.None
+                Store = Option.None
+                DocValues = Option.None
+                Coerce = Option.None
+                IgnoreMalformed = Option.None
+                IgnoreZValue = Option.None
+                Index = Option.None
+                Orientation = Option.None
+                Strategy = Option.None
+                Type = "geo_shape"
+            }
+        /// Creates a HalfFloat with default values
+        let halfFloat () : MappingProperty =
+            MappingProperty.HalfFloat {
+                Meta = Option.None
+                Properties = Option.None
+                IgnoreAbove = Option.None
+                Dynamic = Option.None
+                Fields = Option.None
+                SyntheticSourceKeep = Option.None
+                CopyTo = Option.None
+                Store = Option.None
+                DocValues = Option.None
+                Boost = Option.None
+                Coerce = Option.None
+                IgnoreMalformed = Option.None
+                Index = Option.None
+                OnScriptError = Option.None
+                Script = Option.None
+                TimeSeriesMetric = Option.None
+                TimeSeriesDimension = Option.None
+                Type = "half_float"
+                NullValue = Option.None
+            }
+        /// Creates a Histogram with default values
+        let histogram () : MappingProperty =
+            MappingProperty.Histogram {
+                Meta = Option.None
+                Properties = Option.None
+                IgnoreAbove = Option.None
+                Dynamic = Option.None
+                Fields = Option.None
+                SyntheticSourceKeep = Option.None
+                IgnoreMalformed = Option.None
+                TimeSeriesMetric = Option.None
+                Type = "histogram"
+            }
+        /// Creates a IcuCollationKeyword with default values
+        let icuCollationKeyword () : MappingProperty =
+            MappingProperty.IcuCollationKeyword {
+                Meta = Option.None
+                Properties = Option.None
+                IgnoreAbove = Option.None
+                Dynamic = Option.None
+                Fields = Option.None
+                SyntheticSourceKeep = Option.None
+                CopyTo = Option.None
+                Store = Option.None
+                DocValues = Option.None
+                Type = "icu_collation_keyword"
+                Norms = Option.None
+                IndexOptions = Option.None
+                Index = Option.None
+                NullValue = Option.None
+                Rules = Option.None
+                Language = Option.None
+                Country = Option.None
+                Variant = Option.None
+                Strength = Option.None
+                Decomposition = Option.None
+                Alternate = Option.None
+                CaseLevel = Option.None
+                CaseFirst = Option.None
+                Numeric = Option.None
+                VariableTop = Option.None
+                HiraganaQuaternaryMode = Option.None
+            }
+        /// Creates a Integer with default values
+        let integer () : MappingProperty =
+            MappingProperty.Integer {
+                Meta = Option.None
+                Properties = Option.None
+                IgnoreAbove = Option.None
+                Dynamic = Option.None
+                Fields = Option.None
+                SyntheticSourceKeep = Option.None
+                CopyTo = Option.None
+                Store = Option.None
+                DocValues = Option.None
+                Boost = Option.None
+                Coerce = Option.None
+                IgnoreMalformed = Option.None
+                Index = Option.None
+                OnScriptError = Option.None
+                Script = Option.None
+                TimeSeriesMetric = Option.None
+                TimeSeriesDimension = Option.None
+                Type = "integer"
+                NullValue = Option.None
+            }
+        /// Creates a IntegerRange with default values
+        let integerRange () : MappingProperty =
+            MappingProperty.IntegerRange {
+                Meta = Option.None
+                Properties = Option.None
+                IgnoreAbove = Option.None
+                Dynamic = Option.None
+                Fields = Option.None
+                SyntheticSourceKeep = Option.None
+                CopyTo = Option.None
+                Store = Option.None
+                DocValues = Option.None
+                Boost = Option.None
+                Coerce = Option.None
+                Index = Option.None
+                Type = "integer_range"
+            }
+        /// Creates a Ip with default values
+        let ip () : MappingProperty =
+            MappingProperty.Ip {
+                Meta = Option.None
+                Properties = Option.None
+                IgnoreAbove = Option.None
+                Dynamic = Option.None
+                Fields = Option.None
+                SyntheticSourceKeep = Option.None
+                CopyTo = Option.None
+                Store = Option.None
+                DocValues = Option.None
+                Boost = Option.None
+                Index = Option.None
+                IgnoreMalformed = Option.None
+                NullValue = Option.None
+                OnScriptError = Option.None
+                Script = Option.None
+                TimeSeriesDimension = Option.None
+                Type = "ip"
+            }
+        /// Creates a IpRange with default values
+        let ipRange () : MappingProperty =
+            MappingProperty.IpRange {
+                Meta = Option.None
+                Properties = Option.None
+                IgnoreAbove = Option.None
+                Dynamic = Option.None
+                Fields = Option.None
+                SyntheticSourceKeep = Option.None
+                CopyTo = Option.None
+                Store = Option.None
+                DocValues = Option.None
+                Boost = Option.None
+                Coerce = Option.None
+                Index = Option.None
+                Type = "ip_range"
+            }
+        /// Creates a Join with default values
+        let join () : MappingProperty =
+            MappingProperty.Join {
+                Meta = Option.None
+                Properties = Option.None
+                IgnoreAbove = Option.None
+                Dynamic = Option.None
+                Fields = Option.None
+                SyntheticSourceKeep = Option.None
+                Relations = Option.None
+                EagerGlobalOrdinals = Option.None
+                Type = "join"
+            }
+        /// Creates a Keyword with default values
+        let keyword () : MappingProperty =
+            MappingProperty.Keyword {
+                Meta = Option.None
+                Properties = Option.None
+                IgnoreAbove = Option.None
+                Dynamic = Option.None
+                Fields = Option.None
+                SyntheticSourceKeep = Option.None
+                CopyTo = Option.None
+                Store = Option.None
+                DocValues = Option.None
+                Boost = Option.None
+                EagerGlobalOrdinals = Option.None
+                Index = Option.None
+                IndexOptions = Option.None
+                Script = Option.None
+                OnScriptError = Option.None
+                Normalizer = Option.None
+                Norms = Option.None
+                NullValue = Option.None
+                Similarity = Option.None
+                SplitQueriesOnWhitespace = Option.None
+                TimeSeriesDimension = Option.None
+                Type = "keyword"
+            }
+        /// Creates a Long with default values
+        let long () : MappingProperty =
+            MappingProperty.Long {
+                Meta = Option.None
+                Properties = Option.None
+                IgnoreAbove = Option.None
+                Dynamic = Option.None
+                Fields = Option.None
+                SyntheticSourceKeep = Option.None
+                CopyTo = Option.None
+                Store = Option.None
+                DocValues = Option.None
+                Boost = Option.None
+                Coerce = Option.None
+                IgnoreMalformed = Option.None
+                Index = Option.None
+                OnScriptError = Option.None
+                Script = Option.None
+                TimeSeriesMetric = Option.None
+                TimeSeriesDimension = Option.None
+                Type = "long"
+                NullValue = Option.None
+            }
+        /// Creates a LongRange with default values
+        let longRange () : MappingProperty =
+            MappingProperty.LongRange {
+                Meta = Option.None
+                Properties = Option.None
+                IgnoreAbove = Option.None
+                Dynamic = Option.None
+                Fields = Option.None
+                SyntheticSourceKeep = Option.None
+                CopyTo = Option.None
+                Store = Option.None
+                DocValues = Option.None
+                Boost = Option.None
+                Coerce = Option.None
+                Index = Option.None
+                Type = "long_range"
+            }
+        /// Creates a MatchOnlyText with default values
+        let matchOnlyText () : MappingProperty =
+            MappingProperty.MatchOnlyText {
+                Type = "match_only_text"
+                Fields = Option.None
+                Meta = Option.None
+                CopyTo = Option.None
+            }
+        /// Creates a Murmur3 with default values
+        let murmur3 () : MappingProperty =
+            MappingProperty.Murmur3 {
+                Meta = Option.None
+                Properties = Option.None
+                IgnoreAbove = Option.None
+                Dynamic = Option.None
+                Fields = Option.None
+                SyntheticSourceKeep = Option.None
+                CopyTo = Option.None
+                Store = Option.None
+                DocValues = Option.None
+                Type = "murmur3"
+            }
+        /// Creates a Nested with default values
+        let nested () : MappingProperty =
+            MappingProperty.Nested {
+                Meta = Option.None
+                Properties = Option.None
+                IgnoreAbove = Option.None
+                Dynamic = Option.None
+                Fields = Option.None
+                SyntheticSourceKeep = Option.None
+                CopyTo = Option.None
+                Store = Option.None
+                Enabled = Option.None
+                IncludeInParent = Option.None
+                IncludeInRoot = Option.None
+                Type = "nested"
+            }
+        /// Creates a Object with default values
+        let object () : MappingProperty =
+            MappingProperty.Object {
+                Meta = Option.None
+                Properties = Option.None
+                IgnoreAbove = Option.None
+                Dynamic = Option.None
+                Fields = Option.None
+                SyntheticSourceKeep = Option.None
+                CopyTo = Option.None
+                Store = Option.None
+                Enabled = Option.None
+                Subobjects = Option.None
+                Type = Some "object"
+            }
+        /// Creates a Passthrough with default values
+        let passthrough () : MappingProperty =
+            MappingProperty.Passthrough {
+                Meta = Option.None
+                Properties = Option.None
+                IgnoreAbove = Option.None
+                Dynamic = Option.None
+                Fields = Option.None
+                SyntheticSourceKeep = Option.None
+                CopyTo = Option.None
+                Store = Option.None
+                Type = Some "passthrough"
+                Enabled = Option.None
+                Priority = Option.None
+                TimeSeriesDimension = Option.None
+            }
+        /// Creates a Percolator with default values
+        let percolator () : MappingProperty =
+            MappingProperty.Percolator {
+                Meta = Option.None
+                Properties = Option.None
+                IgnoreAbove = Option.None
+                Dynamic = Option.None
+                Fields = Option.None
+                SyntheticSourceKeep = Option.None
+                Type = "percolator"
+            }
+        /// Creates a Point with default values
+        let point () : MappingProperty =
+            MappingProperty.Point {
+                Meta = Option.None
+                Properties = Option.None
+                IgnoreAbove = Option.None
+                Dynamic = Option.None
+                Fields = Option.None
+                SyntheticSourceKeep = Option.None
+                CopyTo = Option.None
+                Store = Option.None
+                DocValues = Option.None
+                IgnoreMalformed = Option.None
+                IgnoreZValue = Option.None
+                NullValue = Option.None
+                Type = "point"
+            }
+        /// Creates a RankFeature with default values
+        let rankFeature () : MappingProperty =
+            MappingProperty.RankFeature {
+                Meta = Option.None
+                Properties = Option.None
+                IgnoreAbove = Option.None
+                Dynamic = Option.None
+                Fields = Option.None
+                SyntheticSourceKeep = Option.None
+                PositiveScoreImpact = Option.None
+                Type = "rank_feature"
+            }
+        /// Creates a RankFeatures with default values
+        let rankFeatures () : MappingProperty =
+            MappingProperty.RankFeatures {
+                Meta = Option.None
+                Properties = Option.None
+                IgnoreAbove = Option.None
+                Dynamic = Option.None
+                Fields = Option.None
+                SyntheticSourceKeep = Option.None
+                PositiveScoreImpact = Option.None
+                Type = "rank_features"
+            }
+        /// Creates a RankVectors with default values
+        let rankVectors () : MappingProperty =
+            MappingProperty.RankVectors {
+                Meta = Option.None
+                Properties = Option.None
+                IgnoreAbove = Option.None
+                Dynamic = Option.None
+                Fields = Option.None
+                SyntheticSourceKeep = Option.None
+                Type = "rank_vectors"
+                ElementType = Option.None
+                Dims = Option.None
+            }
+        /// Creates a ScaledFloat with default values
+        let scaledFloat () : MappingProperty =
+            MappingProperty.ScaledFloat {
+                Meta = Option.None
+                Properties = Option.None
+                IgnoreAbove = Option.None
+                Dynamic = Option.None
+                Fields = Option.None
+                SyntheticSourceKeep = Option.None
+                CopyTo = Option.None
+                Store = Option.None
+                DocValues = Option.None
+                Boost = Option.None
+                Coerce = Option.None
+                IgnoreMalformed = Option.None
+                Index = Option.None
+                OnScriptError = Option.None
+                Script = Option.None
+                TimeSeriesMetric = Option.None
+                TimeSeriesDimension = Option.None
+                Type = "scaled_float"
+                NullValue = Option.None
+                ScalingFactor = Option.None
+            }
+        /// Creates a SearchAsYouType with default values
+        let searchAsYouType () : MappingProperty =
+            MappingProperty.SearchAsYouType {
+                Meta = Option.None
+                Properties = Option.None
+                IgnoreAbove = Option.None
+                Dynamic = Option.None
+                Fields = Option.None
+                SyntheticSourceKeep = Option.None
+                CopyTo = Option.None
+                Store = Option.None
+                Analyzer = Option.None
+                Index = Option.None
+                IndexOptions = Option.None
+                MaxShingleSize = Option.None
+                Norms = Option.None
+                SearchAnalyzer = Option.None
+                SearchQuoteAnalyzer = Option.None
+                Similarity = Option.None
+                TermVector = Option.None
+                Type = "search_as_you_type"
+            }
+        /// Creates a SemanticText with default values
+        let semanticText () : MappingProperty =
+            MappingProperty.SemanticText {
+                Type = "semantic_text"
+                Meta = Option.None
+                InferenceId = Option.None
+                SearchInferenceId = Option.None
+                IndexOptions = Option.None
+                ChunkingSettings = Option.None
+                Fields = Option.None
+            }
+        /// Creates a Shape with default values
+        let shape () : MappingProperty =
+            MappingProperty.Shape {
+                Meta = Option.None
+                Properties = Option.None
+                IgnoreAbove = Option.None
+                Dynamic = Option.None
+                Fields = Option.None
+                SyntheticSourceKeep = Option.None
+                CopyTo = Option.None
+                Store = Option.None
+                DocValues = Option.None
+                Coerce = Option.None
+                IgnoreMalformed = Option.None
+                IgnoreZValue = Option.None
+                Orientation = Option.None
+                Type = "shape"
+            }
+        /// Creates a Short with default values
+        let short () : MappingProperty =
+            MappingProperty.Short {
+                Meta = Option.None
+                Properties = Option.None
+                IgnoreAbove = Option.None
+                Dynamic = Option.None
+                Fields = Option.None
+                SyntheticSourceKeep = Option.None
+                CopyTo = Option.None
+                Store = Option.None
+                DocValues = Option.None
+                Boost = Option.None
+                Coerce = Option.None
+                IgnoreMalformed = Option.None
+                Index = Option.None
+                OnScriptError = Option.None
+                Script = Option.None
+                TimeSeriesMetric = Option.None
+                TimeSeriesDimension = Option.None
+                Type = "short"
+                NullValue = Option.None
+            }
+        /// Creates a SparseVector with default values
+        let sparseVector () : MappingProperty =
+            MappingProperty.SparseVector {
+                Meta = Option.None
+                Properties = Option.None
+                IgnoreAbove = Option.None
+                Dynamic = Option.None
+                Fields = Option.None
+                SyntheticSourceKeep = Option.None
+                Store = Option.None
+                Type = "sparse_vector"
+                IndexOptions = Option.None
+            }
+        /// Creates a Text with default values
+        let text () : MappingProperty =
+            MappingProperty.Text {
+                Meta = Option.None
+                Properties = Option.None
+                IgnoreAbove = Option.None
+                Dynamic = Option.None
+                Fields = Option.None
+                SyntheticSourceKeep = Option.None
+                CopyTo = Option.None
+                Store = Option.None
+                Analyzer = Option.None
+                Boost = Option.None
+                EagerGlobalOrdinals = Option.None
+                Fielddata = Option.None
+                FielddataFrequencyFilter = Option.None
+                Index = Option.None
+                IndexOptions = Option.None
+                IndexPhrases = Option.None
+                IndexPrefixes = Option.None
+                Norms = Option.None
+                PositionIncrementGap = Option.None
+                SearchAnalyzer = Option.None
+                SearchQuoteAnalyzer = Option.None
+                Similarity = Option.None
+                TermVector = Option.None
+                Type = "text"
+            }
+        /// Creates a TokenCount with default values
+        let tokenCount () : MappingProperty =
+            MappingProperty.TokenCount {
+                Meta = Option.None
+                Properties = Option.None
+                IgnoreAbove = Option.None
+                Dynamic = Option.None
+                Fields = Option.None
+                SyntheticSourceKeep = Option.None
+                CopyTo = Option.None
+                Store = Option.None
+                DocValues = Option.None
+                Analyzer = Option.None
+                Boost = Option.None
+                Index = Option.None
+                NullValue = Option.None
+                EnablePositionIncrements = Option.None
+                Type = "token_count"
+            }
+        /// Creates a UnsignedLong with default values
+        let unsignedLong () : MappingProperty =
+            MappingProperty.UnsignedLong {
+                Meta = Option.None
+                Properties = Option.None
+                IgnoreAbove = Option.None
+                Dynamic = Option.None
+                Fields = Option.None
+                SyntheticSourceKeep = Option.None
+                CopyTo = Option.None
+                Store = Option.None
+                DocValues = Option.None
+                Boost = Option.None
+                Coerce = Option.None
+                IgnoreMalformed = Option.None
+                Index = Option.None
+                OnScriptError = Option.None
+                Script = Option.None
+                TimeSeriesMetric = Option.None
+                TimeSeriesDimension = Option.None
+                Type = "unsigned_long"
+                NullValue = Option.None
+            }
+        /// Creates a Version with default values
+        let version () : MappingProperty =
+            MappingProperty.Version {
+                Meta = Option.None
+                Properties = Option.None
+                IgnoreAbove = Option.None
+                Dynamic = Option.None
+                Fields = Option.None
+                SyntheticSourceKeep = Option.None
+                CopyTo = Option.None
+                Store = Option.None
+                DocValues = Option.None
+                Type = "version"
+            }
+        /// Creates a Wildcard with default values
+        let wildcard () : MappingProperty =
+            MappingProperty.Wildcard {
+                Meta = Option.None
+                Properties = Option.None
+                IgnoreAbove = Option.None
+                Dynamic = Option.None
+                Fields = Option.None
+                SyntheticSourceKeep = Option.None
+                CopyTo = Option.None
+                Store = Option.None
+                DocValues = Option.None
+                Type = "wildcard"
+                NullValue = Option.None
+            }
+
+    /// Smart constructors for RemoteInfoClusterRemoteInfo
+    [<RequireQualifiedAccess>]
+    module RemoteInfoClusterRemoteInfoBuilders =
+        /// Creates a Proxy with default values
+        let proxy () : RemoteInfoClusterRemoteInfo =
+            RemoteInfoClusterRemoteInfo.Proxy {
+                Mode = "proxy"
+                Connected = false
+                InitialConnectTimeout = Unchecked.defaultof<_>
+                SkipUnavailable = false
+                ProxyAddress = ""
+                ServerName = ""
+                NumProxySocketsConnected = 0.0
+                MaxProxySocketConnections = 0.0
+                ClusterCredentials = Option.None
+            }
+        /// Creates a Sniff with default values
+        let sniff () : RemoteInfoClusterRemoteInfo =
+            RemoteInfoClusterRemoteInfo.Sniff {
+                Mode = "sniff"
+                Connected = false
+                MaxConnectionsPerCluster = 0.0
+                NumNodesConnected = 0.0
+                InitialConnectTimeout = Unchecked.defaultof<_>
+                SkipUnavailable = false
+                Seeds = [||]
+            }
+
+    /// Smart constructors for TypesValidation
+    [<RequireQualifiedAccess>]
+    module TypesValidationBuilders =
+        /// Creates a GreaterThan with default values
+        let greaterThan () : TypesValidation =
+            TypesValidation.GreaterThan {
+                Type = "greater_than"
+                Constraint = 0.0
+            }
+        /// Creates a IncludedIn with default values
+        let includedIn () : TypesValidation =
+            TypesValidation.IncludedIn {
+                Type = "included_in"
+                Constraint = [||]
+            }
+        /// Creates a LessThan with default values
+        let lessThan () : TypesValidation =
+            TypesValidation.LessThan {
+                Type = "less_than"
+                Constraint = 0.0
+            }
+        /// Creates a ListType with default values
+        let listType () : TypesValidation =
+            TypesValidation.ListType {
+                Type = "list_type"
+                Constraint = ""
+            }
+        /// Creates a Regex with default values
+        let regex () : TypesValidation =
+            TypesValidation.Regex {
+                Type = "regex"
+                Constraint = ""
+            }
+
+    /// Smart constructors for ExplainLifecycleLifecycleExplain
+    [<RequireQualifiedAccess>]
+    module ExplainLifecycleLifecycleExplainBuilders =
+        /// Creates a False with default values
+        let ``false`` () : ExplainLifecycleLifecycleExplain =
+            ExplainLifecycleLifecycleExplain.False {
+                Index = Unchecked.defaultof<_>
+                Managed = "false"
+            }
+        /// Creates a True with default values
+        let ``true`` () : ExplainLifecycleLifecycleExplain =
+            ExplainLifecycleLifecycleExplain.True {
+                Action = Option.None
+                ActionTime = Option.None
+                ActionTimeMillis = Option.None
+                Age = Option.None
+                AgeInMillis = Option.None
+                FailedStep = Option.None
+                FailedStepRetryCount = Option.None
+                Index = Unchecked.defaultof<_>
+                IndexCreationDate = Option.None
+                IndexCreationDateMillis = Option.None
+                IsAutoRetryableError = Option.None
+                LifecycleDate = Option.None
+                LifecycleDateMillis = Option.None
+                Managed = "true"
+                Phase = Option.None
+                PhaseTime = Option.None
+                PhaseTimeMillis = Option.None
+                Policy = Option.None
+                PreviousStepInfo = Option.None
+                RepositoryName = Option.None
+                SnapshotName = Option.None
+                ShrinkIndexName = Option.None
+                Step = Option.None
+                StepInfo = Option.None
+                StepTime = Option.None
+                StepTimeMillis = Option.None
+                PhaseExecution = Option.None
+                TimeSinceIndexCreation = Option.None
+                Skip = false
+            }
+
+    /// Smart constructors for TypesRepository
+    [<RequireQualifiedAccess>]
+    module TypesRepositoryBuilders =
+        /// Creates a Azure with default values
+        let azure () : TypesRepository =
+            TypesRepository.Azure {
+                Uuid = Option.None
+                Type = "azure"
+                Settings = Option.None
+            }
+        /// Creates a Fs with default values
+        let fs () : TypesRepository =
+            TypesRepository.Fs {
+                Uuid = Option.None
+                Type = "fs"
+                Settings = Unchecked.defaultof<_>
+            }
+        /// Creates a Gcs with default values
+        let gcs () : TypesRepository =
+            TypesRepository.Gcs {
+                Uuid = Option.None
+                Type = "gcs"
+                Settings = Unchecked.defaultof<_>
+            }
+        /// Creates a S3 with default values
+        let s3 () : TypesRepository =
+            TypesRepository.S3 {
+                Uuid = Option.None
+                Type = "s3"
+                Settings = Unchecked.defaultof<_>
+            }
+        /// Creates a Source with default values
+        let source () : TypesRepository =
+            TypesRepository.Source {
+                Uuid = Option.None
+                Type = "source"
+                Settings = Unchecked.defaultof<_>
+            }
+        /// Creates a Url with default values
+        let url () : TypesRepository =
+            TypesRepository.Url {
+                Uuid = Option.None
+                Type = "url"
+                Settings = Unchecked.defaultof<_>
+            }
 
