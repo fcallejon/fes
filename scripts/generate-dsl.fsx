@@ -1167,10 +1167,14 @@ let generateOperationRequestType (op: OperationDefinition) : string =
         sb.AppendLine($"    type {typeName} = unit") |> ignore
     else
         // First pass: compute renamed field names to handle collisions
+        // Use descriptive prefixes instead of numeric suffixes:
+        // - Path parameters: no prefix (they come first)
+        // - Query parameters with collision: "Query" prefix
+        // - Body parameters with collision: "Body" prefix
         let usedNames = HashSet<string>()
         let fieldNameMap = System.Collections.Generic.Dictionary<string, string>() // "location:originalName" -> fsharpName
 
-        // Path parameters first
+        // Path parameters first (no prefix needed as they have priority)
         for pathParam in op.PathParameters do
             let baseName = toPascalCase pathParam.Name
             let mutable fsharpName = baseName
@@ -1181,24 +1185,30 @@ let generateOperationRequestType (op: OperationDefinition) : string =
             usedNames.Add(fsharpName) |> ignore
             fieldNameMap.[$"path:{pathParam.Name}"] <- fsharpName
 
-        // Query parameters
+        // Query parameters - use "Query" prefix on collision
         for queryParam in op.QueryParameters do
             let baseName = toPascalCase queryParam.Name
             let mutable fsharpName = baseName
+            if usedNames.Contains(fsharpName) then
+                fsharpName <- $"Query{baseName}"
+            // If still collision (rare), fall back to numeric suffix
             let mutable suffix = 2
             while usedNames.Contains(fsharpName) do
-                fsharpName <- $"{baseName}{suffix}"
+                fsharpName <- $"Query{baseName}{suffix}"
                 suffix <- suffix + 1
             usedNames.Add(fsharpName) |> ignore
             fieldNameMap.[$"query:{queryParam.Name}"] <- fsharpName
 
-        // Body fields
+        // Body fields - use "Body" prefix on collision
         for bodyField in bodyFields do
             let baseName = toPascalCase bodyField.Name
             let mutable fsharpName = baseName
+            if usedNames.Contains(fsharpName) then
+                fsharpName <- $"Body{baseName}"
+            // If still collision (rare), fall back to numeric suffix
             let mutable suffix = 2
             while usedNames.Contains(fsharpName) do
-                fsharpName <- $"{baseName}{suffix}"
+                fsharpName <- $"Body{baseName}{suffix}"
                 suffix <- suffix + 1
             usedNames.Add(fsharpName) |> ignore
             fieldNameMap.[$"body:{bodyField.Name}"] <- fsharpName
@@ -1320,22 +1330,33 @@ let generateOperationBuilder (op: OperationDefinition) : string =
                 [("body", fsharpTypeName, true)]
             | None -> []
 
-    let allFields = pathFields @ queryFields @ bodyFields
+    // Tag fields with their origin for collision handling
+    let taggedPathFields = pathFields |> List.map (fun (n, t, r) -> ("path", n, t, r))
+    let taggedQueryFields = queryFields |> List.map (fun (n, t, r) -> ("query", n, t, r))
+    let taggedBodyFields = bodyFields |> List.map (fun (n, t, r) -> ("body", n, t, r))
+    let allTaggedFields = taggedPathFields @ taggedQueryFields @ taggedBodyFields
 
-    if allFields.IsEmpty then
+    if allTaggedFields.IsEmpty then
         sb.AppendLine($"    let {Char.ToLower(typeName[0])}{typeName.Substring(1)} = ()") |> ignore
     else
         sb.AppendLine($"    type {builderName}() =") |> ignore
         sb.AppendLine($"        member _.Yield(_: unit) : {typeName} =") |> ignore
         sb.AppendLine($"            {{") |> ignore
 
+        // Use same collision handling as request type generation
         let usedNames = HashSet<string>()
-        for (name, fsharpType, required) in allFields do
+        for (origin, name, fsharpType, required) in allTaggedFields do
             let baseName = toPascalCase name
             let mutable fsharpName = baseName
+            // Use location-based prefix on collision
+            if usedNames.Contains(fsharpName) then
+                let prefix = match origin with "query" -> "Query" | "body" -> "Body" | _ -> ""
+                fsharpName <- $"{prefix}{baseName}"
+            // If still collision, fall back to numeric suffix
             let mutable suffix = 2
             while usedNames.Contains(fsharpName) do
-                fsharpName <- $"{baseName}{suffix}"
+                let prefix = match origin with "query" -> "Query" | "body" -> "Body" | _ -> ""
+                fsharpName <- $"{prefix}{baseName}{suffix}"
                 suffix <- suffix + 1
             usedNames.Add(fsharpName) |> ignore
             let defaultValue =
@@ -1355,20 +1376,31 @@ let generateOperationBuilder (op: OperationDefinition) : string =
 
         usedNames.Clear()
         let operationNames = HashSet<string>()
-        for (name, fsharpType, required) in allFields do
+        for (origin, name, fsharpType, required) in allTaggedFields do
             let baseName = toPascalCase name
             let mutable fsharpName = baseName
+            // Use location-based prefix on collision
+            if usedNames.Contains(fsharpName) then
+                let prefix = match origin with "query" -> "Query" | "body" -> "Body" | _ -> ""
+                fsharpName <- $"{prefix}{baseName}"
+            // If still collision, fall back to numeric suffix
             let mutable suffix = 2
             while usedNames.Contains(fsharpName) do
-                fsharpName <- $"{baseName}{suffix}"
+                let prefix = match origin with "query" -> "Query" | "body" -> "Body" | _ -> ""
+                fsharpName <- $"{prefix}{baseName}{suffix}"
                 suffix <- suffix + 1
             usedNames.Add(fsharpName) |> ignore
 
+            // Custom operation name uses snake_case with location prefix on collision
             let baseOpName = name.Replace(".", "_").Replace("-", "_")
             let mutable opName = baseOpName
+            if operationNames.Contains(opName) then
+                let prefix = match origin with "query" -> "query_" | "body" -> "body_" | _ -> ""
+                opName <- $"{prefix}{baseOpName}"
             let mutable opSuffix = 2
             while operationNames.Contains(opName) do
-                opName <- $"{baseOpName}{opSuffix}"
+                let prefix = match origin with "query" -> "query_" | "body" -> "body_" | _ -> ""
+                opName <- $"{prefix}{baseOpName}{opSuffix}"
                 opSuffix <- opSuffix + 1
             operationNames.Add(opName) |> ignore
 

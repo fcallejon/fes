@@ -742,13 +742,13 @@ module DocumentOperations =
         WaitForActiveShards: WaitForActiveShards option
         WaitForCompletion: bool option
         [<JsonPropertyName("max_docs")>]
-        MaxDocs2: float option
+        BodyMaxDocs: float option
         [<JsonPropertyName("query")>]
         Query: QueryDslQueryContainer option
         [<JsonPropertyName("slice")>]
         Slice: SlicedScroll option
         [<JsonPropertyName("sort")>]
-        Sort2: Sort option
+        BodySort: Sort option
     } with
         static member ToRequest(request: DeleteByQueryRequest) : Result<Fes.Http.RequestMsg, exn> =
             try
@@ -792,7 +792,7 @@ module DocumentOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody {| ``max_docs`` = request.MaxDocs2; ``query`` = request.Query; ``slice`` = request.Slice; ``sort`` = request.Sort2 |}
+                |> Fes.Http.Request.withJsonBody {| ``max_docs`` = request.BodyMaxDocs; ``query`` = request.Query; ``slice`` = request.Slice; ``sort`` = request.BodySort |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -834,10 +834,10 @@ module DocumentOperations =
                 DeleteByQueryRequest.Version = Option.None
                 DeleteByQueryRequest.WaitForActiveShards = Option.None
                 DeleteByQueryRequest.WaitForCompletion = Option.None
-                DeleteByQueryRequest.MaxDocs2 = Option.None
+                DeleteByQueryRequest.BodyMaxDocs = Option.None
                 DeleteByQueryRequest.Query = Option.None
                 DeleteByQueryRequest.Slice = Option.None
-                DeleteByQueryRequest.Sort2 = Option.None
+                DeleteByQueryRequest.BodySort = Option.None
             } : DeleteByQueryRequest
 
         [<CustomOperation("index")>]
@@ -960,9 +960,9 @@ module DocumentOperations =
         member _.WaitForCompletion(state: DeleteByQueryRequest, value: bool) =
             { state with DeleteByQueryRequest.WaitForCompletion = Option.Some value } : DeleteByQueryRequest
 
-        [<CustomOperation("max_docs2")>]
-        member _.MaxDocs2(state: DeleteByQueryRequest, value: float) =
-            { state with DeleteByQueryRequest.MaxDocs2 = Option.Some value } : DeleteByQueryRequest
+        [<CustomOperation("body_max_docs")>]
+        member _.BodyMaxDocs(state: DeleteByQueryRequest, value: float) =
+            { state with DeleteByQueryRequest.BodyMaxDocs = Option.Some value } : DeleteByQueryRequest
 
         [<CustomOperation("query")>]
         member _.Query(state: DeleteByQueryRequest, value: QueryDslQueryContainer) =
@@ -972,9 +972,9 @@ module DocumentOperations =
         member _.Slice(state: DeleteByQueryRequest, value: SlicedScroll) =
             { state with DeleteByQueryRequest.Slice = Option.Some value } : DeleteByQueryRequest
 
-        [<CustomOperation("sort2")>]
-        member _.Sort2(state: DeleteByQueryRequest, value: Sort) =
-            { state with DeleteByQueryRequest.Sort2 = Option.Some value } : DeleteByQueryRequest
+        [<CustomOperation("body_sort")>]
+        member _.BodySort(state: DeleteByQueryRequest, value: Sort) =
+            { state with DeleteByQueryRequest.BodySort = Option.Some value } : DeleteByQueryRequest
 
     let deleteByQueryRequest = DeleteByQueryRequestBuilder()
 
@@ -1392,7 +1392,7 @@ module DocumentOperations =
         [<JsonPropertyName("docs")>]
         Docs: MtermvectorsOperation array option
         [<JsonPropertyName("ids")>]
-        Ids2: Id array option
+        BodyIds: Id array option
     } with
         static member ToRequest(request: MtermvectorsRequest) : Result<Fes.Http.RequestMsg, exn> =
             try
@@ -1419,7 +1419,7 @@ module DocumentOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody {| ``docs`` = request.Docs; ``ids`` = request.Ids2 |}
+                |> Fes.Http.Request.withJsonBody {| ``docs`` = request.Docs; ``ids`` = request.BodyIds |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1445,7 +1445,7 @@ module DocumentOperations =
                 MtermvectorsRequest.Version = Option.None
                 MtermvectorsRequest.VersionType = Option.None
                 MtermvectorsRequest.Docs = Option.None
-                MtermvectorsRequest.Ids2 = Option.None
+                MtermvectorsRequest.BodyIds = Option.None
             } : MtermvectorsRequest
 
         [<CustomOperation("index")>]
@@ -1504,9 +1504,9 @@ module DocumentOperations =
         member _.Docs(state: MtermvectorsRequest, value: MtermvectorsOperation array) =
             { state with MtermvectorsRequest.Docs = Option.Some value } : MtermvectorsRequest
 
-        [<CustomOperation("ids2")>]
-        member _.Ids2(state: MtermvectorsRequest, value: Id array) =
-            { state with MtermvectorsRequest.Ids2 = Option.Some value } : MtermvectorsRequest
+        [<CustomOperation("body_ids")>]
+        member _.BodyIds(state: MtermvectorsRequest, value: Id array) =
+            { state with MtermvectorsRequest.BodyIds = Option.Some value } : MtermvectorsRequest
 
     let mtermvectorsRequest = MtermvectorsRequestBuilder()
 
@@ -1525,7 +1525,7 @@ module DocumentOperations =
         [<JsonPropertyName("dest")>]
         Dest: ReindexDestination
         [<JsonPropertyName("max_docs")>]
-        MaxDocs2: float option
+        BodyMaxDocs: float option
         [<JsonPropertyName("script")>]
         Script: Script option
         [<JsonPropertyName("source")>]
@@ -1553,7 +1553,7 @@ module DocumentOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody {| ``conflicts`` = request.Conflicts; ``dest`` = request.Dest; ``max_docs`` = request.MaxDocs2; ``script`` = request.Script; ``source`` = request.Source |}
+                |> Fes.Http.Request.withJsonBody {| ``conflicts`` = request.Conflicts; ``dest`` = request.Dest; ``max_docs`` = request.BodyMaxDocs; ``script`` = request.Script; ``source`` = request.Source |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1576,7 +1576,7 @@ module DocumentOperations =
                 ReindexRequest.RequireAlias = Option.None
                 ReindexRequest.Conflicts = Option.None
                 ReindexRequest.Dest = Unchecked.defaultof<ReindexDestination>
-                ReindexRequest.MaxDocs2 = Option.None
+                ReindexRequest.BodyMaxDocs = Option.None
                 ReindexRequest.Script = Option.None
                 ReindexRequest.Source = Unchecked.defaultof<ReindexSource>
             } : ReindexRequest
@@ -1625,9 +1625,9 @@ module DocumentOperations =
         member _.Dest(state: ReindexRequest, value: ReindexDestination) =
             { state with ReindexRequest.Dest = value } : ReindexRequest
 
-        [<CustomOperation("max_docs2")>]
-        member _.MaxDocs2(state: ReindexRequest, value: float) =
-            { state with ReindexRequest.MaxDocs2 = Option.Some value } : ReindexRequest
+        [<CustomOperation("body_max_docs")>]
+        member _.BodyMaxDocs(state: ReindexRequest, value: float) =
+            { state with ReindexRequest.BodyMaxDocs = Option.Some value } : ReindexRequest
 
         [<CustomOperation("script")>]
         member _.Script(state: ReindexRequest, value: Script) =
@@ -1743,23 +1743,23 @@ module DocumentOperations =
         [<JsonPropertyName("per_field_analyzer")>]
         PerFieldAnalyzer: Map<string, string> option
         [<JsonPropertyName("fields")>]
-        Fields2: Field array option
+        BodyFields: Field array option
         [<JsonPropertyName("field_statistics")>]
-        FieldStatistics2: bool option
+        BodyFieldStatistics: bool option
         [<JsonPropertyName("offsets")>]
-        Offsets2: bool option
+        BodyOffsets: bool option
         [<JsonPropertyName("payloads")>]
-        Payloads2: bool option
+        BodyPayloads: bool option
         [<JsonPropertyName("positions")>]
-        Positions2: bool option
+        BodyPositions: bool option
         [<JsonPropertyName("term_statistics")>]
-        TermStatistics2: bool option
+        BodyTermStatistics: bool option
         [<JsonPropertyName("routing")>]
-        Routing2: Routing option
+        BodyRouting: Routing option
         [<JsonPropertyName("version")>]
-        Version2: VersionNumber option
+        BodyVersion: VersionNumber option
         [<JsonPropertyName("version_type")>]
-        VersionType2: VersionType option
+        BodyVersionType: VersionType option
     } with
         static member ToRequest(request: TermvectorsRequest) : Result<Fes.Http.RequestMsg, exn> =
             try
@@ -1785,7 +1785,7 @@ module DocumentOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody {| ``doc`` = request.Doc; ``filter`` = request.Filter; ``per_field_analyzer`` = request.PerFieldAnalyzer; ``fields`` = request.Fields2; ``field_statistics`` = request.FieldStatistics2; ``offsets`` = request.Offsets2; ``payloads`` = request.Payloads2; ``positions`` = request.Positions2; ``term_statistics`` = request.TermStatistics2; ``routing`` = request.Routing2; ``version`` = request.Version2; ``version_type`` = request.VersionType2 |}
+                |> Fes.Http.Request.withJsonBody {| ``doc`` = request.Doc; ``filter`` = request.Filter; ``per_field_analyzer`` = request.PerFieldAnalyzer; ``fields`` = request.BodyFields; ``field_statistics`` = request.BodyFieldStatistics; ``offsets`` = request.BodyOffsets; ``payloads`` = request.BodyPayloads; ``positions`` = request.BodyPositions; ``term_statistics`` = request.BodyTermStatistics; ``routing`` = request.BodyRouting; ``version`` = request.BodyVersion; ``version_type`` = request.BodyVersionType |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1813,15 +1813,15 @@ module DocumentOperations =
                 TermvectorsRequest.Doc = Option.None
                 TermvectorsRequest.Filter = Option.None
                 TermvectorsRequest.PerFieldAnalyzer = Option.None
-                TermvectorsRequest.Fields2 = Option.None
-                TermvectorsRequest.FieldStatistics2 = Option.None
-                TermvectorsRequest.Offsets2 = Option.None
-                TermvectorsRequest.Payloads2 = Option.None
-                TermvectorsRequest.Positions2 = Option.None
-                TermvectorsRequest.TermStatistics2 = Option.None
-                TermvectorsRequest.Routing2 = Option.None
-                TermvectorsRequest.Version2 = Option.None
-                TermvectorsRequest.VersionType2 = Option.None
+                TermvectorsRequest.BodyFields = Option.None
+                TermvectorsRequest.BodyFieldStatistics = Option.None
+                TermvectorsRequest.BodyOffsets = Option.None
+                TermvectorsRequest.BodyPayloads = Option.None
+                TermvectorsRequest.BodyPositions = Option.None
+                TermvectorsRequest.BodyTermStatistics = Option.None
+                TermvectorsRequest.BodyRouting = Option.None
+                TermvectorsRequest.BodyVersion = Option.None
+                TermvectorsRequest.BodyVersionType = Option.None
             } : TermvectorsRequest
 
         [<CustomOperation("index")>]
@@ -1888,41 +1888,41 @@ module DocumentOperations =
         member _.PerFieldAnalyzer(state: TermvectorsRequest, value: Map<string, string>) =
             { state with TermvectorsRequest.PerFieldAnalyzer = Option.Some value } : TermvectorsRequest
 
-        [<CustomOperation("fields2")>]
-        member _.Fields2(state: TermvectorsRequest, value: Field array) =
-            { state with TermvectorsRequest.Fields2 = Option.Some value } : TermvectorsRequest
+        [<CustomOperation("body_fields")>]
+        member _.BodyFields(state: TermvectorsRequest, value: Field array) =
+            { state with TermvectorsRequest.BodyFields = Option.Some value } : TermvectorsRequest
 
-        [<CustomOperation("field_statistics2")>]
-        member _.FieldStatistics2(state: TermvectorsRequest, value: bool) =
-            { state with TermvectorsRequest.FieldStatistics2 = Option.Some value } : TermvectorsRequest
+        [<CustomOperation("body_field_statistics")>]
+        member _.BodyFieldStatistics(state: TermvectorsRequest, value: bool) =
+            { state with TermvectorsRequest.BodyFieldStatistics = Option.Some value } : TermvectorsRequest
 
-        [<CustomOperation("offsets2")>]
-        member _.Offsets2(state: TermvectorsRequest, value: bool) =
-            { state with TermvectorsRequest.Offsets2 = Option.Some value } : TermvectorsRequest
+        [<CustomOperation("body_offsets")>]
+        member _.BodyOffsets(state: TermvectorsRequest, value: bool) =
+            { state with TermvectorsRequest.BodyOffsets = Option.Some value } : TermvectorsRequest
 
-        [<CustomOperation("payloads2")>]
-        member _.Payloads2(state: TermvectorsRequest, value: bool) =
-            { state with TermvectorsRequest.Payloads2 = Option.Some value } : TermvectorsRequest
+        [<CustomOperation("body_payloads")>]
+        member _.BodyPayloads(state: TermvectorsRequest, value: bool) =
+            { state with TermvectorsRequest.BodyPayloads = Option.Some value } : TermvectorsRequest
 
-        [<CustomOperation("positions2")>]
-        member _.Positions2(state: TermvectorsRequest, value: bool) =
-            { state with TermvectorsRequest.Positions2 = Option.Some value } : TermvectorsRequest
+        [<CustomOperation("body_positions")>]
+        member _.BodyPositions(state: TermvectorsRequest, value: bool) =
+            { state with TermvectorsRequest.BodyPositions = Option.Some value } : TermvectorsRequest
 
-        [<CustomOperation("term_statistics2")>]
-        member _.TermStatistics2(state: TermvectorsRequest, value: bool) =
-            { state with TermvectorsRequest.TermStatistics2 = Option.Some value } : TermvectorsRequest
+        [<CustomOperation("body_term_statistics")>]
+        member _.BodyTermStatistics(state: TermvectorsRequest, value: bool) =
+            { state with TermvectorsRequest.BodyTermStatistics = Option.Some value } : TermvectorsRequest
 
-        [<CustomOperation("routing2")>]
-        member _.Routing2(state: TermvectorsRequest, value: Routing) =
-            { state with TermvectorsRequest.Routing2 = Option.Some value } : TermvectorsRequest
+        [<CustomOperation("body_routing")>]
+        member _.BodyRouting(state: TermvectorsRequest, value: Routing) =
+            { state with TermvectorsRequest.BodyRouting = Option.Some value } : TermvectorsRequest
 
-        [<CustomOperation("version2")>]
-        member _.Version2(state: TermvectorsRequest, value: VersionNumber) =
-            { state with TermvectorsRequest.Version2 = Option.Some value } : TermvectorsRequest
+        [<CustomOperation("body_version")>]
+        member _.BodyVersion(state: TermvectorsRequest, value: VersionNumber) =
+            { state with TermvectorsRequest.BodyVersion = Option.Some value } : TermvectorsRequest
 
-        [<CustomOperation("version_type2")>]
-        member _.VersionType2(state: TermvectorsRequest, value: VersionType) =
-            { state with TermvectorsRequest.VersionType2 = Option.Some value } : TermvectorsRequest
+        [<CustomOperation("body_version_type")>]
+        member _.BodyVersionType(state: TermvectorsRequest, value: VersionType) =
+            { state with TermvectorsRequest.BodyVersionType = Option.Some value } : TermvectorsRequest
 
     let termvectorsRequest = TermvectorsRequestBuilder()
 
@@ -1953,7 +1953,7 @@ module DocumentOperations =
         [<JsonPropertyName("scripted_upsert")>]
         ScriptedUpsert: bool option
         [<JsonPropertyName("_source")>]
-        Source2: SearchTypesSourceConfig option
+        BodySource: SearchTypesSourceConfig option
         [<JsonPropertyName("upsert")>]
         Upsert: obj option
     } with
@@ -1983,7 +1983,7 @@ module DocumentOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody {| ``detect_noop`` = request.DetectNoop; ``doc`` = request.Doc; ``doc_as_upsert`` = request.DocAsUpsert; ``script`` = request.Script; ``scripted_upsert`` = request.ScriptedUpsert; ``_source`` = request.Source2; ``upsert`` = request.Upsert |}
+                |> Fes.Http.Request.withJsonBody {| ``detect_noop`` = request.DetectNoop; ``doc`` = request.Doc; ``doc_as_upsert`` = request.DocAsUpsert; ``script`` = request.Script; ``scripted_upsert`` = request.ScriptedUpsert; ``_source`` = request.BodySource; ``upsert`` = request.Upsert |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -2015,7 +2015,7 @@ module DocumentOperations =
                 UpdateRequest.DocAsUpsert = Option.None
                 UpdateRequest.Script = Option.None
                 UpdateRequest.ScriptedUpsert = Option.None
-                UpdateRequest.Source2 = Option.None
+                UpdateRequest.BodySource = Option.None
                 UpdateRequest.Upsert = Option.None
             } : UpdateRequest
 
@@ -2099,9 +2099,9 @@ module DocumentOperations =
         member _.ScriptedUpsert(state: UpdateRequest, value: bool) =
             { state with UpdateRequest.ScriptedUpsert = Option.Some value } : UpdateRequest
 
-        [<CustomOperation("_source2")>]
-        member _.Source2(state: UpdateRequest, value: SearchTypesSourceConfig) =
-            { state with UpdateRequest.Source2 = Option.Some value } : UpdateRequest
+        [<CustomOperation("body__source")>]
+        member _.BodySource(state: UpdateRequest, value: SearchTypesSourceConfig) =
+            { state with UpdateRequest.BodySource = Option.Some value } : UpdateRequest
 
         [<CustomOperation("upsert")>]
         member _.Upsert(state: UpdateRequest, value: obj) =
@@ -2145,7 +2145,7 @@ module DocumentOperations =
         WaitForActiveShards: WaitForActiveShards option
         WaitForCompletion: bool option
         [<JsonPropertyName("max_docs")>]
-        MaxDocs2: float option
+        BodyMaxDocs: float option
         [<JsonPropertyName("query")>]
         Query: QueryDslQueryContainer option
         [<JsonPropertyName("script")>]
@@ -2153,7 +2153,7 @@ module DocumentOperations =
         [<JsonPropertyName("slice")>]
         Slice: SlicedScroll option
         [<JsonPropertyName("conflicts")>]
-        Conflicts2: Conflicts option
+        BodyConflicts: Conflicts option
     } with
         static member ToRequest(request: UpdateByQueryRequest) : Result<Fes.Http.RequestMsg, exn> =
             try
@@ -2199,7 +2199,7 @@ module DocumentOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody {| ``max_docs`` = request.MaxDocs2; ``query`` = request.Query; ``script`` = request.Script; ``slice`` = request.Slice; ``conflicts`` = request.Conflicts2 |}
+                |> Fes.Http.Request.withJsonBody {| ``max_docs`` = request.BodyMaxDocs; ``query`` = request.Query; ``script`` = request.Script; ``slice`` = request.Slice; ``conflicts`` = request.BodyConflicts |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -2243,11 +2243,11 @@ module DocumentOperations =
                 UpdateByQueryRequest.VersionType = Option.None
                 UpdateByQueryRequest.WaitForActiveShards = Option.None
                 UpdateByQueryRequest.WaitForCompletion = Option.None
-                UpdateByQueryRequest.MaxDocs2 = Option.None
+                UpdateByQueryRequest.BodyMaxDocs = Option.None
                 UpdateByQueryRequest.Query = Option.None
                 UpdateByQueryRequest.Script = Option.None
                 UpdateByQueryRequest.Slice = Option.None
-                UpdateByQueryRequest.Conflicts2 = Option.None
+                UpdateByQueryRequest.BodyConflicts = Option.None
             } : UpdateByQueryRequest
 
         [<CustomOperation("index")>]
@@ -2378,9 +2378,9 @@ module DocumentOperations =
         member _.WaitForCompletion(state: UpdateByQueryRequest, value: bool) =
             { state with UpdateByQueryRequest.WaitForCompletion = Option.Some value } : UpdateByQueryRequest
 
-        [<CustomOperation("max_docs2")>]
-        member _.MaxDocs2(state: UpdateByQueryRequest, value: float) =
-            { state with UpdateByQueryRequest.MaxDocs2 = Option.Some value } : UpdateByQueryRequest
+        [<CustomOperation("body_max_docs")>]
+        member _.BodyMaxDocs(state: UpdateByQueryRequest, value: float) =
+            { state with UpdateByQueryRequest.BodyMaxDocs = Option.Some value } : UpdateByQueryRequest
 
         [<CustomOperation("query")>]
         member _.Query(state: UpdateByQueryRequest, value: QueryDslQueryContainer) =
@@ -2394,9 +2394,9 @@ module DocumentOperations =
         member _.Slice(state: UpdateByQueryRequest, value: SlicedScroll) =
             { state with UpdateByQueryRequest.Slice = Option.Some value } : UpdateByQueryRequest
 
-        [<CustomOperation("conflicts2")>]
-        member _.Conflicts2(state: UpdateByQueryRequest, value: Conflicts) =
-            { state with UpdateByQueryRequest.Conflicts2 = Option.Some value } : UpdateByQueryRequest
+        [<CustomOperation("body_conflicts")>]
+        member _.BodyConflicts(state: UpdateByQueryRequest, value: Conflicts) =
+            { state with UpdateByQueryRequest.BodyConflicts = Option.Some value } : UpdateByQueryRequest
 
     let updateByQueryRequest = UpdateByQueryRequestBuilder()
 

@@ -616,7 +616,7 @@ module WatcherOperations =
     type WatcherStatsRequest = {
         Metric: System.Text.Json.JsonElement
         EmitStacktraces: bool option
-        Metric2: System.Text.Json.JsonElement option
+        QueryMetric: System.Text.Json.JsonElement option
     } with
         static member ToRequest(request: WatcherStatsRequest) : Result<Fes.Http.RequestMsg, exn> =
             try
@@ -624,7 +624,7 @@ module WatcherOperations =
                 let queryParams =
                     [
                         request.EmitStacktraces |> Option.map (fun v -> "emit_stacktraces", Fes.Http.toQueryValue v)
-                        request.Metric2 |> Option.map (fun v -> "metric", Fes.Http.toQueryValue v)
+                        request.QueryMetric |> Option.map (fun v -> "metric", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -646,7 +646,7 @@ module WatcherOperations =
             {
                 WatcherStatsRequest.Metric = Unchecked.defaultof<System.Text.Json.JsonElement>
                 WatcherStatsRequest.EmitStacktraces = Option.None
-                WatcherStatsRequest.Metric2 = Option.None
+                WatcherStatsRequest.QueryMetric = Option.None
             } : WatcherStatsRequest
 
         [<CustomOperation("metric")>]
@@ -657,9 +657,9 @@ module WatcherOperations =
         member _.EmitStacktraces(state: WatcherStatsRequest, value: bool) =
             { state with WatcherStatsRequest.EmitStacktraces = Option.Some value } : WatcherStatsRequest
 
-        [<CustomOperation("metric2")>]
-        member _.Metric2(state: WatcherStatsRequest, value: System.Text.Json.JsonElement) =
-            { state with WatcherStatsRequest.Metric2 = Option.Some value } : WatcherStatsRequest
+        [<CustomOperation("query_metric")>]
+        member _.QueryMetric(state: WatcherStatsRequest, value: System.Text.Json.JsonElement) =
+            { state with WatcherStatsRequest.QueryMetric = Option.Some value } : WatcherStatsRequest
 
     let watcherStatsRequest = WatcherStatsRequestBuilder()
 

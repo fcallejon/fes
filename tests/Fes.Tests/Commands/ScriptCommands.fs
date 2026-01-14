@@ -22,7 +22,7 @@ module ScriptCommands =
         let putReq = putScriptRequest {
             id "my_script"
             context "score"              // Path parameter: /_scripts/my_script/score
-            context2 "filter"            // Query parameter: ?context=filter
+            query_context "filter"       // Query parameter: ?context=filter
             timeout "30s"
             script storedScript
         }

@@ -570,7 +570,7 @@ module IndicesOperations =
 
     type IndicesAnalyzeRequest = {
         Index: IndexName
-        Index2: IndexName option
+        QueryIndex: IndexName option
         [<JsonPropertyName("analyzer")>]
         Analyzer: string option
         [<JsonPropertyName("attributes")>]
@@ -595,7 +595,7 @@ module IndicesOperations =
                 let path = $"/{request.Index}/_analyze"
                 let queryParams =
                     [
-                        request.Index2 |> Option.map (fun v -> "index", Fes.Http.toQueryValue v)
+                        request.QueryIndex |> Option.map (fun v -> "index", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -617,7 +617,7 @@ module IndicesOperations =
         member _.Yield(_: unit) : IndicesAnalyzeRequest =
             {
                 IndicesAnalyzeRequest.Index = Unchecked.defaultof<IndexName>
-                IndicesAnalyzeRequest.Index2 = Option.None
+                IndicesAnalyzeRequest.QueryIndex = Option.None
                 IndicesAnalyzeRequest.Analyzer = Option.None
                 IndicesAnalyzeRequest.Attributes = Option.None
                 IndicesAnalyzeRequest.CharFilter = Option.None
@@ -633,9 +633,9 @@ module IndicesOperations =
         member _.Index(state: IndicesAnalyzeRequest, value: IndexName) =
             { state with IndicesAnalyzeRequest.Index = value } : IndicesAnalyzeRequest
 
-        [<CustomOperation("index2")>]
-        member _.Index2(state: IndicesAnalyzeRequest, value: IndexName) =
-            { state with IndicesAnalyzeRequest.Index2 = Option.Some value } : IndicesAnalyzeRequest
+        [<CustomOperation("query_index")>]
+        member _.QueryIndex(state: IndicesAnalyzeRequest, value: IndexName) =
+            { state with IndicesAnalyzeRequest.QueryIndex = Option.Some value } : IndicesAnalyzeRequest
 
         [<CustomOperation("analyzer")>]
         member _.Analyzer(state: IndicesAnalyzeRequest, value: string) =
@@ -677,7 +677,7 @@ module IndicesOperations =
 
     type IndicesClearCacheRequest = {
         Index: Indices
-        Index2: Indices option
+        QueryIndex: Indices option
         AllowNoIndices: bool option
         ExpandWildcards: ExpandWildcards option
         Fielddata: bool option
@@ -691,7 +691,7 @@ module IndicesOperations =
                 let path = $"/{request.Index}/_cache/clear"
                 let queryParams =
                     [
-                        request.Index2 |> Option.map (fun v -> "index", Fes.Http.toQueryValue v)
+                        request.QueryIndex |> Option.map (fun v -> "index", Fes.Http.toQueryValue v)
                         request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
                         request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
                         request.Fielddata |> Option.map (fun v -> "fielddata", Fes.Http.toQueryValue v)
@@ -719,7 +719,7 @@ module IndicesOperations =
         member _.Yield(_: unit) : IndicesClearCacheRequest =
             {
                 IndicesClearCacheRequest.Index = Unchecked.defaultof<Indices>
-                IndicesClearCacheRequest.Index2 = Option.None
+                IndicesClearCacheRequest.QueryIndex = Option.None
                 IndicesClearCacheRequest.AllowNoIndices = Option.None
                 IndicesClearCacheRequest.ExpandWildcards = Option.None
                 IndicesClearCacheRequest.Fielddata = Option.None
@@ -733,9 +733,9 @@ module IndicesOperations =
         member _.Index(state: IndicesClearCacheRequest, value: Indices) =
             { state with IndicesClearCacheRequest.Index = value } : IndicesClearCacheRequest
 
-        [<CustomOperation("index2")>]
-        member _.Index2(state: IndicesClearCacheRequest, value: Indices) =
-            { state with IndicesClearCacheRequest.Index2 = Option.Some value } : IndicesClearCacheRequest
+        [<CustomOperation("query_index")>]
+        member _.QueryIndex(state: IndicesClearCacheRequest, value: Indices) =
+            { state with IndicesClearCacheRequest.QueryIndex = Option.Some value } : IndicesClearCacheRequest
 
         [<CustomOperation("allow_no_indices")>]
         member _.AllowNoIndices(state: IndicesClearCacheRequest, value: bool) =
@@ -1841,7 +1841,7 @@ module IndicesOperations =
         [<JsonPropertyName("mappings")>]
         Mappings: MappingTypeMapping option
         [<JsonPropertyName("order")>]
-        Order2: float option
+        BodyOrder: float option
         [<JsonPropertyName("settings")>]
         Settings: TypesIndexSettings option
         [<JsonPropertyName("version")>]
@@ -1864,7 +1864,7 @@ module IndicesOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody {| ``aliases`` = request.Aliases; ``index_patterns`` = request.IndexPatterns; ``mappings`` = request.Mappings; ``order`` = request.Order2; ``settings`` = request.Settings; ``version`` = request.Version |}
+                |> Fes.Http.Request.withJsonBody {| ``aliases`` = request.Aliases; ``index_patterns`` = request.IndexPatterns; ``mappings`` = request.Mappings; ``order`` = request.BodyOrder; ``settings`` = request.Settings; ``version`` = request.Version |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1884,7 +1884,7 @@ module IndicesOperations =
                 IndicesPutTemplateRequest.Aliases = Option.None
                 IndicesPutTemplateRequest.IndexPatterns = Option.None
                 IndicesPutTemplateRequest.Mappings = Option.None
-                IndicesPutTemplateRequest.Order2 = Option.None
+                IndicesPutTemplateRequest.BodyOrder = Option.None
                 IndicesPutTemplateRequest.Settings = Option.None
                 IndicesPutTemplateRequest.Version = Option.None
             } : IndicesPutTemplateRequest
@@ -1921,9 +1921,9 @@ module IndicesOperations =
         member _.Mappings(state: IndicesPutTemplateRequest, value: MappingTypeMapping) =
             { state with IndicesPutTemplateRequest.Mappings = Option.Some value } : IndicesPutTemplateRequest
 
-        [<CustomOperation("order2")>]
-        member _.Order2(state: IndicesPutTemplateRequest, value: float) =
-            { state with IndicesPutTemplateRequest.Order2 = Option.Some value } : IndicesPutTemplateRequest
+        [<CustomOperation("body_order")>]
+        member _.BodyOrder(state: IndicesPutTemplateRequest, value: float) =
+            { state with IndicesPutTemplateRequest.BodyOrder = Option.Some value } : IndicesPutTemplateRequest
 
         [<CustomOperation("settings")>]
         member _.Settings(state: IndicesPutTemplateRequest, value: TypesIndexSettings) =

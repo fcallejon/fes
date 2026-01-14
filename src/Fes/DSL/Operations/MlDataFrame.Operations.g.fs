@@ -513,9 +513,9 @@ module MlDataFrameOperations =
         Id: Id
         Timeout: Duration option
         [<JsonPropertyName("id")>]
-        Id2: Id option
+        BodyId: Id option
         [<JsonPropertyName("timeout")>]
-        Timeout2: Duration option
+        BodyTimeout: Duration option
     } with
         static member ToRequest(request: MlStartDataFrameAnalyticsRequest) : Result<Fes.Http.RequestMsg, exn> =
             try
@@ -531,7 +531,7 @@ module MlDataFrameOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody {| ``id`` = request.Id2; ``timeout`` = request.Timeout2 |}
+                |> Fes.Http.Request.withJsonBody {| ``id`` = request.BodyId; ``timeout`` = request.BodyTimeout |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -545,8 +545,8 @@ module MlDataFrameOperations =
             {
                 MlStartDataFrameAnalyticsRequest.Id = Unchecked.defaultof<Id>
                 MlStartDataFrameAnalyticsRequest.Timeout = Option.None
-                MlStartDataFrameAnalyticsRequest.Id2 = Option.None
-                MlStartDataFrameAnalyticsRequest.Timeout2 = Option.None
+                MlStartDataFrameAnalyticsRequest.BodyId = Option.None
+                MlStartDataFrameAnalyticsRequest.BodyTimeout = Option.None
             } : MlStartDataFrameAnalyticsRequest
 
         [<CustomOperation("id")>]
@@ -557,13 +557,13 @@ module MlDataFrameOperations =
         member _.Timeout(state: MlStartDataFrameAnalyticsRequest, value: Duration) =
             { state with MlStartDataFrameAnalyticsRequest.Timeout = Option.Some value } : MlStartDataFrameAnalyticsRequest
 
-        [<CustomOperation("id2")>]
-        member _.Id2(state: MlStartDataFrameAnalyticsRequest, value: Id) =
-            { state with MlStartDataFrameAnalyticsRequest.Id2 = Option.Some value } : MlStartDataFrameAnalyticsRequest
+        [<CustomOperation("body_id")>]
+        member _.BodyId(state: MlStartDataFrameAnalyticsRequest, value: Id) =
+            { state with MlStartDataFrameAnalyticsRequest.BodyId = Option.Some value } : MlStartDataFrameAnalyticsRequest
 
-        [<CustomOperation("timeout2")>]
-        member _.Timeout2(state: MlStartDataFrameAnalyticsRequest, value: Duration) =
-            { state with MlStartDataFrameAnalyticsRequest.Timeout2 = Option.Some value } : MlStartDataFrameAnalyticsRequest
+        [<CustomOperation("body_timeout")>]
+        member _.BodyTimeout(state: MlStartDataFrameAnalyticsRequest, value: Duration) =
+            { state with MlStartDataFrameAnalyticsRequest.BodyTimeout = Option.Some value } : MlStartDataFrameAnalyticsRequest
 
     let mlStartDataFrameAnalyticsRequest = MlStartDataFrameAnalyticsRequestBuilder()
 
@@ -580,13 +580,13 @@ module MlDataFrameOperations =
         Force: bool option
         Timeout: Duration option
         [<JsonPropertyName("id")>]
-        Id2: Id option
+        BodyId: Id option
         [<JsonPropertyName("allow_no_match")>]
-        AllowNoMatch2: bool option
+        BodyAllowNoMatch: bool option
         [<JsonPropertyName("force")>]
-        Force2: bool option
+        BodyForce: bool option
         [<JsonPropertyName("timeout")>]
-        Timeout2: Duration option
+        BodyTimeout: Duration option
     } with
         static member ToRequest(request: MlStopDataFrameAnalyticsRequest) : Result<Fes.Http.RequestMsg, exn> =
             try
@@ -604,7 +604,7 @@ module MlDataFrameOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody {| ``id`` = request.Id2; ``allow_no_match`` = request.AllowNoMatch2; ``force`` = request.Force2; ``timeout`` = request.Timeout2 |}
+                |> Fes.Http.Request.withJsonBody {| ``id`` = request.BodyId; ``allow_no_match`` = request.BodyAllowNoMatch; ``force`` = request.BodyForce; ``timeout`` = request.BodyTimeout |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -620,10 +620,10 @@ module MlDataFrameOperations =
                 MlStopDataFrameAnalyticsRequest.AllowNoMatch = Option.None
                 MlStopDataFrameAnalyticsRequest.Force = Option.None
                 MlStopDataFrameAnalyticsRequest.Timeout = Option.None
-                MlStopDataFrameAnalyticsRequest.Id2 = Option.None
-                MlStopDataFrameAnalyticsRequest.AllowNoMatch2 = Option.None
-                MlStopDataFrameAnalyticsRequest.Force2 = Option.None
-                MlStopDataFrameAnalyticsRequest.Timeout2 = Option.None
+                MlStopDataFrameAnalyticsRequest.BodyId = Option.None
+                MlStopDataFrameAnalyticsRequest.BodyAllowNoMatch = Option.None
+                MlStopDataFrameAnalyticsRequest.BodyForce = Option.None
+                MlStopDataFrameAnalyticsRequest.BodyTimeout = Option.None
             } : MlStopDataFrameAnalyticsRequest
 
         [<CustomOperation("id")>]
@@ -642,21 +642,21 @@ module MlDataFrameOperations =
         member _.Timeout(state: MlStopDataFrameAnalyticsRequest, value: Duration) =
             { state with MlStopDataFrameAnalyticsRequest.Timeout = Option.Some value } : MlStopDataFrameAnalyticsRequest
 
-        [<CustomOperation("id2")>]
-        member _.Id2(state: MlStopDataFrameAnalyticsRequest, value: Id) =
-            { state with MlStopDataFrameAnalyticsRequest.Id2 = Option.Some value } : MlStopDataFrameAnalyticsRequest
+        [<CustomOperation("body_id")>]
+        member _.BodyId(state: MlStopDataFrameAnalyticsRequest, value: Id) =
+            { state with MlStopDataFrameAnalyticsRequest.BodyId = Option.Some value } : MlStopDataFrameAnalyticsRequest
 
-        [<CustomOperation("allow_no_match2")>]
-        member _.AllowNoMatch2(state: MlStopDataFrameAnalyticsRequest, value: bool) =
-            { state with MlStopDataFrameAnalyticsRequest.AllowNoMatch2 = Option.Some value } : MlStopDataFrameAnalyticsRequest
+        [<CustomOperation("body_allow_no_match")>]
+        member _.BodyAllowNoMatch(state: MlStopDataFrameAnalyticsRequest, value: bool) =
+            { state with MlStopDataFrameAnalyticsRequest.BodyAllowNoMatch = Option.Some value } : MlStopDataFrameAnalyticsRequest
 
-        [<CustomOperation("force2")>]
-        member _.Force2(state: MlStopDataFrameAnalyticsRequest, value: bool) =
-            { state with MlStopDataFrameAnalyticsRequest.Force2 = Option.Some value } : MlStopDataFrameAnalyticsRequest
+        [<CustomOperation("body_force")>]
+        member _.BodyForce(state: MlStopDataFrameAnalyticsRequest, value: bool) =
+            { state with MlStopDataFrameAnalyticsRequest.BodyForce = Option.Some value } : MlStopDataFrameAnalyticsRequest
 
-        [<CustomOperation("timeout2")>]
-        member _.Timeout2(state: MlStopDataFrameAnalyticsRequest, value: Duration) =
-            { state with MlStopDataFrameAnalyticsRequest.Timeout2 = Option.Some value } : MlStopDataFrameAnalyticsRequest
+        [<CustomOperation("body_timeout")>]
+        member _.BodyTimeout(state: MlStopDataFrameAnalyticsRequest, value: Duration) =
+            { state with MlStopDataFrameAnalyticsRequest.BodyTimeout = Option.Some value } : MlStopDataFrameAnalyticsRequest
 
     let mlStopDataFrameAnalyticsRequest = MlStopDataFrameAnalyticsRequestBuilder()
 

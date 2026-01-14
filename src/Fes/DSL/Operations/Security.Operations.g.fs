@@ -1500,7 +1500,7 @@ module SecurityOperations =
         Username: Username
         Refresh: Refresh option
         [<JsonPropertyName("username")>]
-        Username2: Username option
+        BodyUsername: Username option
         [<JsonPropertyName("email")>]
         Email: System.Text.Json.JsonElement option
         [<JsonPropertyName("full_name")>]
@@ -1530,7 +1530,7 @@ module SecurityOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody {| ``username`` = request.Username2; ``email`` = request.Email; ``full_name`` = request.FullName; ``metadata`` = request.Metadata; ``password`` = request.Password; ``password_hash`` = request.PasswordHash; ``roles`` = request.Roles; ``enabled`` = request.Enabled |}
+                |> Fes.Http.Request.withJsonBody {| ``username`` = request.BodyUsername; ``email`` = request.Email; ``full_name`` = request.FullName; ``metadata`` = request.Metadata; ``password`` = request.Password; ``password_hash`` = request.PasswordHash; ``roles`` = request.Roles; ``enabled`` = request.Enabled |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1544,7 +1544,7 @@ module SecurityOperations =
             {
                 SecurityPutUserRequest.Username = Unchecked.defaultof<Username>
                 SecurityPutUserRequest.Refresh = Option.None
-                SecurityPutUserRequest.Username2 = Option.None
+                SecurityPutUserRequest.BodyUsername = Option.None
                 SecurityPutUserRequest.Email = Option.None
                 SecurityPutUserRequest.FullName = Option.None
                 SecurityPutUserRequest.Metadata = Option.None
@@ -1562,9 +1562,9 @@ module SecurityOperations =
         member _.Refresh(state: SecurityPutUserRequest, value: Refresh) =
             { state with SecurityPutUserRequest.Refresh = Option.Some value } : SecurityPutUserRequest
 
-        [<CustomOperation("username2")>]
-        member _.Username2(state: SecurityPutUserRequest, value: Username) =
-            { state with SecurityPutUserRequest.Username2 = Option.Some value } : SecurityPutUserRequest
+        [<CustomOperation("body_username")>]
+        member _.BodyUsername(state: SecurityPutUserRequest, value: Username) =
+            { state with SecurityPutUserRequest.BodyUsername = Option.Some value } : SecurityPutUserRequest
 
         [<CustomOperation("email")>]
         member _.Email(state: SecurityPutUserRequest, value: System.Text.Json.JsonElement) =
@@ -3224,7 +3224,7 @@ module SecurityOperations =
         [<JsonPropertyName("size")>]
         Size: float option
         [<JsonPropertyName("data")>]
-        Data2: System.Text.Json.JsonElement option
+        BodyData: System.Text.Json.JsonElement option
         [<JsonPropertyName("hint")>]
         Hint: SuggestUserProfilesHint option
     } with
@@ -3242,7 +3242,7 @@ module SecurityOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody {| ``name`` = request.Name; ``size`` = request.Size; ``data`` = request.Data2; ``hint`` = request.Hint |}
+                |> Fes.Http.Request.withJsonBody {| ``name`` = request.Name; ``size`` = request.Size; ``data`` = request.BodyData; ``hint`` = request.Hint |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -3257,7 +3257,7 @@ module SecurityOperations =
                 SecuritySuggestUserProfilesRequest.Data = Option.None
                 SecuritySuggestUserProfilesRequest.Name = Option.None
                 SecuritySuggestUserProfilesRequest.Size = Option.None
-                SecuritySuggestUserProfilesRequest.Data2 = Option.None
+                SecuritySuggestUserProfilesRequest.BodyData = Option.None
                 SecuritySuggestUserProfilesRequest.Hint = Option.None
             } : SecuritySuggestUserProfilesRequest
 
@@ -3273,9 +3273,9 @@ module SecurityOperations =
         member _.Size(state: SecuritySuggestUserProfilesRequest, value: float) =
             { state with SecuritySuggestUserProfilesRequest.Size = Option.Some value } : SecuritySuggestUserProfilesRequest
 
-        [<CustomOperation("data2")>]
-        member _.Data2(state: SecuritySuggestUserProfilesRequest, value: System.Text.Json.JsonElement) =
-            { state with SecuritySuggestUserProfilesRequest.Data2 = Option.Some value } : SecuritySuggestUserProfilesRequest
+        [<CustomOperation("body_data")>]
+        member _.BodyData(state: SecuritySuggestUserProfilesRequest, value: System.Text.Json.JsonElement) =
+            { state with SecuritySuggestUserProfilesRequest.BodyData = Option.Some value } : SecuritySuggestUserProfilesRequest
 
         [<CustomOperation("hint")>]
         member _.Hint(state: SecuritySuggestUserProfilesRequest, value: SuggestUserProfilesHint) =

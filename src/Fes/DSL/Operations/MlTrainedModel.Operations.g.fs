@@ -749,9 +749,9 @@ module MlTrainedModelOperations =
         [<JsonPropertyName("id")>]
         Id: Id option
         [<JsonPropertyName("allow_no_match")>]
-        AllowNoMatch2: bool option
+        BodyAllowNoMatch: bool option
         [<JsonPropertyName("force")>]
-        Force2: bool option
+        BodyForce: bool option
     } with
         static member ToRequest(request: MlStopTrainedModelDeploymentRequest) : Result<Fes.Http.RequestMsg, exn> =
             try
@@ -768,7 +768,7 @@ module MlTrainedModelOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody {| ``id`` = request.Id; ``allow_no_match`` = request.AllowNoMatch2; ``force`` = request.Force2 |}
+                |> Fes.Http.Request.withJsonBody {| ``id`` = request.Id; ``allow_no_match`` = request.BodyAllowNoMatch; ``force`` = request.BodyForce |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -784,8 +784,8 @@ module MlTrainedModelOperations =
                 MlStopTrainedModelDeploymentRequest.AllowNoMatch = Option.None
                 MlStopTrainedModelDeploymentRequest.Force = Option.None
                 MlStopTrainedModelDeploymentRequest.Id = Option.None
-                MlStopTrainedModelDeploymentRequest.AllowNoMatch2 = Option.None
-                MlStopTrainedModelDeploymentRequest.Force2 = Option.None
+                MlStopTrainedModelDeploymentRequest.BodyAllowNoMatch = Option.None
+                MlStopTrainedModelDeploymentRequest.BodyForce = Option.None
             } : MlStopTrainedModelDeploymentRequest
 
         [<CustomOperation("model_id")>]
@@ -804,13 +804,13 @@ module MlTrainedModelOperations =
         member _.Id(state: MlStopTrainedModelDeploymentRequest, value: Id) =
             { state with MlStopTrainedModelDeploymentRequest.Id = Option.Some value } : MlStopTrainedModelDeploymentRequest
 
-        [<CustomOperation("allow_no_match2")>]
-        member _.AllowNoMatch2(state: MlStopTrainedModelDeploymentRequest, value: bool) =
-            { state with MlStopTrainedModelDeploymentRequest.AllowNoMatch2 = Option.Some value } : MlStopTrainedModelDeploymentRequest
+        [<CustomOperation("body_allow_no_match")>]
+        member _.BodyAllowNoMatch(state: MlStopTrainedModelDeploymentRequest, value: bool) =
+            { state with MlStopTrainedModelDeploymentRequest.BodyAllowNoMatch = Option.Some value } : MlStopTrainedModelDeploymentRequest
 
-        [<CustomOperation("force2")>]
-        member _.Force2(state: MlStopTrainedModelDeploymentRequest, value: bool) =
-            { state with MlStopTrainedModelDeploymentRequest.Force2 = Option.Some value } : MlStopTrainedModelDeploymentRequest
+        [<CustomOperation("body_force")>]
+        member _.BodyForce(state: MlStopTrainedModelDeploymentRequest, value: bool) =
+            { state with MlStopTrainedModelDeploymentRequest.BodyForce = Option.Some value } : MlStopTrainedModelDeploymentRequest
 
     let mlStopTrainedModelDeploymentRequest = MlStopTrainedModelDeploymentRequestBuilder()
 
@@ -823,7 +823,7 @@ module MlTrainedModelOperations =
         ModelId: Id
         NumberOfAllocations: float option
         [<JsonPropertyName("number_of_allocations")>]
-        NumberOfAllocations2: float option
+        BodyNumberOfAllocations: float option
         [<JsonPropertyName("adaptive_allocations")>]
         AdaptiveAllocations: TypesAdaptiveAllocationsSettings option
     } with
@@ -841,7 +841,7 @@ module MlTrainedModelOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody {| ``number_of_allocations`` = request.NumberOfAllocations2; ``adaptive_allocations`` = request.AdaptiveAllocations |}
+                |> Fes.Http.Request.withJsonBody {| ``number_of_allocations`` = request.BodyNumberOfAllocations; ``adaptive_allocations`` = request.AdaptiveAllocations |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -855,7 +855,7 @@ module MlTrainedModelOperations =
             {
                 MlUpdateTrainedModelDeploymentRequest.ModelId = Unchecked.defaultof<Id>
                 MlUpdateTrainedModelDeploymentRequest.NumberOfAllocations = Option.None
-                MlUpdateTrainedModelDeploymentRequest.NumberOfAllocations2 = Option.None
+                MlUpdateTrainedModelDeploymentRequest.BodyNumberOfAllocations = Option.None
                 MlUpdateTrainedModelDeploymentRequest.AdaptiveAllocations = Option.None
             } : MlUpdateTrainedModelDeploymentRequest
 
@@ -867,9 +867,9 @@ module MlTrainedModelOperations =
         member _.NumberOfAllocations(state: MlUpdateTrainedModelDeploymentRequest, value: float) =
             { state with MlUpdateTrainedModelDeploymentRequest.NumberOfAllocations = Option.Some value } : MlUpdateTrainedModelDeploymentRequest
 
-        [<CustomOperation("number_of_allocations2")>]
-        member _.NumberOfAllocations2(state: MlUpdateTrainedModelDeploymentRequest, value: float) =
-            { state with MlUpdateTrainedModelDeploymentRequest.NumberOfAllocations2 = Option.Some value } : MlUpdateTrainedModelDeploymentRequest
+        [<CustomOperation("body_number_of_allocations")>]
+        member _.BodyNumberOfAllocations(state: MlUpdateTrainedModelDeploymentRequest, value: float) =
+            { state with MlUpdateTrainedModelDeploymentRequest.BodyNumberOfAllocations = Option.Some value } : MlUpdateTrainedModelDeploymentRequest
 
         [<CustomOperation("adaptive_allocations")>]
         member _.AdaptiveAllocations(state: MlUpdateTrainedModelDeploymentRequest, value: TypesAdaptiveAllocationsSettings) =

@@ -167,15 +167,15 @@ module EqlOperations =
         [<JsonPropertyName("filter")>]
         Filter: System.Text.Json.JsonElement option
         [<JsonPropertyName("keep_alive")>]
-        KeepAlive2: Duration option
+        BodyKeepAlive: Duration option
         [<JsonPropertyName("keep_on_completion")>]
-        KeepOnCompletion2: bool option
+        BodyKeepOnCompletion: bool option
         [<JsonPropertyName("wait_for_completion_timeout")>]
-        WaitForCompletionTimeout2: Duration option
+        BodyWaitForCompletionTimeout: Duration option
         [<JsonPropertyName("allow_partial_search_results")>]
-        AllowPartialSearchResults2: bool option
+        BodyAllowPartialSearchResults: bool option
         [<JsonPropertyName("allow_partial_sequence_results")>]
-        AllowPartialSequenceResults2: bool option
+        BodyAllowPartialSequenceResults: bool option
         [<JsonPropertyName("size")>]
         Size: Uint option
         [<JsonPropertyName("fields")>]
@@ -209,7 +209,7 @@ module EqlOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody {| ``query`` = request.Query; ``case_sensitive`` = request.CaseSensitive; ``event_category_field`` = request.EventCategoryField; ``tiebreaker_field`` = request.TiebreakerField; ``timestamp_field`` = request.TimestampField; ``fetch_size`` = request.FetchSize; ``filter`` = request.Filter; ``keep_alive`` = request.KeepAlive2; ``keep_on_completion`` = request.KeepOnCompletion2; ``wait_for_completion_timeout`` = request.WaitForCompletionTimeout2; ``allow_partial_search_results`` = request.AllowPartialSearchResults2; ``allow_partial_sequence_results`` = request.AllowPartialSequenceResults2; ``size`` = request.Size; ``fields`` = request.Fields; ``result_position`` = request.ResultPosition; ``runtime_mappings`` = request.RuntimeMappings; ``max_samples_per_key`` = request.MaxSamplesPerKey |}
+                |> Fes.Http.Request.withJsonBody {| ``query`` = request.Query; ``case_sensitive`` = request.CaseSensitive; ``event_category_field`` = request.EventCategoryField; ``tiebreaker_field`` = request.TiebreakerField; ``timestamp_field`` = request.TimestampField; ``fetch_size`` = request.FetchSize; ``filter`` = request.Filter; ``keep_alive`` = request.BodyKeepAlive; ``keep_on_completion`` = request.BodyKeepOnCompletion; ``wait_for_completion_timeout`` = request.BodyWaitForCompletionTimeout; ``allow_partial_search_results`` = request.BodyAllowPartialSearchResults; ``allow_partial_sequence_results`` = request.BodyAllowPartialSequenceResults; ``size`` = request.Size; ``fields`` = request.Fields; ``result_position`` = request.ResultPosition; ``runtime_mappings`` = request.RuntimeMappings; ``max_samples_per_key`` = request.MaxSamplesPerKey |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -238,11 +238,11 @@ module EqlOperations =
                 EqlSearchRequest.TimestampField = Option.None
                 EqlSearchRequest.FetchSize = Option.None
                 EqlSearchRequest.Filter = Option.None
-                EqlSearchRequest.KeepAlive2 = Option.None
-                EqlSearchRequest.KeepOnCompletion2 = Option.None
-                EqlSearchRequest.WaitForCompletionTimeout2 = Option.None
-                EqlSearchRequest.AllowPartialSearchResults2 = Option.None
-                EqlSearchRequest.AllowPartialSequenceResults2 = Option.None
+                EqlSearchRequest.BodyKeepAlive = Option.None
+                EqlSearchRequest.BodyKeepOnCompletion = Option.None
+                EqlSearchRequest.BodyWaitForCompletionTimeout = Option.None
+                EqlSearchRequest.BodyAllowPartialSearchResults = Option.None
+                EqlSearchRequest.BodyAllowPartialSequenceResults = Option.None
                 EqlSearchRequest.Size = Option.None
                 EqlSearchRequest.Fields = Option.None
                 EqlSearchRequest.ResultPosition = Option.None
@@ -318,25 +318,25 @@ module EqlOperations =
         member _.Filter(state: EqlSearchRequest, value: System.Text.Json.JsonElement) =
             { state with EqlSearchRequest.Filter = Option.Some value } : EqlSearchRequest
 
-        [<CustomOperation("keep_alive2")>]
-        member _.KeepAlive2(state: EqlSearchRequest, value: Duration) =
-            { state with EqlSearchRequest.KeepAlive2 = Option.Some value } : EqlSearchRequest
+        [<CustomOperation("body_keep_alive")>]
+        member _.BodyKeepAlive(state: EqlSearchRequest, value: Duration) =
+            { state with EqlSearchRequest.BodyKeepAlive = Option.Some value } : EqlSearchRequest
 
-        [<CustomOperation("keep_on_completion2")>]
-        member _.KeepOnCompletion2(state: EqlSearchRequest, value: bool) =
-            { state with EqlSearchRequest.KeepOnCompletion2 = Option.Some value } : EqlSearchRequest
+        [<CustomOperation("body_keep_on_completion")>]
+        member _.BodyKeepOnCompletion(state: EqlSearchRequest, value: bool) =
+            { state with EqlSearchRequest.BodyKeepOnCompletion = Option.Some value } : EqlSearchRequest
 
-        [<CustomOperation("wait_for_completion_timeout2")>]
-        member _.WaitForCompletionTimeout2(state: EqlSearchRequest, value: Duration) =
-            { state with EqlSearchRequest.WaitForCompletionTimeout2 = Option.Some value } : EqlSearchRequest
+        [<CustomOperation("body_wait_for_completion_timeout")>]
+        member _.BodyWaitForCompletionTimeout(state: EqlSearchRequest, value: Duration) =
+            { state with EqlSearchRequest.BodyWaitForCompletionTimeout = Option.Some value } : EqlSearchRequest
 
-        [<CustomOperation("allow_partial_search_results2")>]
-        member _.AllowPartialSearchResults2(state: EqlSearchRequest, value: bool) =
-            { state with EqlSearchRequest.AllowPartialSearchResults2 = Option.Some value } : EqlSearchRequest
+        [<CustomOperation("body_allow_partial_search_results")>]
+        member _.BodyAllowPartialSearchResults(state: EqlSearchRequest, value: bool) =
+            { state with EqlSearchRequest.BodyAllowPartialSearchResults = Option.Some value } : EqlSearchRequest
 
-        [<CustomOperation("allow_partial_sequence_results2")>]
-        member _.AllowPartialSequenceResults2(state: EqlSearchRequest, value: bool) =
-            { state with EqlSearchRequest.AllowPartialSequenceResults2 = Option.Some value } : EqlSearchRequest
+        [<CustomOperation("body_allow_partial_sequence_results")>]
+        member _.BodyAllowPartialSequenceResults(state: EqlSearchRequest, value: bool) =
+            { state with EqlSearchRequest.BodyAllowPartialSequenceResults = Option.Some value } : EqlSearchRequest
 
         [<CustomOperation("size")>]
         member _.Size(state: EqlSearchRequest, value: Uint) =

@@ -21,13 +21,13 @@ module ClusterOperations =
         IncludeYesDecisions: bool option
         MasterTimeout: Duration option
         [<JsonPropertyName("index")>]
-        Index2: IndexName option
+        BodyIndex: IndexName option
         [<JsonPropertyName("shard")>]
-        Shard2: float option
+        BodyShard: float option
         [<JsonPropertyName("primary")>]
-        Primary2: bool option
+        BodyPrimary: bool option
         [<JsonPropertyName("current_node")>]
-        CurrentNode2: NodeId option
+        BodyCurrentNode: NodeId option
     } with
         static member ToRequest(request: ClusterAllocationExplainRequest) : Result<Fes.Http.RequestMsg, exn> =
             try
@@ -49,7 +49,7 @@ module ClusterOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody {| ``index`` = request.Index2; ``shard`` = request.Shard2; ``primary`` = request.Primary2; ``current_node`` = request.CurrentNode2 |}
+                |> Fes.Http.Request.withJsonBody {| ``index`` = request.BodyIndex; ``shard`` = request.BodyShard; ``primary`` = request.BodyPrimary; ``current_node`` = request.BodyCurrentNode |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -68,10 +68,10 @@ module ClusterOperations =
                 ClusterAllocationExplainRequest.IncludeDiskInfo = Option.None
                 ClusterAllocationExplainRequest.IncludeYesDecisions = Option.None
                 ClusterAllocationExplainRequest.MasterTimeout = Option.None
-                ClusterAllocationExplainRequest.Index2 = Option.None
-                ClusterAllocationExplainRequest.Shard2 = Option.None
-                ClusterAllocationExplainRequest.Primary2 = Option.None
-                ClusterAllocationExplainRequest.CurrentNode2 = Option.None
+                ClusterAllocationExplainRequest.BodyIndex = Option.None
+                ClusterAllocationExplainRequest.BodyShard = Option.None
+                ClusterAllocationExplainRequest.BodyPrimary = Option.None
+                ClusterAllocationExplainRequest.BodyCurrentNode = Option.None
             } : ClusterAllocationExplainRequest
 
         [<CustomOperation("index")>]
@@ -102,21 +102,21 @@ module ClusterOperations =
         member _.MasterTimeout(state: ClusterAllocationExplainRequest, value: Duration) =
             { state with ClusterAllocationExplainRequest.MasterTimeout = Option.Some value } : ClusterAllocationExplainRequest
 
-        [<CustomOperation("index2")>]
-        member _.Index2(state: ClusterAllocationExplainRequest, value: IndexName) =
-            { state with ClusterAllocationExplainRequest.Index2 = Option.Some value } : ClusterAllocationExplainRequest
+        [<CustomOperation("body_index")>]
+        member _.BodyIndex(state: ClusterAllocationExplainRequest, value: IndexName) =
+            { state with ClusterAllocationExplainRequest.BodyIndex = Option.Some value } : ClusterAllocationExplainRequest
 
-        [<CustomOperation("shard2")>]
-        member _.Shard2(state: ClusterAllocationExplainRequest, value: float) =
-            { state with ClusterAllocationExplainRequest.Shard2 = Option.Some value } : ClusterAllocationExplainRequest
+        [<CustomOperation("body_shard")>]
+        member _.BodyShard(state: ClusterAllocationExplainRequest, value: float) =
+            { state with ClusterAllocationExplainRequest.BodyShard = Option.Some value } : ClusterAllocationExplainRequest
 
-        [<CustomOperation("primary2")>]
-        member _.Primary2(state: ClusterAllocationExplainRequest, value: bool) =
-            { state with ClusterAllocationExplainRequest.Primary2 = Option.Some value } : ClusterAllocationExplainRequest
+        [<CustomOperation("body_primary")>]
+        member _.BodyPrimary(state: ClusterAllocationExplainRequest, value: bool) =
+            { state with ClusterAllocationExplainRequest.BodyPrimary = Option.Some value } : ClusterAllocationExplainRequest
 
-        [<CustomOperation("current_node2")>]
-        member _.CurrentNode2(state: ClusterAllocationExplainRequest, value: NodeId) =
-            { state with ClusterAllocationExplainRequest.CurrentNode2 = Option.Some value } : ClusterAllocationExplainRequest
+        [<CustomOperation("body_current_node")>]
+        member _.BodyCurrentNode(state: ClusterAllocationExplainRequest, value: NodeId) =
+            { state with ClusterAllocationExplainRequest.BodyCurrentNode = Option.Some value } : ClusterAllocationExplainRequest
 
     let clusterAllocationExplainRequest = ClusterAllocationExplainRequestBuilder()
 

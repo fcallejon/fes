@@ -198,19 +198,19 @@ module SearchOperations =
         [<JsonPropertyName("collapse")>]
         Collapse: SearchTypesFieldCollapse option
         [<JsonPropertyName("explain")>]
-        Explain2: bool option
+        BodyExplain: bool option
         [<JsonPropertyName("ext")>]
         Ext: Map<string, obj> option
         [<JsonPropertyName("from")>]
-        From2: float option
+        BodyFrom: float option
         [<JsonPropertyName("highlight")>]
         Highlight: SearchTypesHighlight option
         [<JsonPropertyName("track_total_hits")>]
-        TrackTotalHits2: SearchTypesTrackHits option
+        BodyTrackTotalHits: SearchTypesTrackHits option
         [<JsonPropertyName("indices_boost")>]
         IndicesBoost: Map<string, float> array option
         [<JsonPropertyName("docvalue_fields")>]
-        DocvalueFields2: QueryDslFieldAndFormat array option
+        BodyDocvalueFields: QueryDslFieldAndFormat array option
         [<JsonPropertyName("knn")>]
         Knn: System.Text.Json.JsonElement option
         [<JsonPropertyName("min_score")>]
@@ -228,35 +228,35 @@ module SearchOperations =
         [<JsonPropertyName("search_after")>]
         SearchAfter: SortResults option
         [<JsonPropertyName("size")>]
-        Size2: float option
+        BodySize: float option
         [<JsonPropertyName("slice")>]
         Slice: SlicedScroll option
         [<JsonPropertyName("sort")>]
-        Sort2: Sort option
+        BodySort: Sort option
         [<JsonPropertyName("_source")>]
-        Source2: SearchTypesSourceConfig option
+        BodySource: SearchTypesSourceConfig option
         [<JsonPropertyName("fields")>]
         Fields: QueryDslFieldAndFormat array option
         [<JsonPropertyName("suggest")>]
         Suggest: SearchTypesSuggester option
         [<JsonPropertyName("terminate_after")>]
-        TerminateAfter2: float option
+        BodyTerminateAfter: float option
         [<JsonPropertyName("timeout")>]
-        Timeout2: string option
+        BodyTimeout: string option
         [<JsonPropertyName("track_scores")>]
-        TrackScores2: bool option
+        BodyTrackScores: bool option
         [<JsonPropertyName("version")>]
-        Version2: bool option
+        BodyVersion: bool option
         [<JsonPropertyName("seq_no_primary_term")>]
-        SeqNoPrimaryTerm2: bool option
+        BodySeqNoPrimaryTerm: bool option
         [<JsonPropertyName("stored_fields")>]
-        StoredFields2: Fields option
+        BodyStoredFields: Fields option
         [<JsonPropertyName("pit")>]
         Pit: SearchTypesPointInTimeReference option
         [<JsonPropertyName("runtime_mappings")>]
         RuntimeMappings: MappingRuntimeFields option
         [<JsonPropertyName("stats")>]
-        Stats2: string array option
+        BodyStats: string array option
     } with
         static member ToRequest(request: AsyncSearchSubmitRequest) : Result<Fes.Http.RequestMsg, exn> =
             try
@@ -314,7 +314,7 @@ module SearchOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody {| ``aggregations`` = request.Aggregations; ``collapse`` = request.Collapse; ``explain`` = request.Explain2; ``ext`` = request.Ext; ``from`` = request.From2; ``highlight`` = request.Highlight; ``track_total_hits`` = request.TrackTotalHits2; ``indices_boost`` = request.IndicesBoost; ``docvalue_fields`` = request.DocvalueFields2; ``knn`` = request.Knn; ``min_score`` = request.MinScore; ``post_filter`` = request.PostFilter; ``profile`` = request.Profile; ``query`` = request.Query; ``rescore`` = request.Rescore; ``script_fields`` = request.ScriptFields; ``search_after`` = request.SearchAfter; ``size`` = request.Size2; ``slice`` = request.Slice; ``sort`` = request.Sort2; ``_source`` = request.Source2; ``fields`` = request.Fields; ``suggest`` = request.Suggest; ``terminate_after`` = request.TerminateAfter2; ``timeout`` = request.Timeout2; ``track_scores`` = request.TrackScores2; ``version`` = request.Version2; ``seq_no_primary_term`` = request.SeqNoPrimaryTerm2; ``stored_fields`` = request.StoredFields2; ``pit`` = request.Pit; ``runtime_mappings`` = request.RuntimeMappings; ``stats`` = request.Stats2 |}
+                |> Fes.Http.Request.withJsonBody {| ``aggregations`` = request.Aggregations; ``collapse`` = request.Collapse; ``explain`` = request.BodyExplain; ``ext`` = request.Ext; ``from`` = request.BodyFrom; ``highlight`` = request.Highlight; ``track_total_hits`` = request.BodyTrackTotalHits; ``indices_boost`` = request.IndicesBoost; ``docvalue_fields`` = request.BodyDocvalueFields; ``knn`` = request.Knn; ``min_score`` = request.MinScore; ``post_filter`` = request.PostFilter; ``profile`` = request.Profile; ``query`` = request.Query; ``rescore`` = request.Rescore; ``script_fields`` = request.ScriptFields; ``search_after`` = request.SearchAfter; ``size`` = request.BodySize; ``slice`` = request.Slice; ``sort`` = request.BodySort; ``_source`` = request.BodySource; ``fields`` = request.Fields; ``suggest`` = request.Suggest; ``terminate_after`` = request.BodyTerminateAfter; ``timeout`` = request.BodyTimeout; ``track_scores`` = request.BodyTrackScores; ``version`` = request.BodyVersion; ``seq_no_primary_term`` = request.BodySeqNoPrimaryTerm; ``stored_fields`` = request.BodyStoredFields; ``pit`` = request.Pit; ``runtime_mappings`` = request.RuntimeMappings; ``stats`` = request.BodyStats |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -372,13 +372,13 @@ module SearchOperations =
                 AsyncSearchSubmitRequest.Sort = Option.None
                 AsyncSearchSubmitRequest.Aggregations = Option.None
                 AsyncSearchSubmitRequest.Collapse = Option.None
-                AsyncSearchSubmitRequest.Explain2 = Option.None
+                AsyncSearchSubmitRequest.BodyExplain = Option.None
                 AsyncSearchSubmitRequest.Ext = Option.None
-                AsyncSearchSubmitRequest.From2 = Option.None
+                AsyncSearchSubmitRequest.BodyFrom = Option.None
                 AsyncSearchSubmitRequest.Highlight = Option.None
-                AsyncSearchSubmitRequest.TrackTotalHits2 = Option.None
+                AsyncSearchSubmitRequest.BodyTrackTotalHits = Option.None
                 AsyncSearchSubmitRequest.IndicesBoost = Option.None
-                AsyncSearchSubmitRequest.DocvalueFields2 = Option.None
+                AsyncSearchSubmitRequest.BodyDocvalueFields = Option.None
                 AsyncSearchSubmitRequest.Knn = Option.None
                 AsyncSearchSubmitRequest.MinScore = Option.None
                 AsyncSearchSubmitRequest.PostFilter = Option.None
@@ -387,21 +387,21 @@ module SearchOperations =
                 AsyncSearchSubmitRequest.Rescore = Option.None
                 AsyncSearchSubmitRequest.ScriptFields = Option.None
                 AsyncSearchSubmitRequest.SearchAfter = Option.None
-                AsyncSearchSubmitRequest.Size2 = Option.None
+                AsyncSearchSubmitRequest.BodySize = Option.None
                 AsyncSearchSubmitRequest.Slice = Option.None
-                AsyncSearchSubmitRequest.Sort2 = Option.None
-                AsyncSearchSubmitRequest.Source2 = Option.None
+                AsyncSearchSubmitRequest.BodySort = Option.None
+                AsyncSearchSubmitRequest.BodySource = Option.None
                 AsyncSearchSubmitRequest.Fields = Option.None
                 AsyncSearchSubmitRequest.Suggest = Option.None
-                AsyncSearchSubmitRequest.TerminateAfter2 = Option.None
-                AsyncSearchSubmitRequest.Timeout2 = Option.None
-                AsyncSearchSubmitRequest.TrackScores2 = Option.None
-                AsyncSearchSubmitRequest.Version2 = Option.None
-                AsyncSearchSubmitRequest.SeqNoPrimaryTerm2 = Option.None
-                AsyncSearchSubmitRequest.StoredFields2 = Option.None
+                AsyncSearchSubmitRequest.BodyTerminateAfter = Option.None
+                AsyncSearchSubmitRequest.BodyTimeout = Option.None
+                AsyncSearchSubmitRequest.BodyTrackScores = Option.None
+                AsyncSearchSubmitRequest.BodyVersion = Option.None
+                AsyncSearchSubmitRequest.BodySeqNoPrimaryTerm = Option.None
+                AsyncSearchSubmitRequest.BodyStoredFields = Option.None
                 AsyncSearchSubmitRequest.Pit = Option.None
                 AsyncSearchSubmitRequest.RuntimeMappings = Option.None
-                AsyncSearchSubmitRequest.Stats2 = Option.None
+                AsyncSearchSubmitRequest.BodyStats = Option.None
             } : AsyncSearchSubmitRequest
 
         [<CustomOperation("index")>]
@@ -588,33 +588,33 @@ module SearchOperations =
         member _.Collapse(state: AsyncSearchSubmitRequest, value: SearchTypesFieldCollapse) =
             { state with AsyncSearchSubmitRequest.Collapse = Option.Some value } : AsyncSearchSubmitRequest
 
-        [<CustomOperation("explain2")>]
-        member _.Explain2(state: AsyncSearchSubmitRequest, value: bool) =
-            { state with AsyncSearchSubmitRequest.Explain2 = Option.Some value } : AsyncSearchSubmitRequest
+        [<CustomOperation("body_explain")>]
+        member _.BodyExplain(state: AsyncSearchSubmitRequest, value: bool) =
+            { state with AsyncSearchSubmitRequest.BodyExplain = Option.Some value } : AsyncSearchSubmitRequest
 
         [<CustomOperation("ext")>]
         member _.Ext(state: AsyncSearchSubmitRequest, value: Map<string, obj>) =
             { state with AsyncSearchSubmitRequest.Ext = Option.Some value } : AsyncSearchSubmitRequest
 
-        [<CustomOperation("from2")>]
-        member _.From2(state: AsyncSearchSubmitRequest, value: float) =
-            { state with AsyncSearchSubmitRequest.From2 = Option.Some value } : AsyncSearchSubmitRequest
+        [<CustomOperation("body_from")>]
+        member _.BodyFrom(state: AsyncSearchSubmitRequest, value: float) =
+            { state with AsyncSearchSubmitRequest.BodyFrom = Option.Some value } : AsyncSearchSubmitRequest
 
         [<CustomOperation("highlight")>]
         member _.Highlight(state: AsyncSearchSubmitRequest, value: SearchTypesHighlight) =
             { state with AsyncSearchSubmitRequest.Highlight = Option.Some value } : AsyncSearchSubmitRequest
 
-        [<CustomOperation("track_total_hits2")>]
-        member _.TrackTotalHits2(state: AsyncSearchSubmitRequest, value: SearchTypesTrackHits) =
-            { state with AsyncSearchSubmitRequest.TrackTotalHits2 = Option.Some value } : AsyncSearchSubmitRequest
+        [<CustomOperation("body_track_total_hits")>]
+        member _.BodyTrackTotalHits(state: AsyncSearchSubmitRequest, value: SearchTypesTrackHits) =
+            { state with AsyncSearchSubmitRequest.BodyTrackTotalHits = Option.Some value } : AsyncSearchSubmitRequest
 
         [<CustomOperation("indices_boost")>]
         member _.IndicesBoost(state: AsyncSearchSubmitRequest, value: Map<string, float> array) =
             { state with AsyncSearchSubmitRequest.IndicesBoost = Option.Some value } : AsyncSearchSubmitRequest
 
-        [<CustomOperation("docvalue_fields2")>]
-        member _.DocvalueFields2(state: AsyncSearchSubmitRequest, value: QueryDslFieldAndFormat array) =
-            { state with AsyncSearchSubmitRequest.DocvalueFields2 = Option.Some value } : AsyncSearchSubmitRequest
+        [<CustomOperation("body_docvalue_fields")>]
+        member _.BodyDocvalueFields(state: AsyncSearchSubmitRequest, value: QueryDslFieldAndFormat array) =
+            { state with AsyncSearchSubmitRequest.BodyDocvalueFields = Option.Some value } : AsyncSearchSubmitRequest
 
         [<CustomOperation("knn")>]
         member _.Knn(state: AsyncSearchSubmitRequest, value: System.Text.Json.JsonElement) =
@@ -648,21 +648,21 @@ module SearchOperations =
         member _.SearchAfter(state: AsyncSearchSubmitRequest, value: SortResults) =
             { state with AsyncSearchSubmitRequest.SearchAfter = Option.Some value } : AsyncSearchSubmitRequest
 
-        [<CustomOperation("size2")>]
-        member _.Size2(state: AsyncSearchSubmitRequest, value: float) =
-            { state with AsyncSearchSubmitRequest.Size2 = Option.Some value } : AsyncSearchSubmitRequest
+        [<CustomOperation("body_size")>]
+        member _.BodySize(state: AsyncSearchSubmitRequest, value: float) =
+            { state with AsyncSearchSubmitRequest.BodySize = Option.Some value } : AsyncSearchSubmitRequest
 
         [<CustomOperation("slice")>]
         member _.Slice(state: AsyncSearchSubmitRequest, value: SlicedScroll) =
             { state with AsyncSearchSubmitRequest.Slice = Option.Some value } : AsyncSearchSubmitRequest
 
-        [<CustomOperation("sort2")>]
-        member _.Sort2(state: AsyncSearchSubmitRequest, value: Sort) =
-            { state with AsyncSearchSubmitRequest.Sort2 = Option.Some value } : AsyncSearchSubmitRequest
+        [<CustomOperation("body_sort")>]
+        member _.BodySort(state: AsyncSearchSubmitRequest, value: Sort) =
+            { state with AsyncSearchSubmitRequest.BodySort = Option.Some value } : AsyncSearchSubmitRequest
 
-        [<CustomOperation("_source2")>]
-        member _.Source2(state: AsyncSearchSubmitRequest, value: SearchTypesSourceConfig) =
-            { state with AsyncSearchSubmitRequest.Source2 = Option.Some value } : AsyncSearchSubmitRequest
+        [<CustomOperation("body__source")>]
+        member _.BodySource(state: AsyncSearchSubmitRequest, value: SearchTypesSourceConfig) =
+            { state with AsyncSearchSubmitRequest.BodySource = Option.Some value } : AsyncSearchSubmitRequest
 
         [<CustomOperation("fields")>]
         member _.Fields(state: AsyncSearchSubmitRequest, value: QueryDslFieldAndFormat array) =
@@ -672,29 +672,29 @@ module SearchOperations =
         member _.Suggest(state: AsyncSearchSubmitRequest, value: SearchTypesSuggester) =
             { state with AsyncSearchSubmitRequest.Suggest = Option.Some value } : AsyncSearchSubmitRequest
 
-        [<CustomOperation("terminate_after2")>]
-        member _.TerminateAfter2(state: AsyncSearchSubmitRequest, value: float) =
-            { state with AsyncSearchSubmitRequest.TerminateAfter2 = Option.Some value } : AsyncSearchSubmitRequest
+        [<CustomOperation("body_terminate_after")>]
+        member _.BodyTerminateAfter(state: AsyncSearchSubmitRequest, value: float) =
+            { state with AsyncSearchSubmitRequest.BodyTerminateAfter = Option.Some value } : AsyncSearchSubmitRequest
 
-        [<CustomOperation("timeout2")>]
-        member _.Timeout2(state: AsyncSearchSubmitRequest, value: string) =
-            { state with AsyncSearchSubmitRequest.Timeout2 = Option.Some value } : AsyncSearchSubmitRequest
+        [<CustomOperation("body_timeout")>]
+        member _.BodyTimeout(state: AsyncSearchSubmitRequest, value: string) =
+            { state with AsyncSearchSubmitRequest.BodyTimeout = Option.Some value } : AsyncSearchSubmitRequest
 
-        [<CustomOperation("track_scores2")>]
-        member _.TrackScores2(state: AsyncSearchSubmitRequest, value: bool) =
-            { state with AsyncSearchSubmitRequest.TrackScores2 = Option.Some value } : AsyncSearchSubmitRequest
+        [<CustomOperation("body_track_scores")>]
+        member _.BodyTrackScores(state: AsyncSearchSubmitRequest, value: bool) =
+            { state with AsyncSearchSubmitRequest.BodyTrackScores = Option.Some value } : AsyncSearchSubmitRequest
 
-        [<CustomOperation("version2")>]
-        member _.Version2(state: AsyncSearchSubmitRequest, value: bool) =
-            { state with AsyncSearchSubmitRequest.Version2 = Option.Some value } : AsyncSearchSubmitRequest
+        [<CustomOperation("body_version")>]
+        member _.BodyVersion(state: AsyncSearchSubmitRequest, value: bool) =
+            { state with AsyncSearchSubmitRequest.BodyVersion = Option.Some value } : AsyncSearchSubmitRequest
 
-        [<CustomOperation("seq_no_primary_term2")>]
-        member _.SeqNoPrimaryTerm2(state: AsyncSearchSubmitRequest, value: bool) =
-            { state with AsyncSearchSubmitRequest.SeqNoPrimaryTerm2 = Option.Some value } : AsyncSearchSubmitRequest
+        [<CustomOperation("body_seq_no_primary_term")>]
+        member _.BodySeqNoPrimaryTerm(state: AsyncSearchSubmitRequest, value: bool) =
+            { state with AsyncSearchSubmitRequest.BodySeqNoPrimaryTerm = Option.Some value } : AsyncSearchSubmitRequest
 
-        [<CustomOperation("stored_fields2")>]
-        member _.StoredFields2(state: AsyncSearchSubmitRequest, value: Fields) =
-            { state with AsyncSearchSubmitRequest.StoredFields2 = Option.Some value } : AsyncSearchSubmitRequest
+        [<CustomOperation("body_stored_fields")>]
+        member _.BodyStoredFields(state: AsyncSearchSubmitRequest, value: Fields) =
+            { state with AsyncSearchSubmitRequest.BodyStoredFields = Option.Some value } : AsyncSearchSubmitRequest
 
         [<CustomOperation("pit")>]
         member _.Pit(state: AsyncSearchSubmitRequest, value: SearchTypesPointInTimeReference) =
@@ -704,21 +704,21 @@ module SearchOperations =
         member _.RuntimeMappings(state: AsyncSearchSubmitRequest, value: MappingRuntimeFields) =
             { state with AsyncSearchSubmitRequest.RuntimeMappings = Option.Some value } : AsyncSearchSubmitRequest
 
-        [<CustomOperation("stats2")>]
-        member _.Stats2(state: AsyncSearchSubmitRequest, value: string array) =
-            { state with AsyncSearchSubmitRequest.Stats2 = Option.Some value } : AsyncSearchSubmitRequest
+        [<CustomOperation("body_stats")>]
+        member _.BodyStats(state: AsyncSearchSubmitRequest, value: string array) =
+            { state with AsyncSearchSubmitRequest.BodyStats = Option.Some value } : AsyncSearchSubmitRequest
 
     let asyncSearchSubmitRequest = AsyncSearchSubmitRequestBuilder()
 
     type ScrollRequest = {
         ScrollId: ScrollId
         Scroll: Duration option
-        ScrollId2: ScrollId option
+        QueryScrollId: ScrollId option
         RestTotalHitsAsInt: bool option
         [<JsonPropertyName("scroll")>]
-        Scroll2: Duration option
+        BodyScroll: Duration option
         [<JsonPropertyName("scroll_id")>]
-        ScrollId3: ScrollId
+        BodyScrollId: ScrollId
     } with
         static member ToRequest(request: ScrollRequest) : Result<Fes.Http.RequestMsg, exn> =
             try
@@ -726,7 +726,7 @@ module SearchOperations =
                 let queryParams =
                     [
                         request.Scroll |> Option.map (fun v -> "scroll", Fes.Http.toQueryValue v)
-                        request.ScrollId2 |> Option.map (fun v -> "scroll_id", Fes.Http.toQueryValue v)
+                        request.QueryScrollId |> Option.map (fun v -> "scroll_id", Fes.Http.toQueryValue v)
                         request.RestTotalHitsAsInt |> Option.map (fun v -> "rest_total_hits_as_int", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
@@ -736,7 +736,7 @@ module SearchOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody {| ``scroll`` = request.Scroll2; ``scroll_id`` = request.ScrollId3 |}
+                |> Fes.Http.Request.withJsonBody {| ``scroll`` = request.BodyScroll; ``scroll_id`` = request.BodyScrollId |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -750,10 +750,10 @@ module SearchOperations =
             {
                 ScrollRequest.ScrollId = Unchecked.defaultof<ScrollId>
                 ScrollRequest.Scroll = Option.None
-                ScrollRequest.ScrollId2 = Option.None
+                ScrollRequest.QueryScrollId = Option.None
                 ScrollRequest.RestTotalHitsAsInt = Option.None
-                ScrollRequest.Scroll2 = Option.None
-                ScrollRequest.ScrollId3 = Unchecked.defaultof<ScrollId>
+                ScrollRequest.BodyScroll = Option.None
+                ScrollRequest.BodyScrollId = Unchecked.defaultof<ScrollId>
             } : ScrollRequest
 
         [<CustomOperation("scroll_id")>]
@@ -764,28 +764,28 @@ module SearchOperations =
         member _.Scroll(state: ScrollRequest, value: Duration) =
             { state with ScrollRequest.Scroll = Option.Some value } : ScrollRequest
 
-        [<CustomOperation("scroll_id2")>]
-        member _.ScrollId2(state: ScrollRequest, value: ScrollId) =
-            { state with ScrollRequest.ScrollId2 = Option.Some value } : ScrollRequest
+        [<CustomOperation("query_scroll_id")>]
+        member _.QueryScrollId(state: ScrollRequest, value: ScrollId) =
+            { state with ScrollRequest.QueryScrollId = Option.Some value } : ScrollRequest
 
         [<CustomOperation("rest_total_hits_as_int")>]
         member _.RestTotalHitsAsInt(state: ScrollRequest, value: bool) =
             { state with ScrollRequest.RestTotalHitsAsInt = Option.Some value } : ScrollRequest
 
-        [<CustomOperation("scroll2")>]
-        member _.Scroll2(state: ScrollRequest, value: Duration) =
-            { state with ScrollRequest.Scroll2 = Option.Some value } : ScrollRequest
+        [<CustomOperation("body_scroll")>]
+        member _.BodyScroll(state: ScrollRequest, value: Duration) =
+            { state with ScrollRequest.BodyScroll = Option.Some value } : ScrollRequest
 
-        [<CustomOperation("scroll_id3")>]
-        member _.ScrollId3(state: ScrollRequest, value: ScrollId) =
-            { state with ScrollRequest.ScrollId3 = value } : ScrollRequest
+        [<CustomOperation("body_scroll_id")>]
+        member _.BodyScrollId(state: ScrollRequest, value: ScrollId) =
+            { state with ScrollRequest.BodyScrollId = value } : ScrollRequest
 
     let scrollRequest = ScrollRequestBuilder()
 
     type ClearScrollRequest = {
         ScrollId: ScrollIds
         [<JsonPropertyName("scroll_id")>]
-        ScrollId2: ScrollIds option
+        BodyScrollId: ScrollIds option
     } with
         static member ToRequest(request: ClearScrollRequest) : Result<Fes.Http.RequestMsg, exn> =
             try
@@ -794,7 +794,7 @@ module SearchOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Fes.Http.Request.withJsonBody {| ``scroll_id`` = request.ScrollId2 |}
+                |> Fes.Http.Request.withJsonBody {| ``scroll_id`` = request.BodyScrollId |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -807,16 +807,16 @@ module SearchOperations =
         member _.Yield(_: unit) : ClearScrollRequest =
             {
                 ClearScrollRequest.ScrollId = Unchecked.defaultof<ScrollIds>
-                ClearScrollRequest.ScrollId2 = Option.None
+                ClearScrollRequest.BodyScrollId = Option.None
             } : ClearScrollRequest
 
         [<CustomOperation("scroll_id")>]
         member _.ScrollId(state: ClearScrollRequest, value: ScrollIds) =
             { state with ClearScrollRequest.ScrollId = value } : ClearScrollRequest
 
-        [<CustomOperation("scroll_id2")>]
-        member _.ScrollId2(state: ClearScrollRequest, value: ScrollIds) =
-            { state with ClearScrollRequest.ScrollId2 = Option.Some value } : ClearScrollRequest
+        [<CustomOperation("body_scroll_id")>]
+        member _.BodyScrollId(state: ClearScrollRequest, value: ScrollIds) =
+            { state with ClearScrollRequest.BodyScrollId = Option.Some value } : ClearScrollRequest
 
     let clearScrollRequest = ClearScrollRequestBuilder()
 
@@ -1146,7 +1146,7 @@ module SearchOperations =
         Types: string array option
         IncludeEmptyFields: bool option
         [<JsonPropertyName("fields")>]
-        Fields2: Fields option
+        BodyFields: Fields option
         [<JsonPropertyName("index_filter")>]
         IndexFilter: QueryDslQueryContainer option
         [<JsonPropertyName("runtime_mappings")>]
@@ -1173,7 +1173,7 @@ module SearchOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody {| ``fields`` = request.Fields2; ``index_filter`` = request.IndexFilter; ``runtime_mappings`` = request.RuntimeMappings |}
+                |> Fes.Http.Request.withJsonBody {| ``fields`` = request.BodyFields; ``index_filter`` = request.IndexFilter; ``runtime_mappings`` = request.RuntimeMappings |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1194,7 +1194,7 @@ module SearchOperations =
                 FieldCapsRequest.Filters = Option.None
                 FieldCapsRequest.Types = Option.None
                 FieldCapsRequest.IncludeEmptyFields = Option.None
-                FieldCapsRequest.Fields2 = Option.None
+                FieldCapsRequest.BodyFields = Option.None
                 FieldCapsRequest.IndexFilter = Option.None
                 FieldCapsRequest.RuntimeMappings = Option.None
             } : FieldCapsRequest
@@ -1235,9 +1235,9 @@ module SearchOperations =
         member _.IncludeEmptyFields(state: FieldCapsRequest, value: bool) =
             { state with FieldCapsRequest.IncludeEmptyFields = Option.Some value } : FieldCapsRequest
 
-        [<CustomOperation("fields2")>]
-        member _.Fields2(state: FieldCapsRequest, value: Fields) =
-            { state with FieldCapsRequest.Fields2 = Option.Some value } : FieldCapsRequest
+        [<CustomOperation("body_fields")>]
+        member _.BodyFields(state: FieldCapsRequest, value: Fields) =
+            { state with FieldCapsRequest.BodyFields = Option.Some value } : FieldCapsRequest
 
         [<CustomOperation("index_filter")>]
         member _.IndexFilter(state: FieldCapsRequest, value: QueryDslQueryContainer) =
@@ -1257,7 +1257,7 @@ module SearchOperations =
         IgnoreThrottled: bool option
         IgnoreUnavailable: bool option
         IncludeNamedQueriesScore: bool option
-        Index2: Indices option
+        QueryIndex: Indices option
         MaxConcurrentSearches: float option
         MaxConcurrentShardRequests: float option
         PreFilterShardSize: float option
@@ -1277,7 +1277,7 @@ module SearchOperations =
                         request.IgnoreThrottled |> Option.map (fun v -> "ignore_throttled", Fes.Http.toQueryValue v)
                         request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
                         request.IncludeNamedQueriesScore |> Option.map (fun v -> "include_named_queries_score", Fes.Http.toQueryValue v)
-                        request.Index2 |> Option.map (fun v -> "index", Fes.Http.toQueryValue v)
+                        request.QueryIndex |> Option.map (fun v -> "index", Fes.Http.toQueryValue v)
                         request.MaxConcurrentSearches |> Option.map (fun v -> "max_concurrent_searches", Fes.Http.toQueryValue v)
                         request.MaxConcurrentShardRequests |> Option.map (fun v -> "max_concurrent_shard_requests", Fes.Http.toQueryValue v)
                         request.PreFilterShardSize |> Option.map (fun v -> "pre_filter_shard_size", Fes.Http.toQueryValue v)
@@ -1311,7 +1311,7 @@ module SearchOperations =
                 MsearchRequest.IgnoreThrottled = Option.None
                 MsearchRequest.IgnoreUnavailable = Option.None
                 MsearchRequest.IncludeNamedQueriesScore = Option.None
-                MsearchRequest.Index2 = Option.None
+                MsearchRequest.QueryIndex = Option.None
                 MsearchRequest.MaxConcurrentSearches = Option.None
                 MsearchRequest.MaxConcurrentShardRequests = Option.None
                 MsearchRequest.PreFilterShardSize = Option.None
@@ -1349,9 +1349,9 @@ module SearchOperations =
         member _.IncludeNamedQueriesScore(state: MsearchRequest, value: bool) =
             { state with MsearchRequest.IncludeNamedQueriesScore = Option.Some value } : MsearchRequest
 
-        [<CustomOperation("index2")>]
-        member _.Index2(state: MsearchRequest, value: Indices) =
-            { state with MsearchRequest.Index2 = Option.Some value } : MsearchRequest
+        [<CustomOperation("query_index")>]
+        member _.QueryIndex(state: MsearchRequest, value: Indices) =
+            { state with MsearchRequest.QueryIndex = Option.Some value } : MsearchRequest
 
         [<CustomOperation("max_concurrent_searches")>]
         member _.MaxConcurrentSearches(state: MsearchRequest, value: float) =
@@ -1636,7 +1636,7 @@ module SearchOperations =
     type RenderSearchTemplateRequest = {
         Id: Id
         [<JsonPropertyName("id")>]
-        Id2: Id option
+        BodyId: Id option
         [<JsonPropertyName("file")>]
         File: string option
         [<JsonPropertyName("params")>]
@@ -1651,7 +1651,7 @@ module SearchOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody {| ``id`` = request.Id2; ``file`` = request.File; ``params`` = request.Params; ``source`` = request.Source |}
+                |> Fes.Http.Request.withJsonBody {| ``id`` = request.BodyId; ``file`` = request.File; ``params`` = request.Params; ``source`` = request.Source |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1664,7 +1664,7 @@ module SearchOperations =
         member _.Yield(_: unit) : RenderSearchTemplateRequest =
             {
                 RenderSearchTemplateRequest.Id = Unchecked.defaultof<Id>
-                RenderSearchTemplateRequest.Id2 = Option.None
+                RenderSearchTemplateRequest.BodyId = Option.None
                 RenderSearchTemplateRequest.File = Option.None
                 RenderSearchTemplateRequest.Params = Option.None
                 RenderSearchTemplateRequest.Source = Option.None
@@ -1674,9 +1674,9 @@ module SearchOperations =
         member _.Id(state: RenderSearchTemplateRequest, value: Id) =
             { state with RenderSearchTemplateRequest.Id = value } : RenderSearchTemplateRequest
 
-        [<CustomOperation("id2")>]
-        member _.Id2(state: RenderSearchTemplateRequest, value: Id) =
-            { state with RenderSearchTemplateRequest.Id2 = Option.Some value } : RenderSearchTemplateRequest
+        [<CustomOperation("body_id")>]
+        member _.BodyId(state: RenderSearchTemplateRequest, value: Id) =
+            { state with RenderSearchTemplateRequest.BodyId = Option.Some value } : RenderSearchTemplateRequest
 
         [<CustomOperation("file")>]
         member _.File(state: RenderSearchTemplateRequest, value: string) =
@@ -1743,19 +1743,19 @@ module SearchOperations =
         [<JsonPropertyName("collapse")>]
         Collapse: SearchTypesFieldCollapse option
         [<JsonPropertyName("explain")>]
-        Explain2: bool option
+        BodyExplain: bool option
         [<JsonPropertyName("ext")>]
         Ext: Map<string, obj> option
         [<JsonPropertyName("from")>]
-        From2: float option
+        BodyFrom: float option
         [<JsonPropertyName("highlight")>]
         Highlight: SearchTypesHighlight option
         [<JsonPropertyName("track_total_hits")>]
-        TrackTotalHits2: SearchTypesTrackHits option
+        BodyTrackTotalHits: SearchTypesTrackHits option
         [<JsonPropertyName("indices_boost")>]
         IndicesBoost: Map<string, float> array option
         [<JsonPropertyName("docvalue_fields")>]
-        DocvalueFields2: QueryDslFieldAndFormat array option
+        BodyDocvalueFields: QueryDslFieldAndFormat array option
         [<JsonPropertyName("knn")>]
         Knn: System.Text.Json.JsonElement option
         [<JsonPropertyName("rank")>]
@@ -1777,35 +1777,35 @@ module SearchOperations =
         [<JsonPropertyName("search_after")>]
         SearchAfter: SortResults option
         [<JsonPropertyName("size")>]
-        Size2: float option
+        BodySize: float option
         [<JsonPropertyName("slice")>]
         Slice: SlicedScroll option
         [<JsonPropertyName("sort")>]
-        Sort2: Sort option
+        BodySort: Sort option
         [<JsonPropertyName("_source")>]
-        Source2: SearchTypesSourceConfig option
+        BodySource: SearchTypesSourceConfig option
         [<JsonPropertyName("fields")>]
         Fields: QueryDslFieldAndFormat array option
         [<JsonPropertyName("suggest")>]
         Suggest: SearchTypesSuggester option
         [<JsonPropertyName("terminate_after")>]
-        TerminateAfter2: float option
+        BodyTerminateAfter: float option
         [<JsonPropertyName("timeout")>]
-        Timeout2: string option
+        BodyTimeout: string option
         [<JsonPropertyName("track_scores")>]
-        TrackScores2: bool option
+        BodyTrackScores: bool option
         [<JsonPropertyName("version")>]
-        Version2: bool option
+        BodyVersion: bool option
         [<JsonPropertyName("seq_no_primary_term")>]
-        SeqNoPrimaryTerm2: bool option
+        BodySeqNoPrimaryTerm: bool option
         [<JsonPropertyName("stored_fields")>]
-        StoredFields2: Fields option
+        BodyStoredFields: Fields option
         [<JsonPropertyName("pit")>]
         Pit: SearchTypesPointInTimeReference option
         [<JsonPropertyName("runtime_mappings")>]
         RuntimeMappings: MappingRuntimeFields option
         [<JsonPropertyName("stats")>]
-        Stats2: string array option
+        BodyStats: string array option
     } with
         static member ToRequest(request: SearchRequest) : Result<Fes.Http.RequestMsg, exn> =
             try
@@ -1864,7 +1864,7 @@ module SearchOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody {| ``aggregations`` = request.Aggregations; ``collapse`` = request.Collapse; ``explain`` = request.Explain2; ``ext`` = request.Ext; ``from`` = request.From2; ``highlight`` = request.Highlight; ``track_total_hits`` = request.TrackTotalHits2; ``indices_boost`` = request.IndicesBoost; ``docvalue_fields`` = request.DocvalueFields2; ``knn`` = request.Knn; ``rank`` = request.Rank; ``min_score`` = request.MinScore; ``post_filter`` = request.PostFilter; ``profile`` = request.Profile; ``query`` = request.Query; ``rescore`` = request.Rescore; ``retriever`` = request.Retriever; ``script_fields`` = request.ScriptFields; ``search_after`` = request.SearchAfter; ``size`` = request.Size2; ``slice`` = request.Slice; ``sort`` = request.Sort2; ``_source`` = request.Source2; ``fields`` = request.Fields; ``suggest`` = request.Suggest; ``terminate_after`` = request.TerminateAfter2; ``timeout`` = request.Timeout2; ``track_scores`` = request.TrackScores2; ``version`` = request.Version2; ``seq_no_primary_term`` = request.SeqNoPrimaryTerm2; ``stored_fields`` = request.StoredFields2; ``pit`` = request.Pit; ``runtime_mappings`` = request.RuntimeMappings; ``stats`` = request.Stats2 |}
+                |> Fes.Http.Request.withJsonBody {| ``aggregations`` = request.Aggregations; ``collapse`` = request.Collapse; ``explain`` = request.BodyExplain; ``ext`` = request.Ext; ``from`` = request.BodyFrom; ``highlight`` = request.Highlight; ``track_total_hits`` = request.BodyTrackTotalHits; ``indices_boost`` = request.IndicesBoost; ``docvalue_fields`` = request.BodyDocvalueFields; ``knn`` = request.Knn; ``rank`` = request.Rank; ``min_score`` = request.MinScore; ``post_filter`` = request.PostFilter; ``profile`` = request.Profile; ``query`` = request.Query; ``rescore`` = request.Rescore; ``retriever`` = request.Retriever; ``script_fields`` = request.ScriptFields; ``search_after`` = request.SearchAfter; ``size`` = request.BodySize; ``slice`` = request.Slice; ``sort`` = request.BodySort; ``_source`` = request.BodySource; ``fields`` = request.Fields; ``suggest`` = request.Suggest; ``terminate_after`` = request.BodyTerminateAfter; ``timeout`` = request.BodyTimeout; ``track_scores`` = request.BodyTrackScores; ``version`` = request.BodyVersion; ``seq_no_primary_term`` = request.BodySeqNoPrimaryTerm; ``stored_fields`` = request.BodyStoredFields; ``pit`` = request.Pit; ``runtime_mappings`` = request.RuntimeMappings; ``stats`` = request.BodyStats |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1923,13 +1923,13 @@ module SearchOperations =
                 SearchRequest.Sort = Option.None
                 SearchRequest.Aggregations = Option.None
                 SearchRequest.Collapse = Option.None
-                SearchRequest.Explain2 = Option.None
+                SearchRequest.BodyExplain = Option.None
                 SearchRequest.Ext = Option.None
-                SearchRequest.From2 = Option.None
+                SearchRequest.BodyFrom = Option.None
                 SearchRequest.Highlight = Option.None
-                SearchRequest.TrackTotalHits2 = Option.None
+                SearchRequest.BodyTrackTotalHits = Option.None
                 SearchRequest.IndicesBoost = Option.None
-                SearchRequest.DocvalueFields2 = Option.None
+                SearchRequest.BodyDocvalueFields = Option.None
                 SearchRequest.Knn = Option.None
                 SearchRequest.Rank = Option.None
                 SearchRequest.MinScore = Option.None
@@ -1940,21 +1940,21 @@ module SearchOperations =
                 SearchRequest.Retriever = Option.None
                 SearchRequest.ScriptFields = Option.None
                 SearchRequest.SearchAfter = Option.None
-                SearchRequest.Size2 = Option.None
+                SearchRequest.BodySize = Option.None
                 SearchRequest.Slice = Option.None
-                SearchRequest.Sort2 = Option.None
-                SearchRequest.Source2 = Option.None
+                SearchRequest.BodySort = Option.None
+                SearchRequest.BodySource = Option.None
                 SearchRequest.Fields = Option.None
                 SearchRequest.Suggest = Option.None
-                SearchRequest.TerminateAfter2 = Option.None
-                SearchRequest.Timeout2 = Option.None
-                SearchRequest.TrackScores2 = Option.None
-                SearchRequest.Version2 = Option.None
-                SearchRequest.SeqNoPrimaryTerm2 = Option.None
-                SearchRequest.StoredFields2 = Option.None
+                SearchRequest.BodyTerminateAfter = Option.None
+                SearchRequest.BodyTimeout = Option.None
+                SearchRequest.BodyTrackScores = Option.None
+                SearchRequest.BodyVersion = Option.None
+                SearchRequest.BodySeqNoPrimaryTerm = Option.None
+                SearchRequest.BodyStoredFields = Option.None
                 SearchRequest.Pit = Option.None
                 SearchRequest.RuntimeMappings = Option.None
-                SearchRequest.Stats2 = Option.None
+                SearchRequest.BodyStats = Option.None
             } : SearchRequest
 
         [<CustomOperation("index")>]
@@ -2145,33 +2145,33 @@ module SearchOperations =
         member _.Collapse(state: SearchRequest, value: SearchTypesFieldCollapse) =
             { state with SearchRequest.Collapse = Option.Some value } : SearchRequest
 
-        [<CustomOperation("explain2")>]
-        member _.Explain2(state: SearchRequest, value: bool) =
-            { state with SearchRequest.Explain2 = Option.Some value } : SearchRequest
+        [<CustomOperation("body_explain")>]
+        member _.BodyExplain(state: SearchRequest, value: bool) =
+            { state with SearchRequest.BodyExplain = Option.Some value } : SearchRequest
 
         [<CustomOperation("ext")>]
         member _.Ext(state: SearchRequest, value: Map<string, obj>) =
             { state with SearchRequest.Ext = Option.Some value } : SearchRequest
 
-        [<CustomOperation("from2")>]
-        member _.From2(state: SearchRequest, value: float) =
-            { state with SearchRequest.From2 = Option.Some value } : SearchRequest
+        [<CustomOperation("body_from")>]
+        member _.BodyFrom(state: SearchRequest, value: float) =
+            { state with SearchRequest.BodyFrom = Option.Some value } : SearchRequest
 
         [<CustomOperation("highlight")>]
         member _.Highlight(state: SearchRequest, value: SearchTypesHighlight) =
             { state with SearchRequest.Highlight = Option.Some value } : SearchRequest
 
-        [<CustomOperation("track_total_hits2")>]
-        member _.TrackTotalHits2(state: SearchRequest, value: SearchTypesTrackHits) =
-            { state with SearchRequest.TrackTotalHits2 = Option.Some value } : SearchRequest
+        [<CustomOperation("body_track_total_hits")>]
+        member _.BodyTrackTotalHits(state: SearchRequest, value: SearchTypesTrackHits) =
+            { state with SearchRequest.BodyTrackTotalHits = Option.Some value } : SearchRequest
 
         [<CustomOperation("indices_boost")>]
         member _.IndicesBoost(state: SearchRequest, value: Map<string, float> array) =
             { state with SearchRequest.IndicesBoost = Option.Some value } : SearchRequest
 
-        [<CustomOperation("docvalue_fields2")>]
-        member _.DocvalueFields2(state: SearchRequest, value: QueryDslFieldAndFormat array) =
-            { state with SearchRequest.DocvalueFields2 = Option.Some value } : SearchRequest
+        [<CustomOperation("body_docvalue_fields")>]
+        member _.BodyDocvalueFields(state: SearchRequest, value: QueryDslFieldAndFormat array) =
+            { state with SearchRequest.BodyDocvalueFields = Option.Some value } : SearchRequest
 
         [<CustomOperation("knn")>]
         member _.Knn(state: SearchRequest, value: System.Text.Json.JsonElement) =
@@ -2213,21 +2213,21 @@ module SearchOperations =
         member _.SearchAfter(state: SearchRequest, value: SortResults) =
             { state with SearchRequest.SearchAfter = Option.Some value } : SearchRequest
 
-        [<CustomOperation("size2")>]
-        member _.Size2(state: SearchRequest, value: float) =
-            { state with SearchRequest.Size2 = Option.Some value } : SearchRequest
+        [<CustomOperation("body_size")>]
+        member _.BodySize(state: SearchRequest, value: float) =
+            { state with SearchRequest.BodySize = Option.Some value } : SearchRequest
 
         [<CustomOperation("slice")>]
         member _.Slice(state: SearchRequest, value: SlicedScroll) =
             { state with SearchRequest.Slice = Option.Some value } : SearchRequest
 
-        [<CustomOperation("sort2")>]
-        member _.Sort2(state: SearchRequest, value: Sort) =
-            { state with SearchRequest.Sort2 = Option.Some value } : SearchRequest
+        [<CustomOperation("body_sort")>]
+        member _.BodySort(state: SearchRequest, value: Sort) =
+            { state with SearchRequest.BodySort = Option.Some value } : SearchRequest
 
-        [<CustomOperation("_source2")>]
-        member _.Source2(state: SearchRequest, value: SearchTypesSourceConfig) =
-            { state with SearchRequest.Source2 = Option.Some value } : SearchRequest
+        [<CustomOperation("body__source")>]
+        member _.BodySource(state: SearchRequest, value: SearchTypesSourceConfig) =
+            { state with SearchRequest.BodySource = Option.Some value } : SearchRequest
 
         [<CustomOperation("fields")>]
         member _.Fields(state: SearchRequest, value: QueryDslFieldAndFormat array) =
@@ -2237,29 +2237,29 @@ module SearchOperations =
         member _.Suggest(state: SearchRequest, value: SearchTypesSuggester) =
             { state with SearchRequest.Suggest = Option.Some value } : SearchRequest
 
-        [<CustomOperation("terminate_after2")>]
-        member _.TerminateAfter2(state: SearchRequest, value: float) =
-            { state with SearchRequest.TerminateAfter2 = Option.Some value } : SearchRequest
+        [<CustomOperation("body_terminate_after")>]
+        member _.BodyTerminateAfter(state: SearchRequest, value: float) =
+            { state with SearchRequest.BodyTerminateAfter = Option.Some value } : SearchRequest
 
-        [<CustomOperation("timeout2")>]
-        member _.Timeout2(state: SearchRequest, value: string) =
-            { state with SearchRequest.Timeout2 = Option.Some value } : SearchRequest
+        [<CustomOperation("body_timeout")>]
+        member _.BodyTimeout(state: SearchRequest, value: string) =
+            { state with SearchRequest.BodyTimeout = Option.Some value } : SearchRequest
 
-        [<CustomOperation("track_scores2")>]
-        member _.TrackScores2(state: SearchRequest, value: bool) =
-            { state with SearchRequest.TrackScores2 = Option.Some value } : SearchRequest
+        [<CustomOperation("body_track_scores")>]
+        member _.BodyTrackScores(state: SearchRequest, value: bool) =
+            { state with SearchRequest.BodyTrackScores = Option.Some value } : SearchRequest
 
-        [<CustomOperation("version2")>]
-        member _.Version2(state: SearchRequest, value: bool) =
-            { state with SearchRequest.Version2 = Option.Some value } : SearchRequest
+        [<CustomOperation("body_version")>]
+        member _.BodyVersion(state: SearchRequest, value: bool) =
+            { state with SearchRequest.BodyVersion = Option.Some value } : SearchRequest
 
-        [<CustomOperation("seq_no_primary_term2")>]
-        member _.SeqNoPrimaryTerm2(state: SearchRequest, value: bool) =
-            { state with SearchRequest.SeqNoPrimaryTerm2 = Option.Some value } : SearchRequest
+        [<CustomOperation("body_seq_no_primary_term")>]
+        member _.BodySeqNoPrimaryTerm(state: SearchRequest, value: bool) =
+            { state with SearchRequest.BodySeqNoPrimaryTerm = Option.Some value } : SearchRequest
 
-        [<CustomOperation("stored_fields2")>]
-        member _.StoredFields2(state: SearchRequest, value: Fields) =
-            { state with SearchRequest.StoredFields2 = Option.Some value } : SearchRequest
+        [<CustomOperation("body_stored_fields")>]
+        member _.BodyStoredFields(state: SearchRequest, value: Fields) =
+            { state with SearchRequest.BodyStoredFields = Option.Some value } : SearchRequest
 
         [<CustomOperation("pit")>]
         member _.Pit(state: SearchRequest, value: SearchTypesPointInTimeReference) =
@@ -2269,9 +2269,9 @@ module SearchOperations =
         member _.RuntimeMappings(state: SearchRequest, value: MappingRuntimeFields) =
             { state with SearchRequest.RuntimeMappings = Option.Some value } : SearchRequest
 
-        [<CustomOperation("stats2")>]
-        member _.Stats2(state: SearchRequest, value: string array) =
-            { state with SearchRequest.Stats2 = Option.Some value } : SearchRequest
+        [<CustomOperation("body_stats")>]
+        member _.BodyStats(state: SearchRequest, value: string array) =
+            { state with SearchRequest.BodyStats = Option.Some value } : SearchRequest
 
     let searchRequest = SearchRequestBuilder()
 
@@ -2294,29 +2294,29 @@ module SearchOperations =
         [<JsonPropertyName("buffer")>]
         Buffer: float option
         [<JsonPropertyName("exact_bounds")>]
-        ExactBounds2: bool option
+        BodyExactBounds: bool option
         [<JsonPropertyName("extent")>]
-        Extent2: float option
+        BodyExtent: float option
         [<JsonPropertyName("fields")>]
         Fields: Fields option
         [<JsonPropertyName("grid_agg")>]
-        GridAgg2: SearchMvtTypesGridAggregationType option
+        BodyGridAgg: SearchMvtTypesGridAggregationType option
         [<JsonPropertyName("grid_precision")>]
-        GridPrecision2: float option
+        BodyGridPrecision: float option
         [<JsonPropertyName("grid_type")>]
-        GridType2: SearchMvtTypesGridType option
+        BodyGridType: SearchMvtTypesGridType option
         [<JsonPropertyName("query")>]
         Query: QueryDslQueryContainer option
         [<JsonPropertyName("runtime_mappings")>]
         RuntimeMappings: MappingRuntimeFields option
         [<JsonPropertyName("size")>]
-        Size2: float option
+        BodySize: float option
         [<JsonPropertyName("sort")>]
         Sort: Sort option
         [<JsonPropertyName("track_total_hits")>]
-        TrackTotalHits2: SearchTypesTrackHits option
+        BodyTrackTotalHits: SearchTypesTrackHits option
         [<JsonPropertyName("with_labels")>]
-        WithLabels2: bool option
+        BodyWithLabels: bool option
     } with
         static member ToRequest(request: SearchMvtRequest) : Result<Fes.Http.RequestMsg, exn> =
             try
@@ -2339,7 +2339,7 @@ module SearchOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Fes.Http.Request.withJsonBody {| ``aggs`` = request.Aggs; ``buffer`` = request.Buffer; ``exact_bounds`` = request.ExactBounds2; ``extent`` = request.Extent2; ``fields`` = request.Fields; ``grid_agg`` = request.GridAgg2; ``grid_precision`` = request.GridPrecision2; ``grid_type`` = request.GridType2; ``query`` = request.Query; ``runtime_mappings`` = request.RuntimeMappings; ``size`` = request.Size2; ``sort`` = request.Sort; ``track_total_hits`` = request.TrackTotalHits2; ``with_labels`` = request.WithLabels2 |}
+                |> Fes.Http.Request.withJsonBody {| ``aggs`` = request.Aggs; ``buffer`` = request.Buffer; ``exact_bounds`` = request.BodyExactBounds; ``extent`` = request.BodyExtent; ``fields`` = request.Fields; ``grid_agg`` = request.BodyGridAgg; ``grid_precision`` = request.BodyGridPrecision; ``grid_type`` = request.BodyGridType; ``query`` = request.Query; ``runtime_mappings`` = request.RuntimeMappings; ``size`` = request.BodySize; ``sort`` = request.Sort; ``track_total_hits`` = request.BodyTrackTotalHits; ``with_labels`` = request.BodyWithLabels |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -2366,18 +2366,18 @@ module SearchOperations =
                 SearchMvtRequest.WithLabels = Option.None
                 SearchMvtRequest.Aggs = Option.None
                 SearchMvtRequest.Buffer = Option.None
-                SearchMvtRequest.ExactBounds2 = Option.None
-                SearchMvtRequest.Extent2 = Option.None
+                SearchMvtRequest.BodyExactBounds = Option.None
+                SearchMvtRequest.BodyExtent = Option.None
                 SearchMvtRequest.Fields = Option.None
-                SearchMvtRequest.GridAgg2 = Option.None
-                SearchMvtRequest.GridPrecision2 = Option.None
-                SearchMvtRequest.GridType2 = Option.None
+                SearchMvtRequest.BodyGridAgg = Option.None
+                SearchMvtRequest.BodyGridPrecision = Option.None
+                SearchMvtRequest.BodyGridType = Option.None
                 SearchMvtRequest.Query = Option.None
                 SearchMvtRequest.RuntimeMappings = Option.None
-                SearchMvtRequest.Size2 = Option.None
+                SearchMvtRequest.BodySize = Option.None
                 SearchMvtRequest.Sort = Option.None
-                SearchMvtRequest.TrackTotalHits2 = Option.None
-                SearchMvtRequest.WithLabels2 = Option.None
+                SearchMvtRequest.BodyTrackTotalHits = Option.None
+                SearchMvtRequest.BodyWithLabels = Option.None
             } : SearchMvtRequest
 
         [<CustomOperation("index")>]
@@ -2440,29 +2440,29 @@ module SearchOperations =
         member _.Buffer(state: SearchMvtRequest, value: float) =
             { state with SearchMvtRequest.Buffer = Option.Some value } : SearchMvtRequest
 
-        [<CustomOperation("exact_bounds2")>]
-        member _.ExactBounds2(state: SearchMvtRequest, value: bool) =
-            { state with SearchMvtRequest.ExactBounds2 = Option.Some value } : SearchMvtRequest
+        [<CustomOperation("body_exact_bounds")>]
+        member _.BodyExactBounds(state: SearchMvtRequest, value: bool) =
+            { state with SearchMvtRequest.BodyExactBounds = Option.Some value } : SearchMvtRequest
 
-        [<CustomOperation("extent2")>]
-        member _.Extent2(state: SearchMvtRequest, value: float) =
-            { state with SearchMvtRequest.Extent2 = Option.Some value } : SearchMvtRequest
+        [<CustomOperation("body_extent")>]
+        member _.BodyExtent(state: SearchMvtRequest, value: float) =
+            { state with SearchMvtRequest.BodyExtent = Option.Some value } : SearchMvtRequest
 
         [<CustomOperation("fields")>]
         member _.Fields(state: SearchMvtRequest, value: Fields) =
             { state with SearchMvtRequest.Fields = Option.Some value } : SearchMvtRequest
 
-        [<CustomOperation("grid_agg2")>]
-        member _.GridAgg2(state: SearchMvtRequest, value: SearchMvtTypesGridAggregationType) =
-            { state with SearchMvtRequest.GridAgg2 = Option.Some value } : SearchMvtRequest
+        [<CustomOperation("body_grid_agg")>]
+        member _.BodyGridAgg(state: SearchMvtRequest, value: SearchMvtTypesGridAggregationType) =
+            { state with SearchMvtRequest.BodyGridAgg = Option.Some value } : SearchMvtRequest
 
-        [<CustomOperation("grid_precision2")>]
-        member _.GridPrecision2(state: SearchMvtRequest, value: float) =
-            { state with SearchMvtRequest.GridPrecision2 = Option.Some value } : SearchMvtRequest
+        [<CustomOperation("body_grid_precision")>]
+        member _.BodyGridPrecision(state: SearchMvtRequest, value: float) =
+            { state with SearchMvtRequest.BodyGridPrecision = Option.Some value } : SearchMvtRequest
 
-        [<CustomOperation("grid_type2")>]
-        member _.GridType2(state: SearchMvtRequest, value: SearchMvtTypesGridType) =
-            { state with SearchMvtRequest.GridType2 = Option.Some value } : SearchMvtRequest
+        [<CustomOperation("body_grid_type")>]
+        member _.BodyGridType(state: SearchMvtRequest, value: SearchMvtTypesGridType) =
+            { state with SearchMvtRequest.BodyGridType = Option.Some value } : SearchMvtRequest
 
         [<CustomOperation("query")>]
         member _.Query(state: SearchMvtRequest, value: QueryDslQueryContainer) =
@@ -2472,21 +2472,21 @@ module SearchOperations =
         member _.RuntimeMappings(state: SearchMvtRequest, value: MappingRuntimeFields) =
             { state with SearchMvtRequest.RuntimeMappings = Option.Some value } : SearchMvtRequest
 
-        [<CustomOperation("size2")>]
-        member _.Size2(state: SearchMvtRequest, value: float) =
-            { state with SearchMvtRequest.Size2 = Option.Some value } : SearchMvtRequest
+        [<CustomOperation("body_size")>]
+        member _.BodySize(state: SearchMvtRequest, value: float) =
+            { state with SearchMvtRequest.BodySize = Option.Some value } : SearchMvtRequest
 
         [<CustomOperation("sort")>]
         member _.Sort(state: SearchMvtRequest, value: Sort) =
             { state with SearchMvtRequest.Sort = Option.Some value } : SearchMvtRequest
 
-        [<CustomOperation("track_total_hits2")>]
-        member _.TrackTotalHits2(state: SearchMvtRequest, value: SearchTypesTrackHits) =
-            { state with SearchMvtRequest.TrackTotalHits2 = Option.Some value } : SearchMvtRequest
+        [<CustomOperation("body_track_total_hits")>]
+        member _.BodyTrackTotalHits(state: SearchMvtRequest, value: SearchTypesTrackHits) =
+            { state with SearchMvtRequest.BodyTrackTotalHits = Option.Some value } : SearchMvtRequest
 
-        [<CustomOperation("with_labels2")>]
-        member _.WithLabels2(state: SearchMvtRequest, value: bool) =
-            { state with SearchMvtRequest.WithLabels2 = Option.Some value } : SearchMvtRequest
+        [<CustomOperation("body_with_labels")>]
+        member _.BodyWithLabels(state: SearchMvtRequest, value: bool) =
+            { state with SearchMvtRequest.BodyWithLabels = Option.Some value } : SearchMvtRequest
 
     let searchMvtRequest = SearchMvtRequestBuilder()
 
@@ -2591,13 +2591,13 @@ module SearchOperations =
         RestTotalHitsAsInt: bool option
         TypedKeys: bool option
         [<JsonPropertyName("explain")>]
-        Explain2: bool option
+        BodyExplain: bool option
         [<JsonPropertyName("id")>]
         Id: Id option
         [<JsonPropertyName("params")>]
         Params: Map<string, obj> option
         [<JsonPropertyName("profile")>]
-        Profile2: bool option
+        BodyProfile: bool option
         [<JsonPropertyName("source")>]
         Source: ScriptSource option
     } with
@@ -2627,7 +2627,7 @@ module SearchOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody {| ``explain`` = request.Explain2; ``id`` = request.Id; ``params`` = request.Params; ``profile`` = request.Profile2; ``source`` = request.Source |}
+                |> Fes.Http.Request.withJsonBody {| ``explain`` = request.BodyExplain; ``id`` = request.Id; ``params`` = request.Params; ``profile`` = request.BodyProfile; ``source`` = request.Source |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -2653,10 +2653,10 @@ module SearchOperations =
                 SearchTemplateRequest.SearchType = Option.None
                 SearchTemplateRequest.RestTotalHitsAsInt = Option.None
                 SearchTemplateRequest.TypedKeys = Option.None
-                SearchTemplateRequest.Explain2 = Option.None
+                SearchTemplateRequest.BodyExplain = Option.None
                 SearchTemplateRequest.Id = Option.None
                 SearchTemplateRequest.Params = Option.None
-                SearchTemplateRequest.Profile2 = Option.None
+                SearchTemplateRequest.BodyProfile = Option.None
                 SearchTemplateRequest.Source = Option.None
             } : SearchTemplateRequest
 
@@ -2716,9 +2716,9 @@ module SearchOperations =
         member _.TypedKeys(state: SearchTemplateRequest, value: bool) =
             { state with SearchTemplateRequest.TypedKeys = Option.Some value } : SearchTemplateRequest
 
-        [<CustomOperation("explain2")>]
-        member _.Explain2(state: SearchTemplateRequest, value: bool) =
-            { state with SearchTemplateRequest.Explain2 = Option.Some value } : SearchTemplateRequest
+        [<CustomOperation("body_explain")>]
+        member _.BodyExplain(state: SearchTemplateRequest, value: bool) =
+            { state with SearchTemplateRequest.BodyExplain = Option.Some value } : SearchTemplateRequest
 
         [<CustomOperation("id")>]
         member _.Id(state: SearchTemplateRequest, value: Id) =
@@ -2728,9 +2728,9 @@ module SearchOperations =
         member _.Params(state: SearchTemplateRequest, value: Map<string, obj>) =
             { state with SearchTemplateRequest.Params = Option.Some value } : SearchTemplateRequest
 
-        [<CustomOperation("profile2")>]
-        member _.Profile2(state: SearchTemplateRequest, value: bool) =
-            { state with SearchTemplateRequest.Profile2 = Option.Some value } : SearchTemplateRequest
+        [<CustomOperation("body_profile")>]
+        member _.BodyProfile(state: SearchTemplateRequest, value: bool) =
+            { state with SearchTemplateRequest.BodyProfile = Option.Some value } : SearchTemplateRequest
 
         [<CustomOperation("source")>]
         member _.Source(state: SearchTemplateRequest, value: ScriptSource) =

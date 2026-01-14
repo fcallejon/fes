@@ -67,7 +67,7 @@ module IlmOperations =
         MasterTimeout: Duration option
         Timeout: Duration option
         [<JsonPropertyName("policy")>]
-        Policy2: TypesPolicy option
+        BodyPolicy: TypesPolicy option
     } with
         static member ToRequest(request: IlmPutLifecycleRequest) : Result<Fes.Http.RequestMsg, exn> =
             try
@@ -84,7 +84,7 @@ module IlmOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody {| ``policy`` = request.Policy2 |}
+                |> Fes.Http.Request.withJsonBody {| ``policy`` = request.BodyPolicy |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -99,7 +99,7 @@ module IlmOperations =
                 IlmPutLifecycleRequest.Policy = Unchecked.defaultof<Name>
                 IlmPutLifecycleRequest.MasterTimeout = Option.None
                 IlmPutLifecycleRequest.Timeout = Option.None
-                IlmPutLifecycleRequest.Policy2 = Option.None
+                IlmPutLifecycleRequest.BodyPolicy = Option.None
             } : IlmPutLifecycleRequest
 
         [<CustomOperation("policy")>]
@@ -114,9 +114,9 @@ module IlmOperations =
         member _.Timeout(state: IlmPutLifecycleRequest, value: Duration) =
             { state with IlmPutLifecycleRequest.Timeout = Option.Some value } : IlmPutLifecycleRequest
 
-        [<CustomOperation("policy2")>]
-        member _.Policy2(state: IlmPutLifecycleRequest, value: TypesPolicy) =
-            { state with IlmPutLifecycleRequest.Policy2 = Option.Some value } : IlmPutLifecycleRequest
+        [<CustomOperation("body_policy")>]
+        member _.BodyPolicy(state: IlmPutLifecycleRequest, value: TypesPolicy) =
+            { state with IlmPutLifecycleRequest.BodyPolicy = Option.Some value } : IlmPutLifecycleRequest
 
     let ilmPutLifecycleRequest = IlmPutLifecycleRequestBuilder()
 

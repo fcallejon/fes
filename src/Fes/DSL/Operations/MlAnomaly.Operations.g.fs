@@ -18,11 +18,11 @@ module MlAnomalyOperations =
         Force: bool option
         Timeout: Duration option
         [<JsonPropertyName("allow_no_match")>]
-        AllowNoMatch2: bool option
+        BodyAllowNoMatch: bool option
         [<JsonPropertyName("force")>]
-        Force2: bool option
+        BodyForce: bool option
         [<JsonPropertyName("timeout")>]
-        Timeout2: Duration option
+        BodyTimeout: Duration option
     } with
         static member ToRequest(request: MlCloseJobRequest) : Result<Fes.Http.RequestMsg, exn> =
             try
@@ -40,7 +40,7 @@ module MlAnomalyOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody {| ``allow_no_match`` = request.AllowNoMatch2; ``force`` = request.Force2; ``timeout`` = request.Timeout2 |}
+                |> Fes.Http.Request.withJsonBody {| ``allow_no_match`` = request.BodyAllowNoMatch; ``force`` = request.BodyForce; ``timeout`` = request.BodyTimeout |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -56,9 +56,9 @@ module MlAnomalyOperations =
                 MlCloseJobRequest.AllowNoMatch = Option.None
                 MlCloseJobRequest.Force = Option.None
                 MlCloseJobRequest.Timeout = Option.None
-                MlCloseJobRequest.AllowNoMatch2 = Option.None
-                MlCloseJobRequest.Force2 = Option.None
-                MlCloseJobRequest.Timeout2 = Option.None
+                MlCloseJobRequest.BodyAllowNoMatch = Option.None
+                MlCloseJobRequest.BodyForce = Option.None
+                MlCloseJobRequest.BodyTimeout = Option.None
             } : MlCloseJobRequest
 
         [<CustomOperation("job_id")>]
@@ -77,17 +77,17 @@ module MlAnomalyOperations =
         member _.Timeout(state: MlCloseJobRequest, value: Duration) =
             { state with MlCloseJobRequest.Timeout = Option.Some value } : MlCloseJobRequest
 
-        [<CustomOperation("allow_no_match2")>]
-        member _.AllowNoMatch2(state: MlCloseJobRequest, value: bool) =
-            { state with MlCloseJobRequest.AllowNoMatch2 = Option.Some value } : MlCloseJobRequest
+        [<CustomOperation("body_allow_no_match")>]
+        member _.BodyAllowNoMatch(state: MlCloseJobRequest, value: bool) =
+            { state with MlCloseJobRequest.BodyAllowNoMatch = Option.Some value } : MlCloseJobRequest
 
-        [<CustomOperation("force2")>]
-        member _.Force2(state: MlCloseJobRequest, value: bool) =
-            { state with MlCloseJobRequest.Force2 = Option.Some value } : MlCloseJobRequest
+        [<CustomOperation("body_force")>]
+        member _.BodyForce(state: MlCloseJobRequest, value: bool) =
+            { state with MlCloseJobRequest.BodyForce = Option.Some value } : MlCloseJobRequest
 
-        [<CustomOperation("timeout2")>]
-        member _.Timeout2(state: MlCloseJobRequest, value: Duration) =
-            { state with MlCloseJobRequest.Timeout2 = Option.Some value } : MlCloseJobRequest
+        [<CustomOperation("body_timeout")>]
+        member _.BodyTimeout(state: MlCloseJobRequest, value: Duration) =
+            { state with MlCloseJobRequest.BodyTimeout = Option.Some value } : MlCloseJobRequest
 
     let mlCloseJobRequest = MlCloseJobRequestBuilder()
 
@@ -664,9 +664,9 @@ module MlAnomalyOperations =
         RequestsPerSecond: float option
         Timeout: Duration option
         [<JsonPropertyName("requests_per_second")>]
-        RequestsPerSecond2: float option
+        BodyRequestsPerSecond: float option
         [<JsonPropertyName("timeout")>]
-        Timeout2: Duration option
+        BodyTimeout: Duration option
     } with
         static member ToRequest(request: MlDeleteExpiredDataRequest) : Result<Fes.Http.RequestMsg, exn> =
             try
@@ -683,7 +683,7 @@ module MlAnomalyOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Fes.Http.Request.withJsonBody {| ``requests_per_second`` = request.RequestsPerSecond2; ``timeout`` = request.Timeout2 |}
+                |> Fes.Http.Request.withJsonBody {| ``requests_per_second`` = request.BodyRequestsPerSecond; ``timeout`` = request.BodyTimeout |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -698,8 +698,8 @@ module MlAnomalyOperations =
                 MlDeleteExpiredDataRequest.JobId = Unchecked.defaultof<Id>
                 MlDeleteExpiredDataRequest.RequestsPerSecond = Option.None
                 MlDeleteExpiredDataRequest.Timeout = Option.None
-                MlDeleteExpiredDataRequest.RequestsPerSecond2 = Option.None
-                MlDeleteExpiredDataRequest.Timeout2 = Option.None
+                MlDeleteExpiredDataRequest.BodyRequestsPerSecond = Option.None
+                MlDeleteExpiredDataRequest.BodyTimeout = Option.None
             } : MlDeleteExpiredDataRequest
 
         [<CustomOperation("job_id")>]
@@ -714,13 +714,13 @@ module MlAnomalyOperations =
         member _.Timeout(state: MlDeleteExpiredDataRequest, value: Duration) =
             { state with MlDeleteExpiredDataRequest.Timeout = Option.Some value } : MlDeleteExpiredDataRequest
 
-        [<CustomOperation("requests_per_second2")>]
-        member _.RequestsPerSecond2(state: MlDeleteExpiredDataRequest, value: float) =
-            { state with MlDeleteExpiredDataRequest.RequestsPerSecond2 = Option.Some value } : MlDeleteExpiredDataRequest
+        [<CustomOperation("body_requests_per_second")>]
+        member _.BodyRequestsPerSecond(state: MlDeleteExpiredDataRequest, value: float) =
+            { state with MlDeleteExpiredDataRequest.BodyRequestsPerSecond = Option.Some value } : MlDeleteExpiredDataRequest
 
-        [<CustomOperation("timeout2")>]
-        member _.Timeout2(state: MlDeleteExpiredDataRequest, value: Duration) =
-            { state with MlDeleteExpiredDataRequest.Timeout2 = Option.Some value } : MlDeleteExpiredDataRequest
+        [<CustomOperation("body_timeout")>]
+        member _.BodyTimeout(state: MlDeleteExpiredDataRequest, value: Duration) =
+            { state with MlDeleteExpiredDataRequest.BodyTimeout = Option.Some value } : MlDeleteExpiredDataRequest
 
     let mlDeleteExpiredDataRequest = MlDeleteExpiredDataRequestBuilder()
 
@@ -991,7 +991,7 @@ module MlAnomalyOperations =
         [<JsonPropertyName("description")>]
         Description: string option
         [<JsonPropertyName("job_id")>]
-        JobId2: Id option
+        BodyJobId: Id option
         [<JsonPropertyName("groups")>]
         Groups: string array option
         [<JsonPropertyName("model_plot_config")>]
@@ -1022,7 +1022,7 @@ module MlAnomalyOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody {| ``allow_lazy_open`` = request.AllowLazyOpen; ``analysis_config`` = request.AnalysisConfig; ``analysis_limits`` = request.AnalysisLimits; ``background_persist_interval`` = request.BackgroundPersistInterval; ``custom_settings`` = request.CustomSettings; ``daily_model_snapshot_retention_after_days`` = request.DailyModelSnapshotRetentionAfterDays; ``data_description`` = request.DataDescription; ``datafeed_config`` = request.DatafeedConfig; ``description`` = request.Description; ``job_id`` = request.JobId2; ``groups`` = request.Groups; ``model_plot_config`` = request.ModelPlotConfig; ``model_snapshot_retention_days`` = request.ModelSnapshotRetentionDays; ``renormalization_window_days`` = request.RenormalizationWindowDays; ``results_index_name`` = request.ResultsIndexName; ``results_retention_days`` = request.ResultsRetentionDays |}
+                |> Fes.Http.Request.withJsonBody {| ``allow_lazy_open`` = request.AllowLazyOpen; ``analysis_config`` = request.AnalysisConfig; ``analysis_limits`` = request.AnalysisLimits; ``background_persist_interval`` = request.BackgroundPersistInterval; ``custom_settings`` = request.CustomSettings; ``daily_model_snapshot_retention_after_days`` = request.DailyModelSnapshotRetentionAfterDays; ``data_description`` = request.DataDescription; ``datafeed_config`` = request.DatafeedConfig; ``description`` = request.Description; ``job_id`` = request.BodyJobId; ``groups`` = request.Groups; ``model_plot_config`` = request.ModelPlotConfig; ``model_snapshot_retention_days`` = request.ModelSnapshotRetentionDays; ``renormalization_window_days`` = request.RenormalizationWindowDays; ``results_index_name`` = request.ResultsIndexName; ``results_retention_days`` = request.ResultsRetentionDays |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1048,7 +1048,7 @@ module MlAnomalyOperations =
                 MlPutJobRequest.DataDescription = Unchecked.defaultof<TypesDataDescription>
                 MlPutJobRequest.DatafeedConfig = Option.None
                 MlPutJobRequest.Description = Option.None
-                MlPutJobRequest.JobId2 = Option.None
+                MlPutJobRequest.BodyJobId = Option.None
                 MlPutJobRequest.Groups = Option.None
                 MlPutJobRequest.ModelPlotConfig = Option.None
                 MlPutJobRequest.ModelSnapshotRetentionDays = Option.None
@@ -1113,9 +1113,9 @@ module MlAnomalyOperations =
         member _.Description(state: MlPutJobRequest, value: string) =
             { state with MlPutJobRequest.Description = Option.Some value } : MlPutJobRequest
 
-        [<CustomOperation("job_id2")>]
-        member _.JobId2(state: MlPutJobRequest, value: Id) =
-            { state with MlPutJobRequest.JobId2 = Option.Some value } : MlPutJobRequest
+        [<CustomOperation("body_job_id")>]
+        member _.BodyJobId(state: MlPutJobRequest, value: Id) =
+            { state with MlPutJobRequest.BodyJobId = Option.Some value } : MlPutJobRequest
 
         [<CustomOperation("groups")>]
         member _.Groups(state: MlPutJobRequest, value: string array) =
@@ -1255,15 +1255,15 @@ module MlAnomalyOperations =
         Sort: Field option
         Start: DateTime option
         [<JsonPropertyName("desc")>]
-        Desc2: bool option
+        BodyDesc: bool option
         [<JsonPropertyName("end")>]
-        End2: DateTime option
+        BodyEnd: DateTime option
         [<JsonPropertyName("page")>]
         Page: TypesPage option
         [<JsonPropertyName("sort")>]
-        Sort2: Field option
+        BodySort: Field option
         [<JsonPropertyName("start")>]
-        Start2: DateTime option
+        BodyStart: DateTime option
     } with
         static member ToRequest(request: MlGetModelSnapshotsRequest) : Result<Fes.Http.RequestMsg, exn> =
             try
@@ -1284,7 +1284,7 @@ module MlAnomalyOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody {| ``desc`` = request.Desc2; ``end`` = request.End2; ``page`` = request.Page; ``sort`` = request.Sort2; ``start`` = request.Start2 |}
+                |> Fes.Http.Request.withJsonBody {| ``desc`` = request.BodyDesc; ``end`` = request.BodyEnd; ``page`` = request.Page; ``sort`` = request.BodySort; ``start`` = request.BodyStart |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1304,11 +1304,11 @@ module MlAnomalyOperations =
                 MlGetModelSnapshotsRequest.Size = Option.None
                 MlGetModelSnapshotsRequest.Sort = Option.None
                 MlGetModelSnapshotsRequest.Start = Option.None
-                MlGetModelSnapshotsRequest.Desc2 = Option.None
-                MlGetModelSnapshotsRequest.End2 = Option.None
+                MlGetModelSnapshotsRequest.BodyDesc = Option.None
+                MlGetModelSnapshotsRequest.BodyEnd = Option.None
                 MlGetModelSnapshotsRequest.Page = Option.None
-                MlGetModelSnapshotsRequest.Sort2 = Option.None
-                MlGetModelSnapshotsRequest.Start2 = Option.None
+                MlGetModelSnapshotsRequest.BodySort = Option.None
+                MlGetModelSnapshotsRequest.BodyStart = Option.None
             } : MlGetModelSnapshotsRequest
 
         [<CustomOperation("job_id")>]
@@ -1343,25 +1343,25 @@ module MlAnomalyOperations =
         member _.Start(state: MlGetModelSnapshotsRequest, value: DateTime) =
             { state with MlGetModelSnapshotsRequest.Start = Option.Some value } : MlGetModelSnapshotsRequest
 
-        [<CustomOperation("desc2")>]
-        member _.Desc2(state: MlGetModelSnapshotsRequest, value: bool) =
-            { state with MlGetModelSnapshotsRequest.Desc2 = Option.Some value } : MlGetModelSnapshotsRequest
+        [<CustomOperation("body_desc")>]
+        member _.BodyDesc(state: MlGetModelSnapshotsRequest, value: bool) =
+            { state with MlGetModelSnapshotsRequest.BodyDesc = Option.Some value } : MlGetModelSnapshotsRequest
 
-        [<CustomOperation("end2")>]
-        member _.End2(state: MlGetModelSnapshotsRequest, value: DateTime) =
-            { state with MlGetModelSnapshotsRequest.End2 = Option.Some value } : MlGetModelSnapshotsRequest
+        [<CustomOperation("body_end")>]
+        member _.BodyEnd(state: MlGetModelSnapshotsRequest, value: DateTime) =
+            { state with MlGetModelSnapshotsRequest.BodyEnd = Option.Some value } : MlGetModelSnapshotsRequest
 
         [<CustomOperation("page")>]
         member _.Page(state: MlGetModelSnapshotsRequest, value: TypesPage) =
             { state with MlGetModelSnapshotsRequest.Page = Option.Some value } : MlGetModelSnapshotsRequest
 
-        [<CustomOperation("sort2")>]
-        member _.Sort2(state: MlGetModelSnapshotsRequest, value: Field) =
-            { state with MlGetModelSnapshotsRequest.Sort2 = Option.Some value } : MlGetModelSnapshotsRequest
+        [<CustomOperation("body_sort")>]
+        member _.BodySort(state: MlGetModelSnapshotsRequest, value: Field) =
+            { state with MlGetModelSnapshotsRequest.BodySort = Option.Some value } : MlGetModelSnapshotsRequest
 
-        [<CustomOperation("start2")>]
-        member _.Start2(state: MlGetModelSnapshotsRequest, value: DateTime) =
-            { state with MlGetModelSnapshotsRequest.Start2 = Option.Some value } : MlGetModelSnapshotsRequest
+        [<CustomOperation("body_start")>]
+        member _.BodyStart(state: MlGetModelSnapshotsRequest, value: DateTime) =
+            { state with MlGetModelSnapshotsRequest.BodyStart = Option.Some value } : MlGetModelSnapshotsRequest
 
     let mlGetModelSnapshotsRequest = MlGetModelSnapshotsRequestBuilder()
 
@@ -1462,15 +1462,15 @@ module MlAnomalyOperations =
         SkipTime: DateTime option
         Start: DateTime option
         [<JsonPropertyName("advance_time")>]
-        AdvanceTime2: DateTime option
+        BodyAdvanceTime: DateTime option
         [<JsonPropertyName("calc_interim")>]
-        CalcInterim2: bool option
+        BodyCalcInterim: bool option
         [<JsonPropertyName("end")>]
-        End2: DateTime option
+        BodyEnd: DateTime option
         [<JsonPropertyName("skip_time")>]
-        SkipTime2: DateTime option
+        BodySkipTime: DateTime option
         [<JsonPropertyName("start")>]
-        Start2: DateTime option
+        BodyStart: DateTime option
     } with
         static member ToRequest(request: MlFlushJobRequest) : Result<Fes.Http.RequestMsg, exn> =
             try
@@ -1490,7 +1490,7 @@ module MlAnomalyOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody {| ``advance_time`` = request.AdvanceTime2; ``calc_interim`` = request.CalcInterim2; ``end`` = request.End2; ``skip_time`` = request.SkipTime2; ``start`` = request.Start2 |}
+                |> Fes.Http.Request.withJsonBody {| ``advance_time`` = request.BodyAdvanceTime; ``calc_interim`` = request.BodyCalcInterim; ``end`` = request.BodyEnd; ``skip_time`` = request.BodySkipTime; ``start`` = request.BodyStart |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1508,11 +1508,11 @@ module MlAnomalyOperations =
                 MlFlushJobRequest.End = Option.None
                 MlFlushJobRequest.SkipTime = Option.None
                 MlFlushJobRequest.Start = Option.None
-                MlFlushJobRequest.AdvanceTime2 = Option.None
-                MlFlushJobRequest.CalcInterim2 = Option.None
-                MlFlushJobRequest.End2 = Option.None
-                MlFlushJobRequest.SkipTime2 = Option.None
-                MlFlushJobRequest.Start2 = Option.None
+                MlFlushJobRequest.BodyAdvanceTime = Option.None
+                MlFlushJobRequest.BodyCalcInterim = Option.None
+                MlFlushJobRequest.BodyEnd = Option.None
+                MlFlushJobRequest.BodySkipTime = Option.None
+                MlFlushJobRequest.BodyStart = Option.None
             } : MlFlushJobRequest
 
         [<CustomOperation("job_id")>]
@@ -1539,25 +1539,25 @@ module MlAnomalyOperations =
         member _.Start(state: MlFlushJobRequest, value: DateTime) =
             { state with MlFlushJobRequest.Start = Option.Some value } : MlFlushJobRequest
 
-        [<CustomOperation("advance_time2")>]
-        member _.AdvanceTime2(state: MlFlushJobRequest, value: DateTime) =
-            { state with MlFlushJobRequest.AdvanceTime2 = Option.Some value } : MlFlushJobRequest
+        [<CustomOperation("body_advance_time")>]
+        member _.BodyAdvanceTime(state: MlFlushJobRequest, value: DateTime) =
+            { state with MlFlushJobRequest.BodyAdvanceTime = Option.Some value } : MlFlushJobRequest
 
-        [<CustomOperation("calc_interim2")>]
-        member _.CalcInterim2(state: MlFlushJobRequest, value: bool) =
-            { state with MlFlushJobRequest.CalcInterim2 = Option.Some value } : MlFlushJobRequest
+        [<CustomOperation("body_calc_interim")>]
+        member _.BodyCalcInterim(state: MlFlushJobRequest, value: bool) =
+            { state with MlFlushJobRequest.BodyCalcInterim = Option.Some value } : MlFlushJobRequest
 
-        [<CustomOperation("end2")>]
-        member _.End2(state: MlFlushJobRequest, value: DateTime) =
-            { state with MlFlushJobRequest.End2 = Option.Some value } : MlFlushJobRequest
+        [<CustomOperation("body_end")>]
+        member _.BodyEnd(state: MlFlushJobRequest, value: DateTime) =
+            { state with MlFlushJobRequest.BodyEnd = Option.Some value } : MlFlushJobRequest
 
-        [<CustomOperation("skip_time2")>]
-        member _.SkipTime2(state: MlFlushJobRequest, value: DateTime) =
-            { state with MlFlushJobRequest.SkipTime2 = Option.Some value } : MlFlushJobRequest
+        [<CustomOperation("body_skip_time")>]
+        member _.BodySkipTime(state: MlFlushJobRequest, value: DateTime) =
+            { state with MlFlushJobRequest.BodySkipTime = Option.Some value } : MlFlushJobRequest
 
-        [<CustomOperation("start2")>]
-        member _.Start2(state: MlFlushJobRequest, value: DateTime) =
-            { state with MlFlushJobRequest.Start2 = Option.Some value } : MlFlushJobRequest
+        [<CustomOperation("body_start")>]
+        member _.BodyStart(state: MlFlushJobRequest, value: DateTime) =
+            { state with MlFlushJobRequest.BodyStart = Option.Some value } : MlFlushJobRequest
 
     let mlFlushJobRequest = MlFlushJobRequestBuilder()
 
@@ -1574,11 +1574,11 @@ module MlAnomalyOperations =
         ExpiresIn: Duration option
         MaxModelMemory: string option
         [<JsonPropertyName("duration")>]
-        Duration2: Duration option
+        BodyDuration: Duration option
         [<JsonPropertyName("expires_in")>]
-        ExpiresIn2: Duration option
+        BodyExpiresIn: Duration option
         [<JsonPropertyName("max_model_memory")>]
-        MaxModelMemory2: string option
+        BodyMaxModelMemory: string option
     } with
         static member ToRequest(request: MlForecastRequest) : Result<Fes.Http.RequestMsg, exn> =
             try
@@ -1596,7 +1596,7 @@ module MlAnomalyOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody {| ``duration`` = request.Duration2; ``expires_in`` = request.ExpiresIn2; ``max_model_memory`` = request.MaxModelMemory2 |}
+                |> Fes.Http.Request.withJsonBody {| ``duration`` = request.BodyDuration; ``expires_in`` = request.BodyExpiresIn; ``max_model_memory`` = request.BodyMaxModelMemory |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1612,9 +1612,9 @@ module MlAnomalyOperations =
                 MlForecastRequest.Duration = Option.None
                 MlForecastRequest.ExpiresIn = Option.None
                 MlForecastRequest.MaxModelMemory = Option.None
-                MlForecastRequest.Duration2 = Option.None
-                MlForecastRequest.ExpiresIn2 = Option.None
-                MlForecastRequest.MaxModelMemory2 = Option.None
+                MlForecastRequest.BodyDuration = Option.None
+                MlForecastRequest.BodyExpiresIn = Option.None
+                MlForecastRequest.BodyMaxModelMemory = Option.None
             } : MlForecastRequest
 
         [<CustomOperation("job_id")>]
@@ -1633,17 +1633,17 @@ module MlAnomalyOperations =
         member _.MaxModelMemory(state: MlForecastRequest, value: string) =
             { state with MlForecastRequest.MaxModelMemory = Option.Some value } : MlForecastRequest
 
-        [<CustomOperation("duration2")>]
-        member _.Duration2(state: MlForecastRequest, value: Duration) =
-            { state with MlForecastRequest.Duration2 = Option.Some value } : MlForecastRequest
+        [<CustomOperation("body_duration")>]
+        member _.BodyDuration(state: MlForecastRequest, value: Duration) =
+            { state with MlForecastRequest.BodyDuration = Option.Some value } : MlForecastRequest
 
-        [<CustomOperation("expires_in2")>]
-        member _.ExpiresIn2(state: MlForecastRequest, value: Duration) =
-            { state with MlForecastRequest.ExpiresIn2 = Option.Some value } : MlForecastRequest
+        [<CustomOperation("body_expires_in")>]
+        member _.BodyExpiresIn(state: MlForecastRequest, value: Duration) =
+            { state with MlForecastRequest.BodyExpiresIn = Option.Some value } : MlForecastRequest
 
-        [<CustomOperation("max_model_memory2")>]
-        member _.MaxModelMemory2(state: MlForecastRequest, value: string) =
-            { state with MlForecastRequest.MaxModelMemory2 = Option.Some value } : MlForecastRequest
+        [<CustomOperation("body_max_model_memory")>]
+        member _.BodyMaxModelMemory(state: MlForecastRequest, value: string) =
+            { state with MlForecastRequest.BodyMaxModelMemory = Option.Some value } : MlForecastRequest
 
     let mlForecastRequest = MlForecastRequestBuilder()
 
@@ -1667,21 +1667,21 @@ module MlAnomalyOperations =
         Sort: Field option
         Start: DateTime option
         [<JsonPropertyName("anomaly_score")>]
-        AnomalyScore2: float option
+        BodyAnomalyScore: float option
         [<JsonPropertyName("desc")>]
-        Desc2: bool option
+        BodyDesc: bool option
         [<JsonPropertyName("end")>]
-        End2: DateTime option
+        BodyEnd: DateTime option
         [<JsonPropertyName("exclude_interim")>]
-        ExcludeInterim2: bool option
+        BodyExcludeInterim: bool option
         [<JsonPropertyName("expand")>]
-        Expand2: bool option
+        BodyExpand: bool option
         [<JsonPropertyName("page")>]
         Page: TypesPage option
         [<JsonPropertyName("sort")>]
-        Sort2: Field option
+        BodySort: Field option
         [<JsonPropertyName("start")>]
-        Start2: DateTime option
+        BodyStart: DateTime option
     } with
         static member ToRequest(request: MlGetBucketsRequest) : Result<Fes.Http.RequestMsg, exn> =
             try
@@ -1705,7 +1705,7 @@ module MlAnomalyOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody {| ``anomaly_score`` = request.AnomalyScore2; ``desc`` = request.Desc2; ``end`` = request.End2; ``exclude_interim`` = request.ExcludeInterim2; ``expand`` = request.Expand2; ``page`` = request.Page; ``sort`` = request.Sort2; ``start`` = request.Start2 |}
+                |> Fes.Http.Request.withJsonBody {| ``anomaly_score`` = request.BodyAnomalyScore; ``desc`` = request.BodyDesc; ``end`` = request.BodyEnd; ``exclude_interim`` = request.BodyExcludeInterim; ``expand`` = request.BodyExpand; ``page`` = request.Page; ``sort`` = request.BodySort; ``start`` = request.BodyStart |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1728,14 +1728,14 @@ module MlAnomalyOperations =
                 MlGetBucketsRequest.Size = Option.None
                 MlGetBucketsRequest.Sort = Option.None
                 MlGetBucketsRequest.Start = Option.None
-                MlGetBucketsRequest.AnomalyScore2 = Option.None
-                MlGetBucketsRequest.Desc2 = Option.None
-                MlGetBucketsRequest.End2 = Option.None
-                MlGetBucketsRequest.ExcludeInterim2 = Option.None
-                MlGetBucketsRequest.Expand2 = Option.None
+                MlGetBucketsRequest.BodyAnomalyScore = Option.None
+                MlGetBucketsRequest.BodyDesc = Option.None
+                MlGetBucketsRequest.BodyEnd = Option.None
+                MlGetBucketsRequest.BodyExcludeInterim = Option.None
+                MlGetBucketsRequest.BodyExpand = Option.None
                 MlGetBucketsRequest.Page = Option.None
-                MlGetBucketsRequest.Sort2 = Option.None
-                MlGetBucketsRequest.Start2 = Option.None
+                MlGetBucketsRequest.BodySort = Option.None
+                MlGetBucketsRequest.BodyStart = Option.None
             } : MlGetBucketsRequest
 
         [<CustomOperation("job_id")>]
@@ -1782,37 +1782,37 @@ module MlAnomalyOperations =
         member _.Start(state: MlGetBucketsRequest, value: DateTime) =
             { state with MlGetBucketsRequest.Start = Option.Some value } : MlGetBucketsRequest
 
-        [<CustomOperation("anomaly_score2")>]
-        member _.AnomalyScore2(state: MlGetBucketsRequest, value: float) =
-            { state with MlGetBucketsRequest.AnomalyScore2 = Option.Some value } : MlGetBucketsRequest
+        [<CustomOperation("body_anomaly_score")>]
+        member _.BodyAnomalyScore(state: MlGetBucketsRequest, value: float) =
+            { state with MlGetBucketsRequest.BodyAnomalyScore = Option.Some value } : MlGetBucketsRequest
 
-        [<CustomOperation("desc2")>]
-        member _.Desc2(state: MlGetBucketsRequest, value: bool) =
-            { state with MlGetBucketsRequest.Desc2 = Option.Some value } : MlGetBucketsRequest
+        [<CustomOperation("body_desc")>]
+        member _.BodyDesc(state: MlGetBucketsRequest, value: bool) =
+            { state with MlGetBucketsRequest.BodyDesc = Option.Some value } : MlGetBucketsRequest
 
-        [<CustomOperation("end2")>]
-        member _.End2(state: MlGetBucketsRequest, value: DateTime) =
-            { state with MlGetBucketsRequest.End2 = Option.Some value } : MlGetBucketsRequest
+        [<CustomOperation("body_end")>]
+        member _.BodyEnd(state: MlGetBucketsRequest, value: DateTime) =
+            { state with MlGetBucketsRequest.BodyEnd = Option.Some value } : MlGetBucketsRequest
 
-        [<CustomOperation("exclude_interim2")>]
-        member _.ExcludeInterim2(state: MlGetBucketsRequest, value: bool) =
-            { state with MlGetBucketsRequest.ExcludeInterim2 = Option.Some value } : MlGetBucketsRequest
+        [<CustomOperation("body_exclude_interim")>]
+        member _.BodyExcludeInterim(state: MlGetBucketsRequest, value: bool) =
+            { state with MlGetBucketsRequest.BodyExcludeInterim = Option.Some value } : MlGetBucketsRequest
 
-        [<CustomOperation("expand2")>]
-        member _.Expand2(state: MlGetBucketsRequest, value: bool) =
-            { state with MlGetBucketsRequest.Expand2 = Option.Some value } : MlGetBucketsRequest
+        [<CustomOperation("body_expand")>]
+        member _.BodyExpand(state: MlGetBucketsRequest, value: bool) =
+            { state with MlGetBucketsRequest.BodyExpand = Option.Some value } : MlGetBucketsRequest
 
         [<CustomOperation("page")>]
         member _.Page(state: MlGetBucketsRequest, value: TypesPage) =
             { state with MlGetBucketsRequest.Page = Option.Some value } : MlGetBucketsRequest
 
-        [<CustomOperation("sort2")>]
-        member _.Sort2(state: MlGetBucketsRequest, value: Field) =
-            { state with MlGetBucketsRequest.Sort2 = Option.Some value } : MlGetBucketsRequest
+        [<CustomOperation("body_sort")>]
+        member _.BodySort(state: MlGetBucketsRequest, value: Field) =
+            { state with MlGetBucketsRequest.BodySort = Option.Some value } : MlGetBucketsRequest
 
-        [<CustomOperation("start2")>]
-        member _.Start2(state: MlGetBucketsRequest, value: DateTime) =
-            { state with MlGetBucketsRequest.Start2 = Option.Some value } : MlGetBucketsRequest
+        [<CustomOperation("body_start")>]
+        member _.BodyStart(state: MlGetBucketsRequest, value: DateTime) =
+            { state with MlGetBucketsRequest.BodyStart = Option.Some value } : MlGetBucketsRequest
 
     let mlGetBucketsRequest = MlGetBucketsRequestBuilder()
 
@@ -2260,19 +2260,19 @@ module MlAnomalyOperations =
         Start: DateTime option
         TopN: float option
         [<JsonPropertyName("allow_no_match")>]
-        AllowNoMatch2: bool option
+        BodyAllowNoMatch: bool option
         [<JsonPropertyName("bucket_span")>]
-        BucketSpan2: Duration option
+        BodyBucketSpan: Duration option
         [<JsonPropertyName("end")>]
-        End2: DateTime option
+        BodyEnd: DateTime option
         [<JsonPropertyName("exclude_interim")>]
-        ExcludeInterim2: bool option
+        BodyExcludeInterim: bool option
         [<JsonPropertyName("overall_score")>]
-        OverallScore2: float option
+        BodyOverallScore: float option
         [<JsonPropertyName("start")>]
-        Start2: DateTime option
+        BodyStart: DateTime option
         [<JsonPropertyName("top_n")>]
-        TopN2: float option
+        BodyTopN: float option
     } with
         static member ToRequest(request: MlGetOverallBucketsRequest) : Result<Fes.Http.RequestMsg, exn> =
             try
@@ -2294,7 +2294,7 @@ module MlAnomalyOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody {| ``allow_no_match`` = request.AllowNoMatch2; ``bucket_span`` = request.BucketSpan2; ``end`` = request.End2; ``exclude_interim`` = request.ExcludeInterim2; ``overall_score`` = request.OverallScore2; ``start`` = request.Start2; ``top_n`` = request.TopN2 |}
+                |> Fes.Http.Request.withJsonBody {| ``allow_no_match`` = request.BodyAllowNoMatch; ``bucket_span`` = request.BodyBucketSpan; ``end`` = request.BodyEnd; ``exclude_interim`` = request.BodyExcludeInterim; ``overall_score`` = request.BodyOverallScore; ``start`` = request.BodyStart; ``top_n`` = request.BodyTopN |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -2314,13 +2314,13 @@ module MlAnomalyOperations =
                 MlGetOverallBucketsRequest.OverallScore = Option.None
                 MlGetOverallBucketsRequest.Start = Option.None
                 MlGetOverallBucketsRequest.TopN = Option.None
-                MlGetOverallBucketsRequest.AllowNoMatch2 = Option.None
-                MlGetOverallBucketsRequest.BucketSpan2 = Option.None
-                MlGetOverallBucketsRequest.End2 = Option.None
-                MlGetOverallBucketsRequest.ExcludeInterim2 = Option.None
-                MlGetOverallBucketsRequest.OverallScore2 = Option.None
-                MlGetOverallBucketsRequest.Start2 = Option.None
-                MlGetOverallBucketsRequest.TopN2 = Option.None
+                MlGetOverallBucketsRequest.BodyAllowNoMatch = Option.None
+                MlGetOverallBucketsRequest.BodyBucketSpan = Option.None
+                MlGetOverallBucketsRequest.BodyEnd = Option.None
+                MlGetOverallBucketsRequest.BodyExcludeInterim = Option.None
+                MlGetOverallBucketsRequest.BodyOverallScore = Option.None
+                MlGetOverallBucketsRequest.BodyStart = Option.None
+                MlGetOverallBucketsRequest.BodyTopN = Option.None
             } : MlGetOverallBucketsRequest
 
         [<CustomOperation("job_id")>]
@@ -2355,33 +2355,33 @@ module MlAnomalyOperations =
         member _.TopN(state: MlGetOverallBucketsRequest, value: float) =
             { state with MlGetOverallBucketsRequest.TopN = Option.Some value } : MlGetOverallBucketsRequest
 
-        [<CustomOperation("allow_no_match2")>]
-        member _.AllowNoMatch2(state: MlGetOverallBucketsRequest, value: bool) =
-            { state with MlGetOverallBucketsRequest.AllowNoMatch2 = Option.Some value } : MlGetOverallBucketsRequest
+        [<CustomOperation("body_allow_no_match")>]
+        member _.BodyAllowNoMatch(state: MlGetOverallBucketsRequest, value: bool) =
+            { state with MlGetOverallBucketsRequest.BodyAllowNoMatch = Option.Some value } : MlGetOverallBucketsRequest
 
-        [<CustomOperation("bucket_span2")>]
-        member _.BucketSpan2(state: MlGetOverallBucketsRequest, value: Duration) =
-            { state with MlGetOverallBucketsRequest.BucketSpan2 = Option.Some value } : MlGetOverallBucketsRequest
+        [<CustomOperation("body_bucket_span")>]
+        member _.BodyBucketSpan(state: MlGetOverallBucketsRequest, value: Duration) =
+            { state with MlGetOverallBucketsRequest.BodyBucketSpan = Option.Some value } : MlGetOverallBucketsRequest
 
-        [<CustomOperation("end2")>]
-        member _.End2(state: MlGetOverallBucketsRequest, value: DateTime) =
-            { state with MlGetOverallBucketsRequest.End2 = Option.Some value } : MlGetOverallBucketsRequest
+        [<CustomOperation("body_end")>]
+        member _.BodyEnd(state: MlGetOverallBucketsRequest, value: DateTime) =
+            { state with MlGetOverallBucketsRequest.BodyEnd = Option.Some value } : MlGetOverallBucketsRequest
 
-        [<CustomOperation("exclude_interim2")>]
-        member _.ExcludeInterim2(state: MlGetOverallBucketsRequest, value: bool) =
-            { state with MlGetOverallBucketsRequest.ExcludeInterim2 = Option.Some value } : MlGetOverallBucketsRequest
+        [<CustomOperation("body_exclude_interim")>]
+        member _.BodyExcludeInterim(state: MlGetOverallBucketsRequest, value: bool) =
+            { state with MlGetOverallBucketsRequest.BodyExcludeInterim = Option.Some value } : MlGetOverallBucketsRequest
 
-        [<CustomOperation("overall_score2")>]
-        member _.OverallScore2(state: MlGetOverallBucketsRequest, value: float) =
-            { state with MlGetOverallBucketsRequest.OverallScore2 = Option.Some value } : MlGetOverallBucketsRequest
+        [<CustomOperation("body_overall_score")>]
+        member _.BodyOverallScore(state: MlGetOverallBucketsRequest, value: float) =
+            { state with MlGetOverallBucketsRequest.BodyOverallScore = Option.Some value } : MlGetOverallBucketsRequest
 
-        [<CustomOperation("start2")>]
-        member _.Start2(state: MlGetOverallBucketsRequest, value: DateTime) =
-            { state with MlGetOverallBucketsRequest.Start2 = Option.Some value } : MlGetOverallBucketsRequest
+        [<CustomOperation("body_start")>]
+        member _.BodyStart(state: MlGetOverallBucketsRequest, value: DateTime) =
+            { state with MlGetOverallBucketsRequest.BodyStart = Option.Some value } : MlGetOverallBucketsRequest
 
-        [<CustomOperation("top_n2")>]
-        member _.TopN2(state: MlGetOverallBucketsRequest, value: float) =
-            { state with MlGetOverallBucketsRequest.TopN2 = Option.Some value } : MlGetOverallBucketsRequest
+        [<CustomOperation("body_top_n")>]
+        member _.BodyTopN(state: MlGetOverallBucketsRequest, value: float) =
+            { state with MlGetOverallBucketsRequest.BodyTopN = Option.Some value } : MlGetOverallBucketsRequest
 
     let mlGetOverallBucketsRequest = MlGetOverallBucketsRequestBuilder()
 
@@ -2396,19 +2396,19 @@ module MlAnomalyOperations =
         Sort: Field option
         Start: DateTime option
         [<JsonPropertyName("desc")>]
-        Desc2: bool option
+        BodyDesc: bool option
         [<JsonPropertyName("end")>]
-        End2: DateTime option
+        BodyEnd: DateTime option
         [<JsonPropertyName("exclude_interim")>]
-        ExcludeInterim2: bool option
+        BodyExcludeInterim: bool option
         [<JsonPropertyName("page")>]
         Page: TypesPage option
         [<JsonPropertyName("record_score")>]
-        RecordScore2: float option
+        BodyRecordScore: float option
         [<JsonPropertyName("sort")>]
-        Sort2: Field option
+        BodySort: Field option
         [<JsonPropertyName("start")>]
-        Start2: DateTime option
+        BodyStart: DateTime option
     } with
         static member ToRequest(request: MlGetRecordsRequest) : Result<Fes.Http.RequestMsg, exn> =
             try
@@ -2431,7 +2431,7 @@ module MlAnomalyOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody {| ``desc`` = request.Desc2; ``end`` = request.End2; ``exclude_interim`` = request.ExcludeInterim2; ``page`` = request.Page; ``record_score`` = request.RecordScore2; ``sort`` = request.Sort2; ``start`` = request.Start2 |}
+                |> Fes.Http.Request.withJsonBody {| ``desc`` = request.BodyDesc; ``end`` = request.BodyEnd; ``exclude_interim`` = request.BodyExcludeInterim; ``page`` = request.Page; ``record_score`` = request.BodyRecordScore; ``sort`` = request.BodySort; ``start`` = request.BodyStart |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -2452,13 +2452,13 @@ module MlAnomalyOperations =
                 MlGetRecordsRequest.Size = Option.None
                 MlGetRecordsRequest.Sort = Option.None
                 MlGetRecordsRequest.Start = Option.None
-                MlGetRecordsRequest.Desc2 = Option.None
-                MlGetRecordsRequest.End2 = Option.None
-                MlGetRecordsRequest.ExcludeInterim2 = Option.None
+                MlGetRecordsRequest.BodyDesc = Option.None
+                MlGetRecordsRequest.BodyEnd = Option.None
+                MlGetRecordsRequest.BodyExcludeInterim = Option.None
                 MlGetRecordsRequest.Page = Option.None
-                MlGetRecordsRequest.RecordScore2 = Option.None
-                MlGetRecordsRequest.Sort2 = Option.None
-                MlGetRecordsRequest.Start2 = Option.None
+                MlGetRecordsRequest.BodyRecordScore = Option.None
+                MlGetRecordsRequest.BodySort = Option.None
+                MlGetRecordsRequest.BodyStart = Option.None
             } : MlGetRecordsRequest
 
         [<CustomOperation("job_id")>]
@@ -2497,33 +2497,33 @@ module MlAnomalyOperations =
         member _.Start(state: MlGetRecordsRequest, value: DateTime) =
             { state with MlGetRecordsRequest.Start = Option.Some value } : MlGetRecordsRequest
 
-        [<CustomOperation("desc2")>]
-        member _.Desc2(state: MlGetRecordsRequest, value: bool) =
-            { state with MlGetRecordsRequest.Desc2 = Option.Some value } : MlGetRecordsRequest
+        [<CustomOperation("body_desc")>]
+        member _.BodyDesc(state: MlGetRecordsRequest, value: bool) =
+            { state with MlGetRecordsRequest.BodyDesc = Option.Some value } : MlGetRecordsRequest
 
-        [<CustomOperation("end2")>]
-        member _.End2(state: MlGetRecordsRequest, value: DateTime) =
-            { state with MlGetRecordsRequest.End2 = Option.Some value } : MlGetRecordsRequest
+        [<CustomOperation("body_end")>]
+        member _.BodyEnd(state: MlGetRecordsRequest, value: DateTime) =
+            { state with MlGetRecordsRequest.BodyEnd = Option.Some value } : MlGetRecordsRequest
 
-        [<CustomOperation("exclude_interim2")>]
-        member _.ExcludeInterim2(state: MlGetRecordsRequest, value: bool) =
-            { state with MlGetRecordsRequest.ExcludeInterim2 = Option.Some value } : MlGetRecordsRequest
+        [<CustomOperation("body_exclude_interim")>]
+        member _.BodyExcludeInterim(state: MlGetRecordsRequest, value: bool) =
+            { state with MlGetRecordsRequest.BodyExcludeInterim = Option.Some value } : MlGetRecordsRequest
 
         [<CustomOperation("page")>]
         member _.Page(state: MlGetRecordsRequest, value: TypesPage) =
             { state with MlGetRecordsRequest.Page = Option.Some value } : MlGetRecordsRequest
 
-        [<CustomOperation("record_score2")>]
-        member _.RecordScore2(state: MlGetRecordsRequest, value: float) =
-            { state with MlGetRecordsRequest.RecordScore2 = Option.Some value } : MlGetRecordsRequest
+        [<CustomOperation("body_record_score")>]
+        member _.BodyRecordScore(state: MlGetRecordsRequest, value: float) =
+            { state with MlGetRecordsRequest.BodyRecordScore = Option.Some value } : MlGetRecordsRequest
 
-        [<CustomOperation("sort2")>]
-        member _.Sort2(state: MlGetRecordsRequest, value: Field) =
-            { state with MlGetRecordsRequest.Sort2 = Option.Some value } : MlGetRecordsRequest
+        [<CustomOperation("body_sort")>]
+        member _.BodySort(state: MlGetRecordsRequest, value: Field) =
+            { state with MlGetRecordsRequest.BodySort = Option.Some value } : MlGetRecordsRequest
 
-        [<CustomOperation("start2")>]
-        member _.Start2(state: MlGetRecordsRequest, value: DateTime) =
-            { state with MlGetRecordsRequest.Start2 = Option.Some value } : MlGetRecordsRequest
+        [<CustomOperation("body_start")>]
+        member _.BodyStart(state: MlGetRecordsRequest, value: DateTime) =
+            { state with MlGetRecordsRequest.BodyStart = Option.Some value } : MlGetRecordsRequest
 
     let mlGetRecordsRequest = MlGetRecordsRequestBuilder()
 
@@ -2531,7 +2531,7 @@ module MlAnomalyOperations =
         JobId: Id
         Timeout: Duration option
         [<JsonPropertyName("timeout")>]
-        Timeout2: Duration option
+        BodyTimeout: Duration option
     } with
         static member ToRequest(request: MlOpenJobRequest) : Result<Fes.Http.RequestMsg, exn> =
             try
@@ -2547,7 +2547,7 @@ module MlAnomalyOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody {| ``timeout`` = request.Timeout2 |}
+                |> Fes.Http.Request.withJsonBody {| ``timeout`` = request.BodyTimeout |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -2561,7 +2561,7 @@ module MlAnomalyOperations =
             {
                 MlOpenJobRequest.JobId = Unchecked.defaultof<Id>
                 MlOpenJobRequest.Timeout = Option.None
-                MlOpenJobRequest.Timeout2 = Option.None
+                MlOpenJobRequest.BodyTimeout = Option.None
             } : MlOpenJobRequest
 
         [<CustomOperation("job_id")>]
@@ -2572,9 +2572,9 @@ module MlAnomalyOperations =
         member _.Timeout(state: MlOpenJobRequest, value: Duration) =
             { state with MlOpenJobRequest.Timeout = Option.Some value } : MlOpenJobRequest
 
-        [<CustomOperation("timeout2")>]
-        member _.Timeout2(state: MlOpenJobRequest, value: Duration) =
-            { state with MlOpenJobRequest.Timeout2 = Option.Some value } : MlOpenJobRequest
+        [<CustomOperation("body_timeout")>]
+        member _.BodyTimeout(state: MlOpenJobRequest, value: Duration) =
+            { state with MlOpenJobRequest.BodyTimeout = Option.Some value } : MlOpenJobRequest
 
     let mlOpenJobRequest = MlOpenJobRequestBuilder()
 
@@ -2796,7 +2796,7 @@ module MlAnomalyOperations =
         SnapshotId: Id
         DeleteInterveningResults: bool option
         [<JsonPropertyName("delete_intervening_results")>]
-        DeleteInterveningResults2: bool option
+        BodyDeleteInterveningResults: bool option
     } with
         static member ToRequest(request: MlRevertModelSnapshotRequest) : Result<Fes.Http.RequestMsg, exn> =
             try
@@ -2812,7 +2812,7 @@ module MlAnomalyOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody {| ``delete_intervening_results`` = request.DeleteInterveningResults2 |}
+                |> Fes.Http.Request.withJsonBody {| ``delete_intervening_results`` = request.BodyDeleteInterveningResults |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -2827,7 +2827,7 @@ module MlAnomalyOperations =
                 MlRevertModelSnapshotRequest.JobId = Unchecked.defaultof<Id>
                 MlRevertModelSnapshotRequest.SnapshotId = Unchecked.defaultof<Id>
                 MlRevertModelSnapshotRequest.DeleteInterveningResults = Option.None
-                MlRevertModelSnapshotRequest.DeleteInterveningResults2 = Option.None
+                MlRevertModelSnapshotRequest.BodyDeleteInterveningResults = Option.None
             } : MlRevertModelSnapshotRequest
 
         [<CustomOperation("job_id")>]
@@ -2842,9 +2842,9 @@ module MlAnomalyOperations =
         member _.DeleteInterveningResults(state: MlRevertModelSnapshotRequest, value: bool) =
             { state with MlRevertModelSnapshotRequest.DeleteInterveningResults = Option.Some value } : MlRevertModelSnapshotRequest
 
-        [<CustomOperation("delete_intervening_results2")>]
-        member _.DeleteInterveningResults2(state: MlRevertModelSnapshotRequest, value: bool) =
-            { state with MlRevertModelSnapshotRequest.DeleteInterveningResults2 = Option.Some value } : MlRevertModelSnapshotRequest
+        [<CustomOperation("body_delete_intervening_results")>]
+        member _.BodyDeleteInterveningResults(state: MlRevertModelSnapshotRequest, value: bool) =
+            { state with MlRevertModelSnapshotRequest.BodyDeleteInterveningResults = Option.Some value } : MlRevertModelSnapshotRequest
 
     let mlRevertModelSnapshotRequest = MlRevertModelSnapshotRequestBuilder()
 
@@ -2859,11 +2859,11 @@ module MlAnomalyOperations =
         Start: DateTime option
         Timeout: Duration option
         [<JsonPropertyName("end")>]
-        End2: DateTime option
+        BodyEnd: DateTime option
         [<JsonPropertyName("start")>]
-        Start2: DateTime option
+        BodyStart: DateTime option
         [<JsonPropertyName("timeout")>]
-        Timeout2: Duration option
+        BodyTimeout: Duration option
     } with
         static member ToRequest(request: MlStartDatafeedRequest) : Result<Fes.Http.RequestMsg, exn> =
             try
@@ -2881,7 +2881,7 @@ module MlAnomalyOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody {| ``end`` = request.End2; ``start`` = request.Start2; ``timeout`` = request.Timeout2 |}
+                |> Fes.Http.Request.withJsonBody {| ``end`` = request.BodyEnd; ``start`` = request.BodyStart; ``timeout`` = request.BodyTimeout |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -2897,9 +2897,9 @@ module MlAnomalyOperations =
                 MlStartDatafeedRequest.End = Option.None
                 MlStartDatafeedRequest.Start = Option.None
                 MlStartDatafeedRequest.Timeout = Option.None
-                MlStartDatafeedRequest.End2 = Option.None
-                MlStartDatafeedRequest.Start2 = Option.None
-                MlStartDatafeedRequest.Timeout2 = Option.None
+                MlStartDatafeedRequest.BodyEnd = Option.None
+                MlStartDatafeedRequest.BodyStart = Option.None
+                MlStartDatafeedRequest.BodyTimeout = Option.None
             } : MlStartDatafeedRequest
 
         [<CustomOperation("datafeed_id")>]
@@ -2918,17 +2918,17 @@ module MlAnomalyOperations =
         member _.Timeout(state: MlStartDatafeedRequest, value: Duration) =
             { state with MlStartDatafeedRequest.Timeout = Option.Some value } : MlStartDatafeedRequest
 
-        [<CustomOperation("end2")>]
-        member _.End2(state: MlStartDatafeedRequest, value: DateTime) =
-            { state with MlStartDatafeedRequest.End2 = Option.Some value } : MlStartDatafeedRequest
+        [<CustomOperation("body_end")>]
+        member _.BodyEnd(state: MlStartDatafeedRequest, value: DateTime) =
+            { state with MlStartDatafeedRequest.BodyEnd = Option.Some value } : MlStartDatafeedRequest
 
-        [<CustomOperation("start2")>]
-        member _.Start2(state: MlStartDatafeedRequest, value: DateTime) =
-            { state with MlStartDatafeedRequest.Start2 = Option.Some value } : MlStartDatafeedRequest
+        [<CustomOperation("body_start")>]
+        member _.BodyStart(state: MlStartDatafeedRequest, value: DateTime) =
+            { state with MlStartDatafeedRequest.BodyStart = Option.Some value } : MlStartDatafeedRequest
 
-        [<CustomOperation("timeout2")>]
-        member _.Timeout2(state: MlStartDatafeedRequest, value: Duration) =
-            { state with MlStartDatafeedRequest.Timeout2 = Option.Some value } : MlStartDatafeedRequest
+        [<CustomOperation("body_timeout")>]
+        member _.BodyTimeout(state: MlStartDatafeedRequest, value: Duration) =
+            { state with MlStartDatafeedRequest.BodyTimeout = Option.Some value } : MlStartDatafeedRequest
 
     let mlStartDatafeedRequest = MlStartDatafeedRequestBuilder()
 
@@ -2946,13 +2946,13 @@ module MlAnomalyOperations =
         Timeout: Duration option
         CloseJob: bool option
         [<JsonPropertyName("allow_no_match")>]
-        AllowNoMatch2: bool option
+        BodyAllowNoMatch: bool option
         [<JsonPropertyName("force")>]
-        Force2: bool option
+        BodyForce: bool option
         [<JsonPropertyName("timeout")>]
-        Timeout2: Duration option
+        BodyTimeout: Duration option
         [<JsonPropertyName("close_job")>]
-        CloseJob2: bool option
+        BodyCloseJob: bool option
     } with
         static member ToRequest(request: MlStopDatafeedRequest) : Result<Fes.Http.RequestMsg, exn> =
             try
@@ -2971,7 +2971,7 @@ module MlAnomalyOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody {| ``allow_no_match`` = request.AllowNoMatch2; ``force`` = request.Force2; ``timeout`` = request.Timeout2; ``close_job`` = request.CloseJob2 |}
+                |> Fes.Http.Request.withJsonBody {| ``allow_no_match`` = request.BodyAllowNoMatch; ``force`` = request.BodyForce; ``timeout`` = request.BodyTimeout; ``close_job`` = request.BodyCloseJob |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -2988,10 +2988,10 @@ module MlAnomalyOperations =
                 MlStopDatafeedRequest.Force = Option.None
                 MlStopDatafeedRequest.Timeout = Option.None
                 MlStopDatafeedRequest.CloseJob = Option.None
-                MlStopDatafeedRequest.AllowNoMatch2 = Option.None
-                MlStopDatafeedRequest.Force2 = Option.None
-                MlStopDatafeedRequest.Timeout2 = Option.None
-                MlStopDatafeedRequest.CloseJob2 = Option.None
+                MlStopDatafeedRequest.BodyAllowNoMatch = Option.None
+                MlStopDatafeedRequest.BodyForce = Option.None
+                MlStopDatafeedRequest.BodyTimeout = Option.None
+                MlStopDatafeedRequest.BodyCloseJob = Option.None
             } : MlStopDatafeedRequest
 
         [<CustomOperation("datafeed_id")>]
@@ -3014,21 +3014,21 @@ module MlAnomalyOperations =
         member _.CloseJob(state: MlStopDatafeedRequest, value: bool) =
             { state with MlStopDatafeedRequest.CloseJob = Option.Some value } : MlStopDatafeedRequest
 
-        [<CustomOperation("allow_no_match2")>]
-        member _.AllowNoMatch2(state: MlStopDatafeedRequest, value: bool) =
-            { state with MlStopDatafeedRequest.AllowNoMatch2 = Option.Some value } : MlStopDatafeedRequest
+        [<CustomOperation("body_allow_no_match")>]
+        member _.BodyAllowNoMatch(state: MlStopDatafeedRequest, value: bool) =
+            { state with MlStopDatafeedRequest.BodyAllowNoMatch = Option.Some value } : MlStopDatafeedRequest
 
-        [<CustomOperation("force2")>]
-        member _.Force2(state: MlStopDatafeedRequest, value: bool) =
-            { state with MlStopDatafeedRequest.Force2 = Option.Some value } : MlStopDatafeedRequest
+        [<CustomOperation("body_force")>]
+        member _.BodyForce(state: MlStopDatafeedRequest, value: bool) =
+            { state with MlStopDatafeedRequest.BodyForce = Option.Some value } : MlStopDatafeedRequest
 
-        [<CustomOperation("timeout2")>]
-        member _.Timeout2(state: MlStopDatafeedRequest, value: Duration) =
-            { state with MlStopDatafeedRequest.Timeout2 = Option.Some value } : MlStopDatafeedRequest
+        [<CustomOperation("body_timeout")>]
+        member _.BodyTimeout(state: MlStopDatafeedRequest, value: Duration) =
+            { state with MlStopDatafeedRequest.BodyTimeout = Option.Some value } : MlStopDatafeedRequest
 
-        [<CustomOperation("close_job2")>]
-        member _.CloseJob2(state: MlStopDatafeedRequest, value: bool) =
-            { state with MlStopDatafeedRequest.CloseJob2 = Option.Some value } : MlStopDatafeedRequest
+        [<CustomOperation("body_close_job")>]
+        member _.BodyCloseJob(state: MlStopDatafeedRequest, value: bool) =
+            { state with MlStopDatafeedRequest.BodyCloseJob = Option.Some value } : MlStopDatafeedRequest
 
     let mlStopDatafeedRequest = MlStopDatafeedRequestBuilder()
 

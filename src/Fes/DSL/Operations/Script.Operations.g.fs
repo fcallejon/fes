@@ -139,7 +139,7 @@ module ScriptOperations =
     type PutScriptRequest = {
         Id: Id
         Context: Name
-        Context2: Name option
+        QueryContext: Name option
         MasterTimeout: Duration option
         Timeout: Duration option
         [<JsonPropertyName("script")>]
@@ -150,7 +150,7 @@ module ScriptOperations =
                 let path = $"/_scripts/{request.Id}/{request.Context}"
                 let queryParams =
                     [
-                        request.Context2 |> Option.map (fun v -> "context", Fes.Http.toQueryValue v)
+                        request.QueryContext |> Option.map (fun v -> "context", Fes.Http.toQueryValue v)
                         request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
                         request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
@@ -175,7 +175,7 @@ module ScriptOperations =
             {
                 PutScriptRequest.Id = Unchecked.defaultof<Id>
                 PutScriptRequest.Context = Unchecked.defaultof<Name>
-                PutScriptRequest.Context2 = Option.None
+                PutScriptRequest.QueryContext = Option.None
                 PutScriptRequest.MasterTimeout = Option.None
                 PutScriptRequest.Timeout = Option.None
                 PutScriptRequest.Script = Unchecked.defaultof<StoredScript>
@@ -189,9 +189,9 @@ module ScriptOperations =
         member _.Context(state: PutScriptRequest, value: Name) =
             { state with PutScriptRequest.Context = value } : PutScriptRequest
 
-        [<CustomOperation("context2")>]
-        member _.Context2(state: PutScriptRequest, value: Name) =
-            { state with PutScriptRequest.Context2 = Option.Some value } : PutScriptRequest
+        [<CustomOperation("query_context")>]
+        member _.QueryContext(state: PutScriptRequest, value: Name) =
+            { state with PutScriptRequest.QueryContext = Option.Some value } : PutScriptRequest
 
         [<CustomOperation("master_timeout")>]
         member _.MasterTimeout(state: PutScriptRequest, value: Duration) =

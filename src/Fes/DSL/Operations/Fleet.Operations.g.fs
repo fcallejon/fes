@@ -260,19 +260,19 @@ module FleetOperations =
         [<JsonPropertyName("collapse")>]
         Collapse: SearchTypesFieldCollapse option
         [<JsonPropertyName("explain")>]
-        Explain2: bool option
+        BodyExplain: bool option
         [<JsonPropertyName("ext")>]
         Ext: Map<string, obj> option
         [<JsonPropertyName("from")>]
-        From2: float option
+        BodyFrom: float option
         [<JsonPropertyName("highlight")>]
         Highlight: SearchTypesHighlight option
         [<JsonPropertyName("track_total_hits")>]
-        TrackTotalHits2: SearchTypesTrackHits option
+        BodyTrackTotalHits: SearchTypesTrackHits option
         [<JsonPropertyName("indices_boost")>]
         IndicesBoost: Map<string, float> array option
         [<JsonPropertyName("docvalue_fields")>]
-        DocvalueFields2: QueryDslFieldAndFormat array option
+        BodyDocvalueFields: QueryDslFieldAndFormat array option
         [<JsonPropertyName("min_score")>]
         MinScore: float option
         [<JsonPropertyName("post_filter")>]
@@ -288,35 +288,35 @@ module FleetOperations =
         [<JsonPropertyName("search_after")>]
         SearchAfter: SortResults option
         [<JsonPropertyName("size")>]
-        Size2: float option
+        BodySize: float option
         [<JsonPropertyName("slice")>]
         Slice: SlicedScroll option
         [<JsonPropertyName("sort")>]
-        Sort2: Sort option
+        BodySort: Sort option
         [<JsonPropertyName("_source")>]
-        Source2: SearchTypesSourceConfig option
+        BodySource: SearchTypesSourceConfig option
         [<JsonPropertyName("fields")>]
         Fields: QueryDslFieldAndFormat array option
         [<JsonPropertyName("suggest")>]
         Suggest: SearchTypesSuggester option
         [<JsonPropertyName("terminate_after")>]
-        TerminateAfter2: float option
+        BodyTerminateAfter: float option
         [<JsonPropertyName("timeout")>]
-        Timeout2: string option
+        BodyTimeout: string option
         [<JsonPropertyName("track_scores")>]
-        TrackScores2: bool option
+        BodyTrackScores: bool option
         [<JsonPropertyName("version")>]
-        Version2: bool option
+        BodyVersion: bool option
         [<JsonPropertyName("seq_no_primary_term")>]
-        SeqNoPrimaryTerm2: bool option
+        BodySeqNoPrimaryTerm: bool option
         [<JsonPropertyName("stored_fields")>]
-        StoredFields2: Fields option
+        BodyStoredFields: Fields option
         [<JsonPropertyName("pit")>]
         Pit: SearchTypesPointInTimeReference option
         [<JsonPropertyName("runtime_mappings")>]
         RuntimeMappings: MappingRuntimeFields option
         [<JsonPropertyName("stats")>]
-        Stats2: string array option
+        BodyStats: string array option
     } with
         static member ToRequest(request: FleetSearchRequest) : Result<Fes.Http.RequestMsg, exn> =
             try
@@ -374,7 +374,7 @@ module FleetOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody {| ``aggregations`` = request.Aggregations; ``collapse`` = request.Collapse; ``explain`` = request.Explain2; ``ext`` = request.Ext; ``from`` = request.From2; ``highlight`` = request.Highlight; ``track_total_hits`` = request.TrackTotalHits2; ``indices_boost`` = request.IndicesBoost; ``docvalue_fields`` = request.DocvalueFields2; ``min_score`` = request.MinScore; ``post_filter`` = request.PostFilter; ``profile`` = request.Profile; ``query`` = request.Query; ``rescore`` = request.Rescore; ``script_fields`` = request.ScriptFields; ``search_after`` = request.SearchAfter; ``size`` = request.Size2; ``slice`` = request.Slice; ``sort`` = request.Sort2; ``_source`` = request.Source2; ``fields`` = request.Fields; ``suggest`` = request.Suggest; ``terminate_after`` = request.TerminateAfter2; ``timeout`` = request.Timeout2; ``track_scores`` = request.TrackScores2; ``version`` = request.Version2; ``seq_no_primary_term`` = request.SeqNoPrimaryTerm2; ``stored_fields`` = request.StoredFields2; ``pit`` = request.Pit; ``runtime_mappings`` = request.RuntimeMappings; ``stats`` = request.Stats2 |}
+                |> Fes.Http.Request.withJsonBody {| ``aggregations`` = request.Aggregations; ``collapse`` = request.Collapse; ``explain`` = request.BodyExplain; ``ext`` = request.Ext; ``from`` = request.BodyFrom; ``highlight`` = request.Highlight; ``track_total_hits`` = request.BodyTrackTotalHits; ``indices_boost`` = request.IndicesBoost; ``docvalue_fields`` = request.BodyDocvalueFields; ``min_score`` = request.MinScore; ``post_filter`` = request.PostFilter; ``profile`` = request.Profile; ``query`` = request.Query; ``rescore`` = request.Rescore; ``script_fields`` = request.ScriptFields; ``search_after`` = request.SearchAfter; ``size`` = request.BodySize; ``slice`` = request.Slice; ``sort`` = request.BodySort; ``_source`` = request.BodySource; ``fields`` = request.Fields; ``suggest`` = request.Suggest; ``terminate_after`` = request.BodyTerminateAfter; ``timeout`` = request.BodyTimeout; ``track_scores`` = request.BodyTrackScores; ``version`` = request.BodyVersion; ``seq_no_primary_term`` = request.BodySeqNoPrimaryTerm; ``stored_fields`` = request.BodyStoredFields; ``pit`` = request.Pit; ``runtime_mappings`` = request.RuntimeMappings; ``stats`` = request.BodyStats |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -432,13 +432,13 @@ module FleetOperations =
                 FleetSearchRequest.AllowPartialSearchResults = Option.None
                 FleetSearchRequest.Aggregations = Option.None
                 FleetSearchRequest.Collapse = Option.None
-                FleetSearchRequest.Explain2 = Option.None
+                FleetSearchRequest.BodyExplain = Option.None
                 FleetSearchRequest.Ext = Option.None
-                FleetSearchRequest.From2 = Option.None
+                FleetSearchRequest.BodyFrom = Option.None
                 FleetSearchRequest.Highlight = Option.None
-                FleetSearchRequest.TrackTotalHits2 = Option.None
+                FleetSearchRequest.BodyTrackTotalHits = Option.None
                 FleetSearchRequest.IndicesBoost = Option.None
-                FleetSearchRequest.DocvalueFields2 = Option.None
+                FleetSearchRequest.BodyDocvalueFields = Option.None
                 FleetSearchRequest.MinScore = Option.None
                 FleetSearchRequest.PostFilter = Option.None
                 FleetSearchRequest.Profile = Option.None
@@ -446,21 +446,21 @@ module FleetOperations =
                 FleetSearchRequest.Rescore = Option.None
                 FleetSearchRequest.ScriptFields = Option.None
                 FleetSearchRequest.SearchAfter = Option.None
-                FleetSearchRequest.Size2 = Option.None
+                FleetSearchRequest.BodySize = Option.None
                 FleetSearchRequest.Slice = Option.None
-                FleetSearchRequest.Sort2 = Option.None
-                FleetSearchRequest.Source2 = Option.None
+                FleetSearchRequest.BodySort = Option.None
+                FleetSearchRequest.BodySource = Option.None
                 FleetSearchRequest.Fields = Option.None
                 FleetSearchRequest.Suggest = Option.None
-                FleetSearchRequest.TerminateAfter2 = Option.None
-                FleetSearchRequest.Timeout2 = Option.None
-                FleetSearchRequest.TrackScores2 = Option.None
-                FleetSearchRequest.Version2 = Option.None
-                FleetSearchRequest.SeqNoPrimaryTerm2 = Option.None
-                FleetSearchRequest.StoredFields2 = Option.None
+                FleetSearchRequest.BodyTerminateAfter = Option.None
+                FleetSearchRequest.BodyTimeout = Option.None
+                FleetSearchRequest.BodyTrackScores = Option.None
+                FleetSearchRequest.BodyVersion = Option.None
+                FleetSearchRequest.BodySeqNoPrimaryTerm = Option.None
+                FleetSearchRequest.BodyStoredFields = Option.None
                 FleetSearchRequest.Pit = Option.None
                 FleetSearchRequest.RuntimeMappings = Option.None
-                FleetSearchRequest.Stats2 = Option.None
+                FleetSearchRequest.BodyStats = Option.None
             } : FleetSearchRequest
 
         [<CustomOperation("index")>]
@@ -647,33 +647,33 @@ module FleetOperations =
         member _.Collapse(state: FleetSearchRequest, value: SearchTypesFieldCollapse) =
             { state with FleetSearchRequest.Collapse = Option.Some value } : FleetSearchRequest
 
-        [<CustomOperation("explain2")>]
-        member _.Explain2(state: FleetSearchRequest, value: bool) =
-            { state with FleetSearchRequest.Explain2 = Option.Some value } : FleetSearchRequest
+        [<CustomOperation("body_explain")>]
+        member _.BodyExplain(state: FleetSearchRequest, value: bool) =
+            { state with FleetSearchRequest.BodyExplain = Option.Some value } : FleetSearchRequest
 
         [<CustomOperation("ext")>]
         member _.Ext(state: FleetSearchRequest, value: Map<string, obj>) =
             { state with FleetSearchRequest.Ext = Option.Some value } : FleetSearchRequest
 
-        [<CustomOperation("from2")>]
-        member _.From2(state: FleetSearchRequest, value: float) =
-            { state with FleetSearchRequest.From2 = Option.Some value } : FleetSearchRequest
+        [<CustomOperation("body_from")>]
+        member _.BodyFrom(state: FleetSearchRequest, value: float) =
+            { state with FleetSearchRequest.BodyFrom = Option.Some value } : FleetSearchRequest
 
         [<CustomOperation("highlight")>]
         member _.Highlight(state: FleetSearchRequest, value: SearchTypesHighlight) =
             { state with FleetSearchRequest.Highlight = Option.Some value } : FleetSearchRequest
 
-        [<CustomOperation("track_total_hits2")>]
-        member _.TrackTotalHits2(state: FleetSearchRequest, value: SearchTypesTrackHits) =
-            { state with FleetSearchRequest.TrackTotalHits2 = Option.Some value } : FleetSearchRequest
+        [<CustomOperation("body_track_total_hits")>]
+        member _.BodyTrackTotalHits(state: FleetSearchRequest, value: SearchTypesTrackHits) =
+            { state with FleetSearchRequest.BodyTrackTotalHits = Option.Some value } : FleetSearchRequest
 
         [<CustomOperation("indices_boost")>]
         member _.IndicesBoost(state: FleetSearchRequest, value: Map<string, float> array) =
             { state with FleetSearchRequest.IndicesBoost = Option.Some value } : FleetSearchRequest
 
-        [<CustomOperation("docvalue_fields2")>]
-        member _.DocvalueFields2(state: FleetSearchRequest, value: QueryDslFieldAndFormat array) =
-            { state with FleetSearchRequest.DocvalueFields2 = Option.Some value } : FleetSearchRequest
+        [<CustomOperation("body_docvalue_fields")>]
+        member _.BodyDocvalueFields(state: FleetSearchRequest, value: QueryDslFieldAndFormat array) =
+            { state with FleetSearchRequest.BodyDocvalueFields = Option.Some value } : FleetSearchRequest
 
         [<CustomOperation("min_score")>]
         member _.MinScore(state: FleetSearchRequest, value: float) =
@@ -703,21 +703,21 @@ module FleetOperations =
         member _.SearchAfter(state: FleetSearchRequest, value: SortResults) =
             { state with FleetSearchRequest.SearchAfter = Option.Some value } : FleetSearchRequest
 
-        [<CustomOperation("size2")>]
-        member _.Size2(state: FleetSearchRequest, value: float) =
-            { state with FleetSearchRequest.Size2 = Option.Some value } : FleetSearchRequest
+        [<CustomOperation("body_size")>]
+        member _.BodySize(state: FleetSearchRequest, value: float) =
+            { state with FleetSearchRequest.BodySize = Option.Some value } : FleetSearchRequest
 
         [<CustomOperation("slice")>]
         member _.Slice(state: FleetSearchRequest, value: SlicedScroll) =
             { state with FleetSearchRequest.Slice = Option.Some value } : FleetSearchRequest
 
-        [<CustomOperation("sort2")>]
-        member _.Sort2(state: FleetSearchRequest, value: Sort) =
-            { state with FleetSearchRequest.Sort2 = Option.Some value } : FleetSearchRequest
+        [<CustomOperation("body_sort")>]
+        member _.BodySort(state: FleetSearchRequest, value: Sort) =
+            { state with FleetSearchRequest.BodySort = Option.Some value } : FleetSearchRequest
 
-        [<CustomOperation("_source2")>]
-        member _.Source2(state: FleetSearchRequest, value: SearchTypesSourceConfig) =
-            { state with FleetSearchRequest.Source2 = Option.Some value } : FleetSearchRequest
+        [<CustomOperation("body__source")>]
+        member _.BodySource(state: FleetSearchRequest, value: SearchTypesSourceConfig) =
+            { state with FleetSearchRequest.BodySource = Option.Some value } : FleetSearchRequest
 
         [<CustomOperation("fields")>]
         member _.Fields(state: FleetSearchRequest, value: QueryDslFieldAndFormat array) =
@@ -727,29 +727,29 @@ module FleetOperations =
         member _.Suggest(state: FleetSearchRequest, value: SearchTypesSuggester) =
             { state with FleetSearchRequest.Suggest = Option.Some value } : FleetSearchRequest
 
-        [<CustomOperation("terminate_after2")>]
-        member _.TerminateAfter2(state: FleetSearchRequest, value: float) =
-            { state with FleetSearchRequest.TerminateAfter2 = Option.Some value } : FleetSearchRequest
+        [<CustomOperation("body_terminate_after")>]
+        member _.BodyTerminateAfter(state: FleetSearchRequest, value: float) =
+            { state with FleetSearchRequest.BodyTerminateAfter = Option.Some value } : FleetSearchRequest
 
-        [<CustomOperation("timeout2")>]
-        member _.Timeout2(state: FleetSearchRequest, value: string) =
-            { state with FleetSearchRequest.Timeout2 = Option.Some value } : FleetSearchRequest
+        [<CustomOperation("body_timeout")>]
+        member _.BodyTimeout(state: FleetSearchRequest, value: string) =
+            { state with FleetSearchRequest.BodyTimeout = Option.Some value } : FleetSearchRequest
 
-        [<CustomOperation("track_scores2")>]
-        member _.TrackScores2(state: FleetSearchRequest, value: bool) =
-            { state with FleetSearchRequest.TrackScores2 = Option.Some value } : FleetSearchRequest
+        [<CustomOperation("body_track_scores")>]
+        member _.BodyTrackScores(state: FleetSearchRequest, value: bool) =
+            { state with FleetSearchRequest.BodyTrackScores = Option.Some value } : FleetSearchRequest
 
-        [<CustomOperation("version2")>]
-        member _.Version2(state: FleetSearchRequest, value: bool) =
-            { state with FleetSearchRequest.Version2 = Option.Some value } : FleetSearchRequest
+        [<CustomOperation("body_version")>]
+        member _.BodyVersion(state: FleetSearchRequest, value: bool) =
+            { state with FleetSearchRequest.BodyVersion = Option.Some value } : FleetSearchRequest
 
-        [<CustomOperation("seq_no_primary_term2")>]
-        member _.SeqNoPrimaryTerm2(state: FleetSearchRequest, value: bool) =
-            { state with FleetSearchRequest.SeqNoPrimaryTerm2 = Option.Some value } : FleetSearchRequest
+        [<CustomOperation("body_seq_no_primary_term")>]
+        member _.BodySeqNoPrimaryTerm(state: FleetSearchRequest, value: bool) =
+            { state with FleetSearchRequest.BodySeqNoPrimaryTerm = Option.Some value } : FleetSearchRequest
 
-        [<CustomOperation("stored_fields2")>]
-        member _.StoredFields2(state: FleetSearchRequest, value: Fields) =
-            { state with FleetSearchRequest.StoredFields2 = Option.Some value } : FleetSearchRequest
+        [<CustomOperation("body_stored_fields")>]
+        member _.BodyStoredFields(state: FleetSearchRequest, value: Fields) =
+            { state with FleetSearchRequest.BodyStoredFields = Option.Some value } : FleetSearchRequest
 
         [<CustomOperation("pit")>]
         member _.Pit(state: FleetSearchRequest, value: SearchTypesPointInTimeReference) =
@@ -759,9 +759,9 @@ module FleetOperations =
         member _.RuntimeMappings(state: FleetSearchRequest, value: MappingRuntimeFields) =
             { state with FleetSearchRequest.RuntimeMappings = Option.Some value } : FleetSearchRequest
 
-        [<CustomOperation("stats2")>]
-        member _.Stats2(state: FleetSearchRequest, value: string array) =
-            { state with FleetSearchRequest.Stats2 = Option.Some value } : FleetSearchRequest
+        [<CustomOperation("body_stats")>]
+        member _.BodyStats(state: FleetSearchRequest, value: string array) =
+            { state with FleetSearchRequest.BodyStats = Option.Some value } : FleetSearchRequest
 
     let fleetSearchRequest = FleetSearchRequestBuilder()
 

@@ -320,7 +320,7 @@ module CatOperations =
 
     type CatFielddataRequest = {
         Fields: Fields
-        Fields2: Fields option
+        QueryFields: Fields option
         H: TypesCatFieldDataColumns option
         S: Names option
     } with
@@ -329,7 +329,7 @@ module CatOperations =
                 let path = $"/_cat/fielddata/{request.Fields}"
                 let queryParams =
                     [
-                        request.Fields2 |> Option.map (fun v -> "fields", Fes.Http.toQueryValue v)
+                        request.QueryFields |> Option.map (fun v -> "fields", Fes.Http.toQueryValue v)
                         request.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
                         request.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
                     ] |> List.choose id
@@ -352,7 +352,7 @@ module CatOperations =
         member _.Yield(_: unit) : CatFielddataRequest =
             {
                 CatFielddataRequest.Fields = Unchecked.defaultof<Fields>
-                CatFielddataRequest.Fields2 = Option.None
+                CatFielddataRequest.QueryFields = Option.None
                 CatFielddataRequest.H = Option.None
                 CatFielddataRequest.S = Option.None
             } : CatFielddataRequest
@@ -361,9 +361,9 @@ module CatOperations =
         member _.Fields(state: CatFielddataRequest, value: Fields) =
             { state with CatFielddataRequest.Fields = value } : CatFielddataRequest
 
-        [<CustomOperation("fields2")>]
-        member _.Fields2(state: CatFielddataRequest, value: Fields) =
-            { state with CatFielddataRequest.Fields2 = Option.Some value } : CatFielddataRequest
+        [<CustomOperation("query_fields")>]
+        member _.QueryFields(state: CatFielddataRequest, value: Fields) =
+            { state with CatFielddataRequest.QueryFields = Option.Some value } : CatFielddataRequest
 
         [<CustomOperation("h")>]
         member _.H(state: CatFielddataRequest, value: TypesCatFieldDataColumns) =
@@ -1065,7 +1065,7 @@ module CatOperations =
         Index: Indices
         ActiveOnly: bool option
         Detailed: bool option
-        Index2: Indices option
+        QueryIndex: Indices option
         H: TypesCatRecoveryColumns option
         S: Names option
     } with
@@ -1076,7 +1076,7 @@ module CatOperations =
                     [
                         request.ActiveOnly |> Option.map (fun v -> "active_only", Fes.Http.toQueryValue v)
                         request.Detailed |> Option.map (fun v -> "detailed", Fes.Http.toQueryValue v)
-                        request.Index2 |> Option.map (fun v -> "index", Fes.Http.toQueryValue v)
+                        request.QueryIndex |> Option.map (fun v -> "index", Fes.Http.toQueryValue v)
                         request.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
                         request.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
                     ] |> List.choose id
@@ -1101,7 +1101,7 @@ module CatOperations =
                 CatRecoveryRequest.Index = Unchecked.defaultof<Indices>
                 CatRecoveryRequest.ActiveOnly = Option.None
                 CatRecoveryRequest.Detailed = Option.None
-                CatRecoveryRequest.Index2 = Option.None
+                CatRecoveryRequest.QueryIndex = Option.None
                 CatRecoveryRequest.H = Option.None
                 CatRecoveryRequest.S = Option.None
             } : CatRecoveryRequest
@@ -1118,9 +1118,9 @@ module CatOperations =
         member _.Detailed(state: CatRecoveryRequest, value: bool) =
             { state with CatRecoveryRequest.Detailed = Option.Some value } : CatRecoveryRequest
 
-        [<CustomOperation("index2")>]
-        member _.Index2(state: CatRecoveryRequest, value: Indices) =
-            { state with CatRecoveryRequest.Index2 = Option.Some value } : CatRecoveryRequest
+        [<CustomOperation("query_index")>]
+        member _.QueryIndex(state: CatRecoveryRequest, value: Indices) =
+            { state with CatRecoveryRequest.QueryIndex = Option.Some value } : CatRecoveryRequest
 
         [<CustomOperation("h")>]
         member _.H(state: CatRecoveryRequest, value: TypesCatRecoveryColumns) =
