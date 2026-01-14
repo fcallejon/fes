@@ -1,51 +1,80 @@
-﻿namespace Fes
+namespace Fes
 
-open Fleece.SystemTextJson
+open System
+open System.Text.Json
+open System.Text.Json.Nodes
+open System.Text.Json.Serialization
+open System.Threading.Tasks
+
+module JsonSettings =
+    let options =
+        let opts = JsonSerializerOptions()
+        // Add manual type converters (not in generated models)
+        opts.Converters.Add(Fes.Exceptions.ElasticsearchExceptionsConverter())
+        opts.Converters.Add(Fes.Exceptions.ElasticsearchCauseByTypeConverter())
+        // Add generated enum converters explicitly (must come BEFORE JsonFSharpConverter factory)
+        // These converters handle ES enum types that serialize as simple strings
+        opts.Converters.Add(Fes.DSL.Models.Types.ResultConverter())
+        opts.Converters.Add(Fes.DSL.Models.Types.RefreshConverter())
+        opts.Converters.Add(Fes.DSL.Models.Types.HealthStatusConverter())
+        opts.Converters.Add(Fes.DSL.Models.Types.VersionTypeConverter())
+        opts.Converters.Add(Fes.DSL.Models.Types.SearchTypeConverter())
+        opts.Converters.Add(Fes.DSL.Models.Types.OpTypeConverter())
+        opts.Converters.Add(Fes.DSL.Models.Types.ExpandWildcardConverter())
+        opts.Converters.Add(Fes.DSL.Models.Types.ConflictsConverter())
+        opts.Converters.Add(Fes.DSL.Models.Types.WaitForEventsConverter())
+        // Add discriminated union converters (must come BEFORE JsonFSharpConverter)
+        // These have custom serialization logic for polymorphic types
+        opts.Converters.Add(Fes.DSL.Models.Types.MappingPropertyConverter())
+        opts.Converters.Add(Fes.DSL.Models.Types.AnalysisAnalyzerConverter())
+        opts.Converters.Add(Fes.DSL.Models.Types.AnalysisTokenizerDefinitionConverter())
+        opts.Converters.Add(Fes.DSL.Models.Types.AnalysisTokenFilterDefinitionConverter())
+        opts.Converters.Add(Fes.DSL.Models.Types.AnalysisCharFilterDefinitionConverter())
+        opts.Converters.Add(Fes.DSL.Models.Types.AnalysisNormalizerConverter())
+        opts.Converters.Add(Fes.DSL.Models.Types.AggregationsMovingAverageAggregationConverter())
+        opts.Converters.Add(Fes.DSL.Models.Types.TypesSettingsSimilarityConverter())
+        opts.Converters.Add(Fes.DSL.Models.Types.RemoteInfoClusterRemoteInfoConverter())
+        opts.Converters.Add(Fes.DSL.Models.Types.TypesValidationConverter())
+        opts.Converters.Add(Fes.DSL.Models.Types.ExplainLifecycleLifecycleExplainConverter())
+        opts.Converters.Add(Fes.DSL.Models.Types.TypesRepositoryConverter())
+        // Enum converter for lowercase enum values (Elasticsearch expects "true" not "True")
+        opts.Converters.Add(JsonStringEnumConverter(JsonNamingPolicy.CamelCase))
+        // JsonFSharpConverter handles remaining F# types (options, other unions)
+        opts.Converters.Add(JsonFSharpConverter(
+            JsonUnionEncoding.AdjacentTag ||| JsonUnionEncoding.NamedFields ||| JsonUnionEncoding.UnwrapOption,
+            unionTagName = "type",
+            unionFieldsName = "value"
+        ))
+        opts.PropertyNamingPolicy <- JsonNamingPolicy.SnakeCaseLower
+        opts.DefaultIgnoreCondition <- JsonIgnoreCondition.WhenWritingNull
+        opts
 
 module Json =
-    type JRes<'a> =
-        | Ok of 'a
-        | Error of string
+    open JsonSettings
 
-    open Fleece
-    let inline tryGetValue k (from: Encoding) =
-        match from with
-        | JObject o ->
-            o.Properties
-            |> Seq.tryFind (fun (key, _) -> key = k)
-        | _ -> None
-    
-[<AutoOpen>]
-module JRes =
-    open Json
-    let bind (f: 'a -> JRes<'b>) (r: JRes<'a>) : JRes<'b> =
-        match r with
-        | Ok r' -> f r'
-        | Error e -> Error e
-        
-    let map (f: 'a -> 'b) (r: JRes<'a>) : JRes<'b> =
-        bind (f >> Ok) r
-        
-    type ParserBuilder() =
-        member _.Return x = Ok x
-        member _.ReturnFrom = id
-        member _.Bind (x, f) = bind f x
+    let inline serialize (value: 'a) : string =
+        JsonSerializer.Serialize(value, options)
+
+    let inline deserialize<'a> (json: string) : 'a =
+        JsonSerializer.Deserialize<'a>(json, options)
+
+    let inline tryDeserialize<'a> (json: string) : Result<'a, exn> =
+        try
+            Ok (JsonSerializer.Deserialize<'a>(json, options))
+        with ex ->
+            Error ex
+
+    let inline serializeToNode (value: 'a) : JsonNode =
+        JsonSerializer.SerializeToNode(value, options)
+
+    let inline deserializeNode<'a> (node: JsonNode) : 'a =
+        node.Deserialize<'a>(options)
 
 [<RequireQualifiedAccess>]
 module JsonRes =
-    open Fleece
-    open Json
-    let inline from json =
-        let inline _from (_: ^a, b: ^b) =
-            ((^a or ^b): (static member OfJson: ^b -> (JsonValue -> ^b JRes)) b)
-        _from (Encoding, Unchecked.defaultof<'a>) json
-        
-    let inline ofString s =
-        let _map =
-            function
-            | ParseResult.Ok o -> Result.Ok o
-            | ParseResult.Error e -> Result.Error <| exn $"%O{e}"
-        
-        Encoding.Parse s
-        |> (ofJson >> _map)
-        |> Async.retn
+    let inline ofString<'a> (s: string) : TaskResult<'a, exn> =
+        try
+            let result = Json.deserialize<'a> s
+            TaskResult.retn result
+        with ex ->
+            Task.FromResult(Result.Error ex)

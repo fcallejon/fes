@@ -7,17 +7,12 @@ EndProjectSection
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fes", "src/Fes/Fes.fsproj", "{A74AB07D-0AFF-49D3-851B-53816B4DE4FB}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "paket", "paket", "{509DDF89-85AD-43DA-9A3B-25C41B21A94C}"
-ProjectSection(SolutionItems) = preProject
-	paket.dependencies = paket.dependencies
-	paket.lock = paket.lock
-EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution", "Solution", "{0F9E0F70-62EC-41B3-932C-D6CE547D189F}"
 ProjectSection(SolutionItems) = preProject
 	.gitignore = .gitignore
 	README.md = README.md
 	Directory.Build.props = Directory.Build.props
+	Directory.Packages.props = Directory.Packages.props
 EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sample", "Sample", "{A6D41FAC-CF2F-4643-9E61-17A3BB3DB33D}"
@@ -34,6 +29,12 @@ EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fes.Tests", "tests\Fes.Tests\Fes.Tests.fsproj", "{293A5326-154F-47B8-917F-C7A2635387F1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{9F69195B-2353-48A6-A03D-6986CBCE5C32}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{AD3E4A5D-072E-4A34-B45E-2326918372E2}"
+	ProjectSection(SolutionItems) = preProject
+		scripts\generate-dsl.fsx = scripts\generate-dsl.fsx
+		scripts\esapi.2025-01.yaml = scripts\esapi.2025-01.yaml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

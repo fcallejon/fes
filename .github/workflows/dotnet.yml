@@ -10,48 +10,62 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    services:
+      elasticsearch:
+        image: docker.elastic.co/elasticsearch/elasticsearch:8.13.0
+        ports:
+          - 9200:9200
+        env:
+          discovery.type: single-node
+          xpack.security.enabled: "false"
+          ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+        options: >-
+          --health-cmd "curl -s http://localhost:9200/_cluster/health | grep -qE 'yellow|green'"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 10
+
     steps:
-      - uses: actions/checkout@v2
-          
+      - uses: actions/checkout@v4
+
       - name: Configure sysctl limits
-        if: ${{ !env.ACT }}
         run: |
           sudo swapoff -a
           sudo sysctl -w vm.swappiness=1
           sudo sysctl -w fs.file-max=262144
           sudo sysctl -w vm.max_map_count=262144
-          
+
       - name: Setup .NET
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 6.0.x
-      - name: Restore tools
-        run: dotnet tool restore
+          dotnet-version: 10.0.x
+
       - name: Restore dependencies
         run: dotnet restore
+
       - name: Build
         run: dotnet build --no-restore
-      - name: Run Tests
+
+      - name: Run Unit Tests
         run: dotnet test --no-build --no-restore
 
-#      - name: Runs Elasticsearch
-#        if: ${{ !env.ACT }}
-#        uses: elastic/elastic-github-actions/elasticsearch@master
-#        with:
-#          stack-version: 7.6.0
-#          port: 9200
-#          nodes: 1
-#
-#      - name: Run Sample GitHub
-#        if: ${{ !env.ACT }}
-#        run: |
-#          export FES_ES_SERVER=http://es1:9200/
-#          export FES_ES_INDEX_NAME=gh_index_$(date +%s)
-#          dotnet run --project ./src/Fes.Sample/Fes.Sample.fsproj --no-build
-#
-#      - name: Run Sample Local
-#        if: ${{ env.ACT }}
-#        run: |
-#          export FES_ES_SERVER=http://localhost:9200/
-#          export FES_ES_INDEX_NAME=index_$(date +%s)
-#          dotnet run --project ./src/Fes.Sample/Fes.Sample.fsproj --no-build
+      - name: Wait for Elasticsearch
+        run: |
+          echo "Waiting for Elasticsearch to be ready..."
+          for i in {1..30}; do
+            if curl -s http://localhost:9200/_cluster/health | grep -qE '"status":"(green|yellow)"'; then
+              echo "Elasticsearch is ready!"
+              curl -s http://localhost:9200
+              exit 0
+            fi
+            echo "Attempt $i: Elasticsearch not ready, waiting..."
+            sleep 5
+          done
+          echo "Elasticsearch failed to start"
+          exit 1
+
+      - name: Run Integration Tests (Fes.Sample)
+        env:
+          FES_ES_SERVER: http://localhost:9200/
+          FES_ES_INDEX_NAME: fes_test_${{ github.run_id }}
+        run: dotnet run --project ./src/Fes.Sample/Fes.Sample.fsproj --no-build

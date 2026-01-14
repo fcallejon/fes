@@ -30,12 +30,12 @@ module ErrorDeserialization =
     [<Fact>]
     let ``illegal_argument_exception from ES can be parsed`` () =
       let assertValues (iaException: ElasticsearchException) =
-        Assert.Equal(illegal_argument_exception.error.reason, iaException.reason, true, true, true)
-        Assert.Equal(illegal_argument_exception.error.root_cause.Head.reason, iaException.root.[0].Reason, true, true, true)
-        Assert.Equal(illegal_argument_exception.status, (int iaException.status))
-        Assert.Equal(ElasticsearchExceptions.IllegalArgumentException, iaException.esType)
-        Assert.Equal(ElasticsearchCauseByType.NumberFormat, iaException.cause.Value.Type)
-        Assert.Equal(illegal_argument_exception.error.caused_by.reason, iaException.cause.Value.Reason, true, true, true)
+        Assert.Equal(illegal_argument_exception.error.reason, iaException.Reason, true, true, true)
+        Assert.Equal(illegal_argument_exception.error.root_cause.Head.reason, iaException.RootCause.[0].Reason, true, true, true)
+        Assert.Equal(illegal_argument_exception.status, (int iaException.Status))
+        Assert.Equal(ElasticsearchExceptions.IllegalArgumentException, iaException.ErrorType)
+        Assert.Equal(ElasticsearchCauseByType.NumberFormat, iaException.Cause.Value.Type)
+        Assert.Equal(illegal_argument_exception.error.caused_by.reason, iaException.Cause.Value.Reason, true, true, true)
 
       illegal_argument_exception
       |> systemJsonSerialize
