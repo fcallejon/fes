@@ -22,8 +22,8 @@ module MlOperations =
                 let path = $"/_ml/memory/{request.NodeId}/_stats"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -86,8 +86,8 @@ module MlOperations =
                 let path = "/_ml/set_upgrade_mode"
                 let queryParams =
                     [
-                        request.Enabled |> Option.map (fun v -> "enabled", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.Enabled |> Option.map (fun v -> "enabled", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""

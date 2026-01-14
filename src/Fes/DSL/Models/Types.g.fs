@@ -137,6 +137,11 @@ module Types =
         SearchTypesTotalHitsRelation =
         | Eq
         | Gte
+        with
+        override this.ToString() =
+            match this with
+            | Eq -> "eq"
+            | Gte -> "gte"
 
     and SearchTypesTotalHits = {
         [<JsonPropertyName("relation")>]
@@ -701,6 +706,14 @@ module Types =
         | Partial
         | Skipped
         | Failed
+        with
+        override this.ToString() =
+            match this with
+            | Running -> "running"
+            | Successful -> "successful"
+            | Partial -> "partial"
+            | Skipped -> "skipped"
+            | Failed -> "failed"
 
     /// <summary>
     /// Time unit for milliseconds
@@ -2661,6 +2674,13 @@ module Types =
         | AND
         | Or
         | OR
+        with
+        override this.ToString() =
+            match this with
+            | And -> "and"
+            | AND -> "AND"
+            | Or -> "or"
+            | OR -> "OR"
 
     and Fields = obj
 
@@ -2693,6 +2713,14 @@ module Types =
         | Closed
         | Hidden
         | None
+        with
+        override this.ToString() =
+            match this with
+            | All -> "all"
+            | Open -> "open"
+            | Closed -> "closed"
+            | Hidden -> "hidden"
+            | None -> "none"
 
     and ExpandWildcards = obj
 
@@ -2716,6 +2744,11 @@ module Types =
         SearchType =
         | QueryThenFetch
         | DfsQueryThenFetch
+        with
+        override this.ToString() =
+            match this with
+            | QueryThenFetch -> "query_then_fetch"
+            | DfsQueryThenFetch -> "dfs_query_then_fetch"
 
     and SuggestModeConverter() =
         inherit JsonConverter<SuggestMode>()
@@ -2740,6 +2773,12 @@ module Types =
         | Missing
         | Popular
         | Always
+        with
+        override this.ToString() =
+            match this with
+            | Missing -> "missing"
+            | Popular -> "popular"
+            | Always -> "always"
 
     /// <summary>
     /// Number of hits matching the query to count accurately. If true, the exact
@@ -2867,6 +2906,11 @@ module Types =
         QueryDslCombinedFieldsOperator =
         | Or
         | And
+        with
+        override this.ToString() =
+            match this with
+            | Or -> "or"
+            | And -> "and"
 
     and QueryDslCombinedFieldsZeroTermsConverter() =
         inherit JsonConverter<QueryDslCombinedFieldsZeroTerms>()
@@ -2888,6 +2932,11 @@ module Types =
         QueryDslCombinedFieldsZeroTerms =
         | None
         | All
+        with
+        override this.ToString() =
+            match this with
+            | None -> "none"
+            | All -> "all"
 
     and QueryDslCombinedFieldsQuery = {
         [<JsonPropertyName("boost")>]
@@ -3072,6 +3121,15 @@ module Types =
         | Avg
         | Max
         | Min
+        with
+        override this.ToString() =
+            match this with
+            | Multiply -> "multiply"
+            | Replace -> "replace"
+            | Sum -> "sum"
+            | Avg -> "avg"
+            | Max -> "max"
+            | Min -> "min"
 
     and QueryDslMultiValueModeConverter() =
         inherit JsonConverter<QueryDslMultiValueMode>()
@@ -3099,6 +3157,13 @@ module Types =
         | Max
         | Avg
         | Sum
+        with
+        override this.ToString() =
+            match this with
+            | Min -> "min"
+            | Max -> "max"
+            | Avg -> "avg"
+            | Sum -> "sum"
 
     and QueryDslDecayFunctionBaseDateMathDuration = {
         [<JsonPropertyName("multi_value_mode")>]
@@ -3186,6 +3251,19 @@ module Types =
         | Square
         | Sqrt
         | Reciprocal
+        with
+        override this.ToString() =
+            match this with
+            | None -> "none"
+            | Log -> "log"
+            | Log1p -> "log1p"
+            | Log2p -> "log2p"
+            | Ln -> "ln"
+            | Ln1p -> "ln1p"
+            | Ln2p -> "ln2p"
+            | Square -> "square"
+            | Sqrt -> "sqrt"
+            | Reciprocal -> "reciprocal"
 
     and QueryDslFieldValueFactorScoreFunction = {
         [<JsonPropertyName("field")>]
@@ -3230,6 +3308,12 @@ module Types =
         | Chars
         | Sentence
         | Word
+        with
+        override this.ToString() =
+            match this with
+            | Chars -> "chars"
+            | Sentence -> "sentence"
+            | Word -> "word"
 
     and SearchTypesHighlighterFragmenterConverter() =
         inherit JsonConverter<SearchTypesHighlighterFragmenter>()
@@ -3251,6 +3335,11 @@ module Types =
         SearchTypesHighlighterFragmenter =
         | Simple
         | Span
+        with
+        override this.ToString() =
+            match this with
+            | Simple -> "simple"
+            | Span -> "span"
 
     and SearchTypesHighlighterOrderConverter() =
         inherit JsonConverter<SearchTypesHighlighterOrder>()
@@ -3269,6 +3358,10 @@ module Types =
     and [<JsonConverter(typeof<SearchTypesHighlighterOrderConverter>)>]
         SearchTypesHighlighterOrder =
         | Score
+        with
+        override this.ToString() =
+            match this with
+            | Score -> "score"
 
     and SearchTypesHighlighterTagsSchemaConverter() =
         inherit JsonConverter<SearchTypesHighlighterTagsSchema>()
@@ -3287,6 +3380,10 @@ module Types =
     and [<JsonConverter(typeof<SearchTypesHighlighterTagsSchemaConverter>)>]
         SearchTypesHighlighterTagsSchema =
         | Styled
+        with
+        override this.ToString() =
+            match this with
+            | Styled -> "styled"
 
     and SearchTypesHighlighterType = obj
 
@@ -3404,6 +3501,11 @@ module Types =
         SearchTypesHighlighterEncoder =
         | Default
         | Html
+        with
+        override this.ToString() =
+            match this with
+            | Default -> "default"
+            | Html -> "html"
 
     and SearchTypesHighlight = {
         [<JsonPropertyName("type")>]
@@ -3518,6 +3620,18 @@ module Types =
         | M
         | Cm
         | Mm
+        with
+        override this.ToString() =
+            match this with
+            | In -> "in"
+            | Ft -> "ft"
+            | Yd -> "yd"
+            | Mi -> "mi"
+            | Nmi -> "nmi"
+            | Km -> "km"
+            | M -> "m"
+            | Cm -> "cm"
+            | Mm -> "mm"
 
     and GeoDistanceTypeConverter() =
         inherit JsonConverter<GeoDistanceType>()
@@ -3539,6 +3653,11 @@ module Types =
         GeoDistanceType =
         | Arc
         | Plane
+        with
+        override this.ToString() =
+            match this with
+            | Arc -> "arc"
+            | Plane -> "plane"
 
     and NestedSortValue = {
         [<JsonPropertyName("filter")>]
@@ -3580,6 +3699,14 @@ module Types =
         | Sum
         | Avg
         | Median
+        with
+        override this.ToString() =
+            match this with
+            | Min -> "min"
+            | Max -> "max"
+            | Sum -> "sum"
+            | Avg -> "avg"
+            | Median -> "median"
 
     and SortOrderConverter() =
         inherit JsonConverter<SortOrder>()
@@ -3601,6 +3728,11 @@ module Types =
         SortOrder =
         | Asc
         | Desc
+        with
+        override this.ToString() =
+            match this with
+            | Asc -> "asc"
+            | Desc -> "desc"
 
     and GeoDistanceSort = {
         [<JsonPropertyName("mode")>]
@@ -3645,6 +3777,12 @@ module Types =
         | String
         | Number
         | Version
+        with
+        override this.ToString() =
+            match this with
+            | String -> "string"
+            | Number -> "number"
+            | Version -> "version"
 
     and ScriptSort = {
         [<JsonPropertyName("order")>]
@@ -3775,6 +3913,14 @@ module Types =
         | Min
         | Multiply
         | Total
+        with
+        override this.ToString() =
+            match this with
+            | Avg -> "avg"
+            | Max -> "max"
+            | Min -> "min"
+            | Multiply -> "multiply"
+            | Total -> "total"
 
     and SearchTypesRescoreQuery = {
         [<JsonPropertyName("rescore_query")>]
@@ -3864,6 +4010,10 @@ module Types =
     and [<JsonConverter(typeof<DiversifyRetrieverTypesConverter>)>]
         DiversifyRetrieverTypes =
         | Mmr
+        with
+        override this.ToString() =
+            match this with
+            | Mmr -> "mmr"
 
     and RetrieverBase = {
         [<JsonPropertyName("filter")>]
@@ -3947,6 +4097,12 @@ module Types =
         | None
         | Minmax
         | L2Norm
+        with
+        override this.ToString() =
+            match this with
+            | None -> "none"
+            | Minmax -> "minmax"
+            | L2Norm -> "l2_norm"
 
     and InnerRetriever = {
         [<JsonPropertyName("retriever")>]
@@ -4200,6 +4356,19 @@ module Types =
         | Keyword
         | Long
         | Lookup
+        with
+        override this.ToString() =
+            match this with
+            | Boolean -> "boolean"
+            | Composite -> "composite"
+            | Date -> "date"
+            | Double -> "double"
+            | GeoPoint -> "geo_point"
+            | GeoShape -> "geo_shape"
+            | Ip -> "ip"
+            | Keyword -> "keyword"
+            | Long -> "long"
+            | Lookup -> "lookup"
 
     and MappingCompositeSubField = {
         [<JsonPropertyName("type")>]
@@ -4376,6 +4545,15 @@ module Types =
         | First
         | Max
         | Min
+        with
+        override this.ToString() =
+            match this with
+            | Multiply -> "multiply"
+            | Sum -> "sum"
+            | Avg -> "avg"
+            | First -> "first"
+            | Max -> "max"
+            | Min -> "min"
 
     and QueryDslFunctionScoreQuery = {
         [<JsonPropertyName("boost")>]
@@ -4439,6 +4617,11 @@ module Types =
         QueryDslGeoExecution =
         | Memory
         | Indexed
+        with
+        override this.ToString() =
+            match this with
+            | Memory -> "memory"
+            | Indexed -> "indexed"
 
     and QueryDslGeoValidationMethodConverter() =
         inherit JsonConverter<QueryDslGeoValidationMethod>()
@@ -4463,6 +4646,12 @@ module Types =
         | Coerce
         | IgnoreMalformed
         | Strict
+        with
+        override this.ToString() =
+            match this with
+            | Coerce -> "coerce"
+            | IgnoreMalformed -> "ignore_malformed"
+            | Strict -> "strict"
 
     and QueryDslGeoBoundingBoxQuery = {
         [<JsonPropertyName("boost")>]
@@ -4556,6 +4745,14 @@ module Types =
         | Sum
         | Max
         | Min
+        with
+        override this.ToString() =
+            match this with
+            | None -> "none"
+            | Avg -> "avg"
+            | Sum -> "sum"
+            | Max -> "max"
+            | Min -> "min"
 
     and QueryDslHasChildQuery = {
         [<JsonPropertyName("boost")>]
@@ -4818,6 +5015,11 @@ module Types =
         QueryDslZeroTermsQuery =
         | All
         | None
+        with
+        override this.ToString() =
+            match this with
+            | All -> "all"
+            | None -> "none"
 
     and QueryDslMatchPhrasePrefixQuery = {
         [<JsonPropertyName("boost")>]
@@ -4907,6 +5109,12 @@ module Types =
         | Internal
         | External
         | ExternalGte
+        with
+        override this.ToString() =
+            match this with
+            | Internal -> "internal"
+            | External -> "external"
+            | ExternalGte -> "external_gte"
 
     and AnalysisStopWordLanguageConverter() =
         inherit JsonConverter<AnalysisStopWordLanguage>()
@@ -5033,6 +5241,46 @@ module Types =
         | Thai
         | Turkish
         | None
+        with
+        override this.ToString() =
+            match this with
+            | Arabic -> "_arabic_"
+            | Armenian -> "_armenian_"
+            | Basque -> "_basque_"
+            | Bengali -> "_bengali_"
+            | Brazilian -> "_brazilian_"
+            | Bulgarian -> "_bulgarian_"
+            | Catalan -> "_catalan_"
+            | Cjk -> "_cjk_"
+            | Czech -> "_czech_"
+            | Danish -> "_danish_"
+            | Dutch -> "_dutch_"
+            | English -> "_english_"
+            | Estonian -> "_estonian_"
+            | Finnish -> "_finnish_"
+            | French -> "_french_"
+            | Galician -> "_galician_"
+            | German -> "_german_"
+            | Greek -> "_greek_"
+            | Hindi -> "_hindi_"
+            | Hungarian -> "_hungarian_"
+            | Indonesian -> "_indonesian_"
+            | Irish -> "_irish_"
+            | Italian -> "_italian_"
+            | Latvian -> "_latvian_"
+            | Lithuanian -> "_lithuanian_"
+            | Norwegian -> "_norwegian_"
+            | Persian -> "_persian_"
+            | Portuguese -> "_portuguese_"
+            | Romanian -> "_romanian_"
+            | Russian -> "_russian_"
+            | Serbian -> "_serbian_"
+            | Sorani -> "_sorani_"
+            | Spanish -> "_spanish_"
+            | Swedish -> "_swedish_"
+            | Thai -> "_thai_"
+            | Turkish -> "_turkish_"
+            | None -> "_none_"
 
     /// <summary>
     /// Language value, such as _arabic_ or _thai_. Defaults to _english_.
@@ -5140,6 +5388,15 @@ module Types =
         | Phrase
         | PhrasePrefix
         | BoolPrefix
+        with
+        override this.ToString() =
+            match this with
+            | BestFields -> "best_fields"
+            | MostFields -> "most_fields"
+            | CrossFields -> "cross_fields"
+            | Phrase -> "phrase"
+            | PhrasePrefix -> "phrase_prefix"
+            | BoolPrefix -> "bool_prefix"
 
     and QueryDslMultiMatchQuery = {
         [<JsonPropertyName("boost")>]
@@ -5354,6 +5611,12 @@ module Types =
         | Within
         | Contains
         | Intersects
+        with
+        override this.ToString() =
+            match this with
+            | Within -> "within"
+            | Contains -> "contains"
+            | Intersects -> "intersects"
 
     and QueryDslRangeQueryBaseDateMath = {
         [<JsonPropertyName("boost")>]
@@ -5666,6 +5929,22 @@ module Types =
         | NEAR
         | SLOP
         | ALL
+        with
+        override this.ToString() =
+            match this with
+            | NONE -> "NONE"
+            | AND -> "AND"
+            | NOT -> "NOT"
+            | OR -> "OR"
+            | PREFIX -> "PREFIX"
+            | PHRASE -> "PHRASE"
+            | PRECEDENCE -> "PRECEDENCE"
+            | ESCAPE -> "ESCAPE"
+            | WHITESPACE -> "WHITESPACE"
+            | FUZZY -> "FUZZY"
+            | NEAR -> "NEAR"
+            | SLOP -> "SLOP"
+            | ALL -> "ALL"
 
     /// <summary>
     /// A set of flags that can be represented as a single enum value or a set of values that are encoded
@@ -6125,6 +6404,15 @@ module Types =
         | Day
         | Month
         | Year
+        with
+        override this.ToString() =
+            match this with
+            | Second -> "second"
+            | Minute -> "minute"
+            | Hour -> "hour"
+            | Day -> "day"
+            | Month -> "month"
+            | Year -> "year"
 
     and AggregationsAutoDateHistogramAggregation = {
         [<JsonPropertyName("buckets")>]
@@ -6215,6 +6503,12 @@ module Types =
         | Skip
         | InsertZeros
         | KeepValues
+        with
+        override this.ToString() =
+            match this with
+            | Skip -> "skip"
+            | InsertZeros -> "insert_zeros"
+            | KeepValues -> "keep_values"
 
     and AggregationsPipelineAggregationBase = {
         [<JsonPropertyName("buckets_path")>]
@@ -6254,6 +6548,11 @@ module Types =
         AggregationsTDigestExecutionHint =
         | Default
         | HighAccuracy
+        with
+        override this.ToString() =
+            match this with
+            | Default -> "default"
+            | HighAccuracy -> "high_accuracy"
 
     and AggregationsBoxplotAggregation = {
         [<JsonPropertyName("field")>]
@@ -6375,6 +6674,14 @@ module Types =
         | Direct
         | SaveMemoryHeuristic
         | SaveTimeHeuristic
+        with
+        override this.ToString() =
+            match this with
+            | GlobalOrdinals -> "global_ordinals"
+            | SegmentOrdinals -> "segment_ordinals"
+            | Direct -> "direct"
+            | SaveMemoryHeuristic -> "save_memory_heuristic"
+            | SaveTimeHeuristic -> "save_time_heuristic"
 
     and AggregationsCardinalityAggregation = {
         [<JsonPropertyName("field")>]
@@ -6485,6 +6792,12 @@ module Types =
         | First
         | Last
         | Default
+        with
+        override this.ToString() =
+            match this with
+            | First -> "first"
+            | Last -> "last"
+            | Default -> "default"
 
     and AggregationsValueTypeConverter() =
         inherit JsonConverter<AggregationsValueType>()
@@ -6530,6 +6843,19 @@ module Types =
         | Numeric
         | GeoPoint
         | Boolean
+        with
+        override this.ToString() =
+            match this with
+            | String -> "string"
+            | Long -> "long"
+            | Double -> "double"
+            | Number -> "number"
+            | Date -> "date"
+            | DateNanos -> "date_nanos"
+            | Ip -> "ip"
+            | Numeric -> "numeric"
+            | GeoPoint -> "geo_point"
+            | Boolean -> "boolean"
 
     and AggregationsCompositeAggregationBase = {
         [<JsonPropertyName("field")>]
@@ -6724,6 +7050,25 @@ module Types =
         | N1q
         | Year
         | N1y
+        with
+        override this.ToString() =
+            match this with
+            | Second -> "second"
+            | N1s -> "1s"
+            | Minute -> "minute"
+            | N1m -> "1m"
+            | Hour -> "hour"
+            | N1h -> "1h"
+            | Day -> "day"
+            | N1d -> "1d"
+            | Week -> "week"
+            | N1w -> "1w"
+            | Month -> "month"
+            | N1M -> "1M"
+            | Quarter -> "quarter"
+            | N1q -> "1q"
+            | Year -> "year"
+            | N1y -> "1y"
 
     /// <summary>
     /// A date range limit, represented either as a DateMath expression or a number expressed
@@ -6827,6 +7172,12 @@ module Types =
         | Map
         | GlobalOrdinals
         | BytesHash
+        with
+        override this.ToString() =
+            match this with
+            | Map -> "map"
+            | GlobalOrdinals -> "global_ordinals"
+            | BytesHash -> "bytes_hash"
 
     and AggregationsDiversifiedSamplerAggregation = {
         [<JsonPropertyName("execution_hint")>]
@@ -7298,6 +7649,11 @@ module Types =
         AggregationsHoltWintersType =
         | Add
         | Mult
+        with
+        override this.ToString() =
+            match this with
+            | Add -> "add"
+            | Mult -> "mult"
 
     and AggregationsHoltWintersModelSettings = {
         [<JsonPropertyName("alpha")>]
@@ -7405,6 +7761,14 @@ module Types =
         | HoltWinters
         | Linear
         | Simple
+        with
+        override this.ToString() =
+            match this with
+            | Ewma -> "ewma"
+            | Holt -> "holt"
+            | HoltWinters -> "holt_winters"
+            | Linear -> "linear"
+            | Simple -> "simple"
 
     and AggregationsMovingAverageAggregation = obj
 
@@ -7465,6 +7829,11 @@ module Types =
         AggregationsTermsAggregationCollectMode =
         | DepthFirst
         | BreadthFirst
+        with
+        override this.ToString() =
+            match this with
+            | DepthFirst -> "depth_first"
+            | BreadthFirst -> "breadth_first"
 
     and AggregationsMultiTermsAggregation = {
         [<JsonPropertyName("collect_mode")>]
@@ -7522,6 +7891,15 @@ module Types =
         | Mean
         | ZScore
         | Softmax
+        with
+        override this.ToString() =
+            match this with
+            | Rescale01 -> "rescale_0_1"
+            | Rescale0100 -> "rescale_0_100"
+            | PercentOfSum -> "percent_of_sum"
+            | Mean -> "mean"
+            | ZScore -> "z_score"
+            | Softmax -> "softmax"
 
     and AggregationsNormalizeAggregation = {
         [<JsonPropertyName("buckets_path")>]
@@ -7661,6 +8039,11 @@ module Types =
         AggregationsRateMode =
         | Sum
         | ValueCount
+        with
+        override this.ToString() =
+            match this with
+            | Sum -> "sum"
+            | ValueCount -> "value_count"
 
     and AggregationsRateAggregation = {
         [<JsonPropertyName("field")>]
@@ -7776,6 +8159,13 @@ module Types =
         | GlobalOrdinals
         | GlobalOrdinalsHash
         | GlobalOrdinalsLowCardinality
+        with
+        override this.ToString() =
+            match this with
+            | Map -> "map"
+            | GlobalOrdinals -> "global_ordinals"
+            | GlobalOrdinalsHash -> "global_ordinals_hash"
+            | GlobalOrdinalsLowCardinality -> "global_ordinals_low_cardinality"
 
     and AggregationsSignificantTermsAggregation = {
         [<JsonPropertyName("background_filter")>]
@@ -7923,6 +8313,12 @@ module Types =
         | Paired
         | Homoscedastic
         | Heteroscedastic
+        with
+        override this.ToString() =
+            match this with
+            | Paired -> "paired"
+            | Homoscedastic -> "homoscedastic"
+            | Heteroscedastic -> "heteroscedastic"
 
     and AggregationsTestPopulation = {
         [<JsonPropertyName("field")>]
@@ -8288,6 +8684,12 @@ module Types =
         | True
         | False
         | WaitFor
+        with
+        override this.ToString() =
+            match this with
+            | True -> "true"
+            | False -> "false"
+            | WaitFor -> "wait_for"
 
     and WaitForActiveShardOptionsConverter() =
         inherit JsonConverter<WaitForActiveShardOptions>()
@@ -8309,6 +8711,11 @@ module Types =
         WaitForActiveShardOptions =
         | All
         | IndexSetting
+        with
+        override this.ToString() =
+            match this with
+            | All -> "all"
+            | IndexSetting -> "index_setting"
 
     and WaitForActiveShards = obj
 
@@ -8490,6 +8897,13 @@ module Types =
         | Used
         | NotEnabled
         | Failed
+        with
+        override this.ToString() =
+            match this with
+            | NotApplicableOrUnknown -> "not_applicable_or_unknown"
+            | Used -> "used"
+            | NotEnabled -> "not_enabled"
+            | Failed -> "failed"
 
     and InlineGetDictUserDefined = {
         [<JsonPropertyName("fields")>]
@@ -8774,6 +9188,17 @@ module Types =
         | RED
         | Unknown
         | Unavailable
+        with
+        override this.ToString() =
+            match this with
+            | Green -> "green"
+            | GREEN -> "GREEN"
+            | Yellow -> "yellow"
+            | YELLOW -> "YELLOW"
+            | Red -> "red"
+            | RED -> "RED"
+            | Unknown -> "unknown"
+            | Unavailable -> "unavailable"
 
     and TypesCatIndicesColumn = obj
 
@@ -9152,6 +9577,13 @@ module Types =
         | Stopped
         | Starting
         | Stopping
+        with
+        override this.ToString() =
+            match this with
+            | Started -> "started"
+            | Stopped -> "stopped"
+            | Starting -> "starting"
+            | Stopping -> "stopping"
 
     and MlDatafeedsDatafeedsRecord = {
         [<JsonPropertyName("id")>]
@@ -9204,6 +9636,11 @@ module Types =
         TypesCategorizationStatus =
         | Ok
         | Warn
+        with
+        override this.ToString() =
+            match this with
+            | Ok -> "ok"
+            | Warn -> "warn"
 
     and TypesJobStateConverter() =
         inherit JsonConverter<TypesJobState>()
@@ -9234,6 +9671,14 @@ module Types =
         | Opened
         | Failed
         | Opening
+        with
+        override this.ToString() =
+            match this with
+            | Closing -> "closing"
+            | Closed -> "closed"
+            | Opened -> "opened"
+            | Failed -> "failed"
+            | Opening -> "opening"
 
     and TypesMemoryStatusConverter() =
         inherit JsonConverter<TypesMemoryStatus>()
@@ -9258,6 +9703,12 @@ module Types =
         | Ok
         | SoftLimit
         | HardLimit
+        with
+        override this.ToString() =
+            match this with
+            | Ok -> "ok"
+            | SoftLimit -> "soft_limit"
+            | HardLimit -> "hard_limit"
 
     and MlJobsJobsRecord = {
         [<JsonPropertyName("id")>]
@@ -10202,6 +10653,11 @@ module Types =
         TypesSegmentSortMissing =
         | Last
         | First
+        with
+        override this.ToString() =
+            match this with
+            | Last -> "_last"
+            | First -> "_first"
 
     and TypesSegmentSortModeConverter() =
         inherit JsonConverter<TypesSegmentSortMode>()
@@ -10229,6 +10685,13 @@ module Types =
         | MIN
         | Max
         | MAX
+        with
+        override this.ToString() =
+            match this with
+            | Min -> "min"
+            | MIN -> "MIN"
+            | Max -> "max"
+            | MAX -> "MAX"
 
     and TypesSegmentSortOrderConverter() =
         inherit JsonConverter<TypesSegmentSortOrder>()
@@ -10256,6 +10719,13 @@ module Types =
         | ASC
         | Desc
         | DESC
+        with
+        override this.ToString() =
+            match this with
+            | Asc -> "asc"
+            | ASC -> "ASC"
+            | Desc -> "desc"
+            | DESC -> "DESC"
 
     and TypesIndexSegmentSort = {
         [<JsonPropertyName("field")>]
@@ -10291,6 +10761,12 @@ module Types =
         | True
         | False
         | Checksum
+        with
+        override this.ToString() =
+            match this with
+            | True -> "true"
+            | False -> "false"
+            | Checksum -> "checksum"
 
     /// <summary>
     /// Some APIs will return values such as numbers also as a string (notably epoch timestamps). This behavior
@@ -10430,6 +10906,13 @@ module Types =
         | Primaries
         | NewPrimaries
         | None
+        with
+        override this.ToString() =
+            match this with
+            | All -> "all"
+            | Primaries -> "primaries"
+            | NewPrimaries -> "new_primaries"
+            | None -> "none"
 
     and TypesIndexRoutingAllocation = {
         [<JsonPropertyName("enable")>]
@@ -10468,6 +10951,13 @@ module Types =
         | Primaries
         | Replicas
         | None
+        with
+        override this.ToString() =
+            match this with
+            | All -> "all"
+            | Primaries -> "primaries"
+            | Replicas -> "replicas"
+            | None -> "none"
 
     and TypesIndexRoutingRebalance = {
         [<JsonPropertyName("enable")>]
@@ -10546,6 +11036,13 @@ module Types =
         | REQUEST
         | Async
         | ASYNC
+        with
+        override this.ToString() =
+            match this with
+            | Request -> "request"
+            | REQUEST -> "REQUEST"
+            | Async -> "async"
+            | ASYNC -> "ASYNC"
 
     and TypesTranslogRetention = {
         [<JsonPropertyName("size")>]
@@ -10839,6 +11336,11 @@ module Types =
         AnalysisIcuNormalizationMode =
         | Decompose
         | Compose
+        with
+        override this.ToString() =
+            match this with
+            | Decompose -> "decompose"
+            | Compose -> "compose"
 
     and AnalysisIcuNormalizationTypeConverter() =
         inherit JsonConverter<AnalysisIcuNormalizationType>()
@@ -10863,6 +11365,12 @@ module Types =
         | Nfc
         | Nfkc
         | NfkcCf
+        with
+        override this.ToString() =
+            match this with
+            | Nfc -> "nfc"
+            | Nfkc -> "nfkc"
+            | NfkcCf -> "nfkc_cf"
 
     and AnalysisIcuAnalyzer = {
         [<JsonPropertyName("type")>]
@@ -10936,6 +11444,12 @@ module Types =
         | Normal
         | Search
         | Extended
+        with
+        override this.ToString() =
+            match this with
+            | Normal -> "normal"
+            | Search -> "search"
+            | Extended -> "extended"
 
     and AnalysisKuromojiAnalyzer = {
         [<JsonPropertyName("type")>]
@@ -10991,6 +11505,12 @@ module Types =
         | Discard
         | None
         | Mixed
+        with
+        override this.ToString() =
+            match this with
+            | Discard -> "discard"
+            | None -> "none"
+            | Mixed -> "mixed"
 
     and AnalysisNoriAnalyzer = {
         [<JsonPropertyName("type")>]
@@ -11188,6 +11708,36 @@ module Types =
         | Spanish
         | Swedish
         | Turkish
+        with
+        override this.ToString() =
+            match this with
+            | Arabic -> "Arabic"
+            | Armenian -> "Armenian"
+            | Basque -> "Basque"
+            | Catalan -> "Catalan"
+            | Danish -> "Danish"
+            | Dutch -> "Dutch"
+            | English -> "English"
+            | Estonian -> "Estonian"
+            | Finnish -> "Finnish"
+            | French -> "French"
+            | German -> "German"
+            | German2 -> "German2"
+            | Hungarian -> "Hungarian"
+            | Italian -> "Italian"
+            | Irish -> "Irish"
+            | Kp -> "Kp"
+            | Lithuanian -> "Lithuanian"
+            | Lovins -> "Lovins"
+            | Norwegian -> "Norwegian"
+            | Porter -> "Porter"
+            | Portuguese -> "Portuguese"
+            | Romanian -> "Romanian"
+            | Russian -> "Russian"
+            | Serbian -> "Serbian"
+            | Spanish -> "Spanish"
+            | Swedish -> "Swedish"
+            | Turkish -> "Turkish"
 
     and AnalysisSnowballAnalyzer = {
         [<JsonPropertyName("type")>]
@@ -11443,6 +11993,58 @@ module Types =
         | Thai
         | Turkish
         | Whitespace
+        with
+        override this.ToString() =
+            match this with
+            | Arabic -> "arabic"
+            | Armenian -> "armenian"
+            | Basque -> "basque"
+            | Bengali -> "bengali"
+            | Brazilian -> "brazilian"
+            | Bulgarian -> "bulgarian"
+            | Catalan -> "catalan"
+            | Chinese -> "chinese"
+            | Cjk -> "cjk"
+            | Custom -> "custom"
+            | Czech -> "czech"
+            | Danish -> "danish"
+            | Dutch -> "dutch"
+            | English -> "english"
+            | Estonian -> "estonian"
+            | Fingerprint -> "fingerprint"
+            | Finnish -> "finnish"
+            | French -> "french"
+            | Galician -> "galician"
+            | German -> "german"
+            | Greek -> "greek"
+            | Hindi -> "hindi"
+            | Hungarian -> "hungarian"
+            | IcuAnalyzer -> "icu_analyzer"
+            | Indonesian -> "indonesian"
+            | Irish -> "irish"
+            | Italian -> "italian"
+            | Keyword -> "keyword"
+            | Kuromoji -> "kuromoji"
+            | Latvian -> "latvian"
+            | Lithuanian -> "lithuanian"
+            | Nori -> "nori"
+            | Norwegian -> "norwegian"
+            | Pattern -> "pattern"
+            | Persian -> "persian"
+            | Portuguese -> "portuguese"
+            | Romanian -> "romanian"
+            | Russian -> "russian"
+            | Serbian -> "serbian"
+            | Simple -> "simple"
+            | Snowball -> "snowball"
+            | Sorani -> "sorani"
+            | Spanish -> "spanish"
+            | Standard -> "standard"
+            | Stop -> "stop"
+            | Swedish -> "swedish"
+            | Thai -> "thai"
+            | Turkish -> "turkish"
+            | Whitespace -> "whitespace"
 
     and AnalysisAnalyzer = obj
 
@@ -11482,6 +12084,11 @@ module Types =
         AnalysisNormalizerType =
         | Custom
         | Lowercase
+        with
+        override this.ToString() =
+            match this with
+            | Custom -> "custom"
+            | Lowercase -> "lowercase"
 
     and AnalysisNormalizer = obj
 
@@ -11593,6 +12200,14 @@ module Types =
         | KuromojiIterationMark
         | Mapping
         | PatternReplace
+        with
+        override this.ToString() =
+            match this with
+            | HtmlStrip -> "html_strip"
+            | IcuNormalizer -> "icu_normalizer"
+            | KuromojiIterationMark -> "kuromoji_iteration_mark"
+            | Mapping -> "mapping"
+            | PatternReplace -> "pattern_replace"
 
     and AnalysisCharFilterDefinition = obj
 
@@ -11671,6 +12286,13 @@ module Types =
         | Hangul
         | Hiragana
         | Katakana
+        with
+        override this.ToString() =
+            match this with
+            | Han -> "han"
+            | Hangul -> "hangul"
+            | Hiragana -> "hiragana"
+            | Katakana -> "katakana"
 
     and AnalysisCjkBigramTokenFilter = {
         [<JsonPropertyName("version")>]
@@ -11760,6 +12382,12 @@ module Types =
         | Int
         | Float
         | Identity
+        with
+        override this.ToString() =
+            match this with
+            | Int -> "int"
+            | Float -> "float"
+            | Identity -> "identity"
 
     and AnalysisDelimitedPayloadTokenFilter = {
         [<JsonPropertyName("version")>]
@@ -11835,6 +12463,11 @@ module Types =
         AnalysisEdgeNGramSide =
         | Front
         | Back
+        with
+        override this.ToString() =
+            match this with
+            | Front -> "front"
+            | Back -> "back"
 
     and AnalysisEdgeNGramTokenFilter = {
         [<JsonPropertyName("version")>]
@@ -11970,6 +12603,11 @@ module Types =
         AnalysisIcuCollationAlternate =
         | Shifted
         | NonIgnorable
+        with
+        override this.ToString() =
+            match this with
+            | Shifted -> "shifted"
+            | NonIgnorable -> "non_ignorable"
 
     and AnalysisIcuCollationCaseFirstConverter() =
         inherit JsonConverter<AnalysisIcuCollationCaseFirst>()
@@ -11991,6 +12629,11 @@ module Types =
         AnalysisIcuCollationCaseFirst =
         | Lower
         | Upper
+        with
+        override this.ToString() =
+            match this with
+            | Lower -> "lower"
+            | Upper -> "upper"
 
     and AnalysisIcuCollationDecompositionConverter() =
         inherit JsonConverter<AnalysisIcuCollationDecomposition>()
@@ -12012,6 +12655,11 @@ module Types =
         AnalysisIcuCollationDecomposition =
         | No
         | Identical
+        with
+        override this.ToString() =
+            match this with
+            | No -> "no"
+            | Identical -> "identical"
 
     and AnalysisIcuCollationStrengthConverter() =
         inherit JsonConverter<AnalysisIcuCollationStrength>()
@@ -12042,6 +12690,14 @@ module Types =
         | Tertiary
         | Quaternary
         | Identical
+        with
+        override this.ToString() =
+            match this with
+            | Primary -> "primary"
+            | Secondary -> "secondary"
+            | Tertiary -> "tertiary"
+            | Quaternary -> "quaternary"
+            | Identical -> "identical"
 
     and AnalysisIcuCollationTokenFilter = {
         [<JsonPropertyName("version")>]
@@ -12112,6 +12768,11 @@ module Types =
         AnalysisIcuTransformDirection =
         | Forward
         | Reverse
+        with
+        override this.ToString() =
+            match this with
+            | Forward -> "forward"
+            | Reverse -> "reverse"
 
     and AnalysisIcuTransformTokenFilter = {
         [<JsonPropertyName("version")>]
@@ -12167,6 +12828,11 @@ module Types =
         AnalysisKeepTypesMode =
         | Include
         | Exclude
+        with
+        override this.ToString() =
+            match this with
+            | Include -> "include"
+            | Exclude -> "exclude"
 
     and AnalysisKeepTypesTokenFilter = {
         [<JsonPropertyName("version")>]
@@ -12286,6 +12952,12 @@ module Types =
         | Greek
         | Irish
         | Turkish
+        with
+        override this.ToString() =
+            match this with
+            | Greek -> "greek"
+            | Irish -> "irish"
+            | Turkish -> "turkish"
 
     and AnalysisLowercaseTokenFilter = {
         [<JsonPropertyName("version")>]
@@ -12434,6 +13106,21 @@ module Types =
         | Haasephonetik
         | BeiderMorse
         | DaitchMokotoff
+        with
+        override this.ToString() =
+            match this with
+            | Metaphone -> "metaphone"
+            | DoubleMetaphone -> "double_metaphone"
+            | Soundex -> "soundex"
+            | RefinedSoundex -> "refined_soundex"
+            | Caverphone1 -> "caverphone1"
+            | Caverphone2 -> "caverphone2"
+            | Cologne -> "cologne"
+            | Nysiis -> "nysiis"
+            | Koelnerphonetik -> "koelnerphonetik"
+            | Haasephonetik -> "haasephonetik"
+            | BeiderMorse -> "beider_morse"
+            | DaitchMokotoff -> "daitch_mokotoff"
 
     and AnalysisPhoneticLanguageConverter() =
         inherit JsonConverter<AnalysisPhoneticLanguage>()
@@ -12485,6 +13172,21 @@ module Types =
         | Romanian
         | Russian
         | Spanish
+        with
+        override this.ToString() =
+            match this with
+            | Any -> "any"
+            | Common -> "common"
+            | Cyrillic -> "cyrillic"
+            | English -> "english"
+            | French -> "french"
+            | German -> "german"
+            | Hebrew -> "hebrew"
+            | Hungarian -> "hungarian"
+            | Polish -> "polish"
+            | Romanian -> "romanian"
+            | Russian -> "russian"
+            | Spanish -> "spanish"
 
     and AnalysisPhoneticNameTypeConverter() =
         inherit JsonConverter<AnalysisPhoneticNameType>()
@@ -12509,6 +13211,12 @@ module Types =
         | Generic
         | Ashkenazi
         | Sephardic
+        with
+        override this.ToString() =
+            match this with
+            | Generic -> "generic"
+            | Ashkenazi -> "ashkenazi"
+            | Sephardic -> "sephardic"
 
     and AnalysisPhoneticRuleTypeConverter() =
         inherit JsonConverter<AnalysisPhoneticRuleType>()
@@ -12530,6 +13238,11 @@ module Types =
         AnalysisPhoneticRuleType =
         | Approx
         | Exact
+        with
+        override this.ToString() =
+            match this with
+            | Approx -> "approx"
+            | Exact -> "exact"
 
     and AnalysisPhoneticTokenFilter = {
         [<JsonPropertyName("version")>]
@@ -12698,6 +13411,11 @@ module Types =
         AnalysisSynonymFormat =
         | Solr
         | Wordnet
+        with
+        override this.ToString() =
+            match this with
+            | Solr -> "solr"
+            | Wordnet -> "wordnet"
 
     and AnalysisSynonymTokenFilterBase = {
         [<JsonPropertyName("version")>]
@@ -13135,6 +13853,83 @@ module Types =
         | Uppercase
         | WordDelimiter
         | WordDelimiterGraph
+        with
+        override this.ToString() =
+            match this with
+            | Apostrophe -> "apostrophe"
+            | ArabicNormalization -> "arabic_normalization"
+            | ArabicStem -> "arabic_stem"
+            | Asciifolding -> "asciifolding"
+            | BengaliNormalization -> "bengali_normalization"
+            | BrazilianStem -> "brazilian_stem"
+            | CjkBigram -> "cjk_bigram"
+            | CjkWidth -> "cjk_width"
+            | Classic -> "classic"
+            | CommonGrams -> "common_grams"
+            | Condition -> "condition"
+            | CzechStem -> "czech_stem"
+            | DecimalDigit -> "decimal_digit"
+            | DelimitedPayload -> "delimited_payload"
+            | DictionaryDecompounder -> "dictionary_decompounder"
+            | DutchStem -> "dutch_stem"
+            | EdgeNgram -> "edge_ngram"
+            | Elision -> "elision"
+            | Fingerprint -> "fingerprint"
+            | FlattenGraph -> "flatten_graph"
+            | FrenchStem -> "french_stem"
+            | GermanNormalization -> "german_normalization"
+            | GermanStem -> "german_stem"
+            | HindiNormalization -> "hindi_normalization"
+            | Hunspell -> "hunspell"
+            | HyphenationDecompounder -> "hyphenation_decompounder"
+            | IcuCollation -> "icu_collation"
+            | IcuFolding -> "icu_folding"
+            | IcuNormalizer -> "icu_normalizer"
+            | IcuTransform -> "icu_transform"
+            | IndicNormalization -> "indic_normalization"
+            | JaStop -> "ja_stop"
+            | Keep -> "keep"
+            | KeepTypes -> "keep_types"
+            | KeywordMarker -> "keyword_marker"
+            | KeywordRepeat -> "keyword_repeat"
+            | Kstem -> "kstem"
+            | KuromojiPartOfSpeech -> "kuromoji_part_of_speech"
+            | KuromojiReadingform -> "kuromoji_readingform"
+            | KuromojiStemmer -> "kuromoji_stemmer"
+            | Length -> "length"
+            | Limit -> "limit"
+            | Lowercase -> "lowercase"
+            | MinHash -> "min_hash"
+            | Multiplexer -> "multiplexer"
+            | Ngram -> "ngram"
+            | NoriPartOfSpeech -> "nori_part_of_speech"
+            | PatternCapture -> "pattern_capture"
+            | PatternReplace -> "pattern_replace"
+            | PersianNormalization -> "persian_normalization"
+            | PersianStem -> "persian_stem"
+            | Phonetic -> "phonetic"
+            | PorterStem -> "porter_stem"
+            | PredicateTokenFilter -> "predicate_token_filter"
+            | RemoveDuplicates -> "remove_duplicates"
+            | Reverse -> "reverse"
+            | RussianStem -> "russian_stem"
+            | ScandinavianFolding -> "scandinavian_folding"
+            | ScandinavianNormalization -> "scandinavian_normalization"
+            | SerbianNormalization -> "serbian_normalization"
+            | Shingle -> "shingle"
+            | Snowball -> "snowball"
+            | SoraniNormalization -> "sorani_normalization"
+            | Stemmer -> "stemmer"
+            | StemmerOverride -> "stemmer_override"
+            | Stop -> "stop"
+            | Synonym -> "synonym"
+            | SynonymGraph -> "synonym_graph"
+            | Trim -> "trim"
+            | Truncate -> "truncate"
+            | Unique -> "unique"
+            | Uppercase -> "uppercase"
+            | WordDelimiter -> "word_delimiter"
+            | WordDelimiterGraph -> "word_delimiter_graph"
 
     and AnalysisTokenFilterDefinition = obj
 
@@ -13195,6 +13990,15 @@ module Types =
         | Punctuation
         | Symbol
         | Custom
+        with
+        override this.ToString() =
+            match this with
+            | Letter -> "letter"
+            | Digit -> "digit"
+            | Whitespace -> "whitespace"
+            | Punctuation -> "punctuation"
+            | Symbol -> "symbol"
+            | Custom -> "custom"
 
     and AnalysisEdgeNGramTokenizer = {
         [<JsonPropertyName("version")>]
@@ -13444,6 +14248,27 @@ module Types =
         | Thai
         | UaxUrlEmail
         | Whitespace
+        with
+        override this.ToString() =
+            match this with
+            | CharGroup -> "char_group"
+            | Classic -> "classic"
+            | EdgeNgram -> "edge_ngram"
+            | IcuTokenizer -> "icu_tokenizer"
+            | Keyword -> "keyword"
+            | KuromojiTokenizer -> "kuromoji_tokenizer"
+            | Letter -> "letter"
+            | Lowercase -> "lowercase"
+            | Ngram -> "ngram"
+            | NoriTokenizer -> "nori_tokenizer"
+            | PathHierarchy -> "path_hierarchy"
+            | Pattern -> "pattern"
+            | SimplePattern -> "simple_pattern"
+            | SimplePatternSplit -> "simple_pattern_split"
+            | Standard -> "standard"
+            | Thai -> "thai"
+            | UaxUrlEmail -> "uax_url_email"
+            | Whitespace -> "whitespace"
 
     and AnalysisTokenizerDefinition = obj
 
@@ -13503,6 +14328,12 @@ module Types =
         | Standardized
         | Saturated
         | Chisquared
+        with
+        override this.ToString() =
+            match this with
+            | Standardized -> "standardized"
+            | Saturated -> "saturated"
+            | Chisquared -> "chisquared"
 
     and TypesSettingsSimilarityDfi = {
         [<JsonPropertyName("type")>]
@@ -13534,6 +14365,12 @@ module Types =
         | No
         | B
         | L
+        with
+        override this.ToString() =
+            match this with
+            | No -> "no"
+            | B -> "b"
+            | L -> "l"
 
     and DFRBasicModelConverter() =
         inherit JsonConverter<DFRBasicModel>()
@@ -13570,6 +14407,16 @@ module Types =
         | In
         | Ine
         | P
+        with
+        override this.ToString() =
+            match this with
+            | Be -> "be"
+            | D -> "d"
+            | G -> "g"
+            | If -> "if"
+            | In -> "in"
+            | Ine -> "ine"
+            | P -> "p"
 
     and NormalizationConverter() =
         inherit JsonConverter<Normalization>()
@@ -13600,6 +14447,14 @@ module Types =
         | H2
         | H3
         | Z
+        with
+        override this.ToString() =
+            match this with
+            | No -> "no"
+            | H1 -> "h1"
+            | H2 -> "h2"
+            | H3 -> "h3"
+            | Z -> "z"
 
     and TypesSettingsSimilarityDfr = {
         [<JsonPropertyName("type")>]
@@ -13632,6 +14487,11 @@ module Types =
         IBDistribution =
         | Ll
         | Spl
+        with
+        override this.ToString() =
+            match this with
+            | Ll -> "ll"
+            | Spl -> "spl"
 
     and IBLambdaConverter() =
         inherit JsonConverter<IBLambda>()
@@ -13653,6 +14513,11 @@ module Types =
         IBLambda =
         | Df
         | Ttf
+        with
+        override this.ToString() =
+            match this with
+            | Df -> "df"
+            | Ttf -> "ttf"
 
     and TypesSettingsSimilarityIb = {
         [<JsonPropertyName("type")>]
@@ -13726,6 +14591,17 @@ module Types =
         | LMJelinekMercer
         | Boolean
         | Scripted
+        with
+        override this.ToString() =
+            match this with
+            | BM25 -> "BM25"
+            | DFI -> "DFI"
+            | DFR -> "DFR"
+            | IB -> "IB"
+            | LMDirichlet -> "LMDirichlet"
+            | LMJelinekMercer -> "LMJelinekMercer"
+            | Boolean -> "boolean"
+            | Scripted -> "scripted"
 
     and TypesSettingsSimilarity = obj
 
@@ -13777,6 +14653,12 @@ module Types =
         | Disabled
         | Stored
         | Synthetic
+        with
+        override this.ToString() =
+            match this with
+            | Disabled -> "disabled"
+            | Stored -> "stored"
+            | Synthetic -> "synthetic"
 
     and TypesMappingLimitSettingsSourceFields = {
         [<JsonPropertyName("mode")>]
@@ -13894,6 +14776,11 @@ module Types =
         FollowInfoFollowerIndexStatus =
         | Active
         | Paused
+        with
+        override this.ToString() =
+            match this with
+            | Active -> "active"
+            | Paused -> "paused"
 
     and FollowInfoFollowerIndex = {
         [<JsonPropertyName("follower_index")>]
@@ -14086,6 +14973,17 @@ module Types =
         | AllocationDelayed
         | NoValidShardCopy
         | NoAttempt
+        with
+        override this.ToString() =
+            match this with
+            | Yes -> "yes"
+            | No -> "no"
+            | WorseBalance -> "worse_balance"
+            | Throttled -> "throttled"
+            | AwaitingInfo -> "awaiting_info"
+            | AllocationDelayed -> "allocation_delayed"
+            | NoValidShardCopy -> "no_valid_shard_copy"
+            | NoAttempt -> "no_attempt"
 
     and AllocationExplainAllocationExplainDecisionConverter() =
         inherit JsonConverter<AllocationExplainAllocationExplainDecision>()
@@ -14113,6 +15011,13 @@ module Types =
         | YES
         | THROTTLE
         | ALWAYS
+        with
+        override this.ToString() =
+            match this with
+            | NO -> "NO"
+            | YES -> "YES"
+            | THROTTLE -> "THROTTLE"
+            | ALWAYS -> "ALWAYS"
 
     and AllocationExplainAllocationDecision = {
         [<JsonPropertyName("decider")>]
@@ -14227,6 +15132,23 @@ module Types =
         | Transform
         | RemoteClusterClient
         | CoordinatingOnly
+        with
+        override this.ToString() =
+            match this with
+            | Master -> "master"
+            | Data -> "data"
+            | DataCold -> "data_cold"
+            | DataContent -> "data_content"
+            | DataFrozen -> "data_frozen"
+            | DataHot -> "data_hot"
+            | DataWarm -> "data_warm"
+            | Client -> "client"
+            | Ingest -> "ingest"
+            | Ml -> "ml"
+            | VotingOnly -> "voting_only"
+            | Transform -> "transform"
+            | RemoteClusterClient -> "remote_cluster_client"
+            | CoordinatingOnly -> "coordinating_only"
 
     and NodeRoles = NodeRole array
 
@@ -14342,6 +15264,24 @@ module Types =
         | PRIMARYFAILED
         | FORCEDEMPTYPRIMARY
         | MANUALALLOCATION
+        with
+        override this.ToString() =
+            match this with
+            | INDEXCREATED -> "INDEX_CREATED"
+            | CLUSTERRECOVERED -> "CLUSTER_RECOVERED"
+            | INDEXREOPENED -> "INDEX_REOPENED"
+            | DANGLINGINDEXIMPORTED -> "DANGLING_INDEX_IMPORTED"
+            | NEWINDEXRESTORED -> "NEW_INDEX_RESTORED"
+            | EXISTINGINDEXRESTORED -> "EXISTING_INDEX_RESTORED"
+            | REPLICAADDED -> "REPLICA_ADDED"
+            | ALLOCATIONFAILED -> "ALLOCATION_FAILED"
+            | NODELEFT -> "NODE_LEFT"
+            | REROUTECANCELLED -> "REROUTE_CANCELLED"
+            | REINITIALIZED -> "REINITIALIZED"
+            | REALLOCATEDREPLICA -> "REALLOCATED_REPLICA"
+            | PRIMARYFAILED -> "PRIMARY_FAILED"
+            | FORCEDEMPTYPRIMARY -> "FORCED_EMPTY_PRIMARY"
+            | MANUALALLOCATION -> "MANUAL_ALLOCATION"
 
     and AllocationExplainUnassignedInformation = {
         [<JsonPropertyName("at")>]
@@ -14414,6 +15354,13 @@ module Types =
         | Runtime
         | True
         | False
+        with
+        override this.ToString() =
+            match this with
+            | Strict -> "strict"
+            | Runtime -> "runtime"
+            | True -> "true"
+            | False -> "false"
 
     and MappingMatchTypeConverter() =
         inherit JsonConverter<MappingMatchType>()
@@ -14435,6 +15382,11 @@ module Types =
         MappingMatchType =
         | Simple
         | Regex
+        with
+        override this.ToString() =
+            match this with
+            | Simple -> "simple"
+            | Regex -> "regex"
 
     and MappingSyntheticSourceKeepEnumConverter() =
         inherit JsonConverter<MappingSyntheticSourceKeepEnum>()
@@ -14459,6 +15411,12 @@ module Types =
         | None
         | Arrays
         | All
+        with
+        override this.ToString() =
+            match this with
+            | None -> "none"
+            | Arrays -> "arrays"
+            | All -> "all"
 
     and MappingPropertyBase = {
         [<JsonPropertyName("meta")>]
@@ -14504,6 +15462,14 @@ module Types =
         | Summary
         | Histogram
         | Position
+        with
+        override this.ToString() =
+            match this with
+            | Gauge -> "gauge"
+            | Counter -> "counter"
+            | Summary -> "summary"
+            | Histogram -> "histogram"
+            | Position -> "position"
 
     and MappingAggregateMetricDoubleProperty = {
         [<JsonPropertyName("meta")>]
@@ -14613,6 +15579,11 @@ module Types =
         MappingOnScriptError =
         | Fail
         | Continue
+        with
+        override this.ToString() =
+            match this with
+            | Fail -> "fail"
+            | Continue -> "continue"
 
     and TypesNumericFielddataFormatConverter() =
         inherit JsonConverter<TypesNumericFielddataFormat>()
@@ -14634,6 +15605,11 @@ module Types =
         TypesNumericFielddataFormat =
         | Array
         | Disabled
+        with
+        override this.ToString() =
+            match this with
+            | Array -> "array"
+            | Disabled -> "disabled"
 
     and TypesNumericFielddata = {
         [<JsonPropertyName("format")>]
@@ -15009,6 +15985,13 @@ module Types =
         | Byte
         | Float
         | Bfloat16
+        with
+        override this.ToString() =
+            match this with
+            | Bit -> "bit"
+            | Byte -> "byte"
+            | Float -> "float"
+            | Bfloat16 -> "bfloat16"
 
     and MappingDenseVectorIndexOptionsRescoreVector = {
         [<JsonPropertyName("oversample")>]
@@ -15056,6 +16039,18 @@ module Types =
         | Int4Hnsw
         | Int8Flat
         | Int8Hnsw
+        with
+        override this.ToString() =
+            match this with
+            | BbqFlat -> "bbq_flat"
+            | BbqHnsw -> "bbq_hnsw"
+            | BbqDisk -> "bbq_disk"
+            | Flat -> "flat"
+            | Hnsw -> "hnsw"
+            | Int4Flat -> "int4_flat"
+            | Int4Hnsw -> "int4_hnsw"
+            | Int8Flat -> "int8_flat"
+            | Int8Hnsw -> "int8_hnsw"
 
     and MappingDenseVectorIndexOptions = {
         [<JsonPropertyName("confidence_interval")>]
@@ -15098,6 +16093,13 @@ module Types =
         | DotProduct
         | L2Norm
         | MaxInnerProduct
+        with
+        override this.ToString() =
+            match this with
+            | Cosine -> "cosine"
+            | DotProduct -> "dot_product"
+            | L2Norm -> "l2_norm"
+            | MaxInnerProduct -> "max_inner_product"
 
     and MappingDenseVectorProperty = {
         [<JsonPropertyName("meta")>]
@@ -15222,6 +16224,13 @@ module Types =
         | Freqs
         | Positions
         | Offsets
+        with
+        override this.ToString() =
+            match this with
+            | Docs -> "docs"
+            | Freqs -> "freqs"
+            | Positions -> "positions"
+            | Offsets -> "offsets"
 
     and MappingTermVectorOptionConverter() =
         inherit JsonConverter<MappingTermVectorOption>()
@@ -15258,6 +16267,16 @@ module Types =
         | WithPositionsOffsets
         | WithPositionsOffsetsPayloads
         | WithPositionsPayloads
+        with
+        override this.ToString() =
+            match this with
+            | No -> "no"
+            | Yes -> "yes"
+            | WithOffsets -> "with_offsets"
+            | WithPositions -> "with_positions"
+            | WithPositionsOffsets -> "with_positions_offsets"
+            | WithPositionsOffsetsPayloads -> "with_positions_offsets_payloads"
+            | WithPositionsPayloads -> "with_positions_payloads"
 
     and MappingTextIndexPrefixes = {
         [<JsonPropertyName("max_chars")>]
@@ -15501,6 +16520,12 @@ module Types =
         | Gauge
         | Counter
         | Position
+        with
+        override this.ToString() =
+            match this with
+            | Gauge -> "gauge"
+            | Counter -> "counter"
+            | Position -> "position"
 
     and MappingGeoPointProperty = {
         [<JsonPropertyName("meta")>]
@@ -15577,6 +16602,17 @@ module Types =
         | LEFT
         | Clockwise
         | Cw
+        with
+        override this.ToString() =
+            match this with
+            | Right -> "right"
+            | RIGHT -> "RIGHT"
+            | Counterclockwise -> "counterclockwise"
+            | Ccw -> "ccw"
+            | Left -> "left"
+            | LEFT -> "LEFT"
+            | Clockwise -> "clockwise"
+            | Cw -> "cw"
 
     and MappingGeoStrategyConverter() =
         inherit JsonConverter<MappingGeoStrategy>()
@@ -15598,6 +16634,11 @@ module Types =
         MappingGeoStrategy =
         | Recursive
         | Term
+        with
+        override this.ToString() =
+            match this with
+            | Recursive -> "recursive"
+            | Term -> "term"
 
     /// <summary>
     /// The `geo_shape` data type facilitates the indexing of and searching with arbitrary geo shapes such as rectangles
@@ -16115,6 +17156,11 @@ module Types =
         MappingSubobjects =
         | True
         | False
+        with
+        override this.ToString() =
+            match this with
+            | True -> "true"
+            | False -> "false"
 
     and MappingObjectProperty = {
         [<JsonPropertyName("meta")>]
@@ -16275,6 +17321,12 @@ module Types =
         | Byte
         | Float
         | Bit
+        with
+        override this.ToString() =
+            match this with
+            | Byte -> "byte"
+            | Float -> "float"
+            | Bit -> "bit"
 
     /// <summary>
     /// Technical preview
@@ -16881,6 +17933,61 @@ module Types =
         | UnsignedLong
         | Version
         | Wildcard
+        with
+        override this.ToString() =
+            match this with
+            | AggregateMetricDouble -> "aggregate_metric_double"
+            | Alias -> "alias"
+            | Binary -> "binary"
+            | Boolean -> "boolean"
+            | Byte -> "byte"
+            | Completion -> "completion"
+            | ConstantKeyword -> "constant_keyword"
+            | CountedKeyword -> "counted_keyword"
+            | Date -> "date"
+            | DateNanos -> "date_nanos"
+            | DateRange -> "date_range"
+            | DenseVector -> "dense_vector"
+            | Double -> "double"
+            | DoubleRange -> "double_range"
+            | ExponentialHistogram -> "exponential_histogram"
+            | Flattened -> "flattened"
+            | Float -> "float"
+            | FloatRange -> "float_range"
+            | GeoPoint -> "geo_point"
+            | GeoShape -> "geo_shape"
+            | HalfFloat -> "half_float"
+            | Histogram -> "histogram"
+            | IcuCollationKeyword -> "icu_collation_keyword"
+            | Integer -> "integer"
+            | IntegerRange -> "integer_range"
+            | Ip -> "ip"
+            | IpRange -> "ip_range"
+            | Join -> "join"
+            | Keyword -> "keyword"
+            | Long -> "long"
+            | LongRange -> "long_range"
+            | MatchOnlyText -> "match_only_text"
+            | Murmur3 -> "murmur3"
+            | Nested -> "nested"
+            | Object -> "object"
+            | Passthrough -> "passthrough"
+            | Percolator -> "percolator"
+            | Point -> "point"
+            | RankFeature -> "rank_feature"
+            | RankFeatures -> "rank_features"
+            | RankVectors -> "rank_vectors"
+            | ScaledFloat -> "scaled_float"
+            | SearchAsYouType -> "search_as_you_type"
+            | SemanticText -> "semantic_text"
+            | Shape -> "shape"
+            | Short -> "short"
+            | SparseVector -> "sparse_vector"
+            | Text -> "text"
+            | TokenCount -> "token_count"
+            | UnsignedLong -> "unsigned_long"
+            | Version -> "version"
+            | Wildcard -> "wildcard"
 
     and MappingProperty = obj
 
@@ -16948,6 +18055,12 @@ module Types =
         | Disabled
         | Stored
         | Synthetic
+        with
+        override this.ToString() =
+            match this with
+            | Disabled -> "disabled"
+            | Stored -> "stored"
+            | Synthetic -> "synthetic"
 
     and MappingSourceField = {
         [<JsonPropertyName("compress")>]
@@ -17043,6 +18156,11 @@ module Types =
         TypesSamplingMethod =
         | Aggregate
         | LastValue
+        with
+        override this.ToString() =
+            match this with
+            | Aggregate -> "aggregate"
+            | LastValue -> "last_value"
 
     /// <summary>
     /// Data stream lifecycle denotes that a data stream is managed by the data stream lifecycle and contains the configuration.
@@ -17193,6 +18311,12 @@ module Types =
         | Cluster
         | Indices
         | Shards
+        with
+        override this.ToString() =
+            match this with
+            | Cluster -> "cluster"
+            | Indices -> "indices"
+            | Shards -> "shards"
 
     and WaitForEventsConverter() =
         inherit JsonConverter<WaitForEvents>()
@@ -17226,6 +18350,15 @@ module Types =
         | Normal
         | Low
         | Languid
+        with
+        override this.ToString() =
+            match this with
+            | Immediate -> "immediate"
+            | Urgent -> "urgent"
+            | High -> "high"
+            | Normal -> "normal"
+            | Low -> "low"
+            | Languid -> "languid"
 
     and HealthWaitForNodes = obj
 
@@ -17339,6 +18472,14 @@ module Types =
         | Ingest
         | ThreadPool
         | Script
+        with
+        override this.ToString() =
+            match this with
+            | All -> "_all"
+            | Http -> "http"
+            | Ingest -> "ingest"
+            | ThreadPool -> "thread_pool"
+            | Script -> "script"
 
     and ClusterInfoTargets = obj
 
@@ -17644,6 +18785,11 @@ module Types =
         RemoteInfoClusterRemoteInfoType =
         | Proxy
         | Sniff
+        with
+        override this.ToString() =
+            match this with
+            | Proxy -> "proxy"
+            | Sniff -> "sniff"
 
     and RemoteInfoClusterRemoteInfo = obj
 
@@ -17778,6 +18924,18 @@ module Types =
         | RoutingTable
         | RoutingNodes
         | Customs
+        with
+        override this.ToString() =
+            match this with
+            | All -> "_all"
+            | Version -> "version"
+            | MasterNode -> "master_node"
+            | Blocks -> "blocks"
+            | Nodes -> "nodes"
+            | Metadata -> "metadata"
+            | RoutingTable -> "routing_table"
+            | RoutingNodes -> "routing_nodes"
+            | Customs -> "customs"
 
     and StateClusterStateMetrics = obj
 
@@ -18726,6 +19884,14 @@ module Types =
         | Deleted
         | NotFound
         | Noop
+        with
+        override this.ToString() =
+            match this with
+            | Created -> "created"
+            | Updated -> "updated"
+            | Deleted -> "deleted"
+            | NotFound -> "not_found"
+            | Noop -> "noop"
 
     /// <summary>
     /// A scalar value.
@@ -18758,6 +19924,13 @@ module Types =
         | Int
         | List
         | Bool
+        with
+        override this.ToString() =
+            match this with
+            | Str -> "str"
+            | Int -> "int"
+            | List -> "list"
+            | Bool -> "bool"
 
     and TypesDependency = {
         [<JsonPropertyName("field")>]
@@ -18795,6 +19968,14 @@ module Types =
         | Numeric
         | Toggle
         | Dropdown
+        with
+        override this.ToString() =
+            match this with
+            | Textbox -> "textbox"
+            | Textarea -> "textarea"
+            | Numeric -> "numeric"
+            | Toggle -> "toggle"
+            | Dropdown -> "dropdown"
 
     and TypesSelectOption = {
         [<JsonPropertyName("label")>]
@@ -18867,6 +20048,14 @@ module Types =
         | LessThan
         | ListType
         | Regex
+        with
+        override this.ToString() =
+            match this with
+            | GreaterThan -> "greater_than"
+            | IncludedIn -> "included_in"
+            | LessThan -> "less_than"
+            | ListType -> "list_type"
+            | Regex -> "regex"
 
     and TypesValidation = obj
 
@@ -18985,6 +20174,14 @@ module Types =
         | Configured
         | Connected
         | Error
+        with
+        override this.ToString() =
+            match this with
+            | Created -> "created"
+            | NeedsConfiguration -> "needs_configuration"
+            | Configured -> "configured"
+            | Connected -> "connected"
+            | Error -> "error"
 
     and TypesFilteringAdvancedSnippet = {
         [<JsonPropertyName("created_at")>]
@@ -19015,6 +20212,11 @@ module Types =
         TypesFilteringPolicy =
         | Exclude
         | Include
+        with
+        override this.ToString() =
+            match this with
+            | Exclude -> "exclude"
+            | Include -> "include"
 
     and TypesFilteringRuleRuleConverter() =
         inherit JsonConverter<TypesFilteringRuleRule>()
@@ -19051,6 +20253,16 @@ module Types =
         | StartsWith
         | Gt
         | Lt
+        with
+        override this.ToString() =
+            match this with
+            | Contains -> "contains"
+            | EndsWith -> "ends_with"
+            | Equals -> "equals"
+            | Regex -> "regex"
+            | StartsWith -> "starts_with"
+            | Gt -> ">"
+            | Lt -> "<"
 
     and TypesFilteringRule = {
         [<JsonPropertyName("created_at")>]
@@ -19101,6 +20313,12 @@ module Types =
         | Edited
         | Invalid
         | Valid
+        with
+        override this.ToString() =
+            match this with
+            | Edited -> "edited"
+            | Invalid -> "invalid"
+            | Valid -> "valid"
 
     and TypesFilteringRulesValidation = {
         [<JsonPropertyName("errors")>]
@@ -19189,6 +20407,16 @@ module Types =
         | InProgress
         | Pending
         | Suspended
+        with
+        override this.ToString() =
+            match this with
+            | Canceling -> "canceling"
+            | Canceled -> "canceled"
+            | Completed -> "completed"
+            | Error -> "error"
+            | InProgress -> "in_progress"
+            | Pending -> "pending"
+            | Suspended -> "suspended"
 
     and TypesConnector = {
         [<JsonPropertyName("api_key_id")>]
@@ -19294,6 +20522,11 @@ module Types =
         TypesSyncJobTriggerMethod =
         | OnDemand
         | Scheduled
+        with
+        override this.ToString() =
+            match this with
+            | OnDemand -> "on_demand"
+            | Scheduled -> "scheduled"
 
     and TypesSyncJobTypeConverter() =
         inherit JsonConverter<TypesSyncJobType>()
@@ -19318,6 +20551,12 @@ module Types =
         | Full
         | Incremental
         | AccessControl
+        with
+        override this.ToString() =
+            match this with
+            | Full -> "full"
+            | Incremental -> "incremental"
+            | AccessControl -> "access_control"
 
     and TypesConnectorSyncJob = {
         [<JsonPropertyName("cancelation_requested_at")>]
@@ -19410,6 +20649,11 @@ module Types =
         Conflicts =
         | Abort
         | Proceed
+        with
+        override this.ToString() =
+            match this with
+            | Abort -> "abort"
+            | Proceed -> "proceed"
 
     and SlicesCalculationConverter() =
         inherit JsonConverter<SlicesCalculation>()
@@ -19428,6 +20672,10 @@ module Types =
     and [<JsonConverter(typeof<SlicesCalculationConverter>)>]
         SlicesCalculation =
         | Auto
+        with
+        override this.ToString() =
+            match this with
+            | Auto -> "auto"
 
     /// <summary>
     /// Slices configuration used to parallelize a process.
@@ -19584,6 +20832,14 @@ module Types =
         | COMPLETE
         | FAILED
         | CANCELLED
+        with
+        override this.ToString() =
+            match this with
+            | SCHEDULED -> "SCHEDULED"
+            | RUNNING -> "RUNNING"
+            | COMPLETE -> "COMPLETE"
+            | FAILED -> "FAILED"
+            | CANCELLED -> "CANCELLED"
 
     and ExecutePolicyExecuteEnrichPolicyStatus = {
         [<JsonPropertyName("phase")>]
@@ -19717,6 +20973,11 @@ module Types =
         SearchResultPosition =
         | Tail
         | Head
+        with
+        override this.ToString() =
+            match this with
+            | Tail -> "tail"
+            | Head -> "head"
 
     and TypesEsqlFormatConverter() =
         inherit JsonConverter<TypesEsqlFormat>()
@@ -19756,6 +21017,17 @@ module Types =
         | Cbor
         | Smile
         | Arrow
+        with
+        override this.ToString() =
+            match this with
+            | Csv -> "csv"
+            | Json -> "json"
+            | Tsv -> "tsv"
+            | Txt -> "txt"
+            | Yaml -> "yaml"
+            | Cbor -> "cbor"
+            | Smile -> "smile"
+            | Arrow -> "arrow"
 
     and TypesTableValuesIntegerValue = obj
 
@@ -19805,6 +21077,14 @@ module Types =
         | Partial
         | Skipped
         | Failed
+        with
+        override this.ToString() =
+            match this with
+            | Running -> "running"
+            | Successful -> "successful"
+            | Partial -> "partial"
+            | Skipped -> "skipped"
+            | Failed -> "failed"
 
     and TypesEsqlShardFailure = {
         [<JsonPropertyName("shard")>]
@@ -20273,6 +21553,13 @@ module Types =
         | Ingest
         | Backup
         | DeploymentManagement
+        with
+        override this.ToString() =
+            match this with
+            | Search -> "search"
+            | Ingest -> "ingest"
+            | Backup -> "backup"
+            | DeploymentManagement -> "deployment_management"
 
     and HealthReportImpact = {
         [<JsonPropertyName("description")>]
@@ -20314,6 +21601,14 @@ module Types =
         | Red
         | Unknown
         | Unavailable
+        with
+        override this.ToString() =
+            match this with
+            | Green -> "green"
+            | Yellow -> "yellow"
+            | Red -> "red"
+            | Unknown -> "unknown"
+            | Unavailable -> "unavailable"
 
     and HealthReportBaseIndicator = {
         [<JsonPropertyName("status")>]
@@ -20435,6 +21730,12 @@ module Types =
         | RUNNING
         | STOPPING
         | STOPPED
+        with
+        override this.ToString() =
+            match this with
+            | RUNNING -> "RUNNING"
+            | STOPPING -> "STOPPING"
+            | STOPPED -> "STOPPED"
 
     and HealthReportIlmIndicatorDetails = {
         [<JsonPropertyName("ilm_status")>]
@@ -20872,6 +22173,11 @@ module Types =
         ExplainLifecycleLifecycleExplainType =
         | False
         | True
+        with
+        override this.ToString() =
+            match this with
+            | False -> "false"
+            | True -> "true"
 
     and ExplainLifecycleLifecycleExplain = obj
 
@@ -20926,6 +22232,11 @@ module Types =
         OpType =
         | Index
         | Create
+        with
+        override this.ToString() =
+            match this with
+            | Index -> "index"
+            | Create -> "create"
 
     and TypesIndicesBlockOptionsConverter() =
         inherit JsonConverter<TypesIndicesBlockOptions>()
@@ -20953,6 +22264,13 @@ module Types =
         | Read
         | ReadOnly
         | Write
+        with
+        override this.ToString() =
+            match this with
+            | Metadata -> "metadata"
+            | Read -> "read"
+            | ReadOnly -> "read_only"
+            | Write -> "write"
 
     and AddBlockAddIndicesBlockStatus = {
         [<JsonPropertyName("name")>]
@@ -21153,6 +22471,12 @@ module Types =
         | Aliases
         | Mappings
         | Settings
+        with
+        override this.ToString() =
+            match this with
+            | Aliases -> "aliases"
+            | Mappings -> "mappings"
+            | Settings -> "settings"
 
     and GetFeatures = obj
 
@@ -21218,6 +22542,13 @@ module Types =
         | TimeSeries
         | Logsdb
         | Lookup
+        with
+        override this.ToString() =
+            match this with
+            | Standard -> "standard"
+            | TimeSeries -> "time_series"
+            | Logsdb -> "logsdb"
+            | Lookup -> "lookup"
 
     and TypesManagedByConverter() =
         inherit JsonConverter<TypesManagedBy>()
@@ -21242,6 +22573,12 @@ module Types =
         | IndexLifecycleManagement
         | DataStreamLifecycle
         | Unmanaged
+        with
+        override this.ToString() =
+            match this with
+            | IndexLifecycleManagement -> "Index Lifecycle Management"
+            | DataStreamLifecycle -> "Data stream lifecycle"
+            | Unmanaged -> "Unmanaged"
 
     and TypesDataStreamIndex = {
         [<JsonPropertyName("index_name")>]
@@ -21465,6 +22802,10 @@ module Types =
     and [<JsonConverter(typeof<MigrateReindexModeEnumConverter>)>]
         MigrateReindexModeEnum =
         | Upgrade
+        with
+        override this.ToString() =
+            match this with
+            | Upgrade -> "upgrade"
 
     and MigrateReindexSourceIndex = {
         [<JsonPropertyName("index")>]
@@ -21900,6 +23241,13 @@ module Types =
         | Yellow
         | Red
         | All
+        with
+        override this.ToString() =
+            match this with
+            | Green -> "green"
+            | Yellow -> "yellow"
+            | Red -> "red"
+            | All -> "all"
 
     and ShardStoresShardStoreAllocationConverter() =
         inherit JsonConverter<ShardStoresShardStoreAllocation>()
@@ -21924,6 +23272,12 @@ module Types =
         | Primary
         | Replica
         | Unused
+        with
+        override this.ToString() =
+            match this with
+            | Primary -> "primary"
+            | Replica -> "replica"
+            | Unused -> "unused"
 
     and ShardStoresShardStoreException = {
         [<JsonPropertyName("reason")>]
@@ -22047,6 +23401,31 @@ module Types =
         | Mappings
         | DenseVector
         | SparseVector
+        with
+        override this.ToString() =
+            match this with
+            | All -> "_all"
+            | Store -> "store"
+            | Indexing -> "indexing"
+            | Get -> "get"
+            | Search -> "search"
+            | Merge -> "merge"
+            | Flush -> "flush"
+            | Refresh -> "refresh"
+            | QueryCache -> "query_cache"
+            | Fielddata -> "fielddata"
+            | Docs -> "docs"
+            | Warmer -> "warmer"
+            | Completion -> "completion"
+            | Segments -> "segments"
+            | Translog -> "translog"
+            | RequestCache -> "request_cache"
+            | Recovery -> "recovery"
+            | Bulk -> "bulk"
+            | ShardStats -> "shard_stats"
+            | Mappings -> "mappings"
+            | DenseVector -> "dense_vector"
+            | SparseVector -> "sparse_vector"
 
     and CommonStatsFlags = obj
 
@@ -22070,6 +23449,11 @@ module Types =
         StatsIndexMetadataState =
         | Open
         | Close
+        with
+        override this.ToString() =
+            match this with
+            | Open -> "open"
+            | Close -> "close"
 
     and BulkStats = {
         [<JsonPropertyName("total_operations")>]
@@ -22444,6 +23828,13 @@ module Types =
         | INITIALIZING
         | STARTED
         | RELOCATING
+        with
+        override this.ToString() =
+            match this with
+            | UNASSIGNED -> "UNASSIGNED"
+            | INITIALIZING -> "INITIALIZING"
+            | STARTED -> "STARTED"
+            | RELOCATING -> "RELOCATING"
 
     and StatsShardRouting = {
         [<JsonPropertyName("node")>]
@@ -22762,6 +24153,14 @@ module Types =
         | Rerank
         | Completion
         | ChatCompletion
+        with
+        override this.ToString() =
+            match this with
+            | SparseEmbedding -> "sparse_embedding"
+            | TextEmbedding -> "text_embedding"
+            | Rerank -> "rerank"
+            | Completion -> "completion"
+            | ChatCompletion -> "chat_completion"
 
     /// <summary>
     /// Acknowledged response. For dry_run, contains the list of pipelines which reference the inference endpoint
@@ -22916,6 +24315,11 @@ module Types =
         TypesAi21TaskType =
         | Completion
         | ChatCompletion
+        with
+        override this.ToString() =
+            match this with
+            | Completion -> "completion"
+            | ChatCompletion -> "chat_completion"
 
     and TypesAi21ServiceTypeConverter() =
         inherit JsonConverter<TypesAi21ServiceType>()
@@ -22934,6 +24338,10 @@ module Types =
     and [<JsonConverter(typeof<TypesAi21ServiceTypeConverter>)>]
         TypesAi21ServiceType =
         | Ai21
+        with
+        override this.ToString() =
+            match this with
+            | Ai21 -> "ai21"
 
     /// <summary>
     /// This setting helps to minimize the number of rate limit errors returned from the service.
@@ -22972,6 +24380,11 @@ module Types =
         TypesTaskTypeAi21 =
         | Completion
         | ChatCompletion
+        with
+        override this.ToString() =
+            match this with
+            | Completion -> "completion"
+            | ChatCompletion -> "chat_completion"
 
     and TypesInferenceEndpointInfoAi21 = {
         [<JsonPropertyName("chunking_settings")>]
@@ -23014,6 +24427,13 @@ module Types =
         | Rerank
         | SparseEmbedding
         | TextEmbedding
+        with
+        override this.ToString() =
+            match this with
+            | Completion -> "completion"
+            | Rerank -> "rerank"
+            | SparseEmbedding -> "sparse_embedding"
+            | TextEmbedding -> "text_embedding"
 
     and TypesAlibabaCloudServiceTypeConverter() =
         inherit JsonConverter<TypesAlibabaCloudServiceType>()
@@ -23032,6 +24452,10 @@ module Types =
     and [<JsonConverter(typeof<TypesAlibabaCloudServiceTypeConverter>)>]
         TypesAlibabaCloudServiceType =
         | AlibabacloudAiSearch
+        with
+        override this.ToString() =
+            match this with
+            | AlibabacloudAiSearch -> "alibabacloud_ai_search"
 
     and TypesAlibabaCloudServiceSettings = {
         [<JsonPropertyName("api_key")>]
@@ -23079,6 +24503,13 @@ module Types =
         | Rerank
         | Completion
         | SparseEmbedding
+        with
+        override this.ToString() =
+            match this with
+            | TextEmbedding -> "text_embedding"
+            | Rerank -> "rerank"
+            | Completion -> "completion"
+            | SparseEmbedding -> "sparse_embedding"
 
     and TypesInferenceEndpointInfoAlibabaCloudAI = {
         [<JsonPropertyName("chunking_settings")>]
@@ -23115,6 +24546,11 @@ module Types =
         TypesAmazonBedrockTaskType =
         | Completion
         | TextEmbedding
+        with
+        override this.ToString() =
+            match this with
+            | Completion -> "completion"
+            | TextEmbedding -> "text_embedding"
 
     and TypesAmazonBedrockServiceTypeConverter() =
         inherit JsonConverter<TypesAmazonBedrockServiceType>()
@@ -23133,6 +24569,10 @@ module Types =
     and [<JsonConverter(typeof<TypesAmazonBedrockServiceTypeConverter>)>]
         TypesAmazonBedrockServiceType =
         | Amazonbedrock
+        with
+        override this.ToString() =
+            match this with
+            | Amazonbedrock -> "amazonbedrock"
 
     and TypesAmazonBedrockServiceSettings = {
         [<JsonPropertyName("access_key")>]
@@ -23180,6 +24620,11 @@ module Types =
         TypesTaskTypeAmazonBedrock =
         | TextEmbedding
         | Completion
+        with
+        override this.ToString() =
+            match this with
+            | TextEmbedding -> "text_embedding"
+            | Completion -> "completion"
 
     and TypesInferenceEndpointInfoAmazonBedrock = {
         [<JsonPropertyName("chunking_settings")>]
@@ -23225,6 +24670,14 @@ module Types =
         | ChatCompletion
         | SparseEmbedding
         | Rerank
+        with
+        override this.ToString() =
+            match this with
+            | TextEmbedding -> "text_embedding"
+            | Completion -> "completion"
+            | ChatCompletion -> "chat_completion"
+            | SparseEmbedding -> "sparse_embedding"
+            | Rerank -> "rerank"
 
     and TypesAmazonSageMakerServiceTypeConverter() =
         inherit JsonConverter<TypesAmazonSageMakerServiceType>()
@@ -23243,6 +24696,10 @@ module Types =
     and [<JsonConverter(typeof<TypesAmazonSageMakerServiceTypeConverter>)>]
         TypesAmazonSageMakerServiceType =
         | AmazonSagemaker
+        with
+        override this.ToString() =
+            match this with
+            | AmazonSagemaker -> "amazon_sagemaker"
 
     and TypesAmazonSageMakerApiConverter() =
         inherit JsonConverter<TypesAmazonSageMakerApi>()
@@ -23264,6 +24721,11 @@ module Types =
         TypesAmazonSageMakerApi =
         | Openai
         | Elastic
+        with
+        override this.ToString() =
+            match this with
+            | Openai -> "openai"
+            | Elastic -> "elastic"
 
     and TypesAmazonSageMakerServiceSettings = {
         [<JsonPropertyName("access_key")>]
@@ -23333,6 +24795,10 @@ module Types =
     and [<JsonConverter(typeof<TypesAnthropicTaskTypeConverter>)>]
         TypesAnthropicTaskType =
         | Completion
+        with
+        override this.ToString() =
+            match this with
+            | Completion -> "completion"
 
     and TypesAnthropicServiceTypeConverter() =
         inherit JsonConverter<TypesAnthropicServiceType>()
@@ -23351,6 +24817,10 @@ module Types =
     and [<JsonConverter(typeof<TypesAnthropicServiceTypeConverter>)>]
         TypesAnthropicServiceType =
         | Anthropic
+        with
+        override this.ToString() =
+            match this with
+            | Anthropic -> "anthropic"
 
     and TypesAnthropicServiceSettings = {
         [<JsonPropertyName("api_key")>]
@@ -23389,6 +24859,10 @@ module Types =
     and [<JsonConverter(typeof<TypesTaskTypeAnthropicConverter>)>]
         TypesTaskTypeAnthropic =
         | Completion
+        with
+        override this.ToString() =
+            match this with
+            | Completion -> "completion"
 
     and TypesInferenceEndpointInfoAnthropic = {
         [<JsonPropertyName("chunking_settings")>]
@@ -23428,6 +24902,12 @@ module Types =
         | Completion
         | Rerank
         | TextEmbedding
+        with
+        override this.ToString() =
+            match this with
+            | Completion -> "completion"
+            | Rerank -> "rerank"
+            | TextEmbedding -> "text_embedding"
 
     and TypesAzureAiStudioServiceTypeConverter() =
         inherit JsonConverter<TypesAzureAiStudioServiceType>()
@@ -23446,6 +24926,10 @@ module Types =
     and [<JsonConverter(typeof<TypesAzureAiStudioServiceTypeConverter>)>]
         TypesAzureAiStudioServiceType =
         | Azureaistudio
+        with
+        override this.ToString() =
+            match this with
+            | Azureaistudio -> "azureaistudio"
 
     and TypesAzureAiStudioServiceSettings = {
         [<JsonPropertyName("api_key")>]
@@ -23500,6 +24984,12 @@ module Types =
         | TextEmbedding
         | Completion
         | Rerank
+        with
+        override this.ToString() =
+            match this with
+            | TextEmbedding -> "text_embedding"
+            | Completion -> "completion"
+            | Rerank -> "rerank"
 
     and TypesInferenceEndpointInfoAzureAIStudio = {
         [<JsonPropertyName("chunking_settings")>]
@@ -23539,6 +25029,12 @@ module Types =
         | Completion
         | ChatCompletion
         | TextEmbedding
+        with
+        override this.ToString() =
+            match this with
+            | Completion -> "completion"
+            | ChatCompletion -> "chat_completion"
+            | TextEmbedding -> "text_embedding"
 
     and TypesAzureOpenAIServiceTypeConverter() =
         inherit JsonConverter<TypesAzureOpenAIServiceType>()
@@ -23557,6 +25053,10 @@ module Types =
     and [<JsonConverter(typeof<TypesAzureOpenAIServiceTypeConverter>)>]
         TypesAzureOpenAIServiceType =
         | Azureopenai
+        with
+        override this.ToString() =
+            match this with
+            | Azureopenai -> "azureopenai"
 
     and TypesAzureOpenAIServiceSettings = {
         [<JsonPropertyName("api_key")>]
@@ -23601,6 +25101,12 @@ module Types =
         | TextEmbedding
         | Completion
         | ChatCompletion
+        with
+        override this.ToString() =
+            match this with
+            | TextEmbedding -> "text_embedding"
+            | Completion -> "completion"
+            | ChatCompletion -> "chat_completion"
 
     and TypesInferenceEndpointInfoAzureOpenAI = {
         [<JsonPropertyName("chunking_settings")>]
@@ -23640,6 +25146,12 @@ module Types =
         | Completion
         | Rerank
         | TextEmbedding
+        with
+        override this.ToString() =
+            match this with
+            | Completion -> "completion"
+            | Rerank -> "rerank"
+            | TextEmbedding -> "text_embedding"
 
     and TypesCohereServiceTypeConverter() =
         inherit JsonConverter<TypesCohereServiceType>()
@@ -23658,6 +25170,10 @@ module Types =
     and [<JsonConverter(typeof<TypesCohereServiceTypeConverter>)>]
         TypesCohereServiceType =
         | Cohere
+        with
+        override this.ToString() =
+            match this with
+            | Cohere -> "cohere"
 
     and TypesCohereEmbeddingTypeConverter() =
         inherit JsonConverter<TypesCohereEmbeddingType>()
@@ -23688,6 +25204,14 @@ module Types =
         | Byte
         | Float
         | Int8
+        with
+        override this.ToString() =
+            match this with
+            | Binary -> "binary"
+            | Bit -> "bit"
+            | Byte -> "byte"
+            | Float -> "float"
+            | Int8 -> "int8"
 
     and TypesCohereSimilarityTypeConverter() =
         inherit JsonConverter<TypesCohereSimilarityType>()
@@ -23712,6 +25236,12 @@ module Types =
         | Cosine
         | DotProduct
         | L2Norm
+        with
+        override this.ToString() =
+            match this with
+            | Cosine -> "cosine"
+            | DotProduct -> "dot_product"
+            | L2Norm -> "l2_norm"
 
     and TypesCohereServiceSettings = {
         [<JsonPropertyName("api_key")>]
@@ -23752,6 +25282,13 @@ module Types =
         | Clustering
         | Ingest
         | Search
+        with
+        override this.ToString() =
+            match this with
+            | Classification -> "classification"
+            | Clustering -> "clustering"
+            | Ingest -> "ingest"
+            | Search -> "search"
 
     and TypesCohereTruncateTypeConverter() =
         inherit JsonConverter<TypesCohereTruncateType>()
@@ -23776,6 +25313,12 @@ module Types =
         | END
         | NONE
         | START
+        with
+        override this.ToString() =
+            match this with
+            | END -> "END"
+            | NONE -> "NONE"
+            | START -> "START"
 
     and TypesCohereTaskSettings = {
         [<JsonPropertyName("input_type")>]
@@ -23811,6 +25354,12 @@ module Types =
         | TextEmbedding
         | Rerank
         | Completion
+        with
+        override this.ToString() =
+            match this with
+            | TextEmbedding -> "text_embedding"
+            | Rerank -> "rerank"
+            | Completion -> "completion"
 
     and TypesInferenceEndpointInfoCohere = {
         [<JsonPropertyName("chunking_settings")>]
@@ -23844,6 +25393,10 @@ module Types =
     and [<JsonConverter(typeof<TypesTaskTypeContextualAIConverter>)>]
         TypesTaskTypeContextualAI =
         | Rerank
+        with
+        override this.ToString() =
+            match this with
+            | Rerank -> "rerank"
 
     and TypesContextualAIServiceTypeConverter() =
         inherit JsonConverter<TypesContextualAIServiceType>()
@@ -23862,6 +25415,10 @@ module Types =
     and [<JsonConverter(typeof<TypesContextualAIServiceTypeConverter>)>]
         TypesContextualAIServiceType =
         | Contextualai
+        with
+        override this.ToString() =
+            match this with
+            | Contextualai -> "contextualai"
 
     and TypesContextualAIServiceSettings = {
         [<JsonPropertyName("api_key")>]
@@ -23922,6 +25479,13 @@ module Types =
         | SparseEmbedding
         | Rerank
         | Completion
+        with
+        override this.ToString() =
+            match this with
+            | TextEmbedding -> "text_embedding"
+            | SparseEmbedding -> "sparse_embedding"
+            | Rerank -> "rerank"
+            | Completion -> "completion"
 
     and TypesCustomServiceTypeConverter() =
         inherit JsonConverter<TypesCustomServiceType>()
@@ -23940,6 +25504,10 @@ module Types =
     and [<JsonConverter(typeof<TypesCustomServiceTypeConverter>)>]
         TypesCustomServiceType =
         | Custom
+        with
+        override this.ToString() =
+            match this with
+            | Custom -> "custom"
 
     and TypesCustomRequestParams = {
         [<JsonPropertyName("content")>]
@@ -24001,6 +25569,13 @@ module Types =
         | SparseEmbedding
         | Rerank
         | Completion
+        with
+        override this.ToString() =
+            match this with
+            | TextEmbedding -> "text_embedding"
+            | SparseEmbedding -> "sparse_embedding"
+            | Rerank -> "rerank"
+            | Completion -> "completion"
 
     and TypesInferenceEndpointInfoCustom = {
         [<JsonPropertyName("chunking_settings")>]
@@ -24037,6 +25612,11 @@ module Types =
         TypesTaskTypeDeepSeek =
         | Completion
         | ChatCompletion
+        with
+        override this.ToString() =
+            match this with
+            | Completion -> "completion"
+            | ChatCompletion -> "chat_completion"
 
     and TypesDeepSeekServiceTypeConverter() =
         inherit JsonConverter<TypesDeepSeekServiceType>()
@@ -24055,6 +25635,10 @@ module Types =
     and [<JsonConverter(typeof<TypesDeepSeekServiceTypeConverter>)>]
         TypesDeepSeekServiceType =
         | Deepseek
+        with
+        override this.ToString() =
+            match this with
+            | Deepseek -> "deepseek"
 
     and TypesDeepSeekServiceSettings = {
         [<JsonPropertyName("api_key")>]
@@ -24103,6 +25687,12 @@ module Types =
         | Rerank
         | SparseEmbedding
         | TextEmbedding
+        with
+        override this.ToString() =
+            match this with
+            | Rerank -> "rerank"
+            | SparseEmbedding -> "sparse_embedding"
+            | TextEmbedding -> "text_embedding"
 
     and TypesElasticsearchServiceTypeConverter() =
         inherit JsonConverter<TypesElasticsearchServiceType>()
@@ -24121,6 +25711,10 @@ module Types =
     and [<JsonConverter(typeof<TypesElasticsearchServiceTypeConverter>)>]
         TypesElasticsearchServiceType =
         | Elasticsearch
+        with
+        override this.ToString() =
+            match this with
+            | Elasticsearch -> "elasticsearch"
 
     and TypesAdaptiveAllocations = {
         [<JsonPropertyName("enabled")>]
@@ -24176,6 +25770,12 @@ module Types =
         | SparseEmbedding
         | TextEmbedding
         | Rerank
+        with
+        override this.ToString() =
+            match this with
+            | SparseEmbedding -> "sparse_embedding"
+            | TextEmbedding -> "text_embedding"
+            | Rerank -> "rerank"
 
     and TypesInferenceEndpointInfoElasticsearch = {
         [<JsonPropertyName("chunking_settings")>]
@@ -24209,6 +25809,10 @@ module Types =
     and [<JsonConverter(typeof<TypesElserTaskTypeConverter>)>]
         TypesElserTaskType =
         | SparseEmbedding
+        with
+        override this.ToString() =
+            match this with
+            | SparseEmbedding -> "sparse_embedding"
 
     and TypesElserServiceTypeConverter() =
         inherit JsonConverter<TypesElserServiceType>()
@@ -24227,6 +25831,10 @@ module Types =
     and [<JsonConverter(typeof<TypesElserServiceTypeConverter>)>]
         TypesElserServiceType =
         | Elser
+        with
+        override this.ToString() =
+            match this with
+            | Elser -> "elser"
 
     and TypesElserServiceSettings = {
         [<JsonPropertyName("adaptive_allocations")>]
@@ -24254,6 +25862,10 @@ module Types =
     and [<JsonConverter(typeof<TypesTaskTypeELSERConverter>)>]
         TypesTaskTypeELSER =
         | SparseEmbedding
+        with
+        override this.ToString() =
+            match this with
+            | SparseEmbedding -> "sparse_embedding"
 
     and TypesInferenceEndpointInfoELSER = {
         [<JsonPropertyName("chunking_settings")>]
@@ -24290,6 +25902,11 @@ module Types =
         TypesGoogleAiStudioTaskType =
         | Completion
         | TextEmbedding
+        with
+        override this.ToString() =
+            match this with
+            | Completion -> "completion"
+            | TextEmbedding -> "text_embedding"
 
     and TypesGoogleAiServiceTypeConverter() =
         inherit JsonConverter<TypesGoogleAiServiceType>()
@@ -24308,6 +25925,10 @@ module Types =
     and [<JsonConverter(typeof<TypesGoogleAiServiceTypeConverter>)>]
         TypesGoogleAiServiceType =
         | Googleaistudio
+        with
+        override this.ToString() =
+            match this with
+            | Googleaistudio -> "googleaistudio"
 
     and TypesGoogleAiStudioServiceSettings = {
         [<JsonPropertyName("api_key")>]
@@ -24338,6 +25959,11 @@ module Types =
         TypesTaskTypeGoogleAIStudio =
         | TextEmbedding
         | Completion
+        with
+        override this.ToString() =
+            match this with
+            | TextEmbedding -> "text_embedding"
+            | Completion -> "completion"
 
     and TypesInferenceEndpointInfoGoogleAIStudio = {
         [<JsonPropertyName("chunking_settings")>]
@@ -24380,6 +26006,13 @@ module Types =
         | TextEmbedding
         | Completion
         | ChatCompletion
+        with
+        override this.ToString() =
+            match this with
+            | Rerank -> "rerank"
+            | TextEmbedding -> "text_embedding"
+            | Completion -> "completion"
+            | ChatCompletion -> "chat_completion"
 
     and TypesGoogleVertexAIServiceTypeConverter() =
         inherit JsonConverter<TypesGoogleVertexAIServiceType>()
@@ -24398,6 +26031,10 @@ module Types =
     and [<JsonConverter(typeof<TypesGoogleVertexAIServiceTypeConverter>)>]
         TypesGoogleVertexAIServiceType =
         | Googlevertexai
+        with
+        override this.ToString() =
+            match this with
+            | Googlevertexai -> "googlevertexai"
 
     and TypesGoogleModelGardenProviderConverter() =
         inherit JsonConverter<TypesGoogleModelGardenProvider>()
@@ -24431,6 +26068,15 @@ module Types =
         | HuggingFace
         | Mistral
         | Ai21
+        with
+        override this.ToString() =
+            match this with
+            | Google -> "google"
+            | Anthropic -> "anthropic"
+            | Meta -> "meta"
+            | HuggingFace -> "hugging_face"
+            | Mistral -> "mistral"
+            | Ai21 -> "ai21"
 
     and TypesGoogleVertexAIServiceSettings = {
         [<JsonPropertyName("provider")>]
@@ -24495,6 +26141,13 @@ module Types =
         | Completion
         | TextEmbedding
         | Rerank
+        with
+        override this.ToString() =
+            match this with
+            | ChatCompletion -> "chat_completion"
+            | Completion -> "completion"
+            | TextEmbedding -> "text_embedding"
+            | Rerank -> "rerank"
 
     and TypesInferenceEndpointInfoGoogleVertexAI = {
         [<JsonPropertyName("chunking_settings")>]
@@ -24528,6 +26181,10 @@ module Types =
     and [<JsonConverter(typeof<TypesGroqTaskTypeConverter>)>]
         TypesGroqTaskType =
         | ChatCompletion
+        with
+        override this.ToString() =
+            match this with
+            | ChatCompletion -> "chat_completion"
 
     and TypesGroqServiceTypeConverter() =
         inherit JsonConverter<TypesGroqServiceType>()
@@ -24546,6 +26203,10 @@ module Types =
     and [<JsonConverter(typeof<TypesGroqServiceTypeConverter>)>]
         TypesGroqServiceType =
         | Groq
+        with
+        override this.ToString() =
+            match this with
+            | Groq -> "groq"
 
     and TypesGroqServiceSettings = {
         [<JsonPropertyName("model_id")>]
@@ -24573,6 +26234,10 @@ module Types =
     and [<JsonConverter(typeof<TypesTaskTypeGroqConverter>)>]
         TypesTaskTypeGroq =
         | ChatCompletion
+        with
+        override this.ToString() =
+            match this with
+            | ChatCompletion -> "chat_completion"
 
     and TypesInferenceEndpointInfoGroq = {
         [<JsonPropertyName("chunking_settings")>]
@@ -24615,6 +26280,13 @@ module Types =
         | Completion
         | Rerank
         | TextEmbedding
+        with
+        override this.ToString() =
+            match this with
+            | ChatCompletion -> "chat_completion"
+            | Completion -> "completion"
+            | Rerank -> "rerank"
+            | TextEmbedding -> "text_embedding"
 
     and TypesHuggingFaceServiceTypeConverter() =
         inherit JsonConverter<TypesHuggingFaceServiceType>()
@@ -24633,6 +26305,10 @@ module Types =
     and [<JsonConverter(typeof<TypesHuggingFaceServiceTypeConverter>)>]
         TypesHuggingFaceServiceType =
         | HuggingFace
+        with
+        override this.ToString() =
+            match this with
+            | HuggingFace -> "hugging_face"
 
     and TypesHuggingFaceServiceSettings = {
         [<JsonPropertyName("api_key")>]
@@ -24678,6 +26354,13 @@ module Types =
         | Completion
         | Rerank
         | TextEmbedding
+        with
+        override this.ToString() =
+            match this with
+            | ChatCompletion -> "chat_completion"
+            | Completion -> "completion"
+            | Rerank -> "rerank"
+            | TextEmbedding -> "text_embedding"
 
     and TypesInferenceEndpointInfoHuggingFace = {
         [<JsonPropertyName("chunking_settings")>]
@@ -24714,6 +26397,11 @@ module Types =
         TypesJinaAITaskType =
         | Rerank
         | TextEmbedding
+        with
+        override this.ToString() =
+            match this with
+            | Rerank -> "rerank"
+            | TextEmbedding -> "text_embedding"
 
     and TypesJinaAIServiceTypeConverter() =
         inherit JsonConverter<TypesJinaAIServiceType>()
@@ -24732,6 +26420,10 @@ module Types =
     and [<JsonConverter(typeof<TypesJinaAIServiceTypeConverter>)>]
         TypesJinaAIServiceType =
         | Jinaai
+        with
+        override this.ToString() =
+            match this with
+            | Jinaai -> "jinaai"
 
     and TypesJinaAISimilarityTypeConverter() =
         inherit JsonConverter<TypesJinaAISimilarityType>()
@@ -24756,6 +26448,12 @@ module Types =
         | Cosine
         | DotProduct
         | L2Norm
+        with
+        override this.ToString() =
+            match this with
+            | Cosine -> "cosine"
+            | DotProduct -> "dot_product"
+            | L2Norm -> "l2_norm"
 
     and TypesJinaAIServiceSettings = {
         [<JsonPropertyName("api_key")>]
@@ -24794,6 +26492,13 @@ module Types =
         | Clustering
         | Ingest
         | Search
+        with
+        override this.ToString() =
+            match this with
+            | Classification -> "classification"
+            | Clustering -> "clustering"
+            | Ingest -> "ingest"
+            | Search -> "search"
 
     and TypesJinaAITaskSettings = {
         [<JsonPropertyName("return_documents")>]
@@ -24824,6 +26529,11 @@ module Types =
         TypesTaskTypeJinaAi =
         | TextEmbedding
         | Rerank
+        with
+        override this.ToString() =
+            match this with
+            | TextEmbedding -> "text_embedding"
+            | Rerank -> "rerank"
 
     and TypesInferenceEndpointInfoJinaAi = {
         [<JsonPropertyName("chunking_settings")>]
@@ -24863,6 +26573,12 @@ module Types =
         | TextEmbedding
         | Completion
         | ChatCompletion
+        with
+        override this.ToString() =
+            match this with
+            | TextEmbedding -> "text_embedding"
+            | Completion -> "completion"
+            | ChatCompletion -> "chat_completion"
 
     and TypesLlamaServiceTypeConverter() =
         inherit JsonConverter<TypesLlamaServiceType>()
@@ -24881,6 +26597,10 @@ module Types =
     and [<JsonConverter(typeof<TypesLlamaServiceTypeConverter>)>]
         TypesLlamaServiceType =
         | Llama
+        with
+        override this.ToString() =
+            match this with
+            | Llama -> "llama"
 
     and TypesLlamaSimilarityTypeConverter() =
         inherit JsonConverter<TypesLlamaSimilarityType>()
@@ -24905,6 +26625,12 @@ module Types =
         | Cosine
         | DotProduct
         | L2Norm
+        with
+        override this.ToString() =
+            match this with
+            | Cosine -> "cosine"
+            | DotProduct -> "dot_product"
+            | L2Norm -> "l2_norm"
 
     and TypesLlamaServiceSettings = {
         [<JsonPropertyName("url")>]
@@ -24942,6 +26668,12 @@ module Types =
         | TextEmbedding
         | ChatCompletion
         | Completion
+        with
+        override this.ToString() =
+            match this with
+            | TextEmbedding -> "text_embedding"
+            | ChatCompletion -> "chat_completion"
+            | Completion -> "completion"
 
     and TypesInferenceEndpointInfoLlama = {
         [<JsonPropertyName("chunking_settings")>]
@@ -24981,6 +26713,12 @@ module Types =
         | TextEmbedding
         | Completion
         | ChatCompletion
+        with
+        override this.ToString() =
+            match this with
+            | TextEmbedding -> "text_embedding"
+            | Completion -> "completion"
+            | ChatCompletion -> "chat_completion"
 
     and TypesMistralServiceTypeConverter() =
         inherit JsonConverter<TypesMistralServiceType>()
@@ -24999,6 +26737,10 @@ module Types =
     and [<JsonConverter(typeof<TypesMistralServiceTypeConverter>)>]
         TypesMistralServiceType =
         | Mistral
+        with
+        override this.ToString() =
+            match this with
+            | Mistral -> "mistral"
 
     and TypesMistralServiceSettings = {
         [<JsonPropertyName("api_key")>]
@@ -25034,6 +26776,12 @@ module Types =
         | TextEmbedding
         | ChatCompletion
         | Completion
+        with
+        override this.ToString() =
+            match this with
+            | TextEmbedding -> "text_embedding"
+            | ChatCompletion -> "chat_completion"
+            | Completion -> "completion"
 
     and TypesInferenceEndpointInfoMistral = {
         [<JsonPropertyName("chunking_settings")>]
@@ -25076,6 +26824,13 @@ module Types =
         | Completion
         | Rerank
         | TextEmbedding
+        with
+        override this.ToString() =
+            match this with
+            | ChatCompletion -> "chat_completion"
+            | Completion -> "completion"
+            | Rerank -> "rerank"
+            | TextEmbedding -> "text_embedding"
 
     and TypesNvidiaServiceTypeConverter() =
         inherit JsonConverter<TypesNvidiaServiceType>()
@@ -25094,6 +26849,10 @@ module Types =
     and [<JsonConverter(typeof<TypesNvidiaServiceTypeConverter>)>]
         TypesNvidiaServiceType =
         | Nvidia
+        with
+        override this.ToString() =
+            match this with
+            | Nvidia -> "nvidia"
 
     and TypesNvidiaSimilarityTypeConverter() =
         inherit JsonConverter<TypesNvidiaSimilarityType>()
@@ -25118,6 +26877,12 @@ module Types =
         | Cosine
         | DotProduct
         | L2Norm
+        with
+        override this.ToString() =
+            match this with
+            | Cosine -> "cosine"
+            | DotProduct -> "dot_product"
+            | L2Norm -> "l2_norm"
 
     and TypesNvidiaServiceSettings = {
         [<JsonPropertyName("api_key")>]
@@ -25154,6 +26919,11 @@ module Types =
         TypesNvidiaInputType =
         | Ingest
         | Search
+        with
+        override this.ToString() =
+            match this with
+            | Ingest -> "ingest"
+            | Search -> "search"
 
     and TypesNvidiaTaskSettings = {
         [<JsonPropertyName("input_type")>]
@@ -25188,6 +26958,13 @@ module Types =
         | Completion
         | Rerank
         | TextEmbedding
+        with
+        override this.ToString() =
+            match this with
+            | ChatCompletion -> "chat_completion"
+            | Completion -> "completion"
+            | Rerank -> "rerank"
+            | TextEmbedding -> "text_embedding"
 
     and TypesInferenceEndpointInfoNvidia = {
         [<JsonPropertyName("chunking_settings")>]
@@ -25227,6 +27004,12 @@ module Types =
         | ChatCompletion
         | Completion
         | TextEmbedding
+        with
+        override this.ToString() =
+            match this with
+            | ChatCompletion -> "chat_completion"
+            | Completion -> "completion"
+            | TextEmbedding -> "text_embedding"
 
     and TypesOpenAIServiceTypeConverter() =
         inherit JsonConverter<TypesOpenAIServiceType>()
@@ -25245,6 +27028,10 @@ module Types =
     and [<JsonConverter(typeof<TypesOpenAIServiceTypeConverter>)>]
         TypesOpenAIServiceType =
         | Openai
+        with
+        override this.ToString() =
+            match this with
+            | Openai -> "openai"
 
     and TypesOpenAIServiceSettings = {
         [<JsonPropertyName("api_key")>]
@@ -25291,6 +27078,12 @@ module Types =
         | TextEmbedding
         | ChatCompletion
         | Completion
+        with
+        override this.ToString() =
+            match this with
+            | TextEmbedding -> "text_embedding"
+            | ChatCompletion -> "chat_completion"
+            | Completion -> "completion"
 
     and TypesInferenceEndpointInfoOpenAI = {
         [<JsonPropertyName("chunking_settings")>]
@@ -25333,6 +27126,13 @@ module Types =
         | Completion
         | ChatCompletion
         | Rerank
+        with
+        override this.ToString() =
+            match this with
+            | TextEmbedding -> "text_embedding"
+            | Completion -> "completion"
+            | ChatCompletion -> "chat_completion"
+            | Rerank -> "rerank"
 
     and TypesOpenShiftAiServiceTypeConverter() =
         inherit JsonConverter<TypesOpenShiftAiServiceType>()
@@ -25351,6 +27151,10 @@ module Types =
     and [<JsonConverter(typeof<TypesOpenShiftAiServiceTypeConverter>)>]
         TypesOpenShiftAiServiceType =
         | OpenshiftAi
+        with
+        override this.ToString() =
+            match this with
+            | OpenshiftAi -> "openshift_ai"
 
     and TypesOpenShiftAiSimilarityTypeConverter() =
         inherit JsonConverter<TypesOpenShiftAiSimilarityType>()
@@ -25375,6 +27179,12 @@ module Types =
         | Cosine
         | DotProduct
         | L2Norm
+        with
+        override this.ToString() =
+            match this with
+            | Cosine -> "cosine"
+            | DotProduct -> "dot_product"
+            | L2Norm -> "l2_norm"
 
     and TypesOpenShiftAiServiceSettings = {
         [<JsonPropertyName("api_key")>]
@@ -25424,6 +27234,13 @@ module Types =
         | ChatCompletion
         | Completion
         | Rerank
+        with
+        override this.ToString() =
+            match this with
+            | TextEmbedding -> "text_embedding"
+            | ChatCompletion -> "chat_completion"
+            | Completion -> "completion"
+            | Rerank -> "rerank"
 
     and TypesInferenceEndpointInfoOpenShiftAi = {
         [<JsonPropertyName("chunking_settings")>]
@@ -25460,6 +27277,11 @@ module Types =
         TypesVoyageAITaskType =
         | TextEmbedding
         | Rerank
+        with
+        override this.ToString() =
+            match this with
+            | TextEmbedding -> "text_embedding"
+            | Rerank -> "rerank"
 
     and TypesVoyageAIServiceTypeConverter() =
         inherit JsonConverter<TypesVoyageAIServiceType>()
@@ -25478,6 +27300,10 @@ module Types =
     and [<JsonConverter(typeof<TypesVoyageAIServiceTypeConverter>)>]
         TypesVoyageAIServiceType =
         | Voyageai
+        with
+        override this.ToString() =
+            match this with
+            | Voyageai -> "voyageai"
 
     and TypesVoyageAIServiceSettings = {
         [<JsonPropertyName("dimensions")>]
@@ -25521,6 +27347,11 @@ module Types =
         TypesTaskTypeVoyageAI =
         | TextEmbedding
         | Rerank
+        with
+        override this.ToString() =
+            match this with
+            | TextEmbedding -> "text_embedding"
+            | Rerank -> "rerank"
 
     and TypesInferenceEndpointInfoVoyageAI = {
         [<JsonPropertyName("chunking_settings")>]
@@ -25560,6 +27391,12 @@ module Types =
         | TextEmbedding
         | ChatCompletion
         | Completion
+        with
+        override this.ToString() =
+            match this with
+            | TextEmbedding -> "text_embedding"
+            | ChatCompletion -> "chat_completion"
+            | Completion -> "completion"
 
     and TypesWatsonxServiceTypeConverter() =
         inherit JsonConverter<TypesWatsonxServiceType>()
@@ -25578,6 +27415,10 @@ module Types =
     and [<JsonConverter(typeof<TypesWatsonxServiceTypeConverter>)>]
         TypesWatsonxServiceType =
         | Watsonxai
+        with
+        override this.ToString() =
+            match this with
+            | Watsonxai -> "watsonxai"
 
     and TypesWatsonxServiceSettings = {
         [<JsonPropertyName("api_key")>]
@@ -25617,6 +27458,12 @@ module Types =
         | TextEmbedding
         | ChatCompletion
         | Completion
+        with
+        override this.ToString() =
+            match this with
+            | TextEmbedding -> "text_embedding"
+            | ChatCompletion -> "chat_completion"
+            | Completion -> "completion"
 
     and TypesInferenceEndpointInfoWatsonx = {
         [<JsonPropertyName("chunking_settings")>]
@@ -25797,6 +27644,11 @@ module Types =
         TypesFieldAccessPattern =
         | Classic
         | Flexible
+        with
+        override this.ToString() =
+            match this with
+            | Classic -> "classic"
+            | Flexible -> "flexible"
 
     and TypesProcessorBase = {
         [<JsonPropertyName("description")>]
@@ -25900,6 +27752,11 @@ module Types =
         TypesShapeType =
         | GeoShape
         | Shape
+        with
+        override this.ToString() =
+            match this with
+            | GeoShape -> "geo_shape"
+            | Shape -> "shape"
 
     and TypesCircleProcessor = {
         [<JsonPropertyName("description")>]
@@ -25997,6 +27854,17 @@ module Types =
         | Ip
         | String
         | Auto
+        with
+        override this.ToString() =
+            match this with
+            | Integer -> "integer"
+            | Long -> "long"
+            | Double -> "double"
+            | Float -> "float"
+            | Boolean -> "boolean"
+            | Ip -> "ip"
+            | String -> "string"
+            | Auto -> "auto"
 
     and TypesConvertProcessor = {
         [<JsonPropertyName("description")>]
@@ -26177,6 +28045,13 @@ module Types =
         | Disjoint
         | Within
         | Contains
+        with
+        override this.ToString() =
+            match this with
+            | Intersects -> "intersects"
+            | Disjoint -> "disjoint"
+            | Within -> "within"
+            | Contains -> "contains"
 
     and TypesEnrichProcessor = {
         [<JsonPropertyName("description")>]
@@ -26249,6 +28124,14 @@ module Types =
         | SHA256
         | SHA512
         | MurmurHash3
+        with
+        override this.ToString() =
+            match this with
+            | MD5 -> "MD5"
+            | SHA1 -> "SHA_1"
+            | SHA256 -> "SHA_256"
+            | SHA512 -> "SHA_512"
+            | MurmurHash3 -> "MurmurHash3"
 
     and TypesFingerprintProcessor = {
         [<JsonPropertyName("description")>]
@@ -26312,6 +28195,11 @@ module Types =
         TypesGeoGridTargetFormat =
         | Geojson
         | Wkt
+        with
+        override this.ToString() =
+            match this with
+            | Geojson -> "geojson"
+            | Wkt -> "wkt"
 
     and TypesGeoGridTileTypeConverter() =
         inherit JsonConverter<TypesGeoGridTileType>()
@@ -26336,6 +28224,12 @@ module Types =
         | Geotile
         | Geohex
         | Geohash
+        with
+        override this.ToString() =
+            match this with
+            | Geotile -> "geotile"
+            | Geohex -> "geohex"
+            | Geohash -> "geohash"
 
     and TypesGeoGridProcessor = {
         [<JsonPropertyName("description")>]
@@ -26589,6 +28483,11 @@ module Types =
         TypesJsonProcessorConflictStrategy =
         | Replace
         | Merge
+        with
+        override this.ToString() =
+            match this with
+            | Replace -> "replace"
+            | Merge -> "merge"
 
     and TypesJsonProcessor = {
         [<JsonPropertyName("description")>]
@@ -27041,6 +28940,14 @@ module Types =
         | Device
         | Original
         | Version
+        with
+        override this.ToString() =
+            match this with
+            | Name -> "name"
+            | Os -> "os"
+            | Device -> "device"
+            | Original -> "original"
+            | Version -> "version"
 
     and TypesUserAgentProcessor = {
         [<JsonPropertyName("description")>]
@@ -27249,6 +29156,14 @@ module Types =
         | ErrorIgnored
         | Skipped
         | Dropped
+        with
+        override this.ToString() =
+            match this with
+            | Success -> "success"
+            | Error -> "error"
+            | ErrorIgnored -> "error_ignored"
+            | Skipped -> "skipped"
+            | Dropped -> "dropped"
 
     and TypesPipelineProcessorResult = {
         [<JsonPropertyName("doc")>]
@@ -27307,6 +29222,13 @@ module Types =
         | Valid
         | Invalid
         | Expired
+        with
+        override this.ToString() =
+            match this with
+            | Active -> "active"
+            | Valid -> "valid"
+            | Invalid -> "invalid"
+            | Expired -> "expired"
 
     and TypesLicenseTypeConverter() =
         inherit JsonConverter<TypesLicenseType>()
@@ -27349,6 +29271,18 @@ module Types =
         | Gold
         | Platinum
         | Enterprise
+        with
+        override this.ToString() =
+            match this with
+            | Missing -> "missing"
+            | Trial -> "trial"
+            | Basic -> "basic"
+            | Standard -> "standard"
+            | Dev -> "dev"
+            | Silver -> "silver"
+            | Gold -> "gold"
+            | Platinum -> "platinum"
+            | Enterprise -> "enterprise"
 
     and GetLicenseInformation = {
         [<JsonPropertyName("expiry_date")>]
@@ -27483,6 +29417,13 @@ module Types =
         | Info
         | Warning
         | Critical
+        with
+        override this.ToString() =
+            match this with
+            | None -> "none"
+            | Info -> "info"
+            | Warning -> "warning"
+            | Critical -> "critical"
 
     and DeprecationsDeprecation = {
         [<JsonPropertyName("details")>]
@@ -27534,6 +29475,13 @@ module Types =
         | MIGRATIONNEEDED
         | INPROGRESS
         | ERROR
+        with
+        override this.ToString() =
+            match this with
+            | NOMIGRATIONNEEDED -> "NO_MIGRATION_NEEDED"
+            | MIGRATIONNEEDED -> "MIGRATION_NEEDED"
+            | INPROGRESS -> "IN_PROGRESS"
+            | ERROR -> "ERROR"
 
     and GetFeatureUpgradeStatusMigrationFeature = {
         [<JsonPropertyName("feature_name")>]
@@ -27582,6 +29530,11 @@ module Types =
         TypesFilterType =
         | Include
         | Exclude
+        with
+        override this.ToString() =
+            match this with
+            | Include -> "include"
+            | Exclude -> "exclude"
 
     and TypesFilterRef = {
         [<JsonPropertyName("filter_id")>]
@@ -27610,6 +29563,11 @@ module Types =
         TypesRuleAction =
         | SkipResult
         | SkipModelUpdate
+        with
+        override this.ToString() =
+            match this with
+            | SkipResult -> "skip_result"
+            | SkipModelUpdate -> "skip_model_update"
 
     and TypesAppliesToConverter() =
         inherit JsonConverter<TypesAppliesTo>()
@@ -27637,6 +29595,13 @@ module Types =
         | Typical
         | DiffFromTypical
         | Time
+        with
+        override this.ToString() =
+            match this with
+            | Actual -> "actual"
+            | Typical -> "typical"
+            | DiffFromTypical -> "diff_from_typical"
+            | Time -> "time"
 
     and TypesConditionOperatorConverter() =
         inherit JsonConverter<TypesConditionOperator>()
@@ -27664,6 +29629,13 @@ module Types =
         | Gte
         | Lt
         | Lte
+        with
+        override this.ToString() =
+            match this with
+            | Gt -> "gt"
+            | Gte -> "gte"
+            | Lt -> "lt"
+            | Lte -> "lte"
 
     and TypesRuleCondition = {
         [<JsonPropertyName("applies_to")>]
@@ -27709,6 +29681,13 @@ module Types =
         | None
         | By
         | Over
+        with
+        override this.ToString() =
+            match this with
+            | All -> "all"
+            | None -> "none"
+            | By -> "by"
+            | Over -> "over"
 
     and TypesDetector = {
         [<JsonPropertyName("by_field_name")>]
@@ -28565,6 +30544,14 @@ module Types =
         | Starting
         | Stopping
         | Failed
+        with
+        override this.ToString() =
+            match this with
+            | Started -> "started"
+            | Stopped -> "stopped"
+            | Starting -> "starting"
+            | Stopping -> "stopping"
+            | Failed -> "failed"
 
     and TypesDataframeAnalytics = {
         [<JsonPropertyName("analysis_stats")>]
@@ -28707,6 +30694,12 @@ module Types =
         | Auto
         | Manual
         | Off
+        with
+        override this.ToString() =
+            match this with
+            | Auto -> "auto"
+            | Manual -> "manual"
+            | Off -> "off"
 
     and TypesChunkingConfig = {
         [<JsonPropertyName("mode")>]
@@ -29002,6 +30995,12 @@ module Types =
         | Delete
         | Reset
         | Revert
+        with
+        override this.ToString() =
+            match this with
+            | Delete -> "delete"
+            | Reset -> "reset"
+            | Revert -> "revert"
 
     and TypesJobBlocked = {
         [<JsonPropertyName("reason")>]
@@ -29185,6 +31184,13 @@ module Types =
         | SavingNewState
         | Stopped
         | Failed
+        with
+        override this.ToString() =
+            match this with
+            | LoadingOldState -> "loading_old_state"
+            | SavingNewState -> "saving_new_state"
+            | Stopped -> "stopped"
+            | Failed -> "failed"
 
     and TypesModelSnapshotUpgrade = {
         [<JsonPropertyName("job_id")>]
@@ -29396,6 +31402,14 @@ module Types =
         | Hyperparameters
         | TotalFeatureImportance
         | DefinitionStatus
+        with
+        override this.ToString() =
+            match this with
+            | Definition -> "definition"
+            | FeatureImportanceBaseline -> "feature_importance_baseline"
+            | Hyperparameters -> "hyperparameters"
+            | TotalFeatureImportance -> "total_feature_importance"
+            | DefinitionStatus -> "definition_status"
 
     and TypesTokenizationTruncateConverter() =
         inherit JsonConverter<TypesTokenizationTruncate>()
@@ -29420,6 +31434,12 @@ module Types =
         | First
         | Second
         | None
+        with
+        override this.ToString() =
+            match this with
+            | First -> "first"
+            | Second -> "second"
+            | None -> "none"
 
     and TypesCommonTokenizationConfig = {
         [<JsonPropertyName("do_lower_case")>]
@@ -29798,6 +31818,12 @@ module Types =
         | TreeEnsemble
         | LangIdent
         | Pytorch
+        with
+        override this.ToString() =
+            match this with
+            | TreeEnsemble -> "tree_ensemble"
+            | LangIdent -> "lang_ident"
+            | Pytorch -> "pytorch"
 
     and TypesTrainedModelConfig = {
         [<JsonPropertyName("model_id")>]
@@ -29879,6 +31905,13 @@ module Types =
         | Starting
         | Stopping
         | Failed
+        with
+        override this.ToString() =
+            match this with
+            | Started -> "started"
+            | Starting -> "starting"
+            | Stopping -> "stopping"
+            | Failed -> "failed"
 
     and TypesDeploymentAllocationStateConverter() =
         inherit JsonConverter<TypesDeploymentAllocationState>()
@@ -29903,6 +31936,12 @@ module Types =
         | Started
         | Starting
         | FullyAllocated
+        with
+        override this.ToString() =
+            match this with
+            | Started -> "started"
+            | Starting -> "starting"
+            | FullyAllocated -> "fully_allocated"
 
     and TypesTrainedModelDeploymentAllocationStatus = {
         [<JsonPropertyName("allocation_count")>]
@@ -29942,6 +31981,14 @@ module Types =
         | Starting
         | Stopped
         | Stopping
+        with
+        override this.ToString() =
+            match this with
+            | Failed -> "failed"
+            | Started -> "started"
+            | Starting -> "starting"
+            | Stopped -> "stopped"
+            | Stopping -> "stopping"
 
     and TypesTrainedModelAssignmentRoutingStateAndReason = {
         [<JsonPropertyName("reason")>]
@@ -30009,6 +32056,11 @@ module Types =
         TypesTrainingPriority =
         | Normal
         | Low
+        with
+        override this.ToString() =
+            match this with
+            | Normal -> "normal"
+            | Low -> "low"
 
     and TypesTrainedModelDeploymentStats = {
         [<JsonPropertyName("adaptive_allocations")>]
@@ -30831,6 +32883,14 @@ module Types =
         | Block
         | Gpu
         | Mem
+        with
+        override this.ToString() =
+            match this with
+            | Cpu -> "cpu"
+            | Wait -> "wait"
+            | Block -> "block"
+            | Gpu -> "gpu"
+            | Mem -> "mem"
 
     and InfoNodesInfoMetricConverter() =
         inherit JsonConverter<InfoNodesInfoMetric>()
@@ -30888,6 +32948,23 @@ module Types =
         | Ingest
         | Aggregations
         | Indices
+        with
+        override this.ToString() =
+            match this with
+            | All -> "_all"
+            | None -> "_none"
+            | Settings -> "settings"
+            | Os -> "os"
+            | Process -> "process"
+            | Jvm -> "jvm"
+            | ThreadPool -> "thread_pool"
+            | Transport -> "transport"
+            | Http -> "http"
+            | RemoteClusterServer -> "remote_cluster_server"
+            | Plugins -> "plugins"
+            | Ingest -> "ingest"
+            | Aggregations -> "aggregations"
+            | Indices -> "indices"
 
     and InfoNodesInfoMetrics = obj
 
@@ -31537,6 +33614,28 @@ module Types =
         | IndexingPressure
         | Repositories
         | Allocations
+        with
+        override this.ToString() =
+            match this with
+            | All -> "_all"
+            | None -> "_none"
+            | Indices -> "indices"
+            | Os -> "os"
+            | Process -> "process"
+            | Jvm -> "jvm"
+            | ThreadPool -> "thread_pool"
+            | Fs -> "fs"
+            | Transport -> "transport"
+            | Http -> "http"
+            | Breaker -> "breaker"
+            | Script -> "script"
+            | Discovery -> "discovery"
+            | Ingest -> "ingest"
+            | AdaptiveSelection -> "adaptive_selection"
+            | ScriptCache -> "script_cache"
+            | IndexingPressure -> "indexing_pressure"
+            | Repositories -> "repositories"
+            | Allocations -> "allocations"
 
     and StatsNodeStatsMetrics = obj
 
@@ -31563,6 +33662,12 @@ module Types =
         | Node
         | Indices
         | Shards
+        with
+        override this.ToString() =
+            match this with
+            | Node -> "node"
+            | Indices -> "indices"
+            | Shards -> "shards"
 
     and TypesAdaptiveSelection = {
         [<JsonPropertyName("avg_queue_size")>]
@@ -32133,6 +34238,12 @@ module Types =
         | All
         | RestActions
         | Aggregations
+        with
+        override this.ToString() =
+            match this with
+            | All -> "_all"
+            | RestActions -> "rest_actions"
+            | Aggregations -> "aggregations"
 
     and UsageNodesUsageMetrics = obj
 
@@ -32213,6 +34324,21 @@ module Types =
         | Gt
         | Gte
         | Always
+        with
+        override this.ToString() =
+            match this with
+            | Global -> "global"
+            | Exact -> "exact"
+            | ExactFuzzy -> "exact_fuzzy"
+            | Fuzzy -> "fuzzy"
+            | Prefix -> "prefix"
+            | Suffix -> "suffix"
+            | Contains -> "contains"
+            | Lt -> "lt"
+            | Lte -> "lte"
+            | Gt -> "gt"
+            | Gte -> "gte"
+            | Always -> "always"
 
     and TypesQueryRuleCriteria = {
         [<JsonPropertyName("type")>]
@@ -32243,6 +34369,11 @@ module Types =
         TypesQueryRuleType =
         | Pinned
         | Exclude
+        with
+        override this.ToString() =
+            match this with
+            | Pinned -> "pinned"
+            | Exclude -> "exclude"
 
     and TypesQueryRule = {
         [<JsonPropertyName("rule_id")>]
@@ -32586,6 +34717,14 @@ module Types =
         | Sum
         | Avg
         | ValueCount
+        with
+        override this.ToString() =
+            match this with
+            | Min -> "min"
+            | Max -> "max"
+            | Sum -> "sum"
+            | Avg -> "avg"
+            | ValueCount -> "value_count"
 
     and TypesFieldMetric = {
         [<JsonPropertyName("field")>]
@@ -32707,6 +34846,14 @@ module Types =
         | Stopping
         | Stopped
         | Aborting
+        with
+        override this.ToString() =
+            match this with
+            | Started -> "started"
+            | Indexing -> "indexing"
+            | Stopping -> "stopping"
+            | Stopped -> "stopped"
+            | Aborting -> "aborting"
 
     and GetJobsRollupJobStatus = {
         [<JsonPropertyName("current_position")>]
@@ -32823,6 +34970,20 @@ module Types =
         | KeywordField
         | LongField
         | CompositeField
+        with
+        override this.ToString() =
+            match this with
+            | PainlessTest -> "painless_test"
+            | Filter -> "filter"
+            | Score -> "score"
+            | BooleanField -> "boolean_field"
+            | DateField -> "date_field"
+            | DoubleField -> "double_field"
+            | GeoPointField -> "geo_point_field"
+            | IpField -> "ip_field"
+            | KeywordField -> "keyword_field"
+            | LongField -> "long_field"
+            | CompositeField -> "composite_field"
 
     and ScriptsPainlessExecutePainlessContextSetup = {
         [<JsonPropertyName("document")>]
@@ -32893,6 +35054,12 @@ module Types =
         | PageView
         | Search
         | SearchClick
+        with
+        override this.ToString() =
+            match this with
+            | PageView -> "page_view"
+            | Search -> "search"
+            | SearchClick -> "search_click"
 
     and PutBehavioralAnalyticsAnalyticsAcknowledgeResponseBase = {
         [<JsonPropertyName("acknowledged")>]
@@ -32925,6 +35092,11 @@ module Types =
         SearchMvtTypesGridAggregationType =
         | Geotile
         | Geohex
+        with
+        override this.ToString() =
+            match this with
+            | Geotile -> "geotile"
+            | Geohex -> "geohex"
 
     and SearchMvtTypesGridTypeConverter() =
         inherit JsonConverter<SearchMvtTypesGridType>()
@@ -32949,6 +35121,12 @@ module Types =
         | Grid
         | Point
         | Centroid
+        with
+        override this.ToString() =
+            match this with
+            | Grid -> "grid"
+            | Point -> "point"
+            | Centroid -> "centroid"
 
     and MapboxVectorTiles = obj
 
@@ -33064,6 +35242,12 @@ module Types =
         | Cluster
         | Indices
         | Shards
+        with
+        override this.ToString() =
+            match this with
+            | Cluster -> "cluster"
+            | Indices -> "indices"
+            | Shards -> "shards"
 
     and TypesGrantTypeConverter() =
         inherit JsonConverter<TypesGrantType>()
@@ -33085,6 +35269,11 @@ module Types =
         TypesGrantType =
         | Password
         | AccessToken
+        with
+        override this.ToString() =
+            match this with
+            | Password -> "password"
+            | AccessToken -> "access_token"
 
     and TypesUserProfileId = string
 
@@ -33160,6 +35349,11 @@ module Types =
         TypesApiKeyManagedBy =
         | Cloud
         | Elasticsearch
+        with
+        override this.ToString() =
+            match this with
+            | Cloud -> "cloud"
+            | Elasticsearch -> "elasticsearch"
 
     and AuthenticateAuthenticateApiKey = {
         [<JsonPropertyName("id")>]
@@ -33287,6 +35481,11 @@ module Types =
         TypesRemoteClusterPrivilege =
         | MonitorEnrich
         | MonitorStats
+        with
+        override this.ToString() =
+            match this with
+            | MonitorEnrich -> "monitor_enrich"
+            | MonitorStats -> "monitor_stats"
 
     /// <summary>
     /// The subset of cluster level privileges that can be defined for remote clusters.
@@ -33455,6 +35654,11 @@ module Types =
         TypesApiKeyType =
         | Rest
         | CrossCluster
+        with
+        override this.ToString() =
+            match this with
+            | Rest -> "rest"
+            | CrossCluster -> "cross_cluster"
 
     and TypesApiKey = {
         [<JsonPropertyName("id")>]
@@ -33524,6 +35728,11 @@ module Types =
         TypesTemplateFormat =
         | String
         | Json
+        with
+        override this.ToString() =
+            match this with
+            | String -> "string"
+            | Json -> "json"
 
     and TypesRoleTemplate = {
         [<JsonPropertyName("format")>]
@@ -33688,6 +35897,13 @@ module Types =
         | ClientCredentials
         | Kerberos
         | RefreshToken
+        with
+        override this.ToString() =
+            match this with
+            | Password -> "password"
+            | ClientCredentials -> "client_credentials"
+            | Kerberos -> "_kerberos"
+            | RefreshToken -> "refresh_token"
 
     and TypesUser = {
         [<JsonPropertyName("email")>]
@@ -33811,6 +36027,11 @@ module Types =
         GrantApiKeyApiKeyGrantType =
         | AccessToken
         | Password
+        with
+        override this.ToString() =
+            match this with
+            | AccessToken -> "access_token"
+            | Password -> "password"
 
     and HasPrivilegesApplicationPrivilegesCheck = {
         [<JsonPropertyName("application")>]
@@ -34058,6 +36279,11 @@ module Types =
         IngestMergeType =
         | Index
         | Template
+        with
+        override this.ToString() =
+            match this with
+            | Index -> "index"
+            | Template -> "template"
 
     /// <summary>
     /// The results of ingest simulation on a single document. The _source of the document contains
@@ -34518,6 +36744,15 @@ module Types =
         | S3
         | Source
         | Url
+        with
+        override this.ToString() =
+            match this with
+            | Azure -> "azure"
+            | Fs -> "fs"
+            | Gcs -> "gcs"
+            | S3 -> "s3"
+            | Source -> "source"
+            | Url -> "url"
 
     and TypesRepository = obj
 
@@ -34556,6 +36791,16 @@ module Types =
         | Repository
         | ShardCount
         | FailedShardCount
+        with
+        override this.ToString() =
+            match this with
+            | StartTime -> "start_time"
+            | Duration -> "duration"
+            | Name -> "name"
+            | IndexCount -> "index_count"
+            | Repository -> "repository"
+            | ShardCount -> "shard_count"
+            | FailedShardCount -> "failed_shard_count"
 
     and TypesSnapshotStateConverter() =
         inherit JsonConverter<TypesSnapshotState>()
@@ -34586,6 +36831,14 @@ module Types =
         | FAILED
         | PARTIAL
         | INCOMPATIBLE
+        with
+        override this.ToString() =
+            match this with
+            | INPROGRESS -> "IN_PROGRESS"
+            | SUCCESS -> "SUCCESS"
+            | FAILED -> "FAILED"
+            | PARTIAL -> "PARTIAL"
+            | INCOMPATIBLE -> "INCOMPATIBLE"
 
     and GetSnapshotResponseItem = {
         [<JsonPropertyName("repository")>]
@@ -34764,6 +37017,14 @@ module Types =
         | FINALIZE
         | INIT
         | STARTED
+        with
+        override this.ToString() =
+            match this with
+            | DONE -> "DONE"
+            | FAILURE -> "FAILURE"
+            | FINALIZE -> "FINALIZE"
+            | INIT -> "INIT"
+            | STARTED -> "STARTED"
 
     and TypesShardsStatsSummaryItem = {
         [<JsonPropertyName("file_count")>]
@@ -34889,6 +37150,16 @@ module Types =
         | Yaml
         | Cbor
         | Smile
+        with
+        override this.ToString() =
+            match this with
+            | Csv -> "csv"
+            | Json -> "json"
+            | Tsv -> "tsv"
+            | Txt -> "txt"
+            | Yaml -> "yaml"
+            | Cbor -> "cbor"
+            | Smile -> "smile"
 
     and CertificatesCertificateInformation = {
         [<JsonPropertyName("alias")>]
@@ -34962,6 +37233,12 @@ module Types =
         | Nodes
         | Parents
         | None
+        with
+        override this.ToString() =
+            match this with
+            | Nodes -> "nodes"
+            | Parents -> "parents"
+            | None -> "none"
 
     and TypesEcsCompatibilityTypeConverter() =
         inherit JsonConverter<TypesEcsCompatibilityType>()
@@ -34983,6 +37260,11 @@ module Types =
         TypesEcsCompatibilityType =
         | Disabled
         | V1
+        with
+        override this.ToString() =
+            match this with
+            | Disabled -> "disabled"
+            | V1 -> "v1"
 
     and TypesFormatTypeConverter() =
         inherit JsonConverter<TypesFormatType>()
@@ -35010,6 +37292,13 @@ module Types =
         | Ndjson
         | SemiStructuredText
         | Xml
+        with
+        override this.ToString() =
+            match this with
+            | Delimited -> "delimited"
+            | Ndjson -> "ndjson"
+            | SemiStructuredText -> "semi_structured_text"
+            | Xml -> "xml"
 
     and TypesTopHit = {
         [<JsonPropertyName("count")>]
@@ -35074,6 +37363,13 @@ module Types =
         | Xml
         | Delimited
         | SemiStructuredText
+        with
+        override this.ToString() =
+            match this with
+            | Ndjson -> "ndjson"
+            | Xml -> "xml"
+            | Delimited -> "delimited"
+            | SemiStructuredText -> "semi_structured_text"
 
     and TestGrokPatternMatchedField = {
         [<JsonPropertyName("match")>]
@@ -35441,6 +37737,12 @@ module Types =
         | AwaitsSuccessfulExecution
         | Ackable
         | Acked
+        with
+        override this.ToString() =
+            match this with
+            | AwaitsSuccessfulExecution -> "awaits_successful_execution"
+            | Ackable -> "ackable"
+            | Acked -> "acked"
 
     and TypesAcknowledgeState = {
         [<JsonPropertyName("state")>]
@@ -35514,6 +37816,14 @@ module Types =
         | Execute
         | ForceExecute
         | Skip
+        with
+        override this.ToString() =
+            match this with
+            | Simulate -> "simulate"
+            | ForceSimulate -> "force_simulate"
+            | Execute -> "execute"
+            | ForceExecute -> "force_execute"
+            | Skip -> "skip"
 
     and TypesSimulatedActions = {
         [<JsonPropertyName("actions")>]
@@ -35623,6 +37933,15 @@ module Types =
         | Logging
         | Slack
         | Pagerduty
+        with
+        override this.ToString() =
+            match this with
+            | Email -> "email"
+            | Webhook -> "webhook"
+            | Index -> "index"
+            | Logging -> "logging"
+            | Slack -> "slack"
+            | Pagerduty -> "pagerduty"
 
     and TypesAlwaysCondition = obj
 
@@ -35677,6 +37996,11 @@ module Types =
         TypesDataAttachmentFormat =
         | Json
         | Yaml
+        with
+        override this.ToString() =
+            match this with
+            | Json -> "json"
+            | Yaml -> "yaml"
 
     and TypesDataEmailAttachment = {
         [<JsonPropertyName("format")>]
@@ -35703,6 +38027,11 @@ module Types =
         TypesConnectionScheme =
         | Http
         | Https
+        with
+        override this.ToString() =
+            match this with
+            | Http -> "http"
+            | Https -> "https"
 
     and TypesHttpInputBasicAuthentication = {
         [<JsonPropertyName("password")>]
@@ -35745,6 +38074,14 @@ module Types =
         | Post
         | Put
         | Delete
+        with
+        override this.ToString() =
+            match this with
+            | Head -> "head"
+            | Get -> "get"
+            | Post -> "post"
+            | Put -> "put"
+            | Delete -> "delete"
 
     and TypesHttpInputProxy = {
         [<JsonPropertyName("host")>]
@@ -35849,6 +38186,14 @@ module Types =
         | Normal
         | High
         | Highest
+        with
+        override this.ToString() =
+            match this with
+            | Lowest -> "lowest"
+            | Low -> "low"
+            | Normal -> "normal"
+            | High -> "high"
+            | Highest -> "highest"
 
     and TypesEmail = {
         [<JsonPropertyName("id")>]
@@ -35944,6 +38289,11 @@ module Types =
         TypesPagerDutyContextType =
         | Link
         | Image
+        with
+        override this.ToString() =
+            match this with
+            | Link -> "link"
+            | Image -> "image"
 
     and TypesPagerDutyContext = {
         [<JsonPropertyName("href")>]
@@ -35984,6 +38334,12 @@ module Types =
         | Trigger
         | Resolve
         | Acknowledge
+        with
+        override this.ToString() =
+            match this with
+            | Trigger -> "trigger"
+            | Resolve -> "resolve"
+            | Acknowledge -> "acknowledge"
 
     and TypesPagerDutyEvent = {
         [<JsonPropertyName("account")>]
@@ -36186,6 +38542,12 @@ module Types =
         | Json
         | Yaml
         | Text
+        with
+        override this.ToString() =
+            match this with
+            | Json -> "json"
+            | Yaml -> "yaml"
+            | Text -> "text"
 
     and TypesHttpInput = {
         [<JsonPropertyName("extract")>]
@@ -36268,6 +38630,16 @@ module Types =
         | Thursday
         | Friday
         | Saturday
+        with
+        override this.ToString() =
+            match this with
+            | Sunday -> "sunday"
+            | Monday -> "monday"
+            | Tuesday -> "tuesday"
+            | Wednesday -> "wednesday"
+            | Thursday -> "thursday"
+            | Friday -> "friday"
+            | Saturday -> "saturday"
 
     and TypesTimeOfWeek = {
         [<JsonPropertyName("at")>]
@@ -36326,6 +38698,21 @@ module Types =
         | October
         | November
         | December
+        with
+        override this.ToString() =
+            match this with
+            | January -> "january"
+            | February -> "february"
+            | March -> "march"
+            | April -> "april"
+            | May -> "may"
+            | June -> "june"
+            | July -> "july"
+            | August -> "august"
+            | September -> "september"
+            | October -> "october"
+            | November -> "november"
+            | December -> "december"
 
     and TypesTimeOfYear = {
         [<JsonPropertyName("at")>]
@@ -36407,6 +38794,13 @@ module Types =
         | Failure
         | Simulated
         | Throttled
+        with
+        override this.ToString() =
+            match this with
+            | Success -> "success"
+            | Failure -> "failure"
+            | Simulated -> "simulated"
+            | Throttled -> "throttled"
 
     and TypesEmailResult = {
         [<JsonPropertyName("account")>]
@@ -36557,6 +38951,14 @@ module Types =
         | Script
         | Compare
         | ArrayCompare
+        with
+        override this.ToString() =
+            match this with
+            | Always -> "always"
+            | Never -> "never"
+            | Script -> "script"
+            | Compare -> "compare"
+            | ArrayCompare -> "array_compare"
 
     and TypesExecutionResultCondition = {
         [<JsonPropertyName("met")>]
@@ -36590,6 +38992,12 @@ module Types =
         | Http
         | Search
         | Simple
+        with
+        override this.ToString() =
+            match this with
+            | Http -> "http"
+            | Search -> "search"
+            | Simple -> "simple"
 
     and TypesExecutionResultInput = {
         [<JsonPropertyName("payload")>]
@@ -36651,6 +39059,17 @@ module Types =
         | Failed
         | DeletedWhileQueued
         | NotExecutedAlreadyQueued
+        with
+        override this.ToString() =
+            match this with
+            | AwaitsExecution -> "awaits_execution"
+            | Checking -> "checking"
+            | ExecutionNotNeeded -> "execution_not_needed"
+            | Throttled -> "throttled"
+            | Executed -> "executed"
+            | Failed -> "failed"
+            | DeletedWhileQueued -> "deleted_while_queued"
+            | NotExecutedAlreadyQueued -> "not_executed_already_queued"
 
     and TypesTriggerEventContainer = {
         [<JsonPropertyName("schedule")>]
@@ -36730,6 +39149,13 @@ module Types =
         | QueuedWatches
         | CurrentWatches
         | PendingWatches
+        with
+        override this.ToString() =
+            match this with
+            | All -> "_all"
+            | QueuedWatches -> "queued_watches"
+            | CurrentWatches -> "current_watches"
+            | PendingWatches -> "pending_watches"
 
     and TypesExecutionThreadPool = {
         [<JsonPropertyName("max_size")>]
@@ -36781,6 +39207,17 @@ module Types =
         | WatchTransform
         | Aborted
         | Finished
+        with
+        override this.ToString() =
+            match this with
+            | AwaitsExecution -> "awaits_execution"
+            | Started -> "started"
+            | Input -> "input"
+            | Condition -> "condition"
+            | Actions -> "actions"
+            | WatchTransform -> "watch_transform"
+            | Aborted -> "aborted"
+            | Finished -> "finished"
 
     and StatsWatchRecordStats = {
         [<JsonPropertyName("execution_time")>]
@@ -36823,6 +39260,13 @@ module Types =
         | Starting
         | Started
         | Stopping
+        with
+        override this.ToString() =
+            match this with
+            | Stopped -> "stopped"
+            | Starting -> "starting"
+            | Started -> "started"
+            | Stopping -> "stopping"
 
     and StatsWatcherNodeStats = {
         [<JsonPropertyName("current_watches")>]
@@ -36862,6 +39306,12 @@ module Types =
         | Build
         | Features
         | License
+        with
+        override this.ToString() =
+            match this with
+            | Build -> "build"
+            | Features -> "features"
+            | License -> "license"
 
     and InfoBuildInformation = {
         [<JsonPropertyName("date")>]

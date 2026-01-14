@@ -47,10 +47,10 @@ module EsqlOperations =
                 let path = "/_query/async"
                 let queryParams =
                     [
-                        request.AllowPartialResults |> Option.map (fun v -> "allow_partial_results", string v)
-                        request.Delimiter |> Option.map (fun v -> "delimiter", string v)
-                        request.DropNullColumns |> Option.map (fun v -> "drop_null_columns", string v)
-                        request.Format |> Option.map (fun v -> "format", string v)
+                        request.AllowPartialResults |> Option.map (fun v -> "allow_partial_results", Fes.Http.toQueryValue v)
+                        request.Delimiter |> Option.map (fun v -> "delimiter", Fes.Http.toQueryValue v)
+                        request.DropNullColumns |> Option.map (fun v -> "drop_null_columns", Fes.Http.toQueryValue v)
+                        request.Format |> Option.map (fun v -> "format", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -59,7 +59,7 @@ module EsqlOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``columnar`` = request.Columnar; ``filter`` = request.Filter; ``locale`` = request.Locale; ``params`` = request.Params; ``profile`` = request.Profile; ``query`` = request.Query; ``tables`` = request.Tables; ``include_ccs_metadata`` = request.IncludeCcsMetadata; ``include_execution_metadata`` = request.IncludeExecutionMetadata; ``wait_for_completion_timeout`` = request.WaitForCompletionTimeout; ``keep_alive`` = request.KeepAlive; ``keep_on_completion`` = request.KeepOnCompletion |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -169,10 +169,10 @@ module EsqlOperations =
                 let path = $"/_query/async/{request.Id}"
                 let queryParams =
                     [
-                        request.DropNullColumns |> Option.map (fun v -> "drop_null_columns", string v)
-                        request.Format |> Option.map (fun v -> "format", string v)
-                        request.KeepAlive |> Option.map (fun v -> "keep_alive", string v)
-                        request.WaitForCompletionTimeout |> Option.map (fun v -> "wait_for_completion_timeout", string v)
+                        request.DropNullColumns |> Option.map (fun v -> "drop_null_columns", Fes.Http.toQueryValue v)
+                        request.Format |> Option.map (fun v -> "format", Fes.Http.toQueryValue v)
+                        request.KeepAlive |> Option.map (fun v -> "keep_alive", Fes.Http.toQueryValue v)
+                        request.WaitForCompletionTimeout |> Option.map (fun v -> "wait_for_completion_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -264,7 +264,7 @@ module EsqlOperations =
                 let path = $"/_query/async/{request.Id}/stop"
                 let queryParams =
                     [
-                        request.DropNullColumns |> Option.map (fun v -> "drop_null_columns", string v)
+                        request.DropNullColumns |> Option.map (fun v -> "drop_null_columns", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -385,10 +385,10 @@ module EsqlOperations =
                 let path = "/_query"
                 let queryParams =
                     [
-                        request.Format |> Option.map (fun v -> "format", string v)
-                        request.Delimiter |> Option.map (fun v -> "delimiter", string v)
-                        request.DropNullColumns |> Option.map (fun v -> "drop_null_columns", string v)
-                        request.AllowPartialResults |> Option.map (fun v -> "allow_partial_results", string v)
+                        request.Format |> Option.map (fun v -> "format", Fes.Http.toQueryValue v)
+                        request.Delimiter |> Option.map (fun v -> "delimiter", Fes.Http.toQueryValue v)
+                        request.DropNullColumns |> Option.map (fun v -> "drop_null_columns", Fes.Http.toQueryValue v)
+                        request.AllowPartialResults |> Option.map (fun v -> "allow_partial_results", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -397,7 +397,7 @@ module EsqlOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``columnar`` = request.Columnar; ``filter`` = request.Filter; ``locale`` = request.Locale; ``params`` = request.Params; ``profile`` = request.Profile; ``query`` = request.Query; ``tables`` = request.Tables; ``include_ccs_metadata`` = request.IncludeCcsMetadata; ``include_execution_metadata`` = request.IncludeExecutionMetadata |}
                 |> Result.Ok
             with ex -> Result.Error ex
 

@@ -50,7 +50,7 @@ module SearchCommands =
         Assert.Contains("q=*", result)
         Assert.Contains("size=5", result)
         Assert.Contains("timeout=30s", result)
-        Assert.Contains("track_total_hits=True", result)
+        Assert.Contains("track_total_hits=true", result)
 
     [<Fact>]
     let ``Search request with aggregations returns correct HTTP call`` () =
@@ -154,7 +154,7 @@ module SearchCommands =
 
         Assert.Contains("Method: POST", result)
         Assert.Contains("/products/_search", result)
-        Assert.Contains("search_type=DfsQueryThenFetch", result)
+        Assert.Contains("search_type=dfs_query_then_fetch", result)
 
     [<Fact>]
     let ``Async search submit request returns correct HTTP call`` () =
@@ -171,7 +171,7 @@ module SearchCommands =
         Assert.Contains("/products/_async_search", result)
         Assert.Contains("wait_for_completion_timeout=1s", result)
         Assert.Contains("keep_alive=5m", result)
-        Assert.Contains("keep_on_completion=True", result)
+        Assert.Contains("keep_on_completion=true", result)
 
     [<Fact>]
     let ``Async search get request returns correct HTTP call`` () =

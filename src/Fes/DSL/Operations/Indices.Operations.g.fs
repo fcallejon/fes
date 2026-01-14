@@ -25,11 +25,11 @@ module IndicesOperations =
                 let path = $"/_component_template/{request.Name}"
                 let queryParams =
                     [
-                        request.FlatSettings |> Option.map (fun v -> "flat_settings", string v)
-                        request.SettingsFilter |> Option.map (fun v -> "settings_filter", string v)
-                        request.IncludeDefaults |> Option.map (fun v -> "include_defaults", string v)
-                        request.Local |> Option.map (fun v -> "local", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
+                        request.FlatSettings |> Option.map (fun v -> "flat_settings", Fes.Http.toQueryValue v)
+                        request.SettingsFilter |> Option.map (fun v -> "settings_filter", Fes.Http.toQueryValue v)
+                        request.IncludeDefaults |> Option.map (fun v -> "include_defaults", Fes.Http.toQueryValue v)
+                        request.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -102,9 +102,9 @@ module IndicesOperations =
                 let path = $"/_component_template/{request.Name}"
                 let queryParams =
                     [
-                        request.Create |> Option.map (fun v -> "create", string v)
-                        request.Cause |> Option.map (fun v -> "cause", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
+                        request.Create |> Option.map (fun v -> "create", Fes.Http.toQueryValue v)
+                        request.Cause |> Option.map (fun v -> "cause", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -113,7 +113,7 @@ module IndicesOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``template`` = request.Template; ``version`` = request.Version; ``_meta`` = request.Meta; ``deprecated`` = request.Deprecated |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -179,8 +179,8 @@ module IndicesOperations =
                 let path = $"/_component_template/{request.Name}"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -231,8 +231,8 @@ module IndicesOperations =
                 let path = $"/_component_template/{request.Name}"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Local |> Option.map (fun v -> "local", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -282,9 +282,9 @@ module IndicesOperations =
                 let path = $"/_dangling/{request.IndexUuid}"
                 let queryParams =
                     [
-                        request.AcceptDataLoss |> Option.map (fun v -> "accept_data_loss", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.AcceptDataLoss |> Option.map (fun v -> "accept_data_loss", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -341,9 +341,9 @@ module IndicesOperations =
                 let path = $"/_dangling/{request.IndexUuid}"
                 let queryParams =
                     [
-                        request.AcceptDataLoss |> Option.map (fun v -> "accept_data_loss", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.AcceptDataLoss |> Option.map (fun v -> "accept_data_loss", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -412,11 +412,11 @@ module IndicesOperations =
                 let path = $"/{request.Index}/_block/{request.Block}"
                 let queryParams =
                     [
-                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", string v)
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -498,11 +498,11 @@ module IndicesOperations =
                 let path = $"/{request.Index}/_block/{request.Block}"
                 let queryParams =
                     [
-                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", string v)
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -595,7 +595,7 @@ module IndicesOperations =
                 let path = $"/{request.Index}/_analyze"
                 let queryParams =
                     [
-                        request.Index2 |> Option.map (fun v -> "index", string v)
+                        request.Index2 |> Option.map (fun v -> "index", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -604,7 +604,7 @@ module IndicesOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``analyzer`` = request.Analyzer; ``attributes`` = request.Attributes; ``char_filter`` = request.CharFilter; ``explain`` = request.Explain; ``field`` = request.Field; ``filter`` = request.Filter; ``normalizer`` = request.Normalizer; ``text`` = request.Text; ``tokenizer`` = request.Tokenizer |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -691,14 +691,14 @@ module IndicesOperations =
                 let path = $"/{request.Index}/_cache/clear"
                 let queryParams =
                     [
-                        request.Index2 |> Option.map (fun v -> "index", string v)
-                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", string v)
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.Fielddata |> Option.map (fun v -> "fielddata", string v)
-                        request.Fields |> Option.map (fun v -> "fields", string v)
-                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", string v)
-                        request.Query |> Option.map (fun v -> "query", string v)
-                        request.Request |> Option.map (fun v -> "request", string v)
+                        request.Index2 |> Option.map (fun v -> "index", Fes.Http.toQueryValue v)
+                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.Fielddata |> Option.map (fun v -> "fielddata", Fes.Http.toQueryValue v)
+                        request.Fields |> Option.map (fun v -> "fields", Fes.Http.toQueryValue v)
+                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                        request.Query |> Option.map (fun v -> "query", Fes.Http.toQueryValue v)
+                        request.Request |> Option.map (fun v -> "request", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -783,9 +783,9 @@ module IndicesOperations =
                 let path = $"/{request.Index}/_clone/{request.Target}"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
-                        request.WaitForActiveShards |> Option.map (fun v -> "wait_for_active_shards", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                        request.WaitForActiveShards |> Option.map (fun v -> "wait_for_active_shards", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -794,7 +794,7 @@ module IndicesOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``aliases`` = request.Aliases; ``settings`` = request.Settings |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -859,12 +859,12 @@ module IndicesOperations =
                 let path = $"/{request.Index}/_close"
                 let queryParams =
                     [
-                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", string v)
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
-                        request.WaitForActiveShards |> Option.map (fun v -> "wait_for_active_shards", string v)
+                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                        request.WaitForActiveShards |> Option.map (fun v -> "wait_for_active_shards", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -948,14 +948,14 @@ module IndicesOperations =
                 let path = $"/{request.Index}"
                 let queryParams =
                     [
-                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", string v)
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.FlatSettings |> Option.map (fun v -> "flat_settings", string v)
-                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", string v)
-                        request.IncludeDefaults |> Option.map (fun v -> "include_defaults", string v)
-                        request.Local |> Option.map (fun v -> "local", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Features |> Option.map (fun v -> "features", string v)
+                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.FlatSettings |> Option.map (fun v -> "flat_settings", Fes.Http.toQueryValue v)
+                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                        request.IncludeDefaults |> Option.map (fun v -> "include_defaults", Fes.Http.toQueryValue v)
+                        request.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Features |> Option.map (fun v -> "features", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1041,9 +1041,9 @@ module IndicesOperations =
                 let path = $"/{request.Index}"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
-                        request.WaitForActiveShards |> Option.map (fun v -> "wait_for_active_shards", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                        request.WaitForActiveShards |> Option.map (fun v -> "wait_for_active_shards", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1052,7 +1052,7 @@ module IndicesOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``aliases`` = request.Aliases; ``mappings`` = request.Mappings; ``settings`` = request.Settings |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1125,11 +1125,11 @@ module IndicesOperations =
                 let path = $"/{request.Index}"
                 let queryParams =
                     [
-                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", string v)
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1199,12 +1199,12 @@ module IndicesOperations =
                 let path = $"/{request.Index}"
                 let queryParams =
                     [
-                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", string v)
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.FlatSettings |> Option.map (fun v -> "flat_settings", string v)
-                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", string v)
-                        request.IncludeDefaults |> Option.map (fun v -> "include_defaults", string v)
-                        request.Local |> Option.map (fun v -> "local", string v)
+                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.FlatSettings |> Option.map (fun v -> "flat_settings", Fes.Http.toQueryValue v)
+                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                        request.IncludeDefaults |> Option.map (fun v -> "include_defaults", Fes.Http.toQueryValue v)
+                        request.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1284,8 +1284,8 @@ module IndicesOperations =
                 let path = $"/{request.Index}/_aliases/{request.Name}"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1294,7 +1294,7 @@ module IndicesOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``filter`` = request.Filter; ``index_routing`` = request.IndexRouting; ``is_write_index`` = request.IsWriteIndex; ``routing`` = request.Routing; ``search_routing`` = request.SearchRouting |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1366,8 +1366,8 @@ module IndicesOperations =
                 let path = $"/{request.Index}/_aliases/{request.Name}"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1422,9 +1422,9 @@ module IndicesOperations =
                 let path = $"/_data_stream/{request.Name}/_lifecycle"
                 let queryParams =
                     [
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1482,10 +1482,10 @@ module IndicesOperations =
                 let path = $"/_index_template/{request.Name}"
                 let queryParams =
                     [
-                        request.Local |> Option.map (fun v -> "local", string v)
-                        request.FlatSettings |> Option.map (fun v -> "flat_settings", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.IncludeDefaults |> Option.map (fun v -> "include_defaults", string v)
+                        request.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
+                        request.FlatSettings |> Option.map (fun v -> "flat_settings", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.IncludeDefaults |> Option.map (fun v -> "include_defaults", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1565,9 +1565,9 @@ module IndicesOperations =
                 let path = $"/_index_template/{request.Name}"
                 let queryParams =
                     [
-                        request.Create |> Option.map (fun v -> "create", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Cause |> Option.map (fun v -> "cause", string v)
+                        request.Create |> Option.map (fun v -> "create", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Cause |> Option.map (fun v -> "cause", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1576,7 +1576,7 @@ module IndicesOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``index_patterns`` = request.IndexPatterns; ``composed_of`` = request.ComposedOf; ``template`` = request.Template; ``data_stream`` = request.DataStream; ``priority`` = request.Priority; ``version`` = request.Version; ``_meta`` = request.Meta; ``allow_auto_create`` = request.AllowAutoCreate; ``ignore_missing_component_templates`` = request.IgnoreMissingComponentTemplates; ``deprecated`` = request.Deprecated |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1672,8 +1672,8 @@ module IndicesOperations =
                 let path = $"/_index_template/{request.Name}"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1725,9 +1725,9 @@ module IndicesOperations =
                 let path = $"/_index_template/{request.Name}"
                 let queryParams =
                     [
-                        request.Local |> Option.map (fun v -> "local", string v)
-                        request.FlatSettings |> Option.map (fun v -> "flat_settings", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
+                        request.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
+                        request.FlatSettings |> Option.map (fun v -> "flat_settings", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1782,9 +1782,9 @@ module IndicesOperations =
                 let path = $"/_template/{request.Name}"
                 let queryParams =
                     [
-                        request.FlatSettings |> Option.map (fun v -> "flat_settings", string v)
-                        request.Local |> Option.map (fun v -> "local", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
+                        request.FlatSettings |> Option.map (fun v -> "flat_settings", Fes.Http.toQueryValue v)
+                        request.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1852,10 +1852,10 @@ module IndicesOperations =
                 let path = $"/_template/{request.Name}"
                 let queryParams =
                     [
-                        request.Create |> Option.map (fun v -> "create", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Order |> Option.map (fun v -> "order", string v)
-                        request.Cause |> Option.map (fun v -> "cause", string v)
+                        request.Create |> Option.map (fun v -> "create", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Order |> Option.map (fun v -> "order", Fes.Http.toQueryValue v)
+                        request.Cause |> Option.map (fun v -> "cause", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1864,7 +1864,7 @@ module IndicesOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``aliases`` = request.Aliases; ``index_patterns`` = request.IndexPatterns; ``mappings`` = request.Mappings; ``order`` = request.Order2; ``settings`` = request.Settings; ``version`` = request.Version |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1945,8 +1945,8 @@ module IndicesOperations =
                 let path = $"/_template/{request.Name}"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1998,9 +1998,9 @@ module IndicesOperations =
                 let path = $"/_template/{request.Name}"
                 let queryParams =
                     [
-                        request.FlatSettings |> Option.map (fun v -> "flat_settings", string v)
-                        request.Local |> Option.map (fun v -> "local", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
+                        request.FlatSettings |> Option.map (fun v -> "flat_settings", Fes.Http.toQueryValue v)
+                        request.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -2057,11 +2057,11 @@ module IndicesOperations =
                 let path = $"/{request.Index}/_disk_usage"
                 let queryParams =
                     [
-                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", string v)
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.Flush |> Option.map (fun v -> "flush", string v)
-                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", string v)
-                        request.RunExpensiveTasks |> Option.map (fun v -> "run_expensive_tasks", string v)
+                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.Flush |> Option.map (fun v -> "flush", Fes.Http.toQueryValue v)
+                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                        request.RunExpensiveTasks |> Option.map (fun v -> "run_expensive_tasks", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -2128,10 +2128,10 @@ module IndicesOperations =
                 let path = $"/{request.Index}/_alias/{request.Name}"
                 let queryParams =
                     [
-                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", string v)
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
+                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -2198,10 +2198,10 @@ module IndicesOperations =
                 let path = $"/{request.Index}/_alias/{request.Name}"
                 let queryParams =
                     [
-                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", string v)
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
+                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -2267,10 +2267,10 @@ module IndicesOperations =
                 let path = $"/{request.Index}/_field_usage_stats"
                 let queryParams =
                     [
-                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", string v)
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", string v)
-                        request.Fields |> Option.map (fun v -> "fields", string v)
+                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                        request.Fields |> Option.map (fun v -> "fields", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -2334,11 +2334,11 @@ module IndicesOperations =
                 let path = $"/{request.Index}/_flush"
                 let queryParams =
                     [
-                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", string v)
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.Force |> Option.map (fun v -> "force", string v)
-                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", string v)
-                        request.WaitIfOngoing |> Option.map (fun v -> "wait_if_ongoing", string v)
+                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.Force |> Option.map (fun v -> "force", Fes.Http.toQueryValue v)
+                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                        request.WaitIfOngoing |> Option.map (fun v -> "wait_if_ongoing", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -2407,13 +2407,13 @@ module IndicesOperations =
                 let path = $"/{request.Index}/_forcemerge"
                 let queryParams =
                     [
-                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", string v)
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.Flush |> Option.map (fun v -> "flush", string v)
-                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", string v)
-                        request.MaxNumSegments |> Option.map (fun v -> "max_num_segments", string v)
-                        request.OnlyExpungeDeletes |> Option.map (fun v -> "only_expunge_deletes", string v)
-                        request.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", string v)
+                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.Flush |> Option.map (fun v -> "flush", Fes.Http.toQueryValue v)
+                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                        request.MaxNumSegments |> Option.map (fun v -> "max_num_segments", Fes.Http.toQueryValue v)
+                        request.OnlyExpungeDeletes |> Option.map (fun v -> "only_expunge_deletes", Fes.Http.toQueryValue v)
+                        request.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -2490,10 +2490,10 @@ module IndicesOperations =
                 let path = $"/{request.Index}/_mapping/field/{request.Fields}"
                 let queryParams =
                     [
-                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", string v)
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", string v)
-                        request.IncludeDefaults |> Option.map (fun v -> "include_defaults", string v)
+                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                        request.IncludeDefaults |> Option.map (fun v -> "include_defaults", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -2560,11 +2560,11 @@ module IndicesOperations =
                 let path = $"/{request.Index}/_mapping"
                 let queryParams =
                     [
-                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", string v)
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", string v)
-                        request.Local |> Option.map (fun v -> "local", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
+                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                        request.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -2654,12 +2654,12 @@ module IndicesOperations =
                 let path = $"/{request.Index}/_mapping"
                 let queryParams =
                     [
-                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", string v)
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
-                        request.WriteIndexOnly |> Option.map (fun v -> "write_index_only", string v)
+                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                        request.WriteIndexOnly |> Option.map (fun v -> "write_index_only", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -2668,7 +2668,7 @@ module IndicesOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``date_detection`` = request.DateDetection; ``dynamic`` = request.Dynamic; ``dynamic_date_formats`` = request.DynamicDateFormats; ``dynamic_templates`` = request.DynamicTemplates; ``_field_names`` = request.FieldNames; ``_meta`` = request.Meta; ``numeric_detection`` = request.NumericDetection; ``properties`` = request.Properties; ``_routing`` = request.Routing; ``_source`` = request.Source; ``runtime`` = request.Runtime |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -2790,13 +2790,13 @@ module IndicesOperations =
                 let path = $"/{request.Index}/_settings/{request.Name}"
                 let queryParams =
                     [
-                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", string v)
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.FlatSettings |> Option.map (fun v -> "flat_settings", string v)
-                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", string v)
-                        request.IncludeDefaults |> Option.map (fun v -> "include_defaults", string v)
-                        request.Local |> Option.map (fun v -> "local", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
+                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.FlatSettings |> Option.map (fun v -> "flat_settings", Fes.Http.toQueryValue v)
+                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                        request.IncludeDefaults |> Option.map (fun v -> "include_defaults", Fes.Http.toQueryValue v)
+                        request.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -2879,12 +2879,12 @@ module IndicesOperations =
                 let path = $"/{request.Index}/_open"
                 let queryParams =
                     [
-                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", string v)
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
-                        request.WaitForActiveShards |> Option.map (fun v -> "wait_for_active_shards", string v)
+                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                        request.WaitForActiveShards |> Option.map (fun v -> "wait_for_active_shards", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -2968,14 +2968,14 @@ module IndicesOperations =
                 let path = $"/{request.Index}/_settings"
                 let queryParams =
                     [
-                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", string v)
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.FlatSettings |> Option.map (fun v -> "flat_settings", string v)
-                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.PreserveExisting |> Option.map (fun v -> "preserve_existing", string v)
-                        request.Reopen |> Option.map (fun v -> "reopen", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.FlatSettings |> Option.map (fun v -> "flat_settings", Fes.Http.toQueryValue v)
+                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.PreserveExisting |> Option.map (fun v -> "preserve_existing", Fes.Http.toQueryValue v)
+                        request.Reopen |> Option.map (fun v -> "reopen", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -3063,11 +3063,11 @@ module IndicesOperations =
                 let path = $"/{request.Index}/_recovery"
                 let queryParams =
                     [
-                        request.ActiveOnly |> Option.map (fun v -> "active_only", string v)
-                        request.Detailed |> Option.map (fun v -> "detailed", string v)
-                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", string v)
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", string v)
+                        request.ActiveOnly |> Option.map (fun v -> "active_only", Fes.Http.toQueryValue v)
+                        request.Detailed |> Option.map (fun v -> "detailed", Fes.Http.toQueryValue v)
+                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -3132,9 +3132,9 @@ module IndicesOperations =
                 let path = $"/{request.Index}/_refresh"
                 let queryParams =
                     [
-                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", string v)
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", string v)
+                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -3190,10 +3190,10 @@ module IndicesOperations =
                 let path = $"/{request.Index}/_reload_search_analyzers"
                 let queryParams =
                     [
-                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", string v)
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", string v)
-                        request.Resource |> Option.map (fun v -> "resource", string v)
+                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                        request.Resource |> Option.map (fun v -> "resource", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -3255,11 +3255,11 @@ module IndicesOperations =
                 let path = $"/_resolve/cluster/{request.Name}"
                 let queryParams =
                     [
-                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", string v)
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.IgnoreThrottled |> Option.map (fun v -> "ignore_throttled", string v)
-                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.IgnoreThrottled |> Option.map (fun v -> "ignore_throttled", Fes.Http.toQueryValue v)
+                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -3325,10 +3325,10 @@ module IndicesOperations =
                 let path = $"/_resolve/index/{request.Name}"
                 let queryParams =
                     [
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", string v)
-                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", string v)
-                        request.Mode |> Option.map (fun v -> "mode", string v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                        request.Mode |> Option.map (fun v -> "mode", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -3399,11 +3399,11 @@ module IndicesOperations =
                 let path = $"/{request.Alias}/_rollover/{request.NewIndex}"
                 let queryParams =
                     [
-                        request.DryRun |> Option.map (fun v -> "dry_run", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
-                        request.WaitForActiveShards |> Option.map (fun v -> "wait_for_active_shards", string v)
-                        request.Lazy |> Option.map (fun v -> "lazy", string v)
+                        request.DryRun |> Option.map (fun v -> "dry_run", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                        request.WaitForActiveShards |> Option.map (fun v -> "wait_for_active_shards", Fes.Http.toQueryValue v)
+                        request.Lazy |> Option.map (fun v -> "lazy", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -3412,7 +3412,7 @@ module IndicesOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``aliases`` = request.Aliases; ``conditions`` = request.Conditions; ``mappings`` = request.Mappings; ``settings`` = request.Settings |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -3494,9 +3494,9 @@ module IndicesOperations =
                 let path = $"/{request.Index}/_segments"
                 let queryParams =
                     [
-                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", string v)
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", string v)
+                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -3552,10 +3552,10 @@ module IndicesOperations =
                 let path = $"/{request.Index}/_shard_stores"
                 let queryParams =
                     [
-                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", string v)
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", string v)
-                        request.Status |> Option.map (fun v -> "status", string v)
+                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                        request.Status |> Option.map (fun v -> "status", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -3620,9 +3620,9 @@ module IndicesOperations =
                 let path = $"/{request.Index}/_shrink/{request.Target}"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
-                        request.WaitForActiveShards |> Option.map (fun v -> "wait_for_active_shards", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                        request.WaitForActiveShards |> Option.map (fun v -> "wait_for_active_shards", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -3631,7 +3631,7 @@ module IndicesOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``aliases`` = request.Aliases; ``settings`` = request.Settings |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -3696,10 +3696,10 @@ module IndicesOperations =
                 let path = $"/_index_template/_simulate_index/{request.Name}"
                 let queryParams =
                     [
-                        request.Create |> Option.map (fun v -> "create", string v)
-                        request.Cause |> Option.map (fun v -> "cause", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.IncludeDefaults |> Option.map (fun v -> "include_defaults", string v)
+                        request.Create |> Option.map (fun v -> "create", Fes.Http.toQueryValue v)
+                        request.Cause |> Option.map (fun v -> "cause", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.IncludeDefaults |> Option.map (fun v -> "include_defaults", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -3793,10 +3793,10 @@ module IndicesOperations =
                 let path = $"/_index_template/_simulate/{request.Name}"
                 let queryParams =
                     [
-                        request.Create |> Option.map (fun v -> "create", string v)
-                        request.Cause |> Option.map (fun v -> "cause", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.IncludeDefaults |> Option.map (fun v -> "include_defaults", string v)
+                        request.Create |> Option.map (fun v -> "create", Fes.Http.toQueryValue v)
+                        request.Cause |> Option.map (fun v -> "cause", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.IncludeDefaults |> Option.map (fun v -> "include_defaults", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -3805,7 +3805,7 @@ module IndicesOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``allow_auto_create`` = request.AllowAutoCreate; ``index_patterns`` = request.IndexPatterns; ``composed_of`` = request.ComposedOf; ``template`` = request.Template; ``data_stream`` = request.DataStream; ``priority`` = request.Priority; ``version`` = request.Version; ``_meta`` = request.Meta; ``ignore_missing_component_templates`` = request.IgnoreMissingComponentTemplates; ``deprecated`` = request.Deprecated |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -3912,9 +3912,9 @@ module IndicesOperations =
                 let path = $"/{request.Index}/_split/{request.Target}"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
-                        request.WaitForActiveShards |> Option.map (fun v -> "wait_for_active_shards", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                        request.WaitForActiveShards |> Option.map (fun v -> "wait_for_active_shards", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -3923,7 +3923,7 @@ module IndicesOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``aliases`` = request.Aliases; ``settings`` = request.Settings |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -3992,15 +3992,15 @@ module IndicesOperations =
                 let path = $"/{request.Index}/_stats/{request.Metric}"
                 let queryParams =
                     [
-                        request.CompletionFields |> Option.map (fun v -> "completion_fields", string v)
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.FielddataFields |> Option.map (fun v -> "fielddata_fields", string v)
-                        request.Fields |> Option.map (fun v -> "fields", string v)
-                        request.ForbidClosedIndices |> Option.map (fun v -> "forbid_closed_indices", string v)
-                        request.Groups |> Option.map (fun v -> "groups", string v)
-                        request.IncludeSegmentFileSizes |> Option.map (fun v -> "include_segment_file_sizes", string v)
-                        request.IncludeUnloadedSegments |> Option.map (fun v -> "include_unloaded_segments", string v)
-                        request.Level |> Option.map (fun v -> "level", string v)
+                        request.CompletionFields |> Option.map (fun v -> "completion_fields", Fes.Http.toQueryValue v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.FielddataFields |> Option.map (fun v -> "fielddata_fields", Fes.Http.toQueryValue v)
+                        request.Fields |> Option.map (fun v -> "fields", Fes.Http.toQueryValue v)
+                        request.ForbidClosedIndices |> Option.map (fun v -> "forbid_closed_indices", Fes.Http.toQueryValue v)
+                        request.Groups |> Option.map (fun v -> "groups", Fes.Http.toQueryValue v)
+                        request.IncludeSegmentFileSizes |> Option.map (fun v -> "include_segment_file_sizes", Fes.Http.toQueryValue v)
+                        request.IncludeUnloadedSegments |> Option.map (fun v -> "include_unloaded_segments", Fes.Http.toQueryValue v)
+                        request.Level |> Option.map (fun v -> "level", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -4090,8 +4090,8 @@ module IndicesOperations =
                 let path = "/_aliases"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -4100,7 +4100,7 @@ module IndicesOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``actions`` = request.Actions |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -4155,18 +4155,18 @@ module IndicesOperations =
                 let path = $"/{request.Index}/_validate/query"
                 let queryParams =
                     [
-                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", string v)
-                        request.AllShards |> Option.map (fun v -> "all_shards", string v)
-                        request.Analyzer |> Option.map (fun v -> "analyzer", string v)
-                        request.AnalyzeWildcard |> Option.map (fun v -> "analyze_wildcard", string v)
-                        request.DefaultOperator |> Option.map (fun v -> "default_operator", string v)
-                        request.Df |> Option.map (fun v -> "df", string v)
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.Explain |> Option.map (fun v -> "explain", string v)
-                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", string v)
-                        request.Lenient |> Option.map (fun v -> "lenient", string v)
-                        request.Rewrite |> Option.map (fun v -> "rewrite", string v)
-                        request.Q |> Option.map (fun v -> "q", string v)
+                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                        request.AllShards |> Option.map (fun v -> "all_shards", Fes.Http.toQueryValue v)
+                        request.Analyzer |> Option.map (fun v -> "analyzer", Fes.Http.toQueryValue v)
+                        request.AnalyzeWildcard |> Option.map (fun v -> "analyze_wildcard", Fes.Http.toQueryValue v)
+                        request.DefaultOperator |> Option.map (fun v -> "default_operator", Fes.Http.toQueryValue v)
+                        request.Df |> Option.map (fun v -> "df", Fes.Http.toQueryValue v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.Explain |> Option.map (fun v -> "explain", Fes.Http.toQueryValue v)
+                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                        request.Lenient |> Option.map (fun v -> "lenient", Fes.Http.toQueryValue v)
+                        request.Rewrite |> Option.map (fun v -> "rewrite", Fes.Http.toQueryValue v)
+                        request.Q |> Option.map (fun v -> "q", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -4175,7 +4175,7 @@ module IndicesOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``query`` = request.Query |}
                 |> Result.Ok
             with ex -> Result.Error ex
 

@@ -29,9 +29,9 @@ module MlAnomalyOperations =
                 let path = $"/_ml/anomaly_detectors/{request.JobId}/_close"
                 let queryParams =
                     [
-                        request.AllowNoMatch |> Option.map (fun v -> "allow_no_match", string v)
-                        request.Force |> Option.map (fun v -> "force", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
+                        request.Force |> Option.map (fun v -> "force", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -40,7 +40,7 @@ module MlAnomalyOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``allow_no_match`` = request.AllowNoMatch2; ``force`` = request.Force2; ``timeout`` = request.Timeout2 |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -110,7 +110,7 @@ module MlAnomalyOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``job_ids`` = request.JobIds; ``description`` = request.Description |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -162,8 +162,8 @@ module MlAnomalyOperations =
                 let path = $"/_ml/calendars/{request.CalendarId}"
                 let queryParams =
                     [
-                        request.From |> Option.map (fun v -> "from", string v)
-                        request.Size |> Option.map (fun v -> "size", string v)
+                        request.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
+                        request.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -172,7 +172,7 @@ module MlAnomalyOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``page`` = request.Page |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -378,8 +378,8 @@ module MlAnomalyOperations =
                 let path = $"/_ml/datafeeds/{request.DatafeedId}"
                 let queryParams =
                     [
-                        request.AllowNoMatch |> Option.map (fun v -> "allow_no_match", string v)
-                        request.ExcludeGenerated |> Option.map (fun v -> "exclude_generated", string v)
+                        request.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
+                        request.ExcludeGenerated |> Option.map (fun v -> "exclude_generated", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -458,10 +458,10 @@ module MlAnomalyOperations =
                 let path = $"/_ml/datafeeds/{request.DatafeedId}"
                 let queryParams =
                     [
-                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", string v)
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.IgnoreThrottled |> Option.map (fun v -> "ignore_throttled", string v)
-                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", string v)
+                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.IgnoreThrottled |> Option.map (fun v -> "ignore_throttled", Fes.Http.toQueryValue v)
+                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -470,7 +470,7 @@ module MlAnomalyOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``aggregations`` = request.Aggregations; ``chunking_config`` = request.ChunkingConfig; ``delayed_data_check_config`` = request.DelayedDataCheckConfig; ``frequency`` = request.Frequency; ``indices`` = request.Indices; ``indices_options`` = request.IndicesOptions; ``job_id`` = request.JobId; ``max_empty_searches`` = request.MaxEmptySearches; ``query`` = request.Query; ``query_delay`` = request.QueryDelay; ``runtime_mappings`` = request.RuntimeMappings; ``script_fields`` = request.ScriptFields; ``scroll_size`` = request.ScrollSize; ``headers`` = request.Headers |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -623,7 +623,7 @@ module MlAnomalyOperations =
                 let path = $"/_ml/datafeeds/{request.DatafeedId}"
                 let queryParams =
                     [
-                        request.Force |> Option.map (fun v -> "force", string v)
+                        request.Force |> Option.map (fun v -> "force", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -673,8 +673,8 @@ module MlAnomalyOperations =
                 let path = $"/_ml/_delete_expired_data/{request.JobId}"
                 let queryParams =
                     [
-                        request.RequestsPerSecond |> Option.map (fun v -> "requests_per_second", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.RequestsPerSecond |> Option.map (fun v -> "requests_per_second", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -683,7 +683,7 @@ module MlAnomalyOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``requests_per_second`` = request.RequestsPerSecond2; ``timeout`` = request.Timeout2 |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -734,8 +734,8 @@ module MlAnomalyOperations =
                 let path = $"/_ml/filters/{request.FilterId}"
                 let queryParams =
                     [
-                        request.From |> Option.map (fun v -> "from", string v)
-                        request.Size |> Option.map (fun v -> "size", string v)
+                        request.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
+                        request.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -788,7 +788,7 @@ module MlAnomalyOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``description`` = request.Description; ``items`` = request.Items |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -871,8 +871,8 @@ module MlAnomalyOperations =
                 let path = $"/_ml/anomaly_detectors/{request.JobId}/_forecast/{request.ForecastId}"
                 let queryParams =
                     [
-                        request.AllowNoForecasts |> Option.map (fun v -> "allow_no_forecasts", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.AllowNoForecasts |> Option.map (fun v -> "allow_no_forecasts", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -926,8 +926,8 @@ module MlAnomalyOperations =
                 let path = $"/_ml/anomaly_detectors/{request.JobId}"
                 let queryParams =
                     [
-                        request.AllowNoMatch |> Option.map (fun v -> "allow_no_match", string v)
-                        request.ExcludeGenerated |> Option.map (fun v -> "exclude_generated", string v)
+                        request.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
+                        request.ExcludeGenerated |> Option.map (fun v -> "exclude_generated", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1010,10 +1010,10 @@ module MlAnomalyOperations =
                 let path = $"/_ml/anomaly_detectors/{request.JobId}"
                 let queryParams =
                     [
-                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", string v)
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.IgnoreThrottled |> Option.map (fun v -> "ignore_throttled", string v)
-                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", string v)
+                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.IgnoreThrottled |> Option.map (fun v -> "ignore_throttled", Fes.Http.toQueryValue v)
+                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1022,7 +1022,7 @@ module MlAnomalyOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``allow_lazy_open`` = request.AllowLazyOpen; ``analysis_config`` = request.AnalysisConfig; ``analysis_limits`` = request.AnalysisLimits; ``background_persist_interval`` = request.BackgroundPersistInterval; ``custom_settings`` = request.CustomSettings; ``daily_model_snapshot_retention_after_days`` = request.DailyModelSnapshotRetentionAfterDays; ``data_description`` = request.DataDescription; ``datafeed_config`` = request.DatafeedConfig; ``description`` = request.Description; ``job_id`` = request.JobId2; ``groups`` = request.Groups; ``model_plot_config`` = request.ModelPlotConfig; ``model_snapshot_retention_days`` = request.ModelSnapshotRetentionDays; ``renormalization_window_days`` = request.RenormalizationWindowDays; ``results_index_name`` = request.ResultsIndexName; ``results_retention_days`` = request.ResultsRetentionDays |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1197,9 +1197,9 @@ module MlAnomalyOperations =
                 let path = $"/_ml/anomaly_detectors/{request.JobId}"
                 let queryParams =
                     [
-                        request.Force |> Option.map (fun v -> "force", string v)
-                        request.DeleteUserAnnotations |> Option.map (fun v -> "delete_user_annotations", string v)
-                        request.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", string v)
+                        request.Force |> Option.map (fun v -> "force", Fes.Http.toQueryValue v)
+                        request.DeleteUserAnnotations |> Option.map (fun v -> "delete_user_annotations", Fes.Http.toQueryValue v)
+                        request.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1270,12 +1270,12 @@ module MlAnomalyOperations =
                 let path = $"/_ml/anomaly_detectors/{request.JobId}/model_snapshots/{request.SnapshotId}"
                 let queryParams =
                     [
-                        request.Desc |> Option.map (fun v -> "desc", string v)
-                        request.End |> Option.map (fun v -> "end", string v)
-                        request.From |> Option.map (fun v -> "from", string v)
-                        request.Size |> Option.map (fun v -> "size", string v)
-                        request.Sort |> Option.map (fun v -> "sort", string v)
-                        request.Start |> Option.map (fun v -> "start", string v)
+                        request.Desc |> Option.map (fun v -> "desc", Fes.Http.toQueryValue v)
+                        request.End |> Option.map (fun v -> "end", Fes.Http.toQueryValue v)
+                        request.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
+                        request.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
+                        request.Sort |> Option.map (fun v -> "sort", Fes.Http.toQueryValue v)
+                        request.Start |> Option.map (fun v -> "start", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1284,7 +1284,7 @@ module MlAnomalyOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``desc`` = request.Desc2; ``end`` = request.End2; ``page`` = request.Page; ``sort`` = request.Sort2; ``start`` = request.Start2 |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1418,7 +1418,7 @@ module MlAnomalyOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``analysis_config`` = request.AnalysisConfig; ``max_bucket_cardinality`` = request.MaxBucketCardinality; ``overall_cardinality`` = request.OverallCardinality |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1477,11 +1477,11 @@ module MlAnomalyOperations =
                 let path = $"/_ml/anomaly_detectors/{request.JobId}/_flush"
                 let queryParams =
                     [
-                        request.AdvanceTime |> Option.map (fun v -> "advance_time", string v)
-                        request.CalcInterim |> Option.map (fun v -> "calc_interim", string v)
-                        request.End |> Option.map (fun v -> "end", string v)
-                        request.SkipTime |> Option.map (fun v -> "skip_time", string v)
-                        request.Start |> Option.map (fun v -> "start", string v)
+                        request.AdvanceTime |> Option.map (fun v -> "advance_time", Fes.Http.toQueryValue v)
+                        request.CalcInterim |> Option.map (fun v -> "calc_interim", Fes.Http.toQueryValue v)
+                        request.End |> Option.map (fun v -> "end", Fes.Http.toQueryValue v)
+                        request.SkipTime |> Option.map (fun v -> "skip_time", Fes.Http.toQueryValue v)
+                        request.Start |> Option.map (fun v -> "start", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1490,7 +1490,7 @@ module MlAnomalyOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``advance_time`` = request.AdvanceTime2; ``calc_interim`` = request.CalcInterim2; ``end`` = request.End2; ``skip_time`` = request.SkipTime2; ``start`` = request.Start2 |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1585,9 +1585,9 @@ module MlAnomalyOperations =
                 let path = $"/_ml/anomaly_detectors/{request.JobId}/_forecast"
                 let queryParams =
                     [
-                        request.Duration |> Option.map (fun v -> "duration", string v)
-                        request.ExpiresIn |> Option.map (fun v -> "expires_in", string v)
-                        request.MaxModelMemory |> Option.map (fun v -> "max_model_memory", string v)
+                        request.Duration |> Option.map (fun v -> "duration", Fes.Http.toQueryValue v)
+                        request.ExpiresIn |> Option.map (fun v -> "expires_in", Fes.Http.toQueryValue v)
+                        request.MaxModelMemory |> Option.map (fun v -> "max_model_memory", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1596,7 +1596,7 @@ module MlAnomalyOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``duration`` = request.Duration2; ``expires_in`` = request.ExpiresIn2; ``max_model_memory`` = request.MaxModelMemory2 |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1688,15 +1688,15 @@ module MlAnomalyOperations =
                 let path = $"/_ml/anomaly_detectors/{request.JobId}/results/buckets/{request.Timestamp}"
                 let queryParams =
                     [
-                        request.AnomalyScore |> Option.map (fun v -> "anomaly_score", string v)
-                        request.Desc |> Option.map (fun v -> "desc", string v)
-                        request.End |> Option.map (fun v -> "end", string v)
-                        request.ExcludeInterim |> Option.map (fun v -> "exclude_interim", string v)
-                        request.Expand |> Option.map (fun v -> "expand", string v)
-                        request.From |> Option.map (fun v -> "from", string v)
-                        request.Size |> Option.map (fun v -> "size", string v)
-                        request.Sort |> Option.map (fun v -> "sort", string v)
-                        request.Start |> Option.map (fun v -> "start", string v)
+                        request.AnomalyScore |> Option.map (fun v -> "anomaly_score", Fes.Http.toQueryValue v)
+                        request.Desc |> Option.map (fun v -> "desc", Fes.Http.toQueryValue v)
+                        request.End |> Option.map (fun v -> "end", Fes.Http.toQueryValue v)
+                        request.ExcludeInterim |> Option.map (fun v -> "exclude_interim", Fes.Http.toQueryValue v)
+                        request.Expand |> Option.map (fun v -> "expand", Fes.Http.toQueryValue v)
+                        request.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
+                        request.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
+                        request.Sort |> Option.map (fun v -> "sort", Fes.Http.toQueryValue v)
+                        request.Start |> Option.map (fun v -> "start", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1705,7 +1705,7 @@ module MlAnomalyOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``anomaly_score`` = request.AnomalyScore2; ``desc`` = request.Desc2; ``end`` = request.End2; ``exclude_interim`` = request.ExcludeInterim2; ``expand`` = request.Expand2; ``page`` = request.Page; ``sort`` = request.Sort2; ``start`` = request.Start2 |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1829,11 +1829,11 @@ module MlAnomalyOperations =
                 let path = $"/_ml/calendars/{request.CalendarId}/events"
                 let queryParams =
                     [
-                        request.End |> Option.map (fun v -> "end", string v)
-                        request.From |> Option.map (fun v -> "from", string v)
-                        request.JobId |> Option.map (fun v -> "job_id", string v)
-                        request.Size |> Option.map (fun v -> "size", string v)
-                        request.Start |> Option.map (fun v -> "start", string v)
+                        request.End |> Option.map (fun v -> "end", Fes.Http.toQueryValue v)
+                        request.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
+                        request.JobId |> Option.map (fun v -> "job_id", Fes.Http.toQueryValue v)
+                        request.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
+                        request.Start |> Option.map (fun v -> "start", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1906,7 +1906,7 @@ module MlAnomalyOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``events`` = request.Events |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1951,9 +1951,9 @@ module MlAnomalyOperations =
                 let path = $"/_ml/anomaly_detectors/{request.JobId}/results/categories/{request.CategoryId}"
                 let queryParams =
                     [
-                        request.From |> Option.map (fun v -> "from", string v)
-                        request.PartitionFieldValue |> Option.map (fun v -> "partition_field_value", string v)
-                        request.Size |> Option.map (fun v -> "size", string v)
+                        request.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
+                        request.PartitionFieldValue |> Option.map (fun v -> "partition_field_value", Fes.Http.toQueryValue v)
+                        request.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1962,7 +1962,7 @@ module MlAnomalyOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``page`` = request.Page |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -2017,7 +2017,7 @@ module MlAnomalyOperations =
                 let path = $"/_ml/datafeeds/{request.DatafeedId}/_stats"
                 let queryParams =
                     [
-                        request.AllowNoMatch |> Option.map (fun v -> "allow_no_match", string v)
+                        request.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -2069,14 +2069,14 @@ module MlAnomalyOperations =
                 let path = $"/_ml/anomaly_detectors/{request.JobId}/results/influencers"
                 let queryParams =
                     [
-                        request.Desc |> Option.map (fun v -> "desc", string v)
-                        request.End |> Option.map (fun v -> "end", string v)
-                        request.ExcludeInterim |> Option.map (fun v -> "exclude_interim", string v)
-                        request.InfluencerScore |> Option.map (fun v -> "influencer_score", string v)
-                        request.From |> Option.map (fun v -> "from", string v)
-                        request.Size |> Option.map (fun v -> "size", string v)
-                        request.Sort |> Option.map (fun v -> "sort", string v)
-                        request.Start |> Option.map (fun v -> "start", string v)
+                        request.Desc |> Option.map (fun v -> "desc", Fes.Http.toQueryValue v)
+                        request.End |> Option.map (fun v -> "end", Fes.Http.toQueryValue v)
+                        request.ExcludeInterim |> Option.map (fun v -> "exclude_interim", Fes.Http.toQueryValue v)
+                        request.InfluencerScore |> Option.map (fun v -> "influencer_score", Fes.Http.toQueryValue v)
+                        request.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
+                        request.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
+                        request.Sort |> Option.map (fun v -> "sort", Fes.Http.toQueryValue v)
+                        request.Start |> Option.map (fun v -> "start", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -2085,7 +2085,7 @@ module MlAnomalyOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``page`` = request.Page |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -2160,7 +2160,7 @@ module MlAnomalyOperations =
                 let path = $"/_ml/anomaly_detectors/{request.JobId}/_stats"
                 let queryParams =
                     [
-                        request.AllowNoMatch |> Option.map (fun v -> "allow_no_match", string v)
+                        request.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -2204,7 +2204,7 @@ module MlAnomalyOperations =
                 let path = $"/_ml/anomaly_detectors/{request.JobId}/model_snapshots/{request.SnapshotId}/_upgrade/_stats"
                 let queryParams =
                     [
-                        request.AllowNoMatch |> Option.map (fun v -> "allow_no_match", string v)
+                        request.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -2279,13 +2279,13 @@ module MlAnomalyOperations =
                 let path = $"/_ml/anomaly_detectors/{request.JobId}/results/overall_buckets"
                 let queryParams =
                     [
-                        request.AllowNoMatch |> Option.map (fun v -> "allow_no_match", string v)
-                        request.BucketSpan |> Option.map (fun v -> "bucket_span", string v)
-                        request.End |> Option.map (fun v -> "end", string v)
-                        request.ExcludeInterim |> Option.map (fun v -> "exclude_interim", string v)
-                        request.OverallScore |> Option.map (fun v -> "overall_score", string v)
-                        request.Start |> Option.map (fun v -> "start", string v)
-                        request.TopN |> Option.map (fun v -> "top_n", string v)
+                        request.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
+                        request.BucketSpan |> Option.map (fun v -> "bucket_span", Fes.Http.toQueryValue v)
+                        request.End |> Option.map (fun v -> "end", Fes.Http.toQueryValue v)
+                        request.ExcludeInterim |> Option.map (fun v -> "exclude_interim", Fes.Http.toQueryValue v)
+                        request.OverallScore |> Option.map (fun v -> "overall_score", Fes.Http.toQueryValue v)
+                        request.Start |> Option.map (fun v -> "start", Fes.Http.toQueryValue v)
+                        request.TopN |> Option.map (fun v -> "top_n", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -2294,7 +2294,7 @@ module MlAnomalyOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``allow_no_match`` = request.AllowNoMatch2; ``bucket_span`` = request.BucketSpan2; ``end`` = request.End2; ``exclude_interim`` = request.ExcludeInterim2; ``overall_score`` = request.OverallScore2; ``start`` = request.Start2; ``top_n`` = request.TopN2 |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -2415,14 +2415,14 @@ module MlAnomalyOperations =
                 let path = $"/_ml/anomaly_detectors/{request.JobId}/results/records"
                 let queryParams =
                     [
-                        request.Desc |> Option.map (fun v -> "desc", string v)
-                        request.End |> Option.map (fun v -> "end", string v)
-                        request.ExcludeInterim |> Option.map (fun v -> "exclude_interim", string v)
-                        request.From |> Option.map (fun v -> "from", string v)
-                        request.RecordScore |> Option.map (fun v -> "record_score", string v)
-                        request.Size |> Option.map (fun v -> "size", string v)
-                        request.Sort |> Option.map (fun v -> "sort", string v)
-                        request.Start |> Option.map (fun v -> "start", string v)
+                        request.Desc |> Option.map (fun v -> "desc", Fes.Http.toQueryValue v)
+                        request.End |> Option.map (fun v -> "end", Fes.Http.toQueryValue v)
+                        request.ExcludeInterim |> Option.map (fun v -> "exclude_interim", Fes.Http.toQueryValue v)
+                        request.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
+                        request.RecordScore |> Option.map (fun v -> "record_score", Fes.Http.toQueryValue v)
+                        request.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
+                        request.Sort |> Option.map (fun v -> "sort", Fes.Http.toQueryValue v)
+                        request.Start |> Option.map (fun v -> "start", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -2431,7 +2431,7 @@ module MlAnomalyOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``desc`` = request.Desc2; ``end`` = request.End2; ``exclude_interim`` = request.ExcludeInterim2; ``page`` = request.Page; ``record_score`` = request.RecordScore2; ``sort`` = request.Sort2; ``start`` = request.Start2 |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -2538,7 +2538,7 @@ module MlAnomalyOperations =
                 let path = $"/_ml/anomaly_detectors/{request.JobId}/_open"
                 let queryParams =
                     [
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -2547,7 +2547,7 @@ module MlAnomalyOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``timeout`` = request.Timeout2 |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -2595,8 +2595,8 @@ module MlAnomalyOperations =
                 let path = $"/_ml/anomaly_detectors/{request.JobId}/_data"
                 let queryParams =
                     [
-                        request.ResetEnd |> Option.map (fun v -> "reset_end", string v)
-                        request.ResetStart |> Option.map (fun v -> "reset_start", string v)
+                        request.ResetEnd |> Option.map (fun v -> "reset_end", Fes.Http.toQueryValue v)
+                        request.ResetStart |> Option.map (fun v -> "reset_start", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -2688,8 +2688,8 @@ module MlAnomalyOperations =
                 let path = $"/_ml/datafeeds/{request.DatafeedId}/_preview"
                 let queryParams =
                     [
-                        request.Start |> Option.map (fun v -> "start", string v)
-                        request.End |> Option.map (fun v -> "end", string v)
+                        request.Start |> Option.map (fun v -> "start", Fes.Http.toQueryValue v)
+                        request.End |> Option.map (fun v -> "end", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -2698,7 +2698,7 @@ module MlAnomalyOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``datafeed_config`` = request.DatafeedConfig; ``job_config`` = request.JobConfig |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -2749,8 +2749,8 @@ module MlAnomalyOperations =
                 let path = $"/_ml/anomaly_detectors/{request.JobId}/_reset"
                 let queryParams =
                     [
-                        request.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", string v)
-                        request.DeleteUserAnnotations |> Option.map (fun v -> "delete_user_annotations", string v)
+                        request.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", Fes.Http.toQueryValue v)
+                        request.DeleteUserAnnotations |> Option.map (fun v -> "delete_user_annotations", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -2803,7 +2803,7 @@ module MlAnomalyOperations =
                 let path = $"/_ml/anomaly_detectors/{request.JobId}/model_snapshots/{request.SnapshotId}/_revert"
                 let queryParams =
                     [
-                        request.DeleteInterveningResults |> Option.map (fun v -> "delete_intervening_results", string v)
+                        request.DeleteInterveningResults |> Option.map (fun v -> "delete_intervening_results", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -2812,7 +2812,7 @@ module MlAnomalyOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``delete_intervening_results`` = request.DeleteInterveningResults2 |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -2870,9 +2870,9 @@ module MlAnomalyOperations =
                 let path = $"/_ml/datafeeds/{request.DatafeedId}/_start"
                 let queryParams =
                     [
-                        request.End |> Option.map (fun v -> "end", string v)
-                        request.Start |> Option.map (fun v -> "start", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.End |> Option.map (fun v -> "end", Fes.Http.toQueryValue v)
+                        request.Start |> Option.map (fun v -> "start", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -2881,7 +2881,7 @@ module MlAnomalyOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``end`` = request.End2; ``start`` = request.Start2; ``timeout`` = request.Timeout2 |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -2959,10 +2959,10 @@ module MlAnomalyOperations =
                 let path = $"/_ml/datafeeds/{request.DatafeedId}/_stop"
                 let queryParams =
                     [
-                        request.AllowNoMatch |> Option.map (fun v -> "allow_no_match", string v)
-                        request.Force |> Option.map (fun v -> "force", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
-                        request.CloseJob |> Option.map (fun v -> "close_job", string v)
+                        request.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
+                        request.Force |> Option.map (fun v -> "force", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                        request.CloseJob |> Option.map (fun v -> "close_job", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -2971,7 +2971,7 @@ module MlAnomalyOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``allow_no_match`` = request.AllowNoMatch2; ``force`` = request.Force2; ``timeout`` = request.Timeout2; ``close_job`` = request.CloseJob2 |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -3075,10 +3075,10 @@ module MlAnomalyOperations =
                 let path = $"/_ml/datafeeds/{request.DatafeedId}/_update"
                 let queryParams =
                     [
-                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", string v)
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.IgnoreThrottled |> Option.map (fun v -> "ignore_throttled", string v)
-                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", string v)
+                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.IgnoreThrottled |> Option.map (fun v -> "ignore_throttled", Fes.Http.toQueryValue v)
+                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -3087,7 +3087,7 @@ module MlAnomalyOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``aggregations`` = request.Aggregations; ``chunking_config`` = request.ChunkingConfig; ``delayed_data_check_config`` = request.DelayedDataCheckConfig; ``frequency`` = request.Frequency; ``indices`` = request.Indices; ``indices_options`` = request.IndicesOptions; ``job_id`` = request.JobId; ``max_empty_searches`` = request.MaxEmptySearches; ``query`` = request.Query; ``query_delay`` = request.QueryDelay; ``runtime_mappings`` = request.RuntimeMappings; ``script_fields`` = request.ScriptFields; ``scroll_size`` = request.ScrollSize |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -3242,7 +3242,7 @@ module MlAnomalyOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``add_items`` = request.AddItems; ``description`` = request.Description; ``remove_items`` = request.RemoveItems |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -3327,7 +3327,7 @@ module MlAnomalyOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``allow_lazy_open`` = request.AllowLazyOpen; ``analysis_limits`` = request.AnalysisLimits; ``background_persist_interval`` = request.BackgroundPersistInterval; ``custom_settings`` = request.CustomSettings; ``categorization_filters`` = request.CategorizationFilters; ``description`` = request.Description; ``model_plot_config`` = request.ModelPlotConfig; ``model_prune_window`` = request.ModelPruneWindow; ``daily_model_snapshot_retention_after_days`` = request.DailyModelSnapshotRetentionAfterDays; ``model_snapshot_retention_days`` = request.ModelSnapshotRetentionDays; ``renormalization_window_days`` = request.RenormalizationWindowDays; ``results_retention_days`` = request.ResultsRetentionDays; ``groups`` = request.Groups; ``detectors`` = request.Detectors; ``per_partition_categorization`` = request.PerPartitionCategorization |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -3483,7 +3483,7 @@ module MlAnomalyOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``description`` = request.Description; ``retain`` = request.Retain |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -3537,8 +3537,8 @@ module MlAnomalyOperations =
                 let path = $"/_ml/anomaly_detectors/{request.JobId}/model_snapshots/{request.SnapshotId}/_upgrade"
                 let queryParams =
                     [
-                        request.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""

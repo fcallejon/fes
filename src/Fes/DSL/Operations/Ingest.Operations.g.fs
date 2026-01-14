@@ -56,8 +56,8 @@ module IngestOperations =
                 let path = $"/_ingest/geoip/database/{request.Id}"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -66,7 +66,7 @@ module IngestOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``name`` = request.Name; ``maxmind`` = request.Maxmind |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -119,8 +119,8 @@ module IngestOperations =
                 let path = $"/_ingest/geoip/database/{request.Id}"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -203,8 +203,8 @@ module IngestOperations =
                 let path = $"/_ingest/ip_location/database/{request.Id}"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -261,8 +261,8 @@ module IngestOperations =
                 let path = $"/_ingest/ip_location/database/{request.Id}"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -313,8 +313,8 @@ module IngestOperations =
                 let path = $"/_ingest/pipeline/{request.Id}"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Summary |> Option.map (fun v -> "summary", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Summary |> Option.map (fun v -> "summary", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -378,9 +378,9 @@ module IngestOperations =
                 let path = $"/_ingest/pipeline/{request.Id}"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
-                        request.IfVersion |> Option.map (fun v -> "if_version", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                        request.IfVersion |> Option.map (fun v -> "if_version", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -389,7 +389,7 @@ module IngestOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``_meta`` = request.Meta; ``description`` = request.Description; ``on_failure`` = request.OnFailure; ``processors`` = request.Processors; ``version`` = request.Version; ``deprecated`` = request.Deprecated; ``field_access_pattern`` = request.FieldAccessPattern |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -472,8 +472,8 @@ module IngestOperations =
                 let path = $"/_ingest/pipeline/{request.Id}"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -547,7 +547,7 @@ module IngestOperations =
                 let path = $"/_ingest/pipeline/{request.Id}/_simulate"
                 let queryParams =
                     [
-                        request.Verbose |> Option.map (fun v -> "verbose", string v)
+                        request.Verbose |> Option.map (fun v -> "verbose", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -556,7 +556,7 @@ module IngestOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``docs`` = request.Docs; ``pipeline`` = request.Pipeline |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -612,8 +612,8 @@ module IngestOperations =
                 let path = $"/_ingest/{request.Index}/_simulate"
                 let queryParams =
                     [
-                        request.Pipeline |> Option.map (fun v -> "pipeline", string v)
-                        request.MergeType |> Option.map (fun v -> "merge_type", string v)
+                        request.Pipeline |> Option.map (fun v -> "pipeline", Fes.Http.toQueryValue v)
+                        request.MergeType |> Option.map (fun v -> "merge_type", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -622,7 +622,7 @@ module IngestOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``docs`` = request.Docs; ``component_template_substitutions`` = request.ComponentTemplateSubstitutions; ``index_template_substitutions`` = request.IndexTemplateSubstitutions; ``mapping_addition`` = request.MappingAddition; ``pipeline_substitutions`` = request.PipelineSubstitutions |}
                 |> Result.Ok
             with ex -> Result.Error ex
 

@@ -24,10 +24,10 @@ module TransformOperations =
                 let path = $"/_transform/{request.TransformId}"
                 let queryParams =
                     [
-                        request.AllowNoMatch |> Option.map (fun v -> "allow_no_match", string v)
-                        request.From |> Option.map (fun v -> "from", string v)
-                        request.Size |> Option.map (fun v -> "size", string v)
-                        request.ExcludeGenerated |> Option.map (fun v -> "exclude_generated", string v)
+                        request.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
+                        request.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
+                        request.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
+                        request.ExcludeGenerated |> Option.map (fun v -> "exclude_generated", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -106,8 +106,8 @@ module TransformOperations =
                 let path = $"/_transform/{request.TransformId}"
                 let queryParams =
                     [
-                        request.DeferValidation |> Option.map (fun v -> "defer_validation", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.DeferValidation |> Option.map (fun v -> "defer_validation", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -116,7 +116,7 @@ module TransformOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``dest`` = request.Dest; ``description`` = request.Description; ``frequency`` = request.Frequency; ``latest`` = request.Latest; ``_meta`` = request.Meta; ``pivot`` = request.Pivot; ``retention_policy`` = request.RetentionPolicy; ``settings`` = request.Settings; ``source`` = request.Source; ``sync`` = request.Sync |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -210,9 +210,9 @@ module TransformOperations =
                 let path = $"/_transform/{request.TransformId}"
                 let queryParams =
                     [
-                        request.Force |> Option.map (fun v -> "force", string v)
-                        request.DeleteDestIndex |> Option.map (fun v -> "delete_dest_index", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.Force |> Option.map (fun v -> "force", Fes.Http.toQueryValue v)
+                        request.DeleteDestIndex |> Option.map (fun v -> "delete_dest_index", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -276,10 +276,10 @@ module TransformOperations =
                 let path = $"/_transform/{request.TransformId}/_stats"
                 let queryParams =
                     [
-                        request.AllowNoMatch |> Option.map (fun v -> "allow_no_match", string v)
-                        request.From |> Option.map (fun v -> "from", string v)
-                        request.Size |> Option.map (fun v -> "size", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
+                        request.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
+                        request.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -362,7 +362,7 @@ module TransformOperations =
                 let path = $"/_transform/{request.TransformId}/_preview"
                 let queryParams =
                     [
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -371,7 +371,7 @@ module TransformOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``dest`` = request.Dest; ``description`` = request.Description; ``frequency`` = request.Frequency; ``pivot`` = request.Pivot; ``source`` = request.Source; ``settings`` = request.Settings; ``sync`` = request.Sync; ``retention_policy`` = request.RetentionPolicy; ``latest`` = request.Latest |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -452,8 +452,8 @@ module TransformOperations =
                 let path = $"/_transform/{request.TransformId}/_reset"
                 let queryParams =
                     [
-                        request.Force |> Option.map (fun v -> "force", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.Force |> Option.map (fun v -> "force", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -503,7 +503,7 @@ module TransformOperations =
                 let path = $"/_transform/{request.TransformId}/_schedule_now"
                 let queryParams =
                     [
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -548,8 +548,8 @@ module TransformOperations =
                 let path = "/_transform/set_upgrade_mode"
                 let queryParams =
                     [
-                        request.Enabled |> Option.map (fun v -> "enabled", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.Enabled |> Option.map (fun v -> "enabled", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -595,8 +595,8 @@ module TransformOperations =
                 let path = $"/_transform/{request.TransformId}/_start"
                 let queryParams =
                     [
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
-                        request.From |> Option.map (fun v -> "from", string v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                        request.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -650,11 +650,11 @@ module TransformOperations =
                 let path = $"/_transform/{request.TransformId}/_stop"
                 let queryParams =
                     [
-                        request.AllowNoMatch |> Option.map (fun v -> "allow_no_match", string v)
-                        request.Force |> Option.map (fun v -> "force", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
-                        request.WaitForCheckpoint |> Option.map (fun v -> "wait_for_checkpoint", string v)
-                        request.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", string v)
+                        request.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
+                        request.Force |> Option.map (fun v -> "force", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                        request.WaitForCheckpoint |> Option.map (fun v -> "wait_for_checkpoint", Fes.Http.toQueryValue v)
+                        request.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -736,8 +736,8 @@ module TransformOperations =
                 let path = $"/_transform/{request.TransformId}/_update"
                 let queryParams =
                     [
-                        request.DeferValidation |> Option.map (fun v -> "defer_validation", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.DeferValidation |> Option.map (fun v -> "defer_validation", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -746,7 +746,7 @@ module TransformOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``dest`` = request.Dest; ``description`` = request.Description; ``frequency`` = request.Frequency; ``_meta`` = request.Meta; ``source`` = request.Source; ``settings`` = request.Settings; ``sync`` = request.Sync; ``retention_policy`` = request.RetentionPolicy |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -857,8 +857,8 @@ module TransformOperations =
                 let path = "/_transform/_upgrade"
                 let queryParams =
                     [
-                        request.DryRun |> Option.map (fun v -> "dry_run", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.DryRun |> Option.map (fun v -> "dry_run", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""

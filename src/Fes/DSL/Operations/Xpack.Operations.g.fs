@@ -22,9 +22,9 @@ module XpackOperations =
                 let path = "/_xpack"
                 let queryParams =
                     [
-                        request.Categories |> Option.map (fun v -> "categories", string v)
-                        request.AcceptEnterprise |> Option.map (fun v -> "accept_enterprise", string v)
-                        request.Human |> Option.map (fun v -> "human", string v)
+                        request.Categories |> Option.map (fun v -> "categories", Fes.Http.toQueryValue v)
+                        request.AcceptEnterprise |> Option.map (fun v -> "accept_enterprise", Fes.Http.toQueryValue v)
+                        request.Human |> Option.map (fun v -> "human", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -82,7 +82,7 @@ module XpackOperations =
                 let path = "/_xpack/usage"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""

@@ -24,10 +24,10 @@ module CatOperations =
                 let path = $"/_cat/aliases/{request.Name}"
                 let queryParams =
                     [
-                        request.H |> Option.map (fun v -> "h", string v)
-                        request.S |> Option.map (fun v -> "s", string v)
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
+                        request.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
+                        request.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -88,10 +88,10 @@ module CatOperations =
                 let path = $"/_cat/allocation/{request.NodeId}"
                 let queryParams =
                     [
-                        request.H |> Option.map (fun v -> "h", string v)
-                        request.S |> Option.map (fun v -> "s", string v)
-                        request.Local |> Option.map (fun v -> "local", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
+                        request.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
+                        request.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
+                        request.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -152,10 +152,10 @@ module CatOperations =
                 let path = $"/_cat/circuit_breaker/{request.CircuitBreakerPatterns}"
                 let queryParams =
                     [
-                        request.H |> Option.map (fun v -> "h", string v)
-                        request.S |> Option.map (fun v -> "s", string v)
-                        request.Local |> Option.map (fun v -> "local", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
+                        request.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
+                        request.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
+                        request.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -216,10 +216,10 @@ module CatOperations =
                 let path = $"/_cat/component_templates/{request.Name}"
                 let queryParams =
                     [
-                        request.H |> Option.map (fun v -> "h", string v)
-                        request.S |> Option.map (fun v -> "s", string v)
-                        request.Local |> Option.map (fun v -> "local", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
+                        request.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
+                        request.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
+                        request.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -278,8 +278,8 @@ module CatOperations =
                 let path = $"/_cat/count/{request.Index}"
                 let queryParams =
                     [
-                        request.H |> Option.map (fun v -> "h", string v)
-                        request.S |> Option.map (fun v -> "s", string v)
+                        request.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
+                        request.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -329,9 +329,9 @@ module CatOperations =
                 let path = $"/_cat/fielddata/{request.Fields}"
                 let queryParams =
                     [
-                        request.Fields2 |> Option.map (fun v -> "fields", string v)
-                        request.H |> Option.map (fun v -> "h", string v)
-                        request.S |> Option.map (fun v -> "s", string v)
+                        request.Fields2 |> Option.map (fun v -> "fields", Fes.Http.toQueryValue v)
+                        request.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
+                        request.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -385,9 +385,9 @@ module CatOperations =
                 let path = "/_cat/health"
                 let queryParams =
                     [
-                        request.Ts |> Option.map (fun v -> "ts", string v)
-                        request.H |> Option.map (fun v -> "h", string v)
-                        request.S |> Option.map (fun v -> "s", string v)
+                        request.Ts |> Option.map (fun v -> "ts", Fes.Http.toQueryValue v)
+                        request.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
+                        request.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -445,13 +445,13 @@ module CatOperations =
                 let path = $"/_cat/indices/{request.Index}"
                 let queryParams =
                     [
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.Health |> Option.map (fun v -> "health", string v)
-                        request.IncludeUnloadedSegments |> Option.map (fun v -> "include_unloaded_segments", string v)
-                        request.Pri |> Option.map (fun v -> "pri", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.H |> Option.map (fun v -> "h", string v)
-                        request.S |> Option.map (fun v -> "s", string v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.Health |> Option.map (fun v -> "health", Fes.Http.toQueryValue v)
+                        request.IncludeUnloadedSegments |> Option.map (fun v -> "include_unloaded_segments", Fes.Http.toQueryValue v)
+                        request.Pri |> Option.map (fun v -> "pri", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
+                        request.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -526,10 +526,10 @@ module CatOperations =
                 let path = "/_cat/master"
                 let queryParams =
                     [
-                        request.H |> Option.map (fun v -> "h", string v)
-                        request.S |> Option.map (fun v -> "s", string v)
-                        request.Local |> Option.map (fun v -> "local", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
+                        request.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
+                        request.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
+                        request.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -584,9 +584,9 @@ module CatOperations =
                 let path = $"/_cat/ml/data_frame/analytics/{request.Id}"
                 let queryParams =
                     [
-                        request.AllowNoMatch |> Option.map (fun v -> "allow_no_match", string v)
-                        request.H |> Option.map (fun v -> "h", string v)
-                        request.S |> Option.map (fun v -> "s", string v)
+                        request.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
+                        request.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
+                        request.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -641,9 +641,9 @@ module CatOperations =
                 let path = $"/_cat/ml/datafeeds/{request.DatafeedId}"
                 let queryParams =
                     [
-                        request.AllowNoMatch |> Option.map (fun v -> "allow_no_match", string v)
-                        request.H |> Option.map (fun v -> "h", string v)
-                        request.S |> Option.map (fun v -> "s", string v)
+                        request.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
+                        request.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
+                        request.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -698,9 +698,9 @@ module CatOperations =
                 let path = $"/_cat/ml/anomaly_detectors/{request.JobId}"
                 let queryParams =
                     [
-                        request.AllowNoMatch |> Option.map (fun v -> "allow_no_match", string v)
-                        request.H |> Option.map (fun v -> "h", string v)
-                        request.S |> Option.map (fun v -> "s", string v)
+                        request.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
+                        request.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
+                        request.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -757,11 +757,11 @@ module CatOperations =
                 let path = $"/_cat/ml/trained_models/{request.ModelId}"
                 let queryParams =
                     [
-                        request.AllowNoMatch |> Option.map (fun v -> "allow_no_match", string v)
-                        request.H |> Option.map (fun v -> "h", string v)
-                        request.S |> Option.map (fun v -> "s", string v)
-                        request.From |> Option.map (fun v -> "from", string v)
-                        request.Size |> Option.map (fun v -> "size", string v)
+                        request.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
+                        request.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
+                        request.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
+                        request.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
+                        request.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -826,10 +826,10 @@ module CatOperations =
                 let path = "/_cat/nodeattrs"
                 let queryParams =
                     [
-                        request.H |> Option.map (fun v -> "h", string v)
-                        request.S |> Option.map (fun v -> "s", string v)
-                        request.Local |> Option.map (fun v -> "local", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
+                        request.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
+                        request.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
+                        request.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -885,11 +885,11 @@ module CatOperations =
                 let path = "/_cat/nodes"
                 let queryParams =
                     [
-                        request.FullId |> Option.map (fun v -> "full_id", string v)
-                        request.IncludeUnloadedSegments |> Option.map (fun v -> "include_unloaded_segments", string v)
-                        request.H |> Option.map (fun v -> "h", string v)
-                        request.S |> Option.map (fun v -> "s", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
+                        request.FullId |> Option.map (fun v -> "full_id", Fes.Http.toQueryValue v)
+                        request.IncludeUnloadedSegments |> Option.map (fun v -> "include_unloaded_segments", Fes.Http.toQueryValue v)
+                        request.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
+                        request.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -949,10 +949,10 @@ module CatOperations =
                 let path = "/_cat/pending_tasks"
                 let queryParams =
                     [
-                        request.H |> Option.map (fun v -> "h", string v)
-                        request.S |> Option.map (fun v -> "s", string v)
-                        request.Local |> Option.map (fun v -> "local", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
+                        request.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
+                        request.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
+                        request.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1008,11 +1008,11 @@ module CatOperations =
                 let path = "/_cat/plugins"
                 let queryParams =
                     [
-                        request.H |> Option.map (fun v -> "h", string v)
-                        request.S |> Option.map (fun v -> "s", string v)
-                        request.IncludeBootstrap |> Option.map (fun v -> "include_bootstrap", string v)
-                        request.Local |> Option.map (fun v -> "local", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
+                        request.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
+                        request.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
+                        request.IncludeBootstrap |> Option.map (fun v -> "include_bootstrap", Fes.Http.toQueryValue v)
+                        request.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1074,11 +1074,11 @@ module CatOperations =
                 let path = $"/_cat/recovery/{request.Index}"
                 let queryParams =
                     [
-                        request.ActiveOnly |> Option.map (fun v -> "active_only", string v)
-                        request.Detailed |> Option.map (fun v -> "detailed", string v)
-                        request.Index2 |> Option.map (fun v -> "index", string v)
-                        request.H |> Option.map (fun v -> "h", string v)
-                        request.S |> Option.map (fun v -> "s", string v)
+                        request.ActiveOnly |> Option.map (fun v -> "active_only", Fes.Http.toQueryValue v)
+                        request.Detailed |> Option.map (fun v -> "detailed", Fes.Http.toQueryValue v)
+                        request.Index2 |> Option.map (fun v -> "index", Fes.Http.toQueryValue v)
+                        request.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
+                        request.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1143,10 +1143,10 @@ module CatOperations =
                 let path = "/_cat/repositories"
                 let queryParams =
                     [
-                        request.H |> Option.map (fun v -> "h", string v)
-                        request.S |> Option.map (fun v -> "s", string v)
-                        request.Local |> Option.map (fun v -> "local", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
+                        request.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
+                        request.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
+                        request.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1207,15 +1207,15 @@ module CatOperations =
                 let path = $"/_cat/segments/{request.Index}"
                 let queryParams =
                     [
-                        request.H |> Option.map (fun v -> "h", string v)
-                        request.S |> Option.map (fun v -> "s", string v)
-                        request.Local |> Option.map (fun v -> "local", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", string v)
-                        request.IgnoreThrottled |> Option.map (fun v -> "ignore_throttled", string v)
-                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", string v)
-                        request.AllowClosed |> Option.map (fun v -> "allow_closed", string v)
+                        request.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
+                        request.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
+                        request.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                        request.IgnoreThrottled |> Option.map (fun v -> "ignore_throttled", Fes.Http.toQueryValue v)
+                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                        request.AllowClosed |> Option.map (fun v -> "allow_closed", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1300,9 +1300,9 @@ module CatOperations =
                 let path = $"/_cat/shards/{request.Index}"
                 let queryParams =
                     [
-                        request.H |> Option.map (fun v -> "h", string v)
-                        request.S |> Option.map (fun v -> "s", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
+                        request.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
+                        request.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1358,10 +1358,10 @@ module CatOperations =
                 let path = $"/_cat/snapshots/{request.Repository}"
                 let queryParams =
                     [
-                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", string v)
-                        request.H |> Option.map (fun v -> "h", string v)
-                        request.S |> Option.map (fun v -> "s", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
+                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                        request.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
+                        request.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1425,14 +1425,14 @@ module CatOperations =
                 let path = "/_cat/tasks"
                 let queryParams =
                     [
-                        request.Actions |> Option.map (fun v -> "actions", string v)
-                        request.Detailed |> Option.map (fun v -> "detailed", string v)
-                        request.Nodes |> Option.map (fun v -> "nodes", string v)
-                        request.ParentTaskId |> Option.map (fun v -> "parent_task_id", string v)
-                        request.H |> Option.map (fun v -> "h", string v)
-                        request.S |> Option.map (fun v -> "s", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
-                        request.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", string v)
+                        request.Actions |> Option.map (fun v -> "actions", Fes.Http.toQueryValue v)
+                        request.Detailed |> Option.map (fun v -> "detailed", Fes.Http.toQueryValue v)
+                        request.Nodes |> Option.map (fun v -> "nodes", Fes.Http.toQueryValue v)
+                        request.ParentTaskId |> Option.map (fun v -> "parent_task_id", Fes.Http.toQueryValue v)
+                        request.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
+                        request.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                        request.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1508,10 +1508,10 @@ module CatOperations =
                 let path = $"/_cat/templates/{request.Name}"
                 let queryParams =
                     [
-                        request.H |> Option.map (fun v -> "h", string v)
-                        request.S |> Option.map (fun v -> "s", string v)
-                        request.Local |> Option.map (fun v -> "local", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
+                        request.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
+                        request.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
+                        request.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1572,10 +1572,10 @@ module CatOperations =
                 let path = $"/_cat/thread_pool/{request.ThreadPoolPatterns}"
                 let queryParams =
                     [
-                        request.H |> Option.map (fun v -> "h", string v)
-                        request.S |> Option.map (fun v -> "s", string v)
-                        request.Local |> Option.map (fun v -> "local", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
+                        request.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
+                        request.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
+                        request.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1637,11 +1637,11 @@ module CatOperations =
                 let path = $"/_cat/transforms/{request.TransformId}"
                 let queryParams =
                     [
-                        request.AllowNoMatch |> Option.map (fun v -> "allow_no_match", string v)
-                        request.From |> Option.map (fun v -> "from", string v)
-                        request.H |> Option.map (fun v -> "h", string v)
-                        request.S |> Option.map (fun v -> "s", string v)
-                        request.Size |> Option.map (fun v -> "size", string v)
+                        request.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
+                        request.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
+                        request.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
+                        request.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
+                        request.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""

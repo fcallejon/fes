@@ -24,10 +24,10 @@ module TasksOperations =
                 let path = $"/_tasks/{request.TaskId}/_cancel"
                 let queryParams =
                     [
-                        request.Actions |> Option.map (fun v -> "actions", string v)
-                        request.Nodes |> Option.map (fun v -> "nodes", string v)
-                        request.ParentTaskId |> Option.map (fun v -> "parent_task_id", string v)
-                        request.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", string v)
+                        request.Actions |> Option.map (fun v -> "actions", Fes.Http.toQueryValue v)
+                        request.Nodes |> Option.map (fun v -> "nodes", Fes.Http.toQueryValue v)
+                        request.ParentTaskId |> Option.map (fun v -> "parent_task_id", Fes.Http.toQueryValue v)
+                        request.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -86,8 +86,8 @@ module TasksOperations =
                 let path = $"/_tasks/{request.TaskId}"
                 let queryParams =
                     [
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
-                        request.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", string v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                        request.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -151,13 +151,13 @@ module TasksOperations =
                 let path = "/_tasks"
                 let queryParams =
                     [
-                        request.Actions |> Option.map (fun v -> "actions", string v)
-                        request.Detailed |> Option.map (fun v -> "detailed", string v)
-                        request.GroupBy |> Option.map (fun v -> "group_by", string v)
-                        request.Nodes |> Option.map (fun v -> "nodes", string v)
-                        request.ParentTaskId |> Option.map (fun v -> "parent_task_id", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
-                        request.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", string v)
+                        request.Actions |> Option.map (fun v -> "actions", Fes.Http.toQueryValue v)
+                        request.Detailed |> Option.map (fun v -> "detailed", Fes.Http.toQueryValue v)
+                        request.GroupBy |> Option.map (fun v -> "group_by", Fes.Http.toQueryValue v)
+                        request.Nodes |> Option.map (fun v -> "nodes", Fes.Http.toQueryValue v)
+                        request.ParentTaskId |> Option.map (fun v -> "parent_task_id", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                        request.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""

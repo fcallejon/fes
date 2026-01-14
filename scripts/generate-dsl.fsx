@@ -439,6 +439,12 @@ let generateEnumWithConverter (typeName: string) (values: string list) (isFirst:
         sb.AppendLine($"        {typeName} =") |> ignore
         for (caseName, _) in validValues do
             sb.AppendLine($"        | {caseName}") |> ignore
+        // Add ToString() override so that `string enumValue` returns the correct lowercase/snake_case value
+        sb.AppendLine($"        with") |> ignore
+        sb.AppendLine($"        override this.ToString() =") |> ignore
+        sb.AppendLine($"            match this with") |> ignore
+        for (caseName, snakeCase) in validValues do
+            sb.AppendLine($"            | {caseName} -> \"{snakeCase}\"") |> ignore
         sb.AppendLine() |> ignore
         Some (sb.ToString())
 
@@ -1246,9 +1252,9 @@ let generateOperationRequestType (op: OperationDefinition) : string =
             for qp in op.QueryParameters do
                 let fsharpName = fieldNameMap.[$"query:{qp.Name}"]
                 if qp.Required then
-                    sb.AppendLine($"                        Some (\"{qp.Name}\", string request.{fsharpName})") |> ignore
+                    sb.AppendLine($"                        Some (\"{qp.Name}\", Fes.Http.toQueryValue request.{fsharpName})") |> ignore
                 else
-                    sb.AppendLine($"                        request.{fsharpName} |> Option.map (fun v -> \"{qp.Name}\", string v)") |> ignore
+                    sb.AppendLine($"                        request.{fsharpName} |> Option.map (fun v -> \"{qp.Name}\", Fes.Http.toQueryValue v)") |> ignore
             sb.AppendLine($"                    ] |> List.choose id") |> ignore
             sb.AppendLine($"                let queryString =") |> ignore
             sb.AppendLine($"                    if List.isEmpty queryParams then \"\"") |> ignore
@@ -1263,11 +1269,23 @@ let generateOperationRequestType (op: OperationDefinition) : string =
         sb.AppendLine($"                |> Fes.Http.Request.withMethod {httpMethod}") |> ignore
 
         if hasBody then
-            // If body is a reference type, serialize the Body field; otherwise serialize the whole request
+            // If body is a reference type, serialize the Body field
+            // Otherwise, create an anonymous record with just the body fields (excluding path/query params)
             if hasBodyRef then
                 sb.AppendLine($"                |> Fes.Http.Request.withJsonBody request.Body") |> ignore
             else
-                sb.AppendLine($"                |> Fes.Http.Request.withJsonBody request") |> ignore
+                // Build anonymous record with only body fields
+                match op.RequestBodyInline with
+                | Some inlineProps when not inlineProps.IsEmpty ->
+                    let bodyFieldAssignments =
+                        inlineProps
+                        |> List.map (fun prop ->
+                            let fsharpName = fieldNameMap.[$"body:{prop.Name}"]
+                            // Use backticks for field names that contain hyphens or are reserved words
+                            $"``{prop.Name}`` = request.{fsharpName}")
+                        |> String.concat "; "
+                    sb.AppendLine($"                |> Fes.Http.Request.withJsonBody {{| {bodyFieldAssignments} |}}") |> ignore
+                | _ -> ()
 
         sb.AppendLine($"                |> Result.Ok") |> ignore
         sb.AppendLine($"            with ex -> Result.Error ex") |> ignore

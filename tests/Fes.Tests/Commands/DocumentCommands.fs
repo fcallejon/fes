@@ -34,8 +34,8 @@ module DocumentCommands =
         Assert.Contains("Method: GET", result)
         Assert.Contains("/products/_doc/product_123", result)
         Assert.Contains("routing=user_1", result)
-        Assert.Contains("realtime=False", result)
-        Assert.Contains("refresh=True", result)
+        Assert.Contains("realtime=false", result)
+        Assert.Contains("refresh=true", result)
 
     [<Fact>]
     let ``Get document with source filtering returns correct HTTP call`` () =
@@ -65,7 +65,7 @@ module DocumentCommands =
         Assert.Contains("Method: GET", result)
         Assert.Contains("/products/_doc/product_123", result)
         Assert.Contains("version=5", result)
-        Assert.Contains("version_type=External", result)
+        Assert.Contains("version_type=external", result)
 
     [<Fact>]
     let ``Delete document request returns correct HTTP call`` () =
@@ -93,7 +93,7 @@ module DocumentCommands =
 
         Assert.Contains("Method: DELETE", result)
         Assert.Contains("/products/_doc/product_123", result)
-        Assert.Contains("refresh=True", result)
+        Assert.Contains("refresh=true", result)
         Assert.Contains("timeout=30s", result)
         Assert.Contains("routing=user_1", result)
 
@@ -139,7 +139,7 @@ module DocumentCommands =
 
         Assert.Contains("Method: POST", result)
         Assert.Contains("/products/_create/product_new", result)
-        Assert.Contains("refresh=WaitFor", result)
+        Assert.Contains("refresh=wait_for", result)
         Assert.Contains("timeout=1m", result)
         Assert.Contains("pipeline=my_pipeline", result)
 
@@ -154,7 +154,7 @@ module DocumentCommands =
 
         Assert.Contains("Method: PUT", result)
         Assert.Contains("/products/_bulk", result)
-        Assert.Contains("refresh=True", result)
+        Assert.Contains("refresh=true", result)
 
     [<Fact>]
     let ``Bulk request with options returns correct HTTP call`` () =
@@ -186,7 +186,7 @@ module DocumentCommands =
 
         Assert.Contains("Method: POST", result)
         Assert.Contains("/products/_doc/auto_123", result)
-        Assert.Contains("refresh=True", result)
+        Assert.Contains("refresh=true", result)
 
     [<Fact>]
     let ``Index request with id returns correct HTTP call`` () =
@@ -201,7 +201,7 @@ module DocumentCommands =
 
         Assert.Contains("Method: POST", result)
         Assert.Contains($"/products/_doc/{docId}", result)
-        Assert.Contains("refresh=True", result)
+        Assert.Contains("refresh=true", result)
 
     [<Fact>]
     let ``Index request with routing and pipeline returns correct HTTP call`` () =

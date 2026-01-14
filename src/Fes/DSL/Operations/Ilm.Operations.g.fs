@@ -22,8 +22,8 @@ module IlmOperations =
                 let path = $"/_ilm/policy/{request.Policy}"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -74,8 +74,8 @@ module IlmOperations =
                 let path = $"/_ilm/policy/{request.Policy}"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -84,7 +84,7 @@ module IlmOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``policy`` = request.Policy2 |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -132,8 +132,8 @@ module IlmOperations =
                 let path = $"/_ilm/policy/{request.Policy}"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -185,9 +185,9 @@ module IlmOperations =
                 let path = $"/{request.Index}/_ilm/explain"
                 let queryParams =
                     [
-                        request.OnlyErrors |> Option.map (fun v -> "only_errors", string v)
-                        request.OnlyManaged |> Option.map (fun v -> "only_managed", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
+                        request.OnlyErrors |> Option.map (fun v -> "only_errors", Fes.Http.toQueryValue v)
+                        request.OnlyManaged |> Option.map (fun v -> "only_managed", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -258,8 +258,8 @@ module IlmOperations =
                 let path = "/_ilm/migrate_to_data_tiers"
                 let queryParams =
                     [
-                        request.DryRun |> Option.map (fun v -> "dry_run", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
+                        request.DryRun |> Option.map (fun v -> "dry_run", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -268,7 +268,7 @@ module IlmOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``legacy_template_to_delete`` = request.LegacyTemplateToDelete; ``node_attribute`` = request.NodeAttribute |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -335,7 +335,7 @@ module IlmOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``current_step`` = request.CurrentStep; ``next_step`` = request.NextStep |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -446,8 +446,8 @@ module IlmOperations =
                 let path = "/_ilm/start"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -492,8 +492,8 @@ module IlmOperations =
                 let path = "/_ilm/stop"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""

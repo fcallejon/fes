@@ -21,7 +21,7 @@ module SearchableSnapshotsOperations =
                 let path = $"/_searchable_snapshots/{request.NodeId}/cache/stats"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -66,9 +66,9 @@ module SearchableSnapshotsOperations =
                 let path = $"/{request.Index}/_searchable_snapshots/cache/clear"
                 let queryParams =
                     [
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", string v)
-                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", string v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -132,9 +132,9 @@ module SearchableSnapshotsOperations =
                 let path = $"/_snapshot/{request.Repository}/{request.Snapshot}/_mount"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", string v)
-                        request.Storage |> Option.map (fun v -> "storage", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", Fes.Http.toQueryValue v)
+                        request.Storage |> Option.map (fun v -> "storage", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -143,7 +143,7 @@ module SearchableSnapshotsOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``index`` = request.Index; ``renamed_index`` = request.RenamedIndex; ``index_settings`` = request.IndexSettings; ``ignore_index_settings`` = request.IgnoreIndexSettings |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -218,7 +218,7 @@ module SearchableSnapshotsOperations =
                 let path = $"/{request.Index}/_searchable_snapshots/stats"
                 let queryParams =
                     [
-                        request.Level |> Option.map (fun v -> "level", string v)
+                        request.Level |> Option.map (fun v -> "level", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""

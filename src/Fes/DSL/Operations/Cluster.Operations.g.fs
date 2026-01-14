@@ -34,13 +34,13 @@ module ClusterOperations =
                 let path = "/_cluster/allocation/explain"
                 let queryParams =
                     [
-                        request.Index |> Option.map (fun v -> "index", string v)
-                        request.Shard |> Option.map (fun v -> "shard", string v)
-                        request.Primary |> Option.map (fun v -> "primary", string v)
-                        request.CurrentNode |> Option.map (fun v -> "current_node", string v)
-                        request.IncludeDiskInfo |> Option.map (fun v -> "include_disk_info", string v)
-                        request.IncludeYesDecisions |> Option.map (fun v -> "include_yes_decisions", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
+                        request.Index |> Option.map (fun v -> "index", Fes.Http.toQueryValue v)
+                        request.Shard |> Option.map (fun v -> "shard", Fes.Http.toQueryValue v)
+                        request.Primary |> Option.map (fun v -> "primary", Fes.Http.toQueryValue v)
+                        request.CurrentNode |> Option.map (fun v -> "current_node", Fes.Http.toQueryValue v)
+                        request.IncludeDiskInfo |> Option.map (fun v -> "include_disk_info", Fes.Http.toQueryValue v)
+                        request.IncludeYesDecisions |> Option.map (fun v -> "include_yes_decisions", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -49,7 +49,7 @@ module ClusterOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``index`` = request.Index2; ``shard`` = request.Shard2; ``primary`` = request.Primary2; ``current_node`` = request.CurrentNode2 |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -131,10 +131,10 @@ module ClusterOperations =
                 let path = "/_cluster/voting_config_exclusions"
                 let queryParams =
                     [
-                        request.NodeNames |> Option.map (fun v -> "node_names", string v)
-                        request.NodeIds |> Option.map (fun v -> "node_ids", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.NodeNames |> Option.map (fun v -> "node_names", Fes.Http.toQueryValue v)
+                        request.NodeIds |> Option.map (fun v -> "node_ids", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -187,8 +187,8 @@ module ClusterOperations =
                 let path = "/_cluster/voting_config_exclusions"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.WaitForRemoval |> Option.map (fun v -> "wait_for_removal", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.WaitForRemoval |> Option.map (fun v -> "wait_for_removal", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -233,10 +233,10 @@ module ClusterOperations =
                 let path = "/_cluster/settings"
                 let queryParams =
                     [
-                        request.FlatSettings |> Option.map (fun v -> "flat_settings", string v)
-                        request.IncludeDefaults |> Option.map (fun v -> "include_defaults", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.FlatSettings |> Option.map (fun v -> "flat_settings", Fes.Http.toQueryValue v)
+                        request.IncludeDefaults |> Option.map (fun v -> "include_defaults", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -303,9 +303,9 @@ module ClusterOperations =
                 let path = "/_cluster/settings"
                 let queryParams =
                     [
-                        request.FlatSettings |> Option.map (fun v -> "flat_settings", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.FlatSettings |> Option.map (fun v -> "flat_settings", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -314,7 +314,7 @@ module ClusterOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``persistent`` = request.Persistent; ``transient`` = request.Transient |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -383,17 +383,17 @@ module ClusterOperations =
                 let path = $"/_cluster/health/{request.Index}"
                 let queryParams =
                     [
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.Level |> Option.map (fun v -> "level", string v)
-                        request.Local |> Option.map (fun v -> "local", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
-                        request.WaitForActiveShards |> Option.map (fun v -> "wait_for_active_shards", string v)
-                        request.WaitForEvents |> Option.map (fun v -> "wait_for_events", string v)
-                        request.WaitForNodes |> Option.map (fun v -> "wait_for_nodes", string v)
-                        request.WaitForNoInitializingShards |> Option.map (fun v -> "wait_for_no_initializing_shards", string v)
-                        request.WaitForNoRelocatingShards |> Option.map (fun v -> "wait_for_no_relocating_shards", string v)
-                        request.WaitForStatus |> Option.map (fun v -> "wait_for_status", string v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.Level |> Option.map (fun v -> "level", Fes.Http.toQueryValue v)
+                        request.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                        request.WaitForActiveShards |> Option.map (fun v -> "wait_for_active_shards", Fes.Http.toQueryValue v)
+                        request.WaitForEvents |> Option.map (fun v -> "wait_for_events", Fes.Http.toQueryValue v)
+                        request.WaitForNodes |> Option.map (fun v -> "wait_for_nodes", Fes.Http.toQueryValue v)
+                        request.WaitForNoInitializingShards |> Option.map (fun v -> "wait_for_no_initializing_shards", Fes.Http.toQueryValue v)
+                        request.WaitForNoRelocatingShards |> Option.map (fun v -> "wait_for_no_relocating_shards", Fes.Http.toQueryValue v)
+                        request.WaitForStatus |> Option.map (fun v -> "wait_for_status", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -529,8 +529,8 @@ module ClusterOperations =
                 let path = "/_cluster/pending_tasks"
                 let queryParams =
                     [
-                        request.Local |> Option.map (fun v -> "local", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
+                        request.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -588,12 +588,12 @@ module ClusterOperations =
                 let path = "/_cluster/reroute"
                 let queryParams =
                     [
-                        request.DryRun |> Option.map (fun v -> "dry_run", string v)
-                        request.Explain |> Option.map (fun v -> "explain", string v)
-                        request.Metric |> Option.map (fun v -> "metric", string v)
-                        request.RetryFailed |> Option.map (fun v -> "retry_failed", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.DryRun |> Option.map (fun v -> "dry_run", Fes.Http.toQueryValue v)
+                        request.Explain |> Option.map (fun v -> "explain", Fes.Http.toQueryValue v)
+                        request.Metric |> Option.map (fun v -> "metric", Fes.Http.toQueryValue v)
+                        request.RetryFailed |> Option.map (fun v -> "retry_failed", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -602,7 +602,7 @@ module ClusterOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``commands`` = request.Commands |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -679,14 +679,14 @@ module ClusterOperations =
                 let path = $"/_cluster/state/{request.Metric}/{request.Index}"
                 let queryParams =
                     [
-                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", string v)
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.FlatSettings |> Option.map (fun v -> "flat_settings", string v)
-                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", string v)
-                        request.Local |> Option.map (fun v -> "local", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.WaitForMetadataVersion |> Option.map (fun v -> "wait_for_metadata_version", string v)
-                        request.WaitForTimeout |> Option.map (fun v -> "wait_for_timeout", string v)
+                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.FlatSettings |> Option.map (fun v -> "flat_settings", Fes.Http.toQueryValue v)
+                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                        request.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.WaitForMetadataVersion |> Option.map (fun v -> "wait_for_metadata_version", Fes.Http.toQueryValue v)
+                        request.WaitForTimeout |> Option.map (fun v -> "wait_for_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -770,8 +770,8 @@ module ClusterOperations =
                 let path = $"/_cluster/stats/nodes/{request.NodeId}"
                 let queryParams =
                     [
-                        request.IncludeRemotes |> Option.map (fun v -> "include_remotes", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.IncludeRemotes |> Option.map (fun v -> "include_remotes", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -899,13 +899,13 @@ module ClusterOperations =
                 let path = $"/_nodes/{request.NodeId}/hot_threads"
                 let queryParams =
                     [
-                        request.IgnoreIdleThreads |> Option.map (fun v -> "ignore_idle_threads", string v)
-                        request.Interval |> Option.map (fun v -> "interval", string v)
-                        request.Snapshots |> Option.map (fun v -> "snapshots", string v)
-                        request.Threads |> Option.map (fun v -> "threads", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
-                        request.Type |> Option.map (fun v -> "type", string v)
-                        request.Sort |> Option.map (fun v -> "sort", string v)
+                        request.IgnoreIdleThreads |> Option.map (fun v -> "ignore_idle_threads", Fes.Http.toQueryValue v)
+                        request.Interval |> Option.map (fun v -> "interval", Fes.Http.toQueryValue v)
+                        request.Snapshots |> Option.map (fun v -> "snapshots", Fes.Http.toQueryValue v)
+                        request.Threads |> Option.map (fun v -> "threads", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                        request.Type |> Option.map (fun v -> "type", Fes.Http.toQueryValue v)
+                        request.Sort |> Option.map (fun v -> "sort", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -980,8 +980,8 @@ module ClusterOperations =
                 let path = $"/_nodes/{request.NodeId}/{request.Metric}"
                 let queryParams =
                     [
-                        request.FlatSettings |> Option.map (fun v -> "flat_settings", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.FlatSettings |> Option.map (fun v -> "flat_settings", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1036,7 +1036,7 @@ module ClusterOperations =
                 let path = $"/_nodes/{request.NodeId}/reload_secure_settings"
                 let queryParams =
                     [
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1045,7 +1045,7 @@ module ClusterOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``secure_settings_password`` = request.SecureSettingsPassword |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1095,15 +1095,15 @@ module ClusterOperations =
                 let path = $"/_nodes/{request.NodeId}/stats/{request.Metric}/{request.IndexMetric}"
                 let queryParams =
                     [
-                        request.CompletionFields |> Option.map (fun v -> "completion_fields", string v)
-                        request.FielddataFields |> Option.map (fun v -> "fielddata_fields", string v)
-                        request.Fields |> Option.map (fun v -> "fields", string v)
-                        request.Groups |> Option.map (fun v -> "groups", string v)
-                        request.IncludeSegmentFileSizes |> Option.map (fun v -> "include_segment_file_sizes", string v)
-                        request.Level |> Option.map (fun v -> "level", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
-                        request.Types |> Option.map (fun v -> "types", string v)
-                        request.IncludeUnloadedSegments |> Option.map (fun v -> "include_unloaded_segments", string v)
+                        request.CompletionFields |> Option.map (fun v -> "completion_fields", Fes.Http.toQueryValue v)
+                        request.FielddataFields |> Option.map (fun v -> "fielddata_fields", Fes.Http.toQueryValue v)
+                        request.Fields |> Option.map (fun v -> "fields", Fes.Http.toQueryValue v)
+                        request.Groups |> Option.map (fun v -> "groups", Fes.Http.toQueryValue v)
+                        request.IncludeSegmentFileSizes |> Option.map (fun v -> "include_segment_file_sizes", Fes.Http.toQueryValue v)
+                        request.Level |> Option.map (fun v -> "level", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                        request.Types |> Option.map (fun v -> "types", Fes.Http.toQueryValue v)
+                        request.IncludeUnloadedSegments |> Option.map (fun v -> "include_unloaded_segments", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1197,7 +1197,7 @@ module ClusterOperations =
                 let path = $"/_nodes/{request.NodeId}/usage/{request.Metric}"
                 let queryParams =
                     [
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""

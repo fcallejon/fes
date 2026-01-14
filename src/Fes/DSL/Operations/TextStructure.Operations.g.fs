@@ -33,20 +33,20 @@ module TextStructureOperations =
                 let path = "/_text_structure/find_field_structure"
                 let queryParams =
                     [
-                        request.ColumnNames |> Option.map (fun v -> "column_names", string v)
-                        request.Delimiter |> Option.map (fun v -> "delimiter", string v)
-                        request.DocumentsToSample |> Option.map (fun v -> "documents_to_sample", string v)
-                        request.EcsCompatibility |> Option.map (fun v -> "ecs_compatibility", string v)
-                        request.Explain |> Option.map (fun v -> "explain", string v)
-                        Some ("field", string request.Field)
-                        request.Format |> Option.map (fun v -> "format", string v)
-                        request.GrokPattern |> Option.map (fun v -> "grok_pattern", string v)
-                        Some ("index", string request.Index)
-                        request.Quote |> Option.map (fun v -> "quote", string v)
-                        request.ShouldTrimFields |> Option.map (fun v -> "should_trim_fields", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
-                        request.TimestampField |> Option.map (fun v -> "timestamp_field", string v)
-                        request.TimestampFormat |> Option.map (fun v -> "timestamp_format", string v)
+                        request.ColumnNames |> Option.map (fun v -> "column_names", Fes.Http.toQueryValue v)
+                        request.Delimiter |> Option.map (fun v -> "delimiter", Fes.Http.toQueryValue v)
+                        request.DocumentsToSample |> Option.map (fun v -> "documents_to_sample", Fes.Http.toQueryValue v)
+                        request.EcsCompatibility |> Option.map (fun v -> "ecs_compatibility", Fes.Http.toQueryValue v)
+                        request.Explain |> Option.map (fun v -> "explain", Fes.Http.toQueryValue v)
+                        Some ("field", Fes.Http.toQueryValue request.Field)
+                        request.Format |> Option.map (fun v -> "format", Fes.Http.toQueryValue v)
+                        request.GrokPattern |> Option.map (fun v -> "grok_pattern", Fes.Http.toQueryValue v)
+                        Some ("index", Fes.Http.toQueryValue request.Index)
+                        request.Quote |> Option.map (fun v -> "quote", Fes.Http.toQueryValue v)
+                        request.ShouldTrimFields |> Option.map (fun v -> "should_trim_fields", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                        request.TimestampField |> Option.map (fun v -> "timestamp_field", Fes.Http.toQueryValue v)
+                        request.TimestampFormat |> Option.map (fun v -> "timestamp_format", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -193,17 +193,17 @@ module TextStructureOperations =
                 let path = "/_text_structure/find_message_structure"
                 let queryParams =
                     [
-                        request.ColumnNames |> Option.map (fun v -> "column_names", string v)
-                        request.Delimiter |> Option.map (fun v -> "delimiter", string v)
-                        request.EcsCompatibility |> Option.map (fun v -> "ecs_compatibility", string v)
-                        request.Explain |> Option.map (fun v -> "explain", string v)
-                        request.Format |> Option.map (fun v -> "format", string v)
-                        request.GrokPattern |> Option.map (fun v -> "grok_pattern", string v)
-                        request.Quote |> Option.map (fun v -> "quote", string v)
-                        request.ShouldTrimFields |> Option.map (fun v -> "should_trim_fields", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
-                        request.TimestampField |> Option.map (fun v -> "timestamp_field", string v)
-                        request.TimestampFormat |> Option.map (fun v -> "timestamp_format", string v)
+                        request.ColumnNames |> Option.map (fun v -> "column_names", Fes.Http.toQueryValue v)
+                        request.Delimiter |> Option.map (fun v -> "delimiter", Fes.Http.toQueryValue v)
+                        request.EcsCompatibility |> Option.map (fun v -> "ecs_compatibility", Fes.Http.toQueryValue v)
+                        request.Explain |> Option.map (fun v -> "explain", Fes.Http.toQueryValue v)
+                        request.Format |> Option.map (fun v -> "format", Fes.Http.toQueryValue v)
+                        request.GrokPattern |> Option.map (fun v -> "grok_pattern", Fes.Http.toQueryValue v)
+                        request.Quote |> Option.map (fun v -> "quote", Fes.Http.toQueryValue v)
+                        request.ShouldTrimFields |> Option.map (fun v -> "should_trim_fields", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                        request.TimestampField |> Option.map (fun v -> "timestamp_field", Fes.Http.toQueryValue v)
+                        request.TimestampFormat |> Option.map (fun v -> "timestamp_format", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -212,7 +212,7 @@ module TextStructureOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``messages`` = request.Messages |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -310,21 +310,21 @@ module TextStructureOperations =
                 let path = "/_text_structure/find_structure"
                 let queryParams =
                     [
-                        request.Charset |> Option.map (fun v -> "charset", string v)
-                        request.ColumnNames |> Option.map (fun v -> "column_names", string v)
-                        request.Delimiter |> Option.map (fun v -> "delimiter", string v)
-                        request.EcsCompatibility |> Option.map (fun v -> "ecs_compatibility", string v)
-                        request.Explain |> Option.map (fun v -> "explain", string v)
-                        request.Format |> Option.map (fun v -> "format", string v)
-                        request.GrokPattern |> Option.map (fun v -> "grok_pattern", string v)
-                        request.HasHeaderRow |> Option.map (fun v -> "has_header_row", string v)
-                        request.LineMergeSizeLimit |> Option.map (fun v -> "line_merge_size_limit", string v)
-                        request.LinesToSample |> Option.map (fun v -> "lines_to_sample", string v)
-                        request.Quote |> Option.map (fun v -> "quote", string v)
-                        request.ShouldTrimFields |> Option.map (fun v -> "should_trim_fields", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
-                        request.TimestampField |> Option.map (fun v -> "timestamp_field", string v)
-                        request.TimestampFormat |> Option.map (fun v -> "timestamp_format", string v)
+                        request.Charset |> Option.map (fun v -> "charset", Fes.Http.toQueryValue v)
+                        request.ColumnNames |> Option.map (fun v -> "column_names", Fes.Http.toQueryValue v)
+                        request.Delimiter |> Option.map (fun v -> "delimiter", Fes.Http.toQueryValue v)
+                        request.EcsCompatibility |> Option.map (fun v -> "ecs_compatibility", Fes.Http.toQueryValue v)
+                        request.Explain |> Option.map (fun v -> "explain", Fes.Http.toQueryValue v)
+                        request.Format |> Option.map (fun v -> "format", Fes.Http.toQueryValue v)
+                        request.GrokPattern |> Option.map (fun v -> "grok_pattern", Fes.Http.toQueryValue v)
+                        request.HasHeaderRow |> Option.map (fun v -> "has_header_row", Fes.Http.toQueryValue v)
+                        request.LineMergeSizeLimit |> Option.map (fun v -> "line_merge_size_limit", Fes.Http.toQueryValue v)
+                        request.LinesToSample |> Option.map (fun v -> "lines_to_sample", Fes.Http.toQueryValue v)
+                        request.Quote |> Option.map (fun v -> "quote", Fes.Http.toQueryValue v)
+                        request.ShouldTrimFields |> Option.map (fun v -> "should_trim_fields", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                        request.TimestampField |> Option.map (fun v -> "timestamp_field", Fes.Http.toQueryValue v)
+                        request.TimestampFormat |> Option.map (fun v -> "timestamp_format", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -482,7 +482,7 @@ module TextStructureOperations =
                 let path = "/_text_structure/test_grok_pattern"
                 let queryParams =
                     [
-                        request.EcsCompatibility |> Option.map (fun v -> "ecs_compatibility", string v)
+                        request.EcsCompatibility |> Option.map (fun v -> "ecs_compatibility", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -491,7 +491,7 @@ module TextStructureOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``grok_pattern`` = request.GrokPattern; ``text`` = request.Text |}
                 |> Result.Ok
             with ex -> Result.Error ex
 

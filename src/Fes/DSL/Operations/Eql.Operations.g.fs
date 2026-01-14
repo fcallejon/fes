@@ -22,8 +22,8 @@ module EqlOperations =
                 let path = $"/_eql/search/{request.Id}"
                 let queryParams =
                     [
-                        request.KeepAlive |> Option.map (fun v -> "keep_alive", string v)
-                        request.WaitForCompletionTimeout |> Option.map (fun v -> "wait_for_completion_timeout", string v)
+                        request.KeepAlive |> Option.map (fun v -> "keep_alive", Fes.Http.toQueryValue v)
+                        request.WaitForCompletionTimeout |> Option.map (fun v -> "wait_for_completion_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -192,15 +192,15 @@ module EqlOperations =
                 let path = $"/{request.Index}/_eql/search"
                 let queryParams =
                     [
-                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", string v)
-                        request.AllowPartialSearchResults |> Option.map (fun v -> "allow_partial_search_results", string v)
-                        request.AllowPartialSequenceResults |> Option.map (fun v -> "allow_partial_sequence_results", string v)
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.CcsMinimizeRoundtrips |> Option.map (fun v -> "ccs_minimize_roundtrips", string v)
-                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", string v)
-                        request.KeepAlive |> Option.map (fun v -> "keep_alive", string v)
-                        request.KeepOnCompletion |> Option.map (fun v -> "keep_on_completion", string v)
-                        request.WaitForCompletionTimeout |> Option.map (fun v -> "wait_for_completion_timeout", string v)
+                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                        request.AllowPartialSearchResults |> Option.map (fun v -> "allow_partial_search_results", Fes.Http.toQueryValue v)
+                        request.AllowPartialSequenceResults |> Option.map (fun v -> "allow_partial_sequence_results", Fes.Http.toQueryValue v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.CcsMinimizeRoundtrips |> Option.map (fun v -> "ccs_minimize_roundtrips", Fes.Http.toQueryValue v)
+                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                        request.KeepAlive |> Option.map (fun v -> "keep_alive", Fes.Http.toQueryValue v)
+                        request.KeepOnCompletion |> Option.map (fun v -> "keep_on_completion", Fes.Http.toQueryValue v)
+                        request.WaitForCompletionTimeout |> Option.map (fun v -> "wait_for_completion_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -209,7 +209,7 @@ module EqlOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``query`` = request.Query; ``case_sensitive`` = request.CaseSensitive; ``event_category_field`` = request.EventCategoryField; ``tiebreaker_field`` = request.TiebreakerField; ``timestamp_field`` = request.TimestampField; ``fetch_size`` = request.FetchSize; ``filter`` = request.Filter; ``keep_alive`` = request.KeepAlive2; ``keep_on_completion`` = request.KeepOnCompletion2; ``wait_for_completion_timeout`` = request.WaitForCompletionTimeout2; ``allow_partial_search_results`` = request.AllowPartialSearchResults2; ``allow_partial_sequence_results`` = request.AllowPartialSequenceResults2; ``size`` = request.Size; ``fields`` = request.Fields; ``result_position`` = request.ResultPosition; ``runtime_mappings`` = request.RuntimeMappings; ``max_samples_per_key`` = request.MaxSamplesPerKey |}
                 |> Result.Ok
             with ex -> Result.Error ex
 

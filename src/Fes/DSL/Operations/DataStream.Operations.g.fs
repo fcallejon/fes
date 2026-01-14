@@ -24,10 +24,10 @@ module DataStreamOperations =
                 let path = $"/_data_stream/{request.Name}"
                 let queryParams =
                     [
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.IncludeDefaults |> Option.map (fun v -> "include_defaults", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Verbose |> Option.map (fun v -> "verbose", string v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.IncludeDefaults |> Option.map (fun v -> "include_defaults", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Verbose |> Option.map (fun v -> "verbose", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -86,8 +86,8 @@ module DataStreamOperations =
                 let path = $"/_data_stream/{request.Name}"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -138,8 +138,8 @@ module DataStreamOperations =
                 let path = $"/_data_stream/{request.Name}"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -189,7 +189,7 @@ module DataStreamOperations =
                 let path = $"/_data_stream/{request.Name}/_stats"
                 let queryParams =
                     [
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -234,9 +234,9 @@ module DataStreamOperations =
                 let path = $"/_data_stream/{request.Name}/_lifecycle"
                 let queryParams =
                     [
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.IncludeDefaults |> Option.map (fun v -> "include_defaults", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.IncludeDefaults |> Option.map (fun v -> "include_defaults", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -304,9 +304,9 @@ module DataStreamOperations =
                 let path = $"/_data_stream/{request.Name}/_lifecycle"
                 let queryParams =
                     [
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -315,7 +315,7 @@ module DataStreamOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``data_retention`` = request.DataRetention; ``downsampling`` = request.Downsampling; ``downsampling_method`` = request.DownsamplingMethod; ``enabled`` = request.Enabled |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -383,8 +383,8 @@ module DataStreamOperations =
                 let path = $"/_data_stream/{request.Name}/_options"
                 let queryParams =
                     [
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -441,9 +441,9 @@ module DataStreamOperations =
                 let path = $"/_data_stream/{request.Name}/_options"
                 let queryParams =
                     [
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -452,7 +452,7 @@ module DataStreamOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``failure_store`` = request.FailureStore |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -506,9 +506,9 @@ module DataStreamOperations =
                 let path = $"/_data_stream/{request.Name}/_options"
                 let queryParams =
                     [
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -608,8 +608,8 @@ module DataStreamOperations =
                 let path = $"/{request.Index}/_lifecycle/explain"
                 let queryParams =
                     [
-                        request.IncludeDefaults |> Option.map (fun v -> "include_defaults", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
+                        request.IncludeDefaults |> Option.map (fun v -> "include_defaults", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -677,7 +677,7 @@ module DataStreamOperations =
                 let path = $"/_data_stream/{request.Name}/_mappings"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -729,9 +729,9 @@ module DataStreamOperations =
                 let path = $"/_data_stream/{request.Name}/_mappings"
                 let queryParams =
                     [
-                        request.DryRun |> Option.map (fun v -> "dry_run", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.DryRun |> Option.map (fun v -> "dry_run", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -795,7 +795,7 @@ module DataStreamOperations =
                 let path = $"/_data_stream/{request.Name}/_settings"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -847,9 +847,9 @@ module DataStreamOperations =
                 let path = $"/_data_stream/{request.Name}/_settings"
                 let queryParams =
                     [
-                        request.DryRun |> Option.map (fun v -> "dry_run", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.DryRun |> Option.map (fun v -> "dry_run", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -914,8 +914,8 @@ module DataStreamOperations =
                 let path = $"/_data_stream/_migrate/{request.Name}"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -967,7 +967,7 @@ module DataStreamOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``actions`` = request.Actions |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -999,7 +999,7 @@ module DataStreamOperations =
                 let path = $"/_data_stream/_promote/{request.Name}"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""

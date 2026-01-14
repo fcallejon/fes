@@ -32,18 +32,18 @@ module DocumentOperations =
                 let path = $"/{request.Index}/_bulk"
                 let queryParams =
                     [
-                        request.IncludeSourceOnError |> Option.map (fun v -> "include_source_on_error", string v)
-                        request.ListExecutedPipelines |> Option.map (fun v -> "list_executed_pipelines", string v)
-                        request.Pipeline |> Option.map (fun v -> "pipeline", string v)
-                        request.Refresh |> Option.map (fun v -> "refresh", string v)
-                        request.Routing |> Option.map (fun v -> "routing", string v)
-                        request.Source |> Option.map (fun v -> "_source", string v)
-                        request.SourceExcludes |> Option.map (fun v -> "_source_excludes", string v)
-                        request.SourceIncludes |> Option.map (fun v -> "_source_includes", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
-                        request.WaitForActiveShards |> Option.map (fun v -> "wait_for_active_shards", string v)
-                        request.RequireAlias |> Option.map (fun v -> "require_alias", string v)
-                        request.RequireDataStream |> Option.map (fun v -> "require_data_stream", string v)
+                        request.IncludeSourceOnError |> Option.map (fun v -> "include_source_on_error", Fes.Http.toQueryValue v)
+                        request.ListExecutedPipelines |> Option.map (fun v -> "list_executed_pipelines", Fes.Http.toQueryValue v)
+                        request.Pipeline |> Option.map (fun v -> "pipeline", Fes.Http.toQueryValue v)
+                        request.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
+                        request.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
+                        request.Source |> Option.map (fun v -> "_source", Fes.Http.toQueryValue v)
+                        request.SourceExcludes |> Option.map (fun v -> "_source_excludes", Fes.Http.toQueryValue v)
+                        request.SourceIncludes |> Option.map (fun v -> "_source_includes", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                        request.WaitForActiveShards |> Option.map (fun v -> "wait_for_active_shards", Fes.Http.toQueryValue v)
+                        request.RequireAlias |> Option.map (fun v -> "require_alias", Fes.Http.toQueryValue v)
+                        request.RequireDataStream |> Option.map (fun v -> "require_data_stream", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -151,16 +151,16 @@ module DocumentOperations =
                 let path = $"/{request.Index}/_create/{request.Id}"
                 let queryParams =
                     [
-                        request.IncludeSourceOnError |> Option.map (fun v -> "include_source_on_error", string v)
-                        request.Pipeline |> Option.map (fun v -> "pipeline", string v)
-                        request.Refresh |> Option.map (fun v -> "refresh", string v)
-                        request.RequireAlias |> Option.map (fun v -> "require_alias", string v)
-                        request.RequireDataStream |> Option.map (fun v -> "require_data_stream", string v)
-                        request.Routing |> Option.map (fun v -> "routing", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
-                        request.Version |> Option.map (fun v -> "version", string v)
-                        request.VersionType |> Option.map (fun v -> "version_type", string v)
-                        request.WaitForActiveShards |> Option.map (fun v -> "wait_for_active_shards", string v)
+                        request.IncludeSourceOnError |> Option.map (fun v -> "include_source_on_error", Fes.Http.toQueryValue v)
+                        request.Pipeline |> Option.map (fun v -> "pipeline", Fes.Http.toQueryValue v)
+                        request.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
+                        request.RequireAlias |> Option.map (fun v -> "require_alias", Fes.Http.toQueryValue v)
+                        request.RequireDataStream |> Option.map (fun v -> "require_data_stream", Fes.Http.toQueryValue v)
+                        request.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                        request.Version |> Option.map (fun v -> "version", Fes.Http.toQueryValue v)
+                        request.VersionType |> Option.map (fun v -> "version_type", Fes.Http.toQueryValue v)
+                        request.WaitForActiveShards |> Option.map (fun v -> "wait_for_active_shards", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -264,17 +264,17 @@ module DocumentOperations =
                 let path = $"/{request.Index}/_doc/{request.Id}"
                 let queryParams =
                     [
-                        request.Preference |> Option.map (fun v -> "preference", string v)
-                        request.Realtime |> Option.map (fun v -> "realtime", string v)
-                        request.Refresh |> Option.map (fun v -> "refresh", string v)
-                        request.Routing |> Option.map (fun v -> "routing", string v)
-                        request.Source |> Option.map (fun v -> "_source", string v)
-                        request.SourceExcludes |> Option.map (fun v -> "_source_excludes", string v)
-                        request.SourceExcludeVectors |> Option.map (fun v -> "_source_exclude_vectors", string v)
-                        request.SourceIncludes |> Option.map (fun v -> "_source_includes", string v)
-                        request.StoredFields |> Option.map (fun v -> "stored_fields", string v)
-                        request.Version |> Option.map (fun v -> "version", string v)
-                        request.VersionType |> Option.map (fun v -> "version_type", string v)
+                        request.Preference |> Option.map (fun v -> "preference", Fes.Http.toQueryValue v)
+                        request.Realtime |> Option.map (fun v -> "realtime", Fes.Http.toQueryValue v)
+                        request.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
+                        request.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
+                        request.Source |> Option.map (fun v -> "_source", Fes.Http.toQueryValue v)
+                        request.SourceExcludes |> Option.map (fun v -> "_source_excludes", Fes.Http.toQueryValue v)
+                        request.SourceExcludeVectors |> Option.map (fun v -> "_source_exclude_vectors", Fes.Http.toQueryValue v)
+                        request.SourceIncludes |> Option.map (fun v -> "_source_includes", Fes.Http.toQueryValue v)
+                        request.StoredFields |> Option.map (fun v -> "stored_fields", Fes.Http.toQueryValue v)
+                        request.Version |> Option.map (fun v -> "version", Fes.Http.toQueryValue v)
+                        request.VersionType |> Option.map (fun v -> "version_type", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -387,19 +387,19 @@ module DocumentOperations =
                 let path = $"/{request.Index}/_doc/{request.Id}"
                 let queryParams =
                     [
-                        request.IfPrimaryTerm |> Option.map (fun v -> "if_primary_term", string v)
-                        request.IfSeqNo |> Option.map (fun v -> "if_seq_no", string v)
-                        request.IncludeSourceOnError |> Option.map (fun v -> "include_source_on_error", string v)
-                        request.OpType |> Option.map (fun v -> "op_type", string v)
-                        request.Pipeline |> Option.map (fun v -> "pipeline", string v)
-                        request.Refresh |> Option.map (fun v -> "refresh", string v)
-                        request.Routing |> Option.map (fun v -> "routing", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
-                        request.Version |> Option.map (fun v -> "version", string v)
-                        request.VersionType |> Option.map (fun v -> "version_type", string v)
-                        request.WaitForActiveShards |> Option.map (fun v -> "wait_for_active_shards", string v)
-                        request.RequireAlias |> Option.map (fun v -> "require_alias", string v)
-                        request.RequireDataStream |> Option.map (fun v -> "require_data_stream", string v)
+                        request.IfPrimaryTerm |> Option.map (fun v -> "if_primary_term", Fes.Http.toQueryValue v)
+                        request.IfSeqNo |> Option.map (fun v -> "if_seq_no", Fes.Http.toQueryValue v)
+                        request.IncludeSourceOnError |> Option.map (fun v -> "include_source_on_error", Fes.Http.toQueryValue v)
+                        request.OpType |> Option.map (fun v -> "op_type", Fes.Http.toQueryValue v)
+                        request.Pipeline |> Option.map (fun v -> "pipeline", Fes.Http.toQueryValue v)
+                        request.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
+                        request.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                        request.Version |> Option.map (fun v -> "version", Fes.Http.toQueryValue v)
+                        request.VersionType |> Option.map (fun v -> "version_type", Fes.Http.toQueryValue v)
+                        request.WaitForActiveShards |> Option.map (fun v -> "wait_for_active_shards", Fes.Http.toQueryValue v)
+                        request.RequireAlias |> Option.map (fun v -> "require_alias", Fes.Http.toQueryValue v)
+                        request.RequireDataStream |> Option.map (fun v -> "require_data_stream", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -515,14 +515,14 @@ module DocumentOperations =
                 let path = $"/{request.Index}/_doc/{request.Id}"
                 let queryParams =
                     [
-                        request.IfPrimaryTerm |> Option.map (fun v -> "if_primary_term", string v)
-                        request.IfSeqNo |> Option.map (fun v -> "if_seq_no", string v)
-                        request.Refresh |> Option.map (fun v -> "refresh", string v)
-                        request.Routing |> Option.map (fun v -> "routing", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
-                        request.Version |> Option.map (fun v -> "version", string v)
-                        request.VersionType |> Option.map (fun v -> "version_type", string v)
-                        request.WaitForActiveShards |> Option.map (fun v -> "wait_for_active_shards", string v)
+                        request.IfPrimaryTerm |> Option.map (fun v -> "if_primary_term", Fes.Http.toQueryValue v)
+                        request.IfSeqNo |> Option.map (fun v -> "if_seq_no", Fes.Http.toQueryValue v)
+                        request.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
+                        request.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                        request.Version |> Option.map (fun v -> "version", Fes.Http.toQueryValue v)
+                        request.VersionType |> Option.map (fun v -> "version_type", Fes.Http.toQueryValue v)
+                        request.WaitForActiveShards |> Option.map (fun v -> "wait_for_active_shards", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -617,16 +617,16 @@ module DocumentOperations =
                 let path = $"/{request.Index}/_doc/{request.Id}"
                 let queryParams =
                     [
-                        request.Preference |> Option.map (fun v -> "preference", string v)
-                        request.Realtime |> Option.map (fun v -> "realtime", string v)
-                        request.Refresh |> Option.map (fun v -> "refresh", string v)
-                        request.Routing |> Option.map (fun v -> "routing", string v)
-                        request.Source |> Option.map (fun v -> "_source", string v)
-                        request.SourceExcludes |> Option.map (fun v -> "_source_excludes", string v)
-                        request.SourceIncludes |> Option.map (fun v -> "_source_includes", string v)
-                        request.StoredFields |> Option.map (fun v -> "stored_fields", string v)
-                        request.Version |> Option.map (fun v -> "version", string v)
-                        request.VersionType |> Option.map (fun v -> "version_type", string v)
+                        request.Preference |> Option.map (fun v -> "preference", Fes.Http.toQueryValue v)
+                        request.Realtime |> Option.map (fun v -> "realtime", Fes.Http.toQueryValue v)
+                        request.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
+                        request.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
+                        request.Source |> Option.map (fun v -> "_source", Fes.Http.toQueryValue v)
+                        request.SourceExcludes |> Option.map (fun v -> "_source_excludes", Fes.Http.toQueryValue v)
+                        request.SourceIncludes |> Option.map (fun v -> "_source_includes", Fes.Http.toQueryValue v)
+                        request.StoredFields |> Option.map (fun v -> "stored_fields", Fes.Http.toQueryValue v)
+                        request.Version |> Option.map (fun v -> "version", Fes.Http.toQueryValue v)
+                        request.VersionType |> Option.map (fun v -> "version_type", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -755,35 +755,35 @@ module DocumentOperations =
                 let path = $"/{request.Index}/_delete_by_query"
                 let queryParams =
                     [
-                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", string v)
-                        request.Analyzer |> Option.map (fun v -> "analyzer", string v)
-                        request.AnalyzeWildcard |> Option.map (fun v -> "analyze_wildcard", string v)
-                        request.Conflicts |> Option.map (fun v -> "conflicts", string v)
-                        request.DefaultOperator |> Option.map (fun v -> "default_operator", string v)
-                        request.Df |> Option.map (fun v -> "df", string v)
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.From |> Option.map (fun v -> "from", string v)
-                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", string v)
-                        request.Lenient |> Option.map (fun v -> "lenient", string v)
-                        request.MaxDocs |> Option.map (fun v -> "max_docs", string v)
-                        request.Preference |> Option.map (fun v -> "preference", string v)
-                        request.Refresh |> Option.map (fun v -> "refresh", string v)
-                        request.RequestCache |> Option.map (fun v -> "request_cache", string v)
-                        request.RequestsPerSecond |> Option.map (fun v -> "requests_per_second", string v)
-                        request.Routing |> Option.map (fun v -> "routing", string v)
-                        request.Q |> Option.map (fun v -> "q", string v)
-                        request.Scroll |> Option.map (fun v -> "scroll", string v)
-                        request.ScrollSize |> Option.map (fun v -> "scroll_size", string v)
-                        request.SearchTimeout |> Option.map (fun v -> "search_timeout", string v)
-                        request.SearchType |> Option.map (fun v -> "search_type", string v)
-                        request.Slices |> Option.map (fun v -> "slices", string v)
-                        request.Sort |> Option.map (fun v -> "sort", string v)
-                        request.Stats |> Option.map (fun v -> "stats", string v)
-                        request.TerminateAfter |> Option.map (fun v -> "terminate_after", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
-                        request.Version |> Option.map (fun v -> "version", string v)
-                        request.WaitForActiveShards |> Option.map (fun v -> "wait_for_active_shards", string v)
-                        request.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", string v)
+                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                        request.Analyzer |> Option.map (fun v -> "analyzer", Fes.Http.toQueryValue v)
+                        request.AnalyzeWildcard |> Option.map (fun v -> "analyze_wildcard", Fes.Http.toQueryValue v)
+                        request.Conflicts |> Option.map (fun v -> "conflicts", Fes.Http.toQueryValue v)
+                        request.DefaultOperator |> Option.map (fun v -> "default_operator", Fes.Http.toQueryValue v)
+                        request.Df |> Option.map (fun v -> "df", Fes.Http.toQueryValue v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
+                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                        request.Lenient |> Option.map (fun v -> "lenient", Fes.Http.toQueryValue v)
+                        request.MaxDocs |> Option.map (fun v -> "max_docs", Fes.Http.toQueryValue v)
+                        request.Preference |> Option.map (fun v -> "preference", Fes.Http.toQueryValue v)
+                        request.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
+                        request.RequestCache |> Option.map (fun v -> "request_cache", Fes.Http.toQueryValue v)
+                        request.RequestsPerSecond |> Option.map (fun v -> "requests_per_second", Fes.Http.toQueryValue v)
+                        request.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
+                        request.Q |> Option.map (fun v -> "q", Fes.Http.toQueryValue v)
+                        request.Scroll |> Option.map (fun v -> "scroll", Fes.Http.toQueryValue v)
+                        request.ScrollSize |> Option.map (fun v -> "scroll_size", Fes.Http.toQueryValue v)
+                        request.SearchTimeout |> Option.map (fun v -> "search_timeout", Fes.Http.toQueryValue v)
+                        request.SearchType |> Option.map (fun v -> "search_type", Fes.Http.toQueryValue v)
+                        request.Slices |> Option.map (fun v -> "slices", Fes.Http.toQueryValue v)
+                        request.Sort |> Option.map (fun v -> "sort", Fes.Http.toQueryValue v)
+                        request.Stats |> Option.map (fun v -> "stats", Fes.Http.toQueryValue v)
+                        request.TerminateAfter |> Option.map (fun v -> "terminate_after", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                        request.Version |> Option.map (fun v -> "version", Fes.Http.toQueryValue v)
+                        request.WaitForActiveShards |> Option.map (fun v -> "wait_for_active_shards", Fes.Http.toQueryValue v)
+                        request.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -792,7 +792,7 @@ module DocumentOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``max_docs`` = request.MaxDocs2; ``query`` = request.Query; ``slice`` = request.Slice; ``sort`` = request.Sort2 |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1022,7 +1022,7 @@ module DocumentOperations =
                 let path = $"/_delete_by_query/{request.TaskId}/_rethrottle"
                 let queryParams =
                     [
-                        Some ("requests_per_second", string request.RequestsPerSecond)
+                        Some ("requests_per_second", Fes.Http.toQueryValue request.RequestsPerSecond)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1076,15 +1076,15 @@ module DocumentOperations =
                 let path = $"/{request.Index}/_source/{request.Id}"
                 let queryParams =
                     [
-                        request.Preference |> Option.map (fun v -> "preference", string v)
-                        request.Realtime |> Option.map (fun v -> "realtime", string v)
-                        request.Refresh |> Option.map (fun v -> "refresh", string v)
-                        request.Routing |> Option.map (fun v -> "routing", string v)
-                        request.Source |> Option.map (fun v -> "_source", string v)
-                        request.SourceExcludes |> Option.map (fun v -> "_source_excludes", string v)
-                        request.SourceIncludes |> Option.map (fun v -> "_source_includes", string v)
-                        request.Version |> Option.map (fun v -> "version", string v)
-                        request.VersionType |> Option.map (fun v -> "version_type", string v)
+                        request.Preference |> Option.map (fun v -> "preference", Fes.Http.toQueryValue v)
+                        request.Realtime |> Option.map (fun v -> "realtime", Fes.Http.toQueryValue v)
+                        request.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
+                        request.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
+                        request.Source |> Option.map (fun v -> "_source", Fes.Http.toQueryValue v)
+                        request.SourceExcludes |> Option.map (fun v -> "_source_excludes", Fes.Http.toQueryValue v)
+                        request.SourceIncludes |> Option.map (fun v -> "_source_includes", Fes.Http.toQueryValue v)
+                        request.Version |> Option.map (fun v -> "version", Fes.Http.toQueryValue v)
+                        request.VersionType |> Option.map (fun v -> "version_type", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1181,15 +1181,15 @@ module DocumentOperations =
                 let path = $"/{request.Index}/_source/{request.Id}"
                 let queryParams =
                     [
-                        request.Preference |> Option.map (fun v -> "preference", string v)
-                        request.Realtime |> Option.map (fun v -> "realtime", string v)
-                        request.Refresh |> Option.map (fun v -> "refresh", string v)
-                        request.Routing |> Option.map (fun v -> "routing", string v)
-                        request.Source |> Option.map (fun v -> "_source", string v)
-                        request.SourceExcludes |> Option.map (fun v -> "_source_excludes", string v)
-                        request.SourceIncludes |> Option.map (fun v -> "_source_includes", string v)
-                        request.Version |> Option.map (fun v -> "version", string v)
-                        request.VersionType |> Option.map (fun v -> "version_type", string v)
+                        request.Preference |> Option.map (fun v -> "preference", Fes.Http.toQueryValue v)
+                        request.Realtime |> Option.map (fun v -> "realtime", Fes.Http.toQueryValue v)
+                        request.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
+                        request.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
+                        request.Source |> Option.map (fun v -> "_source", Fes.Http.toQueryValue v)
+                        request.SourceExcludes |> Option.map (fun v -> "_source_excludes", Fes.Http.toQueryValue v)
+                        request.SourceIncludes |> Option.map (fun v -> "_source_includes", Fes.Http.toQueryValue v)
+                        request.Version |> Option.map (fun v -> "version", Fes.Http.toQueryValue v)
+                        request.VersionType |> Option.map (fun v -> "version_type", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1288,14 +1288,14 @@ module DocumentOperations =
                 let path = $"/{request.Index}/_mget"
                 let queryParams =
                     [
-                        request.Preference |> Option.map (fun v -> "preference", string v)
-                        request.Realtime |> Option.map (fun v -> "realtime", string v)
-                        request.Refresh |> Option.map (fun v -> "refresh", string v)
-                        request.Routing |> Option.map (fun v -> "routing", string v)
-                        request.Source |> Option.map (fun v -> "_source", string v)
-                        request.SourceExcludes |> Option.map (fun v -> "_source_excludes", string v)
-                        request.SourceIncludes |> Option.map (fun v -> "_source_includes", string v)
-                        request.StoredFields |> Option.map (fun v -> "stored_fields", string v)
+                        request.Preference |> Option.map (fun v -> "preference", Fes.Http.toQueryValue v)
+                        request.Realtime |> Option.map (fun v -> "realtime", Fes.Http.toQueryValue v)
+                        request.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
+                        request.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
+                        request.Source |> Option.map (fun v -> "_source", Fes.Http.toQueryValue v)
+                        request.SourceExcludes |> Option.map (fun v -> "_source_excludes", Fes.Http.toQueryValue v)
+                        request.SourceIncludes |> Option.map (fun v -> "_source_includes", Fes.Http.toQueryValue v)
+                        request.StoredFields |> Option.map (fun v -> "stored_fields", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1304,7 +1304,7 @@ module DocumentOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``docs`` = request.Docs; ``ids`` = request.Ids |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1399,18 +1399,18 @@ module DocumentOperations =
                 let path = $"/{request.Index}/_mtermvectors"
                 let queryParams =
                     [
-                        request.Ids |> Option.map (fun v -> "ids", string v)
-                        request.Fields |> Option.map (fun v -> "fields", string v)
-                        request.FieldStatistics |> Option.map (fun v -> "field_statistics", string v)
-                        request.Offsets |> Option.map (fun v -> "offsets", string v)
-                        request.Payloads |> Option.map (fun v -> "payloads", string v)
-                        request.Positions |> Option.map (fun v -> "positions", string v)
-                        request.Preference |> Option.map (fun v -> "preference", string v)
-                        request.Realtime |> Option.map (fun v -> "realtime", string v)
-                        request.Routing |> Option.map (fun v -> "routing", string v)
-                        request.TermStatistics |> Option.map (fun v -> "term_statistics", string v)
-                        request.Version |> Option.map (fun v -> "version", string v)
-                        request.VersionType |> Option.map (fun v -> "version_type", string v)
+                        request.Ids |> Option.map (fun v -> "ids", Fes.Http.toQueryValue v)
+                        request.Fields |> Option.map (fun v -> "fields", Fes.Http.toQueryValue v)
+                        request.FieldStatistics |> Option.map (fun v -> "field_statistics", Fes.Http.toQueryValue v)
+                        request.Offsets |> Option.map (fun v -> "offsets", Fes.Http.toQueryValue v)
+                        request.Payloads |> Option.map (fun v -> "payloads", Fes.Http.toQueryValue v)
+                        request.Positions |> Option.map (fun v -> "positions", Fes.Http.toQueryValue v)
+                        request.Preference |> Option.map (fun v -> "preference", Fes.Http.toQueryValue v)
+                        request.Realtime |> Option.map (fun v -> "realtime", Fes.Http.toQueryValue v)
+                        request.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
+                        request.TermStatistics |> Option.map (fun v -> "term_statistics", Fes.Http.toQueryValue v)
+                        request.Version |> Option.map (fun v -> "version", Fes.Http.toQueryValue v)
+                        request.VersionType |> Option.map (fun v -> "version_type", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1419,7 +1419,7 @@ module DocumentOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``docs`` = request.Docs; ``ids`` = request.Ids2 |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1536,15 +1536,15 @@ module DocumentOperations =
                 let path = "/_reindex"
                 let queryParams =
                     [
-                        request.Refresh |> Option.map (fun v -> "refresh", string v)
-                        request.RequestsPerSecond |> Option.map (fun v -> "requests_per_second", string v)
-                        request.Scroll |> Option.map (fun v -> "scroll", string v)
-                        request.Slices |> Option.map (fun v -> "slices", string v)
-                        request.MaxDocs |> Option.map (fun v -> "max_docs", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
-                        request.WaitForActiveShards |> Option.map (fun v -> "wait_for_active_shards", string v)
-                        request.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", string v)
-                        request.RequireAlias |> Option.map (fun v -> "require_alias", string v)
+                        request.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
+                        request.RequestsPerSecond |> Option.map (fun v -> "requests_per_second", Fes.Http.toQueryValue v)
+                        request.Scroll |> Option.map (fun v -> "scroll", Fes.Http.toQueryValue v)
+                        request.Slices |> Option.map (fun v -> "slices", Fes.Http.toQueryValue v)
+                        request.MaxDocs |> Option.map (fun v -> "max_docs", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                        request.WaitForActiveShards |> Option.map (fun v -> "wait_for_active_shards", Fes.Http.toQueryValue v)
+                        request.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", Fes.Http.toQueryValue v)
+                        request.RequireAlias |> Option.map (fun v -> "require_alias", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1553,7 +1553,7 @@ module DocumentOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``conflicts`` = request.Conflicts; ``dest`` = request.Dest; ``max_docs`` = request.MaxDocs2; ``script`` = request.Script; ``source`` = request.Source |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1683,7 +1683,7 @@ module DocumentOperations =
                 let path = $"/_reindex/{request.TaskId}/_rethrottle"
                 let queryParams =
                     [
-                        Some ("requests_per_second", string request.RequestsPerSecond)
+                        Some ("requests_per_second", Fes.Http.toQueryValue request.RequestsPerSecond)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1766,17 +1766,17 @@ module DocumentOperations =
                 let path = $"/{request.Index}/_termvectors/{request.Id}"
                 let queryParams =
                     [
-                        request.Fields |> Option.map (fun v -> "fields", string v)
-                        request.FieldStatistics |> Option.map (fun v -> "field_statistics", string v)
-                        request.Offsets |> Option.map (fun v -> "offsets", string v)
-                        request.Payloads |> Option.map (fun v -> "payloads", string v)
-                        request.Positions |> Option.map (fun v -> "positions", string v)
-                        request.Preference |> Option.map (fun v -> "preference", string v)
-                        request.Realtime |> Option.map (fun v -> "realtime", string v)
-                        request.Routing |> Option.map (fun v -> "routing", string v)
-                        request.TermStatistics |> Option.map (fun v -> "term_statistics", string v)
-                        request.Version |> Option.map (fun v -> "version", string v)
-                        request.VersionType |> Option.map (fun v -> "version_type", string v)
+                        request.Fields |> Option.map (fun v -> "fields", Fes.Http.toQueryValue v)
+                        request.FieldStatistics |> Option.map (fun v -> "field_statistics", Fes.Http.toQueryValue v)
+                        request.Offsets |> Option.map (fun v -> "offsets", Fes.Http.toQueryValue v)
+                        request.Payloads |> Option.map (fun v -> "payloads", Fes.Http.toQueryValue v)
+                        request.Positions |> Option.map (fun v -> "positions", Fes.Http.toQueryValue v)
+                        request.Preference |> Option.map (fun v -> "preference", Fes.Http.toQueryValue v)
+                        request.Realtime |> Option.map (fun v -> "realtime", Fes.Http.toQueryValue v)
+                        request.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
+                        request.TermStatistics |> Option.map (fun v -> "term_statistics", Fes.Http.toQueryValue v)
+                        request.Version |> Option.map (fun v -> "version", Fes.Http.toQueryValue v)
+                        request.VersionType |> Option.map (fun v -> "version_type", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1785,7 +1785,7 @@ module DocumentOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``doc`` = request.Doc; ``filter`` = request.Filter; ``per_field_analyzer`` = request.PerFieldAnalyzer; ``fields`` = request.Fields2; ``field_statistics`` = request.FieldStatistics2; ``offsets`` = request.Offsets2; ``payloads`` = request.Payloads2; ``positions`` = request.Positions2; ``term_statistics`` = request.TermStatistics2; ``routing`` = request.Routing2; ``version`` = request.Version2; ``version_type`` = request.VersionType2 |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1962,19 +1962,19 @@ module DocumentOperations =
                 let path = $"/{request.Index}/_update/{request.Id}"
                 let queryParams =
                     [
-                        request.IfPrimaryTerm |> Option.map (fun v -> "if_primary_term", string v)
-                        request.IfSeqNo |> Option.map (fun v -> "if_seq_no", string v)
-                        request.IncludeSourceOnError |> Option.map (fun v -> "include_source_on_error", string v)
-                        request.Lang |> Option.map (fun v -> "lang", string v)
-                        request.Refresh |> Option.map (fun v -> "refresh", string v)
-                        request.RequireAlias |> Option.map (fun v -> "require_alias", string v)
-                        request.RetryOnConflict |> Option.map (fun v -> "retry_on_conflict", string v)
-                        request.Routing |> Option.map (fun v -> "routing", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
-                        request.WaitForActiveShards |> Option.map (fun v -> "wait_for_active_shards", string v)
-                        request.Source |> Option.map (fun v -> "_source", string v)
-                        request.SourceExcludes |> Option.map (fun v -> "_source_excludes", string v)
-                        request.SourceIncludes |> Option.map (fun v -> "_source_includes", string v)
+                        request.IfPrimaryTerm |> Option.map (fun v -> "if_primary_term", Fes.Http.toQueryValue v)
+                        request.IfSeqNo |> Option.map (fun v -> "if_seq_no", Fes.Http.toQueryValue v)
+                        request.IncludeSourceOnError |> Option.map (fun v -> "include_source_on_error", Fes.Http.toQueryValue v)
+                        request.Lang |> Option.map (fun v -> "lang", Fes.Http.toQueryValue v)
+                        request.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
+                        request.RequireAlias |> Option.map (fun v -> "require_alias", Fes.Http.toQueryValue v)
+                        request.RetryOnConflict |> Option.map (fun v -> "retry_on_conflict", Fes.Http.toQueryValue v)
+                        request.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                        request.WaitForActiveShards |> Option.map (fun v -> "wait_for_active_shards", Fes.Http.toQueryValue v)
+                        request.Source |> Option.map (fun v -> "_source", Fes.Http.toQueryValue v)
+                        request.SourceExcludes |> Option.map (fun v -> "_source_excludes", Fes.Http.toQueryValue v)
+                        request.SourceIncludes |> Option.map (fun v -> "_source_includes", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1983,7 +1983,7 @@ module DocumentOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``detect_noop`` = request.DetectNoop; ``doc`` = request.Doc; ``doc_as_upsert`` = request.DocAsUpsert; ``script`` = request.Script; ``scripted_upsert`` = request.ScriptedUpsert; ``_source`` = request.Source2; ``upsert`` = request.Upsert |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -2160,37 +2160,37 @@ module DocumentOperations =
                 let path = $"/{request.Index}/_update_by_query"
                 let queryParams =
                     [
-                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", string v)
-                        request.Analyzer |> Option.map (fun v -> "analyzer", string v)
-                        request.AnalyzeWildcard |> Option.map (fun v -> "analyze_wildcard", string v)
-                        request.Conflicts |> Option.map (fun v -> "conflicts", string v)
-                        request.DefaultOperator |> Option.map (fun v -> "default_operator", string v)
-                        request.Df |> Option.map (fun v -> "df", string v)
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.From |> Option.map (fun v -> "from", string v)
-                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", string v)
-                        request.Lenient |> Option.map (fun v -> "lenient", string v)
-                        request.MaxDocs |> Option.map (fun v -> "max_docs", string v)
-                        request.Pipeline |> Option.map (fun v -> "pipeline", string v)
-                        request.Preference |> Option.map (fun v -> "preference", string v)
-                        request.Q |> Option.map (fun v -> "q", string v)
-                        request.Refresh |> Option.map (fun v -> "refresh", string v)
-                        request.RequestCache |> Option.map (fun v -> "request_cache", string v)
-                        request.RequestsPerSecond |> Option.map (fun v -> "requests_per_second", string v)
-                        request.Routing |> Option.map (fun v -> "routing", string v)
-                        request.Scroll |> Option.map (fun v -> "scroll", string v)
-                        request.ScrollSize |> Option.map (fun v -> "scroll_size", string v)
-                        request.SearchTimeout |> Option.map (fun v -> "search_timeout", string v)
-                        request.SearchType |> Option.map (fun v -> "search_type", string v)
-                        request.Slices |> Option.map (fun v -> "slices", string v)
-                        request.Sort |> Option.map (fun v -> "sort", string v)
-                        request.Stats |> Option.map (fun v -> "stats", string v)
-                        request.TerminateAfter |> Option.map (fun v -> "terminate_after", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
-                        request.Version |> Option.map (fun v -> "version", string v)
-                        request.VersionType |> Option.map (fun v -> "version_type", string v)
-                        request.WaitForActiveShards |> Option.map (fun v -> "wait_for_active_shards", string v)
-                        request.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", string v)
+                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                        request.Analyzer |> Option.map (fun v -> "analyzer", Fes.Http.toQueryValue v)
+                        request.AnalyzeWildcard |> Option.map (fun v -> "analyze_wildcard", Fes.Http.toQueryValue v)
+                        request.Conflicts |> Option.map (fun v -> "conflicts", Fes.Http.toQueryValue v)
+                        request.DefaultOperator |> Option.map (fun v -> "default_operator", Fes.Http.toQueryValue v)
+                        request.Df |> Option.map (fun v -> "df", Fes.Http.toQueryValue v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
+                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                        request.Lenient |> Option.map (fun v -> "lenient", Fes.Http.toQueryValue v)
+                        request.MaxDocs |> Option.map (fun v -> "max_docs", Fes.Http.toQueryValue v)
+                        request.Pipeline |> Option.map (fun v -> "pipeline", Fes.Http.toQueryValue v)
+                        request.Preference |> Option.map (fun v -> "preference", Fes.Http.toQueryValue v)
+                        request.Q |> Option.map (fun v -> "q", Fes.Http.toQueryValue v)
+                        request.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
+                        request.RequestCache |> Option.map (fun v -> "request_cache", Fes.Http.toQueryValue v)
+                        request.RequestsPerSecond |> Option.map (fun v -> "requests_per_second", Fes.Http.toQueryValue v)
+                        request.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
+                        request.Scroll |> Option.map (fun v -> "scroll", Fes.Http.toQueryValue v)
+                        request.ScrollSize |> Option.map (fun v -> "scroll_size", Fes.Http.toQueryValue v)
+                        request.SearchTimeout |> Option.map (fun v -> "search_timeout", Fes.Http.toQueryValue v)
+                        request.SearchType |> Option.map (fun v -> "search_type", Fes.Http.toQueryValue v)
+                        request.Slices |> Option.map (fun v -> "slices", Fes.Http.toQueryValue v)
+                        request.Sort |> Option.map (fun v -> "sort", Fes.Http.toQueryValue v)
+                        request.Stats |> Option.map (fun v -> "stats", Fes.Http.toQueryValue v)
+                        request.TerminateAfter |> Option.map (fun v -> "terminate_after", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                        request.Version |> Option.map (fun v -> "version", Fes.Http.toQueryValue v)
+                        request.VersionType |> Option.map (fun v -> "version_type", Fes.Http.toQueryValue v)
+                        request.WaitForActiveShards |> Option.map (fun v -> "wait_for_active_shards", Fes.Http.toQueryValue v)
+                        request.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -2199,7 +2199,7 @@ module DocumentOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``max_docs`` = request.MaxDocs2; ``query`` = request.Query; ``script`` = request.Script; ``slice`` = request.Slice; ``conflicts`` = request.Conflicts2 |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -2444,7 +2444,7 @@ module DocumentOperations =
                 let path = $"/_update_by_query/{request.TaskId}/_rethrottle"
                 let queryParams =
                     [
-                        Some ("requests_per_second", string request.RequestsPerSecond)
+                        Some ("requests_per_second", Fes.Http.toQueryValue request.RequestsPerSecond)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""

@@ -21,7 +21,7 @@ module ScriptOperations =
                 let path = $"/_scripts/{request.Id}"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -74,8 +74,8 @@ module ScriptOperations =
                 let path = $"/_scripts/{request.Id}"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -150,9 +150,9 @@ module ScriptOperations =
                 let path = $"/_scripts/{request.Id}/{request.Context}"
                 let queryParams =
                     [
-                        request.Context2 |> Option.map (fun v -> "context", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.Context2 |> Option.map (fun v -> "context", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -161,7 +161,7 @@ module ScriptOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``script`` = request.Script |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -222,7 +222,7 @@ module ScriptOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``context`` = request.Context; ``context_setup`` = request.ContextSetup; ``script`` = request.Script |}
                 |> Result.Ok
             with ex -> Result.Error ex
 

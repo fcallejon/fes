@@ -24,10 +24,10 @@ module MlDataFrameOperations =
                 let path = $"/_ml/data_frame/analytics/{request.Id}"
                 let queryParams =
                     [
-                        request.AllowNoMatch |> Option.map (fun v -> "allow_no_match", string v)
-                        request.From |> Option.map (fun v -> "from", string v)
-                        request.Size |> Option.map (fun v -> "size", string v)
-                        request.ExcludeGenerated |> Option.map (fun v -> "exclude_generated", string v)
+                        request.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
+                        request.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
+                        request.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
+                        request.ExcludeGenerated |> Option.map (fun v -> "exclude_generated", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -108,7 +108,7 @@ module MlDataFrameOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``allow_lazy_start`` = request.AllowLazyStart; ``analysis`` = request.Analysis; ``analyzed_fields`` = request.AnalyzedFields; ``description`` = request.Description; ``dest`` = request.Dest; ``max_num_threads`` = request.MaxNumThreads; ``_meta`` = request.Meta; ``model_memory_limit`` = request.ModelMemoryLimit; ``source`` = request.Source; ``headers`` = request.Headers; ``version`` = request.Version |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -223,8 +223,8 @@ module MlDataFrameOperations =
                 let path = $"/_ml/data_frame/analytics/{request.Id}"
                 let queryParams =
                     [
-                        request.Force |> Option.map (fun v -> "force", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.Force |> Option.map (fun v -> "force", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -280,7 +280,7 @@ module MlDataFrameOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``evaluation`` = request.Evaluation; ``index`` = request.Index; ``query`` = request.Query |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -346,7 +346,7 @@ module MlDataFrameOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``source`` = request.Source; ``dest`` = request.Dest; ``analysis`` = request.Analysis; ``description`` = request.Description; ``model_memory_limit`` = request.ModelMemoryLimit; ``max_num_threads`` = request.MaxNumThreads; ``analyzed_fields`` = request.AnalyzedFields; ``allow_lazy_start`` = request.AllowLazyStart |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -419,10 +419,10 @@ module MlDataFrameOperations =
                 let path = $"/_ml/data_frame/analytics/{request.Id}/_stats"
                 let queryParams =
                     [
-                        request.AllowNoMatch |> Option.map (fun v -> "allow_no_match", string v)
-                        request.From |> Option.map (fun v -> "from", string v)
-                        request.Size |> Option.map (fun v -> "size", string v)
-                        request.Verbose |> Option.map (fun v -> "verbose", string v)
+                        request.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
+                        request.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
+                        request.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
+                        request.Verbose |> Option.map (fun v -> "verbose", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -483,7 +483,7 @@ module MlDataFrameOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``config`` = request.Config |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -522,7 +522,7 @@ module MlDataFrameOperations =
                 let path = $"/_ml/data_frame/analytics/{request.Id}/_start"
                 let queryParams =
                     [
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -531,7 +531,7 @@ module MlDataFrameOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``id`` = request.Id2; ``timeout`` = request.Timeout2 |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -593,9 +593,9 @@ module MlDataFrameOperations =
                 let path = $"/_ml/data_frame/analytics/{request.Id}/_stop"
                 let queryParams =
                     [
-                        request.AllowNoMatch |> Option.map (fun v -> "allow_no_match", string v)
-                        request.Force |> Option.map (fun v -> "force", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
+                        request.Force |> Option.map (fun v -> "force", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -604,7 +604,7 @@ module MlDataFrameOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``id`` = request.Id2; ``allow_no_match`` = request.AllowNoMatch2; ``force`` = request.Force2; ``timeout`` = request.Timeout2 |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -683,7 +683,7 @@ module MlDataFrameOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``description`` = request.Description; ``model_memory_limit`` = request.ModelMemoryLimit; ``max_num_threads`` = request.MaxNumThreads; ``allow_lazy_start`` = request.AllowLazyStart |}
                 |> Result.Ok
             with ex -> Result.Error ex
 

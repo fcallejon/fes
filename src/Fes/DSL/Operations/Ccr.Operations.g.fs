@@ -21,7 +21,7 @@ module CcrOperations =
                 let path = $"/_ccr/auto_follow/{request.Name}"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -94,7 +94,7 @@ module CcrOperations =
                 let path = $"/_ccr/auto_follow/{request.Name}"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -103,7 +103,7 @@ module CcrOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``remote_cluster`` = request.RemoteCluster; ``follow_index_pattern`` = request.FollowIndexPattern; ``leader_index_patterns`` = request.LeaderIndexPatterns; ``leader_index_exclusion_patterns`` = request.LeaderIndexExclusionPatterns; ``max_outstanding_read_requests`` = request.MaxOutstandingReadRequests; ``settings`` = request.Settings; ``max_outstanding_write_requests`` = request.MaxOutstandingWriteRequests; ``read_poll_timeout`` = request.ReadPollTimeout; ``max_read_request_operation_count`` = request.MaxReadRequestOperationCount; ``max_read_request_size`` = request.MaxReadRequestSize; ``max_retry_delay`` = request.MaxRetryDelay; ``max_write_buffer_count`` = request.MaxWriteBufferCount; ``max_write_buffer_size`` = request.MaxWriteBufferSize; ``max_write_request_operation_count`` = request.MaxWriteRequestOperationCount; ``max_write_request_size`` = request.MaxWriteRequestSize |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -215,7 +215,7 @@ module CcrOperations =
                 let path = $"/_ccr/auto_follow/{request.Name}"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -289,8 +289,8 @@ module CcrOperations =
                 let path = $"/{request.Index}/_ccr/follow"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.WaitForActiveShards |> Option.map (fun v -> "wait_for_active_shards", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.WaitForActiveShards |> Option.map (fun v -> "wait_for_active_shards", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -299,7 +299,7 @@ module CcrOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``data_stream_name`` = request.DataStreamName; ``leader_index`` = request.LeaderIndex; ``max_outstanding_read_requests`` = request.MaxOutstandingReadRequests; ``max_outstanding_write_requests`` = request.MaxOutstandingWriteRequests; ``max_read_request_operation_count`` = request.MaxReadRequestOperationCount; ``max_read_request_size`` = request.MaxReadRequestSize; ``max_retry_delay`` = request.MaxRetryDelay; ``max_write_buffer_count`` = request.MaxWriteBufferCount; ``max_write_buffer_size`` = request.MaxWriteBufferSize; ``max_write_request_operation_count`` = request.MaxWriteRequestOperationCount; ``max_write_request_size`` = request.MaxWriteRequestSize; ``read_poll_timeout`` = request.ReadPollTimeout; ``remote_cluster`` = request.RemoteCluster; ``settings`` = request.Settings |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -418,7 +418,7 @@ module CcrOperations =
                 let path = $"/{request.Index}/_ccr/info"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -466,7 +466,7 @@ module CcrOperations =
                 let path = $"/{request.Index}/_ccr/stats"
                 let queryParams =
                     [
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -522,7 +522,7 @@ module CcrOperations =
                 let path = $"/{request.Index}/_ccr/forget_follower"
                 let queryParams =
                     [
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -531,7 +531,7 @@ module CcrOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``follower_cluster`` = request.FollowerCluster; ``follower_index`` = request.FollowerIndex; ``follower_index_uuid`` = request.FollowerIndexUuid; ``leader_remote_cluster`` = request.LeaderRemoteCluster |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -591,7 +591,7 @@ module CcrOperations =
                 let path = $"/_ccr/auto_follow/{request.Name}/pause"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -636,7 +636,7 @@ module CcrOperations =
                 let path = $"/{request.Index}/_ccr/pause_follow"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -681,7 +681,7 @@ module CcrOperations =
                 let path = $"/_ccr/auto_follow/{request.Name}/resume"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -746,7 +746,7 @@ module CcrOperations =
                 let path = $"/{request.Index}/_ccr/resume_follow"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -755,7 +755,7 @@ module CcrOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``max_outstanding_read_requests`` = request.MaxOutstandingReadRequests; ``max_outstanding_write_requests`` = request.MaxOutstandingWriteRequests; ``max_read_request_operation_count`` = request.MaxReadRequestOperationCount; ``max_read_request_size`` = request.MaxReadRequestSize; ``max_retry_delay`` = request.MaxRetryDelay; ``max_write_buffer_count`` = request.MaxWriteBufferCount; ``max_write_buffer_size`` = request.MaxWriteBufferSize; ``max_write_request_operation_count`` = request.MaxWriteRequestOperationCount; ``max_write_request_size`` = request.MaxWriteRequestSize; ``read_poll_timeout`` = request.ReadPollTimeout |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -842,8 +842,8 @@ module CcrOperations =
                 let path = "/_ccr/stats"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -893,7 +893,7 @@ module CcrOperations =
                 let path = $"/{request.Index}/_ccr/unfollow"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""

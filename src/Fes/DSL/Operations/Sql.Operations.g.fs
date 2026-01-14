@@ -23,7 +23,7 @@ module SqlOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``cursor`` = request.Cursor |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -93,10 +93,10 @@ module SqlOperations =
                 let path = $"/_sql/async/{request.Id}"
                 let queryParams =
                     [
-                        request.Delimiter |> Option.map (fun v -> "delimiter", string v)
-                        request.Format |> Option.map (fun v -> "format", string v)
-                        request.KeepAlive |> Option.map (fun v -> "keep_alive", string v)
-                        request.WaitForCompletionTimeout |> Option.map (fun v -> "wait_for_completion_timeout", string v)
+                        request.Delimiter |> Option.map (fun v -> "delimiter", Fes.Http.toQueryValue v)
+                        request.Format |> Option.map (fun v -> "format", Fes.Http.toQueryValue v)
+                        request.KeepAlive |> Option.map (fun v -> "keep_alive", Fes.Http.toQueryValue v)
+                        request.WaitForCompletionTimeout |> Option.map (fun v -> "wait_for_completion_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -247,7 +247,7 @@ module SqlOperations =
                 let path = "/_sql"
                 let queryParams =
                     [
-                        request.Format |> Option.map (fun v -> "format", string v)
+                        request.Format |> Option.map (fun v -> "format", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -256,7 +256,7 @@ module SqlOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``allow_partial_search_results`` = request.AllowPartialSearchResults; ``catalog`` = request.Catalog; ``columnar`` = request.Columnar; ``cursor`` = request.Cursor; ``fetch_size`` = request.FetchSize; ``field_multi_value_leniency`` = request.FieldMultiValueLeniency; ``filter`` = request.Filter; ``index_using_frozen`` = request.IndexUsingFrozen; ``keep_alive`` = request.KeepAlive; ``keep_on_completion`` = request.KeepOnCompletion; ``page_timeout`` = request.PageTimeout; ``params`` = request.Params; ``query`` = request.Query; ``request_timeout`` = request.RequestTimeout; ``runtime_mappings`` = request.RuntimeMappings; ``time_zone`` = request.TimeZone; ``wait_for_completion_timeout`` = request.WaitForCompletionTimeout |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -379,7 +379,7 @@ module SqlOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``fetch_size`` = request.FetchSize; ``filter`` = request.Filter; ``query`` = request.Query; ``time_zone`` = request.TimeZone |}
                 |> Result.Ok
             with ex -> Result.Error ex
 

@@ -12,6 +12,8 @@ module JsonSettings =
         // Add manual type converters (not in generated models)
         opts.Converters.Add(Fes.Exceptions.ElasticsearchExceptionsConverter())
         opts.Converters.Add(Fes.Exceptions.ElasticsearchCauseByTypeConverter())
+        // Enum converter for lowercase enum values (Elasticsearch expects "true" not "True")
+        opts.Converters.Add(JsonStringEnumConverter(JsonNamingPolicy.CamelCase))
         // JsonFSharpConverter handles remaining F# types (options, other unions)
         opts.Converters.Add(JsonFSharpConverter(
             JsonUnionEncoding.AdjacentTag ||| JsonUnionEncoding.NamedFields ||| JsonUnionEncoding.UnwrapOption,

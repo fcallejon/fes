@@ -69,7 +69,7 @@ module QueryRulesOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``type`` = request.Type; ``criteria`` = request.Criteria; ``actions`` = request.Actions; ``priority`` = request.Priority |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -202,7 +202,7 @@ module QueryRulesOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``rules`` = request.Rules |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -274,8 +274,8 @@ module QueryRulesOperations =
                 let path = "/_query_rules"
                 let queryParams =
                     [
-                        request.From |> Option.map (fun v -> "from", string v)
-                        request.Size |> Option.map (fun v -> "size", string v)
+                        request.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
+                        request.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -328,7 +328,7 @@ module QueryRulesOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``match_criteria`` = request.MatchCriteria |}
                 |> Result.Ok
             with ex -> Result.Error ex
 

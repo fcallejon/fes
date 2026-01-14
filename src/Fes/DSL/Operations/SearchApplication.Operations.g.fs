@@ -55,7 +55,7 @@ module SearchApplicationOperations =
                 let path = $"/_application/search_application/{request.Name}"
                 let queryParams =
                     [
-                        request.Create |> Option.map (fun v -> "create", string v)
+                        request.Create |> Option.map (fun v -> "create", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -142,9 +142,9 @@ module SearchApplicationOperations =
                 let path = "/_application/search_application"
                 let queryParams =
                     [
-                        request.Q |> Option.map (fun v -> "q", string v)
-                        request.From |> Option.map (fun v -> "from", string v)
-                        request.Size |> Option.map (fun v -> "size", string v)
+                        request.Q |> Option.map (fun v -> "q", Fes.Http.toQueryValue v)
+                        request.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
+                        request.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -202,7 +202,7 @@ module SearchApplicationOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``params`` = request.Params |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -239,7 +239,7 @@ module SearchApplicationOperations =
                 let path = $"/_application/search_application/{request.Name}/_search"
                 let queryParams =
                     [
-                        request.TypedKeys |> Option.map (fun v -> "typed_keys", string v)
+                        request.TypedKeys |> Option.map (fun v -> "typed_keys", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -248,7 +248,7 @@ module SearchApplicationOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``params`` = request.Params |}
                 |> Result.Ok
             with ex -> Result.Error ex
 

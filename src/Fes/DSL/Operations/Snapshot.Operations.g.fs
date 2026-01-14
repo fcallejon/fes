@@ -22,8 +22,8 @@ module SnapshotOperations =
                 let path = $"/_snapshot/{request.Repository}/_cleanup"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -80,7 +80,7 @@ module SnapshotOperations =
                 let path = $"/_snapshot/{request.Repository}/{request.Snapshot}/_clone/{request.TargetSnapshot}"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -89,7 +89,7 @@ module SnapshotOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``indices`` = request.Indices |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -155,20 +155,20 @@ module SnapshotOperations =
                 let path = $"/_snapshot/{request.Repository}/{request.Snapshot}"
                 let queryParams =
                     [
-                        request.After |> Option.map (fun v -> "after", string v)
-                        request.FromSortValue |> Option.map (fun v -> "from_sort_value", string v)
-                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", string v)
-                        request.IndexDetails |> Option.map (fun v -> "index_details", string v)
-                        request.IndexNames |> Option.map (fun v -> "index_names", string v)
-                        request.IncludeRepository |> Option.map (fun v -> "include_repository", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Order |> Option.map (fun v -> "order", string v)
-                        request.Offset |> Option.map (fun v -> "offset", string v)
-                        request.Size |> Option.map (fun v -> "size", string v)
-                        request.SlmPolicyFilter |> Option.map (fun v -> "slm_policy_filter", string v)
-                        request.Sort |> Option.map (fun v -> "sort", string v)
-                        request.State |> Option.map (fun v -> "state", string v)
-                        request.Verbose |> Option.map (fun v -> "verbose", string v)
+                        request.After |> Option.map (fun v -> "after", Fes.Http.toQueryValue v)
+                        request.FromSortValue |> Option.map (fun v -> "from_sort_value", Fes.Http.toQueryValue v)
+                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                        request.IndexDetails |> Option.map (fun v -> "index_details", Fes.Http.toQueryValue v)
+                        request.IndexNames |> Option.map (fun v -> "index_names", Fes.Http.toQueryValue v)
+                        request.IncludeRepository |> Option.map (fun v -> "include_repository", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Order |> Option.map (fun v -> "order", Fes.Http.toQueryValue v)
+                        request.Offset |> Option.map (fun v -> "offset", Fes.Http.toQueryValue v)
+                        request.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
+                        request.SlmPolicyFilter |> Option.map (fun v -> "slm_policy_filter", Fes.Http.toQueryValue v)
+                        request.Sort |> Option.map (fun v -> "sort", Fes.Http.toQueryValue v)
+                        request.State |> Option.map (fun v -> "state", Fes.Http.toQueryValue v)
+                        request.Verbose |> Option.map (fun v -> "verbose", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -310,8 +310,8 @@ module SnapshotOperations =
                 let path = $"/_snapshot/{request.Repository}/{request.Snapshot}"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -320,7 +320,7 @@ module SnapshotOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``expand_wildcards`` = request.ExpandWildcards; ``feature_states`` = request.FeatureStates; ``ignore_unavailable`` = request.IgnoreUnavailable; ``include_global_state`` = request.IncludeGlobalState; ``indices`` = request.Indices; ``metadata`` = request.Metadata; ``partial`` = request.Partial |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -402,8 +402,8 @@ module SnapshotOperations =
                 let path = $"/_snapshot/{request.Repository}/{request.Snapshot}"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -459,8 +459,8 @@ module SnapshotOperations =
                 let path = $"/_snapshot/{request.Repository}"
                 let queryParams =
                     [
-                        request.Local |> Option.map (fun v -> "local", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
+                        request.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -512,9 +512,9 @@ module SnapshotOperations =
                 let path = $"/_snapshot/{request.Repository}"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
-                        request.Verify |> Option.map (fun v -> "verify", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                        request.Verify |> Option.map (fun v -> "verify", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -574,8 +574,8 @@ module SnapshotOperations =
                 let path = $"/_snapshot/{request.Repository}"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -636,18 +636,18 @@ module SnapshotOperations =
                 let path = $"/_snapshot/{request.Repository}/_analyze"
                 let queryParams =
                     [
-                        request.BlobCount |> Option.map (fun v -> "blob_count", string v)
-                        request.Concurrency |> Option.map (fun v -> "concurrency", string v)
-                        request.Detailed |> Option.map (fun v -> "detailed", string v)
-                        request.EarlyReadNodeCount |> Option.map (fun v -> "early_read_node_count", string v)
-                        request.MaxBlobSize |> Option.map (fun v -> "max_blob_size", string v)
-                        request.MaxTotalDataSize |> Option.map (fun v -> "max_total_data_size", string v)
-                        request.RareActionProbability |> Option.map (fun v -> "rare_action_probability", string v)
-                        request.RarelyAbortWrites |> Option.map (fun v -> "rarely_abort_writes", string v)
-                        request.ReadNodeCount |> Option.map (fun v -> "read_node_count", string v)
-                        request.RegisterOperationCount |> Option.map (fun v -> "register_operation_count", string v)
-                        request.Seed |> Option.map (fun v -> "seed", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.BlobCount |> Option.map (fun v -> "blob_count", Fes.Http.toQueryValue v)
+                        request.Concurrency |> Option.map (fun v -> "concurrency", Fes.Http.toQueryValue v)
+                        request.Detailed |> Option.map (fun v -> "detailed", Fes.Http.toQueryValue v)
+                        request.EarlyReadNodeCount |> Option.map (fun v -> "early_read_node_count", Fes.Http.toQueryValue v)
+                        request.MaxBlobSize |> Option.map (fun v -> "max_blob_size", Fes.Http.toQueryValue v)
+                        request.MaxTotalDataSize |> Option.map (fun v -> "max_total_data_size", Fes.Http.toQueryValue v)
+                        request.RareActionProbability |> Option.map (fun v -> "rare_action_probability", Fes.Http.toQueryValue v)
+                        request.RarelyAbortWrites |> Option.map (fun v -> "rarely_abort_writes", Fes.Http.toQueryValue v)
+                        request.ReadNodeCount |> Option.map (fun v -> "read_node_count", Fes.Http.toQueryValue v)
+                        request.RegisterOperationCount |> Option.map (fun v -> "register_operation_count", Fes.Http.toQueryValue v)
+                        request.Seed |> Option.map (fun v -> "seed", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -795,14 +795,14 @@ module SnapshotOperations =
                 let path = $"/_snapshot/{request.Repository}/_verify_integrity"
                 let queryParams =
                     [
-                        request.BlobThreadPoolConcurrency |> Option.map (fun v -> "blob_thread_pool_concurrency", string v)
-                        request.IndexSnapshotVerificationConcurrency |> Option.map (fun v -> "index_snapshot_verification_concurrency", string v)
-                        request.IndexVerificationConcurrency |> Option.map (fun v -> "index_verification_concurrency", string v)
-                        request.MaxBytesPerSec |> Option.map (fun v -> "max_bytes_per_sec", string v)
-                        request.MaxFailedShardSnapshots |> Option.map (fun v -> "max_failed_shard_snapshots", string v)
-                        request.MetaThreadPoolConcurrency |> Option.map (fun v -> "meta_thread_pool_concurrency", string v)
-                        request.SnapshotVerificationConcurrency |> Option.map (fun v -> "snapshot_verification_concurrency", string v)
-                        request.VerifyBlobContents |> Option.map (fun v -> "verify_blob_contents", string v)
+                        request.BlobThreadPoolConcurrency |> Option.map (fun v -> "blob_thread_pool_concurrency", Fes.Http.toQueryValue v)
+                        request.IndexSnapshotVerificationConcurrency |> Option.map (fun v -> "index_snapshot_verification_concurrency", Fes.Http.toQueryValue v)
+                        request.IndexVerificationConcurrency |> Option.map (fun v -> "index_verification_concurrency", Fes.Http.toQueryValue v)
+                        request.MaxBytesPerSec |> Option.map (fun v -> "max_bytes_per_sec", Fes.Http.toQueryValue v)
+                        request.MaxFailedShardSnapshots |> Option.map (fun v -> "max_failed_shard_snapshots", Fes.Http.toQueryValue v)
+                        request.MetaThreadPoolConcurrency |> Option.map (fun v -> "meta_thread_pool_concurrency", Fes.Http.toQueryValue v)
+                        request.SnapshotVerificationConcurrency |> Option.map (fun v -> "snapshot_verification_concurrency", Fes.Http.toQueryValue v)
+                        request.VerifyBlobContents |> Option.map (fun v -> "verify_blob_contents", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -902,8 +902,8 @@ module SnapshotOperations =
                 let path = $"/_snapshot/{request.Repository}/{request.Snapshot}/_restore"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -912,7 +912,7 @@ module SnapshotOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``feature_states`` = request.FeatureStates; ``ignore_index_settings`` = request.IgnoreIndexSettings; ``ignore_unavailable`` = request.IgnoreUnavailable; ``include_aliases`` = request.IncludeAliases; ``include_global_state`` = request.IncludeGlobalState; ``index_settings`` = request.IndexSettings; ``indices`` = request.Indices; ``partial`` = request.Partial; ``rename_pattern`` = request.RenamePattern; ``rename_replacement`` = request.RenameReplacement |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1016,8 +1016,8 @@ module SnapshotOperations =
                 let path = $"/_snapshot/{request.Repository}/{request.Snapshot}/_status"
                 let queryParams =
                     [
-                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
+                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1071,8 +1071,8 @@ module SnapshotOperations =
                 let path = $"/_snapshot/{request.Repository}/_verify"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""

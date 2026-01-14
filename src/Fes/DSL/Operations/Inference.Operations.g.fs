@@ -23,7 +23,7 @@ module InferenceOperations =
                 let path = $"/_inference/chat_completion/{request.InferenceId}/_stream"
                 let queryParams =
                     [
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -78,7 +78,7 @@ module InferenceOperations =
                 let path = $"/_inference/completion/{request.InferenceId}"
                 let queryParams =
                     [
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -87,7 +87,7 @@ module InferenceOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``input`` = request.Input; ``task_settings`` = request.TaskSettings |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -173,7 +173,7 @@ module InferenceOperations =
                 let path = $"/_inference/{request.TaskType}/{request.InferenceId}"
                 let queryParams =
                     [
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -236,7 +236,7 @@ module InferenceOperations =
                 let path = $"/_inference/{request.TaskType}/{request.InferenceId}"
                 let queryParams =
                     [
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -245,7 +245,7 @@ module InferenceOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``query`` = request.Query; ``input`` = request.Input; ``input_type`` = request.InputType; ``task_settings`` = request.TaskSettings |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -307,8 +307,8 @@ module InferenceOperations =
                 let path = $"/_inference/{request.TaskType}/{request.InferenceId}"
                 let queryParams =
                     [
-                        request.DryRun |> Option.map (fun v -> "dry_run", string v)
-                        request.Force |> Option.map (fun v -> "force", string v)
+                        request.DryRun |> Option.map (fun v -> "dry_run", Fes.Http.toQueryValue v)
+                        request.Force |> Option.map (fun v -> "force", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -366,7 +366,7 @@ module InferenceOperations =
                 let path = $"/_inference/{request.TaskType}/{request.Ai21InferenceId}"
                 let queryParams =
                     [
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -375,7 +375,7 @@ module InferenceOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``service`` = request.Service; ``service_settings`` = request.ServiceSettings |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -436,7 +436,7 @@ module InferenceOperations =
                 let path = $"/_inference/{request.TaskType}/{request.AlibabacloudInferenceId}"
                 let queryParams =
                     [
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -445,7 +445,7 @@ module InferenceOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``chunking_settings`` = request.ChunkingSettings; ``service`` = request.Service; ``service_settings`` = request.ServiceSettings; ``task_settings`` = request.TaskSettings |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -516,7 +516,7 @@ module InferenceOperations =
                 let path = $"/_inference/{request.TaskType}/{request.AmazonbedrockInferenceId}"
                 let queryParams =
                     [
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -525,7 +525,7 @@ module InferenceOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``chunking_settings`` = request.ChunkingSettings; ``service`` = request.Service; ``service_settings`` = request.ServiceSettings; ``task_settings`` = request.TaskSettings |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -596,7 +596,7 @@ module InferenceOperations =
                 let path = $"/_inference/{request.TaskType}/{request.AmazonsagemakerInferenceId}"
                 let queryParams =
                     [
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -605,7 +605,7 @@ module InferenceOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``chunking_settings`` = request.ChunkingSettings; ``service`` = request.Service; ``service_settings`` = request.ServiceSettings; ``task_settings`` = request.TaskSettings |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -674,7 +674,7 @@ module InferenceOperations =
                 let path = $"/_inference/{request.TaskType}/{request.AnthropicInferenceId}"
                 let queryParams =
                     [
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -683,7 +683,7 @@ module InferenceOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``service`` = request.Service; ``service_settings`` = request.ServiceSettings; ``task_settings`` = request.TaskSettings |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -749,7 +749,7 @@ module InferenceOperations =
                 let path = $"/_inference/{request.TaskType}/{request.AzureaistudioInferenceId}"
                 let queryParams =
                     [
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -758,7 +758,7 @@ module InferenceOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``chunking_settings`` = request.ChunkingSettings; ``service`` = request.Service; ``service_settings`` = request.ServiceSettings; ``task_settings`` = request.TaskSettings |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -829,7 +829,7 @@ module InferenceOperations =
                 let path = $"/_inference/{request.TaskType}/{request.AzureopenaiInferenceId}"
                 let queryParams =
                     [
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -838,7 +838,7 @@ module InferenceOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``chunking_settings`` = request.ChunkingSettings; ``service`` = request.Service; ``service_settings`` = request.ServiceSettings; ``task_settings`` = request.TaskSettings |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -909,7 +909,7 @@ module InferenceOperations =
                 let path = $"/_inference/{request.TaskType}/{request.CohereInferenceId}"
                 let queryParams =
                     [
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -918,7 +918,7 @@ module InferenceOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``chunking_settings`` = request.ChunkingSettings; ``service`` = request.Service; ``service_settings`` = request.ServiceSettings; ``task_settings`` = request.TaskSettings |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -987,7 +987,7 @@ module InferenceOperations =
                 let path = $"/_inference/{request.TaskType}/{request.ContextualaiInferenceId}"
                 let queryParams =
                     [
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -996,7 +996,7 @@ module InferenceOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``service`` = request.Service; ``service_settings`` = request.ServiceSettings; ``task_settings`` = request.TaskSettings |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1063,7 +1063,7 @@ module InferenceOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``chunking_settings`` = request.ChunkingSettings; ``service`` = request.Service; ``service_settings`` = request.ServiceSettings; ``task_settings`` = request.TaskSettings |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1125,7 +1125,7 @@ module InferenceOperations =
                 let path = $"/_inference/{request.TaskType}/{request.DeepseekInferenceId}"
                 let queryParams =
                     [
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1134,7 +1134,7 @@ module InferenceOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``service`` = request.Service; ``service_settings`` = request.ServiceSettings |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1195,7 +1195,7 @@ module InferenceOperations =
                 let path = $"/_inference/{request.TaskType}/{request.ElasticsearchInferenceId}"
                 let queryParams =
                     [
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1204,7 +1204,7 @@ module InferenceOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``chunking_settings`` = request.ChunkingSettings; ``service`` = request.Service; ``service_settings`` = request.ServiceSettings; ``task_settings`` = request.TaskSettings |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1273,7 +1273,7 @@ module InferenceOperations =
                 let path = $"/_inference/{request.TaskType}/{request.ElserInferenceId}"
                 let queryParams =
                     [
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1282,7 +1282,7 @@ module InferenceOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``chunking_settings`` = request.ChunkingSettings; ``service`` = request.Service; ``service_settings`` = request.ServiceSettings |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1346,7 +1346,7 @@ module InferenceOperations =
                 let path = $"/_inference/{request.TaskType}/{request.GoogleaistudioInferenceId}"
                 let queryParams =
                     [
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1355,7 +1355,7 @@ module InferenceOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``chunking_settings`` = request.ChunkingSettings; ``service`` = request.Service; ``service_settings`` = request.ServiceSettings |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1421,7 +1421,7 @@ module InferenceOperations =
                 let path = $"/_inference/{request.TaskType}/{request.GooglevertexaiInferenceId}"
                 let queryParams =
                     [
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1430,7 +1430,7 @@ module InferenceOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``chunking_settings`` = request.ChunkingSettings; ``service`` = request.Service; ``service_settings`` = request.ServiceSettings; ``task_settings`` = request.TaskSettings |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1497,7 +1497,7 @@ module InferenceOperations =
                 let path = $"/_inference/{request.TaskType}/{request.GroqInferenceId}"
                 let queryParams =
                     [
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1506,7 +1506,7 @@ module InferenceOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``service`` = request.Service; ``service_settings`` = request.ServiceSettings |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1567,7 +1567,7 @@ module InferenceOperations =
                 let path = $"/_inference/{request.TaskType}/{request.HuggingfaceInferenceId}"
                 let queryParams =
                     [
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1576,7 +1576,7 @@ module InferenceOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``chunking_settings`` = request.ChunkingSettings; ``service`` = request.Service; ``service_settings`` = request.ServiceSettings; ``task_settings`` = request.TaskSettings |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1647,7 +1647,7 @@ module InferenceOperations =
                 let path = $"/_inference/{request.TaskType}/{request.JinaaiInferenceId}"
                 let queryParams =
                     [
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1656,7 +1656,7 @@ module InferenceOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``chunking_settings`` = request.ChunkingSettings; ``service`` = request.Service; ``service_settings`` = request.ServiceSettings; ``task_settings`` = request.TaskSettings |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1725,7 +1725,7 @@ module InferenceOperations =
                 let path = $"/_inference/{request.TaskType}/{request.LlamaInferenceId}"
                 let queryParams =
                     [
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1734,7 +1734,7 @@ module InferenceOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``chunking_settings`` = request.ChunkingSettings; ``service`` = request.Service; ``service_settings`` = request.ServiceSettings |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1798,7 +1798,7 @@ module InferenceOperations =
                 let path = $"/_inference/{request.TaskType}/{request.MistralInferenceId}"
                 let queryParams =
                     [
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1807,7 +1807,7 @@ module InferenceOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``chunking_settings`` = request.ChunkingSettings; ``service`` = request.Service; ``service_settings`` = request.ServiceSettings |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1873,7 +1873,7 @@ module InferenceOperations =
                 let path = $"/_inference/{request.TaskType}/{request.NvidiaInferenceId}"
                 let queryParams =
                     [
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1882,7 +1882,7 @@ module InferenceOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``chunking_settings`` = request.ChunkingSettings; ``service`` = request.Service; ``service_settings`` = request.ServiceSettings; ``task_settings`` = request.TaskSettings |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1953,7 +1953,7 @@ module InferenceOperations =
                 let path = $"/_inference/{request.TaskType}/{request.OpenaiInferenceId}"
                 let queryParams =
                     [
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1962,7 +1962,7 @@ module InferenceOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``chunking_settings`` = request.ChunkingSettings; ``service`` = request.Service; ``service_settings`` = request.ServiceSettings; ``task_settings`` = request.TaskSettings |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -2033,7 +2033,7 @@ module InferenceOperations =
                 let path = $"/_inference/{request.TaskType}/{request.OpenshiftaiInferenceId}"
                 let queryParams =
                     [
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -2042,7 +2042,7 @@ module InferenceOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``chunking_settings`` = request.ChunkingSettings; ``service`` = request.Service; ``service_settings`` = request.ServiceSettings; ``task_settings`` = request.TaskSettings |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -2113,7 +2113,7 @@ module InferenceOperations =
                 let path = $"/_inference/{request.TaskType}/{request.VoyageaiInferenceId}"
                 let queryParams =
                     [
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -2122,7 +2122,7 @@ module InferenceOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``chunking_settings`` = request.ChunkingSettings; ``service`` = request.Service; ``service_settings`` = request.ServiceSettings; ``task_settings`` = request.TaskSettings |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -2191,7 +2191,7 @@ module InferenceOperations =
                 let path = $"/_inference/{request.TaskType}/{request.WatsonxInferenceId}"
                 let queryParams =
                     [
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -2200,7 +2200,7 @@ module InferenceOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``chunking_settings`` = request.ChunkingSettings; ``service`` = request.Service; ``service_settings`` = request.ServiceSettings |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -2267,7 +2267,7 @@ module InferenceOperations =
                 let path = $"/_inference/rerank/{request.InferenceId}"
                 let queryParams =
                     [
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -2276,7 +2276,7 @@ module InferenceOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``query`` = request.Query; ``input`` = request.Input; ``return_documents`` = request.ReturnDocuments; ``top_n`` = request.TopN; ``task_settings`` = request.TaskSettings |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -2342,7 +2342,7 @@ module InferenceOperations =
                 let path = $"/_inference/sparse_embedding/{request.InferenceId}"
                 let queryParams =
                     [
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -2351,7 +2351,7 @@ module InferenceOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``input`` = request.Input; ``task_settings`` = request.TaskSettings |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -2402,7 +2402,7 @@ module InferenceOperations =
                 let path = $"/_inference/completion/{request.InferenceId}/_stream"
                 let queryParams =
                     [
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -2411,7 +2411,7 @@ module InferenceOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``input`` = request.Input; ``task_settings`` = request.TaskSettings |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -2464,7 +2464,7 @@ module InferenceOperations =
                 let path = $"/_inference/text_embedding/{request.InferenceId}"
                 let queryParams =
                     [
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -2473,7 +2473,7 @@ module InferenceOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``input`` = request.Input; ``input_type`` = request.InputType; ``task_settings`` = request.TaskSettings |}
                 |> Result.Ok
             with ex -> Result.Error ex
 

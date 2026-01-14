@@ -21,8 +21,8 @@ module LicenseOperations =
                 let path = "/_license"
                 let queryParams =
                     [
-                        request.AcceptEnterprise |> Option.map (fun v -> "accept_enterprise", string v)
-                        request.Local |> Option.map (fun v -> "local", string v)
+                        request.AcceptEnterprise |> Option.map (fun v -> "accept_enterprise", Fes.Http.toQueryValue v)
+                        request.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -75,9 +75,9 @@ module LicenseOperations =
                 let path = "/_license"
                 let queryParams =
                     [
-                        request.Acknowledge |> Option.map (fun v -> "acknowledge", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.Acknowledge |> Option.map (fun v -> "acknowledge", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -86,7 +86,7 @@ module LicenseOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``license`` = request.License; ``licenses`` = request.Licenses |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -136,8 +136,8 @@ module LicenseOperations =
                 let path = "/_license"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -201,9 +201,9 @@ module LicenseOperations =
                 let path = "/_license/start_basic"
                 let queryParams =
                     [
-                        request.Acknowledge |> Option.map (fun v -> "acknowledge", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.Acknowledge |> Option.map (fun v -> "acknowledge", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -265,9 +265,9 @@ module LicenseOperations =
                 let path = "/_license/start_trial"
                 let queryParams =
                     [
-                        request.Acknowledge |> Option.map (fun v -> "acknowledge", string v)
-                        request.Type |> Option.map (fun v -> "type", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
+                        request.Acknowledge |> Option.map (fun v -> "acknowledge", Fes.Http.toQueryValue v)
+                        request.Type |> Option.map (fun v -> "type", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""

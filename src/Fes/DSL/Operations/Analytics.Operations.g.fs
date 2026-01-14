@@ -116,7 +116,7 @@ module AnalyticsOperations =
                 let path = $"/_application/analytics/{request.CollectionName}/event/{request.EventType}"
                 let queryParams =
                     [
-                        request.Debug |> Option.map (fun v -> "debug", string v)
+                        request.Debug |> Option.map (fun v -> "debug", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""

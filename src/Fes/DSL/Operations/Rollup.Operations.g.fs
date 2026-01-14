@@ -68,7 +68,7 @@ module RollupOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``cron`` = request.Cron; ``groups`` = request.Groups; ``index_pattern`` = request.IndexPattern; ``metrics`` = request.Metrics; ``page_size`` = request.PageSize; ``rollup_index`` = request.RollupIndex; ``timeout`` = request.Timeout; ``headers`` = request.Headers |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -244,8 +244,8 @@ module RollupOperations =
                 let path = $"/{request.Index}/_rollup_search"
                 let queryParams =
                     [
-                        request.RestTotalHitsAsInt |> Option.map (fun v -> "rest_total_hits_as_int", string v)
-                        request.TypedKeys |> Option.map (fun v -> "typed_keys", string v)
+                        request.RestTotalHitsAsInt |> Option.map (fun v -> "rest_total_hits_as_int", Fes.Http.toQueryValue v)
+                        request.TypedKeys |> Option.map (fun v -> "typed_keys", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -254,7 +254,7 @@ module RollupOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``aggregations`` = request.Aggregations; ``query`` = request.Query; ``size`` = request.Size |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -345,8 +345,8 @@ module RollupOperations =
                 let path = $"/_rollup/job/{request.Id}/_stop"
                 let queryParams =
                     [
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
-                        request.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", string v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                        request.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""

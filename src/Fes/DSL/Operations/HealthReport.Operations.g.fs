@@ -23,9 +23,9 @@ module HealthReportOperations =
                 let path = $"/_health_report/{request.Feature}"
                 let queryParams =
                     [
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
-                        request.Verbose |> Option.map (fun v -> "verbose", string v)
-                        request.Size |> Option.map (fun v -> "size", string v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                        request.Verbose |> Option.map (fun v -> "verbose", Fes.Http.toQueryValue v)
+                        request.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""

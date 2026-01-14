@@ -23,9 +23,9 @@ module SearchOperations =
                 let path = $"/_async_search/{request.Id}"
                 let queryParams =
                     [
-                        request.KeepAlive |> Option.map (fun v -> "keep_alive", string v)
-                        request.TypedKeys |> Option.map (fun v -> "typed_keys", string v)
-                        request.WaitForCompletionTimeout |> Option.map (fun v -> "wait_for_completion_timeout", string v)
+                        request.KeepAlive |> Option.map (fun v -> "keep_alive", Fes.Http.toQueryValue v)
+                        request.TypedKeys |> Option.map (fun v -> "typed_keys", Fes.Http.toQueryValue v)
+                        request.WaitForCompletionTimeout |> Option.map (fun v -> "wait_for_completion_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -112,7 +112,7 @@ module SearchOperations =
                 let path = $"/_async_search/status/{request.Id}"
                 let queryParams =
                     [
-                        request.KeepAlive |> Option.map (fun v -> "keep_alive", string v)
+                        request.KeepAlive |> Option.map (fun v -> "keep_alive", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -263,49 +263,49 @@ module SearchOperations =
                 let path = $"/{request.Index}/_async_search"
                 let queryParams =
                     [
-                        request.WaitForCompletionTimeout |> Option.map (fun v -> "wait_for_completion_timeout", string v)
-                        request.KeepAlive |> Option.map (fun v -> "keep_alive", string v)
-                        request.KeepOnCompletion |> Option.map (fun v -> "keep_on_completion", string v)
-                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", string v)
-                        request.AllowPartialSearchResults |> Option.map (fun v -> "allow_partial_search_results", string v)
-                        request.Analyzer |> Option.map (fun v -> "analyzer", string v)
-                        request.AnalyzeWildcard |> Option.map (fun v -> "analyze_wildcard", string v)
-                        request.BatchedReduceSize |> Option.map (fun v -> "batched_reduce_size", string v)
-                        request.CcsMinimizeRoundtrips |> Option.map (fun v -> "ccs_minimize_roundtrips", string v)
-                        request.DefaultOperator |> Option.map (fun v -> "default_operator", string v)
-                        request.Df |> Option.map (fun v -> "df", string v)
-                        request.DocvalueFields |> Option.map (fun v -> "docvalue_fields", string v)
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.Explain |> Option.map (fun v -> "explain", string v)
-                        request.IgnoreThrottled |> Option.map (fun v -> "ignore_throttled", string v)
-                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", string v)
-                        request.Lenient |> Option.map (fun v -> "lenient", string v)
-                        request.MaxConcurrentShardRequests |> Option.map (fun v -> "max_concurrent_shard_requests", string v)
-                        request.Preference |> Option.map (fun v -> "preference", string v)
-                        request.RequestCache |> Option.map (fun v -> "request_cache", string v)
-                        request.Routing |> Option.map (fun v -> "routing", string v)
-                        request.SearchType |> Option.map (fun v -> "search_type", string v)
-                        request.Stats |> Option.map (fun v -> "stats", string v)
-                        request.StoredFields |> Option.map (fun v -> "stored_fields", string v)
-                        request.SuggestField |> Option.map (fun v -> "suggest_field", string v)
-                        request.SuggestMode |> Option.map (fun v -> "suggest_mode", string v)
-                        request.SuggestSize |> Option.map (fun v -> "suggest_size", string v)
-                        request.SuggestText |> Option.map (fun v -> "suggest_text", string v)
-                        request.TerminateAfter |> Option.map (fun v -> "terminate_after", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
-                        request.TrackTotalHits |> Option.map (fun v -> "track_total_hits", string v)
-                        request.TrackScores |> Option.map (fun v -> "track_scores", string v)
-                        request.TypedKeys |> Option.map (fun v -> "typed_keys", string v)
-                        request.RestTotalHitsAsInt |> Option.map (fun v -> "rest_total_hits_as_int", string v)
-                        request.Version |> Option.map (fun v -> "version", string v)
-                        request.Source |> Option.map (fun v -> "_source", string v)
-                        request.SourceExcludes |> Option.map (fun v -> "_source_excludes", string v)
-                        request.SourceIncludes |> Option.map (fun v -> "_source_includes", string v)
-                        request.SeqNoPrimaryTerm |> Option.map (fun v -> "seq_no_primary_term", string v)
-                        request.Q |> Option.map (fun v -> "q", string v)
-                        request.Size |> Option.map (fun v -> "size", string v)
-                        request.From |> Option.map (fun v -> "from", string v)
-                        request.Sort |> Option.map (fun v -> "sort", string v)
+                        request.WaitForCompletionTimeout |> Option.map (fun v -> "wait_for_completion_timeout", Fes.Http.toQueryValue v)
+                        request.KeepAlive |> Option.map (fun v -> "keep_alive", Fes.Http.toQueryValue v)
+                        request.KeepOnCompletion |> Option.map (fun v -> "keep_on_completion", Fes.Http.toQueryValue v)
+                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                        request.AllowPartialSearchResults |> Option.map (fun v -> "allow_partial_search_results", Fes.Http.toQueryValue v)
+                        request.Analyzer |> Option.map (fun v -> "analyzer", Fes.Http.toQueryValue v)
+                        request.AnalyzeWildcard |> Option.map (fun v -> "analyze_wildcard", Fes.Http.toQueryValue v)
+                        request.BatchedReduceSize |> Option.map (fun v -> "batched_reduce_size", Fes.Http.toQueryValue v)
+                        request.CcsMinimizeRoundtrips |> Option.map (fun v -> "ccs_minimize_roundtrips", Fes.Http.toQueryValue v)
+                        request.DefaultOperator |> Option.map (fun v -> "default_operator", Fes.Http.toQueryValue v)
+                        request.Df |> Option.map (fun v -> "df", Fes.Http.toQueryValue v)
+                        request.DocvalueFields |> Option.map (fun v -> "docvalue_fields", Fes.Http.toQueryValue v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.Explain |> Option.map (fun v -> "explain", Fes.Http.toQueryValue v)
+                        request.IgnoreThrottled |> Option.map (fun v -> "ignore_throttled", Fes.Http.toQueryValue v)
+                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                        request.Lenient |> Option.map (fun v -> "lenient", Fes.Http.toQueryValue v)
+                        request.MaxConcurrentShardRequests |> Option.map (fun v -> "max_concurrent_shard_requests", Fes.Http.toQueryValue v)
+                        request.Preference |> Option.map (fun v -> "preference", Fes.Http.toQueryValue v)
+                        request.RequestCache |> Option.map (fun v -> "request_cache", Fes.Http.toQueryValue v)
+                        request.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
+                        request.SearchType |> Option.map (fun v -> "search_type", Fes.Http.toQueryValue v)
+                        request.Stats |> Option.map (fun v -> "stats", Fes.Http.toQueryValue v)
+                        request.StoredFields |> Option.map (fun v -> "stored_fields", Fes.Http.toQueryValue v)
+                        request.SuggestField |> Option.map (fun v -> "suggest_field", Fes.Http.toQueryValue v)
+                        request.SuggestMode |> Option.map (fun v -> "suggest_mode", Fes.Http.toQueryValue v)
+                        request.SuggestSize |> Option.map (fun v -> "suggest_size", Fes.Http.toQueryValue v)
+                        request.SuggestText |> Option.map (fun v -> "suggest_text", Fes.Http.toQueryValue v)
+                        request.TerminateAfter |> Option.map (fun v -> "terminate_after", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                        request.TrackTotalHits |> Option.map (fun v -> "track_total_hits", Fes.Http.toQueryValue v)
+                        request.TrackScores |> Option.map (fun v -> "track_scores", Fes.Http.toQueryValue v)
+                        request.TypedKeys |> Option.map (fun v -> "typed_keys", Fes.Http.toQueryValue v)
+                        request.RestTotalHitsAsInt |> Option.map (fun v -> "rest_total_hits_as_int", Fes.Http.toQueryValue v)
+                        request.Version |> Option.map (fun v -> "version", Fes.Http.toQueryValue v)
+                        request.Source |> Option.map (fun v -> "_source", Fes.Http.toQueryValue v)
+                        request.SourceExcludes |> Option.map (fun v -> "_source_excludes", Fes.Http.toQueryValue v)
+                        request.SourceIncludes |> Option.map (fun v -> "_source_includes", Fes.Http.toQueryValue v)
+                        request.SeqNoPrimaryTerm |> Option.map (fun v -> "seq_no_primary_term", Fes.Http.toQueryValue v)
+                        request.Q |> Option.map (fun v -> "q", Fes.Http.toQueryValue v)
+                        request.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
+                        request.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
+                        request.Sort |> Option.map (fun v -> "sort", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -314,7 +314,7 @@ module SearchOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``aggregations`` = request.Aggregations; ``collapse`` = request.Collapse; ``explain`` = request.Explain2; ``ext`` = request.Ext; ``from`` = request.From2; ``highlight`` = request.Highlight; ``track_total_hits`` = request.TrackTotalHits2; ``indices_boost`` = request.IndicesBoost; ``docvalue_fields`` = request.DocvalueFields2; ``knn`` = request.Knn; ``min_score`` = request.MinScore; ``post_filter`` = request.PostFilter; ``profile`` = request.Profile; ``query`` = request.Query; ``rescore`` = request.Rescore; ``script_fields`` = request.ScriptFields; ``search_after`` = request.SearchAfter; ``size`` = request.Size2; ``slice`` = request.Slice; ``sort`` = request.Sort2; ``_source`` = request.Source2; ``fields`` = request.Fields; ``suggest`` = request.Suggest; ``terminate_after`` = request.TerminateAfter2; ``timeout`` = request.Timeout2; ``track_scores`` = request.TrackScores2; ``version`` = request.Version2; ``seq_no_primary_term`` = request.SeqNoPrimaryTerm2; ``stored_fields`` = request.StoredFields2; ``pit`` = request.Pit; ``runtime_mappings`` = request.RuntimeMappings; ``stats`` = request.Stats2 |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -725,9 +725,9 @@ module SearchOperations =
                 let path = $"/_search/scroll/{request.ScrollId}"
                 let queryParams =
                     [
-                        request.Scroll |> Option.map (fun v -> "scroll", string v)
-                        request.ScrollId2 |> Option.map (fun v -> "scroll_id", string v)
-                        request.RestTotalHitsAsInt |> Option.map (fun v -> "rest_total_hits_as_int", string v)
+                        request.Scroll |> Option.map (fun v -> "scroll", Fes.Http.toQueryValue v)
+                        request.ScrollId2 |> Option.map (fun v -> "scroll_id", Fes.Http.toQueryValue v)
+                        request.RestTotalHitsAsInt |> Option.map (fun v -> "rest_total_hits_as_int", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -736,7 +736,7 @@ module SearchOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``scroll`` = request.Scroll2; ``scroll_id`` = request.ScrollId3 |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -794,7 +794,7 @@ module SearchOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``scroll_id`` = request.ScrollId2 |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -831,7 +831,7 @@ module SearchOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``id`` = request.Id |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -883,20 +883,20 @@ module SearchOperations =
                 let path = $"/{request.Index}/_count"
                 let queryParams =
                     [
-                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", string v)
-                        request.Analyzer |> Option.map (fun v -> "analyzer", string v)
-                        request.AnalyzeWildcard |> Option.map (fun v -> "analyze_wildcard", string v)
-                        request.DefaultOperator |> Option.map (fun v -> "default_operator", string v)
-                        request.Df |> Option.map (fun v -> "df", string v)
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.IgnoreThrottled |> Option.map (fun v -> "ignore_throttled", string v)
-                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", string v)
-                        request.Lenient |> Option.map (fun v -> "lenient", string v)
-                        request.MinScore |> Option.map (fun v -> "min_score", string v)
-                        request.Preference |> Option.map (fun v -> "preference", string v)
-                        request.Routing |> Option.map (fun v -> "routing", string v)
-                        request.TerminateAfter |> Option.map (fun v -> "terminate_after", string v)
-                        request.Q |> Option.map (fun v -> "q", string v)
+                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                        request.Analyzer |> Option.map (fun v -> "analyzer", Fes.Http.toQueryValue v)
+                        request.AnalyzeWildcard |> Option.map (fun v -> "analyze_wildcard", Fes.Http.toQueryValue v)
+                        request.DefaultOperator |> Option.map (fun v -> "default_operator", Fes.Http.toQueryValue v)
+                        request.Df |> Option.map (fun v -> "df", Fes.Http.toQueryValue v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.IgnoreThrottled |> Option.map (fun v -> "ignore_throttled", Fes.Http.toQueryValue v)
+                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                        request.Lenient |> Option.map (fun v -> "lenient", Fes.Http.toQueryValue v)
+                        request.MinScore |> Option.map (fun v -> "min_score", Fes.Http.toQueryValue v)
+                        request.Preference |> Option.map (fun v -> "preference", Fes.Http.toQueryValue v)
+                        request.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
+                        request.TerminateAfter |> Option.map (fun v -> "terminate_after", Fes.Http.toQueryValue v)
+                        request.Q |> Option.map (fun v -> "q", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -905,7 +905,7 @@ module SearchOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``query`` = request.Query |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1024,18 +1024,18 @@ module SearchOperations =
                 let path = $"/{request.Index}/_explain/{request.Id}"
                 let queryParams =
                     [
-                        request.Analyzer |> Option.map (fun v -> "analyzer", string v)
-                        request.AnalyzeWildcard |> Option.map (fun v -> "analyze_wildcard", string v)
-                        request.DefaultOperator |> Option.map (fun v -> "default_operator", string v)
-                        request.Df |> Option.map (fun v -> "df", string v)
-                        request.Lenient |> Option.map (fun v -> "lenient", string v)
-                        request.Preference |> Option.map (fun v -> "preference", string v)
-                        request.Routing |> Option.map (fun v -> "routing", string v)
-                        request.Source |> Option.map (fun v -> "_source", string v)
-                        request.SourceExcludes |> Option.map (fun v -> "_source_excludes", string v)
-                        request.SourceIncludes |> Option.map (fun v -> "_source_includes", string v)
-                        request.StoredFields |> Option.map (fun v -> "stored_fields", string v)
-                        request.Q |> Option.map (fun v -> "q", string v)
+                        request.Analyzer |> Option.map (fun v -> "analyzer", Fes.Http.toQueryValue v)
+                        request.AnalyzeWildcard |> Option.map (fun v -> "analyze_wildcard", Fes.Http.toQueryValue v)
+                        request.DefaultOperator |> Option.map (fun v -> "default_operator", Fes.Http.toQueryValue v)
+                        request.Df |> Option.map (fun v -> "df", Fes.Http.toQueryValue v)
+                        request.Lenient |> Option.map (fun v -> "lenient", Fes.Http.toQueryValue v)
+                        request.Preference |> Option.map (fun v -> "preference", Fes.Http.toQueryValue v)
+                        request.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
+                        request.Source |> Option.map (fun v -> "_source", Fes.Http.toQueryValue v)
+                        request.SourceExcludes |> Option.map (fun v -> "_source_excludes", Fes.Http.toQueryValue v)
+                        request.SourceIncludes |> Option.map (fun v -> "_source_includes", Fes.Http.toQueryValue v)
+                        request.StoredFields |> Option.map (fun v -> "stored_fields", Fes.Http.toQueryValue v)
+                        request.Q |> Option.map (fun v -> "q", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1044,7 +1044,7 @@ module SearchOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``query`` = request.Query |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1157,14 +1157,14 @@ module SearchOperations =
                 let path = $"/{request.Index}/_field_caps"
                 let queryParams =
                     [
-                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", string v)
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.Fields |> Option.map (fun v -> "fields", string v)
-                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", string v)
-                        request.IncludeUnmapped |> Option.map (fun v -> "include_unmapped", string v)
-                        request.Filters |> Option.map (fun v -> "filters", string v)
-                        request.Types |> Option.map (fun v -> "types", string v)
-                        request.IncludeEmptyFields |> Option.map (fun v -> "include_empty_fields", string v)
+                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.Fields |> Option.map (fun v -> "fields", Fes.Http.toQueryValue v)
+                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                        request.IncludeUnmapped |> Option.map (fun v -> "include_unmapped", Fes.Http.toQueryValue v)
+                        request.Filters |> Option.map (fun v -> "filters", Fes.Http.toQueryValue v)
+                        request.Types |> Option.map (fun v -> "types", Fes.Http.toQueryValue v)
+                        request.IncludeEmptyFields |> Option.map (fun v -> "include_empty_fields", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1173,7 +1173,7 @@ module SearchOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``fields`` = request.Fields2; ``index_filter`` = request.IndexFilter; ``runtime_mappings`` = request.RuntimeMappings |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1271,20 +1271,20 @@ module SearchOperations =
                 let path = $"/{request.Index}/_msearch"
                 let queryParams =
                     [
-                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", string v)
-                        request.CcsMinimizeRoundtrips |> Option.map (fun v -> "ccs_minimize_roundtrips", string v)
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.IgnoreThrottled |> Option.map (fun v -> "ignore_throttled", string v)
-                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", string v)
-                        request.IncludeNamedQueriesScore |> Option.map (fun v -> "include_named_queries_score", string v)
-                        request.Index2 |> Option.map (fun v -> "index", string v)
-                        request.MaxConcurrentSearches |> Option.map (fun v -> "max_concurrent_searches", string v)
-                        request.MaxConcurrentShardRequests |> Option.map (fun v -> "max_concurrent_shard_requests", string v)
-                        request.PreFilterShardSize |> Option.map (fun v -> "pre_filter_shard_size", string v)
-                        request.RestTotalHitsAsInt |> Option.map (fun v -> "rest_total_hits_as_int", string v)
-                        request.Routing |> Option.map (fun v -> "routing", string v)
-                        request.SearchType |> Option.map (fun v -> "search_type", string v)
-                        request.TypedKeys |> Option.map (fun v -> "typed_keys", string v)
+                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                        request.CcsMinimizeRoundtrips |> Option.map (fun v -> "ccs_minimize_roundtrips", Fes.Http.toQueryValue v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.IgnoreThrottled |> Option.map (fun v -> "ignore_throttled", Fes.Http.toQueryValue v)
+                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                        request.IncludeNamedQueriesScore |> Option.map (fun v -> "include_named_queries_score", Fes.Http.toQueryValue v)
+                        request.Index2 |> Option.map (fun v -> "index", Fes.Http.toQueryValue v)
+                        request.MaxConcurrentSearches |> Option.map (fun v -> "max_concurrent_searches", Fes.Http.toQueryValue v)
+                        request.MaxConcurrentShardRequests |> Option.map (fun v -> "max_concurrent_shard_requests", Fes.Http.toQueryValue v)
+                        request.PreFilterShardSize |> Option.map (fun v -> "pre_filter_shard_size", Fes.Http.toQueryValue v)
+                        request.RestTotalHitsAsInt |> Option.map (fun v -> "rest_total_hits_as_int", Fes.Http.toQueryValue v)
+                        request.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
+                        request.SearchType |> Option.map (fun v -> "search_type", Fes.Http.toQueryValue v)
+                        request.TypedKeys |> Option.map (fun v -> "typed_keys", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1396,11 +1396,11 @@ module SearchOperations =
                 let path = $"/{request.Index}/_msearch/template"
                 let queryParams =
                     [
-                        request.CcsMinimizeRoundtrips |> Option.map (fun v -> "ccs_minimize_roundtrips", string v)
-                        request.MaxConcurrentSearches |> Option.map (fun v -> "max_concurrent_searches", string v)
-                        request.SearchType |> Option.map (fun v -> "search_type", string v)
-                        request.RestTotalHitsAsInt |> Option.map (fun v -> "rest_total_hits_as_int", string v)
-                        request.TypedKeys |> Option.map (fun v -> "typed_keys", string v)
+                        request.CcsMinimizeRoundtrips |> Option.map (fun v -> "ccs_minimize_roundtrips", Fes.Http.toQueryValue v)
+                        request.MaxConcurrentSearches |> Option.map (fun v -> "max_concurrent_searches", Fes.Http.toQueryValue v)
+                        request.SearchType |> Option.map (fun v -> "search_type", Fes.Http.toQueryValue v)
+                        request.RestTotalHitsAsInt |> Option.map (fun v -> "rest_total_hits_as_int", Fes.Http.toQueryValue v)
+                        request.TypedKeys |> Option.map (fun v -> "typed_keys", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1471,13 +1471,13 @@ module SearchOperations =
                 let path = $"/{request.Index}/_pit"
                 let queryParams =
                     [
-                        Some ("keep_alive", string request.KeepAlive)
-                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", string v)
-                        request.Preference |> Option.map (fun v -> "preference", string v)
-                        request.Routing |> Option.map (fun v -> "routing", string v)
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.AllowPartialSearchResults |> Option.map (fun v -> "allow_partial_search_results", string v)
-                        request.MaxConcurrentShardRequests |> Option.map (fun v -> "max_concurrent_shard_requests", string v)
+                        Some ("keep_alive", Fes.Http.toQueryValue request.KeepAlive)
+                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                        request.Preference |> Option.map (fun v -> "preference", Fes.Http.toQueryValue v)
+                        request.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.AllowPartialSearchResults |> Option.map (fun v -> "allow_partial_search_results", Fes.Http.toQueryValue v)
+                        request.MaxConcurrentShardRequests |> Option.map (fun v -> "max_concurrent_shard_requests", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1486,7 +1486,7 @@ module SearchOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``index_filter`` = request.IndexFilter |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1570,10 +1570,10 @@ module SearchOperations =
                 let path = $"/{request.Index}/_rank_eval"
                 let queryParams =
                     [
-                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", string v)
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", string v)
-                        request.SearchType |> Option.map (fun v -> "search_type", string v)
+                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                        request.SearchType |> Option.map (fun v -> "search_type", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1582,7 +1582,7 @@ module SearchOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``requests`` = request.Requests; ``metric`` = request.Metric |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1651,7 +1651,7 @@ module SearchOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``id`` = request.Id2; ``file`` = request.File; ``params`` = request.Params; ``source`` = request.Source |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1812,50 +1812,50 @@ module SearchOperations =
                 let path = $"/{request.Index}/_search"
                 let queryParams =
                     [
-                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", string v)
-                        request.AllowPartialSearchResults |> Option.map (fun v -> "allow_partial_search_results", string v)
-                        request.Analyzer |> Option.map (fun v -> "analyzer", string v)
-                        request.AnalyzeWildcard |> Option.map (fun v -> "analyze_wildcard", string v)
-                        request.BatchedReduceSize |> Option.map (fun v -> "batched_reduce_size", string v)
-                        request.CcsMinimizeRoundtrips |> Option.map (fun v -> "ccs_minimize_roundtrips", string v)
-                        request.DefaultOperator |> Option.map (fun v -> "default_operator", string v)
-                        request.Df |> Option.map (fun v -> "df", string v)
-                        request.DocvalueFields |> Option.map (fun v -> "docvalue_fields", string v)
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.Explain |> Option.map (fun v -> "explain", string v)
-                        request.IgnoreThrottled |> Option.map (fun v -> "ignore_throttled", string v)
-                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", string v)
-                        request.IncludeNamedQueriesScore |> Option.map (fun v -> "include_named_queries_score", string v)
-                        request.Lenient |> Option.map (fun v -> "lenient", string v)
-                        request.MaxConcurrentShardRequests |> Option.map (fun v -> "max_concurrent_shard_requests", string v)
-                        request.Preference |> Option.map (fun v -> "preference", string v)
-                        request.PreFilterShardSize |> Option.map (fun v -> "pre_filter_shard_size", string v)
-                        request.RequestCache |> Option.map (fun v -> "request_cache", string v)
-                        request.Routing |> Option.map (fun v -> "routing", string v)
-                        request.Scroll |> Option.map (fun v -> "scroll", string v)
-                        request.SearchType |> Option.map (fun v -> "search_type", string v)
-                        request.Stats |> Option.map (fun v -> "stats", string v)
-                        request.StoredFields |> Option.map (fun v -> "stored_fields", string v)
-                        request.SuggestField |> Option.map (fun v -> "suggest_field", string v)
-                        request.SuggestMode |> Option.map (fun v -> "suggest_mode", string v)
-                        request.SuggestSize |> Option.map (fun v -> "suggest_size", string v)
-                        request.SuggestText |> Option.map (fun v -> "suggest_text", string v)
-                        request.TerminateAfter |> Option.map (fun v -> "terminate_after", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
-                        request.TrackTotalHits |> Option.map (fun v -> "track_total_hits", string v)
-                        request.TrackScores |> Option.map (fun v -> "track_scores", string v)
-                        request.TypedKeys |> Option.map (fun v -> "typed_keys", string v)
-                        request.RestTotalHitsAsInt |> Option.map (fun v -> "rest_total_hits_as_int", string v)
-                        request.Version |> Option.map (fun v -> "version", string v)
-                        request.Source |> Option.map (fun v -> "_source", string v)
-                        request.SourceExcludes |> Option.map (fun v -> "_source_excludes", string v)
-                        request.SourceExcludeVectors |> Option.map (fun v -> "_source_exclude_vectors", string v)
-                        request.SourceIncludes |> Option.map (fun v -> "_source_includes", string v)
-                        request.SeqNoPrimaryTerm |> Option.map (fun v -> "seq_no_primary_term", string v)
-                        request.Q |> Option.map (fun v -> "q", string v)
-                        request.Size |> Option.map (fun v -> "size", string v)
-                        request.From |> Option.map (fun v -> "from", string v)
-                        request.Sort |> Option.map (fun v -> "sort", string v)
+                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                        request.AllowPartialSearchResults |> Option.map (fun v -> "allow_partial_search_results", Fes.Http.toQueryValue v)
+                        request.Analyzer |> Option.map (fun v -> "analyzer", Fes.Http.toQueryValue v)
+                        request.AnalyzeWildcard |> Option.map (fun v -> "analyze_wildcard", Fes.Http.toQueryValue v)
+                        request.BatchedReduceSize |> Option.map (fun v -> "batched_reduce_size", Fes.Http.toQueryValue v)
+                        request.CcsMinimizeRoundtrips |> Option.map (fun v -> "ccs_minimize_roundtrips", Fes.Http.toQueryValue v)
+                        request.DefaultOperator |> Option.map (fun v -> "default_operator", Fes.Http.toQueryValue v)
+                        request.Df |> Option.map (fun v -> "df", Fes.Http.toQueryValue v)
+                        request.DocvalueFields |> Option.map (fun v -> "docvalue_fields", Fes.Http.toQueryValue v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.Explain |> Option.map (fun v -> "explain", Fes.Http.toQueryValue v)
+                        request.IgnoreThrottled |> Option.map (fun v -> "ignore_throttled", Fes.Http.toQueryValue v)
+                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                        request.IncludeNamedQueriesScore |> Option.map (fun v -> "include_named_queries_score", Fes.Http.toQueryValue v)
+                        request.Lenient |> Option.map (fun v -> "lenient", Fes.Http.toQueryValue v)
+                        request.MaxConcurrentShardRequests |> Option.map (fun v -> "max_concurrent_shard_requests", Fes.Http.toQueryValue v)
+                        request.Preference |> Option.map (fun v -> "preference", Fes.Http.toQueryValue v)
+                        request.PreFilterShardSize |> Option.map (fun v -> "pre_filter_shard_size", Fes.Http.toQueryValue v)
+                        request.RequestCache |> Option.map (fun v -> "request_cache", Fes.Http.toQueryValue v)
+                        request.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
+                        request.Scroll |> Option.map (fun v -> "scroll", Fes.Http.toQueryValue v)
+                        request.SearchType |> Option.map (fun v -> "search_type", Fes.Http.toQueryValue v)
+                        request.Stats |> Option.map (fun v -> "stats", Fes.Http.toQueryValue v)
+                        request.StoredFields |> Option.map (fun v -> "stored_fields", Fes.Http.toQueryValue v)
+                        request.SuggestField |> Option.map (fun v -> "suggest_field", Fes.Http.toQueryValue v)
+                        request.SuggestMode |> Option.map (fun v -> "suggest_mode", Fes.Http.toQueryValue v)
+                        request.SuggestSize |> Option.map (fun v -> "suggest_size", Fes.Http.toQueryValue v)
+                        request.SuggestText |> Option.map (fun v -> "suggest_text", Fes.Http.toQueryValue v)
+                        request.TerminateAfter |> Option.map (fun v -> "terminate_after", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                        request.TrackTotalHits |> Option.map (fun v -> "track_total_hits", Fes.Http.toQueryValue v)
+                        request.TrackScores |> Option.map (fun v -> "track_scores", Fes.Http.toQueryValue v)
+                        request.TypedKeys |> Option.map (fun v -> "typed_keys", Fes.Http.toQueryValue v)
+                        request.RestTotalHitsAsInt |> Option.map (fun v -> "rest_total_hits_as_int", Fes.Http.toQueryValue v)
+                        request.Version |> Option.map (fun v -> "version", Fes.Http.toQueryValue v)
+                        request.Source |> Option.map (fun v -> "_source", Fes.Http.toQueryValue v)
+                        request.SourceExcludes |> Option.map (fun v -> "_source_excludes", Fes.Http.toQueryValue v)
+                        request.SourceExcludeVectors |> Option.map (fun v -> "_source_exclude_vectors", Fes.Http.toQueryValue v)
+                        request.SourceIncludes |> Option.map (fun v -> "_source_includes", Fes.Http.toQueryValue v)
+                        request.SeqNoPrimaryTerm |> Option.map (fun v -> "seq_no_primary_term", Fes.Http.toQueryValue v)
+                        request.Q |> Option.map (fun v -> "q", Fes.Http.toQueryValue v)
+                        request.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
+                        request.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
+                        request.Sort |> Option.map (fun v -> "sort", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1864,7 +1864,7 @@ module SearchOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``aggregations`` = request.Aggregations; ``collapse`` = request.Collapse; ``explain`` = request.Explain2; ``ext`` = request.Ext; ``from`` = request.From2; ``highlight`` = request.Highlight; ``track_total_hits`` = request.TrackTotalHits2; ``indices_boost`` = request.IndicesBoost; ``docvalue_fields`` = request.DocvalueFields2; ``knn`` = request.Knn; ``rank`` = request.Rank; ``min_score`` = request.MinScore; ``post_filter`` = request.PostFilter; ``profile`` = request.Profile; ``query`` = request.Query; ``rescore`` = request.Rescore; ``retriever`` = request.Retriever; ``script_fields`` = request.ScriptFields; ``search_after`` = request.SearchAfter; ``size`` = request.Size2; ``slice`` = request.Slice; ``sort`` = request.Sort2; ``_source`` = request.Source2; ``fields`` = request.Fields; ``suggest`` = request.Suggest; ``terminate_after`` = request.TerminateAfter2; ``timeout`` = request.Timeout2; ``track_scores`` = request.TrackScores2; ``version`` = request.Version2; ``seq_no_primary_term`` = request.SeqNoPrimaryTerm2; ``stored_fields`` = request.StoredFields2; ``pit`` = request.Pit; ``runtime_mappings`` = request.RuntimeMappings; ``stats`` = request.Stats2 |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -2323,14 +2323,14 @@ module SearchOperations =
                 let path = $"/{request.Index}/_mvt/{request.Field}/{request.Zoom}/{request.X}/{request.Y}"
                 let queryParams =
                     [
-                        request.ExactBounds |> Option.map (fun v -> "exact_bounds", string v)
-                        request.Extent |> Option.map (fun v -> "extent", string v)
-                        request.GridAgg |> Option.map (fun v -> "grid_agg", string v)
-                        request.GridPrecision |> Option.map (fun v -> "grid_precision", string v)
-                        request.GridType |> Option.map (fun v -> "grid_type", string v)
-                        request.Size |> Option.map (fun v -> "size", string v)
-                        request.TrackTotalHits |> Option.map (fun v -> "track_total_hits", string v)
-                        request.WithLabels |> Option.map (fun v -> "with_labels", string v)
+                        request.ExactBounds |> Option.map (fun v -> "exact_bounds", Fes.Http.toQueryValue v)
+                        request.Extent |> Option.map (fun v -> "extent", Fes.Http.toQueryValue v)
+                        request.GridAgg |> Option.map (fun v -> "grid_agg", Fes.Http.toQueryValue v)
+                        request.GridPrecision |> Option.map (fun v -> "grid_precision", Fes.Http.toQueryValue v)
+                        request.GridType |> Option.map (fun v -> "grid_type", Fes.Http.toQueryValue v)
+                        request.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
+                        request.TrackTotalHits |> Option.map (fun v -> "track_total_hits", Fes.Http.toQueryValue v)
+                        request.WithLabels |> Option.map (fun v -> "with_labels", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -2339,7 +2339,7 @@ module SearchOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``aggs`` = request.Aggs; ``buffer`` = request.Buffer; ``exact_bounds`` = request.ExactBounds2; ``extent`` = request.Extent2; ``fields`` = request.Fields; ``grid_agg`` = request.GridAgg2; ``grid_precision`` = request.GridPrecision2; ``grid_type`` = request.GridType2; ``query`` = request.Query; ``runtime_mappings`` = request.RuntimeMappings; ``size`` = request.Size2; ``sort`` = request.Sort; ``track_total_hits`` = request.TrackTotalHits2; ``with_labels`` = request.WithLabels2 |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -2505,13 +2505,13 @@ module SearchOperations =
                 let path = $"/{request.Index}/_search_shards"
                 let queryParams =
                     [
-                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", string v)
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", string v)
-                        request.Local |> Option.map (fun v -> "local", string v)
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Preference |> Option.map (fun v -> "preference", string v)
-                        request.Routing |> Option.map (fun v -> "routing", string v)
+                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                        request.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Preference |> Option.map (fun v -> "preference", Fes.Http.toQueryValue v)
+                        request.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -2606,19 +2606,19 @@ module SearchOperations =
                 let path = $"/{request.Index}/_search/template"
                 let queryParams =
                     [
-                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", string v)
-                        request.CcsMinimizeRoundtrips |> Option.map (fun v -> "ccs_minimize_roundtrips", string v)
-                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", string v)
-                        request.Explain |> Option.map (fun v -> "explain", string v)
-                        request.IgnoreThrottled |> Option.map (fun v -> "ignore_throttled", string v)
-                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", string v)
-                        request.Preference |> Option.map (fun v -> "preference", string v)
-                        request.Profile |> Option.map (fun v -> "profile", string v)
-                        request.Routing |> Option.map (fun v -> "routing", string v)
-                        request.Scroll |> Option.map (fun v -> "scroll", string v)
-                        request.SearchType |> Option.map (fun v -> "search_type", string v)
-                        request.RestTotalHitsAsInt |> Option.map (fun v -> "rest_total_hits_as_int", string v)
-                        request.TypedKeys |> Option.map (fun v -> "typed_keys", string v)
+                        request.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                        request.CcsMinimizeRoundtrips |> Option.map (fun v -> "ccs_minimize_roundtrips", Fes.Http.toQueryValue v)
+                        request.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                        request.Explain |> Option.map (fun v -> "explain", Fes.Http.toQueryValue v)
+                        request.IgnoreThrottled |> Option.map (fun v -> "ignore_throttled", Fes.Http.toQueryValue v)
+                        request.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                        request.Preference |> Option.map (fun v -> "preference", Fes.Http.toQueryValue v)
+                        request.Profile |> Option.map (fun v -> "profile", Fes.Http.toQueryValue v)
+                        request.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
+                        request.Scroll |> Option.map (fun v -> "scroll", Fes.Http.toQueryValue v)
+                        request.SearchType |> Option.map (fun v -> "search_type", Fes.Http.toQueryValue v)
+                        request.RestTotalHitsAsInt |> Option.map (fun v -> "rest_total_hits_as_int", Fes.Http.toQueryValue v)
+                        request.TypedKeys |> Option.map (fun v -> "typed_keys", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -2627,7 +2627,7 @@ module SearchOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``explain`` = request.Explain2; ``id`` = request.Id; ``params`` = request.Params; ``profile`` = request.Profile2; ``source`` = request.Source |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -2762,7 +2762,7 @@ module SearchOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``field`` = request.Field; ``size`` = request.Size; ``timeout`` = request.Timeout; ``case_insensitive`` = request.CaseInsensitive; ``index_filter`` = request.IndexFilter; ``string`` = request.String; ``search_after`` = request.SearchAfter |}
                 |> Result.Ok
             with ex -> Result.Error ex
 

@@ -22,8 +22,8 @@ module SynonymsOperations =
                 let path = $"/_synonyms/{request.Id}"
                 let queryParams =
                     [
-                        request.From |> Option.map (fun v -> "from", string v)
-                        request.Size |> Option.map (fun v -> "size", string v)
+                        request.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
+                        request.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -80,7 +80,7 @@ module SynonymsOperations =
                 let path = $"/_synonyms/{request.Id}"
                 let queryParams =
                     [
-                        request.Refresh |> Option.map (fun v -> "refresh", string v)
+                        request.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -89,7 +89,7 @@ module SynonymsOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``synonyms_set`` = request.SynonymsSet |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -209,7 +209,7 @@ module SynonymsOperations =
                 let path = $"/_synonyms/{request.SetId}/{request.RuleId}"
                 let queryParams =
                     [
-                        request.Refresh |> Option.map (fun v -> "refresh", string v)
+                        request.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -218,7 +218,7 @@ module SynonymsOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``synonyms`` = request.Synonyms |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -266,7 +266,7 @@ module SynonymsOperations =
                 let path = $"/_synonyms/{request.SetId}/{request.RuleId}"
                 let queryParams =
                     [
-                        request.Refresh |> Option.map (fun v -> "refresh", string v)
+                        request.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -316,8 +316,8 @@ module SynonymsOperations =
                 let path = "/_synonyms"
                 let queryParams =
                     [
-                        request.From |> Option.map (fun v -> "from", string v)
-                        request.Size |> Option.map (fun v -> "size", string v)
+                        request.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
+                        request.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""

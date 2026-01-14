@@ -30,8 +30,8 @@ module GraphOperations =
                 let path = $"/{request.Index}/_graph/explore"
                 let queryParams =
                     [
-                        request.Routing |> Option.map (fun v -> "routing", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -40,7 +40,7 @@ module GraphOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``connections`` = request.Connections; ``controls`` = request.Controls; ``query`` = request.Query; ``vertices`` = request.Vertices |}
                 |> Result.Ok
             with ex -> Result.Error ex
 

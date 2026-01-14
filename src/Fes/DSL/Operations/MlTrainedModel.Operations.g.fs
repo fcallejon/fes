@@ -62,13 +62,13 @@ module MlTrainedModelOperations =
                 let path = $"/_ml/trained_models/{request.ModelId}"
                 let queryParams =
                     [
-                        request.AllowNoMatch |> Option.map (fun v -> "allow_no_match", string v)
-                        request.DecompressDefinition |> Option.map (fun v -> "decompress_definition", string v)
-                        request.ExcludeGenerated |> Option.map (fun v -> "exclude_generated", string v)
-                        request.From |> Option.map (fun v -> "from", string v)
-                        request.Include |> Option.map (fun v -> "include", string v)
-                        request.Size |> Option.map (fun v -> "size", string v)
-                        request.Tags |> Option.map (fun v -> "tags", string v)
+                        request.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
+                        request.DecompressDefinition |> Option.map (fun v -> "decompress_definition", Fes.Http.toQueryValue v)
+                        request.ExcludeGenerated |> Option.map (fun v -> "exclude_generated", Fes.Http.toQueryValue v)
+                        request.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
+                        request.Include |> Option.map (fun v -> "include", Fes.Http.toQueryValue v)
+                        request.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
+                        request.Tags |> Option.map (fun v -> "tags", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -164,8 +164,8 @@ module MlTrainedModelOperations =
                 let path = $"/_ml/trained_models/{request.ModelId}"
                 let queryParams =
                     [
-                        request.DeferDefinitionDecompression |> Option.map (fun v -> "defer_definition_decompression", string v)
-                        request.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", string v)
+                        request.DeferDefinitionDecompression |> Option.map (fun v -> "defer_definition_decompression", Fes.Http.toQueryValue v)
+                        request.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -174,7 +174,7 @@ module MlTrainedModelOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``compressed_definition`` = request.CompressedDefinition; ``definition`` = request.Definition; ``description`` = request.Description; ``inference_config`` = request.InferenceConfig; ``input`` = request.Input; ``metadata`` = request.Metadata; ``model_type`` = request.ModelType; ``model_size_bytes`` = request.ModelSizeBytes; ``platform_architecture`` = request.PlatformArchitecture; ``tags`` = request.Tags; ``prefix_strings`` = request.PrefixStrings |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -272,8 +272,8 @@ module MlTrainedModelOperations =
                 let path = $"/_ml/trained_models/{request.ModelId}"
                 let queryParams =
                     [
-                        request.Force |> Option.map (fun v -> "force", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.Force |> Option.map (fun v -> "force", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -324,7 +324,7 @@ module MlTrainedModelOperations =
                 let path = $"/_ml/trained_models/{request.ModelId}/model_aliases/{request.ModelAlias}"
                 let queryParams =
                     [
-                        request.Reassign |> Option.map (fun v -> "reassign", string v)
+                        request.Reassign |> Option.map (fun v -> "reassign", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -414,9 +414,9 @@ module MlTrainedModelOperations =
                 let path = $"/_ml/trained_models/{request.ModelId}/_stats"
                 let queryParams =
                     [
-                        request.AllowNoMatch |> Option.map (fun v -> "allow_no_match", string v)
-                        request.From |> Option.map (fun v -> "from", string v)
-                        request.Size |> Option.map (fun v -> "size", string v)
+                        request.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
+                        request.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
+                        request.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -473,7 +473,7 @@ module MlTrainedModelOperations =
                 let path = $"/_ml/trained_models/{request.ModelId}/_infer"
                 let queryParams =
                     [
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -482,7 +482,7 @@ module MlTrainedModelOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``docs`` = request.Docs; ``inference_config`` = request.InferenceConfig |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -540,7 +540,7 @@ module MlTrainedModelOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``definition`` = request.Definition; ``total_definition_length`` = request.TotalDefinitionLength; ``total_parts`` = request.TotalParts |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -599,7 +599,7 @@ module MlTrainedModelOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``vocabulary`` = request.Vocabulary; ``merges`` = request.Merges; ``scores`` = request.Scores |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -655,14 +655,14 @@ module MlTrainedModelOperations =
                 let path = $"/_ml/trained_models/{request.ModelId}/deployment/_start"
                 let queryParams =
                     [
-                        request.CacheSize |> Option.map (fun v -> "cache_size", string v)
-                        request.DeploymentId |> Option.map (fun v -> "deployment_id", string v)
-                        request.NumberOfAllocations |> Option.map (fun v -> "number_of_allocations", string v)
-                        request.Priority |> Option.map (fun v -> "priority", string v)
-                        request.QueueCapacity |> Option.map (fun v -> "queue_capacity", string v)
-                        request.ThreadsPerAllocation |> Option.map (fun v -> "threads_per_allocation", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
-                        request.WaitFor |> Option.map (fun v -> "wait_for", string v)
+                        request.CacheSize |> Option.map (fun v -> "cache_size", Fes.Http.toQueryValue v)
+                        request.DeploymentId |> Option.map (fun v -> "deployment_id", Fes.Http.toQueryValue v)
+                        request.NumberOfAllocations |> Option.map (fun v -> "number_of_allocations", Fes.Http.toQueryValue v)
+                        request.Priority |> Option.map (fun v -> "priority", Fes.Http.toQueryValue v)
+                        request.QueueCapacity |> Option.map (fun v -> "queue_capacity", Fes.Http.toQueryValue v)
+                        request.ThreadsPerAllocation |> Option.map (fun v -> "threads_per_allocation", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                        request.WaitFor |> Option.map (fun v -> "wait_for", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -671,7 +671,7 @@ module MlTrainedModelOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``adaptive_allocations`` = request.AdaptiveAllocations |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -758,8 +758,8 @@ module MlTrainedModelOperations =
                 let path = $"/_ml/trained_models/{request.ModelId}/deployment/_stop"
                 let queryParams =
                     [
-                        request.AllowNoMatch |> Option.map (fun v -> "allow_no_match", string v)
-                        request.Force |> Option.map (fun v -> "force", string v)
+                        request.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
+                        request.Force |> Option.map (fun v -> "force", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -768,7 +768,7 @@ module MlTrainedModelOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``id`` = request.Id; ``allow_no_match`` = request.AllowNoMatch2; ``force`` = request.Force2 |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -832,7 +832,7 @@ module MlTrainedModelOperations =
                 let path = $"/_ml/trained_models/{request.ModelId}/deployment/_update"
                 let queryParams =
                     [
-                        request.NumberOfAllocations |> Option.map (fun v -> "number_of_allocations", string v)
+                        request.NumberOfAllocations |> Option.map (fun v -> "number_of_allocations", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -841,7 +841,7 @@ module MlTrainedModelOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``number_of_allocations`` = request.NumberOfAllocations2; ``adaptive_allocations`` = request.AdaptiveAllocations |}
                 |> Result.Ok
             with ex -> Result.Error ex
 

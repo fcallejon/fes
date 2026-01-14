@@ -30,7 +30,7 @@ module ClusterCommands =
         Assert.Contains("Method: GET", result)
         Assert.Contains("/_cluster/health/products", result)
         Assert.Contains("timeout=30s", result)
-        Assert.Contains("wait_for_status=Yellow", result)
+        Assert.Contains("wait_for_status=yellow", result)
 
     [<Fact>]
     let ``Cluster health with wait for nodes returns correct HTTP call`` () =
@@ -45,7 +45,7 @@ module ClusterCommands =
         Assert.Contains("Method: GET", result)
         Assert.Contains("/_cluster/health/*", result)
         Assert.Contains("wait_for_nodes=>=3", result)
-        Assert.Contains("wait_for_no_relocating_shards=True", result)
+        Assert.Contains("wait_for_no_relocating_shards=true", result)
 
     [<Fact>]
     let ``Cluster state request returns correct HTTP call`` () =
@@ -80,7 +80,7 @@ module ClusterCommands =
 
         Assert.Contains("Method: GET", result)
         Assert.Contains("/_cluster/settings", result)
-        Assert.Contains("include_defaults=True", result)
+        Assert.Contains("include_defaults=true", result)
 
 
 module CatCommands =
@@ -107,7 +107,7 @@ module CatCommands =
 
         Assert.Contains("Method: GET", result)
         Assert.Contains("/_cat/indices/*", result)
-        Assert.Contains("health=Yellow", result)
+        Assert.Contains("health=yellow", result)
 
     [<Fact>]
     let ``Cat indices with primary only returns correct HTTP call`` () =
@@ -120,7 +120,7 @@ module CatCommands =
 
         Assert.Contains("Method: GET", result)
         Assert.Contains("/_cat/indices/products*", result)
-        Assert.Contains("pri=True", result)
+        Assert.Contains("pri=true", result)
 
     [<Fact>]
     let ``Cat nodes request returns correct HTTP call`` () =
@@ -132,7 +132,7 @@ module CatCommands =
 
         Assert.Contains("Method: GET", result)
         Assert.Contains("/_cat/nodes", result)
-        Assert.Contains("full_id=True", result)
+        Assert.Contains("full_id=true", result)
 
     [<Fact>]
     let ``Cat nodes with master timeout returns correct HTTP call`` () =

@@ -56,7 +56,7 @@ module ConnectorOperations =
                 let path = $"/_connector/{request.ConnectorId}"
                 let queryParams =
                     [
-                        request.IncludeDeleted |> Option.map (fun v -> "include_deleted", string v)
+                        request.IncludeDeleted |> Option.map (fun v -> "include_deleted", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -114,7 +114,7 @@ module ConnectorOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``description`` = request.Description; ``index_name`` = request.IndexName; ``is_native`` = request.IsNative; ``language`` = request.Language; ``name`` = request.Name; ``service_type`` = request.ServiceType |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -175,8 +175,8 @@ module ConnectorOperations =
                 let path = $"/_connector/{request.ConnectorId}"
                 let queryParams =
                     [
-                        request.DeleteSyncJobs |> Option.map (fun v -> "delete_sync_jobs", string v)
-                        request.Hard |> Option.map (fun v -> "hard", string v)
+                        request.DeleteSyncJobs |> Option.map (fun v -> "delete_sync_jobs", Fes.Http.toQueryValue v)
+                        request.Hard |> Option.map (fun v -> "hard", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -231,13 +231,13 @@ module ConnectorOperations =
                 let path = "/_connector"
                 let queryParams =
                     [
-                        request.From |> Option.map (fun v -> "from", string v)
-                        request.Size |> Option.map (fun v -> "size", string v)
-                        request.IndexName |> Option.map (fun v -> "index_name", string v)
-                        request.ConnectorName |> Option.map (fun v -> "connector_name", string v)
-                        request.ServiceType |> Option.map (fun v -> "service_type", string v)
-                        request.IncludeDeleted |> Option.map (fun v -> "include_deleted", string v)
-                        request.Query |> Option.map (fun v -> "query", string v)
+                        request.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
+                        request.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
+                        request.IndexName |> Option.map (fun v -> "index_name", Fes.Http.toQueryValue v)
+                        request.ConnectorName |> Option.map (fun v -> "connector_name", Fes.Http.toQueryValue v)
+                        request.ServiceType |> Option.map (fun v -> "service_type", Fes.Http.toQueryValue v)
+                        request.IncludeDeleted |> Option.map (fun v -> "include_deleted", Fes.Http.toQueryValue v)
+                        request.Query |> Option.map (fun v -> "query", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -324,7 +324,7 @@ module ConnectorOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``description`` = request.Description; ``index_name`` = request.IndexName; ``is_native`` = request.IsNative; ``language`` = request.Language; ``name`` = request.Name; ``service_type`` = request.ServiceType |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -456,7 +456,7 @@ module ConnectorOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``sync_cursor`` = request.SyncCursor; ``worker_hostname`` = request.WorkerHostname |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -563,7 +563,7 @@ module ConnectorOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``error`` = request.Error |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -601,11 +601,11 @@ module ConnectorOperations =
                 let path = "/_connector/_sync_job"
                 let queryParams =
                     [
-                        request.From |> Option.map (fun v -> "from", string v)
-                        request.Size |> Option.map (fun v -> "size", string v)
-                        request.Status |> Option.map (fun v -> "status", string v)
-                        request.ConnectorId |> Option.map (fun v -> "connector_id", string v)
-                        request.JobType |> Option.map (fun v -> "job_type", string v)
+                        request.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
+                        request.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
+                        request.Status |> Option.map (fun v -> "status", Fes.Http.toQueryValue v)
+                        request.ConnectorId |> Option.map (fun v -> "connector_id", Fes.Http.toQueryValue v)
+                        request.JobType |> Option.map (fun v -> "job_type", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -676,7 +676,7 @@ module ConnectorOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``id`` = request.Id; ``job_type`` = request.JobType; ``trigger_method`` = request.TriggerMethod |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -734,7 +734,7 @@ module ConnectorOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``deleted_document_count`` = request.DeletedDocumentCount; ``indexed_document_count`` = request.IndexedDocumentCount; ``indexed_document_volume`` = request.IndexedDocumentVolume; ``last_seen`` = request.LastSeen; ``metadata`` = request.Metadata; ``total_document_count`` = request.TotalDocumentCount |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -834,7 +834,7 @@ module ConnectorOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``api_key_id`` = request.ApiKeyId; ``api_key_secret_id`` = request.ApiKeySecretId |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -884,7 +884,7 @@ module ConnectorOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``configuration`` = request.Configuration; ``values`` = request.Values |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -932,7 +932,7 @@ module ConnectorOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``error`` = request.Error |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -975,7 +975,7 @@ module ConnectorOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``features`` = request.Features |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1022,7 +1022,7 @@ module ConnectorOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``filtering`` = request.Filtering; ``rules`` = request.Rules; ``advanced_snippet`` = request.AdvancedSnippet |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1075,7 +1075,7 @@ module ConnectorOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``validation`` = request.Validation |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1118,7 +1118,7 @@ module ConnectorOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``index_name`` = request.IndexName |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1163,7 +1163,7 @@ module ConnectorOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``name`` = request.Name; ``description`` = request.Description |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1211,7 +1211,7 @@ module ConnectorOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``is_native`` = request.IsNative |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1254,7 +1254,7 @@ module ConnectorOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``pipeline`` = request.Pipeline |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1297,7 +1297,7 @@ module ConnectorOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``scheduling`` = request.Scheduling |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1340,7 +1340,7 @@ module ConnectorOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``service_type`` = request.ServiceType |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1383,7 +1383,7 @@ module ConnectorOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``status`` = request.Status |}
                 |> Result.Ok
             with ex -> Result.Error ex
 

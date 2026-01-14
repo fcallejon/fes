@@ -29,7 +29,7 @@ module SecurityOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``access_token`` = request.AccessToken; ``grant_type`` = request.GrantType; ``password`` = request.Password; ``username`` = request.Username |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -106,7 +106,7 @@ module SecurityOperations =
                 let path = "/_security/role"
                 let queryParams =
                     [
-                        request.Refresh |> Option.map (fun v -> "refresh", string v)
+                        request.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -115,7 +115,7 @@ module SecurityOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``roles`` = request.Roles |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -162,7 +162,7 @@ module SecurityOperations =
                 let path = "/_security/role"
                 let queryParams =
                     [
-                        request.Refresh |> Option.map (fun v -> "refresh", string v)
+                        request.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -171,7 +171,7 @@ module SecurityOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``names`` = request.Names |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -223,7 +223,7 @@ module SecurityOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``expiration`` = request.Expiration; ``ids`` = request.Ids; ``metadata`` = request.Metadata; ``role_descriptors`` = request.RoleDescriptors |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -281,7 +281,7 @@ module SecurityOperations =
                 let path = $"/_security/user/{request.Username}/_password"
                 let queryParams =
                     [
-                        request.Refresh |> Option.map (fun v -> "refresh", string v)
+                        request.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -290,7 +290,7 @@ module SecurityOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``password`` = request.Password; ``password_hash`` = request.PasswordHash |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -413,7 +413,7 @@ module SecurityOperations =
                 let path = $"/_security/realm/{request.Realms}/_clear_cache"
                 let queryParams =
                     [
-                        request.Usernames |> Option.map (fun v -> "usernames", string v)
+                        request.Usernames |> Option.map (fun v -> "usernames", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -561,14 +561,14 @@ module SecurityOperations =
                 let path = "/_security/api_key"
                 let queryParams =
                     [
-                        request.Id |> Option.map (fun v -> "id", string v)
-                        request.Name |> Option.map (fun v -> "name", string v)
-                        request.Owner |> Option.map (fun v -> "owner", string v)
-                        request.RealmName |> Option.map (fun v -> "realm_name", string v)
-                        request.Username |> Option.map (fun v -> "username", string v)
-                        request.WithLimitedBy |> Option.map (fun v -> "with_limited_by", string v)
-                        request.ActiveOnly |> Option.map (fun v -> "active_only", string v)
-                        request.WithProfileUid |> Option.map (fun v -> "with_profile_uid", string v)
+                        request.Id |> Option.map (fun v -> "id", Fes.Http.toQueryValue v)
+                        request.Name |> Option.map (fun v -> "name", Fes.Http.toQueryValue v)
+                        request.Owner |> Option.map (fun v -> "owner", Fes.Http.toQueryValue v)
+                        request.RealmName |> Option.map (fun v -> "realm_name", Fes.Http.toQueryValue v)
+                        request.Username |> Option.map (fun v -> "username", Fes.Http.toQueryValue v)
+                        request.WithLimitedBy |> Option.map (fun v -> "with_limited_by", Fes.Http.toQueryValue v)
+                        request.ActiveOnly |> Option.map (fun v -> "active_only", Fes.Http.toQueryValue v)
+                        request.WithProfileUid |> Option.map (fun v -> "with_profile_uid", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -653,7 +653,7 @@ module SecurityOperations =
                 let path = "/_security/api_key"
                 let queryParams =
                     [
-                        request.Refresh |> Option.map (fun v -> "refresh", string v)
+                        request.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -662,7 +662,7 @@ module SecurityOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``expiration`` = request.Expiration; ``name`` = request.Name; ``role_descriptors`` = request.RoleDescriptors; ``metadata`` = request.Metadata |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -724,7 +724,7 @@ module SecurityOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``id`` = request.Id; ``ids`` = request.Ids; ``name`` = request.Name; ``owner`` = request.Owner; ``realm_name`` = request.RealmName; ``username`` = request.Username |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -800,7 +800,7 @@ module SecurityOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``access`` = request.Access; ``expiration`` = request.Expiration; ``metadata`` = request.Metadata; ``name`` = request.Name; ``certificate_identity`` = request.CertificateIdentity |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -865,7 +865,7 @@ module SecurityOperations =
                 let path = $"/_security/service/{request.Namespace}/{request.Service}/credential/token/{request.Name}"
                 let queryParams =
                     [
-                        request.Refresh |> Option.map (fun v -> "refresh", string v)
+                        request.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -920,7 +920,7 @@ module SecurityOperations =
                 let path = $"/_security/service/{request.Namespace}/{request.Service}/credential/token/{request.Name}"
                 let queryParams =
                     [
-                        request.Refresh |> Option.map (fun v -> "refresh", string v)
+                        request.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -980,7 +980,7 @@ module SecurityOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``x509_certificate_chain`` = request.X509CertificateChain |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1058,7 +1058,7 @@ module SecurityOperations =
                 let path = $"/_security/privilege/{request.Application}/{request.Name}"
                 let queryParams =
                     [
-                        request.Refresh |> Option.map (fun v -> "refresh", string v)
+                        request.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1156,7 +1156,7 @@ module SecurityOperations =
                 let path = $"/_security/role/{request.Name}"
                 let queryParams =
                     [
-                        request.Refresh |> Option.map (fun v -> "refresh", string v)
+                        request.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1165,7 +1165,7 @@ module SecurityOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``applications`` = request.Applications; ``cluster`` = request.Cluster; ``global`` = request.Global; ``indices`` = request.Indices; ``remote_indices`` = request.RemoteIndices; ``remote_cluster`` = request.RemoteCluster; ``metadata`` = request.Metadata; ``run_as`` = request.RunAs; ``description`` = request.Description; ``transient_metadata`` = request.TransientMetadata |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1250,7 +1250,7 @@ module SecurityOperations =
                 let path = $"/_security/role/{request.Name}"
                 let queryParams =
                     [
-                        request.Refresh |> Option.map (fun v -> "refresh", string v)
+                        request.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1340,7 +1340,7 @@ module SecurityOperations =
                 let path = $"/_security/role_mapping/{request.Name}"
                 let queryParams =
                     [
-                        request.Refresh |> Option.map (fun v -> "refresh", string v)
+                        request.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1349,7 +1349,7 @@ module SecurityOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``enabled`` = request.Enabled; ``metadata`` = request.Metadata; ``roles`` = request.Roles; ``role_templates`` = request.RoleTemplates; ``rules`` = request.Rules; ``run_as`` = request.RunAs |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1414,7 +1414,7 @@ module SecurityOperations =
                 let path = $"/_security/role_mapping/{request.Name}"
                 let queryParams =
                     [
-                        request.Refresh |> Option.map (fun v -> "refresh", string v)
+                        request.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1462,7 +1462,7 @@ module SecurityOperations =
                 let path = $"/_security/user/{request.Username}"
                 let queryParams =
                     [
-                        request.WithProfileUid |> Option.map (fun v -> "with_profile_uid", string v)
+                        request.WithProfileUid |> Option.map (fun v -> "with_profile_uid", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1521,7 +1521,7 @@ module SecurityOperations =
                 let path = $"/_security/user/{request.Username}"
                 let queryParams =
                     [
-                        request.Refresh |> Option.map (fun v -> "refresh", string v)
+                        request.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1530,7 +1530,7 @@ module SecurityOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``username`` = request.Username2; ``email`` = request.Email; ``full_name`` = request.FullName; ``metadata`` = request.Metadata; ``password`` = request.Password; ``password_hash`` = request.PasswordHash; ``roles`` = request.Roles; ``enabled`` = request.Enabled |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -1605,7 +1605,7 @@ module SecurityOperations =
                 let path = $"/_security/user/{request.Username}"
                 let queryParams =
                     [
-                        request.Refresh |> Option.map (fun v -> "refresh", string v)
+                        request.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1653,7 +1653,7 @@ module SecurityOperations =
                 let path = $"/_security/user/{request.Username}/_disable"
                 let queryParams =
                     [
-                        request.Refresh |> Option.map (fun v -> "refresh", string v)
+                        request.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1696,7 +1696,7 @@ module SecurityOperations =
                 let path = $"/_security/profile/{request.Uid}/_disable"
                 let queryParams =
                     [
-                        request.Refresh |> Option.map (fun v -> "refresh", string v)
+                        request.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1739,7 +1739,7 @@ module SecurityOperations =
                 let path = $"/_security/user/{request.Username}/_enable"
                 let queryParams =
                     [
-                        request.Refresh |> Option.map (fun v -> "refresh", string v)
+                        request.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1782,7 +1782,7 @@ module SecurityOperations =
                 let path = $"/_security/profile/{request.Uid}/_enable"
                 let queryParams =
                     [
-                        request.Refresh |> Option.map (fun v -> "refresh", string v)
+                        request.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -1950,7 +1950,7 @@ module SecurityOperations =
                 let path = "/_security/settings"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -2003,8 +2003,8 @@ module SecurityOperations =
                 let path = "/_security/settings"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -2013,7 +2013,7 @@ module SecurityOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``security`` = request.Security; ``security-profile`` = request.SecurityProfile; ``security-tokens`` = request.SecurityTokens |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -2089,7 +2089,7 @@ module SecurityOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``grant_type`` = request.GrantType; ``scope`` = request.Scope; ``password`` = request.Password; ``kerberos_ticket`` = request.KerberosTicket; ``refresh_token`` = request.RefreshToken; ``username`` = request.Username |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -2169,7 +2169,7 @@ module SecurityOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``token`` = request.Token; ``refresh_token`` = request.RefreshToken; ``realm_name`` = request.RealmName; ``username`` = request.Username |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -2246,7 +2246,7 @@ module SecurityOperations =
                 let path = $"/_security/profile/{request.Uid}"
                 let queryParams =
                     [
-                        request.Data |> Option.map (fun v -> "data", string v)
+                        request.Data |> Option.map (fun v -> "data", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -2307,7 +2307,7 @@ module SecurityOperations =
                 let path = "/_security/api_key/grant"
                 let queryParams =
                     [
-                        request.Refresh |> Option.map (fun v -> "refresh", string v)
+                        request.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -2316,7 +2316,7 @@ module SecurityOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``api_key`` = request.ApiKey; ``grant_type`` = request.GrantType; ``access_token`` = request.AccessToken; ``username`` = request.Username; ``password`` = request.Password; ``run_as`` = request.RunAs |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -2396,7 +2396,7 @@ module SecurityOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``application`` = request.Application; ``cluster`` = request.Cluster; ``index`` = request.Index |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -2445,7 +2445,7 @@ module SecurityOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``uids`` = request.Uids; ``privileges`` = request.Privileges |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -2488,7 +2488,7 @@ module SecurityOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``nonce`` = request.Nonce; ``realm`` = request.Realm; ``redirect_uri`` = request.RedirectUri; ``state`` = request.State |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -2548,7 +2548,7 @@ module SecurityOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``token`` = request.Token; ``refresh_token`` = request.RefreshToken |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -2598,7 +2598,7 @@ module SecurityOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``iss`` = request.Iss; ``login_hint`` = request.LoginHint; ``nonce`` = request.Nonce; ``realm`` = request.Realm; ``state`` = request.State |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -2658,7 +2658,7 @@ module SecurityOperations =
                 let path = "/_security/privilege"
                 let queryParams =
                     [
-                        request.Refresh |> Option.map (fun v -> "refresh", string v)
+                        request.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -2709,9 +2709,9 @@ module SecurityOperations =
                 let path = "/_security/_query/api_key"
                 let queryParams =
                     [
-                        request.WithLimitedBy |> Option.map (fun v -> "with_limited_by", string v)
-                        request.WithProfileUid |> Option.map (fun v -> "with_profile_uid", string v)
-                        request.TypedKeys |> Option.map (fun v -> "typed_keys", string v)
+                        request.WithLimitedBy |> Option.map (fun v -> "with_limited_by", Fes.Http.toQueryValue v)
+                        request.WithProfileUid |> Option.map (fun v -> "with_profile_uid", Fes.Http.toQueryValue v)
+                        request.TypedKeys |> Option.map (fun v -> "typed_keys", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -2720,7 +2720,7 @@ module SecurityOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``aggregations`` = request.Aggregations; ``query`` = request.Query; ``from`` = request.From; ``sort`` = request.Sort; ``size`` = request.Size; ``search_after`` = request.SearchAfter |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -2800,7 +2800,7 @@ module SecurityOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``query`` = request.Query; ``from`` = request.From; ``sort`` = request.Sort; ``size`` = request.Size; ``search_after`` = request.SearchAfter |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -2859,7 +2859,7 @@ module SecurityOperations =
                 let path = "/_security/_query/user"
                 let queryParams =
                     [
-                        request.WithProfileUid |> Option.map (fun v -> "with_profile_uid", string v)
+                        request.WithProfileUid |> Option.map (fun v -> "with_profile_uid", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -2868,7 +2868,7 @@ module SecurityOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``query`` = request.Query; ``from`` = request.From; ``sort`` = request.Sort; ``size`` = request.Size; ``search_after`` = request.SearchAfter |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -2929,7 +2929,7 @@ module SecurityOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``content`` = request.Content; ``ids`` = request.Ids; ``realm`` = request.Realm |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -2992,7 +2992,7 @@ module SecurityOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``realm`` = request.Realm; ``ids`` = request.Ids; ``query_string`` = request.QueryString; ``content`` = request.Content |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -3043,7 +3043,7 @@ module SecurityOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``acs`` = request.Acs; ``query_string`` = request.QueryString; ``realm`` = request.Realm |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -3096,7 +3096,7 @@ module SecurityOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``token`` = request.Token; ``refresh_token`` = request.RefreshToken |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -3142,7 +3142,7 @@ module SecurityOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``acs`` = request.Acs; ``realm`` = request.Realm; ``relay_state`` = request.RelayState |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -3233,7 +3233,7 @@ module SecurityOperations =
                 let path = "/_security/profile/_suggest"
                 let queryParams =
                     [
-                        request.Data |> Option.map (fun v -> "data", string v)
+                        request.Data |> Option.map (fun v -> "data", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -3242,7 +3242,7 @@ module SecurityOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``name`` = request.Name; ``size`` = request.Size; ``data`` = request.Data2; ``hint`` = request.Hint |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -3299,7 +3299,7 @@ module SecurityOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``role_descriptors`` = request.RoleDescriptors; ``metadata`` = request.Metadata; ``expiration`` = request.Expiration |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -3358,7 +3358,7 @@ module SecurityOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``access`` = request.Access; ``expiration`` = request.Expiration; ``metadata`` = request.Metadata; ``certificate_identity`` = request.CertificateIdentity |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -3419,9 +3419,9 @@ module SecurityOperations =
                 let path = $"/_security/profile/{request.Uid}/_data"
                 let queryParams =
                     [
-                        request.IfSeqNo |> Option.map (fun v -> "if_seq_no", string v)
-                        request.IfPrimaryTerm |> Option.map (fun v -> "if_primary_term", string v)
-                        request.Refresh |> Option.map (fun v -> "refresh", string v)
+                        request.IfSeqNo |> Option.map (fun v -> "if_seq_no", Fes.Http.toQueryValue v)
+                        request.IfPrimaryTerm |> Option.map (fun v -> "if_primary_term", Fes.Http.toQueryValue v)
+                        request.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -3430,7 +3430,7 @@ module SecurityOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``labels`` = request.Labels; ``data`` = request.Data |}
                 |> Result.Ok
             with ex -> Result.Error ex
 

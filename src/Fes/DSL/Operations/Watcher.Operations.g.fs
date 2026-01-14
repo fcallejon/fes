@@ -183,10 +183,10 @@ module WatcherOperations =
                 let path = $"/_watcher/watch/{request.Id}"
                 let queryParams =
                     [
-                        request.Active |> Option.map (fun v -> "active", string v)
-                        request.IfPrimaryTerm |> Option.map (fun v -> "if_primary_term", string v)
-                        request.IfSeqNo |> Option.map (fun v -> "if_seq_no", string v)
-                        request.Version |> Option.map (fun v -> "version", string v)
+                        request.Active |> Option.map (fun v -> "active", Fes.Http.toQueryValue v)
+                        request.IfPrimaryTerm |> Option.map (fun v -> "if_primary_term", Fes.Http.toQueryValue v)
+                        request.IfSeqNo |> Option.map (fun v -> "if_seq_no", Fes.Http.toQueryValue v)
+                        request.Version |> Option.map (fun v -> "version", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -195,7 +195,7 @@ module WatcherOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``actions`` = request.Actions; ``condition`` = request.Condition; ``input`` = request.Input; ``metadata`` = request.Metadata; ``throttle_period`` = request.ThrottlePeriod; ``throttle_period_in_millis`` = request.ThrottlePeriodInMillis; ``transform`` = request.Transform; ``trigger`` = request.Trigger |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -338,7 +338,7 @@ module WatcherOperations =
                 let path = $"/_watcher/watch/{request.Id}/_execute"
                 let queryParams =
                     [
-                        request.Debug |> Option.map (fun v -> "debug", string v)
+                        request.Debug |> Option.map (fun v -> "debug", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -347,7 +347,7 @@ module WatcherOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``action_modes`` = request.ActionModes; ``alternative_input`` = request.AlternativeInput; ``ignore_condition`` = request.IgnoreCondition; ``record_execution`` = request.RecordExecution; ``simulated_actions`` = request.SimulatedActions; ``trigger_data`` = request.TriggerData; ``watch`` = request.Watch |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -416,7 +416,7 @@ module WatcherOperations =
                 let path = "/_watcher/settings"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -463,8 +463,8 @@ module WatcherOperations =
                 let path = "/_watcher/settings"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
-                        request.Timeout |> Option.map (fun v -> "timeout", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                        request.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -473,7 +473,7 @@ module WatcherOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``index.auto_expand_replicas`` = request.IndexAutoExpandReplicas; ``index.number_of_replicas`` = request.IndexNumberOfReplicas |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -533,7 +533,7 @@ module WatcherOperations =
                 fullPath
                 |> Fes.Http.Request.fromPath
                 |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody request
+                |> Fes.Http.Request.withJsonBody {| ``from`` = request.From; ``size`` = request.Size; ``query`` = request.Query; ``sort`` = request.Sort; ``search_after`` = request.SearchAfter |}
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -582,7 +582,7 @@ module WatcherOperations =
                 let path = "/_watcher/_start"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -623,8 +623,8 @@ module WatcherOperations =
                 let path = $"/_watcher/stats/{request.Metric}"
                 let queryParams =
                     [
-                        request.EmitStacktraces |> Option.map (fun v -> "emit_stacktraces", string v)
-                        request.Metric2 |> Option.map (fun v -> "metric", string v)
+                        request.EmitStacktraces |> Option.map (fun v -> "emit_stacktraces", Fes.Http.toQueryValue v)
+                        request.Metric2 |> Option.map (fun v -> "metric", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -671,7 +671,7 @@ module WatcherOperations =
                 let path = "/_watcher/_stop"
                 let queryParams =
                     [
-                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", string v)
+                        request.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
