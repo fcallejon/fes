@@ -13,15 +13,10 @@ open Fes.DSL.Models.Types
 module MlDataFrameOperations =
 
     type MlGetDataFrameAnalyticsRequest = {
-        [<JsonPropertyName("id")>]
         Id: Id
-        [<JsonPropertyName("allow_no_match")>]
         AllowNoMatch: bool option
-        [<JsonPropertyName("from")>]
         From: float option
-        [<JsonPropertyName("size")>]
         Size: float option
-        [<JsonPropertyName("exclude_generated")>]
         ExcludeGenerated: bool option
     } with
         static member ToRequest(request: MlGetDataFrameAnalyticsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -82,7 +77,6 @@ module MlDataFrameOperations =
     let mlGetDataFrameAnalyticsRequest = MlGetDataFrameAnalyticsRequestBuilder()
 
     type MlPutDataFrameAnalyticsRequest = {
-        [<JsonPropertyName("id")>]
         Id: Id
         [<JsonPropertyName("allow_lazy_start")>]
         AllowLazyStart: bool option
@@ -220,11 +214,8 @@ module MlDataFrameOperations =
     }
 
     type MlDeleteDataFrameAnalyticsRequest = {
-        [<JsonPropertyName("id")>]
         Id: Id
-        [<JsonPropertyName("force")>]
         Force: bool option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: MlDeleteDataFrameAnalyticsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -330,7 +321,6 @@ module MlDataFrameOperations =
     }
 
     type MlExplainDataFrameAnalyticsRequest = {
-        [<JsonPropertyName("id")>]
         Id: Id
         [<JsonPropertyName("source")>]
         Source: TypesDataframeAnalyticsSource option
@@ -418,15 +408,10 @@ module MlDataFrameOperations =
     let mlExplainDataFrameAnalyticsRequest = MlExplainDataFrameAnalyticsRequestBuilder()
 
     type MlGetDataFrameAnalyticsStatsRequest = {
-        [<JsonPropertyName("id")>]
         Id: Id
-        [<JsonPropertyName("allow_no_match")>]
         AllowNoMatch: bool option
-        [<JsonPropertyName("from")>]
         From: float option
-        [<JsonPropertyName("size")>]
         Size: float option
-        [<JsonPropertyName("verbose")>]
         Verbose: bool option
     } with
         static member ToRequest(request: MlGetDataFrameAnalyticsStatsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -487,7 +472,6 @@ module MlDataFrameOperations =
     let mlGetDataFrameAnalyticsStatsRequest = MlGetDataFrameAnalyticsStatsRequestBuilder()
 
     type MlPreviewDataFrameAnalyticsRequest = {
-        [<JsonPropertyName("id")>]
         Id: Id
         [<JsonPropertyName("config")>]
         Config: PreviewDataFrameAnalyticsDataframePreviewConfig option
@@ -526,9 +510,7 @@ module MlDataFrameOperations =
     let mlPreviewDataFrameAnalyticsRequest = MlPreviewDataFrameAnalyticsRequestBuilder()
 
     type MlStartDataFrameAnalyticsRequest = {
-        [<JsonPropertyName("id")>]
         Id: Id
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("id")>]
         Id2: Id option
@@ -593,13 +575,9 @@ module MlDataFrameOperations =
     }
 
     type MlStopDataFrameAnalyticsRequest = {
-        [<JsonPropertyName("id")>]
         Id: Id
-        [<JsonPropertyName("allow_no_match")>]
         AllowNoMatch: bool option
-        [<JsonPropertyName("force")>]
         Force: bool option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("id")>]
         Id2: Id option
@@ -688,7 +666,6 @@ module MlDataFrameOperations =
     }
 
     type MlUpdateDataFrameAnalyticsRequest = {
-        [<JsonPropertyName("id")>]
         Id: Id
         [<JsonPropertyName("description")>]
         Description: string option

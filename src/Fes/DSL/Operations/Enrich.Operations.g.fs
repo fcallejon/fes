@@ -13,9 +13,7 @@ open Fes.DSL.Models.Types
 module EnrichOperations =
 
     type EnrichGetPolicyRequest = {
-        [<JsonPropertyName("name")>]
         Name: Names
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
     } with
         static member ToRequest(request: EnrichGetPolicyRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -58,9 +56,7 @@ module EnrichOperations =
     let enrichGetPolicyRequest = EnrichGetPolicyRequestBuilder()
 
     type EnrichPutPolicyRequest = {
-        [<JsonPropertyName("name")>]
         Name: Name
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
         [<JsonPropertyName("geo_match")>]
         GeoMatch: TypesPolicy option
@@ -127,9 +123,7 @@ module EnrichOperations =
     type EnrichPutPolicyResponse = AcknowledgedResponseBase
 
     type EnrichDeletePolicyRequest = {
-        [<JsonPropertyName("name")>]
         Name: Name
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
     } with
         static member ToRequest(request: EnrichDeletePolicyRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -174,11 +168,8 @@ module EnrichOperations =
     type EnrichDeletePolicyResponse = AcknowledgedResponseBase
 
     type EnrichExecutePolicyRequest = {
-        [<JsonPropertyName("name")>]
         Name: Name
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("wait_for_completion")>]
         WaitForCompletion: bool option
     } with
         static member ToRequest(request: EnrichExecutePolicyRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -234,7 +225,6 @@ module EnrichOperations =
     }
 
     type EnrichStatsRequest = {
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
     } with
         static member ToRequest(request: EnrichStatsRequest) : Result<Fes.Http.RequestMsg, exn> =

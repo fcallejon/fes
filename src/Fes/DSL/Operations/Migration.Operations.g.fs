@@ -13,7 +13,6 @@ open Fes.DSL.Models.Types
 module MigrationOperations =
 
     type IndicesCancelMigrateReindexRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
     } with
         static member ToRequest(request: IndicesCancelMigrateReindexRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -46,9 +45,7 @@ module MigrationOperations =
     type IndicesCancelMigrateReindexResponse = AcknowledgedResponseBase
 
     type IndicesCreateFromRequest = {
-        [<JsonPropertyName("source")>]
         Source: IndexName
-        [<JsonPropertyName("dest")>]
         Dest: IndexName
         [<JsonPropertyName("body")>]
         Body: CreateFromCreateFrom
@@ -92,7 +89,6 @@ module MigrationOperations =
     let indicesCreateFromRequest = IndicesCreateFromRequestBuilder()
 
     type IndicesGetMigrateReindexStatusRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
     } with
         static member ToRequest(request: IndicesGetMigrateReindexStatusRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -175,7 +171,6 @@ module MigrationOperations =
     type IndicesMigrateReindexResponse = AcknowledgedResponseBase
 
     type MigrationDeprecationsRequest = {
-        [<JsonPropertyName("index")>]
         Index: IndexName
     } with
         static member ToRequest(request: MigrationDeprecationsRequest) : Result<Fes.Http.RequestMsg, exn> =

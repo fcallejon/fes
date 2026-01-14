@@ -13,7 +13,6 @@ open Fes.DSL.Models.Types
 module ConnectorOperations =
 
     type ConnectorCheckInRequest = {
-        [<JsonPropertyName("connector_id")>]
         ConnectorId: Id
     } with
         static member ToRequest(request: ConnectorCheckInRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -49,9 +48,7 @@ module ConnectorOperations =
     }
 
     type ConnectorGetRequest = {
-        [<JsonPropertyName("connector_id")>]
         ConnectorId: Id
-        [<JsonPropertyName("include_deleted")>]
         IncludeDeleted: bool option
     } with
         static member ToRequest(request: ConnectorGetRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -96,7 +93,6 @@ module ConnectorOperations =
     type ConnectorGetResponse = TypesConnector
 
     type ConnectorPutRequest = {
-        [<JsonPropertyName("connector_id")>]
         ConnectorId: Id
         [<JsonPropertyName("description")>]
         Description: string option
@@ -170,11 +166,8 @@ module ConnectorOperations =
     let connectorPutRequest = ConnectorPutRequestBuilder()
 
     type ConnectorDeleteRequest = {
-        [<JsonPropertyName("connector_id")>]
         ConnectorId: Id
-        [<JsonPropertyName("delete_sync_jobs")>]
         DeleteSyncJobs: bool option
-        [<JsonPropertyName("hard")>]
         Hard: bool option
     } with
         static member ToRequest(request: ConnectorDeleteRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -225,19 +218,12 @@ module ConnectorOperations =
     type ConnectorDeleteResponse = AcknowledgedResponseBase
 
     type ConnectorListRequest = {
-        [<JsonPropertyName("from")>]
         From: float option
-        [<JsonPropertyName("size")>]
         Size: float option
-        [<JsonPropertyName("index_name")>]
         IndexName: Indices option
-        [<JsonPropertyName("connector_name")>]
         ConnectorName: Names option
-        [<JsonPropertyName("service_type")>]
         ServiceType: Names option
-        [<JsonPropertyName("include_deleted")>]
         IncludeDeleted: bool option
-        [<JsonPropertyName("query")>]
         Query: string option
     } with
         static member ToRequest(request: ConnectorListRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -392,7 +378,6 @@ module ConnectorOperations =
     }
 
     type ConnectorSyncJobCancelRequest = {
-        [<JsonPropertyName("connector_sync_job_id")>]
         ConnectorSyncJobId: Id
     } with
         static member ToRequest(request: ConnectorSyncJobCancelRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -428,7 +413,6 @@ module ConnectorOperations =
     }
 
     type ConnectorSyncJobCheckInRequest = {
-        [<JsonPropertyName("connector_sync_job_id")>]
         ConnectorSyncJobId: Id
     } with
         static member ToRequest(request: ConnectorSyncJobCheckInRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -459,7 +443,6 @@ module ConnectorOperations =
     let connectorSyncJobCheckInRequest = ConnectorSyncJobCheckInRequestBuilder()
 
     type ConnectorSyncJobClaimRequest = {
-        [<JsonPropertyName("connector_sync_job_id")>]
         ConnectorSyncJobId: Id
         [<JsonPropertyName("sync_cursor")>]
         SyncCursor: obj option
@@ -505,7 +488,6 @@ module ConnectorOperations =
     let connectorSyncJobClaimRequest = ConnectorSyncJobClaimRequestBuilder()
 
     type ConnectorSyncJobGetRequest = {
-        [<JsonPropertyName("connector_sync_job_id")>]
         ConnectorSyncJobId: Id
     } with
         static member ToRequest(request: ConnectorSyncJobGetRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -538,7 +520,6 @@ module ConnectorOperations =
     type ConnectorSyncJobGetResponse = TypesConnectorSyncJob
 
     type ConnectorSyncJobDeleteRequest = {
-        [<JsonPropertyName("connector_sync_job_id")>]
         ConnectorSyncJobId: Id
     } with
         static member ToRequest(request: ConnectorSyncJobDeleteRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -571,7 +552,6 @@ module ConnectorOperations =
     type ConnectorSyncJobDeleteResponse = AcknowledgedResponseBase
 
     type ConnectorSyncJobErrorRequest = {
-        [<JsonPropertyName("connector_sync_job_id")>]
         ConnectorSyncJobId: Id
         [<JsonPropertyName("error")>]
         Error: string
@@ -610,15 +590,10 @@ module ConnectorOperations =
     let connectorSyncJobErrorRequest = ConnectorSyncJobErrorRequestBuilder()
 
     type ConnectorSyncJobListRequest = {
-        [<JsonPropertyName("from")>]
         From: float option
-        [<JsonPropertyName("size")>]
         Size: float option
-        [<JsonPropertyName("status")>]
         Status: TypesSyncStatus option
-        [<JsonPropertyName("connector_id")>]
         ConnectorId: Id option
-        [<JsonPropertyName("job_type")>]
         JobType: System.Text.Json.JsonElement option
     } with
         static member ToRequest(request: ConnectorSyncJobListRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -738,7 +713,6 @@ module ConnectorOperations =
     }
 
     type ConnectorSyncJobUpdateStatsRequest = {
-        [<JsonPropertyName("connector_sync_job_id")>]
         ConnectorSyncJobId: Id
         [<JsonPropertyName("deleted_document_count")>]
         DeletedDocumentCount: float
@@ -812,7 +786,6 @@ module ConnectorOperations =
     let connectorSyncJobUpdateStatsRequest = ConnectorSyncJobUpdateStatsRequestBuilder()
 
     type ConnectorUpdateActiveFilteringRequest = {
-        [<JsonPropertyName("connector_id")>]
         ConnectorId: Id
     } with
         static member ToRequest(request: ConnectorUpdateActiveFilteringRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -848,7 +821,6 @@ module ConnectorOperations =
     }
 
     type ConnectorUpdateApiKeyIdRequest = {
-        [<JsonPropertyName("connector_id")>]
         ConnectorId: Id
         [<JsonPropertyName("api_key_id")>]
         ApiKeyId: string option
@@ -899,7 +871,6 @@ module ConnectorOperations =
     }
 
     type ConnectorUpdateConfigurationRequest = {
-        [<JsonPropertyName("connector_id")>]
         ConnectorId: Id
         [<JsonPropertyName("configuration")>]
         Configuration: TypesConnectorConfiguration option
@@ -950,7 +921,6 @@ module ConnectorOperations =
     }
 
     type ConnectorUpdateErrorRequest = {
-        [<JsonPropertyName("connector_id")>]
         ConnectorId: Id
         [<JsonPropertyName("error")>]
         Error: System.Text.Json.JsonElement
@@ -994,7 +964,6 @@ module ConnectorOperations =
     }
 
     type ConnectorUpdateFeaturesRequest = {
-        [<JsonPropertyName("connector_id")>]
         ConnectorId: Id
         [<JsonPropertyName("features")>]
         Features: TypesConnectorFeatures
@@ -1038,7 +1007,6 @@ module ConnectorOperations =
     }
 
     type ConnectorUpdateFilteringRequest = {
-        [<JsonPropertyName("connector_id")>]
         ConnectorId: Id
         [<JsonPropertyName("filtering")>]
         Filtering: TypesFilteringConfig array option
@@ -1096,7 +1064,6 @@ module ConnectorOperations =
     }
 
     type ConnectorUpdateFilteringValidationRequest = {
-        [<JsonPropertyName("connector_id")>]
         ConnectorId: Id
         [<JsonPropertyName("validation")>]
         Validation: TypesFilteringRulesValidation
@@ -1140,7 +1107,6 @@ module ConnectorOperations =
     }
 
     type ConnectorUpdateIndexNameRequest = {
-        [<JsonPropertyName("connector_id")>]
         ConnectorId: Id
         [<JsonPropertyName("index_name")>]
         IndexName: System.Text.Json.JsonElement
@@ -1184,7 +1150,6 @@ module ConnectorOperations =
     }
 
     type ConnectorUpdateNameRequest = {
-        [<JsonPropertyName("connector_id")>]
         ConnectorId: Id
         [<JsonPropertyName("name")>]
         Name: string option
@@ -1235,7 +1200,6 @@ module ConnectorOperations =
     }
 
     type ConnectorUpdateNativeRequest = {
-        [<JsonPropertyName("connector_id")>]
         ConnectorId: Id
         [<JsonPropertyName("is_native")>]
         IsNative: bool
@@ -1279,7 +1243,6 @@ module ConnectorOperations =
     }
 
     type ConnectorUpdatePipelineRequest = {
-        [<JsonPropertyName("connector_id")>]
         ConnectorId: Id
         [<JsonPropertyName("pipeline")>]
         Pipeline: TypesIngestPipelineParams
@@ -1323,7 +1286,6 @@ module ConnectorOperations =
     }
 
     type ConnectorUpdateSchedulingRequest = {
-        [<JsonPropertyName("connector_id")>]
         ConnectorId: Id
         [<JsonPropertyName("scheduling")>]
         Scheduling: TypesSchedulingConfiguration
@@ -1367,7 +1329,6 @@ module ConnectorOperations =
     }
 
     type ConnectorUpdateServiceTypeRequest = {
-        [<JsonPropertyName("connector_id")>]
         ConnectorId: Id
         [<JsonPropertyName("service_type")>]
         ServiceType: string
@@ -1411,7 +1372,6 @@ module ConnectorOperations =
     }
 
     type ConnectorUpdateStatusRequest = {
-        [<JsonPropertyName("connector_id")>]
         ConnectorId: Id
         [<JsonPropertyName("status")>]
         Status: TypesConnectorStatus

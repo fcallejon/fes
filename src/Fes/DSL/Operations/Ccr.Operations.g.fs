@@ -13,9 +13,7 @@ open Fes.DSL.Models.Types
 module CcrOperations =
 
     type CcrGetAutoFollowPatternRequest = {
-        [<JsonPropertyName("name")>]
         Name: Name
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
     } with
         static member ToRequest(request: CcrGetAutoFollowPatternRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -58,9 +56,7 @@ module CcrOperations =
     let ccrGetAutoFollowPatternRequest = CcrGetAutoFollowPatternRequestBuilder()
 
     type CcrPutAutoFollowPatternRequest = {
-        [<JsonPropertyName("name")>]
         Name: Name
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
         [<JsonPropertyName("remote_cluster")>]
         RemoteCluster: string
@@ -211,9 +207,7 @@ module CcrOperations =
     type CcrPutAutoFollowPatternResponse = AcknowledgedResponseBase
 
     type CcrDeleteAutoFollowPatternRequest = {
-        [<JsonPropertyName("name")>]
         Name: Name
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
     } with
         static member ToRequest(request: CcrDeleteAutoFollowPatternRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -258,11 +252,8 @@ module CcrOperations =
     type CcrDeleteAutoFollowPatternResponse = AcknowledgedResponseBase
 
     type CcrFollowRequest = {
-        [<JsonPropertyName("index")>]
         Index: IndexName
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("wait_for_active_shards")>]
         WaitForActiveShards: WaitForActiveShards option
         [<JsonPropertyName("data_stream_name")>]
         DataStreamName: string option
@@ -419,9 +410,7 @@ module CcrOperations =
     }
 
     type CcrFollowInfoRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
     } with
         static member ToRequest(request: CcrFollowInfoRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -469,9 +458,7 @@ module CcrOperations =
     }
 
     type CcrFollowStatsRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: CcrFollowStatsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -519,9 +506,7 @@ module CcrOperations =
     }
 
     type CcrForgetFollowerRequest = {
-        [<JsonPropertyName("index")>]
         Index: IndexName
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("follower_cluster")>]
         FollowerCluster: string option
@@ -598,9 +583,7 @@ module CcrOperations =
     }
 
     type CcrPauseAutoFollowPatternRequest = {
-        [<JsonPropertyName("name")>]
         Name: Name
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
     } with
         static member ToRequest(request: CcrPauseAutoFollowPatternRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -645,9 +628,7 @@ module CcrOperations =
     type CcrPauseAutoFollowPatternResponse = AcknowledgedResponseBase
 
     type CcrPauseFollowRequest = {
-        [<JsonPropertyName("index")>]
         Index: IndexName
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
     } with
         static member ToRequest(request: CcrPauseFollowRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -692,9 +673,7 @@ module CcrOperations =
     type CcrPauseFollowResponse = AcknowledgedResponseBase
 
     type CcrResumeAutoFollowPatternRequest = {
-        [<JsonPropertyName("name")>]
         Name: Name
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
     } with
         static member ToRequest(request: CcrResumeAutoFollowPatternRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -739,9 +718,7 @@ module CcrOperations =
     type CcrResumeAutoFollowPatternResponse = AcknowledgedResponseBase
 
     type CcrResumeFollowRequest = {
-        [<JsonPropertyName("index")>]
         Index: IndexName
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
         [<JsonPropertyName("max_outstanding_read_requests")>]
         MaxOutstandingReadRequests: float option
@@ -857,9 +834,7 @@ module CcrOperations =
     type CcrResumeFollowResponse = AcknowledgedResponseBase
 
     type CcrStatsRequest = {
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: CcrStatsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -910,9 +885,7 @@ module CcrOperations =
     }
 
     type CcrUnfollowRequest = {
-        [<JsonPropertyName("index")>]
         Index: IndexName
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
     } with
         static member ToRequest(request: CcrUnfollowRequest) : Result<Fes.Http.RequestMsg, exn> =

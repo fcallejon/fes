@@ -13,7 +13,6 @@ open Fes.DSL.Models.Types
 module AnalyticsOperations =
 
     type SearchApplicationGetBehavioralAnalyticsRequest = {
-        [<JsonPropertyName("name")>]
         Name: Name array
     } with
         static member ToRequest(request: SearchApplicationGetBehavioralAnalyticsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -44,7 +43,6 @@ module AnalyticsOperations =
     let searchApplicationGetBehavioralAnalyticsRequest = SearchApplicationGetBehavioralAnalyticsRequestBuilder()
 
     type SearchApplicationPutBehavioralAnalyticsRequest = {
-        [<JsonPropertyName("name")>]
         Name: Name
     } with
         static member ToRequest(request: SearchApplicationPutBehavioralAnalyticsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -77,7 +75,6 @@ module AnalyticsOperations =
     type SearchApplicationPutBehavioralAnalyticsResponse = PutBehavioralAnalyticsAnalyticsAcknowledgeResponseBase
 
     type SearchApplicationDeleteBehavioralAnalyticsRequest = {
-        [<JsonPropertyName("name")>]
         Name: Name
     } with
         static member ToRequest(request: SearchApplicationDeleteBehavioralAnalyticsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -110,11 +107,8 @@ module AnalyticsOperations =
     type SearchApplicationDeleteBehavioralAnalyticsResponse = AcknowledgedResponseBase
 
     type SearchApplicationPostBehavioralAnalyticsEventRequest = {
-        [<JsonPropertyName("collection_name")>]
         CollectionName: Name
-        [<JsonPropertyName("event_type")>]
         EventType: TypesEventType
-        [<JsonPropertyName("debug")>]
         Debug: bool option
     } with
         static member ToRequest(request: SearchApplicationPostBehavioralAnalyticsEventRequest) : Result<Fes.Http.RequestMsg, exn> =

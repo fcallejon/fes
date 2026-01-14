@@ -13,31 +13,18 @@ open Fes.DSL.Models.Types
 module DocumentOperations =
 
     type BulkRequest = {
-        [<JsonPropertyName("index")>]
         Index: IndexName
-        [<JsonPropertyName("include_source_on_error")>]
         IncludeSourceOnError: bool option
-        [<JsonPropertyName("list_executed_pipelines")>]
         ListExecutedPipelines: bool option
-        [<JsonPropertyName("pipeline")>]
         Pipeline: string option
-        [<JsonPropertyName("refresh")>]
         Refresh: Refresh option
-        [<JsonPropertyName("routing")>]
         Routing: Routing option
-        [<JsonPropertyName("_source")>]
         Source: SearchTypesSourceConfigParam option
-        [<JsonPropertyName("_source_excludes")>]
         SourceExcludes: Fields option
-        [<JsonPropertyName("_source_includes")>]
         SourceIncludes: Fields option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
-        [<JsonPropertyName("wait_for_active_shards")>]
         WaitForActiveShards: WaitForActiveShards option
-        [<JsonPropertyName("require_alias")>]
         RequireAlias: bool option
-        [<JsonPropertyName("require_data_stream")>]
         RequireDataStream: bool option
     } with
         static member ToRequest(request: BulkRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -146,29 +133,17 @@ module DocumentOperations =
     let bulkRequest = BulkRequestBuilder()
 
     type CreateRequest = {
-        [<JsonPropertyName("index")>]
         Index: IndexName
-        [<JsonPropertyName("id")>]
         Id: Id
-        [<JsonPropertyName("include_source_on_error")>]
         IncludeSourceOnError: bool option
-        [<JsonPropertyName("pipeline")>]
         Pipeline: string option
-        [<JsonPropertyName("refresh")>]
         Refresh: Refresh option
-        [<JsonPropertyName("require_alias")>]
         RequireAlias: bool option
-        [<JsonPropertyName("require_data_stream")>]
         RequireDataStream: bool option
-        [<JsonPropertyName("routing")>]
         Routing: Routing option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
-        [<JsonPropertyName("version")>]
         Version: VersionNumber option
-        [<JsonPropertyName("version_type")>]
         VersionType: VersionType option
-        [<JsonPropertyName("wait_for_active_shards")>]
         WaitForActiveShards: WaitForActiveShards option
     } with
         static member ToRequest(request: CreateRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -270,31 +245,18 @@ module DocumentOperations =
     let createRequest = CreateRequestBuilder()
 
     type GetRequest = {
-        [<JsonPropertyName("index")>]
         Index: IndexName
-        [<JsonPropertyName("id")>]
         Id: Id
-        [<JsonPropertyName("preference")>]
         Preference: string option
-        [<JsonPropertyName("realtime")>]
         Realtime: bool option
-        [<JsonPropertyName("refresh")>]
         Refresh: bool option
-        [<JsonPropertyName("routing")>]
         Routing: Routing option
-        [<JsonPropertyName("_source")>]
         Source: SearchTypesSourceConfigParam option
-        [<JsonPropertyName("_source_excludes")>]
         SourceExcludes: Fields option
-        [<JsonPropertyName("_source_exclude_vectors")>]
         SourceExcludeVectors: bool option
-        [<JsonPropertyName("_source_includes")>]
         SourceIncludes: Fields option
-        [<JsonPropertyName("stored_fields")>]
         StoredFields: Fields option
-        [<JsonPropertyName("version")>]
         Version: VersionNumber option
-        [<JsonPropertyName("version_type")>]
         VersionType: VersionType option
     } with
         static member ToRequest(request: GetRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -404,35 +366,20 @@ module DocumentOperations =
     type GetResponse = GetGetResult
 
     type IndexRequest = {
-        [<JsonPropertyName("index")>]
         Index: IndexName
-        [<JsonPropertyName("id")>]
         Id: Id
-        [<JsonPropertyName("if_primary_term")>]
         IfPrimaryTerm: float option
-        [<JsonPropertyName("if_seq_no")>]
         IfSeqNo: SequenceNumber option
-        [<JsonPropertyName("include_source_on_error")>]
         IncludeSourceOnError: bool option
-        [<JsonPropertyName("op_type")>]
         OpType: OpType option
-        [<JsonPropertyName("pipeline")>]
         Pipeline: string option
-        [<JsonPropertyName("refresh")>]
         Refresh: Refresh option
-        [<JsonPropertyName("routing")>]
         Routing: Routing option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
-        [<JsonPropertyName("version")>]
         Version: VersionNumber option
-        [<JsonPropertyName("version_type")>]
         VersionType: VersionType option
-        [<JsonPropertyName("wait_for_active_shards")>]
         WaitForActiveShards: WaitForActiveShards option
-        [<JsonPropertyName("require_alias")>]
         RequireAlias: bool option
-        [<JsonPropertyName("require_data_stream")>]
         RequireDataStream: bool option
     } with
         static member ToRequest(request: IndexRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -552,25 +499,15 @@ module DocumentOperations =
     let indexRequest = IndexRequestBuilder()
 
     type DeleteRequest = {
-        [<JsonPropertyName("index")>]
         Index: IndexName
-        [<JsonPropertyName("id")>]
         Id: Id
-        [<JsonPropertyName("if_primary_term")>]
         IfPrimaryTerm: float option
-        [<JsonPropertyName("if_seq_no")>]
         IfSeqNo: SequenceNumber option
-        [<JsonPropertyName("refresh")>]
         Refresh: Refresh option
-        [<JsonPropertyName("routing")>]
         Routing: Routing option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
-        [<JsonPropertyName("version")>]
         Version: VersionNumber option
-        [<JsonPropertyName("version_type")>]
         VersionType: VersionType option
-        [<JsonPropertyName("wait_for_active_shards")>]
         WaitForActiveShards: WaitForActiveShards option
     } with
         static member ToRequest(request: DeleteRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -662,29 +599,17 @@ module DocumentOperations =
     type DeleteResponse = WriteResponseBase
 
     type ExistsRequest = {
-        [<JsonPropertyName("index")>]
         Index: IndexName
-        [<JsonPropertyName("id")>]
         Id: Id
-        [<JsonPropertyName("preference")>]
         Preference: string option
-        [<JsonPropertyName("realtime")>]
         Realtime: bool option
-        [<JsonPropertyName("refresh")>]
         Refresh: bool option
-        [<JsonPropertyName("routing")>]
         Routing: Routing option
-        [<JsonPropertyName("_source")>]
         Source: SearchTypesSourceConfigParam option
-        [<JsonPropertyName("_source_excludes")>]
         SourceExcludes: Fields option
-        [<JsonPropertyName("_source_includes")>]
         SourceIncludes: Fields option
-        [<JsonPropertyName("stored_fields")>]
         StoredFields: Fields option
-        [<JsonPropertyName("version")>]
         Version: VersionNumber option
-        [<JsonPropertyName("version_type")>]
         VersionType: VersionType option
     } with
         static member ToRequest(request: ExistsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -786,65 +711,35 @@ module DocumentOperations =
     let existsRequest = ExistsRequestBuilder()
 
     type DeleteByQueryRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("allow_no_indices")>]
         AllowNoIndices: bool option
-        [<JsonPropertyName("analyzer")>]
         Analyzer: string option
-        [<JsonPropertyName("analyze_wildcard")>]
         AnalyzeWildcard: bool option
-        [<JsonPropertyName("conflicts")>]
         Conflicts: Conflicts option
-        [<JsonPropertyName("default_operator")>]
         DefaultOperator: QueryDslOperator option
-        [<JsonPropertyName("df")>]
         Df: string option
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("from")>]
         From: float option
-        [<JsonPropertyName("ignore_unavailable")>]
         IgnoreUnavailable: bool option
-        [<JsonPropertyName("lenient")>]
         Lenient: bool option
-        [<JsonPropertyName("max_docs")>]
         MaxDocs: float option
-        [<JsonPropertyName("preference")>]
         Preference: string option
-        [<JsonPropertyName("refresh")>]
         Refresh: bool option
-        [<JsonPropertyName("request_cache")>]
         RequestCache: bool option
-        [<JsonPropertyName("requests_per_second")>]
         RequestsPerSecond: float option
-        [<JsonPropertyName("routing")>]
         Routing: Routing option
-        [<JsonPropertyName("q")>]
         Q: string option
-        [<JsonPropertyName("scroll")>]
         Scroll: Duration option
-        [<JsonPropertyName("scroll_size")>]
         ScrollSize: float option
-        [<JsonPropertyName("search_timeout")>]
         SearchTimeout: Duration option
-        [<JsonPropertyName("search_type")>]
         SearchType: SearchType option
-        [<JsonPropertyName("slices")>]
         Slices: Slices option
-        [<JsonPropertyName("sort")>]
         Sort: string array option
-        [<JsonPropertyName("stats")>]
         Stats: string array option
-        [<JsonPropertyName("terminate_after")>]
         TerminateAfter: float option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
-        [<JsonPropertyName("version")>]
         Version: bool option
-        [<JsonPropertyName("wait_for_active_shards")>]
         WaitForActiveShards: WaitForActiveShards option
-        [<JsonPropertyName("wait_for_completion")>]
         WaitForCompletion: bool option
         [<JsonPropertyName("max_docs")>]
         MaxDocs2: float option
@@ -1119,9 +1014,7 @@ module DocumentOperations =
     }
 
     type DeleteByQueryRethrottleRequest = {
-        [<JsonPropertyName("task_id")>]
         TaskId: TaskId
-        [<JsonPropertyName("requests_per_second")>]
         RequestsPerSecond: float
     } with
         static member ToRequest(request: DeleteByQueryRethrottleRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1166,27 +1059,16 @@ module DocumentOperations =
     type DeleteByQueryRethrottleResponse = TypesTaskListResponseBase
 
     type GetSourceRequest = {
-        [<JsonPropertyName("index")>]
         Index: IndexName
-        [<JsonPropertyName("id")>]
         Id: Id
-        [<JsonPropertyName("preference")>]
         Preference: string option
-        [<JsonPropertyName("realtime")>]
         Realtime: bool option
-        [<JsonPropertyName("refresh")>]
         Refresh: bool option
-        [<JsonPropertyName("routing")>]
         Routing: Routing option
-        [<JsonPropertyName("_source")>]
         Source: SearchTypesSourceConfigParam option
-        [<JsonPropertyName("_source_excludes")>]
         SourceExcludes: Fields option
-        [<JsonPropertyName("_source_includes")>]
         SourceIncludes: Fields option
-        [<JsonPropertyName("version")>]
         Version: VersionNumber option
-        [<JsonPropertyName("version_type")>]
         VersionType: VersionType option
     } with
         static member ToRequest(request: GetSourceRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1282,27 +1164,16 @@ module DocumentOperations =
     let getSourceRequest = GetSourceRequestBuilder()
 
     type ExistsSourceRequest = {
-        [<JsonPropertyName("index")>]
         Index: IndexName
-        [<JsonPropertyName("id")>]
         Id: Id
-        [<JsonPropertyName("preference")>]
         Preference: string option
-        [<JsonPropertyName("realtime")>]
         Realtime: bool option
-        [<JsonPropertyName("refresh")>]
         Refresh: bool option
-        [<JsonPropertyName("routing")>]
         Routing: Routing option
-        [<JsonPropertyName("_source")>]
         Source: SearchTypesSourceConfigParam option
-        [<JsonPropertyName("_source_excludes")>]
         SourceExcludes: Fields option
-        [<JsonPropertyName("_source_includes")>]
         SourceIncludes: Fields option
-        [<JsonPropertyName("version")>]
         Version: VersionNumber option
-        [<JsonPropertyName("version_type")>]
         VersionType: VersionType option
     } with
         static member ToRequest(request: ExistsSourceRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1398,23 +1269,14 @@ module DocumentOperations =
     let existsSourceRequest = ExistsSourceRequestBuilder()
 
     type MgetRequest = {
-        [<JsonPropertyName("index")>]
         Index: IndexName
-        [<JsonPropertyName("preference")>]
         Preference: string option
-        [<JsonPropertyName("realtime")>]
         Realtime: bool option
-        [<JsonPropertyName("refresh")>]
         Refresh: bool option
-        [<JsonPropertyName("routing")>]
         Routing: Routing option
-        [<JsonPropertyName("_source")>]
         Source: SearchTypesSourceConfigParam option
-        [<JsonPropertyName("_source_excludes")>]
         SourceExcludes: Fields option
-        [<JsonPropertyName("_source_includes")>]
         SourceIncludes: Fields option
-        [<JsonPropertyName("stored_fields")>]
         StoredFields: Fields option
         [<JsonPropertyName("docs")>]
         Docs: MgetOperation array option
@@ -1514,31 +1376,18 @@ module DocumentOperations =
     let mgetRequest = MgetRequestBuilder()
 
     type MtermvectorsRequest = {
-        [<JsonPropertyName("index")>]
         Index: IndexName
-        [<JsonPropertyName("ids")>]
         Ids: Id array option
-        [<JsonPropertyName("fields")>]
         Fields: Fields option
-        [<JsonPropertyName("field_statistics")>]
         FieldStatistics: bool option
-        [<JsonPropertyName("offsets")>]
         Offsets: bool option
-        [<JsonPropertyName("payloads")>]
         Payloads: bool option
-        [<JsonPropertyName("positions")>]
         Positions: bool option
-        [<JsonPropertyName("preference")>]
         Preference: string option
-        [<JsonPropertyName("realtime")>]
         Realtime: bool option
-        [<JsonPropertyName("routing")>]
         Routing: Routing option
-        [<JsonPropertyName("term_statistics")>]
         TermStatistics: bool option
-        [<JsonPropertyName("version")>]
         Version: VersionNumber option
-        [<JsonPropertyName("version_type")>]
         VersionType: VersionType option
         [<JsonPropertyName("docs")>]
         Docs: MtermvectorsOperation array option
@@ -1662,23 +1511,14 @@ module DocumentOperations =
     let mtermvectorsRequest = MtermvectorsRequestBuilder()
 
     type ReindexRequest = {
-        [<JsonPropertyName("refresh")>]
         Refresh: bool option
-        [<JsonPropertyName("requests_per_second")>]
         RequestsPerSecond: float option
-        [<JsonPropertyName("scroll")>]
         Scroll: Duration option
-        [<JsonPropertyName("slices")>]
         Slices: Slices option
-        [<JsonPropertyName("max_docs")>]
         MaxDocs: float option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
-        [<JsonPropertyName("wait_for_active_shards")>]
         WaitForActiveShards: WaitForActiveShards option
-        [<JsonPropertyName("wait_for_completion")>]
         WaitForCompletion: bool option
-        [<JsonPropertyName("require_alias")>]
         RequireAlias: bool option
         [<JsonPropertyName("conflicts")>]
         Conflicts: Conflicts option
@@ -1835,9 +1675,7 @@ module DocumentOperations =
     }
 
     type ReindexRethrottleRequest = {
-        [<JsonPropertyName("task_id")>]
         TaskId: Id
-        [<JsonPropertyName("requests_per_second")>]
         RequestsPerSecond: float
     } with
         static member ToRequest(request: ReindexRethrottleRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1885,31 +1723,18 @@ module DocumentOperations =
     }
 
     type TermvectorsRequest = {
-        [<JsonPropertyName("index")>]
         Index: IndexName
-        [<JsonPropertyName("id")>]
         Id: Id
-        [<JsonPropertyName("fields")>]
         Fields: Fields option
-        [<JsonPropertyName("field_statistics")>]
         FieldStatistics: bool option
-        [<JsonPropertyName("offsets")>]
         Offsets: bool option
-        [<JsonPropertyName("payloads")>]
         Payloads: bool option
-        [<JsonPropertyName("positions")>]
         Positions: bool option
-        [<JsonPropertyName("preference")>]
         Preference: string option
-        [<JsonPropertyName("realtime")>]
         Realtime: bool option
-        [<JsonPropertyName("routing")>]
         Routing: Routing option
-        [<JsonPropertyName("term_statistics")>]
         TermStatistics: bool option
-        [<JsonPropertyName("version")>]
         Version: VersionNumber option
-        [<JsonPropertyName("version_type")>]
         VersionType: VersionType option
         [<JsonPropertyName("doc")>]
         Doc: obj option
@@ -2102,35 +1927,20 @@ module DocumentOperations =
     let termvectorsRequest = TermvectorsRequestBuilder()
 
     type UpdateRequest = {
-        [<JsonPropertyName("index")>]
         Index: IndexName
-        [<JsonPropertyName("id")>]
         Id: Id
-        [<JsonPropertyName("if_primary_term")>]
         IfPrimaryTerm: float option
-        [<JsonPropertyName("if_seq_no")>]
         IfSeqNo: SequenceNumber option
-        [<JsonPropertyName("include_source_on_error")>]
         IncludeSourceOnError: bool option
-        [<JsonPropertyName("lang")>]
         Lang: string option
-        [<JsonPropertyName("refresh")>]
         Refresh: Refresh option
-        [<JsonPropertyName("require_alias")>]
         RequireAlias: bool option
-        [<JsonPropertyName("retry_on_conflict")>]
         RetryOnConflict: float option
-        [<JsonPropertyName("routing")>]
         Routing: Routing option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
-        [<JsonPropertyName("wait_for_active_shards")>]
         WaitForActiveShards: WaitForActiveShards option
-        [<JsonPropertyName("_source")>]
         Source: SearchTypesSourceConfigParam option
-        [<JsonPropertyName("_source_excludes")>]
         SourceExcludes: Fields option
-        [<JsonPropertyName("_source_includes")>]
         SourceIncludes: Fields option
         [<JsonPropertyName("detect_noop")>]
         DetectNoop: bool option
@@ -2302,69 +2112,37 @@ module DocumentOperations =
     type UpdateResponse = UpdateUpdateWriteResponseBase
 
     type UpdateByQueryRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("allow_no_indices")>]
         AllowNoIndices: bool option
-        [<JsonPropertyName("analyzer")>]
         Analyzer: string option
-        [<JsonPropertyName("analyze_wildcard")>]
         AnalyzeWildcard: bool option
-        [<JsonPropertyName("conflicts")>]
         Conflicts: Conflicts option
-        [<JsonPropertyName("default_operator")>]
         DefaultOperator: QueryDslOperator option
-        [<JsonPropertyName("df")>]
         Df: string option
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("from")>]
         From: float option
-        [<JsonPropertyName("ignore_unavailable")>]
         IgnoreUnavailable: bool option
-        [<JsonPropertyName("lenient")>]
         Lenient: bool option
-        [<JsonPropertyName("max_docs")>]
         MaxDocs: float option
-        [<JsonPropertyName("pipeline")>]
         Pipeline: string option
-        [<JsonPropertyName("preference")>]
         Preference: string option
-        [<JsonPropertyName("q")>]
         Q: string option
-        [<JsonPropertyName("refresh")>]
         Refresh: bool option
-        [<JsonPropertyName("request_cache")>]
         RequestCache: bool option
-        [<JsonPropertyName("requests_per_second")>]
         RequestsPerSecond: float option
-        [<JsonPropertyName("routing")>]
         Routing: Routing option
-        [<JsonPropertyName("scroll")>]
         Scroll: Duration option
-        [<JsonPropertyName("scroll_size")>]
         ScrollSize: float option
-        [<JsonPropertyName("search_timeout")>]
         SearchTimeout: Duration option
-        [<JsonPropertyName("search_type")>]
         SearchType: SearchType option
-        [<JsonPropertyName("slices")>]
         Slices: Slices option
-        [<JsonPropertyName("sort")>]
         Sort: string array option
-        [<JsonPropertyName("stats")>]
         Stats: string array option
-        [<JsonPropertyName("terminate_after")>]
         TerminateAfter: float option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
-        [<JsonPropertyName("version")>]
         Version: bool option
-        [<JsonPropertyName("version_type")>]
         VersionType: bool option
-        [<JsonPropertyName("wait_for_active_shards")>]
         WaitForActiveShards: WaitForActiveShards option
-        [<JsonPropertyName("wait_for_completion")>]
         WaitForCompletion: bool option
         [<JsonPropertyName("max_docs")>]
         MaxDocs2: float option
@@ -2658,9 +2436,7 @@ module DocumentOperations =
     }
 
     type UpdateByQueryRethrottleRequest = {
-        [<JsonPropertyName("task_id")>]
         TaskId: Id
-        [<JsonPropertyName("requests_per_second")>]
         RequestsPerSecond: float
     } with
         static member ToRequest(request: UpdateByQueryRethrottleRequest) : Result<Fes.Http.RequestMsg, exn> =

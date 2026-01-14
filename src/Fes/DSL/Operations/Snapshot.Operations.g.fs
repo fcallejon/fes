@@ -13,11 +13,8 @@ open Fes.DSL.Models.Types
 module SnapshotOperations =
 
     type SnapshotCleanupRepositoryRequest = {
-        [<JsonPropertyName("repository")>]
         Repository: Name
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: SnapshotCleanupRepositoryRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -71,13 +68,9 @@ module SnapshotOperations =
     }
 
     type SnapshotCloneRequest = {
-        [<JsonPropertyName("repository")>]
         Repository: Name
-        [<JsonPropertyName("snapshot")>]
         Snapshot: Name
-        [<JsonPropertyName("target_snapshot")>]
         TargetSnapshot: Name
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
         [<JsonPropertyName("indices")>]
         Indices: string
@@ -140,37 +133,21 @@ module SnapshotOperations =
     type SnapshotCloneResponse = AcknowledgedResponseBase
 
     type SnapshotGetRequest = {
-        [<JsonPropertyName("repository")>]
         Repository: Name
-        [<JsonPropertyName("snapshot")>]
         Snapshot: Names
-        [<JsonPropertyName("after")>]
         After: string option
-        [<JsonPropertyName("from_sort_value")>]
         FromSortValue: string option
-        [<JsonPropertyName("ignore_unavailable")>]
         IgnoreUnavailable: bool option
-        [<JsonPropertyName("index_details")>]
         IndexDetails: bool option
-        [<JsonPropertyName("index_names")>]
         IndexNames: bool option
-        [<JsonPropertyName("include_repository")>]
         IncludeRepository: bool option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("order")>]
         Order: SortOrder option
-        [<JsonPropertyName("offset")>]
         Offset: float option
-        [<JsonPropertyName("size")>]
         Size: float option
-        [<JsonPropertyName("slm_policy_filter")>]
         SlmPolicyFilter: Name option
-        [<JsonPropertyName("sort")>]
         Sort: TypesSnapshotSort option
-        [<JsonPropertyName("state")>]
         State: System.Text.Json.JsonElement option
-        [<JsonPropertyName("verbose")>]
         Verbose: bool option
     } with
         static member ToRequest(request: SnapshotGetRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -309,13 +286,9 @@ module SnapshotOperations =
     }
 
     type SnapshotCreateRequest = {
-        [<JsonPropertyName("repository")>]
         Repository: Name
-        [<JsonPropertyName("snapshot")>]
         Snapshot: Name
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("wait_for_completion")>]
         WaitForCompletion: bool option
         [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
@@ -419,13 +392,9 @@ module SnapshotOperations =
     let snapshotCreateRequest = SnapshotCreateRequestBuilder()
 
     type SnapshotDeleteRequest = {
-        [<JsonPropertyName("repository")>]
         Repository: Name
-        [<JsonPropertyName("snapshot")>]
         Snapshot: Names
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("wait_for_completion")>]
         WaitForCompletion: bool option
     } with
         static member ToRequest(request: SnapshotDeleteRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -481,11 +450,8 @@ module SnapshotOperations =
     type SnapshotDeleteResponse = AcknowledgedResponseBase
 
     type SnapshotGetRepositoryRequest = {
-        [<JsonPropertyName("repository")>]
         Repository: Names
-        [<JsonPropertyName("local")>]
         Local: bool option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
     } with
         static member ToRequest(request: SnapshotGetRepositoryRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -534,13 +500,9 @@ module SnapshotOperations =
     let snapshotGetRepositoryRequest = SnapshotGetRepositoryRequestBuilder()
 
     type SnapshotCreateRepositoryRequest = {
-        [<JsonPropertyName("repository")>]
         Repository: Name
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
-        [<JsonPropertyName("verify")>]
         Verify: bool option
         [<JsonPropertyName("body")>]
         Body: TypesRepository
@@ -603,11 +565,8 @@ module SnapshotOperations =
     let snapshotCreateRepositoryRequest = SnapshotCreateRepositoryRequestBuilder()
 
     type SnapshotDeleteRepositoryRequest = {
-        [<JsonPropertyName("repository")>]
         Repository: Names
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: SnapshotDeleteRepositoryRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -658,31 +617,18 @@ module SnapshotOperations =
     type SnapshotDeleteRepositoryResponse = AcknowledgedResponseBase
 
     type SnapshotRepositoryAnalyzeRequest = {
-        [<JsonPropertyName("repository")>]
         Repository: Name
-        [<JsonPropertyName("blob_count")>]
         BlobCount: float option
-        [<JsonPropertyName("concurrency")>]
         Concurrency: float option
-        [<JsonPropertyName("detailed")>]
         Detailed: bool option
-        [<JsonPropertyName("early_read_node_count")>]
         EarlyReadNodeCount: float option
-        [<JsonPropertyName("max_blob_size")>]
         MaxBlobSize: ByteSize option
-        [<JsonPropertyName("max_total_data_size")>]
         MaxTotalDataSize: ByteSize option
-        [<JsonPropertyName("rare_action_probability")>]
         RareActionProbability: float option
-        [<JsonPropertyName("rarely_abort_writes")>]
         RarelyAbortWrites: bool option
-        [<JsonPropertyName("read_node_count")>]
         ReadNodeCount: float option
-        [<JsonPropertyName("register_operation_count")>]
         RegisterOperationCount: float option
-        [<JsonPropertyName("seed")>]
         Seed: float option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: SnapshotRepositoryAnalyzeRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -834,23 +780,14 @@ module SnapshotOperations =
     }
 
     type SnapshotRepositoryVerifyIntegrityRequest = {
-        [<JsonPropertyName("repository")>]
         Repository: Names
-        [<JsonPropertyName("blob_thread_pool_concurrency")>]
         BlobThreadPoolConcurrency: float option
-        [<JsonPropertyName("index_snapshot_verification_concurrency")>]
         IndexSnapshotVerificationConcurrency: float option
-        [<JsonPropertyName("index_verification_concurrency")>]
         IndexVerificationConcurrency: float option
-        [<JsonPropertyName("max_bytes_per_sec")>]
         MaxBytesPerSec: string option
-        [<JsonPropertyName("max_failed_shard_snapshots")>]
         MaxFailedShardSnapshots: float option
-        [<JsonPropertyName("meta_thread_pool_concurrency")>]
         MetaThreadPoolConcurrency: float option
-        [<JsonPropertyName("snapshot_verification_concurrency")>]
         SnapshotVerificationConcurrency: float option
-        [<JsonPropertyName("verify_blob_contents")>]
         VerifyBlobContents: bool option
     } with
         static member ToRequest(request: SnapshotRepositoryVerifyIntegrityRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -935,13 +872,9 @@ module SnapshotOperations =
     let snapshotRepositoryVerifyIntegrityRequest = SnapshotRepositoryVerifyIntegrityRequestBuilder()
 
     type SnapshotRestoreRequest = {
-        [<JsonPropertyName("repository")>]
         Repository: Name
-        [<JsonPropertyName("snapshot")>]
         Snapshot: Name
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("wait_for_completion")>]
         WaitForCompletion: bool option
         [<JsonPropertyName("feature_states")>]
         FeatureStates: string array option
@@ -1073,13 +1006,9 @@ module SnapshotOperations =
     }
 
     type SnapshotStatusRequest = {
-        [<JsonPropertyName("repository")>]
         Repository: Name
-        [<JsonPropertyName("snapshot")>]
         Snapshot: Names
-        [<JsonPropertyName("ignore_unavailable")>]
         IgnoreUnavailable: bool option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
     } with
         static member ToRequest(request: SnapshotStatusRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1133,11 +1062,8 @@ module SnapshotOperations =
     let snapshotStatusRequest = SnapshotStatusRequestBuilder()
 
     type SnapshotVerifyRepositoryRequest = {
-        [<JsonPropertyName("repository")>]
         Repository: Name
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: SnapshotVerifyRepositoryRequest) : Result<Fes.Http.RequestMsg, exn> =

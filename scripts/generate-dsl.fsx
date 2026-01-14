@@ -1200,20 +1200,21 @@ let generateOperationRequestType (op: OperationDefinition) : string =
         // Generate the record type
         sb.AppendLine($"    type {typeName} = {{") |> ignore
 
+        // Path parameters - no JsonPropertyName since they go in URL path, not JSON body
         for pathParam in op.PathParameters do
             let fsharpName = fieldNameMap.[$"path:{pathParam.Name}"]
             let fsharpType = typeRefToFSharp pathParam.Type
             let finalType = if pathParam.Required then fsharpType else $"{fsharpType} option"
-            sb.AppendLine($"        [<JsonPropertyName(\"{pathParam.Name}\")>]") |> ignore
             sb.AppendLine($"        {fsharpName}: {finalType}") |> ignore
 
+        // Query parameters - no JsonPropertyName since they go in URL query string, not JSON body
         for queryParam in op.QueryParameters do
             let fsharpName = fieldNameMap.[$"query:{queryParam.Name}"]
             let fsharpType = typeRefToFSharp queryParam.Type
             let finalType = if queryParam.Required then fsharpType else $"{fsharpType} option"
-            sb.AppendLine($"        [<JsonPropertyName(\"{queryParam.Name}\")>]") |> ignore
             sb.AppendLine($"        {fsharpName}: {finalType}") |> ignore
 
+        // Body fields - these DO need JsonPropertyName for JSON serialization
         for bodyField in bodyFields do
             let fsharpName = fieldNameMap.[$"body:{bodyField.Name}"]
             let fsharpType = typeRefToFSharp bodyField.Type

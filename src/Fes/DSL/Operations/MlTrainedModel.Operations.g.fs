@@ -13,7 +13,6 @@ open Fes.DSL.Models.Types
 module MlTrainedModelOperations =
 
     type MlClearTrainedModelDeploymentCacheRequest = {
-        [<JsonPropertyName("model_id")>]
         ModelId: Id
     } with
         static member ToRequest(request: MlClearTrainedModelDeploymentCacheRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -49,21 +48,13 @@ module MlTrainedModelOperations =
     }
 
     type MlGetTrainedModelsRequest = {
-        [<JsonPropertyName("model_id")>]
         ModelId: Ids
-        [<JsonPropertyName("allow_no_match")>]
         AllowNoMatch: bool option
-        [<JsonPropertyName("decompress_definition")>]
         DecompressDefinition: bool option
-        [<JsonPropertyName("exclude_generated")>]
         ExcludeGenerated: bool option
-        [<JsonPropertyName("from")>]
         From: float option
-        [<JsonPropertyName("include")>]
         Include: TypesInclude option
-        [<JsonPropertyName("size")>]
         Size: float option
-        [<JsonPropertyName("tags")>]
         Tags: System.Text.Json.JsonElement option
     } with
         static member ToRequest(request: MlGetTrainedModelsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -142,11 +133,8 @@ module MlTrainedModelOperations =
     let mlGetTrainedModelsRequest = MlGetTrainedModelsRequestBuilder()
 
     type MlPutTrainedModelRequest = {
-        [<JsonPropertyName("model_id")>]
         ModelId: Id
-        [<JsonPropertyName("defer_definition_decompression")>]
         DeferDefinitionDecompression: bool option
-        [<JsonPropertyName("wait_for_completion")>]
         WaitForCompletion: bool option
         [<JsonPropertyName("compressed_definition")>]
         CompressedDefinition: string option
@@ -275,11 +263,8 @@ module MlTrainedModelOperations =
     type MlPutTrainedModelResponse = TypesTrainedModelConfig
 
     type MlDeleteTrainedModelRequest = {
-        [<JsonPropertyName("model_id")>]
         ModelId: Id
-        [<JsonPropertyName("force")>]
         Force: bool option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: MlDeleteTrainedModelRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -330,11 +315,8 @@ module MlTrainedModelOperations =
     type MlDeleteTrainedModelResponse = AcknowledgedResponseBase
 
     type MlPutTrainedModelAliasRequest = {
-        [<JsonPropertyName("model_id")>]
         ModelId: Id
-        [<JsonPropertyName("model_alias")>]
         ModelAlias: Name
-        [<JsonPropertyName("reassign")>]
         Reassign: bool option
     } with
         static member ToRequest(request: MlPutTrainedModelAliasRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -384,9 +366,7 @@ module MlTrainedModelOperations =
     type MlPutTrainedModelAliasResponse = AcknowledgedResponseBase
 
     type MlDeleteTrainedModelAliasRequest = {
-        [<JsonPropertyName("model_id")>]
         ModelId: Id
-        [<JsonPropertyName("model_alias")>]
         ModelAlias: Name
     } with
         static member ToRequest(request: MlDeleteTrainedModelAliasRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -424,13 +404,9 @@ module MlTrainedModelOperations =
     type MlDeleteTrainedModelAliasResponse = AcknowledgedResponseBase
 
     type MlGetTrainedModelsStatsRequest = {
-        [<JsonPropertyName("model_id")>]
         ModelId: Ids
-        [<JsonPropertyName("allow_no_match")>]
         AllowNoMatch: bool option
-        [<JsonPropertyName("from")>]
         From: float option
-        [<JsonPropertyName("size")>]
         Size: float option
     } with
         static member ToRequest(request: MlGetTrainedModelsStatsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -485,9 +461,7 @@ module MlTrainedModelOperations =
     let mlGetTrainedModelsStatsRequest = MlGetTrainedModelsStatsRequestBuilder()
 
     type MlInferTrainedModelRequest = {
-        [<JsonPropertyName("model_id")>]
         ModelId: Id
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("docs")>]
         Docs: Map<string, obj> array
@@ -550,9 +524,7 @@ module MlTrainedModelOperations =
     }
 
     type MlPutTrainedModelDefinitionPartRequest = {
-        [<JsonPropertyName("model_id")>]
         ModelId: Id
-        [<JsonPropertyName("part")>]
         Part: float
         [<JsonPropertyName("definition")>]
         Definition: string
@@ -612,7 +584,6 @@ module MlTrainedModelOperations =
     type MlPutTrainedModelDefinitionPartResponse = AcknowledgedResponseBase
 
     type MlPutTrainedModelVocabularyRequest = {
-        [<JsonPropertyName("model_id")>]
         ModelId: Id
         [<JsonPropertyName("vocabulary")>]
         Vocabulary: string array
@@ -667,23 +638,14 @@ module MlTrainedModelOperations =
     type MlPutTrainedModelVocabularyResponse = AcknowledgedResponseBase
 
     type MlStartTrainedModelDeploymentRequest = {
-        [<JsonPropertyName("model_id")>]
         ModelId: Id
-        [<JsonPropertyName("cache_size")>]
         CacheSize: ByteSize option
-        [<JsonPropertyName("deployment_id")>]
         DeploymentId: string option
-        [<JsonPropertyName("number_of_allocations")>]
         NumberOfAllocations: float option
-        [<JsonPropertyName("priority")>]
         Priority: TypesTrainingPriority option
-        [<JsonPropertyName("queue_capacity")>]
         QueueCapacity: float option
-        [<JsonPropertyName("threads_per_allocation")>]
         ThreadsPerAllocation: float option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
-        [<JsonPropertyName("wait_for")>]
         WaitFor: TypesDeploymentAllocationState option
         [<JsonPropertyName("adaptive_allocations")>]
         AdaptiveAllocations: TypesAdaptiveAllocationsSettings option
@@ -781,11 +743,8 @@ module MlTrainedModelOperations =
     }
 
     type MlStopTrainedModelDeploymentRequest = {
-        [<JsonPropertyName("model_id")>]
         ModelId: Id
-        [<JsonPropertyName("allow_no_match")>]
         AllowNoMatch: bool option
-        [<JsonPropertyName("force")>]
         Force: bool option
         [<JsonPropertyName("id")>]
         Id: Id option
@@ -861,9 +820,7 @@ module MlTrainedModelOperations =
     }
 
     type MlUpdateTrainedModelDeploymentRequest = {
-        [<JsonPropertyName("model_id")>]
         ModelId: Id
-        [<JsonPropertyName("number_of_allocations")>]
         NumberOfAllocations: float option
         [<JsonPropertyName("number_of_allocations")>]
         NumberOfAllocations2: float option

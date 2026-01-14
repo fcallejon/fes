@@ -13,9 +13,7 @@ open Fes.DSL.Models.Types
 module LicenseOperations =
 
     type LicenseGetRequest = {
-        [<JsonPropertyName("accept_enterprise")>]
         AcceptEnterprise: bool option
-        [<JsonPropertyName("local")>]
         Local: bool option
     } with
         static member ToRequest(request: LicenseGetRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -64,11 +62,8 @@ module LicenseOperations =
     }
 
     type LicensePostRequest = {
-        [<JsonPropertyName("acknowledge")>]
         Acknowledge: bool option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("license")>]
         License: TypesLicense option
@@ -133,9 +128,7 @@ module LicenseOperations =
     let licensePostRequest = LicensePostRequestBuilder()
 
     type LicenseDeleteRequest = {
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: LicenseDeleteRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -199,11 +192,8 @@ module LicenseOperations =
     }
 
     type LicensePostStartBasicRequest = {
-        [<JsonPropertyName("acknowledge")>]
         Acknowledge: bool option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: LicensePostStartBasicRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -266,11 +256,8 @@ module LicenseOperations =
     }
 
     type LicensePostStartTrialRequest = {
-        [<JsonPropertyName("acknowledge")>]
         Acknowledge: bool option
-        [<JsonPropertyName("type")>]
         Type: string option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
     } with
         static member ToRequest(request: LicensePostStartTrialRequest) : Result<Fes.Http.RequestMsg, exn> =

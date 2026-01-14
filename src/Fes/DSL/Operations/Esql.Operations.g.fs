@@ -13,13 +13,9 @@ open Fes.DSL.Models.Types
 module EsqlOperations =
 
     type EsqlAsyncQueryRequest = {
-        [<JsonPropertyName("allow_partial_results")>]
         AllowPartialResults: bool option
-        [<JsonPropertyName("delimiter")>]
         Delimiter: string option
-        [<JsonPropertyName("drop_null_columns")>]
         DropNullColumns: bool option
-        [<JsonPropertyName("format")>]
         Format: TypesEsqlFormat option
         [<JsonPropertyName("columnar")>]
         Columnar: bool option
@@ -162,15 +158,10 @@ module EsqlOperations =
     type EsqlAsyncQueryResponse = TypesAsyncEsqlResult
 
     type EsqlAsyncQueryGetRequest = {
-        [<JsonPropertyName("id")>]
         Id: Id
-        [<JsonPropertyName("drop_null_columns")>]
         DropNullColumns: bool option
-        [<JsonPropertyName("format")>]
         Format: TypesEsqlFormat option
-        [<JsonPropertyName("keep_alive")>]
         KeepAlive: Duration option
-        [<JsonPropertyName("wait_for_completion_timeout")>]
         WaitForCompletionTimeout: Duration option
     } with
         static member ToRequest(request: EsqlAsyncQueryGetRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -233,7 +224,6 @@ module EsqlOperations =
     type EsqlAsyncQueryGetResponse = TypesAsyncEsqlResult
 
     type EsqlAsyncQueryDeleteRequest = {
-        [<JsonPropertyName("id")>]
         Id: Id
     } with
         static member ToRequest(request: EsqlAsyncQueryDeleteRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -266,9 +256,7 @@ module EsqlOperations =
     type EsqlAsyncQueryDeleteResponse = AcknowledgedResponseBase
 
     type EsqlAsyncQueryStopRequest = {
-        [<JsonPropertyName("id")>]
         Id: Id
-        [<JsonPropertyName("drop_null_columns")>]
         DropNullColumns: bool option
     } with
         static member ToRequest(request: EsqlAsyncQueryStopRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -313,7 +301,6 @@ module EsqlOperations =
     type EsqlAsyncQueryStopResponse = TypesEsqlResult
 
     type EsqlGetQueryRequest = {
-        [<JsonPropertyName("id")>]
         Id: Id
     } with
         static member ToRequest(request: EsqlGetQueryRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -370,13 +357,9 @@ module EsqlOperations =
     }
 
     type EsqlQueryRequest = {
-        [<JsonPropertyName("format")>]
         Format: TypesEsqlFormat option
-        [<JsonPropertyName("delimiter")>]
         Delimiter: string option
-        [<JsonPropertyName("drop_null_columns")>]
         DropNullColumns: bool option
-        [<JsonPropertyName("allow_partial_results")>]
         AllowPartialResults: bool option
         [<JsonPropertyName("columnar")>]
         Columnar: bool option

@@ -13,15 +13,10 @@ open Fes.DSL.Models.Types
 module TasksOperations =
 
     type TasksCancelRequest = {
-        [<JsonPropertyName("task_id")>]
         TaskId: TaskId
-        [<JsonPropertyName("actions")>]
         Actions: System.Text.Json.JsonElement option
-        [<JsonPropertyName("nodes")>]
         Nodes: string array option
-        [<JsonPropertyName("parent_task_id")>]
         ParentTaskId: string option
-        [<JsonPropertyName("wait_for_completion")>]
         WaitForCompletion: bool option
     } with
         static member ToRequest(request: TasksCancelRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -82,11 +77,8 @@ module TasksOperations =
     let tasksCancelRequest = TasksCancelRequestBuilder()
 
     type TasksGetRequest = {
-        [<JsonPropertyName("task_id")>]
         TaskId: Id
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
-        [<JsonPropertyName("wait_for_completion")>]
         WaitForCompletion: bool option
     } with
         static member ToRequest(request: TasksGetRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -146,19 +138,12 @@ module TasksOperations =
     }
 
     type TasksListRequest = {
-        [<JsonPropertyName("actions")>]
         Actions: System.Text.Json.JsonElement option
-        [<JsonPropertyName("detailed")>]
         Detailed: bool option
-        [<JsonPropertyName("group_by")>]
         GroupBy: TypesGroupBy option
-        [<JsonPropertyName("nodes")>]
         Nodes: NodeIds option
-        [<JsonPropertyName("parent_task_id")>]
         ParentTaskId: Id option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
-        [<JsonPropertyName("wait_for_completion")>]
         WaitForCompletion: bool option
     } with
         static member ToRequest(request: TasksListRequest) : Result<Fes.Http.RequestMsg, exn> =

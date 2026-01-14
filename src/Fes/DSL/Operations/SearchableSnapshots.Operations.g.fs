@@ -13,9 +13,7 @@ open Fes.DSL.Models.Types
 module SearchableSnapshotsOperations =
 
     type SearchableSnapshotsCacheStatsRequest = {
-        [<JsonPropertyName("node_id")>]
         NodeId: NodeIds
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
     } with
         static member ToRequest(request: SearchableSnapshotsCacheStatsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -58,13 +56,9 @@ module SearchableSnapshotsOperations =
     let searchableSnapshotsCacheStatsRequest = SearchableSnapshotsCacheStatsRequestBuilder()
 
     type SearchableSnapshotsClearCacheRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("allow_no_indices")>]
         AllowNoIndices: bool option
-        [<JsonPropertyName("ignore_unavailable")>]
         IgnoreUnavailable: bool option
     } with
         static member ToRequest(request: SearchableSnapshotsClearCacheRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -119,15 +113,10 @@ module SearchableSnapshotsOperations =
     let searchableSnapshotsClearCacheRequest = SearchableSnapshotsClearCacheRequestBuilder()
 
     type SearchableSnapshotsMountRequest = {
-        [<JsonPropertyName("repository")>]
         Repository: Name
-        [<JsonPropertyName("snapshot")>]
         Snapshot: Name
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("wait_for_completion")>]
         WaitForCompletion: bool option
-        [<JsonPropertyName("storage")>]
         Storage: string option
         [<JsonPropertyName("index")>]
         Index: IndexName
@@ -221,9 +210,7 @@ module SearchableSnapshotsOperations =
     }
 
     type SearchableSnapshotsStatsRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("level")>]
         Level: TypesStatsLevel option
     } with
         static member ToRequest(request: SearchableSnapshotsStatsRequest) : Result<Fes.Http.RequestMsg, exn> =

@@ -13,7 +13,6 @@ open Fes.DSL.Models.Types
 module IngestOperations =
 
     type IngestGetGeoipDatabaseRequest = {
-        [<JsonPropertyName("id")>]
         Id: Ids
     } with
         static member ToRequest(request: IngestGetGeoipDatabaseRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -44,11 +43,8 @@ module IngestOperations =
     let ingestGetGeoipDatabaseRequest = IngestGetGeoipDatabaseRequestBuilder()
 
     type IngestPutGeoipDatabaseRequest = {
-        [<JsonPropertyName("id")>]
         Id: Id
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("name")>]
         Name: Name
@@ -114,11 +110,8 @@ module IngestOperations =
     type IngestPutGeoipDatabaseResponse = AcknowledgedResponseBase
 
     type IngestDeleteGeoipDatabaseRequest = {
-        [<JsonPropertyName("id")>]
         Id: Ids
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: IngestDeleteGeoipDatabaseRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -169,7 +162,6 @@ module IngestOperations =
     type IngestDeleteGeoipDatabaseResponse = AcknowledgedResponseBase
 
     type IngestGetIpLocationDatabaseRequest = {
-        [<JsonPropertyName("id")>]
         Id: Ids
     } with
         static member ToRequest(request: IngestGetIpLocationDatabaseRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -200,11 +192,8 @@ module IngestOperations =
     let ingestGetIpLocationDatabaseRequest = IngestGetIpLocationDatabaseRequestBuilder()
 
     type IngestPutIpLocationDatabaseRequest = {
-        [<JsonPropertyName("id")>]
         Id: Id
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("body")>]
         Body: TypesDatabaseConfiguration
@@ -263,11 +252,8 @@ module IngestOperations =
     type IngestPutIpLocationDatabaseResponse = AcknowledgedResponseBase
 
     type IngestDeleteIpLocationDatabaseRequest = {
-        [<JsonPropertyName("id")>]
         Id: Ids
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: IngestDeleteIpLocationDatabaseRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -318,11 +304,8 @@ module IngestOperations =
     type IngestDeleteIpLocationDatabaseResponse = AcknowledgedResponseBase
 
     type IngestGetPipelineRequest = {
-        [<JsonPropertyName("id")>]
         Id: Id
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("summary")>]
         Summary: bool option
     } with
         static member ToRequest(request: IngestGetPipelineRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -371,13 +354,9 @@ module IngestOperations =
     let ingestGetPipelineRequest = IngestGetPipelineRequestBuilder()
 
     type IngestPutPipelineRequest = {
-        [<JsonPropertyName("id")>]
         Id: Id
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
-        [<JsonPropertyName("if_version")>]
         IfVersion: float option
         [<JsonPropertyName("_meta")>]
         Meta: Metadata option
@@ -484,11 +463,8 @@ module IngestOperations =
     type IngestPutPipelineResponse = AcknowledgedResponseBase
 
     type IngestDeletePipelineRequest = {
-        [<JsonPropertyName("id")>]
         Id: Id
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: IngestDeletePipelineRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -559,9 +535,7 @@ module IngestOperations =
     }
 
     type IngestSimulateRequest = {
-        [<JsonPropertyName("id")>]
         Id: Id
-        [<JsonPropertyName("verbose")>]
         Verbose: bool option
         [<JsonPropertyName("docs")>]
         Docs: TypesDocument array
@@ -619,11 +593,8 @@ module IngestOperations =
     let ingestSimulateRequest = IngestSimulateRequestBuilder()
 
     type SimulateIngestRequest = {
-        [<JsonPropertyName("index")>]
         Index: IndexName
-        [<JsonPropertyName("pipeline")>]
         Pipeline: PipelineName option
-        [<JsonPropertyName("merge_type")>]
         MergeType: IngestMergeType option
         [<JsonPropertyName("docs")>]
         Docs: TypesDocument array

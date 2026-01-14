@@ -13,11 +13,8 @@ open Fes.DSL.Models.Types
 module IlmOperations =
 
     type IlmGetLifecycleRequest = {
-        [<JsonPropertyName("policy")>]
         Policy: Name
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: IlmGetLifecycleRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -66,11 +63,8 @@ module IlmOperations =
     let ilmGetLifecycleRequest = IlmGetLifecycleRequestBuilder()
 
     type IlmPutLifecycleRequest = {
-        [<JsonPropertyName("policy")>]
         Policy: Name
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("policy")>]
         Policy2: TypesPolicy option
@@ -129,11 +123,8 @@ module IlmOperations =
     type IlmPutLifecycleResponse = AcknowledgedResponseBase
 
     type IlmDeleteLifecycleRequest = {
-        [<JsonPropertyName("policy")>]
         Policy: Name
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: IlmDeleteLifecycleRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -184,13 +175,9 @@ module IlmOperations =
     type IlmDeleteLifecycleResponse = AcknowledgedResponseBase
 
     type IlmExplainLifecycleRequest = {
-        [<JsonPropertyName("index")>]
         Index: IndexName
-        [<JsonPropertyName("only_errors")>]
         OnlyErrors: bool option
-        [<JsonPropertyName("only_managed")>]
         OnlyManaged: bool option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
     } with
         static member ToRequest(request: IlmExplainLifecycleRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -259,9 +246,7 @@ module IlmOperations =
     }
 
     type IlmMigrateToDataTiersRequest = {
-        [<JsonPropertyName("dry_run")>]
         DryRun: bool option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
         [<JsonPropertyName("legacy_template_to_delete")>]
         LegacyTemplateToDelete: string option
@@ -337,7 +322,6 @@ module IlmOperations =
     }
 
     type IlmMoveToStepRequest = {
-        [<JsonPropertyName("index")>]
         Index: IndexName
         [<JsonPropertyName("current_step")>]
         CurrentStep: MoveToStepStepKey
@@ -385,7 +369,6 @@ module IlmOperations =
     type IlmMoveToStepResponse = AcknowledgedResponseBase
 
     type IlmRemovePolicyRequest = {
-        [<JsonPropertyName("index")>]
         Index: IndexName
     } with
         static member ToRequest(request: IlmRemovePolicyRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -423,7 +406,6 @@ module IlmOperations =
     }
 
     type IlmRetryRequest = {
-        [<JsonPropertyName("index")>]
         Index: IndexName
     } with
         static member ToRequest(request: IlmRetryRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -456,9 +438,7 @@ module IlmOperations =
     type IlmRetryResponse = AcknowledgedResponseBase
 
     type IlmStartRequest = {
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: IlmStartRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -504,9 +484,7 @@ module IlmOperations =
     type IlmStartResponse = AcknowledgedResponseBase
 
     type IlmStopRequest = {
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: IlmStopRequest) : Result<Fes.Http.RequestMsg, exn> =

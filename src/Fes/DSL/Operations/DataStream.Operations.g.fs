@@ -13,15 +13,10 @@ open Fes.DSL.Models.Types
 module DataStreamOperations =
 
     type IndicesGetDataStreamRequest = {
-        [<JsonPropertyName("name")>]
         Name: DataStreamNames
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("include_defaults")>]
         IncludeDefaults: bool option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("verbose")>]
         Verbose: bool option
     } with
         static member ToRequest(request: IndicesGetDataStreamRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -82,11 +77,8 @@ module DataStreamOperations =
     let indicesGetDataStreamRequest = IndicesGetDataStreamRequestBuilder()
 
     type IndicesCreateDataStreamRequest = {
-        [<JsonPropertyName("name")>]
         Name: DataStreamName
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: IndicesCreateDataStreamRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -137,11 +129,8 @@ module DataStreamOperations =
     type IndicesCreateDataStreamResponse = AcknowledgedResponseBase
 
     type IndicesDeleteDataStreamRequest = {
-        [<JsonPropertyName("name")>]
         Name: DataStreamNames
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
     } with
         static member ToRequest(request: IndicesDeleteDataStreamRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -192,9 +181,7 @@ module DataStreamOperations =
     type IndicesDeleteDataStreamResponse = AcknowledgedResponseBase
 
     type IndicesDataStreamsStatsRequest = {
-        [<JsonPropertyName("name")>]
         Name: Indices
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
     } with
         static member ToRequest(request: IndicesDataStreamsStatsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -237,13 +224,9 @@ module DataStreamOperations =
     let indicesDataStreamsStatsRequest = IndicesDataStreamsStatsRequestBuilder()
 
     type IndicesGetDataLifecycleRequest = {
-        [<JsonPropertyName("name")>]
         Name: DataStreamNames
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("include_defaults")>]
         IncludeDefaults: bool option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
     } with
         static member ToRequest(request: IndicesGetDataLifecycleRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -303,13 +286,9 @@ module DataStreamOperations =
     }
 
     type IndicesPutDataLifecycleRequest = {
-        [<JsonPropertyName("name")>]
         Name: DataStreamNames
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("data_retention")>]
         DataRetention: Duration option
@@ -395,11 +374,8 @@ module DataStreamOperations =
     type IndicesPutDataLifecycleResponse = AcknowledgedResponseBase
 
     type IndicesGetDataStreamOptionsRequest = {
-        [<JsonPropertyName("name")>]
         Name: DataStreamNames
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
     } with
         static member ToRequest(request: IndicesGetDataStreamOptionsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -453,13 +429,9 @@ module DataStreamOperations =
     }
 
     type IndicesPutDataStreamOptionsRequest = {
-        [<JsonPropertyName("name")>]
         Name: DataStreamNames
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("failure_store")>]
         FailureStore: TypesDataStreamFailureStore option
@@ -524,13 +496,9 @@ module DataStreamOperations =
     type IndicesPutDataStreamOptionsResponse = AcknowledgedResponseBase
 
     type IndicesDeleteDataStreamOptionsRequest = {
-        [<JsonPropertyName("name")>]
         Name: DataStreamNames
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: IndicesDeleteDataStreamOptionsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -587,9 +555,7 @@ module DataStreamOperations =
     type IndicesDeleteDataStreamOptionsResponse = AcknowledgedResponseBase
 
     type IndicesDownsampleRequest = {
-        [<JsonPropertyName("index")>]
         Index: IndexName
-        [<JsonPropertyName("target_index")>]
         TargetIndex: IndexName
         [<JsonPropertyName("body")>]
         Body: TypesDownsampleConfig
@@ -633,11 +599,8 @@ module DataStreamOperations =
     let indicesDownsampleRequest = IndicesDownsampleRequestBuilder()
 
     type IndicesExplainDataLifecycleRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("include_defaults")>]
         IncludeDefaults: bool option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
     } with
         static member ToRequest(request: IndicesExplainDataLifecycleRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -706,9 +669,7 @@ module DataStreamOperations =
     }
 
     type IndicesGetDataStreamMappingsRequest = {
-        [<JsonPropertyName("name")>]
         Name: Indices
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
     } with
         static member ToRequest(request: IndicesGetDataStreamMappingsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -756,13 +717,9 @@ module DataStreamOperations =
     }
 
     type IndicesPutDataStreamMappingsRequest = {
-        [<JsonPropertyName("name")>]
         Name: Indices
-        [<JsonPropertyName("dry_run")>]
         DryRun: bool option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("body")>]
         Body: MappingTypeMapping
@@ -830,9 +787,7 @@ module DataStreamOperations =
     }
 
     type IndicesGetDataStreamSettingsRequest = {
-        [<JsonPropertyName("name")>]
         Name: Indices
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
     } with
         static member ToRequest(request: IndicesGetDataStreamSettingsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -880,13 +835,9 @@ module DataStreamOperations =
     }
 
     type IndicesPutDataStreamSettingsRequest = {
-        [<JsonPropertyName("name")>]
         Name: Indices
-        [<JsonPropertyName("dry_run")>]
         DryRun: bool option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("body")>]
         Body: TypesIndexSettings
@@ -954,11 +905,8 @@ module DataStreamOperations =
     }
 
     type IndicesMigrateToDataStreamRequest = {
-        [<JsonPropertyName("name")>]
         Name: IndexName
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: IndicesMigrateToDataStreamRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1043,9 +991,7 @@ module DataStreamOperations =
     type IndicesModifyDataStreamResponse = AcknowledgedResponseBase
 
     type IndicesPromoteDataStreamRequest = {
-        [<JsonPropertyName("name")>]
         Name: IndexName
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
     } with
         static member ToRequest(request: IndicesPromoteDataStreamRequest) : Result<Fes.Http.RequestMsg, exn> =

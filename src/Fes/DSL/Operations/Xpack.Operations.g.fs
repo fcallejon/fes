@@ -13,11 +13,8 @@ open Fes.DSL.Models.Types
 module XpackOperations =
 
     type XpackInfoRequest = {
-        [<JsonPropertyName("categories")>]
         Categories: InfoXPackCategory array option
-        [<JsonPropertyName("accept_enterprise")>]
         AcceptEnterprise: bool option
-        [<JsonPropertyName("human")>]
         Human: bool option
     } with
         static member ToRequest(request: XpackInfoRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -78,7 +75,6 @@ module XpackOperations =
     }
 
     type XpackUsageRequest = {
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
     } with
         static member ToRequest(request: XpackUsageRequest) : Result<Fes.Http.RequestMsg, exn> =

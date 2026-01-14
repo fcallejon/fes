@@ -13,13 +13,9 @@ open Fes.DSL.Models.Types
 module MlAnomalyOperations =
 
     type MlCloseJobRequest = {
-        [<JsonPropertyName("job_id")>]
         JobId: Id
-        [<JsonPropertyName("allow_no_match")>]
         AllowNoMatch: bool option
-        [<JsonPropertyName("force")>]
         Force: bool option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("allow_no_match")>]
         AllowNoMatch2: bool option
@@ -101,7 +97,6 @@ module MlAnomalyOperations =
     }
 
     type MlPutCalendarRequest = {
-        [<JsonPropertyName("calendar_id")>]
         CalendarId: Id
         [<JsonPropertyName("job_ids")>]
         JobIds: Id array option
@@ -156,11 +151,8 @@ module MlAnomalyOperations =
     }
 
     type MlGetCalendarsRequest = {
-        [<JsonPropertyName("calendar_id")>]
         CalendarId: Id
-        [<JsonPropertyName("from")>]
         From: float option
-        [<JsonPropertyName("size")>]
         Size: float option
         [<JsonPropertyName("page")>]
         Page: TypesPage option
@@ -217,7 +209,6 @@ module MlAnomalyOperations =
     let mlGetCalendarsRequest = MlGetCalendarsRequestBuilder()
 
     type MlDeleteCalendarRequest = {
-        [<JsonPropertyName("calendar_id")>]
         CalendarId: Id
     } with
         static member ToRequest(request: MlDeleteCalendarRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -250,9 +241,7 @@ module MlAnomalyOperations =
     type MlDeleteCalendarResponse = AcknowledgedResponseBase
 
     type MlDeleteCalendarEventRequest = {
-        [<JsonPropertyName("calendar_id")>]
         CalendarId: Id
-        [<JsonPropertyName("event_id")>]
         EventId: Id
     } with
         static member ToRequest(request: MlDeleteCalendarEventRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -290,9 +279,7 @@ module MlAnomalyOperations =
     type MlDeleteCalendarEventResponse = AcknowledgedResponseBase
 
     type MlPutCalendarJobRequest = {
-        [<JsonPropertyName("calendar_id")>]
         CalendarId: Id
-        [<JsonPropertyName("job_id")>]
         JobId: Ids
     } with
         static member ToRequest(request: MlPutCalendarJobRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -337,9 +324,7 @@ module MlAnomalyOperations =
     }
 
     type MlDeleteCalendarJobRequest = {
-        [<JsonPropertyName("calendar_id")>]
         CalendarId: Id
-        [<JsonPropertyName("job_id")>]
         JobId: Ids
     } with
         static member ToRequest(request: MlDeleteCalendarJobRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -384,11 +369,8 @@ module MlAnomalyOperations =
     }
 
     type MlGetDatafeedsRequest = {
-        [<JsonPropertyName("datafeed_id")>]
         DatafeedId: Ids
-        [<JsonPropertyName("allow_no_match")>]
         AllowNoMatch: bool option
-        [<JsonPropertyName("exclude_generated")>]
         ExcludeGenerated: bool option
     } with
         static member ToRequest(request: MlGetDatafeedsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -437,15 +419,10 @@ module MlAnomalyOperations =
     let mlGetDatafeedsRequest = MlGetDatafeedsRequestBuilder()
 
     type MlPutDatafeedRequest = {
-        [<JsonPropertyName("datafeed_id")>]
         DatafeedId: Id
-        [<JsonPropertyName("allow_no_indices")>]
         AllowNoIndices: bool option
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("ignore_throttled")>]
         IgnoreThrottled: bool option
-        [<JsonPropertyName("ignore_unavailable")>]
         IgnoreUnavailable: bool option
         [<JsonPropertyName("aggregations")>]
         Aggregations: Map<string, AggregationsAggregationContainer> option
@@ -638,9 +615,7 @@ module MlAnomalyOperations =
     }
 
     type MlDeleteDatafeedRequest = {
-        [<JsonPropertyName("datafeed_id")>]
         DatafeedId: Id
-        [<JsonPropertyName("force")>]
         Force: bool option
     } with
         static member ToRequest(request: MlDeleteDatafeedRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -685,11 +660,8 @@ module MlAnomalyOperations =
     type MlDeleteDatafeedResponse = AcknowledgedResponseBase
 
     type MlDeleteExpiredDataRequest = {
-        [<JsonPropertyName("job_id")>]
         JobId: Id
-        [<JsonPropertyName("requests_per_second")>]
         RequestsPerSecond: float option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("requests_per_second")>]
         RequestsPerSecond2: float option
@@ -753,11 +725,8 @@ module MlAnomalyOperations =
     let mlDeleteExpiredDataRequest = MlDeleteExpiredDataRequestBuilder()
 
     type MlGetFiltersRequest = {
-        [<JsonPropertyName("filter_id")>]
         FilterId: Ids
-        [<JsonPropertyName("from")>]
         From: float option
-        [<JsonPropertyName("size")>]
         Size: float option
     } with
         static member ToRequest(request: MlGetFiltersRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -806,7 +775,6 @@ module MlAnomalyOperations =
     let mlGetFiltersRequest = MlGetFiltersRequestBuilder()
 
     type MlPutFilterRequest = {
-        [<JsonPropertyName("filter_id")>]
         FilterId: Id
         [<JsonPropertyName("description")>]
         Description: string option
@@ -861,7 +829,6 @@ module MlAnomalyOperations =
     }
 
     type MlDeleteFilterRequest = {
-        [<JsonPropertyName("filter_id")>]
         FilterId: Id
     } with
         static member ToRequest(request: MlDeleteFilterRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -894,13 +861,9 @@ module MlAnomalyOperations =
     type MlDeleteFilterResponse = AcknowledgedResponseBase
 
     type MlDeleteForecastRequest = {
-        [<JsonPropertyName("job_id")>]
         JobId: Id
-        [<JsonPropertyName("forecast_id")>]
         ForecastId: Id
-        [<JsonPropertyName("allow_no_forecasts")>]
         AllowNoForecasts: bool option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: MlDeleteForecastRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -954,11 +917,8 @@ module MlAnomalyOperations =
     let mlDeleteForecastRequest = MlDeleteForecastRequestBuilder()
 
     type MlGetJobsRequest = {
-        [<JsonPropertyName("job_id")>]
         JobId: Ids
-        [<JsonPropertyName("allow_no_match")>]
         AllowNoMatch: bool option
-        [<JsonPropertyName("exclude_generated")>]
         ExcludeGenerated: bool option
     } with
         static member ToRequest(request: MlGetJobsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1007,15 +967,10 @@ module MlAnomalyOperations =
     let mlGetJobsRequest = MlGetJobsRequestBuilder()
 
     type MlPutJobRequest = {
-        [<JsonPropertyName("job_id")>]
         JobId: Id
-        [<JsonPropertyName("allow_no_indices")>]
         AllowNoIndices: bool option
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("ignore_throttled")>]
         IgnoreThrottled: bool option
-        [<JsonPropertyName("ignore_unavailable")>]
         IgnoreUnavailable: bool option
         [<JsonPropertyName("allow_lazy_open")>]
         AllowLazyOpen: bool option
@@ -1232,13 +1187,9 @@ module MlAnomalyOperations =
     }
 
     type MlDeleteJobRequest = {
-        [<JsonPropertyName("job_id")>]
         JobId: Id
-        [<JsonPropertyName("force")>]
         Force: bool option
-        [<JsonPropertyName("delete_user_annotations")>]
         DeleteUserAnnotations: bool option
-        [<JsonPropertyName("wait_for_completion")>]
         WaitForCompletion: bool option
     } with
         static member ToRequest(request: MlDeleteJobRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1295,21 +1246,13 @@ module MlAnomalyOperations =
     type MlDeleteJobResponse = AcknowledgedResponseBase
 
     type MlGetModelSnapshotsRequest = {
-        [<JsonPropertyName("job_id")>]
         JobId: Id
-        [<JsonPropertyName("snapshot_id")>]
         SnapshotId: Id
-        [<JsonPropertyName("desc")>]
         Desc: bool option
-        [<JsonPropertyName("end")>]
         End: DateTime option
-        [<JsonPropertyName("from")>]
         From: float option
-        [<JsonPropertyName("size")>]
         Size: float option
-        [<JsonPropertyName("sort")>]
         Sort: Field option
-        [<JsonPropertyName("start")>]
         Start: DateTime option
         [<JsonPropertyName("desc")>]
         Desc2: bool option
@@ -1423,9 +1366,7 @@ module MlAnomalyOperations =
     let mlGetModelSnapshotsRequest = MlGetModelSnapshotsRequestBuilder()
 
     type MlDeleteModelSnapshotRequest = {
-        [<JsonPropertyName("job_id")>]
         JobId: Id
-        [<JsonPropertyName("snapshot_id")>]
         SnapshotId: Id
     } with
         static member ToRequest(request: MlDeleteModelSnapshotRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1514,17 +1455,11 @@ module MlAnomalyOperations =
     }
 
     type MlFlushJobRequest = {
-        [<JsonPropertyName("job_id")>]
         JobId: Id
-        [<JsonPropertyName("advance_time")>]
         AdvanceTime: DateTime option
-        [<JsonPropertyName("calc_interim")>]
         CalcInterim: bool option
-        [<JsonPropertyName("end")>]
         End: DateTime option
-        [<JsonPropertyName("skip_time")>]
         SkipTime: DateTime option
-        [<JsonPropertyName("start")>]
         Start: DateTime option
         [<JsonPropertyName("advance_time")>]
         AdvanceTime2: DateTime option
@@ -1634,13 +1569,9 @@ module MlAnomalyOperations =
     }
 
     type MlForecastRequest = {
-        [<JsonPropertyName("job_id")>]
         JobId: Id
-        [<JsonPropertyName("duration")>]
         Duration: Duration option
-        [<JsonPropertyName("expires_in")>]
         ExpiresIn: Duration option
-        [<JsonPropertyName("max_model_memory")>]
         MaxModelMemory: string option
         [<JsonPropertyName("duration")>]
         Duration2: Duration option
@@ -1724,27 +1655,16 @@ module MlAnomalyOperations =
     }
 
     type MlGetBucketsRequest = {
-        [<JsonPropertyName("job_id")>]
         JobId: Id
-        [<JsonPropertyName("timestamp")>]
         Timestamp: DateTime
-        [<JsonPropertyName("anomaly_score")>]
         AnomalyScore: float option
-        [<JsonPropertyName("desc")>]
         Desc: bool option
-        [<JsonPropertyName("end")>]
         End: DateTime option
-        [<JsonPropertyName("exclude_interim")>]
         ExcludeInterim: bool option
-        [<JsonPropertyName("expand")>]
         Expand: bool option
-        [<JsonPropertyName("from")>]
         From: float option
-        [<JsonPropertyName("size")>]
         Size: float option
-        [<JsonPropertyName("sort")>]
         Sort: Field option
-        [<JsonPropertyName("start")>]
         Start: DateTime option
         [<JsonPropertyName("anomaly_score")>]
         AnomalyScore2: float option
@@ -1897,17 +1817,11 @@ module MlAnomalyOperations =
     let mlGetBucketsRequest = MlGetBucketsRequestBuilder()
 
     type MlGetCalendarEventsRequest = {
-        [<JsonPropertyName("calendar_id")>]
         CalendarId: Id
-        [<JsonPropertyName("end")>]
         End: DateTime option
-        [<JsonPropertyName("from")>]
         From: float option
-        [<JsonPropertyName("job_id")>]
         JobId: Id option
-        [<JsonPropertyName("size")>]
         Size: float option
-        [<JsonPropertyName("start")>]
         Start: DateTime option
     } with
         static member ToRequest(request: MlGetCalendarEventsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1981,7 +1895,6 @@ module MlAnomalyOperations =
     }
 
     type MlPostCalendarEventsRequest = {
-        [<JsonPropertyName("calendar_id")>]
         CalendarId: Id
         [<JsonPropertyName("events")>]
         Events: TypesCalendarEvent array
@@ -2025,15 +1938,10 @@ module MlAnomalyOperations =
     }
 
     type MlGetCategoriesRequest = {
-        [<JsonPropertyName("job_id")>]
         JobId: Id
-        [<JsonPropertyName("category_id")>]
         CategoryId: CategoryId
-        [<JsonPropertyName("from")>]
         From: float option
-        [<JsonPropertyName("partition_field_value")>]
         PartitionFieldValue: string option
-        [<JsonPropertyName("size")>]
         Size: float option
         [<JsonPropertyName("page")>]
         Page: TypesPage option
@@ -2101,9 +2009,7 @@ module MlAnomalyOperations =
     let mlGetCategoriesRequest = MlGetCategoriesRequestBuilder()
 
     type MlGetDatafeedStatsRequest = {
-        [<JsonPropertyName("datafeed_id")>]
         DatafeedId: Ids
-        [<JsonPropertyName("allow_no_match")>]
         AllowNoMatch: bool option
     } with
         static member ToRequest(request: MlGetDatafeedStatsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -2146,23 +2052,14 @@ module MlAnomalyOperations =
     let mlGetDatafeedStatsRequest = MlGetDatafeedStatsRequestBuilder()
 
     type MlGetInfluencersRequest = {
-        [<JsonPropertyName("job_id")>]
         JobId: Id
-        [<JsonPropertyName("desc")>]
         Desc: bool option
-        [<JsonPropertyName("end")>]
         End: DateTime option
-        [<JsonPropertyName("exclude_interim")>]
         ExcludeInterim: bool option
-        [<JsonPropertyName("influencer_score")>]
         InfluencerScore: float option
-        [<JsonPropertyName("from")>]
         From: float option
-        [<JsonPropertyName("size")>]
         Size: float option
-        [<JsonPropertyName("sort")>]
         Sort: Field option
-        [<JsonPropertyName("start")>]
         Start: DateTime option
         [<JsonPropertyName("page")>]
         Page: TypesPage option
@@ -2255,9 +2152,7 @@ module MlAnomalyOperations =
     let mlGetInfluencersRequest = MlGetInfluencersRequestBuilder()
 
     type MlGetJobStatsRequest = {
-        [<JsonPropertyName("job_id")>]
         JobId: Id
-        [<JsonPropertyName("allow_no_match")>]
         AllowNoMatch: bool option
     } with
         static member ToRequest(request: MlGetJobStatsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -2300,11 +2195,8 @@ module MlAnomalyOperations =
     let mlGetJobStatsRequest = MlGetJobStatsRequestBuilder()
 
     type MlGetModelSnapshotUpgradeStatsRequest = {
-        [<JsonPropertyName("job_id")>]
         JobId: Id
-        [<JsonPropertyName("snapshot_id")>]
         SnapshotId: Id
-        [<JsonPropertyName("allow_no_match")>]
         AllowNoMatch: bool option
     } with
         static member ToRequest(request: MlGetModelSnapshotUpgradeStatsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -2359,21 +2251,13 @@ module MlAnomalyOperations =
     }
 
     type MlGetOverallBucketsRequest = {
-        [<JsonPropertyName("job_id")>]
         JobId: Id
-        [<JsonPropertyName("allow_no_match")>]
         AllowNoMatch: bool option
-        [<JsonPropertyName("bucket_span")>]
         BucketSpan: Duration option
-        [<JsonPropertyName("end")>]
         End: DateTime option
-        [<JsonPropertyName("exclude_interim")>]
         ExcludeInterim: bool option
-        [<JsonPropertyName("overall_score")>]
         OverallScore: float option
-        [<JsonPropertyName("start")>]
         Start: DateTime option
-        [<JsonPropertyName("top_n")>]
         TopN: float option
         [<JsonPropertyName("allow_no_match")>]
         AllowNoMatch2: bool option
@@ -2502,23 +2386,14 @@ module MlAnomalyOperations =
     let mlGetOverallBucketsRequest = MlGetOverallBucketsRequestBuilder()
 
     type MlGetRecordsRequest = {
-        [<JsonPropertyName("job_id")>]
         JobId: Id
-        [<JsonPropertyName("desc")>]
         Desc: bool option
-        [<JsonPropertyName("end")>]
         End: DateTime option
-        [<JsonPropertyName("exclude_interim")>]
         ExcludeInterim: bool option
-        [<JsonPropertyName("from")>]
         From: float option
-        [<JsonPropertyName("record_score")>]
         RecordScore: float option
-        [<JsonPropertyName("size")>]
         Size: float option
-        [<JsonPropertyName("sort")>]
         Sort: Field option
-        [<JsonPropertyName("start")>]
         Start: DateTime option
         [<JsonPropertyName("desc")>]
         Desc2: bool option
@@ -2653,9 +2528,7 @@ module MlAnomalyOperations =
     let mlGetRecordsRequest = MlGetRecordsRequestBuilder()
 
     type MlOpenJobRequest = {
-        [<JsonPropertyName("job_id")>]
         JobId: Id
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("timeout")>]
         Timeout2: Duration option
@@ -2713,11 +2586,8 @@ module MlAnomalyOperations =
     }
 
     type MlPostDataRequest = {
-        [<JsonPropertyName("job_id")>]
         JobId: Id
-        [<JsonPropertyName("reset_end")>]
         ResetEnd: DateTime option
-        [<JsonPropertyName("reset_start")>]
         ResetStart: DateTime option
     } with
         static member ToRequest(request: MlPostDataRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -2805,11 +2675,8 @@ module MlAnomalyOperations =
     }
 
     type MlPreviewDatafeedRequest = {
-        [<JsonPropertyName("datafeed_id")>]
         DatafeedId: Id
-        [<JsonPropertyName("start")>]
         Start: DateTime option
-        [<JsonPropertyName("end")>]
         End: DateTime option
         [<JsonPropertyName("datafeed_config")>]
         DatafeedConfig: TypesDatafeedConfig option
@@ -2873,11 +2740,8 @@ module MlAnomalyOperations =
     let mlPreviewDatafeedRequest = MlPreviewDatafeedRequestBuilder()
 
     type MlResetJobRequest = {
-        [<JsonPropertyName("job_id")>]
         JobId: Id
-        [<JsonPropertyName("wait_for_completion")>]
         WaitForCompletion: bool option
-        [<JsonPropertyName("delete_user_annotations")>]
         DeleteUserAnnotations: bool option
     } with
         static member ToRequest(request: MlResetJobRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -2928,11 +2792,8 @@ module MlAnomalyOperations =
     type MlResetJobResponse = AcknowledgedResponseBase
 
     type MlRevertModelSnapshotRequest = {
-        [<JsonPropertyName("job_id")>]
         JobId: Id
-        [<JsonPropertyName("snapshot_id")>]
         SnapshotId: Id
-        [<JsonPropertyName("delete_intervening_results")>]
         DeleteInterveningResults: bool option
         [<JsonPropertyName("delete_intervening_results")>]
         DeleteInterveningResults2: bool option
@@ -2993,13 +2854,9 @@ module MlAnomalyOperations =
     }
 
     type MlStartDatafeedRequest = {
-        [<JsonPropertyName("datafeed_id")>]
         DatafeedId: Id
-        [<JsonPropertyName("end")>]
         End: DateTime option
-        [<JsonPropertyName("start")>]
         Start: DateTime option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("end")>]
         End2: DateTime option
@@ -3083,15 +2940,10 @@ module MlAnomalyOperations =
     }
 
     type MlStopDatafeedRequest = {
-        [<JsonPropertyName("datafeed_id")>]
         DatafeedId: Id
-        [<JsonPropertyName("allow_no_match")>]
         AllowNoMatch: bool option
-        [<JsonPropertyName("force")>]
         Force: bool option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
-        [<JsonPropertyName("close_job")>]
         CloseJob: bool option
         [<JsonPropertyName("allow_no_match")>]
         AllowNoMatch2: bool option
@@ -3186,15 +3038,10 @@ module MlAnomalyOperations =
     }
 
     type MlUpdateDatafeedRequest = {
-        [<JsonPropertyName("datafeed_id")>]
         DatafeedId: Id
-        [<JsonPropertyName("allow_no_indices")>]
         AllowNoIndices: bool option
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("ignore_throttled")>]
         IgnoreThrottled: bool option
-        [<JsonPropertyName("ignore_unavailable")>]
         IgnoreUnavailable: bool option
         [<JsonPropertyName("aggregations")>]
         Aggregations: Map<string, AggregationsAggregationContainer> option
@@ -3380,7 +3227,6 @@ module MlAnomalyOperations =
     }
 
     type MlUpdateFilterRequest = {
-        [<JsonPropertyName("filter_id")>]
         FilterId: Id
         [<JsonPropertyName("add_items")>]
         AddItems: string array option
@@ -3442,7 +3288,6 @@ module MlAnomalyOperations =
     }
 
     type MlUpdateJobRequest = {
-        [<JsonPropertyName("job_id")>]
         JobId: Id
         [<JsonPropertyName("allow_lazy_open")>]
         AllowLazyOpen: bool option
@@ -3624,9 +3469,7 @@ module MlAnomalyOperations =
     }
 
     type MlUpdateModelSnapshotRequest = {
-        [<JsonPropertyName("job_id")>]
         JobId: Id
-        [<JsonPropertyName("snapshot_id")>]
         SnapshotId: Id
         [<JsonPropertyName("description")>]
         Description: string option
@@ -3684,13 +3527,9 @@ module MlAnomalyOperations =
     }
 
     type MlUpgradeJobSnapshotRequest = {
-        [<JsonPropertyName("job_id")>]
         JobId: Id
-        [<JsonPropertyName("snapshot_id")>]
         SnapshotId: Id
-        [<JsonPropertyName("wait_for_completion")>]
         WaitForCompletion: bool option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: MlUpgradeJobSnapshotRequest) : Result<Fes.Http.RequestMsg, exn> =

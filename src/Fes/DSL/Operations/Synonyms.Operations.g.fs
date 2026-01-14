@@ -13,11 +13,8 @@ open Fes.DSL.Models.Types
 module SynonymsOperations =
 
     type SynonymsGetSynonymRequest = {
-        [<JsonPropertyName("id")>]
         Id: Id
-        [<JsonPropertyName("from")>]
         From: float option
-        [<JsonPropertyName("size")>]
         Size: float option
     } with
         static member ToRequest(request: SynonymsGetSynonymRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -73,9 +70,7 @@ module SynonymsOperations =
     }
 
     type SynonymsPutSynonymRequest = {
-        [<JsonPropertyName("id")>]
         Id: Id
-        [<JsonPropertyName("refresh")>]
         Refresh: bool option
         [<JsonPropertyName("synonyms_set")>]
         SynonymsSet: System.Text.Json.JsonElement
@@ -133,7 +128,6 @@ module SynonymsOperations =
     }
 
     type SynonymsDeleteSynonymRequest = {
-        [<JsonPropertyName("id")>]
         Id: Id
     } with
         static member ToRequest(request: SynonymsDeleteSynonymRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -166,9 +160,7 @@ module SynonymsOperations =
     type SynonymsDeleteSynonymResponse = AcknowledgedResponseBase
 
     type SynonymsGetSynonymRuleRequest = {
-        [<JsonPropertyName("set_id")>]
         SetId: Id
-        [<JsonPropertyName("rule_id")>]
         RuleId: Id
     } with
         static member ToRequest(request: SynonymsGetSynonymRuleRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -206,11 +198,8 @@ module SynonymsOperations =
     type SynonymsGetSynonymRuleResponse = TypesSynonymRuleRead
 
     type SynonymsPutSynonymRuleRequest = {
-        [<JsonPropertyName("set_id")>]
         SetId: Id
-        [<JsonPropertyName("rule_id")>]
         RuleId: Id
-        [<JsonPropertyName("refresh")>]
         Refresh: bool option
         [<JsonPropertyName("synonyms")>]
         Synonyms: TypesSynonymString
@@ -268,11 +257,8 @@ module SynonymsOperations =
     type SynonymsPutSynonymRuleResponse = TypesSynonymsUpdateResult
 
     type SynonymsDeleteSynonymRuleRequest = {
-        [<JsonPropertyName("set_id")>]
         SetId: Id
-        [<JsonPropertyName("rule_id")>]
         RuleId: Id
-        [<JsonPropertyName("refresh")>]
         Refresh: bool option
     } with
         static member ToRequest(request: SynonymsDeleteSynonymRuleRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -322,9 +308,7 @@ module SynonymsOperations =
     type SynonymsDeleteSynonymRuleResponse = TypesSynonymsUpdateResult
 
     type SynonymsGetSynonymsSetsRequest = {
-        [<JsonPropertyName("from")>]
         From: float option
-        [<JsonPropertyName("size")>]
         Size: float option
     } with
         static member ToRequest(request: SynonymsGetSynonymsSetsRequest) : Result<Fes.Http.RequestMsg, exn> =

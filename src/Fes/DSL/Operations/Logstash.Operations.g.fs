@@ -13,7 +13,6 @@ open Fes.DSL.Models.Types
 module LogstashOperations =
 
     type LogstashGetPipelineRequest = {
-        [<JsonPropertyName("id")>]
         Id: Ids
     } with
         static member ToRequest(request: LogstashGetPipelineRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -44,7 +43,6 @@ module LogstashOperations =
     let logstashGetPipelineRequest = LogstashGetPipelineRequestBuilder()
 
     type LogstashPutPipelineRequest = {
-        [<JsonPropertyName("id")>]
         Id: Id
         [<JsonPropertyName("body")>]
         Body: TypesPipeline
@@ -83,7 +81,6 @@ module LogstashOperations =
     let logstashPutPipelineRequest = LogstashPutPipelineRequestBuilder()
 
     type LogstashDeletePipelineRequest = {
-        [<JsonPropertyName("id")>]
         Id: Id
     } with
         static member ToRequest(request: LogstashDeletePipelineRequest) : Result<Fes.Http.RequestMsg, exn> =

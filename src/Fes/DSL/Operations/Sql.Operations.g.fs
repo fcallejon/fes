@@ -50,7 +50,6 @@ module SqlOperations =
     }
 
     type SqlDeleteAsyncRequest = {
-        [<JsonPropertyName("id")>]
         Id: Id
     } with
         static member ToRequest(request: SqlDeleteAsyncRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -83,15 +82,10 @@ module SqlOperations =
     type SqlDeleteAsyncResponse = AcknowledgedResponseBase
 
     type SqlGetAsyncRequest = {
-        [<JsonPropertyName("id")>]
         Id: Id
-        [<JsonPropertyName("delimiter")>]
         Delimiter: string option
-        [<JsonPropertyName("format")>]
         Format: string option
-        [<JsonPropertyName("keep_alive")>]
         KeepAlive: Duration option
-        [<JsonPropertyName("wait_for_completion_timeout")>]
         WaitForCompletionTimeout: Duration option
     } with
         static member ToRequest(request: SqlGetAsyncRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -167,7 +161,6 @@ module SqlOperations =
     }
 
     type SqlGetAsyncStatusRequest = {
-        [<JsonPropertyName("id")>]
         Id: Id
     } with
         static member ToRequest(request: SqlGetAsyncStatusRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -213,7 +206,6 @@ module SqlOperations =
     }
 
     type SqlQueryRequest = {
-        [<JsonPropertyName("format")>]
         Format: QuerySqlFormat option
         [<JsonPropertyName("allow_partial_search_results")>]
         AllowPartialSearchResults: bool option

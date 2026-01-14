@@ -13,11 +13,8 @@ open Fes.DSL.Models.Types
 module GraphOperations =
 
     type GraphExploreRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("routing")>]
         Routing: Routing option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("connections")>]
         Connections: TypesHop option

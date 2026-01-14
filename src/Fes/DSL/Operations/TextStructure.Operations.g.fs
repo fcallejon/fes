@@ -13,33 +13,19 @@ open Fes.DSL.Models.Types
 module TextStructureOperations =
 
     type TextStructureFindFieldStructureRequest = {
-        [<JsonPropertyName("column_names")>]
         ColumnNames: System.Text.Json.JsonElement option
-        [<JsonPropertyName("delimiter")>]
         Delimiter: string option
-        [<JsonPropertyName("documents_to_sample")>]
         DocumentsToSample: Uint option
-        [<JsonPropertyName("ecs_compatibility")>]
         EcsCompatibility: TypesEcsCompatibilityType option
-        [<JsonPropertyName("explain")>]
         Explain: bool option
-        [<JsonPropertyName("field")>]
         Field: Field
-        [<JsonPropertyName("format")>]
         Format: TypesFormatType option
-        [<JsonPropertyName("grok_pattern")>]
         GrokPattern: GrokPattern option
-        [<JsonPropertyName("index")>]
         Index: IndexName
-        [<JsonPropertyName("quote")>]
         Quote: string option
-        [<JsonPropertyName("should_trim_fields")>]
         ShouldTrimFields: bool option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
-        [<JsonPropertyName("timestamp_field")>]
         TimestampField: Field option
-        [<JsonPropertyName("timestamp_format")>]
         TimestampFormat: string option
     } with
         static member ToRequest(request: TextStructureFindFieldStructureRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -188,27 +174,16 @@ module TextStructureOperations =
     }
 
     type TextStructureFindMessageStructureRequest = {
-        [<JsonPropertyName("column_names")>]
         ColumnNames: System.Text.Json.JsonElement option
-        [<JsonPropertyName("delimiter")>]
         Delimiter: string option
-        [<JsonPropertyName("ecs_compatibility")>]
         EcsCompatibility: TypesEcsCompatibilityType option
-        [<JsonPropertyName("explain")>]
         Explain: bool option
-        [<JsonPropertyName("format")>]
         Format: TypesFormatType option
-        [<JsonPropertyName("grok_pattern")>]
         GrokPattern: GrokPattern option
-        [<JsonPropertyName("quote")>]
         Quote: string option
-        [<JsonPropertyName("should_trim_fields")>]
         ShouldTrimFields: bool option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
-        [<JsonPropertyName("timestamp_field")>]
         TimestampField: Field option
-        [<JsonPropertyName("timestamp_format")>]
         TimestampFormat: string option
         [<JsonPropertyName("messages")>]
         Messages: string array
@@ -314,35 +289,20 @@ module TextStructureOperations =
     let textStructureFindMessageStructureRequest = TextStructureFindMessageStructureRequestBuilder()
 
     type TextStructureFindStructureRequest = {
-        [<JsonPropertyName("charset")>]
         Charset: string option
-        [<JsonPropertyName("column_names")>]
         ColumnNames: System.Text.Json.JsonElement option
-        [<JsonPropertyName("delimiter")>]
         Delimiter: string option
-        [<JsonPropertyName("ecs_compatibility")>]
         EcsCompatibility: string option
-        [<JsonPropertyName("explain")>]
         Explain: bool option
-        [<JsonPropertyName("format")>]
         Format: FindStructureFindStructureFormat option
-        [<JsonPropertyName("grok_pattern")>]
         GrokPattern: GrokPattern option
-        [<JsonPropertyName("has_header_row")>]
         HasHeaderRow: bool option
-        [<JsonPropertyName("line_merge_size_limit")>]
         LineMergeSizeLimit: Uint option
-        [<JsonPropertyName("lines_to_sample")>]
         LinesToSample: Uint option
-        [<JsonPropertyName("quote")>]
         Quote: string option
-        [<JsonPropertyName("should_trim_fields")>]
         ShouldTrimFields: bool option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
-        [<JsonPropertyName("timestamp_field")>]
         TimestampField: Field option
-        [<JsonPropertyName("timestamp_format")>]
         TimestampFormat: string option
     } with
         static member ToRequest(request: TextStructureFindStructureRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -511,7 +471,6 @@ module TextStructureOperations =
     }
 
     type TextStructureTestGrokPatternRequest = {
-        [<JsonPropertyName("ecs_compatibility")>]
         EcsCompatibility: string option
         [<JsonPropertyName("grok_pattern")>]
         GrokPattern: GrokPattern

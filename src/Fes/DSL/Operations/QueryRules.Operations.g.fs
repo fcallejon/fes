@@ -13,9 +13,7 @@ open Fes.DSL.Models.Types
 module QueryRulesOperations =
 
     type QueryRulesGetRuleRequest = {
-        [<JsonPropertyName("ruleset_id")>]
         RulesetId: Id
-        [<JsonPropertyName("rule_id")>]
         RuleId: Id
     } with
         static member ToRequest(request: QueryRulesGetRuleRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -53,9 +51,7 @@ module QueryRulesOperations =
     type QueryRulesGetRuleResponse = TypesQueryRule
 
     type QueryRulesPutRuleRequest = {
-        [<JsonPropertyName("ruleset_id")>]
         RulesetId: Id
-        [<JsonPropertyName("rule_id")>]
         RuleId: Id
         [<JsonPropertyName("type")>]
         Type: TypesQueryRuleType
@@ -125,9 +121,7 @@ module QueryRulesOperations =
     }
 
     type QueryRulesDeleteRuleRequest = {
-        [<JsonPropertyName("ruleset_id")>]
         RulesetId: Id
-        [<JsonPropertyName("rule_id")>]
         RuleId: Id
     } with
         static member ToRequest(request: QueryRulesDeleteRuleRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -165,7 +159,6 @@ module QueryRulesOperations =
     type QueryRulesDeleteRuleResponse = AcknowledgedResponseBase
 
     type QueryRulesGetRulesetRequest = {
-        [<JsonPropertyName("ruleset_id")>]
         RulesetId: Id
     } with
         static member ToRequest(request: QueryRulesGetRulesetRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -198,7 +191,6 @@ module QueryRulesOperations =
     type QueryRulesGetRulesetResponse = TypesQueryRuleset
 
     type QueryRulesPutRulesetRequest = {
-        [<JsonPropertyName("ruleset_id")>]
         RulesetId: Id
         [<JsonPropertyName("rules")>]
         Rules: System.Text.Json.JsonElement
@@ -242,7 +234,6 @@ module QueryRulesOperations =
     }
 
     type QueryRulesDeleteRulesetRequest = {
-        [<JsonPropertyName("ruleset_id")>]
         RulesetId: Id
     } with
         static member ToRequest(request: QueryRulesDeleteRulesetRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -275,9 +266,7 @@ module QueryRulesOperations =
     type QueryRulesDeleteRulesetResponse = AcknowledgedResponseBase
 
     type QueryRulesListRulesetsRequest = {
-        [<JsonPropertyName("from")>]
         From: float option
-        [<JsonPropertyName("size")>]
         Size: float option
     } with
         static member ToRequest(request: QueryRulesListRulesetsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -328,7 +317,6 @@ module QueryRulesOperations =
     }
 
     type QueryRulesTestRequest = {
-        [<JsonPropertyName("ruleset_id")>]
         RulesetId: Id
         [<JsonPropertyName("match_criteria")>]
         MatchCriteria: Map<string, obj>

@@ -13,15 +13,10 @@ open Fes.DSL.Models.Types
 module FleetOperations =
 
     type FleetGlobalCheckpointsRequest = {
-        [<JsonPropertyName("index")>]
         Index: System.Text.Json.JsonElement
-        [<JsonPropertyName("wait_for_advance")>]
         WaitForAdvance: bool option
-        [<JsonPropertyName("wait_for_index")>]
         WaitForIndex: bool option
-        [<JsonPropertyName("checkpoints")>]
         Checkpoints: TypesCheckpoint array option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: FleetGlobalCheckpointsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -89,33 +84,19 @@ module FleetOperations =
     }
 
     type FleetMsearchRequest = {
-        [<JsonPropertyName("index")>]
         Index: System.Text.Json.JsonElement
-        [<JsonPropertyName("allow_no_indices")>]
         AllowNoIndices: bool option
-        [<JsonPropertyName("ccs_minimize_roundtrips")>]
         CcsMinimizeRoundtrips: bool option
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("ignore_throttled")>]
         IgnoreThrottled: bool option
-        [<JsonPropertyName("ignore_unavailable")>]
         IgnoreUnavailable: bool option
-        [<JsonPropertyName("max_concurrent_searches")>]
         MaxConcurrentSearches: float option
-        [<JsonPropertyName("max_concurrent_shard_requests")>]
         MaxConcurrentShardRequests: float option
-        [<JsonPropertyName("pre_filter_shard_size")>]
         PreFilterShardSize: float option
-        [<JsonPropertyName("search_type")>]
         SearchType: SearchType option
-        [<JsonPropertyName("rest_total_hits_as_int")>]
         RestTotalHitsAsInt: bool option
-        [<JsonPropertyName("typed_keys")>]
         TypedKeys: bool option
-        [<JsonPropertyName("wait_for_checkpoints")>]
         WaitForCheckpoints: TypesCheckpoint array option
-        [<JsonPropertyName("allow_partial_search_results")>]
         AllowPartialSearchResults: bool option
     } with
         static member ToRequest(request: FleetMsearchRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -230,93 +211,49 @@ module FleetOperations =
     let fleetMsearchRequest = FleetMsearchRequestBuilder()
 
     type FleetSearchRequest = {
-        [<JsonPropertyName("index")>]
         Index: System.Text.Json.JsonElement
-        [<JsonPropertyName("allow_no_indices")>]
         AllowNoIndices: bool option
-        [<JsonPropertyName("analyzer")>]
         Analyzer: string option
-        [<JsonPropertyName("analyze_wildcard")>]
         AnalyzeWildcard: bool option
-        [<JsonPropertyName("batched_reduce_size")>]
         BatchedReduceSize: float option
-        [<JsonPropertyName("ccs_minimize_roundtrips")>]
         CcsMinimizeRoundtrips: bool option
-        [<JsonPropertyName("default_operator")>]
         DefaultOperator: QueryDslOperator option
-        [<JsonPropertyName("df")>]
         Df: string option
-        [<JsonPropertyName("docvalue_fields")>]
         DocvalueFields: Fields option
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("explain")>]
         Explain: bool option
-        [<JsonPropertyName("ignore_throttled")>]
         IgnoreThrottled: bool option
-        [<JsonPropertyName("ignore_unavailable")>]
         IgnoreUnavailable: bool option
-        [<JsonPropertyName("lenient")>]
         Lenient: bool option
-        [<JsonPropertyName("max_concurrent_shard_requests")>]
         MaxConcurrentShardRequests: float option
-        [<JsonPropertyName("preference")>]
         Preference: string option
-        [<JsonPropertyName("pre_filter_shard_size")>]
         PreFilterShardSize: float option
-        [<JsonPropertyName("request_cache")>]
         RequestCache: bool option
-        [<JsonPropertyName("routing")>]
         Routing: Routing option
-        [<JsonPropertyName("scroll")>]
         Scroll: Duration option
-        [<JsonPropertyName("search_type")>]
         SearchType: SearchType option
-        [<JsonPropertyName("stats")>]
         Stats: string array option
-        [<JsonPropertyName("stored_fields")>]
         StoredFields: Fields option
-        [<JsonPropertyName("suggest_field")>]
         SuggestField: Field option
-        [<JsonPropertyName("suggest_mode")>]
         SuggestMode: SuggestMode option
-        [<JsonPropertyName("suggest_size")>]
         SuggestSize: float option
-        [<JsonPropertyName("suggest_text")>]
         SuggestText: string option
-        [<JsonPropertyName("terminate_after")>]
         TerminateAfter: float option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
-        [<JsonPropertyName("track_total_hits")>]
         TrackTotalHits: SearchTypesTrackHits option
-        [<JsonPropertyName("track_scores")>]
         TrackScores: bool option
-        [<JsonPropertyName("typed_keys")>]
         TypedKeys: bool option
-        [<JsonPropertyName("rest_total_hits_as_int")>]
         RestTotalHitsAsInt: bool option
-        [<JsonPropertyName("version")>]
         Version: bool option
-        [<JsonPropertyName("_source")>]
         Source: SearchTypesSourceConfigParam option
-        [<JsonPropertyName("_source_excludes")>]
         SourceExcludes: Fields option
-        [<JsonPropertyName("_source_includes")>]
         SourceIncludes: Fields option
-        [<JsonPropertyName("seq_no_primary_term")>]
         SeqNoPrimaryTerm: bool option
-        [<JsonPropertyName("q")>]
         Q: string option
-        [<JsonPropertyName("size")>]
         Size: float option
-        [<JsonPropertyName("from")>]
         From: float option
-        [<JsonPropertyName("sort")>]
         Sort: System.Text.Json.JsonElement option
-        [<JsonPropertyName("wait_for_checkpoints")>]
         WaitForCheckpoints: TypesCheckpoint array option
-        [<JsonPropertyName("allow_partial_search_results")>]
         AllowPartialSearchResults: bool option
         [<JsonPropertyName("aggregations")>]
         Aggregations: Map<string, AggregationsAggregationContainer> option

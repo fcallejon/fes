@@ -13,7 +13,6 @@ open Fes.DSL.Models.Types
 module RollupOperations =
 
     type RollupGetJobsRequest = {
-        [<JsonPropertyName("id")>]
         Id: Id
     } with
         static member ToRequest(request: RollupGetJobsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -44,7 +43,6 @@ module RollupOperations =
     let rollupGetJobsRequest = RollupGetJobsRequestBuilder()
 
     type RollupPutJobRequest = {
-        [<JsonPropertyName("id")>]
         Id: Id
         [<JsonPropertyName("cron")>]
         Cron: string
@@ -134,7 +132,6 @@ module RollupOperations =
     type RollupPutJobResponse = AcknowledgedResponseBase
 
     type RollupDeleteJobRequest = {
-        [<JsonPropertyName("id")>]
         Id: Id
     } with
         static member ToRequest(request: RollupDeleteJobRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -172,7 +169,6 @@ module RollupOperations =
     }
 
     type RollupGetRollupCapsRequest = {
-        [<JsonPropertyName("id")>]
         Id: Id
     } with
         static member ToRequest(request: RollupGetRollupCapsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -203,7 +199,6 @@ module RollupOperations =
     let rollupGetRollupCapsRequest = RollupGetRollupCapsRequestBuilder()
 
     type RollupGetRollupIndexCapsRequest = {
-        [<JsonPropertyName("index")>]
         Index: Ids
     } with
         static member ToRequest(request: RollupGetRollupIndexCapsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -234,11 +229,8 @@ module RollupOperations =
     let rollupGetRollupIndexCapsRequest = RollupGetRollupIndexCapsRequestBuilder()
 
     type RollupRollupSearchRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("rest_total_hits_as_int")>]
         RestTotalHitsAsInt: bool option
-        [<JsonPropertyName("typed_keys")>]
         TypedKeys: bool option
         [<JsonPropertyName("aggregations")>]
         Aggregations: Map<string, AggregationsAggregationContainer> option
@@ -309,7 +301,6 @@ module RollupOperations =
     let rollupRollupSearchRequest = RollupRollupSearchRequestBuilder()
 
     type RollupStartJobRequest = {
-        [<JsonPropertyName("id")>]
         Id: Id
     } with
         static member ToRequest(request: RollupStartJobRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -345,11 +336,8 @@ module RollupOperations =
     }
 
     type RollupStopJobRequest = {
-        [<JsonPropertyName("id")>]
         Id: Id
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
-        [<JsonPropertyName("wait_for_completion")>]
         WaitForCompletion: bool option
     } with
         static member ToRequest(request: RollupStopJobRequest) : Result<Fes.Http.RequestMsg, exn> =

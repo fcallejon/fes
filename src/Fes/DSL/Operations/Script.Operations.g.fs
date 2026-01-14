@@ -13,9 +13,7 @@ open Fes.DSL.Models.Types
 module ScriptOperations =
 
     type GetScriptRequest = {
-        [<JsonPropertyName("id")>]
         Id: Id
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
     } with
         static member ToRequest(request: GetScriptRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -67,11 +65,8 @@ module ScriptOperations =
     }
 
     type DeleteScriptRequest = {
-        [<JsonPropertyName("id")>]
         Id: Id
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: DeleteScriptRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -142,15 +137,10 @@ module ScriptOperations =
     }
 
     type PutScriptRequest = {
-        [<JsonPropertyName("id")>]
         Id: Id
-        [<JsonPropertyName("context")>]
         Context: Name
-        [<JsonPropertyName("context")>]
         Context2: Name option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("script")>]
         Script: StoredScript

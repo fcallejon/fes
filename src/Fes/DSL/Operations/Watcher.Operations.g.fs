@@ -13,9 +13,7 @@ open Fes.DSL.Models.Types
 module WatcherOperations =
 
     type WatcherAckWatchRequest = {
-        [<JsonPropertyName("watch_id")>]
         WatchId: Name
-        [<JsonPropertyName("action_id")>]
         ActionId: Names
     } with
         static member ToRequest(request: WatcherAckWatchRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -51,7 +49,6 @@ module WatcherOperations =
     let watcherAckWatchRequest = WatcherAckWatchRequestBuilder()
 
     type WatcherActivateWatchRequest = {
-        [<JsonPropertyName("watch_id")>]
         WatchId: Name
     } with
         static member ToRequest(request: WatcherActivateWatchRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -82,7 +79,6 @@ module WatcherOperations =
     let watcherActivateWatchRequest = WatcherActivateWatchRequestBuilder()
 
     type WatcherDeactivateWatchRequest = {
-        [<JsonPropertyName("watch_id")>]
         WatchId: Name
     } with
         static member ToRequest(request: WatcherDeactivateWatchRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -113,7 +109,6 @@ module WatcherOperations =
     let watcherDeactivateWatchRequest = WatcherDeactivateWatchRequestBuilder()
 
     type WatcherGetWatchRequest = {
-        [<JsonPropertyName("id")>]
         Id: Name
     } with
         static member ToRequest(request: WatcherGetWatchRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -161,15 +156,10 @@ module WatcherOperations =
     }
 
     type WatcherPutWatchRequest = {
-        [<JsonPropertyName("id")>]
         Id: Id
-        [<JsonPropertyName("active")>]
         Active: bool option
-        [<JsonPropertyName("if_primary_term")>]
         IfPrimaryTerm: float option
-        [<JsonPropertyName("if_seq_no")>]
         IfSeqNo: SequenceNumber option
-        [<JsonPropertyName("version")>]
         Version: VersionNumber option
         [<JsonPropertyName("actions")>]
         Actions: Map<string, TypesAction> option
@@ -287,7 +277,6 @@ module WatcherOperations =
     let watcherPutWatchRequest = WatcherPutWatchRequestBuilder()
 
     type WatcherDeleteWatchRequest = {
-        [<JsonPropertyName("id")>]
         Id: Name
     } with
         static member ToRequest(request: WatcherDeleteWatchRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -327,9 +316,7 @@ module WatcherOperations =
     }
 
     type WatcherExecuteWatchRequest = {
-        [<JsonPropertyName("id")>]
         Id: Id
-        [<JsonPropertyName("debug")>]
         Debug: bool option
         [<JsonPropertyName("action_modes")>]
         ActionModes: Map<string, TypesActionExecutionMode> option
@@ -422,7 +409,6 @@ module WatcherOperations =
     let watcherExecuteWatchRequest = WatcherExecuteWatchRequestBuilder()
 
     type WatcherGetSettingsRequest = {
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
     } with
         static member ToRequest(request: WatcherGetSettingsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -465,9 +451,7 @@ module WatcherOperations =
     }
 
     type WatcherUpdateSettingsRequest = {
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("index.auto_expand_replicas")>]
         IndexAutoExpandReplicas: string option
@@ -591,7 +575,6 @@ module WatcherOperations =
     let watcherQueryWatchesRequest = WatcherQueryWatchesRequestBuilder()
 
     type WatcherStartRequest = {
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
     } with
         static member ToRequest(request: WatcherStartRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -631,11 +614,8 @@ module WatcherOperations =
     type WatcherStartResponse = AcknowledgedResponseBase
 
     type WatcherStatsRequest = {
-        [<JsonPropertyName("metric")>]
         Metric: System.Text.Json.JsonElement
-        [<JsonPropertyName("emit_stacktraces")>]
         EmitStacktraces: bool option
-        [<JsonPropertyName("metric")>]
         Metric2: System.Text.Json.JsonElement option
     } with
         static member ToRequest(request: WatcherStatsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -684,7 +664,6 @@ module WatcherOperations =
     let watcherStatsRequest = WatcherStatsRequestBuilder()
 
     type WatcherStopRequest = {
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
     } with
         static member ToRequest(request: WatcherStopRequest) : Result<Fes.Http.RequestMsg, exn> =

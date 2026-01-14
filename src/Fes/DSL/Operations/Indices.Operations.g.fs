@@ -13,17 +13,11 @@ open Fes.DSL.Models.Types
 module IndicesOperations =
 
     type ClusterGetComponentTemplateRequest = {
-        [<JsonPropertyName("name")>]
         Name: Name
-        [<JsonPropertyName("flat_settings")>]
         FlatSettings: bool option
-        [<JsonPropertyName("settings_filter")>]
         SettingsFilter: System.Text.Json.JsonElement option
-        [<JsonPropertyName("include_defaults")>]
         IncludeDefaults: bool option
-        [<JsonPropertyName("local")>]
         Local: bool option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
     } with
         static member ToRequest(request: ClusterGetComponentTemplateRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -90,13 +84,9 @@ module IndicesOperations =
     let clusterGetComponentTemplateRequest = ClusterGetComponentTemplateRequestBuilder()
 
     type ClusterPutComponentTemplateRequest = {
-        [<JsonPropertyName("name")>]
         Name: Name
-        [<JsonPropertyName("create")>]
         Create: bool option
-        [<JsonPropertyName("cause")>]
         Cause: string option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
         [<JsonPropertyName("template")>]
         Template: PutIndexTemplateIndexTemplateMapping
@@ -180,11 +170,8 @@ module IndicesOperations =
     let clusterPutComponentTemplateRequest = ClusterPutComponentTemplateRequestBuilder()
 
     type ClusterDeleteComponentTemplateRequest = {
-        [<JsonPropertyName("name")>]
         Name: Names
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: ClusterDeleteComponentTemplateRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -235,11 +222,8 @@ module IndicesOperations =
     type ClusterDeleteComponentTemplateResponse = AcknowledgedResponseBase
 
     type ClusterExistsComponentTemplateRequest = {
-        [<JsonPropertyName("name")>]
         Name: Names
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("local")>]
         Local: bool option
     } with
         static member ToRequest(request: ClusterExistsComponentTemplateRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -288,13 +272,9 @@ module IndicesOperations =
     let clusterExistsComponentTemplateRequest = ClusterExistsComponentTemplateRequestBuilder()
 
     type DanglingIndicesImportDanglingIndexRequest = {
-        [<JsonPropertyName("index_uuid")>]
         IndexUuid: Uuid
-        [<JsonPropertyName("accept_data_loss")>]
         AcceptDataLoss: bool option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: DanglingIndicesImportDanglingIndexRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -351,13 +331,9 @@ module IndicesOperations =
     type DanglingIndicesImportDanglingIndexResponse = AcknowledgedResponseBase
 
     type DanglingIndicesDeleteDanglingIndexRequest = {
-        [<JsonPropertyName("index_uuid")>]
         IndexUuid: Uuid
-        [<JsonPropertyName("accept_data_loss")>]
         AcceptDataLoss: bool option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: DanglingIndicesDeleteDanglingIndexRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -423,19 +399,12 @@ module IndicesOperations =
     }
 
     type IndicesAddBlockRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("block")>]
         Block: TypesIndicesBlockOptions
-        [<JsonPropertyName("allow_no_indices")>]
         AllowNoIndices: bool option
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("ignore_unavailable")>]
         IgnoreUnavailable: bool option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: IndicesAddBlockRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -516,19 +485,12 @@ module IndicesOperations =
     }
 
     type IndicesRemoveBlockRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("block")>]
         Block: TypesIndicesBlockOptions
-        [<JsonPropertyName("allow_no_indices")>]
         AllowNoIndices: bool option
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("ignore_unavailable")>]
         IgnoreUnavailable: bool option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: IndicesRemoveBlockRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -607,9 +569,7 @@ module IndicesOperations =
     }
 
     type IndicesAnalyzeRequest = {
-        [<JsonPropertyName("index")>]
         Index: IndexName
-        [<JsonPropertyName("index")>]
         Index2: IndexName option
         [<JsonPropertyName("analyzer")>]
         Analyzer: string option
@@ -716,23 +676,14 @@ module IndicesOperations =
     let indicesAnalyzeRequest = IndicesAnalyzeRequestBuilder()
 
     type IndicesClearCacheRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("index")>]
         Index2: Indices option
-        [<JsonPropertyName("allow_no_indices")>]
         AllowNoIndices: bool option
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("fielddata")>]
         Fielddata: bool option
-        [<JsonPropertyName("fields")>]
         Fields: Fields option
-        [<JsonPropertyName("ignore_unavailable")>]
         IgnoreUnavailable: bool option
-        [<JsonPropertyName("query")>]
         Query: bool option
-        [<JsonPropertyName("request")>]
         Request: bool option
     } with
         static member ToRequest(request: IndicesClearCacheRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -817,15 +768,10 @@ module IndicesOperations =
     let indicesClearCacheRequest = IndicesClearCacheRequestBuilder()
 
     type IndicesCloneRequest = {
-        [<JsonPropertyName("index")>]
         Index: IndexName
-        [<JsonPropertyName("target")>]
         Target: Name
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
-        [<JsonPropertyName("wait_for_active_shards")>]
         WaitForActiveShards: WaitForActiveShards option
         [<JsonPropertyName("aliases")>]
         Aliases: Map<string, TypesAlias> option
@@ -900,19 +846,12 @@ module IndicesOperations =
     let indicesCloneRequest = IndicesCloneRequestBuilder()
 
     type IndicesCloseRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("allow_no_indices")>]
         AllowNoIndices: bool option
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("ignore_unavailable")>]
         IgnoreUnavailable: bool option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
-        [<JsonPropertyName("wait_for_active_shards")>]
         WaitForActiveShards: WaitForActiveShards option
     } with
         static member ToRequest(request: IndicesCloseRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -994,23 +933,14 @@ module IndicesOperations =
     }
 
     type IndicesGetRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("allow_no_indices")>]
         AllowNoIndices: bool option
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("flat_settings")>]
         FlatSettings: bool option
-        [<JsonPropertyName("ignore_unavailable")>]
         IgnoreUnavailable: bool option
-        [<JsonPropertyName("include_defaults")>]
         IncludeDefaults: bool option
-        [<JsonPropertyName("local")>]
         Local: bool option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("features")>]
         Features: GetFeatures option
     } with
         static member ToRequest(request: IndicesGetRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1095,13 +1025,9 @@ module IndicesOperations =
     let indicesGetRequest = IndicesGetRequestBuilder()
 
     type IndicesCreateRequest = {
-        [<JsonPropertyName("index")>]
         Index: IndexName
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
-        [<JsonPropertyName("wait_for_active_shards")>]
         WaitForActiveShards: WaitForActiveShards option
         [<JsonPropertyName("aliases")>]
         Aliases: Map<string, TypesAlias> option
@@ -1187,17 +1113,11 @@ module IndicesOperations =
     }
 
     type IndicesDeleteRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("allow_no_indices")>]
         AllowNoIndices: bool option
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("ignore_unavailable")>]
         IgnoreUnavailable: bool option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: IndicesDeleteRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1266,19 +1186,12 @@ module IndicesOperations =
     type IndicesDeleteResponse = IndicesResponseBase
 
     type IndicesExistsRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("allow_no_indices")>]
         AllowNoIndices: bool option
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("flat_settings")>]
         FlatSettings: bool option
-        [<JsonPropertyName("ignore_unavailable")>]
         IgnoreUnavailable: bool option
-        [<JsonPropertyName("include_defaults")>]
         IncludeDefaults: bool option
-        [<JsonPropertyName("local")>]
         Local: bool option
     } with
         static member ToRequest(request: IndicesExistsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1351,13 +1264,9 @@ module IndicesOperations =
     let indicesExistsRequest = IndicesExistsRequestBuilder()
 
     type IndicesPutAliasRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("name")>]
         Name: Name
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("filter")>]
         Filter: QueryDslQueryContainer option
@@ -1447,13 +1356,9 @@ module IndicesOperations =
     let indicesPutAliasRequest = IndicesPutAliasRequestBuilder()
 
     type IndicesDeleteAliasRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("name")>]
         Name: Names
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: IndicesDeleteAliasRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1507,13 +1412,9 @@ module IndicesOperations =
     let indicesDeleteAliasRequest = IndicesDeleteAliasRequestBuilder()
 
     type IndicesDeleteDataLifecycleRequest = {
-        [<JsonPropertyName("name")>]
         Name: DataStreamNames
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: IndicesDeleteDataLifecycleRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1570,15 +1471,10 @@ module IndicesOperations =
     type IndicesDeleteDataLifecycleResponse = AcknowledgedResponseBase
 
     type IndicesGetIndexTemplateRequest = {
-        [<JsonPropertyName("name")>]
         Name: Name
-        [<JsonPropertyName("local")>]
         Local: bool option
-        [<JsonPropertyName("flat_settings")>]
         FlatSettings: bool option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("include_defaults")>]
         IncludeDefaults: bool option
     } with
         static member ToRequest(request: IndicesGetIndexTemplateRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1639,13 +1535,9 @@ module IndicesOperations =
     let indicesGetIndexTemplateRequest = IndicesGetIndexTemplateRequestBuilder()
 
     type IndicesPutIndexTemplateRequest = {
-        [<JsonPropertyName("name")>]
         Name: Name
-        [<JsonPropertyName("create")>]
         Create: bool option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("cause")>]
         Cause: string option
         [<JsonPropertyName("index_patterns")>]
         IndexPatterns: Indices option
@@ -1771,11 +1663,8 @@ module IndicesOperations =
     let indicesPutIndexTemplateRequest = IndicesPutIndexTemplateRequestBuilder()
 
     type IndicesDeleteIndexTemplateRequest = {
-        [<JsonPropertyName("name")>]
         Name: Names
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: IndicesDeleteIndexTemplateRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1826,13 +1715,9 @@ module IndicesOperations =
     type IndicesDeleteIndexTemplateResponse = AcknowledgedResponseBase
 
     type IndicesExistsIndexTemplateRequest = {
-        [<JsonPropertyName("name")>]
         Name: Name
-        [<JsonPropertyName("local")>]
         Local: bool option
-        [<JsonPropertyName("flat_settings")>]
         FlatSettings: bool option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
     } with
         static member ToRequest(request: IndicesExistsIndexTemplateRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1887,13 +1772,9 @@ module IndicesOperations =
     let indicesExistsIndexTemplateRequest = IndicesExistsIndexTemplateRequestBuilder()
 
     type IndicesGetTemplateRequest = {
-        [<JsonPropertyName("name")>]
         Name: Names
-        [<JsonPropertyName("flat_settings")>]
         FlatSettings: bool option
-        [<JsonPropertyName("local")>]
         Local: bool option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
     } with
         static member ToRequest(request: IndicesGetTemplateRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1948,15 +1829,10 @@ module IndicesOperations =
     let indicesGetTemplateRequest = IndicesGetTemplateRequestBuilder()
 
     type IndicesPutTemplateRequest = {
-        [<JsonPropertyName("name")>]
         Name: Name
-        [<JsonPropertyName("create")>]
         Create: bool option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("order")>]
         Order: float option
-        [<JsonPropertyName("cause")>]
         Cause: string option
         [<JsonPropertyName("aliases")>]
         Aliases: Map<string, TypesAlias> option
@@ -2060,11 +1936,8 @@ module IndicesOperations =
     let indicesPutTemplateRequest = IndicesPutTemplateRequestBuilder()
 
     type IndicesDeleteTemplateRequest = {
-        [<JsonPropertyName("name")>]
         Name: Name
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: IndicesDeleteTemplateRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -2115,13 +1988,9 @@ module IndicesOperations =
     type IndicesDeleteTemplateResponse = AcknowledgedResponseBase
 
     type IndicesExistsTemplateRequest = {
-        [<JsonPropertyName("name")>]
         Name: Names
-        [<JsonPropertyName("flat_settings")>]
         FlatSettings: bool option
-        [<JsonPropertyName("local")>]
         Local: bool option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
     } with
         static member ToRequest(request: IndicesExistsTemplateRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -2176,17 +2045,11 @@ module IndicesOperations =
     let indicesExistsTemplateRequest = IndicesExistsTemplateRequestBuilder()
 
     type IndicesDiskUsageRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("allow_no_indices")>]
         AllowNoIndices: bool option
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("flush")>]
         Flush: bool option
-        [<JsonPropertyName("ignore_unavailable")>]
         IgnoreUnavailable: bool option
-        [<JsonPropertyName("run_expensive_tasks")>]
         RunExpensiveTasks: bool option
     } with
         static member ToRequest(request: IndicesDiskUsageRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -2253,17 +2116,11 @@ module IndicesOperations =
     let indicesDiskUsageRequest = IndicesDiskUsageRequestBuilder()
 
     type IndicesGetAliasRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("name")>]
         Name: Names
-        [<JsonPropertyName("allow_no_indices")>]
         AllowNoIndices: bool option
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("ignore_unavailable")>]
         IgnoreUnavailable: bool option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
     } with
         static member ToRequest(request: IndicesGetAliasRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -2329,17 +2186,11 @@ module IndicesOperations =
     let indicesGetAliasRequest = IndicesGetAliasRequestBuilder()
 
     type IndicesExistsAliasRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("name")>]
         Name: Names
-        [<JsonPropertyName("allow_no_indices")>]
         AllowNoIndices: bool option
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("ignore_unavailable")>]
         IgnoreUnavailable: bool option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
     } with
         static member ToRequest(request: IndicesExistsAliasRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -2405,15 +2256,10 @@ module IndicesOperations =
     let indicesExistsAliasRequest = IndicesExistsAliasRequestBuilder()
 
     type IndicesFieldUsageStatsRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("allow_no_indices")>]
         AllowNoIndices: bool option
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("ignore_unavailable")>]
         IgnoreUnavailable: bool option
-        [<JsonPropertyName("fields")>]
         Fields: Fields option
     } with
         static member ToRequest(request: IndicesFieldUsageStatsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -2476,17 +2322,11 @@ module IndicesOperations =
     type IndicesFieldUsageStatsResponse = FieldUsageStatsFieldsUsageBody
 
     type IndicesFlushRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("allow_no_indices")>]
         AllowNoIndices: bool option
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("force")>]
         Force: bool option
-        [<JsonPropertyName("ignore_unavailable")>]
         IgnoreUnavailable: bool option
-        [<JsonPropertyName("wait_if_ongoing")>]
         WaitIfOngoing: bool option
     } with
         static member ToRequest(request: IndicesFlushRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -2553,21 +2393,13 @@ module IndicesOperations =
     let indicesFlushRequest = IndicesFlushRequestBuilder()
 
     type IndicesForcemergeRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("allow_no_indices")>]
         AllowNoIndices: bool option
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("flush")>]
         Flush: bool option
-        [<JsonPropertyName("ignore_unavailable")>]
         IgnoreUnavailable: bool option
-        [<JsonPropertyName("max_num_segments")>]
         MaxNumSegments: float option
-        [<JsonPropertyName("only_expunge_deletes")>]
         OnlyExpungeDeletes: bool option
-        [<JsonPropertyName("wait_for_completion")>]
         WaitForCompletion: bool option
     } with
         static member ToRequest(request: IndicesForcemergeRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -2646,17 +2478,11 @@ module IndicesOperations =
     let indicesForcemergeRequest = IndicesForcemergeRequestBuilder()
 
     type IndicesGetFieldMappingRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("fields")>]
         Fields: Fields
-        [<JsonPropertyName("allow_no_indices")>]
         AllowNoIndices: bool option
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("ignore_unavailable")>]
         IgnoreUnavailable: bool option
-        [<JsonPropertyName("include_defaults")>]
         IncludeDefaults: bool option
     } with
         static member ToRequest(request: IndicesGetFieldMappingRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -2722,17 +2548,11 @@ module IndicesOperations =
     let indicesGetFieldMappingRequest = IndicesGetFieldMappingRequestBuilder()
 
     type IndicesGetMappingRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("allow_no_indices")>]
         AllowNoIndices: bool option
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("ignore_unavailable")>]
         IgnoreUnavailable: bool option
-        [<JsonPropertyName("local")>]
         Local: bool option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
     } with
         static member ToRequest(request: IndicesGetMappingRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -2799,19 +2619,12 @@ module IndicesOperations =
     let indicesGetMappingRequest = IndicesGetMappingRequestBuilder()
 
     type IndicesPutMappingRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("allow_no_indices")>]
         AllowNoIndices: bool option
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("ignore_unavailable")>]
         IgnoreUnavailable: bool option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
-        [<JsonPropertyName("write_index_only")>]
         WriteIndexOnly: bool option
         [<JsonPropertyName("date_detection")>]
         DateDetection: bool option
@@ -2962,23 +2775,14 @@ module IndicesOperations =
     let indicesPutMappingRequest = IndicesPutMappingRequestBuilder()
 
     type IndicesGetSettingsRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("name")>]
         Name: Names
-        [<JsonPropertyName("allow_no_indices")>]
         AllowNoIndices: bool option
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("flat_settings")>]
         FlatSettings: bool option
-        [<JsonPropertyName("ignore_unavailable")>]
         IgnoreUnavailable: bool option
-        [<JsonPropertyName("include_defaults")>]
         IncludeDefaults: bool option
-        [<JsonPropertyName("local")>]
         Local: bool option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
     } with
         static member ToRequest(request: IndicesGetSettingsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -3062,19 +2866,12 @@ module IndicesOperations =
     let indicesGetSettingsRequest = IndicesGetSettingsRequestBuilder()
 
     type IndicesOpenRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("allow_no_indices")>]
         AllowNoIndices: bool option
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("ignore_unavailable")>]
         IgnoreUnavailable: bool option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
-        [<JsonPropertyName("wait_for_active_shards")>]
         WaitForActiveShards: WaitForActiveShards option
     } with
         static member ToRequest(request: IndicesOpenRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -3154,23 +2951,14 @@ module IndicesOperations =
     }
 
     type IndicesPutSettingsRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("allow_no_indices")>]
         AllowNoIndices: bool option
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("flat_settings")>]
         FlatSettings: bool option
-        [<JsonPropertyName("ignore_unavailable")>]
         IgnoreUnavailable: bool option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("preserve_existing")>]
         PreserveExisting: bool option
-        [<JsonPropertyName("reopen")>]
         Reopen: bool option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("body")>]
         Body: TypesIndexSettings
@@ -3263,17 +3051,11 @@ module IndicesOperations =
     let indicesPutSettingsRequest = IndicesPutSettingsRequestBuilder()
 
     type IndicesRecoveryRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("active_only")>]
         ActiveOnly: bool option
-        [<JsonPropertyName("detailed")>]
         Detailed: bool option
-        [<JsonPropertyName("allow_no_indices")>]
         AllowNoIndices: bool option
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("ignore_unavailable")>]
         IgnoreUnavailable: bool option
     } with
         static member ToRequest(request: IndicesRecoveryRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -3340,13 +3122,9 @@ module IndicesOperations =
     let indicesRecoveryRequest = IndicesRecoveryRequestBuilder()
 
     type IndicesRefreshRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("allow_no_indices")>]
         AllowNoIndices: bool option
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("ignore_unavailable")>]
         IgnoreUnavailable: bool option
     } with
         static member ToRequest(request: IndicesRefreshRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -3401,15 +3179,10 @@ module IndicesOperations =
     let indicesRefreshRequest = IndicesRefreshRequestBuilder()
 
     type IndicesReloadSearchAnalyzersRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("allow_no_indices")>]
         AllowNoIndices: bool option
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("ignore_unavailable")>]
         IgnoreUnavailable: bool option
-        [<JsonPropertyName("resource")>]
         Resource: string option
     } with
         static member ToRequest(request: IndicesReloadSearchAnalyzersRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -3470,17 +3243,11 @@ module IndicesOperations =
     let indicesReloadSearchAnalyzersRequest = IndicesReloadSearchAnalyzersRequestBuilder()
 
     type IndicesResolveClusterRequest = {
-        [<JsonPropertyName("name")>]
         Name: Names
-        [<JsonPropertyName("allow_no_indices")>]
         AllowNoIndices: bool option
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("ignore_throttled")>]
         IgnoreThrottled: bool option
-        [<JsonPropertyName("ignore_unavailable")>]
         IgnoreUnavailable: bool option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: IndicesResolveClusterRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -3547,15 +3314,10 @@ module IndicesOperations =
     let indicesResolveClusterRequest = IndicesResolveClusterRequestBuilder()
 
     type IndicesResolveIndexRequest = {
-        [<JsonPropertyName("name")>]
         Name: Names
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("ignore_unavailable")>]
         IgnoreUnavailable: bool option
-        [<JsonPropertyName("allow_no_indices")>]
         AllowNoIndices: bool option
-        [<JsonPropertyName("mode")>]
         Mode: System.Text.Json.JsonElement option
     } with
         static member ToRequest(request: IndicesResolveIndexRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -3616,19 +3378,12 @@ module IndicesOperations =
     let indicesResolveIndexRequest = IndicesResolveIndexRequestBuilder()
 
     type IndicesRolloverRequest = {
-        [<JsonPropertyName("alias")>]
         Alias: IndexAlias
-        [<JsonPropertyName("new_index")>]
         NewIndex: IndexName
-        [<JsonPropertyName("dry_run")>]
         DryRun: bool option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
-        [<JsonPropertyName("wait_for_active_shards")>]
         WaitForActiveShards: WaitForActiveShards option
-        [<JsonPropertyName("lazy")>]
         Lazy: bool option
         [<JsonPropertyName("aliases")>]
         Aliases: Map<string, TypesAlias> option
@@ -3729,13 +3484,9 @@ module IndicesOperations =
     let indicesRolloverRequest = IndicesRolloverRequestBuilder()
 
     type IndicesSegmentsRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("allow_no_indices")>]
         AllowNoIndices: bool option
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("ignore_unavailable")>]
         IgnoreUnavailable: bool option
     } with
         static member ToRequest(request: IndicesSegmentsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -3790,15 +3541,10 @@ module IndicesOperations =
     let indicesSegmentsRequest = IndicesSegmentsRequestBuilder()
 
     type IndicesShardStoresRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("allow_no_indices")>]
         AllowNoIndices: bool option
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("ignore_unavailable")>]
         IgnoreUnavailable: bool option
-        [<JsonPropertyName("status")>]
         Status: System.Text.Json.JsonElement option
     } with
         static member ToRequest(request: IndicesShardStoresRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -3859,15 +3605,10 @@ module IndicesOperations =
     let indicesShardStoresRequest = IndicesShardStoresRequestBuilder()
 
     type IndicesShrinkRequest = {
-        [<JsonPropertyName("index")>]
         Index: IndexName
-        [<JsonPropertyName("target")>]
         Target: IndexName
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
-        [<JsonPropertyName("wait_for_active_shards")>]
         WaitForActiveShards: WaitForActiveShards option
         [<JsonPropertyName("aliases")>]
         Aliases: Map<string, TypesAlias> option
@@ -3942,15 +3683,10 @@ module IndicesOperations =
     let indicesShrinkRequest = IndicesShrinkRequestBuilder()
 
     type IndicesSimulateIndexTemplateRequest = {
-        [<JsonPropertyName("name")>]
         Name: Name
-        [<JsonPropertyName("create")>]
         Create: bool option
-        [<JsonPropertyName("cause")>]
         Cause: string option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("include_defaults")>]
         IncludeDefaults: bool option
         [<JsonPropertyName("body")>]
         Body: TypesIndexTemplate
@@ -4026,15 +3762,10 @@ module IndicesOperations =
     }
 
     type IndicesSimulateTemplateRequest = {
-        [<JsonPropertyName("name")>]
         Name: Name
-        [<JsonPropertyName("create")>]
         Create: bool option
-        [<JsonPropertyName("cause")>]
         Cause: string option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("include_defaults")>]
         IncludeDefaults: bool option
         [<JsonPropertyName("allow_auto_create")>]
         AllowAutoCreate: bool option
@@ -4166,15 +3897,10 @@ module IndicesOperations =
     let indicesSimulateTemplateRequest = IndicesSimulateTemplateRequestBuilder()
 
     type IndicesSplitRequest = {
-        [<JsonPropertyName("index")>]
         Index: IndexName
-        [<JsonPropertyName("target")>]
         Target: IndexName
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
-        [<JsonPropertyName("wait_for_active_shards")>]
         WaitForActiveShards: WaitForActiveShards option
         [<JsonPropertyName("aliases")>]
         Aliases: Map<string, TypesAlias> option
@@ -4249,27 +3975,16 @@ module IndicesOperations =
     let indicesSplitRequest = IndicesSplitRequestBuilder()
 
     type IndicesStatsRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("metric")>]
         Metric: CommonStatsFlags
-        [<JsonPropertyName("completion_fields")>]
         CompletionFields: Fields option
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("fielddata_fields")>]
         FielddataFields: Fields option
-        [<JsonPropertyName("fields")>]
         Fields: Fields option
-        [<JsonPropertyName("forbid_closed_indices")>]
         ForbidClosedIndices: bool option
-        [<JsonPropertyName("groups")>]
         Groups: System.Text.Json.JsonElement option
-        [<JsonPropertyName("include_segment_file_sizes")>]
         IncludeSegmentFileSizes: bool option
-        [<JsonPropertyName("include_unloaded_segments")>]
         IncludeUnloadedSegments: bool option
-        [<JsonPropertyName("level")>]
         Level: Level option
     } with
         static member ToRequest(request: IndicesStatsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -4365,9 +4080,7 @@ module IndicesOperations =
     let indicesStatsRequest = IndicesStatsRequestBuilder()
 
     type IndicesUpdateAliasesRequest = {
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("actions")>]
         Actions: UpdateAliasesAction array option
@@ -4421,31 +4134,18 @@ module IndicesOperations =
     type IndicesUpdateAliasesResponse = AcknowledgedResponseBase
 
     type IndicesValidateQueryRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("allow_no_indices")>]
         AllowNoIndices: bool option
-        [<JsonPropertyName("all_shards")>]
         AllShards: bool option
-        [<JsonPropertyName("analyzer")>]
         Analyzer: string option
-        [<JsonPropertyName("analyze_wildcard")>]
         AnalyzeWildcard: bool option
-        [<JsonPropertyName("default_operator")>]
         DefaultOperator: QueryDslOperator option
-        [<JsonPropertyName("df")>]
         Df: string option
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("explain")>]
         Explain: bool option
-        [<JsonPropertyName("ignore_unavailable")>]
         IgnoreUnavailable: bool option
-        [<JsonPropertyName("lenient")>]
         Lenient: bool option
-        [<JsonPropertyName("rewrite")>]
         Rewrite: bool option
-        [<JsonPropertyName("q")>]
         Q: string option
         [<JsonPropertyName("query")>]
         Query: QueryDslQueryContainer option

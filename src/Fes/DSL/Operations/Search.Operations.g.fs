@@ -13,13 +13,9 @@ open Fes.DSL.Models.Types
 module SearchOperations =
 
     type AsyncSearchGetRequest = {
-        [<JsonPropertyName("id")>]
         Id: Id
-        [<JsonPropertyName("keep_alive")>]
         KeepAlive: Duration option
-        [<JsonPropertyName("typed_keys")>]
         TypedKeys: bool option
-        [<JsonPropertyName("wait_for_completion_timeout")>]
         WaitForCompletionTimeout: Duration option
     } with
         static member ToRequest(request: AsyncSearchGetRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -76,7 +72,6 @@ module SearchOperations =
     type AsyncSearchGetResponse = TypesAsyncSearchDocumentResponseBase
 
     type AsyncSearchDeleteRequest = {
-        [<JsonPropertyName("id")>]
         Id: Id
     } with
         static member ToRequest(request: AsyncSearchDeleteRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -109,9 +104,7 @@ module SearchOperations =
     type AsyncSearchDeleteResponse = AcknowledgedResponseBase
 
     type AsyncSearchStatusRequest = {
-        [<JsonPropertyName("id")>]
         Id: Id
-        [<JsonPropertyName("keep_alive")>]
         KeepAlive: Duration option
     } with
         static member ToRequest(request: AsyncSearchStatusRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -156,93 +149,49 @@ module SearchOperations =
     type AsyncSearchStatusResponse = StatusStatusResponseBase
 
     type AsyncSearchSubmitRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("wait_for_completion_timeout")>]
         WaitForCompletionTimeout: Duration option
-        [<JsonPropertyName("keep_alive")>]
         KeepAlive: Duration option
-        [<JsonPropertyName("keep_on_completion")>]
         KeepOnCompletion: bool option
-        [<JsonPropertyName("allow_no_indices")>]
         AllowNoIndices: bool option
-        [<JsonPropertyName("allow_partial_search_results")>]
         AllowPartialSearchResults: bool option
-        [<JsonPropertyName("analyzer")>]
         Analyzer: string option
-        [<JsonPropertyName("analyze_wildcard")>]
         AnalyzeWildcard: bool option
-        [<JsonPropertyName("batched_reduce_size")>]
         BatchedReduceSize: float option
-        [<JsonPropertyName("ccs_minimize_roundtrips")>]
         CcsMinimizeRoundtrips: bool option
-        [<JsonPropertyName("default_operator")>]
         DefaultOperator: QueryDslOperator option
-        [<JsonPropertyName("df")>]
         Df: string option
-        [<JsonPropertyName("docvalue_fields")>]
         DocvalueFields: Fields option
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("explain")>]
         Explain: bool option
-        [<JsonPropertyName("ignore_throttled")>]
         IgnoreThrottled: bool option
-        [<JsonPropertyName("ignore_unavailable")>]
         IgnoreUnavailable: bool option
-        [<JsonPropertyName("lenient")>]
         Lenient: bool option
-        [<JsonPropertyName("max_concurrent_shard_requests")>]
         MaxConcurrentShardRequests: float option
-        [<JsonPropertyName("preference")>]
         Preference: string option
-        [<JsonPropertyName("request_cache")>]
         RequestCache: bool option
-        [<JsonPropertyName("routing")>]
         Routing: Routing option
-        [<JsonPropertyName("search_type")>]
         SearchType: SearchType option
-        [<JsonPropertyName("stats")>]
         Stats: string array option
-        [<JsonPropertyName("stored_fields")>]
         StoredFields: Fields option
-        [<JsonPropertyName("suggest_field")>]
         SuggestField: Field option
-        [<JsonPropertyName("suggest_mode")>]
         SuggestMode: SuggestMode option
-        [<JsonPropertyName("suggest_size")>]
         SuggestSize: float option
-        [<JsonPropertyName("suggest_text")>]
         SuggestText: string option
-        [<JsonPropertyName("terminate_after")>]
         TerminateAfter: float option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
-        [<JsonPropertyName("track_total_hits")>]
         TrackTotalHits: SearchTypesTrackHits option
-        [<JsonPropertyName("track_scores")>]
         TrackScores: bool option
-        [<JsonPropertyName("typed_keys")>]
         TypedKeys: bool option
-        [<JsonPropertyName("rest_total_hits_as_int")>]
         RestTotalHitsAsInt: bool option
-        [<JsonPropertyName("version")>]
         Version: bool option
-        [<JsonPropertyName("_source")>]
         Source: SearchTypesSourceConfigParam option
-        [<JsonPropertyName("_source_excludes")>]
         SourceExcludes: Fields option
-        [<JsonPropertyName("_source_includes")>]
         SourceIncludes: Fields option
-        [<JsonPropertyName("seq_no_primary_term")>]
         SeqNoPrimaryTerm: bool option
-        [<JsonPropertyName("q")>]
         Q: string option
-        [<JsonPropertyName("size")>]
         Size: float option
-        [<JsonPropertyName("from")>]
         From: float option
-        [<JsonPropertyName("sort")>]
         Sort: System.Text.Json.JsonElement option
         [<JsonPropertyName("aggregations")>]
         Aggregations: Map<string, AggregationsAggregationContainer> option
@@ -762,13 +711,9 @@ module SearchOperations =
     let asyncSearchSubmitRequest = AsyncSearchSubmitRequestBuilder()
 
     type ScrollRequest = {
-        [<JsonPropertyName("scroll_id")>]
         ScrollId: ScrollId
-        [<JsonPropertyName("scroll")>]
         Scroll: Duration option
-        [<JsonPropertyName("scroll_id")>]
         ScrollId2: ScrollId option
-        [<JsonPropertyName("rest_total_hits_as_int")>]
         RestTotalHitsAsInt: bool option
         [<JsonPropertyName("scroll")>]
         Scroll2: Duration option
@@ -838,7 +783,6 @@ module SearchOperations =
     let scrollRequest = ScrollRequestBuilder()
 
     type ClearScrollRequest = {
-        [<JsonPropertyName("scroll_id")>]
         ScrollId: ScrollIds
         [<JsonPropertyName("scroll_id")>]
         ScrollId2: ScrollIds option
@@ -916,35 +860,20 @@ module SearchOperations =
     }
 
     type CountRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("allow_no_indices")>]
         AllowNoIndices: bool option
-        [<JsonPropertyName("analyzer")>]
         Analyzer: string option
-        [<JsonPropertyName("analyze_wildcard")>]
         AnalyzeWildcard: bool option
-        [<JsonPropertyName("default_operator")>]
         DefaultOperator: QueryDslOperator option
-        [<JsonPropertyName("df")>]
         Df: string option
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("ignore_throttled")>]
         IgnoreThrottled: bool option
-        [<JsonPropertyName("ignore_unavailable")>]
         IgnoreUnavailable: bool option
-        [<JsonPropertyName("lenient")>]
         Lenient: bool option
-        [<JsonPropertyName("min_score")>]
         MinScore: float option
-        [<JsonPropertyName("preference")>]
         Preference: string option
-        [<JsonPropertyName("routing")>]
         Routing: Routing option
-        [<JsonPropertyName("terminate_after")>]
         TerminateAfter: float option
-        [<JsonPropertyName("q")>]
         Q: string option
         [<JsonPropertyName("query")>]
         Query: QueryDslQueryContainer option
@@ -1073,33 +1002,19 @@ module SearchOperations =
     let countRequest = CountRequestBuilder()
 
     type ExplainRequest = {
-        [<JsonPropertyName("index")>]
         Index: IndexName
-        [<JsonPropertyName("id")>]
         Id: Id
-        [<JsonPropertyName("analyzer")>]
         Analyzer: string option
-        [<JsonPropertyName("analyze_wildcard")>]
         AnalyzeWildcard: bool option
-        [<JsonPropertyName("default_operator")>]
         DefaultOperator: QueryDslOperator option
-        [<JsonPropertyName("df")>]
         Df: string option
-        [<JsonPropertyName("lenient")>]
         Lenient: bool option
-        [<JsonPropertyName("preference")>]
         Preference: string option
-        [<JsonPropertyName("routing")>]
         Routing: Routing option
-        [<JsonPropertyName("_source")>]
         Source: SearchTypesSourceConfigParam option
-        [<JsonPropertyName("_source_excludes")>]
         SourceExcludes: Fields option
-        [<JsonPropertyName("_source_includes")>]
         SourceIncludes: Fields option
-        [<JsonPropertyName("stored_fields")>]
         StoredFields: Fields option
-        [<JsonPropertyName("q")>]
         Q: string option
         [<JsonPropertyName("query")>]
         Query: QueryDslQueryContainer option
@@ -1221,23 +1136,14 @@ module SearchOperations =
     let explainRequest = ExplainRequestBuilder()
 
     type FieldCapsRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("allow_no_indices")>]
         AllowNoIndices: bool option
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("fields")>]
         Fields: Fields option
-        [<JsonPropertyName("ignore_unavailable")>]
         IgnoreUnavailable: bool option
-        [<JsonPropertyName("include_unmapped")>]
         IncludeUnmapped: bool option
-        [<JsonPropertyName("filters")>]
         Filters: System.Text.Json.JsonElement option
-        [<JsonPropertyName("types")>]
         Types: string array option
-        [<JsonPropertyName("include_empty_fields")>]
         IncludeEmptyFields: bool option
         [<JsonPropertyName("fields")>]
         Fields2: Fields option
@@ -1344,35 +1250,20 @@ module SearchOperations =
     let fieldCapsRequest = FieldCapsRequestBuilder()
 
     type MsearchRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("allow_no_indices")>]
         AllowNoIndices: bool option
-        [<JsonPropertyName("ccs_minimize_roundtrips")>]
         CcsMinimizeRoundtrips: bool option
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("ignore_throttled")>]
         IgnoreThrottled: bool option
-        [<JsonPropertyName("ignore_unavailable")>]
         IgnoreUnavailable: bool option
-        [<JsonPropertyName("include_named_queries_score")>]
         IncludeNamedQueriesScore: bool option
-        [<JsonPropertyName("index")>]
         Index2: Indices option
-        [<JsonPropertyName("max_concurrent_searches")>]
         MaxConcurrentSearches: float option
-        [<JsonPropertyName("max_concurrent_shard_requests")>]
         MaxConcurrentShardRequests: float option
-        [<JsonPropertyName("pre_filter_shard_size")>]
         PreFilterShardSize: float option
-        [<JsonPropertyName("rest_total_hits_as_int")>]
         RestTotalHitsAsInt: bool option
-        [<JsonPropertyName("routing")>]
         Routing: Routing option
-        [<JsonPropertyName("search_type")>]
         SearchType: SearchType option
-        [<JsonPropertyName("typed_keys")>]
         TypedKeys: bool option
     } with
         static member ToRequest(request: MsearchRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1493,17 +1384,11 @@ module SearchOperations =
     let msearchRequest = MsearchRequestBuilder()
 
     type MsearchTemplateRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("ccs_minimize_roundtrips")>]
         CcsMinimizeRoundtrips: bool option
-        [<JsonPropertyName("max_concurrent_searches")>]
         MaxConcurrentSearches: float option
-        [<JsonPropertyName("search_type")>]
         SearchType: SearchType option
-        [<JsonPropertyName("rest_total_hits_as_int")>]
         RestTotalHitsAsInt: bool option
-        [<JsonPropertyName("typed_keys")>]
         TypedKeys: bool option
     } with
         static member ToRequest(request: MsearchTemplateRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1570,21 +1455,13 @@ module SearchOperations =
     let msearchTemplateRequest = MsearchTemplateRequestBuilder()
 
     type OpenPointInTimeRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("keep_alive")>]
         KeepAlive: Duration
-        [<JsonPropertyName("ignore_unavailable")>]
         IgnoreUnavailable: bool option
-        [<JsonPropertyName("preference")>]
         Preference: string option
-        [<JsonPropertyName("routing")>]
         Routing: Routing option
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("allow_partial_search_results")>]
         AllowPartialSearchResults: bool option
-        [<JsonPropertyName("max_concurrent_shard_requests")>]
         MaxConcurrentShardRequests: float option
         [<JsonPropertyName("index_filter")>]
         IndexFilter: QueryDslQueryContainer option
@@ -1678,15 +1555,10 @@ module SearchOperations =
     }
 
     type RankEvalRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("allow_no_indices")>]
         AllowNoIndices: bool option
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("ignore_unavailable")>]
         IgnoreUnavailable: bool option
-        [<JsonPropertyName("search_type")>]
         SearchType: SearchType option
         [<JsonPropertyName("requests")>]
         Requests: RankEvalRankEvalRequestItem array
@@ -1762,7 +1634,6 @@ module SearchOperations =
     let rankEvalRequest = RankEvalRequestBuilder()
 
     type RenderSearchTemplateRequest = {
-        [<JsonPropertyName("id")>]
         Id: Id
         [<JsonPropertyName("id")>]
         Id2: Id option
@@ -1822,95 +1693,50 @@ module SearchOperations =
     let renderSearchTemplateRequest = RenderSearchTemplateRequestBuilder()
 
     type SearchRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("allow_no_indices")>]
         AllowNoIndices: bool option
-        [<JsonPropertyName("allow_partial_search_results")>]
         AllowPartialSearchResults: bool option
-        [<JsonPropertyName("analyzer")>]
         Analyzer: string option
-        [<JsonPropertyName("analyze_wildcard")>]
         AnalyzeWildcard: bool option
-        [<JsonPropertyName("batched_reduce_size")>]
         BatchedReduceSize: float option
-        [<JsonPropertyName("ccs_minimize_roundtrips")>]
         CcsMinimizeRoundtrips: bool option
-        [<JsonPropertyName("default_operator")>]
         DefaultOperator: QueryDslOperator option
-        [<JsonPropertyName("df")>]
         Df: string option
-        [<JsonPropertyName("docvalue_fields")>]
         DocvalueFields: Fields option
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("explain")>]
         Explain: bool option
-        [<JsonPropertyName("ignore_throttled")>]
         IgnoreThrottled: bool option
-        [<JsonPropertyName("ignore_unavailable")>]
         IgnoreUnavailable: bool option
-        [<JsonPropertyName("include_named_queries_score")>]
         IncludeNamedQueriesScore: bool option
-        [<JsonPropertyName("lenient")>]
         Lenient: bool option
-        [<JsonPropertyName("max_concurrent_shard_requests")>]
         MaxConcurrentShardRequests: float option
-        [<JsonPropertyName("preference")>]
         Preference: string option
-        [<JsonPropertyName("pre_filter_shard_size")>]
         PreFilterShardSize: float option
-        [<JsonPropertyName("request_cache")>]
         RequestCache: bool option
-        [<JsonPropertyName("routing")>]
         Routing: Routing option
-        [<JsonPropertyName("scroll")>]
         Scroll: Duration option
-        [<JsonPropertyName("search_type")>]
         SearchType: SearchType option
-        [<JsonPropertyName("stats")>]
         Stats: string array option
-        [<JsonPropertyName("stored_fields")>]
         StoredFields: Fields option
-        [<JsonPropertyName("suggest_field")>]
         SuggestField: Field option
-        [<JsonPropertyName("suggest_mode")>]
         SuggestMode: SuggestMode option
-        [<JsonPropertyName("suggest_size")>]
         SuggestSize: float option
-        [<JsonPropertyName("suggest_text")>]
         SuggestText: string option
-        [<JsonPropertyName("terminate_after")>]
         TerminateAfter: float option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
-        [<JsonPropertyName("track_total_hits")>]
         TrackTotalHits: SearchTypesTrackHits option
-        [<JsonPropertyName("track_scores")>]
         TrackScores: bool option
-        [<JsonPropertyName("typed_keys")>]
         TypedKeys: bool option
-        [<JsonPropertyName("rest_total_hits_as_int")>]
         RestTotalHitsAsInt: bool option
-        [<JsonPropertyName("version")>]
         Version: bool option
-        [<JsonPropertyName("_source")>]
         Source: SearchTypesSourceConfigParam option
-        [<JsonPropertyName("_source_excludes")>]
         SourceExcludes: Fields option
-        [<JsonPropertyName("_source_exclude_vectors")>]
         SourceExcludeVectors: bool option
-        [<JsonPropertyName("_source_includes")>]
         SourceIncludes: Fields option
-        [<JsonPropertyName("seq_no_primary_term")>]
         SeqNoPrimaryTerm: bool option
-        [<JsonPropertyName("q")>]
         Q: string option
-        [<JsonPropertyName("size")>]
         Size: float option
-        [<JsonPropertyName("from")>]
         From: float option
-        [<JsonPropertyName("sort")>]
         Sort: System.Text.Json.JsonElement option
         [<JsonPropertyName("aggregations")>]
         Aggregations: Map<string, AggregationsAggregationContainer> option
@@ -2450,31 +2276,18 @@ module SearchOperations =
     let searchRequest = SearchRequestBuilder()
 
     type SearchMvtRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("field")>]
         Field: Field
-        [<JsonPropertyName("zoom")>]
         Zoom: SearchMvtTypesZoomLevel
-        [<JsonPropertyName("x")>]
         X: SearchMvtTypesCoordinate
-        [<JsonPropertyName("y")>]
         Y: SearchMvtTypesCoordinate
-        [<JsonPropertyName("exact_bounds")>]
         ExactBounds: bool option
-        [<JsonPropertyName("extent")>]
         Extent: float option
-        [<JsonPropertyName("grid_agg")>]
         GridAgg: SearchMvtTypesGridAggregationType option
-        [<JsonPropertyName("grid_precision")>]
         GridPrecision: float option
-        [<JsonPropertyName("grid_type")>]
         GridType: SearchMvtTypesGridType option
-        [<JsonPropertyName("size")>]
         Size: float option
-        [<JsonPropertyName("track_total_hits")>]
         TrackTotalHits: SearchTypesTrackHits option
-        [<JsonPropertyName("with_labels")>]
         WithLabels: bool option
         [<JsonPropertyName("aggs")>]
         Aggs: Map<string, AggregationsAggregationContainer> option
@@ -2678,21 +2491,13 @@ module SearchOperations =
     let searchMvtRequest = SearchMvtRequestBuilder()
 
     type SearchShardsRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("allow_no_indices")>]
         AllowNoIndices: bool option
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("ignore_unavailable")>]
         IgnoreUnavailable: bool option
-        [<JsonPropertyName("local")>]
         Local: bool option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("preference")>]
         Preference: string option
-        [<JsonPropertyName("routing")>]
         Routing: Routing option
     } with
         static member ToRequest(request: SearchShardsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -2771,33 +2576,19 @@ module SearchOperations =
     let searchShardsRequest = SearchShardsRequestBuilder()
 
     type SearchTemplateRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("allow_no_indices")>]
         AllowNoIndices: bool option
-        [<JsonPropertyName("ccs_minimize_roundtrips")>]
         CcsMinimizeRoundtrips: bool option
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("explain")>]
         Explain: bool option
-        [<JsonPropertyName("ignore_throttled")>]
         IgnoreThrottled: bool option
-        [<JsonPropertyName("ignore_unavailable")>]
         IgnoreUnavailable: bool option
-        [<JsonPropertyName("preference")>]
         Preference: string option
-        [<JsonPropertyName("profile")>]
         Profile: bool option
-        [<JsonPropertyName("routing")>]
         Routing: Routing option
-        [<JsonPropertyName("scroll")>]
         Scroll: Duration option
-        [<JsonPropertyName("search_type")>]
         SearchType: SearchType option
-        [<JsonPropertyName("rest_total_hits_as_int")>]
         RestTotalHitsAsInt: bool option
-        [<JsonPropertyName("typed_keys")>]
         TypedKeys: bool option
         [<JsonPropertyName("explain")>]
         Explain2: bool option
@@ -2948,7 +2739,6 @@ module SearchOperations =
     let searchTemplateRequest = SearchTemplateRequestBuilder()
 
     type TermsEnumRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
         [<JsonPropertyName("field")>]
         Field: Field

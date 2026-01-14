@@ -25,6 +25,7 @@
     <Compile Include="Commands\DocumentCommands.fs" />
     <Compile Include="Commands\SearchCommands.fs" />
     <Compile Include="Commands\ClusterCommands.fs" />
+    <Compile Include="Commands\ScriptCommands.fs" />
     <Compile Include="Responses\ErrorDeserialization.fs" />
   </ItemGroup>
   <ItemGroup>

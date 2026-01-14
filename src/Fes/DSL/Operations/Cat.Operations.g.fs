@@ -13,15 +13,10 @@ open Fes.DSL.Models.Types
 module CatOperations =
 
     type CatAliasesRequest = {
-        [<JsonPropertyName("name")>]
         Name: Names
-        [<JsonPropertyName("h")>]
         H: TypesCatAliasesColumns option
-        [<JsonPropertyName("s")>]
         S: Names option
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
     } with
         static member ToRequest(request: CatAliasesRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -82,15 +77,10 @@ module CatOperations =
     let catAliasesRequest = CatAliasesRequestBuilder()
 
     type CatAllocationRequest = {
-        [<JsonPropertyName("node_id")>]
         NodeId: NodeIds
-        [<JsonPropertyName("h")>]
         H: TypesCatAllocationColumns option
-        [<JsonPropertyName("s")>]
         S: Names option
-        [<JsonPropertyName("local")>]
         Local: bool option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
     } with
         static member ToRequest(request: CatAllocationRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -151,15 +141,10 @@ module CatOperations =
     let catAllocationRequest = CatAllocationRequestBuilder()
 
     type CatCircuitBreakerRequest = {
-        [<JsonPropertyName("circuit_breaker_patterns")>]
         CircuitBreakerPatterns: System.Text.Json.JsonElement
-        [<JsonPropertyName("h")>]
         H: TypesCatCircuitBreakerColumns option
-        [<JsonPropertyName("s")>]
         S: Names option
-        [<JsonPropertyName("local")>]
         Local: bool option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
     } with
         static member ToRequest(request: CatCircuitBreakerRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -220,15 +205,10 @@ module CatOperations =
     let catCircuitBreakerRequest = CatCircuitBreakerRequestBuilder()
 
     type CatComponentTemplatesRequest = {
-        [<JsonPropertyName("name")>]
         Name: string
-        [<JsonPropertyName("h")>]
         H: TypesCatComponentColumns option
-        [<JsonPropertyName("s")>]
         S: Names option
-        [<JsonPropertyName("local")>]
         Local: bool option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
     } with
         static member ToRequest(request: CatComponentTemplatesRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -289,11 +269,8 @@ module CatOperations =
     let catComponentTemplatesRequest = CatComponentTemplatesRequestBuilder()
 
     type CatCountRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("h")>]
         H: TypesCatCountColumns option
-        [<JsonPropertyName("s")>]
         S: Names option
     } with
         static member ToRequest(request: CatCountRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -342,13 +319,9 @@ module CatOperations =
     let catCountRequest = CatCountRequestBuilder()
 
     type CatFielddataRequest = {
-        [<JsonPropertyName("fields")>]
         Fields: Fields
-        [<JsonPropertyName("fields")>]
         Fields2: Fields option
-        [<JsonPropertyName("h")>]
         H: TypesCatFieldDataColumns option
-        [<JsonPropertyName("s")>]
         S: Names option
     } with
         static member ToRequest(request: CatFielddataRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -403,11 +376,8 @@ module CatOperations =
     let catFielddataRequest = CatFielddataRequestBuilder()
 
     type CatHealthRequest = {
-        [<JsonPropertyName("ts")>]
         Ts: bool option
-        [<JsonPropertyName("h")>]
         H: TypesCatHealthColumns option
-        [<JsonPropertyName("s")>]
         S: Names option
     } with
         static member ToRequest(request: CatHealthRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -461,21 +431,13 @@ module CatOperations =
     let catHelpRequest = ()
 
     type CatIndicesRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("health")>]
         Health: HealthStatus option
-        [<JsonPropertyName("include_unloaded_segments")>]
         IncludeUnloadedSegments: bool option
-        [<JsonPropertyName("pri")>]
         Pri: bool option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("h")>]
         H: TypesCatIndicesColumns option
-        [<JsonPropertyName("s")>]
         S: Names option
     } with
         static member ToRequest(request: CatIndicesRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -554,13 +516,9 @@ module CatOperations =
     let catIndicesRequest = CatIndicesRequestBuilder()
 
     type CatMasterRequest = {
-        [<JsonPropertyName("h")>]
         H: TypesCatMasterColumns option
-        [<JsonPropertyName("s")>]
         S: Names option
-        [<JsonPropertyName("local")>]
         Local: bool option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
     } with
         static member ToRequest(request: CatMasterRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -616,13 +574,9 @@ module CatOperations =
     let catMasterRequest = CatMasterRequestBuilder()
 
     type CatMlDataFrameAnalyticsRequest = {
-        [<JsonPropertyName("id")>]
         Id: Id
-        [<JsonPropertyName("allow_no_match")>]
         AllowNoMatch: bool option
-        [<JsonPropertyName("h")>]
         H: TypesCatDfaColumns option
-        [<JsonPropertyName("s")>]
         S: TypesCatDfaColumns option
     } with
         static member ToRequest(request: CatMlDataFrameAnalyticsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -677,13 +631,9 @@ module CatOperations =
     let catMlDataFrameAnalyticsRequest = CatMlDataFrameAnalyticsRequestBuilder()
 
     type CatMlDatafeedsRequest = {
-        [<JsonPropertyName("datafeed_id")>]
         DatafeedId: Id
-        [<JsonPropertyName("allow_no_match")>]
         AllowNoMatch: bool option
-        [<JsonPropertyName("h")>]
         H: TypesCatDatafeedColumns option
-        [<JsonPropertyName("s")>]
         S: TypesCatDatafeedColumns option
     } with
         static member ToRequest(request: CatMlDatafeedsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -738,13 +688,9 @@ module CatOperations =
     let catMlDatafeedsRequest = CatMlDatafeedsRequestBuilder()
 
     type CatMlJobsRequest = {
-        [<JsonPropertyName("job_id")>]
         JobId: Id
-        [<JsonPropertyName("allow_no_match")>]
         AllowNoMatch: bool option
-        [<JsonPropertyName("h")>]
         H: TypesCatAnomalyDetectorColumns option
-        [<JsonPropertyName("s")>]
         S: TypesCatAnomalyDetectorColumns option
     } with
         static member ToRequest(request: CatMlJobsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -799,17 +745,11 @@ module CatOperations =
     let catMlJobsRequest = CatMlJobsRequestBuilder()
 
     type CatMlTrainedModelsRequest = {
-        [<JsonPropertyName("model_id")>]
         ModelId: Id
-        [<JsonPropertyName("allow_no_match")>]
         AllowNoMatch: bool option
-        [<JsonPropertyName("h")>]
         H: TypesCatTrainedModelsColumns option
-        [<JsonPropertyName("s")>]
         S: TypesCatTrainedModelsColumns option
-        [<JsonPropertyName("from")>]
         From: float option
-        [<JsonPropertyName("size")>]
         Size: float option
     } with
         static member ToRequest(request: CatMlTrainedModelsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -876,13 +816,9 @@ module CatOperations =
     let catMlTrainedModelsRequest = CatMlTrainedModelsRequestBuilder()
 
     type CatNodeattrsRequest = {
-        [<JsonPropertyName("h")>]
         H: TypesCatNodeattrsColumns option
-        [<JsonPropertyName("s")>]
         S: Names option
-        [<JsonPropertyName("local")>]
         Local: bool option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
     } with
         static member ToRequest(request: CatNodeattrsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -938,15 +874,10 @@ module CatOperations =
     let catNodeattrsRequest = CatNodeattrsRequestBuilder()
 
     type CatNodesRequest = {
-        [<JsonPropertyName("full_id")>]
         FullId: bool option
-        [<JsonPropertyName("include_unloaded_segments")>]
         IncludeUnloadedSegments: bool option
-        [<JsonPropertyName("h")>]
         H: TypesCatNodeColumns option
-        [<JsonPropertyName("s")>]
         S: Names option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
     } with
         static member ToRequest(request: CatNodesRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1008,13 +939,9 @@ module CatOperations =
     let catNodesRequest = CatNodesRequestBuilder()
 
     type CatPendingTasksRequest = {
-        [<JsonPropertyName("h")>]
         H: TypesCatPendingTasksColumns option
-        [<JsonPropertyName("s")>]
         S: Names option
-        [<JsonPropertyName("local")>]
         Local: bool option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
     } with
         static member ToRequest(request: CatPendingTasksRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1070,15 +997,10 @@ module CatOperations =
     let catPendingTasksRequest = CatPendingTasksRequestBuilder()
 
     type CatPluginsRequest = {
-        [<JsonPropertyName("h")>]
         H: TypesCatPluginsColumns option
-        [<JsonPropertyName("s")>]
         S: Names option
-        [<JsonPropertyName("include_bootstrap")>]
         IncludeBootstrap: bool option
-        [<JsonPropertyName("local")>]
         Local: bool option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
     } with
         static member ToRequest(request: CatPluginsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1140,17 +1062,11 @@ module CatOperations =
     let catPluginsRequest = CatPluginsRequestBuilder()
 
     type CatRecoveryRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("active_only")>]
         ActiveOnly: bool option
-        [<JsonPropertyName("detailed")>]
         Detailed: bool option
-        [<JsonPropertyName("index")>]
         Index2: Indices option
-        [<JsonPropertyName("h")>]
         H: TypesCatRecoveryColumns option
-        [<JsonPropertyName("s")>]
         S: Names option
     } with
         static member ToRequest(request: CatRecoveryRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1217,13 +1133,9 @@ module CatOperations =
     let catRecoveryRequest = CatRecoveryRequestBuilder()
 
     type CatRepositoriesRequest = {
-        [<JsonPropertyName("h")>]
         H: Names option
-        [<JsonPropertyName("s")>]
         S: Names option
-        [<JsonPropertyName("local")>]
         Local: bool option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
     } with
         static member ToRequest(request: CatRepositoriesRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1279,25 +1191,15 @@ module CatOperations =
     let catRepositoriesRequest = CatRepositoriesRequestBuilder()
 
     type CatSegmentsRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("h")>]
         H: TypesCatSegmentsColumns option
-        [<JsonPropertyName("s")>]
         S: Names option
-        [<JsonPropertyName("local")>]
         Local: bool option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("allow_no_indices")>]
         AllowNoIndices: bool option
-        [<JsonPropertyName("ignore_throttled")>]
         IgnoreThrottled: bool option
-        [<JsonPropertyName("ignore_unavailable")>]
         IgnoreUnavailable: bool option
-        [<JsonPropertyName("allow_closed")>]
         AllowClosed: bool option
     } with
         static member ToRequest(request: CatSegmentsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1388,13 +1290,9 @@ module CatOperations =
     let catSegmentsRequest = CatSegmentsRequestBuilder()
 
     type CatShardsRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("h")>]
         H: TypesCatShardColumns option
-        [<JsonPropertyName("s")>]
         S: Names option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
     } with
         static member ToRequest(request: CatShardsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1449,15 +1347,10 @@ module CatOperations =
     let catShardsRequest = CatShardsRequestBuilder()
 
     type CatSnapshotsRequest = {
-        [<JsonPropertyName("repository")>]
         Repository: Names
-        [<JsonPropertyName("ignore_unavailable")>]
         IgnoreUnavailable: bool option
-        [<JsonPropertyName("h")>]
         H: TypesCatSnapshotsColumns option
-        [<JsonPropertyName("s")>]
         S: Names option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
     } with
         static member ToRequest(request: CatSnapshotsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1518,21 +1411,13 @@ module CatOperations =
     let catSnapshotsRequest = CatSnapshotsRequestBuilder()
 
     type CatTasksRequest = {
-        [<JsonPropertyName("actions")>]
         Actions: string array option
-        [<JsonPropertyName("detailed")>]
         Detailed: bool option
-        [<JsonPropertyName("nodes")>]
         Nodes: string array option
-        [<JsonPropertyName("parent_task_id")>]
         ParentTaskId: string option
-        [<JsonPropertyName("h")>]
         H: TypesCatTasksColumns option
-        [<JsonPropertyName("s")>]
         S: Names option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
-        [<JsonPropertyName("wait_for_completion")>]
         WaitForCompletion: bool option
     } with
         static member ToRequest(request: CatTasksRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1612,15 +1497,10 @@ module CatOperations =
     let catTasksRequest = CatTasksRequestBuilder()
 
     type CatTemplatesRequest = {
-        [<JsonPropertyName("name")>]
         Name: Name
-        [<JsonPropertyName("h")>]
         H: TypesCatTemplatesColumns option
-        [<JsonPropertyName("s")>]
         S: Names option
-        [<JsonPropertyName("local")>]
         Local: bool option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
     } with
         static member ToRequest(request: CatTemplatesRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1681,15 +1561,10 @@ module CatOperations =
     let catTemplatesRequest = CatTemplatesRequestBuilder()
 
     type CatThreadPoolRequest = {
-        [<JsonPropertyName("thread_pool_patterns")>]
         ThreadPoolPatterns: Names
-        [<JsonPropertyName("h")>]
         H: TypesCatThreadPoolColumns option
-        [<JsonPropertyName("s")>]
         S: Names option
-        [<JsonPropertyName("local")>]
         Local: bool option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
     } with
         static member ToRequest(request: CatThreadPoolRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1750,17 +1625,11 @@ module CatOperations =
     let catThreadPoolRequest = CatThreadPoolRequestBuilder()
 
     type CatTransformsRequest = {
-        [<JsonPropertyName("transform_id")>]
         TransformId: Id
-        [<JsonPropertyName("allow_no_match")>]
         AllowNoMatch: bool option
-        [<JsonPropertyName("from")>]
         From: float option
-        [<JsonPropertyName("h")>]
         H: TypesCatTransformColumns option
-        [<JsonPropertyName("s")>]
         S: TypesCatTransformColumns option
-        [<JsonPropertyName("size")>]
         Size: float option
     } with
         static member ToRequest(request: CatTransformsRequest) : Result<Fes.Http.RequestMsg, exn> =

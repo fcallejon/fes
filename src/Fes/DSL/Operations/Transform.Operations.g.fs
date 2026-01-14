@@ -13,15 +13,10 @@ open Fes.DSL.Models.Types
 module TransformOperations =
 
     type TransformGetTransformRequest = {
-        [<JsonPropertyName("transform_id")>]
         TransformId: Names
-        [<JsonPropertyName("allow_no_match")>]
         AllowNoMatch: bool option
-        [<JsonPropertyName("from")>]
         From: float option
-        [<JsonPropertyName("size")>]
         Size: float option
-        [<JsonPropertyName("exclude_generated")>]
         ExcludeGenerated: bool option
     } with
         static member ToRequest(request: TransformGetTransformRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -82,11 +77,8 @@ module TransformOperations =
     let transformGetTransformRequest = TransformGetTransformRequestBuilder()
 
     type TransformPutTransformRequest = {
-        [<JsonPropertyName("transform_id")>]
         TransformId: Id
-        [<JsonPropertyName("defer_validation")>]
         DeferValidation: bool option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("dest")>]
         Dest: TypesDestination
@@ -208,13 +200,9 @@ module TransformOperations =
     type TransformPutTransformResponse = AcknowledgedResponseBase
 
     type TransformDeleteTransformRequest = {
-        [<JsonPropertyName("transform_id")>]
         TransformId: Id
-        [<JsonPropertyName("force")>]
         Force: bool option
-        [<JsonPropertyName("delete_dest_index")>]
         DeleteDestIndex: bool option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: TransformDeleteTransformRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -277,15 +265,10 @@ module TransformOperations =
     type TransformGetNodeStatsResponse = GetNodeStatsTransformNodeFullStats
 
     type TransformGetTransformStatsRequest = {
-        [<JsonPropertyName("transform_id")>]
         TransformId: Names
-        [<JsonPropertyName("allow_no_match")>]
         AllowNoMatch: bool option
-        [<JsonPropertyName("from")>]
         From: float option
-        [<JsonPropertyName("size")>]
         Size: float option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: TransformGetTransformStatsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -353,9 +336,7 @@ module TransformOperations =
     }
 
     type TransformPreviewTransformRequest = {
-        [<JsonPropertyName("transform_id")>]
         TransformId: Id
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("dest")>]
         Dest: TypesDestination option
@@ -462,11 +443,8 @@ module TransformOperations =
     let transformPreviewTransformRequest = TransformPreviewTransformRequestBuilder()
 
     type TransformResetTransformRequest = {
-        [<JsonPropertyName("transform_id")>]
         TransformId: Id
-        [<JsonPropertyName("force")>]
         Force: bool option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: TransformResetTransformRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -517,9 +495,7 @@ module TransformOperations =
     type TransformResetTransformResponse = AcknowledgedResponseBase
 
     type TransformScheduleNowTransformRequest = {
-        [<JsonPropertyName("transform_id")>]
         TransformId: Id
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: TransformScheduleNowTransformRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -564,9 +540,7 @@ module TransformOperations =
     type TransformScheduleNowTransformResponse = AcknowledgedResponseBase
 
     type TransformSetUpgradeModeRequest = {
-        [<JsonPropertyName("enabled")>]
         Enabled: bool option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: TransformSetUpgradeModeRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -612,11 +586,8 @@ module TransformOperations =
     type TransformSetUpgradeModeResponse = AcknowledgedResponseBase
 
     type TransformStartTransformRequest = {
-        [<JsonPropertyName("transform_id")>]
         TransformId: Id
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
-        [<JsonPropertyName("from")>]
         From: string option
     } with
         static member ToRequest(request: TransformStartTransformRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -667,17 +638,11 @@ module TransformOperations =
     type TransformStartTransformResponse = AcknowledgedResponseBase
 
     type TransformStopTransformRequest = {
-        [<JsonPropertyName("transform_id")>]
         TransformId: Name
-        [<JsonPropertyName("allow_no_match")>]
         AllowNoMatch: bool option
-        [<JsonPropertyName("force")>]
         Force: bool option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
-        [<JsonPropertyName("wait_for_checkpoint")>]
         WaitForCheckpoint: bool option
-        [<JsonPropertyName("wait_for_completion")>]
         WaitForCompletion: bool option
     } with
         static member ToRequest(request: TransformStopTransformRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -746,11 +711,8 @@ module TransformOperations =
     type TransformStopTransformResponse = AcknowledgedResponseBase
 
     type TransformUpdateTransformRequest = {
-        [<JsonPropertyName("transform_id")>]
         TransformId: Id
-        [<JsonPropertyName("defer_validation")>]
         DeferValidation: bool option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("dest")>]
         Dest: TypesDestination option
@@ -887,9 +849,7 @@ module TransformOperations =
     }
 
     type TransformUpgradeTransformsRequest = {
-        [<JsonPropertyName("dry_run")>]
         DryRun: bool option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: TransformUpgradeTransformsRequest) : Result<Fes.Http.RequestMsg, exn> =

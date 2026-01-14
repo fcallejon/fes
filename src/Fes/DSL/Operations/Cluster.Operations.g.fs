@@ -13,19 +13,12 @@ open Fes.DSL.Models.Types
 module ClusterOperations =
 
     type ClusterAllocationExplainRequest = {
-        [<JsonPropertyName("index")>]
         Index: IndexName option
-        [<JsonPropertyName("shard")>]
         Shard: float option
-        [<JsonPropertyName("primary")>]
         Primary: bool option
-        [<JsonPropertyName("current_node")>]
         CurrentNode: NodeId option
-        [<JsonPropertyName("include_disk_info")>]
         IncludeDiskInfo: bool option
-        [<JsonPropertyName("include_yes_decisions")>]
         IncludeYesDecisions: bool option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
         [<JsonPropertyName("index")>]
         Index2: IndexName option
@@ -128,13 +121,9 @@ module ClusterOperations =
     let clusterAllocationExplainRequest = ClusterAllocationExplainRequestBuilder()
 
     type ClusterPostVotingConfigExclusionsRequest = {
-        [<JsonPropertyName("node_names")>]
         NodeNames: Names option
-        [<JsonPropertyName("node_ids")>]
         NodeIds: Ids option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: ClusterPostVotingConfigExclusionsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -190,9 +179,7 @@ module ClusterOperations =
     let clusterPostVotingConfigExclusionsRequest = ClusterPostVotingConfigExclusionsRequestBuilder()
 
     type ClusterDeleteVotingConfigExclusionsRequest = {
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("wait_for_removal")>]
         WaitForRemoval: bool option
     } with
         static member ToRequest(request: ClusterDeleteVotingConfigExclusionsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -236,13 +223,9 @@ module ClusterOperations =
     let clusterDeleteVotingConfigExclusionsRequest = ClusterDeleteVotingConfigExclusionsRequestBuilder()
 
     type ClusterGetSettingsRequest = {
-        [<JsonPropertyName("flat_settings")>]
         FlatSettings: bool option
-        [<JsonPropertyName("include_defaults")>]
         IncludeDefaults: bool option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: ClusterGetSettingsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -307,11 +290,8 @@ module ClusterOperations =
     }
 
     type ClusterPutSettingsRequest = {
-        [<JsonPropertyName("flat_settings")>]
         FlatSettings: bool option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("persistent")>]
         Persistent: Map<string, obj> option
@@ -385,29 +365,17 @@ module ClusterOperations =
     }
 
     type ClusterHealthRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("level")>]
         Level: Level option
-        [<JsonPropertyName("local")>]
         Local: bool option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
-        [<JsonPropertyName("wait_for_active_shards")>]
         WaitForActiveShards: WaitForActiveShards option
-        [<JsonPropertyName("wait_for_events")>]
         WaitForEvents: WaitForEvents option
-        [<JsonPropertyName("wait_for_nodes")>]
         WaitForNodes: HealthWaitForNodes option
-        [<JsonPropertyName("wait_for_no_initializing_shards")>]
         WaitForNoInitializingShards: bool option
-        [<JsonPropertyName("wait_for_no_relocating_shards")>]
         WaitForNoRelocatingShards: bool option
-        [<JsonPropertyName("wait_for_status")>]
         WaitForStatus: HealthStatus option
     } with
         static member ToRequest(request: ClusterHealthRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -510,7 +478,6 @@ module ClusterOperations =
     let clusterHealthRequest = ClusterHealthRequestBuilder()
 
     type ClusterInfoRequest = {
-        [<JsonPropertyName("target")>]
         Target: ClusterInfoTargets
     } with
         static member ToRequest(request: ClusterInfoRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -554,9 +521,7 @@ module ClusterOperations =
     }
 
     type ClusterPendingTasksRequest = {
-        [<JsonPropertyName("local")>]
         Local: bool option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
     } with
         static member ToRequest(request: ClusterPendingTasksRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -609,17 +574,11 @@ module ClusterOperations =
     let clusterRemoteInfoRequest = ()
 
     type ClusterRerouteRequest = {
-        [<JsonPropertyName("dry_run")>]
         DryRun: bool option
-        [<JsonPropertyName("explain")>]
         Explain: bool option
-        [<JsonPropertyName("metric")>]
         Metric: System.Text.Json.JsonElement option
-        [<JsonPropertyName("retry_failed")>]
         RetryFailed: bool option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("commands")>]
         Commands: RerouteCommand array option
@@ -704,25 +663,15 @@ module ClusterOperations =
     }
 
     type ClusterStateRequest = {
-        [<JsonPropertyName("metric")>]
         Metric: StateClusterStateMetrics
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("allow_no_indices")>]
         AllowNoIndices: bool option
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("flat_settings")>]
         FlatSettings: bool option
-        [<JsonPropertyName("ignore_unavailable")>]
         IgnoreUnavailable: bool option
-        [<JsonPropertyName("local")>]
         Local: bool option
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("wait_for_metadata_version")>]
         WaitForMetadataVersion: VersionNumber option
-        [<JsonPropertyName("wait_for_timeout")>]
         WaitForTimeout: Duration option
     } with
         static member ToRequest(request: ClusterStateRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -812,11 +761,8 @@ module ClusterOperations =
     let clusterStateRequest = ClusterStateRequestBuilder()
 
     type ClusterStatsRequest = {
-        [<JsonPropertyName("node_id")>]
         NodeId: NodeIds
-        [<JsonPropertyName("include_remotes")>]
         IncludeRemotes: bool option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: ClusterStatsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -869,9 +815,7 @@ module ClusterOperations =
     let pingRequest = ()
 
     type NodesClearRepositoriesMeteringArchiveRequest = {
-        [<JsonPropertyName("node_id")>]
         NodeId: NodeIds
-        [<JsonPropertyName("max_archive_version")>]
         MaxArchiveVersion: float
     } with
         static member ToRequest(request: NodesClearRepositoriesMeteringArchiveRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -909,7 +853,6 @@ module ClusterOperations =
     type NodesClearRepositoriesMeteringArchiveResponse = ClearRepositoriesMeteringArchiveResponseBase
 
     type NodesGetRepositoriesMeteringInfoRequest = {
-        [<JsonPropertyName("node_id")>]
         NodeId: NodeIds
     } with
         static member ToRequest(request: NodesGetRepositoriesMeteringInfoRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -942,21 +885,13 @@ module ClusterOperations =
     type NodesGetRepositoriesMeteringInfoResponse = GetRepositoriesMeteringInfoResponseBase
 
     type NodesHotThreadsRequest = {
-        [<JsonPropertyName("node_id")>]
         NodeId: NodeIds
-        [<JsonPropertyName("ignore_idle_threads")>]
         IgnoreIdleThreads: bool option
-        [<JsonPropertyName("interval")>]
         Interval: Duration option
-        [<JsonPropertyName("snapshots")>]
         Snapshots: float option
-        [<JsonPropertyName("threads")>]
         Threads: float option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
-        [<JsonPropertyName("type")>]
         Type: ThreadType option
-        [<JsonPropertyName("sort")>]
         Sort: ThreadType option
     } with
         static member ToRequest(request: NodesHotThreadsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1035,13 +970,9 @@ module ClusterOperations =
     let nodesHotThreadsRequest = NodesHotThreadsRequestBuilder()
 
     type NodesInfoRequest = {
-        [<JsonPropertyName("node_id")>]
         NodeId: NodeIds
-        [<JsonPropertyName("metric")>]
         Metric: InfoNodesInfoMetrics
-        [<JsonPropertyName("flat_settings")>]
         FlatSettings: bool option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: NodesInfoRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1095,9 +1026,7 @@ module ClusterOperations =
     let nodesInfoRequest = NodesInfoRequestBuilder()
 
     type NodesReloadSecureSettingsRequest = {
-        [<JsonPropertyName("node_id")>]
         NodeId: NodeIds
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("secure_settings_password")>]
         SecureSettingsPassword: Password option
@@ -1148,29 +1077,17 @@ module ClusterOperations =
     let nodesReloadSecureSettingsRequest = NodesReloadSecureSettingsRequestBuilder()
 
     type NodesStatsRequest = {
-        [<JsonPropertyName("node_id")>]
         NodeId: NodeIds
-        [<JsonPropertyName("metric")>]
         Metric: StatsNodeStatsMetrics
-        [<JsonPropertyName("index_metric")>]
         IndexMetric: CommonStatsFlags
-        [<JsonPropertyName("completion_fields")>]
         CompletionFields: Fields option
-        [<JsonPropertyName("fielddata_fields")>]
         FielddataFields: Fields option
-        [<JsonPropertyName("fields")>]
         Fields: Fields option
-        [<JsonPropertyName("groups")>]
         Groups: bool option
-        [<JsonPropertyName("include_segment_file_sizes")>]
         IncludeSegmentFileSizes: bool option
-        [<JsonPropertyName("level")>]
         Level: NodeStatsLevel option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
-        [<JsonPropertyName("types")>]
         Types: string array option
-        [<JsonPropertyName("include_unloaded_segments")>]
         IncludeUnloadedSegments: bool option
     } with
         static member ToRequest(request: NodesStatsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1271,11 +1188,8 @@ module ClusterOperations =
     let nodesStatsRequest = NodesStatsRequestBuilder()
 
     type NodesUsageRequest = {
-        [<JsonPropertyName("node_id")>]
         NodeId: NodeIds
-        [<JsonPropertyName("metric")>]
         Metric: UsageNodesUsageMetrics
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: NodesUsageRequest) : Result<Fes.Http.RequestMsg, exn> =

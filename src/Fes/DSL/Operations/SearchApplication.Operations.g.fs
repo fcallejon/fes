@@ -13,7 +13,6 @@ open Fes.DSL.Models.Types
 module SearchApplicationOperations =
 
     type SearchApplicationGetRequest = {
-        [<JsonPropertyName("name")>]
         Name: Name
     } with
         static member ToRequest(request: SearchApplicationGetRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -46,9 +45,7 @@ module SearchApplicationOperations =
     type SearchApplicationGetResponse = TypesSearchApplication
 
     type SearchApplicationPutRequest = {
-        [<JsonPropertyName("name")>]
         Name: Name
-        [<JsonPropertyName("create")>]
         Create: bool option
         [<JsonPropertyName("body")>]
         Body: TypesSearchApplicationParameters
@@ -104,7 +101,6 @@ module SearchApplicationOperations =
     }
 
     type SearchApplicationDeleteRequest = {
-        [<JsonPropertyName("name")>]
         Name: Name
     } with
         static member ToRequest(request: SearchApplicationDeleteRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -137,11 +133,8 @@ module SearchApplicationOperations =
     type SearchApplicationDeleteResponse = AcknowledgedResponseBase
 
     type SearchApplicationListRequest = {
-        [<JsonPropertyName("q")>]
         Q: string option
-        [<JsonPropertyName("from")>]
         From: float option
-        [<JsonPropertyName("size")>]
         Size: float option
     } with
         static member ToRequest(request: SearchApplicationListRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -198,7 +191,6 @@ module SearchApplicationOperations =
     }
 
     type SearchApplicationRenderQueryRequest = {
-        [<JsonPropertyName("name")>]
         Name: Name
         [<JsonPropertyName("params")>]
         Params: Map<string, obj> option
@@ -237,9 +229,7 @@ module SearchApplicationOperations =
     let searchApplicationRenderQueryRequest = SearchApplicationRenderQueryRequestBuilder()
 
     type SearchApplicationSearchRequest = {
-        [<JsonPropertyName("name")>]
         Name: Name
-        [<JsonPropertyName("typed_keys")>]
         TypedKeys: bool option
         [<JsonPropertyName("params")>]
         Params: Map<string, obj> option

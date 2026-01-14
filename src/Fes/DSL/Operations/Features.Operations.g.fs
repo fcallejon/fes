@@ -13,7 +13,6 @@ open Fes.DSL.Models.Types
 module FeaturesOperations =
 
     type FeaturesGetFeaturesRequest = {
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
     } with
         static member ToRequest(request: FeaturesGetFeaturesRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -56,7 +55,6 @@ module FeaturesOperations =
     }
 
     type FeaturesResetFeaturesRequest = {
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
     } with
         static member ToRequest(request: FeaturesResetFeaturesRequest) : Result<Fes.Http.RequestMsg, exn> =

@@ -13,9 +13,7 @@ open Fes.DSL.Models.Types
 module InferenceOperations =
 
     type InferenceChatCompletionUnifiedRequest = {
-        [<JsonPropertyName("inference_id")>]
         InferenceId: Id
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("body")>]
         Body: TypesRequestChatCompletion
@@ -68,9 +66,7 @@ module InferenceOperations =
     type InferenceChatCompletionUnifiedResponse = StreamResult
 
     type InferenceCompletionRequest = {
-        [<JsonPropertyName("inference_id")>]
         InferenceId: Id
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("input")>]
         Input: System.Text.Json.JsonElement
@@ -130,9 +126,7 @@ module InferenceOperations =
     type InferenceCompletionResponse = TypesCompletionInferenceResult
 
     type InferenceGetRequest = {
-        [<JsonPropertyName("task_type")>]
         TaskType: TypesTaskType
-        [<JsonPropertyName("inference_id")>]
         InferenceId: Id
     } with
         static member ToRequest(request: InferenceGetRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -168,11 +162,8 @@ module InferenceOperations =
     let inferenceGetRequest = InferenceGetRequestBuilder()
 
     type InferencePutRequest = {
-        [<JsonPropertyName("task_type")>]
         TaskType: TypesTaskType
-        [<JsonPropertyName("inference_id")>]
         InferenceId: Id
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("body")>]
         Body: TypesInferenceEndpoint
@@ -228,11 +219,8 @@ module InferenceOperations =
     let inferencePutRequest = InferencePutRequestBuilder()
 
     type InferenceInferenceRequest = {
-        [<JsonPropertyName("task_type")>]
         TaskType: TypesTaskType
-        [<JsonPropertyName("inference_id")>]
         InferenceId: Id
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("query")>]
         Query: string option
@@ -309,13 +297,9 @@ module InferenceOperations =
     let inferenceInferenceRequest = InferenceInferenceRequestBuilder()
 
     type InferenceDeleteRequest = {
-        [<JsonPropertyName("task_type")>]
         TaskType: TypesTaskType
-        [<JsonPropertyName("inference_id")>]
         InferenceId: Id
-        [<JsonPropertyName("dry_run")>]
         DryRun: bool option
-        [<JsonPropertyName("force")>]
         Force: bool option
     } with
         static member ToRequest(request: InferenceDeleteRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -369,11 +353,8 @@ module InferenceOperations =
     let inferenceDeleteRequest = InferenceDeleteRequestBuilder()
 
     type InferencePutAi21Request = {
-        [<JsonPropertyName("task_type")>]
         TaskType: TypesAi21TaskType
-        [<JsonPropertyName("ai21_inference_id")>]
         Ai21InferenceId: Id
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("service")>]
         Service: TypesAi21ServiceType
@@ -438,11 +419,8 @@ module InferenceOperations =
     type InferencePutAi21Response = TypesInferenceEndpointInfoAi21
 
     type InferencePutAlibabacloudRequest = {
-        [<JsonPropertyName("task_type")>]
         TaskType: TypesAlibabaCloudTaskType
-        [<JsonPropertyName("alibabacloud_inference_id")>]
         AlibabacloudInferenceId: Id
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("chunking_settings")>]
         ChunkingSettings: TypesInferenceChunkingSettings option
@@ -521,11 +499,8 @@ module InferenceOperations =
     type InferencePutAlibabacloudResponse = TypesInferenceEndpointInfoAlibabaCloudAI
 
     type InferencePutAmazonbedrockRequest = {
-        [<JsonPropertyName("task_type")>]
         TaskType: TypesAmazonBedrockTaskType
-        [<JsonPropertyName("amazonbedrock_inference_id")>]
         AmazonbedrockInferenceId: Id
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("chunking_settings")>]
         ChunkingSettings: TypesInferenceChunkingSettings option
@@ -604,11 +579,8 @@ module InferenceOperations =
     type InferencePutAmazonbedrockResponse = TypesInferenceEndpointInfoAmazonBedrock
 
     type InferencePutAmazonsagemakerRequest = {
-        [<JsonPropertyName("task_type")>]
         TaskType: TypesTaskTypeAmazonSageMaker
-        [<JsonPropertyName("amazonsagemaker_inference_id")>]
         AmazonsagemakerInferenceId: Id
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("chunking_settings")>]
         ChunkingSettings: TypesInferenceChunkingSettings option
@@ -687,11 +659,8 @@ module InferenceOperations =
     type InferencePutAmazonsagemakerResponse = TypesInferenceEndpointInfoAmazonSageMaker
 
     type InferencePutAnthropicRequest = {
-        [<JsonPropertyName("task_type")>]
         TaskType: TypesAnthropicTaskType
-        [<JsonPropertyName("anthropic_inference_id")>]
         AnthropicInferenceId: Id
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("service")>]
         Service: TypesAnthropicServiceType
@@ -763,11 +732,8 @@ module InferenceOperations =
     type InferencePutAnthropicResponse = TypesInferenceEndpointInfoAnthropic
 
     type InferencePutAzureaistudioRequest = {
-        [<JsonPropertyName("task_type")>]
         TaskType: TypesAzureAiStudioTaskType
-        [<JsonPropertyName("azureaistudio_inference_id")>]
         AzureaistudioInferenceId: Id
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("chunking_settings")>]
         ChunkingSettings: TypesInferenceChunkingSettings option
@@ -846,11 +812,8 @@ module InferenceOperations =
     type InferencePutAzureaistudioResponse = TypesInferenceEndpointInfoAzureAIStudio
 
     type InferencePutAzureopenaiRequest = {
-        [<JsonPropertyName("task_type")>]
         TaskType: TypesAzureOpenAITaskType
-        [<JsonPropertyName("azureopenai_inference_id")>]
         AzureopenaiInferenceId: Id
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("chunking_settings")>]
         ChunkingSettings: TypesInferenceChunkingSettings option
@@ -929,11 +892,8 @@ module InferenceOperations =
     type InferencePutAzureopenaiResponse = TypesInferenceEndpointInfoAzureOpenAI
 
     type InferencePutCohereRequest = {
-        [<JsonPropertyName("task_type")>]
         TaskType: TypesCohereTaskType
-        [<JsonPropertyName("cohere_inference_id")>]
         CohereInferenceId: Id
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("chunking_settings")>]
         ChunkingSettings: TypesInferenceChunkingSettings option
@@ -1012,11 +972,8 @@ module InferenceOperations =
     type InferencePutCohereResponse = TypesInferenceEndpointInfoCohere
 
     type InferencePutContextualaiRequest = {
-        [<JsonPropertyName("task_type")>]
         TaskType: TypesTaskTypeContextualAI
-        [<JsonPropertyName("contextualai_inference_id")>]
         ContextualaiInferenceId: Id
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("service")>]
         Service: TypesContextualAIServiceType
@@ -1088,9 +1045,7 @@ module InferenceOperations =
     type InferencePutContextualaiResponse = TypesInferenceEndpointInfoContextualAi
 
     type InferencePutCustomRequest = {
-        [<JsonPropertyName("task_type")>]
         TaskType: TypesCustomTaskType
-        [<JsonPropertyName("custom_inference_id")>]
         CustomInferenceId: Id
         [<JsonPropertyName("chunking_settings")>]
         ChunkingSettings: TypesInferenceChunkingSettings option
@@ -1157,11 +1112,8 @@ module InferenceOperations =
     type InferencePutCustomResponse = TypesInferenceEndpointInfoCustom
 
     type InferencePutDeepseekRequest = {
-        [<JsonPropertyName("task_type")>]
         TaskType: TypesTaskTypeDeepSeek
-        [<JsonPropertyName("deepseek_inference_id")>]
         DeepseekInferenceId: Id
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("service")>]
         Service: TypesDeepSeekServiceType
@@ -1226,11 +1178,8 @@ module InferenceOperations =
     type InferencePutDeepseekResponse = TypesInferenceEndpointInfoDeepSeek
 
     type InferencePutElasticsearchRequest = {
-        [<JsonPropertyName("task_type")>]
         TaskType: TypesElasticsearchTaskType
-        [<JsonPropertyName("elasticsearch_inference_id")>]
         ElasticsearchInferenceId: Id
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("chunking_settings")>]
         ChunkingSettings: TypesInferenceChunkingSettings option
@@ -1309,11 +1258,8 @@ module InferenceOperations =
     type InferencePutElasticsearchResponse = TypesInferenceEndpointInfoElasticsearch
 
     type InferencePutElserRequest = {
-        [<JsonPropertyName("task_type")>]
         TaskType: TypesElserTaskType
-        [<JsonPropertyName("elser_inference_id")>]
         ElserInferenceId: Id
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("chunking_settings")>]
         ChunkingSettings: TypesInferenceChunkingSettings option
@@ -1385,11 +1331,8 @@ module InferenceOperations =
     type InferencePutElserResponse = TypesInferenceEndpointInfoELSER
 
     type InferencePutGoogleaistudioRequest = {
-        [<JsonPropertyName("task_type")>]
         TaskType: TypesGoogleAiStudioTaskType
-        [<JsonPropertyName("googleaistudio_inference_id")>]
         GoogleaistudioInferenceId: Id
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("chunking_settings")>]
         ChunkingSettings: TypesInferenceChunkingSettings option
@@ -1461,11 +1404,8 @@ module InferenceOperations =
     type InferencePutGoogleaistudioResponse = TypesInferenceEndpointInfoGoogleAIStudio
 
     type InferencePutGooglevertexaiRequest = {
-        [<JsonPropertyName("task_type")>]
         TaskType: TypesGoogleVertexAITaskType
-        [<JsonPropertyName("googlevertexai_inference_id")>]
         GooglevertexaiInferenceId: Id
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("chunking_settings")>]
         ChunkingSettings: TypesInferenceChunkingSettings option
@@ -1544,11 +1484,8 @@ module InferenceOperations =
     type InferencePutGooglevertexaiResponse = TypesInferenceEndpointInfoGoogleVertexAI
 
     type InferencePutGroqRequest = {
-        [<JsonPropertyName("task_type")>]
         TaskType: TypesGroqTaskType
-        [<JsonPropertyName("groq_inference_id")>]
         GroqInferenceId: Id
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("service")>]
         Service: TypesGroqServiceType
@@ -1613,11 +1550,8 @@ module InferenceOperations =
     type InferencePutGroqResponse = TypesInferenceEndpointInfoGroq
 
     type InferencePutHuggingFaceRequest = {
-        [<JsonPropertyName("task_type")>]
         TaskType: TypesHuggingFaceTaskType
-        [<JsonPropertyName("huggingface_inference_id")>]
         HuggingfaceInferenceId: Id
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("chunking_settings")>]
         ChunkingSettings: TypesInferenceChunkingSettings option
@@ -1696,11 +1630,8 @@ module InferenceOperations =
     type InferencePutHuggingFaceResponse = TypesInferenceEndpointInfoHuggingFace
 
     type InferencePutJinaaiRequest = {
-        [<JsonPropertyName("task_type")>]
         TaskType: TypesJinaAITaskType
-        [<JsonPropertyName("jinaai_inference_id")>]
         JinaaiInferenceId: Id
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("chunking_settings")>]
         ChunkingSettings: TypesInferenceChunkingSettings option
@@ -1779,11 +1710,8 @@ module InferenceOperations =
     type InferencePutJinaaiResponse = TypesInferenceEndpointInfoJinaAi
 
     type InferencePutLlamaRequest = {
-        [<JsonPropertyName("task_type")>]
         TaskType: TypesLlamaTaskType
-        [<JsonPropertyName("llama_inference_id")>]
         LlamaInferenceId: Id
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("chunking_settings")>]
         ChunkingSettings: TypesInferenceChunkingSettings option
@@ -1855,11 +1783,8 @@ module InferenceOperations =
     type InferencePutLlamaResponse = TypesInferenceEndpointInfoLlama
 
     type InferencePutMistralRequest = {
-        [<JsonPropertyName("task_type")>]
         TaskType: TypesMistralTaskType
-        [<JsonPropertyName("mistral_inference_id")>]
         MistralInferenceId: Id
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("chunking_settings")>]
         ChunkingSettings: TypesInferenceChunkingSettings option
@@ -1931,11 +1856,8 @@ module InferenceOperations =
     type InferencePutMistralResponse = TypesInferenceEndpointInfoMistral
 
     type InferencePutNvidiaRequest = {
-        [<JsonPropertyName("task_type")>]
         TaskType: TypesNvidiaTaskType
-        [<JsonPropertyName("nvidia_inference_id")>]
         NvidiaInferenceId: Id
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("chunking_settings")>]
         ChunkingSettings: TypesInferenceChunkingSettings option
@@ -2014,11 +1936,8 @@ module InferenceOperations =
     type InferencePutNvidiaResponse = TypesInferenceEndpointInfoNvidia
 
     type InferencePutOpenaiRequest = {
-        [<JsonPropertyName("task_type")>]
         TaskType: TypesOpenAITaskType
-        [<JsonPropertyName("openai_inference_id")>]
         OpenaiInferenceId: Id
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("chunking_settings")>]
         ChunkingSettings: TypesInferenceChunkingSettings option
@@ -2097,11 +2016,8 @@ module InferenceOperations =
     type InferencePutOpenaiResponse = TypesInferenceEndpointInfoOpenAI
 
     type InferencePutOpenshiftAiRequest = {
-        [<JsonPropertyName("task_type")>]
         TaskType: TypesOpenShiftAiTaskType
-        [<JsonPropertyName("openshiftai_inference_id")>]
         OpenshiftaiInferenceId: Id
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("chunking_settings")>]
         ChunkingSettings: TypesInferenceChunkingSettings option
@@ -2180,11 +2096,8 @@ module InferenceOperations =
     type InferencePutOpenshiftAiResponse = TypesInferenceEndpointInfoOpenShiftAi
 
     type InferencePutVoyageaiRequest = {
-        [<JsonPropertyName("task_type")>]
         TaskType: TypesVoyageAITaskType
-        [<JsonPropertyName("voyageai_inference_id")>]
         VoyageaiInferenceId: Id
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("chunking_settings")>]
         ChunkingSettings: TypesInferenceChunkingSettings option
@@ -2263,11 +2176,8 @@ module InferenceOperations =
     type InferencePutVoyageaiResponse = TypesInferenceEndpointInfoVoyageAI
 
     type InferencePutWatsonxRequest = {
-        [<JsonPropertyName("task_type")>]
         TaskType: TypesWatsonxTaskType
-        [<JsonPropertyName("watsonx_inference_id")>]
         WatsonxInferenceId: Id
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("chunking_settings")>]
         ChunkingSettings: TypesInferenceChunkingSettings option
@@ -2339,9 +2249,7 @@ module InferenceOperations =
     type InferencePutWatsonxResponse = TypesInferenceEndpointInfoWatsonx
 
     type InferenceRerankRequest = {
-        [<JsonPropertyName("inference_id")>]
         InferenceId: Id
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("query")>]
         Query: string
@@ -2422,9 +2330,7 @@ module InferenceOperations =
     type InferenceRerankResponse = TypesRerankedInferenceResult
 
     type InferenceSparseEmbeddingRequest = {
-        [<JsonPropertyName("inference_id")>]
         InferenceId: Id
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("input")>]
         Input: System.Text.Json.JsonElement
@@ -2484,9 +2390,7 @@ module InferenceOperations =
     type InferenceSparseEmbeddingResponse = TypesSparseEmbeddingInferenceResult
 
     type InferenceStreamCompletionRequest = {
-        [<JsonPropertyName("inference_id")>]
         InferenceId: Id
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("input")>]
         Input: System.Text.Json.JsonElement
@@ -2546,9 +2450,7 @@ module InferenceOperations =
     type InferenceStreamCompletionResponse = StreamResult
 
     type InferenceTextEmbeddingRequest = {
-        [<JsonPropertyName("inference_id")>]
         InferenceId: Id
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("input")>]
         Input: System.Text.Json.JsonElement
@@ -2615,9 +2517,7 @@ module InferenceOperations =
     type InferenceTextEmbeddingResponse = TypesTextEmbeddingInferenceResult
 
     type InferenceUpdateRequest = {
-        [<JsonPropertyName("task_type")>]
         TaskType: TypesTaskType
-        [<JsonPropertyName("inference_id")>]
         InferenceId: Id
         [<JsonPropertyName("body")>]
         Body: TypesInferenceEndpoint

@@ -13,11 +13,8 @@ open Fes.DSL.Models.Types
 module EqlOperations =
 
     type EqlGetRequest = {
-        [<JsonPropertyName("id")>]
         Id: Id
-        [<JsonPropertyName("keep_alive")>]
         KeepAlive: Duration option
-        [<JsonPropertyName("wait_for_completion_timeout")>]
         WaitForCompletionTimeout: Duration option
     } with
         static member ToRequest(request: EqlGetRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -68,7 +65,6 @@ module EqlOperations =
     type EqlGetResponse = TypesEqlSearchResponseBase
 
     type EqlDeleteRequest = {
-        [<JsonPropertyName("id")>]
         Id: Id
     } with
         static member ToRequest(request: EqlDeleteRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -101,7 +97,6 @@ module EqlOperations =
     type EqlDeleteResponse = AcknowledgedResponseBase
 
     type EqlGetStatusRequest = {
-        [<JsonPropertyName("id")>]
         Id: Id
     } with
         static member ToRequest(request: EqlGetStatusRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -147,25 +142,15 @@ module EqlOperations =
     }
 
     type EqlSearchRequest = {
-        [<JsonPropertyName("index")>]
         Index: Indices
-        [<JsonPropertyName("allow_no_indices")>]
         AllowNoIndices: bool option
-        [<JsonPropertyName("allow_partial_search_results")>]
         AllowPartialSearchResults: bool option
-        [<JsonPropertyName("allow_partial_sequence_results")>]
         AllowPartialSequenceResults: bool option
-        [<JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: ExpandWildcards option
-        [<JsonPropertyName("ccs_minimize_roundtrips")>]
         CcsMinimizeRoundtrips: bool option
-        [<JsonPropertyName("ignore_unavailable")>]
         IgnoreUnavailable: bool option
-        [<JsonPropertyName("keep_alive")>]
         KeepAlive: Duration option
-        [<JsonPropertyName("keep_on_completion")>]
         KeepOnCompletion: bool option
-        [<JsonPropertyName("wait_for_completion_timeout")>]
         WaitForCompletionTimeout: Duration option
         [<JsonPropertyName("query")>]
         Query: string

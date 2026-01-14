@@ -13,13 +13,9 @@ open Fes.DSL.Models.Types
 module HealthReportOperations =
 
     type HealthReportRequest = {
-        [<JsonPropertyName("feature")>]
         Feature: System.Text.Json.JsonElement
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
-        [<JsonPropertyName("verbose")>]
         Verbose: bool option
-        [<JsonPropertyName("size")>]
         Size: float option
     } with
         static member ToRequest(request: HealthReportRequest) : Result<Fes.Http.RequestMsg, exn> =

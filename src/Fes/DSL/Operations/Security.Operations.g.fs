@@ -97,7 +97,6 @@ module SecurityOperations =
     }
 
     type SecurityBulkPutRoleRequest = {
-        [<JsonPropertyName("refresh")>]
         Refresh: Refresh option
         [<JsonPropertyName("roles")>]
         Roles: Map<string, TypesRoleDescriptor>
@@ -154,7 +153,6 @@ module SecurityOperations =
     }
 
     type SecurityBulkDeleteRoleRequest = {
-        [<JsonPropertyName("refresh")>]
         Refresh: Refresh option
         [<JsonPropertyName("names")>]
         Names: string array
@@ -271,9 +269,7 @@ module SecurityOperations =
     }
 
     type SecurityChangePasswordRequest = {
-        [<JsonPropertyName("username")>]
         Username: Username
-        [<JsonPropertyName("refresh")>]
         Refresh: Refresh option
         [<JsonPropertyName("password")>]
         Password: Password option
@@ -331,7 +327,6 @@ module SecurityOperations =
     let securityChangePasswordRequest = SecurityChangePasswordRequestBuilder()
 
     type SecurityClearApiKeyCacheRequest = {
-        [<JsonPropertyName("ids")>]
         Ids: Ids
     } with
         static member ToRequest(request: SecurityClearApiKeyCacheRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -371,7 +366,6 @@ module SecurityOperations =
     }
 
     type SecurityClearCachedPrivilegesRequest = {
-        [<JsonPropertyName("application")>]
         Application: Names
     } with
         static member ToRequest(request: SecurityClearCachedPrivilegesRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -411,9 +405,7 @@ module SecurityOperations =
     }
 
     type SecurityClearCachedRealmsRequest = {
-        [<JsonPropertyName("realms")>]
         Realms: Names
-        [<JsonPropertyName("usernames")>]
         Usernames: string array option
     } with
         static member ToRequest(request: SecurityClearCachedRealmsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -465,7 +457,6 @@ module SecurityOperations =
     }
 
     type SecurityClearCachedRolesRequest = {
-        [<JsonPropertyName("name")>]
         Name: Names
     } with
         static member ToRequest(request: SecurityClearCachedRolesRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -505,11 +496,8 @@ module SecurityOperations =
     }
 
     type SecurityClearCachedServiceTokensRequest = {
-        [<JsonPropertyName("namespace")>]
         Namespace: Namespace
-        [<JsonPropertyName("service")>]
         Service: Service
-        [<JsonPropertyName("name")>]
         Name: Names
     } with
         static member ToRequest(request: SecurityClearCachedServiceTokensRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -559,21 +547,13 @@ module SecurityOperations =
     }
 
     type SecurityGetApiKeyRequest = {
-        [<JsonPropertyName("id")>]
         Id: Id option
-        [<JsonPropertyName("name")>]
         Name: Name option
-        [<JsonPropertyName("owner")>]
         Owner: bool option
-        [<JsonPropertyName("realm_name")>]
         RealmName: Name option
-        [<JsonPropertyName("username")>]
         Username: Username option
-        [<JsonPropertyName("with_limited_by")>]
         WithLimitedBy: bool option
-        [<JsonPropertyName("active_only")>]
         ActiveOnly: bool option
-        [<JsonPropertyName("with_profile_uid")>]
         WithProfileUid: bool option
     } with
         static member ToRequest(request: SecurityGetApiKeyRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -658,7 +638,6 @@ module SecurityOperations =
     }
 
     type SecurityCreateApiKeyRequest = {
-        [<JsonPropertyName("refresh")>]
         Refresh: Refresh option
         [<JsonPropertyName("expiration")>]
         Expiration: Duration option
@@ -876,13 +855,9 @@ module SecurityOperations =
     }
 
     type SecurityCreateServiceTokenRequest = {
-        [<JsonPropertyName("namespace")>]
         Namespace: Namespace
-        [<JsonPropertyName("service")>]
         Service: Service
-        [<JsonPropertyName("name")>]
         Name: Name
-        [<JsonPropertyName("refresh")>]
         Refresh: Refresh option
     } with
         static member ToRequest(request: SecurityCreateServiceTokenRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -935,13 +910,9 @@ module SecurityOperations =
     let securityCreateServiceTokenRequest = SecurityCreateServiceTokenRequestBuilder()
 
     type SecurityDeleteServiceTokenRequest = {
-        [<JsonPropertyName("namespace")>]
         Namespace: Namespace
-        [<JsonPropertyName("service")>]
         Service: Service
-        [<JsonPropertyName("name")>]
         Name: Name
-        [<JsonPropertyName("refresh")>]
         Refresh: Refresh option
     } with
         static member ToRequest(request: SecurityDeleteServiceTokenRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1042,9 +1013,7 @@ module SecurityOperations =
     }
 
     type SecurityGetPrivilegesRequest = {
-        [<JsonPropertyName("application")>]
         Application: Name
-        [<JsonPropertyName("name")>]
         Name: Names
     } with
         static member ToRequest(request: SecurityGetPrivilegesRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1080,11 +1049,8 @@ module SecurityOperations =
     let securityGetPrivilegesRequest = SecurityGetPrivilegesRequestBuilder()
 
     type SecurityDeletePrivilegesRequest = {
-        [<JsonPropertyName("application")>]
         Application: Name
-        [<JsonPropertyName("name")>]
         Name: Names
-        [<JsonPropertyName("refresh")>]
         Refresh: Refresh option
     } with
         static member ToRequest(request: SecurityDeletePrivilegesRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1132,7 +1098,6 @@ module SecurityOperations =
     let securityDeletePrivilegesRequest = SecurityDeletePrivilegesRequestBuilder()
 
     type SecurityGetRoleRequest = {
-        [<JsonPropertyName("name")>]
         Name: Names
     } with
         static member ToRequest(request: SecurityGetRoleRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1163,9 +1128,7 @@ module SecurityOperations =
     let securityGetRoleRequest = SecurityGetRoleRequestBuilder()
 
     type SecurityPutRoleRequest = {
-        [<JsonPropertyName("name")>]
         Name: Name
-        [<JsonPropertyName("refresh")>]
         Refresh: Refresh option
         [<JsonPropertyName("applications")>]
         Applications: TypesApplicationPrivileges array option
@@ -1279,9 +1242,7 @@ module SecurityOperations =
     let securityPutRoleRequest = SecurityPutRoleRequestBuilder()
 
     type SecurityDeleteRoleRequest = {
-        [<JsonPropertyName("name")>]
         Name: Name
-        [<JsonPropertyName("refresh")>]
         Refresh: Refresh option
     } with
         static member ToRequest(request: SecurityDeleteRoleRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1329,7 +1290,6 @@ module SecurityOperations =
     }
 
     type SecurityGetRoleMappingRequest = {
-        [<JsonPropertyName("name")>]
         Name: Names
     } with
         static member ToRequest(request: SecurityGetRoleMappingRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1360,9 +1320,7 @@ module SecurityOperations =
     let securityGetRoleMappingRequest = SecurityGetRoleMappingRequestBuilder()
 
     type SecurityPutRoleMappingRequest = {
-        [<JsonPropertyName("name")>]
         Name: Name
-        [<JsonPropertyName("refresh")>]
         Refresh: Refresh option
         [<JsonPropertyName("enabled")>]
         Enabled: bool option
@@ -1448,9 +1406,7 @@ module SecurityOperations =
     let securityPutRoleMappingRequest = SecurityPutRoleMappingRequestBuilder()
 
     type SecurityDeleteRoleMappingRequest = {
-        [<JsonPropertyName("name")>]
         Name: Name
-        [<JsonPropertyName("refresh")>]
         Refresh: Refresh option
     } with
         static member ToRequest(request: SecurityDeleteRoleMappingRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1498,9 +1454,7 @@ module SecurityOperations =
     }
 
     type SecurityGetUserRequest = {
-        [<JsonPropertyName("username")>]
         Username: System.Text.Json.JsonElement
-        [<JsonPropertyName("with_profile_uid")>]
         WithProfileUid: bool option
     } with
         static member ToRequest(request: SecurityGetUserRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1543,9 +1497,7 @@ module SecurityOperations =
     let securityGetUserRequest = SecurityGetUserRequestBuilder()
 
     type SecurityPutUserRequest = {
-        [<JsonPropertyName("username")>]
         Username: Username
-        [<JsonPropertyName("refresh")>]
         Refresh: Refresh option
         [<JsonPropertyName("username")>]
         Username2: Username option
@@ -1645,9 +1597,7 @@ module SecurityOperations =
     let securityPutUserRequest = SecurityPutUserRequestBuilder()
 
     type SecurityDeleteUserRequest = {
-        [<JsonPropertyName("username")>]
         Username: Username
-        [<JsonPropertyName("refresh")>]
         Refresh: Refresh option
     } with
         static member ToRequest(request: SecurityDeleteUserRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1695,9 +1645,7 @@ module SecurityOperations =
     }
 
     type SecurityDisableUserRequest = {
-        [<JsonPropertyName("username")>]
         Username: Username
-        [<JsonPropertyName("refresh")>]
         Refresh: Refresh option
     } with
         static member ToRequest(request: SecurityDisableUserRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1740,9 +1688,7 @@ module SecurityOperations =
     let securityDisableUserRequest = SecurityDisableUserRequestBuilder()
 
     type SecurityDisableUserProfileRequest = {
-        [<JsonPropertyName("uid")>]
         Uid: TypesUserProfileId
-        [<JsonPropertyName("refresh")>]
         Refresh: Refresh option
     } with
         static member ToRequest(request: SecurityDisableUserProfileRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1785,9 +1731,7 @@ module SecurityOperations =
     let securityDisableUserProfileRequest = SecurityDisableUserProfileRequestBuilder()
 
     type SecurityEnableUserRequest = {
-        [<JsonPropertyName("username")>]
         Username: Username
-        [<JsonPropertyName("refresh")>]
         Refresh: Refresh option
     } with
         static member ToRequest(request: SecurityEnableUserRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1830,9 +1774,7 @@ module SecurityOperations =
     let securityEnableUserRequest = SecurityEnableUserRequestBuilder()
 
     type SecurityEnableUserProfileRequest = {
-        [<JsonPropertyName("uid")>]
         Uid: TypesUserProfileId
-        [<JsonPropertyName("refresh")>]
         Refresh: Refresh option
     } with
         static member ToRequest(request: SecurityEnableUserProfileRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1918,9 +1860,7 @@ module SecurityOperations =
     }
 
     type SecurityGetServiceAccountsRequest = {
-        [<JsonPropertyName("namespace")>]
         Namespace: Namespace
-        [<JsonPropertyName("service")>]
         Service: Service
     } with
         static member ToRequest(request: SecurityGetServiceAccountsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1956,9 +1896,7 @@ module SecurityOperations =
     let securityGetServiceAccountsRequest = SecurityGetServiceAccountsRequestBuilder()
 
     type SecurityGetServiceCredentialsRequest = {
-        [<JsonPropertyName("namespace")>]
         Namespace: Namespace
-        [<JsonPropertyName("service")>]
         Service: Name
     } with
         static member ToRequest(request: SecurityGetServiceCredentialsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -2005,7 +1943,6 @@ module SecurityOperations =
     }
 
     type SecurityGetSettingsRequest = {
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
     } with
         static member ToRequest(request: SecurityGetSettingsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -2052,9 +1989,7 @@ module SecurityOperations =
     }
 
     type SecurityUpdateSettingsRequest = {
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("security")>]
         Security: TypesSecuritySettings option
@@ -2303,9 +2238,7 @@ module SecurityOperations =
     }
 
     type SecurityGetUserProfileRequest = {
-        [<JsonPropertyName("uid")>]
         Uid: System.Text.Json.JsonElement
-        [<JsonPropertyName("data")>]
         Data: System.Text.Json.JsonElement option
     } with
         static member ToRequest(request: SecurityGetUserProfileRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -2355,7 +2288,6 @@ module SecurityOperations =
     }
 
     type SecurityGrantApiKeyRequest = {
-        [<JsonPropertyName("refresh")>]
         Refresh: Refresh option
         [<JsonPropertyName("api_key")>]
         ApiKey: GrantApiKeyGrantApiKey
@@ -2449,7 +2381,6 @@ module SecurityOperations =
     }
 
     type SecurityHasPrivilegesRequest = {
-        [<JsonPropertyName("user")>]
         User: Name
         [<JsonPropertyName("application")>]
         Application: HasPrivilegesApplicationPrivilegesCheck array option
@@ -2720,7 +2651,6 @@ module SecurityOperations =
     }
 
     type SecurityPutPrivilegesRequest = {
-        [<JsonPropertyName("refresh")>]
         Refresh: Refresh option
     } with
         static member ToRequest(request: SecurityPutPrivilegesRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -2758,11 +2688,8 @@ module SecurityOperations =
     let securityPutPrivilegesRequest = SecurityPutPrivilegesRequestBuilder()
 
     type SecurityQueryApiKeysRequest = {
-        [<JsonPropertyName("with_limited_by")>]
         WithLimitedBy: bool option
-        [<JsonPropertyName("with_profile_uid")>]
         WithProfileUid: bool option
-        [<JsonPropertyName("typed_keys")>]
         TypedKeys: bool option
         [<JsonPropertyName("aggregations")>]
         Aggregations: Map<string, QueryApiKeysApiKeyAggregationContainer> option
@@ -2915,7 +2842,6 @@ module SecurityOperations =
     let securityQueryRoleRequest = SecurityQueryRoleRequestBuilder()
 
     type SecurityQueryUserRequest = {
-        [<JsonPropertyName("with_profile_uid")>]
         WithProfileUid: bool option
         [<JsonPropertyName("query")>]
         Query: QueryUserUserQueryContainer option
@@ -3257,7 +3183,6 @@ module SecurityOperations =
     }
 
     type SecuritySamlServiceProviderMetadataRequest = {
-        [<JsonPropertyName("realm_name")>]
         RealmName: Name
     } with
         static member ToRequest(request: SecuritySamlServiceProviderMetadataRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -3293,7 +3218,6 @@ module SecurityOperations =
     }
 
     type SecuritySuggestUserProfilesRequest = {
-        [<JsonPropertyName("data")>]
         Data: System.Text.Json.JsonElement option
         [<JsonPropertyName("name")>]
         Name: string option
@@ -3360,7 +3284,6 @@ module SecurityOperations =
     let securitySuggestUserProfilesRequest = SecuritySuggestUserProfilesRequestBuilder()
 
     type SecurityUpdateApiKeyRequest = {
-        [<JsonPropertyName("id")>]
         Id: Id
         [<JsonPropertyName("role_descriptors")>]
         RoleDescriptors: Map<string, TypesRoleDescriptor> option
@@ -3418,7 +3341,6 @@ module SecurityOperations =
     }
 
     type SecurityUpdateCrossClusterApiKeyRequest = {
-        [<JsonPropertyName("id")>]
         Id: Id
         [<JsonPropertyName("access")>]
         Access: TypesAccess
@@ -3483,13 +3405,9 @@ module SecurityOperations =
     }
 
     type SecurityUpdateUserProfileDataRequest = {
-        [<JsonPropertyName("uid")>]
         Uid: TypesUserProfileId
-        [<JsonPropertyName("if_seq_no")>]
         IfSeqNo: SequenceNumber option
-        [<JsonPropertyName("if_primary_term")>]
         IfPrimaryTerm: float option
-        [<JsonPropertyName("refresh")>]
         Refresh: Refresh option
         [<JsonPropertyName("labels")>]
         Labels: Map<string, obj> option

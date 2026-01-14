@@ -13,11 +13,8 @@ open Fes.DSL.Models.Types
 module SlmOperations =
 
     type SlmGetLifecycleRequest = {
-        [<JsonPropertyName("policy_id")>]
         PolicyId: Names
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: SlmGetLifecycleRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -66,11 +63,8 @@ module SlmOperations =
     let slmGetLifecycleRequest = SlmGetLifecycleRequestBuilder()
 
     type SlmPutLifecycleRequest = {
-        [<JsonPropertyName("policy_id")>]
         PolicyId: Name
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
         [<JsonPropertyName("config")>]
         Config: TypesConfiguration option
@@ -157,11 +151,8 @@ module SlmOperations =
     type SlmPutLifecycleResponse = AcknowledgedResponseBase
 
     type SlmDeleteLifecycleRequest = {
-        [<JsonPropertyName("policy_id")>]
         PolicyId: Name
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: SlmDeleteLifecycleRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -212,11 +203,8 @@ module SlmOperations =
     type SlmDeleteLifecycleResponse = AcknowledgedResponseBase
 
     type SlmExecuteLifecycleRequest = {
-        [<JsonPropertyName("policy_id")>]
         PolicyId: Name
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: SlmExecuteLifecycleRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -270,9 +258,7 @@ module SlmOperations =
     }
 
     type SlmExecuteRetentionRequest = {
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: SlmExecuteRetentionRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -318,9 +304,7 @@ module SlmOperations =
     type SlmExecuteRetentionResponse = AcknowledgedResponseBase
 
     type SlmGetStatsRequest = {
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: SlmGetStatsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -387,9 +371,7 @@ module SlmOperations =
     }
 
     type SlmGetStatusRequest = {
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: SlmGetStatusRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -438,9 +420,7 @@ module SlmOperations =
     }
 
     type SlmStartRequest = {
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: SlmStartRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -486,9 +466,7 @@ module SlmOperations =
     type SlmStartResponse = AcknowledgedResponseBase
 
     type SlmStopRequest = {
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: SlmStopRequest) : Result<Fes.Http.RequestMsg, exn> =

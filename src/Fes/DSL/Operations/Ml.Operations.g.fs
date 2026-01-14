@@ -13,11 +13,8 @@ open Fes.DSL.Models.Types
 module MlOperations =
 
     type MlGetMemoryStatsRequest = {
-        [<JsonPropertyName("node_id")>]
         NodeId: Id
-        [<JsonPropertyName("master_timeout")>]
         MasterTimeout: Duration option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: MlGetMemoryStatsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -81,9 +78,7 @@ module MlOperations =
     }
 
     type MlSetUpgradeModeRequest = {
-        [<JsonPropertyName("enabled")>]
         Enabled: bool option
-        [<JsonPropertyName("timeout")>]
         Timeout: Duration option
     } with
         static member ToRequest(request: MlSetUpgradeModeRequest) : Result<Fes.Http.RequestMsg, exn> =
