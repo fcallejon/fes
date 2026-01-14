@@ -1,8 +1,6 @@
 open System
 open System.Net.Http
-open System.Text.Json
 open System.Text.Json.Serialization
-open FSharpPlus
 open Fes
 open Fes.DSL.Models.Types
 open Fes.DSL.Operations

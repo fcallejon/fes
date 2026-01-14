@@ -1,9 +1,9 @@
 namespace Fes.Tests
 
 open System
-open Fes
 open FSharpPlus
 open Xunit
+open Fes
 
 [<AutoOpen>]
 module Assert =
@@ -12,7 +12,7 @@ module Assert =
         match request.Method.Method.ToUpperInvariant() with
         | "POST"
         | "PUT"
-        | "PATCH" ->
+        | "PATCH" when request.Content <> null ->
             request.Content.ReadAsStringAsync()
             |> TaskResult.ofTask
             |> fun t -> t.Result

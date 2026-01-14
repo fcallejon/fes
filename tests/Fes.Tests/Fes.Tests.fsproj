@@ -5,6 +5,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="FSharp.Core" />
+    <PackageReference Include="FSharpPlus"/>
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
     <PackageReference Include="xunit" />
     <PackageReference Include="xunit.runner.visualstudio">
@@ -21,6 +22,9 @@
     <Compile Include="AssertRequestCommands.fs" />
     <Compile Include="Commands\IndexDocumentCommands.fs" />
     <Compile Include="Commands\IndexCommands.fs" />
+    <Compile Include="Commands\DocumentCommands.fs" />
+    <Compile Include="Commands\SearchCommands.fs" />
+    <Compile Include="Commands\ClusterCommands.fs" />
     <Compile Include="Responses\ErrorDeserialization.fs" />
   </ItemGroup>
   <ItemGroup>
