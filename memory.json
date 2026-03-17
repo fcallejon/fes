@@ -1,1 +1,1 @@
-{"last_run":"2026-03-17","run_id":"23203305321","prs":["repo-assist/eng-ci-caching-2026-03-17"],"issues":["Publish package to NuGet.org"],"notes":"First run. CI caching PR and NuGet issue created."}
+{"last_run":"2026-03-17","run_id":"23212755825","open_prs":{"10":"NuGet caching+docker-compose+.bak cleanup (Copilot, needs review)"},"pending_patches":["CONTRIBUTING.md (run 23212755825, push blocked)"],"monthly_issue":"[Repo Assist] Monthly Activity 2026-03","notes":"Build OOM on runner (Types.g.fs ~43k lines, pre-existing)."}
