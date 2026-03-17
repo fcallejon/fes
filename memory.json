@@ -1,1 +1,10 @@
-{"last_run":"2026-03-17","run_id":"23212755825","open_prs":{"10":"NuGet caching+docker-compose+.bak cleanup (Copilot, needs review)"},"pending_patches":["CONTRIBUTING.md (run 23212755825, push blocked)"],"monthly_issue":"[Repo Assist] Monthly Activity 2026-03","notes":"Build OOM on runner (Types.g.fs ~43k lines, pre-existing)."}
+{
+  "last_run": "2026-03-17",
+  "run_id": "23218252393",
+  "open_prs": {
+    "10": "NuGet caching+docker-compose+.bak cleanup (Copilot, needs review)",
+    "tee-fix": "fix teeOk/teeError side effects never invoked; wire Tests.fs into project (repo-assist/fix-prelude-tee-functions)"
+  },
+  "monthly_issue": "[Repo Assist] Monthly Activity 2026-03",
+  "notes": "Build OOM on runner (Types.g.fs ~43k lines, pre-existing). No open issues in repo. Tests.fs was excluded from .fsproj - now fixed."
+}
