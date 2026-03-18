@@ -73,8 +73,4 @@ module Json =
 [<RequireQualifiedAccess>]
 module JsonRes =
     let inline ofString<'a> (s: string) : TaskResult<'a, exn> =
-        try
-            let result = Json.deserialize<'a> s
-            TaskResult.retn result
-        with ex ->
-            Task.FromResult(Result.Error ex)
+        Json.tryDeserialize<'a> s |> TaskHelpers.retn
