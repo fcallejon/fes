@@ -27,6 +27,7 @@
     <Compile Include="Commands\ClusterCommands.fs" />
     <Compile Include="Commands\ScriptCommands.fs" />
     <Compile Include="JsonDeserializationTests.fs" />
+    <Compile Include="JsonResAndHttpUtilsTests.fs" />
     <Compile Include="Responses\ErrorDeserialization.fs" />
   </ItemGroup>
   <ItemGroup>
