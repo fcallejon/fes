@@ -1,1 +1,13 @@
-{"last_run":"2026-03-18","run_id":"23227578140","open_prs":{"10":"NuGet caching+docker-compose+.bak (Copilot)","12":"fix teeOk/teeError, wire Tests.fs (repo-assist draft)"},"monthly_issue":"[Repo Assist] Monthly Activity 2026-03","notes":"Build OOM pre-existing (Types.g.fs ~43k lines). Branch push rejected. Perf patch generated run 23227578140: TaskResult.map uses TaskHelpers.map(Result.map f); Http error path merges 2 maps into 1."}
+{
+  "last_run": "2026-03-18",
+  "run_id": "23230139512",
+  "open_prs": {
+    "10": "NuGet caching+docker-compose+.bak (Copilot)",
+    "12": "fix teeOk/teeError, wire Tests.fs (repo-assist draft)",
+    "14": "perf: TaskResult.map+Http error path (repo-assist draft)",
+    "new_eng": "chore: remove stale Fes.test.fsproj + update README (repo-assist, patch only - check if PR was created)"
+  },
+  "monthly_issue": "[Repo Assist] Monthly Activity 2026-03",
+  "notes": "Build OOM pre-existing (Types.g.fs ~43k lines). Removed stale Fes.test.fsproj and updated README Fleece->FSharp.SystemTextJson, AsyncResult->TaskResult. Monthly activity issue created this run.",
+  "no_open_issues": true
+}
