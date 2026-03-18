@@ -1,16 +1,1 @@
-{
-  "last_run": "2026-03-18",
-  "run_id": "23233949528",
-  "open_prs": {
-    "10": "NuGet caching+docker-compose+.bak (Copilot)",
-    "12": "fix teeOk/teeError, wire Tests.fs (repo-assist draft, 73/73 tests)",
-    "14": "perf: TaskResult.map+Http error path (repo-assist draft)",
-    "16": "chore: remove stale Fes.test.fsproj + update README (repo-assist draft)"
-  },
-  "monthly_issue": "[Repo Assist] Monthly Activity 2026-03",
-  "fix_attempts": {
-    "error-deserialization-test": "patch generated (branch: repo-assist/fix-error-deserialization-test-silent-pass), PR not created (patch artifact only)"
-  },
-  "notes": "Build OOM pre-existing (Types.g.fs ~43k lines). ErrorDeserialization.fs has silent-pass bug in test (Result.map assertValues). Monthly activity issue created this run. No open issues exist.",
-  "no_open_issues": true
-}
+{"last_run":"2026-03-18","run_id":"23239680098","open_prs":{"10":"Copilot NuGet","12":"RA teeOk fix 73tests","14":"RA perf","16":"RA README","18":"RA errordeser","TBD":"RA JsonRes+Result"},"monthly_issue":"created","oom":true,"no_issues":true}
