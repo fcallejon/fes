@@ -40,4 +40,6 @@ module ErrorDeserialization =
       illegal_argument_exception
       |> systemJsonSerialize
       |> ElasticsearchException.ofString
-      |> Result.map assertValues
+      |> function
+         | Ok ex -> assertValues ex
+         | Error err -> raise err
