@@ -13,10 +13,14 @@ module TaskHelpers =
         }
 
     let inline map (f: 'a -> 'b) (t: Task<'a>) : Task<'b> =
-        task {
-            let! a = t
-            return f a
-        }
+        // Fast path: skip state machine allocation for already-completed tasks
+        if t.IsCompletedSuccessfully then
+            Task.FromResult(f t.Result)
+        else
+            task {
+                let! a = t
+                return f a
+            }
 
     let mapOut (f: 'b -> 'c) (a: 'a -> Task<'b>) : 'a -> Task<'c> =
         a >> map f

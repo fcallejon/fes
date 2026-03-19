@@ -24,13 +24,17 @@ module TaskResult =
         x |> TaskHelpers.map Result.ofChoice
 
     let inline ofTask<'a> (t: Task<'a>) : TaskResult<'a, exn> =
-        task {
-            try
-                let! tr = t
-                return Ok tr
-            with
-            | e -> return Error e
-        }
+        // Fast path: skip state machine allocation for already-completed tasks
+        if t.IsCompletedSuccessfully then
+            Task.FromResult(Ok t.Result)
+        else
+            task {
+                try
+                    let! tr = t
+                    return Ok tr
+                with
+                | e -> return Error e
+            }
 
     let mapIn (f: 'a2 -> 'a) (a: 'a -> TaskResult<'b, exn>) : 'a2 -> TaskResult<'b, exn> =
         f >> a
