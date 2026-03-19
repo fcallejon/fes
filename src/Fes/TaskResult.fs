@@ -45,4 +45,16 @@ module TaskResult =
         a >> bind f
 
     let after (f: 'a * 'b -> _) (g: 'a -> TaskResult<'b, exn>) : 'a -> TaskResult<'b, exn> =
-        fun a -> g a |> map (fun b -> let _ = f (a, b) in b)
+        fun a -> g a |> map (fun b -> f (a, b) |> ignore; b)
+
+    /// Applies a side-effectful function when the result is Ok, passing the value through unchanged.
+    let inline teeOk (f: 'a -> unit) (x: TaskResult<'a, 'e>) : TaskResult<'a, 'e> =
+        x |> TaskHelpers.map (Result.map (fun a -> f a; a))
+
+    /// Applies a side-effectful function when the result is Error, passing the error through unchanged.
+    let inline teeError (f: 'e -> unit) (x: TaskResult<'a, 'e>) : TaskResult<'a, 'e> =
+        x |> TaskHelpers.map (Result.mapError (fun e -> f e; e))
+
+    /// Discards the Ok value, mapping it to unit while preserving the error channel.
+    let inline ignore (x: TaskResult<'a, 'e>) : TaskResult<unit, 'e> =
+        x |> TaskHelpers.map (Result.map (fun _ -> ()))
