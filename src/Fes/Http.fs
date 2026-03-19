@@ -81,7 +81,12 @@ module ElasticsearchClient =
     type HttpCall = HttpRequestMessage -> TaskResult<HttpResponseMessage, exn>
 
     let inline execute (httpCall: HttpCall) : 'fesRequest -> TaskResult<'fesResponse, exn> =
-        let inReq = fun (req: 'fesRequest) -> Http.toRequest req |> TaskHelpers.retn
-        httpCall
-        |> TaskResult.bindOut Http.Response.toResult
-        |> TaskResult.bindIn inReq
+        fun req ->
+            task {
+                match Http.toRequest req with
+                | Error e -> return Error e
+                | Ok requestMsg ->
+                    match! httpCall requestMsg with
+                    | Error e -> return Error e
+                    | Ok responseMsg -> return! Http.Response.toResult responseMsg
+            }
