@@ -52,9 +52,19 @@ module Http =
             request.Content <- new StringContent(body, Encoding.UTF8, "application/json")
             request
 
+        /// Cached content-type header value to avoid allocating it on every request.
+        let jsonMediaType =
+            System.Net.Http.Headers.MediaTypeHeaderValue("application/json", CharSet = "utf-8")
+
+        /// Serializes `body` directly to UTF-8 bytes and sets the request content,
+        /// avoiding the intermediate UTF-16 string allocation that `withJson` incurs.
         let inline withJsonBody body =
-            Json.serialize body
-            |> withJson
+            let bytes = Json.serializeToUtf8Bytes body
+            fun (request: RequestMsg) ->
+                let content = new ByteArrayContent(bytes)
+                content.Headers.ContentType <- jsonMediaType
+                request.Content <- content
+                request
 
 
     module Response =

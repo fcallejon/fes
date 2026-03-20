@@ -64,6 +64,9 @@ module Json =
         with ex ->
             Error ex
 
+    let inline serializeToUtf8Bytes (value: 'a) : byte[] =
+        JsonSerializer.SerializeToUtf8Bytes(value, options)
+
     let inline serializeToNode (value: 'a) : JsonNode =
         JsonSerializer.SerializeToNode(value, options)
 
