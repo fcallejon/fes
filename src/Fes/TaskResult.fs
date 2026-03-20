@@ -9,11 +9,17 @@ module TaskResult =
     let retn x : TaskResult<'a, 'b> = Task.FromResult(Ok x)
 
     let bind (f: 'a -> TaskResult<'b, 'e>) (x: TaskResult<'a, 'e>) : TaskResult<'b, 'e> =
-        task {
-            match! x with
-            | Ok r -> return! f r
-            | Error e -> return Error e
-        }
+        // Fast path: skip state machine allocation for already-completed tasks
+        if x.IsCompletedSuccessfully then
+            match x.Result with
+            | Ok r -> f r
+            | Error e -> Task.FromResult(Error e)
+        else
+            task {
+                match! x with
+                | Ok r -> return! f r
+                | Error e -> return Error e
+            }
 
     let inline map f m = bind (f >> retn) m
 

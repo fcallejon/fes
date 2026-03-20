@@ -7,10 +7,14 @@ module TaskHelpers =
     let inline retn x = Task.FromResult(x)
 
     let inline bind (f: 'a -> Task<'b>) (t: Task<'a>) : Task<'b> =
-        task {
-            let! a = t
-            return! f a
-        }
+        // Fast path: skip state machine allocation for already-completed tasks
+        if t.IsCompletedSuccessfully then
+            f t.Result
+        else
+            task {
+                let! a = t
+                return! f a
+            }
 
     let inline map (f: 'a -> 'b) (t: Task<'a>) : Task<'b> =
         task {
