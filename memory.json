@@ -1,1 +1,1 @@
-{"r":"23383048494","prs":[12,14,16,18,20,22,25,27,28,35,37,43,50],"m":"2026-03","n":"14 PRs+CI fix PR. Monthly issue #aw_monthly01 created. CI trigger fix PR created."}
+{"r":"23386432436","prs":[12,14,16,18,20,22,25,27,28,35,37,43,50],"m":"2026-03","summary":"RA-bak-PR created. Monthly issue aw_monthly26. Conflicts: TaskResult.fs(#14,27,28,35,43),Http.fs(#14,28,37,50),Task.fs(#27,28,43),Tests.fs(#12,35),fsproj(#12,22,25,35). Safe first: #16,18. CI not triggering-needs approval."}
