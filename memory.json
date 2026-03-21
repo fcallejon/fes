@@ -1,1 +1,1 @@
-{"r":"23370678191","prs":[12,14,16,18,20,22,25,27,28,35,37,43,50],"new_prs_this_run":["chore-test-sdk-update"],"monthly":"2026-03","monthly_issue":"created","notes":"No open issues. 14 Repo Assist PRs open (#12-#50 + new SDK update PR). Monthly activity issue created for 2026-03. Build OOM in sandbox (SIGKILL/137) - pre-existing infra issue. Updated Microsoft.NET.Test.Sdk 18.0.1→18.3.0."}
+{"r":"23372337388","prs":[12,14,16,18,20,22,25,27,28,35,37,43,50,51],"monthly":"2026-03","notes":"14 RA PRs open. #51=dep update. No issues. Build OOM sandbox (pre-existing)."}
