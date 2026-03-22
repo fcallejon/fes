@@ -17,6 +17,8 @@
         <!-- Auto-generated DTO/Model types from ES OpenAPI spec -->
         <!-- Auto-generated model files (ordered by dependencies) -->
         <Compile Include="DSL\Models\Types.g.fs"/>
+        <!-- Aggregation builder helpers (depends only on Types.g.fs) -->
+        <Compile Include="Aggregations.fs"/>
         <!-- Exceptions before Json so converters are available -->
         <Compile Include="Exceptions.fs"/>
         <!-- Json.fs after models and exceptions so it can reference all converters -->
