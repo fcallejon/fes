@@ -19,6 +19,7 @@
     <PackageReference Include="FsUnit.xUnit" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ResultTests.fs" />
     <Compile Include="AssertRequestCommands.fs" />
     <Compile Include="Commands\IndexDocumentCommands.fs" />
     <Compile Include="Commands\IndexCommands.fs" />
