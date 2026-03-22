@@ -21,6 +21,8 @@
         <Compile Include="Exceptions.fs"/>
         <!-- Json.fs after models and exceptions so it can reference all converters -->
         <Compile Include="Json.fs"/>
+        <!-- Manual DSL helpers (after Json.fs to use JsonSettings) -->
+        <Compile Include="DSL\Query.fs"/>
         <Compile Include="Http.fs"/>
         <!-- Auto-generated operation files (must be after Http.fs) -->
         <Compile Include="DSL\Operations\Analytics.Operations.g.fs"/>
