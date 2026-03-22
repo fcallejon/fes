@@ -59,10 +59,7 @@ module Json =
         JsonSerializer.Deserialize<'a>(json, options)
 
     let inline tryDeserialize<'a> (json: string) : Result<'a, exn> =
-        try
-            Ok (JsonSerializer.Deserialize<'a>(json, options))
-        with ex ->
-            Error ex
+        Result.protect (fun (s: string) -> JsonSerializer.Deserialize<'a>(s, options)) json
 
     let inline serializeToNode (value: 'a) : JsonNode =
         JsonSerializer.SerializeToNode(value, options)

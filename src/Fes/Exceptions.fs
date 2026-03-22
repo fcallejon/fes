@@ -142,8 +142,7 @@ module ElasticsearchException =
         opts
 
     let ofString (s: string) : Result<ElasticsearchException, exn> =
-        try
-            let response = JsonSerializer.Deserialize<ElasticsearchErrorResponse>(s, deserializeOptions)
-            Ok (ElasticsearchException(response, s))
-        with ex ->
-            Error (exn ($"Server Raw Error: {s}\r\nParsing Error: {ex.Message}", ex))
+        Result.protect (fun (json: string) ->
+            let response = JsonSerializer.Deserialize<ElasticsearchErrorResponse>(json, deserializeOptions)
+            ElasticsearchException(response, json)) s
+        |> Result.mapError (fun ex -> exn($"Server Raw Error: {s}\r\nParsing Error: {ex.Message}", ex))
