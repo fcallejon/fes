@@ -104,14 +104,15 @@ module Exceptions =
           [<JsonPropertyName("index")>] Index: string option
           [<JsonPropertyName("caused_by")>] CausedBy: ElasticsearchCausedBy option
           [<JsonPropertyName("stack_trace")>] StackTrace: string option
-          [<JsonPropertyName("root_cause")>] RootCause: ElasticsearchRootCauseInfo[] }
+          [<JsonPropertyName("root_cause")>] RootCause: ElasticsearchRootCauseInfo[]
+          // phase, grouped, failed_shards are nested inside "error" in Elasticsearch responses
+          [<JsonPropertyName("phase")>] Phase: string option
+          [<JsonPropertyName("grouped")>] Grouped: bool option
+          [<JsonPropertyName("failed_shards")>] FailedShards: FailedShards[] option }
 
     type ElasticsearchErrorResponse =
         { [<JsonPropertyName("error")>] Error: ElasticsearchErrorInfo
-          [<JsonPropertyName("status")>] Status: int
-          [<JsonPropertyName("phase")>] Phase: string option
-          [<JsonPropertyName("grouped")>] Grouped: bool option
-          [<JsonPropertyName("failed_shards")>] FailedShards: FailedShards option }
+          [<JsonPropertyName("status")>] Status: int }
 
     type ElasticsearchException(response: ElasticsearchErrorResponse, rawJson: string) =
         inherit Exception(response.Error.Reason)
@@ -124,9 +125,9 @@ module Exceptions =
         member _.StackTrace = response.Error.StackTrace
         member _.Index = response.Error.Index
         member _.RootCause = response.Error.RootCause
-        member _.Phase = response.Phase
-        member _.Grouped = response.Grouped
-        member _.FailedShards = response.FailedShards
+        member _.Phase = response.Error.Phase
+        member _.Grouped = response.Error.Grouped
+        member _.FailedShards = response.Error.FailedShards
 
 [<RequireQualifiedAccess>]
 module ElasticsearchException =
