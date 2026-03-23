@@ -70,8 +70,10 @@ module Http =
                 |> TaskResult.bind JsonRes.ofString
             else
                 body
-                |> TaskHelpers.map (Result.bind ElasticsearchException.ofString)
-                |> TaskHelpers.map (function | Ok e -> e :> exn |> Error | Error e -> Error e)
+                |> TaskHelpers.map (fun result ->
+                    result
+                    |> Result.bind ElasticsearchException.ofString
+                    |> Result.bind (fun e -> Error (e :> exn)))
 
     let inline toRequest x =
         (^T : (static member ToRequest: ^T -> Result<RequestMsg, exn>) x)
