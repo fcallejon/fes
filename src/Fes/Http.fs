@@ -56,6 +56,18 @@ module Http =
             Json.serialize body
             |> withJson
 
+        /// Adds a single HTTP header to the request.
+        /// Uses TryAddWithoutValidation to support non-standard Elasticsearch headers such as X-Opaque-Id.
+        let inline withHeader (name: string) (value: string) (request: RequestMsg) =
+            request.Headers.TryAddWithoutValidation(name, value) |> ignore
+            request
+
+        /// Adds multiple HTTP headers to the request.
+        /// Uses TryAddWithoutValidation to support non-standard Elasticsearch headers.
+        let inline withHeaders (headers: (string * string) seq) (request: RequestMsg) =
+            headers |> Seq.iter (fun (name, value) -> request.Headers.TryAddWithoutValidation(name, value) |> ignore)
+            request
+
 
     module Response =
 
