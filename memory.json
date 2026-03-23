@@ -1,1 +1,1 @@
-{"r":"23420109043","prs":[10,12,14,16,18,20,22,25,27,28,35,37,43,50,59,64,66,69,71,75,76,77],"m":"2026-03","build":"OOM","notes":"21+ open PRs. Priority: #12,#18,#75. New: #76(test deps),#77(perf stream response)."}
+{"r":"23426574962","prs":[10,12,14,16,18,20,22,25,27,28,35,37,43,50,59,64,66,69,71,75,79,80],"m":"2026-03","monthly":"created","build":"OOM","notes":"PR80=perf/querystring-seq. IssueAPI broken. Priority: #12,#18,#75"}
