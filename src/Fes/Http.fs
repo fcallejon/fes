@@ -1,6 +1,7 @@
 namespace Fes
 
 open System.Net.Http
+open System.Net.Http.Json
 open System.Threading.Tasks
 
 [<RequireQualifiedAccess>]
@@ -63,15 +64,23 @@ module Http =
             response.Content.ReadAsStringAsync()
             |> TaskResult.ofTask
 
-        let inline toResult (response: ResponseMsg) =
-            let body = asString response
+        /// Deserialises the HTTP response.
+        /// Success path: streams JSON directly from the response content, avoiding an intermediate string allocation.
+        /// Error path: reads the body as a string to preserve raw JSON in the ElasticsearchException.
+        let inline toResult (response: ResponseMsg) : TaskResult<'a, exn> =
             if response.IsSuccessStatusCode then
-                body
-                |> TaskResult.bind JsonRes.ofString
+                response.Content.ReadFromJsonAsync<'a>(JsonSettings.options)
+                |> TaskResult.ofTask
             else
-                body
-                |> TaskHelpers.map (Result.bind ElasticsearchException.ofString)
-                |> TaskHelpers.map (function | Ok e -> e :> exn |> Error | Error e -> Error e)
+                response.Content.ReadAsStringAsync()
+                |> TaskResult.ofTask
+                |> TaskHelpers.map (fun r ->
+                    match r with
+                    | Ok s ->
+                        match ElasticsearchException.ofString s with
+                        | Ok e -> Error (e :> exn)
+                        | Error parseError -> Error parseError
+                    | Error e -> Error e)
 
     let inline toRequest x =
         (^T : (static member ToRequest: ^T -> Result<RequestMsg, exn>) x)
