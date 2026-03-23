@@ -1411,7 +1411,7 @@ let generateOperationRequestType (op: OperationDefinition) : string =
             sb.AppendLine($"                    ] |> List.choose id") |> ignore
             sb.AppendLine($"                let queryString =") |> ignore
             sb.AppendLine($"                    if List.isEmpty queryParams then \"\"") |> ignore
-            sb.AppendLine($"                    else \"?\" + (queryParams |> List.map (fun (k,v) -> k + \"=\" + v) |> String.concat \"&\")") |> ignore
+            sb.AppendLine($"                    else \"?\" + (queryParams |> Seq.map (fun (k,v) -> k + \"=\" + v) |> String.concat \"&\")") |> ignore
             sb.AppendLine($"                let fullPath = path + queryString") |> ignore
         else
             sb.AppendLine($"                let fullPath = path") |> ignore

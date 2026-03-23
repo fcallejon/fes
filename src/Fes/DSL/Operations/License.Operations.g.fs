@@ -26,7 +26,7 @@ module LicenseOperations =
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k,v) -> k + "=" + v) |> String.concat "&")
+                    else "?" + (queryParams |> Seq.map (fun (k,v) -> k + "=" + v) |> String.concat "&")
                 let fullPath = path + queryString
                 fullPath
                 |> Fes.Http.Request.fromPath
@@ -81,7 +81,7 @@ module LicenseOperations =
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k,v) -> k + "=" + v) |> String.concat "&")
+                    else "?" + (queryParams |> Seq.map (fun (k,v) -> k + "=" + v) |> String.concat "&")
                 let fullPath = path + queryString
                 fullPath
                 |> Fes.Http.Request.fromPath
@@ -141,7 +141,7 @@ module LicenseOperations =
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k,v) -> k + "=" + v) |> String.concat "&")
+                    else "?" + (queryParams |> Seq.map (fun (k,v) -> k + "=" + v) |> String.concat "&")
                 let fullPath = path + queryString
                 fullPath
                 |> Fes.Http.Request.fromPath
@@ -207,7 +207,7 @@ module LicenseOperations =
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k,v) -> k + "=" + v) |> String.concat "&")
+                    else "?" + (queryParams |> Seq.map (fun (k,v) -> k + "=" + v) |> String.concat "&")
                 let fullPath = path + queryString
                 fullPath
                 |> Fes.Http.Request.fromPath
@@ -271,7 +271,7 @@ module LicenseOperations =
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k,v) -> k + "=" + v) |> String.concat "&")
+                    else "?" + (queryParams |> Seq.map (fun (k,v) -> k + "=" + v) |> String.concat "&")
                 let fullPath = path + queryString
                 fullPath
                 |> Fes.Http.Request.fromPath
