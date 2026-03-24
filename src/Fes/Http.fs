@@ -67,7 +67,7 @@ module Http =
             let body = asString response
             if response.IsSuccessStatusCode then
                 body
-                |> TaskResult.bind JsonRes.ofString
+                |> TaskResult.mapResult JsonRes.ofStringSync
             else
                 body
                 |> TaskHelpers.map (Result.bind ElasticsearchException.ofString)

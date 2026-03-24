@@ -44,5 +44,11 @@ module TaskResult =
     let bindOut (f: 'b -> TaskResult<'c, exn>) (a: 'a -> TaskResult<'b, exn>) : 'a -> TaskResult<'c, exn> =
         a >> bind f
 
+    /// Like `bind`, but for a synchronous function returning `Result` instead of `TaskResult`.
+    /// Avoids allocating an inner completed Task, making it more efficient than
+    /// `bind (f >> Task.FromResult)` when the continuation is pure/synchronous.
+    let inline mapResult (f: 'a -> Result<'b, 'e>) (x: TaskResult<'a, 'e>) : TaskResult<'b, 'e> =
+        x |> TaskHelpers.map (Result.bind f)
+
     let after (f: 'a * 'b -> _) (g: 'a -> TaskResult<'b, exn>) : 'a -> TaskResult<'b, exn> =
         fun a -> g a |> map (fun b -> let _ = f (a, b) in b)

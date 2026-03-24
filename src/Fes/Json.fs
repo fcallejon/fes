@@ -72,6 +72,16 @@ module Json =
 
 [<RequireQualifiedAccess>]
 module JsonRes =
+    /// Synchronously deserialises a JSON string, returning a `Result`.
+    /// Prefer this over `ofString` when the caller already operates on a
+    /// `TaskResult` pipeline: use `TaskResult.mapResult JsonRes.ofStringSync`
+    /// to avoid the extra completed-Task allocation that `ofString` creates.
+    let inline ofStringSync<'a> (s: string) : Result<'a, exn> =
+        try
+            Ok (Json.deserialize<'a> s)
+        with ex ->
+            Error ex
+
     let inline ofString<'a> (s: string) : TaskResult<'a, exn> =
         try
             let result = Json.deserialize<'a> s
