@@ -1,1 +1,1 @@
-{"r":"23478198048","m":"2026-03","mi":91,"prs":[10,12,14,16,18,20,22,25,27,28,35,37,43,50,59,64,66,69,71,75,79,81,85,86],"n":"OOM build exit 137. New PR: test/error-types-20260324. No open issues."}
+{"r":"23484095733","m":"2026-03","mi":91,"prs":[10,12,14,16,18,20,22,25,27,28,35,37,43,50,59,64,66,69,71,75,79,81,85,86,92],"n":"OOM build exit 137 persists. Created perf PR: avoid extra Task alloc in JSON deserialisation (TaskResult.mapResult + JsonRes.ofStringSync). 25 open Repo Assist PRs. No open issues visible via API."}
