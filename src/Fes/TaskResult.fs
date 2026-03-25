@@ -46,3 +46,12 @@ module TaskResult =
 
     let after (f: 'a * 'b -> _) (g: 'a -> TaskResult<'b, exn>) : 'a -> TaskResult<'b, exn> =
         fun a -> g a |> map (fun b -> let _ = f (a, b) in b)
+
+    /// Converts a list of TaskResults into a single TaskResult containing a list.
+    /// Fails fast on the first Error, returning that error without awaiting remaining items.
+    let sequence (results: TaskResult<'a, 'e> list) : TaskResult<'a list, 'e> =
+        let rec go acc remaining =
+            match remaining with
+            | [] -> retn (List.rev acc)
+            | head :: tail -> head |> bind (fun v -> go (v :: acc) tail)
+        go [] results
