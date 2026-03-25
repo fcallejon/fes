@@ -15,7 +15,8 @@ module TaskResult =
             | Error e -> return Error e
         }
 
-    let inline map f m = bind (f >> retn) m
+    let inline map (f: 'a -> 'b) (m: TaskResult<'a, 'e>) : TaskResult<'b, 'e> =
+        m |> TaskHelpers.map (Result.map f)
 
     let inline mapError f (x: TaskResult<'a, 'e>) : TaskResult<'a, 'e2> =
         x |> TaskHelpers.map (Result.mapError f)
