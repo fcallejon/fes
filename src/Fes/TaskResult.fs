@@ -20,6 +20,8 @@ module TaskResult =
     let inline mapError f (x: TaskResult<'a, 'e>) : TaskResult<'a, 'e2> =
         x |> TaskHelpers.map (Result.mapError f)
 
+    let inline ofResult (r: Result<'a, 'e>) : TaskResult<'a, 'e> = Task.FromResult r
+
     let inline ofChoice (x: Task<Choice<'a, 'e>>) : TaskResult<'a, 'e> =
         x |> TaskHelpers.map Result.ofChoice
 
