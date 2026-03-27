@@ -1,13 +1,1 @@
-{
-  "r": "23641244424",
-  "m": "2026-03",
-  "comments_made": {
-    "pr12": {"run": "23641244424", "note": "flagged as superseded by PR #111"},
-    "pr107": {"run": "23641244424", "note": "flagged as subset of PR #14"}
-  },
-  "duplicate_prs": {
-    "pr12": "superseded by PR #111 (same teeOk/teeError fix)",
-    "pr107": "subset of PR #14 (same TaskResult.map change)"
-  },
-  "monthly_summary_issue": "open - March 2026"
-}
+{"r":"23649233808","m":"2026-03","comments":{"pr12":"23641244424","pr107":"23641244424"},"dups":{"teefix":"pr12+pr111","mapperf":"pr14+pr107"},"summary":"created","notes":"0 open issues found; 33 open PRs; build env broken (dir perms); teeOk/teeError bug real in Prelude.fs"}
