@@ -1,1 +1,1 @@
-{"r":"23688688593","m":"2026-03","s":"34 RA PRs; monthly iss created (aw_monthly02); teeOk/teeError bug in main (#111 fixes); PR #12→#111 dup (commented); PR #14→#107 conflict (commented); OOM in runner; avoid new PRs"}
+{"r":"23692173499","m":"2026-03","s":"33 RA PRs open; monthly issue created (aw_monthly03); roadmap issue created (aw_roadmap1); #12=dup of #111; #14 superseded by #107; #75 conflicts with #120 (both Exceptions.fs); #59 superseded by #10; OOM on build (Types.g.fs too large)"}
