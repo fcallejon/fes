@@ -1,1 +1,1 @@
-{"r":"23692173499","m":"2026-03","s":"33 RA PRs open; monthly issue created (aw_monthly03); roadmap issue created (aw_roadmap1); #12=dup of #111; #14 superseded by #107; #75 conflicts with #120 (both Exceptions.fs); #59 superseded by #10; OOM on build (Types.g.fs too large)"}
+{"r":"23695059364","m":"2026-03","s":"GH MCP empty; PR=improve-core-module-tests; monthly#aw_monthly; OOM build; 33 RA PRs; #12=dup#111; #14>>#107; #75&#120 conflict; #59>>#10"}
