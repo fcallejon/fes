@@ -33,9 +33,11 @@ module Http =
 
     /// Converts a value to a query string representation suitable for Elasticsearch
     /// Booleans are converted to lowercase "true"/"false"
+    /// String arrays (used for Fields-type parameters) are joined with commas
     let inline toQueryValue (v: 'a) : string =
         match box v with
         | :? bool as b -> if b then "true" else "false"
+        | :? (string[]) as arr -> String.concat "," arr
         | _ -> string v
 
     module Request =

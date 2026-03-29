@@ -50,6 +50,8 @@ module DocumentCommands =
 
         Assert.Contains("Method: GET", result)
         Assert.Contains("/products/_doc/product_123", result)
+        Assert.Contains("_source_includes=name,price", result)
+        Assert.Contains("_source_excludes=description", result)
 
     [<Fact>]
     let ``Get document with version returns correct HTTP call`` () =
