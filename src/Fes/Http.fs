@@ -56,6 +56,22 @@ module Http =
             Json.serialize body
             |> withJson
 
+        /// Appends query parameters to the request URI.
+        /// Handles the '?' vs '&' separator automatically.
+        let withQueryParams (queryParams: (string * string) list) (request: RequestMsg) =
+            match queryParams with
+            | [] -> request
+            | _ ->
+                let existing = request.RequestUri.OriginalString
+                let separator = if existing.Contains('?') then "&" else "?"
+                let qs = queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&"
+                request.RequestUri <- Uri(existing + separator + qs, UriKind.Relative)
+                request
+
+        /// Appends a single query parameter to the request URI.
+        let inline withQueryParam key value (request: RequestMsg) =
+            withQueryParams [ key, value ] request
+
 
     module Response =
 
