@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssertRequestCommands.fs" />
+    <Compile Include="Commands\AnalyticsCommands.fs" />
     <Compile Include="Commands\IndexDocumentCommands.fs" />
     <Compile Include="Commands\IndexCommands.fs" />
     <Compile Include="Commands\DocumentCommands.fs" />

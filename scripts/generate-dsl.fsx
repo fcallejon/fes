@@ -1395,7 +1395,11 @@ let generateOperationRequestType (op: OperationDefinition) : string =
             let mutable pathStr = pathTemplate
             for pathParam in op.PathParameters do
                 let fsharpName = fieldNameMap.[$"path:{pathParam.Name}"]
-                pathStr <- pathStr.Replace($"{{{pathParam.Name}}}", $"{{request.{fsharpName}}}")
+                let substitution =
+                    match pathParam.Type with
+                    | Array _ -> $"{{String.Join(\",\", request.{fsharpName})}}"
+                    | _ -> $"{{request.{fsharpName}}}"
+                pathStr <- pathStr.Replace($"{{{pathParam.Name}}}", substitution)
             sb.AppendLine($"                let path = $\"{pathStr}\"") |> ignore
 
         // Build query string using correctly renamed field names

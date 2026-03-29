@@ -17,7 +17,7 @@ module AnalyticsOperations =
     } with
         static member ToRequest(request: SearchApplicationGetBehavioralAnalyticsRequest) : Result<Fes.Http.RequestMsg, exn> =
             try
-                let path = $"/_application/analytics/{request.Name}"
+                let path = $"/_application/analytics/{String.Join(",", request.Name)}"
                 let fullPath = path
                 fullPath
                 |> Fes.Http.Request.fromPath
