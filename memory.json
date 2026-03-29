@@ -1,1 +1,1 @@
-{"r":"23716726132","m":"2026-03","mi":139,"s":"GH MCP issues list empty; use REST API. 38 RA PRs open. All 94 issues are RA-generated. #11 already commented. Created Fields string[] fix PR."}
+{"r":"23719898255","m":"2026-03","mi":139,"s":"39 RA PRs open. PR#140=Fields fix, PR#141=array path param fix. CI only on main. Task6: no CI fails. Task3: fixed Name array in URL."}
