@@ -5,9 +5,30 @@
         <WarnOn>3390;$(WarnOn)</WarnOn>
         <RootNamespace>Fes</RootNamespace>
     </PropertyGroup>
+
+    <!-- NuGet packaging metadata -->
+    <PropertyGroup>
+        <PackageId>FEs</PackageId>
+        <Version>0.1.0-alpha</Version>
+        <Authors>fcallejon</Authors>
+        <Description>An idiomatic F# client for Elasticsearch. Provides a generated DSL covering the full ES REST API, a TaskResult-based error-handling pipeline, and System.Text.Json serialisation — all without forcing C# patterns on F# consumers.</Description>
+        <PackageTags>elasticsearch fsharp dotnet client dsl search</PackageTags>
+        <PackageProjectUrl>https://github.com/fcallejon/fes</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/fcallejon/fes</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <Copyright>Copyright © fcallejon</Copyright>
+        <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="FSharp.Core"/>
         <PackageReference Include="FSharp.SystemTextJson"/>
+    </ItemGroup>
+    <ItemGroup>
+        <None Include="..\..\README.md" Pack="true" PackagePath="\" />
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Prelude.fs"/>
