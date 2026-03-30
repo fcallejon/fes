@@ -133,12 +133,19 @@ module ElasticsearchException =
     open Exceptions
 
     // Note: Can't use Json.deserialize here due to circular dependency (Json.fs references this file's converters)
-    // Use inline deserialization with minimal options instead
+    // Use inline deserialization with the required converters instead.
+    // JsonFSharpConverter is required to deserialize F# records and option fields.
     let private deserializeOptions =
         let opts = JsonSerializerOptions()
         opts.Converters.Add(ElasticsearchExceptionsConverter())
         opts.Converters.Add(ElasticsearchCauseByTypeConverter())
+        opts.Converters.Add(JsonFSharpConverter(
+            JsonUnionEncoding.AdjacentTag ||| JsonUnionEncoding.NamedFields ||| JsonUnionEncoding.UnwrapOption,
+            unionTagName = "type",
+            unionFieldsName = "value"
+        ))
         opts.PropertyNamingPolicy <- JsonNamingPolicy.SnakeCaseLower
+        opts.DefaultIgnoreCondition <- JsonIgnoreCondition.WhenWritingNull
         opts
 
     let ofString (s: string) : Result<ElasticsearchException, exn> =

@@ -29,15 +29,19 @@ module ErrorDeserialization =
 
     [<Fact>]
     let ``illegal_argument_exception from ES can be parsed`` () =
-      let assertValues (iaException: ElasticsearchException) =
-        Assert.Equal(illegal_argument_exception.error.reason, iaException.Reason, true, true, true)
-        Assert.Equal(illegal_argument_exception.error.root_cause.Head.reason, iaException.RootCause.[0].Reason, true, true, true)
-        Assert.Equal(illegal_argument_exception.status, (int iaException.Status))
-        Assert.Equal(ElasticsearchExceptions.IllegalArgumentException, iaException.ErrorType)
-        Assert.Equal(ElasticsearchCauseByType.NumberFormat, iaException.Cause.Value.Type)
-        Assert.Equal(illegal_argument_exception.error.caused_by.reason, iaException.Cause.Value.Reason, true, true, true)
+      let result =
+        illegal_argument_exception
+        |> systemJsonSerialize
+        |> ElasticsearchException.ofString
 
-      illegal_argument_exception
-      |> systemJsonSerialize
-      |> ElasticsearchException.ofString
-      |> Result.map assertValues
+      let iaException =
+        match result with
+        | Ok ex -> ex
+        | Error e -> raise e
+
+      Assert.Equal(illegal_argument_exception.error.reason, iaException.Reason, true, true, true)
+      Assert.Equal(illegal_argument_exception.error.root_cause.Head.reason, iaException.RootCause.[0].Reason, true, true, true)
+      Assert.Equal(illegal_argument_exception.status, (int iaException.Status))
+      Assert.Equal(ElasticsearchExceptions.IllegalArgumentException, iaException.ErrorType)
+      Assert.Equal(ElasticsearchCauseByType.NumberFormat, iaException.Cause.Value.Type)
+      Assert.Equal(illegal_argument_exception.error.caused_by.reason, iaException.Cause.Value.Reason, true, true, true)
