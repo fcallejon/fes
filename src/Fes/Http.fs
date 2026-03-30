@@ -80,8 +80,18 @@ module Http =
 module ElasticsearchClient =
     type HttpCall = HttpRequestMessage -> TaskResult<HttpResponseMessage, exn>
 
+    /// Wraps a standard <see cref="System.Net.Http.HttpClient"/> as an <see cref="HttpCall"/>,
+    /// capturing any transport-level exception as an <c>Error</c>.
+    let fromHttpClient (client: System.Net.Http.HttpClient) : HttpCall =
+        client.SendAsync >> TaskResult.ofTask
+
     let inline execute (httpCall: HttpCall) : 'fesRequest -> TaskResult<'fesResponse, exn> =
         let inReq = fun (req: 'fesRequest) -> Http.toRequest req |> TaskHelpers.retn
         httpCall
         |> TaskResult.bindOut Http.Response.toResult
         |> TaskResult.bindIn inReq
+
+    /// Convenience wrapper that builds the full request pipeline for a given <see cref="System.Net.Http.HttpClient"/>.
+    /// Equivalent to <c>execute (fromHttpClient client)</c>.
+    let inline executeWith (client: System.Net.Http.HttpClient) : 'fesRequest -> TaskResult<'fesResponse, exn> =
+        execute (fromHttpClient client)

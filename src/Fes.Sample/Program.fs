@@ -114,10 +114,7 @@ let main _ =
     printfn $"Elasticsearch: {client.BaseAddress}"
 
     let inline executeElasticsearchCall req =
-        let arrow =
-            client.SendAsync >> TaskResult.ofTask
-            |> ElasticsearchClient.execute
-        arrow req
+        ElasticsearchClient.executeWith client req
 
     let indexName = getIndexName ()
     printfn $"Index Name: {indexName}"
