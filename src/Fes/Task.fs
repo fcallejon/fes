@@ -18,11 +18,11 @@ module TaskHelpers =
             return f a
         }
 
-    let mapOut (f: 'b -> 'c) (a: 'a -> Task<'b>) : 'a -> Task<'c> =
+    let inline mapOut (f: 'b -> 'c) (a: 'a -> Task<'b>) : 'a -> Task<'c> =
         a >> map f
 
-    let bindOut (f: 'c -> Task<'a>) (a: 'a -> Task<'b>) : 'c -> Task<'b> =
+    let inline bindOut (f: 'c -> Task<'a>) (a: 'a -> Task<'b>) : 'c -> Task<'b> =
         f >> bind a
 
-    let mapIn (f: 'a2 -> 'a) (a: 'a -> Task<'b>) : 'a2 -> Task<'b> =
+    let inline mapIn (f: 'a2 -> 'a) (a: 'a -> Task<'b>) : 'a2 -> Task<'b> =
         f >> a

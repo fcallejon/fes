@@ -6,9 +6,9 @@ type TaskResult<'a, 'b> = Task<Result<'a, 'b>>
 
 [<RequireQualifiedAccess>]
 module TaskResult =
-    let retn x : TaskResult<'a, 'b> = Task.FromResult(Ok x)
+    let inline retn x : TaskResult<'a, 'b> = Task.FromResult(Ok x)
 
-    let bind (f: 'a -> TaskResult<'b, 'e>) (x: TaskResult<'a, 'e>) : TaskResult<'b, 'e> =
+    let inline bind (f: 'a -> TaskResult<'b, 'e>) (x: TaskResult<'a, 'e>) : TaskResult<'b, 'e> =
         task {
             match! x with
             | Ok r -> return! f r
@@ -32,17 +32,17 @@ module TaskResult =
             | e -> return Error e
         }
 
-    let mapIn (f: 'a2 -> 'a) (a: 'a -> TaskResult<'b, exn>) : 'a2 -> TaskResult<'b, exn> =
+    let inline mapIn (f: 'a2 -> 'a) (a: 'a -> TaskResult<'b, exn>) : 'a2 -> TaskResult<'b, exn> =
         f >> a
 
-    let mapOut (f: 'b -> 'c) (a: 'a -> TaskResult<'b, exn>) : 'a -> TaskResult<'c, exn> =
+    let inline mapOut (f: 'b -> 'c) (a: 'a -> TaskResult<'b, exn>) : 'a -> TaskResult<'c, exn> =
         a >> map f
 
-    let bindIn (f: 'a2 -> TaskResult<'a, exn>) (a: 'a -> TaskResult<'b, exn>) : 'a2 -> TaskResult<'b, exn> =
+    let inline bindIn (f: 'a2 -> TaskResult<'a, exn>) (a: 'a -> TaskResult<'b, exn>) : 'a2 -> TaskResult<'b, exn> =
         f >> bind a
 
-    let bindOut (f: 'b -> TaskResult<'c, exn>) (a: 'a -> TaskResult<'b, exn>) : 'a -> TaskResult<'c, exn> =
+    let inline bindOut (f: 'b -> TaskResult<'c, exn>) (a: 'a -> TaskResult<'b, exn>) : 'a -> TaskResult<'c, exn> =
         a >> bind f
 
-    let after (f: 'a * 'b -> _) (g: 'a -> TaskResult<'b, exn>) : 'a -> TaskResult<'b, exn> =
+    let inline after (f: 'a * 'b -> _) (g: 'a -> TaskResult<'b, exn>) : 'a -> TaskResult<'b, exn> =
         fun a -> g a |> map (fun b -> let _ = f (a, b) in b)
