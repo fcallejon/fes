@@ -23,6 +23,7 @@
     <Compile Include="Commands\IndexDocumentCommands.fs" />
     <Compile Include="Commands\IndexCommands.fs" />
     <Compile Include="Commands\DocumentCommands.fs" />
+    <Compile Include="Commands\UpdateDocumentCommands.fs" />
     <Compile Include="Commands\SearchCommands.fs" />
     <Compile Include="Commands\ClusterCommands.fs" />
     <Compile Include="Commands\ScriptCommands.fs" />
