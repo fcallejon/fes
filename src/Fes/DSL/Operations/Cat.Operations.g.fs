@@ -13,7 +13,7 @@ open Fes.DSL.Models.Types
 module CatOperations =
 
     type CatAliasesRequest = {
-        Name: Names
+        Name: Name array
         H: TypesCatAliasesColumns option
         S: Names option
         ExpandWildcards: ExpandWildcards option
@@ -21,7 +21,7 @@ module CatOperations =
     } with
         static member ToRequest(request: CatAliasesRequest) : Result<Fes.Http.RequestMsg, exn> =
             try
-                let path = $"/_cat/aliases/{request.Name}"
+                let path = $"/_cat/aliases/{String.Join(",", request.Name)}"
                 let queryParams =
                     [
                         request.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
@@ -47,7 +47,7 @@ module CatOperations =
     type CatAliasesRequestBuilder() =
         member _.Yield(_: unit) : CatAliasesRequest =
             {
-                CatAliasesRequest.Name = Unchecked.defaultof<Names>
+                CatAliasesRequest.Name = [||]
                 CatAliasesRequest.H = Option.None
                 CatAliasesRequest.S = Option.None
                 CatAliasesRequest.ExpandWildcards = Option.None
@@ -55,7 +55,7 @@ module CatOperations =
             } : CatAliasesRequest
 
         [<CustomOperation("name")>]
-        member _.Name(state: CatAliasesRequest, value: Names) =
+        member _.Name(state: CatAliasesRequest, value: Name array) =
             { state with CatAliasesRequest.Name = value } : CatAliasesRequest
 
         [<CustomOperation("h")>]

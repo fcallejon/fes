@@ -327,11 +327,11 @@ module SecurityOperations =
     let securityChangePasswordRequest = SecurityChangePasswordRequestBuilder()
 
     type SecurityClearApiKeyCacheRequest = {
-        Ids: Ids
+        Ids: Id array
     } with
         static member ToRequest(request: SecurityClearApiKeyCacheRequest) : Result<Fes.Http.RequestMsg, exn> =
             try
-                let path = $"/_security/api_key/{request.Ids}/_clear_cache"
+                let path = $"/_security/api_key/{String.Join(",", request.Ids)}/_clear_cache"
                 let fullPath = path
                 fullPath
                 |> Fes.Http.Request.fromPath
@@ -347,11 +347,11 @@ module SecurityOperations =
     type SecurityClearApiKeyCacheRequestBuilder() =
         member _.Yield(_: unit) : SecurityClearApiKeyCacheRequest =
             {
-                SecurityClearApiKeyCacheRequest.Ids = Unchecked.defaultof<Ids>
+                SecurityClearApiKeyCacheRequest.Ids = [||]
             } : SecurityClearApiKeyCacheRequest
 
         [<CustomOperation("ids")>]
-        member _.Ids(state: SecurityClearApiKeyCacheRequest, value: Ids) =
+        member _.Ids(state: SecurityClearApiKeyCacheRequest, value: Id array) =
             { state with SecurityClearApiKeyCacheRequest.Ids = value } : SecurityClearApiKeyCacheRequest
 
     let securityClearApiKeyCacheRequest = SecurityClearApiKeyCacheRequestBuilder()
@@ -366,11 +366,11 @@ module SecurityOperations =
     }
 
     type SecurityClearCachedPrivilegesRequest = {
-        Application: Names
+        Application: Name array
     } with
         static member ToRequest(request: SecurityClearCachedPrivilegesRequest) : Result<Fes.Http.RequestMsg, exn> =
             try
-                let path = $"/_security/privilege/{request.Application}/_clear_cache"
+                let path = $"/_security/privilege/{String.Join(",", request.Application)}/_clear_cache"
                 let fullPath = path
                 fullPath
                 |> Fes.Http.Request.fromPath
@@ -386,11 +386,11 @@ module SecurityOperations =
     type SecurityClearCachedPrivilegesRequestBuilder() =
         member _.Yield(_: unit) : SecurityClearCachedPrivilegesRequest =
             {
-                SecurityClearCachedPrivilegesRequest.Application = Unchecked.defaultof<Names>
+                SecurityClearCachedPrivilegesRequest.Application = [||]
             } : SecurityClearCachedPrivilegesRequest
 
         [<CustomOperation("application")>]
-        member _.Application(state: SecurityClearCachedPrivilegesRequest, value: Names) =
+        member _.Application(state: SecurityClearCachedPrivilegesRequest, value: Name array) =
             { state with SecurityClearCachedPrivilegesRequest.Application = value } : SecurityClearCachedPrivilegesRequest
 
     let securityClearCachedPrivilegesRequest = SecurityClearCachedPrivilegesRequestBuilder()
@@ -405,12 +405,12 @@ module SecurityOperations =
     }
 
     type SecurityClearCachedRealmsRequest = {
-        Realms: Names
+        Realms: Name array
         Usernames: string array option
     } with
         static member ToRequest(request: SecurityClearCachedRealmsRequest) : Result<Fes.Http.RequestMsg, exn> =
             try
-                let path = $"/_security/realm/{request.Realms}/_clear_cache"
+                let path = $"/_security/realm/{String.Join(",", request.Realms)}/_clear_cache"
                 let queryParams =
                     [
                         request.Usernames |> Option.map (fun v -> "usernames", Fes.Http.toQueryValue v)
@@ -433,12 +433,12 @@ module SecurityOperations =
     type SecurityClearCachedRealmsRequestBuilder() =
         member _.Yield(_: unit) : SecurityClearCachedRealmsRequest =
             {
-                SecurityClearCachedRealmsRequest.Realms = Unchecked.defaultof<Names>
+                SecurityClearCachedRealmsRequest.Realms = [||]
                 SecurityClearCachedRealmsRequest.Usernames = Option.None
             } : SecurityClearCachedRealmsRequest
 
         [<CustomOperation("realms")>]
-        member _.Realms(state: SecurityClearCachedRealmsRequest, value: Names) =
+        member _.Realms(state: SecurityClearCachedRealmsRequest, value: Name array) =
             { state with SecurityClearCachedRealmsRequest.Realms = value } : SecurityClearCachedRealmsRequest
 
         [<CustomOperation("usernames")>]
@@ -457,11 +457,11 @@ module SecurityOperations =
     }
 
     type SecurityClearCachedRolesRequest = {
-        Name: Names
+        Name: Name array
     } with
         static member ToRequest(request: SecurityClearCachedRolesRequest) : Result<Fes.Http.RequestMsg, exn> =
             try
-                let path = $"/_security/role/{request.Name}/_clear_cache"
+                let path = $"/_security/role/{String.Join(",", request.Name)}/_clear_cache"
                 let fullPath = path
                 fullPath
                 |> Fes.Http.Request.fromPath
@@ -477,11 +477,11 @@ module SecurityOperations =
     type SecurityClearCachedRolesRequestBuilder() =
         member _.Yield(_: unit) : SecurityClearCachedRolesRequest =
             {
-                SecurityClearCachedRolesRequest.Name = Unchecked.defaultof<Names>
+                SecurityClearCachedRolesRequest.Name = [||]
             } : SecurityClearCachedRolesRequest
 
         [<CustomOperation("name")>]
-        member _.Name(state: SecurityClearCachedRolesRequest, value: Names) =
+        member _.Name(state: SecurityClearCachedRolesRequest, value: Name array) =
             { state with SecurityClearCachedRolesRequest.Name = value } : SecurityClearCachedRolesRequest
 
     let securityClearCachedRolesRequest = SecurityClearCachedRolesRequestBuilder()
@@ -498,11 +498,11 @@ module SecurityOperations =
     type SecurityClearCachedServiceTokensRequest = {
         Namespace: Namespace
         Service: Service
-        Name: Names
+        Name: Name array
     } with
         static member ToRequest(request: SecurityClearCachedServiceTokensRequest) : Result<Fes.Http.RequestMsg, exn> =
             try
-                let path = $"/_security/service/{request.Namespace}/{request.Service}/credential/token/{request.Name}/_clear_cache"
+                let path = $"/_security/service/{request.Namespace}/{request.Service}/credential/token/{String.Join(",", request.Name)}/_clear_cache"
                 let fullPath = path
                 fullPath
                 |> Fes.Http.Request.fromPath
@@ -520,7 +520,7 @@ module SecurityOperations =
             {
                 SecurityClearCachedServiceTokensRequest.Namespace = Unchecked.defaultof<Namespace>
                 SecurityClearCachedServiceTokensRequest.Service = Unchecked.defaultof<Service>
-                SecurityClearCachedServiceTokensRequest.Name = Unchecked.defaultof<Names>
+                SecurityClearCachedServiceTokensRequest.Name = [||]
             } : SecurityClearCachedServiceTokensRequest
 
         [<CustomOperation("namespace")>]
@@ -532,7 +532,7 @@ module SecurityOperations =
             { state with SecurityClearCachedServiceTokensRequest.Service = value } : SecurityClearCachedServiceTokensRequest
 
         [<CustomOperation("name")>]
-        member _.Name(state: SecurityClearCachedServiceTokensRequest, value: Names) =
+        member _.Name(state: SecurityClearCachedServiceTokensRequest, value: Name array) =
             { state with SecurityClearCachedServiceTokensRequest.Name = value } : SecurityClearCachedServiceTokensRequest
 
     let securityClearCachedServiceTokensRequest = SecurityClearCachedServiceTokensRequestBuilder()
