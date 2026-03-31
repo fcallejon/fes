@@ -1,1 +1,1 @@
-{"r":"23769785157","m":"2026-03","commented_pr153":"dup of 12+111","monthly_issue":"created","bug_in_main":"teeOk/teeError","mcp_issues":"empty(known)","prs":"44 open. bugs:153,148,141,140,137,120,75,18,12,111; feat:151,146,132,112,108,85,71,69,66,64,35,20; perf:142,107,93,86,81,79,50,43,37,27,14; tests:134,130,110,94,92,25,22; docs:104,28,59,16"}
+{"r":"23779115675","m":"2026-03","monthly":"created","mcp_issues":"empty","dup":"teeOk:keep12,close111,153","pr154":"fix cat/sec array path params"}
