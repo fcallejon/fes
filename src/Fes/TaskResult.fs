@@ -46,3 +46,24 @@ module TaskResult =
 
     let after (f: 'a * 'b -> _) (g: 'a -> TaskResult<'b, exn>) : 'a -> TaskResult<'b, exn> =
         fun a -> g a |> map (fun b -> let _ = f (a, b) in b)
+
+    /// Runs a side-effect on the success value and returns the original TaskResult unchanged.
+    /// Useful for logging or tracing in async pipelines.
+    let teeOk (f: 'a -> unit) (x: TaskResult<'a, 'e>) : TaskResult<'a, 'e> =
+        x |> TaskHelpers.map (fun r ->
+            match r with
+            | Ok v -> f v; r
+            | Error _ -> r)
+
+    /// Runs a side-effect on the error value and returns the original TaskResult unchanged.
+    /// Useful for logging or tracing in async pipelines.
+    let teeError (f: 'e -> unit) (x: TaskResult<'a, 'e>) : TaskResult<'a, 'e> =
+        x |> TaskHelpers.map (fun r ->
+            match r with
+            | Ok _ -> r
+            | Error e -> f e; r)
+
+    /// Discards the success value, returning TaskResult<unit, 'e>.
+    /// Useful when only the success/failure outcome matters, not the value.
+    let ignore (x: TaskResult<'a, 'e>) : TaskResult<unit, 'e> =
+        x |> map (fun _ -> ())
