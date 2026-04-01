@@ -207,3 +207,17 @@ module SearchCommands =
 
         Assert.Contains("Method: POST", result)
         Assert.Contains("/products/_msearch", result)
+
+    [<Fact>]
+    let ``Search request with stats array serializes as comma-separated query param`` () =
+        let searchReq = searchRequest {
+            index (box "products" : Indices)
+            stats [| "group1"; "group2"; "group3" |]
+        }
+
+        let result = searchReq |> toRequestString
+
+        Assert.Contains("Method: POST", result)
+        Assert.Contains("/products/_search", result)
+        // String arrays must be joined with commas, not rendered as "System.String[]"
+        Assert.Contains("stats=group1,group2,group3", result)
