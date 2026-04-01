@@ -1,1 +1,1 @@
-{"r":"23852872355","m":"2026-04","n":"30 RA PRs open. OOM build (137). No user issues. issue-list MCP broken. MA issue created Apr26. PR #163 TaskResult.teeOk/teeError/ignore. #153 preferred over #111 for teeOk fix."}
+{"r":"23858713574","m":"2026-04","n":"20 RA PRs open. Issue MCP broken. Build OOM. MA issue created. PR: fix string[] query params (supersedes #140). #153>>#111 teeOk."}
