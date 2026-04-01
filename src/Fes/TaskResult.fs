@@ -46,3 +46,23 @@ module TaskResult =
 
     let after (f: 'a * 'b -> _) (g: 'a -> TaskResult<'b, exn>) : 'a -> TaskResult<'b, exn> =
         fun a -> g a |> map (fun b -> let _ = f (a, b) in b)
+
+    /// Unwrap the TaskResult, returning the value on success or `defaultValue` on error.
+    let inline defaultValue (def: 'a) (x: TaskResult<'a, 'e>) : Task<'a> =
+        x |> TaskHelpers.map (function Ok v -> v | Error _ -> def)
+
+    /// Unwrap the TaskResult, returning the value on success or applying `f` to the error.
+    let inline defaultWith (f: 'e -> 'a) (x: TaskResult<'a, 'e>) : Task<'a> =
+        x |> TaskHelpers.map (function Ok v -> v | Error e -> f e)
+
+    /// Convert a TaskResult to Task<'a option>, discarding error information.
+    let inline toOption (x: TaskResult<'a, 'e>) : Task<'a option> =
+        x |> TaskHelpers.map (function Ok v -> Some v | Error _ -> None)
+
+    /// Apply `f` to the error channel, enabling error recovery via monadic chaining.
+    let catch (f: 'e -> TaskResult<'a, 'e2>) (x: TaskResult<'a, 'e>) : TaskResult<'a, 'e2> =
+        task {
+            match! x with
+            | Ok v -> return Ok v
+            | Error e -> return! f e
+        }

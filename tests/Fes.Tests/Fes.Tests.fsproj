@@ -28,6 +28,7 @@
     <Compile Include="Commands\ScriptCommands.fs" />
     <Compile Include="JsonDeserializationTests.fs" />
     <Compile Include="Responses\ErrorDeserialization.fs" />
+    <Compile Include="TaskResultTests.fs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Fes\Fes.fsproj" />
