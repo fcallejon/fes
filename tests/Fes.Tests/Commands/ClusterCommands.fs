@@ -174,8 +174,8 @@ module CatCommands =
 
         let result = catReq |> toRequestString
 
-        // Note: Generated code uses POST for this endpoint
-        Assert.Contains("Method: POST", result)
+        // Cat count uses GET per the Elasticsearch API spec
+        Assert.Contains("Method: GET", result)
         Assert.Contains("/_cat/count/products", result)
 
     [<Fact>]

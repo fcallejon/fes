@@ -287,7 +287,7 @@ module CatOperations =
                 let fullPath = path + queryString
                 fullPath
                 |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
+                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
                 |> Result.Ok
             with ex -> Result.Error ex
 
