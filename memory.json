@@ -1,1 +1,1 @@
-{"r":"23872956295","m":"2026-04","n":"11 RA PRs (added catcount fix). MCP broken. OOM build. MA created 2026-04."}
+{"r":"23882313744","m":"2026-04","n":"42 RA PRs open. Build OOM infra issue. Issue MCP broken. MA issue created 2026-04. teeOk/teeError bug exists in Prelude.fs main (PRs #153 and #12 both address it)."}
