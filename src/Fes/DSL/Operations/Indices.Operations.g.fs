@@ -2346,7 +2346,7 @@ module IndicesOperations =
                 let fullPath = path + queryString
                 fullPath
                 |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
+                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
                 |> Result.Ok
             with ex -> Result.Error ex
 
@@ -3142,7 +3142,7 @@ module IndicesOperations =
                 let fullPath = path + queryString
                 fullPath
                 |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
+                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
                 |> Result.Ok
             with ex -> Result.Error ex
 
