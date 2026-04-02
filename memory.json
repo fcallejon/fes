@@ -1,1 +1,1 @@
-{"r":"23889850483","m":"2026-04","n":"OOM build. MCP broken. #153 teeOk fix. PRs: #148-#174. This run: PR for util tests."}
+{"r":"23895570067","m":"2026-04","n":"OOM build (exit 137). MCP PR-read broken. 50 open draft PRs (#16-#176). Key bugs in main: teeOk/teeError never calls fn (fix in #153/#111, #153 preferred). Apr activity issue created. Commented on #35 (dup of #167), #111 (dup of #153), #176 (depends on #153). PRs needing priority review: #153,#174,#169,#156,#148,#176,#162."}
