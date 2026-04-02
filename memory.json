@@ -1,1 +1,1 @@
-{"r":"23904167480","m":"2026-04","n":"OOM build (exit 137). MCP PR-read broken. 53 open Repo Assist PRs (#12-#177). Key: teeOk/teeError fix in #153 (preferred over #111). Created #177 (fix IndicesFlushRequest+IndicesRefreshRequest POST, + indices mgmt tests). Monthly activity issue created this run. Priority PRs: #153,#174,#177,#169,#156,#148,#137,#120."}
+{"r":"23910227876","m":"2026-04","n":"50 RA PRs open. Key: #153(teeOk), #169(str[]), #156(pathArr), #148, #174, #179, #120, #137, #59, #180(new). Commented #111 dupe. MCP issue search broken."}
