@@ -75,8 +75,7 @@ module TransformOperations =
         let withTimeout (value: Types.Duration) (req: TransformDeleteTransformRequest) =
             { req with Timeout = Some value }
 
-    type TransformGetNodeStatsRequest = {
-    }
+    type TransformGetNodeStatsRequest = | TransformGetNodeStatsRequest
 
         with
         static member ToRequest(req: TransformGetNodeStatsRequest) : Result<Fes.Http.RequestMsg, exn> =

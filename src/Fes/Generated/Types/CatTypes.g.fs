@@ -588,8 +588,7 @@ module CatTypes =
         | CatRecoveryColumn of CatTypes.CatRecoveryColumn
         | Array of CatTypes.CatRecoveryColumn list
 
-    type CatRequestBase = {
-    }
+    type CatRequestBase = System.Text.Json.JsonElement
 
     [<RequireQualifiedAccess>]
     type CatSegmentsColumn =

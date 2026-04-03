@@ -1938,8 +1938,7 @@ module GlobalOperations =
         let withMasterTimeout (value: Types.Duration) (req: GetScriptRequest) =
             { req with MasterTimeout = Some value }
 
-    type GetScriptContextRequest = {
-    }
+    type GetScriptContextRequest = | GetScriptContextRequest
 
         with
         static member ToRequest(req: GetScriptContextRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1961,8 +1960,7 @@ module GlobalOperations =
 
     let getScriptContextRequest = GetScriptContextRequestBuilder()
 
-    type GetScriptLanguagesRequest = {
-    }
+    type GetScriptLanguagesRequest = | GetScriptLanguagesRequest
 
         with
         static member ToRequest(req: GetScriptLanguagesRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -2339,8 +2337,7 @@ module GlobalOperations =
         let withRequireDataStream (value: bool) (req: IndexRequest) =
             { req with RequireDataStream = Some value }
 
-    type InfoRequest = {
-    }
+    type InfoRequest = | InfoRequest
 
         with
         static member ToRequest(req: InfoRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -3147,8 +3144,7 @@ module GlobalOperations =
         let withProjectRouting (value: Types.ProjectRouting) (req: OpenPointInTimeRequest) =
             { req with ProjectRouting = Some value }
 
-    type PingRequest = {
-    }
+    type PingRequest = | PingRequest
 
         with
         static member ToRequest(req: PingRequest) : Result<Fes.Http.RequestMsg, exn> =

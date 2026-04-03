@@ -176,8 +176,7 @@ module IngestOperations =
         let withTimeout (value: Types.Duration) (req: IngestDeletePipelineRequest) =
             { req with Timeout = Some value }
 
-    type IngestGeoIpStatsRequest = {
-    }
+    type IngestGeoIpStatsRequest = | IngestGeoIpStatsRequest
 
         with
         static member ToRequest(req: IngestGeoIpStatsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -312,8 +311,7 @@ module IngestOperations =
         let withSummary (value: bool) (req: IngestGetPipelineRequest) =
             { req with Summary = Some value }
 
-    type IngestProcessorGrokRequest = {
-    }
+    type IngestProcessorGrokRequest = | IngestProcessorGrokRequest
 
         with
         static member ToRequest(req: IngestProcessorGrokRequest) : Result<Fes.Http.RequestMsg, exn> =

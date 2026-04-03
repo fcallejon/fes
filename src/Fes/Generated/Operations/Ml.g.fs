@@ -2818,8 +2818,7 @@ module MlOperations =
         let withInferenceConfig (value: MlTypes.InferenceConfigUpdateContainer) (req: MlInferTrainedModelRequest) =
             { req with InferenceConfig = Some value }
 
-    type MlInfoRequest = {
-    }
+    type MlInfoRequest = | MlInfoRequest
 
         with
         static member ToRequest(req: MlInfoRequest) : Result<Fes.Http.RequestMsg, exn> =

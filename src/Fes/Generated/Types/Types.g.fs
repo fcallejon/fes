@@ -551,8 +551,7 @@ module Types =
         Lambda: Types.Float option
     }
 
-    [<RequireQualifiedAccess>]
-    and RetrieverContainer =
+    and [<RequireQualifiedAccess>] RetrieverContainer =
         | Standard of Types.StandardRetriever
         | Knn of Types.KnnRetriever
         | Rrf of Types.RRFRetriever
@@ -577,8 +576,7 @@ module Types =
     }
 
     /// Either a direct RetrieverContainer (backward compatible) or an RRFRetrieverComponent with weight.
-    [<RequireQualifiedAccess>]
-    and RRFRetrieverEntry =
+    and [<RequireQualifiedAccess>] RRFRetrieverEntry =
         | RetrieverContainer of Types.RetrieverContainer
         | RRFRetrieverComponent of Types.RRFRetrieverComponent
 
@@ -706,8 +704,7 @@ module Types =
     }
 
     /// For empty Class assignments
-    type EmptyObject = {
-    }
+    type EmptyObject = System.Text.Json.JsonElement
 
     /// The response returned by Elasticsearch when request execution did not succeed.
     type ErrorResponseBase = {
@@ -1307,8 +1304,7 @@ module Types =
         TotalCount: Types.Long
     }
 
-    type RankBase = {
-    }
+    type RankBase = System.Text.Json.JsonElement
 
     type RrfRank = {
         [<System.Text.Json.Serialization.JsonPropertyName("rank_constant")>]
@@ -1395,8 +1391,7 @@ module Types =
 
     type RelationName = string
 
-    type RequestBase = {
-    }
+    type RequestBase = System.Text.Json.JsonElement
 
     type RequestCacheStats = {
         [<System.Text.Json.Serialization.JsonPropertyName("evictions")>]

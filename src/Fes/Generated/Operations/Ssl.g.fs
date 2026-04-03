@@ -11,8 +11,7 @@ open Fes
 [<AutoOpen>]
 module SslOperations =
 
-    type SslCertificatesRequest = {
-    }
+    type SslCertificatesRequest = | SslCertificatesRequest
 
         with
         static member ToRequest(req: SslCertificatesRequest) : Result<Fes.Http.RequestMsg, exn> =

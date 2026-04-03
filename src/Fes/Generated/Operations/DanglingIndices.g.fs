@@ -139,8 +139,7 @@ module DanglingIndicesOperations =
         let withTimeout (value: Types.Duration) (req: DanglingIndicesImportDanglingIndexRequest) =
             { req with Timeout = Some value }
 
-    type DanglingIndicesListDanglingIndicesRequest = {
-    }
+    type DanglingIndicesListDanglingIndicesRequest = | DanglingIndicesListDanglingIndicesRequest
 
         with
         static member ToRequest(req: DanglingIndicesListDanglingIndicesRequest) : Result<Fes.Http.RequestMsg, exn> =

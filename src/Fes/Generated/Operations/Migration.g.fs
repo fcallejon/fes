@@ -40,8 +40,7 @@ module MigrationOperations =
 
     let migrationDeprecationsRequest = MigrationDeprecationsRequestBuilder()
 
-    type MigrationGetFeatureUpgradeStatusRequest = {
-    }
+    type MigrationGetFeatureUpgradeStatusRequest = | MigrationGetFeatureUpgradeStatusRequest
 
         with
         static member ToRequest(req: MigrationGetFeatureUpgradeStatusRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -63,8 +62,7 @@ module MigrationOperations =
 
     let migrationGetFeatureUpgradeStatusRequest = MigrationGetFeatureUpgradeStatusRequestBuilder()
 
-    type MigrationPostFeatureUpgradeRequest = {
-    }
+    type MigrationPostFeatureUpgradeRequest = | MigrationPostFeatureUpgradeRequest
 
         with
         static member ToRequest(req: MigrationPostFeatureUpgradeRequest) : Result<Fes.Http.RequestMsg, exn> =

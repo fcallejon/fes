@@ -10,9 +10,11 @@ open Fes.Generator.Emitters.FSharpWriter
 
 let emitEnum (w: Writer) (isFirst: bool) (def: EnumDefinition) =
     w.DocComment def.Description
-    w.Attribute "RequireQualifiedAccess"
-    let keyword = w.TypeKeyword isFirst
-    w.Line $"{keyword} {Namespacing.toFSharpTypeName def.Name.Name} ="
+    if isFirst then
+        w.Attribute "RequireQualifiedAccess"
+        w.Line $"type {Namespacing.toFSharpTypeName def.Name.Name} ="
+    else
+        w.Line $"and [<RequireQualifiedAccess>] {Namespacing.toFSharpTypeName def.Name.Name} ="
 
     w.Indent()
     for m in def.Members do
@@ -56,14 +58,18 @@ let emitRecord (w: Writer) (isFirst: bool) (ctx: TypeResolver.ResolveContext) (n
         match generics with
         | [] -> ""
         | gs -> "<" + (gs |> List.map (fun g -> $"'{Namespacing.toCamelCase g.Name}") |> String.concat ", ") + ">"
-    w.Line $"{keyword} {Namespacing.toFSharpTypeName name}{genericParams} = {{"
 
-    w.Indent()
-    for p in properties do
-        emitRecordField w ctx p
-    w.Dedent()
+    if properties.IsEmpty then
+        // F# records cannot be empty — use a type alias to JsonElement
+        w.Line $"{keyword} {Namespacing.toFSharpTypeName name}{genericParams} = System.Text.Json.JsonElement"
+    else
+        w.Line $"{keyword} {Namespacing.toFSharpTypeName name}{genericParams} = {{"
+        w.Indent()
+        for p in properties do
+            emitRecordField w ctx p
+        w.Dedent()
+        w.Line "}"
 
-    w.Line "}"
     w.BlankLine()
 
 // ============================================================================
@@ -76,10 +82,12 @@ let emitContainerVariant (w: Writer) (isFirst: bool) (ctx: TypeResolver.ResolveC
 
     // Emit the DU
     w.DocComment def.Description
-    w.Attribute "RequireQualifiedAccess"
-    let keyword = w.TypeKeyword isFirst
     let duName = Namespacing.toFSharpTypeName def.Name.Name
-    w.Line $"{keyword} {duName} ="
+    if isFirst then
+        w.Attribute "RequireQualifiedAccess"
+        w.Line $"type {duName} ="
+    else
+        w.Line $"and [<RequireQualifiedAccess>] {duName} ="
 
     w.Indent()
     for p in variantProps do
@@ -118,10 +126,12 @@ let emitInternalTagVariant (w: Writer) (isFirst: bool) (ctx: TypeResolver.Resolv
     // The type_alias wraps a union_of where each item is a concrete type
     // whose tag field value determines the case name
     w.DocComment def.Description
-    w.Attribute "RequireQualifiedAccess"
-    let keyword = w.TypeKeyword isFirst
     let duName = Namespacing.toFSharpTypeName def.Name.Name
-    w.Line $"{keyword} {duName} ="
+    if isFirst then
+        w.Attribute "RequireQualifiedAccess"
+        w.Line $"type {duName} ="
+    else
+        w.Line $"and [<RequireQualifiedAccess>] {duName} ="
 
     w.Indent()
     match def.Type with
@@ -161,8 +171,11 @@ let emitTypeAlias (w: Writer) (isFirst: bool) (ctx: TypeResolver.ResolveContext)
     match def.Type with
     | ValueOf.UnionOf items when items.Length >= 2 ->
         // Emit as DU for unions
-        w.Attribute "RequireQualifiedAccess"
-        w.Line $"{keyword} {name}{genericParams} ="
+        if isFirst then
+            w.Attribute "RequireQualifiedAccess"
+            w.Line $"type {name}{genericParams} ="
+        else
+            w.Line $"and [<RequireQualifiedAccess>] {name}{genericParams} ="
         w.Indent()
         for i, item in items |> List.indexed do
             let caseType = TypeResolver.resolveValueOf ctx item
@@ -177,8 +190,22 @@ let emitTypeAlias (w: Writer) (isFirst: bool) (ctx: TypeResolver.ResolveContext)
             w.Line $"| {caseName} of {caseType}"
         w.Dedent()
     | _ ->
+        let keyword = w.TypeKeyword isFirst
         let resolved = TypeResolver.resolveValueOf ctx def.Type
-        w.Line $"{keyword} {name}{genericParams} = {resolved}"
+        // Only include generic params that appear in the resolved type
+        let usedGenericParams =
+            match def.Generics with
+            | [] -> ""
+            | gs ->
+                let used =
+                    gs
+                    |> List.filter (fun g ->
+                        let paramStr = $"'{Namespacing.toCamelCase g.Name}"
+                        resolved.Contains(paramStr))
+                match used with
+                | [] -> ""
+                | us -> "<" + (us |> List.map (fun g -> $"'{Namespacing.toCamelCase g.Name}") |> String.concat ", ") + ">"
+        w.Line $"{keyword} {name}{usedGenericParams} = {resolved}"
 
     w.BlankLine()
 

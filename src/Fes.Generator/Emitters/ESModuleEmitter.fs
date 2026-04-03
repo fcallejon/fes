@@ -73,14 +73,12 @@ let emitESModule (index: TypeIndex.TypeIndex) : string * string =
                         // Returns a default request that can be used with the CE builder
                         w.Line $"let {funcName} {paramList} ="
                         w.Indent()
-                        w.Line $"{{ Unchecked.defaultof<{reqTypeName}> with"
-                        w.Indent()
+                        w.Line $"let mutable req = Unchecked.defaultof<{reqTypeName}>"
                         for p in pathParams do
                             let fieldName = Namespacing.toFieldName p.Name
                             let argName = Namespacing.toFunctionName p.Name
-                            w.Line $"{fieldName} = {argName}"
-                        w.Dedent()
-                        w.Line "}"
+                            w.Line $"req <- {{ req with {fieldName} = {argName} }}"
+                        w.Line "req"
                         w.Dedent()
                     else
                         w.Line $"let {funcName} {paramList} : {reqTypeName} ="
@@ -150,14 +148,11 @@ let emitESModule (index: TypeIndex.TypeIndex) : string * string =
                         if List.isEmpty pathParams then
                             w.Line $"Unchecked.defaultof<{reqTypeName}>"
                         else
-                            w.Line $"let req = {{ Unchecked.defaultof<{reqTypeName}> with"
-                            w.Indent()
+                            w.Line $"let mutable req = Unchecked.defaultof<{reqTypeName}>"
                             for p in pathParams do
                                 let fieldName = Namespacing.toFieldName p.Name
                                 let argName = Namespacing.toFunctionName p.Name
-                                w.Line $"{fieldName} = {argName}"
-                            w.Dedent()
-                            w.Line "}"
+                                w.Line $"req <- {{ req with {fieldName} = {argName} }}"
                             w.Line "req"
                         w.Dedent()
                     w.BlankLine()

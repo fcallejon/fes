@@ -2186,8 +2186,7 @@ module IndicesOperations =
         let withMasterTimeout (value: Types.Duration) (req: IndicesGetDataLifecycleRequest) =
             { req with MasterTimeout = Some value }
 
-    type IndicesGetDataLifecycleStatsRequest = {
-    }
+    type IndicesGetDataLifecycleStatsRequest = | IndicesGetDataLifecycleStatsRequest
 
         with
         static member ToRequest(req: IndicesGetDataLifecycleStatsRequest) : Result<Fes.Http.RequestMsg, exn> =

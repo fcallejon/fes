@@ -41,15 +41,12 @@ module TypesAggregations =
         Key: string
     }
 
-    type AdjacencyMatrixAggregate = {
-    }
+    type AdjacencyMatrixAggregate = System.Text.Json.JsonElement
 
-    type Aggregation = {
-    }
+    type Aggregation = System.Text.Json.JsonElement
 
     /// Base type for bucket aggregations. These aggregations also accept sub-aggregations.
-    type BucketAggregationBase = {
-    }
+    type BucketAggregationBase = System.Text.Json.JsonElement
 
     type AdjacencyMatrixAggregation = {
         [<System.Text.Json.Serialization.JsonPropertyName("filters")>]
@@ -84,20 +81,15 @@ module TypesAggregations =
         Values: TypesAggregations.Percentiles
     }
 
-    type HdrPercentilesAggregate = {
-    }
+    type HdrPercentilesAggregate = System.Text.Json.JsonElement
 
-    type HdrPercentileRanksAggregate = {
-    }
+    type HdrPercentileRanksAggregate = System.Text.Json.JsonElement
 
-    type TDigestPercentilesAggregate = {
-    }
+    type TDigestPercentilesAggregate = System.Text.Json.JsonElement
 
-    type TDigestPercentileRanksAggregate = {
-    }
+    type TDigestPercentileRanksAggregate = System.Text.Json.JsonElement
 
-    type PercentilesBucketAggregate = {
-    }
+    type PercentilesBucketAggregate = System.Text.Json.JsonElement
 
     type SingleMetricAggregateBase = {
         [<System.Text.Json.Serialization.JsonPropertyName("value")>]
@@ -106,32 +98,24 @@ module TypesAggregations =
         ValueAsString: string option
     }
 
-    type MedianAbsoluteDeviationAggregate = {
-    }
+    type MedianAbsoluteDeviationAggregate = System.Text.Json.JsonElement
 
-    type MinAggregate = {
-    }
+    type MinAggregate = System.Text.Json.JsonElement
 
-    type MaxAggregate = {
-    }
+    type MaxAggregate = System.Text.Json.JsonElement
 
     /// Sum aggregation result. `value` is always present and is zero if there were no values to process.
-    type SumAggregate = {
-    }
+    type SumAggregate = System.Text.Json.JsonElement
 
-    type AvgAggregate = {
-    }
+    type AvgAggregate = System.Text.Json.JsonElement
 
     /// Weighted average aggregation result. `value` is missing if the weight was set to zero.
-    type WeightedAvgAggregate = {
-    }
+    type WeightedAvgAggregate = System.Text.Json.JsonElement
 
     /// Value count aggregation result. `value` is always present.
-    type ValueCountAggregate = {
-    }
+    type ValueCountAggregate = System.Text.Json.JsonElement
 
-    type SimpleValueAggregate = {
-    }
+    type SimpleValueAggregate = System.Text.Json.JsonElement
 
     type DerivativeAggregate = {
         [<System.Text.Json.Serialization.JsonPropertyName("normalized_value")>]
@@ -145,11 +129,9 @@ module TypesAggregations =
         Keys: string list
     }
 
-    type Dip = {
-    }
+    type Dip = System.Text.Json.JsonElement
 
-    type DistributionChange = {
-    }
+    type DistributionChange = System.Text.Json.JsonElement
 
     type Indeterminable = {
         [<System.Text.Json.Serialization.JsonPropertyName("reason")>]
@@ -165,14 +147,11 @@ module TypesAggregations =
         Trend: string
     }
 
-    type Spike = {
-    }
+    type Spike = System.Text.Json.JsonElement
 
-    type Stationary = {
-    }
+    type Stationary = System.Text.Json.JsonElement
 
-    type StepChange = {
-    }
+    type StepChange = System.Text.Json.JsonElement
 
     type TrendChange = {
         [<System.Text.Json.Serialization.JsonPropertyName("p_value")>]
@@ -228,8 +207,7 @@ module TypesAggregations =
         SumAsString: string option
     }
 
-    type StatsBucketAggregate = {
-    }
+    type StatsBucketAggregate = System.Text.Json.JsonElement
 
     type StandardDeviationBounds = {
         [<System.Text.Json.Serialization.JsonPropertyName("upper")>]
@@ -292,8 +270,7 @@ module TypesAggregations =
         StdDeviationBoundsAsString: TypesAggregations.StandardDeviationBoundsAsString option
     }
 
-    type ExtendedStatsBucketAggregate = {
-    }
+    type ExtendedStatsBucketAggregate = System.Text.Json.JsonElement
 
     type CartesianBoundsAggregate = {
         [<System.Text.Json.Serialization.JsonPropertyName("bounds")>]
@@ -326,8 +303,7 @@ module TypesAggregations =
         Key: Types.Double
     }
 
-    type HistogramAggregate = {
-    }
+    type HistogramAggregate = System.Text.Json.JsonElement
 
     type DateHistogramBucket = {
         [<System.Text.Json.Serialization.JsonPropertyName("key_as_string")>]
@@ -336,8 +312,7 @@ module TypesAggregations =
         Key: Types.EpochTime<Types.UnitMillis>
     }
 
-    type DateHistogramAggregate = {
-    }
+    type DateHistogramAggregate = System.Text.Json.JsonElement
 
     type AutoDateHistogramAggregate = {
         [<System.Text.Json.Serialization.JsonPropertyName("interval")>]
@@ -359,8 +334,7 @@ module TypesAggregations =
         MaxAsString: string option
     }
 
-    type VariableWidthHistogramAggregate = {
-    }
+    type VariableWidthHistogramAggregate = System.Text.Json.JsonElement
 
     type TermsAggregateBase<'tBucket> = {
         [<System.Text.Json.Serialization.JsonPropertyName("doc_count_error_upper_bound")>]
@@ -380,8 +354,7 @@ module TypesAggregations =
     }
 
     /// Result of a `terms` aggregation when the field is a string.
-    type StringTermsAggregate = {
-    }
+    type StringTermsAggregate = System.Text.Json.JsonElement
 
     type LongTermsBucket = {
         [<System.Text.Json.Serialization.JsonPropertyName("key")>]
@@ -391,8 +364,7 @@ module TypesAggregations =
     }
 
     /// Result of a `terms` aggregation when the field is some kind of whole number like a integer, long, or a date.
-    type LongTermsAggregate = {
-    }
+    type LongTermsAggregate = System.Text.Json.JsonElement
 
     type DoubleTermsBucket = {
         [<System.Text.Json.Serialization.JsonPropertyName("key")>]
@@ -402,12 +374,10 @@ module TypesAggregations =
     }
 
     /// Result of a `terms` aggregation when the field is some kind of decimal number like a float, double, or distance.
-    type DoubleTermsAggregate = {
-    }
+    type DoubleTermsAggregate = System.Text.Json.JsonElement
 
     /// Result of a `terms` aggregation when the field is unmapped. `buckets` is always empty.
-    type UnmappedTermsAggregate = {
-    }
+    type UnmappedTermsAggregate = System.Text.Json.JsonElement
 
     type LongRareTermsBucket = {
         [<System.Text.Json.Serialization.JsonPropertyName("key")>]
@@ -417,8 +387,7 @@ module TypesAggregations =
     }
 
     /// Result of the `rare_terms` aggregation when the field is some kind of whole number like a integer, long, or a date.
-    type LongRareTermsAggregate = {
-    }
+    type LongRareTermsAggregate = System.Text.Json.JsonElement
 
     type StringRareTermsBucket = {
         [<System.Text.Json.Serialization.JsonPropertyName("key")>]
@@ -426,12 +395,10 @@ module TypesAggregations =
     }
 
     /// Result of the `rare_terms` aggregation when the field is a string.
-    type StringRareTermsAggregate = {
-    }
+    type StringRareTermsAggregate = System.Text.Json.JsonElement
 
     /// Result of a `rare_terms` aggregation when the field is unmapped. `buckets` is always empty.
-    type UnmappedRareTermsAggregate = {
-    }
+    type UnmappedRareTermsAggregate = System.Text.Json.JsonElement
 
     type MultiTermsBucket = {
         [<System.Text.Json.Serialization.JsonPropertyName("key")>]
@@ -442,8 +409,7 @@ module TypesAggregations =
         DocCountErrorUpperBound: Types.Long option
     }
 
-    type MultiTermsAggregate = {
-    }
+    type MultiTermsAggregate = System.Text.Json.JsonElement
 
     /// Base type for single-bucket aggregation results that can hold sub-aggregations results.
     type SingleBucketAggregateBase = {
@@ -451,56 +417,44 @@ module TypesAggregations =
         DocCount: Types.Long
     }
 
-    type MissingAggregate = {
-    }
+    type MissingAggregate = System.Text.Json.JsonElement
 
-    type NestedAggregate = {
-    }
+    type NestedAggregate = System.Text.Json.JsonElement
 
-    type ReverseNestedAggregate = {
-    }
+    type ReverseNestedAggregate = System.Text.Json.JsonElement
 
-    type GlobalAggregate = {
-    }
+    type GlobalAggregate = System.Text.Json.JsonElement
 
-    type FilterAggregate = {
-    }
+    type FilterAggregate = System.Text.Json.JsonElement
 
-    type ChildrenAggregate = {
-    }
+    type ChildrenAggregate = System.Text.Json.JsonElement
 
-    type ParentAggregate = {
-    }
+    type ParentAggregate = System.Text.Json.JsonElement
 
-    type SamplerAggregate = {
-    }
+    type SamplerAggregate = System.Text.Json.JsonElement
 
-    type UnmappedSamplerAggregate = {
-    }
+    type UnmappedSamplerAggregate = System.Text.Json.JsonElement
 
     type GeoHashGridBucket = {
         [<System.Text.Json.Serialization.JsonPropertyName("key")>]
         Key: Types.GeoHash
     }
 
-    type GeoHashGridAggregate = {
-    }
+    type GeoHashGridAggregate = System.Text.Json.JsonElement
 
     type GeoTileGridBucket = {
         [<System.Text.Json.Serialization.JsonPropertyName("key")>]
         Key: Types.GeoTile
     }
 
-    type GeoTileGridAggregate = {
-    }
+    type GeoTileGridAggregate = System.Text.Json.JsonElement
 
     type GeoHexGridBucket = {
         [<System.Text.Json.Serialization.JsonPropertyName("key")>]
         Key: Types.GeoHexCell
     }
 
-    type GeoHexGridAggregate = {
-    }
+    type GeoHexGridAggregate = System.Text.Json.JsonElement
 
     type RangeBucket = {
         [<System.Text.Json.Serialization.JsonPropertyName("from")>]
@@ -515,16 +469,13 @@ module TypesAggregations =
         Key: string option
     }
 
-    type RangeAggregate = {
-    }
+    type RangeAggregate = System.Text.Json.JsonElement
 
     /// Result of a `date_range` aggregation. Same format as a for a `range` aggregation: `from` and `to`
-    type DateRangeAggregate = {
-    }
+    type DateRangeAggregate = System.Text.Json.JsonElement
 
     /// Result of a `geo_distance` aggregation. The unit for `from` and `to` is meters by default.
-    type GeoDistanceAggregate = {
-    }
+    type GeoDistanceAggregate = System.Text.Json.JsonElement
 
     type IpRangeBucket = {
         [<System.Text.Json.Serialization.JsonPropertyName("key")>]
@@ -535,8 +486,7 @@ module TypesAggregations =
         To: string option
     }
 
-    type IpRangeAggregate = {
-    }
+    type IpRangeAggregate = System.Text.Json.JsonElement
 
     type IpPrefixBucket = {
         [<System.Text.Json.Serialization.JsonPropertyName("is_ipv6")>]
@@ -549,16 +499,14 @@ module TypesAggregations =
         Netmask: string option
     }
 
-    type IpPrefixAggregate = {
-    }
+    type IpPrefixAggregate = System.Text.Json.JsonElement
 
     type FiltersBucket = {
         [<System.Text.Json.Serialization.JsonPropertyName("key")>]
         Key: string option
     }
 
-    type FiltersAggregate = {
-    }
+    type FiltersAggregate = System.Text.Json.JsonElement
 
     type SignificantTermsAggregateBase<'t> = {
         [<System.Text.Json.Serialization.JsonPropertyName("bg_count")>]
@@ -581,20 +529,17 @@ module TypesAggregations =
         KeyAsString: string option
     }
 
-    type SignificantLongTermsAggregate = {
-    }
+    type SignificantLongTermsAggregate = System.Text.Json.JsonElement
 
     type SignificantStringTermsBucket = {
         [<System.Text.Json.Serialization.JsonPropertyName("key")>]
         Key: string
     }
 
-    type SignificantStringTermsAggregate = {
-    }
+    type SignificantStringTermsAggregate = System.Text.Json.JsonElement
 
     /// Result of the `significant_terms` aggregation on an unmapped field. `buckets` is always empty.
-    type UnmappedSignificantTermsAggregate = {
-    }
+    type UnmappedSignificantTermsAggregate = System.Text.Json.JsonElement
 
     type CompositeAggregateKey = Map<Types.Field, Types.FieldValue>
 
@@ -615,16 +560,14 @@ module TypesAggregations =
         Support: Types.Double
     }
 
-    type FrequentItemSetsAggregate = {
-    }
+    type FrequentItemSetsAggregate = System.Text.Json.JsonElement
 
     type TimeSeriesBucket = {
         [<System.Text.Json.Serialization.JsonPropertyName("key")>]
         Key: Map<Types.Field, Types.FieldValue>
     }
 
-    type TimeSeriesAggregate = {
-    }
+    type TimeSeriesAggregate = System.Text.Json.JsonElement
 
     type ScriptedMetricAggregate = {
         [<System.Text.Json.Serialization.JsonPropertyName("value")>]
@@ -925,8 +868,7 @@ module TypesAggregations =
         Format: string option
     }
 
-    type AverageAggregation = {
-    }
+    type AverageAggregation = System.Text.Json.JsonElement
 
     [<RequireQualifiedAccess>]
     type GapPolicy =
@@ -953,8 +895,7 @@ module TypesAggregations =
         GapPolicy: TypesAggregations.GapPolicy option
     }
 
-    type AverageBucketAggregation = {
-    }
+    type AverageBucketAggregation = System.Text.Json.JsonElement
 
     [<RequireQualifiedAccess>]
     type TDigestExecutionHint =
@@ -1041,11 +982,9 @@ module TypesAggregations =
         ExecutionHint: TypesAggregations.CardinalityExecutionMode option
     }
 
-    type CartesianBoundsAggregation = {
-    }
+    type CartesianBoundsAggregation = System.Text.Json.JsonElement
 
-    type CartesianCentroidAggregation = {
-    }
+    type CartesianCentroidAggregation = System.Text.Json.JsonElement
 
     type CustomCategorizeTextAnalyzer = {
         [<System.Text.Json.Serialization.JsonPropertyName("char_filter")>]
@@ -1085,8 +1024,7 @@ module TypesAggregations =
         ShardMinDocCount: Types.Integer option
     }
 
-    type ChangePointAggregation = {
-    }
+    type ChangePointAggregation = System.Text.Json.JsonElement
 
     type ChildrenAggregation = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
@@ -1127,8 +1065,7 @@ module TypesAggregations =
         Order: Types.SortOrder option
     }
 
-    type CompositeTermsAggregation = {
-    }
+    type CompositeTermsAggregation = System.Text.Json.JsonElement
 
     type CompositeHistogramAggregation = {
         [<System.Text.Json.Serialization.JsonPropertyName("interval")>]
@@ -1171,11 +1108,9 @@ module TypesAggregations =
         Sources: Map<string, TypesAggregations.CompositeAggregationSource> list option
     }
 
-    type CumulativeCardinalityAggregation = {
-    }
+    type CumulativeCardinalityAggregation = System.Text.Json.JsonElement
 
-    type CumulativeSumAggregation = {
-    }
+    type CumulativeSumAggregation = System.Text.Json.JsonElement
 
     [<RequireQualifiedAccess>]
     type CalendarInterval =
@@ -1258,8 +1193,7 @@ module TypesAggregations =
         Keyed: bool option
     }
 
-    type DerivativeAggregation = {
-    }
+    type DerivativeAggregation = System.Text.Json.JsonElement
 
     [<RequireQualifiedAccess>]
     type SamplerAggregationExecutionHint =
@@ -1437,8 +1371,7 @@ module TypesAggregations =
         ShardSize: Types.Integer option
     }
 
-    type GlobalAggregation = {
-    }
+    type GlobalAggregation = System.Text.Json.JsonElement
 
     type HistogramAggregation = {
         [<System.Text.Json.Serialization.JsonPropertyName("extended_bounds")>]
@@ -1520,11 +1453,9 @@ module TypesAggregations =
         Mode: Types.SortMode option
     }
 
-    type MaxAggregation = {
-    }
+    type MaxAggregation = System.Text.Json.JsonElement
 
-    type MaxBucketAggregation = {
-    }
+    type MaxBucketAggregation = System.Text.Json.JsonElement
 
     type MedianAbsoluteDeviationAggregation = {
         [<System.Text.Json.Serialization.JsonPropertyName("compression")>]
@@ -1533,11 +1464,9 @@ module TypesAggregations =
         ExecutionHint: TypesAggregations.TDigestExecutionHint option
     }
 
-    type MinAggregation = {
-    }
+    type MinAggregation = System.Text.Json.JsonElement
 
-    type MinBucketAggregation = {
-    }
+    type MinBucketAggregation = System.Text.Json.JsonElement
 
     type MissingAggregation = {
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
@@ -1852,8 +1781,7 @@ module TypesAggregations =
         IncludeNegatives: bool option
     }
 
-    type PercentageScoreHeuristic = {
-    }
+    type PercentageScoreHeuristic = System.Text.Json.JsonElement
 
     type ScriptedHeuristic = {
         [<System.Text.Json.Serialization.JsonPropertyName("script")>]
@@ -1939,22 +1867,18 @@ module TypesAggregations =
         SourceFields: Types.Fields option
     }
 
-    type StatsAggregation = {
-    }
+    type StatsAggregation = System.Text.Json.JsonElement
 
-    type StatsBucketAggregation = {
-    }
+    type StatsBucketAggregation = System.Text.Json.JsonElement
 
     type StringStatsAggregation = {
         [<System.Text.Json.Serialization.JsonPropertyName("show_distribution")>]
         ShowDistribution: bool option
     }
 
-    type SumAggregation = {
-    }
+    type SumAggregation = System.Text.Json.JsonElement
 
-    type SumBucketAggregation = {
-    }
+    type SumBucketAggregation = System.Text.Json.JsonElement
 
     type TermsAggregation = {
         [<System.Text.Json.Serialization.JsonPropertyName("collect_mode")>]
@@ -2072,8 +1996,7 @@ module TypesAggregations =
         Format: string option
     }
 
-    type ValueCountAggregation = {
-    }
+    type ValueCountAggregation = System.Text.Json.JsonElement
 
     type WeightedAverageValue = {
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]

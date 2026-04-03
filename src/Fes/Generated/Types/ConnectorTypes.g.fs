@@ -186,8 +186,8 @@ module ConnectorTypes =
         | Equals
         | Regex
         | StartsWith
-        | >
-        | <
+        | Gt
+        | Lt
 
     type FilteringRule = {
         [<System.Text.Json.Serialization.JsonPropertyName("created_at")>]

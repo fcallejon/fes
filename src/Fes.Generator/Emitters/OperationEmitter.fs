@@ -75,6 +75,13 @@ let private operationGroupName (endpointName: string) =
 // ============================================================================
 
 let private emitRequestRecord (w: Writer) (ctx: TypeResolver.ResolveContext) (reqTypeName: string) (pathProps: Property list) (queryProps: Property list) (bodyProps: Property list) =
+    let allProps = pathProps @ queryProps @ bodyProps
+    if allProps.IsEmpty then
+        // Empty request — use a marker type
+        w.Line $"type {reqTypeName} = | {reqTypeName}"
+        w.BlankLine()
+    else
+
     w.Line $"type {reqTypeName} = {{"
     w.Indent()
 

@@ -69,8 +69,7 @@ module SecurityOperations =
         let withUsername (value: string) (req: SecurityActivateUserProfileRequest) =
             { req with Username = Some value }
 
-    type SecurityAuthenticateRequest = {
-    }
+    type SecurityAuthenticateRequest = | SecurityAuthenticateRequest
 
         with
         static member ToRequest(req: SecurityAuthenticateRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1148,8 +1147,7 @@ module SecurityOperations =
         let withRefresh (value: Types.Refresh) (req: SecurityEnableUserProfileRequest) =
             { req with Refresh = Some value }
 
-    type SecurityEnrollKibanaRequest = {
-    }
+    type SecurityEnrollKibanaRequest = | SecurityEnrollKibanaRequest
 
         with
         static member ToRequest(req: SecurityEnrollKibanaRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1171,8 +1169,7 @@ module SecurityOperations =
 
     let securityEnrollKibanaRequest = SecurityEnrollKibanaRequestBuilder()
 
-    type SecurityEnrollNodeRequest = {
-    }
+    type SecurityEnrollNodeRequest = | SecurityEnrollNodeRequest
 
         with
         static member ToRequest(req: SecurityEnrollNodeRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1297,8 +1294,7 @@ module SecurityOperations =
         let withWithProfileUid (value: bool) (req: SecurityGetApiKeyRequest) =
             { req with WithProfileUid = Some value }
 
-    type SecurityGetBuiltinPrivilegesRequest = {
-    }
+    type SecurityGetBuiltinPrivilegesRequest = | SecurityGetBuiltinPrivilegesRequest
 
         with
         static member ToRequest(req: SecurityGetBuiltinPrivilegesRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1523,8 +1519,7 @@ module SecurityOperations =
         let withMasterTimeout (value: Types.Duration) (req: SecurityGetSettingsRequest) =
             { req with MasterTimeout = Some value }
 
-    type SecurityGetStatsRequest = {
-    }
+    type SecurityGetStatsRequest = | SecurityGetStatsRequest
 
         with
         static member ToRequest(req: SecurityGetStatsRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -1666,8 +1661,7 @@ module SecurityOperations =
         let withWithProfileUid (value: bool) (req: SecurityGetUserRequest) =
             { req with WithProfileUid = Some value }
 
-    type SecurityGetUserPrivilegesRequest = {
-    }
+    type SecurityGetUserPrivilegesRequest = | SecurityGetUserPrivilegesRequest
 
         with
         static member ToRequest(req: SecurityGetUserPrivilegesRequest) : Result<Fes.Http.RequestMsg, exn> =

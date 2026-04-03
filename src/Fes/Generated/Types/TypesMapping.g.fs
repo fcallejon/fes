@@ -199,8 +199,7 @@ module TypesMapping =
         SyntheticSourceKeep: TypesMapping.SyntheticSourceKeepEnum option
     }
 
-    [<RequireQualifiedAccess>]
-    and Property =
+    and [<RequireQualifiedAccess>] Property =
         | BinaryProperty of TypesMapping.BinaryProperty
         | BooleanProperty of TypesMapping.BooleanProperty
         | DynamicProperty of TypesMapping.DynamicProperty

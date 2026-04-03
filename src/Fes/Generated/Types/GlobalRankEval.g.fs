@@ -49,12 +49,10 @@ module GlobalRankEval =
     }
 
     /// Recall at K (R@k)
-    type RankEvalMetricRecall = {
-    }
+    type RankEvalMetricRecall = System.Text.Json.JsonElement
 
     /// Mean Reciprocal Rank
-    type RankEvalMetricMeanReciprocalRank = {
-    }
+    type RankEvalMetricMeanReciprocalRank = System.Text.Json.JsonElement
 
     /// Discounted cumulative gain (DCG)
     type RankEvalMetricDiscountedCumulativeGain = {

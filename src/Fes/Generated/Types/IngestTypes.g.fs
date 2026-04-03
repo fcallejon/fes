@@ -115,8 +115,7 @@ module IngestTypes =
         Tag: string option
     }
 
-    [<RequireQualifiedAccess>]
-    and ProcessorContainer =
+    and [<RequireQualifiedAccess>] ProcessorContainer =
         | Append of IngestTypes.AppendProcessor
         | Attachment of IngestTypes.AttachmentProcessor
         | Bytes of IngestTypes.BytesProcessor
@@ -324,8 +323,7 @@ module IngestTypes =
         Path: string option
     }
 
-    and DropProcessor = {
-    }
+    and DropProcessor = System.Text.Json.JsonElement
 
     and EnrichProcessor = {
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
@@ -668,8 +666,7 @@ module IngestTypes =
         TargetField: Types.Field option
     }
 
-    and TerminateProcessor = {
-    }
+    and TerminateProcessor = System.Text.Json.JsonElement
 
     and TrimProcessor = {
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
@@ -731,8 +728,7 @@ module IngestTypes =
         AccountId: Types.Id
     }
 
-    type Ipinfo = {
-    }
+    type Ipinfo = System.Text.Json.JsonElement
 
     /// The configuration necessary to identify which IP geolocation provider to use to download a database, as well as any provider-specific configuration necessary for such downloading.
     [<RequireQualifiedAccess>]
@@ -745,8 +741,7 @@ module IngestTypes =
         Name: Types.Name
     }
 
-    type Web = {
-    }
+    type Web = System.Text.Json.JsonElement
 
     type Local = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]

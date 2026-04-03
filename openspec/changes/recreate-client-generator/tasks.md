@@ -38,12 +38,12 @@
 
 ## 6. Serialisation Emitter
 
-- [ ] 6.1 Implement container variant `JsonConverter<T>` emission: write single-key object, read by inspecting property names, handle SingleKeyDictionary encoding
-- [ ] 6.2 Implement internal-tag variant `JsonConverter<T>` emission: read tag field, dispatch to case
-- [ ] 6.3 Implement enum `JsonConverter<T>` emission: string ↔ DU case mapping, open enum fallback
-- [ ] 6.4 Implement union alias `JsonConverter<T>` emission: try-parse each alternative
-- [ ] 6.5 Emit converter registration (JsonSerializerOptions setup) in a `Serialisation.g.fs` file
-- [ ] 6.6 Write tests: serialise/deserialise Query, Aggregation, Property, Refresh enum round-trips
+- [x] 6.1 Implement container variant `JsonConverter<T>` emission: write single-key object, read by inspecting property names, handle SingleKeyDictionary encoding
+- [x] 6.2 Implement internal-tag variant `JsonConverter<T>` emission: read tag field, dispatch to case
+- [x] 6.3 Implement enum `JsonConverter<T>` emission: string ↔ DU case mapping, open enum fallback
+- [ ] 6.4 Implement union alias `JsonConverter<T>` emission: try-parse each alternative (deferred)
+- [x] 6.5 Emit converter registration (JsonSerializerOptions setup) in a `Serialisation.g.fs` file
+- [ ] 6.6 Write tests: serialise/deserialise Query, Aggregation, Property, Refresh enum round-trips (deferred)
 
 ## 7. Operation Emitter
 

@@ -23,7 +23,18 @@ let escapeKeyword (name: string) =
 
 /// Convert a string to PascalCase
 let toPascalCase (s: string) =
-    s.Split([| '_'; '-'; '.' |], StringSplitOptions.RemoveEmptyEntries)
+    let sanitised =
+        s.Replace(">", "Gt").Replace("<", "Lt").Replace(">=", "Gte").Replace("<=", "Lte")
+         .Replace("@", "At").Replace("#", "Hash").Replace("$", "Dollar")
+         .Replace("%", "Percent").Replace("&", "And").Replace("*", "Star")
+         .Replace("+", "Plus").Replace("=", "Eq").Replace("!", "Bang")
+         .Replace("?", "Question").Replace("/", "_").Replace("\\", "_")
+         .Replace(":", "_").Replace(";", "_").Replace(",", "_")
+         .Replace("'", "").Replace("\"", "")
+         .Replace("(", "").Replace(")", "")
+         .Replace("[", "").Replace("]", "")
+         .Replace("{", "").Replace("}", "")
+    sanitised.Split([| '_'; '-'; '.'; ' ' |], StringSplitOptions.RemoveEmptyEntries)
     |> Array.map (fun part ->
         if part.Length > 0 then
             Char.ToUpperInvariant(part[0]).ToString() + part.Substring(1)

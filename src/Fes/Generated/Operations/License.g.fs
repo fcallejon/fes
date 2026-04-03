@@ -109,8 +109,7 @@ module LicenseOperations =
         let withLocal (value: bool) (req: LicenseGetRequest) =
             { req with Local = Some value }
 
-    type LicenseGetBasicStatusRequest = {
-    }
+    type LicenseGetBasicStatusRequest = | LicenseGetBasicStatusRequest
 
         with
         static member ToRequest(req: LicenseGetBasicStatusRequest) : Result<Fes.Http.RequestMsg, exn> =
@@ -132,8 +131,7 @@ module LicenseOperations =
 
     let licenseGetBasicStatusRequest = LicenseGetBasicStatusRequestBuilder()
 
-    type LicenseGetTrialStatusRequest = {
-    }
+    type LicenseGetTrialStatusRequest = | LicenseGetTrialStatusRequest
 
         with
         static member ToRequest(req: LicenseGetTrialStatusRequest) : Result<Fes.Http.RequestMsg, exn> =
