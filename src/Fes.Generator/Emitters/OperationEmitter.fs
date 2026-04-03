@@ -159,7 +159,7 @@ let private emitToEndpoint (w: Writer) (reqTypeName: string) (endpoint: Endpoint
                 match pathProp with
                 | Some pp -> getFieldName fnm "path" pp
                 | None -> Namespacing.toFieldName param
-            p <- p.Replace($"{{{param}}}", $"{{req.{fieldName}}}")
+            p <- p.Replace($"{{{param}}}", $"{{Fes.Http.toPathSegment req.{fieldName}}}")
         $"$\"{p}\""
     w.Line $"let path = {pathExpr}"
 

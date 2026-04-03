@@ -38,12 +38,12 @@
 
 ## 7. Tests
 
-- [ ] 7.1 Write tests for `FesSerializer` (serialise/deserialise round-trip via `Serializer` API)
-- [ ] 7.2 Write tests for `ES.connect`, `ES.connectWithApiKey`, `ES.connectCloud` (verify transport configuration)
-- [ ] 7.3 Write tests for `ToEndpoint` on key request types (search, get, delete, index create) — verify EndpointPath and PostData
-- [ ] 7.4 Write tests for query builders (`Query.bool`, `Query.match'`, `Query.term`) — verify DU construction
-- [ ] 7.5 Write tests for aggregation builders (`Aggregation.terms`, `Aggregation.avg`) — verify DU construction
-- [ ] 7.6 Write tests for CE builders (`searchRequest { }`, `boolQuery { }`) — verify record construction
-- [ ] 7.7 Write tests for JSON converter round-trips (enum, container variant, internal-tag)
-- [ ] 7.8 Remove old test files and update `Fes.Tests.fsproj`
-- [ ] 7.9 Verify all tests pass
+- [x] 7.1 Write tests for `FesSerializer` (serialise/deserialise round-trip via `Serializer` API)
+- [x] 7.2 Write tests for `ES.connect`, `ES.connectWithApiKey`, `ES.connectCloud` (verify transport configuration)
+- [x] 7.3 Write tests for `ToEndpoint` on key request types (search, get, delete, index create) — verify EndpointPath and PostData
+- [x] 7.4 Write tests for query builders (`Query.bool`, `Query.match'`, `Query.term`) — verify DU construction
+- [x] 7.5 Write tests for aggregation builders (`Aggregation.terms`, `Aggregation.avg`) — verify DU construction
+- [x] 7.6 Write tests for CE builders (`searchRequest { }`, `boolQuery { }`) — verify record construction
+- [x] 7.7 Write tests for JSON converter round-trips (enum, container variant, internal-tag)
+- [x] 7.8 Remove old test files and update `Fes.Tests.fsproj`
+- [x] 7.9 Verify all tests pass

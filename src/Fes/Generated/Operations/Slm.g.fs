@@ -20,7 +20,7 @@ module SlmOperations =
 
         with
         static member ToEndpoint(req: SlmDeleteLifecycleRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_slm/policy/{req.PolicyId}"
+            let path = $"/_slm/policy/{Fes.Http.toPathSegment req.PolicyId}"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -71,7 +71,7 @@ module SlmOperations =
 
         with
         static member ToEndpoint(req: SlmExecuteLifecycleRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_slm/policy/{req.PolicyId}/_execute"
+            let path = $"/_slm/policy/{Fes.Http.toPathSegment req.PolicyId}/_execute"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -167,7 +167,7 @@ module SlmOperations =
 
         with
         static member ToEndpoint(req: SlmGetLifecycleRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_slm/policy/{req.PolicyId}"
+            let path = $"/_slm/policy/{Fes.Http.toPathSegment req.PolicyId}"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -318,7 +318,7 @@ module SlmOperations =
 
         with
         static member ToEndpoint(req: SlmPutLifecycleRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_slm/policy/{req.PolicyId}"
+            let path = $"/_slm/policy/{Fes.Http.toPathSegment req.PolicyId}"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)

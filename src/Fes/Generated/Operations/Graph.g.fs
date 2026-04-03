@@ -28,7 +28,7 @@ module GraphOperations =
 
         with
         static member ToEndpoint(req: GraphExploreRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_graph/explore"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_graph/explore"
             let queryParams =
                 [
                     req.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)

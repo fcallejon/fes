@@ -19,7 +19,7 @@ module EnrichOperations =
 
         with
         static member ToEndpoint(req: EnrichDeletePolicyRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_enrich/policy/{req.Name}"
+            let path = $"/_enrich/policy/{Fes.Http.toPathSegment req.Name}"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -62,7 +62,7 @@ module EnrichOperations =
 
         with
         static member ToEndpoint(req: EnrichExecutePolicyRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_enrich/policy/{req.Name}/_execute"
+            let path = $"/_enrich/policy/{Fes.Http.toPathSegment req.Name}/_execute"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -112,7 +112,7 @@ module EnrichOperations =
 
         with
         static member ToEndpoint(req: EnrichGetPolicyRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_enrich/policy/{req.Name}"
+            let path = $"/_enrich/policy/{Fes.Http.toPathSegment req.Name}"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -160,7 +160,7 @@ module EnrichOperations =
 
         with
         static member ToEndpoint(req: EnrichPutPolicyRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_enrich/policy/{req.Name}"
+            let path = $"/_enrich/policy/{Fes.Http.toPathSegment req.Name}"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)

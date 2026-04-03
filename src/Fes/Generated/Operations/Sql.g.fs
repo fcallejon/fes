@@ -49,7 +49,7 @@ module SqlOperations =
 
         with
         static member ToEndpoint(req: SqlDeleteAsyncRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_sql/async/delete/{req.Id}"
+            let path = $"/_sql/async/delete/{Fes.Http.toPathSegment req.Id}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
             endpoint, ValueNone
@@ -78,7 +78,7 @@ module SqlOperations =
 
         with
         static member ToEndpoint(req: SqlGetAsyncRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_sql/async/{req.Id}"
+            let path = $"/_sql/async/{Fes.Http.toPathSegment req.Id}"
             let queryParams =
                 [
                     req.Delimiter |> Option.map (fun v -> "delimiter", Fes.Http.toQueryValue v)
@@ -143,7 +143,7 @@ module SqlOperations =
 
         with
         static member ToEndpoint(req: SqlGetAsyncStatusRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_sql/async/status/{req.Id}"
+            let path = $"/_sql/async/status/{Fes.Http.toPathSegment req.Id}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
             endpoint, ValueNone

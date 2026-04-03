@@ -20,7 +20,7 @@ module InferenceOperations =
 
         with
         static member ToEndpoint(req: InferenceChatCompletionUnifiedRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_inference/chat_completion/{req.InferenceId}/_stream"
+            let path = $"/_inference/chat_completion/{Fes.Http.toPathSegment req.InferenceId}/_stream"
             let queryParams =
                 [
                     req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
@@ -72,7 +72,7 @@ module InferenceOperations =
 
         with
         static member ToEndpoint(req: InferenceCompletionRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_inference/completion/{req.InferenceId}"
+            let path = $"/_inference/completion/{Fes.Http.toPathSegment req.InferenceId}"
             let queryParams =
                 [
                     req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
@@ -131,7 +131,7 @@ module InferenceOperations =
 
         with
         static member ToEndpoint(req: InferenceDeleteRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_inference/{req.TaskType}/{req.InferenceId}"
+            let path = $"/_inference/{Fes.Http.toPathSegment req.TaskType}/{Fes.Http.toPathSegment req.InferenceId}"
             let queryParams =
                 [
                     req.DryRun |> Option.map (fun v -> "dry_run", Fes.Http.toQueryValue v)
@@ -187,7 +187,7 @@ module InferenceOperations =
 
         with
         static member ToEndpoint(req: InferenceEmbeddingRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_inference/embedding/{req.InferenceId}"
+            let path = $"/_inference/embedding/{Fes.Http.toPathSegment req.InferenceId}"
             let queryParams =
                 [
                     req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
@@ -235,7 +235,7 @@ module InferenceOperations =
 
         with
         static member ToEndpoint(req: InferenceGetRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_inference/{req.TaskType}/{req.InferenceId}"
+            let path = $"/_inference/{Fes.Http.toPathSegment req.TaskType}/{Fes.Http.toPathSegment req.InferenceId}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
             endpoint, ValueNone
@@ -275,7 +275,7 @@ module InferenceOperations =
 
         with
         static member ToEndpoint(req: InferenceInferenceRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_inference/{req.TaskType}/{req.InferenceId}"
+            let path = $"/_inference/{Fes.Http.toPathSegment req.TaskType}/{Fes.Http.toPathSegment req.InferenceId}"
             let queryParams =
                 [
                     req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
@@ -353,7 +353,7 @@ module InferenceOperations =
 
         with
         static member ToEndpoint(req: InferencePutRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_inference/{req.TaskType}/{req.InferenceId}"
+            let path = $"/_inference/{Fes.Http.toPathSegment req.TaskType}/{Fes.Http.toPathSegment req.InferenceId}"
             let queryParams =
                 [
                     req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
@@ -411,7 +411,7 @@ module InferenceOperations =
 
         with
         static member ToEndpoint(req: InferencePutAi21Request) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_inference/{req.TaskType}/{req.Ai21InferenceId}"
+            let path = $"/_inference/{Fes.Http.toPathSegment req.TaskType}/{Fes.Http.toPathSegment req.Ai21InferenceId}"
             let queryParams =
                 [
                     req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
@@ -482,7 +482,7 @@ module InferenceOperations =
 
         with
         static member ToEndpoint(req: InferencePutAlibabacloudRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_inference/{req.TaskType}/{req.AlibabacloudInferenceId}"
+            let path = $"/_inference/{Fes.Http.toPathSegment req.TaskType}/{Fes.Http.toPathSegment req.AlibabacloudInferenceId}"
             let queryParams =
                 [
                     req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
@@ -567,7 +567,7 @@ module InferenceOperations =
 
         with
         static member ToEndpoint(req: InferencePutAmazonbedrockRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_inference/{req.TaskType}/{req.AmazonbedrockInferenceId}"
+            let path = $"/_inference/{Fes.Http.toPathSegment req.TaskType}/{Fes.Http.toPathSegment req.AmazonbedrockInferenceId}"
             let queryParams =
                 [
                     req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
@@ -652,7 +652,7 @@ module InferenceOperations =
 
         with
         static member ToEndpoint(req: InferencePutAmazonsagemakerRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_inference/{req.TaskType}/{req.AmazonsagemakerInferenceId}"
+            let path = $"/_inference/{Fes.Http.toPathSegment req.TaskType}/{Fes.Http.toPathSegment req.AmazonsagemakerInferenceId}"
             let queryParams =
                 [
                     req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
@@ -735,7 +735,7 @@ module InferenceOperations =
 
         with
         static member ToEndpoint(req: InferencePutAnthropicRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_inference/{req.TaskType}/{req.AnthropicInferenceId}"
+            let path = $"/_inference/{Fes.Http.toPathSegment req.TaskType}/{Fes.Http.toPathSegment req.AnthropicInferenceId}"
             let queryParams =
                 [
                     req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
@@ -813,7 +813,7 @@ module InferenceOperations =
 
         with
         static member ToEndpoint(req: InferencePutAzureaistudioRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_inference/{req.TaskType}/{req.AzureaistudioInferenceId}"
+            let path = $"/_inference/{Fes.Http.toPathSegment req.TaskType}/{Fes.Http.toPathSegment req.AzureaistudioInferenceId}"
             let queryParams =
                 [
                     req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
@@ -898,7 +898,7 @@ module InferenceOperations =
 
         with
         static member ToEndpoint(req: InferencePutAzureopenaiRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_inference/{req.TaskType}/{req.AzureopenaiInferenceId}"
+            let path = $"/_inference/{Fes.Http.toPathSegment req.TaskType}/{Fes.Http.toPathSegment req.AzureopenaiInferenceId}"
             let queryParams =
                 [
                     req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
@@ -983,7 +983,7 @@ module InferenceOperations =
 
         with
         static member ToEndpoint(req: InferencePutCohereRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_inference/{req.TaskType}/{req.CohereInferenceId}"
+            let path = $"/_inference/{Fes.Http.toPathSegment req.TaskType}/{Fes.Http.toPathSegment req.CohereInferenceId}"
             let queryParams =
                 [
                     req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
@@ -1066,7 +1066,7 @@ module InferenceOperations =
 
         with
         static member ToEndpoint(req: InferencePutContextualaiRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_inference/{req.TaskType}/{req.ContextualaiInferenceId}"
+            let path = $"/_inference/{Fes.Http.toPathSegment req.TaskType}/{Fes.Http.toPathSegment req.ContextualaiInferenceId}"
             let queryParams =
                 [
                     req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
@@ -1143,7 +1143,7 @@ module InferenceOperations =
 
         with
         static member ToEndpoint(req: InferencePutCustomRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_inference/{req.TaskType}/{req.CustomInferenceId}"
+            let path = $"/_inference/{Fes.Http.toPathSegment req.TaskType}/{Fes.Http.toPathSegment req.CustomInferenceId}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
             let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
@@ -1210,7 +1210,7 @@ module InferenceOperations =
 
         with
         static member ToEndpoint(req: InferencePutDeepseekRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_inference/{req.TaskType}/{req.DeepseekInferenceId}"
+            let path = $"/_inference/{Fes.Http.toPathSegment req.TaskType}/{Fes.Http.toPathSegment req.DeepseekInferenceId}"
             let queryParams =
                 [
                     req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
@@ -1281,7 +1281,7 @@ module InferenceOperations =
 
         with
         static member ToEndpoint(req: InferencePutElasticsearchRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_inference/{req.TaskType}/{req.ElasticsearchInferenceId}"
+            let path = $"/_inference/{Fes.Http.toPathSegment req.TaskType}/{Fes.Http.toPathSegment req.ElasticsearchInferenceId}"
             let queryParams =
                 [
                     req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
@@ -1364,7 +1364,7 @@ module InferenceOperations =
 
         with
         static member ToEndpoint(req: InferencePutElserRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_inference/{req.TaskType}/{req.ElserInferenceId}"
+            let path = $"/_inference/{Fes.Http.toPathSegment req.TaskType}/{Fes.Http.toPathSegment req.ElserInferenceId}"
             let queryParams =
                 [
                     req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
@@ -1442,7 +1442,7 @@ module InferenceOperations =
 
         with
         static member ToEndpoint(req: InferencePutFireworksaiRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_inference/{req.TaskType}/{req.FireworksaiInferenceId}"
+            let path = $"/_inference/{Fes.Http.toPathSegment req.TaskType}/{Fes.Http.toPathSegment req.FireworksaiInferenceId}"
             let queryParams =
                 [
                     req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
@@ -1525,7 +1525,7 @@ module InferenceOperations =
 
         with
         static member ToEndpoint(req: InferencePutGoogleaistudioRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_inference/{req.TaskType}/{req.GoogleaistudioInferenceId}"
+            let path = $"/_inference/{Fes.Http.toPathSegment req.TaskType}/{Fes.Http.toPathSegment req.GoogleaistudioInferenceId}"
             let queryParams =
                 [
                     req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
@@ -1603,7 +1603,7 @@ module InferenceOperations =
 
         with
         static member ToEndpoint(req: InferencePutGooglevertexaiRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_inference/{req.TaskType}/{req.GooglevertexaiInferenceId}"
+            let path = $"/_inference/{Fes.Http.toPathSegment req.TaskType}/{Fes.Http.toPathSegment req.GooglevertexaiInferenceId}"
             let queryParams =
                 [
                     req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
@@ -1684,7 +1684,7 @@ module InferenceOperations =
 
         with
         static member ToEndpoint(req: InferencePutGroqRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_inference/{req.TaskType}/{req.GroqInferenceId}"
+            let path = $"/_inference/{Fes.Http.toPathSegment req.TaskType}/{Fes.Http.toPathSegment req.GroqInferenceId}"
             let queryParams =
                 [
                     req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
@@ -1755,7 +1755,7 @@ module InferenceOperations =
 
         with
         static member ToEndpoint(req: InferencePutHuggingFaceRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_inference/{req.TaskType}/{req.HuggingfaceInferenceId}"
+            let path = $"/_inference/{Fes.Http.toPathSegment req.TaskType}/{Fes.Http.toPathSegment req.HuggingfaceInferenceId}"
             let queryParams =
                 [
                     req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
@@ -1840,7 +1840,7 @@ module InferenceOperations =
 
         with
         static member ToEndpoint(req: InferencePutJinaaiRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_inference/{req.TaskType}/{req.JinaaiInferenceId}"
+            let path = $"/_inference/{Fes.Http.toPathSegment req.TaskType}/{Fes.Http.toPathSegment req.JinaaiInferenceId}"
             let queryParams =
                 [
                     req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
@@ -1923,7 +1923,7 @@ module InferenceOperations =
 
         with
         static member ToEndpoint(req: InferencePutLlamaRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_inference/{req.TaskType}/{req.LlamaInferenceId}"
+            let path = $"/_inference/{Fes.Http.toPathSegment req.TaskType}/{Fes.Http.toPathSegment req.LlamaInferenceId}"
             let queryParams =
                 [
                     req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
@@ -1999,7 +1999,7 @@ module InferenceOperations =
 
         with
         static member ToEndpoint(req: InferencePutMistralRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_inference/{req.TaskType}/{req.MistralInferenceId}"
+            let path = $"/_inference/{Fes.Http.toPathSegment req.TaskType}/{Fes.Http.toPathSegment req.MistralInferenceId}"
             let queryParams =
                 [
                     req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
@@ -2077,7 +2077,7 @@ module InferenceOperations =
 
         with
         static member ToEndpoint(req: InferencePutNvidiaRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_inference/{req.TaskType}/{req.NvidiaInferenceId}"
+            let path = $"/_inference/{Fes.Http.toPathSegment req.TaskType}/{Fes.Http.toPathSegment req.NvidiaInferenceId}"
             let queryParams =
                 [
                     req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
@@ -2162,7 +2162,7 @@ module InferenceOperations =
 
         with
         static member ToEndpoint(req: InferencePutOpenaiRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_inference/{req.TaskType}/{req.OpenaiInferenceId}"
+            let path = $"/_inference/{Fes.Http.toPathSegment req.TaskType}/{Fes.Http.toPathSegment req.OpenaiInferenceId}"
             let queryParams =
                 [
                     req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
@@ -2247,7 +2247,7 @@ module InferenceOperations =
 
         with
         static member ToEndpoint(req: InferencePutOpenshiftAiRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_inference/{req.TaskType}/{req.OpenshiftaiInferenceId}"
+            let path = $"/_inference/{Fes.Http.toPathSegment req.TaskType}/{Fes.Http.toPathSegment req.OpenshiftaiInferenceId}"
             let queryParams =
                 [
                     req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
@@ -2332,7 +2332,7 @@ module InferenceOperations =
 
         with
         static member ToEndpoint(req: InferencePutVoyageaiRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_inference/{req.TaskType}/{req.VoyageaiInferenceId}"
+            let path = $"/_inference/{Fes.Http.toPathSegment req.TaskType}/{Fes.Http.toPathSegment req.VoyageaiInferenceId}"
             let queryParams =
                 [
                     req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
@@ -2415,7 +2415,7 @@ module InferenceOperations =
 
         with
         static member ToEndpoint(req: InferencePutWatsonxRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_inference/{req.TaskType}/{req.WatsonxInferenceId}"
+            let path = $"/_inference/{Fes.Http.toPathSegment req.TaskType}/{Fes.Http.toPathSegment req.WatsonxInferenceId}"
             let queryParams =
                 [
                     req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
@@ -2494,7 +2494,7 @@ module InferenceOperations =
 
         with
         static member ToEndpoint(req: InferenceRerankRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_inference/rerank/{req.InferenceId}"
+            let path = $"/_inference/rerank/{Fes.Http.toPathSegment req.InferenceId}"
             let queryParams =
                 [
                     req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
@@ -2576,7 +2576,7 @@ module InferenceOperations =
 
         with
         static member ToEndpoint(req: InferenceSparseEmbeddingRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_inference/sparse_embedding/{req.InferenceId}"
+            let path = $"/_inference/sparse_embedding/{Fes.Http.toPathSegment req.InferenceId}"
             let queryParams =
                 [
                     req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
@@ -2637,7 +2637,7 @@ module InferenceOperations =
 
         with
         static member ToEndpoint(req: InferenceStreamCompletionRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_inference/completion/{req.InferenceId}/_stream"
+            let path = $"/_inference/completion/{Fes.Http.toPathSegment req.InferenceId}/_stream"
             let queryParams =
                 [
                     req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
@@ -2700,7 +2700,7 @@ module InferenceOperations =
 
         with
         static member ToEndpoint(req: InferenceTextEmbeddingRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_inference/text_embedding/{req.InferenceId}"
+            let path = $"/_inference/text_embedding/{Fes.Http.toPathSegment req.InferenceId}"
             let queryParams =
                 [
                     req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
@@ -2765,7 +2765,7 @@ module InferenceOperations =
 
         with
         static member ToEndpoint(req: InferenceUpdateRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_inference/{req.TaskType}/{req.InferenceId}/_update"
+            let path = $"/_inference/{Fes.Http.toPathSegment req.TaskType}/{Fes.Http.toPathSegment req.InferenceId}/_update"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
             let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req.Document)

@@ -18,7 +18,7 @@ module FleetOperations =
 
         with
         static member ToEndpoint(req: FleetDeleteSecretRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_fleet/secret/{req.Id}"
+            let path = $"/_fleet/secret/{Fes.Http.toPathSegment req.Id}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
             endpoint, ValueNone
@@ -43,7 +43,7 @@ module FleetOperations =
 
         with
         static member ToEndpoint(req: FleetGetSecretRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_fleet/secret/{req.Id}"
+            let path = $"/_fleet/secret/{Fes.Http.toPathSegment req.Id}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
             endpoint, ValueNone
@@ -72,7 +72,7 @@ module FleetOperations =
 
         with
         static member ToEndpoint(req: FleetGlobalCheckpointsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_fleet/global_checkpoints"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_fleet/global_checkpoints"
             let queryParams =
                 [
                     req.WaitForAdvance |> Option.map (fun v -> "wait_for_advance", Fes.Http.toQueryValue v)
@@ -151,7 +151,7 @@ module FleetOperations =
 
         with
         static member ToEndpoint(req: FleetMsearchRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_fleet/_fleet_msearch"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_fleet/_fleet_msearch"
             let queryParams =
                 [
                     req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
@@ -430,7 +430,7 @@ module FleetOperations =
 
         with
         static member ToEndpoint(req: FleetSearchRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_fleet/_fleet_search"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_fleet/_fleet_search"
             let queryParams =
                 [
                     req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)

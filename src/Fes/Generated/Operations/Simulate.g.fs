@@ -30,7 +30,7 @@ module SimulateOperations =
 
         with
         static member ToEndpoint(req: SimulateIngestRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ingest/{req.Index}/_simulate"
+            let path = $"/_ingest/{Fes.Http.toPathSegment req.Index}/_simulate"
             let queryParams =
                 [
                     req.Pipeline |> Option.map (fun v -> "pipeline", Fes.Http.toQueryValue v)

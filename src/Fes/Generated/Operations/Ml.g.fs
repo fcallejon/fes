@@ -18,7 +18,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlClearTrainedModelDeploymentCacheRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/trained_models/{req.ModelId}/deployment/cache/_clear"
+            let path = $"/_ml/trained_models/{Fes.Http.toPathSegment req.ModelId}/deployment/cache/_clear"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
             endpoint, ValueNone
@@ -52,7 +52,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlCloseJobRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/anomaly_detectors/{req.JobId}/_close"
+            let path = $"/_ml/anomaly_detectors/{Fes.Http.toPathSegment req.JobId}/_close"
             let queryParams =
                 [
                     req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
@@ -131,7 +131,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlDeleteCalendarRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/calendars/{req.CalendarId}"
+            let path = $"/_ml/calendars/{Fes.Http.toPathSegment req.CalendarId}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
             endpoint, ValueNone
@@ -157,7 +157,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlDeleteCalendarEventRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/calendars/{req.CalendarId}/events/{req.EventId}"
+            let path = $"/_ml/calendars/{Fes.Http.toPathSegment req.CalendarId}/events/{Fes.Http.toPathSegment req.EventId}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
             endpoint, ValueNone
@@ -188,7 +188,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlDeleteCalendarJobRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/calendars/{req.CalendarId}/jobs/{req.JobId}"
+            let path = $"/_ml/calendars/{Fes.Http.toPathSegment req.CalendarId}/jobs/{Fes.Http.toPathSegment req.JobId}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
             endpoint, ValueNone
@@ -220,7 +220,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlDeleteDataFrameAnalyticsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/data_frame/analytics/{req.Id}"
+            let path = $"/_ml/data_frame/analytics/{Fes.Http.toPathSegment req.Id}"
             let queryParams =
                 [
                     req.Force |> Option.map (fun v -> "force", Fes.Http.toQueryValue v)
@@ -270,7 +270,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlDeleteDatafeedRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/datafeeds/{req.DatafeedId}"
+            let path = $"/_ml/datafeeds/{Fes.Http.toPathSegment req.DatafeedId}"
             let queryParams =
                 [
                     req.Force |> Option.map (fun v -> "force", Fes.Http.toQueryValue v)
@@ -317,7 +317,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlDeleteExpiredDataRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/_delete_expired_data/{req.JobId}"
+            let path = $"/_ml/_delete_expired_data/{Fes.Http.toPathSegment req.JobId}"
             let queryParams =
                 [
                     req.RequestsPerSecond |> Option.map (fun v -> "requests_per_second", Fes.Http.toQueryValue v)
@@ -381,7 +381,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlDeleteFilterRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/filters/{req.FilterId}"
+            let path = $"/_ml/filters/{Fes.Http.toPathSegment req.FilterId}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
             endpoint, ValueNone
@@ -409,7 +409,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlDeleteForecastRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/anomaly_detectors/{req.JobId}/_forecast/{req.ForecastId}"
+            let path = $"/_ml/anomaly_detectors/{Fes.Http.toPathSegment req.JobId}/_forecast/{Fes.Http.toPathSegment req.ForecastId}"
             let queryParams =
                 [
                     req.AllowNoForecasts |> Option.map (fun v -> "allow_no_forecasts", Fes.Http.toQueryValue v)
@@ -466,7 +466,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlDeleteJobRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/anomaly_detectors/{req.JobId}"
+            let path = $"/_ml/anomaly_detectors/{Fes.Http.toPathSegment req.JobId}"
             let queryParams =
                 [
                     req.Force |> Option.map (fun v -> "force", Fes.Http.toQueryValue v)
@@ -524,7 +524,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlDeleteModelSnapshotRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/anomaly_detectors/{req.JobId}/model_snapshots/{req.SnapshotId}"
+            let path = $"/_ml/anomaly_detectors/{Fes.Http.toPathSegment req.JobId}/model_snapshots/{Fes.Http.toPathSegment req.SnapshotId}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
             endpoint, ValueNone
@@ -556,7 +556,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlDeleteTrainedModelRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/trained_models/{req.ModelId}"
+            let path = $"/_ml/trained_models/{Fes.Http.toPathSegment req.ModelId}"
             let queryParams =
                 [
                     req.Force |> Option.map (fun v -> "force", Fes.Http.toQueryValue v)
@@ -606,7 +606,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlDeleteTrainedModelAliasRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/trained_models/{req.ModelId}/model_aliases/{req.ModelAlias}"
+            let path = $"/_ml/trained_models/{Fes.Http.toPathSegment req.ModelId}/model_aliases/{Fes.Http.toPathSegment req.ModelAlias}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
             endpoint, ValueNone
@@ -750,7 +750,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlExplainDataFrameAnalyticsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/data_frame/analytics/{req.Id}/_explain"
+            let path = $"/_ml/data_frame/analytics/{Fes.Http.toPathSegment req.Id}/_explain"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
             let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
@@ -849,7 +849,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlFlushJobRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/anomaly_detectors/{req.JobId}/_flush"
+            let path = $"/_ml/anomaly_detectors/{Fes.Http.toPathSegment req.JobId}/_flush"
             let queryParams =
                 [
                     req.AdvanceTime |> Option.map (fun v -> "advance_time", Fes.Http.toQueryValue v)
@@ -967,7 +967,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlForecastRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/anomaly_detectors/{req.JobId}/_forecast"
+            let path = $"/_ml/anomaly_detectors/{Fes.Http.toPathSegment req.JobId}/_forecast"
             let queryParams =
                 [
                     req.Duration |> Option.map (fun v -> "duration", Fes.Http.toQueryValue v)
@@ -1072,7 +1072,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlGetBucketsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/anomaly_detectors/{req.JobId}/results/buckets/{req.Timestamp}"
+            let path = $"/_ml/anomaly_detectors/{Fes.Http.toPathSegment req.JobId}/results/buckets/{Fes.Http.toPathSegment req.Timestamp}"
             let queryParams =
                 [
                     req.AnomalyScore |> Option.map (fun v -> "anomaly_score", Fes.Http.toQueryValue v)
@@ -1244,7 +1244,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlGetCalendarEventsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/calendars/{req.CalendarId}/events"
+            let path = $"/_ml/calendars/{Fes.Http.toPathSegment req.CalendarId}/events"
             let queryParams =
                 [
                     req.End |> Option.map (fun v -> "end", Fes.Http.toQueryValue v)
@@ -1321,7 +1321,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlGetCalendarsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/calendars/{req.CalendarId}"
+            let path = $"/_ml/calendars/{Fes.Http.toPathSegment req.CalendarId}"
             let queryParams =
                 [
                     req.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
@@ -1384,7 +1384,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlGetCategoriesRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/anomaly_detectors/{req.JobId}/results/categories/{req.CategoryId}"
+            let path = $"/_ml/anomaly_detectors/{Fes.Http.toPathSegment req.JobId}/results/categories/{Fes.Http.toPathSegment req.CategoryId}"
             let queryParams =
                 [
                     req.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
@@ -1458,7 +1458,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlGetDataFrameAnalyticsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/data_frame/analytics/{req.Id}"
+            let path = $"/_ml/data_frame/analytics/{Fes.Http.toPathSegment req.Id}"
             let queryParams =
                 [
                     req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
@@ -1527,7 +1527,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlGetDataFrameAnalyticsStatsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/data_frame/analytics/{req.Id}/_stats"
+            let path = $"/_ml/data_frame/analytics/{Fes.Http.toPathSegment req.Id}/_stats"
             let queryParams =
                 [
                     req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
@@ -1593,7 +1593,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlGetDatafeedStatsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/datafeeds/{req.DatafeedId}/_stats"
+            let path = $"/_ml/datafeeds/{Fes.Http.toPathSegment req.DatafeedId}/_stats"
             let queryParams =
                 [
                     req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
@@ -1636,7 +1636,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlGetDatafeedsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/datafeeds/{req.DatafeedId}"
+            let path = $"/_ml/datafeeds/{Fes.Http.toPathSegment req.DatafeedId}"
             let queryParams =
                 [
                     req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
@@ -1687,7 +1687,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlGetFiltersRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/filters/{req.FilterId}"
+            let path = $"/_ml/filters/{Fes.Http.toPathSegment req.FilterId}"
             let queryParams =
                 [
                     req.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
@@ -1746,7 +1746,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlGetInfluencersRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/anomaly_detectors/{req.JobId}/results/influencers"
+            let path = $"/_ml/anomaly_detectors/{Fes.Http.toPathSegment req.JobId}/results/influencers"
             let queryParams =
                 [
                     req.Desc |> Option.map (fun v -> "desc", Fes.Http.toQueryValue v)
@@ -1852,7 +1852,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlGetJobStatsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/anomaly_detectors/{req.JobId}/_stats"
+            let path = $"/_ml/anomaly_detectors/{Fes.Http.toPathSegment req.JobId}/_stats"
             let queryParams =
                 [
                     req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
@@ -1895,7 +1895,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlGetJobsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/anomaly_detectors/{req.JobId}"
+            let path = $"/_ml/anomaly_detectors/{Fes.Http.toPathSegment req.JobId}"
             let queryParams =
                 [
                     req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
@@ -1946,7 +1946,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlGetMemoryStatsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/memory/{req.NodeId}/_stats"
+            let path = $"/_ml/memory/{Fes.Http.toPathSegment req.NodeId}/_stats"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -1997,7 +1997,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlGetModelSnapshotUpgradeStatsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/anomaly_detectors/{req.JobId}/model_snapshots/{req.SnapshotId}/_upgrade/_stats"
+            let path = $"/_ml/anomaly_detectors/{Fes.Http.toPathSegment req.JobId}/model_snapshots/{Fes.Http.toPathSegment req.SnapshotId}/_upgrade/_stats"
             let queryParams =
                 [
                     req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
@@ -2060,7 +2060,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlGetModelSnapshotsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/anomaly_detectors/{req.JobId}/model_snapshots/{req.SnapshotId}"
+            let path = $"/_ml/anomaly_detectors/{Fes.Http.toPathSegment req.JobId}/model_snapshots/{Fes.Http.toPathSegment req.SnapshotId}"
             let queryParams =
                 [
                     req.Desc |> Option.map (fun v -> "desc", Fes.Http.toQueryValue v)
@@ -2203,7 +2203,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlGetOverallBucketsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/anomaly_detectors/{req.JobId}/results/overall_buckets"
+            let path = $"/_ml/anomaly_detectors/{Fes.Http.toPathSegment req.JobId}/results/overall_buckets"
             let queryParams =
                 [
                     req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
@@ -2364,7 +2364,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlGetRecordsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/anomaly_detectors/{req.JobId}/results/records"
+            let path = $"/_ml/anomaly_detectors/{Fes.Http.toPathSegment req.JobId}/results/records"
             let queryParams =
                 [
                     req.Desc |> Option.map (fun v -> "desc", Fes.Http.toQueryValue v)
@@ -2518,7 +2518,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlGetTrainedModelsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/trained_models/{req.ModelId}"
+            let path = $"/_ml/trained_models/{Fes.Http.toPathSegment req.ModelId}"
             let queryParams =
                 [
                     req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
@@ -2610,7 +2610,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlGetTrainedModelsStatsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/trained_models/{req.ModelId}/_stats"
+            let path = $"/_ml/trained_models/{Fes.Http.toPathSegment req.ModelId}/_stats"
             let queryParams =
                 [
                     req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
@@ -2672,7 +2672,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlInferTrainedModelRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/trained_models/{req.ModelId}/_infer"
+            let path = $"/_ml/trained_models/{Fes.Http.toPathSegment req.ModelId}/_infer"
             let queryParams =
                 [
                     req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
@@ -2742,7 +2742,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlOpenJobRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/anomaly_detectors/{req.JobId}/_open"
+            let path = $"/_ml/anomaly_detectors/{Fes.Http.toPathSegment req.JobId}/_open"
             let queryParams =
                 [
                     req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
@@ -2793,7 +2793,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlPostCalendarEventsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/calendars/{req.CalendarId}/events"
+            let path = $"/_ml/calendars/{Fes.Http.toPathSegment req.CalendarId}/events"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
             let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
@@ -2839,7 +2839,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlPreviewDataFrameAnalyticsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/data_frame/analytics/{req.Id}/_preview"
+            let path = $"/_ml/data_frame/analytics/{Fes.Http.toPathSegment req.Id}/_preview"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
             let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
@@ -2880,7 +2880,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlPreviewDatafeedRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/datafeeds/{req.DatafeedId}/_preview"
+            let path = $"/_ml/datafeeds/{Fes.Http.toPathSegment req.DatafeedId}/_preview"
             let queryParams =
                 [
                     req.Start |> Option.map (fun v -> "start", Fes.Http.toQueryValue v)
@@ -2948,7 +2948,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlPutCalendarRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/calendars/{req.CalendarId}"
+            let path = $"/_ml/calendars/{Fes.Http.toPathSegment req.CalendarId}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
             let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
@@ -2991,7 +2991,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlPutCalendarJobRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/calendars/{req.CalendarId}/jobs/{req.JobId}"
+            let path = $"/_ml/calendars/{Fes.Http.toPathSegment req.CalendarId}/jobs/{Fes.Http.toPathSegment req.JobId}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
             endpoint, ValueNone
@@ -3043,7 +3043,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlPutDataFrameAnalyticsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/data_frame/analytics/{req.Id}"
+            let path = $"/_ml/data_frame/analytics/{Fes.Http.toPathSegment req.Id}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
             let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
@@ -3180,7 +3180,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlPutDatafeedRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/datafeeds/{req.DatafeedId}"
+            let path = $"/_ml/datafeeds/{Fes.Http.toPathSegment req.DatafeedId}"
             let queryParams =
                 [
                     req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
@@ -3348,7 +3348,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlPutFilterRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/filters/{req.FilterId}"
+            let path = $"/_ml/filters/{Fes.Http.toPathSegment req.FilterId}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
             let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
@@ -3426,7 +3426,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlPutJobRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/anomaly_detectors/{req.JobId}"
+            let path = $"/_ml/anomaly_detectors/{Fes.Http.toPathSegment req.JobId}"
             let queryParams =
                 [
                     req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
@@ -3628,7 +3628,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlPutTrainedModelRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/trained_models/{req.ModelId}"
+            let path = $"/_ml/trained_models/{Fes.Http.toPathSegment req.ModelId}"
             let queryParams =
                 [
                     req.DeferDefinitionDecompression |> Option.map (fun v -> "defer_definition_decompression", Fes.Http.toQueryValue v)
@@ -3757,7 +3757,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlPutTrainedModelAliasRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/trained_models/{req.ModelId}/model_aliases/{req.ModelAlias}"
+            let path = $"/_ml/trained_models/{Fes.Http.toPathSegment req.ModelId}/model_aliases/{Fes.Http.toPathSegment req.ModelAlias}"
             let queryParams =
                 [
                     req.Reassign |> Option.map (fun v -> "reassign", Fes.Http.toQueryValue v)
@@ -3810,7 +3810,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlPutTrainedModelDefinitionPartRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/trained_models/{req.ModelId}/definition/{req.Part}"
+            let path = $"/_ml/trained_models/{Fes.Http.toPathSegment req.ModelId}/definition/{Fes.Http.toPathSegment req.Part}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
             let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
@@ -3870,7 +3870,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlPutTrainedModelVocabularyRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/trained_models/{req.ModelId}/vocabulary"
+            let path = $"/_ml/trained_models/{Fes.Http.toPathSegment req.ModelId}/vocabulary"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
             let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
@@ -3921,7 +3921,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlResetJobRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/anomaly_detectors/{req.JobId}/_reset"
+            let path = $"/_ml/anomaly_detectors/{Fes.Http.toPathSegment req.JobId}/_reset"
             let queryParams =
                 [
                     req.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", Fes.Http.toQueryValue v)
@@ -3974,7 +3974,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlRevertModelSnapshotRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/anomaly_detectors/{req.JobId}/model_snapshots/{req.SnapshotId}/_revert"
+            let path = $"/_ml/anomaly_detectors/{Fes.Http.toPathSegment req.JobId}/model_snapshots/{Fes.Http.toPathSegment req.SnapshotId}/_revert"
             let queryParams =
                 [
                     req.DeleteInterveningResults |> Option.map (fun v -> "delete_intervening_results", Fes.Http.toQueryValue v)
@@ -4078,7 +4078,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlStartDataFrameAnalyticsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/data_frame/analytics/{req.Id}/_start"
+            let path = $"/_ml/data_frame/analytics/{Fes.Http.toPathSegment req.Id}/_start"
             let queryParams =
                 [
                     req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
@@ -4143,7 +4143,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlStartDatafeedRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/datafeeds/{req.DatafeedId}/_start"
+            let path = $"/_ml/datafeeds/{Fes.Http.toPathSegment req.DatafeedId}/_start"
             let queryParams =
                 [
                     req.End |> Option.map (fun v -> "end", Fes.Http.toQueryValue v)
@@ -4232,7 +4232,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlStartTrainedModelDeploymentRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/trained_models/{req.ModelId}/deployment/_start"
+            let path = $"/_ml/trained_models/{Fes.Http.toPathSegment req.ModelId}/deployment/_start"
             let queryParams =
                 [
                     req.CacheSize |> Option.map (fun v -> "cache_size", Fes.Http.toQueryValue v)
@@ -4348,7 +4348,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlStopDataFrameAnalyticsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/data_frame/analytics/{req.Id}/_stop"
+            let path = $"/_ml/data_frame/analytics/{Fes.Http.toPathSegment req.Id}/_stop"
             let queryParams =
                 [
                     req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
@@ -4446,7 +4446,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlStopDatafeedRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/datafeeds/{req.DatafeedId}/_stop"
+            let path = $"/_ml/datafeeds/{Fes.Http.toPathSegment req.DatafeedId}/_stop"
             let queryParams =
                 [
                     req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
@@ -4548,7 +4548,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlStopTrainedModelDeploymentRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/trained_models/{req.ModelId}/deployment/_stop"
+            let path = $"/_ml/trained_models/{Fes.Http.toPathSegment req.ModelId}/deployment/_stop"
             let queryParams =
                 [
                     req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
@@ -4627,7 +4627,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlUpdateDataFrameAnalyticsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/data_frame/analytics/{req.Id}/_update"
+            let path = $"/_ml/data_frame/analytics/{Fes.Http.toPathSegment req.Id}/_update"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
             let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
@@ -4713,7 +4713,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlUpdateDatafeedRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/datafeeds/{req.DatafeedId}/_update"
+            let path = $"/_ml/datafeeds/{Fes.Http.toPathSegment req.DatafeedId}/_update"
             let queryParams =
                 [
                     req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
@@ -4876,7 +4876,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlUpdateFilterRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/filters/{req.FilterId}/_update"
+            let path = $"/_ml/filters/{Fes.Http.toPathSegment req.FilterId}/_update"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
             let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
@@ -4955,7 +4955,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlUpdateJobRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/anomaly_detectors/{req.JobId}/_update"
+            let path = $"/_ml/anomaly_detectors/{Fes.Http.toPathSegment req.JobId}/_update"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
             let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
@@ -5093,7 +5093,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlUpdateModelSnapshotRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/anomaly_detectors/{req.JobId}/model_snapshots/{req.SnapshotId}/_update"
+            let path = $"/_ml/anomaly_detectors/{Fes.Http.toPathSegment req.JobId}/model_snapshots/{Fes.Http.toPathSegment req.SnapshotId}/_update"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
             let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
@@ -5145,7 +5145,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlUpdateTrainedModelDeploymentRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/trained_models/{req.ModelId}/deployment/_update"
+            let path = $"/_ml/trained_models/{Fes.Http.toPathSegment req.ModelId}/deployment/_update"
             let queryParams =
                 [
                     req.NumberOfAllocations |> Option.map (fun v -> "number_of_allocations", Fes.Http.toQueryValue v)
@@ -5204,7 +5204,7 @@ module MlOperations =
 
         with
         static member ToEndpoint(req: MlUpgradeJobSnapshotRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ml/anomaly_detectors/{req.JobId}/model_snapshots/{req.SnapshotId}/_upgrade"
+            let path = $"/_ml/anomaly_detectors/{Fes.Http.toPathSegment req.JobId}/model_snapshots/{Fes.Http.toPathSegment req.SnapshotId}/_upgrade"
             let queryParams =
                 [
                     req.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", Fes.Http.toQueryValue v)

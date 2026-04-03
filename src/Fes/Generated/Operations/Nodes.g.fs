@@ -19,7 +19,7 @@ module NodesOperations =
 
         with
         static member ToEndpoint(req: NodesClearRepositoriesMeteringArchiveRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_nodes/{req.NodeId}/_repositories_metering/{req.MaxArchiveVersion}"
+            let path = $"/_nodes/{Fes.Http.toPathSegment req.NodeId}/_repositories_metering/{Fes.Http.toPathSegment req.MaxArchiveVersion}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
             endpoint, ValueNone
@@ -49,7 +49,7 @@ module NodesOperations =
 
         with
         static member ToEndpoint(req: NodesGetRepositoriesMeteringInfoRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_nodes/{req.NodeId}/_repositories_metering"
+            let path = $"/_nodes/{Fes.Http.toPathSegment req.NodeId}/_repositories_metering"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
             endpoint, ValueNone
@@ -81,7 +81,7 @@ module NodesOperations =
 
         with
         static member ToEndpoint(req: NodesHotThreadsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_nodes/{req.NodeId}/hot_threads"
+            let path = $"/_nodes/{Fes.Http.toPathSegment req.NodeId}/hot_threads"
             let queryParams =
                 [
                     req.IgnoreIdleThreads |> Option.map (fun v -> "ignore_idle_threads", Fes.Http.toQueryValue v)
@@ -173,7 +173,7 @@ module NodesOperations =
 
         with
         static member ToEndpoint(req: NodesInfoRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_nodes/{req.NodeId}/{req.Metric}"
+            let path = $"/_nodes/{Fes.Http.toPathSegment req.NodeId}/{Fes.Http.toPathSegment req.Metric}"
             let queryParams =
                 [
                     req.FlatSettings |> Option.map (fun v -> "flat_settings", Fes.Http.toQueryValue v)
@@ -230,7 +230,7 @@ module NodesOperations =
 
         with
         static member ToEndpoint(req: NodesReloadSecureSettingsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_nodes/{req.NodeId}/reload_secure_settings"
+            let path = $"/_nodes/{Fes.Http.toPathSegment req.NodeId}/reload_secure_settings"
             let queryParams =
                 [
                     req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
@@ -290,7 +290,7 @@ module NodesOperations =
 
         with
         static member ToEndpoint(req: NodesStatsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_nodes/{req.NodeId}/stats/{req.Metric}/{req.IndexMetric}"
+            let path = $"/_nodes/{Fes.Http.toPathSegment req.NodeId}/stats/{Fes.Http.toPathSegment req.Metric}/{Fes.Http.toPathSegment req.IndexMetric}"
             let queryParams =
                 [
                     req.CompletionFields |> Option.map (fun v -> "completion_fields", Fes.Http.toQueryValue v)
@@ -407,7 +407,7 @@ module NodesOperations =
 
         with
         static member ToEndpoint(req: NodesUsageRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_nodes/{req.NodeId}/usage/{req.Metric}"
+            let path = $"/_nodes/{Fes.Http.toPathSegment req.NodeId}/usage/{Fes.Http.toPathSegment req.Metric}"
             let queryParams =
                 [
                     req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)

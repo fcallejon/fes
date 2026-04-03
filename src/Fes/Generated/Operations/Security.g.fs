@@ -242,7 +242,7 @@ module SecurityOperations =
 
         with
         static member ToEndpoint(req: SecurityChangePasswordRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_security/user/{req.Username}/_password"
+            let path = $"/_security/user/{Fes.Http.toPathSegment req.Username}/_password"
             let queryParams =
                 [
                     req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
@@ -298,7 +298,7 @@ module SecurityOperations =
 
         with
         static member ToEndpoint(req: SecurityClearApiKeyCacheRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_security/api_key/{req.Ids}/_clear_cache"
+            let path = $"/_security/api_key/{Fes.Http.toPathSegment req.Ids}/_clear_cache"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
             endpoint, ValueNone
@@ -323,7 +323,7 @@ module SecurityOperations =
 
         with
         static member ToEndpoint(req: SecurityClearCachedPrivilegesRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_security/privilege/{req.Application}/_clear_cache"
+            let path = $"/_security/privilege/{Fes.Http.toPathSegment req.Application}/_clear_cache"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
             endpoint, ValueNone
@@ -349,7 +349,7 @@ module SecurityOperations =
 
         with
         static member ToEndpoint(req: SecurityClearCachedRealmsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_security/realm/{req.Realms}/_clear_cache"
+            let path = $"/_security/realm/{Fes.Http.toPathSegment req.Realms}/_clear_cache"
             let queryParams =
                 [
                     req.Usernames |> Option.map (fun v -> "usernames", Fes.Http.toQueryValue v)
@@ -390,7 +390,7 @@ module SecurityOperations =
 
         with
         static member ToEndpoint(req: SecurityClearCachedRolesRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_security/role/{req.Name}/_clear_cache"
+            let path = $"/_security/role/{Fes.Http.toPathSegment req.Name}/_clear_cache"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
             endpoint, ValueNone
@@ -417,7 +417,7 @@ module SecurityOperations =
 
         with
         static member ToEndpoint(req: SecurityClearCachedServiceTokensRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_security/service/{req.Namespace}/{req.Service}/credential/token/{req.Name}/_clear_cache"
+            let path = $"/_security/service/{Fes.Http.toPathSegment req.Namespace}/{Fes.Http.toPathSegment req.Service}/credential/token/{Fes.Http.toPathSegment req.Name}/_clear_cache"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
             endpoint, ValueNone
@@ -595,7 +595,7 @@ module SecurityOperations =
 
         with
         static member ToEndpoint(req: SecurityCreateServiceTokenRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_security/service/{req.Namespace}/{req.Service}/credential/token/{req.Name}"
+            let path = $"/_security/service/{Fes.Http.toPathSegment req.Namespace}/{Fes.Http.toPathSegment req.Service}/credential/token/{Fes.Http.toPathSegment req.Name}"
             let queryParams =
                 [
                     req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
@@ -679,7 +679,7 @@ module SecurityOperations =
 
         with
         static member ToEndpoint(req: SecurityDeletePrivilegesRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_security/privilege/{req.Application}/{req.Name}"
+            let path = $"/_security/privilege/{Fes.Http.toPathSegment req.Application}/{Fes.Http.toPathSegment req.Name}"
             let queryParams =
                 [
                     req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
@@ -726,7 +726,7 @@ module SecurityOperations =
 
         with
         static member ToEndpoint(req: SecurityDeleteRoleRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_security/role/{req.Name}"
+            let path = $"/_security/role/{Fes.Http.toPathSegment req.Name}"
             let queryParams =
                 [
                     req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
@@ -768,7 +768,7 @@ module SecurityOperations =
 
         with
         static member ToEndpoint(req: SecurityDeleteRoleMappingRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_security/role_mapping/{req.Name}"
+            let path = $"/_security/role_mapping/{Fes.Http.toPathSegment req.Name}"
             let queryParams =
                 [
                     req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
@@ -812,7 +812,7 @@ module SecurityOperations =
 
         with
         static member ToEndpoint(req: SecurityDeleteServiceTokenRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_security/service/{req.Namespace}/{req.Service}/credential/token/{req.Name}"
+            let path = $"/_security/service/{Fes.Http.toPathSegment req.Namespace}/{Fes.Http.toPathSegment req.Service}/credential/token/{Fes.Http.toPathSegment req.Name}"
             let queryParams =
                 [
                     req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
@@ -864,7 +864,7 @@ module SecurityOperations =
 
         with
         static member ToEndpoint(req: SecurityDeleteUserRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_security/user/{req.Username}"
+            let path = $"/_security/user/{Fes.Http.toPathSegment req.Username}"
             let queryParams =
                 [
                     req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
@@ -906,7 +906,7 @@ module SecurityOperations =
 
         with
         static member ToEndpoint(req: SecurityDisableUserRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_security/user/{req.Username}/_disable"
+            let path = $"/_security/user/{Fes.Http.toPathSegment req.Username}/_disable"
             let queryParams =
                 [
                     req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
@@ -948,7 +948,7 @@ module SecurityOperations =
 
         with
         static member ToEndpoint(req: SecurityDisableUserProfileRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_security/profile/{req.Uid}/_disable"
+            let path = $"/_security/profile/{Fes.Http.toPathSegment req.Uid}/_disable"
             let queryParams =
                 [
                     req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
@@ -990,7 +990,7 @@ module SecurityOperations =
 
         with
         static member ToEndpoint(req: SecurityEnableUserRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_security/user/{req.Username}/_enable"
+            let path = $"/_security/user/{Fes.Http.toPathSegment req.Username}/_enable"
             let queryParams =
                 [
                     req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
@@ -1032,7 +1032,7 @@ module SecurityOperations =
 
         with
         static member ToEndpoint(req: SecurityEnableUserProfileRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_security/profile/{req.Uid}/_enable"
+            let path = $"/_security/profile/{Fes.Http.toPathSegment req.Uid}/_enable"
             let queryParams =
                 [
                     req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
@@ -1206,7 +1206,7 @@ module SecurityOperations =
 
         with
         static member ToEndpoint(req: SecurityGetPrivilegesRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_security/privilege/{req.Application}/{req.Name}"
+            let path = $"/_security/privilege/{Fes.Http.toPathSegment req.Application}/{Fes.Http.toPathSegment req.Name}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
             endpoint, ValueNone
@@ -1236,7 +1236,7 @@ module SecurityOperations =
 
         with
         static member ToEndpoint(req: SecurityGetRoleRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_security/role/{req.Name}"
+            let path = $"/_security/role/{Fes.Http.toPathSegment req.Name}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
             endpoint, ValueNone
@@ -1261,7 +1261,7 @@ module SecurityOperations =
 
         with
         static member ToEndpoint(req: SecurityGetRoleMappingRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_security/role_mapping/{req.Name}"
+            let path = $"/_security/role_mapping/{Fes.Http.toPathSegment req.Name}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
             endpoint, ValueNone
@@ -1287,7 +1287,7 @@ module SecurityOperations =
 
         with
         static member ToEndpoint(req: SecurityGetServiceAccountsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_security/service/{req.Namespace}/{req.Service}"
+            let path = $"/_security/service/{Fes.Http.toPathSegment req.Namespace}/{Fes.Http.toPathSegment req.Service}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
             endpoint, ValueNone
@@ -1318,7 +1318,7 @@ module SecurityOperations =
 
         with
         static member ToEndpoint(req: SecurityGetServiceCredentialsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_security/service/{req.Namespace}/{req.Service}/credential"
+            let path = $"/_security/service/{Fes.Http.toPathSegment req.Namespace}/{Fes.Http.toPathSegment req.Service}/credential"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
             endpoint, ValueNone
@@ -1472,7 +1472,7 @@ module SecurityOperations =
 
         with
         static member ToEndpoint(req: SecurityGetUserRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_security/user/{req.Username}"
+            let path = $"/_security/user/{Fes.Http.toPathSegment req.Username}"
             let queryParams =
                 [
                     req.WithProfileUid |> Option.map (fun v -> "with_profile_uid", Fes.Http.toQueryValue v)
@@ -1525,7 +1525,7 @@ module SecurityOperations =
 
         with
         static member ToEndpoint(req: SecurityGetUserProfileRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_security/profile/{req.Uid}"
+            let path = $"/_security/profile/{Fes.Http.toPathSegment req.Uid}"
             let queryParams =
                 [
                     req.Data |> Option.map (fun v -> "data", Fes.Http.toQueryValue v)
@@ -1663,7 +1663,7 @@ module SecurityOperations =
 
         with
         static member ToEndpoint(req: SecurityHasPrivilegesRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_security/user/{req.User}/_has_privileges"
+            let path = $"/_security/user/{Fes.Http.toPathSegment req.User}/_has_privileges"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
             let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
@@ -2115,7 +2115,7 @@ module SecurityOperations =
 
         with
         static member ToEndpoint(req: SecurityPutRoleRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_security/role/{req.Name}"
+            let path = $"/_security/role/{Fes.Http.toPathSegment req.Name}"
             let queryParams =
                 [
                     req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
@@ -2240,7 +2240,7 @@ module SecurityOperations =
 
         with
         static member ToEndpoint(req: SecurityPutRoleMappingRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_security/role_mapping/{req.Name}"
+            let path = $"/_security/role_mapping/{Fes.Http.toPathSegment req.Name}"
             let queryParams =
                 [
                     req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
@@ -2341,7 +2341,7 @@ module SecurityOperations =
 
         with
         static member ToEndpoint(req: SecurityPutUserRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_security/user/{req.Username}"
+            let path = $"/_security/user/{Fes.Http.toPathSegment req.Username}"
             let queryParams =
                 [
                     req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
@@ -2942,7 +2942,7 @@ module SecurityOperations =
 
         with
         static member ToEndpoint(req: SecuritySamlServiceProviderMetadataRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_security/saml/metadata/{req.RealmName}"
+            let path = $"/_security/saml/metadata/{Fes.Http.toPathSegment req.RealmName}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
             endpoint, ValueNone
@@ -3046,7 +3046,7 @@ module SecurityOperations =
 
         with
         static member ToEndpoint(req: SecurityUpdateApiKeyRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_security/api_key/{req.Id}"
+            let path = $"/_security/api_key/{Fes.Http.toPathSegment req.Id}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
             let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
@@ -3103,7 +3103,7 @@ module SecurityOperations =
 
         with
         static member ToEndpoint(req: SecurityUpdateCrossClusterApiKeyRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_security/cross_cluster/api_key/{req.Id}"
+            let path = $"/_security/cross_cluster/api_key/{Fes.Http.toPathSegment req.Id}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
             let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
@@ -3239,7 +3239,7 @@ module SecurityOperations =
 
         with
         static member ToEndpoint(req: SecurityUpdateUserProfileDataRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_security/profile/{req.Uid}/_data"
+            let path = $"/_security/profile/{Fes.Http.toPathSegment req.Uid}/_data"
             let queryParams =
                 [
                     req.IfSeqNo |> Option.map (fun v -> "if_seq_no", Fes.Http.toQueryValue v)

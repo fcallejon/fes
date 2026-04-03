@@ -20,7 +20,7 @@ module IlmOperations =
 
         with
         static member ToEndpoint(req: IlmDeleteLifecycleRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ilm/policy/{req.Policy}"
+            let path = $"/_ilm/policy/{Fes.Http.toPathSegment req.Policy}"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -72,7 +72,7 @@ module IlmOperations =
 
         with
         static member ToEndpoint(req: IlmExplainLifecycleRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_ilm/explain"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_ilm/explain"
             let queryParams =
                 [
                     req.OnlyErrors |> Option.map (fun v -> "only_errors", Fes.Http.toQueryValue v)
@@ -131,7 +131,7 @@ module IlmOperations =
 
         with
         static member ToEndpoint(req: IlmGetLifecycleRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ilm/policy/{req.Policy}"
+            let path = $"/_ilm/policy/{Fes.Http.toPathSegment req.Policy}"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -259,7 +259,7 @@ module IlmOperations =
 
         with
         static member ToEndpoint(req: IlmMoveToStepRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ilm/move/{req.Index}"
+            let path = $"/_ilm/move/{Fes.Http.toPathSegment req.Index}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
             let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
@@ -305,7 +305,7 @@ module IlmOperations =
 
         with
         static member ToEndpoint(req: IlmPutLifecycleRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ilm/policy/{req.Policy}"
+            let path = $"/_ilm/policy/{Fes.Http.toPathSegment req.Policy}"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -362,7 +362,7 @@ module IlmOperations =
 
         with
         static member ToEndpoint(req: IlmRemovePolicyRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_ilm/remove"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_ilm/remove"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
             endpoint, ValueNone
@@ -387,7 +387,7 @@ module IlmOperations =
 
         with
         static member ToEndpoint(req: IlmRetryRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_ilm/retry"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_ilm/retry"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
             endpoint, ValueNone

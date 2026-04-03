@@ -20,7 +20,7 @@ module IngestOperations =
 
         with
         static member ToEndpoint(req: IngestDeleteGeoipDatabaseRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ingest/geoip/database/{req.Id}"
+            let path = $"/_ingest/geoip/database/{Fes.Http.toPathSegment req.Id}"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -71,7 +71,7 @@ module IngestOperations =
 
         with
         static member ToEndpoint(req: IngestDeleteIpLocationDatabaseRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ingest/ip_location/database/{req.Id}"
+            let path = $"/_ingest/ip_location/database/{Fes.Http.toPathSegment req.Id}"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -122,7 +122,7 @@ module IngestOperations =
 
         with
         static member ToEndpoint(req: IngestDeletePipelineRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ingest/pipeline/{req.Id}"
+            let path = $"/_ingest/pipeline/{Fes.Http.toPathSegment req.Id}"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -182,7 +182,7 @@ module IngestOperations =
 
         with
         static member ToEndpoint(req: IngestGetGeoipDatabaseRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ingest/geoip/database/{req.Id}"
+            let path = $"/_ingest/geoip/database/{Fes.Http.toPathSegment req.Id}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
             endpoint, ValueNone
@@ -207,7 +207,7 @@ module IngestOperations =
 
         with
         static member ToEndpoint(req: IngestGetIpLocationDatabaseRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ingest/ip_location/database/{req.Id}"
+            let path = $"/_ingest/ip_location/database/{Fes.Http.toPathSegment req.Id}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
             endpoint, ValueNone
@@ -234,7 +234,7 @@ module IngestOperations =
 
         with
         static member ToEndpoint(req: IngestGetPipelineRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ingest/pipeline/{req.Id}"
+            let path = $"/_ingest/pipeline/{Fes.Http.toPathSegment req.Id}"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -300,7 +300,7 @@ module IngestOperations =
 
         with
         static member ToEndpoint(req: IngestPutGeoipDatabaseRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ingest/geoip/database/{req.Id}"
+            let path = $"/_ingest/geoip/database/{Fes.Http.toPathSegment req.Id}"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -367,7 +367,7 @@ module IngestOperations =
 
         with
         static member ToEndpoint(req: IngestPutIpLocationDatabaseRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ingest/ip_location/database/{req.Id}"
+            let path = $"/_ingest/ip_location/database/{Fes.Http.toPathSegment req.Id}"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -439,7 +439,7 @@ module IngestOperations =
 
         with
         static member ToEndpoint(req: IngestPutPipelineRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ingest/pipeline/{req.Id}"
+            let path = $"/_ingest/pipeline/{Fes.Http.toPathSegment req.Id}"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -551,7 +551,7 @@ module IngestOperations =
 
         with
         static member ToEndpoint(req: IngestSimulateRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ingest/pipeline/{req.Id}/_simulate"
+            let path = $"/_ingest/pipeline/{Fes.Http.toPathSegment req.Id}/_simulate"
             let queryParams =
                 [
                     req.Verbose |> Option.map (fun v -> "verbose", Fes.Http.toQueryValue v)

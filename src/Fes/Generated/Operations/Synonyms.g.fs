@@ -18,7 +18,7 @@ module SynonymsOperations =
 
         with
         static member ToEndpoint(req: SynonymsDeleteSynonymRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_synonyms/{req.Id}"
+            let path = $"/_synonyms/{Fes.Http.toPathSegment req.Id}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
             endpoint, ValueNone
@@ -45,7 +45,7 @@ module SynonymsOperations =
 
         with
         static member ToEndpoint(req: SynonymsDeleteSynonymRuleRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_synonyms/{req.SetId}/{req.RuleId}"
+            let path = $"/_synonyms/{Fes.Http.toPathSegment req.SetId}/{Fes.Http.toPathSegment req.RuleId}"
             let queryParams =
                 [
                     req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
@@ -93,7 +93,7 @@ module SynonymsOperations =
 
         with
         static member ToEndpoint(req: SynonymsGetSynonymRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_synonyms/{req.Id}"
+            let path = $"/_synonyms/{Fes.Http.toPathSegment req.Id}"
             let queryParams =
                 [
                     req.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
@@ -143,7 +143,7 @@ module SynonymsOperations =
 
         with
         static member ToEndpoint(req: SynonymsGetSynonymRuleRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_synonyms/{req.SetId}/{req.RuleId}"
+            let path = $"/_synonyms/{Fes.Http.toPathSegment req.SetId}/{Fes.Http.toPathSegment req.RuleId}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
             endpoint, ValueNone
@@ -221,7 +221,7 @@ module SynonymsOperations =
 
         with
         static member ToEndpoint(req: SynonymsPutSynonymRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_synonyms/{req.Id}"
+            let path = $"/_synonyms/{Fes.Http.toPathSegment req.Id}"
             let queryParams =
                 [
                     req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
@@ -274,7 +274,7 @@ module SynonymsOperations =
 
         with
         static member ToEndpoint(req: SynonymsPutSynonymRuleRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_synonyms/{req.SetId}/{req.RuleId}"
+            let path = $"/_synonyms/{Fes.Http.toPathSegment req.SetId}/{Fes.Http.toPathSegment req.RuleId}"
             let queryParams =
                 [
                     req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)

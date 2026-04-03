@@ -19,7 +19,7 @@ module WatcherOperations =
 
         with
         static member ToEndpoint(req: WatcherAckWatchRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_watcher/watch/{req.WatchId}/_ack/{req.ActionId}"
+            let path = $"/_watcher/watch/{Fes.Http.toPathSegment req.WatchId}/_ack/{Fes.Http.toPathSegment req.ActionId}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
             endpoint, ValueNone
@@ -49,7 +49,7 @@ module WatcherOperations =
 
         with
         static member ToEndpoint(req: WatcherActivateWatchRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_watcher/watch/{req.WatchId}/_activate"
+            let path = $"/_watcher/watch/{Fes.Http.toPathSegment req.WatchId}/_activate"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
             endpoint, ValueNone
@@ -74,7 +74,7 @@ module WatcherOperations =
 
         with
         static member ToEndpoint(req: WatcherDeactivateWatchRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_watcher/watch/{req.WatchId}/_deactivate"
+            let path = $"/_watcher/watch/{Fes.Http.toPathSegment req.WatchId}/_deactivate"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
             endpoint, ValueNone
@@ -99,7 +99,7 @@ module WatcherOperations =
 
         with
         static member ToEndpoint(req: WatcherDeleteWatchRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_watcher/watch/{req.Id}"
+            let path = $"/_watcher/watch/{Fes.Http.toPathSegment req.Id}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
             endpoint, ValueNone
@@ -139,7 +139,7 @@ module WatcherOperations =
 
         with
         static member ToEndpoint(req: WatcherExecuteWatchRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_watcher/watch/{req.Id}/_execute"
+            let path = $"/_watcher/watch/{Fes.Http.toPathSegment req.Id}/_execute"
             let queryParams =
                 [
                     req.Debug |> Option.map (fun v -> "debug", Fes.Http.toQueryValue v)
@@ -266,7 +266,7 @@ module WatcherOperations =
 
         with
         static member ToEndpoint(req: WatcherGetWatchRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_watcher/watch/{req.Id}"
+            let path = $"/_watcher/watch/{Fes.Http.toPathSegment req.Id}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
             endpoint, ValueNone
@@ -311,7 +311,7 @@ module WatcherOperations =
 
         with
         static member ToEndpoint(req: WatcherPutWatchRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_watcher/watch/{req.Id}"
+            let path = $"/_watcher/watch/{Fes.Http.toPathSegment req.Id}"
             let queryParams =
                 [
                     req.Active |> Option.map (fun v -> "active", Fes.Http.toQueryValue v)
@@ -538,7 +538,7 @@ module WatcherOperations =
 
         with
         static member ToEndpoint(req: WatcherStatsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_watcher/stats/{req.Metric}"
+            let path = $"/_watcher/stats/{Fes.Http.toPathSegment req.Metric}"
             let queryParams =
                 [
                     req.EmitStacktraces |> Option.map (fun v -> "emit_stacktraces", Fes.Http.toQueryValue v)

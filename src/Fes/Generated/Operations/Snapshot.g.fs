@@ -20,7 +20,7 @@ module SnapshotOperations =
 
         with
         static member ToEndpoint(req: SnapshotCleanupRepositoryRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_snapshot/{req.Repository}/_cleanup"
+            let path = $"/_snapshot/{Fes.Http.toPathSegment req.Repository}/_cleanup"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -74,7 +74,7 @@ module SnapshotOperations =
 
         with
         static member ToEndpoint(req: SnapshotCloneRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_snapshot/{req.Repository}/{req.Snapshot}/_clone/{req.TargetSnapshot}"
+            let path = $"/_snapshot/{Fes.Http.toPathSegment req.Repository}/{Fes.Http.toPathSegment req.Snapshot}/_clone/{Fes.Http.toPathSegment req.TargetSnapshot}"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -150,7 +150,7 @@ module SnapshotOperations =
 
         with
         static member ToEndpoint(req: SnapshotCreateRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_snapshot/{req.Repository}/{req.Snapshot}"
+            let path = $"/_snapshot/{Fes.Http.toPathSegment req.Repository}/{Fes.Http.toPathSegment req.Snapshot}"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -258,7 +258,7 @@ module SnapshotOperations =
 
         with
         static member ToEndpoint(req: SnapshotCreateRepositoryRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_snapshot/{req.Repository}"
+            let path = $"/_snapshot/{Fes.Http.toPathSegment req.Repository}"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -324,7 +324,7 @@ module SnapshotOperations =
 
         with
         static member ToEndpoint(req: SnapshotDeleteRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_snapshot/{req.Repository}/{req.Snapshot}"
+            let path = $"/_snapshot/{Fes.Http.toPathSegment req.Repository}/{Fes.Http.toPathSegment req.Snapshot}"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -380,7 +380,7 @@ module SnapshotOperations =
 
         with
         static member ToEndpoint(req: SnapshotDeleteRepositoryRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_snapshot/{req.Repository}"
+            let path = $"/_snapshot/{Fes.Http.toPathSegment req.Repository}"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -444,7 +444,7 @@ module SnapshotOperations =
 
         with
         static member ToEndpoint(req: SnapshotGetRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_snapshot/{req.Repository}/{req.Snapshot}"
+            let path = $"/_snapshot/{Fes.Http.toPathSegment req.Repository}/{Fes.Http.toPathSegment req.Snapshot}"
             let queryParams =
                 [
                     req.After |> Option.map (fun v -> "after", Fes.Http.toQueryValue v)
@@ -596,7 +596,7 @@ module SnapshotOperations =
 
         with
         static member ToEndpoint(req: SnapshotGetRepositoryRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_snapshot/{req.Repository}"
+            let path = $"/_snapshot/{Fes.Http.toPathSegment req.Repository}"
             let queryParams =
                 [
                     req.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
@@ -657,7 +657,7 @@ module SnapshotOperations =
 
         with
         static member ToEndpoint(req: SnapshotRepositoryAnalyzeRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_snapshot/{req.Repository}/_analyze"
+            let path = $"/_snapshot/{Fes.Http.toPathSegment req.Repository}/_analyze"
             let queryParams =
                 [
                     req.BlobCount |> Option.map (fun v -> "blob_count", Fes.Http.toQueryValue v)
@@ -794,7 +794,7 @@ module SnapshotOperations =
 
         with
         static member ToEndpoint(req: SnapshotRepositoryVerifyIntegrityRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_snapshot/{req.Repository}/_verify_integrity"
+            let path = $"/_snapshot/{Fes.Http.toPathSegment req.Repository}/_verify_integrity"
             let queryParams =
                 [
                     req.BlobThreadPoolConcurrency |> Option.map (fun v -> "blob_thread_pool_concurrency", Fes.Http.toQueryValue v)
@@ -914,7 +914,7 @@ module SnapshotOperations =
 
         with
         static member ToEndpoint(req: SnapshotRestoreRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_snapshot/{req.Repository}/{req.Snapshot}/_restore"
+            let path = $"/_snapshot/{Fes.Http.toPathSegment req.Repository}/{Fes.Http.toPathSegment req.Snapshot}/_restore"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -1042,7 +1042,7 @@ module SnapshotOperations =
 
         with
         static member ToEndpoint(req: SnapshotStatusRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_snapshot/{req.Repository}/{req.Snapshot}/_status"
+            let path = $"/_snapshot/{Fes.Http.toPathSegment req.Repository}/{Fes.Http.toPathSegment req.Snapshot}/_status"
             let queryParams =
                 [
                     req.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
@@ -1098,7 +1098,7 @@ module SnapshotOperations =
 
         with
         static member ToEndpoint(req: SnapshotVerifyRepositoryRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_snapshot/{req.Repository}/_verify"
+            let path = $"/_snapshot/{Fes.Http.toPathSegment req.Repository}/_verify"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)

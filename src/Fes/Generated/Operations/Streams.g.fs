@@ -20,7 +20,7 @@ module StreamsOperations =
 
         with
         static member ToEndpoint(req: StreamsLogsDisableRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_streams/{req.Name}/_disable"
+            let path = $"/_streams/{Fes.Http.toPathSegment req.Name}/_disable"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -71,7 +71,7 @@ module StreamsOperations =
 
         with
         static member ToEndpoint(req: StreamsLogsEnableRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_streams/{req.Name}/_enable"
+            let path = $"/_streams/{Fes.Http.toPathSegment req.Name}/_enable"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
