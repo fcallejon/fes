@@ -4,13 +4,13 @@ namespace Fes.Generated.Builders
 
 
 open System.Text.Json.Serialization
-open Fes.Generated.Types
+open Fes.Generated
 
 [<AutoOpen>]
 module AsyncSearchStatusBuilders =
 
     type StatusResponseBaseBuilder() =
-        member _.Yield(_: unit) : StatusResponseBase =
+        member _.Yield(_: unit) : Types.StatusResponseBase =
             {
                 Shards = Unchecked.defaultof<_>
                 Clusters = None
@@ -18,15 +18,15 @@ module AsyncSearchStatusBuilders =
             }
 
         [<CustomOperation("shards")>]
-        member _.Shards(state: StatusResponseBase, value: CoreTypes.ShardStatistics) =
+        member _.Shards(state: Types.StatusResponseBase, value: Types.ShardStatistics) =
             { state with Shards = value }
 
         [<CustomOperation("clusters")>]
-        member _.Clusters(state: StatusResponseBase, value: CoreTypes.ClusterStatistics) =
+        member _.Clusters(state: Types.StatusResponseBase, value: Types.ClusterStatistics) =
             { state with Clusters = Some value }
 
         [<CustomOperation("completionStatus")>]
-        member _.CompletionStatus(state: StatusResponseBase, value: CoreTypes.Integer) =
+        member _.CompletionStatus(state: Types.StatusResponseBase, value: Types.Integer) =
             { state with CompletionStatus = Some value }
 
     let statusResponseBase = StatusResponseBaseBuilder()

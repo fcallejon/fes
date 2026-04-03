@@ -4,13 +4,13 @@ namespace Fes.Generated.Builders
 
 
 open System.Text.Json.Serialization
-open Fes.Generated.Types
+open Fes.Generated
 
 [<AutoOpen>]
 module ClusterRerouteBuilders =
 
     type CommandBuilder() =
-        member _.Yield(_: unit) : Command =
+        member _.Yield(_: unit) : Types.Command =
             {
                 Cancel = None
                 Move = None
@@ -20,29 +20,29 @@ module ClusterRerouteBuilders =
             }
 
         [<CustomOperation("cancel")>]
-        member _.Cancel(state: Command, value: ClusterReroute.CommandCancelAction) =
+        member _.Cancel(state: Types.Command, value: Types.CommandCancelAction) =
             { state with Cancel = Some value }
 
         [<CustomOperation("move")>]
-        member _.Move(state: Command, value: ClusterReroute.CommandMoveAction) =
+        member _.Move(state: Types.Command, value: Types.CommandMoveAction) =
             { state with Move = Some value }
 
         [<CustomOperation("allocateReplica")>]
-        member _.AllocateReplica(state: Command, value: ClusterReroute.CommandAllocateReplicaAction) =
+        member _.AllocateReplica(state: Types.Command, value: Types.CommandAllocateReplicaAction) =
             { state with AllocateReplica = Some value }
 
         [<CustomOperation("allocateStalePrimary")>]
-        member _.AllocateStalePrimary(state: Command, value: ClusterReroute.CommandAllocatePrimaryAction) =
+        member _.AllocateStalePrimary(state: Types.Command, value: Types.CommandAllocatePrimaryAction) =
             { state with AllocateStalePrimary = Some value }
 
         [<CustomOperation("allocateEmptyPrimary")>]
-        member _.AllocateEmptyPrimary(state: Command, value: ClusterReroute.CommandAllocatePrimaryAction) =
+        member _.AllocateEmptyPrimary(state: Types.Command, value: Types.CommandAllocatePrimaryAction) =
             { state with AllocateEmptyPrimary = Some value }
 
     let command = CommandBuilder()
 
     type RerouteParametersBuilder() =
-        member _.Yield(_: unit) : RerouteParameters =
+        member _.Yield(_: unit) : Types.RerouteParameters =
             {
                 AllowPrimary = Unchecked.defaultof<_>
                 Index = Unchecked.defaultof<_>
@@ -53,27 +53,27 @@ module ClusterRerouteBuilders =
             }
 
         [<CustomOperation("allowPrimary")>]
-        member _.AllowPrimary(state: RerouteParameters, value: bool) =
+        member _.AllowPrimary(state: Types.RerouteParameters, value: bool) =
             { state with AllowPrimary = value }
 
         [<CustomOperation("index")>]
-        member _.Index(state: RerouteParameters, value: CoreTypes.IndexName) =
+        member _.Index(state: Types.RerouteParameters, value: Types.IndexName) =
             { state with Index = value }
 
         [<CustomOperation("node")>]
-        member _.Node(state: RerouteParameters, value: CoreTypes.NodeName) =
+        member _.Node(state: Types.RerouteParameters, value: Types.NodeName) =
             { state with Node = value }
 
         [<CustomOperation("shard")>]
-        member _.Shard(state: RerouteParameters, value: CoreTypes.Integer) =
+        member _.Shard(state: Types.RerouteParameters, value: Types.Integer) =
             { state with Shard = value }
 
         [<CustomOperation("fromNode")>]
-        member _.FromNode(state: RerouteParameters, value: CoreTypes.NodeName) =
+        member _.FromNode(state: Types.RerouteParameters, value: Types.NodeName) =
             { state with FromNode = Some value }
 
         [<CustomOperation("toNode")>]
-        member _.ToNode(state: RerouteParameters, value: CoreTypes.NodeName) =
+        member _.ToNode(state: Types.RerouteParameters, value: Types.NodeName) =
             { state with ToNode = Some value }
 
     let rerouteParameters = RerouteParametersBuilder()

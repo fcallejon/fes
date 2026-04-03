@@ -4,13 +4,13 @@ namespace Fes.Generated.Builders
 
 
 open System.Text.Json.Serialization
-open Fes.Generated.Types
+open Fes.Generated
 
 [<AutoOpen>]
 module CatMlDataFrameAnalyticsBuilders =
 
     type DataFrameAnalyticsRecordBuilder() =
-        member _.Yield(_: unit) : DataFrameAnalyticsRecord =
+        member _.Yield(_: unit) : Types.DataFrameAnalyticsRecord =
             {
                 Id = None
                 Type = None
@@ -31,67 +31,67 @@ module CatMlDataFrameAnalyticsBuilders =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: DataFrameAnalyticsRecord, value: CoreTypes.Id) =
+        member _.Id(state: Types.DataFrameAnalyticsRecord, value: Types.Id) =
             { state with Id = Some value }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: DataFrameAnalyticsRecord, value: string) =
+        member _.Type(state: Types.DataFrameAnalyticsRecord, value: string) =
             { state with Type = Some value }
 
         [<CustomOperation("createTime")>]
-        member _.CreateTime(state: DataFrameAnalyticsRecord, value: string) =
+        member _.CreateTime(state: Types.DataFrameAnalyticsRecord, value: string) =
             { state with CreateTime = Some value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: DataFrameAnalyticsRecord, value: CoreTypes.VersionString) =
+        member _.Version(state: Types.DataFrameAnalyticsRecord, value: Types.VersionString) =
             { state with Version = Some value }
 
         [<CustomOperation("sourceIndex")>]
-        member _.SourceIndex(state: DataFrameAnalyticsRecord, value: CoreTypes.IndexName) =
+        member _.SourceIndex(state: Types.DataFrameAnalyticsRecord, value: Types.IndexName) =
             { state with SourceIndex = Some value }
 
         [<CustomOperation("destIndex")>]
-        member _.DestIndex(state: DataFrameAnalyticsRecord, value: CoreTypes.IndexName) =
+        member _.DestIndex(state: Types.DataFrameAnalyticsRecord, value: Types.IndexName) =
             { state with DestIndex = Some value }
 
         [<CustomOperation("description")>]
-        member _.Description(state: DataFrameAnalyticsRecord, value: string) =
+        member _.Description(state: Types.DataFrameAnalyticsRecord, value: string) =
             { state with Description = Some value }
 
         [<CustomOperation("modelMemoryLimit")>]
-        member _.ModelMemoryLimit(state: DataFrameAnalyticsRecord, value: string) =
+        member _.ModelMemoryLimit(state: Types.DataFrameAnalyticsRecord, value: string) =
             { state with ModelMemoryLimit = Some value }
 
         [<CustomOperation("state")>]
-        member _.State(state: DataFrameAnalyticsRecord, value: string) =
+        member _.State(state: Types.DataFrameAnalyticsRecord, value: string) =
             { state with State = Some value }
 
         [<CustomOperation("failureReason")>]
-        member _.FailureReason(state: DataFrameAnalyticsRecord, value: string) =
+        member _.FailureReason(state: Types.DataFrameAnalyticsRecord, value: string) =
             { state with FailureReason = Some value }
 
         [<CustomOperation("progress")>]
-        member _.Progress(state: DataFrameAnalyticsRecord, value: string) =
+        member _.Progress(state: Types.DataFrameAnalyticsRecord, value: string) =
             { state with Progress = Some value }
 
         [<CustomOperation("assignmentExplanation")>]
-        member _.AssignmentExplanation(state: DataFrameAnalyticsRecord, value: string) =
+        member _.AssignmentExplanation(state: Types.DataFrameAnalyticsRecord, value: string) =
             { state with AssignmentExplanation = Some value }
 
         [<CustomOperation("nodeId")>]
-        member _.NodeId(state: DataFrameAnalyticsRecord, value: CoreTypes.Id) =
+        member _.NodeId(state: Types.DataFrameAnalyticsRecord, value: Types.Id) =
             { state with NodeId = Some value }
 
         [<CustomOperation("nodeName")>]
-        member _.NodeName(state: DataFrameAnalyticsRecord, value: CoreTypes.Name) =
+        member _.NodeName(state: Types.DataFrameAnalyticsRecord, value: Types.Name) =
             { state with NodeName = Some value }
 
         [<CustomOperation("nodeEphemeralId")>]
-        member _.NodeEphemeralId(state: DataFrameAnalyticsRecord, value: CoreTypes.Id) =
+        member _.NodeEphemeralId(state: Types.DataFrameAnalyticsRecord, value: Types.Id) =
             { state with NodeEphemeralId = Some value }
 
         [<CustomOperation("nodeAddress")>]
-        member _.NodeAddress(state: DataFrameAnalyticsRecord, value: string) =
+        member _.NodeAddress(state: Types.DataFrameAnalyticsRecord, value: string) =
             { state with NodeAddress = Some value }
 
     let dataFrameAnalyticsRecord = DataFrameAnalyticsRecordBuilder()

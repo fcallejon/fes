@@ -7,19 +7,20 @@ open System
 open System.Text.Json
 open System.Text.Json.Serialization
 open Fes
+open Fes.Generated
 
 [<AutoOpen>]
 module SimulateOperations =
 
     type SimulateIngestRequest = {
-        Index: CoreTypes.IndexName
-        Pipeline: CoreTypes.PipelineName option
-        MergeType: SimulateIngest.MergeType option
-        Docs: IngestTypes.Document list
-        ComponentTemplateSubstitutions: Map<string, ClusterTypes.ComponentTemplateNode> option
-        IndexTemplateSubstitutions: Map<string, IndicesTypes.IndexTemplate> option
-        MappingAddition: CoreTypes.TypeMapping option
-        PipelineSubstitutions: Map<string, IngestTypes.Pipeline> option
+        Index: Types.IndexName
+        Pipeline: Types.PipelineName option
+        MergeType: Types.MergeType option
+        Docs: Types.Document list
+        ComponentTemplateSubstitutions: Map<string, Types.ComponentTemplateNode> option
+        IndexTemplateSubstitutions: Map<string, Types.IndexTemplate> option
+        MappingAddition: Types.TypeMapping option
+        PipelineSubstitutions: Map<string, Types.IngestTypesPipeline> option
     }
 
         with
@@ -58,52 +59,52 @@ module SimulateOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: SimulateIngestRequest, value: CoreTypes.IndexName) =
+        member _.Index(state: SimulateIngestRequest, value: Types.IndexName) =
             { state with Index = value }
 
         [<CustomOperation("pipeline")>]
-        member _.Pipeline(state: SimulateIngestRequest, value: CoreTypes.PipelineName) =
+        member _.Pipeline(state: SimulateIngestRequest, value: Types.PipelineName) =
             { state with Pipeline = Some value }
 
         [<CustomOperation("mergeType")>]
-        member _.MergeType(state: SimulateIngestRequest, value: SimulateIngest.MergeType) =
+        member _.MergeType(state: SimulateIngestRequest, value: Types.MergeType) =
             { state with MergeType = Some value }
 
         [<CustomOperation("docs")>]
-        member _.Docs(state: SimulateIngestRequest, value: IngestTypes.Document list) =
+        member _.Docs(state: SimulateIngestRequest, value: Types.Document list) =
             { state with Docs = value }
 
         [<CustomOperation("componentTemplateSubstitutions")>]
-        member _.ComponentTemplateSubstitutions(state: SimulateIngestRequest, value: Map<string, ClusterTypes.ComponentTemplateNode>) =
+        member _.ComponentTemplateSubstitutions(state: SimulateIngestRequest, value: Map<string, Types.ComponentTemplateNode>) =
             { state with ComponentTemplateSubstitutions = Some value }
 
         [<CustomOperation("indexTemplateSubstitutions")>]
-        member _.IndexTemplateSubstitutions(state: SimulateIngestRequest, value: Map<string, IndicesTypes.IndexTemplate>) =
+        member _.IndexTemplateSubstitutions(state: SimulateIngestRequest, value: Map<string, Types.IndexTemplate>) =
             { state with IndexTemplateSubstitutions = Some value }
 
         [<CustomOperation("mappingAddition")>]
-        member _.MappingAddition(state: SimulateIngestRequest, value: CoreTypes.TypeMapping) =
+        member _.MappingAddition(state: SimulateIngestRequest, value: Types.TypeMapping) =
             { state with MappingAddition = Some value }
 
         [<CustomOperation("pipelineSubstitutions")>]
-        member _.PipelineSubstitutions(state: SimulateIngestRequest, value: Map<string, IngestTypes.Pipeline>) =
+        member _.PipelineSubstitutions(state: SimulateIngestRequest, value: Map<string, Types.IngestTypesPipeline>) =
             { state with PipelineSubstitutions = Some value }
 
     let simulateIngestRequest = SimulateIngestRequestBuilder()
 
     module Ingest =
-        let withPipeline (value: CoreTypes.PipelineName) (req: SimulateIngestRequest) =
+        let withPipeline (value: Types.PipelineName) (req: SimulateIngestRequest) =
             { req with Pipeline = Some value }
-        let withMergeType (value: SimulateIngest.MergeType) (req: SimulateIngestRequest) =
+        let withMergeType (value: Types.MergeType) (req: SimulateIngestRequest) =
             { req with MergeType = Some value }
-        let withDocs (value: IngestTypes.Document list) (req: SimulateIngestRequest) =
+        let withDocs (value: Types.Document list) (req: SimulateIngestRequest) =
             { req with Docs = value }
-        let withComponentTemplateSubstitutions (value: Map<string, ClusterTypes.ComponentTemplateNode>) (req: SimulateIngestRequest) =
+        let withComponentTemplateSubstitutions (value: Map<string, Types.ComponentTemplateNode>) (req: SimulateIngestRequest) =
             { req with ComponentTemplateSubstitutions = Some value }
-        let withIndexTemplateSubstitutions (value: Map<string, IndicesTypes.IndexTemplate>) (req: SimulateIngestRequest) =
+        let withIndexTemplateSubstitutions (value: Map<string, Types.IndexTemplate>) (req: SimulateIngestRequest) =
             { req with IndexTemplateSubstitutions = Some value }
-        let withMappingAddition (value: CoreTypes.TypeMapping) (req: SimulateIngestRequest) =
+        let withMappingAddition (value: Types.TypeMapping) (req: SimulateIngestRequest) =
             { req with MappingAddition = Some value }
-        let withPipelineSubstitutions (value: Map<string, IngestTypes.Pipeline>) (req: SimulateIngestRequest) =
+        let withPipelineSubstitutions (value: Map<string, Types.IngestTypesPipeline>) (req: SimulateIngestRequest) =
             { req with PipelineSubstitutions = Some value }
 

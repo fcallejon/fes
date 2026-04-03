@@ -4,13 +4,13 @@ namespace Fes.Generated.Builders
 
 
 open System.Text.Json.Serialization
-open Fes.Generated.Types
+open Fes.Generated
 
 [<AutoOpen>]
 module SecurityPutPrivilegesBuilders =
 
-    type ActionsBuilder() =
-        member _.Yield(_: unit) : Actions =
+    type SecurityPutPrivilegesActionsBuilder() =
+        member _.Yield(_: unit) : Types.SecurityPutPrivilegesActions =
             {
                 Actions = Unchecked.defaultof<_>
                 Application = None
@@ -19,20 +19,20 @@ module SecurityPutPrivilegesBuilders =
             }
 
         [<CustomOperation("actions")>]
-        member _.Actions(state: Actions, value: string list) =
+        member _.Actions(state: Types.SecurityPutPrivilegesActions, value: string list) =
             { state with Actions = value }
 
         [<CustomOperation("application")>]
-        member _.Application(state: Actions, value: string) =
+        member _.Application(state: Types.SecurityPutPrivilegesActions, value: string) =
             { state with Application = Some value }
 
         [<CustomOperation("name")>]
-        member _.Name(state: Actions, value: CoreTypes.Name) =
+        member _.Name(state: Types.SecurityPutPrivilegesActions, value: Types.Name) =
             { state with Name = Some value }
 
         [<CustomOperation("metadata")>]
-        member _.Metadata(state: Actions, value: CoreTypes.Metadata) =
+        member _.Metadata(state: Types.SecurityPutPrivilegesActions, value: Types.Metadata) =
             { state with Metadata = Some value }
 
-    let actions = ActionsBuilder()
+    let securityPutPrivilegesActions = SecurityPutPrivilegesActionsBuilder()
 

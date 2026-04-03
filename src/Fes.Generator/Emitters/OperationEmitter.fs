@@ -383,6 +383,7 @@ let emitOperationsFile (index: TypeIndex.TypeIndex) (groupName: string) (endpoin
     w.Open "System.Text.Json"
     w.Open "System.Text.Json.Serialization"
     w.Open "Fes"
+    w.Open "Fes.Generated"
     w.BlankLine()
 
     w.AutoOpenModule $"{groupName}Operations"

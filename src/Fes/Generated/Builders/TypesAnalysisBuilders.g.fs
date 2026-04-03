@@ -4,13 +4,13 @@ namespace Fes.Generated.Builders
 
 
 open System.Text.Json.Serialization
-open Fes.Generated.Types
+open Fes.Generated
 
 [<AutoOpen>]
 module TypesAnalysisBuilders =
 
     type ArabicAnalyzerBuilder() =
-        member _.Yield(_: unit) : ArabicAnalyzer =
+        member _.Yield(_: unit) : Types.ArabicAnalyzer =
             {
                 Type = Unchecked.defaultof<_>
                 Stopwords = None
@@ -19,25 +19,25 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: ArabicAnalyzer, value: string) =
+        member _.Type(state: Types.ArabicAnalyzer, value: string) =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: ArabicAnalyzer, value: CoreTypes.StopWords) =
+        member _.Stopwords(state: Types.ArabicAnalyzer, value: Types.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
-        member _.StopwordsPath(state: ArabicAnalyzer, value: string) =
+        member _.StopwordsPath(state: Types.ArabicAnalyzer, value: string) =
             { state with StopwordsPath = Some value }
 
         [<CustomOperation("stemExclusion")>]
-        member _.StemExclusion(state: ArabicAnalyzer, value: string list) =
+        member _.StemExclusion(state: Types.ArabicAnalyzer, value: string list) =
             { state with StemExclusion = Some value }
 
     let arabicAnalyzer = ArabicAnalyzerBuilder()
 
     type ArmenianAnalyzerBuilder() =
-        member _.Yield(_: unit) : ArmenianAnalyzer =
+        member _.Yield(_: unit) : Types.ArmenianAnalyzer =
             {
                 Type = Unchecked.defaultof<_>
                 Stopwords = None
@@ -46,25 +46,25 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: ArmenianAnalyzer, value: string) =
+        member _.Type(state: Types.ArmenianAnalyzer, value: string) =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: ArmenianAnalyzer, value: CoreTypes.StopWords) =
+        member _.Stopwords(state: Types.ArmenianAnalyzer, value: Types.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
-        member _.StopwordsPath(state: ArmenianAnalyzer, value: string) =
+        member _.StopwordsPath(state: Types.ArmenianAnalyzer, value: string) =
             { state with StopwordsPath = Some value }
 
         [<CustomOperation("stemExclusion")>]
-        member _.StemExclusion(state: ArmenianAnalyzer, value: string list) =
+        member _.StemExclusion(state: Types.ArmenianAnalyzer, value: string list) =
             { state with StemExclusion = Some value }
 
     let armenianAnalyzer = ArmenianAnalyzerBuilder()
 
     type BasqueAnalyzerBuilder() =
-        member _.Yield(_: unit) : BasqueAnalyzer =
+        member _.Yield(_: unit) : Types.BasqueAnalyzer =
             {
                 Type = Unchecked.defaultof<_>
                 Stopwords = None
@@ -73,25 +73,25 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: BasqueAnalyzer, value: string) =
+        member _.Type(state: Types.BasqueAnalyzer, value: string) =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: BasqueAnalyzer, value: CoreTypes.StopWords) =
+        member _.Stopwords(state: Types.BasqueAnalyzer, value: Types.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
-        member _.StopwordsPath(state: BasqueAnalyzer, value: string) =
+        member _.StopwordsPath(state: Types.BasqueAnalyzer, value: string) =
             { state with StopwordsPath = Some value }
 
         [<CustomOperation("stemExclusion")>]
-        member _.StemExclusion(state: BasqueAnalyzer, value: string list) =
+        member _.StemExclusion(state: Types.BasqueAnalyzer, value: string list) =
             { state with StemExclusion = Some value }
 
     let basqueAnalyzer = BasqueAnalyzerBuilder()
 
     type BengaliAnalyzerBuilder() =
-        member _.Yield(_: unit) : BengaliAnalyzer =
+        member _.Yield(_: unit) : Types.BengaliAnalyzer =
             {
                 Type = Unchecked.defaultof<_>
                 Stopwords = None
@@ -100,25 +100,25 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: BengaliAnalyzer, value: string) =
+        member _.Type(state: Types.BengaliAnalyzer, value: string) =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: BengaliAnalyzer, value: CoreTypes.StopWords) =
+        member _.Stopwords(state: Types.BengaliAnalyzer, value: Types.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
-        member _.StopwordsPath(state: BengaliAnalyzer, value: string) =
+        member _.StopwordsPath(state: Types.BengaliAnalyzer, value: string) =
             { state with StopwordsPath = Some value }
 
         [<CustomOperation("stemExclusion")>]
-        member _.StemExclusion(state: BengaliAnalyzer, value: string list) =
+        member _.StemExclusion(state: Types.BengaliAnalyzer, value: string list) =
             { state with StemExclusion = Some value }
 
     let bengaliAnalyzer = BengaliAnalyzerBuilder()
 
     type BrazilianAnalyzerBuilder() =
-        member _.Yield(_: unit) : BrazilianAnalyzer =
+        member _.Yield(_: unit) : Types.BrazilianAnalyzer =
             {
                 Type = Unchecked.defaultof<_>
                 Stopwords = None
@@ -126,21 +126,21 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: BrazilianAnalyzer, value: string) =
+        member _.Type(state: Types.BrazilianAnalyzer, value: string) =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: BrazilianAnalyzer, value: CoreTypes.StopWords) =
+        member _.Stopwords(state: Types.BrazilianAnalyzer, value: Types.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
-        member _.StopwordsPath(state: BrazilianAnalyzer, value: string) =
+        member _.StopwordsPath(state: Types.BrazilianAnalyzer, value: string) =
             { state with StopwordsPath = Some value }
 
     let brazilianAnalyzer = BrazilianAnalyzerBuilder()
 
     type BulgarianAnalyzerBuilder() =
-        member _.Yield(_: unit) : BulgarianAnalyzer =
+        member _.Yield(_: unit) : Types.BulgarianAnalyzer =
             {
                 Type = Unchecked.defaultof<_>
                 Stopwords = None
@@ -149,25 +149,25 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: BulgarianAnalyzer, value: string) =
+        member _.Type(state: Types.BulgarianAnalyzer, value: string) =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: BulgarianAnalyzer, value: CoreTypes.StopWords) =
+        member _.Stopwords(state: Types.BulgarianAnalyzer, value: Types.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
-        member _.StopwordsPath(state: BulgarianAnalyzer, value: string) =
+        member _.StopwordsPath(state: Types.BulgarianAnalyzer, value: string) =
             { state with StopwordsPath = Some value }
 
         [<CustomOperation("stemExclusion")>]
-        member _.StemExclusion(state: BulgarianAnalyzer, value: string list) =
+        member _.StemExclusion(state: Types.BulgarianAnalyzer, value: string list) =
             { state with StemExclusion = Some value }
 
     let bulgarianAnalyzer = BulgarianAnalyzerBuilder()
 
     type CatalanAnalyzerBuilder() =
-        member _.Yield(_: unit) : CatalanAnalyzer =
+        member _.Yield(_: unit) : Types.CatalanAnalyzer =
             {
                 Type = Unchecked.defaultof<_>
                 Stopwords = None
@@ -176,25 +176,25 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: CatalanAnalyzer, value: string) =
+        member _.Type(state: Types.CatalanAnalyzer, value: string) =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: CatalanAnalyzer, value: CoreTypes.StopWords) =
+        member _.Stopwords(state: Types.CatalanAnalyzer, value: Types.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
-        member _.StopwordsPath(state: CatalanAnalyzer, value: string) =
+        member _.StopwordsPath(state: Types.CatalanAnalyzer, value: string) =
             { state with StopwordsPath = Some value }
 
         [<CustomOperation("stemExclusion")>]
-        member _.StemExclusion(state: CatalanAnalyzer, value: string list) =
+        member _.StemExclusion(state: Types.CatalanAnalyzer, value: string list) =
             { state with StemExclusion = Some value }
 
     let catalanAnalyzer = CatalanAnalyzerBuilder()
 
     type ChineseAnalyzerBuilder() =
-        member _.Yield(_: unit) : ChineseAnalyzer =
+        member _.Yield(_: unit) : Types.ChineseAnalyzer =
             {
                 Type = Unchecked.defaultof<_>
                 Stopwords = None
@@ -202,21 +202,21 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: ChineseAnalyzer, value: string) =
+        member _.Type(state: Types.ChineseAnalyzer, value: string) =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: ChineseAnalyzer, value: CoreTypes.StopWords) =
+        member _.Stopwords(state: Types.ChineseAnalyzer, value: Types.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
-        member _.StopwordsPath(state: ChineseAnalyzer, value: string) =
+        member _.StopwordsPath(state: Types.ChineseAnalyzer, value: string) =
             { state with StopwordsPath = Some value }
 
     let chineseAnalyzer = ChineseAnalyzerBuilder()
 
     type CjkAnalyzerBuilder() =
-        member _.Yield(_: unit) : CjkAnalyzer =
+        member _.Yield(_: unit) : Types.CjkAnalyzer =
             {
                 Type = Unchecked.defaultof<_>
                 Stopwords = None
@@ -224,21 +224,21 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: CjkAnalyzer, value: string) =
+        member _.Type(state: Types.CjkAnalyzer, value: string) =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: CjkAnalyzer, value: CoreTypes.StopWords) =
+        member _.Stopwords(state: Types.CjkAnalyzer, value: Types.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
-        member _.StopwordsPath(state: CjkAnalyzer, value: string) =
+        member _.StopwordsPath(state: Types.CjkAnalyzer, value: string) =
             { state with StopwordsPath = Some value }
 
     let cjkAnalyzer = CjkAnalyzerBuilder()
 
     type CjkBigramTokenFilterBuilder() =
-        member _.Yield(_: unit) : CjkBigramTokenFilter =
+        member _.Yield(_: unit) : Types.CjkBigramTokenFilter =
             {
                 Type = Unchecked.defaultof<_>
                 IgnoredScripts = None
@@ -246,21 +246,21 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: CjkBigramTokenFilter, value: string) =
+        member _.Type(state: Types.CjkBigramTokenFilter, value: string) =
             { state with Type = value }
 
         [<CustomOperation("ignoredScripts")>]
-        member _.IgnoredScripts(state: CjkBigramTokenFilter, value: CoreTypes.CjkBigramIgnoredScript list) =
+        member _.IgnoredScripts(state: Types.CjkBigramTokenFilter, value: Types.CjkBigramIgnoredScript list) =
             { state with IgnoredScripts = Some value }
 
         [<CustomOperation("outputUnigrams")>]
-        member _.OutputUnigrams(state: CjkBigramTokenFilter, value: bool) =
+        member _.OutputUnigrams(state: Types.CjkBigramTokenFilter, value: bool) =
             { state with OutputUnigrams = Some value }
 
     let cjkBigramTokenFilter = CjkBigramTokenFilterBuilder()
 
     type CommonGramsTokenFilterBuilder() =
-        member _.Yield(_: unit) : CommonGramsTokenFilter =
+        member _.Yield(_: unit) : Types.CommonGramsTokenFilter =
             {
                 Type = Unchecked.defaultof<_>
                 CommonWords = None
@@ -270,29 +270,29 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: CommonGramsTokenFilter, value: string) =
+        member _.Type(state: Types.CommonGramsTokenFilter, value: string) =
             { state with Type = value }
 
         [<CustomOperation("commonWords")>]
-        member _.CommonWords(state: CommonGramsTokenFilter, value: string list) =
+        member _.CommonWords(state: Types.CommonGramsTokenFilter, value: string list) =
             { state with CommonWords = Some value }
 
         [<CustomOperation("commonWordsPath")>]
-        member _.CommonWordsPath(state: CommonGramsTokenFilter, value: string) =
+        member _.CommonWordsPath(state: Types.CommonGramsTokenFilter, value: string) =
             { state with CommonWordsPath = Some value }
 
         [<CustomOperation("ignoreCase")>]
-        member _.IgnoreCase(state: CommonGramsTokenFilter, value: bool) =
+        member _.IgnoreCase(state: Types.CommonGramsTokenFilter, value: bool) =
             { state with IgnoreCase = Some value }
 
         [<CustomOperation("queryMode")>]
-        member _.QueryMode(state: CommonGramsTokenFilter, value: bool) =
+        member _.QueryMode(state: Types.CommonGramsTokenFilter, value: bool) =
             { state with QueryMode = Some value }
 
     let commonGramsTokenFilter = CommonGramsTokenFilterBuilder()
 
     type CompoundWordTokenFilterBaseBuilder() =
-        member _.Yield(_: unit) : CompoundWordTokenFilterBase =
+        member _.Yield(_: unit) : Types.CompoundWordTokenFilterBase =
             {
                 MaxSubwordSize = None
                 MinSubwordSize = None
@@ -303,33 +303,33 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("maxSubwordSize")>]
-        member _.MaxSubwordSize(state: CompoundWordTokenFilterBase, value: CoreTypes.Integer) =
+        member _.MaxSubwordSize(state: Types.CompoundWordTokenFilterBase, value: Types.Integer) =
             { state with MaxSubwordSize = Some value }
 
         [<CustomOperation("minSubwordSize")>]
-        member _.MinSubwordSize(state: CompoundWordTokenFilterBase, value: CoreTypes.Integer) =
+        member _.MinSubwordSize(state: Types.CompoundWordTokenFilterBase, value: Types.Integer) =
             { state with MinSubwordSize = Some value }
 
         [<CustomOperation("minWordSize")>]
-        member _.MinWordSize(state: CompoundWordTokenFilterBase, value: CoreTypes.Integer) =
+        member _.MinWordSize(state: Types.CompoundWordTokenFilterBase, value: Types.Integer) =
             { state with MinWordSize = Some value }
 
         [<CustomOperation("onlyLongestMatch")>]
-        member _.OnlyLongestMatch(state: CompoundWordTokenFilterBase, value: bool) =
+        member _.OnlyLongestMatch(state: Types.CompoundWordTokenFilterBase, value: bool) =
             { state with OnlyLongestMatch = Some value }
 
         [<CustomOperation("wordList")>]
-        member _.WordList(state: CompoundWordTokenFilterBase, value: string list) =
+        member _.WordList(state: Types.CompoundWordTokenFilterBase, value: string list) =
             { state with WordList = Some value }
 
         [<CustomOperation("wordListPath")>]
-        member _.WordListPath(state: CompoundWordTokenFilterBase, value: string) =
+        member _.WordListPath(state: Types.CompoundWordTokenFilterBase, value: string) =
             { state with WordListPath = Some value }
 
     let compoundWordTokenFilterBase = CompoundWordTokenFilterBaseBuilder()
 
     type CustomAnalyzerBuilder() =
-        member _.Yield(_: unit) : CustomAnalyzer =
+        member _.Yield(_: unit) : Types.CustomAnalyzer =
             {
                 Type = Unchecked.defaultof<_>
                 CharFilter = None
@@ -340,33 +340,33 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: CustomAnalyzer, value: string) =
+        member _.Type(state: Types.CustomAnalyzer, value: string) =
             { state with Type = value }
 
         [<CustomOperation("charFilter")>]
-        member _.CharFilter(state: CustomAnalyzer, value: System.Text.Json.JsonElement) =
+        member _.CharFilter(state: Types.CustomAnalyzer, value: System.Text.Json.JsonElement) =
             { state with CharFilter = Some value }
 
         [<CustomOperation("filter")>]
-        member _.Filter(state: CustomAnalyzer, value: System.Text.Json.JsonElement) =
+        member _.Filter(state: Types.CustomAnalyzer, value: System.Text.Json.JsonElement) =
             { state with Filter = Some value }
 
         [<CustomOperation("positionIncrementGap")>]
-        member _.PositionIncrementGap(state: CustomAnalyzer, value: CoreTypes.Integer) =
+        member _.PositionIncrementGap(state: Types.CustomAnalyzer, value: Types.Integer) =
             { state with PositionIncrementGap = Some value }
 
         [<CustomOperation("positionOffsetGap")>]
-        member _.PositionOffsetGap(state: CustomAnalyzer, value: CoreTypes.Integer) =
+        member _.PositionOffsetGap(state: Types.CustomAnalyzer, value: Types.Integer) =
             { state with PositionOffsetGap = Some value }
 
         [<CustomOperation("tokenizer")>]
-        member _.Tokenizer(state: CustomAnalyzer, value: string) =
+        member _.Tokenizer(state: Types.CustomAnalyzer, value: string) =
             { state with Tokenizer = value }
 
     let customAnalyzer = CustomAnalyzerBuilder()
 
     type CustomNormalizerBuilder() =
-        member _.Yield(_: unit) : CustomNormalizer =
+        member _.Yield(_: unit) : Types.CustomNormalizer =
             {
                 Type = Unchecked.defaultof<_>
                 CharFilter = None
@@ -374,21 +374,21 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: CustomNormalizer, value: string) =
+        member _.Type(state: Types.CustomNormalizer, value: string) =
             { state with Type = value }
 
         [<CustomOperation("charFilter")>]
-        member _.CharFilter(state: CustomNormalizer, value: string list) =
+        member _.CharFilter(state: Types.CustomNormalizer, value: string list) =
             { state with CharFilter = Some value }
 
         [<CustomOperation("filter")>]
-        member _.Filter(state: CustomNormalizer, value: string list) =
+        member _.Filter(state: Types.CustomNormalizer, value: string list) =
             { state with Filter = Some value }
 
     let customNormalizer = CustomNormalizerBuilder()
 
     type CzechAnalyzerBuilder() =
-        member _.Yield(_: unit) : CzechAnalyzer =
+        member _.Yield(_: unit) : Types.CzechAnalyzer =
             {
                 Type = Unchecked.defaultof<_>
                 Stopwords = None
@@ -397,25 +397,25 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: CzechAnalyzer, value: string) =
+        member _.Type(state: Types.CzechAnalyzer, value: string) =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: CzechAnalyzer, value: CoreTypes.StopWords) =
+        member _.Stopwords(state: Types.CzechAnalyzer, value: Types.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
-        member _.StopwordsPath(state: CzechAnalyzer, value: string) =
+        member _.StopwordsPath(state: Types.CzechAnalyzer, value: string) =
             { state with StopwordsPath = Some value }
 
         [<CustomOperation("stemExclusion")>]
-        member _.StemExclusion(state: CzechAnalyzer, value: string list) =
+        member _.StemExclusion(state: Types.CzechAnalyzer, value: string list) =
             { state with StemExclusion = Some value }
 
     let czechAnalyzer = CzechAnalyzerBuilder()
 
     type DanishAnalyzerBuilder() =
-        member _.Yield(_: unit) : DanishAnalyzer =
+        member _.Yield(_: unit) : Types.DanishAnalyzer =
             {
                 Type = Unchecked.defaultof<_>
                 Stopwords = None
@@ -423,21 +423,21 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: DanishAnalyzer, value: string) =
+        member _.Type(state: Types.DanishAnalyzer, value: string) =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: DanishAnalyzer, value: CoreTypes.StopWords) =
+        member _.Stopwords(state: Types.DanishAnalyzer, value: Types.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
-        member _.StopwordsPath(state: DanishAnalyzer, value: string) =
+        member _.StopwordsPath(state: Types.DanishAnalyzer, value: string) =
             { state with StopwordsPath = Some value }
 
     let danishAnalyzer = DanishAnalyzerBuilder()
 
     type DelimitedPayloadTokenFilterBuilder() =
-        member _.Yield(_: unit) : DelimitedPayloadTokenFilter =
+        member _.Yield(_: unit) : Types.DelimitedPayloadTokenFilter =
             {
                 Type = Unchecked.defaultof<_>
                 Delimiter = None
@@ -445,21 +445,21 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: DelimitedPayloadTokenFilter, value: string) =
+        member _.Type(state: Types.DelimitedPayloadTokenFilter, value: string) =
             { state with Type = value }
 
         [<CustomOperation("delimiter")>]
-        member _.Delimiter(state: DelimitedPayloadTokenFilter, value: string) =
+        member _.Delimiter(state: Types.DelimitedPayloadTokenFilter, value: string) =
             { state with Delimiter = Some value }
 
         [<CustomOperation("encoding")>]
-        member _.Encoding(state: DelimitedPayloadTokenFilter, value: CoreTypes.DelimitedPayloadEncoding) =
+        member _.Encoding(state: Types.DelimitedPayloadTokenFilter, value: Types.DelimitedPayloadEncoding) =
             { state with Encoding = Some value }
 
     let delimitedPayloadTokenFilter = DelimitedPayloadTokenFilterBuilder()
 
     type DutchAnalyzerBuilder() =
-        member _.Yield(_: unit) : DutchAnalyzer =
+        member _.Yield(_: unit) : Types.DutchAnalyzer =
             {
                 Type = Unchecked.defaultof<_>
                 Stopwords = None
@@ -468,25 +468,25 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: DutchAnalyzer, value: string) =
+        member _.Type(state: Types.DutchAnalyzer, value: string) =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: DutchAnalyzer, value: CoreTypes.StopWords) =
+        member _.Stopwords(state: Types.DutchAnalyzer, value: Types.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
-        member _.StopwordsPath(state: DutchAnalyzer, value: string) =
+        member _.StopwordsPath(state: Types.DutchAnalyzer, value: string) =
             { state with StopwordsPath = Some value }
 
         [<CustomOperation("stemExclusion")>]
-        member _.StemExclusion(state: DutchAnalyzer, value: string list) =
+        member _.StemExclusion(state: Types.DutchAnalyzer, value: string list) =
             { state with StemExclusion = Some value }
 
     let dutchAnalyzer = DutchAnalyzerBuilder()
 
     type EdgeNGramTokenFilterBuilder() =
-        member _.Yield(_: unit) : EdgeNGramTokenFilter =
+        member _.Yield(_: unit) : Types.EdgeNGramTokenFilter =
             {
                 Type = Unchecked.defaultof<_>
                 MaxGram = None
@@ -496,29 +496,29 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: EdgeNGramTokenFilter, value: string) =
+        member _.Type(state: Types.EdgeNGramTokenFilter, value: string) =
             { state with Type = value }
 
         [<CustomOperation("maxGram")>]
-        member _.MaxGram(state: EdgeNGramTokenFilter, value: CoreTypes.Integer) =
+        member _.MaxGram(state: Types.EdgeNGramTokenFilter, value: Types.Integer) =
             { state with MaxGram = Some value }
 
         [<CustomOperation("minGram")>]
-        member _.MinGram(state: EdgeNGramTokenFilter, value: CoreTypes.Integer) =
+        member _.MinGram(state: Types.EdgeNGramTokenFilter, value: Types.Integer) =
             { state with MinGram = Some value }
 
         [<CustomOperation("side")>]
-        member _.Side(state: EdgeNGramTokenFilter, value: CoreTypes.EdgeNGramSide) =
+        member _.Side(state: Types.EdgeNGramTokenFilter, value: Types.EdgeNGramSide) =
             { state with Side = Some value }
 
         [<CustomOperation("preserveOriginal")>]
-        member _.PreserveOriginal(state: EdgeNGramTokenFilter, value: CoreTypes.Stringified<bool>) =
+        member _.PreserveOriginal(state: Types.EdgeNGramTokenFilter, value: Types.Stringified<bool>) =
             { state with PreserveOriginal = Some value }
 
     let edgeNGramTokenFilter = EdgeNGramTokenFilterBuilder()
 
     type EdgeNGramTokenizerBuilder() =
-        member _.Yield(_: unit) : EdgeNGramTokenizer =
+        member _.Yield(_: unit) : Types.EdgeNGramTokenizer =
             {
                 Type = Unchecked.defaultof<_>
                 CustomTokenChars = None
@@ -528,29 +528,29 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: EdgeNGramTokenizer, value: string) =
+        member _.Type(state: Types.EdgeNGramTokenizer, value: string) =
             { state with Type = value }
 
         [<CustomOperation("customTokenChars")>]
-        member _.CustomTokenChars(state: EdgeNGramTokenizer, value: string) =
+        member _.CustomTokenChars(state: Types.EdgeNGramTokenizer, value: string) =
             { state with CustomTokenChars = Some value }
 
         [<CustomOperation("maxGram")>]
-        member _.MaxGram(state: EdgeNGramTokenizer, value: CoreTypes.Integer) =
+        member _.MaxGram(state: Types.EdgeNGramTokenizer, value: Types.Integer) =
             { state with MaxGram = Some value }
 
         [<CustomOperation("minGram")>]
-        member _.MinGram(state: EdgeNGramTokenizer, value: CoreTypes.Integer) =
+        member _.MinGram(state: Types.EdgeNGramTokenizer, value: Types.Integer) =
             { state with MinGram = Some value }
 
         [<CustomOperation("tokenChars")>]
-        member _.TokenChars(state: EdgeNGramTokenizer, value: CoreTypes.TokenChar list) =
+        member _.TokenChars(state: Types.EdgeNGramTokenizer, value: Types.TokenChar list) =
             { state with TokenChars = Some value }
 
     let edgeNGramTokenizer = EdgeNGramTokenizerBuilder()
 
     type ElisionTokenFilterBuilder() =
-        member _.Yield(_: unit) : ElisionTokenFilter =
+        member _.Yield(_: unit) : Types.ElisionTokenFilter =
             {
                 Type = Unchecked.defaultof<_>
                 Articles = None
@@ -559,25 +559,25 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: ElisionTokenFilter, value: string) =
+        member _.Type(state: Types.ElisionTokenFilter, value: string) =
             { state with Type = value }
 
         [<CustomOperation("articles")>]
-        member _.Articles(state: ElisionTokenFilter, value: string list) =
+        member _.Articles(state: Types.ElisionTokenFilter, value: string list) =
             { state with Articles = Some value }
 
         [<CustomOperation("articlesPath")>]
-        member _.ArticlesPath(state: ElisionTokenFilter, value: string) =
+        member _.ArticlesPath(state: Types.ElisionTokenFilter, value: string) =
             { state with ArticlesPath = Some value }
 
         [<CustomOperation("articlesCase")>]
-        member _.ArticlesCase(state: ElisionTokenFilter, value: CoreTypes.Stringified<bool>) =
+        member _.ArticlesCase(state: Types.ElisionTokenFilter, value: Types.Stringified<bool>) =
             { state with ArticlesCase = Some value }
 
     let elisionTokenFilter = ElisionTokenFilterBuilder()
 
     type EnglishAnalyzerBuilder() =
-        member _.Yield(_: unit) : EnglishAnalyzer =
+        member _.Yield(_: unit) : Types.EnglishAnalyzer =
             {
                 Type = Unchecked.defaultof<_>
                 Stopwords = None
@@ -586,25 +586,25 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: EnglishAnalyzer, value: string) =
+        member _.Type(state: Types.EnglishAnalyzer, value: string) =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: EnglishAnalyzer, value: CoreTypes.StopWords) =
+        member _.Stopwords(state: Types.EnglishAnalyzer, value: Types.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
-        member _.StopwordsPath(state: EnglishAnalyzer, value: string) =
+        member _.StopwordsPath(state: Types.EnglishAnalyzer, value: string) =
             { state with StopwordsPath = Some value }
 
         [<CustomOperation("stemExclusion")>]
-        member _.StemExclusion(state: EnglishAnalyzer, value: string list) =
+        member _.StemExclusion(state: Types.EnglishAnalyzer, value: string list) =
             { state with StemExclusion = Some value }
 
     let englishAnalyzer = EnglishAnalyzerBuilder()
 
     type EstonianAnalyzerBuilder() =
-        member _.Yield(_: unit) : EstonianAnalyzer =
+        member _.Yield(_: unit) : Types.EstonianAnalyzer =
             {
                 Type = Unchecked.defaultof<_>
                 Stopwords = None
@@ -612,21 +612,21 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: EstonianAnalyzer, value: string) =
+        member _.Type(state: Types.EstonianAnalyzer, value: string) =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: EstonianAnalyzer, value: CoreTypes.StopWords) =
+        member _.Stopwords(state: Types.EstonianAnalyzer, value: Types.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
-        member _.StopwordsPath(state: EstonianAnalyzer, value: string) =
+        member _.StopwordsPath(state: Types.EstonianAnalyzer, value: string) =
             { state with StopwordsPath = Some value }
 
     let estonianAnalyzer = EstonianAnalyzerBuilder()
 
     type FingerprintAnalyzerBuilder() =
-        member _.Yield(_: unit) : FingerprintAnalyzer =
+        member _.Yield(_: unit) : Types.FingerprintAnalyzer =
             {
                 Type = Unchecked.defaultof<_>
                 Version = None
@@ -637,33 +637,33 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: FingerprintAnalyzer, value: string) =
+        member _.Type(state: Types.FingerprintAnalyzer, value: string) =
             { state with Type = value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: FingerprintAnalyzer, value: CoreTypes.VersionString) =
+        member _.Version(state: Types.FingerprintAnalyzer, value: Types.VersionString) =
             { state with Version = Some value }
 
         [<CustomOperation("maxOutputSize")>]
-        member _.MaxOutputSize(state: FingerprintAnalyzer, value: CoreTypes.Integer) =
+        member _.MaxOutputSize(state: Types.FingerprintAnalyzer, value: Types.Integer) =
             { state with MaxOutputSize = Some value }
 
         [<CustomOperation("separator")>]
-        member _.Separator(state: FingerprintAnalyzer, value: string) =
+        member _.Separator(state: Types.FingerprintAnalyzer, value: string) =
             { state with Separator = Some value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: FingerprintAnalyzer, value: CoreTypes.StopWords) =
+        member _.Stopwords(state: Types.FingerprintAnalyzer, value: Types.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
-        member _.StopwordsPath(state: FingerprintAnalyzer, value: string) =
+        member _.StopwordsPath(state: Types.FingerprintAnalyzer, value: string) =
             { state with StopwordsPath = Some value }
 
     let fingerprintAnalyzer = FingerprintAnalyzerBuilder()
 
     type FingerprintTokenFilterBuilder() =
-        member _.Yield(_: unit) : FingerprintTokenFilter =
+        member _.Yield(_: unit) : Types.FingerprintTokenFilter =
             {
                 Type = Unchecked.defaultof<_>
                 MaxOutputSize = None
@@ -671,21 +671,21 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: FingerprintTokenFilter, value: string) =
+        member _.Type(state: Types.FingerprintTokenFilter, value: string) =
             { state with Type = value }
 
         [<CustomOperation("maxOutputSize")>]
-        member _.MaxOutputSize(state: FingerprintTokenFilter, value: CoreTypes.Integer) =
+        member _.MaxOutputSize(state: Types.FingerprintTokenFilter, value: Types.Integer) =
             { state with MaxOutputSize = Some value }
 
         [<CustomOperation("separator")>]
-        member _.Separator(state: FingerprintTokenFilter, value: string) =
+        member _.Separator(state: Types.FingerprintTokenFilter, value: string) =
             { state with Separator = Some value }
 
     let fingerprintTokenFilter = FingerprintTokenFilterBuilder()
 
     type FinnishAnalyzerBuilder() =
-        member _.Yield(_: unit) : FinnishAnalyzer =
+        member _.Yield(_: unit) : Types.FinnishAnalyzer =
             {
                 Type = Unchecked.defaultof<_>
                 Stopwords = None
@@ -694,25 +694,25 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: FinnishAnalyzer, value: string) =
+        member _.Type(state: Types.FinnishAnalyzer, value: string) =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: FinnishAnalyzer, value: CoreTypes.StopWords) =
+        member _.Stopwords(state: Types.FinnishAnalyzer, value: Types.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
-        member _.StopwordsPath(state: FinnishAnalyzer, value: string) =
+        member _.StopwordsPath(state: Types.FinnishAnalyzer, value: string) =
             { state with StopwordsPath = Some value }
 
         [<CustomOperation("stemExclusion")>]
-        member _.StemExclusion(state: FinnishAnalyzer, value: string list) =
+        member _.StemExclusion(state: Types.FinnishAnalyzer, value: string list) =
             { state with StemExclusion = Some value }
 
     let finnishAnalyzer = FinnishAnalyzerBuilder()
 
     type FrenchAnalyzerBuilder() =
-        member _.Yield(_: unit) : FrenchAnalyzer =
+        member _.Yield(_: unit) : Types.FrenchAnalyzer =
             {
                 Type = Unchecked.defaultof<_>
                 Stopwords = None
@@ -721,25 +721,25 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: FrenchAnalyzer, value: string) =
+        member _.Type(state: Types.FrenchAnalyzer, value: string) =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: FrenchAnalyzer, value: CoreTypes.StopWords) =
+        member _.Stopwords(state: Types.FrenchAnalyzer, value: Types.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
-        member _.StopwordsPath(state: FrenchAnalyzer, value: string) =
+        member _.StopwordsPath(state: Types.FrenchAnalyzer, value: string) =
             { state with StopwordsPath = Some value }
 
         [<CustomOperation("stemExclusion")>]
-        member _.StemExclusion(state: FrenchAnalyzer, value: string list) =
+        member _.StemExclusion(state: Types.FrenchAnalyzer, value: string list) =
             { state with StemExclusion = Some value }
 
     let frenchAnalyzer = FrenchAnalyzerBuilder()
 
     type GalicianAnalyzerBuilder() =
-        member _.Yield(_: unit) : GalicianAnalyzer =
+        member _.Yield(_: unit) : Types.GalicianAnalyzer =
             {
                 Type = Unchecked.defaultof<_>
                 Stopwords = None
@@ -748,25 +748,25 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: GalicianAnalyzer, value: string) =
+        member _.Type(state: Types.GalicianAnalyzer, value: string) =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: GalicianAnalyzer, value: CoreTypes.StopWords) =
+        member _.Stopwords(state: Types.GalicianAnalyzer, value: Types.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
-        member _.StopwordsPath(state: GalicianAnalyzer, value: string) =
+        member _.StopwordsPath(state: Types.GalicianAnalyzer, value: string) =
             { state with StopwordsPath = Some value }
 
         [<CustomOperation("stemExclusion")>]
-        member _.StemExclusion(state: GalicianAnalyzer, value: string list) =
+        member _.StemExclusion(state: Types.GalicianAnalyzer, value: string list) =
             { state with StemExclusion = Some value }
 
     let galicianAnalyzer = GalicianAnalyzerBuilder()
 
     type GermanAnalyzerBuilder() =
-        member _.Yield(_: unit) : GermanAnalyzer =
+        member _.Yield(_: unit) : Types.GermanAnalyzer =
             {
                 Type = Unchecked.defaultof<_>
                 Stopwords = None
@@ -775,25 +775,25 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: GermanAnalyzer, value: string) =
+        member _.Type(state: Types.GermanAnalyzer, value: string) =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: GermanAnalyzer, value: CoreTypes.StopWords) =
+        member _.Stopwords(state: Types.GermanAnalyzer, value: Types.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
-        member _.StopwordsPath(state: GermanAnalyzer, value: string) =
+        member _.StopwordsPath(state: Types.GermanAnalyzer, value: string) =
             { state with StopwordsPath = Some value }
 
         [<CustomOperation("stemExclusion")>]
-        member _.StemExclusion(state: GermanAnalyzer, value: string list) =
+        member _.StemExclusion(state: Types.GermanAnalyzer, value: string list) =
             { state with StemExclusion = Some value }
 
     let germanAnalyzer = GermanAnalyzerBuilder()
 
     type GreekAnalyzerBuilder() =
-        member _.Yield(_: unit) : GreekAnalyzer =
+        member _.Yield(_: unit) : Types.GreekAnalyzer =
             {
                 Type = Unchecked.defaultof<_>
                 Stopwords = None
@@ -801,21 +801,21 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: GreekAnalyzer, value: string) =
+        member _.Type(state: Types.GreekAnalyzer, value: string) =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: GreekAnalyzer, value: CoreTypes.StopWords) =
+        member _.Stopwords(state: Types.GreekAnalyzer, value: Types.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
-        member _.StopwordsPath(state: GreekAnalyzer, value: string) =
+        member _.StopwordsPath(state: Types.GreekAnalyzer, value: string) =
             { state with StopwordsPath = Some value }
 
     let greekAnalyzer = GreekAnalyzerBuilder()
 
     type HindiAnalyzerBuilder() =
-        member _.Yield(_: unit) : HindiAnalyzer =
+        member _.Yield(_: unit) : Types.HindiAnalyzer =
             {
                 Type = Unchecked.defaultof<_>
                 Stopwords = None
@@ -824,25 +824,25 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: HindiAnalyzer, value: string) =
+        member _.Type(state: Types.HindiAnalyzer, value: string) =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: HindiAnalyzer, value: CoreTypes.StopWords) =
+        member _.Stopwords(state: Types.HindiAnalyzer, value: Types.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
-        member _.StopwordsPath(state: HindiAnalyzer, value: string) =
+        member _.StopwordsPath(state: Types.HindiAnalyzer, value: string) =
             { state with StopwordsPath = Some value }
 
         [<CustomOperation("stemExclusion")>]
-        member _.StemExclusion(state: HindiAnalyzer, value: string list) =
+        member _.StemExclusion(state: Types.HindiAnalyzer, value: string list) =
             { state with StemExclusion = Some value }
 
     let hindiAnalyzer = HindiAnalyzerBuilder()
 
     type HungarianAnalyzerBuilder() =
-        member _.Yield(_: unit) : HungarianAnalyzer =
+        member _.Yield(_: unit) : Types.HungarianAnalyzer =
             {
                 Type = Unchecked.defaultof<_>
                 Stopwords = None
@@ -851,25 +851,25 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: HungarianAnalyzer, value: string) =
+        member _.Type(state: Types.HungarianAnalyzer, value: string) =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: HungarianAnalyzer, value: CoreTypes.StopWords) =
+        member _.Stopwords(state: Types.HungarianAnalyzer, value: Types.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
-        member _.StopwordsPath(state: HungarianAnalyzer, value: string) =
+        member _.StopwordsPath(state: Types.HungarianAnalyzer, value: string) =
             { state with StopwordsPath = Some value }
 
         [<CustomOperation("stemExclusion")>]
-        member _.StemExclusion(state: HungarianAnalyzer, value: string list) =
+        member _.StemExclusion(state: Types.HungarianAnalyzer, value: string list) =
             { state with StemExclusion = Some value }
 
     let hungarianAnalyzer = HungarianAnalyzerBuilder()
 
     type HunspellTokenFilterBuilder() =
-        member _.Yield(_: unit) : HunspellTokenFilter =
+        member _.Yield(_: unit) : Types.HunspellTokenFilter =
             {
                 Type = Unchecked.defaultof<_>
                 Dedup = None
@@ -879,29 +879,29 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: HunspellTokenFilter, value: string) =
+        member _.Type(state: Types.HunspellTokenFilter, value: string) =
             { state with Type = value }
 
         [<CustomOperation("dedup")>]
-        member _.Dedup(state: HunspellTokenFilter, value: bool) =
+        member _.Dedup(state: Types.HunspellTokenFilter, value: bool) =
             { state with Dedup = Some value }
 
         [<CustomOperation("dictionary")>]
-        member _.Dictionary(state: HunspellTokenFilter, value: string) =
+        member _.Dictionary(state: Types.HunspellTokenFilter, value: string) =
             { state with Dictionary = Some value }
 
         [<CustomOperation("locale")>]
-        member _.Locale(state: HunspellTokenFilter, value: string) =
+        member _.Locale(state: Types.HunspellTokenFilter, value: string) =
             { state with Locale = value }
 
         [<CustomOperation("longestOnly")>]
-        member _.LongestOnly(state: HunspellTokenFilter, value: bool) =
+        member _.LongestOnly(state: Types.HunspellTokenFilter, value: bool) =
             { state with LongestOnly = Some value }
 
     let hunspellTokenFilter = HunspellTokenFilterBuilder()
 
     type HyphenationDecompounderTokenFilterBuilder() =
-        member _.Yield(_: unit) : HyphenationDecompounderTokenFilter =
+        member _.Yield(_: unit) : Types.HyphenationDecompounderTokenFilter =
             {
                 Type = Unchecked.defaultof<_>
                 HyphenationPatternsPath = Unchecked.defaultof<_>
@@ -910,25 +910,25 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: HyphenationDecompounderTokenFilter, value: string) =
+        member _.Type(state: Types.HyphenationDecompounderTokenFilter, value: string) =
             { state with Type = value }
 
         [<CustomOperation("hyphenationPatternsPath")>]
-        member _.HyphenationPatternsPath(state: HyphenationDecompounderTokenFilter, value: string) =
+        member _.HyphenationPatternsPath(state: Types.HyphenationDecompounderTokenFilter, value: string) =
             { state with HyphenationPatternsPath = value }
 
         [<CustomOperation("noSubMatches")>]
-        member _.NoSubMatches(state: HyphenationDecompounderTokenFilter, value: bool) =
+        member _.NoSubMatches(state: Types.HyphenationDecompounderTokenFilter, value: bool) =
             { state with NoSubMatches = Some value }
 
         [<CustomOperation("noOverlappingMatches")>]
-        member _.NoOverlappingMatches(state: HyphenationDecompounderTokenFilter, value: bool) =
+        member _.NoOverlappingMatches(state: Types.HyphenationDecompounderTokenFilter, value: bool) =
             { state with NoOverlappingMatches = Some value }
 
     let hyphenationDecompounderTokenFilter = HyphenationDecompounderTokenFilterBuilder()
 
     type IcuCollationTokenFilterBuilder() =
-        member _.Yield(_: unit) : IcuCollationTokenFilter =
+        member _.Yield(_: unit) : Types.IcuCollationTokenFilter =
             {
                 Type = Unchecked.defaultof<_>
                 Alternate = None
@@ -946,61 +946,61 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: IcuCollationTokenFilter, value: string) =
+        member _.Type(state: Types.IcuCollationTokenFilter, value: string) =
             { state with Type = value }
 
         [<CustomOperation("alternate")>]
-        member _.Alternate(state: IcuCollationTokenFilter, value: CoreTypes.IcuCollationAlternate) =
+        member _.Alternate(state: Types.IcuCollationTokenFilter, value: Types.IcuCollationAlternate) =
             { state with Alternate = Some value }
 
         [<CustomOperation("caseFirst")>]
-        member _.CaseFirst(state: IcuCollationTokenFilter, value: CoreTypes.IcuCollationCaseFirst) =
+        member _.CaseFirst(state: Types.IcuCollationTokenFilter, value: Types.IcuCollationCaseFirst) =
             { state with CaseFirst = Some value }
 
         [<CustomOperation("caseLevel")>]
-        member _.CaseLevel(state: IcuCollationTokenFilter, value: bool) =
+        member _.CaseLevel(state: Types.IcuCollationTokenFilter, value: bool) =
             { state with CaseLevel = Some value }
 
         [<CustomOperation("country")>]
-        member _.Country(state: IcuCollationTokenFilter, value: string) =
+        member _.Country(state: Types.IcuCollationTokenFilter, value: string) =
             { state with Country = Some value }
 
         [<CustomOperation("decomposition")>]
-        member _.Decomposition(state: IcuCollationTokenFilter, value: CoreTypes.IcuCollationDecomposition) =
+        member _.Decomposition(state: Types.IcuCollationTokenFilter, value: Types.IcuCollationDecomposition) =
             { state with Decomposition = Some value }
 
         [<CustomOperation("hiraganaQuaternaryMode")>]
-        member _.HiraganaQuaternaryMode(state: IcuCollationTokenFilter, value: bool) =
+        member _.HiraganaQuaternaryMode(state: Types.IcuCollationTokenFilter, value: bool) =
             { state with HiraganaQuaternaryMode = Some value }
 
         [<CustomOperation("language")>]
-        member _.Language(state: IcuCollationTokenFilter, value: string) =
+        member _.Language(state: Types.IcuCollationTokenFilter, value: string) =
             { state with Language = Some value }
 
         [<CustomOperation("numeric")>]
-        member _.Numeric(state: IcuCollationTokenFilter, value: bool) =
+        member _.Numeric(state: Types.IcuCollationTokenFilter, value: bool) =
             { state with Numeric = Some value }
 
         [<CustomOperation("rules")>]
-        member _.Rules(state: IcuCollationTokenFilter, value: string) =
+        member _.Rules(state: Types.IcuCollationTokenFilter, value: string) =
             { state with Rules = Some value }
 
         [<CustomOperation("strength")>]
-        member _.Strength(state: IcuCollationTokenFilter, value: CoreTypes.IcuCollationStrength) =
+        member _.Strength(state: Types.IcuCollationTokenFilter, value: Types.IcuCollationStrength) =
             { state with Strength = Some value }
 
         [<CustomOperation("variableTop")>]
-        member _.VariableTop(state: IcuCollationTokenFilter, value: string) =
+        member _.VariableTop(state: Types.IcuCollationTokenFilter, value: string) =
             { state with VariableTop = Some value }
 
         [<CustomOperation("variant")>]
-        member _.Variant(state: IcuCollationTokenFilter, value: string) =
+        member _.Variant(state: Types.IcuCollationTokenFilter, value: string) =
             { state with Variant = Some value }
 
     let icuCollationTokenFilter = IcuCollationTokenFilterBuilder()
 
     type IcuNormalizationCharFilterBuilder() =
-        member _.Yield(_: unit) : IcuNormalizationCharFilter =
+        member _.Yield(_: unit) : Types.IcuNormalizationCharFilter =
             {
                 Type = Unchecked.defaultof<_>
                 Mode = None
@@ -1009,25 +1009,25 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: IcuNormalizationCharFilter, value: string) =
+        member _.Type(state: Types.IcuNormalizationCharFilter, value: string) =
             { state with Type = value }
 
         [<CustomOperation("mode")>]
-        member _.Mode(state: IcuNormalizationCharFilter, value: CoreTypes.IcuNormalizationMode) =
+        member _.Mode(state: Types.IcuNormalizationCharFilter, value: Types.IcuNormalizationMode) =
             { state with Mode = Some value }
 
         [<CustomOperation("name")>]
-        member _.Name(state: IcuNormalizationCharFilter, value: CoreTypes.IcuNormalizationType) =
+        member _.Name(state: Types.IcuNormalizationCharFilter, value: Types.IcuNormalizationType) =
             { state with Name = Some value }
 
         [<CustomOperation("unicodeSetFilter")>]
-        member _.UnicodeSetFilter(state: IcuNormalizationCharFilter, value: string) =
+        member _.UnicodeSetFilter(state: Types.IcuNormalizationCharFilter, value: string) =
             { state with UnicodeSetFilter = Some value }
 
     let icuNormalizationCharFilter = IcuNormalizationCharFilterBuilder()
 
     type IndonesianAnalyzerBuilder() =
-        member _.Yield(_: unit) : IndonesianAnalyzer =
+        member _.Yield(_: unit) : Types.IndonesianAnalyzer =
             {
                 Type = Unchecked.defaultof<_>
                 Stopwords = None
@@ -1036,25 +1036,25 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: IndonesianAnalyzer, value: string) =
+        member _.Type(state: Types.IndonesianAnalyzer, value: string) =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: IndonesianAnalyzer, value: CoreTypes.StopWords) =
+        member _.Stopwords(state: Types.IndonesianAnalyzer, value: Types.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
-        member _.StopwordsPath(state: IndonesianAnalyzer, value: string) =
+        member _.StopwordsPath(state: Types.IndonesianAnalyzer, value: string) =
             { state with StopwordsPath = Some value }
 
         [<CustomOperation("stemExclusion")>]
-        member _.StemExclusion(state: IndonesianAnalyzer, value: string list) =
+        member _.StemExclusion(state: Types.IndonesianAnalyzer, value: string list) =
             { state with StemExclusion = Some value }
 
     let indonesianAnalyzer = IndonesianAnalyzerBuilder()
 
     type IrishAnalyzerBuilder() =
-        member _.Yield(_: unit) : IrishAnalyzer =
+        member _.Yield(_: unit) : Types.IrishAnalyzer =
             {
                 Type = Unchecked.defaultof<_>
                 Stopwords = None
@@ -1063,25 +1063,25 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: IrishAnalyzer, value: string) =
+        member _.Type(state: Types.IrishAnalyzer, value: string) =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: IrishAnalyzer, value: CoreTypes.StopWords) =
+        member _.Stopwords(state: Types.IrishAnalyzer, value: Types.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
-        member _.StopwordsPath(state: IrishAnalyzer, value: string) =
+        member _.StopwordsPath(state: Types.IrishAnalyzer, value: string) =
             { state with StopwordsPath = Some value }
 
         [<CustomOperation("stemExclusion")>]
-        member _.StemExclusion(state: IrishAnalyzer, value: string list) =
+        member _.StemExclusion(state: Types.IrishAnalyzer, value: string list) =
             { state with StemExclusion = Some value }
 
     let irishAnalyzer = IrishAnalyzerBuilder()
 
     type ItalianAnalyzerBuilder() =
-        member _.Yield(_: unit) : ItalianAnalyzer =
+        member _.Yield(_: unit) : Types.ItalianAnalyzer =
             {
                 Type = Unchecked.defaultof<_>
                 Stopwords = None
@@ -1090,25 +1090,25 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: ItalianAnalyzer, value: string) =
+        member _.Type(state: Types.ItalianAnalyzer, value: string) =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: ItalianAnalyzer, value: CoreTypes.StopWords) =
+        member _.Stopwords(state: Types.ItalianAnalyzer, value: Types.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
-        member _.StopwordsPath(state: ItalianAnalyzer, value: string) =
+        member _.StopwordsPath(state: Types.ItalianAnalyzer, value: string) =
             { state with StopwordsPath = Some value }
 
         [<CustomOperation("stemExclusion")>]
-        member _.StemExclusion(state: ItalianAnalyzer, value: string list) =
+        member _.StemExclusion(state: Types.ItalianAnalyzer, value: string list) =
             { state with StemExclusion = Some value }
 
     let italianAnalyzer = ItalianAnalyzerBuilder()
 
     type KeepWordsTokenFilterBuilder() =
-        member _.Yield(_: unit) : KeepWordsTokenFilter =
+        member _.Yield(_: unit) : Types.KeepWordsTokenFilter =
             {
                 Type = Unchecked.defaultof<_>
                 KeepWords = None
@@ -1117,25 +1117,25 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: KeepWordsTokenFilter, value: string) =
+        member _.Type(state: Types.KeepWordsTokenFilter, value: string) =
             { state with Type = value }
 
         [<CustomOperation("keepWords")>]
-        member _.KeepWords(state: KeepWordsTokenFilter, value: string list) =
+        member _.KeepWords(state: Types.KeepWordsTokenFilter, value: string list) =
             { state with KeepWords = Some value }
 
         [<CustomOperation("keepWordsCase")>]
-        member _.KeepWordsCase(state: KeepWordsTokenFilter, value: bool) =
+        member _.KeepWordsCase(state: Types.KeepWordsTokenFilter, value: bool) =
             { state with KeepWordsCase = Some value }
 
         [<CustomOperation("keepWordsPath")>]
-        member _.KeepWordsPath(state: KeepWordsTokenFilter, value: string) =
+        member _.KeepWordsPath(state: Types.KeepWordsTokenFilter, value: string) =
             { state with KeepWordsPath = Some value }
 
     let keepWordsTokenFilter = KeepWordsTokenFilterBuilder()
 
     type KeywordMarkerTokenFilterBuilder() =
-        member _.Yield(_: unit) : KeywordMarkerTokenFilter =
+        member _.Yield(_: unit) : Types.KeywordMarkerTokenFilter =
             {
                 Type = Unchecked.defaultof<_>
                 IgnoreCase = None
@@ -1145,29 +1145,29 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: KeywordMarkerTokenFilter, value: string) =
+        member _.Type(state: Types.KeywordMarkerTokenFilter, value: string) =
             { state with Type = value }
 
         [<CustomOperation("ignoreCase")>]
-        member _.IgnoreCase(state: KeywordMarkerTokenFilter, value: bool) =
+        member _.IgnoreCase(state: Types.KeywordMarkerTokenFilter, value: bool) =
             { state with IgnoreCase = Some value }
 
         [<CustomOperation("keywords")>]
-        member _.Keywords(state: KeywordMarkerTokenFilter, value: System.Text.Json.JsonElement) =
+        member _.Keywords(state: Types.KeywordMarkerTokenFilter, value: System.Text.Json.JsonElement) =
             { state with Keywords = Some value }
 
         [<CustomOperation("keywordsPath")>]
-        member _.KeywordsPath(state: KeywordMarkerTokenFilter, value: string) =
+        member _.KeywordsPath(state: Types.KeywordMarkerTokenFilter, value: string) =
             { state with KeywordsPath = Some value }
 
         [<CustomOperation("keywordsPattern")>]
-        member _.KeywordsPattern(state: KeywordMarkerTokenFilter, value: string) =
+        member _.KeywordsPattern(state: Types.KeywordMarkerTokenFilter, value: string) =
             { state with KeywordsPattern = Some value }
 
     let keywordMarkerTokenFilter = KeywordMarkerTokenFilterBuilder()
 
     type KuromojiAnalyzerBuilder() =
-        member _.Yield(_: unit) : KuromojiAnalyzer =
+        member _.Yield(_: unit) : Types.KuromojiAnalyzer =
             {
                 Type = Unchecked.defaultof<_>
                 Mode = None
@@ -1175,21 +1175,21 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: KuromojiAnalyzer, value: string) =
+        member _.Type(state: Types.KuromojiAnalyzer, value: string) =
             { state with Type = value }
 
         [<CustomOperation("mode")>]
-        member _.Mode(state: KuromojiAnalyzer, value: CoreTypes.KuromojiTokenizationMode) =
+        member _.Mode(state: Types.KuromojiAnalyzer, value: Types.KuromojiTokenizationMode) =
             { state with Mode = Some value }
 
         [<CustomOperation("userDictionary")>]
-        member _.UserDictionary(state: KuromojiAnalyzer, value: string) =
+        member _.UserDictionary(state: Types.KuromojiAnalyzer, value: string) =
             { state with UserDictionary = Some value }
 
     let kuromojiAnalyzer = KuromojiAnalyzerBuilder()
 
     type KuromojiTokenizerBuilder() =
-        member _.Yield(_: unit) : KuromojiTokenizer =
+        member _.Yield(_: unit) : Types.KuromojiTokenizer =
             {
                 Type = Unchecked.defaultof<_>
                 DiscardPunctuation = None
@@ -1202,41 +1202,41 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: KuromojiTokenizer, value: string) =
+        member _.Type(state: Types.KuromojiTokenizer, value: string) =
             { state with Type = value }
 
         [<CustomOperation("discardPunctuation")>]
-        member _.DiscardPunctuation(state: KuromojiTokenizer, value: bool) =
+        member _.DiscardPunctuation(state: Types.KuromojiTokenizer, value: bool) =
             { state with DiscardPunctuation = Some value }
 
         [<CustomOperation("mode")>]
-        member _.Mode(state: KuromojiTokenizer, value: CoreTypes.KuromojiTokenizationMode) =
+        member _.Mode(state: Types.KuromojiTokenizer, value: Types.KuromojiTokenizationMode) =
             { state with Mode = value }
 
         [<CustomOperation("nbestCost")>]
-        member _.NbestCost(state: KuromojiTokenizer, value: CoreTypes.Integer) =
+        member _.NbestCost(state: Types.KuromojiTokenizer, value: Types.Integer) =
             { state with NbestCost = Some value }
 
         [<CustomOperation("nbestExamples")>]
-        member _.NbestExamples(state: KuromojiTokenizer, value: string) =
+        member _.NbestExamples(state: Types.KuromojiTokenizer, value: string) =
             { state with NbestExamples = Some value }
 
         [<CustomOperation("userDictionary")>]
-        member _.UserDictionary(state: KuromojiTokenizer, value: string) =
+        member _.UserDictionary(state: Types.KuromojiTokenizer, value: string) =
             { state with UserDictionary = Some value }
 
         [<CustomOperation("userDictionaryRules")>]
-        member _.UserDictionaryRules(state: KuromojiTokenizer, value: string list) =
+        member _.UserDictionaryRules(state: Types.KuromojiTokenizer, value: string list) =
             { state with UserDictionaryRules = Some value }
 
         [<CustomOperation("discardCompoundToken")>]
-        member _.DiscardCompoundToken(state: KuromojiTokenizer, value: bool) =
+        member _.DiscardCompoundToken(state: Types.KuromojiTokenizer, value: bool) =
             { state with DiscardCompoundToken = Some value }
 
     let kuromojiTokenizer = KuromojiTokenizerBuilder()
 
     type LatvianAnalyzerBuilder() =
-        member _.Yield(_: unit) : LatvianAnalyzer =
+        member _.Yield(_: unit) : Types.LatvianAnalyzer =
             {
                 Type = Unchecked.defaultof<_>
                 Stopwords = None
@@ -1245,25 +1245,25 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: LatvianAnalyzer, value: string) =
+        member _.Type(state: Types.LatvianAnalyzer, value: string) =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: LatvianAnalyzer, value: CoreTypes.StopWords) =
+        member _.Stopwords(state: Types.LatvianAnalyzer, value: Types.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
-        member _.StopwordsPath(state: LatvianAnalyzer, value: string) =
+        member _.StopwordsPath(state: Types.LatvianAnalyzer, value: string) =
             { state with StopwordsPath = Some value }
 
         [<CustomOperation("stemExclusion")>]
-        member _.StemExclusion(state: LatvianAnalyzer, value: string list) =
+        member _.StemExclusion(state: Types.LatvianAnalyzer, value: string list) =
             { state with StemExclusion = Some value }
 
     let latvianAnalyzer = LatvianAnalyzerBuilder()
 
     type LengthTokenFilterBuilder() =
-        member _.Yield(_: unit) : LengthTokenFilter =
+        member _.Yield(_: unit) : Types.LengthTokenFilter =
             {
                 Type = Unchecked.defaultof<_>
                 Max = None
@@ -1271,21 +1271,21 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: LengthTokenFilter, value: string) =
+        member _.Type(state: Types.LengthTokenFilter, value: string) =
             { state with Type = value }
 
         [<CustomOperation("max")>]
-        member _.Max(state: LengthTokenFilter, value: CoreTypes.Integer) =
+        member _.Max(state: Types.LengthTokenFilter, value: Types.Integer) =
             { state with Max = Some value }
 
         [<CustomOperation("min")>]
-        member _.Min(state: LengthTokenFilter, value: CoreTypes.Integer) =
+        member _.Min(state: Types.LengthTokenFilter, value: Types.Integer) =
             { state with Min = Some value }
 
     let lengthTokenFilter = LengthTokenFilterBuilder()
 
     type LimitTokenCountTokenFilterBuilder() =
-        member _.Yield(_: unit) : LimitTokenCountTokenFilter =
+        member _.Yield(_: unit) : Types.LimitTokenCountTokenFilter =
             {
                 Type = Unchecked.defaultof<_>
                 ConsumeAllTokens = None
@@ -1293,21 +1293,21 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: LimitTokenCountTokenFilter, value: string) =
+        member _.Type(state: Types.LimitTokenCountTokenFilter, value: string) =
             { state with Type = value }
 
         [<CustomOperation("consumeAllTokens")>]
-        member _.ConsumeAllTokens(state: LimitTokenCountTokenFilter, value: bool) =
+        member _.ConsumeAllTokens(state: Types.LimitTokenCountTokenFilter, value: bool) =
             { state with ConsumeAllTokens = Some value }
 
         [<CustomOperation("maxTokenCount")>]
-        member _.MaxTokenCount(state: LimitTokenCountTokenFilter, value: CoreTypes.Stringified<CoreTypes.Integer>) =
+        member _.MaxTokenCount(state: Types.LimitTokenCountTokenFilter, value: Types.Stringified<Types.Integer>) =
             { state with MaxTokenCount = Some value }
 
     let limitTokenCountTokenFilter = LimitTokenCountTokenFilterBuilder()
 
     type LithuanianAnalyzerBuilder() =
-        member _.Yield(_: unit) : LithuanianAnalyzer =
+        member _.Yield(_: unit) : Types.LithuanianAnalyzer =
             {
                 Type = Unchecked.defaultof<_>
                 Stopwords = None
@@ -1316,25 +1316,25 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: LithuanianAnalyzer, value: string) =
+        member _.Type(state: Types.LithuanianAnalyzer, value: string) =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: LithuanianAnalyzer, value: CoreTypes.StopWords) =
+        member _.Stopwords(state: Types.LithuanianAnalyzer, value: Types.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
-        member _.StopwordsPath(state: LithuanianAnalyzer, value: string) =
+        member _.StopwordsPath(state: Types.LithuanianAnalyzer, value: string) =
             { state with StopwordsPath = Some value }
 
         [<CustomOperation("stemExclusion")>]
-        member _.StemExclusion(state: LithuanianAnalyzer, value: string list) =
+        member _.StemExclusion(state: Types.LithuanianAnalyzer, value: string list) =
             { state with StemExclusion = Some value }
 
     let lithuanianAnalyzer = LithuanianAnalyzerBuilder()
 
     type MappingCharFilterBuilder() =
-        member _.Yield(_: unit) : MappingCharFilter =
+        member _.Yield(_: unit) : Types.MappingCharFilter =
             {
                 Type = Unchecked.defaultof<_>
                 Mappings = None
@@ -1342,21 +1342,21 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: MappingCharFilter, value: string) =
+        member _.Type(state: Types.MappingCharFilter, value: string) =
             { state with Type = value }
 
         [<CustomOperation("mappings")>]
-        member _.Mappings(state: MappingCharFilter, value: string list) =
+        member _.Mappings(state: Types.MappingCharFilter, value: string list) =
             { state with Mappings = Some value }
 
         [<CustomOperation("mappingsPath")>]
-        member _.MappingsPath(state: MappingCharFilter, value: string) =
+        member _.MappingsPath(state: Types.MappingCharFilter, value: string) =
             { state with MappingsPath = Some value }
 
     let mappingCharFilter = MappingCharFilterBuilder()
 
     type MinHashTokenFilterBuilder() =
-        member _.Yield(_: unit) : MinHashTokenFilter =
+        member _.Yield(_: unit) : Types.MinHashTokenFilter =
             {
                 Type = Unchecked.defaultof<_>
                 BucketCount = None
@@ -1366,29 +1366,29 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: MinHashTokenFilter, value: string) =
+        member _.Type(state: Types.MinHashTokenFilter, value: string) =
             { state with Type = value }
 
         [<CustomOperation("bucketCount")>]
-        member _.BucketCount(state: MinHashTokenFilter, value: CoreTypes.Integer) =
+        member _.BucketCount(state: Types.MinHashTokenFilter, value: Types.Integer) =
             { state with BucketCount = Some value }
 
         [<CustomOperation("hashCount")>]
-        member _.HashCount(state: MinHashTokenFilter, value: CoreTypes.Integer) =
+        member _.HashCount(state: Types.MinHashTokenFilter, value: Types.Integer) =
             { state with HashCount = Some value }
 
         [<CustomOperation("hashSetSize")>]
-        member _.HashSetSize(state: MinHashTokenFilter, value: CoreTypes.Integer) =
+        member _.HashSetSize(state: Types.MinHashTokenFilter, value: Types.Integer) =
             { state with HashSetSize = Some value }
 
         [<CustomOperation("withRotation")>]
-        member _.WithRotation(state: MinHashTokenFilter, value: bool) =
+        member _.WithRotation(state: Types.MinHashTokenFilter, value: bool) =
             { state with WithRotation = Some value }
 
     let minHashTokenFilter = MinHashTokenFilterBuilder()
 
     type NGramTokenFilterBuilder() =
-        member _.Yield(_: unit) : NGramTokenFilter =
+        member _.Yield(_: unit) : Types.NGramTokenFilter =
             {
                 Type = Unchecked.defaultof<_>
                 MaxGram = None
@@ -1397,25 +1397,25 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: NGramTokenFilter, value: string) =
+        member _.Type(state: Types.NGramTokenFilter, value: string) =
             { state with Type = value }
 
         [<CustomOperation("maxGram")>]
-        member _.MaxGram(state: NGramTokenFilter, value: CoreTypes.Integer) =
+        member _.MaxGram(state: Types.NGramTokenFilter, value: Types.Integer) =
             { state with MaxGram = Some value }
 
         [<CustomOperation("minGram")>]
-        member _.MinGram(state: NGramTokenFilter, value: CoreTypes.Integer) =
+        member _.MinGram(state: Types.NGramTokenFilter, value: Types.Integer) =
             { state with MinGram = Some value }
 
         [<CustomOperation("preserveOriginal")>]
-        member _.PreserveOriginal(state: NGramTokenFilter, value: CoreTypes.Stringified<bool>) =
+        member _.PreserveOriginal(state: Types.NGramTokenFilter, value: Types.Stringified<bool>) =
             { state with PreserveOriginal = Some value }
 
     let nGramTokenFilter = NGramTokenFilterBuilder()
 
     type NGramTokenizerBuilder() =
-        member _.Yield(_: unit) : NGramTokenizer =
+        member _.Yield(_: unit) : Types.NGramTokenizer =
             {
                 Type = Unchecked.defaultof<_>
                 CustomTokenChars = None
@@ -1425,29 +1425,29 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: NGramTokenizer, value: string) =
+        member _.Type(state: Types.NGramTokenizer, value: string) =
             { state with Type = value }
 
         [<CustomOperation("customTokenChars")>]
-        member _.CustomTokenChars(state: NGramTokenizer, value: string) =
+        member _.CustomTokenChars(state: Types.NGramTokenizer, value: string) =
             { state with CustomTokenChars = Some value }
 
         [<CustomOperation("maxGram")>]
-        member _.MaxGram(state: NGramTokenizer, value: CoreTypes.Integer) =
+        member _.MaxGram(state: Types.NGramTokenizer, value: Types.Integer) =
             { state with MaxGram = Some value }
 
         [<CustomOperation("minGram")>]
-        member _.MinGram(state: NGramTokenizer, value: CoreTypes.Integer) =
+        member _.MinGram(state: Types.NGramTokenizer, value: Types.Integer) =
             { state with MinGram = Some value }
 
         [<CustomOperation("tokenChars")>]
-        member _.TokenChars(state: NGramTokenizer, value: CoreTypes.TokenChar list) =
+        member _.TokenChars(state: Types.NGramTokenizer, value: Types.TokenChar list) =
             { state with TokenChars = Some value }
 
     let nGramTokenizer = NGramTokenizerBuilder()
 
     type NoriAnalyzerBuilder() =
-        member _.Yield(_: unit) : NoriAnalyzer =
+        member _.Yield(_: unit) : Types.NoriAnalyzer =
             {
                 Type = Unchecked.defaultof<_>
                 Version = None
@@ -1457,29 +1457,29 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: NoriAnalyzer, value: string) =
+        member _.Type(state: Types.NoriAnalyzer, value: string) =
             { state with Type = value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: NoriAnalyzer, value: CoreTypes.VersionString) =
+        member _.Version(state: Types.NoriAnalyzer, value: Types.VersionString) =
             { state with Version = Some value }
 
         [<CustomOperation("decompoundMode")>]
-        member _.DecompoundMode(state: NoriAnalyzer, value: CoreTypes.NoriDecompoundMode) =
+        member _.DecompoundMode(state: Types.NoriAnalyzer, value: Types.NoriDecompoundMode) =
             { state with DecompoundMode = Some value }
 
         [<CustomOperation("stoptags")>]
-        member _.Stoptags(state: NoriAnalyzer, value: string list) =
+        member _.Stoptags(state: Types.NoriAnalyzer, value: string list) =
             { state with Stoptags = Some value }
 
         [<CustomOperation("userDictionary")>]
-        member _.UserDictionary(state: NoriAnalyzer, value: string) =
+        member _.UserDictionary(state: Types.NoriAnalyzer, value: string) =
             { state with UserDictionary = Some value }
 
     let noriAnalyzer = NoriAnalyzerBuilder()
 
     type NoriTokenizerBuilder() =
-        member _.Yield(_: unit) : NoriTokenizer =
+        member _.Yield(_: unit) : Types.NoriTokenizer =
             {
                 Type = Unchecked.defaultof<_>
                 DecompoundMode = None
@@ -1489,29 +1489,29 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: NoriTokenizer, value: string) =
+        member _.Type(state: Types.NoriTokenizer, value: string) =
             { state with Type = value }
 
         [<CustomOperation("decompoundMode")>]
-        member _.DecompoundMode(state: NoriTokenizer, value: CoreTypes.NoriDecompoundMode) =
+        member _.DecompoundMode(state: Types.NoriTokenizer, value: Types.NoriDecompoundMode) =
             { state with DecompoundMode = Some value }
 
         [<CustomOperation("discardPunctuation")>]
-        member _.DiscardPunctuation(state: NoriTokenizer, value: bool) =
+        member _.DiscardPunctuation(state: Types.NoriTokenizer, value: bool) =
             { state with DiscardPunctuation = Some value }
 
         [<CustomOperation("userDictionary")>]
-        member _.UserDictionary(state: NoriTokenizer, value: string) =
+        member _.UserDictionary(state: Types.NoriTokenizer, value: string) =
             { state with UserDictionary = Some value }
 
         [<CustomOperation("userDictionaryRules")>]
-        member _.UserDictionaryRules(state: NoriTokenizer, value: string list) =
+        member _.UserDictionaryRules(state: Types.NoriTokenizer, value: string list) =
             { state with UserDictionaryRules = Some value }
 
     let noriTokenizer = NoriTokenizerBuilder()
 
     type NorwegianAnalyzerBuilder() =
-        member _.Yield(_: unit) : NorwegianAnalyzer =
+        member _.Yield(_: unit) : Types.NorwegianAnalyzer =
             {
                 Type = Unchecked.defaultof<_>
                 Stopwords = None
@@ -1520,25 +1520,25 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: NorwegianAnalyzer, value: string) =
+        member _.Type(state: Types.NorwegianAnalyzer, value: string) =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: NorwegianAnalyzer, value: CoreTypes.StopWords) =
+        member _.Stopwords(state: Types.NorwegianAnalyzer, value: Types.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
-        member _.StopwordsPath(state: NorwegianAnalyzer, value: string) =
+        member _.StopwordsPath(state: Types.NorwegianAnalyzer, value: string) =
             { state with StopwordsPath = Some value }
 
         [<CustomOperation("stemExclusion")>]
-        member _.StemExclusion(state: NorwegianAnalyzer, value: string list) =
+        member _.StemExclusion(state: Types.NorwegianAnalyzer, value: string list) =
             { state with StemExclusion = Some value }
 
     let norwegianAnalyzer = NorwegianAnalyzerBuilder()
 
     type PathHierarchyTokenizerBuilder() =
-        member _.Yield(_: unit) : PathHierarchyTokenizer =
+        member _.Yield(_: unit) : Types.PathHierarchyTokenizer =
             {
                 Type = Unchecked.defaultof<_>
                 BufferSize = None
@@ -1549,33 +1549,33 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: PathHierarchyTokenizer, value: string) =
+        member _.Type(state: Types.PathHierarchyTokenizer, value: string) =
             { state with Type = value }
 
         [<CustomOperation("bufferSize")>]
-        member _.BufferSize(state: PathHierarchyTokenizer, value: CoreTypes.Stringified<CoreTypes.Integer>) =
+        member _.BufferSize(state: Types.PathHierarchyTokenizer, value: Types.Stringified<Types.Integer>) =
             { state with BufferSize = Some value }
 
         [<CustomOperation("delimiter")>]
-        member _.Delimiter(state: PathHierarchyTokenizer, value: string) =
+        member _.Delimiter(state: Types.PathHierarchyTokenizer, value: string) =
             { state with Delimiter = Some value }
 
         [<CustomOperation("replacement")>]
-        member _.Replacement(state: PathHierarchyTokenizer, value: string) =
+        member _.Replacement(state: Types.PathHierarchyTokenizer, value: string) =
             { state with Replacement = Some value }
 
         [<CustomOperation("reverse")>]
-        member _.Reverse(state: PathHierarchyTokenizer, value: CoreTypes.Stringified<bool>) =
+        member _.Reverse(state: Types.PathHierarchyTokenizer, value: Types.Stringified<bool>) =
             { state with Reverse = Some value }
 
         [<CustomOperation("skip")>]
-        member _.Skip(state: PathHierarchyTokenizer, value: CoreTypes.Stringified<CoreTypes.Integer>) =
+        member _.Skip(state: Types.PathHierarchyTokenizer, value: Types.Stringified<Types.Integer>) =
             { state with Skip = Some value }
 
     let pathHierarchyTokenizer = PathHierarchyTokenizerBuilder()
 
     type PatternAnalyzerBuilder() =
-        member _.Yield(_: unit) : PatternAnalyzer =
+        member _.Yield(_: unit) : Types.PatternAnalyzer =
             {
                 Type = Unchecked.defaultof<_>
                 Version = None
@@ -1587,37 +1587,37 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: PatternAnalyzer, value: string) =
+        member _.Type(state: Types.PatternAnalyzer, value: string) =
             { state with Type = value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: PatternAnalyzer, value: CoreTypes.VersionString) =
+        member _.Version(state: Types.PatternAnalyzer, value: Types.VersionString) =
             { state with Version = Some value }
 
         [<CustomOperation("flags")>]
-        member _.Flags(state: PatternAnalyzer, value: string) =
+        member _.Flags(state: Types.PatternAnalyzer, value: string) =
             { state with Flags = Some value }
 
         [<CustomOperation("lowercase")>]
-        member _.Lowercase(state: PatternAnalyzer, value: bool) =
+        member _.Lowercase(state: Types.PatternAnalyzer, value: bool) =
             { state with Lowercase = Some value }
 
         [<CustomOperation("pattern")>]
-        member _.Pattern(state: PatternAnalyzer, value: string) =
+        member _.Pattern(state: Types.PatternAnalyzer, value: string) =
             { state with Pattern = Some value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: PatternAnalyzer, value: CoreTypes.StopWords) =
+        member _.Stopwords(state: Types.PatternAnalyzer, value: Types.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
-        member _.StopwordsPath(state: PatternAnalyzer, value: string) =
+        member _.StopwordsPath(state: Types.PatternAnalyzer, value: string) =
             { state with StopwordsPath = Some value }
 
     let patternAnalyzer = PatternAnalyzerBuilder()
 
     type PatternReplaceCharFilterBuilder() =
-        member _.Yield(_: unit) : PatternReplaceCharFilter =
+        member _.Yield(_: unit) : Types.PatternReplaceCharFilter =
             {
                 Type = Unchecked.defaultof<_>
                 Flags = None
@@ -1626,25 +1626,25 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: PatternReplaceCharFilter, value: string) =
+        member _.Type(state: Types.PatternReplaceCharFilter, value: string) =
             { state with Type = value }
 
         [<CustomOperation("flags")>]
-        member _.Flags(state: PatternReplaceCharFilter, value: string) =
+        member _.Flags(state: Types.PatternReplaceCharFilter, value: string) =
             { state with Flags = Some value }
 
         [<CustomOperation("pattern")>]
-        member _.Pattern(state: PatternReplaceCharFilter, value: string) =
+        member _.Pattern(state: Types.PatternReplaceCharFilter, value: string) =
             { state with Pattern = value }
 
         [<CustomOperation("replacement")>]
-        member _.Replacement(state: PatternReplaceCharFilter, value: string) =
+        member _.Replacement(state: Types.PatternReplaceCharFilter, value: string) =
             { state with Replacement = Some value }
 
     let patternReplaceCharFilter = PatternReplaceCharFilterBuilder()
 
     type PatternReplaceTokenFilterBuilder() =
-        member _.Yield(_: unit) : PatternReplaceTokenFilter =
+        member _.Yield(_: unit) : Types.PatternReplaceTokenFilter =
             {
                 Type = Unchecked.defaultof<_>
                 All = None
@@ -1654,29 +1654,29 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: PatternReplaceTokenFilter, value: string) =
+        member _.Type(state: Types.PatternReplaceTokenFilter, value: string) =
             { state with Type = value }
 
         [<CustomOperation("all")>]
-        member _.All(state: PatternReplaceTokenFilter, value: bool) =
+        member _.All(state: Types.PatternReplaceTokenFilter, value: bool) =
             { state with All = Some value }
 
         [<CustomOperation("flags")>]
-        member _.Flags(state: PatternReplaceTokenFilter, value: string) =
+        member _.Flags(state: Types.PatternReplaceTokenFilter, value: string) =
             { state with Flags = Some value }
 
         [<CustomOperation("pattern")>]
-        member _.Pattern(state: PatternReplaceTokenFilter, value: string) =
+        member _.Pattern(state: Types.PatternReplaceTokenFilter, value: string) =
             { state with Pattern = value }
 
         [<CustomOperation("replacement")>]
-        member _.Replacement(state: PatternReplaceTokenFilter, value: string) =
+        member _.Replacement(state: Types.PatternReplaceTokenFilter, value: string) =
             { state with Replacement = Some value }
 
     let patternReplaceTokenFilter = PatternReplaceTokenFilterBuilder()
 
     type PatternTokenizerBuilder() =
-        member _.Yield(_: unit) : PatternTokenizer =
+        member _.Yield(_: unit) : Types.PatternTokenizer =
             {
                 Type = Unchecked.defaultof<_>
                 Flags = None
@@ -1685,25 +1685,25 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: PatternTokenizer, value: string) =
+        member _.Type(state: Types.PatternTokenizer, value: string) =
             { state with Type = value }
 
         [<CustomOperation("flags")>]
-        member _.Flags(state: PatternTokenizer, value: string) =
+        member _.Flags(state: Types.PatternTokenizer, value: string) =
             { state with Flags = Some value }
 
         [<CustomOperation("group")>]
-        member _.Group(state: PatternTokenizer, value: CoreTypes.Integer) =
+        member _.Group(state: Types.PatternTokenizer, value: Types.Integer) =
             { state with Group = Some value }
 
         [<CustomOperation("pattern")>]
-        member _.Pattern(state: PatternTokenizer, value: string) =
+        member _.Pattern(state: Types.PatternTokenizer, value: string) =
             { state with Pattern = Some value }
 
     let patternTokenizer = PatternTokenizerBuilder()
 
     type PersianAnalyzerBuilder() =
-        member _.Yield(_: unit) : PersianAnalyzer =
+        member _.Yield(_: unit) : Types.PersianAnalyzer =
             {
                 Type = Unchecked.defaultof<_>
                 Stopwords = None
@@ -1711,21 +1711,21 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: PersianAnalyzer, value: string) =
+        member _.Type(state: Types.PersianAnalyzer, value: string) =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: PersianAnalyzer, value: CoreTypes.StopWords) =
+        member _.Stopwords(state: Types.PersianAnalyzer, value: Types.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
-        member _.StopwordsPath(state: PersianAnalyzer, value: string) =
+        member _.StopwordsPath(state: Types.PersianAnalyzer, value: string) =
             { state with StopwordsPath = Some value }
 
     let persianAnalyzer = PersianAnalyzerBuilder()
 
     type PhoneticTokenFilterBuilder() =
-        member _.Yield(_: unit) : PhoneticTokenFilter =
+        member _.Yield(_: unit) : Types.PhoneticTokenFilter =
             {
                 Type = Unchecked.defaultof<_>
                 Encoder = Unchecked.defaultof<_>
@@ -1737,37 +1737,37 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: PhoneticTokenFilter, value: string) =
+        member _.Type(state: Types.PhoneticTokenFilter, value: string) =
             { state with Type = value }
 
         [<CustomOperation("encoder")>]
-        member _.Encoder(state: PhoneticTokenFilter, value: CoreTypes.PhoneticEncoder) =
+        member _.Encoder(state: Types.PhoneticTokenFilter, value: Types.PhoneticEncoder) =
             { state with Encoder = value }
 
         [<CustomOperation("languageset")>]
-        member _.Languageset(state: PhoneticTokenFilter, value: System.Text.Json.JsonElement) =
+        member _.Languageset(state: Types.PhoneticTokenFilter, value: System.Text.Json.JsonElement) =
             { state with Languageset = Some value }
 
         [<CustomOperation("maxCodeLen")>]
-        member _.MaxCodeLen(state: PhoneticTokenFilter, value: CoreTypes.Integer) =
+        member _.MaxCodeLen(state: Types.PhoneticTokenFilter, value: Types.Integer) =
             { state with MaxCodeLen = Some value }
 
         [<CustomOperation("nameType")>]
-        member _.NameType(state: PhoneticTokenFilter, value: CoreTypes.PhoneticNameType) =
+        member _.NameType(state: Types.PhoneticTokenFilter, value: Types.PhoneticNameType) =
             { state with NameType = Some value }
 
         [<CustomOperation("replace")>]
-        member _.Replace(state: PhoneticTokenFilter, value: bool) =
+        member _.Replace(state: Types.PhoneticTokenFilter, value: bool) =
             { state with Replace = Some value }
 
         [<CustomOperation("ruleType")>]
-        member _.RuleType(state: PhoneticTokenFilter, value: CoreTypes.PhoneticRuleType) =
+        member _.RuleType(state: Types.PhoneticTokenFilter, value: Types.PhoneticRuleType) =
             { state with RuleType = Some value }
 
     let phoneticTokenFilter = PhoneticTokenFilterBuilder()
 
     type PortugueseAnalyzerBuilder() =
-        member _.Yield(_: unit) : PortugueseAnalyzer =
+        member _.Yield(_: unit) : Types.PortugueseAnalyzer =
             {
                 Type = Unchecked.defaultof<_>
                 Stopwords = None
@@ -1776,25 +1776,25 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: PortugueseAnalyzer, value: string) =
+        member _.Type(state: Types.PortugueseAnalyzer, value: string) =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: PortugueseAnalyzer, value: CoreTypes.StopWords) =
+        member _.Stopwords(state: Types.PortugueseAnalyzer, value: Types.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
-        member _.StopwordsPath(state: PortugueseAnalyzer, value: string) =
+        member _.StopwordsPath(state: Types.PortugueseAnalyzer, value: string) =
             { state with StopwordsPath = Some value }
 
         [<CustomOperation("stemExclusion")>]
-        member _.StemExclusion(state: PortugueseAnalyzer, value: string list) =
+        member _.StemExclusion(state: Types.PortugueseAnalyzer, value: string list) =
             { state with StemExclusion = Some value }
 
     let portugueseAnalyzer = PortugueseAnalyzerBuilder()
 
     type RomanianAnalyzerBuilder() =
-        member _.Yield(_: unit) : RomanianAnalyzer =
+        member _.Yield(_: unit) : Types.RomanianAnalyzer =
             {
                 Type = Unchecked.defaultof<_>
                 Stopwords = None
@@ -1803,25 +1803,25 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: RomanianAnalyzer, value: string) =
+        member _.Type(state: Types.RomanianAnalyzer, value: string) =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: RomanianAnalyzer, value: CoreTypes.StopWords) =
+        member _.Stopwords(state: Types.RomanianAnalyzer, value: Types.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
-        member _.StopwordsPath(state: RomanianAnalyzer, value: string) =
+        member _.StopwordsPath(state: Types.RomanianAnalyzer, value: string) =
             { state with StopwordsPath = Some value }
 
         [<CustomOperation("stemExclusion")>]
-        member _.StemExclusion(state: RomanianAnalyzer, value: string list) =
+        member _.StemExclusion(state: Types.RomanianAnalyzer, value: string list) =
             { state with StemExclusion = Some value }
 
     let romanianAnalyzer = RomanianAnalyzerBuilder()
 
     type RussianAnalyzerBuilder() =
-        member _.Yield(_: unit) : RussianAnalyzer =
+        member _.Yield(_: unit) : Types.RussianAnalyzer =
             {
                 Type = Unchecked.defaultof<_>
                 Stopwords = None
@@ -1830,25 +1830,25 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: RussianAnalyzer, value: string) =
+        member _.Type(state: Types.RussianAnalyzer, value: string) =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: RussianAnalyzer, value: CoreTypes.StopWords) =
+        member _.Stopwords(state: Types.RussianAnalyzer, value: Types.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
-        member _.StopwordsPath(state: RussianAnalyzer, value: string) =
+        member _.StopwordsPath(state: Types.RussianAnalyzer, value: string) =
             { state with StopwordsPath = Some value }
 
         [<CustomOperation("stemExclusion")>]
-        member _.StemExclusion(state: RussianAnalyzer, value: string list) =
+        member _.StemExclusion(state: Types.RussianAnalyzer, value: string list) =
             { state with StemExclusion = Some value }
 
     let russianAnalyzer = RussianAnalyzerBuilder()
 
     type SerbianAnalyzerBuilder() =
-        member _.Yield(_: unit) : SerbianAnalyzer =
+        member _.Yield(_: unit) : Types.SerbianAnalyzer =
             {
                 Type = Unchecked.defaultof<_>
                 Stopwords = None
@@ -1857,25 +1857,25 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: SerbianAnalyzer, value: string) =
+        member _.Type(state: Types.SerbianAnalyzer, value: string) =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: SerbianAnalyzer, value: CoreTypes.StopWords) =
+        member _.Stopwords(state: Types.SerbianAnalyzer, value: Types.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
-        member _.StopwordsPath(state: SerbianAnalyzer, value: string) =
+        member _.StopwordsPath(state: Types.SerbianAnalyzer, value: string) =
             { state with StopwordsPath = Some value }
 
         [<CustomOperation("stemExclusion")>]
-        member _.StemExclusion(state: SerbianAnalyzer, value: string list) =
+        member _.StemExclusion(state: Types.SerbianAnalyzer, value: string list) =
             { state with StemExclusion = Some value }
 
     let serbianAnalyzer = SerbianAnalyzerBuilder()
 
     type ShingleTokenFilterBuilder() =
-        member _.Yield(_: unit) : ShingleTokenFilter =
+        member _.Yield(_: unit) : Types.ShingleTokenFilter =
             {
                 Type = Unchecked.defaultof<_>
                 FillerToken = None
@@ -1887,37 +1887,37 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: ShingleTokenFilter, value: string) =
+        member _.Type(state: Types.ShingleTokenFilter, value: string) =
             { state with Type = value }
 
         [<CustomOperation("fillerToken")>]
-        member _.FillerToken(state: ShingleTokenFilter, value: string) =
+        member _.FillerToken(state: Types.ShingleTokenFilter, value: string) =
             { state with FillerToken = Some value }
 
         [<CustomOperation("maxShingleSize")>]
-        member _.MaxShingleSize(state: ShingleTokenFilter, value: CoreTypes.Stringified<CoreTypes.Integer>) =
+        member _.MaxShingleSize(state: Types.ShingleTokenFilter, value: Types.Stringified<Types.Integer>) =
             { state with MaxShingleSize = Some value }
 
         [<CustomOperation("minShingleSize")>]
-        member _.MinShingleSize(state: ShingleTokenFilter, value: CoreTypes.Stringified<CoreTypes.Integer>) =
+        member _.MinShingleSize(state: Types.ShingleTokenFilter, value: Types.Stringified<Types.Integer>) =
             { state with MinShingleSize = Some value }
 
         [<CustomOperation("outputUnigrams")>]
-        member _.OutputUnigrams(state: ShingleTokenFilter, value: bool) =
+        member _.OutputUnigrams(state: Types.ShingleTokenFilter, value: bool) =
             { state with OutputUnigrams = Some value }
 
         [<CustomOperation("outputUnigramsIfNoShingles")>]
-        member _.OutputUnigramsIfNoShingles(state: ShingleTokenFilter, value: bool) =
+        member _.OutputUnigramsIfNoShingles(state: Types.ShingleTokenFilter, value: bool) =
             { state with OutputUnigramsIfNoShingles = Some value }
 
         [<CustomOperation("tokenSeparator")>]
-        member _.TokenSeparator(state: ShingleTokenFilter, value: string) =
+        member _.TokenSeparator(state: Types.ShingleTokenFilter, value: string) =
             { state with TokenSeparator = Some value }
 
     let shingleTokenFilter = ShingleTokenFilterBuilder()
 
     type SnowballAnalyzerBuilder() =
-        member _.Yield(_: unit) : SnowballAnalyzer =
+        member _.Yield(_: unit) : Types.SnowballAnalyzer =
             {
                 Type = Unchecked.defaultof<_>
                 Version = None
@@ -1926,25 +1926,25 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: SnowballAnalyzer, value: string) =
+        member _.Type(state: Types.SnowballAnalyzer, value: string) =
             { state with Type = value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: SnowballAnalyzer, value: CoreTypes.VersionString) =
+        member _.Version(state: Types.SnowballAnalyzer, value: Types.VersionString) =
             { state with Version = Some value }
 
         [<CustomOperation("language")>]
-        member _.Language(state: SnowballAnalyzer, value: CoreTypes.SnowballLanguage) =
+        member _.Language(state: Types.SnowballAnalyzer, value: Types.SnowballLanguage) =
             { state with Language = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: SnowballAnalyzer, value: CoreTypes.StopWords) =
+        member _.Stopwords(state: Types.SnowballAnalyzer, value: Types.StopWords) =
             { state with Stopwords = Some value }
 
     let snowballAnalyzer = SnowballAnalyzerBuilder()
 
     type SoraniAnalyzerBuilder() =
-        member _.Yield(_: unit) : SoraniAnalyzer =
+        member _.Yield(_: unit) : Types.SoraniAnalyzer =
             {
                 Type = Unchecked.defaultof<_>
                 Stopwords = None
@@ -1953,25 +1953,25 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: SoraniAnalyzer, value: string) =
+        member _.Type(state: Types.SoraniAnalyzer, value: string) =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: SoraniAnalyzer, value: CoreTypes.StopWords) =
+        member _.Stopwords(state: Types.SoraniAnalyzer, value: Types.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
-        member _.StopwordsPath(state: SoraniAnalyzer, value: string) =
+        member _.StopwordsPath(state: Types.SoraniAnalyzer, value: string) =
             { state with StopwordsPath = Some value }
 
         [<CustomOperation("stemExclusion")>]
-        member _.StemExclusion(state: SoraniAnalyzer, value: string list) =
+        member _.StemExclusion(state: Types.SoraniAnalyzer, value: string list) =
             { state with StemExclusion = Some value }
 
     let soraniAnalyzer = SoraniAnalyzerBuilder()
 
     type SpanishAnalyzerBuilder() =
-        member _.Yield(_: unit) : SpanishAnalyzer =
+        member _.Yield(_: unit) : Types.SpanishAnalyzer =
             {
                 Type = Unchecked.defaultof<_>
                 Stopwords = None
@@ -1980,25 +1980,25 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: SpanishAnalyzer, value: string) =
+        member _.Type(state: Types.SpanishAnalyzer, value: string) =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: SpanishAnalyzer, value: CoreTypes.StopWords) =
+        member _.Stopwords(state: Types.SpanishAnalyzer, value: Types.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
-        member _.StopwordsPath(state: SpanishAnalyzer, value: string) =
+        member _.StopwordsPath(state: Types.SpanishAnalyzer, value: string) =
             { state with StopwordsPath = Some value }
 
         [<CustomOperation("stemExclusion")>]
-        member _.StemExclusion(state: SpanishAnalyzer, value: string list) =
+        member _.StemExclusion(state: Types.SpanishAnalyzer, value: string list) =
             { state with StemExclusion = Some value }
 
     let spanishAnalyzer = SpanishAnalyzerBuilder()
 
     type StandardAnalyzerBuilder() =
-        member _.Yield(_: unit) : StandardAnalyzer =
+        member _.Yield(_: unit) : Types.StandardAnalyzer =
             {
                 Type = Unchecked.defaultof<_>
                 MaxTokenLength = None
@@ -2007,25 +2007,25 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: StandardAnalyzer, value: string) =
+        member _.Type(state: Types.StandardAnalyzer, value: string) =
             { state with Type = value }
 
         [<CustomOperation("maxTokenLength")>]
-        member _.MaxTokenLength(state: StandardAnalyzer, value: CoreTypes.Integer) =
+        member _.MaxTokenLength(state: Types.StandardAnalyzer, value: Types.Integer) =
             { state with MaxTokenLength = Some value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: StandardAnalyzer, value: CoreTypes.StopWords) =
+        member _.Stopwords(state: Types.StandardAnalyzer, value: Types.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
-        member _.StopwordsPath(state: StandardAnalyzer, value: string) =
+        member _.StopwordsPath(state: Types.StandardAnalyzer, value: string) =
             { state with StopwordsPath = Some value }
 
     let standardAnalyzer = StandardAnalyzerBuilder()
 
     type StemmerOverrideTokenFilterBuilder() =
-        member _.Yield(_: unit) : StemmerOverrideTokenFilter =
+        member _.Yield(_: unit) : Types.StemmerOverrideTokenFilter =
             {
                 Type = Unchecked.defaultof<_>
                 Rules = None
@@ -2033,21 +2033,21 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: StemmerOverrideTokenFilter, value: string) =
+        member _.Type(state: Types.StemmerOverrideTokenFilter, value: string) =
             { state with Type = value }
 
         [<CustomOperation("rules")>]
-        member _.Rules(state: StemmerOverrideTokenFilter, value: string list) =
+        member _.Rules(state: Types.StemmerOverrideTokenFilter, value: string list) =
             { state with Rules = Some value }
 
         [<CustomOperation("rulesPath")>]
-        member _.RulesPath(state: StemmerOverrideTokenFilter, value: string) =
+        member _.RulesPath(state: Types.StemmerOverrideTokenFilter, value: string) =
             { state with RulesPath = Some value }
 
     let stemmerOverrideTokenFilter = StemmerOverrideTokenFilterBuilder()
 
     type StopAnalyzerBuilder() =
-        member _.Yield(_: unit) : StopAnalyzer =
+        member _.Yield(_: unit) : Types.StopAnalyzer =
             {
                 Type = Unchecked.defaultof<_>
                 Version = None
@@ -2056,25 +2056,25 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: StopAnalyzer, value: string) =
+        member _.Type(state: Types.StopAnalyzer, value: string) =
             { state with Type = value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: StopAnalyzer, value: CoreTypes.VersionString) =
+        member _.Version(state: Types.StopAnalyzer, value: Types.VersionString) =
             { state with Version = Some value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: StopAnalyzer, value: CoreTypes.StopWords) =
+        member _.Stopwords(state: Types.StopAnalyzer, value: Types.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
-        member _.StopwordsPath(state: StopAnalyzer, value: string) =
+        member _.StopwordsPath(state: Types.StopAnalyzer, value: string) =
             { state with StopwordsPath = Some value }
 
     let stopAnalyzer = StopAnalyzerBuilder()
 
     type StopTokenFilterBuilder() =
-        member _.Yield(_: unit) : StopTokenFilter =
+        member _.Yield(_: unit) : Types.StopTokenFilter =
             {
                 Type = Unchecked.defaultof<_>
                 IgnoreCase = None
@@ -2084,29 +2084,29 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: StopTokenFilter, value: string) =
+        member _.Type(state: Types.StopTokenFilter, value: string) =
             { state with Type = value }
 
         [<CustomOperation("ignoreCase")>]
-        member _.IgnoreCase(state: StopTokenFilter, value: bool) =
+        member _.IgnoreCase(state: Types.StopTokenFilter, value: bool) =
             { state with IgnoreCase = Some value }
 
         [<CustomOperation("removeTrailing")>]
-        member _.RemoveTrailing(state: StopTokenFilter, value: bool) =
+        member _.RemoveTrailing(state: Types.StopTokenFilter, value: bool) =
             { state with RemoveTrailing = Some value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: StopTokenFilter, value: CoreTypes.StopWords) =
+        member _.Stopwords(state: Types.StopTokenFilter, value: Types.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
-        member _.StopwordsPath(state: StopTokenFilter, value: string) =
+        member _.StopwordsPath(state: Types.StopTokenFilter, value: string) =
             { state with StopwordsPath = Some value }
 
     let stopTokenFilter = StopTokenFilterBuilder()
 
     type SwedishAnalyzerBuilder() =
-        member _.Yield(_: unit) : SwedishAnalyzer =
+        member _.Yield(_: unit) : Types.SwedishAnalyzer =
             {
                 Type = Unchecked.defaultof<_>
                 Stopwords = None
@@ -2115,25 +2115,25 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: SwedishAnalyzer, value: string) =
+        member _.Type(state: Types.SwedishAnalyzer, value: string) =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: SwedishAnalyzer, value: CoreTypes.StopWords) =
+        member _.Stopwords(state: Types.SwedishAnalyzer, value: Types.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
-        member _.StopwordsPath(state: SwedishAnalyzer, value: string) =
+        member _.StopwordsPath(state: Types.SwedishAnalyzer, value: string) =
             { state with StopwordsPath = Some value }
 
         [<CustomOperation("stemExclusion")>]
-        member _.StemExclusion(state: SwedishAnalyzer, value: string list) =
+        member _.StemExclusion(state: Types.SwedishAnalyzer, value: string list) =
             { state with StemExclusion = Some value }
 
     let swedishAnalyzer = SwedishAnalyzerBuilder()
 
     type SynonymTokenFilterBaseBuilder() =
-        member _.Yield(_: unit) : SynonymTokenFilterBase =
+        member _.Yield(_: unit) : Types.SynonymTokenFilterBase =
             {
                 Expand = None
                 Format = None
@@ -2146,41 +2146,41 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("expand")>]
-        member _.Expand(state: SynonymTokenFilterBase, value: bool) =
+        member _.Expand(state: Types.SynonymTokenFilterBase, value: bool) =
             { state with Expand = Some value }
 
         [<CustomOperation("format")>]
-        member _.Format(state: SynonymTokenFilterBase, value: CoreTypes.SynonymFormat) =
+        member _.Format(state: Types.SynonymTokenFilterBase, value: Types.SynonymFormat) =
             { state with Format = Some value }
 
         [<CustomOperation("lenient")>]
-        member _.Lenient(state: SynonymTokenFilterBase, value: bool) =
+        member _.Lenient(state: Types.SynonymTokenFilterBase, value: bool) =
             { state with Lenient = Some value }
 
         [<CustomOperation("synonyms")>]
-        member _.Synonyms(state: SynonymTokenFilterBase, value: string list) =
+        member _.Synonyms(state: Types.SynonymTokenFilterBase, value: string list) =
             { state with Synonyms = Some value }
 
         [<CustomOperation("synonymsPath")>]
-        member _.SynonymsPath(state: SynonymTokenFilterBase, value: string) =
+        member _.SynonymsPath(state: Types.SynonymTokenFilterBase, value: string) =
             { state with SynonymsPath = Some value }
 
         [<CustomOperation("synonymsSet")>]
-        member _.SynonymsSet(state: SynonymTokenFilterBase, value: string) =
+        member _.SynonymsSet(state: Types.SynonymTokenFilterBase, value: string) =
             { state with SynonymsSet = Some value }
 
         [<CustomOperation("tokenizer")>]
-        member _.Tokenizer(state: SynonymTokenFilterBase, value: string) =
+        member _.Tokenizer(state: Types.SynonymTokenFilterBase, value: string) =
             { state with Tokenizer = Some value }
 
         [<CustomOperation("updateable")>]
-        member _.Updateable(state: SynonymTokenFilterBase, value: bool) =
+        member _.Updateable(state: Types.SynonymTokenFilterBase, value: bool) =
             { state with Updateable = Some value }
 
     let synonymTokenFilterBase = SynonymTokenFilterBaseBuilder()
 
     type ThaiAnalyzerBuilder() =
-        member _.Yield(_: unit) : ThaiAnalyzer =
+        member _.Yield(_: unit) : Types.ThaiAnalyzer =
             {
                 Type = Unchecked.defaultof<_>
                 Stopwords = None
@@ -2188,21 +2188,21 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: ThaiAnalyzer, value: string) =
+        member _.Type(state: Types.ThaiAnalyzer, value: string) =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: ThaiAnalyzer, value: CoreTypes.StopWords) =
+        member _.Stopwords(state: Types.ThaiAnalyzer, value: Types.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
-        member _.StopwordsPath(state: ThaiAnalyzer, value: string) =
+        member _.StopwordsPath(state: Types.ThaiAnalyzer, value: string) =
             { state with StopwordsPath = Some value }
 
     let thaiAnalyzer = ThaiAnalyzerBuilder()
 
     type TurkishAnalyzerBuilder() =
-        member _.Yield(_: unit) : TurkishAnalyzer =
+        member _.Yield(_: unit) : Types.TurkishAnalyzer =
             {
                 Type = Unchecked.defaultof<_>
                 Stopwords = None
@@ -2211,25 +2211,25 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: TurkishAnalyzer, value: string) =
+        member _.Type(state: Types.TurkishAnalyzer, value: string) =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: TurkishAnalyzer, value: CoreTypes.StopWords) =
+        member _.Stopwords(state: Types.TurkishAnalyzer, value: Types.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
-        member _.StopwordsPath(state: TurkishAnalyzer, value: string) =
+        member _.StopwordsPath(state: Types.TurkishAnalyzer, value: string) =
             { state with StopwordsPath = Some value }
 
         [<CustomOperation("stemExclusion")>]
-        member _.StemExclusion(state: TurkishAnalyzer, value: string list) =
+        member _.StemExclusion(state: Types.TurkishAnalyzer, value: string list) =
             { state with StemExclusion = Some value }
 
     let turkishAnalyzer = TurkishAnalyzerBuilder()
 
     type WordDelimiterGraphTokenFilterBuilder() =
-        member _.Yield(_: unit) : WordDelimiterGraphTokenFilter =
+        member _.Yield(_: unit) : Types.WordDelimiterGraphTokenFilter =
             {
                 Type = Unchecked.defaultof<_>
                 AdjustOffsets = None
@@ -2237,21 +2237,21 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: WordDelimiterGraphTokenFilter, value: string) =
+        member _.Type(state: Types.WordDelimiterGraphTokenFilter, value: string) =
             { state with Type = value }
 
         [<CustomOperation("adjustOffsets")>]
-        member _.AdjustOffsets(state: WordDelimiterGraphTokenFilter, value: bool) =
+        member _.AdjustOffsets(state: Types.WordDelimiterGraphTokenFilter, value: bool) =
             { state with AdjustOffsets = Some value }
 
         [<CustomOperation("ignoreKeywords")>]
-        member _.IgnoreKeywords(state: WordDelimiterGraphTokenFilter, value: bool) =
+        member _.IgnoreKeywords(state: Types.WordDelimiterGraphTokenFilter, value: bool) =
             { state with IgnoreKeywords = Some value }
 
     let wordDelimiterGraphTokenFilter = WordDelimiterGraphTokenFilterBuilder()
 
     type WordDelimiterTokenFilterBaseBuilder() =
-        member _.Yield(_: unit) : WordDelimiterTokenFilterBase =
+        member _.Yield(_: unit) : Types.WordDelimiterTokenFilterBase =
             {
                 CatenateAll = None
                 CatenateNumbers = None
@@ -2269,55 +2269,55 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("catenateAll")>]
-        member _.CatenateAll(state: WordDelimiterTokenFilterBase, value: bool) =
+        member _.CatenateAll(state: Types.WordDelimiterTokenFilterBase, value: bool) =
             { state with CatenateAll = Some value }
 
         [<CustomOperation("catenateNumbers")>]
-        member _.CatenateNumbers(state: WordDelimiterTokenFilterBase, value: bool) =
+        member _.CatenateNumbers(state: Types.WordDelimiterTokenFilterBase, value: bool) =
             { state with CatenateNumbers = Some value }
 
         [<CustomOperation("catenateWords")>]
-        member _.CatenateWords(state: WordDelimiterTokenFilterBase, value: bool) =
+        member _.CatenateWords(state: Types.WordDelimiterTokenFilterBase, value: bool) =
             { state with CatenateWords = Some value }
 
         [<CustomOperation("generateNumberParts")>]
-        member _.GenerateNumberParts(state: WordDelimiterTokenFilterBase, value: bool) =
+        member _.GenerateNumberParts(state: Types.WordDelimiterTokenFilterBase, value: bool) =
             { state with GenerateNumberParts = Some value }
 
         [<CustomOperation("generateWordParts")>]
-        member _.GenerateWordParts(state: WordDelimiterTokenFilterBase, value: bool) =
+        member _.GenerateWordParts(state: Types.WordDelimiterTokenFilterBase, value: bool) =
             { state with GenerateWordParts = Some value }
 
         [<CustomOperation("preserveOriginal")>]
-        member _.PreserveOriginal(state: WordDelimiterTokenFilterBase, value: CoreTypes.Stringified<bool>) =
+        member _.PreserveOriginal(state: Types.WordDelimiterTokenFilterBase, value: Types.Stringified<bool>) =
             { state with PreserveOriginal = Some value }
 
         [<CustomOperation("protectedWords")>]
-        member _.ProtectedWords(state: WordDelimiterTokenFilterBase, value: string list) =
+        member _.ProtectedWords(state: Types.WordDelimiterTokenFilterBase, value: string list) =
             { state with ProtectedWords = Some value }
 
         [<CustomOperation("protectedWordsPath")>]
-        member _.ProtectedWordsPath(state: WordDelimiterTokenFilterBase, value: string) =
+        member _.ProtectedWordsPath(state: Types.WordDelimiterTokenFilterBase, value: string) =
             { state with ProtectedWordsPath = Some value }
 
         [<CustomOperation("splitOnCaseChange")>]
-        member _.SplitOnCaseChange(state: WordDelimiterTokenFilterBase, value: bool) =
+        member _.SplitOnCaseChange(state: Types.WordDelimiterTokenFilterBase, value: bool) =
             { state with SplitOnCaseChange = Some value }
 
         [<CustomOperation("splitOnNumerics")>]
-        member _.SplitOnNumerics(state: WordDelimiterTokenFilterBase, value: bool) =
+        member _.SplitOnNumerics(state: Types.WordDelimiterTokenFilterBase, value: bool) =
             { state with SplitOnNumerics = Some value }
 
         [<CustomOperation("stemEnglishPossessive")>]
-        member _.StemEnglishPossessive(state: WordDelimiterTokenFilterBase, value: bool) =
+        member _.StemEnglishPossessive(state: Types.WordDelimiterTokenFilterBase, value: bool) =
             { state with StemEnglishPossessive = Some value }
 
         [<CustomOperation("typeTable")>]
-        member _.TypeTable(state: WordDelimiterTokenFilterBase, value: string list) =
+        member _.TypeTable(state: Types.WordDelimiterTokenFilterBase, value: string list) =
             { state with TypeTable = Some value }
 
         [<CustomOperation("typeTablePath")>]
-        member _.TypeTablePath(state: WordDelimiterTokenFilterBase, value: string) =
+        member _.TypeTablePath(state: Types.WordDelimiterTokenFilterBase, value: string) =
             { state with TypeTablePath = Some value }
 
     let wordDelimiterTokenFilterBase = WordDelimiterTokenFilterBaseBuilder()

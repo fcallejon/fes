@@ -7,14 +7,15 @@ open System
 open System.Text.Json
 open System.Text.Json.Serialization
 open Fes
+open Fes.Generated
 
 [<AutoOpen>]
 module StreamsOperations =
 
     type StreamsLogsDisableRequest = {
-        Name: StreamsTypes.StreamType
-        MasterTimeout: CoreTypes.Duration option
-        Timeout: CoreTypes.Duration option
+        Name: Types.StreamType
+        MasterTimeout: Types.Duration option
+        Timeout: Types.Duration option
     }
 
         with
@@ -36,7 +37,7 @@ module StreamsOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type StreamsLogsDisableResponse = CoreTypes.AcknowledgedResponseBase
+    type StreamsLogsDisableResponse = Types.AcknowledgedResponseBase
 
     type StreamsLogsDisableRequestBuilder() =
         member _.Yield(_: unit) : StreamsLogsDisableRequest =
@@ -47,29 +48,29 @@ module StreamsOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: StreamsLogsDisableRequest, value: StreamsTypes.StreamType) =
+        member _.Name(state: StreamsLogsDisableRequest, value: Types.StreamType) =
             { state with Name = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: StreamsLogsDisableRequest, value: CoreTypes.Duration) =
+        member _.MasterTimeout(state: StreamsLogsDisableRequest, value: Types.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: StreamsLogsDisableRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: StreamsLogsDisableRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
     let streamsLogsDisableRequest = StreamsLogsDisableRequestBuilder()
 
     module LogsDisable =
-        let withMasterTimeout (value: CoreTypes.Duration) (req: StreamsLogsDisableRequest) =
+        let withMasterTimeout (value: Types.Duration) (req: StreamsLogsDisableRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: StreamsLogsDisableRequest) =
+        let withTimeout (value: Types.Duration) (req: StreamsLogsDisableRequest) =
             { req with Timeout = Some value }
 
     type StreamsLogsEnableRequest = {
-        Name: StreamsTypes.StreamType
-        MasterTimeout: CoreTypes.Duration option
-        Timeout: CoreTypes.Duration option
+        Name: Types.StreamType
+        MasterTimeout: Types.Duration option
+        Timeout: Types.Duration option
     }
 
         with
@@ -91,7 +92,7 @@ module StreamsOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type StreamsLogsEnableResponse = CoreTypes.AcknowledgedResponseBase
+    type StreamsLogsEnableResponse = Types.AcknowledgedResponseBase
 
     type StreamsLogsEnableRequestBuilder() =
         member _.Yield(_: unit) : StreamsLogsEnableRequest =
@@ -102,27 +103,27 @@ module StreamsOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: StreamsLogsEnableRequest, value: StreamsTypes.StreamType) =
+        member _.Name(state: StreamsLogsEnableRequest, value: Types.StreamType) =
             { state with Name = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: StreamsLogsEnableRequest, value: CoreTypes.Duration) =
+        member _.MasterTimeout(state: StreamsLogsEnableRequest, value: Types.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: StreamsLogsEnableRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: StreamsLogsEnableRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
     let streamsLogsEnableRequest = StreamsLogsEnableRequestBuilder()
 
     module LogsEnable =
-        let withMasterTimeout (value: CoreTypes.Duration) (req: StreamsLogsEnableRequest) =
+        let withMasterTimeout (value: Types.Duration) (req: StreamsLogsEnableRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: StreamsLogsEnableRequest) =
+        let withTimeout (value: Types.Duration) (req: StreamsLogsEnableRequest) =
             { req with Timeout = Some value }
 
     type StreamsStatusRequest = {
-        MasterTimeout: CoreTypes.Duration option
+        MasterTimeout: Types.Duration option
     }
 
         with
@@ -152,12 +153,12 @@ module StreamsOperations =
             }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: StreamsStatusRequest, value: CoreTypes.Duration) =
+        member _.MasterTimeout(state: StreamsStatusRequest, value: Types.Duration) =
             { state with MasterTimeout = Some value }
 
     let streamsStatusRequest = StreamsStatusRequestBuilder()
 
     module Status =
-        let withMasterTimeout (value: CoreTypes.Duration) (req: StreamsStatusRequest) =
+        let withMasterTimeout (value: Types.Duration) (req: StreamsStatusRequest) =
             { req with MasterTimeout = Some value }
 

@@ -7,13 +7,14 @@ open System
 open System.Text.Json
 open System.Text.Json.Serialization
 open Fes
+open Fes.Generated
 
 [<AutoOpen>]
 module QueryRulesOperations =
 
     type QueryRulesDeleteRuleRequest = {
-        RulesetId: CoreTypes.Id
-        RuleId: CoreTypes.Id
+        RulesetId: Types.Id
+        RuleId: Types.Id
     }
 
         with
@@ -27,7 +28,7 @@ module QueryRulesOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type QueryRulesDeleteRuleResponse = CoreTypes.AcknowledgedResponseBase
+    type QueryRulesDeleteRuleResponse = Types.AcknowledgedResponseBase
 
     type QueryRulesDeleteRuleRequestBuilder() =
         member _.Yield(_: unit) : QueryRulesDeleteRuleRequest =
@@ -37,17 +38,17 @@ module QueryRulesOperations =
             }
 
         [<CustomOperation("rulesetId")>]
-        member _.RulesetId(state: QueryRulesDeleteRuleRequest, value: CoreTypes.Id) =
+        member _.RulesetId(state: QueryRulesDeleteRuleRequest, value: Types.Id) =
             { state with RulesetId = value }
 
         [<CustomOperation("ruleId")>]
-        member _.RuleId(state: QueryRulesDeleteRuleRequest, value: CoreTypes.Id) =
+        member _.RuleId(state: QueryRulesDeleteRuleRequest, value: Types.Id) =
             { state with RuleId = value }
 
     let queryRulesDeleteRuleRequest = QueryRulesDeleteRuleRequestBuilder()
 
     type QueryRulesDeleteRulesetRequest = {
-        RulesetId: CoreTypes.Id
+        RulesetId: Types.Id
     }
 
         with
@@ -61,7 +62,7 @@ module QueryRulesOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type QueryRulesDeleteRulesetResponse = CoreTypes.AcknowledgedResponseBase
+    type QueryRulesDeleteRulesetResponse = Types.AcknowledgedResponseBase
 
     type QueryRulesDeleteRulesetRequestBuilder() =
         member _.Yield(_: unit) : QueryRulesDeleteRulesetRequest =
@@ -70,14 +71,14 @@ module QueryRulesOperations =
             }
 
         [<CustomOperation("rulesetId")>]
-        member _.RulesetId(state: QueryRulesDeleteRulesetRequest, value: CoreTypes.Id) =
+        member _.RulesetId(state: QueryRulesDeleteRulesetRequest, value: Types.Id) =
             { state with RulesetId = value }
 
     let queryRulesDeleteRulesetRequest = QueryRulesDeleteRulesetRequestBuilder()
 
     type QueryRulesGetRuleRequest = {
-        RulesetId: CoreTypes.Id
-        RuleId: CoreTypes.Id
+        RulesetId: Types.Id
+        RuleId: Types.Id
     }
 
         with
@@ -91,7 +92,7 @@ module QueryRulesOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type QueryRulesGetRuleResponse = QueryRulesTypes.QueryRule
+    type QueryRulesGetRuleResponse = Types.QueryRule
 
     type QueryRulesGetRuleRequestBuilder() =
         member _.Yield(_: unit) : QueryRulesGetRuleRequest =
@@ -101,17 +102,17 @@ module QueryRulesOperations =
             }
 
         [<CustomOperation("rulesetId")>]
-        member _.RulesetId(state: QueryRulesGetRuleRequest, value: CoreTypes.Id) =
+        member _.RulesetId(state: QueryRulesGetRuleRequest, value: Types.Id) =
             { state with RulesetId = value }
 
         [<CustomOperation("ruleId")>]
-        member _.RuleId(state: QueryRulesGetRuleRequest, value: CoreTypes.Id) =
+        member _.RuleId(state: QueryRulesGetRuleRequest, value: Types.Id) =
             { state with RuleId = value }
 
     let queryRulesGetRuleRequest = QueryRulesGetRuleRequestBuilder()
 
     type QueryRulesGetRulesetRequest = {
-        RulesetId: CoreTypes.Id
+        RulesetId: Types.Id
     }
 
         with
@@ -125,7 +126,7 @@ module QueryRulesOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type QueryRulesGetRulesetResponse = QueryRulesTypes.QueryRuleset
+    type QueryRulesGetRulesetResponse = Types.QueryRuleset
 
     type QueryRulesGetRulesetRequestBuilder() =
         member _.Yield(_: unit) : QueryRulesGetRulesetRequest =
@@ -134,14 +135,14 @@ module QueryRulesOperations =
             }
 
         [<CustomOperation("rulesetId")>]
-        member _.RulesetId(state: QueryRulesGetRulesetRequest, value: CoreTypes.Id) =
+        member _.RulesetId(state: QueryRulesGetRulesetRequest, value: Types.Id) =
             { state with RulesetId = value }
 
     let queryRulesGetRulesetRequest = QueryRulesGetRulesetRequestBuilder()
 
     type QueryRulesListRulesetsRequest = {
-        From: CoreTypes.Integer option
-        Size: CoreTypes.Integer option
+        From: Types.Integer option
+        Size: Types.Integer option
     }
 
         with
@@ -173,28 +174,28 @@ module QueryRulesOperations =
             }
 
         [<CustomOperation("from")>]
-        member _.From(state: QueryRulesListRulesetsRequest, value: CoreTypes.Integer) =
+        member _.From(state: QueryRulesListRulesetsRequest, value: Types.Integer) =
             { state with From = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: QueryRulesListRulesetsRequest, value: CoreTypes.Integer) =
+        member _.Size(state: QueryRulesListRulesetsRequest, value: Types.Integer) =
             { state with Size = Some value }
 
     let queryRulesListRulesetsRequest = QueryRulesListRulesetsRequestBuilder()
 
     module ListRulesets =
-        let withFrom (value: CoreTypes.Integer) (req: QueryRulesListRulesetsRequest) =
+        let withFrom (value: Types.Integer) (req: QueryRulesListRulesetsRequest) =
             { req with From = Some value }
-        let withSize (value: CoreTypes.Integer) (req: QueryRulesListRulesetsRequest) =
+        let withSize (value: Types.Integer) (req: QueryRulesListRulesetsRequest) =
             { req with Size = Some value }
 
     type QueryRulesPutRuleRequest = {
-        RulesetId: CoreTypes.Id
-        RuleId: CoreTypes.Id
-        Type: QueryRulesTypes.QueryRuleType
+        RulesetId: Types.Id
+        RuleId: Types.Id
+        Type: Types.QueryRuleType
         Criteria: System.Text.Json.JsonElement
-        Actions: QueryRulesTypes.QueryRuleActions
-        Priority: CoreTypes.Integer option
+        Actions: Types.QueryRuleActions
+        Priority: Types.Integer option
     }
 
         with
@@ -223,15 +224,15 @@ module QueryRulesOperations =
             }
 
         [<CustomOperation("rulesetId")>]
-        member _.RulesetId(state: QueryRulesPutRuleRequest, value: CoreTypes.Id) =
+        member _.RulesetId(state: QueryRulesPutRuleRequest, value: Types.Id) =
             { state with RulesetId = value }
 
         [<CustomOperation("ruleId")>]
-        member _.RuleId(state: QueryRulesPutRuleRequest, value: CoreTypes.Id) =
+        member _.RuleId(state: QueryRulesPutRuleRequest, value: Types.Id) =
             { state with RuleId = value }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: QueryRulesPutRuleRequest, value: QueryRulesTypes.QueryRuleType) =
+        member _.Type(state: QueryRulesPutRuleRequest, value: Types.QueryRuleType) =
             { state with Type = value }
 
         [<CustomOperation("criteria")>]
@@ -239,27 +240,27 @@ module QueryRulesOperations =
             { state with Criteria = value }
 
         [<CustomOperation("actions")>]
-        member _.Actions(state: QueryRulesPutRuleRequest, value: QueryRulesTypes.QueryRuleActions) =
+        member _.Actions(state: QueryRulesPutRuleRequest, value: Types.QueryRuleActions) =
             { state with Actions = value }
 
         [<CustomOperation("priority")>]
-        member _.Priority(state: QueryRulesPutRuleRequest, value: CoreTypes.Integer) =
+        member _.Priority(state: QueryRulesPutRuleRequest, value: Types.Integer) =
             { state with Priority = Some value }
 
     let queryRulesPutRuleRequest = QueryRulesPutRuleRequestBuilder()
 
     module PutRule =
-        let withType (value: QueryRulesTypes.QueryRuleType) (req: QueryRulesPutRuleRequest) =
+        let withType (value: Types.QueryRuleType) (req: QueryRulesPutRuleRequest) =
             { req with Type = value }
         let withCriteria (value: System.Text.Json.JsonElement) (req: QueryRulesPutRuleRequest) =
             { req with Criteria = value }
-        let withActions (value: QueryRulesTypes.QueryRuleActions) (req: QueryRulesPutRuleRequest) =
+        let withActions (value: Types.QueryRuleActions) (req: QueryRulesPutRuleRequest) =
             { req with Actions = value }
-        let withPriority (value: CoreTypes.Integer) (req: QueryRulesPutRuleRequest) =
+        let withPriority (value: Types.Integer) (req: QueryRulesPutRuleRequest) =
             { req with Priority = Some value }
 
     type QueryRulesPutRulesetRequest = {
-        RulesetId: CoreTypes.Id
+        RulesetId: Types.Id
         Rules: System.Text.Json.JsonElement
     }
 
@@ -285,7 +286,7 @@ module QueryRulesOperations =
             }
 
         [<CustomOperation("rulesetId")>]
-        member _.RulesetId(state: QueryRulesPutRulesetRequest, value: CoreTypes.Id) =
+        member _.RulesetId(state: QueryRulesPutRulesetRequest, value: Types.Id) =
             { state with RulesetId = value }
 
         [<CustomOperation("rules")>]
@@ -299,7 +300,7 @@ module QueryRulesOperations =
             { req with Rules = value }
 
     type QueryRulesTestRequest = {
-        RulesetId: CoreTypes.Id
+        RulesetId: Types.Id
         MatchCriteria: Map<string, System.Text.Json.JsonElement>
     }
 
@@ -325,7 +326,7 @@ module QueryRulesOperations =
             }
 
         [<CustomOperation("rulesetId")>]
-        member _.RulesetId(state: QueryRulesTestRequest, value: CoreTypes.Id) =
+        member _.RulesetId(state: QueryRulesTestRequest, value: Types.Id) =
             { state with RulesetId = value }
 
         [<CustomOperation("matchCriteria")>]

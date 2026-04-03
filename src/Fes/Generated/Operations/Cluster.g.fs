@@ -7,22 +7,23 @@ open System
 open System.Text.Json
 open System.Text.Json.Serialization
 open Fes
+open Fes.Generated
 
 [<AutoOpen>]
 module ClusterOperations =
 
     type ClusterAllocationExplainRequest = {
-        Index: CoreTypes.IndexName option
-        Shard: CoreTypes.Integer option
+        Index: Types.IndexName option
+        Shard: Types.Integer option
         Primary: bool option
-        CurrentNode: CoreTypes.NodeId option
+        CurrentNode: Types.NodeId option
         IncludeDiskInfo: bool option
         IncludeYesDecisions: bool option
-        MasterTimeout: CoreTypes.Duration option
-        Index: CoreTypes.IndexName option
-        Shard: CoreTypes.Integer option
+        MasterTimeout: Types.Duration option
+        Index: Types.IndexName option
+        Shard: Types.Integer option
         Primary: bool option
-        CurrentNode: CoreTypes.NodeId option
+        CurrentNode: Types.NodeId option
     }
 
         with
@@ -69,11 +70,11 @@ module ClusterOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: ClusterAllocationExplainRequest, value: CoreTypes.IndexName) =
+        member _.Index(state: ClusterAllocationExplainRequest, value: Types.IndexName) =
             { state with Index = Some value }
 
         [<CustomOperation("shard")>]
-        member _.Shard(state: ClusterAllocationExplainRequest, value: CoreTypes.Integer) =
+        member _.Shard(state: ClusterAllocationExplainRequest, value: Types.Integer) =
             { state with Shard = Some value }
 
         [<CustomOperation("primary")>]
@@ -81,7 +82,7 @@ module ClusterOperations =
             { state with Primary = Some value }
 
         [<CustomOperation("currentNode")>]
-        member _.CurrentNode(state: ClusterAllocationExplainRequest, value: CoreTypes.NodeId) =
+        member _.CurrentNode(state: ClusterAllocationExplainRequest, value: Types.NodeId) =
             { state with CurrentNode = Some value }
 
         [<CustomOperation("includeDiskInfo")>]
@@ -93,15 +94,15 @@ module ClusterOperations =
             { state with IncludeYesDecisions = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: ClusterAllocationExplainRequest, value: CoreTypes.Duration) =
+        member _.MasterTimeout(state: ClusterAllocationExplainRequest, value: Types.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("index")>]
-        member _.Index(state: ClusterAllocationExplainRequest, value: CoreTypes.IndexName) =
+        member _.Index(state: ClusterAllocationExplainRequest, value: Types.IndexName) =
             { state with Index = Some value }
 
         [<CustomOperation("shard")>]
-        member _.Shard(state: ClusterAllocationExplainRequest, value: CoreTypes.Integer) =
+        member _.Shard(state: ClusterAllocationExplainRequest, value: Types.Integer) =
             { state with Shard = Some value }
 
         [<CustomOperation("primary")>]
@@ -109,39 +110,39 @@ module ClusterOperations =
             { state with Primary = Some value }
 
         [<CustomOperation("currentNode")>]
-        member _.CurrentNode(state: ClusterAllocationExplainRequest, value: CoreTypes.NodeId) =
+        member _.CurrentNode(state: ClusterAllocationExplainRequest, value: Types.NodeId) =
             { state with CurrentNode = Some value }
 
     let clusterAllocationExplainRequest = ClusterAllocationExplainRequestBuilder()
 
     module AllocationExplain =
-        let withIndex (value: CoreTypes.IndexName) (req: ClusterAllocationExplainRequest) =
+        let withIndex (value: Types.IndexName) (req: ClusterAllocationExplainRequest) =
             { req with Index = Some value }
-        let withShard (value: CoreTypes.Integer) (req: ClusterAllocationExplainRequest) =
+        let withShard (value: Types.Integer) (req: ClusterAllocationExplainRequest) =
             { req with Shard = Some value }
         let withPrimary (value: bool) (req: ClusterAllocationExplainRequest) =
             { req with Primary = Some value }
-        let withCurrentNode (value: CoreTypes.NodeId) (req: ClusterAllocationExplainRequest) =
+        let withCurrentNode (value: Types.NodeId) (req: ClusterAllocationExplainRequest) =
             { req with CurrentNode = Some value }
         let withIncludeDiskInfo (value: bool) (req: ClusterAllocationExplainRequest) =
             { req with IncludeDiskInfo = Some value }
         let withIncludeYesDecisions (value: bool) (req: ClusterAllocationExplainRequest) =
             { req with IncludeYesDecisions = Some value }
-        let withMasterTimeout (value: CoreTypes.Duration) (req: ClusterAllocationExplainRequest) =
+        let withMasterTimeout (value: Types.Duration) (req: ClusterAllocationExplainRequest) =
             { req with MasterTimeout = Some value }
-        let withIndex (value: CoreTypes.IndexName) (req: ClusterAllocationExplainRequest) =
+        let withIndex (value: Types.IndexName) (req: ClusterAllocationExplainRequest) =
             { req with Index = Some value }
-        let withShard (value: CoreTypes.Integer) (req: ClusterAllocationExplainRequest) =
+        let withShard (value: Types.Integer) (req: ClusterAllocationExplainRequest) =
             { req with Shard = Some value }
         let withPrimary (value: bool) (req: ClusterAllocationExplainRequest) =
             { req with Primary = Some value }
-        let withCurrentNode (value: CoreTypes.NodeId) (req: ClusterAllocationExplainRequest) =
+        let withCurrentNode (value: Types.NodeId) (req: ClusterAllocationExplainRequest) =
             { req with CurrentNode = Some value }
 
     type ClusterDeleteComponentTemplateRequest = {
-        Name: CoreTypes.Names
-        MasterTimeout: CoreTypes.Duration option
-        Timeout: CoreTypes.Duration option
+        Name: Types.Names
+        MasterTimeout: Types.Duration option
+        Timeout: Types.Duration option
     }
 
         with
@@ -163,7 +164,7 @@ module ClusterOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type ClusterDeleteComponentTemplateResponse = CoreTypes.AcknowledgedResponseBase
+    type ClusterDeleteComponentTemplateResponse = Types.AcknowledgedResponseBase
 
     type ClusterDeleteComponentTemplateRequestBuilder() =
         member _.Yield(_: unit) : ClusterDeleteComponentTemplateRequest =
@@ -174,27 +175,27 @@ module ClusterOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: ClusterDeleteComponentTemplateRequest, value: CoreTypes.Names) =
+        member _.Name(state: ClusterDeleteComponentTemplateRequest, value: Types.Names) =
             { state with Name = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: ClusterDeleteComponentTemplateRequest, value: CoreTypes.Duration) =
+        member _.MasterTimeout(state: ClusterDeleteComponentTemplateRequest, value: Types.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: ClusterDeleteComponentTemplateRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: ClusterDeleteComponentTemplateRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
     let clusterDeleteComponentTemplateRequest = ClusterDeleteComponentTemplateRequestBuilder()
 
     module DeleteComponentTemplate =
-        let withMasterTimeout (value: CoreTypes.Duration) (req: ClusterDeleteComponentTemplateRequest) =
+        let withMasterTimeout (value: Types.Duration) (req: ClusterDeleteComponentTemplateRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: ClusterDeleteComponentTemplateRequest) =
+        let withTimeout (value: Types.Duration) (req: ClusterDeleteComponentTemplateRequest) =
             { req with Timeout = Some value }
 
     type ClusterDeleteVotingConfigExclusionsRequest = {
-        MasterTimeout: CoreTypes.Duration option
+        MasterTimeout: Types.Duration option
         WaitForRemoval: bool option
     }
 
@@ -227,7 +228,7 @@ module ClusterOperations =
             }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: ClusterDeleteVotingConfigExclusionsRequest, value: CoreTypes.Duration) =
+        member _.MasterTimeout(state: ClusterDeleteVotingConfigExclusionsRequest, value: Types.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("waitForRemoval")>]
@@ -237,14 +238,14 @@ module ClusterOperations =
     let clusterDeleteVotingConfigExclusionsRequest = ClusterDeleteVotingConfigExclusionsRequestBuilder()
 
     module DeleteVotingConfigExclusions =
-        let withMasterTimeout (value: CoreTypes.Duration) (req: ClusterDeleteVotingConfigExclusionsRequest) =
+        let withMasterTimeout (value: Types.Duration) (req: ClusterDeleteVotingConfigExclusionsRequest) =
             { req with MasterTimeout = Some value }
         let withWaitForRemoval (value: bool) (req: ClusterDeleteVotingConfigExclusionsRequest) =
             { req with WaitForRemoval = Some value }
 
     type ClusterExistsComponentTemplateRequest = {
-        Name: CoreTypes.Names
-        MasterTimeout: CoreTypes.Duration option
+        Name: Types.Names
+        MasterTimeout: Types.Duration option
         Local: bool option
     }
 
@@ -278,11 +279,11 @@ module ClusterOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: ClusterExistsComponentTemplateRequest, value: CoreTypes.Names) =
+        member _.Name(state: ClusterExistsComponentTemplateRequest, value: Types.Names) =
             { state with Name = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: ClusterExistsComponentTemplateRequest, value: CoreTypes.Duration) =
+        member _.MasterTimeout(state: ClusterExistsComponentTemplateRequest, value: Types.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("local")>]
@@ -292,18 +293,18 @@ module ClusterOperations =
     let clusterExistsComponentTemplateRequest = ClusterExistsComponentTemplateRequestBuilder()
 
     module ExistsComponentTemplate =
-        let withMasterTimeout (value: CoreTypes.Duration) (req: ClusterExistsComponentTemplateRequest) =
+        let withMasterTimeout (value: Types.Duration) (req: ClusterExistsComponentTemplateRequest) =
             { req with MasterTimeout = Some value }
         let withLocal (value: bool) (req: ClusterExistsComponentTemplateRequest) =
             { req with Local = Some value }
 
     type ClusterGetComponentTemplateRequest = {
-        Name: CoreTypes.Name
+        Name: Types.Name
         FlatSettings: bool option
         SettingsFilter: System.Text.Json.JsonElement option
         IncludeDefaults: bool option
         Local: bool option
-        MasterTimeout: CoreTypes.Duration option
+        MasterTimeout: Types.Duration option
     }
 
         with
@@ -342,7 +343,7 @@ module ClusterOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: ClusterGetComponentTemplateRequest, value: CoreTypes.Name) =
+        member _.Name(state: ClusterGetComponentTemplateRequest, value: Types.Name) =
             { state with Name = value }
 
         [<CustomOperation("flatSettings")>]
@@ -362,7 +363,7 @@ module ClusterOperations =
             { state with Local = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: ClusterGetComponentTemplateRequest, value: CoreTypes.Duration) =
+        member _.MasterTimeout(state: ClusterGetComponentTemplateRequest, value: Types.Duration) =
             { state with MasterTimeout = Some value }
 
     let clusterGetComponentTemplateRequest = ClusterGetComponentTemplateRequestBuilder()
@@ -376,14 +377,14 @@ module ClusterOperations =
             { req with IncludeDefaults = Some value }
         let withLocal (value: bool) (req: ClusterGetComponentTemplateRequest) =
             { req with Local = Some value }
-        let withMasterTimeout (value: CoreTypes.Duration) (req: ClusterGetComponentTemplateRequest) =
+        let withMasterTimeout (value: Types.Duration) (req: ClusterGetComponentTemplateRequest) =
             { req with MasterTimeout = Some value }
 
     type ClusterGetSettingsRequest = {
         FlatSettings: bool option
         IncludeDefaults: bool option
-        MasterTimeout: CoreTypes.Duration option
-        Timeout: CoreTypes.Duration option
+        MasterTimeout: Types.Duration option
+        Timeout: Types.Duration option
     }
 
         with
@@ -427,11 +428,11 @@ module ClusterOperations =
             { state with IncludeDefaults = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: ClusterGetSettingsRequest, value: CoreTypes.Duration) =
+        member _.MasterTimeout(state: ClusterGetSettingsRequest, value: Types.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: ClusterGetSettingsRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: ClusterGetSettingsRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
     let clusterGetSettingsRequest = ClusterGetSettingsRequestBuilder()
@@ -441,24 +442,24 @@ module ClusterOperations =
             { req with FlatSettings = Some value }
         let withIncludeDefaults (value: bool) (req: ClusterGetSettingsRequest) =
             { req with IncludeDefaults = Some value }
-        let withMasterTimeout (value: CoreTypes.Duration) (req: ClusterGetSettingsRequest) =
+        let withMasterTimeout (value: Types.Duration) (req: ClusterGetSettingsRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: ClusterGetSettingsRequest) =
+        let withTimeout (value: Types.Duration) (req: ClusterGetSettingsRequest) =
             { req with Timeout = Some value }
 
     type ClusterHealthRequest = {
-        Index: CoreTypes.Indices
-        ExpandWildcards: CoreTypes.ExpandWildcards option
-        Level: CoreTypes.Level option
+        Index: Types.Indices
+        ExpandWildcards: Types.ExpandWildcards option
+        Level: Types.Level option
         Local: bool option
-        MasterTimeout: CoreTypes.Duration option
-        Timeout: CoreTypes.Duration option
-        WaitForActiveShards: CoreTypes.WaitForActiveShards option
-        WaitForEvents: CoreTypes.WaitForEvents option
-        WaitForNodes: ClusterHealth.WaitForNodes option
+        MasterTimeout: Types.Duration option
+        Timeout: Types.Duration option
+        WaitForActiveShards: Types.WaitForActiveShards option
+        WaitForEvents: Types.WaitForEvents option
+        WaitForNodes: Types.WaitForNodes option
         WaitForNoInitializingShards: bool option
         WaitForNoRelocatingShards: bool option
-        WaitForStatus: CoreTypes.HealthStatus option
+        WaitForStatus: Types.HealthStatus option
     }
 
         with
@@ -489,7 +490,7 @@ module ClusterOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type ClusterHealthResponse = ClusterHealth.HealthResponseBody
+    type ClusterHealthResponse = Types.HealthResponseBody
 
     type ClusterHealthRequestBuilder() =
         member _.Yield(_: unit) : ClusterHealthRequest =
@@ -509,15 +510,15 @@ module ClusterOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: ClusterHealthRequest, value: CoreTypes.Indices) =
+        member _.Index(state: ClusterHealthRequest, value: Types.Indices) =
             { state with Index = value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: ClusterHealthRequest, value: CoreTypes.ExpandWildcards) =
+        member _.ExpandWildcards(state: ClusterHealthRequest, value: Types.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("level")>]
-        member _.Level(state: ClusterHealthRequest, value: CoreTypes.Level) =
+        member _.Level(state: ClusterHealthRequest, value: Types.Level) =
             { state with Level = Some value }
 
         [<CustomOperation("local")>]
@@ -525,23 +526,23 @@ module ClusterOperations =
             { state with Local = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: ClusterHealthRequest, value: CoreTypes.Duration) =
+        member _.MasterTimeout(state: ClusterHealthRequest, value: Types.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: ClusterHealthRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: ClusterHealthRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("waitForActiveShards")>]
-        member _.WaitForActiveShards(state: ClusterHealthRequest, value: CoreTypes.WaitForActiveShards) =
+        member _.WaitForActiveShards(state: ClusterHealthRequest, value: Types.WaitForActiveShards) =
             { state with WaitForActiveShards = Some value }
 
         [<CustomOperation("waitForEvents")>]
-        member _.WaitForEvents(state: ClusterHealthRequest, value: CoreTypes.WaitForEvents) =
+        member _.WaitForEvents(state: ClusterHealthRequest, value: Types.WaitForEvents) =
             { state with WaitForEvents = Some value }
 
         [<CustomOperation("waitForNodes")>]
-        member _.WaitForNodes(state: ClusterHealthRequest, value: ClusterHealth.WaitForNodes) =
+        member _.WaitForNodes(state: ClusterHealthRequest, value: Types.WaitForNodes) =
             { state with WaitForNodes = Some value }
 
         [<CustomOperation("waitForNoInitializingShards")>]
@@ -553,37 +554,37 @@ module ClusterOperations =
             { state with WaitForNoRelocatingShards = Some value }
 
         [<CustomOperation("waitForStatus")>]
-        member _.WaitForStatus(state: ClusterHealthRequest, value: CoreTypes.HealthStatus) =
+        member _.WaitForStatus(state: ClusterHealthRequest, value: Types.HealthStatus) =
             { state with WaitForStatus = Some value }
 
     let clusterHealthRequest = ClusterHealthRequestBuilder()
 
     module Health =
-        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: ClusterHealthRequest) =
+        let withExpandWildcards (value: Types.ExpandWildcards) (req: ClusterHealthRequest) =
             { req with ExpandWildcards = Some value }
-        let withLevel (value: CoreTypes.Level) (req: ClusterHealthRequest) =
+        let withLevel (value: Types.Level) (req: ClusterHealthRequest) =
             { req with Level = Some value }
         let withLocal (value: bool) (req: ClusterHealthRequest) =
             { req with Local = Some value }
-        let withMasterTimeout (value: CoreTypes.Duration) (req: ClusterHealthRequest) =
+        let withMasterTimeout (value: Types.Duration) (req: ClusterHealthRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: ClusterHealthRequest) =
+        let withTimeout (value: Types.Duration) (req: ClusterHealthRequest) =
             { req with Timeout = Some value }
-        let withWaitForActiveShards (value: CoreTypes.WaitForActiveShards) (req: ClusterHealthRequest) =
+        let withWaitForActiveShards (value: Types.WaitForActiveShards) (req: ClusterHealthRequest) =
             { req with WaitForActiveShards = Some value }
-        let withWaitForEvents (value: CoreTypes.WaitForEvents) (req: ClusterHealthRequest) =
+        let withWaitForEvents (value: Types.WaitForEvents) (req: ClusterHealthRequest) =
             { req with WaitForEvents = Some value }
-        let withWaitForNodes (value: ClusterHealth.WaitForNodes) (req: ClusterHealthRequest) =
+        let withWaitForNodes (value: Types.WaitForNodes) (req: ClusterHealthRequest) =
             { req with WaitForNodes = Some value }
         let withWaitForNoInitializingShards (value: bool) (req: ClusterHealthRequest) =
             { req with WaitForNoInitializingShards = Some value }
         let withWaitForNoRelocatingShards (value: bool) (req: ClusterHealthRequest) =
             { req with WaitForNoRelocatingShards = Some value }
-        let withWaitForStatus (value: CoreTypes.HealthStatus) (req: ClusterHealthRequest) =
+        let withWaitForStatus (value: Types.HealthStatus) (req: ClusterHealthRequest) =
             { req with WaitForStatus = Some value }
 
     type ClusterInfoRequest = {
-        Target: CoreTypes.ClusterInfoTargets
+        Target: Types.ClusterInfoTargets
     }
 
         with
@@ -606,14 +607,14 @@ module ClusterOperations =
             }
 
         [<CustomOperation("target")>]
-        member _.Target(state: ClusterInfoRequest, value: CoreTypes.ClusterInfoTargets) =
+        member _.Target(state: ClusterInfoRequest, value: Types.ClusterInfoTargets) =
             { state with Target = value }
 
     let clusterInfoRequest = ClusterInfoRequestBuilder()
 
     type ClusterPendingTasksRequest = {
         Local: bool option
-        MasterTimeout: CoreTypes.Duration option
+        MasterTimeout: Types.Duration option
     }
 
         with
@@ -649,7 +650,7 @@ module ClusterOperations =
             { state with Local = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: ClusterPendingTasksRequest, value: CoreTypes.Duration) =
+        member _.MasterTimeout(state: ClusterPendingTasksRequest, value: Types.Duration) =
             { state with MasterTimeout = Some value }
 
     let clusterPendingTasksRequest = ClusterPendingTasksRequestBuilder()
@@ -657,14 +658,14 @@ module ClusterOperations =
     module PendingTasks =
         let withLocal (value: bool) (req: ClusterPendingTasksRequest) =
             { req with Local = Some value }
-        let withMasterTimeout (value: CoreTypes.Duration) (req: ClusterPendingTasksRequest) =
+        let withMasterTimeout (value: Types.Duration) (req: ClusterPendingTasksRequest) =
             { req with MasterTimeout = Some value }
 
     type ClusterPostVotingConfigExclusionsRequest = {
-        NodeNames: CoreTypes.Names option
-        NodeIds: CoreTypes.Ids option
-        MasterTimeout: CoreTypes.Duration option
-        Timeout: CoreTypes.Duration option
+        NodeNames: Types.Names option
+        NodeIds: Types.Ids option
+        MasterTimeout: Types.Duration option
+        Timeout: Types.Duration option
     }
 
         with
@@ -700,41 +701,41 @@ module ClusterOperations =
             }
 
         [<CustomOperation("nodeNames")>]
-        member _.NodeNames(state: ClusterPostVotingConfigExclusionsRequest, value: CoreTypes.Names) =
+        member _.NodeNames(state: ClusterPostVotingConfigExclusionsRequest, value: Types.Names) =
             { state with NodeNames = Some value }
 
         [<CustomOperation("nodeIds")>]
-        member _.NodeIds(state: ClusterPostVotingConfigExclusionsRequest, value: CoreTypes.Ids) =
+        member _.NodeIds(state: ClusterPostVotingConfigExclusionsRequest, value: Types.Ids) =
             { state with NodeIds = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: ClusterPostVotingConfigExclusionsRequest, value: CoreTypes.Duration) =
+        member _.MasterTimeout(state: ClusterPostVotingConfigExclusionsRequest, value: Types.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: ClusterPostVotingConfigExclusionsRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: ClusterPostVotingConfigExclusionsRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
     let clusterPostVotingConfigExclusionsRequest = ClusterPostVotingConfigExclusionsRequestBuilder()
 
     module PostVotingConfigExclusions =
-        let withNodeNames (value: CoreTypes.Names) (req: ClusterPostVotingConfigExclusionsRequest) =
+        let withNodeNames (value: Types.Names) (req: ClusterPostVotingConfigExclusionsRequest) =
             { req with NodeNames = Some value }
-        let withNodeIds (value: CoreTypes.Ids) (req: ClusterPostVotingConfigExclusionsRequest) =
+        let withNodeIds (value: Types.Ids) (req: ClusterPostVotingConfigExclusionsRequest) =
             { req with NodeIds = Some value }
-        let withMasterTimeout (value: CoreTypes.Duration) (req: ClusterPostVotingConfigExclusionsRequest) =
+        let withMasterTimeout (value: Types.Duration) (req: ClusterPostVotingConfigExclusionsRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: ClusterPostVotingConfigExclusionsRequest) =
+        let withTimeout (value: Types.Duration) (req: ClusterPostVotingConfigExclusionsRequest) =
             { req with Timeout = Some value }
 
     type ClusterPutComponentTemplateRequest = {
-        Name: CoreTypes.Name
+        Name: Types.Name
         Create: bool option
         Cause: string option
-        MasterTimeout: CoreTypes.Duration option
-        Template: IndicesPutIndexTemplate.IndexTemplateMapping
-        Version: CoreTypes.VersionNumber option
-        Meta: CoreTypes.Metadata option
+        MasterTimeout: Types.Duration option
+        Template: Types.IndexTemplateMapping
+        Version: Types.VersionNumber option
+        Meta: Types.Metadata option
         Deprecated: bool option
     }
 
@@ -759,7 +760,7 @@ module ClusterOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type ClusterPutComponentTemplateResponse = CoreTypes.AcknowledgedResponseBase
+    type ClusterPutComponentTemplateResponse = Types.AcknowledgedResponseBase
 
     type ClusterPutComponentTemplateRequestBuilder() =
         member _.Yield(_: unit) : ClusterPutComponentTemplateRequest =
@@ -775,7 +776,7 @@ module ClusterOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: ClusterPutComponentTemplateRequest, value: CoreTypes.Name) =
+        member _.Name(state: ClusterPutComponentTemplateRequest, value: Types.Name) =
             { state with Name = value }
 
         [<CustomOperation("create")>]
@@ -787,19 +788,19 @@ module ClusterOperations =
             { state with Cause = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: ClusterPutComponentTemplateRequest, value: CoreTypes.Duration) =
+        member _.MasterTimeout(state: ClusterPutComponentTemplateRequest, value: Types.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("template")>]
-        member _.Template(state: ClusterPutComponentTemplateRequest, value: IndicesPutIndexTemplate.IndexTemplateMapping) =
+        member _.Template(state: ClusterPutComponentTemplateRequest, value: Types.IndexTemplateMapping) =
             { state with Template = value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: ClusterPutComponentTemplateRequest, value: CoreTypes.VersionNumber) =
+        member _.Version(state: ClusterPutComponentTemplateRequest, value: Types.VersionNumber) =
             { state with Version = Some value }
 
         [<CustomOperation("meta")>]
-        member _.Meta(state: ClusterPutComponentTemplateRequest, value: CoreTypes.Metadata) =
+        member _.Meta(state: ClusterPutComponentTemplateRequest, value: Types.Metadata) =
             { state with Meta = Some value }
 
         [<CustomOperation("deprecated")>]
@@ -813,21 +814,21 @@ module ClusterOperations =
             { req with Create = Some value }
         let withCause (value: string) (req: ClusterPutComponentTemplateRequest) =
             { req with Cause = Some value }
-        let withMasterTimeout (value: CoreTypes.Duration) (req: ClusterPutComponentTemplateRequest) =
+        let withMasterTimeout (value: Types.Duration) (req: ClusterPutComponentTemplateRequest) =
             { req with MasterTimeout = Some value }
-        let withTemplate (value: IndicesPutIndexTemplate.IndexTemplateMapping) (req: ClusterPutComponentTemplateRequest) =
+        let withTemplate (value: Types.IndexTemplateMapping) (req: ClusterPutComponentTemplateRequest) =
             { req with Template = value }
-        let withVersion (value: CoreTypes.VersionNumber) (req: ClusterPutComponentTemplateRequest) =
+        let withVersion (value: Types.VersionNumber) (req: ClusterPutComponentTemplateRequest) =
             { req with Version = Some value }
-        let withMeta (value: CoreTypes.Metadata) (req: ClusterPutComponentTemplateRequest) =
+        let withMeta (value: Types.Metadata) (req: ClusterPutComponentTemplateRequest) =
             { req with Meta = Some value }
         let withDeprecated (value: bool) (req: ClusterPutComponentTemplateRequest) =
             { req with Deprecated = Some value }
 
     type ClusterPutSettingsRequest = {
         FlatSettings: bool option
-        MasterTimeout: CoreTypes.Duration option
-        Timeout: CoreTypes.Duration option
+        MasterTimeout: Types.Duration option
+        Timeout: Types.Duration option
         Persistent: Map<string, System.Text.Json.JsonElement> option
         Transient: Map<string, System.Text.Json.JsonElement> option
     }
@@ -870,11 +871,11 @@ module ClusterOperations =
             { state with FlatSettings = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: ClusterPutSettingsRequest, value: CoreTypes.Duration) =
+        member _.MasterTimeout(state: ClusterPutSettingsRequest, value: Types.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: ClusterPutSettingsRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: ClusterPutSettingsRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("persistent")>]
@@ -890,9 +891,9 @@ module ClusterOperations =
     module PutSettings =
         let withFlatSettings (value: bool) (req: ClusterPutSettingsRequest) =
             { req with FlatSettings = Some value }
-        let withMasterTimeout (value: CoreTypes.Duration) (req: ClusterPutSettingsRequest) =
+        let withMasterTimeout (value: Types.Duration) (req: ClusterPutSettingsRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: ClusterPutSettingsRequest) =
+        let withTimeout (value: Types.Duration) (req: ClusterPutSettingsRequest) =
             { req with Timeout = Some value }
         let withPersistent (value: Map<string, System.Text.Json.JsonElement>) (req: ClusterPutSettingsRequest) =
             { req with Persistent = Some value }
@@ -912,7 +913,7 @@ module ClusterOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type ClusterRemoteInfoResponse = Map<string, ClusterRemoteInfo.ClusterRemoteInfo>
+    type ClusterRemoteInfoResponse = Map<string, Types.ClusterRemoteInfo>
 
     type ClusterRemoteInfoRequestBuilder() =
         member _.Yield(_: unit) : ClusterRemoteInfoRequest =
@@ -926,9 +927,9 @@ module ClusterOperations =
         Explain: bool option
         Metric: System.Text.Json.JsonElement option
         RetryFailed: bool option
-        MasterTimeout: CoreTypes.Duration option
-        Timeout: CoreTypes.Duration option
-        Commands: ClusterReroute.Command list option
+        MasterTimeout: Types.Duration option
+        Timeout: Types.Duration option
+        Commands: Types.Command list option
     }
 
         with
@@ -986,15 +987,15 @@ module ClusterOperations =
             { state with RetryFailed = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: ClusterRerouteRequest, value: CoreTypes.Duration) =
+        member _.MasterTimeout(state: ClusterRerouteRequest, value: Types.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: ClusterRerouteRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: ClusterRerouteRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("commands")>]
-        member _.Commands(state: ClusterRerouteRequest, value: ClusterReroute.Command list) =
+        member _.Commands(state: ClusterRerouteRequest, value: Types.Command list) =
             { state with Commands = Some value }
 
     let clusterRerouteRequest = ClusterRerouteRequestBuilder()
@@ -1008,24 +1009,24 @@ module ClusterOperations =
             { req with Metric = Some value }
         let withRetryFailed (value: bool) (req: ClusterRerouteRequest) =
             { req with RetryFailed = Some value }
-        let withMasterTimeout (value: CoreTypes.Duration) (req: ClusterRerouteRequest) =
+        let withMasterTimeout (value: Types.Duration) (req: ClusterRerouteRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: ClusterRerouteRequest) =
+        let withTimeout (value: Types.Duration) (req: ClusterRerouteRequest) =
             { req with Timeout = Some value }
-        let withCommands (value: ClusterReroute.Command list) (req: ClusterRerouteRequest) =
+        let withCommands (value: Types.Command list) (req: ClusterRerouteRequest) =
             { req with Commands = Some value }
 
     type ClusterStateRequest = {
-        Metric: ClusterState.ClusterStateMetrics
-        Index: CoreTypes.Indices
+        Metric: Types.ClusterStateMetrics
+        Index: Types.Indices
         AllowNoIndices: bool option
-        ExpandWildcards: CoreTypes.ExpandWildcards option
+        ExpandWildcards: Types.ExpandWildcards option
         FlatSettings: bool option
         IgnoreUnavailable: bool option
         Local: bool option
-        MasterTimeout: CoreTypes.Duration option
-        WaitForMetadataVersion: CoreTypes.VersionNumber option
-        WaitForTimeout: CoreTypes.Duration option
+        MasterTimeout: Types.Duration option
+        WaitForMetadataVersion: Types.VersionNumber option
+        WaitForTimeout: Types.Duration option
     }
 
         with
@@ -1071,11 +1072,11 @@ module ClusterOperations =
             }
 
         [<CustomOperation("metric")>]
-        member _.Metric(state: ClusterStateRequest, value: ClusterState.ClusterStateMetrics) =
+        member _.Metric(state: ClusterStateRequest, value: Types.ClusterStateMetrics) =
             { state with Metric = value }
 
         [<CustomOperation("index")>]
-        member _.Index(state: ClusterStateRequest, value: CoreTypes.Indices) =
+        member _.Index(state: ClusterStateRequest, value: Types.Indices) =
             { state with Index = value }
 
         [<CustomOperation("allowNoIndices")>]
@@ -1083,7 +1084,7 @@ module ClusterOperations =
             { state with AllowNoIndices = Some value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: ClusterStateRequest, value: CoreTypes.ExpandWildcards) =
+        member _.ExpandWildcards(state: ClusterStateRequest, value: Types.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("flatSettings")>]
@@ -1099,15 +1100,15 @@ module ClusterOperations =
             { state with Local = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: ClusterStateRequest, value: CoreTypes.Duration) =
+        member _.MasterTimeout(state: ClusterStateRequest, value: Types.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("waitForMetadataVersion")>]
-        member _.WaitForMetadataVersion(state: ClusterStateRequest, value: CoreTypes.VersionNumber) =
+        member _.WaitForMetadataVersion(state: ClusterStateRequest, value: Types.VersionNumber) =
             { state with WaitForMetadataVersion = Some value }
 
         [<CustomOperation("waitForTimeout")>]
-        member _.WaitForTimeout(state: ClusterStateRequest, value: CoreTypes.Duration) =
+        member _.WaitForTimeout(state: ClusterStateRequest, value: Types.Duration) =
             { state with WaitForTimeout = Some value }
 
     let clusterStateRequest = ClusterStateRequestBuilder()
@@ -1115,7 +1116,7 @@ module ClusterOperations =
     module State =
         let withAllowNoIndices (value: bool) (req: ClusterStateRequest) =
             { req with AllowNoIndices = Some value }
-        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: ClusterStateRequest) =
+        let withExpandWildcards (value: Types.ExpandWildcards) (req: ClusterStateRequest) =
             { req with ExpandWildcards = Some value }
         let withFlatSettings (value: bool) (req: ClusterStateRequest) =
             { req with FlatSettings = Some value }
@@ -1123,17 +1124,17 @@ module ClusterOperations =
             { req with IgnoreUnavailable = Some value }
         let withLocal (value: bool) (req: ClusterStateRequest) =
             { req with Local = Some value }
-        let withMasterTimeout (value: CoreTypes.Duration) (req: ClusterStateRequest) =
+        let withMasterTimeout (value: Types.Duration) (req: ClusterStateRequest) =
             { req with MasterTimeout = Some value }
-        let withWaitForMetadataVersion (value: CoreTypes.VersionNumber) (req: ClusterStateRequest) =
+        let withWaitForMetadataVersion (value: Types.VersionNumber) (req: ClusterStateRequest) =
             { req with WaitForMetadataVersion = Some value }
-        let withWaitForTimeout (value: CoreTypes.Duration) (req: ClusterStateRequest) =
+        let withWaitForTimeout (value: Types.Duration) (req: ClusterStateRequest) =
             { req with WaitForTimeout = Some value }
 
     type ClusterStatsRequest = {
-        NodeId: CoreTypes.NodeIds
+        NodeId: Types.NodeIds
         IncludeRemotes: bool option
-        Timeout: CoreTypes.Duration option
+        Timeout: Types.Duration option
     }
 
         with
@@ -1155,7 +1156,7 @@ module ClusterOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type ClusterStatsResponse = ClusterStats.StatsResponseBase
+    type ClusterStatsResponse = Types.StatsResponseBase
 
     type ClusterStatsRequestBuilder() =
         member _.Yield(_: unit) : ClusterStatsRequest =
@@ -1166,7 +1167,7 @@ module ClusterOperations =
             }
 
         [<CustomOperation("nodeId")>]
-        member _.NodeId(state: ClusterStatsRequest, value: CoreTypes.NodeIds) =
+        member _.NodeId(state: ClusterStatsRequest, value: Types.NodeIds) =
             { state with NodeId = value }
 
         [<CustomOperation("includeRemotes")>]
@@ -1174,7 +1175,7 @@ module ClusterOperations =
             { state with IncludeRemotes = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: ClusterStatsRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: ClusterStatsRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
     let clusterStatsRequest = ClusterStatsRequestBuilder()
@@ -1182,6 +1183,6 @@ module ClusterOperations =
     module Stats =
         let withIncludeRemotes (value: bool) (req: ClusterStatsRequest) =
             { req with IncludeRemotes = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: ClusterStatsRequest) =
+        let withTimeout (value: Types.Duration) (req: ClusterStatsRequest) =
             { req with Timeout = Some value }
 

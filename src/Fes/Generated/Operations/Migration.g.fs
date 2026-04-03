@@ -7,12 +7,13 @@ open System
 open System.Text.Json
 open System.Text.Json.Serialization
 open Fes
+open Fes.Generated
 
 [<AutoOpen>]
 module MigrationOperations =
 
     type MigrationDeprecationsRequest = {
-        Index: CoreTypes.IndexName
+        Index: Types.IndexName
     }
 
         with
@@ -35,7 +36,7 @@ module MigrationOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: MigrationDeprecationsRequest, value: CoreTypes.IndexName) =
+        member _.Index(state: MigrationDeprecationsRequest, value: Types.IndexName) =
             { state with Index = value }
 
     let migrationDeprecationsRequest = MigrationDeprecationsRequestBuilder()

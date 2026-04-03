@@ -4,13 +4,13 @@ namespace Fes.Generated.Builders
 
 
 open System.Text.Json.Serialization
-open Fes.Generated.Types
+open Fes.Generated
 
 [<AutoOpen>]
 module IngestTypesBuilders =
 
     type AppendProcessorBuilder() =
-        member _.Yield(_: unit) : AppendProcessor =
+        member _.Yield(_: unit) : Types.AppendProcessor =
             {
                 Field = Unchecked.defaultof<_>
                 Value = None
@@ -21,33 +21,33 @@ module IngestTypesBuilders =
             }
 
         [<CustomOperation("field")>]
-        member _.Field(state: AppendProcessor, value: CoreTypes.Field) =
+        member _.Field(state: Types.AppendProcessor, value: Types.Field) =
             { state with Field = value }
 
         [<CustomOperation("value")>]
-        member _.Value(state: AppendProcessor, value: System.Text.Json.JsonElement) =
+        member _.Value(state: Types.AppendProcessor, value: System.Text.Json.JsonElement) =
             { state with Value = Some value }
 
         [<CustomOperation("mediaType")>]
-        member _.MediaType(state: AppendProcessor, value: string) =
+        member _.MediaType(state: Types.AppendProcessor, value: string) =
             { state with MediaType = Some value }
 
         [<CustomOperation("copyFrom")>]
-        member _.CopyFrom(state: AppendProcessor, value: CoreTypes.Field) =
+        member _.CopyFrom(state: Types.AppendProcessor, value: Types.Field) =
             { state with CopyFrom = Some value }
 
         [<CustomOperation("allowDuplicates")>]
-        member _.AllowDuplicates(state: AppendProcessor, value: bool) =
+        member _.AllowDuplicates(state: Types.AppendProcessor, value: bool) =
             { state with AllowDuplicates = Some value }
 
         [<CustomOperation("ignoreEmptyValues")>]
-        member _.IgnoreEmptyValues(state: AppendProcessor, value: bool) =
+        member _.IgnoreEmptyValues(state: Types.AppendProcessor, value: bool) =
             { state with IgnoreEmptyValues = Some value }
 
     let appendProcessor = AppendProcessorBuilder()
 
     type AttachmentProcessorBuilder() =
-        member _.Yield(_: unit) : AttachmentProcessor =
+        member _.Yield(_: unit) : Types.AttachmentProcessor =
             {
                 Field = Unchecked.defaultof<_>
                 IgnoreMissing = None
@@ -60,41 +60,41 @@ module IngestTypesBuilders =
             }
 
         [<CustomOperation("field")>]
-        member _.Field(state: AttachmentProcessor, value: CoreTypes.Field) =
+        member _.Field(state: Types.AttachmentProcessor, value: Types.Field) =
             { state with Field = value }
 
         [<CustomOperation("ignoreMissing")>]
-        member _.IgnoreMissing(state: AttachmentProcessor, value: bool) =
+        member _.IgnoreMissing(state: Types.AttachmentProcessor, value: bool) =
             { state with IgnoreMissing = Some value }
 
         [<CustomOperation("indexedChars")>]
-        member _.IndexedChars(state: AttachmentProcessor, value: CoreTypes.Long) =
+        member _.IndexedChars(state: Types.AttachmentProcessor, value: Types.Long) =
             { state with IndexedChars = Some value }
 
         [<CustomOperation("indexedCharsField")>]
-        member _.IndexedCharsField(state: AttachmentProcessor, value: CoreTypes.Field) =
+        member _.IndexedCharsField(state: Types.AttachmentProcessor, value: Types.Field) =
             { state with IndexedCharsField = Some value }
 
         [<CustomOperation("properties")>]
-        member _.Properties(state: AttachmentProcessor, value: string list) =
+        member _.Properties(state: Types.AttachmentProcessor, value: string list) =
             { state with Properties = Some value }
 
         [<CustomOperation("targetField")>]
-        member _.TargetField(state: AttachmentProcessor, value: CoreTypes.Field) =
+        member _.TargetField(state: Types.AttachmentProcessor, value: Types.Field) =
             { state with TargetField = Some value }
 
         [<CustomOperation("removeBinary")>]
-        member _.RemoveBinary(state: AttachmentProcessor, value: bool) =
+        member _.RemoveBinary(state: Types.AttachmentProcessor, value: bool) =
             { state with RemoveBinary = Some value }
 
         [<CustomOperation("resourceName")>]
-        member _.ResourceName(state: AttachmentProcessor, value: string) =
+        member _.ResourceName(state: Types.AttachmentProcessor, value: string) =
             { state with ResourceName = Some value }
 
     let attachmentProcessor = AttachmentProcessorBuilder()
 
     type BytesProcessorBuilder() =
-        member _.Yield(_: unit) : BytesProcessor =
+        member _.Yield(_: unit) : Types.BytesProcessor =
             {
                 Field = Unchecked.defaultof<_>
                 IgnoreMissing = None
@@ -102,21 +102,21 @@ module IngestTypesBuilders =
             }
 
         [<CustomOperation("field")>]
-        member _.Field(state: BytesProcessor, value: CoreTypes.Field) =
+        member _.Field(state: Types.BytesProcessor, value: Types.Field) =
             { state with Field = value }
 
         [<CustomOperation("ignoreMissing")>]
-        member _.IgnoreMissing(state: BytesProcessor, value: bool) =
+        member _.IgnoreMissing(state: Types.BytesProcessor, value: bool) =
             { state with IgnoreMissing = Some value }
 
         [<CustomOperation("targetField")>]
-        member _.TargetField(state: BytesProcessor, value: CoreTypes.Field) =
+        member _.TargetField(state: Types.BytesProcessor, value: Types.Field) =
             { state with TargetField = Some value }
 
     let bytesProcessor = BytesProcessorBuilder()
 
     type CefProcessorBuilder() =
-        member _.Yield(_: unit) : CefProcessor =
+        member _.Yield(_: unit) : Types.CefProcessor =
             {
                 Field = Unchecked.defaultof<_>
                 IgnoreMissing = None
@@ -126,29 +126,29 @@ module IngestTypesBuilders =
             }
 
         [<CustomOperation("field")>]
-        member _.Field(state: CefProcessor, value: CoreTypes.Field) =
+        member _.Field(state: Types.CefProcessor, value: Types.Field) =
             { state with Field = value }
 
         [<CustomOperation("ignoreMissing")>]
-        member _.IgnoreMissing(state: CefProcessor, value: bool) =
+        member _.IgnoreMissing(state: Types.CefProcessor, value: bool) =
             { state with IgnoreMissing = Some value }
 
         [<CustomOperation("targetField")>]
-        member _.TargetField(state: CefProcessor, value: CoreTypes.Field) =
+        member _.TargetField(state: Types.CefProcessor, value: Types.Field) =
             { state with TargetField = Some value }
 
         [<CustomOperation("ignoreEmptyValues")>]
-        member _.IgnoreEmptyValues(state: CefProcessor, value: bool) =
+        member _.IgnoreEmptyValues(state: Types.CefProcessor, value: bool) =
             { state with IgnoreEmptyValues = Some value }
 
         [<CustomOperation("timezone")>]
-        member _.Timezone(state: CefProcessor, value: string) =
+        member _.Timezone(state: Types.CefProcessor, value: string) =
             { state with Timezone = Some value }
 
     let cefProcessor = CefProcessorBuilder()
 
     type CircleProcessorBuilder() =
-        member _.Yield(_: unit) : CircleProcessor =
+        member _.Yield(_: unit) : Types.CircleProcessor =
             {
                 ErrorDistance = Unchecked.defaultof<_>
                 Field = Unchecked.defaultof<_>
@@ -158,29 +158,29 @@ module IngestTypesBuilders =
             }
 
         [<CustomOperation("errorDistance")>]
-        member _.ErrorDistance(state: CircleProcessor, value: CoreTypes.Double) =
+        member _.ErrorDistance(state: Types.CircleProcessor, value: Types.Double) =
             { state with ErrorDistance = value }
 
         [<CustomOperation("field")>]
-        member _.Field(state: CircleProcessor, value: CoreTypes.Field) =
+        member _.Field(state: Types.CircleProcessor, value: Types.Field) =
             { state with Field = value }
 
         [<CustomOperation("ignoreMissing")>]
-        member _.IgnoreMissing(state: CircleProcessor, value: bool) =
+        member _.IgnoreMissing(state: Types.CircleProcessor, value: bool) =
             { state with IgnoreMissing = Some value }
 
         [<CustomOperation("shapeType")>]
-        member _.ShapeType(state: CircleProcessor, value: IngestTypes.ShapeType) =
+        member _.ShapeType(state: Types.CircleProcessor, value: Types.ShapeType) =
             { state with ShapeType = value }
 
         [<CustomOperation("targetField")>]
-        member _.TargetField(state: CircleProcessor, value: CoreTypes.Field) =
+        member _.TargetField(state: Types.CircleProcessor, value: Types.Field) =
             { state with TargetField = Some value }
 
     let circleProcessor = CircleProcessorBuilder()
 
     type CommunityIDProcessorBuilder() =
-        member _.Yield(_: unit) : CommunityIDProcessor =
+        member _.Yield(_: unit) : Types.CommunityIDProcessor =
             {
                 SourceIp = None
                 SourcePort = None
@@ -196,53 +196,53 @@ module IngestTypesBuilders =
             }
 
         [<CustomOperation("sourceIp")>]
-        member _.SourceIp(state: CommunityIDProcessor, value: CoreTypes.Field) =
+        member _.SourceIp(state: Types.CommunityIDProcessor, value: Types.Field) =
             { state with SourceIp = Some value }
 
         [<CustomOperation("sourcePort")>]
-        member _.SourcePort(state: CommunityIDProcessor, value: CoreTypes.Field) =
+        member _.SourcePort(state: Types.CommunityIDProcessor, value: Types.Field) =
             { state with SourcePort = Some value }
 
         [<CustomOperation("destinationIp")>]
-        member _.DestinationIp(state: CommunityIDProcessor, value: CoreTypes.Field) =
+        member _.DestinationIp(state: Types.CommunityIDProcessor, value: Types.Field) =
             { state with DestinationIp = Some value }
 
         [<CustomOperation("destinationPort")>]
-        member _.DestinationPort(state: CommunityIDProcessor, value: CoreTypes.Field) =
+        member _.DestinationPort(state: Types.CommunityIDProcessor, value: Types.Field) =
             { state with DestinationPort = Some value }
 
         [<CustomOperation("ianaNumber")>]
-        member _.IanaNumber(state: CommunityIDProcessor, value: CoreTypes.Field) =
+        member _.IanaNumber(state: Types.CommunityIDProcessor, value: Types.Field) =
             { state with IanaNumber = Some value }
 
         [<CustomOperation("icmpType")>]
-        member _.IcmpType(state: CommunityIDProcessor, value: CoreTypes.Field) =
+        member _.IcmpType(state: Types.CommunityIDProcessor, value: Types.Field) =
             { state with IcmpType = Some value }
 
         [<CustomOperation("icmpCode")>]
-        member _.IcmpCode(state: CommunityIDProcessor, value: CoreTypes.Field) =
+        member _.IcmpCode(state: Types.CommunityIDProcessor, value: Types.Field) =
             { state with IcmpCode = Some value }
 
         [<CustomOperation("transport")>]
-        member _.Transport(state: CommunityIDProcessor, value: CoreTypes.Field) =
+        member _.Transport(state: Types.CommunityIDProcessor, value: Types.Field) =
             { state with Transport = Some value }
 
         [<CustomOperation("targetField")>]
-        member _.TargetField(state: CommunityIDProcessor, value: CoreTypes.Field) =
+        member _.TargetField(state: Types.CommunityIDProcessor, value: Types.Field) =
             { state with TargetField = Some value }
 
         [<CustomOperation("seed")>]
-        member _.Seed(state: CommunityIDProcessor, value: CoreTypes.Integer) =
+        member _.Seed(state: Types.CommunityIDProcessor, value: Types.Integer) =
             { state with Seed = Some value }
 
         [<CustomOperation("ignoreMissing")>]
-        member _.IgnoreMissing(state: CommunityIDProcessor, value: bool) =
+        member _.IgnoreMissing(state: Types.CommunityIDProcessor, value: bool) =
             { state with IgnoreMissing = Some value }
 
     let communityIDProcessor = CommunityIDProcessorBuilder()
 
     type ConvertProcessorBuilder() =
-        member _.Yield(_: unit) : ConvertProcessor =
+        member _.Yield(_: unit) : Types.ConvertProcessor =
             {
                 Field = Unchecked.defaultof<_>
                 IgnoreMissing = None
@@ -251,25 +251,25 @@ module IngestTypesBuilders =
             }
 
         [<CustomOperation("field")>]
-        member _.Field(state: ConvertProcessor, value: CoreTypes.Field) =
+        member _.Field(state: Types.ConvertProcessor, value: Types.Field) =
             { state with Field = value }
 
         [<CustomOperation("ignoreMissing")>]
-        member _.IgnoreMissing(state: ConvertProcessor, value: bool) =
+        member _.IgnoreMissing(state: Types.ConvertProcessor, value: bool) =
             { state with IgnoreMissing = Some value }
 
         [<CustomOperation("targetField")>]
-        member _.TargetField(state: ConvertProcessor, value: CoreTypes.Field) =
+        member _.TargetField(state: Types.ConvertProcessor, value: Types.Field) =
             { state with TargetField = Some value }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: ConvertProcessor, value: IngestTypes.ConvertType) =
+        member _.Type(state: Types.ConvertProcessor, value: Types.ConvertType) =
             { state with Type = value }
 
     let convertProcessor = ConvertProcessorBuilder()
 
     type CsvProcessorBuilder() =
-        member _.Yield(_: unit) : CsvProcessor =
+        member _.Yield(_: unit) : Types.CsvProcessor =
             {
                 EmptyValue = None
                 Field = Unchecked.defaultof<_>
@@ -281,59 +281,59 @@ module IngestTypesBuilders =
             }
 
         [<CustomOperation("emptyValue")>]
-        member _.EmptyValue(state: CsvProcessor, value: System.Text.Json.JsonElement) =
+        member _.EmptyValue(state: Types.CsvProcessor, value: System.Text.Json.JsonElement) =
             { state with EmptyValue = Some value }
 
         [<CustomOperation("field")>]
-        member _.Field(state: CsvProcessor, value: CoreTypes.Field) =
+        member _.Field(state: Types.CsvProcessor, value: Types.Field) =
             { state with Field = value }
 
         [<CustomOperation("ignoreMissing")>]
-        member _.IgnoreMissing(state: CsvProcessor, value: bool) =
+        member _.IgnoreMissing(state: Types.CsvProcessor, value: bool) =
             { state with IgnoreMissing = Some value }
 
         [<CustomOperation("quote")>]
-        member _.Quote(state: CsvProcessor, value: string) =
+        member _.Quote(state: Types.CsvProcessor, value: string) =
             { state with Quote = Some value }
 
         [<CustomOperation("separator")>]
-        member _.Separator(state: CsvProcessor, value: string) =
+        member _.Separator(state: Types.CsvProcessor, value: string) =
             { state with Separator = Some value }
 
         [<CustomOperation("targetFields")>]
-        member _.TargetFields(state: CsvProcessor, value: CoreTypes.Fields) =
+        member _.TargetFields(state: Types.CsvProcessor, value: Types.Fields) =
             { state with TargetFields = value }
 
         [<CustomOperation("trim")>]
-        member _.Trim(state: CsvProcessor, value: bool) =
+        member _.Trim(state: Types.CsvProcessor, value: bool) =
             { state with Trim = Some value }
 
     let csvProcessor = CsvProcessorBuilder()
 
     module DatabaseConfiguration =
 
-        let maxmind (value: IngestTypes.Maxmind) =
-            DatabaseConfiguration.Maxmind value
+        let maxmind (value: Types.Maxmind) =
+            Types.DatabaseConfiguration.Maxmind value
 
-        let ipinfo (value: IngestTypes.Ipinfo) =
-            DatabaseConfiguration.Ipinfo value
+        let ipinfo (value: Types.Ipinfo) =
+            Types.DatabaseConfiguration.Ipinfo value
 
     module DatabaseConfigurationFull =
 
-        let web (value: IngestTypes.Web) =
-            DatabaseConfigurationFull.Web value
+        let web (value: Types.Web) =
+            Types.DatabaseConfigurationFull.Web value
 
-        let local (value: IngestTypes.Local) =
-            DatabaseConfigurationFull.Local value
+        let local (value: Types.Local) =
+            Types.DatabaseConfigurationFull.Local value
 
-        let maxmind (value: IngestTypes.Maxmind) =
-            DatabaseConfigurationFull.Maxmind value
+        let maxmind (value: Types.Maxmind) =
+            Types.DatabaseConfigurationFull.Maxmind value
 
-        let ipinfo (value: IngestTypes.Ipinfo) =
-            DatabaseConfigurationFull.Ipinfo value
+        let ipinfo (value: Types.Ipinfo) =
+            Types.DatabaseConfigurationFull.Ipinfo value
 
     type DateIndexNameProcessorBuilder() =
-        member _.Yield(_: unit) : DateIndexNameProcessor =
+        member _.Yield(_: unit) : Types.DateIndexNameProcessor =
             {
                 DateFormats = None
                 DateRounding = Unchecked.defaultof<_>
@@ -345,37 +345,37 @@ module IngestTypesBuilders =
             }
 
         [<CustomOperation("dateFormats")>]
-        member _.DateFormats(state: DateIndexNameProcessor, value: string list) =
+        member _.DateFormats(state: Types.DateIndexNameProcessor, value: string list) =
             { state with DateFormats = Some value }
 
         [<CustomOperation("dateRounding")>]
-        member _.DateRounding(state: DateIndexNameProcessor, value: string) =
+        member _.DateRounding(state: Types.DateIndexNameProcessor, value: string) =
             { state with DateRounding = value }
 
         [<CustomOperation("field")>]
-        member _.Field(state: DateIndexNameProcessor, value: CoreTypes.Field) =
+        member _.Field(state: Types.DateIndexNameProcessor, value: Types.Field) =
             { state with Field = value }
 
         [<CustomOperation("indexNameFormat")>]
-        member _.IndexNameFormat(state: DateIndexNameProcessor, value: string) =
+        member _.IndexNameFormat(state: Types.DateIndexNameProcessor, value: string) =
             { state with IndexNameFormat = Some value }
 
         [<CustomOperation("indexNamePrefix")>]
-        member _.IndexNamePrefix(state: DateIndexNameProcessor, value: string) =
+        member _.IndexNamePrefix(state: Types.DateIndexNameProcessor, value: string) =
             { state with IndexNamePrefix = Some value }
 
         [<CustomOperation("locale")>]
-        member _.Locale(state: DateIndexNameProcessor, value: string) =
+        member _.Locale(state: Types.DateIndexNameProcessor, value: string) =
             { state with Locale = Some value }
 
         [<CustomOperation("timezone")>]
-        member _.Timezone(state: DateIndexNameProcessor, value: string) =
+        member _.Timezone(state: Types.DateIndexNameProcessor, value: string) =
             { state with Timezone = Some value }
 
     let dateIndexNameProcessor = DateIndexNameProcessorBuilder()
 
     type DateProcessorBuilder() =
-        member _.Yield(_: unit) : DateProcessor =
+        member _.Yield(_: unit) : Types.DateProcessor =
             {
                 Field = Unchecked.defaultof<_>
                 Formats = Unchecked.defaultof<_>
@@ -386,33 +386,33 @@ module IngestTypesBuilders =
             }
 
         [<CustomOperation("field")>]
-        member _.Field(state: DateProcessor, value: CoreTypes.Field) =
+        member _.Field(state: Types.DateProcessor, value: Types.Field) =
             { state with Field = value }
 
         [<CustomOperation("formats")>]
-        member _.Formats(state: DateProcessor, value: string list) =
+        member _.Formats(state: Types.DateProcessor, value: string list) =
             { state with Formats = value }
 
         [<CustomOperation("locale")>]
-        member _.Locale(state: DateProcessor, value: string) =
+        member _.Locale(state: Types.DateProcessor, value: string) =
             { state with Locale = Some value }
 
         [<CustomOperation("targetField")>]
-        member _.TargetField(state: DateProcessor, value: CoreTypes.Field) =
+        member _.TargetField(state: Types.DateProcessor, value: Types.Field) =
             { state with TargetField = Some value }
 
         [<CustomOperation("timezone")>]
-        member _.Timezone(state: DateProcessor, value: string) =
+        member _.Timezone(state: Types.DateProcessor, value: string) =
             { state with Timezone = Some value }
 
         [<CustomOperation("outputFormat")>]
-        member _.OutputFormat(state: DateProcessor, value: string) =
+        member _.OutputFormat(state: Types.DateProcessor, value: string) =
             { state with OutputFormat = Some value }
 
     let dateProcessor = DateProcessorBuilder()
 
     type DissectProcessorBuilder() =
-        member _.Yield(_: unit) : DissectProcessor =
+        member _.Yield(_: unit) : Types.DissectProcessor =
             {
                 AppendSeparator = None
                 Field = Unchecked.defaultof<_>
@@ -421,25 +421,25 @@ module IngestTypesBuilders =
             }
 
         [<CustomOperation("appendSeparator")>]
-        member _.AppendSeparator(state: DissectProcessor, value: string) =
+        member _.AppendSeparator(state: Types.DissectProcessor, value: string) =
             { state with AppendSeparator = Some value }
 
         [<CustomOperation("field")>]
-        member _.Field(state: DissectProcessor, value: CoreTypes.Field) =
+        member _.Field(state: Types.DissectProcessor, value: Types.Field) =
             { state with Field = value }
 
         [<CustomOperation("ignoreMissing")>]
-        member _.IgnoreMissing(state: DissectProcessor, value: bool) =
+        member _.IgnoreMissing(state: Types.DissectProcessor, value: bool) =
             { state with IgnoreMissing = Some value }
 
         [<CustomOperation("pattern")>]
-        member _.Pattern(state: DissectProcessor, value: string) =
+        member _.Pattern(state: Types.DissectProcessor, value: string) =
             { state with Pattern = value }
 
     let dissectProcessor = DissectProcessorBuilder()
 
     type DocumentBuilder() =
-        member _.Yield(_: unit) : Document =
+        member _.Yield(_: unit) : Types.Document =
             {
                 Id = None
                 Index = None
@@ -447,21 +447,21 @@ module IngestTypesBuilders =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: Document, value: CoreTypes.Id) =
+        member _.Id(state: Types.Document, value: Types.Id) =
             { state with Id = Some value }
 
         [<CustomOperation("index")>]
-        member _.Index(state: Document, value: CoreTypes.IndexName) =
+        member _.Index(state: Types.Document, value: Types.IndexName) =
             { state with Index = Some value }
 
         [<CustomOperation("source")>]
-        member _.Source(state: Document, value: System.Text.Json.JsonElement) =
+        member _.Source(state: Types.Document, value: System.Text.Json.JsonElement) =
             { state with Source = value }
 
     let document = DocumentBuilder()
 
     type DocumentSimulationBuilder() =
-        member _.Yield(_: unit) : DocumentSimulation =
+        member _.Yield(_: unit) : Types.DocumentSimulation =
             {
                 Id = Unchecked.defaultof<_>
                 Index = Unchecked.defaultof<_>
@@ -473,37 +473,37 @@ module IngestTypesBuilders =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: DocumentSimulation, value: CoreTypes.Id) =
+        member _.Id(state: Types.DocumentSimulation, value: Types.Id) =
             { state with Id = value }
 
         [<CustomOperation("index")>]
-        member _.Index(state: DocumentSimulation, value: CoreTypes.IndexName) =
+        member _.Index(state: Types.DocumentSimulation, value: Types.IndexName) =
             { state with Index = value }
 
         [<CustomOperation("ingest")>]
-        member _.Ingest(state: DocumentSimulation, value: IngestTypes.Ingest) =
+        member _.Ingest(state: Types.DocumentSimulation, value: Types.IngestTypesIngest) =
             { state with Ingest = value }
 
         [<CustomOperation("routing")>]
-        member _.Routing(state: DocumentSimulation, value: string) =
+        member _.Routing(state: Types.DocumentSimulation, value: string) =
             { state with Routing = Some value }
 
         [<CustomOperation("source")>]
-        member _.Source(state: DocumentSimulation, value: Map<string, System.Text.Json.JsonElement>) =
+        member _.Source(state: Types.DocumentSimulation, value: Map<string, System.Text.Json.JsonElement>) =
             { state with Source = value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: DocumentSimulation, value: CoreTypes.Stringified<CoreTypes.VersionNumber>) =
+        member _.Version(state: Types.DocumentSimulation, value: Types.Stringified<Types.VersionNumber>) =
             { state with Version = Some value }
 
         [<CustomOperation("versionType")>]
-        member _.VersionType(state: DocumentSimulation, value: CoreTypes.VersionType) =
+        member _.VersionType(state: Types.DocumentSimulation, value: Types.VersionType) =
             { state with VersionType = Some value }
 
     let documentSimulation = DocumentSimulationBuilder()
 
     type DotExpanderProcessorBuilder() =
-        member _.Yield(_: unit) : DotExpanderProcessor =
+        member _.Yield(_: unit) : Types.DotExpanderProcessor =
             {
                 Field = Unchecked.defaultof<_>
                 Override = None
@@ -511,21 +511,21 @@ module IngestTypesBuilders =
             }
 
         [<CustomOperation("field")>]
-        member _.Field(state: DotExpanderProcessor, value: CoreTypes.Field) =
+        member _.Field(state: Types.DotExpanderProcessor, value: Types.Field) =
             { state with Field = value }
 
         [<CustomOperation("override'")>]
-        member _.Override(state: DotExpanderProcessor, value: bool) =
+        member _.Override(state: Types.DotExpanderProcessor, value: bool) =
             { state with Override = Some value }
 
         [<CustomOperation("path")>]
-        member _.Path(state: DotExpanderProcessor, value: string) =
+        member _.Path(state: Types.DotExpanderProcessor, value: string) =
             { state with Path = Some value }
 
     let dotExpanderProcessor = DotExpanderProcessorBuilder()
 
     type EnrichProcessorBuilder() =
-        member _.Yield(_: unit) : EnrichProcessor =
+        member _.Yield(_: unit) : Types.EnrichProcessor =
             {
                 Field = Unchecked.defaultof<_>
                 IgnoreMissing = None
@@ -537,37 +537,37 @@ module IngestTypesBuilders =
             }
 
         [<CustomOperation("field")>]
-        member _.Field(state: EnrichProcessor, value: CoreTypes.Field) =
+        member _.Field(state: Types.EnrichProcessor, value: Types.Field) =
             { state with Field = value }
 
         [<CustomOperation("ignoreMissing")>]
-        member _.IgnoreMissing(state: EnrichProcessor, value: bool) =
+        member _.IgnoreMissing(state: Types.EnrichProcessor, value: bool) =
             { state with IgnoreMissing = Some value }
 
         [<CustomOperation("maxMatches")>]
-        member _.MaxMatches(state: EnrichProcessor, value: CoreTypes.Integer) =
+        member _.MaxMatches(state: Types.EnrichProcessor, value: Types.Integer) =
             { state with MaxMatches = Some value }
 
         [<CustomOperation("override'")>]
-        member _.Override(state: EnrichProcessor, value: bool) =
+        member _.Override(state: Types.EnrichProcessor, value: bool) =
             { state with Override = Some value }
 
         [<CustomOperation("policyName")>]
-        member _.PolicyName(state: EnrichProcessor, value: string) =
+        member _.PolicyName(state: Types.EnrichProcessor, value: string) =
             { state with PolicyName = value }
 
         [<CustomOperation("shapeRelation")>]
-        member _.ShapeRelation(state: EnrichProcessor, value: CoreTypes.GeoShapeRelation) =
+        member _.ShapeRelation(state: Types.EnrichProcessor, value: Types.GeoShapeRelation) =
             { state with ShapeRelation = Some value }
 
         [<CustomOperation("targetField")>]
-        member _.TargetField(state: EnrichProcessor, value: CoreTypes.Field) =
+        member _.TargetField(state: Types.EnrichProcessor, value: Types.Field) =
             { state with TargetField = value }
 
     let enrichProcessor = EnrichProcessorBuilder()
 
     type FingerprintProcessorBuilder() =
-        member _.Yield(_: unit) : FingerprintProcessor =
+        member _.Yield(_: unit) : Types.FingerprintProcessor =
             {
                 Fields = Unchecked.defaultof<_>
                 TargetField = None
@@ -577,29 +577,29 @@ module IngestTypesBuilders =
             }
 
         [<CustomOperation("fields")>]
-        member _.Fields(state: FingerprintProcessor, value: CoreTypes.Fields) =
+        member _.Fields(state: Types.FingerprintProcessor, value: Types.Fields) =
             { state with Fields = value }
 
         [<CustomOperation("targetField")>]
-        member _.TargetField(state: FingerprintProcessor, value: CoreTypes.Field) =
+        member _.TargetField(state: Types.FingerprintProcessor, value: Types.Field) =
             { state with TargetField = Some value }
 
         [<CustomOperation("salt")>]
-        member _.Salt(state: FingerprintProcessor, value: string) =
+        member _.Salt(state: Types.FingerprintProcessor, value: string) =
             { state with Salt = Some value }
 
         [<CustomOperation("method")>]
-        member _.Method(state: FingerprintProcessor, value: IngestTypes.FingerprintDigest) =
+        member _.Method(state: Types.FingerprintProcessor, value: Types.FingerprintDigest) =
             { state with Method = Some value }
 
         [<CustomOperation("ignoreMissing")>]
-        member _.IgnoreMissing(state: FingerprintProcessor, value: bool) =
+        member _.IgnoreMissing(state: Types.FingerprintProcessor, value: bool) =
             { state with IgnoreMissing = Some value }
 
     let fingerprintProcessor = FingerprintProcessorBuilder()
 
     type GeoGridProcessorBuilder() =
-        member _.Yield(_: unit) : GeoGridProcessor =
+        member _.Yield(_: unit) : Types.GeoGridProcessor =
             {
                 Field = Unchecked.defaultof<_>
                 TileType = Unchecked.defaultof<_>
@@ -613,45 +613,45 @@ module IngestTypesBuilders =
             }
 
         [<CustomOperation("field")>]
-        member _.Field(state: GeoGridProcessor, value: string) =
+        member _.Field(state: Types.GeoGridProcessor, value: string) =
             { state with Field = value }
 
         [<CustomOperation("tileType")>]
-        member _.TileType(state: GeoGridProcessor, value: IngestTypes.GeoGridTileType) =
+        member _.TileType(state: Types.GeoGridProcessor, value: Types.GeoGridTileType) =
             { state with TileType = value }
 
         [<CustomOperation("targetField")>]
-        member _.TargetField(state: GeoGridProcessor, value: CoreTypes.Field) =
+        member _.TargetField(state: Types.GeoGridProcessor, value: Types.Field) =
             { state with TargetField = Some value }
 
         [<CustomOperation("parentField")>]
-        member _.ParentField(state: GeoGridProcessor, value: CoreTypes.Field) =
+        member _.ParentField(state: Types.GeoGridProcessor, value: Types.Field) =
             { state with ParentField = Some value }
 
         [<CustomOperation("childrenField")>]
-        member _.ChildrenField(state: GeoGridProcessor, value: CoreTypes.Field) =
+        member _.ChildrenField(state: Types.GeoGridProcessor, value: Types.Field) =
             { state with ChildrenField = Some value }
 
         [<CustomOperation("nonChildrenField")>]
-        member _.NonChildrenField(state: GeoGridProcessor, value: CoreTypes.Field) =
+        member _.NonChildrenField(state: Types.GeoGridProcessor, value: Types.Field) =
             { state with NonChildrenField = Some value }
 
         [<CustomOperation("precisionField")>]
-        member _.PrecisionField(state: GeoGridProcessor, value: CoreTypes.Field) =
+        member _.PrecisionField(state: Types.GeoGridProcessor, value: Types.Field) =
             { state with PrecisionField = Some value }
 
         [<CustomOperation("ignoreMissing")>]
-        member _.IgnoreMissing(state: GeoGridProcessor, value: bool) =
+        member _.IgnoreMissing(state: Types.GeoGridProcessor, value: bool) =
             { state with IgnoreMissing = Some value }
 
         [<CustomOperation("targetFormat")>]
-        member _.TargetFormat(state: GeoGridProcessor, value: IngestTypes.GeoGridTargetFormat) =
+        member _.TargetFormat(state: Types.GeoGridProcessor, value: Types.GeoGridTargetFormat) =
             { state with TargetFormat = Some value }
 
     let geoGridProcessor = GeoGridProcessorBuilder()
 
     type GeoIpProcessorBuilder() =
-        member _.Yield(_: unit) : GeoIpProcessor =
+        member _.Yield(_: unit) : Types.GeoIpProcessor =
             {
                 DatabaseFile = None
                 Field = Unchecked.defaultof<_>
@@ -663,37 +663,37 @@ module IngestTypesBuilders =
             }
 
         [<CustomOperation("databaseFile")>]
-        member _.DatabaseFile(state: GeoIpProcessor, value: string) =
+        member _.DatabaseFile(state: Types.GeoIpProcessor, value: string) =
             { state with DatabaseFile = Some value }
 
         [<CustomOperation("field")>]
-        member _.Field(state: GeoIpProcessor, value: CoreTypes.Field) =
+        member _.Field(state: Types.GeoIpProcessor, value: Types.Field) =
             { state with Field = value }
 
         [<CustomOperation("firstOnly")>]
-        member _.FirstOnly(state: GeoIpProcessor, value: bool) =
+        member _.FirstOnly(state: Types.GeoIpProcessor, value: bool) =
             { state with FirstOnly = Some value }
 
         [<CustomOperation("ignoreMissing")>]
-        member _.IgnoreMissing(state: GeoIpProcessor, value: bool) =
+        member _.IgnoreMissing(state: Types.GeoIpProcessor, value: bool) =
             { state with IgnoreMissing = Some value }
 
         [<CustomOperation("properties")>]
-        member _.Properties(state: GeoIpProcessor, value: string list) =
+        member _.Properties(state: Types.GeoIpProcessor, value: string list) =
             { state with Properties = Some value }
 
         [<CustomOperation("targetField")>]
-        member _.TargetField(state: GeoIpProcessor, value: CoreTypes.Field) =
+        member _.TargetField(state: Types.GeoIpProcessor, value: Types.Field) =
             { state with TargetField = Some value }
 
         [<CustomOperation("downloadDatabaseOnPipelineCreation")>]
-        member _.DownloadDatabaseOnPipelineCreation(state: GeoIpProcessor, value: bool) =
+        member _.DownloadDatabaseOnPipelineCreation(state: Types.GeoIpProcessor, value: bool) =
             { state with DownloadDatabaseOnPipelineCreation = Some value }
 
     let geoIpProcessor = GeoIpProcessorBuilder()
 
     type GrokProcessorBuilder() =
-        member _.Yield(_: unit) : GrokProcessor =
+        member _.Yield(_: unit) : Types.GrokProcessor =
             {
                 EcsCompatibility = None
                 Field = Unchecked.defaultof<_>
@@ -705,37 +705,37 @@ module IngestTypesBuilders =
             }
 
         [<CustomOperation("ecsCompatibility")>]
-        member _.EcsCompatibility(state: GrokProcessor, value: string) =
+        member _.EcsCompatibility(state: Types.GrokProcessor, value: string) =
             { state with EcsCompatibility = Some value }
 
         [<CustomOperation("field")>]
-        member _.Field(state: GrokProcessor, value: CoreTypes.Field) =
+        member _.Field(state: Types.GrokProcessor, value: Types.Field) =
             { state with Field = value }
 
         [<CustomOperation("ignoreMissing")>]
-        member _.IgnoreMissing(state: GrokProcessor, value: bool) =
+        member _.IgnoreMissing(state: Types.GrokProcessor, value: bool) =
             { state with IgnoreMissing = Some value }
 
         [<CustomOperation("patternDefinitions")>]
-        member _.PatternDefinitions(state: GrokProcessor, value: Map<string, string>) =
+        member _.PatternDefinitions(state: Types.GrokProcessor, value: Map<string, string>) =
             { state with PatternDefinitions = Some value }
 
         [<CustomOperation("patterns")>]
-        member _.Patterns(state: GrokProcessor, value: CoreTypes.GrokPattern list) =
+        member _.Patterns(state: Types.GrokProcessor, value: Types.GrokPattern list) =
             { state with Patterns = value }
 
         [<CustomOperation("traceMatch")>]
-        member _.TraceMatch(state: GrokProcessor, value: bool) =
+        member _.TraceMatch(state: Types.GrokProcessor, value: bool) =
             { state with TraceMatch = Some value }
 
         [<CustomOperation("validateOnly")>]
-        member _.ValidateOnly(state: GrokProcessor, value: bool) =
+        member _.ValidateOnly(state: Types.GrokProcessor, value: bool) =
             { state with ValidateOnly = Some value }
 
     let grokProcessor = GrokProcessorBuilder()
 
     type GsubProcessorBuilder() =
-        member _.Yield(_: unit) : GsubProcessor =
+        member _.Yield(_: unit) : Types.GsubProcessor =
             {
                 Field = Unchecked.defaultof<_>
                 IgnoreMissing = None
@@ -745,29 +745,29 @@ module IngestTypesBuilders =
             }
 
         [<CustomOperation("field")>]
-        member _.Field(state: GsubProcessor, value: CoreTypes.Field) =
+        member _.Field(state: Types.GsubProcessor, value: Types.Field) =
             { state with Field = value }
 
         [<CustomOperation("ignoreMissing")>]
-        member _.IgnoreMissing(state: GsubProcessor, value: bool) =
+        member _.IgnoreMissing(state: Types.GsubProcessor, value: bool) =
             { state with IgnoreMissing = Some value }
 
         [<CustomOperation("pattern")>]
-        member _.Pattern(state: GsubProcessor, value: string) =
+        member _.Pattern(state: Types.GsubProcessor, value: string) =
             { state with Pattern = value }
 
         [<CustomOperation("replacement")>]
-        member _.Replacement(state: GsubProcessor, value: string) =
+        member _.Replacement(state: Types.GsubProcessor, value: string) =
             { state with Replacement = value }
 
         [<CustomOperation("targetField")>]
-        member _.TargetField(state: GsubProcessor, value: CoreTypes.Field) =
+        member _.TargetField(state: Types.GsubProcessor, value: Types.Field) =
             { state with TargetField = Some value }
 
     let gsubProcessor = GsubProcessorBuilder()
 
     type HtmlStripProcessorBuilder() =
-        member _.Yield(_: unit) : HtmlStripProcessor =
+        member _.Yield(_: unit) : Types.HtmlStripProcessor =
             {
                 Field = Unchecked.defaultof<_>
                 IgnoreMissing = None
@@ -775,29 +775,29 @@ module IngestTypesBuilders =
             }
 
         [<CustomOperation("field")>]
-        member _.Field(state: HtmlStripProcessor, value: CoreTypes.Field) =
+        member _.Field(state: Types.HtmlStripProcessor, value: Types.Field) =
             { state with Field = value }
 
         [<CustomOperation("ignoreMissing")>]
-        member _.IgnoreMissing(state: HtmlStripProcessor, value: bool) =
+        member _.IgnoreMissing(state: Types.HtmlStripProcessor, value: bool) =
             { state with IgnoreMissing = Some value }
 
         [<CustomOperation("targetField")>]
-        member _.TargetField(state: HtmlStripProcessor, value: CoreTypes.Field) =
+        member _.TargetField(state: Types.HtmlStripProcessor, value: Types.Field) =
             { state with TargetField = Some value }
 
     let htmlStripProcessor = HtmlStripProcessorBuilder()
 
     module InferenceConfig =
 
-        let regression (value: IngestTypes.InferenceConfigRegression) =
-            InferenceConfig.Regression value
+        let regression (value: Types.InferenceConfigRegression) =
+            Types.InferenceConfig.Regression value
 
-        let classification (value: IngestTypes.InferenceConfigClassification) =
-            InferenceConfig.Classification value
+        let classification (value: Types.InferenceConfigClassification) =
+            Types.InferenceConfig.Classification value
 
     type InferenceConfigClassificationBuilder() =
-        member _.Yield(_: unit) : InferenceConfigClassification =
+        member _.Yield(_: unit) : Types.InferenceConfigClassification =
             {
                 NumTopClasses = None
                 NumTopFeatureImportanceValues = None
@@ -807,46 +807,46 @@ module IngestTypesBuilders =
             }
 
         [<CustomOperation("numTopClasses")>]
-        member _.NumTopClasses(state: InferenceConfigClassification, value: CoreTypes.Integer) =
+        member _.NumTopClasses(state: Types.InferenceConfigClassification, value: Types.Integer) =
             { state with NumTopClasses = Some value }
 
         [<CustomOperation("numTopFeatureImportanceValues")>]
-        member _.NumTopFeatureImportanceValues(state: InferenceConfigClassification, value: CoreTypes.Integer) =
+        member _.NumTopFeatureImportanceValues(state: Types.InferenceConfigClassification, value: Types.Integer) =
             { state with NumTopFeatureImportanceValues = Some value }
 
         [<CustomOperation("resultsField")>]
-        member _.ResultsField(state: InferenceConfigClassification, value: CoreTypes.Field) =
+        member _.ResultsField(state: Types.InferenceConfigClassification, value: Types.Field) =
             { state with ResultsField = Some value }
 
         [<CustomOperation("topClassesResultsField")>]
-        member _.TopClassesResultsField(state: InferenceConfigClassification, value: CoreTypes.Field) =
+        member _.TopClassesResultsField(state: Types.InferenceConfigClassification, value: Types.Field) =
             { state with TopClassesResultsField = Some value }
 
         [<CustomOperation("predictionFieldType")>]
-        member _.PredictionFieldType(state: InferenceConfigClassification, value: string) =
+        member _.PredictionFieldType(state: Types.InferenceConfigClassification, value: string) =
             { state with PredictionFieldType = Some value }
 
     let inferenceConfigClassification = InferenceConfigClassificationBuilder()
 
     type InferenceConfigRegressionBuilder() =
-        member _.Yield(_: unit) : InferenceConfigRegression =
+        member _.Yield(_: unit) : Types.InferenceConfigRegression =
             {
                 ResultsField = None
                 NumTopFeatureImportanceValues = None
             }
 
         [<CustomOperation("resultsField")>]
-        member _.ResultsField(state: InferenceConfigRegression, value: CoreTypes.Field) =
+        member _.ResultsField(state: Types.InferenceConfigRegression, value: Types.Field) =
             { state with ResultsField = Some value }
 
         [<CustomOperation("numTopFeatureImportanceValues")>]
-        member _.NumTopFeatureImportanceValues(state: InferenceConfigRegression, value: CoreTypes.Integer) =
+        member _.NumTopFeatureImportanceValues(state: Types.InferenceConfigRegression, value: Types.Integer) =
             { state with NumTopFeatureImportanceValues = Some value }
 
     let inferenceConfigRegression = InferenceConfigRegressionBuilder()
 
     type InferenceProcessorBuilder() =
-        member _.Yield(_: unit) : InferenceProcessor =
+        member _.Yield(_: unit) : Types.InferenceProcessor =
             {
                 ModelId = Unchecked.defaultof<_>
                 TargetField = None
@@ -857,33 +857,33 @@ module IngestTypesBuilders =
             }
 
         [<CustomOperation("modelId")>]
-        member _.ModelId(state: InferenceProcessor, value: CoreTypes.Id) =
+        member _.ModelId(state: Types.InferenceProcessor, value: Types.Id) =
             { state with ModelId = value }
 
         [<CustomOperation("targetField")>]
-        member _.TargetField(state: InferenceProcessor, value: CoreTypes.Field) =
+        member _.TargetField(state: Types.InferenceProcessor, value: Types.Field) =
             { state with TargetField = Some value }
 
         [<CustomOperation("fieldMap")>]
-        member _.FieldMap(state: InferenceProcessor, value: Map<CoreTypes.Field, System.Text.Json.JsonElement>) =
+        member _.FieldMap(state: Types.InferenceProcessor, value: Map<Types.Field, System.Text.Json.JsonElement>) =
             { state with FieldMap = Some value }
 
         [<CustomOperation("inferenceConfig")>]
-        member _.InferenceConfig(state: InferenceProcessor, value: IngestTypes.InferenceConfig) =
+        member _.InferenceConfig(state: Types.InferenceProcessor, value: Types.InferenceConfig) =
             { state with InferenceConfig = Some value }
 
         [<CustomOperation("inputOutput")>]
-        member _.InputOutput(state: InferenceProcessor, value: System.Text.Json.JsonElement) =
+        member _.InputOutput(state: Types.InferenceProcessor, value: System.Text.Json.JsonElement) =
             { state with InputOutput = Some value }
 
         [<CustomOperation("ignoreMissing")>]
-        member _.IgnoreMissing(state: InferenceProcessor, value: bool) =
+        member _.IgnoreMissing(state: Types.InferenceProcessor, value: bool) =
             { state with IgnoreMissing = Some value }
 
     let inferenceProcessor = InferenceProcessorBuilder()
 
-    type IngestBuilder() =
-        member _.Yield(_: unit) : Ingest =
+    type IngestTypesIngestBuilder() =
+        member _.Yield(_: unit) : Types.IngestTypesIngest =
             {
                 Redact = None
                 Timestamp = Unchecked.defaultof<_>
@@ -891,21 +891,21 @@ module IngestTypesBuilders =
             }
 
         [<CustomOperation("redact")>]
-        member _.Redact(state: Ingest, value: IngestTypes.Redact) =
+        member _.Redact(state: Types.IngestTypesIngest, value: Types.Redact) =
             { state with Redact = Some value }
 
         [<CustomOperation("timestamp")>]
-        member _.Timestamp(state: Ingest, value: CoreTypes.DateTime) =
+        member _.Timestamp(state: Types.IngestTypesIngest, value: Types.DateTime) =
             { state with Timestamp = value }
 
         [<CustomOperation("pipeline")>]
-        member _.Pipeline(state: Ingest, value: CoreTypes.Name) =
+        member _.Pipeline(state: Types.IngestTypesIngest, value: Types.Name) =
             { state with Pipeline = Some value }
 
-    let ingest = IngestBuilder()
+    let ingestTypesIngest = IngestTypesIngestBuilder()
 
     type IpLocationProcessorBuilder() =
-        member _.Yield(_: unit) : IpLocationProcessor =
+        member _.Yield(_: unit) : Types.IpLocationProcessor =
             {
                 DatabaseFile = None
                 Field = Unchecked.defaultof<_>
@@ -917,37 +917,37 @@ module IngestTypesBuilders =
             }
 
         [<CustomOperation("databaseFile")>]
-        member _.DatabaseFile(state: IpLocationProcessor, value: string) =
+        member _.DatabaseFile(state: Types.IpLocationProcessor, value: string) =
             { state with DatabaseFile = Some value }
 
         [<CustomOperation("field")>]
-        member _.Field(state: IpLocationProcessor, value: CoreTypes.Field) =
+        member _.Field(state: Types.IpLocationProcessor, value: Types.Field) =
             { state with Field = value }
 
         [<CustomOperation("firstOnly")>]
-        member _.FirstOnly(state: IpLocationProcessor, value: bool) =
+        member _.FirstOnly(state: Types.IpLocationProcessor, value: bool) =
             { state with FirstOnly = Some value }
 
         [<CustomOperation("ignoreMissing")>]
-        member _.IgnoreMissing(state: IpLocationProcessor, value: bool) =
+        member _.IgnoreMissing(state: Types.IpLocationProcessor, value: bool) =
             { state with IgnoreMissing = Some value }
 
         [<CustomOperation("properties")>]
-        member _.Properties(state: IpLocationProcessor, value: string list) =
+        member _.Properties(state: Types.IpLocationProcessor, value: string list) =
             { state with Properties = Some value }
 
         [<CustomOperation("targetField")>]
-        member _.TargetField(state: IpLocationProcessor, value: CoreTypes.Field) =
+        member _.TargetField(state: Types.IpLocationProcessor, value: Types.Field) =
             { state with TargetField = Some value }
 
         [<CustomOperation("downloadDatabaseOnPipelineCreation")>]
-        member _.DownloadDatabaseOnPipelineCreation(state: IpLocationProcessor, value: bool) =
+        member _.DownloadDatabaseOnPipelineCreation(state: Types.IpLocationProcessor, value: bool) =
             { state with DownloadDatabaseOnPipelineCreation = Some value }
 
     let ipLocationProcessor = IpLocationProcessorBuilder()
 
     type JsonProcessorBuilder() =
-        member _.Yield(_: unit) : JsonProcessor =
+        member _.Yield(_: unit) : Types.JsonProcessor =
             {
                 AddToRoot = None
                 AddToRootConflictStrategy = None
@@ -957,29 +957,29 @@ module IngestTypesBuilders =
             }
 
         [<CustomOperation("addToRoot")>]
-        member _.AddToRoot(state: JsonProcessor, value: bool) =
+        member _.AddToRoot(state: Types.JsonProcessor, value: bool) =
             { state with AddToRoot = Some value }
 
         [<CustomOperation("addToRootConflictStrategy")>]
-        member _.AddToRootConflictStrategy(state: JsonProcessor, value: IngestTypes.JsonProcessorConflictStrategy) =
+        member _.AddToRootConflictStrategy(state: Types.JsonProcessor, value: Types.JsonProcessorConflictStrategy) =
             { state with AddToRootConflictStrategy = Some value }
 
         [<CustomOperation("allowDuplicateKeys")>]
-        member _.AllowDuplicateKeys(state: JsonProcessor, value: bool) =
+        member _.AllowDuplicateKeys(state: Types.JsonProcessor, value: bool) =
             { state with AllowDuplicateKeys = Some value }
 
         [<CustomOperation("field")>]
-        member _.Field(state: JsonProcessor, value: CoreTypes.Field) =
+        member _.Field(state: Types.JsonProcessor, value: Types.Field) =
             { state with Field = value }
 
         [<CustomOperation("targetField")>]
-        member _.TargetField(state: JsonProcessor, value: CoreTypes.Field) =
+        member _.TargetField(state: Types.JsonProcessor, value: Types.Field) =
             { state with TargetField = Some value }
 
     let jsonProcessor = JsonProcessorBuilder()
 
     type KeyValueProcessorBuilder() =
-        member _.Yield(_: unit) : KeyValueProcessor =
+        member _.Yield(_: unit) : Types.KeyValueProcessor =
             {
                 ExcludeKeys = None
                 Field = Unchecked.defaultof<_>
@@ -995,53 +995,53 @@ module IngestTypesBuilders =
             }
 
         [<CustomOperation("excludeKeys")>]
-        member _.ExcludeKeys(state: KeyValueProcessor, value: string list) =
+        member _.ExcludeKeys(state: Types.KeyValueProcessor, value: string list) =
             { state with ExcludeKeys = Some value }
 
         [<CustomOperation("field")>]
-        member _.Field(state: KeyValueProcessor, value: CoreTypes.Field) =
+        member _.Field(state: Types.KeyValueProcessor, value: Types.Field) =
             { state with Field = value }
 
         [<CustomOperation("fieldSplit")>]
-        member _.FieldSplit(state: KeyValueProcessor, value: string) =
+        member _.FieldSplit(state: Types.KeyValueProcessor, value: string) =
             { state with FieldSplit = value }
 
         [<CustomOperation("ignoreMissing")>]
-        member _.IgnoreMissing(state: KeyValueProcessor, value: bool) =
+        member _.IgnoreMissing(state: Types.KeyValueProcessor, value: bool) =
             { state with IgnoreMissing = Some value }
 
         [<CustomOperation("includeKeys")>]
-        member _.IncludeKeys(state: KeyValueProcessor, value: string list) =
+        member _.IncludeKeys(state: Types.KeyValueProcessor, value: string list) =
             { state with IncludeKeys = Some value }
 
         [<CustomOperation("prefix")>]
-        member _.Prefix(state: KeyValueProcessor, value: string) =
+        member _.Prefix(state: Types.KeyValueProcessor, value: string) =
             { state with Prefix = Some value }
 
         [<CustomOperation("stripBrackets")>]
-        member _.StripBrackets(state: KeyValueProcessor, value: bool) =
+        member _.StripBrackets(state: Types.KeyValueProcessor, value: bool) =
             { state with StripBrackets = Some value }
 
         [<CustomOperation("targetField")>]
-        member _.TargetField(state: KeyValueProcessor, value: CoreTypes.Field) =
+        member _.TargetField(state: Types.KeyValueProcessor, value: Types.Field) =
             { state with TargetField = Some value }
 
         [<CustomOperation("trimKey")>]
-        member _.TrimKey(state: KeyValueProcessor, value: string) =
+        member _.TrimKey(state: Types.KeyValueProcessor, value: string) =
             { state with TrimKey = Some value }
 
         [<CustomOperation("trimValue")>]
-        member _.TrimValue(state: KeyValueProcessor, value: string) =
+        member _.TrimValue(state: Types.KeyValueProcessor, value: string) =
             { state with TrimValue = Some value }
 
         [<CustomOperation("valueSplit")>]
-        member _.ValueSplit(state: KeyValueProcessor, value: string) =
+        member _.ValueSplit(state: Types.KeyValueProcessor, value: string) =
             { state with ValueSplit = value }
 
     let keyValueProcessor = KeyValueProcessorBuilder()
 
     type LowercaseProcessorBuilder() =
-        member _.Yield(_: unit) : LowercaseProcessor =
+        member _.Yield(_: unit) : Types.LowercaseProcessor =
             {
                 Field = Unchecked.defaultof<_>
                 IgnoreMissing = None
@@ -1049,21 +1049,21 @@ module IngestTypesBuilders =
             }
 
         [<CustomOperation("field")>]
-        member _.Field(state: LowercaseProcessor, value: CoreTypes.Field) =
+        member _.Field(state: Types.LowercaseProcessor, value: Types.Field) =
             { state with Field = value }
 
         [<CustomOperation("ignoreMissing")>]
-        member _.IgnoreMissing(state: LowercaseProcessor, value: bool) =
+        member _.IgnoreMissing(state: Types.LowercaseProcessor, value: bool) =
             { state with IgnoreMissing = Some value }
 
         [<CustomOperation("targetField")>]
-        member _.TargetField(state: LowercaseProcessor, value: CoreTypes.Field) =
+        member _.TargetField(state: Types.LowercaseProcessor, value: Types.Field) =
             { state with TargetField = Some value }
 
     let lowercaseProcessor = LowercaseProcessorBuilder()
 
     type NetworkDirectionProcessorBuilder() =
-        member _.Yield(_: unit) : NetworkDirectionProcessor =
+        member _.Yield(_: unit) : Types.NetworkDirectionProcessor =
             {
                 SourceIp = None
                 DestinationIp = None
@@ -1074,33 +1074,33 @@ module IngestTypesBuilders =
             }
 
         [<CustomOperation("sourceIp")>]
-        member _.SourceIp(state: NetworkDirectionProcessor, value: CoreTypes.Field) =
+        member _.SourceIp(state: Types.NetworkDirectionProcessor, value: Types.Field) =
             { state with SourceIp = Some value }
 
         [<CustomOperation("destinationIp")>]
-        member _.DestinationIp(state: NetworkDirectionProcessor, value: CoreTypes.Field) =
+        member _.DestinationIp(state: Types.NetworkDirectionProcessor, value: Types.Field) =
             { state with DestinationIp = Some value }
 
         [<CustomOperation("targetField")>]
-        member _.TargetField(state: NetworkDirectionProcessor, value: CoreTypes.Field) =
+        member _.TargetField(state: Types.NetworkDirectionProcessor, value: Types.Field) =
             { state with TargetField = Some value }
 
         [<CustomOperation("internalNetworks")>]
-        member _.InternalNetworks(state: NetworkDirectionProcessor, value: string list) =
+        member _.InternalNetworks(state: Types.NetworkDirectionProcessor, value: string list) =
             { state with InternalNetworks = Some value }
 
         [<CustomOperation("internalNetworksField")>]
-        member _.InternalNetworksField(state: NetworkDirectionProcessor, value: CoreTypes.Field) =
+        member _.InternalNetworksField(state: Types.NetworkDirectionProcessor, value: Types.Field) =
             { state with InternalNetworksField = Some value }
 
         [<CustomOperation("ignoreMissing")>]
-        member _.IgnoreMissing(state: NetworkDirectionProcessor, value: bool) =
+        member _.IgnoreMissing(state: Types.NetworkDirectionProcessor, value: bool) =
             { state with IgnoreMissing = Some value }
 
     let networkDirectionProcessor = NetworkDirectionProcessorBuilder()
 
-    type PipelineBuilder() =
-        member _.Yield(_: unit) : Pipeline =
+    type IngestTypesPipelineBuilder() =
+        member _.Yield(_: unit) : Types.IngestTypesPipeline =
             {
                 Description = None
                 OnFailure = None
@@ -1116,53 +1116,53 @@ module IngestTypesBuilders =
             }
 
         [<CustomOperation("description")>]
-        member _.Description(state: Pipeline, value: string) =
+        member _.Description(state: Types.IngestTypesPipeline, value: string) =
             { state with Description = Some value }
 
         [<CustomOperation("onFailure")>]
-        member _.OnFailure(state: Pipeline, value: IngestTypes.ProcessorContainer list) =
+        member _.OnFailure(state: Types.IngestTypesPipeline, value: Types.ProcessorContainer list) =
             { state with OnFailure = Some value }
 
         [<CustomOperation("processors")>]
-        member _.Processors(state: Pipeline, value: IngestTypes.ProcessorContainer list) =
+        member _.Processors(state: Types.IngestTypesPipeline, value: Types.ProcessorContainer list) =
             { state with Processors = Some value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: Pipeline, value: CoreTypes.VersionNumber) =
+        member _.Version(state: Types.IngestTypesPipeline, value: Types.VersionNumber) =
             { state with Version = Some value }
 
         [<CustomOperation("deprecated")>]
-        member _.Deprecated(state: Pipeline, value: bool) =
+        member _.Deprecated(state: Types.IngestTypesPipeline, value: bool) =
             { state with Deprecated = Some value }
 
         [<CustomOperation("meta")>]
-        member _.Meta(state: Pipeline, value: CoreTypes.Metadata) =
+        member _.Meta(state: Types.IngestTypesPipeline, value: Types.Metadata) =
             { state with Meta = Some value }
 
         [<CustomOperation("createdDate")>]
-        member _.CreatedDate(state: Pipeline, value: CoreTypes.DateTime) =
+        member _.CreatedDate(state: Types.IngestTypesPipeline, value: Types.DateTime) =
             { state with CreatedDate = Some value }
 
         [<CustomOperation("createdDateMillis")>]
-        member _.CreatedDateMillis(state: Pipeline, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
+        member _.CreatedDateMillis(state: Types.IngestTypesPipeline, value: Types.EpochTime<Types.UnitMillis>) =
             { state with CreatedDateMillis = Some value }
 
         [<CustomOperation("modifiedDate")>]
-        member _.ModifiedDate(state: Pipeline, value: CoreTypes.DateTime) =
+        member _.ModifiedDate(state: Types.IngestTypesPipeline, value: Types.DateTime) =
             { state with ModifiedDate = Some value }
 
         [<CustomOperation("modifiedDateMillis")>]
-        member _.ModifiedDateMillis(state: Pipeline, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
+        member _.ModifiedDateMillis(state: Types.IngestTypesPipeline, value: Types.EpochTime<Types.UnitMillis>) =
             { state with ModifiedDateMillis = Some value }
 
         [<CustomOperation("fieldAccessPattern")>]
-        member _.FieldAccessPattern(state: Pipeline, value: IngestTypes.FieldAccessPattern) =
+        member _.FieldAccessPattern(state: Types.IngestTypesPipeline, value: Types.FieldAccessPattern) =
             { state with FieldAccessPattern = Some value }
 
-    let pipeline = PipelineBuilder()
+    let ingestTypesPipeline = IngestTypesPipelineBuilder()
 
     type PipelineConfigBuilder() =
-        member _.Yield(_: unit) : PipelineConfig =
+        member _.Yield(_: unit) : Types.PipelineConfig =
             {
                 Description = None
                 Version = None
@@ -1170,21 +1170,21 @@ module IngestTypesBuilders =
             }
 
         [<CustomOperation("description")>]
-        member _.Description(state: PipelineConfig, value: string) =
+        member _.Description(state: Types.PipelineConfig, value: string) =
             { state with Description = Some value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: PipelineConfig, value: CoreTypes.VersionNumber) =
+        member _.Version(state: Types.PipelineConfig, value: Types.VersionNumber) =
             { state with Version = Some value }
 
         [<CustomOperation("processors")>]
-        member _.Processors(state: PipelineConfig, value: IngestTypes.ProcessorContainer list) =
+        member _.Processors(state: Types.PipelineConfig, value: Types.ProcessorContainer list) =
             { state with Processors = value }
 
     let pipelineConfig = PipelineConfigBuilder()
 
     type PipelineProcessorResultBuilder() =
-        member _.Yield(_: unit) : PipelineProcessorResult =
+        member _.Yield(_: unit) : Types.PipelineProcessorResult =
             {
                 Doc = None
                 Tag = None
@@ -1196,37 +1196,37 @@ module IngestTypesBuilders =
             }
 
         [<CustomOperation("doc")>]
-        member _.Doc(state: PipelineProcessorResult, value: IngestTypes.DocumentSimulation) =
+        member _.Doc(state: Types.PipelineProcessorResult, value: Types.DocumentSimulation) =
             { state with Doc = Some value }
 
         [<CustomOperation("tag")>]
-        member _.Tag(state: PipelineProcessorResult, value: string) =
+        member _.Tag(state: Types.PipelineProcessorResult, value: string) =
             { state with Tag = Some value }
 
         [<CustomOperation("processorType")>]
-        member _.ProcessorType(state: PipelineProcessorResult, value: string) =
+        member _.ProcessorType(state: Types.PipelineProcessorResult, value: string) =
             { state with ProcessorType = Some value }
 
         [<CustomOperation("status")>]
-        member _.Status(state: PipelineProcessorResult, value: IngestTypes.PipelineSimulationStatusOptions) =
+        member _.Status(state: Types.PipelineProcessorResult, value: Types.PipelineSimulationStatusOptions) =
             { state with Status = Some value }
 
         [<CustomOperation("description")>]
-        member _.Description(state: PipelineProcessorResult, value: string) =
+        member _.Description(state: Types.PipelineProcessorResult, value: string) =
             { state with Description = Some value }
 
         [<CustomOperation("ignoredError")>]
-        member _.IgnoredError(state: PipelineProcessorResult, value: CoreTypes.ErrorCause) =
+        member _.IgnoredError(state: Types.PipelineProcessorResult, value: Types.ErrorCause) =
             { state with IgnoredError = Some value }
 
         [<CustomOperation("error")>]
-        member _.Error(state: PipelineProcessorResult, value: CoreTypes.ErrorCause) =
+        member _.Error(state: Types.PipelineProcessorResult, value: Types.ErrorCause) =
             { state with Error = Some value }
 
     let pipelineProcessorResult = PipelineProcessorResultBuilder()
 
     type ProcessorBaseBuilder() =
-        member _.Yield(_: unit) : ProcessorBase =
+        member _.Yield(_: unit) : Types.ProcessorBase =
             {
                 Description = None
                 If = None
@@ -1236,169 +1236,169 @@ module IngestTypesBuilders =
             }
 
         [<CustomOperation("description")>]
-        member _.Description(state: ProcessorBase, value: string) =
+        member _.Description(state: Types.ProcessorBase, value: string) =
             { state with Description = Some value }
 
         [<CustomOperation("if'")>]
-        member _.If(state: ProcessorBase, value: CoreTypes.Script) =
+        member _.If(state: Types.ProcessorBase, value: Types.Script) =
             { state with If = Some value }
 
         [<CustomOperation("ignoreFailure")>]
-        member _.IgnoreFailure(state: ProcessorBase, value: bool) =
+        member _.IgnoreFailure(state: Types.ProcessorBase, value: bool) =
             { state with IgnoreFailure = Some value }
 
         [<CustomOperation("onFailure")>]
-        member _.OnFailure(state: ProcessorBase, value: IngestTypes.ProcessorContainer list) =
+        member _.OnFailure(state: Types.ProcessorBase, value: Types.ProcessorContainer list) =
             { state with OnFailure = Some value }
 
         [<CustomOperation("tag")>]
-        member _.Tag(state: ProcessorBase, value: string) =
+        member _.Tag(state: Types.ProcessorBase, value: string) =
             { state with Tag = Some value }
 
     let processorBase = ProcessorBaseBuilder()
 
     module Processor =
 
-        let append (value: IngestTypes.AppendProcessor) =
-            ProcessorContainer.Append value
+        let append (value: Types.AppendProcessor) =
+            Types.ProcessorContainer.Append value
 
-        let attachment (value: IngestTypes.AttachmentProcessor) =
-            ProcessorContainer.Attachment value
+        let attachment (value: Types.AttachmentProcessor) =
+            Types.ProcessorContainer.Attachment value
 
-        let bytes (value: IngestTypes.BytesProcessor) =
-            ProcessorContainer.Bytes value
+        let bytes (value: Types.BytesProcessor) =
+            Types.ProcessorContainer.Bytes value
 
-        let cef (value: IngestTypes.CefProcessor) =
-            ProcessorContainer.Cef value
+        let cef (value: Types.CefProcessor) =
+            Types.ProcessorContainer.Cef value
 
-        let circle (value: IngestTypes.CircleProcessor) =
-            ProcessorContainer.Circle value
+        let circle (value: Types.CircleProcessor) =
+            Types.ProcessorContainer.Circle value
 
-        let communityId (value: IngestTypes.CommunityIDProcessor) =
-            ProcessorContainer.CommunityId value
+        let communityId (value: Types.CommunityIDProcessor) =
+            Types.ProcessorContainer.CommunityId value
 
-        let convert (value: IngestTypes.ConvertProcessor) =
-            ProcessorContainer.Convert value
+        let convert (value: Types.ConvertProcessor) =
+            Types.ProcessorContainer.Convert value
 
-        let csv (value: IngestTypes.CsvProcessor) =
-            ProcessorContainer.Csv value
+        let csv (value: Types.CsvProcessor) =
+            Types.ProcessorContainer.Csv value
 
-        let date (value: IngestTypes.DateProcessor) =
-            ProcessorContainer.Date value
+        let date (value: Types.DateProcessor) =
+            Types.ProcessorContainer.Date value
 
-        let dateIndexName (value: IngestTypes.DateIndexNameProcessor) =
-            ProcessorContainer.DateIndexName value
+        let dateIndexName (value: Types.DateIndexNameProcessor) =
+            Types.ProcessorContainer.DateIndexName value
 
-        let dissect (value: IngestTypes.DissectProcessor) =
-            ProcessorContainer.Dissect value
+        let dissect (value: Types.DissectProcessor) =
+            Types.ProcessorContainer.Dissect value
 
-        let dotExpander (value: IngestTypes.DotExpanderProcessor) =
-            ProcessorContainer.DotExpander value
+        let dotExpander (value: Types.DotExpanderProcessor) =
+            Types.ProcessorContainer.DotExpander value
 
-        let drop (value: IngestTypes.DropProcessor) =
-            ProcessorContainer.Drop value
+        let drop (value: Types.DropProcessor) =
+            Types.ProcessorContainer.Drop value
 
-        let enrich (value: IngestTypes.EnrichProcessor) =
-            ProcessorContainer.Enrich value
+        let enrich (value: Types.EnrichProcessor) =
+            Types.ProcessorContainer.Enrich value
 
-        let fail (value: IngestTypes.FailProcessor) =
-            ProcessorContainer.Fail value
+        let fail (value: Types.FailProcessor) =
+            Types.ProcessorContainer.Fail value
 
-        let fingerprint (value: IngestTypes.FingerprintProcessor) =
-            ProcessorContainer.Fingerprint value
+        let fingerprint (value: Types.FingerprintProcessor) =
+            Types.ProcessorContainer.Fingerprint value
 
-        let foreach (value: IngestTypes.ForeachProcessor) =
-            ProcessorContainer.Foreach value
+        let foreach (value: Types.ForeachProcessor) =
+            Types.ProcessorContainer.Foreach value
 
-        let ipLocation (value: IngestTypes.IpLocationProcessor) =
-            ProcessorContainer.IpLocation value
+        let ipLocation (value: Types.IpLocationProcessor) =
+            Types.ProcessorContainer.IpLocation value
 
-        let geoGrid (value: IngestTypes.GeoGridProcessor) =
-            ProcessorContainer.GeoGrid value
+        let geoGrid (value: Types.GeoGridProcessor) =
+            Types.ProcessorContainer.GeoGrid value
 
-        let geoip (value: IngestTypes.GeoIpProcessor) =
-            ProcessorContainer.Geoip value
+        let geoip (value: Types.GeoIpProcessor) =
+            Types.ProcessorContainer.Geoip value
 
-        let grok (value: IngestTypes.GrokProcessor) =
-            ProcessorContainer.Grok value
+        let grok (value: Types.GrokProcessor) =
+            Types.ProcessorContainer.Grok value
 
-        let gsub (value: IngestTypes.GsubProcessor) =
-            ProcessorContainer.Gsub value
+        let gsub (value: Types.GsubProcessor) =
+            Types.ProcessorContainer.Gsub value
 
-        let htmlStrip (value: IngestTypes.HtmlStripProcessor) =
-            ProcessorContainer.HtmlStrip value
+        let htmlStrip (value: Types.HtmlStripProcessor) =
+            Types.ProcessorContainer.HtmlStrip value
 
-        let inference (value: IngestTypes.InferenceProcessor) =
-            ProcessorContainer.Inference value
+        let inference (value: Types.InferenceProcessor) =
+            Types.ProcessorContainer.Inference value
 
-        let join (value: IngestTypes.JoinProcessor) =
-            ProcessorContainer.Join value
+        let join (value: Types.JoinProcessor) =
+            Types.ProcessorContainer.Join value
 
-        let json (value: IngestTypes.JsonProcessor) =
-            ProcessorContainer.Json value
+        let json (value: Types.JsonProcessor) =
+            Types.ProcessorContainer.Json value
 
-        let kv (value: IngestTypes.KeyValueProcessor) =
-            ProcessorContainer.Kv value
+        let kv (value: Types.KeyValueProcessor) =
+            Types.ProcessorContainer.Kv value
 
-        let lowercase (value: IngestTypes.LowercaseProcessor) =
-            ProcessorContainer.Lowercase value
+        let lowercase (value: Types.LowercaseProcessor) =
+            Types.ProcessorContainer.Lowercase value
 
-        let networkDirection (value: IngestTypes.NetworkDirectionProcessor) =
-            ProcessorContainer.NetworkDirection value
+        let networkDirection (value: Types.NetworkDirectionProcessor) =
+            Types.ProcessorContainer.NetworkDirection value
 
-        let pipeline (value: IngestTypes.PipelineProcessor) =
-            ProcessorContainer.Pipeline value
+        let pipeline (value: Types.PipelineProcessor) =
+            Types.ProcessorContainer.Pipeline value
 
-        let redact (value: IngestTypes.RedactProcessor) =
-            ProcessorContainer.Redact value
+        let redact (value: Types.RedactProcessor) =
+            Types.ProcessorContainer.Redact value
 
-        let registeredDomain (value: IngestTypes.RegisteredDomainProcessor) =
-            ProcessorContainer.RegisteredDomain value
+        let registeredDomain (value: Types.RegisteredDomainProcessor) =
+            Types.ProcessorContainer.RegisteredDomain value
 
-        let remove (value: IngestTypes.RemoveProcessor) =
-            ProcessorContainer.Remove value
+        let remove (value: Types.RemoveProcessor) =
+            Types.ProcessorContainer.Remove value
 
-        let rename (value: IngestTypes.RenameProcessor) =
-            ProcessorContainer.Rename value
+        let rename (value: Types.RenameProcessor) =
+            Types.ProcessorContainer.Rename value
 
-        let reroute (value: IngestTypes.RerouteProcessor) =
-            ProcessorContainer.Reroute value
+        let reroute (value: Types.RerouteProcessor) =
+            Types.ProcessorContainer.Reroute value
 
-        let script (value: IngestTypes.ScriptProcessor) =
-            ProcessorContainer.Script value
+        let script (value: Types.ScriptProcessor) =
+            Types.ProcessorContainer.Script value
 
-        let set (value: IngestTypes.SetProcessor) =
-            ProcessorContainer.Set value
+        let set (value: Types.SetProcessor) =
+            Types.ProcessorContainer.Set value
 
-        let setSecurityUser (value: IngestTypes.SetSecurityUserProcessor) =
-            ProcessorContainer.SetSecurityUser value
+        let setSecurityUser (value: Types.SetSecurityUserProcessor) =
+            Types.ProcessorContainer.SetSecurityUser value
 
-        let sort (value: IngestTypes.SortProcessor) =
-            ProcessorContainer.Sort value
+        let sort (value: Types.SortProcessor) =
+            Types.ProcessorContainer.Sort value
 
-        let split (value: IngestTypes.SplitProcessor) =
-            ProcessorContainer.Split value
+        let split (value: Types.SplitProcessor) =
+            Types.ProcessorContainer.Split value
 
-        let terminate (value: IngestTypes.TerminateProcessor) =
-            ProcessorContainer.Terminate value
+        let terminate (value: Types.TerminateProcessor) =
+            Types.ProcessorContainer.Terminate value
 
-        let trim (value: IngestTypes.TrimProcessor) =
-            ProcessorContainer.Trim value
+        let trim (value: Types.TrimProcessor) =
+            Types.ProcessorContainer.Trim value
 
-        let uppercase (value: IngestTypes.UppercaseProcessor) =
-            ProcessorContainer.Uppercase value
+        let uppercase (value: Types.UppercaseProcessor) =
+            Types.ProcessorContainer.Uppercase value
 
-        let urldecode (value: IngestTypes.UrlDecodeProcessor) =
-            ProcessorContainer.Urldecode value
+        let urldecode (value: Types.UrlDecodeProcessor) =
+            Types.ProcessorContainer.Urldecode value
 
-        let uriParts (value: IngestTypes.UriPartsProcessor) =
-            ProcessorContainer.UriParts value
+        let uriParts (value: Types.UriPartsProcessor) =
+            Types.ProcessorContainer.UriParts value
 
-        let userAgent (value: IngestTypes.UserAgentProcessor) =
-            ProcessorContainer.UserAgent value
+        let userAgent (value: Types.UserAgentProcessor) =
+            Types.ProcessorContainer.UserAgent value
 
     type RedactProcessorBuilder() =
-        member _.Yield(_: unit) : RedactProcessor =
+        member _.Yield(_: unit) : Types.RedactProcessor =
             {
                 Field = Unchecked.defaultof<_>
                 Patterns = Unchecked.defaultof<_>
@@ -1411,41 +1411,41 @@ module IngestTypesBuilders =
             }
 
         [<CustomOperation("field")>]
-        member _.Field(state: RedactProcessor, value: CoreTypes.Field) =
+        member _.Field(state: Types.RedactProcessor, value: Types.Field) =
             { state with Field = value }
 
         [<CustomOperation("patterns")>]
-        member _.Patterns(state: RedactProcessor, value: CoreTypes.GrokPattern list) =
+        member _.Patterns(state: Types.RedactProcessor, value: Types.GrokPattern list) =
             { state with Patterns = value }
 
         [<CustomOperation("patternDefinitions")>]
-        member _.PatternDefinitions(state: RedactProcessor, value: Map<string, string>) =
+        member _.PatternDefinitions(state: Types.RedactProcessor, value: Map<string, string>) =
             { state with PatternDefinitions = Some value }
 
         [<CustomOperation("prefix")>]
-        member _.Prefix(state: RedactProcessor, value: string) =
+        member _.Prefix(state: Types.RedactProcessor, value: string) =
             { state with Prefix = Some value }
 
         [<CustomOperation("suffix")>]
-        member _.Suffix(state: RedactProcessor, value: string) =
+        member _.Suffix(state: Types.RedactProcessor, value: string) =
             { state with Suffix = Some value }
 
         [<CustomOperation("ignoreMissing")>]
-        member _.IgnoreMissing(state: RedactProcessor, value: bool) =
+        member _.IgnoreMissing(state: Types.RedactProcessor, value: bool) =
             { state with IgnoreMissing = Some value }
 
         [<CustomOperation("skipIfUnlicensed")>]
-        member _.SkipIfUnlicensed(state: RedactProcessor, value: bool) =
+        member _.SkipIfUnlicensed(state: Types.RedactProcessor, value: bool) =
             { state with SkipIfUnlicensed = Some value }
 
         [<CustomOperation("traceRedact")>]
-        member _.TraceRedact(state: RedactProcessor, value: bool) =
+        member _.TraceRedact(state: Types.RedactProcessor, value: bool) =
             { state with TraceRedact = Some value }
 
     let redactProcessor = RedactProcessorBuilder()
 
     type RegisteredDomainProcessorBuilder() =
-        member _.Yield(_: unit) : RegisteredDomainProcessor =
+        member _.Yield(_: unit) : Types.RegisteredDomainProcessor =
             {
                 Field = Unchecked.defaultof<_>
                 TargetField = None
@@ -1453,21 +1453,21 @@ module IngestTypesBuilders =
             }
 
         [<CustomOperation("field")>]
-        member _.Field(state: RegisteredDomainProcessor, value: CoreTypes.Field) =
+        member _.Field(state: Types.RegisteredDomainProcessor, value: Types.Field) =
             { state with Field = value }
 
         [<CustomOperation("targetField")>]
-        member _.TargetField(state: RegisteredDomainProcessor, value: CoreTypes.Field) =
+        member _.TargetField(state: Types.RegisteredDomainProcessor, value: Types.Field) =
             { state with TargetField = Some value }
 
         [<CustomOperation("ignoreMissing")>]
-        member _.IgnoreMissing(state: RegisteredDomainProcessor, value: bool) =
+        member _.IgnoreMissing(state: Types.RegisteredDomainProcessor, value: bool) =
             { state with IgnoreMissing = Some value }
 
     let registeredDomainProcessor = RegisteredDomainProcessorBuilder()
 
     type RemoveProcessorBuilder() =
-        member _.Yield(_: unit) : RemoveProcessor =
+        member _.Yield(_: unit) : Types.RemoveProcessor =
             {
                 Field = Unchecked.defaultof<_>
                 Keep = None
@@ -1475,21 +1475,21 @@ module IngestTypesBuilders =
             }
 
         [<CustomOperation("field")>]
-        member _.Field(state: RemoveProcessor, value: CoreTypes.Fields) =
+        member _.Field(state: Types.RemoveProcessor, value: Types.Fields) =
             { state with Field = value }
 
         [<CustomOperation("keep")>]
-        member _.Keep(state: RemoveProcessor, value: CoreTypes.Fields) =
+        member _.Keep(state: Types.RemoveProcessor, value: Types.Fields) =
             { state with Keep = Some value }
 
         [<CustomOperation("ignoreMissing")>]
-        member _.IgnoreMissing(state: RemoveProcessor, value: bool) =
+        member _.IgnoreMissing(state: Types.RemoveProcessor, value: bool) =
             { state with IgnoreMissing = Some value }
 
     let removeProcessor = RemoveProcessorBuilder()
 
     type RerouteProcessorBuilder() =
-        member _.Yield(_: unit) : RerouteProcessor =
+        member _.Yield(_: unit) : Types.RerouteProcessor =
             {
                 Destination = None
                 Dataset = None
@@ -1497,21 +1497,21 @@ module IngestTypesBuilders =
             }
 
         [<CustomOperation("destination")>]
-        member _.Destination(state: RerouteProcessor, value: string) =
+        member _.Destination(state: Types.RerouteProcessor, value: string) =
             { state with Destination = Some value }
 
         [<CustomOperation("dataset")>]
-        member _.Dataset(state: RerouteProcessor, value: System.Text.Json.JsonElement) =
+        member _.Dataset(state: Types.RerouteProcessor, value: System.Text.Json.JsonElement) =
             { state with Dataset = Some value }
 
         [<CustomOperation("namespace'")>]
-        member _.Namespace(state: RerouteProcessor, value: System.Text.Json.JsonElement) =
+        member _.Namespace(state: Types.RerouteProcessor, value: System.Text.Json.JsonElement) =
             { state with Namespace = Some value }
 
     let rerouteProcessor = RerouteProcessorBuilder()
 
     type ScriptProcessorBuilder() =
-        member _.Yield(_: unit) : ScriptProcessor =
+        member _.Yield(_: unit) : Types.ScriptProcessor =
             {
                 Id = None
                 Lang = None
@@ -1520,25 +1520,25 @@ module IngestTypesBuilders =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: ScriptProcessor, value: CoreTypes.Id) =
+        member _.Id(state: Types.ScriptProcessor, value: Types.Id) =
             { state with Id = Some value }
 
         [<CustomOperation("lang")>]
-        member _.Lang(state: ScriptProcessor, value: CoreTypes.ScriptLanguage) =
+        member _.Lang(state: Types.ScriptProcessor, value: Types.ScriptLanguage) =
             { state with Lang = Some value }
 
         [<CustomOperation("params")>]
-        member _.Params(state: ScriptProcessor, value: Map<string, System.Text.Json.JsonElement>) =
+        member _.Params(state: Types.ScriptProcessor, value: Map<string, System.Text.Json.JsonElement>) =
             { state with Params = Some value }
 
         [<CustomOperation("source")>]
-        member _.Source(state: ScriptProcessor, value: CoreTypes.ScriptSource) =
+        member _.Source(state: Types.ScriptProcessor, value: Types.ScriptSource) =
             { state with Source = Some value }
 
     let scriptProcessor = ScriptProcessorBuilder()
 
     type SetProcessorBuilder() =
-        member _.Yield(_: unit) : SetProcessor =
+        member _.Yield(_: unit) : Types.SetProcessor =
             {
                 CopyFrom = None
                 Field = Unchecked.defaultof<_>
@@ -1549,33 +1549,33 @@ module IngestTypesBuilders =
             }
 
         [<CustomOperation("copyFrom")>]
-        member _.CopyFrom(state: SetProcessor, value: CoreTypes.Field) =
+        member _.CopyFrom(state: Types.SetProcessor, value: Types.Field) =
             { state with CopyFrom = Some value }
 
         [<CustomOperation("field")>]
-        member _.Field(state: SetProcessor, value: CoreTypes.Field) =
+        member _.Field(state: Types.SetProcessor, value: Types.Field) =
             { state with Field = value }
 
         [<CustomOperation("ignoreEmptyValue")>]
-        member _.IgnoreEmptyValue(state: SetProcessor, value: bool) =
+        member _.IgnoreEmptyValue(state: Types.SetProcessor, value: bool) =
             { state with IgnoreEmptyValue = Some value }
 
         [<CustomOperation("mediaType")>]
-        member _.MediaType(state: SetProcessor, value: string) =
+        member _.MediaType(state: Types.SetProcessor, value: string) =
             { state with MediaType = Some value }
 
         [<CustomOperation("override'")>]
-        member _.Override(state: SetProcessor, value: bool) =
+        member _.Override(state: Types.SetProcessor, value: bool) =
             { state with Override = Some value }
 
         [<CustomOperation("value")>]
-        member _.Value(state: SetProcessor, value: System.Text.Json.JsonElement) =
+        member _.Value(state: Types.SetProcessor, value: System.Text.Json.JsonElement) =
             { state with Value = Some value }
 
     let setProcessor = SetProcessorBuilder()
 
     type SimulateDocumentResultBuilder() =
-        member _.Yield(_: unit) : SimulateDocumentResult =
+        member _.Yield(_: unit) : Types.SimulateDocumentResult =
             {
                 Doc = None
                 Error = None
@@ -1583,21 +1583,21 @@ module IngestTypesBuilders =
             }
 
         [<CustomOperation("doc")>]
-        member _.Doc(state: SimulateDocumentResult, value: IngestTypes.DocumentSimulation) =
+        member _.Doc(state: Types.SimulateDocumentResult, value: Types.DocumentSimulation) =
             { state with Doc = Some value }
 
         [<CustomOperation("error")>]
-        member _.Error(state: SimulateDocumentResult, value: CoreTypes.ErrorCause) =
+        member _.Error(state: Types.SimulateDocumentResult, value: Types.ErrorCause) =
             { state with Error = Some value }
 
         [<CustomOperation("processorResults")>]
-        member _.ProcessorResults(state: SimulateDocumentResult, value: IngestTypes.PipelineProcessorResult list) =
+        member _.ProcessorResults(state: Types.SimulateDocumentResult, value: Types.PipelineProcessorResult list) =
             { state with ProcessorResults = Some value }
 
     let simulateDocumentResult = SimulateDocumentResultBuilder()
 
     type SortProcessorBuilder() =
-        member _.Yield(_: unit) : SortProcessor =
+        member _.Yield(_: unit) : Types.SortProcessor =
             {
                 Field = Unchecked.defaultof<_>
                 Order = None
@@ -1605,21 +1605,21 @@ module IngestTypesBuilders =
             }
 
         [<CustomOperation("field")>]
-        member _.Field(state: SortProcessor, value: CoreTypes.Field) =
+        member _.Field(state: Types.SortProcessor, value: Types.Field) =
             { state with Field = value }
 
         [<CustomOperation("order")>]
-        member _.Order(state: SortProcessor, value: CoreTypes.SortOrder) =
+        member _.Order(state: Types.SortProcessor, value: Types.SortOrder) =
             { state with Order = Some value }
 
         [<CustomOperation("targetField")>]
-        member _.TargetField(state: SortProcessor, value: CoreTypes.Field) =
+        member _.TargetField(state: Types.SortProcessor, value: Types.Field) =
             { state with TargetField = Some value }
 
     let sortProcessor = SortProcessorBuilder()
 
     type SplitProcessorBuilder() =
-        member _.Yield(_: unit) : SplitProcessor =
+        member _.Yield(_: unit) : Types.SplitProcessor =
             {
                 Field = Unchecked.defaultof<_>
                 IgnoreMissing = None
@@ -1629,29 +1629,29 @@ module IngestTypesBuilders =
             }
 
         [<CustomOperation("field")>]
-        member _.Field(state: SplitProcessor, value: CoreTypes.Field) =
+        member _.Field(state: Types.SplitProcessor, value: Types.Field) =
             { state with Field = value }
 
         [<CustomOperation("ignoreMissing")>]
-        member _.IgnoreMissing(state: SplitProcessor, value: bool) =
+        member _.IgnoreMissing(state: Types.SplitProcessor, value: bool) =
             { state with IgnoreMissing = Some value }
 
         [<CustomOperation("preserveTrailing")>]
-        member _.PreserveTrailing(state: SplitProcessor, value: bool) =
+        member _.PreserveTrailing(state: Types.SplitProcessor, value: bool) =
             { state with PreserveTrailing = Some value }
 
         [<CustomOperation("separator")>]
-        member _.Separator(state: SplitProcessor, value: string) =
+        member _.Separator(state: Types.SplitProcessor, value: string) =
             { state with Separator = value }
 
         [<CustomOperation("targetField")>]
-        member _.TargetField(state: SplitProcessor, value: CoreTypes.Field) =
+        member _.TargetField(state: Types.SplitProcessor, value: Types.Field) =
             { state with TargetField = Some value }
 
     let splitProcessor = SplitProcessorBuilder()
 
     type TrimProcessorBuilder() =
-        member _.Yield(_: unit) : TrimProcessor =
+        member _.Yield(_: unit) : Types.TrimProcessor =
             {
                 Field = Unchecked.defaultof<_>
                 IgnoreMissing = None
@@ -1659,21 +1659,21 @@ module IngestTypesBuilders =
             }
 
         [<CustomOperation("field")>]
-        member _.Field(state: TrimProcessor, value: CoreTypes.Field) =
+        member _.Field(state: Types.TrimProcessor, value: Types.Field) =
             { state with Field = value }
 
         [<CustomOperation("ignoreMissing")>]
-        member _.IgnoreMissing(state: TrimProcessor, value: bool) =
+        member _.IgnoreMissing(state: Types.TrimProcessor, value: bool) =
             { state with IgnoreMissing = Some value }
 
         [<CustomOperation("targetField")>]
-        member _.TargetField(state: TrimProcessor, value: CoreTypes.Field) =
+        member _.TargetField(state: Types.TrimProcessor, value: Types.Field) =
             { state with TargetField = Some value }
 
     let trimProcessor = TrimProcessorBuilder()
 
     type UppercaseProcessorBuilder() =
-        member _.Yield(_: unit) : UppercaseProcessor =
+        member _.Yield(_: unit) : Types.UppercaseProcessor =
             {
                 Field = Unchecked.defaultof<_>
                 IgnoreMissing = None
@@ -1681,21 +1681,21 @@ module IngestTypesBuilders =
             }
 
         [<CustomOperation("field")>]
-        member _.Field(state: UppercaseProcessor, value: CoreTypes.Field) =
+        member _.Field(state: Types.UppercaseProcessor, value: Types.Field) =
             { state with Field = value }
 
         [<CustomOperation("ignoreMissing")>]
-        member _.IgnoreMissing(state: UppercaseProcessor, value: bool) =
+        member _.IgnoreMissing(state: Types.UppercaseProcessor, value: bool) =
             { state with IgnoreMissing = Some value }
 
         [<CustomOperation("targetField")>]
-        member _.TargetField(state: UppercaseProcessor, value: CoreTypes.Field) =
+        member _.TargetField(state: Types.UppercaseProcessor, value: Types.Field) =
             { state with TargetField = Some value }
 
     let uppercaseProcessor = UppercaseProcessorBuilder()
 
     type UriPartsProcessorBuilder() =
-        member _.Yield(_: unit) : UriPartsProcessor =
+        member _.Yield(_: unit) : Types.UriPartsProcessor =
             {
                 Field = Unchecked.defaultof<_>
                 IgnoreMissing = None
@@ -1705,29 +1705,29 @@ module IngestTypesBuilders =
             }
 
         [<CustomOperation("field")>]
-        member _.Field(state: UriPartsProcessor, value: CoreTypes.Field) =
+        member _.Field(state: Types.UriPartsProcessor, value: Types.Field) =
             { state with Field = value }
 
         [<CustomOperation("ignoreMissing")>]
-        member _.IgnoreMissing(state: UriPartsProcessor, value: bool) =
+        member _.IgnoreMissing(state: Types.UriPartsProcessor, value: bool) =
             { state with IgnoreMissing = Some value }
 
         [<CustomOperation("keepOriginal")>]
-        member _.KeepOriginal(state: UriPartsProcessor, value: bool) =
+        member _.KeepOriginal(state: Types.UriPartsProcessor, value: bool) =
             { state with KeepOriginal = Some value }
 
         [<CustomOperation("removeIfSuccessful")>]
-        member _.RemoveIfSuccessful(state: UriPartsProcessor, value: bool) =
+        member _.RemoveIfSuccessful(state: Types.UriPartsProcessor, value: bool) =
             { state with RemoveIfSuccessful = Some value }
 
         [<CustomOperation("targetField")>]
-        member _.TargetField(state: UriPartsProcessor, value: CoreTypes.Field) =
+        member _.TargetField(state: Types.UriPartsProcessor, value: Types.Field) =
             { state with TargetField = Some value }
 
     let uriPartsProcessor = UriPartsProcessorBuilder()
 
     type UrlDecodeProcessorBuilder() =
-        member _.Yield(_: unit) : UrlDecodeProcessor =
+        member _.Yield(_: unit) : Types.UrlDecodeProcessor =
             {
                 Field = Unchecked.defaultof<_>
                 IgnoreMissing = None
@@ -1735,21 +1735,21 @@ module IngestTypesBuilders =
             }
 
         [<CustomOperation("field")>]
-        member _.Field(state: UrlDecodeProcessor, value: CoreTypes.Field) =
+        member _.Field(state: Types.UrlDecodeProcessor, value: Types.Field) =
             { state with Field = value }
 
         [<CustomOperation("ignoreMissing")>]
-        member _.IgnoreMissing(state: UrlDecodeProcessor, value: bool) =
+        member _.IgnoreMissing(state: Types.UrlDecodeProcessor, value: bool) =
             { state with IgnoreMissing = Some value }
 
         [<CustomOperation("targetField")>]
-        member _.TargetField(state: UrlDecodeProcessor, value: CoreTypes.Field) =
+        member _.TargetField(state: Types.UrlDecodeProcessor, value: Types.Field) =
             { state with TargetField = Some value }
 
     let urlDecodeProcessor = UrlDecodeProcessorBuilder()
 
     type UserAgentProcessorBuilder() =
-        member _.Yield(_: unit) : UserAgentProcessor =
+        member _.Yield(_: unit) : Types.UserAgentProcessor =
             {
                 Field = Unchecked.defaultof<_>
                 IgnoreMissing = None
@@ -1760,27 +1760,27 @@ module IngestTypesBuilders =
             }
 
         [<CustomOperation("field")>]
-        member _.Field(state: UserAgentProcessor, value: CoreTypes.Field) =
+        member _.Field(state: Types.UserAgentProcessor, value: Types.Field) =
             { state with Field = value }
 
         [<CustomOperation("ignoreMissing")>]
-        member _.IgnoreMissing(state: UserAgentProcessor, value: bool) =
+        member _.IgnoreMissing(state: Types.UserAgentProcessor, value: bool) =
             { state with IgnoreMissing = Some value }
 
         [<CustomOperation("regexFile")>]
-        member _.RegexFile(state: UserAgentProcessor, value: string) =
+        member _.RegexFile(state: Types.UserAgentProcessor, value: string) =
             { state with RegexFile = Some value }
 
         [<CustomOperation("targetField")>]
-        member _.TargetField(state: UserAgentProcessor, value: CoreTypes.Field) =
+        member _.TargetField(state: Types.UserAgentProcessor, value: Types.Field) =
             { state with TargetField = Some value }
 
         [<CustomOperation("properties")>]
-        member _.Properties(state: UserAgentProcessor, value: IngestTypes.UserAgentProperty list) =
+        member _.Properties(state: Types.UserAgentProcessor, value: Types.UserAgentProperty list) =
             { state with Properties = Some value }
 
         [<CustomOperation("extractDeviceType")>]
-        member _.ExtractDeviceType(state: UserAgentProcessor, value: bool) =
+        member _.ExtractDeviceType(state: Types.UserAgentProcessor, value: bool) =
             { state with ExtractDeviceType = Some value }
 
     let userAgentProcessor = UserAgentProcessorBuilder()

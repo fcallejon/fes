@@ -7,15 +7,16 @@ open System
 open System.Text.Json
 open System.Text.Json.Serialization
 open Fes
+open Fes.Generated
 
 [<AutoOpen>]
 module TransformOperations =
 
     type TransformDeleteTransformRequest = {
-        TransformId: CoreTypes.Id
+        TransformId: Types.Id
         Force: bool option
         DeleteDestIndex: bool option
-        Timeout: CoreTypes.Duration option
+        Timeout: Types.Duration option
     }
 
         with
@@ -38,7 +39,7 @@ module TransformOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type TransformDeleteTransformResponse = CoreTypes.AcknowledgedResponseBase
+    type TransformDeleteTransformResponse = Types.AcknowledgedResponseBase
 
     type TransformDeleteTransformRequestBuilder() =
         member _.Yield(_: unit) : TransformDeleteTransformRequest =
@@ -50,7 +51,7 @@ module TransformOperations =
             }
 
         [<CustomOperation("transformId")>]
-        member _.TransformId(state: TransformDeleteTransformRequest, value: CoreTypes.Id) =
+        member _.TransformId(state: TransformDeleteTransformRequest, value: Types.Id) =
             { state with TransformId = value }
 
         [<CustomOperation("force")>]
@@ -62,7 +63,7 @@ module TransformOperations =
             { state with DeleteDestIndex = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: TransformDeleteTransformRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: TransformDeleteTransformRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
     let transformDeleteTransformRequest = TransformDeleteTransformRequestBuilder()
@@ -72,7 +73,7 @@ module TransformOperations =
             { req with Force = Some value }
         let withDeleteDestIndex (value: bool) (req: TransformDeleteTransformRequest) =
             { req with DeleteDestIndex = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: TransformDeleteTransformRequest) =
+        let withTimeout (value: Types.Duration) (req: TransformDeleteTransformRequest) =
             { req with Timeout = Some value }
 
     type TransformGetNodeStatsRequest = | TransformGetNodeStatsRequest
@@ -88,7 +89,7 @@ module TransformOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type TransformGetNodeStatsResponse = TransformGetNodeStats.TransformNodeFullStats
+    type TransformGetNodeStatsResponse = Types.TransformNodeFullStats
 
     type TransformGetNodeStatsRequestBuilder() =
         member _.Yield(_: unit) : TransformGetNodeStatsRequest =
@@ -98,10 +99,10 @@ module TransformOperations =
     let transformGetNodeStatsRequest = TransformGetNodeStatsRequestBuilder()
 
     type TransformGetTransformRequest = {
-        TransformId: CoreTypes.Names
+        TransformId: Types.Names
         AllowNoMatch: bool option
-        From: CoreTypes.Integer option
-        Size: CoreTypes.Integer option
+        From: Types.Integer option
+        Size: Types.Integer option
         ExcludeGenerated: bool option
     }
 
@@ -139,7 +140,7 @@ module TransformOperations =
             }
 
         [<CustomOperation("transformId")>]
-        member _.TransformId(state: TransformGetTransformRequest, value: CoreTypes.Names) =
+        member _.TransformId(state: TransformGetTransformRequest, value: Types.Names) =
             { state with TransformId = value }
 
         [<CustomOperation("allowNoMatch")>]
@@ -147,11 +148,11 @@ module TransformOperations =
             { state with AllowNoMatch = Some value }
 
         [<CustomOperation("from")>]
-        member _.From(state: TransformGetTransformRequest, value: CoreTypes.Integer) =
+        member _.From(state: TransformGetTransformRequest, value: Types.Integer) =
             { state with From = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: TransformGetTransformRequest, value: CoreTypes.Integer) =
+        member _.Size(state: TransformGetTransformRequest, value: Types.Integer) =
             { state with Size = Some value }
 
         [<CustomOperation("excludeGenerated")>]
@@ -163,19 +164,19 @@ module TransformOperations =
     module GetTransform =
         let withAllowNoMatch (value: bool) (req: TransformGetTransformRequest) =
             { req with AllowNoMatch = Some value }
-        let withFrom (value: CoreTypes.Integer) (req: TransformGetTransformRequest) =
+        let withFrom (value: Types.Integer) (req: TransformGetTransformRequest) =
             { req with From = Some value }
-        let withSize (value: CoreTypes.Integer) (req: TransformGetTransformRequest) =
+        let withSize (value: Types.Integer) (req: TransformGetTransformRequest) =
             { req with Size = Some value }
         let withExcludeGenerated (value: bool) (req: TransformGetTransformRequest) =
             { req with ExcludeGenerated = Some value }
 
     type TransformGetTransformStatsRequest = {
-        TransformId: CoreTypes.Names
+        TransformId: Types.Names
         AllowNoMatch: bool option
-        From: CoreTypes.Long option
-        Size: CoreTypes.Long option
-        Timeout: CoreTypes.Duration option
+        From: Types.Long option
+        Size: Types.Long option
+        Timeout: Types.Duration option
     }
 
         with
@@ -212,7 +213,7 @@ module TransformOperations =
             }
 
         [<CustomOperation("transformId")>]
-        member _.TransformId(state: TransformGetTransformStatsRequest, value: CoreTypes.Names) =
+        member _.TransformId(state: TransformGetTransformStatsRequest, value: Types.Names) =
             { state with TransformId = value }
 
         [<CustomOperation("allowNoMatch")>]
@@ -220,15 +221,15 @@ module TransformOperations =
             { state with AllowNoMatch = Some value }
 
         [<CustomOperation("from")>]
-        member _.From(state: TransformGetTransformStatsRequest, value: CoreTypes.Long) =
+        member _.From(state: TransformGetTransformStatsRequest, value: Types.Long) =
             { state with From = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: TransformGetTransformStatsRequest, value: CoreTypes.Long) =
+        member _.Size(state: TransformGetTransformStatsRequest, value: Types.Long) =
             { state with Size = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: TransformGetTransformStatsRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: TransformGetTransformStatsRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
     let transformGetTransformStatsRequest = TransformGetTransformStatsRequestBuilder()
@@ -236,25 +237,25 @@ module TransformOperations =
     module GetTransformStats =
         let withAllowNoMatch (value: bool) (req: TransformGetTransformStatsRequest) =
             { req with AllowNoMatch = Some value }
-        let withFrom (value: CoreTypes.Long) (req: TransformGetTransformStatsRequest) =
+        let withFrom (value: Types.Long) (req: TransformGetTransformStatsRequest) =
             { req with From = Some value }
-        let withSize (value: CoreTypes.Long) (req: TransformGetTransformStatsRequest) =
+        let withSize (value: Types.Long) (req: TransformGetTransformStatsRequest) =
             { req with Size = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: TransformGetTransformStatsRequest) =
+        let withTimeout (value: Types.Duration) (req: TransformGetTransformStatsRequest) =
             { req with Timeout = Some value }
 
     type TransformPreviewTransformRequest = {
-        TransformId: CoreTypes.Id
-        Timeout: CoreTypes.Duration option
-        Dest: TransformTypes.Destination option
+        TransformId: Types.Id
+        Timeout: Types.Duration option
+        Dest: Types.TransformTypesDestination option
         Description: string option
-        Frequency: CoreTypes.Duration option
-        Pivot: TransformTypes.Pivot option
-        Source: TransformTypes.Source option
-        Settings: TransformTypes.Settings option
-        Sync: TransformTypes.SyncContainer option
-        RetentionPolicy: TransformTypes.RetentionPolicyContainer option
-        Latest: TransformTypes.Latest option
+        Frequency: Types.Duration option
+        Pivot: Types.Pivot option
+        Source: Types.TransformTypesSource option
+        Settings: Types.Settings option
+        Sync: Types.SyncContainer option
+        RetentionPolicy: Types.RetentionPolicyContainer option
+        Latest: Types.Latest option
     }
 
         with
@@ -295,15 +296,15 @@ module TransformOperations =
             }
 
         [<CustomOperation("transformId")>]
-        member _.TransformId(state: TransformPreviewTransformRequest, value: CoreTypes.Id) =
+        member _.TransformId(state: TransformPreviewTransformRequest, value: Types.Id) =
             { state with TransformId = value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: TransformPreviewTransformRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: TransformPreviewTransformRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("dest")>]
-        member _.Dest(state: TransformPreviewTransformRequest, value: TransformTypes.Destination) =
+        member _.Dest(state: TransformPreviewTransformRequest, value: Types.TransformTypesDestination) =
             { state with Dest = Some value }
 
         [<CustomOperation("description")>]
@@ -311,71 +312,71 @@ module TransformOperations =
             { state with Description = Some value }
 
         [<CustomOperation("frequency")>]
-        member _.Frequency(state: TransformPreviewTransformRequest, value: CoreTypes.Duration) =
+        member _.Frequency(state: TransformPreviewTransformRequest, value: Types.Duration) =
             { state with Frequency = Some value }
 
         [<CustomOperation("pivot")>]
-        member _.Pivot(state: TransformPreviewTransformRequest, value: TransformTypes.Pivot) =
+        member _.Pivot(state: TransformPreviewTransformRequest, value: Types.Pivot) =
             { state with Pivot = Some value }
 
         [<CustomOperation("source")>]
-        member _.Source(state: TransformPreviewTransformRequest, value: TransformTypes.Source) =
+        member _.Source(state: TransformPreviewTransformRequest, value: Types.TransformTypesSource) =
             { state with Source = Some value }
 
         [<CustomOperation("settings")>]
-        member _.Settings(state: TransformPreviewTransformRequest, value: TransformTypes.Settings) =
+        member _.Settings(state: TransformPreviewTransformRequest, value: Types.Settings) =
             { state with Settings = Some value }
 
         [<CustomOperation("sync")>]
-        member _.Sync(state: TransformPreviewTransformRequest, value: TransformTypes.SyncContainer) =
+        member _.Sync(state: TransformPreviewTransformRequest, value: Types.SyncContainer) =
             { state with Sync = Some value }
 
         [<CustomOperation("retentionPolicy")>]
-        member _.RetentionPolicy(state: TransformPreviewTransformRequest, value: TransformTypes.RetentionPolicyContainer) =
+        member _.RetentionPolicy(state: TransformPreviewTransformRequest, value: Types.RetentionPolicyContainer) =
             { state with RetentionPolicy = Some value }
 
         [<CustomOperation("latest")>]
-        member _.Latest(state: TransformPreviewTransformRequest, value: TransformTypes.Latest) =
+        member _.Latest(state: TransformPreviewTransformRequest, value: Types.Latest) =
             { state with Latest = Some value }
 
     let transformPreviewTransformRequest = TransformPreviewTransformRequestBuilder()
 
     module PreviewTransform =
-        let withTimeout (value: CoreTypes.Duration) (req: TransformPreviewTransformRequest) =
+        let withTimeout (value: Types.Duration) (req: TransformPreviewTransformRequest) =
             { req with Timeout = Some value }
-        let withDest (value: TransformTypes.Destination) (req: TransformPreviewTransformRequest) =
+        let withDest (value: Types.TransformTypesDestination) (req: TransformPreviewTransformRequest) =
             { req with Dest = Some value }
         let withDescription (value: string) (req: TransformPreviewTransformRequest) =
             { req with Description = Some value }
-        let withFrequency (value: CoreTypes.Duration) (req: TransformPreviewTransformRequest) =
+        let withFrequency (value: Types.Duration) (req: TransformPreviewTransformRequest) =
             { req with Frequency = Some value }
-        let withPivot (value: TransformTypes.Pivot) (req: TransformPreviewTransformRequest) =
+        let withPivot (value: Types.Pivot) (req: TransformPreviewTransformRequest) =
             { req with Pivot = Some value }
-        let withSource (value: TransformTypes.Source) (req: TransformPreviewTransformRequest) =
+        let withSource (value: Types.TransformTypesSource) (req: TransformPreviewTransformRequest) =
             { req with Source = Some value }
-        let withSettings (value: TransformTypes.Settings) (req: TransformPreviewTransformRequest) =
+        let withSettings (value: Types.Settings) (req: TransformPreviewTransformRequest) =
             { req with Settings = Some value }
-        let withSync (value: TransformTypes.SyncContainer) (req: TransformPreviewTransformRequest) =
+        let withSync (value: Types.SyncContainer) (req: TransformPreviewTransformRequest) =
             { req with Sync = Some value }
-        let withRetentionPolicy (value: TransformTypes.RetentionPolicyContainer) (req: TransformPreviewTransformRequest) =
+        let withRetentionPolicy (value: Types.RetentionPolicyContainer) (req: TransformPreviewTransformRequest) =
             { req with RetentionPolicy = Some value }
-        let withLatest (value: TransformTypes.Latest) (req: TransformPreviewTransformRequest) =
+        let withLatest (value: Types.Latest) (req: TransformPreviewTransformRequest) =
             { req with Latest = Some value }
 
     type TransformPutTransformRequest = {
-        TransformId: CoreTypes.Id
+        TransformId: Types.Id
         DeferValidation: bool option
-        Timeout: CoreTypes.Duration option
-        Dest: TransformTypes.Destination
+        Timeout: Types.Duration option
+        Dest: Types.TransformTypesDestination
         Description: string option
-        Frequency: CoreTypes.Duration option
-        Latest: TransformTypes.Latest option
-        Meta: CoreTypes.Metadata option
-        Pivot: TransformTypes.Pivot option
-        RetentionPolicy: TransformTypes.RetentionPolicyContainer option
-        Settings: TransformTypes.Settings option
-        Source: TransformTypes.Source
-        Sync: TransformTypes.SyncContainer option
+        Frequency: Types.Duration option
+        Latest: Types.Latest option
+        Meta: Types.Metadata option
+        Pivot: Types.Pivot option
+        RetentionPolicy: Types.RetentionPolicyContainer option
+        Settings: Types.Settings option
+        Source: Types.TransformTypesSource
+        Sync: Types.SyncContainer option
     }
 
         with
@@ -398,7 +399,7 @@ module TransformOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type TransformPutTransformResponse = CoreTypes.AcknowledgedResponseBase
+    type TransformPutTransformResponse = Types.AcknowledgedResponseBase
 
     type TransformPutTransformRequestBuilder() =
         member _.Yield(_: unit) : TransformPutTransformRequest =
@@ -419,7 +420,7 @@ module TransformOperations =
             }
 
         [<CustomOperation("transformId")>]
-        member _.TransformId(state: TransformPutTransformRequest, value: CoreTypes.Id) =
+        member _.TransformId(state: TransformPutTransformRequest, value: Types.Id) =
             { state with TransformId = value }
 
         [<CustomOperation("deferValidation")>]
@@ -427,11 +428,11 @@ module TransformOperations =
             { state with DeferValidation = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: TransformPutTransformRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: TransformPutTransformRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("dest")>]
-        member _.Dest(state: TransformPutTransformRequest, value: TransformTypes.Destination) =
+        member _.Dest(state: TransformPutTransformRequest, value: Types.TransformTypesDestination) =
             { state with Dest = value }
 
         [<CustomOperation("description")>]
@@ -439,35 +440,35 @@ module TransformOperations =
             { state with Description = Some value }
 
         [<CustomOperation("frequency")>]
-        member _.Frequency(state: TransformPutTransformRequest, value: CoreTypes.Duration) =
+        member _.Frequency(state: TransformPutTransformRequest, value: Types.Duration) =
             { state with Frequency = Some value }
 
         [<CustomOperation("latest")>]
-        member _.Latest(state: TransformPutTransformRequest, value: TransformTypes.Latest) =
+        member _.Latest(state: TransformPutTransformRequest, value: Types.Latest) =
             { state with Latest = Some value }
 
         [<CustomOperation("meta")>]
-        member _.Meta(state: TransformPutTransformRequest, value: CoreTypes.Metadata) =
+        member _.Meta(state: TransformPutTransformRequest, value: Types.Metadata) =
             { state with Meta = Some value }
 
         [<CustomOperation("pivot")>]
-        member _.Pivot(state: TransformPutTransformRequest, value: TransformTypes.Pivot) =
+        member _.Pivot(state: TransformPutTransformRequest, value: Types.Pivot) =
             { state with Pivot = Some value }
 
         [<CustomOperation("retentionPolicy")>]
-        member _.RetentionPolicy(state: TransformPutTransformRequest, value: TransformTypes.RetentionPolicyContainer) =
+        member _.RetentionPolicy(state: TransformPutTransformRequest, value: Types.RetentionPolicyContainer) =
             { state with RetentionPolicy = Some value }
 
         [<CustomOperation("settings")>]
-        member _.Settings(state: TransformPutTransformRequest, value: TransformTypes.Settings) =
+        member _.Settings(state: TransformPutTransformRequest, value: Types.Settings) =
             { state with Settings = Some value }
 
         [<CustomOperation("source")>]
-        member _.Source(state: TransformPutTransformRequest, value: TransformTypes.Source) =
+        member _.Source(state: TransformPutTransformRequest, value: Types.TransformTypesSource) =
             { state with Source = value }
 
         [<CustomOperation("sync")>]
-        member _.Sync(state: TransformPutTransformRequest, value: TransformTypes.SyncContainer) =
+        member _.Sync(state: TransformPutTransformRequest, value: Types.SyncContainer) =
             { state with Sync = Some value }
 
     let transformPutTransformRequest = TransformPutTransformRequestBuilder()
@@ -475,33 +476,33 @@ module TransformOperations =
     module PutTransform =
         let withDeferValidation (value: bool) (req: TransformPutTransformRequest) =
             { req with DeferValidation = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: TransformPutTransformRequest) =
+        let withTimeout (value: Types.Duration) (req: TransformPutTransformRequest) =
             { req with Timeout = Some value }
-        let withDest (value: TransformTypes.Destination) (req: TransformPutTransformRequest) =
+        let withDest (value: Types.TransformTypesDestination) (req: TransformPutTransformRequest) =
             { req with Dest = value }
         let withDescription (value: string) (req: TransformPutTransformRequest) =
             { req with Description = Some value }
-        let withFrequency (value: CoreTypes.Duration) (req: TransformPutTransformRequest) =
+        let withFrequency (value: Types.Duration) (req: TransformPutTransformRequest) =
             { req with Frequency = Some value }
-        let withLatest (value: TransformTypes.Latest) (req: TransformPutTransformRequest) =
+        let withLatest (value: Types.Latest) (req: TransformPutTransformRequest) =
             { req with Latest = Some value }
-        let withMeta (value: CoreTypes.Metadata) (req: TransformPutTransformRequest) =
+        let withMeta (value: Types.Metadata) (req: TransformPutTransformRequest) =
             { req with Meta = Some value }
-        let withPivot (value: TransformTypes.Pivot) (req: TransformPutTransformRequest) =
+        let withPivot (value: Types.Pivot) (req: TransformPutTransformRequest) =
             { req with Pivot = Some value }
-        let withRetentionPolicy (value: TransformTypes.RetentionPolicyContainer) (req: TransformPutTransformRequest) =
+        let withRetentionPolicy (value: Types.RetentionPolicyContainer) (req: TransformPutTransformRequest) =
             { req with RetentionPolicy = Some value }
-        let withSettings (value: TransformTypes.Settings) (req: TransformPutTransformRequest) =
+        let withSettings (value: Types.Settings) (req: TransformPutTransformRequest) =
             { req with Settings = Some value }
-        let withSource (value: TransformTypes.Source) (req: TransformPutTransformRequest) =
+        let withSource (value: Types.TransformTypesSource) (req: TransformPutTransformRequest) =
             { req with Source = value }
-        let withSync (value: TransformTypes.SyncContainer) (req: TransformPutTransformRequest) =
+        let withSync (value: Types.SyncContainer) (req: TransformPutTransformRequest) =
             { req with Sync = Some value }
 
     type TransformResetTransformRequest = {
-        TransformId: CoreTypes.Id
+        TransformId: Types.Id
         Force: bool option
-        Timeout: CoreTypes.Duration option
+        Timeout: Types.Duration option
     }
 
         with
@@ -523,7 +524,7 @@ module TransformOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type TransformResetTransformResponse = CoreTypes.AcknowledgedResponseBase
+    type TransformResetTransformResponse = Types.AcknowledgedResponseBase
 
     type TransformResetTransformRequestBuilder() =
         member _.Yield(_: unit) : TransformResetTransformRequest =
@@ -534,7 +535,7 @@ module TransformOperations =
             }
 
         [<CustomOperation("transformId")>]
-        member _.TransformId(state: TransformResetTransformRequest, value: CoreTypes.Id) =
+        member _.TransformId(state: TransformResetTransformRequest, value: Types.Id) =
             { state with TransformId = value }
 
         [<CustomOperation("force")>]
@@ -542,7 +543,7 @@ module TransformOperations =
             { state with Force = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: TransformResetTransformRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: TransformResetTransformRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
     let transformResetTransformRequest = TransformResetTransformRequestBuilder()
@@ -550,12 +551,12 @@ module TransformOperations =
     module ResetTransform =
         let withForce (value: bool) (req: TransformResetTransformRequest) =
             { req with Force = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: TransformResetTransformRequest) =
+        let withTimeout (value: Types.Duration) (req: TransformResetTransformRequest) =
             { req with Timeout = Some value }
 
     type TransformScheduleNowTransformRequest = {
-        TransformId: CoreTypes.Id
-        Timeout: CoreTypes.Duration option
+        TransformId: Types.Id
+        Timeout: Types.Duration option
     }
 
         with
@@ -576,7 +577,7 @@ module TransformOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type TransformScheduleNowTransformResponse = CoreTypes.AcknowledgedResponseBase
+    type TransformScheduleNowTransformResponse = Types.AcknowledgedResponseBase
 
     type TransformScheduleNowTransformRequestBuilder() =
         member _.Yield(_: unit) : TransformScheduleNowTransformRequest =
@@ -586,22 +587,22 @@ module TransformOperations =
             }
 
         [<CustomOperation("transformId")>]
-        member _.TransformId(state: TransformScheduleNowTransformRequest, value: CoreTypes.Id) =
+        member _.TransformId(state: TransformScheduleNowTransformRequest, value: Types.Id) =
             { state with TransformId = value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: TransformScheduleNowTransformRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: TransformScheduleNowTransformRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
     let transformScheduleNowTransformRequest = TransformScheduleNowTransformRequestBuilder()
 
     module ScheduleNowTransform =
-        let withTimeout (value: CoreTypes.Duration) (req: TransformScheduleNowTransformRequest) =
+        let withTimeout (value: Types.Duration) (req: TransformScheduleNowTransformRequest) =
             { req with Timeout = Some value }
 
     type TransformSetUpgradeModeRequest = {
         Enabled: bool option
-        Timeout: CoreTypes.Duration option
+        Timeout: Types.Duration option
     }
 
         with
@@ -623,7 +624,7 @@ module TransformOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type TransformSetUpgradeModeResponse = CoreTypes.AcknowledgedResponseBase
+    type TransformSetUpgradeModeResponse = Types.AcknowledgedResponseBase
 
     type TransformSetUpgradeModeRequestBuilder() =
         member _.Yield(_: unit) : TransformSetUpgradeModeRequest =
@@ -637,7 +638,7 @@ module TransformOperations =
             { state with Enabled = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: TransformSetUpgradeModeRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: TransformSetUpgradeModeRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
     let transformSetUpgradeModeRequest = TransformSetUpgradeModeRequestBuilder()
@@ -645,12 +646,12 @@ module TransformOperations =
     module SetUpgradeMode =
         let withEnabled (value: bool) (req: TransformSetUpgradeModeRequest) =
             { req with Enabled = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: TransformSetUpgradeModeRequest) =
+        let withTimeout (value: Types.Duration) (req: TransformSetUpgradeModeRequest) =
             { req with Timeout = Some value }
 
     type TransformStartTransformRequest = {
-        TransformId: CoreTypes.Id
-        Timeout: CoreTypes.Duration option
+        TransformId: Types.Id
+        Timeout: Types.Duration option
         From: string option
     }
 
@@ -673,7 +674,7 @@ module TransformOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type TransformStartTransformResponse = CoreTypes.AcknowledgedResponseBase
+    type TransformStartTransformResponse = Types.AcknowledgedResponseBase
 
     type TransformStartTransformRequestBuilder() =
         member _.Yield(_: unit) : TransformStartTransformRequest =
@@ -684,11 +685,11 @@ module TransformOperations =
             }
 
         [<CustomOperation("transformId")>]
-        member _.TransformId(state: TransformStartTransformRequest, value: CoreTypes.Id) =
+        member _.TransformId(state: TransformStartTransformRequest, value: Types.Id) =
             { state with TransformId = value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: TransformStartTransformRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: TransformStartTransformRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("from")>]
@@ -698,16 +699,16 @@ module TransformOperations =
     let transformStartTransformRequest = TransformStartTransformRequestBuilder()
 
     module StartTransform =
-        let withTimeout (value: CoreTypes.Duration) (req: TransformStartTransformRequest) =
+        let withTimeout (value: Types.Duration) (req: TransformStartTransformRequest) =
             { req with Timeout = Some value }
         let withFrom (value: string) (req: TransformStartTransformRequest) =
             { req with From = Some value }
 
     type TransformStopTransformRequest = {
-        TransformId: CoreTypes.Name
+        TransformId: Types.Name
         AllowNoMatch: bool option
         Force: bool option
-        Timeout: CoreTypes.Duration option
+        Timeout: Types.Duration option
         WaitForCheckpoint: bool option
         WaitForCompletion: bool option
     }
@@ -734,7 +735,7 @@ module TransformOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type TransformStopTransformResponse = CoreTypes.AcknowledgedResponseBase
+    type TransformStopTransformResponse = Types.AcknowledgedResponseBase
 
     type TransformStopTransformRequestBuilder() =
         member _.Yield(_: unit) : TransformStopTransformRequest =
@@ -748,7 +749,7 @@ module TransformOperations =
             }
 
         [<CustomOperation("transformId")>]
-        member _.TransformId(state: TransformStopTransformRequest, value: CoreTypes.Name) =
+        member _.TransformId(state: TransformStopTransformRequest, value: Types.Name) =
             { state with TransformId = value }
 
         [<CustomOperation("allowNoMatch")>]
@@ -760,7 +761,7 @@ module TransformOperations =
             { state with Force = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: TransformStopTransformRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: TransformStopTransformRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("waitForCheckpoint")>]
@@ -778,7 +779,7 @@ module TransformOperations =
             { req with AllowNoMatch = Some value }
         let withForce (value: bool) (req: TransformStopTransformRequest) =
             { req with Force = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: TransformStopTransformRequest) =
+        let withTimeout (value: Types.Duration) (req: TransformStopTransformRequest) =
             { req with Timeout = Some value }
         let withWaitForCheckpoint (value: bool) (req: TransformStopTransformRequest) =
             { req with WaitForCheckpoint = Some value }
@@ -786,17 +787,17 @@ module TransformOperations =
             { req with WaitForCompletion = Some value }
 
     type TransformUpdateTransformRequest = {
-        TransformId: CoreTypes.Id
+        TransformId: Types.Id
         DeferValidation: bool option
-        Timeout: CoreTypes.Duration option
-        Dest: TransformTypes.Destination option
+        Timeout: Types.Duration option
+        Dest: Types.TransformTypesDestination option
         Description: string option
-        Frequency: CoreTypes.Duration option
-        Meta: CoreTypes.Metadata option
-        Source: TransformTypes.Source option
-        Settings: TransformTypes.Settings option
-        Sync: TransformTypes.SyncContainer option
-        RetentionPolicy: TransformTypes.RetentionPolicyContainer option option
+        Frequency: Types.Duration option
+        Meta: Types.Metadata option
+        Source: Types.TransformTypesSource option
+        Settings: Types.Settings option
+        Sync: Types.SyncContainer option
+        RetentionPolicy: Types.RetentionPolicyContainer option option
     }
 
         with
@@ -838,7 +839,7 @@ module TransformOperations =
             }
 
         [<CustomOperation("transformId")>]
-        member _.TransformId(state: TransformUpdateTransformRequest, value: CoreTypes.Id) =
+        member _.TransformId(state: TransformUpdateTransformRequest, value: Types.Id) =
             { state with TransformId = value }
 
         [<CustomOperation("deferValidation")>]
@@ -846,11 +847,11 @@ module TransformOperations =
             { state with DeferValidation = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: TransformUpdateTransformRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: TransformUpdateTransformRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("dest")>]
-        member _.Dest(state: TransformUpdateTransformRequest, value: TransformTypes.Destination) =
+        member _.Dest(state: TransformUpdateTransformRequest, value: Types.TransformTypesDestination) =
             { state with Dest = Some value }
 
         [<CustomOperation("description")>]
@@ -858,27 +859,27 @@ module TransformOperations =
             { state with Description = Some value }
 
         [<CustomOperation("frequency")>]
-        member _.Frequency(state: TransformUpdateTransformRequest, value: CoreTypes.Duration) =
+        member _.Frequency(state: TransformUpdateTransformRequest, value: Types.Duration) =
             { state with Frequency = Some value }
 
         [<CustomOperation("meta")>]
-        member _.Meta(state: TransformUpdateTransformRequest, value: CoreTypes.Metadata) =
+        member _.Meta(state: TransformUpdateTransformRequest, value: Types.Metadata) =
             { state with Meta = Some value }
 
         [<CustomOperation("source")>]
-        member _.Source(state: TransformUpdateTransformRequest, value: TransformTypes.Source) =
+        member _.Source(state: TransformUpdateTransformRequest, value: Types.TransformTypesSource) =
             { state with Source = Some value }
 
         [<CustomOperation("settings")>]
-        member _.Settings(state: TransformUpdateTransformRequest, value: TransformTypes.Settings) =
+        member _.Settings(state: TransformUpdateTransformRequest, value: Types.Settings) =
             { state with Settings = Some value }
 
         [<CustomOperation("sync")>]
-        member _.Sync(state: TransformUpdateTransformRequest, value: TransformTypes.SyncContainer) =
+        member _.Sync(state: TransformUpdateTransformRequest, value: Types.SyncContainer) =
             { state with Sync = Some value }
 
         [<CustomOperation("retentionPolicy")>]
-        member _.RetentionPolicy(state: TransformUpdateTransformRequest, value: TransformTypes.RetentionPolicyContainer option) =
+        member _.RetentionPolicy(state: TransformUpdateTransformRequest, value: Types.RetentionPolicyContainer option) =
             { state with RetentionPolicy = Some value }
 
     let transformUpdateTransformRequest = TransformUpdateTransformRequestBuilder()
@@ -886,28 +887,28 @@ module TransformOperations =
     module UpdateTransform =
         let withDeferValidation (value: bool) (req: TransformUpdateTransformRequest) =
             { req with DeferValidation = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: TransformUpdateTransformRequest) =
+        let withTimeout (value: Types.Duration) (req: TransformUpdateTransformRequest) =
             { req with Timeout = Some value }
-        let withDest (value: TransformTypes.Destination) (req: TransformUpdateTransformRequest) =
+        let withDest (value: Types.TransformTypesDestination) (req: TransformUpdateTransformRequest) =
             { req with Dest = Some value }
         let withDescription (value: string) (req: TransformUpdateTransformRequest) =
             { req with Description = Some value }
-        let withFrequency (value: CoreTypes.Duration) (req: TransformUpdateTransformRequest) =
+        let withFrequency (value: Types.Duration) (req: TransformUpdateTransformRequest) =
             { req with Frequency = Some value }
-        let withMeta (value: CoreTypes.Metadata) (req: TransformUpdateTransformRequest) =
+        let withMeta (value: Types.Metadata) (req: TransformUpdateTransformRequest) =
             { req with Meta = Some value }
-        let withSource (value: TransformTypes.Source) (req: TransformUpdateTransformRequest) =
+        let withSource (value: Types.TransformTypesSource) (req: TransformUpdateTransformRequest) =
             { req with Source = Some value }
-        let withSettings (value: TransformTypes.Settings) (req: TransformUpdateTransformRequest) =
+        let withSettings (value: Types.Settings) (req: TransformUpdateTransformRequest) =
             { req with Settings = Some value }
-        let withSync (value: TransformTypes.SyncContainer) (req: TransformUpdateTransformRequest) =
+        let withSync (value: Types.SyncContainer) (req: TransformUpdateTransformRequest) =
             { req with Sync = Some value }
-        let withRetentionPolicy (value: TransformTypes.RetentionPolicyContainer option) (req: TransformUpdateTransformRequest) =
+        let withRetentionPolicy (value: Types.RetentionPolicyContainer option) (req: TransformUpdateTransformRequest) =
             { req with RetentionPolicy = Some value }
 
     type TransformUpgradeTransformsRequest = {
         DryRun: bool option
-        Timeout: CoreTypes.Duration option
+        Timeout: Types.Duration option
     }
 
         with
@@ -943,7 +944,7 @@ module TransformOperations =
             { state with DryRun = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: TransformUpgradeTransformsRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: TransformUpgradeTransformsRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
     let transformUpgradeTransformsRequest = TransformUpgradeTransformsRequestBuilder()
@@ -951,6 +952,6 @@ module TransformOperations =
     module UpgradeTransforms =
         let withDryRun (value: bool) (req: TransformUpgradeTransformsRequest) =
             { req with DryRun = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: TransformUpgradeTransformsRequest) =
+        let withTimeout (value: Types.Duration) (req: TransformUpgradeTransformsRequest) =
             { req with Timeout = Some value }
 

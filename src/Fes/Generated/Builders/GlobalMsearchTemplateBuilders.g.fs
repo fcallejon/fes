@@ -4,13 +4,13 @@ namespace Fes.Generated.Builders
 
 
 open System.Text.Json.Serialization
-open Fes.Generated.Types
+open Fes.Generated
 
 [<AutoOpen>]
 module GlobalMsearchTemplateBuilders =
 
     type TemplateConfigBuilder() =
-        member _.Yield(_: unit) : TemplateConfig =
+        member _.Yield(_: unit) : Types.TemplateConfig =
             {
                 Explain = None
                 Id = None
@@ -20,23 +20,23 @@ module GlobalMsearchTemplateBuilders =
             }
 
         [<CustomOperation("explain")>]
-        member _.Explain(state: TemplateConfig, value: bool) =
+        member _.Explain(state: Types.TemplateConfig, value: bool) =
             { state with Explain = Some value }
 
         [<CustomOperation("id")>]
-        member _.Id(state: TemplateConfig, value: CoreTypes.Id) =
+        member _.Id(state: Types.TemplateConfig, value: Types.Id) =
             { state with Id = Some value }
 
         [<CustomOperation("params")>]
-        member _.Params(state: TemplateConfig, value: Map<string, System.Text.Json.JsonElement>) =
+        member _.Params(state: Types.TemplateConfig, value: Map<string, System.Text.Json.JsonElement>) =
             { state with Params = Some value }
 
         [<CustomOperation("profile")>]
-        member _.Profile(state: TemplateConfig, value: bool) =
+        member _.Profile(state: Types.TemplateConfig, value: bool) =
             { state with Profile = Some value }
 
         [<CustomOperation("source")>]
-        member _.Source(state: TemplateConfig, value: CoreTypes.ScriptSource) =
+        member _.Source(state: Types.TemplateConfig, value: Types.ScriptSource) =
             { state with Source = Some value }
 
     let templateConfig = TemplateConfigBuilder()

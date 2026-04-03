@@ -7,6 +7,7 @@ open System
 open System.Text.Json
 open System.Text.Json.Serialization
 open Fes
+open Fes.Generated
 
 [<AutoOpen>]
 module FleetOperations =
@@ -73,8 +74,8 @@ module FleetOperations =
         Index: System.Text.Json.JsonElement
         WaitForAdvance: bool option
         WaitForIndex: bool option
-        Checkpoints: FleetTypes.Checkpoint list option
-        Timeout: CoreTypes.Duration option
+        Checkpoints: Types.Checkpoint list option
+        Timeout: Types.Duration option
     }
 
         with
@@ -123,11 +124,11 @@ module FleetOperations =
             { state with WaitForIndex = Some value }
 
         [<CustomOperation("checkpoints")>]
-        member _.Checkpoints(state: FleetGlobalCheckpointsRequest, value: FleetTypes.Checkpoint list) =
+        member _.Checkpoints(state: FleetGlobalCheckpointsRequest, value: Types.Checkpoint list) =
             { state with Checkpoints = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: FleetGlobalCheckpointsRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: FleetGlobalCheckpointsRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
     let fleetGlobalCheckpointsRequest = FleetGlobalCheckpointsRequestBuilder()
@@ -137,25 +138,25 @@ module FleetOperations =
             { req with WaitForAdvance = Some value }
         let withWaitForIndex (value: bool) (req: FleetGlobalCheckpointsRequest) =
             { req with WaitForIndex = Some value }
-        let withCheckpoints (value: FleetTypes.Checkpoint list) (req: FleetGlobalCheckpointsRequest) =
+        let withCheckpoints (value: Types.Checkpoint list) (req: FleetGlobalCheckpointsRequest) =
             { req with Checkpoints = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: FleetGlobalCheckpointsRequest) =
+        let withTimeout (value: Types.Duration) (req: FleetGlobalCheckpointsRequest) =
             { req with Timeout = Some value }
 
     type FleetMsearchRequest = {
         Index: System.Text.Json.JsonElement
         AllowNoIndices: bool option
         CcsMinimizeRoundtrips: bool option
-        ExpandWildcards: CoreTypes.ExpandWildcards option
+        ExpandWildcards: Types.ExpandWildcards option
         IgnoreThrottled: bool option
         IgnoreUnavailable: bool option
-        MaxConcurrentSearches: CoreTypes.Integer option
-        MaxConcurrentShardRequests: CoreTypes.Integer option
-        PreFilterShardSize: CoreTypes.Long option
-        SearchType: CoreTypes.SearchType option
+        MaxConcurrentSearches: Types.Integer option
+        MaxConcurrentShardRequests: Types.Integer option
+        PreFilterShardSize: Types.Long option
+        SearchType: Types.SearchType option
         RestTotalHitsAsInt: bool option
         TypedKeys: bool option
-        WaitForCheckpoints: FleetTypes.Checkpoint list option
+        WaitForCheckpoints: Types.Checkpoint list option
         AllowPartialSearchResults: bool option
         Document: obj
     }
@@ -226,7 +227,7 @@ module FleetOperations =
             { state with CcsMinimizeRoundtrips = Some value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: FleetMsearchRequest, value: CoreTypes.ExpandWildcards) =
+        member _.ExpandWildcards(state: FleetMsearchRequest, value: Types.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("ignoreThrottled")>]
@@ -238,19 +239,19 @@ module FleetOperations =
             { state with IgnoreUnavailable = Some value }
 
         [<CustomOperation("maxConcurrentSearches")>]
-        member _.MaxConcurrentSearches(state: FleetMsearchRequest, value: CoreTypes.Integer) =
+        member _.MaxConcurrentSearches(state: FleetMsearchRequest, value: Types.Integer) =
             { state with MaxConcurrentSearches = Some value }
 
         [<CustomOperation("maxConcurrentShardRequests")>]
-        member _.MaxConcurrentShardRequests(state: FleetMsearchRequest, value: CoreTypes.Integer) =
+        member _.MaxConcurrentShardRequests(state: FleetMsearchRequest, value: Types.Integer) =
             { state with MaxConcurrentShardRequests = Some value }
 
         [<CustomOperation("preFilterShardSize")>]
-        member _.PreFilterShardSize(state: FleetMsearchRequest, value: CoreTypes.Long) =
+        member _.PreFilterShardSize(state: FleetMsearchRequest, value: Types.Long) =
             { state with PreFilterShardSize = Some value }
 
         [<CustomOperation("searchType")>]
-        member _.SearchType(state: FleetMsearchRequest, value: CoreTypes.SearchType) =
+        member _.SearchType(state: FleetMsearchRequest, value: Types.SearchType) =
             { state with SearchType = Some value }
 
         [<CustomOperation("restTotalHitsAsInt")>]
@@ -262,7 +263,7 @@ module FleetOperations =
             { state with TypedKeys = Some value }
 
         [<CustomOperation("waitForCheckpoints")>]
-        member _.WaitForCheckpoints(state: FleetMsearchRequest, value: FleetTypes.Checkpoint list) =
+        member _.WaitForCheckpoints(state: FleetMsearchRequest, value: Types.Checkpoint list) =
             { state with WaitForCheckpoints = Some value }
 
         [<CustomOperation("allowPartialSearchResults")>]
@@ -280,25 +281,25 @@ module FleetOperations =
             { req with AllowNoIndices = Some value }
         let withCcsMinimizeRoundtrips (value: bool) (req: FleetMsearchRequest) =
             { req with CcsMinimizeRoundtrips = Some value }
-        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: FleetMsearchRequest) =
+        let withExpandWildcards (value: Types.ExpandWildcards) (req: FleetMsearchRequest) =
             { req with ExpandWildcards = Some value }
         let withIgnoreThrottled (value: bool) (req: FleetMsearchRequest) =
             { req with IgnoreThrottled = Some value }
         let withIgnoreUnavailable (value: bool) (req: FleetMsearchRequest) =
             { req with IgnoreUnavailable = Some value }
-        let withMaxConcurrentSearches (value: CoreTypes.Integer) (req: FleetMsearchRequest) =
+        let withMaxConcurrentSearches (value: Types.Integer) (req: FleetMsearchRequest) =
             { req with MaxConcurrentSearches = Some value }
-        let withMaxConcurrentShardRequests (value: CoreTypes.Integer) (req: FleetMsearchRequest) =
+        let withMaxConcurrentShardRequests (value: Types.Integer) (req: FleetMsearchRequest) =
             { req with MaxConcurrentShardRequests = Some value }
-        let withPreFilterShardSize (value: CoreTypes.Long) (req: FleetMsearchRequest) =
+        let withPreFilterShardSize (value: Types.Long) (req: FleetMsearchRequest) =
             { req with PreFilterShardSize = Some value }
-        let withSearchType (value: CoreTypes.SearchType) (req: FleetMsearchRequest) =
+        let withSearchType (value: Types.SearchType) (req: FleetMsearchRequest) =
             { req with SearchType = Some value }
         let withRestTotalHitsAsInt (value: bool) (req: FleetMsearchRequest) =
             { req with RestTotalHitsAsInt = Some value }
         let withTypedKeys (value: bool) (req: FleetMsearchRequest) =
             { req with TypedKeys = Some value }
-        let withWaitForCheckpoints (value: FleetTypes.Checkpoint list) (req: FleetMsearchRequest) =
+        let withWaitForCheckpoints (value: Types.Checkpoint list) (req: FleetMsearchRequest) =
             { req with WaitForCheckpoints = Some value }
         let withAllowPartialSearchResults (value: bool) (req: FleetMsearchRequest) =
             { req with AllowPartialSearchResults = Some value }
@@ -342,76 +343,76 @@ module FleetOperations =
         AllowNoIndices: bool option
         Analyzer: string option
         AnalyzeWildcard: bool option
-        BatchedReduceSize: CoreTypes.Long option
+        BatchedReduceSize: Types.Long option
         CcsMinimizeRoundtrips: bool option
-        DefaultOperator: CoreTypes.Operator option
+        DefaultOperator: Types.Operator option
         Df: string option
-        DocvalueFields: CoreTypes.Fields option
-        ExpandWildcards: CoreTypes.ExpandWildcards option
+        DocvalueFields: Types.Fields option
+        ExpandWildcards: Types.ExpandWildcards option
         Explain: bool option
         IgnoreThrottled: bool option
         IgnoreUnavailable: bool option
         Lenient: bool option
-        MaxConcurrentShardRequests: CoreTypes.Integer option
+        MaxConcurrentShardRequests: Types.Integer option
         Preference: string option
-        PreFilterShardSize: CoreTypes.Long option
+        PreFilterShardSize: Types.Long option
         RequestCache: bool option
-        Routing: CoreTypes.Routing option
-        Scroll: CoreTypes.Duration option
-        SearchType: CoreTypes.SearchType option
+        Routing: Types.Routing option
+        Scroll: Types.Duration option
+        SearchType: Types.SearchType option
         Stats: string list option
-        StoredFields: CoreTypes.Fields option
-        SuggestField: CoreTypes.Field option
-        SuggestMode: CoreTypes.SuggestMode option
-        SuggestSize: CoreTypes.Long option
+        StoredFields: Types.Fields option
+        SuggestField: Types.Field option
+        SuggestMode: Types.SuggestMode option
+        SuggestSize: Types.Long option
         SuggestText: string option
-        TerminateAfter: CoreTypes.Long option
-        Timeout: CoreTypes.Duration option
-        TrackTotalHits: GlobalSearchTypes.TrackHits option
+        TerminateAfter: Types.Long option
+        Timeout: Types.Duration option
+        TrackTotalHits: Types.TrackHits option
         TrackScores: bool option
         TypedKeys: bool option
         RestTotalHitsAsInt: bool option
         Version: bool option
-        Source: GlobalSearchTypes.SourceConfigParam option
-        SourceExcludes: CoreTypes.Fields option
-        SourceIncludes: CoreTypes.Fields option
+        Source: Types.SourceConfigParam option
+        SourceExcludes: Types.Fields option
+        SourceIncludes: Types.Fields option
         SeqNoPrimaryTerm: bool option
         Q: string option
-        Size: CoreTypes.Integer option
-        From: CoreTypes.Integer option
+        Size: Types.Integer option
+        From: Types.Integer option
         Sort: System.Text.Json.JsonElement option
-        WaitForCheckpoints: FleetTypes.Checkpoint list option
+        WaitForCheckpoints: Types.Checkpoint list option
         AllowPartialSearchResults: bool option
-        Aggregations: Map<string, CoreTypes.AggregationContainer> option
-        Collapse: GlobalSearchTypes.FieldCollapse option
+        Aggregations: Map<string, Types.AggregationContainer> option
+        Collapse: Types.FieldCollapse option
         Explain: bool option
         Ext: Map<string, System.Text.Json.JsonElement> option
-        From: CoreTypes.Integer option
-        Highlight: GlobalSearchTypes.Highlight option
-        TrackTotalHits: GlobalSearchTypes.TrackHits option
-        IndicesBoost: Map<CoreTypes.IndexName, CoreTypes.Double> list option
-        DocvalueFields: CoreTypes.FieldAndFormat list option
-        MinScore: CoreTypes.Double option
-        PostFilter: CoreTypes.QueryContainer option
+        From: Types.Integer option
+        Highlight: Types.Highlight option
+        TrackTotalHits: Types.TrackHits option
+        IndicesBoost: Map<Types.IndexName, Types.Double> list option
+        DocvalueFields: Types.FieldAndFormat list option
+        MinScore: Types.Double option
+        PostFilter: Types.QueryContainer option
         Profile: bool option
-        Query: CoreTypes.QueryContainer option
+        Query: Types.QueryContainer option
         Rescore: System.Text.Json.JsonElement option
-        ScriptFields: Map<string, CoreTypes.ScriptField> option
-        SearchAfter: CoreTypes.SortResults option
-        Size: CoreTypes.Integer option
-        Slice: CoreTypes.SlicedScroll option
-        Sort: CoreTypes.Sort option
-        Source: GlobalSearchTypes.SourceConfig option
-        Fields: CoreTypes.FieldAndFormat list option
-        Suggest: GlobalSearchTypes.Suggester option
-        TerminateAfter: CoreTypes.Long option
+        ScriptFields: Map<string, Types.ScriptField> option
+        SearchAfter: Types.SortResults option
+        Size: Types.Integer option
+        Slice: Types.SlicedScroll option
+        Sort: Types.Sort option
+        Source: Types.SourceConfig option
+        Fields: Types.FieldAndFormat list option
+        Suggest: Types.Suggester option
+        TerminateAfter: Types.Long option
         Timeout: string option
         TrackScores: bool option
         Version: bool option
         SeqNoPrimaryTerm: bool option
-        StoredFields: CoreTypes.Fields option
-        Pit: GlobalSearchTypes.PointInTimeReference option
-        RuntimeMappings: CoreTypes.RuntimeFields option
+        StoredFields: Types.Fields option
+        Pit: Types.PointInTimeReference option
+        RuntimeMappings: Types.RuntimeFields option
         Stats: string list option
     }
 
@@ -575,7 +576,7 @@ module FleetOperations =
             { state with AnalyzeWildcard = Some value }
 
         [<CustomOperation("batchedReduceSize")>]
-        member _.BatchedReduceSize(state: FleetSearchRequest, value: CoreTypes.Long) =
+        member _.BatchedReduceSize(state: FleetSearchRequest, value: Types.Long) =
             { state with BatchedReduceSize = Some value }
 
         [<CustomOperation("ccsMinimizeRoundtrips")>]
@@ -583,7 +584,7 @@ module FleetOperations =
             { state with CcsMinimizeRoundtrips = Some value }
 
         [<CustomOperation("defaultOperator")>]
-        member _.DefaultOperator(state: FleetSearchRequest, value: CoreTypes.Operator) =
+        member _.DefaultOperator(state: FleetSearchRequest, value: Types.Operator) =
             { state with DefaultOperator = Some value }
 
         [<CustomOperation("df")>]
@@ -591,11 +592,11 @@ module FleetOperations =
             { state with Df = Some value }
 
         [<CustomOperation("docvalueFields")>]
-        member _.DocvalueFields(state: FleetSearchRequest, value: CoreTypes.Fields) =
+        member _.DocvalueFields(state: FleetSearchRequest, value: Types.Fields) =
             { state with DocvalueFields = Some value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: FleetSearchRequest, value: CoreTypes.ExpandWildcards) =
+        member _.ExpandWildcards(state: FleetSearchRequest, value: Types.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("explain")>]
@@ -615,7 +616,7 @@ module FleetOperations =
             { state with Lenient = Some value }
 
         [<CustomOperation("maxConcurrentShardRequests")>]
-        member _.MaxConcurrentShardRequests(state: FleetSearchRequest, value: CoreTypes.Integer) =
+        member _.MaxConcurrentShardRequests(state: FleetSearchRequest, value: Types.Integer) =
             { state with MaxConcurrentShardRequests = Some value }
 
         [<CustomOperation("preference")>]
@@ -623,7 +624,7 @@ module FleetOperations =
             { state with Preference = Some value }
 
         [<CustomOperation("preFilterShardSize")>]
-        member _.PreFilterShardSize(state: FleetSearchRequest, value: CoreTypes.Long) =
+        member _.PreFilterShardSize(state: FleetSearchRequest, value: Types.Long) =
             { state with PreFilterShardSize = Some value }
 
         [<CustomOperation("requestCache")>]
@@ -631,15 +632,15 @@ module FleetOperations =
             { state with RequestCache = Some value }
 
         [<CustomOperation("routing")>]
-        member _.Routing(state: FleetSearchRequest, value: CoreTypes.Routing) =
+        member _.Routing(state: FleetSearchRequest, value: Types.Routing) =
             { state with Routing = Some value }
 
         [<CustomOperation("scroll")>]
-        member _.Scroll(state: FleetSearchRequest, value: CoreTypes.Duration) =
+        member _.Scroll(state: FleetSearchRequest, value: Types.Duration) =
             { state with Scroll = Some value }
 
         [<CustomOperation("searchType")>]
-        member _.SearchType(state: FleetSearchRequest, value: CoreTypes.SearchType) =
+        member _.SearchType(state: FleetSearchRequest, value: Types.SearchType) =
             { state with SearchType = Some value }
 
         [<CustomOperation("stats")>]
@@ -647,19 +648,19 @@ module FleetOperations =
             { state with Stats = Some value }
 
         [<CustomOperation("storedFields")>]
-        member _.StoredFields(state: FleetSearchRequest, value: CoreTypes.Fields) =
+        member _.StoredFields(state: FleetSearchRequest, value: Types.Fields) =
             { state with StoredFields = Some value }
 
         [<CustomOperation("suggestField")>]
-        member _.SuggestField(state: FleetSearchRequest, value: CoreTypes.Field) =
+        member _.SuggestField(state: FleetSearchRequest, value: Types.Field) =
             { state with SuggestField = Some value }
 
         [<CustomOperation("suggestMode")>]
-        member _.SuggestMode(state: FleetSearchRequest, value: CoreTypes.SuggestMode) =
+        member _.SuggestMode(state: FleetSearchRequest, value: Types.SuggestMode) =
             { state with SuggestMode = Some value }
 
         [<CustomOperation("suggestSize")>]
-        member _.SuggestSize(state: FleetSearchRequest, value: CoreTypes.Long) =
+        member _.SuggestSize(state: FleetSearchRequest, value: Types.Long) =
             { state with SuggestSize = Some value }
 
         [<CustomOperation("suggestText")>]
@@ -667,15 +668,15 @@ module FleetOperations =
             { state with SuggestText = Some value }
 
         [<CustomOperation("terminateAfter")>]
-        member _.TerminateAfter(state: FleetSearchRequest, value: CoreTypes.Long) =
+        member _.TerminateAfter(state: FleetSearchRequest, value: Types.Long) =
             { state with TerminateAfter = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: FleetSearchRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: FleetSearchRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("trackTotalHits")>]
-        member _.TrackTotalHits(state: FleetSearchRequest, value: GlobalSearchTypes.TrackHits) =
+        member _.TrackTotalHits(state: FleetSearchRequest, value: Types.TrackHits) =
             { state with TrackTotalHits = Some value }
 
         [<CustomOperation("trackScores")>]
@@ -695,15 +696,15 @@ module FleetOperations =
             { state with Version = Some value }
 
         [<CustomOperation("source")>]
-        member _.Source(state: FleetSearchRequest, value: GlobalSearchTypes.SourceConfigParam) =
+        member _.Source(state: FleetSearchRequest, value: Types.SourceConfigParam) =
             { state with Source = Some value }
 
         [<CustomOperation("sourceExcludes")>]
-        member _.SourceExcludes(state: FleetSearchRequest, value: CoreTypes.Fields) =
+        member _.SourceExcludes(state: FleetSearchRequest, value: Types.Fields) =
             { state with SourceExcludes = Some value }
 
         [<CustomOperation("sourceIncludes")>]
-        member _.SourceIncludes(state: FleetSearchRequest, value: CoreTypes.Fields) =
+        member _.SourceIncludes(state: FleetSearchRequest, value: Types.Fields) =
             { state with SourceIncludes = Some value }
 
         [<CustomOperation("seqNoPrimaryTerm")>]
@@ -715,11 +716,11 @@ module FleetOperations =
             { state with Q = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: FleetSearchRequest, value: CoreTypes.Integer) =
+        member _.Size(state: FleetSearchRequest, value: Types.Integer) =
             { state with Size = Some value }
 
         [<CustomOperation("from")>]
-        member _.From(state: FleetSearchRequest, value: CoreTypes.Integer) =
+        member _.From(state: FleetSearchRequest, value: Types.Integer) =
             { state with From = Some value }
 
         [<CustomOperation("sort")>]
@@ -727,7 +728,7 @@ module FleetOperations =
             { state with Sort = Some value }
 
         [<CustomOperation("waitForCheckpoints")>]
-        member _.WaitForCheckpoints(state: FleetSearchRequest, value: FleetTypes.Checkpoint list) =
+        member _.WaitForCheckpoints(state: FleetSearchRequest, value: Types.Checkpoint list) =
             { state with WaitForCheckpoints = Some value }
 
         [<CustomOperation("allowPartialSearchResults")>]
@@ -735,11 +736,11 @@ module FleetOperations =
             { state with AllowPartialSearchResults = Some value }
 
         [<CustomOperation("aggregations")>]
-        member _.Aggregations(state: FleetSearchRequest, value: Map<string, CoreTypes.AggregationContainer>) =
+        member _.Aggregations(state: FleetSearchRequest, value: Map<string, Types.AggregationContainer>) =
             { state with Aggregations = Some value }
 
         [<CustomOperation("collapse")>]
-        member _.Collapse(state: FleetSearchRequest, value: GlobalSearchTypes.FieldCollapse) =
+        member _.Collapse(state: FleetSearchRequest, value: Types.FieldCollapse) =
             { state with Collapse = Some value }
 
         [<CustomOperation("explain")>]
@@ -751,31 +752,31 @@ module FleetOperations =
             { state with Ext = Some value }
 
         [<CustomOperation("from")>]
-        member _.From(state: FleetSearchRequest, value: CoreTypes.Integer) =
+        member _.From(state: FleetSearchRequest, value: Types.Integer) =
             { state with From = Some value }
 
         [<CustomOperation("highlight")>]
-        member _.Highlight(state: FleetSearchRequest, value: GlobalSearchTypes.Highlight) =
+        member _.Highlight(state: FleetSearchRequest, value: Types.Highlight) =
             { state with Highlight = Some value }
 
         [<CustomOperation("trackTotalHits")>]
-        member _.TrackTotalHits(state: FleetSearchRequest, value: GlobalSearchTypes.TrackHits) =
+        member _.TrackTotalHits(state: FleetSearchRequest, value: Types.TrackHits) =
             { state with TrackTotalHits = Some value }
 
         [<CustomOperation("indicesBoost")>]
-        member _.IndicesBoost(state: FleetSearchRequest, value: Map<CoreTypes.IndexName, CoreTypes.Double> list) =
+        member _.IndicesBoost(state: FleetSearchRequest, value: Map<Types.IndexName, Types.Double> list) =
             { state with IndicesBoost = Some value }
 
         [<CustomOperation("docvalueFields")>]
-        member _.DocvalueFields(state: FleetSearchRequest, value: CoreTypes.FieldAndFormat list) =
+        member _.DocvalueFields(state: FleetSearchRequest, value: Types.FieldAndFormat list) =
             { state with DocvalueFields = Some value }
 
         [<CustomOperation("minScore")>]
-        member _.MinScore(state: FleetSearchRequest, value: CoreTypes.Double) =
+        member _.MinScore(state: FleetSearchRequest, value: Types.Double) =
             { state with MinScore = Some value }
 
         [<CustomOperation("postFilter")>]
-        member _.PostFilter(state: FleetSearchRequest, value: CoreTypes.QueryContainer) =
+        member _.PostFilter(state: FleetSearchRequest, value: Types.QueryContainer) =
             { state with PostFilter = Some value }
 
         [<CustomOperation("profile")>]
@@ -783,7 +784,7 @@ module FleetOperations =
             { state with Profile = Some value }
 
         [<CustomOperation("query")>]
-        member _.Query(state: FleetSearchRequest, value: CoreTypes.QueryContainer) =
+        member _.Query(state: FleetSearchRequest, value: Types.QueryContainer) =
             { state with Query = Some value }
 
         [<CustomOperation("rescore")>]
@@ -791,39 +792,39 @@ module FleetOperations =
             { state with Rescore = Some value }
 
         [<CustomOperation("scriptFields")>]
-        member _.ScriptFields(state: FleetSearchRequest, value: Map<string, CoreTypes.ScriptField>) =
+        member _.ScriptFields(state: FleetSearchRequest, value: Map<string, Types.ScriptField>) =
             { state with ScriptFields = Some value }
 
         [<CustomOperation("searchAfter")>]
-        member _.SearchAfter(state: FleetSearchRequest, value: CoreTypes.SortResults) =
+        member _.SearchAfter(state: FleetSearchRequest, value: Types.SortResults) =
             { state with SearchAfter = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: FleetSearchRequest, value: CoreTypes.Integer) =
+        member _.Size(state: FleetSearchRequest, value: Types.Integer) =
             { state with Size = Some value }
 
         [<CustomOperation("slice")>]
-        member _.Slice(state: FleetSearchRequest, value: CoreTypes.SlicedScroll) =
+        member _.Slice(state: FleetSearchRequest, value: Types.SlicedScroll) =
             { state with Slice = Some value }
 
         [<CustomOperation("sort")>]
-        member _.Sort(state: FleetSearchRequest, value: CoreTypes.Sort) =
+        member _.Sort(state: FleetSearchRequest, value: Types.Sort) =
             { state with Sort = Some value }
 
         [<CustomOperation("source")>]
-        member _.Source(state: FleetSearchRequest, value: GlobalSearchTypes.SourceConfig) =
+        member _.Source(state: FleetSearchRequest, value: Types.SourceConfig) =
             { state with Source = Some value }
 
         [<CustomOperation("fields")>]
-        member _.Fields(state: FleetSearchRequest, value: CoreTypes.FieldAndFormat list) =
+        member _.Fields(state: FleetSearchRequest, value: Types.FieldAndFormat list) =
             { state with Fields = Some value }
 
         [<CustomOperation("suggest")>]
-        member _.Suggest(state: FleetSearchRequest, value: GlobalSearchTypes.Suggester) =
+        member _.Suggest(state: FleetSearchRequest, value: Types.Suggester) =
             { state with Suggest = Some value }
 
         [<CustomOperation("terminateAfter")>]
-        member _.TerminateAfter(state: FleetSearchRequest, value: CoreTypes.Long) =
+        member _.TerminateAfter(state: FleetSearchRequest, value: Types.Long) =
             { state with TerminateAfter = Some value }
 
         [<CustomOperation("timeout")>]
@@ -843,15 +844,15 @@ module FleetOperations =
             { state with SeqNoPrimaryTerm = Some value }
 
         [<CustomOperation("storedFields")>]
-        member _.StoredFields(state: FleetSearchRequest, value: CoreTypes.Fields) =
+        member _.StoredFields(state: FleetSearchRequest, value: Types.Fields) =
             { state with StoredFields = Some value }
 
         [<CustomOperation("pit")>]
-        member _.Pit(state: FleetSearchRequest, value: GlobalSearchTypes.PointInTimeReference) =
+        member _.Pit(state: FleetSearchRequest, value: Types.PointInTimeReference) =
             { state with Pit = Some value }
 
         [<CustomOperation("runtimeMappings")>]
-        member _.RuntimeMappings(state: FleetSearchRequest, value: CoreTypes.RuntimeFields) =
+        member _.RuntimeMappings(state: FleetSearchRequest, value: Types.RuntimeFields) =
             { state with RuntimeMappings = Some value }
 
         [<CustomOperation("stats")>]
@@ -867,17 +868,17 @@ module FleetOperations =
             { req with Analyzer = Some value }
         let withAnalyzeWildcard (value: bool) (req: FleetSearchRequest) =
             { req with AnalyzeWildcard = Some value }
-        let withBatchedReduceSize (value: CoreTypes.Long) (req: FleetSearchRequest) =
+        let withBatchedReduceSize (value: Types.Long) (req: FleetSearchRequest) =
             { req with BatchedReduceSize = Some value }
         let withCcsMinimizeRoundtrips (value: bool) (req: FleetSearchRequest) =
             { req with CcsMinimizeRoundtrips = Some value }
-        let withDefaultOperator (value: CoreTypes.Operator) (req: FleetSearchRequest) =
+        let withDefaultOperator (value: Types.Operator) (req: FleetSearchRequest) =
             { req with DefaultOperator = Some value }
         let withDf (value: string) (req: FleetSearchRequest) =
             { req with Df = Some value }
-        let withDocvalueFields (value: CoreTypes.Fields) (req: FleetSearchRequest) =
+        let withDocvalueFields (value: Types.Fields) (req: FleetSearchRequest) =
             { req with DocvalueFields = Some value }
-        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: FleetSearchRequest) =
+        let withExpandWildcards (value: Types.ExpandWildcards) (req: FleetSearchRequest) =
             { req with ExpandWildcards = Some value }
         let withExplain (value: bool) (req: FleetSearchRequest) =
             { req with Explain = Some value }
@@ -887,37 +888,37 @@ module FleetOperations =
             { req with IgnoreUnavailable = Some value }
         let withLenient (value: bool) (req: FleetSearchRequest) =
             { req with Lenient = Some value }
-        let withMaxConcurrentShardRequests (value: CoreTypes.Integer) (req: FleetSearchRequest) =
+        let withMaxConcurrentShardRequests (value: Types.Integer) (req: FleetSearchRequest) =
             { req with MaxConcurrentShardRequests = Some value }
         let withPreference (value: string) (req: FleetSearchRequest) =
             { req with Preference = Some value }
-        let withPreFilterShardSize (value: CoreTypes.Long) (req: FleetSearchRequest) =
+        let withPreFilterShardSize (value: Types.Long) (req: FleetSearchRequest) =
             { req with PreFilterShardSize = Some value }
         let withRequestCache (value: bool) (req: FleetSearchRequest) =
             { req with RequestCache = Some value }
-        let withRouting (value: CoreTypes.Routing) (req: FleetSearchRequest) =
+        let withRouting (value: Types.Routing) (req: FleetSearchRequest) =
             { req with Routing = Some value }
-        let withScroll (value: CoreTypes.Duration) (req: FleetSearchRequest) =
+        let withScroll (value: Types.Duration) (req: FleetSearchRequest) =
             { req with Scroll = Some value }
-        let withSearchType (value: CoreTypes.SearchType) (req: FleetSearchRequest) =
+        let withSearchType (value: Types.SearchType) (req: FleetSearchRequest) =
             { req with SearchType = Some value }
         let withStats (value: string list) (req: FleetSearchRequest) =
             { req with Stats = Some value }
-        let withStoredFields (value: CoreTypes.Fields) (req: FleetSearchRequest) =
+        let withStoredFields (value: Types.Fields) (req: FleetSearchRequest) =
             { req with StoredFields = Some value }
-        let withSuggestField (value: CoreTypes.Field) (req: FleetSearchRequest) =
+        let withSuggestField (value: Types.Field) (req: FleetSearchRequest) =
             { req with SuggestField = Some value }
-        let withSuggestMode (value: CoreTypes.SuggestMode) (req: FleetSearchRequest) =
+        let withSuggestMode (value: Types.SuggestMode) (req: FleetSearchRequest) =
             { req with SuggestMode = Some value }
-        let withSuggestSize (value: CoreTypes.Long) (req: FleetSearchRequest) =
+        let withSuggestSize (value: Types.Long) (req: FleetSearchRequest) =
             { req with SuggestSize = Some value }
         let withSuggestText (value: string) (req: FleetSearchRequest) =
             { req with SuggestText = Some value }
-        let withTerminateAfter (value: CoreTypes.Long) (req: FleetSearchRequest) =
+        let withTerminateAfter (value: Types.Long) (req: FleetSearchRequest) =
             { req with TerminateAfter = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: FleetSearchRequest) =
+        let withTimeout (value: Types.Duration) (req: FleetSearchRequest) =
             { req with Timeout = Some value }
-        let withTrackTotalHits (value: GlobalSearchTypes.TrackHits) (req: FleetSearchRequest) =
+        let withTrackTotalHits (value: Types.TrackHits) (req: FleetSearchRequest) =
             { req with TrackTotalHits = Some value }
         let withTrackScores (value: bool) (req: FleetSearchRequest) =
             { req with TrackScores = Some value }
@@ -927,71 +928,71 @@ module FleetOperations =
             { req with RestTotalHitsAsInt = Some value }
         let withVersion (value: bool) (req: FleetSearchRequest) =
             { req with Version = Some value }
-        let withSource (value: GlobalSearchTypes.SourceConfigParam) (req: FleetSearchRequest) =
+        let withSource (value: Types.SourceConfigParam) (req: FleetSearchRequest) =
             { req with Source = Some value }
-        let withSourceExcludes (value: CoreTypes.Fields) (req: FleetSearchRequest) =
+        let withSourceExcludes (value: Types.Fields) (req: FleetSearchRequest) =
             { req with SourceExcludes = Some value }
-        let withSourceIncludes (value: CoreTypes.Fields) (req: FleetSearchRequest) =
+        let withSourceIncludes (value: Types.Fields) (req: FleetSearchRequest) =
             { req with SourceIncludes = Some value }
         let withSeqNoPrimaryTerm (value: bool) (req: FleetSearchRequest) =
             { req with SeqNoPrimaryTerm = Some value }
         let withQ (value: string) (req: FleetSearchRequest) =
             { req with Q = Some value }
-        let withSize (value: CoreTypes.Integer) (req: FleetSearchRequest) =
+        let withSize (value: Types.Integer) (req: FleetSearchRequest) =
             { req with Size = Some value }
-        let withFrom (value: CoreTypes.Integer) (req: FleetSearchRequest) =
+        let withFrom (value: Types.Integer) (req: FleetSearchRequest) =
             { req with From = Some value }
         let withSort (value: System.Text.Json.JsonElement) (req: FleetSearchRequest) =
             { req with Sort = Some value }
-        let withWaitForCheckpoints (value: FleetTypes.Checkpoint list) (req: FleetSearchRequest) =
+        let withWaitForCheckpoints (value: Types.Checkpoint list) (req: FleetSearchRequest) =
             { req with WaitForCheckpoints = Some value }
         let withAllowPartialSearchResults (value: bool) (req: FleetSearchRequest) =
             { req with AllowPartialSearchResults = Some value }
-        let withAggregations (value: Map<string, CoreTypes.AggregationContainer>) (req: FleetSearchRequest) =
+        let withAggregations (value: Map<string, Types.AggregationContainer>) (req: FleetSearchRequest) =
             { req with Aggregations = Some value }
-        let withCollapse (value: GlobalSearchTypes.FieldCollapse) (req: FleetSearchRequest) =
+        let withCollapse (value: Types.FieldCollapse) (req: FleetSearchRequest) =
             { req with Collapse = Some value }
         let withExplain (value: bool) (req: FleetSearchRequest) =
             { req with Explain = Some value }
         let withExt (value: Map<string, System.Text.Json.JsonElement>) (req: FleetSearchRequest) =
             { req with Ext = Some value }
-        let withFrom (value: CoreTypes.Integer) (req: FleetSearchRequest) =
+        let withFrom (value: Types.Integer) (req: FleetSearchRequest) =
             { req with From = Some value }
-        let withHighlight (value: GlobalSearchTypes.Highlight) (req: FleetSearchRequest) =
+        let withHighlight (value: Types.Highlight) (req: FleetSearchRequest) =
             { req with Highlight = Some value }
-        let withTrackTotalHits (value: GlobalSearchTypes.TrackHits) (req: FleetSearchRequest) =
+        let withTrackTotalHits (value: Types.TrackHits) (req: FleetSearchRequest) =
             { req with TrackTotalHits = Some value }
-        let withIndicesBoost (value: Map<CoreTypes.IndexName, CoreTypes.Double> list) (req: FleetSearchRequest) =
+        let withIndicesBoost (value: Map<Types.IndexName, Types.Double> list) (req: FleetSearchRequest) =
             { req with IndicesBoost = Some value }
-        let withDocvalueFields (value: CoreTypes.FieldAndFormat list) (req: FleetSearchRequest) =
+        let withDocvalueFields (value: Types.FieldAndFormat list) (req: FleetSearchRequest) =
             { req with DocvalueFields = Some value }
-        let withMinScore (value: CoreTypes.Double) (req: FleetSearchRequest) =
+        let withMinScore (value: Types.Double) (req: FleetSearchRequest) =
             { req with MinScore = Some value }
-        let withPostFilter (value: CoreTypes.QueryContainer) (req: FleetSearchRequest) =
+        let withPostFilter (value: Types.QueryContainer) (req: FleetSearchRequest) =
             { req with PostFilter = Some value }
         let withProfile (value: bool) (req: FleetSearchRequest) =
             { req with Profile = Some value }
-        let withQuery (value: CoreTypes.QueryContainer) (req: FleetSearchRequest) =
+        let withQuery (value: Types.QueryContainer) (req: FleetSearchRequest) =
             { req with Query = Some value }
         let withRescore (value: System.Text.Json.JsonElement) (req: FleetSearchRequest) =
             { req with Rescore = Some value }
-        let withScriptFields (value: Map<string, CoreTypes.ScriptField>) (req: FleetSearchRequest) =
+        let withScriptFields (value: Map<string, Types.ScriptField>) (req: FleetSearchRequest) =
             { req with ScriptFields = Some value }
-        let withSearchAfter (value: CoreTypes.SortResults) (req: FleetSearchRequest) =
+        let withSearchAfter (value: Types.SortResults) (req: FleetSearchRequest) =
             { req with SearchAfter = Some value }
-        let withSize (value: CoreTypes.Integer) (req: FleetSearchRequest) =
+        let withSize (value: Types.Integer) (req: FleetSearchRequest) =
             { req with Size = Some value }
-        let withSlice (value: CoreTypes.SlicedScroll) (req: FleetSearchRequest) =
+        let withSlice (value: Types.SlicedScroll) (req: FleetSearchRequest) =
             { req with Slice = Some value }
-        let withSort (value: CoreTypes.Sort) (req: FleetSearchRequest) =
+        let withSort (value: Types.Sort) (req: FleetSearchRequest) =
             { req with Sort = Some value }
-        let withSource (value: GlobalSearchTypes.SourceConfig) (req: FleetSearchRequest) =
+        let withSource (value: Types.SourceConfig) (req: FleetSearchRequest) =
             { req with Source = Some value }
-        let withFields (value: CoreTypes.FieldAndFormat list) (req: FleetSearchRequest) =
+        let withFields (value: Types.FieldAndFormat list) (req: FleetSearchRequest) =
             { req with Fields = Some value }
-        let withSuggest (value: GlobalSearchTypes.Suggester) (req: FleetSearchRequest) =
+        let withSuggest (value: Types.Suggester) (req: FleetSearchRequest) =
             { req with Suggest = Some value }
-        let withTerminateAfter (value: CoreTypes.Long) (req: FleetSearchRequest) =
+        let withTerminateAfter (value: Types.Long) (req: FleetSearchRequest) =
             { req with TerminateAfter = Some value }
         let withTimeout (value: string) (req: FleetSearchRequest) =
             { req with Timeout = Some value }
@@ -1001,11 +1002,11 @@ module FleetOperations =
             { req with Version = Some value }
         let withSeqNoPrimaryTerm (value: bool) (req: FleetSearchRequest) =
             { req with SeqNoPrimaryTerm = Some value }
-        let withStoredFields (value: CoreTypes.Fields) (req: FleetSearchRequest) =
+        let withStoredFields (value: Types.Fields) (req: FleetSearchRequest) =
             { req with StoredFields = Some value }
-        let withPit (value: GlobalSearchTypes.PointInTimeReference) (req: FleetSearchRequest) =
+        let withPit (value: Types.PointInTimeReference) (req: FleetSearchRequest) =
             { req with Pit = Some value }
-        let withRuntimeMappings (value: CoreTypes.RuntimeFields) (req: FleetSearchRequest) =
+        let withRuntimeMappings (value: Types.RuntimeFields) (req: FleetSearchRequest) =
             { req with RuntimeMappings = Some value }
         let withStats (value: string list) (req: FleetSearchRequest) =
             { req with Stats = Some value }

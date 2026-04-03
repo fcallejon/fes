@@ -4,13 +4,13 @@ namespace Fes.Generated.Builders
 
 
 open System.Text.Json.Serialization
-open Fes.Generated.Types
+open Fes.Generated
 
 [<AutoOpen>]
 module MlGetMemoryStatsBuilders =
 
     type JvmStatsBuilder() =
-        member _.Yield(_: unit) : JvmStats =
+        member _.Yield(_: unit) : Types.JvmStats =
             {
                 HeapMax = None
                 HeapMaxInBytes = Unchecked.defaultof<_>
@@ -21,33 +21,33 @@ module MlGetMemoryStatsBuilders =
             }
 
         [<CustomOperation("heapMax")>]
-        member _.HeapMax(state: JvmStats, value: CoreTypes.ByteSize) =
+        member _.HeapMax(state: Types.JvmStats, value: Types.ByteSize) =
             { state with HeapMax = Some value }
 
         [<CustomOperation("heapMaxInBytes")>]
-        member _.HeapMaxInBytes(state: JvmStats, value: CoreTypes.Integer) =
+        member _.HeapMaxInBytes(state: Types.JvmStats, value: Types.Integer) =
             { state with HeapMaxInBytes = value }
 
         [<CustomOperation("javaInference")>]
-        member _.JavaInference(state: JvmStats, value: CoreTypes.ByteSize) =
+        member _.JavaInference(state: Types.JvmStats, value: Types.ByteSize) =
             { state with JavaInference = Some value }
 
         [<CustomOperation("javaInferenceInBytes")>]
-        member _.JavaInferenceInBytes(state: JvmStats, value: CoreTypes.Integer) =
+        member _.JavaInferenceInBytes(state: Types.JvmStats, value: Types.Integer) =
             { state with JavaInferenceInBytes = value }
 
         [<CustomOperation("javaInferenceMax")>]
-        member _.JavaInferenceMax(state: JvmStats, value: CoreTypes.ByteSize) =
+        member _.JavaInferenceMax(state: Types.JvmStats, value: Types.ByteSize) =
             { state with JavaInferenceMax = Some value }
 
         [<CustomOperation("javaInferenceMaxInBytes")>]
-        member _.JavaInferenceMaxInBytes(state: JvmStats, value: CoreTypes.Integer) =
+        member _.JavaInferenceMaxInBytes(state: Types.JvmStats, value: Types.Integer) =
             { state with JavaInferenceMaxInBytes = value }
 
     let jvmStats = JvmStatsBuilder()
 
     type MemMlStatsBuilder() =
-        member _.Yield(_: unit) : MemMlStats =
+        member _.Yield(_: unit) : Types.MemMlStats =
             {
                 AnomalyDetectors = None
                 AnomalyDetectorsInBytes = Unchecked.defaultof<_>
@@ -62,49 +62,49 @@ module MlGetMemoryStatsBuilders =
             }
 
         [<CustomOperation("anomalyDetectors")>]
-        member _.AnomalyDetectors(state: MemMlStats, value: CoreTypes.ByteSize) =
+        member _.AnomalyDetectors(state: Types.MemMlStats, value: Types.ByteSize) =
             { state with AnomalyDetectors = Some value }
 
         [<CustomOperation("anomalyDetectorsInBytes")>]
-        member _.AnomalyDetectorsInBytes(state: MemMlStats, value: CoreTypes.Integer) =
+        member _.AnomalyDetectorsInBytes(state: Types.MemMlStats, value: Types.Integer) =
             { state with AnomalyDetectorsInBytes = value }
 
         [<CustomOperation("dataFrameAnalytics")>]
-        member _.DataFrameAnalytics(state: MemMlStats, value: CoreTypes.ByteSize) =
+        member _.DataFrameAnalytics(state: Types.MemMlStats, value: Types.ByteSize) =
             { state with DataFrameAnalytics = Some value }
 
         [<CustomOperation("dataFrameAnalyticsInBytes")>]
-        member _.DataFrameAnalyticsInBytes(state: MemMlStats, value: CoreTypes.Integer) =
+        member _.DataFrameAnalyticsInBytes(state: Types.MemMlStats, value: Types.Integer) =
             { state with DataFrameAnalyticsInBytes = value }
 
         [<CustomOperation("max")>]
-        member _.Max(state: MemMlStats, value: CoreTypes.ByteSize) =
+        member _.Max(state: Types.MemMlStats, value: Types.ByteSize) =
             { state with Max = Some value }
 
         [<CustomOperation("maxInBytes")>]
-        member _.MaxInBytes(state: MemMlStats, value: CoreTypes.Integer) =
+        member _.MaxInBytes(state: Types.MemMlStats, value: Types.Integer) =
             { state with MaxInBytes = value }
 
         [<CustomOperation("nativeCodeOverhead")>]
-        member _.NativeCodeOverhead(state: MemMlStats, value: CoreTypes.ByteSize) =
+        member _.NativeCodeOverhead(state: Types.MemMlStats, value: Types.ByteSize) =
             { state with NativeCodeOverhead = Some value }
 
         [<CustomOperation("nativeCodeOverheadInBytes")>]
-        member _.NativeCodeOverheadInBytes(state: MemMlStats, value: CoreTypes.Integer) =
+        member _.NativeCodeOverheadInBytes(state: Types.MemMlStats, value: Types.Integer) =
             { state with NativeCodeOverheadInBytes = value }
 
         [<CustomOperation("nativeInference")>]
-        member _.NativeInference(state: MemMlStats, value: CoreTypes.ByteSize) =
+        member _.NativeInference(state: Types.MemMlStats, value: Types.ByteSize) =
             { state with NativeInference = Some value }
 
         [<CustomOperation("nativeInferenceInBytes")>]
-        member _.NativeInferenceInBytes(state: MemMlStats, value: CoreTypes.Integer) =
+        member _.NativeInferenceInBytes(state: Types.MemMlStats, value: Types.Integer) =
             { state with NativeInferenceInBytes = value }
 
     let memMlStats = MemMlStatsBuilder()
 
     type MemStatsBuilder() =
-        member _.Yield(_: unit) : MemStats =
+        member _.Yield(_: unit) : Types.MemStats =
             {
                 AdjustedTotal = None
                 AdjustedTotalInBytes = Unchecked.defaultof<_>
@@ -114,23 +114,23 @@ module MlGetMemoryStatsBuilders =
             }
 
         [<CustomOperation("adjustedTotal")>]
-        member _.AdjustedTotal(state: MemStats, value: CoreTypes.ByteSize) =
+        member _.AdjustedTotal(state: Types.MemStats, value: Types.ByteSize) =
             { state with AdjustedTotal = Some value }
 
         [<CustomOperation("adjustedTotalInBytes")>]
-        member _.AdjustedTotalInBytes(state: MemStats, value: CoreTypes.Integer) =
+        member _.AdjustedTotalInBytes(state: Types.MemStats, value: Types.Integer) =
             { state with AdjustedTotalInBytes = value }
 
         [<CustomOperation("total")>]
-        member _.Total(state: MemStats, value: CoreTypes.ByteSize) =
+        member _.Total(state: Types.MemStats, value: Types.ByteSize) =
             { state with Total = Some value }
 
         [<CustomOperation("totalInBytes")>]
-        member _.TotalInBytes(state: MemStats, value: CoreTypes.Integer) =
+        member _.TotalInBytes(state: Types.MemStats, value: Types.Integer) =
             { state with TotalInBytes = value }
 
         [<CustomOperation("ml")>]
-        member _.Ml(state: MemStats, value: MlGetMemoryStats.MemMlStats) =
+        member _.Ml(state: Types.MemStats, value: Types.MemMlStats) =
             { state with Ml = value }
 
     let memStats = MemStatsBuilder()

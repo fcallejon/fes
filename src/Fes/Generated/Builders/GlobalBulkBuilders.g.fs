@@ -4,13 +4,13 @@ namespace Fes.Generated.Builders
 
 
 open System.Text.Json.Serialization
-open Fes.Generated.Types
+open Fes.Generated
 
 [<AutoOpen>]
 module GlobalBulkBuilders =
 
     type OperationBaseBuilder() =
-        member _.Yield(_: unit) : OperationBase =
+        member _.Yield(_: unit) : Types.OperationBase =
             {
                 Id = None
                 Index = None
@@ -22,51 +22,51 @@ module GlobalBulkBuilders =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: OperationBase, value: CoreTypes.Id) =
+        member _.Id(state: Types.OperationBase, value: Types.Id) =
             { state with Id = Some value }
 
         [<CustomOperation("index")>]
-        member _.Index(state: OperationBase, value: CoreTypes.IndexName) =
+        member _.Index(state: Types.OperationBase, value: Types.IndexName) =
             { state with Index = Some value }
 
         [<CustomOperation("routing")>]
-        member _.Routing(state: OperationBase, value: string) =
+        member _.Routing(state: Types.OperationBase, value: string) =
             { state with Routing = Some value }
 
         [<CustomOperation("ifPrimaryTerm")>]
-        member _.IfPrimaryTerm(state: OperationBase, value: CoreTypes.Long) =
+        member _.IfPrimaryTerm(state: Types.OperationBase, value: Types.Long) =
             { state with IfPrimaryTerm = Some value }
 
         [<CustomOperation("ifSeqNo")>]
-        member _.IfSeqNo(state: OperationBase, value: CoreTypes.SequenceNumber) =
+        member _.IfSeqNo(state: Types.OperationBase, value: Types.SequenceNumber) =
             { state with IfSeqNo = Some value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: OperationBase, value: CoreTypes.VersionNumber) =
+        member _.Version(state: Types.OperationBase, value: Types.VersionNumber) =
             { state with Version = Some value }
 
         [<CustomOperation("versionType")>]
-        member _.VersionType(state: OperationBase, value: CoreTypes.VersionType) =
+        member _.VersionType(state: Types.OperationBase, value: Types.VersionType) =
             { state with VersionType = Some value }
 
     let operationBase = OperationBaseBuilder()
 
     module Operation =
 
-        let index (value: GlobalBulk.IndexOperation) =
-            OperationContainer.Index value
+        let index (value: Types.IndexOperation) =
+            Types.OperationContainer.Index value
 
-        let create (value: GlobalBulk.CreateOperation) =
-            OperationContainer.Create value
+        let create (value: Types.CreateOperation) =
+            Types.OperationContainer.Create value
 
-        let update (value: GlobalBulk.UpdateOperation) =
-            OperationContainer.Update value
+        let update (value: Types.UpdateOperation) =
+            Types.OperationContainer.Update value
 
-        let delete (value: GlobalBulk.DeleteOperation) =
-            OperationContainer.Delete value
+        let delete (value: Types.DeleteOperation) =
+            Types.OperationContainer.Delete value
 
-    type ResponseItemBuilder() =
-        member _.Yield(_: unit) : ResponseItem =
+    type GlobalBulkResponseItemBuilder() =
+        member _.Yield(_: unit) : Types.GlobalBulkResponseItem =
             {
                 Id = None
                 Index = Unchecked.defaultof<_>
@@ -83,116 +83,74 @@ module GlobalBulkBuilders =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: ResponseItem, value: string option) =
+        member _.Id(state: Types.GlobalBulkResponseItem, value: string option) =
             { state with Id = Some value }
 
         [<CustomOperation("index")>]
-        member _.Index(state: ResponseItem, value: string) =
+        member _.Index(state: Types.GlobalBulkResponseItem, value: string) =
             { state with Index = value }
 
         [<CustomOperation("status")>]
-        member _.Status(state: ResponseItem, value: CoreTypes.Integer) =
+        member _.Status(state: Types.GlobalBulkResponseItem, value: Types.Integer) =
             { state with Status = value }
 
         [<CustomOperation("failureStore")>]
-        member _.FailureStore(state: ResponseItem, value: GlobalBulk.FailureStoreStatus) =
+        member _.FailureStore(state: Types.GlobalBulkResponseItem, value: Types.FailureStoreStatus) =
             { state with FailureStore = Some value }
 
         [<CustomOperation("error")>]
-        member _.Error(state: ResponseItem, value: CoreTypes.ErrorCause) =
+        member _.Error(state: Types.GlobalBulkResponseItem, value: Types.ErrorCause) =
             { state with Error = Some value }
 
         [<CustomOperation("primaryTerm")>]
-        member _.PrimaryTerm(state: ResponseItem, value: CoreTypes.Long) =
+        member _.PrimaryTerm(state: Types.GlobalBulkResponseItem, value: Types.Long) =
             { state with PrimaryTerm = Some value }
 
         [<CustomOperation("result")>]
-        member _.Result(state: ResponseItem, value: string) =
+        member _.Result(state: Types.GlobalBulkResponseItem, value: string) =
             { state with Result = Some value }
 
         [<CustomOperation("seqNo")>]
-        member _.SeqNo(state: ResponseItem, value: CoreTypes.SequenceNumber) =
+        member _.SeqNo(state: Types.GlobalBulkResponseItem, value: Types.SequenceNumber) =
             { state with SeqNo = Some value }
 
         [<CustomOperation("shards")>]
-        member _.Shards(state: ResponseItem, value: CoreTypes.ShardStatistics) =
+        member _.Shards(state: Types.GlobalBulkResponseItem, value: Types.ShardStatistics) =
             { state with Shards = Some value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: ResponseItem, value: CoreTypes.VersionNumber) =
+        member _.Version(state: Types.GlobalBulkResponseItem, value: Types.VersionNumber) =
             { state with Version = Some value }
 
         [<CustomOperation("forcedRefresh")>]
-        member _.ForcedRefresh(state: ResponseItem, value: bool) =
+        member _.ForcedRefresh(state: Types.GlobalBulkResponseItem, value: bool) =
             { state with ForcedRefresh = Some value }
 
         [<CustomOperation("get")>]
-        member _.Get(state: ResponseItem, value: CoreTypes.InlineGet<Map<string, System.Text.Json.JsonElement>>) =
+        member _.Get(state: Types.GlobalBulkResponseItem, value: Types.InlineGet<Map<string, System.Text.Json.JsonElement>>) =
             { state with Get = Some value }
 
-    let responseItem = ResponseItemBuilder()
-
-    type UpdateActionBuilder() =
-        member _.Yield(_: unit) : UpdateAction =
-            {
-                DetectNoop = None
-                Doc = None
-                DocAsUpsert = None
-                Script = None
-                ScriptedUpsert = None
-                Source = None
-                Upsert = None
-            }
-
-        [<CustomOperation("detectNoop")>]
-        member _.DetectNoop(state: UpdateAction, value: bool) =
-            { state with DetectNoop = Some value }
-
-        [<CustomOperation("doc")>]
-        member _.Doc(state: UpdateAction, value: 'tPartialDocument) =
-            { state with Doc = Some value }
-
-        [<CustomOperation("docAsUpsert")>]
-        member _.DocAsUpsert(state: UpdateAction, value: bool) =
-            { state with DocAsUpsert = Some value }
-
-        [<CustomOperation("script")>]
-        member _.Script(state: UpdateAction, value: CoreTypes.Script) =
-            { state with Script = Some value }
-
-        [<CustomOperation("scriptedUpsert")>]
-        member _.ScriptedUpsert(state: UpdateAction, value: bool) =
-            { state with ScriptedUpsert = Some value }
-
-        [<CustomOperation("source")>]
-        member _.Source(state: UpdateAction, value: GlobalSearchTypes.SourceConfig) =
-            { state with Source = Some value }
-
-        [<CustomOperation("upsert")>]
-        member _.Upsert(state: UpdateAction, value: 'tDocument) =
-            { state with Upsert = Some value }
-
-    let updateAction = UpdateActionBuilder()
+    let globalBulkResponseItem = GlobalBulkResponseItemBuilder()
 
     type UpdateOperationBuilder() =
-        member _.Yield(_: unit) : UpdateOperation =
+        member _.Yield(_: unit) : Types.UpdateOperation =
             {
                 RequireAlias = None
                 RetryOnConflict = None
             }
 
         [<CustomOperation("requireAlias")>]
-        member _.RequireAlias(state: UpdateOperation, value: bool) =
+        member _.RequireAlias(state: Types.UpdateOperation, value: bool) =
             { state with RequireAlias = Some value }
 
         [<CustomOperation("retryOnConflict")>]
-        member _.RetryOnConflict(state: UpdateOperation, value: CoreTypes.Integer) =
+        member _.RetryOnConflict(state: Types.UpdateOperation, value: Types.Integer) =
             { state with RetryOnConflict = Some value }
 
     let updateOperation = UpdateOperationBuilder()
 
     type WriteOperationBuilder() =
-        member _.Yield(_: unit) : WriteOperation =
+        member _.Yield(_: unit) : Types.WriteOperation =
             {
                 DynamicTemplates = None
                 Pipeline = None
@@ -200,15 +158,15 @@ module GlobalBulkBuilders =
             }
 
         [<CustomOperation("dynamicTemplates")>]
-        member _.DynamicTemplates(state: WriteOperation, value: Map<string, string>) =
+        member _.DynamicTemplates(state: Types.WriteOperation, value: Map<string, string>) =
             { state with DynamicTemplates = Some value }
 
         [<CustomOperation("pipeline")>]
-        member _.Pipeline(state: WriteOperation, value: string) =
+        member _.Pipeline(state: Types.WriteOperation, value: string) =
             { state with Pipeline = Some value }
 
         [<CustomOperation("requireAlias")>]
-        member _.RequireAlias(state: WriteOperation, value: bool) =
+        member _.RequireAlias(state: Types.WriteOperation, value: bool) =
             { state with RequireAlias = Some value }
 
     let writeOperation = WriteOperationBuilder()

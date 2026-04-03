@@ -4,13 +4,13 @@ namespace Fes.Generated.Builders
 
 
 open System.Text.Json.Serialization
-open Fes.Generated.Types
+open Fes.Generated
 
 [<AutoOpen>]
 module IndicesShardStoresBuilders =
 
     type ShardStoreBuilder() =
-        member _.Yield(_: unit) : ShardStore =
+        member _.Yield(_: unit) : Types.ShardStore =
             {
                 Allocation = Unchecked.defaultof<_>
                 AllocationId = None
@@ -18,21 +18,21 @@ module IndicesShardStoresBuilders =
             }
 
         [<CustomOperation("allocation")>]
-        member _.Allocation(state: ShardStore, value: IndicesShardStores.ShardStoreAllocation) =
+        member _.Allocation(state: Types.ShardStore, value: Types.ShardStoreAllocation) =
             { state with Allocation = value }
 
         [<CustomOperation("allocationId")>]
-        member _.AllocationId(state: ShardStore, value: CoreTypes.Id) =
+        member _.AllocationId(state: Types.ShardStore, value: Types.Id) =
             { state with AllocationId = Some value }
 
         [<CustomOperation("storeException")>]
-        member _.StoreException(state: ShardStore, value: IndicesShardStores.ShardStoreException) =
+        member _.StoreException(state: Types.ShardStore, value: Types.ShardStoreException) =
             { state with StoreException = Some value }
 
     let shardStore = ShardStoreBuilder()
 
     type ShardStoreNodeBuilder() =
-        member _.Yield(_: unit) : ShardStoreNode =
+        member _.Yield(_: unit) : Types.ShardStoreNode =
             {
                 Attributes = Unchecked.defaultof<_>
                 EphemeralId = None
@@ -43,27 +43,27 @@ module IndicesShardStoresBuilders =
             }
 
         [<CustomOperation("attributes")>]
-        member _.Attributes(state: ShardStoreNode, value: Map<string, string>) =
+        member _.Attributes(state: Types.ShardStoreNode, value: Map<string, string>) =
             { state with Attributes = value }
 
         [<CustomOperation("ephemeralId")>]
-        member _.EphemeralId(state: ShardStoreNode, value: string) =
+        member _.EphemeralId(state: Types.ShardStoreNode, value: string) =
             { state with EphemeralId = Some value }
 
         [<CustomOperation("externalId")>]
-        member _.ExternalId(state: ShardStoreNode, value: string) =
+        member _.ExternalId(state: Types.ShardStoreNode, value: string) =
             { state with ExternalId = Some value }
 
         [<CustomOperation("name")>]
-        member _.Name(state: ShardStoreNode, value: CoreTypes.Name) =
+        member _.Name(state: Types.ShardStoreNode, value: Types.Name) =
             { state with Name = value }
 
         [<CustomOperation("roles")>]
-        member _.Roles(state: ShardStoreNode, value: string list) =
+        member _.Roles(state: Types.ShardStoreNode, value: string list) =
             { state with Roles = value }
 
         [<CustomOperation("transportAddress")>]
-        member _.TransportAddress(state: ShardStoreNode, value: CoreTypes.TransportAddress) =
+        member _.TransportAddress(state: Types.ShardStoreNode, value: Types.TransportAddress) =
             { state with TransportAddress = value }
 
     let shardStoreNode = ShardStoreNodeBuilder()

@@ -7,6 +7,7 @@ open System
 open System.Text.Json
 open System.Text.Json.Serialization
 open Fes
+open Fes.Generated
 
 [<AutoOpen>]
 module SslOperations =
@@ -24,7 +25,7 @@ module SslOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type SslCertificatesResponse = SslCertificates.CertificateInformation list
+    type SslCertificatesResponse = Types.CertificateInformation list
 
     type SslCertificatesRequestBuilder() =
         member _.Yield(_: unit) : SslCertificatesRequest =

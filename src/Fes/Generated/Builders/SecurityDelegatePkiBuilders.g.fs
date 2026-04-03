@@ -4,13 +4,13 @@ namespace Fes.Generated.Builders
 
 
 open System.Text.Json.Serialization
-open Fes.Generated.Types
+open Fes.Generated
 
 [<AutoOpen>]
 module SecurityDelegatePkiBuilders =
 
     type AuthenticationBuilder() =
-        member _.Yield(_: unit) : Authentication =
+        member _.Yield(_: unit) : Types.Authentication =
             {
                 Username = Unchecked.defaultof<_>
                 Roles = Unchecked.defaultof<_>
@@ -26,47 +26,47 @@ module SecurityDelegatePkiBuilders =
             }
 
         [<CustomOperation("username")>]
-        member _.Username(state: Authentication, value: string) =
+        member _.Username(state: Types.Authentication, value: string) =
             { state with Username = value }
 
         [<CustomOperation("roles")>]
-        member _.Roles(state: Authentication, value: string list) =
+        member _.Roles(state: Types.Authentication, value: string list) =
             { state with Roles = value }
 
         [<CustomOperation("fullName")>]
-        member _.FullName(state: Authentication, value: string option) =
+        member _.FullName(state: Types.Authentication, value: string option) =
             { state with FullName = value }
 
         [<CustomOperation("email")>]
-        member _.Email(state: Authentication, value: string option) =
+        member _.Email(state: Types.Authentication, value: string option) =
             { state with Email = value }
 
         [<CustomOperation("token")>]
-        member _.Token(state: Authentication, value: Map<string, string>) =
+        member _.Token(state: Types.Authentication, value: Map<string, string>) =
             { state with Token = Some value }
 
         [<CustomOperation("metadata")>]
-        member _.Metadata(state: Authentication, value: CoreTypes.Metadata) =
+        member _.Metadata(state: Types.Authentication, value: Types.Metadata) =
             { state with Metadata = value }
 
         [<CustomOperation("enabled")>]
-        member _.Enabled(state: Authentication, value: bool) =
+        member _.Enabled(state: Types.Authentication, value: bool) =
             { state with Enabled = value }
 
         [<CustomOperation("authenticationRealm")>]
-        member _.AuthenticationRealm(state: Authentication, value: SecurityDelegatePki.AuthenticationRealm) =
+        member _.AuthenticationRealm(state: Types.Authentication, value: Types.AuthenticationRealm) =
             { state with AuthenticationRealm = value }
 
         [<CustomOperation("lookupRealm")>]
-        member _.LookupRealm(state: Authentication, value: SecurityDelegatePki.AuthenticationRealm) =
+        member _.LookupRealm(state: Types.Authentication, value: Types.AuthenticationRealm) =
             { state with LookupRealm = value }
 
         [<CustomOperation("authenticationType")>]
-        member _.AuthenticationType(state: Authentication, value: string) =
+        member _.AuthenticationType(state: Types.Authentication, value: string) =
             { state with AuthenticationType = value }
 
         [<CustomOperation("apiKey")>]
-        member _.ApiKey(state: Authentication, value: Map<string, string>) =
+        member _.ApiKey(state: Types.Authentication, value: Map<string, string>) =
             { state with ApiKey = Some value }
 
     let authentication = AuthenticationBuilder()

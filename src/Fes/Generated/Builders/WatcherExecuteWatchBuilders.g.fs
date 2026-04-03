@@ -4,13 +4,13 @@ namespace Fes.Generated.Builders
 
 
 open System.Text.Json.Serialization
-open Fes.Generated.Types
+open Fes.Generated
 
 [<AutoOpen>]
 module WatcherExecuteWatchBuilders =
 
     type WatchRecordBuilder() =
-        member _.Yield(_: unit) : WatchRecord =
+        member _.Yield(_: unit) : Types.WatchRecord =
             {
                 Condition = Unchecked.defaultof<_>
                 Input = Unchecked.defaultof<_>
@@ -26,47 +26,47 @@ module WatcherExecuteWatchBuilders =
             }
 
         [<CustomOperation("condition")>]
-        member _.Condition(state: WatchRecord, value: WatcherTypes.ConditionContainer) =
+        member _.Condition(state: Types.WatchRecord, value: Types.ConditionContainer) =
             { state with Condition = value }
 
         [<CustomOperation("input")>]
-        member _.Input(state: WatchRecord, value: WatcherTypes.InputContainer) =
+        member _.Input(state: Types.WatchRecord, value: Types.InputContainer) =
             { state with Input = value }
 
         [<CustomOperation("messages")>]
-        member _.Messages(state: WatchRecord, value: string list) =
+        member _.Messages(state: Types.WatchRecord, value: string list) =
             { state with Messages = value }
 
         [<CustomOperation("metadata")>]
-        member _.Metadata(state: WatchRecord, value: CoreTypes.Metadata) =
+        member _.Metadata(state: Types.WatchRecord, value: Types.Metadata) =
             { state with Metadata = Some value }
 
         [<CustomOperation("node")>]
-        member _.Node(state: WatchRecord, value: string) =
+        member _.Node(state: Types.WatchRecord, value: string) =
             { state with Node = value }
 
         [<CustomOperation("result")>]
-        member _.Result(state: WatchRecord, value: WatcherTypes.ExecutionResult) =
+        member _.Result(state: Types.WatchRecord, value: Types.ExecutionResult) =
             { state with Result = value }
 
         [<CustomOperation("state")>]
-        member _.State(state: WatchRecord, value: WatcherTypes.ExecutionStatus) =
+        member _.State(state: Types.WatchRecord, value: Types.ExecutionStatus) =
             { state with State = value }
 
         [<CustomOperation("triggerEvent")>]
-        member _.TriggerEvent(state: WatchRecord, value: WatcherTypes.TriggerEventResult) =
+        member _.TriggerEvent(state: Types.WatchRecord, value: Types.TriggerEventResult) =
             { state with TriggerEvent = value }
 
         [<CustomOperation("user")>]
-        member _.User(state: WatchRecord, value: CoreTypes.Username) =
+        member _.User(state: Types.WatchRecord, value: Types.Username) =
             { state with User = value }
 
         [<CustomOperation("watchId")>]
-        member _.WatchId(state: WatchRecord, value: CoreTypes.Id) =
+        member _.WatchId(state: Types.WatchRecord, value: Types.Id) =
             { state with WatchId = value }
 
         [<CustomOperation("status")>]
-        member _.Status(state: WatchRecord, value: WatcherTypes.WatchStatus) =
+        member _.Status(state: Types.WatchRecord, value: Types.WatchStatus) =
             { state with Status = Some value }
 
     let watchRecord = WatchRecordBuilder()

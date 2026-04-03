@@ -8,11 +8,10 @@ open Fes.Generator.Emitters.FSharpWriter
 // Emit JsonConverter for container variant DUs
 // ============================================================================
 
-let private emitContainerVariantConverter (w: Writer) (ctx: TypeResolver.ResolveContext) (def: InterfaceDefinition) (nonExhaustive: bool) =
+let private emitContainerVariantConverter (w: Writer) (ctx: TypeResolver.ResolveContext) (def: InterfaceDefinition) (nonExhaustive: bool) (resolvedName: string) =
     let variantProps = def.Properties |> List.filter (fun p -> not p.ContainerProperty)
-    let duName = Namespacing.toFSharpTypeName def.Name.Name
-    let moduleName = Namespacing.toModuleName def.Name.Namespace
-    let fullDuName = $"{moduleName}.{duName}"
+    let duName = resolvedName
+    let fullDuName = duName
     let converterName = $"{duName}Converter"
 
     w.Line $"type {converterName}() ="
@@ -76,7 +75,7 @@ let private emitContainerVariantConverter (w: Writer) (ctx: TypeResolver.Resolve
             w.Line "reader.Read() |> ignore // StartObject"
             w.Line "let field = reader.GetString()"
             w.Line "reader.Read() |> ignore"
-            w.Line $"let v = System.Text.Json.JsonSerializer.Deserialize<{valueType}>(ref reader, options)"
+            w.Line $"let v = System.Text.Json.JsonSerializer.Deserialize<{valueType}>(&reader, options)"
             w.Line "reader.Read() |> ignore // EndObject"
             w.Line $"{fullDuName}.{caseName} (field, v)"
             w.Dedent()
@@ -84,13 +83,13 @@ let private emitContainerVariantConverter (w: Writer) (ctx: TypeResolver.Resolve
             let caseType = TypeResolver.resolveValueOf ctx p.Type
             w.Line $"| \"{p.Name}\" ->"
             w.Indent()
-            w.Line $"let v = System.Text.Json.JsonSerializer.Deserialize<{caseType}>(ref reader, options)"
+            w.Line $"let v = System.Text.Json.JsonSerializer.Deserialize<{caseType}>(&reader, options)"
             w.Line $"{fullDuName}.{caseName} v"
             w.Dedent()
     if nonExhaustive then
         w.Line "| other ->"
         w.Indent()
-        w.Line "let el = System.Text.Json.JsonElement.ParseValue(ref reader)"
+        w.Line "let el = System.Text.Json.JsonElement.ParseValue(&reader)"
         w.Line $"{fullDuName}.Unknown (other, el)"
         w.Dedent()
     else
@@ -106,10 +105,9 @@ let private emitContainerVariantConverter (w: Writer) (ctx: TypeResolver.Resolve
 // Emit JsonConverter for enums
 // ============================================================================
 
-let private emitEnumConverter (w: Writer) (def: EnumDefinition) =
-    let enumName = Namespacing.toFSharpTypeName def.Name.Name
-    let moduleName = Namespacing.toModuleName def.Name.Namespace
-    let fullName = $"{moduleName}.{enumName}"
+let private emitEnumConverter (w: Writer) (def: EnumDefinition) (resolvedName: string) =
+    let enumName = resolvedName
+    let fullName = enumName
     let converterName = $"{enumName}Converter"
 
     w.Line $"type {converterName}() ="
@@ -153,10 +151,9 @@ let private emitEnumConverter (w: Writer) (def: EnumDefinition) =
 // Emit JsonConverter for internal-tag variant DUs (type_alias)
 // ============================================================================
 
-let private emitInternalTagConverter (w: Writer) (ctx: TypeResolver.ResolveContext) (def: TypeAliasDefinition) (tag: string) (_defaultTag: string option) (nonExhaustive: bool) =
-    let duName = Namespacing.toFSharpTypeName def.Name.Name
-    let moduleName = Namespacing.toModuleName def.Name.Namespace
-    let fullDuName = $"{moduleName}.{duName}"
+let private emitInternalTagConverter (w: Writer) (ctx: TypeResolver.ResolveContext) (def: TypeAliasDefinition) (tag: string) (_defaultTag: string option) (nonExhaustive: bool) (resolvedName: string) =
+    let duName = resolvedName
+    let fullDuName = duName
     let converterName = $"{duName}Converter"
 
     w.Line $"type {converterName}() ="
@@ -184,7 +181,7 @@ let private emitInternalTagConverter (w: Writer) (ctx: TypeResolver.ResolveConte
 
     w.Line $"override _.Read(reader, _typeToConvert, options) ="
     w.Indent()
-    w.Line "let doc = System.Text.Json.JsonDocument.ParseValue(ref reader)"
+    w.Line "let doc = System.Text.Json.JsonDocument.ParseValue(&reader)"
     w.Line $"let tagValue ="
     w.Line $"    match doc.RootElement.TryGetProperty(\"{tag}\") with"
     w.Line "    | true, v -> v.GetString()"
@@ -226,6 +223,7 @@ let emitAllConverters (index: TypeIndex.TypeIndex) (types: TypeDefinition list) 
     w.Header()
     w.Namespace "Fes.Generated"
     w.BlankLine()
+    w.Open "Fes.Generated"
     w.Open "Fes.Generated.Types"
     w.BlankLine()
     w.Line "module Converters ="
@@ -234,28 +232,33 @@ let emitAllConverters (index: TypeIndex.TypeIndex) (types: TypeDefinition list) 
 
     let mutable converterNames = []
 
+    let lookupName (tn: TypeName) =
+        match Map.tryFind tn index.NameMap with
+        | Some n -> n
+        | None -> Namespacing.toFSharpTypeName tn.Name
+
     for td in types do
         match td with
         | TypeDefinition.Interface def ->
             match def.Variants with
             | Some (VariantKind.Container nonExhaustive) ->
                 let ctx = TypeResolver.makeContext index def.Generics
-                emitContainerVariantConverter w ctx def nonExhaustive
-                let duName = Namespacing.toFSharpTypeName def.Name.Name
+                let duName = lookupName def.Name
+                emitContainerVariantConverter w ctx def nonExhaustive duName
                 converterNames <- $"{duName}Converter" :: converterNames
             | _ -> ()
 
         | TypeDefinition.Enum def ->
-            emitEnumConverter w def
-            let enumName = Namespacing.toFSharpTypeName def.Name.Name
+            let enumName = lookupName def.Name
+            emitEnumConverter w def enumName
             converterNames <- $"{enumName}Converter" :: converterNames
 
         | TypeDefinition.TypeAlias def ->
             match def.Variants with
             | Some (VariantKind.InternalTag (tag, defaultTag, nonExhaustive)) ->
                 let ctx = TypeResolver.makeContext index def.Generics
-                emitInternalTagConverter w ctx def tag defaultTag nonExhaustive
-                let duName = Namespacing.toFSharpTypeName def.Name.Name
+                let duName = lookupName def.Name
+                emitInternalTagConverter w ctx def tag defaultTag nonExhaustive duName
                 converterNames <- $"{duName}Converter" :: converterNames
             | _ -> ()
 

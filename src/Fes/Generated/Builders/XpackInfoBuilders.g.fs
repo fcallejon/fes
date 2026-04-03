@@ -4,13 +4,13 @@ namespace Fes.Generated.Builders
 
 
 open System.Text.Json.Serialization
-open Fes.Generated.Types
+open Fes.Generated
 
 [<AutoOpen>]
 module XpackInfoBuilders =
 
-    type FeatureBuilder() =
-        member _.Yield(_: unit) : Feature =
+    type XpackInfoFeatureBuilder() =
+        member _.Yield(_: unit) : Types.XpackInfoFeature =
             {
                 Available = Unchecked.defaultof<_>
                 Description = None
@@ -19,20 +19,20 @@ module XpackInfoBuilders =
             }
 
         [<CustomOperation("available")>]
-        member _.Available(state: Feature, value: bool) =
+        member _.Available(state: Types.XpackInfoFeature, value: bool) =
             { state with Available = value }
 
         [<CustomOperation("description")>]
-        member _.Description(state: Feature, value: string) =
+        member _.Description(state: Types.XpackInfoFeature, value: string) =
             { state with Description = Some value }
 
         [<CustomOperation("enabled")>]
-        member _.Enabled(state: Feature, value: bool) =
+        member _.Enabled(state: Types.XpackInfoFeature, value: bool) =
             { state with Enabled = value }
 
         [<CustomOperation("nativeCodeInfo")>]
-        member _.NativeCodeInfo(state: Feature, value: XpackInfo.NativeCodeInformation) =
+        member _.NativeCodeInfo(state: Types.XpackInfoFeature, value: Types.NativeCodeInformation) =
             { state with NativeCodeInfo = Some value }
 
-    let feature = FeatureBuilder()
+    let xpackInfoFeature = XpackInfoFeatureBuilder()
 

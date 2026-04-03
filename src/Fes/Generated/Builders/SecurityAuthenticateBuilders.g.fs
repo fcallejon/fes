@@ -4,13 +4,13 @@ namespace Fes.Generated.Builders
 
 
 open System.Text.Json.Serialization
-open Fes.Generated.Types
+open Fes.Generated
 
 [<AutoOpen>]
 module SecurityAuthenticateBuilders =
 
     type AuthenticateApiKeyBuilder() =
-        member _.Yield(_: unit) : AuthenticateApiKey =
+        member _.Yield(_: unit) : Types.AuthenticateApiKey =
             {
                 Id = Unchecked.defaultof<_>
                 Name = None
@@ -19,19 +19,19 @@ module SecurityAuthenticateBuilders =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: AuthenticateApiKey, value: CoreTypes.Id) =
+        member _.Id(state: Types.AuthenticateApiKey, value: Types.Id) =
             { state with Id = value }
 
         [<CustomOperation("name")>]
-        member _.Name(state: AuthenticateApiKey, value: CoreTypes.Name) =
+        member _.Name(state: Types.AuthenticateApiKey, value: Types.Name) =
             { state with Name = Some value }
 
         [<CustomOperation("managedBy")>]
-        member _.ManagedBy(state: AuthenticateApiKey, value: SecurityTypes.ApiKeyManagedBy) =
+        member _.ManagedBy(state: Types.AuthenticateApiKey, value: Types.ApiKeyManagedBy) =
             { state with ManagedBy = value }
 
         [<CustomOperation("internal'")>]
-        member _.Internal(state: AuthenticateApiKey, value: bool) =
+        member _.Internal(state: Types.AuthenticateApiKey, value: bool) =
             { state with Internal = Some value }
 
     let authenticateApiKey = AuthenticateApiKeyBuilder()

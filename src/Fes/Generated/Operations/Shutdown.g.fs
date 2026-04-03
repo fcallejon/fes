@@ -7,14 +7,15 @@ open System
 open System.Text.Json
 open System.Text.Json.Serialization
 open Fes
+open Fes.Generated
 
 [<AutoOpen>]
 module ShutdownOperations =
 
     type ShutdownDeleteNodeRequest = {
-        NodeId: CoreTypes.NodeId
-        MasterTimeout: CoreTypes.Duration option
-        Timeout: CoreTypes.Duration option
+        NodeId: Types.NodeId
+        MasterTimeout: Types.Duration option
+        Timeout: Types.Duration option
     }
 
         with
@@ -36,7 +37,7 @@ module ShutdownOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type ShutdownDeleteNodeResponse = CoreTypes.AcknowledgedResponseBase
+    type ShutdownDeleteNodeResponse = Types.AcknowledgedResponseBase
 
     type ShutdownDeleteNodeRequestBuilder() =
         member _.Yield(_: unit) : ShutdownDeleteNodeRequest =
@@ -47,28 +48,28 @@ module ShutdownOperations =
             }
 
         [<CustomOperation("nodeId")>]
-        member _.NodeId(state: ShutdownDeleteNodeRequest, value: CoreTypes.NodeId) =
+        member _.NodeId(state: ShutdownDeleteNodeRequest, value: Types.NodeId) =
             { state with NodeId = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: ShutdownDeleteNodeRequest, value: CoreTypes.Duration) =
+        member _.MasterTimeout(state: ShutdownDeleteNodeRequest, value: Types.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: ShutdownDeleteNodeRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: ShutdownDeleteNodeRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
     let shutdownDeleteNodeRequest = ShutdownDeleteNodeRequestBuilder()
 
     module DeleteNode =
-        let withMasterTimeout (value: CoreTypes.Duration) (req: ShutdownDeleteNodeRequest) =
+        let withMasterTimeout (value: Types.Duration) (req: ShutdownDeleteNodeRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: ShutdownDeleteNodeRequest) =
+        let withTimeout (value: Types.Duration) (req: ShutdownDeleteNodeRequest) =
             { req with Timeout = Some value }
 
     type ShutdownGetNodeRequest = {
-        NodeId: CoreTypes.NodeIds
-        MasterTimeout: CoreTypes.Duration option
+        NodeId: Types.NodeIds
+        MasterTimeout: Types.Duration option
     }
 
         with
@@ -99,24 +100,24 @@ module ShutdownOperations =
             }
 
         [<CustomOperation("nodeId")>]
-        member _.NodeId(state: ShutdownGetNodeRequest, value: CoreTypes.NodeIds) =
+        member _.NodeId(state: ShutdownGetNodeRequest, value: Types.NodeIds) =
             { state with NodeId = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: ShutdownGetNodeRequest, value: CoreTypes.Duration) =
+        member _.MasterTimeout(state: ShutdownGetNodeRequest, value: Types.Duration) =
             { state with MasterTimeout = Some value }
 
     let shutdownGetNodeRequest = ShutdownGetNodeRequestBuilder()
 
     module GetNode =
-        let withMasterTimeout (value: CoreTypes.Duration) (req: ShutdownGetNodeRequest) =
+        let withMasterTimeout (value: Types.Duration) (req: ShutdownGetNodeRequest) =
             { req with MasterTimeout = Some value }
 
     type ShutdownPutNodeRequest = {
-        NodeId: CoreTypes.NodeId
-        MasterTimeout: CoreTypes.Duration option
-        Timeout: CoreTypes.Duration option
-        Type: ShutdownTypes.Type
+        NodeId: Types.NodeId
+        MasterTimeout: Types.Duration option
+        Timeout: Types.Duration option
+        Type: Types.Type
         Reason: string
         AllocationDelay: string option
         TargetNodeName: string option
@@ -142,7 +143,7 @@ module ShutdownOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type ShutdownPutNodeResponse = CoreTypes.AcknowledgedResponseBase
+    type ShutdownPutNodeResponse = Types.AcknowledgedResponseBase
 
     type ShutdownPutNodeRequestBuilder() =
         member _.Yield(_: unit) : ShutdownPutNodeRequest =
@@ -157,19 +158,19 @@ module ShutdownOperations =
             }
 
         [<CustomOperation("nodeId")>]
-        member _.NodeId(state: ShutdownPutNodeRequest, value: CoreTypes.NodeId) =
+        member _.NodeId(state: ShutdownPutNodeRequest, value: Types.NodeId) =
             { state with NodeId = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: ShutdownPutNodeRequest, value: CoreTypes.Duration) =
+        member _.MasterTimeout(state: ShutdownPutNodeRequest, value: Types.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: ShutdownPutNodeRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: ShutdownPutNodeRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: ShutdownPutNodeRequest, value: ShutdownTypes.Type) =
+        member _.Type(state: ShutdownPutNodeRequest, value: Types.Type) =
             { state with Type = value }
 
         [<CustomOperation("reason")>]
@@ -187,11 +188,11 @@ module ShutdownOperations =
     let shutdownPutNodeRequest = ShutdownPutNodeRequestBuilder()
 
     module PutNode =
-        let withMasterTimeout (value: CoreTypes.Duration) (req: ShutdownPutNodeRequest) =
+        let withMasterTimeout (value: Types.Duration) (req: ShutdownPutNodeRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: ShutdownPutNodeRequest) =
+        let withTimeout (value: Types.Duration) (req: ShutdownPutNodeRequest) =
             { req with Timeout = Some value }
-        let withType (value: ShutdownTypes.Type) (req: ShutdownPutNodeRequest) =
+        let withType (value: Types.Type) (req: ShutdownPutNodeRequest) =
             { req with Type = value }
         let withReason (value: string) (req: ShutdownPutNodeRequest) =
             { req with Reason = value }

@@ -7,18 +7,19 @@ open System
 open System.Text.Json
 open System.Text.Json.Serialization
 open Fes
+open Fes.Generated
 
 [<AutoOpen>]
 module GraphOperations =
 
     type GraphExploreRequest = {
-        Index: CoreTypes.Indices
-        Routing: CoreTypes.Routing option
-        Timeout: CoreTypes.Duration option
-        Connections: GraphTypes.Hop option
-        Controls: GraphTypes.ExploreControls option
-        Query: CoreTypes.QueryContainer option
-        Vertices: GraphTypes.VertexDefinition list option
+        Index: Types.Indices
+        Routing: Types.Routing option
+        Timeout: Types.Duration option
+        Connections: Types.Hop option
+        Controls: Types.ExploreControls option
+        Query: Types.QueryContainer option
+        Vertices: Types.VertexDefinition list option
     }
 
         with
@@ -56,46 +57,46 @@ module GraphOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: GraphExploreRequest, value: CoreTypes.Indices) =
+        member _.Index(state: GraphExploreRequest, value: Types.Indices) =
             { state with Index = value }
 
         [<CustomOperation("routing")>]
-        member _.Routing(state: GraphExploreRequest, value: CoreTypes.Routing) =
+        member _.Routing(state: GraphExploreRequest, value: Types.Routing) =
             { state with Routing = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: GraphExploreRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: GraphExploreRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("connections")>]
-        member _.Connections(state: GraphExploreRequest, value: GraphTypes.Hop) =
+        member _.Connections(state: GraphExploreRequest, value: Types.Hop) =
             { state with Connections = Some value }
 
         [<CustomOperation("controls")>]
-        member _.Controls(state: GraphExploreRequest, value: GraphTypes.ExploreControls) =
+        member _.Controls(state: GraphExploreRequest, value: Types.ExploreControls) =
             { state with Controls = Some value }
 
         [<CustomOperation("query")>]
-        member _.Query(state: GraphExploreRequest, value: CoreTypes.QueryContainer) =
+        member _.Query(state: GraphExploreRequest, value: Types.QueryContainer) =
             { state with Query = Some value }
 
         [<CustomOperation("vertices")>]
-        member _.Vertices(state: GraphExploreRequest, value: GraphTypes.VertexDefinition list) =
+        member _.Vertices(state: GraphExploreRequest, value: Types.VertexDefinition list) =
             { state with Vertices = Some value }
 
     let graphExploreRequest = GraphExploreRequestBuilder()
 
     module Explore =
-        let withRouting (value: CoreTypes.Routing) (req: GraphExploreRequest) =
+        let withRouting (value: Types.Routing) (req: GraphExploreRequest) =
             { req with Routing = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: GraphExploreRequest) =
+        let withTimeout (value: Types.Duration) (req: GraphExploreRequest) =
             { req with Timeout = Some value }
-        let withConnections (value: GraphTypes.Hop) (req: GraphExploreRequest) =
+        let withConnections (value: Types.Hop) (req: GraphExploreRequest) =
             { req with Connections = Some value }
-        let withControls (value: GraphTypes.ExploreControls) (req: GraphExploreRequest) =
+        let withControls (value: Types.ExploreControls) (req: GraphExploreRequest) =
             { req with Controls = Some value }
-        let withQuery (value: CoreTypes.QueryContainer) (req: GraphExploreRequest) =
+        let withQuery (value: Types.QueryContainer) (req: GraphExploreRequest) =
             { req with Query = Some value }
-        let withVertices (value: GraphTypes.VertexDefinition list) (req: GraphExploreRequest) =
+        let withVertices (value: Types.VertexDefinition list) (req: GraphExploreRequest) =
             { req with Vertices = Some value }
 

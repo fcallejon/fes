@@ -7,13 +7,14 @@ open System
 open System.Text.Json
 open System.Text.Json.Serialization
 open Fes
+open Fes.Generated
 
 [<AutoOpen>]
 module InferenceOperations =
 
     type InferenceChatCompletionUnifiedRequest = {
-        InferenceId: CoreTypes.Id
-        Timeout: CoreTypes.Duration option
+        InferenceId: Types.Id
+        Timeout: Types.Duration option
         Document: obj
     }
 
@@ -36,7 +37,7 @@ module InferenceOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type InferenceChatCompletionUnifiedResponse = CoreTypes.StreamResult
+    type InferenceChatCompletionUnifiedResponse = Types.StreamResult
 
     type InferenceChatCompletionUnifiedRequestBuilder() =
         member _.Yield(_: unit) : InferenceChatCompletionUnifiedRequest =
@@ -47,11 +48,11 @@ module InferenceOperations =
             }
 
         [<CustomOperation("inferenceId")>]
-        member _.InferenceId(state: InferenceChatCompletionUnifiedRequest, value: CoreTypes.Id) =
+        member _.InferenceId(state: InferenceChatCompletionUnifiedRequest, value: Types.Id) =
             { state with InferenceId = value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: InferenceChatCompletionUnifiedRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: InferenceChatCompletionUnifiedRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("document")>]
@@ -61,14 +62,14 @@ module InferenceOperations =
     let inferenceChatCompletionUnifiedRequest = InferenceChatCompletionUnifiedRequestBuilder()
 
     module ChatCompletionUnified =
-        let withTimeout (value: CoreTypes.Duration) (req: InferenceChatCompletionUnifiedRequest) =
+        let withTimeout (value: Types.Duration) (req: InferenceChatCompletionUnifiedRequest) =
             { req with Timeout = Some value }
 
     type InferenceCompletionRequest = {
-        InferenceId: CoreTypes.Id
-        Timeout: CoreTypes.Duration option
+        InferenceId: Types.Id
+        Timeout: Types.Duration option
         Input: System.Text.Json.JsonElement
-        TaskSettings: InferenceTypes.TaskSettings option
+        TaskSettings: Types.TaskSettings option
     }
 
         with
@@ -90,7 +91,7 @@ module InferenceOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type InferenceCompletionResponse = InferenceTypes.CompletionInferenceResult
+    type InferenceCompletionResponse = Types.CompletionInferenceResult
 
     type InferenceCompletionRequestBuilder() =
         member _.Yield(_: unit) : InferenceCompletionRequest =
@@ -102,11 +103,11 @@ module InferenceOperations =
             }
 
         [<CustomOperation("inferenceId")>]
-        member _.InferenceId(state: InferenceCompletionRequest, value: CoreTypes.Id) =
+        member _.InferenceId(state: InferenceCompletionRequest, value: Types.Id) =
             { state with InferenceId = value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: InferenceCompletionRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: InferenceCompletionRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("input")>]
@@ -114,22 +115,22 @@ module InferenceOperations =
             { state with Input = value }
 
         [<CustomOperation("taskSettings")>]
-        member _.TaskSettings(state: InferenceCompletionRequest, value: InferenceTypes.TaskSettings) =
+        member _.TaskSettings(state: InferenceCompletionRequest, value: Types.TaskSettings) =
             { state with TaskSettings = Some value }
 
     let inferenceCompletionRequest = InferenceCompletionRequestBuilder()
 
     module Completion =
-        let withTimeout (value: CoreTypes.Duration) (req: InferenceCompletionRequest) =
+        let withTimeout (value: Types.Duration) (req: InferenceCompletionRequest) =
             { req with Timeout = Some value }
         let withInput (value: System.Text.Json.JsonElement) (req: InferenceCompletionRequest) =
             { req with Input = value }
-        let withTaskSettings (value: InferenceTypes.TaskSettings) (req: InferenceCompletionRequest) =
+        let withTaskSettings (value: Types.TaskSettings) (req: InferenceCompletionRequest) =
             { req with TaskSettings = Some value }
 
     type InferenceDeleteRequest = {
-        TaskType: InferenceTypes.TaskType
-        InferenceId: CoreTypes.Id
+        TaskType: Types.TaskType
+        InferenceId: Types.Id
         DryRun: bool option
         Force: bool option
     }
@@ -153,7 +154,7 @@ module InferenceOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type InferenceDeleteResponse = InferenceTypes.DeleteInferenceEndpointResult
+    type InferenceDeleteResponse = Types.DeleteInferenceEndpointResult
 
     type InferenceDeleteRequestBuilder() =
         member _.Yield(_: unit) : InferenceDeleteRequest =
@@ -165,11 +166,11 @@ module InferenceOperations =
             }
 
         [<CustomOperation("taskType")>]
-        member _.TaskType(state: InferenceDeleteRequest, value: InferenceTypes.TaskType) =
+        member _.TaskType(state: InferenceDeleteRequest, value: Types.TaskType) =
             { state with TaskType = value }
 
         [<CustomOperation("inferenceId")>]
-        member _.InferenceId(state: InferenceDeleteRequest, value: CoreTypes.Id) =
+        member _.InferenceId(state: InferenceDeleteRequest, value: Types.Id) =
             { state with InferenceId = value }
 
         [<CustomOperation("dryRun")>]
@@ -189,8 +190,8 @@ module InferenceOperations =
             { req with Force = Some value }
 
     type InferenceEmbeddingRequest = {
-        InferenceId: CoreTypes.Id
-        Timeout: CoreTypes.Duration option
+        InferenceId: Types.Id
+        Timeout: Types.Duration option
         Document: obj
     }
 
@@ -213,7 +214,7 @@ module InferenceOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type InferenceEmbeddingResponse = InferenceTypes.EmbeddingInferenceResult
+    type InferenceEmbeddingResponse = Types.EmbeddingInferenceResult
 
     type InferenceEmbeddingRequestBuilder() =
         member _.Yield(_: unit) : InferenceEmbeddingRequest =
@@ -224,11 +225,11 @@ module InferenceOperations =
             }
 
         [<CustomOperation("inferenceId")>]
-        member _.InferenceId(state: InferenceEmbeddingRequest, value: CoreTypes.Id) =
+        member _.InferenceId(state: InferenceEmbeddingRequest, value: Types.Id) =
             { state with InferenceId = value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: InferenceEmbeddingRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: InferenceEmbeddingRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("document")>]
@@ -238,12 +239,12 @@ module InferenceOperations =
     let inferenceEmbeddingRequest = InferenceEmbeddingRequestBuilder()
 
     module Embedding =
-        let withTimeout (value: CoreTypes.Duration) (req: InferenceEmbeddingRequest) =
+        let withTimeout (value: Types.Duration) (req: InferenceEmbeddingRequest) =
             { req with Timeout = Some value }
 
     type InferenceGetRequest = {
-        TaskType: InferenceTypes.TaskType
-        InferenceId: CoreTypes.Id
+        TaskType: Types.TaskType
+        InferenceId: Types.Id
     }
 
         with
@@ -267,23 +268,23 @@ module InferenceOperations =
             }
 
         [<CustomOperation("taskType")>]
-        member _.TaskType(state: InferenceGetRequest, value: InferenceTypes.TaskType) =
+        member _.TaskType(state: InferenceGetRequest, value: Types.TaskType) =
             { state with TaskType = value }
 
         [<CustomOperation("inferenceId")>]
-        member _.InferenceId(state: InferenceGetRequest, value: CoreTypes.Id) =
+        member _.InferenceId(state: InferenceGetRequest, value: Types.Id) =
             { state with InferenceId = value }
 
     let inferenceGetRequest = InferenceGetRequestBuilder()
 
     type InferenceInferenceRequest = {
-        TaskType: InferenceTypes.TaskType
-        InferenceId: CoreTypes.Id
-        Timeout: CoreTypes.Duration option
+        TaskType: Types.TaskType
+        InferenceId: Types.Id
+        Timeout: Types.Duration option
         Query: string option
         Input: System.Text.Json.JsonElement
         InputType: string option
-        TaskSettings: InferenceTypes.TaskSettings option
+        TaskSettings: Types.TaskSettings option
     }
 
         with
@@ -305,7 +306,7 @@ module InferenceOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type InferenceInferenceResponse = InferenceTypes.InferenceResult
+    type InferenceInferenceResponse = Types.InferenceResult
 
     type InferenceInferenceRequestBuilder() =
         member _.Yield(_: unit) : InferenceInferenceRequest =
@@ -320,15 +321,15 @@ module InferenceOperations =
             }
 
         [<CustomOperation("taskType")>]
-        member _.TaskType(state: InferenceInferenceRequest, value: InferenceTypes.TaskType) =
+        member _.TaskType(state: InferenceInferenceRequest, value: Types.TaskType) =
             { state with TaskType = value }
 
         [<CustomOperation("inferenceId")>]
-        member _.InferenceId(state: InferenceInferenceRequest, value: CoreTypes.Id) =
+        member _.InferenceId(state: InferenceInferenceRequest, value: Types.Id) =
             { state with InferenceId = value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: InferenceInferenceRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: InferenceInferenceRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("query")>]
@@ -344,13 +345,13 @@ module InferenceOperations =
             { state with InputType = Some value }
 
         [<CustomOperation("taskSettings")>]
-        member _.TaskSettings(state: InferenceInferenceRequest, value: InferenceTypes.TaskSettings) =
+        member _.TaskSettings(state: InferenceInferenceRequest, value: Types.TaskSettings) =
             { state with TaskSettings = Some value }
 
     let inferenceInferenceRequest = InferenceInferenceRequestBuilder()
 
     module Inference =
-        let withTimeout (value: CoreTypes.Duration) (req: InferenceInferenceRequest) =
+        let withTimeout (value: Types.Duration) (req: InferenceInferenceRequest) =
             { req with Timeout = Some value }
         let withQuery (value: string) (req: InferenceInferenceRequest) =
             { req with Query = Some value }
@@ -358,13 +359,13 @@ module InferenceOperations =
             { req with Input = value }
         let withInputType (value: string) (req: InferenceInferenceRequest) =
             { req with InputType = Some value }
-        let withTaskSettings (value: InferenceTypes.TaskSettings) (req: InferenceInferenceRequest) =
+        let withTaskSettings (value: Types.TaskSettings) (req: InferenceInferenceRequest) =
             { req with TaskSettings = Some value }
 
     type InferencePutRequest = {
-        TaskType: InferenceTypes.TaskType
-        InferenceId: CoreTypes.Id
-        Timeout: CoreTypes.Duration option
+        TaskType: Types.TaskType
+        InferenceId: Types.Id
+        Timeout: Types.Duration option
         Document: obj
     }
 
@@ -387,7 +388,7 @@ module InferenceOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type InferencePutResponse = InferenceTypes.InferenceEndpointInfo
+    type InferencePutResponse = Types.InferenceEndpointInfo
 
     type InferencePutRequestBuilder() =
         member _.Yield(_: unit) : InferencePutRequest =
@@ -399,15 +400,15 @@ module InferenceOperations =
             }
 
         [<CustomOperation("taskType")>]
-        member _.TaskType(state: InferencePutRequest, value: InferenceTypes.TaskType) =
+        member _.TaskType(state: InferencePutRequest, value: Types.TaskType) =
             { state with TaskType = value }
 
         [<CustomOperation("inferenceId")>]
-        member _.InferenceId(state: InferencePutRequest, value: CoreTypes.Id) =
+        member _.InferenceId(state: InferencePutRequest, value: Types.Id) =
             { state with InferenceId = value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: InferencePutRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: InferencePutRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("document")>]
@@ -417,15 +418,15 @@ module InferenceOperations =
     let inferencePutRequest = InferencePutRequestBuilder()
 
     module Put =
-        let withTimeout (value: CoreTypes.Duration) (req: InferencePutRequest) =
+        let withTimeout (value: Types.Duration) (req: InferencePutRequest) =
             { req with Timeout = Some value }
 
     type InferencePutAi21Request = {
-        TaskType: InferenceTypes.Ai21TaskType
-        Ai21InferenceId: CoreTypes.Id
-        Timeout: CoreTypes.Duration option
-        Service: InferenceTypes.Ai21ServiceType
-        ServiceSettings: InferenceTypes.Ai21ServiceSettings
+        TaskType: Types.Ai21TaskType
+        Ai21InferenceId: Types.Id
+        Timeout: Types.Duration option
+        Service: Types.Ai21ServiceType
+        ServiceSettings: Types.Ai21ServiceSettings
     }
 
         with
@@ -447,7 +448,7 @@ module InferenceOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type InferencePutAi21Response = InferenceTypes.InferenceEndpointInfoAi21
+    type InferencePutAi21Response = Types.InferenceEndpointInfoAi21
 
     type InferencePutAi21RequestBuilder() =
         member _.Yield(_: unit) : InferencePutAi21Request =
@@ -460,43 +461,43 @@ module InferenceOperations =
             }
 
         [<CustomOperation("taskType")>]
-        member _.TaskType(state: InferencePutAi21Request, value: InferenceTypes.Ai21TaskType) =
+        member _.TaskType(state: InferencePutAi21Request, value: Types.Ai21TaskType) =
             { state with TaskType = value }
 
         [<CustomOperation("ai21InferenceId")>]
-        member _.Ai21InferenceId(state: InferencePutAi21Request, value: CoreTypes.Id) =
+        member _.Ai21InferenceId(state: InferencePutAi21Request, value: Types.Id) =
             { state with Ai21InferenceId = value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: InferencePutAi21Request, value: CoreTypes.Duration) =
+        member _.Timeout(state: InferencePutAi21Request, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("service")>]
-        member _.Service(state: InferencePutAi21Request, value: InferenceTypes.Ai21ServiceType) =
+        member _.Service(state: InferencePutAi21Request, value: Types.Ai21ServiceType) =
             { state with Service = value }
 
         [<CustomOperation("serviceSettings")>]
-        member _.ServiceSettings(state: InferencePutAi21Request, value: InferenceTypes.Ai21ServiceSettings) =
+        member _.ServiceSettings(state: InferencePutAi21Request, value: Types.Ai21ServiceSettings) =
             { state with ServiceSettings = value }
 
     let inferencePutAi21Request = InferencePutAi21RequestBuilder()
 
     module PutAi21 =
-        let withTimeout (value: CoreTypes.Duration) (req: InferencePutAi21Request) =
+        let withTimeout (value: Types.Duration) (req: InferencePutAi21Request) =
             { req with Timeout = Some value }
-        let withService (value: InferenceTypes.Ai21ServiceType) (req: InferencePutAi21Request) =
+        let withService (value: Types.Ai21ServiceType) (req: InferencePutAi21Request) =
             { req with Service = value }
-        let withServiceSettings (value: InferenceTypes.Ai21ServiceSettings) (req: InferencePutAi21Request) =
+        let withServiceSettings (value: Types.Ai21ServiceSettings) (req: InferencePutAi21Request) =
             { req with ServiceSettings = value }
 
     type InferencePutAlibabacloudRequest = {
-        TaskType: InferenceTypes.AlibabaCloudTaskType
-        AlibabacloudInferenceId: CoreTypes.Id
-        Timeout: CoreTypes.Duration option
-        ChunkingSettings: InferenceTypes.InferenceChunkingSettings option
-        Service: InferenceTypes.AlibabaCloudServiceType
-        ServiceSettings: InferenceTypes.AlibabaCloudServiceSettings
-        TaskSettings: InferenceTypes.AlibabaCloudTaskSettings option
+        TaskType: Types.AlibabaCloudTaskType
+        AlibabacloudInferenceId: Types.Id
+        Timeout: Types.Duration option
+        ChunkingSettings: Types.InferenceChunkingSettings option
+        Service: Types.AlibabaCloudServiceType
+        ServiceSettings: Types.AlibabaCloudServiceSettings
+        TaskSettings: Types.AlibabaCloudTaskSettings option
     }
 
         with
@@ -518,7 +519,7 @@ module InferenceOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type InferencePutAlibabacloudResponse = InferenceTypes.InferenceEndpointInfoAlibabaCloudAI
+    type InferencePutAlibabacloudResponse = Types.InferenceEndpointInfoAlibabaCloudAI
 
     type InferencePutAlibabacloudRequestBuilder() =
         member _.Yield(_: unit) : InferencePutAlibabacloudRequest =
@@ -533,55 +534,55 @@ module InferenceOperations =
             }
 
         [<CustomOperation("taskType")>]
-        member _.TaskType(state: InferencePutAlibabacloudRequest, value: InferenceTypes.AlibabaCloudTaskType) =
+        member _.TaskType(state: InferencePutAlibabacloudRequest, value: Types.AlibabaCloudTaskType) =
             { state with TaskType = value }
 
         [<CustomOperation("alibabacloudInferenceId")>]
-        member _.AlibabacloudInferenceId(state: InferencePutAlibabacloudRequest, value: CoreTypes.Id) =
+        member _.AlibabacloudInferenceId(state: InferencePutAlibabacloudRequest, value: Types.Id) =
             { state with AlibabacloudInferenceId = value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: InferencePutAlibabacloudRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: InferencePutAlibabacloudRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("chunkingSettings")>]
-        member _.ChunkingSettings(state: InferencePutAlibabacloudRequest, value: InferenceTypes.InferenceChunkingSettings) =
+        member _.ChunkingSettings(state: InferencePutAlibabacloudRequest, value: Types.InferenceChunkingSettings) =
             { state with ChunkingSettings = Some value }
 
         [<CustomOperation("service")>]
-        member _.Service(state: InferencePutAlibabacloudRequest, value: InferenceTypes.AlibabaCloudServiceType) =
+        member _.Service(state: InferencePutAlibabacloudRequest, value: Types.AlibabaCloudServiceType) =
             { state with Service = value }
 
         [<CustomOperation("serviceSettings")>]
-        member _.ServiceSettings(state: InferencePutAlibabacloudRequest, value: InferenceTypes.AlibabaCloudServiceSettings) =
+        member _.ServiceSettings(state: InferencePutAlibabacloudRequest, value: Types.AlibabaCloudServiceSettings) =
             { state with ServiceSettings = value }
 
         [<CustomOperation("taskSettings")>]
-        member _.TaskSettings(state: InferencePutAlibabacloudRequest, value: InferenceTypes.AlibabaCloudTaskSettings) =
+        member _.TaskSettings(state: InferencePutAlibabacloudRequest, value: Types.AlibabaCloudTaskSettings) =
             { state with TaskSettings = Some value }
 
     let inferencePutAlibabacloudRequest = InferencePutAlibabacloudRequestBuilder()
 
     module PutAlibabacloud =
-        let withTimeout (value: CoreTypes.Duration) (req: InferencePutAlibabacloudRequest) =
+        let withTimeout (value: Types.Duration) (req: InferencePutAlibabacloudRequest) =
             { req with Timeout = Some value }
-        let withChunkingSettings (value: InferenceTypes.InferenceChunkingSettings) (req: InferencePutAlibabacloudRequest) =
+        let withChunkingSettings (value: Types.InferenceChunkingSettings) (req: InferencePutAlibabacloudRequest) =
             { req with ChunkingSettings = Some value }
-        let withService (value: InferenceTypes.AlibabaCloudServiceType) (req: InferencePutAlibabacloudRequest) =
+        let withService (value: Types.AlibabaCloudServiceType) (req: InferencePutAlibabacloudRequest) =
             { req with Service = value }
-        let withServiceSettings (value: InferenceTypes.AlibabaCloudServiceSettings) (req: InferencePutAlibabacloudRequest) =
+        let withServiceSettings (value: Types.AlibabaCloudServiceSettings) (req: InferencePutAlibabacloudRequest) =
             { req with ServiceSettings = value }
-        let withTaskSettings (value: InferenceTypes.AlibabaCloudTaskSettings) (req: InferencePutAlibabacloudRequest) =
+        let withTaskSettings (value: Types.AlibabaCloudTaskSettings) (req: InferencePutAlibabacloudRequest) =
             { req with TaskSettings = Some value }
 
     type InferencePutAmazonbedrockRequest = {
-        TaskType: InferenceTypes.AmazonBedrockTaskType
-        AmazonbedrockInferenceId: CoreTypes.Id
-        Timeout: CoreTypes.Duration option
-        ChunkingSettings: InferenceTypes.InferenceChunkingSettings option
-        Service: InferenceTypes.AmazonBedrockServiceType
-        ServiceSettings: InferenceTypes.AmazonBedrockServiceSettings
-        TaskSettings: InferenceTypes.AmazonBedrockTaskSettings option
+        TaskType: Types.AmazonBedrockTaskType
+        AmazonbedrockInferenceId: Types.Id
+        Timeout: Types.Duration option
+        ChunkingSettings: Types.InferenceChunkingSettings option
+        Service: Types.AmazonBedrockServiceType
+        ServiceSettings: Types.AmazonBedrockServiceSettings
+        TaskSettings: Types.AmazonBedrockTaskSettings option
     }
 
         with
@@ -603,7 +604,7 @@ module InferenceOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type InferencePutAmazonbedrockResponse = InferenceTypes.InferenceEndpointInfoAmazonBedrock
+    type InferencePutAmazonbedrockResponse = Types.InferenceEndpointInfoAmazonBedrock
 
     type InferencePutAmazonbedrockRequestBuilder() =
         member _.Yield(_: unit) : InferencePutAmazonbedrockRequest =
@@ -618,55 +619,55 @@ module InferenceOperations =
             }
 
         [<CustomOperation("taskType")>]
-        member _.TaskType(state: InferencePutAmazonbedrockRequest, value: InferenceTypes.AmazonBedrockTaskType) =
+        member _.TaskType(state: InferencePutAmazonbedrockRequest, value: Types.AmazonBedrockTaskType) =
             { state with TaskType = value }
 
         [<CustomOperation("amazonbedrockInferenceId")>]
-        member _.AmazonbedrockInferenceId(state: InferencePutAmazonbedrockRequest, value: CoreTypes.Id) =
+        member _.AmazonbedrockInferenceId(state: InferencePutAmazonbedrockRequest, value: Types.Id) =
             { state with AmazonbedrockInferenceId = value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: InferencePutAmazonbedrockRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: InferencePutAmazonbedrockRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("chunkingSettings")>]
-        member _.ChunkingSettings(state: InferencePutAmazonbedrockRequest, value: InferenceTypes.InferenceChunkingSettings) =
+        member _.ChunkingSettings(state: InferencePutAmazonbedrockRequest, value: Types.InferenceChunkingSettings) =
             { state with ChunkingSettings = Some value }
 
         [<CustomOperation("service")>]
-        member _.Service(state: InferencePutAmazonbedrockRequest, value: InferenceTypes.AmazonBedrockServiceType) =
+        member _.Service(state: InferencePutAmazonbedrockRequest, value: Types.AmazonBedrockServiceType) =
             { state with Service = value }
 
         [<CustomOperation("serviceSettings")>]
-        member _.ServiceSettings(state: InferencePutAmazonbedrockRequest, value: InferenceTypes.AmazonBedrockServiceSettings) =
+        member _.ServiceSettings(state: InferencePutAmazonbedrockRequest, value: Types.AmazonBedrockServiceSettings) =
             { state with ServiceSettings = value }
 
         [<CustomOperation("taskSettings")>]
-        member _.TaskSettings(state: InferencePutAmazonbedrockRequest, value: InferenceTypes.AmazonBedrockTaskSettings) =
+        member _.TaskSettings(state: InferencePutAmazonbedrockRequest, value: Types.AmazonBedrockTaskSettings) =
             { state with TaskSettings = Some value }
 
     let inferencePutAmazonbedrockRequest = InferencePutAmazonbedrockRequestBuilder()
 
     module PutAmazonbedrock =
-        let withTimeout (value: CoreTypes.Duration) (req: InferencePutAmazonbedrockRequest) =
+        let withTimeout (value: Types.Duration) (req: InferencePutAmazonbedrockRequest) =
             { req with Timeout = Some value }
-        let withChunkingSettings (value: InferenceTypes.InferenceChunkingSettings) (req: InferencePutAmazonbedrockRequest) =
+        let withChunkingSettings (value: Types.InferenceChunkingSettings) (req: InferencePutAmazonbedrockRequest) =
             { req with ChunkingSettings = Some value }
-        let withService (value: InferenceTypes.AmazonBedrockServiceType) (req: InferencePutAmazonbedrockRequest) =
+        let withService (value: Types.AmazonBedrockServiceType) (req: InferencePutAmazonbedrockRequest) =
             { req with Service = value }
-        let withServiceSettings (value: InferenceTypes.AmazonBedrockServiceSettings) (req: InferencePutAmazonbedrockRequest) =
+        let withServiceSettings (value: Types.AmazonBedrockServiceSettings) (req: InferencePutAmazonbedrockRequest) =
             { req with ServiceSettings = value }
-        let withTaskSettings (value: InferenceTypes.AmazonBedrockTaskSettings) (req: InferencePutAmazonbedrockRequest) =
+        let withTaskSettings (value: Types.AmazonBedrockTaskSettings) (req: InferencePutAmazonbedrockRequest) =
             { req with TaskSettings = Some value }
 
     type InferencePutAmazonsagemakerRequest = {
-        TaskType: InferenceTypes.TaskTypeAmazonSageMaker
-        AmazonsagemakerInferenceId: CoreTypes.Id
-        Timeout: CoreTypes.Duration option
-        ChunkingSettings: InferenceTypes.InferenceChunkingSettings option
-        Service: InferenceTypes.AmazonSageMakerServiceType
-        ServiceSettings: InferenceTypes.AmazonSageMakerServiceSettings
-        TaskSettings: InferenceTypes.AmazonSageMakerTaskSettings option
+        TaskType: Types.TaskTypeAmazonSageMaker
+        AmazonsagemakerInferenceId: Types.Id
+        Timeout: Types.Duration option
+        ChunkingSettings: Types.InferenceChunkingSettings option
+        Service: Types.AmazonSageMakerServiceType
+        ServiceSettings: Types.AmazonSageMakerServiceSettings
+        TaskSettings: Types.AmazonSageMakerTaskSettings option
     }
 
         with
@@ -688,7 +689,7 @@ module InferenceOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type InferencePutAmazonsagemakerResponse = InferenceTypes.InferenceEndpointInfoAmazonSageMaker
+    type InferencePutAmazonsagemakerResponse = Types.InferenceEndpointInfoAmazonSageMaker
 
     type InferencePutAmazonsagemakerRequestBuilder() =
         member _.Yield(_: unit) : InferencePutAmazonsagemakerRequest =
@@ -703,54 +704,54 @@ module InferenceOperations =
             }
 
         [<CustomOperation("taskType")>]
-        member _.TaskType(state: InferencePutAmazonsagemakerRequest, value: InferenceTypes.TaskTypeAmazonSageMaker) =
+        member _.TaskType(state: InferencePutAmazonsagemakerRequest, value: Types.TaskTypeAmazonSageMaker) =
             { state with TaskType = value }
 
         [<CustomOperation("amazonsagemakerInferenceId")>]
-        member _.AmazonsagemakerInferenceId(state: InferencePutAmazonsagemakerRequest, value: CoreTypes.Id) =
+        member _.AmazonsagemakerInferenceId(state: InferencePutAmazonsagemakerRequest, value: Types.Id) =
             { state with AmazonsagemakerInferenceId = value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: InferencePutAmazonsagemakerRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: InferencePutAmazonsagemakerRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("chunkingSettings")>]
-        member _.ChunkingSettings(state: InferencePutAmazonsagemakerRequest, value: InferenceTypes.InferenceChunkingSettings) =
+        member _.ChunkingSettings(state: InferencePutAmazonsagemakerRequest, value: Types.InferenceChunkingSettings) =
             { state with ChunkingSettings = Some value }
 
         [<CustomOperation("service")>]
-        member _.Service(state: InferencePutAmazonsagemakerRequest, value: InferenceTypes.AmazonSageMakerServiceType) =
+        member _.Service(state: InferencePutAmazonsagemakerRequest, value: Types.AmazonSageMakerServiceType) =
             { state with Service = value }
 
         [<CustomOperation("serviceSettings")>]
-        member _.ServiceSettings(state: InferencePutAmazonsagemakerRequest, value: InferenceTypes.AmazonSageMakerServiceSettings) =
+        member _.ServiceSettings(state: InferencePutAmazonsagemakerRequest, value: Types.AmazonSageMakerServiceSettings) =
             { state with ServiceSettings = value }
 
         [<CustomOperation("taskSettings")>]
-        member _.TaskSettings(state: InferencePutAmazonsagemakerRequest, value: InferenceTypes.AmazonSageMakerTaskSettings) =
+        member _.TaskSettings(state: InferencePutAmazonsagemakerRequest, value: Types.AmazonSageMakerTaskSettings) =
             { state with TaskSettings = Some value }
 
     let inferencePutAmazonsagemakerRequest = InferencePutAmazonsagemakerRequestBuilder()
 
     module PutAmazonsagemaker =
-        let withTimeout (value: CoreTypes.Duration) (req: InferencePutAmazonsagemakerRequest) =
+        let withTimeout (value: Types.Duration) (req: InferencePutAmazonsagemakerRequest) =
             { req with Timeout = Some value }
-        let withChunkingSettings (value: InferenceTypes.InferenceChunkingSettings) (req: InferencePutAmazonsagemakerRequest) =
+        let withChunkingSettings (value: Types.InferenceChunkingSettings) (req: InferencePutAmazonsagemakerRequest) =
             { req with ChunkingSettings = Some value }
-        let withService (value: InferenceTypes.AmazonSageMakerServiceType) (req: InferencePutAmazonsagemakerRequest) =
+        let withService (value: Types.AmazonSageMakerServiceType) (req: InferencePutAmazonsagemakerRequest) =
             { req with Service = value }
-        let withServiceSettings (value: InferenceTypes.AmazonSageMakerServiceSettings) (req: InferencePutAmazonsagemakerRequest) =
+        let withServiceSettings (value: Types.AmazonSageMakerServiceSettings) (req: InferencePutAmazonsagemakerRequest) =
             { req with ServiceSettings = value }
-        let withTaskSettings (value: InferenceTypes.AmazonSageMakerTaskSettings) (req: InferencePutAmazonsagemakerRequest) =
+        let withTaskSettings (value: Types.AmazonSageMakerTaskSettings) (req: InferencePutAmazonsagemakerRequest) =
             { req with TaskSettings = Some value }
 
     type InferencePutAnthropicRequest = {
-        TaskType: InferenceTypes.AnthropicTaskType
-        AnthropicInferenceId: CoreTypes.Id
-        Timeout: CoreTypes.Duration option
-        Service: InferenceTypes.AnthropicServiceType
-        ServiceSettings: InferenceTypes.AnthropicServiceSettings
-        TaskSettings: InferenceTypes.AnthropicTaskSettings option
+        TaskType: Types.AnthropicTaskType
+        AnthropicInferenceId: Types.Id
+        Timeout: Types.Duration option
+        Service: Types.AnthropicServiceType
+        ServiceSettings: Types.AnthropicServiceSettings
+        TaskSettings: Types.AnthropicTaskSettings option
     }
 
         with
@@ -772,7 +773,7 @@ module InferenceOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type InferencePutAnthropicResponse = InferenceTypes.InferenceEndpointInfoAnthropic
+    type InferencePutAnthropicResponse = Types.InferenceEndpointInfoAnthropic
 
     type InferencePutAnthropicRequestBuilder() =
         member _.Yield(_: unit) : InferencePutAnthropicRequest =
@@ -786,49 +787,49 @@ module InferenceOperations =
             }
 
         [<CustomOperation("taskType")>]
-        member _.TaskType(state: InferencePutAnthropicRequest, value: InferenceTypes.AnthropicTaskType) =
+        member _.TaskType(state: InferencePutAnthropicRequest, value: Types.AnthropicTaskType) =
             { state with TaskType = value }
 
         [<CustomOperation("anthropicInferenceId")>]
-        member _.AnthropicInferenceId(state: InferencePutAnthropicRequest, value: CoreTypes.Id) =
+        member _.AnthropicInferenceId(state: InferencePutAnthropicRequest, value: Types.Id) =
             { state with AnthropicInferenceId = value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: InferencePutAnthropicRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: InferencePutAnthropicRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("service")>]
-        member _.Service(state: InferencePutAnthropicRequest, value: InferenceTypes.AnthropicServiceType) =
+        member _.Service(state: InferencePutAnthropicRequest, value: Types.AnthropicServiceType) =
             { state with Service = value }
 
         [<CustomOperation("serviceSettings")>]
-        member _.ServiceSettings(state: InferencePutAnthropicRequest, value: InferenceTypes.AnthropicServiceSettings) =
+        member _.ServiceSettings(state: InferencePutAnthropicRequest, value: Types.AnthropicServiceSettings) =
             { state with ServiceSettings = value }
 
         [<CustomOperation("taskSettings")>]
-        member _.TaskSettings(state: InferencePutAnthropicRequest, value: InferenceTypes.AnthropicTaskSettings) =
+        member _.TaskSettings(state: InferencePutAnthropicRequest, value: Types.AnthropicTaskSettings) =
             { state with TaskSettings = Some value }
 
     let inferencePutAnthropicRequest = InferencePutAnthropicRequestBuilder()
 
     module PutAnthropic =
-        let withTimeout (value: CoreTypes.Duration) (req: InferencePutAnthropicRequest) =
+        let withTimeout (value: Types.Duration) (req: InferencePutAnthropicRequest) =
             { req with Timeout = Some value }
-        let withService (value: InferenceTypes.AnthropicServiceType) (req: InferencePutAnthropicRequest) =
+        let withService (value: Types.AnthropicServiceType) (req: InferencePutAnthropicRequest) =
             { req with Service = value }
-        let withServiceSettings (value: InferenceTypes.AnthropicServiceSettings) (req: InferencePutAnthropicRequest) =
+        let withServiceSettings (value: Types.AnthropicServiceSettings) (req: InferencePutAnthropicRequest) =
             { req with ServiceSettings = value }
-        let withTaskSettings (value: InferenceTypes.AnthropicTaskSettings) (req: InferencePutAnthropicRequest) =
+        let withTaskSettings (value: Types.AnthropicTaskSettings) (req: InferencePutAnthropicRequest) =
             { req with TaskSettings = Some value }
 
     type InferencePutAzureaistudioRequest = {
-        TaskType: InferenceTypes.AzureAiStudioTaskType
-        AzureaistudioInferenceId: CoreTypes.Id
-        Timeout: CoreTypes.Duration option
-        ChunkingSettings: InferenceTypes.InferenceChunkingSettings option
-        Service: InferenceTypes.AzureAiStudioServiceType
-        ServiceSettings: InferenceTypes.AzureAiStudioServiceSettings
-        TaskSettings: InferenceTypes.AzureAiStudioTaskSettings option
+        TaskType: Types.AzureAiStudioTaskType
+        AzureaistudioInferenceId: Types.Id
+        Timeout: Types.Duration option
+        ChunkingSettings: Types.InferenceChunkingSettings option
+        Service: Types.AzureAiStudioServiceType
+        ServiceSettings: Types.AzureAiStudioServiceSettings
+        TaskSettings: Types.AzureAiStudioTaskSettings option
     }
 
         with
@@ -850,7 +851,7 @@ module InferenceOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type InferencePutAzureaistudioResponse = InferenceTypes.InferenceEndpointInfoAzureAIStudio
+    type InferencePutAzureaistudioResponse = Types.InferenceEndpointInfoAzureAIStudio
 
     type InferencePutAzureaistudioRequestBuilder() =
         member _.Yield(_: unit) : InferencePutAzureaistudioRequest =
@@ -865,55 +866,55 @@ module InferenceOperations =
             }
 
         [<CustomOperation("taskType")>]
-        member _.TaskType(state: InferencePutAzureaistudioRequest, value: InferenceTypes.AzureAiStudioTaskType) =
+        member _.TaskType(state: InferencePutAzureaistudioRequest, value: Types.AzureAiStudioTaskType) =
             { state with TaskType = value }
 
         [<CustomOperation("azureaistudioInferenceId")>]
-        member _.AzureaistudioInferenceId(state: InferencePutAzureaistudioRequest, value: CoreTypes.Id) =
+        member _.AzureaistudioInferenceId(state: InferencePutAzureaistudioRequest, value: Types.Id) =
             { state with AzureaistudioInferenceId = value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: InferencePutAzureaistudioRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: InferencePutAzureaistudioRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("chunkingSettings")>]
-        member _.ChunkingSettings(state: InferencePutAzureaistudioRequest, value: InferenceTypes.InferenceChunkingSettings) =
+        member _.ChunkingSettings(state: InferencePutAzureaistudioRequest, value: Types.InferenceChunkingSettings) =
             { state with ChunkingSettings = Some value }
 
         [<CustomOperation("service")>]
-        member _.Service(state: InferencePutAzureaistudioRequest, value: InferenceTypes.AzureAiStudioServiceType) =
+        member _.Service(state: InferencePutAzureaistudioRequest, value: Types.AzureAiStudioServiceType) =
             { state with Service = value }
 
         [<CustomOperation("serviceSettings")>]
-        member _.ServiceSettings(state: InferencePutAzureaistudioRequest, value: InferenceTypes.AzureAiStudioServiceSettings) =
+        member _.ServiceSettings(state: InferencePutAzureaistudioRequest, value: Types.AzureAiStudioServiceSettings) =
             { state with ServiceSettings = value }
 
         [<CustomOperation("taskSettings")>]
-        member _.TaskSettings(state: InferencePutAzureaistudioRequest, value: InferenceTypes.AzureAiStudioTaskSettings) =
+        member _.TaskSettings(state: InferencePutAzureaistudioRequest, value: Types.AzureAiStudioTaskSettings) =
             { state with TaskSettings = Some value }
 
     let inferencePutAzureaistudioRequest = InferencePutAzureaistudioRequestBuilder()
 
     module PutAzureaistudio =
-        let withTimeout (value: CoreTypes.Duration) (req: InferencePutAzureaistudioRequest) =
+        let withTimeout (value: Types.Duration) (req: InferencePutAzureaistudioRequest) =
             { req with Timeout = Some value }
-        let withChunkingSettings (value: InferenceTypes.InferenceChunkingSettings) (req: InferencePutAzureaistudioRequest) =
+        let withChunkingSettings (value: Types.InferenceChunkingSettings) (req: InferencePutAzureaistudioRequest) =
             { req with ChunkingSettings = Some value }
-        let withService (value: InferenceTypes.AzureAiStudioServiceType) (req: InferencePutAzureaistudioRequest) =
+        let withService (value: Types.AzureAiStudioServiceType) (req: InferencePutAzureaistudioRequest) =
             { req with Service = value }
-        let withServiceSettings (value: InferenceTypes.AzureAiStudioServiceSettings) (req: InferencePutAzureaistudioRequest) =
+        let withServiceSettings (value: Types.AzureAiStudioServiceSettings) (req: InferencePutAzureaistudioRequest) =
             { req with ServiceSettings = value }
-        let withTaskSettings (value: InferenceTypes.AzureAiStudioTaskSettings) (req: InferencePutAzureaistudioRequest) =
+        let withTaskSettings (value: Types.AzureAiStudioTaskSettings) (req: InferencePutAzureaistudioRequest) =
             { req with TaskSettings = Some value }
 
     type InferencePutAzureopenaiRequest = {
-        TaskType: InferenceTypes.AzureOpenAITaskType
-        AzureopenaiInferenceId: CoreTypes.Id
-        Timeout: CoreTypes.Duration option
-        ChunkingSettings: InferenceTypes.InferenceChunkingSettings option
-        Service: InferenceTypes.AzureOpenAIServiceType
-        ServiceSettings: InferenceTypes.AzureOpenAIServiceSettings
-        TaskSettings: InferenceTypes.AzureOpenAITaskSettings option
+        TaskType: Types.AzureOpenAITaskType
+        AzureopenaiInferenceId: Types.Id
+        Timeout: Types.Duration option
+        ChunkingSettings: Types.InferenceChunkingSettings option
+        Service: Types.AzureOpenAIServiceType
+        ServiceSettings: Types.AzureOpenAIServiceSettings
+        TaskSettings: Types.AzureOpenAITaskSettings option
     }
 
         with
@@ -935,7 +936,7 @@ module InferenceOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type InferencePutAzureopenaiResponse = InferenceTypes.InferenceEndpointInfoAzureOpenAI
+    type InferencePutAzureopenaiResponse = Types.InferenceEndpointInfoAzureOpenAI
 
     type InferencePutAzureopenaiRequestBuilder() =
         member _.Yield(_: unit) : InferencePutAzureopenaiRequest =
@@ -950,55 +951,55 @@ module InferenceOperations =
             }
 
         [<CustomOperation("taskType")>]
-        member _.TaskType(state: InferencePutAzureopenaiRequest, value: InferenceTypes.AzureOpenAITaskType) =
+        member _.TaskType(state: InferencePutAzureopenaiRequest, value: Types.AzureOpenAITaskType) =
             { state with TaskType = value }
 
         [<CustomOperation("azureopenaiInferenceId")>]
-        member _.AzureopenaiInferenceId(state: InferencePutAzureopenaiRequest, value: CoreTypes.Id) =
+        member _.AzureopenaiInferenceId(state: InferencePutAzureopenaiRequest, value: Types.Id) =
             { state with AzureopenaiInferenceId = value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: InferencePutAzureopenaiRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: InferencePutAzureopenaiRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("chunkingSettings")>]
-        member _.ChunkingSettings(state: InferencePutAzureopenaiRequest, value: InferenceTypes.InferenceChunkingSettings) =
+        member _.ChunkingSettings(state: InferencePutAzureopenaiRequest, value: Types.InferenceChunkingSettings) =
             { state with ChunkingSettings = Some value }
 
         [<CustomOperation("service")>]
-        member _.Service(state: InferencePutAzureopenaiRequest, value: InferenceTypes.AzureOpenAIServiceType) =
+        member _.Service(state: InferencePutAzureopenaiRequest, value: Types.AzureOpenAIServiceType) =
             { state with Service = value }
 
         [<CustomOperation("serviceSettings")>]
-        member _.ServiceSettings(state: InferencePutAzureopenaiRequest, value: InferenceTypes.AzureOpenAIServiceSettings) =
+        member _.ServiceSettings(state: InferencePutAzureopenaiRequest, value: Types.AzureOpenAIServiceSettings) =
             { state with ServiceSettings = value }
 
         [<CustomOperation("taskSettings")>]
-        member _.TaskSettings(state: InferencePutAzureopenaiRequest, value: InferenceTypes.AzureOpenAITaskSettings) =
+        member _.TaskSettings(state: InferencePutAzureopenaiRequest, value: Types.AzureOpenAITaskSettings) =
             { state with TaskSettings = Some value }
 
     let inferencePutAzureopenaiRequest = InferencePutAzureopenaiRequestBuilder()
 
     module PutAzureopenai =
-        let withTimeout (value: CoreTypes.Duration) (req: InferencePutAzureopenaiRequest) =
+        let withTimeout (value: Types.Duration) (req: InferencePutAzureopenaiRequest) =
             { req with Timeout = Some value }
-        let withChunkingSettings (value: InferenceTypes.InferenceChunkingSettings) (req: InferencePutAzureopenaiRequest) =
+        let withChunkingSettings (value: Types.InferenceChunkingSettings) (req: InferencePutAzureopenaiRequest) =
             { req with ChunkingSettings = Some value }
-        let withService (value: InferenceTypes.AzureOpenAIServiceType) (req: InferencePutAzureopenaiRequest) =
+        let withService (value: Types.AzureOpenAIServiceType) (req: InferencePutAzureopenaiRequest) =
             { req with Service = value }
-        let withServiceSettings (value: InferenceTypes.AzureOpenAIServiceSettings) (req: InferencePutAzureopenaiRequest) =
+        let withServiceSettings (value: Types.AzureOpenAIServiceSettings) (req: InferencePutAzureopenaiRequest) =
             { req with ServiceSettings = value }
-        let withTaskSettings (value: InferenceTypes.AzureOpenAITaskSettings) (req: InferencePutAzureopenaiRequest) =
+        let withTaskSettings (value: Types.AzureOpenAITaskSettings) (req: InferencePutAzureopenaiRequest) =
             { req with TaskSettings = Some value }
 
     type InferencePutCohereRequest = {
-        TaskType: InferenceTypes.CohereTaskType
-        CohereInferenceId: CoreTypes.Id
-        Timeout: CoreTypes.Duration option
-        ChunkingSettings: InferenceTypes.InferenceChunkingSettings option
-        Service: InferenceTypes.CohereServiceType
-        ServiceSettings: InferenceTypes.CohereServiceSettings
-        TaskSettings: InferenceTypes.CohereTaskSettings option
+        TaskType: Types.CohereTaskType
+        CohereInferenceId: Types.Id
+        Timeout: Types.Duration option
+        ChunkingSettings: Types.InferenceChunkingSettings option
+        Service: Types.CohereServiceType
+        ServiceSettings: Types.CohereServiceSettings
+        TaskSettings: Types.CohereTaskSettings option
     }
 
         with
@@ -1020,7 +1021,7 @@ module InferenceOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type InferencePutCohereResponse = InferenceTypes.InferenceEndpointInfoCohere
+    type InferencePutCohereResponse = Types.InferenceEndpointInfoCohere
 
     type InferencePutCohereRequestBuilder() =
         member _.Yield(_: unit) : InferencePutCohereRequest =
@@ -1035,54 +1036,54 @@ module InferenceOperations =
             }
 
         [<CustomOperation("taskType")>]
-        member _.TaskType(state: InferencePutCohereRequest, value: InferenceTypes.CohereTaskType) =
+        member _.TaskType(state: InferencePutCohereRequest, value: Types.CohereTaskType) =
             { state with TaskType = value }
 
         [<CustomOperation("cohereInferenceId")>]
-        member _.CohereInferenceId(state: InferencePutCohereRequest, value: CoreTypes.Id) =
+        member _.CohereInferenceId(state: InferencePutCohereRequest, value: Types.Id) =
             { state with CohereInferenceId = value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: InferencePutCohereRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: InferencePutCohereRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("chunkingSettings")>]
-        member _.ChunkingSettings(state: InferencePutCohereRequest, value: InferenceTypes.InferenceChunkingSettings) =
+        member _.ChunkingSettings(state: InferencePutCohereRequest, value: Types.InferenceChunkingSettings) =
             { state with ChunkingSettings = Some value }
 
         [<CustomOperation("service")>]
-        member _.Service(state: InferencePutCohereRequest, value: InferenceTypes.CohereServiceType) =
+        member _.Service(state: InferencePutCohereRequest, value: Types.CohereServiceType) =
             { state with Service = value }
 
         [<CustomOperation("serviceSettings")>]
-        member _.ServiceSettings(state: InferencePutCohereRequest, value: InferenceTypes.CohereServiceSettings) =
+        member _.ServiceSettings(state: InferencePutCohereRequest, value: Types.CohereServiceSettings) =
             { state with ServiceSettings = value }
 
         [<CustomOperation("taskSettings")>]
-        member _.TaskSettings(state: InferencePutCohereRequest, value: InferenceTypes.CohereTaskSettings) =
+        member _.TaskSettings(state: InferencePutCohereRequest, value: Types.CohereTaskSettings) =
             { state with TaskSettings = Some value }
 
     let inferencePutCohereRequest = InferencePutCohereRequestBuilder()
 
     module PutCohere =
-        let withTimeout (value: CoreTypes.Duration) (req: InferencePutCohereRequest) =
+        let withTimeout (value: Types.Duration) (req: InferencePutCohereRequest) =
             { req with Timeout = Some value }
-        let withChunkingSettings (value: InferenceTypes.InferenceChunkingSettings) (req: InferencePutCohereRequest) =
+        let withChunkingSettings (value: Types.InferenceChunkingSettings) (req: InferencePutCohereRequest) =
             { req with ChunkingSettings = Some value }
-        let withService (value: InferenceTypes.CohereServiceType) (req: InferencePutCohereRequest) =
+        let withService (value: Types.CohereServiceType) (req: InferencePutCohereRequest) =
             { req with Service = value }
-        let withServiceSettings (value: InferenceTypes.CohereServiceSettings) (req: InferencePutCohereRequest) =
+        let withServiceSettings (value: Types.CohereServiceSettings) (req: InferencePutCohereRequest) =
             { req with ServiceSettings = value }
-        let withTaskSettings (value: InferenceTypes.CohereTaskSettings) (req: InferencePutCohereRequest) =
+        let withTaskSettings (value: Types.CohereTaskSettings) (req: InferencePutCohereRequest) =
             { req with TaskSettings = Some value }
 
     type InferencePutContextualaiRequest = {
-        TaskType: InferenceTypes.TaskTypeContextualAI
-        ContextualaiInferenceId: CoreTypes.Id
-        Timeout: CoreTypes.Duration option
-        Service: InferenceTypes.ContextualAIServiceType
-        ServiceSettings: InferenceTypes.ContextualAIServiceSettings
-        TaskSettings: InferenceTypes.ContextualAITaskSettings option
+        TaskType: Types.TaskTypeContextualAI
+        ContextualaiInferenceId: Types.Id
+        Timeout: Types.Duration option
+        Service: Types.ContextualAIServiceType
+        ServiceSettings: Types.ContextualAIServiceSettings
+        TaskSettings: Types.ContextualAITaskSettings option
     }
 
         with
@@ -1104,7 +1105,7 @@ module InferenceOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type InferencePutContextualaiResponse = InferenceTypes.InferenceEndpointInfoContextualAi
+    type InferencePutContextualaiResponse = Types.InferenceEndpointInfoContextualAi
 
     type InferencePutContextualaiRequestBuilder() =
         member _.Yield(_: unit) : InferencePutContextualaiRequest =
@@ -1118,48 +1119,48 @@ module InferenceOperations =
             }
 
         [<CustomOperation("taskType")>]
-        member _.TaskType(state: InferencePutContextualaiRequest, value: InferenceTypes.TaskTypeContextualAI) =
+        member _.TaskType(state: InferencePutContextualaiRequest, value: Types.TaskTypeContextualAI) =
             { state with TaskType = value }
 
         [<CustomOperation("contextualaiInferenceId")>]
-        member _.ContextualaiInferenceId(state: InferencePutContextualaiRequest, value: CoreTypes.Id) =
+        member _.ContextualaiInferenceId(state: InferencePutContextualaiRequest, value: Types.Id) =
             { state with ContextualaiInferenceId = value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: InferencePutContextualaiRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: InferencePutContextualaiRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("service")>]
-        member _.Service(state: InferencePutContextualaiRequest, value: InferenceTypes.ContextualAIServiceType) =
+        member _.Service(state: InferencePutContextualaiRequest, value: Types.ContextualAIServiceType) =
             { state with Service = value }
 
         [<CustomOperation("serviceSettings")>]
-        member _.ServiceSettings(state: InferencePutContextualaiRequest, value: InferenceTypes.ContextualAIServiceSettings) =
+        member _.ServiceSettings(state: InferencePutContextualaiRequest, value: Types.ContextualAIServiceSettings) =
             { state with ServiceSettings = value }
 
         [<CustomOperation("taskSettings")>]
-        member _.TaskSettings(state: InferencePutContextualaiRequest, value: InferenceTypes.ContextualAITaskSettings) =
+        member _.TaskSettings(state: InferencePutContextualaiRequest, value: Types.ContextualAITaskSettings) =
             { state with TaskSettings = Some value }
 
     let inferencePutContextualaiRequest = InferencePutContextualaiRequestBuilder()
 
     module PutContextualai =
-        let withTimeout (value: CoreTypes.Duration) (req: InferencePutContextualaiRequest) =
+        let withTimeout (value: Types.Duration) (req: InferencePutContextualaiRequest) =
             { req with Timeout = Some value }
-        let withService (value: InferenceTypes.ContextualAIServiceType) (req: InferencePutContextualaiRequest) =
+        let withService (value: Types.ContextualAIServiceType) (req: InferencePutContextualaiRequest) =
             { req with Service = value }
-        let withServiceSettings (value: InferenceTypes.ContextualAIServiceSettings) (req: InferencePutContextualaiRequest) =
+        let withServiceSettings (value: Types.ContextualAIServiceSettings) (req: InferencePutContextualaiRequest) =
             { req with ServiceSettings = value }
-        let withTaskSettings (value: InferenceTypes.ContextualAITaskSettings) (req: InferencePutContextualaiRequest) =
+        let withTaskSettings (value: Types.ContextualAITaskSettings) (req: InferencePutContextualaiRequest) =
             { req with TaskSettings = Some value }
 
     type InferencePutCustomRequest = {
-        TaskType: InferenceTypes.CustomTaskType
-        CustomInferenceId: CoreTypes.Id
-        ChunkingSettings: InferenceTypes.InferenceChunkingSettings option
-        Service: InferenceTypes.CustomServiceType
-        ServiceSettings: InferenceTypes.CustomServiceSettings
-        TaskSettings: InferenceTypes.CustomTaskSettings option
+        TaskType: Types.CustomTaskType
+        CustomInferenceId: Types.Id
+        ChunkingSettings: Types.InferenceChunkingSettings option
+        Service: Types.CustomServiceType
+        ServiceSettings: Types.CustomServiceSettings
+        TaskSettings: Types.CustomTaskSettings option
     }
 
         with
@@ -1174,7 +1175,7 @@ module InferenceOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type InferencePutCustomResponse = InferenceTypes.InferenceEndpointInfoCustom
+    type InferencePutCustomResponse = Types.InferenceEndpointInfoCustom
 
     type InferencePutCustomRequestBuilder() =
         member _.Yield(_: unit) : InferencePutCustomRequest =
@@ -1188,47 +1189,47 @@ module InferenceOperations =
             }
 
         [<CustomOperation("taskType")>]
-        member _.TaskType(state: InferencePutCustomRequest, value: InferenceTypes.CustomTaskType) =
+        member _.TaskType(state: InferencePutCustomRequest, value: Types.CustomTaskType) =
             { state with TaskType = value }
 
         [<CustomOperation("customInferenceId")>]
-        member _.CustomInferenceId(state: InferencePutCustomRequest, value: CoreTypes.Id) =
+        member _.CustomInferenceId(state: InferencePutCustomRequest, value: Types.Id) =
             { state with CustomInferenceId = value }
 
         [<CustomOperation("chunkingSettings")>]
-        member _.ChunkingSettings(state: InferencePutCustomRequest, value: InferenceTypes.InferenceChunkingSettings) =
+        member _.ChunkingSettings(state: InferencePutCustomRequest, value: Types.InferenceChunkingSettings) =
             { state with ChunkingSettings = Some value }
 
         [<CustomOperation("service")>]
-        member _.Service(state: InferencePutCustomRequest, value: InferenceTypes.CustomServiceType) =
+        member _.Service(state: InferencePutCustomRequest, value: Types.CustomServiceType) =
             { state with Service = value }
 
         [<CustomOperation("serviceSettings")>]
-        member _.ServiceSettings(state: InferencePutCustomRequest, value: InferenceTypes.CustomServiceSettings) =
+        member _.ServiceSettings(state: InferencePutCustomRequest, value: Types.CustomServiceSettings) =
             { state with ServiceSettings = value }
 
         [<CustomOperation("taskSettings")>]
-        member _.TaskSettings(state: InferencePutCustomRequest, value: InferenceTypes.CustomTaskSettings) =
+        member _.TaskSettings(state: InferencePutCustomRequest, value: Types.CustomTaskSettings) =
             { state with TaskSettings = Some value }
 
     let inferencePutCustomRequest = InferencePutCustomRequestBuilder()
 
     module PutCustom =
-        let withChunkingSettings (value: InferenceTypes.InferenceChunkingSettings) (req: InferencePutCustomRequest) =
+        let withChunkingSettings (value: Types.InferenceChunkingSettings) (req: InferencePutCustomRequest) =
             { req with ChunkingSettings = Some value }
-        let withService (value: InferenceTypes.CustomServiceType) (req: InferencePutCustomRequest) =
+        let withService (value: Types.CustomServiceType) (req: InferencePutCustomRequest) =
             { req with Service = value }
-        let withServiceSettings (value: InferenceTypes.CustomServiceSettings) (req: InferencePutCustomRequest) =
+        let withServiceSettings (value: Types.CustomServiceSettings) (req: InferencePutCustomRequest) =
             { req with ServiceSettings = value }
-        let withTaskSettings (value: InferenceTypes.CustomTaskSettings) (req: InferencePutCustomRequest) =
+        let withTaskSettings (value: Types.CustomTaskSettings) (req: InferencePutCustomRequest) =
             { req with TaskSettings = Some value }
 
     type InferencePutDeepseekRequest = {
-        TaskType: InferenceTypes.TaskTypeDeepSeek
-        DeepseekInferenceId: CoreTypes.Id
-        Timeout: CoreTypes.Duration option
-        Service: InferenceTypes.DeepSeekServiceType
-        ServiceSettings: InferenceTypes.DeepSeekServiceSettings
+        TaskType: Types.TaskTypeDeepSeek
+        DeepseekInferenceId: Types.Id
+        Timeout: Types.Duration option
+        Service: Types.DeepSeekServiceType
+        ServiceSettings: Types.DeepSeekServiceSettings
     }
 
         with
@@ -1250,7 +1251,7 @@ module InferenceOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type InferencePutDeepseekResponse = InferenceTypes.InferenceEndpointInfoDeepSeek
+    type InferencePutDeepseekResponse = Types.InferenceEndpointInfoDeepSeek
 
     type InferencePutDeepseekRequestBuilder() =
         member _.Yield(_: unit) : InferencePutDeepseekRequest =
@@ -1263,43 +1264,43 @@ module InferenceOperations =
             }
 
         [<CustomOperation("taskType")>]
-        member _.TaskType(state: InferencePutDeepseekRequest, value: InferenceTypes.TaskTypeDeepSeek) =
+        member _.TaskType(state: InferencePutDeepseekRequest, value: Types.TaskTypeDeepSeek) =
             { state with TaskType = value }
 
         [<CustomOperation("deepseekInferenceId")>]
-        member _.DeepseekInferenceId(state: InferencePutDeepseekRequest, value: CoreTypes.Id) =
+        member _.DeepseekInferenceId(state: InferencePutDeepseekRequest, value: Types.Id) =
             { state with DeepseekInferenceId = value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: InferencePutDeepseekRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: InferencePutDeepseekRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("service")>]
-        member _.Service(state: InferencePutDeepseekRequest, value: InferenceTypes.DeepSeekServiceType) =
+        member _.Service(state: InferencePutDeepseekRequest, value: Types.DeepSeekServiceType) =
             { state with Service = value }
 
         [<CustomOperation("serviceSettings")>]
-        member _.ServiceSettings(state: InferencePutDeepseekRequest, value: InferenceTypes.DeepSeekServiceSettings) =
+        member _.ServiceSettings(state: InferencePutDeepseekRequest, value: Types.DeepSeekServiceSettings) =
             { state with ServiceSettings = value }
 
     let inferencePutDeepseekRequest = InferencePutDeepseekRequestBuilder()
 
     module PutDeepseek =
-        let withTimeout (value: CoreTypes.Duration) (req: InferencePutDeepseekRequest) =
+        let withTimeout (value: Types.Duration) (req: InferencePutDeepseekRequest) =
             { req with Timeout = Some value }
-        let withService (value: InferenceTypes.DeepSeekServiceType) (req: InferencePutDeepseekRequest) =
+        let withService (value: Types.DeepSeekServiceType) (req: InferencePutDeepseekRequest) =
             { req with Service = value }
-        let withServiceSettings (value: InferenceTypes.DeepSeekServiceSettings) (req: InferencePutDeepseekRequest) =
+        let withServiceSettings (value: Types.DeepSeekServiceSettings) (req: InferencePutDeepseekRequest) =
             { req with ServiceSettings = value }
 
     type InferencePutElasticsearchRequest = {
-        TaskType: InferenceTypes.ElasticsearchTaskType
-        ElasticsearchInferenceId: CoreTypes.Id
-        Timeout: CoreTypes.Duration option
-        ChunkingSettings: InferenceTypes.InferenceChunkingSettings option
-        Service: InferenceTypes.ElasticsearchServiceType
-        ServiceSettings: InferenceTypes.ElasticsearchServiceSettings
-        TaskSettings: InferenceTypes.ElasticsearchTaskSettings option
+        TaskType: Types.ElasticsearchTaskType
+        ElasticsearchInferenceId: Types.Id
+        Timeout: Types.Duration option
+        ChunkingSettings: Types.InferenceChunkingSettings option
+        Service: Types.ElasticsearchServiceType
+        ServiceSettings: Types.ElasticsearchServiceSettings
+        TaskSettings: Types.ElasticsearchTaskSettings option
     }
 
         with
@@ -1321,7 +1322,7 @@ module InferenceOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type InferencePutElasticsearchResponse = InferenceTypes.InferenceEndpointInfoElasticsearch
+    type InferencePutElasticsearchResponse = Types.InferenceEndpointInfoElasticsearch
 
     type InferencePutElasticsearchRequestBuilder() =
         member _.Yield(_: unit) : InferencePutElasticsearchRequest =
@@ -1336,54 +1337,54 @@ module InferenceOperations =
             }
 
         [<CustomOperation("taskType")>]
-        member _.TaskType(state: InferencePutElasticsearchRequest, value: InferenceTypes.ElasticsearchTaskType) =
+        member _.TaskType(state: InferencePutElasticsearchRequest, value: Types.ElasticsearchTaskType) =
             { state with TaskType = value }
 
         [<CustomOperation("elasticsearchInferenceId")>]
-        member _.ElasticsearchInferenceId(state: InferencePutElasticsearchRequest, value: CoreTypes.Id) =
+        member _.ElasticsearchInferenceId(state: InferencePutElasticsearchRequest, value: Types.Id) =
             { state with ElasticsearchInferenceId = value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: InferencePutElasticsearchRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: InferencePutElasticsearchRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("chunkingSettings")>]
-        member _.ChunkingSettings(state: InferencePutElasticsearchRequest, value: InferenceTypes.InferenceChunkingSettings) =
+        member _.ChunkingSettings(state: InferencePutElasticsearchRequest, value: Types.InferenceChunkingSettings) =
             { state with ChunkingSettings = Some value }
 
         [<CustomOperation("service")>]
-        member _.Service(state: InferencePutElasticsearchRequest, value: InferenceTypes.ElasticsearchServiceType) =
+        member _.Service(state: InferencePutElasticsearchRequest, value: Types.ElasticsearchServiceType) =
             { state with Service = value }
 
         [<CustomOperation("serviceSettings")>]
-        member _.ServiceSettings(state: InferencePutElasticsearchRequest, value: InferenceTypes.ElasticsearchServiceSettings) =
+        member _.ServiceSettings(state: InferencePutElasticsearchRequest, value: Types.ElasticsearchServiceSettings) =
             { state with ServiceSettings = value }
 
         [<CustomOperation("taskSettings")>]
-        member _.TaskSettings(state: InferencePutElasticsearchRequest, value: InferenceTypes.ElasticsearchTaskSettings) =
+        member _.TaskSettings(state: InferencePutElasticsearchRequest, value: Types.ElasticsearchTaskSettings) =
             { state with TaskSettings = Some value }
 
     let inferencePutElasticsearchRequest = InferencePutElasticsearchRequestBuilder()
 
     module PutElasticsearch =
-        let withTimeout (value: CoreTypes.Duration) (req: InferencePutElasticsearchRequest) =
+        let withTimeout (value: Types.Duration) (req: InferencePutElasticsearchRequest) =
             { req with Timeout = Some value }
-        let withChunkingSettings (value: InferenceTypes.InferenceChunkingSettings) (req: InferencePutElasticsearchRequest) =
+        let withChunkingSettings (value: Types.InferenceChunkingSettings) (req: InferencePutElasticsearchRequest) =
             { req with ChunkingSettings = Some value }
-        let withService (value: InferenceTypes.ElasticsearchServiceType) (req: InferencePutElasticsearchRequest) =
+        let withService (value: Types.ElasticsearchServiceType) (req: InferencePutElasticsearchRequest) =
             { req with Service = value }
-        let withServiceSettings (value: InferenceTypes.ElasticsearchServiceSettings) (req: InferencePutElasticsearchRequest) =
+        let withServiceSettings (value: Types.ElasticsearchServiceSettings) (req: InferencePutElasticsearchRequest) =
             { req with ServiceSettings = value }
-        let withTaskSettings (value: InferenceTypes.ElasticsearchTaskSettings) (req: InferencePutElasticsearchRequest) =
+        let withTaskSettings (value: Types.ElasticsearchTaskSettings) (req: InferencePutElasticsearchRequest) =
             { req with TaskSettings = Some value }
 
     type InferencePutElserRequest = {
-        TaskType: InferenceTypes.ElserTaskType
-        ElserInferenceId: CoreTypes.Id
-        Timeout: CoreTypes.Duration option
-        ChunkingSettings: InferenceTypes.InferenceChunkingSettings option
-        Service: InferenceTypes.ElserServiceType
-        ServiceSettings: InferenceTypes.ElserServiceSettings
+        TaskType: Types.ElserTaskType
+        ElserInferenceId: Types.Id
+        Timeout: Types.Duration option
+        ChunkingSettings: Types.InferenceChunkingSettings option
+        Service: Types.ElserServiceType
+        ServiceSettings: Types.ElserServiceSettings
     }
 
         with
@@ -1405,7 +1406,7 @@ module InferenceOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type InferencePutElserResponse = InferenceTypes.InferenceEndpointInfoELSER
+    type InferencePutElserResponse = Types.InferenceEndpointInfoELSER
 
     type InferencePutElserRequestBuilder() =
         member _.Yield(_: unit) : InferencePutElserRequest =
@@ -1419,49 +1420,49 @@ module InferenceOperations =
             }
 
         [<CustomOperation("taskType")>]
-        member _.TaskType(state: InferencePutElserRequest, value: InferenceTypes.ElserTaskType) =
+        member _.TaskType(state: InferencePutElserRequest, value: Types.ElserTaskType) =
             { state with TaskType = value }
 
         [<CustomOperation("elserInferenceId")>]
-        member _.ElserInferenceId(state: InferencePutElserRequest, value: CoreTypes.Id) =
+        member _.ElserInferenceId(state: InferencePutElserRequest, value: Types.Id) =
             { state with ElserInferenceId = value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: InferencePutElserRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: InferencePutElserRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("chunkingSettings")>]
-        member _.ChunkingSettings(state: InferencePutElserRequest, value: InferenceTypes.InferenceChunkingSettings) =
+        member _.ChunkingSettings(state: InferencePutElserRequest, value: Types.InferenceChunkingSettings) =
             { state with ChunkingSettings = Some value }
 
         [<CustomOperation("service")>]
-        member _.Service(state: InferencePutElserRequest, value: InferenceTypes.ElserServiceType) =
+        member _.Service(state: InferencePutElserRequest, value: Types.ElserServiceType) =
             { state with Service = value }
 
         [<CustomOperation("serviceSettings")>]
-        member _.ServiceSettings(state: InferencePutElserRequest, value: InferenceTypes.ElserServiceSettings) =
+        member _.ServiceSettings(state: InferencePutElserRequest, value: Types.ElserServiceSettings) =
             { state with ServiceSettings = value }
 
     let inferencePutElserRequest = InferencePutElserRequestBuilder()
 
     module PutElser =
-        let withTimeout (value: CoreTypes.Duration) (req: InferencePutElserRequest) =
+        let withTimeout (value: Types.Duration) (req: InferencePutElserRequest) =
             { req with Timeout = Some value }
-        let withChunkingSettings (value: InferenceTypes.InferenceChunkingSettings) (req: InferencePutElserRequest) =
+        let withChunkingSettings (value: Types.InferenceChunkingSettings) (req: InferencePutElserRequest) =
             { req with ChunkingSettings = Some value }
-        let withService (value: InferenceTypes.ElserServiceType) (req: InferencePutElserRequest) =
+        let withService (value: Types.ElserServiceType) (req: InferencePutElserRequest) =
             { req with Service = value }
-        let withServiceSettings (value: InferenceTypes.ElserServiceSettings) (req: InferencePutElserRequest) =
+        let withServiceSettings (value: Types.ElserServiceSettings) (req: InferencePutElserRequest) =
             { req with ServiceSettings = value }
 
     type InferencePutFireworksaiRequest = {
-        TaskType: InferenceTypes.FireworksAITaskType
-        FireworksaiInferenceId: CoreTypes.Id
-        Timeout: CoreTypes.Duration option
-        ChunkingSettings: InferenceTypes.InferenceChunkingSettings option
-        Service: InferenceTypes.FireworksAIServiceType
-        ServiceSettings: InferenceTypes.FireworksAIServiceSettings
-        TaskSettings: InferenceTypes.FireworksAITaskSettings option
+        TaskType: Types.FireworksAITaskType
+        FireworksaiInferenceId: Types.Id
+        Timeout: Types.Duration option
+        ChunkingSettings: Types.InferenceChunkingSettings option
+        Service: Types.FireworksAIServiceType
+        ServiceSettings: Types.FireworksAIServiceSettings
+        TaskSettings: Types.FireworksAITaskSettings option
     }
 
         with
@@ -1483,7 +1484,7 @@ module InferenceOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type InferencePutFireworksaiResponse = InferenceTypes.InferenceEndpointInfoFireworksAI
+    type InferencePutFireworksaiResponse = Types.InferenceEndpointInfoFireworksAI
 
     type InferencePutFireworksaiRequestBuilder() =
         member _.Yield(_: unit) : InferencePutFireworksaiRequest =
@@ -1498,54 +1499,54 @@ module InferenceOperations =
             }
 
         [<CustomOperation("taskType")>]
-        member _.TaskType(state: InferencePutFireworksaiRequest, value: InferenceTypes.FireworksAITaskType) =
+        member _.TaskType(state: InferencePutFireworksaiRequest, value: Types.FireworksAITaskType) =
             { state with TaskType = value }
 
         [<CustomOperation("fireworksaiInferenceId")>]
-        member _.FireworksaiInferenceId(state: InferencePutFireworksaiRequest, value: CoreTypes.Id) =
+        member _.FireworksaiInferenceId(state: InferencePutFireworksaiRequest, value: Types.Id) =
             { state with FireworksaiInferenceId = value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: InferencePutFireworksaiRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: InferencePutFireworksaiRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("chunkingSettings")>]
-        member _.ChunkingSettings(state: InferencePutFireworksaiRequest, value: InferenceTypes.InferenceChunkingSettings) =
+        member _.ChunkingSettings(state: InferencePutFireworksaiRequest, value: Types.InferenceChunkingSettings) =
             { state with ChunkingSettings = Some value }
 
         [<CustomOperation("service")>]
-        member _.Service(state: InferencePutFireworksaiRequest, value: InferenceTypes.FireworksAIServiceType) =
+        member _.Service(state: InferencePutFireworksaiRequest, value: Types.FireworksAIServiceType) =
             { state with Service = value }
 
         [<CustomOperation("serviceSettings")>]
-        member _.ServiceSettings(state: InferencePutFireworksaiRequest, value: InferenceTypes.FireworksAIServiceSettings) =
+        member _.ServiceSettings(state: InferencePutFireworksaiRequest, value: Types.FireworksAIServiceSettings) =
             { state with ServiceSettings = value }
 
         [<CustomOperation("taskSettings")>]
-        member _.TaskSettings(state: InferencePutFireworksaiRequest, value: InferenceTypes.FireworksAITaskSettings) =
+        member _.TaskSettings(state: InferencePutFireworksaiRequest, value: Types.FireworksAITaskSettings) =
             { state with TaskSettings = Some value }
 
     let inferencePutFireworksaiRequest = InferencePutFireworksaiRequestBuilder()
 
     module PutFireworksai =
-        let withTimeout (value: CoreTypes.Duration) (req: InferencePutFireworksaiRequest) =
+        let withTimeout (value: Types.Duration) (req: InferencePutFireworksaiRequest) =
             { req with Timeout = Some value }
-        let withChunkingSettings (value: InferenceTypes.InferenceChunkingSettings) (req: InferencePutFireworksaiRequest) =
+        let withChunkingSettings (value: Types.InferenceChunkingSettings) (req: InferencePutFireworksaiRequest) =
             { req with ChunkingSettings = Some value }
-        let withService (value: InferenceTypes.FireworksAIServiceType) (req: InferencePutFireworksaiRequest) =
+        let withService (value: Types.FireworksAIServiceType) (req: InferencePutFireworksaiRequest) =
             { req with Service = value }
-        let withServiceSettings (value: InferenceTypes.FireworksAIServiceSettings) (req: InferencePutFireworksaiRequest) =
+        let withServiceSettings (value: Types.FireworksAIServiceSettings) (req: InferencePutFireworksaiRequest) =
             { req with ServiceSettings = value }
-        let withTaskSettings (value: InferenceTypes.FireworksAITaskSettings) (req: InferencePutFireworksaiRequest) =
+        let withTaskSettings (value: Types.FireworksAITaskSettings) (req: InferencePutFireworksaiRequest) =
             { req with TaskSettings = Some value }
 
     type InferencePutGoogleaistudioRequest = {
-        TaskType: InferenceTypes.GoogleAiStudioTaskType
-        GoogleaistudioInferenceId: CoreTypes.Id
-        Timeout: CoreTypes.Duration option
-        ChunkingSettings: InferenceTypes.InferenceChunkingSettings option
-        Service: InferenceTypes.GoogleAiServiceType
-        ServiceSettings: InferenceTypes.GoogleAiStudioServiceSettings
+        TaskType: Types.GoogleAiStudioTaskType
+        GoogleaistudioInferenceId: Types.Id
+        Timeout: Types.Duration option
+        ChunkingSettings: Types.InferenceChunkingSettings option
+        Service: Types.GoogleAiServiceType
+        ServiceSettings: Types.GoogleAiStudioServiceSettings
     }
 
         with
@@ -1567,7 +1568,7 @@ module InferenceOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type InferencePutGoogleaistudioResponse = InferenceTypes.InferenceEndpointInfoGoogleAIStudio
+    type InferencePutGoogleaistudioResponse = Types.InferenceEndpointInfoGoogleAIStudio
 
     type InferencePutGoogleaistudioRequestBuilder() =
         member _.Yield(_: unit) : InferencePutGoogleaistudioRequest =
@@ -1581,49 +1582,49 @@ module InferenceOperations =
             }
 
         [<CustomOperation("taskType")>]
-        member _.TaskType(state: InferencePutGoogleaistudioRequest, value: InferenceTypes.GoogleAiStudioTaskType) =
+        member _.TaskType(state: InferencePutGoogleaistudioRequest, value: Types.GoogleAiStudioTaskType) =
             { state with TaskType = value }
 
         [<CustomOperation("googleaistudioInferenceId")>]
-        member _.GoogleaistudioInferenceId(state: InferencePutGoogleaistudioRequest, value: CoreTypes.Id) =
+        member _.GoogleaistudioInferenceId(state: InferencePutGoogleaistudioRequest, value: Types.Id) =
             { state with GoogleaistudioInferenceId = value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: InferencePutGoogleaistudioRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: InferencePutGoogleaistudioRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("chunkingSettings")>]
-        member _.ChunkingSettings(state: InferencePutGoogleaistudioRequest, value: InferenceTypes.InferenceChunkingSettings) =
+        member _.ChunkingSettings(state: InferencePutGoogleaistudioRequest, value: Types.InferenceChunkingSettings) =
             { state with ChunkingSettings = Some value }
 
         [<CustomOperation("service")>]
-        member _.Service(state: InferencePutGoogleaistudioRequest, value: InferenceTypes.GoogleAiServiceType) =
+        member _.Service(state: InferencePutGoogleaistudioRequest, value: Types.GoogleAiServiceType) =
             { state with Service = value }
 
         [<CustomOperation("serviceSettings")>]
-        member _.ServiceSettings(state: InferencePutGoogleaistudioRequest, value: InferenceTypes.GoogleAiStudioServiceSettings) =
+        member _.ServiceSettings(state: InferencePutGoogleaistudioRequest, value: Types.GoogleAiStudioServiceSettings) =
             { state with ServiceSettings = value }
 
     let inferencePutGoogleaistudioRequest = InferencePutGoogleaistudioRequestBuilder()
 
     module PutGoogleaistudio =
-        let withTimeout (value: CoreTypes.Duration) (req: InferencePutGoogleaistudioRequest) =
+        let withTimeout (value: Types.Duration) (req: InferencePutGoogleaistudioRequest) =
             { req with Timeout = Some value }
-        let withChunkingSettings (value: InferenceTypes.InferenceChunkingSettings) (req: InferencePutGoogleaistudioRequest) =
+        let withChunkingSettings (value: Types.InferenceChunkingSettings) (req: InferencePutGoogleaistudioRequest) =
             { req with ChunkingSettings = Some value }
-        let withService (value: InferenceTypes.GoogleAiServiceType) (req: InferencePutGoogleaistudioRequest) =
+        let withService (value: Types.GoogleAiServiceType) (req: InferencePutGoogleaistudioRequest) =
             { req with Service = value }
-        let withServiceSettings (value: InferenceTypes.GoogleAiStudioServiceSettings) (req: InferencePutGoogleaistudioRequest) =
+        let withServiceSettings (value: Types.GoogleAiStudioServiceSettings) (req: InferencePutGoogleaistudioRequest) =
             { req with ServiceSettings = value }
 
     type InferencePutGooglevertexaiRequest = {
-        TaskType: InferenceTypes.GoogleVertexAITaskType
-        GooglevertexaiInferenceId: CoreTypes.Id
-        Timeout: CoreTypes.Duration option
-        ChunkingSettings: InferenceTypes.InferenceChunkingSettings option
-        Service: InferenceTypes.GoogleVertexAIServiceType
-        ServiceSettings: InferenceTypes.GoogleVertexAIServiceSettings
-        TaskSettings: InferenceTypes.GoogleVertexAITaskSettings option
+        TaskType: Types.GoogleVertexAITaskType
+        GooglevertexaiInferenceId: Types.Id
+        Timeout: Types.Duration option
+        ChunkingSettings: Types.InferenceChunkingSettings option
+        Service: Types.GoogleVertexAIServiceType
+        ServiceSettings: Types.GoogleVertexAIServiceSettings
+        TaskSettings: Types.GoogleVertexAITaskSettings option
     }
 
         with
@@ -1645,7 +1646,7 @@ module InferenceOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type InferencePutGooglevertexaiResponse = InferenceTypes.InferenceEndpointInfoGoogleVertexAI
+    type InferencePutGooglevertexaiResponse = Types.InferenceEndpointInfoGoogleVertexAI
 
     type InferencePutGooglevertexaiRequestBuilder() =
         member _.Yield(_: unit) : InferencePutGooglevertexaiRequest =
@@ -1660,53 +1661,53 @@ module InferenceOperations =
             }
 
         [<CustomOperation("taskType")>]
-        member _.TaskType(state: InferencePutGooglevertexaiRequest, value: InferenceTypes.GoogleVertexAITaskType) =
+        member _.TaskType(state: InferencePutGooglevertexaiRequest, value: Types.GoogleVertexAITaskType) =
             { state with TaskType = value }
 
         [<CustomOperation("googlevertexaiInferenceId")>]
-        member _.GooglevertexaiInferenceId(state: InferencePutGooglevertexaiRequest, value: CoreTypes.Id) =
+        member _.GooglevertexaiInferenceId(state: InferencePutGooglevertexaiRequest, value: Types.Id) =
             { state with GooglevertexaiInferenceId = value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: InferencePutGooglevertexaiRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: InferencePutGooglevertexaiRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("chunkingSettings")>]
-        member _.ChunkingSettings(state: InferencePutGooglevertexaiRequest, value: InferenceTypes.InferenceChunkingSettings) =
+        member _.ChunkingSettings(state: InferencePutGooglevertexaiRequest, value: Types.InferenceChunkingSettings) =
             { state with ChunkingSettings = Some value }
 
         [<CustomOperation("service")>]
-        member _.Service(state: InferencePutGooglevertexaiRequest, value: InferenceTypes.GoogleVertexAIServiceType) =
+        member _.Service(state: InferencePutGooglevertexaiRequest, value: Types.GoogleVertexAIServiceType) =
             { state with Service = value }
 
         [<CustomOperation("serviceSettings")>]
-        member _.ServiceSettings(state: InferencePutGooglevertexaiRequest, value: InferenceTypes.GoogleVertexAIServiceSettings) =
+        member _.ServiceSettings(state: InferencePutGooglevertexaiRequest, value: Types.GoogleVertexAIServiceSettings) =
             { state with ServiceSettings = value }
 
         [<CustomOperation("taskSettings")>]
-        member _.TaskSettings(state: InferencePutGooglevertexaiRequest, value: InferenceTypes.GoogleVertexAITaskSettings) =
+        member _.TaskSettings(state: InferencePutGooglevertexaiRequest, value: Types.GoogleVertexAITaskSettings) =
             { state with TaskSettings = Some value }
 
     let inferencePutGooglevertexaiRequest = InferencePutGooglevertexaiRequestBuilder()
 
     module PutGooglevertexai =
-        let withTimeout (value: CoreTypes.Duration) (req: InferencePutGooglevertexaiRequest) =
+        let withTimeout (value: Types.Duration) (req: InferencePutGooglevertexaiRequest) =
             { req with Timeout = Some value }
-        let withChunkingSettings (value: InferenceTypes.InferenceChunkingSettings) (req: InferencePutGooglevertexaiRequest) =
+        let withChunkingSettings (value: Types.InferenceChunkingSettings) (req: InferencePutGooglevertexaiRequest) =
             { req with ChunkingSettings = Some value }
-        let withService (value: InferenceTypes.GoogleVertexAIServiceType) (req: InferencePutGooglevertexaiRequest) =
+        let withService (value: Types.GoogleVertexAIServiceType) (req: InferencePutGooglevertexaiRequest) =
             { req with Service = value }
-        let withServiceSettings (value: InferenceTypes.GoogleVertexAIServiceSettings) (req: InferencePutGooglevertexaiRequest) =
+        let withServiceSettings (value: Types.GoogleVertexAIServiceSettings) (req: InferencePutGooglevertexaiRequest) =
             { req with ServiceSettings = value }
-        let withTaskSettings (value: InferenceTypes.GoogleVertexAITaskSettings) (req: InferencePutGooglevertexaiRequest) =
+        let withTaskSettings (value: Types.GoogleVertexAITaskSettings) (req: InferencePutGooglevertexaiRequest) =
             { req with TaskSettings = Some value }
 
     type InferencePutGroqRequest = {
-        TaskType: InferenceTypes.GroqTaskType
-        GroqInferenceId: CoreTypes.Id
-        Timeout: CoreTypes.Duration option
-        Service: InferenceTypes.GroqServiceType
-        ServiceSettings: InferenceTypes.GroqServiceSettings
+        TaskType: Types.GroqTaskType
+        GroqInferenceId: Types.Id
+        Timeout: Types.Duration option
+        Service: Types.GroqServiceType
+        ServiceSettings: Types.GroqServiceSettings
     }
 
         with
@@ -1728,7 +1729,7 @@ module InferenceOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type InferencePutGroqResponse = InferenceTypes.InferenceEndpointInfoGroq
+    type InferencePutGroqResponse = Types.InferenceEndpointInfoGroq
 
     type InferencePutGroqRequestBuilder() =
         member _.Yield(_: unit) : InferencePutGroqRequest =
@@ -1741,43 +1742,43 @@ module InferenceOperations =
             }
 
         [<CustomOperation("taskType")>]
-        member _.TaskType(state: InferencePutGroqRequest, value: InferenceTypes.GroqTaskType) =
+        member _.TaskType(state: InferencePutGroqRequest, value: Types.GroqTaskType) =
             { state with TaskType = value }
 
         [<CustomOperation("groqInferenceId")>]
-        member _.GroqInferenceId(state: InferencePutGroqRequest, value: CoreTypes.Id) =
+        member _.GroqInferenceId(state: InferencePutGroqRequest, value: Types.Id) =
             { state with GroqInferenceId = value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: InferencePutGroqRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: InferencePutGroqRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("service")>]
-        member _.Service(state: InferencePutGroqRequest, value: InferenceTypes.GroqServiceType) =
+        member _.Service(state: InferencePutGroqRequest, value: Types.GroqServiceType) =
             { state with Service = value }
 
         [<CustomOperation("serviceSettings")>]
-        member _.ServiceSettings(state: InferencePutGroqRequest, value: InferenceTypes.GroqServiceSettings) =
+        member _.ServiceSettings(state: InferencePutGroqRequest, value: Types.GroqServiceSettings) =
             { state with ServiceSettings = value }
 
     let inferencePutGroqRequest = InferencePutGroqRequestBuilder()
 
     module PutGroq =
-        let withTimeout (value: CoreTypes.Duration) (req: InferencePutGroqRequest) =
+        let withTimeout (value: Types.Duration) (req: InferencePutGroqRequest) =
             { req with Timeout = Some value }
-        let withService (value: InferenceTypes.GroqServiceType) (req: InferencePutGroqRequest) =
+        let withService (value: Types.GroqServiceType) (req: InferencePutGroqRequest) =
             { req with Service = value }
-        let withServiceSettings (value: InferenceTypes.GroqServiceSettings) (req: InferencePutGroqRequest) =
+        let withServiceSettings (value: Types.GroqServiceSettings) (req: InferencePutGroqRequest) =
             { req with ServiceSettings = value }
 
     type InferencePutHuggingFaceRequest = {
-        TaskType: InferenceTypes.HuggingFaceTaskType
-        HuggingfaceInferenceId: CoreTypes.Id
-        Timeout: CoreTypes.Duration option
-        ChunkingSettings: InferenceTypes.InferenceChunkingSettings option
-        Service: InferenceTypes.HuggingFaceServiceType
-        ServiceSettings: InferenceTypes.HuggingFaceServiceSettings
-        TaskSettings: InferenceTypes.HuggingFaceTaskSettings option
+        TaskType: Types.HuggingFaceTaskType
+        HuggingfaceInferenceId: Types.Id
+        Timeout: Types.Duration option
+        ChunkingSettings: Types.InferenceChunkingSettings option
+        Service: Types.HuggingFaceServiceType
+        ServiceSettings: Types.HuggingFaceServiceSettings
+        TaskSettings: Types.HuggingFaceTaskSettings option
     }
 
         with
@@ -1799,7 +1800,7 @@ module InferenceOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type InferencePutHuggingFaceResponse = InferenceTypes.InferenceEndpointInfoHuggingFace
+    type InferencePutHuggingFaceResponse = Types.InferenceEndpointInfoHuggingFace
 
     type InferencePutHuggingFaceRequestBuilder() =
         member _.Yield(_: unit) : InferencePutHuggingFaceRequest =
@@ -1814,55 +1815,55 @@ module InferenceOperations =
             }
 
         [<CustomOperation("taskType")>]
-        member _.TaskType(state: InferencePutHuggingFaceRequest, value: InferenceTypes.HuggingFaceTaskType) =
+        member _.TaskType(state: InferencePutHuggingFaceRequest, value: Types.HuggingFaceTaskType) =
             { state with TaskType = value }
 
         [<CustomOperation("huggingfaceInferenceId")>]
-        member _.HuggingfaceInferenceId(state: InferencePutHuggingFaceRequest, value: CoreTypes.Id) =
+        member _.HuggingfaceInferenceId(state: InferencePutHuggingFaceRequest, value: Types.Id) =
             { state with HuggingfaceInferenceId = value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: InferencePutHuggingFaceRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: InferencePutHuggingFaceRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("chunkingSettings")>]
-        member _.ChunkingSettings(state: InferencePutHuggingFaceRequest, value: InferenceTypes.InferenceChunkingSettings) =
+        member _.ChunkingSettings(state: InferencePutHuggingFaceRequest, value: Types.InferenceChunkingSettings) =
             { state with ChunkingSettings = Some value }
 
         [<CustomOperation("service")>]
-        member _.Service(state: InferencePutHuggingFaceRequest, value: InferenceTypes.HuggingFaceServiceType) =
+        member _.Service(state: InferencePutHuggingFaceRequest, value: Types.HuggingFaceServiceType) =
             { state with Service = value }
 
         [<CustomOperation("serviceSettings")>]
-        member _.ServiceSettings(state: InferencePutHuggingFaceRequest, value: InferenceTypes.HuggingFaceServiceSettings) =
+        member _.ServiceSettings(state: InferencePutHuggingFaceRequest, value: Types.HuggingFaceServiceSettings) =
             { state with ServiceSettings = value }
 
         [<CustomOperation("taskSettings")>]
-        member _.TaskSettings(state: InferencePutHuggingFaceRequest, value: InferenceTypes.HuggingFaceTaskSettings) =
+        member _.TaskSettings(state: InferencePutHuggingFaceRequest, value: Types.HuggingFaceTaskSettings) =
             { state with TaskSettings = Some value }
 
     let inferencePutHuggingFaceRequest = InferencePutHuggingFaceRequestBuilder()
 
     module PutHuggingFace =
-        let withTimeout (value: CoreTypes.Duration) (req: InferencePutHuggingFaceRequest) =
+        let withTimeout (value: Types.Duration) (req: InferencePutHuggingFaceRequest) =
             { req with Timeout = Some value }
-        let withChunkingSettings (value: InferenceTypes.InferenceChunkingSettings) (req: InferencePutHuggingFaceRequest) =
+        let withChunkingSettings (value: Types.InferenceChunkingSettings) (req: InferencePutHuggingFaceRequest) =
             { req with ChunkingSettings = Some value }
-        let withService (value: InferenceTypes.HuggingFaceServiceType) (req: InferencePutHuggingFaceRequest) =
+        let withService (value: Types.HuggingFaceServiceType) (req: InferencePutHuggingFaceRequest) =
             { req with Service = value }
-        let withServiceSettings (value: InferenceTypes.HuggingFaceServiceSettings) (req: InferencePutHuggingFaceRequest) =
+        let withServiceSettings (value: Types.HuggingFaceServiceSettings) (req: InferencePutHuggingFaceRequest) =
             { req with ServiceSettings = value }
-        let withTaskSettings (value: InferenceTypes.HuggingFaceTaskSettings) (req: InferencePutHuggingFaceRequest) =
+        let withTaskSettings (value: Types.HuggingFaceTaskSettings) (req: InferencePutHuggingFaceRequest) =
             { req with TaskSettings = Some value }
 
     type InferencePutJinaaiRequest = {
-        TaskType: InferenceTypes.JinaAITaskType
-        JinaaiInferenceId: CoreTypes.Id
-        Timeout: CoreTypes.Duration option
-        ChunkingSettings: InferenceTypes.InferenceChunkingSettings option
-        Service: InferenceTypes.JinaAIServiceType
-        ServiceSettings: InferenceTypes.JinaAIServiceSettings
-        TaskSettings: InferenceTypes.JinaAITaskSettings option
+        TaskType: Types.JinaAITaskType
+        JinaaiInferenceId: Types.Id
+        Timeout: Types.Duration option
+        ChunkingSettings: Types.InferenceChunkingSettings option
+        Service: Types.JinaAIServiceType
+        ServiceSettings: Types.JinaAIServiceSettings
+        TaskSettings: Types.JinaAITaskSettings option
     }
 
         with
@@ -1884,7 +1885,7 @@ module InferenceOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type InferencePutJinaaiResponse = InferenceTypes.InferenceEndpointInfoJinaAi
+    type InferencePutJinaaiResponse = Types.InferenceEndpointInfoJinaAi
 
     type InferencePutJinaaiRequestBuilder() =
         member _.Yield(_: unit) : InferencePutJinaaiRequest =
@@ -1899,54 +1900,54 @@ module InferenceOperations =
             }
 
         [<CustomOperation("taskType")>]
-        member _.TaskType(state: InferencePutJinaaiRequest, value: InferenceTypes.JinaAITaskType) =
+        member _.TaskType(state: InferencePutJinaaiRequest, value: Types.JinaAITaskType) =
             { state with TaskType = value }
 
         [<CustomOperation("jinaaiInferenceId")>]
-        member _.JinaaiInferenceId(state: InferencePutJinaaiRequest, value: CoreTypes.Id) =
+        member _.JinaaiInferenceId(state: InferencePutJinaaiRequest, value: Types.Id) =
             { state with JinaaiInferenceId = value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: InferencePutJinaaiRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: InferencePutJinaaiRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("chunkingSettings")>]
-        member _.ChunkingSettings(state: InferencePutJinaaiRequest, value: InferenceTypes.InferenceChunkingSettings) =
+        member _.ChunkingSettings(state: InferencePutJinaaiRequest, value: Types.InferenceChunkingSettings) =
             { state with ChunkingSettings = Some value }
 
         [<CustomOperation("service")>]
-        member _.Service(state: InferencePutJinaaiRequest, value: InferenceTypes.JinaAIServiceType) =
+        member _.Service(state: InferencePutJinaaiRequest, value: Types.JinaAIServiceType) =
             { state with Service = value }
 
         [<CustomOperation("serviceSettings")>]
-        member _.ServiceSettings(state: InferencePutJinaaiRequest, value: InferenceTypes.JinaAIServiceSettings) =
+        member _.ServiceSettings(state: InferencePutJinaaiRequest, value: Types.JinaAIServiceSettings) =
             { state with ServiceSettings = value }
 
         [<CustomOperation("taskSettings")>]
-        member _.TaskSettings(state: InferencePutJinaaiRequest, value: InferenceTypes.JinaAITaskSettings) =
+        member _.TaskSettings(state: InferencePutJinaaiRequest, value: Types.JinaAITaskSettings) =
             { state with TaskSettings = Some value }
 
     let inferencePutJinaaiRequest = InferencePutJinaaiRequestBuilder()
 
     module PutJinaai =
-        let withTimeout (value: CoreTypes.Duration) (req: InferencePutJinaaiRequest) =
+        let withTimeout (value: Types.Duration) (req: InferencePutJinaaiRequest) =
             { req with Timeout = Some value }
-        let withChunkingSettings (value: InferenceTypes.InferenceChunkingSettings) (req: InferencePutJinaaiRequest) =
+        let withChunkingSettings (value: Types.InferenceChunkingSettings) (req: InferencePutJinaaiRequest) =
             { req with ChunkingSettings = Some value }
-        let withService (value: InferenceTypes.JinaAIServiceType) (req: InferencePutJinaaiRequest) =
+        let withService (value: Types.JinaAIServiceType) (req: InferencePutJinaaiRequest) =
             { req with Service = value }
-        let withServiceSettings (value: InferenceTypes.JinaAIServiceSettings) (req: InferencePutJinaaiRequest) =
+        let withServiceSettings (value: Types.JinaAIServiceSettings) (req: InferencePutJinaaiRequest) =
             { req with ServiceSettings = value }
-        let withTaskSettings (value: InferenceTypes.JinaAITaskSettings) (req: InferencePutJinaaiRequest) =
+        let withTaskSettings (value: Types.JinaAITaskSettings) (req: InferencePutJinaaiRequest) =
             { req with TaskSettings = Some value }
 
     type InferencePutLlamaRequest = {
-        TaskType: InferenceTypes.LlamaTaskType
-        LlamaInferenceId: CoreTypes.Id
-        Timeout: CoreTypes.Duration option
-        ChunkingSettings: InferenceTypes.InferenceChunkingSettings option
-        Service: InferenceTypes.LlamaServiceType
-        ServiceSettings: InferenceTypes.LlamaServiceSettings
+        TaskType: Types.LlamaTaskType
+        LlamaInferenceId: Types.Id
+        Timeout: Types.Duration option
+        ChunkingSettings: Types.InferenceChunkingSettings option
+        Service: Types.LlamaServiceType
+        ServiceSettings: Types.LlamaServiceSettings
     }
 
         with
@@ -1968,7 +1969,7 @@ module InferenceOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type InferencePutLlamaResponse = InferenceTypes.InferenceEndpointInfoLlama
+    type InferencePutLlamaResponse = Types.InferenceEndpointInfoLlama
 
     type InferencePutLlamaRequestBuilder() =
         member _.Yield(_: unit) : InferencePutLlamaRequest =
@@ -1982,48 +1983,48 @@ module InferenceOperations =
             }
 
         [<CustomOperation("taskType")>]
-        member _.TaskType(state: InferencePutLlamaRequest, value: InferenceTypes.LlamaTaskType) =
+        member _.TaskType(state: InferencePutLlamaRequest, value: Types.LlamaTaskType) =
             { state with TaskType = value }
 
         [<CustomOperation("llamaInferenceId")>]
-        member _.LlamaInferenceId(state: InferencePutLlamaRequest, value: CoreTypes.Id) =
+        member _.LlamaInferenceId(state: InferencePutLlamaRequest, value: Types.Id) =
             { state with LlamaInferenceId = value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: InferencePutLlamaRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: InferencePutLlamaRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("chunkingSettings")>]
-        member _.ChunkingSettings(state: InferencePutLlamaRequest, value: InferenceTypes.InferenceChunkingSettings) =
+        member _.ChunkingSettings(state: InferencePutLlamaRequest, value: Types.InferenceChunkingSettings) =
             { state with ChunkingSettings = Some value }
 
         [<CustomOperation("service")>]
-        member _.Service(state: InferencePutLlamaRequest, value: InferenceTypes.LlamaServiceType) =
+        member _.Service(state: InferencePutLlamaRequest, value: Types.LlamaServiceType) =
             { state with Service = value }
 
         [<CustomOperation("serviceSettings")>]
-        member _.ServiceSettings(state: InferencePutLlamaRequest, value: InferenceTypes.LlamaServiceSettings) =
+        member _.ServiceSettings(state: InferencePutLlamaRequest, value: Types.LlamaServiceSettings) =
             { state with ServiceSettings = value }
 
     let inferencePutLlamaRequest = InferencePutLlamaRequestBuilder()
 
     module PutLlama =
-        let withTimeout (value: CoreTypes.Duration) (req: InferencePutLlamaRequest) =
+        let withTimeout (value: Types.Duration) (req: InferencePutLlamaRequest) =
             { req with Timeout = Some value }
-        let withChunkingSettings (value: InferenceTypes.InferenceChunkingSettings) (req: InferencePutLlamaRequest) =
+        let withChunkingSettings (value: Types.InferenceChunkingSettings) (req: InferencePutLlamaRequest) =
             { req with ChunkingSettings = Some value }
-        let withService (value: InferenceTypes.LlamaServiceType) (req: InferencePutLlamaRequest) =
+        let withService (value: Types.LlamaServiceType) (req: InferencePutLlamaRequest) =
             { req with Service = value }
-        let withServiceSettings (value: InferenceTypes.LlamaServiceSettings) (req: InferencePutLlamaRequest) =
+        let withServiceSettings (value: Types.LlamaServiceSettings) (req: InferencePutLlamaRequest) =
             { req with ServiceSettings = value }
 
     type InferencePutMistralRequest = {
-        TaskType: InferenceTypes.MistralTaskType
-        MistralInferenceId: CoreTypes.Id
-        Timeout: CoreTypes.Duration option
-        ChunkingSettings: InferenceTypes.InferenceChunkingSettings option
-        Service: InferenceTypes.MistralServiceType
-        ServiceSettings: InferenceTypes.MistralServiceSettings
+        TaskType: Types.MistralTaskType
+        MistralInferenceId: Types.Id
+        Timeout: Types.Duration option
+        ChunkingSettings: Types.InferenceChunkingSettings option
+        Service: Types.MistralServiceType
+        ServiceSettings: Types.MistralServiceSettings
     }
 
         with
@@ -2045,7 +2046,7 @@ module InferenceOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type InferencePutMistralResponse = InferenceTypes.InferenceEndpointInfoMistral
+    type InferencePutMistralResponse = Types.InferenceEndpointInfoMistral
 
     type InferencePutMistralRequestBuilder() =
         member _.Yield(_: unit) : InferencePutMistralRequest =
@@ -2059,49 +2060,49 @@ module InferenceOperations =
             }
 
         [<CustomOperation("taskType")>]
-        member _.TaskType(state: InferencePutMistralRequest, value: InferenceTypes.MistralTaskType) =
+        member _.TaskType(state: InferencePutMistralRequest, value: Types.MistralTaskType) =
             { state with TaskType = value }
 
         [<CustomOperation("mistralInferenceId")>]
-        member _.MistralInferenceId(state: InferencePutMistralRequest, value: CoreTypes.Id) =
+        member _.MistralInferenceId(state: InferencePutMistralRequest, value: Types.Id) =
             { state with MistralInferenceId = value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: InferencePutMistralRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: InferencePutMistralRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("chunkingSettings")>]
-        member _.ChunkingSettings(state: InferencePutMistralRequest, value: InferenceTypes.InferenceChunkingSettings) =
+        member _.ChunkingSettings(state: InferencePutMistralRequest, value: Types.InferenceChunkingSettings) =
             { state with ChunkingSettings = Some value }
 
         [<CustomOperation("service")>]
-        member _.Service(state: InferencePutMistralRequest, value: InferenceTypes.MistralServiceType) =
+        member _.Service(state: InferencePutMistralRequest, value: Types.MistralServiceType) =
             { state with Service = value }
 
         [<CustomOperation("serviceSettings")>]
-        member _.ServiceSettings(state: InferencePutMistralRequest, value: InferenceTypes.MistralServiceSettings) =
+        member _.ServiceSettings(state: InferencePutMistralRequest, value: Types.MistralServiceSettings) =
             { state with ServiceSettings = value }
 
     let inferencePutMistralRequest = InferencePutMistralRequestBuilder()
 
     module PutMistral =
-        let withTimeout (value: CoreTypes.Duration) (req: InferencePutMistralRequest) =
+        let withTimeout (value: Types.Duration) (req: InferencePutMistralRequest) =
             { req with Timeout = Some value }
-        let withChunkingSettings (value: InferenceTypes.InferenceChunkingSettings) (req: InferencePutMistralRequest) =
+        let withChunkingSettings (value: Types.InferenceChunkingSettings) (req: InferencePutMistralRequest) =
             { req with ChunkingSettings = Some value }
-        let withService (value: InferenceTypes.MistralServiceType) (req: InferencePutMistralRequest) =
+        let withService (value: Types.MistralServiceType) (req: InferencePutMistralRequest) =
             { req with Service = value }
-        let withServiceSettings (value: InferenceTypes.MistralServiceSettings) (req: InferencePutMistralRequest) =
+        let withServiceSettings (value: Types.MistralServiceSettings) (req: InferencePutMistralRequest) =
             { req with ServiceSettings = value }
 
     type InferencePutNvidiaRequest = {
-        TaskType: InferenceTypes.NvidiaTaskType
-        NvidiaInferenceId: CoreTypes.Id
-        Timeout: CoreTypes.Duration option
-        ChunkingSettings: InferenceTypes.InferenceChunkingSettings option
-        Service: InferenceTypes.NvidiaServiceType
-        ServiceSettings: InferenceTypes.NvidiaServiceSettings
-        TaskSettings: InferenceTypes.NvidiaTaskSettings option
+        TaskType: Types.NvidiaTaskType
+        NvidiaInferenceId: Types.Id
+        Timeout: Types.Duration option
+        ChunkingSettings: Types.InferenceChunkingSettings option
+        Service: Types.NvidiaServiceType
+        ServiceSettings: Types.NvidiaServiceSettings
+        TaskSettings: Types.NvidiaTaskSettings option
     }
 
         with
@@ -2123,7 +2124,7 @@ module InferenceOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type InferencePutNvidiaResponse = InferenceTypes.InferenceEndpointInfoNvidia
+    type InferencePutNvidiaResponse = Types.InferenceEndpointInfoNvidia
 
     type InferencePutNvidiaRequestBuilder() =
         member _.Yield(_: unit) : InferencePutNvidiaRequest =
@@ -2138,55 +2139,55 @@ module InferenceOperations =
             }
 
         [<CustomOperation("taskType")>]
-        member _.TaskType(state: InferencePutNvidiaRequest, value: InferenceTypes.NvidiaTaskType) =
+        member _.TaskType(state: InferencePutNvidiaRequest, value: Types.NvidiaTaskType) =
             { state with TaskType = value }
 
         [<CustomOperation("nvidiaInferenceId")>]
-        member _.NvidiaInferenceId(state: InferencePutNvidiaRequest, value: CoreTypes.Id) =
+        member _.NvidiaInferenceId(state: InferencePutNvidiaRequest, value: Types.Id) =
             { state with NvidiaInferenceId = value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: InferencePutNvidiaRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: InferencePutNvidiaRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("chunkingSettings")>]
-        member _.ChunkingSettings(state: InferencePutNvidiaRequest, value: InferenceTypes.InferenceChunkingSettings) =
+        member _.ChunkingSettings(state: InferencePutNvidiaRequest, value: Types.InferenceChunkingSettings) =
             { state with ChunkingSettings = Some value }
 
         [<CustomOperation("service")>]
-        member _.Service(state: InferencePutNvidiaRequest, value: InferenceTypes.NvidiaServiceType) =
+        member _.Service(state: InferencePutNvidiaRequest, value: Types.NvidiaServiceType) =
             { state with Service = value }
 
         [<CustomOperation("serviceSettings")>]
-        member _.ServiceSettings(state: InferencePutNvidiaRequest, value: InferenceTypes.NvidiaServiceSettings) =
+        member _.ServiceSettings(state: InferencePutNvidiaRequest, value: Types.NvidiaServiceSettings) =
             { state with ServiceSettings = value }
 
         [<CustomOperation("taskSettings")>]
-        member _.TaskSettings(state: InferencePutNvidiaRequest, value: InferenceTypes.NvidiaTaskSettings) =
+        member _.TaskSettings(state: InferencePutNvidiaRequest, value: Types.NvidiaTaskSettings) =
             { state with TaskSettings = Some value }
 
     let inferencePutNvidiaRequest = InferencePutNvidiaRequestBuilder()
 
     module PutNvidia =
-        let withTimeout (value: CoreTypes.Duration) (req: InferencePutNvidiaRequest) =
+        let withTimeout (value: Types.Duration) (req: InferencePutNvidiaRequest) =
             { req with Timeout = Some value }
-        let withChunkingSettings (value: InferenceTypes.InferenceChunkingSettings) (req: InferencePutNvidiaRequest) =
+        let withChunkingSettings (value: Types.InferenceChunkingSettings) (req: InferencePutNvidiaRequest) =
             { req with ChunkingSettings = Some value }
-        let withService (value: InferenceTypes.NvidiaServiceType) (req: InferencePutNvidiaRequest) =
+        let withService (value: Types.NvidiaServiceType) (req: InferencePutNvidiaRequest) =
             { req with Service = value }
-        let withServiceSettings (value: InferenceTypes.NvidiaServiceSettings) (req: InferencePutNvidiaRequest) =
+        let withServiceSettings (value: Types.NvidiaServiceSettings) (req: InferencePutNvidiaRequest) =
             { req with ServiceSettings = value }
-        let withTaskSettings (value: InferenceTypes.NvidiaTaskSettings) (req: InferencePutNvidiaRequest) =
+        let withTaskSettings (value: Types.NvidiaTaskSettings) (req: InferencePutNvidiaRequest) =
             { req with TaskSettings = Some value }
 
     type InferencePutOpenaiRequest = {
-        TaskType: InferenceTypes.OpenAITaskType
-        OpenaiInferenceId: CoreTypes.Id
-        Timeout: CoreTypes.Duration option
-        ChunkingSettings: InferenceTypes.InferenceChunkingSettings option
-        Service: InferenceTypes.OpenAIServiceType
-        ServiceSettings: InferenceTypes.OpenAIServiceSettings
-        TaskSettings: InferenceTypes.OpenAITaskSettings option
+        TaskType: Types.OpenAITaskType
+        OpenaiInferenceId: Types.Id
+        Timeout: Types.Duration option
+        ChunkingSettings: Types.InferenceChunkingSettings option
+        Service: Types.OpenAIServiceType
+        ServiceSettings: Types.OpenAIServiceSettings
+        TaskSettings: Types.OpenAITaskSettings option
     }
 
         with
@@ -2208,7 +2209,7 @@ module InferenceOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type InferencePutOpenaiResponse = InferenceTypes.InferenceEndpointInfoOpenAI
+    type InferencePutOpenaiResponse = Types.InferenceEndpointInfoOpenAI
 
     type InferencePutOpenaiRequestBuilder() =
         member _.Yield(_: unit) : InferencePutOpenaiRequest =
@@ -2223,55 +2224,55 @@ module InferenceOperations =
             }
 
         [<CustomOperation("taskType")>]
-        member _.TaskType(state: InferencePutOpenaiRequest, value: InferenceTypes.OpenAITaskType) =
+        member _.TaskType(state: InferencePutOpenaiRequest, value: Types.OpenAITaskType) =
             { state with TaskType = value }
 
         [<CustomOperation("openaiInferenceId")>]
-        member _.OpenaiInferenceId(state: InferencePutOpenaiRequest, value: CoreTypes.Id) =
+        member _.OpenaiInferenceId(state: InferencePutOpenaiRequest, value: Types.Id) =
             { state with OpenaiInferenceId = value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: InferencePutOpenaiRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: InferencePutOpenaiRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("chunkingSettings")>]
-        member _.ChunkingSettings(state: InferencePutOpenaiRequest, value: InferenceTypes.InferenceChunkingSettings) =
+        member _.ChunkingSettings(state: InferencePutOpenaiRequest, value: Types.InferenceChunkingSettings) =
             { state with ChunkingSettings = Some value }
 
         [<CustomOperation("service")>]
-        member _.Service(state: InferencePutOpenaiRequest, value: InferenceTypes.OpenAIServiceType) =
+        member _.Service(state: InferencePutOpenaiRequest, value: Types.OpenAIServiceType) =
             { state with Service = value }
 
         [<CustomOperation("serviceSettings")>]
-        member _.ServiceSettings(state: InferencePutOpenaiRequest, value: InferenceTypes.OpenAIServiceSettings) =
+        member _.ServiceSettings(state: InferencePutOpenaiRequest, value: Types.OpenAIServiceSettings) =
             { state with ServiceSettings = value }
 
         [<CustomOperation("taskSettings")>]
-        member _.TaskSettings(state: InferencePutOpenaiRequest, value: InferenceTypes.OpenAITaskSettings) =
+        member _.TaskSettings(state: InferencePutOpenaiRequest, value: Types.OpenAITaskSettings) =
             { state with TaskSettings = Some value }
 
     let inferencePutOpenaiRequest = InferencePutOpenaiRequestBuilder()
 
     module PutOpenai =
-        let withTimeout (value: CoreTypes.Duration) (req: InferencePutOpenaiRequest) =
+        let withTimeout (value: Types.Duration) (req: InferencePutOpenaiRequest) =
             { req with Timeout = Some value }
-        let withChunkingSettings (value: InferenceTypes.InferenceChunkingSettings) (req: InferencePutOpenaiRequest) =
+        let withChunkingSettings (value: Types.InferenceChunkingSettings) (req: InferencePutOpenaiRequest) =
             { req with ChunkingSettings = Some value }
-        let withService (value: InferenceTypes.OpenAIServiceType) (req: InferencePutOpenaiRequest) =
+        let withService (value: Types.OpenAIServiceType) (req: InferencePutOpenaiRequest) =
             { req with Service = value }
-        let withServiceSettings (value: InferenceTypes.OpenAIServiceSettings) (req: InferencePutOpenaiRequest) =
+        let withServiceSettings (value: Types.OpenAIServiceSettings) (req: InferencePutOpenaiRequest) =
             { req with ServiceSettings = value }
-        let withTaskSettings (value: InferenceTypes.OpenAITaskSettings) (req: InferencePutOpenaiRequest) =
+        let withTaskSettings (value: Types.OpenAITaskSettings) (req: InferencePutOpenaiRequest) =
             { req with TaskSettings = Some value }
 
     type InferencePutOpenshiftAiRequest = {
-        TaskType: InferenceTypes.OpenShiftAiTaskType
-        OpenshiftaiInferenceId: CoreTypes.Id
-        Timeout: CoreTypes.Duration option
-        ChunkingSettings: InferenceTypes.InferenceChunkingSettings option
-        Service: InferenceTypes.OpenShiftAiServiceType
-        ServiceSettings: InferenceTypes.OpenShiftAiServiceSettings
-        TaskSettings: InferenceTypes.OpenShiftAiTaskSettings option
+        TaskType: Types.OpenShiftAiTaskType
+        OpenshiftaiInferenceId: Types.Id
+        Timeout: Types.Duration option
+        ChunkingSettings: Types.InferenceChunkingSettings option
+        Service: Types.OpenShiftAiServiceType
+        ServiceSettings: Types.OpenShiftAiServiceSettings
+        TaskSettings: Types.OpenShiftAiTaskSettings option
     }
 
         with
@@ -2293,7 +2294,7 @@ module InferenceOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type InferencePutOpenshiftAiResponse = InferenceTypes.InferenceEndpointInfoOpenShiftAi
+    type InferencePutOpenshiftAiResponse = Types.InferenceEndpointInfoOpenShiftAi
 
     type InferencePutOpenshiftAiRequestBuilder() =
         member _.Yield(_: unit) : InferencePutOpenshiftAiRequest =
@@ -2308,55 +2309,55 @@ module InferenceOperations =
             }
 
         [<CustomOperation("taskType")>]
-        member _.TaskType(state: InferencePutOpenshiftAiRequest, value: InferenceTypes.OpenShiftAiTaskType) =
+        member _.TaskType(state: InferencePutOpenshiftAiRequest, value: Types.OpenShiftAiTaskType) =
             { state with TaskType = value }
 
         [<CustomOperation("openshiftaiInferenceId")>]
-        member _.OpenshiftaiInferenceId(state: InferencePutOpenshiftAiRequest, value: CoreTypes.Id) =
+        member _.OpenshiftaiInferenceId(state: InferencePutOpenshiftAiRequest, value: Types.Id) =
             { state with OpenshiftaiInferenceId = value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: InferencePutOpenshiftAiRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: InferencePutOpenshiftAiRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("chunkingSettings")>]
-        member _.ChunkingSettings(state: InferencePutOpenshiftAiRequest, value: InferenceTypes.InferenceChunkingSettings) =
+        member _.ChunkingSettings(state: InferencePutOpenshiftAiRequest, value: Types.InferenceChunkingSettings) =
             { state with ChunkingSettings = Some value }
 
         [<CustomOperation("service")>]
-        member _.Service(state: InferencePutOpenshiftAiRequest, value: InferenceTypes.OpenShiftAiServiceType) =
+        member _.Service(state: InferencePutOpenshiftAiRequest, value: Types.OpenShiftAiServiceType) =
             { state with Service = value }
 
         [<CustomOperation("serviceSettings")>]
-        member _.ServiceSettings(state: InferencePutOpenshiftAiRequest, value: InferenceTypes.OpenShiftAiServiceSettings) =
+        member _.ServiceSettings(state: InferencePutOpenshiftAiRequest, value: Types.OpenShiftAiServiceSettings) =
             { state with ServiceSettings = value }
 
         [<CustomOperation("taskSettings")>]
-        member _.TaskSettings(state: InferencePutOpenshiftAiRequest, value: InferenceTypes.OpenShiftAiTaskSettings) =
+        member _.TaskSettings(state: InferencePutOpenshiftAiRequest, value: Types.OpenShiftAiTaskSettings) =
             { state with TaskSettings = Some value }
 
     let inferencePutOpenshiftAiRequest = InferencePutOpenshiftAiRequestBuilder()
 
     module PutOpenshiftAi =
-        let withTimeout (value: CoreTypes.Duration) (req: InferencePutOpenshiftAiRequest) =
+        let withTimeout (value: Types.Duration) (req: InferencePutOpenshiftAiRequest) =
             { req with Timeout = Some value }
-        let withChunkingSettings (value: InferenceTypes.InferenceChunkingSettings) (req: InferencePutOpenshiftAiRequest) =
+        let withChunkingSettings (value: Types.InferenceChunkingSettings) (req: InferencePutOpenshiftAiRequest) =
             { req with ChunkingSettings = Some value }
-        let withService (value: InferenceTypes.OpenShiftAiServiceType) (req: InferencePutOpenshiftAiRequest) =
+        let withService (value: Types.OpenShiftAiServiceType) (req: InferencePutOpenshiftAiRequest) =
             { req with Service = value }
-        let withServiceSettings (value: InferenceTypes.OpenShiftAiServiceSettings) (req: InferencePutOpenshiftAiRequest) =
+        let withServiceSettings (value: Types.OpenShiftAiServiceSettings) (req: InferencePutOpenshiftAiRequest) =
             { req with ServiceSettings = value }
-        let withTaskSettings (value: InferenceTypes.OpenShiftAiTaskSettings) (req: InferencePutOpenshiftAiRequest) =
+        let withTaskSettings (value: Types.OpenShiftAiTaskSettings) (req: InferencePutOpenshiftAiRequest) =
             { req with TaskSettings = Some value }
 
     type InferencePutVoyageaiRequest = {
-        TaskType: InferenceTypes.VoyageAITaskType
-        VoyageaiInferenceId: CoreTypes.Id
-        Timeout: CoreTypes.Duration option
-        ChunkingSettings: InferenceTypes.InferenceChunkingSettings option
-        Service: InferenceTypes.VoyageAIServiceType
-        ServiceSettings: InferenceTypes.VoyageAIServiceSettings
-        TaskSettings: InferenceTypes.VoyageAITaskSettings option
+        TaskType: Types.VoyageAITaskType
+        VoyageaiInferenceId: Types.Id
+        Timeout: Types.Duration option
+        ChunkingSettings: Types.InferenceChunkingSettings option
+        Service: Types.VoyageAIServiceType
+        ServiceSettings: Types.VoyageAIServiceSettings
+        TaskSettings: Types.VoyageAITaskSettings option
     }
 
         with
@@ -2378,7 +2379,7 @@ module InferenceOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type InferencePutVoyageaiResponse = InferenceTypes.InferenceEndpointInfoVoyageAI
+    type InferencePutVoyageaiResponse = Types.InferenceEndpointInfoVoyageAI
 
     type InferencePutVoyageaiRequestBuilder() =
         member _.Yield(_: unit) : InferencePutVoyageaiRequest =
@@ -2393,54 +2394,54 @@ module InferenceOperations =
             }
 
         [<CustomOperation("taskType")>]
-        member _.TaskType(state: InferencePutVoyageaiRequest, value: InferenceTypes.VoyageAITaskType) =
+        member _.TaskType(state: InferencePutVoyageaiRequest, value: Types.VoyageAITaskType) =
             { state with TaskType = value }
 
         [<CustomOperation("voyageaiInferenceId")>]
-        member _.VoyageaiInferenceId(state: InferencePutVoyageaiRequest, value: CoreTypes.Id) =
+        member _.VoyageaiInferenceId(state: InferencePutVoyageaiRequest, value: Types.Id) =
             { state with VoyageaiInferenceId = value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: InferencePutVoyageaiRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: InferencePutVoyageaiRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("chunkingSettings")>]
-        member _.ChunkingSettings(state: InferencePutVoyageaiRequest, value: InferenceTypes.InferenceChunkingSettings) =
+        member _.ChunkingSettings(state: InferencePutVoyageaiRequest, value: Types.InferenceChunkingSettings) =
             { state with ChunkingSettings = Some value }
 
         [<CustomOperation("service")>]
-        member _.Service(state: InferencePutVoyageaiRequest, value: InferenceTypes.VoyageAIServiceType) =
+        member _.Service(state: InferencePutVoyageaiRequest, value: Types.VoyageAIServiceType) =
             { state with Service = value }
 
         [<CustomOperation("serviceSettings")>]
-        member _.ServiceSettings(state: InferencePutVoyageaiRequest, value: InferenceTypes.VoyageAIServiceSettings) =
+        member _.ServiceSettings(state: InferencePutVoyageaiRequest, value: Types.VoyageAIServiceSettings) =
             { state with ServiceSettings = value }
 
         [<CustomOperation("taskSettings")>]
-        member _.TaskSettings(state: InferencePutVoyageaiRequest, value: InferenceTypes.VoyageAITaskSettings) =
+        member _.TaskSettings(state: InferencePutVoyageaiRequest, value: Types.VoyageAITaskSettings) =
             { state with TaskSettings = Some value }
 
     let inferencePutVoyageaiRequest = InferencePutVoyageaiRequestBuilder()
 
     module PutVoyageai =
-        let withTimeout (value: CoreTypes.Duration) (req: InferencePutVoyageaiRequest) =
+        let withTimeout (value: Types.Duration) (req: InferencePutVoyageaiRequest) =
             { req with Timeout = Some value }
-        let withChunkingSettings (value: InferenceTypes.InferenceChunkingSettings) (req: InferencePutVoyageaiRequest) =
+        let withChunkingSettings (value: Types.InferenceChunkingSettings) (req: InferencePutVoyageaiRequest) =
             { req with ChunkingSettings = Some value }
-        let withService (value: InferenceTypes.VoyageAIServiceType) (req: InferencePutVoyageaiRequest) =
+        let withService (value: Types.VoyageAIServiceType) (req: InferencePutVoyageaiRequest) =
             { req with Service = value }
-        let withServiceSettings (value: InferenceTypes.VoyageAIServiceSettings) (req: InferencePutVoyageaiRequest) =
+        let withServiceSettings (value: Types.VoyageAIServiceSettings) (req: InferencePutVoyageaiRequest) =
             { req with ServiceSettings = value }
-        let withTaskSettings (value: InferenceTypes.VoyageAITaskSettings) (req: InferencePutVoyageaiRequest) =
+        let withTaskSettings (value: Types.VoyageAITaskSettings) (req: InferencePutVoyageaiRequest) =
             { req with TaskSettings = Some value }
 
     type InferencePutWatsonxRequest = {
-        TaskType: InferenceTypes.WatsonxTaskType
-        WatsonxInferenceId: CoreTypes.Id
-        Timeout: CoreTypes.Duration option
-        ChunkingSettings: InferenceTypes.InferenceChunkingSettings option
-        Service: InferenceTypes.WatsonxServiceType
-        ServiceSettings: InferenceTypes.WatsonxServiceSettings
+        TaskType: Types.WatsonxTaskType
+        WatsonxInferenceId: Types.Id
+        Timeout: Types.Duration option
+        ChunkingSettings: Types.InferenceChunkingSettings option
+        Service: Types.WatsonxServiceType
+        ServiceSettings: Types.WatsonxServiceSettings
     }
 
         with
@@ -2462,7 +2463,7 @@ module InferenceOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type InferencePutWatsonxResponse = InferenceTypes.InferenceEndpointInfoWatsonx
+    type InferencePutWatsonxResponse = Types.InferenceEndpointInfoWatsonx
 
     type InferencePutWatsonxRequestBuilder() =
         member _.Yield(_: unit) : InferencePutWatsonxRequest =
@@ -2476,49 +2477,49 @@ module InferenceOperations =
             }
 
         [<CustomOperation("taskType")>]
-        member _.TaskType(state: InferencePutWatsonxRequest, value: InferenceTypes.WatsonxTaskType) =
+        member _.TaskType(state: InferencePutWatsonxRequest, value: Types.WatsonxTaskType) =
             { state with TaskType = value }
 
         [<CustomOperation("watsonxInferenceId")>]
-        member _.WatsonxInferenceId(state: InferencePutWatsonxRequest, value: CoreTypes.Id) =
+        member _.WatsonxInferenceId(state: InferencePutWatsonxRequest, value: Types.Id) =
             { state with WatsonxInferenceId = value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: InferencePutWatsonxRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: InferencePutWatsonxRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("chunkingSettings")>]
-        member _.ChunkingSettings(state: InferencePutWatsonxRequest, value: InferenceTypes.InferenceChunkingSettings) =
+        member _.ChunkingSettings(state: InferencePutWatsonxRequest, value: Types.InferenceChunkingSettings) =
             { state with ChunkingSettings = Some value }
 
         [<CustomOperation("service")>]
-        member _.Service(state: InferencePutWatsonxRequest, value: InferenceTypes.WatsonxServiceType) =
+        member _.Service(state: InferencePutWatsonxRequest, value: Types.WatsonxServiceType) =
             { state with Service = value }
 
         [<CustomOperation("serviceSettings")>]
-        member _.ServiceSettings(state: InferencePutWatsonxRequest, value: InferenceTypes.WatsonxServiceSettings) =
+        member _.ServiceSettings(state: InferencePutWatsonxRequest, value: Types.WatsonxServiceSettings) =
             { state with ServiceSettings = value }
 
     let inferencePutWatsonxRequest = InferencePutWatsonxRequestBuilder()
 
     module PutWatsonx =
-        let withTimeout (value: CoreTypes.Duration) (req: InferencePutWatsonxRequest) =
+        let withTimeout (value: Types.Duration) (req: InferencePutWatsonxRequest) =
             { req with Timeout = Some value }
-        let withChunkingSettings (value: InferenceTypes.InferenceChunkingSettings) (req: InferencePutWatsonxRequest) =
+        let withChunkingSettings (value: Types.InferenceChunkingSettings) (req: InferencePutWatsonxRequest) =
             { req with ChunkingSettings = Some value }
-        let withService (value: InferenceTypes.WatsonxServiceType) (req: InferencePutWatsonxRequest) =
+        let withService (value: Types.WatsonxServiceType) (req: InferencePutWatsonxRequest) =
             { req with Service = value }
-        let withServiceSettings (value: InferenceTypes.WatsonxServiceSettings) (req: InferencePutWatsonxRequest) =
+        let withServiceSettings (value: Types.WatsonxServiceSettings) (req: InferencePutWatsonxRequest) =
             { req with ServiceSettings = value }
 
     type InferenceRerankRequest = {
-        InferenceId: CoreTypes.Id
-        Timeout: CoreTypes.Duration option
+        InferenceId: Types.Id
+        Timeout: Types.Duration option
         Query: string
         Input: string list
         ReturnDocuments: bool option
-        TopN: CoreTypes.Integer option
-        TaskSettings: InferenceTypes.TaskSettings option
+        TopN: Types.Integer option
+        TaskSettings: Types.TaskSettings option
     }
 
         with
@@ -2540,7 +2541,7 @@ module InferenceOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type InferenceRerankResponse = InferenceTypes.RerankedInferenceResult
+    type InferenceRerankResponse = Types.RerankedInferenceResult
 
     type InferenceRerankRequestBuilder() =
         member _.Yield(_: unit) : InferenceRerankRequest =
@@ -2555,11 +2556,11 @@ module InferenceOperations =
             }
 
         [<CustomOperation("inferenceId")>]
-        member _.InferenceId(state: InferenceRerankRequest, value: CoreTypes.Id) =
+        member _.InferenceId(state: InferenceRerankRequest, value: Types.Id) =
             { state with InferenceId = value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: InferenceRerankRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: InferenceRerankRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("query")>]
@@ -2575,17 +2576,17 @@ module InferenceOperations =
             { state with ReturnDocuments = Some value }
 
         [<CustomOperation("topN")>]
-        member _.TopN(state: InferenceRerankRequest, value: CoreTypes.Integer) =
+        member _.TopN(state: InferenceRerankRequest, value: Types.Integer) =
             { state with TopN = Some value }
 
         [<CustomOperation("taskSettings")>]
-        member _.TaskSettings(state: InferenceRerankRequest, value: InferenceTypes.TaskSettings) =
+        member _.TaskSettings(state: InferenceRerankRequest, value: Types.TaskSettings) =
             { state with TaskSettings = Some value }
 
     let inferenceRerankRequest = InferenceRerankRequestBuilder()
 
     module Rerank =
-        let withTimeout (value: CoreTypes.Duration) (req: InferenceRerankRequest) =
+        let withTimeout (value: Types.Duration) (req: InferenceRerankRequest) =
             { req with Timeout = Some value }
         let withQuery (value: string) (req: InferenceRerankRequest) =
             { req with Query = value }
@@ -2593,16 +2594,16 @@ module InferenceOperations =
             { req with Input = value }
         let withReturnDocuments (value: bool) (req: InferenceRerankRequest) =
             { req with ReturnDocuments = Some value }
-        let withTopN (value: CoreTypes.Integer) (req: InferenceRerankRequest) =
+        let withTopN (value: Types.Integer) (req: InferenceRerankRequest) =
             { req with TopN = Some value }
-        let withTaskSettings (value: InferenceTypes.TaskSettings) (req: InferenceRerankRequest) =
+        let withTaskSettings (value: Types.TaskSettings) (req: InferenceRerankRequest) =
             { req with TaskSettings = Some value }
 
     type InferenceSparseEmbeddingRequest = {
-        InferenceId: CoreTypes.Id
-        Timeout: CoreTypes.Duration option
+        InferenceId: Types.Id
+        Timeout: Types.Duration option
         Input: System.Text.Json.JsonElement
-        TaskSettings: InferenceTypes.TaskSettings option
+        TaskSettings: Types.TaskSettings option
     }
 
         with
@@ -2624,7 +2625,7 @@ module InferenceOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type InferenceSparseEmbeddingResponse = InferenceTypes.SparseEmbeddingInferenceResult
+    type InferenceSparseEmbeddingResponse = Types.SparseEmbeddingInferenceResult
 
     type InferenceSparseEmbeddingRequestBuilder() =
         member _.Yield(_: unit) : InferenceSparseEmbeddingRequest =
@@ -2636,11 +2637,11 @@ module InferenceOperations =
             }
 
         [<CustomOperation("inferenceId")>]
-        member _.InferenceId(state: InferenceSparseEmbeddingRequest, value: CoreTypes.Id) =
+        member _.InferenceId(state: InferenceSparseEmbeddingRequest, value: Types.Id) =
             { state with InferenceId = value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: InferenceSparseEmbeddingRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: InferenceSparseEmbeddingRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("input")>]
@@ -2648,24 +2649,24 @@ module InferenceOperations =
             { state with Input = value }
 
         [<CustomOperation("taskSettings")>]
-        member _.TaskSettings(state: InferenceSparseEmbeddingRequest, value: InferenceTypes.TaskSettings) =
+        member _.TaskSettings(state: InferenceSparseEmbeddingRequest, value: Types.TaskSettings) =
             { state with TaskSettings = Some value }
 
     let inferenceSparseEmbeddingRequest = InferenceSparseEmbeddingRequestBuilder()
 
     module SparseEmbedding =
-        let withTimeout (value: CoreTypes.Duration) (req: InferenceSparseEmbeddingRequest) =
+        let withTimeout (value: Types.Duration) (req: InferenceSparseEmbeddingRequest) =
             { req with Timeout = Some value }
         let withInput (value: System.Text.Json.JsonElement) (req: InferenceSparseEmbeddingRequest) =
             { req with Input = value }
-        let withTaskSettings (value: InferenceTypes.TaskSettings) (req: InferenceSparseEmbeddingRequest) =
+        let withTaskSettings (value: Types.TaskSettings) (req: InferenceSparseEmbeddingRequest) =
             { req with TaskSettings = Some value }
 
     type InferenceStreamCompletionRequest = {
-        InferenceId: CoreTypes.Id
-        Timeout: CoreTypes.Duration option
+        InferenceId: Types.Id
+        Timeout: Types.Duration option
         Input: System.Text.Json.JsonElement
-        TaskSettings: InferenceTypes.TaskSettings option
+        TaskSettings: Types.TaskSettings option
     }
 
         with
@@ -2687,7 +2688,7 @@ module InferenceOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type InferenceStreamCompletionResponse = CoreTypes.StreamResult
+    type InferenceStreamCompletionResponse = Types.StreamResult
 
     type InferenceStreamCompletionRequestBuilder() =
         member _.Yield(_: unit) : InferenceStreamCompletionRequest =
@@ -2699,11 +2700,11 @@ module InferenceOperations =
             }
 
         [<CustomOperation("inferenceId")>]
-        member _.InferenceId(state: InferenceStreamCompletionRequest, value: CoreTypes.Id) =
+        member _.InferenceId(state: InferenceStreamCompletionRequest, value: Types.Id) =
             { state with InferenceId = value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: InferenceStreamCompletionRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: InferenceStreamCompletionRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("input")>]
@@ -2711,25 +2712,25 @@ module InferenceOperations =
             { state with Input = value }
 
         [<CustomOperation("taskSettings")>]
-        member _.TaskSettings(state: InferenceStreamCompletionRequest, value: InferenceTypes.TaskSettings) =
+        member _.TaskSettings(state: InferenceStreamCompletionRequest, value: Types.TaskSettings) =
             { state with TaskSettings = Some value }
 
     let inferenceStreamCompletionRequest = InferenceStreamCompletionRequestBuilder()
 
     module StreamCompletion =
-        let withTimeout (value: CoreTypes.Duration) (req: InferenceStreamCompletionRequest) =
+        let withTimeout (value: Types.Duration) (req: InferenceStreamCompletionRequest) =
             { req with Timeout = Some value }
         let withInput (value: System.Text.Json.JsonElement) (req: InferenceStreamCompletionRequest) =
             { req with Input = value }
-        let withTaskSettings (value: InferenceTypes.TaskSettings) (req: InferenceStreamCompletionRequest) =
+        let withTaskSettings (value: Types.TaskSettings) (req: InferenceStreamCompletionRequest) =
             { req with TaskSettings = Some value }
 
     type InferenceTextEmbeddingRequest = {
-        InferenceId: CoreTypes.Id
-        Timeout: CoreTypes.Duration option
+        InferenceId: Types.Id
+        Timeout: Types.Duration option
         Input: System.Text.Json.JsonElement
         InputType: string option
-        TaskSettings: InferenceTypes.TaskSettings option
+        TaskSettings: Types.TaskSettings option
     }
 
         with
@@ -2751,7 +2752,7 @@ module InferenceOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type InferenceTextEmbeddingResponse = InferenceTypes.TextEmbeddingInferenceResult
+    type InferenceTextEmbeddingResponse = Types.TextEmbeddingInferenceResult
 
     type InferenceTextEmbeddingRequestBuilder() =
         member _.Yield(_: unit) : InferenceTextEmbeddingRequest =
@@ -2764,11 +2765,11 @@ module InferenceOperations =
             }
 
         [<CustomOperation("inferenceId")>]
-        member _.InferenceId(state: InferenceTextEmbeddingRequest, value: CoreTypes.Id) =
+        member _.InferenceId(state: InferenceTextEmbeddingRequest, value: Types.Id) =
             { state with InferenceId = value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: InferenceTextEmbeddingRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: InferenceTextEmbeddingRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("input")>]
@@ -2780,24 +2781,24 @@ module InferenceOperations =
             { state with InputType = Some value }
 
         [<CustomOperation("taskSettings")>]
-        member _.TaskSettings(state: InferenceTextEmbeddingRequest, value: InferenceTypes.TaskSettings) =
+        member _.TaskSettings(state: InferenceTextEmbeddingRequest, value: Types.TaskSettings) =
             { state with TaskSettings = Some value }
 
     let inferenceTextEmbeddingRequest = InferenceTextEmbeddingRequestBuilder()
 
     module TextEmbedding =
-        let withTimeout (value: CoreTypes.Duration) (req: InferenceTextEmbeddingRequest) =
+        let withTimeout (value: Types.Duration) (req: InferenceTextEmbeddingRequest) =
             { req with Timeout = Some value }
         let withInput (value: System.Text.Json.JsonElement) (req: InferenceTextEmbeddingRequest) =
             { req with Input = value }
         let withInputType (value: string) (req: InferenceTextEmbeddingRequest) =
             { req with InputType = Some value }
-        let withTaskSettings (value: InferenceTypes.TaskSettings) (req: InferenceTextEmbeddingRequest) =
+        let withTaskSettings (value: Types.TaskSettings) (req: InferenceTextEmbeddingRequest) =
             { req with TaskSettings = Some value }
 
     type InferenceUpdateRequest = {
-        InferenceId: CoreTypes.Id
-        TaskType: InferenceTypes.TaskType
+        InferenceId: Types.Id
+        TaskType: Types.TaskType
         Document: obj
     }
 
@@ -2813,7 +2814,7 @@ module InferenceOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type InferenceUpdateResponse = InferenceTypes.InferenceEndpointInfo
+    type InferenceUpdateResponse = Types.InferenceEndpointInfo
 
     type InferenceUpdateRequestBuilder() =
         member _.Yield(_: unit) : InferenceUpdateRequest =
@@ -2824,11 +2825,11 @@ module InferenceOperations =
             }
 
         [<CustomOperation("inferenceId")>]
-        member _.InferenceId(state: InferenceUpdateRequest, value: CoreTypes.Id) =
+        member _.InferenceId(state: InferenceUpdateRequest, value: Types.Id) =
             { state with InferenceId = value }
 
         [<CustomOperation("taskType")>]
-        member _.TaskType(state: InferenceUpdateRequest, value: InferenceTypes.TaskType) =
+        member _.TaskType(state: InferenceUpdateRequest, value: Types.TaskType) =
             { state with TaskType = value }
 
         [<CustomOperation("document")>]

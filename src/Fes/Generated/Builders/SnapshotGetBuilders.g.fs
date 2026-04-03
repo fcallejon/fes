@@ -4,13 +4,13 @@ namespace Fes.Generated.Builders
 
 
 open System.Text.Json.Serialization
-open Fes.Generated.Types
+open Fes.Generated
 
 [<AutoOpen>]
 module SnapshotGetBuilders =
 
     type SnapshotResponseItemBuilder() =
-        member _.Yield(_: unit) : SnapshotResponseItem =
+        member _.Yield(_: unit) : Types.SnapshotResponseItem =
             {
                 Repository = Unchecked.defaultof<_>
                 Snapshots = None
@@ -18,15 +18,15 @@ module SnapshotGetBuilders =
             }
 
         [<CustomOperation("repository")>]
-        member _.Repository(state: SnapshotResponseItem, value: CoreTypes.Name) =
+        member _.Repository(state: Types.SnapshotResponseItem, value: Types.Name) =
             { state with Repository = value }
 
         [<CustomOperation("snapshots")>]
-        member _.Snapshots(state: SnapshotResponseItem, value: SnapshotTypes.SnapshotInfo list) =
+        member _.Snapshots(state: Types.SnapshotResponseItem, value: Types.SnapshotInfo list) =
             { state with Snapshots = Some value }
 
         [<CustomOperation("error")>]
-        member _.Error(state: SnapshotResponseItem, value: CoreTypes.ErrorCause) =
+        member _.Error(state: Types.SnapshotResponseItem, value: Types.ErrorCause) =
             { state with Error = Some value }
 
     let snapshotResponseItem = SnapshotResponseItemBuilder()

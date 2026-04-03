@@ -4,13 +4,13 @@ namespace Fes.Generated.Builders
 
 
 open System.Text.Json.Serialization
-open Fes.Generated.Types
+open Fes.Generated
 
 [<AutoOpen>]
 module IndicesRemoveBlockBuilders =
 
     type RemoveIndicesBlockStatusBuilder() =
-        member _.Yield(_: unit) : RemoveIndicesBlockStatus =
+        member _.Yield(_: unit) : Types.RemoveIndicesBlockStatus =
             {
                 Name = Unchecked.defaultof<_>
                 Unblocked = None
@@ -18,15 +18,15 @@ module IndicesRemoveBlockBuilders =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: RemoveIndicesBlockStatus, value: CoreTypes.IndexName) =
+        member _.Name(state: Types.RemoveIndicesBlockStatus, value: Types.IndexName) =
             { state with Name = value }
 
         [<CustomOperation("unblocked")>]
-        member _.Unblocked(state: RemoveIndicesBlockStatus, value: bool) =
+        member _.Unblocked(state: Types.RemoveIndicesBlockStatus, value: bool) =
             { state with Unblocked = Some value }
 
         [<CustomOperation("exception'")>]
-        member _.Exception(state: RemoveIndicesBlockStatus, value: CoreTypes.ErrorCause) =
+        member _.Exception(state: Types.RemoveIndicesBlockStatus, value: Types.ErrorCause) =
             { state with Exception = Some value }
 
     let removeIndicesBlockStatus = RemoveIndicesBlockStatusBuilder()

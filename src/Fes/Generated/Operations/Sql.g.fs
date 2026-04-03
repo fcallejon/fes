@@ -7,6 +7,7 @@ open System
 open System.Text.Json
 open System.Text.Json.Serialization
 open Fes
+open Fes.Generated
 
 [<AutoOpen>]
 module SqlOperations =
@@ -46,7 +47,7 @@ module SqlOperations =
             { req with Cursor = value }
 
     type SqlDeleteAsyncRequest = {
-        Id: CoreTypes.Id
+        Id: Types.Id
     }
 
         with
@@ -60,7 +61,7 @@ module SqlOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type SqlDeleteAsyncResponse = CoreTypes.AcknowledgedResponseBase
+    type SqlDeleteAsyncResponse = Types.AcknowledgedResponseBase
 
     type SqlDeleteAsyncRequestBuilder() =
         member _.Yield(_: unit) : SqlDeleteAsyncRequest =
@@ -69,17 +70,17 @@ module SqlOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: SqlDeleteAsyncRequest, value: CoreTypes.Id) =
+        member _.Id(state: SqlDeleteAsyncRequest, value: Types.Id) =
             { state with Id = value }
 
     let sqlDeleteAsyncRequest = SqlDeleteAsyncRequestBuilder()
 
     type SqlGetAsyncRequest = {
-        Id: CoreTypes.Id
+        Id: Types.Id
         Delimiter: string option
         Format: string option
-        KeepAlive: CoreTypes.Duration option
-        WaitForCompletionTimeout: CoreTypes.Duration option
+        KeepAlive: Types.Duration option
+        WaitForCompletionTimeout: Types.Duration option
     }
 
         with
@@ -116,7 +117,7 @@ module SqlOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: SqlGetAsyncRequest, value: CoreTypes.Id) =
+        member _.Id(state: SqlGetAsyncRequest, value: Types.Id) =
             { state with Id = value }
 
         [<CustomOperation("delimiter")>]
@@ -128,11 +129,11 @@ module SqlOperations =
             { state with Format = Some value }
 
         [<CustomOperation("keepAlive")>]
-        member _.KeepAlive(state: SqlGetAsyncRequest, value: CoreTypes.Duration) =
+        member _.KeepAlive(state: SqlGetAsyncRequest, value: Types.Duration) =
             { state with KeepAlive = Some value }
 
         [<CustomOperation("waitForCompletionTimeout")>]
-        member _.WaitForCompletionTimeout(state: SqlGetAsyncRequest, value: CoreTypes.Duration) =
+        member _.WaitForCompletionTimeout(state: SqlGetAsyncRequest, value: Types.Duration) =
             { state with WaitForCompletionTimeout = Some value }
 
     let sqlGetAsyncRequest = SqlGetAsyncRequestBuilder()
@@ -142,13 +143,13 @@ module SqlOperations =
             { req with Delimiter = Some value }
         let withFormat (value: string) (req: SqlGetAsyncRequest) =
             { req with Format = Some value }
-        let withKeepAlive (value: CoreTypes.Duration) (req: SqlGetAsyncRequest) =
+        let withKeepAlive (value: Types.Duration) (req: SqlGetAsyncRequest) =
             { req with KeepAlive = Some value }
-        let withWaitForCompletionTimeout (value: CoreTypes.Duration) (req: SqlGetAsyncRequest) =
+        let withWaitForCompletionTimeout (value: Types.Duration) (req: SqlGetAsyncRequest) =
             { req with WaitForCompletionTimeout = Some value }
 
     type SqlGetAsyncStatusRequest = {
-        Id: CoreTypes.Id
+        Id: Types.Id
     }
 
         with
@@ -171,31 +172,31 @@ module SqlOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: SqlGetAsyncStatusRequest, value: CoreTypes.Id) =
+        member _.Id(state: SqlGetAsyncStatusRequest, value: Types.Id) =
             { state with Id = value }
 
     let sqlGetAsyncStatusRequest = SqlGetAsyncStatusRequestBuilder()
 
     type SqlQueryRequest = {
-        Format: SqlQuery.SqlFormat option
+        Format: Types.SqlFormat option
         AllowPartialSearchResults: bool option
         Catalog: string option
         Columnar: bool option
         Cursor: string option
-        FetchSize: CoreTypes.Integer option
+        FetchSize: Types.Integer option
         FieldMultiValueLeniency: bool option
-        Filter: CoreTypes.QueryContainer option
+        Filter: Types.QueryContainer option
         IndexUsingFrozen: bool option
-        KeepAlive: CoreTypes.Duration option
+        KeepAlive: Types.Duration option
         KeepOnCompletion: bool option
-        PageTimeout: CoreTypes.Duration option
+        PageTimeout: Types.Duration option
         Params: System.Text.Json.JsonElement list option
         Query: string option
-        ProjectRouting: CoreTypes.ProjectRouting option
-        RequestTimeout: CoreTypes.Duration option
-        RuntimeMappings: CoreTypes.RuntimeFields option
-        TimeZone: CoreTypes.TimeZone option
-        WaitForCompletionTimeout: CoreTypes.Duration option
+        ProjectRouting: Types.ProjectRouting option
+        RequestTimeout: Types.Duration option
+        RuntimeMappings: Types.RuntimeFields option
+        TimeZone: Types.TimeZone option
+        WaitForCompletionTimeout: Types.Duration option
     }
 
         with
@@ -244,7 +245,7 @@ module SqlOperations =
             }
 
         [<CustomOperation("format")>]
-        member _.Format(state: SqlQueryRequest, value: SqlQuery.SqlFormat) =
+        member _.Format(state: SqlQueryRequest, value: Types.SqlFormat) =
             { state with Format = Some value }
 
         [<CustomOperation("allowPartialSearchResults")>]
@@ -264,7 +265,7 @@ module SqlOperations =
             { state with Cursor = Some value }
 
         [<CustomOperation("fetchSize")>]
-        member _.FetchSize(state: SqlQueryRequest, value: CoreTypes.Integer) =
+        member _.FetchSize(state: SqlQueryRequest, value: Types.Integer) =
             { state with FetchSize = Some value }
 
         [<CustomOperation("fieldMultiValueLeniency")>]
@@ -272,7 +273,7 @@ module SqlOperations =
             { state with FieldMultiValueLeniency = Some value }
 
         [<CustomOperation("filter")>]
-        member _.Filter(state: SqlQueryRequest, value: CoreTypes.QueryContainer) =
+        member _.Filter(state: SqlQueryRequest, value: Types.QueryContainer) =
             { state with Filter = Some value }
 
         [<CustomOperation("indexUsingFrozen")>]
@@ -280,7 +281,7 @@ module SqlOperations =
             { state with IndexUsingFrozen = Some value }
 
         [<CustomOperation("keepAlive")>]
-        member _.KeepAlive(state: SqlQueryRequest, value: CoreTypes.Duration) =
+        member _.KeepAlive(state: SqlQueryRequest, value: Types.Duration) =
             { state with KeepAlive = Some value }
 
         [<CustomOperation("keepOnCompletion")>]
@@ -288,7 +289,7 @@ module SqlOperations =
             { state with KeepOnCompletion = Some value }
 
         [<CustomOperation("pageTimeout")>]
-        member _.PageTimeout(state: SqlQueryRequest, value: CoreTypes.Duration) =
+        member _.PageTimeout(state: SqlQueryRequest, value: Types.Duration) =
             { state with PageTimeout = Some value }
 
         [<CustomOperation("params")>]
@@ -300,29 +301,29 @@ module SqlOperations =
             { state with Query = Some value }
 
         [<CustomOperation("projectRouting")>]
-        member _.ProjectRouting(state: SqlQueryRequest, value: CoreTypes.ProjectRouting) =
+        member _.ProjectRouting(state: SqlQueryRequest, value: Types.ProjectRouting) =
             { state with ProjectRouting = Some value }
 
         [<CustomOperation("requestTimeout")>]
-        member _.RequestTimeout(state: SqlQueryRequest, value: CoreTypes.Duration) =
+        member _.RequestTimeout(state: SqlQueryRequest, value: Types.Duration) =
             { state with RequestTimeout = Some value }
 
         [<CustomOperation("runtimeMappings")>]
-        member _.RuntimeMappings(state: SqlQueryRequest, value: CoreTypes.RuntimeFields) =
+        member _.RuntimeMappings(state: SqlQueryRequest, value: Types.RuntimeFields) =
             { state with RuntimeMappings = Some value }
 
         [<CustomOperation("timeZone")>]
-        member _.TimeZone(state: SqlQueryRequest, value: CoreTypes.TimeZone) =
+        member _.TimeZone(state: SqlQueryRequest, value: Types.TimeZone) =
             { state with TimeZone = Some value }
 
         [<CustomOperation("waitForCompletionTimeout")>]
-        member _.WaitForCompletionTimeout(state: SqlQueryRequest, value: CoreTypes.Duration) =
+        member _.WaitForCompletionTimeout(state: SqlQueryRequest, value: Types.Duration) =
             { state with WaitForCompletionTimeout = Some value }
 
     let sqlQueryRequest = SqlQueryRequestBuilder()
 
     module Query =
-        let withFormat (value: SqlQuery.SqlFormat) (req: SqlQueryRequest) =
+        let withFormat (value: Types.SqlFormat) (req: SqlQueryRequest) =
             { req with Format = Some value }
         let withAllowPartialSearchResults (value: bool) (req: SqlQueryRequest) =
             { req with AllowPartialSearchResults = Some value }
@@ -332,40 +333,40 @@ module SqlOperations =
             { req with Columnar = Some value }
         let withCursor (value: string) (req: SqlQueryRequest) =
             { req with Cursor = Some value }
-        let withFetchSize (value: CoreTypes.Integer) (req: SqlQueryRequest) =
+        let withFetchSize (value: Types.Integer) (req: SqlQueryRequest) =
             { req with FetchSize = Some value }
         let withFieldMultiValueLeniency (value: bool) (req: SqlQueryRequest) =
             { req with FieldMultiValueLeniency = Some value }
-        let withFilter (value: CoreTypes.QueryContainer) (req: SqlQueryRequest) =
+        let withFilter (value: Types.QueryContainer) (req: SqlQueryRequest) =
             { req with Filter = Some value }
         let withIndexUsingFrozen (value: bool) (req: SqlQueryRequest) =
             { req with IndexUsingFrozen = Some value }
-        let withKeepAlive (value: CoreTypes.Duration) (req: SqlQueryRequest) =
+        let withKeepAlive (value: Types.Duration) (req: SqlQueryRequest) =
             { req with KeepAlive = Some value }
         let withKeepOnCompletion (value: bool) (req: SqlQueryRequest) =
             { req with KeepOnCompletion = Some value }
-        let withPageTimeout (value: CoreTypes.Duration) (req: SqlQueryRequest) =
+        let withPageTimeout (value: Types.Duration) (req: SqlQueryRequest) =
             { req with PageTimeout = Some value }
         let withParams (value: System.Text.Json.JsonElement list) (req: SqlQueryRequest) =
             { req with Params = Some value }
         let withQuery (value: string) (req: SqlQueryRequest) =
             { req with Query = Some value }
-        let withProjectRouting (value: CoreTypes.ProjectRouting) (req: SqlQueryRequest) =
+        let withProjectRouting (value: Types.ProjectRouting) (req: SqlQueryRequest) =
             { req with ProjectRouting = Some value }
-        let withRequestTimeout (value: CoreTypes.Duration) (req: SqlQueryRequest) =
+        let withRequestTimeout (value: Types.Duration) (req: SqlQueryRequest) =
             { req with RequestTimeout = Some value }
-        let withRuntimeMappings (value: CoreTypes.RuntimeFields) (req: SqlQueryRequest) =
+        let withRuntimeMappings (value: Types.RuntimeFields) (req: SqlQueryRequest) =
             { req with RuntimeMappings = Some value }
-        let withTimeZone (value: CoreTypes.TimeZone) (req: SqlQueryRequest) =
+        let withTimeZone (value: Types.TimeZone) (req: SqlQueryRequest) =
             { req with TimeZone = Some value }
-        let withWaitForCompletionTimeout (value: CoreTypes.Duration) (req: SqlQueryRequest) =
+        let withWaitForCompletionTimeout (value: Types.Duration) (req: SqlQueryRequest) =
             { req with WaitForCompletionTimeout = Some value }
 
     type SqlTranslateRequest = {
-        FetchSize: CoreTypes.Integer option
-        Filter: CoreTypes.QueryContainer option
+        FetchSize: Types.Integer option
+        Filter: Types.QueryContainer option
         Query: string
-        TimeZone: CoreTypes.TimeZone option
+        TimeZone: Types.TimeZone option
     }
 
         with
@@ -392,11 +393,11 @@ module SqlOperations =
             }
 
         [<CustomOperation("fetchSize")>]
-        member _.FetchSize(state: SqlTranslateRequest, value: CoreTypes.Integer) =
+        member _.FetchSize(state: SqlTranslateRequest, value: Types.Integer) =
             { state with FetchSize = Some value }
 
         [<CustomOperation("filter")>]
-        member _.Filter(state: SqlTranslateRequest, value: CoreTypes.QueryContainer) =
+        member _.Filter(state: SqlTranslateRequest, value: Types.QueryContainer) =
             { state with Filter = Some value }
 
         [<CustomOperation("query")>]
@@ -404,18 +405,18 @@ module SqlOperations =
             { state with Query = value }
 
         [<CustomOperation("timeZone")>]
-        member _.TimeZone(state: SqlTranslateRequest, value: CoreTypes.TimeZone) =
+        member _.TimeZone(state: SqlTranslateRequest, value: Types.TimeZone) =
             { state with TimeZone = Some value }
 
     let sqlTranslateRequest = SqlTranslateRequestBuilder()
 
     module Translate =
-        let withFetchSize (value: CoreTypes.Integer) (req: SqlTranslateRequest) =
+        let withFetchSize (value: Types.Integer) (req: SqlTranslateRequest) =
             { req with FetchSize = Some value }
-        let withFilter (value: CoreTypes.QueryContainer) (req: SqlTranslateRequest) =
+        let withFilter (value: Types.QueryContainer) (req: SqlTranslateRequest) =
             { req with Filter = Some value }
         let withQuery (value: string) (req: SqlTranslateRequest) =
             { req with Query = value }
-        let withTimeZone (value: CoreTypes.TimeZone) (req: SqlTranslateRequest) =
+        let withTimeZone (value: Types.TimeZone) (req: SqlTranslateRequest) =
             { req with TimeZone = Some value }
 

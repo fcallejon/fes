@@ -4,13 +4,13 @@ namespace Fes.Generated.Builders
 
 
 open System.Text.Json.Serialization
-open Fes.Generated.Types
+open Fes.Generated
 
 [<AutoOpen>]
 module NodesInfoBuilders =
 
     type NodeInfoBuilder() =
-        member _.Yield(_: unit) : NodeInfo =
+        member _.Yield(_: unit) : Types.NodeInfo =
             {
                 Attributes = Unchecked.defaultof<_>
                 BuildFlavor = Unchecked.defaultof<_>
@@ -42,117 +42,117 @@ module NodesInfoBuilders =
             }
 
         [<CustomOperation("attributes")>]
-        member _.Attributes(state: NodeInfo, value: Map<string, string>) =
+        member _.Attributes(state: Types.NodeInfo, value: Map<string, string>) =
             { state with Attributes = value }
 
         [<CustomOperation("buildFlavor")>]
-        member _.BuildFlavor(state: NodeInfo, value: string) =
+        member _.BuildFlavor(state: Types.NodeInfo, value: string) =
             { state with BuildFlavor = value }
 
         [<CustomOperation("buildHash")>]
-        member _.BuildHash(state: NodeInfo, value: string) =
+        member _.BuildHash(state: Types.NodeInfo, value: string) =
             { state with BuildHash = value }
 
         [<CustomOperation("buildType")>]
-        member _.BuildType(state: NodeInfo, value: string) =
+        member _.BuildType(state: Types.NodeInfo, value: string) =
             { state with BuildType = value }
 
         [<CustomOperation("componentVersions")>]
-        member _.ComponentVersions(state: NodeInfo, value: Map<CoreTypes.Name, CoreTypes.Integer>) =
+        member _.ComponentVersions(state: Types.NodeInfo, value: Map<Types.Name, Types.Integer>) =
             { state with ComponentVersions = value }
 
         [<CustomOperation("host")>]
-        member _.Host(state: NodeInfo, value: CoreTypes.Host) =
+        member _.Host(state: Types.NodeInfo, value: Types.Host) =
             { state with Host = value }
 
         [<CustomOperation("http")>]
-        member _.Http(state: NodeInfo, value: NodesInfo.NodeInfoHttp) =
+        member _.Http(state: Types.NodeInfo, value: Types.NodeInfoHttp) =
             { state with Http = Some value }
 
         [<CustomOperation("indexVersion")>]
-        member _.IndexVersion(state: NodeInfo, value: CoreTypes.VersionNumber) =
+        member _.IndexVersion(state: Types.NodeInfo, value: Types.VersionNumber) =
             { state with IndexVersion = value }
 
         [<CustomOperation("ip")>]
-        member _.Ip(state: NodeInfo, value: CoreTypes.Ip) =
+        member _.Ip(state: Types.NodeInfo, value: Types.Ip) =
             { state with Ip = value }
 
         [<CustomOperation("jvm")>]
-        member _.Jvm(state: NodeInfo, value: NodesInfo.NodeJvmInfo) =
+        member _.Jvm(state: Types.NodeInfo, value: Types.NodeJvmInfo) =
             { state with Jvm = Some value }
 
         [<CustomOperation("name")>]
-        member _.Name(state: NodeInfo, value: CoreTypes.Name) =
+        member _.Name(state: Types.NodeInfo, value: Types.Name) =
             { state with Name = value }
 
         [<CustomOperation("os")>]
-        member _.Os(state: NodeInfo, value: NodesInfo.NodeOperatingSystemInfo) =
+        member _.Os(state: Types.NodeInfo, value: Types.NodeOperatingSystemInfo) =
             { state with Os = Some value }
 
         [<CustomOperation("plugins")>]
-        member _.Plugins(state: NodeInfo, value: CoreTypes.PluginStats list) =
+        member _.Plugins(state: Types.NodeInfo, value: Types.PluginStats list) =
             { state with Plugins = Some value }
 
         [<CustomOperation("process")>]
-        member _.Process(state: NodeInfo, value: NodesInfo.NodeProcessInfo) =
+        member _.Process(state: Types.NodeInfo, value: Types.NodeProcessInfo) =
             { state with Process = Some value }
 
         [<CustomOperation("roles")>]
-        member _.Roles(state: NodeInfo, value: CoreTypes.NodeRoles) =
+        member _.Roles(state: Types.NodeInfo, value: Types.NodeRoles) =
             { state with Roles = value }
 
         [<CustomOperation("settings")>]
-        member _.Settings(state: NodeInfo, value: NodesInfo.NodeInfoSettings) =
+        member _.Settings(state: Types.NodeInfo, value: Types.NodeInfoSettings) =
             { state with Settings = Some value }
 
         [<CustomOperation("threadPool")>]
-        member _.ThreadPool(state: NodeInfo, value: Map<string, NodesInfo.NodeThreadPoolInfo>) =
+        member _.ThreadPool(state: Types.NodeInfo, value: Map<string, Types.NodeThreadPoolInfo>) =
             { state with ThreadPool = Some value }
 
         [<CustomOperation("totalIndexingBuffer")>]
-        member _.TotalIndexingBuffer(state: NodeInfo, value: CoreTypes.Long) =
+        member _.TotalIndexingBuffer(state: Types.NodeInfo, value: Types.Long) =
             { state with TotalIndexingBuffer = Some value }
 
         [<CustomOperation("totalIndexingBufferInBytes")>]
-        member _.TotalIndexingBufferInBytes(state: NodeInfo, value: CoreTypes.ByteSize) =
+        member _.TotalIndexingBufferInBytes(state: Types.NodeInfo, value: Types.ByteSize) =
             { state with TotalIndexingBufferInBytes = Some value }
 
         [<CustomOperation("transport")>]
-        member _.Transport(state: NodeInfo, value: NodesInfo.NodeInfoTransport) =
+        member _.Transport(state: Types.NodeInfo, value: Types.NodeInfoTransport) =
             { state with Transport = Some value }
 
         [<CustomOperation("transportAddress")>]
-        member _.TransportAddress(state: NodeInfo, value: CoreTypes.TransportAddress) =
+        member _.TransportAddress(state: Types.NodeInfo, value: Types.TransportAddress) =
             { state with TransportAddress = value }
 
         [<CustomOperation("transportVersion")>]
-        member _.TransportVersion(state: NodeInfo, value: CoreTypes.VersionNumber) =
+        member _.TransportVersion(state: Types.NodeInfo, value: Types.VersionNumber) =
             { state with TransportVersion = value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: NodeInfo, value: CoreTypes.VersionString) =
+        member _.Version(state: Types.NodeInfo, value: Types.VersionString) =
             { state with Version = value }
 
         [<CustomOperation("modules")>]
-        member _.Modules(state: NodeInfo, value: CoreTypes.PluginStats list) =
+        member _.Modules(state: Types.NodeInfo, value: Types.PluginStats list) =
             { state with Modules = Some value }
 
         [<CustomOperation("ingest")>]
-        member _.Ingest(state: NodeInfo, value: NodesInfo.NodeInfoIngest) =
+        member _.Ingest(state: Types.NodeInfo, value: Types.NodeInfoIngest) =
             { state with Ingest = Some value }
 
         [<CustomOperation("aggregations")>]
-        member _.Aggregations(state: NodeInfo, value: Map<string, NodesInfo.NodeInfoAggregation>) =
+        member _.Aggregations(state: Types.NodeInfo, value: Map<string, Types.NodeInfoAggregation>) =
             { state with Aggregations = Some value }
 
         [<CustomOperation("remoteClusterServer")>]
-        member _.RemoteClusterServer(state: NodeInfo, value: NodesInfo.RemoveClusterServer) =
+        member _.RemoteClusterServer(state: Types.NodeInfo, value: Types.RemoveClusterServer) =
             { state with RemoteClusterServer = Some value }
 
     let nodeInfo = NodeInfoBuilder()
 
     type NodeInfoDiscoverBuilder() =
-        member _.Yield(_: unit) : NodeInfoDiscover =
+        member _.Yield(_: unit) : Types.NodeInfoDiscover =
             {
                 SeedHosts = None
                 Type = None
@@ -160,21 +160,21 @@ module NodesInfoBuilders =
             }
 
         [<CustomOperation("seedHosts")>]
-        member _.SeedHosts(state: NodeInfoDiscover, value: System.Text.Json.JsonElement) =
+        member _.SeedHosts(state: Types.NodeInfoDiscover, value: System.Text.Json.JsonElement) =
             { state with SeedHosts = Some value }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: NodeInfoDiscover, value: string) =
+        member _.Type(state: Types.NodeInfoDiscover, value: string) =
             { state with Type = Some value }
 
         [<CustomOperation("seedProviders")>]
-        member _.SeedProviders(state: NodeInfoDiscover, value: string list) =
+        member _.SeedProviders(state: Types.NodeInfoDiscover, value: string list) =
             { state with SeedProviders = Some value }
 
     let nodeInfoDiscover = NodeInfoDiscoverBuilder()
 
     type NodeInfoJvmMemoryBuilder() =
-        member _.Yield(_: unit) : NodeInfoJvmMemory =
+        member _.Yield(_: unit) : Types.NodeInfoJvmMemory =
             {
                 DirectMax = None
                 DirectMaxInBytes = Unchecked.defaultof<_>
@@ -189,49 +189,49 @@ module NodesInfoBuilders =
             }
 
         [<CustomOperation("directMax")>]
-        member _.DirectMax(state: NodeInfoJvmMemory, value: CoreTypes.ByteSize) =
+        member _.DirectMax(state: Types.NodeInfoJvmMemory, value: Types.ByteSize) =
             { state with DirectMax = Some value }
 
         [<CustomOperation("directMaxInBytes")>]
-        member _.DirectMaxInBytes(state: NodeInfoJvmMemory, value: CoreTypes.Long) =
+        member _.DirectMaxInBytes(state: Types.NodeInfoJvmMemory, value: Types.Long) =
             { state with DirectMaxInBytes = value }
 
         [<CustomOperation("heapInit")>]
-        member _.HeapInit(state: NodeInfoJvmMemory, value: CoreTypes.ByteSize) =
+        member _.HeapInit(state: Types.NodeInfoJvmMemory, value: Types.ByteSize) =
             { state with HeapInit = Some value }
 
         [<CustomOperation("heapInitInBytes")>]
-        member _.HeapInitInBytes(state: NodeInfoJvmMemory, value: CoreTypes.Long) =
+        member _.HeapInitInBytes(state: Types.NodeInfoJvmMemory, value: Types.Long) =
             { state with HeapInitInBytes = value }
 
         [<CustomOperation("heapMax")>]
-        member _.HeapMax(state: NodeInfoJvmMemory, value: CoreTypes.ByteSize) =
+        member _.HeapMax(state: Types.NodeInfoJvmMemory, value: Types.ByteSize) =
             { state with HeapMax = Some value }
 
         [<CustomOperation("heapMaxInBytes")>]
-        member _.HeapMaxInBytes(state: NodeInfoJvmMemory, value: CoreTypes.Long) =
+        member _.HeapMaxInBytes(state: Types.NodeInfoJvmMemory, value: Types.Long) =
             { state with HeapMaxInBytes = value }
 
         [<CustomOperation("nonHeapInit")>]
-        member _.NonHeapInit(state: NodeInfoJvmMemory, value: CoreTypes.ByteSize) =
+        member _.NonHeapInit(state: Types.NodeInfoJvmMemory, value: Types.ByteSize) =
             { state with NonHeapInit = Some value }
 
         [<CustomOperation("nonHeapInitInBytes")>]
-        member _.NonHeapInitInBytes(state: NodeInfoJvmMemory, value: CoreTypes.Long) =
+        member _.NonHeapInitInBytes(state: Types.NodeInfoJvmMemory, value: Types.Long) =
             { state with NonHeapInitInBytes = value }
 
         [<CustomOperation("nonHeapMax")>]
-        member _.NonHeapMax(state: NodeInfoJvmMemory, value: CoreTypes.ByteSize) =
+        member _.NonHeapMax(state: Types.NodeInfoJvmMemory, value: Types.ByteSize) =
             { state with NonHeapMax = Some value }
 
         [<CustomOperation("nonHeapMaxInBytes")>]
-        member _.NonHeapMaxInBytes(state: NodeInfoJvmMemory, value: CoreTypes.Long) =
+        member _.NonHeapMaxInBytes(state: Types.NodeInfoJvmMemory, value: Types.Long) =
             { state with NonHeapMaxInBytes = value }
 
     let nodeInfoJvmMemory = NodeInfoJvmMemoryBuilder()
 
     type NodeInfoPathBuilder() =
-        member _.Yield(_: unit) : NodeInfoPath =
+        member _.Yield(_: unit) : Types.NodeInfoPath =
             {
                 Logs = None
                 Home = None
@@ -240,25 +240,25 @@ module NodesInfoBuilders =
             }
 
         [<CustomOperation("logs")>]
-        member _.Logs(state: NodeInfoPath, value: string) =
+        member _.Logs(state: Types.NodeInfoPath, value: string) =
             { state with Logs = Some value }
 
         [<CustomOperation("home")>]
-        member _.Home(state: NodeInfoPath, value: string) =
+        member _.Home(state: Types.NodeInfoPath, value: string) =
             { state with Home = Some value }
 
         [<CustomOperation("repo")>]
-        member _.Repo(state: NodeInfoPath, value: string list) =
+        member _.Repo(state: Types.NodeInfoPath, value: string list) =
             { state with Repo = Some value }
 
         [<CustomOperation("data")>]
-        member _.Data(state: NodeInfoPath, value: System.Text.Json.JsonElement) =
+        member _.Data(state: Types.NodeInfoPath, value: System.Text.Json.JsonElement) =
             { state with Data = Some value }
 
     let nodeInfoPath = NodeInfoPathBuilder()
 
     type NodeInfoSettingsBuilder() =
-        member _.Yield(_: unit) : NodeInfoSettings =
+        member _.Yield(_: unit) : Types.NodeInfoSettings =
             {
                 Cluster = Unchecked.defaultof<_>
                 Node = Unchecked.defaultof<_>
@@ -278,69 +278,69 @@ module NodesInfoBuilders =
             }
 
         [<CustomOperation("cluster")>]
-        member _.Cluster(state: NodeInfoSettings, value: NodesInfo.NodeInfoSettingsCluster) =
+        member _.Cluster(state: Types.NodeInfoSettings, value: Types.NodeInfoSettingsCluster) =
             { state with Cluster = value }
 
         [<CustomOperation("node")>]
-        member _.Node(state: NodeInfoSettings, value: NodesInfo.NodeInfoSettingsNode) =
+        member _.Node(state: Types.NodeInfoSettings, value: Types.NodeInfoSettingsNode) =
             { state with Node = value }
 
         [<CustomOperation("path")>]
-        member _.Path(state: NodeInfoSettings, value: NodesInfo.NodeInfoPath) =
+        member _.Path(state: Types.NodeInfoSettings, value: Types.NodeInfoPath) =
             { state with Path = Some value }
 
         [<CustomOperation("repositories")>]
-        member _.Repositories(state: NodeInfoSettings, value: NodesInfo.NodeInfoRepositories) =
+        member _.Repositories(state: Types.NodeInfoSettings, value: Types.NodeInfoRepositories) =
             { state with Repositories = Some value }
 
         [<CustomOperation("discovery")>]
-        member _.Discovery(state: NodeInfoSettings, value: NodesInfo.NodeInfoDiscover) =
+        member _.Discovery(state: Types.NodeInfoSettings, value: Types.NodeInfoDiscover) =
             { state with Discovery = Some value }
 
         [<CustomOperation("action")>]
-        member _.Action(state: NodeInfoSettings, value: NodesInfo.NodeInfoAction) =
+        member _.Action(state: Types.NodeInfoSettings, value: Types.NodeInfoAction) =
             { state with Action = Some value }
 
         [<CustomOperation("client")>]
-        member _.Client(state: NodeInfoSettings, value: NodesInfo.NodeInfoClient) =
+        member _.Client(state: Types.NodeInfoSettings, value: Types.NodeInfoClient) =
             { state with Client = Some value }
 
         [<CustomOperation("http")>]
-        member _.Http(state: NodeInfoSettings, value: NodesInfo.NodeInfoSettingsHttp) =
+        member _.Http(state: Types.NodeInfoSettings, value: Types.NodeInfoSettingsHttp) =
             { state with Http = value }
 
         [<CustomOperation("bootstrap")>]
-        member _.Bootstrap(state: NodeInfoSettings, value: NodesInfo.NodeInfoBootstrap) =
+        member _.Bootstrap(state: Types.NodeInfoSettings, value: Types.NodeInfoBootstrap) =
             { state with Bootstrap = Some value }
 
         [<CustomOperation("transport")>]
-        member _.Transport(state: NodeInfoSettings, value: NodesInfo.NodeInfoSettingsTransport) =
+        member _.Transport(state: Types.NodeInfoSettings, value: Types.NodeInfoSettingsTransport) =
             { state with Transport = value }
 
         [<CustomOperation("network")>]
-        member _.Network(state: NodeInfoSettings, value: NodesInfo.NodeInfoSettingsNetwork) =
+        member _.Network(state: Types.NodeInfoSettings, value: Types.NodeInfoSettingsNetwork) =
             { state with Network = Some value }
 
         [<CustomOperation("xpack")>]
-        member _.Xpack(state: NodeInfoSettings, value: NodesInfo.NodeInfoXpack) =
+        member _.Xpack(state: Types.NodeInfoSettings, value: Types.NodeInfoXpack) =
             { state with Xpack = Some value }
 
         [<CustomOperation("script")>]
-        member _.Script(state: NodeInfoSettings, value: NodesInfo.NodeInfoScript) =
+        member _.Script(state: Types.NodeInfoSettings, value: Types.NodeInfoScript) =
             { state with Script = Some value }
 
         [<CustomOperation("search")>]
-        member _.Search(state: NodeInfoSettings, value: NodesInfo.NodeInfoSearch) =
+        member _.Search(state: Types.NodeInfoSettings, value: Types.NodeInfoSearch) =
             { state with Search = Some value }
 
         [<CustomOperation("ingest")>]
-        member _.Ingest(state: NodeInfoSettings, value: NodesInfo.NodeInfoSettingsIngest) =
+        member _.Ingest(state: Types.NodeInfoSettings, value: Types.NodeInfoSettingsIngest) =
             { state with Ingest = Some value }
 
     let nodeInfoSettings = NodeInfoSettingsBuilder()
 
     type NodeInfoSettingsClusterBuilder() =
-        member _.Yield(_: unit) : NodeInfoSettingsCluster =
+        member _.Yield(_: unit) : Types.NodeInfoSettingsCluster =
             {
                 Name = Unchecked.defaultof<_>
                 Routing = None
@@ -350,29 +350,29 @@ module NodesInfoBuilders =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: NodeInfoSettingsCluster, value: CoreTypes.Name) =
+        member _.Name(state: Types.NodeInfoSettingsCluster, value: Types.Name) =
             { state with Name = value }
 
         [<CustomOperation("routing")>]
-        member _.Routing(state: NodeInfoSettingsCluster, value: IndicesTypes.IndexRouting) =
+        member _.Routing(state: Types.NodeInfoSettingsCluster, value: Types.IndexRouting) =
             { state with Routing = Some value }
 
         [<CustomOperation("election")>]
-        member _.Election(state: NodeInfoSettingsCluster, value: NodesInfo.NodeInfoSettingsClusterElection) =
+        member _.Election(state: Types.NodeInfoSettingsCluster, value: Types.NodeInfoSettingsClusterElection) =
             { state with Election = value }
 
         [<CustomOperation("initialMasterNodes")>]
-        member _.InitialMasterNodes(state: NodeInfoSettingsCluster, value: System.Text.Json.JsonElement) =
+        member _.InitialMasterNodes(state: Types.NodeInfoSettingsCluster, value: System.Text.Json.JsonElement) =
             { state with InitialMasterNodes = Some value }
 
         [<CustomOperation("deprecationIndexing")>]
-        member _.DeprecationIndexing(state: NodeInfoSettingsCluster, value: NodesInfo.DeprecationIndexing) =
+        member _.DeprecationIndexing(state: Types.NodeInfoSettingsCluster, value: Types.DeprecationIndexing) =
             { state with DeprecationIndexing = Some value }
 
     let nodeInfoSettingsCluster = NodeInfoSettingsClusterBuilder()
 
     type NodeInfoSettingsHttpBuilder() =
-        member _.Yield(_: unit) : NodeInfoSettingsHttp =
+        member _.Yield(_: unit) : Types.NodeInfoSettingsHttp =
             {
                 Type = Unchecked.defaultof<_>
                 TypeDefault = None
@@ -381,25 +381,25 @@ module NodesInfoBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: NodeInfoSettingsHttp, value: NodesInfo.NodeInfoSettingsHttpType) =
+        member _.Type(state: Types.NodeInfoSettingsHttp, value: Types.NodeInfoSettingsHttpType) =
             { state with Type = value }
 
         [<CustomOperation("typeDefault")>]
-        member _.TypeDefault(state: NodeInfoSettingsHttp, value: string) =
+        member _.TypeDefault(state: Types.NodeInfoSettingsHttp, value: string) =
             { state with TypeDefault = Some value }
 
         [<CustomOperation("compression")>]
-        member _.Compression(state: NodeInfoSettingsHttp, value: System.Text.Json.JsonElement) =
+        member _.Compression(state: Types.NodeInfoSettingsHttp, value: System.Text.Json.JsonElement) =
             { state with Compression = Some value }
 
         [<CustomOperation("port")>]
-        member _.Port(state: NodeInfoSettingsHttp, value: System.Text.Json.JsonElement) =
+        member _.Port(state: Types.NodeInfoSettingsHttp, value: System.Text.Json.JsonElement) =
             { state with Port = Some value }
 
     let nodeInfoSettingsHttp = NodeInfoSettingsHttpBuilder()
 
     type NodeInfoSettingsIngestBuilder() =
-        member _.Yield(_: unit) : NodeInfoSettingsIngest =
+        member _.Yield(_: unit) : Types.NodeInfoSettingsIngest =
             {
                 Attachment = None
                 Append = None
@@ -438,145 +438,145 @@ module NodesInfoBuilders =
             }
 
         [<CustomOperation("attachment")>]
-        member _.Attachment(state: NodeInfoSettingsIngest, value: NodesInfo.NodeInfoIngestInfo) =
+        member _.Attachment(state: Types.NodeInfoSettingsIngest, value: Types.NodeInfoIngestInfo) =
             { state with Attachment = Some value }
 
         [<CustomOperation("append")>]
-        member _.Append(state: NodeInfoSettingsIngest, value: NodesInfo.NodeInfoIngestInfo) =
+        member _.Append(state: Types.NodeInfoSettingsIngest, value: Types.NodeInfoIngestInfo) =
             { state with Append = Some value }
 
         [<CustomOperation("csv")>]
-        member _.Csv(state: NodeInfoSettingsIngest, value: NodesInfo.NodeInfoIngestInfo) =
+        member _.Csv(state: Types.NodeInfoSettingsIngest, value: Types.NodeInfoIngestInfo) =
             { state with Csv = Some value }
 
         [<CustomOperation("convert")>]
-        member _.Convert(state: NodeInfoSettingsIngest, value: NodesInfo.NodeInfoIngestInfo) =
+        member _.Convert(state: Types.NodeInfoSettingsIngest, value: Types.NodeInfoIngestInfo) =
             { state with Convert = Some value }
 
         [<CustomOperation("date")>]
-        member _.Date(state: NodeInfoSettingsIngest, value: NodesInfo.NodeInfoIngestInfo) =
+        member _.Date(state: Types.NodeInfoSettingsIngest, value: Types.NodeInfoIngestInfo) =
             { state with Date = Some value }
 
         [<CustomOperation("dateIndexName")>]
-        member _.DateIndexName(state: NodeInfoSettingsIngest, value: NodesInfo.NodeInfoIngestInfo) =
+        member _.DateIndexName(state: Types.NodeInfoSettingsIngest, value: Types.NodeInfoIngestInfo) =
             { state with DateIndexName = Some value }
 
         [<CustomOperation("dotExpander")>]
-        member _.DotExpander(state: NodeInfoSettingsIngest, value: NodesInfo.NodeInfoIngestInfo) =
+        member _.DotExpander(state: Types.NodeInfoSettingsIngest, value: Types.NodeInfoIngestInfo) =
             { state with DotExpander = Some value }
 
         [<CustomOperation("enrich")>]
-        member _.Enrich(state: NodeInfoSettingsIngest, value: NodesInfo.NodeInfoIngestInfo) =
+        member _.Enrich(state: Types.NodeInfoSettingsIngest, value: Types.NodeInfoIngestInfo) =
             { state with Enrich = Some value }
 
         [<CustomOperation("fail")>]
-        member _.Fail(state: NodeInfoSettingsIngest, value: NodesInfo.NodeInfoIngestInfo) =
+        member _.Fail(state: Types.NodeInfoSettingsIngest, value: Types.NodeInfoIngestInfo) =
             { state with Fail = Some value }
 
         [<CustomOperation("foreach")>]
-        member _.Foreach(state: NodeInfoSettingsIngest, value: NodesInfo.NodeInfoIngestInfo) =
+        member _.Foreach(state: Types.NodeInfoSettingsIngest, value: Types.NodeInfoIngestInfo) =
             { state with Foreach = Some value }
 
         [<CustomOperation("json")>]
-        member _.Json(state: NodeInfoSettingsIngest, value: NodesInfo.NodeInfoIngestInfo) =
+        member _.Json(state: Types.NodeInfoSettingsIngest, value: Types.NodeInfoIngestInfo) =
             { state with Json = Some value }
 
         [<CustomOperation("userAgent")>]
-        member _.UserAgent(state: NodeInfoSettingsIngest, value: NodesInfo.NodeInfoIngestInfo) =
+        member _.UserAgent(state: Types.NodeInfoSettingsIngest, value: Types.NodeInfoIngestInfo) =
             { state with UserAgent = Some value }
 
         [<CustomOperation("kv")>]
-        member _.Kv(state: NodeInfoSettingsIngest, value: NodesInfo.NodeInfoIngestInfo) =
+        member _.Kv(state: Types.NodeInfoSettingsIngest, value: Types.NodeInfoIngestInfo) =
             { state with Kv = Some value }
 
         [<CustomOperation("geoip")>]
-        member _.Geoip(state: NodeInfoSettingsIngest, value: NodesInfo.NodeInfoIngestInfo) =
+        member _.Geoip(state: Types.NodeInfoSettingsIngest, value: Types.NodeInfoIngestInfo) =
             { state with Geoip = Some value }
 
         [<CustomOperation("grok")>]
-        member _.Grok(state: NodeInfoSettingsIngest, value: NodesInfo.NodeInfoIngestInfo) =
+        member _.Grok(state: Types.NodeInfoSettingsIngest, value: Types.NodeInfoIngestInfo) =
             { state with Grok = Some value }
 
         [<CustomOperation("gsub")>]
-        member _.Gsub(state: NodeInfoSettingsIngest, value: NodesInfo.NodeInfoIngestInfo) =
+        member _.Gsub(state: Types.NodeInfoSettingsIngest, value: Types.NodeInfoIngestInfo) =
             { state with Gsub = Some value }
 
         [<CustomOperation("join")>]
-        member _.Join(state: NodeInfoSettingsIngest, value: NodesInfo.NodeInfoIngestInfo) =
+        member _.Join(state: Types.NodeInfoSettingsIngest, value: Types.NodeInfoIngestInfo) =
             { state with Join = Some value }
 
         [<CustomOperation("lowercase")>]
-        member _.Lowercase(state: NodeInfoSettingsIngest, value: NodesInfo.NodeInfoIngestInfo) =
+        member _.Lowercase(state: Types.NodeInfoSettingsIngest, value: Types.NodeInfoIngestInfo) =
             { state with Lowercase = Some value }
 
         [<CustomOperation("remove")>]
-        member _.Remove(state: NodeInfoSettingsIngest, value: NodesInfo.NodeInfoIngestInfo) =
+        member _.Remove(state: Types.NodeInfoSettingsIngest, value: Types.NodeInfoIngestInfo) =
             { state with Remove = Some value }
 
         [<CustomOperation("rename")>]
-        member _.Rename(state: NodeInfoSettingsIngest, value: NodesInfo.NodeInfoIngestInfo) =
+        member _.Rename(state: Types.NodeInfoSettingsIngest, value: Types.NodeInfoIngestInfo) =
             { state with Rename = Some value }
 
         [<CustomOperation("script")>]
-        member _.Script(state: NodeInfoSettingsIngest, value: NodesInfo.NodeInfoIngestInfo) =
+        member _.Script(state: Types.NodeInfoSettingsIngest, value: Types.NodeInfoIngestInfo) =
             { state with Script = Some value }
 
         [<CustomOperation("set")>]
-        member _.Set(state: NodeInfoSettingsIngest, value: NodesInfo.NodeInfoIngestInfo) =
+        member _.Set(state: Types.NodeInfoSettingsIngest, value: Types.NodeInfoIngestInfo) =
             { state with Set = Some value }
 
         [<CustomOperation("sort")>]
-        member _.Sort(state: NodeInfoSettingsIngest, value: NodesInfo.NodeInfoIngestInfo) =
+        member _.Sort(state: Types.NodeInfoSettingsIngest, value: Types.NodeInfoIngestInfo) =
             { state with Sort = Some value }
 
         [<CustomOperation("split")>]
-        member _.Split(state: NodeInfoSettingsIngest, value: NodesInfo.NodeInfoIngestInfo) =
+        member _.Split(state: Types.NodeInfoSettingsIngest, value: Types.NodeInfoIngestInfo) =
             { state with Split = Some value }
 
         [<CustomOperation("trim")>]
-        member _.Trim(state: NodeInfoSettingsIngest, value: NodesInfo.NodeInfoIngestInfo) =
+        member _.Trim(state: Types.NodeInfoSettingsIngest, value: Types.NodeInfoIngestInfo) =
             { state with Trim = Some value }
 
         [<CustomOperation("uppercase")>]
-        member _.Uppercase(state: NodeInfoSettingsIngest, value: NodesInfo.NodeInfoIngestInfo) =
+        member _.Uppercase(state: Types.NodeInfoSettingsIngest, value: Types.NodeInfoIngestInfo) =
             { state with Uppercase = Some value }
 
         [<CustomOperation("urldecode")>]
-        member _.Urldecode(state: NodeInfoSettingsIngest, value: NodesInfo.NodeInfoIngestInfo) =
+        member _.Urldecode(state: Types.NodeInfoSettingsIngest, value: Types.NodeInfoIngestInfo) =
             { state with Urldecode = Some value }
 
         [<CustomOperation("bytes")>]
-        member _.Bytes(state: NodeInfoSettingsIngest, value: NodesInfo.NodeInfoIngestInfo) =
+        member _.Bytes(state: Types.NodeInfoSettingsIngest, value: Types.NodeInfoIngestInfo) =
             { state with Bytes = Some value }
 
         [<CustomOperation("dissect")>]
-        member _.Dissect(state: NodeInfoSettingsIngest, value: NodesInfo.NodeInfoIngestInfo) =
+        member _.Dissect(state: Types.NodeInfoSettingsIngest, value: Types.NodeInfoIngestInfo) =
             { state with Dissect = Some value }
 
         [<CustomOperation("setSecurityUser")>]
-        member _.SetSecurityUser(state: NodeInfoSettingsIngest, value: NodesInfo.NodeInfoIngestInfo) =
+        member _.SetSecurityUser(state: Types.NodeInfoSettingsIngest, value: Types.NodeInfoIngestInfo) =
             { state with SetSecurityUser = Some value }
 
         [<CustomOperation("pipeline")>]
-        member _.Pipeline(state: NodeInfoSettingsIngest, value: NodesInfo.NodeInfoIngestInfo) =
+        member _.Pipeline(state: Types.NodeInfoSettingsIngest, value: Types.NodeInfoIngestInfo) =
             { state with Pipeline = Some value }
 
         [<CustomOperation("drop")>]
-        member _.Drop(state: NodeInfoSettingsIngest, value: NodesInfo.NodeInfoIngestInfo) =
+        member _.Drop(state: Types.NodeInfoSettingsIngest, value: Types.NodeInfoIngestInfo) =
             { state with Drop = Some value }
 
         [<CustomOperation("circle")>]
-        member _.Circle(state: NodeInfoSettingsIngest, value: NodesInfo.NodeInfoIngestInfo) =
+        member _.Circle(state: Types.NodeInfoSettingsIngest, value: Types.NodeInfoIngestInfo) =
             { state with Circle = Some value }
 
         [<CustomOperation("inference")>]
-        member _.Inference(state: NodeInfoSettingsIngest, value: NodesInfo.NodeInfoIngestInfo) =
+        member _.Inference(state: Types.NodeInfoSettingsIngest, value: Types.NodeInfoIngestInfo) =
             { state with Inference = Some value }
 
     let nodeInfoSettingsIngest = NodeInfoSettingsIngestBuilder()
 
     type NodeInfoSettingsTransportBuilder() =
-        member _.Yield(_: unit) : NodeInfoSettingsTransport =
+        member _.Yield(_: unit) : Types.NodeInfoSettingsTransport =
             {
                 Type = Unchecked.defaultof<_>
                 TypeDefault = None
@@ -585,25 +585,25 @@ module NodesInfoBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: NodeInfoSettingsTransport, value: NodesInfo.NodeInfoSettingsTransportType) =
+        member _.Type(state: Types.NodeInfoSettingsTransport, value: Types.NodeInfoSettingsTransportType) =
             { state with Type = value }
 
         [<CustomOperation("typeDefault")>]
-        member _.TypeDefault(state: NodeInfoSettingsTransport, value: string) =
+        member _.TypeDefault(state: Types.NodeInfoSettingsTransport, value: string) =
             { state with TypeDefault = Some value }
 
         [<CustomOperation("features")>]
-        member _.Features(state: NodeInfoSettingsTransport, value: NodesInfo.NodeInfoSettingsTransportFeatures) =
+        member _.Features(state: Types.NodeInfoSettingsTransport, value: Types.NodeInfoSettingsTransportFeatures) =
             { state with Features = Some value }
 
         [<CustomOperation("ignoreDeserializationErrors")>]
-        member _.IgnoreDeserializationErrors(state: NodeInfoSettingsTransport, value: CoreTypes.Stringified<bool>) =
+        member _.IgnoreDeserializationErrors(state: Types.NodeInfoSettingsTransport, value: Types.Stringified<bool>) =
             { state with IgnoreDeserializationErrors = Some value }
 
     let nodeInfoSettingsTransport = NodeInfoSettingsTransportBuilder()
 
     type NodeInfoXpackBuilder() =
-        member _.Yield(_: unit) : NodeInfoXpack =
+        member _.Yield(_: unit) : Types.NodeInfoXpack =
             {
                 License = None
                 Security = Unchecked.defaultof<_>
@@ -612,25 +612,25 @@ module NodesInfoBuilders =
             }
 
         [<CustomOperation("license")>]
-        member _.License(state: NodeInfoXpack, value: NodesInfo.NodeInfoXpackLicense) =
+        member _.License(state: Types.NodeInfoXpack, value: Types.NodeInfoXpackLicense) =
             { state with License = Some value }
 
         [<CustomOperation("security")>]
-        member _.Security(state: NodeInfoXpack, value: NodesInfo.NodeInfoXpackSecurity) =
+        member _.Security(state: Types.NodeInfoXpack, value: Types.NodeInfoXpackSecurity) =
             { state with Security = value }
 
         [<CustomOperation("notification")>]
-        member _.Notification(state: NodeInfoXpack, value: Map<string, System.Text.Json.JsonElement>) =
+        member _.Notification(state: Types.NodeInfoXpack, value: Map<string, System.Text.Json.JsonElement>) =
             { state with Notification = Some value }
 
         [<CustomOperation("ml")>]
-        member _.Ml(state: NodeInfoXpack, value: NodesInfo.NodeInfoXpackMl) =
+        member _.Ml(state: Types.NodeInfoXpack, value: Types.NodeInfoXpackMl) =
             { state with Ml = Some value }
 
     let nodeInfoXpack = NodeInfoXpackBuilder()
 
     type NodeInfoXpackSecurityBuilder() =
-        member _.Yield(_: unit) : NodeInfoXpackSecurity =
+        member _.Yield(_: unit) : Types.NodeInfoXpackSecurity =
             {
                 Http = None
                 Enabled = Unchecked.defaultof<_>
@@ -639,42 +639,42 @@ module NodesInfoBuilders =
             }
 
         [<CustomOperation("http")>]
-        member _.Http(state: NodeInfoXpackSecurity, value: NodesInfo.NodeInfoXpackSecuritySsl) =
+        member _.Http(state: Types.NodeInfoXpackSecurity, value: Types.NodeInfoXpackSecuritySsl) =
             { state with Http = Some value }
 
         [<CustomOperation("enabled")>]
-        member _.Enabled(state: NodeInfoXpackSecurity, value: string) =
+        member _.Enabled(state: Types.NodeInfoXpackSecurity, value: string) =
             { state with Enabled = value }
 
         [<CustomOperation("transport")>]
-        member _.Transport(state: NodeInfoXpackSecurity, value: NodesInfo.NodeInfoXpackSecuritySsl) =
+        member _.Transport(state: Types.NodeInfoXpackSecurity, value: Types.NodeInfoXpackSecuritySsl) =
             { state with Transport = Some value }
 
         [<CustomOperation("authc")>]
-        member _.Authc(state: NodeInfoXpackSecurity, value: NodesInfo.NodeInfoXpackSecurityAuthc) =
+        member _.Authc(state: Types.NodeInfoXpackSecurity, value: Types.NodeInfoXpackSecurityAuthc) =
             { state with Authc = Some value }
 
     let nodeInfoXpackSecurity = NodeInfoXpackSecurityBuilder()
 
     type NodeInfoXpackSecurityAuthcBuilder() =
-        member _.Yield(_: unit) : NodeInfoXpackSecurityAuthc =
+        member _.Yield(_: unit) : Types.NodeInfoXpackSecurityAuthc =
             {
                 Realms = None
                 Token = None
             }
 
         [<CustomOperation("realms")>]
-        member _.Realms(state: NodeInfoXpackSecurityAuthc, value: NodesInfo.NodeInfoXpackSecurityAuthcRealms) =
+        member _.Realms(state: Types.NodeInfoXpackSecurityAuthc, value: Types.NodeInfoXpackSecurityAuthcRealms) =
             { state with Realms = Some value }
 
         [<CustomOperation("token")>]
-        member _.Token(state: NodeInfoXpackSecurityAuthc, value: NodesInfo.NodeInfoXpackSecurityAuthcToken) =
+        member _.Token(state: Types.NodeInfoXpackSecurityAuthc, value: Types.NodeInfoXpackSecurityAuthcToken) =
             { state with Token = Some value }
 
     let nodeInfoXpackSecurityAuthc = NodeInfoXpackSecurityAuthcBuilder()
 
     type NodeInfoXpackSecurityAuthcRealmsBuilder() =
-        member _.Yield(_: unit) : NodeInfoXpackSecurityAuthcRealms =
+        member _.Yield(_: unit) : Types.NodeInfoXpackSecurityAuthcRealms =
             {
                 File = None
                 Native = None
@@ -682,21 +682,21 @@ module NodesInfoBuilders =
             }
 
         [<CustomOperation("file")>]
-        member _.File(state: NodeInfoXpackSecurityAuthcRealms, value: Map<string, NodesInfo.NodeInfoXpackSecurityAuthcRealmsStatus>) =
+        member _.File(state: Types.NodeInfoXpackSecurityAuthcRealms, value: Map<string, Types.NodeInfoXpackSecurityAuthcRealmsStatus>) =
             { state with File = Some value }
 
         [<CustomOperation("native")>]
-        member _.Native(state: NodeInfoXpackSecurityAuthcRealms, value: Map<string, NodesInfo.NodeInfoXpackSecurityAuthcRealmsStatus>) =
+        member _.Native(state: Types.NodeInfoXpackSecurityAuthcRealms, value: Map<string, Types.NodeInfoXpackSecurityAuthcRealmsStatus>) =
             { state with Native = Some value }
 
         [<CustomOperation("pki")>]
-        member _.Pki(state: NodeInfoXpackSecurityAuthcRealms, value: Map<string, NodesInfo.NodeInfoXpackSecurityAuthcRealmsStatus>) =
+        member _.Pki(state: Types.NodeInfoXpackSecurityAuthcRealms, value: Map<string, Types.NodeInfoXpackSecurityAuthcRealmsStatus>) =
             { state with Pki = Some value }
 
     let nodeInfoXpackSecurityAuthcRealms = NodeInfoXpackSecurityAuthcRealmsBuilder()
 
     type NodeOperatingSystemInfoBuilder() =
-        member _.Yield(_: unit) : NodeOperatingSystemInfo =
+        member _.Yield(_: unit) : Types.NodeOperatingSystemInfo =
             {
                 Arch = Unchecked.defaultof<_>
                 AvailableProcessors = Unchecked.defaultof<_>
@@ -711,49 +711,49 @@ module NodesInfoBuilders =
             }
 
         [<CustomOperation("arch")>]
-        member _.Arch(state: NodeOperatingSystemInfo, value: string) =
+        member _.Arch(state: Types.NodeOperatingSystemInfo, value: string) =
             { state with Arch = value }
 
         [<CustomOperation("availableProcessors")>]
-        member _.AvailableProcessors(state: NodeOperatingSystemInfo, value: CoreTypes.Integer) =
+        member _.AvailableProcessors(state: Types.NodeOperatingSystemInfo, value: Types.Integer) =
             { state with AvailableProcessors = value }
 
         [<CustomOperation("allocatedProcessors")>]
-        member _.AllocatedProcessors(state: NodeOperatingSystemInfo, value: CoreTypes.Integer) =
+        member _.AllocatedProcessors(state: Types.NodeOperatingSystemInfo, value: Types.Integer) =
             { state with AllocatedProcessors = Some value }
 
         [<CustomOperation("name")>]
-        member _.Name(state: NodeOperatingSystemInfo, value: CoreTypes.Name) =
+        member _.Name(state: Types.NodeOperatingSystemInfo, value: Types.Name) =
             { state with Name = value }
 
         [<CustomOperation("prettyName")>]
-        member _.PrettyName(state: NodeOperatingSystemInfo, value: CoreTypes.Name) =
+        member _.PrettyName(state: Types.NodeOperatingSystemInfo, value: Types.Name) =
             { state with PrettyName = value }
 
         [<CustomOperation("refreshIntervalInMillis")>]
-        member _.RefreshIntervalInMillis(state: NodeOperatingSystemInfo, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
+        member _.RefreshIntervalInMillis(state: Types.NodeOperatingSystemInfo, value: Types.DurationValue<Types.UnitMillis>) =
             { state with RefreshIntervalInMillis = value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: NodeOperatingSystemInfo, value: CoreTypes.VersionString) =
+        member _.Version(state: Types.NodeOperatingSystemInfo, value: Types.VersionString) =
             { state with Version = value }
 
         [<CustomOperation("cpu")>]
-        member _.Cpu(state: NodeOperatingSystemInfo, value: NodesInfo.NodeInfoOSCPU) =
+        member _.Cpu(state: Types.NodeOperatingSystemInfo, value: Types.NodeInfoOSCPU) =
             { state with Cpu = Some value }
 
         [<CustomOperation("mem")>]
-        member _.Mem(state: NodeOperatingSystemInfo, value: NodesInfo.NodeInfoMemory) =
+        member _.Mem(state: Types.NodeOperatingSystemInfo, value: Types.NodeInfoMemory) =
             { state with Mem = Some value }
 
         [<CustomOperation("swap")>]
-        member _.Swap(state: NodeOperatingSystemInfo, value: NodesInfo.NodeInfoMemory) =
+        member _.Swap(state: Types.NodeOperatingSystemInfo, value: Types.NodeInfoMemory) =
             { state with Swap = Some value }
 
     let nodeOperatingSystemInfo = NodeOperatingSystemInfoBuilder()
 
     type NodeThreadPoolInfoBuilder() =
-        member _.Yield(_: unit) : NodeThreadPoolInfo =
+        member _.Yield(_: unit) : Types.NodeThreadPoolInfo =
             {
                 Core = None
                 KeepAlive = None
@@ -764,27 +764,27 @@ module NodesInfoBuilders =
             }
 
         [<CustomOperation("core")>]
-        member _.Core(state: NodeThreadPoolInfo, value: CoreTypes.Integer) =
+        member _.Core(state: Types.NodeThreadPoolInfo, value: Types.Integer) =
             { state with Core = Some value }
 
         [<CustomOperation("keepAlive")>]
-        member _.KeepAlive(state: NodeThreadPoolInfo, value: CoreTypes.Duration) =
+        member _.KeepAlive(state: Types.NodeThreadPoolInfo, value: Types.Duration) =
             { state with KeepAlive = Some value }
 
         [<CustomOperation("max")>]
-        member _.Max(state: NodeThreadPoolInfo, value: CoreTypes.Integer) =
+        member _.Max(state: Types.NodeThreadPoolInfo, value: Types.Integer) =
             { state with Max = Some value }
 
         [<CustomOperation("queueSize")>]
-        member _.QueueSize(state: NodeThreadPoolInfo, value: CoreTypes.Integer) =
+        member _.QueueSize(state: Types.NodeThreadPoolInfo, value: Types.Integer) =
             { state with QueueSize = value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: NodeThreadPoolInfo, value: CoreTypes.Integer) =
+        member _.Size(state: Types.NodeThreadPoolInfo, value: Types.Integer) =
             { state with Size = Some value }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: NodeThreadPoolInfo, value: string) =
+        member _.Type(state: Types.NodeThreadPoolInfo, value: string) =
             { state with Type = value }
 
     let nodeThreadPoolInfo = NodeThreadPoolInfoBuilder()

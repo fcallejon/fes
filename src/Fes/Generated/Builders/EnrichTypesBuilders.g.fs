@@ -4,13 +4,13 @@ namespace Fes.Generated.Builders
 
 
 open System.Text.Json.Serialization
-open Fes.Generated.Types
+open Fes.Generated
 
 [<AutoOpen>]
 module EnrichTypesBuilders =
 
-    type PolicyBuilder() =
-        member _.Yield(_: unit) : Policy =
+    type EnrichTypesPolicyBuilder() =
+        member _.Yield(_: unit) : Types.EnrichTypesPolicy =
             {
                 EnrichFields = Unchecked.defaultof<_>
                 Indices = Unchecked.defaultof<_>
@@ -21,28 +21,28 @@ module EnrichTypesBuilders =
             }
 
         [<CustomOperation("enrichFields")>]
-        member _.EnrichFields(state: Policy, value: CoreTypes.Fields) =
+        member _.EnrichFields(state: Types.EnrichTypesPolicy, value: Types.Fields) =
             { state with EnrichFields = value }
 
         [<CustomOperation("indices")>]
-        member _.Indices(state: Policy, value: CoreTypes.Indices) =
+        member _.Indices(state: Types.EnrichTypesPolicy, value: Types.Indices) =
             { state with Indices = value }
 
         [<CustomOperation("matchField")>]
-        member _.MatchField(state: Policy, value: CoreTypes.Field) =
+        member _.MatchField(state: Types.EnrichTypesPolicy, value: Types.Field) =
             { state with MatchField = value }
 
         [<CustomOperation("query")>]
-        member _.Query(state: Policy, value: CoreTypes.QueryContainer) =
+        member _.Query(state: Types.EnrichTypesPolicy, value: Types.QueryContainer) =
             { state with Query = Some value }
 
         [<CustomOperation("name")>]
-        member _.Name(state: Policy, value: CoreTypes.Name) =
+        member _.Name(state: Types.EnrichTypesPolicy, value: Types.Name) =
             { state with Name = Some value }
 
         [<CustomOperation("elasticsearchVersion")>]
-        member _.ElasticsearchVersion(state: Policy, value: string) =
+        member _.ElasticsearchVersion(state: Types.EnrichTypesPolicy, value: string) =
             { state with ElasticsearchVersion = Some value }
 
-    let policy = PolicyBuilder()
+    let enrichTypesPolicy = EnrichTypesPolicyBuilder()
 

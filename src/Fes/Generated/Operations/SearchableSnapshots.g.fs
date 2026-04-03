@@ -7,12 +7,13 @@ open System
 open System.Text.Json
 open System.Text.Json.Serialization
 open Fes
+open Fes.Generated
 
 [<AutoOpen>]
 module SearchableSnapshotsOperations =
 
     type SearchableSnapshotsCacheStatsRequest = {
-        NodeId: CoreTypes.NodeIds
+        NodeId: Types.NodeIds
     }
 
         with
@@ -35,14 +36,14 @@ module SearchableSnapshotsOperations =
             }
 
         [<CustomOperation("nodeId")>]
-        member _.NodeId(state: SearchableSnapshotsCacheStatsRequest, value: CoreTypes.NodeIds) =
+        member _.NodeId(state: SearchableSnapshotsCacheStatsRequest, value: Types.NodeIds) =
             { state with NodeId = value }
 
     let searchableSnapshotsCacheStatsRequest = SearchableSnapshotsCacheStatsRequestBuilder()
 
     type SearchableSnapshotsClearCacheRequest = {
-        Index: CoreTypes.Indices
-        ExpandWildcards: CoreTypes.ExpandWildcards option
+        Index: Types.Indices
+        ExpandWildcards: Types.ExpandWildcards option
         AllowNoIndices: bool option
         IgnoreUnavailable: bool option
     }
@@ -79,11 +80,11 @@ module SearchableSnapshotsOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: SearchableSnapshotsClearCacheRequest, value: CoreTypes.Indices) =
+        member _.Index(state: SearchableSnapshotsClearCacheRequest, value: Types.Indices) =
             { state with Index = value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: SearchableSnapshotsClearCacheRequest, value: CoreTypes.ExpandWildcards) =
+        member _.ExpandWildcards(state: SearchableSnapshotsClearCacheRequest, value: Types.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("allowNoIndices")>]
@@ -97,7 +98,7 @@ module SearchableSnapshotsOperations =
     let searchableSnapshotsClearCacheRequest = SearchableSnapshotsClearCacheRequestBuilder()
 
     module ClearCache =
-        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: SearchableSnapshotsClearCacheRequest) =
+        let withExpandWildcards (value: Types.ExpandWildcards) (req: SearchableSnapshotsClearCacheRequest) =
             { req with ExpandWildcards = Some value }
         let withAllowNoIndices (value: bool) (req: SearchableSnapshotsClearCacheRequest) =
             { req with AllowNoIndices = Some value }
@@ -105,13 +106,13 @@ module SearchableSnapshotsOperations =
             { req with IgnoreUnavailable = Some value }
 
     type SearchableSnapshotsMountRequest = {
-        Repository: CoreTypes.Name
-        Snapshot: CoreTypes.Name
-        MasterTimeout: CoreTypes.Duration option
+        Repository: Types.Name
+        Snapshot: Types.Name
+        MasterTimeout: Types.Duration option
         WaitForCompletion: bool option
-        Storage: SearchableSnapshotsMount.StorageOption option
-        Index: CoreTypes.IndexName
-        RenamedIndex: CoreTypes.IndexName option
+        Storage: Types.StorageOption option
+        Index: Types.IndexName
+        RenamedIndex: Types.IndexName option
         IndexSettings: Map<string, System.Text.Json.JsonElement> option
         IgnoreIndexSettings: string list option
     }
@@ -154,15 +155,15 @@ module SearchableSnapshotsOperations =
             }
 
         [<CustomOperation("repository")>]
-        member _.Repository(state: SearchableSnapshotsMountRequest, value: CoreTypes.Name) =
+        member _.Repository(state: SearchableSnapshotsMountRequest, value: Types.Name) =
             { state with Repository = value }
 
         [<CustomOperation("snapshot")>]
-        member _.Snapshot(state: SearchableSnapshotsMountRequest, value: CoreTypes.Name) =
+        member _.Snapshot(state: SearchableSnapshotsMountRequest, value: Types.Name) =
             { state with Snapshot = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: SearchableSnapshotsMountRequest, value: CoreTypes.Duration) =
+        member _.MasterTimeout(state: SearchableSnapshotsMountRequest, value: Types.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("waitForCompletion")>]
@@ -170,15 +171,15 @@ module SearchableSnapshotsOperations =
             { state with WaitForCompletion = Some value }
 
         [<CustomOperation("storage")>]
-        member _.Storage(state: SearchableSnapshotsMountRequest, value: SearchableSnapshotsMount.StorageOption) =
+        member _.Storage(state: SearchableSnapshotsMountRequest, value: Types.StorageOption) =
             { state with Storage = Some value }
 
         [<CustomOperation("index")>]
-        member _.Index(state: SearchableSnapshotsMountRequest, value: CoreTypes.IndexName) =
+        member _.Index(state: SearchableSnapshotsMountRequest, value: Types.IndexName) =
             { state with Index = value }
 
         [<CustomOperation("renamedIndex")>]
-        member _.RenamedIndex(state: SearchableSnapshotsMountRequest, value: CoreTypes.IndexName) =
+        member _.RenamedIndex(state: SearchableSnapshotsMountRequest, value: Types.IndexName) =
             { state with RenamedIndex = Some value }
 
         [<CustomOperation("indexSettings")>]
@@ -192,15 +193,15 @@ module SearchableSnapshotsOperations =
     let searchableSnapshotsMountRequest = SearchableSnapshotsMountRequestBuilder()
 
     module Mount =
-        let withMasterTimeout (value: CoreTypes.Duration) (req: SearchableSnapshotsMountRequest) =
+        let withMasterTimeout (value: Types.Duration) (req: SearchableSnapshotsMountRequest) =
             { req with MasterTimeout = Some value }
         let withWaitForCompletion (value: bool) (req: SearchableSnapshotsMountRequest) =
             { req with WaitForCompletion = Some value }
-        let withStorage (value: SearchableSnapshotsMount.StorageOption) (req: SearchableSnapshotsMountRequest) =
+        let withStorage (value: Types.StorageOption) (req: SearchableSnapshotsMountRequest) =
             { req with Storage = Some value }
-        let withIndex (value: CoreTypes.IndexName) (req: SearchableSnapshotsMountRequest) =
+        let withIndex (value: Types.IndexName) (req: SearchableSnapshotsMountRequest) =
             { req with Index = value }
-        let withRenamedIndex (value: CoreTypes.IndexName) (req: SearchableSnapshotsMountRequest) =
+        let withRenamedIndex (value: Types.IndexName) (req: SearchableSnapshotsMountRequest) =
             { req with RenamedIndex = Some value }
         let withIndexSettings (value: Map<string, System.Text.Json.JsonElement>) (req: SearchableSnapshotsMountRequest) =
             { req with IndexSettings = Some value }
@@ -208,8 +209,8 @@ module SearchableSnapshotsOperations =
             { req with IgnoreIndexSettings = Some value }
 
     type SearchableSnapshotsStatsRequest = {
-        Index: CoreTypes.Indices
-        Level: SearchableSnapshotsTypes.StatsLevel option
+        Index: Types.Indices
+        Level: Types.StatsLevel option
     }
 
         with
@@ -240,16 +241,16 @@ module SearchableSnapshotsOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: SearchableSnapshotsStatsRequest, value: CoreTypes.Indices) =
+        member _.Index(state: SearchableSnapshotsStatsRequest, value: Types.Indices) =
             { state with Index = value }
 
         [<CustomOperation("level")>]
-        member _.Level(state: SearchableSnapshotsStatsRequest, value: SearchableSnapshotsTypes.StatsLevel) =
+        member _.Level(state: SearchableSnapshotsStatsRequest, value: Types.StatsLevel) =
             { state with Level = Some value }
 
     let searchableSnapshotsStatsRequest = SearchableSnapshotsStatsRequestBuilder()
 
     module Stats =
-        let withLevel (value: SearchableSnapshotsTypes.StatsLevel) (req: SearchableSnapshotsStatsRequest) =
+        let withLevel (value: Types.StatsLevel) (req: SearchableSnapshotsStatsRequest) =
             { req with Level = Some value }
 

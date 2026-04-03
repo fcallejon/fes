@@ -7,15 +7,16 @@ open System
 open System.Text.Json
 open System.Text.Json.Serialization
 open Fes
+open Fes.Generated
 
 [<AutoOpen>]
 module DanglingIndicesOperations =
 
     type DanglingIndicesDeleteDanglingIndexRequest = {
-        IndexUuid: CoreTypes.Uuid
+        IndexUuid: Types.Uuid
         AcceptDataLoss: bool option
-        MasterTimeout: CoreTypes.Duration option
-        Timeout: CoreTypes.Duration option
+        MasterTimeout: Types.Duration option
+        Timeout: Types.Duration option
     }
 
         with
@@ -38,7 +39,7 @@ module DanglingIndicesOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type DanglingIndicesDeleteDanglingIndexResponse = CoreTypes.AcknowledgedResponseBase
+    type DanglingIndicesDeleteDanglingIndexResponse = Types.AcknowledgedResponseBase
 
     type DanglingIndicesDeleteDanglingIndexRequestBuilder() =
         member _.Yield(_: unit) : DanglingIndicesDeleteDanglingIndexRequest =
@@ -50,7 +51,7 @@ module DanglingIndicesOperations =
             }
 
         [<CustomOperation("indexUuid")>]
-        member _.IndexUuid(state: DanglingIndicesDeleteDanglingIndexRequest, value: CoreTypes.Uuid) =
+        member _.IndexUuid(state: DanglingIndicesDeleteDanglingIndexRequest, value: Types.Uuid) =
             { state with IndexUuid = value }
 
         [<CustomOperation("acceptDataLoss")>]
@@ -58,11 +59,11 @@ module DanglingIndicesOperations =
             { state with AcceptDataLoss = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: DanglingIndicesDeleteDanglingIndexRequest, value: CoreTypes.Duration) =
+        member _.MasterTimeout(state: DanglingIndicesDeleteDanglingIndexRequest, value: Types.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: DanglingIndicesDeleteDanglingIndexRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: DanglingIndicesDeleteDanglingIndexRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
     let danglingIndicesDeleteDanglingIndexRequest = DanglingIndicesDeleteDanglingIndexRequestBuilder()
@@ -70,16 +71,16 @@ module DanglingIndicesOperations =
     module DeleteDanglingIndex =
         let withAcceptDataLoss (value: bool) (req: DanglingIndicesDeleteDanglingIndexRequest) =
             { req with AcceptDataLoss = Some value }
-        let withMasterTimeout (value: CoreTypes.Duration) (req: DanglingIndicesDeleteDanglingIndexRequest) =
+        let withMasterTimeout (value: Types.Duration) (req: DanglingIndicesDeleteDanglingIndexRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: DanglingIndicesDeleteDanglingIndexRequest) =
+        let withTimeout (value: Types.Duration) (req: DanglingIndicesDeleteDanglingIndexRequest) =
             { req with Timeout = Some value }
 
     type DanglingIndicesImportDanglingIndexRequest = {
-        IndexUuid: CoreTypes.Uuid
+        IndexUuid: Types.Uuid
         AcceptDataLoss: bool option
-        MasterTimeout: CoreTypes.Duration option
-        Timeout: CoreTypes.Duration option
+        MasterTimeout: Types.Duration option
+        Timeout: Types.Duration option
     }
 
         with
@@ -102,7 +103,7 @@ module DanglingIndicesOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type DanglingIndicesImportDanglingIndexResponse = CoreTypes.AcknowledgedResponseBase
+    type DanglingIndicesImportDanglingIndexResponse = Types.AcknowledgedResponseBase
 
     type DanglingIndicesImportDanglingIndexRequestBuilder() =
         member _.Yield(_: unit) : DanglingIndicesImportDanglingIndexRequest =
@@ -114,7 +115,7 @@ module DanglingIndicesOperations =
             }
 
         [<CustomOperation("indexUuid")>]
-        member _.IndexUuid(state: DanglingIndicesImportDanglingIndexRequest, value: CoreTypes.Uuid) =
+        member _.IndexUuid(state: DanglingIndicesImportDanglingIndexRequest, value: Types.Uuid) =
             { state with IndexUuid = value }
 
         [<CustomOperation("acceptDataLoss")>]
@@ -122,11 +123,11 @@ module DanglingIndicesOperations =
             { state with AcceptDataLoss = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: DanglingIndicesImportDanglingIndexRequest, value: CoreTypes.Duration) =
+        member _.MasterTimeout(state: DanglingIndicesImportDanglingIndexRequest, value: Types.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: DanglingIndicesImportDanglingIndexRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: DanglingIndicesImportDanglingIndexRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
     let danglingIndicesImportDanglingIndexRequest = DanglingIndicesImportDanglingIndexRequestBuilder()
@@ -134,9 +135,9 @@ module DanglingIndicesOperations =
     module ImportDanglingIndex =
         let withAcceptDataLoss (value: bool) (req: DanglingIndicesImportDanglingIndexRequest) =
             { req with AcceptDataLoss = Some value }
-        let withMasterTimeout (value: CoreTypes.Duration) (req: DanglingIndicesImportDanglingIndexRequest) =
+        let withMasterTimeout (value: Types.Duration) (req: DanglingIndicesImportDanglingIndexRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: DanglingIndicesImportDanglingIndexRequest) =
+        let withTimeout (value: Types.Duration) (req: DanglingIndicesImportDanglingIndexRequest) =
             { req with Timeout = Some value }
 
     type DanglingIndicesListDanglingIndicesRequest = | DanglingIndicesListDanglingIndicesRequest

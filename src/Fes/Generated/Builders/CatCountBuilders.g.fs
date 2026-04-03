@@ -4,13 +4,13 @@ namespace Fes.Generated.Builders
 
 
 open System.Text.Json.Serialization
-open Fes.Generated.Types
+open Fes.Generated
 
 [<AutoOpen>]
 module CatCountBuilders =
 
     type CountRecordBuilder() =
-        member _.Yield(_: unit) : CountRecord =
+        member _.Yield(_: unit) : Types.CountRecord =
             {
                 Epoch = None
                 Timestamp = None
@@ -18,15 +18,15 @@ module CatCountBuilders =
             }
 
         [<CustomOperation("epoch")>]
-        member _.Epoch(state: CountRecord, value: CoreTypes.Stringified<CoreTypes.EpochTime<CoreTypes.UnitSeconds>>) =
+        member _.Epoch(state: Types.CountRecord, value: Types.Stringified<Types.EpochTime<Types.UnitSeconds>>) =
             { state with Epoch = Some value }
 
         [<CustomOperation("timestamp")>]
-        member _.Timestamp(state: CountRecord, value: CoreTypes.TimeOfDay) =
+        member _.Timestamp(state: Types.CountRecord, value: Types.TimeOfDay) =
             { state with Timestamp = Some value }
 
         [<CustomOperation("count")>]
-        member _.Count(state: CountRecord, value: string) =
+        member _.Count(state: Types.CountRecord, value: string) =
             { state with Count = Some value }
 
     let countRecord = CountRecordBuilder()

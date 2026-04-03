@@ -4,13 +4,13 @@ namespace Fes.Generated.Builders
 
 
 open System.Text.Json.Serialization
-open Fes.Generated.Types
+open Fes.Generated
 
 [<AutoOpen>]
 module GlobalHealthReportBuilders =
 
     type BaseIndicatorBuilder() =
-        member _.Yield(_: unit) : BaseIndicator =
+        member _.Yield(_: unit) : Types.BaseIndicator =
             {
                 Status = Unchecked.defaultof<_>
                 Symptom = Unchecked.defaultof<_>
@@ -19,25 +19,25 @@ module GlobalHealthReportBuilders =
             }
 
         [<CustomOperation("status")>]
-        member _.Status(state: BaseIndicator, value: GlobalHealthReport.IndicatorHealthStatus) =
+        member _.Status(state: Types.BaseIndicator, value: Types.IndicatorHealthStatus) =
             { state with Status = value }
 
         [<CustomOperation("symptom")>]
-        member _.Symptom(state: BaseIndicator, value: string) =
+        member _.Symptom(state: Types.BaseIndicator, value: string) =
             { state with Symptom = value }
 
         [<CustomOperation("impacts")>]
-        member _.Impacts(state: BaseIndicator, value: GlobalHealthReport.Impact list) =
+        member _.Impacts(state: Types.BaseIndicator, value: Types.Impact list) =
             { state with Impacts = Some value }
 
         [<CustomOperation("diagnosis")>]
-        member _.Diagnosis(state: BaseIndicator, value: GlobalHealthReport.Diagnosis list) =
+        member _.Diagnosis(state: Types.BaseIndicator, value: Types.Diagnosis list) =
             { state with Diagnosis = Some value }
 
     let baseIndicator = BaseIndicatorBuilder()
 
     type DiagnosisAffectedResourcesBuilder() =
-        member _.Yield(_: unit) : DiagnosisAffectedResources =
+        member _.Yield(_: unit) : Types.DiagnosisAffectedResources =
             {
                 Indices = None
                 Nodes = None
@@ -47,29 +47,29 @@ module GlobalHealthReportBuilders =
             }
 
         [<CustomOperation("indices")>]
-        member _.Indices(state: DiagnosisAffectedResources, value: CoreTypes.Indices) =
+        member _.Indices(state: Types.DiagnosisAffectedResources, value: Types.Indices) =
             { state with Indices = Some value }
 
         [<CustomOperation("nodes")>]
-        member _.Nodes(state: DiagnosisAffectedResources, value: GlobalHealthReport.IndicatorNode list) =
+        member _.Nodes(state: Types.DiagnosisAffectedResources, value: Types.IndicatorNode list) =
             { state with Nodes = Some value }
 
         [<CustomOperation("slmPolicies")>]
-        member _.SlmPolicies(state: DiagnosisAffectedResources, value: string list) =
+        member _.SlmPolicies(state: Types.DiagnosisAffectedResources, value: string list) =
             { state with SlmPolicies = Some value }
 
         [<CustomOperation("featureStates")>]
-        member _.FeatureStates(state: DiagnosisAffectedResources, value: string list) =
+        member _.FeatureStates(state: Types.DiagnosisAffectedResources, value: string list) =
             { state with FeatureStates = Some value }
 
         [<CustomOperation("snapshotRepositories")>]
-        member _.SnapshotRepositories(state: DiagnosisAffectedResources, value: string list) =
+        member _.SnapshotRepositories(state: Types.DiagnosisAffectedResources, value: string list) =
             { state with SnapshotRepositories = Some value }
 
     let diagnosisAffectedResources = DiagnosisAffectedResourcesBuilder()
 
     type IndicatorsBuilder() =
-        member _.Yield(_: unit) : Indicators =
+        member _.Yield(_: unit) : Types.Indicators =
             {
                 MasterIsStable = None
                 ShardsAvailability = None
@@ -83,45 +83,45 @@ module GlobalHealthReportBuilders =
             }
 
         [<CustomOperation("masterIsStable")>]
-        member _.MasterIsStable(state: Indicators, value: GlobalHealthReport.MasterIsStableIndicator) =
+        member _.MasterIsStable(state: Types.Indicators, value: Types.MasterIsStableIndicator) =
             { state with MasterIsStable = Some value }
 
         [<CustomOperation("shardsAvailability")>]
-        member _.ShardsAvailability(state: Indicators, value: GlobalHealthReport.ShardsAvailabilityIndicator) =
+        member _.ShardsAvailability(state: Types.Indicators, value: Types.ShardsAvailabilityIndicator) =
             { state with ShardsAvailability = Some value }
 
         [<CustomOperation("disk")>]
-        member _.Disk(state: Indicators, value: GlobalHealthReport.DiskIndicator) =
+        member _.Disk(state: Types.Indicators, value: Types.DiskIndicator) =
             { state with Disk = Some value }
 
         [<CustomOperation("repositoryIntegrity")>]
-        member _.RepositoryIntegrity(state: Indicators, value: GlobalHealthReport.RepositoryIntegrityIndicator) =
+        member _.RepositoryIntegrity(state: Types.Indicators, value: Types.RepositoryIntegrityIndicator) =
             { state with RepositoryIntegrity = Some value }
 
         [<CustomOperation("dataStreamLifecycle")>]
-        member _.DataStreamLifecycle(state: Indicators, value: GlobalHealthReport.DataStreamLifecycleIndicator) =
+        member _.DataStreamLifecycle(state: Types.Indicators, value: Types.DataStreamLifecycleIndicator) =
             { state with DataStreamLifecycle = Some value }
 
         [<CustomOperation("ilm")>]
-        member _.Ilm(state: Indicators, value: GlobalHealthReport.IlmIndicator) =
+        member _.Ilm(state: Types.Indicators, value: Types.IlmIndicator) =
             { state with Ilm = Some value }
 
         [<CustomOperation("slm")>]
-        member _.Slm(state: Indicators, value: GlobalHealthReport.SlmIndicator) =
+        member _.Slm(state: Types.Indicators, value: Types.SlmIndicator) =
             { state with Slm = Some value }
 
         [<CustomOperation("shardsCapacity")>]
-        member _.ShardsCapacity(state: Indicators, value: GlobalHealthReport.ShardsCapacityIndicator) =
+        member _.ShardsCapacity(state: Types.Indicators, value: Types.ShardsCapacityIndicator) =
             { state with ShardsCapacity = Some value }
 
         [<CustomOperation("fileSettings")>]
-        member _.FileSettings(state: Indicators, value: GlobalHealthReport.FileSettingsIndicator) =
+        member _.FileSettings(state: Types.Indicators, value: Types.FileSettingsIndicator) =
             { state with FileSettings = Some value }
 
     let indicators = IndicatorsBuilder()
 
     type MasterIsStableIndicatorDetailsBuilder() =
-        member _.Yield(_: unit) : MasterIsStableIndicatorDetails =
+        member _.Yield(_: unit) : Types.MasterIsStableIndicatorDetails =
             {
                 CurrentMaster = Unchecked.defaultof<_>
                 RecentMasters = Unchecked.defaultof<_>
@@ -130,25 +130,25 @@ module GlobalHealthReportBuilders =
             }
 
         [<CustomOperation("currentMaster")>]
-        member _.CurrentMaster(state: MasterIsStableIndicatorDetails, value: GlobalHealthReport.IndicatorNode) =
+        member _.CurrentMaster(state: Types.MasterIsStableIndicatorDetails, value: Types.IndicatorNode) =
             { state with CurrentMaster = value }
 
         [<CustomOperation("recentMasters")>]
-        member _.RecentMasters(state: MasterIsStableIndicatorDetails, value: GlobalHealthReport.IndicatorNode list) =
+        member _.RecentMasters(state: Types.MasterIsStableIndicatorDetails, value: Types.IndicatorNode list) =
             { state with RecentMasters = value }
 
         [<CustomOperation("exceptionFetchingHistory")>]
-        member _.ExceptionFetchingHistory(state: MasterIsStableIndicatorDetails, value: GlobalHealthReport.MasterIsStableIndicatorExceptionFetchingHistory) =
+        member _.ExceptionFetchingHistory(state: Types.MasterIsStableIndicatorDetails, value: Types.MasterIsStableIndicatorExceptionFetchingHistory) =
             { state with ExceptionFetchingHistory = Some value }
 
         [<CustomOperation("clusterFormation")>]
-        member _.ClusterFormation(state: MasterIsStableIndicatorDetails, value: GlobalHealthReport.MasterIsStableIndicatorClusterFormationNode list) =
+        member _.ClusterFormation(state: Types.MasterIsStableIndicatorDetails, value: Types.MasterIsStableIndicatorClusterFormationNode list) =
             { state with ClusterFormation = Some value }
 
     let masterIsStableIndicatorDetails = MasterIsStableIndicatorDetailsBuilder()
 
     type RepositoryIntegrityIndicatorDetailsBuilder() =
-        member _.Yield(_: unit) : RepositoryIntegrityIndicatorDetails =
+        member _.Yield(_: unit) : Types.RepositoryIntegrityIndicatorDetails =
             {
                 TotalRepositories = None
                 CorruptedRepositories = None
@@ -156,15 +156,15 @@ module GlobalHealthReportBuilders =
             }
 
         [<CustomOperation("totalRepositories")>]
-        member _.TotalRepositories(state: RepositoryIntegrityIndicatorDetails, value: CoreTypes.Long) =
+        member _.TotalRepositories(state: Types.RepositoryIntegrityIndicatorDetails, value: Types.Long) =
             { state with TotalRepositories = Some value }
 
         [<CustomOperation("corruptedRepositories")>]
-        member _.CorruptedRepositories(state: RepositoryIntegrityIndicatorDetails, value: CoreTypes.Long) =
+        member _.CorruptedRepositories(state: Types.RepositoryIntegrityIndicatorDetails, value: Types.Long) =
             { state with CorruptedRepositories = Some value }
 
         [<CustomOperation("corrupted")>]
-        member _.Corrupted(state: RepositoryIntegrityIndicatorDetails, value: string list) =
+        member _.Corrupted(state: Types.RepositoryIntegrityIndicatorDetails, value: string list) =
             { state with Corrupted = Some value }
 
     let repositoryIntegrityIndicatorDetails = RepositoryIntegrityIndicatorDetailsBuilder()

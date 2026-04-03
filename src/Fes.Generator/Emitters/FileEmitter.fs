@@ -40,54 +40,70 @@ let emitTypeFile (index: TypeIndex.TypeIndex) (ns: string) (types: TypeDefinitio
     w.Dedent()
     filePath, w.ToString()
 
-/// Check if a namespace should be merged into the core types file
-let private isCoreTypeNamespace (ns: string) =
-    ns.StartsWith("_types") || ns = "_spec_utils"
+/// Build a name map: TypeName → unique F# name.
+/// Types in _types namespace keep short names, others get namespace-prefixed names.
+/// Duplicates always get prefixed.
+let buildNameMap (types: TypeDefinition list) : Map<TypeName, string> =
+    let emittable =
+        types |> List.filter (fun td ->
+            match td with
+            | TypeDefinition.Request _ | TypeDefinition.Response _ -> false
+            | _ -> true)
 
-/// Emit all type files.
-/// Core type namespaces (_types, _types.query_dsl, _types.mapping, etc.) are merged
-/// into a single file to handle circular cross-namespace dependencies.
+    // Collect all names and find duplicates
+    let allNames =
+        emittable
+        |> List.map (fun td -> TypeDefinition.name td)
+
+    let shortNameCounts =
+        allNames
+        |> List.countBy (fun tn -> Namespacing.toFSharpTypeName tn.Name)
+        |> Map.ofList
+
+    let mutable nameMap = Map.empty
+    for tn in allNames do
+        let shortName = Namespacing.toFSharpTypeName tn.Name
+        let isDuplicate = Map.tryFind shortName shortNameCounts |> Option.defaultValue 0 > 1
+        let fsharpName =
+            if isDuplicate then
+                // Always prefix duplicates
+                let prefix = Namespacing.toModuleName tn.Namespace
+                $"{prefix}{shortName}"
+            else
+                shortName
+        nameMap <- Map.add tn fsharpName nameMap
+    nameMap
+
+/// Emit all types into a single file to avoid cross-namespace circular dependencies.
 let emitAllTypeFiles (index: TypeIndex.TypeIndex) (types: TypeDefinition list) : (string * string) list =
-    let grouped = groupTypesByNamespace types
+    let allEmittableTypes =
+        types
+        |> List.filter (fun td ->
+            match td with
+            | TypeDefinition.Request _ | TypeDefinition.Response _ -> false
+            | _ -> true)
 
-    // Separate core types from the rest
-    let coreNamespaces, otherNamespaces =
-        grouped
-        |> Map.toList
-        |> List.partition (fun (ns, _) -> isCoreTypeNamespace ns)
+    let nameMap = buildNameMap types
+    let index = TypeIndex.withNameMap nameMap index
+    let sorted = DependencyGraph.topologicalSort allEmittableTypes
 
-    // Merge all core namespaces into one file with all types together
-    let coreFile =
-        if coreNamespaces.IsEmpty then []
-        else
-            let allCoreTypes = coreNamespaces |> List.collect snd
-            let sorted = DependencyGraph.topologicalSort allCoreTypes
+    let w = FSharpWriter.Writer()
+    w.Header()
+    w.Namespace "Fes.Generated"
+    w.BlankLine()
+    w.Open "System.Text.Json.Serialization"
+    w.BlankLine()
+    w.Line "module Types ="
+    w.BlankLine()
+    w.Indent()
 
-            let w = FSharpWriter.Writer()
-            w.Header()
-            w.Namespace "Fes.Generated.Types"
-            w.BlankLine()
-            w.Open "System.Text.Json.Serialization"
-            w.BlankLine()
-            // Emit each core namespace as a nested module within CoreTypes
-            // But to avoid self-reference issues, emit ALL types in one flat module
-            w.Line "module CoreTypes ="
-            w.BlankLine()
-            w.Indent()
+    let mergedNs = "__all__"
+    for group in sorted do
+        TypeEmitter.emitTypeGroup w index mergedNs group
 
-            // We need a merged namespace for resolution
-            let mergedNs = "_types"
-            for group in sorted do
-                TypeEmitter.emitTypeGroup w index mergedNs group
+    w.Dedent()
 
-            w.Dedent()
-            [ "Types/CoreTypes.g.fs", w.ToString() ]
-
-    let otherFiles =
-        otherNamespaces
-        |> List.map (fun (ns, nsTypes) -> emitTypeFile index ns nsTypes)
-
-    coreFile @ otherFiles
+    [ "Types/AllTypes.g.fs", w.ToString() ]
 
 /// Write files to disk
 let writeFiles (outputDir: string) (files: (string * string) list) =

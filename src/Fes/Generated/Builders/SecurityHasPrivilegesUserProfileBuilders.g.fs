@@ -4,13 +4,13 @@ namespace Fes.Generated.Builders
 
 
 open System.Text.Json.Serialization
-open Fes.Generated.Types
+open Fes.Generated
 
 [<AutoOpen>]
 module SecurityHasPrivilegesUserProfileBuilders =
 
     type PrivilegesCheckBuilder() =
-        member _.Yield(_: unit) : PrivilegesCheck =
+        member _.Yield(_: unit) : Types.PrivilegesCheck =
             {
                 Application = None
                 Cluster = None
@@ -18,15 +18,15 @@ module SecurityHasPrivilegesUserProfileBuilders =
             }
 
         [<CustomOperation("application")>]
-        member _.Application(state: PrivilegesCheck, value: SecurityHasPrivileges.ApplicationPrivilegesCheck list) =
+        member _.Application(state: Types.PrivilegesCheck, value: Types.ApplicationPrivilegesCheck list) =
             { state with Application = Some value }
 
         [<CustomOperation("cluster")>]
-        member _.Cluster(state: PrivilegesCheck, value: SecurityTypes.ClusterPrivilege list) =
+        member _.Cluster(state: Types.PrivilegesCheck, value: Types.ClusterPrivilege list) =
             { state with Cluster = Some value }
 
         [<CustomOperation("index")>]
-        member _.Index(state: PrivilegesCheck, value: SecurityHasPrivileges.IndexPrivilegesCheck list) =
+        member _.Index(state: Types.PrivilegesCheck, value: Types.IndexPrivilegesCheck list) =
             { state with Index = Some value }
 
     let privilegesCheck = PrivilegesCheckBuilder()

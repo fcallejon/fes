@@ -4,13 +4,13 @@ namespace Fes.Generated.Builders
 
 
 open System.Text.Json.Serialization
-open Fes.Generated.Types
+open Fes.Generated
 
 [<AutoOpen>]
 module SecurityGrantApiKeyBuilders =
 
     type GrantApiKeyBuilder() =
-        member _.Yield(_: unit) : GrantApiKey =
+        member _.Yield(_: unit) : Types.GrantApiKey =
             {
                 Name = Unchecked.defaultof<_>
                 Expiration = None
@@ -19,19 +19,19 @@ module SecurityGrantApiKeyBuilders =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: GrantApiKey, value: CoreTypes.Name) =
+        member _.Name(state: Types.GrantApiKey, value: Types.Name) =
             { state with Name = value }
 
         [<CustomOperation("expiration")>]
-        member _.Expiration(state: GrantApiKey, value: CoreTypes.DurationLarge) =
+        member _.Expiration(state: Types.GrantApiKey, value: Types.DurationLarge) =
             { state with Expiration = Some value }
 
         [<CustomOperation("roleDescriptors")>]
-        member _.RoleDescriptors(state: GrantApiKey, value: System.Text.Json.JsonElement) =
+        member _.RoleDescriptors(state: Types.GrantApiKey, value: System.Text.Json.JsonElement) =
             { state with RoleDescriptors = Some value }
 
         [<CustomOperation("metadata")>]
-        member _.Metadata(state: GrantApiKey, value: CoreTypes.Metadata) =
+        member _.Metadata(state: Types.GrantApiKey, value: Types.Metadata) =
             { state with Metadata = Some value }
 
     let grantApiKey = GrantApiKeyBuilder()
