@@ -17,16 +17,12 @@ module ProfilingOperations =
     }
 
         with
-        static member ToRequest(req: ProfilingFlamegraphRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_profiling/flamegraph"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req.Document
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ProfilingFlamegraphRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_profiling/flamegraph"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req.Document)
+            endpoint, ValueSome postData
 
     type ProfilingFlamegraphResponse = System.Text.Json.JsonElement
 
@@ -47,16 +43,12 @@ module ProfilingOperations =
     }
 
         with
-        static member ToRequest(req: ProfilingStacktracesRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_profiling/stacktraces"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req.Document
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ProfilingStacktracesRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_profiling/stacktraces"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req.Document)
+            endpoint, ValueSome postData
 
     type ProfilingStacktracesResponse = System.Text.Json.JsonElement
 
@@ -79,24 +71,20 @@ module ProfilingOperations =
     }
 
         with
-        static member ToRequest(req: ProfilingStatusRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_profiling/status"
-                let queryParams =
-                    [
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                        req.WaitForResourcesCreated |> Option.map (fun v -> "wait_for_resources_created", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ProfilingStatusRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_profiling/status"
+            let queryParams =
+                [
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                    req.WaitForResourcesCreated |> Option.map (fun v -> "wait_for_resources_created", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type ProfilingStatusResponse = System.Text.Json.JsonElement
 
@@ -135,16 +123,12 @@ module ProfilingOperations =
     }
 
         with
-        static member ToRequest(req: ProfilingTopnFunctionsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_profiling/topn/functions"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req.Document
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ProfilingTopnFunctionsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_profiling/topn/functions"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req.Document)
+            endpoint, ValueSome postData
 
     type ProfilingTopnFunctionsResponse = System.Text.Json.JsonElement
 

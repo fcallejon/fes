@@ -21,25 +21,21 @@ module TasksOperations =
     }
 
         with
-        static member ToRequest(req: TasksCancelRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_tasks/{req.TaskId}/_cancel"
-                let queryParams =
-                    [
-                        req.Actions |> Option.map (fun v -> "actions", Fes.Http.toQueryValue v)
-                        req.Nodes |> Option.map (fun v -> "nodes", Fes.Http.toQueryValue v)
-                        req.ParentTaskId |> Option.map (fun v -> "parent_task_id", Fes.Http.toQueryValue v)
-                        req.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: TasksCancelRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_tasks/{req.TaskId}/_cancel"
+            let queryParams =
+                [
+                    req.Actions |> Option.map (fun v -> "actions", Fes.Http.toQueryValue v)
+                    req.Nodes |> Option.map (fun v -> "nodes", Fes.Http.toQueryValue v)
+                    req.ParentTaskId |> Option.map (fun v -> "parent_task_id", Fes.Http.toQueryValue v)
+                    req.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            endpoint, ValueNone
 
     type TasksCancelResponse = Types.TaskListResponseBase
 
@@ -92,23 +88,19 @@ module TasksOperations =
     }
 
         with
-        static member ToRequest(req: TasksGetRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_tasks/{req.TaskId}"
-                let queryParams =
-                    [
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                        req.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: TasksGetRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_tasks/{req.TaskId}"
+            let queryParams =
+                [
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                    req.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type TasksGetResponse = System.Text.Json.JsonElement
 
@@ -151,28 +143,24 @@ module TasksOperations =
     }
 
         with
-        static member ToRequest(req: TasksListRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_tasks"
-                let queryParams =
-                    [
-                        req.Actions |> Option.map (fun v -> "actions", Fes.Http.toQueryValue v)
-                        req.Detailed |> Option.map (fun v -> "detailed", Fes.Http.toQueryValue v)
-                        req.GroupBy |> Option.map (fun v -> "group_by", Fes.Http.toQueryValue v)
-                        req.Nodes |> Option.map (fun v -> "nodes", Fes.Http.toQueryValue v)
-                        req.ParentTaskId |> Option.map (fun v -> "parent_task_id", Fes.Http.toQueryValue v)
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                        req.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: TasksListRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_tasks"
+            let queryParams =
+                [
+                    req.Actions |> Option.map (fun v -> "actions", Fes.Http.toQueryValue v)
+                    req.Detailed |> Option.map (fun v -> "detailed", Fes.Http.toQueryValue v)
+                    req.GroupBy |> Option.map (fun v -> "group_by", Fes.Http.toQueryValue v)
+                    req.Nodes |> Option.map (fun v -> "nodes", Fes.Http.toQueryValue v)
+                    req.ParentTaskId |> Option.map (fun v -> "parent_task_id", Fes.Http.toQueryValue v)
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                    req.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type TasksListResponse = Types.TaskListResponseBase
 

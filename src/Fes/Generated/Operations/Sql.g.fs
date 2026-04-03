@@ -18,16 +18,12 @@ module SqlOperations =
     }
 
         with
-        static member ToRequest(req: SqlClearCursorRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_sql/close"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SqlClearCursorRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_sql/close"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type SqlClearCursorResponse = System.Text.Json.JsonElement
 
@@ -52,15 +48,11 @@ module SqlOperations =
     }
 
         with
-        static member ToRequest(req: SqlDeleteAsyncRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_sql/async/delete/{req.Id}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SqlDeleteAsyncRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_sql/async/delete/{req.Id}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
+            endpoint, ValueNone
 
     type SqlDeleteAsyncResponse = Types.AcknowledgedResponseBase
 
@@ -85,25 +77,21 @@ module SqlOperations =
     }
 
         with
-        static member ToRequest(req: SqlGetAsyncRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_sql/async/{req.Id}"
-                let queryParams =
-                    [
-                        req.Delimiter |> Option.map (fun v -> "delimiter", Fes.Http.toQueryValue v)
-                        req.Format |> Option.map (fun v -> "format", Fes.Http.toQueryValue v)
-                        req.KeepAlive |> Option.map (fun v -> "keep_alive", Fes.Http.toQueryValue v)
-                        req.WaitForCompletionTimeout |> Option.map (fun v -> "wait_for_completion_timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SqlGetAsyncRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_sql/async/{req.Id}"
+            let queryParams =
+                [
+                    req.Delimiter |> Option.map (fun v -> "delimiter", Fes.Http.toQueryValue v)
+                    req.Format |> Option.map (fun v -> "format", Fes.Http.toQueryValue v)
+                    req.KeepAlive |> Option.map (fun v -> "keep_alive", Fes.Http.toQueryValue v)
+                    req.WaitForCompletionTimeout |> Option.map (fun v -> "wait_for_completion_timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type SqlGetAsyncResponse = System.Text.Json.JsonElement
 
@@ -154,15 +142,11 @@ module SqlOperations =
     }
 
         with
-        static member ToRequest(req: SqlGetAsyncStatusRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_sql/async/status/{req.Id}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SqlGetAsyncStatusRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_sql/async/status/{req.Id}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type SqlGetAsyncStatusResponse = System.Text.Json.JsonElement
 
@@ -219,23 +203,19 @@ module SqlOperations =
     }
 
         with
-        static member ToRequest(req: SqlQueryRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_sql"
-                let queryParams =
-                    [
-                        req.Format |> Option.map (fun v -> "format", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SqlQueryRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_sql"
+            let queryParams =
+                [
+                    req.Format |> Option.map (fun v -> "format", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type SqlQueryResponse = System.Text.Json.JsonElement
 
@@ -393,16 +373,12 @@ module SqlOperations =
     }
 
         with
-        static member ToRequest(req: SqlTranslateRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_sql/translate"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SqlTranslateRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_sql/translate"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type SqlTranslateResponse = System.Text.Json.JsonElement
 

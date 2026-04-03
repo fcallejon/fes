@@ -24,16 +24,12 @@ let emitESModule (index: TypeIndex.TypeIndex) : string * string =
             if parts.Length > 1 then Some (Namespacing.toPascalCase parts[0])
             else None)
 
-    w.Line "module ES ="
+    w.Line "module Endpoints ="
     w.BlankLine()
     w.Indent()
 
-    // send function
-    w.Line "let inline send (client: System.Net.Http.HttpClient) (request: ^T) ="
-    w.Line "    let arrow ="
-    w.Line "        client.SendAsync >> TaskResult.ofTask"
-    w.Line "        |> ElasticsearchClient.execute"
-    w.Line "    arrow request"
+    // Note: ES.connect, ES.sendAsync etc. are defined in Transport.fs
+    // This generated module only contains verb-first endpoint functions
     w.BlankLine()
 
     // Global endpoints (no namespace prefix)

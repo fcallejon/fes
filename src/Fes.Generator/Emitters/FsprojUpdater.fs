@@ -45,6 +45,7 @@ let updateFsproj (fsprojPath: string) (generatedDir: string) =
     sb.AppendLine("""        <RootNamespace>Fes</RootNamespace>""") |> ignore
     sb.AppendLine("""    </PropertyGroup>""") |> ignore
     sb.AppendLine("""    <ItemGroup>""") |> ignore
+    sb.AppendLine("""        <PackageReference Include="Elastic.Transport"/>""") |> ignore
     sb.AppendLine("""        <PackageReference Include="FSharp.Core"/>""") |> ignore
     sb.AppendLine("""        <PackageReference Include="FSharp.SystemTextJson"/>""") |> ignore
     sb.AppendLine("""    </ItemGroup>""") |> ignore
@@ -64,6 +65,7 @@ let updateFsproj (fsprojPath: string) (generatedDir: string) =
     sb.AppendLine("""        <!-- Core library files (after types/converters) -->""") |> ignore
     sb.AppendLine("""        <Compile Include="Json.fs"/>""") |> ignore
     sb.AppendLine("""        <Compile Include="Http.fs"/>""") |> ignore
+    sb.AppendLine("""        <Compile Include="Transport.fs"/>""") |> ignore
     sb.AppendLine("""        <!-- Generated builders -->""") |> ignore
     for f in builderFiles do
         sb.AppendLine($"        <Compile Include=\"{f}\"/>") |> ignore

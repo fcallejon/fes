@@ -31,34 +31,30 @@ module TextStructureOperations =
     }
 
         with
-        static member ToRequest(req: TextStructureFindFieldStructureRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_text_structure/find_field_structure"
-                let queryParams =
-                    [
-                        req.ColumnNames |> Option.map (fun v -> "column_names", Fes.Http.toQueryValue v)
-                        req.Delimiter |> Option.map (fun v -> "delimiter", Fes.Http.toQueryValue v)
-                        req.DocumentsToSample |> Option.map (fun v -> "documents_to_sample", Fes.Http.toQueryValue v)
-                        req.EcsCompatibility |> Option.map (fun v -> "ecs_compatibility", Fes.Http.toQueryValue v)
-                        req.Explain |> Option.map (fun v -> "explain", Fes.Http.toQueryValue v)
-                        req.Format |> Option.map (fun v -> "format", Fes.Http.toQueryValue v)
-                        req.GrokPattern |> Option.map (fun v -> "grok_pattern", Fes.Http.toQueryValue v)
-                        req.Quote |> Option.map (fun v -> "quote", Fes.Http.toQueryValue v)
-                        req.ShouldTrimFields |> Option.map (fun v -> "should_trim_fields", Fes.Http.toQueryValue v)
-                        req.ShouldParseRecursively |> Option.map (fun v -> "should_parse_recursively", Fes.Http.toQueryValue v)
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                        req.TimestampField |> Option.map (fun v -> "timestamp_field", Fes.Http.toQueryValue v)
-                        req.TimestampFormat |> Option.map (fun v -> "timestamp_format", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: TextStructureFindFieldStructureRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_text_structure/find_field_structure"
+            let queryParams =
+                [
+                    req.ColumnNames |> Option.map (fun v -> "column_names", Fes.Http.toQueryValue v)
+                    req.Delimiter |> Option.map (fun v -> "delimiter", Fes.Http.toQueryValue v)
+                    req.DocumentsToSample |> Option.map (fun v -> "documents_to_sample", Fes.Http.toQueryValue v)
+                    req.EcsCompatibility |> Option.map (fun v -> "ecs_compatibility", Fes.Http.toQueryValue v)
+                    req.Explain |> Option.map (fun v -> "explain", Fes.Http.toQueryValue v)
+                    req.Format |> Option.map (fun v -> "format", Fes.Http.toQueryValue v)
+                    req.GrokPattern |> Option.map (fun v -> "grok_pattern", Fes.Http.toQueryValue v)
+                    req.Quote |> Option.map (fun v -> "quote", Fes.Http.toQueryValue v)
+                    req.ShouldTrimFields |> Option.map (fun v -> "should_trim_fields", Fes.Http.toQueryValue v)
+                    req.ShouldParseRecursively |> Option.map (fun v -> "should_parse_recursively", Fes.Http.toQueryValue v)
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                    req.TimestampField |> Option.map (fun v -> "timestamp_field", Fes.Http.toQueryValue v)
+                    req.TimestampFormat |> Option.map (fun v -> "timestamp_format", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type TextStructureFindFieldStructureResponse = System.Text.Json.JsonElement
 
@@ -194,34 +190,30 @@ module TextStructureOperations =
     }
 
         with
-        static member ToRequest(req: TextStructureFindMessageStructureRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_text_structure/find_message_structure"
-                let queryParams =
-                    [
-                        req.ColumnNames |> Option.map (fun v -> "column_names", Fes.Http.toQueryValue v)
-                        req.Delimiter |> Option.map (fun v -> "delimiter", Fes.Http.toQueryValue v)
-                        req.EcsCompatibility |> Option.map (fun v -> "ecs_compatibility", Fes.Http.toQueryValue v)
-                        req.Explain |> Option.map (fun v -> "explain", Fes.Http.toQueryValue v)
-                        req.Format |> Option.map (fun v -> "format", Fes.Http.toQueryValue v)
-                        req.GrokPattern |> Option.map (fun v -> "grok_pattern", Fes.Http.toQueryValue v)
-                        req.Quote |> Option.map (fun v -> "quote", Fes.Http.toQueryValue v)
-                        req.ShouldTrimFields |> Option.map (fun v -> "should_trim_fields", Fes.Http.toQueryValue v)
-                        req.ShouldParseRecursively |> Option.map (fun v -> "should_parse_recursively", Fes.Http.toQueryValue v)
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                        req.TimestampField |> Option.map (fun v -> "timestamp_field", Fes.Http.toQueryValue v)
-                        req.TimestampFormat |> Option.map (fun v -> "timestamp_format", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: TextStructureFindMessageStructureRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_text_structure/find_message_structure"
+            let queryParams =
+                [
+                    req.ColumnNames |> Option.map (fun v -> "column_names", Fes.Http.toQueryValue v)
+                    req.Delimiter |> Option.map (fun v -> "delimiter", Fes.Http.toQueryValue v)
+                    req.EcsCompatibility |> Option.map (fun v -> "ecs_compatibility", Fes.Http.toQueryValue v)
+                    req.Explain |> Option.map (fun v -> "explain", Fes.Http.toQueryValue v)
+                    req.Format |> Option.map (fun v -> "format", Fes.Http.toQueryValue v)
+                    req.GrokPattern |> Option.map (fun v -> "grok_pattern", Fes.Http.toQueryValue v)
+                    req.Quote |> Option.map (fun v -> "quote", Fes.Http.toQueryValue v)
+                    req.ShouldTrimFields |> Option.map (fun v -> "should_trim_fields", Fes.Http.toQueryValue v)
+                    req.ShouldParseRecursively |> Option.map (fun v -> "should_parse_recursively", Fes.Http.toQueryValue v)
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                    req.TimestampField |> Option.map (fun v -> "timestamp_field", Fes.Http.toQueryValue v)
+                    req.TimestampFormat |> Option.map (fun v -> "timestamp_format", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type TextStructureFindMessageStructureResponse = System.Text.Json.JsonElement
 
@@ -356,23 +348,19 @@ module TextStructureOperations =
     }
 
         with
-        static member ToRequest(req: TextStructureTestGrokPatternRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_text_structure/test_grok_pattern"
-                let queryParams =
-                    [
-                        req.EcsCompatibility |> Option.map (fun v -> "ecs_compatibility", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: TextStructureTestGrokPatternRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_text_structure/test_grok_pattern"
+            let queryParams =
+                [
+                    req.EcsCompatibility |> Option.map (fun v -> "ecs_compatibility", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type TextStructureTestGrokPatternResponse = System.Text.Json.JsonElement
 

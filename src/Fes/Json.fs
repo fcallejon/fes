@@ -24,6 +24,15 @@ module JsonSettings =
         opts.DefaultIgnoreCondition <- JsonIgnoreCondition.WhenWritingNull
         opts
 
+/// Bridges FEs JsonSerializerOptions into Elastic.Transport's Serializer abstraction
+type FesSerializerOptionsProvider() =
+    interface Elastic.Transport.IJsonSerializerOptionsProvider with
+        member _.CreateJsonSerializerOptions() = JsonSettings.options
+
+/// Serializer for use with Elastic.Transport — delegates to our JsonSettings.options
+type FesSerializer() =
+    inherit Elastic.Transport.SystemTextJsonSerializer(FesSerializerOptionsProvider())
+
 module Json =
     open JsonSettings
 

@@ -24,16 +24,12 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecurityActivateUserProfileRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/profile/_activate"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityActivateUserProfileRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/profile/_activate"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type SecurityActivateUserProfileResponse = Types.UserProfileWithMetadata
 
@@ -77,15 +73,11 @@ module SecurityOperations =
     type SecurityAuthenticateRequest = | SecurityAuthenticateRequest
 
         with
-        static member ToRequest(req: SecurityAuthenticateRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/_authenticate"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityAuthenticateRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/_authenticate"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type SecurityAuthenticateResponse = System.Text.Json.JsonElement
 
@@ -96,23 +88,19 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecurityBulkDeleteRoleRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/role"
-                let queryParams =
-                    [
-                        req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityBulkDeleteRoleRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/role"
+            let queryParams =
+                [
+                    req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type SecurityBulkDeleteRoleResponse = System.Text.Json.JsonElement
 
@@ -146,23 +134,19 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecurityBulkPutRoleRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/role"
-                let queryParams =
-                    [
-                        req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityBulkPutRoleRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/role"
+            let queryParams =
+                [
+                    req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type SecurityBulkPutRoleResponse = System.Text.Json.JsonElement
 
@@ -201,16 +185,12 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecurityBulkUpdateApiKeysRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/api_key/_bulk_update"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityBulkUpdateApiKeysRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/api_key/_bulk_update"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type SecurityBulkUpdateApiKeysResponse = System.Text.Json.JsonElement
 
@@ -261,23 +241,19 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecurityChangePasswordRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/user/{req.Username}/_password"
-                let queryParams =
-                    [
-                        req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityChangePasswordRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/user/{req.Username}/_password"
+            let queryParams =
+                [
+                    req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type SecurityChangePasswordResponse = System.Text.Json.JsonElement
 
@@ -321,15 +297,11 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecurityClearApiKeyCacheRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/api_key/{req.Ids}/_clear_cache"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityClearApiKeyCacheRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/api_key/{req.Ids}/_clear_cache"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            endpoint, ValueNone
 
     type SecurityClearApiKeyCacheResponse = System.Text.Json.JsonElement
 
@@ -350,15 +322,11 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecurityClearCachedPrivilegesRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/privilege/{req.Application}/_clear_cache"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityClearCachedPrivilegesRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/privilege/{req.Application}/_clear_cache"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            endpoint, ValueNone
 
     type SecurityClearCachedPrivilegesResponse = System.Text.Json.JsonElement
 
@@ -380,22 +348,18 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecurityClearCachedRealmsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/realm/{req.Realms}/_clear_cache"
-                let queryParams =
-                    [
-                        req.Usernames |> Option.map (fun v -> "usernames", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityClearCachedRealmsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/realm/{req.Realms}/_clear_cache"
+            let queryParams =
+                [
+                    req.Usernames |> Option.map (fun v -> "usernames", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            endpoint, ValueNone
 
     type SecurityClearCachedRealmsResponse = System.Text.Json.JsonElement
 
@@ -425,15 +389,11 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecurityClearCachedRolesRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/role/{req.Name}/_clear_cache"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityClearCachedRolesRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/role/{req.Name}/_clear_cache"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            endpoint, ValueNone
 
     type SecurityClearCachedRolesResponse = System.Text.Json.JsonElement
 
@@ -456,15 +416,11 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecurityClearCachedServiceTokensRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/service/{req.Namespace}/{req.Service}/credential/token/{req.Name}/_clear_cache"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityClearCachedServiceTokensRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/service/{req.Namespace}/{req.Service}/credential/token/{req.Name}/_clear_cache"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            endpoint, ValueNone
 
     type SecurityClearCachedServiceTokensResponse = System.Text.Json.JsonElement
 
@@ -503,23 +459,19 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecurityCreateApiKeyRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/api_key"
-                let queryParams =
-                    [
-                        req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityCreateApiKeyRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/api_key"
+            let queryParams =
+                [
+                    req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type SecurityCreateApiKeyResponse = System.Text.Json.JsonElement
 
@@ -581,16 +533,12 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecurityCreateCrossClusterApiKeyRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/cross_cluster/api_key"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityCreateCrossClusterApiKeyRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/cross_cluster/api_key"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type SecurityCreateCrossClusterApiKeyResponse = System.Text.Json.JsonElement
 
@@ -646,22 +594,18 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecurityCreateServiceTokenRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/service/{req.Namespace}/{req.Service}/credential/token/{req.Name}"
-                let queryParams =
-                    [
-                        req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityCreateServiceTokenRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/service/{req.Namespace}/{req.Service}/credential/token/{req.Name}"
+            let queryParams =
+                [
+                    req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            endpoint, ValueNone
 
     type SecurityCreateServiceTokenResponse = System.Text.Json.JsonElement
 
@@ -702,16 +646,12 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecurityDelegatePkiRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/delegate_pki"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityDelegatePkiRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/delegate_pki"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type SecurityDelegatePkiResponse = System.Text.Json.JsonElement
 
@@ -738,22 +678,18 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecurityDeletePrivilegesRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/privilege/{req.Application}/{req.Name}"
-                let queryParams =
-                    [
-                        req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityDeletePrivilegesRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/privilege/{req.Application}/{req.Name}"
+            let queryParams =
+                [
+                    req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
+            endpoint, ValueNone
 
     type SecurityDeletePrivilegesResponse = Map<string, Map<string, Types.FoundStatus>>
 
@@ -789,22 +725,18 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecurityDeleteRoleRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/role/{req.Name}"
-                let queryParams =
-                    [
-                        req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityDeleteRoleRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/role/{req.Name}"
+            let queryParams =
+                [
+                    req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
+            endpoint, ValueNone
 
     type SecurityDeleteRoleResponse = System.Text.Json.JsonElement
 
@@ -835,22 +767,18 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecurityDeleteRoleMappingRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/role_mapping/{req.Name}"
-                let queryParams =
-                    [
-                        req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityDeleteRoleMappingRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/role_mapping/{req.Name}"
+            let queryParams =
+                [
+                    req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
+            endpoint, ValueNone
 
     type SecurityDeleteRoleMappingResponse = System.Text.Json.JsonElement
 
@@ -883,22 +811,18 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecurityDeleteServiceTokenRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/service/{req.Namespace}/{req.Service}/credential/token/{req.Name}"
-                let queryParams =
-                    [
-                        req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityDeleteServiceTokenRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/service/{req.Namespace}/{req.Service}/credential/token/{req.Name}"
+            let queryParams =
+                [
+                    req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
+            endpoint, ValueNone
 
     type SecurityDeleteServiceTokenResponse = System.Text.Json.JsonElement
 
@@ -939,22 +863,18 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecurityDeleteUserRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/user/{req.Username}"
-                let queryParams =
-                    [
-                        req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityDeleteUserRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/user/{req.Username}"
+            let queryParams =
+                [
+                    req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
+            endpoint, ValueNone
 
     type SecurityDeleteUserResponse = System.Text.Json.JsonElement
 
@@ -985,22 +905,18 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecurityDisableUserRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/user/{req.Username}/_disable"
-                let queryParams =
-                    [
-                        req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityDisableUserRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/user/{req.Username}/_disable"
+            let queryParams =
+                [
+                    req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            endpoint, ValueNone
 
     type SecurityDisableUserResponse = System.Text.Json.JsonElement
 
@@ -1031,22 +947,18 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecurityDisableUserProfileRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/profile/{req.Uid}/_disable"
-                let queryParams =
-                    [
-                        req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityDisableUserProfileRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/profile/{req.Uid}/_disable"
+            let queryParams =
+                [
+                    req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            endpoint, ValueNone
 
     type SecurityDisableUserProfileResponse = Types.AcknowledgedResponseBase
 
@@ -1077,22 +989,18 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecurityEnableUserRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/user/{req.Username}/_enable"
-                let queryParams =
-                    [
-                        req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityEnableUserRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/user/{req.Username}/_enable"
+            let queryParams =
+                [
+                    req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            endpoint, ValueNone
 
     type SecurityEnableUserResponse = System.Text.Json.JsonElement
 
@@ -1123,22 +1031,18 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecurityEnableUserProfileRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/profile/{req.Uid}/_enable"
-                let queryParams =
-                    [
-                        req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityEnableUserProfileRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/profile/{req.Uid}/_enable"
+            let queryParams =
+                [
+                    req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            endpoint, ValueNone
 
     type SecurityEnableUserProfileResponse = Types.AcknowledgedResponseBase
 
@@ -1166,30 +1070,22 @@ module SecurityOperations =
     type SecurityEnrollKibanaRequest = | SecurityEnrollKibanaRequest
 
         with
-        static member ToRequest(req: SecurityEnrollKibanaRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/enroll/kibana"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityEnrollKibanaRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/enroll/kibana"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type SecurityEnrollKibanaResponse = System.Text.Json.JsonElement
 
     type SecurityEnrollNodeRequest = | SecurityEnrollNodeRequest
 
         with
-        static member ToRequest(req: SecurityEnrollNodeRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/enroll/node"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityEnrollNodeRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/enroll/node"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type SecurityEnrollNodeResponse = System.Text.Json.JsonElement
 
@@ -1205,29 +1101,25 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecurityGetApiKeyRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/api_key"
-                let queryParams =
-                    [
-                        req.Id |> Option.map (fun v -> "id", Fes.Http.toQueryValue v)
-                        req.Name |> Option.map (fun v -> "name", Fes.Http.toQueryValue v)
-                        req.Owner |> Option.map (fun v -> "owner", Fes.Http.toQueryValue v)
-                        req.RealmName |> Option.map (fun v -> "realm_name", Fes.Http.toQueryValue v)
-                        req.Username |> Option.map (fun v -> "username", Fes.Http.toQueryValue v)
-                        req.WithLimitedBy |> Option.map (fun v -> "with_limited_by", Fes.Http.toQueryValue v)
-                        req.ActiveOnly |> Option.map (fun v -> "active_only", Fes.Http.toQueryValue v)
-                        req.WithProfileUid |> Option.map (fun v -> "with_profile_uid", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityGetApiKeyRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/api_key"
+            let queryParams =
+                [
+                    req.Id |> Option.map (fun v -> "id", Fes.Http.toQueryValue v)
+                    req.Name |> Option.map (fun v -> "name", Fes.Http.toQueryValue v)
+                    req.Owner |> Option.map (fun v -> "owner", Fes.Http.toQueryValue v)
+                    req.RealmName |> Option.map (fun v -> "realm_name", Fes.Http.toQueryValue v)
+                    req.Username |> Option.map (fun v -> "username", Fes.Http.toQueryValue v)
+                    req.WithLimitedBy |> Option.map (fun v -> "with_limited_by", Fes.Http.toQueryValue v)
+                    req.ActiveOnly |> Option.map (fun v -> "active_only", Fes.Http.toQueryValue v)
+                    req.WithProfileUid |> Option.map (fun v -> "with_profile_uid", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type SecurityGetApiKeyResponse = System.Text.Json.JsonElement
 
@@ -1299,15 +1191,11 @@ module SecurityOperations =
     type SecurityGetBuiltinPrivilegesRequest = | SecurityGetBuiltinPrivilegesRequest
 
         with
-        static member ToRequest(req: SecurityGetBuiltinPrivilegesRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/privilege/_builtin"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityGetBuiltinPrivilegesRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/privilege/_builtin"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type SecurityGetBuiltinPrivilegesResponse = System.Text.Json.JsonElement
 
@@ -1317,15 +1205,11 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecurityGetPrivilegesRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/privilege/{req.Application}/{req.Name}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityGetPrivilegesRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/privilege/{req.Application}/{req.Name}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type SecurityGetPrivilegesResponse = Map<string, Map<string, Types.SecurityPutPrivilegesActions>>
 
@@ -1351,15 +1235,11 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecurityGetRoleRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/role/{req.Name}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityGetRoleRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/role/{req.Name}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type SecurityGetRoleResponse = Map<string, Types.Role>
 
@@ -1380,15 +1260,11 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecurityGetRoleMappingRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/role_mapping/{req.Name}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityGetRoleMappingRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/role_mapping/{req.Name}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type SecurityGetRoleMappingResponse = Map<string, Types.SecurityTypesRoleMapping>
 
@@ -1410,15 +1286,11 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecurityGetServiceAccountsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/service/{req.Namespace}/{req.Service}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityGetServiceAccountsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/service/{req.Namespace}/{req.Service}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type SecurityGetServiceAccountsResponse = Map<string, Types.RoleDescriptorWrapper>
 
@@ -1445,15 +1317,11 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecurityGetServiceCredentialsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/service/{req.Namespace}/{req.Service}/credential"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityGetServiceCredentialsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/service/{req.Namespace}/{req.Service}/credential"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type SecurityGetServiceCredentialsResponse = System.Text.Json.JsonElement
 
@@ -1479,22 +1347,18 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecurityGetSettingsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/settings"
-                let queryParams =
-                    [
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityGetSettingsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/settings"
+            let queryParams =
+                [
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type SecurityGetSettingsResponse = System.Text.Json.JsonElement
 
@@ -1517,15 +1381,11 @@ module SecurityOperations =
     type SecurityGetStatsRequest = | SecurityGetStatsRequest
 
         with
-        static member ToRequest(req: SecurityGetStatsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/stats"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityGetStatsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/stats"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type SecurityGetStatsResponse = System.Text.Json.JsonElement
 
@@ -1545,16 +1405,12 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecurityGetTokenRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/oauth2/token"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityGetTokenRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/oauth2/token"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type SecurityGetTokenResponse = System.Text.Json.JsonElement
 
@@ -1615,22 +1471,18 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecurityGetUserRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/user/{req.Username}"
-                let queryParams =
-                    [
-                        req.WithProfileUid |> Option.map (fun v -> "with_profile_uid", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityGetUserRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/user/{req.Username}"
+            let queryParams =
+                [
+                    req.WithProfileUid |> Option.map (fun v -> "with_profile_uid", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type SecurityGetUserResponse = Map<string, Types.User>
 
@@ -1658,15 +1510,11 @@ module SecurityOperations =
     type SecurityGetUserPrivilegesRequest = | SecurityGetUserPrivilegesRequest
 
         with
-        static member ToRequest(req: SecurityGetUserPrivilegesRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/user/_privileges"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityGetUserPrivilegesRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/user/_privileges"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type SecurityGetUserPrivilegesResponse = System.Text.Json.JsonElement
 
@@ -1676,22 +1524,18 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecurityGetUserProfileRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/profile/{req.Uid}"
-                let queryParams =
-                    [
-                        req.Data |> Option.map (fun v -> "data", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityGetUserProfileRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/profile/{req.Uid}"
+            let queryParams =
+                [
+                    req.Data |> Option.map (fun v -> "data", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type SecurityGetUserProfileResponse = System.Text.Json.JsonElement
 
@@ -1733,23 +1577,19 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecurityGrantApiKeyRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/api_key/grant"
-                let queryParams =
-                    [
-                        req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityGrantApiKeyRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/api_key/grant"
+            let queryParams =
+                [
+                    req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type SecurityGrantApiKeyResponse = System.Text.Json.JsonElement
 
@@ -1822,16 +1662,12 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecurityHasPrivilegesRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/user/{req.User}/_has_privileges"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityHasPrivilegesRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/user/{req.User}/_has_privileges"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type SecurityHasPrivilegesResponse = System.Text.Json.JsonElement
 
@@ -1878,16 +1714,12 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecurityHasPrivilegesUserProfileRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/profile/_has_privileges"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityHasPrivilegesUserProfileRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/profile/_has_privileges"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type SecurityHasPrivilegesUserProfileResponse = System.Text.Json.JsonElement
 
@@ -1930,16 +1762,12 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecurityInvalidateApiKeyRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/api_key"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityInvalidateApiKeyRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/api_key"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type SecurityInvalidateApiKeyResponse = System.Text.Json.JsonElement
 
@@ -2006,16 +1834,12 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecurityInvalidateTokenRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/oauth2/token"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityInvalidateTokenRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/oauth2/token"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type SecurityInvalidateTokenResponse = System.Text.Json.JsonElement
 
@@ -2068,16 +1892,12 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecurityOidcAuthenticateRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/oidc/authenticate"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityOidcAuthenticateRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/oidc/authenticate"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type SecurityOidcAuthenticateResponse = System.Text.Json.JsonElement
 
@@ -2126,16 +1946,12 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecurityOidcLogoutRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/oidc/logout"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityOidcLogoutRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/oidc/logout"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type SecurityOidcLogoutResponse = System.Text.Json.JsonElement
 
@@ -2176,16 +1992,12 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecurityOidcPrepareAuthenticationRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/oidc/prepare"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityOidcPrepareAuthenticationRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/oidc/prepare"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type SecurityOidcPrepareAuthenticationResponse = System.Text.Json.JsonElement
 
@@ -2239,23 +2051,19 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecurityPutPrivilegesRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/privilege"
-                let queryParams =
-                    [
-                        req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req.Document
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityPutPrivilegesRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/privilege"
+            let queryParams =
+                [
+                    req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req.Document)
+            endpoint, ValueSome postData
 
     type SecurityPutPrivilegesResponse = Map<string, Map<string, Types.CreatedStatus>>
 
@@ -2306,23 +2114,19 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecurityPutRoleRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/role/{req.Name}"
-                let queryParams =
-                    [
-                        req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityPutRoleRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/role/{req.Name}"
+            let queryParams =
+                [
+                    req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type SecurityPutRoleResponse = System.Text.Json.JsonElement
 
@@ -2435,23 +2239,19 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecurityPutRoleMappingRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/role_mapping/{req.Name}"
-                let queryParams =
-                    [
-                        req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityPutRoleMappingRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/role_mapping/{req.Name}"
+            let queryParams =
+                [
+                    req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type SecurityPutRoleMappingResponse = System.Text.Json.JsonElement
 
@@ -2540,23 +2340,19 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecurityPutUserRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/user/{req.Username}"
-                let queryParams =
-                    [
-                        req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityPutUserRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/user/{req.Username}"
+            let queryParams =
+                [
+                    req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type SecurityPutUserResponse = System.Text.Json.JsonElement
 
@@ -2656,25 +2452,21 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecurityQueryApiKeysRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/_query/api_key"
-                let queryParams =
-                    [
-                        req.WithLimitedBy |> Option.map (fun v -> "with_limited_by", Fes.Http.toQueryValue v)
-                        req.WithProfileUid |> Option.map (fun v -> "with_profile_uid", Fes.Http.toQueryValue v)
-                        req.TypedKeys |> Option.map (fun v -> "typed_keys", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityQueryApiKeysRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/_query/api_key"
+            let queryParams =
+                [
+                    req.WithLimitedBy |> Option.map (fun v -> "with_limited_by", Fes.Http.toQueryValue v)
+                    req.WithProfileUid |> Option.map (fun v -> "with_profile_uid", Fes.Http.toQueryValue v)
+                    req.TypedKeys |> Option.map (fun v -> "typed_keys", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type SecurityQueryApiKeysResponse = System.Text.Json.JsonElement
 
@@ -2764,16 +2556,12 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecurityQueryRoleRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/_query/role"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityQueryRoleRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/_query/role"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type SecurityQueryRoleResponse = System.Text.Json.JsonElement
 
@@ -2836,23 +2624,19 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecurityQueryUserRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/_query/user"
-                let queryParams =
-                    [
-                        req.WithProfileUid |> Option.map (fun v -> "with_profile_uid", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityQueryUserRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/_query/user"
+            let queryParams =
+                [
+                    req.WithProfileUid |> Option.map (fun v -> "with_profile_uid", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type SecurityQueryUserResponse = System.Text.Json.JsonElement
 
@@ -2917,16 +2701,12 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecuritySamlAuthenticateRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/saml/authenticate"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecuritySamlAuthenticateRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/saml/authenticate"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type SecuritySamlAuthenticateResponse = System.Text.Json.JsonElement
 
@@ -2972,16 +2752,12 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecuritySamlCompleteLogoutRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/saml/complete_logout"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecuritySamlCompleteLogoutRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/saml/complete_logout"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type SecuritySamlCompleteLogoutResponse = unit
 
@@ -3032,16 +2808,12 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecuritySamlInvalidateRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/saml/invalidate"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecuritySamlInvalidateRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/saml/invalidate"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type SecuritySamlInvalidateResponse = System.Text.Json.JsonElement
 
@@ -3083,16 +2855,12 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecuritySamlLogoutRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/saml/logout"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecuritySamlLogoutRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/saml/logout"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type SecuritySamlLogoutResponse = System.Text.Json.JsonElement
 
@@ -3129,16 +2897,12 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecuritySamlPrepareAuthenticationRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/saml/prepare"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecuritySamlPrepareAuthenticationRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/saml/prepare"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type SecuritySamlPrepareAuthenticationResponse = System.Text.Json.JsonElement
 
@@ -3177,15 +2941,11 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecuritySamlServiceProviderMetadataRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/saml/metadata/{req.RealmName}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecuritySamlServiceProviderMetadataRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/saml/metadata/{req.RealmName}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type SecuritySamlServiceProviderMetadataResponse = System.Text.Json.JsonElement
 
@@ -3214,23 +2974,19 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecuritySuggestUserProfilesRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/profile/_suggest"
-                let queryParams =
-                    [
-                        req.Data |> Option.map (fun v -> "data", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecuritySuggestUserProfilesRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/profile/_suggest"
+            let queryParams =
+                [
+                    req.Data |> Option.map (fun v -> "data", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type SecuritySuggestUserProfilesResponse = System.Text.Json.JsonElement
 
@@ -3289,16 +3045,12 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecurityUpdateApiKeyRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/api_key/{req.Id}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityUpdateApiKeyRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/api_key/{req.Id}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type SecurityUpdateApiKeyResponse = System.Text.Json.JsonElement
 
@@ -3350,16 +3102,12 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecurityUpdateCrossClusterApiKeyRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/cross_cluster/api_key/{req.Id}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityUpdateCrossClusterApiKeyRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/cross_cluster/api_key/{req.Id}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type SecurityUpdateCrossClusterApiKeyResponse = System.Text.Json.JsonElement
 
@@ -3417,24 +3165,20 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecurityUpdateSettingsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/settings"
-                let queryParams =
-                    [
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityUpdateSettingsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/settings"
+            let queryParams =
+                [
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type SecurityUpdateSettingsResponse = System.Text.Json.JsonElement
 
@@ -3494,25 +3238,21 @@ module SecurityOperations =
     }
 
         with
-        static member ToRequest(req: SecurityUpdateUserProfileDataRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_security/profile/{req.Uid}/_data"
-                let queryParams =
-                    [
-                        req.IfSeqNo |> Option.map (fun v -> "if_seq_no", Fes.Http.toQueryValue v)
-                        req.IfPrimaryTerm |> Option.map (fun v -> "if_primary_term", Fes.Http.toQueryValue v)
-                        req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SecurityUpdateUserProfileDataRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_security/profile/{req.Uid}/_data"
+            let queryParams =
+                [
+                    req.IfSeqNo |> Option.map (fun v -> "if_seq_no", Fes.Http.toQueryValue v)
+                    req.IfPrimaryTerm |> Option.map (fun v -> "if_primary_term", Fes.Http.toQueryValue v)
+                    req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type SecurityUpdateUserProfileDataResponse = Types.AcknowledgedResponseBase
 

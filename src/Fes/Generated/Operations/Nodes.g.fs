@@ -18,15 +18,11 @@ module NodesOperations =
     }
 
         with
-        static member ToRequest(req: NodesClearRepositoriesMeteringArchiveRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_nodes/{req.NodeId}/_repositories_metering/{req.MaxArchiveVersion}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: NodesClearRepositoriesMeteringArchiveRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_nodes/{req.NodeId}/_repositories_metering/{req.MaxArchiveVersion}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
+            endpoint, ValueNone
 
     type NodesClearRepositoriesMeteringArchiveResponse = Types.NodesClearRepositoriesMeteringArchiveResponseBase
 
@@ -52,15 +48,11 @@ module NodesOperations =
     }
 
         with
-        static member ToRequest(req: NodesGetRepositoriesMeteringInfoRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_nodes/{req.NodeId}/_repositories_metering"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: NodesGetRepositoriesMeteringInfoRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_nodes/{req.NodeId}/_repositories_metering"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type NodesGetRepositoriesMeteringInfoResponse = Types.NodesGetRepositoriesMeteringInfoResponseBase
 
@@ -88,28 +80,24 @@ module NodesOperations =
     }
 
         with
-        static member ToRequest(req: NodesHotThreadsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_nodes/{req.NodeId}/hot_threads"
-                let queryParams =
-                    [
-                        req.IgnoreIdleThreads |> Option.map (fun v -> "ignore_idle_threads", Fes.Http.toQueryValue v)
-                        req.Interval |> Option.map (fun v -> "interval", Fes.Http.toQueryValue v)
-                        req.Snapshots |> Option.map (fun v -> "snapshots", Fes.Http.toQueryValue v)
-                        req.Threads |> Option.map (fun v -> "threads", Fes.Http.toQueryValue v)
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                        req.Type |> Option.map (fun v -> "type", Fes.Http.toQueryValue v)
-                        req.Sort |> Option.map (fun v -> "sort", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: NodesHotThreadsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_nodes/{req.NodeId}/hot_threads"
+            let queryParams =
+                [
+                    req.IgnoreIdleThreads |> Option.map (fun v -> "ignore_idle_threads", Fes.Http.toQueryValue v)
+                    req.Interval |> Option.map (fun v -> "interval", Fes.Http.toQueryValue v)
+                    req.Snapshots |> Option.map (fun v -> "snapshots", Fes.Http.toQueryValue v)
+                    req.Threads |> Option.map (fun v -> "threads", Fes.Http.toQueryValue v)
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                    req.Type |> Option.map (fun v -> "type", Fes.Http.toQueryValue v)
+                    req.Sort |> Option.map (fun v -> "sort", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type NodesHotThreadsResponse = System.Text.Json.JsonElement
 
@@ -184,23 +172,19 @@ module NodesOperations =
     }
 
         with
-        static member ToRequest(req: NodesInfoRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_nodes/{req.NodeId}/{req.Metric}"
-                let queryParams =
-                    [
-                        req.FlatSettings |> Option.map (fun v -> "flat_settings", Fes.Http.toQueryValue v)
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: NodesInfoRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_nodes/{req.NodeId}/{req.Metric}"
+            let queryParams =
+                [
+                    req.FlatSettings |> Option.map (fun v -> "flat_settings", Fes.Http.toQueryValue v)
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type NodesInfoResponse = Types.NodesInfoResponseBase
 
@@ -245,23 +229,19 @@ module NodesOperations =
     }
 
         with
-        static member ToRequest(req: NodesReloadSecureSettingsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_nodes/{req.NodeId}/reload_secure_settings"
-                let queryParams =
-                    [
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: NodesReloadSecureSettingsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_nodes/{req.NodeId}/reload_secure_settings"
+            let queryParams =
+                [
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type NodesReloadSecureSettingsResponse = Types.NodesReloadSecureSettingsResponseBase
 
@@ -309,30 +289,26 @@ module NodesOperations =
     }
 
         with
-        static member ToRequest(req: NodesStatsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_nodes/{req.NodeId}/stats/{req.Metric}/{req.IndexMetric}"
-                let queryParams =
-                    [
-                        req.CompletionFields |> Option.map (fun v -> "completion_fields", Fes.Http.toQueryValue v)
-                        req.FielddataFields |> Option.map (fun v -> "fielddata_fields", Fes.Http.toQueryValue v)
-                        req.Fields |> Option.map (fun v -> "fields", Fes.Http.toQueryValue v)
-                        req.Groups |> Option.map (fun v -> "groups", Fes.Http.toQueryValue v)
-                        req.IncludeSegmentFileSizes |> Option.map (fun v -> "include_segment_file_sizes", Fes.Http.toQueryValue v)
-                        req.Level |> Option.map (fun v -> "level", Fes.Http.toQueryValue v)
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                        req.Types |> Option.map (fun v -> "types", Fes.Http.toQueryValue v)
-                        req.IncludeUnloadedSegments |> Option.map (fun v -> "include_unloaded_segments", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: NodesStatsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_nodes/{req.NodeId}/stats/{req.Metric}/{req.IndexMetric}"
+            let queryParams =
+                [
+                    req.CompletionFields |> Option.map (fun v -> "completion_fields", Fes.Http.toQueryValue v)
+                    req.FielddataFields |> Option.map (fun v -> "fielddata_fields", Fes.Http.toQueryValue v)
+                    req.Fields |> Option.map (fun v -> "fields", Fes.Http.toQueryValue v)
+                    req.Groups |> Option.map (fun v -> "groups", Fes.Http.toQueryValue v)
+                    req.IncludeSegmentFileSizes |> Option.map (fun v -> "include_segment_file_sizes", Fes.Http.toQueryValue v)
+                    req.Level |> Option.map (fun v -> "level", Fes.Http.toQueryValue v)
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                    req.Types |> Option.map (fun v -> "types", Fes.Http.toQueryValue v)
+                    req.IncludeUnloadedSegments |> Option.map (fun v -> "include_unloaded_segments", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type NodesStatsResponse = Types.NodesStatsResponseBase
 
@@ -430,22 +406,18 @@ module NodesOperations =
     }
 
         with
-        static member ToRequest(req: NodesUsageRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_nodes/{req.NodeId}/usage/{req.Metric}"
-                let queryParams =
-                    [
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: NodesUsageRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_nodes/{req.NodeId}/usage/{req.Metric}"
+            let queryParams =
+                [
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type NodesUsageResponse = Types.NodesUsageResponseBase
 

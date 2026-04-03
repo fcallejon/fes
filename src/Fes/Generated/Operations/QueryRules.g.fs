@@ -18,15 +18,11 @@ module QueryRulesOperations =
     }
 
         with
-        static member ToRequest(req: QueryRulesDeleteRuleRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_query_rules/{req.RulesetId}/_rule/{req.RuleId}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: QueryRulesDeleteRuleRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_query_rules/{req.RulesetId}/_rule/{req.RuleId}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
+            endpoint, ValueNone
 
     type QueryRulesDeleteRuleResponse = Types.AcknowledgedResponseBase
 
@@ -52,15 +48,11 @@ module QueryRulesOperations =
     }
 
         with
-        static member ToRequest(req: QueryRulesDeleteRulesetRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_query_rules/{req.RulesetId}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: QueryRulesDeleteRulesetRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_query_rules/{req.RulesetId}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
+            endpoint, ValueNone
 
     type QueryRulesDeleteRulesetResponse = Types.AcknowledgedResponseBase
 
@@ -82,15 +74,11 @@ module QueryRulesOperations =
     }
 
         with
-        static member ToRequest(req: QueryRulesGetRuleRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_query_rules/{req.RulesetId}/_rule/{req.RuleId}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: QueryRulesGetRuleRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_query_rules/{req.RulesetId}/_rule/{req.RuleId}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type QueryRulesGetRuleResponse = Types.QueryRule
 
@@ -116,15 +104,11 @@ module QueryRulesOperations =
     }
 
         with
-        static member ToRequest(req: QueryRulesGetRulesetRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_query_rules/{req.RulesetId}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: QueryRulesGetRulesetRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_query_rules/{req.RulesetId}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type QueryRulesGetRulesetResponse = Types.QueryRuleset
 
@@ -146,23 +130,19 @@ module QueryRulesOperations =
     }
 
         with
-        static member ToRequest(req: QueryRulesListRulesetsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_query_rules"
-                let queryParams =
-                    [
-                        req.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
-                        req.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: QueryRulesListRulesetsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_query_rules"
+            let queryParams =
+                [
+                    req.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
+                    req.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type QueryRulesListRulesetsResponse = System.Text.Json.JsonElement
 
@@ -203,16 +183,12 @@ module QueryRulesOperations =
     }
 
         with
-        static member ToRequest(req: QueryRulesPutRuleRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_query_rules/{req.RulesetId}/_rule/{req.RuleId}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: QueryRulesPutRuleRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_query_rules/{req.RulesetId}/_rule/{req.RuleId}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type QueryRulesPutRuleResponse = System.Text.Json.JsonElement
 
@@ -270,16 +246,12 @@ module QueryRulesOperations =
     }
 
         with
-        static member ToRequest(req: QueryRulesPutRulesetRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_query_rules/{req.RulesetId}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: QueryRulesPutRulesetRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_query_rules/{req.RulesetId}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type QueryRulesPutRulesetResponse = System.Text.Json.JsonElement
 
@@ -311,16 +283,12 @@ module QueryRulesOperations =
     }
 
         with
-        static member ToRequest(req: QueryRulesTestRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_query_rules/{req.RulesetId}/_test"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: QueryRulesTestRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_query_rules/{req.RulesetId}/_test"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type QueryRulesTestResponse = System.Text.Json.JsonElement
 

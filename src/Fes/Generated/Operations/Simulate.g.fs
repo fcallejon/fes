@@ -29,24 +29,20 @@ module SimulateOperations =
     }
 
         with
-        static member ToRequest(req: SimulateIngestRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ingest/{req.Index}/_simulate"
-                let queryParams =
-                    [
-                        req.Pipeline |> Option.map (fun v -> "pipeline", Fes.Http.toQueryValue v)
-                        req.MergeType |> Option.map (fun v -> "merge_type", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SimulateIngestRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ingest/{req.Index}/_simulate"
+            let queryParams =
+                [
+                    req.Pipeline |> Option.map (fun v -> "pipeline", Fes.Http.toQueryValue v)
+                    req.MergeType |> Option.map (fun v -> "merge_type", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type SimulateIngestResponse = System.Text.Json.JsonElement
 

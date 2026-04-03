@@ -17,15 +17,11 @@ module SynonymsOperations =
     }
 
         with
-        static member ToRequest(req: SynonymsDeleteSynonymRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_synonyms/{req.Id}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SynonymsDeleteSynonymRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_synonyms/{req.Id}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
+            endpoint, ValueNone
 
     type SynonymsDeleteSynonymResponse = Types.AcknowledgedResponseBase
 
@@ -48,22 +44,18 @@ module SynonymsOperations =
     }
 
         with
-        static member ToRequest(req: SynonymsDeleteSynonymRuleRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_synonyms/{req.SetId}/{req.RuleId}"
-                let queryParams =
-                    [
-                        req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SynonymsDeleteSynonymRuleRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_synonyms/{req.SetId}/{req.RuleId}"
+            let queryParams =
+                [
+                    req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
+            endpoint, ValueNone
 
     type SynonymsDeleteSynonymRuleResponse = Types.SynonymsUpdateResult
 
@@ -100,23 +92,19 @@ module SynonymsOperations =
     }
 
         with
-        static member ToRequest(req: SynonymsGetSynonymRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_synonyms/{req.Id}"
-                let queryParams =
-                    [
-                        req.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
-                        req.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SynonymsGetSynonymRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_synonyms/{req.Id}"
+            let queryParams =
+                [
+                    req.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
+                    req.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type SynonymsGetSynonymResponse = System.Text.Json.JsonElement
 
@@ -154,15 +142,11 @@ module SynonymsOperations =
     }
 
         with
-        static member ToRequest(req: SynonymsGetSynonymRuleRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_synonyms/{req.SetId}/{req.RuleId}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SynonymsGetSynonymRuleRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_synonyms/{req.SetId}/{req.RuleId}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type SynonymsGetSynonymRuleResponse = Types.SynonymRuleRead
 
@@ -189,23 +173,19 @@ module SynonymsOperations =
     }
 
         with
-        static member ToRequest(req: SynonymsGetSynonymsSetsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_synonyms"
-                let queryParams =
-                    [
-                        req.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
-                        req.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SynonymsGetSynonymsSetsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_synonyms"
+            let queryParams =
+                [
+                    req.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
+                    req.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type SynonymsGetSynonymsSetsResponse = System.Text.Json.JsonElement
 
@@ -240,23 +220,19 @@ module SynonymsOperations =
     }
 
         with
-        static member ToRequest(req: SynonymsPutSynonymRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_synonyms/{req.Id}"
-                let queryParams =
-                    [
-                        req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SynonymsPutSynonymRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_synonyms/{req.Id}"
+            let queryParams =
+                [
+                    req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type SynonymsPutSynonymResponse = System.Text.Json.JsonElement
 
@@ -297,23 +273,19 @@ module SynonymsOperations =
     }
 
         with
-        static member ToRequest(req: SynonymsPutSynonymRuleRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_synonyms/{req.SetId}/{req.RuleId}"
-                let queryParams =
-                    [
-                        req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SynonymsPutSynonymRuleRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_synonyms/{req.SetId}/{req.RuleId}"
+            let queryParams =
+                [
+                    req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type SynonymsPutSynonymRuleResponse = Types.SynonymsUpdateResult
 

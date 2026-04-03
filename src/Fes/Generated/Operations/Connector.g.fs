@@ -17,15 +17,11 @@ module ConnectorOperations =
     }
 
         with
-        static member ToRequest(req: ConnectorCheckInRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_connector/{req.ConnectorId}/_check_in"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ConnectorCheckInRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_connector/{req.ConnectorId}/_check_in"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
+            endpoint, ValueNone
 
     type ConnectorCheckInResponse = System.Text.Json.JsonElement
 
@@ -48,23 +44,19 @@ module ConnectorOperations =
     }
 
         with
-        static member ToRequest(req: ConnectorDeleteRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_connector/{req.ConnectorId}"
-                let queryParams =
-                    [
-                        req.DeleteSyncJobs |> Option.map (fun v -> "delete_sync_jobs", Fes.Http.toQueryValue v)
-                        req.Hard |> Option.map (fun v -> "hard", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ConnectorDeleteRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_connector/{req.ConnectorId}"
+            let queryParams =
+                [
+                    req.DeleteSyncJobs |> Option.map (fun v -> "delete_sync_jobs", Fes.Http.toQueryValue v)
+                    req.Hard |> Option.map (fun v -> "hard", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
+            endpoint, ValueNone
 
     type ConnectorDeleteResponse = Types.AcknowledgedResponseBase
 
@@ -102,22 +94,18 @@ module ConnectorOperations =
     }
 
         with
-        static member ToRequest(req: ConnectorGetRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_connector/{req.ConnectorId}"
-                let queryParams =
-                    [
-                        req.IncludeDeleted |> Option.map (fun v -> "include_deleted", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ConnectorGetRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_connector/{req.ConnectorId}"
+            let queryParams =
+                [
+                    req.IncludeDeleted |> Option.map (fun v -> "include_deleted", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type ConnectorGetResponse = Types.Connector
 
@@ -171,16 +159,12 @@ module ConnectorOperations =
     }
 
         with
-        static member ToRequest(req: ConnectorLastSyncRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_connector/{req.ConnectorId}/_last_sync"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ConnectorLastSyncRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_connector/{req.ConnectorId}/_last_sync"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type ConnectorLastSyncResponse = System.Text.Json.JsonElement
 
@@ -293,28 +277,24 @@ module ConnectorOperations =
     }
 
         with
-        static member ToRequest(req: ConnectorListRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_connector"
-                let queryParams =
-                    [
-                        req.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
-                        req.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
-                        req.IndexName |> Option.map (fun v -> "index_name", Fes.Http.toQueryValue v)
-                        req.ConnectorName |> Option.map (fun v -> "connector_name", Fes.Http.toQueryValue v)
-                        req.ServiceType |> Option.map (fun v -> "service_type", Fes.Http.toQueryValue v)
-                        req.IncludeDeleted |> Option.map (fun v -> "include_deleted", Fes.Http.toQueryValue v)
-                        req.Query |> Option.map (fun v -> "query", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ConnectorListRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_connector"
+            let queryParams =
+                [
+                    req.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
+                    req.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
+                    req.IndexName |> Option.map (fun v -> "index_name", Fes.Http.toQueryValue v)
+                    req.ConnectorName |> Option.map (fun v -> "connector_name", Fes.Http.toQueryValue v)
+                    req.ServiceType |> Option.map (fun v -> "service_type", Fes.Http.toQueryValue v)
+                    req.IncludeDeleted |> Option.map (fun v -> "include_deleted", Fes.Http.toQueryValue v)
+                    req.Query |> Option.map (fun v -> "query", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type ConnectorListResponse = System.Text.Json.JsonElement
 
@@ -392,16 +372,12 @@ module ConnectorOperations =
     }
 
         with
-        static member ToRequest(req: ConnectorPostRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_connector"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ConnectorPostRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_connector"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type ConnectorPostResponse = System.Text.Json.JsonElement
 
@@ -473,16 +449,12 @@ module ConnectorOperations =
     }
 
         with
-        static member ToRequest(req: ConnectorPutRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_connector/{req.ConnectorId}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ConnectorPutRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_connector/{req.ConnectorId}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type ConnectorPutResponse = System.Text.Json.JsonElement
 
@@ -547,15 +519,11 @@ module ConnectorOperations =
     }
 
         with
-        static member ToRequest(req: ConnectorSecretDeleteRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_connector/_secret/{req.Id}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ConnectorSecretDeleteRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_connector/_secret/{req.Id}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
+            endpoint, ValueNone
 
     type ConnectorSecretDeleteResponse = System.Text.Json.JsonElement
 
@@ -576,15 +544,11 @@ module ConnectorOperations =
     }
 
         with
-        static member ToRequest(req: ConnectorSecretGetRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_connector/_secret/{req.Id}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ConnectorSecretGetRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_connector/_secret/{req.Id}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type ConnectorSecretGetResponse = System.Text.Json.JsonElement
 
@@ -606,16 +570,12 @@ module ConnectorOperations =
     }
 
         with
-        static member ToRequest(req: ConnectorSecretPostRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_connector/_secret"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ConnectorSecretPostRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_connector/_secret"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type ConnectorSecretPostResponse = System.Text.Json.JsonElement
 
@@ -642,16 +602,12 @@ module ConnectorOperations =
     }
 
         with
-        static member ToRequest(req: ConnectorSecretPutRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_connector/_secret/{req.Id}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ConnectorSecretPutRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_connector/_secret/{req.Id}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type ConnectorSecretPutResponse = System.Text.Json.JsonElement
 
@@ -681,15 +637,11 @@ module ConnectorOperations =
     }
 
         with
-        static member ToRequest(req: ConnectorSyncJobCancelRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_connector/_sync_job/{req.ConnectorSyncJobId}/_cancel"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ConnectorSyncJobCancelRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_connector/_sync_job/{req.ConnectorSyncJobId}/_cancel"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
+            endpoint, ValueNone
 
     type ConnectorSyncJobCancelResponse = System.Text.Json.JsonElement
 
@@ -710,15 +662,11 @@ module ConnectorOperations =
     }
 
         with
-        static member ToRequest(req: ConnectorSyncJobCheckInRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_connector/_sync_job/{req.ConnectorSyncJobId}/_check_in"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ConnectorSyncJobCheckInRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_connector/_sync_job/{req.ConnectorSyncJobId}/_check_in"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
+            endpoint, ValueNone
 
     type ConnectorSyncJobCheckInResponse = System.Text.Json.JsonElement
 
@@ -743,16 +691,12 @@ module ConnectorOperations =
     }
 
         with
-        static member ToRequest(req: ConnectorSyncJobClaimRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_connector/_sync_job/{req.ConnectorSyncJobId}/_claim"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ConnectorSyncJobClaimRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_connector/_sync_job/{req.ConnectorSyncJobId}/_claim"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type ConnectorSyncJobClaimResponse = System.Text.Json.JsonElement
 
@@ -789,15 +733,11 @@ module ConnectorOperations =
     }
 
         with
-        static member ToRequest(req: ConnectorSyncJobDeleteRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_connector/_sync_job/{req.ConnectorSyncJobId}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ConnectorSyncJobDeleteRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_connector/_sync_job/{req.ConnectorSyncJobId}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
+            endpoint, ValueNone
 
     type ConnectorSyncJobDeleteResponse = Types.AcknowledgedResponseBase
 
@@ -820,16 +760,12 @@ module ConnectorOperations =
     }
 
         with
-        static member ToRequest(req: ConnectorSyncJobErrorRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_connector/_sync_job/{req.ConnectorSyncJobId}/_error"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ConnectorSyncJobErrorRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_connector/_sync_job/{req.ConnectorSyncJobId}/_error"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type ConnectorSyncJobErrorResponse = System.Text.Json.JsonElement
 
@@ -859,15 +795,11 @@ module ConnectorOperations =
     }
 
         with
-        static member ToRequest(req: ConnectorSyncJobGetRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_connector/_sync_job/{req.ConnectorSyncJobId}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ConnectorSyncJobGetRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_connector/_sync_job/{req.ConnectorSyncJobId}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type ConnectorSyncJobGetResponse = Types.ConnectorSyncJob
 
@@ -892,26 +824,22 @@ module ConnectorOperations =
     }
 
         with
-        static member ToRequest(req: ConnectorSyncJobListRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_connector/_sync_job"
-                let queryParams =
-                    [
-                        req.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
-                        req.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
-                        req.Status |> Option.map (fun v -> "status", Fes.Http.toQueryValue v)
-                        req.ConnectorId |> Option.map (fun v -> "connector_id", Fes.Http.toQueryValue v)
-                        req.JobType |> Option.map (fun v -> "job_type", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ConnectorSyncJobListRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_connector/_sync_job"
+            let queryParams =
+                [
+                    req.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
+                    req.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
+                    req.Status |> Option.map (fun v -> "status", Fes.Http.toQueryValue v)
+                    req.ConnectorId |> Option.map (fun v -> "connector_id", Fes.Http.toQueryValue v)
+                    req.JobType |> Option.map (fun v -> "job_type", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type ConnectorSyncJobListResponse = System.Text.Json.JsonElement
 
@@ -969,16 +897,12 @@ module ConnectorOperations =
     }
 
         with
-        static member ToRequest(req: ConnectorSyncJobPostRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_connector/_sync_job"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ConnectorSyncJobPostRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_connector/_sync_job"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type ConnectorSyncJobPostResponse = System.Text.Json.JsonElement
 
@@ -1029,16 +953,12 @@ module ConnectorOperations =
     }
 
         with
-        static member ToRequest(req: ConnectorSyncJobUpdateStatsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_connector/_sync_job/{req.ConnectorSyncJobId}/_stats"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ConnectorSyncJobUpdateStatsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_connector/_sync_job/{req.ConnectorSyncJobId}/_stats"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type ConnectorSyncJobUpdateStatsResponse = System.Text.Json.JsonElement
 
@@ -1103,15 +1023,11 @@ module ConnectorOperations =
     }
 
         with
-        static member ToRequest(req: ConnectorUpdateActiveFilteringRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_connector/{req.ConnectorId}/_filtering/_activate"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ConnectorUpdateActiveFilteringRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_connector/{req.ConnectorId}/_filtering/_activate"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
+            endpoint, ValueNone
 
     type ConnectorUpdateActiveFilteringResponse = System.Text.Json.JsonElement
 
@@ -1136,16 +1052,12 @@ module ConnectorOperations =
     }
 
         with
-        static member ToRequest(req: ConnectorUpdateApiKeyIdRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_connector/{req.ConnectorId}/_api_key_id"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ConnectorUpdateApiKeyIdRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_connector/{req.ConnectorId}/_api_key_id"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type ConnectorUpdateApiKeyIdResponse = System.Text.Json.JsonElement
 
@@ -1186,16 +1098,12 @@ module ConnectorOperations =
     }
 
         with
-        static member ToRequest(req: ConnectorUpdateConfigurationRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_connector/{req.ConnectorId}/_configuration"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ConnectorUpdateConfigurationRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_connector/{req.ConnectorId}/_configuration"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type ConnectorUpdateConfigurationResponse = System.Text.Json.JsonElement
 
@@ -1234,16 +1142,12 @@ module ConnectorOperations =
     }
 
         with
-        static member ToRequest(req: ConnectorUpdateErrorRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_connector/{req.ConnectorId}/_error"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ConnectorUpdateErrorRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_connector/{req.ConnectorId}/_error"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type ConnectorUpdateErrorResponse = System.Text.Json.JsonElement
 
@@ -1275,16 +1179,12 @@ module ConnectorOperations =
     }
 
         with
-        static member ToRequest(req: ConnectorUpdateFeaturesRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_connector/{req.ConnectorId}/_features"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ConnectorUpdateFeaturesRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_connector/{req.ConnectorId}/_features"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type ConnectorUpdateFeaturesResponse = System.Text.Json.JsonElement
 
@@ -1320,16 +1220,12 @@ module ConnectorOperations =
     }
 
         with
-        static member ToRequest(req: ConnectorUpdateFilteringRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_connector/{req.ConnectorId}/_filtering"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ConnectorUpdateFilteringRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_connector/{req.ConnectorId}/_filtering"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type ConnectorUpdateFilteringResponse = System.Text.Json.JsonElement
 
@@ -1375,16 +1271,12 @@ module ConnectorOperations =
     }
 
         with
-        static member ToRequest(req: ConnectorUpdateFilteringValidationRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_connector/{req.ConnectorId}/_filtering/_validation"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ConnectorUpdateFilteringValidationRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_connector/{req.ConnectorId}/_filtering/_validation"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type ConnectorUpdateFilteringValidationResponse = System.Text.Json.JsonElement
 
@@ -1416,16 +1308,12 @@ module ConnectorOperations =
     }
 
         with
-        static member ToRequest(req: ConnectorUpdateIndexNameRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_connector/{req.ConnectorId}/_index_name"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ConnectorUpdateIndexNameRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_connector/{req.ConnectorId}/_index_name"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type ConnectorUpdateIndexNameResponse = System.Text.Json.JsonElement
 
@@ -1459,16 +1347,12 @@ module ConnectorOperations =
     }
 
         with
-        static member ToRequest(req: ConnectorUpdateNameRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_connector/{req.ConnectorId}/_name"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ConnectorUpdateNameRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_connector/{req.ConnectorId}/_name"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type ConnectorUpdateNameResponse = System.Text.Json.JsonElement
 
@@ -1507,16 +1391,12 @@ module ConnectorOperations =
     }
 
         with
-        static member ToRequest(req: ConnectorUpdateNativeRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_connector/{req.ConnectorId}/_native"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ConnectorUpdateNativeRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_connector/{req.ConnectorId}/_native"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type ConnectorUpdateNativeResponse = System.Text.Json.JsonElement
 
@@ -1548,16 +1428,12 @@ module ConnectorOperations =
     }
 
         with
-        static member ToRequest(req: ConnectorUpdatePipelineRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_connector/{req.ConnectorId}/_pipeline"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ConnectorUpdatePipelineRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_connector/{req.ConnectorId}/_pipeline"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type ConnectorUpdatePipelineResponse = System.Text.Json.JsonElement
 
@@ -1589,16 +1465,12 @@ module ConnectorOperations =
     }
 
         with
-        static member ToRequest(req: ConnectorUpdateSchedulingRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_connector/{req.ConnectorId}/_scheduling"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ConnectorUpdateSchedulingRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_connector/{req.ConnectorId}/_scheduling"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type ConnectorUpdateSchedulingResponse = System.Text.Json.JsonElement
 
@@ -1630,16 +1502,12 @@ module ConnectorOperations =
     }
 
         with
-        static member ToRequest(req: ConnectorUpdateServiceTypeRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_connector/{req.ConnectorId}/_service_type"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ConnectorUpdateServiceTypeRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_connector/{req.ConnectorId}/_service_type"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type ConnectorUpdateServiceTypeResponse = System.Text.Json.JsonElement
 
@@ -1671,16 +1539,12 @@ module ConnectorOperations =
     }
 
         with
-        static member ToRequest(req: ConnectorUpdateStatusRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_connector/{req.ConnectorId}/_status"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ConnectorUpdateStatusRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_connector/{req.ConnectorId}/_status"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type ConnectorUpdateStatusResponse = System.Text.Json.JsonElement
 

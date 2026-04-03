@@ -19,23 +19,19 @@ module SnapshotOperations =
     }
 
         with
-        static member ToRequest(req: SnapshotCleanupRepositoryRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_snapshot/{req.Repository}/_cleanup"
-                let queryParams =
-                    [
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SnapshotCleanupRepositoryRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_snapshot/{req.Repository}/_cleanup"
+            let queryParams =
+                [
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            endpoint, ValueNone
 
     type SnapshotCleanupRepositoryResponse = System.Text.Json.JsonElement
 
@@ -77,23 +73,19 @@ module SnapshotOperations =
     }
 
         with
-        static member ToRequest(req: SnapshotCloneRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_snapshot/{req.Repository}/{req.Snapshot}/_clone/{req.TargetSnapshot}"
-                let queryParams =
-                    [
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SnapshotCloneRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_snapshot/{req.Repository}/{req.Snapshot}/_clone/{req.TargetSnapshot}"
+            let queryParams =
+                [
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type SnapshotCloneResponse = Types.AcknowledgedResponseBase
 
@@ -157,24 +149,20 @@ module SnapshotOperations =
     }
 
         with
-        static member ToRequest(req: SnapshotCreateRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_snapshot/{req.Repository}/{req.Snapshot}"
-                let queryParams =
-                    [
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                        req.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SnapshotCreateRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_snapshot/{req.Repository}/{req.Snapshot}"
+            let queryParams =
+                [
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                    req.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type SnapshotCreateResponse = System.Text.Json.JsonElement
 
@@ -269,25 +257,21 @@ module SnapshotOperations =
     }
 
         with
-        static member ToRequest(req: SnapshotCreateRepositoryRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_snapshot/{req.Repository}"
-                let queryParams =
-                    [
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                        req.Verify |> Option.map (fun v -> "verify", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req.Document
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SnapshotCreateRepositoryRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_snapshot/{req.Repository}"
+            let queryParams =
+                [
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                    req.Verify |> Option.map (fun v -> "verify", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req.Document)
+            endpoint, ValueSome postData
 
     type SnapshotCreateRepositoryResponse = Types.AcknowledgedResponseBase
 
@@ -339,23 +323,19 @@ module SnapshotOperations =
     }
 
         with
-        static member ToRequest(req: SnapshotDeleteRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_snapshot/{req.Repository}/{req.Snapshot}"
-                let queryParams =
-                    [
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                        req.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SnapshotDeleteRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_snapshot/{req.Repository}/{req.Snapshot}"
+            let queryParams =
+                [
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                    req.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
+            endpoint, ValueNone
 
     type SnapshotDeleteResponse = Types.AcknowledgedResponseBase
 
@@ -399,23 +379,19 @@ module SnapshotOperations =
     }
 
         with
-        static member ToRequest(req: SnapshotDeleteRepositoryRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_snapshot/{req.Repository}"
-                let queryParams =
-                    [
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SnapshotDeleteRepositoryRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_snapshot/{req.Repository}"
+            let queryParams =
+                [
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
+            endpoint, ValueNone
 
     type SnapshotDeleteRepositoryResponse = Types.AcknowledgedResponseBase
 
@@ -467,35 +443,31 @@ module SnapshotOperations =
     }
 
         with
-        static member ToRequest(req: SnapshotGetRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_snapshot/{req.Repository}/{req.Snapshot}"
-                let queryParams =
-                    [
-                        req.After |> Option.map (fun v -> "after", Fes.Http.toQueryValue v)
-                        req.FromSortValue |> Option.map (fun v -> "from_sort_value", Fes.Http.toQueryValue v)
-                        req.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
-                        req.IndexDetails |> Option.map (fun v -> "index_details", Fes.Http.toQueryValue v)
-                        req.IndexNames |> Option.map (fun v -> "index_names", Fes.Http.toQueryValue v)
-                        req.IncludeRepository |> Option.map (fun v -> "include_repository", Fes.Http.toQueryValue v)
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                        req.Order |> Option.map (fun v -> "order", Fes.Http.toQueryValue v)
-                        req.Offset |> Option.map (fun v -> "offset", Fes.Http.toQueryValue v)
-                        req.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
-                        req.SlmPolicyFilter |> Option.map (fun v -> "slm_policy_filter", Fes.Http.toQueryValue v)
-                        req.Sort |> Option.map (fun v -> "sort", Fes.Http.toQueryValue v)
-                        req.State |> Option.map (fun v -> "state", Fes.Http.toQueryValue v)
-                        req.Verbose |> Option.map (fun v -> "verbose", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SnapshotGetRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_snapshot/{req.Repository}/{req.Snapshot}"
+            let queryParams =
+                [
+                    req.After |> Option.map (fun v -> "after", Fes.Http.toQueryValue v)
+                    req.FromSortValue |> Option.map (fun v -> "from_sort_value", Fes.Http.toQueryValue v)
+                    req.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                    req.IndexDetails |> Option.map (fun v -> "index_details", Fes.Http.toQueryValue v)
+                    req.IndexNames |> Option.map (fun v -> "index_names", Fes.Http.toQueryValue v)
+                    req.IncludeRepository |> Option.map (fun v -> "include_repository", Fes.Http.toQueryValue v)
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                    req.Order |> Option.map (fun v -> "order", Fes.Http.toQueryValue v)
+                    req.Offset |> Option.map (fun v -> "offset", Fes.Http.toQueryValue v)
+                    req.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
+                    req.SlmPolicyFilter |> Option.map (fun v -> "slm_policy_filter", Fes.Http.toQueryValue v)
+                    req.Sort |> Option.map (fun v -> "sort", Fes.Http.toQueryValue v)
+                    req.State |> Option.map (fun v -> "state", Fes.Http.toQueryValue v)
+                    req.Verbose |> Option.map (fun v -> "verbose", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type SnapshotGetResponse = System.Text.Json.JsonElement
 
@@ -623,23 +595,19 @@ module SnapshotOperations =
     }
 
         with
-        static member ToRequest(req: SnapshotGetRepositoryRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_snapshot/{req.Repository}"
-                let queryParams =
-                    [
-                        req.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SnapshotGetRepositoryRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_snapshot/{req.Repository}"
+            let queryParams =
+                [
+                    req.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type SnapshotGetRepositoryResponse = Map<string, Types.Repository>
 
@@ -688,33 +656,29 @@ module SnapshotOperations =
     }
 
         with
-        static member ToRequest(req: SnapshotRepositoryAnalyzeRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_snapshot/{req.Repository}/_analyze"
-                let queryParams =
-                    [
-                        req.BlobCount |> Option.map (fun v -> "blob_count", Fes.Http.toQueryValue v)
-                        req.Concurrency |> Option.map (fun v -> "concurrency", Fes.Http.toQueryValue v)
-                        req.Detailed |> Option.map (fun v -> "detailed", Fes.Http.toQueryValue v)
-                        req.EarlyReadNodeCount |> Option.map (fun v -> "early_read_node_count", Fes.Http.toQueryValue v)
-                        req.MaxBlobSize |> Option.map (fun v -> "max_blob_size", Fes.Http.toQueryValue v)
-                        req.MaxTotalDataSize |> Option.map (fun v -> "max_total_data_size", Fes.Http.toQueryValue v)
-                        req.RareActionProbability |> Option.map (fun v -> "rare_action_probability", Fes.Http.toQueryValue v)
-                        req.RarelyAbortWrites |> Option.map (fun v -> "rarely_abort_writes", Fes.Http.toQueryValue v)
-                        req.ReadNodeCount |> Option.map (fun v -> "read_node_count", Fes.Http.toQueryValue v)
-                        req.RegisterOperationCount |> Option.map (fun v -> "register_operation_count", Fes.Http.toQueryValue v)
-                        req.Seed |> Option.map (fun v -> "seed", Fes.Http.toQueryValue v)
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SnapshotRepositoryAnalyzeRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_snapshot/{req.Repository}/_analyze"
+            let queryParams =
+                [
+                    req.BlobCount |> Option.map (fun v -> "blob_count", Fes.Http.toQueryValue v)
+                    req.Concurrency |> Option.map (fun v -> "concurrency", Fes.Http.toQueryValue v)
+                    req.Detailed |> Option.map (fun v -> "detailed", Fes.Http.toQueryValue v)
+                    req.EarlyReadNodeCount |> Option.map (fun v -> "early_read_node_count", Fes.Http.toQueryValue v)
+                    req.MaxBlobSize |> Option.map (fun v -> "max_blob_size", Fes.Http.toQueryValue v)
+                    req.MaxTotalDataSize |> Option.map (fun v -> "max_total_data_size", Fes.Http.toQueryValue v)
+                    req.RareActionProbability |> Option.map (fun v -> "rare_action_probability", Fes.Http.toQueryValue v)
+                    req.RarelyAbortWrites |> Option.map (fun v -> "rarely_abort_writes", Fes.Http.toQueryValue v)
+                    req.ReadNodeCount |> Option.map (fun v -> "read_node_count", Fes.Http.toQueryValue v)
+                    req.RegisterOperationCount |> Option.map (fun v -> "register_operation_count", Fes.Http.toQueryValue v)
+                    req.Seed |> Option.map (fun v -> "seed", Fes.Http.toQueryValue v)
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            endpoint, ValueNone
 
     type SnapshotRepositoryAnalyzeResponse = System.Text.Json.JsonElement
 
@@ -829,29 +793,25 @@ module SnapshotOperations =
     }
 
         with
-        static member ToRequest(req: SnapshotRepositoryVerifyIntegrityRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_snapshot/{req.Repository}/_verify_integrity"
-                let queryParams =
-                    [
-                        req.BlobThreadPoolConcurrency |> Option.map (fun v -> "blob_thread_pool_concurrency", Fes.Http.toQueryValue v)
-                        req.IndexSnapshotVerificationConcurrency |> Option.map (fun v -> "index_snapshot_verification_concurrency", Fes.Http.toQueryValue v)
-                        req.IndexVerificationConcurrency |> Option.map (fun v -> "index_verification_concurrency", Fes.Http.toQueryValue v)
-                        req.MaxBytesPerSec |> Option.map (fun v -> "max_bytes_per_sec", Fes.Http.toQueryValue v)
-                        req.MaxFailedShardSnapshots |> Option.map (fun v -> "max_failed_shard_snapshots", Fes.Http.toQueryValue v)
-                        req.MetaThreadPoolConcurrency |> Option.map (fun v -> "meta_thread_pool_concurrency", Fes.Http.toQueryValue v)
-                        req.SnapshotVerificationConcurrency |> Option.map (fun v -> "snapshot_verification_concurrency", Fes.Http.toQueryValue v)
-                        req.VerifyBlobContents |> Option.map (fun v -> "verify_blob_contents", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SnapshotRepositoryVerifyIntegrityRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_snapshot/{req.Repository}/_verify_integrity"
+            let queryParams =
+                [
+                    req.BlobThreadPoolConcurrency |> Option.map (fun v -> "blob_thread_pool_concurrency", Fes.Http.toQueryValue v)
+                    req.IndexSnapshotVerificationConcurrency |> Option.map (fun v -> "index_snapshot_verification_concurrency", Fes.Http.toQueryValue v)
+                    req.IndexVerificationConcurrency |> Option.map (fun v -> "index_verification_concurrency", Fes.Http.toQueryValue v)
+                    req.MaxBytesPerSec |> Option.map (fun v -> "max_bytes_per_sec", Fes.Http.toQueryValue v)
+                    req.MaxFailedShardSnapshots |> Option.map (fun v -> "max_failed_shard_snapshots", Fes.Http.toQueryValue v)
+                    req.MetaThreadPoolConcurrency |> Option.map (fun v -> "meta_thread_pool_concurrency", Fes.Http.toQueryValue v)
+                    req.SnapshotVerificationConcurrency |> Option.map (fun v -> "snapshot_verification_concurrency", Fes.Http.toQueryValue v)
+                    req.VerifyBlobContents |> Option.map (fun v -> "verify_blob_contents", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            endpoint, ValueNone
 
     type SnapshotRepositoryVerifyIntegrityResponse = System.Text.Json.JsonElement
 
@@ -953,24 +913,20 @@ module SnapshotOperations =
     }
 
         with
-        static member ToRequest(req: SnapshotRestoreRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_snapshot/{req.Repository}/{req.Snapshot}/_restore"
-                let queryParams =
-                    [
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                        req.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SnapshotRestoreRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_snapshot/{req.Repository}/{req.Snapshot}/_restore"
+            let queryParams =
+                [
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                    req.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type SnapshotRestoreResponse = System.Text.Json.JsonElement
 
@@ -1085,23 +1041,19 @@ module SnapshotOperations =
     }
 
         with
-        static member ToRequest(req: SnapshotStatusRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_snapshot/{req.Repository}/{req.Snapshot}/_status"
-                let queryParams =
-                    [
-                        req.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SnapshotStatusRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_snapshot/{req.Repository}/{req.Snapshot}/_status"
+            let queryParams =
+                [
+                    req.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type SnapshotStatusResponse = System.Text.Json.JsonElement
 
@@ -1145,23 +1097,19 @@ module SnapshotOperations =
     }
 
         with
-        static member ToRequest(req: SnapshotVerifyRepositoryRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_snapshot/{req.Repository}/_verify"
-                let queryParams =
-                    [
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SnapshotVerifyRepositoryRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_snapshot/{req.Repository}/_verify"
+            let queryParams =
+                [
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            endpoint, ValueNone
 
     type SnapshotVerifyRepositoryResponse = System.Text.Json.JsonElement
 
