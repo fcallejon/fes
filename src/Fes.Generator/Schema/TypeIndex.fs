@@ -1,0 +1,31 @@
+module Fes.Generator.Schema.TypeIndex
+
+open Fes.Generator.Schema
+
+type TypeIndex = {
+    ByName: Map<TypeName, TypeDefinition>
+    Endpoints: Endpoint list
+    EndpointsToGenerate: Endpoint list
+}
+
+let build (model: Model) : TypeIndex =
+    let byName =
+        model.Types
+        |> List.map (fun t -> TypeDefinition.name t, t)
+        |> Map.ofList
+
+    let toGenerate =
+        model.Endpoints
+        |> List.filter (fun e -> not e.CodegenExclude)
+
+    { ByName = byName
+      Endpoints = model.Endpoints
+      EndpointsToGenerate = toGenerate }
+
+let tryResolve (index: TypeIndex) (name: TypeName) : TypeDefinition option =
+    Map.tryFind name index.ByName
+
+let resolve (index: TypeIndex) (name: TypeName) : TypeDefinition =
+    match tryResolve index name with
+    | Some t -> t
+    | None -> failwith $"Unresolvable type reference: {name.Namespace}.{name.Name}"

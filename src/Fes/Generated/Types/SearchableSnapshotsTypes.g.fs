@@ -1,0 +1,15 @@
+// Auto-generated from Elasticsearch schema.json — do not edit manually
+
+namespace Fes.Generated.Types
+
+
+open System.Text.Json.Serialization
+
+module SearchableSnapshotsTypes =
+
+    [<RequireQualifiedAccess>]
+    type StatsLevel =
+        | Cluster
+        | Indices
+        | Shards
+

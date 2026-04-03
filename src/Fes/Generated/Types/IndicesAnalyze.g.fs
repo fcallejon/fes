@@ -1,0 +1,84 @@
+// Auto-generated from Elasticsearch schema.json — do not edit manually
+
+namespace Fes.Generated.Types
+
+
+open System.Text.Json.Serialization
+
+module IndicesAnalyze =
+
+    type ExplainAnalyzeToken = {
+        [<System.Text.Json.Serialization.JsonPropertyName("bytes")>]
+        Bytes: string
+        [<System.Text.Json.Serialization.JsonPropertyName("end_offset")>]
+        EndOffset: Types.Long
+        [<System.Text.Json.Serialization.JsonPropertyName("keyword")>]
+        Keyword: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("position")>]
+        Position: Types.Long
+        [<System.Text.Json.Serialization.JsonPropertyName("positionLength")>]
+        PositionLength: Types.Long
+        [<System.Text.Json.Serialization.JsonPropertyName("start_offset")>]
+        StartOffset: Types.Long
+        [<System.Text.Json.Serialization.JsonPropertyName("termFrequency")>]
+        TermFrequency: Types.Long
+        [<System.Text.Json.Serialization.JsonPropertyName("token")>]
+        Token: string
+        [<System.Text.Json.Serialization.JsonPropertyName("type")>]
+        Type: string
+    }
+
+    type AnalyzerDetail = {
+        [<System.Text.Json.Serialization.JsonPropertyName("name")>]
+        Name: string
+        [<System.Text.Json.Serialization.JsonPropertyName("tokens")>]
+        Tokens: IndicesAnalyze.ExplainAnalyzeToken list
+    }
+
+    type CharFilterDetail = {
+        [<System.Text.Json.Serialization.JsonPropertyName("filtered_text")>]
+        FilteredText: string list
+        [<System.Text.Json.Serialization.JsonPropertyName("name")>]
+        Name: string
+    }
+
+    type TokenDetail = {
+        [<System.Text.Json.Serialization.JsonPropertyName("name")>]
+        Name: string
+        [<System.Text.Json.Serialization.JsonPropertyName("tokens")>]
+        Tokens: IndicesAnalyze.ExplainAnalyzeToken list
+    }
+
+    type AnalyzeDetail = {
+        [<System.Text.Json.Serialization.JsonPropertyName("analyzer")>]
+        Analyzer: IndicesAnalyze.AnalyzerDetail option
+        [<System.Text.Json.Serialization.JsonPropertyName("charfilters")>]
+        Charfilters: IndicesAnalyze.CharFilterDetail list option
+        [<System.Text.Json.Serialization.JsonPropertyName("custom_analyzer")>]
+        CustomAnalyzer: bool
+        [<System.Text.Json.Serialization.JsonPropertyName("tokenfilters")>]
+        Tokenfilters: IndicesAnalyze.TokenDetail list option
+        [<System.Text.Json.Serialization.JsonPropertyName("tokenizer")>]
+        Tokenizer: IndicesAnalyze.TokenDetail option
+    }
+
+    type AnalyzeToken = {
+        [<System.Text.Json.Serialization.JsonPropertyName("end_offset")>]
+        EndOffset: Types.Long
+        [<System.Text.Json.Serialization.JsonPropertyName("position")>]
+        Position: Types.Long
+        [<System.Text.Json.Serialization.JsonPropertyName("positionLength")>]
+        PositionLength: Types.Long option
+        [<System.Text.Json.Serialization.JsonPropertyName("start_offset")>]
+        StartOffset: Types.Long
+        [<System.Text.Json.Serialization.JsonPropertyName("token")>]
+        Token: string
+        [<System.Text.Json.Serialization.JsonPropertyName("type")>]
+        Type: string
+    }
+
+    [<RequireQualifiedAccess>]
+    type TextToAnalyze =
+        | String of string
+        | Array of string list
+
