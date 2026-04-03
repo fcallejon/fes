@@ -21,15 +21,19 @@
     <!-- Test infrastructure -->
     <Compile Include="TestTransport.fs" />
     <Compile Include="Snapshot.fs" />
-    <!-- Hand-written tests -->
+    <!-- C#-pattern tests: URL verification, request body JSON, response deserialisation -->
+    <Compile Include="UrlTests.fs" />
+    <Compile Include="RequestBodyTests.fs" />
+    <Compile Include="ResponseDeserializationTests.fs" />
+    <Compile Include="PipelineTests.fs" />
+    <!-- Kept from previous: transport config, serializer, basic builder tests -->
     <Compile Include="SerializerTests.fs" />
     <Compile Include="TransportTests.fs" />
     <Compile Include="EndpointTests.fs" />
     <Compile Include="QueryBuilderTests.fs" />
     <Compile Include="AggregationBuilderTests.fs" />
     <Compile Include="JsonConverterTests.fs" />
-    <Compile Include="PipelineTests.fs" />
-    <!-- Generated tests -->
+    <!-- Generated tests: enum round-trips, endpoint method/body, variant discriminators -->
     <Compile Include="Generated/EndpointTests.g.fs" />
     <Compile Include="Generated/EnumRoundTripTests.g.fs" />
     <Compile Include="Generated/VariantTests.g.fs" />
