@@ -329,6 +329,7 @@ module SearchApplicationOperations =
 
     type SearchApplicationRenderQueryRequest = {
         Name: Types.Name
+        [<System.Text.Json.Serialization.JsonPropertyName("params")>]
         Params: Map<string, System.Text.Json.JsonElement> option
     }
 
@@ -370,6 +371,7 @@ module SearchApplicationOperations =
     type SearchApplicationSearchRequest = {
         Name: Types.Name
         TypedKeys: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("params")>]
         Params: Map<string, System.Text.Json.JsonElement> option
     }
 
@@ -392,7 +394,7 @@ module SearchApplicationOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type SearchApplicationSearchResponse = Types.ResponseBody<Types.TDocument>
+    type SearchApplicationSearchResponse<'tDocument> = Types.ResponseBody<'tDocument>
 
     type SearchApplicationSearchRequestBuilder() =
         member _.Yield(_: unit) : SearchApplicationSearchRequest =

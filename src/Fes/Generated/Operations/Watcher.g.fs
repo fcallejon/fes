@@ -137,12 +137,19 @@ module WatcherOperations =
     type WatcherExecuteWatchRequest = {
         Id: Types.Id
         Debug: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("action_modes")>]
         ActionModes: Map<string, Types.ActionExecutionMode> option
+        [<System.Text.Json.Serialization.JsonPropertyName("alternative_input")>]
         AlternativeInput: Map<string, System.Text.Json.JsonElement> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_condition")>]
         IgnoreCondition: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("record_execution")>]
         RecordExecution: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("simulated_actions")>]
         SimulatedActions: Types.SimulatedActions option
+        [<System.Text.Json.Serialization.JsonPropertyName("trigger_data")>]
         TriggerData: Types.ScheduleTriggerEvent option
+        [<System.Text.Json.Serialization.JsonPropertyName("watch")>]
         Watch: Types.Watch option
     }
 
@@ -312,13 +319,21 @@ module WatcherOperations =
         IfPrimaryTerm: Types.Long option
         IfSeqNo: Types.SequenceNumber option
         Version: Types.VersionNumber option
+        [<System.Text.Json.Serialization.JsonPropertyName("actions")>]
         Actions: Map<string, Types.WatcherTypesAction> option
+        [<System.Text.Json.Serialization.JsonPropertyName("condition")>]
         Condition: Types.ConditionContainer option
+        [<System.Text.Json.Serialization.JsonPropertyName("input")>]
         Input: Types.InputContainer option
+        [<System.Text.Json.Serialization.JsonPropertyName("metadata")>]
         Metadata: Types.Metadata option
+        [<System.Text.Json.Serialization.JsonPropertyName("throttle_period")>]
         ThrottlePeriod: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("throttle_period_in_millis")>]
         ThrottlePeriodInMillis: Types.DurationValue<Types.UnitMillis> option
+        [<System.Text.Json.Serialization.JsonPropertyName("transform")>]
         Transform: Types.TransformContainer option
+        [<System.Text.Json.Serialization.JsonPropertyName("trigger")>]
         Trigger: Types.TriggerContainer option
     }
 
@@ -445,10 +460,15 @@ module WatcherOperations =
             { req with Trigger = Some value }
 
     type WatcherQueryWatchesRequest = {
+        [<System.Text.Json.Serialization.JsonPropertyName("from")>]
         From: Types.Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("size")>]
         Size: Types.Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("query")>]
         Query: Types.QueryContainer option
+        [<System.Text.Json.Serialization.JsonPropertyName("sort")>]
         Sort: Types.Sort option
+        [<System.Text.Json.Serialization.JsonPropertyName("search_after")>]
         SearchAfter: Types.SortResults option
     }
 
@@ -553,7 +573,7 @@ module WatcherOperations =
     type WatcherStatsRequest = {
         Metric: System.Text.Json.JsonElement
         EmitStacktraces: bool option
-        Metric: System.Text.Json.JsonElement option
+        queryMetric: System.Text.Json.JsonElement option
     }
 
         with
@@ -582,7 +602,7 @@ module WatcherOperations =
             {
                 Metric = Unchecked.defaultof<_>
                 EmitStacktraces = None
-                Metric = None
+                queryMetric = None
             }
 
         [<CustomOperation("metric")>]
@@ -595,7 +615,7 @@ module WatcherOperations =
 
         [<CustomOperation("metric")>]
         member _.Metric(state: WatcherStatsRequest, value: System.Text.Json.JsonElement) =
-            { state with Metric = Some value }
+            { state with queryMetric = Some value }
 
     let watcherStatsRequest = WatcherStatsRequestBuilder()
 
@@ -603,7 +623,7 @@ module WatcherOperations =
         let withEmitStacktraces (value: bool) (req: WatcherStatsRequest) =
             { req with EmitStacktraces = Some value }
         let withMetric (value: System.Text.Json.JsonElement) (req: WatcherStatsRequest) =
-            { req with Metric = Some value }
+            { req with queryMetric = Some value }
 
     type WatcherStopRequest = {
         MasterTimeout: Types.Duration option
@@ -648,7 +668,9 @@ module WatcherOperations =
     type WatcherUpdateSettingsRequest = {
         MasterTimeout: Types.Duration option
         Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("index.auto_expand_replicas")>]
         IndexAutoExpandReplicas: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("index.number_of_replicas")>]
         IndexNumberOfReplicas: Types.Integer option
     }
 

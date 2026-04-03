@@ -192,9 +192,13 @@ module QueryRulesOperations =
     type QueryRulesPutRuleRequest = {
         RulesetId: Types.Id
         RuleId: Types.Id
+        [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: Types.QueryRuleType
+        [<System.Text.Json.Serialization.JsonPropertyName("criteria")>]
         Criteria: System.Text.Json.JsonElement
+        [<System.Text.Json.Serialization.JsonPropertyName("actions")>]
         Actions: Types.QueryRuleActions
+        [<System.Text.Json.Serialization.JsonPropertyName("priority")>]
         Priority: Types.Integer option
     }
 
@@ -261,6 +265,7 @@ module QueryRulesOperations =
 
     type QueryRulesPutRulesetRequest = {
         RulesetId: Types.Id
+        [<System.Text.Json.Serialization.JsonPropertyName("rules")>]
         Rules: System.Text.Json.JsonElement
     }
 
@@ -301,6 +306,7 @@ module QueryRulesOperations =
 
     type QueryRulesTestRequest = {
         RulesetId: Types.Id
+        [<System.Text.Json.Serialization.JsonPropertyName("match_criteria")>]
         MatchCriteria: Map<string, System.Text.Json.JsonElement>
     }
 

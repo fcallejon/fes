@@ -16,10 +16,15 @@ module SimulateOperations =
         Index: Types.IndexName
         Pipeline: Types.PipelineName option
         MergeType: Types.MergeType option
+        [<System.Text.Json.Serialization.JsonPropertyName("docs")>]
         Docs: Types.Document list
+        [<System.Text.Json.Serialization.JsonPropertyName("component_template_substitutions")>]
         ComponentTemplateSubstitutions: Map<string, Types.ComponentTemplateNode> option
+        [<System.Text.Json.Serialization.JsonPropertyName("index_template_substitutions")>]
         IndexTemplateSubstitutions: Map<string, Types.IndexTemplate> option
+        [<System.Text.Json.Serialization.JsonPropertyName("mapping_addition")>]
         MappingAddition: Types.TypeMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("pipeline_substitutions")>]
         PipelineSubstitutions: Map<string, Types.IngestTypesPipeline> option
     }
 

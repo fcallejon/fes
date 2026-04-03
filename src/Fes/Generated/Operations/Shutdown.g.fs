@@ -117,9 +117,13 @@ module ShutdownOperations =
         NodeId: Types.NodeId
         MasterTimeout: Types.Duration option
         Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: Types.Type
+        [<System.Text.Json.Serialization.JsonPropertyName("reason")>]
         Reason: string
+        [<System.Text.Json.Serialization.JsonPropertyName("allocation_delay")>]
         AllocationDelay: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("target_node_name")>]
         TargetNodeName: string option
     }
 

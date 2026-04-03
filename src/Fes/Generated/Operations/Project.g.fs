@@ -159,6 +159,7 @@ module ProjectOperations =
     let projectGetRoutingRequest = ProjectGetRoutingRequestBuilder()
 
     type ProjectTagsRequest = {
+        [<System.Text.Json.Serialization.JsonPropertyName("project_routing")>]
         ProjectRouting: Types.ProjectRouting option
     }
 

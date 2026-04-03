@@ -144,17 +144,29 @@ module ConnectorOperations =
 
     type ConnectorLastSyncRequest = {
         ConnectorId: Types.Id
+        [<System.Text.Json.Serialization.JsonPropertyName("last_access_control_sync_error")>]
         LastAccessControlSyncError: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("last_access_control_sync_scheduled_at")>]
         LastAccessControlSyncScheduledAt: Types.DateTime option
+        [<System.Text.Json.Serialization.JsonPropertyName("last_access_control_sync_status")>]
         LastAccessControlSyncStatus: Types.SyncStatus option
+        [<System.Text.Json.Serialization.JsonPropertyName("last_deleted_document_count")>]
         LastDeletedDocumentCount: Types.Long option
+        [<System.Text.Json.Serialization.JsonPropertyName("last_incremental_sync_scheduled_at")>]
         LastIncrementalSyncScheduledAt: Types.DateTime option
+        [<System.Text.Json.Serialization.JsonPropertyName("last_indexed_document_count")>]
         LastIndexedDocumentCount: Types.Long option
+        [<System.Text.Json.Serialization.JsonPropertyName("last_seen")>]
         LastSeen: Types.DateTime option
+        [<System.Text.Json.Serialization.JsonPropertyName("last_sync_error")>]
         LastSyncError: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("last_sync_scheduled_at")>]
         LastSyncScheduledAt: Types.DateTime option
+        [<System.Text.Json.Serialization.JsonPropertyName("last_sync_status")>]
         LastSyncStatus: Types.SyncStatus option
+        [<System.Text.Json.Serialization.JsonPropertyName("last_synced")>]
         LastSynced: Types.DateTime option
+        [<System.Text.Json.Serialization.JsonPropertyName("sync_cursor")>]
         SyncCursor: System.Text.Json.JsonElement option
     }
 
@@ -365,11 +377,17 @@ module ConnectorOperations =
             { req with Query = Some value }
 
     type ConnectorPostRequest = {
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
         Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("index_name")>]
         IndexName: Types.IndexName option
+        [<System.Text.Json.Serialization.JsonPropertyName("is_native")>]
         IsNative: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("language")>]
         Language: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("name")>]
         Name: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("service_type")>]
         ServiceType: string option
     }
 
@@ -440,11 +458,17 @@ module ConnectorOperations =
 
     type ConnectorPutRequest = {
         ConnectorId: Types.Id
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
         Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("index_name")>]
         IndexName: Types.IndexName option
+        [<System.Text.Json.Serialization.JsonPropertyName("is_native")>]
         IsNative: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("language")>]
         Language: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("name")>]
         Name: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("service_type")>]
         ServiceType: string option
     }
 
@@ -577,6 +601,7 @@ module ConnectorOperations =
     let connectorSecretGetRequest = ConnectorSecretGetRequestBuilder()
 
     type ConnectorSecretPostRequest = {
+        [<System.Text.Json.Serialization.JsonPropertyName("value")>]
         Value: string option
     }
 
@@ -612,6 +637,7 @@ module ConnectorOperations =
 
     type ConnectorSecretPutRequest = {
         Id: string
+        [<System.Text.Json.Serialization.JsonPropertyName("value")>]
         Value: string
     }
 
@@ -710,7 +736,9 @@ module ConnectorOperations =
 
     type ConnectorSyncJobClaimRequest = {
         ConnectorSyncJobId: Types.Id
+        [<System.Text.Json.Serialization.JsonPropertyName("sync_cursor")>]
         SyncCursor: System.Text.Json.JsonElement option
+        [<System.Text.Json.Serialization.JsonPropertyName("worker_hostname")>]
         WorkerHostname: string
     }
 
@@ -787,6 +815,7 @@ module ConnectorOperations =
 
     type ConnectorSyncJobErrorRequest = {
         ConnectorSyncJobId: Types.Id
+        [<System.Text.Json.Serialization.JsonPropertyName("error")>]
         Error: string
     }
 
@@ -931,8 +960,11 @@ module ConnectorOperations =
             { req with JobType = Some value }
 
     type ConnectorSyncJobPostRequest = {
+        [<System.Text.Json.Serialization.JsonPropertyName("id")>]
         Id: Types.Id
+        [<System.Text.Json.Serialization.JsonPropertyName("job_type")>]
         JobType: Types.SyncJobType option
+        [<System.Text.Json.Serialization.JsonPropertyName("trigger_method")>]
         TriggerMethod: Types.SyncJobTriggerMethod option
     }
 
@@ -982,11 +1014,17 @@ module ConnectorOperations =
 
     type ConnectorSyncJobUpdateStatsRequest = {
         ConnectorSyncJobId: Types.Id
+        [<System.Text.Json.Serialization.JsonPropertyName("deleted_document_count")>]
         DeletedDocumentCount: Types.Long
+        [<System.Text.Json.Serialization.JsonPropertyName("indexed_document_count")>]
         IndexedDocumentCount: Types.Long
+        [<System.Text.Json.Serialization.JsonPropertyName("indexed_document_volume")>]
         IndexedDocumentVolume: Types.Long
+        [<System.Text.Json.Serialization.JsonPropertyName("last_seen")>]
         LastSeen: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("metadata")>]
         Metadata: Types.Metadata option
+        [<System.Text.Json.Serialization.JsonPropertyName("total_document_count")>]
         TotalDocumentCount: Types.Integer option
     }
 
@@ -1091,7 +1129,9 @@ module ConnectorOperations =
 
     type ConnectorUpdateApiKeyIdRequest = {
         ConnectorId: Types.Id
+        [<System.Text.Json.Serialization.JsonPropertyName("api_key_id")>]
         ApiKeyId: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("api_key_secret_id")>]
         ApiKeySecretId: string option
     }
 
@@ -1139,7 +1179,9 @@ module ConnectorOperations =
 
     type ConnectorUpdateConfigurationRequest = {
         ConnectorId: Types.Id
+        [<System.Text.Json.Serialization.JsonPropertyName("configuration")>]
         Configuration: Types.ConnectorConfiguration option
+        [<System.Text.Json.Serialization.JsonPropertyName("values")>]
         Values: Map<string, System.Text.Json.JsonElement> option
     }
 
@@ -1187,6 +1229,7 @@ module ConnectorOperations =
 
     type ConnectorUpdateErrorRequest = {
         ConnectorId: Types.Id
+        [<System.Text.Json.Serialization.JsonPropertyName("error")>]
         Error: Types.WithNullValue<string>
     }
 
@@ -1227,6 +1270,7 @@ module ConnectorOperations =
 
     type ConnectorUpdateFeaturesRequest = {
         ConnectorId: Types.Id
+        [<System.Text.Json.Serialization.JsonPropertyName("features")>]
         Features: Types.ConnectorFeatures
     }
 
@@ -1267,8 +1311,11 @@ module ConnectorOperations =
 
     type ConnectorUpdateFilteringRequest = {
         ConnectorId: Types.Id
+        [<System.Text.Json.Serialization.JsonPropertyName("filtering")>]
         Filtering: Types.FilteringConfig list option
+        [<System.Text.Json.Serialization.JsonPropertyName("rules")>]
         Rules: Types.FilteringRule list option
+        [<System.Text.Json.Serialization.JsonPropertyName("advanced_snippet")>]
         AdvancedSnippet: Types.FilteringAdvancedSnippet option
     }
 
@@ -1323,6 +1370,7 @@ module ConnectorOperations =
 
     type ConnectorUpdateFilteringValidationRequest = {
         ConnectorId: Types.Id
+        [<System.Text.Json.Serialization.JsonPropertyName("validation")>]
         Validation: Types.FilteringRulesValidation
     }
 
@@ -1363,6 +1411,7 @@ module ConnectorOperations =
 
     type ConnectorUpdateIndexNameRequest = {
         ConnectorId: Types.Id
+        [<System.Text.Json.Serialization.JsonPropertyName("index_name")>]
         IndexName: Types.WithNullValue<Types.IndexName>
     }
 
@@ -1403,7 +1452,9 @@ module ConnectorOperations =
 
     type ConnectorUpdateNameRequest = {
         ConnectorId: Types.Id
+        [<System.Text.Json.Serialization.JsonPropertyName("name")>]
         Name: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
         Description: string option
     }
 
@@ -1451,6 +1502,7 @@ module ConnectorOperations =
 
     type ConnectorUpdateNativeRequest = {
         ConnectorId: Types.Id
+        [<System.Text.Json.Serialization.JsonPropertyName("is_native")>]
         IsNative: bool
     }
 
@@ -1491,6 +1543,7 @@ module ConnectorOperations =
 
     type ConnectorUpdatePipelineRequest = {
         ConnectorId: Types.Id
+        [<System.Text.Json.Serialization.JsonPropertyName("pipeline")>]
         Pipeline: Types.IngestPipelineParams
     }
 
@@ -1531,6 +1584,7 @@ module ConnectorOperations =
 
     type ConnectorUpdateSchedulingRequest = {
         ConnectorId: Types.Id
+        [<System.Text.Json.Serialization.JsonPropertyName("scheduling")>]
         Scheduling: Types.SchedulingConfiguration
     }
 
@@ -1571,6 +1625,7 @@ module ConnectorOperations =
 
     type ConnectorUpdateServiceTypeRequest = {
         ConnectorId: Types.Id
+        [<System.Text.Json.Serialization.JsonPropertyName("service_type")>]
         ServiceType: string
     }
 
@@ -1611,6 +1666,7 @@ module ConnectorOperations =
 
     type ConnectorUpdateStatusRequest = {
         ConnectorId: Types.Id
+        [<System.Text.Json.Serialization.JsonPropertyName("status")>]
         Status: Types.ConnectorStatus
     }
 

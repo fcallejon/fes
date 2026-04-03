@@ -12,6 +12,8 @@ let emitESModule (index: TypeIndex.TypeIndex) : string * string =
     w.Namespace "Fes.Generated.Operations"
     w.BlankLine()
     w.Open "Fes"
+    w.Open "Fes.Generated"
+    w.Open "Fes.Generated.Operations"
     w.BlankLine()
 
     // Group endpoints by namespace

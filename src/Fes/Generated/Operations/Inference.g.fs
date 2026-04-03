@@ -68,7 +68,9 @@ module InferenceOperations =
     type InferenceCompletionRequest = {
         InferenceId: Types.Id
         Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("input")>]
         Input: System.Text.Json.JsonElement
+        [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
         TaskSettings: Types.TaskSettings option
     }
 
@@ -281,9 +283,13 @@ module InferenceOperations =
         TaskType: Types.TaskType
         InferenceId: Types.Id
         Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("query")>]
         Query: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("input")>]
         Input: System.Text.Json.JsonElement
+        [<System.Text.Json.Serialization.JsonPropertyName("input_type")>]
         InputType: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
         TaskSettings: Types.TaskSettings option
     }
 
@@ -425,7 +431,9 @@ module InferenceOperations =
         TaskType: Types.Ai21TaskType
         Ai21InferenceId: Types.Id
         Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("service")>]
         Service: Types.Ai21ServiceType
+        [<System.Text.Json.Serialization.JsonPropertyName("service_settings")>]
         ServiceSettings: Types.Ai21ServiceSettings
     }
 
@@ -494,9 +502,13 @@ module InferenceOperations =
         TaskType: Types.AlibabaCloudTaskType
         AlibabacloudInferenceId: Types.Id
         Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("chunking_settings")>]
         ChunkingSettings: Types.InferenceChunkingSettings option
+        [<System.Text.Json.Serialization.JsonPropertyName("service")>]
         Service: Types.AlibabaCloudServiceType
+        [<System.Text.Json.Serialization.JsonPropertyName("service_settings")>]
         ServiceSettings: Types.AlibabaCloudServiceSettings
+        [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
         TaskSettings: Types.AlibabaCloudTaskSettings option
     }
 
@@ -579,9 +591,13 @@ module InferenceOperations =
         TaskType: Types.AmazonBedrockTaskType
         AmazonbedrockInferenceId: Types.Id
         Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("chunking_settings")>]
         ChunkingSettings: Types.InferenceChunkingSettings option
+        [<System.Text.Json.Serialization.JsonPropertyName("service")>]
         Service: Types.AmazonBedrockServiceType
+        [<System.Text.Json.Serialization.JsonPropertyName("service_settings")>]
         ServiceSettings: Types.AmazonBedrockServiceSettings
+        [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
         TaskSettings: Types.AmazonBedrockTaskSettings option
     }
 
@@ -664,9 +680,13 @@ module InferenceOperations =
         TaskType: Types.TaskTypeAmazonSageMaker
         AmazonsagemakerInferenceId: Types.Id
         Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("chunking_settings")>]
         ChunkingSettings: Types.InferenceChunkingSettings option
+        [<System.Text.Json.Serialization.JsonPropertyName("service")>]
         Service: Types.AmazonSageMakerServiceType
+        [<System.Text.Json.Serialization.JsonPropertyName("service_settings")>]
         ServiceSettings: Types.AmazonSageMakerServiceSettings
+        [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
         TaskSettings: Types.AmazonSageMakerTaskSettings option
     }
 
@@ -749,8 +769,11 @@ module InferenceOperations =
         TaskType: Types.AnthropicTaskType
         AnthropicInferenceId: Types.Id
         Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("service")>]
         Service: Types.AnthropicServiceType
+        [<System.Text.Json.Serialization.JsonPropertyName("service_settings")>]
         ServiceSettings: Types.AnthropicServiceSettings
+        [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
         TaskSettings: Types.AnthropicTaskSettings option
     }
 
@@ -826,9 +849,13 @@ module InferenceOperations =
         TaskType: Types.AzureAiStudioTaskType
         AzureaistudioInferenceId: Types.Id
         Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("chunking_settings")>]
         ChunkingSettings: Types.InferenceChunkingSettings option
+        [<System.Text.Json.Serialization.JsonPropertyName("service")>]
         Service: Types.AzureAiStudioServiceType
+        [<System.Text.Json.Serialization.JsonPropertyName("service_settings")>]
         ServiceSettings: Types.AzureAiStudioServiceSettings
+        [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
         TaskSettings: Types.AzureAiStudioTaskSettings option
     }
 
@@ -911,9 +938,13 @@ module InferenceOperations =
         TaskType: Types.AzureOpenAITaskType
         AzureopenaiInferenceId: Types.Id
         Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("chunking_settings")>]
         ChunkingSettings: Types.InferenceChunkingSettings option
+        [<System.Text.Json.Serialization.JsonPropertyName("service")>]
         Service: Types.AzureOpenAIServiceType
+        [<System.Text.Json.Serialization.JsonPropertyName("service_settings")>]
         ServiceSettings: Types.AzureOpenAIServiceSettings
+        [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
         TaskSettings: Types.AzureOpenAITaskSettings option
     }
 
@@ -996,9 +1027,13 @@ module InferenceOperations =
         TaskType: Types.CohereTaskType
         CohereInferenceId: Types.Id
         Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("chunking_settings")>]
         ChunkingSettings: Types.InferenceChunkingSettings option
+        [<System.Text.Json.Serialization.JsonPropertyName("service")>]
         Service: Types.CohereServiceType
+        [<System.Text.Json.Serialization.JsonPropertyName("service_settings")>]
         ServiceSettings: Types.CohereServiceSettings
+        [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
         TaskSettings: Types.CohereTaskSettings option
     }
 
@@ -1081,8 +1116,11 @@ module InferenceOperations =
         TaskType: Types.TaskTypeContextualAI
         ContextualaiInferenceId: Types.Id
         Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("service")>]
         Service: Types.ContextualAIServiceType
+        [<System.Text.Json.Serialization.JsonPropertyName("service_settings")>]
         ServiceSettings: Types.ContextualAIServiceSettings
+        [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
         TaskSettings: Types.ContextualAITaskSettings option
     }
 
@@ -1157,9 +1195,13 @@ module InferenceOperations =
     type InferencePutCustomRequest = {
         TaskType: Types.CustomTaskType
         CustomInferenceId: Types.Id
+        [<System.Text.Json.Serialization.JsonPropertyName("chunking_settings")>]
         ChunkingSettings: Types.InferenceChunkingSettings option
+        [<System.Text.Json.Serialization.JsonPropertyName("service")>]
         Service: Types.CustomServiceType
+        [<System.Text.Json.Serialization.JsonPropertyName("service_settings")>]
         ServiceSettings: Types.CustomServiceSettings
+        [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
         TaskSettings: Types.CustomTaskSettings option
     }
 
@@ -1228,7 +1270,9 @@ module InferenceOperations =
         TaskType: Types.TaskTypeDeepSeek
         DeepseekInferenceId: Types.Id
         Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("service")>]
         Service: Types.DeepSeekServiceType
+        [<System.Text.Json.Serialization.JsonPropertyName("service_settings")>]
         ServiceSettings: Types.DeepSeekServiceSettings
     }
 
@@ -1297,9 +1341,13 @@ module InferenceOperations =
         TaskType: Types.ElasticsearchTaskType
         ElasticsearchInferenceId: Types.Id
         Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("chunking_settings")>]
         ChunkingSettings: Types.InferenceChunkingSettings option
+        [<System.Text.Json.Serialization.JsonPropertyName("service")>]
         Service: Types.ElasticsearchServiceType
+        [<System.Text.Json.Serialization.JsonPropertyName("service_settings")>]
         ServiceSettings: Types.ElasticsearchServiceSettings
+        [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
         TaskSettings: Types.ElasticsearchTaskSettings option
     }
 
@@ -1382,8 +1430,11 @@ module InferenceOperations =
         TaskType: Types.ElserTaskType
         ElserInferenceId: Types.Id
         Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("chunking_settings")>]
         ChunkingSettings: Types.InferenceChunkingSettings option
+        [<System.Text.Json.Serialization.JsonPropertyName("service")>]
         Service: Types.ElserServiceType
+        [<System.Text.Json.Serialization.JsonPropertyName("service_settings")>]
         ServiceSettings: Types.ElserServiceSettings
     }
 
@@ -1459,9 +1510,13 @@ module InferenceOperations =
         TaskType: Types.FireworksAITaskType
         FireworksaiInferenceId: Types.Id
         Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("chunking_settings")>]
         ChunkingSettings: Types.InferenceChunkingSettings option
+        [<System.Text.Json.Serialization.JsonPropertyName("service")>]
         Service: Types.FireworksAIServiceType
+        [<System.Text.Json.Serialization.JsonPropertyName("service_settings")>]
         ServiceSettings: Types.FireworksAIServiceSettings
+        [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
         TaskSettings: Types.FireworksAITaskSettings option
     }
 
@@ -1544,8 +1599,11 @@ module InferenceOperations =
         TaskType: Types.GoogleAiStudioTaskType
         GoogleaistudioInferenceId: Types.Id
         Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("chunking_settings")>]
         ChunkingSettings: Types.InferenceChunkingSettings option
+        [<System.Text.Json.Serialization.JsonPropertyName("service")>]
         Service: Types.GoogleAiServiceType
+        [<System.Text.Json.Serialization.JsonPropertyName("service_settings")>]
         ServiceSettings: Types.GoogleAiStudioServiceSettings
     }
 
@@ -1621,9 +1679,13 @@ module InferenceOperations =
         TaskType: Types.GoogleVertexAITaskType
         GooglevertexaiInferenceId: Types.Id
         Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("chunking_settings")>]
         ChunkingSettings: Types.InferenceChunkingSettings option
+        [<System.Text.Json.Serialization.JsonPropertyName("service")>]
         Service: Types.GoogleVertexAIServiceType
+        [<System.Text.Json.Serialization.JsonPropertyName("service_settings")>]
         ServiceSettings: Types.GoogleVertexAIServiceSettings
+        [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
         TaskSettings: Types.GoogleVertexAITaskSettings option
     }
 
@@ -1706,7 +1768,9 @@ module InferenceOperations =
         TaskType: Types.GroqTaskType
         GroqInferenceId: Types.Id
         Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("service")>]
         Service: Types.GroqServiceType
+        [<System.Text.Json.Serialization.JsonPropertyName("service_settings")>]
         ServiceSettings: Types.GroqServiceSettings
     }
 
@@ -1775,9 +1839,13 @@ module InferenceOperations =
         TaskType: Types.HuggingFaceTaskType
         HuggingfaceInferenceId: Types.Id
         Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("chunking_settings")>]
         ChunkingSettings: Types.InferenceChunkingSettings option
+        [<System.Text.Json.Serialization.JsonPropertyName("service")>]
         Service: Types.HuggingFaceServiceType
+        [<System.Text.Json.Serialization.JsonPropertyName("service_settings")>]
         ServiceSettings: Types.HuggingFaceServiceSettings
+        [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
         TaskSettings: Types.HuggingFaceTaskSettings option
     }
 
@@ -1860,9 +1928,13 @@ module InferenceOperations =
         TaskType: Types.JinaAITaskType
         JinaaiInferenceId: Types.Id
         Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("chunking_settings")>]
         ChunkingSettings: Types.InferenceChunkingSettings option
+        [<System.Text.Json.Serialization.JsonPropertyName("service")>]
         Service: Types.JinaAIServiceType
+        [<System.Text.Json.Serialization.JsonPropertyName("service_settings")>]
         ServiceSettings: Types.JinaAIServiceSettings
+        [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
         TaskSettings: Types.JinaAITaskSettings option
     }
 
@@ -1945,8 +2017,11 @@ module InferenceOperations =
         TaskType: Types.LlamaTaskType
         LlamaInferenceId: Types.Id
         Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("chunking_settings")>]
         ChunkingSettings: Types.InferenceChunkingSettings option
+        [<System.Text.Json.Serialization.JsonPropertyName("service")>]
         Service: Types.LlamaServiceType
+        [<System.Text.Json.Serialization.JsonPropertyName("service_settings")>]
         ServiceSettings: Types.LlamaServiceSettings
     }
 
@@ -2022,8 +2097,11 @@ module InferenceOperations =
         TaskType: Types.MistralTaskType
         MistralInferenceId: Types.Id
         Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("chunking_settings")>]
         ChunkingSettings: Types.InferenceChunkingSettings option
+        [<System.Text.Json.Serialization.JsonPropertyName("service")>]
         Service: Types.MistralServiceType
+        [<System.Text.Json.Serialization.JsonPropertyName("service_settings")>]
         ServiceSettings: Types.MistralServiceSettings
     }
 
@@ -2099,9 +2177,13 @@ module InferenceOperations =
         TaskType: Types.NvidiaTaskType
         NvidiaInferenceId: Types.Id
         Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("chunking_settings")>]
         ChunkingSettings: Types.InferenceChunkingSettings option
+        [<System.Text.Json.Serialization.JsonPropertyName("service")>]
         Service: Types.NvidiaServiceType
+        [<System.Text.Json.Serialization.JsonPropertyName("service_settings")>]
         ServiceSettings: Types.NvidiaServiceSettings
+        [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
         TaskSettings: Types.NvidiaTaskSettings option
     }
 
@@ -2184,9 +2266,13 @@ module InferenceOperations =
         TaskType: Types.OpenAITaskType
         OpenaiInferenceId: Types.Id
         Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("chunking_settings")>]
         ChunkingSettings: Types.InferenceChunkingSettings option
+        [<System.Text.Json.Serialization.JsonPropertyName("service")>]
         Service: Types.OpenAIServiceType
+        [<System.Text.Json.Serialization.JsonPropertyName("service_settings")>]
         ServiceSettings: Types.OpenAIServiceSettings
+        [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
         TaskSettings: Types.OpenAITaskSettings option
     }
 
@@ -2269,9 +2355,13 @@ module InferenceOperations =
         TaskType: Types.OpenShiftAiTaskType
         OpenshiftaiInferenceId: Types.Id
         Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("chunking_settings")>]
         ChunkingSettings: Types.InferenceChunkingSettings option
+        [<System.Text.Json.Serialization.JsonPropertyName("service")>]
         Service: Types.OpenShiftAiServiceType
+        [<System.Text.Json.Serialization.JsonPropertyName("service_settings")>]
         ServiceSettings: Types.OpenShiftAiServiceSettings
+        [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
         TaskSettings: Types.OpenShiftAiTaskSettings option
     }
 
@@ -2354,9 +2444,13 @@ module InferenceOperations =
         TaskType: Types.VoyageAITaskType
         VoyageaiInferenceId: Types.Id
         Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("chunking_settings")>]
         ChunkingSettings: Types.InferenceChunkingSettings option
+        [<System.Text.Json.Serialization.JsonPropertyName("service")>]
         Service: Types.VoyageAIServiceType
+        [<System.Text.Json.Serialization.JsonPropertyName("service_settings")>]
         ServiceSettings: Types.VoyageAIServiceSettings
+        [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
         TaskSettings: Types.VoyageAITaskSettings option
     }
 
@@ -2439,8 +2533,11 @@ module InferenceOperations =
         TaskType: Types.WatsonxTaskType
         WatsonxInferenceId: Types.Id
         Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("chunking_settings")>]
         ChunkingSettings: Types.InferenceChunkingSettings option
+        [<System.Text.Json.Serialization.JsonPropertyName("service")>]
         Service: Types.WatsonxServiceType
+        [<System.Text.Json.Serialization.JsonPropertyName("service_settings")>]
         ServiceSettings: Types.WatsonxServiceSettings
     }
 
@@ -2515,10 +2612,15 @@ module InferenceOperations =
     type InferenceRerankRequest = {
         InferenceId: Types.Id
         Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("query")>]
         Query: string
+        [<System.Text.Json.Serialization.JsonPropertyName("input")>]
         Input: string list
+        [<System.Text.Json.Serialization.JsonPropertyName("return_documents")>]
         ReturnDocuments: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("top_n")>]
         TopN: Types.Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
         TaskSettings: Types.TaskSettings option
     }
 
@@ -2602,7 +2704,9 @@ module InferenceOperations =
     type InferenceSparseEmbeddingRequest = {
         InferenceId: Types.Id
         Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("input")>]
         Input: System.Text.Json.JsonElement
+        [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
         TaskSettings: Types.TaskSettings option
     }
 
@@ -2665,7 +2769,9 @@ module InferenceOperations =
     type InferenceStreamCompletionRequest = {
         InferenceId: Types.Id
         Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("input")>]
         Input: System.Text.Json.JsonElement
+        [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
         TaskSettings: Types.TaskSettings option
     }
 
@@ -2728,8 +2834,11 @@ module InferenceOperations =
     type InferenceTextEmbeddingRequest = {
         InferenceId: Types.Id
         Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("input")>]
         Input: System.Text.Json.JsonElement
+        [<System.Text.Json.Serialization.JsonPropertyName("input_type")>]
         InputType: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
         TaskSettings: Types.TaskSettings option
     }
 

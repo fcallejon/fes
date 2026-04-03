@@ -338,7 +338,9 @@ module IngestOperations =
         Id: Types.Id
         MasterTimeout: Types.Duration option
         Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("name")>]
         Name: Types.Name
+        [<System.Text.Json.Serialization.JsonPropertyName("maxmind")>]
         Maxmind: Types.Maxmind
     }
 
@@ -473,12 +475,19 @@ module IngestOperations =
         MasterTimeout: Types.Duration option
         Timeout: Types.Duration option
         IfVersion: Types.Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("_meta")>]
         Meta: Types.Metadata option
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
         Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_failure")>]
         OnFailure: Types.ProcessorContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("processors")>]
         Processors: Types.ProcessorContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
         Version: Types.VersionNumber option
+        [<System.Text.Json.Serialization.JsonPropertyName("deprecated")>]
         Deprecated: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("field_access_pattern")>]
         FieldAccessPattern: Types.FieldAccessPattern option
     }
 
@@ -592,7 +601,9 @@ module IngestOperations =
     type IngestSimulateRequest = {
         Id: Types.Id
         Verbose: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("docs")>]
         Docs: Types.Document list
+        [<System.Text.Json.Serialization.JsonPropertyName("pipeline")>]
         Pipeline: Types.IngestTypesPipeline option
     }
 

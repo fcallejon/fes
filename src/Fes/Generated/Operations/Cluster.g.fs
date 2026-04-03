@@ -20,10 +20,14 @@ module ClusterOperations =
         IncludeDiskInfo: bool option
         IncludeYesDecisions: bool option
         MasterTimeout: Types.Duration option
-        Index: Types.IndexName option
-        Shard: Types.Integer option
-        Primary: bool option
-        CurrentNode: Types.NodeId option
+        [<System.Text.Json.Serialization.JsonPropertyName("index")>]
+        bodyIndex: Types.IndexName option
+        [<System.Text.Json.Serialization.JsonPropertyName("shard")>]
+        bodyShard: Types.Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("primary")>]
+        bodyPrimary: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("current_node")>]
+        bodyCurrentNode: Types.NodeId option
     }
 
         with
@@ -63,10 +67,10 @@ module ClusterOperations =
                 IncludeDiskInfo = None
                 IncludeYesDecisions = None
                 MasterTimeout = None
-                Index = None
-                Shard = None
-                Primary = None
-                CurrentNode = None
+                bodyIndex = None
+                bodyShard = None
+                bodyPrimary = None
+                bodyCurrentNode = None
             }
 
         [<CustomOperation("index")>]
@@ -99,31 +103,31 @@ module ClusterOperations =
 
         [<CustomOperation("index")>]
         member _.Index(state: ClusterAllocationExplainRequest, value: Types.IndexName) =
-            { state with Index = Some value }
+            { state with bodyIndex = Some value }
 
         [<CustomOperation("shard")>]
         member _.Shard(state: ClusterAllocationExplainRequest, value: Types.Integer) =
-            { state with Shard = Some value }
+            { state with bodyShard = Some value }
 
         [<CustomOperation("primary")>]
         member _.Primary(state: ClusterAllocationExplainRequest, value: bool) =
-            { state with Primary = Some value }
+            { state with bodyPrimary = Some value }
 
         [<CustomOperation("currentNode")>]
         member _.CurrentNode(state: ClusterAllocationExplainRequest, value: Types.NodeId) =
-            { state with CurrentNode = Some value }
+            { state with bodyCurrentNode = Some value }
 
     let clusterAllocationExplainRequest = ClusterAllocationExplainRequestBuilder()
 
     module AllocationExplain =
         let withIndex (value: Types.IndexName) (req: ClusterAllocationExplainRequest) =
-            { req with Index = Some value }
+            { req with bodyIndex = Some value }
         let withShard (value: Types.Integer) (req: ClusterAllocationExplainRequest) =
-            { req with Shard = Some value }
+            { req with bodyShard = Some value }
         let withPrimary (value: bool) (req: ClusterAllocationExplainRequest) =
-            { req with Primary = Some value }
+            { req with bodyPrimary = Some value }
         let withCurrentNode (value: Types.NodeId) (req: ClusterAllocationExplainRequest) =
-            { req with CurrentNode = Some value }
+            { req with bodyCurrentNode = Some value }
         let withIncludeDiskInfo (value: bool) (req: ClusterAllocationExplainRequest) =
             { req with IncludeDiskInfo = Some value }
         let withIncludeYesDecisions (value: bool) (req: ClusterAllocationExplainRequest) =
@@ -131,13 +135,13 @@ module ClusterOperations =
         let withMasterTimeout (value: Types.Duration) (req: ClusterAllocationExplainRequest) =
             { req with MasterTimeout = Some value }
         let withIndex (value: Types.IndexName) (req: ClusterAllocationExplainRequest) =
-            { req with Index = Some value }
+            { req with bodyIndex = Some value }
         let withShard (value: Types.Integer) (req: ClusterAllocationExplainRequest) =
-            { req with Shard = Some value }
+            { req with bodyShard = Some value }
         let withPrimary (value: bool) (req: ClusterAllocationExplainRequest) =
-            { req with Primary = Some value }
+            { req with bodyPrimary = Some value }
         let withCurrentNode (value: Types.NodeId) (req: ClusterAllocationExplainRequest) =
-            { req with CurrentNode = Some value }
+            { req with bodyCurrentNode = Some value }
 
     type ClusterDeleteComponentTemplateRequest = {
         Name: Types.Names
@@ -733,9 +737,13 @@ module ClusterOperations =
         Create: bool option
         Cause: string option
         MasterTimeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("template")>]
         Template: Types.IndexTemplateMapping
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
         Version: Types.VersionNumber option
+        [<System.Text.Json.Serialization.JsonPropertyName("_meta")>]
         Meta: Types.Metadata option
+        [<System.Text.Json.Serialization.JsonPropertyName("deprecated")>]
         Deprecated: bool option
     }
 
@@ -829,7 +837,9 @@ module ClusterOperations =
         FlatSettings: bool option
         MasterTimeout: Types.Duration option
         Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("persistent")>]
         Persistent: Map<string, System.Text.Json.JsonElement> option
+        [<System.Text.Json.Serialization.JsonPropertyName("transient")>]
         Transient: Map<string, System.Text.Json.JsonElement> option
     }
 
@@ -929,6 +939,7 @@ module ClusterOperations =
         RetryFailed: bool option
         MasterTimeout: Types.Duration option
         Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("commands")>]
         Commands: Types.Command list option
     }
 

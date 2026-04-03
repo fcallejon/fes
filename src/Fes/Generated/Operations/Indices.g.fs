@@ -102,15 +102,24 @@ module IndicesOperations =
 
     type IndicesAnalyzeRequest = {
         Index: Types.IndexName
-        Index: Types.IndexName option
+        queryIndex: Types.IndexName option
+        [<System.Text.Json.Serialization.JsonPropertyName("analyzer")>]
         Analyzer: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("attributes")>]
         Attributes: string list option
+        [<System.Text.Json.Serialization.JsonPropertyName("char_filter")>]
         CharFilter: Types.CharFilter list option
+        [<System.Text.Json.Serialization.JsonPropertyName("explain")>]
         Explain: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("field")>]
         Field: Types.Field option
+        [<System.Text.Json.Serialization.JsonPropertyName("filter")>]
         Filter: Types.TokenFilter list option
+        [<System.Text.Json.Serialization.JsonPropertyName("normalizer")>]
         Normalizer: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("text")>]
         Text: Types.TextToAnalyze option
+        [<System.Text.Json.Serialization.JsonPropertyName("tokenizer")>]
         Tokenizer: Types.Tokenizer option
     }
 
@@ -139,7 +148,7 @@ module IndicesOperations =
         member _.Yield(_: unit) : IndicesAnalyzeRequest =
             {
                 Index = Unchecked.defaultof<_>
-                Index = None
+                queryIndex = None
                 Analyzer = None
                 Attributes = None
                 CharFilter = None
@@ -157,7 +166,7 @@ module IndicesOperations =
 
         [<CustomOperation("index")>]
         member _.Index(state: IndicesAnalyzeRequest, value: Types.IndexName) =
-            { state with Index = Some value }
+            { state with queryIndex = Some value }
 
         [<CustomOperation("analyzer")>]
         member _.Analyzer(state: IndicesAnalyzeRequest, value: string) =
@@ -199,7 +208,7 @@ module IndicesOperations =
 
     module Analyze =
         let withIndex (value: Types.IndexName) (req: IndicesAnalyzeRequest) =
-            { req with Index = Some value }
+            { req with queryIndex = Some value }
         let withAnalyzer (value: string) (req: IndicesAnalyzeRequest) =
             { req with Analyzer = Some value }
         let withAttributes (value: string list) (req: IndicesAnalyzeRequest) =
@@ -250,7 +259,7 @@ module IndicesOperations =
 
     type IndicesClearCacheRequest = {
         Index: Types.Indices
-        Index: Types.Indices option
+        queryIndex: Types.Indices option
         AllowNoIndices: bool option
         ExpandWildcards: Types.ExpandWildcards option
         Fielddata: bool option
@@ -291,7 +300,7 @@ module IndicesOperations =
         member _.Yield(_: unit) : IndicesClearCacheRequest =
             {
                 Index = Unchecked.defaultof<_>
-                Index = None
+                queryIndex = None
                 AllowNoIndices = None
                 ExpandWildcards = None
                 Fielddata = None
@@ -307,7 +316,7 @@ module IndicesOperations =
 
         [<CustomOperation("index")>]
         member _.Index(state: IndicesClearCacheRequest, value: Types.Indices) =
-            { state with Index = Some value }
+            { state with queryIndex = Some value }
 
         [<CustomOperation("allowNoIndices")>]
         member _.AllowNoIndices(state: IndicesClearCacheRequest, value: bool) =
@@ -341,7 +350,7 @@ module IndicesOperations =
 
     module ClearCache =
         let withIndex (value: Types.Indices) (req: IndicesClearCacheRequest) =
-            { req with Index = Some value }
+            { req with queryIndex = Some value }
         let withAllowNoIndices (value: bool) (req: IndicesClearCacheRequest) =
             { req with AllowNoIndices = Some value }
         let withExpandWildcards (value: Types.ExpandWildcards) (req: IndicesClearCacheRequest) =
@@ -363,7 +372,9 @@ module IndicesOperations =
         MasterTimeout: Types.Duration option
         Timeout: Types.Duration option
         WaitForActiveShards: Types.WaitForActiveShards option
+        [<System.Text.Json.Serialization.JsonPropertyName("aliases")>]
         Aliases: Map<Types.IndexName, Types.Alias> option
+        [<System.Text.Json.Serialization.JsonPropertyName("settings")>]
         Settings: Map<string, System.Text.Json.JsonElement> option
     }
 
@@ -540,8 +551,11 @@ module IndicesOperations =
         MasterTimeout: Types.Duration option
         Timeout: Types.Duration option
         WaitForActiveShards: Types.WaitForActiveShards option
+        [<System.Text.Json.Serialization.JsonPropertyName("aliases")>]
         Aliases: Map<Types.Name, Types.Alias> option
+        [<System.Text.Json.Serialization.JsonPropertyName("mappings")>]
         Mappings: Types.TypeMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("settings")>]
         Settings: Types.IndexSettings option
     }
 
@@ -2948,6 +2962,7 @@ module IndicesOperations =
             { req with Timeout = Some value }
 
     type IndicesModifyDataStreamRequest = {
+        [<System.Text.Json.Serialization.JsonPropertyName("actions")>]
         Actions: Types.IndicesModifyDataStreamAction list
     }
 
@@ -3123,10 +3138,15 @@ module IndicesOperations =
         Name: Types.Name
         MasterTimeout: Types.Duration option
         Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("filter")>]
         Filter: Types.QueryContainer option
+        [<System.Text.Json.Serialization.JsonPropertyName("index_routing")>]
         IndexRouting: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("is_write_index")>]
         IsWriteIndex: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("routing")>]
         Routing: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("search_routing")>]
         SearchRouting: string option
     }
 
@@ -3225,9 +3245,13 @@ module IndicesOperations =
         ExpandWildcards: Types.ExpandWildcards option
         MasterTimeout: Types.Duration option
         Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("data_retention")>]
         DataRetention: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("downsampling")>]
         Downsampling: Types.DownsamplingRound list option
+        [<System.Text.Json.Serialization.JsonPropertyName("downsampling_method")>]
         DownsamplingMethod: Types.SamplingMethod option
+        [<System.Text.Json.Serialization.JsonPropertyName("enabled")>]
         Enabled: bool option
     }
 
@@ -3393,6 +3417,7 @@ module IndicesOperations =
         ExpandWildcards: Types.ExpandWildcards option
         MasterTimeout: Types.Duration option
         Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("failure_store")>]
         FailureStore: Types.DataStreamFailureStore option
     }
 
@@ -3537,15 +3562,25 @@ module IndicesOperations =
         Create: bool option
         MasterTimeout: Types.Duration option
         Cause: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("index_patterns")>]
         IndexPatterns: Types.Indices option
+        [<System.Text.Json.Serialization.JsonPropertyName("composed_of")>]
         ComposedOf: Types.Name list option
+        [<System.Text.Json.Serialization.JsonPropertyName("template")>]
         Template: Types.IndexTemplateMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("data_stream")>]
         DataStream: Types.DataStreamVisibility option
+        [<System.Text.Json.Serialization.JsonPropertyName("priority")>]
         Priority: Types.Long option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
         Version: Types.VersionNumber option
+        [<System.Text.Json.Serialization.JsonPropertyName("_meta")>]
         Meta: Types.Metadata option
+        [<System.Text.Json.Serialization.JsonPropertyName("allow_auto_create")>]
         AllowAutoCreate: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_missing_component_templates")>]
         IgnoreMissingComponentTemplates: string list option
+        [<System.Text.Json.Serialization.JsonPropertyName("deprecated")>]
         Deprecated: bool option
     }
 
@@ -3685,16 +3720,27 @@ module IndicesOperations =
         MasterTimeout: Types.Duration option
         Timeout: Types.Duration option
         WriteIndexOnly: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("date_detection")>]
         DateDetection: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
         Dynamic: Types.DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic_date_formats")>]
         DynamicDateFormats: string list option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic_templates")>]
         DynamicTemplates: Map<string, Types.DynamicTemplate> list option
+        [<System.Text.Json.Serialization.JsonPropertyName("_field_names")>]
         FieldNames: Types.FieldNamesField option
+        [<System.Text.Json.Serialization.JsonPropertyName("_meta")>]
         Meta: Types.Metadata option
+        [<System.Text.Json.Serialization.JsonPropertyName("numeric_detection")>]
         NumericDetection: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
         Properties: Map<Types.PropertyName, Types.Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("_routing")>]
         Routing: Types.RoutingField option
+        [<System.Text.Json.Serialization.JsonPropertyName("_source")>]
         Source: Types.SourceField option
+        [<System.Text.Json.Serialization.JsonPropertyName("runtime")>]
         Runtime: Types.RuntimeFields option
     }
 
@@ -3979,11 +4025,17 @@ module IndicesOperations =
         MasterTimeout: Types.Duration option
         Order: Types.Integer option
         Cause: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("aliases")>]
         Aliases: Map<Types.IndexName, Types.Alias> option
+        [<System.Text.Json.Serialization.JsonPropertyName("index_patterns")>]
         IndexPatterns: System.Text.Json.JsonElement option
+        [<System.Text.Json.Serialization.JsonPropertyName("mappings")>]
         Mappings: Types.TypeMapping option
-        Order: Types.Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("order")>]
+        bodyOrder: Types.Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("settings")>]
         Settings: Types.IndexSettings option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
         Version: Types.VersionNumber option
     }
 
@@ -4022,7 +4074,7 @@ module IndicesOperations =
                 Aliases = None
                 IndexPatterns = None
                 Mappings = None
-                Order = None
+                bodyOrder = None
                 Settings = None
                 Version = None
             }
@@ -4061,7 +4113,7 @@ module IndicesOperations =
 
         [<CustomOperation("order")>]
         member _.Order(state: IndicesPutTemplateRequest, value: Types.Integer) =
-            { state with Order = Some value }
+            { state with bodyOrder = Some value }
 
         [<CustomOperation("settings")>]
         member _.Settings(state: IndicesPutTemplateRequest, value: Types.IndexSettings) =
@@ -4079,7 +4131,7 @@ module IndicesOperations =
         let withMasterTimeout (value: Types.Duration) (req: IndicesPutTemplateRequest) =
             { req with MasterTimeout = Some value }
         let withOrder (value: Types.Integer) (req: IndicesPutTemplateRequest) =
-            { req with Order = Some value }
+            { req with bodyOrder = Some value }
         let withCause (value: string) (req: IndicesPutTemplateRequest) =
             { req with Cause = Some value }
         let withAliases (value: Map<Types.IndexName, Types.Alias>) (req: IndicesPutTemplateRequest) =
@@ -4089,7 +4141,7 @@ module IndicesOperations =
         let withMappings (value: Types.TypeMapping) (req: IndicesPutTemplateRequest) =
             { req with Mappings = Some value }
         let withOrder (value: Types.Integer) (req: IndicesPutTemplateRequest) =
-            { req with Order = Some value }
+            { req with bodyOrder = Some value }
         let withSettings (value: Types.IndexSettings) (req: IndicesPutTemplateRequest) =
             { req with Settings = Some value }
         let withVersion (value: Types.VersionNumber) (req: IndicesPutTemplateRequest) =
@@ -4490,6 +4542,7 @@ module IndicesOperations =
         IgnoreUnavailable: bool option
         AllowNoIndices: bool option
         Mode: System.Text.Json.JsonElement option
+        [<System.Text.Json.Serialization.JsonPropertyName("project_routing")>]
         ProjectRouting: Types.ProjectRouting option
     }
 
@@ -4574,9 +4627,13 @@ module IndicesOperations =
         Timeout: Types.Duration option
         WaitForActiveShards: Types.WaitForActiveShards option
         Lazy: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("aliases")>]
         Aliases: Map<Types.IndexName, Types.Alias> option
+        [<System.Text.Json.Serialization.JsonPropertyName("conditions")>]
         Conditions: Types.RolloverConditions option
+        [<System.Text.Json.Serialization.JsonPropertyName("mappings")>]
         Mappings: Types.TypeMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("settings")>]
         Settings: Map<string, System.Text.Json.JsonElement> option
     }
 
@@ -4830,7 +4887,9 @@ module IndicesOperations =
         MasterTimeout: Types.Duration option
         Timeout: Types.Duration option
         WaitForActiveShards: Types.WaitForActiveShards option
+        [<System.Text.Json.Serialization.JsonPropertyName("aliases")>]
         Aliases: Map<Types.IndexName, Types.Alias> option
+        [<System.Text.Json.Serialization.JsonPropertyName("settings")>]
         Settings: Map<string, System.Text.Json.JsonElement> option
     }
 
@@ -4997,15 +5056,25 @@ module IndicesOperations =
         Cause: string option
         MasterTimeout: Types.Duration option
         IncludeDefaults: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("allow_auto_create")>]
         AllowAutoCreate: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("index_patterns")>]
         IndexPatterns: Types.Indices option
+        [<System.Text.Json.Serialization.JsonPropertyName("composed_of")>]
         ComposedOf: Types.Name list option
+        [<System.Text.Json.Serialization.JsonPropertyName("template")>]
         Template: Types.IndexTemplateMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("data_stream")>]
         DataStream: Types.DataStreamVisibility option
+        [<System.Text.Json.Serialization.JsonPropertyName("priority")>]
         Priority: Types.Long option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
         Version: Types.VersionNumber option
+        [<System.Text.Json.Serialization.JsonPropertyName("_meta")>]
         Meta: Types.Metadata option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_missing_component_templates")>]
         IgnoreMissingComponentTemplates: string list option
+        [<System.Text.Json.Serialization.JsonPropertyName("deprecated")>]
         Deprecated: bool option
     }
 
@@ -5151,7 +5220,9 @@ module IndicesOperations =
         MasterTimeout: Types.Duration option
         Timeout: Types.Duration option
         WaitForActiveShards: Types.WaitForActiveShards option
+        [<System.Text.Json.Serialization.JsonPropertyName("aliases")>]
         Aliases: Map<Types.IndexName, Types.Alias> option
+        [<System.Text.Json.Serialization.JsonPropertyName("settings")>]
         Settings: Map<string, System.Text.Json.JsonElement> option
     }
 
@@ -5359,6 +5430,7 @@ module IndicesOperations =
     type IndicesUpdateAliasesRequest = {
         MasterTimeout: Types.Duration option
         Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("actions")>]
         Actions: Types.IndicesUpdateAliasesAction list option
     }
 
@@ -5428,6 +5500,7 @@ module IndicesOperations =
         Lenient: bool option
         Rewrite: bool option
         Q: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("query")>]
         Query: Types.QueryContainer option
     }
 

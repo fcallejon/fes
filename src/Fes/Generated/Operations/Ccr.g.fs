@@ -62,19 +62,33 @@ module CcrOperations =
         Index: Types.IndexName
         MasterTimeout: Types.Duration option
         WaitForActiveShards: Types.WaitForActiveShards option
+        [<System.Text.Json.Serialization.JsonPropertyName("data_stream_name")>]
         DataStreamName: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("leader_index")>]
         LeaderIndex: Types.IndexName
+        [<System.Text.Json.Serialization.JsonPropertyName("max_outstanding_read_requests")>]
         MaxOutstandingReadRequests: Types.Long option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_outstanding_write_requests")>]
         MaxOutstandingWriteRequests: Types.Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_read_request_operation_count")>]
         MaxReadRequestOperationCount: Types.Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_read_request_size")>]
         MaxReadRequestSize: Types.ByteSize option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_retry_delay")>]
         MaxRetryDelay: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_write_buffer_count")>]
         MaxWriteBufferCount: Types.Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_write_buffer_size")>]
         MaxWriteBufferSize: Types.ByteSize option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_write_request_operation_count")>]
         MaxWriteRequestOperationCount: Types.Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_write_request_size")>]
         MaxWriteRequestSize: Types.ByteSize option
+        [<System.Text.Json.Serialization.JsonPropertyName("read_poll_timeout")>]
         ReadPollTimeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("remote_cluster")>]
         RemoteCluster: string
+        [<System.Text.Json.Serialization.JsonPropertyName("settings")>]
         Settings: Types.IndexSettings option
     }
 
@@ -321,9 +335,13 @@ module CcrOperations =
     type CcrForgetFollowerRequest = {
         Index: Types.IndexName
         Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("follower_cluster")>]
         FollowerCluster: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("follower_index")>]
         FollowerIndex: Types.IndexName option
+        [<System.Text.Json.Serialization.JsonPropertyName("follower_index_uuid")>]
         FollowerIndexUuid: Types.Uuid option
+        [<System.Text.Json.Serialization.JsonPropertyName("leader_remote_cluster")>]
         LeaderRemoteCluster: string option
     }
 
@@ -538,20 +556,35 @@ module CcrOperations =
     type CcrPutAutoFollowPatternRequest = {
         Name: Types.Name
         MasterTimeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("remote_cluster")>]
         RemoteCluster: string
+        [<System.Text.Json.Serialization.JsonPropertyName("follow_index_pattern")>]
         FollowIndexPattern: Types.IndexPattern option
+        [<System.Text.Json.Serialization.JsonPropertyName("leader_index_patterns")>]
         LeaderIndexPatterns: Types.IndexPatterns option
+        [<System.Text.Json.Serialization.JsonPropertyName("leader_index_exclusion_patterns")>]
         LeaderIndexExclusionPatterns: Types.IndexPatterns option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_outstanding_read_requests")>]
         MaxOutstandingReadRequests: Types.Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("settings")>]
         Settings: Map<string, System.Text.Json.JsonElement> option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_outstanding_write_requests")>]
         MaxOutstandingWriteRequests: Types.Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("read_poll_timeout")>]
         ReadPollTimeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_read_request_operation_count")>]
         MaxReadRequestOperationCount: Types.Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_read_request_size")>]
         MaxReadRequestSize: Types.ByteSize option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_retry_delay")>]
         MaxRetryDelay: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_write_buffer_count")>]
         MaxWriteBufferCount: Types.Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_write_buffer_size")>]
         MaxWriteBufferSize: Types.ByteSize option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_write_request_operation_count")>]
         MaxWriteRequestOperationCount: Types.Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_write_request_size")>]
         MaxWriteRequestSize: Types.ByteSize option
     }
 
@@ -751,15 +784,25 @@ module CcrOperations =
     type CcrResumeFollowRequest = {
         Index: Types.IndexName
         MasterTimeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_outstanding_read_requests")>]
         MaxOutstandingReadRequests: Types.Long option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_outstanding_write_requests")>]
         MaxOutstandingWriteRequests: Types.Long option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_read_request_operation_count")>]
         MaxReadRequestOperationCount: Types.Long option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_read_request_size")>]
         MaxReadRequestSize: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_retry_delay")>]
         MaxRetryDelay: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_write_buffer_count")>]
         MaxWriteBufferCount: Types.Long option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_write_buffer_size")>]
         MaxWriteBufferSize: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_write_request_operation_count")>]
         MaxWriteRequestOperationCount: Types.Long option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_write_request_size")>]
         MaxWriteRequestSize: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("read_poll_timeout")>]
         ReadPollTimeout: Types.Duration option
     }
 

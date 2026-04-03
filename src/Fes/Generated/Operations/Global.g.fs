@@ -251,7 +251,8 @@ module GlobalOperations =
 
     type ClearScrollRequest = {
         ScrollId: Types.ScrollIds
-        ScrollId: Types.ScrollIds option
+        [<System.Text.Json.Serialization.JsonPropertyName("scroll_id")>]
+        bodyScrollId: Types.ScrollIds option
     }
 
         with
@@ -272,7 +273,7 @@ module GlobalOperations =
         member _.Yield(_: unit) : ClearScrollRequest =
             {
                 ScrollId = Unchecked.defaultof<_>
-                ScrollId = None
+                bodyScrollId = None
             }
 
         [<CustomOperation("scrollId")>]
@@ -281,15 +282,16 @@ module GlobalOperations =
 
         [<CustomOperation("scrollId")>]
         member _.ScrollId(state: ClearScrollRequest, value: Types.ScrollIds) =
-            { state with ScrollId = Some value }
+            { state with bodyScrollId = Some value }
 
     let clearScrollRequest = ClearScrollRequestBuilder()
 
     module ClearScroll =
         let withScrollId (value: Types.ScrollIds) (req: ClearScrollRequest) =
-            { req with ScrollId = Some value }
+            { req with bodyScrollId = Some value }
 
     type ClosePointInTimeRequest = {
+        [<System.Text.Json.Serialization.JsonPropertyName("id")>]
         Id: Types.Id
     }
 
@@ -339,7 +341,9 @@ module GlobalOperations =
         Routing: Types.Routing option
         TerminateAfter: Types.Long option
         Q: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("query")>]
         Query: Types.QueryContainer option
+        [<System.Text.Json.Serialization.JsonPropertyName("project_routing")>]
         ProjectRouting: Types.ProjectRouting option
     }
 
@@ -789,10 +793,14 @@ module GlobalOperations =
         Version: bool option
         WaitForActiveShards: Types.WaitForActiveShards option
         WaitForCompletion: bool option
-        MaxDocs: Types.Long option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_docs")>]
+        bodyMaxDocs: Types.Long option
+        [<System.Text.Json.Serialization.JsonPropertyName("query")>]
         Query: Types.QueryContainer option
+        [<System.Text.Json.Serialization.JsonPropertyName("slice")>]
         Slice: Types.SlicedScroll option
-        Sort: Types.Sort option
+        [<System.Text.Json.Serialization.JsonPropertyName("sort")>]
+        bodySort: Types.Sort option
     }
 
         with
@@ -877,10 +885,10 @@ module GlobalOperations =
                 Version = None
                 WaitForActiveShards = None
                 WaitForCompletion = None
-                MaxDocs = None
+                bodyMaxDocs = None
                 Query = None
                 Slice = None
-                Sort = None
+                bodySort = None
             }
 
         [<CustomOperation("index")>]
@@ -1005,7 +1013,7 @@ module GlobalOperations =
 
         [<CustomOperation("maxDocs")>]
         member _.MaxDocs(state: DeleteByQueryRequest, value: Types.Long) =
-            { state with MaxDocs = Some value }
+            { state with bodyMaxDocs = Some value }
 
         [<CustomOperation("query")>]
         member _.Query(state: DeleteByQueryRequest, value: Types.QueryContainer) =
@@ -1017,7 +1025,7 @@ module GlobalOperations =
 
         [<CustomOperation("sort")>]
         member _.Sort(state: DeleteByQueryRequest, value: Types.Sort) =
-            { state with Sort = Some value }
+            { state with bodySort = Some value }
 
     let deleteByQueryRequest = DeleteByQueryRequestBuilder()
 
@@ -1043,7 +1051,7 @@ module GlobalOperations =
         let withLenient (value: bool) (req: DeleteByQueryRequest) =
             { req with Lenient = Some value }
         let withMaxDocs (value: Types.Long) (req: DeleteByQueryRequest) =
-            { req with MaxDocs = Some value }
+            { req with bodyMaxDocs = Some value }
         let withPreference (value: string) (req: DeleteByQueryRequest) =
             { req with Preference = Some value }
         let withRefresh (value: bool) (req: DeleteByQueryRequest) =
@@ -1067,7 +1075,7 @@ module GlobalOperations =
         let withSlices (value: Types.Slices) (req: DeleteByQueryRequest) =
             { req with Slices = Some value }
         let withSort (value: string list) (req: DeleteByQueryRequest) =
-            { req with Sort = Some value }
+            { req with bodySort = Some value }
         let withStats (value: string list) (req: DeleteByQueryRequest) =
             { req with Stats = Some value }
         let withTerminateAfter (value: Types.Long) (req: DeleteByQueryRequest) =
@@ -1081,13 +1089,13 @@ module GlobalOperations =
         let withWaitForCompletion (value: bool) (req: DeleteByQueryRequest) =
             { req with WaitForCompletion = Some value }
         let withMaxDocs (value: Types.Long) (req: DeleteByQueryRequest) =
-            { req with MaxDocs = Some value }
+            { req with bodyMaxDocs = Some value }
         let withQuery (value: Types.QueryContainer) (req: DeleteByQueryRequest) =
             { req with Query = Some value }
         let withSlice (value: Types.SlicedScroll) (req: DeleteByQueryRequest) =
             { req with Slice = Some value }
         let withSort (value: Types.Sort) (req: DeleteByQueryRequest) =
-            { req with Sort = Some value }
+            { req with bodySort = Some value }
 
     type DeleteByQueryRethrottleRequest = {
         TaskId: Types.TaskId
@@ -1455,6 +1463,7 @@ module GlobalOperations =
         SourceIncludes: Types.Fields option
         StoredFields: Types.Fields option
         Q: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("query")>]
         Query: Types.QueryContainer option
     }
 
@@ -1610,9 +1619,13 @@ module GlobalOperations =
         Filters: System.Text.Json.JsonElement option
         Types: string list option
         IncludeEmptyFields: bool option
-        Fields: Types.Fields option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        bodyFields: Types.Fields option
+        [<System.Text.Json.Serialization.JsonPropertyName("index_filter")>]
         IndexFilter: Types.QueryContainer option
+        [<System.Text.Json.Serialization.JsonPropertyName("runtime_mappings")>]
         RuntimeMappings: Types.RuntimeFields option
+        [<System.Text.Json.Serialization.JsonPropertyName("project_routing")>]
         ProjectRouting: Types.ProjectRouting option
     }
 
@@ -1656,7 +1669,7 @@ module GlobalOperations =
                 Filters = None
                 Types = None
                 IncludeEmptyFields = None
-                Fields = None
+                bodyFields = None
                 IndexFilter = None
                 RuntimeMappings = None
                 ProjectRouting = None
@@ -1700,7 +1713,7 @@ module GlobalOperations =
 
         [<CustomOperation("fields")>]
         member _.Fields(state: FieldCapsRequest, value: Types.Fields) =
-            { state with Fields = Some value }
+            { state with bodyFields = Some value }
 
         [<CustomOperation("indexFilter")>]
         member _.IndexFilter(state: FieldCapsRequest, value: Types.QueryContainer) =
@@ -1722,7 +1735,7 @@ module GlobalOperations =
         let withExpandWildcards (value: Types.ExpandWildcards) (req: FieldCapsRequest) =
             { req with ExpandWildcards = Some value }
         let withFields (value: Types.Fields) (req: FieldCapsRequest) =
-            { req with Fields = Some value }
+            { req with bodyFields = Some value }
         let withIgnoreUnavailable (value: bool) (req: FieldCapsRequest) =
             { req with IgnoreUnavailable = Some value }
         let withIncludeUnmapped (value: bool) (req: FieldCapsRequest) =
@@ -1734,7 +1747,7 @@ module GlobalOperations =
         let withIncludeEmptyFields (value: bool) (req: FieldCapsRequest) =
             { req with IncludeEmptyFields = Some value }
         let withFields (value: Types.Fields) (req: FieldCapsRequest) =
-            { req with Fields = Some value }
+            { req with bodyFields = Some value }
         let withIndexFilter (value: Types.QueryContainer) (req: FieldCapsRequest) =
             { req with IndexFilter = Some value }
         let withRuntimeMappings (value: Types.RuntimeFields) (req: FieldCapsRequest) =
@@ -1788,7 +1801,7 @@ module GlobalOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type GetResponse = Types.GetResult<Types.TDocument>
+    type GetResponse<'tDocument> = Types.GetResult<'tDocument>
 
     type GetRequestBuilder() =
         member _.Yield(_: unit) : GetRequest =
@@ -2023,7 +2036,7 @@ module GlobalOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type GetSourceResponse = Types.TDocument
+    type GetSourceResponse<'tDocument> = 'tDocument
 
     type GetSourceRequestBuilder() =
         member _.Yield(_: unit) : GetSourceRequest =
@@ -2363,11 +2376,17 @@ module GlobalOperations =
     type KnnSearchRequest = {
         Index: Types.Indices
         Routing: Types.Routing option
+        [<System.Text.Json.Serialization.JsonPropertyName("_source")>]
         Source: Types.SourceConfig option
+        [<System.Text.Json.Serialization.JsonPropertyName("docvalue_fields")>]
         DocvalueFields: Types.FieldAndFormat list option
+        [<System.Text.Json.Serialization.JsonPropertyName("stored_fields")>]
         StoredFields: Types.Fields option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
         Fields: Types.Fields option
+        [<System.Text.Json.Serialization.JsonPropertyName("filter")>]
         Filter: System.Text.Json.JsonElement option
+        [<System.Text.Json.Serialization.JsonPropertyName("knn")>]
         Knn: Types.KnnSearchQuery
     }
 
@@ -2466,7 +2485,9 @@ module GlobalOperations =
         SourceExcludes: Types.Fields option
         SourceIncludes: Types.Fields option
         StoredFields: Types.Fields option
+        [<System.Text.Json.Serialization.JsonPropertyName("docs")>]
         Docs: Types.GlobalMgetOperation list option
+        [<System.Text.Json.Serialization.JsonPropertyName("ids")>]
         Ids: Types.Ids option
     }
 
@@ -2643,7 +2664,7 @@ module GlobalOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type MsearchResponse = Types.MultiSearchResult<Types.TDocument>
+    type MsearchResponse<'tDocument> = Types.MultiSearchResult<'tDocument>
 
     type MsearchRequestBuilder() =
         member _.Yield(_: unit) : MsearchRequest =
@@ -2655,7 +2676,7 @@ module GlobalOperations =
                 IgnoreThrottled = None
                 IgnoreUnavailable = None
                 IncludeNamedQueriesScore = None
-                Index = None
+                queryIndex = None
                 MaxConcurrentSearches = None
                 MaxConcurrentShardRequests = None
                 PreFilterShardSize = None
@@ -2697,7 +2718,7 @@ module GlobalOperations =
 
         [<CustomOperation("index")>]
         member _.Index(state: MsearchRequest, value: Types.Indices) =
-            { state with Index = Some value }
+            { state with queryIndex = Some value }
 
         [<CustomOperation("maxConcurrentSearches")>]
         member _.MaxConcurrentSearches(state: MsearchRequest, value: Types.Integer) =
@@ -2751,7 +2772,7 @@ module GlobalOperations =
         let withIncludeNamedQueriesScore (value: bool) (req: MsearchRequest) =
             { req with IncludeNamedQueriesScore = Some value }
         let withIndex (value: Types.Indices) (req: MsearchRequest) =
-            { req with Index = Some value }
+            { req with queryIndex = Some value }
         let withMaxConcurrentSearches (value: Types.Integer) (req: MsearchRequest) =
             { req with MaxConcurrentSearches = Some value }
         let withMaxConcurrentShardRequests (value: Types.Integer) (req: MsearchRequest) =
@@ -2804,7 +2825,7 @@ module GlobalOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type MsearchTemplateResponse = Types.MultiSearchResult<Types.TDocument>
+    type MsearchTemplateResponse<'tDocument> = Types.MultiSearchResult<'tDocument>
 
     type MsearchTemplateRequestBuilder() =
         member _.Yield(_: unit) : MsearchTemplateRequest =
@@ -2881,8 +2902,10 @@ module GlobalOperations =
         TermStatistics: bool option
         Version: Types.VersionNumber option
         VersionType: Types.VersionType option
+        [<System.Text.Json.Serialization.JsonPropertyName("docs")>]
         Docs: Types.GlobalMtermvectorsOperation list option
-        Ids: Types.Id list option
+        [<System.Text.Json.Serialization.JsonPropertyName("ids")>]
+        bodyIds: Types.Id list option
     }
 
         with
@@ -2934,7 +2957,7 @@ module GlobalOperations =
                 Version = None
                 VersionType = None
                 Docs = None
-                Ids = None
+                bodyIds = None
             }
 
         [<CustomOperation("index")>]
@@ -2995,13 +3018,13 @@ module GlobalOperations =
 
         [<CustomOperation("ids")>]
         member _.Ids(state: MtermvectorsRequest, value: Types.Id list) =
-            { state with Ids = Some value }
+            { state with bodyIds = Some value }
 
     let mtermvectorsRequest = MtermvectorsRequestBuilder()
 
     module Mtermvectors =
         let withIds (value: Types.Id list) (req: MtermvectorsRequest) =
-            { req with Ids = Some value }
+            { req with bodyIds = Some value }
         let withFields (value: Types.Fields) (req: MtermvectorsRequest) =
             { req with Fields = Some value }
         let withFieldStatistics (value: bool) (req: MtermvectorsRequest) =
@@ -3027,7 +3050,7 @@ module GlobalOperations =
         let withDocs (value: Types.GlobalMtermvectorsOperation list) (req: MtermvectorsRequest) =
             { req with Docs = Some value }
         let withIds (value: Types.Id list) (req: MtermvectorsRequest) =
-            { req with Ids = Some value }
+            { req with bodyIds = Some value }
 
     type OpenPointInTimeRequest = {
         Index: Types.Indices
@@ -3038,7 +3061,9 @@ module GlobalOperations =
         ExpandWildcards: Types.ExpandWildcards option
         AllowPartialSearchResults: bool option
         MaxConcurrentShardRequests: Types.Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("index_filter")>]
         IndexFilter: Types.QueryContainer option
+        [<System.Text.Json.Serialization.JsonPropertyName("project_routing")>]
         ProjectRouting: Types.ProjectRouting option
     }
 
@@ -3170,9 +3195,10 @@ module GlobalOperations =
     type PutScriptRequest = {
         Id: Types.Id
         Context: Types.Name
-        Context: Types.Name option
+        queryContext: Types.Name option
         MasterTimeout: Types.Duration option
         Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("script")>]
         Script: Types.StoredScript
     }
 
@@ -3204,7 +3230,7 @@ module GlobalOperations =
             {
                 Id = Unchecked.defaultof<_>
                 Context = Unchecked.defaultof<_>
-                Context = None
+                queryContext = None
                 MasterTimeout = None
                 Timeout = None
                 Script = Unchecked.defaultof<_>
@@ -3220,7 +3246,7 @@ module GlobalOperations =
 
         [<CustomOperation("context")>]
         member _.Context(state: PutScriptRequest, value: Types.Name) =
-            { state with Context = Some value }
+            { state with queryContext = Some value }
 
         [<CustomOperation("masterTimeout")>]
         member _.MasterTimeout(state: PutScriptRequest, value: Types.Duration) =
@@ -3238,7 +3264,7 @@ module GlobalOperations =
 
     module PutScript =
         let withContext (value: Types.Name) (req: PutScriptRequest) =
-            { req with Context = Some value }
+            { req with queryContext = Some value }
         let withMasterTimeout (value: Types.Duration) (req: PutScriptRequest) =
             { req with MasterTimeout = Some value }
         let withTimeout (value: Types.Duration) (req: PutScriptRequest) =
@@ -3252,7 +3278,9 @@ module GlobalOperations =
         ExpandWildcards: Types.ExpandWildcards option
         IgnoreUnavailable: bool option
         SearchType: Types.SearchType option
+        [<System.Text.Json.Serialization.JsonPropertyName("requests")>]
         Requests: Types.RankEvalRequestItem list
+        [<System.Text.Json.Serialization.JsonPropertyName("metric")>]
         Metric: Types.RankEvalMetric option
     }
 
@@ -3346,10 +3374,15 @@ module GlobalOperations =
         WaitForActiveShards: Types.WaitForActiveShards option
         WaitForCompletion: bool option
         RequireAlias: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("conflicts")>]
         Conflicts: Types.Conflicts option
+        [<System.Text.Json.Serialization.JsonPropertyName("dest")>]
         Dest: Types.GlobalReindexDestination
-        MaxDocs: Types.Long option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_docs")>]
+        bodyMaxDocs: Types.Long option
+        [<System.Text.Json.Serialization.JsonPropertyName("script")>]
         Script: Types.Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("source")>]
         Source: Types.GlobalReindexSource
     }
 
@@ -3396,7 +3429,7 @@ module GlobalOperations =
                 RequireAlias = None
                 Conflicts = None
                 Dest = Unchecked.defaultof<_>
-                MaxDocs = None
+                bodyMaxDocs = None
                 Script = None
                 Source = Unchecked.defaultof<_>
             }
@@ -3447,7 +3480,7 @@ module GlobalOperations =
 
         [<CustomOperation("maxDocs")>]
         member _.MaxDocs(state: ReindexRequest, value: Types.Long) =
-            { state with MaxDocs = Some value }
+            { state with bodyMaxDocs = Some value }
 
         [<CustomOperation("script")>]
         member _.Script(state: ReindexRequest, value: Types.Script) =
@@ -3469,7 +3502,7 @@ module GlobalOperations =
         let withSlices (value: Types.Slices) (req: ReindexRequest) =
             { req with Slices = Some value }
         let withMaxDocs (value: Types.Integer) (req: ReindexRequest) =
-            { req with MaxDocs = Some value }
+            { req with bodyMaxDocs = Some value }
         let withTimeout (value: Types.Duration) (req: ReindexRequest) =
             { req with Timeout = Some value }
         let withWaitForActiveShards (value: Types.WaitForActiveShards) (req: ReindexRequest) =
@@ -3483,7 +3516,7 @@ module GlobalOperations =
         let withDest (value: Types.GlobalReindexDestination) (req: ReindexRequest) =
             { req with Dest = value }
         let withMaxDocs (value: Types.Long) (req: ReindexRequest) =
-            { req with MaxDocs = Some value }
+            { req with bodyMaxDocs = Some value }
         let withScript (value: Types.Script) (req: ReindexRequest) =
             { req with Script = Some value }
         let withSource (value: Types.GlobalReindexSource) (req: ReindexRequest) =
@@ -3545,9 +3578,13 @@ module GlobalOperations =
 
     type RenderSearchTemplateRequest = {
         Id: Types.Id
-        Id: Types.Id option
+        [<System.Text.Json.Serialization.JsonPropertyName("id")>]
+        bodyId: Types.Id option
+        [<System.Text.Json.Serialization.JsonPropertyName("file")>]
         File: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("params")>]
         Params: Map<string, System.Text.Json.JsonElement> option
+        [<System.Text.Json.Serialization.JsonPropertyName("source")>]
         Source: Types.ScriptSource option
     }
 
@@ -3569,7 +3606,7 @@ module GlobalOperations =
         member _.Yield(_: unit) : RenderSearchTemplateRequest =
             {
                 Id = Unchecked.defaultof<_>
-                Id = None
+                bodyId = None
                 File = None
                 Params = None
                 Source = None
@@ -3581,7 +3618,7 @@ module GlobalOperations =
 
         [<CustomOperation("id")>]
         member _.Id(state: RenderSearchTemplateRequest, value: Types.Id) =
-            { state with Id = Some value }
+            { state with bodyId = Some value }
 
         [<CustomOperation("file")>]
         member _.File(state: RenderSearchTemplateRequest, value: string) =
@@ -3599,7 +3636,7 @@ module GlobalOperations =
 
     module RenderSearchTemplate =
         let withId (value: Types.Id) (req: RenderSearchTemplateRequest) =
-            { req with Id = Some value }
+            { req with bodyId = Some value }
         let withFile (value: string) (req: RenderSearchTemplateRequest) =
             { req with File = Some value }
         let withParams (value: Map<string, System.Text.Json.JsonElement>) (req: RenderSearchTemplateRequest) =
@@ -3608,8 +3645,11 @@ module GlobalOperations =
             { req with Source = Some value }
 
     type ScriptsPainlessExecuteRequest = {
+        [<System.Text.Json.Serialization.JsonPropertyName("context")>]
         Context: Types.PainlessContext option
+        [<System.Text.Json.Serialization.JsonPropertyName("context_setup")>]
         ContextSetup: Types.PainlessContextSetup option
+        [<System.Text.Json.Serialization.JsonPropertyName("script")>]
         Script: Types.Script option
     }
 
@@ -3660,10 +3700,12 @@ module GlobalOperations =
     type ScrollRequest = {
         ScrollId: Types.ScrollId
         Scroll: Types.Duration option
-        ScrollId: Types.ScrollId option
+        queryScrollId: Types.ScrollId option
         RestTotalHitsAsInt: bool option
-        Scroll: Types.Duration option
-        ScrollId: Types.ScrollId
+        [<System.Text.Json.Serialization.JsonPropertyName("scroll")>]
+        bodyScroll: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("scroll_id")>]
+        bodyScrollId: Types.ScrollId
     }
 
         with
@@ -3687,17 +3729,17 @@ module GlobalOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type ScrollResponse = Types.ResponseBody<Types.TDocument>
+    type ScrollResponse<'tDocument> = Types.ResponseBody<'tDocument>
 
     type ScrollRequestBuilder() =
         member _.Yield(_: unit) : ScrollRequest =
             {
                 ScrollId = Unchecked.defaultof<_>
                 Scroll = None
-                ScrollId = None
+                queryScrollId = None
                 RestTotalHitsAsInt = None
-                Scroll = None
-                ScrollId = Unchecked.defaultof<_>
+                bodyScroll = None
+                bodyScrollId = Unchecked.defaultof<_>
             }
 
         [<CustomOperation("scrollId")>]
@@ -3710,7 +3752,7 @@ module GlobalOperations =
 
         [<CustomOperation("scrollId")>]
         member _.ScrollId(state: ScrollRequest, value: Types.ScrollId) =
-            { state with ScrollId = Some value }
+            { state with queryScrollId = Some value }
 
         [<CustomOperation("restTotalHitsAsInt")>]
         member _.RestTotalHitsAsInt(state: ScrollRequest, value: bool) =
@@ -3718,25 +3760,25 @@ module GlobalOperations =
 
         [<CustomOperation("scroll")>]
         member _.Scroll(state: ScrollRequest, value: Types.Duration) =
-            { state with Scroll = Some value }
+            { state with bodyScroll = Some value }
 
         [<CustomOperation("scrollId")>]
         member _.ScrollId(state: ScrollRequest, value: Types.ScrollId) =
-            { state with ScrollId = value }
+            { state with bodyScrollId = value }
 
     let scrollRequest = ScrollRequestBuilder()
 
     module Scroll =
         let withScroll (value: Types.Duration) (req: ScrollRequest) =
-            { req with Scroll = Some value }
+            { req with bodyScroll = Some value }
         let withScrollId (value: Types.ScrollId) (req: ScrollRequest) =
-            { req with ScrollId = Some value }
+            { req with bodyScrollId = Some value }
         let withRestTotalHitsAsInt (value: bool) (req: ScrollRequest) =
             { req with RestTotalHitsAsInt = Some value }
         let withScroll (value: Types.Duration) (req: ScrollRequest) =
-            { req with Scroll = Some value }
+            { req with bodyScroll = Some value }
         let withScrollId (value: Types.ScrollId) (req: ScrollRequest) =
-            { req with ScrollId = value }
+            { req with bodyScrollId = value }
 
     type SearchRequest = {
         Index: Types.Indices
@@ -3785,40 +3827,75 @@ module GlobalOperations =
         From: Types.Integer option
         Sort: System.Text.Json.JsonElement option
         ForceSyntheticSource: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("aggregations")>]
         Aggregations: Map<string, Types.AggregationContainer> option
+        [<System.Text.Json.Serialization.JsonPropertyName("collapse")>]
         Collapse: Types.FieldCollapse option
-        Explain: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("explain")>]
+        bodyExplain: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("ext")>]
         Ext: Map<string, System.Text.Json.JsonElement> option
-        From: Types.Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("from")>]
+        bodyFrom: Types.Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("highlight")>]
         Highlight: Types.Highlight option
-        TrackTotalHits: Types.TrackHits option
+        [<System.Text.Json.Serialization.JsonPropertyName("track_total_hits")>]
+        bodyTrackTotalHits: Types.TrackHits option
+        [<System.Text.Json.Serialization.JsonPropertyName("indices_boost")>]
         IndicesBoost: Map<Types.IndexName, Types.Double> list option
-        DocvalueFields: Types.FieldAndFormat list option
+        [<System.Text.Json.Serialization.JsonPropertyName("docvalue_fields")>]
+        bodyDocvalueFields: Types.FieldAndFormat list option
+        [<System.Text.Json.Serialization.JsonPropertyName("knn")>]
         Knn: System.Text.Json.JsonElement option
+        [<System.Text.Json.Serialization.JsonPropertyName("rank")>]
         Rank: Types.RankContainer option
+        [<System.Text.Json.Serialization.JsonPropertyName("min_score")>]
         MinScore: Types.Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("post_filter")>]
         PostFilter: Types.QueryContainer option
+        [<System.Text.Json.Serialization.JsonPropertyName("profile")>]
         Profile: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("query")>]
         Query: Types.QueryContainer option
+        [<System.Text.Json.Serialization.JsonPropertyName("rescore")>]
         Rescore: System.Text.Json.JsonElement option
+        [<System.Text.Json.Serialization.JsonPropertyName("retriever")>]
         Retriever: Types.RetrieverContainer option
+        [<System.Text.Json.Serialization.JsonPropertyName("script_fields")>]
         ScriptFields: Map<string, Types.ScriptField> option
+        [<System.Text.Json.Serialization.JsonPropertyName("search_after")>]
         SearchAfter: Types.SortResults option
-        Size: Types.Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("size")>]
+        bodySize: Types.Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("slice")>]
         Slice: Types.SlicedScroll option
-        Sort: Types.Sort option
-        Source: Types.SourceConfig option
+        [<System.Text.Json.Serialization.JsonPropertyName("sort")>]
+        bodySort: Types.Sort option
+        [<System.Text.Json.Serialization.JsonPropertyName("_source")>]
+        bodySource: Types.SourceConfig option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
         Fields: Types.FieldAndFormat list option
+        [<System.Text.Json.Serialization.JsonPropertyName("suggest")>]
         Suggest: Types.Suggester option
-        TerminateAfter: Types.Long option
-        Timeout: string option
-        TrackScores: bool option
-        Version: bool option
-        SeqNoPrimaryTerm: bool option
-        StoredFields: Types.Fields option
+        [<System.Text.Json.Serialization.JsonPropertyName("terminate_after")>]
+        bodyTerminateAfter: Types.Long option
+        [<System.Text.Json.Serialization.JsonPropertyName("timeout")>]
+        bodyTimeout: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("track_scores")>]
+        bodyTrackScores: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        bodyVersion: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("seq_no_primary_term")>]
+        bodySeqNoPrimaryTerm: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("stored_fields")>]
+        bodyStoredFields: Types.Fields option
+        [<System.Text.Json.Serialization.JsonPropertyName("pit")>]
         Pit: Types.PointInTimeReference option
+        [<System.Text.Json.Serialization.JsonPropertyName("runtime_mappings")>]
         RuntimeMappings: Types.RuntimeFields option
-        Stats: string list option
+        [<System.Text.Json.Serialization.JsonPropertyName("stats")>]
+        bodyStats: string list option
+        [<System.Text.Json.Serialization.JsonPropertyName("project_routing")>]
         ProjectRouting: Types.ProjectRouting option
     }
 
@@ -3885,7 +3962,7 @@ module GlobalOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type SearchResponse = Types.ResponseBody<Types.TDocument>
+    type SearchResponse<'tDocument> = Types.ResponseBody<'tDocument>
 
     type SearchRequestBuilder() =
         member _.Yield(_: unit) : SearchRequest =
@@ -3938,13 +4015,13 @@ module GlobalOperations =
                 ForceSyntheticSource = None
                 Aggregations = None
                 Collapse = None
-                Explain = None
+                bodyExplain = None
                 Ext = None
-                From = None
+                bodyFrom = None
                 Highlight = None
-                TrackTotalHits = None
+                bodyTrackTotalHits = None
                 IndicesBoost = None
-                DocvalueFields = None
+                bodyDocvalueFields = None
                 Knn = None
                 Rank = None
                 MinScore = None
@@ -3955,21 +4032,21 @@ module GlobalOperations =
                 Retriever = None
                 ScriptFields = None
                 SearchAfter = None
-                Size = None
+                bodySize = None
                 Slice = None
-                Sort = None
-                Source = None
+                bodySort = None
+                bodySource = None
                 Fields = None
                 Suggest = None
-                TerminateAfter = None
-                Timeout = None
-                TrackScores = None
-                Version = None
-                SeqNoPrimaryTerm = None
-                StoredFields = None
+                bodyTerminateAfter = None
+                bodyTimeout = None
+                bodyTrackScores = None
+                bodyVersion = None
+                bodySeqNoPrimaryTerm = None
+                bodyStoredFields = None
                 Pit = None
                 RuntimeMappings = None
-                Stats = None
+                bodyStats = None
                 ProjectRouting = None
             }
 
@@ -4167,7 +4244,7 @@ module GlobalOperations =
 
         [<CustomOperation("explain")>]
         member _.Explain(state: SearchRequest, value: bool) =
-            { state with Explain = Some value }
+            { state with bodyExplain = Some value }
 
         [<CustomOperation("ext")>]
         member _.Ext(state: SearchRequest, value: Map<string, System.Text.Json.JsonElement>) =
@@ -4175,7 +4252,7 @@ module GlobalOperations =
 
         [<CustomOperation("from")>]
         member _.From(state: SearchRequest, value: Types.Integer) =
-            { state with From = Some value }
+            { state with bodyFrom = Some value }
 
         [<CustomOperation("highlight")>]
         member _.Highlight(state: SearchRequest, value: Types.Highlight) =
@@ -4183,7 +4260,7 @@ module GlobalOperations =
 
         [<CustomOperation("trackTotalHits")>]
         member _.TrackTotalHits(state: SearchRequest, value: Types.TrackHits) =
-            { state with TrackTotalHits = Some value }
+            { state with bodyTrackTotalHits = Some value }
 
         [<CustomOperation("indicesBoost")>]
         member _.IndicesBoost(state: SearchRequest, value: Map<Types.IndexName, Types.Double> list) =
@@ -4191,7 +4268,7 @@ module GlobalOperations =
 
         [<CustomOperation("docvalueFields")>]
         member _.DocvalueFields(state: SearchRequest, value: Types.FieldAndFormat list) =
-            { state with DocvalueFields = Some value }
+            { state with bodyDocvalueFields = Some value }
 
         [<CustomOperation("knn")>]
         member _.Knn(state: SearchRequest, value: System.Text.Json.JsonElement) =
@@ -4235,7 +4312,7 @@ module GlobalOperations =
 
         [<CustomOperation("size")>]
         member _.Size(state: SearchRequest, value: Types.Integer) =
-            { state with Size = Some value }
+            { state with bodySize = Some value }
 
         [<CustomOperation("slice")>]
         member _.Slice(state: SearchRequest, value: Types.SlicedScroll) =
@@ -4243,11 +4320,11 @@ module GlobalOperations =
 
         [<CustomOperation("sort")>]
         member _.Sort(state: SearchRequest, value: Types.Sort) =
-            { state with Sort = Some value }
+            { state with bodySort = Some value }
 
         [<CustomOperation("source")>]
         member _.Source(state: SearchRequest, value: Types.SourceConfig) =
-            { state with Source = Some value }
+            { state with bodySource = Some value }
 
         [<CustomOperation("fields")>]
         member _.Fields(state: SearchRequest, value: Types.FieldAndFormat list) =
@@ -4259,27 +4336,27 @@ module GlobalOperations =
 
         [<CustomOperation("terminateAfter")>]
         member _.TerminateAfter(state: SearchRequest, value: Types.Long) =
-            { state with TerminateAfter = Some value }
+            { state with bodyTerminateAfter = Some value }
 
         [<CustomOperation("timeout")>]
         member _.Timeout(state: SearchRequest, value: string) =
-            { state with Timeout = Some value }
+            { state with bodyTimeout = Some value }
 
         [<CustomOperation("trackScores")>]
         member _.TrackScores(state: SearchRequest, value: bool) =
-            { state with TrackScores = Some value }
+            { state with bodyTrackScores = Some value }
 
         [<CustomOperation("version")>]
         member _.Version(state: SearchRequest, value: bool) =
-            { state with Version = Some value }
+            { state with bodyVersion = Some value }
 
         [<CustomOperation("seqNoPrimaryTerm")>]
         member _.SeqNoPrimaryTerm(state: SearchRequest, value: bool) =
-            { state with SeqNoPrimaryTerm = Some value }
+            { state with bodySeqNoPrimaryTerm = Some value }
 
         [<CustomOperation("storedFields")>]
         member _.StoredFields(state: SearchRequest, value: Types.Fields) =
-            { state with StoredFields = Some value }
+            { state with bodyStoredFields = Some value }
 
         [<CustomOperation("pit")>]
         member _.Pit(state: SearchRequest, value: Types.PointInTimeReference) =
@@ -4291,7 +4368,7 @@ module GlobalOperations =
 
         [<CustomOperation("stats")>]
         member _.Stats(state: SearchRequest, value: string list) =
-            { state with Stats = Some value }
+            { state with bodyStats = Some value }
 
         [<CustomOperation("projectRouting")>]
         member _.ProjectRouting(state: SearchRequest, value: Types.ProjectRouting) =
@@ -4317,11 +4394,11 @@ module GlobalOperations =
         let withDf (value: string) (req: SearchRequest) =
             { req with Df = Some value }
         let withDocvalueFields (value: Types.Fields) (req: SearchRequest) =
-            { req with DocvalueFields = Some value }
+            { req with bodyDocvalueFields = Some value }
         let withExpandWildcards (value: Types.ExpandWildcards) (req: SearchRequest) =
             { req with ExpandWildcards = Some value }
         let withExplain (value: bool) (req: SearchRequest) =
-            { req with Explain = Some value }
+            { req with bodyExplain = Some value }
         let withIgnoreThrottled (value: bool) (req: SearchRequest) =
             { req with IgnoreThrottled = Some value }
         let withIgnoreUnavailable (value: bool) (req: SearchRequest) =
@@ -4345,9 +4422,9 @@ module GlobalOperations =
         let withSearchType (value: Types.SearchType) (req: SearchRequest) =
             { req with SearchType = Some value }
         let withStats (value: string list) (req: SearchRequest) =
-            { req with Stats = Some value }
+            { req with bodyStats = Some value }
         let withStoredFields (value: Types.Fields) (req: SearchRequest) =
-            { req with StoredFields = Some value }
+            { req with bodyStoredFields = Some value }
         let withSuggestField (value: Types.Field) (req: SearchRequest) =
             { req with SuggestField = Some value }
         let withSuggestMode (value: Types.SuggestMode) (req: SearchRequest) =
@@ -4357,21 +4434,21 @@ module GlobalOperations =
         let withSuggestText (value: string) (req: SearchRequest) =
             { req with SuggestText = Some value }
         let withTerminateAfter (value: Types.Long) (req: SearchRequest) =
-            { req with TerminateAfter = Some value }
+            { req with bodyTerminateAfter = Some value }
         let withTimeout (value: Types.Duration) (req: SearchRequest) =
-            { req with Timeout = Some value }
+            { req with bodyTimeout = Some value }
         let withTrackTotalHits (value: Types.TrackHits) (req: SearchRequest) =
-            { req with TrackTotalHits = Some value }
+            { req with bodyTrackTotalHits = Some value }
         let withTrackScores (value: bool) (req: SearchRequest) =
-            { req with TrackScores = Some value }
+            { req with bodyTrackScores = Some value }
         let withTypedKeys (value: bool) (req: SearchRequest) =
             { req with TypedKeys = Some value }
         let withRestTotalHitsAsInt (value: bool) (req: SearchRequest) =
             { req with RestTotalHitsAsInt = Some value }
         let withVersion (value: bool) (req: SearchRequest) =
-            { req with Version = Some value }
+            { req with bodyVersion = Some value }
         let withSource (value: Types.SourceConfigParam) (req: SearchRequest) =
-            { req with Source = Some value }
+            { req with bodySource = Some value }
         let withSourceExcludes (value: Types.Fields) (req: SearchRequest) =
             { req with SourceExcludes = Some value }
         let withSourceExcludeVectors (value: bool) (req: SearchRequest) =
@@ -4379,15 +4456,15 @@ module GlobalOperations =
         let withSourceIncludes (value: Types.Fields) (req: SearchRequest) =
             { req with SourceIncludes = Some value }
         let withSeqNoPrimaryTerm (value: bool) (req: SearchRequest) =
-            { req with SeqNoPrimaryTerm = Some value }
+            { req with bodySeqNoPrimaryTerm = Some value }
         let withQ (value: string) (req: SearchRequest) =
             { req with Q = Some value }
         let withSize (value: Types.Integer) (req: SearchRequest) =
-            { req with Size = Some value }
+            { req with bodySize = Some value }
         let withFrom (value: Types.Integer) (req: SearchRequest) =
-            { req with From = Some value }
+            { req with bodyFrom = Some value }
         let withSort (value: System.Text.Json.JsonElement) (req: SearchRequest) =
-            { req with Sort = Some value }
+            { req with bodySort = Some value }
         let withForceSyntheticSource (value: bool) (req: SearchRequest) =
             { req with ForceSyntheticSource = Some value }
         let withAggregations (value: Map<string, Types.AggregationContainer>) (req: SearchRequest) =
@@ -4395,19 +4472,19 @@ module GlobalOperations =
         let withCollapse (value: Types.FieldCollapse) (req: SearchRequest) =
             { req with Collapse = Some value }
         let withExplain (value: bool) (req: SearchRequest) =
-            { req with Explain = Some value }
+            { req with bodyExplain = Some value }
         let withExt (value: Map<string, System.Text.Json.JsonElement>) (req: SearchRequest) =
             { req with Ext = Some value }
         let withFrom (value: Types.Integer) (req: SearchRequest) =
-            { req with From = Some value }
+            { req with bodyFrom = Some value }
         let withHighlight (value: Types.Highlight) (req: SearchRequest) =
             { req with Highlight = Some value }
         let withTrackTotalHits (value: Types.TrackHits) (req: SearchRequest) =
-            { req with TrackTotalHits = Some value }
+            { req with bodyTrackTotalHits = Some value }
         let withIndicesBoost (value: Map<Types.IndexName, Types.Double> list) (req: SearchRequest) =
             { req with IndicesBoost = Some value }
         let withDocvalueFields (value: Types.FieldAndFormat list) (req: SearchRequest) =
-            { req with DocvalueFields = Some value }
+            { req with bodyDocvalueFields = Some value }
         let withKnn (value: System.Text.Json.JsonElement) (req: SearchRequest) =
             { req with Knn = Some value }
         let withRank (value: Types.RankContainer) (req: SearchRequest) =
@@ -4429,35 +4506,35 @@ module GlobalOperations =
         let withSearchAfter (value: Types.SortResults) (req: SearchRequest) =
             { req with SearchAfter = Some value }
         let withSize (value: Types.Integer) (req: SearchRequest) =
-            { req with Size = Some value }
+            { req with bodySize = Some value }
         let withSlice (value: Types.SlicedScroll) (req: SearchRequest) =
             { req with Slice = Some value }
         let withSort (value: Types.Sort) (req: SearchRequest) =
-            { req with Sort = Some value }
+            { req with bodySort = Some value }
         let withSource (value: Types.SourceConfig) (req: SearchRequest) =
-            { req with Source = Some value }
+            { req with bodySource = Some value }
         let withFields (value: Types.FieldAndFormat list) (req: SearchRequest) =
             { req with Fields = Some value }
         let withSuggest (value: Types.Suggester) (req: SearchRequest) =
             { req with Suggest = Some value }
         let withTerminateAfter (value: Types.Long) (req: SearchRequest) =
-            { req with TerminateAfter = Some value }
+            { req with bodyTerminateAfter = Some value }
         let withTimeout (value: string) (req: SearchRequest) =
-            { req with Timeout = Some value }
+            { req with bodyTimeout = Some value }
         let withTrackScores (value: bool) (req: SearchRequest) =
-            { req with TrackScores = Some value }
+            { req with bodyTrackScores = Some value }
         let withVersion (value: bool) (req: SearchRequest) =
-            { req with Version = Some value }
+            { req with bodyVersion = Some value }
         let withSeqNoPrimaryTerm (value: bool) (req: SearchRequest) =
-            { req with SeqNoPrimaryTerm = Some value }
+            { req with bodySeqNoPrimaryTerm = Some value }
         let withStoredFields (value: Types.Fields) (req: SearchRequest) =
-            { req with StoredFields = Some value }
+            { req with bodyStoredFields = Some value }
         let withPit (value: Types.PointInTimeReference) (req: SearchRequest) =
             { req with Pit = Some value }
         let withRuntimeMappings (value: Types.RuntimeFields) (req: SearchRequest) =
             { req with RuntimeMappings = Some value }
         let withStats (value: string list) (req: SearchRequest) =
-            { req with Stats = Some value }
+            { req with bodyStats = Some value }
         let withProjectRouting (value: Types.ProjectRouting) (req: SearchRequest) =
             { req with ProjectRouting = Some value }
 
@@ -4475,20 +4552,35 @@ module GlobalOperations =
         Size: Types.Integer option
         TrackTotalHits: Types.TrackHits option
         WithLabels: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("aggs")>]
         Aggs: Map<string, Types.AggregationContainer> option
+        [<System.Text.Json.Serialization.JsonPropertyName("buffer")>]
         Buffer: Types.Integer option
-        ExactBounds: bool option
-        Extent: Types.Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("exact_bounds")>]
+        bodyExactBounds: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("extent")>]
+        bodyExtent: Types.Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
         Fields: Types.Fields option
-        GridAgg: Types.GridAggregationType option
-        GridPrecision: Types.Integer option
-        GridType: Types.GridType option
+        [<System.Text.Json.Serialization.JsonPropertyName("grid_agg")>]
+        bodyGridAgg: Types.GridAggregationType option
+        [<System.Text.Json.Serialization.JsonPropertyName("grid_precision")>]
+        bodyGridPrecision: Types.Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("grid_type")>]
+        bodyGridType: Types.GridType option
+        [<System.Text.Json.Serialization.JsonPropertyName("query")>]
         Query: Types.QueryContainer option
+        [<System.Text.Json.Serialization.JsonPropertyName("runtime_mappings")>]
         RuntimeMappings: Types.RuntimeFields option
-        Size: Types.Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("size")>]
+        bodySize: Types.Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("sort")>]
         Sort: Types.Sort option
-        TrackTotalHits: Types.TrackHits option
-        WithLabels: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("track_total_hits")>]
+        bodyTrackTotalHits: Types.TrackHits option
+        [<System.Text.Json.Serialization.JsonPropertyName("with_labels")>]
+        bodyWithLabels: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("project_routing")>]
         ProjectRouting: Types.ProjectRouting option
     }
 
@@ -4538,18 +4630,18 @@ module GlobalOperations =
                 WithLabels = None
                 Aggs = None
                 Buffer = None
-                ExactBounds = None
-                Extent = None
+                bodyExactBounds = None
+                bodyExtent = None
                 Fields = None
-                GridAgg = None
-                GridPrecision = None
-                GridType = None
+                bodyGridAgg = None
+                bodyGridPrecision = None
+                bodyGridType = None
                 Query = None
                 RuntimeMappings = None
-                Size = None
+                bodySize = None
                 Sort = None
-                TrackTotalHits = None
-                WithLabels = None
+                bodyTrackTotalHits = None
+                bodyWithLabels = None
                 ProjectRouting = None
             }
 
@@ -4615,11 +4707,11 @@ module GlobalOperations =
 
         [<CustomOperation("exactBounds")>]
         member _.ExactBounds(state: SearchMvtRequest, value: bool) =
-            { state with ExactBounds = Some value }
+            { state with bodyExactBounds = Some value }
 
         [<CustomOperation("extent")>]
         member _.Extent(state: SearchMvtRequest, value: Types.Integer) =
-            { state with Extent = Some value }
+            { state with bodyExtent = Some value }
 
         [<CustomOperation("fields")>]
         member _.Fields(state: SearchMvtRequest, value: Types.Fields) =
@@ -4627,15 +4719,15 @@ module GlobalOperations =
 
         [<CustomOperation("gridAgg")>]
         member _.GridAgg(state: SearchMvtRequest, value: Types.GridAggregationType) =
-            { state with GridAgg = Some value }
+            { state with bodyGridAgg = Some value }
 
         [<CustomOperation("gridPrecision")>]
         member _.GridPrecision(state: SearchMvtRequest, value: Types.Integer) =
-            { state with GridPrecision = Some value }
+            { state with bodyGridPrecision = Some value }
 
         [<CustomOperation("gridType")>]
         member _.GridType(state: SearchMvtRequest, value: Types.GridType) =
-            { state with GridType = Some value }
+            { state with bodyGridType = Some value }
 
         [<CustomOperation("query")>]
         member _.Query(state: SearchMvtRequest, value: Types.QueryContainer) =
@@ -4647,7 +4739,7 @@ module GlobalOperations =
 
         [<CustomOperation("size")>]
         member _.Size(state: SearchMvtRequest, value: Types.Integer) =
-            { state with Size = Some value }
+            { state with bodySize = Some value }
 
         [<CustomOperation("sort")>]
         member _.Sort(state: SearchMvtRequest, value: Types.Sort) =
@@ -4655,11 +4747,11 @@ module GlobalOperations =
 
         [<CustomOperation("trackTotalHits")>]
         member _.TrackTotalHits(state: SearchMvtRequest, value: Types.TrackHits) =
-            { state with TrackTotalHits = Some value }
+            { state with bodyTrackTotalHits = Some value }
 
         [<CustomOperation("withLabels")>]
         member _.WithLabels(state: SearchMvtRequest, value: bool) =
-            { state with WithLabels = Some value }
+            { state with bodyWithLabels = Some value }
 
         [<CustomOperation("projectRouting")>]
         member _.ProjectRouting(state: SearchMvtRequest, value: Types.ProjectRouting) =
@@ -4669,49 +4761,49 @@ module GlobalOperations =
 
     module SearchMvt =
         let withExactBounds (value: bool) (req: SearchMvtRequest) =
-            { req with ExactBounds = Some value }
+            { req with bodyExactBounds = Some value }
         let withExtent (value: Types.Integer) (req: SearchMvtRequest) =
-            { req with Extent = Some value }
+            { req with bodyExtent = Some value }
         let withGridAgg (value: Types.GridAggregationType) (req: SearchMvtRequest) =
-            { req with GridAgg = Some value }
+            { req with bodyGridAgg = Some value }
         let withGridPrecision (value: Types.Integer) (req: SearchMvtRequest) =
-            { req with GridPrecision = Some value }
+            { req with bodyGridPrecision = Some value }
         let withGridType (value: Types.GridType) (req: SearchMvtRequest) =
-            { req with GridType = Some value }
+            { req with bodyGridType = Some value }
         let withSize (value: Types.Integer) (req: SearchMvtRequest) =
-            { req with Size = Some value }
+            { req with bodySize = Some value }
         let withTrackTotalHits (value: Types.TrackHits) (req: SearchMvtRequest) =
-            { req with TrackTotalHits = Some value }
+            { req with bodyTrackTotalHits = Some value }
         let withWithLabels (value: bool) (req: SearchMvtRequest) =
-            { req with WithLabels = Some value }
+            { req with bodyWithLabels = Some value }
         let withAggs (value: Map<string, Types.AggregationContainer>) (req: SearchMvtRequest) =
             { req with Aggs = Some value }
         let withBuffer (value: Types.Integer) (req: SearchMvtRequest) =
             { req with Buffer = Some value }
         let withExactBounds (value: bool) (req: SearchMvtRequest) =
-            { req with ExactBounds = Some value }
+            { req with bodyExactBounds = Some value }
         let withExtent (value: Types.Integer) (req: SearchMvtRequest) =
-            { req with Extent = Some value }
+            { req with bodyExtent = Some value }
         let withFields (value: Types.Fields) (req: SearchMvtRequest) =
             { req with Fields = Some value }
         let withGridAgg (value: Types.GridAggregationType) (req: SearchMvtRequest) =
-            { req with GridAgg = Some value }
+            { req with bodyGridAgg = Some value }
         let withGridPrecision (value: Types.Integer) (req: SearchMvtRequest) =
-            { req with GridPrecision = Some value }
+            { req with bodyGridPrecision = Some value }
         let withGridType (value: Types.GridType) (req: SearchMvtRequest) =
-            { req with GridType = Some value }
+            { req with bodyGridType = Some value }
         let withQuery (value: Types.QueryContainer) (req: SearchMvtRequest) =
             { req with Query = Some value }
         let withRuntimeMappings (value: Types.RuntimeFields) (req: SearchMvtRequest) =
             { req with RuntimeMappings = Some value }
         let withSize (value: Types.Integer) (req: SearchMvtRequest) =
-            { req with Size = Some value }
+            { req with bodySize = Some value }
         let withSort (value: Types.Sort) (req: SearchMvtRequest) =
             { req with Sort = Some value }
         let withTrackTotalHits (value: Types.TrackHits) (req: SearchMvtRequest) =
-            { req with TrackTotalHits = Some value }
+            { req with bodyTrackTotalHits = Some value }
         let withWithLabels (value: bool) (req: SearchMvtRequest) =
-            { req with WithLabels = Some value }
+            { req with bodyWithLabels = Some value }
         let withProjectRouting (value: Types.ProjectRouting) (req: SearchMvtRequest) =
             { req with ProjectRouting = Some value }
 
@@ -4830,11 +4922,17 @@ module GlobalOperations =
         SearchType: Types.SearchType option
         RestTotalHitsAsInt: bool option
         TypedKeys: bool option
-        Explain: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("explain")>]
+        bodyExplain: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("id")>]
         Id: Types.Id option
+        [<System.Text.Json.Serialization.JsonPropertyName("params")>]
         Params: Map<string, System.Text.Json.JsonElement> option
-        Profile: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("profile")>]
+        bodyProfile: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("source")>]
         Source: Types.ScriptSource option
+        [<System.Text.Json.Serialization.JsonPropertyName("project_routing")>]
         ProjectRouting: Types.ProjectRouting option
     }
 
@@ -4888,10 +4986,10 @@ module GlobalOperations =
                 SearchType = None
                 RestTotalHitsAsInt = None
                 TypedKeys = None
-                Explain = None
+                bodyExplain = None
                 Id = None
                 Params = None
-                Profile = None
+                bodyProfile = None
                 Source = None
                 ProjectRouting = None
             }
@@ -4954,7 +5052,7 @@ module GlobalOperations =
 
         [<CustomOperation("explain")>]
         member _.Explain(state: SearchTemplateRequest, value: bool) =
-            { state with Explain = Some value }
+            { state with bodyExplain = Some value }
 
         [<CustomOperation("id")>]
         member _.Id(state: SearchTemplateRequest, value: Types.Id) =
@@ -4966,7 +5064,7 @@ module GlobalOperations =
 
         [<CustomOperation("profile")>]
         member _.Profile(state: SearchTemplateRequest, value: bool) =
-            { state with Profile = Some value }
+            { state with bodyProfile = Some value }
 
         [<CustomOperation("source")>]
         member _.Source(state: SearchTemplateRequest, value: Types.ScriptSource) =
@@ -4986,7 +5084,7 @@ module GlobalOperations =
         let withExpandWildcards (value: Types.ExpandWildcards) (req: SearchTemplateRequest) =
             { req with ExpandWildcards = Some value }
         let withExplain (value: bool) (req: SearchTemplateRequest) =
-            { req with Explain = Some value }
+            { req with bodyExplain = Some value }
         let withIgnoreThrottled (value: bool) (req: SearchTemplateRequest) =
             { req with IgnoreThrottled = Some value }
         let withIgnoreUnavailable (value: bool) (req: SearchTemplateRequest) =
@@ -4994,7 +5092,7 @@ module GlobalOperations =
         let withPreference (value: string) (req: SearchTemplateRequest) =
             { req with Preference = Some value }
         let withProfile (value: bool) (req: SearchTemplateRequest) =
-            { req with Profile = Some value }
+            { req with bodyProfile = Some value }
         let withRouting (value: Types.Routing) (req: SearchTemplateRequest) =
             { req with Routing = Some value }
         let withScroll (value: Types.Duration) (req: SearchTemplateRequest) =
@@ -5006,13 +5104,13 @@ module GlobalOperations =
         let withTypedKeys (value: bool) (req: SearchTemplateRequest) =
             { req with TypedKeys = Some value }
         let withExplain (value: bool) (req: SearchTemplateRequest) =
-            { req with Explain = Some value }
+            { req with bodyExplain = Some value }
         let withId (value: Types.Id) (req: SearchTemplateRequest) =
             { req with Id = Some value }
         let withParams (value: Map<string, System.Text.Json.JsonElement>) (req: SearchTemplateRequest) =
             { req with Params = Some value }
         let withProfile (value: bool) (req: SearchTemplateRequest) =
-            { req with Profile = Some value }
+            { req with bodyProfile = Some value }
         let withSource (value: Types.ScriptSource) (req: SearchTemplateRequest) =
             { req with Source = Some value }
         let withProjectRouting (value: Types.ProjectRouting) (req: SearchTemplateRequest) =
@@ -5020,12 +5118,19 @@ module GlobalOperations =
 
     type TermsEnumRequest = {
         Index: Types.Indices
+        [<System.Text.Json.Serialization.JsonPropertyName("field")>]
         Field: Types.Field
+        [<System.Text.Json.Serialization.JsonPropertyName("size")>]
         Size: Types.Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("timeout")>]
         Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("case_insensitive")>]
         CaseInsensitive: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("index_filter")>]
         IndexFilter: Types.QueryContainer option
+        [<System.Text.Json.Serialization.JsonPropertyName("string")>]
         String: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("search_after")>]
         SearchAfter: string option
     }
 
@@ -5120,18 +5225,30 @@ module GlobalOperations =
         TermStatistics: bool option
         Version: Types.VersionNumber option
         VersionType: Types.VersionType option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc")>]
         Doc: 'tDocument option
+        [<System.Text.Json.Serialization.JsonPropertyName("filter")>]
         Filter: Types.GlobalTermvectorsFilter option
+        [<System.Text.Json.Serialization.JsonPropertyName("per_field_analyzer")>]
         PerFieldAnalyzer: Map<Types.Field, string> option
-        Fields: Types.Field list option
-        FieldStatistics: bool option
-        Offsets: bool option
-        Payloads: bool option
-        Positions: bool option
-        TermStatistics: bool option
-        Routing: Types.Routing option
-        Version: Types.VersionNumber option
-        VersionType: Types.VersionType option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        bodyFields: Types.Field list option
+        [<System.Text.Json.Serialization.JsonPropertyName("field_statistics")>]
+        bodyFieldStatistics: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("offsets")>]
+        bodyOffsets: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("payloads")>]
+        bodyPayloads: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("positions")>]
+        bodyPositions: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("term_statistics")>]
+        bodyTermStatistics: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("routing")>]
+        bodyRouting: Types.Routing option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        bodyVersion: Types.VersionNumber option
+        [<System.Text.Json.Serialization.JsonPropertyName("version_type")>]
+        bodyVersionType: Types.VersionType option
     }
 
         with
@@ -5184,15 +5301,15 @@ module GlobalOperations =
                 Doc = None
                 Filter = None
                 PerFieldAnalyzer = None
-                Fields = None
-                FieldStatistics = None
-                Offsets = None
-                Payloads = None
-                Positions = None
-                TermStatistics = None
-                Routing = None
-                Version = None
-                VersionType = None
+                bodyFields = None
+                bodyFieldStatistics = None
+                bodyOffsets = None
+                bodyPayloads = None
+                bodyPositions = None
+                bodyTermStatistics = None
+                bodyRouting = None
+                bodyVersion = None
+                bodyVersionType = None
             }
 
         [<CustomOperation("index")>]
@@ -5261,65 +5378,65 @@ module GlobalOperations =
 
         [<CustomOperation("fields")>]
         member _.Fields(state: TermvectorsRequest, value: Types.Field list) =
-            { state with Fields = Some value }
+            { state with bodyFields = Some value }
 
         [<CustomOperation("fieldStatistics")>]
         member _.FieldStatistics(state: TermvectorsRequest, value: bool) =
-            { state with FieldStatistics = Some value }
+            { state with bodyFieldStatistics = Some value }
 
         [<CustomOperation("offsets")>]
         member _.Offsets(state: TermvectorsRequest, value: bool) =
-            { state with Offsets = Some value }
+            { state with bodyOffsets = Some value }
 
         [<CustomOperation("payloads")>]
         member _.Payloads(state: TermvectorsRequest, value: bool) =
-            { state with Payloads = Some value }
+            { state with bodyPayloads = Some value }
 
         [<CustomOperation("positions")>]
         member _.Positions(state: TermvectorsRequest, value: bool) =
-            { state with Positions = Some value }
+            { state with bodyPositions = Some value }
 
         [<CustomOperation("termStatistics")>]
         member _.TermStatistics(state: TermvectorsRequest, value: bool) =
-            { state with TermStatistics = Some value }
+            { state with bodyTermStatistics = Some value }
 
         [<CustomOperation("routing")>]
         member _.Routing(state: TermvectorsRequest, value: Types.Routing) =
-            { state with Routing = Some value }
+            { state with bodyRouting = Some value }
 
         [<CustomOperation("version")>]
         member _.Version(state: TermvectorsRequest, value: Types.VersionNumber) =
-            { state with Version = Some value }
+            { state with bodyVersion = Some value }
 
         [<CustomOperation("versionType")>]
         member _.VersionType(state: TermvectorsRequest, value: Types.VersionType) =
-            { state with VersionType = Some value }
+            { state with bodyVersionType = Some value }
 
     let termvectorsRequest = TermvectorsRequestBuilder()
 
     module Termvectors =
         let withFields (value: Types.Fields) (req: TermvectorsRequest) =
-            { req with Fields = Some value }
+            { req with bodyFields = Some value }
         let withFieldStatistics (value: bool) (req: TermvectorsRequest) =
-            { req with FieldStatistics = Some value }
+            { req with bodyFieldStatistics = Some value }
         let withOffsets (value: bool) (req: TermvectorsRequest) =
-            { req with Offsets = Some value }
+            { req with bodyOffsets = Some value }
         let withPayloads (value: bool) (req: TermvectorsRequest) =
-            { req with Payloads = Some value }
+            { req with bodyPayloads = Some value }
         let withPositions (value: bool) (req: TermvectorsRequest) =
-            { req with Positions = Some value }
+            { req with bodyPositions = Some value }
         let withPreference (value: string) (req: TermvectorsRequest) =
             { req with Preference = Some value }
         let withRealtime (value: bool) (req: TermvectorsRequest) =
             { req with Realtime = Some value }
         let withRouting (value: Types.Routing) (req: TermvectorsRequest) =
-            { req with Routing = Some value }
+            { req with bodyRouting = Some value }
         let withTermStatistics (value: bool) (req: TermvectorsRequest) =
-            { req with TermStatistics = Some value }
+            { req with bodyTermStatistics = Some value }
         let withVersion (value: Types.VersionNumber) (req: TermvectorsRequest) =
-            { req with Version = Some value }
+            { req with bodyVersion = Some value }
         let withVersionType (value: Types.VersionType) (req: TermvectorsRequest) =
-            { req with VersionType = Some value }
+            { req with bodyVersionType = Some value }
         let withDoc (value: 'tDocument) (req: TermvectorsRequest) =
             { req with Doc = Some value }
         let withFilter (value: Types.GlobalTermvectorsFilter) (req: TermvectorsRequest) =
@@ -5327,23 +5444,23 @@ module GlobalOperations =
         let withPerFieldAnalyzer (value: Map<Types.Field, string>) (req: TermvectorsRequest) =
             { req with PerFieldAnalyzer = Some value }
         let withFields (value: Types.Field list) (req: TermvectorsRequest) =
-            { req with Fields = Some value }
+            { req with bodyFields = Some value }
         let withFieldStatistics (value: bool) (req: TermvectorsRequest) =
-            { req with FieldStatistics = Some value }
+            { req with bodyFieldStatistics = Some value }
         let withOffsets (value: bool) (req: TermvectorsRequest) =
-            { req with Offsets = Some value }
+            { req with bodyOffsets = Some value }
         let withPayloads (value: bool) (req: TermvectorsRequest) =
-            { req with Payloads = Some value }
+            { req with bodyPayloads = Some value }
         let withPositions (value: bool) (req: TermvectorsRequest) =
-            { req with Positions = Some value }
+            { req with bodyPositions = Some value }
         let withTermStatistics (value: bool) (req: TermvectorsRequest) =
-            { req with TermStatistics = Some value }
+            { req with bodyTermStatistics = Some value }
         let withRouting (value: Types.Routing) (req: TermvectorsRequest) =
-            { req with Routing = Some value }
+            { req with bodyRouting = Some value }
         let withVersion (value: Types.VersionNumber) (req: TermvectorsRequest) =
-            { req with Version = Some value }
+            { req with bodyVersion = Some value }
         let withVersionType (value: Types.VersionType) (req: TermvectorsRequest) =
-            { req with VersionType = Some value }
+            { req with bodyVersionType = Some value }
 
     type UpdateRequest = {
         Id: Types.Id
@@ -5361,12 +5478,19 @@ module GlobalOperations =
         Source: Types.SourceConfigParam option
         SourceExcludes: Types.Fields option
         SourceIncludes: Types.Fields option
+        [<System.Text.Json.Serialization.JsonPropertyName("detect_noop")>]
         DetectNoop: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc")>]
         Doc: 'tPartialDocument option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_as_upsert")>]
         DocAsUpsert: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("script")>]
         Script: Types.Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("scripted_upsert")>]
         ScriptedUpsert: bool option
-        Source: Types.SourceConfig option
+        [<System.Text.Json.Serialization.JsonPropertyName("_source")>]
+        bodySource: Types.SourceConfig option
+        [<System.Text.Json.Serialization.JsonPropertyName("upsert")>]
         Upsert: 'tDocument option
     }
 
@@ -5401,7 +5525,7 @@ module GlobalOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type UpdateResponse = Types.UpdateWriteResponseBase<'tDocument>
+    type UpdateResponse<'tDocument> = Types.UpdateWriteResponseBase<'tDocument>
 
     type UpdateRequestBuilder() =
         member _.Yield(_: unit) : UpdateRequest =
@@ -5426,7 +5550,7 @@ module GlobalOperations =
                 DocAsUpsert = None
                 Script = None
                 ScriptedUpsert = None
-                Source = None
+                bodySource = None
                 Upsert = None
             }
 
@@ -5512,7 +5636,7 @@ module GlobalOperations =
 
         [<CustomOperation("source")>]
         member _.Source(state: UpdateRequest, value: Types.SourceConfig) =
-            { state with Source = Some value }
+            { state with bodySource = Some value }
 
         [<CustomOperation("upsert")>]
         member _.Upsert(state: UpdateRequest, value: 'tDocument) =
@@ -5542,7 +5666,7 @@ module GlobalOperations =
         let withWaitForActiveShards (value: Types.WaitForActiveShards) (req: UpdateRequest) =
             { req with WaitForActiveShards = Some value }
         let withSource (value: Types.SourceConfigParam) (req: UpdateRequest) =
-            { req with Source = Some value }
+            { req with bodySource = Some value }
         let withSourceExcludes (value: Types.Fields) (req: UpdateRequest) =
             { req with SourceExcludes = Some value }
         let withSourceIncludes (value: Types.Fields) (req: UpdateRequest) =
@@ -5558,7 +5682,7 @@ module GlobalOperations =
         let withScriptedUpsert (value: bool) (req: UpdateRequest) =
             { req with ScriptedUpsert = Some value }
         let withSource (value: Types.SourceConfig) (req: UpdateRequest) =
-            { req with Source = Some value }
+            { req with bodySource = Some value }
         let withUpsert (value: 'tDocument) (req: UpdateRequest) =
             { req with Upsert = Some value }
 
@@ -5595,11 +5719,16 @@ module GlobalOperations =
         VersionType: bool option
         WaitForActiveShards: Types.WaitForActiveShards option
         WaitForCompletion: bool option
-        MaxDocs: Types.Long option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_docs")>]
+        bodyMaxDocs: Types.Long option
+        [<System.Text.Json.Serialization.JsonPropertyName("query")>]
         Query: Types.QueryContainer option
+        [<System.Text.Json.Serialization.JsonPropertyName("script")>]
         Script: Types.Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("slice")>]
         Slice: Types.SlicedScroll option
-        Conflicts: Types.Conflicts option
+        [<System.Text.Json.Serialization.JsonPropertyName("conflicts")>]
+        bodyConflicts: Types.Conflicts option
     }
 
         with
@@ -5688,11 +5817,11 @@ module GlobalOperations =
                 VersionType = None
                 WaitForActiveShards = None
                 WaitForCompletion = None
-                MaxDocs = None
+                bodyMaxDocs = None
                 Query = None
                 Script = None
                 Slice = None
-                Conflicts = None
+                bodyConflicts = None
             }
 
         [<CustomOperation("index")>]
@@ -5825,7 +5954,7 @@ module GlobalOperations =
 
         [<CustomOperation("maxDocs")>]
         member _.MaxDocs(state: UpdateByQueryRequest, value: Types.Long) =
-            { state with MaxDocs = Some value }
+            { state with bodyMaxDocs = Some value }
 
         [<CustomOperation("query")>]
         member _.Query(state: UpdateByQueryRequest, value: Types.QueryContainer) =
@@ -5841,7 +5970,7 @@ module GlobalOperations =
 
         [<CustomOperation("conflicts")>]
         member _.Conflicts(state: UpdateByQueryRequest, value: Types.Conflicts) =
-            { state with Conflicts = Some value }
+            { state with bodyConflicts = Some value }
 
     let updateByQueryRequest = UpdateByQueryRequestBuilder()
 
@@ -5853,7 +5982,7 @@ module GlobalOperations =
         let withAnalyzeWildcard (value: bool) (req: UpdateByQueryRequest) =
             { req with AnalyzeWildcard = Some value }
         let withConflicts (value: Types.Conflicts) (req: UpdateByQueryRequest) =
-            { req with Conflicts = Some value }
+            { req with bodyConflicts = Some value }
         let withDefaultOperator (value: Types.Operator) (req: UpdateByQueryRequest) =
             { req with DefaultOperator = Some value }
         let withDf (value: string) (req: UpdateByQueryRequest) =
@@ -5867,7 +5996,7 @@ module GlobalOperations =
         let withLenient (value: bool) (req: UpdateByQueryRequest) =
             { req with Lenient = Some value }
         let withMaxDocs (value: Types.Long) (req: UpdateByQueryRequest) =
-            { req with MaxDocs = Some value }
+            { req with bodyMaxDocs = Some value }
         let withPipeline (value: string) (req: UpdateByQueryRequest) =
             { req with Pipeline = Some value }
         let withPreference (value: string) (req: UpdateByQueryRequest) =
@@ -5909,7 +6038,7 @@ module GlobalOperations =
         let withWaitForCompletion (value: bool) (req: UpdateByQueryRequest) =
             { req with WaitForCompletion = Some value }
         let withMaxDocs (value: Types.Long) (req: UpdateByQueryRequest) =
-            { req with MaxDocs = Some value }
+            { req with bodyMaxDocs = Some value }
         let withQuery (value: Types.QueryContainer) (req: UpdateByQueryRequest) =
             { req with Query = Some value }
         let withScript (value: Types.Script) (req: UpdateByQueryRequest) =
@@ -5917,7 +6046,7 @@ module GlobalOperations =
         let withSlice (value: Types.SlicedScroll) (req: UpdateByQueryRequest) =
             { req with Slice = Some value }
         let withConflicts (value: Types.Conflicts) (req: UpdateByQueryRequest) =
-            { req with Conflicts = Some value }
+            { req with bodyConflicts = Some value }
 
     type UpdateByQueryRethrottleRequest = {
         TaskId: Types.Id

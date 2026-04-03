@@ -72,6 +72,7 @@ module SnapshotOperations =
         Snapshot: Types.Name
         TargetSnapshot: Types.Name
         MasterTimeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("indices")>]
         Indices: string
     }
 
@@ -139,12 +140,19 @@ module SnapshotOperations =
         Snapshot: Types.Name
         MasterTimeout: Types.Duration option
         WaitForCompletion: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("expand_wildcards")>]
         ExpandWildcards: Types.ExpandWildcards option
+        [<System.Text.Json.Serialization.JsonPropertyName("feature_states")>]
         FeatureStates: string list option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_unavailable")>]
         IgnoreUnavailable: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("include_global_state")>]
         IncludeGlobalState: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("indices")>]
         Indices: Types.Indices option
+        [<System.Text.Json.Serialization.JsonPropertyName("metadata")>]
         Metadata: Types.Metadata option
+        [<System.Text.Json.Serialization.JsonPropertyName("partial")>]
         Partial: bool option
     }
 
@@ -922,15 +930,25 @@ module SnapshotOperations =
         Snapshot: Types.Name
         MasterTimeout: Types.Duration option
         WaitForCompletion: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("feature_states")>]
         FeatureStates: string list option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_index_settings")>]
         IgnoreIndexSettings: string list option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_unavailable")>]
         IgnoreUnavailable: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("include_aliases")>]
         IncludeAliases: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("include_global_state")>]
         IncludeGlobalState: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("index_settings")>]
         IndexSettings: Types.IndexSettings option
+        [<System.Text.Json.Serialization.JsonPropertyName("indices")>]
         Indices: Types.Indices option
+        [<System.Text.Json.Serialization.JsonPropertyName("partial")>]
         Partial: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("rename_pattern")>]
         RenamePattern: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("rename_replacement")>]
         RenameReplacement: string option
     }
 

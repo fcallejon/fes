@@ -46,9 +46,12 @@ module MlOperations =
         AllowNoMatch: bool option
         Force: bool option
         Timeout: Types.Duration option
-        AllowNoMatch: bool option
-        Force: bool option
-        Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("allow_no_match")>]
+        bodyAllowNoMatch: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("force")>]
+        bodyForce: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("timeout")>]
+        bodyTimeout: Types.Duration option
     }
 
         with
@@ -81,9 +84,9 @@ module MlOperations =
                 AllowNoMatch = None
                 Force = None
                 Timeout = None
-                AllowNoMatch = None
-                Force = None
-                Timeout = None
+                bodyAllowNoMatch = None
+                bodyForce = None
+                bodyTimeout = None
             }
 
         [<CustomOperation("jobId")>]
@@ -104,31 +107,31 @@ module MlOperations =
 
         [<CustomOperation("allowNoMatch")>]
         member _.AllowNoMatch(state: MlCloseJobRequest, value: bool) =
-            { state with AllowNoMatch = Some value }
+            { state with bodyAllowNoMatch = Some value }
 
         [<CustomOperation("force")>]
         member _.Force(state: MlCloseJobRequest, value: bool) =
-            { state with Force = Some value }
+            { state with bodyForce = Some value }
 
         [<CustomOperation("timeout")>]
         member _.Timeout(state: MlCloseJobRequest, value: Types.Duration) =
-            { state with Timeout = Some value }
+            { state with bodyTimeout = Some value }
 
     let mlCloseJobRequest = MlCloseJobRequestBuilder()
 
     module CloseJob =
         let withAllowNoMatch (value: bool) (req: MlCloseJobRequest) =
-            { req with AllowNoMatch = Some value }
+            { req with bodyAllowNoMatch = Some value }
         let withForce (value: bool) (req: MlCloseJobRequest) =
-            { req with Force = Some value }
+            { req with bodyForce = Some value }
         let withTimeout (value: Types.Duration) (req: MlCloseJobRequest) =
-            { req with Timeout = Some value }
+            { req with bodyTimeout = Some value }
         let withAllowNoMatch (value: bool) (req: MlCloseJobRequest) =
-            { req with AllowNoMatch = Some value }
+            { req with bodyAllowNoMatch = Some value }
         let withForce (value: bool) (req: MlCloseJobRequest) =
-            { req with Force = Some value }
+            { req with bodyForce = Some value }
         let withTimeout (value: Types.Duration) (req: MlCloseJobRequest) =
-            { req with Timeout = Some value }
+            { req with bodyTimeout = Some value }
 
     type MlDeleteCalendarRequest = {
         CalendarId: Types.Id
@@ -334,8 +337,10 @@ module MlOperations =
         JobId: Types.Id
         RequestsPerSecond: Types.Float option
         Timeout: Types.Duration option
-        RequestsPerSecond: Types.Float option
-        Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("requests_per_second")>]
+        bodyRequestsPerSecond: Types.Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("timeout")>]
+        bodyTimeout: Types.Duration option
     }
 
         with
@@ -366,8 +371,8 @@ module MlOperations =
                 JobId = Unchecked.defaultof<_>
                 RequestsPerSecond = None
                 Timeout = None
-                RequestsPerSecond = None
-                Timeout = None
+                bodyRequestsPerSecond = None
+                bodyTimeout = None
             }
 
         [<CustomOperation("jobId")>]
@@ -384,23 +389,23 @@ module MlOperations =
 
         [<CustomOperation("requestsPerSecond")>]
         member _.RequestsPerSecond(state: MlDeleteExpiredDataRequest, value: Types.Float) =
-            { state with RequestsPerSecond = Some value }
+            { state with bodyRequestsPerSecond = Some value }
 
         [<CustomOperation("timeout")>]
         member _.Timeout(state: MlDeleteExpiredDataRequest, value: Types.Duration) =
-            { state with Timeout = Some value }
+            { state with bodyTimeout = Some value }
 
     let mlDeleteExpiredDataRequest = MlDeleteExpiredDataRequestBuilder()
 
     module DeleteExpiredData =
         let withRequestsPerSecond (value: Types.Float) (req: MlDeleteExpiredDataRequest) =
-            { req with RequestsPerSecond = Some value }
+            { req with bodyRequestsPerSecond = Some value }
         let withTimeout (value: Types.Duration) (req: MlDeleteExpiredDataRequest) =
-            { req with Timeout = Some value }
+            { req with bodyTimeout = Some value }
         let withRequestsPerSecond (value: Types.Float) (req: MlDeleteExpiredDataRequest) =
-            { req with RequestsPerSecond = Some value }
+            { req with bodyRequestsPerSecond = Some value }
         let withTimeout (value: Types.Duration) (req: MlDeleteExpiredDataRequest) =
-            { req with Timeout = Some value }
+            { req with bodyTimeout = Some value }
 
     type MlDeleteFilterRequest = {
         FilterId: Types.Id
@@ -682,8 +687,11 @@ module MlOperations =
     let mlDeleteTrainedModelAliasRequest = MlDeleteTrainedModelAliasRequestBuilder()
 
     type MlEstimateModelMemoryRequest = {
+        [<System.Text.Json.Serialization.JsonPropertyName("analysis_config")>]
         AnalysisConfig: Types.AnalysisConfig option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_bucket_cardinality")>]
         MaxBucketCardinality: Map<Types.Field, Types.Long> option
+        [<System.Text.Json.Serialization.JsonPropertyName("overall_cardinality")>]
         OverallCardinality: Map<Types.Field, Types.Long> option
     }
 
@@ -732,8 +740,11 @@ module MlOperations =
             { req with OverallCardinality = Some value }
 
     type MlEvaluateDataFrameRequest = {
+        [<System.Text.Json.Serialization.JsonPropertyName("evaluation")>]
         Evaluation: Types.DataframeEvaluationContainer
+        [<System.Text.Json.Serialization.JsonPropertyName("index")>]
         Index: Types.IndexName
+        [<System.Text.Json.Serialization.JsonPropertyName("query")>]
         Query: Types.QueryContainer option
     }
 
@@ -783,13 +794,21 @@ module MlOperations =
 
     type MlExplainDataFrameAnalyticsRequest = {
         Id: Types.Id
+        [<System.Text.Json.Serialization.JsonPropertyName("source")>]
         Source: Types.DataframeAnalyticsSource option
+        [<System.Text.Json.Serialization.JsonPropertyName("dest")>]
         Dest: Types.DataframeAnalyticsDestination option
+        [<System.Text.Json.Serialization.JsonPropertyName("analysis")>]
         Analysis: Types.DataframeAnalysisContainer option
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
         Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("model_memory_limit")>]
         ModelMemoryLimit: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_num_threads")>]
         MaxNumThreads: Types.Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("analyzed_fields")>]
         AnalyzedFields: Types.DataframeAnalysisAnalyzedFields option
+        [<System.Text.Json.Serialization.JsonPropertyName("allow_lazy_start")>]
         AllowLazyStart: bool option
     }
 
@@ -884,11 +903,16 @@ module MlOperations =
         End: Types.DateTime option
         SkipTime: Types.DateTime option
         Start: Types.DateTime option
-        AdvanceTime: Types.DateTime option
-        CalcInterim: bool option
-        End: Types.DateTime option
-        SkipTime: Types.DateTime option
-        Start: Types.DateTime option
+        [<System.Text.Json.Serialization.JsonPropertyName("advance_time")>]
+        bodyAdvanceTime: Types.DateTime option
+        [<System.Text.Json.Serialization.JsonPropertyName("calc_interim")>]
+        bodyCalcInterim: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("end")>]
+        bodyEnd: Types.DateTime option
+        [<System.Text.Json.Serialization.JsonPropertyName("skip_time")>]
+        bodySkipTime: Types.DateTime option
+        [<System.Text.Json.Serialization.JsonPropertyName("start")>]
+        bodyStart: Types.DateTime option
     }
 
         with
@@ -925,11 +949,11 @@ module MlOperations =
                 End = None
                 SkipTime = None
                 Start = None
-                AdvanceTime = None
-                CalcInterim = None
-                End = None
-                SkipTime = None
-                Start = None
+                bodyAdvanceTime = None
+                bodyCalcInterim = None
+                bodyEnd = None
+                bodySkipTime = None
+                bodyStart = None
             }
 
         [<CustomOperation("jobId")>]
@@ -958,56 +982,59 @@ module MlOperations =
 
         [<CustomOperation("advanceTime")>]
         member _.AdvanceTime(state: MlFlushJobRequest, value: Types.DateTime) =
-            { state with AdvanceTime = Some value }
+            { state with bodyAdvanceTime = Some value }
 
         [<CustomOperation("calcInterim")>]
         member _.CalcInterim(state: MlFlushJobRequest, value: bool) =
-            { state with CalcInterim = Some value }
+            { state with bodyCalcInterim = Some value }
 
         [<CustomOperation("end'")>]
         member _.End(state: MlFlushJobRequest, value: Types.DateTime) =
-            { state with End = Some value }
+            { state with bodyEnd = Some value }
 
         [<CustomOperation("skipTime")>]
         member _.SkipTime(state: MlFlushJobRequest, value: Types.DateTime) =
-            { state with SkipTime = Some value }
+            { state with bodySkipTime = Some value }
 
         [<CustomOperation("start")>]
         member _.Start(state: MlFlushJobRequest, value: Types.DateTime) =
-            { state with Start = Some value }
+            { state with bodyStart = Some value }
 
     let mlFlushJobRequest = MlFlushJobRequestBuilder()
 
     module FlushJob =
         let withAdvanceTime (value: Types.DateTime) (req: MlFlushJobRequest) =
-            { req with AdvanceTime = Some value }
+            { req with bodyAdvanceTime = Some value }
         let withCalcInterim (value: bool) (req: MlFlushJobRequest) =
-            { req with CalcInterim = Some value }
+            { req with bodyCalcInterim = Some value }
         let withEnd (value: Types.DateTime) (req: MlFlushJobRequest) =
-            { req with End = Some value }
+            { req with bodyEnd = Some value }
         let withSkipTime (value: Types.DateTime) (req: MlFlushJobRequest) =
-            { req with SkipTime = Some value }
+            { req with bodySkipTime = Some value }
         let withStart (value: Types.DateTime) (req: MlFlushJobRequest) =
-            { req with Start = Some value }
+            { req with bodyStart = Some value }
         let withAdvanceTime (value: Types.DateTime) (req: MlFlushJobRequest) =
-            { req with AdvanceTime = Some value }
+            { req with bodyAdvanceTime = Some value }
         let withCalcInterim (value: bool) (req: MlFlushJobRequest) =
-            { req with CalcInterim = Some value }
+            { req with bodyCalcInterim = Some value }
         let withEnd (value: Types.DateTime) (req: MlFlushJobRequest) =
-            { req with End = Some value }
+            { req with bodyEnd = Some value }
         let withSkipTime (value: Types.DateTime) (req: MlFlushJobRequest) =
-            { req with SkipTime = Some value }
+            { req with bodySkipTime = Some value }
         let withStart (value: Types.DateTime) (req: MlFlushJobRequest) =
-            { req with Start = Some value }
+            { req with bodyStart = Some value }
 
     type MlForecastRequest = {
         JobId: Types.Id
         Duration: Types.Duration option
         ExpiresIn: Types.Duration option
         MaxModelMemory: string option
-        Duration: Types.Duration option
-        ExpiresIn: Types.Duration option
-        MaxModelMemory: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("duration")>]
+        bodyDuration: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("expires_in")>]
+        bodyExpiresIn: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_model_memory")>]
+        bodyMaxModelMemory: string option
     }
 
         with
@@ -1040,9 +1067,9 @@ module MlOperations =
                 Duration = None
                 ExpiresIn = None
                 MaxModelMemory = None
-                Duration = None
-                ExpiresIn = None
-                MaxModelMemory = None
+                bodyDuration = None
+                bodyExpiresIn = None
+                bodyMaxModelMemory = None
             }
 
         [<CustomOperation("jobId")>]
@@ -1063,31 +1090,31 @@ module MlOperations =
 
         [<CustomOperation("duration")>]
         member _.Duration(state: MlForecastRequest, value: Types.Duration) =
-            { state with Duration = Some value }
+            { state with bodyDuration = Some value }
 
         [<CustomOperation("expiresIn")>]
         member _.ExpiresIn(state: MlForecastRequest, value: Types.Duration) =
-            { state with ExpiresIn = Some value }
+            { state with bodyExpiresIn = Some value }
 
         [<CustomOperation("maxModelMemory")>]
         member _.MaxModelMemory(state: MlForecastRequest, value: string) =
-            { state with MaxModelMemory = Some value }
+            { state with bodyMaxModelMemory = Some value }
 
     let mlForecastRequest = MlForecastRequestBuilder()
 
     module Forecast =
         let withDuration (value: Types.Duration) (req: MlForecastRequest) =
-            { req with Duration = Some value }
+            { req with bodyDuration = Some value }
         let withExpiresIn (value: Types.Duration) (req: MlForecastRequest) =
-            { req with ExpiresIn = Some value }
+            { req with bodyExpiresIn = Some value }
         let withMaxModelMemory (value: string) (req: MlForecastRequest) =
-            { req with MaxModelMemory = Some value }
+            { req with bodyMaxModelMemory = Some value }
         let withDuration (value: Types.Duration) (req: MlForecastRequest) =
-            { req with Duration = Some value }
+            { req with bodyDuration = Some value }
         let withExpiresIn (value: Types.Duration) (req: MlForecastRequest) =
-            { req with ExpiresIn = Some value }
+            { req with bodyExpiresIn = Some value }
         let withMaxModelMemory (value: string) (req: MlForecastRequest) =
-            { req with MaxModelMemory = Some value }
+            { req with bodyMaxModelMemory = Some value }
 
     type MlGetBucketsRequest = {
         JobId: Types.Id
@@ -1101,14 +1128,22 @@ module MlOperations =
         Size: Types.Integer option
         Sort: Types.Field option
         Start: Types.DateTime option
-        AnomalyScore: Types.Double option
-        Desc: bool option
-        End: Types.DateTime option
-        ExcludeInterim: bool option
-        Expand: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("anomaly_score")>]
+        bodyAnomalyScore: Types.Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("desc")>]
+        bodyDesc: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("end")>]
+        bodyEnd: Types.DateTime option
+        [<System.Text.Json.Serialization.JsonPropertyName("exclude_interim")>]
+        bodyExcludeInterim: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("expand")>]
+        bodyExpand: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("page")>]
         Page: Types.Page option
-        Sort: Types.Field option
-        Start: Types.DateTime option
+        [<System.Text.Json.Serialization.JsonPropertyName("sort")>]
+        bodySort: Types.Field option
+        [<System.Text.Json.Serialization.JsonPropertyName("start")>]
+        bodyStart: Types.DateTime option
     }
 
         with
@@ -1154,14 +1189,14 @@ module MlOperations =
                 Size = None
                 Sort = None
                 Start = None
-                AnomalyScore = None
-                Desc = None
-                End = None
-                ExcludeInterim = None
-                Expand = None
+                bodyAnomalyScore = None
+                bodyDesc = None
+                bodyEnd = None
+                bodyExcludeInterim = None
+                bodyExpand = None
                 Page = None
-                Sort = None
-                Start = None
+                bodySort = None
+                bodyStart = None
             }
 
         [<CustomOperation("jobId")>]
@@ -1210,23 +1245,23 @@ module MlOperations =
 
         [<CustomOperation("anomalyScore")>]
         member _.AnomalyScore(state: MlGetBucketsRequest, value: Types.Double) =
-            { state with AnomalyScore = Some value }
+            { state with bodyAnomalyScore = Some value }
 
         [<CustomOperation("desc")>]
         member _.Desc(state: MlGetBucketsRequest, value: bool) =
-            { state with Desc = Some value }
+            { state with bodyDesc = Some value }
 
         [<CustomOperation("end'")>]
         member _.End(state: MlGetBucketsRequest, value: Types.DateTime) =
-            { state with End = Some value }
+            { state with bodyEnd = Some value }
 
         [<CustomOperation("excludeInterim")>]
         member _.ExcludeInterim(state: MlGetBucketsRequest, value: bool) =
-            { state with ExcludeInterim = Some value }
+            { state with bodyExcludeInterim = Some value }
 
         [<CustomOperation("expand")>]
         member _.Expand(state: MlGetBucketsRequest, value: bool) =
-            { state with Expand = Some value }
+            { state with bodyExpand = Some value }
 
         [<CustomOperation("page")>]
         member _.Page(state: MlGetBucketsRequest, value: Types.Page) =
@@ -1234,49 +1269,49 @@ module MlOperations =
 
         [<CustomOperation("sort")>]
         member _.Sort(state: MlGetBucketsRequest, value: Types.Field) =
-            { state with Sort = Some value }
+            { state with bodySort = Some value }
 
         [<CustomOperation("start")>]
         member _.Start(state: MlGetBucketsRequest, value: Types.DateTime) =
-            { state with Start = Some value }
+            { state with bodyStart = Some value }
 
     let mlGetBucketsRequest = MlGetBucketsRequestBuilder()
 
     module GetBuckets =
         let withAnomalyScore (value: Types.Double) (req: MlGetBucketsRequest) =
-            { req with AnomalyScore = Some value }
+            { req with bodyAnomalyScore = Some value }
         let withDesc (value: bool) (req: MlGetBucketsRequest) =
-            { req with Desc = Some value }
+            { req with bodyDesc = Some value }
         let withEnd (value: Types.DateTime) (req: MlGetBucketsRequest) =
-            { req with End = Some value }
+            { req with bodyEnd = Some value }
         let withExcludeInterim (value: bool) (req: MlGetBucketsRequest) =
-            { req with ExcludeInterim = Some value }
+            { req with bodyExcludeInterim = Some value }
         let withExpand (value: bool) (req: MlGetBucketsRequest) =
-            { req with Expand = Some value }
+            { req with bodyExpand = Some value }
         let withFrom (value: Types.Integer) (req: MlGetBucketsRequest) =
             { req with From = Some value }
         let withSize (value: Types.Integer) (req: MlGetBucketsRequest) =
             { req with Size = Some value }
         let withSort (value: Types.Field) (req: MlGetBucketsRequest) =
-            { req with Sort = Some value }
+            { req with bodySort = Some value }
         let withStart (value: Types.DateTime) (req: MlGetBucketsRequest) =
-            { req with Start = Some value }
+            { req with bodyStart = Some value }
         let withAnomalyScore (value: Types.Double) (req: MlGetBucketsRequest) =
-            { req with AnomalyScore = Some value }
+            { req with bodyAnomalyScore = Some value }
         let withDesc (value: bool) (req: MlGetBucketsRequest) =
-            { req with Desc = Some value }
+            { req with bodyDesc = Some value }
         let withEnd (value: Types.DateTime) (req: MlGetBucketsRequest) =
-            { req with End = Some value }
+            { req with bodyEnd = Some value }
         let withExcludeInterim (value: bool) (req: MlGetBucketsRequest) =
-            { req with ExcludeInterim = Some value }
+            { req with bodyExcludeInterim = Some value }
         let withExpand (value: bool) (req: MlGetBucketsRequest) =
-            { req with Expand = Some value }
+            { req with bodyExpand = Some value }
         let withPage (value: Types.Page) (req: MlGetBucketsRequest) =
             { req with Page = Some value }
         let withSort (value: Types.Field) (req: MlGetBucketsRequest) =
-            { req with Sort = Some value }
+            { req with bodySort = Some value }
         let withStart (value: Types.DateTime) (req: MlGetBucketsRequest) =
-            { req with Start = Some value }
+            { req with bodyStart = Some value }
 
     type MlGetCalendarEventsRequest = {
         CalendarId: Types.Id
@@ -1364,6 +1399,7 @@ module MlOperations =
         CalendarId: Types.Id
         From: Types.Integer option
         Size: Types.Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("page")>]
         Page: Types.Page option
     }
 
@@ -1430,6 +1466,7 @@ module MlOperations =
         From: Types.Integer option
         PartitionFieldValue: string option
         Size: Types.Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("page")>]
         Page: Types.Page option
     }
 
@@ -1815,6 +1852,7 @@ module MlOperations =
         Size: Types.Integer option
         Sort: Types.Field option
         Start: Types.DateTime option
+        [<System.Text.Json.Serialization.JsonPropertyName("page")>]
         Page: Types.Page option
     }
 
@@ -2140,11 +2178,16 @@ module MlOperations =
         Size: Types.Integer option
         Sort: Types.Field option
         Start: Types.DateTime option
-        Desc: bool option
-        End: Types.DateTime option
+        [<System.Text.Json.Serialization.JsonPropertyName("desc")>]
+        bodyDesc: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("end")>]
+        bodyEnd: Types.DateTime option
+        [<System.Text.Json.Serialization.JsonPropertyName("page")>]
         Page: Types.Page option
-        Sort: Types.Field option
-        Start: Types.DateTime option
+        [<System.Text.Json.Serialization.JsonPropertyName("sort")>]
+        bodySort: Types.Field option
+        [<System.Text.Json.Serialization.JsonPropertyName("start")>]
+        bodyStart: Types.DateTime option
     }
 
         with
@@ -2184,11 +2227,11 @@ module MlOperations =
                 Size = None
                 Sort = None
                 Start = None
-                Desc = None
-                End = None
+                bodyDesc = None
+                bodyEnd = None
                 Page = None
-                Sort = None
-                Start = None
+                bodySort = None
+                bodyStart = None
             }
 
         [<CustomOperation("jobId")>]
@@ -2225,11 +2268,11 @@ module MlOperations =
 
         [<CustomOperation("desc")>]
         member _.Desc(state: MlGetModelSnapshotsRequest, value: bool) =
-            { state with Desc = Some value }
+            { state with bodyDesc = Some value }
 
         [<CustomOperation("end'")>]
         member _.End(state: MlGetModelSnapshotsRequest, value: Types.DateTime) =
-            { state with End = Some value }
+            { state with bodyEnd = Some value }
 
         [<CustomOperation("page")>]
         member _.Page(state: MlGetModelSnapshotsRequest, value: Types.Page) =
@@ -2237,37 +2280,37 @@ module MlOperations =
 
         [<CustomOperation("sort")>]
         member _.Sort(state: MlGetModelSnapshotsRequest, value: Types.Field) =
-            { state with Sort = Some value }
+            { state with bodySort = Some value }
 
         [<CustomOperation("start")>]
         member _.Start(state: MlGetModelSnapshotsRequest, value: Types.DateTime) =
-            { state with Start = Some value }
+            { state with bodyStart = Some value }
 
     let mlGetModelSnapshotsRequest = MlGetModelSnapshotsRequestBuilder()
 
     module GetModelSnapshots =
         let withDesc (value: bool) (req: MlGetModelSnapshotsRequest) =
-            { req with Desc = Some value }
+            { req with bodyDesc = Some value }
         let withEnd (value: Types.DateTime) (req: MlGetModelSnapshotsRequest) =
-            { req with End = Some value }
+            { req with bodyEnd = Some value }
         let withFrom (value: Types.Integer) (req: MlGetModelSnapshotsRequest) =
             { req with From = Some value }
         let withSize (value: Types.Integer) (req: MlGetModelSnapshotsRequest) =
             { req with Size = Some value }
         let withSort (value: Types.Field) (req: MlGetModelSnapshotsRequest) =
-            { req with Sort = Some value }
+            { req with bodySort = Some value }
         let withStart (value: Types.DateTime) (req: MlGetModelSnapshotsRequest) =
-            { req with Start = Some value }
+            { req with bodyStart = Some value }
         let withDesc (value: bool) (req: MlGetModelSnapshotsRequest) =
-            { req with Desc = Some value }
+            { req with bodyDesc = Some value }
         let withEnd (value: Types.DateTime) (req: MlGetModelSnapshotsRequest) =
-            { req with End = Some value }
+            { req with bodyEnd = Some value }
         let withPage (value: Types.Page) (req: MlGetModelSnapshotsRequest) =
             { req with Page = Some value }
         let withSort (value: Types.Field) (req: MlGetModelSnapshotsRequest) =
-            { req with Sort = Some value }
+            { req with bodySort = Some value }
         let withStart (value: Types.DateTime) (req: MlGetModelSnapshotsRequest) =
-            { req with Start = Some value }
+            { req with bodyStart = Some value }
 
     type MlGetOverallBucketsRequest = {
         JobId: Types.Id
@@ -2278,13 +2321,20 @@ module MlOperations =
         OverallScore: Types.Double option
         Start: Types.DateTime option
         TopN: Types.Integer option
-        AllowNoMatch: bool option
-        BucketSpan: Types.Duration option
-        End: Types.DateTime option
-        ExcludeInterim: bool option
-        OverallScore: Types.Double option
-        Start: Types.DateTime option
-        TopN: Types.Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("allow_no_match")>]
+        bodyAllowNoMatch: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("bucket_span")>]
+        bodyBucketSpan: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("end")>]
+        bodyEnd: Types.DateTime option
+        [<System.Text.Json.Serialization.JsonPropertyName("exclude_interim")>]
+        bodyExcludeInterim: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("overall_score")>]
+        bodyOverallScore: Types.Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("start")>]
+        bodyStart: Types.DateTime option
+        [<System.Text.Json.Serialization.JsonPropertyName("top_n")>]
+        bodyTopN: Types.Integer option
     }
 
         with
@@ -2325,13 +2375,13 @@ module MlOperations =
                 OverallScore = None
                 Start = None
                 TopN = None
-                AllowNoMatch = None
-                BucketSpan = None
-                End = None
-                ExcludeInterim = None
-                OverallScore = None
-                Start = None
-                TopN = None
+                bodyAllowNoMatch = None
+                bodyBucketSpan = None
+                bodyEnd = None
+                bodyExcludeInterim = None
+                bodyOverallScore = None
+                bodyStart = None
+                bodyTopN = None
             }
 
         [<CustomOperation("jobId")>]
@@ -2368,63 +2418,63 @@ module MlOperations =
 
         [<CustomOperation("allowNoMatch")>]
         member _.AllowNoMatch(state: MlGetOverallBucketsRequest, value: bool) =
-            { state with AllowNoMatch = Some value }
+            { state with bodyAllowNoMatch = Some value }
 
         [<CustomOperation("bucketSpan")>]
         member _.BucketSpan(state: MlGetOverallBucketsRequest, value: Types.Duration) =
-            { state with BucketSpan = Some value }
+            { state with bodyBucketSpan = Some value }
 
         [<CustomOperation("end'")>]
         member _.End(state: MlGetOverallBucketsRequest, value: Types.DateTime) =
-            { state with End = Some value }
+            { state with bodyEnd = Some value }
 
         [<CustomOperation("excludeInterim")>]
         member _.ExcludeInterim(state: MlGetOverallBucketsRequest, value: bool) =
-            { state with ExcludeInterim = Some value }
+            { state with bodyExcludeInterim = Some value }
 
         [<CustomOperation("overallScore")>]
         member _.OverallScore(state: MlGetOverallBucketsRequest, value: Types.Double) =
-            { state with OverallScore = Some value }
+            { state with bodyOverallScore = Some value }
 
         [<CustomOperation("start")>]
         member _.Start(state: MlGetOverallBucketsRequest, value: Types.DateTime) =
-            { state with Start = Some value }
+            { state with bodyStart = Some value }
 
         [<CustomOperation("topN")>]
         member _.TopN(state: MlGetOverallBucketsRequest, value: Types.Integer) =
-            { state with TopN = Some value }
+            { state with bodyTopN = Some value }
 
     let mlGetOverallBucketsRequest = MlGetOverallBucketsRequestBuilder()
 
     module GetOverallBuckets =
         let withAllowNoMatch (value: bool) (req: MlGetOverallBucketsRequest) =
-            { req with AllowNoMatch = Some value }
+            { req with bodyAllowNoMatch = Some value }
         let withBucketSpan (value: Types.Duration) (req: MlGetOverallBucketsRequest) =
-            { req with BucketSpan = Some value }
+            { req with bodyBucketSpan = Some value }
         let withEnd (value: Types.DateTime) (req: MlGetOverallBucketsRequest) =
-            { req with End = Some value }
+            { req with bodyEnd = Some value }
         let withExcludeInterim (value: bool) (req: MlGetOverallBucketsRequest) =
-            { req with ExcludeInterim = Some value }
+            { req with bodyExcludeInterim = Some value }
         let withOverallScore (value: Types.Double) (req: MlGetOverallBucketsRequest) =
-            { req with OverallScore = Some value }
+            { req with bodyOverallScore = Some value }
         let withStart (value: Types.DateTime) (req: MlGetOverallBucketsRequest) =
-            { req with Start = Some value }
+            { req with bodyStart = Some value }
         let withTopN (value: Types.Integer) (req: MlGetOverallBucketsRequest) =
-            { req with TopN = Some value }
+            { req with bodyTopN = Some value }
         let withAllowNoMatch (value: bool) (req: MlGetOverallBucketsRequest) =
-            { req with AllowNoMatch = Some value }
+            { req with bodyAllowNoMatch = Some value }
         let withBucketSpan (value: Types.Duration) (req: MlGetOverallBucketsRequest) =
-            { req with BucketSpan = Some value }
+            { req with bodyBucketSpan = Some value }
         let withEnd (value: Types.DateTime) (req: MlGetOverallBucketsRequest) =
-            { req with End = Some value }
+            { req with bodyEnd = Some value }
         let withExcludeInterim (value: bool) (req: MlGetOverallBucketsRequest) =
-            { req with ExcludeInterim = Some value }
+            { req with bodyExcludeInterim = Some value }
         let withOverallScore (value: Types.Double) (req: MlGetOverallBucketsRequest) =
-            { req with OverallScore = Some value }
+            { req with bodyOverallScore = Some value }
         let withStart (value: Types.DateTime) (req: MlGetOverallBucketsRequest) =
-            { req with Start = Some value }
+            { req with bodyStart = Some value }
         let withTopN (value: Types.Integer) (req: MlGetOverallBucketsRequest) =
-            { req with TopN = Some value }
+            { req with bodyTopN = Some value }
 
     type MlGetRecordsRequest = {
         JobId: Types.Id
@@ -2436,13 +2486,20 @@ module MlOperations =
         Size: Types.Integer option
         Sort: Types.Field option
         Start: Types.DateTime option
-        Desc: bool option
-        End: Types.DateTime option
-        ExcludeInterim: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("desc")>]
+        bodyDesc: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("end")>]
+        bodyEnd: Types.DateTime option
+        [<System.Text.Json.Serialization.JsonPropertyName("exclude_interim")>]
+        bodyExcludeInterim: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("page")>]
         Page: Types.Page option
-        RecordScore: Types.Double option
-        Sort: Types.Field option
-        Start: Types.DateTime option
+        [<System.Text.Json.Serialization.JsonPropertyName("record_score")>]
+        bodyRecordScore: Types.Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("sort")>]
+        bodySort: Types.Field option
+        [<System.Text.Json.Serialization.JsonPropertyName("start")>]
+        bodyStart: Types.DateTime option
     }
 
         with
@@ -2485,13 +2542,13 @@ module MlOperations =
                 Size = None
                 Sort = None
                 Start = None
-                Desc = None
-                End = None
-                ExcludeInterim = None
+                bodyDesc = None
+                bodyEnd = None
+                bodyExcludeInterim = None
                 Page = None
-                RecordScore = None
-                Sort = None
-                Start = None
+                bodyRecordScore = None
+                bodySort = None
+                bodyStart = None
             }
 
         [<CustomOperation("jobId")>]
@@ -2532,15 +2589,15 @@ module MlOperations =
 
         [<CustomOperation("desc")>]
         member _.Desc(state: MlGetRecordsRequest, value: bool) =
-            { state with Desc = Some value }
+            { state with bodyDesc = Some value }
 
         [<CustomOperation("end'")>]
         member _.End(state: MlGetRecordsRequest, value: Types.DateTime) =
-            { state with End = Some value }
+            { state with bodyEnd = Some value }
 
         [<CustomOperation("excludeInterim")>]
         member _.ExcludeInterim(state: MlGetRecordsRequest, value: bool) =
-            { state with ExcludeInterim = Some value }
+            { state with bodyExcludeInterim = Some value }
 
         [<CustomOperation("page")>]
         member _.Page(state: MlGetRecordsRequest, value: Types.Page) =
@@ -2548,49 +2605,49 @@ module MlOperations =
 
         [<CustomOperation("recordScore")>]
         member _.RecordScore(state: MlGetRecordsRequest, value: Types.Double) =
-            { state with RecordScore = Some value }
+            { state with bodyRecordScore = Some value }
 
         [<CustomOperation("sort")>]
         member _.Sort(state: MlGetRecordsRequest, value: Types.Field) =
-            { state with Sort = Some value }
+            { state with bodySort = Some value }
 
         [<CustomOperation("start")>]
         member _.Start(state: MlGetRecordsRequest, value: Types.DateTime) =
-            { state with Start = Some value }
+            { state with bodyStart = Some value }
 
     let mlGetRecordsRequest = MlGetRecordsRequestBuilder()
 
     module GetRecords =
         let withDesc (value: bool) (req: MlGetRecordsRequest) =
-            { req with Desc = Some value }
+            { req with bodyDesc = Some value }
         let withEnd (value: Types.DateTime) (req: MlGetRecordsRequest) =
-            { req with End = Some value }
+            { req with bodyEnd = Some value }
         let withExcludeInterim (value: bool) (req: MlGetRecordsRequest) =
-            { req with ExcludeInterim = Some value }
+            { req with bodyExcludeInterim = Some value }
         let withFrom (value: Types.Integer) (req: MlGetRecordsRequest) =
             { req with From = Some value }
         let withRecordScore (value: Types.Double) (req: MlGetRecordsRequest) =
-            { req with RecordScore = Some value }
+            { req with bodyRecordScore = Some value }
         let withSize (value: Types.Integer) (req: MlGetRecordsRequest) =
             { req with Size = Some value }
         let withSort (value: Types.Field) (req: MlGetRecordsRequest) =
-            { req with Sort = Some value }
+            { req with bodySort = Some value }
         let withStart (value: Types.DateTime) (req: MlGetRecordsRequest) =
-            { req with Start = Some value }
+            { req with bodyStart = Some value }
         let withDesc (value: bool) (req: MlGetRecordsRequest) =
-            { req with Desc = Some value }
+            { req with bodyDesc = Some value }
         let withEnd (value: Types.DateTime) (req: MlGetRecordsRequest) =
-            { req with End = Some value }
+            { req with bodyEnd = Some value }
         let withExcludeInterim (value: bool) (req: MlGetRecordsRequest) =
-            { req with ExcludeInterim = Some value }
+            { req with bodyExcludeInterim = Some value }
         let withPage (value: Types.Page) (req: MlGetRecordsRequest) =
             { req with Page = Some value }
         let withRecordScore (value: Types.Double) (req: MlGetRecordsRequest) =
-            { req with RecordScore = Some value }
+            { req with bodyRecordScore = Some value }
         let withSort (value: Types.Field) (req: MlGetRecordsRequest) =
-            { req with Sort = Some value }
+            { req with bodySort = Some value }
         let withStart (value: Types.DateTime) (req: MlGetRecordsRequest) =
-            { req with Start = Some value }
+            { req with bodyStart = Some value }
 
     type MlGetTrainedModelsRequest = {
         ModelId: Types.Ids
@@ -2759,7 +2816,9 @@ module MlOperations =
     type MlInferTrainedModelRequest = {
         ModelId: Types.Id
         Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("docs")>]
         Docs: Map<string, System.Text.Json.JsonElement> list
+        [<System.Text.Json.Serialization.JsonPropertyName("inference_config")>]
         InferenceConfig: Types.InferenceConfigUpdateContainer option
     }
 
@@ -2844,7 +2903,8 @@ module MlOperations =
     type MlOpenJobRequest = {
         JobId: Types.Id
         Timeout: Types.Duration option
-        Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("timeout")>]
+        bodyTimeout: Types.Duration option
     }
 
         with
@@ -2873,7 +2933,7 @@ module MlOperations =
             {
                 JobId = Unchecked.defaultof<_>
                 Timeout = None
-                Timeout = None
+                bodyTimeout = None
             }
 
         [<CustomOperation("jobId")>]
@@ -2886,18 +2946,19 @@ module MlOperations =
 
         [<CustomOperation("timeout")>]
         member _.Timeout(state: MlOpenJobRequest, value: Types.Duration) =
-            { state with Timeout = Some value }
+            { state with bodyTimeout = Some value }
 
     let mlOpenJobRequest = MlOpenJobRequestBuilder()
 
     module OpenJob =
         let withTimeout (value: Types.Duration) (req: MlOpenJobRequest) =
-            { req with Timeout = Some value }
+            { req with bodyTimeout = Some value }
         let withTimeout (value: Types.Duration) (req: MlOpenJobRequest) =
-            { req with Timeout = Some value }
+            { req with bodyTimeout = Some value }
 
     type MlPostCalendarEventsRequest = {
         CalendarId: Types.Id
+        [<System.Text.Json.Serialization.JsonPropertyName("events")>]
         Events: Types.CalendarEvent list
     }
 
@@ -3000,6 +3061,7 @@ module MlOperations =
 
     type MlPreviewDataFrameAnalyticsRequest = {
         Id: Types.Id
+        [<System.Text.Json.Serialization.JsonPropertyName("config")>]
         Config: Types.DataframePreviewConfig option
     }
 
@@ -3042,7 +3104,9 @@ module MlOperations =
         DatafeedId: Types.Id
         Start: Types.DateTime option
         End: Types.DateTime option
+        [<System.Text.Json.Serialization.JsonPropertyName("datafeed_config")>]
         DatafeedConfig: Types.DatafeedConfig option
+        [<System.Text.Json.Serialization.JsonPropertyName("job_config")>]
         JobConfig: Types.JobConfig option
     }
 
@@ -3066,7 +3130,7 @@ module MlOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type MlPreviewDatafeedResponse = Types.TDocument list
+    type MlPreviewDatafeedResponse<'tDocument> = 'tDocument list
 
     type MlPreviewDatafeedRequestBuilder() =
         member _.Yield(_: unit) : MlPreviewDatafeedRequest =
@@ -3112,7 +3176,9 @@ module MlOperations =
 
     type MlPutCalendarRequest = {
         CalendarId: Types.Id
+        [<System.Text.Json.Serialization.JsonPropertyName("job_ids")>]
         JobIds: Types.Id list option
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
         Description: string option
     }
 
@@ -3195,16 +3261,27 @@ module MlOperations =
 
     type MlPutDataFrameAnalyticsRequest = {
         Id: Types.Id
+        [<System.Text.Json.Serialization.JsonPropertyName("allow_lazy_start")>]
         AllowLazyStart: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("analysis")>]
         Analysis: Types.DataframeAnalysisContainer
+        [<System.Text.Json.Serialization.JsonPropertyName("analyzed_fields")>]
         AnalyzedFields: Types.DataframeAnalysisAnalyzedFields option
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
         Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("dest")>]
         Dest: Types.DataframeAnalyticsDestination
+        [<System.Text.Json.Serialization.JsonPropertyName("max_num_threads")>]
         MaxNumThreads: Types.Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("_meta")>]
         Meta: Types.Metadata option
+        [<System.Text.Json.Serialization.JsonPropertyName("model_memory_limit")>]
         ModelMemoryLimit: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("source")>]
         Source: Types.DataframeAnalyticsSource
+        [<System.Text.Json.Serialization.JsonPropertyName("headers")>]
         Headers: Types.HttpHeaders option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
         Version: Types.VersionString option
     }
 
@@ -3319,19 +3396,33 @@ module MlOperations =
         ExpandWildcards: Types.ExpandWildcards option
         IgnoreThrottled: bool option
         IgnoreUnavailable: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("aggregations")>]
         Aggregations: Map<string, Types.AggregationContainer> option
+        [<System.Text.Json.Serialization.JsonPropertyName("chunking_config")>]
         ChunkingConfig: Types.ChunkingConfig option
+        [<System.Text.Json.Serialization.JsonPropertyName("delayed_data_check_config")>]
         DelayedDataCheckConfig: Types.DelayedDataCheckConfig option
+        [<System.Text.Json.Serialization.JsonPropertyName("frequency")>]
         Frequency: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("indices")>]
         Indices: Types.Indices option
+        [<System.Text.Json.Serialization.JsonPropertyName("indices_options")>]
         IndicesOptions: Types.IndicesOptions option
+        [<System.Text.Json.Serialization.JsonPropertyName("job_id")>]
         JobId: Types.Id option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_empty_searches")>]
         MaxEmptySearches: Types.Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("query")>]
         Query: Types.QueryContainer option
+        [<System.Text.Json.Serialization.JsonPropertyName("query_delay")>]
         QueryDelay: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("runtime_mappings")>]
         RuntimeMappings: Types.RuntimeFields option
+        [<System.Text.Json.Serialization.JsonPropertyName("script_fields")>]
         ScriptFields: Map<string, Types.ScriptField> option
+        [<System.Text.Json.Serialization.JsonPropertyName("scroll_size")>]
         ScrollSize: Types.Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("headers")>]
         Headers: Types.HttpHeaders option
     }
 
@@ -3501,7 +3592,9 @@ module MlOperations =
 
     type MlPutFilterRequest = {
         FilterId: Types.Id
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
         Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("items")>]
         Items: string list option
     }
 
@@ -3553,21 +3646,37 @@ module MlOperations =
         ExpandWildcards: Types.ExpandWildcards option
         IgnoreThrottled: bool option
         IgnoreUnavailable: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("allow_lazy_open")>]
         AllowLazyOpen: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("analysis_config")>]
         AnalysisConfig: Types.AnalysisConfig
+        [<System.Text.Json.Serialization.JsonPropertyName("analysis_limits")>]
         AnalysisLimits: Types.AnalysisLimits option
+        [<System.Text.Json.Serialization.JsonPropertyName("background_persist_interval")>]
         BackgroundPersistInterval: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("custom_settings")>]
         CustomSettings: Types.CustomSettings option
+        [<System.Text.Json.Serialization.JsonPropertyName("daily_model_snapshot_retention_after_days")>]
         DailyModelSnapshotRetentionAfterDays: Types.Long option
+        [<System.Text.Json.Serialization.JsonPropertyName("data_description")>]
         DataDescription: Types.DataDescription
+        [<System.Text.Json.Serialization.JsonPropertyName("datafeed_config")>]
         DatafeedConfig: Types.DatafeedConfig option
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
         Description: string option
-        JobId: Types.Id option
+        [<System.Text.Json.Serialization.JsonPropertyName("job_id")>]
+        bodyJobId: Types.Id option
+        [<System.Text.Json.Serialization.JsonPropertyName("groups")>]
         Groups: string list option
+        [<System.Text.Json.Serialization.JsonPropertyName("model_plot_config")>]
         ModelPlotConfig: Types.ModelPlotConfig option
+        [<System.Text.Json.Serialization.JsonPropertyName("model_snapshot_retention_days")>]
         ModelSnapshotRetentionDays: Types.Long option
+        [<System.Text.Json.Serialization.JsonPropertyName("renormalization_window_days")>]
         RenormalizationWindowDays: Types.Long option
+        [<System.Text.Json.Serialization.JsonPropertyName("results_index_name")>]
         ResultsIndexName: Types.IndexName option
+        [<System.Text.Json.Serialization.JsonPropertyName("results_retention_days")>]
         ResultsRetentionDays: Types.Long option
     }
 
@@ -3612,7 +3721,7 @@ module MlOperations =
                 DataDescription = Unchecked.defaultof<_>
                 DatafeedConfig = None
                 Description = None
-                JobId = None
+                bodyJobId = None
                 Groups = None
                 ModelPlotConfig = None
                 ModelSnapshotRetentionDays = None
@@ -3679,7 +3788,7 @@ module MlOperations =
 
         [<CustomOperation("jobId")>]
         member _.JobId(state: MlPutJobRequest, value: Types.Id) =
-            { state with JobId = Some value }
+            { state with bodyJobId = Some value }
 
         [<CustomOperation("groups")>]
         member _.Groups(state: MlPutJobRequest, value: string list) =
@@ -3735,7 +3844,7 @@ module MlOperations =
         let withDescription (value: string) (req: MlPutJobRequest) =
             { req with Description = Some value }
         let withJobId (value: Types.Id) (req: MlPutJobRequest) =
-            { req with JobId = Some value }
+            { req with bodyJobId = Some value }
         let withGroups (value: string list) (req: MlPutJobRequest) =
             { req with Groups = Some value }
         let withModelPlotConfig (value: Types.ModelPlotConfig) (req: MlPutJobRequest) =
@@ -3753,16 +3862,27 @@ module MlOperations =
         ModelId: Types.Id
         DeferDefinitionDecompression: bool option
         WaitForCompletion: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("compressed_definition")>]
         CompressedDefinition: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("definition")>]
         Definition: Types.Definition option
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
         Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("inference_config")>]
         InferenceConfig: Types.InferenceConfigCreateContainer option
+        [<System.Text.Json.Serialization.JsonPropertyName("input")>]
         Input: Types.Input option
+        [<System.Text.Json.Serialization.JsonPropertyName("metadata")>]
         Metadata: System.Text.Json.JsonElement option
+        [<System.Text.Json.Serialization.JsonPropertyName("model_type")>]
         ModelType: Types.TrainedModelType option
+        [<System.Text.Json.Serialization.JsonPropertyName("model_size_bytes")>]
         ModelSizeBytes: Types.Long option
+        [<System.Text.Json.Serialization.JsonPropertyName("platform_architecture")>]
         PlatformArchitecture: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("tags")>]
         Tags: string list option
+        [<System.Text.Json.Serialization.JsonPropertyName("prefix_strings")>]
         PrefixStrings: Types.TrainedModelPrefixStrings option
     }
 
@@ -3948,8 +4068,11 @@ module MlOperations =
     type MlPutTrainedModelDefinitionPartRequest = {
         ModelId: Types.Id
         Part: Types.Integer
+        [<System.Text.Json.Serialization.JsonPropertyName("definition")>]
         Definition: string
+        [<System.Text.Json.Serialization.JsonPropertyName("total_definition_length")>]
         TotalDefinitionLength: Types.Long
+        [<System.Text.Json.Serialization.JsonPropertyName("total_parts")>]
         TotalParts: Types.Integer
     }
 
@@ -4009,8 +4132,11 @@ module MlOperations =
 
     type MlPutTrainedModelVocabularyRequest = {
         ModelId: Types.Id
+        [<System.Text.Json.Serialization.JsonPropertyName("vocabulary")>]
         Vocabulary: string list
+        [<System.Text.Json.Serialization.JsonPropertyName("merges")>]
         Merges: string list option
+        [<System.Text.Json.Serialization.JsonPropertyName("scores")>]
         Scores: Types.Double list option
     }
 
@@ -4122,7 +4248,8 @@ module MlOperations =
         JobId: Types.Id
         SnapshotId: Types.Id
         DeleteInterveningResults: bool option
-        DeleteInterveningResults: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("delete_intervening_results")>]
+        bodyDeleteInterveningResults: bool option
     }
 
         with
@@ -4152,7 +4279,7 @@ module MlOperations =
                 JobId = Unchecked.defaultof<_>
                 SnapshotId = Unchecked.defaultof<_>
                 DeleteInterveningResults = None
-                DeleteInterveningResults = None
+                bodyDeleteInterveningResults = None
             }
 
         [<CustomOperation("jobId")>]
@@ -4169,15 +4296,15 @@ module MlOperations =
 
         [<CustomOperation("deleteInterveningResults")>]
         member _.DeleteInterveningResults(state: MlRevertModelSnapshotRequest, value: bool) =
-            { state with DeleteInterveningResults = Some value }
+            { state with bodyDeleteInterveningResults = Some value }
 
     let mlRevertModelSnapshotRequest = MlRevertModelSnapshotRequestBuilder()
 
     module RevertModelSnapshot =
         let withDeleteInterveningResults (value: bool) (req: MlRevertModelSnapshotRequest) =
-            { req with DeleteInterveningResults = Some value }
+            { req with bodyDeleteInterveningResults = Some value }
         let withDeleteInterveningResults (value: bool) (req: MlRevertModelSnapshotRequest) =
-            { req with DeleteInterveningResults = Some value }
+            { req with bodyDeleteInterveningResults = Some value }
 
     type MlSetUpgradeModeRequest = {
         Enabled: bool option
@@ -4231,8 +4358,10 @@ module MlOperations =
     type MlStartDataFrameAnalyticsRequest = {
         Id: Types.Id
         Timeout: Types.Duration option
-        Id: Types.Id option
-        Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("id")>]
+        bodyId: Types.Id option
+        [<System.Text.Json.Serialization.JsonPropertyName("timeout")>]
+        bodyTimeout: Types.Duration option
     }
 
         with
@@ -4261,8 +4390,8 @@ module MlOperations =
             {
                 Id = Unchecked.defaultof<_>
                 Timeout = None
-                Id = None
-                Timeout = None
+                bodyId = None
+                bodyTimeout = None
             }
 
         [<CustomOperation("id")>]
@@ -4275,30 +4404,33 @@ module MlOperations =
 
         [<CustomOperation("id")>]
         member _.Id(state: MlStartDataFrameAnalyticsRequest, value: Types.Id) =
-            { state with Id = Some value }
+            { state with bodyId = Some value }
 
         [<CustomOperation("timeout")>]
         member _.Timeout(state: MlStartDataFrameAnalyticsRequest, value: Types.Duration) =
-            { state with Timeout = Some value }
+            { state with bodyTimeout = Some value }
 
     let mlStartDataFrameAnalyticsRequest = MlStartDataFrameAnalyticsRequestBuilder()
 
     module StartDataFrameAnalytics =
         let withTimeout (value: Types.Duration) (req: MlStartDataFrameAnalyticsRequest) =
-            { req with Timeout = Some value }
+            { req with bodyTimeout = Some value }
         let withId (value: Types.Id) (req: MlStartDataFrameAnalyticsRequest) =
-            { req with Id = Some value }
+            { req with bodyId = Some value }
         let withTimeout (value: Types.Duration) (req: MlStartDataFrameAnalyticsRequest) =
-            { req with Timeout = Some value }
+            { req with bodyTimeout = Some value }
 
     type MlStartDatafeedRequest = {
         DatafeedId: Types.Id
         End: Types.DateTime option
         Start: Types.DateTime option
         Timeout: Types.Duration option
-        End: Types.DateTime option
-        Start: Types.DateTime option
-        Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("end")>]
+        bodyEnd: Types.DateTime option
+        [<System.Text.Json.Serialization.JsonPropertyName("start")>]
+        bodyStart: Types.DateTime option
+        [<System.Text.Json.Serialization.JsonPropertyName("timeout")>]
+        bodyTimeout: Types.Duration option
     }
 
         with
@@ -4331,9 +4463,9 @@ module MlOperations =
                 End = None
                 Start = None
                 Timeout = None
-                End = None
-                Start = None
-                Timeout = None
+                bodyEnd = None
+                bodyStart = None
+                bodyTimeout = None
             }
 
         [<CustomOperation("datafeedId")>]
@@ -4354,31 +4486,31 @@ module MlOperations =
 
         [<CustomOperation("end'")>]
         member _.End(state: MlStartDatafeedRequest, value: Types.DateTime) =
-            { state with End = Some value }
+            { state with bodyEnd = Some value }
 
         [<CustomOperation("start")>]
         member _.Start(state: MlStartDatafeedRequest, value: Types.DateTime) =
-            { state with Start = Some value }
+            { state with bodyStart = Some value }
 
         [<CustomOperation("timeout")>]
         member _.Timeout(state: MlStartDatafeedRequest, value: Types.Duration) =
-            { state with Timeout = Some value }
+            { state with bodyTimeout = Some value }
 
     let mlStartDatafeedRequest = MlStartDatafeedRequestBuilder()
 
     module StartDatafeed =
         let withEnd (value: Types.DateTime) (req: MlStartDatafeedRequest) =
-            { req with End = Some value }
+            { req with bodyEnd = Some value }
         let withStart (value: Types.DateTime) (req: MlStartDatafeedRequest) =
-            { req with Start = Some value }
+            { req with bodyStart = Some value }
         let withTimeout (value: Types.Duration) (req: MlStartDatafeedRequest) =
-            { req with Timeout = Some value }
+            { req with bodyTimeout = Some value }
         let withEnd (value: Types.DateTime) (req: MlStartDatafeedRequest) =
-            { req with End = Some value }
+            { req with bodyEnd = Some value }
         let withStart (value: Types.DateTime) (req: MlStartDatafeedRequest) =
-            { req with Start = Some value }
+            { req with bodyStart = Some value }
         let withTimeout (value: Types.Duration) (req: MlStartDatafeedRequest) =
-            { req with Timeout = Some value }
+            { req with bodyTimeout = Some value }
 
     type MlStartTrainedModelDeploymentRequest = {
         ModelId: Types.Id
@@ -4390,6 +4522,7 @@ module MlOperations =
         ThreadsPerAllocation: Types.Integer option
         Timeout: Types.Duration option
         WaitFor: Types.DeploymentAllocationState option
+        [<System.Text.Json.Serialization.JsonPropertyName("adaptive_allocations")>]
         AdaptiveAllocations: Types.AdaptiveAllocationsSettings option
     }
 
@@ -4503,10 +4636,14 @@ module MlOperations =
         AllowNoMatch: bool option
         Force: bool option
         Timeout: Types.Duration option
-        Id: Types.Id option
-        AllowNoMatch: bool option
-        Force: bool option
-        Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("id")>]
+        bodyId: Types.Id option
+        [<System.Text.Json.Serialization.JsonPropertyName("allow_no_match")>]
+        bodyAllowNoMatch: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("force")>]
+        bodyForce: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("timeout")>]
+        bodyTimeout: Types.Duration option
     }
 
         with
@@ -4539,10 +4676,10 @@ module MlOperations =
                 AllowNoMatch = None
                 Force = None
                 Timeout = None
-                Id = None
-                AllowNoMatch = None
-                Force = None
-                Timeout = None
+                bodyId = None
+                bodyAllowNoMatch = None
+                bodyForce = None
+                bodyTimeout = None
             }
 
         [<CustomOperation("id")>]
@@ -4563,37 +4700,37 @@ module MlOperations =
 
         [<CustomOperation("id")>]
         member _.Id(state: MlStopDataFrameAnalyticsRequest, value: Types.Id) =
-            { state with Id = Some value }
+            { state with bodyId = Some value }
 
         [<CustomOperation("allowNoMatch")>]
         member _.AllowNoMatch(state: MlStopDataFrameAnalyticsRequest, value: bool) =
-            { state with AllowNoMatch = Some value }
+            { state with bodyAllowNoMatch = Some value }
 
         [<CustomOperation("force")>]
         member _.Force(state: MlStopDataFrameAnalyticsRequest, value: bool) =
-            { state with Force = Some value }
+            { state with bodyForce = Some value }
 
         [<CustomOperation("timeout")>]
         member _.Timeout(state: MlStopDataFrameAnalyticsRequest, value: Types.Duration) =
-            { state with Timeout = Some value }
+            { state with bodyTimeout = Some value }
 
     let mlStopDataFrameAnalyticsRequest = MlStopDataFrameAnalyticsRequestBuilder()
 
     module StopDataFrameAnalytics =
         let withAllowNoMatch (value: bool) (req: MlStopDataFrameAnalyticsRequest) =
-            { req with AllowNoMatch = Some value }
+            { req with bodyAllowNoMatch = Some value }
         let withForce (value: bool) (req: MlStopDataFrameAnalyticsRequest) =
-            { req with Force = Some value }
+            { req with bodyForce = Some value }
         let withTimeout (value: Types.Duration) (req: MlStopDataFrameAnalyticsRequest) =
-            { req with Timeout = Some value }
+            { req with bodyTimeout = Some value }
         let withId (value: Types.Id) (req: MlStopDataFrameAnalyticsRequest) =
-            { req with Id = Some value }
+            { req with bodyId = Some value }
         let withAllowNoMatch (value: bool) (req: MlStopDataFrameAnalyticsRequest) =
-            { req with AllowNoMatch = Some value }
+            { req with bodyAllowNoMatch = Some value }
         let withForce (value: bool) (req: MlStopDataFrameAnalyticsRequest) =
-            { req with Force = Some value }
+            { req with bodyForce = Some value }
         let withTimeout (value: Types.Duration) (req: MlStopDataFrameAnalyticsRequest) =
-            { req with Timeout = Some value }
+            { req with bodyTimeout = Some value }
 
     type MlStopDatafeedRequest = {
         DatafeedId: Types.Id
@@ -4601,10 +4738,14 @@ module MlOperations =
         Force: bool option
         Timeout: Types.Duration option
         CloseJob: bool option
-        AllowNoMatch: bool option
-        Force: bool option
-        Timeout: Types.Duration option
-        CloseJob: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("allow_no_match")>]
+        bodyAllowNoMatch: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("force")>]
+        bodyForce: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("timeout")>]
+        bodyTimeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("close_job")>]
+        bodyCloseJob: bool option
     }
 
         with
@@ -4639,10 +4780,10 @@ module MlOperations =
                 Force = None
                 Timeout = None
                 CloseJob = None
-                AllowNoMatch = None
-                Force = None
-                Timeout = None
-                CloseJob = None
+                bodyAllowNoMatch = None
+                bodyForce = None
+                bodyTimeout = None
+                bodyCloseJob = None
             }
 
         [<CustomOperation("datafeedId")>]
@@ -4667,47 +4808,50 @@ module MlOperations =
 
         [<CustomOperation("allowNoMatch")>]
         member _.AllowNoMatch(state: MlStopDatafeedRequest, value: bool) =
-            { state with AllowNoMatch = Some value }
+            { state with bodyAllowNoMatch = Some value }
 
         [<CustomOperation("force")>]
         member _.Force(state: MlStopDatafeedRequest, value: bool) =
-            { state with Force = Some value }
+            { state with bodyForce = Some value }
 
         [<CustomOperation("timeout")>]
         member _.Timeout(state: MlStopDatafeedRequest, value: Types.Duration) =
-            { state with Timeout = Some value }
+            { state with bodyTimeout = Some value }
 
         [<CustomOperation("closeJob")>]
         member _.CloseJob(state: MlStopDatafeedRequest, value: bool) =
-            { state with CloseJob = Some value }
+            { state with bodyCloseJob = Some value }
 
     let mlStopDatafeedRequest = MlStopDatafeedRequestBuilder()
 
     module StopDatafeed =
         let withAllowNoMatch (value: bool) (req: MlStopDatafeedRequest) =
-            { req with AllowNoMatch = Some value }
+            { req with bodyAllowNoMatch = Some value }
         let withForce (value: bool) (req: MlStopDatafeedRequest) =
-            { req with Force = Some value }
+            { req with bodyForce = Some value }
         let withTimeout (value: Types.Duration) (req: MlStopDatafeedRequest) =
-            { req with Timeout = Some value }
+            { req with bodyTimeout = Some value }
         let withCloseJob (value: bool) (req: MlStopDatafeedRequest) =
-            { req with CloseJob = Some value }
+            { req with bodyCloseJob = Some value }
         let withAllowNoMatch (value: bool) (req: MlStopDatafeedRequest) =
-            { req with AllowNoMatch = Some value }
+            { req with bodyAllowNoMatch = Some value }
         let withForce (value: bool) (req: MlStopDatafeedRequest) =
-            { req with Force = Some value }
+            { req with bodyForce = Some value }
         let withTimeout (value: Types.Duration) (req: MlStopDatafeedRequest) =
-            { req with Timeout = Some value }
+            { req with bodyTimeout = Some value }
         let withCloseJob (value: bool) (req: MlStopDatafeedRequest) =
-            { req with CloseJob = Some value }
+            { req with bodyCloseJob = Some value }
 
     type MlStopTrainedModelDeploymentRequest = {
         ModelId: Types.Id
         AllowNoMatch: bool option
         Force: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("id")>]
         Id: Types.Id option
-        AllowNoMatch: bool option
-        Force: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("allow_no_match")>]
+        bodyAllowNoMatch: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("force")>]
+        bodyForce: bool option
     }
 
         with
@@ -4739,8 +4883,8 @@ module MlOperations =
                 AllowNoMatch = None
                 Force = None
                 Id = None
-                AllowNoMatch = None
-                Force = None
+                bodyAllowNoMatch = None
+                bodyForce = None
             }
 
         [<CustomOperation("modelId")>]
@@ -4761,31 +4905,35 @@ module MlOperations =
 
         [<CustomOperation("allowNoMatch")>]
         member _.AllowNoMatch(state: MlStopTrainedModelDeploymentRequest, value: bool) =
-            { state with AllowNoMatch = Some value }
+            { state with bodyAllowNoMatch = Some value }
 
         [<CustomOperation("force")>]
         member _.Force(state: MlStopTrainedModelDeploymentRequest, value: bool) =
-            { state with Force = Some value }
+            { state with bodyForce = Some value }
 
     let mlStopTrainedModelDeploymentRequest = MlStopTrainedModelDeploymentRequestBuilder()
 
     module StopTrainedModelDeployment =
         let withAllowNoMatch (value: bool) (req: MlStopTrainedModelDeploymentRequest) =
-            { req with AllowNoMatch = Some value }
+            { req with bodyAllowNoMatch = Some value }
         let withForce (value: bool) (req: MlStopTrainedModelDeploymentRequest) =
-            { req with Force = Some value }
+            { req with bodyForce = Some value }
         let withId (value: Types.Id) (req: MlStopTrainedModelDeploymentRequest) =
             { req with Id = Some value }
         let withAllowNoMatch (value: bool) (req: MlStopTrainedModelDeploymentRequest) =
-            { req with AllowNoMatch = Some value }
+            { req with bodyAllowNoMatch = Some value }
         let withForce (value: bool) (req: MlStopTrainedModelDeploymentRequest) =
-            { req with Force = Some value }
+            { req with bodyForce = Some value }
 
     type MlUpdateDataFrameAnalyticsRequest = {
         Id: Types.Id
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
         Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("model_memory_limit")>]
         ModelMemoryLimit: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_num_threads")>]
         MaxNumThreads: Types.Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("allow_lazy_start")>]
         AllowLazyStart: bool option
     }
 
@@ -4851,18 +4999,31 @@ module MlOperations =
         ExpandWildcards: Types.ExpandWildcards option
         IgnoreThrottled: bool option
         IgnoreUnavailable: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("aggregations")>]
         Aggregations: Map<string, Types.AggregationContainer> option
+        [<System.Text.Json.Serialization.JsonPropertyName("chunking_config")>]
         ChunkingConfig: Types.ChunkingConfig option
+        [<System.Text.Json.Serialization.JsonPropertyName("delayed_data_check_config")>]
         DelayedDataCheckConfig: Types.DelayedDataCheckConfig option
+        [<System.Text.Json.Serialization.JsonPropertyName("frequency")>]
         Frequency: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("indices")>]
         Indices: string list option
+        [<System.Text.Json.Serialization.JsonPropertyName("indices_options")>]
         IndicesOptions: Types.IndicesOptions option
+        [<System.Text.Json.Serialization.JsonPropertyName("job_id")>]
         JobId: Types.Id option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_empty_searches")>]
         MaxEmptySearches: Types.Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("query")>]
         Query: Types.QueryContainer option
+        [<System.Text.Json.Serialization.JsonPropertyName("query_delay")>]
         QueryDelay: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("runtime_mappings")>]
         RuntimeMappings: Types.RuntimeFields option
+        [<System.Text.Json.Serialization.JsonPropertyName("script_fields")>]
         ScriptFields: Map<string, Types.ScriptField> option
+        [<System.Text.Json.Serialization.JsonPropertyName("scroll_size")>]
         ScrollSize: Types.Integer option
     }
 
@@ -5025,8 +5186,11 @@ module MlOperations =
 
     type MlUpdateFilterRequest = {
         FilterId: Types.Id
+        [<System.Text.Json.Serialization.JsonPropertyName("add_items")>]
         AddItems: string list option
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
         Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("remove_items")>]
         RemoveItems: string list option
     }
 
@@ -5081,20 +5245,35 @@ module MlOperations =
 
     type MlUpdateJobRequest = {
         JobId: Types.Id
+        [<System.Text.Json.Serialization.JsonPropertyName("allow_lazy_open")>]
         AllowLazyOpen: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("analysis_limits")>]
         AnalysisLimits: Types.AnalysisMemoryLimit option
+        [<System.Text.Json.Serialization.JsonPropertyName("background_persist_interval")>]
         BackgroundPersistInterval: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("custom_settings")>]
         CustomSettings: Map<string, System.Text.Json.JsonElement> option
+        [<System.Text.Json.Serialization.JsonPropertyName("categorization_filters")>]
         CategorizationFilters: string list option
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
         Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("model_plot_config")>]
         ModelPlotConfig: Types.ModelPlotConfig option
+        [<System.Text.Json.Serialization.JsonPropertyName("model_prune_window")>]
         ModelPruneWindow: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("daily_model_snapshot_retention_after_days")>]
         DailyModelSnapshotRetentionAfterDays: Types.Long option
+        [<System.Text.Json.Serialization.JsonPropertyName("model_snapshot_retention_days")>]
         ModelSnapshotRetentionDays: Types.Long option
+        [<System.Text.Json.Serialization.JsonPropertyName("renormalization_window_days")>]
         RenormalizationWindowDays: Types.Long option
+        [<System.Text.Json.Serialization.JsonPropertyName("results_retention_days")>]
         ResultsRetentionDays: Types.Long option
+        [<System.Text.Json.Serialization.JsonPropertyName("groups")>]
         Groups: string list option
+        [<System.Text.Json.Serialization.JsonPropertyName("detectors")>]
         Detectors: Types.DetectorUpdate list option
+        [<System.Text.Json.Serialization.JsonPropertyName("per_partition_categorization")>]
         PerPartitionCategorization: Types.PerPartitionCategorization option
     }
 
@@ -5234,7 +5413,9 @@ module MlOperations =
     type MlUpdateModelSnapshotRequest = {
         JobId: Types.Id
         SnapshotId: Types.Id
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
         Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("retain")>]
         Retain: bool option
     }
 
@@ -5288,7 +5469,9 @@ module MlOperations =
     type MlUpdateTrainedModelDeploymentRequest = {
         ModelId: Types.Id
         NumberOfAllocations: Types.Integer option
-        NumberOfAllocations: Types.Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("number_of_allocations")>]
+        bodyNumberOfAllocations: Types.Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("adaptive_allocations")>]
         AdaptiveAllocations: Types.AdaptiveAllocationsSettings option
     }
 
@@ -5318,7 +5501,7 @@ module MlOperations =
             {
                 ModelId = Unchecked.defaultof<_>
                 NumberOfAllocations = None
-                NumberOfAllocations = None
+                bodyNumberOfAllocations = None
                 AdaptiveAllocations = None
             }
 
@@ -5332,7 +5515,7 @@ module MlOperations =
 
         [<CustomOperation("numberOfAllocations")>]
         member _.NumberOfAllocations(state: MlUpdateTrainedModelDeploymentRequest, value: Types.Integer) =
-            { state with NumberOfAllocations = Some value }
+            { state with bodyNumberOfAllocations = Some value }
 
         [<CustomOperation("adaptiveAllocations")>]
         member _.AdaptiveAllocations(state: MlUpdateTrainedModelDeploymentRequest, value: Types.AdaptiveAllocationsSettings) =
@@ -5342,9 +5525,9 @@ module MlOperations =
 
     module UpdateTrainedModelDeployment =
         let withNumberOfAllocations (value: Types.Integer) (req: MlUpdateTrainedModelDeploymentRequest) =
-            { req with NumberOfAllocations = Some value }
+            { req with bodyNumberOfAllocations = Some value }
         let withNumberOfAllocations (value: Types.Integer) (req: MlUpdateTrainedModelDeploymentRequest) =
-            { req with NumberOfAllocations = Some value }
+            { req with bodyNumberOfAllocations = Some value }
         let withAdaptiveAllocations (value: Types.AdaptiveAllocationsSettings) (req: MlUpdateTrainedModelDeploymentRequest) =
             { req with AdaptiveAllocations = Some value }
 
@@ -5410,14 +5593,23 @@ module MlOperations =
             { req with Timeout = Some value }
 
     type MlValidateRequest = {
+        [<System.Text.Json.Serialization.JsonPropertyName("job_id")>]
         JobId: Types.Id option
+        [<System.Text.Json.Serialization.JsonPropertyName("analysis_config")>]
         AnalysisConfig: Types.AnalysisConfig option
+        [<System.Text.Json.Serialization.JsonPropertyName("analysis_limits")>]
         AnalysisLimits: Types.AnalysisLimits option
+        [<System.Text.Json.Serialization.JsonPropertyName("data_description")>]
         DataDescription: Types.DataDescription option
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
         Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("model_plot")>]
         ModelPlot: Types.ModelPlotConfig option
+        [<System.Text.Json.Serialization.JsonPropertyName("model_snapshot_id")>]
         ModelSnapshotId: Types.Id option
+        [<System.Text.Json.Serialization.JsonPropertyName("model_snapshot_retention_days")>]
         ModelSnapshotRetentionDays: Types.Long option
+        [<System.Text.Json.Serialization.JsonPropertyName("results_index_name")>]
         ResultsIndexName: Types.IndexName option
     }
 

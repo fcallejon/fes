@@ -189,6 +189,7 @@ module TextStructureOperations =
         Timeout: Types.Duration option
         TimestampField: Types.Field option
         TimestampFormat: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("messages")>]
         Messages: string list
     }
 
@@ -508,7 +509,9 @@ module TextStructureOperations =
 
     type TextStructureTestGrokPatternRequest = {
         EcsCompatibility: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("grok_pattern")>]
         GrokPattern: Types.GrokPattern
+        [<System.Text.Json.Serialization.JsonPropertyName("text")>]
         Text: string list
     }
 
