@@ -17,15 +17,11 @@ module SearchableSnapshotsOperations =
     }
 
         with
-        static member ToRequest(req: SearchableSnapshotsCacheStatsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_searchable_snapshots/{req.NodeId}/cache/stats"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SearchableSnapshotsCacheStatsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_searchable_snapshots/{req.NodeId}/cache/stats"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type SearchableSnapshotsCacheStatsResponse = System.Text.Json.JsonElement
 
@@ -49,24 +45,20 @@ module SearchableSnapshotsOperations =
     }
 
         with
-        static member ToRequest(req: SearchableSnapshotsClearCacheRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/{req.Index}/_searchable_snapshots/cache/clear"
-                let queryParams =
-                    [
-                        req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
-                        req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
-                        req.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SearchableSnapshotsClearCacheRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/{req.Index}/_searchable_snapshots/cache/clear"
+            let queryParams =
+                [
+                    req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                    req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                    req.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            endpoint, ValueNone
 
     type SearchableSnapshotsClearCacheResponse = System.Text.Json.JsonElement
 
@@ -122,25 +114,21 @@ module SearchableSnapshotsOperations =
     }
 
         with
-        static member ToRequest(req: SearchableSnapshotsMountRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_snapshot/{req.Repository}/{req.Snapshot}/_mount"
-                let queryParams =
-                    [
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                        req.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", Fes.Http.toQueryValue v)
-                        req.Storage |> Option.map (fun v -> "storage", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SearchableSnapshotsMountRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_snapshot/{req.Repository}/{req.Snapshot}/_mount"
+            let queryParams =
+                [
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                    req.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", Fes.Http.toQueryValue v)
+                    req.Storage |> Option.map (fun v -> "storage", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type SearchableSnapshotsMountResponse = System.Text.Json.JsonElement
 
@@ -218,22 +206,18 @@ module SearchableSnapshotsOperations =
     }
 
         with
-        static member ToRequest(req: SearchableSnapshotsStatsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/{req.Index}/_searchable_snapshots/stats"
-                let queryParams =
-                    [
-                        req.Level |> Option.map (fun v -> "level", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SearchableSnapshotsStatsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/{req.Index}/_searchable_snapshots/stats"
+            let queryParams =
+                [
+                    req.Level |> Option.map (fun v -> "level", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type SearchableSnapshotsStatsResponse = System.Text.Json.JsonElement
 

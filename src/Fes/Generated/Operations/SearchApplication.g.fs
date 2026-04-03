@@ -17,15 +17,11 @@ module SearchApplicationOperations =
     }
 
         with
-        static member ToRequest(req: SearchApplicationDeleteRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_application/search_application/{req.Name}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SearchApplicationDeleteRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_application/search_application/{req.Name}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
+            endpoint, ValueNone
 
     type SearchApplicationDeleteResponse = Types.AcknowledgedResponseBase
 
@@ -46,15 +42,11 @@ module SearchApplicationOperations =
     }
 
         with
-        static member ToRequest(req: SearchApplicationDeleteBehavioralAnalyticsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_application/analytics/{req.Name}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SearchApplicationDeleteBehavioralAnalyticsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_application/analytics/{req.Name}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
+            endpoint, ValueNone
 
     type SearchApplicationDeleteBehavioralAnalyticsResponse = Types.AcknowledgedResponseBase
 
@@ -75,15 +67,11 @@ module SearchApplicationOperations =
     }
 
         with
-        static member ToRequest(req: SearchApplicationGetRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_application/search_application/{req.Name}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SearchApplicationGetRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_application/search_application/{req.Name}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type SearchApplicationGetResponse = Types.SearchApplication
 
@@ -104,15 +92,11 @@ module SearchApplicationOperations =
     }
 
         with
-        static member ToRequest(req: SearchApplicationGetBehavioralAnalyticsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_application/analytics/{req.Name}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SearchApplicationGetBehavioralAnalyticsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_application/analytics/{req.Name}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type SearchApplicationGetBehavioralAnalyticsResponse = Map<Types.Name, Types.AnalyticsCollection>
 
@@ -135,24 +119,20 @@ module SearchApplicationOperations =
     }
 
         with
-        static member ToRequest(req: SearchApplicationListRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_application/search_application"
-                let queryParams =
-                    [
-                        req.Q |> Option.map (fun v -> "q", Fes.Http.toQueryValue v)
-                        req.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
-                        req.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SearchApplicationListRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_application/search_application"
+            let queryParams =
+                [
+                    req.Q |> Option.map (fun v -> "q", Fes.Http.toQueryValue v)
+                    req.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
+                    req.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type SearchApplicationListResponse = System.Text.Json.JsonElement
 
@@ -194,23 +174,19 @@ module SearchApplicationOperations =
     }
 
         with
-        static member ToRequest(req: SearchApplicationPostBehavioralAnalyticsEventRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_application/analytics/{req.CollectionName}/event/{req.EventType}"
-                let queryParams =
-                    [
-                        req.Debug |> Option.map (fun v -> "debug", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req.Document
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SearchApplicationPostBehavioralAnalyticsEventRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_application/analytics/{req.CollectionName}/event/{req.EventType}"
+            let queryParams =
+                [
+                    req.Debug |> Option.map (fun v -> "debug", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req.Document)
+            endpoint, ValueSome postData
 
     type SearchApplicationPostBehavioralAnalyticsEventResponse = System.Text.Json.JsonElement
 
@@ -252,23 +228,19 @@ module SearchApplicationOperations =
     }
 
         with
-        static member ToRequest(req: SearchApplicationPutRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_application/search_application/{req.Name}"
-                let queryParams =
-                    [
-                        req.Create |> Option.map (fun v -> "create", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody req.Document
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SearchApplicationPutRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_application/search_application/{req.Name}"
+            let queryParams =
+                [
+                    req.Create |> Option.map (fun v -> "create", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req.Document)
+            endpoint, ValueSome postData
 
     type SearchApplicationPutResponse = System.Text.Json.JsonElement
 
@@ -303,15 +275,11 @@ module SearchApplicationOperations =
     }
 
         with
-        static member ToRequest(req: SearchApplicationPutBehavioralAnalyticsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_application/analytics/{req.Name}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SearchApplicationPutBehavioralAnalyticsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_application/analytics/{req.Name}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
+            endpoint, ValueNone
 
     type SearchApplicationPutBehavioralAnalyticsResponse = Types.AnalyticsAcknowledgeResponseBase
 
@@ -334,16 +302,12 @@ module SearchApplicationOperations =
     }
 
         with
-        static member ToRequest(req: SearchApplicationRenderQueryRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_application/search_application/{req.Name}/_render_query"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SearchApplicationRenderQueryRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_application/search_application/{req.Name}/_render_query"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type SearchApplicationRenderQueryResponse = System.Text.Json.JsonElement
 
@@ -376,23 +340,19 @@ module SearchApplicationOperations =
     }
 
         with
-        static member ToRequest(req: SearchApplicationSearchRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_application/search_application/{req.Name}/_search"
-                let queryParams =
-                    [
-                        req.TypedKeys |> Option.map (fun v -> "typed_keys", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SearchApplicationSearchRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_application/search_application/{req.Name}/_search"
+            let queryParams =
+                [
+                    req.TypedKeys |> Option.map (fun v -> "typed_keys", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type SearchApplicationSearchResponse<'tDocument> = Types.ResponseBody<'tDocument>
 

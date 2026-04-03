@@ -10,13 +10,13 @@ open Fes.Generator.Emitters.FSharpWriter
 
 let private httpMethodString (methods: string list) =
     // Prefer POST if available (for body), otherwise first method
-    if methods |> List.contains "POST" then "Post"
-    elif methods |> List.contains "PUT" then "Put"
-    elif methods |> List.contains "DELETE" then "Delete"
-    elif methods |> List.contains "GET" then "Get"
-    elif methods |> List.contains "HEAD" then "Head"
-    elif methods |> List.contains "PATCH" then "Patch"
-    else "Get"
+    if methods |> List.contains "POST" then "POST"
+    elif methods |> List.contains "PUT" then "PUT"
+    elif methods |> List.contains "DELETE" then "DELETE"
+    elif methods |> List.contains "GET" then "GET"
+    elif methods |> List.contains "HEAD" then "HEAD"
+    elif methods |> List.contains "PATCH" then "PATCH"
+    else "GET"
 
 /// Pick the best URL template (prefer the one with most path params for the function signature)
 let private bestUrl (urls: UrlTemplate list) =
@@ -138,17 +138,15 @@ let private emitRequestRecord (w: Writer) (ctx: TypeResolver.ResolveContext) (re
     w.BlankLine()
 
 // ============================================================================
-// Emit ToRequest static method
+// Emit ToEndpoint static method
 // ============================================================================
 
-let private emitToRequest (w: Writer) (reqTypeName: string) (endpoint: Endpoint) (request: RequestDefinition) (fnm: FieldNameMap) =
+let private emitToEndpoint (w: Writer) (reqTypeName: string) (endpoint: Endpoint) (request: RequestDefinition) (fnm: FieldNameMap) =
     let url = bestUrl endpoint.Urls
     let httpMethod = httpMethodString url.Methods
 
     w.Indent()
-    w.Line $"static member ToRequest(req: {reqTypeName}) : Result<Fes.Http.RequestMsg, exn> ="
-    w.Indent()
-    w.Line "try"
+    w.Line $"static member ToEndpoint(req: {reqTypeName}) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption ="
     w.Indent()
 
     // Build path with interpolation
@@ -156,7 +154,6 @@ let private emitToRequest (w: Writer) (reqTypeName: string) (endpoint: Endpoint)
     let pathExpr =
         let mutable p = url.Path
         for param in pathParams do
-            // Find the matching path property to get the deduped field name
             let pathProp = request.Path |> List.tryFind (fun pp -> pp.Name = param)
             let fieldName =
                 match pathProp with
@@ -188,22 +185,19 @@ let private emitToRequest (w: Writer) (reqTypeName: string) (endpoint: Endpoint)
     else
         w.Line "let fullPath = path"
 
-    // Build request
-    w.Line "fullPath"
-    w.Line "|> Fes.Http.Request.fromPath"
-    w.Line $"|> Fes.Http.Request.withMethod Fes.Http.Method.{httpMethod}"
+    // Build endpoint + post data
+    w.Line $"let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.{httpMethod}, fullPath)"
 
-    // Attach body if PropertiesBody
     match request.Body with
     | Body.Properties props when not props.IsEmpty ->
-        w.Line "|> Fes.Http.Request.withJsonBody req"
+        w.Line "let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)"
+        w.Line "endpoint, ValueSome postData"
     | Body.Value _ ->
-        w.Line "|> Fes.Http.Request.withJsonBody req.Document"
-    | _ -> ()
+        w.Line "let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req.Document)"
+        w.Line "endpoint, ValueSome postData"
+    | _ ->
+        w.Line "endpoint, ValueNone"
 
-    w.Line "|> Result.Ok"
-    w.Dedent()
-    w.Line "with ex -> Result.Error ex"
     w.Dedent()
     w.Dedent()
     w.BlankLine()
@@ -377,10 +371,10 @@ let emitEndpoint (w: Writer) (index: TypeIndex.TypeIndex) (endpoint: Endpoint) =
         else
             emitRequestRecord w ctx reqTN fnm request.Generics pathProps queryProps bodyProps
 
-        // ToRequest method — skip for generic requests (needs generic threading)
+        // ToEndpoint method — skip for generic requests (needs generic threading)
         if request.Generics.IsEmpty then
             w.Line $"    with"
-            emitToRequest w reqTN endpoint request fnm
+            emitToEndpoint w reqTN endpoint request fnm
 
         // Response type alias
         let respTd = TypeIndex.resolve index endpoint.Response

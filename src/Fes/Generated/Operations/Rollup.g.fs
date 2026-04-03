@@ -17,15 +17,11 @@ module RollupOperations =
     }
 
         with
-        static member ToRequest(req: RollupDeleteJobRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_rollup/job/{req.Id}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: RollupDeleteJobRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_rollup/job/{req.Id}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
+            endpoint, ValueNone
 
     type RollupDeleteJobResponse = System.Text.Json.JsonElement
 
@@ -46,15 +42,11 @@ module RollupOperations =
     }
 
         with
-        static member ToRequest(req: RollupGetJobsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_rollup/job/{req.Id}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: RollupGetJobsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_rollup/job/{req.Id}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type RollupGetJobsResponse = System.Text.Json.JsonElement
 
@@ -75,15 +67,11 @@ module RollupOperations =
     }
 
         with
-        static member ToRequest(req: RollupGetRollupCapsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_rollup/data/{req.Id}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: RollupGetRollupCapsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_rollup/data/{req.Id}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type RollupGetRollupCapsResponse = Map<Types.IndexName, Types.RollupCapabilities>
 
@@ -104,15 +92,11 @@ module RollupOperations =
     }
 
         with
-        static member ToRequest(req: RollupGetRollupIndexCapsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/{req.Index}/_rollup/data"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: RollupGetRollupIndexCapsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/{req.Index}/_rollup/data"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type RollupGetRollupIndexCapsResponse = Map<Types.IndexName, Types.IndexCapabilities>
 
@@ -149,16 +133,12 @@ module RollupOperations =
     }
 
         with
-        static member ToRequest(req: RollupPutJobRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_rollup/job/{req.Id}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: RollupPutJobRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_rollup/job/{req.Id}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type RollupPutJobResponse = Types.AcknowledgedResponseBase
 
@@ -245,24 +225,20 @@ module RollupOperations =
     }
 
         with
-        static member ToRequest(req: RollupRollupSearchRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/{req.Index}/_rollup_search"
-                let queryParams =
-                    [
-                        req.RestTotalHitsAsInt |> Option.map (fun v -> "rest_total_hits_as_int", Fes.Http.toQueryValue v)
-                        req.TypedKeys |> Option.map (fun v -> "typed_keys", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: RollupRollupSearchRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/{req.Index}/_rollup_search"
+            let queryParams =
+                [
+                    req.RestTotalHitsAsInt |> Option.map (fun v -> "rest_total_hits_as_int", Fes.Http.toQueryValue v)
+                    req.TypedKeys |> Option.map (fun v -> "typed_keys", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type RollupRollupSearchResponse = System.Text.Json.JsonElement
 
@@ -320,15 +296,11 @@ module RollupOperations =
     }
 
         with
-        static member ToRequest(req: RollupStartJobRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_rollup/job/{req.Id}/_start"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: RollupStartJobRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_rollup/job/{req.Id}/_start"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            endpoint, ValueNone
 
     type RollupStartJobResponse = System.Text.Json.JsonElement
 
@@ -351,23 +323,19 @@ module RollupOperations =
     }
 
         with
-        static member ToRequest(req: RollupStopJobRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_rollup/job/{req.Id}/_stop"
-                let queryParams =
-                    [
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                        req.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: RollupStopJobRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_rollup/job/{req.Id}/_stop"
+            let queryParams =
+                [
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                    req.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            endpoint, ValueNone
 
     type RollupStopJobResponse = System.Text.Json.JsonElement
 

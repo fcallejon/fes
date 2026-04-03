@@ -17,15 +17,11 @@ module FleetOperations =
     }
 
         with
-        static member ToRequest(req: FleetDeleteSecretRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_fleet/secret/{req.Id}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: FleetDeleteSecretRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_fleet/secret/{req.Id}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
+            endpoint, ValueNone
 
     type FleetDeleteSecretResponse = System.Text.Json.JsonElement
 
@@ -46,15 +42,11 @@ module FleetOperations =
     }
 
         with
-        static member ToRequest(req: FleetGetSecretRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_fleet/secret/{req.Id}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: FleetGetSecretRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_fleet/secret/{req.Id}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type FleetGetSecretResponse = System.Text.Json.JsonElement
 
@@ -79,25 +71,21 @@ module FleetOperations =
     }
 
         with
-        static member ToRequest(req: FleetGlobalCheckpointsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/{req.Index}/_fleet/global_checkpoints"
-                let queryParams =
-                    [
-                        req.WaitForAdvance |> Option.map (fun v -> "wait_for_advance", Fes.Http.toQueryValue v)
-                        req.WaitForIndex |> Option.map (fun v -> "wait_for_index", Fes.Http.toQueryValue v)
-                        req.Checkpoints |> Option.map (fun v -> "checkpoints", Fes.Http.toQueryValue v)
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: FleetGlobalCheckpointsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/{req.Index}/_fleet/global_checkpoints"
+            let queryParams =
+                [
+                    req.WaitForAdvance |> Option.map (fun v -> "wait_for_advance", Fes.Http.toQueryValue v)
+                    req.WaitForIndex |> Option.map (fun v -> "wait_for_index", Fes.Http.toQueryValue v)
+                    req.Checkpoints |> Option.map (fun v -> "checkpoints", Fes.Http.toQueryValue v)
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type FleetGlobalCheckpointsResponse = System.Text.Json.JsonElement
 
@@ -162,35 +150,31 @@ module FleetOperations =
     }
 
         with
-        static member ToRequest(req: FleetMsearchRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/{req.Index}/_fleet/_fleet_msearch"
-                let queryParams =
-                    [
-                        req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
-                        req.CcsMinimizeRoundtrips |> Option.map (fun v -> "ccs_minimize_roundtrips", Fes.Http.toQueryValue v)
-                        req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
-                        req.IgnoreThrottled |> Option.map (fun v -> "ignore_throttled", Fes.Http.toQueryValue v)
-                        req.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
-                        req.MaxConcurrentSearches |> Option.map (fun v -> "max_concurrent_searches", Fes.Http.toQueryValue v)
-                        req.MaxConcurrentShardRequests |> Option.map (fun v -> "max_concurrent_shard_requests", Fes.Http.toQueryValue v)
-                        req.PreFilterShardSize |> Option.map (fun v -> "pre_filter_shard_size", Fes.Http.toQueryValue v)
-                        req.SearchType |> Option.map (fun v -> "search_type", Fes.Http.toQueryValue v)
-                        req.RestTotalHitsAsInt |> Option.map (fun v -> "rest_total_hits_as_int", Fes.Http.toQueryValue v)
-                        req.TypedKeys |> Option.map (fun v -> "typed_keys", Fes.Http.toQueryValue v)
-                        req.WaitForCheckpoints |> Option.map (fun v -> "wait_for_checkpoints", Fes.Http.toQueryValue v)
-                        req.AllowPartialSearchResults |> Option.map (fun v -> "allow_partial_search_results", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req.Document
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: FleetMsearchRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/{req.Index}/_fleet/_fleet_msearch"
+            let queryParams =
+                [
+                    req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                    req.CcsMinimizeRoundtrips |> Option.map (fun v -> "ccs_minimize_roundtrips", Fes.Http.toQueryValue v)
+                    req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                    req.IgnoreThrottled |> Option.map (fun v -> "ignore_throttled", Fes.Http.toQueryValue v)
+                    req.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                    req.MaxConcurrentSearches |> Option.map (fun v -> "max_concurrent_searches", Fes.Http.toQueryValue v)
+                    req.MaxConcurrentShardRequests |> Option.map (fun v -> "max_concurrent_shard_requests", Fes.Http.toQueryValue v)
+                    req.PreFilterShardSize |> Option.map (fun v -> "pre_filter_shard_size", Fes.Http.toQueryValue v)
+                    req.SearchType |> Option.map (fun v -> "search_type", Fes.Http.toQueryValue v)
+                    req.RestTotalHitsAsInt |> Option.map (fun v -> "rest_total_hits_as_int", Fes.Http.toQueryValue v)
+                    req.TypedKeys |> Option.map (fun v -> "typed_keys", Fes.Http.toQueryValue v)
+                    req.WaitForCheckpoints |> Option.map (fun v -> "wait_for_checkpoints", Fes.Http.toQueryValue v)
+                    req.AllowPartialSearchResults |> Option.map (fun v -> "allow_partial_search_results", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req.Document)
+            endpoint, ValueSome postData
 
     type FleetMsearchResponse = System.Text.Json.JsonElement
 
@@ -310,16 +294,12 @@ module FleetOperations =
     }
 
         with
-        static member ToRequest(req: FleetPostSecretRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_fleet/secret"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: FleetPostSecretRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_fleet/secret"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type FleetPostSecretResponse = System.Text.Json.JsonElement
 
@@ -449,65 +429,61 @@ module FleetOperations =
     }
 
         with
-        static member ToRequest(req: FleetSearchRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/{req.Index}/_fleet/_fleet_search"
-                let queryParams =
-                    [
-                        req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
-                        req.Analyzer |> Option.map (fun v -> "analyzer", Fes.Http.toQueryValue v)
-                        req.AnalyzeWildcard |> Option.map (fun v -> "analyze_wildcard", Fes.Http.toQueryValue v)
-                        req.BatchedReduceSize |> Option.map (fun v -> "batched_reduce_size", Fes.Http.toQueryValue v)
-                        req.CcsMinimizeRoundtrips |> Option.map (fun v -> "ccs_minimize_roundtrips", Fes.Http.toQueryValue v)
-                        req.DefaultOperator |> Option.map (fun v -> "default_operator", Fes.Http.toQueryValue v)
-                        req.Df |> Option.map (fun v -> "df", Fes.Http.toQueryValue v)
-                        req.DocvalueFields |> Option.map (fun v -> "docvalue_fields", Fes.Http.toQueryValue v)
-                        req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
-                        req.Explain |> Option.map (fun v -> "explain", Fes.Http.toQueryValue v)
-                        req.IgnoreThrottled |> Option.map (fun v -> "ignore_throttled", Fes.Http.toQueryValue v)
-                        req.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
-                        req.Lenient |> Option.map (fun v -> "lenient", Fes.Http.toQueryValue v)
-                        req.MaxConcurrentShardRequests |> Option.map (fun v -> "max_concurrent_shard_requests", Fes.Http.toQueryValue v)
-                        req.Preference |> Option.map (fun v -> "preference", Fes.Http.toQueryValue v)
-                        req.PreFilterShardSize |> Option.map (fun v -> "pre_filter_shard_size", Fes.Http.toQueryValue v)
-                        req.RequestCache |> Option.map (fun v -> "request_cache", Fes.Http.toQueryValue v)
-                        req.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
-                        req.Scroll |> Option.map (fun v -> "scroll", Fes.Http.toQueryValue v)
-                        req.SearchType |> Option.map (fun v -> "search_type", Fes.Http.toQueryValue v)
-                        req.Stats |> Option.map (fun v -> "stats", Fes.Http.toQueryValue v)
-                        req.StoredFields |> Option.map (fun v -> "stored_fields", Fes.Http.toQueryValue v)
-                        req.SuggestField |> Option.map (fun v -> "suggest_field", Fes.Http.toQueryValue v)
-                        req.SuggestMode |> Option.map (fun v -> "suggest_mode", Fes.Http.toQueryValue v)
-                        req.SuggestSize |> Option.map (fun v -> "suggest_size", Fes.Http.toQueryValue v)
-                        req.SuggestText |> Option.map (fun v -> "suggest_text", Fes.Http.toQueryValue v)
-                        req.TerminateAfter |> Option.map (fun v -> "terminate_after", Fes.Http.toQueryValue v)
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                        req.TrackTotalHits |> Option.map (fun v -> "track_total_hits", Fes.Http.toQueryValue v)
-                        req.TrackScores |> Option.map (fun v -> "track_scores", Fes.Http.toQueryValue v)
-                        req.TypedKeys |> Option.map (fun v -> "typed_keys", Fes.Http.toQueryValue v)
-                        req.RestTotalHitsAsInt |> Option.map (fun v -> "rest_total_hits_as_int", Fes.Http.toQueryValue v)
-                        req.Version |> Option.map (fun v -> "version", Fes.Http.toQueryValue v)
-                        req.Source |> Option.map (fun v -> "_source", Fes.Http.toQueryValue v)
-                        req.SourceExcludes |> Option.map (fun v -> "_source_excludes", Fes.Http.toQueryValue v)
-                        req.SourceIncludes |> Option.map (fun v -> "_source_includes", Fes.Http.toQueryValue v)
-                        req.SeqNoPrimaryTerm |> Option.map (fun v -> "seq_no_primary_term", Fes.Http.toQueryValue v)
-                        req.Q |> Option.map (fun v -> "q", Fes.Http.toQueryValue v)
-                        req.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
-                        req.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
-                        req.Sort |> Option.map (fun v -> "sort", Fes.Http.toQueryValue v)
-                        req.WaitForCheckpoints |> Option.map (fun v -> "wait_for_checkpoints", Fes.Http.toQueryValue v)
-                        req.AllowPartialSearchResults |> Option.map (fun v -> "allow_partial_search_results", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: FleetSearchRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/{req.Index}/_fleet/_fleet_search"
+            let queryParams =
+                [
+                    req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                    req.Analyzer |> Option.map (fun v -> "analyzer", Fes.Http.toQueryValue v)
+                    req.AnalyzeWildcard |> Option.map (fun v -> "analyze_wildcard", Fes.Http.toQueryValue v)
+                    req.BatchedReduceSize |> Option.map (fun v -> "batched_reduce_size", Fes.Http.toQueryValue v)
+                    req.CcsMinimizeRoundtrips |> Option.map (fun v -> "ccs_minimize_roundtrips", Fes.Http.toQueryValue v)
+                    req.DefaultOperator |> Option.map (fun v -> "default_operator", Fes.Http.toQueryValue v)
+                    req.Df |> Option.map (fun v -> "df", Fes.Http.toQueryValue v)
+                    req.DocvalueFields |> Option.map (fun v -> "docvalue_fields", Fes.Http.toQueryValue v)
+                    req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                    req.Explain |> Option.map (fun v -> "explain", Fes.Http.toQueryValue v)
+                    req.IgnoreThrottled |> Option.map (fun v -> "ignore_throttled", Fes.Http.toQueryValue v)
+                    req.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                    req.Lenient |> Option.map (fun v -> "lenient", Fes.Http.toQueryValue v)
+                    req.MaxConcurrentShardRequests |> Option.map (fun v -> "max_concurrent_shard_requests", Fes.Http.toQueryValue v)
+                    req.Preference |> Option.map (fun v -> "preference", Fes.Http.toQueryValue v)
+                    req.PreFilterShardSize |> Option.map (fun v -> "pre_filter_shard_size", Fes.Http.toQueryValue v)
+                    req.RequestCache |> Option.map (fun v -> "request_cache", Fes.Http.toQueryValue v)
+                    req.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
+                    req.Scroll |> Option.map (fun v -> "scroll", Fes.Http.toQueryValue v)
+                    req.SearchType |> Option.map (fun v -> "search_type", Fes.Http.toQueryValue v)
+                    req.Stats |> Option.map (fun v -> "stats", Fes.Http.toQueryValue v)
+                    req.StoredFields |> Option.map (fun v -> "stored_fields", Fes.Http.toQueryValue v)
+                    req.SuggestField |> Option.map (fun v -> "suggest_field", Fes.Http.toQueryValue v)
+                    req.SuggestMode |> Option.map (fun v -> "suggest_mode", Fes.Http.toQueryValue v)
+                    req.SuggestSize |> Option.map (fun v -> "suggest_size", Fes.Http.toQueryValue v)
+                    req.SuggestText |> Option.map (fun v -> "suggest_text", Fes.Http.toQueryValue v)
+                    req.TerminateAfter |> Option.map (fun v -> "terminate_after", Fes.Http.toQueryValue v)
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                    req.TrackTotalHits |> Option.map (fun v -> "track_total_hits", Fes.Http.toQueryValue v)
+                    req.TrackScores |> Option.map (fun v -> "track_scores", Fes.Http.toQueryValue v)
+                    req.TypedKeys |> Option.map (fun v -> "typed_keys", Fes.Http.toQueryValue v)
+                    req.RestTotalHitsAsInt |> Option.map (fun v -> "rest_total_hits_as_int", Fes.Http.toQueryValue v)
+                    req.Version |> Option.map (fun v -> "version", Fes.Http.toQueryValue v)
+                    req.Source |> Option.map (fun v -> "_source", Fes.Http.toQueryValue v)
+                    req.SourceExcludes |> Option.map (fun v -> "_source_excludes", Fes.Http.toQueryValue v)
+                    req.SourceIncludes |> Option.map (fun v -> "_source_includes", Fes.Http.toQueryValue v)
+                    req.SeqNoPrimaryTerm |> Option.map (fun v -> "seq_no_primary_term", Fes.Http.toQueryValue v)
+                    req.Q |> Option.map (fun v -> "q", Fes.Http.toQueryValue v)
+                    req.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
+                    req.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
+                    req.Sort |> Option.map (fun v -> "sort", Fes.Http.toQueryValue v)
+                    req.WaitForCheckpoints |> Option.map (fun v -> "wait_for_checkpoints", Fes.Http.toQueryValue v)
+                    req.AllowPartialSearchResults |> Option.map (fun v -> "allow_partial_search_results", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type FleetSearchResponse = System.Text.Json.JsonElement
 

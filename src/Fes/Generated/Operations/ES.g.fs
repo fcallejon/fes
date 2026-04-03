@@ -7,13 +7,8 @@ open Fes
 open Fes.Generated
 open Fes.Generated.Operations
 
-module ES =
+module Endpoints =
 
-    let inline send (client: System.Net.Http.HttpClient) (request: ^T) =
-        let arrow =
-            client.SendAsync >> TaskResult.ofTask
-            |> ElasticsearchClient.execute
-        arrow request
 
     module AsyncSearch =
 

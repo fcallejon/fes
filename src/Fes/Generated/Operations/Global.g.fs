@@ -41,27 +41,23 @@ module GlobalOperations =
     }
 
         with
-        static member ToRequest(req: CapabilitiesRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_capabilities"
-                let queryParams =
-                    [
-                        req.Method |> Option.map (fun v -> "method", Fes.Http.toQueryValue v)
-                        req.Path |> Option.map (fun v -> "path", Fes.Http.toQueryValue v)
-                        req.Parameters |> Option.map (fun v -> "parameters", Fes.Http.toQueryValue v)
-                        req.Capabilities |> Option.map (fun v -> "capabilities", Fes.Http.toQueryValue v)
-                        req.LocalOnly |> Option.map (fun v -> "local_only", Fes.Http.toQueryValue v)
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: CapabilitiesRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_capabilities"
+            let queryParams =
+                [
+                    req.Method |> Option.map (fun v -> "method", Fes.Http.toQueryValue v)
+                    req.Path |> Option.map (fun v -> "path", Fes.Http.toQueryValue v)
+                    req.Parameters |> Option.map (fun v -> "parameters", Fes.Http.toQueryValue v)
+                    req.Capabilities |> Option.map (fun v -> "capabilities", Fes.Http.toQueryValue v)
+                    req.LocalOnly |> Option.map (fun v -> "local_only", Fes.Http.toQueryValue v)
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type CapabilitiesResponse = System.Text.Json.JsonElement
 
@@ -123,16 +119,12 @@ module GlobalOperations =
     }
 
         with
-        static member ToRequest(req: ClearScrollRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_search/scroll/{req.ScrollId}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ClearScrollRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_search/scroll/{req.ScrollId}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type ClearScrollResponse = System.Text.Json.JsonElement
 
@@ -163,16 +155,12 @@ module GlobalOperations =
     }
 
         with
-        static member ToRequest(req: ClosePointInTimeRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_pit"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ClosePointInTimeRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_pit"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type ClosePointInTimeResponse = System.Text.Json.JsonElement
 
@@ -215,36 +203,32 @@ module GlobalOperations =
     }
 
         with
-        static member ToRequest(req: CountRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/{req.Index}/_count"
-                let queryParams =
-                    [
-                        req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
-                        req.Analyzer |> Option.map (fun v -> "analyzer", Fes.Http.toQueryValue v)
-                        req.AnalyzeWildcard |> Option.map (fun v -> "analyze_wildcard", Fes.Http.toQueryValue v)
-                        req.DefaultOperator |> Option.map (fun v -> "default_operator", Fes.Http.toQueryValue v)
-                        req.Df |> Option.map (fun v -> "df", Fes.Http.toQueryValue v)
-                        req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
-                        req.IgnoreThrottled |> Option.map (fun v -> "ignore_throttled", Fes.Http.toQueryValue v)
-                        req.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
-                        req.Lenient |> Option.map (fun v -> "lenient", Fes.Http.toQueryValue v)
-                        req.MinScore |> Option.map (fun v -> "min_score", Fes.Http.toQueryValue v)
-                        req.Preference |> Option.map (fun v -> "preference", Fes.Http.toQueryValue v)
-                        req.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
-                        req.TerminateAfter |> Option.map (fun v -> "terminate_after", Fes.Http.toQueryValue v)
-                        req.Q |> Option.map (fun v -> "q", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: CountRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/{req.Index}/_count"
+            let queryParams =
+                [
+                    req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                    req.Analyzer |> Option.map (fun v -> "analyzer", Fes.Http.toQueryValue v)
+                    req.AnalyzeWildcard |> Option.map (fun v -> "analyze_wildcard", Fes.Http.toQueryValue v)
+                    req.DefaultOperator |> Option.map (fun v -> "default_operator", Fes.Http.toQueryValue v)
+                    req.Df |> Option.map (fun v -> "df", Fes.Http.toQueryValue v)
+                    req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                    req.IgnoreThrottled |> Option.map (fun v -> "ignore_throttled", Fes.Http.toQueryValue v)
+                    req.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                    req.Lenient |> Option.map (fun v -> "lenient", Fes.Http.toQueryValue v)
+                    req.MinScore |> Option.map (fun v -> "min_score", Fes.Http.toQueryValue v)
+                    req.Preference |> Option.map (fun v -> "preference", Fes.Http.toQueryValue v)
+                    req.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
+                    req.TerminateAfter |> Option.map (fun v -> "terminate_after", Fes.Http.toQueryValue v)
+                    req.Q |> Option.map (fun v -> "q", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type CountResponse = System.Text.Json.JsonElement
 
@@ -406,29 +390,25 @@ module GlobalOperations =
     }
 
         with
-        static member ToRequest(req: DeleteRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/{req.Index}/_doc/{req.Id}"
-                let queryParams =
-                    [
-                        req.IfPrimaryTerm |> Option.map (fun v -> "if_primary_term", Fes.Http.toQueryValue v)
-                        req.IfSeqNo |> Option.map (fun v -> "if_seq_no", Fes.Http.toQueryValue v)
-                        req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
-                        req.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                        req.Version |> Option.map (fun v -> "version", Fes.Http.toQueryValue v)
-                        req.VersionType |> Option.map (fun v -> "version_type", Fes.Http.toQueryValue v)
-                        req.WaitForActiveShards |> Option.map (fun v -> "wait_for_active_shards", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: DeleteRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/{req.Index}/_doc/{req.Id}"
+            let queryParams =
+                [
+                    req.IfPrimaryTerm |> Option.map (fun v -> "if_primary_term", Fes.Http.toQueryValue v)
+                    req.IfSeqNo |> Option.map (fun v -> "if_seq_no", Fes.Http.toQueryValue v)
+                    req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
+                    req.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                    req.Version |> Option.map (fun v -> "version", Fes.Http.toQueryValue v)
+                    req.VersionType |> Option.map (fun v -> "version_type", Fes.Http.toQueryValue v)
+                    req.WaitForActiveShards |> Option.map (fun v -> "wait_for_active_shards", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
+            endpoint, ValueNone
 
     type DeleteResponse = Types.WriteResponseBase
 
@@ -549,51 +529,47 @@ module GlobalOperations =
     }
 
         with
-        static member ToRequest(req: DeleteByQueryRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/{req.Index}/_delete_by_query"
-                let queryParams =
-                    [
-                        req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
-                        req.Analyzer |> Option.map (fun v -> "analyzer", Fes.Http.toQueryValue v)
-                        req.AnalyzeWildcard |> Option.map (fun v -> "analyze_wildcard", Fes.Http.toQueryValue v)
-                        req.Conflicts |> Option.map (fun v -> "conflicts", Fes.Http.toQueryValue v)
-                        req.DefaultOperator |> Option.map (fun v -> "default_operator", Fes.Http.toQueryValue v)
-                        req.Df |> Option.map (fun v -> "df", Fes.Http.toQueryValue v)
-                        req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
-                        req.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
-                        req.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
-                        req.Lenient |> Option.map (fun v -> "lenient", Fes.Http.toQueryValue v)
-                        req.MaxDocs |> Option.map (fun v -> "max_docs", Fes.Http.toQueryValue v)
-                        req.Preference |> Option.map (fun v -> "preference", Fes.Http.toQueryValue v)
-                        req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
-                        req.RequestCache |> Option.map (fun v -> "request_cache", Fes.Http.toQueryValue v)
-                        req.RequestsPerSecond |> Option.map (fun v -> "requests_per_second", Fes.Http.toQueryValue v)
-                        req.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
-                        req.Q |> Option.map (fun v -> "q", Fes.Http.toQueryValue v)
-                        req.Scroll |> Option.map (fun v -> "scroll", Fes.Http.toQueryValue v)
-                        req.ScrollSize |> Option.map (fun v -> "scroll_size", Fes.Http.toQueryValue v)
-                        req.SearchTimeout |> Option.map (fun v -> "search_timeout", Fes.Http.toQueryValue v)
-                        req.SearchType |> Option.map (fun v -> "search_type", Fes.Http.toQueryValue v)
-                        req.Slices |> Option.map (fun v -> "slices", Fes.Http.toQueryValue v)
-                        req.Sort |> Option.map (fun v -> "sort", Fes.Http.toQueryValue v)
-                        req.Stats |> Option.map (fun v -> "stats", Fes.Http.toQueryValue v)
-                        req.TerminateAfter |> Option.map (fun v -> "terminate_after", Fes.Http.toQueryValue v)
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                        req.Version |> Option.map (fun v -> "version", Fes.Http.toQueryValue v)
-                        req.WaitForActiveShards |> Option.map (fun v -> "wait_for_active_shards", Fes.Http.toQueryValue v)
-                        req.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: DeleteByQueryRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/{req.Index}/_delete_by_query"
+            let queryParams =
+                [
+                    req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                    req.Analyzer |> Option.map (fun v -> "analyzer", Fes.Http.toQueryValue v)
+                    req.AnalyzeWildcard |> Option.map (fun v -> "analyze_wildcard", Fes.Http.toQueryValue v)
+                    req.Conflicts |> Option.map (fun v -> "conflicts", Fes.Http.toQueryValue v)
+                    req.DefaultOperator |> Option.map (fun v -> "default_operator", Fes.Http.toQueryValue v)
+                    req.Df |> Option.map (fun v -> "df", Fes.Http.toQueryValue v)
+                    req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                    req.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
+                    req.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                    req.Lenient |> Option.map (fun v -> "lenient", Fes.Http.toQueryValue v)
+                    req.MaxDocs |> Option.map (fun v -> "max_docs", Fes.Http.toQueryValue v)
+                    req.Preference |> Option.map (fun v -> "preference", Fes.Http.toQueryValue v)
+                    req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
+                    req.RequestCache |> Option.map (fun v -> "request_cache", Fes.Http.toQueryValue v)
+                    req.RequestsPerSecond |> Option.map (fun v -> "requests_per_second", Fes.Http.toQueryValue v)
+                    req.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
+                    req.Q |> Option.map (fun v -> "q", Fes.Http.toQueryValue v)
+                    req.Scroll |> Option.map (fun v -> "scroll", Fes.Http.toQueryValue v)
+                    req.ScrollSize |> Option.map (fun v -> "scroll_size", Fes.Http.toQueryValue v)
+                    req.SearchTimeout |> Option.map (fun v -> "search_timeout", Fes.Http.toQueryValue v)
+                    req.SearchType |> Option.map (fun v -> "search_type", Fes.Http.toQueryValue v)
+                    req.Slices |> Option.map (fun v -> "slices", Fes.Http.toQueryValue v)
+                    req.Sort |> Option.map (fun v -> "sort", Fes.Http.toQueryValue v)
+                    req.Stats |> Option.map (fun v -> "stats", Fes.Http.toQueryValue v)
+                    req.TerminateAfter |> Option.map (fun v -> "terminate_after", Fes.Http.toQueryValue v)
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                    req.Version |> Option.map (fun v -> "version", Fes.Http.toQueryValue v)
+                    req.WaitForActiveShards |> Option.map (fun v -> "wait_for_active_shards", Fes.Http.toQueryValue v)
+                    req.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type DeleteByQueryResponse = System.Text.Json.JsonElement
 
@@ -848,15 +824,11 @@ module GlobalOperations =
     }
 
         with
-        static member ToRequest(req: DeleteByQueryRethrottleRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_delete_by_query/{req.TaskId}/_rethrottle"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: DeleteByQueryRethrottleRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_delete_by_query/{req.TaskId}/_rethrottle"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            endpoint, ValueNone
 
     type DeleteByQueryRethrottleResponse = Types.TaskListResponseBase
 
@@ -888,23 +860,19 @@ module GlobalOperations =
     }
 
         with
-        static member ToRequest(req: DeleteScriptRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_scripts/{req.Id}"
-                let queryParams =
-                    [
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: DeleteScriptRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_scripts/{req.Id}"
+            let queryParams =
+                [
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
+            endpoint, ValueNone
 
     type DeleteScriptResponse = Types.AcknowledgedResponseBase
 
@@ -952,31 +920,27 @@ module GlobalOperations =
     }
 
         with
-        static member ToRequest(req: ExistsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/{req.Index}/_doc/{req.Id}"
-                let queryParams =
-                    [
-                        req.Preference |> Option.map (fun v -> "preference", Fes.Http.toQueryValue v)
-                        req.Realtime |> Option.map (fun v -> "realtime", Fes.Http.toQueryValue v)
-                        req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
-                        req.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
-                        req.Source |> Option.map (fun v -> "_source", Fes.Http.toQueryValue v)
-                        req.SourceExcludes |> Option.map (fun v -> "_source_excludes", Fes.Http.toQueryValue v)
-                        req.SourceIncludes |> Option.map (fun v -> "_source_includes", Fes.Http.toQueryValue v)
-                        req.StoredFields |> Option.map (fun v -> "stored_fields", Fes.Http.toQueryValue v)
-                        req.Version |> Option.map (fun v -> "version", Fes.Http.toQueryValue v)
-                        req.VersionType |> Option.map (fun v -> "version_type", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Head
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ExistsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/{req.Index}/_doc/{req.Id}"
+            let queryParams =
+                [
+                    req.Preference |> Option.map (fun v -> "preference", Fes.Http.toQueryValue v)
+                    req.Realtime |> Option.map (fun v -> "realtime", Fes.Http.toQueryValue v)
+                    req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
+                    req.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
+                    req.Source |> Option.map (fun v -> "_source", Fes.Http.toQueryValue v)
+                    req.SourceExcludes |> Option.map (fun v -> "_source_excludes", Fes.Http.toQueryValue v)
+                    req.SourceIncludes |> Option.map (fun v -> "_source_includes", Fes.Http.toQueryValue v)
+                    req.StoredFields |> Option.map (fun v -> "stored_fields", Fes.Http.toQueryValue v)
+                    req.Version |> Option.map (fun v -> "version", Fes.Http.toQueryValue v)
+                    req.VersionType |> Option.map (fun v -> "version_type", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.HEAD, fullPath)
+            endpoint, ValueNone
 
     type ExistsResponse = unit
 
@@ -1084,30 +1048,26 @@ module GlobalOperations =
     }
 
         with
-        static member ToRequest(req: ExistsSourceRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/{req.Index}/_source/{req.Id}"
-                let queryParams =
-                    [
-                        req.Preference |> Option.map (fun v -> "preference", Fes.Http.toQueryValue v)
-                        req.Realtime |> Option.map (fun v -> "realtime", Fes.Http.toQueryValue v)
-                        req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
-                        req.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
-                        req.Source |> Option.map (fun v -> "_source", Fes.Http.toQueryValue v)
-                        req.SourceExcludes |> Option.map (fun v -> "_source_excludes", Fes.Http.toQueryValue v)
-                        req.SourceIncludes |> Option.map (fun v -> "_source_includes", Fes.Http.toQueryValue v)
-                        req.Version |> Option.map (fun v -> "version", Fes.Http.toQueryValue v)
-                        req.VersionType |> Option.map (fun v -> "version_type", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Head
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ExistsSourceRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/{req.Index}/_source/{req.Id}"
+            let queryParams =
+                [
+                    req.Preference |> Option.map (fun v -> "preference", Fes.Http.toQueryValue v)
+                    req.Realtime |> Option.map (fun v -> "realtime", Fes.Http.toQueryValue v)
+                    req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
+                    req.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
+                    req.Source |> Option.map (fun v -> "_source", Fes.Http.toQueryValue v)
+                    req.SourceExcludes |> Option.map (fun v -> "_source_excludes", Fes.Http.toQueryValue v)
+                    req.SourceIncludes |> Option.map (fun v -> "_source_includes", Fes.Http.toQueryValue v)
+                    req.Version |> Option.map (fun v -> "version", Fes.Http.toQueryValue v)
+                    req.VersionType |> Option.map (fun v -> "version_type", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.HEAD, fullPath)
+            endpoint, ValueNone
 
     type ExistsSourceResponse = unit
 
@@ -1213,34 +1173,30 @@ module GlobalOperations =
     }
 
         with
-        static member ToRequest(req: ExplainRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/{req.Index}/_explain/{req.Id}"
-                let queryParams =
-                    [
-                        req.Analyzer |> Option.map (fun v -> "analyzer", Fes.Http.toQueryValue v)
-                        req.AnalyzeWildcard |> Option.map (fun v -> "analyze_wildcard", Fes.Http.toQueryValue v)
-                        req.DefaultOperator |> Option.map (fun v -> "default_operator", Fes.Http.toQueryValue v)
-                        req.Df |> Option.map (fun v -> "df", Fes.Http.toQueryValue v)
-                        req.Lenient |> Option.map (fun v -> "lenient", Fes.Http.toQueryValue v)
-                        req.Preference |> Option.map (fun v -> "preference", Fes.Http.toQueryValue v)
-                        req.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
-                        req.Source |> Option.map (fun v -> "_source", Fes.Http.toQueryValue v)
-                        req.SourceExcludes |> Option.map (fun v -> "_source_excludes", Fes.Http.toQueryValue v)
-                        req.SourceIncludes |> Option.map (fun v -> "_source_includes", Fes.Http.toQueryValue v)
-                        req.StoredFields |> Option.map (fun v -> "stored_fields", Fes.Http.toQueryValue v)
-                        req.Q |> Option.map (fun v -> "q", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ExplainRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/{req.Index}/_explain/{req.Id}"
+            let queryParams =
+                [
+                    req.Analyzer |> Option.map (fun v -> "analyzer", Fes.Http.toQueryValue v)
+                    req.AnalyzeWildcard |> Option.map (fun v -> "analyze_wildcard", Fes.Http.toQueryValue v)
+                    req.DefaultOperator |> Option.map (fun v -> "default_operator", Fes.Http.toQueryValue v)
+                    req.Df |> Option.map (fun v -> "df", Fes.Http.toQueryValue v)
+                    req.Lenient |> Option.map (fun v -> "lenient", Fes.Http.toQueryValue v)
+                    req.Preference |> Option.map (fun v -> "preference", Fes.Http.toQueryValue v)
+                    req.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
+                    req.Source |> Option.map (fun v -> "_source", Fes.Http.toQueryValue v)
+                    req.SourceExcludes |> Option.map (fun v -> "_source_excludes", Fes.Http.toQueryValue v)
+                    req.SourceIncludes |> Option.map (fun v -> "_source_includes", Fes.Http.toQueryValue v)
+                    req.StoredFields |> Option.map (fun v -> "stored_fields", Fes.Http.toQueryValue v)
+                    req.Q |> Option.map (fun v -> "q", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type ExplainResponse = System.Text.Json.JsonElement
 
@@ -1375,30 +1331,26 @@ module GlobalOperations =
     }
 
         with
-        static member ToRequest(req: FieldCapsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/{req.Index}/_field_caps"
-                let queryParams =
-                    [
-                        req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
-                        req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
-                        req.Fields |> Option.map (fun v -> "fields", Fes.Http.toQueryValue v)
-                        req.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
-                        req.IncludeUnmapped |> Option.map (fun v -> "include_unmapped", Fes.Http.toQueryValue v)
-                        req.Filters |> Option.map (fun v -> "filters", Fes.Http.toQueryValue v)
-                        req.Types |> Option.map (fun v -> "types", Fes.Http.toQueryValue v)
-                        req.IncludeEmptyFields |> Option.map (fun v -> "include_empty_fields", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: FieldCapsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/{req.Index}/_field_caps"
+            let queryParams =
+                [
+                    req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                    req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                    req.Fields |> Option.map (fun v -> "fields", Fes.Http.toQueryValue v)
+                    req.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                    req.IncludeUnmapped |> Option.map (fun v -> "include_unmapped", Fes.Http.toQueryValue v)
+                    req.Filters |> Option.map (fun v -> "filters", Fes.Http.toQueryValue v)
+                    req.Types |> Option.map (fun v -> "types", Fes.Http.toQueryValue v)
+                    req.IncludeEmptyFields |> Option.map (fun v -> "include_empty_fields", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type FieldCapsResponse = System.Text.Json.JsonElement
 
@@ -1518,33 +1470,29 @@ module GlobalOperations =
     }
 
         with
-        static member ToRequest(req: GetRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/{req.Index}/_doc/{req.Id}"
-                let queryParams =
-                    [
-                        req.ForceSyntheticSource |> Option.map (fun v -> "force_synthetic_source", Fes.Http.toQueryValue v)
-                        req.Preference |> Option.map (fun v -> "preference", Fes.Http.toQueryValue v)
-                        req.Realtime |> Option.map (fun v -> "realtime", Fes.Http.toQueryValue v)
-                        req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
-                        req.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
-                        req.Source |> Option.map (fun v -> "_source", Fes.Http.toQueryValue v)
-                        req.SourceExcludes |> Option.map (fun v -> "_source_excludes", Fes.Http.toQueryValue v)
-                        req.SourceExcludeVectors |> Option.map (fun v -> "_source_exclude_vectors", Fes.Http.toQueryValue v)
-                        req.SourceIncludes |> Option.map (fun v -> "_source_includes", Fes.Http.toQueryValue v)
-                        req.StoredFields |> Option.map (fun v -> "stored_fields", Fes.Http.toQueryValue v)
-                        req.Version |> Option.map (fun v -> "version", Fes.Http.toQueryValue v)
-                        req.VersionType |> Option.map (fun v -> "version_type", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: GetRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/{req.Index}/_doc/{req.Id}"
+            let queryParams =
+                [
+                    req.ForceSyntheticSource |> Option.map (fun v -> "force_synthetic_source", Fes.Http.toQueryValue v)
+                    req.Preference |> Option.map (fun v -> "preference", Fes.Http.toQueryValue v)
+                    req.Realtime |> Option.map (fun v -> "realtime", Fes.Http.toQueryValue v)
+                    req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
+                    req.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
+                    req.Source |> Option.map (fun v -> "_source", Fes.Http.toQueryValue v)
+                    req.SourceExcludes |> Option.map (fun v -> "_source_excludes", Fes.Http.toQueryValue v)
+                    req.SourceExcludeVectors |> Option.map (fun v -> "_source_exclude_vectors", Fes.Http.toQueryValue v)
+                    req.SourceIncludes |> Option.map (fun v -> "_source_includes", Fes.Http.toQueryValue v)
+                    req.StoredFields |> Option.map (fun v -> "stored_fields", Fes.Http.toQueryValue v)
+                    req.Version |> Option.map (fun v -> "version", Fes.Http.toQueryValue v)
+                    req.VersionType |> Option.map (fun v -> "version_type", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type GetResponse<'tDocument> = Types.GetResult<'tDocument>
 
@@ -1657,22 +1605,18 @@ module GlobalOperations =
     }
 
         with
-        static member ToRequest(req: GetScriptRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_scripts/{req.Id}"
-                let queryParams =
-                    [
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: GetScriptRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_scripts/{req.Id}"
+            let queryParams =
+                [
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type GetScriptResponse = System.Text.Json.JsonElement
 
@@ -1700,30 +1644,22 @@ module GlobalOperations =
     type GetScriptContextRequest = | GetScriptContextRequest
 
         with
-        static member ToRequest(req: GetScriptContextRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_script_context"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: GetScriptContextRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_script_context"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type GetScriptContextResponse = System.Text.Json.JsonElement
 
     type GetScriptLanguagesRequest = | GetScriptLanguagesRequest
 
         with
-        static member ToRequest(req: GetScriptLanguagesRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_script_language"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: GetScriptLanguagesRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_script_language"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type GetScriptLanguagesResponse = System.Text.Json.JsonElement
 
@@ -1742,30 +1678,26 @@ module GlobalOperations =
     }
 
         with
-        static member ToRequest(req: GetSourceRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/{req.Index}/_source/{req.Id}"
-                let queryParams =
-                    [
-                        req.Preference |> Option.map (fun v -> "preference", Fes.Http.toQueryValue v)
-                        req.Realtime |> Option.map (fun v -> "realtime", Fes.Http.toQueryValue v)
-                        req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
-                        req.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
-                        req.Source |> Option.map (fun v -> "_source", Fes.Http.toQueryValue v)
-                        req.SourceExcludes |> Option.map (fun v -> "_source_excludes", Fes.Http.toQueryValue v)
-                        req.SourceIncludes |> Option.map (fun v -> "_source_includes", Fes.Http.toQueryValue v)
-                        req.Version |> Option.map (fun v -> "version", Fes.Http.toQueryValue v)
-                        req.VersionType |> Option.map (fun v -> "version_type", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: GetSourceRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/{req.Index}/_source/{req.Id}"
+            let queryParams =
+                [
+                    req.Preference |> Option.map (fun v -> "preference", Fes.Http.toQueryValue v)
+                    req.Realtime |> Option.map (fun v -> "realtime", Fes.Http.toQueryValue v)
+                    req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
+                    req.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
+                    req.Source |> Option.map (fun v -> "_source", Fes.Http.toQueryValue v)
+                    req.SourceExcludes |> Option.map (fun v -> "_source_excludes", Fes.Http.toQueryValue v)
+                    req.SourceIncludes |> Option.map (fun v -> "_source_includes", Fes.Http.toQueryValue v)
+                    req.Version |> Option.map (fun v -> "version", Fes.Http.toQueryValue v)
+                    req.VersionType |> Option.map (fun v -> "version_type", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type GetSourceResponse<'tDocument> = 'tDocument
 
@@ -1859,24 +1791,20 @@ module GlobalOperations =
     }
 
         with
-        static member ToRequest(req: HealthReportRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_health_report/{req.Feature}"
-                let queryParams =
-                    [
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                        req.Verbose |> Option.map (fun v -> "verbose", Fes.Http.toQueryValue v)
-                        req.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: HealthReportRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_health_report/{req.Feature}"
+            let queryParams =
+                [
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                    req.Verbose |> Option.map (fun v -> "verbose", Fes.Http.toQueryValue v)
+                    req.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type HealthReportResponse = System.Text.Json.JsonElement
 
@@ -1939,15 +1867,11 @@ module GlobalOperations =
     type InfoRequest = | InfoRequest
 
         with
-        static member ToRequest(req: InfoRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: InfoRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type InfoResponse = System.Text.Json.JsonElement
 
@@ -1969,23 +1893,19 @@ module GlobalOperations =
     }
 
         with
-        static member ToRequest(req: KnnSearchRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/{req.Index}/_knn_search"
-                let queryParams =
-                    [
-                        req.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: KnnSearchRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/{req.Index}/_knn_search"
+            let queryParams =
+                [
+                    req.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type KnnSearchResponse = System.Text.Json.JsonElement
 
@@ -2070,31 +1990,27 @@ module GlobalOperations =
     }
 
         with
-        static member ToRequest(req: MgetRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/{req.Index}/_mget"
-                let queryParams =
-                    [
-                        req.ForceSyntheticSource |> Option.map (fun v -> "force_synthetic_source", Fes.Http.toQueryValue v)
-                        req.Preference |> Option.map (fun v -> "preference", Fes.Http.toQueryValue v)
-                        req.Realtime |> Option.map (fun v -> "realtime", Fes.Http.toQueryValue v)
-                        req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
-                        req.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
-                        req.Source |> Option.map (fun v -> "_source", Fes.Http.toQueryValue v)
-                        req.SourceExcludes |> Option.map (fun v -> "_source_excludes", Fes.Http.toQueryValue v)
-                        req.SourceIncludes |> Option.map (fun v -> "_source_includes", Fes.Http.toQueryValue v)
-                        req.StoredFields |> Option.map (fun v -> "stored_fields", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MgetRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/{req.Index}/_mget"
+            let queryParams =
+                [
+                    req.ForceSyntheticSource |> Option.map (fun v -> "force_synthetic_source", Fes.Http.toQueryValue v)
+                    req.Preference |> Option.map (fun v -> "preference", Fes.Http.toQueryValue v)
+                    req.Realtime |> Option.map (fun v -> "realtime", Fes.Http.toQueryValue v)
+                    req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
+                    req.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
+                    req.Source |> Option.map (fun v -> "_source", Fes.Http.toQueryValue v)
+                    req.SourceExcludes |> Option.map (fun v -> "_source_excludes", Fes.Http.toQueryValue v)
+                    req.SourceIncludes |> Option.map (fun v -> "_source_includes", Fes.Http.toQueryValue v)
+                    req.StoredFields |> Option.map (fun v -> "stored_fields", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type MgetResponse = System.Text.Json.JsonElement
 
@@ -2210,37 +2126,33 @@ module GlobalOperations =
     }
 
         with
-        static member ToRequest(req: MsearchRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/{req.Index}/_msearch"
-                let queryParams =
-                    [
-                        req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
-                        req.CcsMinimizeRoundtrips |> Option.map (fun v -> "ccs_minimize_roundtrips", Fes.Http.toQueryValue v)
-                        req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
-                        req.IgnoreThrottled |> Option.map (fun v -> "ignore_throttled", Fes.Http.toQueryValue v)
-                        req.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
-                        req.IncludeNamedQueriesScore |> Option.map (fun v -> "include_named_queries_score", Fes.Http.toQueryValue v)
-                        req.queryIndex |> Option.map (fun v -> "index", Fes.Http.toQueryValue v)
-                        req.MaxConcurrentSearches |> Option.map (fun v -> "max_concurrent_searches", Fes.Http.toQueryValue v)
-                        req.MaxConcurrentShardRequests |> Option.map (fun v -> "max_concurrent_shard_requests", Fes.Http.toQueryValue v)
-                        req.PreFilterShardSize |> Option.map (fun v -> "pre_filter_shard_size", Fes.Http.toQueryValue v)
-                        req.ProjectRouting |> Option.map (fun v -> "project_routing", Fes.Http.toQueryValue v)
-                        req.RestTotalHitsAsInt |> Option.map (fun v -> "rest_total_hits_as_int", Fes.Http.toQueryValue v)
-                        req.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
-                        req.SearchType |> Option.map (fun v -> "search_type", Fes.Http.toQueryValue v)
-                        req.TypedKeys |> Option.map (fun v -> "typed_keys", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req.Document
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MsearchRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/{req.Index}/_msearch"
+            let queryParams =
+                [
+                    req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                    req.CcsMinimizeRoundtrips |> Option.map (fun v -> "ccs_minimize_roundtrips", Fes.Http.toQueryValue v)
+                    req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                    req.IgnoreThrottled |> Option.map (fun v -> "ignore_throttled", Fes.Http.toQueryValue v)
+                    req.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                    req.IncludeNamedQueriesScore |> Option.map (fun v -> "include_named_queries_score", Fes.Http.toQueryValue v)
+                    req.queryIndex |> Option.map (fun v -> "index", Fes.Http.toQueryValue v)
+                    req.MaxConcurrentSearches |> Option.map (fun v -> "max_concurrent_searches", Fes.Http.toQueryValue v)
+                    req.MaxConcurrentShardRequests |> Option.map (fun v -> "max_concurrent_shard_requests", Fes.Http.toQueryValue v)
+                    req.PreFilterShardSize |> Option.map (fun v -> "pre_filter_shard_size", Fes.Http.toQueryValue v)
+                    req.ProjectRouting |> Option.map (fun v -> "project_routing", Fes.Http.toQueryValue v)
+                    req.RestTotalHitsAsInt |> Option.map (fun v -> "rest_total_hits_as_int", Fes.Http.toQueryValue v)
+                    req.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
+                    req.SearchType |> Option.map (fun v -> "search_type", Fes.Http.toQueryValue v)
+                    req.TypedKeys |> Option.map (fun v -> "typed_keys", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req.Document)
+            endpoint, ValueSome postData
 
     type MsearchResponse<'tDocument> = Types.MultiSearchResult<'tDocument>
 
@@ -2380,28 +2292,24 @@ module GlobalOperations =
     }
 
         with
-        static member ToRequest(req: MsearchTemplateRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/{req.Index}/_msearch/template"
-                let queryParams =
-                    [
-                        req.CcsMinimizeRoundtrips |> Option.map (fun v -> "ccs_minimize_roundtrips", Fes.Http.toQueryValue v)
-                        req.MaxConcurrentSearches |> Option.map (fun v -> "max_concurrent_searches", Fes.Http.toQueryValue v)
-                        req.ProjectRouting |> Option.map (fun v -> "project_routing", Fes.Http.toQueryValue v)
-                        req.SearchType |> Option.map (fun v -> "search_type", Fes.Http.toQueryValue v)
-                        req.RestTotalHitsAsInt |> Option.map (fun v -> "rest_total_hits_as_int", Fes.Http.toQueryValue v)
-                        req.TypedKeys |> Option.map (fun v -> "typed_keys", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req.Document
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MsearchTemplateRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/{req.Index}/_msearch/template"
+            let queryParams =
+                [
+                    req.CcsMinimizeRoundtrips |> Option.map (fun v -> "ccs_minimize_roundtrips", Fes.Http.toQueryValue v)
+                    req.MaxConcurrentSearches |> Option.map (fun v -> "max_concurrent_searches", Fes.Http.toQueryValue v)
+                    req.ProjectRouting |> Option.map (fun v -> "project_routing", Fes.Http.toQueryValue v)
+                    req.SearchType |> Option.map (fun v -> "search_type", Fes.Http.toQueryValue v)
+                    req.RestTotalHitsAsInt |> Option.map (fun v -> "rest_total_hits_as_int", Fes.Http.toQueryValue v)
+                    req.TypedKeys |> Option.map (fun v -> "typed_keys", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req.Document)
+            endpoint, ValueSome postData
 
     type MsearchTemplateResponse<'tDocument> = Types.MultiSearchResult<'tDocument>
 
@@ -2487,34 +2395,30 @@ module GlobalOperations =
     }
 
         with
-        static member ToRequest(req: MtermvectorsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/{req.Index}/_mtermvectors"
-                let queryParams =
-                    [
-                        req.Ids |> Option.map (fun v -> "ids", Fes.Http.toQueryValue v)
-                        req.Fields |> Option.map (fun v -> "fields", Fes.Http.toQueryValue v)
-                        req.FieldStatistics |> Option.map (fun v -> "field_statistics", Fes.Http.toQueryValue v)
-                        req.Offsets |> Option.map (fun v -> "offsets", Fes.Http.toQueryValue v)
-                        req.Payloads |> Option.map (fun v -> "payloads", Fes.Http.toQueryValue v)
-                        req.Positions |> Option.map (fun v -> "positions", Fes.Http.toQueryValue v)
-                        req.Preference |> Option.map (fun v -> "preference", Fes.Http.toQueryValue v)
-                        req.Realtime |> Option.map (fun v -> "realtime", Fes.Http.toQueryValue v)
-                        req.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
-                        req.TermStatistics |> Option.map (fun v -> "term_statistics", Fes.Http.toQueryValue v)
-                        req.Version |> Option.map (fun v -> "version", Fes.Http.toQueryValue v)
-                        req.VersionType |> Option.map (fun v -> "version_type", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MtermvectorsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/{req.Index}/_mtermvectors"
+            let queryParams =
+                [
+                    req.Ids |> Option.map (fun v -> "ids", Fes.Http.toQueryValue v)
+                    req.Fields |> Option.map (fun v -> "fields", Fes.Http.toQueryValue v)
+                    req.FieldStatistics |> Option.map (fun v -> "field_statistics", Fes.Http.toQueryValue v)
+                    req.Offsets |> Option.map (fun v -> "offsets", Fes.Http.toQueryValue v)
+                    req.Payloads |> Option.map (fun v -> "payloads", Fes.Http.toQueryValue v)
+                    req.Positions |> Option.map (fun v -> "positions", Fes.Http.toQueryValue v)
+                    req.Preference |> Option.map (fun v -> "preference", Fes.Http.toQueryValue v)
+                    req.Realtime |> Option.map (fun v -> "realtime", Fes.Http.toQueryValue v)
+                    req.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
+                    req.TermStatistics |> Option.map (fun v -> "term_statistics", Fes.Http.toQueryValue v)
+                    req.Version |> Option.map (fun v -> "version", Fes.Http.toQueryValue v)
+                    req.VersionType |> Option.map (fun v -> "version_type", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type MtermvectorsResponse = System.Text.Json.JsonElement
 
@@ -2646,28 +2550,24 @@ module GlobalOperations =
     }
 
         with
-        static member ToRequest(req: OpenPointInTimeRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/{req.Index}/_pit"
-                let queryParams =
-                    [
-                        req.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
-                        req.Preference |> Option.map (fun v -> "preference", Fes.Http.toQueryValue v)
-                        req.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
-                        req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
-                        req.AllowPartialSearchResults |> Option.map (fun v -> "allow_partial_search_results", Fes.Http.toQueryValue v)
-                        req.MaxConcurrentShardRequests |> Option.map (fun v -> "max_concurrent_shard_requests", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: OpenPointInTimeRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/{req.Index}/_pit"
+            let queryParams =
+                [
+                    req.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                    req.Preference |> Option.map (fun v -> "preference", Fes.Http.toQueryValue v)
+                    req.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
+                    req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                    req.AllowPartialSearchResults |> Option.map (fun v -> "allow_partial_search_results", Fes.Http.toQueryValue v)
+                    req.MaxConcurrentShardRequests |> Option.map (fun v -> "max_concurrent_shard_requests", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type OpenPointInTimeResponse = System.Text.Json.JsonElement
 
@@ -2751,15 +2651,11 @@ module GlobalOperations =
     type PingRequest = | PingRequest
 
         with
-        static member ToRequest(req: PingRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Head
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: PingRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.HEAD, fullPath)
+            endpoint, ValueNone
 
     type PingResponse = unit
 
@@ -2774,25 +2670,21 @@ module GlobalOperations =
     }
 
         with
-        static member ToRequest(req: PutScriptRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_scripts/{req.Id}/{req.Context}"
-                let queryParams =
-                    [
-                        req.queryContext |> Option.map (fun v -> "context", Fes.Http.toQueryValue v)
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: PutScriptRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_scripts/{req.Id}/{req.Context}"
+            let queryParams =
+                [
+                    req.queryContext |> Option.map (fun v -> "context", Fes.Http.toQueryValue v)
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type PutScriptResponse = Types.AcknowledgedResponseBase
 
@@ -2856,26 +2748,22 @@ module GlobalOperations =
     }
 
         with
-        static member ToRequest(req: RankEvalRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/{req.Index}/_rank_eval"
-                let queryParams =
-                    [
-                        req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
-                        req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
-                        req.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
-                        req.SearchType |> Option.map (fun v -> "search_type", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: RankEvalRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/{req.Index}/_rank_eval"
+            let queryParams =
+                [
+                    req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                    req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                    req.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                    req.SearchType |> Option.map (fun v -> "search_type", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type RankEvalResponse = System.Text.Json.JsonElement
 
@@ -2958,31 +2846,27 @@ module GlobalOperations =
     }
 
         with
-        static member ToRequest(req: ReindexRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_reindex"
-                let queryParams =
-                    [
-                        req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
-                        req.RequestsPerSecond |> Option.map (fun v -> "requests_per_second", Fes.Http.toQueryValue v)
-                        req.Scroll |> Option.map (fun v -> "scroll", Fes.Http.toQueryValue v)
-                        req.Slices |> Option.map (fun v -> "slices", Fes.Http.toQueryValue v)
-                        req.MaxDocs |> Option.map (fun v -> "max_docs", Fes.Http.toQueryValue v)
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                        req.WaitForActiveShards |> Option.map (fun v -> "wait_for_active_shards", Fes.Http.toQueryValue v)
-                        req.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", Fes.Http.toQueryValue v)
-                        req.RequireAlias |> Option.map (fun v -> "require_alias", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ReindexRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_reindex"
+            let queryParams =
+                [
+                    req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
+                    req.RequestsPerSecond |> Option.map (fun v -> "requests_per_second", Fes.Http.toQueryValue v)
+                    req.Scroll |> Option.map (fun v -> "scroll", Fes.Http.toQueryValue v)
+                    req.Slices |> Option.map (fun v -> "slices", Fes.Http.toQueryValue v)
+                    req.MaxDocs |> Option.map (fun v -> "max_docs", Fes.Http.toQueryValue v)
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                    req.WaitForActiveShards |> Option.map (fun v -> "wait_for_active_shards", Fes.Http.toQueryValue v)
+                    req.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", Fes.Http.toQueryValue v)
+                    req.RequireAlias |> Option.map (fun v -> "require_alias", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type ReindexResponse = System.Text.Json.JsonElement
 
@@ -3100,22 +2984,18 @@ module GlobalOperations =
     }
 
         with
-        static member ToRequest(req: ReindexRethrottleRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_reindex/{req.TaskId}/_rethrottle"
-                let queryParams =
-                    [
-                        req.GroupBy |> Option.map (fun v -> "group_by", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ReindexRethrottleRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_reindex/{req.TaskId}/_rethrottle"
+            let queryParams =
+                [
+                    req.GroupBy |> Option.map (fun v -> "group_by", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            endpoint, ValueNone
 
     type ReindexRethrottleResponse = System.Text.Json.JsonElement
 
@@ -3160,16 +3040,12 @@ module GlobalOperations =
     }
 
         with
-        static member ToRequest(req: RenderSearchTemplateRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_render/template/{req.Id}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: RenderSearchTemplateRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_render/template/{req.Id}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type RenderSearchTemplateResponse = System.Text.Json.JsonElement
 
@@ -3225,16 +3101,12 @@ module GlobalOperations =
     }
 
         with
-        static member ToRequest(req: ScriptsPainlessExecuteRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_scripts/painless/_execute"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ScriptsPainlessExecuteRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_scripts/painless/_execute"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type ScriptsPainlessExecuteResponse = System.Text.Json.JsonElement
 
@@ -3280,25 +3152,21 @@ module GlobalOperations =
     }
 
         with
-        static member ToRequest(req: ScrollRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_search/scroll/{req.ScrollId}"
-                let queryParams =
-                    [
-                        req.Scroll |> Option.map (fun v -> "scroll", Fes.Http.toQueryValue v)
-                        req.queryScrollId |> Option.map (fun v -> "scroll_id", Fes.Http.toQueryValue v)
-                        req.RestTotalHitsAsInt |> Option.map (fun v -> "rest_total_hits_as_int", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ScrollRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_search/scroll/{req.ScrollId}"
+            let queryParams =
+                [
+                    req.Scroll |> Option.map (fun v -> "scroll", Fes.Http.toQueryValue v)
+                    req.queryScrollId |> Option.map (fun v -> "scroll_id", Fes.Http.toQueryValue v)
+                    req.RestTotalHitsAsInt |> Option.map (fun v -> "rest_total_hits_as_int", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type ScrollResponse<'tDocument> = Types.ResponseBody<'tDocument>
 
@@ -3471,67 +3339,63 @@ module GlobalOperations =
     }
 
         with
-        static member ToRequest(req: SearchRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/{req.Index}/_search"
-                let queryParams =
-                    [
-                        req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
-                        req.AllowPartialSearchResults |> Option.map (fun v -> "allow_partial_search_results", Fes.Http.toQueryValue v)
-                        req.Analyzer |> Option.map (fun v -> "analyzer", Fes.Http.toQueryValue v)
-                        req.AnalyzeWildcard |> Option.map (fun v -> "analyze_wildcard", Fes.Http.toQueryValue v)
-                        req.BatchedReduceSize |> Option.map (fun v -> "batched_reduce_size", Fes.Http.toQueryValue v)
-                        req.CcsMinimizeRoundtrips |> Option.map (fun v -> "ccs_minimize_roundtrips", Fes.Http.toQueryValue v)
-                        req.DefaultOperator |> Option.map (fun v -> "default_operator", Fes.Http.toQueryValue v)
-                        req.Df |> Option.map (fun v -> "df", Fes.Http.toQueryValue v)
-                        req.DocvalueFields |> Option.map (fun v -> "docvalue_fields", Fes.Http.toQueryValue v)
-                        req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
-                        req.Explain |> Option.map (fun v -> "explain", Fes.Http.toQueryValue v)
-                        req.IgnoreThrottled |> Option.map (fun v -> "ignore_throttled", Fes.Http.toQueryValue v)
-                        req.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
-                        req.IncludeNamedQueriesScore |> Option.map (fun v -> "include_named_queries_score", Fes.Http.toQueryValue v)
-                        req.Lenient |> Option.map (fun v -> "lenient", Fes.Http.toQueryValue v)
-                        req.MaxConcurrentShardRequests |> Option.map (fun v -> "max_concurrent_shard_requests", Fes.Http.toQueryValue v)
-                        req.Preference |> Option.map (fun v -> "preference", Fes.Http.toQueryValue v)
-                        req.PreFilterShardSize |> Option.map (fun v -> "pre_filter_shard_size", Fes.Http.toQueryValue v)
-                        req.RequestCache |> Option.map (fun v -> "request_cache", Fes.Http.toQueryValue v)
-                        req.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
-                        req.Scroll |> Option.map (fun v -> "scroll", Fes.Http.toQueryValue v)
-                        req.SearchType |> Option.map (fun v -> "search_type", Fes.Http.toQueryValue v)
-                        req.Stats |> Option.map (fun v -> "stats", Fes.Http.toQueryValue v)
-                        req.StoredFields |> Option.map (fun v -> "stored_fields", Fes.Http.toQueryValue v)
-                        req.SuggestField |> Option.map (fun v -> "suggest_field", Fes.Http.toQueryValue v)
-                        req.SuggestMode |> Option.map (fun v -> "suggest_mode", Fes.Http.toQueryValue v)
-                        req.SuggestSize |> Option.map (fun v -> "suggest_size", Fes.Http.toQueryValue v)
-                        req.SuggestText |> Option.map (fun v -> "suggest_text", Fes.Http.toQueryValue v)
-                        req.TerminateAfter |> Option.map (fun v -> "terminate_after", Fes.Http.toQueryValue v)
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                        req.TrackTotalHits |> Option.map (fun v -> "track_total_hits", Fes.Http.toQueryValue v)
-                        req.TrackScores |> Option.map (fun v -> "track_scores", Fes.Http.toQueryValue v)
-                        req.TypedKeys |> Option.map (fun v -> "typed_keys", Fes.Http.toQueryValue v)
-                        req.RestTotalHitsAsInt |> Option.map (fun v -> "rest_total_hits_as_int", Fes.Http.toQueryValue v)
-                        req.Version |> Option.map (fun v -> "version", Fes.Http.toQueryValue v)
-                        req.Source |> Option.map (fun v -> "_source", Fes.Http.toQueryValue v)
-                        req.SourceExcludes |> Option.map (fun v -> "_source_excludes", Fes.Http.toQueryValue v)
-                        req.SourceExcludeVectors |> Option.map (fun v -> "_source_exclude_vectors", Fes.Http.toQueryValue v)
-                        req.SourceIncludes |> Option.map (fun v -> "_source_includes", Fes.Http.toQueryValue v)
-                        req.SeqNoPrimaryTerm |> Option.map (fun v -> "seq_no_primary_term", Fes.Http.toQueryValue v)
-                        req.Q |> Option.map (fun v -> "q", Fes.Http.toQueryValue v)
-                        req.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
-                        req.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
-                        req.Sort |> Option.map (fun v -> "sort", Fes.Http.toQueryValue v)
-                        req.ForceSyntheticSource |> Option.map (fun v -> "force_synthetic_source", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SearchRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/{req.Index}/_search"
+            let queryParams =
+                [
+                    req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                    req.AllowPartialSearchResults |> Option.map (fun v -> "allow_partial_search_results", Fes.Http.toQueryValue v)
+                    req.Analyzer |> Option.map (fun v -> "analyzer", Fes.Http.toQueryValue v)
+                    req.AnalyzeWildcard |> Option.map (fun v -> "analyze_wildcard", Fes.Http.toQueryValue v)
+                    req.BatchedReduceSize |> Option.map (fun v -> "batched_reduce_size", Fes.Http.toQueryValue v)
+                    req.CcsMinimizeRoundtrips |> Option.map (fun v -> "ccs_minimize_roundtrips", Fes.Http.toQueryValue v)
+                    req.DefaultOperator |> Option.map (fun v -> "default_operator", Fes.Http.toQueryValue v)
+                    req.Df |> Option.map (fun v -> "df", Fes.Http.toQueryValue v)
+                    req.DocvalueFields |> Option.map (fun v -> "docvalue_fields", Fes.Http.toQueryValue v)
+                    req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                    req.Explain |> Option.map (fun v -> "explain", Fes.Http.toQueryValue v)
+                    req.IgnoreThrottled |> Option.map (fun v -> "ignore_throttled", Fes.Http.toQueryValue v)
+                    req.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                    req.IncludeNamedQueriesScore |> Option.map (fun v -> "include_named_queries_score", Fes.Http.toQueryValue v)
+                    req.Lenient |> Option.map (fun v -> "lenient", Fes.Http.toQueryValue v)
+                    req.MaxConcurrentShardRequests |> Option.map (fun v -> "max_concurrent_shard_requests", Fes.Http.toQueryValue v)
+                    req.Preference |> Option.map (fun v -> "preference", Fes.Http.toQueryValue v)
+                    req.PreFilterShardSize |> Option.map (fun v -> "pre_filter_shard_size", Fes.Http.toQueryValue v)
+                    req.RequestCache |> Option.map (fun v -> "request_cache", Fes.Http.toQueryValue v)
+                    req.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
+                    req.Scroll |> Option.map (fun v -> "scroll", Fes.Http.toQueryValue v)
+                    req.SearchType |> Option.map (fun v -> "search_type", Fes.Http.toQueryValue v)
+                    req.Stats |> Option.map (fun v -> "stats", Fes.Http.toQueryValue v)
+                    req.StoredFields |> Option.map (fun v -> "stored_fields", Fes.Http.toQueryValue v)
+                    req.SuggestField |> Option.map (fun v -> "suggest_field", Fes.Http.toQueryValue v)
+                    req.SuggestMode |> Option.map (fun v -> "suggest_mode", Fes.Http.toQueryValue v)
+                    req.SuggestSize |> Option.map (fun v -> "suggest_size", Fes.Http.toQueryValue v)
+                    req.SuggestText |> Option.map (fun v -> "suggest_text", Fes.Http.toQueryValue v)
+                    req.TerminateAfter |> Option.map (fun v -> "terminate_after", Fes.Http.toQueryValue v)
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                    req.TrackTotalHits |> Option.map (fun v -> "track_total_hits", Fes.Http.toQueryValue v)
+                    req.TrackScores |> Option.map (fun v -> "track_scores", Fes.Http.toQueryValue v)
+                    req.TypedKeys |> Option.map (fun v -> "typed_keys", Fes.Http.toQueryValue v)
+                    req.RestTotalHitsAsInt |> Option.map (fun v -> "rest_total_hits_as_int", Fes.Http.toQueryValue v)
+                    req.Version |> Option.map (fun v -> "version", Fes.Http.toQueryValue v)
+                    req.Source |> Option.map (fun v -> "_source", Fes.Http.toQueryValue v)
+                    req.SourceExcludes |> Option.map (fun v -> "_source_excludes", Fes.Http.toQueryValue v)
+                    req.SourceExcludeVectors |> Option.map (fun v -> "_source_exclude_vectors", Fes.Http.toQueryValue v)
+                    req.SourceIncludes |> Option.map (fun v -> "_source_includes", Fes.Http.toQueryValue v)
+                    req.SeqNoPrimaryTerm |> Option.map (fun v -> "seq_no_primary_term", Fes.Http.toQueryValue v)
+                    req.Q |> Option.map (fun v -> "q", Fes.Http.toQueryValue v)
+                    req.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
+                    req.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
+                    req.Sort |> Option.map (fun v -> "sort", Fes.Http.toQueryValue v)
+                    req.ForceSyntheticSource |> Option.map (fun v -> "force_synthetic_source", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type SearchResponse<'tDocument> = Types.ResponseBody<'tDocument>
 
@@ -4156,30 +4020,26 @@ module GlobalOperations =
     }
 
         with
-        static member ToRequest(req: SearchMvtRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/{req.Index}/_mvt/{req.Field}/{req.Zoom}/{req.X}/{req.Y}"
-                let queryParams =
-                    [
-                        req.ExactBounds |> Option.map (fun v -> "exact_bounds", Fes.Http.toQueryValue v)
-                        req.Extent |> Option.map (fun v -> "extent", Fes.Http.toQueryValue v)
-                        req.GridAgg |> Option.map (fun v -> "grid_agg", Fes.Http.toQueryValue v)
-                        req.GridPrecision |> Option.map (fun v -> "grid_precision", Fes.Http.toQueryValue v)
-                        req.GridType |> Option.map (fun v -> "grid_type", Fes.Http.toQueryValue v)
-                        req.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
-                        req.TrackTotalHits |> Option.map (fun v -> "track_total_hits", Fes.Http.toQueryValue v)
-                        req.WithLabels |> Option.map (fun v -> "with_labels", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SearchMvtRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/{req.Index}/_mvt/{req.Field}/{req.Zoom}/{req.X}/{req.Y}"
+            let queryParams =
+                [
+                    req.ExactBounds |> Option.map (fun v -> "exact_bounds", Fes.Http.toQueryValue v)
+                    req.Extent |> Option.map (fun v -> "extent", Fes.Http.toQueryValue v)
+                    req.GridAgg |> Option.map (fun v -> "grid_agg", Fes.Http.toQueryValue v)
+                    req.GridPrecision |> Option.map (fun v -> "grid_precision", Fes.Http.toQueryValue v)
+                    req.GridType |> Option.map (fun v -> "grid_type", Fes.Http.toQueryValue v)
+                    req.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
+                    req.TrackTotalHits |> Option.map (fun v -> "track_total_hits", Fes.Http.toQueryValue v)
+                    req.WithLabels |> Option.map (fun v -> "with_labels", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type SearchMvtResponse = Types.MapboxVectorTiles
 
@@ -4390,28 +4250,24 @@ module GlobalOperations =
     }
 
         with
-        static member ToRequest(req: SearchShardsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/{req.Index}/_search_shards"
-                let queryParams =
-                    [
-                        req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
-                        req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
-                        req.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
-                        req.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                        req.Preference |> Option.map (fun v -> "preference", Fes.Http.toQueryValue v)
-                        req.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SearchShardsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/{req.Index}/_search_shards"
+            let queryParams =
+                [
+                    req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                    req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                    req.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                    req.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                    req.Preference |> Option.map (fun v -> "preference", Fes.Http.toQueryValue v)
+                    req.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            endpoint, ValueNone
 
     type SearchShardsResponse = System.Text.Json.JsonElement
 
@@ -4508,35 +4364,31 @@ module GlobalOperations =
     }
 
         with
-        static member ToRequest(req: SearchTemplateRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/{req.Index}/_search/template"
-                let queryParams =
-                    [
-                        req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
-                        req.CcsMinimizeRoundtrips |> Option.map (fun v -> "ccs_minimize_roundtrips", Fes.Http.toQueryValue v)
-                        req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
-                        req.Explain |> Option.map (fun v -> "explain", Fes.Http.toQueryValue v)
-                        req.IgnoreThrottled |> Option.map (fun v -> "ignore_throttled", Fes.Http.toQueryValue v)
-                        req.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
-                        req.Preference |> Option.map (fun v -> "preference", Fes.Http.toQueryValue v)
-                        req.Profile |> Option.map (fun v -> "profile", Fes.Http.toQueryValue v)
-                        req.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
-                        req.Scroll |> Option.map (fun v -> "scroll", Fes.Http.toQueryValue v)
-                        req.SearchType |> Option.map (fun v -> "search_type", Fes.Http.toQueryValue v)
-                        req.RestTotalHitsAsInt |> Option.map (fun v -> "rest_total_hits_as_int", Fes.Http.toQueryValue v)
-                        req.TypedKeys |> Option.map (fun v -> "typed_keys", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SearchTemplateRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/{req.Index}/_search/template"
+            let queryParams =
+                [
+                    req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                    req.CcsMinimizeRoundtrips |> Option.map (fun v -> "ccs_minimize_roundtrips", Fes.Http.toQueryValue v)
+                    req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                    req.Explain |> Option.map (fun v -> "explain", Fes.Http.toQueryValue v)
+                    req.IgnoreThrottled |> Option.map (fun v -> "ignore_throttled", Fes.Http.toQueryValue v)
+                    req.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                    req.Preference |> Option.map (fun v -> "preference", Fes.Http.toQueryValue v)
+                    req.Profile |> Option.map (fun v -> "profile", Fes.Http.toQueryValue v)
+                    req.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
+                    req.Scroll |> Option.map (fun v -> "scroll", Fes.Http.toQueryValue v)
+                    req.SearchType |> Option.map (fun v -> "search_type", Fes.Http.toQueryValue v)
+                    req.RestTotalHitsAsInt |> Option.map (fun v -> "rest_total_hits_as_int", Fes.Http.toQueryValue v)
+                    req.TypedKeys |> Option.map (fun v -> "typed_keys", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type SearchTemplateResponse = System.Text.Json.JsonElement
 
@@ -4706,16 +4558,12 @@ module GlobalOperations =
     }
 
         with
-        static member ToRequest(req: TermsEnumRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/{req.Index}/_terms_enum"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: TermsEnumRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/{req.Index}/_terms_enum"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type TermsEnumResponse = System.Text.Json.JsonElement
 
@@ -4904,53 +4752,49 @@ module GlobalOperations =
     }
 
         with
-        static member ToRequest(req: UpdateByQueryRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/{req.Index}/_update_by_query"
-                let queryParams =
-                    [
-                        req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
-                        req.Analyzer |> Option.map (fun v -> "analyzer", Fes.Http.toQueryValue v)
-                        req.AnalyzeWildcard |> Option.map (fun v -> "analyze_wildcard", Fes.Http.toQueryValue v)
-                        req.Conflicts |> Option.map (fun v -> "conflicts", Fes.Http.toQueryValue v)
-                        req.DefaultOperator |> Option.map (fun v -> "default_operator", Fes.Http.toQueryValue v)
-                        req.Df |> Option.map (fun v -> "df", Fes.Http.toQueryValue v)
-                        req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
-                        req.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
-                        req.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
-                        req.Lenient |> Option.map (fun v -> "lenient", Fes.Http.toQueryValue v)
-                        req.MaxDocs |> Option.map (fun v -> "max_docs", Fes.Http.toQueryValue v)
-                        req.Pipeline |> Option.map (fun v -> "pipeline", Fes.Http.toQueryValue v)
-                        req.Preference |> Option.map (fun v -> "preference", Fes.Http.toQueryValue v)
-                        req.Q |> Option.map (fun v -> "q", Fes.Http.toQueryValue v)
-                        req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
-                        req.RequestCache |> Option.map (fun v -> "request_cache", Fes.Http.toQueryValue v)
-                        req.RequestsPerSecond |> Option.map (fun v -> "requests_per_second", Fes.Http.toQueryValue v)
-                        req.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
-                        req.Scroll |> Option.map (fun v -> "scroll", Fes.Http.toQueryValue v)
-                        req.ScrollSize |> Option.map (fun v -> "scroll_size", Fes.Http.toQueryValue v)
-                        req.SearchTimeout |> Option.map (fun v -> "search_timeout", Fes.Http.toQueryValue v)
-                        req.SearchType |> Option.map (fun v -> "search_type", Fes.Http.toQueryValue v)
-                        req.Slices |> Option.map (fun v -> "slices", Fes.Http.toQueryValue v)
-                        req.Sort |> Option.map (fun v -> "sort", Fes.Http.toQueryValue v)
-                        req.Stats |> Option.map (fun v -> "stats", Fes.Http.toQueryValue v)
-                        req.TerminateAfter |> Option.map (fun v -> "terminate_after", Fes.Http.toQueryValue v)
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                        req.Version |> Option.map (fun v -> "version", Fes.Http.toQueryValue v)
-                        req.VersionType |> Option.map (fun v -> "version_type", Fes.Http.toQueryValue v)
-                        req.WaitForActiveShards |> Option.map (fun v -> "wait_for_active_shards", Fes.Http.toQueryValue v)
-                        req.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: UpdateByQueryRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/{req.Index}/_update_by_query"
+            let queryParams =
+                [
+                    req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                    req.Analyzer |> Option.map (fun v -> "analyzer", Fes.Http.toQueryValue v)
+                    req.AnalyzeWildcard |> Option.map (fun v -> "analyze_wildcard", Fes.Http.toQueryValue v)
+                    req.Conflicts |> Option.map (fun v -> "conflicts", Fes.Http.toQueryValue v)
+                    req.DefaultOperator |> Option.map (fun v -> "default_operator", Fes.Http.toQueryValue v)
+                    req.Df |> Option.map (fun v -> "df", Fes.Http.toQueryValue v)
+                    req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                    req.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
+                    req.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                    req.Lenient |> Option.map (fun v -> "lenient", Fes.Http.toQueryValue v)
+                    req.MaxDocs |> Option.map (fun v -> "max_docs", Fes.Http.toQueryValue v)
+                    req.Pipeline |> Option.map (fun v -> "pipeline", Fes.Http.toQueryValue v)
+                    req.Preference |> Option.map (fun v -> "preference", Fes.Http.toQueryValue v)
+                    req.Q |> Option.map (fun v -> "q", Fes.Http.toQueryValue v)
+                    req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
+                    req.RequestCache |> Option.map (fun v -> "request_cache", Fes.Http.toQueryValue v)
+                    req.RequestsPerSecond |> Option.map (fun v -> "requests_per_second", Fes.Http.toQueryValue v)
+                    req.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
+                    req.Scroll |> Option.map (fun v -> "scroll", Fes.Http.toQueryValue v)
+                    req.ScrollSize |> Option.map (fun v -> "scroll_size", Fes.Http.toQueryValue v)
+                    req.SearchTimeout |> Option.map (fun v -> "search_timeout", Fes.Http.toQueryValue v)
+                    req.SearchType |> Option.map (fun v -> "search_type", Fes.Http.toQueryValue v)
+                    req.Slices |> Option.map (fun v -> "slices", Fes.Http.toQueryValue v)
+                    req.Sort |> Option.map (fun v -> "sort", Fes.Http.toQueryValue v)
+                    req.Stats |> Option.map (fun v -> "stats", Fes.Http.toQueryValue v)
+                    req.TerminateAfter |> Option.map (fun v -> "terminate_after", Fes.Http.toQueryValue v)
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                    req.Version |> Option.map (fun v -> "version", Fes.Http.toQueryValue v)
+                    req.VersionType |> Option.map (fun v -> "version_type", Fes.Http.toQueryValue v)
+                    req.WaitForActiveShards |> Option.map (fun v -> "wait_for_active_shards", Fes.Http.toQueryValue v)
+                    req.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type UpdateByQueryResponse = System.Text.Json.JsonElement
 
@@ -5226,15 +5070,11 @@ module GlobalOperations =
     }
 
         with
-        static member ToRequest(req: UpdateByQueryRethrottleRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_update_by_query/{req.TaskId}/_rethrottle"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: UpdateByQueryRethrottleRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_update_by_query/{req.TaskId}/_rethrottle"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            endpoint, ValueNone
 
     type UpdateByQueryRethrottleResponse = System.Text.Json.JsonElement
 

@@ -17,15 +17,11 @@ module LogstashOperations =
     }
 
         with
-        static member ToRequest(req: LogstashDeletePipelineRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_logstash/pipeline/{req.Id}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: LogstashDeletePipelineRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_logstash/pipeline/{req.Id}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
+            endpoint, ValueNone
 
     type LogstashDeletePipelineResponse = unit
 
@@ -46,15 +42,11 @@ module LogstashOperations =
     }
 
         with
-        static member ToRequest(req: LogstashGetPipelineRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_logstash/pipeline/{req.Id}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: LogstashGetPipelineRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_logstash/pipeline/{req.Id}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type LogstashGetPipelineResponse = Map<Types.Id, Types.LogstashTypesPipeline>
 
@@ -76,16 +68,12 @@ module LogstashOperations =
     }
 
         with
-        static member ToRequest(req: LogstashPutPipelineRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_logstash/pipeline/{req.Id}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody req.Document
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: LogstashPutPipelineRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_logstash/pipeline/{req.Id}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req.Document)
+            endpoint, ValueSome postData
 
     type LogstashPutPipelineResponse = unit
 

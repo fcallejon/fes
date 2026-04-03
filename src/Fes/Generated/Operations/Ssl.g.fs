@@ -15,15 +15,11 @@ module SslOperations =
     type SslCertificatesRequest = | SslCertificatesRequest
 
         with
-        static member ToRequest(req: SslCertificatesRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ssl/certificates"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: SslCertificatesRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ssl/certificates"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type SslCertificatesResponse = Types.CertificateInformation list
 

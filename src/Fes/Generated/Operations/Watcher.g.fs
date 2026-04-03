@@ -18,15 +18,11 @@ module WatcherOperations =
     }
 
         with
-        static member ToRequest(req: WatcherAckWatchRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_watcher/watch/{req.WatchId}/_ack/{req.ActionId}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: WatcherAckWatchRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_watcher/watch/{req.WatchId}/_ack/{req.ActionId}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            endpoint, ValueNone
 
     type WatcherAckWatchResponse = System.Text.Json.JsonElement
 
@@ -52,15 +48,11 @@ module WatcherOperations =
     }
 
         with
-        static member ToRequest(req: WatcherActivateWatchRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_watcher/watch/{req.WatchId}/_activate"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: WatcherActivateWatchRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_watcher/watch/{req.WatchId}/_activate"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            endpoint, ValueNone
 
     type WatcherActivateWatchResponse = System.Text.Json.JsonElement
 
@@ -81,15 +73,11 @@ module WatcherOperations =
     }
 
         with
-        static member ToRequest(req: WatcherDeactivateWatchRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_watcher/watch/{req.WatchId}/_deactivate"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: WatcherDeactivateWatchRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_watcher/watch/{req.WatchId}/_deactivate"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            endpoint, ValueNone
 
     type WatcherDeactivateWatchResponse = System.Text.Json.JsonElement
 
@@ -110,15 +98,11 @@ module WatcherOperations =
     }
 
         with
-        static member ToRequest(req: WatcherDeleteWatchRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_watcher/watch/{req.Id}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: WatcherDeleteWatchRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_watcher/watch/{req.Id}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
+            endpoint, ValueNone
 
     type WatcherDeleteWatchResponse = System.Text.Json.JsonElement
 
@@ -154,23 +138,19 @@ module WatcherOperations =
     }
 
         with
-        static member ToRequest(req: WatcherExecuteWatchRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_watcher/watch/{req.Id}/_execute"
-                let queryParams =
-                    [
-                        req.Debug |> Option.map (fun v -> "debug", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: WatcherExecuteWatchRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_watcher/watch/{req.Id}/_execute"
+            let queryParams =
+                [
+                    req.Debug |> Option.map (fun v -> "debug", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type WatcherExecuteWatchResponse = System.Text.Json.JsonElement
 
@@ -249,22 +229,18 @@ module WatcherOperations =
     }
 
         with
-        static member ToRequest(req: WatcherGetSettingsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_watcher/settings"
-                let queryParams =
-                    [
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: WatcherGetSettingsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_watcher/settings"
+            let queryParams =
+                [
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type WatcherGetSettingsResponse = System.Text.Json.JsonElement
 
@@ -289,15 +265,11 @@ module WatcherOperations =
     }
 
         with
-        static member ToRequest(req: WatcherGetWatchRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_watcher/watch/{req.Id}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: WatcherGetWatchRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_watcher/watch/{req.Id}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type WatcherGetWatchResponse = System.Text.Json.JsonElement
 
@@ -338,26 +310,22 @@ module WatcherOperations =
     }
 
         with
-        static member ToRequest(req: WatcherPutWatchRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_watcher/watch/{req.Id}"
-                let queryParams =
-                    [
-                        req.Active |> Option.map (fun v -> "active", Fes.Http.toQueryValue v)
-                        req.IfPrimaryTerm |> Option.map (fun v -> "if_primary_term", Fes.Http.toQueryValue v)
-                        req.IfSeqNo |> Option.map (fun v -> "if_seq_no", Fes.Http.toQueryValue v)
-                        req.Version |> Option.map (fun v -> "version", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: WatcherPutWatchRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_watcher/watch/{req.Id}"
+            let queryParams =
+                [
+                    req.Active |> Option.map (fun v -> "active", Fes.Http.toQueryValue v)
+                    req.IfPrimaryTerm |> Option.map (fun v -> "if_primary_term", Fes.Http.toQueryValue v)
+                    req.IfSeqNo |> Option.map (fun v -> "if_seq_no", Fes.Http.toQueryValue v)
+                    req.Version |> Option.map (fun v -> "version", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type WatcherPutWatchResponse = System.Text.Json.JsonElement
 
@@ -473,16 +441,12 @@ module WatcherOperations =
     }
 
         with
-        static member ToRequest(req: WatcherQueryWatchesRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_watcher/_query/watches"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: WatcherQueryWatchesRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_watcher/_query/watches"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type WatcherQueryWatchesResponse = System.Text.Json.JsonElement
 
@@ -535,22 +499,18 @@ module WatcherOperations =
     }
 
         with
-        static member ToRequest(req: WatcherStartRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_watcher/_start"
-                let queryParams =
-                    [
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: WatcherStartRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_watcher/_start"
+            let queryParams =
+                [
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            endpoint, ValueNone
 
     type WatcherStartResponse = Types.AcknowledgedResponseBase
 
@@ -577,23 +537,19 @@ module WatcherOperations =
     }
 
         with
-        static member ToRequest(req: WatcherStatsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_watcher/stats/{req.Metric}"
-                let queryParams =
-                    [
-                        req.EmitStacktraces |> Option.map (fun v -> "emit_stacktraces", Fes.Http.toQueryValue v)
-                        req.queryMetric |> Option.map (fun v -> "metric", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: WatcherStatsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_watcher/stats/{req.Metric}"
+            let queryParams =
+                [
+                    req.EmitStacktraces |> Option.map (fun v -> "emit_stacktraces", Fes.Http.toQueryValue v)
+                    req.queryMetric |> Option.map (fun v -> "metric", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type WatcherStatsResponse = System.Text.Json.JsonElement
 
@@ -630,22 +586,18 @@ module WatcherOperations =
     }
 
         with
-        static member ToRequest(req: WatcherStopRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_watcher/_stop"
-                let queryParams =
-                    [
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: WatcherStopRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_watcher/_stop"
+            let queryParams =
+                [
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            endpoint, ValueNone
 
     type WatcherStopResponse = Types.AcknowledgedResponseBase
 
@@ -675,24 +627,20 @@ module WatcherOperations =
     }
 
         with
-        static member ToRequest(req: WatcherUpdateSettingsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_watcher/settings"
-                let queryParams =
-                    [
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: WatcherUpdateSettingsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_watcher/settings"
+            let queryParams =
+                [
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type WatcherUpdateSettingsResponse = System.Text.Json.JsonElement
 

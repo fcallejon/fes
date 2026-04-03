@@ -6,6 +6,7 @@
         <RootNamespace>Fes</RootNamespace>
     </PropertyGroup>
     <ItemGroup>
+        <PackageReference Include="Elastic.Transport"/>
         <PackageReference Include="FSharp.Core"/>
         <PackageReference Include="FSharp.SystemTextJson"/>
     </ItemGroup>
@@ -23,6 +24,7 @@
         <!-- Core library files (after types/converters) -->
         <Compile Include="Json.fs"/>
         <Compile Include="Http.fs"/>
+        <Compile Include="Transport.fs"/>
         <!-- Generated builders -->
         <Compile Include="Generated/Builders/AsyncSearchStatusBuilders.g.fs"/>
         <Compile Include="Generated/Builders/AsyncSearchTypesBuilders.g.fs"/>

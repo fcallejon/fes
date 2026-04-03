@@ -21,25 +21,21 @@ module CatOperations =
     }
 
         with
-        static member ToRequest(req: CatAliasesRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_cat/aliases/{req.Name}"
-                let queryParams =
-                    [
-                        req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
-                        req.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
-                        req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: CatAliasesRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_cat/aliases/{req.Name}"
+            let queryParams =
+                [
+                    req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
+                    req.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
+                    req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type CatAliasesResponse = Types.AliasesRecord list
 
@@ -94,25 +90,21 @@ module CatOperations =
     }
 
         with
-        static member ToRequest(req: CatAllocationRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_cat/allocation/{req.NodeId}"
-                let queryParams =
-                    [
-                        req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
-                        req.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
-                        req.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: CatAllocationRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_cat/allocation/{req.NodeId}"
+            let queryParams =
+                [
+                    req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
+                    req.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
+                    req.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type CatAllocationResponse = Types.AllocationRecord list
 
@@ -167,25 +159,21 @@ module CatOperations =
     }
 
         with
-        static member ToRequest(req: CatCircuitBreakerRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_cat/circuit_breaker/{req.CircuitBreakerPatterns}"
-                let queryParams =
-                    [
-                        req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
-                        req.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
-                        req.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: CatCircuitBreakerRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_cat/circuit_breaker/{req.CircuitBreakerPatterns}"
+            let queryParams =
+                [
+                    req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
+                    req.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
+                    req.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type CatCircuitBreakerResponse = Types.CircuitBreakerRecord list
 
@@ -240,25 +228,21 @@ module CatOperations =
     }
 
         with
-        static member ToRequest(req: CatComponentTemplatesRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_cat/component_templates/{req.Name}"
-                let queryParams =
-                    [
-                        req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
-                        req.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
-                        req.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: CatComponentTemplatesRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_cat/component_templates/{req.Name}"
+            let queryParams =
+                [
+                    req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
+                    req.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
+                    req.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type CatComponentTemplatesResponse = Types.CatComponentTemplatesComponentTemplate list
 
@@ -313,24 +297,20 @@ module CatOperations =
     }
 
         with
-        static member ToRequest(req: CatCountRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_cat/count/{req.Index}"
-                let queryParams =
-                    [
-                        req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
-                        req.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: CatCountRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_cat/count/{req.Index}"
+            let queryParams =
+                [
+                    req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
+                    req.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type CatCountResponse = Types.CountRecord list
 
@@ -377,24 +357,20 @@ module CatOperations =
     }
 
         with
-        static member ToRequest(req: CatFielddataRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_cat/fielddata/{req.Fields}"
-                let queryParams =
-                    [
-                        req.queryFields |> Option.map (fun v -> "fields", Fes.Http.toQueryValue v)
-                        req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
-                        req.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: CatFielddataRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_cat/fielddata/{req.Fields}"
+            let queryParams =
+                [
+                    req.queryFields |> Option.map (fun v -> "fields", Fes.Http.toQueryValue v)
+                    req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
+                    req.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type CatFielddataResponse = Types.FielddataRecord list
 
@@ -440,24 +416,20 @@ module CatOperations =
     }
 
         with
-        static member ToRequest(req: CatHealthRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_cat/health"
-                let queryParams =
-                    [
-                        req.Ts |> Option.map (fun v -> "ts", Fes.Http.toQueryValue v)
-                        req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
-                        req.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: CatHealthRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_cat/health"
+            let queryParams =
+                [
+                    req.Ts |> Option.map (fun v -> "ts", Fes.Http.toQueryValue v)
+                    req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
+                    req.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type CatHealthResponse = Types.HealthRecord list
 
@@ -494,15 +466,11 @@ module CatOperations =
     type CatHelpRequest = | CatHelpRequest
 
         with
-        static member ToRequest(req: CatHelpRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_cat"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: CatHelpRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_cat"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type CatHelpResponse = System.Text.Json.JsonElement
 
@@ -518,28 +486,24 @@ module CatOperations =
     }
 
         with
-        static member ToRequest(req: CatIndicesRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_cat/indices/{req.Index}"
-                let queryParams =
-                    [
-                        req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
-                        req.Health |> Option.map (fun v -> "health", Fes.Http.toQueryValue v)
-                        req.IncludeUnloadedSegments |> Option.map (fun v -> "include_unloaded_segments", Fes.Http.toQueryValue v)
-                        req.Pri |> Option.map (fun v -> "pri", Fes.Http.toQueryValue v)
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                        req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
-                        req.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: CatIndicesRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_cat/indices/{req.Index}"
+            let queryParams =
+                [
+                    req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                    req.Health |> Option.map (fun v -> "health", Fes.Http.toQueryValue v)
+                    req.IncludeUnloadedSegments |> Option.map (fun v -> "include_unloaded_segments", Fes.Http.toQueryValue v)
+                    req.Pri |> Option.map (fun v -> "pri", Fes.Http.toQueryValue v)
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                    req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
+                    req.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type CatIndicesResponse = Types.IndicesRecord list
 
@@ -614,25 +578,21 @@ module CatOperations =
     }
 
         with
-        static member ToRequest(req: CatMasterRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_cat/master"
-                let queryParams =
-                    [
-                        req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
-                        req.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
-                        req.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: CatMasterRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_cat/master"
+            let queryParams =
+                [
+                    req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
+                    req.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
+                    req.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type CatMasterResponse = Types.MasterRecord list
 
@@ -681,24 +641,20 @@ module CatOperations =
     }
 
         with
-        static member ToRequest(req: CatMlDataFrameAnalyticsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_cat/ml/data_frame/analytics/{req.Id}"
-                let queryParams =
-                    [
-                        req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
-                        req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
-                        req.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: CatMlDataFrameAnalyticsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_cat/ml/data_frame/analytics/{req.Id}"
+            let queryParams =
+                [
+                    req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
+                    req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
+                    req.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type CatMlDataFrameAnalyticsResponse = Types.DataFrameAnalyticsRecord list
 
@@ -745,24 +701,20 @@ module CatOperations =
     }
 
         with
-        static member ToRequest(req: CatMlDatafeedsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_cat/ml/datafeeds/{req.DatafeedId}"
-                let queryParams =
-                    [
-                        req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
-                        req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
-                        req.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: CatMlDatafeedsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_cat/ml/datafeeds/{req.DatafeedId}"
+            let queryParams =
+                [
+                    req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
+                    req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
+                    req.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type CatMlDatafeedsResponse = Types.DatafeedsRecord list
 
@@ -809,24 +761,20 @@ module CatOperations =
     }
 
         with
-        static member ToRequest(req: CatMlJobsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_cat/ml/anomaly_detectors/{req.JobId}"
-                let queryParams =
-                    [
-                        req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
-                        req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
-                        req.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: CatMlJobsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_cat/ml/anomaly_detectors/{req.JobId}"
+            let queryParams =
+                [
+                    req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
+                    req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
+                    req.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type CatMlJobsResponse = Types.JobsRecord list
 
@@ -875,26 +823,22 @@ module CatOperations =
     }
 
         with
-        static member ToRequest(req: CatMlTrainedModelsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_cat/ml/trained_models/{req.ModelId}"
-                let queryParams =
-                    [
-                        req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
-                        req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
-                        req.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
-                        req.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
-                        req.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: CatMlTrainedModelsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_cat/ml/trained_models/{req.ModelId}"
+            let queryParams =
+                [
+                    req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
+                    req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
+                    req.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
+                    req.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
+                    req.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type CatMlTrainedModelsResponse = Types.TrainedModelsRecord list
 
@@ -955,25 +899,21 @@ module CatOperations =
     }
 
         with
-        static member ToRequest(req: CatNodeattrsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_cat/nodeattrs"
-                let queryParams =
-                    [
-                        req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
-                        req.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
-                        req.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: CatNodeattrsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_cat/nodeattrs"
+            let queryParams =
+                [
+                    req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
+                    req.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
+                    req.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type CatNodeattrsResponse = Types.NodeAttributesRecord list
 
@@ -1023,26 +963,22 @@ module CatOperations =
     }
 
         with
-        static member ToRequest(req: CatNodesRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_cat/nodes"
-                let queryParams =
-                    [
-                        req.FullId |> Option.map (fun v -> "full_id", Fes.Http.toQueryValue v)
-                        req.IncludeUnloadedSegments |> Option.map (fun v -> "include_unloaded_segments", Fes.Http.toQueryValue v)
-                        req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
-                        req.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: CatNodesRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_cat/nodes"
+            let queryParams =
+                [
+                    req.FullId |> Option.map (fun v -> "full_id", Fes.Http.toQueryValue v)
+                    req.IncludeUnloadedSegments |> Option.map (fun v -> "include_unloaded_segments", Fes.Http.toQueryValue v)
+                    req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
+                    req.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type CatNodesResponse = Types.NodesRecord list
 
@@ -1098,25 +1034,21 @@ module CatOperations =
     }
 
         with
-        static member ToRequest(req: CatPendingTasksRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_cat/pending_tasks"
-                let queryParams =
-                    [
-                        req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
-                        req.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
-                        req.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: CatPendingTasksRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_cat/pending_tasks"
+            let queryParams =
+                [
+                    req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
+                    req.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
+                    req.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type CatPendingTasksResponse = Types.PendingTasksRecord list
 
@@ -1166,26 +1098,22 @@ module CatOperations =
     }
 
         with
-        static member ToRequest(req: CatPluginsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_cat/plugins"
-                let queryParams =
-                    [
-                        req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
-                        req.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
-                        req.IncludeBootstrap |> Option.map (fun v -> "include_bootstrap", Fes.Http.toQueryValue v)
-                        req.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: CatPluginsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_cat/plugins"
+            let queryParams =
+                [
+                    req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
+                    req.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
+                    req.IncludeBootstrap |> Option.map (fun v -> "include_bootstrap", Fes.Http.toQueryValue v)
+                    req.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type CatPluginsResponse = Types.PluginsRecord list
 
@@ -1243,26 +1171,22 @@ module CatOperations =
     }
 
         with
-        static member ToRequest(req: CatRecoveryRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_cat/recovery/{req.Index}"
-                let queryParams =
-                    [
-                        req.ActiveOnly |> Option.map (fun v -> "active_only", Fes.Http.toQueryValue v)
-                        req.Detailed |> Option.map (fun v -> "detailed", Fes.Http.toQueryValue v)
-                        req.queryIndex |> Option.map (fun v -> "index", Fes.Http.toQueryValue v)
-                        req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
-                        req.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: CatRecoveryRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_cat/recovery/{req.Index}"
+            let queryParams =
+                [
+                    req.ActiveOnly |> Option.map (fun v -> "active_only", Fes.Http.toQueryValue v)
+                    req.Detailed |> Option.map (fun v -> "detailed", Fes.Http.toQueryValue v)
+                    req.queryIndex |> Option.map (fun v -> "index", Fes.Http.toQueryValue v)
+                    req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
+                    req.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type CatRecoveryResponse = Types.RecoveryRecord list
 
@@ -1323,25 +1247,21 @@ module CatOperations =
     }
 
         with
-        static member ToRequest(req: CatRepositoriesRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_cat/repositories"
-                let queryParams =
-                    [
-                        req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
-                        req.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
-                        req.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: CatRepositoriesRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_cat/repositories"
+            let queryParams =
+                [
+                    req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
+                    req.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
+                    req.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type CatRepositoriesResponse = Types.RepositoriesRecord list
 
@@ -1396,30 +1316,26 @@ module CatOperations =
     }
 
         with
-        static member ToRequest(req: CatSegmentsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_cat/segments/{req.Index}"
-                let queryParams =
-                    [
-                        req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
-                        req.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
-                        req.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                        req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
-                        req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
-                        req.IgnoreThrottled |> Option.map (fun v -> "ignore_throttled", Fes.Http.toQueryValue v)
-                        req.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
-                        req.AllowClosed |> Option.map (fun v -> "allow_closed", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: CatSegmentsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_cat/segments/{req.Index}"
+            let queryParams =
+                [
+                    req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
+                    req.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
+                    req.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                    req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                    req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                    req.IgnoreThrottled |> Option.map (fun v -> "ignore_throttled", Fes.Http.toQueryValue v)
+                    req.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                    req.AllowClosed |> Option.map (fun v -> "allow_closed", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type CatSegmentsResponse = Types.SegmentsRecord list
 
@@ -1508,24 +1424,20 @@ module CatOperations =
     }
 
         with
-        static member ToRequest(req: CatShardsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_cat/shards/{req.Index}"
-                let queryParams =
-                    [
-                        req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
-                        req.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: CatShardsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_cat/shards/{req.Index}"
+            let queryParams =
+                [
+                    req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
+                    req.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type CatShardsResponse = Types.ShardsRecord list
 
@@ -1573,25 +1485,21 @@ module CatOperations =
     }
 
         with
-        static member ToRequest(req: CatSnapshotsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_cat/snapshots/{req.Repository}"
-                let queryParams =
-                    [
-                        req.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
-                        req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
-                        req.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: CatSnapshotsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_cat/snapshots/{req.Repository}"
+            let queryParams =
+                [
+                    req.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                    req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
+                    req.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type CatSnapshotsResponse = Types.SnapshotsRecord list
 
@@ -1649,29 +1557,25 @@ module CatOperations =
     }
 
         with
-        static member ToRequest(req: CatTasksRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_cat/tasks"
-                let queryParams =
-                    [
-                        req.Actions |> Option.map (fun v -> "actions", Fes.Http.toQueryValue v)
-                        req.Detailed |> Option.map (fun v -> "detailed", Fes.Http.toQueryValue v)
-                        req.Nodes |> Option.map (fun v -> "nodes", Fes.Http.toQueryValue v)
-                        req.ParentTaskId |> Option.map (fun v -> "parent_task_id", Fes.Http.toQueryValue v)
-                        req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
-                        req.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                        req.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: CatTasksRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_cat/tasks"
+            let queryParams =
+                [
+                    req.Actions |> Option.map (fun v -> "actions", Fes.Http.toQueryValue v)
+                    req.Detailed |> Option.map (fun v -> "detailed", Fes.Http.toQueryValue v)
+                    req.Nodes |> Option.map (fun v -> "nodes", Fes.Http.toQueryValue v)
+                    req.ParentTaskId |> Option.map (fun v -> "parent_task_id", Fes.Http.toQueryValue v)
+                    req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
+                    req.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                    req.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type CatTasksResponse = Types.TasksRecord list
 
@@ -1749,25 +1653,21 @@ module CatOperations =
     }
 
         with
-        static member ToRequest(req: CatTemplatesRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_cat/templates/{req.Name}"
-                let queryParams =
-                    [
-                        req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
-                        req.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
-                        req.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: CatTemplatesRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_cat/templates/{req.Name}"
+            let queryParams =
+                [
+                    req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
+                    req.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
+                    req.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type CatTemplatesResponse = Types.TemplatesRecord list
 
@@ -1822,25 +1722,21 @@ module CatOperations =
     }
 
         with
-        static member ToRequest(req: CatThreadPoolRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_cat/thread_pool/{req.ThreadPoolPatterns}"
-                let queryParams =
-                    [
-                        req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
-                        req.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
-                        req.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: CatThreadPoolRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_cat/thread_pool/{req.ThreadPoolPatterns}"
+            let queryParams =
+                [
+                    req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
+                    req.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
+                    req.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type CatThreadPoolResponse = Types.ThreadPoolRecord list
 
@@ -1896,26 +1792,22 @@ module CatOperations =
     }
 
         with
-        static member ToRequest(req: CatTransformsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_cat/transforms/{req.TransformId}"
-                let queryParams =
-                    [
-                        req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
-                        req.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
-                        req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
-                        req.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
-                        req.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: CatTransformsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_cat/transforms/{req.TransformId}"
+            let queryParams =
+                [
+                    req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
+                    req.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
+                    req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
+                    req.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
+                    req.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type CatTransformsResponse = Types.TransformsRecord list
 

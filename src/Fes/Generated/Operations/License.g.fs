@@ -18,23 +18,19 @@ module LicenseOperations =
     }
 
         with
-        static member ToRequest(req: LicenseDeleteRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_license"
-                let queryParams =
-                    [
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: LicenseDeleteRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_license"
+            let queryParams =
+                [
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
+            endpoint, ValueNone
 
     type LicenseDeleteResponse = Types.AcknowledgedResponseBase
 
@@ -67,23 +63,19 @@ module LicenseOperations =
     }
 
         with
-        static member ToRequest(req: LicenseGetRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_license"
-                let queryParams =
-                    [
-                        req.AcceptEnterprise |> Option.map (fun v -> "accept_enterprise", Fes.Http.toQueryValue v)
-                        req.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: LicenseGetRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_license"
+            let queryParams =
+                [
+                    req.AcceptEnterprise |> Option.map (fun v -> "accept_enterprise", Fes.Http.toQueryValue v)
+                    req.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type LicenseGetResponse = System.Text.Json.JsonElement
 
@@ -113,30 +105,22 @@ module LicenseOperations =
     type LicenseGetBasicStatusRequest = | LicenseGetBasicStatusRequest
 
         with
-        static member ToRequest(req: LicenseGetBasicStatusRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_license/basic_status"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: LicenseGetBasicStatusRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_license/basic_status"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type LicenseGetBasicStatusResponse = System.Text.Json.JsonElement
 
     type LicenseGetTrialStatusRequest = | LicenseGetTrialStatusRequest
 
         with
-        static member ToRequest(req: LicenseGetTrialStatusRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_license/trial_status"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: LicenseGetTrialStatusRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_license/trial_status"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type LicenseGetTrialStatusResponse = System.Text.Json.JsonElement
 
@@ -151,25 +135,21 @@ module LicenseOperations =
     }
 
         with
-        static member ToRequest(req: LicensePostRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_license"
-                let queryParams =
-                    [
-                        req.Acknowledge |> Option.map (fun v -> "acknowledge", Fes.Http.toQueryValue v)
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: LicensePostRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_license"
+            let queryParams =
+                [
+                    req.Acknowledge |> Option.map (fun v -> "acknowledge", Fes.Http.toQueryValue v)
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type LicensePostResponse = System.Text.Json.JsonElement
 
@@ -224,24 +204,20 @@ module LicenseOperations =
     }
 
         with
-        static member ToRequest(req: LicensePostStartBasicRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_license/start_basic"
-                let queryParams =
-                    [
-                        req.Acknowledge |> Option.map (fun v -> "acknowledge", Fes.Http.toQueryValue v)
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: LicensePostStartBasicRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_license/start_basic"
+            let queryParams =
+                [
+                    req.Acknowledge |> Option.map (fun v -> "acknowledge", Fes.Http.toQueryValue v)
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            endpoint, ValueNone
 
     type LicensePostStartBasicResponse = System.Text.Json.JsonElement
 
@@ -282,24 +258,20 @@ module LicenseOperations =
     }
 
         with
-        static member ToRequest(req: LicensePostStartTrialRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_license/start_trial"
-                let queryParams =
-                    [
-                        req.Acknowledge |> Option.map (fun v -> "acknowledge", Fes.Http.toQueryValue v)
-                        req.Type |> Option.map (fun v -> "type", Fes.Http.toQueryValue v)
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: LicensePostStartTrialRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_license/start_trial"
+            let queryParams =
+                [
+                    req.Acknowledge |> Option.map (fun v -> "acknowledge", Fes.Http.toQueryValue v)
+                    req.Type |> Option.map (fun v -> "type", Fes.Http.toQueryValue v)
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            endpoint, ValueNone
 
     type LicensePostStartTrialResponse = System.Text.Json.JsonElement
 

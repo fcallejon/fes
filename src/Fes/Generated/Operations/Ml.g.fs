@@ -17,15 +17,11 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlClearTrainedModelDeploymentCacheRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/trained_models/{req.ModelId}/deployment/cache/_clear"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlClearTrainedModelDeploymentCacheRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/trained_models/{req.ModelId}/deployment/cache/_clear"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            endpoint, ValueNone
 
     type MlClearTrainedModelDeploymentCacheResponse = System.Text.Json.JsonElement
 
@@ -55,25 +51,21 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlCloseJobRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/anomaly_detectors/{req.JobId}/_close"
-                let queryParams =
-                    [
-                        req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
-                        req.Force |> Option.map (fun v -> "force", Fes.Http.toQueryValue v)
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlCloseJobRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/anomaly_detectors/{req.JobId}/_close"
+            let queryParams =
+                [
+                    req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
+                    req.Force |> Option.map (fun v -> "force", Fes.Http.toQueryValue v)
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type MlCloseJobResponse = System.Text.Json.JsonElement
 
@@ -138,15 +130,11 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlDeleteCalendarRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/calendars/{req.CalendarId}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlDeleteCalendarRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/calendars/{req.CalendarId}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
+            endpoint, ValueNone
 
     type MlDeleteCalendarResponse = Types.AcknowledgedResponseBase
 
@@ -168,15 +156,11 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlDeleteCalendarEventRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/calendars/{req.CalendarId}/events/{req.EventId}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlDeleteCalendarEventRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/calendars/{req.CalendarId}/events/{req.EventId}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
+            endpoint, ValueNone
 
     type MlDeleteCalendarEventResponse = Types.AcknowledgedResponseBase
 
@@ -203,15 +187,11 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlDeleteCalendarJobRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/calendars/{req.CalendarId}/jobs/{req.JobId}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlDeleteCalendarJobRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/calendars/{req.CalendarId}/jobs/{req.JobId}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
+            endpoint, ValueNone
 
     type MlDeleteCalendarJobResponse = System.Text.Json.JsonElement
 
@@ -239,23 +219,19 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlDeleteDataFrameAnalyticsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/data_frame/analytics/{req.Id}"
-                let queryParams =
-                    [
-                        req.Force |> Option.map (fun v -> "force", Fes.Http.toQueryValue v)
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlDeleteDataFrameAnalyticsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/data_frame/analytics/{req.Id}"
+            let queryParams =
+                [
+                    req.Force |> Option.map (fun v -> "force", Fes.Http.toQueryValue v)
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
+            endpoint, ValueNone
 
     type MlDeleteDataFrameAnalyticsResponse = Types.AcknowledgedResponseBase
 
@@ -293,22 +269,18 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlDeleteDatafeedRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/datafeeds/{req.DatafeedId}"
-                let queryParams =
-                    [
-                        req.Force |> Option.map (fun v -> "force", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlDeleteDatafeedRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/datafeeds/{req.DatafeedId}"
+            let queryParams =
+                [
+                    req.Force |> Option.map (fun v -> "force", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
+            endpoint, ValueNone
 
     type MlDeleteDatafeedResponse = Types.AcknowledgedResponseBase
 
@@ -344,24 +316,20 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlDeleteExpiredDataRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/_delete_expired_data/{req.JobId}"
-                let queryParams =
-                    [
-                        req.RequestsPerSecond |> Option.map (fun v -> "requests_per_second", Fes.Http.toQueryValue v)
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlDeleteExpiredDataRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/_delete_expired_data/{req.JobId}"
+            let queryParams =
+                [
+                    req.RequestsPerSecond |> Option.map (fun v -> "requests_per_second", Fes.Http.toQueryValue v)
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type MlDeleteExpiredDataResponse = System.Text.Json.JsonElement
 
@@ -412,15 +380,11 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlDeleteFilterRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/filters/{req.FilterId}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlDeleteFilterRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/filters/{req.FilterId}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
+            endpoint, ValueNone
 
     type MlDeleteFilterResponse = Types.AcknowledgedResponseBase
 
@@ -444,23 +408,19 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlDeleteForecastRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/anomaly_detectors/{req.JobId}/_forecast/{req.ForecastId}"
-                let queryParams =
-                    [
-                        req.AllowNoForecasts |> Option.map (fun v -> "allow_no_forecasts", Fes.Http.toQueryValue v)
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlDeleteForecastRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/anomaly_detectors/{req.JobId}/_forecast/{req.ForecastId}"
+            let queryParams =
+                [
+                    req.AllowNoForecasts |> Option.map (fun v -> "allow_no_forecasts", Fes.Http.toQueryValue v)
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
+            endpoint, ValueNone
 
     type MlDeleteForecastResponse = Types.AcknowledgedResponseBase
 
@@ -505,24 +465,20 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlDeleteJobRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/anomaly_detectors/{req.JobId}"
-                let queryParams =
-                    [
-                        req.Force |> Option.map (fun v -> "force", Fes.Http.toQueryValue v)
-                        req.DeleteUserAnnotations |> Option.map (fun v -> "delete_user_annotations", Fes.Http.toQueryValue v)
-                        req.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlDeleteJobRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/anomaly_detectors/{req.JobId}"
+            let queryParams =
+                [
+                    req.Force |> Option.map (fun v -> "force", Fes.Http.toQueryValue v)
+                    req.DeleteUserAnnotations |> Option.map (fun v -> "delete_user_annotations", Fes.Http.toQueryValue v)
+                    req.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
+            endpoint, ValueNone
 
     type MlDeleteJobResponse = Types.AcknowledgedResponseBase
 
@@ -567,15 +523,11 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlDeleteModelSnapshotRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/anomaly_detectors/{req.JobId}/model_snapshots/{req.SnapshotId}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlDeleteModelSnapshotRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/anomaly_detectors/{req.JobId}/model_snapshots/{req.SnapshotId}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
+            endpoint, ValueNone
 
     type MlDeleteModelSnapshotResponse = Types.AcknowledgedResponseBase
 
@@ -603,23 +555,19 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlDeleteTrainedModelRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/trained_models/{req.ModelId}"
-                let queryParams =
-                    [
-                        req.Force |> Option.map (fun v -> "force", Fes.Http.toQueryValue v)
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlDeleteTrainedModelRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/trained_models/{req.ModelId}"
+            let queryParams =
+                [
+                    req.Force |> Option.map (fun v -> "force", Fes.Http.toQueryValue v)
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
+            endpoint, ValueNone
 
     type MlDeleteTrainedModelResponse = Types.AcknowledgedResponseBase
 
@@ -657,15 +605,11 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlDeleteTrainedModelAliasRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/trained_models/{req.ModelId}/model_aliases/{req.ModelAlias}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlDeleteTrainedModelAliasRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/trained_models/{req.ModelId}/model_aliases/{req.ModelAlias}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
+            endpoint, ValueNone
 
     type MlDeleteTrainedModelAliasResponse = Types.AcknowledgedResponseBase
 
@@ -696,16 +640,12 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlEstimateModelMemoryRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/anomaly_detectors/_estimate_model_memory"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlEstimateModelMemoryRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/anomaly_detectors/_estimate_model_memory"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type MlEstimateModelMemoryResponse = System.Text.Json.JsonElement
 
@@ -749,16 +689,12 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlEvaluateDataFrameRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/data_frame/_evaluate"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlEvaluateDataFrameRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/data_frame/_evaluate"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type MlEvaluateDataFrameResponse = System.Text.Json.JsonElement
 
@@ -813,16 +749,12 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlExplainDataFrameAnalyticsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/data_frame/analytics/{req.Id}/_explain"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlExplainDataFrameAnalyticsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/data_frame/analytics/{req.Id}/_explain"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type MlExplainDataFrameAnalyticsResponse = System.Text.Json.JsonElement
 
@@ -916,27 +848,23 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlFlushJobRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/anomaly_detectors/{req.JobId}/_flush"
-                let queryParams =
-                    [
-                        req.AdvanceTime |> Option.map (fun v -> "advance_time", Fes.Http.toQueryValue v)
-                        req.CalcInterim |> Option.map (fun v -> "calc_interim", Fes.Http.toQueryValue v)
-                        req.End |> Option.map (fun v -> "end", Fes.Http.toQueryValue v)
-                        req.SkipTime |> Option.map (fun v -> "skip_time", Fes.Http.toQueryValue v)
-                        req.Start |> Option.map (fun v -> "start", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlFlushJobRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/anomaly_detectors/{req.JobId}/_flush"
+            let queryParams =
+                [
+                    req.AdvanceTime |> Option.map (fun v -> "advance_time", Fes.Http.toQueryValue v)
+                    req.CalcInterim |> Option.map (fun v -> "calc_interim", Fes.Http.toQueryValue v)
+                    req.End |> Option.map (fun v -> "end", Fes.Http.toQueryValue v)
+                    req.SkipTime |> Option.map (fun v -> "skip_time", Fes.Http.toQueryValue v)
+                    req.Start |> Option.map (fun v -> "start", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type MlFlushJobResponse = System.Text.Json.JsonElement
 
@@ -1038,25 +966,21 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlForecastRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/anomaly_detectors/{req.JobId}/_forecast"
-                let queryParams =
-                    [
-                        req.Duration |> Option.map (fun v -> "duration", Fes.Http.toQueryValue v)
-                        req.ExpiresIn |> Option.map (fun v -> "expires_in", Fes.Http.toQueryValue v)
-                        req.MaxModelMemory |> Option.map (fun v -> "max_model_memory", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlForecastRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/anomaly_detectors/{req.JobId}/_forecast"
+            let queryParams =
+                [
+                    req.Duration |> Option.map (fun v -> "duration", Fes.Http.toQueryValue v)
+                    req.ExpiresIn |> Option.map (fun v -> "expires_in", Fes.Http.toQueryValue v)
+                    req.MaxModelMemory |> Option.map (fun v -> "max_model_memory", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type MlForecastResponse = System.Text.Json.JsonElement
 
@@ -1147,31 +1071,27 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlGetBucketsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/anomaly_detectors/{req.JobId}/results/buckets/{req.Timestamp}"
-                let queryParams =
-                    [
-                        req.AnomalyScore |> Option.map (fun v -> "anomaly_score", Fes.Http.toQueryValue v)
-                        req.Desc |> Option.map (fun v -> "desc", Fes.Http.toQueryValue v)
-                        req.End |> Option.map (fun v -> "end", Fes.Http.toQueryValue v)
-                        req.ExcludeInterim |> Option.map (fun v -> "exclude_interim", Fes.Http.toQueryValue v)
-                        req.Expand |> Option.map (fun v -> "expand", Fes.Http.toQueryValue v)
-                        req.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
-                        req.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
-                        req.Sort |> Option.map (fun v -> "sort", Fes.Http.toQueryValue v)
-                        req.Start |> Option.map (fun v -> "start", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlGetBucketsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/anomaly_detectors/{req.JobId}/results/buckets/{req.Timestamp}"
+            let queryParams =
+                [
+                    req.AnomalyScore |> Option.map (fun v -> "anomaly_score", Fes.Http.toQueryValue v)
+                    req.Desc |> Option.map (fun v -> "desc", Fes.Http.toQueryValue v)
+                    req.End |> Option.map (fun v -> "end", Fes.Http.toQueryValue v)
+                    req.ExcludeInterim |> Option.map (fun v -> "exclude_interim", Fes.Http.toQueryValue v)
+                    req.Expand |> Option.map (fun v -> "expand", Fes.Http.toQueryValue v)
+                    req.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
+                    req.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
+                    req.Sort |> Option.map (fun v -> "sort", Fes.Http.toQueryValue v)
+                    req.Start |> Option.map (fun v -> "start", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type MlGetBucketsResponse = System.Text.Json.JsonElement
 
@@ -1323,26 +1243,22 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlGetCalendarEventsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/calendars/{req.CalendarId}/events"
-                let queryParams =
-                    [
-                        req.End |> Option.map (fun v -> "end", Fes.Http.toQueryValue v)
-                        req.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
-                        req.JobId |> Option.map (fun v -> "job_id", Fes.Http.toQueryValue v)
-                        req.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
-                        req.Start |> Option.map (fun v -> "start", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlGetCalendarEventsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/calendars/{req.CalendarId}/events"
+            let queryParams =
+                [
+                    req.End |> Option.map (fun v -> "end", Fes.Http.toQueryValue v)
+                    req.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
+                    req.JobId |> Option.map (fun v -> "job_id", Fes.Http.toQueryValue v)
+                    req.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
+                    req.Start |> Option.map (fun v -> "start", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type MlGetCalendarEventsResponse = System.Text.Json.JsonElement
 
@@ -1404,24 +1320,20 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlGetCalendarsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/calendars/{req.CalendarId}"
-                let queryParams =
-                    [
-                        req.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
-                        req.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlGetCalendarsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/calendars/{req.CalendarId}"
+            let queryParams =
+                [
+                    req.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
+                    req.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type MlGetCalendarsResponse = System.Text.Json.JsonElement
 
@@ -1471,25 +1383,21 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlGetCategoriesRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/anomaly_detectors/{req.JobId}/results/categories/{req.CategoryId}"
-                let queryParams =
-                    [
-                        req.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
-                        req.PartitionFieldValue |> Option.map (fun v -> "partition_field_value", Fes.Http.toQueryValue v)
-                        req.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlGetCategoriesRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/anomaly_detectors/{req.JobId}/results/categories/{req.CategoryId}"
+            let queryParams =
+                [
+                    req.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
+                    req.PartitionFieldValue |> Option.map (fun v -> "partition_field_value", Fes.Http.toQueryValue v)
+                    req.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type MlGetCategoriesResponse = System.Text.Json.JsonElement
 
@@ -1549,25 +1457,21 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlGetDataFrameAnalyticsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/data_frame/analytics/{req.Id}"
-                let queryParams =
-                    [
-                        req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
-                        req.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
-                        req.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
-                        req.ExcludeGenerated |> Option.map (fun v -> "exclude_generated", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlGetDataFrameAnalyticsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/data_frame/analytics/{req.Id}"
+            let queryParams =
+                [
+                    req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
+                    req.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
+                    req.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
+                    req.ExcludeGenerated |> Option.map (fun v -> "exclude_generated", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type MlGetDataFrameAnalyticsResponse = System.Text.Json.JsonElement
 
@@ -1622,25 +1526,21 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlGetDataFrameAnalyticsStatsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/data_frame/analytics/{req.Id}/_stats"
-                let queryParams =
-                    [
-                        req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
-                        req.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
-                        req.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
-                        req.Verbose |> Option.map (fun v -> "verbose", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlGetDataFrameAnalyticsStatsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/data_frame/analytics/{req.Id}/_stats"
+            let queryParams =
+                [
+                    req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
+                    req.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
+                    req.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
+                    req.Verbose |> Option.map (fun v -> "verbose", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type MlGetDataFrameAnalyticsStatsResponse = System.Text.Json.JsonElement
 
@@ -1692,22 +1592,18 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlGetDatafeedStatsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/datafeeds/{req.DatafeedId}/_stats"
-                let queryParams =
-                    [
-                        req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlGetDatafeedStatsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/datafeeds/{req.DatafeedId}/_stats"
+            let queryParams =
+                [
+                    req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type MlGetDatafeedStatsResponse = System.Text.Json.JsonElement
 
@@ -1739,23 +1635,19 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlGetDatafeedsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/datafeeds/{req.DatafeedId}"
-                let queryParams =
-                    [
-                        req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
-                        req.ExcludeGenerated |> Option.map (fun v -> "exclude_generated", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlGetDatafeedsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/datafeeds/{req.DatafeedId}"
+            let queryParams =
+                [
+                    req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
+                    req.ExcludeGenerated |> Option.map (fun v -> "exclude_generated", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type MlGetDatafeedsResponse = System.Text.Json.JsonElement
 
@@ -1794,23 +1686,19 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlGetFiltersRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/filters/{req.FilterId}"
-                let queryParams =
-                    [
-                        req.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
-                        req.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlGetFiltersRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/filters/{req.FilterId}"
+            let queryParams =
+                [
+                    req.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
+                    req.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type MlGetFiltersResponse = System.Text.Json.JsonElement
 
@@ -1857,30 +1745,26 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlGetInfluencersRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/anomaly_detectors/{req.JobId}/results/influencers"
-                let queryParams =
-                    [
-                        req.Desc |> Option.map (fun v -> "desc", Fes.Http.toQueryValue v)
-                        req.End |> Option.map (fun v -> "end", Fes.Http.toQueryValue v)
-                        req.ExcludeInterim |> Option.map (fun v -> "exclude_interim", Fes.Http.toQueryValue v)
-                        req.InfluencerScore |> Option.map (fun v -> "influencer_score", Fes.Http.toQueryValue v)
-                        req.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
-                        req.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
-                        req.Sort |> Option.map (fun v -> "sort", Fes.Http.toQueryValue v)
-                        req.Start |> Option.map (fun v -> "start", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlGetInfluencersRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/anomaly_detectors/{req.JobId}/results/influencers"
+            let queryParams =
+                [
+                    req.Desc |> Option.map (fun v -> "desc", Fes.Http.toQueryValue v)
+                    req.End |> Option.map (fun v -> "end", Fes.Http.toQueryValue v)
+                    req.ExcludeInterim |> Option.map (fun v -> "exclude_interim", Fes.Http.toQueryValue v)
+                    req.InfluencerScore |> Option.map (fun v -> "influencer_score", Fes.Http.toQueryValue v)
+                    req.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
+                    req.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
+                    req.Sort |> Option.map (fun v -> "sort", Fes.Http.toQueryValue v)
+                    req.Start |> Option.map (fun v -> "start", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type MlGetInfluencersResponse = System.Text.Json.JsonElement
 
@@ -1967,22 +1851,18 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlGetJobStatsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/anomaly_detectors/{req.JobId}/_stats"
-                let queryParams =
-                    [
-                        req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlGetJobStatsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/anomaly_detectors/{req.JobId}/_stats"
+            let queryParams =
+                [
+                    req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type MlGetJobStatsResponse = System.Text.Json.JsonElement
 
@@ -2014,23 +1894,19 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlGetJobsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/anomaly_detectors/{req.JobId}"
-                let queryParams =
-                    [
-                        req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
-                        req.ExcludeGenerated |> Option.map (fun v -> "exclude_generated", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlGetJobsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/anomaly_detectors/{req.JobId}"
+            let queryParams =
+                [
+                    req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
+                    req.ExcludeGenerated |> Option.map (fun v -> "exclude_generated", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type MlGetJobsResponse = System.Text.Json.JsonElement
 
@@ -2069,23 +1945,19 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlGetMemoryStatsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/memory/{req.NodeId}/_stats"
-                let queryParams =
-                    [
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlGetMemoryStatsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/memory/{req.NodeId}/_stats"
+            let queryParams =
+                [
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type MlGetMemoryStatsResponse = System.Text.Json.JsonElement
 
@@ -2124,22 +1996,18 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlGetModelSnapshotUpgradeStatsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/anomaly_detectors/{req.JobId}/model_snapshots/{req.SnapshotId}/_upgrade/_stats"
-                let queryParams =
-                    [
-                        req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlGetModelSnapshotUpgradeStatsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/anomaly_detectors/{req.JobId}/model_snapshots/{req.SnapshotId}/_upgrade/_stats"
+            let queryParams =
+                [
+                    req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type MlGetModelSnapshotUpgradeStatsResponse = System.Text.Json.JsonElement
 
@@ -2191,28 +2059,24 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlGetModelSnapshotsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/anomaly_detectors/{req.JobId}/model_snapshots/{req.SnapshotId}"
-                let queryParams =
-                    [
-                        req.Desc |> Option.map (fun v -> "desc", Fes.Http.toQueryValue v)
-                        req.End |> Option.map (fun v -> "end", Fes.Http.toQueryValue v)
-                        req.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
-                        req.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
-                        req.Sort |> Option.map (fun v -> "sort", Fes.Http.toQueryValue v)
-                        req.Start |> Option.map (fun v -> "start", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlGetModelSnapshotsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/anomaly_detectors/{req.JobId}/model_snapshots/{req.SnapshotId}"
+            let queryParams =
+                [
+                    req.Desc |> Option.map (fun v -> "desc", Fes.Http.toQueryValue v)
+                    req.End |> Option.map (fun v -> "end", Fes.Http.toQueryValue v)
+                    req.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
+                    req.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
+                    req.Sort |> Option.map (fun v -> "sort", Fes.Http.toQueryValue v)
+                    req.Start |> Option.map (fun v -> "start", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type MlGetModelSnapshotsResponse = System.Text.Json.JsonElement
 
@@ -2338,29 +2202,25 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlGetOverallBucketsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/anomaly_detectors/{req.JobId}/results/overall_buckets"
-                let queryParams =
-                    [
-                        req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
-                        req.BucketSpan |> Option.map (fun v -> "bucket_span", Fes.Http.toQueryValue v)
-                        req.End |> Option.map (fun v -> "end", Fes.Http.toQueryValue v)
-                        req.ExcludeInterim |> Option.map (fun v -> "exclude_interim", Fes.Http.toQueryValue v)
-                        req.OverallScore |> Option.map (fun v -> "overall_score", Fes.Http.toQueryValue v)
-                        req.Start |> Option.map (fun v -> "start", Fes.Http.toQueryValue v)
-                        req.TopN |> Option.map (fun v -> "top_n", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlGetOverallBucketsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/anomaly_detectors/{req.JobId}/results/overall_buckets"
+            let queryParams =
+                [
+                    req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
+                    req.BucketSpan |> Option.map (fun v -> "bucket_span", Fes.Http.toQueryValue v)
+                    req.End |> Option.map (fun v -> "end", Fes.Http.toQueryValue v)
+                    req.ExcludeInterim |> Option.map (fun v -> "exclude_interim", Fes.Http.toQueryValue v)
+                    req.OverallScore |> Option.map (fun v -> "overall_score", Fes.Http.toQueryValue v)
+                    req.Start |> Option.map (fun v -> "start", Fes.Http.toQueryValue v)
+                    req.TopN |> Option.map (fun v -> "top_n", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type MlGetOverallBucketsResponse = System.Text.Json.JsonElement
 
@@ -2503,30 +2363,26 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlGetRecordsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/anomaly_detectors/{req.JobId}/results/records"
-                let queryParams =
-                    [
-                        req.Desc |> Option.map (fun v -> "desc", Fes.Http.toQueryValue v)
-                        req.End |> Option.map (fun v -> "end", Fes.Http.toQueryValue v)
-                        req.ExcludeInterim |> Option.map (fun v -> "exclude_interim", Fes.Http.toQueryValue v)
-                        req.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
-                        req.RecordScore |> Option.map (fun v -> "record_score", Fes.Http.toQueryValue v)
-                        req.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
-                        req.Sort |> Option.map (fun v -> "sort", Fes.Http.toQueryValue v)
-                        req.Start |> Option.map (fun v -> "start", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlGetRecordsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/anomaly_detectors/{req.JobId}/results/records"
+            let queryParams =
+                [
+                    req.Desc |> Option.map (fun v -> "desc", Fes.Http.toQueryValue v)
+                    req.End |> Option.map (fun v -> "end", Fes.Http.toQueryValue v)
+                    req.ExcludeInterim |> Option.map (fun v -> "exclude_interim", Fes.Http.toQueryValue v)
+                    req.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
+                    req.RecordScore |> Option.map (fun v -> "record_score", Fes.Http.toQueryValue v)
+                    req.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
+                    req.Sort |> Option.map (fun v -> "sort", Fes.Http.toQueryValue v)
+                    req.Start |> Option.map (fun v -> "start", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type MlGetRecordsResponse = System.Text.Json.JsonElement
 
@@ -2661,28 +2517,24 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlGetTrainedModelsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/trained_models/{req.ModelId}"
-                let queryParams =
-                    [
-                        req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
-                        req.DecompressDefinition |> Option.map (fun v -> "decompress_definition", Fes.Http.toQueryValue v)
-                        req.ExcludeGenerated |> Option.map (fun v -> "exclude_generated", Fes.Http.toQueryValue v)
-                        req.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
-                        req.Include |> Option.map (fun v -> "include", Fes.Http.toQueryValue v)
-                        req.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
-                        req.Tags |> Option.map (fun v -> "tags", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlGetTrainedModelsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/trained_models/{req.ModelId}"
+            let queryParams =
+                [
+                    req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
+                    req.DecompressDefinition |> Option.map (fun v -> "decompress_definition", Fes.Http.toQueryValue v)
+                    req.ExcludeGenerated |> Option.map (fun v -> "exclude_generated", Fes.Http.toQueryValue v)
+                    req.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
+                    req.Include |> Option.map (fun v -> "include", Fes.Http.toQueryValue v)
+                    req.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
+                    req.Tags |> Option.map (fun v -> "tags", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type MlGetTrainedModelsResponse = System.Text.Json.JsonElement
 
@@ -2757,24 +2609,20 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlGetTrainedModelsStatsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/trained_models/{req.ModelId}/_stats"
-                let queryParams =
-                    [
-                        req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
-                        req.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
-                        req.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlGetTrainedModelsStatsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/trained_models/{req.ModelId}/_stats"
+            let queryParams =
+                [
+                    req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
+                    req.From |> Option.map (fun v -> "from", Fes.Http.toQueryValue v)
+                    req.Size |> Option.map (fun v -> "size", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type MlGetTrainedModelsStatsResponse = System.Text.Json.JsonElement
 
@@ -2823,23 +2671,19 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlInferTrainedModelRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/trained_models/{req.ModelId}/_infer"
-                let queryParams =
-                    [
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlInferTrainedModelRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/trained_models/{req.ModelId}/_infer"
+            let queryParams =
+                [
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type MlInferTrainedModelResponse = System.Text.Json.JsonElement
 
@@ -2881,15 +2725,11 @@ module MlOperations =
     type MlInfoRequest = | MlInfoRequest
 
         with
-        static member ToRequest(req: MlInfoRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/info"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlInfoRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/info"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type MlInfoResponse = System.Text.Json.JsonElement
 
@@ -2901,23 +2741,19 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlOpenJobRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/anomaly_detectors/{req.JobId}/_open"
-                let queryParams =
-                    [
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlOpenJobRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/anomaly_detectors/{req.JobId}/_open"
+            let queryParams =
+                [
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type MlOpenJobResponse = System.Text.Json.JsonElement
 
@@ -2956,16 +2792,12 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlPostCalendarEventsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/calendars/{req.CalendarId}/events"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlPostCalendarEventsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/calendars/{req.CalendarId}/events"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type MlPostCalendarEventsResponse = System.Text.Json.JsonElement
 
@@ -3006,16 +2838,12 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlPreviewDataFrameAnalyticsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/data_frame/analytics/{req.Id}/_preview"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlPreviewDataFrameAnalyticsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/data_frame/analytics/{req.Id}/_preview"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type MlPreviewDataFrameAnalyticsResponse = System.Text.Json.JsonElement
 
@@ -3051,24 +2879,20 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlPreviewDatafeedRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/datafeeds/{req.DatafeedId}/_preview"
-                let queryParams =
-                    [
-                        req.Start |> Option.map (fun v -> "start", Fes.Http.toQueryValue v)
-                        req.End |> Option.map (fun v -> "end", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlPreviewDatafeedRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/datafeeds/{req.DatafeedId}/_preview"
+            let queryParams =
+                [
+                    req.Start |> Option.map (fun v -> "start", Fes.Http.toQueryValue v)
+                    req.End |> Option.map (fun v -> "end", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type MlPreviewDatafeedResponse<'tDocument> = 'tDocument list
 
@@ -3123,16 +2947,12 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlPutCalendarRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/calendars/{req.CalendarId}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlPutCalendarRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/calendars/{req.CalendarId}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type MlPutCalendarResponse = System.Text.Json.JsonElement
 
@@ -3170,15 +2990,11 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlPutCalendarJobRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/calendars/{req.CalendarId}/jobs/{req.JobId}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlPutCalendarJobRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/calendars/{req.CalendarId}/jobs/{req.JobId}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
+            endpoint, ValueNone
 
     type MlPutCalendarJobResponse = System.Text.Json.JsonElement
 
@@ -3226,16 +3042,12 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlPutDataFrameAnalyticsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/data_frame/analytics/{req.Id}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlPutDataFrameAnalyticsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/data_frame/analytics/{req.Id}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type MlPutDataFrameAnalyticsResponse = System.Text.Json.JsonElement
 
@@ -3367,26 +3179,22 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlPutDatafeedRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/datafeeds/{req.DatafeedId}"
-                let queryParams =
-                    [
-                        req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
-                        req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
-                        req.IgnoreThrottled |> Option.map (fun v -> "ignore_throttled", Fes.Http.toQueryValue v)
-                        req.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlPutDatafeedRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/datafeeds/{req.DatafeedId}"
+            let queryParams =
+                [
+                    req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                    req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                    req.IgnoreThrottled |> Option.map (fun v -> "ignore_throttled", Fes.Http.toQueryValue v)
+                    req.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type MlPutDatafeedResponse = System.Text.Json.JsonElement
 
@@ -3539,16 +3347,12 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlPutFilterRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/filters/{req.FilterId}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlPutFilterRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/filters/{req.FilterId}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type MlPutFilterResponse = System.Text.Json.JsonElement
 
@@ -3621,26 +3425,22 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlPutJobRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/anomaly_detectors/{req.JobId}"
-                let queryParams =
-                    [
-                        req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
-                        req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
-                        req.IgnoreThrottled |> Option.map (fun v -> "ignore_throttled", Fes.Http.toQueryValue v)
-                        req.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlPutJobRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/anomaly_detectors/{req.JobId}"
+            let queryParams =
+                [
+                    req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                    req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                    req.IgnoreThrottled |> Option.map (fun v -> "ignore_throttled", Fes.Http.toQueryValue v)
+                    req.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type MlPutJobResponse = System.Text.Json.JsonElement
 
@@ -3827,24 +3627,20 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlPutTrainedModelRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/trained_models/{req.ModelId}"
-                let queryParams =
-                    [
-                        req.DeferDefinitionDecompression |> Option.map (fun v -> "defer_definition_decompression", Fes.Http.toQueryValue v)
-                        req.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlPutTrainedModelRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/trained_models/{req.ModelId}"
+            let queryParams =
+                [
+                    req.DeferDefinitionDecompression |> Option.map (fun v -> "defer_definition_decompression", Fes.Http.toQueryValue v)
+                    req.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type MlPutTrainedModelResponse = Types.TrainedModelConfig
 
@@ -3960,22 +3756,18 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlPutTrainedModelAliasRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/trained_models/{req.ModelId}/model_aliases/{req.ModelAlias}"
-                let queryParams =
-                    [
-                        req.Reassign |> Option.map (fun v -> "reassign", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlPutTrainedModelAliasRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/trained_models/{req.ModelId}/model_aliases/{req.ModelAlias}"
+            let queryParams =
+                [
+                    req.Reassign |> Option.map (fun v -> "reassign", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
+            endpoint, ValueNone
 
     type MlPutTrainedModelAliasResponse = Types.AcknowledgedResponseBase
 
@@ -4017,16 +3809,12 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlPutTrainedModelDefinitionPartRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/trained_models/{req.ModelId}/definition/{req.Part}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlPutTrainedModelDefinitionPartRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/trained_models/{req.ModelId}/definition/{req.Part}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type MlPutTrainedModelDefinitionPartResponse = Types.AcknowledgedResponseBase
 
@@ -4081,16 +3869,12 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlPutTrainedModelVocabularyRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/trained_models/{req.ModelId}/vocabulary"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlPutTrainedModelVocabularyRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/trained_models/{req.ModelId}/vocabulary"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type MlPutTrainedModelVocabularyResponse = Types.AcknowledgedResponseBase
 
@@ -4136,23 +3920,19 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlResetJobRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/anomaly_detectors/{req.JobId}/_reset"
-                let queryParams =
-                    [
-                        req.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", Fes.Http.toQueryValue v)
-                        req.DeleteUserAnnotations |> Option.map (fun v -> "delete_user_annotations", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlResetJobRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/anomaly_detectors/{req.JobId}/_reset"
+            let queryParams =
+                [
+                    req.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", Fes.Http.toQueryValue v)
+                    req.DeleteUserAnnotations |> Option.map (fun v -> "delete_user_annotations", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            endpoint, ValueNone
 
     type MlResetJobResponse = Types.AcknowledgedResponseBase
 
@@ -4193,23 +3973,19 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlRevertModelSnapshotRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/anomaly_detectors/{req.JobId}/model_snapshots/{req.SnapshotId}/_revert"
-                let queryParams =
-                    [
-                        req.DeleteInterveningResults |> Option.map (fun v -> "delete_intervening_results", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlRevertModelSnapshotRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/anomaly_detectors/{req.JobId}/model_snapshots/{req.SnapshotId}/_revert"
+            let queryParams =
+                [
+                    req.DeleteInterveningResults |> Option.map (fun v -> "delete_intervening_results", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type MlRevertModelSnapshotResponse = System.Text.Json.JsonElement
 
@@ -4252,23 +4028,19 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlSetUpgradeModeRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/set_upgrade_mode"
-                let queryParams =
-                    [
-                        req.Enabled |> Option.map (fun v -> "enabled", Fes.Http.toQueryValue v)
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlSetUpgradeModeRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/set_upgrade_mode"
+            let queryParams =
+                [
+                    req.Enabled |> Option.map (fun v -> "enabled", Fes.Http.toQueryValue v)
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            endpoint, ValueNone
 
     type MlSetUpgradeModeResponse = Types.AcknowledgedResponseBase
 
@@ -4305,23 +4077,19 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlStartDataFrameAnalyticsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/data_frame/analytics/{req.Id}/_start"
-                let queryParams =
-                    [
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlStartDataFrameAnalyticsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/data_frame/analytics/{req.Id}/_start"
+            let queryParams =
+                [
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type MlStartDataFrameAnalyticsResponse = System.Text.Json.JsonElement
 
@@ -4374,25 +4142,21 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlStartDatafeedRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/datafeeds/{req.DatafeedId}/_start"
-                let queryParams =
-                    [
-                        req.End |> Option.map (fun v -> "end", Fes.Http.toQueryValue v)
-                        req.Start |> Option.map (fun v -> "start", Fes.Http.toQueryValue v)
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlStartDatafeedRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/datafeeds/{req.DatafeedId}/_start"
+            let queryParams =
+                [
+                    req.End |> Option.map (fun v -> "end", Fes.Http.toQueryValue v)
+                    req.Start |> Option.map (fun v -> "start", Fes.Http.toQueryValue v)
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type MlStartDatafeedResponse = System.Text.Json.JsonElement
 
@@ -4467,30 +4231,26 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlStartTrainedModelDeploymentRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/trained_models/{req.ModelId}/deployment/_start"
-                let queryParams =
-                    [
-                        req.CacheSize |> Option.map (fun v -> "cache_size", Fes.Http.toQueryValue v)
-                        req.DeploymentId |> Option.map (fun v -> "deployment_id", Fes.Http.toQueryValue v)
-                        req.NumberOfAllocations |> Option.map (fun v -> "number_of_allocations", Fes.Http.toQueryValue v)
-                        req.Priority |> Option.map (fun v -> "priority", Fes.Http.toQueryValue v)
-                        req.QueueCapacity |> Option.map (fun v -> "queue_capacity", Fes.Http.toQueryValue v)
-                        req.ThreadsPerAllocation |> Option.map (fun v -> "threads_per_allocation", Fes.Http.toQueryValue v)
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                        req.WaitFor |> Option.map (fun v -> "wait_for", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlStartTrainedModelDeploymentRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/trained_models/{req.ModelId}/deployment/_start"
+            let queryParams =
+                [
+                    req.CacheSize |> Option.map (fun v -> "cache_size", Fes.Http.toQueryValue v)
+                    req.DeploymentId |> Option.map (fun v -> "deployment_id", Fes.Http.toQueryValue v)
+                    req.NumberOfAllocations |> Option.map (fun v -> "number_of_allocations", Fes.Http.toQueryValue v)
+                    req.Priority |> Option.map (fun v -> "priority", Fes.Http.toQueryValue v)
+                    req.QueueCapacity |> Option.map (fun v -> "queue_capacity", Fes.Http.toQueryValue v)
+                    req.ThreadsPerAllocation |> Option.map (fun v -> "threads_per_allocation", Fes.Http.toQueryValue v)
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                    req.WaitFor |> Option.map (fun v -> "wait_for", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type MlStartTrainedModelDeploymentResponse = System.Text.Json.JsonElement
 
@@ -4587,25 +4347,21 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlStopDataFrameAnalyticsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/data_frame/analytics/{req.Id}/_stop"
-                let queryParams =
-                    [
-                        req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
-                        req.Force |> Option.map (fun v -> "force", Fes.Http.toQueryValue v)
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlStopDataFrameAnalyticsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/data_frame/analytics/{req.Id}/_stop"
+            let queryParams =
+                [
+                    req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
+                    req.Force |> Option.map (fun v -> "force", Fes.Http.toQueryValue v)
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type MlStopDataFrameAnalyticsResponse = System.Text.Json.JsonElement
 
@@ -4689,26 +4445,22 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlStopDatafeedRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/datafeeds/{req.DatafeedId}/_stop"
-                let queryParams =
-                    [
-                        req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
-                        req.Force |> Option.map (fun v -> "force", Fes.Http.toQueryValue v)
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                        req.CloseJob |> Option.map (fun v -> "close_job", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlStopDatafeedRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/datafeeds/{req.DatafeedId}/_stop"
+            let queryParams =
+                [
+                    req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
+                    req.Force |> Option.map (fun v -> "force", Fes.Http.toQueryValue v)
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                    req.CloseJob |> Option.map (fun v -> "close_job", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type MlStopDatafeedResponse = System.Text.Json.JsonElement
 
@@ -4795,24 +4547,20 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlStopTrainedModelDeploymentRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/trained_models/{req.ModelId}/deployment/_stop"
-                let queryParams =
-                    [
-                        req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
-                        req.Force |> Option.map (fun v -> "force", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlStopTrainedModelDeploymentRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/trained_models/{req.ModelId}/deployment/_stop"
+            let queryParams =
+                [
+                    req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
+                    req.Force |> Option.map (fun v -> "force", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type MlStopTrainedModelDeploymentResponse = System.Text.Json.JsonElement
 
@@ -4878,16 +4626,12 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlUpdateDataFrameAnalyticsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/data_frame/analytics/{req.Id}/_update"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlUpdateDataFrameAnalyticsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/data_frame/analytics/{req.Id}/_update"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type MlUpdateDataFrameAnalyticsResponse = System.Text.Json.JsonElement
 
@@ -4968,26 +4712,22 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlUpdateDatafeedRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/datafeeds/{req.DatafeedId}/_update"
-                let queryParams =
-                    [
-                        req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
-                        req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
-                        req.IgnoreThrottled |> Option.map (fun v -> "ignore_throttled", Fes.Http.toQueryValue v)
-                        req.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlUpdateDatafeedRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/datafeeds/{req.DatafeedId}/_update"
+            let queryParams =
+                [
+                    req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                    req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                    req.IgnoreThrottled |> Option.map (fun v -> "ignore_throttled", Fes.Http.toQueryValue v)
+                    req.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type MlUpdateDatafeedResponse = System.Text.Json.JsonElement
 
@@ -5135,16 +4875,12 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlUpdateFilterRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/filters/{req.FilterId}/_update"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlUpdateFilterRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/filters/{req.FilterId}/_update"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type MlUpdateFilterResponse = System.Text.Json.JsonElement
 
@@ -5218,16 +4954,12 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlUpdateJobRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/anomaly_detectors/{req.JobId}/_update"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlUpdateJobRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/anomaly_detectors/{req.JobId}/_update"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type MlUpdateJobResponse = System.Text.Json.JsonElement
 
@@ -5360,16 +5092,12 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlUpdateModelSnapshotRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/anomaly_detectors/{req.JobId}/model_snapshots/{req.SnapshotId}/_update"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlUpdateModelSnapshotRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/anomaly_detectors/{req.JobId}/model_snapshots/{req.SnapshotId}/_update"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type MlUpdateModelSnapshotResponse = System.Text.Json.JsonElement
 
@@ -5416,23 +5144,19 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlUpdateTrainedModelDeploymentRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/trained_models/{req.ModelId}/deployment/_update"
-                let queryParams =
-                    [
-                        req.NumberOfAllocations |> Option.map (fun v -> "number_of_allocations", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlUpdateTrainedModelDeploymentRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/trained_models/{req.ModelId}/deployment/_update"
+            let queryParams =
+                [
+                    req.NumberOfAllocations |> Option.map (fun v -> "number_of_allocations", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type MlUpdateTrainedModelDeploymentResponse = System.Text.Json.JsonElement
 
@@ -5479,23 +5203,19 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlUpgradeJobSnapshotRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/anomaly_detectors/{req.JobId}/model_snapshots/{req.SnapshotId}/_upgrade"
-                let queryParams =
-                    [
-                        req.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", Fes.Http.toQueryValue v)
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlUpgradeJobSnapshotRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/anomaly_detectors/{req.JobId}/model_snapshots/{req.SnapshotId}/_upgrade"
+            let queryParams =
+                [
+                    req.WaitForCompletion |> Option.map (fun v -> "wait_for_completion", Fes.Http.toQueryValue v)
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            endpoint, ValueNone
 
     type MlUpgradeJobSnapshotResponse = System.Text.Json.JsonElement
 
@@ -5554,16 +5274,12 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlValidateRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/anomaly_detectors/_validate"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlValidateRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/anomaly_detectors/_validate"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type MlValidateResponse = Types.AcknowledgedResponseBase
 
@@ -5644,16 +5360,12 @@ module MlOperations =
     }
 
         with
-        static member ToRequest(req: MlValidateDetectorRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/anomaly_detectors/_validate/detector"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req.Document
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MlValidateDetectorRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/anomaly_detectors/_validate/detector"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req.Document)
+            endpoint, ValueSome postData
 
     type MlValidateDetectorResponse = Types.AcknowledgedResponseBase
 

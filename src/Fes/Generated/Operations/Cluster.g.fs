@@ -31,29 +31,25 @@ module ClusterOperations =
     }
 
         with
-        static member ToRequest(req: ClusterAllocationExplainRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_cluster/allocation/explain"
-                let queryParams =
-                    [
-                        req.Index |> Option.map (fun v -> "index", Fes.Http.toQueryValue v)
-                        req.Shard |> Option.map (fun v -> "shard", Fes.Http.toQueryValue v)
-                        req.Primary |> Option.map (fun v -> "primary", Fes.Http.toQueryValue v)
-                        req.CurrentNode |> Option.map (fun v -> "current_node", Fes.Http.toQueryValue v)
-                        req.IncludeDiskInfo |> Option.map (fun v -> "include_disk_info", Fes.Http.toQueryValue v)
-                        req.IncludeYesDecisions |> Option.map (fun v -> "include_yes_decisions", Fes.Http.toQueryValue v)
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ClusterAllocationExplainRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_cluster/allocation/explain"
+            let queryParams =
+                [
+                    req.Index |> Option.map (fun v -> "index", Fes.Http.toQueryValue v)
+                    req.Shard |> Option.map (fun v -> "shard", Fes.Http.toQueryValue v)
+                    req.Primary |> Option.map (fun v -> "primary", Fes.Http.toQueryValue v)
+                    req.CurrentNode |> Option.map (fun v -> "current_node", Fes.Http.toQueryValue v)
+                    req.IncludeDiskInfo |> Option.map (fun v -> "include_disk_info", Fes.Http.toQueryValue v)
+                    req.IncludeYesDecisions |> Option.map (fun v -> "include_yes_decisions", Fes.Http.toQueryValue v)
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type ClusterAllocationExplainResponse = System.Text.Json.JsonElement
 
@@ -150,23 +146,19 @@ module ClusterOperations =
     }
 
         with
-        static member ToRequest(req: ClusterDeleteComponentTemplateRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_component_template/{req.Name}"
-                let queryParams =
-                    [
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ClusterDeleteComponentTemplateRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_component_template/{req.Name}"
+            let queryParams =
+                [
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
+            endpoint, ValueNone
 
     type ClusterDeleteComponentTemplateResponse = Types.AcknowledgedResponseBase
 
@@ -204,23 +196,19 @@ module ClusterOperations =
     }
 
         with
-        static member ToRequest(req: ClusterDeleteVotingConfigExclusionsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_cluster/voting_config_exclusions"
-                let queryParams =
-                    [
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                        req.WaitForRemoval |> Option.map (fun v -> "wait_for_removal", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ClusterDeleteVotingConfigExclusionsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_cluster/voting_config_exclusions"
+            let queryParams =
+                [
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                    req.WaitForRemoval |> Option.map (fun v -> "wait_for_removal", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
+            endpoint, ValueNone
 
     type ClusterDeleteVotingConfigExclusionsResponse = unit
 
@@ -254,23 +242,19 @@ module ClusterOperations =
     }
 
         with
-        static member ToRequest(req: ClusterExistsComponentTemplateRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_component_template/{req.Name}"
-                let queryParams =
-                    [
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                        req.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Head
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ClusterExistsComponentTemplateRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_component_template/{req.Name}"
+            let queryParams =
+                [
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                    req.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.HEAD, fullPath)
+            endpoint, ValueNone
 
     type ClusterExistsComponentTemplateResponse = unit
 
@@ -312,26 +296,22 @@ module ClusterOperations =
     }
 
         with
-        static member ToRequest(req: ClusterGetComponentTemplateRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_component_template/{req.Name}"
-                let queryParams =
-                    [
-                        req.FlatSettings |> Option.map (fun v -> "flat_settings", Fes.Http.toQueryValue v)
-                        req.SettingsFilter |> Option.map (fun v -> "settings_filter", Fes.Http.toQueryValue v)
-                        req.IncludeDefaults |> Option.map (fun v -> "include_defaults", Fes.Http.toQueryValue v)
-                        req.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ClusterGetComponentTemplateRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_component_template/{req.Name}"
+            let queryParams =
+                [
+                    req.FlatSettings |> Option.map (fun v -> "flat_settings", Fes.Http.toQueryValue v)
+                    req.SettingsFilter |> Option.map (fun v -> "settings_filter", Fes.Http.toQueryValue v)
+                    req.IncludeDefaults |> Option.map (fun v -> "include_defaults", Fes.Http.toQueryValue v)
+                    req.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type ClusterGetComponentTemplateResponse = System.Text.Json.JsonElement
 
@@ -392,25 +372,21 @@ module ClusterOperations =
     }
 
         with
-        static member ToRequest(req: ClusterGetSettingsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_cluster/settings"
-                let queryParams =
-                    [
-                        req.FlatSettings |> Option.map (fun v -> "flat_settings", Fes.Http.toQueryValue v)
-                        req.IncludeDefaults |> Option.map (fun v -> "include_defaults", Fes.Http.toQueryValue v)
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ClusterGetSettingsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_cluster/settings"
+            let queryParams =
+                [
+                    req.FlatSettings |> Option.map (fun v -> "flat_settings", Fes.Http.toQueryValue v)
+                    req.IncludeDefaults |> Option.map (fun v -> "include_defaults", Fes.Http.toQueryValue v)
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type ClusterGetSettingsResponse = System.Text.Json.JsonElement
 
@@ -467,32 +443,28 @@ module ClusterOperations =
     }
 
         with
-        static member ToRequest(req: ClusterHealthRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_cluster/health/{req.Index}"
-                let queryParams =
-                    [
-                        req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
-                        req.Level |> Option.map (fun v -> "level", Fes.Http.toQueryValue v)
-                        req.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                        req.WaitForActiveShards |> Option.map (fun v -> "wait_for_active_shards", Fes.Http.toQueryValue v)
-                        req.WaitForEvents |> Option.map (fun v -> "wait_for_events", Fes.Http.toQueryValue v)
-                        req.WaitForNodes |> Option.map (fun v -> "wait_for_nodes", Fes.Http.toQueryValue v)
-                        req.WaitForNoInitializingShards |> Option.map (fun v -> "wait_for_no_initializing_shards", Fes.Http.toQueryValue v)
-                        req.WaitForNoRelocatingShards |> Option.map (fun v -> "wait_for_no_relocating_shards", Fes.Http.toQueryValue v)
-                        req.WaitForStatus |> Option.map (fun v -> "wait_for_status", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ClusterHealthRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_cluster/health/{req.Index}"
+            let queryParams =
+                [
+                    req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                    req.Level |> Option.map (fun v -> "level", Fes.Http.toQueryValue v)
+                    req.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                    req.WaitForActiveShards |> Option.map (fun v -> "wait_for_active_shards", Fes.Http.toQueryValue v)
+                    req.WaitForEvents |> Option.map (fun v -> "wait_for_events", Fes.Http.toQueryValue v)
+                    req.WaitForNodes |> Option.map (fun v -> "wait_for_nodes", Fes.Http.toQueryValue v)
+                    req.WaitForNoInitializingShards |> Option.map (fun v -> "wait_for_no_initializing_shards", Fes.Http.toQueryValue v)
+                    req.WaitForNoRelocatingShards |> Option.map (fun v -> "wait_for_no_relocating_shards", Fes.Http.toQueryValue v)
+                    req.WaitForStatus |> Option.map (fun v -> "wait_for_status", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type ClusterHealthResponse = Types.HealthResponseBody
 
@@ -592,15 +564,11 @@ module ClusterOperations =
     }
 
         with
-        static member ToRequest(req: ClusterInfoRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_info/{req.Target}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ClusterInfoRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_info/{req.Target}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type ClusterInfoResponse = System.Text.Json.JsonElement
 
@@ -622,23 +590,19 @@ module ClusterOperations =
     }
 
         with
-        static member ToRequest(req: ClusterPendingTasksRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_cluster/pending_tasks"
-                let queryParams =
-                    [
-                        req.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ClusterPendingTasksRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_cluster/pending_tasks"
+            let queryParams =
+                [
+                    req.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type ClusterPendingTasksResponse = System.Text.Json.JsonElement
 
@@ -673,25 +637,21 @@ module ClusterOperations =
     }
 
         with
-        static member ToRequest(req: ClusterPostVotingConfigExclusionsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_cluster/voting_config_exclusions"
-                let queryParams =
-                    [
-                        req.NodeNames |> Option.map (fun v -> "node_names", Fes.Http.toQueryValue v)
-                        req.NodeIds |> Option.map (fun v -> "node_ids", Fes.Http.toQueryValue v)
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ClusterPostVotingConfigExclusionsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_cluster/voting_config_exclusions"
+            let queryParams =
+                [
+                    req.NodeNames |> Option.map (fun v -> "node_names", Fes.Http.toQueryValue v)
+                    req.NodeIds |> Option.map (fun v -> "node_ids", Fes.Http.toQueryValue v)
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            endpoint, ValueNone
 
     type ClusterPostVotingConfigExclusionsResponse = unit
 
@@ -748,25 +708,21 @@ module ClusterOperations =
     }
 
         with
-        static member ToRequest(req: ClusterPutComponentTemplateRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_component_template/{req.Name}"
-                let queryParams =
-                    [
-                        req.Create |> Option.map (fun v -> "create", Fes.Http.toQueryValue v)
-                        req.Cause |> Option.map (fun v -> "cause", Fes.Http.toQueryValue v)
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ClusterPutComponentTemplateRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_component_template/{req.Name}"
+            let queryParams =
+                [
+                    req.Create |> Option.map (fun v -> "create", Fes.Http.toQueryValue v)
+                    req.Cause |> Option.map (fun v -> "cause", Fes.Http.toQueryValue v)
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type ClusterPutComponentTemplateResponse = Types.AcknowledgedResponseBase
 
@@ -844,25 +800,21 @@ module ClusterOperations =
     }
 
         with
-        static member ToRequest(req: ClusterPutSettingsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_cluster/settings"
-                let queryParams =
-                    [
-                        req.FlatSettings |> Option.map (fun v -> "flat_settings", Fes.Http.toQueryValue v)
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ClusterPutSettingsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_cluster/settings"
+            let queryParams =
+                [
+                    req.FlatSettings |> Option.map (fun v -> "flat_settings", Fes.Http.toQueryValue v)
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type ClusterPutSettingsResponse = System.Text.Json.JsonElement
 
@@ -913,15 +865,11 @@ module ClusterOperations =
     type ClusterRemoteInfoRequest = | ClusterRemoteInfoRequest
 
         with
-        static member ToRequest(req: ClusterRemoteInfoRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_remote/info"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ClusterRemoteInfoRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_remote/info"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type ClusterRemoteInfoResponse = Map<string, Types.ClusterRemoteInfo>
 
@@ -937,28 +885,24 @@ module ClusterOperations =
     }
 
         with
-        static member ToRequest(req: ClusterRerouteRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_cluster/reroute"
-                let queryParams =
-                    [
-                        req.DryRun |> Option.map (fun v -> "dry_run", Fes.Http.toQueryValue v)
-                        req.Explain |> Option.map (fun v -> "explain", Fes.Http.toQueryValue v)
-                        req.Metric |> Option.map (fun v -> "metric", Fes.Http.toQueryValue v)
-                        req.RetryFailed |> Option.map (fun v -> "retry_failed", Fes.Http.toQueryValue v)
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ClusterRerouteRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_cluster/reroute"
+            let queryParams =
+                [
+                    req.DryRun |> Option.map (fun v -> "dry_run", Fes.Http.toQueryValue v)
+                    req.Explain |> Option.map (fun v -> "explain", Fes.Http.toQueryValue v)
+                    req.Metric |> Option.map (fun v -> "metric", Fes.Http.toQueryValue v)
+                    req.RetryFailed |> Option.map (fun v -> "retry_failed", Fes.Http.toQueryValue v)
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type ClusterRerouteResponse = System.Text.Json.JsonElement
 
@@ -1034,29 +978,25 @@ module ClusterOperations =
     }
 
         with
-        static member ToRequest(req: ClusterStateRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_cluster/state/{req.Metric}/{req.Index}"
-                let queryParams =
-                    [
-                        req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
-                        req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
-                        req.FlatSettings |> Option.map (fun v -> "flat_settings", Fes.Http.toQueryValue v)
-                        req.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
-                        req.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
-                        req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
-                        req.WaitForMetadataVersion |> Option.map (fun v -> "wait_for_metadata_version", Fes.Http.toQueryValue v)
-                        req.WaitForTimeout |> Option.map (fun v -> "wait_for_timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ClusterStateRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_cluster/state/{req.Metric}/{req.Index}"
+            let queryParams =
+                [
+                    req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
+                    req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
+                    req.FlatSettings |> Option.map (fun v -> "flat_settings", Fes.Http.toQueryValue v)
+                    req.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
+                    req.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
+                    req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
+                    req.WaitForMetadataVersion |> Option.map (fun v -> "wait_for_metadata_version", Fes.Http.toQueryValue v)
+                    req.WaitForTimeout |> Option.map (fun v -> "wait_for_timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type ClusterStateResponse = System.Text.Json.JsonElement
 
@@ -1142,23 +1082,19 @@ module ClusterOperations =
     }
 
         with
-        static member ToRequest(req: ClusterStatsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_cluster/stats/nodes/{req.NodeId}"
-                let queryParams =
-                    [
-                        req.IncludeRemotes |> Option.map (fun v -> "include_remotes", Fes.Http.toQueryValue v)
-                        req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ClusterStatsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_cluster/stats/nodes/{req.NodeId}"
+            let queryParams =
+                [
+                    req.IncludeRemotes |> Option.map (fun v -> "include_remotes", Fes.Http.toQueryValue v)
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type ClusterStatsResponse = Types.StatsResponseBase
 

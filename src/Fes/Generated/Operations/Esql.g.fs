@@ -48,26 +48,22 @@ module EsqlOperations =
     }
 
         with
-        static member ToRequest(req: EsqlAsyncQueryRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_query/async"
-                let queryParams =
-                    [
-                        req.AllowPartialResults |> Option.map (fun v -> "allow_partial_results", Fes.Http.toQueryValue v)
-                        req.Delimiter |> Option.map (fun v -> "delimiter", Fes.Http.toQueryValue v)
-                        req.DropNullColumns |> Option.map (fun v -> "drop_null_columns", Fes.Http.toQueryValue v)
-                        req.Format |> Option.map (fun v -> "format", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: EsqlAsyncQueryRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_query/async"
+            let queryParams =
+                [
+                    req.AllowPartialResults |> Option.map (fun v -> "allow_partial_results", Fes.Http.toQueryValue v)
+                    req.Delimiter |> Option.map (fun v -> "delimiter", Fes.Http.toQueryValue v)
+                    req.DropNullColumns |> Option.map (fun v -> "drop_null_columns", Fes.Http.toQueryValue v)
+                    req.Format |> Option.map (fun v -> "format", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type EsqlAsyncQueryResponse = Types.AsyncEsqlResult
 
@@ -211,15 +207,11 @@ module EsqlOperations =
     }
 
         with
-        static member ToRequest(req: EsqlAsyncQueryDeleteRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_query/async/{req.Id}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: EsqlAsyncQueryDeleteRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_query/async/{req.Id}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
+            endpoint, ValueNone
 
     type EsqlAsyncQueryDeleteResponse = Types.AcknowledgedResponseBase
 
@@ -244,25 +236,21 @@ module EsqlOperations =
     }
 
         with
-        static member ToRequest(req: EsqlAsyncQueryGetRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_query/async/{req.Id}"
-                let queryParams =
-                    [
-                        req.DropNullColumns |> Option.map (fun v -> "drop_null_columns", Fes.Http.toQueryValue v)
-                        req.Format |> Option.map (fun v -> "format", Fes.Http.toQueryValue v)
-                        req.KeepAlive |> Option.map (fun v -> "keep_alive", Fes.Http.toQueryValue v)
-                        req.WaitForCompletionTimeout |> Option.map (fun v -> "wait_for_completion_timeout", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: EsqlAsyncQueryGetRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_query/async/{req.Id}"
+            let queryParams =
+                [
+                    req.DropNullColumns |> Option.map (fun v -> "drop_null_columns", Fes.Http.toQueryValue v)
+                    req.Format |> Option.map (fun v -> "format", Fes.Http.toQueryValue v)
+                    req.KeepAlive |> Option.map (fun v -> "keep_alive", Fes.Http.toQueryValue v)
+                    req.WaitForCompletionTimeout |> Option.map (fun v -> "wait_for_completion_timeout", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type EsqlAsyncQueryGetResponse = Types.AsyncEsqlResult
 
@@ -314,22 +302,18 @@ module EsqlOperations =
     }
 
         with
-        static member ToRequest(req: EsqlAsyncQueryStopRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_query/async/{req.Id}/stop"
-                let queryParams =
-                    [
-                        req.DropNullColumns |> Option.map (fun v -> "drop_null_columns", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: EsqlAsyncQueryStopRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_query/async/{req.Id}/stop"
+            let queryParams =
+                [
+                    req.DropNullColumns |> Option.map (fun v -> "drop_null_columns", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            endpoint, ValueNone
 
     type EsqlAsyncQueryStopResponse = Types.EsqlResult
 
@@ -359,15 +343,11 @@ module EsqlOperations =
     }
 
         with
-        static member ToRequest(req: EsqlDeleteViewRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_query/view/{req.Name}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: EsqlDeleteViewRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_query/view/{req.Name}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
+            endpoint, ValueNone
 
     type EsqlDeleteViewResponse = Types.AcknowledgedResponseBase
 
@@ -388,15 +368,11 @@ module EsqlOperations =
     }
 
         with
-        static member ToRequest(req: EsqlGetQueryRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_query/queries/{req.Id}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: EsqlGetQueryRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_query/queries/{req.Id}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type EsqlGetQueryResponse = System.Text.Json.JsonElement
 
@@ -417,15 +393,11 @@ module EsqlOperations =
     }
 
         with
-        static member ToRequest(req: EsqlGetViewRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_query/view/{req.Name}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: EsqlGetViewRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_query/view/{req.Name}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type EsqlGetViewResponse = System.Text.Json.JsonElement
 
@@ -444,15 +416,11 @@ module EsqlOperations =
     type EsqlListQueriesRequest = | EsqlListQueriesRequest
 
         with
-        static member ToRequest(req: EsqlListQueriesRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_query/queries"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: EsqlListQueriesRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_query/queries"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type EsqlListQueriesResponse = System.Text.Json.JsonElement
 
@@ -463,16 +431,12 @@ module EsqlOperations =
     }
 
         with
-        static member ToRequest(req: EsqlPutViewRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_query/view/{req.Name}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: EsqlPutViewRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_query/view/{req.Name}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type EsqlPutViewResponse = Types.AcknowledgedResponseBase
 
@@ -527,26 +491,22 @@ module EsqlOperations =
     }
 
         with
-        static member ToRequest(req: EsqlQueryRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_query"
-                let queryParams =
-                    [
-                        req.Format |> Option.map (fun v -> "format", Fes.Http.toQueryValue v)
-                        req.Delimiter |> Option.map (fun v -> "delimiter", Fes.Http.toQueryValue v)
-                        req.DropNullColumns |> Option.map (fun v -> "drop_null_columns", Fes.Http.toQueryValue v)
-                        req.AllowPartialResults |> Option.map (fun v -> "allow_partial_results", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: EsqlQueryRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_query"
+            let queryParams =
+                [
+                    req.Format |> Option.map (fun v -> "format", Fes.Http.toQueryValue v)
+                    req.Delimiter |> Option.map (fun v -> "delimiter", Fes.Http.toQueryValue v)
+                    req.DropNullColumns |> Option.map (fun v -> "drop_null_columns", Fes.Http.toQueryValue v)
+                    req.AllowPartialResults |> Option.map (fun v -> "allow_partial_results", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type EsqlQueryResponse = Types.EsqlResult
 

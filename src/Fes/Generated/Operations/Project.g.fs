@@ -17,16 +17,12 @@ module ProjectOperations =
     }
 
         with
-        static member ToRequest(req: ProjectCreateManyRoutingRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_project_routing"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody req.Document
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ProjectCreateManyRoutingRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_project_routing"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req.Document)
+            endpoint, ValueSome postData
 
     type ProjectCreateManyRoutingResponse = Types.AcknowledgedResponseBase
 
@@ -48,16 +44,12 @@ module ProjectOperations =
     }
 
         with
-        static member ToRequest(req: ProjectCreateRoutingRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_project_routing/{req.Name}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Put
-                |> Fes.Http.Request.withJsonBody req.Document
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ProjectCreateRoutingRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_project_routing/{req.Name}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req.Document)
+            endpoint, ValueSome postData
 
     type ProjectCreateRoutingResponse = Types.AcknowledgedResponseBase
 
@@ -83,15 +75,11 @@ module ProjectOperations =
     }
 
         with
-        static member ToRequest(req: ProjectDeleteRoutingRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_project_routing/{req.Name}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Delete
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ProjectDeleteRoutingRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_project_routing/{req.Name}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
+            endpoint, ValueNone
 
     type ProjectDeleteRoutingResponse = Types.AcknowledgedResponseBase
 
@@ -110,15 +98,11 @@ module ProjectOperations =
     type ProjectGetManyRoutingRequest = | ProjectGetManyRoutingRequest
 
         with
-        static member ToRequest(req: ProjectGetManyRoutingRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_project_routing"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ProjectGetManyRoutingRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_project_routing"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type ProjectGetManyRoutingResponse = Types.NamedProjectRoutingExpressions
 
@@ -127,15 +111,11 @@ module ProjectOperations =
     }
 
         with
-        static member ToRequest(req: ProjectGetRoutingRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_project_routing/{req.Name}"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ProjectGetRoutingRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_project_routing/{req.Name}"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type ProjectGetRoutingResponse = Types.ProjectRoutingExpression
 
@@ -157,16 +137,12 @@ module ProjectOperations =
     }
 
         with
-        static member ToRequest(req: ProjectTagsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_project/tags"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: ProjectTagsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_project/tags"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
 
     type ProjectTagsResponse = Types.ProjectTags
 

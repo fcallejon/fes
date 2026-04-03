@@ -17,15 +17,11 @@ module MigrationOperations =
     }
 
         with
-        static member ToRequest(req: MigrationDeprecationsRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/{req.Index}/_migration/deprecations"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MigrationDeprecationsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/{req.Index}/_migration/deprecations"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type MigrationDeprecationsResponse = System.Text.Json.JsonElement
 
@@ -44,30 +40,22 @@ module MigrationOperations =
     type MigrationGetFeatureUpgradeStatusRequest = | MigrationGetFeatureUpgradeStatusRequest
 
         with
-        static member ToRequest(req: MigrationGetFeatureUpgradeStatusRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_migration/system_features"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Get
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MigrationGetFeatureUpgradeStatusRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_migration/system_features"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
+            endpoint, ValueNone
 
     type MigrationGetFeatureUpgradeStatusResponse = System.Text.Json.JsonElement
 
     type MigrationPostFeatureUpgradeRequest = | MigrationPostFeatureUpgradeRequest
 
         with
-        static member ToRequest(req: MigrationPostFeatureUpgradeRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_migration/system_features"
-                let fullPath = path
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Result.Ok
-            with ex -> Result.Error ex
+        static member ToEndpoint(req: MigrationPostFeatureUpgradeRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_migration/system_features"
+            let fullPath = path
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            endpoint, ValueNone
 
     type MigrationPostFeatureUpgradeResponse = System.Text.Json.JsonElement
 
