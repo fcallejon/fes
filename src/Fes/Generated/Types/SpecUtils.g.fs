@@ -8,12 +8,10 @@ open System.Text.Json.Serialization
 module SpecUtils =
 
     /// In some places in the specification an object consists of the union of a set of known properties
-    type AdditionalProperties<'tKey, 'tValue> = {
-    }
+    type AdditionalProperties<'tKey, 'tValue> = System.Text.Json.JsonElement
 
     /// In some places in the specification an object consists of a static set of properties and a single additional property
-    type AdditionalProperty<'tKey, 'tValue> = {
-    }
+    type AdditionalProperty<'tKey, 'tValue> = System.Text.Json.JsonElement
 
     type BaseNode = {
         [<System.Text.Json.Serialization.JsonPropertyName("attributes")>]
@@ -60,8 +58,7 @@ module SpecUtils =
     type NullValue = unit
 
     /// A class that implements `OverloadOf` only needs to declare properties that differ from the parent.
-    type OverloadOf<'tDefinition> = {
-    }
+    type OverloadOf<'tDefinition> = System.Text.Json.JsonElement
 
     /// A set of flags that can be represented as a single enum value or a set of values that are encoded
     [<RequireQualifiedAccess>]

@@ -29,8 +29,7 @@ module WatcherTypes =
         | Slack
         | Pagerduty
 
-    type AlwaysCondition = {
-    }
+    type AlwaysCondition = System.Text.Json.JsonElement
 
     type ArrayCompareCondition = {
         [<System.Text.Json.Serialization.JsonPropertyName("path")>]
@@ -46,8 +45,7 @@ module WatcherTypes =
         | Lte
         | Gte
 
-    type NeverCondition = {
-    }
+    type NeverCondition = System.Text.Json.JsonElement
 
     type ScriptCondition = {
         [<System.Text.Json.Serialization.JsonPropertyName("lang")>]
@@ -231,8 +229,7 @@ module WatcherTypes =
         Attachments: Map<string, WatcherTypes.EmailAttachmentContainer> option
     }
 
-    type EmailAction = {
-    }
+    type EmailAction = System.Text.Json.JsonElement
 
     [<RequireQualifiedAccess>]
     type PagerDutyContextType =
@@ -282,8 +279,7 @@ module WatcherTypes =
         Proxy: WatcherTypes.PagerDutyEventProxy option
     }
 
-    type PagerDutyAction = {
-    }
+    type PagerDutyAction = System.Text.Json.JsonElement
 
     type SlackAttachmentField = {
         [<System.Text.Json.Serialization.JsonPropertyName("short")>]
@@ -356,8 +352,7 @@ module WatcherTypes =
         Message: WatcherTypes.SlackMessage
     }
 
-    type WebhookAction = {
-    }
+    type WebhookAction = System.Text.Json.JsonElement
 
     type Action = {
         [<System.Text.Json.Serialization.JsonPropertyName("action_type")>]
@@ -524,8 +519,7 @@ module WatcherTypes =
         Inputs: Map<string, WatcherTypes.InputContainer> list
     }
 
-    [<RequireQualifiedAccess>]
-    and InputContainer =
+    and [<RequireQualifiedAccess>] InputContainer =
         | Chain of WatcherTypes.ChainInput
         | Http of WatcherTypes.HttpInput
         | Search of WatcherTypes.SearchInput
@@ -612,8 +606,7 @@ module WatcherTypes =
         LoggedText: string
     }
 
-    type HttpInputRequestResult = {
-    }
+    type HttpInputRequestResult = System.Text.Json.JsonElement
 
     type HttpInputResponseResult = {
         [<System.Text.Json.Serialization.JsonPropertyName("body")>]

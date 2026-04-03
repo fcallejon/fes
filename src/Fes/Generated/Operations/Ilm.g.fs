@@ -185,8 +185,7 @@ module IlmOperations =
         let withTimeout (value: Types.Duration) (req: IlmGetLifecycleRequest) =
             { req with Timeout = Some value }
 
-    type IlmGetStatusRequest = {
-    }
+    type IlmGetStatusRequest = | IlmGetStatusRequest
 
         with
         static member ToRequest(req: IlmGetStatusRequest) : Result<Fes.Http.RequestMsg, exn> =

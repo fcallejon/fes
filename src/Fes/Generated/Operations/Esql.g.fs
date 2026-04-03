@@ -426,8 +426,7 @@ module EsqlOperations =
 
     let esqlGetViewRequest = EsqlGetViewRequestBuilder()
 
-    type EsqlListQueriesRequest = {
-    }
+    type EsqlListQueriesRequest = | EsqlListQueriesRequest
 
         with
         static member ToRequest(req: EsqlListQueriesRequest) : Result<Fes.Http.RequestMsg, exn> =

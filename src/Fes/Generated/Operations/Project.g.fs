@@ -106,8 +106,7 @@ module ProjectOperations =
 
     let projectDeleteRoutingRequest = ProjectDeleteRoutingRequestBuilder()
 
-    type ProjectGetManyRoutingRequest = {
-    }
+    type ProjectGetManyRoutingRequest = | ProjectGetManyRoutingRequest
 
         with
         static member ToRequest(req: ProjectGetManyRoutingRequest) : Result<Fes.Http.RequestMsg, exn> =

@@ -489,8 +489,7 @@ module CatOperations =
         let withS (value: Types.Names) (req: CatHealthRequest) =
             { req with S = Some value }
 
-    type CatHelpRequest = {
-    }
+    type CatHelpRequest = | CatHelpRequest
 
         with
         static member ToRequest(req: CatHelpRequest) : Result<Fes.Http.RequestMsg, exn> =

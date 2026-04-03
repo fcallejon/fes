@@ -44,8 +44,8 @@ module IndicesTypes =
 
     [<RequireQualifiedAccess>]
     type ManagedBy =
-        | Index Lifecycle Management
-        | Data stream lifecycle
+        | IndexLifecycleManagement
+        | DataStreamLifecycle
         | Unmanaged
 
     [<RequireQualifiedAccess>]

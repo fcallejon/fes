@@ -1195,8 +1195,7 @@ module MlTypes =
     type FeatureExtractor = MlTypes.QueryFeatureExtractor
 
     /// BERT and MPNet tokenization configuration options
-    type NlpBertTokenizationConfig = {
-    }
+    type NlpBertTokenizationConfig = System.Text.Json.JsonElement
 
     /// RoBERTa tokenization configuration options
     type NlpRobertaTokenizationConfig = {
@@ -1204,8 +1203,7 @@ module MlTypes =
         AddPrefixSpace: bool option
     }
 
-    type XlmRobertaTokenizationConfig = {
-    }
+    type XlmRobertaTokenizationConfig = System.Text.Json.JsonElement
 
     /// Tokenization options stored in inference configuration
     [<RequireQualifiedAccess>]

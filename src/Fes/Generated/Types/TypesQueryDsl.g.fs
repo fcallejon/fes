@@ -68,14 +68,11 @@ module TypesQueryDsl =
         Field: Types.Field
     }
 
-    type UntypedDistanceFeatureQuery = {
-    }
+    type UntypedDistanceFeatureQuery = System.Text.Json.JsonElement
 
-    type GeoDistanceFeatureQuery = {
-    }
+    type GeoDistanceFeatureQuery = System.Text.Json.JsonElement
 
-    type DateDistanceFeatureQuery = {
-    }
+    type DateDistanceFeatureQuery = System.Text.Json.JsonElement
 
     [<RequireQualifiedAccess>]
     type DistanceFeatureQuery =
@@ -109,17 +106,13 @@ module TypesQueryDsl =
         MultiValueMode: TypesQueryDsl.MultiValueMode option
     }
 
-    type UntypedDecayFunction = {
-    }
+    type UntypedDecayFunction = System.Text.Json.JsonElement
 
-    type DateDecayFunction = {
-    }
+    type DateDecayFunction = System.Text.Json.JsonElement
 
-    type NumericDecayFunction = {
-    }
+    type NumericDecayFunction = System.Text.Json.JsonElement
 
-    type GeoDecayFunction = {
-    }
+    type GeoDecayFunction = System.Text.Json.JsonElement
 
     [<RequireQualifiedAccess>]
     type DecayFunction =
@@ -318,8 +311,7 @@ module TypesQueryDsl =
         Filter: TypesQueryDsl.IntervalsFilter option
     }
 
-    [<RequireQualifiedAccess>]
-    and IntervalsContainer =
+    and [<RequireQualifiedAccess>] IntervalsContainer =
         | AllOf of TypesQueryDsl.IntervalsAllOf
         | AnyOf of TypesQueryDsl.IntervalsAnyOf
         | Fuzzy of TypesQueryDsl.IntervalsFuzzy
@@ -336,8 +328,7 @@ module TypesQueryDsl =
         Filter: TypesQueryDsl.IntervalsFilter option
     }
 
-    [<RequireQualifiedAccess>]
-    and IntervalsFilter =
+    and [<RequireQualifiedAccess>] IntervalsFilter =
         | After of TypesQueryDsl.IntervalsContainer
         | Before of TypesQueryDsl.IntervalsContainer
         | ContainedBy of TypesQueryDsl.IntervalsContainer
@@ -408,8 +399,7 @@ module TypesQueryDsl =
         ZeroTermsQuery: TypesQueryDsl.ZeroTermsQuery option
     }
 
-    type MatchAllQuery = {
-    }
+    type MatchAllQuery = System.Text.Json.JsonElement
 
     type MatchBoolPrefixQuery = {
         [<System.Text.Json.Serialization.JsonPropertyName("analyzer")>]
@@ -432,8 +422,7 @@ module TypesQueryDsl =
         Query: string
     }
 
-    type MatchNoneQuery = {
-    }
+    type MatchNoneQuery = System.Text.Json.JsonElement
 
     type MatchPhraseQuery = {
         [<System.Text.Json.Serialization.JsonPropertyName("analyzer")>]
@@ -701,11 +690,9 @@ module TypesQueryDsl =
         TimeZone: Types.TimeZone option
     }
 
-    type NumberRangeQuery = {
-    }
+    type NumberRangeQuery = System.Text.Json.JsonElement
 
-    type TermRangeQuery = {
-    }
+    type TermRangeQuery = System.Text.Json.JsonElement
 
     [<RequireQualifiedAccess>]
     type RangeQuery =
@@ -714,8 +701,7 @@ module TypesQueryDsl =
         | NumberRangeQuery of TypesQueryDsl.NumberRangeQuery
         | TermRangeQuery of TypesQueryDsl.TermRangeQuery
 
-    type RankFeatureFunction = {
-    }
+    type RankFeatureFunction = System.Text.Json.JsonElement
 
     type RankFeatureFunctionSaturation = {
         [<System.Text.Json.Serialization.JsonPropertyName("pivot")>]
@@ -727,8 +713,7 @@ module TypesQueryDsl =
         ScalingFactor: Types.Float
     }
 
-    type RankFeatureFunctionLinear = {
-    }
+    type RankFeatureFunctionLinear = System.Text.Json.JsonElement
 
     type RankFeatureFunctionSigmoid = {
         [<System.Text.Json.Serialization.JsonPropertyName("pivot")>]
@@ -859,8 +844,7 @@ module TypesQueryDsl =
         CaseInsensitive: bool option
     }
 
-    type TermsQuery = {
-    }
+    type TermsQuery = System.Text.Json.JsonElement
 
     type TermsSetQuery = {
         [<System.Text.Json.Serialization.JsonPropertyName("minimum_should_match")>]
@@ -924,8 +908,7 @@ module TypesQueryDsl =
     }
 
     /// An Elasticsearch Query DSL (Domain Specific Language) object that defines a query.
-    [<RequireQualifiedAccess>]
-    and QueryContainer =
+    and [<RequireQualifiedAccess>] QueryContainer =
         | Bool of TypesQueryDsl.BoolQuery
         | Boosting of TypesQueryDsl.BoostingQuery
         | Common of field: string * TypesQueryDsl.CommonTermsQuery
@@ -1025,8 +1008,7 @@ module TypesQueryDsl =
         ScoreMode: TypesQueryDsl.FunctionScoreMode option
     }
 
-    [<RequireQualifiedAccess>]
-    and FunctionScoreContainer =
+    and [<RequireQualifiedAccess>] FunctionScoreContainer =
         | Exp of TypesQueryDsl.DecayFunction
         | Gauss of TypesQueryDsl.DecayFunction
         | Linear of TypesQueryDsl.DecayFunction
@@ -1086,8 +1068,7 @@ module TypesQueryDsl =
         ScoreMode: TypesQueryDsl.ChildScoreMode option
     }
 
-    [<RequireQualifiedAccess>]
-    and PinnedQuery =
+    and [<RequireQualifiedAccess>] PinnedQuery =
         | Ids of Types.Id list
         | Docs of TypesQueryDsl.PinnedDoc list
 
@@ -1123,8 +1104,7 @@ module TypesQueryDsl =
         Little: TypesQueryDsl.SpanQuery
     }
 
-    [<RequireQualifiedAccess>]
-    and SpanQuery =
+    and [<RequireQualifiedAccess>] SpanQuery =
         | SpanContaining of TypesQueryDsl.SpanContainingQuery
         | SpanFieldMasking of TypesQueryDsl.SpanFieldMaskingQuery
         | SpanFirst of TypesQueryDsl.SpanFirstQuery

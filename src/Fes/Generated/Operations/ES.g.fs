@@ -17,39 +17,34 @@ module ES =
 
         /// Delete an async search.
         let delete (id: Types.Id) =
-            let req = { Unchecked.defaultof<AsyncSearchDeleteRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<AsyncSearchDeleteRequest>
+            req <- { req with Id = id }
             req
 
         /// Get async search results.
         let get (id: Types.Id) =
-            let req = { Unchecked.defaultof<AsyncSearchGetRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<AsyncSearchGetRequest>
+            req <- { req with Id = id }
             req
 
         /// Get the async search status.
         let status (id: Types.Id) =
-            let req = { Unchecked.defaultof<AsyncSearchStatusRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<AsyncSearchStatusRequest>
+            req <- { req with Id = id }
             req
 
         /// Run an async search.
         let submit (index: Types.Indices) =
-            let req = { Unchecked.defaultof<AsyncSearchSubmitRequest> with
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<AsyncSearchSubmitRequest>
+            req <- { req with Index = index }
             req
 
     module Autoscaling =
 
         /// Delete an autoscaling policy.
         let deleteAutoscalingPolicy (name: Types.Name) =
-            let req = { Unchecked.defaultof<AutoscalingDeleteAutoscalingPolicyRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<AutoscalingDeleteAutoscalingPolicyRequest>
+            req <- { req with Name = name }
             req
 
         /// Get the autoscaling capacity.
@@ -58,117 +53,115 @@ module ES =
 
         /// Get an autoscaling policy.
         let getAutoscalingPolicy (name: Types.Name) =
-            let req = { Unchecked.defaultof<AutoscalingGetAutoscalingPolicyRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<AutoscalingGetAutoscalingPolicyRequest>
+            req <- { req with Name = name }
             req
 
         /// Create or update an autoscaling policy.
         let putAutoscalingPolicy (name: Types.Name) =
-            let req = { Unchecked.defaultof<AutoscalingPutAutoscalingPolicyRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<AutoscalingPutAutoscalingPolicyRequest>
+            req <- { req with Name = name }
             req
 
     /// Bulk index or delete documents.
     let bulk (index: Types.IndexName) =
-        { Unchecked.defaultof<BulkRequest> with
-            Index = index
-        }
+        let mutable req = Unchecked.defaultof<BulkRequest>
+        req <- { req with Index = index }
+        req
 
     /// Checks if the specified combination of method, API, parameters, and arbitrary capabilities are supported.
     let capabilities  =
-        { Unchecked.defaultof<CapabilitiesRequest> with
-        }
+        let mutable req = Unchecked.defaultof<CapabilitiesRequest>
+        req
 
     /// Clear a scrolling search.
     let clearScroll (scrollId: Types.ScrollIds) =
-        { Unchecked.defaultof<ClearScrollRequest> with
-            ScrollId = scrollId
-        }
+        let mutable req = Unchecked.defaultof<ClearScrollRequest>
+        req <- { req with ScrollId = scrollId }
+        req
 
     /// Close a point in time.
     let closePointInTime  =
-        { Unchecked.defaultof<ClosePointInTimeRequest> with
-        }
+        let mutable req = Unchecked.defaultof<ClosePointInTimeRequest>
+        req
 
     /// Count search results.
     let count (index: Types.Indices) =
-        { Unchecked.defaultof<CountRequest> with
-            Index = index
-        }
+        let mutable req = Unchecked.defaultof<CountRequest>
+        req <- { req with Index = index }
+        req
 
     /// Create a new document in the index.
     let create (id: Types.Id) (index: Types.IndexName) =
-        { Unchecked.defaultof<CreateRequest> with
-            Id = id
-            Index = index
-        }
+        let mutable req = Unchecked.defaultof<CreateRequest>
+        req <- { req with Id = id }
+        req <- { req with Index = index }
+        req
 
     /// Delete a document.
     let delete (id: Types.Id) (index: Types.IndexName) =
-        { Unchecked.defaultof<DeleteRequest> with
-            Id = id
-            Index = index
-        }
+        let mutable req = Unchecked.defaultof<DeleteRequest>
+        req <- { req with Id = id }
+        req <- { req with Index = index }
+        req
 
     /// Delete documents.
     let deleteByQuery (index: Types.Indices) =
-        { Unchecked.defaultof<DeleteByQueryRequest> with
-            Index = index
-        }
+        let mutable req = Unchecked.defaultof<DeleteByQueryRequest>
+        req <- { req with Index = index }
+        req
 
     /// Throttle a delete by query operation.
     let deleteByQueryRethrottle (taskId: Types.TaskId) =
-        { Unchecked.defaultof<DeleteByQueryRethrottleRequest> with
-            TaskId = taskId
-        }
+        let mutable req = Unchecked.defaultof<DeleteByQueryRethrottleRequest>
+        req <- { req with TaskId = taskId }
+        req
 
     /// Delete a script or search template.
     let deleteScript (id: Types.Id) =
-        { Unchecked.defaultof<DeleteScriptRequest> with
-            Id = id
-        }
+        let mutable req = Unchecked.defaultof<DeleteScriptRequest>
+        req <- { req with Id = id }
+        req
 
     /// Check a document.
     let exists (id: Types.Id) (index: Types.IndexName) =
-        { Unchecked.defaultof<ExistsRequest> with
-            Id = id
-            Index = index
-        }
+        let mutable req = Unchecked.defaultof<ExistsRequest>
+        req <- { req with Id = id }
+        req <- { req with Index = index }
+        req
 
     /// Check for a document source.
     let existsSource (id: Types.Id) (index: Types.IndexName) =
-        { Unchecked.defaultof<ExistsSourceRequest> with
-            Id = id
-            Index = index
-        }
+        let mutable req = Unchecked.defaultof<ExistsSourceRequest>
+        req <- { req with Id = id }
+        req <- { req with Index = index }
+        req
 
     /// Explain a document match result.
     let explain (id: Types.Id) (index: Types.IndexName) =
-        { Unchecked.defaultof<ExplainRequest> with
-            Id = id
-            Index = index
-        }
+        let mutable req = Unchecked.defaultof<ExplainRequest>
+        req <- { req with Id = id }
+        req <- { req with Index = index }
+        req
 
     /// Get the field capabilities.
     let fieldCaps (index: Types.Indices) =
-        { Unchecked.defaultof<FieldCapsRequest> with
-            Index = index
-        }
+        let mutable req = Unchecked.defaultof<FieldCapsRequest>
+        req <- { req with Index = index }
+        req
 
     /// Get a document by its ID.
     let get (id: Types.Id) (index: Types.IndexName) =
-        { Unchecked.defaultof<GetRequest> with
-            Id = id
-            Index = index
-        }
+        let mutable req = Unchecked.defaultof<GetRequest>
+        req <- { req with Id = id }
+        req <- { req with Index = index }
+        req
 
     /// Get a script or search template.
     let getScript (id: Types.Id) =
-        { Unchecked.defaultof<GetScriptRequest> with
-            Id = id
-        }
+        let mutable req = Unchecked.defaultof<GetScriptRequest>
+        req <- { req with Id = id }
+        req
 
     /// Get script contexts.
     let getScriptContext  : GetScriptContextRequest =
@@ -182,23 +175,23 @@ module ES =
 
     /// Get a document's source.
     let getSource (id: Types.Id) (index: Types.IndexName) =
-        { Unchecked.defaultof<GetSourceRequest> with
-            Id = id
-            Index = index
-        }
+        let mutable req = Unchecked.defaultof<GetSourceRequest>
+        req <- { req with Id = id }
+        req <- { req with Index = index }
+        req
 
     /// Get the cluster health.
     let healthReport (feature: System.Text.Json.JsonElement) =
-        { Unchecked.defaultof<HealthReportRequest> with
-            Feature = feature
-        }
+        let mutable req = Unchecked.defaultof<HealthReportRequest>
+        req <- { req with Feature = feature }
+        req
 
     /// Create or update a document in an index.
     let index (id: Types.Id) (index: Types.IndexName) =
-        { Unchecked.defaultof<IndexRequest> with
-            Id = id
-            Index = index
-        }
+        let mutable req = Unchecked.defaultof<IndexRequest>
+        req <- { req with Id = id }
+        req <- { req with Index = index }
+        req
 
     /// Get cluster info.
     let info  : InfoRequest =
@@ -207,39 +200,39 @@ module ES =
 
     /// Run a knn search.
     let knnSearch (index: Types.Indices) =
-        { Unchecked.defaultof<KnnSearchRequest> with
-            Index = index
-        }
+        let mutable req = Unchecked.defaultof<KnnSearchRequest>
+        req <- { req with Index = index }
+        req
 
     /// Get multiple documents.
     let mget (index: Types.IndexName) =
-        { Unchecked.defaultof<MgetRequest> with
-            Index = index
-        }
+        let mutable req = Unchecked.defaultof<MgetRequest>
+        req <- { req with Index = index }
+        req
 
     /// Run multiple searches.
     let msearch (index: Types.Indices) =
-        { Unchecked.defaultof<MsearchRequest> with
-            Index = index
-        }
+        let mutable req = Unchecked.defaultof<MsearchRequest>
+        req <- { req with Index = index }
+        req
 
     /// Run multiple templated searches.
     let msearchTemplate (index: Types.Indices) =
-        { Unchecked.defaultof<MsearchTemplateRequest> with
-            Index = index
-        }
+        let mutable req = Unchecked.defaultof<MsearchTemplateRequest>
+        req <- { req with Index = index }
+        req
 
     /// Get multiple term vectors.
     let mtermvectors (index: Types.IndexName) =
-        { Unchecked.defaultof<MtermvectorsRequest> with
-            Index = index
-        }
+        let mutable req = Unchecked.defaultof<MtermvectorsRequest>
+        req <- { req with Index = index }
+        req
 
     /// Open a point in time.
     let openPointInTime (index: Types.Indices) =
-        { Unchecked.defaultof<OpenPointInTimeRequest> with
-            Index = index
-        }
+        let mutable req = Unchecked.defaultof<OpenPointInTimeRequest>
+        req <- { req with Index = index }
+        req
 
     /// Ping the cluster.
     let ping  : PingRequest =
@@ -248,147 +241,141 @@ module ES =
 
     /// Create or update a script or search template.
     let putScript (id: Types.Id) (context: Types.Name) =
-        { Unchecked.defaultof<PutScriptRequest> with
-            Id = id
-            Context = context
-        }
+        let mutable req = Unchecked.defaultof<PutScriptRequest>
+        req <- { req with Id = id }
+        req <- { req with Context = context }
+        req
 
     /// Evaluate ranked search results.
     let rankEval (index: Types.Indices) =
-        { Unchecked.defaultof<RankEvalRequest> with
-            Index = index
-        }
+        let mutable req = Unchecked.defaultof<RankEvalRequest>
+        req <- { req with Index = index }
+        req
 
     /// Reindex documents.
     let reindex  =
-        { Unchecked.defaultof<ReindexRequest> with
-        }
+        let mutable req = Unchecked.defaultof<ReindexRequest>
+        req
 
     /// Throttle a reindex operation.
     let reindexRethrottle (taskId: Types.Id) =
-        { Unchecked.defaultof<ReindexRethrottleRequest> with
-            TaskId = taskId
-        }
+        let mutable req = Unchecked.defaultof<ReindexRethrottleRequest>
+        req <- { req with TaskId = taskId }
+        req
 
     /// Render a search template.
     let renderSearchTemplate (id: Types.Id) =
-        { Unchecked.defaultof<RenderSearchTemplateRequest> with
-            Id = id
-        }
+        let mutable req = Unchecked.defaultof<RenderSearchTemplateRequest>
+        req <- { req with Id = id }
+        req
 
     /// Run a script.
     let scriptsPainlessExecute  =
-        { Unchecked.defaultof<ScriptsPainlessExecuteRequest> with
-        }
+        let mutable req = Unchecked.defaultof<ScriptsPainlessExecuteRequest>
+        req
 
     /// Run a scrolling search.
     let scroll (scrollId: Types.ScrollId) =
-        { Unchecked.defaultof<ScrollRequest> with
-            ScrollId = scrollId
-        }
+        let mutable req = Unchecked.defaultof<ScrollRequest>
+        req <- { req with ScrollId = scrollId }
+        req
 
     /// Run a search.
     let search (index: Types.Indices) =
-        { Unchecked.defaultof<SearchRequest> with
-            Index = index
-        }
+        let mutable req = Unchecked.defaultof<SearchRequest>
+        req <- { req with Index = index }
+        req
 
     /// Search a vector tile.
     let searchMvt (index: Types.Indices) (field: Types.Field) (zoom: GlobalSearchMvtTypes.ZoomLevel) (x: GlobalSearchMvtTypes.Coordinate) (y: GlobalSearchMvtTypes.Coordinate) =
-        { Unchecked.defaultof<SearchMvtRequest> with
-            Index = index
-            Field = field
-            Zoom = zoom
-            X = x
-            Y = y
-        }
+        let mutable req = Unchecked.defaultof<SearchMvtRequest>
+        req <- { req with Index = index }
+        req <- { req with Field = field }
+        req <- { req with Zoom = zoom }
+        req <- { req with X = x }
+        req <- { req with Y = y }
+        req
 
     /// Get the search shards.
     let searchShards (index: Types.Indices) =
-        { Unchecked.defaultof<SearchShardsRequest> with
-            Index = index
-        }
+        let mutable req = Unchecked.defaultof<SearchShardsRequest>
+        req <- { req with Index = index }
+        req
 
     /// Run a search with a search template.
     let searchTemplate (index: Types.Indices) =
-        { Unchecked.defaultof<SearchTemplateRequest> with
-            Index = index
-        }
+        let mutable req = Unchecked.defaultof<SearchTemplateRequest>
+        req <- { req with Index = index }
+        req
 
     /// Get terms in an index.
     let termsEnum (index: Types.Indices) =
-        { Unchecked.defaultof<TermsEnumRequest> with
-            Index = index
-        }
+        let mutable req = Unchecked.defaultof<TermsEnumRequest>
+        req <- { req with Index = index }
+        req
 
     /// Get term vector information.
     let termvectors (index: Types.IndexName) (id: Types.Id) =
-        { Unchecked.defaultof<TermvectorsRequest> with
-            Index = index
-            Id = id
-        }
+        let mutable req = Unchecked.defaultof<TermvectorsRequest>
+        req <- { req with Index = index }
+        req <- { req with Id = id }
+        req
 
     /// Update a document.
     let update (id: Types.Id) (index: Types.IndexName) =
-        { Unchecked.defaultof<UpdateRequest> with
-            Id = id
-            Index = index
-        }
+        let mutable req = Unchecked.defaultof<UpdateRequest>
+        req <- { req with Id = id }
+        req <- { req with Index = index }
+        req
 
     /// Update documents.
     let updateByQuery (index: Types.Indices) =
-        { Unchecked.defaultof<UpdateByQueryRequest> with
-            Index = index
-        }
+        let mutable req = Unchecked.defaultof<UpdateByQueryRequest>
+        req <- { req with Index = index }
+        req
 
     /// Throttle an update by query operation.
     let updateByQueryRethrottle (taskId: Types.Id) =
-        { Unchecked.defaultof<UpdateByQueryRethrottleRequest> with
-            TaskId = taskId
-        }
+        let mutable req = Unchecked.defaultof<UpdateByQueryRethrottleRequest>
+        req <- { req with TaskId = taskId }
+        req
 
     module Cat =
 
         /// Get aliases.
         let aliases (name: Types.Names) =
-            let req = { Unchecked.defaultof<CatAliasesRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<CatAliasesRequest>
+            req <- { req with Name = name }
             req
 
         /// Get shard allocation information.
         let allocation (nodeId: Types.NodeIds) =
-            let req = { Unchecked.defaultof<CatAllocationRequest> with
-                NodeId = nodeId
-            }
+            let mutable req = Unchecked.defaultof<CatAllocationRequest>
+            req <- { req with NodeId = nodeId }
             req
 
         /// Get circuit breakers statistics.
         let circuitBreaker (circuitBreakerPatterns: System.Text.Json.JsonElement) =
-            let req = { Unchecked.defaultof<CatCircuitBreakerRequest> with
-                CircuitBreakerPatterns = circuitBreakerPatterns
-            }
+            let mutable req = Unchecked.defaultof<CatCircuitBreakerRequest>
+            req <- { req with CircuitBreakerPatterns = circuitBreakerPatterns }
             req
 
         /// Get component templates.
         let componentTemplates (name: string) =
-            let req = { Unchecked.defaultof<CatComponentTemplatesRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<CatComponentTemplatesRequest>
+            req <- { req with Name = name }
             req
 
         /// Get a document count.
         let count (index: Types.Indices) =
-            let req = { Unchecked.defaultof<CatCountRequest> with
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<CatCountRequest>
+            req <- { req with Index = index }
             req
 
         /// Get field data cache information.
         let fielddata (fields: Types.Fields) =
-            let req = { Unchecked.defaultof<CatFielddataRequest> with
-                Fields = fields
-            }
+            let mutable req = Unchecked.defaultof<CatFielddataRequest>
+            req <- { req with Fields = fields }
             req
 
         /// Get the cluster health status.
@@ -401,9 +388,8 @@ module ES =
 
         /// Get index information.
         let indices (index: Types.Indices) =
-            let req = { Unchecked.defaultof<CatIndicesRequest> with
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<CatIndicesRequest>
+            req <- { req with Index = index }
             req
 
         /// Get master node information.
@@ -412,30 +398,26 @@ module ES =
 
         /// Get data frame analytics jobs.
         let mlDataFrameAnalytics (id: Types.Id) =
-            let req = { Unchecked.defaultof<CatMlDataFrameAnalyticsRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<CatMlDataFrameAnalyticsRequest>
+            req <- { req with Id = id }
             req
 
         /// Get datafeeds.
         let mlDatafeeds (datafeedId: Types.Id) =
-            let req = { Unchecked.defaultof<CatMlDatafeedsRequest> with
-                DatafeedId = datafeedId
-            }
+            let mutable req = Unchecked.defaultof<CatMlDatafeedsRequest>
+            req <- { req with DatafeedId = datafeedId }
             req
 
         /// Get anomaly detection jobs.
         let mlJobs (jobId: Types.Id) =
-            let req = { Unchecked.defaultof<CatMlJobsRequest> with
-                JobId = jobId
-            }
+            let mutable req = Unchecked.defaultof<CatMlJobsRequest>
+            req <- { req with JobId = jobId }
             req
 
         /// Get trained models.
         let mlTrainedModels (modelId: Types.Id) =
-            let req = { Unchecked.defaultof<CatMlTrainedModelsRequest> with
-                ModelId = modelId
-            }
+            let mutable req = Unchecked.defaultof<CatMlTrainedModelsRequest>
+            req <- { req with ModelId = modelId }
             req
 
         /// Get node attribute information.
@@ -456,9 +438,8 @@ module ES =
 
         /// Get shard recovery information.
         let recovery (index: Types.Indices) =
-            let req = { Unchecked.defaultof<CatRecoveryRequest> with
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<CatRecoveryRequest>
+            req <- { req with Index = index }
             req
 
         /// Get snapshot repository information.
@@ -467,23 +448,20 @@ module ES =
 
         /// Get segment information.
         let segments (index: Types.Indices) =
-            let req = { Unchecked.defaultof<CatSegmentsRequest> with
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<CatSegmentsRequest>
+            req <- { req with Index = index }
             req
 
         /// Get shard information.
         let shards (index: Types.Indices) =
-            let req = { Unchecked.defaultof<CatShardsRequest> with
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<CatShardsRequest>
+            req <- { req with Index = index }
             req
 
         /// Get snapshot information.
         let snapshots (repository: Types.Names) =
-            let req = { Unchecked.defaultof<CatSnapshotsRequest> with
-                Repository = repository
-            }
+            let mutable req = Unchecked.defaultof<CatSnapshotsRequest>
+            req <- { req with Repository = repository }
             req
 
         /// Get task information.
@@ -492,102 +470,88 @@ module ES =
 
         /// Get index template information.
         let templates (name: Types.Name) =
-            let req = { Unchecked.defaultof<CatTemplatesRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<CatTemplatesRequest>
+            req <- { req with Name = name }
             req
 
         /// Get thread pool statistics.
         let threadPool (threadPoolPatterns: Types.Names) =
-            let req = { Unchecked.defaultof<CatThreadPoolRequest> with
-                ThreadPoolPatterns = threadPoolPatterns
-            }
+            let mutable req = Unchecked.defaultof<CatThreadPoolRequest>
+            req <- { req with ThreadPoolPatterns = threadPoolPatterns }
             req
 
         /// Get transform information.
         let transforms (transformId: Types.Id) =
-            let req = { Unchecked.defaultof<CatTransformsRequest> with
-                TransformId = transformId
-            }
+            let mutable req = Unchecked.defaultof<CatTransformsRequest>
+            req <- { req with TransformId = transformId }
             req
 
     module Ccr =
 
         /// Delete auto-follow patterns.
         let deleteAutoFollowPattern (name: Types.Name) =
-            let req = { Unchecked.defaultof<CcrDeleteAutoFollowPatternRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<CcrDeleteAutoFollowPatternRequest>
+            req <- { req with Name = name }
             req
 
         /// Create a follower.
         let follow (index: Types.IndexName) =
-            let req = { Unchecked.defaultof<CcrFollowRequest> with
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<CcrFollowRequest>
+            req <- { req with Index = index }
             req
 
         /// Get follower information.
         let followInfo (index: Types.Indices) =
-            let req = { Unchecked.defaultof<CcrFollowInfoRequest> with
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<CcrFollowInfoRequest>
+            req <- { req with Index = index }
             req
 
         /// Get follower stats.
         let followStats (index: Types.Indices) =
-            let req = { Unchecked.defaultof<CcrFollowStatsRequest> with
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<CcrFollowStatsRequest>
+            req <- { req with Index = index }
             req
 
         /// Forget a follower.
         let forgetFollower (index: Types.IndexName) =
-            let req = { Unchecked.defaultof<CcrForgetFollowerRequest> with
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<CcrForgetFollowerRequest>
+            req <- { req with Index = index }
             req
 
         /// Get auto-follow patterns.
         let getAutoFollowPattern (name: Types.Name) =
-            let req = { Unchecked.defaultof<CcrGetAutoFollowPatternRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<CcrGetAutoFollowPatternRequest>
+            req <- { req with Name = name }
             req
 
         /// Pause an auto-follow pattern.
         let pauseAutoFollowPattern (name: Types.Name) =
-            let req = { Unchecked.defaultof<CcrPauseAutoFollowPatternRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<CcrPauseAutoFollowPatternRequest>
+            req <- { req with Name = name }
             req
 
         /// Pause a follower.
         let pauseFollow (index: Types.IndexName) =
-            let req = { Unchecked.defaultof<CcrPauseFollowRequest> with
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<CcrPauseFollowRequest>
+            req <- { req with Index = index }
             req
 
         /// Create or update auto-follow patterns.
         let putAutoFollowPattern (name: Types.Name) =
-            let req = { Unchecked.defaultof<CcrPutAutoFollowPatternRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<CcrPutAutoFollowPatternRequest>
+            req <- { req with Name = name }
             req
 
         /// Resume an auto-follow pattern.
         let resumeAutoFollowPattern (name: Types.Name) =
-            let req = { Unchecked.defaultof<CcrResumeAutoFollowPatternRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<CcrResumeAutoFollowPatternRequest>
+            req <- { req with Name = name }
             req
 
         /// Resume a follower.
         let resumeFollow (index: Types.IndexName) =
-            let req = { Unchecked.defaultof<CcrResumeFollowRequest> with
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<CcrResumeFollowRequest>
+            req <- { req with Index = index }
             req
 
         /// Get cross-cluster replication stats.
@@ -596,9 +560,8 @@ module ES =
 
         /// Unfollow an index.
         let unfollow (index: Types.IndexName) =
-            let req = { Unchecked.defaultof<CcrUnfollowRequest> with
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<CcrUnfollowRequest>
+            req <- { req with Index = index }
             req
 
     module Cluster =
@@ -609,9 +572,8 @@ module ES =
 
         /// Delete component templates.
         let deleteComponentTemplate (name: Types.Names) =
-            let req = { Unchecked.defaultof<ClusterDeleteComponentTemplateRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<ClusterDeleteComponentTemplateRequest>
+            req <- { req with Name = name }
             req
 
         /// Clear cluster voting config exclusions.
@@ -620,16 +582,14 @@ module ES =
 
         /// Check component templates.
         let existsComponentTemplate (name: Types.Names) =
-            let req = { Unchecked.defaultof<ClusterExistsComponentTemplateRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<ClusterExistsComponentTemplateRequest>
+            req <- { req with Name = name }
             req
 
         /// Get component templates.
         let getComponentTemplate (name: Types.Name) =
-            let req = { Unchecked.defaultof<ClusterGetComponentTemplateRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<ClusterGetComponentTemplateRequest>
+            req <- { req with Name = name }
             req
 
         /// Get cluster-wide settings.
@@ -638,16 +598,14 @@ module ES =
 
         /// Get the cluster health status.
         let health (index: Types.Indices) =
-            let req = { Unchecked.defaultof<ClusterHealthRequest> with
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<ClusterHealthRequest>
+            req <- { req with Index = index }
             req
 
         /// Get cluster info.
         let info (target: Types.ClusterInfoTargets) =
-            let req = { Unchecked.defaultof<ClusterInfoRequest> with
-                Target = target
-            }
+            let mutable req = Unchecked.defaultof<ClusterInfoRequest>
+            req <- { req with Target = target }
             req
 
         /// Get the pending cluster tasks.
@@ -660,9 +618,8 @@ module ES =
 
         /// Create or update a component template.
         let putComponentTemplate (name: Types.Name) =
-            let req = { Unchecked.defaultof<ClusterPutComponentTemplateRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<ClusterPutComponentTemplateRequest>
+            req <- { req with Name = name }
             req
 
         /// Update the cluster settings.
@@ -679,47 +636,41 @@ module ES =
 
         /// Get the cluster state.
         let state (metric: ClusterState.ClusterStateMetrics) (index: Types.Indices) =
-            let req = { Unchecked.defaultof<ClusterStateRequest> with
-                Metric = metric
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<ClusterStateRequest>
+            req <- { req with Metric = metric }
+            req <- { req with Index = index }
             req
 
         /// Get cluster statistics.
         let stats (nodeId: Types.NodeIds) =
-            let req = { Unchecked.defaultof<ClusterStatsRequest> with
-                NodeId = nodeId
-            }
+            let mutable req = Unchecked.defaultof<ClusterStatsRequest>
+            req <- { req with NodeId = nodeId }
             req
 
     module Connector =
 
         /// Check in a connector.
         let checkIn (connectorId: Types.Id) =
-            let req = { Unchecked.defaultof<ConnectorCheckInRequest> with
-                ConnectorId = connectorId
-            }
+            let mutable req = Unchecked.defaultof<ConnectorCheckInRequest>
+            req <- { req with ConnectorId = connectorId }
             req
 
         /// Delete a connector.
         let delete (connectorId: Types.Id) =
-            let req = { Unchecked.defaultof<ConnectorDeleteRequest> with
-                ConnectorId = connectorId
-            }
+            let mutable req = Unchecked.defaultof<ConnectorDeleteRequest>
+            req <- { req with ConnectorId = connectorId }
             req
 
         /// Get a connector.
         let get (connectorId: Types.Id) =
-            let req = { Unchecked.defaultof<ConnectorGetRequest> with
-                ConnectorId = connectorId
-            }
+            let mutable req = Unchecked.defaultof<ConnectorGetRequest>
+            req <- { req with ConnectorId = connectorId }
             req
 
         /// Update the connector last sync stats.
         let lastSync (connectorId: Types.Id) =
-            let req = { Unchecked.defaultof<ConnectorLastSyncRequest> with
-                ConnectorId = connectorId
-            }
+            let mutable req = Unchecked.defaultof<ConnectorLastSyncRequest>
+            req <- { req with ConnectorId = connectorId }
             req
 
         /// Get all connectors.
@@ -732,23 +683,20 @@ module ES =
 
         /// Create or update a connector.
         let put (connectorId: Types.Id) =
-            let req = { Unchecked.defaultof<ConnectorPutRequest> with
-                ConnectorId = connectorId
-            }
+            let mutable req = Unchecked.defaultof<ConnectorPutRequest>
+            req <- { req with ConnectorId = connectorId }
             req
 
         /// Deletes a connector secret.
         let secretDelete (id: string) =
-            let req = { Unchecked.defaultof<ConnectorSecretDeleteRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<ConnectorSecretDeleteRequest>
+            req <- { req with Id = id }
             req
 
         /// Retrieves a secret stored by Connectors.
         let secretGet (id: string) =
-            let req = { Unchecked.defaultof<ConnectorSecretGetRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<ConnectorSecretGetRequest>
+            req <- { req with Id = id }
             req
 
         /// Creates a secret for a Connector.
@@ -757,51 +705,44 @@ module ES =
 
         /// Creates or updates a secret for a Connector.
         let secretPut (id: string) =
-            let req = { Unchecked.defaultof<ConnectorSecretPutRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<ConnectorSecretPutRequest>
+            req <- { req with Id = id }
             req
 
         /// Cancel a connector sync job.
         let syncJobCancel (connectorSyncJobId: Types.Id) =
-            let req = { Unchecked.defaultof<ConnectorSyncJobCancelRequest> with
-                ConnectorSyncJobId = connectorSyncJobId
-            }
+            let mutable req = Unchecked.defaultof<ConnectorSyncJobCancelRequest>
+            req <- { req with ConnectorSyncJobId = connectorSyncJobId }
             req
 
         /// Check in a connector sync job.
         let syncJobCheckIn (connectorSyncJobId: Types.Id) =
-            let req = { Unchecked.defaultof<ConnectorSyncJobCheckInRequest> with
-                ConnectorSyncJobId = connectorSyncJobId
-            }
+            let mutable req = Unchecked.defaultof<ConnectorSyncJobCheckInRequest>
+            req <- { req with ConnectorSyncJobId = connectorSyncJobId }
             req
 
         /// Claim a connector sync job.
         let syncJobClaim (connectorSyncJobId: Types.Id) =
-            let req = { Unchecked.defaultof<ConnectorSyncJobClaimRequest> with
-                ConnectorSyncJobId = connectorSyncJobId
-            }
+            let mutable req = Unchecked.defaultof<ConnectorSyncJobClaimRequest>
+            req <- { req with ConnectorSyncJobId = connectorSyncJobId }
             req
 
         /// Delete a connector sync job.
         let syncJobDelete (connectorSyncJobId: Types.Id) =
-            let req = { Unchecked.defaultof<ConnectorSyncJobDeleteRequest> with
-                ConnectorSyncJobId = connectorSyncJobId
-            }
+            let mutable req = Unchecked.defaultof<ConnectorSyncJobDeleteRequest>
+            req <- { req with ConnectorSyncJobId = connectorSyncJobId }
             req
 
         /// Set a connector sync job error.
         let syncJobError (connectorSyncJobId: Types.Id) =
-            let req = { Unchecked.defaultof<ConnectorSyncJobErrorRequest> with
-                ConnectorSyncJobId = connectorSyncJobId
-            }
+            let mutable req = Unchecked.defaultof<ConnectorSyncJobErrorRequest>
+            req <- { req with ConnectorSyncJobId = connectorSyncJobId }
             req
 
         /// Get a connector sync job.
         let syncJobGet (connectorSyncJobId: Types.Id) =
-            let req = { Unchecked.defaultof<ConnectorSyncJobGetRequest> with
-                ConnectorSyncJobId = connectorSyncJobId
-            }
+            let mutable req = Unchecked.defaultof<ConnectorSyncJobGetRequest>
+            req <- { req with ConnectorSyncJobId = connectorSyncJobId }
             req
 
         /// Get all connector sync jobs.
@@ -814,123 +755,106 @@ module ES =
 
         /// Set the connector sync job stats.
         let syncJobUpdateStats (connectorSyncJobId: Types.Id) =
-            let req = { Unchecked.defaultof<ConnectorSyncJobUpdateStatsRequest> with
-                ConnectorSyncJobId = connectorSyncJobId
-            }
+            let mutable req = Unchecked.defaultof<ConnectorSyncJobUpdateStatsRequest>
+            req <- { req with ConnectorSyncJobId = connectorSyncJobId }
             req
 
         /// Activate the connector draft filter.
         let updateActiveFiltering (connectorId: Types.Id) =
-            let req = { Unchecked.defaultof<ConnectorUpdateActiveFilteringRequest> with
-                ConnectorId = connectorId
-            }
+            let mutable req = Unchecked.defaultof<ConnectorUpdateActiveFilteringRequest>
+            req <- { req with ConnectorId = connectorId }
             req
 
         /// Update the connector API key ID.
         let updateApiKeyId (connectorId: Types.Id) =
-            let req = { Unchecked.defaultof<ConnectorUpdateApiKeyIdRequest> with
-                ConnectorId = connectorId
-            }
+            let mutable req = Unchecked.defaultof<ConnectorUpdateApiKeyIdRequest>
+            req <- { req with ConnectorId = connectorId }
             req
 
         /// Update the connector configuration.
         let updateConfiguration (connectorId: Types.Id) =
-            let req = { Unchecked.defaultof<ConnectorUpdateConfigurationRequest> with
-                ConnectorId = connectorId
-            }
+            let mutable req = Unchecked.defaultof<ConnectorUpdateConfigurationRequest>
+            req <- { req with ConnectorId = connectorId }
             req
 
         /// Update the connector error field.
         let updateError (connectorId: Types.Id) =
-            let req = { Unchecked.defaultof<ConnectorUpdateErrorRequest> with
-                ConnectorId = connectorId
-            }
+            let mutable req = Unchecked.defaultof<ConnectorUpdateErrorRequest>
+            req <- { req with ConnectorId = connectorId }
             req
 
         /// Update the connector features.
         let updateFeatures (connectorId: Types.Id) =
-            let req = { Unchecked.defaultof<ConnectorUpdateFeaturesRequest> with
-                ConnectorId = connectorId
-            }
+            let mutable req = Unchecked.defaultof<ConnectorUpdateFeaturesRequest>
+            req <- { req with ConnectorId = connectorId }
             req
 
         /// Update the connector filtering.
         let updateFiltering (connectorId: Types.Id) =
-            let req = { Unchecked.defaultof<ConnectorUpdateFilteringRequest> with
-                ConnectorId = connectorId
-            }
+            let mutable req = Unchecked.defaultof<ConnectorUpdateFilteringRequest>
+            req <- { req with ConnectorId = connectorId }
             req
 
         /// Update the connector draft filtering validation.
         let updateFilteringValidation (connectorId: Types.Id) =
-            let req = { Unchecked.defaultof<ConnectorUpdateFilteringValidationRequest> with
-                ConnectorId = connectorId
-            }
+            let mutable req = Unchecked.defaultof<ConnectorUpdateFilteringValidationRequest>
+            req <- { req with ConnectorId = connectorId }
             req
 
         /// Update the connector index name.
         let updateIndexName (connectorId: Types.Id) =
-            let req = { Unchecked.defaultof<ConnectorUpdateIndexNameRequest> with
-                ConnectorId = connectorId
-            }
+            let mutable req = Unchecked.defaultof<ConnectorUpdateIndexNameRequest>
+            req <- { req with ConnectorId = connectorId }
             req
 
         /// Update the connector name and description.
         let updateName (connectorId: Types.Id) =
-            let req = { Unchecked.defaultof<ConnectorUpdateNameRequest> with
-                ConnectorId = connectorId
-            }
+            let mutable req = Unchecked.defaultof<ConnectorUpdateNameRequest>
+            req <- { req with ConnectorId = connectorId }
             req
 
         /// Update the connector is_native flag.
         let updateNative (connectorId: Types.Id) =
-            let req = { Unchecked.defaultof<ConnectorUpdateNativeRequest> with
-                ConnectorId = connectorId
-            }
+            let mutable req = Unchecked.defaultof<ConnectorUpdateNativeRequest>
+            req <- { req with ConnectorId = connectorId }
             req
 
         /// Update the connector pipeline.
         let updatePipeline (connectorId: Types.Id) =
-            let req = { Unchecked.defaultof<ConnectorUpdatePipelineRequest> with
-                ConnectorId = connectorId
-            }
+            let mutable req = Unchecked.defaultof<ConnectorUpdatePipelineRequest>
+            req <- { req with ConnectorId = connectorId }
             req
 
         /// Update the connector scheduling.
         let updateScheduling (connectorId: Types.Id) =
-            let req = { Unchecked.defaultof<ConnectorUpdateSchedulingRequest> with
-                ConnectorId = connectorId
-            }
+            let mutable req = Unchecked.defaultof<ConnectorUpdateSchedulingRequest>
+            req <- { req with ConnectorId = connectorId }
             req
 
         /// Update the connector service type.
         let updateServiceType (connectorId: Types.Id) =
-            let req = { Unchecked.defaultof<ConnectorUpdateServiceTypeRequest> with
-                ConnectorId = connectorId
-            }
+            let mutable req = Unchecked.defaultof<ConnectorUpdateServiceTypeRequest>
+            req <- { req with ConnectorId = connectorId }
             req
 
         /// Update the connector status.
         let updateStatus (connectorId: Types.Id) =
-            let req = { Unchecked.defaultof<ConnectorUpdateStatusRequest> with
-                ConnectorId = connectorId
-            }
+            let mutable req = Unchecked.defaultof<ConnectorUpdateStatusRequest>
+            req <- { req with ConnectorId = connectorId }
             req
 
     module DanglingIndices =
 
         /// Delete a dangling index.
         let deleteDanglingIndex (indexUuid: Types.Uuid) =
-            let req = { Unchecked.defaultof<DanglingIndicesDeleteDanglingIndexRequest> with
-                IndexUuid = indexUuid
-            }
+            let mutable req = Unchecked.defaultof<DanglingIndicesDeleteDanglingIndexRequest>
+            req <- { req with IndexUuid = indexUuid }
             req
 
         /// Import a dangling index.
         let importDanglingIndex (indexUuid: Types.Uuid) =
-            let req = { Unchecked.defaultof<DanglingIndicesImportDanglingIndexRequest> with
-                IndexUuid = indexUuid
-            }
+            let mutable req = Unchecked.defaultof<DanglingIndicesImportDanglingIndexRequest>
+            req <- { req with IndexUuid = indexUuid }
             req
 
         /// Get the dangling indices.
@@ -941,30 +865,26 @@ module ES =
 
         /// Delete an enrich policy.
         let deletePolicy (name: Types.Name) =
-            let req = { Unchecked.defaultof<EnrichDeletePolicyRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<EnrichDeletePolicyRequest>
+            req <- { req with Name = name }
             req
 
         /// Run an enrich policy.
         let executePolicy (name: Types.Name) =
-            let req = { Unchecked.defaultof<EnrichExecutePolicyRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<EnrichExecutePolicyRequest>
+            req <- { req with Name = name }
             req
 
         /// Get an enrich policy.
         let getPolicy (name: Types.Names) =
-            let req = { Unchecked.defaultof<EnrichGetPolicyRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<EnrichGetPolicyRequest>
+            req <- { req with Name = name }
             req
 
         /// Create an enrich policy.
         let putPolicy (name: Types.Name) =
-            let req = { Unchecked.defaultof<EnrichPutPolicyRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<EnrichPutPolicyRequest>
+            req <- { req with Name = name }
             req
 
         /// Get enrich stats.
@@ -975,30 +895,26 @@ module ES =
 
         /// Delete an async EQL search.
         let delete (id: Types.Id) =
-            let req = { Unchecked.defaultof<EqlDeleteRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<EqlDeleteRequest>
+            req <- { req with Id = id }
             req
 
         /// Get async EQL search results.
         let get (id: Types.Id) =
-            let req = { Unchecked.defaultof<EqlGetRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<EqlGetRequest>
+            req <- { req with Id = id }
             req
 
         /// Get the async EQL status.
         let getStatus (id: Types.Id) =
-            let req = { Unchecked.defaultof<EqlGetStatusRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<EqlGetStatusRequest>
+            req <- { req with Id = id }
             req
 
         /// Get EQL search results.
         let search (index: Types.Indices) =
-            let req = { Unchecked.defaultof<EqlSearchRequest> with
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<EqlSearchRequest>
+            req <- { req with Index = index }
             req
 
     module Esql =
@@ -1009,44 +925,38 @@ module ES =
 
         /// Delete an async ES|QL query.
         let asyncQueryDelete (id: Types.Id) =
-            let req = { Unchecked.defaultof<EsqlAsyncQueryDeleteRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<EsqlAsyncQueryDeleteRequest>
+            req <- { req with Id = id }
             req
 
         /// Get async ES|QL query results.
         let asyncQueryGet (id: Types.Id) =
-            let req = { Unchecked.defaultof<EsqlAsyncQueryGetRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<EsqlAsyncQueryGetRequest>
+            req <- { req with Id = id }
             req
 
         /// Stop async ES|QL query.
         let asyncQueryStop (id: Types.Id) =
-            let req = { Unchecked.defaultof<EsqlAsyncQueryStopRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<EsqlAsyncQueryStopRequest>
+            req <- { req with Id = id }
             req
 
         /// Delete an ES|QL view.
         let deleteView (name: Types.Id) =
-            let req = { Unchecked.defaultof<EsqlDeleteViewRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<EsqlDeleteViewRequest>
+            req <- { req with Name = name }
             req
 
         /// Get a specific running ES|QL query information.
         let getQuery (id: Types.Id) =
-            let req = { Unchecked.defaultof<EsqlGetQueryRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<EsqlGetQueryRequest>
+            req <- { req with Id = id }
             req
 
         /// Get an ES|QL view.
         let getView (name: Types.Id) =
-            let req = { Unchecked.defaultof<EsqlGetViewRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<EsqlGetViewRequest>
+            req <- { req with Name = name }
             req
 
         /// Get running ES|QL queries information.
@@ -1055,9 +965,8 @@ module ES =
 
         /// Create or update an ES|QL view.
         let putView (name: Types.Id) =
-            let req = { Unchecked.defaultof<EsqlPutViewRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<EsqlPutViewRequest>
+            req <- { req with Name = name }
             req
 
         /// Run an ES|QL query.
@@ -1078,30 +987,26 @@ module ES =
 
         /// Deletes a secret stored by Fleet.
         let deleteSecret (id: string) =
-            let req = { Unchecked.defaultof<FleetDeleteSecretRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<FleetDeleteSecretRequest>
+            req <- { req with Id = id }
             req
 
         /// Retrieves a secret stored by Fleet.
         let getSecret (id: string) =
-            let req = { Unchecked.defaultof<FleetGetSecretRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<FleetGetSecretRequest>
+            req <- { req with Id = id }
             req
 
         /// Get global checkpoints.
         let globalCheckpoints (index: System.Text.Json.JsonElement) =
-            let req = { Unchecked.defaultof<FleetGlobalCheckpointsRequest> with
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<FleetGlobalCheckpointsRequest>
+            req <- { req with Index = index }
             req
 
         /// Run multiple Fleet searches.
         let msearch (index: System.Text.Json.JsonElement) =
-            let req = { Unchecked.defaultof<FleetMsearchRequest> with
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<FleetMsearchRequest>
+            req <- { req with Index = index }
             req
 
         /// Creates a secret stored by Fleet.
@@ -1110,41 +1015,36 @@ module ES =
 
         /// Run a Fleet search.
         let search (index: System.Text.Json.JsonElement) =
-            let req = { Unchecked.defaultof<FleetSearchRequest> with
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<FleetSearchRequest>
+            req <- { req with Index = index }
             req
 
     module Graph =
 
         /// Explore graph analytics.
         let explore (index: Types.Indices) =
-            let req = { Unchecked.defaultof<GraphExploreRequest> with
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<GraphExploreRequest>
+            req <- { req with Index = index }
             req
 
     module Ilm =
 
         /// Delete a lifecycle policy.
         let deleteLifecycle (policy: Types.Name) =
-            let req = { Unchecked.defaultof<IlmDeleteLifecycleRequest> with
-                Policy = policy
-            }
+            let mutable req = Unchecked.defaultof<IlmDeleteLifecycleRequest>
+            req <- { req with Policy = policy }
             req
 
         /// Explain the lifecycle state.
         let explainLifecycle (index: Types.IndexName) =
-            let req = { Unchecked.defaultof<IlmExplainLifecycleRequest> with
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<IlmExplainLifecycleRequest>
+            req <- { req with Index = index }
             req
 
         /// Get lifecycle policies.
         let getLifecycle (policy: Types.Name) =
-            let req = { Unchecked.defaultof<IlmGetLifecycleRequest> with
-                Policy = policy
-            }
+            let mutable req = Unchecked.defaultof<IlmGetLifecycleRequest>
+            req <- { req with Policy = policy }
             req
 
         /// Get the ILM status.
@@ -1157,30 +1057,26 @@ module ES =
 
         /// Move to a lifecycle step.
         let moveToStep (index: Types.IndexName) =
-            let req = { Unchecked.defaultof<IlmMoveToStepRequest> with
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<IlmMoveToStepRequest>
+            req <- { req with Index = index }
             req
 
         /// Create or update a lifecycle policy.
         let putLifecycle (policy: Types.Name) =
-            let req = { Unchecked.defaultof<IlmPutLifecycleRequest> with
-                Policy = policy
-            }
+            let mutable req = Unchecked.defaultof<IlmPutLifecycleRequest>
+            req <- { req with Policy = policy }
             req
 
         /// Remove policies from an index.
         let removePolicy (index: Types.IndexName) =
-            let req = { Unchecked.defaultof<IlmRemovePolicyRequest> with
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<IlmRemovePolicyRequest>
+            req <- { req with Index = index }
             req
 
         /// Retry a policy.
         let retry (index: Types.IndexName) =
-            let req = { Unchecked.defaultof<IlmRetryRequest> with
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<IlmRetryRequest>
+            req <- { req with Index = index }
             req
 
         /// Start the ILM plugin.
@@ -1195,219 +1091,189 @@ module ES =
 
         /// Add an index block.
         let addBlock (index: Types.Indices) (block: IndicesTypes.IndicesBlockOptions) =
-            let req = { Unchecked.defaultof<IndicesAddBlockRequest> with
-                Index = index
-                Block = block
-            }
+            let mutable req = Unchecked.defaultof<IndicesAddBlockRequest>
+            req <- { req with Index = index }
+            req <- { req with Block = block }
             req
 
         /// Get tokens from text analysis.
         let analyze (index: Types.IndexName) =
-            let req = { Unchecked.defaultof<IndicesAnalyzeRequest> with
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<IndicesAnalyzeRequest>
+            req <- { req with Index = index }
             req
 
         /// Cancel a migration reindex operation.
         let cancelMigrateReindex (index: Types.Indices) =
-            let req = { Unchecked.defaultof<IndicesCancelMigrateReindexRequest> with
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<IndicesCancelMigrateReindexRequest>
+            req <- { req with Index = index }
             req
 
         /// Clear the cache.
         let clearCache (index: Types.Indices) =
-            let req = { Unchecked.defaultof<IndicesClearCacheRequest> with
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<IndicesClearCacheRequest>
+            req <- { req with Index = index }
             req
 
         /// Clone an index.
         let clone (index: Types.IndexName) (target: Types.Name) =
-            let req = { Unchecked.defaultof<IndicesCloneRequest> with
-                Index = index
-                Target = target
-            }
+            let mutable req = Unchecked.defaultof<IndicesCloneRequest>
+            req <- { req with Index = index }
+            req <- { req with Target = target }
             req
 
         /// Close an index.
         let close (index: Types.Indices) =
-            let req = { Unchecked.defaultof<IndicesCloseRequest> with
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<IndicesCloseRequest>
+            req <- { req with Index = index }
             req
 
         /// Create an index.
         let create (index: Types.IndexName) =
-            let req = { Unchecked.defaultof<IndicesCreateRequest> with
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<IndicesCreateRequest>
+            req <- { req with Index = index }
             req
 
         /// Create a data stream.
         let createDataStream (name: Types.DataStreamName) =
-            let req = { Unchecked.defaultof<IndicesCreateDataStreamRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<IndicesCreateDataStreamRequest>
+            req <- { req with Name = name }
             req
 
         /// Create an index from a source index.
         let createFrom (source: Types.IndexName) (dest: Types.IndexName) =
-            let req = { Unchecked.defaultof<IndicesCreateFromRequest> with
-                Source = source
-                Dest = dest
-            }
+            let mutable req = Unchecked.defaultof<IndicesCreateFromRequest>
+            req <- { req with Source = source }
+            req <- { req with Dest = dest }
             req
 
         /// Get data stream stats.
         let dataStreamsStats (name: Types.Indices) =
-            let req = { Unchecked.defaultof<IndicesDataStreamsStatsRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<IndicesDataStreamsStatsRequest>
+            req <- { req with Name = name }
             req
 
         /// Delete indices.
         let delete (index: Types.Indices) =
-            let req = { Unchecked.defaultof<IndicesDeleteRequest> with
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<IndicesDeleteRequest>
+            req <- { req with Index = index }
             req
 
         /// Delete an alias.
         let deleteAlias (index: Types.Indices) (name: Types.Names) =
-            let req = { Unchecked.defaultof<IndicesDeleteAliasRequest> with
-                Index = index
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<IndicesDeleteAliasRequest>
+            req <- { req with Index = index }
+            req <- { req with Name = name }
             req
 
         /// Delete data stream lifecycles.
         let deleteDataLifecycle (name: Types.DataStreamNames) =
-            let req = { Unchecked.defaultof<IndicesDeleteDataLifecycleRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<IndicesDeleteDataLifecycleRequest>
+            req <- { req with Name = name }
             req
 
         /// Delete data streams.
         let deleteDataStream (name: Types.DataStreamNames) =
-            let req = { Unchecked.defaultof<IndicesDeleteDataStreamRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<IndicesDeleteDataStreamRequest>
+            req <- { req with Name = name }
             req
 
         /// Delete data stream options.
         let deleteDataStreamOptions (name: Types.DataStreamNames) =
-            let req = { Unchecked.defaultof<IndicesDeleteDataStreamOptionsRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<IndicesDeleteDataStreamOptionsRequest>
+            req <- { req with Name = name }
             req
 
         /// Delete an index template.
         let deleteIndexTemplate (name: Types.Names) =
-            let req = { Unchecked.defaultof<IndicesDeleteIndexTemplateRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<IndicesDeleteIndexTemplateRequest>
+            req <- { req with Name = name }
             req
 
         /// Delete a legacy index template.
         let deleteTemplate (name: Types.Name) =
-            let req = { Unchecked.defaultof<IndicesDeleteTemplateRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<IndicesDeleteTemplateRequest>
+            req <- { req with Name = name }
             req
 
         /// Analyze the index disk usage.
         let diskUsage (index: Types.Indices) =
-            let req = { Unchecked.defaultof<IndicesDiskUsageRequest> with
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<IndicesDiskUsageRequest>
+            req <- { req with Index = index }
             req
 
         /// Downsample an index.
         let downsample (index: Types.IndexName) (targetIndex: Types.IndexName) =
-            let req = { Unchecked.defaultof<IndicesDownsampleRequest> with
-                Index = index
-                TargetIndex = targetIndex
-            }
+            let mutable req = Unchecked.defaultof<IndicesDownsampleRequest>
+            req <- { req with Index = index }
+            req <- { req with TargetIndex = targetIndex }
             req
 
         /// Check indices.
         let exists (index: Types.Indices) =
-            let req = { Unchecked.defaultof<IndicesExistsRequest> with
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<IndicesExistsRequest>
+            req <- { req with Index = index }
             req
 
         /// Check aliases.
         let existsAlias (name: Types.Names) (index: Types.Indices) =
-            let req = { Unchecked.defaultof<IndicesExistsAliasRequest> with
-                Name = name
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<IndicesExistsAliasRequest>
+            req <- { req with Name = name }
+            req <- { req with Index = index }
             req
 
         /// Check index templates.
         let existsIndexTemplate (name: Types.Name) =
-            let req = { Unchecked.defaultof<IndicesExistsIndexTemplateRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<IndicesExistsIndexTemplateRequest>
+            req <- { req with Name = name }
             req
 
         /// Check existence of index templates.
         let existsTemplate (name: Types.Names) =
-            let req = { Unchecked.defaultof<IndicesExistsTemplateRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<IndicesExistsTemplateRequest>
+            req <- { req with Name = name }
             req
 
         /// Get the status for a data stream lifecycle.
         let explainDataLifecycle (index: Types.Indices) =
-            let req = { Unchecked.defaultof<IndicesExplainDataLifecycleRequest> with
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<IndicesExplainDataLifecycleRequest>
+            req <- { req with Index = index }
             req
 
         /// Get field usage stats.
         let fieldUsageStats (index: Types.Indices) =
-            let req = { Unchecked.defaultof<IndicesFieldUsageStatsRequest> with
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<IndicesFieldUsageStatsRequest>
+            req <- { req with Index = index }
             req
 
         /// Flush data streams or indices.
         let flush (index: Types.Indices) =
-            let req = { Unchecked.defaultof<IndicesFlushRequest> with
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<IndicesFlushRequest>
+            req <- { req with Index = index }
             req
 
         /// Force a merge.
         let forcemerge (index: Types.Indices) =
-            let req = { Unchecked.defaultof<IndicesForcemergeRequest> with
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<IndicesForcemergeRequest>
+            req <- { req with Index = index }
             req
 
         /// Get index information.
         let get (index: Types.Indices) =
-            let req = { Unchecked.defaultof<IndicesGetRequest> with
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<IndicesGetRequest>
+            req <- { req with Index = index }
             req
 
         /// Get aliases.
         let getAlias (name: Types.Names) (index: Types.Indices) =
-            let req = { Unchecked.defaultof<IndicesGetAliasRequest> with
-                Name = name
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<IndicesGetAliasRequest>
+            req <- { req with Name = name }
+            req <- { req with Index = index }
             req
 
         /// Get data stream lifecycles.
         let getDataLifecycle (name: Types.DataStreamNames) =
-            let req = { Unchecked.defaultof<IndicesGetDataLifecycleRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<IndicesGetDataLifecycleRequest>
+            req <- { req with Name = name }
             req
 
         /// Get data stream lifecycle stats.
@@ -1416,74 +1282,64 @@ module ES =
 
         /// Get data streams.
         let getDataStream (name: Types.DataStreamNames) =
-            let req = { Unchecked.defaultof<IndicesGetDataStreamRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<IndicesGetDataStreamRequest>
+            req <- { req with Name = name }
             req
 
         /// Get data stream mappings.
         let getDataStreamMappings (name: Types.Indices) =
-            let req = { Unchecked.defaultof<IndicesGetDataStreamMappingsRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<IndicesGetDataStreamMappingsRequest>
+            req <- { req with Name = name }
             req
 
         /// Get data stream options.
         let getDataStreamOptions (name: Types.DataStreamNames) =
-            let req = { Unchecked.defaultof<IndicesGetDataStreamOptionsRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<IndicesGetDataStreamOptionsRequest>
+            req <- { req with Name = name }
             req
 
         /// Get data stream settings.
         let getDataStreamSettings (name: Types.Indices) =
-            let req = { Unchecked.defaultof<IndicesGetDataStreamSettingsRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<IndicesGetDataStreamSettingsRequest>
+            req <- { req with Name = name }
             req
 
         /// Get mapping definitions.
         let getFieldMapping (fields: Types.Fields) (index: Types.Indices) =
-            let req = { Unchecked.defaultof<IndicesGetFieldMappingRequest> with
-                Fields = fields
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<IndicesGetFieldMappingRequest>
+            req <- { req with Fields = fields }
+            req <- { req with Index = index }
             req
 
         /// Get index templates.
         let getIndexTemplate (name: Types.Name) =
-            let req = { Unchecked.defaultof<IndicesGetIndexTemplateRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<IndicesGetIndexTemplateRequest>
+            req <- { req with Name = name }
             req
 
         /// Get mapping definitions.
         let getMapping (index: Types.Indices) =
-            let req = { Unchecked.defaultof<IndicesGetMappingRequest> with
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<IndicesGetMappingRequest>
+            req <- { req with Index = index }
             req
 
         /// Get the migration reindexing status.
         let getMigrateReindexStatus (index: Types.Indices) =
-            let req = { Unchecked.defaultof<IndicesGetMigrateReindexStatusRequest> with
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<IndicesGetMigrateReindexStatusRequest>
+            req <- { req with Index = index }
             req
 
         /// Get index settings.
         let getSettings (index: Types.Indices) (name: Types.Names) =
-            let req = { Unchecked.defaultof<IndicesGetSettingsRequest> with
-                Index = index
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<IndicesGetSettingsRequest>
+            req <- { req with Index = index }
+            req <- { req with Name = name }
             req
 
         /// Get legacy index templates.
         let getTemplate (name: Types.Names) =
-            let req = { Unchecked.defaultof<IndicesGetTemplateRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<IndicesGetTemplateRequest>
+            req <- { req with Name = name }
             req
 
         /// Reindex legacy backing indices.
@@ -1492,9 +1348,8 @@ module ES =
 
         /// Convert an index alias to a data stream.
         let migrateToDataStream (name: Types.IndexName) =
-            let req = { Unchecked.defaultof<IndicesMigrateToDataStreamRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<IndicesMigrateToDataStreamRequest>
+            req <- { req with Name = name }
             req
 
         /// Update data streams.
@@ -1503,183 +1358,158 @@ module ES =
 
         /// Open a closed index.
         let open' (index: Types.Indices) =
-            let req = { Unchecked.defaultof<IndicesOpenRequest> with
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<IndicesOpenRequest>
+            req <- { req with Index = index }
             req
 
         /// Promote a data stream.
         let promoteDataStream (name: Types.IndexName) =
-            let req = { Unchecked.defaultof<IndicesPromoteDataStreamRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<IndicesPromoteDataStreamRequest>
+            req <- { req with Name = name }
             req
 
         /// Create or update an alias.
         let putAlias (index: Types.Indices) (name: Types.Name) =
-            let req = { Unchecked.defaultof<IndicesPutAliasRequest> with
-                Index = index
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<IndicesPutAliasRequest>
+            req <- { req with Index = index }
+            req <- { req with Name = name }
             req
 
         /// Update data stream lifecycles.
         let putDataLifecycle (name: Types.DataStreamNames) =
-            let req = { Unchecked.defaultof<IndicesPutDataLifecycleRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<IndicesPutDataLifecycleRequest>
+            req <- { req with Name = name }
             req
 
         /// Update data stream mappings.
         let putDataStreamMappings (name: Types.Indices) =
-            let req = { Unchecked.defaultof<IndicesPutDataStreamMappingsRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<IndicesPutDataStreamMappingsRequest>
+            req <- { req with Name = name }
             req
 
         /// Update data stream options.
         let putDataStreamOptions (name: Types.DataStreamNames) =
-            let req = { Unchecked.defaultof<IndicesPutDataStreamOptionsRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<IndicesPutDataStreamOptionsRequest>
+            req <- { req with Name = name }
             req
 
         /// Update data stream settings.
         let putDataStreamSettings (name: Types.Indices) =
-            let req = { Unchecked.defaultof<IndicesPutDataStreamSettingsRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<IndicesPutDataStreamSettingsRequest>
+            req <- { req with Name = name }
             req
 
         /// Create or update an index template.
         let putIndexTemplate (name: Types.Name) =
-            let req = { Unchecked.defaultof<IndicesPutIndexTemplateRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<IndicesPutIndexTemplateRequest>
+            req <- { req with Name = name }
             req
 
         /// Update field mappings.
         let putMapping (index: Types.Indices) =
-            let req = { Unchecked.defaultof<IndicesPutMappingRequest> with
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<IndicesPutMappingRequest>
+            req <- { req with Index = index }
             req
 
         /// Update index settings.
         let putSettings (index: Types.Indices) =
-            let req = { Unchecked.defaultof<IndicesPutSettingsRequest> with
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<IndicesPutSettingsRequest>
+            req <- { req with Index = index }
             req
 
         /// Create or update a legacy index template.
         let putTemplate (name: Types.Name) =
-            let req = { Unchecked.defaultof<IndicesPutTemplateRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<IndicesPutTemplateRequest>
+            req <- { req with Name = name }
             req
 
         /// Get index recovery information.
         let recovery (index: Types.Indices) =
-            let req = { Unchecked.defaultof<IndicesRecoveryRequest> with
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<IndicesRecoveryRequest>
+            req <- { req with Index = index }
             req
 
         /// Refresh an index.
         let refresh (index: Types.Indices) =
-            let req = { Unchecked.defaultof<IndicesRefreshRequest> with
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<IndicesRefreshRequest>
+            req <- { req with Index = index }
             req
 
         /// Reload search analyzers.
         let reloadSearchAnalyzers (index: Types.Indices) =
-            let req = { Unchecked.defaultof<IndicesReloadSearchAnalyzersRequest> with
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<IndicesReloadSearchAnalyzersRequest>
+            req <- { req with Index = index }
             req
 
         /// Remove an index block.
         let removeBlock (index: Types.Indices) (block: IndicesTypes.IndicesBlockOptions) =
-            let req = { Unchecked.defaultof<IndicesRemoveBlockRequest> with
-                Index = index
-                Block = block
-            }
+            let mutable req = Unchecked.defaultof<IndicesRemoveBlockRequest>
+            req <- { req with Index = index }
+            req <- { req with Block = block }
             req
 
         /// Resolve the cluster.
         let resolveCluster (name: Types.Names) =
-            let req = { Unchecked.defaultof<IndicesResolveClusterRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<IndicesResolveClusterRequest>
+            req <- { req with Name = name }
             req
 
         /// Resolve indices.
         let resolveIndex (name: Types.Names) =
-            let req = { Unchecked.defaultof<IndicesResolveIndexRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<IndicesResolveIndexRequest>
+            req <- { req with Name = name }
             req
 
         /// Roll over to a new index.
         let rollover (alias: Types.IndexAlias) (newIndex: Types.IndexName) =
-            let req = { Unchecked.defaultof<IndicesRolloverRequest> with
-                Alias = alias
-                NewIndex = newIndex
-            }
+            let mutable req = Unchecked.defaultof<IndicesRolloverRequest>
+            req <- { req with Alias = alias }
+            req <- { req with NewIndex = newIndex }
             req
 
         /// Get index segments.
         let segments (index: Types.Indices) =
-            let req = { Unchecked.defaultof<IndicesSegmentsRequest> with
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<IndicesSegmentsRequest>
+            req <- { req with Index = index }
             req
 
         /// Get index shard stores.
         let shardStores (index: Types.Indices) =
-            let req = { Unchecked.defaultof<IndicesShardStoresRequest> with
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<IndicesShardStoresRequest>
+            req <- { req with Index = index }
             req
 
         /// Shrink an index.
         let shrink (index: Types.IndexName) (target: Types.IndexName) =
-            let req = { Unchecked.defaultof<IndicesShrinkRequest> with
-                Index = index
-                Target = target
-            }
+            let mutable req = Unchecked.defaultof<IndicesShrinkRequest>
+            req <- { req with Index = index }
+            req <- { req with Target = target }
             req
 
         /// Simulate an index.
         let simulateIndexTemplate (name: Types.Name) =
-            let req = { Unchecked.defaultof<IndicesSimulateIndexTemplateRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<IndicesSimulateIndexTemplateRequest>
+            req <- { req with Name = name }
             req
 
         /// Simulate an index template.
         let simulateTemplate (name: Types.Name) =
-            let req = { Unchecked.defaultof<IndicesSimulateTemplateRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<IndicesSimulateTemplateRequest>
+            req <- { req with Name = name }
             req
 
         /// Split an index.
         let split (index: Types.IndexName) (target: Types.IndexName) =
-            let req = { Unchecked.defaultof<IndicesSplitRequest> with
-                Index = index
-                Target = target
-            }
+            let mutable req = Unchecked.defaultof<IndicesSplitRequest>
+            req <- { req with Index = index }
+            req <- { req with Target = target }
             req
 
         /// Get index statistics.
         let stats (metric: Types.CommonStatsFlags) (index: Types.Indices) =
-            let req = { Unchecked.defaultof<IndicesStatsRequest> with
-                Metric = metric
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<IndicesStatsRequest>
+            req <- { req with Metric = metric }
+            req <- { req with Index = index }
             req
 
         /// Create or update an alias.
@@ -1688,331 +1518,289 @@ module ES =
 
         /// Validate a query.
         let validateQuery (index: Types.Indices) =
-            let req = { Unchecked.defaultof<IndicesValidateQueryRequest> with
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<IndicesValidateQueryRequest>
+            req <- { req with Index = index }
             req
 
     module Inference =
 
         /// Perform chat completion inference on the service.
         let chatCompletionUnified (inferenceId: Types.Id) =
-            let req = { Unchecked.defaultof<InferenceChatCompletionUnifiedRequest> with
-                InferenceId = inferenceId
-            }
+            let mutable req = Unchecked.defaultof<InferenceChatCompletionUnifiedRequest>
+            req <- { req with InferenceId = inferenceId }
             req
 
         /// Perform completion inference on the service.
         let completion (inferenceId: Types.Id) =
-            let req = { Unchecked.defaultof<InferenceCompletionRequest> with
-                InferenceId = inferenceId
-            }
+            let mutable req = Unchecked.defaultof<InferenceCompletionRequest>
+            req <- { req with InferenceId = inferenceId }
             req
 
         /// Delete an inference endpoint.
         let delete (taskType: InferenceTypes.TaskType) (inferenceId: Types.Id) =
-            let req = { Unchecked.defaultof<InferenceDeleteRequest> with
-                TaskType = taskType
-                InferenceId = inferenceId
-            }
+            let mutable req = Unchecked.defaultof<InferenceDeleteRequest>
+            req <- { req with TaskType = taskType }
+            req <- { req with InferenceId = inferenceId }
             req
 
         /// Perform dense embedding inference on the service.
         let embedding (inferenceId: Types.Id) =
-            let req = { Unchecked.defaultof<InferenceEmbeddingRequest> with
-                InferenceId = inferenceId
-            }
+            let mutable req = Unchecked.defaultof<InferenceEmbeddingRequest>
+            req <- { req with InferenceId = inferenceId }
             req
 
         /// Get an inference endpoint.
         let get (taskType: InferenceTypes.TaskType) (inferenceId: Types.Id) =
-            let req = { Unchecked.defaultof<InferenceGetRequest> with
-                TaskType = taskType
-                InferenceId = inferenceId
-            }
+            let mutable req = Unchecked.defaultof<InferenceGetRequest>
+            req <- { req with TaskType = taskType }
+            req <- { req with InferenceId = inferenceId }
             req
 
         /// Perform inference on the service.
         let inference (taskType: InferenceTypes.TaskType) (inferenceId: Types.Id) =
-            let req = { Unchecked.defaultof<InferenceInferenceRequest> with
-                TaskType = taskType
-                InferenceId = inferenceId
-            }
+            let mutable req = Unchecked.defaultof<InferenceInferenceRequest>
+            req <- { req with TaskType = taskType }
+            req <- { req with InferenceId = inferenceId }
             req
 
         /// Create an inference endpoint.
         let put (taskType: InferenceTypes.TaskType) (inferenceId: Types.Id) =
-            let req = { Unchecked.defaultof<InferencePutRequest> with
-                TaskType = taskType
-                InferenceId = inferenceId
-            }
+            let mutable req = Unchecked.defaultof<InferencePutRequest>
+            req <- { req with TaskType = taskType }
+            req <- { req with InferenceId = inferenceId }
             req
 
         /// Create a AI21 inference endpoint.
         let putAi21 (taskType: InferenceTypes.Ai21TaskType) (ai21InferenceId: Types.Id) =
-            let req = { Unchecked.defaultof<InferencePutAi21Request> with
-                TaskType = taskType
-                Ai21InferenceId = ai21InferenceId
-            }
+            let mutable req = Unchecked.defaultof<InferencePutAi21Request>
+            req <- { req with TaskType = taskType }
+            req <- { req with Ai21InferenceId = ai21InferenceId }
             req
 
         /// Create an AlibabaCloud AI Search inference endpoint.
         let putAlibabacloud (taskType: InferenceTypes.AlibabaCloudTaskType) (alibabacloudInferenceId: Types.Id) =
-            let req = { Unchecked.defaultof<InferencePutAlibabacloudRequest> with
-                TaskType = taskType
-                AlibabacloudInferenceId = alibabacloudInferenceId
-            }
+            let mutable req = Unchecked.defaultof<InferencePutAlibabacloudRequest>
+            req <- { req with TaskType = taskType }
+            req <- { req with AlibabacloudInferenceId = alibabacloudInferenceId }
             req
 
         /// Create an Amazon Bedrock inference endpoint.
         let putAmazonbedrock (taskType: InferenceTypes.AmazonBedrockTaskType) (amazonbedrockInferenceId: Types.Id) =
-            let req = { Unchecked.defaultof<InferencePutAmazonbedrockRequest> with
-                TaskType = taskType
-                AmazonbedrockInferenceId = amazonbedrockInferenceId
-            }
+            let mutable req = Unchecked.defaultof<InferencePutAmazonbedrockRequest>
+            req <- { req with TaskType = taskType }
+            req <- { req with AmazonbedrockInferenceId = amazonbedrockInferenceId }
             req
 
         /// Create an Amazon SageMaker inference endpoint.
         let putAmazonsagemaker (taskType: InferenceTypes.TaskTypeAmazonSageMaker) (amazonsagemakerInferenceId: Types.Id) =
-            let req = { Unchecked.defaultof<InferencePutAmazonsagemakerRequest> with
-                TaskType = taskType
-                AmazonsagemakerInferenceId = amazonsagemakerInferenceId
-            }
+            let mutable req = Unchecked.defaultof<InferencePutAmazonsagemakerRequest>
+            req <- { req with TaskType = taskType }
+            req <- { req with AmazonsagemakerInferenceId = amazonsagemakerInferenceId }
             req
 
         /// Create an Anthropic inference endpoint.
         let putAnthropic (taskType: InferenceTypes.AnthropicTaskType) (anthropicInferenceId: Types.Id) =
-            let req = { Unchecked.defaultof<InferencePutAnthropicRequest> with
-                TaskType = taskType
-                AnthropicInferenceId = anthropicInferenceId
-            }
+            let mutable req = Unchecked.defaultof<InferencePutAnthropicRequest>
+            req <- { req with TaskType = taskType }
+            req <- { req with AnthropicInferenceId = anthropicInferenceId }
             req
 
         /// Create an Azure AI studio inference endpoint.
         let putAzureaistudio (taskType: InferenceTypes.AzureAiStudioTaskType) (azureaistudioInferenceId: Types.Id) =
-            let req = { Unchecked.defaultof<InferencePutAzureaistudioRequest> with
-                TaskType = taskType
-                AzureaistudioInferenceId = azureaistudioInferenceId
-            }
+            let mutable req = Unchecked.defaultof<InferencePutAzureaistudioRequest>
+            req <- { req with TaskType = taskType }
+            req <- { req with AzureaistudioInferenceId = azureaistudioInferenceId }
             req
 
         /// Create an Azure OpenAI inference endpoint.
         let putAzureopenai (taskType: InferenceTypes.AzureOpenAITaskType) (azureopenaiInferenceId: Types.Id) =
-            let req = { Unchecked.defaultof<InferencePutAzureopenaiRequest> with
-                TaskType = taskType
-                AzureopenaiInferenceId = azureopenaiInferenceId
-            }
+            let mutable req = Unchecked.defaultof<InferencePutAzureopenaiRequest>
+            req <- { req with TaskType = taskType }
+            req <- { req with AzureopenaiInferenceId = azureopenaiInferenceId }
             req
 
         /// Create a Cohere inference endpoint.
         let putCohere (taskType: InferenceTypes.CohereTaskType) (cohereInferenceId: Types.Id) =
-            let req = { Unchecked.defaultof<InferencePutCohereRequest> with
-                TaskType = taskType
-                CohereInferenceId = cohereInferenceId
-            }
+            let mutable req = Unchecked.defaultof<InferencePutCohereRequest>
+            req <- { req with TaskType = taskType }
+            req <- { req with CohereInferenceId = cohereInferenceId }
             req
 
         /// Create an Contextual AI inference endpoint.
         let putContextualai (taskType: InferenceTypes.TaskTypeContextualAI) (contextualaiInferenceId: Types.Id) =
-            let req = { Unchecked.defaultof<InferencePutContextualaiRequest> with
-                TaskType = taskType
-                ContextualaiInferenceId = contextualaiInferenceId
-            }
+            let mutable req = Unchecked.defaultof<InferencePutContextualaiRequest>
+            req <- { req with TaskType = taskType }
+            req <- { req with ContextualaiInferenceId = contextualaiInferenceId }
             req
 
         /// Create a custom inference endpoint.
         let putCustom (taskType: InferenceTypes.CustomTaskType) (customInferenceId: Types.Id) =
-            let req = { Unchecked.defaultof<InferencePutCustomRequest> with
-                TaskType = taskType
-                CustomInferenceId = customInferenceId
-            }
+            let mutable req = Unchecked.defaultof<InferencePutCustomRequest>
+            req <- { req with TaskType = taskType }
+            req <- { req with CustomInferenceId = customInferenceId }
             req
 
         /// Create a DeepSeek inference endpoint.
         let putDeepseek (taskType: InferenceTypes.TaskTypeDeepSeek) (deepseekInferenceId: Types.Id) =
-            let req = { Unchecked.defaultof<InferencePutDeepseekRequest> with
-                TaskType = taskType
-                DeepseekInferenceId = deepseekInferenceId
-            }
+            let mutable req = Unchecked.defaultof<InferencePutDeepseekRequest>
+            req <- { req with TaskType = taskType }
+            req <- { req with DeepseekInferenceId = deepseekInferenceId }
             req
 
         /// Create an Elasticsearch inference endpoint.
         let putElasticsearch (taskType: InferenceTypes.ElasticsearchTaskType) (elasticsearchInferenceId: Types.Id) =
-            let req = { Unchecked.defaultof<InferencePutElasticsearchRequest> with
-                TaskType = taskType
-                ElasticsearchInferenceId = elasticsearchInferenceId
-            }
+            let mutable req = Unchecked.defaultof<InferencePutElasticsearchRequest>
+            req <- { req with TaskType = taskType }
+            req <- { req with ElasticsearchInferenceId = elasticsearchInferenceId }
             req
 
         /// Create an ELSER inference endpoint.
         let putElser (taskType: InferenceTypes.ElserTaskType) (elserInferenceId: Types.Id) =
-            let req = { Unchecked.defaultof<InferencePutElserRequest> with
-                TaskType = taskType
-                ElserInferenceId = elserInferenceId
-            }
+            let mutable req = Unchecked.defaultof<InferencePutElserRequest>
+            req <- { req with TaskType = taskType }
+            req <- { req with ElserInferenceId = elserInferenceId }
             req
 
         /// Create a Fireworks AI inference endpoint.
         let putFireworksai (taskType: InferenceTypes.FireworksAITaskType) (fireworksaiInferenceId: Types.Id) =
-            let req = { Unchecked.defaultof<InferencePutFireworksaiRequest> with
-                TaskType = taskType
-                FireworksaiInferenceId = fireworksaiInferenceId
-            }
+            let mutable req = Unchecked.defaultof<InferencePutFireworksaiRequest>
+            req <- { req with TaskType = taskType }
+            req <- { req with FireworksaiInferenceId = fireworksaiInferenceId }
             req
 
         /// Create an Google AI Studio inference endpoint.
         let putGoogleaistudio (taskType: InferenceTypes.GoogleAiStudioTaskType) (googleaistudioInferenceId: Types.Id) =
-            let req = { Unchecked.defaultof<InferencePutGoogleaistudioRequest> with
-                TaskType = taskType
-                GoogleaistudioInferenceId = googleaistudioInferenceId
-            }
+            let mutable req = Unchecked.defaultof<InferencePutGoogleaistudioRequest>
+            req <- { req with TaskType = taskType }
+            req <- { req with GoogleaistudioInferenceId = googleaistudioInferenceId }
             req
 
         /// Create a Google Vertex AI inference endpoint.
         let putGooglevertexai (taskType: InferenceTypes.GoogleVertexAITaskType) (googlevertexaiInferenceId: Types.Id) =
-            let req = { Unchecked.defaultof<InferencePutGooglevertexaiRequest> with
-                TaskType = taskType
-                GooglevertexaiInferenceId = googlevertexaiInferenceId
-            }
+            let mutable req = Unchecked.defaultof<InferencePutGooglevertexaiRequest>
+            req <- { req with TaskType = taskType }
+            req <- { req with GooglevertexaiInferenceId = googlevertexaiInferenceId }
             req
 
         /// Create a Groq inference endpoint.
         let putGroq (taskType: InferenceTypes.GroqTaskType) (groqInferenceId: Types.Id) =
-            let req = { Unchecked.defaultof<InferencePutGroqRequest> with
-                TaskType = taskType
-                GroqInferenceId = groqInferenceId
-            }
+            let mutable req = Unchecked.defaultof<InferencePutGroqRequest>
+            req <- { req with TaskType = taskType }
+            req <- { req with GroqInferenceId = groqInferenceId }
             req
 
         /// Create a Hugging Face inference endpoint.
         let putHuggingFace (taskType: InferenceTypes.HuggingFaceTaskType) (huggingfaceInferenceId: Types.Id) =
-            let req = { Unchecked.defaultof<InferencePutHuggingFaceRequest> with
-                TaskType = taskType
-                HuggingfaceInferenceId = huggingfaceInferenceId
-            }
+            let mutable req = Unchecked.defaultof<InferencePutHuggingFaceRequest>
+            req <- { req with TaskType = taskType }
+            req <- { req with HuggingfaceInferenceId = huggingfaceInferenceId }
             req
 
         /// Create an JinaAI inference endpoint.
         let putJinaai (taskType: InferenceTypes.JinaAITaskType) (jinaaiInferenceId: Types.Id) =
-            let req = { Unchecked.defaultof<InferencePutJinaaiRequest> with
-                TaskType = taskType
-                JinaaiInferenceId = jinaaiInferenceId
-            }
+            let mutable req = Unchecked.defaultof<InferencePutJinaaiRequest>
+            req <- { req with TaskType = taskType }
+            req <- { req with JinaaiInferenceId = jinaaiInferenceId }
             req
 
         /// Create a Llama inference endpoint.
         let putLlama (taskType: InferenceTypes.LlamaTaskType) (llamaInferenceId: Types.Id) =
-            let req = { Unchecked.defaultof<InferencePutLlamaRequest> with
-                TaskType = taskType
-                LlamaInferenceId = llamaInferenceId
-            }
+            let mutable req = Unchecked.defaultof<InferencePutLlamaRequest>
+            req <- { req with TaskType = taskType }
+            req <- { req with LlamaInferenceId = llamaInferenceId }
             req
 
         /// Create a Mistral inference endpoint.
         let putMistral (taskType: InferenceTypes.MistralTaskType) (mistralInferenceId: Types.Id) =
-            let req = { Unchecked.defaultof<InferencePutMistralRequest> with
-                TaskType = taskType
-                MistralInferenceId = mistralInferenceId
-            }
+            let mutable req = Unchecked.defaultof<InferencePutMistralRequest>
+            req <- { req with TaskType = taskType }
+            req <- { req with MistralInferenceId = mistralInferenceId }
             req
 
         /// Create an Nvidia inference endpoint.
         let putNvidia (taskType: InferenceTypes.NvidiaTaskType) (nvidiaInferenceId: Types.Id) =
-            let req = { Unchecked.defaultof<InferencePutNvidiaRequest> with
-                TaskType = taskType
-                NvidiaInferenceId = nvidiaInferenceId
-            }
+            let mutable req = Unchecked.defaultof<InferencePutNvidiaRequest>
+            req <- { req with TaskType = taskType }
+            req <- { req with NvidiaInferenceId = nvidiaInferenceId }
             req
 
         /// Create an OpenAI inference endpoint.
         let putOpenai (taskType: InferenceTypes.OpenAITaskType) (openaiInferenceId: Types.Id) =
-            let req = { Unchecked.defaultof<InferencePutOpenaiRequest> with
-                TaskType = taskType
-                OpenaiInferenceId = openaiInferenceId
-            }
+            let mutable req = Unchecked.defaultof<InferencePutOpenaiRequest>
+            req <- { req with TaskType = taskType }
+            req <- { req with OpenaiInferenceId = openaiInferenceId }
             req
 
         /// Create an OpenShift AI inference endpoint.
         let putOpenshiftAi (taskType: InferenceTypes.OpenShiftAiTaskType) (openshiftaiInferenceId: Types.Id) =
-            let req = { Unchecked.defaultof<InferencePutOpenshiftAiRequest> with
-                TaskType = taskType
-                OpenshiftaiInferenceId = openshiftaiInferenceId
-            }
+            let mutable req = Unchecked.defaultof<InferencePutOpenshiftAiRequest>
+            req <- { req with TaskType = taskType }
+            req <- { req with OpenshiftaiInferenceId = openshiftaiInferenceId }
             req
 
         /// Create a VoyageAI inference endpoint.
         let putVoyageai (taskType: InferenceTypes.VoyageAITaskType) (voyageaiInferenceId: Types.Id) =
-            let req = { Unchecked.defaultof<InferencePutVoyageaiRequest> with
-                TaskType = taskType
-                VoyageaiInferenceId = voyageaiInferenceId
-            }
+            let mutable req = Unchecked.defaultof<InferencePutVoyageaiRequest>
+            req <- { req with TaskType = taskType }
+            req <- { req with VoyageaiInferenceId = voyageaiInferenceId }
             req
 
         /// Create a Watsonx inference endpoint.
         let putWatsonx (taskType: InferenceTypes.WatsonxTaskType) (watsonxInferenceId: Types.Id) =
-            let req = { Unchecked.defaultof<InferencePutWatsonxRequest> with
-                TaskType = taskType
-                WatsonxInferenceId = watsonxInferenceId
-            }
+            let mutable req = Unchecked.defaultof<InferencePutWatsonxRequest>
+            req <- { req with TaskType = taskType }
+            req <- { req with WatsonxInferenceId = watsonxInferenceId }
             req
 
         /// Perform reranking inference on the service.
         let rerank (inferenceId: Types.Id) =
-            let req = { Unchecked.defaultof<InferenceRerankRequest> with
-                InferenceId = inferenceId
-            }
+            let mutable req = Unchecked.defaultof<InferenceRerankRequest>
+            req <- { req with InferenceId = inferenceId }
             req
 
         /// Perform sparse embedding inference on the service.
         let sparseEmbedding (inferenceId: Types.Id) =
-            let req = { Unchecked.defaultof<InferenceSparseEmbeddingRequest> with
-                InferenceId = inferenceId
-            }
+            let mutable req = Unchecked.defaultof<InferenceSparseEmbeddingRequest>
+            req <- { req with InferenceId = inferenceId }
             req
 
         /// Perform streaming completion inference on the service.
         let streamCompletion (inferenceId: Types.Id) =
-            let req = { Unchecked.defaultof<InferenceStreamCompletionRequest> with
-                InferenceId = inferenceId
-            }
+            let mutable req = Unchecked.defaultof<InferenceStreamCompletionRequest>
+            req <- { req with InferenceId = inferenceId }
             req
 
         /// Perform text embedding inference on the service.
         let textEmbedding (inferenceId: Types.Id) =
-            let req = { Unchecked.defaultof<InferenceTextEmbeddingRequest> with
-                InferenceId = inferenceId
-            }
+            let mutable req = Unchecked.defaultof<InferenceTextEmbeddingRequest>
+            req <- { req with InferenceId = inferenceId }
             req
 
         /// Update an inference endpoint.
         let update (inferenceId: Types.Id) (taskType: InferenceTypes.TaskType) =
-            let req = { Unchecked.defaultof<InferenceUpdateRequest> with
-                InferenceId = inferenceId
-                TaskType = taskType
-            }
+            let mutable req = Unchecked.defaultof<InferenceUpdateRequest>
+            req <- { req with InferenceId = inferenceId }
+            req <- { req with TaskType = taskType }
             req
 
     module Ingest =
 
         /// Delete GeoIP database configurations.
         let deleteGeoipDatabase (id: Types.Ids) =
-            let req = { Unchecked.defaultof<IngestDeleteGeoipDatabaseRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<IngestDeleteGeoipDatabaseRequest>
+            req <- { req with Id = id }
             req
 
         /// Delete IP geolocation database configurations.
         let deleteIpLocationDatabase (id: Types.Ids) =
-            let req = { Unchecked.defaultof<IngestDeleteIpLocationDatabaseRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<IngestDeleteIpLocationDatabaseRequest>
+            req <- { req with Id = id }
             req
 
         /// Delete pipelines.
         let deletePipeline (id: Types.Id) =
-            let req = { Unchecked.defaultof<IngestDeletePipelineRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<IngestDeletePipelineRequest>
+            req <- { req with Id = id }
             req
 
         /// Get GeoIP statistics.
@@ -2021,23 +1809,20 @@ module ES =
 
         /// Get GeoIP database configurations.
         let getGeoipDatabase (id: Types.Ids) =
-            let req = { Unchecked.defaultof<IngestGetGeoipDatabaseRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<IngestGetGeoipDatabaseRequest>
+            req <- { req with Id = id }
             req
 
         /// Get IP geolocation database configurations.
         let getIpLocationDatabase (id: Types.Ids) =
-            let req = { Unchecked.defaultof<IngestGetIpLocationDatabaseRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<IngestGetIpLocationDatabaseRequest>
+            req <- { req with Id = id }
             req
 
         /// Get pipelines.
         let getPipeline (id: Types.Id) =
-            let req = { Unchecked.defaultof<IngestGetPipelineRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<IngestGetPipelineRequest>
+            req <- { req with Id = id }
             req
 
         /// Run a grok processor.
@@ -2046,30 +1831,26 @@ module ES =
 
         /// Create or update a GeoIP database configuration.
         let putGeoipDatabase (id: Types.Id) =
-            let req = { Unchecked.defaultof<IngestPutGeoipDatabaseRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<IngestPutGeoipDatabaseRequest>
+            req <- { req with Id = id }
             req
 
         /// Create or update an IP geolocation database configuration.
         let putIpLocationDatabase (id: Types.Id) =
-            let req = { Unchecked.defaultof<IngestPutIpLocationDatabaseRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<IngestPutIpLocationDatabaseRequest>
+            req <- { req with Id = id }
             req
 
         /// Create or update a pipeline.
         let putPipeline (id: Types.Id) =
-            let req = { Unchecked.defaultof<IngestPutPipelineRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<IngestPutPipelineRequest>
+            req <- { req with Id = id }
             req
 
         /// Simulate a pipeline.
         let simulate (id: Types.Id) =
-            let req = { Unchecked.defaultof<IngestSimulateRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<IngestSimulateRequest>
+            req <- { req with Id = id }
             req
 
     module License =
@@ -2106,32 +1887,28 @@ module ES =
 
         /// Delete a Logstash pipeline.
         let deletePipeline (id: Types.Id) =
-            let req = { Unchecked.defaultof<LogstashDeletePipelineRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<LogstashDeletePipelineRequest>
+            req <- { req with Id = id }
             req
 
         /// Get Logstash pipelines.
         let getPipeline (id: Types.Ids) =
-            let req = { Unchecked.defaultof<LogstashGetPipelineRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<LogstashGetPipelineRequest>
+            req <- { req with Id = id }
             req
 
         /// Create or update a Logstash pipeline.
         let putPipeline (id: Types.Id) =
-            let req = { Unchecked.defaultof<LogstashPutPipelineRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<LogstashPutPipelineRequest>
+            req <- { req with Id = id }
             req
 
     module Migration =
 
         /// Get deprecation information.
         let deprecations (index: Types.IndexName) =
-            let req = { Unchecked.defaultof<MigrationDeprecationsRequest> with
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<MigrationDeprecationsRequest>
+            req <- { req with Index = index }
             req
 
         /// Get feature migration information.
@@ -2146,105 +1923,91 @@ module ES =
 
         /// Clear trained model deployment cache.
         let clearTrainedModelDeploymentCache (modelId: Types.Id) =
-            let req = { Unchecked.defaultof<MlClearTrainedModelDeploymentCacheRequest> with
-                ModelId = modelId
-            }
+            let mutable req = Unchecked.defaultof<MlClearTrainedModelDeploymentCacheRequest>
+            req <- { req with ModelId = modelId }
             req
 
         /// Close anomaly detection jobs.
         let closeJob (jobId: Types.Id) =
-            let req = { Unchecked.defaultof<MlCloseJobRequest> with
-                JobId = jobId
-            }
+            let mutable req = Unchecked.defaultof<MlCloseJobRequest>
+            req <- { req with JobId = jobId }
             req
 
         /// Delete a calendar.
         let deleteCalendar (calendarId: Types.Id) =
-            let req = { Unchecked.defaultof<MlDeleteCalendarRequest> with
-                CalendarId = calendarId
-            }
+            let mutable req = Unchecked.defaultof<MlDeleteCalendarRequest>
+            req <- { req with CalendarId = calendarId }
             req
 
         /// Delete events from a calendar.
         let deleteCalendarEvent (calendarId: Types.Id) (eventId: Types.Id) =
-            let req = { Unchecked.defaultof<MlDeleteCalendarEventRequest> with
-                CalendarId = calendarId
-                EventId = eventId
-            }
+            let mutable req = Unchecked.defaultof<MlDeleteCalendarEventRequest>
+            req <- { req with CalendarId = calendarId }
+            req <- { req with EventId = eventId }
             req
 
         /// Delete anomaly jobs from a calendar.
         let deleteCalendarJob (calendarId: Types.Id) (jobId: Types.Ids) =
-            let req = { Unchecked.defaultof<MlDeleteCalendarJobRequest> with
-                CalendarId = calendarId
-                JobId = jobId
-            }
+            let mutable req = Unchecked.defaultof<MlDeleteCalendarJobRequest>
+            req <- { req with CalendarId = calendarId }
+            req <- { req with JobId = jobId }
             req
 
         /// Delete a data frame analytics job.
         let deleteDataFrameAnalytics (id: Types.Id) =
-            let req = { Unchecked.defaultof<MlDeleteDataFrameAnalyticsRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<MlDeleteDataFrameAnalyticsRequest>
+            req <- { req with Id = id }
             req
 
         /// Delete a datafeed.
         let deleteDatafeed (datafeedId: Types.Id) =
-            let req = { Unchecked.defaultof<MlDeleteDatafeedRequest> with
-                DatafeedId = datafeedId
-            }
+            let mutable req = Unchecked.defaultof<MlDeleteDatafeedRequest>
+            req <- { req with DatafeedId = datafeedId }
             req
 
         /// Delete expired ML data.
         let deleteExpiredData (jobId: Types.Id) =
-            let req = { Unchecked.defaultof<MlDeleteExpiredDataRequest> with
-                JobId = jobId
-            }
+            let mutable req = Unchecked.defaultof<MlDeleteExpiredDataRequest>
+            req <- { req with JobId = jobId }
             req
 
         /// Delete a filter.
         let deleteFilter (filterId: Types.Id) =
-            let req = { Unchecked.defaultof<MlDeleteFilterRequest> with
-                FilterId = filterId
-            }
+            let mutable req = Unchecked.defaultof<MlDeleteFilterRequest>
+            req <- { req with FilterId = filterId }
             req
 
         /// Delete forecasts from a job.
         let deleteForecast (jobId: Types.Id) (forecastId: Types.Id) =
-            let req = { Unchecked.defaultof<MlDeleteForecastRequest> with
-                JobId = jobId
-                ForecastId = forecastId
-            }
+            let mutable req = Unchecked.defaultof<MlDeleteForecastRequest>
+            req <- { req with JobId = jobId }
+            req <- { req with ForecastId = forecastId }
             req
 
         /// Delete an anomaly detection job.
         let deleteJob (jobId: Types.Id) =
-            let req = { Unchecked.defaultof<MlDeleteJobRequest> with
-                JobId = jobId
-            }
+            let mutable req = Unchecked.defaultof<MlDeleteJobRequest>
+            req <- { req with JobId = jobId }
             req
 
         /// Delete a model snapshot.
         let deleteModelSnapshot (jobId: Types.Id) (snapshotId: Types.Id) =
-            let req = { Unchecked.defaultof<MlDeleteModelSnapshotRequest> with
-                JobId = jobId
-                SnapshotId = snapshotId
-            }
+            let mutable req = Unchecked.defaultof<MlDeleteModelSnapshotRequest>
+            req <- { req with JobId = jobId }
+            req <- { req with SnapshotId = snapshotId }
             req
 
         /// Delete an unreferenced trained model.
         let deleteTrainedModel (modelId: Types.Id) =
-            let req = { Unchecked.defaultof<MlDeleteTrainedModelRequest> with
-                ModelId = modelId
-            }
+            let mutable req = Unchecked.defaultof<MlDeleteTrainedModelRequest>
+            req <- { req with ModelId = modelId }
             req
 
         /// Delete a trained model alias.
         let deleteTrainedModelAlias (modelAlias: Types.Name) (modelId: Types.Id) =
-            let req = { Unchecked.defaultof<MlDeleteTrainedModelAliasRequest> with
-                ModelAlias = modelAlias
-                ModelId = modelId
-            }
+            let mutable req = Unchecked.defaultof<MlDeleteTrainedModelAliasRequest>
+            req <- { req with ModelAlias = modelAlias }
+            req <- { req with ModelId = modelId }
             req
 
         /// Estimate job model memory usage.
@@ -2257,167 +2020,144 @@ module ES =
 
         /// Explain data frame analytics config.
         let explainDataFrameAnalytics (id: Types.Id) =
-            let req = { Unchecked.defaultof<MlExplainDataFrameAnalyticsRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<MlExplainDataFrameAnalyticsRequest>
+            req <- { req with Id = id }
             req
 
         /// Force buffered data to be processed.
         let flushJob (jobId: Types.Id) =
-            let req = { Unchecked.defaultof<MlFlushJobRequest> with
-                JobId = jobId
-            }
+            let mutable req = Unchecked.defaultof<MlFlushJobRequest>
+            req <- { req with JobId = jobId }
             req
 
         /// Predict future behavior of a time series.
         let forecast (jobId: Types.Id) =
-            let req = { Unchecked.defaultof<MlForecastRequest> with
-                JobId = jobId
-            }
+            let mutable req = Unchecked.defaultof<MlForecastRequest>
+            req <- { req with JobId = jobId }
             req
 
         /// Get anomaly detection job results for buckets.
         let getBuckets (jobId: Types.Id) (timestamp: Types.DateTime) =
-            let req = { Unchecked.defaultof<MlGetBucketsRequest> with
-                JobId = jobId
-                Timestamp = timestamp
-            }
+            let mutable req = Unchecked.defaultof<MlGetBucketsRequest>
+            req <- { req with JobId = jobId }
+            req <- { req with Timestamp = timestamp }
             req
 
         /// Get info about events in calendars.
         let getCalendarEvents (calendarId: Types.Id) =
-            let req = { Unchecked.defaultof<MlGetCalendarEventsRequest> with
-                CalendarId = calendarId
-            }
+            let mutable req = Unchecked.defaultof<MlGetCalendarEventsRequest>
+            req <- { req with CalendarId = calendarId }
             req
 
         /// Get calendar configuration info.
         let getCalendars (calendarId: Types.Id) =
-            let req = { Unchecked.defaultof<MlGetCalendarsRequest> with
-                CalendarId = calendarId
-            }
+            let mutable req = Unchecked.defaultof<MlGetCalendarsRequest>
+            req <- { req with CalendarId = calendarId }
             req
 
         /// Get anomaly detection job results for categories.
         let getCategories (jobId: Types.Id) (categoryId: Types.CategoryId) =
-            let req = { Unchecked.defaultof<MlGetCategoriesRequest> with
-                JobId = jobId
-                CategoryId = categoryId
-            }
+            let mutable req = Unchecked.defaultof<MlGetCategoriesRequest>
+            req <- { req with JobId = jobId }
+            req <- { req with CategoryId = categoryId }
             req
 
         /// Get data frame analytics job configuration info.
         let getDataFrameAnalytics (id: Types.Id) =
-            let req = { Unchecked.defaultof<MlGetDataFrameAnalyticsRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<MlGetDataFrameAnalyticsRequest>
+            req <- { req with Id = id }
             req
 
         /// Get data frame analytics job stats.
         let getDataFrameAnalyticsStats (id: Types.Id) =
-            let req = { Unchecked.defaultof<MlGetDataFrameAnalyticsStatsRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<MlGetDataFrameAnalyticsStatsRequest>
+            req <- { req with Id = id }
             req
 
         /// Get datafeed stats.
         let getDatafeedStats (datafeedId: Types.Ids) =
-            let req = { Unchecked.defaultof<MlGetDatafeedStatsRequest> with
-                DatafeedId = datafeedId
-            }
+            let mutable req = Unchecked.defaultof<MlGetDatafeedStatsRequest>
+            req <- { req with DatafeedId = datafeedId }
             req
 
         /// Get datafeeds configuration info.
         let getDatafeeds (datafeedId: Types.Ids) =
-            let req = { Unchecked.defaultof<MlGetDatafeedsRequest> with
-                DatafeedId = datafeedId
-            }
+            let mutable req = Unchecked.defaultof<MlGetDatafeedsRequest>
+            req <- { req with DatafeedId = datafeedId }
             req
 
         /// Get filters.
         let getFilters (filterId: Types.Ids) =
-            let req = { Unchecked.defaultof<MlGetFiltersRequest> with
-                FilterId = filterId
-            }
+            let mutable req = Unchecked.defaultof<MlGetFiltersRequest>
+            req <- { req with FilterId = filterId }
             req
 
         /// Get anomaly detection job results for influencers.
         let getInfluencers (jobId: Types.Id) =
-            let req = { Unchecked.defaultof<MlGetInfluencersRequest> with
-                JobId = jobId
-            }
+            let mutable req = Unchecked.defaultof<MlGetInfluencersRequest>
+            req <- { req with JobId = jobId }
             req
 
         /// Get anomaly detection job stats.
         let getJobStats (jobId: Types.Id) =
-            let req = { Unchecked.defaultof<MlGetJobStatsRequest> with
-                JobId = jobId
-            }
+            let mutable req = Unchecked.defaultof<MlGetJobStatsRequest>
+            req <- { req with JobId = jobId }
             req
 
         /// Get anomaly detection jobs configuration info.
         let getJobs (jobId: Types.Ids) =
-            let req = { Unchecked.defaultof<MlGetJobsRequest> with
-                JobId = jobId
-            }
+            let mutable req = Unchecked.defaultof<MlGetJobsRequest>
+            req <- { req with JobId = jobId }
             req
 
         /// Get machine learning memory usage info.
         let getMemoryStats (nodeId: Types.Id) =
-            let req = { Unchecked.defaultof<MlGetMemoryStatsRequest> with
-                NodeId = nodeId
-            }
+            let mutable req = Unchecked.defaultof<MlGetMemoryStatsRequest>
+            req <- { req with NodeId = nodeId }
             req
 
         /// Get anomaly detection job model snapshot upgrade usage info.
         let getModelSnapshotUpgradeStats (jobId: Types.Id) (snapshotId: Types.Id) =
-            let req = { Unchecked.defaultof<MlGetModelSnapshotUpgradeStatsRequest> with
-                JobId = jobId
-                SnapshotId = snapshotId
-            }
+            let mutable req = Unchecked.defaultof<MlGetModelSnapshotUpgradeStatsRequest>
+            req <- { req with JobId = jobId }
+            req <- { req with SnapshotId = snapshotId }
             req
 
         /// Get model snapshots info.
         let getModelSnapshots (jobId: Types.Id) (snapshotId: Types.Id) =
-            let req = { Unchecked.defaultof<MlGetModelSnapshotsRequest> with
-                JobId = jobId
-                SnapshotId = snapshotId
-            }
+            let mutable req = Unchecked.defaultof<MlGetModelSnapshotsRequest>
+            req <- { req with JobId = jobId }
+            req <- { req with SnapshotId = snapshotId }
             req
 
         /// Get overall bucket results.
         let getOverallBuckets (jobId: Types.Id) =
-            let req = { Unchecked.defaultof<MlGetOverallBucketsRequest> with
-                JobId = jobId
-            }
+            let mutable req = Unchecked.defaultof<MlGetOverallBucketsRequest>
+            req <- { req with JobId = jobId }
             req
 
         /// Get anomaly records for an anomaly detection job.
         let getRecords (jobId: Types.Id) =
-            let req = { Unchecked.defaultof<MlGetRecordsRequest> with
-                JobId = jobId
-            }
+            let mutable req = Unchecked.defaultof<MlGetRecordsRequest>
+            req <- { req with JobId = jobId }
             req
 
         /// Get trained model configuration info.
         let getTrainedModels (modelId: Types.Ids) =
-            let req = { Unchecked.defaultof<MlGetTrainedModelsRequest> with
-                ModelId = modelId
-            }
+            let mutable req = Unchecked.defaultof<MlGetTrainedModelsRequest>
+            req <- { req with ModelId = modelId }
             req
 
         /// Get trained models usage info.
         let getTrainedModelsStats (modelId: Types.Ids) =
-            let req = { Unchecked.defaultof<MlGetTrainedModelsStatsRequest> with
-                ModelId = modelId
-            }
+            let mutable req = Unchecked.defaultof<MlGetTrainedModelsStatsRequest>
+            req <- { req with ModelId = modelId }
             req
 
         /// Evaluate a trained model.
         let inferTrainedModel (modelId: Types.Id) =
-            let req = { Unchecked.defaultof<MlInferTrainedModelRequest> with
-                ModelId = modelId
-            }
+            let mutable req = Unchecked.defaultof<MlInferTrainedModelRequest>
+            req <- { req with ModelId = modelId }
             req
 
         /// Get machine learning information.
@@ -2426,125 +2166,108 @@ module ES =
 
         /// Open anomaly detection jobs.
         let openJob (jobId: Types.Id) =
-            let req = { Unchecked.defaultof<MlOpenJobRequest> with
-                JobId = jobId
-            }
+            let mutable req = Unchecked.defaultof<MlOpenJobRequest>
+            req <- { req with JobId = jobId }
             req
 
         /// Add scheduled events to the calendar.
         let postCalendarEvents (calendarId: Types.Id) =
-            let req = { Unchecked.defaultof<MlPostCalendarEventsRequest> with
-                CalendarId = calendarId
-            }
+            let mutable req = Unchecked.defaultof<MlPostCalendarEventsRequest>
+            req <- { req with CalendarId = calendarId }
             req
 
         /// Send data to an anomaly detection job for analysis.
         let postData (jobId: Types.Id) =
-            let req = { Unchecked.defaultof<MlPostDataRequest> with
-                JobId = jobId
-            }
+            let mutable req = Unchecked.defaultof<MlPostDataRequest>
+            req <- { req with JobId = jobId }
             req
 
         /// Preview features used by data frame analytics.
         let previewDataFrameAnalytics (id: Types.Id) =
-            let req = { Unchecked.defaultof<MlPreviewDataFrameAnalyticsRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<MlPreviewDataFrameAnalyticsRequest>
+            req <- { req with Id = id }
             req
 
         /// Preview a datafeed.
         let previewDatafeed (datafeedId: Types.Id) =
-            let req = { Unchecked.defaultof<MlPreviewDatafeedRequest> with
-                DatafeedId = datafeedId
-            }
+            let mutable req = Unchecked.defaultof<MlPreviewDatafeedRequest>
+            req <- { req with DatafeedId = datafeedId }
             req
 
         /// Create a calendar.
         let putCalendar (calendarId: Types.Id) =
-            let req = { Unchecked.defaultof<MlPutCalendarRequest> with
-                CalendarId = calendarId
-            }
+            let mutable req = Unchecked.defaultof<MlPutCalendarRequest>
+            req <- { req with CalendarId = calendarId }
             req
 
         /// Add anomaly detection job to calendar.
         let putCalendarJob (calendarId: Types.Id) (jobId: Types.Ids) =
-            let req = { Unchecked.defaultof<MlPutCalendarJobRequest> with
-                CalendarId = calendarId
-                JobId = jobId
-            }
+            let mutable req = Unchecked.defaultof<MlPutCalendarJobRequest>
+            req <- { req with CalendarId = calendarId }
+            req <- { req with JobId = jobId }
             req
 
         /// Create a data frame analytics job.
         let putDataFrameAnalytics (id: Types.Id) =
-            let req = { Unchecked.defaultof<MlPutDataFrameAnalyticsRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<MlPutDataFrameAnalyticsRequest>
+            req <- { req with Id = id }
             req
 
         /// Create a datafeed.
         let putDatafeed (datafeedId: Types.Id) =
-            let req = { Unchecked.defaultof<MlPutDatafeedRequest> with
-                DatafeedId = datafeedId
-            }
+            let mutable req = Unchecked.defaultof<MlPutDatafeedRequest>
+            req <- { req with DatafeedId = datafeedId }
             req
 
         /// Create a filter.
         let putFilter (filterId: Types.Id) =
-            let req = { Unchecked.defaultof<MlPutFilterRequest> with
-                FilterId = filterId
-            }
+            let mutable req = Unchecked.defaultof<MlPutFilterRequest>
+            req <- { req with FilterId = filterId }
             req
 
         /// Create an anomaly detection job.
         let putJob (jobId: Types.Id) =
-            let req = { Unchecked.defaultof<MlPutJobRequest> with
-                JobId = jobId
-            }
+            let mutable req = Unchecked.defaultof<MlPutJobRequest>
+            req <- { req with JobId = jobId }
             req
 
         /// Create a trained model.
         let putTrainedModel (modelId: Types.Id) =
-            let req = { Unchecked.defaultof<MlPutTrainedModelRequest> with
-                ModelId = modelId
-            }
+            let mutable req = Unchecked.defaultof<MlPutTrainedModelRequest>
+            req <- { req with ModelId = modelId }
             req
 
         /// Create or update a trained model alias.
         let putTrainedModelAlias (modelAlias: Types.Name) (modelId: Types.Id) =
-            let req = { Unchecked.defaultof<MlPutTrainedModelAliasRequest> with
-                ModelAlias = modelAlias
-                ModelId = modelId
-            }
+            let mutable req = Unchecked.defaultof<MlPutTrainedModelAliasRequest>
+            req <- { req with ModelAlias = modelAlias }
+            req <- { req with ModelId = modelId }
             req
 
         /// Create part of a trained model definition.
         let putTrainedModelDefinitionPart (modelId: Types.Id) (part: Types.Integer) =
-            let req = { Unchecked.defaultof<MlPutTrainedModelDefinitionPartRequest> with
-                ModelId = modelId
-                Part = part
-            }
+            let mutable req = Unchecked.defaultof<MlPutTrainedModelDefinitionPartRequest>
+            req <- { req with ModelId = modelId }
+            req <- { req with Part = part }
             req
 
         /// Create a trained model vocabulary.
         let putTrainedModelVocabulary (modelId: Types.Id) =
-            let req = { Unchecked.defaultof<MlPutTrainedModelVocabularyRequest> with
-                ModelId = modelId
-            }
+            let mutable req = Unchecked.defaultof<MlPutTrainedModelVocabularyRequest>
+            req <- { req with ModelId = modelId }
             req
 
         /// Reset an anomaly detection job.
         let resetJob (jobId: Types.Id) =
-            let req = { Unchecked.defaultof<MlResetJobRequest> with
-                JobId = jobId
-            }
+            let mutable req = Unchecked.defaultof<MlResetJobRequest>
+            req <- { req with JobId = jobId }
             req
 
         /// Revert to a snapshot.
         let revertModelSnapshot (jobId: Types.Id) (snapshotId: Types.Id) =
-            let req = { Unchecked.defaultof<MlRevertModelSnapshotRequest> with
-                JobId = jobId
-                SnapshotId = snapshotId
-            }
+            let mutable req = Unchecked.defaultof<MlRevertModelSnapshotRequest>
+            req <- { req with JobId = jobId }
+            req <- { req with SnapshotId = snapshotId }
             req
 
         /// Set upgrade_mode for ML indices.
@@ -2553,95 +2276,82 @@ module ES =
 
         /// Start a data frame analytics job.
         let startDataFrameAnalytics (id: Types.Id) =
-            let req = { Unchecked.defaultof<MlStartDataFrameAnalyticsRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<MlStartDataFrameAnalyticsRequest>
+            req <- { req with Id = id }
             req
 
         /// Start datafeeds.
         let startDatafeed (datafeedId: Types.Id) =
-            let req = { Unchecked.defaultof<MlStartDatafeedRequest> with
-                DatafeedId = datafeedId
-            }
+            let mutable req = Unchecked.defaultof<MlStartDatafeedRequest>
+            req <- { req with DatafeedId = datafeedId }
             req
 
         /// Start a trained model deployment.
         let startTrainedModelDeployment (modelId: Types.Id) =
-            let req = { Unchecked.defaultof<MlStartTrainedModelDeploymentRequest> with
-                ModelId = modelId
-            }
+            let mutable req = Unchecked.defaultof<MlStartTrainedModelDeploymentRequest>
+            req <- { req with ModelId = modelId }
             req
 
         /// Stop data frame analytics jobs.
         let stopDataFrameAnalytics (id: Types.Id) =
-            let req = { Unchecked.defaultof<MlStopDataFrameAnalyticsRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<MlStopDataFrameAnalyticsRequest>
+            req <- { req with Id = id }
             req
 
         /// Stop datafeeds.
         let stopDatafeed (datafeedId: Types.Id) =
-            let req = { Unchecked.defaultof<MlStopDatafeedRequest> with
-                DatafeedId = datafeedId
-            }
+            let mutable req = Unchecked.defaultof<MlStopDatafeedRequest>
+            req <- { req with DatafeedId = datafeedId }
             req
 
         /// Stop a trained model deployment.
         let stopTrainedModelDeployment (modelId: Types.Id) =
-            let req = { Unchecked.defaultof<MlStopTrainedModelDeploymentRequest> with
-                ModelId = modelId
-            }
+            let mutable req = Unchecked.defaultof<MlStopTrainedModelDeploymentRequest>
+            req <- { req with ModelId = modelId }
             req
 
         /// Update a data frame analytics job.
         let updateDataFrameAnalytics (id: Types.Id) =
-            let req = { Unchecked.defaultof<MlUpdateDataFrameAnalyticsRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<MlUpdateDataFrameAnalyticsRequest>
+            req <- { req with Id = id }
             req
 
         /// Update a datafeed.
         let updateDatafeed (datafeedId: Types.Id) =
-            let req = { Unchecked.defaultof<MlUpdateDatafeedRequest> with
-                DatafeedId = datafeedId
-            }
+            let mutable req = Unchecked.defaultof<MlUpdateDatafeedRequest>
+            req <- { req with DatafeedId = datafeedId }
             req
 
         /// Update a filter.
         let updateFilter (filterId: Types.Id) =
-            let req = { Unchecked.defaultof<MlUpdateFilterRequest> with
-                FilterId = filterId
-            }
+            let mutable req = Unchecked.defaultof<MlUpdateFilterRequest>
+            req <- { req with FilterId = filterId }
             req
 
         /// Update an anomaly detection job.
         let updateJob (jobId: Types.Id) =
-            let req = { Unchecked.defaultof<MlUpdateJobRequest> with
-                JobId = jobId
-            }
+            let mutable req = Unchecked.defaultof<MlUpdateJobRequest>
+            req <- { req with JobId = jobId }
             req
 
         /// Update a snapshot.
         let updateModelSnapshot (jobId: Types.Id) (snapshotId: Types.Id) =
-            let req = { Unchecked.defaultof<MlUpdateModelSnapshotRequest> with
-                JobId = jobId
-                SnapshotId = snapshotId
-            }
+            let mutable req = Unchecked.defaultof<MlUpdateModelSnapshotRequest>
+            req <- { req with JobId = jobId }
+            req <- { req with SnapshotId = snapshotId }
             req
 
         /// Update a trained model deployment.
         let updateTrainedModelDeployment (modelId: Types.Id) =
-            let req = { Unchecked.defaultof<MlUpdateTrainedModelDeploymentRequest> with
-                ModelId = modelId
-            }
+            let mutable req = Unchecked.defaultof<MlUpdateTrainedModelDeploymentRequest>
+            req <- { req with ModelId = modelId }
             req
 
         /// Upgrade a snapshot.
         let upgradeJobSnapshot (jobId: Types.Id) (snapshotId: Types.Id) =
-            let req = { Unchecked.defaultof<MlUpgradeJobSnapshotRequest> with
-                JobId = jobId
-                SnapshotId = snapshotId
-            }
+            let mutable req = Unchecked.defaultof<MlUpgradeJobSnapshotRequest>
+            req <- { req with JobId = jobId }
+            req <- { req with SnapshotId = snapshotId }
             req
 
         /// Validate an anomaly detection job.
@@ -2662,56 +2372,49 @@ module ES =
 
         /// Clear the archived repositories metering.
         let clearRepositoriesMeteringArchive (nodeId: Types.NodeIds) (maxArchiveVersion: Types.Long) =
-            let req = { Unchecked.defaultof<NodesClearRepositoriesMeteringArchiveRequest> with
-                NodeId = nodeId
-                MaxArchiveVersion = maxArchiveVersion
-            }
+            let mutable req = Unchecked.defaultof<NodesClearRepositoriesMeteringArchiveRequest>
+            req <- { req with NodeId = nodeId }
+            req <- { req with MaxArchiveVersion = maxArchiveVersion }
             req
 
         /// Get cluster repositories metering.
         let getRepositoriesMeteringInfo (nodeId: Types.NodeIds) =
-            let req = { Unchecked.defaultof<NodesGetRepositoriesMeteringInfoRequest> with
-                NodeId = nodeId
-            }
+            let mutable req = Unchecked.defaultof<NodesGetRepositoriesMeteringInfoRequest>
+            req <- { req with NodeId = nodeId }
             req
 
         /// Get the hot threads for nodes.
         let hotThreads (nodeId: Types.NodeIds) =
-            let req = { Unchecked.defaultof<NodesHotThreadsRequest> with
-                NodeId = nodeId
-            }
+            let mutable req = Unchecked.defaultof<NodesHotThreadsRequest>
+            req <- { req with NodeId = nodeId }
             req
 
         /// Get node information.
         let info (nodeId: Types.NodeIds) (metric: NodesInfo.NodesInfoMetrics) =
-            let req = { Unchecked.defaultof<NodesInfoRequest> with
-                NodeId = nodeId
-                Metric = metric
-            }
+            let mutable req = Unchecked.defaultof<NodesInfoRequest>
+            req <- { req with NodeId = nodeId }
+            req <- { req with Metric = metric }
             req
 
         /// Reload the keystore on nodes in the cluster.
         let reloadSecureSettings (nodeId: Types.NodeIds) =
-            let req = { Unchecked.defaultof<NodesReloadSecureSettingsRequest> with
-                NodeId = nodeId
-            }
+            let mutable req = Unchecked.defaultof<NodesReloadSecureSettingsRequest>
+            req <- { req with NodeId = nodeId }
             req
 
         /// Get node statistics.
         let stats (nodeId: Types.NodeIds) (metric: NodesStats.NodeStatsMetrics) (indexMetric: Types.CommonStatsFlags) =
-            let req = { Unchecked.defaultof<NodesStatsRequest> with
-                NodeId = nodeId
-                Metric = metric
-                IndexMetric = indexMetric
-            }
+            let mutable req = Unchecked.defaultof<NodesStatsRequest>
+            req <- { req with NodeId = nodeId }
+            req <- { req with Metric = metric }
+            req <- { req with IndexMetric = indexMetric }
             req
 
         /// Get feature usage information.
         let usage (nodeId: Types.NodeIds) (metric: NodesUsage.NodesUsageMetrics) =
-            let req = { Unchecked.defaultof<NodesUsageRequest> with
-                NodeId = nodeId
-                Metric = metric
-            }
+            let mutable req = Unchecked.defaultof<NodesUsageRequest>
+            req <- { req with NodeId = nodeId }
+            req <- { req with Metric = metric }
             req
 
     module Profiling =
@@ -2740,16 +2443,14 @@ module ES =
 
         /// Create or update a project routing expression.
         let createRouting (name: string) =
-            let req = { Unchecked.defaultof<ProjectCreateRoutingRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<ProjectCreateRoutingRequest>
+            req <- { req with Name = name }
             req
 
         /// Delete a project routing expression.
         let deleteRouting (name: string) =
-            let req = { Unchecked.defaultof<ProjectDeleteRoutingRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<ProjectDeleteRoutingRequest>
+            req <- { req with Name = name }
             req
 
         /// Get project routing expressions.
@@ -2758,9 +2459,8 @@ module ES =
 
         /// Get a project routing expression.
         let getRouting (name: string) =
-            let req = { Unchecked.defaultof<ProjectGetRoutingRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<ProjectGetRoutingRequest>
+            req <- { req with Name = name }
             req
 
         /// Get tags.
@@ -2771,32 +2471,28 @@ module ES =
 
         /// Delete a query rule.
         let deleteRule (rulesetId: Types.Id) (ruleId: Types.Id) =
-            let req = { Unchecked.defaultof<QueryRulesDeleteRuleRequest> with
-                RulesetId = rulesetId
-                RuleId = ruleId
-            }
+            let mutable req = Unchecked.defaultof<QueryRulesDeleteRuleRequest>
+            req <- { req with RulesetId = rulesetId }
+            req <- { req with RuleId = ruleId }
             req
 
         /// Delete a query ruleset.
         let deleteRuleset (rulesetId: Types.Id) =
-            let req = { Unchecked.defaultof<QueryRulesDeleteRulesetRequest> with
-                RulesetId = rulesetId
-            }
+            let mutable req = Unchecked.defaultof<QueryRulesDeleteRulesetRequest>
+            req <- { req with RulesetId = rulesetId }
             req
 
         /// Get a query rule.
         let getRule (rulesetId: Types.Id) (ruleId: Types.Id) =
-            let req = { Unchecked.defaultof<QueryRulesGetRuleRequest> with
-                RulesetId = rulesetId
-                RuleId = ruleId
-            }
+            let mutable req = Unchecked.defaultof<QueryRulesGetRuleRequest>
+            req <- { req with RulesetId = rulesetId }
+            req <- { req with RuleId = ruleId }
             req
 
         /// Get a query ruleset.
         let getRuleset (rulesetId: Types.Id) =
-            let req = { Unchecked.defaultof<QueryRulesGetRulesetRequest> with
-                RulesetId = rulesetId
-            }
+            let mutable req = Unchecked.defaultof<QueryRulesGetRulesetRequest>
+            req <- { req with RulesetId = rulesetId }
             req
 
         /// Get all query rulesets.
@@ -2805,112 +2501,97 @@ module ES =
 
         /// Create or update a query rule.
         let putRule (rulesetId: Types.Id) (ruleId: Types.Id) =
-            let req = { Unchecked.defaultof<QueryRulesPutRuleRequest> with
-                RulesetId = rulesetId
-                RuleId = ruleId
-            }
+            let mutable req = Unchecked.defaultof<QueryRulesPutRuleRequest>
+            req <- { req with RulesetId = rulesetId }
+            req <- { req with RuleId = ruleId }
             req
 
         /// Create or update a query ruleset.
         let putRuleset (rulesetId: Types.Id) =
-            let req = { Unchecked.defaultof<QueryRulesPutRulesetRequest> with
-                RulesetId = rulesetId
-            }
+            let mutable req = Unchecked.defaultof<QueryRulesPutRulesetRequest>
+            req <- { req with RulesetId = rulesetId }
             req
 
         /// Test a query ruleset.
         let test (rulesetId: Types.Id) =
-            let req = { Unchecked.defaultof<QueryRulesTestRequest> with
-                RulesetId = rulesetId
-            }
+            let mutable req = Unchecked.defaultof<QueryRulesTestRequest>
+            req <- { req with RulesetId = rulesetId }
             req
 
     module Rollup =
 
         /// Delete a rollup job.
         let deleteJob (id: Types.Id) =
-            let req = { Unchecked.defaultof<RollupDeleteJobRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<RollupDeleteJobRequest>
+            req <- { req with Id = id }
             req
 
         /// Get rollup job information.
         let getJobs (id: Types.Id) =
-            let req = { Unchecked.defaultof<RollupGetJobsRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<RollupGetJobsRequest>
+            req <- { req with Id = id }
             req
 
         /// Get the rollup job capabilities.
         let getRollupCaps (id: Types.Id) =
-            let req = { Unchecked.defaultof<RollupGetRollupCapsRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<RollupGetRollupCapsRequest>
+            req <- { req with Id = id }
             req
 
         /// Get the rollup index capabilities.
         let getRollupIndexCaps (index: Types.Ids) =
-            let req = { Unchecked.defaultof<RollupGetRollupIndexCapsRequest> with
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<RollupGetRollupIndexCapsRequest>
+            req <- { req with Index = index }
             req
 
         /// Create a rollup job.
         let putJob (id: Types.Id) =
-            let req = { Unchecked.defaultof<RollupPutJobRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<RollupPutJobRequest>
+            req <- { req with Id = id }
             req
 
         /// Search rolled-up data.
         let rollupSearch (index: Types.Indices) =
-            let req = { Unchecked.defaultof<RollupRollupSearchRequest> with
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<RollupRollupSearchRequest>
+            req <- { req with Index = index }
             req
 
         /// Start rollup jobs.
         let startJob (id: Types.Id) =
-            let req = { Unchecked.defaultof<RollupStartJobRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<RollupStartJobRequest>
+            req <- { req with Id = id }
             req
 
         /// Stop rollup jobs.
         let stopJob (id: Types.Id) =
-            let req = { Unchecked.defaultof<RollupStopJobRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<RollupStopJobRequest>
+            req <- { req with Id = id }
             req
 
     module SearchApplication =
 
         /// Delete a search application.
         let delete (name: Types.Name) =
-            let req = { Unchecked.defaultof<SearchApplicationDeleteRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<SearchApplicationDeleteRequest>
+            req <- { req with Name = name }
             req
 
         /// Delete a behavioral analytics collection.
         let deleteBehavioralAnalytics (name: Types.Name) =
-            let req = { Unchecked.defaultof<SearchApplicationDeleteBehavioralAnalyticsRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<SearchApplicationDeleteBehavioralAnalyticsRequest>
+            req <- { req with Name = name }
             req
 
         /// Get search application details.
         let get (name: Types.Name) =
-            let req = { Unchecked.defaultof<SearchApplicationGetRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<SearchApplicationGetRequest>
+            req <- { req with Name = name }
             req
 
         /// Get behavioral analytics collections.
         let getBehavioralAnalytics (name: Types.Name list) =
-            let req = { Unchecked.defaultof<SearchApplicationGetBehavioralAnalyticsRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<SearchApplicationGetBehavioralAnalyticsRequest>
+            req <- { req with Name = name }
             req
 
         /// Get search applications.
@@ -2919,69 +2600,60 @@ module ES =
 
         /// Create a behavioral analytics collection event.
         let postBehavioralAnalyticsEvent (collectionName: Types.Name) (eventType: SearchApplicationTypes.EventType) =
-            let req = { Unchecked.defaultof<SearchApplicationPostBehavioralAnalyticsEventRequest> with
-                CollectionName = collectionName
-                EventType = eventType
-            }
+            let mutable req = Unchecked.defaultof<SearchApplicationPostBehavioralAnalyticsEventRequest>
+            req <- { req with CollectionName = collectionName }
+            req <- { req with EventType = eventType }
             req
 
         /// Create or update a search application.
         let put (name: Types.Name) =
-            let req = { Unchecked.defaultof<SearchApplicationPutRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<SearchApplicationPutRequest>
+            req <- { req with Name = name }
             req
 
         /// Create a behavioral analytics collection.
         let putBehavioralAnalytics (name: Types.Name) =
-            let req = { Unchecked.defaultof<SearchApplicationPutBehavioralAnalyticsRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<SearchApplicationPutBehavioralAnalyticsRequest>
+            req <- { req with Name = name }
             req
 
         /// Render a search application query.
         let renderQuery (name: Types.Name) =
-            let req = { Unchecked.defaultof<SearchApplicationRenderQueryRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<SearchApplicationRenderQueryRequest>
+            req <- { req with Name = name }
             req
 
         /// Run a search application search.
         let search (name: Types.Name) =
-            let req = { Unchecked.defaultof<SearchApplicationSearchRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<SearchApplicationSearchRequest>
+            req <- { req with Name = name }
             req
 
     module SearchableSnapshots =
 
         /// Get cache statistics.
         let cacheStats (nodeId: Types.NodeIds) =
-            let req = { Unchecked.defaultof<SearchableSnapshotsCacheStatsRequest> with
-                NodeId = nodeId
-            }
+            let mutable req = Unchecked.defaultof<SearchableSnapshotsCacheStatsRequest>
+            req <- { req with NodeId = nodeId }
             req
 
         /// Clear the cache.
         let clearCache (index: Types.Indices) =
-            let req = { Unchecked.defaultof<SearchableSnapshotsClearCacheRequest> with
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<SearchableSnapshotsClearCacheRequest>
+            req <- { req with Index = index }
             req
 
         /// Mount a snapshot.
         let mount (repository: Types.Name) (snapshot: Types.Name) =
-            let req = { Unchecked.defaultof<SearchableSnapshotsMountRequest> with
-                Repository = repository
-                Snapshot = snapshot
-            }
+            let mutable req = Unchecked.defaultof<SearchableSnapshotsMountRequest>
+            req <- { req with Repository = repository }
+            req <- { req with Snapshot = snapshot }
             req
 
         /// Get searchable snapshot statistics.
         let stats (index: Types.Indices) =
-            let req = { Unchecked.defaultof<SearchableSnapshotsStatsRequest> with
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<SearchableSnapshotsStatsRequest>
+            req <- { req with Index = index }
             req
 
     module Security =
@@ -3008,46 +2680,40 @@ module ES =
 
         /// Change passwords.
         let changePassword (username: Types.Username) =
-            let req = { Unchecked.defaultof<SecurityChangePasswordRequest> with
-                Username = username
-            }
+            let mutable req = Unchecked.defaultof<SecurityChangePasswordRequest>
+            req <- { req with Username = username }
             req
 
         /// Clear the API key cache.
         let clearApiKeyCache (ids: Types.Ids) =
-            let req = { Unchecked.defaultof<SecurityClearApiKeyCacheRequest> with
-                Ids = ids
-            }
+            let mutable req = Unchecked.defaultof<SecurityClearApiKeyCacheRequest>
+            req <- { req with Ids = ids }
             req
 
         /// Clear the privileges cache.
         let clearCachedPrivileges (application: Types.Names) =
-            let req = { Unchecked.defaultof<SecurityClearCachedPrivilegesRequest> with
-                Application = application
-            }
+            let mutable req = Unchecked.defaultof<SecurityClearCachedPrivilegesRequest>
+            req <- { req with Application = application }
             req
 
         /// Clear the user cache.
         let clearCachedRealms (realms: Types.Names) =
-            let req = { Unchecked.defaultof<SecurityClearCachedRealmsRequest> with
-                Realms = realms
-            }
+            let mutable req = Unchecked.defaultof<SecurityClearCachedRealmsRequest>
+            req <- { req with Realms = realms }
             req
 
         /// Clear the roles cache.
         let clearCachedRoles (name: Types.Names) =
-            let req = { Unchecked.defaultof<SecurityClearCachedRolesRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<SecurityClearCachedRolesRequest>
+            req <- { req with Name = name }
             req
 
         /// Clear service account token caches.
         let clearCachedServiceTokens (namespace': Types.Namespace) (service: Types.Service) (name: Types.Names) =
-            let req = { Unchecked.defaultof<SecurityClearCachedServiceTokensRequest> with
-                Namespace = namespace'
-                Service = service
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<SecurityClearCachedServiceTokensRequest>
+            req <- { req with Namespace = namespace' }
+            req <- { req with Service = service }
+            req <- { req with Name = name }
             req
 
         /// Create an API key.
@@ -3060,11 +2726,10 @@ module ES =
 
         /// Create a service account token.
         let createServiceToken (namespace': Types.Namespace) (service: Types.Service) (name: Types.Name) =
-            let req = { Unchecked.defaultof<SecurityCreateServiceTokenRequest> with
-                Namespace = namespace'
-                Service = service
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<SecurityCreateServiceTokenRequest>
+            req <- { req with Namespace = namespace' }
+            req <- { req with Service = service }
+            req <- { req with Name = name }
             req
 
         /// Delegate PKI authentication.
@@ -3073,68 +2738,59 @@ module ES =
 
         /// Delete application privileges.
         let deletePrivileges (application: Types.Name) (name: Types.Names) =
-            let req = { Unchecked.defaultof<SecurityDeletePrivilegesRequest> with
-                Application = application
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<SecurityDeletePrivilegesRequest>
+            req <- { req with Application = application }
+            req <- { req with Name = name }
             req
 
         /// Delete roles.
         let deleteRole (name: Types.Name) =
-            let req = { Unchecked.defaultof<SecurityDeleteRoleRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<SecurityDeleteRoleRequest>
+            req <- { req with Name = name }
             req
 
         /// Delete role mappings.
         let deleteRoleMapping (name: Types.Name) =
-            let req = { Unchecked.defaultof<SecurityDeleteRoleMappingRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<SecurityDeleteRoleMappingRequest>
+            req <- { req with Name = name }
             req
 
         /// Delete service account tokens.
         let deleteServiceToken (namespace': Types.Namespace) (service: Types.Service) (name: Types.Name) =
-            let req = { Unchecked.defaultof<SecurityDeleteServiceTokenRequest> with
-                Namespace = namespace'
-                Service = service
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<SecurityDeleteServiceTokenRequest>
+            req <- { req with Namespace = namespace' }
+            req <- { req with Service = service }
+            req <- { req with Name = name }
             req
 
         /// Delete users.
         let deleteUser (username: Types.Username) =
-            let req = { Unchecked.defaultof<SecurityDeleteUserRequest> with
-                Username = username
-            }
+            let mutable req = Unchecked.defaultof<SecurityDeleteUserRequest>
+            req <- { req with Username = username }
             req
 
         /// Disable users.
         let disableUser (username: Types.Username) =
-            let req = { Unchecked.defaultof<SecurityDisableUserRequest> with
-                Username = username
-            }
+            let mutable req = Unchecked.defaultof<SecurityDisableUserRequest>
+            req <- { req with Username = username }
             req
 
         /// Disable a user profile.
         let disableUserProfile (uid: SecurityTypes.UserProfileId) =
-            let req = { Unchecked.defaultof<SecurityDisableUserProfileRequest> with
-                Uid = uid
-            }
+            let mutable req = Unchecked.defaultof<SecurityDisableUserProfileRequest>
+            req <- { req with Uid = uid }
             req
 
         /// Enable users.
         let enableUser (username: Types.Username) =
-            let req = { Unchecked.defaultof<SecurityEnableUserRequest> with
-                Username = username
-            }
+            let mutable req = Unchecked.defaultof<SecurityEnableUserRequest>
+            req <- { req with Username = username }
             req
 
         /// Enable a user profile.
         let enableUserProfile (uid: SecurityTypes.UserProfileId) =
-            let req = { Unchecked.defaultof<SecurityEnableUserProfileRequest> with
-                Uid = uid
-            }
+            let mutable req = Unchecked.defaultof<SecurityEnableUserProfileRequest>
+            req <- { req with Uid = uid }
             req
 
         /// Enroll Kibana.
@@ -3155,40 +2811,35 @@ module ES =
 
         /// Get application privileges.
         let getPrivileges (application: Types.Name) (name: Types.Names) =
-            let req = { Unchecked.defaultof<SecurityGetPrivilegesRequest> with
-                Application = application
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<SecurityGetPrivilegesRequest>
+            req <- { req with Application = application }
+            req <- { req with Name = name }
             req
 
         /// Get roles.
         let getRole (name: Types.Names) =
-            let req = { Unchecked.defaultof<SecurityGetRoleRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<SecurityGetRoleRequest>
+            req <- { req with Name = name }
             req
 
         /// Get role mappings.
         let getRoleMapping (name: Types.Names) =
-            let req = { Unchecked.defaultof<SecurityGetRoleMappingRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<SecurityGetRoleMappingRequest>
+            req <- { req with Name = name }
             req
 
         /// Get service accounts.
         let getServiceAccounts (namespace': Types.Namespace) (service: Types.Service) =
-            let req = { Unchecked.defaultof<SecurityGetServiceAccountsRequest> with
-                Namespace = namespace'
-                Service = service
-            }
+            let mutable req = Unchecked.defaultof<SecurityGetServiceAccountsRequest>
+            req <- { req with Namespace = namespace' }
+            req <- { req with Service = service }
             req
 
         /// Get service account credentials.
         let getServiceCredentials (namespace': Types.Namespace) (service: Types.Name) =
-            let req = { Unchecked.defaultof<SecurityGetServiceCredentialsRequest> with
-                Namespace = namespace'
-                Service = service
-            }
+            let mutable req = Unchecked.defaultof<SecurityGetServiceCredentialsRequest>
+            req <- { req with Namespace = namespace' }
+            req <- { req with Service = service }
             req
 
         /// Get security index settings.
@@ -3205,9 +2856,8 @@ module ES =
 
         /// Get users.
         let getUser (username: System.Text.Json.JsonElement) =
-            let req = { Unchecked.defaultof<SecurityGetUserRequest> with
-                Username = username
-            }
+            let mutable req = Unchecked.defaultof<SecurityGetUserRequest>
+            req <- { req with Username = username }
             req
 
         /// Get user privileges.
@@ -3216,9 +2866,8 @@ module ES =
 
         /// Get a user profile.
         let getUserProfile (uid: System.Text.Json.JsonElement) =
-            let req = { Unchecked.defaultof<SecurityGetUserProfileRequest> with
-                Uid = uid
-            }
+            let mutable req = Unchecked.defaultof<SecurityGetUserProfileRequest>
+            req <- { req with Uid = uid }
             req
 
         /// Grant an API key.
@@ -3227,9 +2876,8 @@ module ES =
 
         /// Check user privileges.
         let hasPrivileges (user: Types.Name) =
-            let req = { Unchecked.defaultof<SecurityHasPrivilegesRequest> with
-                User = user
-            }
+            let mutable req = Unchecked.defaultof<SecurityHasPrivilegesRequest>
+            req <- { req with User = user }
             req
 
         /// Check user profile privileges.
@@ -3262,23 +2910,20 @@ module ES =
 
         /// Create or update roles.
         let putRole (name: Types.Name) =
-            let req = { Unchecked.defaultof<SecurityPutRoleRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<SecurityPutRoleRequest>
+            req <- { req with Name = name }
             req
 
         /// Create or update role mappings.
         let putRoleMapping (name: Types.Name) =
-            let req = { Unchecked.defaultof<SecurityPutRoleMappingRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<SecurityPutRoleMappingRequest>
+            req <- { req with Name = name }
             req
 
         /// Create or update users.
         let putUser (username: Types.Username) =
-            let req = { Unchecked.defaultof<SecurityPutUserRequest> with
-                Username = username
-            }
+            let mutable req = Unchecked.defaultof<SecurityPutUserRequest>
+            req <- { req with Username = username }
             req
 
         /// Find API keys with a query.
@@ -3315,9 +2960,8 @@ module ES =
 
         /// Create SAML service provider metadata.
         let samlServiceProviderMetadata (realmName: Types.Name) =
-            let req = { Unchecked.defaultof<SecuritySamlServiceProviderMetadataRequest> with
-                RealmName = realmName
-            }
+            let mutable req = Unchecked.defaultof<SecuritySamlServiceProviderMetadataRequest>
+            req <- { req with RealmName = realmName }
             req
 
         /// Suggest a user profile.
@@ -3326,16 +2970,14 @@ module ES =
 
         /// Update an API key.
         let updateApiKey (id: Types.Id) =
-            let req = { Unchecked.defaultof<SecurityUpdateApiKeyRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<SecurityUpdateApiKeyRequest>
+            req <- { req with Id = id }
             req
 
         /// Update a cross-cluster API key.
         let updateCrossClusterApiKey (id: Types.Id) =
-            let req = { Unchecked.defaultof<SecurityUpdateCrossClusterApiKeyRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<SecurityUpdateCrossClusterApiKeyRequest>
+            req <- { req with Id = id }
             req
 
         /// Update security index settings.
@@ -3344,57 +2986,50 @@ module ES =
 
         /// Update user profile data.
         let updateUserProfileData (uid: SecurityTypes.UserProfileId) =
-            let req = { Unchecked.defaultof<SecurityUpdateUserProfileDataRequest> with
-                Uid = uid
-            }
+            let mutable req = Unchecked.defaultof<SecurityUpdateUserProfileDataRequest>
+            req <- { req with Uid = uid }
             req
 
     module Shutdown =
 
         /// Cancel node shutdown preparations.
         let deleteNode (nodeId: Types.NodeId) =
-            let req = { Unchecked.defaultof<ShutdownDeleteNodeRequest> with
-                NodeId = nodeId
-            }
+            let mutable req = Unchecked.defaultof<ShutdownDeleteNodeRequest>
+            req <- { req with NodeId = nodeId }
             req
 
         /// Get the shutdown status.
         let getNode (nodeId: Types.NodeIds) =
-            let req = { Unchecked.defaultof<ShutdownGetNodeRequest> with
-                NodeId = nodeId
-            }
+            let mutable req = Unchecked.defaultof<ShutdownGetNodeRequest>
+            req <- { req with NodeId = nodeId }
             req
 
         /// Prepare a node to be shut down.
         let putNode (nodeId: Types.NodeId) =
-            let req = { Unchecked.defaultof<ShutdownPutNodeRequest> with
-                NodeId = nodeId
-            }
+            let mutable req = Unchecked.defaultof<ShutdownPutNodeRequest>
+            req <- { req with NodeId = nodeId }
             req
 
     module Simulate =
 
         /// Simulate data ingestion.
         let ingest (index: Types.IndexName) =
-            let req = { Unchecked.defaultof<SimulateIngestRequest> with
-                Index = index
-            }
+            let mutable req = Unchecked.defaultof<SimulateIngestRequest>
+            req <- { req with Index = index }
             req
 
     module Slm =
 
         /// Delete a policy.
         let deleteLifecycle (policyId: Types.Name) =
-            let req = { Unchecked.defaultof<SlmDeleteLifecycleRequest> with
-                PolicyId = policyId
-            }
+            let mutable req = Unchecked.defaultof<SlmDeleteLifecycleRequest>
+            req <- { req with PolicyId = policyId }
             req
 
         /// Run a policy.
         let executeLifecycle (policyId: Types.Name) =
-            let req = { Unchecked.defaultof<SlmExecuteLifecycleRequest> with
-                PolicyId = policyId
-            }
+            let mutable req = Unchecked.defaultof<SlmExecuteLifecycleRequest>
+            req <- { req with PolicyId = policyId }
             req
 
         /// Run a retention policy.
@@ -3403,9 +3038,8 @@ module ES =
 
         /// Get policy information.
         let getLifecycle (policyId: Types.Names) =
-            let req = { Unchecked.defaultof<SlmGetLifecycleRequest> with
-                PolicyId = policyId
-            }
+            let mutable req = Unchecked.defaultof<SlmGetLifecycleRequest>
+            req <- { req with PolicyId = policyId }
             req
 
         /// Get snapshot lifecycle management statistics.
@@ -3418,9 +3052,8 @@ module ES =
 
         /// Create or update a policy.
         let putLifecycle (policyId: Types.Name) =
-            let req = { Unchecked.defaultof<SlmPutLifecycleRequest> with
-                PolicyId = policyId
-            }
+            let mutable req = Unchecked.defaultof<SlmPutLifecycleRequest>
+            req <- { req with PolicyId = policyId }
             req
 
         /// Start snapshot lifecycle management.
@@ -3435,100 +3068,87 @@ module ES =
 
         /// Clean up the snapshot repository.
         let cleanupRepository (repository: Types.Name) =
-            let req = { Unchecked.defaultof<SnapshotCleanupRepositoryRequest> with
-                Repository = repository
-            }
+            let mutable req = Unchecked.defaultof<SnapshotCleanupRepositoryRequest>
+            req <- { req with Repository = repository }
             req
 
         /// Clone a snapshot.
         let clone (repository: Types.Name) (snapshot: Types.Name) (targetSnapshot: Types.Name) =
-            let req = { Unchecked.defaultof<SnapshotCloneRequest> with
-                Repository = repository
-                Snapshot = snapshot
-                TargetSnapshot = targetSnapshot
-            }
+            let mutable req = Unchecked.defaultof<SnapshotCloneRequest>
+            req <- { req with Repository = repository }
+            req <- { req with Snapshot = snapshot }
+            req <- { req with TargetSnapshot = targetSnapshot }
             req
 
         /// Create a snapshot.
         let create (repository: Types.Name) (snapshot: Types.Name) =
-            let req = { Unchecked.defaultof<SnapshotCreateRequest> with
-                Repository = repository
-                Snapshot = snapshot
-            }
+            let mutable req = Unchecked.defaultof<SnapshotCreateRequest>
+            req <- { req with Repository = repository }
+            req <- { req with Snapshot = snapshot }
             req
 
         /// Create or update a snapshot repository.
         let createRepository (repository: Types.Name) =
-            let req = { Unchecked.defaultof<SnapshotCreateRepositoryRequest> with
-                Repository = repository
-            }
+            let mutable req = Unchecked.defaultof<SnapshotCreateRepositoryRequest>
+            req <- { req with Repository = repository }
             req
 
         /// Delete snapshots.
         let delete (repository: Types.Name) (snapshot: Types.Names) =
-            let req = { Unchecked.defaultof<SnapshotDeleteRequest> with
-                Repository = repository
-                Snapshot = snapshot
-            }
+            let mutable req = Unchecked.defaultof<SnapshotDeleteRequest>
+            req <- { req with Repository = repository }
+            req <- { req with Snapshot = snapshot }
             req
 
         /// Delete snapshot repositories.
         let deleteRepository (repository: Types.Names) =
-            let req = { Unchecked.defaultof<SnapshotDeleteRepositoryRequest> with
-                Repository = repository
-            }
+            let mutable req = Unchecked.defaultof<SnapshotDeleteRepositoryRequest>
+            req <- { req with Repository = repository }
             req
 
         /// Get snapshot information.
         let get (repository: Types.Name) (snapshot: Types.Names) =
-            let req = { Unchecked.defaultof<SnapshotGetRequest> with
-                Repository = repository
-                Snapshot = snapshot
-            }
+            let mutable req = Unchecked.defaultof<SnapshotGetRequest>
+            req <- { req with Repository = repository }
+            req <- { req with Snapshot = snapshot }
             req
 
         /// Get snapshot repository information.
         let getRepository (repository: Types.Names) =
-            let req = { Unchecked.defaultof<SnapshotGetRepositoryRequest> with
-                Repository = repository
-            }
+            let mutable req = Unchecked.defaultof<SnapshotGetRepositoryRequest>
+            req <- { req with Repository = repository }
             req
 
         /// Analyze a snapshot repository.
         let repositoryAnalyze (repository: Types.Name) =
-            let req = { Unchecked.defaultof<SnapshotRepositoryAnalyzeRequest> with
-                Repository = repository
-            }
+            let mutable req = Unchecked.defaultof<SnapshotRepositoryAnalyzeRequest>
+            req <- { req with Repository = repository }
             req
 
         /// Verify the repository integrity.
         let repositoryVerifyIntegrity (repository: Types.Names) =
-            let req = { Unchecked.defaultof<SnapshotRepositoryVerifyIntegrityRequest> with
-                Repository = repository
-            }
+            let mutable req = Unchecked.defaultof<SnapshotRepositoryVerifyIntegrityRequest>
+            req <- { req with Repository = repository }
             req
 
         /// Restore a snapshot.
         let restore (repository: Types.Name) (snapshot: Types.Name) =
-            let req = { Unchecked.defaultof<SnapshotRestoreRequest> with
-                Repository = repository
-                Snapshot = snapshot
-            }
+            let mutable req = Unchecked.defaultof<SnapshotRestoreRequest>
+            req <- { req with Repository = repository }
+            req <- { req with Snapshot = snapshot }
             req
 
         /// Get the snapshot status.
         let status (repository: Types.Name) (snapshot: Types.Names) =
-            let req = { Unchecked.defaultof<SnapshotStatusRequest> with
-                Repository = repository
-                Snapshot = snapshot
-            }
+            let mutable req = Unchecked.defaultof<SnapshotStatusRequest>
+            req <- { req with Repository = repository }
+            req <- { req with Snapshot = snapshot }
             req
 
         /// Verify a snapshot repository.
         let verifyRepository (repository: Types.Name) =
-            let req = { Unchecked.defaultof<SnapshotVerifyRepositoryRequest> with
-                Repository = repository
-            }
+            let mutable req = Unchecked.defaultof<SnapshotVerifyRepositoryRequest>
+            req <- { req with Repository = repository }
             req
 
     module Sql =
@@ -3539,23 +3159,20 @@ module ES =
 
         /// Delete an async SQL search.
         let deleteAsync (id: Types.Id) =
-            let req = { Unchecked.defaultof<SqlDeleteAsyncRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<SqlDeleteAsyncRequest>
+            req <- { req with Id = id }
             req
 
         /// Get async SQL search results.
         let getAsync (id: Types.Id) =
-            let req = { Unchecked.defaultof<SqlGetAsyncRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<SqlGetAsyncRequest>
+            req <- { req with Id = id }
             req
 
         /// Get the async SQL search status.
         let getAsyncStatus (id: Types.Id) =
-            let req = { Unchecked.defaultof<SqlGetAsyncStatusRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<SqlGetAsyncStatusRequest>
+            req <- { req with Id = id }
             req
 
         /// Get SQL search results.
@@ -3576,16 +3193,14 @@ module ES =
 
         /// Disable a named stream.
         let logsDisable (name: StreamsTypes.StreamType) =
-            let req = { Unchecked.defaultof<StreamsLogsDisableRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<StreamsLogsDisableRequest>
+            req <- { req with Name = name }
             req
 
         /// Enable a named stream.
         let logsEnable (name: StreamsTypes.StreamType) =
-            let req = { Unchecked.defaultof<StreamsLogsEnableRequest> with
-                Name = name
-            }
+            let mutable req = Unchecked.defaultof<StreamsLogsEnableRequest>
+            req <- { req with Name = name }
             req
 
         /// Get the status of streams.
@@ -3596,32 +3211,28 @@ module ES =
 
         /// Delete a synonym set.
         let deleteSynonym (id: Types.Id) =
-            let req = { Unchecked.defaultof<SynonymsDeleteSynonymRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<SynonymsDeleteSynonymRequest>
+            req <- { req with Id = id }
             req
 
         /// Delete a synonym rule.
         let deleteSynonymRule (setId: Types.Id) (ruleId: Types.Id) =
-            let req = { Unchecked.defaultof<SynonymsDeleteSynonymRuleRequest> with
-                SetId = setId
-                RuleId = ruleId
-            }
+            let mutable req = Unchecked.defaultof<SynonymsDeleteSynonymRuleRequest>
+            req <- { req with SetId = setId }
+            req <- { req with RuleId = ruleId }
             req
 
         /// Get a synonym set.
         let getSynonym (id: Types.Id) =
-            let req = { Unchecked.defaultof<SynonymsGetSynonymRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<SynonymsGetSynonymRequest>
+            req <- { req with Id = id }
             req
 
         /// Get a synonym rule.
         let getSynonymRule (setId: Types.Id) (ruleId: Types.Id) =
-            let req = { Unchecked.defaultof<SynonymsGetSynonymRuleRequest> with
-                SetId = setId
-                RuleId = ruleId
-            }
+            let mutable req = Unchecked.defaultof<SynonymsGetSynonymRuleRequest>
+            req <- { req with SetId = setId }
+            req <- { req with RuleId = ruleId }
             req
 
         /// Get all synonym sets.
@@ -3630,33 +3241,29 @@ module ES =
 
         /// Create or update a synonym set.
         let putSynonym (id: Types.Id) =
-            let req = { Unchecked.defaultof<SynonymsPutSynonymRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<SynonymsPutSynonymRequest>
+            req <- { req with Id = id }
             req
 
         /// Create or update a synonym rule.
         let putSynonymRule (setId: Types.Id) (ruleId: Types.Id) =
-            let req = { Unchecked.defaultof<SynonymsPutSynonymRuleRequest> with
-                SetId = setId
-                RuleId = ruleId
-            }
+            let mutable req = Unchecked.defaultof<SynonymsPutSynonymRuleRequest>
+            req <- { req with SetId = setId }
+            req <- { req with RuleId = ruleId }
             req
 
     module Tasks =
 
         /// Cancel a task.
         let cancel (taskId: Types.TaskId) =
-            let req = { Unchecked.defaultof<TasksCancelRequest> with
-                TaskId = taskId
-            }
+            let mutable req = Unchecked.defaultof<TasksCancelRequest>
+            req <- { req with TaskId = taskId }
             req
 
         /// Get task information.
         let get (taskId: Types.Id) =
-            let req = { Unchecked.defaultof<TasksGetRequest> with
-                TaskId = taskId
-            }
+            let mutable req = Unchecked.defaultof<TasksGetRequest>
+            req <- { req with TaskId = taskId }
             req
 
         /// Get all tasks.
@@ -3685,9 +3292,8 @@ module ES =
 
         /// Delete a transform.
         let deleteTransform (transformId: Types.Id) =
-            let req = { Unchecked.defaultof<TransformDeleteTransformRequest> with
-                TransformId = transformId
-            }
+            let mutable req = Unchecked.defaultof<TransformDeleteTransformRequest>
+            req <- { req with TransformId = transformId }
             req
 
         /// Get node stats.
@@ -3696,44 +3302,38 @@ module ES =
 
         /// Get transforms.
         let getTransform (transformId: Types.Names) =
-            let req = { Unchecked.defaultof<TransformGetTransformRequest> with
-                TransformId = transformId
-            }
+            let mutable req = Unchecked.defaultof<TransformGetTransformRequest>
+            req <- { req with TransformId = transformId }
             req
 
         /// Get transform stats.
         let getTransformStats (transformId: Types.Names) =
-            let req = { Unchecked.defaultof<TransformGetTransformStatsRequest> with
-                TransformId = transformId
-            }
+            let mutable req = Unchecked.defaultof<TransformGetTransformStatsRequest>
+            req <- { req with TransformId = transformId }
             req
 
         /// Preview a transform.
         let previewTransform (transformId: Types.Id) =
-            let req = { Unchecked.defaultof<TransformPreviewTransformRequest> with
-                TransformId = transformId
-            }
+            let mutable req = Unchecked.defaultof<TransformPreviewTransformRequest>
+            req <- { req with TransformId = transformId }
             req
 
         /// Create a transform.
         let putTransform (transformId: Types.Id) =
-            let req = { Unchecked.defaultof<TransformPutTransformRequest> with
-                TransformId = transformId
-            }
+            let mutable req = Unchecked.defaultof<TransformPutTransformRequest>
+            req <- { req with TransformId = transformId }
             req
 
         /// Reset a transform.
         let resetTransform (transformId: Types.Id) =
-            let req = { Unchecked.defaultof<TransformResetTransformRequest> with
-                TransformId = transformId
-            }
+            let mutable req = Unchecked.defaultof<TransformResetTransformRequest>
+            req <- { req with TransformId = transformId }
             req
 
         /// Schedule a transform to start now.
         let scheduleNowTransform (transformId: Types.Id) =
-            let req = { Unchecked.defaultof<TransformScheduleNowTransformRequest> with
-                TransformId = transformId
-            }
+            let mutable req = Unchecked.defaultof<TransformScheduleNowTransformRequest>
+            req <- { req with TransformId = transformId }
             req
 
         /// Set upgrade_mode for transform indices.
@@ -3742,23 +3342,20 @@ module ES =
 
         /// Start a transform.
         let startTransform (transformId: Types.Id) =
-            let req = { Unchecked.defaultof<TransformStartTransformRequest> with
-                TransformId = transformId
-            }
+            let mutable req = Unchecked.defaultof<TransformStartTransformRequest>
+            req <- { req with TransformId = transformId }
             req
 
         /// Stop transforms.
         let stopTransform (transformId: Types.Name) =
-            let req = { Unchecked.defaultof<TransformStopTransformRequest> with
-                TransformId = transformId
-            }
+            let mutable req = Unchecked.defaultof<TransformStopTransformRequest>
+            req <- { req with TransformId = transformId }
             req
 
         /// Update a transform.
         let updateTransform (transformId: Types.Id) =
-            let req = { Unchecked.defaultof<TransformUpdateTransformRequest> with
-                TransformId = transformId
-            }
+            let mutable req = Unchecked.defaultof<TransformUpdateTransformRequest>
+            req <- { req with TransformId = transformId }
             req
 
         /// Upgrade all transforms.
@@ -3769,38 +3366,33 @@ module ES =
 
         /// Acknowledge a watch.
         let ackWatch (watchId: Types.Name) (actionId: Types.Names) =
-            let req = { Unchecked.defaultof<WatcherAckWatchRequest> with
-                WatchId = watchId
-                ActionId = actionId
-            }
+            let mutable req = Unchecked.defaultof<WatcherAckWatchRequest>
+            req <- { req with WatchId = watchId }
+            req <- { req with ActionId = actionId }
             req
 
         /// Activate a watch.
         let activateWatch (watchId: Types.Name) =
-            let req = { Unchecked.defaultof<WatcherActivateWatchRequest> with
-                WatchId = watchId
-            }
+            let mutable req = Unchecked.defaultof<WatcherActivateWatchRequest>
+            req <- { req with WatchId = watchId }
             req
 
         /// Deactivate a watch.
         let deactivateWatch (watchId: Types.Name) =
-            let req = { Unchecked.defaultof<WatcherDeactivateWatchRequest> with
-                WatchId = watchId
-            }
+            let mutable req = Unchecked.defaultof<WatcherDeactivateWatchRequest>
+            req <- { req with WatchId = watchId }
             req
 
         /// Delete a watch.
         let deleteWatch (id: Types.Name) =
-            let req = { Unchecked.defaultof<WatcherDeleteWatchRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<WatcherDeleteWatchRequest>
+            req <- { req with Id = id }
             req
 
         /// Run a watch.
         let executeWatch (id: Types.Id) =
-            let req = { Unchecked.defaultof<WatcherExecuteWatchRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<WatcherExecuteWatchRequest>
+            req <- { req with Id = id }
             req
 
         /// Get Watcher index settings.
@@ -3809,16 +3401,14 @@ module ES =
 
         /// Get a watch.
         let getWatch (id: Types.Name) =
-            let req = { Unchecked.defaultof<WatcherGetWatchRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<WatcherGetWatchRequest>
+            req <- { req with Id = id }
             req
 
         /// Create or update a watch.
         let putWatch (id: Types.Id) =
-            let req = { Unchecked.defaultof<WatcherPutWatchRequest> with
-                Id = id
-            }
+            let mutable req = Unchecked.defaultof<WatcherPutWatchRequest>
+            req <- { req with Id = id }
             req
 
         /// Query watches.
@@ -3831,9 +3421,8 @@ module ES =
 
         /// Get Watcher statistics.
         let stats (metric: System.Text.Json.JsonElement) =
-            let req = { Unchecked.defaultof<WatcherStatsRequest> with
-                Metric = metric
-            }
+            let mutable req = Unchecked.defaultof<WatcherStatsRequest>
+            req <- { req with Metric = metric }
             req
 
         /// Stop the watch service.

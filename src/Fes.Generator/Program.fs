@@ -85,6 +85,12 @@ let main args =
     FileEmitter.writeFiles outputDir operationFiles
     printfn $"  {operationFiles.Length} operation files"
 
+    // Generate converter files
+    printfn "Generating serialisation converters..."
+    let converterFiles = SerialiserEmitter.emitAllConverters index model.Types
+    FileEmitter.writeFiles outputDir converterFiles
+    printfn $"  {converterFiles.Length} converter files"
+
     // Generate builder files
     printfn "Generating builder files..."
     let builderFiles = BuilderEmitter.emitAllBuilderFiles index model.Types
@@ -97,7 +103,22 @@ let main args =
     FileEmitter.writeFiles outputDir [ esModule ]
     printfn "  1 ES module file"
 
+    let totalFiles = typeFiles.Length + operationFiles.Length + converterFiles.Length + builderFiles.Length + 1
     printfn ""
-    printfn $"Generation complete: {typeFiles.Length + operationFiles.Length} files total"
+    printfn $"Generation complete: {totalFiles} files total"
+
+    // Update fsproj
+    let fsprojPath =
+        args
+        |> Array.tryFindIndex (fun a -> a = "--fsproj")
+        |> Option.bind (fun i ->
+            if i + 1 < args.Length then Some args[i + 1] else None)
+        |> Option.defaultValue "src/Fes/Fes.fsproj"
+
+    if File.Exists fsprojPath then
+        printfn "Updating fsproj..."
+        FsprojUpdater.updateFsproj fsprojPath outputDir
+    else
+        printfn $"Skipping fsproj update (not found: {fsprojPath})"
 
     0

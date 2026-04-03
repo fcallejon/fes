@@ -33,11 +33,9 @@ module GlobalBulk =
         RequireAlias: bool option
     }
 
-    type CreateOperation = {
-    }
+    type CreateOperation = System.Text.Json.JsonElement
 
-    type DeleteOperation = {
-    }
+    type DeleteOperation = System.Text.Json.JsonElement
 
     [<RequireQualifiedAccess>]
     type FailureStoreStatus =
@@ -46,8 +44,7 @@ module GlobalBulk =
         | NotEnabled
         | Failed
 
-    type IndexOperation = {
-    }
+    type IndexOperation = System.Text.Json.JsonElement
 
     type UpdateOperation = {
         [<System.Text.Json.Serialization.JsonPropertyName("require_alias")>]

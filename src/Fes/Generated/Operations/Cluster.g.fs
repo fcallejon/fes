@@ -899,8 +899,7 @@ module ClusterOperations =
         let withTransient (value: Map<string, System.Text.Json.JsonElement>) (req: ClusterPutSettingsRequest) =
             { req with Transient = Some value }
 
-    type ClusterRemoteInfoRequest = {
-    }
+    type ClusterRemoteInfoRequest = | ClusterRemoteInfoRequest
 
         with
         static member ToRequest(req: ClusterRemoteInfoRequest) : Result<Fes.Http.RequestMsg, exn> =
