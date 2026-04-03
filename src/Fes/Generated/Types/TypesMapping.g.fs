@@ -382,7 +382,6 @@ module TypesMapping =
     }
 
     /// A variant of text that trades scoring and efficiency of positional queries for space efficiency. This field
-effectively stores data the same way as a text field that only indexes documents (index_opti...
     and MatchOnlyTextProperty = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
@@ -749,7 +748,6 @@ effectively stores data the same way as a text field that only indexes documents
     }
 
     /// The `geo_shape` data type facilitates the indexing of and searching with arbitrary geo shapes such as rectangles
-and polygons.
     and GeoShapeProperty = {
         [<System.Text.Json.Serialization.JsonPropertyName("coerce")>]
         Coerce: bool option
@@ -779,7 +777,6 @@ and polygons.
     }
 
     /// The `shape` data type facilitates the indexing of and searching with arbitrary `x, y` cartesian shapes such as
-rectangles and polygons.
     and ShapeProperty = {
         [<System.Text.Json.Serialization.JsonPropertyName("coerce")>]
         Coerce: bool option

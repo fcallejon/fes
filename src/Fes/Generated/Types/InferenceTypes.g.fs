@@ -524,7 +524,6 @@ module InferenceTypes =
     }
 
     /// Dense Embedding results containing bytes are represented as Dense
-Vectors of bytes.
     type DenseByteVector = Types.Byte list
 
     /// The dense embedding result object for byte representation
@@ -534,7 +533,6 @@ Vectors of bytes.
     }
 
     /// Dense Embedding results are represented as Dense Vectors
-of floats.
     type DenseVector = Types.Float list
 
     /// The dense embedding result object for float representation
@@ -638,7 +636,6 @@ of floats.
         | Array of string list
 
     /// Inference input.
-Either a string, an array of strings, a `content` object, or an array of `content` objects.
     [<RequireQualifiedAccess>]
     type EmbeddingInput =
         | EmbeddingStringInput of InferenceTypes.EmbeddingStringInput
@@ -1197,7 +1194,6 @@ Either a string, an array of strings, a `content` object, or an array of `conten
     }
 
     /// Sparse Embedding tokens are represented as a dictionary
-of string to double.
     type SparseVector = Map<string, Types.Float>
 
     type SparseEmbeddingResult = {
@@ -1208,9 +1204,6 @@ of string to double.
     }
 
     /// The rerank result object representing a single ranked document
-id: the original index of the document in the request
-relevance_score: the relevance_score of the document relative to the query
-text: Op...
     type RankedDocument = {
         [<System.Text.Json.Serialization.JsonPropertyName("index")>]
         Index: Types.Integer
@@ -1361,7 +1354,6 @@ text: Op...
     }
 
     /// Type representing the different types of reasoning details that can be included in the response from the model.
-Currently supported only for `elastic` provider.
     [<RequireQualifiedAccess>]
     type ReasoningDetail =
         | EncryptedReasoningDetail of InferenceTypes.EncryptedReasoningDetail
@@ -1544,7 +1536,6 @@ Currently supported only for `elastic` provider.
         | Detailed
 
     /// The reasoning configuration to use for the completion request.
-Currently supported only for `elastic` provider.
     type Reasoning = {
         [<System.Text.Json.Serialization.JsonPropertyName("effort")>]
         Effort: InferenceTypes.ReasoningEffort option

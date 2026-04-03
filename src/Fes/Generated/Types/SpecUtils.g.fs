@@ -8,12 +8,10 @@ open System.Text.Json.Serialization
 module SpecUtils =
 
     /// In some places in the specification an object consists of the union of a set of known properties
-and a set of runtime injected properties. Meaning that object should theoretically extend Dictionary bu...
     type AdditionalProperties<'tKey, 'tValue> = {
     }
 
     /// In some places in the specification an object consists of a static set of properties and a single additional property
-with an arbitrary name but a statically defined type. This is typically used for c...
     type AdditionalProperty<'tKey, 'tValue> = {
     }
 
@@ -33,7 +31,6 @@ with an arbitrary name but a statically defined type. This is typically used for
     }
 
     /// Implements a set of common query parameters all Cat API's support.
-Since these can break the request structure these are listed explicitly as a behavior.
     type CommonCatQueryParameters = {
         [<System.Text.Json.Serialization.JsonPropertyName("format")>]
         Format: string option
@@ -48,8 +45,6 @@ Since these can break the request structure these are listed explicitly as a beh
     }
 
     /// Implements a set of common query parameters all API's support.
-Since these can break the request structure these are listed explicitly as a behavior.
-Its up to individual clients to define support alt...
     type CommonQueryParameters = {
         [<System.Text.Json.Serialization.JsonPropertyName("error_trace")>]
         ErrorTrace: bool option
@@ -62,41 +57,28 @@ Its up to individual clients to define support alt...
     }
 
     /// A `null` value that is to be interpreted as an actual value, unless other uses of `null` that are equivalent
-to a missing value. It is used for exemple in settings, where using the `NullValue` for a s...
     type NullValue = unit
 
     /// A class that implements `OverloadOf` only needs to declare properties that differ from the parent.
-Unchanged properties are inherited automatically. For declared properties, you can change
-whether a p...
     type OverloadOf<'tDefinition> = {
     }
 
     /// A set of flags that can be represented as a single enum value or a set of values that are encoded
-as a pipe-separated string
-
-Depending on the target language, code generators can use this hint to gen...
     [<RequireQualifiedAccess>]
     type PipeSeparatedFlags<'t> =
         | T of 't
         | String of string
 
     /// Some APIs will return values such as numbers also as a string (notably epoch timestamps). This behavior
-is used to capture this behavior while keeping the semantics of the field type.
-
-Depending on th...
     [<RequireQualifiedAccess>]
     type Stringified<'t> =
         | T of 't
         | String of string
 
     /// The absence of any type. This is commonly used in APIs that don't return a body.
-
-Although "void" is generally used for the unit type that has only one value, this is to be interpreted as
-the bottom t...
     type Void = unit
 
     /// `WithNullValue&lt;T&gt;` allows for explicit null assignments in contexts where `null` should be interpreted as an
-actual value.
     [<RequireQualifiedAccess>]
     type WithNullValue<'t> =
         | T of 't

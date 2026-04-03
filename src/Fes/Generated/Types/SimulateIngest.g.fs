@@ -8,8 +8,6 @@ open System.Text.Json.Serialization
 module SimulateIngest =
 
     /// The results of ingest simulation on a single document. The _source of the document contains
-the results after running all pipelines listed in executed_pipelines on the document. The
-list of executed p...
     type IngestDocumentSimulation = {
         [<System.Text.Json.Serialization.JsonPropertyName("_id")>]
         Id: Types.Id

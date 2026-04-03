@@ -13,11 +13,9 @@ module Types =
     }
 
     /// The aggregation name as returned from the server. Depending whether typed_keys is specified this could come back
-in the form of `name#type` instead of simply `name`
     type AggregateName = string
 
     /// Cause and details about a request failure. This class defines the properties common to all error types.
-Additional details are also provided, that depend on the error type.
     type ErrorCause = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
@@ -53,7 +51,6 @@ Additional details are also provided, that depend on the error type.
     type Long = float
 
     /// A duration. Units can be `nanos`, `micros`, `ms` (milliseconds), `s` (seconds), `m` (minutes), `h` (hours) and
-`d` (days). Also accepts "0" without a unit and "-1" to indicate an unspecified value.
     [<RequireQualifiedAccess>]
     type Duration =
         | String of string
@@ -304,7 +301,6 @@ Additional details are also provided, that depend on the error type.
     type EpochTime<'unit> = 'unit
 
     /// A date and time, either as a string whose format can depend on the context (defaulting to ISO 8601), or a
-number of milliseconds since the Epoch. Elasticsearch accepts both as input, but will generall...
     [<RequireQualifiedAccess>]
     type DateTime =
         | String of string
@@ -672,7 +668,6 @@ number of milliseconds since the Epoch. Elasticsearch accepts both as input, but
     }
 
     /// A date histogram interval. Similar to `Duration` with additional units: `w` (week), `M` (month), `q` (quarter) and
-`y` (year)
     type DurationLarge = string
 
     type VersionString = string
@@ -835,10 +830,6 @@ number of milliseconds since the Epoch. Elasticsearch accepts both as input, but
     }
 
     /// A latitude/longitude as a 2 dimensional point. It can be represented in various ways:
-- as a `{lat, long}` object
-- as a geo hash value
-- as a `[lon, lat]` array
-- as a string in `"&lt;lat&gt;, &lt;lo...
     [<RequireQualifiedAccess>]
     type GeoLocation =
         | LatLonGeoLocation of Types.LatLonGeoLocation
@@ -866,10 +857,6 @@ number of milliseconds since the Epoch. Elasticsearch accepts both as input, but
     }
 
     /// A geo bounding box. It can be represented in various ways:
-- as 4 top/bottom/left/right coordinates
-- as 2 top_left / bottom_right points
-- as 2 top_right / bottom_left points
-- as a WKT bounding box
     [<RequireQualifiedAccess>]
     type GeoBounds =
         | CoordsGeoBounds of Types.CoordsGeoBounds
@@ -1010,7 +997,6 @@ number of milliseconds since the Epoch. Elasticsearch accepts both as input, but
         | Array of Types.IndexName list
 
     /// Controls how to deal with unavailable concrete indices (closed or missing), how wildcard expressions are expanded
-to actual indices (all, closed or open indices) and how to deal with wildcard expressi...
     type IndicesOptions = {
         [<System.Text.Json.Serialization.JsonPropertyName("allow_no_indices")>]
         AllowNoIndices: bool option
@@ -1628,7 +1614,6 @@ to actual indices (all, closed or open indices) and how to deal with wildcard ex
         | Always
 
     /// The suggestion name as returned from the server. Depending whether typed_keys is specified this could come back
-in the form of `name#type` instead of simply `name`
     type SuggestionName = string
 
     type TaskFailure = {

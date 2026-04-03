@@ -15,7 +15,6 @@ module TypesAggregations =
     }
 
     /// Aggregation buckets. By default they are returned as an array, but if the aggregation has keys configured for
-the different buckets, the result is a dictionary.
     [<RequireQualifiedAccess>]
     type Buckets<'tBucket> =
         | Dictionary of Map<string, 'tBucket>
@@ -208,7 +207,6 @@ the different buckets, the result is a dictionary.
     }
 
     /// Statistics aggregation result. `min`, `max` and `avg` are missing if there were no values to process
-(`count` is zero).
     type StatsAggregate = {
         [<System.Text.Json.Serialization.JsonPropertyName("count")>]
         Count: Types.Long
@@ -521,7 +519,6 @@ the different buckets, the result is a dictionary.
     }
 
     /// Result of a `date_range` aggregation. Same format as a for a `range` aggregation: `from` and `to`
-in `buckets` are milliseconds since the Epoch, represented as a floating point number.
     type DateRangeAggregate = {
     }
 
@@ -938,8 +935,6 @@ in `buckets` are milliseconds since the Epoch, represented as a floating point n
         | KeepValues
 
     /// Buckets path can be expressed in different ways, and an aggregation may accept some or all of these
-forms depending on its type. Please refer to each aggregation's documentation to know what buckets
-p...
     [<RequireQualifiedAccess>]
     type BucketsPath =
         | String of string
@@ -995,8 +990,6 @@ p...
     }
 
     /// A sibling pipeline aggregation which executes a two sample Kolmogorov–Smirnov test (referred
-to as a "K-S test" from now on) against a provided distribution, and the distribution implied
-by the docume...
     type BucketKsAggregation = {
         [<System.Text.Json.Serialization.JsonPropertyName("alternative")>]
         Alternative: string list option
@@ -1069,8 +1062,6 @@ by the docume...
         | CustomCategorizeTextAnalyzer of TypesAggregations.CustomCategorizeTextAnalyzer
 
     /// A multi-bucket aggregation that groups semi-structured text into buckets. Each text
-field is re-analyzed using a custom analyzer. The resulting tokens are then categorized
-creating buckets of similarl...
     type CategorizeTextAggregation = {
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
         Field: Types.Field
@@ -1205,7 +1196,6 @@ creating buckets of similarl...
     }
 
     /// A date range limit, represented either as a DateMath expression or a number expressed
-according to the target field's precision.
     [<RequireQualifiedAccess>]
     type FieldDateMath =
         | DateMath of Types.DateMath
