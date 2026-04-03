@@ -18,12 +18,21 @@
     <PackageReference Include="FsUnit.xUnit" />
   </ItemGroup>
   <ItemGroup>
+    <!-- Test infrastructure -->
+    <Compile Include="TestTransport.fs" />
+    <Compile Include="Snapshot.fs" />
+    <!-- Hand-written tests -->
     <Compile Include="SerializerTests.fs" />
     <Compile Include="TransportTests.fs" />
     <Compile Include="EndpointTests.fs" />
     <Compile Include="QueryBuilderTests.fs" />
     <Compile Include="AggregationBuilderTests.fs" />
     <Compile Include="JsonConverterTests.fs" />
+    <Compile Include="PipelineTests.fs" />
+    <!-- Generated tests -->
+    <Compile Include="Generated/EndpointTests.g.fs" />
+    <Compile Include="Generated/EnumRoundTripTests.g.fs" />
+    <Compile Include="Generated/VariantTests.g.fs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Fes\Fes.fsproj" />
