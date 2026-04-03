@@ -53,9 +53,9 @@ jobs:
             --output src/Fes/Generated \
             --fsproj src/Fes/Fes.fsproj \
             --test-output tests/Fes.Tests
-          if [ -n "$(git diff --name-only src/Fes/Generated/ tests/Fes.Tests/Generated/)" ]; then
+          if [ -n "$(git diff --name-only src/Fes/Generated/ tests/Fes.Tests/Generated/ src/Fes/Fes.fsproj)" ]; then
             echo "Generated files are out of date. Run the generator and commit the results."
-            git diff --stat src/Fes/Generated/ tests/Fes.Tests/Generated/
+            git diff --stat src/Fes/Generated/ tests/Fes.Tests/Generated/ src/Fes/Fes.fsproj
             exit 1
           fi
           echo "Generated files are up to date."

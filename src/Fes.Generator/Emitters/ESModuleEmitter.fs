@@ -69,7 +69,10 @@ let emitESModule (index: TypeIndex.TypeIndex) : string * string =
                     w.DocComment ep.Description
                     if hasBody || hasQueryParams then
                         // Returns a default request that can be used with the CE builder
-                        w.Line $"let {funcName} {paramList} ="
+                        if pathParams.IsEmpty then
+                            w.Line $"let {funcName} () ="
+                        else
+                            w.Line $"let {funcName} {paramList} ="
                         w.Indent()
                         w.Line $"let mutable req = Unchecked.defaultof<{reqTypeName}>"
                         for p in pathParams do

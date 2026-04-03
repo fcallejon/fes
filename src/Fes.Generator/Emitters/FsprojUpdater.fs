@@ -4,7 +4,9 @@ open System.IO
 open System.Text
 
 /// Update the Fes.fsproj to include generated files in the correct order.
-/// Replaces the entire fsproj content with the correct structure.
+/// NOTE: This rewrites the entire fsproj. If custom PropertyGroup, ProjectReference,
+/// or other items are added outside the known structure, they will be lost.
+/// TODO: Consider updating only the generated ItemGroup region instead.
 let updateFsproj (fsprojPath: string) (generatedDir: string) =
     let fsprojDir = Path.GetDirectoryName(fsprojPath)
 

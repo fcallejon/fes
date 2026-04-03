@@ -145,8 +145,8 @@ module Types =
     [<RequireQualifiedAccess>]
     type Duration =
         | String of string
-        | Case1 of string
-        | Case2 of string
+        | Case1 of float
+        | Case2 of float
 
     type DateDistanceFeatureQuery = System.Text.Json.JsonElement
 
@@ -21900,7 +21900,7 @@ module Types =
         [<System.Text.Json.Serialization.JsonPropertyName("lifecycle_date_millis")>]
         LifecycleDateMillis: EpochTime<UnitMillis> option
         [<System.Text.Json.Serialization.JsonPropertyName("managed")>]
-        Managed: string
+        Managed: bool
         [<System.Text.Json.Serialization.JsonPropertyName("phase")>]
         Phase: Name option
         [<System.Text.Json.Serialization.JsonPropertyName("phase_time")>]
@@ -21937,7 +21937,7 @@ module Types =
         [<System.Text.Json.Serialization.JsonPropertyName("index")>]
         Index: IndexName
         [<System.Text.Json.Serialization.JsonPropertyName("managed")>]
-        Managed: string
+        Managed: bool
     }
 
     [<RequireQualifiedAccess>]
