@@ -21,6 +21,25 @@ let filterUsedGenerics (generics: TypeName list) (bodyText: string) =
         | [] -> ""
         | us -> "<" + (us |> List.map (fun g -> $"'{Namespacing.toCamelCase g.Name}") |> String.concat ", ") + ">"
 
+/// Deduplicate record field names — returns properties with CodegenName set for collisions
+let dedupRecordFields (properties: Property list) : Property list =
+    let mutable seenFields = Set.empty
+    properties |> List.map (fun p ->
+        let fieldName = Namespacing.toFieldName p.Name
+        if Set.contains fieldName seenFields then
+            let altName = Namespacing.toPascalCase ($"{p.Name}_field")
+            seenFields <- Set.add altName seenFields
+            { p with CodegenName = Some altName }
+        else
+            seenFields <- Set.add fieldName seenFields
+            p)
+
+/// Get the actual F# field name for a property (respecting dedup)
+let getRecordFieldName (p: Property) =
+    match p.CodegenName with
+    | Some alt -> alt
+    | None -> Namespacing.toFieldName p.Name
+
 // ============================================================================
 // Emit Enums
 // ============================================================================
@@ -83,19 +102,7 @@ let emitRecord (w: Writer) (isFirst: bool) (ctx: TypeResolver.ResolveContext) (n
             | [] -> ""
             | gs -> "<" + (gs |> List.map (fun g -> $"'{Namespacing.toCamelCase g.Name}") |> String.concat ", ") + ">"
 
-        // Deduplicate field names
-        let mutable seenFields = Set.empty
-        let dedupedProperties =
-            properties |> List.map (fun p ->
-                let fieldName = Namespacing.toFieldName p.Name
-                if Set.contains fieldName seenFields then
-                    // Disambiguate by prefixing with raw name parts
-                    let altName = Namespacing.toPascalCase ($"{p.Name}_field")
-                    seenFields <- Set.add altName seenFields
-                    { p with CodegenName = Some altName }
-                else
-                    seenFields <- Set.add fieldName seenFields
-                    p)
+        let dedupedProperties = dedupRecordFields properties
 
         w.Line $"{keyword} {name}{genericParams} = {{"
         w.Indent()
