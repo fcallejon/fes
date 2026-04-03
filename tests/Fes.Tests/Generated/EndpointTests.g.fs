@@ -73,18 +73,6 @@ let ``autoscaling_delete_autoscaling_policy has no request body`` () =
     postData.IsNone |> should be True
 
 [<Fact>]
-let ``autoscaling_get_autoscaling_capacity uses GET method`` () =
-    let req = Unchecked.defaultof<AutoscalingGetAutoscalingCapacityRequest>
-    let (endpoint, _) = AutoscalingGetAutoscalingCapacityRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.GET
-
-[<Fact>]
-let ``autoscaling_get_autoscaling_capacity has no request body`` () =
-    let req = Unchecked.defaultof<AutoscalingGetAutoscalingCapacityRequest>
-    let (_, postData) = AutoscalingGetAutoscalingCapacityRequest.ToEndpoint(req)
-    postData.IsNone |> should be True
-
-[<Fact>]
 let ``autoscaling_get_autoscaling_policy uses GET method`` () =
     let req = autoscalingGetAutoscalingPolicyRequest {
         name "test-value"
@@ -98,34 +86,6 @@ let ``autoscaling_get_autoscaling_policy has no request body`` () =
         name "test-value"
     }
     let (_, postData) = AutoscalingGetAutoscalingPolicyRequest.ToEndpoint(req)
-    postData.IsNone |> should be True
-
-[<Fact>]
-let ``autoscaling_put_autoscaling_policy uses PUT method`` () =
-    let req = autoscalingPutAutoscalingPolicyRequest {
-        name "test-value"
-    }
-    let (endpoint, _) = AutoscalingPutAutoscalingPolicyRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.PUT
-
-[<Fact>]
-let ``autoscaling_put_autoscaling_policy has request body`` () =
-    let req = autoscalingPutAutoscalingPolicyRequest {
-        name "test-value"
-    }
-    let (_, postData) = AutoscalingPutAutoscalingPolicyRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
-let ``capabilities uses GET method`` () =
-    let req = Unchecked.defaultof<CapabilitiesRequest>
-    let (endpoint, _) = CapabilitiesRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.GET
-
-[<Fact>]
-let ``capabilities has no request body`` () =
-    let req = Unchecked.defaultof<CapabilitiesRequest>
-    let (_, postData) = CapabilitiesRequest.ToEndpoint(req)
     postData.IsNone |> should be True
 
 [<Fact>]
@@ -145,18 +105,6 @@ let ``cat_component_templates has no request body`` () =
     postData.IsNone |> should be True
 
 [<Fact>]
-let ``cat_health uses GET method`` () =
-    let req = Unchecked.defaultof<CatHealthRequest>
-    let (endpoint, _) = CatHealthRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.GET
-
-[<Fact>]
-let ``cat_health has no request body`` () =
-    let req = Unchecked.defaultof<CatHealthRequest>
-    let (_, postData) = CatHealthRequest.ToEndpoint(req)
-    postData.IsNone |> should be True
-
-[<Fact>]
 let ``cat_help uses GET method`` () =
     let req = Unchecked.defaultof<CatHelpRequest>
     let (endpoint, _) = CatHelpRequest.ToEndpoint(req)
@@ -166,18 +114,6 @@ let ``cat_help uses GET method`` () =
 let ``cat_help has no request body`` () =
     let req = Unchecked.defaultof<CatHelpRequest>
     let (_, postData) = CatHelpRequest.ToEndpoint(req)
-    postData.IsNone |> should be True
-
-[<Fact>]
-let ``cat_master uses GET method`` () =
-    let req = Unchecked.defaultof<CatMasterRequest>
-    let (endpoint, _) = CatMasterRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.GET
-
-[<Fact>]
-let ``cat_master has no request body`` () =
-    let req = Unchecked.defaultof<CatMasterRequest>
-    let (_, postData) = CatMasterRequest.ToEndpoint(req)
     postData.IsNone |> should be True
 
 [<Fact>]
@@ -242,78 +178,6 @@ let ``cat_ml_trained_models has no request body`` () =
         modelId "test-value"
     }
     let (_, postData) = CatMlTrainedModelsRequest.ToEndpoint(req)
-    postData.IsNone |> should be True
-
-[<Fact>]
-let ``cat_nodeattrs uses GET method`` () =
-    let req = Unchecked.defaultof<CatNodeattrsRequest>
-    let (endpoint, _) = CatNodeattrsRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.GET
-
-[<Fact>]
-let ``cat_nodeattrs has no request body`` () =
-    let req = Unchecked.defaultof<CatNodeattrsRequest>
-    let (_, postData) = CatNodeattrsRequest.ToEndpoint(req)
-    postData.IsNone |> should be True
-
-[<Fact>]
-let ``cat_nodes uses GET method`` () =
-    let req = Unchecked.defaultof<CatNodesRequest>
-    let (endpoint, _) = CatNodesRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.GET
-
-[<Fact>]
-let ``cat_nodes has no request body`` () =
-    let req = Unchecked.defaultof<CatNodesRequest>
-    let (_, postData) = CatNodesRequest.ToEndpoint(req)
-    postData.IsNone |> should be True
-
-[<Fact>]
-let ``cat_pending_tasks uses GET method`` () =
-    let req = Unchecked.defaultof<CatPendingTasksRequest>
-    let (endpoint, _) = CatPendingTasksRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.GET
-
-[<Fact>]
-let ``cat_pending_tasks has no request body`` () =
-    let req = Unchecked.defaultof<CatPendingTasksRequest>
-    let (_, postData) = CatPendingTasksRequest.ToEndpoint(req)
-    postData.IsNone |> should be True
-
-[<Fact>]
-let ``cat_plugins uses GET method`` () =
-    let req = Unchecked.defaultof<CatPluginsRequest>
-    let (endpoint, _) = CatPluginsRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.GET
-
-[<Fact>]
-let ``cat_plugins has no request body`` () =
-    let req = Unchecked.defaultof<CatPluginsRequest>
-    let (_, postData) = CatPluginsRequest.ToEndpoint(req)
-    postData.IsNone |> should be True
-
-[<Fact>]
-let ``cat_repositories uses GET method`` () =
-    let req = Unchecked.defaultof<CatRepositoriesRequest>
-    let (endpoint, _) = CatRepositoriesRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.GET
-
-[<Fact>]
-let ``cat_repositories has no request body`` () =
-    let req = Unchecked.defaultof<CatRepositoriesRequest>
-    let (_, postData) = CatRepositoriesRequest.ToEndpoint(req)
-    postData.IsNone |> should be True
-
-[<Fact>]
-let ``cat_tasks uses GET method`` () =
-    let req = Unchecked.defaultof<CatTasksRequest>
-    let (endpoint, _) = CatTasksRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.GET
-
-[<Fact>]
-let ``cat_tasks has no request body`` () =
-    let req = Unchecked.defaultof<CatTasksRequest>
-    let (_, postData) = CatTasksRequest.ToEndpoint(req)
     postData.IsNone |> should be True
 
 [<Fact>]
@@ -493,18 +357,6 @@ let ``ccr_resume_follow has request body`` () =
     postData.IsSome |> should be True
 
 [<Fact>]
-let ``ccr_stats uses GET method`` () =
-    let req = Unchecked.defaultof<CcrStatsRequest>
-    let (endpoint, _) = CcrStatsRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.GET
-
-[<Fact>]
-let ``ccr_stats has no request body`` () =
-    let req = Unchecked.defaultof<CcrStatsRequest>
-    let (_, postData) = CcrStatsRequest.ToEndpoint(req)
-    postData.IsNone |> should be True
-
-[<Fact>]
 let ``ccr_unfollow uses POST method`` () =
     let req = ccrUnfollowRequest {
         index "test-value"
@@ -518,42 +370,6 @@ let ``ccr_unfollow has no request body`` () =
         index "test-value"
     }
     let (_, postData) = CcrUnfollowRequest.ToEndpoint(req)
-    postData.IsNone |> should be True
-
-[<Fact>]
-let ``close_point_in_time uses DELETE method`` () =
-    let req = Unchecked.defaultof<ClosePointInTimeRequest>
-    let (endpoint, _) = ClosePointInTimeRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.DELETE
-
-[<Fact>]
-let ``close_point_in_time has request body`` () =
-    let req = Unchecked.defaultof<ClosePointInTimeRequest>
-    let (_, postData) = ClosePointInTimeRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
-let ``cluster_allocation_explain uses POST method`` () =
-    let req = Unchecked.defaultof<ClusterAllocationExplainRequest>
-    let (endpoint, _) = ClusterAllocationExplainRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``cluster_allocation_explain has request body`` () =
-    let req = Unchecked.defaultof<ClusterAllocationExplainRequest>
-    let (_, postData) = ClusterAllocationExplainRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
-let ``cluster_delete_voting_config_exclusions uses DELETE method`` () =
-    let req = Unchecked.defaultof<ClusterDeleteVotingConfigExclusionsRequest>
-    let (endpoint, _) = ClusterDeleteVotingConfigExclusionsRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.DELETE
-
-[<Fact>]
-let ``cluster_delete_voting_config_exclusions has no request body`` () =
-    let req = Unchecked.defaultof<ClusterDeleteVotingConfigExclusionsRequest>
-    let (_, postData) = ClusterDeleteVotingConfigExclusionsRequest.ToEndpoint(req)
     postData.IsNone |> should be True
 
 [<Fact>]
@@ -573,42 +389,6 @@ let ``cluster_get_component_template has no request body`` () =
     postData.IsNone |> should be True
 
 [<Fact>]
-let ``cluster_get_settings uses GET method`` () =
-    let req = Unchecked.defaultof<ClusterGetSettingsRequest>
-    let (endpoint, _) = ClusterGetSettingsRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.GET
-
-[<Fact>]
-let ``cluster_get_settings has no request body`` () =
-    let req = Unchecked.defaultof<ClusterGetSettingsRequest>
-    let (_, postData) = ClusterGetSettingsRequest.ToEndpoint(req)
-    postData.IsNone |> should be True
-
-[<Fact>]
-let ``cluster_pending_tasks uses GET method`` () =
-    let req = Unchecked.defaultof<ClusterPendingTasksRequest>
-    let (endpoint, _) = ClusterPendingTasksRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.GET
-
-[<Fact>]
-let ``cluster_pending_tasks has no request body`` () =
-    let req = Unchecked.defaultof<ClusterPendingTasksRequest>
-    let (_, postData) = ClusterPendingTasksRequest.ToEndpoint(req)
-    postData.IsNone |> should be True
-
-[<Fact>]
-let ``cluster_post_voting_config_exclusions uses POST method`` () =
-    let req = Unchecked.defaultof<ClusterPostVotingConfigExclusionsRequest>
-    let (endpoint, _) = ClusterPostVotingConfigExclusionsRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``cluster_post_voting_config_exclusions has no request body`` () =
-    let req = Unchecked.defaultof<ClusterPostVotingConfigExclusionsRequest>
-    let (_, postData) = ClusterPostVotingConfigExclusionsRequest.ToEndpoint(req)
-    postData.IsNone |> should be True
-
-[<Fact>]
 let ``cluster_put_component_template uses POST method`` () =
     let req = clusterPutComponentTemplateRequest {
         name "test-value"
@@ -625,18 +405,6 @@ let ``cluster_put_component_template has request body`` () =
     postData.IsSome |> should be True
 
 [<Fact>]
-let ``cluster_put_settings uses PUT method`` () =
-    let req = Unchecked.defaultof<ClusterPutSettingsRequest>
-    let (endpoint, _) = ClusterPutSettingsRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.PUT
-
-[<Fact>]
-let ``cluster_put_settings has request body`` () =
-    let req = Unchecked.defaultof<ClusterPutSettingsRequest>
-    let (_, postData) = ClusterPutSettingsRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
 let ``cluster_remote_info uses GET method`` () =
     let req = Unchecked.defaultof<ClusterRemoteInfoRequest>
     let (endpoint, _) = ClusterRemoteInfoRequest.ToEndpoint(req)
@@ -647,18 +415,6 @@ let ``cluster_remote_info has no request body`` () =
     let req = Unchecked.defaultof<ClusterRemoteInfoRequest>
     let (_, postData) = ClusterRemoteInfoRequest.ToEndpoint(req)
     postData.IsNone |> should be True
-
-[<Fact>]
-let ``cluster_reroute uses POST method`` () =
-    let req = Unchecked.defaultof<ClusterRerouteRequest>
-    let (endpoint, _) = ClusterRerouteRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``cluster_reroute has request body`` () =
-    let req = Unchecked.defaultof<ClusterRerouteRequest>
-    let (_, postData) = ClusterRerouteRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
 
 [<Fact>]
 let ``connector_check_in uses PUT method`` () =
@@ -725,30 +481,6 @@ let ``connector_last_sync has request body`` () =
     postData.IsSome |> should be True
 
 [<Fact>]
-let ``connector_list uses GET method`` () =
-    let req = Unchecked.defaultof<ConnectorListRequest>
-    let (endpoint, _) = ConnectorListRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.GET
-
-[<Fact>]
-let ``connector_list has no request body`` () =
-    let req = Unchecked.defaultof<ConnectorListRequest>
-    let (_, postData) = ConnectorListRequest.ToEndpoint(req)
-    postData.IsNone |> should be True
-
-[<Fact>]
-let ``connector_post uses POST method`` () =
-    let req = Unchecked.defaultof<ConnectorPostRequest>
-    let (endpoint, _) = ConnectorPostRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``connector_post has request body`` () =
-    let req = Unchecked.defaultof<ConnectorPostRequest>
-    let (_, postData) = ConnectorPostRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
 let ``connector_put uses PUT method`` () =
     let req = connectorPutRequest {
         connectorId "test-value"
@@ -795,18 +527,6 @@ let ``connector_secret_get has no request body`` () =
     }
     let (_, postData) = ConnectorSecretGetRequest.ToEndpoint(req)
     postData.IsNone |> should be True
-
-[<Fact>]
-let ``connector_secret_post uses POST method`` () =
-    let req = Unchecked.defaultof<ConnectorSecretPostRequest>
-    let (endpoint, _) = ConnectorSecretPostRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``connector_secret_post has request body`` () =
-    let req = Unchecked.defaultof<ConnectorSecretPostRequest>
-    let (_, postData) = ConnectorSecretPostRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
 
 [<Fact>]
 let ``connector_secret_put uses PUT method`` () =
@@ -919,30 +639,6 @@ let ``connector_sync_job_get has no request body`` () =
     }
     let (_, postData) = ConnectorSyncJobGetRequest.ToEndpoint(req)
     postData.IsNone |> should be True
-
-[<Fact>]
-let ``connector_sync_job_list uses GET method`` () =
-    let req = Unchecked.defaultof<ConnectorSyncJobListRequest>
-    let (endpoint, _) = ConnectorSyncJobListRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.GET
-
-[<Fact>]
-let ``connector_sync_job_list has no request body`` () =
-    let req = Unchecked.defaultof<ConnectorSyncJobListRequest>
-    let (_, postData) = ConnectorSyncJobListRequest.ToEndpoint(req)
-    postData.IsNone |> should be True
-
-[<Fact>]
-let ``connector_sync_job_post uses POST method`` () =
-    let req = Unchecked.defaultof<ConnectorSyncJobPostRequest>
-    let (endpoint, _) = ConnectorSyncJobPostRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``connector_sync_job_post has request body`` () =
-    let req = Unchecked.defaultof<ConnectorSyncJobPostRequest>
-    let (_, postData) = ConnectorSyncJobPostRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
 
 [<Fact>]
 let ``connector_sync_job_update_stats uses PUT method`` () =
@@ -1327,18 +1023,6 @@ let ``enrich_put_policy has request body`` () =
     postData.IsSome |> should be True
 
 [<Fact>]
-let ``enrich_stats uses GET method`` () =
-    let req = Unchecked.defaultof<EnrichStatsRequest>
-    let (endpoint, _) = EnrichStatsRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.GET
-
-[<Fact>]
-let ``enrich_stats has no request body`` () =
-    let req = Unchecked.defaultof<EnrichStatsRequest>
-    let (_, postData) = EnrichStatsRequest.ToEndpoint(req)
-    postData.IsNone |> should be True
-
-[<Fact>]
 let ``eql_delete uses DELETE method`` () =
     let req = eqlDeleteRequest {
         id "test-value"
@@ -1385,18 +1069,6 @@ let ``eql_get_status has no request body`` () =
     }
     let (_, postData) = EqlGetStatusRequest.ToEndpoint(req)
     postData.IsNone |> should be True
-
-[<Fact>]
-let ``esql_async_query uses POST method`` () =
-    let req = Unchecked.defaultof<EsqlAsyncQueryRequest>
-    let (endpoint, _) = EsqlAsyncQueryRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``esql_async_query has request body`` () =
-    let req = Unchecked.defaultof<EsqlAsyncQueryRequest>
-    let (_, postData) = EsqlAsyncQueryRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
 
 [<Fact>]
 let ``esql_async_query_delete uses DELETE method`` () =
@@ -1523,18 +1195,6 @@ let ``esql_put_view has request body`` () =
     postData.IsSome |> should be True
 
 [<Fact>]
-let ``esql_query uses POST method`` () =
-    let req = Unchecked.defaultof<EsqlQueryRequest>
-    let (endpoint, _) = EsqlQueryRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``esql_query has request body`` () =
-    let req = Unchecked.defaultof<EsqlQueryRequest>
-    let (_, postData) = EsqlQueryRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
 let ``exists uses HEAD method`` () =
     let req = existsRequest {
         id "test-value"
@@ -1589,30 +1249,6 @@ let ``explain has request body`` () =
     postData.IsSome |> should be True
 
 [<Fact>]
-let ``features_get_features uses GET method`` () =
-    let req = Unchecked.defaultof<FeaturesGetFeaturesRequest>
-    let (endpoint, _) = FeaturesGetFeaturesRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.GET
-
-[<Fact>]
-let ``features_get_features has no request body`` () =
-    let req = Unchecked.defaultof<FeaturesGetFeaturesRequest>
-    let (_, postData) = FeaturesGetFeaturesRequest.ToEndpoint(req)
-    postData.IsNone |> should be True
-
-[<Fact>]
-let ``features_reset_features uses POST method`` () =
-    let req = Unchecked.defaultof<FeaturesResetFeaturesRequest>
-    let (endpoint, _) = FeaturesResetFeaturesRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``features_reset_features has no request body`` () =
-    let req = Unchecked.defaultof<FeaturesResetFeaturesRequest>
-    let (_, postData) = FeaturesResetFeaturesRequest.ToEndpoint(req)
-    postData.IsNone |> should be True
-
-[<Fact>]
 let ``fleet_delete_secret uses DELETE method`` () =
     let req = fleetDeleteSecretRequest {
         id "test-value"
@@ -1643,18 +1279,6 @@ let ``fleet_get_secret has no request body`` () =
     }
     let (_, postData) = FleetGetSecretRequest.ToEndpoint(req)
     postData.IsNone |> should be True
-
-[<Fact>]
-let ``fleet_post_secret uses POST method`` () =
-    let req = Unchecked.defaultof<FleetPostSecretRequest>
-    let (endpoint, _) = FleetPostSecretRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``fleet_post_secret has request body`` () =
-    let req = Unchecked.defaultof<FleetPostSecretRequest>
-    let (_, postData) = FleetPostSecretRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
 
 [<Fact>]
 let ``get uses GET method`` () =
@@ -1793,18 +1417,6 @@ let ``ilm_get_status has no request body`` () =
     postData.IsNone |> should be True
 
 [<Fact>]
-let ``ilm_migrate_to_data_tiers uses POST method`` () =
-    let req = Unchecked.defaultof<IlmMigrateToDataTiersRequest>
-    let (endpoint, _) = IlmMigrateToDataTiersRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``ilm_migrate_to_data_tiers has request body`` () =
-    let req = Unchecked.defaultof<IlmMigrateToDataTiersRequest>
-    let (_, postData) = IlmMigrateToDataTiersRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
 let ``ilm_move_to_step uses POST method`` () =
     let req = ilmMoveToStepRequest {
         index "test-value"
@@ -1850,30 +1462,6 @@ let ``ilm_retry has no request body`` () =
         index "test-value"
     }
     let (_, postData) = IlmRetryRequest.ToEndpoint(req)
-    postData.IsNone |> should be True
-
-[<Fact>]
-let ``ilm_start uses POST method`` () =
-    let req = Unchecked.defaultof<IlmStartRequest>
-    let (endpoint, _) = IlmStartRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``ilm_start has no request body`` () =
-    let req = Unchecked.defaultof<IlmStartRequest>
-    let (_, postData) = IlmStartRequest.ToEndpoint(req)
-    postData.IsNone |> should be True
-
-[<Fact>]
-let ``ilm_stop uses POST method`` () =
-    let req = Unchecked.defaultof<IlmStopRequest>
-    let (endpoint, _) = IlmStopRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``ilm_stop has no request body`` () =
-    let req = Unchecked.defaultof<IlmStopRequest>
-    let (_, postData) = IlmStopRequest.ToEndpoint(req)
     postData.IsNone |> should be True
 
 [<Fact>]
@@ -1943,24 +1531,6 @@ let ``indices_create_data_stream has no request body`` () =
     postData.IsNone |> should be True
 
 [<Fact>]
-let ``indices_create_from uses POST method`` () =
-    let req = indicesCreateFromRequest {
-        source "test-value"
-        dest "test-value"
-    }
-    let (endpoint, _) = IndicesCreateFromRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``indices_create_from has request body`` () =
-    let req = indicesCreateFromRequest {
-        source "test-value"
-        dest "test-value"
-    }
-    let (_, postData) = IndicesCreateFromRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
 let ``indices_delete_template uses DELETE method`` () =
     let req = indicesDeleteTemplateRequest {
         name "test-value"
@@ -1975,24 +1545,6 @@ let ``indices_delete_template has no request body`` () =
     }
     let (_, postData) = IndicesDeleteTemplateRequest.ToEndpoint(req)
     postData.IsNone |> should be True
-
-[<Fact>]
-let ``indices_downsample uses POST method`` () =
-    let req = indicesDownsampleRequest {
-        index "test-value"
-        targetIndex "test-value"
-    }
-    let (endpoint, _) = IndicesDownsampleRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``indices_downsample has request body`` () =
-    let req = indicesDownsampleRequest {
-        index "test-value"
-        targetIndex "test-value"
-    }
-    let (_, postData) = IndicesDownsampleRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
 
 [<Fact>]
 let ``indices_exists_index_template uses HEAD method`` () =
@@ -2039,18 +1591,6 @@ let ``indices_get_index_template has no request body`` () =
     postData.IsNone |> should be True
 
 [<Fact>]
-let ``indices_migrate_reindex uses POST method`` () =
-    let req = Unchecked.defaultof<IndicesMigrateReindexRequest>
-    let (endpoint, _) = IndicesMigrateReindexRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``indices_migrate_reindex has request body`` () =
-    let req = Unchecked.defaultof<IndicesMigrateReindexRequest>
-    let (_, postData) = IndicesMigrateReindexRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
 let ``indices_migrate_to_data_stream uses POST method`` () =
     let req = indicesMigrateToDataStreamRequest {
         name "test-value"
@@ -2065,18 +1605,6 @@ let ``indices_migrate_to_data_stream has no request body`` () =
     }
     let (_, postData) = IndicesMigrateToDataStreamRequest.ToEndpoint(req)
     postData.IsNone |> should be True
-
-[<Fact>]
-let ``indices_modify_data_stream uses POST method`` () =
-    let req = Unchecked.defaultof<IndicesModifyDataStreamRequest>
-    let (endpoint, _) = IndicesModifyDataStreamRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``indices_modify_data_stream has request body`` () =
-    let req = Unchecked.defaultof<IndicesModifyDataStreamRequest>
-    let (_, postData) = IndicesModifyDataStreamRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
 
 [<Fact>]
 let ``indices_promote_data_stream uses POST method`` () =
@@ -2163,22 +1691,6 @@ let ``indices_shrink has request body`` () =
     postData.IsSome |> should be True
 
 [<Fact>]
-let ``indices_simulate_index_template uses POST method`` () =
-    let req = indicesSimulateIndexTemplateRequest {
-        name "test-value"
-    }
-    let (endpoint, _) = IndicesSimulateIndexTemplateRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``indices_simulate_index_template has request body`` () =
-    let req = indicesSimulateIndexTemplateRequest {
-        name "test-value"
-    }
-    let (_, postData) = IndicesSimulateIndexTemplateRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
 let ``indices_simulate_template uses POST method`` () =
     let req = indicesSimulateTemplateRequest {
         name "test-value"
@@ -2213,66 +1725,6 @@ let ``indices_split has request body`` () =
     postData.IsSome |> should be True
 
 [<Fact>]
-let ``indices_update_aliases uses POST method`` () =
-    let req = Unchecked.defaultof<IndicesUpdateAliasesRequest>
-    let (endpoint, _) = IndicesUpdateAliasesRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``indices_update_aliases has request body`` () =
-    let req = Unchecked.defaultof<IndicesUpdateAliasesRequest>
-    let (_, postData) = IndicesUpdateAliasesRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
-let ``inference_chat_completion_unified uses POST method`` () =
-    let req = inferenceChatCompletionUnifiedRequest {
-        inferenceId "test-value"
-    }
-    let (endpoint, _) = InferenceChatCompletionUnifiedRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``inference_chat_completion_unified has request body`` () =
-    let req = inferenceChatCompletionUnifiedRequest {
-        inferenceId "test-value"
-    }
-    let (_, postData) = InferenceChatCompletionUnifiedRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
-let ``inference_completion uses POST method`` () =
-    let req = inferenceCompletionRequest {
-        inferenceId "test-value"
-    }
-    let (endpoint, _) = InferenceCompletionRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``inference_completion has request body`` () =
-    let req = inferenceCompletionRequest {
-        inferenceId "test-value"
-    }
-    let (_, postData) = InferenceCompletionRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
-let ``inference_embedding uses POST method`` () =
-    let req = inferenceEmbeddingRequest {
-        inferenceId "test-value"
-    }
-    let (endpoint, _) = InferenceEmbeddingRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``inference_embedding has request body`` () =
-    let req = inferenceEmbeddingRequest {
-        inferenceId "test-value"
-    }
-    let (_, postData) = InferenceEmbeddingRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
 let ``inference_rerank uses POST method`` () =
     let req = inferenceRerankRequest {
         inferenceId "test-value"
@@ -2286,54 +1738,6 @@ let ``inference_rerank has request body`` () =
         inferenceId "test-value"
     }
     let (_, postData) = InferenceRerankRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
-let ``inference_sparse_embedding uses POST method`` () =
-    let req = inferenceSparseEmbeddingRequest {
-        inferenceId "test-value"
-    }
-    let (endpoint, _) = InferenceSparseEmbeddingRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``inference_sparse_embedding has request body`` () =
-    let req = inferenceSparseEmbeddingRequest {
-        inferenceId "test-value"
-    }
-    let (_, postData) = InferenceSparseEmbeddingRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
-let ``inference_stream_completion uses POST method`` () =
-    let req = inferenceStreamCompletionRequest {
-        inferenceId "test-value"
-    }
-    let (endpoint, _) = InferenceStreamCompletionRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``inference_stream_completion has request body`` () =
-    let req = inferenceStreamCompletionRequest {
-        inferenceId "test-value"
-    }
-    let (_, postData) = InferenceStreamCompletionRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
-let ``inference_text_embedding uses POST method`` () =
-    let req = inferenceTextEmbeddingRequest {
-        inferenceId "test-value"
-    }
-    let (endpoint, _) = InferenceTextEmbeddingRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``inference_text_embedding has request body`` () =
-    let req = inferenceTextEmbeddingRequest {
-        inferenceId "test-value"
-    }
-    let (_, postData) = InferenceTextEmbeddingRequest.ToEndpoint(req)
     postData.IsSome |> should be True
 
 [<Fact>]
@@ -2421,22 +1825,6 @@ let ``ingest_put_geoip_database has request body`` () =
     postData.IsSome |> should be True
 
 [<Fact>]
-let ``ingest_put_ip_location_database uses PUT method`` () =
-    let req = ingestPutIpLocationDatabaseRequest {
-        id "test-value"
-    }
-    let (endpoint, _) = IngestPutIpLocationDatabaseRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.PUT
-
-[<Fact>]
-let ``ingest_put_ip_location_database has request body`` () =
-    let req = ingestPutIpLocationDatabaseRequest {
-        id "test-value"
-    }
-    let (_, postData) = IngestPutIpLocationDatabaseRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
 let ``ingest_put_pipeline uses PUT method`` () =
     let req = ingestPutPipelineRequest {
         id "test-value"
@@ -2469,30 +1857,6 @@ let ``ingest_simulate has request body`` () =
     postData.IsSome |> should be True
 
 [<Fact>]
-let ``license_delete uses DELETE method`` () =
-    let req = Unchecked.defaultof<LicenseDeleteRequest>
-    let (endpoint, _) = LicenseDeleteRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.DELETE
-
-[<Fact>]
-let ``license_delete has no request body`` () =
-    let req = Unchecked.defaultof<LicenseDeleteRequest>
-    let (_, postData) = LicenseDeleteRequest.ToEndpoint(req)
-    postData.IsNone |> should be True
-
-[<Fact>]
-let ``license_get uses GET method`` () =
-    let req = Unchecked.defaultof<LicenseGetRequest>
-    let (endpoint, _) = LicenseGetRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.GET
-
-[<Fact>]
-let ``license_get has no request body`` () =
-    let req = Unchecked.defaultof<LicenseGetRequest>
-    let (_, postData) = LicenseGetRequest.ToEndpoint(req)
-    postData.IsNone |> should be True
-
-[<Fact>]
 let ``license_get_basic_status uses GET method`` () =
     let req = Unchecked.defaultof<LicenseGetBasicStatusRequest>
     let (endpoint, _) = LicenseGetBasicStatusRequest.ToEndpoint(req)
@@ -2517,42 +1881,6 @@ let ``license_get_trial_status has no request body`` () =
     postData.IsNone |> should be True
 
 [<Fact>]
-let ``license_post uses POST method`` () =
-    let req = Unchecked.defaultof<LicensePostRequest>
-    let (endpoint, _) = LicensePostRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``license_post has request body`` () =
-    let req = Unchecked.defaultof<LicensePostRequest>
-    let (_, postData) = LicensePostRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
-let ``license_post_start_basic uses POST method`` () =
-    let req = Unchecked.defaultof<LicensePostStartBasicRequest>
-    let (endpoint, _) = LicensePostStartBasicRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``license_post_start_basic has no request body`` () =
-    let req = Unchecked.defaultof<LicensePostStartBasicRequest>
-    let (_, postData) = LicensePostStartBasicRequest.ToEndpoint(req)
-    postData.IsNone |> should be True
-
-[<Fact>]
-let ``license_post_start_trial uses POST method`` () =
-    let req = Unchecked.defaultof<LicensePostStartTrialRequest>
-    let (endpoint, _) = LicensePostStartTrialRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``license_post_start_trial has no request body`` () =
-    let req = Unchecked.defaultof<LicensePostStartTrialRequest>
-    let (_, postData) = LicensePostStartTrialRequest.ToEndpoint(req)
-    postData.IsNone |> should be True
-
-[<Fact>]
 let ``logstash_delete_pipeline uses DELETE method`` () =
     let req = logstashDeletePipelineRequest {
         id "test-value"
@@ -2567,22 +1895,6 @@ let ``logstash_delete_pipeline has no request body`` () =
     }
     let (_, postData) = LogstashDeletePipelineRequest.ToEndpoint(req)
     postData.IsNone |> should be True
-
-[<Fact>]
-let ``logstash_put_pipeline uses PUT method`` () =
-    let req = logstashPutPipelineRequest {
-        id "test-value"
-    }
-    let (endpoint, _) = LogstashPutPipelineRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.PUT
-
-[<Fact>]
-let ``logstash_put_pipeline has request body`` () =
-    let req = logstashPutPipelineRequest {
-        id "test-value"
-    }
-    let (_, postData) = LogstashPutPipelineRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
 
 [<Fact>]
 let ``mget uses POST method`` () =
@@ -2855,30 +2167,6 @@ let ``ml_delete_trained_model_alias has no request body`` () =
     }
     let (_, postData) = MlDeleteTrainedModelAliasRequest.ToEndpoint(req)
     postData.IsNone |> should be True
-
-[<Fact>]
-let ``ml_estimate_model_memory uses POST method`` () =
-    let req = Unchecked.defaultof<MlEstimateModelMemoryRequest>
-    let (endpoint, _) = MlEstimateModelMemoryRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``ml_estimate_model_memory has request body`` () =
-    let req = Unchecked.defaultof<MlEstimateModelMemoryRequest>
-    let (_, postData) = MlEstimateModelMemoryRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
-let ``ml_evaluate_data_frame uses POST method`` () =
-    let req = Unchecked.defaultof<MlEvaluateDataFrameRequest>
-    let (endpoint, _) = MlEvaluateDataFrameRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``ml_evaluate_data_frame has request body`` () =
-    let req = Unchecked.defaultof<MlEvaluateDataFrameRequest>
-    let (_, postData) = MlEvaluateDataFrameRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
 
 [<Fact>]
 let ``ml_explain_data_frame_analytics uses POST method`` () =
@@ -3349,18 +2637,6 @@ let ``ml_revert_model_snapshot has request body`` () =
     postData.IsSome |> should be True
 
 [<Fact>]
-let ``ml_set_upgrade_mode uses POST method`` () =
-    let req = Unchecked.defaultof<MlSetUpgradeModeRequest>
-    let (endpoint, _) = MlSetUpgradeModeRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``ml_set_upgrade_mode has no request body`` () =
-    let req = Unchecked.defaultof<MlSetUpgradeModeRequest>
-    let (_, postData) = MlSetUpgradeModeRequest.ToEndpoint(req)
-    postData.IsNone |> should be True
-
-[<Fact>]
 let ``ml_start_datafeed uses POST method`` () =
     let req = mlStartDatafeedRequest {
         datafeedId "test-value"
@@ -3541,30 +2817,6 @@ let ``ml_upgrade_job_snapshot has no request body`` () =
     postData.IsNone |> should be True
 
 [<Fact>]
-let ``ml_validate uses POST method`` () =
-    let req = Unchecked.defaultof<MlValidateRequest>
-    let (endpoint, _) = MlValidateRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``ml_validate has request body`` () =
-    let req = Unchecked.defaultof<MlValidateRequest>
-    let (_, postData) = MlValidateRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
-let ``ml_validate_detector uses POST method`` () =
-    let req = Unchecked.defaultof<MlValidateDetectorRequest>
-    let (endpoint, _) = MlValidateDetectorRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``ml_validate_detector has request body`` () =
-    let req = Unchecked.defaultof<MlValidateDetectorRequest>
-    let (_, postData) = MlValidateDetectorRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
 let ``mtermvectors uses POST method`` () =
     let req = mtermvectorsRequest {
         index "test-value"
@@ -3591,82 +2843,6 @@ let ``ping has no request body`` () =
     let req = Unchecked.defaultof<PingRequest>
     let (_, postData) = PingRequest.ToEndpoint(req)
     postData.IsNone |> should be True
-
-[<Fact>]
-let ``profiling_flamegraph uses POST method`` () =
-    let req = Unchecked.defaultof<ProfilingFlamegraphRequest>
-    let (endpoint, _) = ProfilingFlamegraphRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``profiling_flamegraph has request body`` () =
-    let req = Unchecked.defaultof<ProfilingFlamegraphRequest>
-    let (_, postData) = ProfilingFlamegraphRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
-let ``profiling_stacktraces uses POST method`` () =
-    let req = Unchecked.defaultof<ProfilingStacktracesRequest>
-    let (endpoint, _) = ProfilingStacktracesRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``profiling_stacktraces has request body`` () =
-    let req = Unchecked.defaultof<ProfilingStacktracesRequest>
-    let (_, postData) = ProfilingStacktracesRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
-let ``profiling_status uses GET method`` () =
-    let req = Unchecked.defaultof<ProfilingStatusRequest>
-    let (endpoint, _) = ProfilingStatusRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.GET
-
-[<Fact>]
-let ``profiling_status has no request body`` () =
-    let req = Unchecked.defaultof<ProfilingStatusRequest>
-    let (_, postData) = ProfilingStatusRequest.ToEndpoint(req)
-    postData.IsNone |> should be True
-
-[<Fact>]
-let ``profiling_topn_functions uses POST method`` () =
-    let req = Unchecked.defaultof<ProfilingTopnFunctionsRequest>
-    let (endpoint, _) = ProfilingTopnFunctionsRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``profiling_topn_functions has request body`` () =
-    let req = Unchecked.defaultof<ProfilingTopnFunctionsRequest>
-    let (_, postData) = ProfilingTopnFunctionsRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
-let ``project_create_many_routing uses PUT method`` () =
-    let req = Unchecked.defaultof<ProjectCreateManyRoutingRequest>
-    let (endpoint, _) = ProjectCreateManyRoutingRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.PUT
-
-[<Fact>]
-let ``project_create_many_routing has request body`` () =
-    let req = Unchecked.defaultof<ProjectCreateManyRoutingRequest>
-    let (_, postData) = ProjectCreateManyRoutingRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
-let ``project_create_routing uses PUT method`` () =
-    let req = projectCreateRoutingRequest {
-        name "test-value"
-    }
-    let (endpoint, _) = ProjectCreateRoutingRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.PUT
-
-[<Fact>]
-let ``project_create_routing has request body`` () =
-    let req = projectCreateRoutingRequest {
-        name "test-value"
-    }
-    let (_, postData) = ProjectCreateRoutingRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
 
 [<Fact>]
 let ``project_delete_routing uses DELETE method`` () =
@@ -3711,18 +2887,6 @@ let ``project_get_routing has no request body`` () =
     }
     let (_, postData) = ProjectGetRoutingRequest.ToEndpoint(req)
     postData.IsNone |> should be True
-
-[<Fact>]
-let ``project_tags uses POST method`` () =
-    let req = Unchecked.defaultof<ProjectTagsRequest>
-    let (endpoint, _) = ProjectTagsRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``project_tags has request body`` () =
-    let req = Unchecked.defaultof<ProjectTagsRequest>
-    let (_, postData) = ProjectTagsRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
 
 [<Fact>]
 let ``put_script uses POST method`` () =
@@ -3811,52 +2975,6 @@ let ``query_rules_get_ruleset has no request body`` () =
     postData.IsNone |> should be True
 
 [<Fact>]
-let ``query_rules_list_rulesets uses GET method`` () =
-    let req = Unchecked.defaultof<QueryRulesListRulesetsRequest>
-    let (endpoint, _) = QueryRulesListRulesetsRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.GET
-
-[<Fact>]
-let ``query_rules_list_rulesets has no request body`` () =
-    let req = Unchecked.defaultof<QueryRulesListRulesetsRequest>
-    let (_, postData) = QueryRulesListRulesetsRequest.ToEndpoint(req)
-    postData.IsNone |> should be True
-
-[<Fact>]
-let ``query_rules_put_rule uses PUT method`` () =
-    let req = queryRulesPutRuleRequest {
-        rulesetId "test-value"
-        ruleId "test-value"
-    }
-    let (endpoint, _) = QueryRulesPutRuleRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.PUT
-
-[<Fact>]
-let ``query_rules_put_rule has request body`` () =
-    let req = queryRulesPutRuleRequest {
-        rulesetId "test-value"
-        ruleId "test-value"
-    }
-    let (_, postData) = QueryRulesPutRuleRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
-let ``query_rules_put_ruleset uses PUT method`` () =
-    let req = queryRulesPutRulesetRequest {
-        rulesetId "test-value"
-    }
-    let (endpoint, _) = QueryRulesPutRulesetRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.PUT
-
-[<Fact>]
-let ``query_rules_put_ruleset has request body`` () =
-    let req = queryRulesPutRulesetRequest {
-        rulesetId "test-value"
-    }
-    let (_, postData) = QueryRulesPutRulesetRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
 let ``query_rules_test uses POST method`` () =
     let req = queryRulesTestRequest {
         rulesetId "test-value"
@@ -3870,18 +2988,6 @@ let ``query_rules_test has request body`` () =
         rulesetId "test-value"
     }
     let (_, postData) = QueryRulesTestRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
-let ``reindex uses POST method`` () =
-    let req = Unchecked.defaultof<ReindexRequest>
-    let (endpoint, _) = ReindexRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``reindex has request body`` () =
-    let req = Unchecked.defaultof<ReindexRequest>
-    let (_, postData) = ReindexRequest.ToEndpoint(req)
     postData.IsSome |> should be True
 
 [<Fact>]
@@ -3997,18 +3103,6 @@ let ``rollup_stop_job has no request body`` () =
     postData.IsNone |> should be True
 
 [<Fact>]
-let ``scripts_painless_execute uses POST method`` () =
-    let req = Unchecked.defaultof<ScriptsPainlessExecuteRequest>
-    let (endpoint, _) = ScriptsPainlessExecuteRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``scripts_painless_execute has request body`` () =
-    let req = Unchecked.defaultof<ScriptsPainlessExecuteRequest>
-    let (_, postData) = ScriptsPainlessExecuteRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
 let ``search_application_delete uses DELETE method`` () =
     let req = searchApplicationDeleteRequest {
         name "test-value"
@@ -4055,34 +3149,6 @@ let ``search_application_get has no request body`` () =
     }
     let (_, postData) = SearchApplicationGetRequest.ToEndpoint(req)
     postData.IsNone |> should be True
-
-[<Fact>]
-let ``search_application_list uses GET method`` () =
-    let req = Unchecked.defaultof<SearchApplicationListRequest>
-    let (endpoint, _) = SearchApplicationListRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.GET
-
-[<Fact>]
-let ``search_application_list has no request body`` () =
-    let req = Unchecked.defaultof<SearchApplicationListRequest>
-    let (_, postData) = SearchApplicationListRequest.ToEndpoint(req)
-    postData.IsNone |> should be True
-
-[<Fact>]
-let ``search_application_put uses PUT method`` () =
-    let req = searchApplicationPutRequest {
-        name "test-value"
-    }
-    let (endpoint, _) = SearchApplicationPutRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.PUT
-
-[<Fact>]
-let ``search_application_put has request body`` () =
-    let req = searchApplicationPutRequest {
-        name "test-value"
-    }
-    let (_, postData) = SearchApplicationPutRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
 
 [<Fact>]
 let ``search_application_put_behavioral_analytics uses PUT method`` () =
@@ -4151,18 +3217,6 @@ let ``searchable_snapshots_mount has request body`` () =
     postData.IsSome |> should be True
 
 [<Fact>]
-let ``security_activate_user_profile uses POST method`` () =
-    let req = Unchecked.defaultof<SecurityActivateUserProfileRequest>
-    let (endpoint, _) = SecurityActivateUserProfileRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``security_activate_user_profile has request body`` () =
-    let req = Unchecked.defaultof<SecurityActivateUserProfileRequest>
-    let (_, postData) = SecurityActivateUserProfileRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
 let ``security_authenticate uses GET method`` () =
     let req = Unchecked.defaultof<SecurityAuthenticateRequest>
     let (endpoint, _) = SecurityAuthenticateRequest.ToEndpoint(req)
@@ -4173,42 +3227,6 @@ let ``security_authenticate has no request body`` () =
     let req = Unchecked.defaultof<SecurityAuthenticateRequest>
     let (_, postData) = SecurityAuthenticateRequest.ToEndpoint(req)
     postData.IsNone |> should be True
-
-[<Fact>]
-let ``security_bulk_delete_role uses DELETE method`` () =
-    let req = Unchecked.defaultof<SecurityBulkDeleteRoleRequest>
-    let (endpoint, _) = SecurityBulkDeleteRoleRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.DELETE
-
-[<Fact>]
-let ``security_bulk_delete_role has request body`` () =
-    let req = Unchecked.defaultof<SecurityBulkDeleteRoleRequest>
-    let (_, postData) = SecurityBulkDeleteRoleRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
-let ``security_bulk_put_role uses POST method`` () =
-    let req = Unchecked.defaultof<SecurityBulkPutRoleRequest>
-    let (endpoint, _) = SecurityBulkPutRoleRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``security_bulk_put_role has request body`` () =
-    let req = Unchecked.defaultof<SecurityBulkPutRoleRequest>
-    let (_, postData) = SecurityBulkPutRoleRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
-let ``security_bulk_update_api_keys uses POST method`` () =
-    let req = Unchecked.defaultof<SecurityBulkUpdateApiKeysRequest>
-    let (endpoint, _) = SecurityBulkUpdateApiKeysRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``security_bulk_update_api_keys has request body`` () =
-    let req = Unchecked.defaultof<SecurityBulkUpdateApiKeysRequest>
-    let (_, postData) = SecurityBulkUpdateApiKeysRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
 
 [<Fact>]
 let ``security_change_password uses POST method`` () =
@@ -4224,30 +3242,6 @@ let ``security_change_password has request body`` () =
         username "test-value"
     }
     let (_, postData) = SecurityChangePasswordRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
-let ``security_create_api_key uses POST method`` () =
-    let req = Unchecked.defaultof<SecurityCreateApiKeyRequest>
-    let (endpoint, _) = SecurityCreateApiKeyRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``security_create_api_key has request body`` () =
-    let req = Unchecked.defaultof<SecurityCreateApiKeyRequest>
-    let (_, postData) = SecurityCreateApiKeyRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
-let ``security_create_cross_cluster_api_key uses POST method`` () =
-    let req = Unchecked.defaultof<SecurityCreateCrossClusterApiKeyRequest>
-    let (endpoint, _) = SecurityCreateCrossClusterApiKeyRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``security_create_cross_cluster_api_key has request body`` () =
-    let req = Unchecked.defaultof<SecurityCreateCrossClusterApiKeyRequest>
-    let (_, postData) = SecurityCreateCrossClusterApiKeyRequest.ToEndpoint(req)
     postData.IsSome |> should be True
 
 [<Fact>]
@@ -4269,18 +3263,6 @@ let ``security_create_service_token has no request body`` () =
     }
     let (_, postData) = SecurityCreateServiceTokenRequest.ToEndpoint(req)
     postData.IsNone |> should be True
-
-[<Fact>]
-let ``security_delegate_pki uses POST method`` () =
-    let req = Unchecked.defaultof<SecurityDelegatePkiRequest>
-    let (endpoint, _) = SecurityDelegatePkiRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``security_delegate_pki has request body`` () =
-    let req = Unchecked.defaultof<SecurityDelegatePkiRequest>
-    let (_, postData) = SecurityDelegatePkiRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
 
 [<Fact>]
 let ``security_delete_role uses DELETE method`` () =
@@ -4439,18 +3421,6 @@ let ``security_enroll_node has no request body`` () =
     postData.IsNone |> should be True
 
 [<Fact>]
-let ``security_get_api_key uses GET method`` () =
-    let req = Unchecked.defaultof<SecurityGetApiKeyRequest>
-    let (endpoint, _) = SecurityGetApiKeyRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.GET
-
-[<Fact>]
-let ``security_get_api_key has no request body`` () =
-    let req = Unchecked.defaultof<SecurityGetApiKeyRequest>
-    let (_, postData) = SecurityGetApiKeyRequest.ToEndpoint(req)
-    postData.IsNone |> should be True
-
-[<Fact>]
 let ``security_get_builtin_privileges uses GET method`` () =
     let req = Unchecked.defaultof<SecurityGetBuiltinPrivilegesRequest>
     let (endpoint, _) = SecurityGetBuiltinPrivilegesRequest.ToEndpoint(req)
@@ -4499,18 +3469,6 @@ let ``security_get_service_credentials has no request body`` () =
     postData.IsNone |> should be True
 
 [<Fact>]
-let ``security_get_settings uses GET method`` () =
-    let req = Unchecked.defaultof<SecurityGetSettingsRequest>
-    let (endpoint, _) = SecurityGetSettingsRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.GET
-
-[<Fact>]
-let ``security_get_settings has no request body`` () =
-    let req = Unchecked.defaultof<SecurityGetSettingsRequest>
-    let (_, postData) = SecurityGetSettingsRequest.ToEndpoint(req)
-    postData.IsNone |> should be True
-
-[<Fact>]
 let ``security_get_stats uses GET method`` () =
     let req = Unchecked.defaultof<SecurityGetStatsRequest>
     let (endpoint, _) = SecurityGetStatsRequest.ToEndpoint(req)
@@ -4523,18 +3481,6 @@ let ``security_get_stats has no request body`` () =
     postData.IsNone |> should be True
 
 [<Fact>]
-let ``security_get_token uses POST method`` () =
-    let req = Unchecked.defaultof<SecurityGetTokenRequest>
-    let (endpoint, _) = SecurityGetTokenRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``security_get_token has request body`` () =
-    let req = Unchecked.defaultof<SecurityGetTokenRequest>
-    let (_, postData) = SecurityGetTokenRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
 let ``security_get_user_privileges uses GET method`` () =
     let req = Unchecked.defaultof<SecurityGetUserPrivilegesRequest>
     let (endpoint, _) = SecurityGetUserPrivilegesRequest.ToEndpoint(req)
@@ -4545,18 +3491,6 @@ let ``security_get_user_privileges has no request body`` () =
     let req = Unchecked.defaultof<SecurityGetUserPrivilegesRequest>
     let (_, postData) = SecurityGetUserPrivilegesRequest.ToEndpoint(req)
     postData.IsNone |> should be True
-
-[<Fact>]
-let ``security_grant_api_key uses POST method`` () =
-    let req = Unchecked.defaultof<SecurityGrantApiKeyRequest>
-    let (endpoint, _) = SecurityGrantApiKeyRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``security_grant_api_key has request body`` () =
-    let req = Unchecked.defaultof<SecurityGrantApiKeyRequest>
-    let (_, postData) = SecurityGrantApiKeyRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
 
 [<Fact>]
 let ``security_has_privileges uses POST method`` () =
@@ -4572,90 +3506,6 @@ let ``security_has_privileges has request body`` () =
         user "test-value"
     }
     let (_, postData) = SecurityHasPrivilegesRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
-let ``security_has_privileges_user_profile uses POST method`` () =
-    let req = Unchecked.defaultof<SecurityHasPrivilegesUserProfileRequest>
-    let (endpoint, _) = SecurityHasPrivilegesUserProfileRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``security_has_privileges_user_profile has request body`` () =
-    let req = Unchecked.defaultof<SecurityHasPrivilegesUserProfileRequest>
-    let (_, postData) = SecurityHasPrivilegesUserProfileRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
-let ``security_invalidate_api_key uses DELETE method`` () =
-    let req = Unchecked.defaultof<SecurityInvalidateApiKeyRequest>
-    let (endpoint, _) = SecurityInvalidateApiKeyRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.DELETE
-
-[<Fact>]
-let ``security_invalidate_api_key has request body`` () =
-    let req = Unchecked.defaultof<SecurityInvalidateApiKeyRequest>
-    let (_, postData) = SecurityInvalidateApiKeyRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
-let ``security_invalidate_token uses DELETE method`` () =
-    let req = Unchecked.defaultof<SecurityInvalidateTokenRequest>
-    let (endpoint, _) = SecurityInvalidateTokenRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.DELETE
-
-[<Fact>]
-let ``security_invalidate_token has request body`` () =
-    let req = Unchecked.defaultof<SecurityInvalidateTokenRequest>
-    let (_, postData) = SecurityInvalidateTokenRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
-let ``security_oidc_authenticate uses POST method`` () =
-    let req = Unchecked.defaultof<SecurityOidcAuthenticateRequest>
-    let (endpoint, _) = SecurityOidcAuthenticateRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``security_oidc_authenticate has request body`` () =
-    let req = Unchecked.defaultof<SecurityOidcAuthenticateRequest>
-    let (_, postData) = SecurityOidcAuthenticateRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
-let ``security_oidc_logout uses POST method`` () =
-    let req = Unchecked.defaultof<SecurityOidcLogoutRequest>
-    let (endpoint, _) = SecurityOidcLogoutRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``security_oidc_logout has request body`` () =
-    let req = Unchecked.defaultof<SecurityOidcLogoutRequest>
-    let (_, postData) = SecurityOidcLogoutRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
-let ``security_oidc_prepare_authentication uses POST method`` () =
-    let req = Unchecked.defaultof<SecurityOidcPrepareAuthenticationRequest>
-    let (endpoint, _) = SecurityOidcPrepareAuthenticationRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``security_oidc_prepare_authentication has request body`` () =
-    let req = Unchecked.defaultof<SecurityOidcPrepareAuthenticationRequest>
-    let (_, postData) = SecurityOidcPrepareAuthenticationRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
-let ``security_put_privileges uses POST method`` () =
-    let req = Unchecked.defaultof<SecurityPutPrivilegesRequest>
-    let (endpoint, _) = SecurityPutPrivilegesRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``security_put_privileges has request body`` () =
-    let req = Unchecked.defaultof<SecurityPutPrivilegesRequest>
-    let (_, postData) = SecurityPutPrivilegesRequest.ToEndpoint(req)
     postData.IsSome |> should be True
 
 [<Fact>]
@@ -4691,102 +3541,6 @@ let ``security_put_role_mapping has request body`` () =
     postData.IsSome |> should be True
 
 [<Fact>]
-let ``security_query_api_keys uses POST method`` () =
-    let req = Unchecked.defaultof<SecurityQueryApiKeysRequest>
-    let (endpoint, _) = SecurityQueryApiKeysRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``security_query_api_keys has request body`` () =
-    let req = Unchecked.defaultof<SecurityQueryApiKeysRequest>
-    let (_, postData) = SecurityQueryApiKeysRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
-let ``security_query_role uses POST method`` () =
-    let req = Unchecked.defaultof<SecurityQueryRoleRequest>
-    let (endpoint, _) = SecurityQueryRoleRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``security_query_role has request body`` () =
-    let req = Unchecked.defaultof<SecurityQueryRoleRequest>
-    let (_, postData) = SecurityQueryRoleRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
-let ``security_query_user uses POST method`` () =
-    let req = Unchecked.defaultof<SecurityQueryUserRequest>
-    let (endpoint, _) = SecurityQueryUserRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``security_query_user has request body`` () =
-    let req = Unchecked.defaultof<SecurityQueryUserRequest>
-    let (_, postData) = SecurityQueryUserRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
-let ``security_saml_authenticate uses POST method`` () =
-    let req = Unchecked.defaultof<SecuritySamlAuthenticateRequest>
-    let (endpoint, _) = SecuritySamlAuthenticateRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``security_saml_authenticate has request body`` () =
-    let req = Unchecked.defaultof<SecuritySamlAuthenticateRequest>
-    let (_, postData) = SecuritySamlAuthenticateRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
-let ``security_saml_complete_logout uses POST method`` () =
-    let req = Unchecked.defaultof<SecuritySamlCompleteLogoutRequest>
-    let (endpoint, _) = SecuritySamlCompleteLogoutRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``security_saml_complete_logout has request body`` () =
-    let req = Unchecked.defaultof<SecuritySamlCompleteLogoutRequest>
-    let (_, postData) = SecuritySamlCompleteLogoutRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
-let ``security_saml_invalidate uses POST method`` () =
-    let req = Unchecked.defaultof<SecuritySamlInvalidateRequest>
-    let (endpoint, _) = SecuritySamlInvalidateRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``security_saml_invalidate has request body`` () =
-    let req = Unchecked.defaultof<SecuritySamlInvalidateRequest>
-    let (_, postData) = SecuritySamlInvalidateRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
-let ``security_saml_logout uses POST method`` () =
-    let req = Unchecked.defaultof<SecuritySamlLogoutRequest>
-    let (endpoint, _) = SecuritySamlLogoutRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``security_saml_logout has request body`` () =
-    let req = Unchecked.defaultof<SecuritySamlLogoutRequest>
-    let (_, postData) = SecuritySamlLogoutRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
-let ``security_saml_prepare_authentication uses POST method`` () =
-    let req = Unchecked.defaultof<SecuritySamlPrepareAuthenticationRequest>
-    let (endpoint, _) = SecuritySamlPrepareAuthenticationRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``security_saml_prepare_authentication has request body`` () =
-    let req = Unchecked.defaultof<SecuritySamlPrepareAuthenticationRequest>
-    let (_, postData) = SecuritySamlPrepareAuthenticationRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
 let ``security_saml_service_provider_metadata uses GET method`` () =
     let req = securitySamlServiceProviderMetadataRequest {
         realmName "test-value"
@@ -4801,18 +3555,6 @@ let ``security_saml_service_provider_metadata has no request body`` () =
     }
     let (_, postData) = SecuritySamlServiceProviderMetadataRequest.ToEndpoint(req)
     postData.IsNone |> should be True
-
-[<Fact>]
-let ``security_suggest_user_profiles uses POST method`` () =
-    let req = Unchecked.defaultof<SecuritySuggestUserProfilesRequest>
-    let (endpoint, _) = SecuritySuggestUserProfilesRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``security_suggest_user_profiles has request body`` () =
-    let req = Unchecked.defaultof<SecuritySuggestUserProfilesRequest>
-    let (_, postData) = SecuritySuggestUserProfilesRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
 
 [<Fact>]
 let ``security_update_api_key uses PUT method`` () =
@@ -4844,18 +3586,6 @@ let ``security_update_cross_cluster_api_key has request body`` () =
         id "test-value"
     }
     let (_, postData) = SecurityUpdateCrossClusterApiKeyRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
-let ``security_update_settings uses PUT method`` () =
-    let req = Unchecked.defaultof<SecurityUpdateSettingsRequest>
-    let (endpoint, _) = SecurityUpdateSettingsRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.PUT
-
-[<Fact>]
-let ``security_update_settings has request body`` () =
-    let req = Unchecked.defaultof<SecurityUpdateSettingsRequest>
-    let (_, postData) = SecurityUpdateSettingsRequest.ToEndpoint(req)
     postData.IsSome |> should be True
 
 [<Fact>]
@@ -4955,42 +3685,6 @@ let ``slm_execute_lifecycle has no request body`` () =
     postData.IsNone |> should be True
 
 [<Fact>]
-let ``slm_execute_retention uses POST method`` () =
-    let req = Unchecked.defaultof<SlmExecuteRetentionRequest>
-    let (endpoint, _) = SlmExecuteRetentionRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``slm_execute_retention has no request body`` () =
-    let req = Unchecked.defaultof<SlmExecuteRetentionRequest>
-    let (_, postData) = SlmExecuteRetentionRequest.ToEndpoint(req)
-    postData.IsNone |> should be True
-
-[<Fact>]
-let ``slm_get_stats uses GET method`` () =
-    let req = Unchecked.defaultof<SlmGetStatsRequest>
-    let (endpoint, _) = SlmGetStatsRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.GET
-
-[<Fact>]
-let ``slm_get_stats has no request body`` () =
-    let req = Unchecked.defaultof<SlmGetStatsRequest>
-    let (_, postData) = SlmGetStatsRequest.ToEndpoint(req)
-    postData.IsNone |> should be True
-
-[<Fact>]
-let ``slm_get_status uses GET method`` () =
-    let req = Unchecked.defaultof<SlmGetStatusRequest>
-    let (endpoint, _) = SlmGetStatusRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.GET
-
-[<Fact>]
-let ``slm_get_status has no request body`` () =
-    let req = Unchecked.defaultof<SlmGetStatusRequest>
-    let (_, postData) = SlmGetStatusRequest.ToEndpoint(req)
-    postData.IsNone |> should be True
-
-[<Fact>]
 let ``slm_put_lifecycle uses PUT method`` () =
     let req = slmPutLifecycleRequest {
         policyId "test-value"
@@ -5005,30 +3699,6 @@ let ``slm_put_lifecycle has request body`` () =
     }
     let (_, postData) = SlmPutLifecycleRequest.ToEndpoint(req)
     postData.IsSome |> should be True
-
-[<Fact>]
-let ``slm_start uses POST method`` () =
-    let req = Unchecked.defaultof<SlmStartRequest>
-    let (endpoint, _) = SlmStartRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``slm_start has no request body`` () =
-    let req = Unchecked.defaultof<SlmStartRequest>
-    let (_, postData) = SlmStartRequest.ToEndpoint(req)
-    postData.IsNone |> should be True
-
-[<Fact>]
-let ``slm_stop uses POST method`` () =
-    let req = Unchecked.defaultof<SlmStopRequest>
-    let (endpoint, _) = SlmStopRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``slm_stop has no request body`` () =
-    let req = Unchecked.defaultof<SlmStopRequest>
-    let (_, postData) = SlmStopRequest.ToEndpoint(req)
-    postData.IsNone |> should be True
 
 [<Fact>]
 let ``snapshot_cleanup_repository uses POST method`` () =
@@ -5085,22 +3755,6 @@ let ``snapshot_create has request body`` () =
     postData.IsSome |> should be True
 
 [<Fact>]
-let ``snapshot_create_repository uses POST method`` () =
-    let req = snapshotCreateRepositoryRequest {
-        repository "test-value"
-    }
-    let (endpoint, _) = SnapshotCreateRepositoryRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``snapshot_create_repository has request body`` () =
-    let req = snapshotCreateRepositoryRequest {
-        repository "test-value"
-    }
-    let (_, postData) = SnapshotCreateRepositoryRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
 let ``snapshot_repository_analyze uses POST method`` () =
     let req = snapshotRepositoryAnalyzeRequest {
         repository "test-value"
@@ -5151,18 +3805,6 @@ let ``snapshot_verify_repository has no request body`` () =
     postData.IsNone |> should be True
 
 [<Fact>]
-let ``sql_clear_cursor uses POST method`` () =
-    let req = Unchecked.defaultof<SqlClearCursorRequest>
-    let (endpoint, _) = SqlClearCursorRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``sql_clear_cursor has request body`` () =
-    let req = Unchecked.defaultof<SqlClearCursorRequest>
-    let (_, postData) = SqlClearCursorRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
 let ``sql_delete_async uses DELETE method`` () =
     let req = sqlDeleteAsyncRequest {
         id "test-value"
@@ -5211,30 +3853,6 @@ let ``sql_get_async_status has no request body`` () =
     postData.IsNone |> should be True
 
 [<Fact>]
-let ``sql_query uses POST method`` () =
-    let req = Unchecked.defaultof<SqlQueryRequest>
-    let (endpoint, _) = SqlQueryRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``sql_query has request body`` () =
-    let req = Unchecked.defaultof<SqlQueryRequest>
-    let (_, postData) = SqlQueryRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
-let ``sql_translate uses POST method`` () =
-    let req = Unchecked.defaultof<SqlTranslateRequest>
-    let (endpoint, _) = SqlTranslateRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``sql_translate has request body`` () =
-    let req = Unchecked.defaultof<SqlTranslateRequest>
-    let (_, postData) = SqlTranslateRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
 let ``ssl_certificates uses GET method`` () =
     let req = Unchecked.defaultof<SslCertificatesRequest>
     let (endpoint, _) = SslCertificatesRequest.ToEndpoint(req)
@@ -5244,18 +3862,6 @@ let ``ssl_certificates uses GET method`` () =
 let ``ssl_certificates has no request body`` () =
     let req = Unchecked.defaultof<SslCertificatesRequest>
     let (_, postData) = SslCertificatesRequest.ToEndpoint(req)
-    postData.IsNone |> should be True
-
-[<Fact>]
-let ``streams_status uses GET method`` () =
-    let req = Unchecked.defaultof<StreamsStatusRequest>
-    let (endpoint, _) = StreamsStatusRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.GET
-
-[<Fact>]
-let ``streams_status has no request body`` () =
-    let req = Unchecked.defaultof<StreamsStatusRequest>
-    let (_, postData) = StreamsStatusRequest.ToEndpoint(req)
     postData.IsNone |> should be True
 
 [<Fact>]
@@ -5327,34 +3933,6 @@ let ``synonyms_get_synonym_rule has no request body`` () =
     postData.IsNone |> should be True
 
 [<Fact>]
-let ``synonyms_get_synonyms_sets uses GET method`` () =
-    let req = Unchecked.defaultof<SynonymsGetSynonymsSetsRequest>
-    let (endpoint, _) = SynonymsGetSynonymsSetsRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.GET
-
-[<Fact>]
-let ``synonyms_get_synonyms_sets has no request body`` () =
-    let req = Unchecked.defaultof<SynonymsGetSynonymsSetsRequest>
-    let (_, postData) = SynonymsGetSynonymsSetsRequest.ToEndpoint(req)
-    postData.IsNone |> should be True
-
-[<Fact>]
-let ``synonyms_put_synonym uses PUT method`` () =
-    let req = synonymsPutSynonymRequest {
-        id "test-value"
-    }
-    let (endpoint, _) = SynonymsPutSynonymRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.PUT
-
-[<Fact>]
-let ``synonyms_put_synonym has request body`` () =
-    let req = synonymsPutSynonymRequest {
-        id "test-value"
-    }
-    let (_, postData) = SynonymsPutSynonymRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
 let ``synonyms_put_synonym_rule uses PUT method`` () =
     let req = synonymsPutSynonymRuleRequest {
         setId "test-value"
@@ -5403,54 +3981,6 @@ let ``tasks_get has no request body`` () =
     }
     let (_, postData) = TasksGetRequest.ToEndpoint(req)
     postData.IsNone |> should be True
-
-[<Fact>]
-let ``tasks_list uses GET method`` () =
-    let req = Unchecked.defaultof<TasksListRequest>
-    let (endpoint, _) = TasksListRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.GET
-
-[<Fact>]
-let ``tasks_list has no request body`` () =
-    let req = Unchecked.defaultof<TasksListRequest>
-    let (_, postData) = TasksListRequest.ToEndpoint(req)
-    postData.IsNone |> should be True
-
-[<Fact>]
-let ``text_structure_find_field_structure uses GET method`` () =
-    let req = Unchecked.defaultof<TextStructureFindFieldStructureRequest>
-    let (endpoint, _) = TextStructureFindFieldStructureRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.GET
-
-[<Fact>]
-let ``text_structure_find_field_structure has no request body`` () =
-    let req = Unchecked.defaultof<TextStructureFindFieldStructureRequest>
-    let (_, postData) = TextStructureFindFieldStructureRequest.ToEndpoint(req)
-    postData.IsNone |> should be True
-
-[<Fact>]
-let ``text_structure_find_message_structure uses POST method`` () =
-    let req = Unchecked.defaultof<TextStructureFindMessageStructureRequest>
-    let (endpoint, _) = TextStructureFindMessageStructureRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``text_structure_find_message_structure has request body`` () =
-    let req = Unchecked.defaultof<TextStructureFindMessageStructureRequest>
-    let (_, postData) = TextStructureFindMessageStructureRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
-let ``text_structure_test_grok_pattern uses POST method`` () =
-    let req = Unchecked.defaultof<TextStructureTestGrokPatternRequest>
-    let (endpoint, _) = TextStructureTestGrokPatternRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``text_structure_test_grok_pattern has request body`` () =
-    let req = Unchecked.defaultof<TextStructureTestGrokPatternRequest>
-    let (_, postData) = TextStructureTestGrokPatternRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
 
 [<Fact>]
 let ``transform_delete_transform uses DELETE method`` () =
@@ -5545,18 +4075,6 @@ let ``transform_schedule_now_transform has no request body`` () =
     postData.IsNone |> should be True
 
 [<Fact>]
-let ``transform_set_upgrade_mode uses POST method`` () =
-    let req = Unchecked.defaultof<TransformSetUpgradeModeRequest>
-    let (endpoint, _) = TransformSetUpgradeModeRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``transform_set_upgrade_mode has no request body`` () =
-    let req = Unchecked.defaultof<TransformSetUpgradeModeRequest>
-    let (_, postData) = TransformSetUpgradeModeRequest.ToEndpoint(req)
-    postData.IsNone |> should be True
-
-[<Fact>]
 let ``transform_start_transform uses POST method`` () =
     let req = transformStartTransformRequest {
         transformId "test-value"
@@ -5603,18 +4121,6 @@ let ``transform_update_transform has request body`` () =
     }
     let (_, postData) = TransformUpdateTransformRequest.ToEndpoint(req)
     postData.IsSome |> should be True
-
-[<Fact>]
-let ``transform_upgrade_transforms uses POST method`` () =
-    let req = Unchecked.defaultof<TransformUpgradeTransformsRequest>
-    let (endpoint, _) = TransformUpgradeTransformsRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``transform_upgrade_transforms has no request body`` () =
-    let req = Unchecked.defaultof<TransformUpgradeTransformsRequest>
-    let (_, postData) = TransformUpgradeTransformsRequest.ToEndpoint(req)
-    postData.IsNone |> should be True
 
 [<Fact>]
 let ``update_by_query_rethrottle uses POST method`` () =
@@ -5697,18 +4203,6 @@ let ``watcher_execute_watch has request body`` () =
     postData.IsSome |> should be True
 
 [<Fact>]
-let ``watcher_get_settings uses GET method`` () =
-    let req = Unchecked.defaultof<WatcherGetSettingsRequest>
-    let (endpoint, _) = WatcherGetSettingsRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.GET
-
-[<Fact>]
-let ``watcher_get_settings has no request body`` () =
-    let req = Unchecked.defaultof<WatcherGetSettingsRequest>
-    let (_, postData) = WatcherGetSettingsRequest.ToEndpoint(req)
-    postData.IsNone |> should be True
-
-[<Fact>]
 let ``watcher_get_watch uses GET method`` () =
     let req = watcherGetWatchRequest {
         id "test-value"
@@ -5739,76 +4233,4 @@ let ``watcher_put_watch has request body`` () =
     }
     let (_, postData) = WatcherPutWatchRequest.ToEndpoint(req)
     postData.IsSome |> should be True
-
-[<Fact>]
-let ``watcher_query_watches uses POST method`` () =
-    let req = Unchecked.defaultof<WatcherQueryWatchesRequest>
-    let (endpoint, _) = WatcherQueryWatchesRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``watcher_query_watches has request body`` () =
-    let req = Unchecked.defaultof<WatcherQueryWatchesRequest>
-    let (_, postData) = WatcherQueryWatchesRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
-let ``watcher_start uses POST method`` () =
-    let req = Unchecked.defaultof<WatcherStartRequest>
-    let (endpoint, _) = WatcherStartRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``watcher_start has no request body`` () =
-    let req = Unchecked.defaultof<WatcherStartRequest>
-    let (_, postData) = WatcherStartRequest.ToEndpoint(req)
-    postData.IsNone |> should be True
-
-[<Fact>]
-let ``watcher_stop uses POST method`` () =
-    let req = Unchecked.defaultof<WatcherStopRequest>
-    let (endpoint, _) = WatcherStopRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.POST
-
-[<Fact>]
-let ``watcher_stop has no request body`` () =
-    let req = Unchecked.defaultof<WatcherStopRequest>
-    let (_, postData) = WatcherStopRequest.ToEndpoint(req)
-    postData.IsNone |> should be True
-
-[<Fact>]
-let ``watcher_update_settings uses PUT method`` () =
-    let req = Unchecked.defaultof<WatcherUpdateSettingsRequest>
-    let (endpoint, _) = WatcherUpdateSettingsRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.PUT
-
-[<Fact>]
-let ``watcher_update_settings has request body`` () =
-    let req = Unchecked.defaultof<WatcherUpdateSettingsRequest>
-    let (_, postData) = WatcherUpdateSettingsRequest.ToEndpoint(req)
-    postData.IsSome |> should be True
-
-[<Fact>]
-let ``xpack_info uses GET method`` () =
-    let req = Unchecked.defaultof<XpackInfoRequest>
-    let (endpoint, _) = XpackInfoRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.GET
-
-[<Fact>]
-let ``xpack_info has no request body`` () =
-    let req = Unchecked.defaultof<XpackInfoRequest>
-    let (_, postData) = XpackInfoRequest.ToEndpoint(req)
-    postData.IsNone |> should be True
-
-[<Fact>]
-let ``xpack_usage uses GET method`` () =
-    let req = Unchecked.defaultof<XpackUsageRequest>
-    let (endpoint, _) = XpackUsageRequest.ToEndpoint(req)
-    endpoint.Method |> should equal HttpMethod.GET
-
-[<Fact>]
-let ``xpack_usage has no request body`` () =
-    let req = Unchecked.defaultof<XpackUsageRequest>
-    let (_, postData) = XpackUsageRequest.ToEndpoint(req)
-    postData.IsNone |> should be True
 
