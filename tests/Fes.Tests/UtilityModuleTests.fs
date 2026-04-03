@@ -20,7 +20,7 @@ module PreludeTests =
         Assert.Equal("hello", konst "hello" true)
         Assert.Equal(3.14, konst 3.14 [1;2;3])
 
-    [<Fact(Skip = "Known bug: teeOk does not call side-effect; tracked in PR #153")>]
+    [<Fact(Skip = "Known bug: teeOk does not call side-effect; tracked in PR #183")>]
     let ``teeOk calls side-effect on Ok and returns original value`` () =
         let mutable called = false
         let mutable capturedValue = 0
@@ -42,7 +42,7 @@ module PreludeTests =
         Assert.False(called, "teeOk should not call side-effect on Error")
         Assert.Equal(result, returned)
 
-    [<Fact(Skip = "Known bug: teeError does not call side-effect; tracked in PR #153")>]
+    [<Fact(Skip = "Known bug: teeError does not call side-effect; tracked in PR #183")>]
     let ``teeError calls side-effect on Error and returns original value`` () =
         let mutable called = false
         let mutable capturedError = ""
@@ -218,3 +218,38 @@ module TaskResultModuleTests =
         match result.Result with
         | Error e -> Assert.Equal(ex :> exn, e)
         | Ok _ -> Assert.Fail("Expected Error but got Ok")
+
+    [<Fact>]
+    let ``TaskResult.mapIn composes input transform before TaskResult function`` () =
+        let f (x: int) : TaskResult<string, exn> = TaskResult.retn (string x)
+        let g = TaskResult.mapIn (fun (s: string) -> s.Length) f
+        Assert.Equal(Ok "3", (g "abc").Result)
+
+    [<Fact>]
+    let ``TaskResult.mapOut composes output transform after TaskResult function`` () =
+        let f (x: int) : TaskResult<int, exn> = TaskResult.retn (x * 2)
+        let g = TaskResult.mapOut string f
+        Assert.Equal(Ok "10", (g 5).Result)
+
+    [<Fact>]
+    let ``TaskResult.bindIn composes TaskResult input transform`` () =
+        let f (x: int) : TaskResult<int, exn> = TaskResult.retn (x + 1)
+        let inputF (s: string) : TaskResult<int, exn> = TaskResult.retn s.Length
+        let g = TaskResult.bindIn inputF f
+        Assert.Equal(Ok 4, (g "abc").Result)
+
+    [<Fact>]
+    let ``TaskResult.bindOut composes TaskResult output transform`` () =
+        let f (x: int) : TaskResult<int, exn> = TaskResult.retn (x * 3)
+        let outputF (x: int) : TaskResult<string, exn> = TaskResult.retn (string x)
+        let g = TaskResult.bindOut outputF f
+        Assert.Equal(Ok "15", (g 5).Result)
+
+    [<Fact>]
+    let ``TaskResult.after calls side-effect with input and output, returns original Ok`` () =
+        let mutable observed = (0, 0)
+        let f (x: int) : TaskResult<int, exn> = TaskResult.retn (x * 2)
+        let g = TaskResult.after (fun (a, b) -> observed <- (a, b)) f
+        let result = (g 4).Result
+        Assert.Equal(Ok 8, result)
+        Assert.Equal((4, 8), observed)
