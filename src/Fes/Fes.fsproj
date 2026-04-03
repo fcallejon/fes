@@ -17,6 +17,9 @@
         <Compile Include="Result.fs"/>
         <Compile Include="TaskResult.fs"/>
         <Compile Include="Exceptions.fs"/>
+    </ItemGroup>
+    <!-- GENERATED:BEGIN — do not edit between these markers -->
+    <ItemGroup>
         <!-- Generated types -->
         <Compile Include="Generated/Types/AllTypes.g.fs"/>
         <!-- Generated converters -->
@@ -195,4 +198,5 @@
         <Compile Include="Generated/Operations/Xpack.g.fs"/>
         <Compile Include="Generated/Operations/ES.g.fs"/>
     </ItemGroup>
+    <!-- GENERATED:END -->
 </Project>
