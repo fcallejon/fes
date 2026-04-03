@@ -1,1 +1,1 @@
-{"r":"23923817961","m":"2026-04","mi":184,"n":"PR#185 Test.Sdk 18.0.1->18.3.0. #184 updated. 57 RA PRs. Build OOMs. MCP tools broken. Key: #183 teeOk, #179 flush POST, #174 CatCount GET, #169 string[] params, #137 bindOut."}
+{"r":"23932452157","m":"2026-04","mi":184,"n":"CI fix PR (fix-ci-oom-build-2026-04-03): DOTNET_GCConserveMemory=9+BuildInParallel=false. Bugs: #183 teeOk,#179 flush,#174 CatCount,#169 str[],#137 bindOut. Dup: #153,#111<#183; #141<#156; #140<#169."}
