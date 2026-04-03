@@ -111,9 +111,13 @@ module SearchableSnapshotsOperations =
         MasterTimeout: Types.Duration option
         WaitForCompletion: bool option
         Storage: Types.StorageOption option
+        [<System.Text.Json.Serialization.JsonPropertyName("index")>]
         Index: Types.IndexName
+        [<System.Text.Json.Serialization.JsonPropertyName("renamed_index")>]
         RenamedIndex: Types.IndexName option
+        [<System.Text.Json.Serialization.JsonPropertyName("index_settings")>]
         IndexSettings: Map<string, System.Text.Json.JsonElement> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_index_settings")>]
         IgnoreIndexSettings: string list option
     }
 

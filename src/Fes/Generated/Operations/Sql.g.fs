@@ -13,6 +13,7 @@ open Fes.Generated
 module SqlOperations =
 
     type SqlClearCursorRequest = {
+        [<System.Text.Json.Serialization.JsonPropertyName("cursor")>]
         Cursor: string
     }
 
@@ -179,23 +180,41 @@ module SqlOperations =
 
     type SqlQueryRequest = {
         Format: Types.SqlFormat option
+        [<System.Text.Json.Serialization.JsonPropertyName("allow_partial_search_results")>]
         AllowPartialSearchResults: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("catalog")>]
         Catalog: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("columnar")>]
         Columnar: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("cursor")>]
         Cursor: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("fetch_size")>]
         FetchSize: Types.Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("field_multi_value_leniency")>]
         FieldMultiValueLeniency: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("filter")>]
         Filter: Types.QueryContainer option
+        [<System.Text.Json.Serialization.JsonPropertyName("index_using_frozen")>]
         IndexUsingFrozen: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("keep_alive")>]
         KeepAlive: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("keep_on_completion")>]
         KeepOnCompletion: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("page_timeout")>]
         PageTimeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("params")>]
         Params: System.Text.Json.JsonElement list option
+        [<System.Text.Json.Serialization.JsonPropertyName("query")>]
         Query: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("project_routing")>]
         ProjectRouting: Types.ProjectRouting option
+        [<System.Text.Json.Serialization.JsonPropertyName("request_timeout")>]
         RequestTimeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("runtime_mappings")>]
         RuntimeMappings: Types.RuntimeFields option
+        [<System.Text.Json.Serialization.JsonPropertyName("time_zone")>]
         TimeZone: Types.TimeZone option
+        [<System.Text.Json.Serialization.JsonPropertyName("wait_for_completion_timeout")>]
         WaitForCompletionTimeout: Types.Duration option
     }
 
@@ -363,9 +382,13 @@ module SqlOperations =
             { req with WaitForCompletionTimeout = Some value }
 
     type SqlTranslateRequest = {
+        [<System.Text.Json.Serialization.JsonPropertyName("fetch_size")>]
         FetchSize: Types.Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("filter")>]
         Filter: Types.QueryContainer option
+        [<System.Text.Json.Serialization.JsonPropertyName("query")>]
         Query: string
+        [<System.Text.Json.Serialization.JsonPropertyName("time_zone")>]
         TimeZone: Types.TimeZone option
     }
 

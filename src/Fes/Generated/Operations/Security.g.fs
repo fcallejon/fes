@@ -13,9 +13,13 @@ open Fes.Generated
 module SecurityOperations =
 
     type SecurityActivateUserProfileRequest = {
+        [<System.Text.Json.Serialization.JsonPropertyName("access_token")>]
         AccessToken: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("grant_type")>]
         GrantType: Types.GrantType
+        [<System.Text.Json.Serialization.JsonPropertyName("password")>]
         Password: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("username")>]
         Username: string option
     }
 
@@ -94,6 +98,7 @@ module SecurityOperations =
 
     type SecurityBulkDeleteRoleRequest = {
         Refresh: Types.Refresh option
+        [<System.Text.Json.Serialization.JsonPropertyName("names")>]
         Names: string list
     }
 
@@ -143,6 +148,7 @@ module SecurityOperations =
 
     type SecurityBulkPutRoleRequest = {
         Refresh: Types.Refresh option
+        [<System.Text.Json.Serialization.JsonPropertyName("roles")>]
         Roles: Map<string, Types.RoleDescriptor>
     }
 
@@ -191,9 +197,13 @@ module SecurityOperations =
             { req with Roles = value }
 
     type SecurityBulkUpdateApiKeysRequest = {
+        [<System.Text.Json.Serialization.JsonPropertyName("expiration")>]
         Expiration: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("ids")>]
         Ids: System.Text.Json.JsonElement
+        [<System.Text.Json.Serialization.JsonPropertyName("metadata")>]
         Metadata: Types.Metadata option
+        [<System.Text.Json.Serialization.JsonPropertyName("role_descriptors")>]
         RoleDescriptors: Map<string, Types.RoleDescriptor> option
     }
 
@@ -251,7 +261,9 @@ module SecurityOperations =
     type SecurityChangePasswordRequest = {
         Username: Types.Username
         Refresh: Types.Refresh option
+        [<System.Text.Json.Serialization.JsonPropertyName("password")>]
         Password: Types.Password option
+        [<System.Text.Json.Serialization.JsonPropertyName("password_hash")>]
         PasswordHash: string option
     }
 
@@ -487,9 +499,13 @@ module SecurityOperations =
 
     type SecurityCreateApiKeyRequest = {
         Refresh: Types.Refresh option
+        [<System.Text.Json.Serialization.JsonPropertyName("expiration")>]
         Expiration: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("name")>]
         Name: Types.Name option
+        [<System.Text.Json.Serialization.JsonPropertyName("role_descriptors")>]
         RoleDescriptors: Map<string, Types.RoleDescriptor> option
+        [<System.Text.Json.Serialization.JsonPropertyName("metadata")>]
         Metadata: Types.Metadata option
     }
 
@@ -559,10 +575,15 @@ module SecurityOperations =
             { req with Metadata = Some value }
 
     type SecurityCreateCrossClusterApiKeyRequest = {
+        [<System.Text.Json.Serialization.JsonPropertyName("access")>]
         Access: Types.Access
+        [<System.Text.Json.Serialization.JsonPropertyName("expiration")>]
         Expiration: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("metadata")>]
         Metadata: Types.Metadata option
+        [<System.Text.Json.Serialization.JsonPropertyName("name")>]
         Name: Types.Name
+        [<System.Text.Json.Serialization.JsonPropertyName("certificate_identity")>]
         CertificateIdentity: string option
     }
 
@@ -683,6 +704,7 @@ module SecurityOperations =
             { req with Refresh = Some value }
 
     type SecurityDelegatePkiRequest = {
+        [<System.Text.Json.Serialization.JsonPropertyName("x509_certificate_chain")>]
         X509CertificateChain: string list
     }
 
@@ -1543,11 +1565,17 @@ module SecurityOperations =
     let securityGetStatsRequest = SecurityGetStatsRequestBuilder()
 
     type SecurityGetTokenRequest = {
+        [<System.Text.Json.Serialization.JsonPropertyName("grant_type")>]
         GrantType: Types.AccessTokenGrantType option
+        [<System.Text.Json.Serialization.JsonPropertyName("scope")>]
         Scope: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("password")>]
         Password: Types.Password option
+        [<System.Text.Json.Serialization.JsonPropertyName("kerberos_ticket")>]
         KerberosTicket: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("refresh_token")>]
         RefreshToken: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("username")>]
         Username: Types.Username option
     }
 
@@ -1732,11 +1760,17 @@ module SecurityOperations =
 
     type SecurityGrantApiKeyRequest = {
         Refresh: Types.Refresh option
+        [<System.Text.Json.Serialization.JsonPropertyName("api_key")>]
         ApiKey: Types.GrantApiKey
+        [<System.Text.Json.Serialization.JsonPropertyName("grant_type")>]
         GrantType: Types.ApiKeyGrantType
+        [<System.Text.Json.Serialization.JsonPropertyName("access_token")>]
         AccessToken: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("username")>]
         Username: Types.Username option
+        [<System.Text.Json.Serialization.JsonPropertyName("password")>]
         Password: Types.Password option
+        [<System.Text.Json.Serialization.JsonPropertyName("run_as")>]
         RunAs: Types.Username option
     }
 
@@ -1821,8 +1855,11 @@ module SecurityOperations =
 
     type SecurityHasPrivilegesRequest = {
         User: Types.Name
+        [<System.Text.Json.Serialization.JsonPropertyName("application")>]
         Application: Types.ApplicationPrivilegesCheck list option
+        [<System.Text.Json.Serialization.JsonPropertyName("cluster")>]
         Cluster: Types.ClusterPrivilege list option
+        [<System.Text.Json.Serialization.JsonPropertyName("index")>]
         Index: Types.IndexPrivilegesCheck list option
     }
 
@@ -1876,7 +1913,9 @@ module SecurityOperations =
             { req with Index = Some value }
 
     type SecurityHasPrivilegesUserProfileRequest = {
+        [<System.Text.Json.Serialization.JsonPropertyName("uids")>]
         Uids: Types.UserProfileId list
+        [<System.Text.Json.Serialization.JsonPropertyName("privileges")>]
         Privileges: Types.PrivilegesCheck
     }
 
@@ -1918,11 +1957,17 @@ module SecurityOperations =
             { req with Privileges = value }
 
     type SecurityInvalidateApiKeyRequest = {
+        [<System.Text.Json.Serialization.JsonPropertyName("id")>]
         Id: Types.Id option
+        [<System.Text.Json.Serialization.JsonPropertyName("ids")>]
         Ids: Types.Id list option
+        [<System.Text.Json.Serialization.JsonPropertyName("name")>]
         Name: Types.Name option
+        [<System.Text.Json.Serialization.JsonPropertyName("owner")>]
         Owner: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("realm_name")>]
         RealmName: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("username")>]
         Username: Types.Username option
     }
 
@@ -1992,9 +2037,13 @@ module SecurityOperations =
             { req with Username = Some value }
 
     type SecurityInvalidateTokenRequest = {
+        [<System.Text.Json.Serialization.JsonPropertyName("token")>]
         Token: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("refresh_token")>]
         RefreshToken: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("realm_name")>]
         RealmName: Types.Name option
+        [<System.Text.Json.Serialization.JsonPropertyName("username")>]
         Username: Types.Username option
     }
 
@@ -2050,9 +2099,13 @@ module SecurityOperations =
             { req with Username = Some value }
 
     type SecurityOidcAuthenticateRequest = {
+        [<System.Text.Json.Serialization.JsonPropertyName("nonce")>]
         Nonce: string
+        [<System.Text.Json.Serialization.JsonPropertyName("realm")>]
         Realm: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("redirect_uri")>]
         RedirectUri: string
+        [<System.Text.Json.Serialization.JsonPropertyName("state")>]
         State: string
     }
 
@@ -2108,7 +2161,9 @@ module SecurityOperations =
             { req with State = value }
 
     type SecurityOidcLogoutRequest = {
+        [<System.Text.Json.Serialization.JsonPropertyName("token")>]
         Token: string
+        [<System.Text.Json.Serialization.JsonPropertyName("refresh_token")>]
         RefreshToken: string option
     }
 
@@ -2150,10 +2205,15 @@ module SecurityOperations =
             { req with RefreshToken = Some value }
 
     type SecurityOidcPrepareAuthenticationRequest = {
+        [<System.Text.Json.Serialization.JsonPropertyName("iss")>]
         Iss: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("login_hint")>]
         LoginHint: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("nonce")>]
         Nonce: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("realm")>]
         Realm: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("state")>]
         State: string option
     }
 
@@ -2265,15 +2325,25 @@ module SecurityOperations =
     type SecurityPutRoleRequest = {
         Name: Types.Name
         Refresh: Types.Refresh option
+        [<System.Text.Json.Serialization.JsonPropertyName("applications")>]
         Applications: Types.ApplicationPrivileges list option
+        [<System.Text.Json.Serialization.JsonPropertyName("cluster")>]
         Cluster: Types.ClusterPrivilege list option
+        [<System.Text.Json.Serialization.JsonPropertyName("global")>]
         Global: Map<string, System.Text.Json.JsonElement> option
+        [<System.Text.Json.Serialization.JsonPropertyName("indices")>]
         Indices: Types.IndicesPrivileges list option
+        [<System.Text.Json.Serialization.JsonPropertyName("remote_indices")>]
         RemoteIndices: Types.RemoteIndicesPrivileges list option
+        [<System.Text.Json.Serialization.JsonPropertyName("remote_cluster")>]
         RemoteCluster: Types.RemoteClusterPrivileges list option
+        [<System.Text.Json.Serialization.JsonPropertyName("metadata")>]
         Metadata: Types.Metadata option
+        [<System.Text.Json.Serialization.JsonPropertyName("run_as")>]
         RunAs: string list option
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
         Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("transient_metadata")>]
         TransientMetadata: Map<string, System.Text.Json.JsonElement> option
     }
 
@@ -2392,11 +2462,17 @@ module SecurityOperations =
     type SecurityPutRoleMappingRequest = {
         Name: Types.Name
         Refresh: Types.Refresh option
+        [<System.Text.Json.Serialization.JsonPropertyName("enabled")>]
         Enabled: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("metadata")>]
         Metadata: Types.Metadata option
+        [<System.Text.Json.Serialization.JsonPropertyName("roles")>]
         Roles: string list option
+        [<System.Text.Json.Serialization.JsonPropertyName("role_templates")>]
         RoleTemplates: Types.RoleTemplate list option
+        [<System.Text.Json.Serialization.JsonPropertyName("rules")>]
         Rules: Types.RoleMappingRule option
+        [<System.Text.Json.Serialization.JsonPropertyName("run_as")>]
         RunAs: string list option
     }
 
@@ -2487,13 +2563,21 @@ module SecurityOperations =
     type SecurityPutUserRequest = {
         Username: Types.Username
         Refresh: Types.Refresh option
-        Username: Types.Username option
+        [<System.Text.Json.Serialization.JsonPropertyName("username")>]
+        bodyUsername: Types.Username option
+        [<System.Text.Json.Serialization.JsonPropertyName("email")>]
         Email: string option option
+        [<System.Text.Json.Serialization.JsonPropertyName("full_name")>]
         FullName: string option option
+        [<System.Text.Json.Serialization.JsonPropertyName("metadata")>]
         Metadata: Types.Metadata option
+        [<System.Text.Json.Serialization.JsonPropertyName("password")>]
         Password: Types.Password option
+        [<System.Text.Json.Serialization.JsonPropertyName("password_hash")>]
         PasswordHash: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("roles")>]
         Roles: string list option
+        [<System.Text.Json.Serialization.JsonPropertyName("enabled")>]
         Enabled: bool option
     }
 
@@ -2523,7 +2607,7 @@ module SecurityOperations =
             {
                 Username = Unchecked.defaultof<_>
                 Refresh = None
-                Username = None
+                bodyUsername = None
                 Email = None
                 FullName = None
                 Metadata = None
@@ -2543,7 +2627,7 @@ module SecurityOperations =
 
         [<CustomOperation("username")>]
         member _.Username(state: SecurityPutUserRequest, value: Types.Username) =
-            { state with Username = Some value }
+            { state with bodyUsername = Some value }
 
         [<CustomOperation("email")>]
         member _.Email(state: SecurityPutUserRequest, value: string option) =
@@ -2579,7 +2663,7 @@ module SecurityOperations =
         let withRefresh (value: Types.Refresh) (req: SecurityPutUserRequest) =
             { req with Refresh = Some value }
         let withUsername (value: Types.Username) (req: SecurityPutUserRequest) =
-            { req with Username = Some value }
+            { req with bodyUsername = Some value }
         let withEmail (value: string option) (req: SecurityPutUserRequest) =
             { req with Email = Some value }
         let withFullName (value: string option) (req: SecurityPutUserRequest) =
@@ -2599,11 +2683,17 @@ module SecurityOperations =
         WithLimitedBy: bool option
         WithProfileUid: bool option
         TypedKeys: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("aggregations")>]
         Aggregations: Map<string, Types.ApiKeyAggregationContainer> option
+        [<System.Text.Json.Serialization.JsonPropertyName("query")>]
         Query: Types.ApiKeyQueryContainer option
+        [<System.Text.Json.Serialization.JsonPropertyName("from")>]
         From: Types.Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("sort")>]
         Sort: Types.Sort option
+        [<System.Text.Json.Serialization.JsonPropertyName("size")>]
         Size: Types.Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("search_after")>]
         SearchAfter: Types.SortResults option
     }
 
@@ -2703,10 +2793,15 @@ module SecurityOperations =
             { req with SearchAfter = Some value }
 
     type SecurityQueryRoleRequest = {
+        [<System.Text.Json.Serialization.JsonPropertyName("query")>]
         Query: Types.RoleQueryContainer option
+        [<System.Text.Json.Serialization.JsonPropertyName("from")>]
         From: Types.Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("sort")>]
         Sort: Types.Sort option
+        [<System.Text.Json.Serialization.JsonPropertyName("size")>]
         Size: Types.Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("search_after")>]
         SearchAfter: Types.SortResults option
     }
 
@@ -2770,10 +2865,15 @@ module SecurityOperations =
 
     type SecurityQueryUserRequest = {
         WithProfileUid: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("query")>]
         Query: Types.UserQueryContainer option
+        [<System.Text.Json.Serialization.JsonPropertyName("from")>]
         From: Types.Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("sort")>]
         Sort: Types.Sort option
+        [<System.Text.Json.Serialization.JsonPropertyName("size")>]
         Size: Types.Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("search_after")>]
         SearchAfter: Types.SortResults option
     }
 
@@ -2850,8 +2950,11 @@ module SecurityOperations =
             { req with SearchAfter = Some value }
 
     type SecuritySamlAuthenticateRequest = {
+        [<System.Text.Json.Serialization.JsonPropertyName("content")>]
         Content: string
+        [<System.Text.Json.Serialization.JsonPropertyName("ids")>]
         Ids: Types.Ids
+        [<System.Text.Json.Serialization.JsonPropertyName("realm")>]
         Realm: string option
     }
 
@@ -2900,9 +3003,13 @@ module SecurityOperations =
             { req with Realm = Some value }
 
     type SecuritySamlCompleteLogoutRequest = {
+        [<System.Text.Json.Serialization.JsonPropertyName("realm")>]
         Realm: string
+        [<System.Text.Json.Serialization.JsonPropertyName("ids")>]
         Ids: Types.Ids
+        [<System.Text.Json.Serialization.JsonPropertyName("query_string")>]
         QueryString: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("content")>]
         Content: string option
     }
 
@@ -2958,8 +3065,11 @@ module SecurityOperations =
             { req with Content = Some value }
 
     type SecuritySamlInvalidateRequest = {
+        [<System.Text.Json.Serialization.JsonPropertyName("acs")>]
         Acs: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("query_string")>]
         QueryString: string
+        [<System.Text.Json.Serialization.JsonPropertyName("realm")>]
         Realm: string option
     }
 
@@ -3008,7 +3118,9 @@ module SecurityOperations =
             { req with Realm = Some value }
 
     type SecuritySamlLogoutRequest = {
+        [<System.Text.Json.Serialization.JsonPropertyName("token")>]
         Token: string
+        [<System.Text.Json.Serialization.JsonPropertyName("refresh_token")>]
         RefreshToken: string option
     }
 
@@ -3050,8 +3162,11 @@ module SecurityOperations =
             { req with RefreshToken = Some value }
 
     type SecuritySamlPrepareAuthenticationRequest = {
+        [<System.Text.Json.Serialization.JsonPropertyName("acs")>]
         Acs: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("realm")>]
         Realm: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("relay_state")>]
         RelayState: string option
     }
 
@@ -3130,9 +3245,13 @@ module SecurityOperations =
 
     type SecuritySuggestUserProfilesRequest = {
         Data: System.Text.Json.JsonElement option
+        [<System.Text.Json.Serialization.JsonPropertyName("name")>]
         Name: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("size")>]
         Size: Types.Long option
-        Data: System.Text.Json.JsonElement option
+        [<System.Text.Json.Serialization.JsonPropertyName("data")>]
+        bodyData: System.Text.Json.JsonElement option
+        [<System.Text.Json.Serialization.JsonPropertyName("hint")>]
         Hint: Types.Hint option
     }
 
@@ -3163,7 +3282,7 @@ module SecurityOperations =
                 Data = None
                 Name = None
                 Size = None
-                Data = None
+                bodyData = None
                 Hint = None
             }
 
@@ -3181,7 +3300,7 @@ module SecurityOperations =
 
         [<CustomOperation("data")>]
         member _.Data(state: SecuritySuggestUserProfilesRequest, value: System.Text.Json.JsonElement) =
-            { state with Data = Some value }
+            { state with bodyData = Some value }
 
         [<CustomOperation("hint")>]
         member _.Hint(state: SecuritySuggestUserProfilesRequest, value: Types.Hint) =
@@ -3191,20 +3310,23 @@ module SecurityOperations =
 
     module SuggestUserProfiles =
         let withData (value: System.Text.Json.JsonElement) (req: SecuritySuggestUserProfilesRequest) =
-            { req with Data = Some value }
+            { req with bodyData = Some value }
         let withName (value: string) (req: SecuritySuggestUserProfilesRequest) =
             { req with Name = Some value }
         let withSize (value: Types.Long) (req: SecuritySuggestUserProfilesRequest) =
             { req with Size = Some value }
         let withData (value: System.Text.Json.JsonElement) (req: SecuritySuggestUserProfilesRequest) =
-            { req with Data = Some value }
+            { req with bodyData = Some value }
         let withHint (value: Types.Hint) (req: SecuritySuggestUserProfilesRequest) =
             { req with Hint = Some value }
 
     type SecurityUpdateApiKeyRequest = {
         Id: Types.Id
+        [<System.Text.Json.Serialization.JsonPropertyName("role_descriptors")>]
         RoleDescriptors: Map<string, Types.RoleDescriptor> option
+        [<System.Text.Json.Serialization.JsonPropertyName("metadata")>]
         Metadata: Types.Metadata option
+        [<System.Text.Json.Serialization.JsonPropertyName("expiration")>]
         Expiration: Types.Duration option
     }
 
@@ -3259,9 +3381,13 @@ module SecurityOperations =
 
     type SecurityUpdateCrossClusterApiKeyRequest = {
         Id: Types.Id
+        [<System.Text.Json.Serialization.JsonPropertyName("access")>]
         Access: Types.Access
+        [<System.Text.Json.Serialization.JsonPropertyName("expiration")>]
         Expiration: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("metadata")>]
         Metadata: Types.Metadata option
+        [<System.Text.Json.Serialization.JsonPropertyName("certificate_identity")>]
         CertificateIdentity: string option
     }
 
@@ -3324,8 +3450,11 @@ module SecurityOperations =
     type SecurityUpdateSettingsRequest = {
         MasterTimeout: Types.Duration option
         Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("security")>]
         Security: Types.SecuritySettings option
+        [<System.Text.Json.Serialization.JsonPropertyName("security-profile")>]
         SecurityProfile: Types.SecuritySettings option
+        [<System.Text.Json.Serialization.JsonPropertyName("security-tokens")>]
         SecurityTokens: Types.SecuritySettings option
     }
 
@@ -3400,7 +3529,9 @@ module SecurityOperations =
         IfSeqNo: Types.SequenceNumber option
         IfPrimaryTerm: Types.Long option
         Refresh: Types.Refresh option
+        [<System.Text.Json.Serialization.JsonPropertyName("labels")>]
         Labels: Map<string, System.Text.Json.JsonElement> option
+        [<System.Text.Json.Serialization.JsonPropertyName("data")>]
         Data: Map<string, System.Text.Json.JsonElement> option
     }
 

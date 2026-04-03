@@ -130,13 +130,21 @@ module RollupOperations =
 
     type RollupPutJobRequest = {
         Id: Types.Id
+        [<System.Text.Json.Serialization.JsonPropertyName("cron")>]
         Cron: string
+        [<System.Text.Json.Serialization.JsonPropertyName("groups")>]
         Groups: Types.Groupings
+        [<System.Text.Json.Serialization.JsonPropertyName("index_pattern")>]
         IndexPattern: string
+        [<System.Text.Json.Serialization.JsonPropertyName("metrics")>]
         Metrics: Types.FieldMetric list option
+        [<System.Text.Json.Serialization.JsonPropertyName("page_size")>]
         PageSize: Types.Integer
+        [<System.Text.Json.Serialization.JsonPropertyName("rollup_index")>]
         RollupIndex: Types.IndexName
+        [<System.Text.Json.Serialization.JsonPropertyName("timeout")>]
         Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("headers")>]
         Headers: Types.HttpHeaders option
     }
 
@@ -228,8 +236,11 @@ module RollupOperations =
         Index: Types.Indices
         RestTotalHitsAsInt: bool option
         TypedKeys: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("aggregations")>]
         Aggregations: Map<string, Types.AggregationContainer> option
+        [<System.Text.Json.Serialization.JsonPropertyName("query")>]
         Query: Types.QueryContainer option
+        [<System.Text.Json.Serialization.JsonPropertyName("size")>]
         Size: Types.Integer option
     }
 

@@ -16,9 +16,13 @@ module GraphOperations =
         Index: Types.Indices
         Routing: Types.Routing option
         Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("connections")>]
         Connections: Types.Hop option
+        [<System.Text.Json.Serialization.JsonPropertyName("controls")>]
         Controls: Types.ExploreControls option
+        [<System.Text.Json.Serialization.JsonPropertyName("query")>]
         Query: Types.QueryContainer option
+        [<System.Text.Json.Serialization.JsonPropertyName("vertices")>]
         Vertices: Types.VertexDefinition list option
     }
 

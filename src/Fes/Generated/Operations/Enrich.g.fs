@@ -162,8 +162,11 @@ module EnrichOperations =
     type EnrichPutPolicyRequest = {
         Name: Types.Name
         MasterTimeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("geo_match")>]
         GeoMatch: Types.EnrichTypesPolicy option
+        [<System.Text.Json.Serialization.JsonPropertyName("match")>]
         Match: Types.EnrichTypesPolicy option
+        [<System.Text.Json.Serialization.JsonPropertyName("range")>]
         Range: Types.EnrichTypesPolicy option
     }
 

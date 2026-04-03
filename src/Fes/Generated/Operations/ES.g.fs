@@ -4,6 +4,8 @@ namespace Fes.Generated.Operations
 
 
 open Fes
+open Fes.Generated
+open Fes.Generated.Operations
 
 module ES =
 

@@ -17,19 +17,33 @@ module EsqlOperations =
         Delimiter: string option
         DropNullColumns: bool option
         Format: Types.EsqlFormat option
+        [<System.Text.Json.Serialization.JsonPropertyName("columnar")>]
         Columnar: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("filter")>]
         Filter: Types.QueryContainer option
+        [<System.Text.Json.Serialization.JsonPropertyName("time_zone")>]
         TimeZone: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("locale")>]
         Locale: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("params")>]
         Params: Types.ESQLParams option
+        [<System.Text.Json.Serialization.JsonPropertyName("profile")>]
         Profile: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("query")>]
         Query: string
+        [<System.Text.Json.Serialization.JsonPropertyName("tables")>]
         Tables: Map<string, Map<string, Types.TableValuesContainer>> option
+        [<System.Text.Json.Serialization.JsonPropertyName("include_ccs_metadata")>]
         IncludeCcsMetadata: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("include_execution_metadata")>]
         IncludeExecutionMetadata: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("wait_for_completion_timeout")>]
         WaitForCompletionTimeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("keep_alive")>]
         KeepAlive: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("keep_on_completion")>]
         KeepOnCompletion: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("project_routing")>]
         ProjectRouting: Types.ProjectRouting option
     }
 
@@ -451,6 +465,7 @@ module EsqlOperations =
 
     type EsqlPutViewRequest = {
         Name: Types.Id
+        [<System.Text.Json.Serialization.JsonPropertyName("query")>]
         Query: string
     }
 
@@ -494,16 +509,27 @@ module EsqlOperations =
         Delimiter: string option
         DropNullColumns: bool option
         AllowPartialResults: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("columnar")>]
         Columnar: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("filter")>]
         Filter: Types.QueryContainer option
+        [<System.Text.Json.Serialization.JsonPropertyName("time_zone")>]
         TimeZone: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("locale")>]
         Locale: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("params")>]
         Params: Types.ESQLParams option
+        [<System.Text.Json.Serialization.JsonPropertyName("profile")>]
         Profile: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("query")>]
         Query: string
+        [<System.Text.Json.Serialization.JsonPropertyName("tables")>]
         Tables: Map<string, Map<string, Types.TableValuesContainer>> option
+        [<System.Text.Json.Serialization.JsonPropertyName("include_ccs_metadata")>]
         IncludeCcsMetadata: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("include_execution_metadata")>]
         IncludeExecutionMetadata: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("project_routing")>]
         ProjectRouting: Types.ProjectRouting option
     }
 

@@ -328,10 +328,15 @@ module SlmOperations =
         PolicyId: Types.Name
         MasterTimeout: Types.Duration option
         Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("config")>]
         Config: Types.Configuration option
+        [<System.Text.Json.Serialization.JsonPropertyName("name")>]
         Name: Types.Name option
+        [<System.Text.Json.Serialization.JsonPropertyName("repository")>]
         Repository: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("retention")>]
         Retention: Types.Retention option
+        [<System.Text.Json.Serialization.JsonPropertyName("schedule")>]
         Schedule: Types.CronExpression option
     }
 

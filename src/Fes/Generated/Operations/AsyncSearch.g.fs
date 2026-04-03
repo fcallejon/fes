@@ -70,7 +70,7 @@ module AsyncSearchOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type AsyncSearchGetResponse = Types.AsyncSearchDocumentResponseBase<Types.TDocument>
+    type AsyncSearchGetResponse<'tDocument> = Types.AsyncSearchDocumentResponseBase<'tDocument>
 
     type AsyncSearchGetRequestBuilder() =
         member _.Yield(_: unit) : AsyncSearchGetRequest =
@@ -205,38 +205,71 @@ module AsyncSearchOperations =
         Size: Types.Integer option
         From: Types.Integer option
         Sort: System.Text.Json.JsonElement option
+        [<System.Text.Json.Serialization.JsonPropertyName("aggregations")>]
         Aggregations: Map<string, Types.AggregationContainer> option
+        [<System.Text.Json.Serialization.JsonPropertyName("collapse")>]
         Collapse: Types.FieldCollapse option
-        Explain: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("explain")>]
+        bodyExplain: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("ext")>]
         Ext: Map<string, System.Text.Json.JsonElement> option
-        From: Types.Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("from")>]
+        bodyFrom: Types.Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("highlight")>]
         Highlight: Types.Highlight option
-        TrackTotalHits: Types.TrackHits option
+        [<System.Text.Json.Serialization.JsonPropertyName("track_total_hits")>]
+        bodyTrackTotalHits: Types.TrackHits option
+        [<System.Text.Json.Serialization.JsonPropertyName("indices_boost")>]
         IndicesBoost: Map<Types.IndexName, Types.Double> list option
-        DocvalueFields: Types.FieldAndFormat list option
+        [<System.Text.Json.Serialization.JsonPropertyName("docvalue_fields")>]
+        bodyDocvalueFields: Types.FieldAndFormat list option
+        [<System.Text.Json.Serialization.JsonPropertyName("knn")>]
         Knn: System.Text.Json.JsonElement option
+        [<System.Text.Json.Serialization.JsonPropertyName("min_score")>]
         MinScore: Types.Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("post_filter")>]
         PostFilter: Types.QueryContainer option
+        [<System.Text.Json.Serialization.JsonPropertyName("profile")>]
         Profile: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("query")>]
         Query: Types.QueryContainer option
+        [<System.Text.Json.Serialization.JsonPropertyName("rescore")>]
         Rescore: System.Text.Json.JsonElement option
+        [<System.Text.Json.Serialization.JsonPropertyName("script_fields")>]
         ScriptFields: Map<string, Types.ScriptField> option
+        [<System.Text.Json.Serialization.JsonPropertyName("search_after")>]
         SearchAfter: Types.SortResults option
-        Size: Types.Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("size")>]
+        bodySize: Types.Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("slice")>]
         Slice: Types.SlicedScroll option
-        Sort: Types.Sort option
-        Source: Types.SourceConfig option
+        [<System.Text.Json.Serialization.JsonPropertyName("sort")>]
+        bodySort: Types.Sort option
+        [<System.Text.Json.Serialization.JsonPropertyName("_source")>]
+        bodySource: Types.SourceConfig option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
         Fields: Types.FieldAndFormat list option
+        [<System.Text.Json.Serialization.JsonPropertyName("suggest")>]
         Suggest: Types.Suggester option
-        TerminateAfter: Types.Long option
-        Timeout: string option
-        TrackScores: bool option
-        Version: bool option
-        SeqNoPrimaryTerm: bool option
-        StoredFields: Types.Fields option
+        [<System.Text.Json.Serialization.JsonPropertyName("terminate_after")>]
+        bodyTerminateAfter: Types.Long option
+        [<System.Text.Json.Serialization.JsonPropertyName("timeout")>]
+        bodyTimeout: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("track_scores")>]
+        bodyTrackScores: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        bodyVersion: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("seq_no_primary_term")>]
+        bodySeqNoPrimaryTerm: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("stored_fields")>]
+        bodyStoredFields: Types.Fields option
+        [<System.Text.Json.Serialization.JsonPropertyName("pit")>]
         Pit: Types.PointInTimeReference option
+        [<System.Text.Json.Serialization.JsonPropertyName("runtime_mappings")>]
         RuntimeMappings: Types.RuntimeFields option
-        Stats: string list option
+        [<System.Text.Json.Serialization.JsonPropertyName("stats")>]
+        bodyStats: string list option
+        [<System.Text.Json.Serialization.JsonPropertyName("project_routing")>]
         ProjectRouting: Types.ProjectRouting option
     }
 
@@ -301,7 +334,7 @@ module AsyncSearchOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type AsyncSearchSubmitResponse = Types.AsyncSearchDocumentResponseBase<Types.TDocument>
+    type AsyncSearchSubmitResponse<'tDocument> = Types.AsyncSearchDocumentResponseBase<'tDocument>
 
     type AsyncSearchSubmitRequestBuilder() =
         member _.Yield(_: unit) : AsyncSearchSubmitRequest =
@@ -352,13 +385,13 @@ module AsyncSearchOperations =
                 Sort = None
                 Aggregations = None
                 Collapse = None
-                Explain = None
+                bodyExplain = None
                 Ext = None
-                From = None
+                bodyFrom = None
                 Highlight = None
-                TrackTotalHits = None
+                bodyTrackTotalHits = None
                 IndicesBoost = None
-                DocvalueFields = None
+                bodyDocvalueFields = None
                 Knn = None
                 MinScore = None
                 PostFilter = None
@@ -367,21 +400,21 @@ module AsyncSearchOperations =
                 Rescore = None
                 ScriptFields = None
                 SearchAfter = None
-                Size = None
+                bodySize = None
                 Slice = None
-                Sort = None
-                Source = None
+                bodySort = None
+                bodySource = None
                 Fields = None
                 Suggest = None
-                TerminateAfter = None
-                Timeout = None
-                TrackScores = None
-                Version = None
-                SeqNoPrimaryTerm = None
-                StoredFields = None
+                bodyTerminateAfter = None
+                bodyTimeout = None
+                bodyTrackScores = None
+                bodyVersion = None
+                bodySeqNoPrimaryTerm = None
+                bodyStoredFields = None
                 Pit = None
                 RuntimeMappings = None
-                Stats = None
+                bodyStats = None
                 ProjectRouting = None
             }
 
@@ -571,7 +604,7 @@ module AsyncSearchOperations =
 
         [<CustomOperation("explain")>]
         member _.Explain(state: AsyncSearchSubmitRequest, value: bool) =
-            { state with Explain = Some value }
+            { state with bodyExplain = Some value }
 
         [<CustomOperation("ext")>]
         member _.Ext(state: AsyncSearchSubmitRequest, value: Map<string, System.Text.Json.JsonElement>) =
@@ -579,7 +612,7 @@ module AsyncSearchOperations =
 
         [<CustomOperation("from")>]
         member _.From(state: AsyncSearchSubmitRequest, value: Types.Integer) =
-            { state with From = Some value }
+            { state with bodyFrom = Some value }
 
         [<CustomOperation("highlight")>]
         member _.Highlight(state: AsyncSearchSubmitRequest, value: Types.Highlight) =
@@ -587,7 +620,7 @@ module AsyncSearchOperations =
 
         [<CustomOperation("trackTotalHits")>]
         member _.TrackTotalHits(state: AsyncSearchSubmitRequest, value: Types.TrackHits) =
-            { state with TrackTotalHits = Some value }
+            { state with bodyTrackTotalHits = Some value }
 
         [<CustomOperation("indicesBoost")>]
         member _.IndicesBoost(state: AsyncSearchSubmitRequest, value: Map<Types.IndexName, Types.Double> list) =
@@ -595,7 +628,7 @@ module AsyncSearchOperations =
 
         [<CustomOperation("docvalueFields")>]
         member _.DocvalueFields(state: AsyncSearchSubmitRequest, value: Types.FieldAndFormat list) =
-            { state with DocvalueFields = Some value }
+            { state with bodyDocvalueFields = Some value }
 
         [<CustomOperation("knn")>]
         member _.Knn(state: AsyncSearchSubmitRequest, value: System.Text.Json.JsonElement) =
@@ -631,7 +664,7 @@ module AsyncSearchOperations =
 
         [<CustomOperation("size")>]
         member _.Size(state: AsyncSearchSubmitRequest, value: Types.Integer) =
-            { state with Size = Some value }
+            { state with bodySize = Some value }
 
         [<CustomOperation("slice")>]
         member _.Slice(state: AsyncSearchSubmitRequest, value: Types.SlicedScroll) =
@@ -639,11 +672,11 @@ module AsyncSearchOperations =
 
         [<CustomOperation("sort")>]
         member _.Sort(state: AsyncSearchSubmitRequest, value: Types.Sort) =
-            { state with Sort = Some value }
+            { state with bodySort = Some value }
 
         [<CustomOperation("source")>]
         member _.Source(state: AsyncSearchSubmitRequest, value: Types.SourceConfig) =
-            { state with Source = Some value }
+            { state with bodySource = Some value }
 
         [<CustomOperation("fields")>]
         member _.Fields(state: AsyncSearchSubmitRequest, value: Types.FieldAndFormat list) =
@@ -655,27 +688,27 @@ module AsyncSearchOperations =
 
         [<CustomOperation("terminateAfter")>]
         member _.TerminateAfter(state: AsyncSearchSubmitRequest, value: Types.Long) =
-            { state with TerminateAfter = Some value }
+            { state with bodyTerminateAfter = Some value }
 
         [<CustomOperation("timeout")>]
         member _.Timeout(state: AsyncSearchSubmitRequest, value: string) =
-            { state with Timeout = Some value }
+            { state with bodyTimeout = Some value }
 
         [<CustomOperation("trackScores")>]
         member _.TrackScores(state: AsyncSearchSubmitRequest, value: bool) =
-            { state with TrackScores = Some value }
+            { state with bodyTrackScores = Some value }
 
         [<CustomOperation("version")>]
         member _.Version(state: AsyncSearchSubmitRequest, value: bool) =
-            { state with Version = Some value }
+            { state with bodyVersion = Some value }
 
         [<CustomOperation("seqNoPrimaryTerm")>]
         member _.SeqNoPrimaryTerm(state: AsyncSearchSubmitRequest, value: bool) =
-            { state with SeqNoPrimaryTerm = Some value }
+            { state with bodySeqNoPrimaryTerm = Some value }
 
         [<CustomOperation("storedFields")>]
         member _.StoredFields(state: AsyncSearchSubmitRequest, value: Types.Fields) =
-            { state with StoredFields = Some value }
+            { state with bodyStoredFields = Some value }
 
         [<CustomOperation("pit")>]
         member _.Pit(state: AsyncSearchSubmitRequest, value: Types.PointInTimeReference) =
@@ -687,7 +720,7 @@ module AsyncSearchOperations =
 
         [<CustomOperation("stats")>]
         member _.Stats(state: AsyncSearchSubmitRequest, value: string list) =
-            { state with Stats = Some value }
+            { state with bodyStats = Some value }
 
         [<CustomOperation("projectRouting")>]
         member _.ProjectRouting(state: AsyncSearchSubmitRequest, value: Types.ProjectRouting) =
@@ -719,11 +752,11 @@ module AsyncSearchOperations =
         let withDf (value: string) (req: AsyncSearchSubmitRequest) =
             { req with Df = Some value }
         let withDocvalueFields (value: Types.Fields) (req: AsyncSearchSubmitRequest) =
-            { req with DocvalueFields = Some value }
+            { req with bodyDocvalueFields = Some value }
         let withExpandWildcards (value: Types.ExpandWildcards) (req: AsyncSearchSubmitRequest) =
             { req with ExpandWildcards = Some value }
         let withExplain (value: bool) (req: AsyncSearchSubmitRequest) =
-            { req with Explain = Some value }
+            { req with bodyExplain = Some value }
         let withIgnoreThrottled (value: bool) (req: AsyncSearchSubmitRequest) =
             { req with IgnoreThrottled = Some value }
         let withIgnoreUnavailable (value: bool) (req: AsyncSearchSubmitRequest) =
@@ -741,9 +774,9 @@ module AsyncSearchOperations =
         let withSearchType (value: Types.SearchType) (req: AsyncSearchSubmitRequest) =
             { req with SearchType = Some value }
         let withStats (value: string list) (req: AsyncSearchSubmitRequest) =
-            { req with Stats = Some value }
+            { req with bodyStats = Some value }
         let withStoredFields (value: Types.Fields) (req: AsyncSearchSubmitRequest) =
-            { req with StoredFields = Some value }
+            { req with bodyStoredFields = Some value }
         let withSuggestField (value: Types.Field) (req: AsyncSearchSubmitRequest) =
             { req with SuggestField = Some value }
         let withSuggestMode (value: Types.SuggestMode) (req: AsyncSearchSubmitRequest) =
@@ -753,53 +786,53 @@ module AsyncSearchOperations =
         let withSuggestText (value: string) (req: AsyncSearchSubmitRequest) =
             { req with SuggestText = Some value }
         let withTerminateAfter (value: Types.Long) (req: AsyncSearchSubmitRequest) =
-            { req with TerminateAfter = Some value }
+            { req with bodyTerminateAfter = Some value }
         let withTimeout (value: Types.Duration) (req: AsyncSearchSubmitRequest) =
-            { req with Timeout = Some value }
+            { req with bodyTimeout = Some value }
         let withTrackTotalHits (value: Types.TrackHits) (req: AsyncSearchSubmitRequest) =
-            { req with TrackTotalHits = Some value }
+            { req with bodyTrackTotalHits = Some value }
         let withTrackScores (value: bool) (req: AsyncSearchSubmitRequest) =
-            { req with TrackScores = Some value }
+            { req with bodyTrackScores = Some value }
         let withTypedKeys (value: bool) (req: AsyncSearchSubmitRequest) =
             { req with TypedKeys = Some value }
         let withRestTotalHitsAsInt (value: bool) (req: AsyncSearchSubmitRequest) =
             { req with RestTotalHitsAsInt = Some value }
         let withVersion (value: bool) (req: AsyncSearchSubmitRequest) =
-            { req with Version = Some value }
+            { req with bodyVersion = Some value }
         let withSource (value: Types.SourceConfigParam) (req: AsyncSearchSubmitRequest) =
-            { req with Source = Some value }
+            { req with bodySource = Some value }
         let withSourceExcludes (value: Types.Fields) (req: AsyncSearchSubmitRequest) =
             { req with SourceExcludes = Some value }
         let withSourceIncludes (value: Types.Fields) (req: AsyncSearchSubmitRequest) =
             { req with SourceIncludes = Some value }
         let withSeqNoPrimaryTerm (value: bool) (req: AsyncSearchSubmitRequest) =
-            { req with SeqNoPrimaryTerm = Some value }
+            { req with bodySeqNoPrimaryTerm = Some value }
         let withQ (value: string) (req: AsyncSearchSubmitRequest) =
             { req with Q = Some value }
         let withSize (value: Types.Integer) (req: AsyncSearchSubmitRequest) =
-            { req with Size = Some value }
+            { req with bodySize = Some value }
         let withFrom (value: Types.Integer) (req: AsyncSearchSubmitRequest) =
-            { req with From = Some value }
+            { req with bodyFrom = Some value }
         let withSort (value: System.Text.Json.JsonElement) (req: AsyncSearchSubmitRequest) =
-            { req with Sort = Some value }
+            { req with bodySort = Some value }
         let withAggregations (value: Map<string, Types.AggregationContainer>) (req: AsyncSearchSubmitRequest) =
             { req with Aggregations = Some value }
         let withCollapse (value: Types.FieldCollapse) (req: AsyncSearchSubmitRequest) =
             { req with Collapse = Some value }
         let withExplain (value: bool) (req: AsyncSearchSubmitRequest) =
-            { req with Explain = Some value }
+            { req with bodyExplain = Some value }
         let withExt (value: Map<string, System.Text.Json.JsonElement>) (req: AsyncSearchSubmitRequest) =
             { req with Ext = Some value }
         let withFrom (value: Types.Integer) (req: AsyncSearchSubmitRequest) =
-            { req with From = Some value }
+            { req with bodyFrom = Some value }
         let withHighlight (value: Types.Highlight) (req: AsyncSearchSubmitRequest) =
             { req with Highlight = Some value }
         let withTrackTotalHits (value: Types.TrackHits) (req: AsyncSearchSubmitRequest) =
-            { req with TrackTotalHits = Some value }
+            { req with bodyTrackTotalHits = Some value }
         let withIndicesBoost (value: Map<Types.IndexName, Types.Double> list) (req: AsyncSearchSubmitRequest) =
             { req with IndicesBoost = Some value }
         let withDocvalueFields (value: Types.FieldAndFormat list) (req: AsyncSearchSubmitRequest) =
-            { req with DocvalueFields = Some value }
+            { req with bodyDocvalueFields = Some value }
         let withKnn (value: System.Text.Json.JsonElement) (req: AsyncSearchSubmitRequest) =
             { req with Knn = Some value }
         let withMinScore (value: Types.Double) (req: AsyncSearchSubmitRequest) =
@@ -817,35 +850,35 @@ module AsyncSearchOperations =
         let withSearchAfter (value: Types.SortResults) (req: AsyncSearchSubmitRequest) =
             { req with SearchAfter = Some value }
         let withSize (value: Types.Integer) (req: AsyncSearchSubmitRequest) =
-            { req with Size = Some value }
+            { req with bodySize = Some value }
         let withSlice (value: Types.SlicedScroll) (req: AsyncSearchSubmitRequest) =
             { req with Slice = Some value }
         let withSort (value: Types.Sort) (req: AsyncSearchSubmitRequest) =
-            { req with Sort = Some value }
+            { req with bodySort = Some value }
         let withSource (value: Types.SourceConfig) (req: AsyncSearchSubmitRequest) =
-            { req with Source = Some value }
+            { req with bodySource = Some value }
         let withFields (value: Types.FieldAndFormat list) (req: AsyncSearchSubmitRequest) =
             { req with Fields = Some value }
         let withSuggest (value: Types.Suggester) (req: AsyncSearchSubmitRequest) =
             { req with Suggest = Some value }
         let withTerminateAfter (value: Types.Long) (req: AsyncSearchSubmitRequest) =
-            { req with TerminateAfter = Some value }
+            { req with bodyTerminateAfter = Some value }
         let withTimeout (value: string) (req: AsyncSearchSubmitRequest) =
-            { req with Timeout = Some value }
+            { req with bodyTimeout = Some value }
         let withTrackScores (value: bool) (req: AsyncSearchSubmitRequest) =
-            { req with TrackScores = Some value }
+            { req with bodyTrackScores = Some value }
         let withVersion (value: bool) (req: AsyncSearchSubmitRequest) =
-            { req with Version = Some value }
+            { req with bodyVersion = Some value }
         let withSeqNoPrimaryTerm (value: bool) (req: AsyncSearchSubmitRequest) =
-            { req with SeqNoPrimaryTerm = Some value }
+            { req with bodySeqNoPrimaryTerm = Some value }
         let withStoredFields (value: Types.Fields) (req: AsyncSearchSubmitRequest) =
-            { req with StoredFields = Some value }
+            { req with bodyStoredFields = Some value }
         let withPit (value: Types.PointInTimeReference) (req: AsyncSearchSubmitRequest) =
             { req with Pit = Some value }
         let withRuntimeMappings (value: Types.RuntimeFields) (req: AsyncSearchSubmitRequest) =
             { req with RuntimeMappings = Some value }
         let withStats (value: string list) (req: AsyncSearchSubmitRequest) =
-            { req with Stats = Some value }
+            { req with bodyStats = Some value }
         let withProjectRouting (value: Types.ProjectRouting) (req: AsyncSearchSubmitRequest) =
             { req with ProjectRouting = Some value }
 

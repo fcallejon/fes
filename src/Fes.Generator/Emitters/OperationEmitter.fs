@@ -71,13 +71,39 @@ let private operationGroupName (endpointName: string) =
     else "Global"
 
 // ============================================================================
+// Field Name Deduplication
+// ============================================================================
+
+type FieldNameMap = Map<string, string>
+
+let private buildFieldNameMap (pathProps: Property list) (queryProps: Property list) (bodyProps: Property list) : FieldNameMap =
+    let mutable seen = Set.empty<string>
+    let mutable result = Map.empty
+    let addProp (prefix: string) (p: Property) =
+        let key = $"{prefix}:{p.Name}"
+        let baseName = Namespacing.toFieldName p.Name
+        if Set.contains baseName seen then
+            let alt = $"{prefix}{baseName}"
+            seen <- Set.add alt seen
+            result <- Map.add key alt result
+        else
+            seen <- Set.add baseName seen
+            result <- Map.add key baseName result
+    for p in pathProps do addProp "path" p
+    for p in queryProps do addProp "query" p
+    for p in bodyProps do addProp "body" p
+    result
+
+let private getFieldName (fnm: FieldNameMap) (prefix: string) (p: Property) =
+    Map.tryFind $"{prefix}:{p.Name}" fnm |> Option.defaultValue (Namespacing.toFieldName p.Name)
+
+// ============================================================================
 // Emit Request Type
 // ============================================================================
 
-let private emitRequestRecord (w: Writer) (ctx: TypeResolver.ResolveContext) (reqTypeName: string) (pathProps: Property list) (queryProps: Property list) (bodyProps: Property list) =
+let private emitRequestRecord (w: Writer) (ctx: TypeResolver.ResolveContext) (reqTypeName: string) (fnm: FieldNameMap) (pathProps: Property list) (queryProps: Property list) (bodyProps: Property list) =
     let allProps = pathProps @ queryProps @ bodyProps
     if allProps.IsEmpty then
-        // Empty request — use a marker type
         w.Line $"type {reqTypeName} = | {reqTypeName}"
         w.BlankLine()
     else
@@ -85,31 +111,23 @@ let private emitRequestRecord (w: Writer) (ctx: TypeResolver.ResolveContext) (re
     w.Line $"type {reqTypeName} = {{"
     w.Indent()
 
-    // Path params (required)
     for p in pathProps do
-        let fieldName = Namespacing.toFieldName p.Name
+        let fieldName = getFieldName fnm "path" p
         let fieldType = TypeResolver.resolveValueOf ctx p.Type
         w.Line $"{fieldName}: {fieldType}"
 
-    // Query params (optional)
     for p in queryProps do
-        let fieldName = Namespacing.toFieldName p.Name
+        let fieldName = getFieldName fnm "query" p
         let fieldType = TypeResolver.resolveValueOf ctx p.Type
-        if p.Required then
-            w.Line $"{fieldName}: {fieldType}"
-        else
-            w.Line $"{fieldName}: {fieldType} option"
+        if p.Required then w.Line $"{fieldName}: {fieldType}"
+        else w.Line $"{fieldName}: {fieldType} option"
 
-    // Body properties (optional unless required)
     for p in bodyProps do
-        let fieldName = Namespacing.toFieldName p.Name
+        let fieldName = getFieldName fnm "body" p
         let fieldType = TypeResolver.resolveValueOf ctx p.Type
-        if fieldName <> Namespacing.toPascalCase p.Name then
-            w.Line $"[<System.Text.Json.Serialization.JsonPropertyName(\"{p.Name}\")>]"
-        if p.Required then
-            w.Line $"{fieldName}: {fieldType}"
-        else
-            w.Line $"{fieldName}: {fieldType} option"
+        w.Line $"[<System.Text.Json.Serialization.JsonPropertyName(\"{p.Name}\")>]"
+        if p.Required then w.Line $"{fieldName}: {fieldType}"
+        else w.Line $"{fieldName}: {fieldType} option"
 
     w.Dedent()
     w.Line "}"
@@ -185,7 +203,7 @@ let private emitToRequest (w: Writer) (reqTypeName: string) (endpoint: Endpoint)
 // Emit CE Builder
 // ============================================================================
 
-let private emitCeBuilder (w: Writer) (ctx: TypeResolver.ResolveContext) (reqTypeName: string) (builderName: string) (pathProps: Property list) (queryProps: Property list) (bodyProps: Property list) (hasValueBody: bool) =
+let private emitCeBuilder (w: Writer) (ctx: TypeResolver.ResolveContext) (reqTypeName: string) (builderName: string) (fnm: FieldNameMap) (pathProps: Property list) (queryProps: Property list) (bodyProps: Property list) (hasValueBody: bool) =
     w.Line $"type {reqTypeName}Builder() ="
 
     w.Indent()
@@ -196,20 +214,16 @@ let private emitCeBuilder (w: Writer) (ctx: TypeResolver.ResolveContext) (reqTyp
     w.Line "{"
     w.Indent()
     for p in pathProps do
-        let fieldName = Namespacing.toFieldName p.Name
+        let fieldName = getFieldName fnm "path" p
         w.Line $"{fieldName} = Unchecked.defaultof<_>"
     for p in queryProps do
-        let fieldName = Namespacing.toFieldName p.Name
-        if p.Required then
-            w.Line $"{fieldName} = Unchecked.defaultof<_>"
-        else
-            w.Line $"{fieldName} = None"
+        let fieldName = getFieldName fnm "query" p
+        if p.Required then w.Line $"{fieldName} = Unchecked.defaultof<_>"
+        else w.Line $"{fieldName} = None"
     for p in bodyProps do
-        let fieldName = Namespacing.toFieldName p.Name
-        if p.Required then
-            w.Line $"{fieldName} = Unchecked.defaultof<_>"
-        else
-            w.Line $"{fieldName} = None"
+        let fieldName = getFieldName fnm "body" p
+        if p.Required then w.Line $"{fieldName} = Unchecked.defaultof<_>"
+        else w.Line $"{fieldName} = None"
     if hasValueBody then
         w.Line "Document = Unchecked.defaultof<_>"
     w.Dedent()
@@ -220,7 +234,7 @@ let private emitCeBuilder (w: Writer) (ctx: TypeResolver.ResolveContext) (reqTyp
     // Custom operations for path params
     for p in pathProps do
         let opName = Namespacing.toFunctionName p.Name
-        let fieldName = Namespacing.toFieldName p.Name
+        let fieldName = getFieldName fnm "path" p
         let fieldType = TypeResolver.resolveValueOf ctx p.Type
         w.Line $"[<CustomOperation(\"{opName}\")>]"
         w.Line $"member _.{Namespacing.toPascalCase p.Name}(state: {reqTypeName}, value: {fieldType}) ="
@@ -230,7 +244,7 @@ let private emitCeBuilder (w: Writer) (ctx: TypeResolver.ResolveContext) (reqTyp
     // Custom operations for query params
     for p in queryProps do
         let opName = Namespacing.toFunctionName p.Name
-        let fieldName = Namespacing.toFieldName p.Name
+        let fieldName = getFieldName fnm "query" p
         let fieldType = TypeResolver.resolveValueOf ctx p.Type
         w.Line $"[<CustomOperation(\"{opName}\")>]"
         if p.Required then
@@ -244,7 +258,7 @@ let private emitCeBuilder (w: Writer) (ctx: TypeResolver.ResolveContext) (reqTyp
     // Custom operations for body props
     for p in bodyProps do
         let opName = Namespacing.toFunctionName p.Name
-        let fieldName = Namespacing.toFieldName p.Name
+        let fieldName = getFieldName fnm "body" p
         let fieldType = TypeResolver.resolveValueOf ctx p.Type
         w.Line $"[<CustomOperation(\"{opName}\")>]"
         if p.Required then
@@ -272,13 +286,15 @@ let private emitCeBuilder (w: Writer) (ctx: TypeResolver.ResolveContext) (reqTyp
 // Emit pipe-friendly module functions
 // ============================================================================
 
-let private emitPipeFunctions (w: Writer) (ctx: TypeResolver.ResolveContext) (reqTypeName: string) (moduleName: string) (queryProps: Property list) (bodyProps: Property list) =
+let private emitPipeFunctions (w: Writer) (ctx: TypeResolver.ResolveContext) (reqTypeName: string) (moduleName: string) (fnm: FieldNameMap) (queryProps: Property list) (bodyProps: Property list) =
     w.Line $"module {moduleName} ="
     w.Indent()
 
     for p in queryProps @ bodyProps do
         let funcName = $"with{Namespacing.toPascalCase p.Name}"
-        let fieldName = Namespacing.toFieldName p.Name
+        let isBody = bodyProps |> List.exists (fun bp -> bp.Name = p.Name)
+        let prefix = if isBody then "body" else "query"
+        let fieldName = getFieldName fnm prefix p
         let fieldType = TypeResolver.resolveValueOf ctx p.Type
         if p.Required then
             w.Line $"let {funcName} (value: {fieldType}) (req: {reqTypeName}) ="
@@ -311,6 +327,8 @@ let emitEndpoint (w: Writer) (index: TypeIndex.TypeIndex) (endpoint: Endpoint) =
             | Body.Value _ -> [], true
             | Body.NoBody -> [], false
 
+        let fnm = buildFieldNameMap pathProps queryProps bodyProps
+
         // Request record
         if hasValueBody then
             // For ValueBody, add a Document field to the request
@@ -330,7 +348,7 @@ let emitEndpoint (w: Writer) (index: TypeIndex.TypeIndex) (endpoint: Endpoint) =
             w.Line "}"
             w.BlankLine()
         else
-            emitRequestRecord w ctx reqTN pathProps queryProps bodyProps
+            emitRequestRecord w ctx reqTN fnm pathProps queryProps bodyProps
 
         // ToRequest method
         w.Line $"    with"
@@ -340,10 +358,15 @@ let emitEndpoint (w: Writer) (index: TypeIndex.TypeIndex) (endpoint: Endpoint) =
         let respTd = TypeIndex.resolve index endpoint.Response
         match respTd with
         | TypeDefinition.Response resp ->
+            let respCtx = TypeResolver.makeContext index resp.Generics
+            let genericParams =
+                match resp.Generics with
+                | [] -> ""
+                | gs -> "<" + (gs |> List.map (fun g -> $"'{Namespacing.toCamelCase g.Name}") |> String.concat ", ") + ">"
             match resp.Body with
             | Body.Value (v, _) ->
-                let respType = TypeResolver.resolveValueOf ctx v
-                w.Line $"type {respTN} = {respType}"
+                let respType = TypeResolver.resolveValueOf respCtx v
+                w.Line $"type {respTN}{genericParams} = {respType}"
             | Body.Properties _ ->
                 w.Line $"type {respTN} = System.Text.Json.JsonElement"
             | Body.NoBody ->
@@ -352,12 +375,12 @@ let emitEndpoint (w: Writer) (index: TypeIndex.TypeIndex) (endpoint: Endpoint) =
         | _ -> ()
 
         // CE builder (always, for consistency)
-        emitCeBuilder w ctx reqTN builderName pathProps queryProps bodyProps hasValueBody
+        emitCeBuilder w ctx reqTN builderName fnm pathProps queryProps bodyProps hasValueBody
 
         // Pipe-friendly module
         let pipeModuleName = Namespacing.toPascalCase (endpoint.Name.Split('.') |> Array.last)
         if not queryProps.IsEmpty || not bodyProps.IsEmpty then
-            emitPipeFunctions w ctx reqTN pipeModuleName queryProps bodyProps
+            emitPipeFunctions w ctx reqTN pipeModuleName fnm queryProps bodyProps
 
     | _ ->
         w.Line $"// Skipping endpoint {endpoint.Name}: request type is not a Request definition"

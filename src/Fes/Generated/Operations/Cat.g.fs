@@ -308,6 +308,7 @@ module CatOperations =
         Index: Types.Indices
         H: Types.CatCountColumns option
         S: Types.Names option
+        [<System.Text.Json.Serialization.JsonPropertyName("project_routing")>]
         ProjectRouting: Types.ProjectRouting option
     }
 
@@ -370,7 +371,7 @@ module CatOperations =
 
     type CatFielddataRequest = {
         Fields: Types.Fields
-        Fields: Types.Fields option
+        queryFields: Types.Fields option
         H: Types.CatFieldDataColumns option
         S: Types.Names option
     }
@@ -401,7 +402,7 @@ module CatOperations =
         member _.Yield(_: unit) : CatFielddataRequest =
             {
                 Fields = Unchecked.defaultof<_>
-                Fields = None
+                queryFields = None
                 H = None
                 S = None
             }
@@ -412,7 +413,7 @@ module CatOperations =
 
         [<CustomOperation("fields")>]
         member _.Fields(state: CatFielddataRequest, value: Types.Fields) =
-            { state with Fields = Some value }
+            { state with queryFields = Some value }
 
         [<CustomOperation("h")>]
         member _.H(state: CatFielddataRequest, value: Types.CatFieldDataColumns) =
@@ -426,7 +427,7 @@ module CatOperations =
 
     module Fielddata =
         let withFields (value: Types.Fields) (req: CatFielddataRequest) =
-            { req with Fields = Some value }
+            { req with queryFields = Some value }
         let withH (value: Types.CatFieldDataColumns) (req: CatFielddataRequest) =
             { req with H = Some value }
         let withS (value: Types.Names) (req: CatFielddataRequest) =
@@ -1243,7 +1244,7 @@ module CatOperations =
         Index: Types.Indices
         ActiveOnly: bool option
         Detailed: bool option
-        Index: Types.Indices option
+        queryIndex: Types.Indices option
         H: Types.CatRecoveryColumns option
         S: Types.Names option
     }
@@ -1278,7 +1279,7 @@ module CatOperations =
                 Index = Unchecked.defaultof<_>
                 ActiveOnly = None
                 Detailed = None
-                Index = None
+                queryIndex = None
                 H = None
                 S = None
             }
@@ -1297,7 +1298,7 @@ module CatOperations =
 
         [<CustomOperation("index")>]
         member _.Index(state: CatRecoveryRequest, value: Types.Indices) =
-            { state with Index = Some value }
+            { state with queryIndex = Some value }
 
         [<CustomOperation("h")>]
         member _.H(state: CatRecoveryRequest, value: Types.CatRecoveryColumns) =
@@ -1315,7 +1316,7 @@ module CatOperations =
         let withDetailed (value: bool) (req: CatRecoveryRequest) =
             { req with Detailed = Some value }
         let withIndex (value: Types.Indices) (req: CatRecoveryRequest) =
-            { req with Index = Some value }
+            { req with queryIndex = Some value }
         let withH (value: Types.CatRecoveryColumns) (req: CatRecoveryRequest) =
             { req with H = Some value }
         let withS (value: Types.Names) (req: CatRecoveryRequest) =

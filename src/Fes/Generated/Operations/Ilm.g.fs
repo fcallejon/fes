@@ -211,7 +211,9 @@ module IlmOperations =
     type IlmMigrateToDataTiersRequest = {
         DryRun: bool option
         MasterTimeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("legacy_template_to_delete")>]
         LegacyTemplateToDelete: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("node_attribute")>]
         NodeAttribute: string option
     }
 
@@ -276,7 +278,9 @@ module IlmOperations =
 
     type IlmMoveToStepRequest = {
         Index: Types.IndexName
+        [<System.Text.Json.Serialization.JsonPropertyName("current_step")>]
         CurrentStep: Types.StepKey
+        [<System.Text.Json.Serialization.JsonPropertyName("next_step")>]
         NextStep: Types.StepKey
     }
 
@@ -326,7 +330,8 @@ module IlmOperations =
         Policy: Types.Name
         MasterTimeout: Types.Duration option
         Timeout: Types.Duration option
-        Policy: Types.IlmTypesPolicy option
+        [<System.Text.Json.Serialization.JsonPropertyName("policy")>]
+        bodyPolicy: Types.IlmTypesPolicy option
     }
 
         with
@@ -357,7 +362,7 @@ module IlmOperations =
                 Policy = Unchecked.defaultof<_>
                 MasterTimeout = None
                 Timeout = None
-                Policy = None
+                bodyPolicy = None
             }
 
         [<CustomOperation("policy")>]
@@ -374,7 +379,7 @@ module IlmOperations =
 
         [<CustomOperation("policy")>]
         member _.Policy(state: IlmPutLifecycleRequest, value: Types.IlmTypesPolicy) =
-            { state with Policy = Some value }
+            { state with bodyPolicy = Some value }
 
     let ilmPutLifecycleRequest = IlmPutLifecycleRequestBuilder()
 
@@ -384,7 +389,7 @@ module IlmOperations =
         let withTimeout (value: Types.Duration) (req: IlmPutLifecycleRequest) =
             { req with Timeout = Some value }
         let withPolicy (value: Types.IlmTypesPolicy) (req: IlmPutLifecycleRequest) =
-            { req with Policy = Some value }
+            { req with bodyPolicy = Some value }
 
     type IlmRemovePolicyRequest = {
         Index: Types.IndexName

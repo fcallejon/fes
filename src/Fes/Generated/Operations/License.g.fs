@@ -158,7 +158,9 @@ module LicenseOperations =
         Acknowledge: bool option
         MasterTimeout: Types.Duration option
         Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("license")>]
         License: Types.License option
+        [<System.Text.Json.Serialization.JsonPropertyName("licenses")>]
         Licenses: Types.License list option
     }
 

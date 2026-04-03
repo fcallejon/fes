@@ -240,6 +240,7 @@ module NodesOperations =
     type NodesReloadSecureSettingsRequest = {
         NodeId: Types.NodeIds
         Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("secure_settings_password")>]
         SecureSettingsPassword: Types.Password option
     }
 

@@ -247,14 +247,23 @@ module TransformOperations =
     type TransformPreviewTransformRequest = {
         TransformId: Types.Id
         Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("dest")>]
         Dest: Types.TransformTypesDestination option
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
         Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("frequency")>]
         Frequency: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("pivot")>]
         Pivot: Types.Pivot option
+        [<System.Text.Json.Serialization.JsonPropertyName("source")>]
         Source: Types.TransformTypesSource option
+        [<System.Text.Json.Serialization.JsonPropertyName("settings")>]
         Settings: Types.Settings option
+        [<System.Text.Json.Serialization.JsonPropertyName("sync")>]
         Sync: Types.SyncContainer option
+        [<System.Text.Json.Serialization.JsonPropertyName("retention_policy")>]
         RetentionPolicy: Types.RetentionPolicyContainer option
+        [<System.Text.Json.Serialization.JsonPropertyName("latest")>]
         Latest: Types.Latest option
     }
 
@@ -367,15 +376,25 @@ module TransformOperations =
         TransformId: Types.Id
         DeferValidation: bool option
         Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("dest")>]
         Dest: Types.TransformTypesDestination
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
         Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("frequency")>]
         Frequency: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("latest")>]
         Latest: Types.Latest option
+        [<System.Text.Json.Serialization.JsonPropertyName("_meta")>]
         Meta: Types.Metadata option
+        [<System.Text.Json.Serialization.JsonPropertyName("pivot")>]
         Pivot: Types.Pivot option
+        [<System.Text.Json.Serialization.JsonPropertyName("retention_policy")>]
         RetentionPolicy: Types.RetentionPolicyContainer option
+        [<System.Text.Json.Serialization.JsonPropertyName("settings")>]
         Settings: Types.Settings option
+        [<System.Text.Json.Serialization.JsonPropertyName("source")>]
         Source: Types.TransformTypesSource
+        [<System.Text.Json.Serialization.JsonPropertyName("sync")>]
         Sync: Types.SyncContainer option
     }
 
@@ -790,13 +809,21 @@ module TransformOperations =
         TransformId: Types.Id
         DeferValidation: bool option
         Timeout: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("dest")>]
         Dest: Types.TransformTypesDestination option
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
         Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("frequency")>]
         Frequency: Types.Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("_meta")>]
         Meta: Types.Metadata option
+        [<System.Text.Json.Serialization.JsonPropertyName("source")>]
         Source: Types.TransformTypesSource option
+        [<System.Text.Json.Serialization.JsonPropertyName("settings")>]
         Settings: Types.Settings option
+        [<System.Text.Json.Serialization.JsonPropertyName("sync")>]
         Sync: Types.SyncContainer option
+        [<System.Text.Json.Serialization.JsonPropertyName("retention_policy")>]
         RetentionPolicy: Types.RetentionPolicyContainer option option
     }
 

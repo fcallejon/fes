@@ -235,6 +235,7 @@ module SynonymsOperations =
     type SynonymsPutSynonymRequest = {
         Id: Types.Id
         Refresh: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("synonyms_set")>]
         SynonymsSet: System.Text.Json.JsonElement
     }
 
@@ -291,6 +292,7 @@ module SynonymsOperations =
         SetId: Types.Id
         RuleId: Types.Id
         Refresh: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("synonyms")>]
         Synonyms: Types.SynonymString
     }
 
