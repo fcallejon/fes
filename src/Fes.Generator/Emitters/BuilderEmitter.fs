@@ -55,10 +55,12 @@ let emitContainerBuilders (w: Writer) (ctx: TypeResolver.ResolveContext) (def: I
 // ============================================================================
 
 let emitRecordCeBuilder (w: Writer) (ctx: TypeResolver.ResolveContext) (typeName: string) (properties: Property list) =
-    // typeName may be qualified like "Types.Foo" — strip prefix for builder class name
     let shortName = typeName.Split('.') |> Array.last
     let builderTypeName = $"{shortName}Builder"
     let builderInstanceName = Namespacing.toCamelCase shortName |> Namespacing.escapeKeyword
+
+    // Use same field dedup as the type emitter
+    let dedupedProps = TypeEmitter.dedupRecordFields properties
 
     w.Line $"type {builderTypeName}() ="
     w.Indent()
@@ -68,8 +70,8 @@ let emitRecordCeBuilder (w: Writer) (ctx: TypeResolver.ResolveContext) (typeName
     w.Indent()
     w.Line "{"
     w.Indent()
-    for p in properties do
-        let fieldName = Namespacing.toFieldName p.Name
+    for p in dedupedProps do
+        let fieldName = TypeEmitter.getRecordFieldName p
         if p.Required then
             w.Line $"{fieldName} = Unchecked.defaultof<_>"
         else
@@ -80,16 +82,16 @@ let emitRecordCeBuilder (w: Writer) (ctx: TypeResolver.ResolveContext) (typeName
     w.BlankLine()
 
     // Custom operations
-    for p in properties do
-        let opName = Namespacing.toFunctionName p.Name
-        let fieldName = Namespacing.toFieldName p.Name
+    for p in dedupedProps do
+        let fieldName = TypeEmitter.getRecordFieldName p
+        let opName = Namespacing.toFunctionName fieldName
         let fieldType = TypeResolver.resolveValueOf ctx p.Type
         w.Line $"[<CustomOperation(\"{opName}\")>]"
         if p.Required then
-            w.Line $"member _.{Namespacing.toPascalCase p.Name}(state: {typeName}, value: {fieldType}) ="
+            w.Line $"member _.{Namespacing.toPascalCase fieldName}(state: {typeName}, value: {fieldType}) ="
             w.Line $"    {{ state with {fieldName} = value }}"
         else
-            w.Line $"member _.{Namespacing.toPascalCase p.Name}(state: {typeName}, value: {fieldType}) ="
+            w.Line $"member _.{Namespacing.toPascalCase fieldName}(state: {typeName}, value: {fieldType}) ="
             w.Line $"    {{ state with {fieldName} = Some value }}"
         w.BlankLine()
 
@@ -115,16 +117,18 @@ let emitShortcutConstructor (w: Writer) (ctx: TypeResolver.ResolveContext) (def:
                 | Some n -> n
                 | None -> Namespacing.toFSharpTypeName def.Name.Name
             let typeName = $"Types.{resolvedName}"
-            let funcName = $"of{Namespacing.toPascalCase shortcutPropName}"
+            let funcName = $"create{resolvedName}"
             let paramType = TypeResolver.resolveValueOf ctx prop.Type
             w.Line $"let {funcName} (value: {paramType}) : {typeName} ="
             w.Indent()
             w.Line "{"
             w.Indent()
-            for p in def.Properties do
-                let fieldName = Namespacing.toFieldName p.Name
+            let dedupedProps = TypeEmitter.dedupRecordFields def.Properties
+            for p in dedupedProps do
+                let fieldName = TypeEmitter.getRecordFieldName p
                 if p.Name = shortcutPropName then
-                    w.Line $"{fieldName} = value"
+                    if p.Required then w.Line $"{fieldName} = value"
+                    else w.Line $"{fieldName} = Some value"
                 elif p.Required then
                     w.Line $"{fieldName} = Unchecked.defaultof<_>"
                 else

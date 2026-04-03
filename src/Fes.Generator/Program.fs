@@ -92,11 +92,11 @@ let main args =
     FileEmitter.writeFiles outputDir converterFiles
     printfn $"  {converterFiles.Length} converter files"
 
-    // Generate builder files (temporarily disabled — needs field dedup fixes)
-    // let builderFiles = BuilderEmitter.emitAllBuilderFiles index model.Types
-    // FileEmitter.writeFiles outputDir builderFiles
-    let builderFiles : (string * string) list = []
-    printfn $"  {builderFiles.Length} builder files (disabled)"
+    // Generate builder files (Query.bool, Agg.terms, boolQuery { } etc.)
+    printfn "Generating builder files..."
+    let builderFiles = BuilderEmitter.emitAllBuilderFiles index model.Types
+    FileEmitter.writeFiles outputDir builderFiles
+    printfn $"  {builderFiles.Length} builder files"
 
     // Generate ES module
     printfn "Generating ES module..."
