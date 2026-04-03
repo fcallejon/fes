@@ -29,11 +29,11 @@ module AsyncSearchTypesBuilders =
             }
 
         [<CustomOperation("aggregations")>]
-        member _.Aggregations(state: AsyncSearch, value: Map<Types.AggregateName, TypesAggregations.Aggregate>) =
+        member _.Aggregations(state: AsyncSearch, value: Map<CoreTypes.AggregateName, CoreTypes.Aggregate>) =
             { state with Aggregations = Some value }
 
         [<CustomOperation("clusters")>]
-        member _.Clusters(state: AsyncSearch, value: Types.ClusterStatistics) =
+        member _.Clusters(state: AsyncSearch, value: CoreTypes.ClusterStatistics) =
             { state with Clusters = Some value }
 
         [<CustomOperation("fields")>]
@@ -45,11 +45,11 @@ module AsyncSearchTypesBuilders =
             { state with Hits = value }
 
         [<CustomOperation("maxScore")>]
-        member _.MaxScore(state: AsyncSearch, value: Types.Double) =
+        member _.MaxScore(state: AsyncSearch, value: CoreTypes.Double) =
             { state with MaxScore = Some value }
 
         [<CustomOperation("numReducePhases")>]
-        member _.NumReducePhases(state: AsyncSearch, value: Types.Long) =
+        member _.NumReducePhases(state: AsyncSearch, value: CoreTypes.Long) =
             { state with NumReducePhases = Some value }
 
         [<CustomOperation("profile")>]
@@ -57,19 +57,19 @@ module AsyncSearchTypesBuilders =
             { state with Profile = Some value }
 
         [<CustomOperation("pitId")>]
-        member _.PitId(state: AsyncSearch, value: Types.Id) =
+        member _.PitId(state: AsyncSearch, value: CoreTypes.Id) =
             { state with PitId = Some value }
 
         [<CustomOperation("scrollId")>]
-        member _.ScrollId(state: AsyncSearch, value: Types.ScrollId) =
+        member _.ScrollId(state: AsyncSearch, value: CoreTypes.ScrollId) =
             { state with ScrollId = Some value }
 
         [<CustomOperation("shards")>]
-        member _.Shards(state: AsyncSearch, value: Types.ShardStatistics) =
+        member _.Shards(state: AsyncSearch, value: CoreTypes.ShardStatistics) =
             { state with Shards = value }
 
         [<CustomOperation("suggest")>]
-        member _.Suggest(state: AsyncSearch, value: Map<Types.SuggestionName, GlobalSearchTypes.Suggest<'tDocument> list>) =
+        member _.Suggest(state: AsyncSearch, value: Map<CoreTypes.SuggestionName, GlobalSearchTypes.Suggest<'tDocument> list>) =
             { state with Suggest = Some value }
 
         [<CustomOperation("terminatedEarly")>]
@@ -81,7 +81,7 @@ module AsyncSearchTypesBuilders =
             { state with TimedOut = value }
 
         [<CustomOperation("took")>]
-        member _.Took(state: AsyncSearch, value: Types.Long) =
+        member _.Took(state: AsyncSearch, value: CoreTypes.Long) =
             { state with Took = value }
 
     let asyncSearch = AsyncSearchBuilder()
@@ -102,7 +102,7 @@ module AsyncSearchTypesBuilders =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: AsyncSearchResponseBase, value: Types.Id) =
+        member _.Id(state: AsyncSearchResponseBase, value: CoreTypes.Id) =
             { state with Id = Some value }
 
         [<CustomOperation("isPartial")>]
@@ -114,31 +114,31 @@ module AsyncSearchTypesBuilders =
             { state with IsRunning = value }
 
         [<CustomOperation("expirationTime")>]
-        member _.ExpirationTime(state: AsyncSearchResponseBase, value: Types.DateTime) =
+        member _.ExpirationTime(state: AsyncSearchResponseBase, value: CoreTypes.DateTime) =
             { state with ExpirationTime = Some value }
 
         [<CustomOperation("expirationTimeInMillis")>]
-        member _.ExpirationTimeInMillis(state: AsyncSearchResponseBase, value: Types.EpochTime<Types.UnitMillis>) =
+        member _.ExpirationTimeInMillis(state: AsyncSearchResponseBase, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
             { state with ExpirationTimeInMillis = value }
 
         [<CustomOperation("startTime")>]
-        member _.StartTime(state: AsyncSearchResponseBase, value: Types.DateTime) =
+        member _.StartTime(state: AsyncSearchResponseBase, value: CoreTypes.DateTime) =
             { state with StartTime = Some value }
 
         [<CustomOperation("startTimeInMillis")>]
-        member _.StartTimeInMillis(state: AsyncSearchResponseBase, value: Types.EpochTime<Types.UnitMillis>) =
+        member _.StartTimeInMillis(state: AsyncSearchResponseBase, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
             { state with StartTimeInMillis = value }
 
         [<CustomOperation("completionTime")>]
-        member _.CompletionTime(state: AsyncSearchResponseBase, value: Types.DateTime) =
+        member _.CompletionTime(state: AsyncSearchResponseBase, value: CoreTypes.DateTime) =
             { state with CompletionTime = Some value }
 
         [<CustomOperation("completionTimeInMillis")>]
-        member _.CompletionTimeInMillis(state: AsyncSearchResponseBase, value: Types.EpochTime<Types.UnitMillis>) =
+        member _.CompletionTimeInMillis(state: AsyncSearchResponseBase, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
             { state with CompletionTimeInMillis = Some value }
 
         [<CustomOperation("error")>]
-        member _.Error(state: AsyncSearchResponseBase, value: Types.ErrorCause) =
+        member _.Error(state: AsyncSearchResponseBase, value: CoreTypes.ErrorCause) =
             { state with Error = Some value }
 
     let asyncSearchResponseBase = AsyncSearchResponseBaseBuilder()
@@ -167,31 +167,31 @@ module AsyncSearchTypesBuilders =
             { state with IsRunning = value }
 
         [<CustomOperation("expirationTime")>]
-        member _.ExpirationTime(state: AsyncSearchResponseException, value: Types.DateTime) =
+        member _.ExpirationTime(state: AsyncSearchResponseException, value: CoreTypes.DateTime) =
             { state with ExpirationTime = Some value }
 
         [<CustomOperation("expirationTimeInMillis")>]
-        member _.ExpirationTimeInMillis(state: AsyncSearchResponseException, value: Types.EpochTime<Types.UnitMillis>) =
+        member _.ExpirationTimeInMillis(state: AsyncSearchResponseException, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
             { state with ExpirationTimeInMillis = value }
 
         [<CustomOperation("startTime")>]
-        member _.StartTime(state: AsyncSearchResponseException, value: Types.DateTime) =
+        member _.StartTime(state: AsyncSearchResponseException, value: CoreTypes.DateTime) =
             { state with StartTime = Some value }
 
         [<CustomOperation("startTimeInMillis")>]
-        member _.StartTimeInMillis(state: AsyncSearchResponseException, value: Types.EpochTime<Types.UnitMillis>) =
+        member _.StartTimeInMillis(state: AsyncSearchResponseException, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
             { state with StartTimeInMillis = value }
 
         [<CustomOperation("completionTime")>]
-        member _.CompletionTime(state: AsyncSearchResponseException, value: Types.DateTime) =
+        member _.CompletionTime(state: AsyncSearchResponseException, value: CoreTypes.DateTime) =
             { state with CompletionTime = Some value }
 
         [<CustomOperation("completionTimeInMillis")>]
-        member _.CompletionTimeInMillis(state: AsyncSearchResponseException, value: Types.EpochTime<Types.UnitMillis>) =
+        member _.CompletionTimeInMillis(state: AsyncSearchResponseException, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
             { state with CompletionTimeInMillis = Some value }
 
         [<CustomOperation("error")>]
-        member _.Error(state: AsyncSearchResponseException, value: Types.ErrorCause) =
+        member _.Error(state: AsyncSearchResponseException, value: CoreTypes.ErrorCause) =
             { state with Error = Some value }
 
         [<CustomOperation("response")>]

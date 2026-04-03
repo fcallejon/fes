@@ -59,11 +59,11 @@ module SpecUtilsBuilders =
             { state with V = Some value }
 
         [<CustomOperation("bytes")>]
-        member _.Bytes(state: CommonCatQueryParameters, value: Types.Bytes) =
+        member _.Bytes(state: CommonCatQueryParameters, value: CoreTypes.Bytes) =
             { state with Bytes = Some value }
 
         [<CustomOperation("time")>]
-        member _.Time(state: CommonCatQueryParameters, value: Types.TimeUnit) =
+        member _.Time(state: CommonCatQueryParameters, value: CoreTypes.TimeUnit) =
             { state with Time = Some value }
 
     let commonCatQueryParameters = CommonCatQueryParametersBuilder()

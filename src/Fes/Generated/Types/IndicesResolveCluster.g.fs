@@ -18,6 +18,6 @@ module IndicesResolveCluster =
         [<System.Text.Json.Serialization.JsonPropertyName("error")>]
         Error: string option
         [<System.Text.Json.Serialization.JsonPropertyName("version")>]
-        Version: Types.ElasticsearchVersionMinInfo option
+        Version: CoreTypes.ElasticsearchVersionMinInfo option
     }
 

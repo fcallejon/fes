@@ -10,21 +10,21 @@ module SimulateIngest =
     /// The results of ingest simulation on a single document. The _source of the document contains
     type IngestDocumentSimulation = {
         [<System.Text.Json.Serialization.JsonPropertyName("_id")>]
-        Id: Types.Id
+        Id: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("_index")>]
-        Index: Types.IndexName
+        Index: CoreTypes.IndexName
         [<System.Text.Json.Serialization.JsonPropertyName("_source")>]
         Source: Map<string, System.Text.Json.JsonElement>
         [<System.Text.Json.Serialization.JsonPropertyName("_version")>]
-        Version: SpecUtils.Stringified<Types.VersionNumber>
+        Version: CoreTypes.Stringified<CoreTypes.VersionNumber>
         [<System.Text.Json.Serialization.JsonPropertyName("executed_pipelines")>]
         ExecutedPipelines: string list
         [<System.Text.Json.Serialization.JsonPropertyName("ignored_fields")>]
         IgnoredFields: Map<string, string> list option
         [<System.Text.Json.Serialization.JsonPropertyName("error")>]
-        Error: Types.ErrorCause option
+        Error: CoreTypes.ErrorCause option
         [<System.Text.Json.Serialization.JsonPropertyName("effective_mapping")>]
-        EffectiveMapping: TypesMapping.TypeMapping option
+        EffectiveMapping: CoreTypes.TypeMapping option
     }
 
     [<RequireQualifiedAccess>]
@@ -34,6 +34,6 @@ module SimulateIngest =
 
     type SimulateIngestDocumentResult = {
         [<System.Text.Json.Serialization.JsonPropertyName("doc")>]
-        Doc: SimulateIngest.IngestDocumentSimulation option
+        Doc: IngestDocumentSimulation option
     }
 

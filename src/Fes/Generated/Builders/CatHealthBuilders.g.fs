@@ -30,11 +30,11 @@ module CatHealthBuilders =
             }
 
         [<CustomOperation("epoch")>]
-        member _.Epoch(state: HealthRecord, value: SpecUtils.Stringified<Types.EpochTime<Types.UnitSeconds>>) =
+        member _.Epoch(state: HealthRecord, value: CoreTypes.Stringified<CoreTypes.EpochTime<CoreTypes.UnitSeconds>>) =
             { state with Epoch = Some value }
 
         [<CustomOperation("timestamp")>]
-        member _.Timestamp(state: HealthRecord, value: Types.TimeOfDay) =
+        member _.Timestamp(state: HealthRecord, value: CoreTypes.TimeOfDay) =
             { state with Timestamp = Some value }
 
         [<CustomOperation("cluster")>]

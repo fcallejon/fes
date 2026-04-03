@@ -15,9 +15,9 @@ module WatcherTypes =
 
     type AcknowledgeState = {
         [<System.Text.Json.Serialization.JsonPropertyName("state")>]
-        State: WatcherTypes.AcknowledgementOptions
+        State: AcknowledgementOptions
         [<System.Text.Json.Serialization.JsonPropertyName("timestamp")>]
-        Timestamp: Types.DateTime
+        Timestamp: CoreTypes.DateTime
     }
 
     [<RequireQualifiedAccess>]
@@ -49,36 +49,36 @@ module WatcherTypes =
 
     type ScriptCondition = {
         [<System.Text.Json.Serialization.JsonPropertyName("lang")>]
-        Lang: Types.ScriptLanguage option
+        Lang: CoreTypes.ScriptLanguage option
         [<System.Text.Json.Serialization.JsonPropertyName("params")>]
         Params: Map<string, System.Text.Json.JsonElement> option
         [<System.Text.Json.Serialization.JsonPropertyName("source")>]
-        Source: Types.ScriptSource option
+        Source: CoreTypes.ScriptSource option
         [<System.Text.Json.Serialization.JsonPropertyName("id")>]
         Id: string option
     }
 
     [<RequireQualifiedAccess>]
     type ConditionContainer =
-        | Always of WatcherTypes.AlwaysCondition
-        | ArrayCompare of field: string * WatcherTypes.ArrayCompareCondition
-        | Compare of field: string * Map<WatcherTypes.ConditionOp, Types.FieldValue>
-        | Never of WatcherTypes.NeverCondition
-        | Script of WatcherTypes.ScriptCondition
+        | Always of AlwaysCondition
+        | ArrayCompare of field: string * ArrayCompareCondition
+        | Compare of field: string * Map<ConditionOp, CoreTypes.FieldValue>
+        | Never of NeverCondition
+        | Script of ScriptCondition
 
     type IndexAction = {
         [<System.Text.Json.Serialization.JsonPropertyName("index")>]
-        Index: Types.IndexName
+        Index: CoreTypes.IndexName
         [<System.Text.Json.Serialization.JsonPropertyName("doc_id")>]
-        DocId: Types.Id option
+        DocId: CoreTypes.Id option
         [<System.Text.Json.Serialization.JsonPropertyName("refresh")>]
-        Refresh: Types.Refresh option
+        Refresh: CoreTypes.Refresh option
         [<System.Text.Json.Serialization.JsonPropertyName("op_type")>]
-        OpType: Types.OpType option
+        OpType: CoreTypes.OpType option
         [<System.Text.Json.Serialization.JsonPropertyName("timeout")>]
-        Timeout: Types.Duration option
+        Timeout: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("execution_time_field")>]
-        ExecutionTimeField: Types.Field option
+        ExecutionTimeField: CoreTypes.Field option
     }
 
     type LoggingAction = {
@@ -107,14 +107,14 @@ module WatcherTypes =
 
     type HttpInputBasicAuthentication = {
         [<System.Text.Json.Serialization.JsonPropertyName("password")>]
-        Password: Types.Password
+        Password: CoreTypes.Password
         [<System.Text.Json.Serialization.JsonPropertyName("username")>]
-        Username: Types.Username
+        Username: CoreTypes.Username
     }
 
     type HttpInputAuthentication = {
         [<System.Text.Json.Serialization.JsonPropertyName("basic")>]
-        Basic: WatcherTypes.HttpInputBasicAuthentication
+        Basic: HttpInputBasicAuthentication
     }
 
     [<RequireQualifiedAccess>]
@@ -127,9 +127,9 @@ module WatcherTypes =
 
     type HttpInputProxy = {
         [<System.Text.Json.Serialization.JsonPropertyName("host")>]
-        Host: Types.Host
+        Host: CoreTypes.Host
         [<System.Text.Json.Serialization.JsonPropertyName("port")>]
-        Port: Types.Uint
+        Port: CoreTypes.Uint
     }
 
     [<RequireQualifiedAccess>]
@@ -139,29 +139,29 @@ module WatcherTypes =
 
     type HttpInputRequestDefinition = {
         [<System.Text.Json.Serialization.JsonPropertyName("auth")>]
-        Auth: WatcherTypes.HttpInputAuthentication option
+        Auth: HttpInputAuthentication option
         [<System.Text.Json.Serialization.JsonPropertyName("body")>]
         Body: string option
         [<System.Text.Json.Serialization.JsonPropertyName("connection_timeout")>]
-        ConnectionTimeout: Types.Duration option
+        ConnectionTimeout: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("headers")>]
         Headers: Map<string, string> option
         [<System.Text.Json.Serialization.JsonPropertyName("host")>]
-        Host: Types.Host option
+        Host: CoreTypes.Host option
         [<System.Text.Json.Serialization.JsonPropertyName("method")>]
-        Method: WatcherTypes.HttpInputMethod option
+        Method: HttpInputMethod option
         [<System.Text.Json.Serialization.JsonPropertyName("params")>]
         Params: Map<string, string> option
         [<System.Text.Json.Serialization.JsonPropertyName("path")>]
         Path: string option
         [<System.Text.Json.Serialization.JsonPropertyName("port")>]
-        Port: Types.Uint option
+        Port: CoreTypes.Uint option
         [<System.Text.Json.Serialization.JsonPropertyName("proxy")>]
-        Proxy: WatcherTypes.HttpInputProxy option
+        Proxy: HttpInputProxy option
         [<System.Text.Json.Serialization.JsonPropertyName("read_timeout")>]
-        ReadTimeout: Types.Duration option
+        ReadTimeout: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("scheme")>]
-        Scheme: WatcherTypes.ConnectionScheme option
+        Scheme: ConnectionScheme option
         [<System.Text.Json.Serialization.JsonPropertyName("url")>]
         Url: string option
     }
@@ -172,7 +172,7 @@ module WatcherTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("inline")>]
         Inline: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("request")>]
-        Request: WatcherTypes.HttpInputRequestDefinition option
+        Request: HttpInputRequestDefinition option
     }
 
     type ReportingEmailAttachment = {
@@ -181,11 +181,11 @@ module WatcherTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("inline")>]
         Inline: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("retries")>]
-        Retries: Types.Integer option
+        Retries: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("interval")>]
-        Interval: Types.Duration option
+        Interval: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("request")>]
-        Request: WatcherTypes.HttpInputRequestDefinition option
+        Request: HttpInputRequestDefinition option
     }
 
     [<RequireQualifiedAccess>]
@@ -195,38 +195,38 @@ module WatcherTypes =
 
     type DataEmailAttachment = {
         [<System.Text.Json.Serialization.JsonPropertyName("format")>]
-        Format: WatcherTypes.DataAttachmentFormat option
+        Format: DataAttachmentFormat option
     }
 
     [<RequireQualifiedAccess>]
     type EmailAttachmentContainer =
-        | Http of WatcherTypes.HttpEmailAttachment
-        | Reporting of WatcherTypes.ReportingEmailAttachment
-        | Data of WatcherTypes.DataEmailAttachment
+        | Http of HttpEmailAttachment
+        | Reporting of ReportingEmailAttachment
+        | Data of DataEmailAttachment
 
     type Email = {
         [<System.Text.Json.Serialization.JsonPropertyName("id")>]
-        Id: Types.Id option
+        Id: CoreTypes.Id option
         [<System.Text.Json.Serialization.JsonPropertyName("bcc")>]
         Bcc: System.Text.Json.JsonElement option
         [<System.Text.Json.Serialization.JsonPropertyName("body")>]
-        Body: WatcherTypes.EmailBody option
+        Body: EmailBody option
         [<System.Text.Json.Serialization.JsonPropertyName("cc")>]
         Cc: System.Text.Json.JsonElement option
         [<System.Text.Json.Serialization.JsonPropertyName("from")>]
         From: string option
         [<System.Text.Json.Serialization.JsonPropertyName("priority")>]
-        Priority: WatcherTypes.EmailPriority option
+        Priority: EmailPriority option
         [<System.Text.Json.Serialization.JsonPropertyName("reply_to")>]
         ReplyTo: System.Text.Json.JsonElement option
         [<System.Text.Json.Serialization.JsonPropertyName("sent_date")>]
-        SentDate: Types.DateTime option
+        SentDate: CoreTypes.DateTime option
         [<System.Text.Json.Serialization.JsonPropertyName("subject")>]
         Subject: string
         [<System.Text.Json.Serialization.JsonPropertyName("to")>]
         To: System.Text.Json.JsonElement
         [<System.Text.Json.Serialization.JsonPropertyName("attachments")>]
-        Attachments: Map<string, WatcherTypes.EmailAttachmentContainer> option
+        Attachments: Map<string, EmailAttachmentContainer> option
     }
 
     type EmailAction = System.Text.Json.JsonElement
@@ -242,7 +242,7 @@ module WatcherTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("src")>]
         Src: string option
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
-        Type: WatcherTypes.PagerDutyContextType
+        Type: PagerDutyContextType
     }
 
     [<RequireQualifiedAccess>]
@@ -253,9 +253,9 @@ module WatcherTypes =
 
     type PagerDutyEventProxy = {
         [<System.Text.Json.Serialization.JsonPropertyName("host")>]
-        Host: Types.Host option
+        Host: CoreTypes.Host option
         [<System.Text.Json.Serialization.JsonPropertyName("port")>]
-        Port: Types.Integer option
+        Port: CoreTypes.Integer option
     }
 
     type PagerDutyEvent = {
@@ -268,15 +268,15 @@ module WatcherTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("client_url")>]
         ClientUrl: string option
         [<System.Text.Json.Serialization.JsonPropertyName("contexts")>]
-        Contexts: WatcherTypes.PagerDutyContext list option
+        Contexts: PagerDutyContext list option
         [<System.Text.Json.Serialization.JsonPropertyName("description")>]
         Description: string
         [<System.Text.Json.Serialization.JsonPropertyName("event_type")>]
-        EventType: WatcherTypes.PagerDutyEventType option
+        EventType: PagerDutyEventType option
         [<System.Text.Json.Serialization.JsonPropertyName("incident_key")>]
         IncidentKey: string
         [<System.Text.Json.Serialization.JsonPropertyName("proxy")>]
-        Proxy: WatcherTypes.PagerDutyEventProxy option
+        Proxy: PagerDutyEventProxy option
     }
 
     type PagerDutyAction = System.Text.Json.JsonElement
@@ -302,7 +302,7 @@ module WatcherTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("fallback")>]
         Fallback: string option
         [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
-        Fields: WatcherTypes.SlackAttachmentField list option
+        Fields: SlackAttachmentField list option
         [<System.Text.Json.Serialization.JsonPropertyName("footer")>]
         Footer: string option
         [<System.Text.Json.Serialization.JsonPropertyName("footer_icon")>]
@@ -320,21 +320,21 @@ module WatcherTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("title_link")>]
         TitleLink: string option
         [<System.Text.Json.Serialization.JsonPropertyName("ts")>]
-        Ts: Types.EpochTime<Types.UnitSeconds> option
+        Ts: CoreTypes.EpochTime<CoreTypes.UnitSeconds> option
     }
 
     type SlackDynamicAttachment = {
         [<System.Text.Json.Serialization.JsonPropertyName("attachment_template")>]
-        AttachmentTemplate: WatcherTypes.SlackAttachment
+        AttachmentTemplate: SlackAttachment
         [<System.Text.Json.Serialization.JsonPropertyName("list_path")>]
         ListPath: string
     }
 
     type SlackMessage = {
         [<System.Text.Json.Serialization.JsonPropertyName("attachments")>]
-        Attachments: WatcherTypes.SlackAttachment list
+        Attachments: SlackAttachment list
         [<System.Text.Json.Serialization.JsonPropertyName("dynamic_attachments")>]
-        DynamicAttachments: WatcherTypes.SlackDynamicAttachment option
+        DynamicAttachments: SlackDynamicAttachment option
         [<System.Text.Json.Serialization.JsonPropertyName("from")>]
         From: string
         [<System.Text.Json.Serialization.JsonPropertyName("icon")>]
@@ -349,40 +349,40 @@ module WatcherTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("account")>]
         Account: string option
         [<System.Text.Json.Serialization.JsonPropertyName("message")>]
-        Message: WatcherTypes.SlackMessage
+        Message: SlackMessage
     }
 
     type WebhookAction = System.Text.Json.JsonElement
 
     type Action = {
         [<System.Text.Json.Serialization.JsonPropertyName("action_type")>]
-        ActionType: WatcherTypes.ActionType option
+        ActionType: ActionType option
         [<System.Text.Json.Serialization.JsonPropertyName("condition")>]
-        Condition: WatcherTypes.ConditionContainer option
+        Condition: ConditionContainer option
         [<System.Text.Json.Serialization.JsonPropertyName("foreach")>]
         Foreach: string option
         [<System.Text.Json.Serialization.JsonPropertyName("max_iterations")>]
-        MaxIterations: Types.Integer option
+        MaxIterations: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.Name option
+        Name: CoreTypes.Name option
         [<System.Text.Json.Serialization.JsonPropertyName("throttle_period")>]
-        ThrottlePeriod: Types.Duration option
+        ThrottlePeriod: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("throttle_period_in_millis")>]
-        ThrottlePeriodInMillis: Types.DurationValue<Types.UnitMillis> option
+        ThrottlePeriodInMillis: CoreTypes.DurationValue<CoreTypes.UnitMillis> option
         [<System.Text.Json.Serialization.JsonPropertyName("transform")>]
-        Transform: Types.TransformContainer option
+        Transform: CoreTypes.TransformContainer option
         [<System.Text.Json.Serialization.JsonPropertyName("index")>]
-        Index: WatcherTypes.IndexAction option
+        Index: IndexAction option
         [<System.Text.Json.Serialization.JsonPropertyName("logging")>]
-        Logging: WatcherTypes.LoggingAction option
+        Logging: LoggingAction option
         [<System.Text.Json.Serialization.JsonPropertyName("email")>]
-        Email: WatcherTypes.EmailAction option
+        Email: EmailAction option
         [<System.Text.Json.Serialization.JsonPropertyName("pagerduty")>]
-        Pagerduty: WatcherTypes.PagerDutyAction option
+        Pagerduty: PagerDutyAction option
         [<System.Text.Json.Serialization.JsonPropertyName("slack")>]
-        Slack: WatcherTypes.SlackAction option
+        Slack: SlackAction option
         [<System.Text.Json.Serialization.JsonPropertyName("webhook")>]
-        Webhook: WatcherTypes.WebhookAction option
+        Webhook: WebhookAction option
     }
 
     [<RequireQualifiedAccess>]
@@ -397,7 +397,7 @@ module WatcherTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("successful")>]
         Successful: bool
         [<System.Text.Json.Serialization.JsonPropertyName("timestamp")>]
-        Timestamp: Types.DateTime
+        Timestamp: CoreTypes.DateTime
         [<System.Text.Json.Serialization.JsonPropertyName("reason")>]
         Reason: string option
     }
@@ -406,18 +406,18 @@ module WatcherTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("reason")>]
         Reason: string
         [<System.Text.Json.Serialization.JsonPropertyName("timestamp")>]
-        Timestamp: Types.DateTime
+        Timestamp: CoreTypes.DateTime
     }
 
     type ActionStatus = {
         [<System.Text.Json.Serialization.JsonPropertyName("ack")>]
-        Ack: WatcherTypes.AcknowledgeState
+        Ack: AcknowledgeState
         [<System.Text.Json.Serialization.JsonPropertyName("last_execution")>]
-        LastExecution: WatcherTypes.ExecutionState option
+        LastExecution: ExecutionState option
         [<System.Text.Json.Serialization.JsonPropertyName("last_successful_execution")>]
-        LastSuccessfulExecution: WatcherTypes.ExecutionState option
+        LastSuccessfulExecution: ExecutionState option
         [<System.Text.Json.Serialization.JsonPropertyName("last_throttle")>]
-        LastThrottle: WatcherTypes.ThrottleState option
+        LastThrottle: ThrottleState option
     }
 
     [<RequireQualifiedAccess>]
@@ -427,22 +427,22 @@ module WatcherTypes =
         | Simulated
         | Throttled
 
-    type Actions = Map<Types.IndexName, WatcherTypes.ActionStatus>
+    type Actions = Map<CoreTypes.IndexName, ActionStatus>
 
     type ActivationState = {
         [<System.Text.Json.Serialization.JsonPropertyName("active")>]
         Active: bool
         [<System.Text.Json.Serialization.JsonPropertyName("timestamp")>]
-        Timestamp: Types.DateTime
+        Timestamp: CoreTypes.DateTime
     }
 
     type ActivationStatus = {
         [<System.Text.Json.Serialization.JsonPropertyName("actions")>]
-        Actions: WatcherTypes.Actions
+        Actions: Actions
         [<System.Text.Json.Serialization.JsonPropertyName("state")>]
-        State: WatcherTypes.ActivationState
+        State: ActivationState
         [<System.Text.Json.Serialization.JsonPropertyName("version")>]
-        Version: Types.VersionNumber
+        Version: CoreTypes.VersionNumber
     }
 
     [<RequireQualifiedAccess>]
@@ -452,9 +452,9 @@ module WatcherTypes =
 
     type ArrayCompareOpParams = {
         [<System.Text.Json.Serialization.JsonPropertyName("quantifier")>]
-        Quantifier: WatcherTypes.Quantifier
+        Quantifier: Quantifier
         [<System.Text.Json.Serialization.JsonPropertyName("value")>]
-        Value: Types.FieldValue
+        Value: CoreTypes.FieldValue
     }
 
     [<RequireQualifiedAccess>]
@@ -467,21 +467,21 @@ module WatcherTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("extract")>]
         Extract: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("request")>]
-        Request: WatcherTypes.HttpInputRequestDefinition option
+        Request: HttpInputRequestDefinition option
         [<System.Text.Json.Serialization.JsonPropertyName("response_content_type")>]
-        ResponseContentType: WatcherTypes.ResponseContentType option
+        ResponseContentType: ResponseContentType option
     }
 
     type SearchInputRequestBody = {
         [<System.Text.Json.Serialization.JsonPropertyName("query")>]
-        Query: TypesQueryDsl.QueryContainer
+        Query: CoreTypes.QueryContainer
     }
 
     type SearchTemplateRequestBody = {
         [<System.Text.Json.Serialization.JsonPropertyName("explain")>]
         Explain: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("id")>]
-        Id: Types.Id option
+        Id: CoreTypes.Id option
         [<System.Text.Json.Serialization.JsonPropertyName("params")>]
         Params: Map<string, System.Text.Json.JsonElement> option
         [<System.Text.Json.Serialization.JsonPropertyName("profile")>]
@@ -492,15 +492,15 @@ module WatcherTypes =
 
     type SearchInputRequestDefinition = {
         [<System.Text.Json.Serialization.JsonPropertyName("body")>]
-        Body: WatcherTypes.SearchInputRequestBody option
+        Body: SearchInputRequestBody option
         [<System.Text.Json.Serialization.JsonPropertyName("indices")>]
-        Indices: Types.IndexName list option
+        Indices: CoreTypes.IndexName list option
         [<System.Text.Json.Serialization.JsonPropertyName("indices_options")>]
-        IndicesOptions: Types.IndicesOptions option
+        IndicesOptions: CoreTypes.IndicesOptions option
         [<System.Text.Json.Serialization.JsonPropertyName("search_type")>]
-        SearchType: Types.SearchType option
+        SearchType: CoreTypes.SearchType option
         [<System.Text.Json.Serialization.JsonPropertyName("template")>]
-        Template: WatcherTypes.SearchTemplateRequestBody option
+        Template: SearchTemplateRequestBody option
         [<System.Text.Json.Serialization.JsonPropertyName("rest_total_hits_as_int")>]
         RestTotalHitsAsInt: bool option
     }
@@ -509,20 +509,20 @@ module WatcherTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("extract")>]
         Extract: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("request")>]
-        Request: WatcherTypes.SearchInputRequestDefinition
+        Request: SearchInputRequestDefinition
         [<System.Text.Json.Serialization.JsonPropertyName("timeout")>]
-        Timeout: Types.Duration option
+        Timeout: CoreTypes.Duration option
     }
 
     type ChainInput = {
         [<System.Text.Json.Serialization.JsonPropertyName("inputs")>]
-        Inputs: Map<string, WatcherTypes.InputContainer> list
+        Inputs: Map<string, InputContainer> list
     }
 
     and [<RequireQualifiedAccess>] InputContainer =
-        | Chain of WatcherTypes.ChainInput
-        | Http of WatcherTypes.HttpInput
-        | Search of WatcherTypes.SearchInput
+        | Chain of ChainInput
+        | Http of HttpInput
+        | Search of SearchInput
         | Simple of Map<string, System.Text.Json.JsonElement>
 
     [<RequireQualifiedAccess>]
@@ -537,20 +537,20 @@ module WatcherTypes =
 
     type HourAndMinute = {
         [<System.Text.Json.Serialization.JsonPropertyName("hour")>]
-        Hour: Types.Integer list
+        Hour: CoreTypes.Integer list
         [<System.Text.Json.Serialization.JsonPropertyName("minute")>]
-        Minute: Types.Integer list
+        Minute: CoreTypes.Integer list
     }
 
     /// A time of day, expressed either as `hh:mm`, `noon`, `midnight`, or an hour/minutes structure.
     [<RequireQualifiedAccess>]
     type ScheduleTimeOfDay =
         | String of string
-        | HourAndMinute of WatcherTypes.HourAndMinute
+        | HourAndMinute of HourAndMinute
 
     type DailySchedule = {
         [<System.Text.Json.Serialization.JsonPropertyName("at")>]
-        At: WatcherTypes.ScheduleTimeOfDay list
+        At: ScheduleTimeOfDay list
     }
 
     [<RequireQualifiedAccess>]
@@ -567,7 +567,7 @@ module WatcherTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("account")>]
         Account: string option
         [<System.Text.Json.Serialization.JsonPropertyName("message")>]
-        Message: WatcherTypes.Email
+        Message: Email
         [<System.Text.Json.Serialization.JsonPropertyName("reason")>]
         Reason: string option
     }
@@ -587,18 +587,18 @@ module WatcherTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("created")>]
         Created: bool
         [<System.Text.Json.Serialization.JsonPropertyName("id")>]
-        Id: Types.Id
+        Id: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("index")>]
-        Index: Types.IndexName
+        Index: CoreTypes.IndexName
         [<System.Text.Json.Serialization.JsonPropertyName("result")>]
-        Result: Types.Result
+        Result: CoreTypes.Result
         [<System.Text.Json.Serialization.JsonPropertyName("version")>]
-        Version: Types.VersionNumber
+        Version: CoreTypes.VersionNumber
     }
 
     type IndexResult = {
         [<System.Text.Json.Serialization.JsonPropertyName("response")>]
-        Response: WatcherTypes.IndexResultSummary
+        Response: IndexResultSummary
     }
 
     type LoggingResult = {
@@ -612,68 +612,68 @@ module WatcherTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("body")>]
         Body: string
         [<System.Text.Json.Serialization.JsonPropertyName("headers")>]
-        Headers: Types.HttpHeaders
+        Headers: CoreTypes.HttpHeaders
         [<System.Text.Json.Serialization.JsonPropertyName("status")>]
-        Status: Types.Integer
+        Status: CoreTypes.Integer
     }
 
     type PagerDutyResult = {
         [<System.Text.Json.Serialization.JsonPropertyName("event")>]
-        Event: WatcherTypes.PagerDutyEvent
+        Event: PagerDutyEvent
         [<System.Text.Json.Serialization.JsonPropertyName("reason")>]
         Reason: string option
         [<System.Text.Json.Serialization.JsonPropertyName("request")>]
-        Request: WatcherTypes.HttpInputRequestResult option
+        Request: HttpInputRequestResult option
         [<System.Text.Json.Serialization.JsonPropertyName("response")>]
-        Response: WatcherTypes.HttpInputResponseResult option
+        Response: HttpInputResponseResult option
     }
 
     type SlackResult = {
         [<System.Text.Json.Serialization.JsonPropertyName("account")>]
         Account: string option
         [<System.Text.Json.Serialization.JsonPropertyName("message")>]
-        Message: WatcherTypes.SlackMessage
+        Message: SlackMessage
     }
 
     type WebhookResult = {
         [<System.Text.Json.Serialization.JsonPropertyName("request")>]
-        Request: WatcherTypes.HttpInputRequestResult
+        Request: HttpInputRequestResult
         [<System.Text.Json.Serialization.JsonPropertyName("response")>]
-        Response: WatcherTypes.HttpInputResponseResult option
+        Response: HttpInputResponseResult option
     }
 
     type ExecutionResultAction = {
         [<System.Text.Json.Serialization.JsonPropertyName("email")>]
-        Email: WatcherTypes.EmailResult option
+        Email: EmailResult option
         [<System.Text.Json.Serialization.JsonPropertyName("id")>]
-        Id: Types.Id
+        Id: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("index")>]
-        Index: WatcherTypes.IndexResult option
+        Index: IndexResult option
         [<System.Text.Json.Serialization.JsonPropertyName("logging")>]
-        Logging: WatcherTypes.LoggingResult option
+        Logging: LoggingResult option
         [<System.Text.Json.Serialization.JsonPropertyName("pagerduty")>]
-        Pagerduty: WatcherTypes.PagerDutyResult option
+        Pagerduty: PagerDutyResult option
         [<System.Text.Json.Serialization.JsonPropertyName("reason")>]
         Reason: string option
         [<System.Text.Json.Serialization.JsonPropertyName("slack")>]
-        Slack: WatcherTypes.SlackResult option
+        Slack: SlackResult option
         [<System.Text.Json.Serialization.JsonPropertyName("status")>]
-        Status: WatcherTypes.ActionStatusOptions
+        Status: ActionStatusOptions
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
-        Type: WatcherTypes.ActionType
+        Type: ActionType
         [<System.Text.Json.Serialization.JsonPropertyName("webhook")>]
-        Webhook: WatcherTypes.WebhookResult option
+        Webhook: WebhookResult option
         [<System.Text.Json.Serialization.JsonPropertyName("error")>]
-        Error: Types.ErrorCause option
+        Error: CoreTypes.ErrorCause option
     }
 
     type ExecutionResultCondition = {
         [<System.Text.Json.Serialization.JsonPropertyName("met")>]
         Met: bool
         [<System.Text.Json.Serialization.JsonPropertyName("status")>]
-        Status: WatcherTypes.ActionStatusOptions
+        Status: ActionStatusOptions
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
-        Type: WatcherTypes.ConditionType
+        Type: ConditionType
     }
 
     [<RequireQualifiedAccess>]
@@ -686,22 +686,22 @@ module WatcherTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("payload")>]
         Payload: Map<string, System.Text.Json.JsonElement>
         [<System.Text.Json.Serialization.JsonPropertyName("status")>]
-        Status: WatcherTypes.ActionStatusOptions
+        Status: ActionStatusOptions
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
-        Type: WatcherTypes.InputType
+        Type: InputType
     }
 
     type ExecutionResult = {
         [<System.Text.Json.Serialization.JsonPropertyName("actions")>]
-        Actions: WatcherTypes.ExecutionResultAction list
+        Actions: ExecutionResultAction list
         [<System.Text.Json.Serialization.JsonPropertyName("condition")>]
-        Condition: WatcherTypes.ExecutionResultCondition
+        Condition: ExecutionResultCondition
         [<System.Text.Json.Serialization.JsonPropertyName("execution_duration")>]
-        ExecutionDuration: Types.DurationValue<Types.UnitMillis>
+        ExecutionDuration: CoreTypes.DurationValue<CoreTypes.UnitMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("execution_time")>]
-        ExecutionTime: Types.DateTime
+        ExecutionTime: CoreTypes.DateTime
         [<System.Text.Json.Serialization.JsonPropertyName("input")>]
-        Input: WatcherTypes.ExecutionResultInput
+        Input: ExecutionResultInput
     }
 
     [<RequireQualifiedAccess>]
@@ -717,14 +717,14 @@ module WatcherTypes =
 
     type ExecutionThreadPool = {
         [<System.Text.Json.Serialization.JsonPropertyName("max_size")>]
-        MaxSize: Types.Long
+        MaxSize: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("queue_size")>]
-        QueueSize: Types.Long
+        QueueSize: CoreTypes.Long
     }
 
     type HourlySchedule = {
         [<System.Text.Json.Serialization.JsonPropertyName("minute")>]
-        Minute: Types.Integer list
+        Minute: CoreTypes.Integer list
     }
 
     [<RequireQualifiedAccess>]
@@ -744,15 +744,15 @@ module WatcherTypes =
 
     type WatchStatus = {
         [<System.Text.Json.Serialization.JsonPropertyName("actions")>]
-        Actions: WatcherTypes.Actions
+        Actions: Actions
         [<System.Text.Json.Serialization.JsonPropertyName("last_checked")>]
-        LastChecked: Types.DateTime option
+        LastChecked: CoreTypes.DateTime option
         [<System.Text.Json.Serialization.JsonPropertyName("last_met_condition")>]
-        LastMetCondition: Types.DateTime option
+        LastMetCondition: CoreTypes.DateTime option
         [<System.Text.Json.Serialization.JsonPropertyName("state")>]
-        State: WatcherTypes.ActivationState
+        State: ActivationState
         [<System.Text.Json.Serialization.JsonPropertyName("version")>]
-        Version: Types.VersionNumber
+        Version: CoreTypes.VersionNumber
         [<System.Text.Json.Serialization.JsonPropertyName("execution_state")>]
         ExecutionState: string option
     }
@@ -761,99 +761,99 @@ module WatcherTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("at")>]
         At: string list
         [<System.Text.Json.Serialization.JsonPropertyName("on")>]
-        On: Types.Integer list
+        On: CoreTypes.Integer list
     }
 
     type TimeOfWeek = {
         [<System.Text.Json.Serialization.JsonPropertyName("at")>]
         At: string list
         [<System.Text.Json.Serialization.JsonPropertyName("on")>]
-        On: WatcherTypes.Day list
+        On: Day list
     }
 
     type TimeOfYear = {
         [<System.Text.Json.Serialization.JsonPropertyName("at")>]
         At: string list
         [<System.Text.Json.Serialization.JsonPropertyName("int")>]
-        Int: WatcherTypes.Month list
+        Int: Month list
         [<System.Text.Json.Serialization.JsonPropertyName("on")>]
-        On: Types.Integer list
+        On: CoreTypes.Integer list
     }
 
     [<RequireQualifiedAccess>]
     type ScheduleContainer =
         | Timezone of string
-        | Cron of WatcherTypes.CronExpression
-        | Daily of WatcherTypes.DailySchedule
-        | Hourly of WatcherTypes.HourlySchedule
-        | Interval of Types.Duration
+        | Cron of CronExpression
+        | Daily of DailySchedule
+        | Hourly of HourlySchedule
+        | Interval of CoreTypes.Duration
         | Monthly of System.Text.Json.JsonElement
         | Weekly of System.Text.Json.JsonElement
         | Yearly of System.Text.Json.JsonElement
 
     [<RequireQualifiedAccess>]
     type TriggerContainer =
-        | Schedule of WatcherTypes.ScheduleContainer
+        | Schedule of ScheduleContainer
 
     type Watch = {
         [<System.Text.Json.Serialization.JsonPropertyName("actions")>]
-        Actions: Map<Types.IndexName, WatcherTypes.Action>
+        Actions: Map<CoreTypes.IndexName, Action>
         [<System.Text.Json.Serialization.JsonPropertyName("condition")>]
-        Condition: WatcherTypes.ConditionContainer
+        Condition: ConditionContainer
         [<System.Text.Json.Serialization.JsonPropertyName("input")>]
-        Input: WatcherTypes.InputContainer
+        Input: InputContainer
         [<System.Text.Json.Serialization.JsonPropertyName("metadata")>]
-        Metadata: Types.Metadata option
+        Metadata: CoreTypes.Metadata option
         [<System.Text.Json.Serialization.JsonPropertyName("status")>]
-        Status: WatcherTypes.WatchStatus option
+        Status: WatchStatus option
         [<System.Text.Json.Serialization.JsonPropertyName("throttle_period")>]
-        ThrottlePeriod: Types.Duration option
+        ThrottlePeriod: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("throttle_period_in_millis")>]
-        ThrottlePeriodInMillis: Types.DurationValue<Types.UnitMillis> option
+        ThrottlePeriodInMillis: CoreTypes.DurationValue<CoreTypes.UnitMillis> option
         [<System.Text.Json.Serialization.JsonPropertyName("transform")>]
-        Transform: Types.TransformContainer option
+        Transform: CoreTypes.TransformContainer option
         [<System.Text.Json.Serialization.JsonPropertyName("trigger")>]
-        Trigger: WatcherTypes.TriggerContainer
+        Trigger: TriggerContainer
     }
 
     type QueryWatch = {
         [<System.Text.Json.Serialization.JsonPropertyName("_id")>]
-        Id: Types.Id
+        Id: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("status")>]
-        Status: WatcherTypes.WatchStatus option
+        Status: WatchStatus option
         [<System.Text.Json.Serialization.JsonPropertyName("watch")>]
-        Watch: WatcherTypes.Watch option
+        Watch: Watch option
         [<System.Text.Json.Serialization.JsonPropertyName("_primary_term")>]
-        PrimaryTerm: Types.Integer option
+        PrimaryTerm: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("_seq_no")>]
-        SeqNo: Types.SequenceNumber option
+        SeqNo: CoreTypes.SequenceNumber option
     }
 
     type ScheduleTriggerEvent = {
         [<System.Text.Json.Serialization.JsonPropertyName("scheduled_time")>]
-        ScheduledTime: Types.DateTime
+        ScheduledTime: CoreTypes.DateTime
         [<System.Text.Json.Serialization.JsonPropertyName("triggered_time")>]
-        TriggeredTime: Types.DateTime option
+        TriggeredTime: CoreTypes.DateTime option
     }
 
     type SimulatedActions = {
         [<System.Text.Json.Serialization.JsonPropertyName("actions")>]
         Actions: string list
         [<System.Text.Json.Serialization.JsonPropertyName("all")>]
-        All: WatcherTypes.SimulatedActions
+        All: SimulatedActions
         [<System.Text.Json.Serialization.JsonPropertyName("use_all")>]
         UseAll: bool
     }
 
     [<RequireQualifiedAccess>]
     type TriggerEventContainer =
-        | Schedule of WatcherTypes.ScheduleTriggerEvent
+        | Schedule of ScheduleTriggerEvent
 
     type TriggerEventResult = {
         [<System.Text.Json.Serialization.JsonPropertyName("manual")>]
-        Manual: WatcherTypes.TriggerEventContainer
+        Manual: TriggerEventContainer
         [<System.Text.Json.Serialization.JsonPropertyName("triggered_time")>]
-        TriggeredTime: Types.DateTime
+        TriggeredTime: CoreTypes.DateTime
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
     }

@@ -20,7 +20,7 @@ module CatTemplatesBuilders =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: TemplatesRecord, value: Types.Name) =
+        member _.Name(state: TemplatesRecord, value: CoreTypes.Name) =
             { state with Name = Some value }
 
         [<CustomOperation("indexPatterns")>]
@@ -32,7 +32,7 @@ module CatTemplatesBuilders =
             { state with Order = Some value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: TemplatesRecord, value: Types.VersionString option) =
+        member _.Version(state: TemplatesRecord, value: CoreTypes.VersionString option) =
             { state with Version = Some value }
 
         [<CustomOperation("composedOf")>]

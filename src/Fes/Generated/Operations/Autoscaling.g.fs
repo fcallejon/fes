@@ -12,9 +12,9 @@ open Fes
 module AutoscalingOperations =
 
     type AutoscalingDeleteAutoscalingPolicyRequest = {
-        Name: Types.Name
-        MasterTimeout: Types.Duration option
-        Timeout: Types.Duration option
+        Name: CoreTypes.Name
+        MasterTimeout: CoreTypes.Duration option
+        Timeout: CoreTypes.Duration option
     }
 
         with
@@ -36,7 +36,7 @@ module AutoscalingOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type AutoscalingDeleteAutoscalingPolicyResponse = Types.AcknowledgedResponseBase
+    type AutoscalingDeleteAutoscalingPolicyResponse = CoreTypes.AcknowledgedResponseBase
 
     type AutoscalingDeleteAutoscalingPolicyRequestBuilder() =
         member _.Yield(_: unit) : AutoscalingDeleteAutoscalingPolicyRequest =
@@ -47,27 +47,27 @@ module AutoscalingOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: AutoscalingDeleteAutoscalingPolicyRequest, value: Types.Name) =
+        member _.Name(state: AutoscalingDeleteAutoscalingPolicyRequest, value: CoreTypes.Name) =
             { state with Name = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: AutoscalingDeleteAutoscalingPolicyRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: AutoscalingDeleteAutoscalingPolicyRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: AutoscalingDeleteAutoscalingPolicyRequest, value: Types.Duration) =
+        member _.Timeout(state: AutoscalingDeleteAutoscalingPolicyRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
     let autoscalingDeleteAutoscalingPolicyRequest = AutoscalingDeleteAutoscalingPolicyRequestBuilder()
 
     module DeleteAutoscalingPolicy =
-        let withMasterTimeout (value: Types.Duration) (req: AutoscalingDeleteAutoscalingPolicyRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: AutoscalingDeleteAutoscalingPolicyRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: Types.Duration) (req: AutoscalingDeleteAutoscalingPolicyRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: AutoscalingDeleteAutoscalingPolicyRequest) =
             { req with Timeout = Some value }
 
     type AutoscalingGetAutoscalingCapacityRequest = {
-        MasterTimeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
     }
 
         with
@@ -97,18 +97,18 @@ module AutoscalingOperations =
             }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: AutoscalingGetAutoscalingCapacityRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: AutoscalingGetAutoscalingCapacityRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
     let autoscalingGetAutoscalingCapacityRequest = AutoscalingGetAutoscalingCapacityRequestBuilder()
 
     module GetAutoscalingCapacity =
-        let withMasterTimeout (value: Types.Duration) (req: AutoscalingGetAutoscalingCapacityRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: AutoscalingGetAutoscalingCapacityRequest) =
             { req with MasterTimeout = Some value }
 
     type AutoscalingGetAutoscalingPolicyRequest = {
-        Name: Types.Name
-        MasterTimeout: Types.Duration option
+        Name: CoreTypes.Name
+        MasterTimeout: CoreTypes.Duration option
     }
 
         with
@@ -139,23 +139,23 @@ module AutoscalingOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: AutoscalingGetAutoscalingPolicyRequest, value: Types.Name) =
+        member _.Name(state: AutoscalingGetAutoscalingPolicyRequest, value: CoreTypes.Name) =
             { state with Name = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: AutoscalingGetAutoscalingPolicyRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: AutoscalingGetAutoscalingPolicyRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
     let autoscalingGetAutoscalingPolicyRequest = AutoscalingGetAutoscalingPolicyRequestBuilder()
 
     module GetAutoscalingPolicy =
-        let withMasterTimeout (value: Types.Duration) (req: AutoscalingGetAutoscalingPolicyRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: AutoscalingGetAutoscalingPolicyRequest) =
             { req with MasterTimeout = Some value }
 
     type AutoscalingPutAutoscalingPolicyRequest = {
-        Name: Types.Name
-        MasterTimeout: Types.Duration option
-        Timeout: Types.Duration option
+        Name: CoreTypes.Name
+        MasterTimeout: CoreTypes.Duration option
+        Timeout: CoreTypes.Duration option
         Document: obj
     }
 
@@ -179,7 +179,7 @@ module AutoscalingOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type AutoscalingPutAutoscalingPolicyResponse = Types.AcknowledgedResponseBase
+    type AutoscalingPutAutoscalingPolicyResponse = CoreTypes.AcknowledgedResponseBase
 
     type AutoscalingPutAutoscalingPolicyRequestBuilder() =
         member _.Yield(_: unit) : AutoscalingPutAutoscalingPolicyRequest =
@@ -191,15 +191,15 @@ module AutoscalingOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: AutoscalingPutAutoscalingPolicyRequest, value: Types.Name) =
+        member _.Name(state: AutoscalingPutAutoscalingPolicyRequest, value: CoreTypes.Name) =
             { state with Name = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: AutoscalingPutAutoscalingPolicyRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: AutoscalingPutAutoscalingPolicyRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: AutoscalingPutAutoscalingPolicyRequest, value: Types.Duration) =
+        member _.Timeout(state: AutoscalingPutAutoscalingPolicyRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("document")>]
@@ -209,8 +209,8 @@ module AutoscalingOperations =
     let autoscalingPutAutoscalingPolicyRequest = AutoscalingPutAutoscalingPolicyRequestBuilder()
 
     module PutAutoscalingPolicy =
-        let withMasterTimeout (value: Types.Duration) (req: AutoscalingPutAutoscalingPolicyRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: AutoscalingPutAutoscalingPolicyRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: Types.Duration) (req: AutoscalingPutAutoscalingPolicyRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: AutoscalingPutAutoscalingPolicyRequest) =
             { req with Timeout = Some value }
 

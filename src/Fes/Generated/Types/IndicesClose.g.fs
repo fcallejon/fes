@@ -9,13 +9,13 @@ module IndicesClose =
 
     type CloseShardResult = {
         [<System.Text.Json.Serialization.JsonPropertyName("failures")>]
-        Failures: Types.ShardFailure list
+        Failures: CoreTypes.ShardFailure list
     }
 
     type CloseIndexResult = {
         [<System.Text.Json.Serialization.JsonPropertyName("closed")>]
         Closed: bool
         [<System.Text.Json.Serialization.JsonPropertyName("shards")>]
-        Shards: Map<string, IndicesClose.CloseShardResult> option
+        Shards: Map<string, CloseShardResult> option
     }
 

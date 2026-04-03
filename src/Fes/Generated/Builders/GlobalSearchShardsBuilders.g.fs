@@ -17,11 +17,11 @@ module GlobalSearchShardsBuilders =
             }
 
         [<CustomOperation("aliases")>]
-        member _.Aliases(state: ShardStoreIndex, value: Types.Name list) =
+        member _.Aliases(state: ShardStoreIndex, value: CoreTypes.Name list) =
             { state with Aliases = Some value }
 
         [<CustomOperation("filter")>]
-        member _.Filter(state: ShardStoreIndex, value: TypesQueryDsl.QueryContainer) =
+        member _.Filter(state: ShardStoreIndex, value: CoreTypes.QueryContainer) =
             { state with Filter = Some value }
 
     let shardStoreIndex = ShardStoreIndexBuilder()

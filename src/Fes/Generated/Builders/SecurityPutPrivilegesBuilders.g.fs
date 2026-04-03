@@ -27,11 +27,11 @@ module SecurityPutPrivilegesBuilders =
             { state with Application = Some value }
 
         [<CustomOperation("name")>]
-        member _.Name(state: Actions, value: Types.Name) =
+        member _.Name(state: Actions, value: CoreTypes.Name) =
             { state with Name = Some value }
 
         [<CustomOperation("metadata")>]
-        member _.Metadata(state: Actions, value: Types.Metadata) =
+        member _.Metadata(state: Actions, value: CoreTypes.Metadata) =
             { state with Metadata = Some value }
 
     let actions = ActionsBuilder()

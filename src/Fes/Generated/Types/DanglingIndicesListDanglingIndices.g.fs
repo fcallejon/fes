@@ -13,8 +13,8 @@ module DanglingIndicesListDanglingIndices =
         [<System.Text.Json.Serialization.JsonPropertyName("index_uuid")>]
         IndexUuid: string
         [<System.Text.Json.Serialization.JsonPropertyName("creation_date_millis")>]
-        CreationDateMillis: Types.EpochTime<Types.UnitMillis>
+        CreationDateMillis: CoreTypes.EpochTime<CoreTypes.UnitMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("node_ids")>]
-        NodeIds: Types.Ids
+        NodeIds: CoreTypes.Ids
     }
 

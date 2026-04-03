@@ -9,23 +9,23 @@ module XpackUsage =
 
     type AnalyticsStatistics = {
         [<System.Text.Json.Serialization.JsonPropertyName("boxplot_usage")>]
-        BoxplotUsage: Types.Long
+        BoxplotUsage: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("cumulative_cardinality_usage")>]
-        CumulativeCardinalityUsage: Types.Long
+        CumulativeCardinalityUsage: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("string_stats_usage")>]
-        StringStatsUsage: Types.Long
+        StringStatsUsage: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("top_metrics_usage")>]
-        TopMetricsUsage: Types.Long
+        TopMetricsUsage: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("t_test_usage")>]
-        TTestUsage: Types.Long
+        TTestUsage: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("moving_percentiles_usage")>]
-        MovingPercentilesUsage: Types.Long
+        MovingPercentilesUsage: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("normalize_usage")>]
-        NormalizeUsage: Types.Long
+        NormalizeUsage: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("rate_usage")>]
-        RateUsage: Types.Long
+        RateUsage: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("multi_terms_usage")>]
-        MultiTermsUsage: Types.Long option
+        MultiTermsUsage: CoreTypes.Long option
     }
 
     type Base = {
@@ -37,12 +37,12 @@ module XpackUsage =
 
     type Analytics = {
         [<System.Text.Json.Serialization.JsonPropertyName("stats")>]
-        Stats: XpackUsage.AnalyticsStatistics
+        Stats: AnalyticsStatistics
     }
 
     type Archive = {
         [<System.Text.Json.Serialization.JsonPropertyName("indices_count")>]
-        IndicesCount: Types.Long
+        IndicesCount: CoreTypes.Long
     }
 
     type FeatureToggle = {
@@ -57,152 +57,152 @@ module XpackUsage =
 
     type Ccr = {
         [<System.Text.Json.Serialization.JsonPropertyName("auto_follow_patterns_count")>]
-        AutoFollowPatternsCount: Types.Integer
+        AutoFollowPatternsCount: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("follower_indices_count")>]
-        FollowerIndicesCount: Types.Integer
+        FollowerIndicesCount: CoreTypes.Integer
     }
 
     type Counter = {
         [<System.Text.Json.Serialization.JsonPropertyName("active")>]
-        Active: Types.Long
+        Active: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("total")>]
-        Total: Types.Long
+        Total: CoreTypes.Long
     }
 
     type DataStreams = {
         [<System.Text.Json.Serialization.JsonPropertyName("data_streams")>]
-        DataStreams: Types.Long
+        DataStreams: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("indices_count")>]
-        IndicesCount: Types.Long
+        IndicesCount: CoreTypes.Long
     }
 
     type DataTierPhaseStatistics = {
         [<System.Text.Json.Serialization.JsonPropertyName("node_count")>]
-        NodeCount: Types.Long
+        NodeCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("index_count")>]
-        IndexCount: Types.Long
+        IndexCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("total_shard_count")>]
-        TotalShardCount: Types.Long
+        TotalShardCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("primary_shard_count")>]
-        PrimaryShardCount: Types.Long
+        PrimaryShardCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("doc_count")>]
-        DocCount: Types.Long
+        DocCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("total_size_bytes")>]
-        TotalSizeBytes: Types.Long
+        TotalSizeBytes: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("primary_size_bytes")>]
-        PrimarySizeBytes: Types.Long
+        PrimarySizeBytes: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("primary_shard_size_avg_bytes")>]
-        PrimaryShardSizeAvgBytes: Types.Long
+        PrimaryShardSizeAvgBytes: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("primary_shard_size_median_bytes")>]
-        PrimaryShardSizeMedianBytes: Types.Long
+        PrimaryShardSizeMedianBytes: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("primary_shard_size_mad_bytes")>]
-        PrimaryShardSizeMadBytes: Types.Long
+        PrimaryShardSizeMadBytes: CoreTypes.Long
     }
 
     type DataTiers = {
         [<System.Text.Json.Serialization.JsonPropertyName("data_warm")>]
-        DataWarm: XpackUsage.DataTierPhaseStatistics
+        DataWarm: DataTierPhaseStatistics
         [<System.Text.Json.Serialization.JsonPropertyName("data_frozen")>]
-        DataFrozen: XpackUsage.DataTierPhaseStatistics option
+        DataFrozen: DataTierPhaseStatistics option
         [<System.Text.Json.Serialization.JsonPropertyName("data_cold")>]
-        DataCold: XpackUsage.DataTierPhaseStatistics
+        DataCold: DataTierPhaseStatistics
         [<System.Text.Json.Serialization.JsonPropertyName("data_content")>]
-        DataContent: XpackUsage.DataTierPhaseStatistics
+        DataContent: DataTierPhaseStatistics
         [<System.Text.Json.Serialization.JsonPropertyName("data_hot")>]
-        DataHot: XpackUsage.DataTierPhaseStatistics
+        DataHot: DataTierPhaseStatistics
     }
 
     type Datafeed = {
         [<System.Text.Json.Serialization.JsonPropertyName("count")>]
-        Count: Types.Long
+        Count: CoreTypes.Long
     }
 
     type EqlFeaturesJoin = {
         [<System.Text.Json.Serialization.JsonPropertyName("join_queries_two")>]
-        JoinQueriesTwo: Types.Uint
+        JoinQueriesTwo: CoreTypes.Uint
         [<System.Text.Json.Serialization.JsonPropertyName("join_queries_three")>]
-        JoinQueriesThree: Types.Uint
+        JoinQueriesThree: CoreTypes.Uint
         [<System.Text.Json.Serialization.JsonPropertyName("join_until")>]
-        JoinUntil: Types.Uint
+        JoinUntil: CoreTypes.Uint
         [<System.Text.Json.Serialization.JsonPropertyName("join_queries_five_or_more")>]
-        JoinQueriesFiveOrMore: Types.Uint
+        JoinQueriesFiveOrMore: CoreTypes.Uint
         [<System.Text.Json.Serialization.JsonPropertyName("join_queries_four")>]
-        JoinQueriesFour: Types.Uint
+        JoinQueriesFour: CoreTypes.Uint
     }
 
     type EqlFeaturesKeys = {
         [<System.Text.Json.Serialization.JsonPropertyName("join_keys_two")>]
-        JoinKeysTwo: Types.Uint
+        JoinKeysTwo: CoreTypes.Uint
         [<System.Text.Json.Serialization.JsonPropertyName("join_keys_one")>]
-        JoinKeysOne: Types.Uint
+        JoinKeysOne: CoreTypes.Uint
         [<System.Text.Json.Serialization.JsonPropertyName("join_keys_three")>]
-        JoinKeysThree: Types.Uint
+        JoinKeysThree: CoreTypes.Uint
         [<System.Text.Json.Serialization.JsonPropertyName("join_keys_five_or_more")>]
-        JoinKeysFiveOrMore: Types.Uint
+        JoinKeysFiveOrMore: CoreTypes.Uint
         [<System.Text.Json.Serialization.JsonPropertyName("join_keys_four")>]
-        JoinKeysFour: Types.Uint
+        JoinKeysFour: CoreTypes.Uint
     }
 
     type EqlFeaturesPipes = {
         [<System.Text.Json.Serialization.JsonPropertyName("pipe_tail")>]
-        PipeTail: Types.Uint
+        PipeTail: CoreTypes.Uint
         [<System.Text.Json.Serialization.JsonPropertyName("pipe_head")>]
-        PipeHead: Types.Uint
+        PipeHead: CoreTypes.Uint
     }
 
     type EqlFeaturesSequences = {
         [<System.Text.Json.Serialization.JsonPropertyName("sequence_queries_three")>]
-        SequenceQueriesThree: Types.Uint
+        SequenceQueriesThree: CoreTypes.Uint
         [<System.Text.Json.Serialization.JsonPropertyName("sequence_queries_four")>]
-        SequenceQueriesFour: Types.Uint
+        SequenceQueriesFour: CoreTypes.Uint
         [<System.Text.Json.Serialization.JsonPropertyName("sequence_queries_two")>]
-        SequenceQueriesTwo: Types.Uint
+        SequenceQueriesTwo: CoreTypes.Uint
         [<System.Text.Json.Serialization.JsonPropertyName("sequence_until")>]
-        SequenceUntil: Types.Uint
+        SequenceUntil: CoreTypes.Uint
         [<System.Text.Json.Serialization.JsonPropertyName("sequence_queries_five_or_more")>]
-        SequenceQueriesFiveOrMore: Types.Uint
+        SequenceQueriesFiveOrMore: CoreTypes.Uint
         [<System.Text.Json.Serialization.JsonPropertyName("sequence_maxspan")>]
-        SequenceMaxspan: Types.Uint
+        SequenceMaxspan: CoreTypes.Uint
     }
 
     type EqlFeatures = {
         [<System.Text.Json.Serialization.JsonPropertyName("join")>]
-        Join: Types.Uint
+        Join: CoreTypes.Uint
         [<System.Text.Json.Serialization.JsonPropertyName("joins")>]
-        Joins: XpackUsage.EqlFeaturesJoin
+        Joins: EqlFeaturesJoin
         [<System.Text.Json.Serialization.JsonPropertyName("keys")>]
-        Keys: XpackUsage.EqlFeaturesKeys
+        Keys: EqlFeaturesKeys
         [<System.Text.Json.Serialization.JsonPropertyName("event")>]
-        Event: Types.Uint
+        Event: CoreTypes.Uint
         [<System.Text.Json.Serialization.JsonPropertyName("pipes")>]
-        Pipes: XpackUsage.EqlFeaturesPipes
+        Pipes: EqlFeaturesPipes
         [<System.Text.Json.Serialization.JsonPropertyName("sequence")>]
-        Sequence: Types.Uint
+        Sequence: CoreTypes.Uint
         [<System.Text.Json.Serialization.JsonPropertyName("sequences")>]
-        Sequences: XpackUsage.EqlFeaturesSequences
+        Sequences: EqlFeaturesSequences
     }
 
     type Query = {
         [<System.Text.Json.Serialization.JsonPropertyName("count")>]
-        Count: Types.Integer option
+        Count: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("failed")>]
-        Failed: Types.Integer option
+        Failed: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("paging")>]
-        Paging: Types.Integer option
+        Paging: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("total")>]
-        Total: Types.Integer option
+        Total: CoreTypes.Integer option
     }
 
     type Eql = {
         [<System.Text.Json.Serialization.JsonPropertyName("features")>]
-        Features: XpackUsage.EqlFeatures
+        Features: EqlFeatures
         [<System.Text.Json.Serialization.JsonPropertyName("queries")>]
-        Queries: Map<string, XpackUsage.Query>
+        Queries: Map<string, Query>
     }
 
     type Flattened = {
         [<System.Text.Json.Serialization.JsonPropertyName("field_count")>]
-        FieldCount: Types.Integer
+        FieldCount: CoreTypes.Integer
     }
 
     /// Per-node GPU statistics for vector indexing.
@@ -210,65 +210,65 @@ module XpackUsage =
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("memory_in_bytes")>]
-        MemoryInBytes: Types.Long
+        MemoryInBytes: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("enabled")>]
         Enabled: bool
         [<System.Text.Json.Serialization.JsonPropertyName("index_build_count")>]
-        IndexBuildCount: Types.Long
+        IndexBuildCount: CoreTypes.Long
     }
 
     /// GPU vector indexing usage statistics.
     type GpuVectorIndexing = {
         [<System.Text.Json.Serialization.JsonPropertyName("index_build_count")>]
-        IndexBuildCount: Types.Long
+        IndexBuildCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("nodes_with_gpu")>]
-        NodesWithGpu: Types.Integer
+        NodesWithGpu: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("nodes")>]
-        Nodes: XpackUsage.GpuNodeStats list
+        Nodes: GpuNodeStats list
     }
 
     type Invocations = {
         [<System.Text.Json.Serialization.JsonPropertyName("total")>]
-        Total: Types.Long
+        Total: CoreTypes.Long
     }
 
     type HealthStatistics = {
         [<System.Text.Json.Serialization.JsonPropertyName("invocations")>]
-        Invocations: XpackUsage.Invocations
+        Invocations: Invocations
     }
 
     type Phase = {
         [<System.Text.Json.Serialization.JsonPropertyName("actions")>]
         Actions: string list
         [<System.Text.Json.Serialization.JsonPropertyName("min_age")>]
-        MinAge: Types.DurationValue<Types.UnitMillis>
+        MinAge: CoreTypes.DurationValue<CoreTypes.UnitMillis>
     }
 
     type Phases = {
         [<System.Text.Json.Serialization.JsonPropertyName("cold")>]
-        Cold: XpackUsage.Phase option
+        Cold: Phase option
         [<System.Text.Json.Serialization.JsonPropertyName("delete")>]
-        Delete: XpackUsage.Phase option
+        Delete: Phase option
         [<System.Text.Json.Serialization.JsonPropertyName("frozen")>]
-        Frozen: XpackUsage.Phase option
+        Frozen: Phase option
         [<System.Text.Json.Serialization.JsonPropertyName("hot")>]
-        Hot: XpackUsage.Phase option
+        Hot: Phase option
         [<System.Text.Json.Serialization.JsonPropertyName("warm")>]
-        Warm: XpackUsage.Phase option
+        Warm: Phase option
     }
 
     type IlmPolicyStatistics = {
         [<System.Text.Json.Serialization.JsonPropertyName("indices_managed")>]
-        IndicesManaged: Types.Integer
+        IndicesManaged: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("phases")>]
-        Phases: XpackUsage.Phases
+        Phases: Phases
     }
 
     type Ilm = {
         [<System.Text.Json.Serialization.JsonPropertyName("policy_count")>]
-        PolicyCount: Types.Integer
+        PolicyCount: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("policy_stats")>]
-        PolicyStats: XpackUsage.IlmPolicyStatistics list
+        PolicyStats: IlmPolicyStatistics list
     }
 
     type IpFilter = {
@@ -280,20 +280,20 @@ module XpackUsage =
 
     type MlJobForecasts = {
         [<System.Text.Json.Serialization.JsonPropertyName("total")>]
-        Total: Types.Long
+        Total: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("forecasted_jobs")>]
-        ForecastedJobs: Types.Long
+        ForecastedJobs: CoreTypes.Long
     }
 
     type JobUsage = {
         [<System.Text.Json.Serialization.JsonPropertyName("count")>]
-        Count: Types.Integer
+        Count: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("created_by")>]
-        CreatedBy: Map<string, Types.Long>
+        CreatedBy: Map<string, CoreTypes.Long>
         [<System.Text.Json.Serialization.JsonPropertyName("detectors")>]
         Detectors: MlTypes.JobStatistics
         [<System.Text.Json.Serialization.JsonPropertyName("forecasts")>]
-        Forecasts: XpackUsage.MlJobForecasts
+        Forecasts: MlJobForecasts
         [<System.Text.Json.Serialization.JsonPropertyName("model_size")>]
         ModelSize: MlTypes.JobStatistics
     }
@@ -305,71 +305,71 @@ module XpackUsage =
 
     type MlDataFrameAnalyticsJobsCount = {
         [<System.Text.Json.Serialization.JsonPropertyName("count")>]
-        Count: Types.Long
+        Count: CoreTypes.Long
     }
 
     type MlDataFrameAnalyticsJobsAnalysis = {
         [<System.Text.Json.Serialization.JsonPropertyName("classification")>]
-        Classification: Types.Integer option
+        Classification: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("outlier_detection")>]
-        OutlierDetection: Types.Integer option
+        OutlierDetection: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("regression")>]
-        Regression: Types.Integer option
+        Regression: CoreTypes.Integer option
     }
 
     type MlDataFrameAnalyticsJobs = {
         [<System.Text.Json.Serialization.JsonPropertyName("memory_usage")>]
-        MemoryUsage: XpackUsage.MlDataFrameAnalyticsJobsMemory option
+        MemoryUsage: MlDataFrameAnalyticsJobsMemory option
         [<System.Text.Json.Serialization.JsonPropertyName("_all")>]
-        All: XpackUsage.MlDataFrameAnalyticsJobsCount
+        All: MlDataFrameAnalyticsJobsCount
         [<System.Text.Json.Serialization.JsonPropertyName("analysis_counts")>]
-        AnalysisCounts: XpackUsage.MlDataFrameAnalyticsJobsAnalysis option
+        AnalysisCounts: MlDataFrameAnalyticsJobsAnalysis option
         [<System.Text.Json.Serialization.JsonPropertyName("stopped")>]
-        Stopped: XpackUsage.MlDataFrameAnalyticsJobsCount option
+        Stopped: MlDataFrameAnalyticsJobsCount option
     }
 
     type MlInferenceIngestProcessorCount = {
         [<System.Text.Json.Serialization.JsonPropertyName("max")>]
-        Max: Types.Long
+        Max: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("sum")>]
-        Sum: Types.Long
+        Sum: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("min")>]
-        Min: Types.Long
+        Min: CoreTypes.Long
     }
 
     type MlCounter = {
         [<System.Text.Json.Serialization.JsonPropertyName("count")>]
-        Count: Types.Long
+        Count: CoreTypes.Long
     }
 
     type MlInferenceIngestProcessor = {
         [<System.Text.Json.Serialization.JsonPropertyName("num_docs_processed")>]
-        NumDocsProcessed: XpackUsage.MlInferenceIngestProcessorCount
+        NumDocsProcessed: MlInferenceIngestProcessorCount
         [<System.Text.Json.Serialization.JsonPropertyName("pipelines")>]
-        Pipelines: XpackUsage.MlCounter
+        Pipelines: MlCounter
         [<System.Text.Json.Serialization.JsonPropertyName("num_failures")>]
-        NumFailures: XpackUsage.MlInferenceIngestProcessorCount
+        NumFailures: MlInferenceIngestProcessorCount
         [<System.Text.Json.Serialization.JsonPropertyName("time_ms")>]
-        TimeMs: XpackUsage.MlInferenceIngestProcessorCount
+        TimeMs: MlInferenceIngestProcessorCount
     }
 
     type MlInferenceTrainedModelsCount = {
         [<System.Text.Json.Serialization.JsonPropertyName("total")>]
-        Total: Types.Long
+        Total: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("prepackaged")>]
-        Prepackaged: Types.Long
+        Prepackaged: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("other")>]
-        Other: Types.Long
+        Other: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("pass_through")>]
-        PassThrough: Types.Long option
+        PassThrough: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("regression")>]
-        Regression: Types.Long option
+        Regression: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("classification")>]
-        Classification: Types.Long option
+        Classification: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("ner")>]
-        Ner: Types.Long option
+        Ner: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("text_embedding")>]
-        TextEmbedding: Types.Long option
+        TextEmbedding: CoreTypes.Long option
     }
 
     type MlInferenceTrainedModels = {
@@ -378,72 +378,72 @@ module XpackUsage =
         [<System.Text.Json.Serialization.JsonPropertyName("estimated_heap_memory_usage_bytes")>]
         EstimatedHeapMemoryUsageBytes: MlTypes.JobStatistics option
         [<System.Text.Json.Serialization.JsonPropertyName("count")>]
-        Count: XpackUsage.MlInferenceTrainedModelsCount option
+        Count: MlInferenceTrainedModelsCount option
         [<System.Text.Json.Serialization.JsonPropertyName("_all")>]
-        All: XpackUsage.MlCounter
+        All: MlCounter
         [<System.Text.Json.Serialization.JsonPropertyName("model_size_bytes")>]
         ModelSizeBytes: MlTypes.JobStatistics option
     }
 
     type MlInferenceDeploymentsTimeMs = {
         [<System.Text.Json.Serialization.JsonPropertyName("avg")>]
-        Avg: Types.Double
+        Avg: CoreTypes.Double
     }
 
     type MlInferenceDeployments = {
         [<System.Text.Json.Serialization.JsonPropertyName("count")>]
-        Count: Types.Integer
+        Count: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("inference_counts")>]
         InferenceCounts: MlTypes.JobStatistics
         [<System.Text.Json.Serialization.JsonPropertyName("model_sizes_bytes")>]
         ModelSizesBytes: MlTypes.JobStatistics
         [<System.Text.Json.Serialization.JsonPropertyName("time_ms")>]
-        TimeMs: XpackUsage.MlInferenceDeploymentsTimeMs
+        TimeMs: MlInferenceDeploymentsTimeMs
     }
 
     type MlInference = {
         [<System.Text.Json.Serialization.JsonPropertyName("ingest_processors")>]
-        IngestProcessors: Map<string, XpackUsage.MlInferenceIngestProcessor>
+        IngestProcessors: Map<string, MlInferenceIngestProcessor>
         [<System.Text.Json.Serialization.JsonPropertyName("trained_models")>]
-        TrainedModels: XpackUsage.MlInferenceTrainedModels
+        TrainedModels: MlInferenceTrainedModels
         [<System.Text.Json.Serialization.JsonPropertyName("deployments")>]
-        Deployments: XpackUsage.MlInferenceDeployments option
+        Deployments: MlInferenceDeployments option
     }
 
     type MachineLearning = {
         [<System.Text.Json.Serialization.JsonPropertyName("datafeeds")>]
-        Datafeeds: Map<string, XpackUsage.Datafeed>
+        Datafeeds: Map<string, Datafeed>
         [<System.Text.Json.Serialization.JsonPropertyName("jobs")>]
-        Jobs: Map<string, XpackUsage.JobUsage>
+        Jobs: Map<string, JobUsage>
         [<System.Text.Json.Serialization.JsonPropertyName("node_count")>]
-        NodeCount: Types.Integer
+        NodeCount: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("data_frame_analytics_jobs")>]
-        DataFrameAnalyticsJobs: XpackUsage.MlDataFrameAnalyticsJobs
+        DataFrameAnalyticsJobs: MlDataFrameAnalyticsJobs
         [<System.Text.Json.Serialization.JsonPropertyName("inference")>]
-        Inference: XpackUsage.MlInference
+        Inference: MlInference
     }
 
     type Monitoring = {
         [<System.Text.Json.Serialization.JsonPropertyName("collection_enabled")>]
         CollectionEnabled: bool
         [<System.Text.Json.Serialization.JsonPropertyName("enabled_exporters")>]
-        EnabledExporters: Map<string, Types.Long>
+        EnabledExporters: Map<string, CoreTypes.Long>
     }
 
     type RealmCache = {
         [<System.Text.Json.Serialization.JsonPropertyName("size")>]
-        Size: Types.Long
+        Size: CoreTypes.Long
     }
 
     type Realm = {
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
         Name: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("order")>]
-        Order: Types.Long list option
+        Order: CoreTypes.Long list option
         [<System.Text.Json.Serialization.JsonPropertyName("size")>]
-        Size: Types.Long list option
+        Size: CoreTypes.Long list option
         [<System.Text.Json.Serialization.JsonPropertyName("cache")>]
-        Cache: XpackUsage.RealmCache list option
+        Cache: RealmCache list option
         [<System.Text.Json.Serialization.JsonPropertyName("has_authorization_realms")>]
         HasAuthorizationRealms: bool list option
         [<System.Text.Json.Serialization.JsonPropertyName("has_default_username_pattern")>]
@@ -456,54 +456,54 @@ module XpackUsage =
 
     type RoleMapping = {
         [<System.Text.Json.Serialization.JsonPropertyName("enabled")>]
-        Enabled: Types.Integer
+        Enabled: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("size")>]
-        Size: Types.Integer
+        Size: CoreTypes.Integer
     }
 
     type RuntimeFieldsType = {
         [<System.Text.Json.Serialization.JsonPropertyName("chars_max")>]
-        CharsMax: Types.Long
+        CharsMax: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("chars_total")>]
-        CharsTotal: Types.Long
+        CharsTotal: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("count")>]
-        Count: Types.Long
+        Count: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("doc_max")>]
-        DocMax: Types.Long
+        DocMax: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("doc_total")>]
-        DocTotal: Types.Long
+        DocTotal: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("index_count")>]
-        IndexCount: Types.Long
+        IndexCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("lang")>]
         Lang: string list
         [<System.Text.Json.Serialization.JsonPropertyName("lines_max")>]
-        LinesMax: Types.Long
+        LinesMax: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("lines_total")>]
-        LinesTotal: Types.Long
+        LinesTotal: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.Field
+        Name: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("scriptless_count")>]
-        ScriptlessCount: Types.Long
+        ScriptlessCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("shadowed_count")>]
-        ShadowedCount: Types.Long
+        ShadowedCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("source_max")>]
-        SourceMax: Types.Long
+        SourceMax: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("source_total")>]
-        SourceTotal: Types.Long
+        SourceTotal: CoreTypes.Long
     }
 
     type RuntimeFieldTypes = {
         [<System.Text.Json.Serialization.JsonPropertyName("field_types")>]
-        FieldTypes: XpackUsage.RuntimeFieldsType list
+        FieldTypes: RuntimeFieldsType list
     }
 
     type SearchableSnapshots = {
         [<System.Text.Json.Serialization.JsonPropertyName("indices_count")>]
-        IndicesCount: Types.Integer
+        IndicesCount: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("full_copy_indices_count")>]
-        FullCopyIndicesCount: Types.Integer option
+        FullCopyIndicesCount: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("shared_cache_indices_count")>]
-        SharedCacheIndicesCount: Types.Integer option
+        SharedCacheIndicesCount: CoreTypes.Integer option
     }
 
     type SecurityRolesNative = {
@@ -512,31 +512,31 @@ module XpackUsage =
         [<System.Text.Json.Serialization.JsonPropertyName("fls")>]
         Fls: bool
         [<System.Text.Json.Serialization.JsonPropertyName("size")>]
-        Size: Types.Long
+        Size: CoreTypes.Long
     }
 
     type SecurityRolesDlsBitSetCache = {
         [<System.Text.Json.Serialization.JsonPropertyName("count")>]
-        Count: Types.Integer
+        Count: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("memory")>]
-        Memory: Types.ByteSize option
+        Memory: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("memory_in_bytes")>]
-        MemoryInBytes: Types.Ulong
+        MemoryInBytes: CoreTypes.Ulong
         [<System.Text.Json.Serialization.JsonPropertyName("hits")>]
-        Hits: Types.Long
+        Hits: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("misses")>]
-        Misses: Types.Long
+        Misses: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("evictions")>]
-        Evictions: Types.Long
+        Evictions: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("hits_time_in_millis")>]
-        HitsTimeInMillis: Types.DurationValue<Types.UnitMillis>
+        HitsTimeInMillis: CoreTypes.DurationValue<CoreTypes.UnitMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("misses_time_in_millis")>]
-        MissesTimeInMillis: Types.DurationValue<Types.UnitMillis>
+        MissesTimeInMillis: CoreTypes.DurationValue<CoreTypes.UnitMillis>
     }
 
     type SecurityRolesDls = {
         [<System.Text.Json.Serialization.JsonPropertyName("bit_set_cache")>]
-        BitSetCache: XpackUsage.SecurityRolesDlsBitSetCache
+        BitSetCache: SecurityRolesDlsBitSetCache
     }
 
     type SecurityRolesFile = {
@@ -545,118 +545,118 @@ module XpackUsage =
         [<System.Text.Json.Serialization.JsonPropertyName("fls")>]
         Fls: bool
         [<System.Text.Json.Serialization.JsonPropertyName("size")>]
-        Size: Types.Long
+        Size: CoreTypes.Long
     }
 
     type SecurityRoles = {
         [<System.Text.Json.Serialization.JsonPropertyName("native")>]
-        Native: XpackUsage.SecurityRolesNative
+        Native: SecurityRolesNative
         [<System.Text.Json.Serialization.JsonPropertyName("dls")>]
-        Dls: XpackUsage.SecurityRolesDls
+        Dls: SecurityRolesDls
         [<System.Text.Json.Serialization.JsonPropertyName("file")>]
-        File: XpackUsage.SecurityRolesFile
+        File: SecurityRolesFile
     }
 
     type Ssl = {
         [<System.Text.Json.Serialization.JsonPropertyName("http")>]
-        Http: XpackUsage.FeatureToggle
+        Http: FeatureToggle
         [<System.Text.Json.Serialization.JsonPropertyName("transport")>]
-        Transport: XpackUsage.FeatureToggle
+        Transport: FeatureToggle
     }
 
     type Security = {
         [<System.Text.Json.Serialization.JsonPropertyName("api_key_service")>]
-        ApiKeyService: XpackUsage.FeatureToggle
+        ApiKeyService: FeatureToggle
         [<System.Text.Json.Serialization.JsonPropertyName("anonymous")>]
-        Anonymous: XpackUsage.FeatureToggle
+        Anonymous: FeatureToggle
         [<System.Text.Json.Serialization.JsonPropertyName("audit")>]
-        Audit: XpackUsage.Audit
+        Audit: Audit
         [<System.Text.Json.Serialization.JsonPropertyName("fips_140")>]
-        Fips140: XpackUsage.FeatureToggle
+        Fips140: FeatureToggle
         [<System.Text.Json.Serialization.JsonPropertyName("ipfilter")>]
-        Ipfilter: XpackUsage.IpFilter
+        Ipfilter: IpFilter
         [<System.Text.Json.Serialization.JsonPropertyName("realms")>]
-        Realms: Map<string, XpackUsage.Realm>
+        Realms: Map<string, Realm>
         [<System.Text.Json.Serialization.JsonPropertyName("role_mapping")>]
-        RoleMapping: Map<string, XpackUsage.RoleMapping>
+        RoleMapping: Map<string, RoleMapping>
         [<System.Text.Json.Serialization.JsonPropertyName("roles")>]
-        Roles: XpackUsage.SecurityRoles
+        Roles: SecurityRoles
         [<System.Text.Json.Serialization.JsonPropertyName("ssl")>]
-        Ssl: XpackUsage.Ssl
+        Ssl: Ssl
         [<System.Text.Json.Serialization.JsonPropertyName("system_key")>]
-        SystemKey: XpackUsage.FeatureToggle option
+        SystemKey: FeatureToggle option
         [<System.Text.Json.Serialization.JsonPropertyName("token_service")>]
-        TokenService: XpackUsage.FeatureToggle
+        TokenService: FeatureToggle
         [<System.Text.Json.Serialization.JsonPropertyName("operator_privileges")>]
-        OperatorPrivileges: XpackUsage.Base
+        OperatorPrivileges: Base
     }
 
     type Slm = {
         [<System.Text.Json.Serialization.JsonPropertyName("policy_count")>]
-        PolicyCount: Types.Integer option
+        PolicyCount: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("policy_stats")>]
         PolicyStats: SlmTypes.Statistics option
     }
 
     type Sql = {
         [<System.Text.Json.Serialization.JsonPropertyName("features")>]
-        Features: Map<string, Types.Integer>
+        Features: Map<string, CoreTypes.Integer>
         [<System.Text.Json.Serialization.JsonPropertyName("queries")>]
-        Queries: Map<string, XpackUsage.Query>
+        Queries: Map<string, Query>
     }
 
     type Vector = {
         [<System.Text.Json.Serialization.JsonPropertyName("dense_vector_dims_avg_count")>]
-        DenseVectorDimsAvgCount: Types.Integer
+        DenseVectorDimsAvgCount: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("dense_vector_fields_count")>]
-        DenseVectorFieldsCount: Types.Integer
+        DenseVectorFieldsCount: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("sparse_vector_fields_count")>]
-        SparseVectorFieldsCount: Types.Integer option
+        SparseVectorFieldsCount: CoreTypes.Integer option
     }
 
     type WatcherActionTotals = {
         [<System.Text.Json.Serialization.JsonPropertyName("total")>]
-        Total: Types.Duration
+        Total: CoreTypes.Duration
         [<System.Text.Json.Serialization.JsonPropertyName("total_time_in_ms")>]
-        TotalTimeInMs: Types.DurationValue<Types.UnitMillis>
+        TotalTimeInMs: CoreTypes.DurationValue<CoreTypes.UnitMillis>
     }
 
     type WatcherActions = {
         [<System.Text.Json.Serialization.JsonPropertyName("actions")>]
-        Actions: Map<Types.Name, XpackUsage.WatcherActionTotals>
+        Actions: Map<CoreTypes.Name, WatcherActionTotals>
     }
 
     type WatcherWatchTriggerSchedule = {
         [<System.Text.Json.Serialization.JsonPropertyName("cron")>]
-        Cron: XpackUsage.Counter
+        Cron: Counter
         [<System.Text.Json.Serialization.JsonPropertyName("_all")>]
-        All: XpackUsage.Counter
+        All: Counter
     }
 
     type WatcherWatchTrigger = {
         [<System.Text.Json.Serialization.JsonPropertyName("schedule")>]
-        Schedule: XpackUsage.WatcherWatchTriggerSchedule option
+        Schedule: WatcherWatchTriggerSchedule option
         [<System.Text.Json.Serialization.JsonPropertyName("_all")>]
-        All: XpackUsage.Counter
+        All: Counter
     }
 
     type WatcherWatch = {
         [<System.Text.Json.Serialization.JsonPropertyName("input")>]
-        Input: Map<Types.Name, XpackUsage.Counter>
+        Input: Map<CoreTypes.Name, Counter>
         [<System.Text.Json.Serialization.JsonPropertyName("condition")>]
-        Condition: Map<Types.Name, XpackUsage.Counter> option
+        Condition: Map<CoreTypes.Name, Counter> option
         [<System.Text.Json.Serialization.JsonPropertyName("action")>]
-        Action: Map<Types.Name, XpackUsage.Counter> option
+        Action: Map<CoreTypes.Name, Counter> option
         [<System.Text.Json.Serialization.JsonPropertyName("trigger")>]
-        Trigger: XpackUsage.WatcherWatchTrigger
+        Trigger: WatcherWatchTrigger
     }
 
     type Watcher = {
         [<System.Text.Json.Serialization.JsonPropertyName("execution")>]
-        Execution: XpackUsage.WatcherActions
+        Execution: WatcherActions
         [<System.Text.Json.Serialization.JsonPropertyName("watch")>]
-        Watch: XpackUsage.WatcherWatch
+        Watch: WatcherWatch
         [<System.Text.Json.Serialization.JsonPropertyName("count")>]
-        Count: XpackUsage.Counter
+        Count: Counter
     }
 

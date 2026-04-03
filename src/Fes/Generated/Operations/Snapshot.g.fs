@@ -12,9 +12,9 @@ open Fes
 module SnapshotOperations =
 
     type SnapshotCleanupRepositoryRequest = {
-        Repository: Types.Name
-        MasterTimeout: Types.Duration option
-        Timeout: Types.Duration option
+        Repository: CoreTypes.Name
+        MasterTimeout: CoreTypes.Duration option
+        Timeout: CoreTypes.Duration option
     }
 
         with
@@ -47,30 +47,30 @@ module SnapshotOperations =
             }
 
         [<CustomOperation("repository")>]
-        member _.Repository(state: SnapshotCleanupRepositoryRequest, value: Types.Name) =
+        member _.Repository(state: SnapshotCleanupRepositoryRequest, value: CoreTypes.Name) =
             { state with Repository = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: SnapshotCleanupRepositoryRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: SnapshotCleanupRepositoryRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: SnapshotCleanupRepositoryRequest, value: Types.Duration) =
+        member _.Timeout(state: SnapshotCleanupRepositoryRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
     let snapshotCleanupRepositoryRequest = SnapshotCleanupRepositoryRequestBuilder()
 
     module CleanupRepository =
-        let withMasterTimeout (value: Types.Duration) (req: SnapshotCleanupRepositoryRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: SnapshotCleanupRepositoryRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: Types.Duration) (req: SnapshotCleanupRepositoryRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: SnapshotCleanupRepositoryRequest) =
             { req with Timeout = Some value }
 
     type SnapshotCloneRequest = {
-        Repository: Types.Name
-        Snapshot: Types.Name
-        TargetSnapshot: Types.Name
-        MasterTimeout: Types.Duration option
+        Repository: CoreTypes.Name
+        Snapshot: CoreTypes.Name
+        TargetSnapshot: CoreTypes.Name
+        MasterTimeout: CoreTypes.Duration option
         Indices: string
     }
 
@@ -93,7 +93,7 @@ module SnapshotOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type SnapshotCloneResponse = Types.AcknowledgedResponseBase
+    type SnapshotCloneResponse = CoreTypes.AcknowledgedResponseBase
 
     type SnapshotCloneRequestBuilder() =
         member _.Yield(_: unit) : SnapshotCloneRequest =
@@ -106,19 +106,19 @@ module SnapshotOperations =
             }
 
         [<CustomOperation("repository")>]
-        member _.Repository(state: SnapshotCloneRequest, value: Types.Name) =
+        member _.Repository(state: SnapshotCloneRequest, value: CoreTypes.Name) =
             { state with Repository = value }
 
         [<CustomOperation("snapshot")>]
-        member _.Snapshot(state: SnapshotCloneRequest, value: Types.Name) =
+        member _.Snapshot(state: SnapshotCloneRequest, value: CoreTypes.Name) =
             { state with Snapshot = value }
 
         [<CustomOperation("targetSnapshot")>]
-        member _.TargetSnapshot(state: SnapshotCloneRequest, value: Types.Name) =
+        member _.TargetSnapshot(state: SnapshotCloneRequest, value: CoreTypes.Name) =
             { state with TargetSnapshot = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: SnapshotCloneRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: SnapshotCloneRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("indices")>]
@@ -128,22 +128,22 @@ module SnapshotOperations =
     let snapshotCloneRequest = SnapshotCloneRequestBuilder()
 
     module Clone =
-        let withMasterTimeout (value: Types.Duration) (req: SnapshotCloneRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: SnapshotCloneRequest) =
             { req with MasterTimeout = Some value }
         let withIndices (value: string) (req: SnapshotCloneRequest) =
             { req with Indices = value }
 
     type SnapshotCreateRequest = {
-        Repository: Types.Name
-        Snapshot: Types.Name
-        MasterTimeout: Types.Duration option
+        Repository: CoreTypes.Name
+        Snapshot: CoreTypes.Name
+        MasterTimeout: CoreTypes.Duration option
         WaitForCompletion: bool option
-        ExpandWildcards: Types.ExpandWildcards option
+        ExpandWildcards: CoreTypes.ExpandWildcards option
         FeatureStates: string list option
         IgnoreUnavailable: bool option
         IncludeGlobalState: bool option
-        Indices: Types.Indices option
-        Metadata: Types.Metadata option
+        Indices: CoreTypes.Indices option
+        Metadata: CoreTypes.Metadata option
         Partial: bool option
     }
 
@@ -186,15 +186,15 @@ module SnapshotOperations =
             }
 
         [<CustomOperation("repository")>]
-        member _.Repository(state: SnapshotCreateRequest, value: Types.Name) =
+        member _.Repository(state: SnapshotCreateRequest, value: CoreTypes.Name) =
             { state with Repository = value }
 
         [<CustomOperation("snapshot")>]
-        member _.Snapshot(state: SnapshotCreateRequest, value: Types.Name) =
+        member _.Snapshot(state: SnapshotCreateRequest, value: CoreTypes.Name) =
             { state with Snapshot = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: SnapshotCreateRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: SnapshotCreateRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("waitForCompletion")>]
@@ -202,7 +202,7 @@ module SnapshotOperations =
             { state with WaitForCompletion = Some value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: SnapshotCreateRequest, value: Types.ExpandWildcards) =
+        member _.ExpandWildcards(state: SnapshotCreateRequest, value: CoreTypes.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("featureStates")>]
@@ -218,11 +218,11 @@ module SnapshotOperations =
             { state with IncludeGlobalState = Some value }
 
         [<CustomOperation("indices")>]
-        member _.Indices(state: SnapshotCreateRequest, value: Types.Indices) =
+        member _.Indices(state: SnapshotCreateRequest, value: CoreTypes.Indices) =
             { state with Indices = Some value }
 
         [<CustomOperation("metadata")>]
-        member _.Metadata(state: SnapshotCreateRequest, value: Types.Metadata) =
+        member _.Metadata(state: SnapshotCreateRequest, value: CoreTypes.Metadata) =
             { state with Metadata = Some value }
 
         [<CustomOperation("partial")>]
@@ -232,11 +232,11 @@ module SnapshotOperations =
     let snapshotCreateRequest = SnapshotCreateRequestBuilder()
 
     module Create =
-        let withMasterTimeout (value: Types.Duration) (req: SnapshotCreateRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: SnapshotCreateRequest) =
             { req with MasterTimeout = Some value }
         let withWaitForCompletion (value: bool) (req: SnapshotCreateRequest) =
             { req with WaitForCompletion = Some value }
-        let withExpandWildcards (value: Types.ExpandWildcards) (req: SnapshotCreateRequest) =
+        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: SnapshotCreateRequest) =
             { req with ExpandWildcards = Some value }
         let withFeatureStates (value: string list) (req: SnapshotCreateRequest) =
             { req with FeatureStates = Some value }
@@ -244,17 +244,17 @@ module SnapshotOperations =
             { req with IgnoreUnavailable = Some value }
         let withIncludeGlobalState (value: bool) (req: SnapshotCreateRequest) =
             { req with IncludeGlobalState = Some value }
-        let withIndices (value: Types.Indices) (req: SnapshotCreateRequest) =
+        let withIndices (value: CoreTypes.Indices) (req: SnapshotCreateRequest) =
             { req with Indices = Some value }
-        let withMetadata (value: Types.Metadata) (req: SnapshotCreateRequest) =
+        let withMetadata (value: CoreTypes.Metadata) (req: SnapshotCreateRequest) =
             { req with Metadata = Some value }
         let withPartial (value: bool) (req: SnapshotCreateRequest) =
             { req with Partial = Some value }
 
     type SnapshotCreateRepositoryRequest = {
-        Repository: Types.Name
-        MasterTimeout: Types.Duration option
-        Timeout: Types.Duration option
+        Repository: CoreTypes.Name
+        MasterTimeout: CoreTypes.Duration option
+        Timeout: CoreTypes.Duration option
         Verify: bool option
         Document: obj
     }
@@ -280,7 +280,7 @@ module SnapshotOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type SnapshotCreateRepositoryResponse = Types.AcknowledgedResponseBase
+    type SnapshotCreateRepositoryResponse = CoreTypes.AcknowledgedResponseBase
 
     type SnapshotCreateRepositoryRequestBuilder() =
         member _.Yield(_: unit) : SnapshotCreateRepositoryRequest =
@@ -293,15 +293,15 @@ module SnapshotOperations =
             }
 
         [<CustomOperation("repository")>]
-        member _.Repository(state: SnapshotCreateRepositoryRequest, value: Types.Name) =
+        member _.Repository(state: SnapshotCreateRepositoryRequest, value: CoreTypes.Name) =
             { state with Repository = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: SnapshotCreateRepositoryRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: SnapshotCreateRepositoryRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: SnapshotCreateRepositoryRequest, value: Types.Duration) =
+        member _.Timeout(state: SnapshotCreateRepositoryRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("verify")>]
@@ -315,17 +315,17 @@ module SnapshotOperations =
     let snapshotCreateRepositoryRequest = SnapshotCreateRepositoryRequestBuilder()
 
     module CreateRepository =
-        let withMasterTimeout (value: Types.Duration) (req: SnapshotCreateRepositoryRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: SnapshotCreateRepositoryRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: Types.Duration) (req: SnapshotCreateRepositoryRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: SnapshotCreateRepositoryRequest) =
             { req with Timeout = Some value }
         let withVerify (value: bool) (req: SnapshotCreateRepositoryRequest) =
             { req with Verify = Some value }
 
     type SnapshotDeleteRequest = {
-        Repository: Types.Name
-        Snapshot: Types.Names
-        MasterTimeout: Types.Duration option
+        Repository: CoreTypes.Name
+        Snapshot: CoreTypes.Names
+        MasterTimeout: CoreTypes.Duration option
         WaitForCompletion: bool option
     }
 
@@ -348,7 +348,7 @@ module SnapshotOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type SnapshotDeleteResponse = Types.AcknowledgedResponseBase
+    type SnapshotDeleteResponse = CoreTypes.AcknowledgedResponseBase
 
     type SnapshotDeleteRequestBuilder() =
         member _.Yield(_: unit) : SnapshotDeleteRequest =
@@ -360,15 +360,15 @@ module SnapshotOperations =
             }
 
         [<CustomOperation("repository")>]
-        member _.Repository(state: SnapshotDeleteRequest, value: Types.Name) =
+        member _.Repository(state: SnapshotDeleteRequest, value: CoreTypes.Name) =
             { state with Repository = value }
 
         [<CustomOperation("snapshot")>]
-        member _.Snapshot(state: SnapshotDeleteRequest, value: Types.Names) =
+        member _.Snapshot(state: SnapshotDeleteRequest, value: CoreTypes.Names) =
             { state with Snapshot = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: SnapshotDeleteRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: SnapshotDeleteRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("waitForCompletion")>]
@@ -378,15 +378,15 @@ module SnapshotOperations =
     let snapshotDeleteRequest = SnapshotDeleteRequestBuilder()
 
     module Delete =
-        let withMasterTimeout (value: Types.Duration) (req: SnapshotDeleteRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: SnapshotDeleteRequest) =
             { req with MasterTimeout = Some value }
         let withWaitForCompletion (value: bool) (req: SnapshotDeleteRequest) =
             { req with WaitForCompletion = Some value }
 
     type SnapshotDeleteRepositoryRequest = {
-        Repository: Types.Names
-        MasterTimeout: Types.Duration option
-        Timeout: Types.Duration option
+        Repository: CoreTypes.Names
+        MasterTimeout: CoreTypes.Duration option
+        Timeout: CoreTypes.Duration option
     }
 
         with
@@ -408,7 +408,7 @@ module SnapshotOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type SnapshotDeleteRepositoryResponse = Types.AcknowledgedResponseBase
+    type SnapshotDeleteRepositoryResponse = CoreTypes.AcknowledgedResponseBase
 
     type SnapshotDeleteRepositoryRequestBuilder() =
         member _.Yield(_: unit) : SnapshotDeleteRepositoryRequest =
@@ -419,39 +419,39 @@ module SnapshotOperations =
             }
 
         [<CustomOperation("repository")>]
-        member _.Repository(state: SnapshotDeleteRepositoryRequest, value: Types.Names) =
+        member _.Repository(state: SnapshotDeleteRepositoryRequest, value: CoreTypes.Names) =
             { state with Repository = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: SnapshotDeleteRepositoryRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: SnapshotDeleteRepositoryRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: SnapshotDeleteRepositoryRequest, value: Types.Duration) =
+        member _.Timeout(state: SnapshotDeleteRepositoryRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
     let snapshotDeleteRepositoryRequest = SnapshotDeleteRepositoryRequestBuilder()
 
     module DeleteRepository =
-        let withMasterTimeout (value: Types.Duration) (req: SnapshotDeleteRepositoryRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: SnapshotDeleteRepositoryRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: Types.Duration) (req: SnapshotDeleteRepositoryRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: SnapshotDeleteRepositoryRequest) =
             { req with Timeout = Some value }
 
     type SnapshotGetRequest = {
-        Repository: Types.Name
-        Snapshot: Types.Names
+        Repository: CoreTypes.Name
+        Snapshot: CoreTypes.Names
         After: string option
         FromSortValue: string option
         IgnoreUnavailable: bool option
         IndexDetails: bool option
         IndexNames: bool option
         IncludeRepository: bool option
-        MasterTimeout: Types.Duration option
-        Order: Types.SortOrder option
-        Offset: Types.Integer option
-        Size: Types.Integer option
-        SlmPolicyFilter: Types.Name option
+        MasterTimeout: CoreTypes.Duration option
+        Order: CoreTypes.SortOrder option
+        Offset: CoreTypes.Integer option
+        Size: CoreTypes.Integer option
+        SlmPolicyFilter: CoreTypes.Name option
         Sort: SnapshotTypes.SnapshotSort option
         State: System.Text.Json.JsonElement option
         Verbose: bool option
@@ -512,11 +512,11 @@ module SnapshotOperations =
             }
 
         [<CustomOperation("repository")>]
-        member _.Repository(state: SnapshotGetRequest, value: Types.Name) =
+        member _.Repository(state: SnapshotGetRequest, value: CoreTypes.Name) =
             { state with Repository = value }
 
         [<CustomOperation("snapshot")>]
-        member _.Snapshot(state: SnapshotGetRequest, value: Types.Names) =
+        member _.Snapshot(state: SnapshotGetRequest, value: CoreTypes.Names) =
             { state with Snapshot = value }
 
         [<CustomOperation("after")>]
@@ -544,23 +544,23 @@ module SnapshotOperations =
             { state with IncludeRepository = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: SnapshotGetRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: SnapshotGetRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("order")>]
-        member _.Order(state: SnapshotGetRequest, value: Types.SortOrder) =
+        member _.Order(state: SnapshotGetRequest, value: CoreTypes.SortOrder) =
             { state with Order = Some value }
 
         [<CustomOperation("offset")>]
-        member _.Offset(state: SnapshotGetRequest, value: Types.Integer) =
+        member _.Offset(state: SnapshotGetRequest, value: CoreTypes.Integer) =
             { state with Offset = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: SnapshotGetRequest, value: Types.Integer) =
+        member _.Size(state: SnapshotGetRequest, value: CoreTypes.Integer) =
             { state with Size = Some value }
 
         [<CustomOperation("slmPolicyFilter")>]
-        member _.SlmPolicyFilter(state: SnapshotGetRequest, value: Types.Name) =
+        member _.SlmPolicyFilter(state: SnapshotGetRequest, value: CoreTypes.Name) =
             { state with SlmPolicyFilter = Some value }
 
         [<CustomOperation("sort")>]
@@ -590,15 +590,15 @@ module SnapshotOperations =
             { req with IndexNames = Some value }
         let withIncludeRepository (value: bool) (req: SnapshotGetRequest) =
             { req with IncludeRepository = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: SnapshotGetRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: SnapshotGetRequest) =
             { req with MasterTimeout = Some value }
-        let withOrder (value: Types.SortOrder) (req: SnapshotGetRequest) =
+        let withOrder (value: CoreTypes.SortOrder) (req: SnapshotGetRequest) =
             { req with Order = Some value }
-        let withOffset (value: Types.Integer) (req: SnapshotGetRequest) =
+        let withOffset (value: CoreTypes.Integer) (req: SnapshotGetRequest) =
             { req with Offset = Some value }
-        let withSize (value: Types.Integer) (req: SnapshotGetRequest) =
+        let withSize (value: CoreTypes.Integer) (req: SnapshotGetRequest) =
             { req with Size = Some value }
-        let withSlmPolicyFilter (value: Types.Name) (req: SnapshotGetRequest) =
+        let withSlmPolicyFilter (value: CoreTypes.Name) (req: SnapshotGetRequest) =
             { req with SlmPolicyFilter = Some value }
         let withSort (value: SnapshotTypes.SnapshotSort) (req: SnapshotGetRequest) =
             { req with Sort = Some value }
@@ -608,9 +608,9 @@ module SnapshotOperations =
             { req with Verbose = Some value }
 
     type SnapshotGetRepositoryRequest = {
-        Repository: Types.Names
+        Repository: CoreTypes.Names
         Local: bool option
-        MasterTimeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
     }
 
         with
@@ -643,7 +643,7 @@ module SnapshotOperations =
             }
 
         [<CustomOperation("repository")>]
-        member _.Repository(state: SnapshotGetRepositoryRequest, value: Types.Names) =
+        member _.Repository(state: SnapshotGetRepositoryRequest, value: CoreTypes.Names) =
             { state with Repository = value }
 
         [<CustomOperation("local")>]
@@ -651,7 +651,7 @@ module SnapshotOperations =
             { state with Local = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: SnapshotGetRepositoryRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: SnapshotGetRepositoryRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
     let snapshotGetRepositoryRequest = SnapshotGetRepositoryRequestBuilder()
@@ -659,23 +659,23 @@ module SnapshotOperations =
     module GetRepository =
         let withLocal (value: bool) (req: SnapshotGetRepositoryRequest) =
             { req with Local = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: SnapshotGetRepositoryRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: SnapshotGetRepositoryRequest) =
             { req with MasterTimeout = Some value }
 
     type SnapshotRepositoryAnalyzeRequest = {
-        Repository: Types.Name
-        BlobCount: Types.Integer option
-        Concurrency: Types.Integer option
+        Repository: CoreTypes.Name
+        BlobCount: CoreTypes.Integer option
+        Concurrency: CoreTypes.Integer option
         Detailed: bool option
-        EarlyReadNodeCount: Types.Integer option
-        MaxBlobSize: Types.ByteSize option
-        MaxTotalDataSize: Types.ByteSize option
-        RareActionProbability: Types.Double option
+        EarlyReadNodeCount: CoreTypes.Integer option
+        MaxBlobSize: CoreTypes.ByteSize option
+        MaxTotalDataSize: CoreTypes.ByteSize option
+        RareActionProbability: CoreTypes.Double option
         RarelyAbortWrites: bool option
-        ReadNodeCount: Types.Integer option
-        RegisterOperationCount: Types.Integer option
-        Seed: Types.Integer option
-        Timeout: Types.Duration option
+        ReadNodeCount: CoreTypes.Integer option
+        RegisterOperationCount: CoreTypes.Integer option
+        Seed: CoreTypes.Integer option
+        Timeout: CoreTypes.Duration option
     }
 
         with
@@ -728,15 +728,15 @@ module SnapshotOperations =
             }
 
         [<CustomOperation("repository")>]
-        member _.Repository(state: SnapshotRepositoryAnalyzeRequest, value: Types.Name) =
+        member _.Repository(state: SnapshotRepositoryAnalyzeRequest, value: CoreTypes.Name) =
             { state with Repository = value }
 
         [<CustomOperation("blobCount")>]
-        member _.BlobCount(state: SnapshotRepositoryAnalyzeRequest, value: Types.Integer) =
+        member _.BlobCount(state: SnapshotRepositoryAnalyzeRequest, value: CoreTypes.Integer) =
             { state with BlobCount = Some value }
 
         [<CustomOperation("concurrency")>]
-        member _.Concurrency(state: SnapshotRepositoryAnalyzeRequest, value: Types.Integer) =
+        member _.Concurrency(state: SnapshotRepositoryAnalyzeRequest, value: CoreTypes.Integer) =
             { state with Concurrency = Some value }
 
         [<CustomOperation("detailed")>]
@@ -744,19 +744,19 @@ module SnapshotOperations =
             { state with Detailed = Some value }
 
         [<CustomOperation("earlyReadNodeCount")>]
-        member _.EarlyReadNodeCount(state: SnapshotRepositoryAnalyzeRequest, value: Types.Integer) =
+        member _.EarlyReadNodeCount(state: SnapshotRepositoryAnalyzeRequest, value: CoreTypes.Integer) =
             { state with EarlyReadNodeCount = Some value }
 
         [<CustomOperation("maxBlobSize")>]
-        member _.MaxBlobSize(state: SnapshotRepositoryAnalyzeRequest, value: Types.ByteSize) =
+        member _.MaxBlobSize(state: SnapshotRepositoryAnalyzeRequest, value: CoreTypes.ByteSize) =
             { state with MaxBlobSize = Some value }
 
         [<CustomOperation("maxTotalDataSize")>]
-        member _.MaxTotalDataSize(state: SnapshotRepositoryAnalyzeRequest, value: Types.ByteSize) =
+        member _.MaxTotalDataSize(state: SnapshotRepositoryAnalyzeRequest, value: CoreTypes.ByteSize) =
             { state with MaxTotalDataSize = Some value }
 
         [<CustomOperation("rareActionProbability")>]
-        member _.RareActionProbability(state: SnapshotRepositoryAnalyzeRequest, value: Types.Double) =
+        member _.RareActionProbability(state: SnapshotRepositoryAnalyzeRequest, value: CoreTypes.Double) =
             { state with RareActionProbability = Some value }
 
         [<CustomOperation("rarelyAbortWrites")>]
@@ -764,58 +764,58 @@ module SnapshotOperations =
             { state with RarelyAbortWrites = Some value }
 
         [<CustomOperation("readNodeCount")>]
-        member _.ReadNodeCount(state: SnapshotRepositoryAnalyzeRequest, value: Types.Integer) =
+        member _.ReadNodeCount(state: SnapshotRepositoryAnalyzeRequest, value: CoreTypes.Integer) =
             { state with ReadNodeCount = Some value }
 
         [<CustomOperation("registerOperationCount")>]
-        member _.RegisterOperationCount(state: SnapshotRepositoryAnalyzeRequest, value: Types.Integer) =
+        member _.RegisterOperationCount(state: SnapshotRepositoryAnalyzeRequest, value: CoreTypes.Integer) =
             { state with RegisterOperationCount = Some value }
 
         [<CustomOperation("seed")>]
-        member _.Seed(state: SnapshotRepositoryAnalyzeRequest, value: Types.Integer) =
+        member _.Seed(state: SnapshotRepositoryAnalyzeRequest, value: CoreTypes.Integer) =
             { state with Seed = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: SnapshotRepositoryAnalyzeRequest, value: Types.Duration) =
+        member _.Timeout(state: SnapshotRepositoryAnalyzeRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
     let snapshotRepositoryAnalyzeRequest = SnapshotRepositoryAnalyzeRequestBuilder()
 
     module RepositoryAnalyze =
-        let withBlobCount (value: Types.Integer) (req: SnapshotRepositoryAnalyzeRequest) =
+        let withBlobCount (value: CoreTypes.Integer) (req: SnapshotRepositoryAnalyzeRequest) =
             { req with BlobCount = Some value }
-        let withConcurrency (value: Types.Integer) (req: SnapshotRepositoryAnalyzeRequest) =
+        let withConcurrency (value: CoreTypes.Integer) (req: SnapshotRepositoryAnalyzeRequest) =
             { req with Concurrency = Some value }
         let withDetailed (value: bool) (req: SnapshotRepositoryAnalyzeRequest) =
             { req with Detailed = Some value }
-        let withEarlyReadNodeCount (value: Types.Integer) (req: SnapshotRepositoryAnalyzeRequest) =
+        let withEarlyReadNodeCount (value: CoreTypes.Integer) (req: SnapshotRepositoryAnalyzeRequest) =
             { req with EarlyReadNodeCount = Some value }
-        let withMaxBlobSize (value: Types.ByteSize) (req: SnapshotRepositoryAnalyzeRequest) =
+        let withMaxBlobSize (value: CoreTypes.ByteSize) (req: SnapshotRepositoryAnalyzeRequest) =
             { req with MaxBlobSize = Some value }
-        let withMaxTotalDataSize (value: Types.ByteSize) (req: SnapshotRepositoryAnalyzeRequest) =
+        let withMaxTotalDataSize (value: CoreTypes.ByteSize) (req: SnapshotRepositoryAnalyzeRequest) =
             { req with MaxTotalDataSize = Some value }
-        let withRareActionProbability (value: Types.Double) (req: SnapshotRepositoryAnalyzeRequest) =
+        let withRareActionProbability (value: CoreTypes.Double) (req: SnapshotRepositoryAnalyzeRequest) =
             { req with RareActionProbability = Some value }
         let withRarelyAbortWrites (value: bool) (req: SnapshotRepositoryAnalyzeRequest) =
             { req with RarelyAbortWrites = Some value }
-        let withReadNodeCount (value: Types.Integer) (req: SnapshotRepositoryAnalyzeRequest) =
+        let withReadNodeCount (value: CoreTypes.Integer) (req: SnapshotRepositoryAnalyzeRequest) =
             { req with ReadNodeCount = Some value }
-        let withRegisterOperationCount (value: Types.Integer) (req: SnapshotRepositoryAnalyzeRequest) =
+        let withRegisterOperationCount (value: CoreTypes.Integer) (req: SnapshotRepositoryAnalyzeRequest) =
             { req with RegisterOperationCount = Some value }
-        let withSeed (value: Types.Integer) (req: SnapshotRepositoryAnalyzeRequest) =
+        let withSeed (value: CoreTypes.Integer) (req: SnapshotRepositoryAnalyzeRequest) =
             { req with Seed = Some value }
-        let withTimeout (value: Types.Duration) (req: SnapshotRepositoryAnalyzeRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: SnapshotRepositoryAnalyzeRequest) =
             { req with Timeout = Some value }
 
     type SnapshotRepositoryVerifyIntegrityRequest = {
-        Repository: Types.Names
-        BlobThreadPoolConcurrency: Types.Integer option
-        IndexSnapshotVerificationConcurrency: Types.Integer option
-        IndexVerificationConcurrency: Types.Integer option
+        Repository: CoreTypes.Names
+        BlobThreadPoolConcurrency: CoreTypes.Integer option
+        IndexSnapshotVerificationConcurrency: CoreTypes.Integer option
+        IndexVerificationConcurrency: CoreTypes.Integer option
         MaxBytesPerSec: string option
-        MaxFailedShardSnapshots: Types.Integer option
-        MetaThreadPoolConcurrency: Types.Integer option
-        SnapshotVerificationConcurrency: Types.Integer option
+        MaxFailedShardSnapshots: CoreTypes.Integer option
+        MetaThreadPoolConcurrency: CoreTypes.Integer option
+        SnapshotVerificationConcurrency: CoreTypes.Integer option
         VerifyBlobContents: bool option
     }
 
@@ -861,19 +861,19 @@ module SnapshotOperations =
             }
 
         [<CustomOperation("repository")>]
-        member _.Repository(state: SnapshotRepositoryVerifyIntegrityRequest, value: Types.Names) =
+        member _.Repository(state: SnapshotRepositoryVerifyIntegrityRequest, value: CoreTypes.Names) =
             { state with Repository = value }
 
         [<CustomOperation("blobThreadPoolConcurrency")>]
-        member _.BlobThreadPoolConcurrency(state: SnapshotRepositoryVerifyIntegrityRequest, value: Types.Integer) =
+        member _.BlobThreadPoolConcurrency(state: SnapshotRepositoryVerifyIntegrityRequest, value: CoreTypes.Integer) =
             { state with BlobThreadPoolConcurrency = Some value }
 
         [<CustomOperation("indexSnapshotVerificationConcurrency")>]
-        member _.IndexSnapshotVerificationConcurrency(state: SnapshotRepositoryVerifyIntegrityRequest, value: Types.Integer) =
+        member _.IndexSnapshotVerificationConcurrency(state: SnapshotRepositoryVerifyIntegrityRequest, value: CoreTypes.Integer) =
             { state with IndexSnapshotVerificationConcurrency = Some value }
 
         [<CustomOperation("indexVerificationConcurrency")>]
-        member _.IndexVerificationConcurrency(state: SnapshotRepositoryVerifyIntegrityRequest, value: Types.Integer) =
+        member _.IndexVerificationConcurrency(state: SnapshotRepositoryVerifyIntegrityRequest, value: CoreTypes.Integer) =
             { state with IndexVerificationConcurrency = Some value }
 
         [<CustomOperation("maxBytesPerSec")>]
@@ -881,15 +881,15 @@ module SnapshotOperations =
             { state with MaxBytesPerSec = Some value }
 
         [<CustomOperation("maxFailedShardSnapshots")>]
-        member _.MaxFailedShardSnapshots(state: SnapshotRepositoryVerifyIntegrityRequest, value: Types.Integer) =
+        member _.MaxFailedShardSnapshots(state: SnapshotRepositoryVerifyIntegrityRequest, value: CoreTypes.Integer) =
             { state with MaxFailedShardSnapshots = Some value }
 
         [<CustomOperation("metaThreadPoolConcurrency")>]
-        member _.MetaThreadPoolConcurrency(state: SnapshotRepositoryVerifyIntegrityRequest, value: Types.Integer) =
+        member _.MetaThreadPoolConcurrency(state: SnapshotRepositoryVerifyIntegrityRequest, value: CoreTypes.Integer) =
             { state with MetaThreadPoolConcurrency = Some value }
 
         [<CustomOperation("snapshotVerificationConcurrency")>]
-        member _.SnapshotVerificationConcurrency(state: SnapshotRepositoryVerifyIntegrityRequest, value: Types.Integer) =
+        member _.SnapshotVerificationConcurrency(state: SnapshotRepositoryVerifyIntegrityRequest, value: CoreTypes.Integer) =
             { state with SnapshotVerificationConcurrency = Some value }
 
         [<CustomOperation("verifyBlobContents")>]
@@ -899,27 +899,27 @@ module SnapshotOperations =
     let snapshotRepositoryVerifyIntegrityRequest = SnapshotRepositoryVerifyIntegrityRequestBuilder()
 
     module RepositoryVerifyIntegrity =
-        let withBlobThreadPoolConcurrency (value: Types.Integer) (req: SnapshotRepositoryVerifyIntegrityRequest) =
+        let withBlobThreadPoolConcurrency (value: CoreTypes.Integer) (req: SnapshotRepositoryVerifyIntegrityRequest) =
             { req with BlobThreadPoolConcurrency = Some value }
-        let withIndexSnapshotVerificationConcurrency (value: Types.Integer) (req: SnapshotRepositoryVerifyIntegrityRequest) =
+        let withIndexSnapshotVerificationConcurrency (value: CoreTypes.Integer) (req: SnapshotRepositoryVerifyIntegrityRequest) =
             { req with IndexSnapshotVerificationConcurrency = Some value }
-        let withIndexVerificationConcurrency (value: Types.Integer) (req: SnapshotRepositoryVerifyIntegrityRequest) =
+        let withIndexVerificationConcurrency (value: CoreTypes.Integer) (req: SnapshotRepositoryVerifyIntegrityRequest) =
             { req with IndexVerificationConcurrency = Some value }
         let withMaxBytesPerSec (value: string) (req: SnapshotRepositoryVerifyIntegrityRequest) =
             { req with MaxBytesPerSec = Some value }
-        let withMaxFailedShardSnapshots (value: Types.Integer) (req: SnapshotRepositoryVerifyIntegrityRequest) =
+        let withMaxFailedShardSnapshots (value: CoreTypes.Integer) (req: SnapshotRepositoryVerifyIntegrityRequest) =
             { req with MaxFailedShardSnapshots = Some value }
-        let withMetaThreadPoolConcurrency (value: Types.Integer) (req: SnapshotRepositoryVerifyIntegrityRequest) =
+        let withMetaThreadPoolConcurrency (value: CoreTypes.Integer) (req: SnapshotRepositoryVerifyIntegrityRequest) =
             { req with MetaThreadPoolConcurrency = Some value }
-        let withSnapshotVerificationConcurrency (value: Types.Integer) (req: SnapshotRepositoryVerifyIntegrityRequest) =
+        let withSnapshotVerificationConcurrency (value: CoreTypes.Integer) (req: SnapshotRepositoryVerifyIntegrityRequest) =
             { req with SnapshotVerificationConcurrency = Some value }
         let withVerifyBlobContents (value: bool) (req: SnapshotRepositoryVerifyIntegrityRequest) =
             { req with VerifyBlobContents = Some value }
 
     type SnapshotRestoreRequest = {
-        Repository: Types.Name
-        Snapshot: Types.Name
-        MasterTimeout: Types.Duration option
+        Repository: CoreTypes.Name
+        Snapshot: CoreTypes.Name
+        MasterTimeout: CoreTypes.Duration option
         WaitForCompletion: bool option
         FeatureStates: string list option
         IgnoreIndexSettings: string list option
@@ -927,7 +927,7 @@ module SnapshotOperations =
         IncludeAliases: bool option
         IncludeGlobalState: bool option
         IndexSettings: IndicesTypes.IndexSettings option
-        Indices: Types.Indices option
+        Indices: CoreTypes.Indices option
         Partial: bool option
         RenamePattern: string option
         RenameReplacement: string option
@@ -975,15 +975,15 @@ module SnapshotOperations =
             }
 
         [<CustomOperation("repository")>]
-        member _.Repository(state: SnapshotRestoreRequest, value: Types.Name) =
+        member _.Repository(state: SnapshotRestoreRequest, value: CoreTypes.Name) =
             { state with Repository = value }
 
         [<CustomOperation("snapshot")>]
-        member _.Snapshot(state: SnapshotRestoreRequest, value: Types.Name) =
+        member _.Snapshot(state: SnapshotRestoreRequest, value: CoreTypes.Name) =
             { state with Snapshot = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: SnapshotRestoreRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: SnapshotRestoreRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("waitForCompletion")>]
@@ -1015,7 +1015,7 @@ module SnapshotOperations =
             { state with IndexSettings = Some value }
 
         [<CustomOperation("indices")>]
-        member _.Indices(state: SnapshotRestoreRequest, value: Types.Indices) =
+        member _.Indices(state: SnapshotRestoreRequest, value: CoreTypes.Indices) =
             { state with Indices = Some value }
 
         [<CustomOperation("partial")>]
@@ -1033,7 +1033,7 @@ module SnapshotOperations =
     let snapshotRestoreRequest = SnapshotRestoreRequestBuilder()
 
     module Restore =
-        let withMasterTimeout (value: Types.Duration) (req: SnapshotRestoreRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: SnapshotRestoreRequest) =
             { req with MasterTimeout = Some value }
         let withWaitForCompletion (value: bool) (req: SnapshotRestoreRequest) =
             { req with WaitForCompletion = Some value }
@@ -1049,7 +1049,7 @@ module SnapshotOperations =
             { req with IncludeGlobalState = Some value }
         let withIndexSettings (value: IndicesTypes.IndexSettings) (req: SnapshotRestoreRequest) =
             { req with IndexSettings = Some value }
-        let withIndices (value: Types.Indices) (req: SnapshotRestoreRequest) =
+        let withIndices (value: CoreTypes.Indices) (req: SnapshotRestoreRequest) =
             { req with Indices = Some value }
         let withPartial (value: bool) (req: SnapshotRestoreRequest) =
             { req with Partial = Some value }
@@ -1059,10 +1059,10 @@ module SnapshotOperations =
             { req with RenameReplacement = Some value }
 
     type SnapshotStatusRequest = {
-        Repository: Types.Name
-        Snapshot: Types.Names
+        Repository: CoreTypes.Name
+        Snapshot: CoreTypes.Names
         IgnoreUnavailable: bool option
-        MasterTimeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
     }
 
         with
@@ -1096,11 +1096,11 @@ module SnapshotOperations =
             }
 
         [<CustomOperation("repository")>]
-        member _.Repository(state: SnapshotStatusRequest, value: Types.Name) =
+        member _.Repository(state: SnapshotStatusRequest, value: CoreTypes.Name) =
             { state with Repository = value }
 
         [<CustomOperation("snapshot")>]
-        member _.Snapshot(state: SnapshotStatusRequest, value: Types.Names) =
+        member _.Snapshot(state: SnapshotStatusRequest, value: CoreTypes.Names) =
             { state with Snapshot = value }
 
         [<CustomOperation("ignoreUnavailable")>]
@@ -1108,7 +1108,7 @@ module SnapshotOperations =
             { state with IgnoreUnavailable = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: SnapshotStatusRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: SnapshotStatusRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
     let snapshotStatusRequest = SnapshotStatusRequestBuilder()
@@ -1116,13 +1116,13 @@ module SnapshotOperations =
     module Status =
         let withIgnoreUnavailable (value: bool) (req: SnapshotStatusRequest) =
             { req with IgnoreUnavailable = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: SnapshotStatusRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: SnapshotStatusRequest) =
             { req with MasterTimeout = Some value }
 
     type SnapshotVerifyRepositoryRequest = {
-        Repository: Types.Name
-        MasterTimeout: Types.Duration option
-        Timeout: Types.Duration option
+        Repository: CoreTypes.Name
+        MasterTimeout: CoreTypes.Duration option
+        Timeout: CoreTypes.Duration option
     }
 
         with
@@ -1155,22 +1155,22 @@ module SnapshotOperations =
             }
 
         [<CustomOperation("repository")>]
-        member _.Repository(state: SnapshotVerifyRepositoryRequest, value: Types.Name) =
+        member _.Repository(state: SnapshotVerifyRepositoryRequest, value: CoreTypes.Name) =
             { state with Repository = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: SnapshotVerifyRepositoryRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: SnapshotVerifyRepositoryRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: SnapshotVerifyRepositoryRequest, value: Types.Duration) =
+        member _.Timeout(state: SnapshotVerifyRepositoryRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
     let snapshotVerifyRepositoryRequest = SnapshotVerifyRepositoryRequestBuilder()
 
     module VerifyRepository =
-        let withMasterTimeout (value: Types.Duration) (req: SnapshotVerifyRepositoryRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: SnapshotVerifyRepositoryRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: Types.Duration) (req: SnapshotVerifyRepositoryRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: SnapshotVerifyRepositoryRequest) =
             { req with Timeout = Some value }
 

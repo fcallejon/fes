@@ -9,10 +9,10 @@ module IlmGetLifecycle =
 
     type Lifecycle = {
         [<System.Text.Json.Serialization.JsonPropertyName("modified_date")>]
-        ModifiedDate: Types.DateTime
+        ModifiedDate: CoreTypes.DateTime
         [<System.Text.Json.Serialization.JsonPropertyName("policy")>]
         Policy: IlmTypes.Policy
         [<System.Text.Json.Serialization.JsonPropertyName("version")>]
-        Version: Types.VersionNumber
+        Version: CoreTypes.VersionNumber
     }
 

@@ -9,19 +9,19 @@ module GlobalMsearch =
 
     type MultiSearchItem<'tDocument> = {
         [<System.Text.Json.Serialization.JsonPropertyName("status")>]
-        Status: Types.Integer option
+        Status: CoreTypes.Integer option
     }
 
     [<RequireQualifiedAccess>]
     type ResponseItem<'tDocument> =
-        | MultiSearchItem of GlobalMsearch.MultiSearchItem<'tDocument>
-        | ErrorResponseBase of Types.ErrorResponseBase
+        | MultiSearchItem of MultiSearchItem<'tDocument>
+        | ErrorResponseBase of CoreTypes.ErrorResponseBase
 
     type MultiSearchResult<'tDocument> = {
         [<System.Text.Json.Serialization.JsonPropertyName("took")>]
-        Took: Types.Long
+        Took: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("responses")>]
-        Responses: GlobalMsearch.ResponseItem<'tDocument> list
+        Responses: ResponseItem<'tDocument> list
     }
 
     /// Contains parameters used to limit or change the subsequent search body request.
@@ -29,21 +29,21 @@ module GlobalMsearch =
         [<System.Text.Json.Serialization.JsonPropertyName("allow_no_indices")>]
         AllowNoIndices: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("expand_wildcards")>]
-        ExpandWildcards: Types.ExpandWildcards option
+        ExpandWildcards: CoreTypes.ExpandWildcards option
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_unavailable")>]
         IgnoreUnavailable: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("index")>]
-        Index: Types.Indices option
+        Index: CoreTypes.Indices option
         [<System.Text.Json.Serialization.JsonPropertyName("preference")>]
         Preference: string option
         [<System.Text.Json.Serialization.JsonPropertyName("project_routing")>]
-        ProjectRouting: Types.ProjectRouting option
+        ProjectRouting: CoreTypes.ProjectRouting option
         [<System.Text.Json.Serialization.JsonPropertyName("request_cache")>]
         RequestCache: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("routing")>]
-        Routing: Types.Routing option
+        Routing: CoreTypes.Routing option
         [<System.Text.Json.Serialization.JsonPropertyName("search_type")>]
-        SearchType: Types.SearchType option
+        SearchType: CoreTypes.SearchType option
         [<System.Text.Json.Serialization.JsonPropertyName("ccs_minimize_roundtrips")>]
         CcsMinimizeRoundtrips: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("allow_partial_search_results")>]
@@ -54,6 +54,6 @@ module GlobalMsearch =
 
     [<RequireQualifiedAccess>]
     type RequestItem =
-        | MultisearchHeader of GlobalMsearch.MultisearchHeader
+        | MultisearchHeader of MultisearchHeader
         | SearchRequestBody of GlobalSearchTypes.SearchRequestBody
 

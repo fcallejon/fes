@@ -25,8 +25,8 @@ module GlobalScriptsPainlessExecute =
         [<System.Text.Json.Serialization.JsonPropertyName("document")>]
         Document: System.Text.Json.JsonElement
         [<System.Text.Json.Serialization.JsonPropertyName("index")>]
-        Index: Types.IndexName
+        Index: CoreTypes.IndexName
         [<System.Text.Json.Serialization.JsonPropertyName("query")>]
-        Query: TypesQueryDsl.QueryContainer option
+        Query: CoreTypes.QueryContainer option
     }
 

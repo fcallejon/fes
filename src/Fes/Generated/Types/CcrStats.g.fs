@@ -9,24 +9,24 @@ module CcrStats =
 
     type AutoFollowedCluster = {
         [<System.Text.Json.Serialization.JsonPropertyName("cluster_name")>]
-        ClusterName: Types.Name
+        ClusterName: CoreTypes.Name
         [<System.Text.Json.Serialization.JsonPropertyName("last_seen_metadata_version")>]
-        LastSeenMetadataVersion: Types.VersionNumber
+        LastSeenMetadataVersion: CoreTypes.VersionNumber
         [<System.Text.Json.Serialization.JsonPropertyName("time_since_last_check_millis")>]
-        TimeSinceLastCheckMillis: Types.DurationValue<Types.UnitMillis>
+        TimeSinceLastCheckMillis: CoreTypes.DurationValue<CoreTypes.UnitMillis>
     }
 
     type AutoFollowStats = {
         [<System.Text.Json.Serialization.JsonPropertyName("auto_followed_clusters")>]
-        AutoFollowedClusters: CcrStats.AutoFollowedCluster list
+        AutoFollowedClusters: AutoFollowedCluster list
         [<System.Text.Json.Serialization.JsonPropertyName("number_of_failed_follow_indices")>]
-        NumberOfFailedFollowIndices: Types.Long
+        NumberOfFailedFollowIndices: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("number_of_failed_remote_cluster_state_requests")>]
-        NumberOfFailedRemoteClusterStateRequests: Types.Long
+        NumberOfFailedRemoteClusterStateRequests: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("number_of_successful_follow_indices")>]
-        NumberOfSuccessfulFollowIndices: Types.Long
+        NumberOfSuccessfulFollowIndices: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("recent_auto_follow_errors")>]
-        RecentAutoFollowErrors: Types.ErrorCause list
+        RecentAutoFollowErrors: CoreTypes.ErrorCause list
     }
 
     type FollowStats = {

@@ -11,8 +11,8 @@ module IndicesGetDataStreamMappings =
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
         Name: string
         [<System.Text.Json.Serialization.JsonPropertyName("mappings")>]
-        Mappings: TypesMapping.TypeMapping
+        Mappings: CoreTypes.TypeMapping
         [<System.Text.Json.Serialization.JsonPropertyName("effective_mappings")>]
-        EffectiveMappings: TypesMapping.TypeMapping
+        EffectiveMappings: CoreTypes.TypeMapping
     }
 

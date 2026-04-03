@@ -17,7 +17,7 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("filters")>]
-        member _.Filters(state: AdjacencyMatrixAggregation, value: Map<string, TypesQueryDsl.QueryContainer>) =
+        member _.Filters(state: AdjacencyMatrixAggregation, value: Map<string, CoreTypes.QueryContainer>) =
             { state with Filters = Some value }
 
         [<CustomOperation("separator")>]
@@ -28,247 +28,247 @@ module TypesAggregationsBuilders =
 
     module Aggregation =
 
-        let adjacencyMatrix (value: TypesAggregations.AdjacencyMatrixAggregation) =
+        let adjacencyMatrix (value: CoreTypes.AdjacencyMatrixAggregation) =
             AggregationContainer.AdjacencyMatrix value
 
-        let autoDateHistogram (value: TypesAggregations.AutoDateHistogramAggregation) =
+        let autoDateHistogram (value: CoreTypes.AutoDateHistogramAggregation) =
             AggregationContainer.AutoDateHistogram value
 
-        let avg (value: TypesAggregations.AverageAggregation) =
+        let avg (value: CoreTypes.AverageAggregation) =
             AggregationContainer.Avg value
 
-        let avgBucket (value: TypesAggregations.AverageBucketAggregation) =
+        let avgBucket (value: CoreTypes.AverageBucketAggregation) =
             AggregationContainer.AvgBucket value
 
-        let boxplot (value: TypesAggregations.BoxplotAggregation) =
+        let boxplot (value: CoreTypes.BoxplotAggregation) =
             AggregationContainer.Boxplot value
 
-        let bucketScript (value: TypesAggregations.BucketScriptAggregation) =
+        let bucketScript (value: CoreTypes.BucketScriptAggregation) =
             AggregationContainer.BucketScript value
 
-        let bucketSelector (value: TypesAggregations.BucketSelectorAggregation) =
+        let bucketSelector (value: CoreTypes.BucketSelectorAggregation) =
             AggregationContainer.BucketSelector value
 
-        let bucketSort (value: TypesAggregations.BucketSortAggregation) =
+        let bucketSort (value: CoreTypes.BucketSortAggregation) =
             AggregationContainer.BucketSort value
 
-        let bucketCountKsTest (value: TypesAggregations.BucketKsAggregation) =
+        let bucketCountKsTest (value: CoreTypes.BucketKsAggregation) =
             AggregationContainer.BucketCountKsTest value
 
-        let bucketCorrelation (value: TypesAggregations.BucketCorrelationAggregation) =
+        let bucketCorrelation (value: CoreTypes.BucketCorrelationAggregation) =
             AggregationContainer.BucketCorrelation value
 
-        let cardinality (value: TypesAggregations.CardinalityAggregation) =
+        let cardinality (value: CoreTypes.CardinalityAggregation) =
             AggregationContainer.Cardinality value
 
-        let cartesianBounds (value: TypesAggregations.CartesianBoundsAggregation) =
+        let cartesianBounds (value: CoreTypes.CartesianBoundsAggregation) =
             AggregationContainer.CartesianBounds value
 
-        let cartesianCentroid (value: TypesAggregations.CartesianCentroidAggregation) =
+        let cartesianCentroid (value: CoreTypes.CartesianCentroidAggregation) =
             AggregationContainer.CartesianCentroid value
 
-        let categorizeText (value: TypesAggregations.CategorizeTextAggregation) =
+        let categorizeText (value: CoreTypes.CategorizeTextAggregation) =
             AggregationContainer.CategorizeText value
 
-        let changePoint (value: TypesAggregations.ChangePointAggregation) =
+        let changePoint (value: CoreTypes.ChangePointAggregation) =
             AggregationContainer.ChangePoint value
 
-        let children (value: TypesAggregations.ChildrenAggregation) =
+        let children (value: CoreTypes.ChildrenAggregation) =
             AggregationContainer.Children value
 
-        let composite (value: TypesAggregations.CompositeAggregation) =
+        let composite (value: CoreTypes.CompositeAggregation) =
             AggregationContainer.Composite value
 
-        let cumulativeCardinality (value: TypesAggregations.CumulativeCardinalityAggregation) =
+        let cumulativeCardinality (value: CoreTypes.CumulativeCardinalityAggregation) =
             AggregationContainer.CumulativeCardinality value
 
-        let cumulativeSum (value: TypesAggregations.CumulativeSumAggregation) =
+        let cumulativeSum (value: CoreTypes.CumulativeSumAggregation) =
             AggregationContainer.CumulativeSum value
 
-        let dateHistogram (value: TypesAggregations.DateHistogramAggregation) =
+        let dateHistogram (value: CoreTypes.DateHistogramAggregation) =
             AggregationContainer.DateHistogram value
 
-        let dateRange (value: TypesAggregations.DateRangeAggregation) =
+        let dateRange (value: CoreTypes.DateRangeAggregation) =
             AggregationContainer.DateRange value
 
-        let derivative (value: TypesAggregations.DerivativeAggregation) =
+        let derivative (value: CoreTypes.DerivativeAggregation) =
             AggregationContainer.Derivative value
 
-        let diversifiedSampler (value: TypesAggregations.DiversifiedSamplerAggregation) =
+        let diversifiedSampler (value: CoreTypes.DiversifiedSamplerAggregation) =
             AggregationContainer.DiversifiedSampler value
 
-        let extendedStats (value: TypesAggregations.ExtendedStatsAggregation) =
+        let extendedStats (value: CoreTypes.ExtendedStatsAggregation) =
             AggregationContainer.ExtendedStats value
 
-        let extendedStatsBucket (value: TypesAggregations.ExtendedStatsBucketAggregation) =
+        let extendedStatsBucket (value: CoreTypes.ExtendedStatsBucketAggregation) =
             AggregationContainer.ExtendedStatsBucket value
 
-        let frequentItemSets (value: TypesAggregations.FrequentItemSetsAggregation) =
+        let frequentItemSets (value: CoreTypes.FrequentItemSetsAggregation) =
             AggregationContainer.FrequentItemSets value
 
-        let filter (value: TypesQueryDsl.QueryContainer) =
+        let filter (value: CoreTypes.QueryContainer) =
             AggregationContainer.Filter value
 
-        let filters (value: TypesAggregations.FiltersAggregation) =
+        let filters (value: CoreTypes.FiltersAggregation) =
             AggregationContainer.Filters value
 
-        let geoBounds (value: TypesAggregations.GeoBoundsAggregation) =
+        let geoBounds (value: CoreTypes.GeoBoundsAggregation) =
             AggregationContainer.GeoBounds value
 
-        let geoCentroid (value: TypesAggregations.GeoCentroidAggregation) =
+        let geoCentroid (value: CoreTypes.GeoCentroidAggregation) =
             AggregationContainer.GeoCentroid value
 
-        let geoDistance (value: TypesAggregations.GeoDistanceAggregation) =
+        let geoDistance (value: CoreTypes.GeoDistanceAggregation) =
             AggregationContainer.GeoDistance value
 
-        let geohashGrid (value: TypesAggregations.GeoHashGridAggregation) =
+        let geohashGrid (value: CoreTypes.GeoHashGridAggregation) =
             AggregationContainer.GeohashGrid value
 
-        let geoLine (value: TypesAggregations.GeoLineAggregation) =
+        let geoLine (value: CoreTypes.GeoLineAggregation) =
             AggregationContainer.GeoLine value
 
-        let geotileGrid (value: TypesAggregations.GeoTileGridAggregation) =
+        let geotileGrid (value: CoreTypes.GeoTileGridAggregation) =
             AggregationContainer.GeotileGrid value
 
-        let geohexGrid (value: TypesAggregations.GeohexGridAggregation) =
+        let geohexGrid (value: CoreTypes.GeohexGridAggregation) =
             AggregationContainer.GeohexGrid value
 
-        let global' (value: TypesAggregations.GlobalAggregation) =
+        let global' (value: CoreTypes.GlobalAggregation) =
             AggregationContainer.Global value
 
-        let histogram (value: TypesAggregations.HistogramAggregation) =
+        let histogram (value: CoreTypes.HistogramAggregation) =
             AggregationContainer.Histogram value
 
-        let ipRange (value: TypesAggregations.IpRangeAggregation) =
+        let ipRange (value: CoreTypes.IpRangeAggregation) =
             AggregationContainer.IpRange value
 
-        let ipPrefix (value: TypesAggregations.IpPrefixAggregation) =
+        let ipPrefix (value: CoreTypes.IpPrefixAggregation) =
             AggregationContainer.IpPrefix value
 
-        let inference (value: TypesAggregations.InferenceAggregation) =
+        let inference (value: CoreTypes.InferenceAggregation) =
             AggregationContainer.Inference value
 
-        let line (value: TypesAggregations.GeoLineAggregation) =
+        let line (value: CoreTypes.GeoLineAggregation) =
             AggregationContainer.Line value
 
-        let matrixStats (value: TypesAggregations.MatrixStatsAggregation) =
+        let matrixStats (value: CoreTypes.MatrixStatsAggregation) =
             AggregationContainer.MatrixStats value
 
-        let max (value: TypesAggregations.MaxAggregation) =
+        let max (value: CoreTypes.MaxAggregation) =
             AggregationContainer.Max value
 
-        let maxBucket (value: TypesAggregations.MaxBucketAggregation) =
+        let maxBucket (value: CoreTypes.MaxBucketAggregation) =
             AggregationContainer.MaxBucket value
 
-        let medianAbsoluteDeviation (value: TypesAggregations.MedianAbsoluteDeviationAggregation) =
+        let medianAbsoluteDeviation (value: CoreTypes.MedianAbsoluteDeviationAggregation) =
             AggregationContainer.MedianAbsoluteDeviation value
 
-        let min (value: TypesAggregations.MinAggregation) =
+        let min (value: CoreTypes.MinAggregation) =
             AggregationContainer.Min value
 
-        let minBucket (value: TypesAggregations.MinBucketAggregation) =
+        let minBucket (value: CoreTypes.MinBucketAggregation) =
             AggregationContainer.MinBucket value
 
-        let missing (value: TypesAggregations.MissingAggregation) =
+        let missing (value: CoreTypes.MissingAggregation) =
             AggregationContainer.Missing value
 
-        let movingAvg (value: TypesAggregations.MovingAverageAggregation) =
+        let movingAvg (value: CoreTypes.MovingAverageAggregation) =
             AggregationContainer.MovingAvg value
 
-        let movingPercentiles (value: TypesAggregations.MovingPercentilesAggregation) =
+        let movingPercentiles (value: CoreTypes.MovingPercentilesAggregation) =
             AggregationContainer.MovingPercentiles value
 
-        let movingFn (value: TypesAggregations.MovingFunctionAggregation) =
+        let movingFn (value: CoreTypes.MovingFunctionAggregation) =
             AggregationContainer.MovingFn value
 
-        let multiTerms (value: TypesAggregations.MultiTermsAggregation) =
+        let multiTerms (value: CoreTypes.MultiTermsAggregation) =
             AggregationContainer.MultiTerms value
 
-        let nested (value: TypesAggregations.NestedAggregation) =
+        let nested (value: CoreTypes.NestedAggregation) =
             AggregationContainer.Nested value
 
-        let normalize (value: TypesAggregations.NormalizeAggregation) =
+        let normalize (value: CoreTypes.NormalizeAggregation) =
             AggregationContainer.Normalize value
 
-        let parent (value: TypesAggregations.ParentAggregation) =
+        let parent (value: CoreTypes.ParentAggregation) =
             AggregationContainer.Parent value
 
-        let percentileRanks (value: TypesAggregations.PercentileRanksAggregation) =
+        let percentileRanks (value: CoreTypes.PercentileRanksAggregation) =
             AggregationContainer.PercentileRanks value
 
-        let percentiles (value: TypesAggregations.PercentilesAggregation) =
+        let percentiles (value: CoreTypes.PercentilesAggregation) =
             AggregationContainer.Percentiles value
 
-        let percentilesBucket (value: TypesAggregations.PercentilesBucketAggregation) =
+        let percentilesBucket (value: CoreTypes.PercentilesBucketAggregation) =
             AggregationContainer.PercentilesBucket value
 
-        let range (value: TypesAggregations.RangeAggregation) =
+        let range (value: CoreTypes.RangeAggregation) =
             AggregationContainer.Range value
 
-        let rareTerms (value: TypesAggregations.RareTermsAggregation) =
+        let rareTerms (value: CoreTypes.RareTermsAggregation) =
             AggregationContainer.RareTerms value
 
-        let rate (value: TypesAggregations.RateAggregation) =
+        let rate (value: CoreTypes.RateAggregation) =
             AggregationContainer.Rate value
 
-        let reverseNested (value: TypesAggregations.ReverseNestedAggregation) =
+        let reverseNested (value: CoreTypes.ReverseNestedAggregation) =
             AggregationContainer.ReverseNested value
 
-        let randomSampler (value: TypesAggregations.RandomSamplerAggregation) =
+        let randomSampler (value: CoreTypes.RandomSamplerAggregation) =
             AggregationContainer.RandomSampler value
 
-        let sampler (value: TypesAggregations.SamplerAggregation) =
+        let sampler (value: CoreTypes.SamplerAggregation) =
             AggregationContainer.Sampler value
 
-        let scriptedMetric (value: TypesAggregations.ScriptedMetricAggregation) =
+        let scriptedMetric (value: CoreTypes.ScriptedMetricAggregation) =
             AggregationContainer.ScriptedMetric value
 
-        let serialDiff (value: TypesAggregations.SerialDifferencingAggregation) =
+        let serialDiff (value: CoreTypes.SerialDifferencingAggregation) =
             AggregationContainer.SerialDiff value
 
-        let significantTerms (value: TypesAggregations.SignificantTermsAggregation) =
+        let significantTerms (value: CoreTypes.SignificantTermsAggregation) =
             AggregationContainer.SignificantTerms value
 
-        let significantText (value: TypesAggregations.SignificantTextAggregation) =
+        let significantText (value: CoreTypes.SignificantTextAggregation) =
             AggregationContainer.SignificantText value
 
-        let stats (value: TypesAggregations.StatsAggregation) =
+        let stats (value: CoreTypes.StatsAggregation) =
             AggregationContainer.Stats value
 
-        let statsBucket (value: TypesAggregations.StatsBucketAggregation) =
+        let statsBucket (value: CoreTypes.StatsBucketAggregation) =
             AggregationContainer.StatsBucket value
 
-        let stringStats (value: TypesAggregations.StringStatsAggregation) =
+        let stringStats (value: CoreTypes.StringStatsAggregation) =
             AggregationContainer.StringStats value
 
-        let sum (value: TypesAggregations.SumAggregation) =
+        let sum (value: CoreTypes.SumAggregation) =
             AggregationContainer.Sum value
 
-        let sumBucket (value: TypesAggregations.SumBucketAggregation) =
+        let sumBucket (value: CoreTypes.SumBucketAggregation) =
             AggregationContainer.SumBucket value
 
-        let terms (value: TypesAggregations.TermsAggregation) =
+        let terms (value: CoreTypes.TermsAggregation) =
             AggregationContainer.Terms value
 
-        let timeSeries (value: TypesAggregations.TimeSeriesAggregation) =
+        let timeSeries (value: CoreTypes.TimeSeriesAggregation) =
             AggregationContainer.TimeSeries value
 
-        let topHits (value: TypesAggregations.TopHitsAggregation) =
+        let topHits (value: CoreTypes.TopHitsAggregation) =
             AggregationContainer.TopHits value
 
-        let tTest (value: TypesAggregations.TTestAggregation) =
+        let tTest (value: CoreTypes.TTestAggregation) =
             AggregationContainer.TTest value
 
-        let topMetrics (value: TypesAggregations.TopMetricsAggregation) =
+        let topMetrics (value: CoreTypes.TopMetricsAggregation) =
             AggregationContainer.TopMetrics value
 
-        let valueCount (value: TypesAggregations.ValueCountAggregation) =
+        let valueCount (value: CoreTypes.ValueCountAggregation) =
             AggregationContainer.ValueCount value
 
-        let weightedAvg (value: TypesAggregations.WeightedAverageAggregation) =
+        let weightedAvg (value: CoreTypes.WeightedAverageAggregation) =
             AggregationContainer.WeightedAvg value
 
-        let variableWidthHistogram (value: TypesAggregations.VariableWidthHistogramAggregation) =
+        let variableWidthHistogram (value: CoreTypes.VariableWidthHistogramAggregation) =
             AggregationContainer.VariableWidthHistogram value
 
     type AggregationRangeBuilder() =
@@ -280,7 +280,7 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("from")>]
-        member _.From(state: AggregationRange, value: Types.Double option) =
+        member _.From(state: AggregationRange, value: CoreTypes.Double option) =
             { state with From = Some value }
 
         [<CustomOperation("key")>]
@@ -288,7 +288,7 @@ module TypesAggregationsBuilders =
             { state with Key = Some value }
 
         [<CustomOperation("to'")>]
-        member _.To(state: AggregationRange, value: Types.Double option) =
+        member _.To(state: AggregationRange, value: CoreTypes.Double option) =
             { state with To = Some value }
 
     let aggregationRange = AggregationRangeBuilder()
@@ -308,11 +308,11 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("buckets")>]
-        member _.Buckets(state: AutoDateHistogramAggregation, value: Types.Integer) =
+        member _.Buckets(state: AutoDateHistogramAggregation, value: CoreTypes.Integer) =
             { state with Buckets = Some value }
 
         [<CustomOperation("field")>]
-        member _.Field(state: AutoDateHistogramAggregation, value: Types.Field) =
+        member _.Field(state: AutoDateHistogramAggregation, value: CoreTypes.Field) =
             { state with Field = Some value }
 
         [<CustomOperation("format")>]
@@ -320,11 +320,11 @@ module TypesAggregationsBuilders =
             { state with Format = Some value }
 
         [<CustomOperation("minimumInterval")>]
-        member _.MinimumInterval(state: AutoDateHistogramAggregation, value: TypesAggregations.MinimumInterval) =
+        member _.MinimumInterval(state: AutoDateHistogramAggregation, value: CoreTypes.MinimumInterval) =
             { state with MinimumInterval = Some value }
 
         [<CustomOperation("missing")>]
-        member _.Missing(state: AutoDateHistogramAggregation, value: Types.DateTime) =
+        member _.Missing(state: AutoDateHistogramAggregation, value: CoreTypes.DateTime) =
             { state with Missing = Some value }
 
         [<CustomOperation("offset")>]
@@ -336,11 +336,11 @@ module TypesAggregationsBuilders =
             { state with Params = Some value }
 
         [<CustomOperation("script")>]
-        member _.Script(state: AutoDateHistogramAggregation, value: Types.Script) =
+        member _.Script(state: AutoDateHistogramAggregation, value: CoreTypes.Script) =
             { state with Script = Some value }
 
         [<CustomOperation("timeZone")>]
-        member _.TimeZone(state: AutoDateHistogramAggregation, value: Types.TimeZone) =
+        member _.TimeZone(state: AutoDateHistogramAggregation, value: CoreTypes.TimeZone) =
             { state with TimeZone = Some value }
 
     let autoDateHistogramAggregation = AutoDateHistogramAggregationBuilder()
@@ -365,31 +365,31 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("min")>]
-        member _.Min(state: BoxPlotAggregate, value: Types.Double) =
+        member _.Min(state: BoxPlotAggregate, value: CoreTypes.Double) =
             { state with Min = value }
 
         [<CustomOperation("max")>]
-        member _.Max(state: BoxPlotAggregate, value: Types.Double) =
+        member _.Max(state: BoxPlotAggregate, value: CoreTypes.Double) =
             { state with Max = value }
 
         [<CustomOperation("q1")>]
-        member _.Q1(state: BoxPlotAggregate, value: Types.Double) =
+        member _.Q1(state: BoxPlotAggregate, value: CoreTypes.Double) =
             { state with Q1 = value }
 
         [<CustomOperation("q2")>]
-        member _.Q2(state: BoxPlotAggregate, value: Types.Double) =
+        member _.Q2(state: BoxPlotAggregate, value: CoreTypes.Double) =
             { state with Q2 = value }
 
         [<CustomOperation("q3")>]
-        member _.Q3(state: BoxPlotAggregate, value: Types.Double) =
+        member _.Q3(state: BoxPlotAggregate, value: CoreTypes.Double) =
             { state with Q3 = value }
 
         [<CustomOperation("lower")>]
-        member _.Lower(state: BoxPlotAggregate, value: Types.Double) =
+        member _.Lower(state: BoxPlotAggregate, value: CoreTypes.Double) =
             { state with Lower = value }
 
         [<CustomOperation("upper")>]
-        member _.Upper(state: BoxPlotAggregate, value: Types.Double) =
+        member _.Upper(state: BoxPlotAggregate, value: CoreTypes.Double) =
             { state with Upper = value }
 
         [<CustomOperation("minAsString")>]
@@ -430,11 +430,11 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("compression")>]
-        member _.Compression(state: BoxplotAggregation, value: Types.Double) =
+        member _.Compression(state: BoxplotAggregation, value: CoreTypes.Double) =
             { state with Compression = Some value }
 
         [<CustomOperation("executionHint")>]
-        member _.ExecutionHint(state: BoxplotAggregation, value: TypesAggregations.TDigestExecutionHint) =
+        member _.ExecutionHint(state: BoxplotAggregation, value: CoreTypes.TDigestExecutionHint) =
             { state with ExecutionHint = Some value }
 
     let boxplotAggregation = BoxplotAggregationBuilder()
@@ -452,7 +452,7 @@ module TypesAggregationsBuilders =
             { state with Alternative = Some value }
 
         [<CustomOperation("fractions")>]
-        member _.Fractions(state: BucketKsAggregation, value: Types.Double list) =
+        member _.Fractions(state: BucketKsAggregation, value: CoreTypes.Double list) =
             { state with Fractions = Some value }
 
         [<CustomOperation("samplingMethod")>]
@@ -471,19 +471,19 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("from")>]
-        member _.From(state: BucketSortAggregation, value: Types.Integer) =
+        member _.From(state: BucketSortAggregation, value: CoreTypes.Integer) =
             { state with From = Some value }
 
         [<CustomOperation("gapPolicy")>]
-        member _.GapPolicy(state: BucketSortAggregation, value: TypesAggregations.GapPolicy) =
+        member _.GapPolicy(state: BucketSortAggregation, value: CoreTypes.GapPolicy) =
             { state with GapPolicy = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: BucketSortAggregation, value: Types.Integer) =
+        member _.Size(state: BucketSortAggregation, value: CoreTypes.Integer) =
             { state with Size = Some value }
 
         [<CustomOperation("sort")>]
-        member _.Sort(state: BucketSortAggregation, value: Types.Sort) =
+        member _.Sort(state: BucketSortAggregation, value: CoreTypes.Sort) =
             { state with Sort = Some value }
 
     let bucketSortAggregation = BucketSortAggregationBuilder()
@@ -497,7 +497,7 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("precisionThreshold")>]
-        member _.PrecisionThreshold(state: CardinalityAggregation, value: Types.Integer) =
+        member _.PrecisionThreshold(state: CardinalityAggregation, value: CoreTypes.Integer) =
             { state with PrecisionThreshold = Some value }
 
         [<CustomOperation("rehash")>]
@@ -505,7 +505,7 @@ module TypesAggregationsBuilders =
             { state with Rehash = Some value }
 
         [<CustomOperation("executionHint")>]
-        member _.ExecutionHint(state: CardinalityAggregation, value: TypesAggregations.CardinalityExecutionMode) =
+        member _.ExecutionHint(state: CardinalityAggregation, value: CoreTypes.CardinalityExecutionMode) =
             { state with ExecutionHint = Some value }
 
     let cardinalityAggregation = CardinalityAggregationBuilder()
@@ -526,19 +526,19 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("field")>]
-        member _.Field(state: CategorizeTextAggregation, value: Types.Field) =
+        member _.Field(state: CategorizeTextAggregation, value: CoreTypes.Field) =
             { state with Field = value }
 
         [<CustomOperation("maxUniqueTokens")>]
-        member _.MaxUniqueTokens(state: CategorizeTextAggregation, value: Types.Integer) =
+        member _.MaxUniqueTokens(state: CategorizeTextAggregation, value: CoreTypes.Integer) =
             { state with MaxUniqueTokens = Some value }
 
         [<CustomOperation("maxMatchedTokens")>]
-        member _.MaxMatchedTokens(state: CategorizeTextAggregation, value: Types.Integer) =
+        member _.MaxMatchedTokens(state: CategorizeTextAggregation, value: CoreTypes.Integer) =
             { state with MaxMatchedTokens = Some value }
 
         [<CustomOperation("similarityThreshold")>]
-        member _.SimilarityThreshold(state: CategorizeTextAggregation, value: Types.Integer) =
+        member _.SimilarityThreshold(state: CategorizeTextAggregation, value: CoreTypes.Integer) =
             { state with SimilarityThreshold = Some value }
 
         [<CustomOperation("categorizationFilters")>]
@@ -546,51 +546,51 @@ module TypesAggregationsBuilders =
             { state with CategorizationFilters = Some value }
 
         [<CustomOperation("categorizationAnalyzer")>]
-        member _.CategorizationAnalyzer(state: CategorizeTextAggregation, value: TypesAggregations.CategorizeTextAnalyzer) =
+        member _.CategorizationAnalyzer(state: CategorizeTextAggregation, value: CoreTypes.CategorizeTextAnalyzer) =
             { state with CategorizationAnalyzer = Some value }
 
         [<CustomOperation("shardSize")>]
-        member _.ShardSize(state: CategorizeTextAggregation, value: Types.Integer) =
+        member _.ShardSize(state: CategorizeTextAggregation, value: CoreTypes.Integer) =
             { state with ShardSize = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: CategorizeTextAggregation, value: Types.Integer) =
+        member _.Size(state: CategorizeTextAggregation, value: CoreTypes.Integer) =
             { state with Size = Some value }
 
         [<CustomOperation("minDocCount")>]
-        member _.MinDocCount(state: CategorizeTextAggregation, value: Types.Integer) =
+        member _.MinDocCount(state: CategorizeTextAggregation, value: CoreTypes.Integer) =
             { state with MinDocCount = Some value }
 
         [<CustomOperation("shardMinDocCount")>]
-        member _.ShardMinDocCount(state: CategorizeTextAggregation, value: Types.Integer) =
+        member _.ShardMinDocCount(state: CategorizeTextAggregation, value: CoreTypes.Integer) =
             { state with ShardMinDocCount = Some value }
 
     let categorizeTextAggregation = CategorizeTextAggregationBuilder()
 
     module ChangeType =
 
-        let dip (value: TypesAggregations.Dip) =
+        let dip (value: CoreTypes.Dip) =
             ChangeType.Dip value
 
-        let distributionChange (value: TypesAggregations.DistributionChange) =
+        let distributionChange (value: CoreTypes.DistributionChange) =
             ChangeType.DistributionChange value
 
-        let indeterminable (value: TypesAggregations.Indeterminable) =
+        let indeterminable (value: CoreTypes.Indeterminable) =
             ChangeType.Indeterminable value
 
-        let nonStationary (value: TypesAggregations.NonStationary) =
+        let nonStationary (value: CoreTypes.NonStationary) =
             ChangeType.NonStationary value
 
-        let spike (value: TypesAggregations.Spike) =
+        let spike (value: CoreTypes.Spike) =
             ChangeType.Spike value
 
-        let stationary (value: TypesAggregations.Stationary) =
+        let stationary (value: CoreTypes.Stationary) =
             ChangeType.Stationary value
 
-        let stepChange (value: TypesAggregations.StepChange) =
+        let stepChange (value: CoreTypes.StepChange) =
             ChangeType.StepChange value
 
-        let trendChange (value: TypesAggregations.TrendChange) =
+        let trendChange (value: CoreTypes.TrendChange) =
             ChangeType.TrendChange value
 
     type CompositeAggregationBuilder() =
@@ -602,15 +602,15 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("after")>]
-        member _.After(state: CompositeAggregation, value: TypesAggregations.CompositeAggregateKey) =
+        member _.After(state: CompositeAggregation, value: CoreTypes.CompositeAggregateKey) =
             { state with After = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: CompositeAggregation, value: Types.Integer) =
+        member _.Size(state: CompositeAggregation, value: CoreTypes.Integer) =
             { state with Size = Some value }
 
         [<CustomOperation("sources")>]
-        member _.Sources(state: CompositeAggregation, value: Map<string, TypesAggregations.CompositeAggregationSource> list) =
+        member _.Sources(state: CompositeAggregation, value: Map<string, CoreTypes.CompositeAggregationSource> list) =
             { state with Sources = Some value }
 
     let compositeAggregation = CompositeAggregationBuilder()
@@ -627,7 +627,7 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("field")>]
-        member _.Field(state: CompositeAggregationBase, value: Types.Field) =
+        member _.Field(state: CompositeAggregationBase, value: CoreTypes.Field) =
             { state with Field = Some value }
 
         [<CustomOperation("missingBucket")>]
@@ -635,35 +635,35 @@ module TypesAggregationsBuilders =
             { state with MissingBucket = Some value }
 
         [<CustomOperation("missingOrder")>]
-        member _.MissingOrder(state: CompositeAggregationBase, value: TypesAggregations.MissingOrder) =
+        member _.MissingOrder(state: CompositeAggregationBase, value: CoreTypes.MissingOrder) =
             { state with MissingOrder = Some value }
 
         [<CustomOperation("script")>]
-        member _.Script(state: CompositeAggregationBase, value: Types.Script) =
+        member _.Script(state: CompositeAggregationBase, value: CoreTypes.Script) =
             { state with Script = Some value }
 
         [<CustomOperation("valueType")>]
-        member _.ValueType(state: CompositeAggregationBase, value: TypesAggregations.ValueType) =
+        member _.ValueType(state: CompositeAggregationBase, value: CoreTypes.ValueType) =
             { state with ValueType = Some value }
 
         [<CustomOperation("order")>]
-        member _.Order(state: CompositeAggregationBase, value: Types.SortOrder) =
+        member _.Order(state: CompositeAggregationBase, value: CoreTypes.SortOrder) =
             { state with Order = Some value }
 
     let compositeAggregationBase = CompositeAggregationBaseBuilder()
 
     module CompositeAggregationSource =
 
-        let terms (value: TypesAggregations.CompositeTermsAggregation) =
+        let terms (value: CoreTypes.CompositeTermsAggregation) =
             CompositeAggregationSource.Terms value
 
-        let histogram (value: TypesAggregations.CompositeHistogramAggregation) =
+        let histogram (value: CoreTypes.CompositeHistogramAggregation) =
             CompositeAggregationSource.Histogram value
 
-        let dateHistogram (value: TypesAggregations.CompositeDateHistogramAggregation) =
+        let dateHistogram (value: CoreTypes.CompositeDateHistogramAggregation) =
             CompositeAggregationSource.DateHistogram value
 
-        let geotileGrid (value: TypesAggregations.CompositeGeoTileGridAggregation) =
+        let geotileGrid (value: CoreTypes.CompositeGeoTileGridAggregation) =
             CompositeAggregationSource.GeotileGrid value
 
     type CompositeDateHistogramAggregationBuilder() =
@@ -681,19 +681,19 @@ module TypesAggregationsBuilders =
             { state with Format = Some value }
 
         [<CustomOperation("calendarInterval")>]
-        member _.CalendarInterval(state: CompositeDateHistogramAggregation, value: Types.DurationLarge) =
+        member _.CalendarInterval(state: CompositeDateHistogramAggregation, value: CoreTypes.DurationLarge) =
             { state with CalendarInterval = Some value }
 
         [<CustomOperation("fixedInterval")>]
-        member _.FixedInterval(state: CompositeDateHistogramAggregation, value: Types.DurationLarge) =
+        member _.FixedInterval(state: CompositeDateHistogramAggregation, value: CoreTypes.DurationLarge) =
             { state with FixedInterval = Some value }
 
         [<CustomOperation("offset")>]
-        member _.Offset(state: CompositeDateHistogramAggregation, value: Types.Duration) =
+        member _.Offset(state: CompositeDateHistogramAggregation, value: CoreTypes.Duration) =
             { state with Offset = Some value }
 
         [<CustomOperation("timeZone")>]
-        member _.TimeZone(state: CompositeDateHistogramAggregation, value: Types.TimeZone) =
+        member _.TimeZone(state: CompositeDateHistogramAggregation, value: CoreTypes.TimeZone) =
             { state with TimeZone = Some value }
 
     let compositeDateHistogramAggregation = CompositeDateHistogramAggregationBuilder()
@@ -706,11 +706,11 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("precision")>]
-        member _.Precision(state: CompositeGeoTileGridAggregation, value: Types.Integer) =
+        member _.Precision(state: CompositeGeoTileGridAggregation, value: CoreTypes.Integer) =
             { state with Precision = Some value }
 
         [<CustomOperation("bounds")>]
-        member _.Bounds(state: CompositeGeoTileGridAggregation, value: Types.GeoBounds) =
+        member _.Bounds(state: CompositeGeoTileGridAggregation, value: CoreTypes.GeoBounds) =
             { state with Bounds = Some value }
 
     let compositeGeoTileGridAggregation = CompositeGeoTileGridAggregationBuilder()
@@ -758,23 +758,23 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("calendarInterval")>]
-        member _.CalendarInterval(state: DateHistogramAggregation, value: TypesAggregations.CalendarInterval) =
+        member _.CalendarInterval(state: DateHistogramAggregation, value: CoreTypes.CalendarInterval) =
             { state with CalendarInterval = Some value }
 
         [<CustomOperation("extendedBounds")>]
-        member _.ExtendedBounds(state: DateHistogramAggregation, value: TypesAggregations.ExtendedBounds<TypesAggregations.FieldDateMath>) =
+        member _.ExtendedBounds(state: DateHistogramAggregation, value: CoreTypes.ExtendedBounds<CoreTypes.FieldDateMath>) =
             { state with ExtendedBounds = Some value }
 
         [<CustomOperation("hardBounds")>]
-        member _.HardBounds(state: DateHistogramAggregation, value: TypesAggregations.ExtendedBounds<TypesAggregations.FieldDateMath>) =
+        member _.HardBounds(state: DateHistogramAggregation, value: CoreTypes.ExtendedBounds<CoreTypes.FieldDateMath>) =
             { state with HardBounds = Some value }
 
         [<CustomOperation("field")>]
-        member _.Field(state: DateHistogramAggregation, value: Types.Field) =
+        member _.Field(state: DateHistogramAggregation, value: CoreTypes.Field) =
             { state with Field = Some value }
 
         [<CustomOperation("fixedInterval")>]
-        member _.FixedInterval(state: DateHistogramAggregation, value: Types.Duration) =
+        member _.FixedInterval(state: DateHistogramAggregation, value: CoreTypes.Duration) =
             { state with FixedInterval = Some value }
 
         [<CustomOperation("format")>]
@@ -782,23 +782,23 @@ module TypesAggregationsBuilders =
             { state with Format = Some value }
 
         [<CustomOperation("interval")>]
-        member _.Interval(state: DateHistogramAggregation, value: Types.Duration) =
+        member _.Interval(state: DateHistogramAggregation, value: CoreTypes.Duration) =
             { state with Interval = Some value }
 
         [<CustomOperation("minDocCount")>]
-        member _.MinDocCount(state: DateHistogramAggregation, value: Types.Integer) =
+        member _.MinDocCount(state: DateHistogramAggregation, value: CoreTypes.Integer) =
             { state with MinDocCount = Some value }
 
         [<CustomOperation("missing")>]
-        member _.Missing(state: DateHistogramAggregation, value: Types.DateTime) =
+        member _.Missing(state: DateHistogramAggregation, value: CoreTypes.DateTime) =
             { state with Missing = Some value }
 
         [<CustomOperation("offset")>]
-        member _.Offset(state: DateHistogramAggregation, value: Types.Duration) =
+        member _.Offset(state: DateHistogramAggregation, value: CoreTypes.Duration) =
             { state with Offset = Some value }
 
         [<CustomOperation("order")>]
-        member _.Order(state: DateHistogramAggregation, value: TypesAggregations.AggregateOrder) =
+        member _.Order(state: DateHistogramAggregation, value: CoreTypes.AggregateOrder) =
             { state with Order = Some value }
 
         [<CustomOperation("params")>]
@@ -806,11 +806,11 @@ module TypesAggregationsBuilders =
             { state with Params = Some value }
 
         [<CustomOperation("script")>]
-        member _.Script(state: DateHistogramAggregation, value: Types.Script) =
+        member _.Script(state: DateHistogramAggregation, value: CoreTypes.Script) =
             { state with Script = Some value }
 
         [<CustomOperation("timeZone")>]
-        member _.TimeZone(state: DateHistogramAggregation, value: Types.TimeZone) =
+        member _.TimeZone(state: DateHistogramAggregation, value: CoreTypes.TimeZone) =
             { state with TimeZone = Some value }
 
         [<CustomOperation("keyed")>]
@@ -831,7 +831,7 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("field")>]
-        member _.Field(state: DateRangeAggregation, value: Types.Field) =
+        member _.Field(state: DateRangeAggregation, value: CoreTypes.Field) =
             { state with Field = Some value }
 
         [<CustomOperation("format")>]
@@ -839,15 +839,15 @@ module TypesAggregationsBuilders =
             { state with Format = Some value }
 
         [<CustomOperation("missing")>]
-        member _.Missing(state: DateRangeAggregation, value: TypesAggregations.Missing) =
+        member _.Missing(state: DateRangeAggregation, value: CoreTypes.Missing) =
             { state with Missing = Some value }
 
         [<CustomOperation("ranges")>]
-        member _.Ranges(state: DateRangeAggregation, value: TypesAggregations.DateRangeExpression list) =
+        member _.Ranges(state: DateRangeAggregation, value: CoreTypes.DateRangeExpression list) =
             { state with Ranges = Some value }
 
         [<CustomOperation("timeZone")>]
-        member _.TimeZone(state: DateRangeAggregation, value: Types.TimeZone) =
+        member _.TimeZone(state: DateRangeAggregation, value: CoreTypes.TimeZone) =
             { state with TimeZone = Some value }
 
         [<CustomOperation("keyed")>]
@@ -865,7 +865,7 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("from")>]
-        member _.From(state: DateRangeExpression, value: TypesAggregations.FieldDateMath) =
+        member _.From(state: DateRangeExpression, value: CoreTypes.FieldDateMath) =
             { state with From = Some value }
 
         [<CustomOperation("key")>]
@@ -873,7 +873,7 @@ module TypesAggregationsBuilders =
             { state with Key = Some value }
 
         [<CustomOperation("to'")>]
-        member _.To(state: DateRangeExpression, value: TypesAggregations.FieldDateMath) =
+        member _.To(state: DateRangeExpression, value: CoreTypes.FieldDateMath) =
             { state with To = Some value }
 
     let dateRangeExpression = DateRangeExpressionBuilder()
@@ -886,7 +886,7 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("normalizedValue")>]
-        member _.NormalizedValue(state: DerivativeAggregate, value: Types.Double) =
+        member _.NormalizedValue(state: DerivativeAggregate, value: CoreTypes.Double) =
             { state with NormalizedValue = Some value }
 
         [<CustomOperation("normalizedValueAsString")>]
@@ -906,23 +906,23 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("executionHint")>]
-        member _.ExecutionHint(state: DiversifiedSamplerAggregation, value: TypesAggregations.SamplerAggregationExecutionHint) =
+        member _.ExecutionHint(state: DiversifiedSamplerAggregation, value: CoreTypes.SamplerAggregationExecutionHint) =
             { state with ExecutionHint = Some value }
 
         [<CustomOperation("maxDocsPerValue")>]
-        member _.MaxDocsPerValue(state: DiversifiedSamplerAggregation, value: Types.Integer) =
+        member _.MaxDocsPerValue(state: DiversifiedSamplerAggregation, value: CoreTypes.Integer) =
             { state with MaxDocsPerValue = Some value }
 
         [<CustomOperation("script")>]
-        member _.Script(state: DiversifiedSamplerAggregation, value: Types.Script) =
+        member _.Script(state: DiversifiedSamplerAggregation, value: CoreTypes.Script) =
             { state with Script = Some value }
 
         [<CustomOperation("shardSize")>]
-        member _.ShardSize(state: DiversifiedSamplerAggregation, value: Types.Integer) =
+        member _.ShardSize(state: DiversifiedSamplerAggregation, value: CoreTypes.Integer) =
             { state with ShardSize = Some value }
 
         [<CustomOperation("field")>]
-        member _.Field(state: DiversifiedSamplerAggregation, value: Types.Field) =
+        member _.Field(state: DiversifiedSamplerAggregation, value: CoreTypes.Field) =
             { state with Field = Some value }
 
     let diversifiedSamplerAggregation = DiversifiedSamplerAggregationBuilder()
@@ -964,35 +964,35 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("sumOfSquares")>]
-        member _.SumOfSquares(state: ExtendedStatsAggregate, value: Types.Double option) =
+        member _.SumOfSquares(state: ExtendedStatsAggregate, value: CoreTypes.Double option) =
             { state with SumOfSquares = value }
 
         [<CustomOperation("variance")>]
-        member _.Variance(state: ExtendedStatsAggregate, value: Types.Double option) =
+        member _.Variance(state: ExtendedStatsAggregate, value: CoreTypes.Double option) =
             { state with Variance = value }
 
         [<CustomOperation("variancePopulation")>]
-        member _.VariancePopulation(state: ExtendedStatsAggregate, value: Types.Double option) =
+        member _.VariancePopulation(state: ExtendedStatsAggregate, value: CoreTypes.Double option) =
             { state with VariancePopulation = value }
 
         [<CustomOperation("varianceSampling")>]
-        member _.VarianceSampling(state: ExtendedStatsAggregate, value: Types.Double option) =
+        member _.VarianceSampling(state: ExtendedStatsAggregate, value: CoreTypes.Double option) =
             { state with VarianceSampling = value }
 
         [<CustomOperation("stdDeviation")>]
-        member _.StdDeviation(state: ExtendedStatsAggregate, value: Types.Double option) =
+        member _.StdDeviation(state: ExtendedStatsAggregate, value: CoreTypes.Double option) =
             { state with StdDeviation = value }
 
         [<CustomOperation("stdDeviationPopulation")>]
-        member _.StdDeviationPopulation(state: ExtendedStatsAggregate, value: Types.Double option) =
+        member _.StdDeviationPopulation(state: ExtendedStatsAggregate, value: CoreTypes.Double option) =
             { state with StdDeviationPopulation = value }
 
         [<CustomOperation("stdDeviationSampling")>]
-        member _.StdDeviationSampling(state: ExtendedStatsAggregate, value: Types.Double option) =
+        member _.StdDeviationSampling(state: ExtendedStatsAggregate, value: CoreTypes.Double option) =
             { state with StdDeviationSampling = value }
 
         [<CustomOperation("stdDeviationBounds")>]
-        member _.StdDeviationBounds(state: ExtendedStatsAggregate, value: TypesAggregations.StandardDeviationBounds) =
+        member _.StdDeviationBounds(state: ExtendedStatsAggregate, value: CoreTypes.StandardDeviationBounds) =
             { state with StdDeviationBounds = Some value }
 
         [<CustomOperation("sumOfSquaresAsString")>]
@@ -1016,7 +1016,7 @@ module TypesAggregationsBuilders =
             { state with StdDeviationAsString = Some value }
 
         [<CustomOperation("stdDeviationBoundsAsString")>]
-        member _.StdDeviationBoundsAsString(state: ExtendedStatsAggregate, value: TypesAggregations.StandardDeviationBoundsAsString) =
+        member _.StdDeviationBoundsAsString(state: ExtendedStatsAggregate, value: CoreTypes.StandardDeviationBoundsAsString) =
             { state with StdDeviationBoundsAsString = Some value }
 
     let extendedStatsAggregate = ExtendedStatsAggregateBuilder()
@@ -1031,7 +1031,7 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("filters")>]
-        member _.Filters(state: FiltersAggregation, value: TypesAggregations.Buckets<TypesQueryDsl.QueryContainer>) =
+        member _.Filters(state: FiltersAggregation, value: CoreTypes.Buckets<CoreTypes.QueryContainer>) =
             { state with Filters = Some value }
 
         [<CustomOperation("otherBucket")>]
@@ -1059,23 +1059,23 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("fields")>]
-        member _.Fields(state: FrequentItemSetsAggregation, value: TypesAggregations.FrequentItemSetsField list) =
+        member _.Fields(state: FrequentItemSetsAggregation, value: CoreTypes.FrequentItemSetsField list) =
             { state with Fields = value }
 
         [<CustomOperation("minimumSetSize")>]
-        member _.MinimumSetSize(state: FrequentItemSetsAggregation, value: Types.Integer) =
+        member _.MinimumSetSize(state: FrequentItemSetsAggregation, value: CoreTypes.Integer) =
             { state with MinimumSetSize = Some value }
 
         [<CustomOperation("minimumSupport")>]
-        member _.MinimumSupport(state: FrequentItemSetsAggregation, value: Types.Double) =
+        member _.MinimumSupport(state: FrequentItemSetsAggregation, value: CoreTypes.Double) =
             { state with MinimumSupport = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: FrequentItemSetsAggregation, value: Types.Integer) =
+        member _.Size(state: FrequentItemSetsAggregation, value: CoreTypes.Integer) =
             { state with Size = Some value }
 
         [<CustomOperation("filter")>]
-        member _.Filter(state: FrequentItemSetsAggregation, value: TypesQueryDsl.QueryContainer) =
+        member _.Filter(state: FrequentItemSetsAggregation, value: CoreTypes.QueryContainer) =
             { state with Filter = Some value }
 
     let frequentItemSetsAggregation = FrequentItemSetsAggregationBuilder()
@@ -1089,15 +1089,15 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("field")>]
-        member _.Field(state: FrequentItemSetsField, value: Types.Field) =
+        member _.Field(state: FrequentItemSetsField, value: CoreTypes.Field) =
             { state with Field = value }
 
         [<CustomOperation("exclude")>]
-        member _.Exclude(state: FrequentItemSetsField, value: TypesAggregations.TermsExclude) =
+        member _.Exclude(state: FrequentItemSetsField, value: CoreTypes.TermsExclude) =
             { state with Exclude = Some value }
 
         [<CustomOperation("include")>]
-        member _.Include(state: FrequentItemSetsField, value: TypesAggregations.TermsInclude) =
+        member _.Include(state: FrequentItemSetsField, value: CoreTypes.TermsInclude) =
             { state with Include = Some value }
 
     let frequentItemSetsField = FrequentItemSetsFieldBuilder()
@@ -1110,11 +1110,11 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("count")>]
-        member _.Count(state: GeoCentroidAggregation, value: Types.Long) =
+        member _.Count(state: GeoCentroidAggregation, value: CoreTypes.Long) =
             { state with Count = Some value }
 
         [<CustomOperation("location")>]
-        member _.Location(state: GeoCentroidAggregation, value: Types.GeoLocation) =
+        member _.Location(state: GeoCentroidAggregation, value: CoreTypes.GeoLocation) =
             { state with Location = Some value }
 
     let geoCentroidAggregation = GeoCentroidAggregationBuilder()
@@ -1130,23 +1130,23 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("distanceType")>]
-        member _.DistanceType(state: GeoDistanceAggregation, value: Types.GeoDistanceType) =
+        member _.DistanceType(state: GeoDistanceAggregation, value: CoreTypes.GeoDistanceType) =
             { state with DistanceType = Some value }
 
         [<CustomOperation("field")>]
-        member _.Field(state: GeoDistanceAggregation, value: Types.Field) =
+        member _.Field(state: GeoDistanceAggregation, value: CoreTypes.Field) =
             { state with Field = Some value }
 
         [<CustomOperation("origin")>]
-        member _.Origin(state: GeoDistanceAggregation, value: Types.GeoLocation) =
+        member _.Origin(state: GeoDistanceAggregation, value: CoreTypes.GeoLocation) =
             { state with Origin = Some value }
 
         [<CustomOperation("ranges")>]
-        member _.Ranges(state: GeoDistanceAggregation, value: TypesAggregations.AggregationRange list) =
+        member _.Ranges(state: GeoDistanceAggregation, value: CoreTypes.AggregationRange list) =
             { state with Ranges = Some value }
 
         [<CustomOperation("unit")>]
-        member _.Unit(state: GeoDistanceAggregation, value: Types.DistanceUnit) =
+        member _.Unit(state: GeoDistanceAggregation, value: CoreTypes.DistanceUnit) =
             { state with Unit = Some value }
 
     let geoDistanceAggregation = GeoDistanceAggregationBuilder()
@@ -1162,23 +1162,23 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("bounds")>]
-        member _.Bounds(state: GeoHashGridAggregation, value: Types.GeoBounds) =
+        member _.Bounds(state: GeoHashGridAggregation, value: CoreTypes.GeoBounds) =
             { state with Bounds = Some value }
 
         [<CustomOperation("field")>]
-        member _.Field(state: GeoHashGridAggregation, value: Types.Field) =
+        member _.Field(state: GeoHashGridAggregation, value: CoreTypes.Field) =
             { state with Field = Some value }
 
         [<CustomOperation("precision")>]
-        member _.Precision(state: GeoHashGridAggregation, value: Types.GeoHashPrecision) =
+        member _.Precision(state: GeoHashGridAggregation, value: CoreTypes.GeoHashPrecision) =
             { state with Precision = Some value }
 
         [<CustomOperation("shardSize")>]
-        member _.ShardSize(state: GeoHashGridAggregation, value: Types.Integer) =
+        member _.ShardSize(state: GeoHashGridAggregation, value: CoreTypes.Integer) =
             { state with ShardSize = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: GeoHashGridAggregation, value: Types.Integer) =
+        member _.Size(state: GeoHashGridAggregation, value: CoreTypes.Integer) =
             { state with Size = Some value }
 
     let geoHashGridAggregation = GeoHashGridAggregationBuilder()
@@ -1194,11 +1194,11 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("point")>]
-        member _.Point(state: GeoLineAggregation, value: TypesAggregations.GeoLinePoint) =
+        member _.Point(state: GeoLineAggregation, value: CoreTypes.GeoLinePoint) =
             { state with Point = value }
 
         [<CustomOperation("sort")>]
-        member _.Sort(state: GeoLineAggregation, value: TypesAggregations.GeoLineSort) =
+        member _.Sort(state: GeoLineAggregation, value: CoreTypes.GeoLineSort) =
             { state with Sort = Some value }
 
         [<CustomOperation("includeSort")>]
@@ -1206,11 +1206,11 @@ module TypesAggregationsBuilders =
             { state with IncludeSort = Some value }
 
         [<CustomOperation("sortOrder")>]
-        member _.SortOrder(state: GeoLineAggregation, value: Types.SortOrder) =
+        member _.SortOrder(state: GeoLineAggregation, value: CoreTypes.SortOrder) =
             { state with SortOrder = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: GeoLineAggregation, value: Types.Integer) =
+        member _.Size(state: GeoLineAggregation, value: CoreTypes.Integer) =
             { state with Size = Some value }
 
     let geoLineAggregation = GeoLineAggregationBuilder()
@@ -1226,23 +1226,23 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("field")>]
-        member _.Field(state: GeoTileGridAggregation, value: Types.Field) =
+        member _.Field(state: GeoTileGridAggregation, value: CoreTypes.Field) =
             { state with Field = Some value }
 
         [<CustomOperation("precision")>]
-        member _.Precision(state: GeoTileGridAggregation, value: Types.GeoTilePrecision) =
+        member _.Precision(state: GeoTileGridAggregation, value: CoreTypes.GeoTilePrecision) =
             { state with Precision = Some value }
 
         [<CustomOperation("shardSize")>]
-        member _.ShardSize(state: GeoTileGridAggregation, value: Types.Integer) =
+        member _.ShardSize(state: GeoTileGridAggregation, value: CoreTypes.Integer) =
             { state with ShardSize = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: GeoTileGridAggregation, value: Types.Integer) =
+        member _.Size(state: GeoTileGridAggregation, value: CoreTypes.Integer) =
             { state with Size = Some value }
 
         [<CustomOperation("bounds")>]
-        member _.Bounds(state: GeoTileGridAggregation, value: Types.GeoBounds) =
+        member _.Bounds(state: GeoTileGridAggregation, value: CoreTypes.GeoBounds) =
             { state with Bounds = Some value }
 
     let geoTileGridAggregation = GeoTileGridAggregationBuilder()
@@ -1258,23 +1258,23 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("field")>]
-        member _.Field(state: GeohexGridAggregation, value: Types.Field) =
+        member _.Field(state: GeohexGridAggregation, value: CoreTypes.Field) =
             { state with Field = value }
 
         [<CustomOperation("precision")>]
-        member _.Precision(state: GeohexGridAggregation, value: Types.Integer) =
+        member _.Precision(state: GeohexGridAggregation, value: CoreTypes.Integer) =
             { state with Precision = Some value }
 
         [<CustomOperation("bounds")>]
-        member _.Bounds(state: GeohexGridAggregation, value: Types.GeoBounds) =
+        member _.Bounds(state: GeohexGridAggregation, value: CoreTypes.GeoBounds) =
             { state with Bounds = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: GeohexGridAggregation, value: Types.Integer) =
+        member _.Size(state: GeohexGridAggregation, value: CoreTypes.Integer) =
             { state with Size = Some value }
 
         [<CustomOperation("shardSize")>]
-        member _.ShardSize(state: GeohexGridAggregation, value: Types.Integer) =
+        member _.ShardSize(state: GeohexGridAggregation, value: CoreTypes.Integer) =
             { state with ShardSize = Some value }
 
     let geohexGridAggregation = GeohexGridAggregationBuilder()
@@ -1296,39 +1296,39 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("extendedBounds")>]
-        member _.ExtendedBounds(state: HistogramAggregation, value: TypesAggregations.ExtendedBounds<Types.Double>) =
+        member _.ExtendedBounds(state: HistogramAggregation, value: CoreTypes.ExtendedBounds<CoreTypes.Double>) =
             { state with ExtendedBounds = Some value }
 
         [<CustomOperation("hardBounds")>]
-        member _.HardBounds(state: HistogramAggregation, value: TypesAggregations.ExtendedBounds<Types.Double>) =
+        member _.HardBounds(state: HistogramAggregation, value: CoreTypes.ExtendedBounds<CoreTypes.Double>) =
             { state with HardBounds = Some value }
 
         [<CustomOperation("field")>]
-        member _.Field(state: HistogramAggregation, value: Types.Field) =
+        member _.Field(state: HistogramAggregation, value: CoreTypes.Field) =
             { state with Field = Some value }
 
         [<CustomOperation("interval")>]
-        member _.Interval(state: HistogramAggregation, value: Types.Double) =
+        member _.Interval(state: HistogramAggregation, value: CoreTypes.Double) =
             { state with Interval = Some value }
 
         [<CustomOperation("minDocCount")>]
-        member _.MinDocCount(state: HistogramAggregation, value: Types.Integer) =
+        member _.MinDocCount(state: HistogramAggregation, value: CoreTypes.Integer) =
             { state with MinDocCount = Some value }
 
         [<CustomOperation("missing")>]
-        member _.Missing(state: HistogramAggregation, value: Types.Double) =
+        member _.Missing(state: HistogramAggregation, value: CoreTypes.Double) =
             { state with Missing = Some value }
 
         [<CustomOperation("offset")>]
-        member _.Offset(state: HistogramAggregation, value: Types.Double) =
+        member _.Offset(state: HistogramAggregation, value: CoreTypes.Double) =
             { state with Offset = Some value }
 
         [<CustomOperation("order")>]
-        member _.Order(state: HistogramAggregation, value: TypesAggregations.AggregateOrder) =
+        member _.Order(state: HistogramAggregation, value: CoreTypes.AggregateOrder) =
             { state with Order = Some value }
 
         [<CustomOperation("script")>]
-        member _.Script(state: HistogramAggregation, value: Types.Script) =
+        member _.Script(state: HistogramAggregation, value: CoreTypes.Script) =
             { state with Script = Some value }
 
         [<CustomOperation("format")>]
@@ -1349,11 +1349,11 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("alpha")>]
-        member _.Alpha(state: HoltLinearModelSettings, value: Types.Float) =
+        member _.Alpha(state: HoltLinearModelSettings, value: CoreTypes.Float) =
             { state with Alpha = Some value }
 
         [<CustomOperation("beta")>]
-        member _.Beta(state: HoltLinearModelSettings, value: Types.Float) =
+        member _.Beta(state: HoltLinearModelSettings, value: CoreTypes.Float) =
             { state with Beta = Some value }
 
     let holtLinearModelSettings = HoltLinearModelSettingsBuilder()
@@ -1370,15 +1370,15 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("alpha")>]
-        member _.Alpha(state: HoltWintersModelSettings, value: Types.Float) =
+        member _.Alpha(state: HoltWintersModelSettings, value: CoreTypes.Float) =
             { state with Alpha = Some value }
 
         [<CustomOperation("beta")>]
-        member _.Beta(state: HoltWintersModelSettings, value: Types.Float) =
+        member _.Beta(state: HoltWintersModelSettings, value: CoreTypes.Float) =
             { state with Beta = Some value }
 
         [<CustomOperation("gamma")>]
-        member _.Gamma(state: HoltWintersModelSettings, value: Types.Float) =
+        member _.Gamma(state: HoltWintersModelSettings, value: CoreTypes.Float) =
             { state with Gamma = Some value }
 
         [<CustomOperation("pad")>]
@@ -1386,11 +1386,11 @@ module TypesAggregationsBuilders =
             { state with Pad = Some value }
 
         [<CustomOperation("period")>]
-        member _.Period(state: HoltWintersModelSettings, value: Types.Integer) =
+        member _.Period(state: HoltWintersModelSettings, value: CoreTypes.Integer) =
             { state with Period = Some value }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: HoltWintersModelSettings, value: TypesAggregations.HoltWintersType) =
+        member _.Type(state: HoltWintersModelSettings, value: CoreTypes.HoltWintersType) =
             { state with Type = Some value }
 
     let holtWintersModelSettings = HoltWintersModelSettingsBuilder()
@@ -1405,15 +1405,15 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("value")>]
-        member _.Value(state: InferenceAggregate, value: Types.FieldValue) =
+        member _.Value(state: InferenceAggregate, value: CoreTypes.FieldValue) =
             { state with Value = Some value }
 
         [<CustomOperation("featureImportance")>]
-        member _.FeatureImportance(state: InferenceAggregate, value: TypesAggregations.InferenceFeatureImportance list) =
+        member _.FeatureImportance(state: InferenceAggregate, value: CoreTypes.InferenceFeatureImportance list) =
             { state with FeatureImportance = Some value }
 
         [<CustomOperation("topClasses")>]
-        member _.TopClasses(state: InferenceAggregate, value: TypesAggregations.InferenceTopClassEntry list) =
+        member _.TopClasses(state: InferenceAggregate, value: CoreTypes.InferenceTopClassEntry list) =
             { state with TopClasses = Some value }
 
         [<CustomOperation("warning")>]
@@ -1443,11 +1443,11 @@ module TypesAggregationsBuilders =
             { state with FeatureName = value }
 
         [<CustomOperation("importance")>]
-        member _.Importance(state: InferenceFeatureImportance, value: Types.Double) =
+        member _.Importance(state: InferenceFeatureImportance, value: CoreTypes.Double) =
             { state with Importance = Some value }
 
         [<CustomOperation("classes")>]
-        member _.Classes(state: InferenceFeatureImportance, value: TypesAggregations.InferenceClassImportance list) =
+        member _.Classes(state: InferenceFeatureImportance, value: CoreTypes.InferenceClassImportance list) =
             { state with Classes = Some value }
 
     let inferenceFeatureImportance = InferenceFeatureImportanceBuilder()
@@ -1464,11 +1464,11 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("field")>]
-        member _.Field(state: IpPrefixAggregation, value: Types.Field) =
+        member _.Field(state: IpPrefixAggregation, value: CoreTypes.Field) =
             { state with Field = value }
 
         [<CustomOperation("prefixLength")>]
-        member _.PrefixLength(state: IpPrefixAggregation, value: Types.Integer) =
+        member _.PrefixLength(state: IpPrefixAggregation, value: CoreTypes.Integer) =
             { state with PrefixLength = value }
 
         [<CustomOperation("isIpv6")>]
@@ -1484,7 +1484,7 @@ module TypesAggregationsBuilders =
             { state with Keyed = Some value }
 
         [<CustomOperation("minDocCount")>]
-        member _.MinDocCount(state: IpPrefixAggregation, value: Types.Long) =
+        member _.MinDocCount(state: IpPrefixAggregation, value: CoreTypes.Long) =
             { state with MinDocCount = Some value }
 
     let ipPrefixAggregation = IpPrefixAggregationBuilder()
@@ -1497,11 +1497,11 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("field")>]
-        member _.Field(state: IpRangeAggregation, value: Types.Field) =
+        member _.Field(state: IpRangeAggregation, value: CoreTypes.Field) =
             { state with Field = Some value }
 
         [<CustomOperation("ranges")>]
-        member _.Ranges(state: IpRangeAggregation, value: TypesAggregations.IpRangeAggregationRange list) =
+        member _.Ranges(state: IpRangeAggregation, value: CoreTypes.IpRangeAggregationRange list) =
             { state with Ranges = Some value }
 
     let ipRangeAggregation = IpRangeAggregationBuilder()
@@ -1558,11 +1558,11 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("fields")>]
-        member _.Fields(state: MatrixAggregation, value: Types.Fields) =
+        member _.Fields(state: MatrixAggregation, value: CoreTypes.Fields) =
             { state with Fields = Some value }
 
         [<CustomOperation("missing")>]
-        member _.Missing(state: MatrixAggregation, value: Map<Types.Field, Types.Double>) =
+        member _.Missing(state: MatrixAggregation, value: Map<CoreTypes.Field, CoreTypes.Double>) =
             { state with Missing = Some value }
 
     let matrixAggregation = MatrixAggregationBuilder()
@@ -1575,11 +1575,11 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("compression")>]
-        member _.Compression(state: MedianAbsoluteDeviationAggregation, value: Types.Double) =
+        member _.Compression(state: MedianAbsoluteDeviationAggregation, value: CoreTypes.Double) =
             { state with Compression = Some value }
 
         [<CustomOperation("executionHint")>]
-        member _.ExecutionHint(state: MedianAbsoluteDeviationAggregation, value: TypesAggregations.TDigestExecutionHint) =
+        member _.ExecutionHint(state: MedianAbsoluteDeviationAggregation, value: CoreTypes.TDigestExecutionHint) =
             { state with ExecutionHint = Some value }
 
     let medianAbsoluteDeviationAggregation = MedianAbsoluteDeviationAggregationBuilder()
@@ -1593,15 +1593,15 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("field")>]
-        member _.Field(state: MetricAggregationBase, value: Types.Field) =
+        member _.Field(state: MetricAggregationBase, value: CoreTypes.Field) =
             { state with Field = Some value }
 
         [<CustomOperation("missing")>]
-        member _.Missing(state: MetricAggregationBase, value: TypesAggregations.Missing) =
+        member _.Missing(state: MetricAggregationBase, value: CoreTypes.Missing) =
             { state with Missing = Some value }
 
         [<CustomOperation("script")>]
-        member _.Script(state: MetricAggregationBase, value: Types.Script) =
+        member _.Script(state: MetricAggregationBase, value: CoreTypes.Script) =
             { state with Script = Some value }
 
     let metricAggregationBase = MetricAggregationBaseBuilder()
@@ -1614,11 +1614,11 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("field")>]
-        member _.Field(state: MissingAggregation, value: Types.Field) =
+        member _.Field(state: MissingAggregation, value: CoreTypes.Field) =
             { state with Field = Some value }
 
         [<CustomOperation("missing")>]
-        member _.Missing(state: MissingAggregation, value: TypesAggregations.Missing) =
+        member _.Missing(state: MissingAggregation, value: CoreTypes.Missing) =
             { state with Missing = Some value }
 
     let missingAggregation = MissingAggregationBuilder()
@@ -1636,11 +1636,11 @@ module TypesAggregationsBuilders =
             { state with Minimize = Some value }
 
         [<CustomOperation("predict")>]
-        member _.Predict(state: MovingAverageAggregationBase, value: Types.Integer) =
+        member _.Predict(state: MovingAverageAggregationBase, value: CoreTypes.Integer) =
             { state with Predict = Some value }
 
         [<CustomOperation("window")>]
-        member _.Window(state: MovingAverageAggregationBase, value: Types.Integer) =
+        member _.Window(state: MovingAverageAggregationBase, value: CoreTypes.Integer) =
             { state with Window = Some value }
 
     let movingAverageAggregationBase = MovingAverageAggregationBaseBuilder()
@@ -1658,11 +1658,11 @@ module TypesAggregationsBuilders =
             { state with Script = Some value }
 
         [<CustomOperation("shift")>]
-        member _.Shift(state: MovingFunctionAggregation, value: Types.Integer) =
+        member _.Shift(state: MovingFunctionAggregation, value: CoreTypes.Integer) =
             { state with Shift = Some value }
 
         [<CustomOperation("window")>]
-        member _.Window(state: MovingFunctionAggregation, value: Types.Integer) =
+        member _.Window(state: MovingFunctionAggregation, value: CoreTypes.Integer) =
             { state with Window = Some value }
 
     let movingFunctionAggregation = MovingFunctionAggregationBuilder()
@@ -1676,11 +1676,11 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("window")>]
-        member _.Window(state: MovingPercentilesAggregation, value: Types.Integer) =
+        member _.Window(state: MovingPercentilesAggregation, value: CoreTypes.Integer) =
             { state with Window = Some value }
 
         [<CustomOperation("shift")>]
-        member _.Shift(state: MovingPercentilesAggregation, value: Types.Integer) =
+        member _.Shift(state: MovingPercentilesAggregation, value: CoreTypes.Integer) =
             { state with Shift = Some value }
 
         [<CustomOperation("keyed")>]
@@ -1691,10 +1691,10 @@ module TypesAggregationsBuilders =
 
     module MultiTermLookup =
 
-        let field (value: Types.Field) =
+        let field (value: CoreTypes.Field) =
             MultiTermLookup.Field value
 
-        let script (value: Types.Script) =
+        let script (value: CoreTypes.Script) =
             MultiTermLookup.Script value
 
     type MultiTermsAggregationBuilder() =
@@ -1711,23 +1711,23 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("collectMode")>]
-        member _.CollectMode(state: MultiTermsAggregation, value: TypesAggregations.TermsAggregationCollectMode) =
+        member _.CollectMode(state: MultiTermsAggregation, value: CoreTypes.TermsAggregationCollectMode) =
             { state with CollectMode = Some value }
 
         [<CustomOperation("order")>]
-        member _.Order(state: MultiTermsAggregation, value: TypesAggregations.AggregateOrder) =
+        member _.Order(state: MultiTermsAggregation, value: CoreTypes.AggregateOrder) =
             { state with Order = Some value }
 
         [<CustomOperation("minDocCount")>]
-        member _.MinDocCount(state: MultiTermsAggregation, value: Types.Long) =
+        member _.MinDocCount(state: MultiTermsAggregation, value: CoreTypes.Long) =
             { state with MinDocCount = Some value }
 
         [<CustomOperation("shardMinDocCount")>]
-        member _.ShardMinDocCount(state: MultiTermsAggregation, value: Types.Long) =
+        member _.ShardMinDocCount(state: MultiTermsAggregation, value: CoreTypes.Long) =
             { state with ShardMinDocCount = Some value }
 
         [<CustomOperation("shardSize")>]
-        member _.ShardSize(state: MultiTermsAggregation, value: Types.Integer) =
+        member _.ShardSize(state: MultiTermsAggregation, value: CoreTypes.Integer) =
             { state with ShardSize = Some value }
 
         [<CustomOperation("showTermDocCountError")>]
@@ -1735,11 +1735,11 @@ module TypesAggregationsBuilders =
             { state with ShowTermDocCountError = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: MultiTermsAggregation, value: Types.Integer) =
+        member _.Size(state: MultiTermsAggregation, value: CoreTypes.Integer) =
             { state with Size = Some value }
 
         [<CustomOperation("terms")>]
-        member _.Terms(state: MultiTermsAggregation, value: TypesAggregations.MultiTermLookup list) =
+        member _.Terms(state: MultiTermsAggregation, value: CoreTypes.MultiTermLookup list) =
             { state with Terms = value }
 
     let multiTermsAggregation = MultiTermsAggregationBuilder()
@@ -1753,7 +1753,7 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("key")>]
-        member _.Key(state: MultiTermsBucket, value: Types.FieldValue list) =
+        member _.Key(state: MultiTermsBucket, value: CoreTypes.FieldValue list) =
             { state with Key = value }
 
         [<CustomOperation("keyAsString")>]
@@ -1761,7 +1761,7 @@ module TypesAggregationsBuilders =
             { state with KeyAsString = Some value }
 
         [<CustomOperation("docCountErrorUpperBound")>]
-        member _.DocCountErrorUpperBound(state: MultiTermsBucket, value: Types.Long) =
+        member _.DocCountErrorUpperBound(state: MultiTermsBucket, value: CoreTypes.Long) =
             { state with DocCountErrorUpperBound = Some value }
 
     let multiTermsBucket = MultiTermsBucketBuilder()
@@ -1795,7 +1795,7 @@ module TypesAggregationsBuilders =
             { state with BackgroundIsSuperset = Some value }
 
         [<CustomOperation("normalizeAbove")>]
-        member _.NormalizeAbove(state: PValueHeuristic, value: Types.Long) =
+        member _.NormalizeAbove(state: PValueHeuristic, value: CoreTypes.Long) =
             { state with NormalizeAbove = Some value }
 
     let pValueHeuristic = PValueHeuristicBuilder()
@@ -1814,15 +1814,15 @@ module TypesAggregationsBuilders =
             { state with Keyed = Some value }
 
         [<CustomOperation("values")>]
-        member _.Values(state: PercentileRanksAggregation, value: Types.Double list option) =
+        member _.Values(state: PercentileRanksAggregation, value: CoreTypes.Double list option) =
             { state with Values = Some value }
 
         [<CustomOperation("hdr")>]
-        member _.Hdr(state: PercentileRanksAggregation, value: TypesAggregations.HdrMethod) =
+        member _.Hdr(state: PercentileRanksAggregation, value: CoreTypes.HdrMethod) =
             { state with Hdr = Some value }
 
         [<CustomOperation("tdigest")>]
-        member _.Tdigest(state: PercentileRanksAggregation, value: TypesAggregations.TDigest) =
+        member _.Tdigest(state: PercentileRanksAggregation, value: CoreTypes.TDigest) =
             { state with Tdigest = Some value }
 
     let percentileRanksAggregation = PercentileRanksAggregationBuilder()
@@ -1845,11 +1845,11 @@ module TypesAggregationsBuilders =
             { state with Percents = Some value }
 
         [<CustomOperation("hdr")>]
-        member _.Hdr(state: PercentilesAggregation, value: TypesAggregations.HdrMethod) =
+        member _.Hdr(state: PercentilesAggregation, value: CoreTypes.HdrMethod) =
             { state with Hdr = Some value }
 
         [<CustomOperation("tdigest")>]
-        member _.Tdigest(state: PercentilesAggregation, value: TypesAggregations.TDigest) =
+        member _.Tdigest(state: PercentilesAggregation, value: CoreTypes.TDigest) =
             { state with Tdigest = Some value }
 
     let percentilesAggregation = PercentilesAggregationBuilder()
@@ -1866,7 +1866,7 @@ module TypesAggregationsBuilders =
             { state with Format = Some value }
 
         [<CustomOperation("gapPolicy")>]
-        member _.GapPolicy(state: PipelineAggregationBase, value: TypesAggregations.GapPolicy) =
+        member _.GapPolicy(state: PipelineAggregationBase, value: CoreTypes.GapPolicy) =
             { state with GapPolicy = Some value }
 
     let pipelineAggregationBase = PipelineAggregationBaseBuilder()
@@ -1880,15 +1880,15 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("probability")>]
-        member _.Probability(state: RandomSamplerAggregation, value: Types.Double) =
+        member _.Probability(state: RandomSamplerAggregation, value: CoreTypes.Double) =
             { state with Probability = value }
 
         [<CustomOperation("seed")>]
-        member _.Seed(state: RandomSamplerAggregation, value: Types.Integer) =
+        member _.Seed(state: RandomSamplerAggregation, value: CoreTypes.Integer) =
             { state with Seed = Some value }
 
         [<CustomOperation("shardSeed")>]
-        member _.ShardSeed(state: RandomSamplerAggregation, value: Types.Integer) =
+        member _.ShardSeed(state: RandomSamplerAggregation, value: CoreTypes.Integer) =
             { state with ShardSeed = Some value }
 
     let randomSamplerAggregation = RandomSamplerAggregationBuilder()
@@ -1905,19 +1905,19 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("field")>]
-        member _.Field(state: RangeAggregation, value: Types.Field) =
+        member _.Field(state: RangeAggregation, value: CoreTypes.Field) =
             { state with Field = Some value }
 
         [<CustomOperation("missing")>]
-        member _.Missing(state: RangeAggregation, value: Types.Integer) =
+        member _.Missing(state: RangeAggregation, value: CoreTypes.Integer) =
             { state with Missing = Some value }
 
         [<CustomOperation("ranges")>]
-        member _.Ranges(state: RangeAggregation, value: TypesAggregations.AggregationRange list) =
+        member _.Ranges(state: RangeAggregation, value: CoreTypes.AggregationRange list) =
             { state with Ranges = Some value }
 
         [<CustomOperation("script")>]
-        member _.Script(state: RangeAggregation, value: Types.Script) =
+        member _.Script(state: RangeAggregation, value: CoreTypes.Script) =
             { state with Script = Some value }
 
         [<CustomOperation("keyed")>]
@@ -1941,11 +1941,11 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("from")>]
-        member _.From(state: RangeBucket, value: Types.Double) =
+        member _.From(state: RangeBucket, value: CoreTypes.Double) =
             { state with From = Some value }
 
         [<CustomOperation("to'")>]
-        member _.To(state: RangeBucket, value: Types.Double) =
+        member _.To(state: RangeBucket, value: CoreTypes.Double) =
             { state with To = Some value }
 
         [<CustomOperation("fromAsString")>]
@@ -1975,27 +1975,27 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("exclude")>]
-        member _.Exclude(state: RareTermsAggregation, value: TypesAggregations.TermsExclude) =
+        member _.Exclude(state: RareTermsAggregation, value: CoreTypes.TermsExclude) =
             { state with Exclude = Some value }
 
         [<CustomOperation("field")>]
-        member _.Field(state: RareTermsAggregation, value: Types.Field) =
+        member _.Field(state: RareTermsAggregation, value: CoreTypes.Field) =
             { state with Field = Some value }
 
         [<CustomOperation("include")>]
-        member _.Include(state: RareTermsAggregation, value: TypesAggregations.TermsInclude) =
+        member _.Include(state: RareTermsAggregation, value: CoreTypes.TermsInclude) =
             { state with Include = Some value }
 
         [<CustomOperation("maxDocCount")>]
-        member _.MaxDocCount(state: RareTermsAggregation, value: Types.Long) =
+        member _.MaxDocCount(state: RareTermsAggregation, value: CoreTypes.Long) =
             { state with MaxDocCount = Some value }
 
         [<CustomOperation("missing")>]
-        member _.Missing(state: RareTermsAggregation, value: TypesAggregations.Missing) =
+        member _.Missing(state: RareTermsAggregation, value: CoreTypes.Missing) =
             { state with Missing = Some value }
 
         [<CustomOperation("precision")>]
-        member _.Precision(state: RareTermsAggregation, value: Types.Double) =
+        member _.Precision(state: RareTermsAggregation, value: CoreTypes.Double) =
             { state with Precision = Some value }
 
         [<CustomOperation("valueType")>]
@@ -2012,11 +2012,11 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("unit")>]
-        member _.Unit(state: RateAggregation, value: TypesAggregations.CalendarInterval) =
+        member _.Unit(state: RateAggregation, value: CoreTypes.CalendarInterval) =
             { state with Unit = Some value }
 
         [<CustomOperation("mode")>]
-        member _.Mode(state: RateAggregation, value: TypesAggregations.RateMode) =
+        member _.Mode(state: RateAggregation, value: CoreTypes.RateMode) =
             { state with Mode = Some value }
 
     let rateAggregation = RateAggregationBuilder()
@@ -2032,15 +2032,15 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("combineScript")>]
-        member _.CombineScript(state: ScriptedMetricAggregation, value: Types.Script) =
+        member _.CombineScript(state: ScriptedMetricAggregation, value: CoreTypes.Script) =
             { state with CombineScript = Some value }
 
         [<CustomOperation("initScript")>]
-        member _.InitScript(state: ScriptedMetricAggregation, value: Types.Script) =
+        member _.InitScript(state: ScriptedMetricAggregation, value: CoreTypes.Script) =
             { state with InitScript = Some value }
 
         [<CustomOperation("mapScript")>]
-        member _.MapScript(state: ScriptedMetricAggregation, value: Types.Script) =
+        member _.MapScript(state: ScriptedMetricAggregation, value: CoreTypes.Script) =
             { state with MapScript = Some value }
 
         [<CustomOperation("params")>]
@@ -2048,7 +2048,7 @@ module TypesAggregationsBuilders =
             { state with Params = Some value }
 
         [<CustomOperation("reduceScript")>]
-        member _.ReduceScript(state: ScriptedMetricAggregation, value: Types.Script) =
+        member _.ReduceScript(state: ScriptedMetricAggregation, value: CoreTypes.Script) =
             { state with ReduceScript = Some value }
 
     let scriptedMetricAggregation = ScriptedMetricAggregationBuilder()
@@ -2061,11 +2061,11 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("bgCount")>]
-        member _.BgCount(state: SignificantTermsAggregateBase, value: Types.Long) =
+        member _.BgCount(state: SignificantTermsAggregateBase, value: CoreTypes.Long) =
             { state with BgCount = Some value }
 
         [<CustomOperation("docCount")>]
-        member _.DocCount(state: SignificantTermsAggregateBase, value: Types.Long) =
+        member _.DocCount(state: SignificantTermsAggregateBase, value: CoreTypes.Long) =
             { state with DocCount = Some value }
 
     let significantTermsAggregateBase = SignificantTermsAggregateBaseBuilder()
@@ -2092,67 +2092,67 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("backgroundFilter")>]
-        member _.BackgroundFilter(state: SignificantTermsAggregation, value: TypesQueryDsl.QueryContainer) =
+        member _.BackgroundFilter(state: SignificantTermsAggregation, value: CoreTypes.QueryContainer) =
             { state with BackgroundFilter = Some value }
 
         [<CustomOperation("chiSquare")>]
-        member _.ChiSquare(state: SignificantTermsAggregation, value: TypesAggregations.ChiSquareHeuristic) =
+        member _.ChiSquare(state: SignificantTermsAggregation, value: CoreTypes.ChiSquareHeuristic) =
             { state with ChiSquare = Some value }
 
         [<CustomOperation("exclude")>]
-        member _.Exclude(state: SignificantTermsAggregation, value: TypesAggregations.TermsExclude) =
+        member _.Exclude(state: SignificantTermsAggregation, value: CoreTypes.TermsExclude) =
             { state with Exclude = Some value }
 
         [<CustomOperation("executionHint")>]
-        member _.ExecutionHint(state: SignificantTermsAggregation, value: TypesAggregations.TermsAggregationExecutionHint) =
+        member _.ExecutionHint(state: SignificantTermsAggregation, value: CoreTypes.TermsAggregationExecutionHint) =
             { state with ExecutionHint = Some value }
 
         [<CustomOperation("field")>]
-        member _.Field(state: SignificantTermsAggregation, value: Types.Field) =
+        member _.Field(state: SignificantTermsAggregation, value: CoreTypes.Field) =
             { state with Field = Some value }
 
         [<CustomOperation("gnd")>]
-        member _.Gnd(state: SignificantTermsAggregation, value: TypesAggregations.GoogleNormalizedDistanceHeuristic) =
+        member _.Gnd(state: SignificantTermsAggregation, value: CoreTypes.GoogleNormalizedDistanceHeuristic) =
             { state with Gnd = Some value }
 
         [<CustomOperation("include")>]
-        member _.Include(state: SignificantTermsAggregation, value: TypesAggregations.TermsInclude) =
+        member _.Include(state: SignificantTermsAggregation, value: CoreTypes.TermsInclude) =
             { state with Include = Some value }
 
         [<CustomOperation("jlh")>]
-        member _.Jlh(state: SignificantTermsAggregation, value: Types.EmptyObject) =
+        member _.Jlh(state: SignificantTermsAggregation, value: CoreTypes.EmptyObject) =
             { state with Jlh = Some value }
 
         [<CustomOperation("minDocCount")>]
-        member _.MinDocCount(state: SignificantTermsAggregation, value: Types.Long) =
+        member _.MinDocCount(state: SignificantTermsAggregation, value: CoreTypes.Long) =
             { state with MinDocCount = Some value }
 
         [<CustomOperation("mutualInformation")>]
-        member _.MutualInformation(state: SignificantTermsAggregation, value: TypesAggregations.MutualInformationHeuristic) =
+        member _.MutualInformation(state: SignificantTermsAggregation, value: CoreTypes.MutualInformationHeuristic) =
             { state with MutualInformation = Some value }
 
         [<CustomOperation("percentage")>]
-        member _.Percentage(state: SignificantTermsAggregation, value: TypesAggregations.PercentageScoreHeuristic) =
+        member _.Percentage(state: SignificantTermsAggregation, value: CoreTypes.PercentageScoreHeuristic) =
             { state with Percentage = Some value }
 
         [<CustomOperation("scriptHeuristic")>]
-        member _.ScriptHeuristic(state: SignificantTermsAggregation, value: TypesAggregations.ScriptedHeuristic) =
+        member _.ScriptHeuristic(state: SignificantTermsAggregation, value: CoreTypes.ScriptedHeuristic) =
             { state with ScriptHeuristic = Some value }
 
         [<CustomOperation("pValue")>]
-        member _.PValue(state: SignificantTermsAggregation, value: TypesAggregations.PValueHeuristic) =
+        member _.PValue(state: SignificantTermsAggregation, value: CoreTypes.PValueHeuristic) =
             { state with PValue = Some value }
 
         [<CustomOperation("shardMinDocCount")>]
-        member _.ShardMinDocCount(state: SignificantTermsAggregation, value: Types.Long) =
+        member _.ShardMinDocCount(state: SignificantTermsAggregation, value: CoreTypes.Long) =
             { state with ShardMinDocCount = Some value }
 
         [<CustomOperation("shardSize")>]
-        member _.ShardSize(state: SignificantTermsAggregation, value: Types.Integer) =
+        member _.ShardSize(state: SignificantTermsAggregation, value: CoreTypes.Integer) =
             { state with ShardSize = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: SignificantTermsAggregation, value: Types.Integer) =
+        member _.Size(state: SignificantTermsAggregation, value: CoreTypes.Integer) =
             { state with Size = Some value }
 
     let significantTermsAggregation = SignificantTermsAggregationBuilder()
@@ -2180,23 +2180,23 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("backgroundFilter")>]
-        member _.BackgroundFilter(state: SignificantTextAggregation, value: TypesQueryDsl.QueryContainer) =
+        member _.BackgroundFilter(state: SignificantTextAggregation, value: CoreTypes.QueryContainer) =
             { state with BackgroundFilter = Some value }
 
         [<CustomOperation("chiSquare")>]
-        member _.ChiSquare(state: SignificantTextAggregation, value: TypesAggregations.ChiSquareHeuristic) =
+        member _.ChiSquare(state: SignificantTextAggregation, value: CoreTypes.ChiSquareHeuristic) =
             { state with ChiSquare = Some value }
 
         [<CustomOperation("exclude")>]
-        member _.Exclude(state: SignificantTextAggregation, value: TypesAggregations.TermsExclude) =
+        member _.Exclude(state: SignificantTextAggregation, value: CoreTypes.TermsExclude) =
             { state with Exclude = Some value }
 
         [<CustomOperation("executionHint")>]
-        member _.ExecutionHint(state: SignificantTextAggregation, value: TypesAggregations.TermsAggregationExecutionHint) =
+        member _.ExecutionHint(state: SignificantTextAggregation, value: CoreTypes.TermsAggregationExecutionHint) =
             { state with ExecutionHint = Some value }
 
         [<CustomOperation("field")>]
-        member _.Field(state: SignificantTextAggregation, value: Types.Field) =
+        member _.Field(state: SignificantTextAggregation, value: CoreTypes.Field) =
             { state with Field = Some value }
 
         [<CustomOperation("filterDuplicateText")>]
@@ -2204,47 +2204,47 @@ module TypesAggregationsBuilders =
             { state with FilterDuplicateText = Some value }
 
         [<CustomOperation("gnd")>]
-        member _.Gnd(state: SignificantTextAggregation, value: TypesAggregations.GoogleNormalizedDistanceHeuristic) =
+        member _.Gnd(state: SignificantTextAggregation, value: CoreTypes.GoogleNormalizedDistanceHeuristic) =
             { state with Gnd = Some value }
 
         [<CustomOperation("include")>]
-        member _.Include(state: SignificantTextAggregation, value: TypesAggregations.TermsInclude) =
+        member _.Include(state: SignificantTextAggregation, value: CoreTypes.TermsInclude) =
             { state with Include = Some value }
 
         [<CustomOperation("jlh")>]
-        member _.Jlh(state: SignificantTextAggregation, value: Types.EmptyObject) =
+        member _.Jlh(state: SignificantTextAggregation, value: CoreTypes.EmptyObject) =
             { state with Jlh = Some value }
 
         [<CustomOperation("minDocCount")>]
-        member _.MinDocCount(state: SignificantTextAggregation, value: Types.Long) =
+        member _.MinDocCount(state: SignificantTextAggregation, value: CoreTypes.Long) =
             { state with MinDocCount = Some value }
 
         [<CustomOperation("mutualInformation")>]
-        member _.MutualInformation(state: SignificantTextAggregation, value: TypesAggregations.MutualInformationHeuristic) =
+        member _.MutualInformation(state: SignificantTextAggregation, value: CoreTypes.MutualInformationHeuristic) =
             { state with MutualInformation = Some value }
 
         [<CustomOperation("percentage")>]
-        member _.Percentage(state: SignificantTextAggregation, value: TypesAggregations.PercentageScoreHeuristic) =
+        member _.Percentage(state: SignificantTextAggregation, value: CoreTypes.PercentageScoreHeuristic) =
             { state with Percentage = Some value }
 
         [<CustomOperation("scriptHeuristic")>]
-        member _.ScriptHeuristic(state: SignificantTextAggregation, value: TypesAggregations.ScriptedHeuristic) =
+        member _.ScriptHeuristic(state: SignificantTextAggregation, value: CoreTypes.ScriptedHeuristic) =
             { state with ScriptHeuristic = Some value }
 
         [<CustomOperation("shardMinDocCount")>]
-        member _.ShardMinDocCount(state: SignificantTextAggregation, value: Types.Long) =
+        member _.ShardMinDocCount(state: SignificantTextAggregation, value: CoreTypes.Long) =
             { state with ShardMinDocCount = Some value }
 
         [<CustomOperation("shardSize")>]
-        member _.ShardSize(state: SignificantTextAggregation, value: Types.Integer) =
+        member _.ShardSize(state: SignificantTextAggregation, value: CoreTypes.Integer) =
             { state with ShardSize = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: SignificantTextAggregation, value: Types.Integer) =
+        member _.Size(state: SignificantTextAggregation, value: CoreTypes.Integer) =
             { state with Size = Some value }
 
         [<CustomOperation("sourceFields")>]
-        member _.SourceFields(state: SignificantTextAggregation, value: Types.Fields) =
+        member _.SourceFields(state: SignificantTextAggregation, value: CoreTypes.Fields) =
             { state with SourceFields = Some value }
 
     let significantTextAggregation = SignificantTextAggregationBuilder()
@@ -2264,23 +2264,23 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("count")>]
-        member _.Count(state: StatsAggregate, value: Types.Long) =
+        member _.Count(state: StatsAggregate, value: CoreTypes.Long) =
             { state with Count = value }
 
         [<CustomOperation("min")>]
-        member _.Min(state: StatsAggregate, value: Types.Double option) =
+        member _.Min(state: StatsAggregate, value: CoreTypes.Double option) =
             { state with Min = value }
 
         [<CustomOperation("max")>]
-        member _.Max(state: StatsAggregate, value: Types.Double option) =
+        member _.Max(state: StatsAggregate, value: CoreTypes.Double option) =
             { state with Max = value }
 
         [<CustomOperation("avg")>]
-        member _.Avg(state: StatsAggregate, value: Types.Double option) =
+        member _.Avg(state: StatsAggregate, value: CoreTypes.Double option) =
             { state with Avg = value }
 
         [<CustomOperation("sum")>]
-        member _.Sum(state: StatsAggregate, value: Types.Double) =
+        member _.Sum(state: StatsAggregate, value: CoreTypes.Double) =
             { state with Sum = value }
 
         [<CustomOperation("minAsString")>]
@@ -2316,27 +2316,27 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("count")>]
-        member _.Count(state: StringStatsAggregate, value: Types.Long) =
+        member _.Count(state: StringStatsAggregate, value: CoreTypes.Long) =
             { state with Count = value }
 
         [<CustomOperation("minLength")>]
-        member _.MinLength(state: StringStatsAggregate, value: Types.Integer option) =
+        member _.MinLength(state: StringStatsAggregate, value: CoreTypes.Integer option) =
             { state with MinLength = value }
 
         [<CustomOperation("maxLength")>]
-        member _.MaxLength(state: StringStatsAggregate, value: Types.Integer option) =
+        member _.MaxLength(state: StringStatsAggregate, value: CoreTypes.Integer option) =
             { state with MaxLength = value }
 
         [<CustomOperation("avgLength")>]
-        member _.AvgLength(state: StringStatsAggregate, value: Types.Double option) =
+        member _.AvgLength(state: StringStatsAggregate, value: CoreTypes.Double option) =
             { state with AvgLength = value }
 
         [<CustomOperation("entropy")>]
-        member _.Entropy(state: StringStatsAggregate, value: Types.Double option) =
+        member _.Entropy(state: StringStatsAggregate, value: CoreTypes.Double option) =
             { state with Entropy = value }
 
         [<CustomOperation("distribution")>]
-        member _.Distribution(state: StringStatsAggregate, value: Map<string, Types.Double> option) =
+        member _.Distribution(state: StringStatsAggregate, value: Map<string, CoreTypes.Double> option) =
             { state with Distribution = Some value }
 
         [<CustomOperation("minLengthAsString")>]
@@ -2361,11 +2361,11 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("compression")>]
-        member _.Compression(state: TDigest, value: Types.Integer) =
+        member _.Compression(state: TDigest, value: CoreTypes.Integer) =
             { state with Compression = Some value }
 
         [<CustomOperation("executionHint")>]
-        member _.ExecutionHint(state: TDigest, value: TypesAggregations.TDigestExecutionHint) =
+        member _.ExecutionHint(state: TDigest, value: CoreTypes.TDigestExecutionHint) =
             { state with ExecutionHint = Some value }
 
     let tDigest = TDigestBuilder()
@@ -2379,15 +2379,15 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("a")>]
-        member _.A(state: TTestAggregation, value: TypesAggregations.TestPopulation) =
+        member _.A(state: TTestAggregation, value: CoreTypes.TestPopulation) =
             { state with A = Some value }
 
         [<CustomOperation("b")>]
-        member _.B(state: TTestAggregation, value: TypesAggregations.TestPopulation) =
+        member _.B(state: TTestAggregation, value: CoreTypes.TestPopulation) =
             { state with B = Some value }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: TTestAggregation, value: TypesAggregations.TTestType) =
+        member _.Type(state: TTestAggregation, value: CoreTypes.TTestType) =
             { state with Type = Some value }
 
     let tTestAggregation = TTestAggregationBuilder()
@@ -2400,11 +2400,11 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("docCountErrorUpperBound")>]
-        member _.DocCountErrorUpperBound(state: TermsAggregateBase, value: Types.Long) =
+        member _.DocCountErrorUpperBound(state: TermsAggregateBase, value: CoreTypes.Long) =
             { state with DocCountErrorUpperBound = Some value }
 
         [<CustomOperation("sumOtherDocCount")>]
-        member _.SumOtherDocCount(state: TermsAggregateBase, value: Types.Long) =
+        member _.SumOtherDocCount(state: TermsAggregateBase, value: CoreTypes.Long) =
             { state with SumOtherDocCount = Some value }
 
     let termsAggregateBase = TermsAggregateBaseBuilder()
@@ -2432,35 +2432,35 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("collectMode")>]
-        member _.CollectMode(state: TermsAggregation, value: TypesAggregations.TermsAggregationCollectMode) =
+        member _.CollectMode(state: TermsAggregation, value: CoreTypes.TermsAggregationCollectMode) =
             { state with CollectMode = Some value }
 
         [<CustomOperation("exclude")>]
-        member _.Exclude(state: TermsAggregation, value: TypesAggregations.TermsExclude) =
+        member _.Exclude(state: TermsAggregation, value: CoreTypes.TermsExclude) =
             { state with Exclude = Some value }
 
         [<CustomOperation("executionHint")>]
-        member _.ExecutionHint(state: TermsAggregation, value: TypesAggregations.TermsAggregationExecutionHint) =
+        member _.ExecutionHint(state: TermsAggregation, value: CoreTypes.TermsAggregationExecutionHint) =
             { state with ExecutionHint = Some value }
 
         [<CustomOperation("field")>]
-        member _.Field(state: TermsAggregation, value: Types.Field) =
+        member _.Field(state: TermsAggregation, value: CoreTypes.Field) =
             { state with Field = Some value }
 
         [<CustomOperation("include")>]
-        member _.Include(state: TermsAggregation, value: TypesAggregations.TermsInclude) =
+        member _.Include(state: TermsAggregation, value: CoreTypes.TermsInclude) =
             { state with Include = Some value }
 
         [<CustomOperation("minDocCount")>]
-        member _.MinDocCount(state: TermsAggregation, value: Types.Integer) =
+        member _.MinDocCount(state: TermsAggregation, value: CoreTypes.Integer) =
             { state with MinDocCount = Some value }
 
         [<CustomOperation("missing")>]
-        member _.Missing(state: TermsAggregation, value: TypesAggregations.Missing) =
+        member _.Missing(state: TermsAggregation, value: CoreTypes.Missing) =
             { state with Missing = Some value }
 
         [<CustomOperation("missingOrder")>]
-        member _.MissingOrder(state: TermsAggregation, value: TypesAggregations.MissingOrder) =
+        member _.MissingOrder(state: TermsAggregation, value: CoreTypes.MissingOrder) =
             { state with MissingOrder = Some value }
 
         [<CustomOperation("missingBucket")>]
@@ -2472,19 +2472,19 @@ module TypesAggregationsBuilders =
             { state with ValueType = Some value }
 
         [<CustomOperation("order")>]
-        member _.Order(state: TermsAggregation, value: TypesAggregations.AggregateOrder) =
+        member _.Order(state: TermsAggregation, value: CoreTypes.AggregateOrder) =
             { state with Order = Some value }
 
         [<CustomOperation("script")>]
-        member _.Script(state: TermsAggregation, value: Types.Script) =
+        member _.Script(state: TermsAggregation, value: CoreTypes.Script) =
             { state with Script = Some value }
 
         [<CustomOperation("shardMinDocCount")>]
-        member _.ShardMinDocCount(state: TermsAggregation, value: Types.Long) =
+        member _.ShardMinDocCount(state: TermsAggregation, value: CoreTypes.Long) =
             { state with ShardMinDocCount = Some value }
 
         [<CustomOperation("shardSize")>]
-        member _.ShardSize(state: TermsAggregation, value: Types.Integer) =
+        member _.ShardSize(state: TermsAggregation, value: CoreTypes.Integer) =
             { state with ShardSize = Some value }
 
         [<CustomOperation("showTermDocCountError")>]
@@ -2492,7 +2492,7 @@ module TypesAggregationsBuilders =
             { state with ShowTermDocCountError = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: TermsAggregation, value: Types.Integer) =
+        member _.Size(state: TermsAggregation, value: CoreTypes.Integer) =
             { state with Size = Some value }
 
         [<CustomOperation("format")>]
@@ -2510,15 +2510,15 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("field")>]
-        member _.Field(state: TestPopulation, value: Types.Field) =
+        member _.Field(state: TestPopulation, value: CoreTypes.Field) =
             { state with Field = value }
 
         [<CustomOperation("script")>]
-        member _.Script(state: TestPopulation, value: Types.Script) =
+        member _.Script(state: TestPopulation, value: CoreTypes.Script) =
             { state with Script = Some value }
 
         [<CustomOperation("filter")>]
-        member _.Filter(state: TestPopulation, value: TypesQueryDsl.QueryContainer) =
+        member _.Filter(state: TestPopulation, value: CoreTypes.QueryContainer) =
             { state with Filter = Some value }
 
     let testPopulation = TestPopulationBuilder()
@@ -2531,7 +2531,7 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("size")>]
-        member _.Size(state: TimeSeriesAggregation, value: Types.Integer) =
+        member _.Size(state: TimeSeriesAggregation, value: CoreTypes.Integer) =
             { state with Size = Some value }
 
         [<CustomOperation("keyed")>]
@@ -2559,7 +2559,7 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("docvalueFields")>]
-        member _.DocvalueFields(state: TopHitsAggregation, value: TypesQueryDsl.FieldAndFormat list) =
+        member _.DocvalueFields(state: TopHitsAggregation, value: CoreTypes.FieldAndFormat list) =
             { state with DocvalueFields = Some value }
 
         [<CustomOperation("explain")>]
@@ -2567,11 +2567,11 @@ module TypesAggregationsBuilders =
             { state with Explain = Some value }
 
         [<CustomOperation("fields")>]
-        member _.Fields(state: TopHitsAggregation, value: TypesQueryDsl.FieldAndFormat list) =
+        member _.Fields(state: TopHitsAggregation, value: CoreTypes.FieldAndFormat list) =
             { state with Fields = Some value }
 
         [<CustomOperation("from")>]
-        member _.From(state: TopHitsAggregation, value: Types.Integer) =
+        member _.From(state: TopHitsAggregation, value: CoreTypes.Integer) =
             { state with From = Some value }
 
         [<CustomOperation("highlight")>]
@@ -2579,15 +2579,15 @@ module TypesAggregationsBuilders =
             { state with Highlight = Some value }
 
         [<CustomOperation("scriptFields")>]
-        member _.ScriptFields(state: TopHitsAggregation, value: Map<string, Types.ScriptField>) =
+        member _.ScriptFields(state: TopHitsAggregation, value: Map<string, CoreTypes.ScriptField>) =
             { state with ScriptFields = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: TopHitsAggregation, value: Types.Integer) =
+        member _.Size(state: TopHitsAggregation, value: CoreTypes.Integer) =
             { state with Size = Some value }
 
         [<CustomOperation("sort")>]
-        member _.Sort(state: TopHitsAggregation, value: Types.Sort) =
+        member _.Sort(state: TopHitsAggregation, value: CoreTypes.Sort) =
             { state with Sort = Some value }
 
         [<CustomOperation("source")>]
@@ -2595,7 +2595,7 @@ module TypesAggregationsBuilders =
             { state with Source = Some value }
 
         [<CustomOperation("storedFields")>]
-        member _.StoredFields(state: TopHitsAggregation, value: Types.Fields) =
+        member _.StoredFields(state: TopHitsAggregation, value: CoreTypes.Fields) =
             { state with StoredFields = Some value }
 
         [<CustomOperation("trackScores")>]
@@ -2625,11 +2625,11 @@ module TypesAggregationsBuilders =
             { state with Metrics = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: TopMetricsAggregation, value: Types.Integer) =
+        member _.Size(state: TopMetricsAggregation, value: CoreTypes.Integer) =
             { state with Size = Some value }
 
         [<CustomOperation("sort")>]
-        member _.Sort(state: TopMetricsAggregation, value: Types.Sort) =
+        member _.Sort(state: TopMetricsAggregation, value: CoreTypes.Sort) =
             { state with Sort = Some value }
 
     let topMetricsAggregation = TopMetricsAggregationBuilder()
@@ -2645,23 +2645,23 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("field")>]
-        member _.Field(state: VariableWidthHistogramAggregation, value: Types.Field) =
+        member _.Field(state: VariableWidthHistogramAggregation, value: CoreTypes.Field) =
             { state with Field = Some value }
 
         [<CustomOperation("buckets")>]
-        member _.Buckets(state: VariableWidthHistogramAggregation, value: Types.Integer) =
+        member _.Buckets(state: VariableWidthHistogramAggregation, value: CoreTypes.Integer) =
             { state with Buckets = Some value }
 
         [<CustomOperation("shardSize")>]
-        member _.ShardSize(state: VariableWidthHistogramAggregation, value: Types.Integer) =
+        member _.ShardSize(state: VariableWidthHistogramAggregation, value: CoreTypes.Integer) =
             { state with ShardSize = Some value }
 
         [<CustomOperation("initialBuffer")>]
-        member _.InitialBuffer(state: VariableWidthHistogramAggregation, value: Types.Integer) =
+        member _.InitialBuffer(state: VariableWidthHistogramAggregation, value: CoreTypes.Integer) =
             { state with InitialBuffer = Some value }
 
         [<CustomOperation("script")>]
-        member _.Script(state: VariableWidthHistogramAggregation, value: Types.Script) =
+        member _.Script(state: VariableWidthHistogramAggregation, value: CoreTypes.Script) =
             { state with Script = Some value }
 
     let variableWidthHistogramAggregation = VariableWidthHistogramAggregationBuilder()
@@ -2678,15 +2678,15 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("min")>]
-        member _.Min(state: VariableWidthHistogramBucket, value: Types.Double) =
+        member _.Min(state: VariableWidthHistogramBucket, value: CoreTypes.Double) =
             { state with Min = value }
 
         [<CustomOperation("key")>]
-        member _.Key(state: VariableWidthHistogramBucket, value: Types.Double) =
+        member _.Key(state: VariableWidthHistogramBucket, value: CoreTypes.Double) =
             { state with Key = value }
 
         [<CustomOperation("max")>]
-        member _.Max(state: VariableWidthHistogramBucket, value: Types.Double) =
+        member _.Max(state: VariableWidthHistogramBucket, value: CoreTypes.Double) =
             { state with Max = value }
 
         [<CustomOperation("minAsString")>]
@@ -2717,15 +2717,15 @@ module TypesAggregationsBuilders =
             { state with Format = Some value }
 
         [<CustomOperation("value")>]
-        member _.Value(state: WeightedAverageAggregation, value: TypesAggregations.WeightedAverageValue) =
+        member _.Value(state: WeightedAverageAggregation, value: CoreTypes.WeightedAverageValue) =
             { state with Value = Some value }
 
         [<CustomOperation("valueType")>]
-        member _.ValueType(state: WeightedAverageAggregation, value: TypesAggregations.ValueType) =
+        member _.ValueType(state: WeightedAverageAggregation, value: CoreTypes.ValueType) =
             { state with ValueType = Some value }
 
         [<CustomOperation("weight")>]
-        member _.Weight(state: WeightedAverageAggregation, value: TypesAggregations.WeightedAverageValue) =
+        member _.Weight(state: WeightedAverageAggregation, value: CoreTypes.WeightedAverageValue) =
             { state with Weight = Some value }
 
     let weightedAverageAggregation = WeightedAverageAggregationBuilder()
@@ -2739,15 +2739,15 @@ module TypesAggregationsBuilders =
             }
 
         [<CustomOperation("field")>]
-        member _.Field(state: WeightedAverageValue, value: Types.Field) =
+        member _.Field(state: WeightedAverageValue, value: CoreTypes.Field) =
             { state with Field = Some value }
 
         [<CustomOperation("missing")>]
-        member _.Missing(state: WeightedAverageValue, value: Types.Double) =
+        member _.Missing(state: WeightedAverageValue, value: CoreTypes.Double) =
             { state with Missing = Some value }
 
         [<CustomOperation("script")>]
-        member _.Script(state: WeightedAverageValue, value: Types.Script) =
+        member _.Script(state: WeightedAverageValue, value: CoreTypes.Script) =
             { state with Script = Some value }
 
     let weightedAverageValue = WeightedAverageValueBuilder()

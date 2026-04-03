@@ -20,23 +20,23 @@ module MlInfoBuilders =
             }
 
         [<CustomOperation("maxSingleMlNodeProcessors")>]
-        member _.MaxSingleMlNodeProcessors(state: Limits, value: Types.Integer) =
+        member _.MaxSingleMlNodeProcessors(state: Limits, value: CoreTypes.Integer) =
             { state with MaxSingleMlNodeProcessors = Some value }
 
         [<CustomOperation("totalMlProcessors")>]
-        member _.TotalMlProcessors(state: Limits, value: Types.Integer) =
+        member _.TotalMlProcessors(state: Limits, value: CoreTypes.Integer) =
             { state with TotalMlProcessors = Some value }
 
         [<CustomOperation("maxModelMemoryLimit")>]
-        member _.MaxModelMemoryLimit(state: Limits, value: Types.ByteSize) =
+        member _.MaxModelMemoryLimit(state: Limits, value: CoreTypes.ByteSize) =
             { state with MaxModelMemoryLimit = Some value }
 
         [<CustomOperation("effectiveMaxModelMemoryLimit")>]
-        member _.EffectiveMaxModelMemoryLimit(state: Limits, value: Types.ByteSize) =
+        member _.EffectiveMaxModelMemoryLimit(state: Limits, value: CoreTypes.ByteSize) =
             { state with EffectiveMaxModelMemoryLimit = Some value }
 
         [<CustomOperation("totalMlMemory")>]
-        member _.TotalMlMemory(state: Limits, value: Types.ByteSize) =
+        member _.TotalMlMemory(state: Limits, value: CoreTypes.ByteSize) =
             { state with TotalMlMemory = value }
 
     let limits = LimitsBuilder()

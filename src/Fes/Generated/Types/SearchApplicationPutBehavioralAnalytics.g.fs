@@ -9,6 +9,6 @@ module SearchApplicationPutBehavioralAnalytics =
 
     type AnalyticsAcknowledgeResponseBase = {
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.Name
+        Name: CoreTypes.Name
     }
 

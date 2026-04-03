@@ -22,27 +22,27 @@ module NodesTypesBuilders =
             }
 
         [<CustomOperation("avgQueueSize")>]
-        member _.AvgQueueSize(state: AdaptiveSelection, value: Types.Long) =
+        member _.AvgQueueSize(state: AdaptiveSelection, value: CoreTypes.Long) =
             { state with AvgQueueSize = Some value }
 
         [<CustomOperation("avgResponseTime")>]
-        member _.AvgResponseTime(state: AdaptiveSelection, value: Types.Duration) =
+        member _.AvgResponseTime(state: AdaptiveSelection, value: CoreTypes.Duration) =
             { state with AvgResponseTime = Some value }
 
         [<CustomOperation("avgResponseTimeNs")>]
-        member _.AvgResponseTimeNs(state: AdaptiveSelection, value: Types.Long) =
+        member _.AvgResponseTimeNs(state: AdaptiveSelection, value: CoreTypes.Long) =
             { state with AvgResponseTimeNs = Some value }
 
         [<CustomOperation("avgServiceTime")>]
-        member _.AvgServiceTime(state: AdaptiveSelection, value: Types.Duration) =
+        member _.AvgServiceTime(state: AdaptiveSelection, value: CoreTypes.Duration) =
             { state with AvgServiceTime = Some value }
 
         [<CustomOperation("avgServiceTimeNs")>]
-        member _.AvgServiceTimeNs(state: AdaptiveSelection, value: Types.Long) =
+        member _.AvgServiceTimeNs(state: AdaptiveSelection, value: CoreTypes.Long) =
             { state with AvgServiceTimeNs = Some value }
 
         [<CustomOperation("outgoingSearches")>]
-        member _.OutgoingSearches(state: AdaptiveSelection, value: Types.Long) =
+        member _.OutgoingSearches(state: AdaptiveSelection, value: CoreTypes.Long) =
             { state with OutgoingSearches = Some value }
 
         [<CustomOperation("rank")>]
@@ -67,7 +67,7 @@ module NodesTypesBuilders =
             { state with EstimatedSize = Some value }
 
         [<CustomOperation("estimatedSizeInBytes")>]
-        member _.EstimatedSizeInBytes(state: Breaker, value: Types.Long) =
+        member _.EstimatedSizeInBytes(state: Breaker, value: CoreTypes.Long) =
             { state with EstimatedSizeInBytes = Some value }
 
         [<CustomOperation("limitSize")>]
@@ -75,15 +75,15 @@ module NodesTypesBuilders =
             { state with LimitSize = Some value }
 
         [<CustomOperation("limitSizeInBytes")>]
-        member _.LimitSizeInBytes(state: Breaker, value: Types.Long) =
+        member _.LimitSizeInBytes(state: Breaker, value: CoreTypes.Long) =
             { state with LimitSizeInBytes = Some value }
 
         [<CustomOperation("overhead")>]
-        member _.Overhead(state: Breaker, value: Types.Float) =
+        member _.Overhead(state: Breaker, value: CoreTypes.Float) =
             { state with Overhead = Some value }
 
         [<CustomOperation("tripped")>]
-        member _.Tripped(state: Breaker, value: Types.Float) =
+        member _.Tripped(state: Breaker, value: CoreTypes.Float) =
             { state with Tripped = Some value }
 
     let breaker = BreakerBuilder()
@@ -124,11 +124,11 @@ module NodesTypesBuilders =
             { state with ControlGroup = Some value }
 
         [<CustomOperation("cfsPeriodMicros")>]
-        member _.CfsPeriodMicros(state: CgroupCpu, value: Types.Integer) =
+        member _.CfsPeriodMicros(state: CgroupCpu, value: CoreTypes.Integer) =
             { state with CfsPeriodMicros = Some value }
 
         [<CustomOperation("cfsQuotaMicros")>]
-        member _.CfsQuotaMicros(state: CgroupCpu, value: Types.Integer) =
+        member _.CfsQuotaMicros(state: CgroupCpu, value: CoreTypes.Integer) =
             { state with CfsQuotaMicros = Some value }
 
         [<CustomOperation("stat")>]
@@ -146,15 +146,15 @@ module NodesTypesBuilders =
             }
 
         [<CustomOperation("numberOfElapsedPeriods")>]
-        member _.NumberOfElapsedPeriods(state: CgroupCpuStat, value: Types.Long) =
+        member _.NumberOfElapsedPeriods(state: CgroupCpuStat, value: CoreTypes.Long) =
             { state with NumberOfElapsedPeriods = Some value }
 
         [<CustomOperation("numberOfTimesThrottled")>]
-        member _.NumberOfTimesThrottled(state: CgroupCpuStat, value: Types.Long) =
+        member _.NumberOfTimesThrottled(state: CgroupCpuStat, value: CoreTypes.Long) =
             { state with NumberOfTimesThrottled = Some value }
 
         [<CustomOperation("timeThrottledNanos")>]
-        member _.TimeThrottledNanos(state: CgroupCpuStat, value: Types.DurationValue<Types.UnitNanos>) =
+        member _.TimeThrottledNanos(state: CgroupCpuStat, value: CoreTypes.DurationValue<CoreTypes.UnitNanos>) =
             { state with TimeThrottledNanos = Some value }
 
     let cgroupCpuStat = CgroupCpuStatBuilder()
@@ -198,7 +198,7 @@ module NodesTypesBuilders =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: Client, value: Types.Long) =
+        member _.Id(state: Client, value: CoreTypes.Long) =
             { state with Id = Some value }
 
         [<CustomOperation("agent")>]
@@ -218,23 +218,23 @@ module NodesTypesBuilders =
             { state with LastUri = Some value }
 
         [<CustomOperation("openedTimeMillis")>]
-        member _.OpenedTimeMillis(state: Client, value: Types.Long) =
+        member _.OpenedTimeMillis(state: Client, value: CoreTypes.Long) =
             { state with OpenedTimeMillis = Some value }
 
         [<CustomOperation("closedTimeMillis")>]
-        member _.ClosedTimeMillis(state: Client, value: Types.Long) =
+        member _.ClosedTimeMillis(state: Client, value: CoreTypes.Long) =
             { state with ClosedTimeMillis = Some value }
 
         [<CustomOperation("lastRequestTimeMillis")>]
-        member _.LastRequestTimeMillis(state: Client, value: Types.Long) =
+        member _.LastRequestTimeMillis(state: Client, value: CoreTypes.Long) =
             { state with LastRequestTimeMillis = Some value }
 
         [<CustomOperation("requestCount")>]
-        member _.RequestCount(state: Client, value: Types.Long) =
+        member _.RequestCount(state: Client, value: CoreTypes.Long) =
             { state with RequestCount = Some value }
 
         [<CustomOperation("requestSizeBytes")>]
-        member _.RequestSizeBytes(state: Client, value: Types.Long) =
+        member _.RequestSizeBytes(state: Client, value: CoreTypes.Long) =
             { state with RequestSizeBytes = Some value }
 
         [<CustomOperation("xOpaqueId")>]
@@ -252,15 +252,15 @@ module NodesTypesBuilders =
             }
 
         [<CustomOperation("total")>]
-        member _.Total(state: ClusterStateQueue, value: Types.Long) =
+        member _.Total(state: ClusterStateQueue, value: CoreTypes.Long) =
             { state with Total = Some value }
 
         [<CustomOperation("pending")>]
-        member _.Pending(state: ClusterStateQueue, value: Types.Long) =
+        member _.Pending(state: ClusterStateQueue, value: CoreTypes.Long) =
             { state with Pending = Some value }
 
         [<CustomOperation("committed")>]
-        member _.Committed(state: ClusterStateQueue, value: Types.Long) =
+        member _.Committed(state: ClusterStateQueue, value: CoreTypes.Long) =
             { state with Committed = Some value }
 
     let clusterStateQueue = ClusterStateQueueBuilder()
@@ -286,63 +286,63 @@ module NodesTypesBuilders =
             }
 
         [<CustomOperation("count")>]
-        member _.Count(state: ClusterStateUpdate, value: Types.Long) =
+        member _.Count(state: ClusterStateUpdate, value: CoreTypes.Long) =
             { state with Count = value }
 
         [<CustomOperation("computationTime")>]
-        member _.ComputationTime(state: ClusterStateUpdate, value: Types.Duration) =
+        member _.ComputationTime(state: ClusterStateUpdate, value: CoreTypes.Duration) =
             { state with ComputationTime = Some value }
 
         [<CustomOperation("computationTimeMillis")>]
-        member _.ComputationTimeMillis(state: ClusterStateUpdate, value: Types.DurationValue<Types.UnitMillis>) =
+        member _.ComputationTimeMillis(state: ClusterStateUpdate, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
             { state with ComputationTimeMillis = Some value }
 
         [<CustomOperation("publicationTime")>]
-        member _.PublicationTime(state: ClusterStateUpdate, value: Types.Duration) =
+        member _.PublicationTime(state: ClusterStateUpdate, value: CoreTypes.Duration) =
             { state with PublicationTime = Some value }
 
         [<CustomOperation("publicationTimeMillis")>]
-        member _.PublicationTimeMillis(state: ClusterStateUpdate, value: Types.DurationValue<Types.UnitMillis>) =
+        member _.PublicationTimeMillis(state: ClusterStateUpdate, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
             { state with PublicationTimeMillis = Some value }
 
         [<CustomOperation("contextConstructionTime")>]
-        member _.ContextConstructionTime(state: ClusterStateUpdate, value: Types.Duration) =
+        member _.ContextConstructionTime(state: ClusterStateUpdate, value: CoreTypes.Duration) =
             { state with ContextConstructionTime = Some value }
 
         [<CustomOperation("contextConstructionTimeMillis")>]
-        member _.ContextConstructionTimeMillis(state: ClusterStateUpdate, value: Types.DurationValue<Types.UnitMillis>) =
+        member _.ContextConstructionTimeMillis(state: ClusterStateUpdate, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
             { state with ContextConstructionTimeMillis = Some value }
 
         [<CustomOperation("commitTime")>]
-        member _.CommitTime(state: ClusterStateUpdate, value: Types.Duration) =
+        member _.CommitTime(state: ClusterStateUpdate, value: CoreTypes.Duration) =
             { state with CommitTime = Some value }
 
         [<CustomOperation("commitTimeMillis")>]
-        member _.CommitTimeMillis(state: ClusterStateUpdate, value: Types.DurationValue<Types.UnitMillis>) =
+        member _.CommitTimeMillis(state: ClusterStateUpdate, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
             { state with CommitTimeMillis = Some value }
 
         [<CustomOperation("completionTime")>]
-        member _.CompletionTime(state: ClusterStateUpdate, value: Types.Duration) =
+        member _.CompletionTime(state: ClusterStateUpdate, value: CoreTypes.Duration) =
             { state with CompletionTime = Some value }
 
         [<CustomOperation("completionTimeMillis")>]
-        member _.CompletionTimeMillis(state: ClusterStateUpdate, value: Types.DurationValue<Types.UnitMillis>) =
+        member _.CompletionTimeMillis(state: ClusterStateUpdate, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
             { state with CompletionTimeMillis = Some value }
 
         [<CustomOperation("masterApplyTime")>]
-        member _.MasterApplyTime(state: ClusterStateUpdate, value: Types.Duration) =
+        member _.MasterApplyTime(state: ClusterStateUpdate, value: CoreTypes.Duration) =
             { state with MasterApplyTime = Some value }
 
         [<CustomOperation("masterApplyTimeMillis")>]
-        member _.MasterApplyTimeMillis(state: ClusterStateUpdate, value: Types.DurationValue<Types.UnitMillis>) =
+        member _.MasterApplyTimeMillis(state: ClusterStateUpdate, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
             { state with MasterApplyTimeMillis = Some value }
 
         [<CustomOperation("notificationTime")>]
-        member _.NotificationTime(state: ClusterStateUpdate, value: Types.Duration) =
+        member _.NotificationTime(state: ClusterStateUpdate, value: CoreTypes.Duration) =
             { state with NotificationTime = Some value }
 
         [<CustomOperation("notificationTimeMillis")>]
-        member _.NotificationTimeMillis(state: ClusterStateUpdate, value: Types.DurationValue<Types.UnitMillis>) =
+        member _.NotificationTimeMillis(state: ClusterStateUpdate, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
             { state with NotificationTimeMillis = Some value }
 
     let clusterStateUpdate = ClusterStateUpdateBuilder()
@@ -361,15 +361,15 @@ module NodesTypesBuilders =
             { state with Context = Some value }
 
         [<CustomOperation("compilations")>]
-        member _.Compilations(state: Context, value: Types.Long) =
+        member _.Compilations(state: Context, value: CoreTypes.Long) =
             { state with Compilations = Some value }
 
         [<CustomOperation("cacheEvictions")>]
-        member _.CacheEvictions(state: Context, value: Types.Long) =
+        member _.CacheEvictions(state: Context, value: CoreTypes.Long) =
             { state with CacheEvictions = Some value }
 
         [<CustomOperation("compilationLimitTriggered")>]
-        member _.CompilationLimitTriggered(state: Context, value: Types.Long) =
+        member _.CompilationLimitTriggered(state: Context, value: CoreTypes.Long) =
             { state with CompilationLimitTriggered = Some value }
 
     let context = ContextBuilder()
@@ -388,35 +388,35 @@ module NodesTypesBuilders =
             }
 
         [<CustomOperation("percent")>]
-        member _.Percent(state: Cpu, value: Types.Integer) =
+        member _.Percent(state: Cpu, value: CoreTypes.Integer) =
             { state with Percent = Some value }
 
         [<CustomOperation("sys")>]
-        member _.Sys(state: Cpu, value: Types.Duration) =
+        member _.Sys(state: Cpu, value: CoreTypes.Duration) =
             { state with Sys = Some value }
 
         [<CustomOperation("sysInMillis")>]
-        member _.SysInMillis(state: Cpu, value: Types.DurationValue<Types.UnitMillis>) =
+        member _.SysInMillis(state: Cpu, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
             { state with SysInMillis = Some value }
 
         [<CustomOperation("total")>]
-        member _.Total(state: Cpu, value: Types.Duration) =
+        member _.Total(state: Cpu, value: CoreTypes.Duration) =
             { state with Total = Some value }
 
         [<CustomOperation("totalInMillis")>]
-        member _.TotalInMillis(state: Cpu, value: Types.DurationValue<Types.UnitMillis>) =
+        member _.TotalInMillis(state: Cpu, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
             { state with TotalInMillis = Some value }
 
         [<CustomOperation("user")>]
-        member _.User(state: Cpu, value: Types.Duration) =
+        member _.User(state: Cpu, value: CoreTypes.Duration) =
             { state with User = Some value }
 
         [<CustomOperation("userInMillis")>]
-        member _.UserInMillis(state: Cpu, value: Types.DurationValue<Types.UnitMillis>) =
+        member _.UserInMillis(state: Cpu, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
             { state with UserInMillis = Some value }
 
         [<CustomOperation("loadAverage")>]
-        member _.LoadAverage(state: Cpu, value: Map<string, Types.Double>) =
+        member _.LoadAverage(state: Cpu, value: Map<string, CoreTypes.Double>) =
             { state with LoadAverage = Some value }
 
     let cpu = CpuBuilder()
@@ -433,7 +433,7 @@ module NodesTypesBuilders =
             { state with ControlGroup = Some value }
 
         [<CustomOperation("usageNanos")>]
-        member _.UsageNanos(state: CpuAcct, value: Types.DurationValue<Types.UnitNanos>) =
+        member _.UsageNanos(state: CpuAcct, value: CoreTypes.DurationValue<CoreTypes.UnitNanos>) =
             { state with UsageNanos = Some value }
 
     let cpuAcct = CpuAcctBuilder()
@@ -464,7 +464,7 @@ module NodesTypesBuilders =
             { state with Available = Some value }
 
         [<CustomOperation("availableInBytes")>]
-        member _.AvailableInBytes(state: DataPathStats, value: Types.Long) =
+        member _.AvailableInBytes(state: DataPathStats, value: CoreTypes.Long) =
             { state with AvailableInBytes = Some value }
 
         [<CustomOperation("diskQueue")>]
@@ -472,7 +472,7 @@ module NodesTypesBuilders =
             { state with DiskQueue = Some value }
 
         [<CustomOperation("diskReads")>]
-        member _.DiskReads(state: DataPathStats, value: Types.Long) =
+        member _.DiskReads(state: DataPathStats, value: CoreTypes.Long) =
             { state with DiskReads = Some value }
 
         [<CustomOperation("diskReadSize")>]
@@ -480,11 +480,11 @@ module NodesTypesBuilders =
             { state with DiskReadSize = Some value }
 
         [<CustomOperation("diskReadSizeInBytes")>]
-        member _.DiskReadSizeInBytes(state: DataPathStats, value: Types.Long) =
+        member _.DiskReadSizeInBytes(state: DataPathStats, value: CoreTypes.Long) =
             { state with DiskReadSizeInBytes = Some value }
 
         [<CustomOperation("diskWrites")>]
-        member _.DiskWrites(state: DataPathStats, value: Types.Long) =
+        member _.DiskWrites(state: DataPathStats, value: CoreTypes.Long) =
             { state with DiskWrites = Some value }
 
         [<CustomOperation("diskWriteSize")>]
@@ -492,7 +492,7 @@ module NodesTypesBuilders =
             { state with DiskWriteSize = Some value }
 
         [<CustomOperation("diskWriteSizeInBytes")>]
-        member _.DiskWriteSizeInBytes(state: DataPathStats, value: Types.Long) =
+        member _.DiskWriteSizeInBytes(state: DataPathStats, value: CoreTypes.Long) =
             { state with DiskWriteSizeInBytes = Some value }
 
         [<CustomOperation("free")>]
@@ -500,7 +500,7 @@ module NodesTypesBuilders =
             { state with Free = Some value }
 
         [<CustomOperation("freeInBytes")>]
-        member _.FreeInBytes(state: DataPathStats, value: Types.Long) =
+        member _.FreeInBytes(state: DataPathStats, value: CoreTypes.Long) =
             { state with FreeInBytes = Some value }
 
         [<CustomOperation("mount")>]
@@ -516,7 +516,7 @@ module NodesTypesBuilders =
             { state with Total = Some value }
 
         [<CustomOperation("totalInBytes")>]
-        member _.TotalInBytes(state: DataPathStats, value: Types.Long) =
+        member _.TotalInBytes(state: DataPathStats, value: CoreTypes.Long) =
             { state with TotalInBytes = Some value }
 
         [<CustomOperation("type'")>]
@@ -565,11 +565,11 @@ module NodesTypesBuilders =
             }
 
         [<CustomOperation("freePercent")>]
-        member _.FreePercent(state: ExtendedMemoryStats, value: Types.Integer) =
+        member _.FreePercent(state: ExtendedMemoryStats, value: CoreTypes.Integer) =
             { state with FreePercent = Some value }
 
         [<CustomOperation("usedPercent")>]
-        member _.UsedPercent(state: ExtendedMemoryStats, value: Types.Integer) =
+        member _.UsedPercent(state: ExtendedMemoryStats, value: CoreTypes.Integer) =
             { state with UsedPercent = Some value }
 
     let extendedMemoryStats = ExtendedMemoryStatsBuilder()
@@ -588,7 +588,7 @@ module NodesTypesBuilders =
             { state with Data = Some value }
 
         [<CustomOperation("timestamp")>]
-        member _.Timestamp(state: FileSystem, value: Types.Long) =
+        member _.Timestamp(state: FileSystem, value: CoreTypes.Long) =
             { state with Timestamp = Some value }
 
         [<CustomOperation("total")>]
@@ -617,7 +617,7 @@ module NodesTypesBuilders =
             { state with Available = Some value }
 
         [<CustomOperation("availableInBytes")>]
-        member _.AvailableInBytes(state: FileSystemTotal, value: Types.Long) =
+        member _.AvailableInBytes(state: FileSystemTotal, value: CoreTypes.Long) =
             { state with AvailableInBytes = Some value }
 
         [<CustomOperation("free")>]
@@ -625,7 +625,7 @@ module NodesTypesBuilders =
             { state with Free = Some value }
 
         [<CustomOperation("freeInBytes")>]
-        member _.FreeInBytes(state: FileSystemTotal, value: Types.Long) =
+        member _.FreeInBytes(state: FileSystemTotal, value: CoreTypes.Long) =
             { state with FreeInBytes = Some value }
 
         [<CustomOperation("total")>]
@@ -633,7 +633,7 @@ module NodesTypesBuilders =
             { state with Total = Some value }
 
         [<CustomOperation("totalInBytes")>]
-        member _.TotalInBytes(state: FileSystemTotal, value: Types.Long) =
+        member _.TotalInBytes(state: FileSystemTotal, value: CoreTypes.Long) =
             { state with TotalInBytes = Some value }
 
     let fileSystemTotal = FileSystemTotalBuilder()
@@ -647,7 +647,7 @@ module NodesTypesBuilders =
             }
 
         [<CustomOperation("collectionCount")>]
-        member _.CollectionCount(state: GarbageCollectorTotal, value: Types.Long) =
+        member _.CollectionCount(state: GarbageCollectorTotal, value: CoreTypes.Long) =
             { state with CollectionCount = Some value }
 
         [<CustomOperation("collectionTime")>]
@@ -655,7 +655,7 @@ module NodesTypesBuilders =
             { state with CollectionTime = Some value }
 
         [<CustomOperation("collectionTimeInMillis")>]
-        member _.CollectionTimeInMillis(state: GarbageCollectorTotal, value: Types.Long) =
+        member _.CollectionTimeInMillis(state: GarbageCollectorTotal, value: CoreTypes.Long) =
             { state with CollectionTimeInMillis = Some value }
 
     let garbageCollectorTotal = GarbageCollectorTotalBuilder()
@@ -670,11 +670,11 @@ module NodesTypesBuilders =
             }
 
         [<CustomOperation("currentOpen")>]
-        member _.CurrentOpen(state: Http, value: Types.Integer) =
+        member _.CurrentOpen(state: Http, value: CoreTypes.Integer) =
             { state with CurrentOpen = Some value }
 
         [<CustomOperation("totalOpened")>]
-        member _.TotalOpened(state: Http, value: Types.Long) =
+        member _.TotalOpened(state: Http, value: CoreTypes.Long) =
             { state with TotalOpened = Some value }
 
         [<CustomOperation("clients")>]
@@ -697,11 +697,11 @@ module NodesTypesBuilders =
             }
 
         [<CustomOperation("limit")>]
-        member _.Limit(state: IndexingPressureMemory, value: Types.ByteSize) =
+        member _.Limit(state: IndexingPressureMemory, value: CoreTypes.ByteSize) =
             { state with Limit = Some value }
 
         [<CustomOperation("limitInBytes")>]
-        member _.LimitInBytes(state: IndexingPressureMemory, value: Types.Long) =
+        member _.LimitInBytes(state: IndexingPressureMemory, value: CoreTypes.Long) =
             { state with LimitInBytes = Some value }
 
         [<CustomOperation("current")>]
@@ -747,23 +747,23 @@ module NodesTypesBuilders =
             { state with DeviceName = Some value }
 
         [<CustomOperation("operations")>]
-        member _.Operations(state: IoStatDevice, value: Types.Long) =
+        member _.Operations(state: IoStatDevice, value: CoreTypes.Long) =
             { state with Operations = Some value }
 
         [<CustomOperation("readKilobytes")>]
-        member _.ReadKilobytes(state: IoStatDevice, value: Types.Long) =
+        member _.ReadKilobytes(state: IoStatDevice, value: CoreTypes.Long) =
             { state with ReadKilobytes = Some value }
 
         [<CustomOperation("readOperations")>]
-        member _.ReadOperations(state: IoStatDevice, value: Types.Long) =
+        member _.ReadOperations(state: IoStatDevice, value: CoreTypes.Long) =
             { state with ReadOperations = Some value }
 
         [<CustomOperation("writeKilobytes")>]
-        member _.WriteKilobytes(state: IoStatDevice, value: Types.Long) =
+        member _.WriteKilobytes(state: IoStatDevice, value: CoreTypes.Long) =
             { state with WriteKilobytes = Some value }
 
         [<CustomOperation("writeOperations")>]
-        member _.WriteOperations(state: IoStatDevice, value: Types.Long) =
+        member _.WriteOperations(state: IoStatDevice, value: CoreTypes.Long) =
             { state with WriteOperations = Some value }
 
     let ioStatDevice = IoStatDeviceBuilder()
@@ -819,7 +819,7 @@ module NodesTypesBuilders =
             { state with Threads = Some value }
 
         [<CustomOperation("timestamp")>]
-        member _.Timestamp(state: Jvm, value: Types.Long) =
+        member _.Timestamp(state: Jvm, value: CoreTypes.Long) =
             { state with Timestamp = Some value }
 
         [<CustomOperation("uptime")>]
@@ -827,7 +827,7 @@ module NodesTypesBuilders =
             { state with Uptime = Some value }
 
         [<CustomOperation("uptimeInMillis")>]
-        member _.UptimeInMillis(state: Jvm, value: Types.Long) =
+        member _.UptimeInMillis(state: Jvm, value: CoreTypes.Long) =
             { state with UptimeInMillis = Some value }
 
     let jvm = JvmBuilder()
@@ -841,15 +841,15 @@ module NodesTypesBuilders =
             }
 
         [<CustomOperation("currentLoadedCount")>]
-        member _.CurrentLoadedCount(state: JvmClasses, value: Types.Long) =
+        member _.CurrentLoadedCount(state: JvmClasses, value: CoreTypes.Long) =
             { state with CurrentLoadedCount = Some value }
 
         [<CustomOperation("totalLoadedCount")>]
-        member _.TotalLoadedCount(state: JvmClasses, value: Types.Long) =
+        member _.TotalLoadedCount(state: JvmClasses, value: CoreTypes.Long) =
             { state with TotalLoadedCount = Some value }
 
         [<CustomOperation("totalUnloadedCount")>]
-        member _.TotalUnloadedCount(state: JvmClasses, value: Types.Long) =
+        member _.TotalUnloadedCount(state: JvmClasses, value: CoreTypes.Long) =
             { state with TotalUnloadedCount = Some value }
 
     let jvmClasses = JvmClassesBuilder()
@@ -868,31 +868,31 @@ module NodesTypesBuilders =
             }
 
         [<CustomOperation("heapUsedInBytes")>]
-        member _.HeapUsedInBytes(state: JvmMemoryStats, value: Types.Long) =
+        member _.HeapUsedInBytes(state: JvmMemoryStats, value: CoreTypes.Long) =
             { state with HeapUsedInBytes = Some value }
 
         [<CustomOperation("heapUsedPercent")>]
-        member _.HeapUsedPercent(state: JvmMemoryStats, value: Types.Long) =
+        member _.HeapUsedPercent(state: JvmMemoryStats, value: CoreTypes.Long) =
             { state with HeapUsedPercent = Some value }
 
         [<CustomOperation("heapCommittedInBytes")>]
-        member _.HeapCommittedInBytes(state: JvmMemoryStats, value: Types.Long) =
+        member _.HeapCommittedInBytes(state: JvmMemoryStats, value: CoreTypes.Long) =
             { state with HeapCommittedInBytes = Some value }
 
         [<CustomOperation("heapMaxInBytes")>]
-        member _.HeapMaxInBytes(state: JvmMemoryStats, value: Types.Long) =
+        member _.HeapMaxInBytes(state: JvmMemoryStats, value: CoreTypes.Long) =
             { state with HeapMaxInBytes = Some value }
 
         [<CustomOperation("heapMax")>]
-        member _.HeapMax(state: JvmMemoryStats, value: Types.ByteSize) =
+        member _.HeapMax(state: JvmMemoryStats, value: CoreTypes.ByteSize) =
             { state with HeapMax = Some value }
 
         [<CustomOperation("nonHeapUsedInBytes")>]
-        member _.NonHeapUsedInBytes(state: JvmMemoryStats, value: Types.Long) =
+        member _.NonHeapUsedInBytes(state: JvmMemoryStats, value: CoreTypes.Long) =
             { state with NonHeapUsedInBytes = Some value }
 
         [<CustomOperation("nonHeapCommittedInBytes")>]
-        member _.NonHeapCommittedInBytes(state: JvmMemoryStats, value: Types.Long) =
+        member _.NonHeapCommittedInBytes(state: JvmMemoryStats, value: CoreTypes.Long) =
             { state with NonHeapCommittedInBytes = Some value }
 
         [<CustomOperation("pools")>]
@@ -909,11 +909,11 @@ module NodesTypesBuilders =
             }
 
         [<CustomOperation("count")>]
-        member _.Count(state: JvmThreads, value: Types.Long) =
+        member _.Count(state: JvmThreads, value: CoreTypes.Long) =
             { state with Count = Some value }
 
         [<CustomOperation("peakCount")>]
-        member _.PeakCount(state: JvmThreads, value: Types.Long) =
+        member _.PeakCount(state: JvmThreads, value: CoreTypes.Long) =
             { state with PeakCount = Some value }
 
     let jvmThreads = JvmThreadsBuilder()
@@ -951,7 +951,7 @@ module NodesTypesBuilders =
             }
 
         [<CustomOperation("adjustedTotalInBytes")>]
-        member _.AdjustedTotalInBytes(state: MemoryStats, value: Types.Long) =
+        member _.AdjustedTotalInBytes(state: MemoryStats, value: CoreTypes.Long) =
             { state with AdjustedTotalInBytes = Some value }
 
         [<CustomOperation("resident")>]
@@ -959,7 +959,7 @@ module NodesTypesBuilders =
             { state with Resident = Some value }
 
         [<CustomOperation("residentInBytes")>]
-        member _.ResidentInBytes(state: MemoryStats, value: Types.Long) =
+        member _.ResidentInBytes(state: MemoryStats, value: CoreTypes.Long) =
             { state with ResidentInBytes = Some value }
 
         [<CustomOperation("share")>]
@@ -967,7 +967,7 @@ module NodesTypesBuilders =
             { state with Share = Some value }
 
         [<CustomOperation("shareInBytes")>]
-        member _.ShareInBytes(state: MemoryStats, value: Types.Long) =
+        member _.ShareInBytes(state: MemoryStats, value: CoreTypes.Long) =
             { state with ShareInBytes = Some value }
 
         [<CustomOperation("totalVirtual")>]
@@ -975,19 +975,19 @@ module NodesTypesBuilders =
             { state with TotalVirtual = Some value }
 
         [<CustomOperation("totalVirtualInBytes")>]
-        member _.TotalVirtualInBytes(state: MemoryStats, value: Types.Long) =
+        member _.TotalVirtualInBytes(state: MemoryStats, value: CoreTypes.Long) =
             { state with TotalVirtualInBytes = Some value }
 
         [<CustomOperation("totalInBytes")>]
-        member _.TotalInBytes(state: MemoryStats, value: Types.Long) =
+        member _.TotalInBytes(state: MemoryStats, value: CoreTypes.Long) =
             { state with TotalInBytes = Some value }
 
         [<CustomOperation("freeInBytes")>]
-        member _.FreeInBytes(state: MemoryStats, value: Types.Long) =
+        member _.FreeInBytes(state: MemoryStats, value: CoreTypes.Long) =
             { state with FreeInBytes = Some value }
 
         [<CustomOperation("usedInBytes")>]
-        member _.UsedInBytes(state: MemoryStats, value: Types.Long) =
+        member _.UsedInBytes(state: MemoryStats, value: CoreTypes.Long) =
             { state with UsedInBytes = Some value }
 
     let memoryStats = MemoryStatsBuilder()
@@ -1003,7 +1003,7 @@ module NodesTypesBuilders =
             }
 
         [<CustomOperation("count")>]
-        member _.Count(state: NodeBufferPool, value: Types.Long) =
+        member _.Count(state: NodeBufferPool, value: CoreTypes.Long) =
             { state with Count = Some value }
 
         [<CustomOperation("totalCapacity")>]
@@ -1011,7 +1011,7 @@ module NodesTypesBuilders =
             { state with TotalCapacity = Some value }
 
         [<CustomOperation("totalCapacityInBytes")>]
-        member _.TotalCapacityInBytes(state: NodeBufferPool, value: Types.Long) =
+        member _.TotalCapacityInBytes(state: NodeBufferPool, value: CoreTypes.Long) =
             { state with TotalCapacityInBytes = Some value }
 
         [<CustomOperation("used")>]
@@ -1019,7 +1019,7 @@ module NodesTypesBuilders =
             { state with Used = Some value }
 
         [<CustomOperation("usedInBytes")>]
-        member _.UsedInBytes(state: NodeBufferPool, value: Types.Long) =
+        member _.UsedInBytes(state: NodeBufferPool, value: CoreTypes.Long) =
             { state with UsedInBytes = Some value }
 
     let nodeBufferPool = NodeBufferPoolBuilder()
@@ -1036,11 +1036,11 @@ module NodesTypesBuilders =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: NodeReloadResult, value: Types.Name) =
+        member _.Name(state: NodeReloadResult, value: CoreTypes.Name) =
             { state with Name = value }
 
         [<CustomOperation("reloadException")>]
-        member _.ReloadException(state: NodeReloadResult, value: Types.ErrorCause) =
+        member _.ReloadException(state: NodeReloadResult, value: CoreTypes.ErrorCause) =
             { state with ReloadException = Some value }
 
         [<CustomOperation("secureSettingNames")>]
@@ -1056,7 +1056,7 @@ module NodesTypesBuilders =
             { state with KeystoreDigest = Some value }
 
         [<CustomOperation("keystoreLastModifiedTime")>]
-        member _.KeystoreLastModifiedTime(state: NodeReloadResult, value: Types.DateTime) =
+        member _.KeystoreLastModifiedTime(state: NodeReloadResult, value: CoreTypes.DateTime) =
             { state with KeystoreLastModifiedTime = Some value }
 
     let nodeReloadResult = NodeReloadResultBuilder()
@@ -1088,7 +1088,7 @@ module NodesTypesBuilders =
             { state with Cgroup = Some value }
 
         [<CustomOperation("timestamp")>]
-        member _.Timestamp(state: OperatingSystem, value: Types.Long) =
+        member _.Timestamp(state: OperatingSystem, value: CoreTypes.Long) =
             { state with Timestamp = Some value }
 
     let operatingSystem = OperatingSystemBuilder()
@@ -1103,19 +1103,19 @@ module NodesTypesBuilders =
             }
 
         [<CustomOperation("usedInBytes")>]
-        member _.UsedInBytes(state: Pool, value: Types.Long) =
+        member _.UsedInBytes(state: Pool, value: CoreTypes.Long) =
             { state with UsedInBytes = Some value }
 
         [<CustomOperation("maxInBytes")>]
-        member _.MaxInBytes(state: Pool, value: Types.Long) =
+        member _.MaxInBytes(state: Pool, value: CoreTypes.Long) =
             { state with MaxInBytes = Some value }
 
         [<CustomOperation("peakUsedInBytes")>]
-        member _.PeakUsedInBytes(state: Pool, value: Types.Long) =
+        member _.PeakUsedInBytes(state: Pool, value: CoreTypes.Long) =
             { state with PeakUsedInBytes = Some value }
 
         [<CustomOperation("peakMaxInBytes")>]
-        member _.PeakMaxInBytes(state: Pool, value: Types.Long) =
+        member _.PeakMaxInBytes(state: Pool, value: CoreTypes.Long) =
             { state with PeakMaxInBytes = Some value }
 
     let pool = PoolBuilder()
@@ -1141,63 +1141,63 @@ module NodesTypesBuilders =
             }
 
         [<CustomOperation("all")>]
-        member _.All(state: PressureMemory, value: Types.ByteSize) =
+        member _.All(state: PressureMemory, value: CoreTypes.ByteSize) =
             { state with All = Some value }
 
         [<CustomOperation("allInBytes")>]
-        member _.AllInBytes(state: PressureMemory, value: Types.Long) =
+        member _.AllInBytes(state: PressureMemory, value: CoreTypes.Long) =
             { state with AllInBytes = Some value }
 
         [<CustomOperation("combinedCoordinatingAndPrimary")>]
-        member _.CombinedCoordinatingAndPrimary(state: PressureMemory, value: Types.ByteSize) =
+        member _.CombinedCoordinatingAndPrimary(state: PressureMemory, value: CoreTypes.ByteSize) =
             { state with CombinedCoordinatingAndPrimary = Some value }
 
         [<CustomOperation("combinedCoordinatingAndPrimaryInBytes")>]
-        member _.CombinedCoordinatingAndPrimaryInBytes(state: PressureMemory, value: Types.Long) =
+        member _.CombinedCoordinatingAndPrimaryInBytes(state: PressureMemory, value: CoreTypes.Long) =
             { state with CombinedCoordinatingAndPrimaryInBytes = Some value }
 
         [<CustomOperation("coordinating")>]
-        member _.Coordinating(state: PressureMemory, value: Types.ByteSize) =
+        member _.Coordinating(state: PressureMemory, value: CoreTypes.ByteSize) =
             { state with Coordinating = Some value }
 
         [<CustomOperation("coordinatingInBytes")>]
-        member _.CoordinatingInBytes(state: PressureMemory, value: Types.Long) =
+        member _.CoordinatingInBytes(state: PressureMemory, value: CoreTypes.Long) =
             { state with CoordinatingInBytes = Some value }
 
         [<CustomOperation("primary")>]
-        member _.Primary(state: PressureMemory, value: Types.ByteSize) =
+        member _.Primary(state: PressureMemory, value: CoreTypes.ByteSize) =
             { state with Primary = Some value }
 
         [<CustomOperation("primaryInBytes")>]
-        member _.PrimaryInBytes(state: PressureMemory, value: Types.Long) =
+        member _.PrimaryInBytes(state: PressureMemory, value: CoreTypes.Long) =
             { state with PrimaryInBytes = Some value }
 
         [<CustomOperation("replica")>]
-        member _.Replica(state: PressureMemory, value: Types.ByteSize) =
+        member _.Replica(state: PressureMemory, value: CoreTypes.ByteSize) =
             { state with Replica = Some value }
 
         [<CustomOperation("replicaInBytes")>]
-        member _.ReplicaInBytes(state: PressureMemory, value: Types.Long) =
+        member _.ReplicaInBytes(state: PressureMemory, value: CoreTypes.Long) =
             { state with ReplicaInBytes = Some value }
 
         [<CustomOperation("coordinatingRejections")>]
-        member _.CoordinatingRejections(state: PressureMemory, value: Types.Long) =
+        member _.CoordinatingRejections(state: PressureMemory, value: CoreTypes.Long) =
             { state with CoordinatingRejections = Some value }
 
         [<CustomOperation("primaryRejections")>]
-        member _.PrimaryRejections(state: PressureMemory, value: Types.Long) =
+        member _.PrimaryRejections(state: PressureMemory, value: CoreTypes.Long) =
             { state with PrimaryRejections = Some value }
 
         [<CustomOperation("replicaRejections")>]
-        member _.ReplicaRejections(state: PressureMemory, value: Types.Long) =
+        member _.ReplicaRejections(state: PressureMemory, value: CoreTypes.Long) =
             { state with ReplicaRejections = Some value }
 
         [<CustomOperation("primaryDocumentRejections")>]
-        member _.PrimaryDocumentRejections(state: PressureMemory, value: Types.Long) =
+        member _.PrimaryDocumentRejections(state: PressureMemory, value: CoreTypes.Long) =
             { state with PrimaryDocumentRejections = Some value }
 
         [<CustomOperation("largeOperationRejections")>]
-        member _.LargeOperationRejections(state: PressureMemory, value: Types.Long) =
+        member _.LargeOperationRejections(state: PressureMemory, value: CoreTypes.Long) =
             { state with LargeOperationRejections = Some value }
 
     let pressureMemory = PressureMemoryBuilder()
@@ -1221,15 +1221,15 @@ module NodesTypesBuilders =
             { state with Mem = Some value }
 
         [<CustomOperation("openFileDescriptors")>]
-        member _.OpenFileDescriptors(state: Process, value: Types.Integer) =
+        member _.OpenFileDescriptors(state: Process, value: CoreTypes.Integer) =
             { state with OpenFileDescriptors = Some value }
 
         [<CustomOperation("maxFileDescriptors")>]
-        member _.MaxFileDescriptors(state: Process, value: Types.Integer) =
+        member _.MaxFileDescriptors(state: Process, value: CoreTypes.Integer) =
             { state with MaxFileDescriptors = Some value }
 
         [<CustomOperation("timestamp")>]
-        member _.Timestamp(state: Process, value: Types.Long) =
+        member _.Timestamp(state: Process, value: CoreTypes.Long) =
             { state with Timestamp = Some value }
 
     let process = ProcessBuilder()
@@ -1244,19 +1244,19 @@ module NodesTypesBuilders =
             }
 
         [<CustomOperation("count")>]
-        member _.Count(state: Processor, value: Types.Long) =
+        member _.Count(state: Processor, value: CoreTypes.Long) =
             { state with Count = Some value }
 
         [<CustomOperation("current")>]
-        member _.Current(state: Processor, value: Types.Long) =
+        member _.Current(state: Processor, value: CoreTypes.Long) =
             { state with Current = Some value }
 
         [<CustomOperation("failed")>]
-        member _.Failed(state: Processor, value: Types.Long) =
+        member _.Failed(state: Processor, value: CoreTypes.Long) =
             { state with Failed = Some value }
 
         [<CustomOperation("timeInMillis")>]
-        member _.TimeInMillis(state: Processor, value: Types.DurationValue<Types.UnitMillis>) =
+        member _.TimeInMillis(state: Processor, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
             { state with TimeInMillis = Some value }
 
     let processor = ProcessorBuilder()
@@ -1270,15 +1270,15 @@ module NodesTypesBuilders =
             }
 
         [<CustomOperation("fullStates")>]
-        member _.FullStates(state: PublishedClusterStates, value: Types.Long) =
+        member _.FullStates(state: PublishedClusterStates, value: CoreTypes.Long) =
             { state with FullStates = Some value }
 
         [<CustomOperation("incompatibleDiffs")>]
-        member _.IncompatibleDiffs(state: PublishedClusterStates, value: Types.Long) =
+        member _.IncompatibleDiffs(state: PublishedClusterStates, value: CoreTypes.Long) =
             { state with IncompatibleDiffs = Some value }
 
         [<CustomOperation("compatibleDiffs")>]
-        member _.CompatibleDiffs(state: PublishedClusterStates, value: Types.Long) =
+        member _.CompatibleDiffs(state: PublishedClusterStates, value: CoreTypes.Long) =
             { state with CompatibleDiffs = Some value }
 
     let publishedClusterStates = PublishedClusterStatesBuilder()
@@ -1297,15 +1297,15 @@ module NodesTypesBuilders =
             { state with Name = Some value }
 
         [<CustomOperation("cumulativeExecutionCount")>]
-        member _.CumulativeExecutionCount(state: Recording, value: Types.Long) =
+        member _.CumulativeExecutionCount(state: Recording, value: CoreTypes.Long) =
             { state with CumulativeExecutionCount = Some value }
 
         [<CustomOperation("cumulativeExecutionTime")>]
-        member _.CumulativeExecutionTime(state: Recording, value: Types.Duration) =
+        member _.CumulativeExecutionTime(state: Recording, value: CoreTypes.Duration) =
             { state with CumulativeExecutionTime = Some value }
 
         [<CustomOperation("cumulativeExecutionTimeMillis")>]
-        member _.CumulativeExecutionTimeMillis(state: Recording, value: Types.DurationValue<Types.UnitMillis>) =
+        member _.CumulativeExecutionTimeMillis(state: Recording, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
             { state with CumulativeExecutionTimeMillis = Some value }
 
     let recording = RecordingBuilder()
@@ -1347,7 +1347,7 @@ module NodesTypesBuilders =
             }
 
         [<CustomOperation("repositoryName")>]
-        member _.RepositoryName(state: RepositoryMeteringInformation, value: Types.Name) =
+        member _.RepositoryName(state: RepositoryMeteringInformation, value: CoreTypes.Name) =
             { state with RepositoryName = value }
 
         [<CustomOperation("repositoryType")>]
@@ -1359,15 +1359,15 @@ module NodesTypesBuilders =
             { state with RepositoryLocation = value }
 
         [<CustomOperation("repositoryEphemeralId")>]
-        member _.RepositoryEphemeralId(state: RepositoryMeteringInformation, value: Types.Id) =
+        member _.RepositoryEphemeralId(state: RepositoryMeteringInformation, value: CoreTypes.Id) =
             { state with RepositoryEphemeralId = value }
 
         [<CustomOperation("repositoryStartedAt")>]
-        member _.RepositoryStartedAt(state: RepositoryMeteringInformation, value: Types.EpochTime<Types.UnitMillis>) =
+        member _.RepositoryStartedAt(state: RepositoryMeteringInformation, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
             { state with RepositoryStartedAt = value }
 
         [<CustomOperation("repositoryStoppedAt")>]
-        member _.RepositoryStoppedAt(state: RepositoryMeteringInformation, value: Types.EpochTime<Types.UnitMillis>) =
+        member _.RepositoryStoppedAt(state: RepositoryMeteringInformation, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
             { state with RepositoryStoppedAt = Some value }
 
         [<CustomOperation("archived")>]
@@ -1375,7 +1375,7 @@ module NodesTypesBuilders =
             { state with Archived = value }
 
         [<CustomOperation("clusterVersion")>]
-        member _.ClusterVersion(state: RepositoryMeteringInformation, value: Types.VersionNumber) =
+        member _.ClusterVersion(state: RepositoryMeteringInformation, value: CoreTypes.VersionNumber) =
             { state with ClusterVersion = Some value }
 
         [<CustomOperation("requestCounts")>]
@@ -1401,47 +1401,47 @@ module NodesTypesBuilders =
             }
 
         [<CustomOperation("getBlobProperties")>]
-        member _.GetBlobProperties(state: RequestCounts, value: Types.Long) =
+        member _.GetBlobProperties(state: RequestCounts, value: CoreTypes.Long) =
             { state with GetBlobProperties = Some value }
 
         [<CustomOperation("getBlob")>]
-        member _.GetBlob(state: RequestCounts, value: Types.Long) =
+        member _.GetBlob(state: RequestCounts, value: CoreTypes.Long) =
             { state with GetBlob = Some value }
 
         [<CustomOperation("listBlobs")>]
-        member _.ListBlobs(state: RequestCounts, value: Types.Long) =
+        member _.ListBlobs(state: RequestCounts, value: CoreTypes.Long) =
             { state with ListBlobs = Some value }
 
         [<CustomOperation("putBlob")>]
-        member _.PutBlob(state: RequestCounts, value: Types.Long) =
+        member _.PutBlob(state: RequestCounts, value: CoreTypes.Long) =
             { state with PutBlob = Some value }
 
         [<CustomOperation("putBlock")>]
-        member _.PutBlock(state: RequestCounts, value: Types.Long) =
+        member _.PutBlock(state: RequestCounts, value: CoreTypes.Long) =
             { state with PutBlock = Some value }
 
         [<CustomOperation("putBlockList")>]
-        member _.PutBlockList(state: RequestCounts, value: Types.Long) =
+        member _.PutBlockList(state: RequestCounts, value: CoreTypes.Long) =
             { state with PutBlockList = Some value }
 
         [<CustomOperation("getObject")>]
-        member _.GetObject(state: RequestCounts, value: Types.Long) =
+        member _.GetObject(state: RequestCounts, value: CoreTypes.Long) =
             { state with GetObject = Some value }
 
         [<CustomOperation("listObjects")>]
-        member _.ListObjects(state: RequestCounts, value: Types.Long) =
+        member _.ListObjects(state: RequestCounts, value: CoreTypes.Long) =
             { state with ListObjects = Some value }
 
         [<CustomOperation("insertObject")>]
-        member _.InsertObject(state: RequestCounts, value: Types.Long) =
+        member _.InsertObject(state: RequestCounts, value: CoreTypes.Long) =
             { state with InsertObject = Some value }
 
         [<CustomOperation("putObject")>]
-        member _.PutObject(state: RequestCounts, value: Types.Long) =
+        member _.PutObject(state: RequestCounts, value: CoreTypes.Long) =
             { state with PutObject = Some value }
 
         [<CustomOperation("putMultipartObject")>]
-        member _.PutMultipartObject(state: RequestCounts, value: Types.Long) =
+        member _.PutMultipartObject(state: RequestCounts, value: CoreTypes.Long) =
             { state with PutMultipartObject = Some value }
 
     let requestCounts = RequestCountsBuilder()
@@ -1456,15 +1456,15 @@ module NodesTypesBuilders =
             }
 
         [<CustomOperation("cacheEvictions")>]
-        member _.CacheEvictions(state: ScriptCache, value: Types.Long) =
+        member _.CacheEvictions(state: ScriptCache, value: CoreTypes.Long) =
             { state with CacheEvictions = Some value }
 
         [<CustomOperation("compilationLimitTriggered")>]
-        member _.CompilationLimitTriggered(state: ScriptCache, value: Types.Long) =
+        member _.CompilationLimitTriggered(state: ScriptCache, value: CoreTypes.Long) =
             { state with CompilationLimitTriggered = Some value }
 
         [<CustomOperation("compilations")>]
-        member _.Compilations(state: ScriptCache, value: Types.Long) =
+        member _.Compilations(state: ScriptCache, value: CoreTypes.Long) =
             { state with Compilations = Some value }
 
         [<CustomOperation("context")>]
@@ -1484,19 +1484,19 @@ module NodesTypesBuilders =
             }
 
         [<CustomOperation("cacheEvictions")>]
-        member _.CacheEvictions(state: Scripting, value: Types.Long) =
+        member _.CacheEvictions(state: Scripting, value: CoreTypes.Long) =
             { state with CacheEvictions = Some value }
 
         [<CustomOperation("compilations")>]
-        member _.Compilations(state: Scripting, value: Types.Long) =
+        member _.Compilations(state: Scripting, value: CoreTypes.Long) =
             { state with Compilations = Some value }
 
         [<CustomOperation("compilationsHistory")>]
-        member _.CompilationsHistory(state: Scripting, value: Map<string, Types.Long>) =
+        member _.CompilationsHistory(state: Scripting, value: Map<string, CoreTypes.Long>) =
             { state with CompilationsHistory = Some value }
 
         [<CustomOperation("compilationLimitTriggered")>]
-        member _.CompilationLimitTriggered(state: Scripting, value: Types.Long) =
+        member _.CompilationLimitTriggered(state: Scripting, value: CoreTypes.Long) =
             { state with CompilationLimitTriggered = Some value }
 
         [<CustomOperation("contexts")>]
@@ -1533,7 +1533,7 @@ module NodesTypesBuilders =
             }
 
         [<CustomOperation("count")>]
-        member _.Count(state: SerializedClusterStateDetail, value: Types.Long) =
+        member _.Count(state: SerializedClusterStateDetail, value: CoreTypes.Long) =
             { state with Count = Some value }
 
         [<CustomOperation("uncompressedSize")>]
@@ -1541,7 +1541,7 @@ module NodesTypesBuilders =
             { state with UncompressedSize = Some value }
 
         [<CustomOperation("uncompressedSizeInBytes")>]
-        member _.UncompressedSizeInBytes(state: SerializedClusterStateDetail, value: Types.Long) =
+        member _.UncompressedSizeInBytes(state: SerializedClusterStateDetail, value: CoreTypes.Long) =
             { state with UncompressedSizeInBytes = Some value }
 
         [<CustomOperation("compressedSize")>]
@@ -1549,7 +1549,7 @@ module NodesTypesBuilders =
             { state with CompressedSize = Some value }
 
         [<CustomOperation("compressedSizeInBytes")>]
-        member _.CompressedSizeInBytes(state: SerializedClusterStateDetail, value: Types.Long) =
+        member _.CompressedSizeInBytes(state: SerializedClusterStateDetail, value: CoreTypes.Long) =
             { state with CompressedSizeInBytes = Some value }
 
     let serializedClusterStateDetail = SerializedClusterStateDetailBuilder()
@@ -1563,15 +1563,15 @@ module NodesTypesBuilders =
             }
 
         [<CustomOperation("count")>]
-        member _.Count(state: SizeHttpHistogram, value: Types.Long) =
+        member _.Count(state: SizeHttpHistogram, value: CoreTypes.Long) =
             { state with Count = value }
 
         [<CustomOperation("geBytes")>]
-        member _.GeBytes(state: SizeHttpHistogram, value: Types.Long) =
+        member _.GeBytes(state: SizeHttpHistogram, value: CoreTypes.Long) =
             { state with GeBytes = Some value }
 
         [<CustomOperation("ltBytes")>]
-        member _.LtBytes(state: SizeHttpHistogram, value: Types.Long) =
+        member _.LtBytes(state: SizeHttpHistogram, value: CoreTypes.Long) =
             { state with LtBytes = Some value }
 
     let sizeHttpHistogram = SizeHttpHistogramBuilder()
@@ -1616,7 +1616,7 @@ module NodesTypesBuilders =
             { state with Fs = Some value }
 
         [<CustomOperation("host")>]
-        member _.Host(state: Stats, value: Types.Host) =
+        member _.Host(state: Stats, value: CoreTypes.Host) =
             { state with Host = Some value }
 
         [<CustomOperation("http")>]
@@ -1636,7 +1636,7 @@ module NodesTypesBuilders =
             { state with Jvm = Some value }
 
         [<CustomOperation("name")>]
-        member _.Name(state: Stats, value: Types.Name) =
+        member _.Name(state: Stats, value: CoreTypes.Name) =
             { state with Name = Some value }
 
         [<CustomOperation("os")>]
@@ -1648,7 +1648,7 @@ module NodesTypesBuilders =
             { state with Process = Some value }
 
         [<CustomOperation("roles")>]
-        member _.Roles(state: Stats, value: Types.NodeRoles) =
+        member _.Roles(state: Stats, value: CoreTypes.NodeRoles) =
             { state with Roles = Some value }
 
         [<CustomOperation("script")>]
@@ -1664,7 +1664,7 @@ module NodesTypesBuilders =
             { state with ThreadPool = Some value }
 
         [<CustomOperation("timestamp")>]
-        member _.Timestamp(state: Stats, value: Types.Long) =
+        member _.Timestamp(state: Stats, value: CoreTypes.Long) =
             { state with Timestamp = Some value }
 
         [<CustomOperation("transport")>]
@@ -1672,11 +1672,11 @@ module NodesTypesBuilders =
             { state with Transport = Some value }
 
         [<CustomOperation("transportAddress")>]
-        member _.TransportAddress(state: Stats, value: Types.TransportAddress) =
+        member _.TransportAddress(state: Stats, value: CoreTypes.TransportAddress) =
             { state with TransportAddress = Some value }
 
         [<CustomOperation("attributes")>]
-        member _.Attributes(state: Stats, value: Map<Types.Field, string>) =
+        member _.Attributes(state: Stats, value: Map<CoreTypes.Field, string>) =
             { state with Attributes = Some value }
 
         [<CustomOperation("discovery")>]
@@ -1705,27 +1705,27 @@ module NodesTypesBuilders =
             }
 
         [<CustomOperation("active")>]
-        member _.Active(state: ThreadCount, value: Types.Long) =
+        member _.Active(state: ThreadCount, value: CoreTypes.Long) =
             { state with Active = Some value }
 
         [<CustomOperation("completed")>]
-        member _.Completed(state: ThreadCount, value: Types.Long) =
+        member _.Completed(state: ThreadCount, value: CoreTypes.Long) =
             { state with Completed = Some value }
 
         [<CustomOperation("largest")>]
-        member _.Largest(state: ThreadCount, value: Types.Long) =
+        member _.Largest(state: ThreadCount, value: CoreTypes.Long) =
             { state with Largest = Some value }
 
         [<CustomOperation("queue")>]
-        member _.Queue(state: ThreadCount, value: Types.Long) =
+        member _.Queue(state: ThreadCount, value: CoreTypes.Long) =
             { state with Queue = Some value }
 
         [<CustomOperation("rejected")>]
-        member _.Rejected(state: ThreadCount, value: Types.Long) =
+        member _.Rejected(state: ThreadCount, value: CoreTypes.Long) =
             { state with Rejected = Some value }
 
         [<CustomOperation("threads")>]
-        member _.Threads(state: ThreadCount, value: Types.Long) =
+        member _.Threads(state: ThreadCount, value: CoreTypes.Long) =
             { state with Threads = Some value }
 
     let threadCount = ThreadCountBuilder()
@@ -1739,15 +1739,15 @@ module NodesTypesBuilders =
             }
 
         [<CustomOperation("count")>]
-        member _.Count(state: TimeHttpHistogram, value: Types.Long) =
+        member _.Count(state: TimeHttpHistogram, value: CoreTypes.Long) =
             { state with Count = value }
 
         [<CustomOperation("geMillis")>]
-        member _.GeMillis(state: TimeHttpHistogram, value: Types.Long) =
+        member _.GeMillis(state: TimeHttpHistogram, value: CoreTypes.Long) =
             { state with GeMillis = Some value }
 
         [<CustomOperation("ltMillis")>]
-        member _.LtMillis(state: TimeHttpHistogram, value: Types.Long) =
+        member _.LtMillis(state: TimeHttpHistogram, value: CoreTypes.Long) =
             { state with LtMillis = Some value }
 
     let timeHttpHistogram = TimeHttpHistogramBuilder()
@@ -1776,7 +1776,7 @@ module NodesTypesBuilders =
             { state with OutboundHandlingTimeHistogram = Some value }
 
         [<CustomOperation("rxCount")>]
-        member _.RxCount(state: Transport, value: Types.Long) =
+        member _.RxCount(state: Transport, value: CoreTypes.Long) =
             { state with RxCount = Some value }
 
         [<CustomOperation("rxSize")>]
@@ -1784,15 +1784,15 @@ module NodesTypesBuilders =
             { state with RxSize = Some value }
 
         [<CustomOperation("rxSizeInBytes")>]
-        member _.RxSizeInBytes(state: Transport, value: Types.Long) =
+        member _.RxSizeInBytes(state: Transport, value: CoreTypes.Long) =
             { state with RxSizeInBytes = Some value }
 
         [<CustomOperation("serverOpen")>]
-        member _.ServerOpen(state: Transport, value: Types.Integer) =
+        member _.ServerOpen(state: Transport, value: CoreTypes.Integer) =
             { state with ServerOpen = Some value }
 
         [<CustomOperation("txCount")>]
-        member _.TxCount(state: Transport, value: Types.Long) =
+        member _.TxCount(state: Transport, value: CoreTypes.Long) =
             { state with TxCount = Some value }
 
         [<CustomOperation("txSize")>]
@@ -1800,11 +1800,11 @@ module NodesTypesBuilders =
             { state with TxSize = Some value }
 
         [<CustomOperation("txSizeInBytes")>]
-        member _.TxSizeInBytes(state: Transport, value: Types.Long) =
+        member _.TxSizeInBytes(state: Transport, value: CoreTypes.Long) =
             { state with TxSizeInBytes = Some value }
 
         [<CustomOperation("totalOutboundConnections")>]
-        member _.TotalOutboundConnections(state: Transport, value: Types.Long) =
+        member _.TotalOutboundConnections(state: Transport, value: CoreTypes.Long) =
             { state with TotalOutboundConnections = Some value }
 
     let transport = TransportBuilder()
@@ -1818,15 +1818,15 @@ module NodesTypesBuilders =
             }
 
         [<CustomOperation("count")>]
-        member _.Count(state: TransportHistogram, value: Types.Long) =
+        member _.Count(state: TransportHistogram, value: CoreTypes.Long) =
             { state with Count = Some value }
 
         [<CustomOperation("ltMillis")>]
-        member _.LtMillis(state: TransportHistogram, value: Types.Long) =
+        member _.LtMillis(state: TransportHistogram, value: CoreTypes.Long) =
             { state with LtMillis = Some value }
 
         [<CustomOperation("geMillis")>]
-        member _.GeMillis(state: TransportHistogram, value: Types.Long) =
+        member _.GeMillis(state: TransportHistogram, value: CoreTypes.Long) =
             { state with GeMillis = Some value }
 
     let transportHistogram = TransportHistogramBuilder()

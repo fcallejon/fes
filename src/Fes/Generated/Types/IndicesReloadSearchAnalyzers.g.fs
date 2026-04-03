@@ -18,8 +18,8 @@ module IndicesReloadSearchAnalyzers =
 
     type ReloadResult = {
         [<System.Text.Json.Serialization.JsonPropertyName("reload_details")>]
-        ReloadDetails: IndicesReloadSearchAnalyzers.ReloadDetails list
+        ReloadDetails: ReloadDetails list
         [<System.Text.Json.Serialization.JsonPropertyName("_shards")>]
-        Shards: Types.ShardStatistics
+        Shards: CoreTypes.ShardStatistics
     }
 

@@ -9,15 +9,15 @@ module IndicesUpdateAliases =
 
     type AddAction = {
         [<System.Text.Json.Serialization.JsonPropertyName("alias")>]
-        Alias: Types.IndexAlias option
+        Alias: CoreTypes.IndexAlias option
         [<System.Text.Json.Serialization.JsonPropertyName("aliases")>]
         Aliases: System.Text.Json.JsonElement option
         [<System.Text.Json.Serialization.JsonPropertyName("filter")>]
-        Filter: TypesQueryDsl.QueryContainer option
+        Filter: CoreTypes.QueryContainer option
         [<System.Text.Json.Serialization.JsonPropertyName("index")>]
-        Index: Types.IndexName option
+        Index: CoreTypes.IndexName option
         [<System.Text.Json.Serialization.JsonPropertyName("indices")>]
-        Indices: Types.Indices option
+        Indices: CoreTypes.Indices option
         [<System.Text.Json.Serialization.JsonPropertyName("index_routing")>]
         IndexRouting: string option
         [<System.Text.Json.Serialization.JsonPropertyName("is_hidden")>]
@@ -34,29 +34,29 @@ module IndicesUpdateAliases =
 
     type RemoveAction = {
         [<System.Text.Json.Serialization.JsonPropertyName("alias")>]
-        Alias: Types.IndexAlias option
+        Alias: CoreTypes.IndexAlias option
         [<System.Text.Json.Serialization.JsonPropertyName("aliases")>]
         Aliases: System.Text.Json.JsonElement option
         [<System.Text.Json.Serialization.JsonPropertyName("index")>]
-        Index: Types.IndexName option
+        Index: CoreTypes.IndexName option
         [<System.Text.Json.Serialization.JsonPropertyName("indices")>]
-        Indices: Types.Indices option
+        Indices: CoreTypes.Indices option
         [<System.Text.Json.Serialization.JsonPropertyName("must_exist")>]
         MustExist: bool option
     }
 
     type RemoveIndexAction = {
         [<System.Text.Json.Serialization.JsonPropertyName("index")>]
-        Index: Types.IndexName option
+        Index: CoreTypes.IndexName option
         [<System.Text.Json.Serialization.JsonPropertyName("indices")>]
-        Indices: Types.Indices option
+        Indices: CoreTypes.Indices option
         [<System.Text.Json.Serialization.JsonPropertyName("must_exist")>]
         MustExist: bool option
     }
 
     [<RequireQualifiedAccess>]
     type Action =
-        | Add of IndicesUpdateAliases.AddAction
-        | Remove of IndicesUpdateAliases.RemoveAction
-        | RemoveIndex of IndicesUpdateAliases.RemoveIndexAction
+        | Add of AddAction
+        | Remove of RemoveAction
+        | RemoveIndex of RemoveIndexAction
 

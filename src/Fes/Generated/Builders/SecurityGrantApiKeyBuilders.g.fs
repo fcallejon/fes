@@ -19,11 +19,11 @@ module SecurityGrantApiKeyBuilders =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: GrantApiKey, value: Types.Name) =
+        member _.Name(state: GrantApiKey, value: CoreTypes.Name) =
             { state with Name = value }
 
         [<CustomOperation("expiration")>]
-        member _.Expiration(state: GrantApiKey, value: Types.DurationLarge) =
+        member _.Expiration(state: GrantApiKey, value: CoreTypes.DurationLarge) =
             { state with Expiration = Some value }
 
         [<CustomOperation("roleDescriptors")>]
@@ -31,7 +31,7 @@ module SecurityGrantApiKeyBuilders =
             { state with RoleDescriptors = Some value }
 
         [<CustomOperation("metadata")>]
-        member _.Metadata(state: GrantApiKey, value: Types.Metadata) =
+        member _.Metadata(state: GrantApiKey, value: CoreTypes.Metadata) =
             { state with Metadata = Some value }
 
     let grantApiKey = GrantApiKeyBuilder()

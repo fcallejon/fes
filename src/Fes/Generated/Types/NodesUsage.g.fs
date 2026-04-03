@@ -9,11 +9,11 @@ module NodesUsage =
 
     type NodeUsage = {
         [<System.Text.Json.Serialization.JsonPropertyName("rest_actions")>]
-        RestActions: Map<string, Types.Integer>
+        RestActions: Map<string, CoreTypes.Integer>
         [<System.Text.Json.Serialization.JsonPropertyName("since")>]
-        Since: Types.EpochTime<Types.UnitMillis>
+        Since: CoreTypes.EpochTime<CoreTypes.UnitMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("timestamp")>]
-        Timestamp: Types.EpochTime<Types.UnitMillis>
+        Timestamp: CoreTypes.EpochTime<CoreTypes.UnitMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("aggregations")>]
         Aggregations: Map<string, System.Text.Json.JsonElement>
     }
@@ -26,13 +26,13 @@ module NodesUsage =
 
     [<RequireQualifiedAccess>]
     type NodesUsageMetrics =
-        | NodesUsageMetric of NodesUsage.NodesUsageMetric
-        | Array of NodesUsage.NodesUsageMetric list
+        | NodesUsageMetric of NodesUsageMetric
+        | Array of NodesUsageMetric list
 
     type ResponseBase = {
         [<System.Text.Json.Serialization.JsonPropertyName("cluster_name")>]
-        ClusterName: Types.Name
+        ClusterName: CoreTypes.Name
         [<System.Text.Json.Serialization.JsonPropertyName("nodes")>]
-        Nodes: Map<string, NodesUsage.NodeUsage>
+        Nodes: Map<string, NodeUsage>
     }
 

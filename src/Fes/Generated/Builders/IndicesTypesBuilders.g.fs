@@ -21,7 +21,7 @@ module IndicesTypesBuilders =
             }
 
         [<CustomOperation("filter")>]
-        member _.Filter(state: Alias, value: TypesQueryDsl.QueryContainer) =
+        member _.Filter(state: Alias, value: CoreTypes.QueryContainer) =
             { state with Filter = Some value }
 
         [<CustomOperation("indexRouting")>]
@@ -58,7 +58,7 @@ module IndicesTypesBuilders =
             }
 
         [<CustomOperation("filter")>]
-        member _.Filter(state: AliasDefinition, value: TypesQueryDsl.QueryContainer) =
+        member _.Filter(state: AliasDefinition, value: CoreTypes.QueryContainer) =
             { state with Filter = Some value }
 
         [<CustomOperation("indexRouting")>]
@@ -109,7 +109,7 @@ module IndicesTypesBuilders =
             }
 
         [<CustomOperation("meta")>]
-        member _.Meta(state: DataStream, value: Types.Metadata) =
+        member _.Meta(state: DataStream, value: CoreTypes.Metadata) =
             { state with Meta = Some value }
 
         [<CustomOperation("allowCustomRouting")>]
@@ -121,7 +121,7 @@ module IndicesTypesBuilders =
             { state with FailureStore = Some value }
 
         [<CustomOperation("generation")>]
-        member _.Generation(state: DataStream, value: Types.Integer) =
+        member _.Generation(state: DataStream, value: CoreTypes.Integer) =
             { state with Generation = value }
 
         [<CustomOperation("hidden")>]
@@ -129,7 +129,7 @@ module IndicesTypesBuilders =
             { state with Hidden = value }
 
         [<CustomOperation("ilmPolicy")>]
-        member _.IlmPolicy(state: DataStream, value: Types.Name) =
+        member _.IlmPolicy(state: DataStream, value: CoreTypes.Name) =
             { state with IlmPolicy = Some value }
 
         [<CustomOperation("nextGenerationManagedBy")>]
@@ -149,7 +149,7 @@ module IndicesTypesBuilders =
             { state with Lifecycle = Some value }
 
         [<CustomOperation("name")>]
-        member _.Name(state: DataStream, value: Types.DataStreamName) =
+        member _.Name(state: DataStream, value: CoreTypes.DataStreamName) =
             { state with Name = value }
 
         [<CustomOperation("replicated")>]
@@ -165,11 +165,11 @@ module IndicesTypesBuilders =
             { state with Settings = value }
 
         [<CustomOperation("mappings")>]
-        member _.Mappings(state: DataStream, value: TypesMapping.TypeMapping) =
+        member _.Mappings(state: DataStream, value: CoreTypes.TypeMapping) =
             { state with Mappings = Some value }
 
         [<CustomOperation("status")>]
-        member _.Status(state: DataStream, value: Types.HealthStatus) =
+        member _.Status(state: DataStream, value: CoreTypes.HealthStatus) =
             { state with Status = value }
 
         [<CustomOperation("system")>]
@@ -177,7 +177,7 @@ module IndicesTypesBuilders =
             { state with System = Some value }
 
         [<CustomOperation("template")>]
-        member _.Template(state: DataStream, value: Types.Name) =
+        member _.Template(state: DataStream, value: CoreTypes.Name) =
             { state with Template = value }
 
         [<CustomOperation("timestampField")>]
@@ -236,15 +236,15 @@ module IndicesTypesBuilders =
             }
 
         [<CustomOperation("indexName")>]
-        member _.IndexName(state: DataStreamIndex, value: Types.IndexName) =
+        member _.IndexName(state: DataStreamIndex, value: CoreTypes.IndexName) =
             { state with IndexName = value }
 
         [<CustomOperation("indexUuid")>]
-        member _.IndexUuid(state: DataStreamIndex, value: Types.Uuid) =
+        member _.IndexUuid(state: DataStreamIndex, value: CoreTypes.Uuid) =
             { state with IndexUuid = value }
 
         [<CustomOperation("ilmPolicy")>]
-        member _.IlmPolicy(state: DataStreamIndex, value: Types.Name) =
+        member _.IlmPolicy(state: DataStreamIndex, value: CoreTypes.Name) =
             { state with IlmPolicy = Some value }
 
         [<CustomOperation("managedBy")>]
@@ -272,7 +272,7 @@ module IndicesTypesBuilders =
             }
 
         [<CustomOperation("dataRetention")>]
-        member _.DataRetention(state: DataStreamLifecycle, value: Types.Duration) =
+        member _.DataRetention(state: DataStreamLifecycle, value: CoreTypes.Duration) =
             { state with DataRetention = Some value }
 
         [<CustomOperation("downsampling")>]
@@ -288,7 +288,7 @@ module IndicesTypesBuilders =
             { state with Enabled = Some value }
 
         [<CustomOperation("frozenAfter")>]
-        member _.FrozenAfter(state: DataStreamLifecycle, value: Types.Duration) =
+        member _.FrozenAfter(state: DataStreamLifecycle, value: CoreTypes.Duration) =
             { state with FrozenAfter = Some value }
 
     let dataStreamLifecycle = DataStreamLifecycleBuilder()
@@ -309,7 +309,7 @@ module IndicesTypesBuilders =
             }
 
         [<CustomOperation("minAge")>]
-        member _.MinAge(state: DataStreamLifecycleRolloverConditions, value: Types.Duration) =
+        member _.MinAge(state: DataStreamLifecycleRolloverConditions, value: CoreTypes.Duration) =
             { state with MinAge = Some value }
 
         [<CustomOperation("maxAge")>]
@@ -317,35 +317,35 @@ module IndicesTypesBuilders =
             { state with MaxAge = Some value }
 
         [<CustomOperation("minDocs")>]
-        member _.MinDocs(state: DataStreamLifecycleRolloverConditions, value: Types.Long) =
+        member _.MinDocs(state: DataStreamLifecycleRolloverConditions, value: CoreTypes.Long) =
             { state with MinDocs = Some value }
 
         [<CustomOperation("maxDocs")>]
-        member _.MaxDocs(state: DataStreamLifecycleRolloverConditions, value: Types.Long) =
+        member _.MaxDocs(state: DataStreamLifecycleRolloverConditions, value: CoreTypes.Long) =
             { state with MaxDocs = Some value }
 
         [<CustomOperation("minSize")>]
-        member _.MinSize(state: DataStreamLifecycleRolloverConditions, value: Types.ByteSize) =
+        member _.MinSize(state: DataStreamLifecycleRolloverConditions, value: CoreTypes.ByteSize) =
             { state with MinSize = Some value }
 
         [<CustomOperation("maxSize")>]
-        member _.MaxSize(state: DataStreamLifecycleRolloverConditions, value: Types.ByteSize) =
+        member _.MaxSize(state: DataStreamLifecycleRolloverConditions, value: CoreTypes.ByteSize) =
             { state with MaxSize = Some value }
 
         [<CustomOperation("minPrimaryShardSize")>]
-        member _.MinPrimaryShardSize(state: DataStreamLifecycleRolloverConditions, value: Types.ByteSize) =
+        member _.MinPrimaryShardSize(state: DataStreamLifecycleRolloverConditions, value: CoreTypes.ByteSize) =
             { state with MinPrimaryShardSize = Some value }
 
         [<CustomOperation("maxPrimaryShardSize")>]
-        member _.MaxPrimaryShardSize(state: DataStreamLifecycleRolloverConditions, value: Types.ByteSize) =
+        member _.MaxPrimaryShardSize(state: DataStreamLifecycleRolloverConditions, value: CoreTypes.ByteSize) =
             { state with MaxPrimaryShardSize = Some value }
 
         [<CustomOperation("minPrimaryShardDocs")>]
-        member _.MinPrimaryShardDocs(state: DataStreamLifecycleRolloverConditions, value: Types.Long) =
+        member _.MinPrimaryShardDocs(state: DataStreamLifecycleRolloverConditions, value: CoreTypes.Long) =
             { state with MinPrimaryShardDocs = Some value }
 
         [<CustomOperation("maxPrimaryShardDocs")>]
-        member _.MaxPrimaryShardDocs(state: DataStreamLifecycleRolloverConditions, value: Types.Long) =
+        member _.MaxPrimaryShardDocs(state: DataStreamLifecycleRolloverConditions, value: CoreTypes.Long) =
             { state with MaxPrimaryShardDocs = Some value }
 
     let dataStreamLifecycleRolloverConditions = DataStreamLifecycleRolloverConditionsBuilder()
@@ -380,7 +380,7 @@ module IndicesTypesBuilders =
             }
 
         [<CustomOperation("dataRetention")>]
-        member _.DataRetention(state: FailureStoreLifecycle, value: Types.Duration) =
+        member _.DataRetention(state: FailureStoreLifecycle, value: CoreTypes.Duration) =
             { state with DataRetention = Some value }
 
         [<CustomOperation("enabled")>]
@@ -397,7 +397,7 @@ module IndicesTypesBuilders =
             }
 
         [<CustomOperation("dataRetention")>]
-        member _.DataRetention(state: FailureStoreLifecycleTemplate, value: Types.Duration option) =
+        member _.DataRetention(state: FailureStoreLifecycleTemplate, value: CoreTypes.Duration option) =
             { state with DataRetention = Some value }
 
         [<CustomOperation("enabled")>]
@@ -462,7 +462,7 @@ module IndicesTypesBuilders =
             { state with TierPreference = Some value }
 
         [<CustomOperation("id")>]
-        member _.Id(state: IndexRoutingAllocationInclude, value: Types.Id) =
+        member _.Id(state: IndexRoutingAllocationInclude, value: CoreTypes.Id) =
             { state with Id = Some value }
 
     let indexRoutingAllocationInclude = IndexRoutingAllocationIncludeBuilder()
@@ -477,7 +477,7 @@ module IndicesTypesBuilders =
             }
 
         [<CustomOperation("field")>]
-        member _.Field(state: IndexSegmentSort, value: Types.Fields) =
+        member _.Field(state: IndexSegmentSort, value: CoreTypes.Fields) =
             { state with Field = Some value }
 
         [<CustomOperation("order")>]
@@ -505,23 +505,23 @@ module IndicesTypesBuilders =
             }
 
         [<CustomOperation("readOnly")>]
-        member _.ReadOnly(state: IndexSettingBlocks, value: SpecUtils.Stringified<bool>) =
+        member _.ReadOnly(state: IndexSettingBlocks, value: CoreTypes.Stringified<bool>) =
             { state with ReadOnly = Some value }
 
         [<CustomOperation("readOnlyAllowDelete")>]
-        member _.ReadOnlyAllowDelete(state: IndexSettingBlocks, value: SpecUtils.Stringified<bool>) =
+        member _.ReadOnlyAllowDelete(state: IndexSettingBlocks, value: CoreTypes.Stringified<bool>) =
             { state with ReadOnlyAllowDelete = Some value }
 
         [<CustomOperation("read")>]
-        member _.Read(state: IndexSettingBlocks, value: SpecUtils.Stringified<bool>) =
+        member _.Read(state: IndexSettingBlocks, value: CoreTypes.Stringified<bool>) =
             { state with Read = Some value }
 
         [<CustomOperation("write")>]
-        member _.Write(state: IndexSettingBlocks, value: SpecUtils.Stringified<bool>) =
+        member _.Write(state: IndexSettingBlocks, value: CoreTypes.Stringified<bool>) =
             { state with Write = Some value }
 
         [<CustomOperation("metadata")>]
-        member _.Metadata(state: IndexSettingBlocks, value: SpecUtils.Stringified<bool>) =
+        member _.Metadata(state: IndexSettingBlocks, value: CoreTypes.Stringified<bool>) =
             { state with Metadata = Some value }
 
     let indexSettingBlocks = IndexSettingBlocksBuilder()
@@ -616,7 +616,7 @@ module IndicesTypesBuilders =
             { state with NumberOfReplicas = Some value }
 
         [<CustomOperation("numberOfRoutingShards")>]
-        member _.NumberOfRoutingShards(state: IndexSettings, value: Types.Integer) =
+        member _.NumberOfRoutingShards(state: IndexSettings, value: CoreTypes.Integer) =
             { state with NumberOfRoutingShards = Some value }
 
         [<CustomOperation("checkOnStartup")>]
@@ -628,7 +628,7 @@ module IndicesTypesBuilders =
             { state with Codec = Some value }
 
         [<CustomOperation("routingPartitionSize")>]
-        member _.RoutingPartitionSize(state: IndexSettings, value: SpecUtils.Stringified<Types.Integer>) =
+        member _.RoutingPartitionSize(state: IndexSettings, value: CoreTypes.Stringified<CoreTypes.Integer>) =
             { state with RoutingPartitionSize = Some value }
 
         [<CustomOperation("loadFixedBitsetFiltersEagerly")>]
@@ -640,7 +640,7 @@ module IndicesTypesBuilders =
             { state with Hidden = Some value }
 
         [<CustomOperation("autoExpandReplicas")>]
-        member _.AutoExpandReplicas(state: IndexSettings, value: SpecUtils.WithNullValue<string>) =
+        member _.AutoExpandReplicas(state: IndexSettings, value: CoreTypes.WithNullValue<string>) =
             { state with AutoExpandReplicas = Some value }
 
         [<CustomOperation("merge")>]
@@ -652,35 +652,35 @@ module IndicesTypesBuilders =
             { state with Search = Some value }
 
         [<CustomOperation("refreshInterval")>]
-        member _.RefreshInterval(state: IndexSettings, value: Types.Duration) =
+        member _.RefreshInterval(state: IndexSettings, value: CoreTypes.Duration) =
             { state with RefreshInterval = Some value }
 
         [<CustomOperation("maxResultWindow")>]
-        member _.MaxResultWindow(state: IndexSettings, value: Types.Integer) =
+        member _.MaxResultWindow(state: IndexSettings, value: CoreTypes.Integer) =
             { state with MaxResultWindow = Some value }
 
         [<CustomOperation("maxInnerResultWindow")>]
-        member _.MaxInnerResultWindow(state: IndexSettings, value: Types.Integer) =
+        member _.MaxInnerResultWindow(state: IndexSettings, value: CoreTypes.Integer) =
             { state with MaxInnerResultWindow = Some value }
 
         [<CustomOperation("maxRescoreWindow")>]
-        member _.MaxRescoreWindow(state: IndexSettings, value: Types.Integer) =
+        member _.MaxRescoreWindow(state: IndexSettings, value: CoreTypes.Integer) =
             { state with MaxRescoreWindow = Some value }
 
         [<CustomOperation("maxDocvalueFieldsSearch")>]
-        member _.MaxDocvalueFieldsSearch(state: IndexSettings, value: Types.Integer) =
+        member _.MaxDocvalueFieldsSearch(state: IndexSettings, value: CoreTypes.Integer) =
             { state with MaxDocvalueFieldsSearch = Some value }
 
         [<CustomOperation("maxScriptFields")>]
-        member _.MaxScriptFields(state: IndexSettings, value: Types.Integer) =
+        member _.MaxScriptFields(state: IndexSettings, value: CoreTypes.Integer) =
             { state with MaxScriptFields = Some value }
 
         [<CustomOperation("maxNgramDiff")>]
-        member _.MaxNgramDiff(state: IndexSettings, value: Types.Integer) =
+        member _.MaxNgramDiff(state: IndexSettings, value: CoreTypes.Integer) =
             { state with MaxNgramDiff = Some value }
 
         [<CustomOperation("maxShingleDiff")>]
-        member _.MaxShingleDiff(state: IndexSettings, value: Types.Integer) =
+        member _.MaxShingleDiff(state: IndexSettings, value: CoreTypes.Integer) =
             { state with MaxShingleDiff = Some value }
 
         [<CustomOperation("blocks")>]
@@ -688,7 +688,7 @@ module IndicesTypesBuilders =
             { state with Blocks = Some value }
 
         [<CustomOperation("maxRefreshListeners")>]
-        member _.MaxRefreshListeners(state: IndexSettings, value: Types.Integer) =
+        member _.MaxRefreshListeners(state: IndexSettings, value: CoreTypes.Integer) =
             { state with MaxRefreshListeners = Some value }
 
         [<CustomOperation("analyze")>]
@@ -700,11 +700,11 @@ module IndicesTypesBuilders =
             { state with Highlight = Some value }
 
         [<CustomOperation("maxTermsCount")>]
-        member _.MaxTermsCount(state: IndexSettings, value: Types.Integer) =
+        member _.MaxTermsCount(state: IndexSettings, value: CoreTypes.Integer) =
             { state with MaxTermsCount = Some value }
 
         [<CustomOperation("maxRegexLength")>]
-        member _.MaxRegexLength(state: IndexSettings, value: Types.Integer) =
+        member _.MaxRegexLength(state: IndexSettings, value: CoreTypes.Integer) =
             { state with MaxRegexLength = Some value }
 
         [<CustomOperation("routing")>]
@@ -712,15 +712,15 @@ module IndicesTypesBuilders =
             { state with Routing = Some value }
 
         [<CustomOperation("gcDeletes")>]
-        member _.GcDeletes(state: IndexSettings, value: Types.Duration) =
+        member _.GcDeletes(state: IndexSettings, value: CoreTypes.Duration) =
             { state with GcDeletes = Some value }
 
         [<CustomOperation("defaultPipeline")>]
-        member _.DefaultPipeline(state: IndexSettings, value: Types.PipelineName) =
+        member _.DefaultPipeline(state: IndexSettings, value: CoreTypes.PipelineName) =
             { state with DefaultPipeline = Some value }
 
         [<CustomOperation("finalPipeline")>]
-        member _.FinalPipeline(state: IndexSettings, value: Types.PipelineName) =
+        member _.FinalPipeline(state: IndexSettings, value: CoreTypes.PipelineName) =
             { state with FinalPipeline = Some value }
 
         [<CustomOperation("lifecycle")>]
@@ -728,19 +728,19 @@ module IndicesTypesBuilders =
             { state with Lifecycle = Some value }
 
         [<CustomOperation("providedName")>]
-        member _.ProvidedName(state: IndexSettings, value: Types.Name) =
+        member _.ProvidedName(state: IndexSettings, value: CoreTypes.Name) =
             { state with ProvidedName = Some value }
 
         [<CustomOperation("creationDate")>]
-        member _.CreationDate(state: IndexSettings, value: SpecUtils.Stringified<Types.EpochTime<Types.UnitMillis>>) =
+        member _.CreationDate(state: IndexSettings, value: CoreTypes.Stringified<CoreTypes.EpochTime<CoreTypes.UnitMillis>>) =
             { state with CreationDate = Some value }
 
         [<CustomOperation("creationDateString")>]
-        member _.CreationDateString(state: IndexSettings, value: Types.DateTime) =
+        member _.CreationDateString(state: IndexSettings, value: CoreTypes.DateTime) =
             { state with CreationDateString = Some value }
 
         [<CustomOperation("uuid")>]
-        member _.Uuid(state: IndexSettings, value: Types.Uuid) =
+        member _.Uuid(state: IndexSettings, value: CoreTypes.Uuid) =
             { state with Uuid = Some value }
 
         [<CustomOperation("version")>]
@@ -756,7 +756,7 @@ module IndicesTypesBuilders =
             { state with Format = Some value }
 
         [<CustomOperation("maxSlicesPerScroll")>]
-        member _.MaxSlicesPerScroll(state: IndexSettings, value: Types.Integer) =
+        member _.MaxSlicesPerScroll(state: IndexSettings, value: CoreTypes.Integer) =
             { state with MaxSlicesPerScroll = Some value }
 
         [<CustomOperation("translog")>]
@@ -772,7 +772,7 @@ module IndicesTypesBuilders =
             { state with Priority = Some value }
 
         [<CustomOperation("topMetricsMaxSize")>]
-        member _.TopMetricsMaxSize(state: IndexSettings, value: Types.Integer) =
+        member _.TopMetricsMaxSize(state: IndexSettings, value: CoreTypes.Integer) =
             { state with TopMetricsMaxSize = Some value }
 
         [<CustomOperation("analysis")>]
@@ -824,23 +824,23 @@ module IndicesTypesBuilders =
             }
 
         [<CustomOperation("analyzer")>]
-        member _.Analyzer(state: IndexSettingsAnalysis, value: Map<string, TypesAnalysis.Analyzer>) =
+        member _.Analyzer(state: IndexSettingsAnalysis, value: Map<string, CoreTypes.Analyzer>) =
             { state with Analyzer = Some value }
 
         [<CustomOperation("charFilter")>]
-        member _.CharFilter(state: IndexSettingsAnalysis, value: Map<string, TypesAnalysis.CharFilter>) =
+        member _.CharFilter(state: IndexSettingsAnalysis, value: Map<string, CoreTypes.CharFilter>) =
             { state with CharFilter = Some value }
 
         [<CustomOperation("filter")>]
-        member _.Filter(state: IndexSettingsAnalysis, value: Map<string, TypesAnalysis.TokenFilter>) =
+        member _.Filter(state: IndexSettingsAnalysis, value: Map<string, CoreTypes.TokenFilter>) =
             { state with Filter = Some value }
 
         [<CustomOperation("normalizer")>]
-        member _.Normalizer(state: IndexSettingsAnalysis, value: Map<string, TypesAnalysis.Normalizer>) =
+        member _.Normalizer(state: IndexSettingsAnalysis, value: Map<string, CoreTypes.Normalizer>) =
             { state with Normalizer = Some value }
 
         [<CustomOperation("tokenizer")>]
-        member _.Tokenizer(state: IndexSettingsAnalysis, value: Map<string, TypesAnalysis.Tokenizer>) =
+        member _.Tokenizer(state: IndexSettingsAnalysis, value: Map<string, CoreTypes.Tokenizer>) =
             { state with Tokenizer = Some value }
 
     let indexSettingsAnalysis = IndexSettingsAnalysisBuilder()
@@ -858,15 +858,15 @@ module IndicesTypesBuilders =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: IndexSettingsLifecycle, value: Types.Name) =
+        member _.Name(state: IndexSettingsLifecycle, value: CoreTypes.Name) =
             { state with Name = Some value }
 
         [<CustomOperation("indexingComplete")>]
-        member _.IndexingComplete(state: IndexSettingsLifecycle, value: SpecUtils.Stringified<bool>) =
+        member _.IndexingComplete(state: IndexSettingsLifecycle, value: CoreTypes.Stringified<bool>) =
             { state with IndexingComplete = Some value }
 
         [<CustomOperation("originationDate")>]
-        member _.OriginationDate(state: IndexSettingsLifecycle, value: Types.Long) =
+        member _.OriginationDate(state: IndexSettingsLifecycle, value: CoreTypes.Long) =
             { state with OriginationDate = Some value }
 
         [<CustomOperation("parseOriginationDate")>]
@@ -895,11 +895,11 @@ module IndicesTypesBuilders =
             }
 
         [<CustomOperation("endTime")>]
-        member _.EndTime(state: IndexSettingsTimeSeries, value: Types.DateTime) =
+        member _.EndTime(state: IndexSettingsTimeSeries, value: CoreTypes.DateTime) =
             { state with EndTime = Some value }
 
         [<CustomOperation("startTime")>]
-        member _.StartTime(state: IndexSettingsTimeSeries, value: Types.DateTime) =
+        member _.StartTime(state: IndexSettingsTimeSeries, value: CoreTypes.DateTime) =
             { state with StartTime = Some value }
 
     let indexSettingsTimeSeries = IndexSettingsTimeSeriesBuilder()
@@ -916,11 +916,11 @@ module IndicesTypesBuilders =
             }
 
         [<CustomOperation("aliases")>]
-        member _.Aliases(state: IndexState, value: Map<Types.IndexName, IndicesTypes.Alias>) =
+        member _.Aliases(state: IndexState, value: Map<CoreTypes.IndexName, IndicesTypes.Alias>) =
             { state with Aliases = Some value }
 
         [<CustomOperation("mappings")>]
-        member _.Mappings(state: IndexState, value: TypesMapping.TypeMapping) =
+        member _.Mappings(state: IndexState, value: CoreTypes.TypeMapping) =
             { state with Mappings = Some value }
 
         [<CustomOperation("settings")>]
@@ -932,7 +932,7 @@ module IndicesTypesBuilders =
             { state with Defaults = Some value }
 
         [<CustomOperation("dataStream")>]
-        member _.DataStream(state: IndexState, value: Types.DataStreamName) =
+        member _.DataStream(state: IndexState, value: CoreTypes.DataStreamName) =
             { state with DataStream = Some value }
 
         [<CustomOperation("lifecycle")>]
@@ -961,11 +961,11 @@ module IndicesTypesBuilders =
             }
 
         [<CustomOperation("indexPatterns")>]
-        member _.IndexPatterns(state: IndexTemplate, value: Types.Names) =
+        member _.IndexPatterns(state: IndexTemplate, value: CoreTypes.Names) =
             { state with IndexPatterns = value }
 
         [<CustomOperation("composedOf")>]
-        member _.ComposedOf(state: IndexTemplate, value: Types.Name list) =
+        member _.ComposedOf(state: IndexTemplate, value: CoreTypes.Name list) =
             { state with ComposedOf = value }
 
         [<CustomOperation("template")>]
@@ -973,15 +973,15 @@ module IndicesTypesBuilders =
             { state with Template = Some value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: IndexTemplate, value: Types.VersionNumber) =
+        member _.Version(state: IndexTemplate, value: CoreTypes.VersionNumber) =
             { state with Version = Some value }
 
         [<CustomOperation("priority")>]
-        member _.Priority(state: IndexTemplate, value: Types.Long) =
+        member _.Priority(state: IndexTemplate, value: CoreTypes.Long) =
             { state with Priority = Some value }
 
         [<CustomOperation("meta")>]
-        member _.Meta(state: IndexTemplate, value: Types.Metadata) =
+        member _.Meta(state: IndexTemplate, value: CoreTypes.Metadata) =
             { state with Meta = Some value }
 
         [<CustomOperation("allowAutoCreate")>]
@@ -997,23 +997,23 @@ module IndicesTypesBuilders =
             { state with Deprecated = Some value }
 
         [<CustomOperation("ignoreMissingComponentTemplates")>]
-        member _.IgnoreMissingComponentTemplates(state: IndexTemplate, value: Types.Names) =
+        member _.IgnoreMissingComponentTemplates(state: IndexTemplate, value: CoreTypes.Names) =
             { state with IgnoreMissingComponentTemplates = Some value }
 
         [<CustomOperation("createdDate")>]
-        member _.CreatedDate(state: IndexTemplate, value: Types.DateTime) =
+        member _.CreatedDate(state: IndexTemplate, value: CoreTypes.DateTime) =
             { state with CreatedDate = Some value }
 
         [<CustomOperation("createdDateMillis")>]
-        member _.CreatedDateMillis(state: IndexTemplate, value: Types.EpochTime<Types.UnitMillis>) =
+        member _.CreatedDateMillis(state: IndexTemplate, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
             { state with CreatedDateMillis = Some value }
 
         [<CustomOperation("modifiedDate")>]
-        member _.ModifiedDate(state: IndexTemplate, value: Types.DateTime) =
+        member _.ModifiedDate(state: IndexTemplate, value: CoreTypes.DateTime) =
             { state with ModifiedDate = Some value }
 
         [<CustomOperation("modifiedDateMillis")>]
-        member _.ModifiedDateMillis(state: IndexTemplate, value: Types.EpochTime<Types.UnitMillis>) =
+        member _.ModifiedDateMillis(state: IndexTemplate, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
             { state with ModifiedDateMillis = Some value }
 
     let indexTemplate = IndexTemplateBuilder()
@@ -1046,11 +1046,11 @@ module IndicesTypesBuilders =
             }
 
         [<CustomOperation("aliases")>]
-        member _.Aliases(state: IndexTemplateSummary, value: Map<Types.IndexName, IndicesTypes.Alias>) =
+        member _.Aliases(state: IndexTemplateSummary, value: Map<CoreTypes.IndexName, IndicesTypes.Alias>) =
             { state with Aliases = Some value }
 
         [<CustomOperation("mappings")>]
-        member _.Mappings(state: IndexTemplateSummary, value: TypesMapping.TypeMapping) =
+        member _.Mappings(state: IndexTemplateSummary, value: CoreTypes.TypeMapping) =
             { state with Mappings = Some value }
 
         [<CustomOperation("settings")>]
@@ -1082,11 +1082,11 @@ module IndicesTypesBuilders =
             { state with Lifecycle = Some value }
 
         [<CustomOperation("aliases")>]
-        member _.Aliases(state: IndexTemplateSummaryWithRollover, value: Map<Types.IndexName, IndicesTypes.Alias>) =
+        member _.Aliases(state: IndexTemplateSummaryWithRollover, value: Map<CoreTypes.IndexName, IndicesTypes.Alias>) =
             { state with Aliases = Some value }
 
         [<CustomOperation("mappings")>]
-        member _.Mappings(state: IndexTemplateSummaryWithRollover, value: TypesMapping.TypeMapping) =
+        member _.Mappings(state: IndexTemplateSummaryWithRollover, value: CoreTypes.TypeMapping) =
             { state with Mappings = Some value }
 
         [<CustomOperation("settings")>]
@@ -1123,23 +1123,23 @@ module IndicesTypesBuilders =
             { state with Template = Some value }
 
         [<CustomOperation("indexPatterns")>]
-        member _.IndexPatterns(state: IndexTemplateWithRollover, value: Types.Names) =
+        member _.IndexPatterns(state: IndexTemplateWithRollover, value: CoreTypes.Names) =
             { state with IndexPatterns = value }
 
         [<CustomOperation("composedOf")>]
-        member _.ComposedOf(state: IndexTemplateWithRollover, value: Types.Name list) =
+        member _.ComposedOf(state: IndexTemplateWithRollover, value: CoreTypes.Name list) =
             { state with ComposedOf = value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: IndexTemplateWithRollover, value: Types.VersionNumber) =
+        member _.Version(state: IndexTemplateWithRollover, value: CoreTypes.VersionNumber) =
             { state with Version = Some value }
 
         [<CustomOperation("priority")>]
-        member _.Priority(state: IndexTemplateWithRollover, value: Types.Long) =
+        member _.Priority(state: IndexTemplateWithRollover, value: CoreTypes.Long) =
             { state with Priority = Some value }
 
         [<CustomOperation("meta")>]
-        member _.Meta(state: IndexTemplateWithRollover, value: Types.Metadata) =
+        member _.Meta(state: IndexTemplateWithRollover, value: CoreTypes.Metadata) =
             { state with Meta = Some value }
 
         [<CustomOperation("allowAutoCreate")>]
@@ -1155,23 +1155,23 @@ module IndicesTypesBuilders =
             { state with Deprecated = Some value }
 
         [<CustomOperation("ignoreMissingComponentTemplates")>]
-        member _.IgnoreMissingComponentTemplates(state: IndexTemplateWithRollover, value: Types.Names) =
+        member _.IgnoreMissingComponentTemplates(state: IndexTemplateWithRollover, value: CoreTypes.Names) =
             { state with IgnoreMissingComponentTemplates = Some value }
 
         [<CustomOperation("createdDate")>]
-        member _.CreatedDate(state: IndexTemplateWithRollover, value: Types.DateTime) =
+        member _.CreatedDate(state: IndexTemplateWithRollover, value: CoreTypes.DateTime) =
             { state with CreatedDate = Some value }
 
         [<CustomOperation("createdDateMillis")>]
-        member _.CreatedDateMillis(state: IndexTemplateWithRollover, value: Types.EpochTime<Types.UnitMillis>) =
+        member _.CreatedDateMillis(state: IndexTemplateWithRollover, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
             { state with CreatedDateMillis = Some value }
 
         [<CustomOperation("modifiedDate")>]
-        member _.ModifiedDate(state: IndexTemplateWithRollover, value: Types.DateTime) =
+        member _.ModifiedDate(state: IndexTemplateWithRollover, value: CoreTypes.DateTime) =
             { state with ModifiedDate = Some value }
 
         [<CustomOperation("modifiedDateMillis")>]
-        member _.ModifiedDateMillis(state: IndexTemplateWithRollover, value: Types.EpochTime<Types.UnitMillis>) =
+        member _.ModifiedDateMillis(state: IndexTemplateWithRollover, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
             { state with ModifiedDateMillis = Some value }
 
     let indexTemplateWithRollover = IndexTemplateWithRolloverBuilder()
@@ -1184,7 +1184,7 @@ module IndicesTypesBuilders =
             }
 
         [<CustomOperation("created")>]
-        member _.Created(state: IndexVersioning, value: Types.VersionString) =
+        member _.Created(state: IndexVersioning, value: CoreTypes.VersionString) =
             { state with Created = Some value }
 
         [<CustomOperation("createdString")>]
@@ -1207,7 +1207,7 @@ module IndicesTypesBuilders =
             { state with Level = Some value }
 
         [<CustomOperation("source")>]
-        member _.Source(state: IndexingSlowlogSettings, value: Types.Integer) =
+        member _.Source(state: IndexingSlowlogSettings, value: CoreTypes.Integer) =
             { state with Source = Some value }
 
         [<CustomOperation("reformat")>]
@@ -1297,11 +1297,11 @@ module IndicesTypesBuilders =
             }
 
         [<CustomOperation("maxThreadCount")>]
-        member _.MaxThreadCount(state: MergeScheduler, value: SpecUtils.Stringified<Types.Integer>) =
+        member _.MaxThreadCount(state: MergeScheduler, value: CoreTypes.Stringified<CoreTypes.Integer>) =
             { state with MaxThreadCount = Some value }
 
         [<CustomOperation("maxMergeCount")>]
-        member _.MaxMergeCount(state: MergeScheduler, value: SpecUtils.Stringified<Types.Integer>) =
+        member _.MaxMergeCount(state: MergeScheduler, value: CoreTypes.Stringified<CoreTypes.Integer>) =
             { state with MaxMergeCount = Some value }
 
     let mergeScheduler = MergeSchedulerBuilder()
@@ -1337,7 +1337,7 @@ module IndicesTypesBuilders =
             { state with Type = value }
 
         [<CustomOperation("b")>]
-        member _.B(state: SettingsSimilarityBm25, value: Types.Double) =
+        member _.B(state: SettingsSimilarityBm25, value: CoreTypes.Double) =
             { state with B = Some value }
 
         [<CustomOperation("discountOverlaps")>]
@@ -1345,7 +1345,7 @@ module IndicesTypesBuilders =
             { state with DiscountOverlaps = Some value }
 
         [<CustomOperation("k1")>]
-        member _.K1(state: SettingsSimilarityBm25, value: Types.Double) =
+        member _.K1(state: SettingsSimilarityBm25, value: CoreTypes.Double) =
             { state with K1 = Some value }
 
     let settingsSimilarityBm25 = SettingsSimilarityBm25Builder()
@@ -1364,7 +1364,7 @@ module IndicesTypesBuilders =
             { state with Level = Some value }
 
         [<CustomOperation("source")>]
-        member _.Source(state: SlowlogSettings, value: Types.Integer) =
+        member _.Source(state: SlowlogSettings, value: CoreTypes.Integer) =
             { state with Source = Some value }
 
         [<CustomOperation("reformat")>]
@@ -1387,19 +1387,19 @@ module IndicesTypesBuilders =
             }
 
         [<CustomOperation("warn")>]
-        member _.Warn(state: SlowlogTresholdLevels, value: Types.Duration) =
+        member _.Warn(state: SlowlogTresholdLevels, value: CoreTypes.Duration) =
             { state with Warn = Some value }
 
         [<CustomOperation("info")>]
-        member _.Info(state: SlowlogTresholdLevels, value: Types.Duration) =
+        member _.Info(state: SlowlogTresholdLevels, value: CoreTypes.Duration) =
             { state with Info = Some value }
 
         [<CustomOperation("debug")>]
-        member _.Debug(state: SlowlogTresholdLevels, value: Types.Duration) =
+        member _.Debug(state: SlowlogTresholdLevels, value: CoreTypes.Duration) =
             { state with Debug = Some value }
 
         [<CustomOperation("trace")>]
-        member _.Trace(state: SlowlogTresholdLevels, value: Types.Duration) =
+        member _.Trace(state: SlowlogTresholdLevels, value: CoreTypes.Duration) =
             { state with Trace = Some value }
 
     let slowlogTresholdLevels = SlowlogTresholdLevelsBuilder()
@@ -1455,7 +1455,7 @@ module IndicesTypesBuilders =
             { state with AllowMmap = Some value }
 
         [<CustomOperation("statsRefreshInterval")>]
-        member _.StatsRefreshInterval(state: Storage, value: Types.Duration) =
+        member _.StatsRefreshInterval(state: Storage, value: CoreTypes.Duration) =
             { state with StatsRefreshInterval = Some value }
 
     let storage = StorageBuilder()
@@ -1470,7 +1470,7 @@ module IndicesTypesBuilders =
             }
 
         [<CustomOperation("syncInterval")>]
-        member _.SyncInterval(state: Translog, value: Types.Duration) =
+        member _.SyncInterval(state: Translog, value: CoreTypes.Duration) =
             { state with SyncInterval = Some value }
 
         [<CustomOperation("durability")>]
@@ -1478,7 +1478,7 @@ module IndicesTypesBuilders =
             { state with Durability = Some value }
 
         [<CustomOperation("flushThresholdSize")>]
-        member _.FlushThresholdSize(state: Translog, value: Types.ByteSize) =
+        member _.FlushThresholdSize(state: Translog, value: CoreTypes.ByteSize) =
             { state with FlushThresholdSize = Some value }
 
         [<CustomOperation("retention")>]
@@ -1495,11 +1495,11 @@ module IndicesTypesBuilders =
             }
 
         [<CustomOperation("size")>]
-        member _.Size(state: TranslogRetention, value: Types.ByteSize) =
+        member _.Size(state: TranslogRetention, value: CoreTypes.ByteSize) =
             { state with Size = Some value }
 
         [<CustomOperation("age")>]
-        member _.Age(state: TranslogRetention, value: Types.Duration) =
+        member _.Age(state: TranslogRetention, value: CoreTypes.Duration) =
             { state with Age = Some value }
 
     let translogRetention = TranslogRetentionBuilder()

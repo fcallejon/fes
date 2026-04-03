@@ -9,13 +9,13 @@ module CatPlugins =
 
     type PluginsRecord = {
         [<System.Text.Json.Serialization.JsonPropertyName("id")>]
-        Id: Types.NodeId option
+        Id: CoreTypes.NodeId option
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.Name option
+        Name: CoreTypes.Name option
         [<System.Text.Json.Serialization.JsonPropertyName("component")>]
         Component: string option
         [<System.Text.Json.Serialization.JsonPropertyName("version")>]
-        Version: Types.VersionString option
+        Version: CoreTypes.VersionString option
         [<System.Text.Json.Serialization.JsonPropertyName("description")>]
         Description: string option
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]

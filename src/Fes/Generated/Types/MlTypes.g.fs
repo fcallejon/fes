@@ -11,24 +11,24 @@ module MlTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("enabled")>]
         Enabled: bool
         [<System.Text.Json.Serialization.JsonPropertyName("min_number_of_allocations")>]
-        MinNumberOfAllocations: Types.Integer option
+        MinNumberOfAllocations: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("max_number_of_allocations")>]
-        MaxNumberOfAllocations: Types.Integer option
+        MaxNumberOfAllocations: CoreTypes.Integer option
     }
 
     type CategorizationAnalyzerDefinition = {
         [<System.Text.Json.Serialization.JsonPropertyName("char_filter")>]
-        CharFilter: TypesAnalysis.CharFilter list option
+        CharFilter: CoreTypes.CharFilter list option
         [<System.Text.Json.Serialization.JsonPropertyName("filter")>]
-        Filter: TypesAnalysis.TokenFilter list option
+        Filter: CoreTypes.TokenFilter list option
         [<System.Text.Json.Serialization.JsonPropertyName("tokenizer")>]
-        Tokenizer: TypesAnalysis.Tokenizer option
+        Tokenizer: CoreTypes.Tokenizer option
     }
 
     [<RequireQualifiedAccess>]
     type CategorizationAnalyzer =
         | String of string
-        | CategorizationAnalyzerDefinition of MlTypes.CategorizationAnalyzerDefinition
+        | CategorizationAnalyzerDefinition of CategorizationAnalyzerDefinition
 
     [<RequireQualifiedAccess>]
     type RuleAction =
@@ -51,11 +51,11 @@ module MlTypes =
 
     type RuleCondition = {
         [<System.Text.Json.Serialization.JsonPropertyName("applies_to")>]
-        AppliesTo: MlTypes.AppliesTo
+        AppliesTo: AppliesTo
         [<System.Text.Json.Serialization.JsonPropertyName("operator")>]
-        Operator: MlTypes.ConditionOperator
+        Operator: ConditionOperator
         [<System.Text.Json.Serialization.JsonPropertyName("value")>]
-        Value: Types.Double
+        Value: CoreTypes.Double
     }
 
     [<RequireQualifiedAccess>]
@@ -65,18 +65,18 @@ module MlTypes =
 
     type FilterRef = {
         [<System.Text.Json.Serialization.JsonPropertyName("filter_id")>]
-        FilterId: Types.Id
+        FilterId: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("filter_type")>]
-        FilterType: MlTypes.FilterType option
+        FilterType: FilterType option
     }
 
     type DetectionRule = {
         [<System.Text.Json.Serialization.JsonPropertyName("actions")>]
-        Actions: MlTypes.RuleAction list option
+        Actions: RuleAction list option
         [<System.Text.Json.Serialization.JsonPropertyName("conditions")>]
-        Conditions: MlTypes.RuleCondition list option
+        Conditions: RuleCondition list option
         [<System.Text.Json.Serialization.JsonPropertyName("scope")>]
-        Scope: Map<Types.Field, MlTypes.FilterRef> option
+        Scope: Map<CoreTypes.Field, FilterRef> option
     }
 
     [<RequireQualifiedAccess>]
@@ -88,23 +88,23 @@ module MlTypes =
 
     type Detector = {
         [<System.Text.Json.Serialization.JsonPropertyName("by_field_name")>]
-        ByFieldName: Types.Field option
+        ByFieldName: CoreTypes.Field option
         [<System.Text.Json.Serialization.JsonPropertyName("custom_rules")>]
-        CustomRules: MlTypes.DetectionRule list option
+        CustomRules: DetectionRule list option
         [<System.Text.Json.Serialization.JsonPropertyName("detector_description")>]
         DetectorDescription: string option
         [<System.Text.Json.Serialization.JsonPropertyName("detector_index")>]
-        DetectorIndex: Types.Integer option
+        DetectorIndex: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("exclude_frequent")>]
-        ExcludeFrequent: MlTypes.ExcludeFrequent option
+        ExcludeFrequent: ExcludeFrequent option
         [<System.Text.Json.Serialization.JsonPropertyName("field_name")>]
-        FieldName: Types.Field option
+        FieldName: CoreTypes.Field option
         [<System.Text.Json.Serialization.JsonPropertyName("function")>]
         Function: string option
         [<System.Text.Json.Serialization.JsonPropertyName("over_field_name")>]
-        OverFieldName: Types.Field option
+        OverFieldName: CoreTypes.Field option
         [<System.Text.Json.Serialization.JsonPropertyName("partition_field_name")>]
-        PartitionFieldName: Types.Field option
+        PartitionFieldName: CoreTypes.Field option
         [<System.Text.Json.Serialization.JsonPropertyName("use_null")>]
         UseNull: bool option
     }
@@ -118,82 +118,82 @@ module MlTypes =
 
     type AnalysisConfig = {
         [<System.Text.Json.Serialization.JsonPropertyName("bucket_span")>]
-        BucketSpan: Types.Duration option
+        BucketSpan: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("categorization_analyzer")>]
-        CategorizationAnalyzer: MlTypes.CategorizationAnalyzer option
+        CategorizationAnalyzer: CategorizationAnalyzer option
         [<System.Text.Json.Serialization.JsonPropertyName("categorization_field_name")>]
-        CategorizationFieldName: Types.Field option
+        CategorizationFieldName: CoreTypes.Field option
         [<System.Text.Json.Serialization.JsonPropertyName("categorization_filters")>]
         CategorizationFilters: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("detectors")>]
-        Detectors: MlTypes.Detector list
+        Detectors: Detector list
         [<System.Text.Json.Serialization.JsonPropertyName("influencers")>]
-        Influencers: Types.Field list option
+        Influencers: CoreTypes.Field list option
         [<System.Text.Json.Serialization.JsonPropertyName("latency")>]
-        Latency: Types.Duration option
+        Latency: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("model_prune_window")>]
-        ModelPruneWindow: Types.Duration option
+        ModelPruneWindow: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("multivariate_by_fields")>]
         MultivariateByFields: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("per_partition_categorization")>]
-        PerPartitionCategorization: MlTypes.PerPartitionCategorization option
+        PerPartitionCategorization: PerPartitionCategorization option
         [<System.Text.Json.Serialization.JsonPropertyName("summary_count_field_name")>]
-        SummaryCountFieldName: Types.Field option
+        SummaryCountFieldName: CoreTypes.Field option
     }
 
     type DetectorRead = {
         [<System.Text.Json.Serialization.JsonPropertyName("function")>]
         Function: string
         [<System.Text.Json.Serialization.JsonPropertyName("by_field_name")>]
-        ByFieldName: Types.Field option
+        ByFieldName: CoreTypes.Field option
         [<System.Text.Json.Serialization.JsonPropertyName("custom_rules")>]
-        CustomRules: MlTypes.DetectionRule list option
+        CustomRules: DetectionRule list option
         [<System.Text.Json.Serialization.JsonPropertyName("detector_description")>]
         DetectorDescription: string option
         [<System.Text.Json.Serialization.JsonPropertyName("detector_index")>]
-        DetectorIndex: Types.Integer option
+        DetectorIndex: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("exclude_frequent")>]
-        ExcludeFrequent: MlTypes.ExcludeFrequent option
+        ExcludeFrequent: ExcludeFrequent option
         [<System.Text.Json.Serialization.JsonPropertyName("field_name")>]
-        FieldName: Types.Field option
+        FieldName: CoreTypes.Field option
         [<System.Text.Json.Serialization.JsonPropertyName("over_field_name")>]
-        OverFieldName: Types.Field option
+        OverFieldName: CoreTypes.Field option
         [<System.Text.Json.Serialization.JsonPropertyName("partition_field_name")>]
-        PartitionFieldName: Types.Field option
+        PartitionFieldName: CoreTypes.Field option
         [<System.Text.Json.Serialization.JsonPropertyName("use_null")>]
         UseNull: bool option
     }
 
     type AnalysisConfigRead = {
         [<System.Text.Json.Serialization.JsonPropertyName("bucket_span")>]
-        BucketSpan: Types.Duration
+        BucketSpan: CoreTypes.Duration
         [<System.Text.Json.Serialization.JsonPropertyName("detectors")>]
-        Detectors: MlTypes.DetectorRead list
+        Detectors: DetectorRead list
         [<System.Text.Json.Serialization.JsonPropertyName("influencers")>]
-        Influencers: Types.Field list
+        Influencers: CoreTypes.Field list
         [<System.Text.Json.Serialization.JsonPropertyName("categorization_analyzer")>]
-        CategorizationAnalyzer: MlTypes.CategorizationAnalyzer option
+        CategorizationAnalyzer: CategorizationAnalyzer option
         [<System.Text.Json.Serialization.JsonPropertyName("categorization_field_name")>]
-        CategorizationFieldName: Types.Field option
+        CategorizationFieldName: CoreTypes.Field option
         [<System.Text.Json.Serialization.JsonPropertyName("categorization_filters")>]
         CategorizationFilters: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("latency")>]
-        Latency: Types.Duration option
+        Latency: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("model_prune_window")>]
-        ModelPruneWindow: Types.Duration option
+        ModelPruneWindow: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("multivariate_by_fields")>]
         MultivariateByFields: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("per_partition_categorization")>]
-        PerPartitionCategorization: MlTypes.PerPartitionCategorization option
+        PerPartitionCategorization: PerPartitionCategorization option
         [<System.Text.Json.Serialization.JsonPropertyName("summary_count_field_name")>]
-        SummaryCountFieldName: Types.Field option
+        SummaryCountFieldName: CoreTypes.Field option
     }
 
     type AnalysisLimits = {
         [<System.Text.Json.Serialization.JsonPropertyName("categorization_examples_limit")>]
-        CategorizationExamplesLimit: Types.Long option
+        CategorizationExamplesLimit: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("model_memory_limit")>]
-        ModelMemoryLimit: Types.ByteSize option
+        ModelMemoryLimit: CoreTypes.ByteSize option
     }
 
     type AnalysisMemoryLimit = {
@@ -203,9 +203,9 @@ module MlTypes =
 
     type AnomalyExplanation = {
         [<System.Text.Json.Serialization.JsonPropertyName("anomaly_characteristics_impact")>]
-        AnomalyCharacteristicsImpact: Types.Integer option
+        AnomalyCharacteristicsImpact: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("anomaly_length")>]
-        AnomalyLength: Types.Integer option
+        AnomalyLength: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("anomaly_type")>]
         AnomalyType: string option
         [<System.Text.Json.Serialization.JsonPropertyName("high_variance_penalty")>]
@@ -213,15 +213,15 @@ module MlTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("incomplete_bucket_penalty")>]
         IncompleteBucketPenalty: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("lower_confidence_bound")>]
-        LowerConfidenceBound: Types.Double option
+        LowerConfidenceBound: CoreTypes.Double option
         [<System.Text.Json.Serialization.JsonPropertyName("multi_bucket_impact")>]
-        MultiBucketImpact: Types.Integer option
+        MultiBucketImpact: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("single_bucket_impact")>]
-        SingleBucketImpact: Types.Integer option
+        SingleBucketImpact: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("typical_value")>]
-        TypicalValue: Types.Double option
+        TypicalValue: CoreTypes.Double option
         [<System.Text.Json.Serialization.JsonPropertyName("upper_confidence_bound")>]
-        UpperConfidenceBound: Types.Double option
+        UpperConfidenceBound: CoreTypes.Double option
     }
 
     type GeoResults = {
@@ -240,25 +240,25 @@ module MlTypes =
 
     type AnomalyCause = {
         [<System.Text.Json.Serialization.JsonPropertyName("actual")>]
-        Actual: Types.Double list option
+        Actual: CoreTypes.Double list option
         [<System.Text.Json.Serialization.JsonPropertyName("by_field_name")>]
-        ByFieldName: Types.Name option
+        ByFieldName: CoreTypes.Name option
         [<System.Text.Json.Serialization.JsonPropertyName("by_field_value")>]
         ByFieldValue: string option
         [<System.Text.Json.Serialization.JsonPropertyName("correlated_by_field_value")>]
         CorrelatedByFieldValue: string option
         [<System.Text.Json.Serialization.JsonPropertyName("field_name")>]
-        FieldName: Types.Field option
+        FieldName: CoreTypes.Field option
         [<System.Text.Json.Serialization.JsonPropertyName("function")>]
         Function: string option
         [<System.Text.Json.Serialization.JsonPropertyName("function_description")>]
         FunctionDescription: string option
         [<System.Text.Json.Serialization.JsonPropertyName("geo_results")>]
-        GeoResults: MlTypes.GeoResults option
+        GeoResults: GeoResults option
         [<System.Text.Json.Serialization.JsonPropertyName("influencers")>]
-        Influencers: MlTypes.Influence list option
+        Influencers: Influence list option
         [<System.Text.Json.Serialization.JsonPropertyName("over_field_name")>]
-        OverFieldName: Types.Name option
+        OverFieldName: CoreTypes.Name option
         [<System.Text.Json.Serialization.JsonPropertyName("over_field_value")>]
         OverFieldValue: string option
         [<System.Text.Json.Serialization.JsonPropertyName("partition_field_name")>]
@@ -266,26 +266,26 @@ module MlTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("partition_field_value")>]
         PartitionFieldValue: string option
         [<System.Text.Json.Serialization.JsonPropertyName("probability")>]
-        Probability: Types.Double
+        Probability: CoreTypes.Double
         [<System.Text.Json.Serialization.JsonPropertyName("typical")>]
-        Typical: Types.Double list option
+        Typical: CoreTypes.Double list option
     }
 
     type Anomaly = {
         [<System.Text.Json.Serialization.JsonPropertyName("actual")>]
-        Actual: Types.Double list option
+        Actual: CoreTypes.Double list option
         [<System.Text.Json.Serialization.JsonPropertyName("anomaly_score_explanation")>]
-        AnomalyScoreExplanation: MlTypes.AnomalyExplanation option
+        AnomalyScoreExplanation: AnomalyExplanation option
         [<System.Text.Json.Serialization.JsonPropertyName("bucket_span")>]
-        BucketSpan: Types.DurationValue<Types.UnitSeconds>
+        BucketSpan: CoreTypes.DurationValue<CoreTypes.UnitSeconds>
         [<System.Text.Json.Serialization.JsonPropertyName("by_field_name")>]
         ByFieldName: string option
         [<System.Text.Json.Serialization.JsonPropertyName("by_field_value")>]
         ByFieldValue: string option
         [<System.Text.Json.Serialization.JsonPropertyName("causes")>]
-        Causes: MlTypes.AnomalyCause list option
+        Causes: AnomalyCause list option
         [<System.Text.Json.Serialization.JsonPropertyName("detector_index")>]
-        DetectorIndex: Types.Integer
+        DetectorIndex: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("field_name")>]
         FieldName: string option
         [<System.Text.Json.Serialization.JsonPropertyName("function")>]
@@ -293,11 +293,11 @@ module MlTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("function_description")>]
         FunctionDescription: string option
         [<System.Text.Json.Serialization.JsonPropertyName("geo_results")>]
-        GeoResults: MlTypes.GeoResults option
+        GeoResults: GeoResults option
         [<System.Text.Json.Serialization.JsonPropertyName("influencers")>]
-        Influencers: MlTypes.Influence list option
+        Influencers: Influence list option
         [<System.Text.Json.Serialization.JsonPropertyName("initial_record_score")>]
-        InitialRecordScore: Types.Double
+        InitialRecordScore: CoreTypes.Double
         [<System.Text.Json.Serialization.JsonPropertyName("is_interim")>]
         IsInterim: bool
         [<System.Text.Json.Serialization.JsonPropertyName("job_id")>]
@@ -311,15 +311,15 @@ module MlTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("partition_field_value")>]
         PartitionFieldValue: string option
         [<System.Text.Json.Serialization.JsonPropertyName("probability")>]
-        Probability: Types.Double
+        Probability: CoreTypes.Double
         [<System.Text.Json.Serialization.JsonPropertyName("record_score")>]
-        RecordScore: Types.Double
+        RecordScore: CoreTypes.Double
         [<System.Text.Json.Serialization.JsonPropertyName("result_type")>]
         ResultType: string
         [<System.Text.Json.Serialization.JsonPropertyName("timestamp")>]
-        Timestamp: Types.EpochTime<Types.UnitMillis>
+        Timestamp: CoreTypes.EpochTime<CoreTypes.UnitMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("typical")>]
-        Typical: Types.Double list option
+        Typical: CoreTypes.Double list option
     }
 
     type ApiKeyAuthorization = {
@@ -331,71 +331,71 @@ module MlTypes =
 
     type BucketInfluencer = {
         [<System.Text.Json.Serialization.JsonPropertyName("anomaly_score")>]
-        AnomalyScore: Types.Double
+        AnomalyScore: CoreTypes.Double
         [<System.Text.Json.Serialization.JsonPropertyName("bucket_span")>]
-        BucketSpan: Types.DurationValue<Types.UnitSeconds>
+        BucketSpan: CoreTypes.DurationValue<CoreTypes.UnitSeconds>
         [<System.Text.Json.Serialization.JsonPropertyName("influencer_field_name")>]
-        InfluencerFieldName: Types.Field
+        InfluencerFieldName: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("initial_anomaly_score")>]
-        InitialAnomalyScore: Types.Double
+        InitialAnomalyScore: CoreTypes.Double
         [<System.Text.Json.Serialization.JsonPropertyName("is_interim")>]
         IsInterim: bool
         [<System.Text.Json.Serialization.JsonPropertyName("job_id")>]
-        JobId: Types.Id
+        JobId: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("probability")>]
-        Probability: Types.Double
+        Probability: CoreTypes.Double
         [<System.Text.Json.Serialization.JsonPropertyName("raw_anomaly_score")>]
-        RawAnomalyScore: Types.Double
+        RawAnomalyScore: CoreTypes.Double
         [<System.Text.Json.Serialization.JsonPropertyName("result_type")>]
         ResultType: string
         [<System.Text.Json.Serialization.JsonPropertyName("timestamp")>]
-        Timestamp: Types.EpochTime<Types.UnitMillis>
+        Timestamp: CoreTypes.EpochTime<CoreTypes.UnitMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("timestamp_string")>]
-        TimestampString: Types.DateTime option
+        TimestampString: CoreTypes.DateTime option
     }
 
     type BucketSummary = {
         [<System.Text.Json.Serialization.JsonPropertyName("anomaly_score")>]
-        AnomalyScore: Types.Double
+        AnomalyScore: CoreTypes.Double
         [<System.Text.Json.Serialization.JsonPropertyName("bucket_influencers")>]
-        BucketInfluencers: MlTypes.BucketInfluencer list
+        BucketInfluencers: BucketInfluencer list
         [<System.Text.Json.Serialization.JsonPropertyName("bucket_span")>]
-        BucketSpan: Types.DurationValue<Types.UnitSeconds>
+        BucketSpan: CoreTypes.DurationValue<CoreTypes.UnitSeconds>
         [<System.Text.Json.Serialization.JsonPropertyName("event_count")>]
-        EventCount: Types.Long
+        EventCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("initial_anomaly_score")>]
-        InitialAnomalyScore: Types.Double
+        InitialAnomalyScore: CoreTypes.Double
         [<System.Text.Json.Serialization.JsonPropertyName("is_interim")>]
         IsInterim: bool
         [<System.Text.Json.Serialization.JsonPropertyName("job_id")>]
-        JobId: Types.Id
+        JobId: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("processing_time_ms")>]
-        ProcessingTimeMs: Types.DurationValue<Types.UnitMillis>
+        ProcessingTimeMs: CoreTypes.DurationValue<CoreTypes.UnitMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("result_type")>]
         ResultType: string
         [<System.Text.Json.Serialization.JsonPropertyName("timestamp")>]
-        Timestamp: Types.EpochTime<Types.UnitMillis>
+        Timestamp: CoreTypes.EpochTime<CoreTypes.UnitMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("timestamp_string")>]
-        TimestampString: Types.DateTime option
+        TimestampString: CoreTypes.DateTime option
     }
 
     type CalendarEvent = {
         [<System.Text.Json.Serialization.JsonPropertyName("calendar_id")>]
-        CalendarId: Types.Id option
+        CalendarId: CoreTypes.Id option
         [<System.Text.Json.Serialization.JsonPropertyName("event_id")>]
-        EventId: Types.Id option
+        EventId: CoreTypes.Id option
         [<System.Text.Json.Serialization.JsonPropertyName("description")>]
         Description: string
         [<System.Text.Json.Serialization.JsonPropertyName("end_time")>]
-        EndTime: Types.DateTime
+        EndTime: CoreTypes.DateTime
         [<System.Text.Json.Serialization.JsonPropertyName("start_time")>]
-        StartTime: Types.DateTime
+        StartTime: CoreTypes.DateTime
         [<System.Text.Json.Serialization.JsonPropertyName("skip_result")>]
         SkipResult: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("skip_model_update")>]
         SkipModelUpdate: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("force_time_shift")>]
-        ForceTimeShift: Types.Integer option
+        ForceTimeShift: CoreTypes.Integer option
     }
 
     [<RequireQualifiedAccess>]
@@ -405,15 +405,15 @@ module MlTypes =
 
     type Category = {
         [<System.Text.Json.Serialization.JsonPropertyName("category_id")>]
-        CategoryId: Types.Ulong
+        CategoryId: CoreTypes.Ulong
         [<System.Text.Json.Serialization.JsonPropertyName("examples")>]
         Examples: string list
         [<System.Text.Json.Serialization.JsonPropertyName("grok_pattern")>]
-        GrokPattern: Types.GrokPattern option
+        GrokPattern: CoreTypes.GrokPattern option
         [<System.Text.Json.Serialization.JsonPropertyName("job_id")>]
-        JobId: Types.Id
+        JobId: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("max_matching_length")>]
-        MaxMatchingLength: Types.Ulong
+        MaxMatchingLength: CoreTypes.Ulong
         [<System.Text.Json.Serialization.JsonPropertyName("partition_field_name")>]
         PartitionFieldName: string option
         [<System.Text.Json.Serialization.JsonPropertyName("partition_field_value")>]
@@ -423,9 +423,9 @@ module MlTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("terms")>]
         Terms: string
         [<System.Text.Json.Serialization.JsonPropertyName("num_matches")>]
-        NumMatches: Types.Long option
+        NumMatches: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("preferred_to_categories")>]
-        PreferredToCategories: Types.Id list option
+        PreferredToCategories: CoreTypes.Id list option
         [<System.Text.Json.Serialization.JsonPropertyName("p")>]
         P: string option
         [<System.Text.Json.Serialization.JsonPropertyName("result_type")>]
@@ -442,16 +442,16 @@ module MlTypes =
 
     type ChunkingConfig = {
         [<System.Text.Json.Serialization.JsonPropertyName("mode")>]
-        Mode: MlTypes.ChunkingMode
+        Mode: ChunkingMode
         [<System.Text.Json.Serialization.JsonPropertyName("time_span")>]
-        TimeSpan: Types.Duration option
+        TimeSpan: CoreTypes.Duration option
     }
 
     type ClassificationInferenceOptions = {
         [<System.Text.Json.Serialization.JsonPropertyName("num_top_classes")>]
-        NumTopClasses: Types.Integer option
+        NumTopClasses: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("num_top_feature_importance_values")>]
-        NumTopFeatureImportanceValues: Types.Integer option
+        NumTopFeatureImportanceValues: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("prediction_field_type")>]
         PredictionFieldType: string option
         [<System.Text.Json.Serialization.JsonPropertyName("results_field")>]
@@ -470,11 +470,11 @@ module MlTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("do_lower_case")>]
         DoLowerCase: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("max_sequence_length")>]
-        MaxSequenceLength: Types.Integer option
+        MaxSequenceLength: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("span")>]
-        Span: Types.Integer option
+        Span: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("truncate")>]
-        Truncate: MlTypes.TokenizationTruncate option
+        Truncate: TokenizationTruncate option
         [<System.Text.Json.Serialization.JsonPropertyName("with_special_tokens")>]
         WithSpecialTokens: bool option
     }
@@ -484,50 +484,50 @@ module MlTypes =
 
     type DataCounts = {
         [<System.Text.Json.Serialization.JsonPropertyName("bucket_count")>]
-        BucketCount: Types.Long
+        BucketCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("earliest_record_timestamp")>]
-        EarliestRecordTimestamp: Types.Long option
+        EarliestRecordTimestamp: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("empty_bucket_count")>]
-        EmptyBucketCount: Types.Long
+        EmptyBucketCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("input_bytes")>]
-        InputBytes: Types.Long
+        InputBytes: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("input_field_count")>]
-        InputFieldCount: Types.Long
+        InputFieldCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("input_record_count")>]
-        InputRecordCount: Types.Long
+        InputRecordCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("invalid_date_count")>]
-        InvalidDateCount: Types.Long
+        InvalidDateCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("job_id")>]
-        JobId: Types.Id
+        JobId: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("last_data_time")>]
-        LastDataTime: Types.Long option
+        LastDataTime: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("latest_empty_bucket_timestamp")>]
-        LatestEmptyBucketTimestamp: Types.Long option
+        LatestEmptyBucketTimestamp: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("latest_record_timestamp")>]
-        LatestRecordTimestamp: Types.Long option
+        LatestRecordTimestamp: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("latest_sparse_bucket_timestamp")>]
-        LatestSparseBucketTimestamp: Types.Long option
+        LatestSparseBucketTimestamp: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("latest_bucket_timestamp")>]
-        LatestBucketTimestamp: Types.Long option
+        LatestBucketTimestamp: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("log_time")>]
-        LogTime: Types.Long option
+        LogTime: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("missing_field_count")>]
-        MissingFieldCount: Types.Long
+        MissingFieldCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("out_of_order_timestamp_count")>]
-        OutOfOrderTimestampCount: Types.Long
+        OutOfOrderTimestampCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("processed_field_count")>]
-        ProcessedFieldCount: Types.Long
+        ProcessedFieldCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("processed_record_count")>]
-        ProcessedRecordCount: Types.Long
+        ProcessedRecordCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("sparse_bucket_count")>]
-        SparseBucketCount: Types.Long
+        SparseBucketCount: CoreTypes.Long
     }
 
     type DataDescription = {
         [<System.Text.Json.Serialization.JsonPropertyName("format")>]
         Format: string option
         [<System.Text.Json.Serialization.JsonPropertyName("time_field")>]
-        TimeField: Types.Field option
+        TimeField: CoreTypes.Field option
         [<System.Text.Json.Serialization.JsonPropertyName("time_format")>]
         TimeFormat: string option
         [<System.Text.Json.Serialization.JsonPropertyName("field_delimiter")>]
@@ -536,7 +536,7 @@ module MlTypes =
 
     type DatafeedAuthorization = {
         [<System.Text.Json.Serialization.JsonPropertyName("api_key")>]
-        ApiKey: MlTypes.ApiKeyAuthorization option
+        ApiKey: ApiKeyAuthorization option
         [<System.Text.Json.Serialization.JsonPropertyName("roles")>]
         Roles: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("service_account")>]
@@ -545,86 +545,86 @@ module MlTypes =
 
     type DelayedDataCheckConfig = {
         [<System.Text.Json.Serialization.JsonPropertyName("check_window")>]
-        CheckWindow: Types.Duration option
+        CheckWindow: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("enabled")>]
         Enabled: bool
     }
 
     type Datafeed = {
         [<System.Text.Json.Serialization.JsonPropertyName("aggregations")>]
-        Aggregations: Map<string, TypesAggregations.AggregationContainer> option
+        Aggregations: Map<string, CoreTypes.AggregationContainer> option
         [<System.Text.Json.Serialization.JsonPropertyName("authorization")>]
-        Authorization: MlTypes.DatafeedAuthorization option
+        Authorization: DatafeedAuthorization option
         [<System.Text.Json.Serialization.JsonPropertyName("chunking_config")>]
-        ChunkingConfig: MlTypes.ChunkingConfig option
+        ChunkingConfig: ChunkingConfig option
         [<System.Text.Json.Serialization.JsonPropertyName("datafeed_id")>]
-        DatafeedId: Types.Id
+        DatafeedId: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("frequency")>]
-        Frequency: Types.Duration option
+        Frequency: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("indices")>]
         Indices: string list
         [<System.Text.Json.Serialization.JsonPropertyName("indexes")>]
         Indexes: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("job_id")>]
-        JobId: Types.Id
+        JobId: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("max_empty_searches")>]
-        MaxEmptySearches: Types.Integer option
+        MaxEmptySearches: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("query")>]
-        Query: TypesQueryDsl.QueryContainer
+        Query: CoreTypes.QueryContainer
         [<System.Text.Json.Serialization.JsonPropertyName("query_delay")>]
-        QueryDelay: Types.Duration option
+        QueryDelay: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("script_fields")>]
-        ScriptFields: Map<string, Types.ScriptField> option
+        ScriptFields: Map<string, CoreTypes.ScriptField> option
         [<System.Text.Json.Serialization.JsonPropertyName("scroll_size")>]
-        ScrollSize: Types.Integer option
+        ScrollSize: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("delayed_data_check_config")>]
-        DelayedDataCheckConfig: MlTypes.DelayedDataCheckConfig
+        DelayedDataCheckConfig: DelayedDataCheckConfig
         [<System.Text.Json.Serialization.JsonPropertyName("runtime_mappings")>]
-        RuntimeMappings: TypesMapping.RuntimeFields option
+        RuntimeMappings: CoreTypes.RuntimeFields option
         [<System.Text.Json.Serialization.JsonPropertyName("indices_options")>]
-        IndicesOptions: Types.IndicesOptions option
+        IndicesOptions: CoreTypes.IndicesOptions option
     }
 
     type DatafeedConfig = {
         [<System.Text.Json.Serialization.JsonPropertyName("aggregations")>]
-        Aggregations: Map<string, TypesAggregations.AggregationContainer> option
+        Aggregations: Map<string, CoreTypes.AggregationContainer> option
         [<System.Text.Json.Serialization.JsonPropertyName("chunking_config")>]
-        ChunkingConfig: MlTypes.ChunkingConfig option
+        ChunkingConfig: ChunkingConfig option
         [<System.Text.Json.Serialization.JsonPropertyName("datafeed_id")>]
-        DatafeedId: Types.Id option
+        DatafeedId: CoreTypes.Id option
         [<System.Text.Json.Serialization.JsonPropertyName("delayed_data_check_config")>]
-        DelayedDataCheckConfig: MlTypes.DelayedDataCheckConfig option
+        DelayedDataCheckConfig: DelayedDataCheckConfig option
         [<System.Text.Json.Serialization.JsonPropertyName("frequency")>]
-        Frequency: Types.Duration option
+        Frequency: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("indices")>]
-        Indices: Types.Indices option
+        Indices: CoreTypes.Indices option
         [<System.Text.Json.Serialization.JsonPropertyName("indices_options")>]
-        IndicesOptions: Types.IndicesOptions option
+        IndicesOptions: CoreTypes.IndicesOptions option
         [<System.Text.Json.Serialization.JsonPropertyName("job_id")>]
-        JobId: Types.Id option
+        JobId: CoreTypes.Id option
         [<System.Text.Json.Serialization.JsonPropertyName("max_empty_searches")>]
-        MaxEmptySearches: Types.Integer option
+        MaxEmptySearches: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("query")>]
-        Query: TypesQueryDsl.QueryContainer option
+        Query: CoreTypes.QueryContainer option
         [<System.Text.Json.Serialization.JsonPropertyName("query_delay")>]
-        QueryDelay: Types.Duration option
+        QueryDelay: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("runtime_mappings")>]
-        RuntimeMappings: TypesMapping.RuntimeFields option
+        RuntimeMappings: CoreTypes.RuntimeFields option
         [<System.Text.Json.Serialization.JsonPropertyName("script_fields")>]
-        ScriptFields: Map<string, Types.ScriptField> option
+        ScriptFields: Map<string, CoreTypes.ScriptField> option
         [<System.Text.Json.Serialization.JsonPropertyName("scroll_size")>]
-        ScrollSize: Types.Integer option
+        ScrollSize: CoreTypes.Integer option
     }
 
     type RunningStateSearchInterval = {
         [<System.Text.Json.Serialization.JsonPropertyName("end")>]
-        End: Types.Duration option
+        End: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("end_ms")>]
-        EndMs: Types.DurationValue<Types.UnitMillis>
+        EndMs: CoreTypes.DurationValue<CoreTypes.UnitMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("start")>]
-        Start: Types.Duration option
+        Start: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("start_ms")>]
-        StartMs: Types.DurationValue<Types.UnitMillis>
+        StartMs: CoreTypes.DurationValue<CoreTypes.UnitMillis>
     }
 
     type DatafeedRunningState = {
@@ -633,7 +633,7 @@ module MlTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("real_time_running")>]
         RealTimeRunning: bool
         [<System.Text.Json.Serialization.JsonPropertyName("search_interval")>]
-        SearchInterval: MlTypes.RunningStateSearchInterval option
+        SearchInterval: RunningStateSearchInterval option
     }
 
     [<RequireQualifiedAccess>]
@@ -646,150 +646,150 @@ module MlTypes =
     /// Alternative representation of DiscoveryNode used in ml.get_job_stats and ml.get_datafeed_stats
     type DiscoveryNodeCompact = {
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.Name
+        Name: CoreTypes.Name
         [<System.Text.Json.Serialization.JsonPropertyName("ephemeral_id")>]
-        EphemeralId: Types.Id
+        EphemeralId: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("id")>]
-        Id: Types.Id
+        Id: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("transport_address")>]
-        TransportAddress: Types.TransportAddress
+        TransportAddress: CoreTypes.TransportAddress
         [<System.Text.Json.Serialization.JsonPropertyName("attributes")>]
         Attributes: Map<string, string>
     }
 
     type ExponentialAverageCalculationContext = {
         [<System.Text.Json.Serialization.JsonPropertyName("incremental_metric_value_ms")>]
-        IncrementalMetricValueMs: Types.DurationValue<Types.UnitFloatMillis>
+        IncrementalMetricValueMs: CoreTypes.DurationValue<CoreTypes.UnitFloatMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("latest_timestamp")>]
-        LatestTimestamp: Types.EpochTime<Types.UnitMillis> option
+        LatestTimestamp: CoreTypes.EpochTime<CoreTypes.UnitMillis> option
         [<System.Text.Json.Serialization.JsonPropertyName("previous_exponential_average_ms")>]
-        PreviousExponentialAverageMs: Types.DurationValue<Types.UnitFloatMillis> option
+        PreviousExponentialAverageMs: CoreTypes.DurationValue<CoreTypes.UnitFloatMillis> option
     }
 
     type DatafeedTimingStats = {
         [<System.Text.Json.Serialization.JsonPropertyName("bucket_count")>]
-        BucketCount: Types.Long
+        BucketCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("exponential_average_search_time_per_hour_ms")>]
-        ExponentialAverageSearchTimePerHourMs: Types.DurationValue<Types.UnitFloatMillis>
+        ExponentialAverageSearchTimePerHourMs: CoreTypes.DurationValue<CoreTypes.UnitFloatMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("exponential_average_calculation_context")>]
-        ExponentialAverageCalculationContext: MlTypes.ExponentialAverageCalculationContext option
+        ExponentialAverageCalculationContext: ExponentialAverageCalculationContext option
         [<System.Text.Json.Serialization.JsonPropertyName("job_id")>]
-        JobId: Types.Id
+        JobId: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("search_count")>]
-        SearchCount: Types.Long
+        SearchCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("total_search_time_ms")>]
-        TotalSearchTimeMs: Types.DurationValue<Types.UnitFloatMillis>
+        TotalSearchTimeMs: CoreTypes.DurationValue<CoreTypes.UnitFloatMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("average_search_time_per_bucket_ms")>]
-        AverageSearchTimePerBucketMs: Types.DurationValue<Types.UnitFloatMillis> option
+        AverageSearchTimePerBucketMs: CoreTypes.DurationValue<CoreTypes.UnitFloatMillis> option
     }
 
     type DatafeedStats = {
         [<System.Text.Json.Serialization.JsonPropertyName("assignment_explanation")>]
         AssignmentExplanation: string option
         [<System.Text.Json.Serialization.JsonPropertyName("datafeed_id")>]
-        DatafeedId: Types.Id
+        DatafeedId: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("node")>]
-        Node: MlTypes.DiscoveryNodeCompact option
+        Node: DiscoveryNodeCompact option
         [<System.Text.Json.Serialization.JsonPropertyName("state")>]
-        State: MlTypes.DatafeedState
+        State: DatafeedState
         [<System.Text.Json.Serialization.JsonPropertyName("timing_stats")>]
-        TimingStats: MlTypes.DatafeedTimingStats option
+        TimingStats: DatafeedTimingStats option
         [<System.Text.Json.Serialization.JsonPropertyName("running_state")>]
-        RunningState: MlTypes.DatafeedRunningState option
+        RunningState: DatafeedRunningState option
     }
 
     type DataframeAnalysisFeatureProcessorFrequencyEncoding = {
         [<System.Text.Json.Serialization.JsonPropertyName("feature_name")>]
-        FeatureName: Types.Name
+        FeatureName: CoreTypes.Name
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
-        Field: Types.Field
+        Field: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("frequency_map")>]
-        FrequencyMap: Map<string, Types.Double>
+        FrequencyMap: Map<string, CoreTypes.Double>
     }
 
     type DataframeAnalysisFeatureProcessorMultiEncoding = {
         [<System.Text.Json.Serialization.JsonPropertyName("processors")>]
-        Processors: Types.Integer list
+        Processors: CoreTypes.Integer list
     }
 
     type DataframeAnalysisFeatureProcessorNGramEncoding = {
         [<System.Text.Json.Serialization.JsonPropertyName("feature_prefix")>]
         FeaturePrefix: string option
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
-        Field: Types.Field
+        Field: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("length")>]
-        Length: Types.Integer option
+        Length: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("n_grams")>]
-        NGrams: Types.Integer list
+        NGrams: CoreTypes.Integer list
         [<System.Text.Json.Serialization.JsonPropertyName("start")>]
-        Start: Types.Integer option
+        Start: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("custom")>]
         Custom: bool option
     }
 
     type DataframeAnalysisFeatureProcessorOneHotEncoding = {
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
-        Field: Types.Field
+        Field: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("hot_map")>]
         HotMap: string
     }
 
     type DataframeAnalysisFeatureProcessorTargetMeanEncoding = {
         [<System.Text.Json.Serialization.JsonPropertyName("default_value")>]
-        DefaultValue: Types.Integer
+        DefaultValue: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("feature_name")>]
-        FeatureName: Types.Name
+        FeatureName: CoreTypes.Name
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
-        Field: Types.Field
+        Field: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("target_map")>]
         TargetMap: Map<string, System.Text.Json.JsonElement>
     }
 
     [<RequireQualifiedAccess>]
     type DataframeAnalysisFeatureProcessor =
-        | FrequencyEncoding of MlTypes.DataframeAnalysisFeatureProcessorFrequencyEncoding
-        | MultiEncoding of MlTypes.DataframeAnalysisFeatureProcessorMultiEncoding
-        | NGramEncoding of MlTypes.DataframeAnalysisFeatureProcessorNGramEncoding
-        | OneHotEncoding of MlTypes.DataframeAnalysisFeatureProcessorOneHotEncoding
-        | TargetMeanEncoding of MlTypes.DataframeAnalysisFeatureProcessorTargetMeanEncoding
+        | FrequencyEncoding of DataframeAnalysisFeatureProcessorFrequencyEncoding
+        | MultiEncoding of DataframeAnalysisFeatureProcessorMultiEncoding
+        | NGramEncoding of DataframeAnalysisFeatureProcessorNGramEncoding
+        | OneHotEncoding of DataframeAnalysisFeatureProcessorOneHotEncoding
+        | TargetMeanEncoding of DataframeAnalysisFeatureProcessorTargetMeanEncoding
 
     type DataframeAnalysis = {
         [<System.Text.Json.Serialization.JsonPropertyName("alpha")>]
-        Alpha: Types.Double option
+        Alpha: CoreTypes.Double option
         [<System.Text.Json.Serialization.JsonPropertyName("dependent_variable")>]
         DependentVariable: string
         [<System.Text.Json.Serialization.JsonPropertyName("downsample_factor")>]
-        DownsampleFactor: Types.Double option
+        DownsampleFactor: CoreTypes.Double option
         [<System.Text.Json.Serialization.JsonPropertyName("early_stopping_enabled")>]
         EarlyStoppingEnabled: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("eta")>]
-        Eta: Types.Double option
+        Eta: CoreTypes.Double option
         [<System.Text.Json.Serialization.JsonPropertyName("eta_growth_rate_per_tree")>]
-        EtaGrowthRatePerTree: Types.Double option
+        EtaGrowthRatePerTree: CoreTypes.Double option
         [<System.Text.Json.Serialization.JsonPropertyName("feature_bag_fraction")>]
-        FeatureBagFraction: Types.Double option
+        FeatureBagFraction: CoreTypes.Double option
         [<System.Text.Json.Serialization.JsonPropertyName("feature_processors")>]
-        FeatureProcessors: MlTypes.DataframeAnalysisFeatureProcessor list option
+        FeatureProcessors: DataframeAnalysisFeatureProcessor list option
         [<System.Text.Json.Serialization.JsonPropertyName("gamma")>]
-        Gamma: Types.Double option
+        Gamma: CoreTypes.Double option
         [<System.Text.Json.Serialization.JsonPropertyName("lambda")>]
-        Lambda: Types.Double option
+        Lambda: CoreTypes.Double option
         [<System.Text.Json.Serialization.JsonPropertyName("max_optimization_rounds_per_hyperparameter")>]
-        MaxOptimizationRoundsPerHyperparameter: Types.Integer option
+        MaxOptimizationRoundsPerHyperparameter: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("max_trees")>]
-        MaxTrees: Types.Integer option
+        MaxTrees: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("num_top_feature_importance_values")>]
-        NumTopFeatureImportanceValues: Types.Integer option
+        NumTopFeatureImportanceValues: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("prediction_field_name")>]
-        PredictionFieldName: Types.Field option
+        PredictionFieldName: CoreTypes.Field option
         [<System.Text.Json.Serialization.JsonPropertyName("randomize_seed")>]
-        RandomizeSeed: Types.Double option
+        RandomizeSeed: CoreTypes.Double option
         [<System.Text.Json.Serialization.JsonPropertyName("soft_tree_depth_limit")>]
-        SoftTreeDepthLimit: Types.Integer option
+        SoftTreeDepthLimit: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("soft_tree_depth_tolerance")>]
-        SoftTreeDepthTolerance: Types.Double option
+        SoftTreeDepthTolerance: CoreTypes.Double option
         [<System.Text.Json.Serialization.JsonPropertyName("training_percent")>]
-        TrainingPercent: Types.Percentage option
+        TrainingPercent: CoreTypes.Percentage option
     }
 
     type DataframeAnalysisAnalyzedFields = {
@@ -803,20 +803,20 @@ module MlTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("class_assignment_objective")>]
         ClassAssignmentObjective: string option
         [<System.Text.Json.Serialization.JsonPropertyName("num_top_classes")>]
-        NumTopClasses: Types.Integer option
+        NumTopClasses: CoreTypes.Integer option
     }
 
     type DataframeAnalysisOutlierDetection = {
         [<System.Text.Json.Serialization.JsonPropertyName("compute_feature_influence")>]
         ComputeFeatureInfluence: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("feature_influence_threshold")>]
-        FeatureInfluenceThreshold: Types.Double option
+        FeatureInfluenceThreshold: CoreTypes.Double option
         [<System.Text.Json.Serialization.JsonPropertyName("method")>]
         Method: string option
         [<System.Text.Json.Serialization.JsonPropertyName("n_neighbors")>]
-        NNeighbors: Types.Integer option
+        NNeighbors: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("outlier_fraction")>]
-        OutlierFraction: Types.Double option
+        OutlierFraction: CoreTypes.Double option
         [<System.Text.Json.Serialization.JsonPropertyName("standardization_enabled")>]
         StandardizationEnabled: bool option
     }
@@ -825,51 +825,51 @@ module MlTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("loss_function")>]
         LossFunction: string option
         [<System.Text.Json.Serialization.JsonPropertyName("loss_function_parameter")>]
-        LossFunctionParameter: Types.Double option
+        LossFunctionParameter: CoreTypes.Double option
     }
 
     [<RequireQualifiedAccess>]
     type DataframeAnalysisContainer =
-        | Classification of MlTypes.DataframeAnalysisClassification
-        | OutlierDetection of MlTypes.DataframeAnalysisOutlierDetection
-        | Regression of MlTypes.DataframeAnalysisRegression
+        | Classification of DataframeAnalysisClassification
+        | OutlierDetection of DataframeAnalysisOutlierDetection
+        | Regression of DataframeAnalysisRegression
 
     type Hyperparameters = {
         [<System.Text.Json.Serialization.JsonPropertyName("alpha")>]
-        Alpha: Types.Double option
+        Alpha: CoreTypes.Double option
         [<System.Text.Json.Serialization.JsonPropertyName("lambda")>]
-        Lambda: Types.Double option
+        Lambda: CoreTypes.Double option
         [<System.Text.Json.Serialization.JsonPropertyName("gamma")>]
-        Gamma: Types.Double option
+        Gamma: CoreTypes.Double option
         [<System.Text.Json.Serialization.JsonPropertyName("eta")>]
-        Eta: Types.Double option
+        Eta: CoreTypes.Double option
         [<System.Text.Json.Serialization.JsonPropertyName("eta_growth_rate_per_tree")>]
-        EtaGrowthRatePerTree: Types.Double option
+        EtaGrowthRatePerTree: CoreTypes.Double option
         [<System.Text.Json.Serialization.JsonPropertyName("feature_bag_fraction")>]
-        FeatureBagFraction: Types.Double option
+        FeatureBagFraction: CoreTypes.Double option
         [<System.Text.Json.Serialization.JsonPropertyName("downsample_factor")>]
-        DownsampleFactor: Types.Double option
+        DownsampleFactor: CoreTypes.Double option
         [<System.Text.Json.Serialization.JsonPropertyName("max_attempts_to_add_tree")>]
-        MaxAttemptsToAddTree: Types.Integer option
+        MaxAttemptsToAddTree: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("max_optimization_rounds_per_hyperparameter")>]
-        MaxOptimizationRoundsPerHyperparameter: Types.Integer option
+        MaxOptimizationRoundsPerHyperparameter: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("max_trees")>]
-        MaxTrees: Types.Integer option
+        MaxTrees: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("num_folds")>]
-        NumFolds: Types.Integer option
+        NumFolds: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("num_splits_per_feature")>]
-        NumSplitsPerFeature: Types.Integer option
+        NumSplitsPerFeature: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("soft_tree_depth_limit")>]
-        SoftTreeDepthLimit: Types.Integer option
+        SoftTreeDepthLimit: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("soft_tree_depth_tolerance")>]
-        SoftTreeDepthTolerance: Types.Double option
+        SoftTreeDepthTolerance: CoreTypes.Double option
     }
 
     type TimingStats = {
         [<System.Text.Json.Serialization.JsonPropertyName("elapsed_time")>]
-        ElapsedTime: Types.DurationValue<Types.UnitMillis>
+        ElapsedTime: CoreTypes.DurationValue<CoreTypes.UnitMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("iteration_time")>]
-        IterationTime: Types.DurationValue<Types.UnitMillis> option
+        IterationTime: CoreTypes.DurationValue<CoreTypes.UnitMillis> option
     }
 
     type ValidationLoss = {
@@ -881,72 +881,72 @@ module MlTypes =
 
     type DataframeAnalyticsStatsHyperparameters = {
         [<System.Text.Json.Serialization.JsonPropertyName("hyperparameters")>]
-        Hyperparameters: MlTypes.Hyperparameters
+        Hyperparameters: Hyperparameters
         [<System.Text.Json.Serialization.JsonPropertyName("iteration")>]
-        Iteration: Types.Integer
+        Iteration: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("timestamp")>]
-        Timestamp: Types.EpochTime<Types.UnitMillis>
+        Timestamp: CoreTypes.EpochTime<CoreTypes.UnitMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("timing_stats")>]
-        TimingStats: MlTypes.TimingStats
+        TimingStats: TimingStats
         [<System.Text.Json.Serialization.JsonPropertyName("validation_loss")>]
-        ValidationLoss: MlTypes.ValidationLoss
+        ValidationLoss: ValidationLoss
     }
 
     type OutlierDetectionParameters = {
         [<System.Text.Json.Serialization.JsonPropertyName("compute_feature_influence")>]
         ComputeFeatureInfluence: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("feature_influence_threshold")>]
-        FeatureInfluenceThreshold: Types.Double option
+        FeatureInfluenceThreshold: CoreTypes.Double option
         [<System.Text.Json.Serialization.JsonPropertyName("method")>]
         Method: string option
         [<System.Text.Json.Serialization.JsonPropertyName("n_neighbors")>]
-        NNeighbors: Types.Integer option
+        NNeighbors: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("outlier_fraction")>]
-        OutlierFraction: Types.Double option
+        OutlierFraction: CoreTypes.Double option
         [<System.Text.Json.Serialization.JsonPropertyName("standardization_enabled")>]
         StandardizationEnabled: bool option
     }
 
     type DataframeAnalyticsStatsOutlierDetection = {
         [<System.Text.Json.Serialization.JsonPropertyName("parameters")>]
-        Parameters: MlTypes.OutlierDetectionParameters
+        Parameters: OutlierDetectionParameters
         [<System.Text.Json.Serialization.JsonPropertyName("timestamp")>]
-        Timestamp: Types.EpochTime<Types.UnitMillis>
+        Timestamp: CoreTypes.EpochTime<CoreTypes.UnitMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("timing_stats")>]
-        TimingStats: MlTypes.TimingStats
+        TimingStats: TimingStats
     }
 
     [<RequireQualifiedAccess>]
     type DataframeAnalyticsStatsContainer =
-        | ClassificationStats of MlTypes.DataframeAnalyticsStatsHyperparameters
-        | OutlierDetectionStats of MlTypes.DataframeAnalyticsStatsOutlierDetection
-        | RegressionStats of MlTypes.DataframeAnalyticsStatsHyperparameters
+        | ClassificationStats of DataframeAnalyticsStatsHyperparameters
+        | OutlierDetectionStats of DataframeAnalyticsStatsOutlierDetection
+        | RegressionStats of DataframeAnalyticsStatsHyperparameters
 
     type DataframeAnalyticsStatsDataCounts = {
         [<System.Text.Json.Serialization.JsonPropertyName("skipped_docs_count")>]
-        SkippedDocsCount: Types.Integer
+        SkippedDocsCount: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("test_docs_count")>]
-        TestDocsCount: Types.Integer
+        TestDocsCount: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("training_docs_count")>]
-        TrainingDocsCount: Types.Integer
+        TrainingDocsCount: CoreTypes.Integer
     }
 
     type DataframeAnalyticsStatsMemoryUsage = {
         [<System.Text.Json.Serialization.JsonPropertyName("memory_reestimate_bytes")>]
-        MemoryReestimateBytes: Types.Long option
+        MemoryReestimateBytes: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("peak_usage_bytes")>]
-        PeakUsageBytes: Types.Long
+        PeakUsageBytes: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("status")>]
         Status: string
         [<System.Text.Json.Serialization.JsonPropertyName("timestamp")>]
-        Timestamp: Types.EpochTime<Types.UnitMillis> option
+        Timestamp: CoreTypes.EpochTime<CoreTypes.UnitMillis> option
     }
 
     type DataframeAnalyticsStatsProgress = {
         [<System.Text.Json.Serialization.JsonPropertyName("phase")>]
         Phase: string
         [<System.Text.Json.Serialization.JsonPropertyName("progress_percent")>]
-        ProgressPercent: Types.Integer
+        ProgressPercent: CoreTypes.Integer
     }
 
     [<RequireQualifiedAccess>]
@@ -959,26 +959,26 @@ module MlTypes =
 
     type DataframeAnalytics = {
         [<System.Text.Json.Serialization.JsonPropertyName("analysis_stats")>]
-        AnalysisStats: MlTypes.DataframeAnalyticsStatsContainer option
+        AnalysisStats: DataframeAnalyticsStatsContainer option
         [<System.Text.Json.Serialization.JsonPropertyName("assignment_explanation")>]
         AssignmentExplanation: string option
         [<System.Text.Json.Serialization.JsonPropertyName("data_counts")>]
-        DataCounts: MlTypes.DataframeAnalyticsStatsDataCounts
+        DataCounts: DataframeAnalyticsStatsDataCounts
         [<System.Text.Json.Serialization.JsonPropertyName("id")>]
-        Id: Types.Id
+        Id: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("memory_usage")>]
-        MemoryUsage: MlTypes.DataframeAnalyticsStatsMemoryUsage
+        MemoryUsage: DataframeAnalyticsStatsMemoryUsage
         [<System.Text.Json.Serialization.JsonPropertyName("node")>]
-        Node: Types.NodeAttributes option
+        Node: CoreTypes.NodeAttributes option
         [<System.Text.Json.Serialization.JsonPropertyName("progress")>]
-        Progress: MlTypes.DataframeAnalyticsStatsProgress list
+        Progress: DataframeAnalyticsStatsProgress list
         [<System.Text.Json.Serialization.JsonPropertyName("state")>]
-        State: MlTypes.DataframeState
+        State: DataframeState
     }
 
     type DataframeAnalyticsAuthorization = {
         [<System.Text.Json.Serialization.JsonPropertyName("api_key")>]
-        ApiKey: MlTypes.ApiKeyAuthorization option
+        ApiKey: ApiKeyAuthorization option
         [<System.Text.Json.Serialization.JsonPropertyName("roles")>]
         Roles: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("service_account")>]
@@ -987,9 +987,9 @@ module MlTypes =
 
     type DataframeAnalyticsDestination = {
         [<System.Text.Json.Serialization.JsonPropertyName("index")>]
-        Index: Types.IndexName
+        Index: CoreTypes.IndexName
         [<System.Text.Json.Serialization.JsonPropertyName("results_field")>]
-        ResultsField: Types.Field option
+        ResultsField: CoreTypes.Field option
     }
 
     type DataframeAnalyticsFieldSelection = {
@@ -1002,7 +1002,7 @@ module MlTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("mapping_types")>]
         MappingTypes: string list
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.Field
+        Name: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("reason")>]
         Reason: string option
     }
@@ -1016,54 +1016,54 @@ module MlTypes =
 
     type DataframeAnalyticsSource = {
         [<System.Text.Json.Serialization.JsonPropertyName("index")>]
-        Index: Types.Indices
+        Index: CoreTypes.Indices
         [<System.Text.Json.Serialization.JsonPropertyName("query")>]
-        Query: TypesQueryDsl.QueryContainer option
+        Query: CoreTypes.QueryContainer option
         [<System.Text.Json.Serialization.JsonPropertyName("runtime_mappings")>]
-        RuntimeMappings: TypesMapping.RuntimeFields option
+        RuntimeMappings: CoreTypes.RuntimeFields option
         [<System.Text.Json.Serialization.JsonPropertyName("_source")>]
-        Source: MlTypes.DataframeAnalysisAnalyzedFields option
+        Source: DataframeAnalysisAnalyzedFields option
     }
 
     type DataframeAnalyticsSummary = {
         [<System.Text.Json.Serialization.JsonPropertyName("allow_lazy_start")>]
         AllowLazyStart: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("analysis")>]
-        Analysis: MlTypes.DataframeAnalysisContainer
+        Analysis: DataframeAnalysisContainer
         [<System.Text.Json.Serialization.JsonPropertyName("analyzed_fields")>]
-        AnalyzedFields: MlTypes.DataframeAnalysisAnalyzedFields option
+        AnalyzedFields: DataframeAnalysisAnalyzedFields option
         [<System.Text.Json.Serialization.JsonPropertyName("authorization")>]
-        Authorization: MlTypes.DataframeAnalyticsAuthorization option
+        Authorization: DataframeAnalyticsAuthorization option
         [<System.Text.Json.Serialization.JsonPropertyName("create_time")>]
-        CreateTime: Types.EpochTime<Types.UnitMillis> option
+        CreateTime: CoreTypes.EpochTime<CoreTypes.UnitMillis> option
         [<System.Text.Json.Serialization.JsonPropertyName("description")>]
         Description: string option
         [<System.Text.Json.Serialization.JsonPropertyName("dest")>]
-        Dest: MlTypes.DataframeAnalyticsDestination
+        Dest: DataframeAnalyticsDestination
         [<System.Text.Json.Serialization.JsonPropertyName("id")>]
-        Id: Types.Id
+        Id: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("max_num_threads")>]
-        MaxNumThreads: Types.Integer option
+        MaxNumThreads: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("model_memory_limit")>]
         ModelMemoryLimit: string option
         [<System.Text.Json.Serialization.JsonPropertyName("source")>]
-        Source: MlTypes.DataframeAnalyticsSource
+        Source: DataframeAnalyticsSource
         [<System.Text.Json.Serialization.JsonPropertyName("version")>]
-        Version: Types.VersionString option
+        Version: CoreTypes.VersionString option
         [<System.Text.Json.Serialization.JsonPropertyName("_meta")>]
-        Meta: Types.Metadata option
+        Meta: CoreTypes.Metadata option
     }
 
     type DataframeEvaluationClassificationMetricsAucRoc = {
         [<System.Text.Json.Serialization.JsonPropertyName("class_name")>]
-        ClassName: Types.Name option
+        ClassName: CoreTypes.Name option
         [<System.Text.Json.Serialization.JsonPropertyName("include_curve")>]
         IncludeCurve: bool option
     }
 
     type DataframeEvaluationMetrics = {
         [<System.Text.Json.Serialization.JsonPropertyName("auc_roc")>]
-        AucRoc: MlTypes.DataframeEvaluationClassificationMetricsAucRoc option
+        AucRoc: DataframeEvaluationClassificationMetricsAucRoc option
         [<System.Text.Json.Serialization.JsonPropertyName("precision")>]
         Precision: Map<string, System.Text.Json.JsonElement> option
         [<System.Text.Json.Serialization.JsonPropertyName("recall")>]
@@ -1079,13 +1079,13 @@ module MlTypes =
 
     type DataframeEvaluationClassification = {
         [<System.Text.Json.Serialization.JsonPropertyName("actual_field")>]
-        ActualField: Types.Field
+        ActualField: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("predicted_field")>]
-        PredictedField: Types.Field option
+        PredictedField: CoreTypes.Field option
         [<System.Text.Json.Serialization.JsonPropertyName("top_classes_field")>]
-        TopClassesField: Types.Field option
+        TopClassesField: CoreTypes.Field option
         [<System.Text.Json.Serialization.JsonPropertyName("metrics")>]
-        Metrics: MlTypes.DataframeEvaluationClassificationMetrics option
+        Metrics: DataframeEvaluationClassificationMetrics option
     }
 
     type DataframeEvaluationOutlierDetectionMetrics = {
@@ -1095,48 +1095,48 @@ module MlTypes =
 
     type DataframeEvaluationOutlierDetection = {
         [<System.Text.Json.Serialization.JsonPropertyName("actual_field")>]
-        ActualField: Types.Field
+        ActualField: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("predicted_probability_field")>]
-        PredictedProbabilityField: Types.Field
+        PredictedProbabilityField: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("metrics")>]
-        Metrics: MlTypes.DataframeEvaluationOutlierDetectionMetrics option
+        Metrics: DataframeEvaluationOutlierDetectionMetrics option
     }
 
     type DataframeEvaluationRegressionMetricsMsle = {
         [<System.Text.Json.Serialization.JsonPropertyName("offset")>]
-        Offset: Types.Double option
+        Offset: CoreTypes.Double option
     }
 
     type DataframeEvaluationRegressionMetricsHuber = {
         [<System.Text.Json.Serialization.JsonPropertyName("delta")>]
-        Delta: Types.Double option
+        Delta: CoreTypes.Double option
     }
 
     type DataframeEvaluationRegressionMetrics = {
         [<System.Text.Json.Serialization.JsonPropertyName("mse")>]
         Mse: Map<string, System.Text.Json.JsonElement> option
         [<System.Text.Json.Serialization.JsonPropertyName("msle")>]
-        Msle: MlTypes.DataframeEvaluationRegressionMetricsMsle option
+        Msle: DataframeEvaluationRegressionMetricsMsle option
         [<System.Text.Json.Serialization.JsonPropertyName("huber")>]
-        Huber: MlTypes.DataframeEvaluationRegressionMetricsHuber option
+        Huber: DataframeEvaluationRegressionMetricsHuber option
         [<System.Text.Json.Serialization.JsonPropertyName("r_squared")>]
         RSquared: Map<string, System.Text.Json.JsonElement> option
     }
 
     type DataframeEvaluationRegression = {
         [<System.Text.Json.Serialization.JsonPropertyName("actual_field")>]
-        ActualField: Types.Field
+        ActualField: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("predicted_field")>]
-        PredictedField: Types.Field
+        PredictedField: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("metrics")>]
-        Metrics: MlTypes.DataframeEvaluationRegressionMetrics option
+        Metrics: DataframeEvaluationRegressionMetrics option
     }
 
     [<RequireQualifiedAccess>]
     type DataframeEvaluationContainer =
-        | Classification of MlTypes.DataframeEvaluationClassification
-        | OutlierDetection of MlTypes.DataframeEvaluationOutlierDetection
-        | Regression of MlTypes.DataframeEvaluationRegression
+        | Classification of DataframeEvaluationClassification
+        | OutlierDetection of DataframeEvaluationOutlierDetection
+        | Regression of DataframeEvaluationRegression
 
     [<RequireQualifiedAccess>]
     type DeploymentAllocationState =
@@ -1153,20 +1153,20 @@ module MlTypes =
 
     type DetectorUpdate = {
         [<System.Text.Json.Serialization.JsonPropertyName("detector_index")>]
-        DetectorIndex: Types.Integer
+        DetectorIndex: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("description")>]
         Description: string option
         [<System.Text.Json.Serialization.JsonPropertyName("custom_rules")>]
-        CustomRules: MlTypes.DetectionRule list option
+        CustomRules: DetectionRule list option
     }
 
     type DiscoveryNodeContent = {
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.Name option
+        Name: CoreTypes.Name option
         [<System.Text.Json.Serialization.JsonPropertyName("ephemeral_id")>]
-        EphemeralId: Types.Id
+        EphemeralId: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("transport_address")>]
-        TransportAddress: Types.TransportAddress
+        TransportAddress: CoreTypes.TransportAddress
         [<System.Text.Json.Serialization.JsonPropertyName("external_id")>]
         ExternalId: string
         [<System.Text.Json.Serialization.JsonPropertyName("attributes")>]
@@ -1174,25 +1174,25 @@ module MlTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("roles")>]
         Roles: string list
         [<System.Text.Json.Serialization.JsonPropertyName("version")>]
-        Version: Types.VersionString
+        Version: CoreTypes.VersionString
         [<System.Text.Json.Serialization.JsonPropertyName("min_index_version")>]
-        MinIndexVersion: Types.Integer
+        MinIndexVersion: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("max_index_version")>]
-        MaxIndexVersion: Types.Integer
+        MaxIndexVersion: CoreTypes.Integer
     }
 
-    type DiscoveryNode = Map<Types.Id, MlTypes.DiscoveryNodeContent>
+    type DiscoveryNode = Map<CoreTypes.Id, DiscoveryNodeContent>
 
     type QueryFeatureExtractor = {
         [<System.Text.Json.Serialization.JsonPropertyName("default_score")>]
-        DefaultScore: Types.Float option
+        DefaultScore: CoreTypes.Float option
         [<System.Text.Json.Serialization.JsonPropertyName("feature_name")>]
         FeatureName: string
         [<System.Text.Json.Serialization.JsonPropertyName("query")>]
-        Query: TypesQueryDsl.QueryContainer
+        Query: CoreTypes.QueryContainer
     }
 
-    type FeatureExtractor = MlTypes.QueryFeatureExtractor
+    type FeatureExtractor = QueryFeatureExtractor
 
     /// BERT and MPNet tokenization configuration options
     type NlpBertTokenizationConfig = System.Text.Json.JsonElement
@@ -1208,15 +1208,15 @@ module MlTypes =
     /// Tokenization options stored in inference configuration
     [<RequireQualifiedAccess>]
     type TokenizationConfigContainer =
-        | Bert of MlTypes.NlpBertTokenizationConfig
-        | BertJa of MlTypes.NlpBertTokenizationConfig
-        | Mpnet of MlTypes.NlpBertTokenizationConfig
-        | Roberta of MlTypes.NlpRobertaTokenizationConfig
-        | XlmRoberta of MlTypes.XlmRobertaTokenizationConfig
+        | Bert of NlpBertTokenizationConfig
+        | BertJa of NlpBertTokenizationConfig
+        | Mpnet of NlpBertTokenizationConfig
+        | Roberta of NlpRobertaTokenizationConfig
+        | XlmRoberta of XlmRobertaTokenizationConfig
 
     type Vocabulary = {
         [<System.Text.Json.Serialization.JsonPropertyName("index")>]
-        Index: Types.IndexName
+        Index: CoreTypes.IndexName
     }
 
     /// Fill mask inference options
@@ -1224,27 +1224,27 @@ module MlTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("mask_token")>]
         MaskToken: string option
         [<System.Text.Json.Serialization.JsonPropertyName("num_top_classes")>]
-        NumTopClasses: Types.Integer option
+        NumTopClasses: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("tokenization")>]
-        Tokenization: MlTypes.TokenizationConfigContainer option
+        Tokenization: TokenizationConfigContainer option
         [<System.Text.Json.Serialization.JsonPropertyName("results_field")>]
         ResultsField: string option
         [<System.Text.Json.Serialization.JsonPropertyName("vocabulary")>]
-        Vocabulary: MlTypes.Vocabulary option
+        Vocabulary: Vocabulary option
     }
 
     type NlpTokenizationUpdateOptions = {
         [<System.Text.Json.Serialization.JsonPropertyName("truncate")>]
-        Truncate: MlTypes.TokenizationTruncate option
+        Truncate: TokenizationTruncate option
         [<System.Text.Json.Serialization.JsonPropertyName("span")>]
-        Span: Types.Integer option
+        Span: CoreTypes.Integer option
     }
 
     type FillMaskInferenceUpdateOptions = {
         [<System.Text.Json.Serialization.JsonPropertyName("num_top_classes")>]
-        NumTopClasses: Types.Integer option
+        NumTopClasses: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("tokenization")>]
-        Tokenization: MlTypes.NlpTokenizationUpdateOptions option
+        Tokenization: NlpTokenizationUpdateOptions option
         [<System.Text.Json.Serialization.JsonPropertyName("results_field")>]
         ResultsField: string option
     }
@@ -1253,22 +1253,22 @@ module MlTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("description")>]
         Description: string option
         [<System.Text.Json.Serialization.JsonPropertyName("filter_id")>]
-        FilterId: Types.Id
+        FilterId: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("items")>]
         Items: string list
     }
 
     type Hyperparameter = {
         [<System.Text.Json.Serialization.JsonPropertyName("absolute_importance")>]
-        AbsoluteImportance: Types.Double option
+        AbsoluteImportance: CoreTypes.Double option
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.Name
+        Name: CoreTypes.Name
         [<System.Text.Json.Serialization.JsonPropertyName("relative_importance")>]
-        RelativeImportance: Types.Double option
+        RelativeImportance: CoreTypes.Double option
         [<System.Text.Json.Serialization.JsonPropertyName("supplied")>]
         Supplied: bool
         [<System.Text.Json.Serialization.JsonPropertyName("value")>]
-        Value: Types.Double
+        Value: CoreTypes.Double
     }
 
     [<RequireQualifiedAccess>]
@@ -1281,29 +1281,29 @@ module MlTypes =
 
     type RegressionInferenceOptions = {
         [<System.Text.Json.Serialization.JsonPropertyName("results_field")>]
-        ResultsField: Types.Field option
+        ResultsField: CoreTypes.Field option
         [<System.Text.Json.Serialization.JsonPropertyName("num_top_feature_importance_values")>]
-        NumTopFeatureImportanceValues: Types.Integer option
+        NumTopFeatureImportanceValues: CoreTypes.Integer option
     }
 
     /// Text classification configuration options
     type TextClassificationInferenceOptions = {
         [<System.Text.Json.Serialization.JsonPropertyName("num_top_classes")>]
-        NumTopClasses: Types.Integer option
+        NumTopClasses: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("tokenization")>]
-        Tokenization: MlTypes.TokenizationConfigContainer option
+        Tokenization: TokenizationConfigContainer option
         [<System.Text.Json.Serialization.JsonPropertyName("results_field")>]
         ResultsField: string option
         [<System.Text.Json.Serialization.JsonPropertyName("classification_labels")>]
         ClassificationLabels: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("vocabulary")>]
-        Vocabulary: MlTypes.Vocabulary option
+        Vocabulary: Vocabulary option
     }
 
     /// Zero shot classification configuration options
     type ZeroShotClassificationInferenceOptions = {
         [<System.Text.Json.Serialization.JsonPropertyName("tokenization")>]
-        Tokenization: MlTypes.TokenizationConfigContainer option
+        Tokenization: TokenizationConfigContainer option
         [<System.Text.Json.Serialization.JsonPropertyName("hypothesis_template")>]
         HypothesisTemplate: string option
         [<System.Text.Json.Serialization.JsonPropertyName("classification_labels")>]
@@ -1320,87 +1320,87 @@ module MlTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("default_params")>]
         DefaultParams: Map<string, System.Text.Json.JsonElement> option
         [<System.Text.Json.Serialization.JsonPropertyName("feature_extractors")>]
-        FeatureExtractors: Map<string, MlTypes.FeatureExtractor> list option
+        FeatureExtractors: Map<string, FeatureExtractor> list option
         [<System.Text.Json.Serialization.JsonPropertyName("num_top_feature_importance_values")>]
-        NumTopFeatureImportanceValues: Types.Integer
+        NumTopFeatureImportanceValues: CoreTypes.Integer
     }
 
     /// Named entity recognition options
     type NerInferenceOptions = {
         [<System.Text.Json.Serialization.JsonPropertyName("tokenization")>]
-        Tokenization: MlTypes.TokenizationConfigContainer option
+        Tokenization: TokenizationConfigContainer option
         [<System.Text.Json.Serialization.JsonPropertyName("results_field")>]
         ResultsField: string option
         [<System.Text.Json.Serialization.JsonPropertyName("classification_labels")>]
         ClassificationLabels: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("vocabulary")>]
-        Vocabulary: MlTypes.Vocabulary option
+        Vocabulary: Vocabulary option
     }
 
     /// Pass through configuration options
     type PassThroughInferenceOptions = {
         [<System.Text.Json.Serialization.JsonPropertyName("tokenization")>]
-        Tokenization: MlTypes.TokenizationConfigContainer option
+        Tokenization: TokenizationConfigContainer option
         [<System.Text.Json.Serialization.JsonPropertyName("results_field")>]
         ResultsField: string option
         [<System.Text.Json.Serialization.JsonPropertyName("vocabulary")>]
-        Vocabulary: MlTypes.Vocabulary option
+        Vocabulary: Vocabulary option
     }
 
     /// Text embedding inference options
     type TextEmbeddingInferenceOptions = {
         [<System.Text.Json.Serialization.JsonPropertyName("embedding_size")>]
-        EmbeddingSize: Types.Integer option
+        EmbeddingSize: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("tokenization")>]
-        Tokenization: MlTypes.TokenizationConfigContainer option
+        Tokenization: TokenizationConfigContainer option
         [<System.Text.Json.Serialization.JsonPropertyName("results_field")>]
         ResultsField: string option
         [<System.Text.Json.Serialization.JsonPropertyName("vocabulary")>]
-        Vocabulary: MlTypes.Vocabulary option
+        Vocabulary: Vocabulary option
     }
 
     /// Text expansion inference options
     type TextExpansionInferenceOptions = {
         [<System.Text.Json.Serialization.JsonPropertyName("tokenization")>]
-        Tokenization: MlTypes.TokenizationConfigContainer option
+        Tokenization: TokenizationConfigContainer option
         [<System.Text.Json.Serialization.JsonPropertyName("results_field")>]
         ResultsField: string option
         [<System.Text.Json.Serialization.JsonPropertyName("vocabulary")>]
-        Vocabulary: MlTypes.Vocabulary option
+        Vocabulary: Vocabulary option
     }
 
     /// Question answering inference options
     type QuestionAnsweringInferenceOptions = {
         [<System.Text.Json.Serialization.JsonPropertyName("num_top_classes")>]
-        NumTopClasses: Types.Integer option
+        NumTopClasses: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("tokenization")>]
-        Tokenization: MlTypes.TokenizationConfigContainer option
+        Tokenization: TokenizationConfigContainer option
         [<System.Text.Json.Serialization.JsonPropertyName("results_field")>]
         ResultsField: string option
         [<System.Text.Json.Serialization.JsonPropertyName("max_answer_length")>]
-        MaxAnswerLength: Types.Integer option
+        MaxAnswerLength: CoreTypes.Integer option
     }
 
     /// Inference configuration provided when storing the model config
     [<RequireQualifiedAccess>]
     type InferenceConfigCreateContainer =
-        | Regression of MlTypes.RegressionInferenceOptions
-        | Classification of MlTypes.ClassificationInferenceOptions
-        | TextClassification of MlTypes.TextClassificationInferenceOptions
-        | ZeroShotClassification of MlTypes.ZeroShotClassificationInferenceOptions
-        | FillMask of MlTypes.FillMaskInferenceOptions
-        | LearningToRank of MlTypes.LearningToRankConfig
-        | Ner of MlTypes.NerInferenceOptions
-        | PassThrough of MlTypes.PassThroughInferenceOptions
-        | TextEmbedding of MlTypes.TextEmbeddingInferenceOptions
-        | TextExpansion of MlTypes.TextExpansionInferenceOptions
-        | QuestionAnswering of MlTypes.QuestionAnsweringInferenceOptions
+        | Regression of RegressionInferenceOptions
+        | Classification of ClassificationInferenceOptions
+        | TextClassification of TextClassificationInferenceOptions
+        | ZeroShotClassification of ZeroShotClassificationInferenceOptions
+        | FillMask of FillMaskInferenceOptions
+        | LearningToRank of LearningToRankConfig
+        | Ner of NerInferenceOptions
+        | PassThrough of PassThroughInferenceOptions
+        | TextEmbedding of TextEmbeddingInferenceOptions
+        | TextExpansion of TextExpansionInferenceOptions
+        | QuestionAnswering of QuestionAnsweringInferenceOptions
 
     type TextClassificationInferenceUpdateOptions = {
         [<System.Text.Json.Serialization.JsonPropertyName("num_top_classes")>]
-        NumTopClasses: Types.Integer option
+        NumTopClasses: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("tokenization")>]
-        Tokenization: MlTypes.NlpTokenizationUpdateOptions option
+        Tokenization: NlpTokenizationUpdateOptions option
         [<System.Text.Json.Serialization.JsonPropertyName("results_field")>]
         ResultsField: string option
         [<System.Text.Json.Serialization.JsonPropertyName("classification_labels")>]
@@ -1409,7 +1409,7 @@ module MlTypes =
 
     type ZeroShotClassificationInferenceUpdateOptions = {
         [<System.Text.Json.Serialization.JsonPropertyName("tokenization")>]
-        Tokenization: MlTypes.NlpTokenizationUpdateOptions option
+        Tokenization: NlpTokenizationUpdateOptions option
         [<System.Text.Json.Serialization.JsonPropertyName("results_field")>]
         ResultsField: string option
         [<System.Text.Json.Serialization.JsonPropertyName("multi_label")>]
@@ -1420,28 +1420,28 @@ module MlTypes =
 
     type NerInferenceUpdateOptions = {
         [<System.Text.Json.Serialization.JsonPropertyName("tokenization")>]
-        Tokenization: MlTypes.NlpTokenizationUpdateOptions option
+        Tokenization: NlpTokenizationUpdateOptions option
         [<System.Text.Json.Serialization.JsonPropertyName("results_field")>]
         ResultsField: string option
     }
 
     type PassThroughInferenceUpdateOptions = {
         [<System.Text.Json.Serialization.JsonPropertyName("tokenization")>]
-        Tokenization: MlTypes.NlpTokenizationUpdateOptions option
+        Tokenization: NlpTokenizationUpdateOptions option
         [<System.Text.Json.Serialization.JsonPropertyName("results_field")>]
         ResultsField: string option
     }
 
     type TextEmbeddingInferenceUpdateOptions = {
         [<System.Text.Json.Serialization.JsonPropertyName("tokenization")>]
-        Tokenization: MlTypes.NlpTokenizationUpdateOptions option
+        Tokenization: NlpTokenizationUpdateOptions option
         [<System.Text.Json.Serialization.JsonPropertyName("results_field")>]
         ResultsField: string option
     }
 
     type TextExpansionInferenceUpdateOptions = {
         [<System.Text.Json.Serialization.JsonPropertyName("tokenization")>]
-        Tokenization: MlTypes.NlpTokenizationUpdateOptions option
+        Tokenization: NlpTokenizationUpdateOptions option
         [<System.Text.Json.Serialization.JsonPropertyName("results_field")>]
         ResultsField: string option
     }
@@ -1450,74 +1450,74 @@ module MlTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("question")>]
         Question: string
         [<System.Text.Json.Serialization.JsonPropertyName("num_top_classes")>]
-        NumTopClasses: Types.Integer option
+        NumTopClasses: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("tokenization")>]
-        Tokenization: MlTypes.NlpTokenizationUpdateOptions option
+        Tokenization: NlpTokenizationUpdateOptions option
         [<System.Text.Json.Serialization.JsonPropertyName("results_field")>]
         ResultsField: string option
         [<System.Text.Json.Serialization.JsonPropertyName("max_answer_length")>]
-        MaxAnswerLength: Types.Integer option
+        MaxAnswerLength: CoreTypes.Integer option
     }
 
     [<RequireQualifiedAccess>]
     type InferenceConfigUpdateContainer =
-        | Regression of MlTypes.RegressionInferenceOptions
-        | Classification of MlTypes.ClassificationInferenceOptions
-        | TextClassification of MlTypes.TextClassificationInferenceUpdateOptions
-        | ZeroShotClassification of MlTypes.ZeroShotClassificationInferenceUpdateOptions
-        | FillMask of MlTypes.FillMaskInferenceUpdateOptions
-        | Ner of MlTypes.NerInferenceUpdateOptions
-        | PassThrough of MlTypes.PassThroughInferenceUpdateOptions
-        | TextEmbedding of MlTypes.TextEmbeddingInferenceUpdateOptions
-        | TextExpansion of MlTypes.TextExpansionInferenceUpdateOptions
-        | QuestionAnswering of MlTypes.QuestionAnsweringInferenceUpdateOptions
+        | Regression of RegressionInferenceOptions
+        | Classification of ClassificationInferenceOptions
+        | TextClassification of TextClassificationInferenceUpdateOptions
+        | ZeroShotClassification of ZeroShotClassificationInferenceUpdateOptions
+        | FillMask of FillMaskInferenceUpdateOptions
+        | Ner of NerInferenceUpdateOptions
+        | PassThrough of PassThroughInferenceUpdateOptions
+        | TextEmbedding of TextEmbeddingInferenceUpdateOptions
+        | TextExpansion of TextExpansionInferenceUpdateOptions
+        | QuestionAnswering of QuestionAnsweringInferenceUpdateOptions
 
     type TrainedModelEntities = {
         [<System.Text.Json.Serialization.JsonPropertyName("class_name")>]
         ClassName: string
         [<System.Text.Json.Serialization.JsonPropertyName("class_probability")>]
-        ClassProbability: Types.Double
+        ClassProbability: CoreTypes.Double
         [<System.Text.Json.Serialization.JsonPropertyName("entity")>]
         Entity: string
         [<System.Text.Json.Serialization.JsonPropertyName("start_pos")>]
-        StartPos: Types.Integer
+        StartPos: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("end_pos")>]
-        EndPos: Types.Integer
+        EndPos: CoreTypes.Integer
     }
 
     [<RequireQualifiedAccess>]
     type PredictedValue =
-        | ScalarValue of Types.ScalarValue
-        | Array of Types.ScalarValue list
+        | ScalarValue of CoreTypes.ScalarValue
+        | Array of CoreTypes.ScalarValue list
 
     type TopClassEntry = {
         [<System.Text.Json.Serialization.JsonPropertyName("class_name")>]
         ClassName: string
         [<System.Text.Json.Serialization.JsonPropertyName("class_probability")>]
-        ClassProbability: Types.Double
+        ClassProbability: CoreTypes.Double
         [<System.Text.Json.Serialization.JsonPropertyName("class_score")>]
-        ClassScore: Types.Double
+        ClassScore: CoreTypes.Double
     }
 
     type TrainedModelInferenceClassImportance = {
         [<System.Text.Json.Serialization.JsonPropertyName("class_name")>]
         ClassName: string
         [<System.Text.Json.Serialization.JsonPropertyName("importance")>]
-        Importance: Types.Double
+        Importance: CoreTypes.Double
     }
 
     type TrainedModelInferenceFeatureImportance = {
         [<System.Text.Json.Serialization.JsonPropertyName("feature_name")>]
         FeatureName: string
         [<System.Text.Json.Serialization.JsonPropertyName("importance")>]
-        Importance: Types.Double option
+        Importance: CoreTypes.Double option
         [<System.Text.Json.Serialization.JsonPropertyName("classes")>]
-        Classes: MlTypes.TrainedModelInferenceClassImportance list option
+        Classes: TrainedModelInferenceClassImportance list option
     }
 
     type InferenceResponseResult = {
         [<System.Text.Json.Serialization.JsonPropertyName("entities")>]
-        Entities: MlTypes.TrainedModelEntities list option
+        Entities: TrainedModelEntities list option
         [<System.Text.Json.Serialization.JsonPropertyName("is_truncated")>]
         IsTruncated: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("predicted_value")>]
@@ -1525,38 +1525,38 @@ module MlTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("predicted_value_sequence")>]
         PredictedValueSequence: string option
         [<System.Text.Json.Serialization.JsonPropertyName("prediction_probability")>]
-        PredictionProbability: Types.Double option
+        PredictionProbability: CoreTypes.Double option
         [<System.Text.Json.Serialization.JsonPropertyName("prediction_score")>]
-        PredictionScore: Types.Double option
+        PredictionScore: CoreTypes.Double option
         [<System.Text.Json.Serialization.JsonPropertyName("top_classes")>]
-        TopClasses: MlTypes.TopClassEntry list option
+        TopClasses: TopClassEntry list option
         [<System.Text.Json.Serialization.JsonPropertyName("warning")>]
         Warning: string option
         [<System.Text.Json.Serialization.JsonPropertyName("feature_importance")>]
-        FeatureImportance: MlTypes.TrainedModelInferenceFeatureImportance list option
+        FeatureImportance: TrainedModelInferenceFeatureImportance list option
     }
 
     type Influencer = {
         [<System.Text.Json.Serialization.JsonPropertyName("bucket_span")>]
-        BucketSpan: Types.DurationValue<Types.UnitSeconds>
+        BucketSpan: CoreTypes.DurationValue<CoreTypes.UnitSeconds>
         [<System.Text.Json.Serialization.JsonPropertyName("influencer_score")>]
-        InfluencerScore: Types.Double
+        InfluencerScore: CoreTypes.Double
         [<System.Text.Json.Serialization.JsonPropertyName("influencer_field_name")>]
-        InfluencerFieldName: Types.Field
+        InfluencerFieldName: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("influencer_field_value")>]
         InfluencerFieldValue: string
         [<System.Text.Json.Serialization.JsonPropertyName("initial_influencer_score")>]
-        InitialInfluencerScore: Types.Double
+        InitialInfluencerScore: CoreTypes.Double
         [<System.Text.Json.Serialization.JsonPropertyName("is_interim")>]
         IsInterim: bool
         [<System.Text.Json.Serialization.JsonPropertyName("job_id")>]
-        JobId: Types.Id
+        JobId: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("probability")>]
-        Probability: Types.Double
+        Probability: CoreTypes.Double
         [<System.Text.Json.Serialization.JsonPropertyName("result_type")>]
         ResultType: string
         [<System.Text.Json.Serialization.JsonPropertyName("timestamp")>]
-        Timestamp: Types.EpochTime<Types.UnitMillis>
+        Timestamp: CoreTypes.EpochTime<CoreTypes.UnitMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("foo")>]
         Foo: string option
     }
@@ -1569,9 +1569,9 @@ module MlTypes =
 
     type JobBlocked = {
         [<System.Text.Json.Serialization.JsonPropertyName("reason")>]
-        Reason: MlTypes.JobBlockedReason
+        Reason: JobBlockedReason
         [<System.Text.Json.Serialization.JsonPropertyName("task_id")>]
-        TaskId: Types.TaskId option
+        TaskId: CoreTypes.TaskId option
     }
 
     type ModelPlotConfig = {
@@ -1580,119 +1580,119 @@ module MlTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("enabled")>]
         Enabled: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("terms")>]
-        Terms: Types.Field option
+        Terms: CoreTypes.Field option
     }
 
     type Job = {
         [<System.Text.Json.Serialization.JsonPropertyName("allow_lazy_open")>]
         AllowLazyOpen: bool
         [<System.Text.Json.Serialization.JsonPropertyName("analysis_config")>]
-        AnalysisConfig: MlTypes.AnalysisConfig
+        AnalysisConfig: AnalysisConfig
         [<System.Text.Json.Serialization.JsonPropertyName("analysis_limits")>]
-        AnalysisLimits: MlTypes.AnalysisLimits option
+        AnalysisLimits: AnalysisLimits option
         [<System.Text.Json.Serialization.JsonPropertyName("background_persist_interval")>]
-        BackgroundPersistInterval: Types.Duration option
+        BackgroundPersistInterval: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("blocked")>]
-        Blocked: MlTypes.JobBlocked option
+        Blocked: JobBlocked option
         [<System.Text.Json.Serialization.JsonPropertyName("create_time")>]
-        CreateTime: Types.DateTime option
+        CreateTime: CoreTypes.DateTime option
         [<System.Text.Json.Serialization.JsonPropertyName("custom_settings")>]
-        CustomSettings: MlTypes.CustomSettings option
+        CustomSettings: CustomSettings option
         [<System.Text.Json.Serialization.JsonPropertyName("daily_model_snapshot_retention_after_days")>]
-        DailyModelSnapshotRetentionAfterDays: Types.Long option
+        DailyModelSnapshotRetentionAfterDays: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("data_description")>]
-        DataDescription: MlTypes.DataDescription
+        DataDescription: DataDescription
         [<System.Text.Json.Serialization.JsonPropertyName("datafeed_config")>]
-        DatafeedConfig: MlTypes.Datafeed option
+        DatafeedConfig: Datafeed option
         [<System.Text.Json.Serialization.JsonPropertyName("deleting")>]
         Deleting: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("description")>]
         Description: string option
         [<System.Text.Json.Serialization.JsonPropertyName("finished_time")>]
-        FinishedTime: Types.DateTime option
+        FinishedTime: CoreTypes.DateTime option
         [<System.Text.Json.Serialization.JsonPropertyName("groups")>]
         Groups: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("job_id")>]
-        JobId: Types.Id
+        JobId: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("job_type")>]
         JobType: string option
         [<System.Text.Json.Serialization.JsonPropertyName("job_version")>]
-        JobVersion: Types.VersionString option
+        JobVersion: CoreTypes.VersionString option
         [<System.Text.Json.Serialization.JsonPropertyName("model_plot_config")>]
-        ModelPlotConfig: MlTypes.ModelPlotConfig option
+        ModelPlotConfig: ModelPlotConfig option
         [<System.Text.Json.Serialization.JsonPropertyName("model_snapshot_id")>]
-        ModelSnapshotId: Types.Id option
+        ModelSnapshotId: CoreTypes.Id option
         [<System.Text.Json.Serialization.JsonPropertyName("model_snapshot_retention_days")>]
-        ModelSnapshotRetentionDays: Types.Long
+        ModelSnapshotRetentionDays: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("renormalization_window_days")>]
-        RenormalizationWindowDays: Types.Long option
+        RenormalizationWindowDays: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("results_index_name")>]
-        ResultsIndexName: Types.IndexName
+        ResultsIndexName: CoreTypes.IndexName
         [<System.Text.Json.Serialization.JsonPropertyName("results_retention_days")>]
-        ResultsRetentionDays: Types.Long option
+        ResultsRetentionDays: CoreTypes.Long option
     }
 
     type JobConfig = {
         [<System.Text.Json.Serialization.JsonPropertyName("allow_lazy_open")>]
         AllowLazyOpen: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("analysis_config")>]
-        AnalysisConfig: MlTypes.AnalysisConfig
+        AnalysisConfig: AnalysisConfig
         [<System.Text.Json.Serialization.JsonPropertyName("analysis_limits")>]
-        AnalysisLimits: MlTypes.AnalysisLimits option
+        AnalysisLimits: AnalysisLimits option
         [<System.Text.Json.Serialization.JsonPropertyName("background_persist_interval")>]
-        BackgroundPersistInterval: Types.Duration option
+        BackgroundPersistInterval: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("custom_settings")>]
-        CustomSettings: MlTypes.CustomSettings option
+        CustomSettings: CustomSettings option
         [<System.Text.Json.Serialization.JsonPropertyName("daily_model_snapshot_retention_after_days")>]
-        DailyModelSnapshotRetentionAfterDays: Types.Long option
+        DailyModelSnapshotRetentionAfterDays: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("data_description")>]
-        DataDescription: MlTypes.DataDescription
+        DataDescription: DataDescription
         [<System.Text.Json.Serialization.JsonPropertyName("datafeed_config")>]
-        DatafeedConfig: MlTypes.DatafeedConfig option
+        DatafeedConfig: DatafeedConfig option
         [<System.Text.Json.Serialization.JsonPropertyName("description")>]
         Description: string option
         [<System.Text.Json.Serialization.JsonPropertyName("groups")>]
         Groups: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("job_id")>]
-        JobId: Types.Id option
+        JobId: CoreTypes.Id option
         [<System.Text.Json.Serialization.JsonPropertyName("job_type")>]
         JobType: string option
         [<System.Text.Json.Serialization.JsonPropertyName("model_plot_config")>]
-        ModelPlotConfig: MlTypes.ModelPlotConfig option
+        ModelPlotConfig: ModelPlotConfig option
         [<System.Text.Json.Serialization.JsonPropertyName("model_snapshot_retention_days")>]
-        ModelSnapshotRetentionDays: Types.Long option
+        ModelSnapshotRetentionDays: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("renormalization_window_days")>]
-        RenormalizationWindowDays: Types.Long option
+        RenormalizationWindowDays: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("results_index_name")>]
-        ResultsIndexName: Types.IndexName option
+        ResultsIndexName: CoreTypes.IndexName option
         [<System.Text.Json.Serialization.JsonPropertyName("results_retention_days")>]
-        ResultsRetentionDays: Types.Long option
+        ResultsRetentionDays: CoreTypes.Long option
     }
 
     type JobStatistics = {
         [<System.Text.Json.Serialization.JsonPropertyName("avg")>]
-        Avg: Types.Double
+        Avg: CoreTypes.Double
         [<System.Text.Json.Serialization.JsonPropertyName("max")>]
-        Max: Types.Double
+        Max: CoreTypes.Double
         [<System.Text.Json.Serialization.JsonPropertyName("min")>]
-        Min: Types.Double
+        Min: CoreTypes.Double
         [<System.Text.Json.Serialization.JsonPropertyName("total")>]
-        Total: Types.Double
+        Total: CoreTypes.Double
     }
 
     type JobForecastStatistics = {
         [<System.Text.Json.Serialization.JsonPropertyName("memory_bytes")>]
-        MemoryBytes: MlTypes.JobStatistics option
+        MemoryBytes: JobStatistics option
         [<System.Text.Json.Serialization.JsonPropertyName("processing_time_ms")>]
-        ProcessingTimeMs: MlTypes.JobStatistics option
+        ProcessingTimeMs: JobStatistics option
         [<System.Text.Json.Serialization.JsonPropertyName("records")>]
-        Records: MlTypes.JobStatistics option
+        Records: JobStatistics option
         [<System.Text.Json.Serialization.JsonPropertyName("status")>]
-        Status: Map<string, Types.Long> option
+        Status: Map<string, CoreTypes.Long> option
         [<System.Text.Json.Serialization.JsonPropertyName("total")>]
-        Total: Types.Long
+        Total: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("forecasted_jobs")>]
-        ForecastedJobs: Types.Integer
+        ForecastedJobs: CoreTypes.Integer
     }
 
     [<RequireQualifiedAccess>]
@@ -1711,89 +1711,89 @@ module MlTypes =
 
     type ModelSizeStats = {
         [<System.Text.Json.Serialization.JsonPropertyName("bucket_allocation_failures_count")>]
-        BucketAllocationFailuresCount: Types.Long
+        BucketAllocationFailuresCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("job_id")>]
-        JobId: Types.Id
+        JobId: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("log_time")>]
-        LogTime: Types.DateTime
+        LogTime: CoreTypes.DateTime
         [<System.Text.Json.Serialization.JsonPropertyName("memory_status")>]
-        MemoryStatus: MlTypes.MemoryStatus
+        MemoryStatus: MemoryStatus
         [<System.Text.Json.Serialization.JsonPropertyName("model_bytes")>]
-        ModelBytes: Types.ByteSize
+        ModelBytes: CoreTypes.ByteSize
         [<System.Text.Json.Serialization.JsonPropertyName("model_bytes_exceeded")>]
-        ModelBytesExceeded: Types.ByteSize option
+        ModelBytesExceeded: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("model_bytes_memory_limit")>]
-        ModelBytesMemoryLimit: Types.ByteSize option
+        ModelBytesMemoryLimit: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("output_memory_allocator_bytes")>]
-        OutputMemoryAllocatorBytes: Types.ByteSize option
+        OutputMemoryAllocatorBytes: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("peak_model_bytes")>]
-        PeakModelBytes: Types.ByteSize option
+        PeakModelBytes: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("assignment_memory_basis")>]
         AssignmentMemoryBasis: string option
         [<System.Text.Json.Serialization.JsonPropertyName("result_type")>]
         ResultType: string
         [<System.Text.Json.Serialization.JsonPropertyName("total_by_field_count")>]
-        TotalByFieldCount: Types.Long
+        TotalByFieldCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("total_over_field_count")>]
-        TotalOverFieldCount: Types.Long
+        TotalOverFieldCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("total_partition_field_count")>]
-        TotalPartitionFieldCount: Types.Long
+        TotalPartitionFieldCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("categorization_status")>]
-        CategorizationStatus: MlTypes.CategorizationStatus
+        CategorizationStatus: CategorizationStatus
         [<System.Text.Json.Serialization.JsonPropertyName("categorized_doc_count")>]
-        CategorizedDocCount: Types.Integer
+        CategorizedDocCount: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("dead_category_count")>]
-        DeadCategoryCount: Types.Integer
+        DeadCategoryCount: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("failed_category_count")>]
-        FailedCategoryCount: Types.Integer
+        FailedCategoryCount: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("frequent_category_count")>]
-        FrequentCategoryCount: Types.Integer
+        FrequentCategoryCount: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("rare_category_count")>]
-        RareCategoryCount: Types.Integer
+        RareCategoryCount: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("total_category_count")>]
-        TotalCategoryCount: Types.Integer
+        TotalCategoryCount: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("timestamp")>]
-        Timestamp: Types.Long option
+        Timestamp: CoreTypes.Long option
     }
 
     type JobTimingStats = {
         [<System.Text.Json.Serialization.JsonPropertyName("average_bucket_processing_time_ms")>]
-        AverageBucketProcessingTimeMs: Types.DurationValue<Types.UnitFloatMillis> option
+        AverageBucketProcessingTimeMs: CoreTypes.DurationValue<CoreTypes.UnitFloatMillis> option
         [<System.Text.Json.Serialization.JsonPropertyName("bucket_count")>]
-        BucketCount: Types.Long
+        BucketCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("exponential_average_bucket_processing_time_ms")>]
-        ExponentialAverageBucketProcessingTimeMs: Types.DurationValue<Types.UnitFloatMillis> option
+        ExponentialAverageBucketProcessingTimeMs: CoreTypes.DurationValue<CoreTypes.UnitFloatMillis> option
         [<System.Text.Json.Serialization.JsonPropertyName("exponential_average_bucket_processing_time_per_hour_ms")>]
-        ExponentialAverageBucketProcessingTimePerHourMs: Types.DurationValue<Types.UnitFloatMillis>
+        ExponentialAverageBucketProcessingTimePerHourMs: CoreTypes.DurationValue<CoreTypes.UnitFloatMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("job_id")>]
-        JobId: Types.Id
+        JobId: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("total_bucket_processing_time_ms")>]
-        TotalBucketProcessingTimeMs: Types.DurationValue<Types.UnitFloatMillis>
+        TotalBucketProcessingTimeMs: CoreTypes.DurationValue<CoreTypes.UnitFloatMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("maximum_bucket_processing_time_ms")>]
-        MaximumBucketProcessingTimeMs: Types.DurationValue<Types.UnitFloatMillis> option
+        MaximumBucketProcessingTimeMs: CoreTypes.DurationValue<CoreTypes.UnitFloatMillis> option
         [<System.Text.Json.Serialization.JsonPropertyName("minimum_bucket_processing_time_ms")>]
-        MinimumBucketProcessingTimeMs: Types.DurationValue<Types.UnitFloatMillis> option
+        MinimumBucketProcessingTimeMs: CoreTypes.DurationValue<CoreTypes.UnitFloatMillis> option
     }
 
     type JobStats = {
         [<System.Text.Json.Serialization.JsonPropertyName("assignment_explanation")>]
         AssignmentExplanation: string option
         [<System.Text.Json.Serialization.JsonPropertyName("data_counts")>]
-        DataCounts: MlTypes.DataCounts
+        DataCounts: DataCounts
         [<System.Text.Json.Serialization.JsonPropertyName("forecasts_stats")>]
-        ForecastsStats: MlTypes.JobForecastStatistics
+        ForecastsStats: JobForecastStatistics
         [<System.Text.Json.Serialization.JsonPropertyName("job_id")>]
         JobId: string
         [<System.Text.Json.Serialization.JsonPropertyName("model_size_stats")>]
-        ModelSizeStats: MlTypes.ModelSizeStats
+        ModelSizeStats: ModelSizeStats
         [<System.Text.Json.Serialization.JsonPropertyName("node")>]
-        Node: MlTypes.DiscoveryNodeCompact option
+        Node: DiscoveryNodeCompact option
         [<System.Text.Json.Serialization.JsonPropertyName("open_time")>]
-        OpenTime: Types.DateTime option
+        OpenTime: CoreTypes.DateTime option
         [<System.Text.Json.Serialization.JsonPropertyName("state")>]
-        State: MlTypes.JobState
+        State: JobState
         [<System.Text.Json.Serialization.JsonPropertyName("timing_stats")>]
-        TimingStats: MlTypes.JobTimingStats
+        TimingStats: JobTimingStats
         [<System.Text.Json.Serialization.JsonPropertyName("deleting")>]
         Deleting: bool option
     }
@@ -1807,13 +1807,13 @@ module MlTypes =
 
     type ModelPackageConfig = {
         [<System.Text.Json.Serialization.JsonPropertyName("create_time")>]
-        CreateTime: Types.EpochTime<Types.UnitMillis> option
+        CreateTime: CoreTypes.EpochTime<CoreTypes.UnitMillis> option
         [<System.Text.Json.Serialization.JsonPropertyName("description")>]
         Description: string option
         [<System.Text.Json.Serialization.JsonPropertyName("inference_config")>]
         InferenceConfig: Map<string, System.Text.Json.JsonElement> option
         [<System.Text.Json.Serialization.JsonPropertyName("metadata")>]
-        Metadata: Types.Metadata option
+        Metadata: CoreTypes.Metadata option
         [<System.Text.Json.Serialization.JsonPropertyName("minimum_version")>]
         MinimumVersion: string option
         [<System.Text.Json.Serialization.JsonPropertyName("model_repository")>]
@@ -1821,13 +1821,13 @@ module MlTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("model_type")>]
         ModelType: string option
         [<System.Text.Json.Serialization.JsonPropertyName("packaged_model_id")>]
-        PackagedModelId: Types.Id
+        PackagedModelId: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("platform_architecture")>]
         PlatformArchitecture: string option
         [<System.Text.Json.Serialization.JsonPropertyName("prefix_strings")>]
-        PrefixStrings: MlTypes.TrainedModelPrefixStrings option
+        PrefixStrings: TrainedModelPrefixStrings option
         [<System.Text.Json.Serialization.JsonPropertyName("size")>]
-        Size: Types.ByteSize option
+        Size: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("sha256")>]
         Sha256: string option
         [<System.Text.Json.Serialization.JsonPropertyName("tags")>]
@@ -1840,23 +1840,23 @@ module MlTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("description")>]
         Description: string option
         [<System.Text.Json.Serialization.JsonPropertyName("job_id")>]
-        JobId: Types.Id
+        JobId: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("latest_record_time_stamp")>]
-        LatestRecordTimeStamp: Types.Integer option
+        LatestRecordTimeStamp: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("latest_result_time_stamp")>]
-        LatestResultTimeStamp: Types.Integer option
+        LatestResultTimeStamp: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("min_version")>]
-        MinVersion: Types.VersionString
+        MinVersion: CoreTypes.VersionString
         [<System.Text.Json.Serialization.JsonPropertyName("model_size_stats")>]
-        ModelSizeStats: MlTypes.ModelSizeStats option
+        ModelSizeStats: ModelSizeStats option
         [<System.Text.Json.Serialization.JsonPropertyName("retain")>]
         Retain: bool
         [<System.Text.Json.Serialization.JsonPropertyName("snapshot_doc_count")>]
-        SnapshotDocCount: Types.Long
+        SnapshotDocCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("snapshot_id")>]
-        SnapshotId: Types.Id
+        SnapshotId: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("timestamp")>]
-        Timestamp: Types.Long
+        Timestamp: CoreTypes.Long
     }
 
     [<RequireQualifiedAccess>]
@@ -1868,46 +1868,46 @@ module MlTypes =
 
     type ModelSnapshotUpgrade = {
         [<System.Text.Json.Serialization.JsonPropertyName("job_id")>]
-        JobId: Types.Id
+        JobId: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("snapshot_id")>]
-        SnapshotId: Types.Id
+        SnapshotId: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("state")>]
-        State: MlTypes.SnapshotUpgradeState
+        State: SnapshotUpgradeState
         [<System.Text.Json.Serialization.JsonPropertyName("node")>]
-        Node: MlTypes.DiscoveryNode
+        Node: DiscoveryNode
         [<System.Text.Json.Serialization.JsonPropertyName("assignment_explanation")>]
         AssignmentExplanation: string
     }
 
     type OverallBucketJob = {
         [<System.Text.Json.Serialization.JsonPropertyName("job_id")>]
-        JobId: Types.Id
+        JobId: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("max_anomaly_score")>]
-        MaxAnomalyScore: Types.Double
+        MaxAnomalyScore: CoreTypes.Double
     }
 
     type OverallBucket = {
         [<System.Text.Json.Serialization.JsonPropertyName("bucket_span")>]
-        BucketSpan: Types.DurationValue<Types.UnitSeconds>
+        BucketSpan: CoreTypes.DurationValue<CoreTypes.UnitSeconds>
         [<System.Text.Json.Serialization.JsonPropertyName("is_interim")>]
         IsInterim: bool
         [<System.Text.Json.Serialization.JsonPropertyName("jobs")>]
-        Jobs: MlTypes.OverallBucketJob list
+        Jobs: OverallBucketJob list
         [<System.Text.Json.Serialization.JsonPropertyName("overall_score")>]
-        OverallScore: Types.Double
+        OverallScore: CoreTypes.Double
         [<System.Text.Json.Serialization.JsonPropertyName("result_type")>]
         ResultType: string
         [<System.Text.Json.Serialization.JsonPropertyName("timestamp")>]
-        Timestamp: Types.EpochTime<Types.UnitMillis>
+        Timestamp: CoreTypes.EpochTime<CoreTypes.UnitMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("timestamp_string")>]
-        TimestampString: Types.DateTime option
+        TimestampString: CoreTypes.DateTime option
     }
 
     type Page = {
         [<System.Text.Json.Serialization.JsonPropertyName("from")>]
-        From: Types.Integer option
+        From: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("size")>]
-        Size: Types.Integer option
+        Size: CoreTypes.Integer option
     }
 
     [<RequireQualifiedAccess>]
@@ -1920,38 +1920,38 @@ module MlTypes =
 
     type TotalFeatureImportanceStatistics = {
         [<System.Text.Json.Serialization.JsonPropertyName("mean_magnitude")>]
-        MeanMagnitude: Types.Double
+        MeanMagnitude: CoreTypes.Double
         [<System.Text.Json.Serialization.JsonPropertyName("max")>]
-        Max: Types.Integer
+        Max: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("min")>]
-        Min: Types.Integer
+        Min: CoreTypes.Integer
     }
 
     type TotalFeatureImportanceClass = {
         [<System.Text.Json.Serialization.JsonPropertyName("class_name")>]
-        ClassName: Types.Name
+        ClassName: CoreTypes.Name
         [<System.Text.Json.Serialization.JsonPropertyName("importance")>]
-        Importance: MlTypes.TotalFeatureImportanceStatistics list
+        Importance: TotalFeatureImportanceStatistics list
     }
 
     type TotalFeatureImportance = {
         [<System.Text.Json.Serialization.JsonPropertyName("feature_name")>]
-        FeatureName: Types.Name
+        FeatureName: CoreTypes.Name
         [<System.Text.Json.Serialization.JsonPropertyName("importance")>]
-        Importance: MlTypes.TotalFeatureImportanceStatistics list
+        Importance: TotalFeatureImportanceStatistics list
         [<System.Text.Json.Serialization.JsonPropertyName("classes")>]
-        Classes: MlTypes.TotalFeatureImportanceClass list
+        Classes: TotalFeatureImportanceClass list
     }
 
     type TrainedModelAssignmentRoutingTable = {
         [<System.Text.Json.Serialization.JsonPropertyName("reason")>]
         Reason: string option
         [<System.Text.Json.Serialization.JsonPropertyName("routing_state")>]
-        RoutingState: MlTypes.RoutingState
+        RoutingState: RoutingState
         [<System.Text.Json.Serialization.JsonPropertyName("current_allocations")>]
-        CurrentAllocations: Types.Integer
+        CurrentAllocations: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("target_allocations")>]
-        TargetAllocations: Types.Integer
+        TargetAllocations: CoreTypes.Integer
     }
 
     [<RequireQualifiedAccess>]
@@ -1961,49 +1961,49 @@ module MlTypes =
 
     type TrainedModelAssignmentTaskParameters = {
         [<System.Text.Json.Serialization.JsonPropertyName("model_bytes")>]
-        ModelBytes: Types.ByteSize
+        ModelBytes: CoreTypes.ByteSize
         [<System.Text.Json.Serialization.JsonPropertyName("model_id")>]
-        ModelId: Types.Id
+        ModelId: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("deployment_id")>]
-        DeploymentId: Types.Id
+        DeploymentId: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("cache_size")>]
-        CacheSize: Types.ByteSize option
+        CacheSize: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("number_of_allocations")>]
-        NumberOfAllocations: Types.Integer
+        NumberOfAllocations: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("priority")>]
-        Priority: MlTypes.TrainingPriority
+        Priority: TrainingPriority
         [<System.Text.Json.Serialization.JsonPropertyName("per_deployment_memory_bytes")>]
-        PerDeploymentMemoryBytes: Types.ByteSize
+        PerDeploymentMemoryBytes: CoreTypes.ByteSize
         [<System.Text.Json.Serialization.JsonPropertyName("per_allocation_memory_bytes")>]
-        PerAllocationMemoryBytes: Types.ByteSize
+        PerAllocationMemoryBytes: CoreTypes.ByteSize
         [<System.Text.Json.Serialization.JsonPropertyName("queue_capacity")>]
-        QueueCapacity: Types.Integer
+        QueueCapacity: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("threads_per_allocation")>]
-        ThreadsPerAllocation: Types.Integer
+        ThreadsPerAllocation: CoreTypes.Integer
     }
 
     type TrainedModelAssignment = {
         [<System.Text.Json.Serialization.JsonPropertyName("adaptive_allocations")>]
-        AdaptiveAllocations: MlTypes.AdaptiveAllocationsSettings option option
+        AdaptiveAllocations: AdaptiveAllocationsSettings option option
         [<System.Text.Json.Serialization.JsonPropertyName("assignment_state")>]
-        AssignmentState: MlTypes.DeploymentAssignmentState
+        AssignmentState: DeploymentAssignmentState
         [<System.Text.Json.Serialization.JsonPropertyName("max_assigned_allocations")>]
-        MaxAssignedAllocations: Types.Integer option
+        MaxAssignedAllocations: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("reason")>]
         Reason: string option
         [<System.Text.Json.Serialization.JsonPropertyName("routing_table")>]
-        RoutingTable: Map<string, MlTypes.TrainedModelAssignmentRoutingTable>
+        RoutingTable: Map<string, TrainedModelAssignmentRoutingTable>
         [<System.Text.Json.Serialization.JsonPropertyName("start_time")>]
-        StartTime: Types.DateTime
+        StartTime: CoreTypes.DateTime
         [<System.Text.Json.Serialization.JsonPropertyName("task_parameters")>]
-        TaskParameters: MlTypes.TrainedModelAssignmentTaskParameters
+        TaskParameters: TrainedModelAssignmentTaskParameters
     }
 
     type TrainedModelAssignmentRoutingStateAndReason = {
         [<System.Text.Json.Serialization.JsonPropertyName("reason")>]
         Reason: string option
         [<System.Text.Json.Serialization.JsonPropertyName("routing_state")>]
-        RoutingState: MlTypes.RoutingState
+        RoutingState: RoutingState
     }
 
     [<RequireQualifiedAccess>]
@@ -2014,7 +2014,7 @@ module MlTypes =
 
     type TrainedModelConfigInput = {
         [<System.Text.Json.Serialization.JsonPropertyName("field_names")>]
-        FieldNames: Types.Field list
+        FieldNames: CoreTypes.Field list
     }
 
     type TrainedModelConfigMetadata = {
@@ -2023,191 +2023,191 @@ module MlTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("feature_importance_baseline")>]
         FeatureImportanceBaseline: Map<string, string> option
         [<System.Text.Json.Serialization.JsonPropertyName("hyperparameters")>]
-        Hyperparameters: MlTypes.Hyperparameter list option
+        Hyperparameters: Hyperparameter list option
         [<System.Text.Json.Serialization.JsonPropertyName("total_feature_importance")>]
-        TotalFeatureImportance: MlTypes.TotalFeatureImportance list option
+        TotalFeatureImportance: TotalFeatureImportance list option
     }
 
     type TrainedModelLocationIndex = {
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.IndexName
+        Name: CoreTypes.IndexName
     }
 
     type TrainedModelLocation = {
         [<System.Text.Json.Serialization.JsonPropertyName("index")>]
-        Index: MlTypes.TrainedModelLocationIndex
+        Index: TrainedModelLocationIndex
     }
 
     type TrainedModelConfig = {
         [<System.Text.Json.Serialization.JsonPropertyName("model_id")>]
-        ModelId: Types.Id
+        ModelId: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("model_type")>]
-        ModelType: MlTypes.TrainedModelType option
+        ModelType: TrainedModelType option
         [<System.Text.Json.Serialization.JsonPropertyName("tags")>]
         Tags: string list
         [<System.Text.Json.Serialization.JsonPropertyName("version")>]
-        Version: Types.VersionString option
+        Version: CoreTypes.VersionString option
         [<System.Text.Json.Serialization.JsonPropertyName("compressed_definition")>]
         CompressedDefinition: string option
         [<System.Text.Json.Serialization.JsonPropertyName("created_by")>]
         CreatedBy: string option
         [<System.Text.Json.Serialization.JsonPropertyName("create_time")>]
-        CreateTime: Types.DateTime option
+        CreateTime: CoreTypes.DateTime option
         [<System.Text.Json.Serialization.JsonPropertyName("default_field_map")>]
         DefaultFieldMap: Map<string, string> option
         [<System.Text.Json.Serialization.JsonPropertyName("description")>]
         Description: string option
         [<System.Text.Json.Serialization.JsonPropertyName("estimated_heap_memory_usage_bytes")>]
-        EstimatedHeapMemoryUsageBytes: Types.Integer option
+        EstimatedHeapMemoryUsageBytes: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("estimated_operations")>]
-        EstimatedOperations: Types.Integer option
+        EstimatedOperations: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("fully_defined")>]
         FullyDefined: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("inference_config")>]
-        InferenceConfig: MlTypes.InferenceConfigCreateContainer option
+        InferenceConfig: InferenceConfigCreateContainer option
         [<System.Text.Json.Serialization.JsonPropertyName("input")>]
-        Input: MlTypes.TrainedModelConfigInput
+        Input: TrainedModelConfigInput
         [<System.Text.Json.Serialization.JsonPropertyName("license_level")>]
         LicenseLevel: string option
         [<System.Text.Json.Serialization.JsonPropertyName("metadata")>]
-        Metadata: MlTypes.TrainedModelConfigMetadata option
+        Metadata: TrainedModelConfigMetadata option
         [<System.Text.Json.Serialization.JsonPropertyName("model_size_bytes")>]
-        ModelSizeBytes: Types.ByteSize option
+        ModelSizeBytes: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("model_package")>]
-        ModelPackage: MlTypes.ModelPackageConfig option
+        ModelPackage: ModelPackageConfig option
         [<System.Text.Json.Serialization.JsonPropertyName("location")>]
-        Location: MlTypes.TrainedModelLocation option
+        Location: TrainedModelLocation option
         [<System.Text.Json.Serialization.JsonPropertyName("platform_architecture")>]
         PlatformArchitecture: string option
         [<System.Text.Json.Serialization.JsonPropertyName("prefix_strings")>]
-        PrefixStrings: MlTypes.TrainedModelPrefixStrings option
+        PrefixStrings: TrainedModelPrefixStrings option
     }
 
     type TrainedModelDeploymentAllocationStatus = {
         [<System.Text.Json.Serialization.JsonPropertyName("allocation_count")>]
-        AllocationCount: Types.Integer
+        AllocationCount: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("state")>]
-        State: MlTypes.DeploymentAllocationState
+        State: DeploymentAllocationState
         [<System.Text.Json.Serialization.JsonPropertyName("target_allocation_count")>]
-        TargetAllocationCount: Types.Integer
+        TargetAllocationCount: CoreTypes.Integer
     }
 
     type TrainedModelDeploymentNodesStats = {
         [<System.Text.Json.Serialization.JsonPropertyName("average_inference_time_ms")>]
-        AverageInferenceTimeMs: Types.DurationValue<Types.UnitFloatMillis> option
+        AverageInferenceTimeMs: CoreTypes.DurationValue<CoreTypes.UnitFloatMillis> option
         [<System.Text.Json.Serialization.JsonPropertyName("average_inference_time_ms_last_minute")>]
-        AverageInferenceTimeMsLastMinute: Types.DurationValue<Types.UnitFloatMillis> option
+        AverageInferenceTimeMsLastMinute: CoreTypes.DurationValue<CoreTypes.UnitFloatMillis> option
         [<System.Text.Json.Serialization.JsonPropertyName("average_inference_time_ms_excluding_cache_hits")>]
-        AverageInferenceTimeMsExcludingCacheHits: Types.DurationValue<Types.UnitFloatMillis> option
+        AverageInferenceTimeMsExcludingCacheHits: CoreTypes.DurationValue<CoreTypes.UnitFloatMillis> option
         [<System.Text.Json.Serialization.JsonPropertyName("error_count")>]
-        ErrorCount: Types.Integer option
+        ErrorCount: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("inference_count")>]
-        InferenceCount: Types.Long option
+        InferenceCount: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("inference_cache_hit_count")>]
-        InferenceCacheHitCount: Types.Long option
+        InferenceCacheHitCount: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("inference_cache_hit_count_last_minute")>]
-        InferenceCacheHitCountLastMinute: Types.Long option
+        InferenceCacheHitCountLastMinute: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("last_access")>]
-        LastAccess: Types.EpochTime<Types.UnitMillis> option
+        LastAccess: CoreTypes.EpochTime<CoreTypes.UnitMillis> option
         [<System.Text.Json.Serialization.JsonPropertyName("node")>]
-        Node: MlTypes.DiscoveryNode option
+        Node: DiscoveryNode option
         [<System.Text.Json.Serialization.JsonPropertyName("number_of_allocations")>]
-        NumberOfAllocations: Types.Integer option
+        NumberOfAllocations: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("number_of_pending_requests")>]
-        NumberOfPendingRequests: Types.Integer option
+        NumberOfPendingRequests: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("peak_throughput_per_minute")>]
-        PeakThroughputPerMinute: Types.Long
+        PeakThroughputPerMinute: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("rejected_execution_count")>]
-        RejectedExecutionCount: Types.Integer option
+        RejectedExecutionCount: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("routing_state")>]
-        RoutingState: MlTypes.TrainedModelAssignmentRoutingStateAndReason
+        RoutingState: TrainedModelAssignmentRoutingStateAndReason
         [<System.Text.Json.Serialization.JsonPropertyName("start_time")>]
-        StartTime: Types.EpochTime<Types.UnitMillis> option
+        StartTime: CoreTypes.EpochTime<CoreTypes.UnitMillis> option
         [<System.Text.Json.Serialization.JsonPropertyName("threads_per_allocation")>]
-        ThreadsPerAllocation: Types.Integer option
+        ThreadsPerAllocation: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("throughput_last_minute")>]
-        ThroughputLastMinute: Types.Integer
+        ThroughputLastMinute: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("timeout_count")>]
-        TimeoutCount: Types.Integer option
+        TimeoutCount: CoreTypes.Integer option
     }
 
     type TrainedModelDeploymentStats = {
         [<System.Text.Json.Serialization.JsonPropertyName("adaptive_allocations")>]
-        AdaptiveAllocations: MlTypes.AdaptiveAllocationsSettings option
+        AdaptiveAllocations: AdaptiveAllocationsSettings option
         [<System.Text.Json.Serialization.JsonPropertyName("allocation_status")>]
-        AllocationStatus: MlTypes.TrainedModelDeploymentAllocationStatus option
+        AllocationStatus: TrainedModelDeploymentAllocationStatus option
         [<System.Text.Json.Serialization.JsonPropertyName("cache_size")>]
-        CacheSize: Types.ByteSize option
+        CacheSize: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("deployment_id")>]
-        DeploymentId: Types.Id
+        DeploymentId: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("error_count")>]
-        ErrorCount: Types.Integer option
+        ErrorCount: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("inference_count")>]
-        InferenceCount: Types.Integer option
+        InferenceCount: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("model_id")>]
-        ModelId: Types.Id
+        ModelId: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("nodes")>]
-        Nodes: MlTypes.TrainedModelDeploymentNodesStats list
+        Nodes: TrainedModelDeploymentNodesStats list
         [<System.Text.Json.Serialization.JsonPropertyName("number_of_allocations")>]
-        NumberOfAllocations: Types.Integer option
+        NumberOfAllocations: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("peak_throughput_per_minute")>]
-        PeakThroughputPerMinute: Types.Long
+        PeakThroughputPerMinute: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("priority")>]
-        Priority: MlTypes.TrainingPriority
+        Priority: TrainingPriority
         [<System.Text.Json.Serialization.JsonPropertyName("queue_capacity")>]
-        QueueCapacity: Types.Integer option
+        QueueCapacity: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("rejected_execution_count")>]
-        RejectedExecutionCount: Types.Integer option
+        RejectedExecutionCount: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("reason")>]
         Reason: string option
         [<System.Text.Json.Serialization.JsonPropertyName("start_time")>]
-        StartTime: Types.EpochTime<Types.UnitMillis>
+        StartTime: CoreTypes.EpochTime<CoreTypes.UnitMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("state")>]
-        State: MlTypes.DeploymentAssignmentState option
+        State: DeploymentAssignmentState option
         [<System.Text.Json.Serialization.JsonPropertyName("threads_per_allocation")>]
-        ThreadsPerAllocation: Types.Integer option
+        ThreadsPerAllocation: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("timeout_count")>]
-        TimeoutCount: Types.Integer option
+        TimeoutCount: CoreTypes.Integer option
     }
 
     type TrainedModelInferenceStats = {
         [<System.Text.Json.Serialization.JsonPropertyName("cache_miss_count")>]
-        CacheMissCount: Types.Integer
+        CacheMissCount: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("failure_count")>]
-        FailureCount: Types.Integer
+        FailureCount: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("inference_count")>]
-        InferenceCount: Types.Integer
+        InferenceCount: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("missing_all_fields_count")>]
-        MissingAllFieldsCount: Types.Integer
+        MissingAllFieldsCount: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("timestamp")>]
-        Timestamp: Types.EpochTime<Types.UnitMillis>
+        Timestamp: CoreTypes.EpochTime<CoreTypes.UnitMillis>
     }
 
     type TrainedModelSizeStats = {
         [<System.Text.Json.Serialization.JsonPropertyName("model_size_bytes")>]
-        ModelSizeBytes: Types.ByteSize
+        ModelSizeBytes: CoreTypes.ByteSize
         [<System.Text.Json.Serialization.JsonPropertyName("required_native_memory_bytes")>]
-        RequiredNativeMemoryBytes: Types.ByteSize
+        RequiredNativeMemoryBytes: CoreTypes.ByteSize
     }
 
     type TrainedModelStats = {
         [<System.Text.Json.Serialization.JsonPropertyName("deployment_stats")>]
-        DeploymentStats: MlTypes.TrainedModelDeploymentStats option
+        DeploymentStats: TrainedModelDeploymentStats option
         [<System.Text.Json.Serialization.JsonPropertyName("inference_stats")>]
-        InferenceStats: MlTypes.TrainedModelInferenceStats option
+        InferenceStats: TrainedModelInferenceStats option
         [<System.Text.Json.Serialization.JsonPropertyName("ingest")>]
         Ingest: Map<string, System.Text.Json.JsonElement> option
         [<System.Text.Json.Serialization.JsonPropertyName("model_id")>]
-        ModelId: Types.Id
+        ModelId: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("model_size_stats")>]
-        ModelSizeStats: MlTypes.TrainedModelSizeStats
+        ModelSizeStats: TrainedModelSizeStats
         [<System.Text.Json.Serialization.JsonPropertyName("pipeline_count")>]
-        PipelineCount: Types.Integer
+        PipelineCount: CoreTypes.Integer
     }
 
     type TransformAuthorization = {
         [<System.Text.Json.Serialization.JsonPropertyName("api_key")>]
-        ApiKey: MlTypes.ApiKeyAuthorization option
+        ApiKey: ApiKeyAuthorization option
         [<System.Text.Json.Serialization.JsonPropertyName("roles")>]
         Roles: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("service_account")>]

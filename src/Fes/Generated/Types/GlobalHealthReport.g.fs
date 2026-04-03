@@ -28,9 +28,9 @@ module GlobalHealthReport =
         [<System.Text.Json.Serialization.JsonPropertyName("id")>]
         Id: string
         [<System.Text.Json.Serialization.JsonPropertyName("impact_areas")>]
-        ImpactAreas: GlobalHealthReport.ImpactArea list
+        ImpactAreas: ImpactArea list
         [<System.Text.Json.Serialization.JsonPropertyName("severity")>]
-        Severity: Types.Integer
+        Severity: CoreTypes.Integer
     }
 
     type IndicatorNode = {
@@ -42,9 +42,9 @@ module GlobalHealthReport =
 
     type DiagnosisAffectedResources = {
         [<System.Text.Json.Serialization.JsonPropertyName("indices")>]
-        Indices: Types.Indices option
+        Indices: CoreTypes.Indices option
         [<System.Text.Json.Serialization.JsonPropertyName("nodes")>]
-        Nodes: GlobalHealthReport.IndicatorNode list option
+        Nodes: IndicatorNode list option
         [<System.Text.Json.Serialization.JsonPropertyName("slm_policies")>]
         SlmPolicies: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("feature_states")>]
@@ -59,7 +59,7 @@ module GlobalHealthReport =
         [<System.Text.Json.Serialization.JsonPropertyName("action")>]
         Action: string
         [<System.Text.Json.Serialization.JsonPropertyName("affected_resources")>]
-        AffectedResources: GlobalHealthReport.DiagnosisAffectedResources
+        AffectedResources: DiagnosisAffectedResources
         [<System.Text.Json.Serialization.JsonPropertyName("cause")>]
         Cause: string
         [<System.Text.Json.Serialization.JsonPropertyName("help_url")>]
@@ -68,61 +68,61 @@ module GlobalHealthReport =
 
     type BaseIndicator = {
         [<System.Text.Json.Serialization.JsonPropertyName("status")>]
-        Status: GlobalHealthReport.IndicatorHealthStatus
+        Status: IndicatorHealthStatus
         [<System.Text.Json.Serialization.JsonPropertyName("symptom")>]
         Symptom: string
         [<System.Text.Json.Serialization.JsonPropertyName("impacts")>]
-        Impacts: GlobalHealthReport.Impact list option
+        Impacts: Impact list option
         [<System.Text.Json.Serialization.JsonPropertyName("diagnosis")>]
-        Diagnosis: GlobalHealthReport.Diagnosis list option
+        Diagnosis: Diagnosis list option
     }
 
     type StagnatingBackingIndices = {
         [<System.Text.Json.Serialization.JsonPropertyName("index_name")>]
-        IndexName: Types.IndexName
+        IndexName: CoreTypes.IndexName
         [<System.Text.Json.Serialization.JsonPropertyName("first_occurrence_timestamp")>]
-        FirstOccurrenceTimestamp: Types.Long
+        FirstOccurrenceTimestamp: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("retry_count")>]
-        RetryCount: Types.Integer
+        RetryCount: CoreTypes.Integer
     }
 
     type DataStreamLifecycleDetails = {
         [<System.Text.Json.Serialization.JsonPropertyName("stagnating_backing_indices_count")>]
-        StagnatingBackingIndicesCount: Types.Integer
+        StagnatingBackingIndicesCount: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("total_backing_indices_in_error")>]
-        TotalBackingIndicesInError: Types.Integer
+        TotalBackingIndicesInError: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("stagnating_backing_indices")>]
-        StagnatingBackingIndices: GlobalHealthReport.StagnatingBackingIndices list option
+        StagnatingBackingIndices: StagnatingBackingIndices list option
     }
 
     /// DATA_STREAM_LIFECYCLE
     type DataStreamLifecycleIndicator = {
         [<System.Text.Json.Serialization.JsonPropertyName("details")>]
-        Details: GlobalHealthReport.DataStreamLifecycleDetails option
+        Details: DataStreamLifecycleDetails option
     }
 
     type DiskIndicatorDetails = {
         [<System.Text.Json.Serialization.JsonPropertyName("indices_with_readonly_block")>]
-        IndicesWithReadonlyBlock: Types.Long
+        IndicesWithReadonlyBlock: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("nodes_with_enough_disk_space")>]
-        NodesWithEnoughDiskSpace: Types.Long
+        NodesWithEnoughDiskSpace: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("nodes_over_high_watermark")>]
-        NodesOverHighWatermark: Types.Long
+        NodesOverHighWatermark: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("nodes_over_flood_stage_watermark")>]
-        NodesOverFloodStageWatermark: Types.Long
+        NodesOverFloodStageWatermark: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("nodes_with_unknown_disk_status")>]
-        NodesWithUnknownDiskStatus: Types.Long
+        NodesWithUnknownDiskStatus: CoreTypes.Long
     }
 
     /// DISK
     type DiskIndicator = {
         [<System.Text.Json.Serialization.JsonPropertyName("details")>]
-        Details: GlobalHealthReport.DiskIndicatorDetails option
+        Details: DiskIndicatorDetails option
     }
 
     type FileSettingsIndicatorDetails = {
         [<System.Text.Json.Serialization.JsonPropertyName("failure_streak")>]
-        FailureStreak: Types.Long
+        FailureStreak: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("most_recent_failure")>]
         MostRecentFailure: string
     }
@@ -130,22 +130,22 @@ module GlobalHealthReport =
     /// FILE_SETTINGS
     type FileSettingsIndicator = {
         [<System.Text.Json.Serialization.JsonPropertyName("details")>]
-        Details: GlobalHealthReport.FileSettingsIndicatorDetails option
+        Details: FileSettingsIndicatorDetails option
     }
 
     type IlmIndicatorDetails = {
         [<System.Text.Json.Serialization.JsonPropertyName("ilm_status")>]
-        IlmStatus: Types.LifecycleOperationMode
+        IlmStatus: CoreTypes.LifecycleOperationMode
         [<System.Text.Json.Serialization.JsonPropertyName("policies")>]
-        Policies: Types.Long
+        Policies: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("stagnating_indices")>]
-        StagnatingIndices: Types.Integer
+        StagnatingIndices: CoreTypes.Integer
     }
 
     /// ILM
     type IlmIndicator = {
         [<System.Text.Json.Serialization.JsonPropertyName("details")>]
-        Details: GlobalHealthReport.IlmIndicatorDetails option
+        Details: IlmIndicatorDetails option
     }
 
     type MasterIsStableIndicatorExceptionFetchingHistory = {
@@ -166,55 +166,55 @@ module GlobalHealthReport =
 
     type MasterIsStableIndicatorDetails = {
         [<System.Text.Json.Serialization.JsonPropertyName("current_master")>]
-        CurrentMaster: GlobalHealthReport.IndicatorNode
+        CurrentMaster: IndicatorNode
         [<System.Text.Json.Serialization.JsonPropertyName("recent_masters")>]
-        RecentMasters: GlobalHealthReport.IndicatorNode list
+        RecentMasters: IndicatorNode list
         [<System.Text.Json.Serialization.JsonPropertyName("exception_fetching_history")>]
-        ExceptionFetchingHistory: GlobalHealthReport.MasterIsStableIndicatorExceptionFetchingHistory option
+        ExceptionFetchingHistory: MasterIsStableIndicatorExceptionFetchingHistory option
         [<System.Text.Json.Serialization.JsonPropertyName("cluster_formation")>]
-        ClusterFormation: GlobalHealthReport.MasterIsStableIndicatorClusterFormationNode list option
+        ClusterFormation: MasterIsStableIndicatorClusterFormationNode list option
     }
 
     /// MASTER_IS_STABLE
     type MasterIsStableIndicator = {
         [<System.Text.Json.Serialization.JsonPropertyName("details")>]
-        Details: GlobalHealthReport.MasterIsStableIndicatorDetails option
+        Details: MasterIsStableIndicatorDetails option
     }
 
     type ShardsAvailabilityIndicatorDetails = {
         [<System.Text.Json.Serialization.JsonPropertyName("creating_primaries")>]
-        CreatingPrimaries: Types.Long
+        CreatingPrimaries: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("creating_replicas")>]
-        CreatingReplicas: Types.Long
+        CreatingReplicas: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("initializing_primaries")>]
-        InitializingPrimaries: Types.Long
+        InitializingPrimaries: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("initializing_replicas")>]
-        InitializingReplicas: Types.Long
+        InitializingReplicas: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("restarting_primaries")>]
-        RestartingPrimaries: Types.Long
+        RestartingPrimaries: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("restarting_replicas")>]
-        RestartingReplicas: Types.Long
+        RestartingReplicas: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("started_primaries")>]
-        StartedPrimaries: Types.Long
+        StartedPrimaries: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("started_replicas")>]
-        StartedReplicas: Types.Long
+        StartedReplicas: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("unassigned_primaries")>]
-        UnassignedPrimaries: Types.Long
+        UnassignedPrimaries: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("unassigned_replicas")>]
-        UnassignedReplicas: Types.Long
+        UnassignedReplicas: CoreTypes.Long
     }
 
     /// SHARDS_AVAILABILITY
     type ShardsAvailabilityIndicator = {
         [<System.Text.Json.Serialization.JsonPropertyName("details")>]
-        Details: GlobalHealthReport.ShardsAvailabilityIndicatorDetails option
+        Details: ShardsAvailabilityIndicatorDetails option
     }
 
     type RepositoryIntegrityIndicatorDetails = {
         [<System.Text.Json.Serialization.JsonPropertyName("total_repositories")>]
-        TotalRepositories: Types.Long option
+        TotalRepositories: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("corrupted_repositories")>]
-        CorruptedRepositories: Types.Long option
+        CorruptedRepositories: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("corrupted")>]
         Corrupted: string list option
     }
@@ -222,69 +222,69 @@ module GlobalHealthReport =
     /// REPOSITORY_INTEGRITY
     type RepositoryIntegrityIndicator = {
         [<System.Text.Json.Serialization.JsonPropertyName("details")>]
-        Details: GlobalHealthReport.RepositoryIntegrityIndicatorDetails option
+        Details: RepositoryIntegrityIndicatorDetails option
     }
 
     type SlmIndicatorUnhealthyPolicies = {
         [<System.Text.Json.Serialization.JsonPropertyName("count")>]
-        Count: Types.Long
+        Count: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("invocations_since_last_success")>]
-        InvocationsSinceLastSuccess: Map<string, Types.Long> option
+        InvocationsSinceLastSuccess: Map<string, CoreTypes.Long> option
     }
 
     type SlmIndicatorDetails = {
         [<System.Text.Json.Serialization.JsonPropertyName("slm_status")>]
-        SlmStatus: Types.LifecycleOperationMode
+        SlmStatus: CoreTypes.LifecycleOperationMode
         [<System.Text.Json.Serialization.JsonPropertyName("policies")>]
-        Policies: Types.Long
+        Policies: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("unhealthy_policies")>]
-        UnhealthyPolicies: GlobalHealthReport.SlmIndicatorUnhealthyPolicies option
+        UnhealthyPolicies: SlmIndicatorUnhealthyPolicies option
     }
 
     /// SLM
     type SlmIndicator = {
         [<System.Text.Json.Serialization.JsonPropertyName("details")>]
-        Details: GlobalHealthReport.SlmIndicatorDetails option
+        Details: SlmIndicatorDetails option
     }
 
     type ShardsCapacityIndicatorTierDetail = {
         [<System.Text.Json.Serialization.JsonPropertyName("max_shards_in_cluster")>]
-        MaxShardsInCluster: Types.Integer
+        MaxShardsInCluster: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("current_used_shards")>]
-        CurrentUsedShards: Types.Integer option
+        CurrentUsedShards: CoreTypes.Integer option
     }
 
     type ShardsCapacityIndicatorDetails = {
         [<System.Text.Json.Serialization.JsonPropertyName("data")>]
-        Data: GlobalHealthReport.ShardsCapacityIndicatorTierDetail
+        Data: ShardsCapacityIndicatorTierDetail
         [<System.Text.Json.Serialization.JsonPropertyName("frozen")>]
-        Frozen: GlobalHealthReport.ShardsCapacityIndicatorTierDetail
+        Frozen: ShardsCapacityIndicatorTierDetail
     }
 
     /// SHARDS_CAPACITY
     type ShardsCapacityIndicator = {
         [<System.Text.Json.Serialization.JsonPropertyName("details")>]
-        Details: GlobalHealthReport.ShardsCapacityIndicatorDetails option
+        Details: ShardsCapacityIndicatorDetails option
     }
 
     type Indicators = {
         [<System.Text.Json.Serialization.JsonPropertyName("master_is_stable")>]
-        MasterIsStable: GlobalHealthReport.MasterIsStableIndicator option
+        MasterIsStable: MasterIsStableIndicator option
         [<System.Text.Json.Serialization.JsonPropertyName("shards_availability")>]
-        ShardsAvailability: GlobalHealthReport.ShardsAvailabilityIndicator option
+        ShardsAvailability: ShardsAvailabilityIndicator option
         [<System.Text.Json.Serialization.JsonPropertyName("disk")>]
-        Disk: GlobalHealthReport.DiskIndicator option
+        Disk: DiskIndicator option
         [<System.Text.Json.Serialization.JsonPropertyName("repository_integrity")>]
-        RepositoryIntegrity: GlobalHealthReport.RepositoryIntegrityIndicator option
+        RepositoryIntegrity: RepositoryIntegrityIndicator option
         [<System.Text.Json.Serialization.JsonPropertyName("data_stream_lifecycle")>]
-        DataStreamLifecycle: GlobalHealthReport.DataStreamLifecycleIndicator option
+        DataStreamLifecycle: DataStreamLifecycleIndicator option
         [<System.Text.Json.Serialization.JsonPropertyName("ilm")>]
-        Ilm: GlobalHealthReport.IlmIndicator option
+        Ilm: IlmIndicator option
         [<System.Text.Json.Serialization.JsonPropertyName("slm")>]
-        Slm: GlobalHealthReport.SlmIndicator option
+        Slm: SlmIndicator option
         [<System.Text.Json.Serialization.JsonPropertyName("shards_capacity")>]
-        ShardsCapacity: GlobalHealthReport.ShardsCapacityIndicator option
+        ShardsCapacity: ShardsCapacityIndicator option
         [<System.Text.Json.Serialization.JsonPropertyName("file_settings")>]
-        FileSettings: GlobalHealthReport.FileSettingsIndicator option
+        FileSettings: FileSettingsIndicator option
     }
 

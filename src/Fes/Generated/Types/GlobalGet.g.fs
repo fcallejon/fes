@@ -9,7 +9,7 @@ module GlobalGet =
 
     type GetResult<'tDocument> = {
         [<System.Text.Json.Serialization.JsonPropertyName("_index")>]
-        Index: Types.IndexName
+        Index: CoreTypes.IndexName
         [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
         Fields: Map<string, System.Text.Json.JsonElement> option
         [<System.Text.Json.Serialization.JsonPropertyName("_ignored")>]
@@ -17,16 +17,16 @@ module GlobalGet =
         [<System.Text.Json.Serialization.JsonPropertyName("found")>]
         Found: bool
         [<System.Text.Json.Serialization.JsonPropertyName("_id")>]
-        Id: Types.Id
+        Id: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("_primary_term")>]
-        PrimaryTerm: Types.Long option
+        PrimaryTerm: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("_routing")>]
         Routing: string option
         [<System.Text.Json.Serialization.JsonPropertyName("_seq_no")>]
-        SeqNo: Types.SequenceNumber option
+        SeqNo: CoreTypes.SequenceNumber option
         [<System.Text.Json.Serialization.JsonPropertyName("_source")>]
         Source: 'tDocument option
         [<System.Text.Json.Serialization.JsonPropertyName("_version")>]
-        Version: Types.VersionNumber option
+        Version: CoreTypes.VersionNumber option
     }
 

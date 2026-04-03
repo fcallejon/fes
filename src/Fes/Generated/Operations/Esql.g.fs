@@ -17,7 +17,7 @@ module EsqlOperations =
         DropNullColumns: bool option
         Format: EsqlTypes.EsqlFormat option
         Columnar: bool option
-        Filter: TypesQueryDsl.QueryContainer option
+        Filter: CoreTypes.QueryContainer option
         TimeZone: string option
         Locale: string option
         Params: EsqlTypes.ESQLParams option
@@ -26,10 +26,10 @@ module EsqlOperations =
         Tables: Map<string, Map<string, EsqlTypes.TableValuesContainer>> option
         IncludeCcsMetadata: bool option
         IncludeExecutionMetadata: bool option
-        WaitForCompletionTimeout: Types.Duration option
-        KeepAlive: Types.Duration option
+        WaitForCompletionTimeout: CoreTypes.Duration option
+        KeepAlive: CoreTypes.Duration option
         KeepOnCompletion: bool option
-        ProjectRouting: Types.ProjectRouting option
+        ProjectRouting: CoreTypes.ProjectRouting option
     }
 
         with
@@ -100,7 +100,7 @@ module EsqlOperations =
             { state with Columnar = Some value }
 
         [<CustomOperation("filter")>]
-        member _.Filter(state: EsqlAsyncQueryRequest, value: TypesQueryDsl.QueryContainer) =
+        member _.Filter(state: EsqlAsyncQueryRequest, value: CoreTypes.QueryContainer) =
             { state with Filter = Some value }
 
         [<CustomOperation("timeZone")>]
@@ -136,11 +136,11 @@ module EsqlOperations =
             { state with IncludeExecutionMetadata = Some value }
 
         [<CustomOperation("waitForCompletionTimeout")>]
-        member _.WaitForCompletionTimeout(state: EsqlAsyncQueryRequest, value: Types.Duration) =
+        member _.WaitForCompletionTimeout(state: EsqlAsyncQueryRequest, value: CoreTypes.Duration) =
             { state with WaitForCompletionTimeout = Some value }
 
         [<CustomOperation("keepAlive")>]
-        member _.KeepAlive(state: EsqlAsyncQueryRequest, value: Types.Duration) =
+        member _.KeepAlive(state: EsqlAsyncQueryRequest, value: CoreTypes.Duration) =
             { state with KeepAlive = Some value }
 
         [<CustomOperation("keepOnCompletion")>]
@@ -148,7 +148,7 @@ module EsqlOperations =
             { state with KeepOnCompletion = Some value }
 
         [<CustomOperation("projectRouting")>]
-        member _.ProjectRouting(state: EsqlAsyncQueryRequest, value: Types.ProjectRouting) =
+        member _.ProjectRouting(state: EsqlAsyncQueryRequest, value: CoreTypes.ProjectRouting) =
             { state with ProjectRouting = Some value }
 
     let esqlAsyncQueryRequest = EsqlAsyncQueryRequestBuilder()
@@ -164,7 +164,7 @@ module EsqlOperations =
             { req with Format = Some value }
         let withColumnar (value: bool) (req: EsqlAsyncQueryRequest) =
             { req with Columnar = Some value }
-        let withFilter (value: TypesQueryDsl.QueryContainer) (req: EsqlAsyncQueryRequest) =
+        let withFilter (value: CoreTypes.QueryContainer) (req: EsqlAsyncQueryRequest) =
             { req with Filter = Some value }
         let withTimeZone (value: string) (req: EsqlAsyncQueryRequest) =
             { req with TimeZone = Some value }
@@ -182,17 +182,17 @@ module EsqlOperations =
             { req with IncludeCcsMetadata = Some value }
         let withIncludeExecutionMetadata (value: bool) (req: EsqlAsyncQueryRequest) =
             { req with IncludeExecutionMetadata = Some value }
-        let withWaitForCompletionTimeout (value: Types.Duration) (req: EsqlAsyncQueryRequest) =
+        let withWaitForCompletionTimeout (value: CoreTypes.Duration) (req: EsqlAsyncQueryRequest) =
             { req with WaitForCompletionTimeout = Some value }
-        let withKeepAlive (value: Types.Duration) (req: EsqlAsyncQueryRequest) =
+        let withKeepAlive (value: CoreTypes.Duration) (req: EsqlAsyncQueryRequest) =
             { req with KeepAlive = Some value }
         let withKeepOnCompletion (value: bool) (req: EsqlAsyncQueryRequest) =
             { req with KeepOnCompletion = Some value }
-        let withProjectRouting (value: Types.ProjectRouting) (req: EsqlAsyncQueryRequest) =
+        let withProjectRouting (value: CoreTypes.ProjectRouting) (req: EsqlAsyncQueryRequest) =
             { req with ProjectRouting = Some value }
 
     type EsqlAsyncQueryDeleteRequest = {
-        Id: Types.Id
+        Id: CoreTypes.Id
     }
 
         with
@@ -206,7 +206,7 @@ module EsqlOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type EsqlAsyncQueryDeleteResponse = Types.AcknowledgedResponseBase
+    type EsqlAsyncQueryDeleteResponse = CoreTypes.AcknowledgedResponseBase
 
     type EsqlAsyncQueryDeleteRequestBuilder() =
         member _.Yield(_: unit) : EsqlAsyncQueryDeleteRequest =
@@ -215,17 +215,17 @@ module EsqlOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: EsqlAsyncQueryDeleteRequest, value: Types.Id) =
+        member _.Id(state: EsqlAsyncQueryDeleteRequest, value: CoreTypes.Id) =
             { state with Id = value }
 
     let esqlAsyncQueryDeleteRequest = EsqlAsyncQueryDeleteRequestBuilder()
 
     type EsqlAsyncQueryGetRequest = {
-        Id: Types.Id
+        Id: CoreTypes.Id
         DropNullColumns: bool option
         Format: EsqlTypes.EsqlFormat option
-        KeepAlive: Types.Duration option
-        WaitForCompletionTimeout: Types.Duration option
+        KeepAlive: CoreTypes.Duration option
+        WaitForCompletionTimeout: CoreTypes.Duration option
     }
 
         with
@@ -262,7 +262,7 @@ module EsqlOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: EsqlAsyncQueryGetRequest, value: Types.Id) =
+        member _.Id(state: EsqlAsyncQueryGetRequest, value: CoreTypes.Id) =
             { state with Id = value }
 
         [<CustomOperation("dropNullColumns")>]
@@ -274,11 +274,11 @@ module EsqlOperations =
             { state with Format = Some value }
 
         [<CustomOperation("keepAlive")>]
-        member _.KeepAlive(state: EsqlAsyncQueryGetRequest, value: Types.Duration) =
+        member _.KeepAlive(state: EsqlAsyncQueryGetRequest, value: CoreTypes.Duration) =
             { state with KeepAlive = Some value }
 
         [<CustomOperation("waitForCompletionTimeout")>]
-        member _.WaitForCompletionTimeout(state: EsqlAsyncQueryGetRequest, value: Types.Duration) =
+        member _.WaitForCompletionTimeout(state: EsqlAsyncQueryGetRequest, value: CoreTypes.Duration) =
             { state with WaitForCompletionTimeout = Some value }
 
     let esqlAsyncQueryGetRequest = EsqlAsyncQueryGetRequestBuilder()
@@ -288,13 +288,13 @@ module EsqlOperations =
             { req with DropNullColumns = Some value }
         let withFormat (value: EsqlTypes.EsqlFormat) (req: EsqlAsyncQueryGetRequest) =
             { req with Format = Some value }
-        let withKeepAlive (value: Types.Duration) (req: EsqlAsyncQueryGetRequest) =
+        let withKeepAlive (value: CoreTypes.Duration) (req: EsqlAsyncQueryGetRequest) =
             { req with KeepAlive = Some value }
-        let withWaitForCompletionTimeout (value: Types.Duration) (req: EsqlAsyncQueryGetRequest) =
+        let withWaitForCompletionTimeout (value: CoreTypes.Duration) (req: EsqlAsyncQueryGetRequest) =
             { req with WaitForCompletionTimeout = Some value }
 
     type EsqlAsyncQueryStopRequest = {
-        Id: Types.Id
+        Id: CoreTypes.Id
         DropNullColumns: bool option
     }
 
@@ -326,7 +326,7 @@ module EsqlOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: EsqlAsyncQueryStopRequest, value: Types.Id) =
+        member _.Id(state: EsqlAsyncQueryStopRequest, value: CoreTypes.Id) =
             { state with Id = value }
 
         [<CustomOperation("dropNullColumns")>]
@@ -340,7 +340,7 @@ module EsqlOperations =
             { req with DropNullColumns = Some value }
 
     type EsqlDeleteViewRequest = {
-        Name: Types.Id
+        Name: CoreTypes.Id
     }
 
         with
@@ -354,7 +354,7 @@ module EsqlOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type EsqlDeleteViewResponse = Types.AcknowledgedResponseBase
+    type EsqlDeleteViewResponse = CoreTypes.AcknowledgedResponseBase
 
     type EsqlDeleteViewRequestBuilder() =
         member _.Yield(_: unit) : EsqlDeleteViewRequest =
@@ -363,13 +363,13 @@ module EsqlOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: EsqlDeleteViewRequest, value: Types.Id) =
+        member _.Name(state: EsqlDeleteViewRequest, value: CoreTypes.Id) =
             { state with Name = value }
 
     let esqlDeleteViewRequest = EsqlDeleteViewRequestBuilder()
 
     type EsqlGetQueryRequest = {
-        Id: Types.Id
+        Id: CoreTypes.Id
     }
 
         with
@@ -392,13 +392,13 @@ module EsqlOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: EsqlGetQueryRequest, value: Types.Id) =
+        member _.Id(state: EsqlGetQueryRequest, value: CoreTypes.Id) =
             { state with Id = value }
 
     let esqlGetQueryRequest = EsqlGetQueryRequestBuilder()
 
     type EsqlGetViewRequest = {
-        Name: Types.Id
+        Name: CoreTypes.Id
     }
 
         with
@@ -421,7 +421,7 @@ module EsqlOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: EsqlGetViewRequest, value: Types.Id) =
+        member _.Name(state: EsqlGetViewRequest, value: CoreTypes.Id) =
             { state with Name = value }
 
     let esqlGetViewRequest = EsqlGetViewRequestBuilder()
@@ -449,7 +449,7 @@ module EsqlOperations =
     let esqlListQueriesRequest = EsqlListQueriesRequestBuilder()
 
     type EsqlPutViewRequest = {
-        Name: Types.Id
+        Name: CoreTypes.Id
         Query: string
     }
 
@@ -465,7 +465,7 @@ module EsqlOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type EsqlPutViewResponse = Types.AcknowledgedResponseBase
+    type EsqlPutViewResponse = CoreTypes.AcknowledgedResponseBase
 
     type EsqlPutViewRequestBuilder() =
         member _.Yield(_: unit) : EsqlPutViewRequest =
@@ -475,7 +475,7 @@ module EsqlOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: EsqlPutViewRequest, value: Types.Id) =
+        member _.Name(state: EsqlPutViewRequest, value: CoreTypes.Id) =
             { state with Name = value }
 
         [<CustomOperation("query")>]
@@ -494,7 +494,7 @@ module EsqlOperations =
         DropNullColumns: bool option
         AllowPartialResults: bool option
         Columnar: bool option
-        Filter: TypesQueryDsl.QueryContainer option
+        Filter: CoreTypes.QueryContainer option
         TimeZone: string option
         Locale: string option
         Params: EsqlTypes.ESQLParams option
@@ -503,7 +503,7 @@ module EsqlOperations =
         Tables: Map<string, Map<string, EsqlTypes.TableValuesContainer>> option
         IncludeCcsMetadata: bool option
         IncludeExecutionMetadata: bool option
-        ProjectRouting: Types.ProjectRouting option
+        ProjectRouting: CoreTypes.ProjectRouting option
     }
 
         with
@@ -571,7 +571,7 @@ module EsqlOperations =
             { state with Columnar = Some value }
 
         [<CustomOperation("filter")>]
-        member _.Filter(state: EsqlQueryRequest, value: TypesQueryDsl.QueryContainer) =
+        member _.Filter(state: EsqlQueryRequest, value: CoreTypes.QueryContainer) =
             { state with Filter = Some value }
 
         [<CustomOperation("timeZone")>]
@@ -607,7 +607,7 @@ module EsqlOperations =
             { state with IncludeExecutionMetadata = Some value }
 
         [<CustomOperation("projectRouting")>]
-        member _.ProjectRouting(state: EsqlQueryRequest, value: Types.ProjectRouting) =
+        member _.ProjectRouting(state: EsqlQueryRequest, value: CoreTypes.ProjectRouting) =
             { state with ProjectRouting = Some value }
 
     let esqlQueryRequest = EsqlQueryRequestBuilder()
@@ -623,7 +623,7 @@ module EsqlOperations =
             { req with AllowPartialResults = Some value }
         let withColumnar (value: bool) (req: EsqlQueryRequest) =
             { req with Columnar = Some value }
-        let withFilter (value: TypesQueryDsl.QueryContainer) (req: EsqlQueryRequest) =
+        let withFilter (value: CoreTypes.QueryContainer) (req: EsqlQueryRequest) =
             { req with Filter = Some value }
         let withTimeZone (value: string) (req: EsqlQueryRequest) =
             { req with TimeZone = Some value }
@@ -641,6 +641,6 @@ module EsqlOperations =
             { req with IncludeCcsMetadata = Some value }
         let withIncludeExecutionMetadata (value: bool) (req: EsqlQueryRequest) =
             { req with IncludeExecutionMetadata = Some value }
-        let withProjectRouting (value: Types.ProjectRouting) (req: EsqlQueryRequest) =
+        let withProjectRouting (value: CoreTypes.ProjectRouting) (req: EsqlQueryRequest) =
             { req with ProjectRouting = Some value }
 

@@ -18,8 +18,8 @@ module IndicesGetMigrateReindexStatus =
         [<System.Text.Json.Serialization.JsonPropertyName("index")>]
         Index: string
         [<System.Text.Json.Serialization.JsonPropertyName("total_doc_count")>]
-        TotalDocCount: Types.Long
+        TotalDocCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("reindexed_doc_count")>]
-        ReindexedDocCount: Types.Long
+        ReindexedDocCount: CoreTypes.Long
     }
 

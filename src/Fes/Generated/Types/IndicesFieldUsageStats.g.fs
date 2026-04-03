@@ -9,65 +9,65 @@ module IndicesFieldUsageStats =
 
     type InvertedIndex = {
         [<System.Text.Json.Serialization.JsonPropertyName("terms")>]
-        Terms: Types.Uint
+        Terms: CoreTypes.Uint
         [<System.Text.Json.Serialization.JsonPropertyName("postings")>]
-        Postings: Types.Uint
+        Postings: CoreTypes.Uint
         [<System.Text.Json.Serialization.JsonPropertyName("proximity")>]
-        Proximity: Types.Uint
+        Proximity: CoreTypes.Uint
         [<System.Text.Json.Serialization.JsonPropertyName("positions")>]
-        Positions: Types.Uint
+        Positions: CoreTypes.Uint
         [<System.Text.Json.Serialization.JsonPropertyName("term_frequencies")>]
-        TermFrequencies: Types.Uint
+        TermFrequencies: CoreTypes.Uint
         [<System.Text.Json.Serialization.JsonPropertyName("offsets")>]
-        Offsets: Types.Uint
+        Offsets: CoreTypes.Uint
         [<System.Text.Json.Serialization.JsonPropertyName("payloads")>]
-        Payloads: Types.Uint
+        Payloads: CoreTypes.Uint
     }
 
     type FieldSummary = {
         [<System.Text.Json.Serialization.JsonPropertyName("any")>]
-        Any: Types.Uint
+        Any: CoreTypes.Uint
         [<System.Text.Json.Serialization.JsonPropertyName("stored_fields")>]
-        StoredFields: Types.Uint
+        StoredFields: CoreTypes.Uint
         [<System.Text.Json.Serialization.JsonPropertyName("doc_values")>]
-        DocValues: Types.Uint
+        DocValues: CoreTypes.Uint
         [<System.Text.Json.Serialization.JsonPropertyName("points")>]
-        Points: Types.Uint
+        Points: CoreTypes.Uint
         [<System.Text.Json.Serialization.JsonPropertyName("norms")>]
-        Norms: Types.Uint
+        Norms: CoreTypes.Uint
         [<System.Text.Json.Serialization.JsonPropertyName("term_vectors")>]
-        TermVectors: Types.Uint
+        TermVectors: CoreTypes.Uint
         [<System.Text.Json.Serialization.JsonPropertyName("knn_vectors")>]
-        KnnVectors: Types.Uint
+        KnnVectors: CoreTypes.Uint
         [<System.Text.Json.Serialization.JsonPropertyName("inverted_index")>]
-        InvertedIndex: IndicesFieldUsageStats.InvertedIndex
+        InvertedIndex: InvertedIndex
     }
 
     type FieldsUsageBody = {
         [<System.Text.Json.Serialization.JsonPropertyName("_shards")>]
-        Shards: Types.ShardStatistics
+        Shards: CoreTypes.ShardStatistics
     }
 
     type ShardsStats = {
         [<System.Text.Json.Serialization.JsonPropertyName("all_fields")>]
-        AllFields: IndicesFieldUsageStats.FieldSummary
+        AllFields: FieldSummary
         [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
-        Fields: Map<Types.Field, IndicesFieldUsageStats.FieldSummary>
+        Fields: Map<CoreTypes.Field, FieldSummary>
     }
 
     type UsageStatsShards = {
         [<System.Text.Json.Serialization.JsonPropertyName("routing")>]
         Routing: IndicesStats.ShardRouting
         [<System.Text.Json.Serialization.JsonPropertyName("stats")>]
-        Stats: IndicesFieldUsageStats.ShardsStats
+        Stats: ShardsStats
         [<System.Text.Json.Serialization.JsonPropertyName("tracking_id")>]
         TrackingId: string
         [<System.Text.Json.Serialization.JsonPropertyName("tracking_started_at_millis")>]
-        TrackingStartedAtMillis: Types.EpochTime<Types.UnitMillis>
+        TrackingStartedAtMillis: CoreTypes.EpochTime<CoreTypes.UnitMillis>
     }
 
     type UsageStatsIndex = {
         [<System.Text.Json.Serialization.JsonPropertyName("shards")>]
-        Shards: IndicesFieldUsageStats.UsageStatsShards list
+        Shards: UsageStatsShards list
     }
 

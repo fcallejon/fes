@@ -27,19 +27,19 @@ module LicenseGetBuilders =
             }
 
         [<CustomOperation("expiryDate")>]
-        member _.ExpiryDate(state: LicenseInformation, value: Types.DateTime) =
+        member _.ExpiryDate(state: LicenseInformation, value: CoreTypes.DateTime) =
             { state with ExpiryDate = Some value }
 
         [<CustomOperation("expiryDateInMillis")>]
-        member _.ExpiryDateInMillis(state: LicenseInformation, value: Types.EpochTime<Types.UnitMillis>) =
+        member _.ExpiryDateInMillis(state: LicenseInformation, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
             { state with ExpiryDateInMillis = Some value }
 
         [<CustomOperation("issueDate")>]
-        member _.IssueDate(state: LicenseInformation, value: Types.DateTime) =
+        member _.IssueDate(state: LicenseInformation, value: CoreTypes.DateTime) =
             { state with IssueDate = value }
 
         [<CustomOperation("issueDateInMillis")>]
-        member _.IssueDateInMillis(state: LicenseInformation, value: Types.EpochTime<Types.UnitMillis>) =
+        member _.IssueDateInMillis(state: LicenseInformation, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
             { state with IssueDateInMillis = value }
 
         [<CustomOperation("issuedTo")>]
@@ -51,11 +51,11 @@ module LicenseGetBuilders =
             { state with Issuer = value }
 
         [<CustomOperation("maxNodes")>]
-        member _.MaxNodes(state: LicenseInformation, value: Types.Long option) =
+        member _.MaxNodes(state: LicenseInformation, value: CoreTypes.Long option) =
             { state with MaxNodes = value }
 
         [<CustomOperation("maxResourceUnits")>]
-        member _.MaxResourceUnits(state: LicenseInformation, value: Types.Integer option) =
+        member _.MaxResourceUnits(state: LicenseInformation, value: CoreTypes.Integer option) =
             { state with MaxResourceUnits = Some value }
 
         [<CustomOperation("status")>]
@@ -67,11 +67,11 @@ module LicenseGetBuilders =
             { state with Type = value }
 
         [<CustomOperation("uid")>]
-        member _.Uid(state: LicenseInformation, value: Types.Uuid) =
+        member _.Uid(state: LicenseInformation, value: CoreTypes.Uuid) =
             { state with Uid = value }
 
         [<CustomOperation("startDateInMillis")>]
-        member _.StartDateInMillis(state: LicenseInformation, value: Types.EpochTime<Types.UnitMillis>) =
+        member _.StartDateInMillis(state: LicenseInformation, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
             { state with StartDateInMillis = value }
 
     let licenseInformation = LicenseInformationBuilder()

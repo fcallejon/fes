@@ -11,7 +11,7 @@ module SslCertificates =
         [<System.Text.Json.Serialization.JsonPropertyName("alias")>]
         Alias: string option
         [<System.Text.Json.Serialization.JsonPropertyName("expiry")>]
-        Expiry: Types.DateTime
+        Expiry: CoreTypes.DateTime
         [<System.Text.Json.Serialization.JsonPropertyName("format")>]
         Format: string
         [<System.Text.Json.Serialization.JsonPropertyName("has_private_key")>]

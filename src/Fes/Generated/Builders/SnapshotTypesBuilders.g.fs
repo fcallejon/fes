@@ -34,7 +34,7 @@ module SnapshotTypesBuilders =
             { state with Container = Some value }
 
         [<CustomOperation("deleteObjectsMaxSize")>]
-        member _.DeleteObjectsMaxSize(state: AzureRepositorySettings, value: Types.Integer) =
+        member _.DeleteObjectsMaxSize(state: AzureRepositorySettings, value: CoreTypes.Integer) =
             { state with DeleteObjectsMaxSize = Some value }
 
         [<CustomOperation("locationMode")>]
@@ -42,7 +42,7 @@ module SnapshotTypesBuilders =
             { state with LocationMode = Some value }
 
         [<CustomOperation("maxConcurrentBatchDeletes")>]
-        member _.MaxConcurrentBatchDeletes(state: AzureRepositorySettings, value: Types.Integer) =
+        member _.MaxConcurrentBatchDeletes(state: AzureRepositorySettings, value: CoreTypes.Integer) =
             { state with MaxConcurrentBatchDeletes = Some value }
 
         [<CustomOperation("readonly")>]
@@ -93,15 +93,15 @@ module SnapshotTypesBuilders =
             }
 
         [<CustomOperation("httpMaxRetries")>]
-        member _.HttpMaxRetries(state: ReadOnlyUrlRepositorySettings, value: Types.Integer) =
+        member _.HttpMaxRetries(state: ReadOnlyUrlRepositorySettings, value: CoreTypes.Integer) =
             { state with HttpMaxRetries = Some value }
 
         [<CustomOperation("httpSocketTimeout")>]
-        member _.HttpSocketTimeout(state: ReadOnlyUrlRepositorySettings, value: Types.Duration) =
+        member _.HttpSocketTimeout(state: ReadOnlyUrlRepositorySettings, value: CoreTypes.Duration) =
             { state with HttpSocketTimeout = Some value }
 
         [<CustomOperation("maxNumberOfSnapshots")>]
-        member _.MaxNumberOfSnapshots(state: ReadOnlyUrlRepositorySettings, value: Types.Integer) =
+        member _.MaxNumberOfSnapshots(state: ReadOnlyUrlRepositorySettings, value: CoreTypes.Integer) =
             { state with MaxNumberOfSnapshots = Some value }
 
         [<CustomOperation("url")>]
@@ -120,7 +120,7 @@ module SnapshotTypesBuilders =
             }
 
         [<CustomOperation("chunkSize")>]
-        member _.ChunkSize(state: RepositorySettingsBase, value: Types.ByteSize) =
+        member _.ChunkSize(state: RepositorySettingsBase, value: CoreTypes.ByteSize) =
             { state with ChunkSize = Some value }
 
         [<CustomOperation("compress")>]
@@ -128,11 +128,11 @@ module SnapshotTypesBuilders =
             { state with Compress = Some value }
 
         [<CustomOperation("maxRestoreBytesPerSec")>]
-        member _.MaxRestoreBytesPerSec(state: RepositorySettingsBase, value: Types.ByteSize) =
+        member _.MaxRestoreBytesPerSec(state: RepositorySettingsBase, value: CoreTypes.ByteSize) =
             { state with MaxRestoreBytesPerSec = Some value }
 
         [<CustomOperation("maxSnapshotBytesPerSec")>]
-        member _.MaxSnapshotBytesPerSec(state: RepositorySettingsBase, value: Types.ByteSize) =
+        member _.MaxSnapshotBytesPerSec(state: RepositorySettingsBase, value: CoreTypes.ByteSize) =
             { state with MaxSnapshotBytesPerSec = Some value }
 
     let repositorySettingsBase = RepositorySettingsBaseBuilder()
@@ -166,7 +166,7 @@ module SnapshotTypesBuilders =
             { state with BasePath = Some value }
 
         [<CustomOperation("bufferSize")>]
-        member _.BufferSize(state: S3RepositorySettings, value: Types.ByteSize) =
+        member _.BufferSize(state: S3RepositorySettings, value: CoreTypes.ByteSize) =
             { state with BufferSize = Some value }
 
         [<CustomOperation("cannedAcl")>]
@@ -178,19 +178,19 @@ module SnapshotTypesBuilders =
             { state with Client = Some value }
 
         [<CustomOperation("deleteObjectsMaxSize")>]
-        member _.DeleteObjectsMaxSize(state: S3RepositorySettings, value: Types.Integer) =
+        member _.DeleteObjectsMaxSize(state: S3RepositorySettings, value: CoreTypes.Integer) =
             { state with DeleteObjectsMaxSize = Some value }
 
         [<CustomOperation("getRegisterRetryDelay")>]
-        member _.GetRegisterRetryDelay(state: S3RepositorySettings, value: Types.Duration) =
+        member _.GetRegisterRetryDelay(state: S3RepositorySettings, value: CoreTypes.Duration) =
             { state with GetRegisterRetryDelay = Some value }
 
         [<CustomOperation("maxMultipartParts")>]
-        member _.MaxMultipartParts(state: S3RepositorySettings, value: Types.Integer) =
+        member _.MaxMultipartParts(state: S3RepositorySettings, value: CoreTypes.Integer) =
             { state with MaxMultipartParts = Some value }
 
         [<CustomOperation("maxMultipartUploadCleanupSize")>]
-        member _.MaxMultipartUploadCleanupSize(state: S3RepositorySettings, value: Types.Integer) =
+        member _.MaxMultipartUploadCleanupSize(state: S3RepositorySettings, value: CoreTypes.Integer) =
             { state with MaxMultipartUploadCleanupSize = Some value }
 
         [<CustomOperation("readonly")>]
@@ -206,15 +206,15 @@ module SnapshotTypesBuilders =
             { state with StorageClass = Some value }
 
         [<CustomOperation("throttledDeleteRetryDelayIncrement")>]
-        member _.ThrottledDeleteRetryDelayIncrement(state: S3RepositorySettings, value: Types.Duration) =
+        member _.ThrottledDeleteRetryDelayIncrement(state: S3RepositorySettings, value: CoreTypes.Duration) =
             { state with ThrottledDeleteRetryDelayIncrement = Some value }
 
         [<CustomOperation("throttledDeleteRetryMaximumDelay")>]
-        member _.ThrottledDeleteRetryMaximumDelay(state: S3RepositorySettings, value: Types.Duration) =
+        member _.ThrottledDeleteRetryMaximumDelay(state: S3RepositorySettings, value: CoreTypes.Duration) =
             { state with ThrottledDeleteRetryMaximumDelay = Some value }
 
         [<CustomOperation("throttledDeleteRetryMaximumNumberOfRetries")>]
-        member _.ThrottledDeleteRetryMaximumNumberOfRetries(state: S3RepositorySettings, value: Types.Integer) =
+        member _.ThrottledDeleteRetryMaximumNumberOfRetries(state: S3RepositorySettings, value: CoreTypes.Integer) =
             { state with ThrottledDeleteRetryMaximumNumberOfRetries = Some value }
 
     let s3RepositorySettings = S3RepositorySettingsBuilder()
@@ -232,7 +232,7 @@ module SnapshotTypesBuilders =
             { state with Location = value }
 
         [<CustomOperation("maxNumberOfSnapshots")>]
-        member _.MaxNumberOfSnapshots(state: SharedFileSystemRepositorySettings, value: Types.Integer) =
+        member _.MaxNumberOfSnapshots(state: SharedFileSystemRepositorySettings, value: CoreTypes.Integer) =
             { state with MaxNumberOfSnapshots = Some value }
 
         [<CustomOperation("readonly")>]
@@ -272,19 +272,19 @@ module SnapshotTypesBuilders =
             { state with DataStreams = value }
 
         [<CustomOperation("duration")>]
-        member _.Duration(state: SnapshotInfo, value: Types.Duration) =
+        member _.Duration(state: SnapshotInfo, value: CoreTypes.Duration) =
             { state with Duration = Some value }
 
         [<CustomOperation("durationInMillis")>]
-        member _.DurationInMillis(state: SnapshotInfo, value: Types.DurationValue<Types.UnitMillis>) =
+        member _.DurationInMillis(state: SnapshotInfo, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
             { state with DurationInMillis = Some value }
 
         [<CustomOperation("endTime")>]
-        member _.EndTime(state: SnapshotInfo, value: Types.DateTime) =
+        member _.EndTime(state: SnapshotInfo, value: CoreTypes.DateTime) =
             { state with EndTime = Some value }
 
         [<CustomOperation("endTimeInMillis")>]
-        member _.EndTimeInMillis(state: SnapshotInfo, value: Types.EpochTime<Types.UnitMillis>) =
+        member _.EndTimeInMillis(state: SnapshotInfo, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
             { state with EndTimeInMillis = Some value }
 
         [<CustomOperation("failures")>]
@@ -296,15 +296,15 @@ module SnapshotTypesBuilders =
             { state with IncludeGlobalState = Some value }
 
         [<CustomOperation("indices")>]
-        member _.Indices(state: SnapshotInfo, value: Types.IndexName list) =
+        member _.Indices(state: SnapshotInfo, value: CoreTypes.IndexName list) =
             { state with Indices = Some value }
 
         [<CustomOperation("indexDetails")>]
-        member _.IndexDetails(state: SnapshotInfo, value: Map<Types.IndexName, SnapshotTypes.IndexDetails>) =
+        member _.IndexDetails(state: SnapshotInfo, value: Map<CoreTypes.IndexName, SnapshotTypes.IndexDetails>) =
             { state with IndexDetails = Some value }
 
         [<CustomOperation("metadata")>]
-        member _.Metadata(state: SnapshotInfo, value: Types.Metadata) =
+        member _.Metadata(state: SnapshotInfo, value: CoreTypes.Metadata) =
             { state with Metadata = Some value }
 
         [<CustomOperation("reason")>]
@@ -312,23 +312,23 @@ module SnapshotTypesBuilders =
             { state with Reason = Some value }
 
         [<CustomOperation("repository")>]
-        member _.Repository(state: SnapshotInfo, value: Types.Name) =
+        member _.Repository(state: SnapshotInfo, value: CoreTypes.Name) =
             { state with Repository = Some value }
 
         [<CustomOperation("snapshot")>]
-        member _.Snapshot(state: SnapshotInfo, value: Types.Name) =
+        member _.Snapshot(state: SnapshotInfo, value: CoreTypes.Name) =
             { state with Snapshot = value }
 
         [<CustomOperation("shards")>]
-        member _.Shards(state: SnapshotInfo, value: Types.ShardStatistics) =
+        member _.Shards(state: SnapshotInfo, value: CoreTypes.ShardStatistics) =
             { state with Shards = Some value }
 
         [<CustomOperation("startTime")>]
-        member _.StartTime(state: SnapshotInfo, value: Types.DateTime) =
+        member _.StartTime(state: SnapshotInfo, value: CoreTypes.DateTime) =
             { state with StartTime = Some value }
 
         [<CustomOperation("startTimeInMillis")>]
-        member _.StartTimeInMillis(state: SnapshotInfo, value: Types.EpochTime<Types.UnitMillis>) =
+        member _.StartTimeInMillis(state: SnapshotInfo, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
             { state with StartTimeInMillis = Some value }
 
         [<CustomOperation("state")>]
@@ -336,15 +336,15 @@ module SnapshotTypesBuilders =
             { state with State = Some value }
 
         [<CustomOperation("uuid")>]
-        member _.Uuid(state: SnapshotInfo, value: Types.Uuid) =
+        member _.Uuid(state: SnapshotInfo, value: CoreTypes.Uuid) =
             { state with Uuid = value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: SnapshotInfo, value: Types.VersionString) =
+        member _.Version(state: SnapshotInfo, value: CoreTypes.VersionString) =
             { state with Version = Some value }
 
         [<CustomOperation("versionId")>]
-        member _.VersionId(state: SnapshotInfo, value: Types.VersionNumber) =
+        member _.VersionId(state: SnapshotInfo, value: CoreTypes.VersionNumber) =
             { state with VersionId = Some value }
 
         [<CustomOperation("featureStates")>]
@@ -366,7 +366,7 @@ module SnapshotTypesBuilders =
             { state with DelegateType = Some value }
 
         [<CustomOperation("maxNumberOfSnapshots")>]
-        member _.MaxNumberOfSnapshots(state: SourceOnlyRepositorySettings, value: Types.Integer) =
+        member _.MaxNumberOfSnapshots(state: SourceOnlyRepositorySettings, value: CoreTypes.Integer) =
             { state with MaxNumberOfSnapshots = Some value }
 
         [<CustomOperation("readOnly")>]

@@ -11,17 +11,17 @@ module IndicesAnalyze =
         [<System.Text.Json.Serialization.JsonPropertyName("bytes")>]
         Bytes: string
         [<System.Text.Json.Serialization.JsonPropertyName("end_offset")>]
-        EndOffset: Types.Long
+        EndOffset: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("keyword")>]
         Keyword: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("position")>]
-        Position: Types.Long
+        Position: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("positionLength")>]
-        PositionLength: Types.Long
+        PositionLength: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("start_offset")>]
-        StartOffset: Types.Long
+        StartOffset: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("termFrequency")>]
-        TermFrequency: Types.Long
+        TermFrequency: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("token")>]
         Token: string
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
@@ -32,7 +32,7 @@ module IndicesAnalyze =
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
         Name: string
         [<System.Text.Json.Serialization.JsonPropertyName("tokens")>]
-        Tokens: IndicesAnalyze.ExplainAnalyzeToken list
+        Tokens: ExplainAnalyzeToken list
     }
 
     type CharFilterDetail = {
@@ -46,31 +46,31 @@ module IndicesAnalyze =
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
         Name: string
         [<System.Text.Json.Serialization.JsonPropertyName("tokens")>]
-        Tokens: IndicesAnalyze.ExplainAnalyzeToken list
+        Tokens: ExplainAnalyzeToken list
     }
 
     type AnalyzeDetail = {
         [<System.Text.Json.Serialization.JsonPropertyName("analyzer")>]
-        Analyzer: IndicesAnalyze.AnalyzerDetail option
+        Analyzer: AnalyzerDetail option
         [<System.Text.Json.Serialization.JsonPropertyName("charfilters")>]
-        Charfilters: IndicesAnalyze.CharFilterDetail list option
+        Charfilters: CharFilterDetail list option
         [<System.Text.Json.Serialization.JsonPropertyName("custom_analyzer")>]
         CustomAnalyzer: bool
         [<System.Text.Json.Serialization.JsonPropertyName("tokenfilters")>]
-        Tokenfilters: IndicesAnalyze.TokenDetail list option
+        Tokenfilters: TokenDetail list option
         [<System.Text.Json.Serialization.JsonPropertyName("tokenizer")>]
-        Tokenizer: IndicesAnalyze.TokenDetail option
+        Tokenizer: TokenDetail option
     }
 
     type AnalyzeToken = {
         [<System.Text.Json.Serialization.JsonPropertyName("end_offset")>]
-        EndOffset: Types.Long
+        EndOffset: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("position")>]
-        Position: Types.Long
+        Position: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("positionLength")>]
-        PositionLength: Types.Long option
+        PositionLength: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("start_offset")>]
-        StartOffset: Types.Long
+        StartOffset: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("token")>]
         Token: string
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]

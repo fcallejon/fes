@@ -12,7 +12,7 @@ open Fes
 module MigrationOperations =
 
     type MigrationDeprecationsRequest = {
-        Index: Types.IndexName
+        Index: CoreTypes.IndexName
     }
 
         with
@@ -35,7 +35,7 @@ module MigrationOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: MigrationDeprecationsRequest, value: Types.IndexName) =
+        member _.Index(state: MigrationDeprecationsRequest, value: CoreTypes.IndexName) =
             { state with Index = value }
 
     let migrationDeprecationsRequest = MigrationDeprecationsRequestBuilder()

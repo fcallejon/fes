@@ -27,11 +27,11 @@ module ClusterTypesBuilders =
             { state with Template = value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: ComponentTemplateNode, value: Types.VersionNumber) =
+        member _.Version(state: ComponentTemplateNode, value: CoreTypes.VersionNumber) =
             { state with Version = Some value }
 
         [<CustomOperation("meta")>]
-        member _.Meta(state: ComponentTemplateNode, value: Types.Metadata) =
+        member _.Meta(state: ComponentTemplateNode, value: CoreTypes.Metadata) =
             { state with Meta = Some value }
 
         [<CustomOperation("deprecated")>]
@@ -39,19 +39,19 @@ module ClusterTypesBuilders =
             { state with Deprecated = Some value }
 
         [<CustomOperation("createdDate")>]
-        member _.CreatedDate(state: ComponentTemplateNode, value: Types.DateTime) =
+        member _.CreatedDate(state: ComponentTemplateNode, value: CoreTypes.DateTime) =
             { state with CreatedDate = Some value }
 
         [<CustomOperation("createdDateMillis")>]
-        member _.CreatedDateMillis(state: ComponentTemplateNode, value: Types.EpochTime<Types.UnitMillis>) =
+        member _.CreatedDateMillis(state: ComponentTemplateNode, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
             { state with CreatedDateMillis = Some value }
 
         [<CustomOperation("modifiedDate")>]
-        member _.ModifiedDate(state: ComponentTemplateNode, value: Types.DateTime) =
+        member _.ModifiedDate(state: ComponentTemplateNode, value: CoreTypes.DateTime) =
             { state with ModifiedDate = Some value }
 
         [<CustomOperation("modifiedDateMillis")>]
-        member _.ModifiedDateMillis(state: ComponentTemplateNode, value: Types.EpochTime<Types.UnitMillis>) =
+        member _.ModifiedDateMillis(state: ComponentTemplateNode, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
             { state with ModifiedDateMillis = Some value }
 
     let componentTemplateNode = ComponentTemplateNodeBuilder()
@@ -74,11 +74,11 @@ module ClusterTypesBuilders =
             { state with Template = value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: ComponentTemplateNodeWithRollover, value: Types.VersionNumber) =
+        member _.Version(state: ComponentTemplateNodeWithRollover, value: CoreTypes.VersionNumber) =
             { state with Version = Some value }
 
         [<CustomOperation("meta")>]
-        member _.Meta(state: ComponentTemplateNodeWithRollover, value: Types.Metadata) =
+        member _.Meta(state: ComponentTemplateNodeWithRollover, value: CoreTypes.Metadata) =
             { state with Meta = Some value }
 
         [<CustomOperation("deprecated")>]
@@ -86,19 +86,19 @@ module ClusterTypesBuilders =
             { state with Deprecated = Some value }
 
         [<CustomOperation("createdDate")>]
-        member _.CreatedDate(state: ComponentTemplateNodeWithRollover, value: Types.DateTime) =
+        member _.CreatedDate(state: ComponentTemplateNodeWithRollover, value: CoreTypes.DateTime) =
             { state with CreatedDate = Some value }
 
         [<CustomOperation("createdDateMillis")>]
-        member _.CreatedDateMillis(state: ComponentTemplateNodeWithRollover, value: Types.EpochTime<Types.UnitMillis>) =
+        member _.CreatedDateMillis(state: ComponentTemplateNodeWithRollover, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
             { state with CreatedDateMillis = Some value }
 
         [<CustomOperation("modifiedDate")>]
-        member _.ModifiedDate(state: ComponentTemplateNodeWithRollover, value: Types.DateTime) =
+        member _.ModifiedDate(state: ComponentTemplateNodeWithRollover, value: CoreTypes.DateTime) =
             { state with ModifiedDate = Some value }
 
         [<CustomOperation("modifiedDateMillis")>]
-        member _.ModifiedDateMillis(state: ComponentTemplateNodeWithRollover, value: Types.EpochTime<Types.UnitMillis>) =
+        member _.ModifiedDateMillis(state: ComponentTemplateNodeWithRollover, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
             { state with ModifiedDateMillis = Some value }
 
     let componentTemplateNodeWithRollover = ComponentTemplateNodeWithRolloverBuilder()
@@ -116,19 +116,19 @@ module ClusterTypesBuilders =
             }
 
         [<CustomOperation("meta")>]
-        member _.Meta(state: ComponentTemplateSummary, value: Types.Metadata) =
+        member _.Meta(state: ComponentTemplateSummary, value: CoreTypes.Metadata) =
             { state with Meta = Some value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: ComponentTemplateSummary, value: Types.VersionNumber) =
+        member _.Version(state: ComponentTemplateSummary, value: CoreTypes.VersionNumber) =
             { state with Version = Some value }
 
         [<CustomOperation("settings")>]
-        member _.Settings(state: ComponentTemplateSummary, value: Map<Types.IndexName, IndicesTypes.IndexSettings>) =
+        member _.Settings(state: ComponentTemplateSummary, value: Map<CoreTypes.IndexName, IndicesTypes.IndexSettings>) =
             { state with Settings = Some value }
 
         [<CustomOperation("mappings")>]
-        member _.Mappings(state: ComponentTemplateSummary, value: TypesMapping.TypeMapping) =
+        member _.Mappings(state: ComponentTemplateSummary, value: CoreTypes.TypeMapping) =
             { state with Mappings = Some value }
 
         [<CustomOperation("aliases")>]
@@ -162,19 +162,19 @@ module ClusterTypesBuilders =
             { state with Lifecycle = Some value }
 
         [<CustomOperation("meta")>]
-        member _.Meta(state: ComponentTemplateSummaryRes, value: Types.Metadata) =
+        member _.Meta(state: ComponentTemplateSummaryRes, value: CoreTypes.Metadata) =
             { state with Meta = Some value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: ComponentTemplateSummaryRes, value: Types.VersionNumber) =
+        member _.Version(state: ComponentTemplateSummaryRes, value: CoreTypes.VersionNumber) =
             { state with Version = Some value }
 
         [<CustomOperation("settings")>]
-        member _.Settings(state: ComponentTemplateSummaryRes, value: Map<Types.IndexName, IndicesTypes.IndexSettings>) =
+        member _.Settings(state: ComponentTemplateSummaryRes, value: Map<CoreTypes.IndexName, IndicesTypes.IndexSettings>) =
             { state with Settings = Some value }
 
         [<CustomOperation("mappings")>]
-        member _.Mappings(state: ComponentTemplateSummaryRes, value: TypesMapping.TypeMapping) =
+        member _.Mappings(state: ComponentTemplateSummaryRes, value: CoreTypes.TypeMapping) =
             { state with Mappings = Some value }
 
         [<CustomOperation("aliases")>]

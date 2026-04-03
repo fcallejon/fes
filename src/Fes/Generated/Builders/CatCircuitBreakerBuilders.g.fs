@@ -24,7 +24,7 @@ module CatCircuitBreakerBuilders =
             }
 
         [<CustomOperation("nodeId")>]
-        member _.NodeId(state: CircuitBreakerRecord, value: Types.NodeId) =
+        member _.NodeId(state: CircuitBreakerRecord, value: CoreTypes.NodeId) =
             { state with NodeId = Some value }
 
         [<CustomOperation("nodeName")>]
@@ -40,7 +40,7 @@ module CatCircuitBreakerBuilders =
             { state with Limit = Some value }
 
         [<CustomOperation("limitBytes")>]
-        member _.LimitBytes(state: CircuitBreakerRecord, value: Types.ByteSize) =
+        member _.LimitBytes(state: CircuitBreakerRecord, value: CoreTypes.ByteSize) =
             { state with LimitBytes = Some value }
 
         [<CustomOperation("estimated")>]
@@ -48,7 +48,7 @@ module CatCircuitBreakerBuilders =
             { state with Estimated = Some value }
 
         [<CustomOperation("estimatedBytes")>]
-        member _.EstimatedBytes(state: CircuitBreakerRecord, value: Types.ByteSize) =
+        member _.EstimatedBytes(state: CircuitBreakerRecord, value: CoreTypes.ByteSize) =
             { state with EstimatedBytes = Some value }
 
         [<CustomOperation("tripped")>]

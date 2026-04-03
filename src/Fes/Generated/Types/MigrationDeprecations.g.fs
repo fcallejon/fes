@@ -18,7 +18,7 @@ module MigrationDeprecations =
         [<System.Text.Json.Serialization.JsonPropertyName("details")>]
         Details: string option
         [<System.Text.Json.Serialization.JsonPropertyName("level")>]
-        Level: MigrationDeprecations.DeprecationLevel
+        Level: DeprecationLevel
         [<System.Text.Json.Serialization.JsonPropertyName("message")>]
         Message: string
         [<System.Text.Json.Serialization.JsonPropertyName("url")>]

@@ -16,57 +16,57 @@ module SecurityTypes =
 
     type FieldSecurity = {
         [<System.Text.Json.Serialization.JsonPropertyName("except")>]
-        Except: Types.Fields option
+        Except: CoreTypes.Fields option
         [<System.Text.Json.Serialization.JsonPropertyName("grant")>]
-        Grant: Types.Fields option
+        Grant: CoreTypes.Fields option
     }
 
     [<RequireQualifiedAccess>]
     type RoleTemplateInlineQuery =
         | String of string
-        | QueryContainer of TypesQueryDsl.QueryContainer
+        | QueryContainer of CoreTypes.QueryContainer
 
     type RoleTemplateScript = {
         [<System.Text.Json.Serialization.JsonPropertyName("source")>]
-        Source: SecurityTypes.RoleTemplateInlineQuery option
+        Source: RoleTemplateInlineQuery option
         [<System.Text.Json.Serialization.JsonPropertyName("id")>]
-        Id: Types.Id option
+        Id: CoreTypes.Id option
         [<System.Text.Json.Serialization.JsonPropertyName("params")>]
         Params: Map<string, System.Text.Json.JsonElement> option
         [<System.Text.Json.Serialization.JsonPropertyName("lang")>]
-        Lang: Types.ScriptLanguage option
+        Lang: CoreTypes.ScriptLanguage option
         [<System.Text.Json.Serialization.JsonPropertyName("options")>]
         Options: Map<string, string> option
     }
 
     type RoleTemplateQuery = {
         [<System.Text.Json.Serialization.JsonPropertyName("template")>]
-        Template: SecurityTypes.RoleTemplateScript option
+        Template: RoleTemplateScript option
     }
 
     /// While creating or updating a role you can provide either a JSON structure or a string to the API.
     [<RequireQualifiedAccess>]
     type IndicesPrivilegesQuery =
         | String of string
-        | QueryContainer of TypesQueryDsl.QueryContainer
-        | RoleTemplateQuery of SecurityTypes.RoleTemplateQuery
+        | QueryContainer of CoreTypes.QueryContainer
+        | RoleTemplateQuery of RoleTemplateQuery
 
     type SearchAccess = {
         [<System.Text.Json.Serialization.JsonPropertyName("field_security")>]
-        FieldSecurity: SecurityTypes.FieldSecurity option
+        FieldSecurity: FieldSecurity option
         [<System.Text.Json.Serialization.JsonPropertyName("names")>]
         Names: System.Text.Json.JsonElement
         [<System.Text.Json.Serialization.JsonPropertyName("query")>]
-        Query: SecurityTypes.IndicesPrivilegesQuery option
+        Query: IndicesPrivilegesQuery option
         [<System.Text.Json.Serialization.JsonPropertyName("allow_restricted_indices")>]
         AllowRestrictedIndices: bool option
     }
 
     type Access = {
         [<System.Text.Json.Serialization.JsonPropertyName("replication")>]
-        Replication: SecurityTypes.ReplicationAccess list option
+        Replication: ReplicationAccess list option
         [<System.Text.Json.Serialization.JsonPropertyName("search")>]
-        Search: SecurityTypes.SearchAccess list option
+        Search: SearchAccess list option
     }
 
     [<RequireQualifiedAccess>]
@@ -173,13 +173,13 @@ module SecurityTypes =
 
     type IndicesPrivileges = {
         [<System.Text.Json.Serialization.JsonPropertyName("field_security")>]
-        FieldSecurity: SecurityTypes.FieldSecurity option
+        FieldSecurity: FieldSecurity option
         [<System.Text.Json.Serialization.JsonPropertyName("names")>]
         Names: System.Text.Json.JsonElement
         [<System.Text.Json.Serialization.JsonPropertyName("privileges")>]
-        Privileges: SecurityTypes.IndexPrivilege list
+        Privileges: IndexPrivilege list
         [<System.Text.Json.Serialization.JsonPropertyName("query")>]
-        Query: SecurityTypes.IndicesPrivilegesQuery option
+        Query: IndicesPrivilegesQuery option
         [<System.Text.Json.Serialization.JsonPropertyName("allow_restricted_indices")>]
         AllowRestrictedIndices: bool option
     }
@@ -187,15 +187,15 @@ module SecurityTypes =
     /// The subset of index level privileges that can be defined for remote clusters.
     type RemoteIndicesPrivileges = {
         [<System.Text.Json.Serialization.JsonPropertyName("clusters")>]
-        Clusters: Types.Names
+        Clusters: CoreTypes.Names
         [<System.Text.Json.Serialization.JsonPropertyName("field_security")>]
-        FieldSecurity: SecurityTypes.FieldSecurity option
+        FieldSecurity: FieldSecurity option
         [<System.Text.Json.Serialization.JsonPropertyName("names")>]
         Names: System.Text.Json.JsonElement
         [<System.Text.Json.Serialization.JsonPropertyName("privileges")>]
-        Privileges: SecurityTypes.IndexPrivilege list
+        Privileges: IndexPrivilege list
         [<System.Text.Json.Serialization.JsonPropertyName("query")>]
-        Query: SecurityTypes.IndicesPrivilegesQuery option
+        Query: IndicesPrivilegesQuery option
         [<System.Text.Json.Serialization.JsonPropertyName("allow_restricted_indices")>]
         AllowRestrictedIndices: bool option
     }
@@ -208,9 +208,9 @@ module SecurityTypes =
     /// The subset of cluster level privileges that can be defined for remote clusters.
     type RemoteClusterPrivileges = {
         [<System.Text.Json.Serialization.JsonPropertyName("clusters")>]
-        Clusters: Types.Names
+        Clusters: CoreTypes.Names
         [<System.Text.Json.Serialization.JsonPropertyName("privileges")>]
-        Privileges: SecurityTypes.RemoteClusterPrivilege list
+        Privileges: RemoteClusterPrivilege list
     }
 
     type ManageUserPrivileges = {
@@ -220,12 +220,12 @@ module SecurityTypes =
 
     type ApplicationGlobalUserPrivileges = {
         [<System.Text.Json.Serialization.JsonPropertyName("manage")>]
-        Manage: SecurityTypes.ManageUserPrivileges
+        Manage: ManageUserPrivileges
     }
 
     type GlobalPrivilege = {
         [<System.Text.Json.Serialization.JsonPropertyName("application")>]
-        Application: SecurityTypes.ApplicationGlobalUserPrivileges
+        Application: ApplicationGlobalUserPrivileges
     }
 
     type ApplicationPrivileges = {
@@ -244,69 +244,69 @@ module SecurityTypes =
 
     type Restriction = {
         [<System.Text.Json.Serialization.JsonPropertyName("workflows")>]
-        Workflows: SecurityTypes.RestrictionWorkflow list
+        Workflows: RestrictionWorkflow list
     }
 
     type RoleDescriptor = {
         [<System.Text.Json.Serialization.JsonPropertyName("cluster")>]
-        Cluster: SecurityTypes.ClusterPrivilege list option
+        Cluster: ClusterPrivilege list option
         [<System.Text.Json.Serialization.JsonPropertyName("indices")>]
-        Indices: SecurityTypes.IndicesPrivileges list option
+        Indices: IndicesPrivileges list option
         [<System.Text.Json.Serialization.JsonPropertyName("remote_indices")>]
-        RemoteIndices: SecurityTypes.RemoteIndicesPrivileges list option
+        RemoteIndices: RemoteIndicesPrivileges list option
         [<System.Text.Json.Serialization.JsonPropertyName("remote_cluster")>]
-        RemoteCluster: SecurityTypes.RemoteClusterPrivileges list option
+        RemoteCluster: RemoteClusterPrivileges list option
         [<System.Text.Json.Serialization.JsonPropertyName("global")>]
         Global: System.Text.Json.JsonElement option
         [<System.Text.Json.Serialization.JsonPropertyName("applications")>]
-        Applications: SecurityTypes.ApplicationPrivileges list option
+        Applications: ApplicationPrivileges list option
         [<System.Text.Json.Serialization.JsonPropertyName("metadata")>]
-        Metadata: Types.Metadata option
+        Metadata: CoreTypes.Metadata option
         [<System.Text.Json.Serialization.JsonPropertyName("run_as")>]
         RunAs: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("description")>]
         Description: string option
         [<System.Text.Json.Serialization.JsonPropertyName("restriction")>]
-        Restriction: SecurityTypes.Restriction option
+        Restriction: Restriction option
         [<System.Text.Json.Serialization.JsonPropertyName("transient_metadata")>]
         TransientMetadata: Map<string, System.Text.Json.JsonElement> option
     }
 
     type ApiKey = {
         [<System.Text.Json.Serialization.JsonPropertyName("id")>]
-        Id: Types.Id
+        Id: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.Name
+        Name: CoreTypes.Name
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
-        Type: SecurityTypes.ApiKeyType
+        Type: ApiKeyType
         [<System.Text.Json.Serialization.JsonPropertyName("creation")>]
-        Creation: Types.EpochTime<Types.UnitMillis>
+        Creation: CoreTypes.EpochTime<CoreTypes.UnitMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("expiration")>]
-        Expiration: Types.EpochTime<Types.UnitMillis> option
+        Expiration: CoreTypes.EpochTime<CoreTypes.UnitMillis> option
         [<System.Text.Json.Serialization.JsonPropertyName("invalidated")>]
         Invalidated: bool
         [<System.Text.Json.Serialization.JsonPropertyName("invalidation")>]
-        Invalidation: Types.EpochTime<Types.UnitMillis> option
+        Invalidation: CoreTypes.EpochTime<CoreTypes.UnitMillis> option
         [<System.Text.Json.Serialization.JsonPropertyName("username")>]
-        Username: Types.Username
+        Username: CoreTypes.Username
         [<System.Text.Json.Serialization.JsonPropertyName("realm")>]
         Realm: string
         [<System.Text.Json.Serialization.JsonPropertyName("realm_type")>]
         RealmType: string option
         [<System.Text.Json.Serialization.JsonPropertyName("metadata")>]
-        Metadata: Types.Metadata
+        Metadata: CoreTypes.Metadata
         [<System.Text.Json.Serialization.JsonPropertyName("role_descriptors")>]
-        RoleDescriptors: Map<string, SecurityTypes.RoleDescriptor> option
+        RoleDescriptors: Map<string, RoleDescriptor> option
         [<System.Text.Json.Serialization.JsonPropertyName("limited_by")>]
-        LimitedBy: Map<string, SecurityTypes.RoleDescriptor> list option
+        LimitedBy: Map<string, RoleDescriptor> list option
         [<System.Text.Json.Serialization.JsonPropertyName("access")>]
-        Access: SecurityTypes.Access option
+        Access: Access option
         [<System.Text.Json.Serialization.JsonPropertyName("certificate_identity")>]
         CertificateIdentity: string option
         [<System.Text.Json.Serialization.JsonPropertyName("profile_uid")>]
         ProfileUid: string option
         [<System.Text.Json.Serialization.JsonPropertyName("_sort")>]
-        Sort: Types.SortResults option
+        Sort: CoreTypes.SortResults option
     }
 
     [<RequireQualifiedAccess>]
@@ -316,14 +316,14 @@ module SecurityTypes =
 
     type BulkError = {
         [<System.Text.Json.Serialization.JsonPropertyName("count")>]
-        Count: Types.Integer
+        Count: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("details")>]
-        Details: Map<string, Types.ErrorCause>
+        Details: Map<string, CoreTypes.ErrorCause>
     }
 
     type ClusterNode = {
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.Name
+        Name: CoreTypes.Name
     }
 
     type CreatedStatus = {
@@ -338,13 +338,13 @@ module SecurityTypes =
 
     type IndicesPrivilegesBase = {
         [<System.Text.Json.Serialization.JsonPropertyName("field_security")>]
-        FieldSecurity: SecurityTypes.FieldSecurity option
+        FieldSecurity: FieldSecurity option
         [<System.Text.Json.Serialization.JsonPropertyName("names")>]
         Names: System.Text.Json.JsonElement
         [<System.Text.Json.Serialization.JsonPropertyName("privileges")>]
-        Privileges: SecurityTypes.IndexPrivilege list
+        Privileges: IndexPrivilege list
         [<System.Text.Json.Serialization.JsonPropertyName("query")>]
-        Query: SecurityTypes.IndicesPrivilegesQuery option
+        Query: IndicesPrivilegesQuery option
         [<System.Text.Json.Serialization.JsonPropertyName("allow_restricted_indices")>]
         AllowRestrictedIndices: bool option
     }
@@ -356,12 +356,12 @@ module SecurityTypes =
 
     type NodeSecurityStats = {
         [<System.Text.Json.Serialization.JsonPropertyName("roles")>]
-        Roles: SecurityTypes.RolesStats
+        Roles: RolesStats
     }
 
     type RealmInfo = {
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.Name
+        Name: CoreTypes.Name
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
     }
@@ -370,38 +370,38 @@ module SecurityTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("clusters")>]
         Clusters: string list
         [<System.Text.Json.Serialization.JsonPropertyName("field_security")>]
-        FieldSecurity: SecurityTypes.FieldSecurity list option
+        FieldSecurity: FieldSecurity list option
         [<System.Text.Json.Serialization.JsonPropertyName("names")>]
         Names: System.Text.Json.JsonElement
         [<System.Text.Json.Serialization.JsonPropertyName("privileges")>]
-        Privileges: SecurityTypes.IndexPrivilege list
+        Privileges: IndexPrivilege list
         [<System.Text.Json.Serialization.JsonPropertyName("query")>]
-        Query: SecurityTypes.IndicesPrivilegesQuery list option
+        Query: IndicesPrivilegesQuery list option
         [<System.Text.Json.Serialization.JsonPropertyName("allow_restricted_indices")>]
         AllowRestrictedIndices: bool
     }
 
     type RoleDescriptorRead = {
         [<System.Text.Json.Serialization.JsonPropertyName("cluster")>]
-        Cluster: SecurityTypes.ClusterPrivilege list
+        Cluster: ClusterPrivilege list
         [<System.Text.Json.Serialization.JsonPropertyName("indices")>]
-        Indices: SecurityTypes.IndicesPrivileges list
+        Indices: IndicesPrivileges list
         [<System.Text.Json.Serialization.JsonPropertyName("remote_indices")>]
-        RemoteIndices: SecurityTypes.RemoteIndicesPrivileges list option
+        RemoteIndices: RemoteIndicesPrivileges list option
         [<System.Text.Json.Serialization.JsonPropertyName("remote_cluster")>]
-        RemoteCluster: SecurityTypes.RemoteClusterPrivileges list option
+        RemoteCluster: RemoteClusterPrivileges list option
         [<System.Text.Json.Serialization.JsonPropertyName("global")>]
         Global: System.Text.Json.JsonElement option
         [<System.Text.Json.Serialization.JsonPropertyName("applications")>]
-        Applications: SecurityTypes.ApplicationPrivileges list option
+        Applications: ApplicationPrivileges list option
         [<System.Text.Json.Serialization.JsonPropertyName("metadata")>]
-        Metadata: Types.Metadata option
+        Metadata: CoreTypes.Metadata option
         [<System.Text.Json.Serialization.JsonPropertyName("run_as")>]
         RunAs: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("description")>]
         Description: string option
         [<System.Text.Json.Serialization.JsonPropertyName("restriction")>]
-        Restriction: SecurityTypes.Restriction option
+        Restriction: Restriction option
         [<System.Text.Json.Serialization.JsonPropertyName("transient_metadata")>]
         TransientMetadata: Map<string, System.Text.Json.JsonElement> option
     }
@@ -413,29 +413,29 @@ module SecurityTypes =
 
     type RoleTemplate = {
         [<System.Text.Json.Serialization.JsonPropertyName("format")>]
-        Format: SecurityTypes.TemplateFormat option
+        Format: TemplateFormat option
         [<System.Text.Json.Serialization.JsonPropertyName("template")>]
-        Template: Types.Script
+        Template: CoreTypes.Script
     }
 
     [<RequireQualifiedAccess>]
     type RoleMappingRule =
-        | Any of SecurityTypes.RoleMappingRule list
-        | All of SecurityTypes.RoleMappingRule list
+        | Any of RoleMappingRule list
+        | All of RoleMappingRule list
         | Field of field: string * System.Text.Json.JsonElement
-        | Except of SecurityTypes.RoleMappingRule
+        | Except of RoleMappingRule
 
     type RoleMapping = {
         [<System.Text.Json.Serialization.JsonPropertyName("enabled")>]
         Enabled: bool
         [<System.Text.Json.Serialization.JsonPropertyName("metadata")>]
-        Metadata: Types.Metadata
+        Metadata: CoreTypes.Metadata
         [<System.Text.Json.Serialization.JsonPropertyName("roles")>]
         Roles: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("role_templates")>]
-        RoleTemplates: SecurityTypes.RoleTemplate list option
+        RoleTemplates: RoleTemplate list option
         [<System.Text.Json.Serialization.JsonPropertyName("rules")>]
-        Rules: SecurityTypes.RoleMappingRule
+        Rules: RoleMappingRule
     }
 
     type SecuritySettings = {
@@ -449,41 +449,41 @@ module SecurityTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("email")>]
         Email: string option option
         [<System.Text.Json.Serialization.JsonPropertyName("full_name")>]
-        FullName: Types.Name option option
+        FullName: CoreTypes.Name option option
         [<System.Text.Json.Serialization.JsonPropertyName("metadata")>]
-        Metadata: Types.Metadata
+        Metadata: CoreTypes.Metadata
         [<System.Text.Json.Serialization.JsonPropertyName("roles")>]
         Roles: string list
         [<System.Text.Json.Serialization.JsonPropertyName("username")>]
-        Username: Types.Username
+        Username: CoreTypes.Username
         [<System.Text.Json.Serialization.JsonPropertyName("enabled")>]
         Enabled: bool
         [<System.Text.Json.Serialization.JsonPropertyName("profile_uid")>]
-        ProfileUid: SecurityTypes.UserProfileId option
+        ProfileUid: UserProfileId option
     }
 
     type UserIndicesPrivileges = {
         [<System.Text.Json.Serialization.JsonPropertyName("field_security")>]
-        FieldSecurity: SecurityTypes.FieldSecurity list option
+        FieldSecurity: FieldSecurity list option
         [<System.Text.Json.Serialization.JsonPropertyName("names")>]
         Names: System.Text.Json.JsonElement
         [<System.Text.Json.Serialization.JsonPropertyName("privileges")>]
-        Privileges: SecurityTypes.IndexPrivilege list
+        Privileges: IndexPrivilege list
         [<System.Text.Json.Serialization.JsonPropertyName("query")>]
-        Query: SecurityTypes.IndicesPrivilegesQuery list option
+        Query: IndicesPrivilegesQuery list option
         [<System.Text.Json.Serialization.JsonPropertyName("allow_restricted_indices")>]
         AllowRestrictedIndices: bool
     }
 
     type UserIndicesPrivilegesBase = {
         [<System.Text.Json.Serialization.JsonPropertyName("field_security")>]
-        FieldSecurity: SecurityTypes.FieldSecurity list option
+        FieldSecurity: FieldSecurity list option
         [<System.Text.Json.Serialization.JsonPropertyName("names")>]
         Names: System.Text.Json.JsonElement
         [<System.Text.Json.Serialization.JsonPropertyName("privileges")>]
-        Privileges: SecurityTypes.IndexPrivilege list
+        Privileges: IndexPrivilege list
         [<System.Text.Json.Serialization.JsonPropertyName("query")>]
-        Query: SecurityTypes.IndicesPrivilegesQuery list option
+        Query: IndicesPrivilegesQuery list option
         [<System.Text.Json.Serialization.JsonPropertyName("allow_restricted_indices")>]
         AllowRestrictedIndices: bool
     }
@@ -492,22 +492,22 @@ module SecurityTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("email")>]
         Email: string option option
         [<System.Text.Json.Serialization.JsonPropertyName("full_name")>]
-        FullName: Types.Name option option
+        FullName: CoreTypes.Name option option
         [<System.Text.Json.Serialization.JsonPropertyName("realm_name")>]
-        RealmName: Types.Name
+        RealmName: CoreTypes.Name
         [<System.Text.Json.Serialization.JsonPropertyName("realm_domain")>]
-        RealmDomain: Types.Name option
+        RealmDomain: CoreTypes.Name option
         [<System.Text.Json.Serialization.JsonPropertyName("roles")>]
         Roles: string list
         [<System.Text.Json.Serialization.JsonPropertyName("username")>]
-        Username: Types.Username
+        Username: CoreTypes.Username
     }
 
     type UserProfile = {
         [<System.Text.Json.Serialization.JsonPropertyName("uid")>]
-        Uid: SecurityTypes.UserProfileId
+        Uid: UserProfileId
         [<System.Text.Json.Serialization.JsonPropertyName("user")>]
-        User: SecurityTypes.UserProfileUser
+        User: UserProfileUser
         [<System.Text.Json.Serialization.JsonPropertyName("data")>]
         Data: Map<string, System.Text.Json.JsonElement>
         [<System.Text.Json.Serialization.JsonPropertyName("labels")>]
@@ -518,15 +518,15 @@ module SecurityTypes =
 
     type UserProfileHitMetadata = {
         [<System.Text.Json.Serialization.JsonPropertyName("_primary_term")>]
-        PrimaryTerm: Types.Long
+        PrimaryTerm: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("_seq_no")>]
-        SeqNo: Types.SequenceNumber
+        SeqNo: CoreTypes.SequenceNumber
     }
 
     type UserProfileWithMetadata = {
         [<System.Text.Json.Serialization.JsonPropertyName("last_synchronized")>]
-        LastSynchronized: Types.Long
+        LastSynchronized: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("_doc")>]
-        Doc: SecurityTypes.UserProfileHitMetadata
+        Doc: UserProfileHitMetadata
     }
 

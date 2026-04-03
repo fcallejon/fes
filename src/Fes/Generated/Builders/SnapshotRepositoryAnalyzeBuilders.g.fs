@@ -27,27 +27,27 @@ module SnapshotRepositoryAnalyzeBuilders =
             { state with Blob = value }
 
         [<CustomOperation("overwriteElapsed")>]
-        member _.OverwriteElapsed(state: DetailsInfo, value: Types.Duration) =
+        member _.OverwriteElapsed(state: DetailsInfo, value: CoreTypes.Duration) =
             { state with OverwriteElapsed = Some value }
 
         [<CustomOperation("overwriteElapsedNanos")>]
-        member _.OverwriteElapsedNanos(state: DetailsInfo, value: Types.DurationValue<Types.UnitNanos>) =
+        member _.OverwriteElapsedNanos(state: DetailsInfo, value: CoreTypes.DurationValue<CoreTypes.UnitNanos>) =
             { state with OverwriteElapsedNanos = Some value }
 
         [<CustomOperation("writeElapsed")>]
-        member _.WriteElapsed(state: DetailsInfo, value: Types.Duration) =
+        member _.WriteElapsed(state: DetailsInfo, value: CoreTypes.Duration) =
             { state with WriteElapsed = value }
 
         [<CustomOperation("writeElapsedNanos")>]
-        member _.WriteElapsedNanos(state: DetailsInfo, value: Types.DurationValue<Types.UnitNanos>) =
+        member _.WriteElapsedNanos(state: DetailsInfo, value: CoreTypes.DurationValue<CoreTypes.UnitNanos>) =
             { state with WriteElapsedNanos = value }
 
         [<CustomOperation("writeThrottled")>]
-        member _.WriteThrottled(state: DetailsInfo, value: Types.Duration) =
+        member _.WriteThrottled(state: DetailsInfo, value: CoreTypes.Duration) =
             { state with WriteThrottled = value }
 
         [<CustomOperation("writeThrottledNanos")>]
-        member _.WriteThrottledNanos(state: DetailsInfo, value: Types.DurationValue<Types.UnitNanos>) =
+        member _.WriteThrottledNanos(state: DetailsInfo, value: CoreTypes.DurationValue<CoreTypes.UnitNanos>) =
             { state with WriteThrottledNanos = value }
 
         [<CustomOperation("writerNode")>]
@@ -75,19 +75,19 @@ module SnapshotRepositoryAnalyzeBuilders =
             { state with BeforeWriteComplete = Some value }
 
         [<CustomOperation("elapsed")>]
-        member _.Elapsed(state: ReadBlobDetails, value: Types.Duration) =
+        member _.Elapsed(state: ReadBlobDetails, value: CoreTypes.Duration) =
             { state with Elapsed = Some value }
 
         [<CustomOperation("elapsedNanos")>]
-        member _.ElapsedNanos(state: ReadBlobDetails, value: Types.DurationValue<Types.UnitNanos>) =
+        member _.ElapsedNanos(state: ReadBlobDetails, value: CoreTypes.DurationValue<CoreTypes.UnitNanos>) =
             { state with ElapsedNanos = Some value }
 
         [<CustomOperation("firstByteTime")>]
-        member _.FirstByteTime(state: ReadBlobDetails, value: Types.Duration) =
+        member _.FirstByteTime(state: ReadBlobDetails, value: CoreTypes.Duration) =
             { state with FirstByteTime = Some value }
 
         [<CustomOperation("firstByteTimeNanos")>]
-        member _.FirstByteTimeNanos(state: ReadBlobDetails, value: Types.DurationValue<Types.UnitNanos>) =
+        member _.FirstByteTimeNanos(state: ReadBlobDetails, value: CoreTypes.DurationValue<CoreTypes.UnitNanos>) =
             { state with FirstByteTimeNanos = value }
 
         [<CustomOperation("found")>]
@@ -99,11 +99,11 @@ module SnapshotRepositoryAnalyzeBuilders =
             { state with Node = value }
 
         [<CustomOperation("throttled")>]
-        member _.Throttled(state: ReadBlobDetails, value: Types.Duration) =
+        member _.Throttled(state: ReadBlobDetails, value: CoreTypes.Duration) =
             { state with Throttled = Some value }
 
         [<CustomOperation("throttledNanos")>]
-        member _.ThrottledNanos(state: ReadBlobDetails, value: Types.DurationValue<Types.UnitNanos>) =
+        member _.ThrottledNanos(state: ReadBlobDetails, value: CoreTypes.DurationValue<CoreTypes.UnitNanos>) =
             { state with ThrottledNanos = Some value }
 
     let readBlobDetails = ReadBlobDetailsBuilder()

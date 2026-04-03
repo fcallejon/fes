@@ -21,61 +21,61 @@ module RollupGetJobs =
         [<System.Text.Json.Serialization.JsonPropertyName("groups")>]
         Groups: RollupTypes.Groupings
         [<System.Text.Json.Serialization.JsonPropertyName("id")>]
-        Id: Types.Id
+        Id: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("index_pattern")>]
         IndexPattern: string
         [<System.Text.Json.Serialization.JsonPropertyName("metrics")>]
         Metrics: RollupTypes.FieldMetric list
         [<System.Text.Json.Serialization.JsonPropertyName("page_size")>]
-        PageSize: Types.Long
+        PageSize: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("rollup_index")>]
-        RollupIndex: Types.IndexName
+        RollupIndex: CoreTypes.IndexName
         [<System.Text.Json.Serialization.JsonPropertyName("timeout")>]
-        Timeout: Types.Duration
+        Timeout: CoreTypes.Duration
     }
 
     type RollupJobStats = {
         [<System.Text.Json.Serialization.JsonPropertyName("documents_processed")>]
-        DocumentsProcessed: Types.Long
+        DocumentsProcessed: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("index_failures")>]
-        IndexFailures: Types.Long
+        IndexFailures: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("index_time_in_ms")>]
-        IndexTimeInMs: Types.DurationValue<Types.UnitMillis>
+        IndexTimeInMs: CoreTypes.DurationValue<CoreTypes.UnitMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("index_total")>]
-        IndexTotal: Types.Long
+        IndexTotal: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("pages_processed")>]
-        PagesProcessed: Types.Long
+        PagesProcessed: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("rollups_indexed")>]
-        RollupsIndexed: Types.Long
+        RollupsIndexed: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("search_failures")>]
-        SearchFailures: Types.Long
+        SearchFailures: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("search_time_in_ms")>]
-        SearchTimeInMs: Types.DurationValue<Types.UnitMillis>
+        SearchTimeInMs: CoreTypes.DurationValue<CoreTypes.UnitMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("search_total")>]
-        SearchTotal: Types.Long
+        SearchTotal: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("trigger_count")>]
-        TriggerCount: Types.Long
+        TriggerCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("processing_time_in_ms")>]
-        ProcessingTimeInMs: Types.DurationValue<Types.UnitMillis>
+        ProcessingTimeInMs: CoreTypes.DurationValue<CoreTypes.UnitMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("processing_total")>]
-        ProcessingTotal: Types.Long
+        ProcessingTotal: CoreTypes.Long
     }
 
     type RollupJobStatus = {
         [<System.Text.Json.Serialization.JsonPropertyName("current_position")>]
         CurrentPosition: Map<string, System.Text.Json.JsonElement> option
         [<System.Text.Json.Serialization.JsonPropertyName("job_state")>]
-        JobState: RollupGetJobs.IndexingJobState
+        JobState: IndexingJobState
         [<System.Text.Json.Serialization.JsonPropertyName("upgraded_doc_id")>]
         UpgradedDocId: bool option
     }
 
     type RollupJob = {
         [<System.Text.Json.Serialization.JsonPropertyName("config")>]
-        Config: RollupGetJobs.RollupJobConfiguration
+        Config: RollupJobConfiguration
         [<System.Text.Json.Serialization.JsonPropertyName("stats")>]
-        Stats: RollupGetJobs.RollupJobStats
+        Stats: RollupJobStats
         [<System.Text.Json.Serialization.JsonPropertyName("status")>]
-        Status: RollupGetJobs.RollupJobStatus
+        Status: RollupJobStatus
     }
 

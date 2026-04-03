@@ -21,11 +21,11 @@ module CatPluginsBuilders =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: PluginsRecord, value: Types.NodeId) =
+        member _.Id(state: PluginsRecord, value: CoreTypes.NodeId) =
             { state with Id = Some value }
 
         [<CustomOperation("name")>]
-        member _.Name(state: PluginsRecord, value: Types.Name) =
+        member _.Name(state: PluginsRecord, value: CoreTypes.Name) =
             { state with Name = Some value }
 
         [<CustomOperation("component")>]
@@ -33,7 +33,7 @@ module CatPluginsBuilders =
             { state with Component = Some value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: PluginsRecord, value: Types.VersionString) =
+        member _.Version(state: PluginsRecord, value: CoreTypes.VersionString) =
             { state with Version = Some value }
 
         [<CustomOperation("description")>]

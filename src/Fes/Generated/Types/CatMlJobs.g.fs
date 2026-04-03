@@ -9,7 +9,7 @@ module CatMlJobs =
 
     type JobsRecord = {
         [<System.Text.Json.Serialization.JsonPropertyName("id")>]
-        Id: Types.Id option
+        Id: CoreTypes.Id option
         [<System.Text.Json.Serialization.JsonPropertyName("state")>]
         State: MlTypes.JobState option
         [<System.Text.Json.Serialization.JsonPropertyName("opened_time")>]
@@ -21,7 +21,7 @@ module CatMlJobs =
         [<System.Text.Json.Serialization.JsonPropertyName("data.processed_fields")>]
         DataProcessedFields: string option
         [<System.Text.Json.Serialization.JsonPropertyName("data.input_bytes")>]
-        DataInputBytes: Types.ByteSize option
+        DataInputBytes: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("data.input_records")>]
         DataInputRecords: string option
         [<System.Text.Json.Serialization.JsonPropertyName("data.input_fields")>]
@@ -49,11 +49,11 @@ module CatMlJobs =
         [<System.Text.Json.Serialization.JsonPropertyName("data.last_sparse_bucket")>]
         DataLastSparseBucket: string option
         [<System.Text.Json.Serialization.JsonPropertyName("model.bytes")>]
-        ModelBytes: Types.ByteSize option
+        ModelBytes: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("model.memory_status")>]
         ModelMemoryStatus: MlTypes.MemoryStatus option
         [<System.Text.Json.Serialization.JsonPropertyName("model.bytes_exceeded")>]
-        ModelBytesExceeded: Types.ByteSize option
+        ModelBytesExceeded: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("model.memory_limit")>]
         ModelMemoryLimit: string option
         [<System.Text.Json.Serialization.JsonPropertyName("model.by_fields")>]
@@ -109,11 +109,11 @@ module CatMlJobs =
         [<System.Text.Json.Serialization.JsonPropertyName("forecasts.time.total")>]
         ForecastsTimeTotal: string option
         [<System.Text.Json.Serialization.JsonPropertyName("node.id")>]
-        NodeId: Types.NodeId option
+        NodeId: CoreTypes.NodeId option
         [<System.Text.Json.Serialization.JsonPropertyName("node.name")>]
         NodeName: string option
         [<System.Text.Json.Serialization.JsonPropertyName("node.ephemeral_id")>]
-        NodeEphemeralId: Types.NodeId option
+        NodeEphemeralId: CoreTypes.NodeId option
         [<System.Text.Json.Serialization.JsonPropertyName("node.address")>]
         NodeAddress: string option
         [<System.Text.Json.Serialization.JsonPropertyName("buckets.count")>]

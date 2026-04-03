@@ -25,7 +25,7 @@ module SlmTypesBuilders =
             { state with IgnoreUnavailable = Some value }
 
         [<CustomOperation("indices")>]
-        member _.Indices(state: Configuration, value: Types.Indices) =
+        member _.Indices(state: Configuration, value: CoreTypes.Indices) =
             { state with Indices = Some value }
 
         [<CustomOperation("includeGlobalState")>]
@@ -37,7 +37,7 @@ module SlmTypesBuilders =
             { state with FeatureStates = Some value }
 
         [<CustomOperation("metadata")>]
-        member _.Metadata(state: Configuration, value: Types.Metadata) =
+        member _.Metadata(state: Configuration, value: CoreTypes.Metadata) =
             { state with Metadata = Some value }
 
         [<CustomOperation("partial")>]
@@ -61,7 +61,7 @@ module SlmTypesBuilders =
             { state with Config = Some value }
 
         [<CustomOperation("name")>]
-        member _.Name(state: Policy, value: Types.Name) =
+        member _.Name(state: Policy, value: CoreTypes.Name) =
             { state with Name = value }
 
         [<CustomOperation("repository")>]
@@ -106,19 +106,19 @@ module SlmTypesBuilders =
             { state with LastSuccess = Some value }
 
         [<CustomOperation("modifiedDate")>]
-        member _.ModifiedDate(state: SnapshotLifecycle, value: Types.DateTime) =
+        member _.ModifiedDate(state: SnapshotLifecycle, value: CoreTypes.DateTime) =
             { state with ModifiedDate = Some value }
 
         [<CustomOperation("modifiedDateMillis")>]
-        member _.ModifiedDateMillis(state: SnapshotLifecycle, value: Types.EpochTime<Types.UnitMillis>) =
+        member _.ModifiedDateMillis(state: SnapshotLifecycle, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
             { state with ModifiedDateMillis = value }
 
         [<CustomOperation("nextExecution")>]
-        member _.NextExecution(state: SnapshotLifecycle, value: Types.DateTime) =
+        member _.NextExecution(state: SnapshotLifecycle, value: CoreTypes.DateTime) =
             { state with NextExecution = Some value }
 
         [<CustomOperation("nextExecutionMillis")>]
-        member _.NextExecutionMillis(state: SnapshotLifecycle, value: Types.EpochTime<Types.UnitMillis>) =
+        member _.NextExecutionMillis(state: SnapshotLifecycle, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
             { state with NextExecutionMillis = value }
 
         [<CustomOperation("policy")>]
@@ -126,7 +126,7 @@ module SlmTypesBuilders =
             { state with Policy = value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: SnapshotLifecycle, value: Types.VersionNumber) =
+        member _.Version(state: SnapshotLifecycle, value: CoreTypes.VersionNumber) =
             { state with Version = value }
 
         [<CustomOperation("stats")>]
@@ -151,43 +151,43 @@ module SlmTypesBuilders =
             }
 
         [<CustomOperation("retentionDeletionTime")>]
-        member _.RetentionDeletionTime(state: Statistics, value: Types.Duration) =
+        member _.RetentionDeletionTime(state: Statistics, value: CoreTypes.Duration) =
             { state with RetentionDeletionTime = Some value }
 
         [<CustomOperation("retentionDeletionTimeMillis")>]
-        member _.RetentionDeletionTimeMillis(state: Statistics, value: Types.DurationValue<Types.UnitMillis>) =
+        member _.RetentionDeletionTimeMillis(state: Statistics, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
             { state with RetentionDeletionTimeMillis = Some value }
 
         [<CustomOperation("retentionFailed")>]
-        member _.RetentionFailed(state: Statistics, value: Types.Long) =
+        member _.RetentionFailed(state: Statistics, value: CoreTypes.Long) =
             { state with RetentionFailed = Some value }
 
         [<CustomOperation("retentionRuns")>]
-        member _.RetentionRuns(state: Statistics, value: Types.Long) =
+        member _.RetentionRuns(state: Statistics, value: CoreTypes.Long) =
             { state with RetentionRuns = Some value }
 
         [<CustomOperation("retentionTimedOut")>]
-        member _.RetentionTimedOut(state: Statistics, value: Types.Long) =
+        member _.RetentionTimedOut(state: Statistics, value: CoreTypes.Long) =
             { state with RetentionTimedOut = Some value }
 
         [<CustomOperation("policy")>]
-        member _.Policy(state: Statistics, value: Types.Id) =
+        member _.Policy(state: Statistics, value: CoreTypes.Id) =
             { state with Policy = Some value }
 
         [<CustomOperation("totalSnapshotsDeleted")>]
-        member _.TotalSnapshotsDeleted(state: Statistics, value: Types.Long) =
+        member _.TotalSnapshotsDeleted(state: Statistics, value: CoreTypes.Long) =
             { state with TotalSnapshotsDeleted = Some value }
 
         [<CustomOperation("totalSnapshotDeletionFailures")>]
-        member _.TotalSnapshotDeletionFailures(state: Statistics, value: Types.Long) =
+        member _.TotalSnapshotDeletionFailures(state: Statistics, value: CoreTypes.Long) =
             { state with TotalSnapshotDeletionFailures = Some value }
 
         [<CustomOperation("totalSnapshotsFailed")>]
-        member _.TotalSnapshotsFailed(state: Statistics, value: Types.Long) =
+        member _.TotalSnapshotsFailed(state: Statistics, value: CoreTypes.Long) =
             { state with TotalSnapshotsFailed = Some value }
 
         [<CustomOperation("totalSnapshotsTaken")>]
-        member _.TotalSnapshotsTaken(state: Statistics, value: Types.Long) =
+        member _.TotalSnapshotsTaken(state: Statistics, value: CoreTypes.Long) =
             { state with TotalSnapshotsTaken = Some value }
 
     let statistics = StatisticsBuilder()

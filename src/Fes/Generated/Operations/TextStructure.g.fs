@@ -14,18 +14,18 @@ module TextStructureOperations =
     type TextStructureFindFieldStructureRequest = {
         ColumnNames: System.Text.Json.JsonElement option
         Delimiter: string option
-        DocumentsToSample: Types.Uint option
+        DocumentsToSample: CoreTypes.Uint option
         EcsCompatibility: TextStructureTypes.EcsCompatibilityType option
         Explain: bool option
-        Field: Types.Field
+        Field: CoreTypes.Field
         Format: TextStructureTypes.FormatType option
-        GrokPattern: Types.GrokPattern option
-        Index: Types.IndexName
+        GrokPattern: CoreTypes.GrokPattern option
+        Index: CoreTypes.IndexName
         Quote: string option
         ShouldTrimFields: bool option
         ShouldParseRecursively: bool option
-        Timeout: Types.Duration option
-        TimestampField: Types.Field option
+        Timeout: CoreTypes.Duration option
+        TimestampField: CoreTypes.Field option
         TimestampFormat: string option
     }
 
@@ -90,7 +90,7 @@ module TextStructureOperations =
             { state with Delimiter = Some value }
 
         [<CustomOperation("documentsToSample")>]
-        member _.DocumentsToSample(state: TextStructureFindFieldStructureRequest, value: Types.Uint) =
+        member _.DocumentsToSample(state: TextStructureFindFieldStructureRequest, value: CoreTypes.Uint) =
             { state with DocumentsToSample = Some value }
 
         [<CustomOperation("ecsCompatibility")>]
@@ -102,7 +102,7 @@ module TextStructureOperations =
             { state with Explain = Some value }
 
         [<CustomOperation("field")>]
-        member _.Field(state: TextStructureFindFieldStructureRequest, value: Types.Field) =
+        member _.Field(state: TextStructureFindFieldStructureRequest, value: CoreTypes.Field) =
             { state with Field = value }
 
         [<CustomOperation("format")>]
@@ -110,11 +110,11 @@ module TextStructureOperations =
             { state with Format = Some value }
 
         [<CustomOperation("grokPattern")>]
-        member _.GrokPattern(state: TextStructureFindFieldStructureRequest, value: Types.GrokPattern) =
+        member _.GrokPattern(state: TextStructureFindFieldStructureRequest, value: CoreTypes.GrokPattern) =
             { state with GrokPattern = Some value }
 
         [<CustomOperation("index")>]
-        member _.Index(state: TextStructureFindFieldStructureRequest, value: Types.IndexName) =
+        member _.Index(state: TextStructureFindFieldStructureRequest, value: CoreTypes.IndexName) =
             { state with Index = value }
 
         [<CustomOperation("quote")>]
@@ -130,11 +130,11 @@ module TextStructureOperations =
             { state with ShouldParseRecursively = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: TextStructureFindFieldStructureRequest, value: Types.Duration) =
+        member _.Timeout(state: TextStructureFindFieldStructureRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("timestampField")>]
-        member _.TimestampField(state: TextStructureFindFieldStructureRequest, value: Types.Field) =
+        member _.TimestampField(state: TextStructureFindFieldStructureRequest, value: CoreTypes.Field) =
             { state with TimestampField = Some value }
 
         [<CustomOperation("timestampFormat")>]
@@ -148,19 +148,19 @@ module TextStructureOperations =
             { req with ColumnNames = Some value }
         let withDelimiter (value: string) (req: TextStructureFindFieldStructureRequest) =
             { req with Delimiter = Some value }
-        let withDocumentsToSample (value: Types.Uint) (req: TextStructureFindFieldStructureRequest) =
+        let withDocumentsToSample (value: CoreTypes.Uint) (req: TextStructureFindFieldStructureRequest) =
             { req with DocumentsToSample = Some value }
         let withEcsCompatibility (value: TextStructureTypes.EcsCompatibilityType) (req: TextStructureFindFieldStructureRequest) =
             { req with EcsCompatibility = Some value }
         let withExplain (value: bool) (req: TextStructureFindFieldStructureRequest) =
             { req with Explain = Some value }
-        let withField (value: Types.Field) (req: TextStructureFindFieldStructureRequest) =
+        let withField (value: CoreTypes.Field) (req: TextStructureFindFieldStructureRequest) =
             { req with Field = value }
         let withFormat (value: TextStructureTypes.FormatType) (req: TextStructureFindFieldStructureRequest) =
             { req with Format = Some value }
-        let withGrokPattern (value: Types.GrokPattern) (req: TextStructureFindFieldStructureRequest) =
+        let withGrokPattern (value: CoreTypes.GrokPattern) (req: TextStructureFindFieldStructureRequest) =
             { req with GrokPattern = Some value }
-        let withIndex (value: Types.IndexName) (req: TextStructureFindFieldStructureRequest) =
+        let withIndex (value: CoreTypes.IndexName) (req: TextStructureFindFieldStructureRequest) =
             { req with Index = value }
         let withQuote (value: string) (req: TextStructureFindFieldStructureRequest) =
             { req with Quote = Some value }
@@ -168,9 +168,9 @@ module TextStructureOperations =
             { req with ShouldTrimFields = Some value }
         let withShouldParseRecursively (value: bool) (req: TextStructureFindFieldStructureRequest) =
             { req with ShouldParseRecursively = Some value }
-        let withTimeout (value: Types.Duration) (req: TextStructureFindFieldStructureRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: TextStructureFindFieldStructureRequest) =
             { req with Timeout = Some value }
-        let withTimestampField (value: Types.Field) (req: TextStructureFindFieldStructureRequest) =
+        let withTimestampField (value: CoreTypes.Field) (req: TextStructureFindFieldStructureRequest) =
             { req with TimestampField = Some value }
         let withTimestampFormat (value: string) (req: TextStructureFindFieldStructureRequest) =
             { req with TimestampFormat = Some value }
@@ -181,12 +181,12 @@ module TextStructureOperations =
         EcsCompatibility: TextStructureTypes.EcsCompatibilityType option
         Explain: bool option
         Format: TextStructureTypes.FormatType option
-        GrokPattern: Types.GrokPattern option
+        GrokPattern: CoreTypes.GrokPattern option
         Quote: string option
         ShouldTrimFields: bool option
         ShouldParseRecursively: bool option
-        Timeout: Types.Duration option
-        TimestampField: Types.Field option
+        Timeout: CoreTypes.Duration option
+        TimestampField: CoreTypes.Field option
         TimestampFormat: string option
         Messages: string list
     }
@@ -262,7 +262,7 @@ module TextStructureOperations =
             { state with Format = Some value }
 
         [<CustomOperation("grokPattern")>]
-        member _.GrokPattern(state: TextStructureFindMessageStructureRequest, value: Types.GrokPattern) =
+        member _.GrokPattern(state: TextStructureFindMessageStructureRequest, value: CoreTypes.GrokPattern) =
             { state with GrokPattern = Some value }
 
         [<CustomOperation("quote")>]
@@ -278,11 +278,11 @@ module TextStructureOperations =
             { state with ShouldParseRecursively = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: TextStructureFindMessageStructureRequest, value: Types.Duration) =
+        member _.Timeout(state: TextStructureFindMessageStructureRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("timestampField")>]
-        member _.TimestampField(state: TextStructureFindMessageStructureRequest, value: Types.Field) =
+        member _.TimestampField(state: TextStructureFindMessageStructureRequest, value: CoreTypes.Field) =
             { state with TimestampField = Some value }
 
         [<CustomOperation("timestampFormat")>]
@@ -306,7 +306,7 @@ module TextStructureOperations =
             { req with Explain = Some value }
         let withFormat (value: TextStructureTypes.FormatType) (req: TextStructureFindMessageStructureRequest) =
             { req with Format = Some value }
-        let withGrokPattern (value: Types.GrokPattern) (req: TextStructureFindMessageStructureRequest) =
+        let withGrokPattern (value: CoreTypes.GrokPattern) (req: TextStructureFindMessageStructureRequest) =
             { req with GrokPattern = Some value }
         let withQuote (value: string) (req: TextStructureFindMessageStructureRequest) =
             { req with Quote = Some value }
@@ -314,9 +314,9 @@ module TextStructureOperations =
             { req with ShouldTrimFields = Some value }
         let withShouldParseRecursively (value: bool) (req: TextStructureFindMessageStructureRequest) =
             { req with ShouldParseRecursively = Some value }
-        let withTimeout (value: Types.Duration) (req: TextStructureFindMessageStructureRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: TextStructureFindMessageStructureRequest) =
             { req with Timeout = Some value }
-        let withTimestampField (value: Types.Field) (req: TextStructureFindMessageStructureRequest) =
+        let withTimestampField (value: CoreTypes.Field) (req: TextStructureFindMessageStructureRequest) =
             { req with TimestampField = Some value }
         let withTimestampFormat (value: string) (req: TextStructureFindMessageStructureRequest) =
             { req with TimestampFormat = Some value }
@@ -330,15 +330,15 @@ module TextStructureOperations =
         EcsCompatibility: string option
         Explain: bool option
         Format: TextStructureFindStructure.FindStructureFormat option
-        GrokPattern: Types.GrokPattern option
+        GrokPattern: CoreTypes.GrokPattern option
         HasHeaderRow: bool option
-        LineMergeSizeLimit: Types.Uint option
-        LinesToSample: Types.Uint option
+        LineMergeSizeLimit: CoreTypes.Uint option
+        LinesToSample: CoreTypes.Uint option
         Quote: string option
         ShouldTrimFields: bool option
         ShouldParseRecursively: bool option
-        Timeout: Types.Duration option
-        TimestampField: Types.Field option
+        Timeout: CoreTypes.Duration option
+        TimestampField: CoreTypes.Field option
         TimestampFormat: string option
         Document: obj
     }
@@ -426,7 +426,7 @@ module TextStructureOperations =
             { state with Format = Some value }
 
         [<CustomOperation("grokPattern")>]
-        member _.GrokPattern(state: TextStructureFindStructureRequest, value: Types.GrokPattern) =
+        member _.GrokPattern(state: TextStructureFindStructureRequest, value: CoreTypes.GrokPattern) =
             { state with GrokPattern = Some value }
 
         [<CustomOperation("hasHeaderRow")>]
@@ -434,11 +434,11 @@ module TextStructureOperations =
             { state with HasHeaderRow = Some value }
 
         [<CustomOperation("lineMergeSizeLimit")>]
-        member _.LineMergeSizeLimit(state: TextStructureFindStructureRequest, value: Types.Uint) =
+        member _.LineMergeSizeLimit(state: TextStructureFindStructureRequest, value: CoreTypes.Uint) =
             { state with LineMergeSizeLimit = Some value }
 
         [<CustomOperation("linesToSample")>]
-        member _.LinesToSample(state: TextStructureFindStructureRequest, value: Types.Uint) =
+        member _.LinesToSample(state: TextStructureFindStructureRequest, value: CoreTypes.Uint) =
             { state with LinesToSample = Some value }
 
         [<CustomOperation("quote")>]
@@ -454,11 +454,11 @@ module TextStructureOperations =
             { state with ShouldParseRecursively = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: TextStructureFindStructureRequest, value: Types.Duration) =
+        member _.Timeout(state: TextStructureFindStructureRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("timestampField")>]
-        member _.TimestampField(state: TextStructureFindStructureRequest, value: Types.Field) =
+        member _.TimestampField(state: TextStructureFindStructureRequest, value: CoreTypes.Field) =
             { state with TimestampField = Some value }
 
         [<CustomOperation("timestampFormat")>]
@@ -484,13 +484,13 @@ module TextStructureOperations =
             { req with Explain = Some value }
         let withFormat (value: TextStructureFindStructure.FindStructureFormat) (req: TextStructureFindStructureRequest) =
             { req with Format = Some value }
-        let withGrokPattern (value: Types.GrokPattern) (req: TextStructureFindStructureRequest) =
+        let withGrokPattern (value: CoreTypes.GrokPattern) (req: TextStructureFindStructureRequest) =
             { req with GrokPattern = Some value }
         let withHasHeaderRow (value: bool) (req: TextStructureFindStructureRequest) =
             { req with HasHeaderRow = Some value }
-        let withLineMergeSizeLimit (value: Types.Uint) (req: TextStructureFindStructureRequest) =
+        let withLineMergeSizeLimit (value: CoreTypes.Uint) (req: TextStructureFindStructureRequest) =
             { req with LineMergeSizeLimit = Some value }
-        let withLinesToSample (value: Types.Uint) (req: TextStructureFindStructureRequest) =
+        let withLinesToSample (value: CoreTypes.Uint) (req: TextStructureFindStructureRequest) =
             { req with LinesToSample = Some value }
         let withQuote (value: string) (req: TextStructureFindStructureRequest) =
             { req with Quote = Some value }
@@ -498,16 +498,16 @@ module TextStructureOperations =
             { req with ShouldTrimFields = Some value }
         let withShouldParseRecursively (value: bool) (req: TextStructureFindStructureRequest) =
             { req with ShouldParseRecursively = Some value }
-        let withTimeout (value: Types.Duration) (req: TextStructureFindStructureRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: TextStructureFindStructureRequest) =
             { req with Timeout = Some value }
-        let withTimestampField (value: Types.Field) (req: TextStructureFindStructureRequest) =
+        let withTimestampField (value: CoreTypes.Field) (req: TextStructureFindStructureRequest) =
             { req with TimestampField = Some value }
         let withTimestampFormat (value: string) (req: TextStructureFindStructureRequest) =
             { req with TimestampFormat = Some value }
 
     type TextStructureTestGrokPatternRequest = {
         EcsCompatibility: string option
-        GrokPattern: Types.GrokPattern
+        GrokPattern: CoreTypes.GrokPattern
         Text: string list
     }
 
@@ -545,7 +545,7 @@ module TextStructureOperations =
             { state with EcsCompatibility = Some value }
 
         [<CustomOperation("grokPattern")>]
-        member _.GrokPattern(state: TextStructureTestGrokPatternRequest, value: Types.GrokPattern) =
+        member _.GrokPattern(state: TextStructureTestGrokPatternRequest, value: CoreTypes.GrokPattern) =
             { state with GrokPattern = value }
 
         [<CustomOperation("text")>]
@@ -557,7 +557,7 @@ module TextStructureOperations =
     module TestGrokPattern =
         let withEcsCompatibility (value: string) (req: TextStructureTestGrokPatternRequest) =
             { req with EcsCompatibility = Some value }
-        let withGrokPattern (value: Types.GrokPattern) (req: TextStructureTestGrokPatternRequest) =
+        let withGrokPattern (value: CoreTypes.GrokPattern) (req: TextStructureTestGrokPatternRequest) =
             { req with GrokPattern = value }
         let withText (value: string list) (req: TextStructureTestGrokPatternRequest) =
             { req with Text = value }

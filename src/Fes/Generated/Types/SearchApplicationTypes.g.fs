@@ -9,12 +9,12 @@ module SearchApplicationTypes =
 
     type EventDataStream = {
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.IndexName
+        Name: CoreTypes.IndexName
     }
 
     type AnalyticsCollection = {
         [<System.Text.Json.Serialization.JsonPropertyName("event_data_stream")>]
-        EventDataStream: SearchApplicationTypes.EventDataStream
+        EventDataStream: EventDataStream
     }
 
     [<RequireQualifiedAccess>]
@@ -25,22 +25,22 @@ module SearchApplicationTypes =
 
     type SearchApplicationTemplate = {
         [<System.Text.Json.Serialization.JsonPropertyName("script")>]
-        Script: Types.Script
+        Script: CoreTypes.Script
     }
 
     type SearchApplicationParameters = {
         [<System.Text.Json.Serialization.JsonPropertyName("indices")>]
-        Indices: Types.IndexName list
+        Indices: CoreTypes.IndexName list
         [<System.Text.Json.Serialization.JsonPropertyName("analytics_collection_name")>]
-        AnalyticsCollectionName: Types.Name option
+        AnalyticsCollectionName: CoreTypes.Name option
         [<System.Text.Json.Serialization.JsonPropertyName("template")>]
-        Template: SearchApplicationTypes.SearchApplicationTemplate option
+        Template: SearchApplicationTemplate option
     }
 
     type SearchApplication = {
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.Name
+        Name: CoreTypes.Name
         [<System.Text.Json.Serialization.JsonPropertyName("updated_at_millis")>]
-        UpdatedAtMillis: Types.EpochTime<Types.UnitMillis>
+        UpdatedAtMillis: CoreTypes.EpochTime<CoreTypes.UnitMillis>
     }
 

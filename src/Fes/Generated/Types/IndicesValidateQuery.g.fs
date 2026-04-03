@@ -13,9 +13,9 @@ module IndicesValidateQuery =
         [<System.Text.Json.Serialization.JsonPropertyName("explanation")>]
         Explanation: string option
         [<System.Text.Json.Serialization.JsonPropertyName("index")>]
-        Index: Types.IndexName option
+        Index: CoreTypes.IndexName option
         [<System.Text.Json.Serialization.JsonPropertyName("shard")>]
-        Shard: Types.Integer option
+        Shard: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("valid")>]
         Valid: bool
     }

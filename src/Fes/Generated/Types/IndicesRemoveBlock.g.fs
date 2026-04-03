@@ -9,10 +9,10 @@ module IndicesRemoveBlock =
 
     type RemoveIndicesBlockStatus = {
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.IndexName
+        Name: CoreTypes.IndexName
         [<System.Text.Json.Serialization.JsonPropertyName("unblocked")>]
         Unblocked: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("exception")>]
-        Exception: Types.ErrorCause option
+        Exception: CoreTypes.ErrorCause option
     }
 

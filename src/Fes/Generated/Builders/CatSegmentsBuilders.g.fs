@@ -30,7 +30,7 @@ module CatSegmentsBuilders =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: SegmentsRecord, value: Types.IndexName) =
+        member _.Index(state: SegmentsRecord, value: CoreTypes.IndexName) =
             { state with Index = Some value }
 
         [<CustomOperation("shard")>]
@@ -46,7 +46,7 @@ module CatSegmentsBuilders =
             { state with Ip = Some value }
 
         [<CustomOperation("id")>]
-        member _.Id(state: SegmentsRecord, value: Types.NodeId) =
+        member _.Id(state: SegmentsRecord, value: CoreTypes.NodeId) =
             { state with Id = Some value }
 
         [<CustomOperation("segment")>]
@@ -66,11 +66,11 @@ module CatSegmentsBuilders =
             { state with DocsDeleted = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: SegmentsRecord, value: Types.ByteSize) =
+        member _.Size(state: SegmentsRecord, value: CoreTypes.ByteSize) =
             { state with Size = Some value }
 
         [<CustomOperation("sizeMemory")>]
-        member _.SizeMemory(state: SegmentsRecord, value: Types.ByteSize) =
+        member _.SizeMemory(state: SegmentsRecord, value: CoreTypes.ByteSize) =
             { state with SizeMemory = Some value }
 
         [<CustomOperation("committed")>]
@@ -82,7 +82,7 @@ module CatSegmentsBuilders =
             { state with Searchable = Some value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: SegmentsRecord, value: Types.VersionString) =
+        member _.Version(state: SegmentsRecord, value: CoreTypes.VersionString) =
             { state with Version = Some value }
 
         [<CustomOperation("compound")>]

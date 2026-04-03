@@ -21,23 +21,23 @@ module LicenseTypes =
 
     type License = {
         [<System.Text.Json.Serialization.JsonPropertyName("expiry_date_in_millis")>]
-        ExpiryDateInMillis: Types.EpochTime<Types.UnitMillis>
+        ExpiryDateInMillis: CoreTypes.EpochTime<CoreTypes.UnitMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("issue_date_in_millis")>]
-        IssueDateInMillis: Types.EpochTime<Types.UnitMillis>
+        IssueDateInMillis: CoreTypes.EpochTime<CoreTypes.UnitMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("start_date_in_millis")>]
-        StartDateInMillis: Types.EpochTime<Types.UnitMillis> option
+        StartDateInMillis: CoreTypes.EpochTime<CoreTypes.UnitMillis> option
         [<System.Text.Json.Serialization.JsonPropertyName("issued_to")>]
         IssuedTo: string
         [<System.Text.Json.Serialization.JsonPropertyName("issuer")>]
         Issuer: string
         [<System.Text.Json.Serialization.JsonPropertyName("max_nodes")>]
-        MaxNodes: Types.Long option option
+        MaxNodes: CoreTypes.Long option option
         [<System.Text.Json.Serialization.JsonPropertyName("max_resource_units")>]
-        MaxResourceUnits: Types.Long option
+        MaxResourceUnits: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("signature")>]
         Signature: string
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
-        Type: LicenseTypes.LicenseType
+        Type: LicenseType
         [<System.Text.Json.Serialization.JsonPropertyName("uid")>]
         Uid: string
     }

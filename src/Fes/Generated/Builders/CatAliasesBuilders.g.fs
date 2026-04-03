@@ -25,7 +25,7 @@ module CatAliasesBuilders =
             { state with Alias = Some value }
 
         [<CustomOperation("index")>]
-        member _.Index(state: AliasesRecord, value: Types.IndexName) =
+        member _.Index(state: AliasesRecord, value: CoreTypes.IndexName) =
             { state with Index = Some value }
 
         [<CustomOperation("filter")>]

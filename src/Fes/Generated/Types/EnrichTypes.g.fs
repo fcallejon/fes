@@ -9,15 +9,15 @@ module EnrichTypes =
 
     type Policy = {
         [<System.Text.Json.Serialization.JsonPropertyName("enrich_fields")>]
-        EnrichFields: Types.Fields
+        EnrichFields: CoreTypes.Fields
         [<System.Text.Json.Serialization.JsonPropertyName("indices")>]
-        Indices: Types.Indices
+        Indices: CoreTypes.Indices
         [<System.Text.Json.Serialization.JsonPropertyName("match_field")>]
-        MatchField: Types.Field
+        MatchField: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("query")>]
-        Query: TypesQueryDsl.QueryContainer option
+        Query: CoreTypes.QueryContainer option
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.Name option
+        Name: CoreTypes.Name option
         [<System.Text.Json.Serialization.JsonPropertyName("elasticsearch_version")>]
         ElasticsearchVersion: string option
     }
@@ -30,6 +30,6 @@ module EnrichTypes =
 
     type Summary = {
         [<System.Text.Json.Serialization.JsonPropertyName("config")>]
-        Config: Map<EnrichTypes.PolicyType, EnrichTypes.Policy>
+        Config: Map<PolicyType, Policy>
     }
 

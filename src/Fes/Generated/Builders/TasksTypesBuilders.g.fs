@@ -22,19 +22,19 @@ module TasksTypesBuilders =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: NodeTasks, value: Types.NodeId) =
+        member _.Name(state: NodeTasks, value: CoreTypes.NodeId) =
             { state with Name = Some value }
 
         [<CustomOperation("transportAddress")>]
-        member _.TransportAddress(state: NodeTasks, value: Types.TransportAddress) =
+        member _.TransportAddress(state: NodeTasks, value: CoreTypes.TransportAddress) =
             { state with TransportAddress = Some value }
 
         [<CustomOperation("host")>]
-        member _.Host(state: NodeTasks, value: Types.Host) =
+        member _.Host(state: NodeTasks, value: CoreTypes.Host) =
             { state with Host = Some value }
 
         [<CustomOperation("ip")>]
-        member _.Ip(state: NodeTasks, value: Types.Ip) =
+        member _.Ip(state: NodeTasks, value: CoreTypes.Ip) =
             { state with Ip = Some value }
 
         [<CustomOperation("roles")>]
@@ -46,7 +46,7 @@ module TasksTypesBuilders =
             { state with Attributes = Some value }
 
         [<CustomOperation("tasks")>]
-        member _.Tasks(state: NodeTasks, value: Map<Types.TaskId, TasksTypes.TaskInfo>) =
+        member _.Tasks(state: NodeTasks, value: Map<CoreTypes.TaskId, TasksTypes.TaskInfo>) =
             { state with Tasks = value }
 
     let nodeTasks = NodeTasksBuilder()
@@ -90,23 +90,23 @@ module TasksTypesBuilders =
             { state with Headers = value }
 
         [<CustomOperation("id")>]
-        member _.Id(state: TaskInfo, value: Types.Long) =
+        member _.Id(state: TaskInfo, value: CoreTypes.Long) =
             { state with Id = value }
 
         [<CustomOperation("node")>]
-        member _.Node(state: TaskInfo, value: Types.NodeId) =
+        member _.Node(state: TaskInfo, value: CoreTypes.NodeId) =
             { state with Node = value }
 
         [<CustomOperation("runningTime")>]
-        member _.RunningTime(state: TaskInfo, value: Types.Duration) =
+        member _.RunningTime(state: TaskInfo, value: CoreTypes.Duration) =
             { state with RunningTime = Some value }
 
         [<CustomOperation("runningTimeInNanos")>]
-        member _.RunningTimeInNanos(state: TaskInfo, value: Types.DurationValue<Types.UnitNanos>) =
+        member _.RunningTimeInNanos(state: TaskInfo, value: CoreTypes.DurationValue<CoreTypes.UnitNanos>) =
             { state with RunningTimeInNanos = value }
 
         [<CustomOperation("startTimeInMillis")>]
-        member _.StartTimeInMillis(state: TaskInfo, value: Types.EpochTime<Types.UnitMillis>) =
+        member _.StartTimeInMillis(state: TaskInfo, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
             { state with StartTimeInMillis = value }
 
         [<CustomOperation("status")>]
@@ -118,7 +118,7 @@ module TasksTypesBuilders =
             { state with Type = value }
 
         [<CustomOperation("parentTaskId")>]
-        member _.ParentTaskId(state: TaskInfo, value: Types.TaskId) =
+        member _.ParentTaskId(state: TaskInfo, value: CoreTypes.TaskId) =
             { state with ParentTaskId = Some value }
 
     let taskInfo = TaskInfoBuilder()
@@ -133,11 +133,11 @@ module TasksTypesBuilders =
             }
 
         [<CustomOperation("nodeFailures")>]
-        member _.NodeFailures(state: TaskListResponseBase, value: Types.ErrorCause list) =
+        member _.NodeFailures(state: TaskListResponseBase, value: CoreTypes.ErrorCause list) =
             { state with NodeFailures = Some value }
 
         [<CustomOperation("taskFailures")>]
-        member _.TaskFailures(state: TaskListResponseBase, value: Types.TaskFailure list) =
+        member _.TaskFailures(state: TaskListResponseBase, value: CoreTypes.TaskFailure list) =
             { state with TaskFailures = Some value }
 
         [<CustomOperation("nodes")>]

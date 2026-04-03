@@ -9,13 +9,13 @@ module IndicesModifyDataStream =
 
     type IndexAndDataStreamAction = {
         [<System.Text.Json.Serialization.JsonPropertyName("data_stream")>]
-        DataStream: Types.DataStreamName
+        DataStream: CoreTypes.DataStreamName
         [<System.Text.Json.Serialization.JsonPropertyName("index")>]
-        Index: Types.IndexName
+        Index: CoreTypes.IndexName
     }
 
     [<RequireQualifiedAccess>]
     type Action =
-        | AddBackingIndex of IndicesModifyDataStream.IndexAndDataStreamAction
-        | RemoveBackingIndex of IndicesModifyDataStream.IndexAndDataStreamAction
+        | AddBackingIndex of IndexAndDataStreamAction
+        | RemoveBackingIndex of IndexAndDataStreamAction
 

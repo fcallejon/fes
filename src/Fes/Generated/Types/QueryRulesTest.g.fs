@@ -9,8 +9,8 @@ module QueryRulesTest =
 
     type QueryRulesetMatchedRule = {
         [<System.Text.Json.Serialization.JsonPropertyName("ruleset_id")>]
-        RulesetId: Types.Id
+        RulesetId: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("rule_id")>]
-        RuleId: Types.Id
+        RuleId: CoreTypes.Id
     }
 

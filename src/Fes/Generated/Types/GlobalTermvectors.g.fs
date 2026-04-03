@@ -9,58 +9,58 @@ module GlobalTermvectors =
 
     type FieldStatistics = {
         [<System.Text.Json.Serialization.JsonPropertyName("doc_count")>]
-        DocCount: Types.Integer
+        DocCount: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("sum_doc_freq")>]
-        SumDocFreq: Types.Long
+        SumDocFreq: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("sum_ttf")>]
-        SumTtf: Types.Long
+        SumTtf: CoreTypes.Long
     }
 
     type Filter = {
         [<System.Text.Json.Serialization.JsonPropertyName("max_doc_freq")>]
-        MaxDocFreq: Types.Integer option
+        MaxDocFreq: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("max_num_terms")>]
-        MaxNumTerms: Types.Integer option
+        MaxNumTerms: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("max_term_freq")>]
-        MaxTermFreq: Types.Integer option
+        MaxTermFreq: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("max_word_length")>]
-        MaxWordLength: Types.Integer option
+        MaxWordLength: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("min_doc_freq")>]
-        MinDocFreq: Types.Integer option
+        MinDocFreq: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("min_term_freq")>]
-        MinTermFreq: Types.Integer option
+        MinTermFreq: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("min_word_length")>]
-        MinWordLength: Types.Integer option
+        MinWordLength: CoreTypes.Integer option
     }
 
     type Token = {
         [<System.Text.Json.Serialization.JsonPropertyName("end_offset")>]
-        EndOffset: Types.Integer option
+        EndOffset: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("payload")>]
         Payload: string option
         [<System.Text.Json.Serialization.JsonPropertyName("position")>]
-        Position: Types.Integer
+        Position: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("start_offset")>]
-        StartOffset: Types.Integer option
+        StartOffset: CoreTypes.Integer option
     }
 
     type Term = {
         [<System.Text.Json.Serialization.JsonPropertyName("doc_freq")>]
-        DocFreq: Types.Integer option
+        DocFreq: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("score")>]
-        Score: Types.Double option
+        Score: CoreTypes.Double option
         [<System.Text.Json.Serialization.JsonPropertyName("term_freq")>]
-        TermFreq: Types.Integer
+        TermFreq: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("tokens")>]
-        Tokens: GlobalTermvectors.Token list option
+        Tokens: Token list option
         [<System.Text.Json.Serialization.JsonPropertyName("ttf")>]
-        Ttf: Types.Integer option
+        Ttf: CoreTypes.Integer option
     }
 
     type TermVector = {
         [<System.Text.Json.Serialization.JsonPropertyName("field_statistics")>]
-        FieldStatistics: GlobalTermvectors.FieldStatistics option
+        FieldStatistics: FieldStatistics option
         [<System.Text.Json.Serialization.JsonPropertyName("terms")>]
-        Terms: Map<string, GlobalTermvectors.Term>
+        Terms: Map<string, Term>
     }
 

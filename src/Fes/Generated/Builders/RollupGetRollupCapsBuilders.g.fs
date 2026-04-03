@@ -22,11 +22,11 @@ module RollupGetRollupCapsBuilders =
             { state with Agg = value }
 
         [<CustomOperation("calendarInterval")>]
-        member _.CalendarInterval(state: RollupFieldSummary, value: Types.Duration) =
+        member _.CalendarInterval(state: RollupFieldSummary, value: CoreTypes.Duration) =
             { state with CalendarInterval = Some value }
 
         [<CustomOperation("timeZone")>]
-        member _.TimeZone(state: RollupFieldSummary, value: Types.TimeZone) =
+        member _.TimeZone(state: RollupFieldSummary, value: CoreTypes.TimeZone) =
             { state with TimeZone = Some value }
 
     let rollupFieldSummary = RollupFieldSummaryBuilder()

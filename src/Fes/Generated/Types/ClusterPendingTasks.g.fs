@@ -11,14 +11,14 @@ module ClusterPendingTasks =
         [<System.Text.Json.Serialization.JsonPropertyName("executing")>]
         Executing: bool
         [<System.Text.Json.Serialization.JsonPropertyName("insert_order")>]
-        InsertOrder: Types.Integer
+        InsertOrder: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("priority")>]
         Priority: string
         [<System.Text.Json.Serialization.JsonPropertyName("source")>]
         Source: string
         [<System.Text.Json.Serialization.JsonPropertyName("time_in_queue")>]
-        TimeInQueue: Types.Duration option
+        TimeInQueue: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("time_in_queue_millis")>]
-        TimeInQueueMillis: Types.DurationValue<Types.UnitMillis>
+        TimeInQueueMillis: CoreTypes.DurationValue<CoreTypes.UnitMillis>
     }
 

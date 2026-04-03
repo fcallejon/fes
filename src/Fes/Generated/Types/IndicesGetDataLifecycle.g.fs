@@ -9,7 +9,7 @@ module IndicesGetDataLifecycle =
 
     type DataStreamWithLifecycle = {
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.DataStreamName
+        Name: CoreTypes.DataStreamName
         [<System.Text.Json.Serialization.JsonPropertyName("lifecycle")>]
         Lifecycle: IndicesTypes.DataStreamLifecycleWithRollover option
     }

@@ -20,11 +20,11 @@ module GlobalReindexBuilders =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: Destination, value: Types.IndexName) =
+        member _.Index(state: Destination, value: CoreTypes.IndexName) =
             { state with Index = value }
 
         [<CustomOperation("opType")>]
-        member _.OpType(state: Destination, value: Types.OpType) =
+        member _.OpType(state: Destination, value: CoreTypes.OpType) =
             { state with OpType = Some value }
 
         [<CustomOperation("pipeline")>]
@@ -36,7 +36,7 @@ module GlobalReindexBuilders =
             { state with Routing = Some value }
 
         [<CustomOperation("versionType")>]
-        member _.VersionType(state: Destination, value: Types.VersionType) =
+        member _.VersionType(state: Destination, value: CoreTypes.VersionType) =
             { state with VersionType = Some value }
 
     let destination = DestinationBuilder()
@@ -54,7 +54,7 @@ module GlobalReindexBuilders =
             }
 
         [<CustomOperation("connectTimeout")>]
-        member _.ConnectTimeout(state: RemoteSource, value: Types.Duration) =
+        member _.ConnectTimeout(state: RemoteSource, value: CoreTypes.Duration) =
             { state with ConnectTimeout = Some value }
 
         [<CustomOperation("headers")>]
@@ -62,15 +62,15 @@ module GlobalReindexBuilders =
             { state with Headers = Some value }
 
         [<CustomOperation("host")>]
-        member _.Host(state: RemoteSource, value: Types.Host) =
+        member _.Host(state: RemoteSource, value: CoreTypes.Host) =
             { state with Host = value }
 
         [<CustomOperation("username")>]
-        member _.Username(state: RemoteSource, value: Types.Username) =
+        member _.Username(state: RemoteSource, value: CoreTypes.Username) =
             { state with Username = Some value }
 
         [<CustomOperation("password")>]
-        member _.Password(state: RemoteSource, value: Types.Password) =
+        member _.Password(state: RemoteSource, value: CoreTypes.Password) =
             { state with Password = Some value }
 
         [<CustomOperation("apiKey")>]
@@ -78,7 +78,7 @@ module GlobalReindexBuilders =
             { state with ApiKey = Some value }
 
         [<CustomOperation("socketTimeout")>]
-        member _.SocketTimeout(state: RemoteSource, value: Types.Duration) =
+        member _.SocketTimeout(state: RemoteSource, value: CoreTypes.Duration) =
             { state with SocketTimeout = Some value }
 
     let remoteSource = RemoteSourceBuilder()
@@ -98,11 +98,11 @@ module GlobalReindexBuilders =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: Source, value: Types.Indices) =
+        member _.Index(state: Source, value: CoreTypes.Indices) =
             { state with Index = value }
 
         [<CustomOperation("query")>]
-        member _.Query(state: Source, value: TypesQueryDsl.QueryContainer) =
+        member _.Query(state: Source, value: CoreTypes.QueryContainer) =
             { state with Query = Some value }
 
         [<CustomOperation("remote")>]
@@ -110,19 +110,19 @@ module GlobalReindexBuilders =
             { state with Remote = Some value }
 
         [<CustomOperation("projectRouting")>]
-        member _.ProjectRouting(state: Source, value: Types.ProjectRouting) =
+        member _.ProjectRouting(state: Source, value: CoreTypes.ProjectRouting) =
             { state with ProjectRouting = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: Source, value: Types.Integer) =
+        member _.Size(state: Source, value: CoreTypes.Integer) =
             { state with Size = Some value }
 
         [<CustomOperation("slice")>]
-        member _.Slice(state: Source, value: Types.SlicedScroll) =
+        member _.Slice(state: Source, value: CoreTypes.SlicedScroll) =
             { state with Slice = Some value }
 
         [<CustomOperation("sort")>]
-        member _.Sort(state: Source, value: Types.Sort) =
+        member _.Sort(state: Source, value: CoreTypes.Sort) =
             { state with Sort = Some value }
 
         [<CustomOperation("source")>]
@@ -130,7 +130,7 @@ module GlobalReindexBuilders =
             { state with Source = Some value }
 
         [<CustomOperation("runtimeMappings")>]
-        member _.RuntimeMappings(state: Source, value: TypesMapping.RuntimeFields) =
+        member _.RuntimeMappings(state: Source, value: CoreTypes.RuntimeFields) =
             { state with RuntimeMappings = Some value }
 
     let source = SourceBuilder()

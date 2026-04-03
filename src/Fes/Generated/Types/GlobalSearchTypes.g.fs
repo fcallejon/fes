@@ -9,53 +9,53 @@ module GlobalSearchTypes =
 
     type AggregationBreakdown = {
         [<System.Text.Json.Serialization.JsonPropertyName("build_aggregation")>]
-        BuildAggregation: Types.Long
+        BuildAggregation: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("build_aggregation_count")>]
-        BuildAggregationCount: Types.Long
+        BuildAggregationCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("build_leaf_collector")>]
-        BuildLeafCollector: Types.Long
+        BuildLeafCollector: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("build_leaf_collector_count")>]
-        BuildLeafCollectorCount: Types.Long
+        BuildLeafCollectorCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("collect")>]
-        Collect: Types.Long
+        Collect: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("collect_count")>]
-        CollectCount: Types.Long
+        CollectCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("initialize")>]
-        Initialize: Types.Long
+        Initialize: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("initialize_count")>]
-        InitializeCount: Types.Long
+        InitializeCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("post_collection")>]
-        PostCollection: Types.Long option
+        PostCollection: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("post_collection_count")>]
-        PostCollectionCount: Types.Long option
+        PostCollectionCount: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("reduce")>]
-        Reduce: Types.Long
+        Reduce: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("reduce_count")>]
-        ReduceCount: Types.Long
+        ReduceCount: CoreTypes.Long
     }
 
     type AggregationProfileDelegateDebugFilter = {
         [<System.Text.Json.Serialization.JsonPropertyName("results_from_metadata")>]
-        ResultsFromMetadata: Types.Integer option
+        ResultsFromMetadata: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("query")>]
         Query: string option
         [<System.Text.Json.Serialization.JsonPropertyName("specialized_for")>]
         SpecializedFor: string option
         [<System.Text.Json.Serialization.JsonPropertyName("segments_counted_in_constant_time")>]
-        SegmentsCountedInConstantTime: Types.Integer option
+        SegmentsCountedInConstantTime: CoreTypes.Integer option
     }
 
     type AggregationProfileDebug = {
         [<System.Text.Json.Serialization.JsonPropertyName("segments_with_multi_valued_ords")>]
-        SegmentsWithMultiValuedOrds: Types.Integer option
+        SegmentsWithMultiValuedOrds: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("collection_strategy")>]
         CollectionStrategy: string option
         [<System.Text.Json.Serialization.JsonPropertyName("segments_with_single_valued_ords")>]
-        SegmentsWithSingleValuedOrds: Types.Integer option
+        SegmentsWithSingleValuedOrds: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("total_buckets")>]
-        TotalBuckets: Types.Integer option
+        TotalBuckets: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("built_buckets")>]
-        BuiltBuckets: Types.Integer option
+        BuiltBuckets: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("result_strategy")>]
         ResultStrategy: string option
         [<System.Text.Json.Serialization.JsonPropertyName("has_filter")>]
@@ -63,68 +63,68 @@ module GlobalSearchTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("delegate")>]
         Delegate: string option
         [<System.Text.Json.Serialization.JsonPropertyName("delegate_debug")>]
-        DelegateDebug: GlobalSearchTypes.AggregationProfileDebug option
+        DelegateDebug: AggregationProfileDebug option
         [<System.Text.Json.Serialization.JsonPropertyName("chars_fetched")>]
-        CharsFetched: Types.Integer option
+        CharsFetched: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("extract_count")>]
-        ExtractCount: Types.Integer option
+        ExtractCount: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("extract_ns")>]
-        ExtractNs: Types.Integer option
+        ExtractNs: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("values_fetched")>]
-        ValuesFetched: Types.Integer option
+        ValuesFetched: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("collect_analyzed_ns")>]
-        CollectAnalyzedNs: Types.Integer option
+        CollectAnalyzedNs: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("collect_analyzed_count")>]
-        CollectAnalyzedCount: Types.Integer option
+        CollectAnalyzedCount: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("surviving_buckets")>]
-        SurvivingBuckets: Types.Integer option
+        SurvivingBuckets: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("ordinals_collectors_used")>]
-        OrdinalsCollectorsUsed: Types.Integer option
+        OrdinalsCollectorsUsed: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("ordinals_collectors_overhead_too_high")>]
-        OrdinalsCollectorsOverheadTooHigh: Types.Integer option
+        OrdinalsCollectorsOverheadTooHigh: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("string_hashing_collectors_used")>]
-        StringHashingCollectorsUsed: Types.Integer option
+        StringHashingCollectorsUsed: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("numeric_collectors_used")>]
-        NumericCollectorsUsed: Types.Integer option
+        NumericCollectorsUsed: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("empty_collectors_used")>]
-        EmptyCollectorsUsed: Types.Integer option
+        EmptyCollectorsUsed: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("deferred_aggregators")>]
         DeferredAggregators: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("segments_with_doc_count_field")>]
-        SegmentsWithDocCountField: Types.Integer option
+        SegmentsWithDocCountField: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("segments_with_deleted_docs")>]
-        SegmentsWithDeletedDocs: Types.Integer option
+        SegmentsWithDeletedDocs: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("filters")>]
-        Filters: GlobalSearchTypes.AggregationProfileDelegateDebugFilter list option
+        Filters: AggregationProfileDelegateDebugFilter list option
         [<System.Text.Json.Serialization.JsonPropertyName("segments_counted")>]
-        SegmentsCounted: Types.Integer option
+        SegmentsCounted: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("segments_collected")>]
-        SegmentsCollected: Types.Integer option
+        SegmentsCollected: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("map_reducer")>]
         MapReducer: string option
         [<System.Text.Json.Serialization.JsonPropertyName("brute_force_used")>]
-        BruteForceUsed: Types.Integer option
+        BruteForceUsed: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("dynamic_pruning_attempted")>]
-        DynamicPruningAttempted: Types.Integer option
+        DynamicPruningAttempted: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("dynamic_pruning_used")>]
-        DynamicPruningUsed: Types.Integer option
+        DynamicPruningUsed: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("skipped_due_to_no_data")>]
-        SkippedDueToNoData: Types.Integer option
+        SkippedDueToNoData: CoreTypes.Integer option
     }
 
     type AggregationProfile = {
         [<System.Text.Json.Serialization.JsonPropertyName("breakdown")>]
-        Breakdown: GlobalSearchTypes.AggregationBreakdown
+        Breakdown: AggregationBreakdown
         [<System.Text.Json.Serialization.JsonPropertyName("description")>]
         Description: string
         [<System.Text.Json.Serialization.JsonPropertyName("time_in_nanos")>]
-        TimeInNanos: Types.DurationValue<Types.UnitNanos>
+        TimeInNanos: CoreTypes.DurationValue<CoreTypes.UnitNanos>
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("debug")>]
-        Debug: GlobalSearchTypes.AggregationProfileDebug option
+        Debug: AggregationProfileDebug option
         [<System.Text.Json.Serialization.JsonPropertyName("children")>]
-        Children: GlobalSearchTypes.AggregationProfile list option
+        Children: AggregationProfile list option
     }
 
     [<RequireQualifiedAccess>]
@@ -139,26 +139,26 @@ module GlobalSearchTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("reason")>]
         Reason: string
         [<System.Text.Json.Serialization.JsonPropertyName("time_in_nanos")>]
-        TimeInNanos: Types.DurationValue<Types.UnitNanos>
+        TimeInNanos: CoreTypes.DurationValue<CoreTypes.UnitNanos>
         [<System.Text.Json.Serialization.JsonPropertyName("children")>]
-        Children: GlobalSearchTypes.Collector list option
+        Children: Collector list option
     }
 
     /// Text or location that we want similar documents for or a lookup to a document's field for the text.
     [<RequireQualifiedAccess>]
     type Context =
         | String of string
-        | GeoLocation of Types.GeoLocation
+        | GeoLocation of CoreTypes.GeoLocation
 
     type CompletionContext = {
         [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
-        Boost: Types.Double option
+        Boost: CoreTypes.Double option
         [<System.Text.Json.Serialization.JsonPropertyName("context")>]
-        Context: GlobalSearchTypes.Context
+        Context: Context
         [<System.Text.Json.Serialization.JsonPropertyName("neighbours")>]
-        Neighbours: Types.GeoHashPrecision list option
+        Neighbours: CoreTypes.GeoHashPrecision list option
         [<System.Text.Json.Serialization.JsonPropertyName("precision")>]
-        Precision: Types.GeoHashPrecision option
+        Precision: CoreTypes.GeoHashPrecision option
         [<System.Text.Json.Serialization.JsonPropertyName("prefix")>]
         Prefix: bool option
     }
@@ -167,30 +167,30 @@ module GlobalSearchTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("collate_match")>]
         CollateMatch: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("contexts")>]
-        Contexts: Map<string, GlobalSearchTypes.Context list> option
+        Contexts: Map<string, Context list> option
         [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
         Fields: Map<string, System.Text.Json.JsonElement> option
         [<System.Text.Json.Serialization.JsonPropertyName("_id")>]
         Id: string option
         [<System.Text.Json.Serialization.JsonPropertyName("_index")>]
-        Index: Types.IndexName option
+        Index: CoreTypes.IndexName option
         [<System.Text.Json.Serialization.JsonPropertyName("_routing")>]
         Routing: string option
         [<System.Text.Json.Serialization.JsonPropertyName("_score")>]
-        Score: Types.Double option
+        Score: CoreTypes.Double option
         [<System.Text.Json.Serialization.JsonPropertyName("_source")>]
         Source: 'tDocument option
         [<System.Text.Json.Serialization.JsonPropertyName("text")>]
         Text: string
         [<System.Text.Json.Serialization.JsonPropertyName("score")>]
-        Score: Types.Double option
+        Score: CoreTypes.Double option
     }
 
     type SuggestBase = {
         [<System.Text.Json.Serialization.JsonPropertyName("length")>]
-        Length: Types.Integer
+        Length: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("offset")>]
-        Offset: Types.Integer
+        Offset: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("text")>]
         Text: string
     }
@@ -202,11 +202,11 @@ module GlobalSearchTypes =
 
     type SuggestFuzziness = {
         [<System.Text.Json.Serialization.JsonPropertyName("fuzziness")>]
-        Fuzziness: Types.Fuzziness option
+        Fuzziness: CoreTypes.Fuzziness option
         [<System.Text.Json.Serialization.JsonPropertyName("min_length")>]
-        MinLength: Types.Integer option
+        MinLength: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("prefix_length")>]
-        PrefixLength: Types.Integer option
+        PrefixLength: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("transpositions")>]
         Transpositions: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("unicode_aware")>]
@@ -217,70 +217,70 @@ module GlobalSearchTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("flags")>]
         Flags: System.Text.Json.JsonElement option
         [<System.Text.Json.Serialization.JsonPropertyName("max_determinized_states")>]
-        MaxDeterminizedStates: Types.Integer option
+        MaxDeterminizedStates: CoreTypes.Integer option
     }
 
     type SuggesterBase = {
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
-        Field: Types.Field
+        Field: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("analyzer")>]
         Analyzer: string option
         [<System.Text.Json.Serialization.JsonPropertyName("size")>]
-        Size: Types.Integer option
+        Size: CoreTypes.Integer option
     }
 
     type CompletionSuggester = {
         [<System.Text.Json.Serialization.JsonPropertyName("contexts")>]
-        Contexts: Map<Types.Field, System.Text.Json.JsonElement> option
+        Contexts: Map<CoreTypes.Field, System.Text.Json.JsonElement> option
         [<System.Text.Json.Serialization.JsonPropertyName("fuzzy")>]
-        Fuzzy: GlobalSearchTypes.SuggestFuzziness option
+        Fuzzy: SuggestFuzziness option
         [<System.Text.Json.Serialization.JsonPropertyName("regex")>]
-        Regex: GlobalSearchTypes.RegexOptions option
+        Regex: RegexOptions option
         [<System.Text.Json.Serialization.JsonPropertyName("skip_duplicates")>]
         SkipDuplicates: bool option
     }
 
     type KnnQueryProfileBreakdown = {
         [<System.Text.Json.Serialization.JsonPropertyName("advance")>]
-        Advance: Types.Long
+        Advance: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("advance_count")>]
-        AdvanceCount: Types.Long
+        AdvanceCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("build_scorer")>]
-        BuildScorer: Types.Long
+        BuildScorer: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("build_scorer_count")>]
-        BuildScorerCount: Types.Long
+        BuildScorerCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("compute_max_score")>]
-        ComputeMaxScore: Types.Long
+        ComputeMaxScore: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("compute_max_score_count")>]
-        ComputeMaxScoreCount: Types.Long
+        ComputeMaxScoreCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("count_weight")>]
-        CountWeight: Types.Long
+        CountWeight: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("count_weight_count")>]
-        CountWeightCount: Types.Long
+        CountWeightCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("create_weight")>]
-        CreateWeight: Types.Long
+        CreateWeight: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("create_weight_count")>]
-        CreateWeightCount: Types.Long
+        CreateWeightCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("match")>]
-        Match: Types.Long
+        Match: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("match_count")>]
-        MatchCount: Types.Long
+        MatchCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("next_doc")>]
-        NextDoc: Types.Long
+        NextDoc: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("next_doc_count")>]
-        NextDocCount: Types.Long
+        NextDocCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("score")>]
-        Score: Types.Long
+        Score: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("score_count")>]
-        ScoreCount: Types.Long
+        ScoreCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("set_min_competitive_score")>]
-        SetMinCompetitiveScore: Types.Long
+        SetMinCompetitiveScore: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("set_min_competitive_score_count")>]
-        SetMinCompetitiveScoreCount: Types.Long
+        SetMinCompetitiveScoreCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("shallow_advance")>]
-        ShallowAdvance: Types.Long
+        ShallowAdvance: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("shallow_advance_count")>]
-        ShallowAdvanceCount: Types.Long
+        ShallowAdvanceCount: CoreTypes.Long
     }
 
     type KnnQueryProfileResult = {
@@ -289,15 +289,15 @@ module GlobalSearchTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("description")>]
         Description: string
         [<System.Text.Json.Serialization.JsonPropertyName("time")>]
-        Time: Types.Duration option
+        Time: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("time_in_nanos")>]
-        TimeInNanos: Types.DurationValue<Types.UnitNanos>
+        TimeInNanos: CoreTypes.DurationValue<CoreTypes.UnitNanos>
         [<System.Text.Json.Serialization.JsonPropertyName("breakdown")>]
-        Breakdown: GlobalSearchTypes.KnnQueryProfileBreakdown
+        Breakdown: KnnQueryProfileBreakdown
         [<System.Text.Json.Serialization.JsonPropertyName("debug")>]
         Debug: Map<string, System.Text.Json.JsonElement> option
         [<System.Text.Json.Serialization.JsonPropertyName("children")>]
-        Children: GlobalSearchTypes.KnnQueryProfileResult list option
+        Children: KnnQueryProfileResult list option
     }
 
     type KnnCollectorResult = {
@@ -306,41 +306,41 @@ module GlobalSearchTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("reason")>]
         Reason: string
         [<System.Text.Json.Serialization.JsonPropertyName("time")>]
-        Time: Types.Duration option
+        Time: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("time_in_nanos")>]
-        TimeInNanos: Types.DurationValue<Types.UnitNanos>
+        TimeInNanos: CoreTypes.DurationValue<CoreTypes.UnitNanos>
         [<System.Text.Json.Serialization.JsonPropertyName("children")>]
-        Children: GlobalSearchTypes.KnnCollectorResult list option
+        Children: KnnCollectorResult list option
     }
 
     type DfsKnnProfile = {
         [<System.Text.Json.Serialization.JsonPropertyName("vector_operations_count")>]
-        VectorOperationsCount: Types.Long option
+        VectorOperationsCount: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("query")>]
-        Query: GlobalSearchTypes.KnnQueryProfileResult list
+        Query: KnnQueryProfileResult list
         [<System.Text.Json.Serialization.JsonPropertyName("rewrite_time")>]
-        RewriteTime: Types.Long
+        RewriteTime: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("collector")>]
-        Collector: GlobalSearchTypes.KnnCollectorResult list
+        Collector: KnnCollectorResult list
     }
 
     type DfsStatisticsBreakdown = {
         [<System.Text.Json.Serialization.JsonPropertyName("collection_statistics")>]
-        CollectionStatistics: Types.Long
+        CollectionStatistics: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("collection_statistics_count")>]
-        CollectionStatisticsCount: Types.Long
+        CollectionStatisticsCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("create_weight")>]
-        CreateWeight: Types.Long
+        CreateWeight: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("create_weight_count")>]
-        CreateWeightCount: Types.Long
+        CreateWeightCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("rewrite")>]
-        Rewrite: Types.Long
+        Rewrite: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("rewrite_count")>]
-        RewriteCount: Types.Long
+        RewriteCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("term_statistics")>]
-        TermStatistics: Types.Long
+        TermStatistics: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("term_statistics_count")>]
-        TermStatisticsCount: Types.Long
+        TermStatisticsCount: CoreTypes.Long
     }
 
     type DfsStatisticsProfile = {
@@ -349,73 +349,73 @@ module GlobalSearchTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("description")>]
         Description: string
         [<System.Text.Json.Serialization.JsonPropertyName("time")>]
-        Time: Types.Duration option
+        Time: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("time_in_nanos")>]
-        TimeInNanos: Types.DurationValue<Types.UnitNanos>
+        TimeInNanos: CoreTypes.DurationValue<CoreTypes.UnitNanos>
         [<System.Text.Json.Serialization.JsonPropertyName("breakdown")>]
-        Breakdown: GlobalSearchTypes.DfsStatisticsBreakdown
+        Breakdown: DfsStatisticsBreakdown
         [<System.Text.Json.Serialization.JsonPropertyName("debug")>]
         Debug: Map<string, System.Text.Json.JsonElement> option
         [<System.Text.Json.Serialization.JsonPropertyName("children")>]
-        Children: GlobalSearchTypes.DfsStatisticsProfile list option
+        Children: DfsStatisticsProfile list option
     }
 
     type DfsProfile = {
         [<System.Text.Json.Serialization.JsonPropertyName("statistics")>]
-        Statistics: GlobalSearchTypes.DfsStatisticsProfile option
+        Statistics: DfsStatisticsProfile option
         [<System.Text.Json.Serialization.JsonPropertyName("knn")>]
-        Knn: GlobalSearchTypes.DfsKnnProfile list option
+        Knn: DfsKnnProfile list option
     }
 
     type DirectGenerator = {
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
-        Field: Types.Field
+        Field: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("max_edits")>]
-        MaxEdits: Types.Integer option
+        MaxEdits: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("max_inspections")>]
-        MaxInspections: Types.Float option
+        MaxInspections: CoreTypes.Float option
         [<System.Text.Json.Serialization.JsonPropertyName("max_term_freq")>]
-        MaxTermFreq: Types.Float option
+        MaxTermFreq: CoreTypes.Float option
         [<System.Text.Json.Serialization.JsonPropertyName("min_doc_freq")>]
-        MinDocFreq: Types.Float option
+        MinDocFreq: CoreTypes.Float option
         [<System.Text.Json.Serialization.JsonPropertyName("min_word_length")>]
-        MinWordLength: Types.Integer option
+        MinWordLength: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("post_filter")>]
         PostFilter: string option
         [<System.Text.Json.Serialization.JsonPropertyName("pre_filter")>]
         PreFilter: string option
         [<System.Text.Json.Serialization.JsonPropertyName("prefix_length")>]
-        PrefixLength: Types.Integer option
+        PrefixLength: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("size")>]
-        Size: Types.Integer option
+        Size: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("suggest_mode")>]
-        SuggestMode: Types.SuggestMode option
+        SuggestMode: CoreTypes.SuggestMode option
     }
 
     type FetchProfileBreakdown = {
         [<System.Text.Json.Serialization.JsonPropertyName("load_source")>]
-        LoadSource: Types.Integer option
+        LoadSource: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("load_source_count")>]
-        LoadSourceCount: Types.Integer option
+        LoadSourceCount: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("load_stored_fields")>]
-        LoadStoredFields: Types.Integer option
+        LoadStoredFields: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("load_stored_fields_count")>]
-        LoadStoredFieldsCount: Types.Integer option
+        LoadStoredFieldsCount: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("next_reader")>]
-        NextReader: Types.Integer option
+        NextReader: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("next_reader_count")>]
-        NextReaderCount: Types.Integer option
+        NextReaderCount: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("process_count")>]
-        ProcessCount: Types.Integer option
+        ProcessCount: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("process")>]
-        Process: Types.Integer option
+        Process: CoreTypes.Integer option
     }
 
     type FetchProfileDebug = {
         [<System.Text.Json.Serialization.JsonPropertyName("stored_fields")>]
         StoredFields: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("fast_path")>]
-        FastPath: Types.Integer option
+        FastPath: CoreTypes.Integer option
     }
 
     type FetchProfile = {
@@ -424,13 +424,13 @@ module GlobalSearchTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("description")>]
         Description: string
         [<System.Text.Json.Serialization.JsonPropertyName("time_in_nanos")>]
-        TimeInNanos: Types.DurationValue<Types.UnitNanos>
+        TimeInNanos: CoreTypes.DurationValue<CoreTypes.UnitNanos>
         [<System.Text.Json.Serialization.JsonPropertyName("breakdown")>]
-        Breakdown: GlobalSearchTypes.FetchProfileBreakdown
+        Breakdown: FetchProfileBreakdown
         [<System.Text.Json.Serialization.JsonPropertyName("debug")>]
-        Debug: GlobalSearchTypes.FetchProfileDebug option
+        Debug: FetchProfileDebug option
         [<System.Text.Json.Serialization.JsonPropertyName("children")>]
-        Children: GlobalSearchTypes.FetchProfile list option
+        Children: FetchProfile list option
     }
 
     [<RequireQualifiedAccess>]
@@ -460,39 +460,39 @@ module GlobalSearchTypes =
 
     type HighlightBase = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
-        Type: GlobalSearchTypes.HighlighterType option
+        Type: HighlighterType option
         [<System.Text.Json.Serialization.JsonPropertyName("boundary_chars")>]
         BoundaryChars: string option
         [<System.Text.Json.Serialization.JsonPropertyName("boundary_max_scan")>]
-        BoundaryMaxScan: Types.Integer option
+        BoundaryMaxScan: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("boundary_scanner")>]
-        BoundaryScanner: GlobalSearchTypes.BoundaryScanner option
+        BoundaryScanner: BoundaryScanner option
         [<System.Text.Json.Serialization.JsonPropertyName("boundary_scanner_locale")>]
         BoundaryScannerLocale: string option
         [<System.Text.Json.Serialization.JsonPropertyName("force_source")>]
         ForceSource: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("fragmenter")>]
-        Fragmenter: GlobalSearchTypes.HighlighterFragmenter option
+        Fragmenter: HighlighterFragmenter option
         [<System.Text.Json.Serialization.JsonPropertyName("fragment_size")>]
-        FragmentSize: Types.Integer option
+        FragmentSize: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("highlight_filter")>]
         HighlightFilter: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("highlight_query")>]
-        HighlightQuery: TypesQueryDsl.QueryContainer option
+        HighlightQuery: CoreTypes.QueryContainer option
         [<System.Text.Json.Serialization.JsonPropertyName("max_fragment_length")>]
-        MaxFragmentLength: Types.Integer option
+        MaxFragmentLength: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("max_analyzed_offset")>]
-        MaxAnalyzedOffset: Types.Integer option
+        MaxAnalyzedOffset: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("no_match_size")>]
-        NoMatchSize: Types.Integer option
+        NoMatchSize: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("number_of_fragments")>]
-        NumberOfFragments: Types.Integer option
+        NumberOfFragments: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("options")>]
         Options: Map<string, System.Text.Json.JsonElement> option
         [<System.Text.Json.Serialization.JsonPropertyName("order")>]
-        Order: GlobalSearchTypes.HighlighterOrder option
+        Order: HighlighterOrder option
         [<System.Text.Json.Serialization.JsonPropertyName("phrase_limit")>]
-        PhraseLimit: Types.Integer option
+        PhraseLimit: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("post_tags")>]
         PostTags: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("pre_tags")>]
@@ -500,19 +500,19 @@ module GlobalSearchTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("require_field_match")>]
         RequireFieldMatch: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("tags_schema")>]
-        TagsSchema: GlobalSearchTypes.HighlighterTagsSchema option
+        TagsSchema: HighlighterTagsSchema option
     }
 
     type HighlightField = {
         [<System.Text.Json.Serialization.JsonPropertyName("fragment_offset")>]
-        FragmentOffset: Types.Integer option
+        FragmentOffset: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("matched_fields")>]
-        MatchedFields: Types.Fields option
+        MatchedFields: CoreTypes.Fields option
     }
 
     type Highlight = {
         [<System.Text.Json.Serialization.JsonPropertyName("encoder")>]
-        Encoder: GlobalSearchTypes.HighlighterEncoder option
+        Encoder: HighlighterEncoder option
         [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
         Fields: System.Text.Json.JsonElement
     }
@@ -521,57 +521,57 @@ module GlobalSearchTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("exclude_vectors")>]
         ExcludeVectors: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("excludes")>]
-        Excludes: Types.Fields option
+        Excludes: CoreTypes.Fields option
         [<System.Text.Json.Serialization.JsonPropertyName("includes")>]
-        Includes: Types.Fields option
+        Includes: CoreTypes.Fields option
     }
 
     /// Defines how to fetch a source. Fetching can be disabled entirely, or the source can be filtered.
     [<RequireQualifiedAccess>]
     type SourceConfig =
         | Boolean of bool
-        | SourceFilter of GlobalSearchTypes.SourceFilter
+        | SourceFilter of SourceFilter
 
     type FieldCollapse = {
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
-        Field: Types.Field
+        Field: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("inner_hits")>]
         InnerHits: System.Text.Json.JsonElement option
         [<System.Text.Json.Serialization.JsonPropertyName("max_concurrent_group_searches")>]
-        MaxConcurrentGroupSearches: Types.Integer option
+        MaxConcurrentGroupSearches: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("collapse")>]
-        Collapse: GlobalSearchTypes.FieldCollapse option
+        Collapse: FieldCollapse option
     }
 
     and InnerHits = {
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.Name option
+        Name: CoreTypes.Name option
         [<System.Text.Json.Serialization.JsonPropertyName("size")>]
-        Size: Types.Integer option
+        Size: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("from")>]
-        From: Types.Integer option
+        From: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("collapse")>]
-        Collapse: GlobalSearchTypes.FieldCollapse option
+        Collapse: FieldCollapse option
         [<System.Text.Json.Serialization.JsonPropertyName("docvalue_fields")>]
-        DocvalueFields: TypesQueryDsl.FieldAndFormat list option
+        DocvalueFields: CoreTypes.FieldAndFormat list option
         [<System.Text.Json.Serialization.JsonPropertyName("explain")>]
         Explain: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("highlight")>]
-        Highlight: GlobalSearchTypes.Highlight option
+        Highlight: Highlight option
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_unmapped")>]
         IgnoreUnmapped: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("script_fields")>]
-        ScriptFields: Map<Types.Field, Types.ScriptField> option
+        ScriptFields: Map<CoreTypes.Field, CoreTypes.ScriptField> option
         [<System.Text.Json.Serialization.JsonPropertyName("seq_no_primary_term")>]
         SeqNoPrimaryTerm: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
-        Fields: Types.Field list option
+        Fields: CoreTypes.Field list option
         [<System.Text.Json.Serialization.JsonPropertyName("sort")>]
-        Sort: Types.Sort option
+        Sort: CoreTypes.Sort option
         [<System.Text.Json.Serialization.JsonPropertyName("_source")>]
-        Source: GlobalSearchTypes.SourceConfig option
+        Source: SourceConfig option
         [<System.Text.Json.Serialization.JsonPropertyName("stored_fields")>]
-        StoredFields: Types.Fields option
+        StoredFields: CoreTypes.Fields option
         [<System.Text.Json.Serialization.JsonPropertyName("track_scores")>]
         TrackScores: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("version")>]
@@ -580,9 +580,9 @@ module GlobalSearchTypes =
 
     type PhraseSuggestCollateQuery = {
         [<System.Text.Json.Serialization.JsonPropertyName("id")>]
-        Id: Types.Id option
+        Id: CoreTypes.Id option
         [<System.Text.Json.Serialization.JsonPropertyName("source")>]
-        Source: Types.ScriptSource option
+        Source: CoreTypes.ScriptSource option
     }
 
     type PhraseSuggestCollate = {
@@ -591,7 +591,7 @@ module GlobalSearchTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("prune")>]
         Prune: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("query")>]
-        Query: GlobalSearchTypes.PhraseSuggestCollateQuery
+        Query: PhraseSuggestCollateQuery
     }
 
     type PhraseSuggestHighlight = {
@@ -603,54 +603,54 @@ module GlobalSearchTypes =
 
     type LaplaceSmoothingModel = {
         [<System.Text.Json.Serialization.JsonPropertyName("alpha")>]
-        Alpha: Types.Double
+        Alpha: CoreTypes.Double
     }
 
     type LinearInterpolationSmoothingModel = {
         [<System.Text.Json.Serialization.JsonPropertyName("bigram_lambda")>]
-        BigramLambda: Types.Double
+        BigramLambda: CoreTypes.Double
         [<System.Text.Json.Serialization.JsonPropertyName("trigram_lambda")>]
-        TrigramLambda: Types.Double
+        TrigramLambda: CoreTypes.Double
         [<System.Text.Json.Serialization.JsonPropertyName("unigram_lambda")>]
-        UnigramLambda: Types.Double
+        UnigramLambda: CoreTypes.Double
     }
 
     type StupidBackoffSmoothingModel = {
         [<System.Text.Json.Serialization.JsonPropertyName("discount")>]
-        Discount: Types.Double
+        Discount: CoreTypes.Double
     }
 
     [<RequireQualifiedAccess>]
     type SmoothingModelContainer =
-        | Laplace of GlobalSearchTypes.LaplaceSmoothingModel
-        | LinearInterpolation of GlobalSearchTypes.LinearInterpolationSmoothingModel
-        | StupidBackoff of GlobalSearchTypes.StupidBackoffSmoothingModel
+        | Laplace of LaplaceSmoothingModel
+        | LinearInterpolation of LinearInterpolationSmoothingModel
+        | StupidBackoff of StupidBackoffSmoothingModel
 
     type PhraseSuggester = {
         [<System.Text.Json.Serialization.JsonPropertyName("collate")>]
-        Collate: GlobalSearchTypes.PhraseSuggestCollate option
+        Collate: PhraseSuggestCollate option
         [<System.Text.Json.Serialization.JsonPropertyName("confidence")>]
-        Confidence: Types.Double option
+        Confidence: CoreTypes.Double option
         [<System.Text.Json.Serialization.JsonPropertyName("direct_generator")>]
-        DirectGenerator: GlobalSearchTypes.DirectGenerator list option
+        DirectGenerator: DirectGenerator list option
         [<System.Text.Json.Serialization.JsonPropertyName("force_unigrams")>]
         ForceUnigrams: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("gram_size")>]
-        GramSize: Types.Integer option
+        GramSize: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("highlight")>]
-        Highlight: GlobalSearchTypes.PhraseSuggestHighlight option
+        Highlight: PhraseSuggestHighlight option
         [<System.Text.Json.Serialization.JsonPropertyName("max_errors")>]
-        MaxErrors: Types.Double option
+        MaxErrors: CoreTypes.Double option
         [<System.Text.Json.Serialization.JsonPropertyName("real_word_error_likelihood")>]
-        RealWordErrorLikelihood: Types.Double option
+        RealWordErrorLikelihood: CoreTypes.Double option
         [<System.Text.Json.Serialization.JsonPropertyName("separator")>]
         Separator: string option
         [<System.Text.Json.Serialization.JsonPropertyName("shard_size")>]
-        ShardSize: Types.Integer option
+        ShardSize: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("smoothing")>]
-        Smoothing: GlobalSearchTypes.SmoothingModelContainer option
+        Smoothing: SmoothingModelContainer option
         [<System.Text.Json.Serialization.JsonPropertyName("token_limit")>]
-        TokenLimit: Types.Integer option
+        TokenLimit: CoreTypes.Integer option
     }
 
     [<RequireQualifiedAccess>]
@@ -670,32 +670,32 @@ module GlobalSearchTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("lowercase_terms")>]
         LowercaseTerms: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("max_edits")>]
-        MaxEdits: Types.Integer option
+        MaxEdits: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("max_inspections")>]
-        MaxInspections: Types.Integer option
+        MaxInspections: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("max_term_freq")>]
-        MaxTermFreq: Types.Float option
+        MaxTermFreq: CoreTypes.Float option
         [<System.Text.Json.Serialization.JsonPropertyName("min_doc_freq")>]
-        MinDocFreq: Types.Float option
+        MinDocFreq: CoreTypes.Float option
         [<System.Text.Json.Serialization.JsonPropertyName("min_word_length")>]
-        MinWordLength: Types.Integer option
+        MinWordLength: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("prefix_length")>]
-        PrefixLength: Types.Integer option
+        PrefixLength: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("shard_size")>]
-        ShardSize: Types.Integer option
+        ShardSize: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("sort")>]
-        Sort: GlobalSearchTypes.SuggestSort option
+        Sort: SuggestSort option
         [<System.Text.Json.Serialization.JsonPropertyName("string_distance")>]
-        StringDistance: GlobalSearchTypes.StringDistance option
+        StringDistance: StringDistance option
         [<System.Text.Json.Serialization.JsonPropertyName("suggest_mode")>]
-        SuggestMode: Types.SuggestMode option
+        SuggestMode: CoreTypes.SuggestMode option
     }
 
     [<RequireQualifiedAccess>]
     type FieldSuggester =
-        | Completion of GlobalSearchTypes.CompletionSuggester
-        | Phrase of GlobalSearchTypes.PhraseSuggester
-        | Term of GlobalSearchTypes.TermSuggester
+        | Completion of CompletionSuggester
+        | Phrase of PhraseSuggester
+        | Term of TermSuggester
         | Unknown of name: string * System.Text.Json.JsonElement
 
     and FieldSuggesterMeta = {
@@ -714,27 +714,27 @@ module GlobalSearchTypes =
 
     type TotalHits = {
         [<System.Text.Json.Serialization.JsonPropertyName("relation")>]
-        Relation: GlobalSearchTypes.TotalHitsRelation
+        Relation: TotalHitsRelation
         [<System.Text.Json.Serialization.JsonPropertyName("value")>]
-        Value: Types.Long
+        Value: CoreTypes.Long
     }
 
     type NestedIdentity = {
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
-        Field: Types.Field
+        Field: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("offset")>]
-        Offset: Types.Integer
+        Offset: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("_nested")>]
-        Nested: GlobalSearchTypes.NestedIdentity option
+        Nested: NestedIdentity option
     }
 
     type Hit<'tDocument> = {
         [<System.Text.Json.Serialization.JsonPropertyName("_index")>]
-        Index: Types.IndexName
+        Index: CoreTypes.IndexName
         [<System.Text.Json.Serialization.JsonPropertyName("_id")>]
-        Id: Types.Id option
+        Id: CoreTypes.Id option
         [<System.Text.Json.Serialization.JsonPropertyName("_score")>]
-        Score: Types.Double option option
+        Score: CoreTypes.Double option option
         [<System.Text.Json.Serialization.JsonPropertyName("_explanation")>]
         Explanation: GlobalExplain.Explanation option
         [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
@@ -742,11 +742,11 @@ module GlobalSearchTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("highlight")>]
         Highlight: Map<string, string list> option
         [<System.Text.Json.Serialization.JsonPropertyName("inner_hits")>]
-        InnerHits: Map<string, GlobalSearchTypes.InnerHitsResult> option
+        InnerHits: Map<string, InnerHitsResult> option
         [<System.Text.Json.Serialization.JsonPropertyName("matched_queries")>]
         MatchedQueries: System.Text.Json.JsonElement option
         [<System.Text.Json.Serialization.JsonPropertyName("_nested")>]
-        Nested: GlobalSearchTypes.NestedIdentity option
+        Nested: NestedIdentity option
         [<System.Text.Json.Serialization.JsonPropertyName("_ignored")>]
         Ignored: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("ignored_field_values")>]
@@ -760,29 +760,29 @@ module GlobalSearchTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("_source")>]
         Source: 'tDocument option
         [<System.Text.Json.Serialization.JsonPropertyName("_rank")>]
-        Rank: Types.Integer option
+        Rank: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("_seq_no")>]
-        SeqNo: Types.SequenceNumber option
+        SeqNo: CoreTypes.SequenceNumber option
         [<System.Text.Json.Serialization.JsonPropertyName("_primary_term")>]
-        PrimaryTerm: Types.Long option
+        PrimaryTerm: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("_version")>]
-        Version: Types.VersionNumber option
+        Version: CoreTypes.VersionNumber option
         [<System.Text.Json.Serialization.JsonPropertyName("sort")>]
-        Sort: Types.SortResults option
+        Sort: CoreTypes.SortResults option
     }
 
     and InnerHitsResult = {
         [<System.Text.Json.Serialization.JsonPropertyName("hits")>]
-        Hits: GlobalSearchTypes.HitsMetadata<System.Text.Json.JsonElement>
+        Hits: HitsMetadata<System.Text.Json.JsonElement>
     }
 
     and HitsMetadata<'t> = {
         [<System.Text.Json.Serialization.JsonPropertyName("total")>]
         Total: System.Text.Json.JsonElement option
         [<System.Text.Json.Serialization.JsonPropertyName("hits")>]
-        Hits: GlobalSearchTypes.Hit<'t> list
+        Hits: Hit<'t> list
         [<System.Text.Json.Serialization.JsonPropertyName("max_score")>]
-        MaxScore: Types.Double option option
+        MaxScore: CoreTypes.Double option option
     }
 
     type LearningToRank = {
@@ -796,7 +796,7 @@ module GlobalSearchTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("text")>]
         Text: string
         [<System.Text.Json.Serialization.JsonPropertyName("score")>]
-        Score: Types.Double
+        Score: CoreTypes.Double
         [<System.Text.Json.Serialization.JsonPropertyName("highlighted")>]
         Highlighted: string option
         [<System.Text.Json.Serialization.JsonPropertyName("collate_match")>]
@@ -810,100 +810,100 @@ module GlobalSearchTypes =
 
     type PointInTimeReference = {
         [<System.Text.Json.Serialization.JsonPropertyName("id")>]
-        Id: Types.Id
+        Id: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("keep_alive")>]
-        KeepAlive: Types.Duration option
+        KeepAlive: CoreTypes.Duration option
     }
 
     type QueryBreakdown = {
         [<System.Text.Json.Serialization.JsonPropertyName("advance")>]
-        Advance: Types.Long
+        Advance: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("advance_count")>]
-        AdvanceCount: Types.Long
+        AdvanceCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("build_scorer")>]
-        BuildScorer: Types.Long
+        BuildScorer: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("build_scorer_count")>]
-        BuildScorerCount: Types.Long
+        BuildScorerCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("create_weight")>]
-        CreateWeight: Types.Long
+        CreateWeight: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("create_weight_count")>]
-        CreateWeightCount: Types.Long
+        CreateWeightCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("match")>]
-        Match: Types.Long
+        Match: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("match_count")>]
-        MatchCount: Types.Long
+        MatchCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("shallow_advance")>]
-        ShallowAdvance: Types.Long
+        ShallowAdvance: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("shallow_advance_count")>]
-        ShallowAdvanceCount: Types.Long
+        ShallowAdvanceCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("next_doc")>]
-        NextDoc: Types.Long
+        NextDoc: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("next_doc_count")>]
-        NextDocCount: Types.Long
+        NextDocCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("score")>]
-        Score: Types.Long
+        Score: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("score_count")>]
-        ScoreCount: Types.Long
+        ScoreCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("compute_max_score")>]
-        ComputeMaxScore: Types.Long
+        ComputeMaxScore: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("compute_max_score_count")>]
-        ComputeMaxScoreCount: Types.Long
+        ComputeMaxScoreCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("count_weight")>]
-        CountWeight: Types.Long
+        CountWeight: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("count_weight_count")>]
-        CountWeightCount: Types.Long
+        CountWeightCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("set_min_competitive_score")>]
-        SetMinCompetitiveScore: Types.Long
+        SetMinCompetitiveScore: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("set_min_competitive_score_count")>]
-        SetMinCompetitiveScoreCount: Types.Long
+        SetMinCompetitiveScoreCount: CoreTypes.Long
     }
 
     type QueryProfile = {
         [<System.Text.Json.Serialization.JsonPropertyName("breakdown")>]
-        Breakdown: GlobalSearchTypes.QueryBreakdown
+        Breakdown: QueryBreakdown
         [<System.Text.Json.Serialization.JsonPropertyName("description")>]
         Description: string
         [<System.Text.Json.Serialization.JsonPropertyName("time_in_nanos")>]
-        TimeInNanos: Types.DurationValue<Types.UnitNanos>
+        TimeInNanos: CoreTypes.DurationValue<CoreTypes.UnitNanos>
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("children")>]
-        Children: GlobalSearchTypes.QueryProfile list option
+        Children: QueryProfile list option
     }
 
     type SearchProfile = {
         [<System.Text.Json.Serialization.JsonPropertyName("collector")>]
-        Collector: GlobalSearchTypes.Collector list
+        Collector: Collector list
         [<System.Text.Json.Serialization.JsonPropertyName("query")>]
-        Query: GlobalSearchTypes.QueryProfile list
+        Query: QueryProfile list
         [<System.Text.Json.Serialization.JsonPropertyName("rewrite_time")>]
-        RewriteTime: Types.Long
+        RewriteTime: CoreTypes.Long
     }
 
     type ShardProfile = {
         [<System.Text.Json.Serialization.JsonPropertyName("aggregations")>]
-        Aggregations: GlobalSearchTypes.AggregationProfile list
+        Aggregations: AggregationProfile list
         [<System.Text.Json.Serialization.JsonPropertyName("cluster")>]
         Cluster: string
         [<System.Text.Json.Serialization.JsonPropertyName("dfs")>]
-        Dfs: GlobalSearchTypes.DfsProfile option
+        Dfs: DfsProfile option
         [<System.Text.Json.Serialization.JsonPropertyName("fetch")>]
-        Fetch: GlobalSearchTypes.FetchProfile option
+        Fetch: FetchProfile option
         [<System.Text.Json.Serialization.JsonPropertyName("id")>]
         Id: string
         [<System.Text.Json.Serialization.JsonPropertyName("index")>]
-        Index: Types.IndexName
+        Index: CoreTypes.IndexName
         [<System.Text.Json.Serialization.JsonPropertyName("node_id")>]
-        NodeId: Types.NodeId
+        NodeId: CoreTypes.NodeId
         [<System.Text.Json.Serialization.JsonPropertyName("searches")>]
-        Searches: GlobalSearchTypes.SearchProfile list
+        Searches: SearchProfile list
         [<System.Text.Json.Serialization.JsonPropertyName("shard_id")>]
-        ShardId: Types.Integer
+        ShardId: CoreTypes.Integer
     }
 
     type Profile = {
         [<System.Text.Json.Serialization.JsonPropertyName("shards")>]
-        Shards: GlobalSearchTypes.ShardProfile list
+        Shards: ShardProfile list
     }
 
     [<RequireQualifiedAccess>]
@@ -916,37 +916,37 @@ module GlobalSearchTypes =
 
     type RescoreQuery = {
         [<System.Text.Json.Serialization.JsonPropertyName("rescore_query")>]
-        RescoreQuery: TypesQueryDsl.QueryContainer
+        RescoreQuery: CoreTypes.QueryContainer
         [<System.Text.Json.Serialization.JsonPropertyName("query_weight")>]
-        QueryWeight: Types.Double option
+        QueryWeight: CoreTypes.Double option
         [<System.Text.Json.Serialization.JsonPropertyName("rescore_query_weight")>]
-        RescoreQueryWeight: Types.Double option
+        RescoreQueryWeight: CoreTypes.Double option
         [<System.Text.Json.Serialization.JsonPropertyName("score_mode")>]
-        ScoreMode: GlobalSearchTypes.ScoreMode option
+        ScoreMode: ScoreMode option
     }
 
     type ScriptRescore = {
         [<System.Text.Json.Serialization.JsonPropertyName("script")>]
-        Script: Types.Script
+        Script: CoreTypes.Script
     }
 
     [<RequireQualifiedAccess>]
     type Rescore =
-        | Query of GlobalSearchTypes.RescoreQuery
-        | LearningToRank of GlobalSearchTypes.LearningToRank
-        | Script of GlobalSearchTypes.ScriptRescore
+        | Query of RescoreQuery
+        | LearningToRank of LearningToRank
+        | Script of ScriptRescore
         | Unknown of name: string * System.Text.Json.JsonElement
 
     and RescoreMeta = {
         [<System.Text.Json.Serialization.JsonPropertyName("window_size")>]
-        WindowSize: Types.Integer option
+        WindowSize: CoreTypes.Integer option
     }
 
     /// Number of hits matching the query to count accurately. If true, the exact
     [<RequireQualifiedAccess>]
     type TrackHits =
         | Boolean of bool
-        | Integer of Types.Integer
+        | Integer of CoreTypes.Integer
 
     type Suggester = {
         [<System.Text.Json.Serialization.JsonPropertyName("text")>]
@@ -955,57 +955,57 @@ module GlobalSearchTypes =
 
     type SearchRequestBody = {
         [<System.Text.Json.Serialization.JsonPropertyName("aggregations")>]
-        Aggregations: Map<string, TypesAggregations.AggregationContainer> option
+        Aggregations: Map<string, CoreTypes.AggregationContainer> option
         [<System.Text.Json.Serialization.JsonPropertyName("collapse")>]
-        Collapse: GlobalSearchTypes.FieldCollapse option
+        Collapse: FieldCollapse option
         [<System.Text.Json.Serialization.JsonPropertyName("explain")>]
         Explain: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("ext")>]
         Ext: Map<string, System.Text.Json.JsonElement> option
         [<System.Text.Json.Serialization.JsonPropertyName("from")>]
-        From: Types.Integer option
+        From: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("highlight")>]
-        Highlight: GlobalSearchTypes.Highlight option
+        Highlight: Highlight option
         [<System.Text.Json.Serialization.JsonPropertyName("track_total_hits")>]
-        TrackTotalHits: GlobalSearchTypes.TrackHits option
+        TrackTotalHits: TrackHits option
         [<System.Text.Json.Serialization.JsonPropertyName("indices_boost")>]
-        IndicesBoost: Map<Types.IndexName, Types.Double> list option
+        IndicesBoost: Map<CoreTypes.IndexName, CoreTypes.Double> list option
         [<System.Text.Json.Serialization.JsonPropertyName("docvalue_fields")>]
-        DocvalueFields: TypesQueryDsl.FieldAndFormat list option
+        DocvalueFields: CoreTypes.FieldAndFormat list option
         [<System.Text.Json.Serialization.JsonPropertyName("knn")>]
         Knn: System.Text.Json.JsonElement option
         [<System.Text.Json.Serialization.JsonPropertyName("rank")>]
-        Rank: Types.RankContainer option
+        Rank: CoreTypes.RankContainer option
         [<System.Text.Json.Serialization.JsonPropertyName("min_score")>]
-        MinScore: Types.Double option
+        MinScore: CoreTypes.Double option
         [<System.Text.Json.Serialization.JsonPropertyName("post_filter")>]
-        PostFilter: TypesQueryDsl.QueryContainer option
+        PostFilter: CoreTypes.QueryContainer option
         [<System.Text.Json.Serialization.JsonPropertyName("profile")>]
         Profile: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("query")>]
-        Query: TypesQueryDsl.QueryContainer option
+        Query: CoreTypes.QueryContainer option
         [<System.Text.Json.Serialization.JsonPropertyName("rescore")>]
         Rescore: System.Text.Json.JsonElement option
         [<System.Text.Json.Serialization.JsonPropertyName("retriever")>]
-        Retriever: Types.RetrieverContainer option
+        Retriever: CoreTypes.RetrieverContainer option
         [<System.Text.Json.Serialization.JsonPropertyName("script_fields")>]
-        ScriptFields: Map<string, Types.ScriptField> option
+        ScriptFields: Map<string, CoreTypes.ScriptField> option
         [<System.Text.Json.Serialization.JsonPropertyName("search_after")>]
-        SearchAfter: Types.SortResults option
+        SearchAfter: CoreTypes.SortResults option
         [<System.Text.Json.Serialization.JsonPropertyName("size")>]
-        Size: Types.Integer option
+        Size: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("slice")>]
-        Slice: Types.SlicedScroll option
+        Slice: CoreTypes.SlicedScroll option
         [<System.Text.Json.Serialization.JsonPropertyName("sort")>]
-        Sort: Types.Sort option
+        Sort: CoreTypes.Sort option
         [<System.Text.Json.Serialization.JsonPropertyName("_source")>]
-        Source: GlobalSearchTypes.SourceConfig option
+        Source: SourceConfig option
         [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
-        Fields: TypesQueryDsl.FieldAndFormat list option
+        Fields: CoreTypes.FieldAndFormat list option
         [<System.Text.Json.Serialization.JsonPropertyName("suggest")>]
-        Suggest: GlobalSearchTypes.Suggester option
+        Suggest: Suggester option
         [<System.Text.Json.Serialization.JsonPropertyName("terminate_after")>]
-        TerminateAfter: Types.Long option
+        TerminateAfter: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("timeout")>]
         Timeout: string option
         [<System.Text.Json.Serialization.JsonPropertyName("track_scores")>]
@@ -1015,11 +1015,11 @@ module GlobalSearchTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("seq_no_primary_term")>]
         SeqNoPrimaryTerm: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("stored_fields")>]
-        StoredFields: Types.Fields option
+        StoredFields: CoreTypes.Fields option
         [<System.Text.Json.Serialization.JsonPropertyName("pit")>]
-        Pit: GlobalSearchTypes.PointInTimeReference option
+        Pit: PointInTimeReference option
         [<System.Text.Json.Serialization.JsonPropertyName("runtime_mappings")>]
-        RuntimeMappings: TypesMapping.RuntimeFields option
+        RuntimeMappings: CoreTypes.RuntimeFields option
         [<System.Text.Json.Serialization.JsonPropertyName("stats")>]
         Stats: string list option
     }
@@ -1028,15 +1028,15 @@ module GlobalSearchTypes =
     [<RequireQualifiedAccess>]
     type SourceConfigParam =
         | Boolean of bool
-        | Fields of Types.Fields
+        | Fields of CoreTypes.Fields
 
     type TermSuggestOption = {
         [<System.Text.Json.Serialization.JsonPropertyName("text")>]
         Text: string
         [<System.Text.Json.Serialization.JsonPropertyName("score")>]
-        Score: Types.Double
+        Score: CoreTypes.Double
         [<System.Text.Json.Serialization.JsonPropertyName("freq")>]
-        Freq: Types.Long
+        Freq: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("highlighted")>]
         Highlighted: string option
         [<System.Text.Json.Serialization.JsonPropertyName("collate_match")>]
@@ -1050,7 +1050,7 @@ module GlobalSearchTypes =
 
     [<RequireQualifiedAccess>]
     type Suggest<'tDocument> =
-        | CompletionSuggest of GlobalSearchTypes.CompletionSuggest<'tDocument>
-        | PhraseSuggest of GlobalSearchTypes.PhraseSuggest
-        | TermSuggest of GlobalSearchTypes.TermSuggest
+        | CompletionSuggest of CompletionSuggest<'tDocument>
+        | PhraseSuggest of PhraseSuggest
+        | TermSuggest of TermSuggest
 

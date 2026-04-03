@@ -9,9 +9,9 @@ module IlmTypes =
 
     type AllocateAction = {
         [<System.Text.Json.Serialization.JsonPropertyName("number_of_replicas")>]
-        NumberOfReplicas: Types.Integer option
+        NumberOfReplicas: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("total_shards_per_node")>]
-        TotalShardsPerNode: Types.Integer option
+        TotalShardsPerNode: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("include")>]
         Include: Map<string, string> option
         [<System.Text.Json.Serialization.JsonPropertyName("exclude")>]
@@ -27,14 +27,14 @@ module IlmTypes =
 
     type DownsampleAction = {
         [<System.Text.Json.Serialization.JsonPropertyName("fixed_interval")>]
-        FixedInterval: Types.DurationLarge
+        FixedInterval: CoreTypes.DurationLarge
         [<System.Text.Json.Serialization.JsonPropertyName("wait_timeout")>]
-        WaitTimeout: Types.Duration option
+        WaitTimeout: CoreTypes.Duration option
     }
 
     type ForceMergeAction = {
         [<System.Text.Json.Serialization.JsonPropertyName("max_num_segments")>]
-        MaxNumSegments: Types.Integer
+        MaxNumSegments: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("index_codec")>]
         IndexCodec: string option
     }
@@ -46,30 +46,30 @@ module IlmTypes =
 
     type RolloverAction = {
         [<System.Text.Json.Serialization.JsonPropertyName("max_size")>]
-        MaxSize: Types.ByteSize option
+        MaxSize: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("max_primary_shard_size")>]
-        MaxPrimaryShardSize: Types.ByteSize option
+        MaxPrimaryShardSize: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("max_age")>]
-        MaxAge: Types.Duration option
+        MaxAge: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("max_docs")>]
-        MaxDocs: Types.Long option
+        MaxDocs: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("max_primary_shard_docs")>]
-        MaxPrimaryShardDocs: Types.Long option
+        MaxPrimaryShardDocs: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("min_size")>]
-        MinSize: Types.ByteSize option
+        MinSize: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("min_primary_shard_size")>]
-        MinPrimaryShardSize: Types.ByteSize option
+        MinPrimaryShardSize: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("min_age")>]
-        MinAge: Types.Duration option
+        MinAge: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("min_docs")>]
-        MinDocs: Types.Long option
+        MinDocs: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("min_primary_shard_docs")>]
-        MinPrimaryShardDocs: Types.Long option
+        MinPrimaryShardDocs: CoreTypes.Long option
     }
 
     type SetPriorityAction = {
         [<System.Text.Json.Serialization.JsonPropertyName("priority")>]
-        Priority: Types.Integer option
+        Priority: CoreTypes.Integer option
     }
 
     type SearchableSnapshotAction = {
@@ -81,9 +81,9 @@ module IlmTypes =
 
     type ShrinkAction = {
         [<System.Text.Json.Serialization.JsonPropertyName("number_of_shards")>]
-        NumberOfShards: Types.Integer option
+        NumberOfShards: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("max_primary_shard_size")>]
-        MaxPrimaryShardSize: Types.ByteSize option
+        MaxPrimaryShardSize: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("allow_write_after_shrink")>]
         AllowWriteAfterShrink: bool option
     }
@@ -95,57 +95,57 @@ module IlmTypes =
 
     type Actions = {
         [<System.Text.Json.Serialization.JsonPropertyName("allocate")>]
-        Allocate: IlmTypes.AllocateAction option
+        Allocate: AllocateAction option
         [<System.Text.Json.Serialization.JsonPropertyName("delete")>]
-        Delete: IlmTypes.DeleteAction option
+        Delete: DeleteAction option
         [<System.Text.Json.Serialization.JsonPropertyName("downsample")>]
-        Downsample: IlmTypes.DownsampleAction option
+        Downsample: DownsampleAction option
         [<System.Text.Json.Serialization.JsonPropertyName("freeze")>]
-        Freeze: Types.EmptyObject option
+        Freeze: CoreTypes.EmptyObject option
         [<System.Text.Json.Serialization.JsonPropertyName("forcemerge")>]
-        Forcemerge: IlmTypes.ForceMergeAction option
+        Forcemerge: ForceMergeAction option
         [<System.Text.Json.Serialization.JsonPropertyName("migrate")>]
-        Migrate: IlmTypes.MigrateAction option
+        Migrate: MigrateAction option
         [<System.Text.Json.Serialization.JsonPropertyName("readonly")>]
-        Readonly: Types.EmptyObject option
+        Readonly: CoreTypes.EmptyObject option
         [<System.Text.Json.Serialization.JsonPropertyName("rollover")>]
-        Rollover: IlmTypes.RolloverAction option
+        Rollover: RolloverAction option
         [<System.Text.Json.Serialization.JsonPropertyName("set_priority")>]
-        SetPriority: IlmTypes.SetPriorityAction option
+        SetPriority: SetPriorityAction option
         [<System.Text.Json.Serialization.JsonPropertyName("searchable_snapshot")>]
-        SearchableSnapshot: IlmTypes.SearchableSnapshotAction option
+        SearchableSnapshot: SearchableSnapshotAction option
         [<System.Text.Json.Serialization.JsonPropertyName("shrink")>]
-        Shrink: IlmTypes.ShrinkAction option
+        Shrink: ShrinkAction option
         [<System.Text.Json.Serialization.JsonPropertyName("unfollow")>]
-        Unfollow: Types.EmptyObject option
+        Unfollow: CoreTypes.EmptyObject option
         [<System.Text.Json.Serialization.JsonPropertyName("wait_for_snapshot")>]
-        WaitForSnapshot: IlmTypes.WaitForSnapshotAction option
+        WaitForSnapshot: WaitForSnapshotAction option
     }
 
     type Phase = {
         [<System.Text.Json.Serialization.JsonPropertyName("actions")>]
-        Actions: IlmTypes.Actions option
+        Actions: Actions option
         [<System.Text.Json.Serialization.JsonPropertyName("min_age")>]
-        MinAge: Types.Duration option
+        MinAge: CoreTypes.Duration option
     }
 
     type Phases = {
         [<System.Text.Json.Serialization.JsonPropertyName("cold")>]
-        Cold: IlmTypes.Phase option
+        Cold: Phase option
         [<System.Text.Json.Serialization.JsonPropertyName("delete")>]
-        Delete: IlmTypes.Phase option
+        Delete: Phase option
         [<System.Text.Json.Serialization.JsonPropertyName("frozen")>]
-        Frozen: IlmTypes.Phase option
+        Frozen: Phase option
         [<System.Text.Json.Serialization.JsonPropertyName("hot")>]
-        Hot: IlmTypes.Phase option
+        Hot: Phase option
         [<System.Text.Json.Serialization.JsonPropertyName("warm")>]
-        Warm: IlmTypes.Phase option
+        Warm: Phase option
     }
 
     type Policy = {
         [<System.Text.Json.Serialization.JsonPropertyName("phases")>]
-        Phases: IlmTypes.Phases
+        Phases: Phases
         [<System.Text.Json.Serialization.JsonPropertyName("_meta")>]
-        Meta: Types.Metadata option
+        Meta: CoreTypes.Metadata option
     }
 

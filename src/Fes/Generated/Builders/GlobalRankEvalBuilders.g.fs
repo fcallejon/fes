@@ -52,7 +52,7 @@ module GlobalRankEvalBuilders =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: RankEvalRequestItem, value: Types.Id) =
+        member _.Id(state: RankEvalRequestItem, value: CoreTypes.Id) =
             { state with Id = value }
 
         [<CustomOperation("request")>]
@@ -64,7 +64,7 @@ module GlobalRankEvalBuilders =
             { state with Ratings = value }
 
         [<CustomOperation("templateId")>]
-        member _.TemplateId(state: RankEvalRequestItem, value: Types.Id) =
+        member _.TemplateId(state: RankEvalRequestItem, value: CoreTypes.Id) =
             { state with TemplateId = Some value }
 
         [<CustomOperation("params")>]

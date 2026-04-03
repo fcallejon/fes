@@ -12,7 +12,7 @@ open Fes
 module TasksOperations =
 
     type TasksCancelRequest = {
-        TaskId: Types.TaskId
+        TaskId: CoreTypes.TaskId
         Actions: System.Text.Json.JsonElement option
         Nodes: string list option
         ParentTaskId: string option
@@ -53,7 +53,7 @@ module TasksOperations =
             }
 
         [<CustomOperation("taskId")>]
-        member _.TaskId(state: TasksCancelRequest, value: Types.TaskId) =
+        member _.TaskId(state: TasksCancelRequest, value: CoreTypes.TaskId) =
             { state with TaskId = value }
 
         [<CustomOperation("actions")>]
@@ -85,8 +85,8 @@ module TasksOperations =
             { req with WaitForCompletion = Some value }
 
     type TasksGetRequest = {
-        TaskId: Types.Id
-        Timeout: Types.Duration option
+        TaskId: CoreTypes.Id
+        Timeout: CoreTypes.Duration option
         WaitForCompletion: bool option
     }
 
@@ -120,11 +120,11 @@ module TasksOperations =
             }
 
         [<CustomOperation("taskId")>]
-        member _.TaskId(state: TasksGetRequest, value: Types.Id) =
+        member _.TaskId(state: TasksGetRequest, value: CoreTypes.Id) =
             { state with TaskId = value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: TasksGetRequest, value: Types.Duration) =
+        member _.Timeout(state: TasksGetRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("waitForCompletion")>]
@@ -134,7 +134,7 @@ module TasksOperations =
     let tasksGetRequest = TasksGetRequestBuilder()
 
     module Get =
-        let withTimeout (value: Types.Duration) (req: TasksGetRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: TasksGetRequest) =
             { req with Timeout = Some value }
         let withWaitForCompletion (value: bool) (req: TasksGetRequest) =
             { req with WaitForCompletion = Some value }
@@ -143,9 +143,9 @@ module TasksOperations =
         Actions: System.Text.Json.JsonElement option
         Detailed: bool option
         GroupBy: TasksTypes.GroupBy option
-        Nodes: Types.NodeIds option
-        ParentTaskId: Types.Id option
-        Timeout: Types.Duration option
+        Nodes: CoreTypes.NodeIds option
+        ParentTaskId: CoreTypes.Id option
+        Timeout: CoreTypes.Duration option
         WaitForCompletion: bool option
     }
 
@@ -200,15 +200,15 @@ module TasksOperations =
             { state with GroupBy = Some value }
 
         [<CustomOperation("nodes")>]
-        member _.Nodes(state: TasksListRequest, value: Types.NodeIds) =
+        member _.Nodes(state: TasksListRequest, value: CoreTypes.NodeIds) =
             { state with Nodes = Some value }
 
         [<CustomOperation("parentTaskId")>]
-        member _.ParentTaskId(state: TasksListRequest, value: Types.Id) =
+        member _.ParentTaskId(state: TasksListRequest, value: CoreTypes.Id) =
             { state with ParentTaskId = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: TasksListRequest, value: Types.Duration) =
+        member _.Timeout(state: TasksListRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("waitForCompletion")>]
@@ -224,11 +224,11 @@ module TasksOperations =
             { req with Detailed = Some value }
         let withGroupBy (value: TasksTypes.GroupBy) (req: TasksListRequest) =
             { req with GroupBy = Some value }
-        let withNodes (value: Types.NodeIds) (req: TasksListRequest) =
+        let withNodes (value: CoreTypes.NodeIds) (req: TasksListRequest) =
             { req with Nodes = Some value }
-        let withParentTaskId (value: Types.Id) (req: TasksListRequest) =
+        let withParentTaskId (value: CoreTypes.Id) (req: TasksListRequest) =
             { req with ParentTaskId = Some value }
-        let withTimeout (value: Types.Duration) (req: TasksListRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: TasksListRequest) =
             { req with Timeout = Some value }
         let withWaitForCompletion (value: bool) (req: TasksListRequest) =
             { req with WaitForCompletion = Some value }

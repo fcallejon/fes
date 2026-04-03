@@ -9,30 +9,30 @@ module SnapshotRepositoryAnalyze =
 
     type SnapshotNodeInfo = {
         [<System.Text.Json.Serialization.JsonPropertyName("id")>]
-        Id: Types.Id
+        Id: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.Name
+        Name: CoreTypes.Name
     }
 
     type ReadBlobDetails = {
         [<System.Text.Json.Serialization.JsonPropertyName("before_write_complete")>]
         BeforeWriteComplete: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("elapsed")>]
-        Elapsed: Types.Duration option
+        Elapsed: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("elapsed_nanos")>]
-        ElapsedNanos: Types.DurationValue<Types.UnitNanos> option
+        ElapsedNanos: CoreTypes.DurationValue<CoreTypes.UnitNanos> option
         [<System.Text.Json.Serialization.JsonPropertyName("first_byte_time")>]
-        FirstByteTime: Types.Duration option
+        FirstByteTime: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("first_byte_time_nanos")>]
-        FirstByteTimeNanos: Types.DurationValue<Types.UnitNanos>
+        FirstByteTimeNanos: CoreTypes.DurationValue<CoreTypes.UnitNanos>
         [<System.Text.Json.Serialization.JsonPropertyName("found")>]
         Found: bool
         [<System.Text.Json.Serialization.JsonPropertyName("node")>]
-        Node: SnapshotRepositoryAnalyze.SnapshotNodeInfo
+        Node: SnapshotNodeInfo
         [<System.Text.Json.Serialization.JsonPropertyName("throttled")>]
-        Throttled: Types.Duration option
+        Throttled: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("throttled_nanos")>]
-        ThrottledNanos: Types.DurationValue<Types.UnitNanos> option
+        ThrottledNanos: CoreTypes.DurationValue<CoreTypes.UnitNanos> option
     }
 
     type BlobDetails = {
@@ -43,82 +43,82 @@ module SnapshotRepositoryAnalyze =
         [<System.Text.Json.Serialization.JsonPropertyName("read_early")>]
         ReadEarly: bool
         [<System.Text.Json.Serialization.JsonPropertyName("read_end")>]
-        ReadEnd: Types.Long
+        ReadEnd: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("read_start")>]
-        ReadStart: Types.Long
+        ReadStart: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("reads")>]
-        Reads: SnapshotRepositoryAnalyze.ReadBlobDetails
+        Reads: ReadBlobDetails
         [<System.Text.Json.Serialization.JsonPropertyName("size")>]
-        Size: Types.ByteSize
+        Size: CoreTypes.ByteSize
         [<System.Text.Json.Serialization.JsonPropertyName("size_bytes")>]
-        SizeBytes: Types.Long
+        SizeBytes: CoreTypes.Long
     }
 
     type DetailsInfo = {
         [<System.Text.Json.Serialization.JsonPropertyName("blob")>]
-        Blob: SnapshotRepositoryAnalyze.BlobDetails
+        Blob: BlobDetails
         [<System.Text.Json.Serialization.JsonPropertyName("overwrite_elapsed")>]
-        OverwriteElapsed: Types.Duration option
+        OverwriteElapsed: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("overwrite_elapsed_nanos")>]
-        OverwriteElapsedNanos: Types.DurationValue<Types.UnitNanos> option
+        OverwriteElapsedNanos: CoreTypes.DurationValue<CoreTypes.UnitNanos> option
         [<System.Text.Json.Serialization.JsonPropertyName("write_elapsed")>]
-        WriteElapsed: Types.Duration
+        WriteElapsed: CoreTypes.Duration
         [<System.Text.Json.Serialization.JsonPropertyName("write_elapsed_nanos")>]
-        WriteElapsedNanos: Types.DurationValue<Types.UnitNanos>
+        WriteElapsedNanos: CoreTypes.DurationValue<CoreTypes.UnitNanos>
         [<System.Text.Json.Serialization.JsonPropertyName("write_throttled")>]
-        WriteThrottled: Types.Duration
+        WriteThrottled: CoreTypes.Duration
         [<System.Text.Json.Serialization.JsonPropertyName("write_throttled_nanos")>]
-        WriteThrottledNanos: Types.DurationValue<Types.UnitNanos>
+        WriteThrottledNanos: CoreTypes.DurationValue<CoreTypes.UnitNanos>
         [<System.Text.Json.Serialization.JsonPropertyName("writer_node")>]
-        WriterNode: SnapshotRepositoryAnalyze.SnapshotNodeInfo
+        WriterNode: SnapshotNodeInfo
     }
 
     type ReadSummaryInfo = {
         [<System.Text.Json.Serialization.JsonPropertyName("count")>]
-        Count: Types.Integer
+        Count: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("max_wait")>]
-        MaxWait: Types.Duration
+        MaxWait: CoreTypes.Duration
         [<System.Text.Json.Serialization.JsonPropertyName("max_wait_nanos")>]
-        MaxWaitNanos: Types.DurationValue<Types.UnitNanos>
+        MaxWaitNanos: CoreTypes.DurationValue<CoreTypes.UnitNanos>
         [<System.Text.Json.Serialization.JsonPropertyName("total_elapsed")>]
-        TotalElapsed: Types.Duration
+        TotalElapsed: CoreTypes.Duration
         [<System.Text.Json.Serialization.JsonPropertyName("total_elapsed_nanos")>]
-        TotalElapsedNanos: Types.DurationValue<Types.UnitNanos>
+        TotalElapsedNanos: CoreTypes.DurationValue<CoreTypes.UnitNanos>
         [<System.Text.Json.Serialization.JsonPropertyName("total_size")>]
-        TotalSize: Types.ByteSize
+        TotalSize: CoreTypes.ByteSize
         [<System.Text.Json.Serialization.JsonPropertyName("total_size_bytes")>]
-        TotalSizeBytes: Types.Long
+        TotalSizeBytes: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("total_throttled")>]
-        TotalThrottled: Types.Duration
+        TotalThrottled: CoreTypes.Duration
         [<System.Text.Json.Serialization.JsonPropertyName("total_throttled_nanos")>]
-        TotalThrottledNanos: Types.DurationValue<Types.UnitNanos>
+        TotalThrottledNanos: CoreTypes.DurationValue<CoreTypes.UnitNanos>
         [<System.Text.Json.Serialization.JsonPropertyName("total_wait")>]
-        TotalWait: Types.Duration
+        TotalWait: CoreTypes.Duration
         [<System.Text.Json.Serialization.JsonPropertyName("total_wait_nanos")>]
-        TotalWaitNanos: Types.DurationValue<Types.UnitNanos>
+        TotalWaitNanos: CoreTypes.DurationValue<CoreTypes.UnitNanos>
     }
 
     type WriteSummaryInfo = {
         [<System.Text.Json.Serialization.JsonPropertyName("count")>]
-        Count: Types.Integer
+        Count: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("total_elapsed")>]
-        TotalElapsed: Types.Duration
+        TotalElapsed: CoreTypes.Duration
         [<System.Text.Json.Serialization.JsonPropertyName("total_elapsed_nanos")>]
-        TotalElapsedNanos: Types.DurationValue<Types.UnitNanos>
+        TotalElapsedNanos: CoreTypes.DurationValue<CoreTypes.UnitNanos>
         [<System.Text.Json.Serialization.JsonPropertyName("total_size")>]
-        TotalSize: Types.ByteSize
+        TotalSize: CoreTypes.ByteSize
         [<System.Text.Json.Serialization.JsonPropertyName("total_size_bytes")>]
-        TotalSizeBytes: Types.Long
+        TotalSizeBytes: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("total_throttled")>]
-        TotalThrottled: Types.Duration
+        TotalThrottled: CoreTypes.Duration
         [<System.Text.Json.Serialization.JsonPropertyName("total_throttled_nanos")>]
-        TotalThrottledNanos: Types.Long
+        TotalThrottledNanos: CoreTypes.Long
     }
 
     type SummaryInfo = {
         [<System.Text.Json.Serialization.JsonPropertyName("read")>]
-        Read: SnapshotRepositoryAnalyze.ReadSummaryInfo
+        Read: ReadSummaryInfo
         [<System.Text.Json.Serialization.JsonPropertyName("write")>]
-        Write: SnapshotRepositoryAnalyze.WriteSummaryInfo
+        Write: WriteSummaryInfo
     }
 

@@ -20,7 +20,7 @@ module IndicesPutDataStreamMappingsBuilders =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: UpdatedDataStreamMappings, value: Types.IndexName) =
+        member _.Name(state: UpdatedDataStreamMappings, value: CoreTypes.IndexName) =
             { state with Name = value }
 
         [<CustomOperation("appliedToDataStream")>]
@@ -32,11 +32,11 @@ module IndicesPutDataStreamMappingsBuilders =
             { state with Error = Some value }
 
         [<CustomOperation("mappings")>]
-        member _.Mappings(state: UpdatedDataStreamMappings, value: TypesMapping.TypeMapping) =
+        member _.Mappings(state: UpdatedDataStreamMappings, value: CoreTypes.TypeMapping) =
             { state with Mappings = Some value }
 
         [<CustomOperation("effectiveMappings")>]
-        member _.EffectiveMappings(state: UpdatedDataStreamMappings, value: TypesMapping.TypeMapping) =
+        member _.EffectiveMappings(state: UpdatedDataStreamMappings, value: CoreTypes.TypeMapping) =
             { state with EffectiveMappings = Some value }
 
     let updatedDataStreamMappings = UpdatedDataStreamMappingsBuilder()

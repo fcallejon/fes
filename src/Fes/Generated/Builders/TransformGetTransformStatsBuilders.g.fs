@@ -21,7 +21,7 @@ module TransformGetTransformStatsBuilders =
             }
 
         [<CustomOperation("checkpoint")>]
-        member _.Checkpoint(state: CheckpointStats, value: Types.Long) =
+        member _.Checkpoint(state: CheckpointStats, value: CoreTypes.Long) =
             { state with Checkpoint = value }
 
         [<CustomOperation("checkpointProgress")>]
@@ -29,19 +29,19 @@ module TransformGetTransformStatsBuilders =
             { state with CheckpointProgress = Some value }
 
         [<CustomOperation("timestamp")>]
-        member _.Timestamp(state: CheckpointStats, value: Types.DateTime) =
+        member _.Timestamp(state: CheckpointStats, value: CoreTypes.DateTime) =
             { state with Timestamp = Some value }
 
         [<CustomOperation("timestampMillis")>]
-        member _.TimestampMillis(state: CheckpointStats, value: Types.EpochTime<Types.UnitMillis>) =
+        member _.TimestampMillis(state: CheckpointStats, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
             { state with TimestampMillis = Some value }
 
         [<CustomOperation("timeUpperBound")>]
-        member _.TimeUpperBound(state: CheckpointStats, value: Types.DateTime) =
+        member _.TimeUpperBound(state: CheckpointStats, value: CoreTypes.DateTime) =
             { state with TimeUpperBound = Some value }
 
         [<CustomOperation("timeUpperBoundMillis")>]
-        member _.TimeUpperBoundMillis(state: CheckpointStats, value: Types.EpochTime<Types.UnitMillis>) =
+        member _.TimeUpperBoundMillis(state: CheckpointStats, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
             { state with TimeUpperBoundMillis = Some value }
 
     let checkpointStats = CheckpointStatsBuilder()
@@ -59,11 +59,11 @@ module TransformGetTransformStatsBuilders =
             }
 
         [<CustomOperation("changesLastDetectedAt")>]
-        member _.ChangesLastDetectedAt(state: Checkpointing, value: Types.Long) =
+        member _.ChangesLastDetectedAt(state: Checkpointing, value: CoreTypes.Long) =
             { state with ChangesLastDetectedAt = Some value }
 
         [<CustomOperation("changesLastDetectedAtString")>]
-        member _.ChangesLastDetectedAtString(state: Checkpointing, value: Types.DateTime) =
+        member _.ChangesLastDetectedAtString(state: Checkpointing, value: CoreTypes.DateTime) =
             { state with ChangesLastDetectedAtString = Some value }
 
         [<CustomOperation("last")>]
@@ -75,15 +75,15 @@ module TransformGetTransformStatsBuilders =
             { state with Next = Some value }
 
         [<CustomOperation("operationsBehind")>]
-        member _.OperationsBehind(state: Checkpointing, value: Types.Long) =
+        member _.OperationsBehind(state: Checkpointing, value: CoreTypes.Long) =
             { state with OperationsBehind = Some value }
 
         [<CustomOperation("lastSearchTime")>]
-        member _.LastSearchTime(state: Checkpointing, value: Types.Long) =
+        member _.LastSearchTime(state: Checkpointing, value: CoreTypes.Long) =
             { state with LastSearchTime = Some value }
 
         [<CustomOperation("lastSearchTimeString")>]
-        member _.LastSearchTimeString(state: Checkpointing, value: Types.DateTime) =
+        member _.LastSearchTimeString(state: Checkpointing, value: CoreTypes.DateTime) =
             { state with LastSearchTimeString = Some value }
 
     let checkpointing = CheckpointingBuilder()
@@ -112,15 +112,15 @@ module TransformGetTransformStatsBuilders =
             { state with Details = Some value }
 
         [<CustomOperation("count")>]
-        member _.Count(state: TransformHealthIssue, value: Types.Integer) =
+        member _.Count(state: TransformHealthIssue, value: CoreTypes.Integer) =
             { state with Count = value }
 
         [<CustomOperation("firstOccurrence")>]
-        member _.FirstOccurrence(state: TransformHealthIssue, value: Types.EpochTime<Types.UnitMillis>) =
+        member _.FirstOccurrence(state: TransformHealthIssue, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
             { state with FirstOccurrence = Some value }
 
         [<CustomOperation("firstOccurenceString")>]
-        member _.FirstOccurenceString(state: TransformHealthIssue, value: Types.DateTime) =
+        member _.FirstOccurenceString(state: TransformHealthIssue, value: CoreTypes.DateTime) =
             { state with FirstOccurenceString = Some value }
 
     let transformHealthIssue = TransformHealthIssueBuilder()
@@ -148,71 +148,71 @@ module TransformGetTransformStatsBuilders =
             }
 
         [<CustomOperation("deleteTimeInMs")>]
-        member _.DeleteTimeInMs(state: TransformIndexerStats, value: Types.EpochTime<Types.UnitMillis>) =
+        member _.DeleteTimeInMs(state: TransformIndexerStats, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
             { state with DeleteTimeInMs = Some value }
 
         [<CustomOperation("documentsIndexed")>]
-        member _.DocumentsIndexed(state: TransformIndexerStats, value: Types.Long) =
+        member _.DocumentsIndexed(state: TransformIndexerStats, value: CoreTypes.Long) =
             { state with DocumentsIndexed = value }
 
         [<CustomOperation("documentsDeleted")>]
-        member _.DocumentsDeleted(state: TransformIndexerStats, value: Types.Long) =
+        member _.DocumentsDeleted(state: TransformIndexerStats, value: CoreTypes.Long) =
             { state with DocumentsDeleted = Some value }
 
         [<CustomOperation("documentsProcessed")>]
-        member _.DocumentsProcessed(state: TransformIndexerStats, value: Types.Long) =
+        member _.DocumentsProcessed(state: TransformIndexerStats, value: CoreTypes.Long) =
             { state with DocumentsProcessed = value }
 
         [<CustomOperation("exponentialAvgCheckpointDurationMs")>]
-        member _.ExponentialAvgCheckpointDurationMs(state: TransformIndexerStats, value: Types.DurationValue<Types.UnitFloatMillis>) =
+        member _.ExponentialAvgCheckpointDurationMs(state: TransformIndexerStats, value: CoreTypes.DurationValue<CoreTypes.UnitFloatMillis>) =
             { state with ExponentialAvgCheckpointDurationMs = value }
 
         [<CustomOperation("exponentialAvgDocumentsIndexed")>]
-        member _.ExponentialAvgDocumentsIndexed(state: TransformIndexerStats, value: Types.Double) =
+        member _.ExponentialAvgDocumentsIndexed(state: TransformIndexerStats, value: CoreTypes.Double) =
             { state with ExponentialAvgDocumentsIndexed = value }
 
         [<CustomOperation("exponentialAvgDocumentsProcessed")>]
-        member _.ExponentialAvgDocumentsProcessed(state: TransformIndexerStats, value: Types.Double) =
+        member _.ExponentialAvgDocumentsProcessed(state: TransformIndexerStats, value: CoreTypes.Double) =
             { state with ExponentialAvgDocumentsProcessed = value }
 
         [<CustomOperation("indexFailures")>]
-        member _.IndexFailures(state: TransformIndexerStats, value: Types.Long) =
+        member _.IndexFailures(state: TransformIndexerStats, value: CoreTypes.Long) =
             { state with IndexFailures = value }
 
         [<CustomOperation("indexTimeInMs")>]
-        member _.IndexTimeInMs(state: TransformIndexerStats, value: Types.DurationValue<Types.UnitMillis>) =
+        member _.IndexTimeInMs(state: TransformIndexerStats, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
             { state with IndexTimeInMs = value }
 
         [<CustomOperation("indexTotal")>]
-        member _.IndexTotal(state: TransformIndexerStats, value: Types.Long) =
+        member _.IndexTotal(state: TransformIndexerStats, value: CoreTypes.Long) =
             { state with IndexTotal = value }
 
         [<CustomOperation("pagesProcessed")>]
-        member _.PagesProcessed(state: TransformIndexerStats, value: Types.Long) =
+        member _.PagesProcessed(state: TransformIndexerStats, value: CoreTypes.Long) =
             { state with PagesProcessed = value }
 
         [<CustomOperation("processingTimeInMs")>]
-        member _.ProcessingTimeInMs(state: TransformIndexerStats, value: Types.DurationValue<Types.UnitMillis>) =
+        member _.ProcessingTimeInMs(state: TransformIndexerStats, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
             { state with ProcessingTimeInMs = value }
 
         [<CustomOperation("processingTotal")>]
-        member _.ProcessingTotal(state: TransformIndexerStats, value: Types.Long) =
+        member _.ProcessingTotal(state: TransformIndexerStats, value: CoreTypes.Long) =
             { state with ProcessingTotal = value }
 
         [<CustomOperation("searchFailures")>]
-        member _.SearchFailures(state: TransformIndexerStats, value: Types.Long) =
+        member _.SearchFailures(state: TransformIndexerStats, value: CoreTypes.Long) =
             { state with SearchFailures = value }
 
         [<CustomOperation("searchTimeInMs")>]
-        member _.SearchTimeInMs(state: TransformIndexerStats, value: Types.DurationValue<Types.UnitMillis>) =
+        member _.SearchTimeInMs(state: TransformIndexerStats, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
             { state with SearchTimeInMs = value }
 
         [<CustomOperation("searchTotal")>]
-        member _.SearchTotal(state: TransformIndexerStats, value: Types.Long) =
+        member _.SearchTotal(state: TransformIndexerStats, value: CoreTypes.Long) =
             { state with SearchTotal = value }
 
         [<CustomOperation("triggerCount")>]
-        member _.TriggerCount(state: TransformIndexerStats, value: Types.Long) =
+        member _.TriggerCount(state: TransformIndexerStats, value: CoreTypes.Long) =
             { state with TriggerCount = value }
 
     let transformIndexerStats = TransformIndexerStatsBuilder()
@@ -228,23 +228,23 @@ module TransformGetTransformStatsBuilders =
             }
 
         [<CustomOperation("docsIndexed")>]
-        member _.DocsIndexed(state: TransformProgress, value: Types.Long) =
+        member _.DocsIndexed(state: TransformProgress, value: CoreTypes.Long) =
             { state with DocsIndexed = value }
 
         [<CustomOperation("docsProcessed")>]
-        member _.DocsProcessed(state: TransformProgress, value: Types.Long) =
+        member _.DocsProcessed(state: TransformProgress, value: CoreTypes.Long) =
             { state with DocsProcessed = value }
 
         [<CustomOperation("docsRemaining")>]
-        member _.DocsRemaining(state: TransformProgress, value: Types.Long) =
+        member _.DocsRemaining(state: TransformProgress, value: CoreTypes.Long) =
             { state with DocsRemaining = Some value }
 
         [<CustomOperation("percentComplete")>]
-        member _.PercentComplete(state: TransformProgress, value: Types.Double) =
+        member _.PercentComplete(state: TransformProgress, value: CoreTypes.Double) =
             { state with PercentComplete = Some value }
 
         [<CustomOperation("totalDocs")>]
-        member _.TotalDocs(state: TransformProgress, value: Types.Long) =
+        member _.TotalDocs(state: TransformProgress, value: CoreTypes.Long) =
             { state with TotalDocs = Some value }
 
     let transformProgress = TransformProgressBuilder()
@@ -270,11 +270,11 @@ module TransformGetTransformStatsBuilders =
             { state with Health = Some value }
 
         [<CustomOperation("id")>]
-        member _.Id(state: TransformStats, value: Types.Id) =
+        member _.Id(state: TransformStats, value: CoreTypes.Id) =
             { state with Id = value }
 
         [<CustomOperation("node")>]
-        member _.Node(state: TransformStats, value: Types.NodeAttributes) =
+        member _.Node(state: TransformStats, value: CoreTypes.NodeAttributes) =
             { state with Node = Some value }
 
         [<CustomOperation("reason")>]

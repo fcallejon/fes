@@ -18,13 +18,13 @@ module SecurityHasPrivileges =
 
     type Privileges = Map<string, bool>
 
-    type ResourcePrivileges = Map<Types.Name, SecurityHasPrivileges.Privileges>
+    type ResourcePrivileges = Map<CoreTypes.Name, Privileges>
 
-    type ApplicationsPrivileges = Map<Types.Name, SecurityHasPrivileges.ResourcePrivileges>
+    type ApplicationsPrivileges = Map<CoreTypes.Name, ResourcePrivileges>
 
     type IndexPrivilegesCheck = {
         [<System.Text.Json.Serialization.JsonPropertyName("names")>]
-        Names: Types.Indices
+        Names: CoreTypes.Indices
         [<System.Text.Json.Serialization.JsonPropertyName("privileges")>]
         Privileges: SecurityTypes.IndexPrivilege list
         [<System.Text.Json.Serialization.JsonPropertyName("allow_restricted_indices")>]

@@ -25,20 +25,10 @@ let updateFsproj (fsprojPath: string) (generatedDir: string) =
     // Order: Core types first (_types.*), then other types, then Converters, then Builders, then Operations
     // Within types, ensure foundational namespaces come first
     let allTypeFiles = generatedFiles |> List.filter (fun f -> f.Contains("/Types/"))
-    // Types.g.fs must come first (defines core types), then TypesX files, then SpecUtils, then rest
-    let typesGFs = allTypeFiles |> List.filter (fun f -> System.IO.Path.GetFileName(f) = "Types.g.fs")
-    let typesXFiles =
-        allTypeFiles
-        |> List.filter (fun f ->
-            let name = System.IO.Path.GetFileName(f)
-            name.StartsWith("Types") && name <> "Types.g.fs")
-    let specUtilsFiles = allTypeFiles |> List.filter (fun f -> System.IO.Path.GetFileName(f).StartsWith("SpecUtils"))
-    let otherTypeFiles =
-        allTypeFiles
-        |> List.filter (fun f ->
-            let name = System.IO.Path.GetFileName(f)
-            not (name.StartsWith("Types")) && not (name.StartsWith("SpecUtils")))
-    let typeFiles = typesGFs @ typesXFiles @ specUtilsFiles @ otherTypeFiles
+    // CoreTypes.g.fs must come first (merged _types + _spec_utils), then everything else
+    let coreTypesFile = allTypeFiles |> List.filter (fun f -> System.IO.Path.GetFileName(f) = "CoreTypes.g.fs")
+    let otherTypeFiles = allTypeFiles |> List.filter (fun f -> System.IO.Path.GetFileName(f) <> "CoreTypes.g.fs")
+    let typeFiles = coreTypesFile @ otherTypeFiles
     let converterFiles = generatedFiles |> List.filter (fun f -> f.EndsWith("Converters.g.fs"))
     let builderFiles = generatedFiles |> List.filter (fun f -> f.Contains("/Builders/"))
     let esModule = generatedFiles |> List.filter (fun f -> f.EndsWith("/ES.g.fs"))

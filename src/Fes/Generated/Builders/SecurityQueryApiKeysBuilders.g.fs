@@ -11,13 +11,13 @@ module SecurityQueryApiKeysBuilders =
 
     module ApiKeyAggregation =
 
-        let cardinality (value: TypesAggregations.CardinalityAggregation) =
+        let cardinality (value: CoreTypes.CardinalityAggregation) =
             ApiKeyAggregationContainer.Cardinality value
 
-        let composite (value: TypesAggregations.CompositeAggregation) =
+        let composite (value: CoreTypes.CompositeAggregation) =
             ApiKeyAggregationContainer.Composite value
 
-        let dateRange (value: TypesAggregations.DateRangeAggregation) =
+        let dateRange (value: CoreTypes.DateRangeAggregation) =
             ApiKeyAggregationContainer.DateRange value
 
         let filter (value: SecurityQueryApiKeys.ApiKeyQueryContainer) =
@@ -26,16 +26,16 @@ module SecurityQueryApiKeysBuilders =
         let filters (value: SecurityQueryApiKeys.ApiKeyFiltersAggregation) =
             ApiKeyAggregationContainer.Filters value
 
-        let missing (value: TypesAggregations.MissingAggregation) =
+        let missing (value: CoreTypes.MissingAggregation) =
             ApiKeyAggregationContainer.Missing value
 
-        let range (value: TypesAggregations.RangeAggregation) =
+        let range (value: CoreTypes.RangeAggregation) =
             ApiKeyAggregationContainer.Range value
 
-        let terms (value: TypesAggregations.TermsAggregation) =
+        let terms (value: CoreTypes.TermsAggregation) =
             ApiKeyAggregationContainer.Terms value
 
-        let valueCount (value: TypesAggregations.ValueCountAggregation) =
+        let valueCount (value: CoreTypes.ValueCountAggregation) =
             ApiKeyAggregationContainer.ValueCount value
 
     type ApiKeyFiltersAggregationBuilder() =
@@ -48,7 +48,7 @@ module SecurityQueryApiKeysBuilders =
             }
 
         [<CustomOperation("filters")>]
-        member _.Filters(state: ApiKeyFiltersAggregation, value: TypesAggregations.Buckets<SecurityQueryApiKeys.ApiKeyQueryContainer>) =
+        member _.Filters(state: ApiKeyFiltersAggregation, value: CoreTypes.Buckets<SecurityQueryApiKeys.ApiKeyQueryContainer>) =
             { state with Filters = Some value }
 
         [<CustomOperation("otherBucket")>]
@@ -67,36 +67,36 @@ module SecurityQueryApiKeysBuilders =
 
     module ApiKeyQuery =
 
-        let bool (value: TypesQueryDsl.BoolQuery) =
+        let bool (value: CoreTypes.BoolQuery) =
             ApiKeyQueryContainer.Bool value
 
-        let exists (value: TypesQueryDsl.ExistsQuery) =
+        let exists (value: CoreTypes.ExistsQuery) =
             ApiKeyQueryContainer.Exists value
 
-        let ids (value: TypesQueryDsl.IdsQuery) =
+        let ids (value: CoreTypes.IdsQuery) =
             ApiKeyQueryContainer.Ids value
 
-        let match' (field: string) (value: TypesQueryDsl.MatchQuery) =
+        let match' (field: string) (value: CoreTypes.MatchQuery) =
             ApiKeyQueryContainer.Match (field, value)
 
-        let matchAll (value: TypesQueryDsl.MatchAllQuery) =
+        let matchAll (value: CoreTypes.MatchAllQuery) =
             ApiKeyQueryContainer.MatchAll value
 
-        let prefix (field: string) (value: TypesQueryDsl.PrefixQuery) =
+        let prefix (field: string) (value: CoreTypes.PrefixQuery) =
             ApiKeyQueryContainer.Prefix (field, value)
 
-        let range (field: string) (value: TypesQueryDsl.RangeQuery) =
+        let range (field: string) (value: CoreTypes.RangeQuery) =
             ApiKeyQueryContainer.Range (field, value)
 
-        let simpleQueryString (value: TypesQueryDsl.SimpleQueryStringQuery) =
+        let simpleQueryString (value: CoreTypes.SimpleQueryStringQuery) =
             ApiKeyQueryContainer.SimpleQueryString value
 
-        let term (field: string) (value: TypesQueryDsl.TermQuery) =
+        let term (field: string) (value: CoreTypes.TermQuery) =
             ApiKeyQueryContainer.Term (field, value)
 
-        let terms (value: TypesQueryDsl.TermsQuery) =
+        let terms (value: CoreTypes.TermsQuery) =
             ApiKeyQueryContainer.Terms value
 
-        let wildcard (field: string) (value: TypesQueryDsl.WildcardQuery) =
+        let wildcard (field: string) (value: CoreTypes.WildcardQuery) =
             ApiKeyQueryContainer.Wildcard (field, value)
 

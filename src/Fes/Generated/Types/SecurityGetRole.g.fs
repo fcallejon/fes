@@ -17,7 +17,7 @@ module SecurityGetRole =
         [<System.Text.Json.Serialization.JsonPropertyName("remote_cluster")>]
         RemoteCluster: SecurityTypes.RemoteClusterPrivileges list option
         [<System.Text.Json.Serialization.JsonPropertyName("metadata")>]
-        Metadata: Types.Metadata
+        Metadata: CoreTypes.Metadata
         [<System.Text.Json.Serialization.JsonPropertyName("description")>]
         Description: string option
         [<System.Text.Json.Serialization.JsonPropertyName("run_as")>]

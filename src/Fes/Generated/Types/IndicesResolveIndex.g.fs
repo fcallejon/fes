@@ -9,29 +9,29 @@ module IndicesResolveIndex =
 
     type ResolveIndexAliasItem = {
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.Name
+        Name: CoreTypes.Name
         [<System.Text.Json.Serialization.JsonPropertyName("indices")>]
-        Indices: Types.Indices
+        Indices: CoreTypes.Indices
     }
 
     type ResolveIndexDataStreamsItem = {
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.DataStreamName
+        Name: CoreTypes.DataStreamName
         [<System.Text.Json.Serialization.JsonPropertyName("timestamp_field")>]
-        TimestampField: Types.Field
+        TimestampField: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("backing_indices")>]
-        BackingIndices: Types.Indices
+        BackingIndices: CoreTypes.Indices
     }
 
     type ResolveIndexItem = {
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.Name
+        Name: CoreTypes.Name
         [<System.Text.Json.Serialization.JsonPropertyName("aliases")>]
         Aliases: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("attributes")>]
         Attributes: string list
         [<System.Text.Json.Serialization.JsonPropertyName("data_stream")>]
-        DataStream: Types.DataStreamName option
+        DataStream: CoreTypes.DataStreamName option
         [<System.Text.Json.Serialization.JsonPropertyName("mode")>]
         Mode: IndicesTypes.IndexMode option
     }

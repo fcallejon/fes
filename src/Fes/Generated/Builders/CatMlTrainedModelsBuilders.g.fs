@@ -33,7 +33,7 @@ module CatMlTrainedModelsBuilders =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: TrainedModelsRecord, value: Types.Id) =
+        member _.Id(state: TrainedModelsRecord, value: CoreTypes.Id) =
             { state with Id = Some value }
 
         [<CustomOperation("createdBy")>]
@@ -41,7 +41,7 @@ module CatMlTrainedModelsBuilders =
             { state with CreatedBy = Some value }
 
         [<CustomOperation("heapSize")>]
-        member _.HeapSize(state: TrainedModelsRecord, value: Types.ByteSize) =
+        member _.HeapSize(state: TrainedModelsRecord, value: CoreTypes.ByteSize) =
             { state with HeapSize = Some value }
 
         [<CustomOperation("operations")>]
@@ -53,11 +53,11 @@ module CatMlTrainedModelsBuilders =
             { state with License = Some value }
 
         [<CustomOperation("createTime")>]
-        member _.CreateTime(state: TrainedModelsRecord, value: Types.DateTime) =
+        member _.CreateTime(state: TrainedModelsRecord, value: CoreTypes.DateTime) =
             { state with CreateTime = Some value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: TrainedModelsRecord, value: Types.VersionString) =
+        member _.Version(state: TrainedModelsRecord, value: CoreTypes.VersionString) =
             { state with Version = Some value }
 
         [<CustomOperation("description")>]

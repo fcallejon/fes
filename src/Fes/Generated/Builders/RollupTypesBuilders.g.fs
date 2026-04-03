@@ -22,11 +22,11 @@ module RollupTypesBuilders =
             }
 
         [<CustomOperation("delay")>]
-        member _.Delay(state: DateHistogramGrouping, value: Types.Duration) =
+        member _.Delay(state: DateHistogramGrouping, value: CoreTypes.Duration) =
             { state with Delay = Some value }
 
         [<CustomOperation("field")>]
-        member _.Field(state: DateHistogramGrouping, value: Types.Field) =
+        member _.Field(state: DateHistogramGrouping, value: CoreTypes.Field) =
             { state with Field = value }
 
         [<CustomOperation("format")>]
@@ -34,19 +34,19 @@ module RollupTypesBuilders =
             { state with Format = Some value }
 
         [<CustomOperation("interval")>]
-        member _.Interval(state: DateHistogramGrouping, value: Types.Duration) =
+        member _.Interval(state: DateHistogramGrouping, value: CoreTypes.Duration) =
             { state with Interval = Some value }
 
         [<CustomOperation("calendarInterval")>]
-        member _.CalendarInterval(state: DateHistogramGrouping, value: Types.Duration) =
+        member _.CalendarInterval(state: DateHistogramGrouping, value: CoreTypes.Duration) =
             { state with CalendarInterval = Some value }
 
         [<CustomOperation("fixedInterval")>]
-        member _.FixedInterval(state: DateHistogramGrouping, value: Types.Duration) =
+        member _.FixedInterval(state: DateHistogramGrouping, value: CoreTypes.Duration) =
             { state with FixedInterval = Some value }
 
         [<CustomOperation("timeZone")>]
-        member _.TimeZone(state: DateHistogramGrouping, value: Types.TimeZone) =
+        member _.TimeZone(state: DateHistogramGrouping, value: CoreTypes.TimeZone) =
             { state with TimeZone = Some value }
 
     let dateHistogramGrouping = DateHistogramGroupingBuilder()

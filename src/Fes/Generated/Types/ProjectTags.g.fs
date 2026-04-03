@@ -20,8 +20,8 @@ module ProjectTags =
 
     type ProjectTags = {
         [<System.Text.Json.Serialization.JsonPropertyName("origin")>]
-        Origin: Map<string, ProjectTags.Tags>
+        Origin: Map<string, Tags>
         [<System.Text.Json.Serialization.JsonPropertyName("linked_projects")>]
-        LinkedProjects: Map<string, ProjectTags.Tags> option
+        LinkedProjects: Map<string, Tags> option
     }
 

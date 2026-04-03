@@ -9,7 +9,7 @@ module NodesReloadSecureSettings =
 
     type ResponseBase = {
         [<System.Text.Json.Serialization.JsonPropertyName("cluster_name")>]
-        ClusterName: Types.Name
+        ClusterName: CoreTypes.Name
         [<System.Text.Json.Serialization.JsonPropertyName("nodes")>]
         Nodes: Map<string, NodesTypes.NodeReloadResult>
     }

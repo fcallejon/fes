@@ -9,13 +9,13 @@ module SnapshotTypes =
 
     type RepositorySettingsBase = {
         [<System.Text.Json.Serialization.JsonPropertyName("chunk_size")>]
-        ChunkSize: Types.ByteSize option
+        ChunkSize: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("compress")>]
         Compress: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("max_restore_bytes_per_sec")>]
-        MaxRestoreBytesPerSec: Types.ByteSize option
+        MaxRestoreBytesPerSec: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("max_snapshot_bytes_per_sec")>]
-        MaxSnapshotBytesPerSec: Types.ByteSize option
+        MaxSnapshotBytesPerSec: CoreTypes.ByteSize option
     }
 
     type AzureRepositorySettings = {
@@ -26,32 +26,32 @@ module SnapshotTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("container")>]
         Container: string option
         [<System.Text.Json.Serialization.JsonPropertyName("delete_objects_max_size")>]
-        DeleteObjectsMaxSize: Types.Integer option
+        DeleteObjectsMaxSize: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("location_mode")>]
         LocationMode: string option
         [<System.Text.Json.Serialization.JsonPropertyName("max_concurrent_batch_deletes")>]
-        MaxConcurrentBatchDeletes: Types.Integer option
+        MaxConcurrentBatchDeletes: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("readonly")>]
         Readonly: bool option
     }
 
     type RepositoryBase = {
         [<System.Text.Json.Serialization.JsonPropertyName("uuid")>]
-        Uuid: Types.Uuid option
+        Uuid: CoreTypes.Uuid option
     }
 
     type AzureRepository = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("settings")>]
-        Settings: SnapshotTypes.AzureRepositorySettings option
+        Settings: AzureRepositorySettings option
     }
 
     type FileCountSnapshotStats = {
         [<System.Text.Json.Serialization.JsonPropertyName("file_count")>]
-        FileCount: Types.Integer
+        FileCount: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("size_in_bytes")>]
-        SizeInBytes: Types.Long
+        SizeInBytes: CoreTypes.Long
     }
 
     type GcsRepositorySettings = {
@@ -71,34 +71,34 @@ module SnapshotTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("settings")>]
-        Settings: SnapshotTypes.GcsRepositorySettings
+        Settings: GcsRepositorySettings
     }
 
     type IndexDetails = {
         [<System.Text.Json.Serialization.JsonPropertyName("shard_count")>]
-        ShardCount: Types.Integer
+        ShardCount: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("size")>]
-        Size: Types.ByteSize option
+        Size: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("size_in_bytes")>]
-        SizeInBytes: Types.Long
+        SizeInBytes: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("max_segments_per_shard")>]
-        MaxSegmentsPerShard: Types.Long
+        MaxSegmentsPerShard: CoreTypes.Long
     }
 
     type InfoFeatureState = {
         [<System.Text.Json.Serialization.JsonPropertyName("feature_name")>]
         FeatureName: string
         [<System.Text.Json.Serialization.JsonPropertyName("indices")>]
-        Indices: Types.Indices
+        Indices: CoreTypes.Indices
     }
 
     type ReadOnlyUrlRepositorySettings = {
         [<System.Text.Json.Serialization.JsonPropertyName("http_max_retries")>]
-        HttpMaxRetries: Types.Integer option
+        HttpMaxRetries: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("http_socket_timeout")>]
-        HttpSocketTimeout: Types.Duration option
+        HttpSocketTimeout: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("max_number_of_snapshots")>]
-        MaxNumberOfSnapshots: Types.Integer option
+        MaxNumberOfSnapshots: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("url")>]
         Url: string
     }
@@ -107,7 +107,7 @@ module SnapshotTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("settings")>]
-        Settings: SnapshotTypes.ReadOnlyUrlRepositorySettings
+        Settings: ReadOnlyUrlRepositorySettings
     }
 
     type S3RepositorySettings = {
@@ -116,19 +116,19 @@ module SnapshotTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("base_path")>]
         BasePath: string option
         [<System.Text.Json.Serialization.JsonPropertyName("buffer_size")>]
-        BufferSize: Types.ByteSize option
+        BufferSize: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("canned_acl")>]
         CannedAcl: string option
         [<System.Text.Json.Serialization.JsonPropertyName("client")>]
         Client: string option
         [<System.Text.Json.Serialization.JsonPropertyName("delete_objects_max_size")>]
-        DeleteObjectsMaxSize: Types.Integer option
+        DeleteObjectsMaxSize: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("get_register_retry_delay")>]
-        GetRegisterRetryDelay: Types.Duration option
+        GetRegisterRetryDelay: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("max_multipart_parts")>]
-        MaxMultipartParts: Types.Integer option
+        MaxMultipartParts: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("max_multipart_upload_cleanup_size")>]
-        MaxMultipartUploadCleanupSize: Types.Integer option
+        MaxMultipartUploadCleanupSize: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("readonly")>]
         Readonly: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("server_side_encryption")>]
@@ -136,25 +136,25 @@ module SnapshotTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("storage_class")>]
         StorageClass: string option
         [<System.Text.Json.Serialization.JsonPropertyName("throttled_delete_retry.delay_increment")>]
-        ThrottledDeleteRetryDelayIncrement: Types.Duration option
+        ThrottledDeleteRetryDelayIncrement: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("throttled_delete_retry.maximum_delay")>]
-        ThrottledDeleteRetryMaximumDelay: Types.Duration option
+        ThrottledDeleteRetryMaximumDelay: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("throttled_delete_retry.maximum_number_of_retries")>]
-        ThrottledDeleteRetryMaximumNumberOfRetries: Types.Integer option
+        ThrottledDeleteRetryMaximumNumberOfRetries: CoreTypes.Integer option
     }
 
     type S3Repository = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("settings")>]
-        Settings: SnapshotTypes.S3RepositorySettings
+        Settings: S3RepositorySettings
     }
 
     type SharedFileSystemRepositorySettings = {
         [<System.Text.Json.Serialization.JsonPropertyName("location")>]
         Location: string
         [<System.Text.Json.Serialization.JsonPropertyName("max_number_of_snapshots")>]
-        MaxNumberOfSnapshots: Types.Integer option
+        MaxNumberOfSnapshots: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("readonly")>]
         Readonly: bool option
     }
@@ -163,14 +163,14 @@ module SnapshotTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("settings")>]
-        Settings: SnapshotTypes.SharedFileSystemRepositorySettings
+        Settings: SharedFileSystemRepositorySettings
     }
 
     type SourceOnlyRepositorySettings = {
         [<System.Text.Json.Serialization.JsonPropertyName("delegate_type")>]
         DelegateType: string option
         [<System.Text.Json.Serialization.JsonPropertyName("max_number_of_snapshots")>]
-        MaxNumberOfSnapshots: Types.Integer option
+        MaxNumberOfSnapshots: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("read_only")>]
         ReadOnly: bool option
     }
@@ -179,32 +179,32 @@ module SnapshotTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("settings")>]
-        Settings: SnapshotTypes.SourceOnlyRepositorySettings
+        Settings: SourceOnlyRepositorySettings
     }
 
     [<RequireQualifiedAccess>]
     type Repository =
-        | AzureRepository of SnapshotTypes.AzureRepository
-        | GcsRepository of SnapshotTypes.GcsRepository
-        | S3Repository of SnapshotTypes.S3Repository
-        | SharedFileSystemRepository of SnapshotTypes.SharedFileSystemRepository
-        | ReadOnlyUrlRepository of SnapshotTypes.ReadOnlyUrlRepository
-        | SourceOnlyRepository of SnapshotTypes.SourceOnlyRepository
+        | AzureRepository of AzureRepository
+        | GcsRepository of GcsRepository
+        | S3Repository of S3Repository
+        | SharedFileSystemRepository of SharedFileSystemRepository
+        | ReadOnlyUrlRepository of ReadOnlyUrlRepository
+        | SourceOnlyRepository of SourceOnlyRepository
         | Unknown of name: string * System.Text.Json.JsonElement
 
     type ShardsStats = {
         [<System.Text.Json.Serialization.JsonPropertyName("done")>]
-        Done: Types.Long
+        Done: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("failed")>]
-        Failed: Types.Long
+        Failed: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("finalizing")>]
-        Finalizing: Types.Long
+        Finalizing: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("initializing")>]
-        Initializing: Types.Long
+        Initializing: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("started")>]
-        Started: Types.Long
+        Started: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("total")>]
-        Total: Types.Long
+        Total: CoreTypes.Long
     }
 
     [<RequireQualifiedAccess>]
@@ -217,64 +217,64 @@ module SnapshotTypes =
 
     type ShardsStatsSummaryItem = {
         [<System.Text.Json.Serialization.JsonPropertyName("file_count")>]
-        FileCount: Types.Long
+        FileCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("size_in_bytes")>]
-        SizeInBytes: Types.Long
+        SizeInBytes: CoreTypes.Long
     }
 
     type ShardsStatsSummary = {
         [<System.Text.Json.Serialization.JsonPropertyName("incremental")>]
-        Incremental: SnapshotTypes.ShardsStatsSummaryItem
+        Incremental: ShardsStatsSummaryItem
         [<System.Text.Json.Serialization.JsonPropertyName("total")>]
-        Total: SnapshotTypes.ShardsStatsSummaryItem
+        Total: ShardsStatsSummaryItem
         [<System.Text.Json.Serialization.JsonPropertyName("start_time_in_millis")>]
-        StartTimeInMillis: Types.EpochTime<Types.UnitMillis>
+        StartTimeInMillis: CoreTypes.EpochTime<CoreTypes.UnitMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("time")>]
-        Time: Types.Duration option
+        Time: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("time_in_millis")>]
-        TimeInMillis: Types.DurationValue<Types.UnitMillis>
+        TimeInMillis: CoreTypes.DurationValue<CoreTypes.UnitMillis>
     }
 
     type SnapshotShardsStatus = {
         [<System.Text.Json.Serialization.JsonPropertyName("stage")>]
-        Stage: SnapshotTypes.ShardsStatsStage
+        Stage: ShardsStatsStage
         [<System.Text.Json.Serialization.JsonPropertyName("stats")>]
-        Stats: SnapshotTypes.ShardsStatsSummary
+        Stats: ShardsStatsSummary
     }
 
     type SnapshotStats = {
         [<System.Text.Json.Serialization.JsonPropertyName("incremental")>]
-        Incremental: SnapshotTypes.FileCountSnapshotStats
+        Incremental: FileCountSnapshotStats
         [<System.Text.Json.Serialization.JsonPropertyName("start_time_in_millis")>]
-        StartTimeInMillis: Types.EpochTime<Types.UnitMillis>
+        StartTimeInMillis: CoreTypes.EpochTime<CoreTypes.UnitMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("time")>]
-        Time: Types.Duration option
+        Time: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("time_in_millis")>]
-        TimeInMillis: Types.DurationValue<Types.UnitMillis>
+        TimeInMillis: CoreTypes.DurationValue<CoreTypes.UnitMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("total")>]
-        Total: SnapshotTypes.FileCountSnapshotStats
+        Total: FileCountSnapshotStats
     }
 
     type SnapshotIndexStats = {
         [<System.Text.Json.Serialization.JsonPropertyName("shards")>]
-        Shards: Map<string, SnapshotTypes.SnapshotShardsStatus>
+        Shards: Map<string, SnapshotShardsStatus>
         [<System.Text.Json.Serialization.JsonPropertyName("shards_stats")>]
-        ShardsStats: SnapshotTypes.ShardsStats
+        ShardsStats: ShardsStats
         [<System.Text.Json.Serialization.JsonPropertyName("stats")>]
-        Stats: SnapshotTypes.SnapshotStats
+        Stats: SnapshotStats
     }
 
     type SnapshotShardFailure = {
         [<System.Text.Json.Serialization.JsonPropertyName("index")>]
-        Index: Types.IndexName
+        Index: CoreTypes.IndexName
         [<System.Text.Json.Serialization.JsonPropertyName("node_id")>]
-        NodeId: Types.Id option
+        NodeId: CoreTypes.Id option
         [<System.Text.Json.Serialization.JsonPropertyName("reason")>]
         Reason: string
         [<System.Text.Json.Serialization.JsonPropertyName("shard_id")>]
-        ShardId: Types.Integer
+        ShardId: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("index_uuid")>]
-        IndexUuid: Types.Id
+        IndexUuid: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("status")>]
         Status: string
     }
@@ -283,45 +283,45 @@ module SnapshotTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("data_streams")>]
         DataStreams: string list
         [<System.Text.Json.Serialization.JsonPropertyName("duration")>]
-        Duration: Types.Duration option
+        Duration: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("duration_in_millis")>]
-        DurationInMillis: Types.DurationValue<Types.UnitMillis> option
+        DurationInMillis: CoreTypes.DurationValue<CoreTypes.UnitMillis> option
         [<System.Text.Json.Serialization.JsonPropertyName("end_time")>]
-        EndTime: Types.DateTime option
+        EndTime: CoreTypes.DateTime option
         [<System.Text.Json.Serialization.JsonPropertyName("end_time_in_millis")>]
-        EndTimeInMillis: Types.EpochTime<Types.UnitMillis> option
+        EndTimeInMillis: CoreTypes.EpochTime<CoreTypes.UnitMillis> option
         [<System.Text.Json.Serialization.JsonPropertyName("failures")>]
-        Failures: SnapshotTypes.SnapshotShardFailure list option
+        Failures: SnapshotShardFailure list option
         [<System.Text.Json.Serialization.JsonPropertyName("include_global_state")>]
         IncludeGlobalState: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("indices")>]
-        Indices: Types.IndexName list option
+        Indices: CoreTypes.IndexName list option
         [<System.Text.Json.Serialization.JsonPropertyName("index_details")>]
-        IndexDetails: Map<Types.IndexName, SnapshotTypes.IndexDetails> option
+        IndexDetails: Map<CoreTypes.IndexName, IndexDetails> option
         [<System.Text.Json.Serialization.JsonPropertyName("metadata")>]
-        Metadata: Types.Metadata option
+        Metadata: CoreTypes.Metadata option
         [<System.Text.Json.Serialization.JsonPropertyName("reason")>]
         Reason: string option
         [<System.Text.Json.Serialization.JsonPropertyName("repository")>]
-        Repository: Types.Name option
+        Repository: CoreTypes.Name option
         [<System.Text.Json.Serialization.JsonPropertyName("snapshot")>]
-        Snapshot: Types.Name
+        Snapshot: CoreTypes.Name
         [<System.Text.Json.Serialization.JsonPropertyName("shards")>]
-        Shards: Types.ShardStatistics option
+        Shards: CoreTypes.ShardStatistics option
         [<System.Text.Json.Serialization.JsonPropertyName("start_time")>]
-        StartTime: Types.DateTime option
+        StartTime: CoreTypes.DateTime option
         [<System.Text.Json.Serialization.JsonPropertyName("start_time_in_millis")>]
-        StartTimeInMillis: Types.EpochTime<Types.UnitMillis> option
+        StartTimeInMillis: CoreTypes.EpochTime<CoreTypes.UnitMillis> option
         [<System.Text.Json.Serialization.JsonPropertyName("state")>]
         State: string option
         [<System.Text.Json.Serialization.JsonPropertyName("uuid")>]
-        Uuid: Types.Uuid
+        Uuid: CoreTypes.Uuid
         [<System.Text.Json.Serialization.JsonPropertyName("version")>]
-        Version: Types.VersionString option
+        Version: CoreTypes.VersionString option
         [<System.Text.Json.Serialization.JsonPropertyName("version_id")>]
-        VersionId: Types.VersionNumber option
+        VersionId: CoreTypes.VersionNumber option
         [<System.Text.Json.Serialization.JsonPropertyName("feature_states")>]
-        FeatureStates: SnapshotTypes.InfoFeatureState list option
+        FeatureStates: InfoFeatureState list option
     }
 
     [<RequireQualifiedAccess>]
@@ -346,18 +346,18 @@ module SnapshotTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("include_global_state")>]
         IncludeGlobalState: bool
         [<System.Text.Json.Serialization.JsonPropertyName("indices")>]
-        Indices: Map<string, SnapshotTypes.SnapshotIndexStats>
+        Indices: Map<string, SnapshotIndexStats>
         [<System.Text.Json.Serialization.JsonPropertyName("repository")>]
         Repository: string
         [<System.Text.Json.Serialization.JsonPropertyName("shards_stats")>]
-        ShardsStats: SnapshotTypes.ShardsStats
+        ShardsStats: ShardsStats
         [<System.Text.Json.Serialization.JsonPropertyName("snapshot")>]
         Snapshot: string
         [<System.Text.Json.Serialization.JsonPropertyName("state")>]
         State: string
         [<System.Text.Json.Serialization.JsonPropertyName("stats")>]
-        Stats: SnapshotTypes.SnapshotStats
+        Stats: SnapshotStats
         [<System.Text.Json.Serialization.JsonPropertyName("uuid")>]
-        Uuid: Types.Uuid
+        Uuid: CoreTypes.Uuid
     }
 

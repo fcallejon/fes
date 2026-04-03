@@ -17,33 +17,33 @@ module GlobalReindexRethrottle =
         [<System.Text.Json.Serialization.JsonPropertyName("description")>]
         Description: string
         [<System.Text.Json.Serialization.JsonPropertyName("id")>]
-        Id: Types.Long
+        Id: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("node")>]
-        Node: Types.Name
+        Node: CoreTypes.Name
         [<System.Text.Json.Serialization.JsonPropertyName("running_time_in_nanos")>]
-        RunningTimeInNanos: Types.DurationValue<Types.UnitNanos>
+        RunningTimeInNanos: CoreTypes.DurationValue<CoreTypes.UnitNanos>
         [<System.Text.Json.Serialization.JsonPropertyName("start_time_in_millis")>]
-        StartTimeInMillis: Types.EpochTime<Types.UnitMillis>
+        StartTimeInMillis: CoreTypes.EpochTime<CoreTypes.UnitMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("status")>]
-        Status: Types.ReindexStatus
+        Status: CoreTypes.ReindexStatus
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("headers")>]
-        Headers: Types.HttpHeaders
+        Headers: CoreTypes.HttpHeaders
     }
 
     type ParentReindexTask = {
         [<System.Text.Json.Serialization.JsonPropertyName("children")>]
-        Children: GlobalReindexRethrottle.ReindexTask list option
+        Children: ReindexTask list option
     }
 
     type ReindexNode = {
         [<System.Text.Json.Serialization.JsonPropertyName("tasks")>]
-        Tasks: Map<Types.TaskId, GlobalReindexRethrottle.ReindexTask>
+        Tasks: Map<CoreTypes.TaskId, ReindexTask>
     }
 
     [<RequireQualifiedAccess>]
     type ReindexTasks =
-        | Array of GlobalReindexRethrottle.ReindexTask list
-        | Dictionary of Map<string, GlobalReindexRethrottle.ParentReindexTask>
+        | Array of ReindexTask list
+        | Dictionary of Map<string, ParentReindexTask>
 

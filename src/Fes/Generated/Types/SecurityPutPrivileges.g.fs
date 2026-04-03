@@ -13,8 +13,8 @@ module SecurityPutPrivileges =
         [<System.Text.Json.Serialization.JsonPropertyName("application")>]
         Application: string option
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.Name option
+        Name: CoreTypes.Name option
         [<System.Text.Json.Serialization.JsonPropertyName("metadata")>]
-        Metadata: Types.Metadata option
+        Metadata: CoreTypes.Metadata option
     }
 

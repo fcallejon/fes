@@ -19,8 +19,8 @@ module CatTypes =
 
     [<RequireQualifiedAccess>]
     type CatAliasesColumns =
-        | CatAliasesColumn of CatTypes.CatAliasesColumn
-        | Array of CatTypes.CatAliasesColumn list
+        | CatAliasesColumn of CatAliasesColumn
+        | Array of CatAliasesColumn list
 
     [<RequireQualifiedAccess>]
     type CatAllocationColumn =
@@ -41,8 +41,8 @@ module CatTypes =
 
     [<RequireQualifiedAccess>]
     type CatAllocationColumns =
-        | CatAllocationColumn of CatTypes.CatAllocationColumn
-        | Array of CatTypes.CatAllocationColumn list
+        | CatAllocationColumn of CatAllocationColumn
+        | Array of CatAllocationColumn list
 
     [<RequireQualifiedAccess>]
     type CatAnomalyDetectorColumn =
@@ -109,8 +109,8 @@ module CatTypes =
 
     [<RequireQualifiedAccess>]
     type CatAnomalyDetectorColumns =
-        | CatAnomalyDetectorColumn of CatTypes.CatAnomalyDetectorColumn
-        | Array of CatTypes.CatAnomalyDetectorColumn list
+        | CatAnomalyDetectorColumn of CatAnomalyDetectorColumn
+        | Array of CatAnomalyDetectorColumn list
 
     [<RequireQualifiedAccess>]
     type CatCircuitBreakerColumn =
@@ -127,8 +127,8 @@ module CatTypes =
 
     [<RequireQualifiedAccess>]
     type CatCircuitBreakerColumns =
-        | CatCircuitBreakerColumn of CatTypes.CatCircuitBreakerColumn
-        | Array of CatTypes.CatCircuitBreakerColumn list
+        | CatCircuitBreakerColumn of CatCircuitBreakerColumn
+        | Array of CatCircuitBreakerColumn list
 
     [<RequireQualifiedAccess>]
     type CatComponentColumn =
@@ -143,8 +143,8 @@ module CatTypes =
 
     [<RequireQualifiedAccess>]
     type CatComponentColumns =
-        | CatComponentColumn of CatTypes.CatComponentColumn
-        | Array of CatTypes.CatComponentColumn list
+        | CatComponentColumn of CatComponentColumn
+        | Array of CatComponentColumn list
 
     [<RequireQualifiedAccess>]
     type CatCountColumn =
@@ -155,8 +155,8 @@ module CatTypes =
 
     [<RequireQualifiedAccess>]
     type CatCountColumns =
-        | CatCountColumn of CatTypes.CatCountColumn
-        | Array of CatTypes.CatCountColumn list
+        | CatCountColumn of CatCountColumn
+        | Array of CatCountColumn list
 
     [<RequireQualifiedAccess>]
     type CatDatafeedColumn =
@@ -175,8 +175,8 @@ module CatTypes =
 
     [<RequireQualifiedAccess>]
     type CatDatafeedColumns =
-        | CatDatafeedColumn of CatTypes.CatDatafeedColumn
-        | Array of CatTypes.CatDatafeedColumn list
+        | CatDatafeedColumn of CatDatafeedColumn
+        | Array of CatDatafeedColumn list
 
     [<RequireQualifiedAccess>]
     type CatDfaColumn =
@@ -199,8 +199,8 @@ module CatTypes =
 
     [<RequireQualifiedAccess>]
     type CatDfaColumns =
-        | CatDfaColumn of CatTypes.CatDfaColumn
-        | Array of CatTypes.CatDfaColumn list
+        | CatDfaColumn of CatDfaColumn
+        | Array of CatDfaColumn list
 
     [<RequireQualifiedAccess>]
     type CatFieldDataColumn =
@@ -214,8 +214,8 @@ module CatTypes =
 
     [<RequireQualifiedAccess>]
     type CatFieldDataColumns =
-        | CatFieldDataColumn of CatTypes.CatFieldDataColumn
-        | Array of CatTypes.CatFieldDataColumn list
+        | CatFieldDataColumn of CatFieldDataColumn
+        | Array of CatFieldDataColumn list
 
     [<RequireQualifiedAccess>]
     type CatHealthColumn =
@@ -238,8 +238,8 @@ module CatTypes =
 
     [<RequireQualifiedAccess>]
     type CatHealthColumns =
-        | CatHealthColumn of CatTypes.CatHealthColumn
-        | Array of CatTypes.CatHealthColumn list
+        | CatHealthColumn of CatHealthColumn
+        | Array of CatHealthColumn list
 
     [<RequireQualifiedAccess>]
     type CatIndicesColumn =
@@ -394,8 +394,8 @@ module CatTypes =
 
     [<RequireQualifiedAccess>]
     type CatIndicesColumns =
-        | CatIndicesColumn of CatTypes.CatIndicesColumn
-        | Array of CatTypes.CatIndicesColumn list
+        | CatIndicesColumn of CatIndicesColumn
+        | Array of CatIndicesColumn list
 
     [<RequireQualifiedAccess>]
     type CatMasterColumn =
@@ -407,8 +407,8 @@ module CatTypes =
 
     [<RequireQualifiedAccess>]
     type CatMasterColumns =
-        | CatMasterColumn of CatTypes.CatMasterColumn
-        | Array of CatTypes.CatMasterColumn list
+        | CatMasterColumn of CatMasterColumn
+        | Array of CatMasterColumn list
 
     [<RequireQualifiedAccess>]
     type CatNodeColumn =
@@ -506,8 +506,8 @@ module CatTypes =
 
     [<RequireQualifiedAccess>]
     type CatNodeColumns =
-        | CatNodeColumn of CatTypes.CatNodeColumn
-        | Array of CatTypes.CatNodeColumn list
+        | CatNodeColumn of CatNodeColumn
+        | Array of CatNodeColumn list
 
     [<RequireQualifiedAccess>]
     type CatNodeattrsColumn =
@@ -523,8 +523,8 @@ module CatTypes =
 
     [<RequireQualifiedAccess>]
     type CatNodeattrsColumns =
-        | CatNodeattrsColumn of CatTypes.CatNodeattrsColumn
-        | Array of CatTypes.CatNodeattrsColumn list
+        | CatNodeattrsColumn of CatNodeattrsColumn
+        | Array of CatNodeattrsColumn list
 
     [<RequireQualifiedAccess>]
     type CatPendingTasksColumn =
@@ -536,8 +536,8 @@ module CatTypes =
 
     [<RequireQualifiedAccess>]
     type CatPendingTasksColumns =
-        | CatPendingTasksColumn of CatTypes.CatPendingTasksColumn
-        | Array of CatTypes.CatPendingTasksColumn list
+        | CatPendingTasksColumn of CatPendingTasksColumn
+        | Array of CatPendingTasksColumn list
 
     [<RequireQualifiedAccess>]
     type CatPluginsColumn =
@@ -550,8 +550,8 @@ module CatTypes =
 
     [<RequireQualifiedAccess>]
     type CatPluginsColumns =
-        | CatPluginsColumn of CatTypes.CatPluginsColumn
-        | Array of CatTypes.CatPluginsColumn list
+        | CatPluginsColumn of CatPluginsColumn
+        | Array of CatPluginsColumn list
 
     [<RequireQualifiedAccess>]
     type CatRecoveryColumn =
@@ -585,8 +585,8 @@ module CatTypes =
 
     [<RequireQualifiedAccess>]
     type CatRecoveryColumns =
-        | CatRecoveryColumn of CatTypes.CatRecoveryColumn
-        | Array of CatTypes.CatRecoveryColumn list
+        | CatRecoveryColumn of CatRecoveryColumn
+        | Array of CatRecoveryColumn list
 
     type CatRequestBase = System.Text.Json.JsonElement
 
@@ -611,8 +611,8 @@ module CatTypes =
 
     [<RequireQualifiedAccess>]
     type CatSegmentsColumns =
-        | CatSegmentsColumn of CatTypes.CatSegmentsColumn
-        | Array of CatTypes.CatSegmentsColumn list
+        | CatSegmentsColumn of CatSegmentsColumn
+        | Array of CatSegmentsColumn list
 
     [<RequireQualifiedAccess>]
     type CatShardColumn =
@@ -690,8 +690,8 @@ module CatTypes =
 
     [<RequireQualifiedAccess>]
     type CatShardColumns =
-        | CatShardColumn of CatTypes.CatShardColumn
-        | Array of CatTypes.CatShardColumn list
+        | CatShardColumn of CatShardColumn
+        | Array of CatShardColumn list
 
     [<RequireQualifiedAccess>]
     type CatSnapshotsColumn =
@@ -712,8 +712,8 @@ module CatTypes =
 
     [<RequireQualifiedAccess>]
     type CatSnapshotsColumns =
-        | CatSnapshotsColumn of CatTypes.CatSnapshotsColumn
-        | Array of CatTypes.CatSnapshotsColumn list
+        | CatSnapshotsColumn of CatSnapshotsColumn
+        | Array of CatSnapshotsColumn list
 
     [<RequireQualifiedAccess>]
     type CatTasksColumn =
@@ -736,8 +736,8 @@ module CatTypes =
 
     [<RequireQualifiedAccess>]
     type CatTasksColumns =
-        | CatTasksColumn of CatTypes.CatTasksColumn
-        | Array of CatTypes.CatTasksColumn list
+        | CatTasksColumn of CatTasksColumn
+        | Array of CatTasksColumn list
 
     [<RequireQualifiedAccess>]
     type CatTemplatesColumn =
@@ -750,8 +750,8 @@ module CatTypes =
 
     [<RequireQualifiedAccess>]
     type CatTemplatesColumns =
-        | CatTemplatesColumn of CatTypes.CatTemplatesColumn
-        | Array of CatTypes.CatTemplatesColumn list
+        | CatTemplatesColumn of CatTemplatesColumn
+        | Array of CatTemplatesColumn list
 
     [<RequireQualifiedAccess>]
     type CatThreadPoolColumn =
@@ -779,8 +779,8 @@ module CatTypes =
 
     [<RequireQualifiedAccess>]
     type CatThreadPoolColumns =
-        | CatThreadPoolColumn of CatTypes.CatThreadPoolColumn
-        | Array of CatTypes.CatThreadPoolColumn list
+        | CatThreadPoolColumn of CatThreadPoolColumn
+        | Array of CatThreadPoolColumn list
 
     [<RequireQualifiedAccess>]
     type CatTrainedModelsColumn =
@@ -801,8 +801,8 @@ module CatTypes =
 
     [<RequireQualifiedAccess>]
     type CatTrainedModelsColumns =
-        | CatTrainedModelsColumn of CatTypes.CatTrainedModelsColumn
-        | Array of CatTypes.CatTrainedModelsColumn list
+        | CatTrainedModelsColumn of CatTrainedModelsColumn
+        | Array of CatTrainedModelsColumn list
 
     [<RequireQualifiedAccess>]
     type CatTransformColumn =
@@ -842,6 +842,6 @@ module CatTypes =
 
     [<RequireQualifiedAccess>]
     type CatTransformColumns =
-        | CatTransformColumn of CatTypes.CatTransformColumn
-        | Array of CatTypes.CatTransformColumn list
+        | CatTransformColumn of CatTransformColumn
+        | Array of CatTransformColumn list
 

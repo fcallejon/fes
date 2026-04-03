@@ -14,12 +14,12 @@ module SecurityGrantApiKey =
 
     type GrantApiKey = {
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.Name
+        Name: CoreTypes.Name
         [<System.Text.Json.Serialization.JsonPropertyName("expiration")>]
-        Expiration: Types.DurationLarge option
+        Expiration: CoreTypes.DurationLarge option
         [<System.Text.Json.Serialization.JsonPropertyName("role_descriptors")>]
         RoleDescriptors: System.Text.Json.JsonElement option
         [<System.Text.Json.Serialization.JsonPropertyName("metadata")>]
-        Metadata: Types.Metadata option
+        Metadata: CoreTypes.Metadata option
     }
 

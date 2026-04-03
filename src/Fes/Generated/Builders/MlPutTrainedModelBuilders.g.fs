@@ -151,31 +151,31 @@ module MlPutTrainedModelBuilders =
             { state with DefaultLeft = Some value }
 
         [<CustomOperation("leafValue")>]
-        member _.LeafValue(state: TrainedModelTreeNode, value: Types.Double) =
+        member _.LeafValue(state: TrainedModelTreeNode, value: CoreTypes.Double) =
             { state with LeafValue = Some value }
 
         [<CustomOperation("leftChild")>]
-        member _.LeftChild(state: TrainedModelTreeNode, value: Types.Integer) =
+        member _.LeftChild(state: TrainedModelTreeNode, value: CoreTypes.Integer) =
             { state with LeftChild = Some value }
 
         [<CustomOperation("nodeIndex")>]
-        member _.NodeIndex(state: TrainedModelTreeNode, value: Types.Integer) =
+        member _.NodeIndex(state: TrainedModelTreeNode, value: CoreTypes.Integer) =
             { state with NodeIndex = value }
 
         [<CustomOperation("rightChild")>]
-        member _.RightChild(state: TrainedModelTreeNode, value: Types.Integer) =
+        member _.RightChild(state: TrainedModelTreeNode, value: CoreTypes.Integer) =
             { state with RightChild = Some value }
 
         [<CustomOperation("splitFeature")>]
-        member _.SplitFeature(state: TrainedModelTreeNode, value: Types.Integer) =
+        member _.SplitFeature(state: TrainedModelTreeNode, value: CoreTypes.Integer) =
             { state with SplitFeature = Some value }
 
         [<CustomOperation("splitGain")>]
-        member _.SplitGain(state: TrainedModelTreeNode, value: Types.Integer) =
+        member _.SplitGain(state: TrainedModelTreeNode, value: CoreTypes.Integer) =
             { state with SplitGain = Some value }
 
         [<CustomOperation("threshold")>]
-        member _.Threshold(state: TrainedModelTreeNode, value: Types.Double) =
+        member _.Threshold(state: TrainedModelTreeNode, value: CoreTypes.Double) =
             { state with Threshold = Some value }
 
     let trainedModelTreeNode = TrainedModelTreeNodeBuilder()

@@ -11,24 +11,24 @@ module RollupGetRollupIndexCaps =
         [<System.Text.Json.Serialization.JsonPropertyName("agg")>]
         Agg: string
         [<System.Text.Json.Serialization.JsonPropertyName("time_zone")>]
-        TimeZone: Types.TimeZone option
+        TimeZone: CoreTypes.TimeZone option
         [<System.Text.Json.Serialization.JsonPropertyName("calendar_interval")>]
-        CalendarInterval: Types.Duration option
+        CalendarInterval: CoreTypes.Duration option
     }
 
     type RollupJobSummary = {
         [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
-        Fields: Map<Types.Field, RollupGetRollupIndexCaps.RollupJobSummaryField list>
+        Fields: Map<CoreTypes.Field, RollupJobSummaryField list>
         [<System.Text.Json.Serialization.JsonPropertyName("index_pattern")>]
         IndexPattern: string
         [<System.Text.Json.Serialization.JsonPropertyName("job_id")>]
-        JobId: Types.Id
+        JobId: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("rollup_index")>]
-        RollupIndex: Types.IndexName
+        RollupIndex: CoreTypes.IndexName
     }
 
     type IndexCapabilities = {
         [<System.Text.Json.Serialization.JsonPropertyName("rollup_jobs")>]
-        RollupJobs: RollupGetRollupIndexCaps.RollupJobSummary list
+        RollupJobs: RollupJobSummary list
     }
 

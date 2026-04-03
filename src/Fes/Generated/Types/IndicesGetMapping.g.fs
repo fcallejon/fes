@@ -9,8 +9,8 @@ module IndicesGetMapping =
 
     type IndexMappingRecord = {
         [<System.Text.Json.Serialization.JsonPropertyName("item")>]
-        Item: TypesMapping.TypeMapping option
+        Item: CoreTypes.TypeMapping option
         [<System.Text.Json.Serialization.JsonPropertyName("mappings")>]
-        Mappings: TypesMapping.TypeMapping
+        Mappings: CoreTypes.TypeMapping
     }
 

@@ -9,11 +9,11 @@ module SearchableSnapshotsMount =
 
     type MountedSnapshot = {
         [<System.Text.Json.Serialization.JsonPropertyName("snapshot")>]
-        Snapshot: Types.Name
+        Snapshot: CoreTypes.Name
         [<System.Text.Json.Serialization.JsonPropertyName("indices")>]
-        Indices: Types.Indices
+        Indices: CoreTypes.Indices
         [<System.Text.Json.Serialization.JsonPropertyName("shards")>]
-        Shards: Types.ShardStatistics
+        Shards: CoreTypes.ShardStatistics
     }
 
     [<RequireQualifiedAccess>]

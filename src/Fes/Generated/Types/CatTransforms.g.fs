@@ -9,7 +9,7 @@ module CatTransforms =
 
     type TransformsRecord = {
         [<System.Text.Json.Serialization.JsonPropertyName("id")>]
-        Id: Types.Id option
+        Id: CoreTypes.Id option
         [<System.Text.Json.Serialization.JsonPropertyName("state")>]
         State: string option
         [<System.Text.Json.Serialization.JsonPropertyName("checkpoint")>]
@@ -25,7 +25,7 @@ module CatTransforms =
         [<System.Text.Json.Serialization.JsonPropertyName("create_time")>]
         CreateTime: string option
         [<System.Text.Json.Serialization.JsonPropertyName("version")>]
-        Version: Types.VersionString option
+        Version: CoreTypes.VersionString option
         [<System.Text.Json.Serialization.JsonPropertyName("source_index")>]
         SourceIndex: string option
         [<System.Text.Json.Serialization.JsonPropertyName("dest_index")>]

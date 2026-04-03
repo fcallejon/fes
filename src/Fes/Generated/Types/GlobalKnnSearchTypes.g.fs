@@ -9,12 +9,12 @@ module GlobalKnnSearchTypes =
 
     type KnnSearchQuery = {
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
-        Field: Types.Field
+        Field: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("query_vector")>]
-        QueryVector: Types.QueryVector
+        QueryVector: CoreTypes.QueryVector
         [<System.Text.Json.Serialization.JsonPropertyName("k")>]
-        K: Types.Integer
+        K: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("num_candidates")>]
-        NumCandidates: Types.Integer
+        NumCandidates: CoreTypes.Integer
     }
 

@@ -12,9 +12,9 @@ open Fes
 module SlmOperations =
 
     type SlmDeleteLifecycleRequest = {
-        PolicyId: Types.Name
-        MasterTimeout: Types.Duration option
-        Timeout: Types.Duration option
+        PolicyId: CoreTypes.Name
+        MasterTimeout: CoreTypes.Duration option
+        Timeout: CoreTypes.Duration option
     }
 
         with
@@ -36,7 +36,7 @@ module SlmOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type SlmDeleteLifecycleResponse = Types.AcknowledgedResponseBase
+    type SlmDeleteLifecycleResponse = CoreTypes.AcknowledgedResponseBase
 
     type SlmDeleteLifecycleRequestBuilder() =
         member _.Yield(_: unit) : SlmDeleteLifecycleRequest =
@@ -47,29 +47,29 @@ module SlmOperations =
             }
 
         [<CustomOperation("policyId")>]
-        member _.PolicyId(state: SlmDeleteLifecycleRequest, value: Types.Name) =
+        member _.PolicyId(state: SlmDeleteLifecycleRequest, value: CoreTypes.Name) =
             { state with PolicyId = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: SlmDeleteLifecycleRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: SlmDeleteLifecycleRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: SlmDeleteLifecycleRequest, value: Types.Duration) =
+        member _.Timeout(state: SlmDeleteLifecycleRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
     let slmDeleteLifecycleRequest = SlmDeleteLifecycleRequestBuilder()
 
     module DeleteLifecycle =
-        let withMasterTimeout (value: Types.Duration) (req: SlmDeleteLifecycleRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: SlmDeleteLifecycleRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: Types.Duration) (req: SlmDeleteLifecycleRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: SlmDeleteLifecycleRequest) =
             { req with Timeout = Some value }
 
     type SlmExecuteLifecycleRequest = {
-        PolicyId: Types.Name
-        MasterTimeout: Types.Duration option
-        Timeout: Types.Duration option
+        PolicyId: CoreTypes.Name
+        MasterTimeout: CoreTypes.Duration option
+        Timeout: CoreTypes.Duration option
     }
 
         with
@@ -102,28 +102,28 @@ module SlmOperations =
             }
 
         [<CustomOperation("policyId")>]
-        member _.PolicyId(state: SlmExecuteLifecycleRequest, value: Types.Name) =
+        member _.PolicyId(state: SlmExecuteLifecycleRequest, value: CoreTypes.Name) =
             { state with PolicyId = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: SlmExecuteLifecycleRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: SlmExecuteLifecycleRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: SlmExecuteLifecycleRequest, value: Types.Duration) =
+        member _.Timeout(state: SlmExecuteLifecycleRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
     let slmExecuteLifecycleRequest = SlmExecuteLifecycleRequestBuilder()
 
     module ExecuteLifecycle =
-        let withMasterTimeout (value: Types.Duration) (req: SlmExecuteLifecycleRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: SlmExecuteLifecycleRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: Types.Duration) (req: SlmExecuteLifecycleRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: SlmExecuteLifecycleRequest) =
             { req with Timeout = Some value }
 
     type SlmExecuteRetentionRequest = {
-        MasterTimeout: Types.Duration option
-        Timeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
+        Timeout: CoreTypes.Duration option
     }
 
         with
@@ -145,7 +145,7 @@ module SlmOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type SlmExecuteRetentionResponse = Types.AcknowledgedResponseBase
+    type SlmExecuteRetentionResponse = CoreTypes.AcknowledgedResponseBase
 
     type SlmExecuteRetentionRequestBuilder() =
         member _.Yield(_: unit) : SlmExecuteRetentionRequest =
@@ -155,25 +155,25 @@ module SlmOperations =
             }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: SlmExecuteRetentionRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: SlmExecuteRetentionRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: SlmExecuteRetentionRequest, value: Types.Duration) =
+        member _.Timeout(state: SlmExecuteRetentionRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
     let slmExecuteRetentionRequest = SlmExecuteRetentionRequestBuilder()
 
     module ExecuteRetention =
-        let withMasterTimeout (value: Types.Duration) (req: SlmExecuteRetentionRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: SlmExecuteRetentionRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: Types.Duration) (req: SlmExecuteRetentionRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: SlmExecuteRetentionRequest) =
             { req with Timeout = Some value }
 
     type SlmGetLifecycleRequest = {
-        PolicyId: Types.Names
-        MasterTimeout: Types.Duration option
-        Timeout: Types.Duration option
+        PolicyId: CoreTypes.Names
+        MasterTimeout: CoreTypes.Duration option
+        Timeout: CoreTypes.Duration option
     }
 
         with
@@ -195,7 +195,7 @@ module SlmOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type SlmGetLifecycleResponse = Map<Types.Id, SlmTypes.SnapshotLifecycle>
+    type SlmGetLifecycleResponse = Map<CoreTypes.Id, SlmTypes.SnapshotLifecycle>
 
     type SlmGetLifecycleRequestBuilder() =
         member _.Yield(_: unit) : SlmGetLifecycleRequest =
@@ -206,28 +206,28 @@ module SlmOperations =
             }
 
         [<CustomOperation("policyId")>]
-        member _.PolicyId(state: SlmGetLifecycleRequest, value: Types.Names) =
+        member _.PolicyId(state: SlmGetLifecycleRequest, value: CoreTypes.Names) =
             { state with PolicyId = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: SlmGetLifecycleRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: SlmGetLifecycleRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: SlmGetLifecycleRequest, value: Types.Duration) =
+        member _.Timeout(state: SlmGetLifecycleRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
     let slmGetLifecycleRequest = SlmGetLifecycleRequestBuilder()
 
     module GetLifecycle =
-        let withMasterTimeout (value: Types.Duration) (req: SlmGetLifecycleRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: SlmGetLifecycleRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: Types.Duration) (req: SlmGetLifecycleRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: SlmGetLifecycleRequest) =
             { req with Timeout = Some value }
 
     type SlmGetStatsRequest = {
-        MasterTimeout: Types.Duration option
-        Timeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
+        Timeout: CoreTypes.Duration option
     }
 
         with
@@ -259,24 +259,24 @@ module SlmOperations =
             }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: SlmGetStatsRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: SlmGetStatsRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: SlmGetStatsRequest, value: Types.Duration) =
+        member _.Timeout(state: SlmGetStatsRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
     let slmGetStatsRequest = SlmGetStatsRequestBuilder()
 
     module GetStats =
-        let withMasterTimeout (value: Types.Duration) (req: SlmGetStatsRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: SlmGetStatsRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: Types.Duration) (req: SlmGetStatsRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: SlmGetStatsRequest) =
             { req with Timeout = Some value }
 
     type SlmGetStatusRequest = {
-        MasterTimeout: Types.Duration option
-        Timeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
+        Timeout: CoreTypes.Duration option
     }
 
         with
@@ -308,27 +308,27 @@ module SlmOperations =
             }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: SlmGetStatusRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: SlmGetStatusRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: SlmGetStatusRequest, value: Types.Duration) =
+        member _.Timeout(state: SlmGetStatusRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
     let slmGetStatusRequest = SlmGetStatusRequestBuilder()
 
     module GetStatus =
-        let withMasterTimeout (value: Types.Duration) (req: SlmGetStatusRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: SlmGetStatusRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: Types.Duration) (req: SlmGetStatusRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: SlmGetStatusRequest) =
             { req with Timeout = Some value }
 
     type SlmPutLifecycleRequest = {
-        PolicyId: Types.Name
-        MasterTimeout: Types.Duration option
-        Timeout: Types.Duration option
+        PolicyId: CoreTypes.Name
+        MasterTimeout: CoreTypes.Duration option
+        Timeout: CoreTypes.Duration option
         Config: SlmTypes.Configuration option
-        Name: Types.Name option
+        Name: CoreTypes.Name option
         Repository: string option
         Retention: SlmTypes.Retention option
         Schedule: WatcherTypes.CronExpression option
@@ -354,7 +354,7 @@ module SlmOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type SlmPutLifecycleResponse = Types.AcknowledgedResponseBase
+    type SlmPutLifecycleResponse = CoreTypes.AcknowledgedResponseBase
 
     type SlmPutLifecycleRequestBuilder() =
         member _.Yield(_: unit) : SlmPutLifecycleRequest =
@@ -370,15 +370,15 @@ module SlmOperations =
             }
 
         [<CustomOperation("policyId")>]
-        member _.PolicyId(state: SlmPutLifecycleRequest, value: Types.Name) =
+        member _.PolicyId(state: SlmPutLifecycleRequest, value: CoreTypes.Name) =
             { state with PolicyId = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: SlmPutLifecycleRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: SlmPutLifecycleRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: SlmPutLifecycleRequest, value: Types.Duration) =
+        member _.Timeout(state: SlmPutLifecycleRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("config")>]
@@ -386,7 +386,7 @@ module SlmOperations =
             { state with Config = Some value }
 
         [<CustomOperation("name")>]
-        member _.Name(state: SlmPutLifecycleRequest, value: Types.Name) =
+        member _.Name(state: SlmPutLifecycleRequest, value: CoreTypes.Name) =
             { state with Name = Some value }
 
         [<CustomOperation("repository")>]
@@ -404,13 +404,13 @@ module SlmOperations =
     let slmPutLifecycleRequest = SlmPutLifecycleRequestBuilder()
 
     module PutLifecycle =
-        let withMasterTimeout (value: Types.Duration) (req: SlmPutLifecycleRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: SlmPutLifecycleRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: Types.Duration) (req: SlmPutLifecycleRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: SlmPutLifecycleRequest) =
             { req with Timeout = Some value }
         let withConfig (value: SlmTypes.Configuration) (req: SlmPutLifecycleRequest) =
             { req with Config = Some value }
-        let withName (value: Types.Name) (req: SlmPutLifecycleRequest) =
+        let withName (value: CoreTypes.Name) (req: SlmPutLifecycleRequest) =
             { req with Name = Some value }
         let withRepository (value: string) (req: SlmPutLifecycleRequest) =
             { req with Repository = Some value }
@@ -420,8 +420,8 @@ module SlmOperations =
             { req with Schedule = Some value }
 
     type SlmStartRequest = {
-        MasterTimeout: Types.Duration option
-        Timeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
+        Timeout: CoreTypes.Duration option
     }
 
         with
@@ -443,7 +443,7 @@ module SlmOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type SlmStartResponse = Types.AcknowledgedResponseBase
+    type SlmStartResponse = CoreTypes.AcknowledgedResponseBase
 
     type SlmStartRequestBuilder() =
         member _.Yield(_: unit) : SlmStartRequest =
@@ -453,24 +453,24 @@ module SlmOperations =
             }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: SlmStartRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: SlmStartRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: SlmStartRequest, value: Types.Duration) =
+        member _.Timeout(state: SlmStartRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
     let slmStartRequest = SlmStartRequestBuilder()
 
     module Start =
-        let withMasterTimeout (value: Types.Duration) (req: SlmStartRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: SlmStartRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: Types.Duration) (req: SlmStartRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: SlmStartRequest) =
             { req with Timeout = Some value }
 
     type SlmStopRequest = {
-        MasterTimeout: Types.Duration option
-        Timeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
+        Timeout: CoreTypes.Duration option
     }
 
         with
@@ -492,7 +492,7 @@ module SlmOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type SlmStopResponse = Types.AcknowledgedResponseBase
+    type SlmStopResponse = CoreTypes.AcknowledgedResponseBase
 
     type SlmStopRequestBuilder() =
         member _.Yield(_: unit) : SlmStopRequest =
@@ -502,18 +502,18 @@ module SlmOperations =
             }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: SlmStopRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: SlmStopRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: SlmStopRequest, value: Types.Duration) =
+        member _.Timeout(state: SlmStopRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
     let slmStopRequest = SlmStopRequestBuilder()
 
     module Stop =
-        let withMasterTimeout (value: Types.Duration) (req: SlmStopRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: SlmStopRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: Types.Duration) (req: SlmStopRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: SlmStopRequest) =
             { req with Timeout = Some value }
 

@@ -75,7 +75,7 @@ module CatMlJobsBuilders =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: JobsRecord, value: Types.Id) =
+        member _.Id(state: JobsRecord, value: CoreTypes.Id) =
             { state with Id = Some value }
 
         [<CustomOperation("state")>]
@@ -99,7 +99,7 @@ module CatMlJobsBuilders =
             { state with DataProcessedFields = Some value }
 
         [<CustomOperation("dataInputBytes")>]
-        member _.DataInputBytes(state: JobsRecord, value: Types.ByteSize) =
+        member _.DataInputBytes(state: JobsRecord, value: CoreTypes.ByteSize) =
             { state with DataInputBytes = Some value }
 
         [<CustomOperation("dataInputRecords")>]
@@ -155,7 +155,7 @@ module CatMlJobsBuilders =
             { state with DataLastSparseBucket = Some value }
 
         [<CustomOperation("modelBytes")>]
-        member _.ModelBytes(state: JobsRecord, value: Types.ByteSize) =
+        member _.ModelBytes(state: JobsRecord, value: CoreTypes.ByteSize) =
             { state with ModelBytes = Some value }
 
         [<CustomOperation("modelMemoryStatus")>]
@@ -163,7 +163,7 @@ module CatMlJobsBuilders =
             { state with ModelMemoryStatus = Some value }
 
         [<CustomOperation("modelBytesExceeded")>]
-        member _.ModelBytesExceeded(state: JobsRecord, value: Types.ByteSize) =
+        member _.ModelBytesExceeded(state: JobsRecord, value: CoreTypes.ByteSize) =
             { state with ModelBytesExceeded = Some value }
 
         [<CustomOperation("modelMemoryLimit")>]
@@ -275,7 +275,7 @@ module CatMlJobsBuilders =
             { state with ForecastsTimeTotal = Some value }
 
         [<CustomOperation("nodeId")>]
-        member _.NodeId(state: JobsRecord, value: Types.NodeId) =
+        member _.NodeId(state: JobsRecord, value: CoreTypes.NodeId) =
             { state with NodeId = Some value }
 
         [<CustomOperation("nodeName")>]
@@ -283,7 +283,7 @@ module CatMlJobsBuilders =
             { state with NodeName = Some value }
 
         [<CustomOperation("nodeEphemeralId")>]
-        member _.NodeEphemeralId(state: JobsRecord, value: Types.NodeId) =
+        member _.NodeEphemeralId(state: JobsRecord, value: CoreTypes.NodeId) =
             { state with NodeEphemeralId = Some value }
 
         [<CustomOperation("nodeAddress")>]

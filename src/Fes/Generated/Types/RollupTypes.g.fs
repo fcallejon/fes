@@ -9,19 +9,19 @@ module RollupTypes =
 
     type DateHistogramGrouping = {
         [<System.Text.Json.Serialization.JsonPropertyName("delay")>]
-        Delay: Types.Duration option
+        Delay: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
-        Field: Types.Field
+        Field: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("format")>]
         Format: string option
         [<System.Text.Json.Serialization.JsonPropertyName("interval")>]
-        Interval: Types.Duration option
+        Interval: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("calendar_interval")>]
-        CalendarInterval: Types.Duration option
+        CalendarInterval: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("fixed_interval")>]
-        FixedInterval: Types.Duration option
+        FixedInterval: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("time_zone")>]
-        TimeZone: Types.TimeZone option
+        TimeZone: CoreTypes.TimeZone option
     }
 
     [<RequireQualifiedAccess>]
@@ -34,29 +34,29 @@ module RollupTypes =
 
     type FieldMetric = {
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
-        Field: Types.Field
+        Field: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("metrics")>]
-        Metrics: RollupTypes.Metric list
+        Metrics: Metric list
     }
 
     type HistogramGrouping = {
         [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
-        Fields: Types.Fields
+        Fields: CoreTypes.Fields
         [<System.Text.Json.Serialization.JsonPropertyName("interval")>]
-        Interval: Types.Long
+        Interval: CoreTypes.Long
     }
 
     type TermsGrouping = {
         [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
-        Fields: Types.Fields
+        Fields: CoreTypes.Fields
     }
 
     type Groupings = {
         [<System.Text.Json.Serialization.JsonPropertyName("date_histogram")>]
-        DateHistogram: RollupTypes.DateHistogramGrouping option
+        DateHistogram: DateHistogramGrouping option
         [<System.Text.Json.Serialization.JsonPropertyName("histogram")>]
-        Histogram: RollupTypes.HistogramGrouping option
+        Histogram: HistogramGrouping option
         [<System.Text.Json.Serialization.JsonPropertyName("terms")>]
-        Terms: RollupTypes.TermsGrouping option
+        Terms: TermsGrouping option
     }
 

@@ -17,7 +17,7 @@ module TransformTypesBuilders =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: Destination, value: Types.IndexName) =
+        member _.Index(state: Destination, value: CoreTypes.IndexName) =
             { state with Index = Some value }
 
         [<CustomOperation("pipeline")>]
@@ -34,7 +34,7 @@ module TransformTypesBuilders =
             }
 
         [<CustomOperation("aggregations")>]
-        member _.Aggregations(state: Pivot, value: Map<string, TypesAggregations.AggregationContainer>) =
+        member _.Aggregations(state: Pivot, value: Map<string, CoreTypes.AggregationContainer>) =
             { state with Aggregations = Some value }
 
         [<CustomOperation("groupBy")>]
@@ -45,16 +45,16 @@ module TransformTypesBuilders =
 
     module PivotGroupBy =
 
-        let dateHistogram (value: TypesAggregations.DateHistogramAggregation) =
+        let dateHistogram (value: CoreTypes.DateHistogramAggregation) =
             PivotGroupByContainer.DateHistogram value
 
-        let geotileGrid (value: TypesAggregations.GeoTileGridAggregation) =
+        let geotileGrid (value: CoreTypes.GeoTileGridAggregation) =
             PivotGroupByContainer.GeotileGrid value
 
-        let histogram (value: TypesAggregations.HistogramAggregation) =
+        let histogram (value: CoreTypes.HistogramAggregation) =
             PivotGroupByContainer.Histogram value
 
-        let terms (value: TypesAggregations.TermsAggregation) =
+        let terms (value: CoreTypes.TermsAggregation) =
             PivotGroupByContainer.Terms value
 
     module RetentionPolicy =
@@ -88,11 +88,11 @@ module TransformTypesBuilders =
             { state with DeduceMappings = Some value }
 
         [<CustomOperation("docsPerSecond")>]
-        member _.DocsPerSecond(state: Settings, value: Types.Float) =
+        member _.DocsPerSecond(state: Settings, value: CoreTypes.Float) =
             { state with DocsPerSecond = Some value }
 
         [<CustomOperation("maxPageSearchSize")>]
-        member _.MaxPageSearchSize(state: Settings, value: Types.Integer) =
+        member _.MaxPageSearchSize(state: Settings, value: CoreTypes.Integer) =
             { state with MaxPageSearchSize = Some value }
 
         [<CustomOperation("usePointInTime")>]
@@ -100,7 +100,7 @@ module TransformTypesBuilders =
             { state with UsePointInTime = Some value }
 
         [<CustomOperation("numFailureRetries")>]
-        member _.NumFailureRetries(state: Settings, value: Types.Integer) =
+        member _.NumFailureRetries(state: Settings, value: CoreTypes.Integer) =
             { state with NumFailureRetries = Some value }
 
         [<CustomOperation("unattended")>]
@@ -119,19 +119,19 @@ module TransformTypesBuilders =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: Source, value: Types.Indices) =
+        member _.Index(state: Source, value: CoreTypes.Indices) =
             { state with Index = value }
 
         [<CustomOperation("query")>]
-        member _.Query(state: Source, value: TypesQueryDsl.QueryContainer) =
+        member _.Query(state: Source, value: CoreTypes.QueryContainer) =
             { state with Query = Some value }
 
         [<CustomOperation("runtimeMappings")>]
-        member _.RuntimeMappings(state: Source, value: TypesMapping.RuntimeFields) =
+        member _.RuntimeMappings(state: Source, value: CoreTypes.RuntimeFields) =
             { state with RuntimeMappings = Some value }
 
         [<CustomOperation("projectRouting")>]
-        member _.ProjectRouting(state: Source, value: Types.ProjectRouting) =
+        member _.ProjectRouting(state: Source, value: CoreTypes.ProjectRouting) =
             { state with ProjectRouting = Some value }
 
     let source = SourceBuilder()

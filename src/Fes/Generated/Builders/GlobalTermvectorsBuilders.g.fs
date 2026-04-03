@@ -22,31 +22,31 @@ module GlobalTermvectorsBuilders =
             }
 
         [<CustomOperation("maxDocFreq")>]
-        member _.MaxDocFreq(state: Filter, value: Types.Integer) =
+        member _.MaxDocFreq(state: Filter, value: CoreTypes.Integer) =
             { state with MaxDocFreq = Some value }
 
         [<CustomOperation("maxNumTerms")>]
-        member _.MaxNumTerms(state: Filter, value: Types.Integer) =
+        member _.MaxNumTerms(state: Filter, value: CoreTypes.Integer) =
             { state with MaxNumTerms = Some value }
 
         [<CustomOperation("maxTermFreq")>]
-        member _.MaxTermFreq(state: Filter, value: Types.Integer) =
+        member _.MaxTermFreq(state: Filter, value: CoreTypes.Integer) =
             { state with MaxTermFreq = Some value }
 
         [<CustomOperation("maxWordLength")>]
-        member _.MaxWordLength(state: Filter, value: Types.Integer) =
+        member _.MaxWordLength(state: Filter, value: CoreTypes.Integer) =
             { state with MaxWordLength = Some value }
 
         [<CustomOperation("minDocFreq")>]
-        member _.MinDocFreq(state: Filter, value: Types.Integer) =
+        member _.MinDocFreq(state: Filter, value: CoreTypes.Integer) =
             { state with MinDocFreq = Some value }
 
         [<CustomOperation("minTermFreq")>]
-        member _.MinTermFreq(state: Filter, value: Types.Integer) =
+        member _.MinTermFreq(state: Filter, value: CoreTypes.Integer) =
             { state with MinTermFreq = Some value }
 
         [<CustomOperation("minWordLength")>]
-        member _.MinWordLength(state: Filter, value: Types.Integer) =
+        member _.MinWordLength(state: Filter, value: CoreTypes.Integer) =
             { state with MinWordLength = Some value }
 
     let filter = FilterBuilder()
@@ -62,15 +62,15 @@ module GlobalTermvectorsBuilders =
             }
 
         [<CustomOperation("docFreq")>]
-        member _.DocFreq(state: Term, value: Types.Integer) =
+        member _.DocFreq(state: Term, value: CoreTypes.Integer) =
             { state with DocFreq = Some value }
 
         [<CustomOperation("score")>]
-        member _.Score(state: Term, value: Types.Double) =
+        member _.Score(state: Term, value: CoreTypes.Double) =
             { state with Score = Some value }
 
         [<CustomOperation("termFreq")>]
-        member _.TermFreq(state: Term, value: Types.Integer) =
+        member _.TermFreq(state: Term, value: CoreTypes.Integer) =
             { state with TermFreq = value }
 
         [<CustomOperation("tokens")>]
@@ -78,7 +78,7 @@ module GlobalTermvectorsBuilders =
             { state with Tokens = Some value }
 
         [<CustomOperation("ttf")>]
-        member _.Ttf(state: Term, value: Types.Integer) =
+        member _.Ttf(state: Term, value: CoreTypes.Integer) =
             { state with Ttf = Some value }
 
     let term = TermBuilder()
@@ -93,7 +93,7 @@ module GlobalTermvectorsBuilders =
             }
 
         [<CustomOperation("endOffset")>]
-        member _.EndOffset(state: Token, value: Types.Integer) =
+        member _.EndOffset(state: Token, value: CoreTypes.Integer) =
             { state with EndOffset = Some value }
 
         [<CustomOperation("payload")>]
@@ -101,11 +101,11 @@ module GlobalTermvectorsBuilders =
             { state with Payload = Some value }
 
         [<CustomOperation("position")>]
-        member _.Position(state: Token, value: Types.Integer) =
+        member _.Position(state: Token, value: CoreTypes.Integer) =
             { state with Position = value }
 
         [<CustomOperation("startOffset")>]
-        member _.StartOffset(state: Token, value: Types.Integer) =
+        member _.StartOffset(state: Token, value: CoreTypes.Integer) =
             { state with StartOffset = Some value }
 
     let token = TokenBuilder()

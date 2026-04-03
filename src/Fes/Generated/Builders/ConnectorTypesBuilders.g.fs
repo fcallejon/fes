@@ -82,11 +82,11 @@ module ConnectorTypesBuilders =
             { state with Filtering = value }
 
         [<CustomOperation("id")>]
-        member _.Id(state: Connector, value: Types.Id) =
+        member _.Id(state: Connector, value: CoreTypes.Id) =
             { state with Id = Some value }
 
         [<CustomOperation("indexName")>]
-        member _.IndexName(state: Connector, value: Types.IndexName option) =
+        member _.IndexName(state: Connector, value: CoreTypes.IndexName option) =
             { state with IndexName = Some value }
 
         [<CustomOperation("isNative")>]
@@ -102,7 +102,7 @@ module ConnectorTypesBuilders =
             { state with LastAccessControlSyncError = Some value }
 
         [<CustomOperation("lastAccessControlSyncScheduledAt")>]
-        member _.LastAccessControlSyncScheduledAt(state: Connector, value: Types.DateTime) =
+        member _.LastAccessControlSyncScheduledAt(state: Connector, value: CoreTypes.DateTime) =
             { state with LastAccessControlSyncScheduledAt = Some value }
 
         [<CustomOperation("lastAccessControlSyncStatus")>]
@@ -110,19 +110,19 @@ module ConnectorTypesBuilders =
             { state with LastAccessControlSyncStatus = Some value }
 
         [<CustomOperation("lastDeletedDocumentCount")>]
-        member _.LastDeletedDocumentCount(state: Connector, value: Types.Long) =
+        member _.LastDeletedDocumentCount(state: Connector, value: CoreTypes.Long) =
             { state with LastDeletedDocumentCount = Some value }
 
         [<CustomOperation("lastIncrementalSyncScheduledAt")>]
-        member _.LastIncrementalSyncScheduledAt(state: Connector, value: Types.DateTime) =
+        member _.LastIncrementalSyncScheduledAt(state: Connector, value: CoreTypes.DateTime) =
             { state with LastIncrementalSyncScheduledAt = Some value }
 
         [<CustomOperation("lastIndexedDocumentCount")>]
-        member _.LastIndexedDocumentCount(state: Connector, value: Types.Long) =
+        member _.LastIndexedDocumentCount(state: Connector, value: CoreTypes.Long) =
             { state with LastIndexedDocumentCount = Some value }
 
         [<CustomOperation("lastSeen")>]
-        member _.LastSeen(state: Connector, value: Types.DateTime) =
+        member _.LastSeen(state: Connector, value: CoreTypes.DateTime) =
             { state with LastSeen = Some value }
 
         [<CustomOperation("lastSyncError")>]
@@ -130,7 +130,7 @@ module ConnectorTypesBuilders =
             { state with LastSyncError = Some value }
 
         [<CustomOperation("lastSyncScheduledAt")>]
-        member _.LastSyncScheduledAt(state: Connector, value: Types.DateTime) =
+        member _.LastSyncScheduledAt(state: Connector, value: CoreTypes.DateTime) =
             { state with LastSyncScheduledAt = Some value }
 
         [<CustomOperation("lastSyncStatus")>]
@@ -138,7 +138,7 @@ module ConnectorTypesBuilders =
             { state with LastSyncStatus = Some value }
 
         [<CustomOperation("lastSynced")>]
-        member _.LastSynced(state: Connector, value: Types.DateTime) =
+        member _.LastSynced(state: Connector, value: CoreTypes.DateTime) =
             { state with LastSynced = Some value }
 
         [<CustomOperation("name")>]
@@ -196,7 +196,7 @@ module ConnectorTypesBuilders =
             { state with Category = Some value }
 
         [<CustomOperation("defaultValue")>]
-        member _.DefaultValue(state: ConnectorConfigProperties, value: Types.ScalarValue) =
+        member _.DefaultValue(state: ConnectorConfigProperties, value: CoreTypes.ScalarValue) =
             { state with DefaultValue = value }
 
         [<CustomOperation("dependsOn")>]
@@ -216,7 +216,7 @@ module ConnectorTypesBuilders =
             { state with Options = value }
 
         [<CustomOperation("order")>]
-        member _.Order(state: ConnectorConfigProperties, value: Types.Integer) =
+        member _.Order(state: ConnectorConfigProperties, value: CoreTypes.Integer) =
             { state with Order = Some value }
 
         [<CustomOperation("placeholder")>]
@@ -304,15 +304,15 @@ module ConnectorTypesBuilders =
             }
 
         [<CustomOperation("cancelationRequestedAt")>]
-        member _.CancelationRequestedAt(state: ConnectorSyncJob, value: Types.DateTime) =
+        member _.CancelationRequestedAt(state: ConnectorSyncJob, value: CoreTypes.DateTime) =
             { state with CancelationRequestedAt = Some value }
 
         [<CustomOperation("canceledAt")>]
-        member _.CanceledAt(state: ConnectorSyncJob, value: Types.DateTime) =
+        member _.CanceledAt(state: ConnectorSyncJob, value: CoreTypes.DateTime) =
             { state with CanceledAt = Some value }
 
         [<CustomOperation("completedAt")>]
-        member _.CompletedAt(state: ConnectorSyncJob, value: Types.DateTime) =
+        member _.CompletedAt(state: ConnectorSyncJob, value: CoreTypes.DateTime) =
             { state with CompletedAt = Some value }
 
         [<CustomOperation("connector")>]
@@ -320,11 +320,11 @@ module ConnectorTypesBuilders =
             { state with Connector = value }
 
         [<CustomOperation("createdAt")>]
-        member _.CreatedAt(state: ConnectorSyncJob, value: Types.DateTime) =
+        member _.CreatedAt(state: ConnectorSyncJob, value: CoreTypes.DateTime) =
             { state with CreatedAt = value }
 
         [<CustomOperation("deletedDocumentCount")>]
-        member _.DeletedDocumentCount(state: ConnectorSyncJob, value: Types.Long) =
+        member _.DeletedDocumentCount(state: ConnectorSyncJob, value: CoreTypes.Long) =
             { state with DeletedDocumentCount = value }
 
         [<CustomOperation("error")>]
@@ -332,15 +332,15 @@ module ConnectorTypesBuilders =
             { state with Error = Some value }
 
         [<CustomOperation("id")>]
-        member _.Id(state: ConnectorSyncJob, value: Types.Id) =
+        member _.Id(state: ConnectorSyncJob, value: CoreTypes.Id) =
             { state with Id = value }
 
         [<CustomOperation("indexedDocumentCount")>]
-        member _.IndexedDocumentCount(state: ConnectorSyncJob, value: Types.Long) =
+        member _.IndexedDocumentCount(state: ConnectorSyncJob, value: CoreTypes.Long) =
             { state with IndexedDocumentCount = value }
 
         [<CustomOperation("indexedDocumentVolume")>]
-        member _.IndexedDocumentVolume(state: ConnectorSyncJob, value: Types.Long) =
+        member _.IndexedDocumentVolume(state: ConnectorSyncJob, value: CoreTypes.Long) =
             { state with IndexedDocumentVolume = value }
 
         [<CustomOperation("jobType")>]
@@ -348,7 +348,7 @@ module ConnectorTypesBuilders =
             { state with JobType = value }
 
         [<CustomOperation("lastSeen")>]
-        member _.LastSeen(state: ConnectorSyncJob, value: Types.DateTime) =
+        member _.LastSeen(state: ConnectorSyncJob, value: CoreTypes.DateTime) =
             { state with LastSeen = Some value }
 
         [<CustomOperation("metadata")>]
@@ -356,7 +356,7 @@ module ConnectorTypesBuilders =
             { state with Metadata = value }
 
         [<CustomOperation("startedAt")>]
-        member _.StartedAt(state: ConnectorSyncJob, value: Types.DateTime) =
+        member _.StartedAt(state: ConnectorSyncJob, value: CoreTypes.DateTime) =
             { state with StartedAt = Some value }
 
         [<CustomOperation("status")>]
@@ -364,7 +364,7 @@ module ConnectorTypesBuilders =
             { state with Status = value }
 
         [<CustomOperation("totalDocumentCount")>]
-        member _.TotalDocumentCount(state: ConnectorSyncJob, value: Types.Long) =
+        member _.TotalDocumentCount(state: ConnectorSyncJob, value: CoreTypes.Long) =
             { state with TotalDocumentCount = value }
 
         [<CustomOperation("triggerMethod")>]
@@ -388,7 +388,7 @@ module ConnectorTypesBuilders =
             }
 
         [<CustomOperation("maxCrawlDepth")>]
-        member _.MaxCrawlDepth(state: CustomSchedulingConfigurationOverrides, value: Types.Integer) =
+        member _.MaxCrawlDepth(state: CustomSchedulingConfigurationOverrides, value: CoreTypes.Integer) =
             { state with MaxCrawlDepth = Some value }
 
         [<CustomOperation("sitemapDiscoveryDisabled")>]
@@ -418,11 +418,11 @@ module ConnectorTypesBuilders =
             }
 
         [<CustomOperation("createdAt")>]
-        member _.CreatedAt(state: FilteringAdvancedSnippet, value: Types.DateTime) =
+        member _.CreatedAt(state: FilteringAdvancedSnippet, value: CoreTypes.DateTime) =
             { state with CreatedAt = Some value }
 
         [<CustomOperation("updatedAt")>]
-        member _.UpdatedAt(state: FilteringAdvancedSnippet, value: Types.DateTime) =
+        member _.UpdatedAt(state: FilteringAdvancedSnippet, value: CoreTypes.DateTime) =
             { state with UpdatedAt = Some value }
 
         [<CustomOperation("value")>]
@@ -445,19 +445,19 @@ module ConnectorTypesBuilders =
             }
 
         [<CustomOperation("createdAt")>]
-        member _.CreatedAt(state: FilteringRule, value: Types.DateTime) =
+        member _.CreatedAt(state: FilteringRule, value: CoreTypes.DateTime) =
             { state with CreatedAt = Some value }
 
         [<CustomOperation("field")>]
-        member _.Field(state: FilteringRule, value: Types.Field) =
+        member _.Field(state: FilteringRule, value: CoreTypes.Field) =
             { state with Field = value }
 
         [<CustomOperation("id")>]
-        member _.Id(state: FilteringRule, value: Types.Id) =
+        member _.Id(state: FilteringRule, value: CoreTypes.Id) =
             { state with Id = value }
 
         [<CustomOperation("order")>]
-        member _.Order(state: FilteringRule, value: Types.Integer) =
+        member _.Order(state: FilteringRule, value: CoreTypes.Integer) =
             { state with Order = value }
 
         [<CustomOperation("policy")>]
@@ -469,7 +469,7 @@ module ConnectorTypesBuilders =
             { state with Rule = value }
 
         [<CustomOperation("updatedAt")>]
-        member _.UpdatedAt(state: FilteringRule, value: Types.DateTime) =
+        member _.UpdatedAt(state: FilteringRule, value: CoreTypes.DateTime) =
             { state with UpdatedAt = Some value }
 
         [<CustomOperation("value")>]
@@ -522,7 +522,7 @@ module ConnectorTypesBuilders =
             { state with Filtering = value }
 
         [<CustomOperation("id")>]
-        member _.Id(state: SyncJobConnectorReference, value: Types.Id) =
+        member _.Id(state: SyncJobConnectorReference, value: CoreTypes.Id) =
             { state with Id = value }
 
         [<CustomOperation("indexName")>]

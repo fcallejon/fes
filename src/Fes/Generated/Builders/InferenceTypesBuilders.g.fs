@@ -22,11 +22,11 @@ module InferenceTypesBuilders =
             { state with Enabled = Some value }
 
         [<CustomOperation("maxNumberOfAllocations")>]
-        member _.MaxNumberOfAllocations(state: AdaptiveAllocations, value: Types.Integer) =
+        member _.MaxNumberOfAllocations(state: AdaptiveAllocations, value: CoreTypes.Integer) =
             { state with MaxNumberOfAllocations = Some value }
 
         [<CustomOperation("minNumberOfAllocations")>]
-        member _.MinNumberOfAllocations(state: AdaptiveAllocations, value: Types.Integer) =
+        member _.MinNumberOfAllocations(state: AdaptiveAllocations, value: CoreTypes.Integer) =
             { state with MinNumberOfAllocations = Some value }
 
     let adaptiveAllocations = AdaptiveAllocationsBuilder()
@@ -117,19 +117,19 @@ module InferenceTypesBuilders =
             }
 
         [<CustomOperation("maxNewTokens")>]
-        member _.MaxNewTokens(state: AmazonBedrockTaskSettings, value: Types.Integer) =
+        member _.MaxNewTokens(state: AmazonBedrockTaskSettings, value: CoreTypes.Integer) =
             { state with MaxNewTokens = Some value }
 
         [<CustomOperation("temperature")>]
-        member _.Temperature(state: AmazonBedrockTaskSettings, value: Types.Float) =
+        member _.Temperature(state: AmazonBedrockTaskSettings, value: CoreTypes.Float) =
             { state with Temperature = Some value }
 
         [<CustomOperation("topK")>]
-        member _.TopK(state: AmazonBedrockTaskSettings, value: Types.Float) =
+        member _.TopK(state: AmazonBedrockTaskSettings, value: CoreTypes.Float) =
             { state with TopK = Some value }
 
         [<CustomOperation("topP")>]
-        member _.TopP(state: AmazonBedrockTaskSettings, value: Types.Float) =
+        member _.TopP(state: AmazonBedrockTaskSettings, value: CoreTypes.Float) =
             { state with TopP = Some value }
 
     let amazonBedrockTaskSettings = AmazonBedrockTaskSettingsBuilder()
@@ -182,11 +182,11 @@ module InferenceTypesBuilders =
             { state with InferenceComponentName = Some value }
 
         [<CustomOperation("batchSize")>]
-        member _.BatchSize(state: AmazonSageMakerServiceSettings, value: Types.Integer) =
+        member _.BatchSize(state: AmazonSageMakerServiceSettings, value: CoreTypes.Integer) =
             { state with BatchSize = Some value }
 
         [<CustomOperation("dimensions")>]
-        member _.Dimensions(state: AmazonSageMakerServiceSettings, value: Types.Integer) =
+        member _.Dimensions(state: AmazonSageMakerServiceSettings, value: CoreTypes.Integer) =
             { state with Dimensions = Some value }
 
     let amazonSageMakerServiceSettings = AmazonSageMakerServiceSettingsBuilder()
@@ -233,19 +233,19 @@ module InferenceTypesBuilders =
             }
 
         [<CustomOperation("maxTokens")>]
-        member _.MaxTokens(state: AnthropicTaskSettings, value: Types.Integer) =
+        member _.MaxTokens(state: AnthropicTaskSettings, value: CoreTypes.Integer) =
             { state with MaxTokens = value }
 
         [<CustomOperation("temperature")>]
-        member _.Temperature(state: AnthropicTaskSettings, value: Types.Float) =
+        member _.Temperature(state: AnthropicTaskSettings, value: CoreTypes.Float) =
             { state with Temperature = Some value }
 
         [<CustomOperation("topK")>]
-        member _.TopK(state: AnthropicTaskSettings, value: Types.Integer) =
+        member _.TopK(state: AnthropicTaskSettings, value: CoreTypes.Integer) =
             { state with TopK = Some value }
 
         [<CustomOperation("topP")>]
-        member _.TopP(state: AnthropicTaskSettings, value: Types.Float) =
+        member _.TopP(state: AnthropicTaskSettings, value: CoreTypes.Float) =
             { state with TopP = Some value }
 
     let anthropicTaskSettings = AnthropicTaskSettingsBuilder()
@@ -263,19 +263,19 @@ module InferenceTypesBuilders =
             }
 
         [<CustomOperation("doSample")>]
-        member _.DoSample(state: AzureAiStudioTaskSettings, value: Types.Float) =
+        member _.DoSample(state: AzureAiStudioTaskSettings, value: CoreTypes.Float) =
             { state with DoSample = Some value }
 
         [<CustomOperation("maxNewTokens")>]
-        member _.MaxNewTokens(state: AzureAiStudioTaskSettings, value: Types.Integer) =
+        member _.MaxNewTokens(state: AzureAiStudioTaskSettings, value: CoreTypes.Integer) =
             { state with MaxNewTokens = Some value }
 
         [<CustomOperation("temperature")>]
-        member _.Temperature(state: AzureAiStudioTaskSettings, value: Types.Float) =
+        member _.Temperature(state: AzureAiStudioTaskSettings, value: CoreTypes.Float) =
             { state with Temperature = Some value }
 
         [<CustomOperation("topP")>]
-        member _.TopP(state: AzureAiStudioTaskSettings, value: Types.Float) =
+        member _.TopP(state: AzureAiStudioTaskSettings, value: CoreTypes.Float) =
             { state with TopP = Some value }
 
         [<CustomOperation("user")>]
@@ -287,7 +287,7 @@ module InferenceTypesBuilders =
             { state with ReturnDocuments = Some value }
 
         [<CustomOperation("topN")>]
-        member _.TopN(state: AzureAiStudioTaskSettings, value: Types.Integer) =
+        member _.TopN(state: AzureAiStudioTaskSettings, value: CoreTypes.Integer) =
             { state with TopN = Some value }
 
     let azureAiStudioTaskSettings = AzureAiStudioTaskSettingsBuilder()
@@ -383,7 +383,7 @@ module InferenceTypesBuilders =
             { state with Id = Some value }
 
         [<CustomOperation("index")>]
-        member _.Index(state: BaseReasoningDetail, value: Types.Integer) =
+        member _.Index(state: BaseReasoningDetail, value: CoreTypes.Integer) =
             { state with Index = Some value }
 
     let baseReasoningDetail = BaseReasoningDetailBuilder()
@@ -438,7 +438,7 @@ module InferenceTypesBuilders =
             { state with ReturnDocuments = Some value }
 
         [<CustomOperation("topN")>]
-        member _.TopN(state: CohereTaskSettings, value: Types.Integer) =
+        member _.TopN(state: CohereTaskSettings, value: CoreTypes.Integer) =
             { state with TopN = Some value }
 
         [<CustomOperation("truncate")>]
@@ -491,7 +491,7 @@ module InferenceTypesBuilders =
             { state with ReturnDocuments = Some value }
 
         [<CustomOperation("topK")>]
-        member _.TopK(state: ContextualAITaskSettings, value: Types.Integer) =
+        member _.TopK(state: ContextualAITaskSettings, value: CoreTypes.Integer) =
             { state with TopK = Some value }
 
     let contextualAITaskSettings = ContextualAITaskSettingsBuilder()
@@ -510,7 +510,7 @@ module InferenceTypesBuilders =
             }
 
         [<CustomOperation("batchSize")>]
-        member _.BatchSize(state: CustomServiceSettings, value: Types.Integer) =
+        member _.BatchSize(state: CustomServiceSettings, value: CoreTypes.Integer) =
             { state with BatchSize = Some value }
 
         [<CustomOperation("headers")>]
@@ -568,11 +568,11 @@ module InferenceTypesBuilders =
             { state with ModelId = value }
 
         [<CustomOperation("numAllocations")>]
-        member _.NumAllocations(state: ElasticsearchServiceSettings, value: Types.Integer) =
+        member _.NumAllocations(state: ElasticsearchServiceSettings, value: CoreTypes.Integer) =
             { state with NumAllocations = Some value }
 
         [<CustomOperation("numThreads")>]
-        member _.NumThreads(state: ElasticsearchServiceSettings, value: Types.Integer) =
+        member _.NumThreads(state: ElasticsearchServiceSettings, value: CoreTypes.Integer) =
             { state with NumThreads = value }
 
         [<CustomOperation("longDocumentStrategy")>]
@@ -580,7 +580,7 @@ module InferenceTypesBuilders =
             { state with LongDocumentStrategy = Some value }
 
         [<CustomOperation("maxChunksPerDoc")>]
-        member _.MaxChunksPerDoc(state: ElasticsearchServiceSettings, value: Types.Integer) =
+        member _.MaxChunksPerDoc(state: ElasticsearchServiceSettings, value: CoreTypes.Integer) =
             { state with MaxChunksPerDoc = Some value }
 
     let elasticsearchServiceSettings = ElasticsearchServiceSettingsBuilder()
@@ -620,7 +620,7 @@ module InferenceTypesBuilders =
             { state with Url = Some value }
 
         [<CustomOperation("dimensions")>]
-        member _.Dimensions(state: FireworksAIServiceSettings, value: Types.Integer) =
+        member _.Dimensions(state: FireworksAIServiceSettings, value: CoreTypes.Integer) =
             { state with Dimensions = Some value }
 
         [<CustomOperation("similarity")>]
@@ -698,11 +698,11 @@ module InferenceTypesBuilders =
             { state with ServiceAccountJson = value }
 
         [<CustomOperation("dimensions")>]
-        member _.Dimensions(state: GoogleVertexAIServiceSettings, value: Types.Integer) =
+        member _.Dimensions(state: GoogleVertexAIServiceSettings, value: CoreTypes.Integer) =
             { state with Dimensions = Some value }
 
         [<CustomOperation("maxBatchSize")>]
-        member _.MaxBatchSize(state: GoogleVertexAIServiceSettings, value: Types.Integer) =
+        member _.MaxBatchSize(state: GoogleVertexAIServiceSettings, value: CoreTypes.Integer) =
             { state with MaxBatchSize = Some value }
 
     let googleVertexAIServiceSettings = GoogleVertexAIServiceSettingsBuilder()
@@ -721,7 +721,7 @@ module InferenceTypesBuilders =
             { state with AutoTruncate = Some value }
 
         [<CustomOperation("topN")>]
-        member _.TopN(state: GoogleVertexAITaskSettings, value: Types.Integer) =
+        member _.TopN(state: GoogleVertexAITaskSettings, value: CoreTypes.Integer) =
             { state with TopN = Some value }
 
         [<CustomOperation("thinkingConfig")>]
@@ -729,7 +729,7 @@ module InferenceTypesBuilders =
             { state with ThinkingConfig = Some value }
 
         [<CustomOperation("maxTokens")>]
-        member _.MaxTokens(state: GoogleVertexAITaskSettings, value: Types.Integer) =
+        member _.MaxTokens(state: GoogleVertexAITaskSettings, value: CoreTypes.Integer) =
             { state with MaxTokens = Some value }
 
     let googleVertexAITaskSettings = GoogleVertexAITaskSettingsBuilder()
@@ -795,7 +795,7 @@ module InferenceTypesBuilders =
             { state with ReturnDocuments = Some value }
 
         [<CustomOperation("topN")>]
-        member _.TopN(state: HuggingFaceTaskSettings, value: Types.Integer) =
+        member _.TopN(state: HuggingFaceTaskSettings, value: CoreTypes.Integer) =
             { state with TopN = Some value }
 
     let huggingFaceTaskSettings = HuggingFaceTaskSettingsBuilder()
@@ -812,15 +812,15 @@ module InferenceTypesBuilders =
             }
 
         [<CustomOperation("maxChunkSize")>]
-        member _.MaxChunkSize(state: InferenceChunkingSettings, value: Types.Integer) =
+        member _.MaxChunkSize(state: InferenceChunkingSettings, value: CoreTypes.Integer) =
             { state with MaxChunkSize = Some value }
 
         [<CustomOperation("overlap")>]
-        member _.Overlap(state: InferenceChunkingSettings, value: Types.Integer) =
+        member _.Overlap(state: InferenceChunkingSettings, value: CoreTypes.Integer) =
             { state with Overlap = Some value }
 
         [<CustomOperation("sentenceOverlap")>]
-        member _.SentenceOverlap(state: InferenceChunkingSettings, value: Types.Integer) =
+        member _.SentenceOverlap(state: InferenceChunkingSettings, value: CoreTypes.Integer) =
             { state with SentenceOverlap = Some value }
 
         [<CustomOperation("separatorGroup")>]
@@ -922,7 +922,7 @@ module InferenceTypesBuilders =
             { state with Similarity = Some value }
 
         [<CustomOperation("dimensions")>]
-        member _.Dimensions(state: JinaAIServiceSettings, value: Types.Integer) =
+        member _.Dimensions(state: JinaAIServiceSettings, value: CoreTypes.Integer) =
             { state with Dimensions = Some value }
 
         [<CustomOperation("elementType")>]
@@ -957,7 +957,7 @@ module InferenceTypesBuilders =
             { state with LateChunking = Some value }
 
         [<CustomOperation("topN")>]
-        member _.TopN(state: JinaAITaskSettings, value: Types.Integer) =
+        member _.TopN(state: JinaAITaskSettings, value: CoreTypes.Integer) =
             { state with TopN = Some value }
 
     let jinaAITaskSettings = JinaAITaskSettingsBuilder()
@@ -981,7 +981,7 @@ module InferenceTypesBuilders =
             { state with ModelId = value }
 
         [<CustomOperation("maxInputTokens")>]
-        member _.MaxInputTokens(state: LlamaServiceSettings, value: Types.Integer) =
+        member _.MaxInputTokens(state: LlamaServiceSettings, value: CoreTypes.Integer) =
             { state with MaxInputTokens = Some value }
 
         [<CustomOperation("similarity")>]
@@ -1014,7 +1014,7 @@ module InferenceTypesBuilders =
             { state with Role = value }
 
         [<CustomOperation("toolCallId")>]
-        member _.ToolCallId(state: Message, value: Types.Id) =
+        member _.ToolCallId(state: Message, value: CoreTypes.Id) =
             { state with ToolCallId = Some value }
 
         [<CustomOperation("toolCalls")>]
@@ -1045,7 +1045,7 @@ module InferenceTypesBuilders =
             { state with ApiKey = value }
 
         [<CustomOperation("maxInputTokens")>]
-        member _.MaxInputTokens(state: MistralServiceSettings, value: Types.Integer) =
+        member _.MaxInputTokens(state: MistralServiceSettings, value: CoreTypes.Integer) =
             { state with MaxInputTokens = Some value }
 
         [<CustomOperation("model")>]
@@ -1082,7 +1082,7 @@ module InferenceTypesBuilders =
             { state with ModelId = value }
 
         [<CustomOperation("maxInputTokens")>]
-        member _.MaxInputTokens(state: NvidiaServiceSettings, value: Types.Integer) =
+        member _.MaxInputTokens(state: NvidiaServiceSettings, value: CoreTypes.Integer) =
             { state with MaxInputTokens = Some value }
 
         [<CustomOperation("similarity")>]
@@ -1129,7 +1129,7 @@ module InferenceTypesBuilders =
             { state with ApiKey = value }
 
         [<CustomOperation("dimensions")>]
-        member _.Dimensions(state: OpenAIServiceSettings, value: Types.Integer) =
+        member _.Dimensions(state: OpenAIServiceSettings, value: CoreTypes.Integer) =
             { state with Dimensions = Some value }
 
         [<CustomOperation("modelId")>]
@@ -1195,7 +1195,7 @@ module InferenceTypesBuilders =
             { state with ModelId = Some value }
 
         [<CustomOperation("maxInputTokens")>]
-        member _.MaxInputTokens(state: OpenShiftAiServiceSettings, value: Types.Integer) =
+        member _.MaxInputTokens(state: OpenShiftAiServiceSettings, value: CoreTypes.Integer) =
             { state with MaxInputTokens = Some value }
 
         [<CustomOperation("similarity")>]
@@ -1220,7 +1220,7 @@ module InferenceTypesBuilders =
             { state with ReturnDocuments = Some value }
 
         [<CustomOperation("topN")>]
-        member _.TopN(state: OpenShiftAiTaskSettings, value: Types.Integer) =
+        member _.TopN(state: OpenShiftAiTaskSettings, value: CoreTypes.Integer) =
             { state with TopN = Some value }
 
     let openShiftAiTaskSettings = OpenShiftAiTaskSettingsBuilder()
@@ -1275,7 +1275,7 @@ module InferenceTypesBuilders =
             { state with Model = Some value }
 
         [<CustomOperation("maxCompletionTokens")>]
-        member _.MaxCompletionTokens(state: RequestChatCompletion, value: Types.Long) =
+        member _.MaxCompletionTokens(state: RequestChatCompletion, value: CoreTypes.Long) =
             { state with MaxCompletionTokens = Some value }
 
         [<CustomOperation("reasoning")>]
@@ -1287,7 +1287,7 @@ module InferenceTypesBuilders =
             { state with Stop = Some value }
 
         [<CustomOperation("temperature")>]
-        member _.Temperature(state: RequestChatCompletion, value: Types.Float) =
+        member _.Temperature(state: RequestChatCompletion, value: CoreTypes.Float) =
             { state with Temperature = Some value }
 
         [<CustomOperation("toolChoice")>]
@@ -1299,7 +1299,7 @@ module InferenceTypesBuilders =
             { state with Tools = Some value }
 
         [<CustomOperation("topP")>]
-        member _.TopP(state: RequestChatCompletion, value: Types.Float) =
+        member _.TopP(state: RequestChatCompletion, value: CoreTypes.Float) =
             { state with TopP = Some value }
 
     let requestChatCompletion = RequestChatCompletionBuilder()
@@ -1369,7 +1369,7 @@ module InferenceTypesBuilders =
             }
 
         [<CustomOperation("dimensions")>]
-        member _.Dimensions(state: VoyageAIServiceSettings, value: Types.Integer) =
+        member _.Dimensions(state: VoyageAIServiceSettings, value: CoreTypes.Integer) =
             { state with Dimensions = Some value }
 
         [<CustomOperation("modelId")>]
@@ -1381,7 +1381,7 @@ module InferenceTypesBuilders =
             { state with RateLimit = Some value }
 
         [<CustomOperation("embeddingType")>]
-        member _.EmbeddingType(state: VoyageAIServiceSettings, value: Types.Float) =
+        member _.EmbeddingType(state: VoyageAIServiceSettings, value: CoreTypes.Float) =
             { state with EmbeddingType = Some value }
 
     let voyageAIServiceSettings = VoyageAIServiceSettingsBuilder()
@@ -1404,7 +1404,7 @@ module InferenceTypesBuilders =
             { state with ReturnDocuments = Some value }
 
         [<CustomOperation("topK")>]
-        member _.TopK(state: VoyageAITaskSettings, value: Types.Integer) =
+        member _.TopK(state: VoyageAITaskSettings, value: CoreTypes.Integer) =
             { state with TopK = Some value }
 
         [<CustomOperation("truncation")>]

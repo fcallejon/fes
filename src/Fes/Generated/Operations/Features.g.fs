@@ -12,7 +12,7 @@ open Fes
 module FeaturesOperations =
 
     type FeaturesGetFeaturesRequest = {
-        MasterTimeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
     }
 
         with
@@ -42,17 +42,17 @@ module FeaturesOperations =
             }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: FeaturesGetFeaturesRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: FeaturesGetFeaturesRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
     let featuresGetFeaturesRequest = FeaturesGetFeaturesRequestBuilder()
 
     module GetFeatures =
-        let withMasterTimeout (value: Types.Duration) (req: FeaturesGetFeaturesRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: FeaturesGetFeaturesRequest) =
             { req with MasterTimeout = Some value }
 
     type FeaturesResetFeaturesRequest = {
-        MasterTimeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
     }
 
         with
@@ -82,12 +82,12 @@ module FeaturesOperations =
             }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: FeaturesResetFeaturesRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: FeaturesResetFeaturesRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
     let featuresResetFeaturesRequest = FeaturesResetFeaturesRequestBuilder()
 
     module ResetFeatures =
-        let withMasterTimeout (value: Types.Duration) (req: FeaturesResetFeaturesRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: FeaturesResetFeaturesRequest) =
             { req with MasterTimeout = Some value }
 

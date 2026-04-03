@@ -49,15 +49,15 @@ module ClusterStatsBuilders =
             }
 
         [<CustomOperation("total")>]
-        member _.Total(state: CCSUsageStats, value: Types.Integer) =
+        member _.Total(state: CCSUsageStats, value: CoreTypes.Integer) =
             { state with Total = value }
 
         [<CustomOperation("success")>]
-        member _.Success(state: CCSUsageStats, value: Types.Integer) =
+        member _.Success(state: CCSUsageStats, value: CoreTypes.Integer) =
             { state with Success = value }
 
         [<CustomOperation("skipped")>]
-        member _.Skipped(state: CCSUsageStats, value: Types.Integer) =
+        member _.Skipped(state: CCSUsageStats, value: CoreTypes.Integer) =
             { state with Skipped = value }
 
         [<CustomOperation("took")>]
@@ -73,23 +73,23 @@ module ClusterStatsBuilders =
             { state with TookMrtFalse = Some value }
 
         [<CustomOperation("remotesPerSearchMax")>]
-        member _.RemotesPerSearchMax(state: CCSUsageStats, value: Types.Integer) =
+        member _.RemotesPerSearchMax(state: CCSUsageStats, value: CoreTypes.Integer) =
             { state with RemotesPerSearchMax = value }
 
         [<CustomOperation("remotesPerSearchAvg")>]
-        member _.RemotesPerSearchAvg(state: CCSUsageStats, value: Types.Double) =
+        member _.RemotesPerSearchAvg(state: CCSUsageStats, value: CoreTypes.Double) =
             { state with RemotesPerSearchAvg = value }
 
         [<CustomOperation("failureReasons")>]
-        member _.FailureReasons(state: CCSUsageStats, value: Map<string, Types.Integer>) =
+        member _.FailureReasons(state: CCSUsageStats, value: Map<string, CoreTypes.Integer>) =
             { state with FailureReasons = value }
 
         [<CustomOperation("features")>]
-        member _.Features(state: CCSUsageStats, value: Map<string, Types.Integer>) =
+        member _.Features(state: CCSUsageStats, value: Map<string, CoreTypes.Integer>) =
             { state with Features = value }
 
         [<CustomOperation("clients")>]
-        member _.Clients(state: CCSUsageStats, value: Map<string, Types.Integer>) =
+        member _.Clients(state: CCSUsageStats, value: Map<string, CoreTypes.Integer>) =
             { state with Clients = value }
 
         [<CustomOperation("clusters")>]
@@ -133,59 +133,59 @@ module ClusterStatsBuilders =
             { state with Type = Some value }
 
         [<CustomOperation("availableInBytes")>]
-        member _.AvailableInBytes(state: ClusterFileSystem, value: Types.Long) =
+        member _.AvailableInBytes(state: ClusterFileSystem, value: CoreTypes.Long) =
             { state with AvailableInBytes = Some value }
 
         [<CustomOperation("available")>]
-        member _.Available(state: ClusterFileSystem, value: Types.ByteSize) =
+        member _.Available(state: ClusterFileSystem, value: CoreTypes.ByteSize) =
             { state with Available = Some value }
 
         [<CustomOperation("freeInBytes")>]
-        member _.FreeInBytes(state: ClusterFileSystem, value: Types.Long) =
+        member _.FreeInBytes(state: ClusterFileSystem, value: CoreTypes.Long) =
             { state with FreeInBytes = Some value }
 
         [<CustomOperation("free")>]
-        member _.Free(state: ClusterFileSystem, value: Types.ByteSize) =
+        member _.Free(state: ClusterFileSystem, value: CoreTypes.ByteSize) =
             { state with Free = Some value }
 
         [<CustomOperation("totalInBytes")>]
-        member _.TotalInBytes(state: ClusterFileSystem, value: Types.Long) =
+        member _.TotalInBytes(state: ClusterFileSystem, value: CoreTypes.Long) =
             { state with TotalInBytes = Some value }
 
         [<CustomOperation("total")>]
-        member _.Total(state: ClusterFileSystem, value: Types.ByteSize) =
+        member _.Total(state: ClusterFileSystem, value: CoreTypes.ByteSize) =
             { state with Total = Some value }
 
         [<CustomOperation("lowWatermarkFreeSpace")>]
-        member _.LowWatermarkFreeSpace(state: ClusterFileSystem, value: Types.ByteSize) =
+        member _.LowWatermarkFreeSpace(state: ClusterFileSystem, value: CoreTypes.ByteSize) =
             { state with LowWatermarkFreeSpace = Some value }
 
         [<CustomOperation("lowWatermarkFreeSpaceInBytes")>]
-        member _.LowWatermarkFreeSpaceInBytes(state: ClusterFileSystem, value: Types.Long) =
+        member _.LowWatermarkFreeSpaceInBytes(state: ClusterFileSystem, value: CoreTypes.Long) =
             { state with LowWatermarkFreeSpaceInBytes = Some value }
 
         [<CustomOperation("highWatermarkFreeSpace")>]
-        member _.HighWatermarkFreeSpace(state: ClusterFileSystem, value: Types.ByteSize) =
+        member _.HighWatermarkFreeSpace(state: ClusterFileSystem, value: CoreTypes.ByteSize) =
             { state with HighWatermarkFreeSpace = Some value }
 
         [<CustomOperation("highWatermarkFreeSpaceInBytes")>]
-        member _.HighWatermarkFreeSpaceInBytes(state: ClusterFileSystem, value: Types.Long) =
+        member _.HighWatermarkFreeSpaceInBytes(state: ClusterFileSystem, value: CoreTypes.Long) =
             { state with HighWatermarkFreeSpaceInBytes = Some value }
 
         [<CustomOperation("floodStageFreeSpace")>]
-        member _.FloodStageFreeSpace(state: ClusterFileSystem, value: Types.ByteSize) =
+        member _.FloodStageFreeSpace(state: ClusterFileSystem, value: CoreTypes.ByteSize) =
             { state with FloodStageFreeSpace = Some value }
 
         [<CustomOperation("floodStageFreeSpaceInBytes")>]
-        member _.FloodStageFreeSpaceInBytes(state: ClusterFileSystem, value: Types.Long) =
+        member _.FloodStageFreeSpaceInBytes(state: ClusterFileSystem, value: CoreTypes.Long) =
             { state with FloodStageFreeSpaceInBytes = Some value }
 
         [<CustomOperation("frozenFloodStageFreeSpace")>]
-        member _.FrozenFloodStageFreeSpace(state: ClusterFileSystem, value: Types.ByteSize) =
+        member _.FrozenFloodStageFreeSpace(state: ClusterFileSystem, value: CoreTypes.ByteSize) =
             { state with FrozenFloodStageFreeSpace = Some value }
 
         [<CustomOperation("frozenFloodStageFreeSpaceInBytes")>]
-        member _.FrozenFloodStageFreeSpaceInBytes(state: ClusterFileSystem, value: Types.Long) =
+        member _.FrozenFloodStageFreeSpaceInBytes(state: ClusterFileSystem, value: CoreTypes.Long) =
             { state with FrozenFloodStageFreeSpaceInBytes = Some value }
 
     let clusterFileSystem = ClusterFileSystemBuilder()
@@ -214,23 +214,23 @@ module ClusterStatsBuilders =
             { state with Analysis = Some value }
 
         [<CustomOperation("completion")>]
-        member _.Completion(state: ClusterIndices, value: Types.CompletionStats) =
+        member _.Completion(state: ClusterIndices, value: CoreTypes.CompletionStats) =
             { state with Completion = value }
 
         [<CustomOperation("count")>]
-        member _.Count(state: ClusterIndices, value: Types.Long) =
+        member _.Count(state: ClusterIndices, value: CoreTypes.Long) =
             { state with Count = value }
 
         [<CustomOperation("docs")>]
-        member _.Docs(state: ClusterIndices, value: Types.DocStats) =
+        member _.Docs(state: ClusterIndices, value: CoreTypes.DocStats) =
             { state with Docs = value }
 
         [<CustomOperation("fielddata")>]
-        member _.Fielddata(state: ClusterIndices, value: Types.FielddataStats) =
+        member _.Fielddata(state: ClusterIndices, value: CoreTypes.FielddataStats) =
             { state with Fielddata = value }
 
         [<CustomOperation("queryCache")>]
-        member _.QueryCache(state: ClusterIndices, value: Types.QueryCacheStats) =
+        member _.QueryCache(state: ClusterIndices, value: CoreTypes.QueryCacheStats) =
             { state with QueryCache = value }
 
         [<CustomOperation("search")>]
@@ -238,7 +238,7 @@ module ClusterStatsBuilders =
             { state with Search = value }
 
         [<CustomOperation("segments")>]
-        member _.Segments(state: ClusterIndices, value: Types.SegmentsStats) =
+        member _.Segments(state: ClusterIndices, value: CoreTypes.SegmentsStats) =
             { state with Segments = value }
 
         [<CustomOperation("shards")>]
@@ -246,7 +246,7 @@ module ClusterStatsBuilders =
             { state with Shards = value }
 
         [<CustomOperation("store")>]
-        member _.Store(state: ClusterIndices, value: Types.StoreStats) =
+        member _.Store(state: ClusterIndices, value: CoreTypes.StoreStats) =
             { state with Store = value }
 
         [<CustomOperation("mappings")>]
@@ -281,15 +281,15 @@ module ClusterStatsBuilders =
             { state with Index = Some value }
 
         [<CustomOperation("primaries")>]
-        member _.Primaries(state: ClusterIndicesShards, value: Types.Double) =
+        member _.Primaries(state: ClusterIndicesShards, value: CoreTypes.Double) =
             { state with Primaries = Some value }
 
         [<CustomOperation("replication")>]
-        member _.Replication(state: ClusterIndicesShards, value: Types.Double) =
+        member _.Replication(state: ClusterIndicesShards, value: CoreTypes.Double) =
             { state with Replication = Some value }
 
         [<CustomOperation("total")>]
-        member _.Total(state: ClusterIndicesShards, value: Types.Double) =
+        member _.Total(state: ClusterIndicesShards, value: CoreTypes.Double) =
             { state with Total = Some value }
 
     let clusterIndicesShards = ClusterIndicesShardsBuilder()
@@ -304,19 +304,19 @@ module ClusterStatsBuilders =
             }
 
         [<CustomOperation("heapMaxInBytes")>]
-        member _.HeapMaxInBytes(state: ClusterJvmMemory, value: Types.Long) =
+        member _.HeapMaxInBytes(state: ClusterJvmMemory, value: CoreTypes.Long) =
             { state with HeapMaxInBytes = value }
 
         [<CustomOperation("heapMax")>]
-        member _.HeapMax(state: ClusterJvmMemory, value: Types.ByteSize) =
+        member _.HeapMax(state: ClusterJvmMemory, value: CoreTypes.ByteSize) =
             { state with HeapMax = Some value }
 
         [<CustomOperation("heapUsedInBytes")>]
-        member _.HeapUsedInBytes(state: ClusterJvmMemory, value: Types.Long) =
+        member _.HeapUsedInBytes(state: ClusterJvmMemory, value: CoreTypes.Long) =
             { state with HeapUsedInBytes = value }
 
         [<CustomOperation("heapUsed")>]
-        member _.HeapUsed(state: ClusterJvmMemory, value: Types.ByteSize) =
+        member _.HeapUsed(state: ClusterJvmMemory, value: CoreTypes.ByteSize) =
             { state with HeapUsed = Some value }
 
     let clusterJvmMemory = ClusterJvmMemoryBuilder()
@@ -343,67 +343,67 @@ module ClusterStatsBuilders =
             }
 
         [<CustomOperation("total")>]
-        member _.Total(state: ClusterNodeCount, value: Types.Integer) =
+        member _.Total(state: ClusterNodeCount, value: CoreTypes.Integer) =
             { state with Total = value }
 
         [<CustomOperation("coordinatingOnly")>]
-        member _.CoordinatingOnly(state: ClusterNodeCount, value: Types.Integer) =
+        member _.CoordinatingOnly(state: ClusterNodeCount, value: CoreTypes.Integer) =
             { state with CoordinatingOnly = Some value }
 
         [<CustomOperation("data")>]
-        member _.Data(state: ClusterNodeCount, value: Types.Integer) =
+        member _.Data(state: ClusterNodeCount, value: CoreTypes.Integer) =
             { state with Data = Some value }
 
         [<CustomOperation("dataCold")>]
-        member _.DataCold(state: ClusterNodeCount, value: Types.Integer) =
+        member _.DataCold(state: ClusterNodeCount, value: CoreTypes.Integer) =
             { state with DataCold = Some value }
 
         [<CustomOperation("dataContent")>]
-        member _.DataContent(state: ClusterNodeCount, value: Types.Integer) =
+        member _.DataContent(state: ClusterNodeCount, value: CoreTypes.Integer) =
             { state with DataContent = Some value }
 
         [<CustomOperation("dataFrozen")>]
-        member _.DataFrozen(state: ClusterNodeCount, value: Types.Integer) =
+        member _.DataFrozen(state: ClusterNodeCount, value: CoreTypes.Integer) =
             { state with DataFrozen = Some value }
 
         [<CustomOperation("dataHot")>]
-        member _.DataHot(state: ClusterNodeCount, value: Types.Integer) =
+        member _.DataHot(state: ClusterNodeCount, value: CoreTypes.Integer) =
             { state with DataHot = Some value }
 
         [<CustomOperation("dataWarm")>]
-        member _.DataWarm(state: ClusterNodeCount, value: Types.Integer) =
+        member _.DataWarm(state: ClusterNodeCount, value: CoreTypes.Integer) =
             { state with DataWarm = Some value }
 
         [<CustomOperation("index")>]
-        member _.Index(state: ClusterNodeCount, value: Types.Integer) =
+        member _.Index(state: ClusterNodeCount, value: CoreTypes.Integer) =
             { state with Index = Some value }
 
         [<CustomOperation("ingest")>]
-        member _.Ingest(state: ClusterNodeCount, value: Types.Integer) =
+        member _.Ingest(state: ClusterNodeCount, value: CoreTypes.Integer) =
             { state with Ingest = Some value }
 
         [<CustomOperation("master")>]
-        member _.Master(state: ClusterNodeCount, value: Types.Integer) =
+        member _.Master(state: ClusterNodeCount, value: CoreTypes.Integer) =
             { state with Master = Some value }
 
         [<CustomOperation("ml")>]
-        member _.Ml(state: ClusterNodeCount, value: Types.Integer) =
+        member _.Ml(state: ClusterNodeCount, value: CoreTypes.Integer) =
             { state with Ml = Some value }
 
         [<CustomOperation("remoteClusterClient")>]
-        member _.RemoteClusterClient(state: ClusterNodeCount, value: Types.Integer) =
+        member _.RemoteClusterClient(state: ClusterNodeCount, value: CoreTypes.Integer) =
             { state with RemoteClusterClient = Some value }
 
         [<CustomOperation("search")>]
-        member _.Search(state: ClusterNodeCount, value: Types.Integer) =
+        member _.Search(state: ClusterNodeCount, value: CoreTypes.Integer) =
             { state with Search = Some value }
 
         [<CustomOperation("transform")>]
-        member _.Transform(state: ClusterNodeCount, value: Types.Integer) =
+        member _.Transform(state: ClusterNodeCount, value: CoreTypes.Integer) =
             { state with Transform = Some value }
 
         [<CustomOperation("votingOnly")>]
-        member _.VotingOnly(state: ClusterNodeCount, value: Types.Integer) =
+        member _.VotingOnly(state: ClusterNodeCount, value: CoreTypes.Integer) =
             { state with VotingOnly = Some value }
 
     let clusterNodeCount = ClusterNodeCountBuilder()
@@ -429,63 +429,63 @@ module ClusterStatsBuilders =
             }
 
         [<CustomOperation("totalSizeBytes")>]
-        member _.TotalSizeBytes(state: DenseVectorOffHeapStats, value: Types.Long) =
+        member _.TotalSizeBytes(state: DenseVectorOffHeapStats, value: CoreTypes.Long) =
             { state with TotalSizeBytes = value }
 
         [<CustomOperation("totalSize")>]
-        member _.TotalSize(state: DenseVectorOffHeapStats, value: Types.ByteSize) =
+        member _.TotalSize(state: DenseVectorOffHeapStats, value: CoreTypes.ByteSize) =
             { state with TotalSize = Some value }
 
         [<CustomOperation("totalVebSizeBytes")>]
-        member _.TotalVebSizeBytes(state: DenseVectorOffHeapStats, value: Types.Long) =
+        member _.TotalVebSizeBytes(state: DenseVectorOffHeapStats, value: CoreTypes.Long) =
             { state with TotalVebSizeBytes = value }
 
         [<CustomOperation("totalVebSize")>]
-        member _.TotalVebSize(state: DenseVectorOffHeapStats, value: Types.ByteSize) =
+        member _.TotalVebSize(state: DenseVectorOffHeapStats, value: CoreTypes.ByteSize) =
             { state with TotalVebSize = Some value }
 
         [<CustomOperation("totalVecSizeBytes")>]
-        member _.TotalVecSizeBytes(state: DenseVectorOffHeapStats, value: Types.Long) =
+        member _.TotalVecSizeBytes(state: DenseVectorOffHeapStats, value: CoreTypes.Long) =
             { state with TotalVecSizeBytes = value }
 
         [<CustomOperation("totalVecSize")>]
-        member _.TotalVecSize(state: DenseVectorOffHeapStats, value: Types.ByteSize) =
+        member _.TotalVecSize(state: DenseVectorOffHeapStats, value: CoreTypes.ByteSize) =
             { state with TotalVecSize = Some value }
 
         [<CustomOperation("totalVeqSizeBytes")>]
-        member _.TotalVeqSizeBytes(state: DenseVectorOffHeapStats, value: Types.Long) =
+        member _.TotalVeqSizeBytes(state: DenseVectorOffHeapStats, value: CoreTypes.Long) =
             { state with TotalVeqSizeBytes = value }
 
         [<CustomOperation("totalVeqSize")>]
-        member _.TotalVeqSize(state: DenseVectorOffHeapStats, value: Types.ByteSize) =
+        member _.TotalVeqSize(state: DenseVectorOffHeapStats, value: CoreTypes.ByteSize) =
             { state with TotalVeqSize = Some value }
 
         [<CustomOperation("totalVexSizeBytes")>]
-        member _.TotalVexSizeBytes(state: DenseVectorOffHeapStats, value: Types.Long) =
+        member _.TotalVexSizeBytes(state: DenseVectorOffHeapStats, value: CoreTypes.Long) =
             { state with TotalVexSizeBytes = value }
 
         [<CustomOperation("totalVexSize")>]
-        member _.TotalVexSize(state: DenseVectorOffHeapStats, value: Types.ByteSize) =
+        member _.TotalVexSize(state: DenseVectorOffHeapStats, value: CoreTypes.ByteSize) =
             { state with TotalVexSize = Some value }
 
         [<CustomOperation("totalCenifSizeBytes")>]
-        member _.TotalCenifSizeBytes(state: DenseVectorOffHeapStats, value: Types.Long) =
+        member _.TotalCenifSizeBytes(state: DenseVectorOffHeapStats, value: CoreTypes.Long) =
             { state with TotalCenifSizeBytes = value }
 
         [<CustomOperation("totalCenifSize")>]
-        member _.TotalCenifSize(state: DenseVectorOffHeapStats, value: Types.ByteSize) =
+        member _.TotalCenifSize(state: DenseVectorOffHeapStats, value: CoreTypes.ByteSize) =
             { state with TotalCenifSize = Some value }
 
         [<CustomOperation("totalClivfSizeBytes")>]
-        member _.TotalClivfSizeBytes(state: DenseVectorOffHeapStats, value: Types.Long) =
+        member _.TotalClivfSizeBytes(state: DenseVectorOffHeapStats, value: CoreTypes.Long) =
             { state with TotalClivfSizeBytes = value }
 
         [<CustomOperation("totalClivfSize")>]
-        member _.TotalClivfSize(state: DenseVectorOffHeapStats, value: Types.ByteSize) =
+        member _.TotalClivfSize(state: DenseVectorOffHeapStats, value: CoreTypes.ByteSize) =
             { state with TotalClivfSize = Some value }
 
         [<CustomOperation("fielddata")>]
-        member _.Fielddata(state: DenseVectorOffHeapStats, value: Map<string, Map<string, Types.Long>>) =
+        member _.Fielddata(state: DenseVectorOffHeapStats, value: Map<string, Map<string, CoreTypes.Long>>) =
             { state with Fielddata = Some value }
 
     let denseVectorOffHeapStats = DenseVectorOffHeapStatsBuilder()
@@ -523,43 +523,43 @@ module ClusterStatsBuilders =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: FieldTypes, value: Types.Name) =
+        member _.Name(state: FieldTypes, value: CoreTypes.Name) =
             { state with Name = value }
 
         [<CustomOperation("count")>]
-        member _.Count(state: FieldTypes, value: Types.Integer) =
+        member _.Count(state: FieldTypes, value: CoreTypes.Integer) =
             { state with Count = value }
 
         [<CustomOperation("indexCount")>]
-        member _.IndexCount(state: FieldTypes, value: Types.Integer) =
+        member _.IndexCount(state: FieldTypes, value: CoreTypes.Integer) =
             { state with IndexCount = value }
 
         [<CustomOperation("indexedVectorCount")>]
-        member _.IndexedVectorCount(state: FieldTypes, value: Types.Integer) =
+        member _.IndexedVectorCount(state: FieldTypes, value: CoreTypes.Integer) =
             { state with IndexedVectorCount = Some value }
 
         [<CustomOperation("indexedVectorDimMax")>]
-        member _.IndexedVectorDimMax(state: FieldTypes, value: Types.Integer) =
+        member _.IndexedVectorDimMax(state: FieldTypes, value: CoreTypes.Integer) =
             { state with IndexedVectorDimMax = Some value }
 
         [<CustomOperation("indexedVectorDimMin")>]
-        member _.IndexedVectorDimMin(state: FieldTypes, value: Types.Integer) =
+        member _.IndexedVectorDimMin(state: FieldTypes, value: CoreTypes.Integer) =
             { state with IndexedVectorDimMin = Some value }
 
         [<CustomOperation("scriptCount")>]
-        member _.ScriptCount(state: FieldTypes, value: Types.Integer) =
+        member _.ScriptCount(state: FieldTypes, value: CoreTypes.Integer) =
             { state with ScriptCount = Some value }
 
         [<CustomOperation("vectorIndexTypeCount")>]
-        member _.VectorIndexTypeCount(state: FieldTypes, value: Map<Types.Name, Types.Integer>) =
+        member _.VectorIndexTypeCount(state: FieldTypes, value: Map<CoreTypes.Name, CoreTypes.Integer>) =
             { state with VectorIndexTypeCount = Some value }
 
         [<CustomOperation("vectorSimilarityTypeCount")>]
-        member _.VectorSimilarityTypeCount(state: FieldTypes, value: Map<Types.Name, Types.Integer>) =
+        member _.VectorSimilarityTypeCount(state: FieldTypes, value: Map<CoreTypes.Name, CoreTypes.Integer>) =
             { state with VectorSimilarityTypeCount = Some value }
 
         [<CustomOperation("vectorElementTypeCount")>]
-        member _.VectorElementTypeCount(state: FieldTypes, value: Map<Types.Name, Types.Integer>) =
+        member _.VectorElementTypeCount(state: FieldTypes, value: Map<CoreTypes.Name, CoreTypes.Integer>) =
             { state with VectorElementTypeCount = Some value }
 
     let fieldTypes = FieldTypesBuilder()
@@ -585,23 +585,23 @@ module ClusterStatsBuilders =
             { state with RuntimeFieldTypes = value }
 
         [<CustomOperation("totalFieldCount")>]
-        member _.TotalFieldCount(state: FieldTypesMappings, value: Types.Long) =
+        member _.TotalFieldCount(state: FieldTypesMappings, value: CoreTypes.Long) =
             { state with TotalFieldCount = Some value }
 
         [<CustomOperation("totalDeduplicatedFieldCount")>]
-        member _.TotalDeduplicatedFieldCount(state: FieldTypesMappings, value: Types.Long) =
+        member _.TotalDeduplicatedFieldCount(state: FieldTypesMappings, value: CoreTypes.Long) =
             { state with TotalDeduplicatedFieldCount = Some value }
 
         [<CustomOperation("totalDeduplicatedMappingSize")>]
-        member _.TotalDeduplicatedMappingSize(state: FieldTypesMappings, value: Types.ByteSize) =
+        member _.TotalDeduplicatedMappingSize(state: FieldTypesMappings, value: CoreTypes.ByteSize) =
             { state with TotalDeduplicatedMappingSize = Some value }
 
         [<CustomOperation("totalDeduplicatedMappingSizeInBytes")>]
-        member _.TotalDeduplicatedMappingSizeInBytes(state: FieldTypesMappings, value: Types.Long) =
+        member _.TotalDeduplicatedMappingSizeInBytes(state: FieldTypesMappings, value: CoreTypes.Long) =
             { state with TotalDeduplicatedMappingSizeInBytes = Some value }
 
         [<CustomOperation("sourceModes")>]
-        member _.SourceModes(state: FieldTypesMappings, value: Map<Types.Name, Types.Integer>) =
+        member _.SourceModes(state: FieldTypesMappings, value: Map<CoreTypes.Name, CoreTypes.Integer>) =
             { state with SourceModes = value }
 
     let fieldTypesMappings = FieldTypesMappingsBuilder()
@@ -622,43 +622,43 @@ module ClusterStatsBuilders =
             }
 
         [<CustomOperation("adjustedTotalInBytes")>]
-        member _.AdjustedTotalInBytes(state: OperatingSystemMemoryInfo, value: Types.Long) =
+        member _.AdjustedTotalInBytes(state: OperatingSystemMemoryInfo, value: CoreTypes.Long) =
             { state with AdjustedTotalInBytes = Some value }
 
         [<CustomOperation("adjustedTotal")>]
-        member _.AdjustedTotal(state: OperatingSystemMemoryInfo, value: Types.ByteSize) =
+        member _.AdjustedTotal(state: OperatingSystemMemoryInfo, value: CoreTypes.ByteSize) =
             { state with AdjustedTotal = Some value }
 
         [<CustomOperation("freeInBytes")>]
-        member _.FreeInBytes(state: OperatingSystemMemoryInfo, value: Types.Long) =
+        member _.FreeInBytes(state: OperatingSystemMemoryInfo, value: CoreTypes.Long) =
             { state with FreeInBytes = value }
 
         [<CustomOperation("free")>]
-        member _.Free(state: OperatingSystemMemoryInfo, value: Types.ByteSize) =
+        member _.Free(state: OperatingSystemMemoryInfo, value: CoreTypes.ByteSize) =
             { state with Free = Some value }
 
         [<CustomOperation("freePercent")>]
-        member _.FreePercent(state: OperatingSystemMemoryInfo, value: Types.Integer) =
+        member _.FreePercent(state: OperatingSystemMemoryInfo, value: CoreTypes.Integer) =
             { state with FreePercent = value }
 
         [<CustomOperation("totalInBytes")>]
-        member _.TotalInBytes(state: OperatingSystemMemoryInfo, value: Types.Long) =
+        member _.TotalInBytes(state: OperatingSystemMemoryInfo, value: CoreTypes.Long) =
             { state with TotalInBytes = value }
 
         [<CustomOperation("total")>]
-        member _.Total(state: OperatingSystemMemoryInfo, value: Types.ByteSize) =
+        member _.Total(state: OperatingSystemMemoryInfo, value: CoreTypes.ByteSize) =
             { state with Total = Some value }
 
         [<CustomOperation("usedInBytes")>]
-        member _.UsedInBytes(state: OperatingSystemMemoryInfo, value: Types.Long) =
+        member _.UsedInBytes(state: OperatingSystemMemoryInfo, value: CoreTypes.Long) =
             { state with UsedInBytes = value }
 
         [<CustomOperation("used")>]
-        member _.Used(state: OperatingSystemMemoryInfo, value: Types.ByteSize) =
+        member _.Used(state: OperatingSystemMemoryInfo, value: CoreTypes.ByteSize) =
             { state with Used = Some value }
 
         [<CustomOperation("usedPercent")>]
-        member _.UsedPercent(state: OperatingSystemMemoryInfo, value: Types.Integer) =
+        member _.UsedPercent(state: OperatingSystemMemoryInfo, value: CoreTypes.Integer) =
             { state with UsedPercent = value }
 
     let operatingSystemMemoryInfo = OperatingSystemMemoryInfoBuilder()
@@ -700,27 +700,27 @@ module ClusterStatsBuilders =
             { state with TransportCompress = value }
 
         [<CustomOperation("status")>]
-        member _.Status(state: RemoteClusterInfo, value: Types.HealthStatus) =
+        member _.Status(state: RemoteClusterInfo, value: CoreTypes.HealthStatus) =
             { state with Status = value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: RemoteClusterInfo, value: Types.VersionString list) =
+        member _.Version(state: RemoteClusterInfo, value: CoreTypes.VersionString list) =
             { state with Version = value }
 
         [<CustomOperation("nodesCount")>]
-        member _.NodesCount(state: RemoteClusterInfo, value: Types.Integer) =
+        member _.NodesCount(state: RemoteClusterInfo, value: CoreTypes.Integer) =
             { state with NodesCount = value }
 
         [<CustomOperation("shardsCount")>]
-        member _.ShardsCount(state: RemoteClusterInfo, value: Types.Integer) =
+        member _.ShardsCount(state: RemoteClusterInfo, value: CoreTypes.Integer) =
             { state with ShardsCount = value }
 
         [<CustomOperation("indicesCount")>]
-        member _.IndicesCount(state: RemoteClusterInfo, value: Types.Integer) =
+        member _.IndicesCount(state: RemoteClusterInfo, value: CoreTypes.Integer) =
             { state with IndicesCount = value }
 
         [<CustomOperation("indicesTotalSizeInBytes")>]
-        member _.IndicesTotalSizeInBytes(state: RemoteClusterInfo, value: Types.Long) =
+        member _.IndicesTotalSizeInBytes(state: RemoteClusterInfo, value: CoreTypes.Long) =
             { state with IndicesTotalSizeInBytes = value }
 
         [<CustomOperation("indicesTotalSize")>]
@@ -728,7 +728,7 @@ module ClusterStatsBuilders =
             { state with IndicesTotalSize = Some value }
 
         [<CustomOperation("maxHeapInBytes")>]
-        member _.MaxHeapInBytes(state: RemoteClusterInfo, value: Types.Long) =
+        member _.MaxHeapInBytes(state: RemoteClusterInfo, value: CoreTypes.Long) =
             { state with MaxHeapInBytes = value }
 
         [<CustomOperation("maxHeap")>]
@@ -736,7 +736,7 @@ module ClusterStatsBuilders =
             { state with MaxHeap = Some value }
 
         [<CustomOperation("memTotalInBytes")>]
-        member _.MemTotalInBytes(state: RemoteClusterInfo, value: Types.Long) =
+        member _.MemTotalInBytes(state: RemoteClusterInfo, value: CoreTypes.Long) =
             { state with MemTotalInBytes = value }
 
         [<CustomOperation("memTotal")>]

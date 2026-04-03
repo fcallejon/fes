@@ -13,11 +13,11 @@ module ClusterRemoteInfo =
         [<System.Text.Json.Serialization.JsonPropertyName("connected")>]
         Connected: bool
         [<System.Text.Json.Serialization.JsonPropertyName("max_connections_per_cluster")>]
-        MaxConnectionsPerCluster: Types.Integer
+        MaxConnectionsPerCluster: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("num_nodes_connected")>]
-        NumNodesConnected: Types.Long
+        NumNodesConnected: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("initial_connect_timeout")>]
-        InitialConnectTimeout: Types.Duration
+        InitialConnectTimeout: CoreTypes.Duration
         [<System.Text.Json.Serialization.JsonPropertyName("skip_unavailable")>]
         SkipUnavailable: bool
         [<System.Text.Json.Serialization.JsonPropertyName("seeds")>]
@@ -30,7 +30,7 @@ module ClusterRemoteInfo =
         [<System.Text.Json.Serialization.JsonPropertyName("connected")>]
         Connected: bool
         [<System.Text.Json.Serialization.JsonPropertyName("initial_connect_timeout")>]
-        InitialConnectTimeout: Types.Duration
+        InitialConnectTimeout: CoreTypes.Duration
         [<System.Text.Json.Serialization.JsonPropertyName("skip_unavailable")>]
         SkipUnavailable: bool
         [<System.Text.Json.Serialization.JsonPropertyName("proxy_address")>]
@@ -38,15 +38,15 @@ module ClusterRemoteInfo =
         [<System.Text.Json.Serialization.JsonPropertyName("server_name")>]
         ServerName: string
         [<System.Text.Json.Serialization.JsonPropertyName("num_proxy_sockets_connected")>]
-        NumProxySocketsConnected: Types.Integer
+        NumProxySocketsConnected: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("max_proxy_socket_connections")>]
-        MaxProxySocketConnections: Types.Integer
+        MaxProxySocketConnections: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("cluster_credentials")>]
         ClusterCredentials: string option
     }
 
     [<RequireQualifiedAccess>]
     type ClusterRemoteInfo =
-        | ClusterRemoteSniffInfo of ClusterRemoteInfo.ClusterRemoteSniffInfo
-        | ClusterRemoteProxyInfo of ClusterRemoteInfo.ClusterRemoteProxyInfo
+        | ClusterRemoteSniffInfo of ClusterRemoteSniffInfo
+        | ClusterRemoteProxyInfo of ClusterRemoteProxyInfo
 

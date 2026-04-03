@@ -34,11 +34,11 @@ module TransformGetTransformBuilders =
             { state with Authorization = Some value }
 
         [<CustomOperation("createTime")>]
-        member _.CreateTime(state: TransformSummary, value: Types.EpochTime<Types.UnitMillis>) =
+        member _.CreateTime(state: TransformSummary, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
             { state with CreateTime = Some value }
 
         [<CustomOperation("createTimeString")>]
-        member _.CreateTimeString(state: TransformSummary, value: Types.DateTime) =
+        member _.CreateTimeString(state: TransformSummary, value: CoreTypes.DateTime) =
             { state with CreateTimeString = Some value }
 
         [<CustomOperation("description")>]
@@ -50,11 +50,11 @@ module TransformGetTransformBuilders =
             { state with Dest = value }
 
         [<CustomOperation("frequency")>]
-        member _.Frequency(state: TransformSummary, value: Types.Duration) =
+        member _.Frequency(state: TransformSummary, value: CoreTypes.Duration) =
             { state with Frequency = Some value }
 
         [<CustomOperation("id")>]
-        member _.Id(state: TransformSummary, value: Types.Id) =
+        member _.Id(state: TransformSummary, value: CoreTypes.Id) =
             { state with Id = value }
 
         [<CustomOperation("latest")>]
@@ -82,11 +82,11 @@ module TransformGetTransformBuilders =
             { state with Sync = Some value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: TransformSummary, value: Types.VersionString) =
+        member _.Version(state: TransformSummary, value: CoreTypes.VersionString) =
             { state with Version = Some value }
 
         [<CustomOperation("meta")>]
-        member _.Meta(state: TransformSummary, value: Types.Metadata) =
+        member _.Meta(state: TransformSummary, value: CoreTypes.Metadata) =
             { state with Meta = Some value }
 
     let transformSummary = TransformSummaryBuilder()

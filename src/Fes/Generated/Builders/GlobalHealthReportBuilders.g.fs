@@ -47,7 +47,7 @@ module GlobalHealthReportBuilders =
             }
 
         [<CustomOperation("indices")>]
-        member _.Indices(state: DiagnosisAffectedResources, value: Types.Indices) =
+        member _.Indices(state: DiagnosisAffectedResources, value: CoreTypes.Indices) =
             { state with Indices = Some value }
 
         [<CustomOperation("nodes")>]
@@ -156,11 +156,11 @@ module GlobalHealthReportBuilders =
             }
 
         [<CustomOperation("totalRepositories")>]
-        member _.TotalRepositories(state: RepositoryIntegrityIndicatorDetails, value: Types.Long) =
+        member _.TotalRepositories(state: RepositoryIntegrityIndicatorDetails, value: CoreTypes.Long) =
             { state with TotalRepositories = Some value }
 
         [<CustomOperation("corruptedRepositories")>]
-        member _.CorruptedRepositories(state: RepositoryIntegrityIndicatorDetails, value: Types.Long) =
+        member _.CorruptedRepositories(state: RepositoryIntegrityIndicatorDetails, value: CoreTypes.Long) =
             { state with CorruptedRepositories = Some value }
 
         [<CustomOperation("corrupted")>]

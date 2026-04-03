@@ -9,6 +9,6 @@ module GlobalUpdate =
 
     type UpdateWriteResponseBase<'tDocument> = {
         [<System.Text.Json.Serialization.JsonPropertyName("get")>]
-        Get: Types.InlineGet<'tDocument> option
+        Get: CoreTypes.InlineGet<'tDocument> option
     }
 

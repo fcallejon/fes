@@ -20,7 +20,7 @@ module IndicesResolveIndexBuilders =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: ResolveIndexItem, value: Types.Name) =
+        member _.Name(state: ResolveIndexItem, value: CoreTypes.Name) =
             { state with Name = value }
 
         [<CustomOperation("aliases")>]
@@ -32,7 +32,7 @@ module IndicesResolveIndexBuilders =
             { state with Attributes = value }
 
         [<CustomOperation("dataStream")>]
-        member _.DataStream(state: ResolveIndexItem, value: Types.DataStreamName) =
+        member _.DataStream(state: ResolveIndexItem, value: CoreTypes.DataStreamName) =
             { state with DataStream = Some value }
 
         [<CustomOperation("mode")>]

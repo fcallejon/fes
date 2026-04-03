@@ -12,13 +12,13 @@ open Fes
 module SimulateOperations =
 
     type SimulateIngestRequest = {
-        Index: Types.IndexName
-        Pipeline: Types.PipelineName option
+        Index: CoreTypes.IndexName
+        Pipeline: CoreTypes.PipelineName option
         MergeType: SimulateIngest.MergeType option
         Docs: IngestTypes.Document list
         ComponentTemplateSubstitutions: Map<string, ClusterTypes.ComponentTemplateNode> option
         IndexTemplateSubstitutions: Map<string, IndicesTypes.IndexTemplate> option
-        MappingAddition: TypesMapping.TypeMapping option
+        MappingAddition: CoreTypes.TypeMapping option
         PipelineSubstitutions: Map<string, IngestTypes.Pipeline> option
     }
 
@@ -58,11 +58,11 @@ module SimulateOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: SimulateIngestRequest, value: Types.IndexName) =
+        member _.Index(state: SimulateIngestRequest, value: CoreTypes.IndexName) =
             { state with Index = value }
 
         [<CustomOperation("pipeline")>]
-        member _.Pipeline(state: SimulateIngestRequest, value: Types.PipelineName) =
+        member _.Pipeline(state: SimulateIngestRequest, value: CoreTypes.PipelineName) =
             { state with Pipeline = Some value }
 
         [<CustomOperation("mergeType")>]
@@ -82,7 +82,7 @@ module SimulateOperations =
             { state with IndexTemplateSubstitutions = Some value }
 
         [<CustomOperation("mappingAddition")>]
-        member _.MappingAddition(state: SimulateIngestRequest, value: TypesMapping.TypeMapping) =
+        member _.MappingAddition(state: SimulateIngestRequest, value: CoreTypes.TypeMapping) =
             { state with MappingAddition = Some value }
 
         [<CustomOperation("pipelineSubstitutions")>]
@@ -92,7 +92,7 @@ module SimulateOperations =
     let simulateIngestRequest = SimulateIngestRequestBuilder()
 
     module Ingest =
-        let withPipeline (value: Types.PipelineName) (req: SimulateIngestRequest) =
+        let withPipeline (value: CoreTypes.PipelineName) (req: SimulateIngestRequest) =
             { req with Pipeline = Some value }
         let withMergeType (value: SimulateIngest.MergeType) (req: SimulateIngestRequest) =
             { req with MergeType = Some value }
@@ -102,7 +102,7 @@ module SimulateOperations =
             { req with ComponentTemplateSubstitutions = Some value }
         let withIndexTemplateSubstitutions (value: Map<string, IndicesTypes.IndexTemplate>) (req: SimulateIngestRequest) =
             { req with IndexTemplateSubstitutions = Some value }
-        let withMappingAddition (value: TypesMapping.TypeMapping) (req: SimulateIngestRequest) =
+        let withMappingAddition (value: CoreTypes.TypeMapping) (req: SimulateIngestRequest) =
             { req with MappingAddition = Some value }
         let withPipelineSubstitutions (value: Map<string, IngestTypes.Pipeline>) (req: SimulateIngestRequest) =
             { req with PipelineSubstitutions = Some value }

@@ -12,7 +12,7 @@ open Fes
 module SearchApplicationOperations =
 
     type SearchApplicationDeleteRequest = {
-        Name: Types.Name
+        Name: CoreTypes.Name
     }
 
         with
@@ -26,7 +26,7 @@ module SearchApplicationOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type SearchApplicationDeleteResponse = Types.AcknowledgedResponseBase
+    type SearchApplicationDeleteResponse = CoreTypes.AcknowledgedResponseBase
 
     type SearchApplicationDeleteRequestBuilder() =
         member _.Yield(_: unit) : SearchApplicationDeleteRequest =
@@ -35,13 +35,13 @@ module SearchApplicationOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: SearchApplicationDeleteRequest, value: Types.Name) =
+        member _.Name(state: SearchApplicationDeleteRequest, value: CoreTypes.Name) =
             { state with Name = value }
 
     let searchApplicationDeleteRequest = SearchApplicationDeleteRequestBuilder()
 
     type SearchApplicationDeleteBehavioralAnalyticsRequest = {
-        Name: Types.Name
+        Name: CoreTypes.Name
     }
 
         with
@@ -55,7 +55,7 @@ module SearchApplicationOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type SearchApplicationDeleteBehavioralAnalyticsResponse = Types.AcknowledgedResponseBase
+    type SearchApplicationDeleteBehavioralAnalyticsResponse = CoreTypes.AcknowledgedResponseBase
 
     type SearchApplicationDeleteBehavioralAnalyticsRequestBuilder() =
         member _.Yield(_: unit) : SearchApplicationDeleteBehavioralAnalyticsRequest =
@@ -64,13 +64,13 @@ module SearchApplicationOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: SearchApplicationDeleteBehavioralAnalyticsRequest, value: Types.Name) =
+        member _.Name(state: SearchApplicationDeleteBehavioralAnalyticsRequest, value: CoreTypes.Name) =
             { state with Name = value }
 
     let searchApplicationDeleteBehavioralAnalyticsRequest = SearchApplicationDeleteBehavioralAnalyticsRequestBuilder()
 
     type SearchApplicationGetRequest = {
-        Name: Types.Name
+        Name: CoreTypes.Name
     }
 
         with
@@ -93,13 +93,13 @@ module SearchApplicationOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: SearchApplicationGetRequest, value: Types.Name) =
+        member _.Name(state: SearchApplicationGetRequest, value: CoreTypes.Name) =
             { state with Name = value }
 
     let searchApplicationGetRequest = SearchApplicationGetRequestBuilder()
 
     type SearchApplicationGetBehavioralAnalyticsRequest = {
-        Name: Types.Name list
+        Name: CoreTypes.Name list
     }
 
         with
@@ -113,7 +113,7 @@ module SearchApplicationOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type SearchApplicationGetBehavioralAnalyticsResponse = Map<Types.Name, SearchApplicationTypes.AnalyticsCollection>
+    type SearchApplicationGetBehavioralAnalyticsResponse = Map<CoreTypes.Name, SearchApplicationTypes.AnalyticsCollection>
 
     type SearchApplicationGetBehavioralAnalyticsRequestBuilder() =
         member _.Yield(_: unit) : SearchApplicationGetBehavioralAnalyticsRequest =
@@ -122,15 +122,15 @@ module SearchApplicationOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: SearchApplicationGetBehavioralAnalyticsRequest, value: Types.Name list) =
+        member _.Name(state: SearchApplicationGetBehavioralAnalyticsRequest, value: CoreTypes.Name list) =
             { state with Name = value }
 
     let searchApplicationGetBehavioralAnalyticsRequest = SearchApplicationGetBehavioralAnalyticsRequestBuilder()
 
     type SearchApplicationListRequest = {
         Q: string option
-        From: Types.Integer option
-        Size: Types.Integer option
+        From: CoreTypes.Integer option
+        Size: CoreTypes.Integer option
     }
 
         with
@@ -168,11 +168,11 @@ module SearchApplicationOperations =
             { state with Q = Some value }
 
         [<CustomOperation("from")>]
-        member _.From(state: SearchApplicationListRequest, value: Types.Integer) =
+        member _.From(state: SearchApplicationListRequest, value: CoreTypes.Integer) =
             { state with From = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: SearchApplicationListRequest, value: Types.Integer) =
+        member _.Size(state: SearchApplicationListRequest, value: CoreTypes.Integer) =
             { state with Size = Some value }
 
     let searchApplicationListRequest = SearchApplicationListRequestBuilder()
@@ -180,13 +180,13 @@ module SearchApplicationOperations =
     module List =
         let withQ (value: string) (req: SearchApplicationListRequest) =
             { req with Q = Some value }
-        let withFrom (value: Types.Integer) (req: SearchApplicationListRequest) =
+        let withFrom (value: CoreTypes.Integer) (req: SearchApplicationListRequest) =
             { req with From = Some value }
-        let withSize (value: Types.Integer) (req: SearchApplicationListRequest) =
+        let withSize (value: CoreTypes.Integer) (req: SearchApplicationListRequest) =
             { req with Size = Some value }
 
     type SearchApplicationPostBehavioralAnalyticsEventRequest = {
-        CollectionName: Types.Name
+        CollectionName: CoreTypes.Name
         EventType: SearchApplicationTypes.EventType
         Debug: bool option
         Document: obj
@@ -223,7 +223,7 @@ module SearchApplicationOperations =
             }
 
         [<CustomOperation("collectionName")>]
-        member _.CollectionName(state: SearchApplicationPostBehavioralAnalyticsEventRequest, value: Types.Name) =
+        member _.CollectionName(state: SearchApplicationPostBehavioralAnalyticsEventRequest, value: CoreTypes.Name) =
             { state with CollectionName = value }
 
         [<CustomOperation("eventType")>]
@@ -245,7 +245,7 @@ module SearchApplicationOperations =
             { req with Debug = Some value }
 
     type SearchApplicationPutRequest = {
-        Name: Types.Name
+        Name: CoreTypes.Name
         Create: bool option
         Document: obj
     }
@@ -280,7 +280,7 @@ module SearchApplicationOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: SearchApplicationPutRequest, value: Types.Name) =
+        member _.Name(state: SearchApplicationPutRequest, value: CoreTypes.Name) =
             { state with Name = value }
 
         [<CustomOperation("create")>]
@@ -298,7 +298,7 @@ module SearchApplicationOperations =
             { req with Create = Some value }
 
     type SearchApplicationPutBehavioralAnalyticsRequest = {
-        Name: Types.Name
+        Name: CoreTypes.Name
     }
 
         with
@@ -321,13 +321,13 @@ module SearchApplicationOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: SearchApplicationPutBehavioralAnalyticsRequest, value: Types.Name) =
+        member _.Name(state: SearchApplicationPutBehavioralAnalyticsRequest, value: CoreTypes.Name) =
             { state with Name = value }
 
     let searchApplicationPutBehavioralAnalyticsRequest = SearchApplicationPutBehavioralAnalyticsRequestBuilder()
 
     type SearchApplicationRenderQueryRequest = {
-        Name: Types.Name
+        Name: CoreTypes.Name
         Params: Map<string, System.Text.Json.JsonElement> option
     }
 
@@ -353,7 +353,7 @@ module SearchApplicationOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: SearchApplicationRenderQueryRequest, value: Types.Name) =
+        member _.Name(state: SearchApplicationRenderQueryRequest, value: CoreTypes.Name) =
             { state with Name = value }
 
         [<CustomOperation("params")>]
@@ -367,7 +367,7 @@ module SearchApplicationOperations =
             { req with Params = Some value }
 
     type SearchApplicationSearchRequest = {
-        Name: Types.Name
+        Name: CoreTypes.Name
         TypedKeys: bool option
         Params: Map<string, System.Text.Json.JsonElement> option
     }
@@ -402,7 +402,7 @@ module SearchApplicationOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: SearchApplicationSearchRequest, value: Types.Name) =
+        member _.Name(state: SearchApplicationSearchRequest, value: CoreTypes.Name) =
             { state with Name = value }
 
         [<CustomOperation("typedKeys")>]

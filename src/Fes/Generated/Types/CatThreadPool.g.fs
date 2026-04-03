@@ -11,7 +11,7 @@ module CatThreadPool =
         [<System.Text.Json.Serialization.JsonPropertyName("node_name")>]
         NodeName: string option
         [<System.Text.Json.Serialization.JsonPropertyName("node_id")>]
-        NodeId: Types.NodeId option
+        NodeId: CoreTypes.NodeId option
         [<System.Text.Json.Serialization.JsonPropertyName("ephemeral_node_id")>]
         EphemeralNodeId: string option
         [<System.Text.Json.Serialization.JsonPropertyName("pid")>]

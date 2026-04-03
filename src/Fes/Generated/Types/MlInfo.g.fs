@@ -11,44 +11,44 @@ module MlInfo =
         [<System.Text.Json.Serialization.JsonPropertyName("categorization_analyzer")>]
         CategorizationAnalyzer: MlTypes.CategorizationAnalyzer
         [<System.Text.Json.Serialization.JsonPropertyName("categorization_examples_limit")>]
-        CategorizationExamplesLimit: Types.Integer
+        CategorizationExamplesLimit: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("model_memory_limit")>]
         ModelMemoryLimit: string
         [<System.Text.Json.Serialization.JsonPropertyName("model_snapshot_retention_days")>]
-        ModelSnapshotRetentionDays: Types.Integer
+        ModelSnapshotRetentionDays: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("daily_model_snapshot_retention_after_days")>]
-        DailyModelSnapshotRetentionAfterDays: Types.Integer
+        DailyModelSnapshotRetentionAfterDays: CoreTypes.Integer
     }
 
     type Datafeeds = {
         [<System.Text.Json.Serialization.JsonPropertyName("scroll_size")>]
-        ScrollSize: Types.Integer
+        ScrollSize: CoreTypes.Integer
     }
 
     type Defaults = {
         [<System.Text.Json.Serialization.JsonPropertyName("anomaly_detectors")>]
-        AnomalyDetectors: MlInfo.AnomalyDetectors
+        AnomalyDetectors: AnomalyDetectors
         [<System.Text.Json.Serialization.JsonPropertyName("datafeeds")>]
-        Datafeeds: MlInfo.Datafeeds
+        Datafeeds: Datafeeds
     }
 
     type Limits = {
         [<System.Text.Json.Serialization.JsonPropertyName("max_single_ml_node_processors")>]
-        MaxSingleMlNodeProcessors: Types.Integer option
+        MaxSingleMlNodeProcessors: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("total_ml_processors")>]
-        TotalMlProcessors: Types.Integer option
+        TotalMlProcessors: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("max_model_memory_limit")>]
-        MaxModelMemoryLimit: Types.ByteSize option
+        MaxModelMemoryLimit: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("effective_max_model_memory_limit")>]
-        EffectiveMaxModelMemoryLimit: Types.ByteSize option
+        EffectiveMaxModelMemoryLimit: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("total_ml_memory")>]
-        TotalMlMemory: Types.ByteSize
+        TotalMlMemory: CoreTypes.ByteSize
     }
 
     type NativeCode = {
         [<System.Text.Json.Serialization.JsonPropertyName("build_hash")>]
         BuildHash: string
         [<System.Text.Json.Serialization.JsonPropertyName("version")>]
-        Version: Types.VersionString
+        Version: CoreTypes.VersionString
     }
 

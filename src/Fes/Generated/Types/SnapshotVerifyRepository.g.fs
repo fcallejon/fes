@@ -9,6 +9,6 @@ module SnapshotVerifyRepository =
 
     type CompactNodeInfo = {
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.Name
+        Name: CoreTypes.Name
     }
 

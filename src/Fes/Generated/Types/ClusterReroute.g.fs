@@ -9,9 +9,9 @@ module ClusterReroute =
 
     type CommandCancelAction = {
         [<System.Text.Json.Serialization.JsonPropertyName("index")>]
-        Index: Types.IndexName
+        Index: CoreTypes.IndexName
         [<System.Text.Json.Serialization.JsonPropertyName("shard")>]
-        Shard: Types.Integer
+        Shard: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("node")>]
         Node: string
         [<System.Text.Json.Serialization.JsonPropertyName("allow_primary")>]
@@ -20,9 +20,9 @@ module ClusterReroute =
 
     type CommandMoveAction = {
         [<System.Text.Json.Serialization.JsonPropertyName("index")>]
-        Index: Types.IndexName
+        Index: CoreTypes.IndexName
         [<System.Text.Json.Serialization.JsonPropertyName("shard")>]
-        Shard: Types.Integer
+        Shard: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("from_node")>]
         FromNode: string
         [<System.Text.Json.Serialization.JsonPropertyName("to_node")>]
@@ -31,18 +31,18 @@ module ClusterReroute =
 
     type CommandAllocateReplicaAction = {
         [<System.Text.Json.Serialization.JsonPropertyName("index")>]
-        Index: Types.IndexName
+        Index: CoreTypes.IndexName
         [<System.Text.Json.Serialization.JsonPropertyName("shard")>]
-        Shard: Types.Integer
+        Shard: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("node")>]
         Node: string
     }
 
     type CommandAllocatePrimaryAction = {
         [<System.Text.Json.Serialization.JsonPropertyName("index")>]
-        Index: Types.IndexName
+        Index: CoreTypes.IndexName
         [<System.Text.Json.Serialization.JsonPropertyName("shard")>]
-        Shard: Types.Integer
+        Shard: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("node")>]
         Node: string
         [<System.Text.Json.Serialization.JsonPropertyName("accept_data_loss")>]
@@ -51,15 +51,15 @@ module ClusterReroute =
 
     type Command = {
         [<System.Text.Json.Serialization.JsonPropertyName("cancel")>]
-        Cancel: ClusterReroute.CommandCancelAction option
+        Cancel: CommandCancelAction option
         [<System.Text.Json.Serialization.JsonPropertyName("move")>]
-        Move: ClusterReroute.CommandMoveAction option
+        Move: CommandMoveAction option
         [<System.Text.Json.Serialization.JsonPropertyName("allocate_replica")>]
-        AllocateReplica: ClusterReroute.CommandAllocateReplicaAction option
+        AllocateReplica: CommandAllocateReplicaAction option
         [<System.Text.Json.Serialization.JsonPropertyName("allocate_stale_primary")>]
-        AllocateStalePrimary: ClusterReroute.CommandAllocatePrimaryAction option
+        AllocateStalePrimary: CommandAllocatePrimaryAction option
         [<System.Text.Json.Serialization.JsonPropertyName("allocate_empty_primary")>]
-        AllocateEmptyPrimary: ClusterReroute.CommandAllocatePrimaryAction option
+        AllocateEmptyPrimary: CommandAllocatePrimaryAction option
     }
 
     type RerouteDecision = {
@@ -75,23 +75,23 @@ module ClusterReroute =
         [<System.Text.Json.Serialization.JsonPropertyName("allow_primary")>]
         AllowPrimary: bool
         [<System.Text.Json.Serialization.JsonPropertyName("index")>]
-        Index: Types.IndexName
+        Index: CoreTypes.IndexName
         [<System.Text.Json.Serialization.JsonPropertyName("node")>]
-        Node: Types.NodeName
+        Node: CoreTypes.NodeName
         [<System.Text.Json.Serialization.JsonPropertyName("shard")>]
-        Shard: Types.Integer
+        Shard: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("from_node")>]
-        FromNode: Types.NodeName option
+        FromNode: CoreTypes.NodeName option
         [<System.Text.Json.Serialization.JsonPropertyName("to_node")>]
-        ToNode: Types.NodeName option
+        ToNode: CoreTypes.NodeName option
     }
 
     type RerouteExplanation = {
         [<System.Text.Json.Serialization.JsonPropertyName("command")>]
         Command: string
         [<System.Text.Json.Serialization.JsonPropertyName("decisions")>]
-        Decisions: ClusterReroute.RerouteDecision list
+        Decisions: RerouteDecision list
         [<System.Text.Json.Serialization.JsonPropertyName("parameters")>]
-        Parameters: ClusterReroute.RerouteParameters
+        Parameters: RerouteParameters
     }
 

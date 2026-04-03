@@ -18,11 +18,11 @@ module SearchApplicationTypesBuilders =
             }
 
         [<CustomOperation("indices")>]
-        member _.Indices(state: SearchApplicationParameters, value: Types.IndexName list) =
+        member _.Indices(state: SearchApplicationParameters, value: CoreTypes.IndexName list) =
             { state with Indices = value }
 
         [<CustomOperation("analyticsCollectionName")>]
-        member _.AnalyticsCollectionName(state: SearchApplicationParameters, value: Types.Name) =
+        member _.AnalyticsCollectionName(state: SearchApplicationParameters, value: CoreTypes.Name) =
             { state with AnalyticsCollectionName = Some value }
 
         [<CustomOperation("template")>]

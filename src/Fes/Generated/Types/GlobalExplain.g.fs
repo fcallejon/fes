@@ -11,17 +11,17 @@ module GlobalExplain =
         [<System.Text.Json.Serialization.JsonPropertyName("description")>]
         Description: string
         [<System.Text.Json.Serialization.JsonPropertyName("details")>]
-        Details: GlobalExplain.ExplanationDetail list option
+        Details: ExplanationDetail list option
         [<System.Text.Json.Serialization.JsonPropertyName("value")>]
-        Value: Types.Float
+        Value: CoreTypes.Float
     }
 
     type Explanation = {
         [<System.Text.Json.Serialization.JsonPropertyName("description")>]
         Description: string
         [<System.Text.Json.Serialization.JsonPropertyName("details")>]
-        Details: GlobalExplain.ExplanationDetail list
+        Details: ExplanationDetail list
         [<System.Text.Json.Serialization.JsonPropertyName("value")>]
-        Value: Types.Float
+        Value: CoreTypes.Float
     }
 

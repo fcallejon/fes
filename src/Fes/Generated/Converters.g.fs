@@ -1104,10 +1104,10 @@ module Converters =
             let result =
                 match propName with
                 | "text_embedding" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<Types.TextEmbedding>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.TextEmbedding>(ref reader, options)
                     Types.QueryVectorBuilder.TextEmbedding v
                 | "lookup" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<Types.LookupQueryVectorBuilder>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.LookupQueryVectorBuilder>(ref reader, options)
                     Types.QueryVectorBuilder.Lookup v
                 | other -> raise (System.Text.Json.JsonException($"Unknown property '{other}' for QueryVectorBuilder"))
             reader.Read() |> ignore // EndObject
@@ -1135,7 +1135,7 @@ module Converters =
             let result =
                 match propName with
                 | "rrf" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<Types.RrfRank>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.RrfRank>(ref reader, options)
                     Types.RankContainer.Rrf v
                 | other -> raise (System.Text.Json.JsonException($"Unknown property '{other}' for RankContainer"))
             reader.Read() |> ignore // EndObject
@@ -1229,31 +1229,31 @@ module Converters =
             let result =
                 match propName with
                 | "standard" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<Types.StandardRetriever>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.StandardRetriever>(ref reader, options)
                     Types.RetrieverContainer.Standard v
                 | "knn" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<Types.KnnRetriever>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.KnnRetriever>(ref reader, options)
                     Types.RetrieverContainer.Knn v
                 | "rrf" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<Types.RRFRetriever>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.RRFRetriever>(ref reader, options)
                     Types.RetrieverContainer.Rrf v
                 | "text_similarity_reranker" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<Types.TextSimilarityReranker>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.TextSimilarityReranker>(ref reader, options)
                     Types.RetrieverContainer.TextSimilarityReranker v
                 | "rule" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<Types.RuleRetriever>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.RuleRetriever>(ref reader, options)
                     Types.RetrieverContainer.Rule v
                 | "rescorer" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<Types.RescorerRetriever>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.RescorerRetriever>(ref reader, options)
                     Types.RetrieverContainer.Rescorer v
                 | "linear" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<Types.LinearRetriever>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.LinearRetriever>(ref reader, options)
                     Types.RetrieverContainer.Linear v
                 | "pinned" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<Types.PinnedRetriever>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.PinnedRetriever>(ref reader, options)
                     Types.RetrieverContainer.Pinned v
                 | "diversify" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<Types.DiversifyRetriever>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.DiversifyRetriever>(ref reader, options)
                     Types.RetrieverContainer.Diversify v
                 | other -> raise (System.Text.Json.JsonException($"Unknown property '{other}' for RetrieverContainer"))
             reader.Read() |> ignore // EndObject
@@ -1405,16 +1405,16 @@ module Converters =
             let result =
                 match propName with
                 | "_score" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<Types.ScoreSort>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.ScoreSort>(ref reader, options)
                     Types.SortOptions.Score v
                 | "_doc" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<Types.ScoreSort>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.ScoreSort>(ref reader, options)
                     Types.SortOptions.Doc v
                 | "_geo_distance" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<Types.GeoDistanceSort>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.GeoDistanceSort>(ref reader, options)
                     Types.SortOptions.GeoDistance v
                 | "_script" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<Types.ScriptSort>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.ScriptSort>(ref reader, options)
                     Types.SortOptions.Script v
                 | other -> raise (System.Text.Json.JsonException($"Unknown property '{other}' for SortOptions"))
             reader.Read() |> ignore // EndObject
@@ -1534,13 +1534,13 @@ module Converters =
             let result =
                 match propName with
                 | "chain" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<Types.TransformContainer list>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.TransformContainer list>(ref reader, options)
                     Types.TransformContainer.Chain v
                 | "script" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<Types.ScriptTransform>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.ScriptTransform>(ref reader, options)
                     Types.TransformContainer.Script v
                 | "search" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<Types.SearchTransform>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.SearchTransform>(ref reader, options)
                     Types.TransformContainer.Search v
                 | other -> raise (System.Text.Json.JsonException($"Unknown property '{other}' for TransformContainer"))
             reader.Read() |> ignore // EndObject
@@ -1872,247 +1872,247 @@ module Converters =
             let result =
                 match propName with
                 | "adjacency_matrix" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.AdjacencyMatrixAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.AdjacencyMatrixAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.AdjacencyMatrix v
                 | "auto_date_histogram" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.AutoDateHistogramAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.AutoDateHistogramAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.AutoDateHistogram v
                 | "avg" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.AverageAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.AverageAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.Avg v
                 | "avg_bucket" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.AverageBucketAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.AverageBucketAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.AvgBucket v
                 | "boxplot" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.BoxplotAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.BoxplotAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.Boxplot v
                 | "bucket_script" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.BucketScriptAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.BucketScriptAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.BucketScript v
                 | "bucket_selector" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.BucketSelectorAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.BucketSelectorAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.BucketSelector v
                 | "bucket_sort" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.BucketSortAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.BucketSortAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.BucketSort v
                 | "bucket_count_ks_test" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.BucketKsAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.BucketKsAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.BucketCountKsTest v
                 | "bucket_correlation" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.BucketCorrelationAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.BucketCorrelationAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.BucketCorrelation v
                 | "cardinality" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.CardinalityAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.CardinalityAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.Cardinality v
                 | "cartesian_bounds" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.CartesianBoundsAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.CartesianBoundsAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.CartesianBounds v
                 | "cartesian_centroid" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.CartesianCentroidAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.CartesianCentroidAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.CartesianCentroid v
                 | "categorize_text" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.CategorizeTextAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.CategorizeTextAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.CategorizeText v
                 | "change_point" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.ChangePointAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.ChangePointAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.ChangePoint v
                 | "children" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.ChildrenAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.ChildrenAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.Children v
                 | "composite" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.CompositeAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.CompositeAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.Composite v
                 | "cumulative_cardinality" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.CumulativeCardinalityAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.CumulativeCardinalityAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.CumulativeCardinality v
                 | "cumulative_sum" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.CumulativeSumAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.CumulativeSumAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.CumulativeSum v
                 | "date_histogram" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.DateHistogramAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.DateHistogramAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.DateHistogram v
                 | "date_range" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.DateRangeAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.DateRangeAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.DateRange v
                 | "derivative" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.DerivativeAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.DerivativeAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.Derivative v
                 | "diversified_sampler" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.DiversifiedSamplerAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.DiversifiedSamplerAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.DiversifiedSampler v
                 | "extended_stats" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.ExtendedStatsAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.ExtendedStatsAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.ExtendedStats v
                 | "extended_stats_bucket" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.ExtendedStatsBucketAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.ExtendedStatsBucketAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.ExtendedStatsBucket v
                 | "frequent_item_sets" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.FrequentItemSetsAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.FrequentItemSetsAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.FrequentItemSets v
                 | "filter" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.QueryContainer>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.QueryContainer>(ref reader, options)
                     TypesAggregations.AggregationContainer.Filter v
                 | "filters" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.FiltersAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.FiltersAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.Filters v
                 | "geo_bounds" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.GeoBoundsAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.GeoBoundsAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.GeoBounds v
                 | "geo_centroid" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.GeoCentroidAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.GeoCentroidAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.GeoCentroid v
                 | "geo_distance" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.GeoDistanceAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.GeoDistanceAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.GeoDistance v
                 | "geohash_grid" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.GeoHashGridAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.GeoHashGridAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.GeohashGrid v
                 | "geo_line" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.GeoLineAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.GeoLineAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.GeoLine v
                 | "geotile_grid" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.GeoTileGridAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.GeoTileGridAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.GeotileGrid v
                 | "geohex_grid" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.GeohexGridAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.GeohexGridAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.GeohexGrid v
                 | "global" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.GlobalAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.GlobalAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.Global v
                 | "histogram" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.HistogramAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.HistogramAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.Histogram v
                 | "ip_range" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.IpRangeAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.IpRangeAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.IpRange v
                 | "ip_prefix" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.IpPrefixAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.IpPrefixAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.IpPrefix v
                 | "inference" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.InferenceAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.InferenceAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.Inference v
                 | "line" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.GeoLineAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.GeoLineAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.Line v
                 | "matrix_stats" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.MatrixStatsAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.MatrixStatsAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.MatrixStats v
                 | "max" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.MaxAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.MaxAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.Max v
                 | "max_bucket" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.MaxBucketAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.MaxBucketAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.MaxBucket v
                 | "median_absolute_deviation" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.MedianAbsoluteDeviationAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.MedianAbsoluteDeviationAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.MedianAbsoluteDeviation v
                 | "min" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.MinAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.MinAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.Min v
                 | "min_bucket" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.MinBucketAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.MinBucketAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.MinBucket v
                 | "missing" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.MissingAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.MissingAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.Missing v
                 | "moving_avg" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.MovingAverageAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.MovingAverageAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.MovingAvg v
                 | "moving_percentiles" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.MovingPercentilesAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.MovingPercentilesAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.MovingPercentiles v
                 | "moving_fn" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.MovingFunctionAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.MovingFunctionAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.MovingFn v
                 | "multi_terms" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.MultiTermsAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.MultiTermsAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.MultiTerms v
                 | "nested" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.NestedAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.NestedAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.Nested v
                 | "normalize" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.NormalizeAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.NormalizeAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.Normalize v
                 | "parent" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.ParentAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.ParentAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.Parent v
                 | "percentile_ranks" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.PercentileRanksAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.PercentileRanksAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.PercentileRanks v
                 | "percentiles" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.PercentilesAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.PercentilesAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.Percentiles v
                 | "percentiles_bucket" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.PercentilesBucketAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.PercentilesBucketAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.PercentilesBucket v
                 | "range" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.RangeAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.RangeAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.Range v
                 | "rare_terms" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.RareTermsAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.RareTermsAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.RareTerms v
                 | "rate" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.RateAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.RateAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.Rate v
                 | "reverse_nested" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.ReverseNestedAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.ReverseNestedAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.ReverseNested v
                 | "random_sampler" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.RandomSamplerAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.RandomSamplerAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.RandomSampler v
                 | "sampler" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.SamplerAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.SamplerAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.Sampler v
                 | "scripted_metric" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.ScriptedMetricAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.ScriptedMetricAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.ScriptedMetric v
                 | "serial_diff" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.SerialDifferencingAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.SerialDifferencingAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.SerialDiff v
                 | "significant_terms" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.SignificantTermsAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.SignificantTermsAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.SignificantTerms v
                 | "significant_text" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.SignificantTextAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.SignificantTextAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.SignificantText v
                 | "stats" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.StatsAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.StatsAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.Stats v
                 | "stats_bucket" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.StatsBucketAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.StatsBucketAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.StatsBucket v
                 | "string_stats" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.StringStatsAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.StringStatsAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.StringStats v
                 | "sum" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.SumAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.SumAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.Sum v
                 | "sum_bucket" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.SumBucketAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.SumBucketAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.SumBucket v
                 | "terms" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.TermsAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.TermsAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.Terms v
                 | "time_series" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.TimeSeriesAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.TimeSeriesAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.TimeSeries v
                 | "top_hits" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.TopHitsAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.TopHitsAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.TopHits v
                 | "t_test" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.TTestAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.TTestAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.TTest v
                 | "top_metrics" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.TopMetricsAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.TopMetricsAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.TopMetrics v
                 | "value_count" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.ValueCountAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.ValueCountAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.ValueCount v
                 | "weighted_avg" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.WeightedAverageAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.WeightedAverageAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.WeightedAvg v
                 | "variable_width_histogram" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.VariableWidthHistogramAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.VariableWidthHistogramAggregation>(ref reader, options)
                     TypesAggregations.AggregationContainer.VariableWidthHistogram v
                 | other ->
                     let el = System.Text.Json.JsonElement.ParseValue(ref reader)
@@ -2215,28 +2215,28 @@ module Converters =
             let result =
                 match propName with
                 | "dip" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.Dip>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.Dip>(ref reader, options)
                     TypesAggregations.ChangeType.Dip v
                 | "distribution_change" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.DistributionChange>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.DistributionChange>(ref reader, options)
                     TypesAggregations.ChangeType.DistributionChange v
                 | "indeterminable" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.Indeterminable>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.Indeterminable>(ref reader, options)
                     TypesAggregations.ChangeType.Indeterminable v
                 | "non_stationary" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.NonStationary>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.NonStationary>(ref reader, options)
                     TypesAggregations.ChangeType.NonStationary v
                 | "spike" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.Spike>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.Spike>(ref reader, options)
                     TypesAggregations.ChangeType.Spike v
                 | "stationary" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.Stationary>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.Stationary>(ref reader, options)
                     TypesAggregations.ChangeType.Stationary v
                 | "step_change" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.StepChange>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.StepChange>(ref reader, options)
                     TypesAggregations.ChangeType.StepChange v
                 | "trend_change" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.TrendChange>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.TrendChange>(ref reader, options)
                     TypesAggregations.ChangeType.TrendChange v
                 | other -> raise (System.Text.Json.JsonException($"Unknown property '{other}' for ChangeType"))
             reader.Read() |> ignore // EndObject
@@ -2273,16 +2273,16 @@ module Converters =
             let result =
                 match propName with
                 | "terms" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.CompositeTermsAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.CompositeTermsAggregation>(ref reader, options)
                     TypesAggregations.CompositeAggregationSource.Terms v
                 | "histogram" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.CompositeHistogramAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.CompositeHistogramAggregation>(ref reader, options)
                     TypesAggregations.CompositeAggregationSource.Histogram v
                 | "date_histogram" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.CompositeDateHistogramAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.CompositeDateHistogramAggregation>(ref reader, options)
                     TypesAggregations.CompositeAggregationSource.DateHistogram v
                 | "geotile_grid" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.CompositeGeoTileGridAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.CompositeGeoTileGridAggregation>(ref reader, options)
                     TypesAggregations.CompositeAggregationSource.GeotileGrid v
                 | other -> raise (System.Text.Json.JsonException($"Unknown property '{other}' for CompositeAggregationSource"))
             reader.Read() |> ignore // EndObject
@@ -2426,19 +2426,19 @@ module Converters =
                 | _ -> ""
             match tagValue with
             | "linearmovingaverageaggregation" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.LinearMovingAverageAggregation>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.LinearMovingAverageAggregation>(doc.RootElement.GetRawText(), options)
                 TypesAggregations.MovingAverageAggregation.LinearMovingAverageAggregation v
             | "simplemovingaverageaggregation" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.SimpleMovingAverageAggregation>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.SimpleMovingAverageAggregation>(doc.RootElement.GetRawText(), options)
                 TypesAggregations.MovingAverageAggregation.SimpleMovingAverageAggregation v
             | "ewmamovingaverageaggregation" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.EwmaMovingAverageAggregation>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.EwmaMovingAverageAggregation>(doc.RootElement.GetRawText(), options)
                 TypesAggregations.MovingAverageAggregation.EwmaMovingAverageAggregation v
             | "holtmovingaverageaggregation" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.HoltMovingAverageAggregation>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.HoltMovingAverageAggregation>(doc.RootElement.GetRawText(), options)
                 TypesAggregations.MovingAverageAggregation.HoltMovingAverageAggregation v
             | "holtwintersmovingaverageaggregation" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.HoltWintersMovingAverageAggregation>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.HoltWintersMovingAverageAggregation>(doc.RootElement.GetRawText(), options)
                 TypesAggregations.MovingAverageAggregation.HoltWintersMovingAverageAggregation v
             | other -> raise (System.Text.Json.JsonException($"Unknown tag value '{other}' for MovingAverageAggregation"))
 
@@ -2467,10 +2467,10 @@ module Converters =
             let result =
                 match propName with
                 | "field" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<Types.Field>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.Field>(ref reader, options)
                     TypesAggregations.MultiTermLookup.Field v
                 | "script" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<Types.Script>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.Script>(ref reader, options)
                     TypesAggregations.MultiTermLookup.Script v
                 | other -> raise (System.Text.Json.JsonException($"Unknown property '{other}' for MultiTermLookup"))
             reader.Read() |> ignore // EndObject
@@ -2757,151 +2757,151 @@ module Converters =
                 | _ -> ""
             match tagValue with
             | "customanalyzer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.CustomAnalyzer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.CustomAnalyzer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.Analyzer.CustomAnalyzer v
             | "fingerprintanalyzer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.FingerprintAnalyzer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.FingerprintAnalyzer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.Analyzer.FingerprintAnalyzer v
             | "keywordanalyzer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.KeywordAnalyzer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.KeywordAnalyzer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.Analyzer.KeywordAnalyzer v
             | "norianalyzer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.NoriAnalyzer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.NoriAnalyzer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.Analyzer.NoriAnalyzer v
             | "patternanalyzer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.PatternAnalyzer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.PatternAnalyzer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.Analyzer.PatternAnalyzer v
             | "simpleanalyzer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.SimpleAnalyzer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.SimpleAnalyzer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.Analyzer.SimpleAnalyzer v
             | "standardanalyzer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.StandardAnalyzer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.StandardAnalyzer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.Analyzer.StandardAnalyzer v
             | "stopanalyzer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.StopAnalyzer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.StopAnalyzer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.Analyzer.StopAnalyzer v
             | "whitespaceanalyzer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.WhitespaceAnalyzer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.WhitespaceAnalyzer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.Analyzer.WhitespaceAnalyzer v
             | "icuanalyzer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.IcuAnalyzer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.IcuAnalyzer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.Analyzer.IcuAnalyzer v
             | "kuromojianalyzer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.KuromojiAnalyzer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.KuromojiAnalyzer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.Analyzer.KuromojiAnalyzer v
             | "snowballanalyzer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.SnowballAnalyzer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.SnowballAnalyzer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.Analyzer.SnowballAnalyzer v
             | "arabicanalyzer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.ArabicAnalyzer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.ArabicAnalyzer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.Analyzer.ArabicAnalyzer v
             | "armeniananalyzer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.ArmenianAnalyzer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.ArmenianAnalyzer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.Analyzer.ArmenianAnalyzer v
             | "basqueanalyzer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.BasqueAnalyzer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.BasqueAnalyzer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.Analyzer.BasqueAnalyzer v
             | "bengalianalyzer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.BengaliAnalyzer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.BengaliAnalyzer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.Analyzer.BengaliAnalyzer v
             | "braziliananalyzer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.BrazilianAnalyzer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.BrazilianAnalyzer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.Analyzer.BrazilianAnalyzer v
             | "bulgariananalyzer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.BulgarianAnalyzer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.BulgarianAnalyzer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.Analyzer.BulgarianAnalyzer v
             | "catalananalyzer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.CatalanAnalyzer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.CatalanAnalyzer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.Analyzer.CatalanAnalyzer v
             | "chineseanalyzer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.ChineseAnalyzer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.ChineseAnalyzer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.Analyzer.ChineseAnalyzer v
             | "cjkanalyzer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.CjkAnalyzer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.CjkAnalyzer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.Analyzer.CjkAnalyzer v
             | "czechanalyzer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.CzechAnalyzer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.CzechAnalyzer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.Analyzer.CzechAnalyzer v
             | "danishanalyzer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.DanishAnalyzer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.DanishAnalyzer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.Analyzer.DanishAnalyzer v
             | "dutchanalyzer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.DutchAnalyzer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.DutchAnalyzer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.Analyzer.DutchAnalyzer v
             | "englishanalyzer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.EnglishAnalyzer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.EnglishAnalyzer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.Analyzer.EnglishAnalyzer v
             | "estoniananalyzer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.EstonianAnalyzer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.EstonianAnalyzer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.Analyzer.EstonianAnalyzer v
             | "finnishanalyzer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.FinnishAnalyzer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.FinnishAnalyzer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.Analyzer.FinnishAnalyzer v
             | "frenchanalyzer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.FrenchAnalyzer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.FrenchAnalyzer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.Analyzer.FrenchAnalyzer v
             | "galiciananalyzer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.GalicianAnalyzer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.GalicianAnalyzer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.Analyzer.GalicianAnalyzer v
             | "germananalyzer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.GermanAnalyzer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.GermanAnalyzer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.Analyzer.GermanAnalyzer v
             | "greekanalyzer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.GreekAnalyzer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.GreekAnalyzer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.Analyzer.GreekAnalyzer v
             | "hindianalyzer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.HindiAnalyzer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.HindiAnalyzer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.Analyzer.HindiAnalyzer v
             | "hungariananalyzer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.HungarianAnalyzer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.HungarianAnalyzer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.Analyzer.HungarianAnalyzer v
             | "indonesiananalyzer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.IndonesianAnalyzer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.IndonesianAnalyzer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.Analyzer.IndonesianAnalyzer v
             | "irishanalyzer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.IrishAnalyzer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.IrishAnalyzer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.Analyzer.IrishAnalyzer v
             | "italiananalyzer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.ItalianAnalyzer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.ItalianAnalyzer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.Analyzer.ItalianAnalyzer v
             | "latviananalyzer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.LatvianAnalyzer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.LatvianAnalyzer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.Analyzer.LatvianAnalyzer v
             | "lithuaniananalyzer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.LithuanianAnalyzer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.LithuanianAnalyzer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.Analyzer.LithuanianAnalyzer v
             | "norwegiananalyzer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.NorwegianAnalyzer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.NorwegianAnalyzer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.Analyzer.NorwegianAnalyzer v
             | "persiananalyzer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.PersianAnalyzer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.PersianAnalyzer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.Analyzer.PersianAnalyzer v
             | "portugueseanalyzer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.PortugueseAnalyzer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.PortugueseAnalyzer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.Analyzer.PortugueseAnalyzer v
             | "romaniananalyzer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.RomanianAnalyzer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.RomanianAnalyzer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.Analyzer.RomanianAnalyzer v
             | "russiananalyzer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.RussianAnalyzer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.RussianAnalyzer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.Analyzer.RussianAnalyzer v
             | "serbiananalyzer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.SerbianAnalyzer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.SerbianAnalyzer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.Analyzer.SerbianAnalyzer v
             | "soranianalyzer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.SoraniAnalyzer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.SoraniAnalyzer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.Analyzer.SoraniAnalyzer v
             | "spanishanalyzer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.SpanishAnalyzer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.SpanishAnalyzer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.Analyzer.SpanishAnalyzer v
             | "swedishanalyzer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.SwedishAnalyzer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.SwedishAnalyzer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.Analyzer.SwedishAnalyzer v
             | "turkishanalyzer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.TurkishAnalyzer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.TurkishAnalyzer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.Analyzer.TurkishAnalyzer v
             | "thaianalyzer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.ThaiAnalyzer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.ThaiAnalyzer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.Analyzer.ThaiAnalyzer v
             | _ -> TypesAnalysis.Analyzer.Unknown (tagValue, doc.RootElement.Clone())
 
@@ -2930,19 +2930,19 @@ module Converters =
                 | _ -> ""
             match tagValue with
             | "htmlstripcharfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.HtmlStripCharFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.HtmlStripCharFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.CharFilterDefinition.HtmlStripCharFilter v
             | "mappingcharfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.MappingCharFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.MappingCharFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.CharFilterDefinition.MappingCharFilter v
             | "patternreplacecharfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.PatternReplaceCharFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.PatternReplaceCharFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.CharFilterDefinition.PatternReplaceCharFilter v
             | "icunormalizationcharfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.IcuNormalizationCharFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.IcuNormalizationCharFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.CharFilterDefinition.IcuNormalizationCharFilter v
             | "kuromojiiterationmarkcharfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.KuromojiIterationMarkCharFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.KuromojiIterationMarkCharFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.CharFilterDefinition.KuromojiIterationMarkCharFilter v
             | _ -> TypesAnalysis.CharFilterDefinition.Unknown (tagValue, doc.RootElement.Clone())
 
@@ -3222,10 +3222,10 @@ module Converters =
                 | _ -> ""
             match tagValue with
             | "lowercasenormalizer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.LowercaseNormalizer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.LowercaseNormalizer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.Normalizer.LowercaseNormalizer v
             | "customnormalizer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.CustomNormalizer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.CustomNormalizer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.Normalizer.CustomNormalizer v
             | other -> raise (System.Text.Json.JsonException($"Unknown tag value '{other}' for Normalizer"))
 
@@ -3698,226 +3698,226 @@ module Converters =
                 | _ -> ""
             match tagValue with
             | "apostrophetokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.ApostropheTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.ApostropheTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.ApostropheTokenFilter v
             | "arabicstemtokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.ArabicStemTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.ArabicStemTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.ArabicStemTokenFilter v
             | "arabicnormalizationtokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.ArabicNormalizationTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.ArabicNormalizationTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.ArabicNormalizationTokenFilter v
             | "asciifoldingtokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.AsciiFoldingTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.AsciiFoldingTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.AsciiFoldingTokenFilter v
             | "bengalinormalizationtokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.BengaliNormalizationTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.BengaliNormalizationTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.BengaliNormalizationTokenFilter v
             | "brazilianstemtokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.BrazilianStemTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.BrazilianStemTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.BrazilianStemTokenFilter v
             | "cjkbigramtokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.CjkBigramTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.CjkBigramTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.CjkBigramTokenFilter v
             | "cjkwidthtokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.CjkWidthTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.CjkWidthTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.CjkWidthTokenFilter v
             | "classictokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.ClassicTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.ClassicTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.ClassicTokenFilter v
             | "commongramstokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.CommonGramsTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.CommonGramsTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.CommonGramsTokenFilter v
             | "conditiontokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.ConditionTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.ConditionTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.ConditionTokenFilter v
             | "czechstemtokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.CzechStemTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.CzechStemTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.CzechStemTokenFilter v
             | "decimaldigittokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.DecimalDigitTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.DecimalDigitTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.DecimalDigitTokenFilter v
             | "delimitedpayloadtokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.DelimitedPayloadTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.DelimitedPayloadTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.DelimitedPayloadTokenFilter v
             | "dutchstemtokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.DutchStemTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.DutchStemTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.DutchStemTokenFilter v
             | "edgengramtokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.EdgeNGramTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.EdgeNGramTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.EdgeNGramTokenFilter v
             | "elisiontokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.ElisionTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.ElisionTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.ElisionTokenFilter v
             | "fingerprinttokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.FingerprintTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.FingerprintTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.FingerprintTokenFilter v
             | "flattengraphtokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.FlattenGraphTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.FlattenGraphTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.FlattenGraphTokenFilter v
             | "frenchstemtokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.FrenchStemTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.FrenchStemTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.FrenchStemTokenFilter v
             | "germannormalizationtokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.GermanNormalizationTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.GermanNormalizationTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.GermanNormalizationTokenFilter v
             | "germanstemtokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.GermanStemTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.GermanStemTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.GermanStemTokenFilter v
             | "hindinormalizationtokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.HindiNormalizationTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.HindiNormalizationTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.HindiNormalizationTokenFilter v
             | "hunspelltokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.HunspellTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.HunspellTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.HunspellTokenFilter v
             | "hyphenationdecompoundertokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.HyphenationDecompounderTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.HyphenationDecompounderTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.HyphenationDecompounderTokenFilter v
             | "indicnormalizationtokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.IndicNormalizationTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.IndicNormalizationTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.IndicNormalizationTokenFilter v
             | "keeptypestokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.KeepTypesTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.KeepTypesTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.KeepTypesTokenFilter v
             | "keepwordstokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.KeepWordsTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.KeepWordsTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.KeepWordsTokenFilter v
             | "keywordmarkertokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.KeywordMarkerTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.KeywordMarkerTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.KeywordMarkerTokenFilter v
             | "keywordrepeattokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.KeywordRepeatTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.KeywordRepeatTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.KeywordRepeatTokenFilter v
             | "kstemtokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.KStemTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.KStemTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.KStemTokenFilter v
             | "lengthtokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.LengthTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.LengthTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.LengthTokenFilter v
             | "limittokencounttokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.LimitTokenCountTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.LimitTokenCountTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.LimitTokenCountTokenFilter v
             | "lowercasetokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.LowercaseTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.LowercaseTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.LowercaseTokenFilter v
             | "minhashtokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.MinHashTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.MinHashTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.MinHashTokenFilter v
             | "multiplexertokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.MultiplexerTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.MultiplexerTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.MultiplexerTokenFilter v
             | "ngramtokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.NGramTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.NGramTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.NGramTokenFilter v
             | "noripartofspeechtokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.NoriPartOfSpeechTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.NoriPartOfSpeechTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.NoriPartOfSpeechTokenFilter v
             | "patterncapturetokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.PatternCaptureTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.PatternCaptureTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.PatternCaptureTokenFilter v
             | "patternreplacetokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.PatternReplaceTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.PatternReplaceTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.PatternReplaceTokenFilter v
             | "persiannormalizationtokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.PersianNormalizationTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.PersianNormalizationTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.PersianNormalizationTokenFilter v
             | "persianstemtokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.PersianStemTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.PersianStemTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.PersianStemTokenFilter v
             | "porterstemtokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.PorterStemTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.PorterStemTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.PorterStemTokenFilter v
             | "predicatetokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.PredicateTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.PredicateTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.PredicateTokenFilter v
             | "removeduplicatestokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.RemoveDuplicatesTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.RemoveDuplicatesTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.RemoveDuplicatesTokenFilter v
             | "reversetokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.ReverseTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.ReverseTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.ReverseTokenFilter v
             | "russianstemtokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.RussianStemTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.RussianStemTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.RussianStemTokenFilter v
             | "scandinavianfoldingtokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.ScandinavianFoldingTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.ScandinavianFoldingTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.ScandinavianFoldingTokenFilter v
             | "scandinaviannormalizationtokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.ScandinavianNormalizationTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.ScandinavianNormalizationTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.ScandinavianNormalizationTokenFilter v
             | "serbiannormalizationtokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.SerbianNormalizationTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.SerbianNormalizationTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.SerbianNormalizationTokenFilter v
             | "shingletokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.ShingleTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.ShingleTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.ShingleTokenFilter v
             | "snowballtokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.SnowballTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.SnowballTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.SnowballTokenFilter v
             | "soraninormalizationtokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.SoraniNormalizationTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.SoraniNormalizationTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.SoraniNormalizationTokenFilter v
             | "stemmeroverridetokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.StemmerOverrideTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.StemmerOverrideTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.StemmerOverrideTokenFilter v
             | "stemmertokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.StemmerTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.StemmerTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.StemmerTokenFilter v
             | "stoptokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.StopTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.StopTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.StopTokenFilter v
             | "synonymgraphtokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.SynonymGraphTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.SynonymGraphTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.SynonymGraphTokenFilter v
             | "synonymtokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.SynonymTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.SynonymTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.SynonymTokenFilter v
             | "trimtokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.TrimTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.TrimTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.TrimTokenFilter v
             | "truncatetokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.TruncateTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.TruncateTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.TruncateTokenFilter v
             | "uniquetokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.UniqueTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.UniqueTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.UniqueTokenFilter v
             | "uppercasetokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.UppercaseTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.UppercaseTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.UppercaseTokenFilter v
             | "worddelimitergraphtokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.WordDelimiterGraphTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.WordDelimiterGraphTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.WordDelimiterGraphTokenFilter v
             | "worddelimitertokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.WordDelimiterTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.WordDelimiterTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.WordDelimiterTokenFilter v
             | "jastoptokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.JaStopTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.JaStopTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.JaStopTokenFilter v
             | "kuromojistemmertokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.KuromojiStemmerTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.KuromojiStemmerTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.KuromojiStemmerTokenFilter v
             | "kuromojireadingformtokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.KuromojiReadingFormTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.KuromojiReadingFormTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.KuromojiReadingFormTokenFilter v
             | "kuromojipartofspeechtokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.KuromojiPartOfSpeechTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.KuromojiPartOfSpeechTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.KuromojiPartOfSpeechTokenFilter v
             | "icucollationtokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.IcuCollationTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.IcuCollationTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.IcuCollationTokenFilter v
             | "icufoldingtokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.IcuFoldingTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.IcuFoldingTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.IcuFoldingTokenFilter v
             | "icunormalizationtokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.IcuNormalizationTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.IcuNormalizationTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.IcuNormalizationTokenFilter v
             | "icutransformtokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.IcuTransformTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.IcuTransformTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.IcuTransformTokenFilter v
             | "phonetictokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.PhoneticTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.PhoneticTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.PhoneticTokenFilter v
             | "dictionarydecompoundertokenfilter" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.DictionaryDecompounderTokenFilter>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.DictionaryDecompounderTokenFilter>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenFilterDefinition.DictionaryDecompounderTokenFilter v
             | _ -> TypesAnalysis.TokenFilterDefinition.Unknown (tagValue, doc.RootElement.Clone())
 
@@ -3972,58 +3972,58 @@ module Converters =
                 | _ -> ""
             match tagValue with
             | "chargrouptokenizer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.CharGroupTokenizer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.CharGroupTokenizer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenizerDefinition.CharGroupTokenizer v
             | "classictokenizer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.ClassicTokenizer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.ClassicTokenizer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenizerDefinition.ClassicTokenizer v
             | "edgengramtokenizer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.EdgeNGramTokenizer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.EdgeNGramTokenizer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenizerDefinition.EdgeNGramTokenizer v
             | "keywordtokenizer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.KeywordTokenizer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.KeywordTokenizer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenizerDefinition.KeywordTokenizer v
             | "lettertokenizer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.LetterTokenizer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.LetterTokenizer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenizerDefinition.LetterTokenizer v
             | "lowercasetokenizer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.LowercaseTokenizer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.LowercaseTokenizer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenizerDefinition.LowercaseTokenizer v
             | "ngramtokenizer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.NGramTokenizer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.NGramTokenizer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenizerDefinition.NGramTokenizer v
             | "pathhierarchytokenizer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.PathHierarchyTokenizer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.PathHierarchyTokenizer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenizerDefinition.PathHierarchyTokenizer v
             | "patterntokenizer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.PatternTokenizer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.PatternTokenizer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenizerDefinition.PatternTokenizer v
             | "simplepatterntokenizer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.SimplePatternTokenizer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.SimplePatternTokenizer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenizerDefinition.SimplePatternTokenizer v
             | "simplepatternsplittokenizer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.SimplePatternSplitTokenizer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.SimplePatternSplitTokenizer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenizerDefinition.SimplePatternSplitTokenizer v
             | "standardtokenizer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.StandardTokenizer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.StandardTokenizer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenizerDefinition.StandardTokenizer v
             | "thaitokenizer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.ThaiTokenizer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.ThaiTokenizer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenizerDefinition.ThaiTokenizer v
             | "uaxemailurltokenizer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.UaxEmailUrlTokenizer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.UaxEmailUrlTokenizer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenizerDefinition.UaxEmailUrlTokenizer v
             | "whitespacetokenizer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.WhitespaceTokenizer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.WhitespaceTokenizer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenizerDefinition.WhitespaceTokenizer v
             | "icutokenizer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.IcuTokenizer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.IcuTokenizer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenizerDefinition.IcuTokenizer v
             | "kuromojitokenizer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.KuromojiTokenizer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.KuromojiTokenizer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenizerDefinition.KuromojiTokenizer v
             | "noritokenizer" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesAnalysis.NoriTokenizer>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.NoriTokenizer>(doc.RootElement.GetRawText(), options)
                 TypesAnalysis.TokenizerDefinition.NoriTokenizer v
             | _ -> TypesAnalysis.TokenizerDefinition.Unknown (tagValue, doc.RootElement.Clone())
 
@@ -4146,10 +4146,10 @@ module Converters =
             let result =
                 match propName with
                 | "mapping" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.Property>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.Property>(ref reader, options)
                     TypesMapping.DynamicTemplate.Mapping v
                 | "runtime" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.RuntimeField>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.RuntimeField>(ref reader, options)
                     TypesMapping.DynamicTemplate.Runtime v
                 | other -> raise (System.Text.Json.JsonException($"Unknown property '{other}' for DynamicTemplate"))
             reader.Read() |> ignore // EndObject
@@ -4493,163 +4493,163 @@ module Converters =
                 | _ -> ""
             match tagValue with
             | "binary" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.BinaryProperty>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.BinaryProperty>(doc.RootElement.GetRawText(), options)
                 TypesMapping.Property.BinaryProperty v
             | "boolean" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.BooleanProperty>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.BooleanProperty>(doc.RootElement.GetRawText(), options)
                 TypesMapping.Property.BooleanProperty v
             | "dynamic" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.DynamicProperty>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.DynamicProperty>(doc.RootElement.GetRawText(), options)
                 TypesMapping.Property.DynamicProperty v
             | "join" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.JoinProperty>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.JoinProperty>(doc.RootElement.GetRawText(), options)
                 TypesMapping.Property.JoinProperty v
             | "keyword" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.KeywordProperty>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.KeywordProperty>(doc.RootElement.GetRawText(), options)
                 TypesMapping.Property.KeywordProperty v
             | "matchonlytext" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.MatchOnlyTextProperty>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.MatchOnlyTextProperty>(doc.RootElement.GetRawText(), options)
                 TypesMapping.Property.MatchOnlyTextProperty v
             | "percolator" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.PercolatorProperty>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.PercolatorProperty>(doc.RootElement.GetRawText(), options)
                 TypesMapping.Property.PercolatorProperty v
             | "rankfeature" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.RankFeatureProperty>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.RankFeatureProperty>(doc.RootElement.GetRawText(), options)
                 TypesMapping.Property.RankFeatureProperty v
             | "rankfeatures" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.RankFeaturesProperty>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.RankFeaturesProperty>(doc.RootElement.GetRawText(), options)
                 TypesMapping.Property.RankFeaturesProperty v
             | "searchasyoutype" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.SearchAsYouTypeProperty>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.SearchAsYouTypeProperty>(doc.RootElement.GetRawText(), options)
                 TypesMapping.Property.SearchAsYouTypeProperty v
             | "text" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.TextProperty>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.TextProperty>(doc.RootElement.GetRawText(), options)
                 TypesMapping.Property.TextProperty v
             | "version" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.VersionProperty>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.VersionProperty>(doc.RootElement.GetRawText(), options)
                 TypesMapping.Property.VersionProperty v
             | "wildcard" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.WildcardProperty>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.WildcardProperty>(doc.RootElement.GetRawText(), options)
                 TypesMapping.Property.WildcardProperty v
             | "datenanos" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.DateNanosProperty>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.DateNanosProperty>(doc.RootElement.GetRawText(), options)
                 TypesMapping.Property.DateNanosProperty v
             | "date" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.DateProperty>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.DateProperty>(doc.RootElement.GetRawText(), options)
                 TypesMapping.Property.DateProperty v
             | "aggregatemetricdouble" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.AggregateMetricDoubleProperty>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.AggregateMetricDoubleProperty>(doc.RootElement.GetRawText(), options)
                 TypesMapping.Property.AggregateMetricDoubleProperty v
             | "densevector" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.DenseVectorProperty>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.DenseVectorProperty>(doc.RootElement.GetRawText(), options)
                 TypesMapping.Property.DenseVectorProperty v
             | "flattened" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.FlattenedProperty>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.FlattenedProperty>(doc.RootElement.GetRawText(), options)
                 TypesMapping.Property.FlattenedProperty v
             | "nested" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.NestedProperty>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.NestedProperty>(doc.RootElement.GetRawText(), options)
                 TypesMapping.Property.NestedProperty v
             | "object" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.ObjectProperty>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.ObjectProperty>(doc.RootElement.GetRawText(), options)
                 TypesMapping.Property.ObjectProperty v
             | "passthroughobject" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.PassthroughObjectProperty>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.PassthroughObjectProperty>(doc.RootElement.GetRawText(), options)
                 TypesMapping.Property.PassthroughObjectProperty v
             | "rankvector" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.RankVectorProperty>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.RankVectorProperty>(doc.RootElement.GetRawText(), options)
                 TypesMapping.Property.RankVectorProperty v
             | "semantictext" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.SemanticTextProperty>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.SemanticTextProperty>(doc.RootElement.GetRawText(), options)
                 TypesMapping.Property.SemanticTextProperty v
             | "sparsevector" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.SparseVectorProperty>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.SparseVectorProperty>(doc.RootElement.GetRawText(), options)
                 TypesMapping.Property.SparseVectorProperty v
             | "completion" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.CompletionProperty>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.CompletionProperty>(doc.RootElement.GetRawText(), options)
                 TypesMapping.Property.CompletionProperty v
             | "constantkeyword" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.ConstantKeywordProperty>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.ConstantKeywordProperty>(doc.RootElement.GetRawText(), options)
                 TypesMapping.Property.ConstantKeywordProperty v
             | "countedkeyword" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.CountedKeywordProperty>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.CountedKeywordProperty>(doc.RootElement.GetRawText(), options)
                 TypesMapping.Property.CountedKeywordProperty v
             | "fieldalias" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.FieldAliasProperty>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.FieldAliasProperty>(doc.RootElement.GetRawText(), options)
                 TypesMapping.Property.FieldAliasProperty v
             | "histogram" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.HistogramProperty>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.HistogramProperty>(doc.RootElement.GetRawText(), options)
                 TypesMapping.Property.HistogramProperty v
             | "exponentialhistogram" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.ExponentialHistogramProperty>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.ExponentialHistogramProperty>(doc.RootElement.GetRawText(), options)
                 TypesMapping.Property.ExponentialHistogramProperty v
             | "ip" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.IpProperty>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.IpProperty>(doc.RootElement.GetRawText(), options)
                 TypesMapping.Property.IpProperty v
             | "murmur3hash" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.Murmur3HashProperty>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.Murmur3HashProperty>(doc.RootElement.GetRawText(), options)
                 TypesMapping.Property.Murmur3HashProperty v
             | "tokencount" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.TokenCountProperty>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.TokenCountProperty>(doc.RootElement.GetRawText(), options)
                 TypesMapping.Property.TokenCountProperty v
             | "geopoint" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.GeoPointProperty>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.GeoPointProperty>(doc.RootElement.GetRawText(), options)
                 TypesMapping.Property.GeoPointProperty v
             | "geoshape" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.GeoShapeProperty>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.GeoShapeProperty>(doc.RootElement.GetRawText(), options)
                 TypesMapping.Property.GeoShapeProperty v
             | "point" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.PointProperty>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.PointProperty>(doc.RootElement.GetRawText(), options)
                 TypesMapping.Property.PointProperty v
             | "shape" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.ShapeProperty>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.ShapeProperty>(doc.RootElement.GetRawText(), options)
                 TypesMapping.Property.ShapeProperty v
             | "bytenumber" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.ByteNumberProperty>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.ByteNumberProperty>(doc.RootElement.GetRawText(), options)
                 TypesMapping.Property.ByteNumberProperty v
             | "doublenumber" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.DoubleNumberProperty>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.DoubleNumberProperty>(doc.RootElement.GetRawText(), options)
                 TypesMapping.Property.DoubleNumberProperty v
             | "floatnumber" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.FloatNumberProperty>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.FloatNumberProperty>(doc.RootElement.GetRawText(), options)
                 TypesMapping.Property.FloatNumberProperty v
             | "halffloatnumber" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.HalfFloatNumberProperty>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.HalfFloatNumberProperty>(doc.RootElement.GetRawText(), options)
                 TypesMapping.Property.HalfFloatNumberProperty v
             | "integernumber" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.IntegerNumberProperty>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.IntegerNumberProperty>(doc.RootElement.GetRawText(), options)
                 TypesMapping.Property.IntegerNumberProperty v
             | "longnumber" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.LongNumberProperty>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.LongNumberProperty>(doc.RootElement.GetRawText(), options)
                 TypesMapping.Property.LongNumberProperty v
             | "scaledfloatnumber" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.ScaledFloatNumberProperty>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.ScaledFloatNumberProperty>(doc.RootElement.GetRawText(), options)
                 TypesMapping.Property.ScaledFloatNumberProperty v
             | "shortnumber" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.ShortNumberProperty>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.ShortNumberProperty>(doc.RootElement.GetRawText(), options)
                 TypesMapping.Property.ShortNumberProperty v
             | "unsignedlongnumber" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.UnsignedLongNumberProperty>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.UnsignedLongNumberProperty>(doc.RootElement.GetRawText(), options)
                 TypesMapping.Property.UnsignedLongNumberProperty v
             | "daterange" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.DateRangeProperty>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.DateRangeProperty>(doc.RootElement.GetRawText(), options)
                 TypesMapping.Property.DateRangeProperty v
             | "doublerange" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.DoubleRangeProperty>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.DoubleRangeProperty>(doc.RootElement.GetRawText(), options)
                 TypesMapping.Property.DoubleRangeProperty v
             | "floatrange" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.FloatRangeProperty>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.FloatRangeProperty>(doc.RootElement.GetRawText(), options)
                 TypesMapping.Property.FloatRangeProperty v
             | "integerrange" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.IntegerRangeProperty>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.IntegerRangeProperty>(doc.RootElement.GetRawText(), options)
                 TypesMapping.Property.IntegerRangeProperty v
             | "iprange" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.IpRangeProperty>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.IpRangeProperty>(doc.RootElement.GetRawText(), options)
                 TypesMapping.Property.IpRangeProperty v
             | "longrange" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.LongRangeProperty>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.LongRangeProperty>(doc.RootElement.GetRawText(), options)
                 TypesMapping.Property.LongRangeProperty v
             | "icucollation" ->
-                let v = System.Text.Json.JsonSerializer.Deserialize<TypesMapping.IcuCollationProperty>(doc.RootElement.GetRawText(), options)
+                let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.IcuCollationProperty>(doc.RootElement.GetRawText(), options)
                 TypesMapping.Property.IcuCollationProperty v
             | _ -> TypesMapping.Property.Unknown (tagValue, doc.RootElement.Clone())
 
@@ -4964,22 +4964,22 @@ module Converters =
             let result =
                 match propName with
                 | "exp" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.DecayFunction>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.DecayFunction>(ref reader, options)
                     TypesQueryDsl.FunctionScoreContainer.Exp v
                 | "gauss" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.DecayFunction>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.DecayFunction>(ref reader, options)
                     TypesQueryDsl.FunctionScoreContainer.Gauss v
                 | "linear" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.DecayFunction>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.DecayFunction>(ref reader, options)
                     TypesQueryDsl.FunctionScoreContainer.Linear v
                 | "field_value_factor" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.FieldValueFactorScoreFunction>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.FieldValueFactorScoreFunction>(ref reader, options)
                     TypesQueryDsl.FunctionScoreContainer.FieldValueFactor v
                 | "random_score" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.RandomScoreFunction>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.RandomScoreFunction>(ref reader, options)
                     TypesQueryDsl.FunctionScoreContainer.RandomScore v
                 | "script_score" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.ScriptScoreFunction>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.ScriptScoreFunction>(ref reader, options)
                     TypesQueryDsl.FunctionScoreContainer.ScriptScore v
                 | other -> raise (System.Text.Json.JsonException($"Unknown property '{other}' for FunctionScoreContainer"))
             reader.Read() |> ignore // EndObject
@@ -5055,13 +5055,13 @@ module Converters =
             let result =
                 match propName with
                 | "geotile" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<Types.GeoTile>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.GeoTile>(ref reader, options)
                     TypesQueryDsl.GeoGridQuery.Geotile v
                 | "geohash" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<Types.GeoHash>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.GeoHash>(ref reader, options)
                     TypesQueryDsl.GeoGridQuery.Geohash v
                 | "geohex" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<Types.GeoHexCell>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.GeoHexCell>(ref reader, options)
                     TypesQueryDsl.GeoGridQuery.Geohex v
                 | other -> raise (System.Text.Json.JsonException($"Unknown property '{other}' for GeoGridQuery"))
             reader.Read() |> ignore // EndObject
@@ -5129,28 +5129,28 @@ module Converters =
             let result =
                 match propName with
                 | "all_of" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.IntervalsAllOf>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.IntervalsAllOf>(ref reader, options)
                     TypesQueryDsl.IntervalsContainer.AllOf v
                 | "any_of" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.IntervalsAnyOf>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.IntervalsAnyOf>(ref reader, options)
                     TypesQueryDsl.IntervalsContainer.AnyOf v
                 | "fuzzy" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.IntervalsFuzzy>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.IntervalsFuzzy>(ref reader, options)
                     TypesQueryDsl.IntervalsContainer.Fuzzy v
                 | "match" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.IntervalsMatch>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.IntervalsMatch>(ref reader, options)
                     TypesQueryDsl.IntervalsContainer.Match v
                 | "prefix" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.IntervalsPrefix>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.IntervalsPrefix>(ref reader, options)
                     TypesQueryDsl.IntervalsContainer.Prefix v
                 | "range" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.IntervalsRange>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.IntervalsRange>(ref reader, options)
                     TypesQueryDsl.IntervalsContainer.Range v
                 | "regexp" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.IntervalsRegexp>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.IntervalsRegexp>(ref reader, options)
                     TypesQueryDsl.IntervalsContainer.Regexp v
                 | "wildcard" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.IntervalsWildcard>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.IntervalsWildcard>(ref reader, options)
                     TypesQueryDsl.IntervalsContainer.Wildcard v
                 | other -> raise (System.Text.Json.JsonException($"Unknown property '{other}' for IntervalsContainer"))
             reader.Read() |> ignore // EndObject
@@ -5202,31 +5202,31 @@ module Converters =
             let result =
                 match propName with
                 | "after" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.IntervalsContainer>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.IntervalsContainer>(ref reader, options)
                     TypesQueryDsl.IntervalsFilter.After v
                 | "before" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.IntervalsContainer>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.IntervalsContainer>(ref reader, options)
                     TypesQueryDsl.IntervalsFilter.Before v
                 | "contained_by" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.IntervalsContainer>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.IntervalsContainer>(ref reader, options)
                     TypesQueryDsl.IntervalsFilter.ContainedBy v
                 | "containing" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.IntervalsContainer>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.IntervalsContainer>(ref reader, options)
                     TypesQueryDsl.IntervalsFilter.Containing v
                 | "not_contained_by" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.IntervalsContainer>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.IntervalsContainer>(ref reader, options)
                     TypesQueryDsl.IntervalsFilter.NotContainedBy v
                 | "not_containing" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.IntervalsContainer>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.IntervalsContainer>(ref reader, options)
                     TypesQueryDsl.IntervalsFilter.NotContaining v
                 | "not_overlapping" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.IntervalsContainer>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.IntervalsContainer>(ref reader, options)
                     TypesQueryDsl.IntervalsFilter.NotOverlapping v
                 | "overlapping" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.IntervalsContainer>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.IntervalsContainer>(ref reader, options)
                     TypesQueryDsl.IntervalsFilter.Overlapping v
                 | "script" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<Types.Script>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.Script>(ref reader, options)
                     TypesQueryDsl.IntervalsFilter.Script v
                 | other -> raise (System.Text.Json.JsonException($"Unknown property '{other}' for IntervalsFilter"))
             reader.Read() |> ignore // EndObject
@@ -5275,28 +5275,28 @@ module Converters =
             let result =
                 match propName with
                 | "all_of" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.IntervalsAllOf>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.IntervalsAllOf>(ref reader, options)
                     TypesQueryDsl.IntervalsQuery.AllOf v
                 | "any_of" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.IntervalsAnyOf>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.IntervalsAnyOf>(ref reader, options)
                     TypesQueryDsl.IntervalsQuery.AnyOf v
                 | "fuzzy" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.IntervalsFuzzy>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.IntervalsFuzzy>(ref reader, options)
                     TypesQueryDsl.IntervalsQuery.Fuzzy v
                 | "match" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.IntervalsMatch>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.IntervalsMatch>(ref reader, options)
                     TypesQueryDsl.IntervalsQuery.Match v
                 | "prefix" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.IntervalsPrefix>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.IntervalsPrefix>(ref reader, options)
                     TypesQueryDsl.IntervalsQuery.Prefix v
                 | "range" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.IntervalsRange>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.IntervalsRange>(ref reader, options)
                     TypesQueryDsl.IntervalsQuery.Range v
                 | "regexp" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.IntervalsRegexp>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.IntervalsRegexp>(ref reader, options)
                     TypesQueryDsl.IntervalsQuery.Regexp v
                 | "wildcard" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.IntervalsWildcard>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.IntervalsWildcard>(ref reader, options)
                     TypesQueryDsl.IntervalsQuery.Wildcard v
                 | other -> raise (System.Text.Json.JsonException($"Unknown property '{other}' for IntervalsQuery"))
             reader.Read() |> ignore // EndObject
@@ -5365,10 +5365,10 @@ module Converters =
             let result =
                 match propName with
                 | "ids" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<Types.Id list>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.Id list>(ref reader, options)
                     TypesQueryDsl.PinnedQuery.Ids v
                 | "docs" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.PinnedDoc list>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.PinnedDoc list>(ref reader, options)
                     TypesQueryDsl.PinnedQuery.Docs v
                 | other -> raise (System.Text.Json.JsonException($"Unknown property '{other}' for PinnedQuery"))
             reader.Read() |> ignore // EndObject
@@ -5630,255 +5630,255 @@ module Converters =
             let result =
                 match propName with
                 | "bool" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.BoolQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.BoolQuery>(ref reader, options)
                     TypesQueryDsl.QueryContainer.Bool v
                 | "boosting" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.BoostingQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.BoostingQuery>(ref reader, options)
                     TypesQueryDsl.QueryContainer.Boosting v
                 | "common" ->
                     reader.Read() |> ignore // StartObject
                     let field = reader.GetString()
                     reader.Read() |> ignore
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.CommonTermsQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.CommonTermsQuery>(ref reader, options)
                     reader.Read() |> ignore // EndObject
                     TypesQueryDsl.QueryContainer.Common (field, v)
                 | "combined_fields" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.CombinedFieldsQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.CombinedFieldsQuery>(ref reader, options)
                     TypesQueryDsl.QueryContainer.CombinedFields v
                 | "constant_score" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.ConstantScoreQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.ConstantScoreQuery>(ref reader, options)
                     TypesQueryDsl.QueryContainer.ConstantScore v
                 | "dis_max" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.DisMaxQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.DisMaxQuery>(ref reader, options)
                     TypesQueryDsl.QueryContainer.DisMax v
                 | "distance_feature" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.DistanceFeatureQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.DistanceFeatureQuery>(ref reader, options)
                     TypesQueryDsl.QueryContainer.DistanceFeature v
                 | "exists" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.ExistsQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.ExistsQuery>(ref reader, options)
                     TypesQueryDsl.QueryContainer.Exists v
                 | "function_score" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.FunctionScoreQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.FunctionScoreQuery>(ref reader, options)
                     TypesQueryDsl.QueryContainer.FunctionScore v
                 | "fuzzy" ->
                     reader.Read() |> ignore // StartObject
                     let field = reader.GetString()
                     reader.Read() |> ignore
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.FuzzyQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.FuzzyQuery>(ref reader, options)
                     reader.Read() |> ignore // EndObject
                     TypesQueryDsl.QueryContainer.Fuzzy (field, v)
                 | "geo_bounding_box" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.GeoBoundingBoxQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.GeoBoundingBoxQuery>(ref reader, options)
                     TypesQueryDsl.QueryContainer.GeoBoundingBox v
                 | "geo_distance" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.GeoDistanceQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.GeoDistanceQuery>(ref reader, options)
                     TypesQueryDsl.QueryContainer.GeoDistance v
                 | "geo_grid" ->
                     reader.Read() |> ignore // StartObject
                     let field = reader.GetString()
                     reader.Read() |> ignore
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.GeoGridQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.GeoGridQuery>(ref reader, options)
                     reader.Read() |> ignore // EndObject
                     TypesQueryDsl.QueryContainer.GeoGrid (field, v)
                 | "geo_polygon" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.GeoPolygonQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.GeoPolygonQuery>(ref reader, options)
                     TypesQueryDsl.QueryContainer.GeoPolygon v
                 | "geo_shape" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.GeoShapeQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.GeoShapeQuery>(ref reader, options)
                     TypesQueryDsl.QueryContainer.GeoShape v
                 | "has_child" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.HasChildQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.HasChildQuery>(ref reader, options)
                     TypesQueryDsl.QueryContainer.HasChild v
                 | "has_parent" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.HasParentQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.HasParentQuery>(ref reader, options)
                     TypesQueryDsl.QueryContainer.HasParent v
                 | "ids" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.IdsQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.IdsQuery>(ref reader, options)
                     TypesQueryDsl.QueryContainer.Ids v
                 | "intervals" ->
                     reader.Read() |> ignore // StartObject
                     let field = reader.GetString()
                     reader.Read() |> ignore
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.IntervalsQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.IntervalsQuery>(ref reader, options)
                     reader.Read() |> ignore // EndObject
                     TypesQueryDsl.QueryContainer.Intervals (field, v)
                 | "knn" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<Types.KnnQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.KnnQuery>(ref reader, options)
                     TypesQueryDsl.QueryContainer.Knn v
                 | "match" ->
                     reader.Read() |> ignore // StartObject
                     let field = reader.GetString()
                     reader.Read() |> ignore
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.MatchQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.MatchQuery>(ref reader, options)
                     reader.Read() |> ignore // EndObject
                     TypesQueryDsl.QueryContainer.Match (field, v)
                 | "match_all" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.MatchAllQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.MatchAllQuery>(ref reader, options)
                     TypesQueryDsl.QueryContainer.MatchAll v
                 | "match_bool_prefix" ->
                     reader.Read() |> ignore // StartObject
                     let field = reader.GetString()
                     reader.Read() |> ignore
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.MatchBoolPrefixQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.MatchBoolPrefixQuery>(ref reader, options)
                     reader.Read() |> ignore // EndObject
                     TypesQueryDsl.QueryContainer.MatchBoolPrefix (field, v)
                 | "match_none" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.MatchNoneQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.MatchNoneQuery>(ref reader, options)
                     TypesQueryDsl.QueryContainer.MatchNone v
                 | "match_phrase" ->
                     reader.Read() |> ignore // StartObject
                     let field = reader.GetString()
                     reader.Read() |> ignore
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.MatchPhraseQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.MatchPhraseQuery>(ref reader, options)
                     reader.Read() |> ignore // EndObject
                     TypesQueryDsl.QueryContainer.MatchPhrase (field, v)
                 | "match_phrase_prefix" ->
                     reader.Read() |> ignore // StartObject
                     let field = reader.GetString()
                     reader.Read() |> ignore
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.MatchPhrasePrefixQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.MatchPhrasePrefixQuery>(ref reader, options)
                     reader.Read() |> ignore // EndObject
                     TypesQueryDsl.QueryContainer.MatchPhrasePrefix (field, v)
                 | "more_like_this" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.MoreLikeThisQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.MoreLikeThisQuery>(ref reader, options)
                     TypesQueryDsl.QueryContainer.MoreLikeThis v
                 | "multi_match" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.MultiMatchQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.MultiMatchQuery>(ref reader, options)
                     TypesQueryDsl.QueryContainer.MultiMatch v
                 | "nested" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.NestedQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.NestedQuery>(ref reader, options)
                     TypesQueryDsl.QueryContainer.Nested v
                 | "parent_id" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.ParentIdQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.ParentIdQuery>(ref reader, options)
                     TypesQueryDsl.QueryContainer.ParentId v
                 | "percolate" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.PercolateQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.PercolateQuery>(ref reader, options)
                     TypesQueryDsl.QueryContainer.Percolate v
                 | "pinned" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.PinnedQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.PinnedQuery>(ref reader, options)
                     TypesQueryDsl.QueryContainer.Pinned v
                 | "prefix" ->
                     reader.Read() |> ignore // StartObject
                     let field = reader.GetString()
                     reader.Read() |> ignore
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.PrefixQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.PrefixQuery>(ref reader, options)
                     reader.Read() |> ignore // EndObject
                     TypesQueryDsl.QueryContainer.Prefix (field, v)
                 | "query_string" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.QueryStringQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.QueryStringQuery>(ref reader, options)
                     TypesQueryDsl.QueryContainer.QueryString v
                 | "range" ->
                     reader.Read() |> ignore // StartObject
                     let field = reader.GetString()
                     reader.Read() |> ignore
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.RangeQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.RangeQuery>(ref reader, options)
                     reader.Read() |> ignore // EndObject
                     TypesQueryDsl.QueryContainer.Range (field, v)
                 | "rank_feature" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.RankFeatureQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.RankFeatureQuery>(ref reader, options)
                     TypesQueryDsl.QueryContainer.RankFeature v
                 | "regexp" ->
                     reader.Read() |> ignore // StartObject
                     let field = reader.GetString()
                     reader.Read() |> ignore
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.RegexpQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.RegexpQuery>(ref reader, options)
                     reader.Read() |> ignore // EndObject
                     TypesQueryDsl.QueryContainer.Regexp (field, v)
                 | "rule" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.RuleQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.RuleQuery>(ref reader, options)
                     TypesQueryDsl.QueryContainer.Rule v
                 | "script" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.ScriptQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.ScriptQuery>(ref reader, options)
                     TypesQueryDsl.QueryContainer.Script v
                 | "script_score" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.ScriptScoreQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.ScriptScoreQuery>(ref reader, options)
                     TypesQueryDsl.QueryContainer.ScriptScore v
                 | "semantic" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.SemanticQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.SemanticQuery>(ref reader, options)
                     TypesQueryDsl.QueryContainer.Semantic v
                 | "shape" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.ShapeQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.ShapeQuery>(ref reader, options)
                     TypesQueryDsl.QueryContainer.Shape v
                 | "simple_query_string" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.SimpleQueryStringQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.SimpleQueryStringQuery>(ref reader, options)
                     TypesQueryDsl.QueryContainer.SimpleQueryString v
                 | "span_containing" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.SpanContainingQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.SpanContainingQuery>(ref reader, options)
                     TypesQueryDsl.QueryContainer.SpanContaining v
                 | "span_field_masking" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.SpanFieldMaskingQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.SpanFieldMaskingQuery>(ref reader, options)
                     TypesQueryDsl.QueryContainer.SpanFieldMasking v
                 | "span_first" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.SpanFirstQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.SpanFirstQuery>(ref reader, options)
                     TypesQueryDsl.QueryContainer.SpanFirst v
                 | "span_multi" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.SpanMultiTermQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.SpanMultiTermQuery>(ref reader, options)
                     TypesQueryDsl.QueryContainer.SpanMulti v
                 | "span_near" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.SpanNearQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.SpanNearQuery>(ref reader, options)
                     TypesQueryDsl.QueryContainer.SpanNear v
                 | "span_not" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.SpanNotQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.SpanNotQuery>(ref reader, options)
                     TypesQueryDsl.QueryContainer.SpanNot v
                 | "span_or" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.SpanOrQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.SpanOrQuery>(ref reader, options)
                     TypesQueryDsl.QueryContainer.SpanOr v
                 | "span_term" ->
                     reader.Read() |> ignore // StartObject
                     let field = reader.GetString()
                     reader.Read() |> ignore
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.SpanTermQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.SpanTermQuery>(ref reader, options)
                     reader.Read() |> ignore // EndObject
                     TypesQueryDsl.QueryContainer.SpanTerm (field, v)
                 | "span_within" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.SpanWithinQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.SpanWithinQuery>(ref reader, options)
                     TypesQueryDsl.QueryContainer.SpanWithin v
                 | "sparse_vector" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.SparseVectorQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.SparseVectorQuery>(ref reader, options)
                     TypesQueryDsl.QueryContainer.SparseVector v
                 | "term" ->
                     reader.Read() |> ignore // StartObject
                     let field = reader.GetString()
                     reader.Read() |> ignore
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.TermQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.TermQuery>(ref reader, options)
                     reader.Read() |> ignore // EndObject
                     TypesQueryDsl.QueryContainer.Term (field, v)
                 | "terms" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.TermsQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.TermsQuery>(ref reader, options)
                     TypesQueryDsl.QueryContainer.Terms v
                 | "terms_set" ->
                     reader.Read() |> ignore // StartObject
                     let field = reader.GetString()
                     reader.Read() |> ignore
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.TermsSetQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.TermsSetQuery>(ref reader, options)
                     reader.Read() |> ignore // EndObject
                     TypesQueryDsl.QueryContainer.TermsSet (field, v)
                 | "text_expansion" ->
                     reader.Read() |> ignore // StartObject
                     let field = reader.GetString()
                     reader.Read() |> ignore
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.TextExpansionQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.TextExpansionQuery>(ref reader, options)
                     reader.Read() |> ignore // EndObject
                     TypesQueryDsl.QueryContainer.TextExpansion (field, v)
                 | "weighted_tokens" ->
                     reader.Read() |> ignore // StartObject
                     let field = reader.GetString()
                     reader.Read() |> ignore
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.WeightedTokensQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.WeightedTokensQuery>(ref reader, options)
                     reader.Read() |> ignore // EndObject
                     TypesQueryDsl.QueryContainer.WeightedTokens (field, v)
                 | "wildcard" ->
                     reader.Read() |> ignore // StartObject
                     let field = reader.GetString()
                     reader.Read() |> ignore
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.WildcardQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.WildcardQuery>(ref reader, options)
                     reader.Read() |> ignore // EndObject
                     TypesQueryDsl.QueryContainer.Wildcard (field, v)
                 | "wrapper" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.WrapperQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.WrapperQuery>(ref reader, options)
                     TypesQueryDsl.QueryContainer.Wrapper v
                 | "type" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.TypeQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.TypeQuery>(ref reader, options)
                     TypesQueryDsl.QueryContainer.Type v
                 | other ->
                     let el = System.Text.Json.JsonElement.ParseValue(ref reader)
@@ -5999,38 +5999,38 @@ module Converters =
             let result =
                 match propName with
                 | "span_containing" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.SpanContainingQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.SpanContainingQuery>(ref reader, options)
                     TypesQueryDsl.SpanQuery.SpanContaining v
                 | "span_field_masking" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.SpanFieldMaskingQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.SpanFieldMaskingQuery>(ref reader, options)
                     TypesQueryDsl.SpanQuery.SpanFieldMasking v
                 | "span_first" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.SpanFirstQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.SpanFirstQuery>(ref reader, options)
                     TypesQueryDsl.SpanQuery.SpanFirst v
                 | "span_gap" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.SpanGapQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.SpanGapQuery>(ref reader, options)
                     TypesQueryDsl.SpanQuery.SpanGap v
                 | "span_multi" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.SpanMultiTermQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.SpanMultiTermQuery>(ref reader, options)
                     TypesQueryDsl.SpanQuery.SpanMulti v
                 | "span_near" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.SpanNearQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.SpanNearQuery>(ref reader, options)
                     TypesQueryDsl.SpanQuery.SpanNear v
                 | "span_not" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.SpanNotQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.SpanNotQuery>(ref reader, options)
                     TypesQueryDsl.SpanQuery.SpanNot v
                 | "span_or" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.SpanOrQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.SpanOrQuery>(ref reader, options)
                     TypesQueryDsl.SpanQuery.SpanOr v
                 | "span_term" ->
                     reader.Read() |> ignore // StartObject
                     let field = reader.GetString()
                     reader.Read() |> ignore
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.SpanTermQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.SpanTermQuery>(ref reader, options)
                     reader.Read() |> ignore // EndObject
                     TypesQueryDsl.SpanQuery.SpanTerm (field, v)
                 | "span_within" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.SpanWithinQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.SpanWithinQuery>(ref reader, options)
                     TypesQueryDsl.SpanQuery.SpanWithin v
                 | other ->
                     let el = System.Text.Json.JsonElement.ParseValue(ref reader)
@@ -6063,10 +6063,10 @@ module Converters =
             let result =
                 match propName with
                 | "query_vector" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<Map<string, Types.Float>>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<Map<string, CoreTypes.Float>>(ref reader, options)
                     TypesQueryDsl.SparseVectorQuery.QueryVector v
                 | "inference_id" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<Types.Id>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.Id>(ref reader, options)
                     TypesQueryDsl.SparseVectorQuery.InferenceId v
                 | other -> raise (System.Text.Json.JsonException($"Unknown property '{other}' for SparseVectorQuery"))
             reader.Read() |> ignore // EndObject
@@ -13091,13 +13091,13 @@ module Converters =
             let result =
                 match propName with
                 | "cardinality" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.CardinalityAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.CardinalityAggregation>(ref reader, options)
                     SecurityQueryApiKeys.ApiKeyAggregationContainer.Cardinality v
                 | "composite" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.CompositeAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.CompositeAggregation>(ref reader, options)
                     SecurityQueryApiKeys.ApiKeyAggregationContainer.Composite v
                 | "date_range" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.DateRangeAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.DateRangeAggregation>(ref reader, options)
                     SecurityQueryApiKeys.ApiKeyAggregationContainer.DateRange v
                 | "filter" ->
                     let v = System.Text.Json.JsonSerializer.Deserialize<SecurityQueryApiKeys.ApiKeyQueryContainer>(ref reader, options)
@@ -13106,16 +13106,16 @@ module Converters =
                     let v = System.Text.Json.JsonSerializer.Deserialize<SecurityQueryApiKeys.ApiKeyFiltersAggregation>(ref reader, options)
                     SecurityQueryApiKeys.ApiKeyAggregationContainer.Filters v
                 | "missing" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.MissingAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.MissingAggregation>(ref reader, options)
                     SecurityQueryApiKeys.ApiKeyAggregationContainer.Missing v
                 | "range" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.RangeAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.RangeAggregation>(ref reader, options)
                     SecurityQueryApiKeys.ApiKeyAggregationContainer.Range v
                 | "terms" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.TermsAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.TermsAggregation>(ref reader, options)
                     SecurityQueryApiKeys.ApiKeyAggregationContainer.Terms v
                 | "value_count" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.ValueCountAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.ValueCountAggregation>(ref reader, options)
                     SecurityQueryApiKeys.ApiKeyAggregationContainer.ValueCount v
                 | other ->
                     let el = System.Text.Json.JsonElement.ParseValue(ref reader)
@@ -13193,56 +13193,56 @@ module Converters =
             let result =
                 match propName with
                 | "bool" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.BoolQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.BoolQuery>(ref reader, options)
                     SecurityQueryApiKeys.ApiKeyQueryContainer.Bool v
                 | "exists" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.ExistsQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.ExistsQuery>(ref reader, options)
                     SecurityQueryApiKeys.ApiKeyQueryContainer.Exists v
                 | "ids" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.IdsQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.IdsQuery>(ref reader, options)
                     SecurityQueryApiKeys.ApiKeyQueryContainer.Ids v
                 | "match" ->
                     reader.Read() |> ignore // StartObject
                     let field = reader.GetString()
                     reader.Read() |> ignore
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.MatchQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.MatchQuery>(ref reader, options)
                     reader.Read() |> ignore // EndObject
                     SecurityQueryApiKeys.ApiKeyQueryContainer.Match (field, v)
                 | "match_all" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.MatchAllQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.MatchAllQuery>(ref reader, options)
                     SecurityQueryApiKeys.ApiKeyQueryContainer.MatchAll v
                 | "prefix" ->
                     reader.Read() |> ignore // StartObject
                     let field = reader.GetString()
                     reader.Read() |> ignore
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.PrefixQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.PrefixQuery>(ref reader, options)
                     reader.Read() |> ignore // EndObject
                     SecurityQueryApiKeys.ApiKeyQueryContainer.Prefix (field, v)
                 | "range" ->
                     reader.Read() |> ignore // StartObject
                     let field = reader.GetString()
                     reader.Read() |> ignore
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.RangeQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.RangeQuery>(ref reader, options)
                     reader.Read() |> ignore // EndObject
                     SecurityQueryApiKeys.ApiKeyQueryContainer.Range (field, v)
                 | "simple_query_string" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.SimpleQueryStringQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.SimpleQueryStringQuery>(ref reader, options)
                     SecurityQueryApiKeys.ApiKeyQueryContainer.SimpleQueryString v
                 | "term" ->
                     reader.Read() |> ignore // StartObject
                     let field = reader.GetString()
                     reader.Read() |> ignore
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.TermQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.TermQuery>(ref reader, options)
                     reader.Read() |> ignore // EndObject
                     SecurityQueryApiKeys.ApiKeyQueryContainer.Term (field, v)
                 | "terms" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.TermsQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.TermsQuery>(ref reader, options)
                     SecurityQueryApiKeys.ApiKeyQueryContainer.Terms v
                 | "wildcard" ->
                     reader.Read() |> ignore // StartObject
                     let field = reader.GetString()
                     reader.Read() |> ignore
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.WildcardQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.WildcardQuery>(ref reader, options)
                     reader.Read() |> ignore // EndObject
                     SecurityQueryApiKeys.ApiKeyQueryContainer.Wildcard (field, v)
                 | other ->
@@ -13321,56 +13321,56 @@ module Converters =
             let result =
                 match propName with
                 | "bool" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.BoolQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.BoolQuery>(ref reader, options)
                     SecurityQueryRole.RoleQueryContainer.Bool v
                 | "exists" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.ExistsQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.ExistsQuery>(ref reader, options)
                     SecurityQueryRole.RoleQueryContainer.Exists v
                 | "ids" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.IdsQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.IdsQuery>(ref reader, options)
                     SecurityQueryRole.RoleQueryContainer.Ids v
                 | "match" ->
                     reader.Read() |> ignore // StartObject
                     let field = reader.GetString()
                     reader.Read() |> ignore
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.MatchQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.MatchQuery>(ref reader, options)
                     reader.Read() |> ignore // EndObject
                     SecurityQueryRole.RoleQueryContainer.Match (field, v)
                 | "match_all" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.MatchAllQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.MatchAllQuery>(ref reader, options)
                     SecurityQueryRole.RoleQueryContainer.MatchAll v
                 | "prefix" ->
                     reader.Read() |> ignore // StartObject
                     let field = reader.GetString()
                     reader.Read() |> ignore
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.PrefixQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.PrefixQuery>(ref reader, options)
                     reader.Read() |> ignore // EndObject
                     SecurityQueryRole.RoleQueryContainer.Prefix (field, v)
                 | "range" ->
                     reader.Read() |> ignore // StartObject
                     let field = reader.GetString()
                     reader.Read() |> ignore
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.RangeQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.RangeQuery>(ref reader, options)
                     reader.Read() |> ignore // EndObject
                     SecurityQueryRole.RoleQueryContainer.Range (field, v)
                 | "simple_query_string" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.SimpleQueryStringQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.SimpleQueryStringQuery>(ref reader, options)
                     SecurityQueryRole.RoleQueryContainer.SimpleQueryString v
                 | "term" ->
                     reader.Read() |> ignore // StartObject
                     let field = reader.GetString()
                     reader.Read() |> ignore
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.TermQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.TermQuery>(ref reader, options)
                     reader.Read() |> ignore // EndObject
                     SecurityQueryRole.RoleQueryContainer.Term (field, v)
                 | "terms" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.TermsQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.TermsQuery>(ref reader, options)
                     SecurityQueryRole.RoleQueryContainer.Terms v
                 | "wildcard" ->
                     reader.Read() |> ignore // StartObject
                     let field = reader.GetString()
                     reader.Read() |> ignore
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.WildcardQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.WildcardQuery>(ref reader, options)
                     reader.Read() |> ignore // EndObject
                     SecurityQueryRole.RoleQueryContainer.Wildcard (field, v)
                 | other ->
@@ -13449,56 +13449,56 @@ module Converters =
             let result =
                 match propName with
                 | "ids" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.IdsQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.IdsQuery>(ref reader, options)
                     SecurityQueryUser.UserQueryContainer.Ids v
                 | "bool" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.BoolQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.BoolQuery>(ref reader, options)
                     SecurityQueryUser.UserQueryContainer.Bool v
                 | "exists" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.ExistsQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.ExistsQuery>(ref reader, options)
                     SecurityQueryUser.UserQueryContainer.Exists v
                 | "match" ->
                     reader.Read() |> ignore // StartObject
                     let field = reader.GetString()
                     reader.Read() |> ignore
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.MatchQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.MatchQuery>(ref reader, options)
                     reader.Read() |> ignore // EndObject
                     SecurityQueryUser.UserQueryContainer.Match (field, v)
                 | "match_all" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.MatchAllQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.MatchAllQuery>(ref reader, options)
                     SecurityQueryUser.UserQueryContainer.MatchAll v
                 | "prefix" ->
                     reader.Read() |> ignore // StartObject
                     let field = reader.GetString()
                     reader.Read() |> ignore
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.PrefixQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.PrefixQuery>(ref reader, options)
                     reader.Read() |> ignore // EndObject
                     SecurityQueryUser.UserQueryContainer.Prefix (field, v)
                 | "range" ->
                     reader.Read() |> ignore // StartObject
                     let field = reader.GetString()
                     reader.Read() |> ignore
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.RangeQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.RangeQuery>(ref reader, options)
                     reader.Read() |> ignore // EndObject
                     SecurityQueryUser.UserQueryContainer.Range (field, v)
                 | "simple_query_string" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.SimpleQueryStringQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.SimpleQueryStringQuery>(ref reader, options)
                     SecurityQueryUser.UserQueryContainer.SimpleQueryString v
                 | "term" ->
                     reader.Read() |> ignore // StartObject
                     let field = reader.GetString()
                     reader.Read() |> ignore
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.TermQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.TermQuery>(ref reader, options)
                     reader.Read() |> ignore // EndObject
                     SecurityQueryUser.UserQueryContainer.Term (field, v)
                 | "terms" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.TermsQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.TermsQuery>(ref reader, options)
                     SecurityQueryUser.UserQueryContainer.Terms v
                 | "wildcard" ->
                     reader.Read() |> ignore // StartObject
                     let field = reader.GetString()
                     reader.Read() |> ignore
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesQueryDsl.WildcardQuery>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.WildcardQuery>(ref reader, options)
                     reader.Read() |> ignore // EndObject
                     SecurityQueryUser.UserQueryContainer.Wildcard (field, v)
                 | other ->
@@ -13855,16 +13855,16 @@ module Converters =
             let result =
                 match propName with
                 | "date_histogram" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.DateHistogramAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.DateHistogramAggregation>(ref reader, options)
                     TransformTypes.PivotGroupByContainer.DateHistogram v
                 | "geotile_grid" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.GeoTileGridAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.GeoTileGridAggregation>(ref reader, options)
                     TransformTypes.PivotGroupByContainer.GeotileGrid v
                 | "histogram" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.HistogramAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.HistogramAggregation>(ref reader, options)
                     TransformTypes.PivotGroupByContainer.Histogram v
                 | "terms" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<TypesAggregations.TermsAggregation>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.TermsAggregation>(ref reader, options)
                     TransformTypes.PivotGroupByContainer.Terms v
                 | other -> raise (System.Text.Json.JsonException($"Unknown property '{other}' for PivotGroupByContainer"))
             reader.Read() |> ignore // EndObject
@@ -14067,7 +14067,7 @@ module Converters =
                     reader.Read() |> ignore // StartObject
                     let field = reader.GetString()
                     reader.Read() |> ignore
-                    let v = System.Text.Json.JsonSerializer.Deserialize<Map<WatcherTypes.ConditionOp, Types.FieldValue>>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<Map<WatcherTypes.ConditionOp, CoreTypes.FieldValue>>(ref reader, options)
                     reader.Read() |> ignore // EndObject
                     WatcherTypes.ConditionContainer.Compare (field, v)
                 | "never" ->
@@ -14562,7 +14562,7 @@ module Converters =
                     let v = System.Text.Json.JsonSerializer.Deserialize<WatcherTypes.HourlySchedule>(ref reader, options)
                     WatcherTypes.ScheduleContainer.Hourly v
                 | "interval" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<Types.Duration>(ref reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<CoreTypes.Duration>(ref reader, options)
                     WatcherTypes.ScheduleContainer.Interval v
                 | "monthly" ->
                     let v = System.Text.Json.JsonSerializer.Deserialize<System.Text.Json.JsonElement>(ref reader, options)

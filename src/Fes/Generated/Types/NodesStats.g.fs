@@ -31,12 +31,12 @@ module NodesStats =
 
     [<RequireQualifiedAccess>]
     type NodeStatsMetrics =
-        | NodeStatsMetric of NodesStats.NodeStatsMetric
-        | Array of NodesStats.NodeStatsMetric list
+        | NodeStatsMetric of NodeStatsMetric
+        | Array of NodeStatsMetric list
 
     type ResponseBase = {
         [<System.Text.Json.Serialization.JsonPropertyName("cluster_name")>]
-        ClusterName: Types.Name option
+        ClusterName: CoreTypes.Name option
         [<System.Text.Json.Serialization.JsonPropertyName("nodes")>]
         Nodes: Map<string, NodesTypes.Stats>
     }

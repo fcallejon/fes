@@ -9,13 +9,13 @@ module EsqlListQueries =
 
     type Body = {
         [<System.Text.Json.Serialization.JsonPropertyName("id")>]
-        Id: Types.Long
+        Id: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("node")>]
-        Node: Types.NodeId
+        Node: CoreTypes.NodeId
         [<System.Text.Json.Serialization.JsonPropertyName("start_time_millis")>]
-        StartTimeMillis: Types.Long
+        StartTimeMillis: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("running_time_nanos")>]
-        RunningTimeNanos: Types.Long
+        RunningTimeNanos: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("query")>]
         Query: string
     }

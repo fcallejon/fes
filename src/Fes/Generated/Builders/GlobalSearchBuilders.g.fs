@@ -29,7 +29,7 @@ module GlobalSearchBuilders =
             }
 
         [<CustomOperation("took")>]
-        member _.Took(state: ResponseBody, value: Types.Long) =
+        member _.Took(state: ResponseBody, value: CoreTypes.Long) =
             { state with Took = value }
 
         [<CustomOperation("timedOut")>]
@@ -37,7 +37,7 @@ module GlobalSearchBuilders =
             { state with TimedOut = value }
 
         [<CustomOperation("shards")>]
-        member _.Shards(state: ResponseBody, value: Types.ShardStatistics) =
+        member _.Shards(state: ResponseBody, value: CoreTypes.ShardStatistics) =
             { state with Shards = value }
 
         [<CustomOperation("hits")>]
@@ -45,11 +45,11 @@ module GlobalSearchBuilders =
             { state with Hits = value }
 
         [<CustomOperation("aggregations")>]
-        member _.Aggregations(state: ResponseBody, value: Map<Types.AggregateName, TypesAggregations.Aggregate>) =
+        member _.Aggregations(state: ResponseBody, value: Map<CoreTypes.AggregateName, CoreTypes.Aggregate>) =
             { state with Aggregations = Some value }
 
         [<CustomOperation("clusters")>]
-        member _.Clusters(state: ResponseBody, value: Types.ClusterStatistics) =
+        member _.Clusters(state: ResponseBody, value: CoreTypes.ClusterStatistics) =
             { state with Clusters = Some value }
 
         [<CustomOperation("fields")>]
@@ -57,11 +57,11 @@ module GlobalSearchBuilders =
             { state with Fields = Some value }
 
         [<CustomOperation("maxScore")>]
-        member _.MaxScore(state: ResponseBody, value: Types.Double) =
+        member _.MaxScore(state: ResponseBody, value: CoreTypes.Double) =
             { state with MaxScore = Some value }
 
         [<CustomOperation("numReducePhases")>]
-        member _.NumReducePhases(state: ResponseBody, value: Types.Long) =
+        member _.NumReducePhases(state: ResponseBody, value: CoreTypes.Long) =
             { state with NumReducePhases = Some value }
 
         [<CustomOperation("profile")>]
@@ -69,15 +69,15 @@ module GlobalSearchBuilders =
             { state with Profile = Some value }
 
         [<CustomOperation("pitId")>]
-        member _.PitId(state: ResponseBody, value: Types.Id) =
+        member _.PitId(state: ResponseBody, value: CoreTypes.Id) =
             { state with PitId = Some value }
 
         [<CustomOperation("scrollId")>]
-        member _.ScrollId(state: ResponseBody, value: Types.ScrollId) =
+        member _.ScrollId(state: ResponseBody, value: CoreTypes.ScrollId) =
             { state with ScrollId = Some value }
 
         [<CustomOperation("suggest")>]
-        member _.Suggest(state: ResponseBody, value: Map<Types.SuggestionName, GlobalSearchTypes.Suggest<'tDocument> list>) =
+        member _.Suggest(state: ResponseBody, value: Map<CoreTypes.SuggestionName, GlobalSearchTypes.Suggest<'tDocument> list>) =
             { state with Suggest = Some value }
 
         [<CustomOperation("terminatedEarly")>]

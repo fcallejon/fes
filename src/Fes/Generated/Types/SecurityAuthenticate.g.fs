@@ -9,9 +9,9 @@ module SecurityAuthenticate =
 
     type AuthenticateApiKey = {
         [<System.Text.Json.Serialization.JsonPropertyName("id")>]
-        Id: Types.Id
+        Id: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.Name option
+        Name: CoreTypes.Name option
         [<System.Text.Json.Serialization.JsonPropertyName("managed_by")>]
         ManagedBy: SecurityTypes.ApiKeyManagedBy
         [<System.Text.Json.Serialization.JsonPropertyName("internal")>]
@@ -20,7 +20,7 @@ module SecurityAuthenticate =
 
     type Token = {
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.Name
+        Name: CoreTypes.Name
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string option
     }

@@ -21,6 +21,6 @@ module ClusterState =
 
     [<RequireQualifiedAccess>]
     type ClusterStateMetrics =
-        | ClusterStateMetric of ClusterState.ClusterStateMetric
-        | Array of ClusterState.ClusterStateMetric list
+        | ClusterStateMetric of ClusterStateMetric
+        | Array of ClusterStateMetric list
 

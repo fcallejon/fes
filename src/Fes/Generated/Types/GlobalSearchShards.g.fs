@@ -9,29 +9,29 @@ module GlobalSearchShards =
 
     type SearchShardsNodeAttributes = {
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.NodeName
+        Name: CoreTypes.NodeName
         [<System.Text.Json.Serialization.JsonPropertyName("ephemeral_id")>]
-        EphemeralId: Types.Id
+        EphemeralId: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("transport_address")>]
-        TransportAddress: Types.TransportAddress
+        TransportAddress: CoreTypes.TransportAddress
         [<System.Text.Json.Serialization.JsonPropertyName("external_id")>]
         ExternalId: string
         [<System.Text.Json.Serialization.JsonPropertyName("attributes")>]
         Attributes: Map<string, string>
         [<System.Text.Json.Serialization.JsonPropertyName("roles")>]
-        Roles: Types.NodeRoles
+        Roles: CoreTypes.NodeRoles
         [<System.Text.Json.Serialization.JsonPropertyName("version")>]
-        Version: Types.VersionString
+        Version: CoreTypes.VersionString
         [<System.Text.Json.Serialization.JsonPropertyName("min_index_version")>]
-        MinIndexVersion: Types.Integer
+        MinIndexVersion: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("max_index_version")>]
-        MaxIndexVersion: Types.Integer
+        MaxIndexVersion: CoreTypes.Integer
     }
 
     type ShardStoreIndex = {
         [<System.Text.Json.Serialization.JsonPropertyName("aliases")>]
-        Aliases: Types.Name list option
+        Aliases: CoreTypes.Name list option
         [<System.Text.Json.Serialization.JsonPropertyName("filter")>]
-        Filter: TypesQueryDsl.QueryContainer option
+        Filter: CoreTypes.QueryContainer option
     }
 

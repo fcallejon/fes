@@ -12,13 +12,13 @@ open Fes
 module IndicesOperations =
 
     type IndicesAddBlockRequest = {
-        Index: Types.Indices
+        Index: CoreTypes.Indices
         Block: IndicesTypes.IndicesBlockOptions
         AllowNoIndices: bool option
-        ExpandWildcards: Types.ExpandWildcards option
+        ExpandWildcards: CoreTypes.ExpandWildcards option
         IgnoreUnavailable: bool option
-        MasterTimeout: Types.Duration option
-        Timeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
+        Timeout: CoreTypes.Duration option
     }
 
         with
@@ -58,7 +58,7 @@ module IndicesOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: IndicesAddBlockRequest, value: Types.Indices) =
+        member _.Index(state: IndicesAddBlockRequest, value: CoreTypes.Indices) =
             { state with Index = value }
 
         [<CustomOperation("block")>]
@@ -70,7 +70,7 @@ module IndicesOperations =
             { state with AllowNoIndices = Some value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: IndicesAddBlockRequest, value: Types.ExpandWildcards) =
+        member _.ExpandWildcards(state: IndicesAddBlockRequest, value: CoreTypes.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("ignoreUnavailable")>]
@@ -78,11 +78,11 @@ module IndicesOperations =
             { state with IgnoreUnavailable = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IndicesAddBlockRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: IndicesAddBlockRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: IndicesAddBlockRequest, value: Types.Duration) =
+        member _.Timeout(state: IndicesAddBlockRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
     let indicesAddBlockRequest = IndicesAddBlockRequestBuilder()
@@ -90,27 +90,27 @@ module IndicesOperations =
     module AddBlock =
         let withAllowNoIndices (value: bool) (req: IndicesAddBlockRequest) =
             { req with AllowNoIndices = Some value }
-        let withExpandWildcards (value: Types.ExpandWildcards) (req: IndicesAddBlockRequest) =
+        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: IndicesAddBlockRequest) =
             { req with ExpandWildcards = Some value }
         let withIgnoreUnavailable (value: bool) (req: IndicesAddBlockRequest) =
             { req with IgnoreUnavailable = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: IndicesAddBlockRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: IndicesAddBlockRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: Types.Duration) (req: IndicesAddBlockRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: IndicesAddBlockRequest) =
             { req with Timeout = Some value }
 
     type IndicesAnalyzeRequest = {
-        Index: Types.IndexName
-        Index: Types.IndexName option
+        Index: CoreTypes.IndexName
+        Index: CoreTypes.IndexName option
         Analyzer: string option
         Attributes: string list option
-        CharFilter: TypesAnalysis.CharFilter list option
+        CharFilter: CoreTypes.CharFilter list option
         Explain: bool option
-        Field: Types.Field option
-        Filter: TypesAnalysis.TokenFilter list option
+        Field: CoreTypes.Field option
+        Filter: CoreTypes.TokenFilter list option
         Normalizer: string option
         Text: IndicesAnalyze.TextToAnalyze option
-        Tokenizer: TypesAnalysis.Tokenizer option
+        Tokenizer: CoreTypes.Tokenizer option
     }
 
         with
@@ -151,11 +151,11 @@ module IndicesOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: IndicesAnalyzeRequest, value: Types.IndexName) =
+        member _.Index(state: IndicesAnalyzeRequest, value: CoreTypes.IndexName) =
             { state with Index = value }
 
         [<CustomOperation("index")>]
-        member _.Index(state: IndicesAnalyzeRequest, value: Types.IndexName) =
+        member _.Index(state: IndicesAnalyzeRequest, value: CoreTypes.IndexName) =
             { state with Index = Some value }
 
         [<CustomOperation("analyzer")>]
@@ -167,7 +167,7 @@ module IndicesOperations =
             { state with Attributes = Some value }
 
         [<CustomOperation("charFilter")>]
-        member _.CharFilter(state: IndicesAnalyzeRequest, value: TypesAnalysis.CharFilter list) =
+        member _.CharFilter(state: IndicesAnalyzeRequest, value: CoreTypes.CharFilter list) =
             { state with CharFilter = Some value }
 
         [<CustomOperation("explain")>]
@@ -175,11 +175,11 @@ module IndicesOperations =
             { state with Explain = Some value }
 
         [<CustomOperation("field")>]
-        member _.Field(state: IndicesAnalyzeRequest, value: Types.Field) =
+        member _.Field(state: IndicesAnalyzeRequest, value: CoreTypes.Field) =
             { state with Field = Some value }
 
         [<CustomOperation("filter")>]
-        member _.Filter(state: IndicesAnalyzeRequest, value: TypesAnalysis.TokenFilter list) =
+        member _.Filter(state: IndicesAnalyzeRequest, value: CoreTypes.TokenFilter list) =
             { state with Filter = Some value }
 
         [<CustomOperation("normalizer")>]
@@ -191,35 +191,35 @@ module IndicesOperations =
             { state with Text = Some value }
 
         [<CustomOperation("tokenizer")>]
-        member _.Tokenizer(state: IndicesAnalyzeRequest, value: TypesAnalysis.Tokenizer) =
+        member _.Tokenizer(state: IndicesAnalyzeRequest, value: CoreTypes.Tokenizer) =
             { state with Tokenizer = Some value }
 
     let indicesAnalyzeRequest = IndicesAnalyzeRequestBuilder()
 
     module Analyze =
-        let withIndex (value: Types.IndexName) (req: IndicesAnalyzeRequest) =
+        let withIndex (value: CoreTypes.IndexName) (req: IndicesAnalyzeRequest) =
             { req with Index = Some value }
         let withAnalyzer (value: string) (req: IndicesAnalyzeRequest) =
             { req with Analyzer = Some value }
         let withAttributes (value: string list) (req: IndicesAnalyzeRequest) =
             { req with Attributes = Some value }
-        let withCharFilter (value: TypesAnalysis.CharFilter list) (req: IndicesAnalyzeRequest) =
+        let withCharFilter (value: CoreTypes.CharFilter list) (req: IndicesAnalyzeRequest) =
             { req with CharFilter = Some value }
         let withExplain (value: bool) (req: IndicesAnalyzeRequest) =
             { req with Explain = Some value }
-        let withField (value: Types.Field) (req: IndicesAnalyzeRequest) =
+        let withField (value: CoreTypes.Field) (req: IndicesAnalyzeRequest) =
             { req with Field = Some value }
-        let withFilter (value: TypesAnalysis.TokenFilter list) (req: IndicesAnalyzeRequest) =
+        let withFilter (value: CoreTypes.TokenFilter list) (req: IndicesAnalyzeRequest) =
             { req with Filter = Some value }
         let withNormalizer (value: string) (req: IndicesAnalyzeRequest) =
             { req with Normalizer = Some value }
         let withText (value: IndicesAnalyze.TextToAnalyze) (req: IndicesAnalyzeRequest) =
             { req with Text = Some value }
-        let withTokenizer (value: TypesAnalysis.Tokenizer) (req: IndicesAnalyzeRequest) =
+        let withTokenizer (value: CoreTypes.Tokenizer) (req: IndicesAnalyzeRequest) =
             { req with Tokenizer = Some value }
 
     type IndicesCancelMigrateReindexRequest = {
-        Index: Types.Indices
+        Index: CoreTypes.Indices
     }
 
         with
@@ -233,7 +233,7 @@ module IndicesOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type IndicesCancelMigrateReindexResponse = Types.AcknowledgedResponseBase
+    type IndicesCancelMigrateReindexResponse = CoreTypes.AcknowledgedResponseBase
 
     type IndicesCancelMigrateReindexRequestBuilder() =
         member _.Yield(_: unit) : IndicesCancelMigrateReindexRequest =
@@ -242,18 +242,18 @@ module IndicesOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: IndicesCancelMigrateReindexRequest, value: Types.Indices) =
+        member _.Index(state: IndicesCancelMigrateReindexRequest, value: CoreTypes.Indices) =
             { state with Index = value }
 
     let indicesCancelMigrateReindexRequest = IndicesCancelMigrateReindexRequestBuilder()
 
     type IndicesClearCacheRequest = {
-        Index: Types.Indices
-        Index: Types.Indices option
+        Index: CoreTypes.Indices
+        Index: CoreTypes.Indices option
         AllowNoIndices: bool option
-        ExpandWildcards: Types.ExpandWildcards option
+        ExpandWildcards: CoreTypes.ExpandWildcards option
         Fielddata: bool option
-        Fields: Types.Fields option
+        Fields: CoreTypes.Fields option
         IgnoreUnavailable: bool option
         Query: bool option
         Request: bool option
@@ -284,7 +284,7 @@ module IndicesOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type IndicesClearCacheResponse = Types.ShardsOperationResponseBase
+    type IndicesClearCacheResponse = CoreTypes.ShardsOperationResponseBase
 
     type IndicesClearCacheRequestBuilder() =
         member _.Yield(_: unit) : IndicesClearCacheRequest =
@@ -301,11 +301,11 @@ module IndicesOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: IndicesClearCacheRequest, value: Types.Indices) =
+        member _.Index(state: IndicesClearCacheRequest, value: CoreTypes.Indices) =
             { state with Index = value }
 
         [<CustomOperation("index")>]
-        member _.Index(state: IndicesClearCacheRequest, value: Types.Indices) =
+        member _.Index(state: IndicesClearCacheRequest, value: CoreTypes.Indices) =
             { state with Index = Some value }
 
         [<CustomOperation("allowNoIndices")>]
@@ -313,7 +313,7 @@ module IndicesOperations =
             { state with AllowNoIndices = Some value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: IndicesClearCacheRequest, value: Types.ExpandWildcards) =
+        member _.ExpandWildcards(state: IndicesClearCacheRequest, value: CoreTypes.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("fielddata")>]
@@ -321,7 +321,7 @@ module IndicesOperations =
             { state with Fielddata = Some value }
 
         [<CustomOperation("fields")>]
-        member _.Fields(state: IndicesClearCacheRequest, value: Types.Fields) =
+        member _.Fields(state: IndicesClearCacheRequest, value: CoreTypes.Fields) =
             { state with Fields = Some value }
 
         [<CustomOperation("ignoreUnavailable")>]
@@ -339,15 +339,15 @@ module IndicesOperations =
     let indicesClearCacheRequest = IndicesClearCacheRequestBuilder()
 
     module ClearCache =
-        let withIndex (value: Types.Indices) (req: IndicesClearCacheRequest) =
+        let withIndex (value: CoreTypes.Indices) (req: IndicesClearCacheRequest) =
             { req with Index = Some value }
         let withAllowNoIndices (value: bool) (req: IndicesClearCacheRequest) =
             { req with AllowNoIndices = Some value }
-        let withExpandWildcards (value: Types.ExpandWildcards) (req: IndicesClearCacheRequest) =
+        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: IndicesClearCacheRequest) =
             { req with ExpandWildcards = Some value }
         let withFielddata (value: bool) (req: IndicesClearCacheRequest) =
             { req with Fielddata = Some value }
-        let withFields (value: Types.Fields) (req: IndicesClearCacheRequest) =
+        let withFields (value: CoreTypes.Fields) (req: IndicesClearCacheRequest) =
             { req with Fields = Some value }
         let withIgnoreUnavailable (value: bool) (req: IndicesClearCacheRequest) =
             { req with IgnoreUnavailable = Some value }
@@ -357,12 +357,12 @@ module IndicesOperations =
             { req with Request = Some value }
 
     type IndicesCloneRequest = {
-        Index: Types.IndexName
-        Target: Types.Name
-        MasterTimeout: Types.Duration option
-        Timeout: Types.Duration option
-        WaitForActiveShards: Types.WaitForActiveShards option
-        Aliases: Map<Types.IndexName, IndicesTypes.Alias> option
+        Index: CoreTypes.IndexName
+        Target: CoreTypes.Name
+        MasterTimeout: CoreTypes.Duration option
+        Timeout: CoreTypes.Duration option
+        WaitForActiveShards: CoreTypes.WaitForActiveShards option
+        Aliases: Map<CoreTypes.IndexName, IndicesTypes.Alias> option
         Settings: Map<string, System.Text.Json.JsonElement> option
     }
 
@@ -402,27 +402,27 @@ module IndicesOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: IndicesCloneRequest, value: Types.IndexName) =
+        member _.Index(state: IndicesCloneRequest, value: CoreTypes.IndexName) =
             { state with Index = value }
 
         [<CustomOperation("target")>]
-        member _.Target(state: IndicesCloneRequest, value: Types.Name) =
+        member _.Target(state: IndicesCloneRequest, value: CoreTypes.Name) =
             { state with Target = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IndicesCloneRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: IndicesCloneRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: IndicesCloneRequest, value: Types.Duration) =
+        member _.Timeout(state: IndicesCloneRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("waitForActiveShards")>]
-        member _.WaitForActiveShards(state: IndicesCloneRequest, value: Types.WaitForActiveShards) =
+        member _.WaitForActiveShards(state: IndicesCloneRequest, value: CoreTypes.WaitForActiveShards) =
             { state with WaitForActiveShards = Some value }
 
         [<CustomOperation("aliases")>]
-        member _.Aliases(state: IndicesCloneRequest, value: Map<Types.IndexName, IndicesTypes.Alias>) =
+        member _.Aliases(state: IndicesCloneRequest, value: Map<CoreTypes.IndexName, IndicesTypes.Alias>) =
             { state with Aliases = Some value }
 
         [<CustomOperation("settings")>]
@@ -432,25 +432,25 @@ module IndicesOperations =
     let indicesCloneRequest = IndicesCloneRequestBuilder()
 
     module Clone =
-        let withMasterTimeout (value: Types.Duration) (req: IndicesCloneRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: IndicesCloneRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: Types.Duration) (req: IndicesCloneRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: IndicesCloneRequest) =
             { req with Timeout = Some value }
-        let withWaitForActiveShards (value: Types.WaitForActiveShards) (req: IndicesCloneRequest) =
+        let withWaitForActiveShards (value: CoreTypes.WaitForActiveShards) (req: IndicesCloneRequest) =
             { req with WaitForActiveShards = Some value }
-        let withAliases (value: Map<Types.IndexName, IndicesTypes.Alias>) (req: IndicesCloneRequest) =
+        let withAliases (value: Map<CoreTypes.IndexName, IndicesTypes.Alias>) (req: IndicesCloneRequest) =
             { req with Aliases = Some value }
         let withSettings (value: Map<string, System.Text.Json.JsonElement>) (req: IndicesCloneRequest) =
             { req with Settings = Some value }
 
     type IndicesCloseRequest = {
-        Index: Types.Indices
+        Index: CoreTypes.Indices
         AllowNoIndices: bool option
-        ExpandWildcards: Types.ExpandWildcards option
+        ExpandWildcards: CoreTypes.ExpandWildcards option
         IgnoreUnavailable: bool option
-        MasterTimeout: Types.Duration option
-        Timeout: Types.Duration option
-        WaitForActiveShards: Types.WaitForActiveShards option
+        MasterTimeout: CoreTypes.Duration option
+        Timeout: CoreTypes.Duration option
+        WaitForActiveShards: CoreTypes.WaitForActiveShards option
     }
 
         with
@@ -491,7 +491,7 @@ module IndicesOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: IndicesCloseRequest, value: Types.Indices) =
+        member _.Index(state: IndicesCloseRequest, value: CoreTypes.Indices) =
             { state with Index = value }
 
         [<CustomOperation("allowNoIndices")>]
@@ -499,7 +499,7 @@ module IndicesOperations =
             { state with AllowNoIndices = Some value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: IndicesCloseRequest, value: Types.ExpandWildcards) =
+        member _.ExpandWildcards(state: IndicesCloseRequest, value: CoreTypes.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("ignoreUnavailable")>]
@@ -507,15 +507,15 @@ module IndicesOperations =
             { state with IgnoreUnavailable = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IndicesCloseRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: IndicesCloseRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: IndicesCloseRequest, value: Types.Duration) =
+        member _.Timeout(state: IndicesCloseRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("waitForActiveShards")>]
-        member _.WaitForActiveShards(state: IndicesCloseRequest, value: Types.WaitForActiveShards) =
+        member _.WaitForActiveShards(state: IndicesCloseRequest, value: CoreTypes.WaitForActiveShards) =
             { state with WaitForActiveShards = Some value }
 
     let indicesCloseRequest = IndicesCloseRequestBuilder()
@@ -523,24 +523,24 @@ module IndicesOperations =
     module Close =
         let withAllowNoIndices (value: bool) (req: IndicesCloseRequest) =
             { req with AllowNoIndices = Some value }
-        let withExpandWildcards (value: Types.ExpandWildcards) (req: IndicesCloseRequest) =
+        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: IndicesCloseRequest) =
             { req with ExpandWildcards = Some value }
         let withIgnoreUnavailable (value: bool) (req: IndicesCloseRequest) =
             { req with IgnoreUnavailable = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: IndicesCloseRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: IndicesCloseRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: Types.Duration) (req: IndicesCloseRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: IndicesCloseRequest) =
             { req with Timeout = Some value }
-        let withWaitForActiveShards (value: Types.WaitForActiveShards) (req: IndicesCloseRequest) =
+        let withWaitForActiveShards (value: CoreTypes.WaitForActiveShards) (req: IndicesCloseRequest) =
             { req with WaitForActiveShards = Some value }
 
     type IndicesCreateRequest = {
-        Index: Types.IndexName
-        MasterTimeout: Types.Duration option
-        Timeout: Types.Duration option
-        WaitForActiveShards: Types.WaitForActiveShards option
-        Aliases: Map<Types.Name, IndicesTypes.Alias> option
-        Mappings: TypesMapping.TypeMapping option
+        Index: CoreTypes.IndexName
+        MasterTimeout: CoreTypes.Duration option
+        Timeout: CoreTypes.Duration option
+        WaitForActiveShards: CoreTypes.WaitForActiveShards option
+        Aliases: Map<CoreTypes.Name, IndicesTypes.Alias> option
+        Mappings: CoreTypes.TypeMapping option
         Settings: IndicesTypes.IndexSettings option
     }
 
@@ -580,27 +580,27 @@ module IndicesOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: IndicesCreateRequest, value: Types.IndexName) =
+        member _.Index(state: IndicesCreateRequest, value: CoreTypes.IndexName) =
             { state with Index = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IndicesCreateRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: IndicesCreateRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: IndicesCreateRequest, value: Types.Duration) =
+        member _.Timeout(state: IndicesCreateRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("waitForActiveShards")>]
-        member _.WaitForActiveShards(state: IndicesCreateRequest, value: Types.WaitForActiveShards) =
+        member _.WaitForActiveShards(state: IndicesCreateRequest, value: CoreTypes.WaitForActiveShards) =
             { state with WaitForActiveShards = Some value }
 
         [<CustomOperation("aliases")>]
-        member _.Aliases(state: IndicesCreateRequest, value: Map<Types.Name, IndicesTypes.Alias>) =
+        member _.Aliases(state: IndicesCreateRequest, value: Map<CoreTypes.Name, IndicesTypes.Alias>) =
             { state with Aliases = Some value }
 
         [<CustomOperation("mappings")>]
-        member _.Mappings(state: IndicesCreateRequest, value: TypesMapping.TypeMapping) =
+        member _.Mappings(state: IndicesCreateRequest, value: CoreTypes.TypeMapping) =
             { state with Mappings = Some value }
 
         [<CustomOperation("settings")>]
@@ -610,23 +610,23 @@ module IndicesOperations =
     let indicesCreateRequest = IndicesCreateRequestBuilder()
 
     module Create =
-        let withMasterTimeout (value: Types.Duration) (req: IndicesCreateRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: IndicesCreateRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: Types.Duration) (req: IndicesCreateRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: IndicesCreateRequest) =
             { req with Timeout = Some value }
-        let withWaitForActiveShards (value: Types.WaitForActiveShards) (req: IndicesCreateRequest) =
+        let withWaitForActiveShards (value: CoreTypes.WaitForActiveShards) (req: IndicesCreateRequest) =
             { req with WaitForActiveShards = Some value }
-        let withAliases (value: Map<Types.Name, IndicesTypes.Alias>) (req: IndicesCreateRequest) =
+        let withAliases (value: Map<CoreTypes.Name, IndicesTypes.Alias>) (req: IndicesCreateRequest) =
             { req with Aliases = Some value }
-        let withMappings (value: TypesMapping.TypeMapping) (req: IndicesCreateRequest) =
+        let withMappings (value: CoreTypes.TypeMapping) (req: IndicesCreateRequest) =
             { req with Mappings = Some value }
         let withSettings (value: IndicesTypes.IndexSettings) (req: IndicesCreateRequest) =
             { req with Settings = Some value }
 
     type IndicesCreateDataStreamRequest = {
-        Name: Types.DataStreamName
-        MasterTimeout: Types.Duration option
-        Timeout: Types.Duration option
+        Name: CoreTypes.DataStreamName
+        MasterTimeout: CoreTypes.Duration option
+        Timeout: CoreTypes.Duration option
     }
 
         with
@@ -648,7 +648,7 @@ module IndicesOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type IndicesCreateDataStreamResponse = Types.AcknowledgedResponseBase
+    type IndicesCreateDataStreamResponse = CoreTypes.AcknowledgedResponseBase
 
     type IndicesCreateDataStreamRequestBuilder() =
         member _.Yield(_: unit) : IndicesCreateDataStreamRequest =
@@ -659,28 +659,28 @@ module IndicesOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: IndicesCreateDataStreamRequest, value: Types.DataStreamName) =
+        member _.Name(state: IndicesCreateDataStreamRequest, value: CoreTypes.DataStreamName) =
             { state with Name = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IndicesCreateDataStreamRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: IndicesCreateDataStreamRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: IndicesCreateDataStreamRequest, value: Types.Duration) =
+        member _.Timeout(state: IndicesCreateDataStreamRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
     let indicesCreateDataStreamRequest = IndicesCreateDataStreamRequestBuilder()
 
     module CreateDataStream =
-        let withMasterTimeout (value: Types.Duration) (req: IndicesCreateDataStreamRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: IndicesCreateDataStreamRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: Types.Duration) (req: IndicesCreateDataStreamRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: IndicesCreateDataStreamRequest) =
             { req with Timeout = Some value }
 
     type IndicesCreateFromRequest = {
-        Source: Types.IndexName
-        Dest: Types.IndexName
+        Source: CoreTypes.IndexName
+        Dest: CoreTypes.IndexName
         Document: obj
     }
 
@@ -707,11 +707,11 @@ module IndicesOperations =
             }
 
         [<CustomOperation("source")>]
-        member _.Source(state: IndicesCreateFromRequest, value: Types.IndexName) =
+        member _.Source(state: IndicesCreateFromRequest, value: CoreTypes.IndexName) =
             { state with Source = value }
 
         [<CustomOperation("dest")>]
-        member _.Dest(state: IndicesCreateFromRequest, value: Types.IndexName) =
+        member _.Dest(state: IndicesCreateFromRequest, value: CoreTypes.IndexName) =
             { state with Dest = value }
 
         [<CustomOperation("document")>]
@@ -721,8 +721,8 @@ module IndicesOperations =
     let indicesCreateFromRequest = IndicesCreateFromRequestBuilder()
 
     type IndicesDataStreamsStatsRequest = {
-        Name: Types.Indices
-        ExpandWildcards: Types.ExpandWildcards option
+        Name: CoreTypes.Indices
+        ExpandWildcards: CoreTypes.ExpandWildcards option
     }
 
         with
@@ -753,26 +753,26 @@ module IndicesOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: IndicesDataStreamsStatsRequest, value: Types.Indices) =
+        member _.Name(state: IndicesDataStreamsStatsRequest, value: CoreTypes.Indices) =
             { state with Name = value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: IndicesDataStreamsStatsRequest, value: Types.ExpandWildcards) =
+        member _.ExpandWildcards(state: IndicesDataStreamsStatsRequest, value: CoreTypes.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
     let indicesDataStreamsStatsRequest = IndicesDataStreamsStatsRequestBuilder()
 
     module DataStreamsStats =
-        let withExpandWildcards (value: Types.ExpandWildcards) (req: IndicesDataStreamsStatsRequest) =
+        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: IndicesDataStreamsStatsRequest) =
             { req with ExpandWildcards = Some value }
 
     type IndicesDeleteRequest = {
-        Index: Types.Indices
+        Index: CoreTypes.Indices
         AllowNoIndices: bool option
-        ExpandWildcards: Types.ExpandWildcards option
+        ExpandWildcards: CoreTypes.ExpandWildcards option
         IgnoreUnavailable: bool option
-        MasterTimeout: Types.Duration option
-        Timeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
+        Timeout: CoreTypes.Duration option
     }
 
         with
@@ -797,7 +797,7 @@ module IndicesOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type IndicesDeleteResponse = Types.IndicesResponseBase
+    type IndicesDeleteResponse = CoreTypes.IndicesResponseBase
 
     type IndicesDeleteRequestBuilder() =
         member _.Yield(_: unit) : IndicesDeleteRequest =
@@ -811,7 +811,7 @@ module IndicesOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: IndicesDeleteRequest, value: Types.Indices) =
+        member _.Index(state: IndicesDeleteRequest, value: CoreTypes.Indices) =
             { state with Index = value }
 
         [<CustomOperation("allowNoIndices")>]
@@ -819,7 +819,7 @@ module IndicesOperations =
             { state with AllowNoIndices = Some value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: IndicesDeleteRequest, value: Types.ExpandWildcards) =
+        member _.ExpandWildcards(state: IndicesDeleteRequest, value: CoreTypes.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("ignoreUnavailable")>]
@@ -827,11 +827,11 @@ module IndicesOperations =
             { state with IgnoreUnavailable = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IndicesDeleteRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: IndicesDeleteRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: IndicesDeleteRequest, value: Types.Duration) =
+        member _.Timeout(state: IndicesDeleteRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
     let indicesDeleteRequest = IndicesDeleteRequestBuilder()
@@ -839,20 +839,20 @@ module IndicesOperations =
     module Delete =
         let withAllowNoIndices (value: bool) (req: IndicesDeleteRequest) =
             { req with AllowNoIndices = Some value }
-        let withExpandWildcards (value: Types.ExpandWildcards) (req: IndicesDeleteRequest) =
+        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: IndicesDeleteRequest) =
             { req with ExpandWildcards = Some value }
         let withIgnoreUnavailable (value: bool) (req: IndicesDeleteRequest) =
             { req with IgnoreUnavailable = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: IndicesDeleteRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: IndicesDeleteRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: Types.Duration) (req: IndicesDeleteRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: IndicesDeleteRequest) =
             { req with Timeout = Some value }
 
     type IndicesDeleteAliasRequest = {
-        Index: Types.Indices
-        Name: Types.Names
-        MasterTimeout: Types.Duration option
-        Timeout: Types.Duration option
+        Index: CoreTypes.Indices
+        Name: CoreTypes.Names
+        MasterTimeout: CoreTypes.Duration option
+        Timeout: CoreTypes.Duration option
     }
 
         with
@@ -886,34 +886,34 @@ module IndicesOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: IndicesDeleteAliasRequest, value: Types.Indices) =
+        member _.Index(state: IndicesDeleteAliasRequest, value: CoreTypes.Indices) =
             { state with Index = value }
 
         [<CustomOperation("name")>]
-        member _.Name(state: IndicesDeleteAliasRequest, value: Types.Names) =
+        member _.Name(state: IndicesDeleteAliasRequest, value: CoreTypes.Names) =
             { state with Name = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IndicesDeleteAliasRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: IndicesDeleteAliasRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: IndicesDeleteAliasRequest, value: Types.Duration) =
+        member _.Timeout(state: IndicesDeleteAliasRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
     let indicesDeleteAliasRequest = IndicesDeleteAliasRequestBuilder()
 
     module DeleteAlias =
-        let withMasterTimeout (value: Types.Duration) (req: IndicesDeleteAliasRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: IndicesDeleteAliasRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: Types.Duration) (req: IndicesDeleteAliasRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: IndicesDeleteAliasRequest) =
             { req with Timeout = Some value }
 
     type IndicesDeleteDataLifecycleRequest = {
-        Name: Types.DataStreamNames
-        ExpandWildcards: Types.ExpandWildcards option
-        MasterTimeout: Types.Duration option
-        Timeout: Types.Duration option
+        Name: CoreTypes.DataStreamNames
+        ExpandWildcards: CoreTypes.ExpandWildcards option
+        MasterTimeout: CoreTypes.Duration option
+        Timeout: CoreTypes.Duration option
     }
 
         with
@@ -936,7 +936,7 @@ module IndicesOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type IndicesDeleteDataLifecycleResponse = Types.AcknowledgedResponseBase
+    type IndicesDeleteDataLifecycleResponse = CoreTypes.AcknowledgedResponseBase
 
     type IndicesDeleteDataLifecycleRequestBuilder() =
         member _.Yield(_: unit) : IndicesDeleteDataLifecycleRequest =
@@ -948,35 +948,35 @@ module IndicesOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: IndicesDeleteDataLifecycleRequest, value: Types.DataStreamNames) =
+        member _.Name(state: IndicesDeleteDataLifecycleRequest, value: CoreTypes.DataStreamNames) =
             { state with Name = value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: IndicesDeleteDataLifecycleRequest, value: Types.ExpandWildcards) =
+        member _.ExpandWildcards(state: IndicesDeleteDataLifecycleRequest, value: CoreTypes.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IndicesDeleteDataLifecycleRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: IndicesDeleteDataLifecycleRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: IndicesDeleteDataLifecycleRequest, value: Types.Duration) =
+        member _.Timeout(state: IndicesDeleteDataLifecycleRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
     let indicesDeleteDataLifecycleRequest = IndicesDeleteDataLifecycleRequestBuilder()
 
     module DeleteDataLifecycle =
-        let withExpandWildcards (value: Types.ExpandWildcards) (req: IndicesDeleteDataLifecycleRequest) =
+        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: IndicesDeleteDataLifecycleRequest) =
             { req with ExpandWildcards = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: IndicesDeleteDataLifecycleRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: IndicesDeleteDataLifecycleRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: Types.Duration) (req: IndicesDeleteDataLifecycleRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: IndicesDeleteDataLifecycleRequest) =
             { req with Timeout = Some value }
 
     type IndicesDeleteDataStreamRequest = {
-        Name: Types.DataStreamNames
-        MasterTimeout: Types.Duration option
-        ExpandWildcards: Types.ExpandWildcards option
+        Name: CoreTypes.DataStreamNames
+        MasterTimeout: CoreTypes.Duration option
+        ExpandWildcards: CoreTypes.ExpandWildcards option
     }
 
         with
@@ -998,7 +998,7 @@ module IndicesOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type IndicesDeleteDataStreamResponse = Types.AcknowledgedResponseBase
+    type IndicesDeleteDataStreamResponse = CoreTypes.AcknowledgedResponseBase
 
     type IndicesDeleteDataStreamRequestBuilder() =
         member _.Yield(_: unit) : IndicesDeleteDataStreamRequest =
@@ -1009,30 +1009,30 @@ module IndicesOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: IndicesDeleteDataStreamRequest, value: Types.DataStreamNames) =
+        member _.Name(state: IndicesDeleteDataStreamRequest, value: CoreTypes.DataStreamNames) =
             { state with Name = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IndicesDeleteDataStreamRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: IndicesDeleteDataStreamRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: IndicesDeleteDataStreamRequest, value: Types.ExpandWildcards) =
+        member _.ExpandWildcards(state: IndicesDeleteDataStreamRequest, value: CoreTypes.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
     let indicesDeleteDataStreamRequest = IndicesDeleteDataStreamRequestBuilder()
 
     module DeleteDataStream =
-        let withMasterTimeout (value: Types.Duration) (req: IndicesDeleteDataStreamRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: IndicesDeleteDataStreamRequest) =
             { req with MasterTimeout = Some value }
-        let withExpandWildcards (value: Types.ExpandWildcards) (req: IndicesDeleteDataStreamRequest) =
+        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: IndicesDeleteDataStreamRequest) =
             { req with ExpandWildcards = Some value }
 
     type IndicesDeleteDataStreamOptionsRequest = {
-        Name: Types.DataStreamNames
-        ExpandWildcards: Types.ExpandWildcards option
-        MasterTimeout: Types.Duration option
-        Timeout: Types.Duration option
+        Name: CoreTypes.DataStreamNames
+        ExpandWildcards: CoreTypes.ExpandWildcards option
+        MasterTimeout: CoreTypes.Duration option
+        Timeout: CoreTypes.Duration option
     }
 
         with
@@ -1055,7 +1055,7 @@ module IndicesOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type IndicesDeleteDataStreamOptionsResponse = Types.AcknowledgedResponseBase
+    type IndicesDeleteDataStreamOptionsResponse = CoreTypes.AcknowledgedResponseBase
 
     type IndicesDeleteDataStreamOptionsRequestBuilder() =
         member _.Yield(_: unit) : IndicesDeleteDataStreamOptionsRequest =
@@ -1067,35 +1067,35 @@ module IndicesOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: IndicesDeleteDataStreamOptionsRequest, value: Types.DataStreamNames) =
+        member _.Name(state: IndicesDeleteDataStreamOptionsRequest, value: CoreTypes.DataStreamNames) =
             { state with Name = value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: IndicesDeleteDataStreamOptionsRequest, value: Types.ExpandWildcards) =
+        member _.ExpandWildcards(state: IndicesDeleteDataStreamOptionsRequest, value: CoreTypes.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IndicesDeleteDataStreamOptionsRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: IndicesDeleteDataStreamOptionsRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: IndicesDeleteDataStreamOptionsRequest, value: Types.Duration) =
+        member _.Timeout(state: IndicesDeleteDataStreamOptionsRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
     let indicesDeleteDataStreamOptionsRequest = IndicesDeleteDataStreamOptionsRequestBuilder()
 
     module DeleteDataStreamOptions =
-        let withExpandWildcards (value: Types.ExpandWildcards) (req: IndicesDeleteDataStreamOptionsRequest) =
+        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: IndicesDeleteDataStreamOptionsRequest) =
             { req with ExpandWildcards = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: IndicesDeleteDataStreamOptionsRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: IndicesDeleteDataStreamOptionsRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: Types.Duration) (req: IndicesDeleteDataStreamOptionsRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: IndicesDeleteDataStreamOptionsRequest) =
             { req with Timeout = Some value }
 
     type IndicesDeleteIndexTemplateRequest = {
-        Name: Types.Names
-        MasterTimeout: Types.Duration option
-        Timeout: Types.Duration option
+        Name: CoreTypes.Names
+        MasterTimeout: CoreTypes.Duration option
+        Timeout: CoreTypes.Duration option
     }
 
         with
@@ -1117,7 +1117,7 @@ module IndicesOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type IndicesDeleteIndexTemplateResponse = Types.AcknowledgedResponseBase
+    type IndicesDeleteIndexTemplateResponse = CoreTypes.AcknowledgedResponseBase
 
     type IndicesDeleteIndexTemplateRequestBuilder() =
         member _.Yield(_: unit) : IndicesDeleteIndexTemplateRequest =
@@ -1128,29 +1128,29 @@ module IndicesOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: IndicesDeleteIndexTemplateRequest, value: Types.Names) =
+        member _.Name(state: IndicesDeleteIndexTemplateRequest, value: CoreTypes.Names) =
             { state with Name = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IndicesDeleteIndexTemplateRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: IndicesDeleteIndexTemplateRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: IndicesDeleteIndexTemplateRequest, value: Types.Duration) =
+        member _.Timeout(state: IndicesDeleteIndexTemplateRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
     let indicesDeleteIndexTemplateRequest = IndicesDeleteIndexTemplateRequestBuilder()
 
     module DeleteIndexTemplate =
-        let withMasterTimeout (value: Types.Duration) (req: IndicesDeleteIndexTemplateRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: IndicesDeleteIndexTemplateRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: Types.Duration) (req: IndicesDeleteIndexTemplateRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: IndicesDeleteIndexTemplateRequest) =
             { req with Timeout = Some value }
 
     type IndicesDeleteTemplateRequest = {
-        Name: Types.Name
-        MasterTimeout: Types.Duration option
-        Timeout: Types.Duration option
+        Name: CoreTypes.Name
+        MasterTimeout: CoreTypes.Duration option
+        Timeout: CoreTypes.Duration option
     }
 
         with
@@ -1172,7 +1172,7 @@ module IndicesOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type IndicesDeleteTemplateResponse = Types.AcknowledgedResponseBase
+    type IndicesDeleteTemplateResponse = CoreTypes.AcknowledgedResponseBase
 
     type IndicesDeleteTemplateRequestBuilder() =
         member _.Yield(_: unit) : IndicesDeleteTemplateRequest =
@@ -1183,29 +1183,29 @@ module IndicesOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: IndicesDeleteTemplateRequest, value: Types.Name) =
+        member _.Name(state: IndicesDeleteTemplateRequest, value: CoreTypes.Name) =
             { state with Name = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IndicesDeleteTemplateRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: IndicesDeleteTemplateRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: IndicesDeleteTemplateRequest, value: Types.Duration) =
+        member _.Timeout(state: IndicesDeleteTemplateRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
     let indicesDeleteTemplateRequest = IndicesDeleteTemplateRequestBuilder()
 
     module DeleteTemplate =
-        let withMasterTimeout (value: Types.Duration) (req: IndicesDeleteTemplateRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: IndicesDeleteTemplateRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: Types.Duration) (req: IndicesDeleteTemplateRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: IndicesDeleteTemplateRequest) =
             { req with Timeout = Some value }
 
     type IndicesDiskUsageRequest = {
-        Index: Types.Indices
+        Index: CoreTypes.Indices
         AllowNoIndices: bool option
-        ExpandWildcards: Types.ExpandWildcards option
+        ExpandWildcards: CoreTypes.ExpandWildcards option
         Flush: bool option
         IgnoreUnavailable: bool option
         RunExpensiveTasks: bool option
@@ -1247,7 +1247,7 @@ module IndicesOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: IndicesDiskUsageRequest, value: Types.Indices) =
+        member _.Index(state: IndicesDiskUsageRequest, value: CoreTypes.Indices) =
             { state with Index = value }
 
         [<CustomOperation("allowNoIndices")>]
@@ -1255,7 +1255,7 @@ module IndicesOperations =
             { state with AllowNoIndices = Some value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: IndicesDiskUsageRequest, value: Types.ExpandWildcards) =
+        member _.ExpandWildcards(state: IndicesDiskUsageRequest, value: CoreTypes.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("flush")>]
@@ -1275,7 +1275,7 @@ module IndicesOperations =
     module DiskUsage =
         let withAllowNoIndices (value: bool) (req: IndicesDiskUsageRequest) =
             { req with AllowNoIndices = Some value }
-        let withExpandWildcards (value: Types.ExpandWildcards) (req: IndicesDiskUsageRequest) =
+        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: IndicesDiskUsageRequest) =
             { req with ExpandWildcards = Some value }
         let withFlush (value: bool) (req: IndicesDiskUsageRequest) =
             { req with Flush = Some value }
@@ -1285,8 +1285,8 @@ module IndicesOperations =
             { req with RunExpensiveTasks = Some value }
 
     type IndicesDownsampleRequest = {
-        Index: Types.IndexName
-        TargetIndex: Types.IndexName
+        Index: CoreTypes.IndexName
+        TargetIndex: CoreTypes.IndexName
         Document: obj
     }
 
@@ -1313,11 +1313,11 @@ module IndicesOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: IndicesDownsampleRequest, value: Types.IndexName) =
+        member _.Index(state: IndicesDownsampleRequest, value: CoreTypes.IndexName) =
             { state with Index = value }
 
         [<CustomOperation("targetIndex")>]
-        member _.TargetIndex(state: IndicesDownsampleRequest, value: Types.IndexName) =
+        member _.TargetIndex(state: IndicesDownsampleRequest, value: CoreTypes.IndexName) =
             { state with TargetIndex = value }
 
         [<CustomOperation("document")>]
@@ -1327,9 +1327,9 @@ module IndicesOperations =
     let indicesDownsampleRequest = IndicesDownsampleRequestBuilder()
 
     type IndicesExistsRequest = {
-        Index: Types.Indices
+        Index: CoreTypes.Indices
         AllowNoIndices: bool option
-        ExpandWildcards: Types.ExpandWildcards option
+        ExpandWildcards: CoreTypes.ExpandWildcards option
         FlatSettings: bool option
         IgnoreUnavailable: bool option
         IncludeDefaults: bool option
@@ -1374,7 +1374,7 @@ module IndicesOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: IndicesExistsRequest, value: Types.Indices) =
+        member _.Index(state: IndicesExistsRequest, value: CoreTypes.Indices) =
             { state with Index = value }
 
         [<CustomOperation("allowNoIndices")>]
@@ -1382,7 +1382,7 @@ module IndicesOperations =
             { state with AllowNoIndices = Some value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: IndicesExistsRequest, value: Types.ExpandWildcards) =
+        member _.ExpandWildcards(state: IndicesExistsRequest, value: CoreTypes.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("flatSettings")>]
@@ -1406,7 +1406,7 @@ module IndicesOperations =
     module Exists =
         let withAllowNoIndices (value: bool) (req: IndicesExistsRequest) =
             { req with AllowNoIndices = Some value }
-        let withExpandWildcards (value: Types.ExpandWildcards) (req: IndicesExistsRequest) =
+        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: IndicesExistsRequest) =
             { req with ExpandWildcards = Some value }
         let withFlatSettings (value: bool) (req: IndicesExistsRequest) =
             { req with FlatSettings = Some value }
@@ -1418,12 +1418,12 @@ module IndicesOperations =
             { req with Local = Some value }
 
     type IndicesExistsAliasRequest = {
-        Name: Types.Names
-        Index: Types.Indices
+        Name: CoreTypes.Names
+        Index: CoreTypes.Indices
         AllowNoIndices: bool option
-        ExpandWildcards: Types.ExpandWildcards option
+        ExpandWildcards: CoreTypes.ExpandWildcards option
         IgnoreUnavailable: bool option
-        MasterTimeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
     }
 
         with
@@ -1461,11 +1461,11 @@ module IndicesOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: IndicesExistsAliasRequest, value: Types.Names) =
+        member _.Name(state: IndicesExistsAliasRequest, value: CoreTypes.Names) =
             { state with Name = value }
 
         [<CustomOperation("index")>]
-        member _.Index(state: IndicesExistsAliasRequest, value: Types.Indices) =
+        member _.Index(state: IndicesExistsAliasRequest, value: CoreTypes.Indices) =
             { state with Index = value }
 
         [<CustomOperation("allowNoIndices")>]
@@ -1473,7 +1473,7 @@ module IndicesOperations =
             { state with AllowNoIndices = Some value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: IndicesExistsAliasRequest, value: Types.ExpandWildcards) =
+        member _.ExpandWildcards(state: IndicesExistsAliasRequest, value: CoreTypes.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("ignoreUnavailable")>]
@@ -1481,7 +1481,7 @@ module IndicesOperations =
             { state with IgnoreUnavailable = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IndicesExistsAliasRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: IndicesExistsAliasRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
     let indicesExistsAliasRequest = IndicesExistsAliasRequestBuilder()
@@ -1489,18 +1489,18 @@ module IndicesOperations =
     module ExistsAlias =
         let withAllowNoIndices (value: bool) (req: IndicesExistsAliasRequest) =
             { req with AllowNoIndices = Some value }
-        let withExpandWildcards (value: Types.ExpandWildcards) (req: IndicesExistsAliasRequest) =
+        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: IndicesExistsAliasRequest) =
             { req with ExpandWildcards = Some value }
         let withIgnoreUnavailable (value: bool) (req: IndicesExistsAliasRequest) =
             { req with IgnoreUnavailable = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: IndicesExistsAliasRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: IndicesExistsAliasRequest) =
             { req with MasterTimeout = Some value }
 
     type IndicesExistsIndexTemplateRequest = {
-        Name: Types.Name
+        Name: CoreTypes.Name
         Local: bool option
         FlatSettings: bool option
-        MasterTimeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
     }
 
         with
@@ -1535,7 +1535,7 @@ module IndicesOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: IndicesExistsIndexTemplateRequest, value: Types.Name) =
+        member _.Name(state: IndicesExistsIndexTemplateRequest, value: CoreTypes.Name) =
             { state with Name = value }
 
         [<CustomOperation("local")>]
@@ -1547,7 +1547,7 @@ module IndicesOperations =
             { state with FlatSettings = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IndicesExistsIndexTemplateRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: IndicesExistsIndexTemplateRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
     let indicesExistsIndexTemplateRequest = IndicesExistsIndexTemplateRequestBuilder()
@@ -1557,14 +1557,14 @@ module IndicesOperations =
             { req with Local = Some value }
         let withFlatSettings (value: bool) (req: IndicesExistsIndexTemplateRequest) =
             { req with FlatSettings = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: IndicesExistsIndexTemplateRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: IndicesExistsIndexTemplateRequest) =
             { req with MasterTimeout = Some value }
 
     type IndicesExistsTemplateRequest = {
-        Name: Types.Names
+        Name: CoreTypes.Names
         FlatSettings: bool option
         Local: bool option
-        MasterTimeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
     }
 
         with
@@ -1599,7 +1599,7 @@ module IndicesOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: IndicesExistsTemplateRequest, value: Types.Names) =
+        member _.Name(state: IndicesExistsTemplateRequest, value: CoreTypes.Names) =
             { state with Name = value }
 
         [<CustomOperation("flatSettings")>]
@@ -1611,7 +1611,7 @@ module IndicesOperations =
             { state with Local = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IndicesExistsTemplateRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: IndicesExistsTemplateRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
     let indicesExistsTemplateRequest = IndicesExistsTemplateRequestBuilder()
@@ -1621,13 +1621,13 @@ module IndicesOperations =
             { req with FlatSettings = Some value }
         let withLocal (value: bool) (req: IndicesExistsTemplateRequest) =
             { req with Local = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: IndicesExistsTemplateRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: IndicesExistsTemplateRequest) =
             { req with MasterTimeout = Some value }
 
     type IndicesExplainDataLifecycleRequest = {
-        Index: Types.Indices
+        Index: CoreTypes.Indices
         IncludeDefaults: bool option
-        MasterTimeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
     }
 
         with
@@ -1660,7 +1660,7 @@ module IndicesOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: IndicesExplainDataLifecycleRequest, value: Types.Indices) =
+        member _.Index(state: IndicesExplainDataLifecycleRequest, value: CoreTypes.Indices) =
             { state with Index = value }
 
         [<CustomOperation("includeDefaults")>]
@@ -1668,7 +1668,7 @@ module IndicesOperations =
             { state with IncludeDefaults = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IndicesExplainDataLifecycleRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: IndicesExplainDataLifecycleRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
     let indicesExplainDataLifecycleRequest = IndicesExplainDataLifecycleRequestBuilder()
@@ -1676,15 +1676,15 @@ module IndicesOperations =
     module ExplainDataLifecycle =
         let withIncludeDefaults (value: bool) (req: IndicesExplainDataLifecycleRequest) =
             { req with IncludeDefaults = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: IndicesExplainDataLifecycleRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: IndicesExplainDataLifecycleRequest) =
             { req with MasterTimeout = Some value }
 
     type IndicesFieldUsageStatsRequest = {
-        Index: Types.Indices
+        Index: CoreTypes.Indices
         AllowNoIndices: bool option
-        ExpandWildcards: Types.ExpandWildcards option
+        ExpandWildcards: CoreTypes.ExpandWildcards option
         IgnoreUnavailable: bool option
-        Fields: Types.Fields option
+        Fields: CoreTypes.Fields option
     }
 
         with
@@ -1721,7 +1721,7 @@ module IndicesOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: IndicesFieldUsageStatsRequest, value: Types.Indices) =
+        member _.Index(state: IndicesFieldUsageStatsRequest, value: CoreTypes.Indices) =
             { state with Index = value }
 
         [<CustomOperation("allowNoIndices")>]
@@ -1729,7 +1729,7 @@ module IndicesOperations =
             { state with AllowNoIndices = Some value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: IndicesFieldUsageStatsRequest, value: Types.ExpandWildcards) =
+        member _.ExpandWildcards(state: IndicesFieldUsageStatsRequest, value: CoreTypes.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("ignoreUnavailable")>]
@@ -1737,7 +1737,7 @@ module IndicesOperations =
             { state with IgnoreUnavailable = Some value }
 
         [<CustomOperation("fields")>]
-        member _.Fields(state: IndicesFieldUsageStatsRequest, value: Types.Fields) =
+        member _.Fields(state: IndicesFieldUsageStatsRequest, value: CoreTypes.Fields) =
             { state with Fields = Some value }
 
     let indicesFieldUsageStatsRequest = IndicesFieldUsageStatsRequestBuilder()
@@ -1745,17 +1745,17 @@ module IndicesOperations =
     module FieldUsageStats =
         let withAllowNoIndices (value: bool) (req: IndicesFieldUsageStatsRequest) =
             { req with AllowNoIndices = Some value }
-        let withExpandWildcards (value: Types.ExpandWildcards) (req: IndicesFieldUsageStatsRequest) =
+        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: IndicesFieldUsageStatsRequest) =
             { req with ExpandWildcards = Some value }
         let withIgnoreUnavailable (value: bool) (req: IndicesFieldUsageStatsRequest) =
             { req with IgnoreUnavailable = Some value }
-        let withFields (value: Types.Fields) (req: IndicesFieldUsageStatsRequest) =
+        let withFields (value: CoreTypes.Fields) (req: IndicesFieldUsageStatsRequest) =
             { req with Fields = Some value }
 
     type IndicesFlushRequest = {
-        Index: Types.Indices
+        Index: CoreTypes.Indices
         AllowNoIndices: bool option
-        ExpandWildcards: Types.ExpandWildcards option
+        ExpandWildcards: CoreTypes.ExpandWildcards option
         Force: bool option
         IgnoreUnavailable: bool option
         WaitIfOngoing: bool option
@@ -1783,7 +1783,7 @@ module IndicesOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type IndicesFlushResponse = Types.ShardsOperationResponseBase
+    type IndicesFlushResponse = CoreTypes.ShardsOperationResponseBase
 
     type IndicesFlushRequestBuilder() =
         member _.Yield(_: unit) : IndicesFlushRequest =
@@ -1797,7 +1797,7 @@ module IndicesOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: IndicesFlushRequest, value: Types.Indices) =
+        member _.Index(state: IndicesFlushRequest, value: CoreTypes.Indices) =
             { state with Index = value }
 
         [<CustomOperation("allowNoIndices")>]
@@ -1805,7 +1805,7 @@ module IndicesOperations =
             { state with AllowNoIndices = Some value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: IndicesFlushRequest, value: Types.ExpandWildcards) =
+        member _.ExpandWildcards(state: IndicesFlushRequest, value: CoreTypes.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("force")>]
@@ -1825,7 +1825,7 @@ module IndicesOperations =
     module Flush =
         let withAllowNoIndices (value: bool) (req: IndicesFlushRequest) =
             { req with AllowNoIndices = Some value }
-        let withExpandWildcards (value: Types.ExpandWildcards) (req: IndicesFlushRequest) =
+        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: IndicesFlushRequest) =
             { req with ExpandWildcards = Some value }
         let withForce (value: bool) (req: IndicesFlushRequest) =
             { req with Force = Some value }
@@ -1835,12 +1835,12 @@ module IndicesOperations =
             { req with WaitIfOngoing = Some value }
 
     type IndicesForcemergeRequest = {
-        Index: Types.Indices
+        Index: CoreTypes.Indices
         AllowNoIndices: bool option
-        ExpandWildcards: Types.ExpandWildcards option
+        ExpandWildcards: CoreTypes.ExpandWildcards option
         Flush: bool option
         IgnoreUnavailable: bool option
-        MaxNumSegments: Types.Long option
+        MaxNumSegments: CoreTypes.Long option
         OnlyExpungeDeletes: bool option
         WaitForCompletion: bool option
     }
@@ -1885,7 +1885,7 @@ module IndicesOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: IndicesForcemergeRequest, value: Types.Indices) =
+        member _.Index(state: IndicesForcemergeRequest, value: CoreTypes.Indices) =
             { state with Index = value }
 
         [<CustomOperation("allowNoIndices")>]
@@ -1893,7 +1893,7 @@ module IndicesOperations =
             { state with AllowNoIndices = Some value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: IndicesForcemergeRequest, value: Types.ExpandWildcards) =
+        member _.ExpandWildcards(state: IndicesForcemergeRequest, value: CoreTypes.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("flush")>]
@@ -1905,7 +1905,7 @@ module IndicesOperations =
             { state with IgnoreUnavailable = Some value }
 
         [<CustomOperation("maxNumSegments")>]
-        member _.MaxNumSegments(state: IndicesForcemergeRequest, value: Types.Long) =
+        member _.MaxNumSegments(state: IndicesForcemergeRequest, value: CoreTypes.Long) =
             { state with MaxNumSegments = Some value }
 
         [<CustomOperation("onlyExpungeDeletes")>]
@@ -1921,13 +1921,13 @@ module IndicesOperations =
     module Forcemerge =
         let withAllowNoIndices (value: bool) (req: IndicesForcemergeRequest) =
             { req with AllowNoIndices = Some value }
-        let withExpandWildcards (value: Types.ExpandWildcards) (req: IndicesForcemergeRequest) =
+        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: IndicesForcemergeRequest) =
             { req with ExpandWildcards = Some value }
         let withFlush (value: bool) (req: IndicesForcemergeRequest) =
             { req with Flush = Some value }
         let withIgnoreUnavailable (value: bool) (req: IndicesForcemergeRequest) =
             { req with IgnoreUnavailable = Some value }
-        let withMaxNumSegments (value: Types.Long) (req: IndicesForcemergeRequest) =
+        let withMaxNumSegments (value: CoreTypes.Long) (req: IndicesForcemergeRequest) =
             { req with MaxNumSegments = Some value }
         let withOnlyExpungeDeletes (value: bool) (req: IndicesForcemergeRequest) =
             { req with OnlyExpungeDeletes = Some value }
@@ -1935,14 +1935,14 @@ module IndicesOperations =
             { req with WaitForCompletion = Some value }
 
     type IndicesGetRequest = {
-        Index: Types.Indices
+        Index: CoreTypes.Indices
         AllowNoIndices: bool option
-        ExpandWildcards: Types.ExpandWildcards option
+        ExpandWildcards: CoreTypes.ExpandWildcards option
         FlatSettings: bool option
         IgnoreUnavailable: bool option
         IncludeDefaults: bool option
         Local: bool option
-        MasterTimeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
         Features: IndicesGet.Features option
     }
 
@@ -1971,7 +1971,7 @@ module IndicesOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type IndicesGetResponse = Map<Types.IndexName, IndicesTypes.IndexState>
+    type IndicesGetResponse = Map<CoreTypes.IndexName, IndicesTypes.IndexState>
 
     type IndicesGetRequestBuilder() =
         member _.Yield(_: unit) : IndicesGetRequest =
@@ -1988,7 +1988,7 @@ module IndicesOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: IndicesGetRequest, value: Types.Indices) =
+        member _.Index(state: IndicesGetRequest, value: CoreTypes.Indices) =
             { state with Index = value }
 
         [<CustomOperation("allowNoIndices")>]
@@ -1996,7 +1996,7 @@ module IndicesOperations =
             { state with AllowNoIndices = Some value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: IndicesGetRequest, value: Types.ExpandWildcards) =
+        member _.ExpandWildcards(state: IndicesGetRequest, value: CoreTypes.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("flatSettings")>]
@@ -2016,7 +2016,7 @@ module IndicesOperations =
             { state with Local = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IndicesGetRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: IndicesGetRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("features")>]
@@ -2028,7 +2028,7 @@ module IndicesOperations =
     module Get =
         let withAllowNoIndices (value: bool) (req: IndicesGetRequest) =
             { req with AllowNoIndices = Some value }
-        let withExpandWildcards (value: Types.ExpandWildcards) (req: IndicesGetRequest) =
+        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: IndicesGetRequest) =
             { req with ExpandWildcards = Some value }
         let withFlatSettings (value: bool) (req: IndicesGetRequest) =
             { req with FlatSettings = Some value }
@@ -2038,18 +2038,18 @@ module IndicesOperations =
             { req with IncludeDefaults = Some value }
         let withLocal (value: bool) (req: IndicesGetRequest) =
             { req with Local = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: IndicesGetRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: IndicesGetRequest) =
             { req with MasterTimeout = Some value }
         let withFeatures (value: IndicesGet.Features) (req: IndicesGetRequest) =
             { req with Features = Some value }
 
     type IndicesGetAliasRequest = {
-        Name: Types.Names
-        Index: Types.Indices
+        Name: CoreTypes.Names
+        Index: CoreTypes.Indices
         AllowNoIndices: bool option
-        ExpandWildcards: Types.ExpandWildcards option
+        ExpandWildcards: CoreTypes.ExpandWildcards option
         IgnoreUnavailable: bool option
-        MasterTimeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
     }
 
         with
@@ -2073,7 +2073,7 @@ module IndicesOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type IndicesGetAliasResponse = Map<Types.IndexName, IndicesGetAliasTypes.IndexAliases>
+    type IndicesGetAliasResponse = Map<CoreTypes.IndexName, IndicesGetAliasTypes.IndexAliases>
 
     type IndicesGetAliasRequestBuilder() =
         member _.Yield(_: unit) : IndicesGetAliasRequest =
@@ -2087,11 +2087,11 @@ module IndicesOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: IndicesGetAliasRequest, value: Types.Names) =
+        member _.Name(state: IndicesGetAliasRequest, value: CoreTypes.Names) =
             { state with Name = value }
 
         [<CustomOperation("index")>]
-        member _.Index(state: IndicesGetAliasRequest, value: Types.Indices) =
+        member _.Index(state: IndicesGetAliasRequest, value: CoreTypes.Indices) =
             { state with Index = value }
 
         [<CustomOperation("allowNoIndices")>]
@@ -2099,7 +2099,7 @@ module IndicesOperations =
             { state with AllowNoIndices = Some value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: IndicesGetAliasRequest, value: Types.ExpandWildcards) =
+        member _.ExpandWildcards(state: IndicesGetAliasRequest, value: CoreTypes.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("ignoreUnavailable")>]
@@ -2107,7 +2107,7 @@ module IndicesOperations =
             { state with IgnoreUnavailable = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IndicesGetAliasRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: IndicesGetAliasRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
     let indicesGetAliasRequest = IndicesGetAliasRequestBuilder()
@@ -2115,18 +2115,18 @@ module IndicesOperations =
     module GetAlias =
         let withAllowNoIndices (value: bool) (req: IndicesGetAliasRequest) =
             { req with AllowNoIndices = Some value }
-        let withExpandWildcards (value: Types.ExpandWildcards) (req: IndicesGetAliasRequest) =
+        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: IndicesGetAliasRequest) =
             { req with ExpandWildcards = Some value }
         let withIgnoreUnavailable (value: bool) (req: IndicesGetAliasRequest) =
             { req with IgnoreUnavailable = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: IndicesGetAliasRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: IndicesGetAliasRequest) =
             { req with MasterTimeout = Some value }
 
     type IndicesGetDataLifecycleRequest = {
-        Name: Types.DataStreamNames
-        ExpandWildcards: Types.ExpandWildcards option
+        Name: CoreTypes.DataStreamNames
+        ExpandWildcards: CoreTypes.ExpandWildcards option
         IncludeDefaults: bool option
-        MasterTimeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
     }
 
         with
@@ -2161,11 +2161,11 @@ module IndicesOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: IndicesGetDataLifecycleRequest, value: Types.DataStreamNames) =
+        member _.Name(state: IndicesGetDataLifecycleRequest, value: CoreTypes.DataStreamNames) =
             { state with Name = value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: IndicesGetDataLifecycleRequest, value: Types.ExpandWildcards) =
+        member _.ExpandWildcards(state: IndicesGetDataLifecycleRequest, value: CoreTypes.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("includeDefaults")>]
@@ -2173,17 +2173,17 @@ module IndicesOperations =
             { state with IncludeDefaults = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IndicesGetDataLifecycleRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: IndicesGetDataLifecycleRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
     let indicesGetDataLifecycleRequest = IndicesGetDataLifecycleRequestBuilder()
 
     module GetDataLifecycle =
-        let withExpandWildcards (value: Types.ExpandWildcards) (req: IndicesGetDataLifecycleRequest) =
+        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: IndicesGetDataLifecycleRequest) =
             { req with ExpandWildcards = Some value }
         let withIncludeDefaults (value: bool) (req: IndicesGetDataLifecycleRequest) =
             { req with IncludeDefaults = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: IndicesGetDataLifecycleRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: IndicesGetDataLifecycleRequest) =
             { req with MasterTimeout = Some value }
 
     type IndicesGetDataLifecycleStatsRequest = | IndicesGetDataLifecycleStatsRequest
@@ -2209,10 +2209,10 @@ module IndicesOperations =
     let indicesGetDataLifecycleStatsRequest = IndicesGetDataLifecycleStatsRequestBuilder()
 
     type IndicesGetDataStreamRequest = {
-        Name: Types.DataStreamNames
-        ExpandWildcards: Types.ExpandWildcards option
+        Name: CoreTypes.DataStreamNames
+        ExpandWildcards: CoreTypes.ExpandWildcards option
         IncludeDefaults: bool option
-        MasterTimeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
         Verbose: bool option
     }
 
@@ -2250,11 +2250,11 @@ module IndicesOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: IndicesGetDataStreamRequest, value: Types.DataStreamNames) =
+        member _.Name(state: IndicesGetDataStreamRequest, value: CoreTypes.DataStreamNames) =
             { state with Name = value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: IndicesGetDataStreamRequest, value: Types.ExpandWildcards) =
+        member _.ExpandWildcards(state: IndicesGetDataStreamRequest, value: CoreTypes.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("includeDefaults")>]
@@ -2262,7 +2262,7 @@ module IndicesOperations =
             { state with IncludeDefaults = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IndicesGetDataStreamRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: IndicesGetDataStreamRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("verbose")>]
@@ -2272,18 +2272,18 @@ module IndicesOperations =
     let indicesGetDataStreamRequest = IndicesGetDataStreamRequestBuilder()
 
     module GetDataStream =
-        let withExpandWildcards (value: Types.ExpandWildcards) (req: IndicesGetDataStreamRequest) =
+        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: IndicesGetDataStreamRequest) =
             { req with ExpandWildcards = Some value }
         let withIncludeDefaults (value: bool) (req: IndicesGetDataStreamRequest) =
             { req with IncludeDefaults = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: IndicesGetDataStreamRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: IndicesGetDataStreamRequest) =
             { req with MasterTimeout = Some value }
         let withVerbose (value: bool) (req: IndicesGetDataStreamRequest) =
             { req with Verbose = Some value }
 
     type IndicesGetDataStreamMappingsRequest = {
-        Name: Types.Indices
-        MasterTimeout: Types.Duration option
+        Name: CoreTypes.Indices
+        MasterTimeout: CoreTypes.Duration option
     }
 
         with
@@ -2314,23 +2314,23 @@ module IndicesOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: IndicesGetDataStreamMappingsRequest, value: Types.Indices) =
+        member _.Name(state: IndicesGetDataStreamMappingsRequest, value: CoreTypes.Indices) =
             { state with Name = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IndicesGetDataStreamMappingsRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: IndicesGetDataStreamMappingsRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
     let indicesGetDataStreamMappingsRequest = IndicesGetDataStreamMappingsRequestBuilder()
 
     module GetDataStreamMappings =
-        let withMasterTimeout (value: Types.Duration) (req: IndicesGetDataStreamMappingsRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: IndicesGetDataStreamMappingsRequest) =
             { req with MasterTimeout = Some value }
 
     type IndicesGetDataStreamOptionsRequest = {
-        Name: Types.DataStreamNames
-        ExpandWildcards: Types.ExpandWildcards option
-        MasterTimeout: Types.Duration option
+        Name: CoreTypes.DataStreamNames
+        ExpandWildcards: CoreTypes.ExpandWildcards option
+        MasterTimeout: CoreTypes.Duration option
     }
 
         with
@@ -2363,28 +2363,28 @@ module IndicesOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: IndicesGetDataStreamOptionsRequest, value: Types.DataStreamNames) =
+        member _.Name(state: IndicesGetDataStreamOptionsRequest, value: CoreTypes.DataStreamNames) =
             { state with Name = value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: IndicesGetDataStreamOptionsRequest, value: Types.ExpandWildcards) =
+        member _.ExpandWildcards(state: IndicesGetDataStreamOptionsRequest, value: CoreTypes.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IndicesGetDataStreamOptionsRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: IndicesGetDataStreamOptionsRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
     let indicesGetDataStreamOptionsRequest = IndicesGetDataStreamOptionsRequestBuilder()
 
     module GetDataStreamOptions =
-        let withExpandWildcards (value: Types.ExpandWildcards) (req: IndicesGetDataStreamOptionsRequest) =
+        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: IndicesGetDataStreamOptionsRequest) =
             { req with ExpandWildcards = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: IndicesGetDataStreamOptionsRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: IndicesGetDataStreamOptionsRequest) =
             { req with MasterTimeout = Some value }
 
     type IndicesGetDataStreamSettingsRequest = {
-        Name: Types.Indices
-        MasterTimeout: Types.Duration option
+        Name: CoreTypes.Indices
+        MasterTimeout: CoreTypes.Duration option
     }
 
         with
@@ -2415,24 +2415,24 @@ module IndicesOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: IndicesGetDataStreamSettingsRequest, value: Types.Indices) =
+        member _.Name(state: IndicesGetDataStreamSettingsRequest, value: CoreTypes.Indices) =
             { state with Name = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IndicesGetDataStreamSettingsRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: IndicesGetDataStreamSettingsRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
     let indicesGetDataStreamSettingsRequest = IndicesGetDataStreamSettingsRequestBuilder()
 
     module GetDataStreamSettings =
-        let withMasterTimeout (value: Types.Duration) (req: IndicesGetDataStreamSettingsRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: IndicesGetDataStreamSettingsRequest) =
             { req with MasterTimeout = Some value }
 
     type IndicesGetFieldMappingRequest = {
-        Fields: Types.Fields
-        Index: Types.Indices
+        Fields: CoreTypes.Fields
+        Index: CoreTypes.Indices
         AllowNoIndices: bool option
-        ExpandWildcards: Types.ExpandWildcards option
+        ExpandWildcards: CoreTypes.ExpandWildcards option
         IgnoreUnavailable: bool option
         IncludeDefaults: bool option
     }
@@ -2458,7 +2458,7 @@ module IndicesOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type IndicesGetFieldMappingResponse = Map<Types.IndexName, IndicesGetFieldMapping.TypeFieldMappings>
+    type IndicesGetFieldMappingResponse = Map<CoreTypes.IndexName, IndicesGetFieldMapping.TypeFieldMappings>
 
     type IndicesGetFieldMappingRequestBuilder() =
         member _.Yield(_: unit) : IndicesGetFieldMappingRequest =
@@ -2472,11 +2472,11 @@ module IndicesOperations =
             }
 
         [<CustomOperation("fields")>]
-        member _.Fields(state: IndicesGetFieldMappingRequest, value: Types.Fields) =
+        member _.Fields(state: IndicesGetFieldMappingRequest, value: CoreTypes.Fields) =
             { state with Fields = value }
 
         [<CustomOperation("index")>]
-        member _.Index(state: IndicesGetFieldMappingRequest, value: Types.Indices) =
+        member _.Index(state: IndicesGetFieldMappingRequest, value: CoreTypes.Indices) =
             { state with Index = value }
 
         [<CustomOperation("allowNoIndices")>]
@@ -2484,7 +2484,7 @@ module IndicesOperations =
             { state with AllowNoIndices = Some value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: IndicesGetFieldMappingRequest, value: Types.ExpandWildcards) =
+        member _.ExpandWildcards(state: IndicesGetFieldMappingRequest, value: CoreTypes.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("ignoreUnavailable")>]
@@ -2500,7 +2500,7 @@ module IndicesOperations =
     module GetFieldMapping =
         let withAllowNoIndices (value: bool) (req: IndicesGetFieldMappingRequest) =
             { req with AllowNoIndices = Some value }
-        let withExpandWildcards (value: Types.ExpandWildcards) (req: IndicesGetFieldMappingRequest) =
+        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: IndicesGetFieldMappingRequest) =
             { req with ExpandWildcards = Some value }
         let withIgnoreUnavailable (value: bool) (req: IndicesGetFieldMappingRequest) =
             { req with IgnoreUnavailable = Some value }
@@ -2508,10 +2508,10 @@ module IndicesOperations =
             { req with IncludeDefaults = Some value }
 
     type IndicesGetIndexTemplateRequest = {
-        Name: Types.Name
+        Name: CoreTypes.Name
         Local: bool option
         FlatSettings: bool option
-        MasterTimeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
         IncludeDefaults: bool option
     }
 
@@ -2549,7 +2549,7 @@ module IndicesOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: IndicesGetIndexTemplateRequest, value: Types.Name) =
+        member _.Name(state: IndicesGetIndexTemplateRequest, value: CoreTypes.Name) =
             { state with Name = value }
 
         [<CustomOperation("local")>]
@@ -2561,7 +2561,7 @@ module IndicesOperations =
             { state with FlatSettings = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IndicesGetIndexTemplateRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: IndicesGetIndexTemplateRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("includeDefaults")>]
@@ -2575,18 +2575,18 @@ module IndicesOperations =
             { req with Local = Some value }
         let withFlatSettings (value: bool) (req: IndicesGetIndexTemplateRequest) =
             { req with FlatSettings = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: IndicesGetIndexTemplateRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: IndicesGetIndexTemplateRequest) =
             { req with MasterTimeout = Some value }
         let withIncludeDefaults (value: bool) (req: IndicesGetIndexTemplateRequest) =
             { req with IncludeDefaults = Some value }
 
     type IndicesGetMappingRequest = {
-        Index: Types.Indices
+        Index: CoreTypes.Indices
         AllowNoIndices: bool option
-        ExpandWildcards: Types.ExpandWildcards option
+        ExpandWildcards: CoreTypes.ExpandWildcards option
         IgnoreUnavailable: bool option
         Local: bool option
-        MasterTimeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
     }
 
         with
@@ -2611,7 +2611,7 @@ module IndicesOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type IndicesGetMappingResponse = Map<Types.IndexName, IndicesGetMapping.IndexMappingRecord>
+    type IndicesGetMappingResponse = Map<CoreTypes.IndexName, IndicesGetMapping.IndexMappingRecord>
 
     type IndicesGetMappingRequestBuilder() =
         member _.Yield(_: unit) : IndicesGetMappingRequest =
@@ -2625,7 +2625,7 @@ module IndicesOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: IndicesGetMappingRequest, value: Types.Indices) =
+        member _.Index(state: IndicesGetMappingRequest, value: CoreTypes.Indices) =
             { state with Index = value }
 
         [<CustomOperation("allowNoIndices")>]
@@ -2633,7 +2633,7 @@ module IndicesOperations =
             { state with AllowNoIndices = Some value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: IndicesGetMappingRequest, value: Types.ExpandWildcards) =
+        member _.ExpandWildcards(state: IndicesGetMappingRequest, value: CoreTypes.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("ignoreUnavailable")>]
@@ -2645,7 +2645,7 @@ module IndicesOperations =
             { state with Local = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IndicesGetMappingRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: IndicesGetMappingRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
     let indicesGetMappingRequest = IndicesGetMappingRequestBuilder()
@@ -2653,17 +2653,17 @@ module IndicesOperations =
     module GetMapping =
         let withAllowNoIndices (value: bool) (req: IndicesGetMappingRequest) =
             { req with AllowNoIndices = Some value }
-        let withExpandWildcards (value: Types.ExpandWildcards) (req: IndicesGetMappingRequest) =
+        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: IndicesGetMappingRequest) =
             { req with ExpandWildcards = Some value }
         let withIgnoreUnavailable (value: bool) (req: IndicesGetMappingRequest) =
             { req with IgnoreUnavailable = Some value }
         let withLocal (value: bool) (req: IndicesGetMappingRequest) =
             { req with Local = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: IndicesGetMappingRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: IndicesGetMappingRequest) =
             { req with MasterTimeout = Some value }
 
     type IndicesGetMigrateReindexStatusRequest = {
-        Index: Types.Indices
+        Index: CoreTypes.Indices
     }
 
         with
@@ -2686,21 +2686,21 @@ module IndicesOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: IndicesGetMigrateReindexStatusRequest, value: Types.Indices) =
+        member _.Index(state: IndicesGetMigrateReindexStatusRequest, value: CoreTypes.Indices) =
             { state with Index = value }
 
     let indicesGetMigrateReindexStatusRequest = IndicesGetMigrateReindexStatusRequestBuilder()
 
     type IndicesGetSettingsRequest = {
-        Index: Types.Indices
-        Name: Types.Names
+        Index: CoreTypes.Indices
+        Name: CoreTypes.Names
         AllowNoIndices: bool option
-        ExpandWildcards: Types.ExpandWildcards option
+        ExpandWildcards: CoreTypes.ExpandWildcards option
         FlatSettings: bool option
         IgnoreUnavailable: bool option
         IncludeDefaults: bool option
         Local: bool option
-        MasterTimeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
     }
 
         with
@@ -2727,7 +2727,7 @@ module IndicesOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type IndicesGetSettingsResponse = Map<Types.IndexName, IndicesTypes.IndexState>
+    type IndicesGetSettingsResponse = Map<CoreTypes.IndexName, IndicesTypes.IndexState>
 
     type IndicesGetSettingsRequestBuilder() =
         member _.Yield(_: unit) : IndicesGetSettingsRequest =
@@ -2744,11 +2744,11 @@ module IndicesOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: IndicesGetSettingsRequest, value: Types.Indices) =
+        member _.Index(state: IndicesGetSettingsRequest, value: CoreTypes.Indices) =
             { state with Index = value }
 
         [<CustomOperation("name")>]
-        member _.Name(state: IndicesGetSettingsRequest, value: Types.Names) =
+        member _.Name(state: IndicesGetSettingsRequest, value: CoreTypes.Names) =
             { state with Name = value }
 
         [<CustomOperation("allowNoIndices")>]
@@ -2756,7 +2756,7 @@ module IndicesOperations =
             { state with AllowNoIndices = Some value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: IndicesGetSettingsRequest, value: Types.ExpandWildcards) =
+        member _.ExpandWildcards(state: IndicesGetSettingsRequest, value: CoreTypes.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("flatSettings")>]
@@ -2776,7 +2776,7 @@ module IndicesOperations =
             { state with Local = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IndicesGetSettingsRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: IndicesGetSettingsRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
     let indicesGetSettingsRequest = IndicesGetSettingsRequestBuilder()
@@ -2784,7 +2784,7 @@ module IndicesOperations =
     module GetSettings =
         let withAllowNoIndices (value: bool) (req: IndicesGetSettingsRequest) =
             { req with AllowNoIndices = Some value }
-        let withExpandWildcards (value: Types.ExpandWildcards) (req: IndicesGetSettingsRequest) =
+        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: IndicesGetSettingsRequest) =
             { req with ExpandWildcards = Some value }
         let withFlatSettings (value: bool) (req: IndicesGetSettingsRequest) =
             { req with FlatSettings = Some value }
@@ -2794,14 +2794,14 @@ module IndicesOperations =
             { req with IncludeDefaults = Some value }
         let withLocal (value: bool) (req: IndicesGetSettingsRequest) =
             { req with Local = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: IndicesGetSettingsRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: IndicesGetSettingsRequest) =
             { req with MasterTimeout = Some value }
 
     type IndicesGetTemplateRequest = {
-        Name: Types.Names
+        Name: CoreTypes.Names
         FlatSettings: bool option
         Local: bool option
-        MasterTimeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
     }
 
         with
@@ -2836,7 +2836,7 @@ module IndicesOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: IndicesGetTemplateRequest, value: Types.Names) =
+        member _.Name(state: IndicesGetTemplateRequest, value: CoreTypes.Names) =
             { state with Name = value }
 
         [<CustomOperation("flatSettings")>]
@@ -2848,7 +2848,7 @@ module IndicesOperations =
             { state with Local = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IndicesGetTemplateRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: IndicesGetTemplateRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
     let indicesGetTemplateRequest = IndicesGetTemplateRequestBuilder()
@@ -2858,7 +2858,7 @@ module IndicesOperations =
             { req with FlatSettings = Some value }
         let withLocal (value: bool) (req: IndicesGetTemplateRequest) =
             { req with Local = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: IndicesGetTemplateRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: IndicesGetTemplateRequest) =
             { req with MasterTimeout = Some value }
 
     type IndicesMigrateReindexRequest = {
@@ -2877,7 +2877,7 @@ module IndicesOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type IndicesMigrateReindexResponse = Types.AcknowledgedResponseBase
+    type IndicesMigrateReindexResponse = CoreTypes.AcknowledgedResponseBase
 
     type IndicesMigrateReindexRequestBuilder() =
         member _.Yield(_: unit) : IndicesMigrateReindexRequest =
@@ -2892,9 +2892,9 @@ module IndicesOperations =
     let indicesMigrateReindexRequest = IndicesMigrateReindexRequestBuilder()
 
     type IndicesMigrateToDataStreamRequest = {
-        Name: Types.IndexName
-        MasterTimeout: Types.Duration option
-        Timeout: Types.Duration option
+        Name: CoreTypes.IndexName
+        MasterTimeout: CoreTypes.Duration option
+        Timeout: CoreTypes.Duration option
     }
 
         with
@@ -2916,7 +2916,7 @@ module IndicesOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type IndicesMigrateToDataStreamResponse = Types.AcknowledgedResponseBase
+    type IndicesMigrateToDataStreamResponse = CoreTypes.AcknowledgedResponseBase
 
     type IndicesMigrateToDataStreamRequestBuilder() =
         member _.Yield(_: unit) : IndicesMigrateToDataStreamRequest =
@@ -2927,23 +2927,23 @@ module IndicesOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: IndicesMigrateToDataStreamRequest, value: Types.IndexName) =
+        member _.Name(state: IndicesMigrateToDataStreamRequest, value: CoreTypes.IndexName) =
             { state with Name = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IndicesMigrateToDataStreamRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: IndicesMigrateToDataStreamRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: IndicesMigrateToDataStreamRequest, value: Types.Duration) =
+        member _.Timeout(state: IndicesMigrateToDataStreamRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
     let indicesMigrateToDataStreamRequest = IndicesMigrateToDataStreamRequestBuilder()
 
     module MigrateToDataStream =
-        let withMasterTimeout (value: Types.Duration) (req: IndicesMigrateToDataStreamRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: IndicesMigrateToDataStreamRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: Types.Duration) (req: IndicesMigrateToDataStreamRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: IndicesMigrateToDataStreamRequest) =
             { req with Timeout = Some value }
 
     type IndicesModifyDataStreamRequest = {
@@ -2962,7 +2962,7 @@ module IndicesOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type IndicesModifyDataStreamResponse = Types.AcknowledgedResponseBase
+    type IndicesModifyDataStreamResponse = CoreTypes.AcknowledgedResponseBase
 
     type IndicesModifyDataStreamRequestBuilder() =
         member _.Yield(_: unit) : IndicesModifyDataStreamRequest =
@@ -2981,13 +2981,13 @@ module IndicesOperations =
             { req with Actions = value }
 
     type IndicesOpenRequest = {
-        Index: Types.Indices
+        Index: CoreTypes.Indices
         AllowNoIndices: bool option
-        ExpandWildcards: Types.ExpandWildcards option
+        ExpandWildcards: CoreTypes.ExpandWildcards option
         IgnoreUnavailable: bool option
-        MasterTimeout: Types.Duration option
-        Timeout: Types.Duration option
-        WaitForActiveShards: Types.WaitForActiveShards option
+        MasterTimeout: CoreTypes.Duration option
+        Timeout: CoreTypes.Duration option
+        WaitForActiveShards: CoreTypes.WaitForActiveShards option
     }
 
         with
@@ -3028,7 +3028,7 @@ module IndicesOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: IndicesOpenRequest, value: Types.Indices) =
+        member _.Index(state: IndicesOpenRequest, value: CoreTypes.Indices) =
             { state with Index = value }
 
         [<CustomOperation("allowNoIndices")>]
@@ -3036,7 +3036,7 @@ module IndicesOperations =
             { state with AllowNoIndices = Some value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: IndicesOpenRequest, value: Types.ExpandWildcards) =
+        member _.ExpandWildcards(state: IndicesOpenRequest, value: CoreTypes.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("ignoreUnavailable")>]
@@ -3044,15 +3044,15 @@ module IndicesOperations =
             { state with IgnoreUnavailable = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IndicesOpenRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: IndicesOpenRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: IndicesOpenRequest, value: Types.Duration) =
+        member _.Timeout(state: IndicesOpenRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("waitForActiveShards")>]
-        member _.WaitForActiveShards(state: IndicesOpenRequest, value: Types.WaitForActiveShards) =
+        member _.WaitForActiveShards(state: IndicesOpenRequest, value: CoreTypes.WaitForActiveShards) =
             { state with WaitForActiveShards = Some value }
 
     let indicesOpenRequest = IndicesOpenRequestBuilder()
@@ -3060,20 +3060,20 @@ module IndicesOperations =
     module Open =
         let withAllowNoIndices (value: bool) (req: IndicesOpenRequest) =
             { req with AllowNoIndices = Some value }
-        let withExpandWildcards (value: Types.ExpandWildcards) (req: IndicesOpenRequest) =
+        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: IndicesOpenRequest) =
             { req with ExpandWildcards = Some value }
         let withIgnoreUnavailable (value: bool) (req: IndicesOpenRequest) =
             { req with IgnoreUnavailable = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: IndicesOpenRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: IndicesOpenRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: Types.Duration) (req: IndicesOpenRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: IndicesOpenRequest) =
             { req with Timeout = Some value }
-        let withWaitForActiveShards (value: Types.WaitForActiveShards) (req: IndicesOpenRequest) =
+        let withWaitForActiveShards (value: CoreTypes.WaitForActiveShards) (req: IndicesOpenRequest) =
             { req with WaitForActiveShards = Some value }
 
     type IndicesPromoteDataStreamRequest = {
-        Name: Types.IndexName
-        MasterTimeout: Types.Duration option
+        Name: CoreTypes.IndexName
+        MasterTimeout: CoreTypes.Duration option
     }
 
         with
@@ -3104,25 +3104,25 @@ module IndicesOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: IndicesPromoteDataStreamRequest, value: Types.IndexName) =
+        member _.Name(state: IndicesPromoteDataStreamRequest, value: CoreTypes.IndexName) =
             { state with Name = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IndicesPromoteDataStreamRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: IndicesPromoteDataStreamRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
     let indicesPromoteDataStreamRequest = IndicesPromoteDataStreamRequestBuilder()
 
     module PromoteDataStream =
-        let withMasterTimeout (value: Types.Duration) (req: IndicesPromoteDataStreamRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: IndicesPromoteDataStreamRequest) =
             { req with MasterTimeout = Some value }
 
     type IndicesPutAliasRequest = {
-        Index: Types.Indices
-        Name: Types.Name
-        MasterTimeout: Types.Duration option
-        Timeout: Types.Duration option
-        Filter: TypesQueryDsl.QueryContainer option
+        Index: CoreTypes.Indices
+        Name: CoreTypes.Name
+        MasterTimeout: CoreTypes.Duration option
+        Timeout: CoreTypes.Duration option
+        Filter: CoreTypes.QueryContainer option
         IndexRouting: string option
         IsWriteIndex: bool option
         Routing: string option
@@ -3149,7 +3149,7 @@ module IndicesOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type IndicesPutAliasResponse = Types.AcknowledgedResponseBase
+    type IndicesPutAliasResponse = CoreTypes.AcknowledgedResponseBase
 
     type IndicesPutAliasRequestBuilder() =
         member _.Yield(_: unit) : IndicesPutAliasRequest =
@@ -3166,23 +3166,23 @@ module IndicesOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: IndicesPutAliasRequest, value: Types.Indices) =
+        member _.Index(state: IndicesPutAliasRequest, value: CoreTypes.Indices) =
             { state with Index = value }
 
         [<CustomOperation("name")>]
-        member _.Name(state: IndicesPutAliasRequest, value: Types.Name) =
+        member _.Name(state: IndicesPutAliasRequest, value: CoreTypes.Name) =
             { state with Name = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IndicesPutAliasRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: IndicesPutAliasRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: IndicesPutAliasRequest, value: Types.Duration) =
+        member _.Timeout(state: IndicesPutAliasRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("filter")>]
-        member _.Filter(state: IndicesPutAliasRequest, value: TypesQueryDsl.QueryContainer) =
+        member _.Filter(state: IndicesPutAliasRequest, value: CoreTypes.QueryContainer) =
             { state with Filter = Some value }
 
         [<CustomOperation("indexRouting")>]
@@ -3204,11 +3204,11 @@ module IndicesOperations =
     let indicesPutAliasRequest = IndicesPutAliasRequestBuilder()
 
     module PutAlias =
-        let withMasterTimeout (value: Types.Duration) (req: IndicesPutAliasRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: IndicesPutAliasRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: Types.Duration) (req: IndicesPutAliasRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: IndicesPutAliasRequest) =
             { req with Timeout = Some value }
-        let withFilter (value: TypesQueryDsl.QueryContainer) (req: IndicesPutAliasRequest) =
+        let withFilter (value: CoreTypes.QueryContainer) (req: IndicesPutAliasRequest) =
             { req with Filter = Some value }
         let withIndexRouting (value: string) (req: IndicesPutAliasRequest) =
             { req with IndexRouting = Some value }
@@ -3220,11 +3220,11 @@ module IndicesOperations =
             { req with SearchRouting = Some value }
 
     type IndicesPutDataLifecycleRequest = {
-        Name: Types.DataStreamNames
-        ExpandWildcards: Types.ExpandWildcards option
-        MasterTimeout: Types.Duration option
-        Timeout: Types.Duration option
-        DataRetention: Types.Duration option
+        Name: CoreTypes.DataStreamNames
+        ExpandWildcards: CoreTypes.ExpandWildcards option
+        MasterTimeout: CoreTypes.Duration option
+        Timeout: CoreTypes.Duration option
+        DataRetention: CoreTypes.Duration option
         Downsampling: IndicesTypes.DownsamplingRound list option
         DownsamplingMethod: IndicesTypes.SamplingMethod option
         Enabled: bool option
@@ -3251,7 +3251,7 @@ module IndicesOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type IndicesPutDataLifecycleResponse = Types.AcknowledgedResponseBase
+    type IndicesPutDataLifecycleResponse = CoreTypes.AcknowledgedResponseBase
 
     type IndicesPutDataLifecycleRequestBuilder() =
         member _.Yield(_: unit) : IndicesPutDataLifecycleRequest =
@@ -3267,23 +3267,23 @@ module IndicesOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: IndicesPutDataLifecycleRequest, value: Types.DataStreamNames) =
+        member _.Name(state: IndicesPutDataLifecycleRequest, value: CoreTypes.DataStreamNames) =
             { state with Name = value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: IndicesPutDataLifecycleRequest, value: Types.ExpandWildcards) =
+        member _.ExpandWildcards(state: IndicesPutDataLifecycleRequest, value: CoreTypes.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IndicesPutDataLifecycleRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: IndicesPutDataLifecycleRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: IndicesPutDataLifecycleRequest, value: Types.Duration) =
+        member _.Timeout(state: IndicesPutDataLifecycleRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("dataRetention")>]
-        member _.DataRetention(state: IndicesPutDataLifecycleRequest, value: Types.Duration) =
+        member _.DataRetention(state: IndicesPutDataLifecycleRequest, value: CoreTypes.Duration) =
             { state with DataRetention = Some value }
 
         [<CustomOperation("downsampling")>]
@@ -3301,13 +3301,13 @@ module IndicesOperations =
     let indicesPutDataLifecycleRequest = IndicesPutDataLifecycleRequestBuilder()
 
     module PutDataLifecycle =
-        let withExpandWildcards (value: Types.ExpandWildcards) (req: IndicesPutDataLifecycleRequest) =
+        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: IndicesPutDataLifecycleRequest) =
             { req with ExpandWildcards = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: IndicesPutDataLifecycleRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: IndicesPutDataLifecycleRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: Types.Duration) (req: IndicesPutDataLifecycleRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: IndicesPutDataLifecycleRequest) =
             { req with Timeout = Some value }
-        let withDataRetention (value: Types.Duration) (req: IndicesPutDataLifecycleRequest) =
+        let withDataRetention (value: CoreTypes.Duration) (req: IndicesPutDataLifecycleRequest) =
             { req with DataRetention = Some value }
         let withDownsampling (value: IndicesTypes.DownsamplingRound list) (req: IndicesPutDataLifecycleRequest) =
             { req with Downsampling = Some value }
@@ -3317,10 +3317,10 @@ module IndicesOperations =
             { req with Enabled = Some value }
 
     type IndicesPutDataStreamMappingsRequest = {
-        Name: Types.Indices
+        Name: CoreTypes.Indices
         DryRun: bool option
-        MasterTimeout: Types.Duration option
-        Timeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
+        Timeout: CoreTypes.Duration option
         Document: obj
     }
 
@@ -3358,7 +3358,7 @@ module IndicesOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: IndicesPutDataStreamMappingsRequest, value: Types.Indices) =
+        member _.Name(state: IndicesPutDataStreamMappingsRequest, value: CoreTypes.Indices) =
             { state with Name = value }
 
         [<CustomOperation("dryRun")>]
@@ -3366,11 +3366,11 @@ module IndicesOperations =
             { state with DryRun = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IndicesPutDataStreamMappingsRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: IndicesPutDataStreamMappingsRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: IndicesPutDataStreamMappingsRequest, value: Types.Duration) =
+        member _.Timeout(state: IndicesPutDataStreamMappingsRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("document")>]
@@ -3382,16 +3382,16 @@ module IndicesOperations =
     module PutDataStreamMappings =
         let withDryRun (value: bool) (req: IndicesPutDataStreamMappingsRequest) =
             { req with DryRun = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: IndicesPutDataStreamMappingsRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: IndicesPutDataStreamMappingsRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: Types.Duration) (req: IndicesPutDataStreamMappingsRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: IndicesPutDataStreamMappingsRequest) =
             { req with Timeout = Some value }
 
     type IndicesPutDataStreamOptionsRequest = {
-        Name: Types.DataStreamNames
-        ExpandWildcards: Types.ExpandWildcards option
-        MasterTimeout: Types.Duration option
-        Timeout: Types.Duration option
+        Name: CoreTypes.DataStreamNames
+        ExpandWildcards: CoreTypes.ExpandWildcards option
+        MasterTimeout: CoreTypes.Duration option
+        Timeout: CoreTypes.Duration option
         FailureStore: IndicesTypes.DataStreamFailureStore option
     }
 
@@ -3416,7 +3416,7 @@ module IndicesOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type IndicesPutDataStreamOptionsResponse = Types.AcknowledgedResponseBase
+    type IndicesPutDataStreamOptionsResponse = CoreTypes.AcknowledgedResponseBase
 
     type IndicesPutDataStreamOptionsRequestBuilder() =
         member _.Yield(_: unit) : IndicesPutDataStreamOptionsRequest =
@@ -3429,19 +3429,19 @@ module IndicesOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: IndicesPutDataStreamOptionsRequest, value: Types.DataStreamNames) =
+        member _.Name(state: IndicesPutDataStreamOptionsRequest, value: CoreTypes.DataStreamNames) =
             { state with Name = value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: IndicesPutDataStreamOptionsRequest, value: Types.ExpandWildcards) =
+        member _.ExpandWildcards(state: IndicesPutDataStreamOptionsRequest, value: CoreTypes.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IndicesPutDataStreamOptionsRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: IndicesPutDataStreamOptionsRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: IndicesPutDataStreamOptionsRequest, value: Types.Duration) =
+        member _.Timeout(state: IndicesPutDataStreamOptionsRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("failureStore")>]
@@ -3451,20 +3451,20 @@ module IndicesOperations =
     let indicesPutDataStreamOptionsRequest = IndicesPutDataStreamOptionsRequestBuilder()
 
     module PutDataStreamOptions =
-        let withExpandWildcards (value: Types.ExpandWildcards) (req: IndicesPutDataStreamOptionsRequest) =
+        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: IndicesPutDataStreamOptionsRequest) =
             { req with ExpandWildcards = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: IndicesPutDataStreamOptionsRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: IndicesPutDataStreamOptionsRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: Types.Duration) (req: IndicesPutDataStreamOptionsRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: IndicesPutDataStreamOptionsRequest) =
             { req with Timeout = Some value }
         let withFailureStore (value: IndicesTypes.DataStreamFailureStore) (req: IndicesPutDataStreamOptionsRequest) =
             { req with FailureStore = Some value }
 
     type IndicesPutDataStreamSettingsRequest = {
-        Name: Types.Indices
+        Name: CoreTypes.Indices
         DryRun: bool option
-        MasterTimeout: Types.Duration option
-        Timeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
+        Timeout: CoreTypes.Duration option
         Document: obj
     }
 
@@ -3502,7 +3502,7 @@ module IndicesOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: IndicesPutDataStreamSettingsRequest, value: Types.Indices) =
+        member _.Name(state: IndicesPutDataStreamSettingsRequest, value: CoreTypes.Indices) =
             { state with Name = value }
 
         [<CustomOperation("dryRun")>]
@@ -3510,11 +3510,11 @@ module IndicesOperations =
             { state with DryRun = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IndicesPutDataStreamSettingsRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: IndicesPutDataStreamSettingsRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: IndicesPutDataStreamSettingsRequest, value: Types.Duration) =
+        member _.Timeout(state: IndicesPutDataStreamSettingsRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("document")>]
@@ -3526,23 +3526,23 @@ module IndicesOperations =
     module PutDataStreamSettings =
         let withDryRun (value: bool) (req: IndicesPutDataStreamSettingsRequest) =
             { req with DryRun = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: IndicesPutDataStreamSettingsRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: IndicesPutDataStreamSettingsRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: Types.Duration) (req: IndicesPutDataStreamSettingsRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: IndicesPutDataStreamSettingsRequest) =
             { req with Timeout = Some value }
 
     type IndicesPutIndexTemplateRequest = {
-        Name: Types.Name
+        Name: CoreTypes.Name
         Create: bool option
-        MasterTimeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
         Cause: string option
-        IndexPatterns: Types.Indices option
-        ComposedOf: Types.Name list option
+        IndexPatterns: CoreTypes.Indices option
+        ComposedOf: CoreTypes.Name list option
         Template: IndicesPutIndexTemplate.IndexTemplateMapping option
         DataStream: IndicesTypes.DataStreamVisibility option
-        Priority: Types.Long option
-        Version: Types.VersionNumber option
-        Meta: Types.Metadata option
+        Priority: CoreTypes.Long option
+        Version: CoreTypes.VersionNumber option
+        Meta: CoreTypes.Metadata option
         AllowAutoCreate: bool option
         IgnoreMissingComponentTemplates: string list option
         Deprecated: bool option
@@ -3569,7 +3569,7 @@ module IndicesOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type IndicesPutIndexTemplateResponse = Types.AcknowledgedResponseBase
+    type IndicesPutIndexTemplateResponse = CoreTypes.AcknowledgedResponseBase
 
     type IndicesPutIndexTemplateRequestBuilder() =
         member _.Yield(_: unit) : IndicesPutIndexTemplateRequest =
@@ -3591,7 +3591,7 @@ module IndicesOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: IndicesPutIndexTemplateRequest, value: Types.Name) =
+        member _.Name(state: IndicesPutIndexTemplateRequest, value: CoreTypes.Name) =
             { state with Name = value }
 
         [<CustomOperation("create")>]
@@ -3599,7 +3599,7 @@ module IndicesOperations =
             { state with Create = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IndicesPutIndexTemplateRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: IndicesPutIndexTemplateRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("cause")>]
@@ -3607,11 +3607,11 @@ module IndicesOperations =
             { state with Cause = Some value }
 
         [<CustomOperation("indexPatterns")>]
-        member _.IndexPatterns(state: IndicesPutIndexTemplateRequest, value: Types.Indices) =
+        member _.IndexPatterns(state: IndicesPutIndexTemplateRequest, value: CoreTypes.Indices) =
             { state with IndexPatterns = Some value }
 
         [<CustomOperation("composedOf")>]
-        member _.ComposedOf(state: IndicesPutIndexTemplateRequest, value: Types.Name list) =
+        member _.ComposedOf(state: IndicesPutIndexTemplateRequest, value: CoreTypes.Name list) =
             { state with ComposedOf = Some value }
 
         [<CustomOperation("template")>]
@@ -3623,15 +3623,15 @@ module IndicesOperations =
             { state with DataStream = Some value }
 
         [<CustomOperation("priority")>]
-        member _.Priority(state: IndicesPutIndexTemplateRequest, value: Types.Long) =
+        member _.Priority(state: IndicesPutIndexTemplateRequest, value: CoreTypes.Long) =
             { state with Priority = Some value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: IndicesPutIndexTemplateRequest, value: Types.VersionNumber) =
+        member _.Version(state: IndicesPutIndexTemplateRequest, value: CoreTypes.VersionNumber) =
             { state with Version = Some value }
 
         [<CustomOperation("meta")>]
-        member _.Meta(state: IndicesPutIndexTemplateRequest, value: Types.Metadata) =
+        member _.Meta(state: IndicesPutIndexTemplateRequest, value: CoreTypes.Metadata) =
             { state with Meta = Some value }
 
         [<CustomOperation("allowAutoCreate")>]
@@ -3651,23 +3651,23 @@ module IndicesOperations =
     module PutIndexTemplate =
         let withCreate (value: bool) (req: IndicesPutIndexTemplateRequest) =
             { req with Create = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: IndicesPutIndexTemplateRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: IndicesPutIndexTemplateRequest) =
             { req with MasterTimeout = Some value }
         let withCause (value: string) (req: IndicesPutIndexTemplateRequest) =
             { req with Cause = Some value }
-        let withIndexPatterns (value: Types.Indices) (req: IndicesPutIndexTemplateRequest) =
+        let withIndexPatterns (value: CoreTypes.Indices) (req: IndicesPutIndexTemplateRequest) =
             { req with IndexPatterns = Some value }
-        let withComposedOf (value: Types.Name list) (req: IndicesPutIndexTemplateRequest) =
+        let withComposedOf (value: CoreTypes.Name list) (req: IndicesPutIndexTemplateRequest) =
             { req with ComposedOf = Some value }
         let withTemplate (value: IndicesPutIndexTemplate.IndexTemplateMapping) (req: IndicesPutIndexTemplateRequest) =
             { req with Template = Some value }
         let withDataStream (value: IndicesTypes.DataStreamVisibility) (req: IndicesPutIndexTemplateRequest) =
             { req with DataStream = Some value }
-        let withPriority (value: Types.Long) (req: IndicesPutIndexTemplateRequest) =
+        let withPriority (value: CoreTypes.Long) (req: IndicesPutIndexTemplateRequest) =
             { req with Priority = Some value }
-        let withVersion (value: Types.VersionNumber) (req: IndicesPutIndexTemplateRequest) =
+        let withVersion (value: CoreTypes.VersionNumber) (req: IndicesPutIndexTemplateRequest) =
             { req with Version = Some value }
-        let withMeta (value: Types.Metadata) (req: IndicesPutIndexTemplateRequest) =
+        let withMeta (value: CoreTypes.Metadata) (req: IndicesPutIndexTemplateRequest) =
             { req with Meta = Some value }
         let withAllowAutoCreate (value: bool) (req: IndicesPutIndexTemplateRequest) =
             { req with AllowAutoCreate = Some value }
@@ -3677,24 +3677,24 @@ module IndicesOperations =
             { req with Deprecated = Some value }
 
     type IndicesPutMappingRequest = {
-        Index: Types.Indices
+        Index: CoreTypes.Indices
         AllowNoIndices: bool option
-        ExpandWildcards: Types.ExpandWildcards option
+        ExpandWildcards: CoreTypes.ExpandWildcards option
         IgnoreUnavailable: bool option
-        MasterTimeout: Types.Duration option
-        Timeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
+        Timeout: CoreTypes.Duration option
         WriteIndexOnly: bool option
         DateDetection: bool option
-        Dynamic: TypesMapping.DynamicMapping option
+        Dynamic: CoreTypes.DynamicMapping option
         DynamicDateFormats: string list option
-        DynamicTemplates: Map<string, TypesMapping.DynamicTemplate> list option
-        FieldNames: TypesMapping.FieldNamesField option
-        Meta: Types.Metadata option
+        DynamicTemplates: Map<string, CoreTypes.DynamicTemplate> list option
+        FieldNames: CoreTypes.FieldNamesField option
+        Meta: CoreTypes.Metadata option
         NumericDetection: bool option
-        Properties: Map<Types.PropertyName, TypesMapping.Property> option
-        Routing: TypesMapping.RoutingField option
-        Source: TypesMapping.SourceField option
-        Runtime: TypesMapping.RuntimeFields option
+        Properties: Map<CoreTypes.PropertyName, CoreTypes.Property> option
+        Routing: CoreTypes.RoutingField option
+        Source: CoreTypes.SourceField option
+        Runtime: CoreTypes.RuntimeFields option
     }
 
         with
@@ -3721,7 +3721,7 @@ module IndicesOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type IndicesPutMappingResponse = Types.IndicesResponseBase
+    type IndicesPutMappingResponse = CoreTypes.IndicesResponseBase
 
     type IndicesPutMappingRequestBuilder() =
         member _.Yield(_: unit) : IndicesPutMappingRequest =
@@ -3747,7 +3747,7 @@ module IndicesOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: IndicesPutMappingRequest, value: Types.Indices) =
+        member _.Index(state: IndicesPutMappingRequest, value: CoreTypes.Indices) =
             { state with Index = value }
 
         [<CustomOperation("allowNoIndices")>]
@@ -3755,7 +3755,7 @@ module IndicesOperations =
             { state with AllowNoIndices = Some value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: IndicesPutMappingRequest, value: Types.ExpandWildcards) =
+        member _.ExpandWildcards(state: IndicesPutMappingRequest, value: CoreTypes.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("ignoreUnavailable")>]
@@ -3763,11 +3763,11 @@ module IndicesOperations =
             { state with IgnoreUnavailable = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IndicesPutMappingRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: IndicesPutMappingRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: IndicesPutMappingRequest, value: Types.Duration) =
+        member _.Timeout(state: IndicesPutMappingRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("writeIndexOnly")>]
@@ -3779,7 +3779,7 @@ module IndicesOperations =
             { state with DateDetection = Some value }
 
         [<CustomOperation("dynamic")>]
-        member _.Dynamic(state: IndicesPutMappingRequest, value: TypesMapping.DynamicMapping) =
+        member _.Dynamic(state: IndicesPutMappingRequest, value: CoreTypes.DynamicMapping) =
             { state with Dynamic = Some value }
 
         [<CustomOperation("dynamicDateFormats")>]
@@ -3787,15 +3787,15 @@ module IndicesOperations =
             { state with DynamicDateFormats = Some value }
 
         [<CustomOperation("dynamicTemplates")>]
-        member _.DynamicTemplates(state: IndicesPutMappingRequest, value: Map<string, TypesMapping.DynamicTemplate> list) =
+        member _.DynamicTemplates(state: IndicesPutMappingRequest, value: Map<string, CoreTypes.DynamicTemplate> list) =
             { state with DynamicTemplates = Some value }
 
         [<CustomOperation("fieldNames")>]
-        member _.FieldNames(state: IndicesPutMappingRequest, value: TypesMapping.FieldNamesField) =
+        member _.FieldNames(state: IndicesPutMappingRequest, value: CoreTypes.FieldNamesField) =
             { state with FieldNames = Some value }
 
         [<CustomOperation("meta")>]
-        member _.Meta(state: IndicesPutMappingRequest, value: Types.Metadata) =
+        member _.Meta(state: IndicesPutMappingRequest, value: CoreTypes.Metadata) =
             { state with Meta = Some value }
 
         [<CustomOperation("numericDetection")>]
@@ -3803,19 +3803,19 @@ module IndicesOperations =
             { state with NumericDetection = Some value }
 
         [<CustomOperation("properties")>]
-        member _.Properties(state: IndicesPutMappingRequest, value: Map<Types.PropertyName, TypesMapping.Property>) =
+        member _.Properties(state: IndicesPutMappingRequest, value: Map<CoreTypes.PropertyName, CoreTypes.Property>) =
             { state with Properties = Some value }
 
         [<CustomOperation("routing")>]
-        member _.Routing(state: IndicesPutMappingRequest, value: TypesMapping.RoutingField) =
+        member _.Routing(state: IndicesPutMappingRequest, value: CoreTypes.RoutingField) =
             { state with Routing = Some value }
 
         [<CustomOperation("source")>]
-        member _.Source(state: IndicesPutMappingRequest, value: TypesMapping.SourceField) =
+        member _.Source(state: IndicesPutMappingRequest, value: CoreTypes.SourceField) =
             { state with Source = Some value }
 
         [<CustomOperation("runtime")>]
-        member _.Runtime(state: IndicesPutMappingRequest, value: TypesMapping.RuntimeFields) =
+        member _.Runtime(state: IndicesPutMappingRequest, value: CoreTypes.RuntimeFields) =
             { state with Runtime = Some value }
 
     let indicesPutMappingRequest = IndicesPutMappingRequestBuilder()
@@ -3823,49 +3823,49 @@ module IndicesOperations =
     module PutMapping =
         let withAllowNoIndices (value: bool) (req: IndicesPutMappingRequest) =
             { req with AllowNoIndices = Some value }
-        let withExpandWildcards (value: Types.ExpandWildcards) (req: IndicesPutMappingRequest) =
+        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: IndicesPutMappingRequest) =
             { req with ExpandWildcards = Some value }
         let withIgnoreUnavailable (value: bool) (req: IndicesPutMappingRequest) =
             { req with IgnoreUnavailable = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: IndicesPutMappingRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: IndicesPutMappingRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: Types.Duration) (req: IndicesPutMappingRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: IndicesPutMappingRequest) =
             { req with Timeout = Some value }
         let withWriteIndexOnly (value: bool) (req: IndicesPutMappingRequest) =
             { req with WriteIndexOnly = Some value }
         let withDateDetection (value: bool) (req: IndicesPutMappingRequest) =
             { req with DateDetection = Some value }
-        let withDynamic (value: TypesMapping.DynamicMapping) (req: IndicesPutMappingRequest) =
+        let withDynamic (value: CoreTypes.DynamicMapping) (req: IndicesPutMappingRequest) =
             { req with Dynamic = Some value }
         let withDynamicDateFormats (value: string list) (req: IndicesPutMappingRequest) =
             { req with DynamicDateFormats = Some value }
-        let withDynamicTemplates (value: Map<string, TypesMapping.DynamicTemplate> list) (req: IndicesPutMappingRequest) =
+        let withDynamicTemplates (value: Map<string, CoreTypes.DynamicTemplate> list) (req: IndicesPutMappingRequest) =
             { req with DynamicTemplates = Some value }
-        let withFieldNames (value: TypesMapping.FieldNamesField) (req: IndicesPutMappingRequest) =
+        let withFieldNames (value: CoreTypes.FieldNamesField) (req: IndicesPutMappingRequest) =
             { req with FieldNames = Some value }
-        let withMeta (value: Types.Metadata) (req: IndicesPutMappingRequest) =
+        let withMeta (value: CoreTypes.Metadata) (req: IndicesPutMappingRequest) =
             { req with Meta = Some value }
         let withNumericDetection (value: bool) (req: IndicesPutMappingRequest) =
             { req with NumericDetection = Some value }
-        let withProperties (value: Map<Types.PropertyName, TypesMapping.Property>) (req: IndicesPutMappingRequest) =
+        let withProperties (value: Map<CoreTypes.PropertyName, CoreTypes.Property>) (req: IndicesPutMappingRequest) =
             { req with Properties = Some value }
-        let withRouting (value: TypesMapping.RoutingField) (req: IndicesPutMappingRequest) =
+        let withRouting (value: CoreTypes.RoutingField) (req: IndicesPutMappingRequest) =
             { req with Routing = Some value }
-        let withSource (value: TypesMapping.SourceField) (req: IndicesPutMappingRequest) =
+        let withSource (value: CoreTypes.SourceField) (req: IndicesPutMappingRequest) =
             { req with Source = Some value }
-        let withRuntime (value: TypesMapping.RuntimeFields) (req: IndicesPutMappingRequest) =
+        let withRuntime (value: CoreTypes.RuntimeFields) (req: IndicesPutMappingRequest) =
             { req with Runtime = Some value }
 
     type IndicesPutSettingsRequest = {
-        Index: Types.Indices
+        Index: CoreTypes.Indices
         AllowNoIndices: bool option
-        ExpandWildcards: Types.ExpandWildcards option
+        ExpandWildcards: CoreTypes.ExpandWildcards option
         FlatSettings: bool option
         IgnoreUnavailable: bool option
-        MasterTimeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
         PreserveExisting: bool option
         Reopen: bool option
-        Timeout: Types.Duration option
+        Timeout: CoreTypes.Duration option
         Document: obj
     }
 
@@ -3895,7 +3895,7 @@ module IndicesOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type IndicesPutSettingsResponse = Types.AcknowledgedResponseBase
+    type IndicesPutSettingsResponse = CoreTypes.AcknowledgedResponseBase
 
     type IndicesPutSettingsRequestBuilder() =
         member _.Yield(_: unit) : IndicesPutSettingsRequest =
@@ -3913,7 +3913,7 @@ module IndicesOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: IndicesPutSettingsRequest, value: Types.Indices) =
+        member _.Index(state: IndicesPutSettingsRequest, value: CoreTypes.Indices) =
             { state with Index = value }
 
         [<CustomOperation("allowNoIndices")>]
@@ -3921,7 +3921,7 @@ module IndicesOperations =
             { state with AllowNoIndices = Some value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: IndicesPutSettingsRequest, value: Types.ExpandWildcards) =
+        member _.ExpandWildcards(state: IndicesPutSettingsRequest, value: CoreTypes.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("flatSettings")>]
@@ -3933,7 +3933,7 @@ module IndicesOperations =
             { state with IgnoreUnavailable = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IndicesPutSettingsRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: IndicesPutSettingsRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("preserveExisting")>]
@@ -3945,7 +3945,7 @@ module IndicesOperations =
             { state with Reopen = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: IndicesPutSettingsRequest, value: Types.Duration) =
+        member _.Timeout(state: IndicesPutSettingsRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("document")>]
@@ -3957,33 +3957,33 @@ module IndicesOperations =
     module PutSettings =
         let withAllowNoIndices (value: bool) (req: IndicesPutSettingsRequest) =
             { req with AllowNoIndices = Some value }
-        let withExpandWildcards (value: Types.ExpandWildcards) (req: IndicesPutSettingsRequest) =
+        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: IndicesPutSettingsRequest) =
             { req with ExpandWildcards = Some value }
         let withFlatSettings (value: bool) (req: IndicesPutSettingsRequest) =
             { req with FlatSettings = Some value }
         let withIgnoreUnavailable (value: bool) (req: IndicesPutSettingsRequest) =
             { req with IgnoreUnavailable = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: IndicesPutSettingsRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: IndicesPutSettingsRequest) =
             { req with MasterTimeout = Some value }
         let withPreserveExisting (value: bool) (req: IndicesPutSettingsRequest) =
             { req with PreserveExisting = Some value }
         let withReopen (value: bool) (req: IndicesPutSettingsRequest) =
             { req with Reopen = Some value }
-        let withTimeout (value: Types.Duration) (req: IndicesPutSettingsRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: IndicesPutSettingsRequest) =
             { req with Timeout = Some value }
 
     type IndicesPutTemplateRequest = {
-        Name: Types.Name
+        Name: CoreTypes.Name
         Create: bool option
-        MasterTimeout: Types.Duration option
-        Order: Types.Integer option
+        MasterTimeout: CoreTypes.Duration option
+        Order: CoreTypes.Integer option
         Cause: string option
-        Aliases: Map<Types.IndexName, IndicesTypes.Alias> option
+        Aliases: Map<CoreTypes.IndexName, IndicesTypes.Alias> option
         IndexPatterns: System.Text.Json.JsonElement option
-        Mappings: TypesMapping.TypeMapping option
-        Order: Types.Integer option
+        Mappings: CoreTypes.TypeMapping option
+        Order: CoreTypes.Integer option
         Settings: IndicesTypes.IndexSettings option
-        Version: Types.VersionNumber option
+        Version: CoreTypes.VersionNumber option
     }
 
         with
@@ -4008,7 +4008,7 @@ module IndicesOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type IndicesPutTemplateResponse = Types.AcknowledgedResponseBase
+    type IndicesPutTemplateResponse = CoreTypes.AcknowledgedResponseBase
 
     type IndicesPutTemplateRequestBuilder() =
         member _.Yield(_: unit) : IndicesPutTemplateRequest =
@@ -4027,7 +4027,7 @@ module IndicesOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: IndicesPutTemplateRequest, value: Types.Name) =
+        member _.Name(state: IndicesPutTemplateRequest, value: CoreTypes.Name) =
             { state with Name = value }
 
         [<CustomOperation("create")>]
@@ -4035,11 +4035,11 @@ module IndicesOperations =
             { state with Create = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IndicesPutTemplateRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: IndicesPutTemplateRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("order")>]
-        member _.Order(state: IndicesPutTemplateRequest, value: Types.Integer) =
+        member _.Order(state: IndicesPutTemplateRequest, value: CoreTypes.Integer) =
             { state with Order = Some value }
 
         [<CustomOperation("cause")>]
@@ -4047,7 +4047,7 @@ module IndicesOperations =
             { state with Cause = Some value }
 
         [<CustomOperation("aliases")>]
-        member _.Aliases(state: IndicesPutTemplateRequest, value: Map<Types.IndexName, IndicesTypes.Alias>) =
+        member _.Aliases(state: IndicesPutTemplateRequest, value: Map<CoreTypes.IndexName, IndicesTypes.Alias>) =
             { state with Aliases = Some value }
 
         [<CustomOperation("indexPatterns")>]
@@ -4055,11 +4055,11 @@ module IndicesOperations =
             { state with IndexPatterns = Some value }
 
         [<CustomOperation("mappings")>]
-        member _.Mappings(state: IndicesPutTemplateRequest, value: TypesMapping.TypeMapping) =
+        member _.Mappings(state: IndicesPutTemplateRequest, value: CoreTypes.TypeMapping) =
             { state with Mappings = Some value }
 
         [<CustomOperation("order")>]
-        member _.Order(state: IndicesPutTemplateRequest, value: Types.Integer) =
+        member _.Order(state: IndicesPutTemplateRequest, value: CoreTypes.Integer) =
             { state with Order = Some value }
 
         [<CustomOperation("settings")>]
@@ -4067,7 +4067,7 @@ module IndicesOperations =
             { state with Settings = Some value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: IndicesPutTemplateRequest, value: Types.VersionNumber) =
+        member _.Version(state: IndicesPutTemplateRequest, value: CoreTypes.VersionNumber) =
             { state with Version = Some value }
 
     let indicesPutTemplateRequest = IndicesPutTemplateRequestBuilder()
@@ -4075,31 +4075,31 @@ module IndicesOperations =
     module PutTemplate =
         let withCreate (value: bool) (req: IndicesPutTemplateRequest) =
             { req with Create = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: IndicesPutTemplateRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: IndicesPutTemplateRequest) =
             { req with MasterTimeout = Some value }
-        let withOrder (value: Types.Integer) (req: IndicesPutTemplateRequest) =
+        let withOrder (value: CoreTypes.Integer) (req: IndicesPutTemplateRequest) =
             { req with Order = Some value }
         let withCause (value: string) (req: IndicesPutTemplateRequest) =
             { req with Cause = Some value }
-        let withAliases (value: Map<Types.IndexName, IndicesTypes.Alias>) (req: IndicesPutTemplateRequest) =
+        let withAliases (value: Map<CoreTypes.IndexName, IndicesTypes.Alias>) (req: IndicesPutTemplateRequest) =
             { req with Aliases = Some value }
         let withIndexPatterns (value: System.Text.Json.JsonElement) (req: IndicesPutTemplateRequest) =
             { req with IndexPatterns = Some value }
-        let withMappings (value: TypesMapping.TypeMapping) (req: IndicesPutTemplateRequest) =
+        let withMappings (value: CoreTypes.TypeMapping) (req: IndicesPutTemplateRequest) =
             { req with Mappings = Some value }
-        let withOrder (value: Types.Integer) (req: IndicesPutTemplateRequest) =
+        let withOrder (value: CoreTypes.Integer) (req: IndicesPutTemplateRequest) =
             { req with Order = Some value }
         let withSettings (value: IndicesTypes.IndexSettings) (req: IndicesPutTemplateRequest) =
             { req with Settings = Some value }
-        let withVersion (value: Types.VersionNumber) (req: IndicesPutTemplateRequest) =
+        let withVersion (value: CoreTypes.VersionNumber) (req: IndicesPutTemplateRequest) =
             { req with Version = Some value }
 
     type IndicesRecoveryRequest = {
-        Index: Types.Indices
+        Index: CoreTypes.Indices
         ActiveOnly: bool option
         Detailed: bool option
         AllowNoIndices: bool option
-        ExpandWildcards: Types.ExpandWildcards option
+        ExpandWildcards: CoreTypes.ExpandWildcards option
         IgnoreUnavailable: bool option
     }
 
@@ -4125,7 +4125,7 @@ module IndicesOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type IndicesRecoveryResponse = Map<Types.IndexName, IndicesRecovery.RecoveryStatus>
+    type IndicesRecoveryResponse = Map<CoreTypes.IndexName, IndicesRecovery.RecoveryStatus>
 
     type IndicesRecoveryRequestBuilder() =
         member _.Yield(_: unit) : IndicesRecoveryRequest =
@@ -4139,7 +4139,7 @@ module IndicesOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: IndicesRecoveryRequest, value: Types.Indices) =
+        member _.Index(state: IndicesRecoveryRequest, value: CoreTypes.Indices) =
             { state with Index = value }
 
         [<CustomOperation("activeOnly")>]
@@ -4155,7 +4155,7 @@ module IndicesOperations =
             { state with AllowNoIndices = Some value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: IndicesRecoveryRequest, value: Types.ExpandWildcards) =
+        member _.ExpandWildcards(state: IndicesRecoveryRequest, value: CoreTypes.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("ignoreUnavailable")>]
@@ -4171,15 +4171,15 @@ module IndicesOperations =
             { req with Detailed = Some value }
         let withAllowNoIndices (value: bool) (req: IndicesRecoveryRequest) =
             { req with AllowNoIndices = Some value }
-        let withExpandWildcards (value: Types.ExpandWildcards) (req: IndicesRecoveryRequest) =
+        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: IndicesRecoveryRequest) =
             { req with ExpandWildcards = Some value }
         let withIgnoreUnavailable (value: bool) (req: IndicesRecoveryRequest) =
             { req with IgnoreUnavailable = Some value }
 
     type IndicesRefreshRequest = {
-        Index: Types.Indices
+        Index: CoreTypes.Indices
         AllowNoIndices: bool option
-        ExpandWildcards: Types.ExpandWildcards option
+        ExpandWildcards: CoreTypes.ExpandWildcards option
         IgnoreUnavailable: bool option
     }
 
@@ -4203,7 +4203,7 @@ module IndicesOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type IndicesRefreshResponse = Types.ShardsOperationResponseBase
+    type IndicesRefreshResponse = CoreTypes.ShardsOperationResponseBase
 
     type IndicesRefreshRequestBuilder() =
         member _.Yield(_: unit) : IndicesRefreshRequest =
@@ -4215,7 +4215,7 @@ module IndicesOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: IndicesRefreshRequest, value: Types.Indices) =
+        member _.Index(state: IndicesRefreshRequest, value: CoreTypes.Indices) =
             { state with Index = value }
 
         [<CustomOperation("allowNoIndices")>]
@@ -4223,7 +4223,7 @@ module IndicesOperations =
             { state with AllowNoIndices = Some value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: IndicesRefreshRequest, value: Types.ExpandWildcards) =
+        member _.ExpandWildcards(state: IndicesRefreshRequest, value: CoreTypes.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("ignoreUnavailable")>]
@@ -4235,15 +4235,15 @@ module IndicesOperations =
     module Refresh =
         let withAllowNoIndices (value: bool) (req: IndicesRefreshRequest) =
             { req with AllowNoIndices = Some value }
-        let withExpandWildcards (value: Types.ExpandWildcards) (req: IndicesRefreshRequest) =
+        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: IndicesRefreshRequest) =
             { req with ExpandWildcards = Some value }
         let withIgnoreUnavailable (value: bool) (req: IndicesRefreshRequest) =
             { req with IgnoreUnavailable = Some value }
 
     type IndicesReloadSearchAnalyzersRequest = {
-        Index: Types.Indices
+        Index: CoreTypes.Indices
         AllowNoIndices: bool option
-        ExpandWildcards: Types.ExpandWildcards option
+        ExpandWildcards: CoreTypes.ExpandWildcards option
         IgnoreUnavailable: bool option
         Resource: string option
     }
@@ -4282,7 +4282,7 @@ module IndicesOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: IndicesReloadSearchAnalyzersRequest, value: Types.Indices) =
+        member _.Index(state: IndicesReloadSearchAnalyzersRequest, value: CoreTypes.Indices) =
             { state with Index = value }
 
         [<CustomOperation("allowNoIndices")>]
@@ -4290,7 +4290,7 @@ module IndicesOperations =
             { state with AllowNoIndices = Some value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: IndicesReloadSearchAnalyzersRequest, value: Types.ExpandWildcards) =
+        member _.ExpandWildcards(state: IndicesReloadSearchAnalyzersRequest, value: CoreTypes.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("ignoreUnavailable")>]
@@ -4306,7 +4306,7 @@ module IndicesOperations =
     module ReloadSearchAnalyzers =
         let withAllowNoIndices (value: bool) (req: IndicesReloadSearchAnalyzersRequest) =
             { req with AllowNoIndices = Some value }
-        let withExpandWildcards (value: Types.ExpandWildcards) (req: IndicesReloadSearchAnalyzersRequest) =
+        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: IndicesReloadSearchAnalyzersRequest) =
             { req with ExpandWildcards = Some value }
         let withIgnoreUnavailable (value: bool) (req: IndicesReloadSearchAnalyzersRequest) =
             { req with IgnoreUnavailable = Some value }
@@ -4314,13 +4314,13 @@ module IndicesOperations =
             { req with Resource = Some value }
 
     type IndicesRemoveBlockRequest = {
-        Index: Types.Indices
+        Index: CoreTypes.Indices
         Block: IndicesTypes.IndicesBlockOptions
         AllowNoIndices: bool option
-        ExpandWildcards: Types.ExpandWildcards option
+        ExpandWildcards: CoreTypes.ExpandWildcards option
         IgnoreUnavailable: bool option
-        MasterTimeout: Types.Duration option
-        Timeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
+        Timeout: CoreTypes.Duration option
     }
 
         with
@@ -4360,7 +4360,7 @@ module IndicesOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: IndicesRemoveBlockRequest, value: Types.Indices) =
+        member _.Index(state: IndicesRemoveBlockRequest, value: CoreTypes.Indices) =
             { state with Index = value }
 
         [<CustomOperation("block")>]
@@ -4372,7 +4372,7 @@ module IndicesOperations =
             { state with AllowNoIndices = Some value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: IndicesRemoveBlockRequest, value: Types.ExpandWildcards) =
+        member _.ExpandWildcards(state: IndicesRemoveBlockRequest, value: CoreTypes.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("ignoreUnavailable")>]
@@ -4380,11 +4380,11 @@ module IndicesOperations =
             { state with IgnoreUnavailable = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IndicesRemoveBlockRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: IndicesRemoveBlockRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: IndicesRemoveBlockRequest, value: Types.Duration) =
+        member _.Timeout(state: IndicesRemoveBlockRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
     let indicesRemoveBlockRequest = IndicesRemoveBlockRequestBuilder()
@@ -4392,22 +4392,22 @@ module IndicesOperations =
     module RemoveBlock =
         let withAllowNoIndices (value: bool) (req: IndicesRemoveBlockRequest) =
             { req with AllowNoIndices = Some value }
-        let withExpandWildcards (value: Types.ExpandWildcards) (req: IndicesRemoveBlockRequest) =
+        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: IndicesRemoveBlockRequest) =
             { req with ExpandWildcards = Some value }
         let withIgnoreUnavailable (value: bool) (req: IndicesRemoveBlockRequest) =
             { req with IgnoreUnavailable = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: IndicesRemoveBlockRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: IndicesRemoveBlockRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: Types.Duration) (req: IndicesRemoveBlockRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: IndicesRemoveBlockRequest) =
             { req with Timeout = Some value }
 
     type IndicesResolveClusterRequest = {
-        Name: Types.Names
+        Name: CoreTypes.Names
         AllowNoIndices: bool option
-        ExpandWildcards: Types.ExpandWildcards option
+        ExpandWildcards: CoreTypes.ExpandWildcards option
         IgnoreThrottled: bool option
         IgnoreUnavailable: bool option
-        Timeout: Types.Duration option
+        Timeout: CoreTypes.Duration option
     }
 
         with
@@ -4432,7 +4432,7 @@ module IndicesOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type IndicesResolveClusterResponse = Map<Types.ClusterAlias, IndicesResolveCluster.ResolveClusterInfo>
+    type IndicesResolveClusterResponse = Map<CoreTypes.ClusterAlias, IndicesResolveCluster.ResolveClusterInfo>
 
     type IndicesResolveClusterRequestBuilder() =
         member _.Yield(_: unit) : IndicesResolveClusterRequest =
@@ -4446,7 +4446,7 @@ module IndicesOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: IndicesResolveClusterRequest, value: Types.Names) =
+        member _.Name(state: IndicesResolveClusterRequest, value: CoreTypes.Names) =
             { state with Name = value }
 
         [<CustomOperation("allowNoIndices")>]
@@ -4454,7 +4454,7 @@ module IndicesOperations =
             { state with AllowNoIndices = Some value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: IndicesResolveClusterRequest, value: Types.ExpandWildcards) =
+        member _.ExpandWildcards(state: IndicesResolveClusterRequest, value: CoreTypes.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("ignoreThrottled")>]
@@ -4466,7 +4466,7 @@ module IndicesOperations =
             { state with IgnoreUnavailable = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: IndicesResolveClusterRequest, value: Types.Duration) =
+        member _.Timeout(state: IndicesResolveClusterRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
     let indicesResolveClusterRequest = IndicesResolveClusterRequestBuilder()
@@ -4474,22 +4474,22 @@ module IndicesOperations =
     module ResolveCluster =
         let withAllowNoIndices (value: bool) (req: IndicesResolveClusterRequest) =
             { req with AllowNoIndices = Some value }
-        let withExpandWildcards (value: Types.ExpandWildcards) (req: IndicesResolveClusterRequest) =
+        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: IndicesResolveClusterRequest) =
             { req with ExpandWildcards = Some value }
         let withIgnoreThrottled (value: bool) (req: IndicesResolveClusterRequest) =
             { req with IgnoreThrottled = Some value }
         let withIgnoreUnavailable (value: bool) (req: IndicesResolveClusterRequest) =
             { req with IgnoreUnavailable = Some value }
-        let withTimeout (value: Types.Duration) (req: IndicesResolveClusterRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: IndicesResolveClusterRequest) =
             { req with Timeout = Some value }
 
     type IndicesResolveIndexRequest = {
-        Name: Types.Names
-        ExpandWildcards: Types.ExpandWildcards option
+        Name: CoreTypes.Names
+        ExpandWildcards: CoreTypes.ExpandWildcards option
         IgnoreUnavailable: bool option
         AllowNoIndices: bool option
         Mode: System.Text.Json.JsonElement option
-        ProjectRouting: Types.ProjectRouting option
+        ProjectRouting: CoreTypes.ProjectRouting option
     }
 
         with
@@ -4528,11 +4528,11 @@ module IndicesOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: IndicesResolveIndexRequest, value: Types.Names) =
+        member _.Name(state: IndicesResolveIndexRequest, value: CoreTypes.Names) =
             { state with Name = value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: IndicesResolveIndexRequest, value: Types.ExpandWildcards) =
+        member _.ExpandWildcards(state: IndicesResolveIndexRequest, value: CoreTypes.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("ignoreUnavailable")>]
@@ -4548,13 +4548,13 @@ module IndicesOperations =
             { state with Mode = Some value }
 
         [<CustomOperation("projectRouting")>]
-        member _.ProjectRouting(state: IndicesResolveIndexRequest, value: Types.ProjectRouting) =
+        member _.ProjectRouting(state: IndicesResolveIndexRequest, value: CoreTypes.ProjectRouting) =
             { state with ProjectRouting = Some value }
 
     let indicesResolveIndexRequest = IndicesResolveIndexRequestBuilder()
 
     module ResolveIndex =
-        let withExpandWildcards (value: Types.ExpandWildcards) (req: IndicesResolveIndexRequest) =
+        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: IndicesResolveIndexRequest) =
             { req with ExpandWildcards = Some value }
         let withIgnoreUnavailable (value: bool) (req: IndicesResolveIndexRequest) =
             { req with IgnoreUnavailable = Some value }
@@ -4562,20 +4562,20 @@ module IndicesOperations =
             { req with AllowNoIndices = Some value }
         let withMode (value: System.Text.Json.JsonElement) (req: IndicesResolveIndexRequest) =
             { req with Mode = Some value }
-        let withProjectRouting (value: Types.ProjectRouting) (req: IndicesResolveIndexRequest) =
+        let withProjectRouting (value: CoreTypes.ProjectRouting) (req: IndicesResolveIndexRequest) =
             { req with ProjectRouting = Some value }
 
     type IndicesRolloverRequest = {
-        Alias: Types.IndexAlias
-        NewIndex: Types.IndexName
+        Alias: CoreTypes.IndexAlias
+        NewIndex: CoreTypes.IndexName
         DryRun: bool option
-        MasterTimeout: Types.Duration option
-        Timeout: Types.Duration option
-        WaitForActiveShards: Types.WaitForActiveShards option
+        MasterTimeout: CoreTypes.Duration option
+        Timeout: CoreTypes.Duration option
+        WaitForActiveShards: CoreTypes.WaitForActiveShards option
         Lazy: bool option
-        Aliases: Map<Types.IndexName, IndicesTypes.Alias> option
+        Aliases: Map<CoreTypes.IndexName, IndicesTypes.Alias> option
         Conditions: IndicesRollover.RolloverConditions option
-        Mappings: TypesMapping.TypeMapping option
+        Mappings: CoreTypes.TypeMapping option
         Settings: Map<string, System.Text.Json.JsonElement> option
     }
 
@@ -4621,11 +4621,11 @@ module IndicesOperations =
             }
 
         [<CustomOperation("alias")>]
-        member _.Alias(state: IndicesRolloverRequest, value: Types.IndexAlias) =
+        member _.Alias(state: IndicesRolloverRequest, value: CoreTypes.IndexAlias) =
             { state with Alias = value }
 
         [<CustomOperation("newIndex")>]
-        member _.NewIndex(state: IndicesRolloverRequest, value: Types.IndexName) =
+        member _.NewIndex(state: IndicesRolloverRequest, value: CoreTypes.IndexName) =
             { state with NewIndex = value }
 
         [<CustomOperation("dryRun")>]
@@ -4633,15 +4633,15 @@ module IndicesOperations =
             { state with DryRun = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IndicesRolloverRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: IndicesRolloverRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: IndicesRolloverRequest, value: Types.Duration) =
+        member _.Timeout(state: IndicesRolloverRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("waitForActiveShards")>]
-        member _.WaitForActiveShards(state: IndicesRolloverRequest, value: Types.WaitForActiveShards) =
+        member _.WaitForActiveShards(state: IndicesRolloverRequest, value: CoreTypes.WaitForActiveShards) =
             { state with WaitForActiveShards = Some value }
 
         [<CustomOperation("lazy'")>]
@@ -4649,7 +4649,7 @@ module IndicesOperations =
             { state with Lazy = Some value }
 
         [<CustomOperation("aliases")>]
-        member _.Aliases(state: IndicesRolloverRequest, value: Map<Types.IndexName, IndicesTypes.Alias>) =
+        member _.Aliases(state: IndicesRolloverRequest, value: Map<CoreTypes.IndexName, IndicesTypes.Alias>) =
             { state with Aliases = Some value }
 
         [<CustomOperation("conditions")>]
@@ -4657,7 +4657,7 @@ module IndicesOperations =
             { state with Conditions = Some value }
 
         [<CustomOperation("mappings")>]
-        member _.Mappings(state: IndicesRolloverRequest, value: TypesMapping.TypeMapping) =
+        member _.Mappings(state: IndicesRolloverRequest, value: CoreTypes.TypeMapping) =
             { state with Mappings = Some value }
 
         [<CustomOperation("settings")>]
@@ -4669,27 +4669,27 @@ module IndicesOperations =
     module Rollover =
         let withDryRun (value: bool) (req: IndicesRolloverRequest) =
             { req with DryRun = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: IndicesRolloverRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: IndicesRolloverRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: Types.Duration) (req: IndicesRolloverRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: IndicesRolloverRequest) =
             { req with Timeout = Some value }
-        let withWaitForActiveShards (value: Types.WaitForActiveShards) (req: IndicesRolloverRequest) =
+        let withWaitForActiveShards (value: CoreTypes.WaitForActiveShards) (req: IndicesRolloverRequest) =
             { req with WaitForActiveShards = Some value }
         let withLazy (value: bool) (req: IndicesRolloverRequest) =
             { req with Lazy = Some value }
-        let withAliases (value: Map<Types.IndexName, IndicesTypes.Alias>) (req: IndicesRolloverRequest) =
+        let withAliases (value: Map<CoreTypes.IndexName, IndicesTypes.Alias>) (req: IndicesRolloverRequest) =
             { req with Aliases = Some value }
         let withConditions (value: IndicesRollover.RolloverConditions) (req: IndicesRolloverRequest) =
             { req with Conditions = Some value }
-        let withMappings (value: TypesMapping.TypeMapping) (req: IndicesRolloverRequest) =
+        let withMappings (value: CoreTypes.TypeMapping) (req: IndicesRolloverRequest) =
             { req with Mappings = Some value }
         let withSettings (value: Map<string, System.Text.Json.JsonElement>) (req: IndicesRolloverRequest) =
             { req with Settings = Some value }
 
     type IndicesSegmentsRequest = {
-        Index: Types.Indices
+        Index: CoreTypes.Indices
         AllowNoIndices: bool option
-        ExpandWildcards: Types.ExpandWildcards option
+        ExpandWildcards: CoreTypes.ExpandWildcards option
         IgnoreUnavailable: bool option
     }
 
@@ -4725,7 +4725,7 @@ module IndicesOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: IndicesSegmentsRequest, value: Types.Indices) =
+        member _.Index(state: IndicesSegmentsRequest, value: CoreTypes.Indices) =
             { state with Index = value }
 
         [<CustomOperation("allowNoIndices")>]
@@ -4733,7 +4733,7 @@ module IndicesOperations =
             { state with AllowNoIndices = Some value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: IndicesSegmentsRequest, value: Types.ExpandWildcards) =
+        member _.ExpandWildcards(state: IndicesSegmentsRequest, value: CoreTypes.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("ignoreUnavailable")>]
@@ -4745,15 +4745,15 @@ module IndicesOperations =
     module Segments =
         let withAllowNoIndices (value: bool) (req: IndicesSegmentsRequest) =
             { req with AllowNoIndices = Some value }
-        let withExpandWildcards (value: Types.ExpandWildcards) (req: IndicesSegmentsRequest) =
+        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: IndicesSegmentsRequest) =
             { req with ExpandWildcards = Some value }
         let withIgnoreUnavailable (value: bool) (req: IndicesSegmentsRequest) =
             { req with IgnoreUnavailable = Some value }
 
     type IndicesShardStoresRequest = {
-        Index: Types.Indices
+        Index: CoreTypes.Indices
         AllowNoIndices: bool option
-        ExpandWildcards: Types.ExpandWildcards option
+        ExpandWildcards: CoreTypes.ExpandWildcards option
         IgnoreUnavailable: bool option
         Status: System.Text.Json.JsonElement option
     }
@@ -4792,7 +4792,7 @@ module IndicesOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: IndicesShardStoresRequest, value: Types.Indices) =
+        member _.Index(state: IndicesShardStoresRequest, value: CoreTypes.Indices) =
             { state with Index = value }
 
         [<CustomOperation("allowNoIndices")>]
@@ -4800,7 +4800,7 @@ module IndicesOperations =
             { state with AllowNoIndices = Some value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: IndicesShardStoresRequest, value: Types.ExpandWildcards) =
+        member _.ExpandWildcards(state: IndicesShardStoresRequest, value: CoreTypes.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("ignoreUnavailable")>]
@@ -4816,7 +4816,7 @@ module IndicesOperations =
     module ShardStores =
         let withAllowNoIndices (value: bool) (req: IndicesShardStoresRequest) =
             { req with AllowNoIndices = Some value }
-        let withExpandWildcards (value: Types.ExpandWildcards) (req: IndicesShardStoresRequest) =
+        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: IndicesShardStoresRequest) =
             { req with ExpandWildcards = Some value }
         let withIgnoreUnavailable (value: bool) (req: IndicesShardStoresRequest) =
             { req with IgnoreUnavailable = Some value }
@@ -4824,12 +4824,12 @@ module IndicesOperations =
             { req with Status = Some value }
 
     type IndicesShrinkRequest = {
-        Index: Types.IndexName
-        Target: Types.IndexName
-        MasterTimeout: Types.Duration option
-        Timeout: Types.Duration option
-        WaitForActiveShards: Types.WaitForActiveShards option
-        Aliases: Map<Types.IndexName, IndicesTypes.Alias> option
+        Index: CoreTypes.IndexName
+        Target: CoreTypes.IndexName
+        MasterTimeout: CoreTypes.Duration option
+        Timeout: CoreTypes.Duration option
+        WaitForActiveShards: CoreTypes.WaitForActiveShards option
+        Aliases: Map<CoreTypes.IndexName, IndicesTypes.Alias> option
         Settings: Map<string, System.Text.Json.JsonElement> option
     }
 
@@ -4869,27 +4869,27 @@ module IndicesOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: IndicesShrinkRequest, value: Types.IndexName) =
+        member _.Index(state: IndicesShrinkRequest, value: CoreTypes.IndexName) =
             { state with Index = value }
 
         [<CustomOperation("target")>]
-        member _.Target(state: IndicesShrinkRequest, value: Types.IndexName) =
+        member _.Target(state: IndicesShrinkRequest, value: CoreTypes.IndexName) =
             { state with Target = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IndicesShrinkRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: IndicesShrinkRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: IndicesShrinkRequest, value: Types.Duration) =
+        member _.Timeout(state: IndicesShrinkRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("waitForActiveShards")>]
-        member _.WaitForActiveShards(state: IndicesShrinkRequest, value: Types.WaitForActiveShards) =
+        member _.WaitForActiveShards(state: IndicesShrinkRequest, value: CoreTypes.WaitForActiveShards) =
             { state with WaitForActiveShards = Some value }
 
         [<CustomOperation("aliases")>]
-        member _.Aliases(state: IndicesShrinkRequest, value: Map<Types.IndexName, IndicesTypes.Alias>) =
+        member _.Aliases(state: IndicesShrinkRequest, value: Map<CoreTypes.IndexName, IndicesTypes.Alias>) =
             { state with Aliases = Some value }
 
         [<CustomOperation("settings")>]
@@ -4899,22 +4899,22 @@ module IndicesOperations =
     let indicesShrinkRequest = IndicesShrinkRequestBuilder()
 
     module Shrink =
-        let withMasterTimeout (value: Types.Duration) (req: IndicesShrinkRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: IndicesShrinkRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: Types.Duration) (req: IndicesShrinkRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: IndicesShrinkRequest) =
             { req with Timeout = Some value }
-        let withWaitForActiveShards (value: Types.WaitForActiveShards) (req: IndicesShrinkRequest) =
+        let withWaitForActiveShards (value: CoreTypes.WaitForActiveShards) (req: IndicesShrinkRequest) =
             { req with WaitForActiveShards = Some value }
-        let withAliases (value: Map<Types.IndexName, IndicesTypes.Alias>) (req: IndicesShrinkRequest) =
+        let withAliases (value: Map<CoreTypes.IndexName, IndicesTypes.Alias>) (req: IndicesShrinkRequest) =
             { req with Aliases = Some value }
         let withSettings (value: Map<string, System.Text.Json.JsonElement>) (req: IndicesShrinkRequest) =
             { req with Settings = Some value }
 
     type IndicesSimulateIndexTemplateRequest = {
-        Name: Types.Name
+        Name: CoreTypes.Name
         Create: bool option
         Cause: string option
-        MasterTimeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
         IncludeDefaults: bool option
         Document: obj
     }
@@ -4955,7 +4955,7 @@ module IndicesOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: IndicesSimulateIndexTemplateRequest, value: Types.Name) =
+        member _.Name(state: IndicesSimulateIndexTemplateRequest, value: CoreTypes.Name) =
             { state with Name = value }
 
         [<CustomOperation("create")>]
@@ -4967,7 +4967,7 @@ module IndicesOperations =
             { state with Cause = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IndicesSimulateIndexTemplateRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: IndicesSimulateIndexTemplateRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("includeDefaults")>]
@@ -4985,25 +4985,25 @@ module IndicesOperations =
             { req with Create = Some value }
         let withCause (value: string) (req: IndicesSimulateIndexTemplateRequest) =
             { req with Cause = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: IndicesSimulateIndexTemplateRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: IndicesSimulateIndexTemplateRequest) =
             { req with MasterTimeout = Some value }
         let withIncludeDefaults (value: bool) (req: IndicesSimulateIndexTemplateRequest) =
             { req with IncludeDefaults = Some value }
 
     type IndicesSimulateTemplateRequest = {
-        Name: Types.Name
+        Name: CoreTypes.Name
         Create: bool option
         Cause: string option
-        MasterTimeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
         IncludeDefaults: bool option
         AllowAutoCreate: bool option
-        IndexPatterns: Types.Indices option
-        ComposedOf: Types.Name list option
+        IndexPatterns: CoreTypes.Indices option
+        ComposedOf: CoreTypes.Name list option
         Template: IndicesPutIndexTemplate.IndexTemplateMapping option
         DataStream: IndicesTypes.DataStreamVisibility option
-        Priority: Types.Long option
-        Version: Types.VersionNumber option
-        Meta: Types.Metadata option
+        Priority: CoreTypes.Long option
+        Version: CoreTypes.VersionNumber option
+        Meta: CoreTypes.Metadata option
         IgnoreMissingComponentTemplates: string list option
         Deprecated: bool option
     }
@@ -5053,7 +5053,7 @@ module IndicesOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: IndicesSimulateTemplateRequest, value: Types.Name) =
+        member _.Name(state: IndicesSimulateTemplateRequest, value: CoreTypes.Name) =
             { state with Name = value }
 
         [<CustomOperation("create")>]
@@ -5065,7 +5065,7 @@ module IndicesOperations =
             { state with Cause = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IndicesSimulateTemplateRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: IndicesSimulateTemplateRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("includeDefaults")>]
@@ -5077,11 +5077,11 @@ module IndicesOperations =
             { state with AllowAutoCreate = Some value }
 
         [<CustomOperation("indexPatterns")>]
-        member _.IndexPatterns(state: IndicesSimulateTemplateRequest, value: Types.Indices) =
+        member _.IndexPatterns(state: IndicesSimulateTemplateRequest, value: CoreTypes.Indices) =
             { state with IndexPatterns = Some value }
 
         [<CustomOperation("composedOf")>]
-        member _.ComposedOf(state: IndicesSimulateTemplateRequest, value: Types.Name list) =
+        member _.ComposedOf(state: IndicesSimulateTemplateRequest, value: CoreTypes.Name list) =
             { state with ComposedOf = Some value }
 
         [<CustomOperation("template")>]
@@ -5093,15 +5093,15 @@ module IndicesOperations =
             { state with DataStream = Some value }
 
         [<CustomOperation("priority")>]
-        member _.Priority(state: IndicesSimulateTemplateRequest, value: Types.Long) =
+        member _.Priority(state: IndicesSimulateTemplateRequest, value: CoreTypes.Long) =
             { state with Priority = Some value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: IndicesSimulateTemplateRequest, value: Types.VersionNumber) =
+        member _.Version(state: IndicesSimulateTemplateRequest, value: CoreTypes.VersionNumber) =
             { state with Version = Some value }
 
         [<CustomOperation("meta")>]
-        member _.Meta(state: IndicesSimulateTemplateRequest, value: Types.Metadata) =
+        member _.Meta(state: IndicesSimulateTemplateRequest, value: CoreTypes.Metadata) =
             { state with Meta = Some value }
 
         [<CustomOperation("ignoreMissingComponentTemplates")>]
@@ -5119,25 +5119,25 @@ module IndicesOperations =
             { req with Create = Some value }
         let withCause (value: string) (req: IndicesSimulateTemplateRequest) =
             { req with Cause = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: IndicesSimulateTemplateRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: IndicesSimulateTemplateRequest) =
             { req with MasterTimeout = Some value }
         let withIncludeDefaults (value: bool) (req: IndicesSimulateTemplateRequest) =
             { req with IncludeDefaults = Some value }
         let withAllowAutoCreate (value: bool) (req: IndicesSimulateTemplateRequest) =
             { req with AllowAutoCreate = Some value }
-        let withIndexPatterns (value: Types.Indices) (req: IndicesSimulateTemplateRequest) =
+        let withIndexPatterns (value: CoreTypes.Indices) (req: IndicesSimulateTemplateRequest) =
             { req with IndexPatterns = Some value }
-        let withComposedOf (value: Types.Name list) (req: IndicesSimulateTemplateRequest) =
+        let withComposedOf (value: CoreTypes.Name list) (req: IndicesSimulateTemplateRequest) =
             { req with ComposedOf = Some value }
         let withTemplate (value: IndicesPutIndexTemplate.IndexTemplateMapping) (req: IndicesSimulateTemplateRequest) =
             { req with Template = Some value }
         let withDataStream (value: IndicesTypes.DataStreamVisibility) (req: IndicesSimulateTemplateRequest) =
             { req with DataStream = Some value }
-        let withPriority (value: Types.Long) (req: IndicesSimulateTemplateRequest) =
+        let withPriority (value: CoreTypes.Long) (req: IndicesSimulateTemplateRequest) =
             { req with Priority = Some value }
-        let withVersion (value: Types.VersionNumber) (req: IndicesSimulateTemplateRequest) =
+        let withVersion (value: CoreTypes.VersionNumber) (req: IndicesSimulateTemplateRequest) =
             { req with Version = Some value }
-        let withMeta (value: Types.Metadata) (req: IndicesSimulateTemplateRequest) =
+        let withMeta (value: CoreTypes.Metadata) (req: IndicesSimulateTemplateRequest) =
             { req with Meta = Some value }
         let withIgnoreMissingComponentTemplates (value: string list) (req: IndicesSimulateTemplateRequest) =
             { req with IgnoreMissingComponentTemplates = Some value }
@@ -5145,12 +5145,12 @@ module IndicesOperations =
             { req with Deprecated = Some value }
 
     type IndicesSplitRequest = {
-        Index: Types.IndexName
-        Target: Types.IndexName
-        MasterTimeout: Types.Duration option
-        Timeout: Types.Duration option
-        WaitForActiveShards: Types.WaitForActiveShards option
-        Aliases: Map<Types.IndexName, IndicesTypes.Alias> option
+        Index: CoreTypes.IndexName
+        Target: CoreTypes.IndexName
+        MasterTimeout: CoreTypes.Duration option
+        Timeout: CoreTypes.Duration option
+        WaitForActiveShards: CoreTypes.WaitForActiveShards option
+        Aliases: Map<CoreTypes.IndexName, IndicesTypes.Alias> option
         Settings: Map<string, System.Text.Json.JsonElement> option
     }
 
@@ -5190,27 +5190,27 @@ module IndicesOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: IndicesSplitRequest, value: Types.IndexName) =
+        member _.Index(state: IndicesSplitRequest, value: CoreTypes.IndexName) =
             { state with Index = value }
 
         [<CustomOperation("target")>]
-        member _.Target(state: IndicesSplitRequest, value: Types.IndexName) =
+        member _.Target(state: IndicesSplitRequest, value: CoreTypes.IndexName) =
             { state with Target = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IndicesSplitRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: IndicesSplitRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: IndicesSplitRequest, value: Types.Duration) =
+        member _.Timeout(state: IndicesSplitRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("waitForActiveShards")>]
-        member _.WaitForActiveShards(state: IndicesSplitRequest, value: Types.WaitForActiveShards) =
+        member _.WaitForActiveShards(state: IndicesSplitRequest, value: CoreTypes.WaitForActiveShards) =
             { state with WaitForActiveShards = Some value }
 
         [<CustomOperation("aliases")>]
-        member _.Aliases(state: IndicesSplitRequest, value: Map<Types.IndexName, IndicesTypes.Alias>) =
+        member _.Aliases(state: IndicesSplitRequest, value: Map<CoreTypes.IndexName, IndicesTypes.Alias>) =
             { state with Aliases = Some value }
 
         [<CustomOperation("settings")>]
@@ -5220,29 +5220,29 @@ module IndicesOperations =
     let indicesSplitRequest = IndicesSplitRequestBuilder()
 
     module Split =
-        let withMasterTimeout (value: Types.Duration) (req: IndicesSplitRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: IndicesSplitRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: Types.Duration) (req: IndicesSplitRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: IndicesSplitRequest) =
             { req with Timeout = Some value }
-        let withWaitForActiveShards (value: Types.WaitForActiveShards) (req: IndicesSplitRequest) =
+        let withWaitForActiveShards (value: CoreTypes.WaitForActiveShards) (req: IndicesSplitRequest) =
             { req with WaitForActiveShards = Some value }
-        let withAliases (value: Map<Types.IndexName, IndicesTypes.Alias>) (req: IndicesSplitRequest) =
+        let withAliases (value: Map<CoreTypes.IndexName, IndicesTypes.Alias>) (req: IndicesSplitRequest) =
             { req with Aliases = Some value }
         let withSettings (value: Map<string, System.Text.Json.JsonElement>) (req: IndicesSplitRequest) =
             { req with Settings = Some value }
 
     type IndicesStatsRequest = {
-        Metric: Types.CommonStatsFlags
-        Index: Types.Indices
-        CompletionFields: Types.Fields option
-        ExpandWildcards: Types.ExpandWildcards option
-        FielddataFields: Types.Fields option
-        Fields: Types.Fields option
+        Metric: CoreTypes.CommonStatsFlags
+        Index: CoreTypes.Indices
+        CompletionFields: CoreTypes.Fields option
+        ExpandWildcards: CoreTypes.ExpandWildcards option
+        FielddataFields: CoreTypes.Fields option
+        Fields: CoreTypes.Fields option
         ForbidClosedIndices: bool option
         Groups: System.Text.Json.JsonElement option
         IncludeSegmentFileSizes: bool option
         IncludeUnloadedSegments: bool option
-        Level: Types.Level option
+        Level: CoreTypes.Level option
     }
 
         with
@@ -5290,27 +5290,27 @@ module IndicesOperations =
             }
 
         [<CustomOperation("metric")>]
-        member _.Metric(state: IndicesStatsRequest, value: Types.CommonStatsFlags) =
+        member _.Metric(state: IndicesStatsRequest, value: CoreTypes.CommonStatsFlags) =
             { state with Metric = value }
 
         [<CustomOperation("index")>]
-        member _.Index(state: IndicesStatsRequest, value: Types.Indices) =
+        member _.Index(state: IndicesStatsRequest, value: CoreTypes.Indices) =
             { state with Index = value }
 
         [<CustomOperation("completionFields")>]
-        member _.CompletionFields(state: IndicesStatsRequest, value: Types.Fields) =
+        member _.CompletionFields(state: IndicesStatsRequest, value: CoreTypes.Fields) =
             { state with CompletionFields = Some value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: IndicesStatsRequest, value: Types.ExpandWildcards) =
+        member _.ExpandWildcards(state: IndicesStatsRequest, value: CoreTypes.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("fielddataFields")>]
-        member _.FielddataFields(state: IndicesStatsRequest, value: Types.Fields) =
+        member _.FielddataFields(state: IndicesStatsRequest, value: CoreTypes.Fields) =
             { state with FielddataFields = Some value }
 
         [<CustomOperation("fields")>]
-        member _.Fields(state: IndicesStatsRequest, value: Types.Fields) =
+        member _.Fields(state: IndicesStatsRequest, value: CoreTypes.Fields) =
             { state with Fields = Some value }
 
         [<CustomOperation("forbidClosedIndices")>]
@@ -5330,19 +5330,19 @@ module IndicesOperations =
             { state with IncludeUnloadedSegments = Some value }
 
         [<CustomOperation("level")>]
-        member _.Level(state: IndicesStatsRequest, value: Types.Level) =
+        member _.Level(state: IndicesStatsRequest, value: CoreTypes.Level) =
             { state with Level = Some value }
 
     let indicesStatsRequest = IndicesStatsRequestBuilder()
 
     module Stats =
-        let withCompletionFields (value: Types.Fields) (req: IndicesStatsRequest) =
+        let withCompletionFields (value: CoreTypes.Fields) (req: IndicesStatsRequest) =
             { req with CompletionFields = Some value }
-        let withExpandWildcards (value: Types.ExpandWildcards) (req: IndicesStatsRequest) =
+        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: IndicesStatsRequest) =
             { req with ExpandWildcards = Some value }
-        let withFielddataFields (value: Types.Fields) (req: IndicesStatsRequest) =
+        let withFielddataFields (value: CoreTypes.Fields) (req: IndicesStatsRequest) =
             { req with FielddataFields = Some value }
-        let withFields (value: Types.Fields) (req: IndicesStatsRequest) =
+        let withFields (value: CoreTypes.Fields) (req: IndicesStatsRequest) =
             { req with Fields = Some value }
         let withForbidClosedIndices (value: bool) (req: IndicesStatsRequest) =
             { req with ForbidClosedIndices = Some value }
@@ -5352,12 +5352,12 @@ module IndicesOperations =
             { req with IncludeSegmentFileSizes = Some value }
         let withIncludeUnloadedSegments (value: bool) (req: IndicesStatsRequest) =
             { req with IncludeUnloadedSegments = Some value }
-        let withLevel (value: Types.Level) (req: IndicesStatsRequest) =
+        let withLevel (value: CoreTypes.Level) (req: IndicesStatsRequest) =
             { req with Level = Some value }
 
     type IndicesUpdateAliasesRequest = {
-        MasterTimeout: Types.Duration option
-        Timeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
+        Timeout: CoreTypes.Duration option
         Actions: IndicesUpdateAliases.Action list option
     }
 
@@ -5381,7 +5381,7 @@ module IndicesOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type IndicesUpdateAliasesResponse = Types.AcknowledgedResponseBase
+    type IndicesUpdateAliasesResponse = CoreTypes.AcknowledgedResponseBase
 
     type IndicesUpdateAliasesRequestBuilder() =
         member _.Yield(_: unit) : IndicesUpdateAliasesRequest =
@@ -5392,11 +5392,11 @@ module IndicesOperations =
             }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IndicesUpdateAliasesRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: IndicesUpdateAliasesRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: IndicesUpdateAliasesRequest, value: Types.Duration) =
+        member _.Timeout(state: IndicesUpdateAliasesRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("actions")>]
@@ -5406,28 +5406,28 @@ module IndicesOperations =
     let indicesUpdateAliasesRequest = IndicesUpdateAliasesRequestBuilder()
 
     module UpdateAliases =
-        let withMasterTimeout (value: Types.Duration) (req: IndicesUpdateAliasesRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: IndicesUpdateAliasesRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: Types.Duration) (req: IndicesUpdateAliasesRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: IndicesUpdateAliasesRequest) =
             { req with Timeout = Some value }
         let withActions (value: IndicesUpdateAliases.Action list) (req: IndicesUpdateAliasesRequest) =
             { req with Actions = Some value }
 
     type IndicesValidateQueryRequest = {
-        Index: Types.Indices
+        Index: CoreTypes.Indices
         AllowNoIndices: bool option
         AllShards: bool option
         Analyzer: string option
         AnalyzeWildcard: bool option
-        DefaultOperator: TypesQueryDsl.Operator option
+        DefaultOperator: CoreTypes.Operator option
         Df: string option
-        ExpandWildcards: Types.ExpandWildcards option
+        ExpandWildcards: CoreTypes.ExpandWildcards option
         Explain: bool option
         IgnoreUnavailable: bool option
         Lenient: bool option
         Rewrite: bool option
         Q: string option
-        Query: TypesQueryDsl.QueryContainer option
+        Query: CoreTypes.QueryContainer option
     }
 
         with
@@ -5482,7 +5482,7 @@ module IndicesOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: IndicesValidateQueryRequest, value: Types.Indices) =
+        member _.Index(state: IndicesValidateQueryRequest, value: CoreTypes.Indices) =
             { state with Index = value }
 
         [<CustomOperation("allowNoIndices")>]
@@ -5502,7 +5502,7 @@ module IndicesOperations =
             { state with AnalyzeWildcard = Some value }
 
         [<CustomOperation("defaultOperator")>]
-        member _.DefaultOperator(state: IndicesValidateQueryRequest, value: TypesQueryDsl.Operator) =
+        member _.DefaultOperator(state: IndicesValidateQueryRequest, value: CoreTypes.Operator) =
             { state with DefaultOperator = Some value }
 
         [<CustomOperation("df")>]
@@ -5510,7 +5510,7 @@ module IndicesOperations =
             { state with Df = Some value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: IndicesValidateQueryRequest, value: Types.ExpandWildcards) =
+        member _.ExpandWildcards(state: IndicesValidateQueryRequest, value: CoreTypes.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("explain")>]
@@ -5534,7 +5534,7 @@ module IndicesOperations =
             { state with Q = Some value }
 
         [<CustomOperation("query")>]
-        member _.Query(state: IndicesValidateQueryRequest, value: TypesQueryDsl.QueryContainer) =
+        member _.Query(state: IndicesValidateQueryRequest, value: CoreTypes.QueryContainer) =
             { state with Query = Some value }
 
     let indicesValidateQueryRequest = IndicesValidateQueryRequestBuilder()
@@ -5548,11 +5548,11 @@ module IndicesOperations =
             { req with Analyzer = Some value }
         let withAnalyzeWildcard (value: bool) (req: IndicesValidateQueryRequest) =
             { req with AnalyzeWildcard = Some value }
-        let withDefaultOperator (value: TypesQueryDsl.Operator) (req: IndicesValidateQueryRequest) =
+        let withDefaultOperator (value: CoreTypes.Operator) (req: IndicesValidateQueryRequest) =
             { req with DefaultOperator = Some value }
         let withDf (value: string) (req: IndicesValidateQueryRequest) =
             { req with Df = Some value }
-        let withExpandWildcards (value: Types.ExpandWildcards) (req: IndicesValidateQueryRequest) =
+        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: IndicesValidateQueryRequest) =
             { req with ExpandWildcards = Some value }
         let withExplain (value: bool) (req: IndicesValidateQueryRequest) =
             { req with Explain = Some value }
@@ -5564,6 +5564,6 @@ module IndicesOperations =
             { req with Rewrite = Some value }
         let withQ (value: string) (req: IndicesValidateQueryRequest) =
             { req with Q = Some value }
-        let withQuery (value: TypesQueryDsl.QueryContainer) (req: IndicesValidateQueryRequest) =
+        let withQuery (value: CoreTypes.QueryContainer) (req: IndicesValidateQueryRequest) =
             { req with Query = Some value }
 

@@ -24,39 +24,39 @@ module IndicesRecoveryBuilders =
             }
 
         [<CustomOperation("percent")>]
-        member _.Percent(state: RecoveryBytes, value: Types.Percentage) =
+        member _.Percent(state: RecoveryBytes, value: CoreTypes.Percentage) =
             { state with Percent = value }
 
         [<CustomOperation("recovered")>]
-        member _.Recovered(state: RecoveryBytes, value: Types.ByteSize) =
+        member _.Recovered(state: RecoveryBytes, value: CoreTypes.ByteSize) =
             { state with Recovered = Some value }
 
         [<CustomOperation("recoveredInBytes")>]
-        member _.RecoveredInBytes(state: RecoveryBytes, value: Types.ByteSize) =
+        member _.RecoveredInBytes(state: RecoveryBytes, value: CoreTypes.ByteSize) =
             { state with RecoveredInBytes = value }
 
         [<CustomOperation("recoveredFromSnapshot")>]
-        member _.RecoveredFromSnapshot(state: RecoveryBytes, value: Types.ByteSize) =
+        member _.RecoveredFromSnapshot(state: RecoveryBytes, value: CoreTypes.ByteSize) =
             { state with RecoveredFromSnapshot = Some value }
 
         [<CustomOperation("recoveredFromSnapshotInBytes")>]
-        member _.RecoveredFromSnapshotInBytes(state: RecoveryBytes, value: Types.ByteSize) =
+        member _.RecoveredFromSnapshotInBytes(state: RecoveryBytes, value: CoreTypes.ByteSize) =
             { state with RecoveredFromSnapshotInBytes = Some value }
 
         [<CustomOperation("reused")>]
-        member _.Reused(state: RecoveryBytes, value: Types.ByteSize) =
+        member _.Reused(state: RecoveryBytes, value: CoreTypes.ByteSize) =
             { state with Reused = Some value }
 
         [<CustomOperation("reusedInBytes")>]
-        member _.ReusedInBytes(state: RecoveryBytes, value: Types.ByteSize) =
+        member _.ReusedInBytes(state: RecoveryBytes, value: CoreTypes.ByteSize) =
             { state with ReusedInBytes = value }
 
         [<CustomOperation("total")>]
-        member _.Total(state: RecoveryBytes, value: Types.ByteSize) =
+        member _.Total(state: RecoveryBytes, value: CoreTypes.ByteSize) =
             { state with Total = Some value }
 
         [<CustomOperation("totalInBytes")>]
-        member _.TotalInBytes(state: RecoveryBytes, value: Types.ByteSize) =
+        member _.TotalInBytes(state: RecoveryBytes, value: CoreTypes.ByteSize) =
             { state with TotalInBytes = value }
 
     let recoveryBytes = RecoveryBytesBuilder()
@@ -88,27 +88,27 @@ module IndicesRecoveryBuilders =
             { state with Size = value }
 
         [<CustomOperation("sourceThrottleTime")>]
-        member _.SourceThrottleTime(state: RecoveryIndexStatus, value: Types.Duration) =
+        member _.SourceThrottleTime(state: RecoveryIndexStatus, value: CoreTypes.Duration) =
             { state with SourceThrottleTime = Some value }
 
         [<CustomOperation("sourceThrottleTimeInMillis")>]
-        member _.SourceThrottleTimeInMillis(state: RecoveryIndexStatus, value: Types.DurationValue<Types.UnitMillis>) =
+        member _.SourceThrottleTimeInMillis(state: RecoveryIndexStatus, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
             { state with SourceThrottleTimeInMillis = value }
 
         [<CustomOperation("targetThrottleTime")>]
-        member _.TargetThrottleTime(state: RecoveryIndexStatus, value: Types.Duration) =
+        member _.TargetThrottleTime(state: RecoveryIndexStatus, value: CoreTypes.Duration) =
             { state with TargetThrottleTime = Some value }
 
         [<CustomOperation("targetThrottleTimeInMillis")>]
-        member _.TargetThrottleTimeInMillis(state: RecoveryIndexStatus, value: Types.DurationValue<Types.UnitMillis>) =
+        member _.TargetThrottleTimeInMillis(state: RecoveryIndexStatus, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
             { state with TargetThrottleTimeInMillis = value }
 
         [<CustomOperation("totalTime")>]
-        member _.TotalTime(state: RecoveryIndexStatus, value: Types.Duration) =
+        member _.TotalTime(state: RecoveryIndexStatus, value: CoreTypes.Duration) =
             { state with TotalTime = Some value }
 
         [<CustomOperation("totalTimeInMillis")>]
-        member _.TotalTimeInMillis(state: RecoveryIndexStatus, value: Types.DurationValue<Types.UnitMillis>) =
+        member _.TotalTimeInMillis(state: RecoveryIndexStatus, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
             { state with TotalTimeInMillis = value }
 
     let recoveryIndexStatus = RecoveryIndexStatusBuilder()
@@ -135,23 +135,23 @@ module IndicesRecoveryBuilders =
             { state with Hostname = Some value }
 
         [<CustomOperation("host")>]
-        member _.Host(state: RecoveryOrigin, value: Types.Host) =
+        member _.Host(state: RecoveryOrigin, value: CoreTypes.Host) =
             { state with Host = Some value }
 
         [<CustomOperation("transportAddress")>]
-        member _.TransportAddress(state: RecoveryOrigin, value: Types.TransportAddress) =
+        member _.TransportAddress(state: RecoveryOrigin, value: CoreTypes.TransportAddress) =
             { state with TransportAddress = Some value }
 
         [<CustomOperation("id")>]
-        member _.Id(state: RecoveryOrigin, value: Types.Id) =
+        member _.Id(state: RecoveryOrigin, value: CoreTypes.Id) =
             { state with Id = Some value }
 
         [<CustomOperation("ip")>]
-        member _.Ip(state: RecoveryOrigin, value: Types.Ip) =
+        member _.Ip(state: RecoveryOrigin, value: CoreTypes.Ip) =
             { state with Ip = Some value }
 
         [<CustomOperation("name")>]
-        member _.Name(state: RecoveryOrigin, value: Types.Name) =
+        member _.Name(state: RecoveryOrigin, value: CoreTypes.Name) =
             { state with Name = Some value }
 
         [<CustomOperation("bootstrapNewHistoryUuid")>]
@@ -159,23 +159,23 @@ module IndicesRecoveryBuilders =
             { state with BootstrapNewHistoryUuid = Some value }
 
         [<CustomOperation("repository")>]
-        member _.Repository(state: RecoveryOrigin, value: Types.Name) =
+        member _.Repository(state: RecoveryOrigin, value: CoreTypes.Name) =
             { state with Repository = Some value }
 
         [<CustomOperation("snapshot")>]
-        member _.Snapshot(state: RecoveryOrigin, value: Types.Name) =
+        member _.Snapshot(state: RecoveryOrigin, value: CoreTypes.Name) =
             { state with Snapshot = Some value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: RecoveryOrigin, value: Types.VersionString) =
+        member _.Version(state: RecoveryOrigin, value: CoreTypes.VersionString) =
             { state with Version = Some value }
 
         [<CustomOperation("restoreUUID")>]
-        member _.RestoreUUID(state: RecoveryOrigin, value: Types.Uuid) =
+        member _.RestoreUUID(state: RecoveryOrigin, value: CoreTypes.Uuid) =
             { state with RestoreUUID = Some value }
 
         [<CustomOperation("index")>]
-        member _.Index(state: RecoveryOrigin, value: Types.IndexName) =
+        member _.Index(state: RecoveryOrigin, value: CoreTypes.IndexName) =
             { state with Index = Some value }
 
     let recoveryOrigin = RecoveryOriginBuilder()
@@ -190,19 +190,19 @@ module IndicesRecoveryBuilders =
             }
 
         [<CustomOperation("checkIndexTime")>]
-        member _.CheckIndexTime(state: RecoveryStartStatus, value: Types.Duration) =
+        member _.CheckIndexTime(state: RecoveryStartStatus, value: CoreTypes.Duration) =
             { state with CheckIndexTime = Some value }
 
         [<CustomOperation("checkIndexTimeInMillis")>]
-        member _.CheckIndexTimeInMillis(state: RecoveryStartStatus, value: Types.DurationValue<Types.UnitMillis>) =
+        member _.CheckIndexTimeInMillis(state: RecoveryStartStatus, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
             { state with CheckIndexTimeInMillis = value }
 
         [<CustomOperation("totalTime")>]
-        member _.TotalTime(state: RecoveryStartStatus, value: Types.Duration) =
+        member _.TotalTime(state: RecoveryStartStatus, value: CoreTypes.Duration) =
             { state with TotalTime = Some value }
 
         [<CustomOperation("totalTimeInMillis")>]
-        member _.TotalTimeInMillis(state: RecoveryStartStatus, value: Types.DurationValue<Types.UnitMillis>) =
+        member _.TotalTimeInMillis(state: RecoveryStartStatus, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
             { state with TotalTimeInMillis = value }
 
     let recoveryStartStatus = RecoveryStartStatusBuilder()
@@ -229,7 +229,7 @@ module IndicesRecoveryBuilders =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: ShardRecovery, value: Types.Long) =
+        member _.Id(state: ShardRecovery, value: CoreTypes.Long) =
             { state with Id = value }
 
         [<CustomOperation("index")>]
@@ -253,19 +253,19 @@ module IndicesRecoveryBuilders =
             { state with Start = Some value }
 
         [<CustomOperation("startTime")>]
-        member _.StartTime(state: ShardRecovery, value: Types.DateTime) =
+        member _.StartTime(state: ShardRecovery, value: CoreTypes.DateTime) =
             { state with StartTime = Some value }
 
         [<CustomOperation("startTimeInMillis")>]
-        member _.StartTimeInMillis(state: ShardRecovery, value: Types.EpochTime<Types.UnitMillis>) =
+        member _.StartTimeInMillis(state: ShardRecovery, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
             { state with StartTimeInMillis = value }
 
         [<CustomOperation("stopTime")>]
-        member _.StopTime(state: ShardRecovery, value: Types.DateTime) =
+        member _.StopTime(state: ShardRecovery, value: CoreTypes.DateTime) =
             { state with StopTime = Some value }
 
         [<CustomOperation("stopTimeInMillis")>]
-        member _.StopTimeInMillis(state: ShardRecovery, value: Types.EpochTime<Types.UnitMillis>) =
+        member _.StopTimeInMillis(state: ShardRecovery, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
             { state with StopTimeInMillis = Some value }
 
         [<CustomOperation("target")>]
@@ -273,11 +273,11 @@ module IndicesRecoveryBuilders =
             { state with Target = value }
 
         [<CustomOperation("totalTime")>]
-        member _.TotalTime(state: ShardRecovery, value: Types.Duration) =
+        member _.TotalTime(state: ShardRecovery, value: CoreTypes.Duration) =
             { state with TotalTime = Some value }
 
         [<CustomOperation("totalTimeInMillis")>]
-        member _.TotalTimeInMillis(state: ShardRecovery, value: Types.DurationValue<Types.UnitMillis>) =
+        member _.TotalTimeInMillis(state: ShardRecovery, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
             { state with TotalTimeInMillis = value }
 
         [<CustomOperation("translog")>]
@@ -304,19 +304,19 @@ module IndicesRecoveryBuilders =
             }
 
         [<CustomOperation("checkIndexTime")>]
-        member _.CheckIndexTime(state: VerifyIndex, value: Types.Duration) =
+        member _.CheckIndexTime(state: VerifyIndex, value: CoreTypes.Duration) =
             { state with CheckIndexTime = Some value }
 
         [<CustomOperation("checkIndexTimeInMillis")>]
-        member _.CheckIndexTimeInMillis(state: VerifyIndex, value: Types.DurationValue<Types.UnitMillis>) =
+        member _.CheckIndexTimeInMillis(state: VerifyIndex, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
             { state with CheckIndexTimeInMillis = value }
 
         [<CustomOperation("totalTime")>]
-        member _.TotalTime(state: VerifyIndex, value: Types.Duration) =
+        member _.TotalTime(state: VerifyIndex, value: CoreTypes.Duration) =
             { state with TotalTime = Some value }
 
         [<CustomOperation("totalTimeInMillis")>]
-        member _.TotalTimeInMillis(state: VerifyIndex, value: Types.DurationValue<Types.UnitMillis>) =
+        member _.TotalTimeInMillis(state: VerifyIndex, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
             { state with TotalTimeInMillis = value }
 
     let verifyIndex = VerifyIndexBuilder()

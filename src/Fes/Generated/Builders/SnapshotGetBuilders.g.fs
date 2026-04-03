@@ -18,7 +18,7 @@ module SnapshotGetBuilders =
             }
 
         [<CustomOperation("repository")>]
-        member _.Repository(state: SnapshotResponseItem, value: Types.Name) =
+        member _.Repository(state: SnapshotResponseItem, value: CoreTypes.Name) =
             { state with Repository = value }
 
         [<CustomOperation("snapshots")>]
@@ -26,7 +26,7 @@ module SnapshotGetBuilders =
             { state with Snapshots = Some value }
 
         [<CustomOperation("error")>]
-        member _.Error(state: SnapshotResponseItem, value: Types.ErrorCause) =
+        member _.Error(state: SnapshotResponseItem, value: CoreTypes.ErrorCause) =
             { state with Error = Some value }
 
     let snapshotResponseItem = SnapshotResponseItemBuilder()

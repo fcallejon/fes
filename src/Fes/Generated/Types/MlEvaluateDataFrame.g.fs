@@ -9,117 +9,117 @@ module MlEvaluateDataFrame =
 
     type ConfusionMatrixPrediction = {
         [<System.Text.Json.Serialization.JsonPropertyName("predicted_class")>]
-        PredictedClass: Types.Name
+        PredictedClass: CoreTypes.Name
         [<System.Text.Json.Serialization.JsonPropertyName("count")>]
-        Count: Types.Integer
+        Count: CoreTypes.Integer
     }
 
     type ConfusionMatrixItem = {
         [<System.Text.Json.Serialization.JsonPropertyName("actual_class")>]
-        ActualClass: Types.Name
+        ActualClass: CoreTypes.Name
         [<System.Text.Json.Serialization.JsonPropertyName("actual_class_doc_count")>]
-        ActualClassDocCount: Types.Integer
+        ActualClassDocCount: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("predicted_classes")>]
-        PredictedClasses: MlEvaluateDataFrame.ConfusionMatrixPrediction list
+        PredictedClasses: ConfusionMatrixPrediction list
         [<System.Text.Json.Serialization.JsonPropertyName("other_predicted_class_doc_count")>]
-        OtherPredictedClassDocCount: Types.Integer
+        OtherPredictedClassDocCount: CoreTypes.Integer
     }
 
     type ConfusionMatrixThreshold = {
         [<System.Text.Json.Serialization.JsonPropertyName("tp")>]
-        Tp: Types.Integer
+        Tp: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("fp")>]
-        Fp: Types.Integer
+        Fp: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("tn")>]
-        Tn: Types.Integer
+        Tn: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("fn")>]
-        Fn: Types.Integer
+        Fn: CoreTypes.Integer
     }
 
     type DataframeEvaluationSummaryAucRocCurveItem = {
         [<System.Text.Json.Serialization.JsonPropertyName("tpr")>]
-        Tpr: Types.Double
+        Tpr: CoreTypes.Double
         [<System.Text.Json.Serialization.JsonPropertyName("fpr")>]
-        Fpr: Types.Double
+        Fpr: CoreTypes.Double
         [<System.Text.Json.Serialization.JsonPropertyName("threshold")>]
-        Threshold: Types.Double
+        Threshold: CoreTypes.Double
     }
 
     type DataframeEvaluationValue = {
         [<System.Text.Json.Serialization.JsonPropertyName("value")>]
-        Value: Types.Double
+        Value: CoreTypes.Double
     }
 
     type DataframeEvaluationSummaryAucRoc = {
         [<System.Text.Json.Serialization.JsonPropertyName("curve")>]
-        Curve: MlEvaluateDataFrame.DataframeEvaluationSummaryAucRocCurveItem list option
+        Curve: DataframeEvaluationSummaryAucRocCurveItem list option
     }
 
     type DataframeEvaluationClass = {
         [<System.Text.Json.Serialization.JsonPropertyName("class_name")>]
-        ClassName: Types.Name
+        ClassName: CoreTypes.Name
     }
 
     type DataframeClassificationSummaryAccuracy = {
         [<System.Text.Json.Serialization.JsonPropertyName("classes")>]
-        Classes: MlEvaluateDataFrame.DataframeEvaluationClass list
+        Classes: DataframeEvaluationClass list
         [<System.Text.Json.Serialization.JsonPropertyName("overall_accuracy")>]
-        OverallAccuracy: Types.Double
+        OverallAccuracy: CoreTypes.Double
     }
 
     type DataframeClassificationSummaryMulticlassConfusionMatrix = {
         [<System.Text.Json.Serialization.JsonPropertyName("confusion_matrix")>]
-        ConfusionMatrix: MlEvaluateDataFrame.ConfusionMatrixItem list
+        ConfusionMatrix: ConfusionMatrixItem list
         [<System.Text.Json.Serialization.JsonPropertyName("other_actual_class_count")>]
-        OtherActualClassCount: Types.Integer
+        OtherActualClassCount: CoreTypes.Integer
     }
 
     type DataframeClassificationSummaryPrecision = {
         [<System.Text.Json.Serialization.JsonPropertyName("classes")>]
-        Classes: MlEvaluateDataFrame.DataframeEvaluationClass list
+        Classes: DataframeEvaluationClass list
         [<System.Text.Json.Serialization.JsonPropertyName("avg_precision")>]
-        AvgPrecision: Types.Double
+        AvgPrecision: CoreTypes.Double
     }
 
     type DataframeClassificationSummaryRecall = {
         [<System.Text.Json.Serialization.JsonPropertyName("classes")>]
-        Classes: MlEvaluateDataFrame.DataframeEvaluationClass list
+        Classes: DataframeEvaluationClass list
         [<System.Text.Json.Serialization.JsonPropertyName("avg_recall")>]
-        AvgRecall: Types.Double
+        AvgRecall: CoreTypes.Double
     }
 
     type DataframeClassificationSummary = {
         [<System.Text.Json.Serialization.JsonPropertyName("auc_roc")>]
-        AucRoc: MlEvaluateDataFrame.DataframeEvaluationSummaryAucRoc option
+        AucRoc: DataframeEvaluationSummaryAucRoc option
         [<System.Text.Json.Serialization.JsonPropertyName("accuracy")>]
-        Accuracy: MlEvaluateDataFrame.DataframeClassificationSummaryAccuracy option
+        Accuracy: DataframeClassificationSummaryAccuracy option
         [<System.Text.Json.Serialization.JsonPropertyName("multiclass_confusion_matrix")>]
-        MulticlassConfusionMatrix: MlEvaluateDataFrame.DataframeClassificationSummaryMulticlassConfusionMatrix option
+        MulticlassConfusionMatrix: DataframeClassificationSummaryMulticlassConfusionMatrix option
         [<System.Text.Json.Serialization.JsonPropertyName("precision")>]
-        Precision: MlEvaluateDataFrame.DataframeClassificationSummaryPrecision option
+        Precision: DataframeClassificationSummaryPrecision option
         [<System.Text.Json.Serialization.JsonPropertyName("recall")>]
-        Recall: MlEvaluateDataFrame.DataframeClassificationSummaryRecall option
+        Recall: DataframeClassificationSummaryRecall option
     }
 
     type DataframeOutlierDetectionSummary = {
         [<System.Text.Json.Serialization.JsonPropertyName("auc_roc")>]
-        AucRoc: MlEvaluateDataFrame.DataframeEvaluationSummaryAucRoc option
+        AucRoc: DataframeEvaluationSummaryAucRoc option
         [<System.Text.Json.Serialization.JsonPropertyName("precision")>]
-        Precision: Map<string, Types.Double> option
+        Precision: Map<string, CoreTypes.Double> option
         [<System.Text.Json.Serialization.JsonPropertyName("recall")>]
-        Recall: Map<string, Types.Double> option
+        Recall: Map<string, CoreTypes.Double> option
         [<System.Text.Json.Serialization.JsonPropertyName("confusion_matrix")>]
-        ConfusionMatrix: Map<string, MlEvaluateDataFrame.ConfusionMatrixThreshold> option
+        ConfusionMatrix: Map<string, ConfusionMatrixThreshold> option
     }
 
     type DataframeRegressionSummary = {
         [<System.Text.Json.Serialization.JsonPropertyName("huber")>]
-        Huber: MlEvaluateDataFrame.DataframeEvaluationValue option
+        Huber: DataframeEvaluationValue option
         [<System.Text.Json.Serialization.JsonPropertyName("mse")>]
-        Mse: MlEvaluateDataFrame.DataframeEvaluationValue option
+        Mse: DataframeEvaluationValue option
         [<System.Text.Json.Serialization.JsonPropertyName("msle")>]
-        Msle: MlEvaluateDataFrame.DataframeEvaluationValue option
+        Msle: DataframeEvaluationValue option
         [<System.Text.Json.Serialization.JsonPropertyName("r_squared")>]
-        RSquared: MlEvaluateDataFrame.DataframeEvaluationValue option
+        RSquared: DataframeEvaluationValue option
     }
 
