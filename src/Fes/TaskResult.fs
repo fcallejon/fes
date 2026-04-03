@@ -32,17 +32,17 @@ module TaskResult =
             | e -> return Error e
         }
 
-    let mapIn (f: 'a2 -> 'a) (a: 'a -> TaskResult<'b, exn>) : 'a2 -> TaskResult<'b, exn> =
+    let mapIn (f: 'a2 -> 'a) (a: 'a -> TaskResult<'b, 'e>) : 'a2 -> TaskResult<'b, 'e> =
         f >> a
 
-    let mapOut (f: 'b -> 'c) (a: 'a -> TaskResult<'b, exn>) : 'a -> TaskResult<'c, exn> =
+    let mapOut (f: 'b -> 'c) (a: 'a -> TaskResult<'b, 'e>) : 'a -> TaskResult<'c, 'e> =
         a >> map f
 
-    let bindIn (f: 'a2 -> TaskResult<'a, exn>) (a: 'a -> TaskResult<'b, exn>) : 'a2 -> TaskResult<'b, exn> =
+    let bindIn (f: 'a2 -> TaskResult<'a, 'e>) (a: 'a -> TaskResult<'b, 'e>) : 'a2 -> TaskResult<'b, 'e> =
         f >> bind a
 
-    let bindOut (f: 'b -> TaskResult<'c, exn>) (a: 'a -> TaskResult<'b, exn>) : 'a -> TaskResult<'c, exn> =
+    let bindOut (f: 'b -> TaskResult<'c, 'e>) (a: 'a -> TaskResult<'b, 'e>) : 'a -> TaskResult<'c, 'e> =
         a >> bind f
 
-    let after (f: 'a * 'b -> _) (g: 'a -> TaskResult<'b, exn>) : 'a -> TaskResult<'b, exn> =
+    let after (f: 'a * 'b -> _) (g: 'a -> TaskResult<'b, 'e>) : 'a -> TaskResult<'b, 'e> =
         fun a -> g a |> map (fun b -> let _ = f (a, b) in b)
