@@ -76,27 +76,27 @@ module SecurityQueryApiKeysBuilders =
         let ids (value: Types.IdsQuery) =
             Types.ApiKeyQueryContainer.Ids value
 
-        let match' (field: string) (value: Types.MatchQuery) =
+        let match' (field: Types.Field) (value: Types.MatchQuery) =
             Types.ApiKeyQueryContainer.Match (field, value)
 
         let matchAll (value: Types.MatchAllQuery) =
             Types.ApiKeyQueryContainer.MatchAll value
 
-        let prefix (field: string) (value: Types.PrefixQuery) =
+        let prefix (field: Types.Field) (value: Types.PrefixQuery) =
             Types.ApiKeyQueryContainer.Prefix (field, value)
 
-        let range (field: string) (value: Types.RangeQuery) =
+        let range (field: Types.Field) (value: Types.RangeQuery) =
             Types.ApiKeyQueryContainer.Range (field, value)
 
         let simpleQueryString (value: Types.SimpleQueryStringQuery) =
             Types.ApiKeyQueryContainer.SimpleQueryString value
 
-        let term (field: string) (value: Types.TermQuery) =
+        let term (field: Types.Field) (value: Types.TermQuery) =
             Types.ApiKeyQueryContainer.Term (field, value)
 
         let terms (value: Types.TermsQuery) =
             Types.ApiKeyQueryContainer.Terms value
 
-        let wildcard (field: string) (value: Types.WildcardQuery) =
+        let wildcard (field: Types.Field) (value: Types.WildcardQuery) =
             Types.ApiKeyQueryContainer.Wildcard (field, value)
 

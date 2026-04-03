@@ -62,8 +62,7 @@ module Endpoints =
 
     /// Checks if the specified combination of method, API, parameters, and arbitrary capabilities are supported.
     let capabilities () =
-        let mutable req = Unchecked.defaultof<CapabilitiesRequest>
-        req
+        Unchecked.defaultof<CapabilitiesRequest>
 
     /// Clear a scrolling search.
     let clearScroll (scrollId: Types.ScrollIds) =
@@ -73,8 +72,7 @@ module Endpoints =
 
     /// Close a point in time.
     let closePointInTime () =
-        let mutable req = Unchecked.defaultof<ClosePointInTimeRequest>
-        req
+        Unchecked.defaultof<ClosePointInTimeRequest>
 
     /// Count search results.
     let count (index: Types.Indices) =
@@ -148,11 +146,11 @@ module Endpoints =
         req
 
     /// Get script contexts.
-    let getScriptContext  : GetScriptContextRequest =
+    let getScriptContext () : GetScriptContextRequest =
         Unchecked.defaultof<GetScriptContextRequest>
 
     /// Get script languages.
-    let getScriptLanguages  : GetScriptLanguagesRequest =
+    let getScriptLanguages () : GetScriptLanguagesRequest =
         Unchecked.defaultof<GetScriptLanguagesRequest>
 
     /// Get a document's source.
@@ -169,7 +167,7 @@ module Endpoints =
         req
 
     /// Get cluster info.
-    let info  : InfoRequest =
+    let info () : InfoRequest =
         Unchecked.defaultof<InfoRequest>
 
     /// Run a knn search.
@@ -209,7 +207,7 @@ module Endpoints =
         req
 
     /// Ping the cluster.
-    let ping  : PingRequest =
+    let ping () : PingRequest =
         Unchecked.defaultof<PingRequest>
 
     /// Create or update a script or search template.
@@ -227,8 +225,7 @@ module Endpoints =
 
     /// Reindex documents.
     let reindex () =
-        let mutable req = Unchecked.defaultof<ReindexRequest>
-        req
+        Unchecked.defaultof<ReindexRequest>
 
     /// Throttle a reindex operation.
     let reindexRethrottle (taskId: Types.Id) =
@@ -244,8 +241,7 @@ module Endpoints =
 
     /// Run a script.
     let scriptsPainlessExecute () =
-        let mutable req = Unchecked.defaultof<ScriptsPainlessExecuteRequest>
-        req
+        Unchecked.defaultof<ScriptsPainlessExecuteRequest>
 
     /// Run a scrolling search.
     let scroll (scrollId: Types.ScrollId) =

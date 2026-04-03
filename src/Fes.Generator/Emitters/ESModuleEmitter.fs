@@ -68,22 +68,27 @@ let emitESModule (index: TypeIndex.TypeIndex) : string * string =
 
                     w.DocComment ep.Description
                     if hasBody || hasQueryParams then
-                        // Returns a default request that can be used with the CE builder
+                        // Returns a default request — intended for use with the CE builder
+                        // Note: Unchecked.defaultof gives null for records; callers should use
+                        // the CE builder (e.g. searchRequest { ... }) rather than this directly
                         if pathParams.IsEmpty then
                             w.Line $"let {funcName} () ="
                         else
                             w.Line $"let {funcName} {paramList} ="
                         w.Indent()
-                        w.Line $"let mutable req = Unchecked.defaultof<{reqTypeName}>"
-                        for p in pathParams do
-                            let fieldName = Namespacing.toFieldName p.Name
-                            let argName = Namespacing.toFunctionName p.Name
-                            w.Line $"req <- {{ req with {fieldName} = {argName} }}"
-                        w.Line "req"
+                        if pathParams.IsEmpty then
+                            w.Line $"Unchecked.defaultof<{reqTypeName}>"
+                        else
+                            w.Line $"let mutable req = Unchecked.defaultof<{reqTypeName}>"
+                            for p in pathParams do
+                                let fieldName = Namespacing.toFieldName p.Name
+                                let argName = Namespacing.toFunctionName p.Name
+                                w.Line $"req <- {{ req with {fieldName} = {argName} }}"
+                            w.Line "req"
                         w.Dedent()
                     else
                         if pathParams.IsEmpty then
-                            w.Line $"let {funcName} {paramList} : {reqTypeName} ="
+                            w.Line $"let {funcName} () : {reqTypeName} ="
                             w.Indent()
                             w.Line $"Unchecked.defaultof<{reqTypeName}>"
                             w.Dedent()

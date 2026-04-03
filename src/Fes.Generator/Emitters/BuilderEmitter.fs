@@ -33,10 +33,11 @@ let emitContainerBuilders (w: Writer) (ctx: TypeResolver.ResolveContext) (def: I
         let funcName = Namespacing.toFunctionName p.Name |> Namespacing.escapeKeyword
 
         match p.Type with
-        | ValueOf.DictionaryOf (_, value, true) ->
-            // SingleKeyDictionary: function takes field + value
+        | ValueOf.DictionaryOf (key, value, true) ->
+            // SingleKeyDictionary: function takes field (key type) + value
+            let keyType = TypeResolver.resolveValueOf ctx key
             let valueType = TypeResolver.resolveValueOf ctx value
-            w.Line $"let {funcName} (field: string) (value: {valueType}) ="
+            w.Line $"let {funcName} (field: {keyType}) (value: {valueType}) ="
             w.Line $"    {duName}.{caseName} (field, value)"
         | ValueOf.InstanceOf (tn, _) ->
             let caseType = TypeResolver.resolveValueOf ctx p.Type
