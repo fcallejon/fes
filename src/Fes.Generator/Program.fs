@@ -19,6 +19,12 @@ let main args =
             if i + 1 < args.Length then Some args[i + 1] else None)
         |> Option.defaultValue "src/Fes/Generated"
 
+    let testOutputDir =
+        args
+        |> Array.tryFindIndex (fun a -> a = "--test-output")
+        |> Option.bind (fun i ->
+            if i + 1 < args.Length then Some args[i + 1] else None)
+
     let clean = args |> Array.contains "--clean"
 
     printfn $"Reading schema from: {schemaPath}"
@@ -121,5 +127,28 @@ let main args =
         FsprojUpdater.updateFsproj fsprojPath outputDir
     else
         printfn $"Skipping fsproj update (not found: {fsprojPath})"
+
+    // Generate test files if --test-output specified
+    match testOutputDir with
+    | Some testDir ->
+        printfn ""
+        printfn $"Generating test files to: {testDir}"
+
+        let genDir = System.IO.Path.Combine(testDir, "Generated")
+        if not (System.IO.Directory.Exists genDir) then
+            System.IO.Directory.CreateDirectory(genDir) |> ignore
+
+        let endpointTests = TestEmitter.emitEndpointTests index
+        System.IO.File.WriteAllText(System.IO.Path.Combine(genDir, "EndpointTests.g.fs"), endpointTests)
+        printfn "  Wrote EndpointTests.g.fs"
+
+        let enumTests = TestEmitter.emitEnumTests index model.Types
+        System.IO.File.WriteAllText(System.IO.Path.Combine(genDir, "EnumRoundTripTests.g.fs"), enumTests)
+        printfn "  Wrote EnumRoundTripTests.g.fs"
+
+        let variantTests = TestEmitter.emitVariantTests index model.Types
+        System.IO.File.WriteAllText(System.IO.Path.Combine(genDir, "VariantTests.g.fs"), variantTests)
+        printfn "  Wrote VariantTests.g.fs"
+    | None -> ()
 
     0
