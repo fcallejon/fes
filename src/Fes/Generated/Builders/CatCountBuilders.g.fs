@@ -18,11 +18,11 @@ module CatCountBuilders =
             }
 
         [<CustomOperation("epoch")>]
-        member _.Epoch(state: CountRecord, value: SpecUtils.Stringified<Types.EpochTime<Types.UnitSeconds>>) =
+        member _.Epoch(state: CountRecord, value: CoreTypes.Stringified<CoreTypes.EpochTime<CoreTypes.UnitSeconds>>) =
             { state with Epoch = Some value }
 
         [<CustomOperation("timestamp")>]
-        member _.Timestamp(state: CountRecord, value: Types.TimeOfDay) =
+        member _.Timestamp(state: CountRecord, value: CoreTypes.TimeOfDay) =
             { state with Timestamp = Some value }
 
         [<CustomOperation("count")>]

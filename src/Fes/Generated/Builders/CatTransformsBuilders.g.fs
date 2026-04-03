@@ -48,7 +48,7 @@ module CatTransformsBuilders =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: TransformsRecord, value: Types.Id) =
+        member _.Id(state: TransformsRecord, value: CoreTypes.Id) =
             { state with Id = Some value }
 
         [<CustomOperation("state")>]
@@ -80,7 +80,7 @@ module CatTransformsBuilders =
             { state with CreateTime = Some value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: TransformsRecord, value: Types.VersionString) =
+        member _.Version(state: TransformsRecord, value: CoreTypes.VersionString) =
             { state with Version = Some value }
 
         [<CustomOperation("sourceIndex")>]

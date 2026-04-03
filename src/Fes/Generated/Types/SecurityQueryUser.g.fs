@@ -9,21 +9,21 @@ module SecurityQueryUser =
 
     type QueryUser = {
         [<System.Text.Json.Serialization.JsonPropertyName("_sort")>]
-        Sort: Types.SortResults option
+        Sort: CoreTypes.SortResults option
     }
 
     [<RequireQualifiedAccess>]
     type UserQueryContainer =
-        | Ids of TypesQueryDsl.IdsQuery
-        | Bool of TypesQueryDsl.BoolQuery
-        | Exists of TypesQueryDsl.ExistsQuery
-        | Match of field: string * TypesQueryDsl.MatchQuery
-        | MatchAll of TypesQueryDsl.MatchAllQuery
-        | Prefix of field: string * TypesQueryDsl.PrefixQuery
-        | Range of field: string * TypesQueryDsl.RangeQuery
-        | SimpleQueryString of TypesQueryDsl.SimpleQueryStringQuery
-        | Term of field: string * TypesQueryDsl.TermQuery
-        | Terms of TypesQueryDsl.TermsQuery
-        | Wildcard of field: string * TypesQueryDsl.WildcardQuery
+        | Ids of CoreTypes.IdsQuery
+        | Bool of CoreTypes.BoolQuery
+        | Exists of CoreTypes.ExistsQuery
+        | Match of field: string * CoreTypes.MatchQuery
+        | MatchAll of CoreTypes.MatchAllQuery
+        | Prefix of field: string * CoreTypes.PrefixQuery
+        | Range of field: string * CoreTypes.RangeQuery
+        | SimpleQueryString of CoreTypes.SimpleQueryStringQuery
+        | Term of field: string * CoreTypes.TermQuery
+        | Terms of CoreTypes.TermsQuery
+        | Wildcard of field: string * CoreTypes.WildcardQuery
         | Unknown of name: string * System.Text.Json.JsonElement
 

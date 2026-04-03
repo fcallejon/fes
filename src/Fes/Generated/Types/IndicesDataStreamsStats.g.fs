@@ -9,14 +9,14 @@ module IndicesDataStreamsStats =
 
     type DataStreamsStatsItem = {
         [<System.Text.Json.Serialization.JsonPropertyName("backing_indices")>]
-        BackingIndices: Types.Integer
+        BackingIndices: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("data_stream")>]
-        DataStream: Types.Name
+        DataStream: CoreTypes.Name
         [<System.Text.Json.Serialization.JsonPropertyName("maximum_timestamp")>]
-        MaximumTimestamp: Types.EpochTime<Types.UnitMillis>
+        MaximumTimestamp: CoreTypes.EpochTime<CoreTypes.UnitMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("store_size")>]
-        StoreSize: Types.ByteSize option
+        StoreSize: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("store_size_bytes")>]
-        StoreSizeBytes: Types.Long
+        StoreSizeBytes: CoreTypes.Long
     }
 

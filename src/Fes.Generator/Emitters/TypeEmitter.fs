@@ -213,7 +213,8 @@ let emitTypeAlias (w: Writer) (isFirst: bool) (ctx: TypeResolver.ResolveContext)
 // Emit a single TypeDefinition
 // ============================================================================
 
-let emitTypeDefinition (w: Writer) (index: TypeIndex.TypeIndex) (isFirst: bool) (td: TypeDefinition) =
+let emitTypeDefinition (w: Writer) (index: TypeIndex.TypeIndex) (isFirst: bool) (currentNamespace: string) (td: TypeDefinition) =
+    let mkCtx generics = TypeResolver.makeContextInNamespace index generics currentNamespace
     match td with
     | TypeDefinition.Enum def ->
         emitEnum w isFirst def
@@ -221,33 +222,27 @@ let emitTypeDefinition (w: Writer) (index: TypeIndex.TypeIndex) (isFirst: bool) 
     | TypeDefinition.Interface def ->
         match def.Variants with
         | Some (VariantKind.Container nonExhaustive) ->
-            let ctx = TypeResolver.makeContext index def.Generics
-            emitContainerVariant w isFirst ctx def nonExhaustive
-        | Some (VariantKind.InternalTag (tag, defaultTag, nonExhaustive)) ->
-            // Unusual: interface with internal tag. Emit as record for now.
-            let ctx = TypeResolver.makeContext index def.Generics
-            emitRecord w isFirst ctx def.Name.Name def.Properties def.Generics def.Description
+            emitContainerVariant w isFirst (mkCtx def.Generics) def nonExhaustive
+        | Some (VariantKind.InternalTag _) ->
+            emitRecord w isFirst (mkCtx def.Generics) def.Name.Name def.Properties def.Generics def.Description
         | _ ->
-            let ctx = TypeResolver.makeContext index def.Generics
-            emitRecord w isFirst ctx def.Name.Name def.Properties def.Generics def.Description
+            emitRecord w isFirst (mkCtx def.Generics) def.Name.Name def.Properties def.Generics def.Description
 
     | TypeDefinition.TypeAlias def ->
         match def.Variants with
         | Some (VariantKind.InternalTag (tag, defaultTag, nonExhaustive)) ->
-            let ctx = TypeResolver.makeContext index def.Generics
-            emitInternalTagVariant w isFirst ctx def tag defaultTag nonExhaustive
+            emitInternalTagVariant w isFirst (mkCtx def.Generics) def tag defaultTag nonExhaustive
         | _ ->
-            let ctx = TypeResolver.makeContext index def.Generics
-            emitTypeAlias w isFirst ctx def
+            emitTypeAlias w isFirst (mkCtx def.Generics) def
 
-    | TypeDefinition.Request _ -> ()  // Handled by OperationEmitter
-    | TypeDefinition.Response _ -> () // Handled by OperationEmitter
+    | TypeDefinition.Request _ -> ()
+    | TypeDefinition.Response _ -> ()
 
 // ============================================================================
 // Emit a TypeGroup (potentially mutually recursive)
 // ============================================================================
 
-let emitTypeGroup (w: Writer) (index: TypeIndex.TypeIndex) (group: DependencyGraph.TypeGroup) =
+let emitTypeGroup (w: Writer) (index: TypeIndex.TypeIndex) (currentNamespace: string) (group: DependencyGraph.TypeGroup) =
     let emittable =
         group.Types
         |> List.filter (fun td ->
@@ -259,4 +254,4 @@ let emitTypeGroup (w: Writer) (index: TypeIndex.TypeIndex) (group: DependencyGra
     | [] -> ()
     | _ ->
         for i, td in emittable |> List.indexed do
-            emitTypeDefinition w index (i = 0) td
+            emitTypeDefinition w index (i = 0) currentNamespace td

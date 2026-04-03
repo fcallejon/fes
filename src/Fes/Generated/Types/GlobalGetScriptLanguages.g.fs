@@ -11,6 +11,6 @@ module GlobalGetScriptLanguages =
         [<System.Text.Json.Serialization.JsonPropertyName("contexts")>]
         Contexts: string list
         [<System.Text.Json.Serialization.JsonPropertyName("language")>]
-        Language: Types.ScriptLanguage
+        Language: CoreTypes.ScriptLanguage
     }
 

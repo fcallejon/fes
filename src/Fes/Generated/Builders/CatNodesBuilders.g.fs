@@ -112,7 +112,7 @@ module CatNodesBuilders =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: NodesRecord, value: Types.Id) =
+        member _.Id(state: NodesRecord, value: CoreTypes.Id) =
             { state with Id = Some value }
 
         [<CustomOperation("pid")>]
@@ -132,7 +132,7 @@ module CatNodesBuilders =
             { state with HttpAddress = Some value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: NodesRecord, value: Types.VersionString) =
+        member _.Version(state: NodesRecord, value: CoreTypes.VersionString) =
             { state with Version = Some value }
 
         [<CustomOperation("flavor")>]
@@ -152,19 +152,19 @@ module CatNodesBuilders =
             { state with Jdk = Some value }
 
         [<CustomOperation("diskTotal")>]
-        member _.DiskTotal(state: NodesRecord, value: Types.ByteSize) =
+        member _.DiskTotal(state: NodesRecord, value: CoreTypes.ByteSize) =
             { state with DiskTotal = Some value }
 
         [<CustomOperation("diskUsed")>]
-        member _.DiskUsed(state: NodesRecord, value: Types.ByteSize) =
+        member _.DiskUsed(state: NodesRecord, value: CoreTypes.ByteSize) =
             { state with DiskUsed = Some value }
 
         [<CustomOperation("diskAvail")>]
-        member _.DiskAvail(state: NodesRecord, value: Types.ByteSize) =
+        member _.DiskAvail(state: NodesRecord, value: CoreTypes.ByteSize) =
             { state with DiskAvail = Some value }
 
         [<CustomOperation("diskUsedPercent")>]
-        member _.DiskUsedPercent(state: NodesRecord, value: Types.Percentage) =
+        member _.DiskUsedPercent(state: NodesRecord, value: CoreTypes.Percentage) =
             { state with DiskUsedPercent = Some value }
 
         [<CustomOperation("heapCurrent")>]
@@ -172,7 +172,7 @@ module CatNodesBuilders =
             { state with HeapCurrent = Some value }
 
         [<CustomOperation("heapPercent")>]
-        member _.HeapPercent(state: NodesRecord, value: Types.Percentage) =
+        member _.HeapPercent(state: NodesRecord, value: CoreTypes.Percentage) =
             { state with HeapPercent = Some value }
 
         [<CustomOperation("heapMax")>]
@@ -184,7 +184,7 @@ module CatNodesBuilders =
             { state with RamCurrent = Some value }
 
         [<CustomOperation("ramPercent")>]
-        member _.RamPercent(state: NodesRecord, value: Types.Percentage) =
+        member _.RamPercent(state: NodesRecord, value: CoreTypes.Percentage) =
             { state with RamPercent = Some value }
 
         [<CustomOperation("ramMax")>]
@@ -196,7 +196,7 @@ module CatNodesBuilders =
             { state with FileDescCurrent = Some value }
 
         [<CustomOperation("fileDescPercent")>]
-        member _.FileDescPercent(state: NodesRecord, value: Types.Percentage) =
+        member _.FileDescPercent(state: NodesRecord, value: CoreTypes.Percentage) =
             { state with FileDescPercent = Some value }
 
         [<CustomOperation("fileDescMax")>]
@@ -236,7 +236,7 @@ module CatNodesBuilders =
             { state with Master = Some value }
 
         [<CustomOperation("name")>]
-        member _.Name(state: NodesRecord, value: Types.Name) =
+        member _.Name(state: NodesRecord, value: CoreTypes.Name) =
             { state with Name = Some value }
 
         [<CustomOperation("completionSize")>]

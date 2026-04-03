@@ -9,17 +9,17 @@ module CatMlDataFrameAnalytics =
 
     type DataFrameAnalyticsRecord = {
         [<System.Text.Json.Serialization.JsonPropertyName("id")>]
-        Id: Types.Id option
+        Id: CoreTypes.Id option
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string option
         [<System.Text.Json.Serialization.JsonPropertyName("create_time")>]
         CreateTime: string option
         [<System.Text.Json.Serialization.JsonPropertyName("version")>]
-        Version: Types.VersionString option
+        Version: CoreTypes.VersionString option
         [<System.Text.Json.Serialization.JsonPropertyName("source_index")>]
-        SourceIndex: Types.IndexName option
+        SourceIndex: CoreTypes.IndexName option
         [<System.Text.Json.Serialization.JsonPropertyName("dest_index")>]
-        DestIndex: Types.IndexName option
+        DestIndex: CoreTypes.IndexName option
         [<System.Text.Json.Serialization.JsonPropertyName("description")>]
         Description: string option
         [<System.Text.Json.Serialization.JsonPropertyName("model_memory_limit")>]
@@ -33,11 +33,11 @@ module CatMlDataFrameAnalytics =
         [<System.Text.Json.Serialization.JsonPropertyName("assignment_explanation")>]
         AssignmentExplanation: string option
         [<System.Text.Json.Serialization.JsonPropertyName("node.id")>]
-        NodeId: Types.Id option
+        NodeId: CoreTypes.Id option
         [<System.Text.Json.Serialization.JsonPropertyName("node.name")>]
-        NodeName: Types.Name option
+        NodeName: CoreTypes.Name option
         [<System.Text.Json.Serialization.JsonPropertyName("node.ephemeral_id")>]
-        NodeEphemeralId: Types.Id option
+        NodeEphemeralId: CoreTypes.Id option
         [<System.Text.Json.Serialization.JsonPropertyName("node.address")>]
         NodeAddress: string option
     }

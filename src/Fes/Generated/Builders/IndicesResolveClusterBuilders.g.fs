@@ -36,7 +36,7 @@ module IndicesResolveClusterBuilders =
             { state with Error = Some value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: ResolveClusterInfo, value: Types.ElasticsearchVersionMinInfo) =
+        member _.Version(state: ResolveClusterInfo, value: CoreTypes.ElasticsearchVersionMinInfo) =
             { state with Version = Some value }
 
     let resolveClusterInfo = ResolveClusterInfoBuilder()

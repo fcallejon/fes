@@ -9,8 +9,8 @@ module SecurityGetUserProfile =
 
     type GetUserProfileErrors = {
         [<System.Text.Json.Serialization.JsonPropertyName("count")>]
-        Count: Types.Long
+        Count: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("details")>]
-        Details: Map<SecurityTypes.UserProfileId, Types.ErrorCause>
+        Details: Map<SecurityTypes.UserProfileId, CoreTypes.ErrorCause>
     }
 

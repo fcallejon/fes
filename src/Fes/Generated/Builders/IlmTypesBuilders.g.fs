@@ -40,7 +40,7 @@ module IlmTypesBuilders =
             { state with Downsample = Some value }
 
         [<CustomOperation("freeze")>]
-        member _.Freeze(state: Actions, value: Types.EmptyObject) =
+        member _.Freeze(state: Actions, value: CoreTypes.EmptyObject) =
             { state with Freeze = Some value }
 
         [<CustomOperation("forcemerge")>]
@@ -52,7 +52,7 @@ module IlmTypesBuilders =
             { state with Migrate = Some value }
 
         [<CustomOperation("readonly")>]
-        member _.Readonly(state: Actions, value: Types.EmptyObject) =
+        member _.Readonly(state: Actions, value: CoreTypes.EmptyObject) =
             { state with Readonly = Some value }
 
         [<CustomOperation("rollover")>]
@@ -72,7 +72,7 @@ module IlmTypesBuilders =
             { state with Shrink = Some value }
 
         [<CustomOperation("unfollow")>]
-        member _.Unfollow(state: Actions, value: Types.EmptyObject) =
+        member _.Unfollow(state: Actions, value: CoreTypes.EmptyObject) =
             { state with Unfollow = Some value }
 
         [<CustomOperation("waitForSnapshot")>]
@@ -92,11 +92,11 @@ module IlmTypesBuilders =
             }
 
         [<CustomOperation("numberOfReplicas")>]
-        member _.NumberOfReplicas(state: AllocateAction, value: Types.Integer) =
+        member _.NumberOfReplicas(state: AllocateAction, value: CoreTypes.Integer) =
             { state with NumberOfReplicas = Some value }
 
         [<CustomOperation("totalShardsPerNode")>]
-        member _.TotalShardsPerNode(state: AllocateAction, value: Types.Integer) =
+        member _.TotalShardsPerNode(state: AllocateAction, value: CoreTypes.Integer) =
             { state with TotalShardsPerNode = Some value }
 
         [<CustomOperation("include")>]
@@ -125,7 +125,7 @@ module IlmTypesBuilders =
             { state with Actions = Some value }
 
         [<CustomOperation("minAge")>]
-        member _.MinAge(state: Phase, value: Types.Duration) =
+        member _.MinAge(state: Phase, value: CoreTypes.Duration) =
             { state with MinAge = Some value }
 
     let phase = PhaseBuilder()
@@ -178,43 +178,43 @@ module IlmTypesBuilders =
             }
 
         [<CustomOperation("maxSize")>]
-        member _.MaxSize(state: RolloverAction, value: Types.ByteSize) =
+        member _.MaxSize(state: RolloverAction, value: CoreTypes.ByteSize) =
             { state with MaxSize = Some value }
 
         [<CustomOperation("maxPrimaryShardSize")>]
-        member _.MaxPrimaryShardSize(state: RolloverAction, value: Types.ByteSize) =
+        member _.MaxPrimaryShardSize(state: RolloverAction, value: CoreTypes.ByteSize) =
             { state with MaxPrimaryShardSize = Some value }
 
         [<CustomOperation("maxAge")>]
-        member _.MaxAge(state: RolloverAction, value: Types.Duration) =
+        member _.MaxAge(state: RolloverAction, value: CoreTypes.Duration) =
             { state with MaxAge = Some value }
 
         [<CustomOperation("maxDocs")>]
-        member _.MaxDocs(state: RolloverAction, value: Types.Long) =
+        member _.MaxDocs(state: RolloverAction, value: CoreTypes.Long) =
             { state with MaxDocs = Some value }
 
         [<CustomOperation("maxPrimaryShardDocs")>]
-        member _.MaxPrimaryShardDocs(state: RolloverAction, value: Types.Long) =
+        member _.MaxPrimaryShardDocs(state: RolloverAction, value: CoreTypes.Long) =
             { state with MaxPrimaryShardDocs = Some value }
 
         [<CustomOperation("minSize")>]
-        member _.MinSize(state: RolloverAction, value: Types.ByteSize) =
+        member _.MinSize(state: RolloverAction, value: CoreTypes.ByteSize) =
             { state with MinSize = Some value }
 
         [<CustomOperation("minPrimaryShardSize")>]
-        member _.MinPrimaryShardSize(state: RolloverAction, value: Types.ByteSize) =
+        member _.MinPrimaryShardSize(state: RolloverAction, value: CoreTypes.ByteSize) =
             { state with MinPrimaryShardSize = Some value }
 
         [<CustomOperation("minAge")>]
-        member _.MinAge(state: RolloverAction, value: Types.Duration) =
+        member _.MinAge(state: RolloverAction, value: CoreTypes.Duration) =
             { state with MinAge = Some value }
 
         [<CustomOperation("minDocs")>]
-        member _.MinDocs(state: RolloverAction, value: Types.Long) =
+        member _.MinDocs(state: RolloverAction, value: CoreTypes.Long) =
             { state with MinDocs = Some value }
 
         [<CustomOperation("minPrimaryShardDocs")>]
-        member _.MinPrimaryShardDocs(state: RolloverAction, value: Types.Long) =
+        member _.MinPrimaryShardDocs(state: RolloverAction, value: CoreTypes.Long) =
             { state with MinPrimaryShardDocs = Some value }
 
     let rolloverAction = RolloverActionBuilder()
@@ -228,11 +228,11 @@ module IlmTypesBuilders =
             }
 
         [<CustomOperation("numberOfShards")>]
-        member _.NumberOfShards(state: ShrinkAction, value: Types.Integer) =
+        member _.NumberOfShards(state: ShrinkAction, value: CoreTypes.Integer) =
             { state with NumberOfShards = Some value }
 
         [<CustomOperation("maxPrimaryShardSize")>]
-        member _.MaxPrimaryShardSize(state: ShrinkAction, value: Types.ByteSize) =
+        member _.MaxPrimaryShardSize(state: ShrinkAction, value: CoreTypes.ByteSize) =
             { state with MaxPrimaryShardSize = Some value }
 
         [<CustomOperation("allowWriteAfterShrink")>]

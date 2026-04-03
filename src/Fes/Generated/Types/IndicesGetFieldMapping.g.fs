@@ -9,6 +9,6 @@ module IndicesGetFieldMapping =
 
     type TypeFieldMappings = {
         [<System.Text.Json.Serialization.JsonPropertyName("mappings")>]
-        Mappings: Map<Types.Field, TypesMapping.FieldMapping>
+        Mappings: Map<CoreTypes.Field, CoreTypes.FieldMapping>
     }
 

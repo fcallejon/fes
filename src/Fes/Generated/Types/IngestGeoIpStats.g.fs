@@ -9,28 +9,28 @@ module IngestGeoIpStats =
 
     type GeoIpDownloadStatistics = {
         [<System.Text.Json.Serialization.JsonPropertyName("successful_downloads")>]
-        SuccessfulDownloads: Types.Integer
+        SuccessfulDownloads: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("failed_downloads")>]
-        FailedDownloads: Types.Integer
+        FailedDownloads: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("total_download_time")>]
-        TotalDownloadTime: Types.DurationValue<Types.UnitMillis>
+        TotalDownloadTime: CoreTypes.DurationValue<CoreTypes.UnitMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("databases_count")>]
-        DatabasesCount: Types.Integer
+        DatabasesCount: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("skipped_updates")>]
-        SkippedUpdates: Types.Integer
+        SkippedUpdates: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("expired_databases")>]
-        ExpiredDatabases: Types.Integer
+        ExpiredDatabases: CoreTypes.Integer
     }
 
     type GeoIpNodeDatabaseName = {
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.Name
+        Name: CoreTypes.Name
     }
 
     /// Downloaded databases for the node. The field key is the node ID.
     type GeoIpNodeDatabases = {
         [<System.Text.Json.Serialization.JsonPropertyName("databases")>]
-        Databases: IngestGeoIpStats.GeoIpNodeDatabaseName list
+        Databases: GeoIpNodeDatabaseName list
         [<System.Text.Json.Serialization.JsonPropertyName("files_in_temp")>]
         FilesInTemp: string list
     }

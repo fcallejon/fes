@@ -22,21 +22,21 @@ module IndicesShardStores =
 
     type ShardStore = {
         [<System.Text.Json.Serialization.JsonPropertyName("allocation")>]
-        Allocation: IndicesShardStores.ShardStoreAllocation
+        Allocation: ShardStoreAllocation
         [<System.Text.Json.Serialization.JsonPropertyName("allocation_id")>]
-        AllocationId: Types.Id option
+        AllocationId: CoreTypes.Id option
         [<System.Text.Json.Serialization.JsonPropertyName("store_exception")>]
-        StoreException: IndicesShardStores.ShardStoreException option
+        StoreException: ShardStoreException option
     }
 
     type ShardStoreWrapper = {
         [<System.Text.Json.Serialization.JsonPropertyName("stores")>]
-        Stores: IndicesShardStores.ShardStore list
+        Stores: ShardStore list
     }
 
     type IndicesShardStores = {
         [<System.Text.Json.Serialization.JsonPropertyName("shards")>]
-        Shards: Map<string, IndicesShardStores.ShardStoreWrapper>
+        Shards: Map<string, ShardStoreWrapper>
     }
 
     type ShardStoreNode = {
@@ -47,11 +47,11 @@ module IndicesShardStores =
         [<System.Text.Json.Serialization.JsonPropertyName("external_id")>]
         ExternalId: string option
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.Name
+        Name: CoreTypes.Name
         [<System.Text.Json.Serialization.JsonPropertyName("roles")>]
         Roles: string list
         [<System.Text.Json.Serialization.JsonPropertyName("transport_address")>]
-        TransportAddress: Types.TransportAddress
+        TransportAddress: CoreTypes.TransportAddress
     }
 
     [<RequireQualifiedAccess>]

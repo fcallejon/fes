@@ -9,19 +9,19 @@ module GlobalBulk =
 
     type OperationBase = {
         [<System.Text.Json.Serialization.JsonPropertyName("_id")>]
-        Id: Types.Id option
+        Id: CoreTypes.Id option
         [<System.Text.Json.Serialization.JsonPropertyName("_index")>]
-        Index: Types.IndexName option
+        Index: CoreTypes.IndexName option
         [<System.Text.Json.Serialization.JsonPropertyName("routing")>]
         Routing: string option
         [<System.Text.Json.Serialization.JsonPropertyName("if_primary_term")>]
-        IfPrimaryTerm: Types.Long option
+        IfPrimaryTerm: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("if_seq_no")>]
-        IfSeqNo: Types.SequenceNumber option
+        IfSeqNo: CoreTypes.SequenceNumber option
         [<System.Text.Json.Serialization.JsonPropertyName("version")>]
-        Version: Types.VersionNumber option
+        Version: CoreTypes.VersionNumber option
         [<System.Text.Json.Serialization.JsonPropertyName("version_type")>]
-        VersionType: Types.VersionType option
+        VersionType: CoreTypes.VersionType option
     }
 
     type WriteOperation = {
@@ -50,15 +50,15 @@ module GlobalBulk =
         [<System.Text.Json.Serialization.JsonPropertyName("require_alias")>]
         RequireAlias: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("retry_on_conflict")>]
-        RetryOnConflict: Types.Integer option
+        RetryOnConflict: CoreTypes.Integer option
     }
 
     [<RequireQualifiedAccess>]
     type OperationContainer =
-        | Index of GlobalBulk.IndexOperation
-        | Create of GlobalBulk.CreateOperation
-        | Update of GlobalBulk.UpdateOperation
-        | Delete of GlobalBulk.DeleteOperation
+        | Index of IndexOperation
+        | Create of CreateOperation
+        | Update of UpdateOperation
+        | Delete of DeleteOperation
 
     [<RequireQualifiedAccess>]
     type OperationType =
@@ -73,25 +73,25 @@ module GlobalBulk =
         [<System.Text.Json.Serialization.JsonPropertyName("_index")>]
         Index: string
         [<System.Text.Json.Serialization.JsonPropertyName("status")>]
-        Status: Types.Integer
+        Status: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("failure_store")>]
-        FailureStore: GlobalBulk.FailureStoreStatus option
+        FailureStore: FailureStoreStatus option
         [<System.Text.Json.Serialization.JsonPropertyName("error")>]
-        Error: Types.ErrorCause option
+        Error: CoreTypes.ErrorCause option
         [<System.Text.Json.Serialization.JsonPropertyName("_primary_term")>]
-        PrimaryTerm: Types.Long option
+        PrimaryTerm: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("result")>]
         Result: string option
         [<System.Text.Json.Serialization.JsonPropertyName("_seq_no")>]
-        SeqNo: Types.SequenceNumber option
+        SeqNo: CoreTypes.SequenceNumber option
         [<System.Text.Json.Serialization.JsonPropertyName("_shards")>]
-        Shards: Types.ShardStatistics option
+        Shards: CoreTypes.ShardStatistics option
         [<System.Text.Json.Serialization.JsonPropertyName("_version")>]
-        Version: Types.VersionNumber option
+        Version: CoreTypes.VersionNumber option
         [<System.Text.Json.Serialization.JsonPropertyName("forced_refresh")>]
         ForcedRefresh: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("get")>]
-        Get: Types.InlineGet<Map<string, System.Text.Json.JsonElement>> option
+        Get: CoreTypes.InlineGet<Map<string, System.Text.Json.JsonElement>> option
     }
 
     type UpdateAction<'tDocument, 'tPartialDocument> = {
@@ -102,7 +102,7 @@ module GlobalBulk =
         [<System.Text.Json.Serialization.JsonPropertyName("doc_as_upsert")>]
         DocAsUpsert: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("script")>]
-        Script: Types.Script option
+        Script: CoreTypes.Script option
         [<System.Text.Json.Serialization.JsonPropertyName("scripted_upsert")>]
         ScriptedUpsert: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("_source")>]

@@ -36,15 +36,15 @@ module ClusterAllocationExplainBuilders =
             { state with NodeDecision = value }
 
         [<CustomOperation("nodeId")>]
-        member _.NodeId(state: NodeAllocationExplanation, value: Types.Id) =
+        member _.NodeId(state: NodeAllocationExplanation, value: CoreTypes.Id) =
             { state with NodeId = value }
 
         [<CustomOperation("nodeName")>]
-        member _.NodeName(state: NodeAllocationExplanation, value: Types.Name) =
+        member _.NodeName(state: NodeAllocationExplanation, value: CoreTypes.Name) =
             { state with NodeName = value }
 
         [<CustomOperation("roles")>]
-        member _.Roles(state: NodeAllocationExplanation, value: Types.NodeRoles) =
+        member _.Roles(state: NodeAllocationExplanation, value: CoreTypes.NodeRoles) =
             { state with Roles = value }
 
         [<CustomOperation("store")>]
@@ -52,11 +52,11 @@ module ClusterAllocationExplainBuilders =
             { state with Store = Some value }
 
         [<CustomOperation("transportAddress")>]
-        member _.TransportAddress(state: NodeAllocationExplanation, value: Types.TransportAddress) =
+        member _.TransportAddress(state: NodeAllocationExplanation, value: CoreTypes.TransportAddress) =
             { state with TransportAddress = value }
 
         [<CustomOperation("weightRanking")>]
-        member _.WeightRanking(state: NodeAllocationExplanation, value: Types.Integer) =
+        member _.WeightRanking(state: NodeAllocationExplanation, value: CoreTypes.Integer) =
             { state with WeightRanking = Some value }
 
     let nodeAllocationExplanation = NodeAllocationExplanationBuilder()
@@ -74,7 +74,7 @@ module ClusterAllocationExplainBuilders =
             }
 
         [<CustomOperation("at")>]
-        member _.At(state: UnassignedInformation, value: Types.DateTime) =
+        member _.At(state: UnassignedInformation, value: CoreTypes.DateTime) =
             { state with At = value }
 
         [<CustomOperation("lastAllocationStatus")>]
@@ -90,7 +90,7 @@ module ClusterAllocationExplainBuilders =
             { state with Details = Some value }
 
         [<CustomOperation("failedAllocationAttempts")>]
-        member _.FailedAllocationAttempts(state: UnassignedInformation, value: Types.Integer) =
+        member _.FailedAllocationAttempts(state: UnassignedInformation, value: CoreTypes.Integer) =
             { state with FailedAllocationAttempts = Some value }
 
         [<CustomOperation("delayed")>]

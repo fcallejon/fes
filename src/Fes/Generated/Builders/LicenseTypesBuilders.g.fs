@@ -25,15 +25,15 @@ module LicenseTypesBuilders =
             }
 
         [<CustomOperation("expiryDateInMillis")>]
-        member _.ExpiryDateInMillis(state: License, value: Types.EpochTime<Types.UnitMillis>) =
+        member _.ExpiryDateInMillis(state: License, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
             { state with ExpiryDateInMillis = value }
 
         [<CustomOperation("issueDateInMillis")>]
-        member _.IssueDateInMillis(state: License, value: Types.EpochTime<Types.UnitMillis>) =
+        member _.IssueDateInMillis(state: License, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
             { state with IssueDateInMillis = value }
 
         [<CustomOperation("startDateInMillis")>]
-        member _.StartDateInMillis(state: License, value: Types.EpochTime<Types.UnitMillis>) =
+        member _.StartDateInMillis(state: License, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
             { state with StartDateInMillis = Some value }
 
         [<CustomOperation("issuedTo")>]
@@ -45,11 +45,11 @@ module LicenseTypesBuilders =
             { state with Issuer = value }
 
         [<CustomOperation("maxNodes")>]
-        member _.MaxNodes(state: License, value: Types.Long option) =
+        member _.MaxNodes(state: License, value: CoreTypes.Long option) =
             { state with MaxNodes = Some value }
 
         [<CustomOperation("maxResourceUnits")>]
-        member _.MaxResourceUnits(state: License, value: Types.Long) =
+        member _.MaxResourceUnits(state: License, value: CoreTypes.Long) =
             { state with MaxResourceUnits = Some value }
 
         [<CustomOperation("signature")>]

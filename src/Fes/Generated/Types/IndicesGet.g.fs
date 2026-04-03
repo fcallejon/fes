@@ -15,6 +15,6 @@ module IndicesGet =
 
     [<RequireQualifiedAccess>]
     type Features =
-        | Feature of IndicesGet.Feature
-        | Array of IndicesGet.Feature list
+        | Feature of Feature
+        | Array of Feature list
 

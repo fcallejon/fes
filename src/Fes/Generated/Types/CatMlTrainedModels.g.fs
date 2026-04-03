@@ -9,19 +9,19 @@ module CatMlTrainedModels =
 
     type TrainedModelsRecord = {
         [<System.Text.Json.Serialization.JsonPropertyName("id")>]
-        Id: Types.Id option
+        Id: CoreTypes.Id option
         [<System.Text.Json.Serialization.JsonPropertyName("created_by")>]
         CreatedBy: string option
         [<System.Text.Json.Serialization.JsonPropertyName("heap_size")>]
-        HeapSize: Types.ByteSize option
+        HeapSize: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("operations")>]
         Operations: string option
         [<System.Text.Json.Serialization.JsonPropertyName("license")>]
         License: string option
         [<System.Text.Json.Serialization.JsonPropertyName("create_time")>]
-        CreateTime: Types.DateTime option
+        CreateTime: CoreTypes.DateTime option
         [<System.Text.Json.Serialization.JsonPropertyName("version")>]
-        Version: Types.VersionString option
+        Version: CoreTypes.VersionString option
         [<System.Text.Json.Serialization.JsonPropertyName("description")>]
         Description: string option
         [<System.Text.Json.Serialization.JsonPropertyName("ingest.pipelines")>]

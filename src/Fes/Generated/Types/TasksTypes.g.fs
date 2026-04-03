@@ -25,58 +25,58 @@ module TasksTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("headers")>]
         Headers: Map<string, string>
         [<System.Text.Json.Serialization.JsonPropertyName("id")>]
-        Id: Types.Long
+        Id: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("node")>]
-        Node: Types.NodeId
+        Node: CoreTypes.NodeId
         [<System.Text.Json.Serialization.JsonPropertyName("running_time")>]
-        RunningTime: Types.Duration option
+        RunningTime: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("running_time_in_nanos")>]
-        RunningTimeInNanos: Types.DurationValue<Types.UnitNanos>
+        RunningTimeInNanos: CoreTypes.DurationValue<CoreTypes.UnitNanos>
         [<System.Text.Json.Serialization.JsonPropertyName("start_time_in_millis")>]
-        StartTimeInMillis: Types.EpochTime<Types.UnitMillis>
+        StartTimeInMillis: CoreTypes.EpochTime<CoreTypes.UnitMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("status")>]
         Status: System.Text.Json.JsonElement option
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("parent_task_id")>]
-        ParentTaskId: Types.TaskId option
+        ParentTaskId: CoreTypes.TaskId option
     }
 
     type NodeTasks = {
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.NodeId option
+        Name: CoreTypes.NodeId option
         [<System.Text.Json.Serialization.JsonPropertyName("transport_address")>]
-        TransportAddress: Types.TransportAddress option
+        TransportAddress: CoreTypes.TransportAddress option
         [<System.Text.Json.Serialization.JsonPropertyName("host")>]
-        Host: Types.Host option
+        Host: CoreTypes.Host option
         [<System.Text.Json.Serialization.JsonPropertyName("ip")>]
-        Ip: Types.Ip option
+        Ip: CoreTypes.Ip option
         [<System.Text.Json.Serialization.JsonPropertyName("roles")>]
         Roles: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("attributes")>]
         Attributes: Map<string, string> option
         [<System.Text.Json.Serialization.JsonPropertyName("tasks")>]
-        Tasks: Map<Types.TaskId, TasksTypes.TaskInfo>
+        Tasks: Map<CoreTypes.TaskId, TaskInfo>
     }
 
     type ParentTaskInfo = {
         [<System.Text.Json.Serialization.JsonPropertyName("children")>]
-        Children: TasksTypes.TaskInfo list option
+        Children: TaskInfo list option
     }
 
     [<RequireQualifiedAccess>]
     type TaskInfos =
-        | Array of TasksTypes.TaskInfo list
-        | Dictionary of Map<string, TasksTypes.ParentTaskInfo>
+        | Array of TaskInfo list
+        | Dictionary of Map<string, ParentTaskInfo>
 
     type TaskListResponseBase = {
         [<System.Text.Json.Serialization.JsonPropertyName("node_failures")>]
-        NodeFailures: Types.ErrorCause list option
+        NodeFailures: CoreTypes.ErrorCause list option
         [<System.Text.Json.Serialization.JsonPropertyName("task_failures")>]
-        TaskFailures: Types.TaskFailure list option
+        TaskFailures: CoreTypes.TaskFailure list option
         [<System.Text.Json.Serialization.JsonPropertyName("nodes")>]
-        Nodes: Map<string, TasksTypes.NodeTasks> option
+        Nodes: Map<string, NodeTasks> option
         [<System.Text.Json.Serialization.JsonPropertyName("tasks")>]
-        Tasks: TasksTypes.TaskInfos option
+        Tasks: TaskInfos option
     }
 

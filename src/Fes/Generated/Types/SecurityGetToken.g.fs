@@ -16,7 +16,7 @@ module SecurityGetToken =
 
     type UserRealm = {
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.Name
+        Name: CoreTypes.Name
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
     }
@@ -25,16 +25,16 @@ module SecurityGetToken =
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.Name
+        Name: CoreTypes.Name
     }
 
     type AuthenticatedUser = {
         [<System.Text.Json.Serialization.JsonPropertyName("authentication_realm")>]
-        AuthenticationRealm: SecurityGetToken.UserRealm
+        AuthenticationRealm: UserRealm
         [<System.Text.Json.Serialization.JsonPropertyName("lookup_realm")>]
-        LookupRealm: SecurityGetToken.UserRealm
+        LookupRealm: UserRealm
         [<System.Text.Json.Serialization.JsonPropertyName("authentication_provider")>]
-        AuthenticationProvider: SecurityGetToken.AuthenticationProvider option
+        AuthenticationProvider: AuthenticationProvider option
         [<System.Text.Json.Serialization.JsonPropertyName("authentication_type")>]
         AuthenticationType: string
     }

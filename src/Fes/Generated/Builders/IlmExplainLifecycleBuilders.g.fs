@@ -44,43 +44,43 @@ module IlmExplainLifecycleBuilders =
             }
 
         [<CustomOperation("action")>]
-        member _.Action(state: LifecycleExplainManaged, value: Types.Name) =
+        member _.Action(state: LifecycleExplainManaged, value: CoreTypes.Name) =
             { state with Action = Some value }
 
         [<CustomOperation("actionTime")>]
-        member _.ActionTime(state: LifecycleExplainManaged, value: Types.DateTime) =
+        member _.ActionTime(state: LifecycleExplainManaged, value: CoreTypes.DateTime) =
             { state with ActionTime = Some value }
 
         [<CustomOperation("actionTimeMillis")>]
-        member _.ActionTimeMillis(state: LifecycleExplainManaged, value: Types.EpochTime<Types.UnitMillis>) =
+        member _.ActionTimeMillis(state: LifecycleExplainManaged, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
             { state with ActionTimeMillis = Some value }
 
         [<CustomOperation("age")>]
-        member _.Age(state: LifecycleExplainManaged, value: Types.Duration) =
+        member _.Age(state: LifecycleExplainManaged, value: CoreTypes.Duration) =
             { state with Age = Some value }
 
         [<CustomOperation("ageInMillis")>]
-        member _.AgeInMillis(state: LifecycleExplainManaged, value: Types.DurationValue<Types.UnitMillis>) =
+        member _.AgeInMillis(state: LifecycleExplainManaged, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
             { state with AgeInMillis = Some value }
 
         [<CustomOperation("failedStep")>]
-        member _.FailedStep(state: LifecycleExplainManaged, value: Types.Name) =
+        member _.FailedStep(state: LifecycleExplainManaged, value: CoreTypes.Name) =
             { state with FailedStep = Some value }
 
         [<CustomOperation("failedStepRetryCount")>]
-        member _.FailedStepRetryCount(state: LifecycleExplainManaged, value: Types.Integer) =
+        member _.FailedStepRetryCount(state: LifecycleExplainManaged, value: CoreTypes.Integer) =
             { state with FailedStepRetryCount = Some value }
 
         [<CustomOperation("index")>]
-        member _.Index(state: LifecycleExplainManaged, value: Types.IndexName) =
+        member _.Index(state: LifecycleExplainManaged, value: CoreTypes.IndexName) =
             { state with Index = value }
 
         [<CustomOperation("indexCreationDate")>]
-        member _.IndexCreationDate(state: LifecycleExplainManaged, value: Types.DateTime) =
+        member _.IndexCreationDate(state: LifecycleExplainManaged, value: CoreTypes.DateTime) =
             { state with IndexCreationDate = Some value }
 
         [<CustomOperation("indexCreationDateMillis")>]
-        member _.IndexCreationDateMillis(state: LifecycleExplainManaged, value: Types.EpochTime<Types.UnitMillis>) =
+        member _.IndexCreationDateMillis(state: LifecycleExplainManaged, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
             { state with IndexCreationDateMillis = Some value }
 
         [<CustomOperation("isAutoRetryableError")>]
@@ -88,11 +88,11 @@ module IlmExplainLifecycleBuilders =
             { state with IsAutoRetryableError = Some value }
 
         [<CustomOperation("lifecycleDate")>]
-        member _.LifecycleDate(state: LifecycleExplainManaged, value: Types.DateTime) =
+        member _.LifecycleDate(state: LifecycleExplainManaged, value: CoreTypes.DateTime) =
             { state with LifecycleDate = Some value }
 
         [<CustomOperation("lifecycleDateMillis")>]
-        member _.LifecycleDateMillis(state: LifecycleExplainManaged, value: Types.EpochTime<Types.UnitMillis>) =
+        member _.LifecycleDateMillis(state: LifecycleExplainManaged, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
             { state with LifecycleDateMillis = Some value }
 
         [<CustomOperation("managed")>]
@@ -100,19 +100,19 @@ module IlmExplainLifecycleBuilders =
             { state with Managed = value }
 
         [<CustomOperation("phase")>]
-        member _.Phase(state: LifecycleExplainManaged, value: Types.Name) =
+        member _.Phase(state: LifecycleExplainManaged, value: CoreTypes.Name) =
             { state with Phase = Some value }
 
         [<CustomOperation("phaseTime")>]
-        member _.PhaseTime(state: LifecycleExplainManaged, value: Types.DateTime) =
+        member _.PhaseTime(state: LifecycleExplainManaged, value: CoreTypes.DateTime) =
             { state with PhaseTime = Some value }
 
         [<CustomOperation("phaseTimeMillis")>]
-        member _.PhaseTimeMillis(state: LifecycleExplainManaged, value: Types.EpochTime<Types.UnitMillis>) =
+        member _.PhaseTimeMillis(state: LifecycleExplainManaged, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
             { state with PhaseTimeMillis = Some value }
 
         [<CustomOperation("policy")>]
-        member _.Policy(state: LifecycleExplainManaged, value: Types.Name) =
+        member _.Policy(state: LifecycleExplainManaged, value: CoreTypes.Name) =
             { state with Policy = Some value }
 
         [<CustomOperation("previousStepInfo")>]
@@ -132,7 +132,7 @@ module IlmExplainLifecycleBuilders =
             { state with ShrinkIndexName = Some value }
 
         [<CustomOperation("step")>]
-        member _.Step(state: LifecycleExplainManaged, value: Types.Name) =
+        member _.Step(state: LifecycleExplainManaged, value: CoreTypes.Name) =
             { state with Step = Some value }
 
         [<CustomOperation("stepInfo")>]
@@ -140,11 +140,11 @@ module IlmExplainLifecycleBuilders =
             { state with StepInfo = Some value }
 
         [<CustomOperation("stepTime")>]
-        member _.StepTime(state: LifecycleExplainManaged, value: Types.DateTime) =
+        member _.StepTime(state: LifecycleExplainManaged, value: CoreTypes.DateTime) =
             { state with StepTime = Some value }
 
         [<CustomOperation("stepTimeMillis")>]
-        member _.StepTimeMillis(state: LifecycleExplainManaged, value: Types.EpochTime<Types.UnitMillis>) =
+        member _.StepTimeMillis(state: LifecycleExplainManaged, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
             { state with StepTimeMillis = Some value }
 
         [<CustomOperation("phaseExecution")>]
@@ -152,7 +152,7 @@ module IlmExplainLifecycleBuilders =
             { state with PhaseExecution = Some value }
 
         [<CustomOperation("timeSinceIndexCreation")>]
-        member _.TimeSinceIndexCreation(state: LifecycleExplainManaged, value: Types.Duration) =
+        member _.TimeSinceIndexCreation(state: LifecycleExplainManaged, value: CoreTypes.Duration) =
             { state with TimeSinceIndexCreation = Some value }
 
         [<CustomOperation("skip")>]

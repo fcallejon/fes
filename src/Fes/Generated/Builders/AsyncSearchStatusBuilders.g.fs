@@ -18,15 +18,15 @@ module AsyncSearchStatusBuilders =
             }
 
         [<CustomOperation("shards")>]
-        member _.Shards(state: StatusResponseBase, value: Types.ShardStatistics) =
+        member _.Shards(state: StatusResponseBase, value: CoreTypes.ShardStatistics) =
             { state with Shards = value }
 
         [<CustomOperation("clusters")>]
-        member _.Clusters(state: StatusResponseBase, value: Types.ClusterStatistics) =
+        member _.Clusters(state: StatusResponseBase, value: CoreTypes.ClusterStatistics) =
             { state with Clusters = Some value }
 
         [<CustomOperation("completionStatus")>]
-        member _.CompletionStatus(state: StatusResponseBase, value: Types.Integer) =
+        member _.CompletionStatus(state: StatusResponseBase, value: CoreTypes.Integer) =
             { state with CompletionStatus = Some value }
 
     let statusResponseBase = StatusResponseBaseBuilder()

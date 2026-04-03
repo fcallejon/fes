@@ -12,12 +12,12 @@ open Fes
 module GraphOperations =
 
     type GraphExploreRequest = {
-        Index: Types.Indices
-        Routing: Types.Routing option
-        Timeout: Types.Duration option
+        Index: CoreTypes.Indices
+        Routing: CoreTypes.Routing option
+        Timeout: CoreTypes.Duration option
         Connections: GraphTypes.Hop option
         Controls: GraphTypes.ExploreControls option
-        Query: TypesQueryDsl.QueryContainer option
+        Query: CoreTypes.QueryContainer option
         Vertices: GraphTypes.VertexDefinition list option
     }
 
@@ -56,15 +56,15 @@ module GraphOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: GraphExploreRequest, value: Types.Indices) =
+        member _.Index(state: GraphExploreRequest, value: CoreTypes.Indices) =
             { state with Index = value }
 
         [<CustomOperation("routing")>]
-        member _.Routing(state: GraphExploreRequest, value: Types.Routing) =
+        member _.Routing(state: GraphExploreRequest, value: CoreTypes.Routing) =
             { state with Routing = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: GraphExploreRequest, value: Types.Duration) =
+        member _.Timeout(state: GraphExploreRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("connections")>]
@@ -76,7 +76,7 @@ module GraphOperations =
             { state with Controls = Some value }
 
         [<CustomOperation("query")>]
-        member _.Query(state: GraphExploreRequest, value: TypesQueryDsl.QueryContainer) =
+        member _.Query(state: GraphExploreRequest, value: CoreTypes.QueryContainer) =
             { state with Query = Some value }
 
         [<CustomOperation("vertices")>]
@@ -86,15 +86,15 @@ module GraphOperations =
     let graphExploreRequest = GraphExploreRequestBuilder()
 
     module Explore =
-        let withRouting (value: Types.Routing) (req: GraphExploreRequest) =
+        let withRouting (value: CoreTypes.Routing) (req: GraphExploreRequest) =
             { req with Routing = Some value }
-        let withTimeout (value: Types.Duration) (req: GraphExploreRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: GraphExploreRequest) =
             { req with Timeout = Some value }
         let withConnections (value: GraphTypes.Hop) (req: GraphExploreRequest) =
             { req with Connections = Some value }
         let withControls (value: GraphTypes.ExploreControls) (req: GraphExploreRequest) =
             { req with Controls = Some value }
-        let withQuery (value: TypesQueryDsl.QueryContainer) (req: GraphExploreRequest) =
+        let withQuery (value: CoreTypes.QueryContainer) (req: GraphExploreRequest) =
             { req with Query = Some value }
         let withVertices (value: GraphTypes.VertexDefinition list) (req: GraphExploreRequest) =
             { req with Vertices = Some value }

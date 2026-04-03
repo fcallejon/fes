@@ -24,11 +24,11 @@ module TextStructureTypesBuilders =
             }
 
         [<CustomOperation("count")>]
-        member _.Count(state: FieldStat, value: Types.Integer) =
+        member _.Count(state: FieldStat, value: CoreTypes.Integer) =
             { state with Count = value }
 
         [<CustomOperation("cardinality")>]
-        member _.Cardinality(state: FieldStat, value: Types.Integer) =
+        member _.Cardinality(state: FieldStat, value: CoreTypes.Integer) =
             { state with Cardinality = value }
 
         [<CustomOperation("topHits")>]
@@ -36,19 +36,19 @@ module TextStructureTypesBuilders =
             { state with TopHits = value }
 
         [<CustomOperation("meanValue")>]
-        member _.MeanValue(state: FieldStat, value: Types.Integer) =
+        member _.MeanValue(state: FieldStat, value: CoreTypes.Integer) =
             { state with MeanValue = Some value }
 
         [<CustomOperation("medianValue")>]
-        member _.MedianValue(state: FieldStat, value: Types.Integer) =
+        member _.MedianValue(state: FieldStat, value: CoreTypes.Integer) =
             { state with MedianValue = Some value }
 
         [<CustomOperation("maxValue")>]
-        member _.MaxValue(state: FieldStat, value: Types.Integer) =
+        member _.MaxValue(state: FieldStat, value: CoreTypes.Integer) =
             { state with MaxValue = Some value }
 
         [<CustomOperation("minValue")>]
-        member _.MinValue(state: FieldStat, value: Types.Integer) =
+        member _.MinValue(state: FieldStat, value: CoreTypes.Integer) =
             { state with MinValue = Some value }
 
         [<CustomOperation("earliest")>]

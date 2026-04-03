@@ -9,42 +9,42 @@ module TransformTypes =
 
     type Destination = {
         [<System.Text.Json.Serialization.JsonPropertyName("index")>]
-        Index: Types.IndexName option
+        Index: CoreTypes.IndexName option
         [<System.Text.Json.Serialization.JsonPropertyName("pipeline")>]
         Pipeline: string option
     }
 
     type Latest = {
         [<System.Text.Json.Serialization.JsonPropertyName("sort")>]
-        Sort: Types.Field
+        Sort: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("unique_key")>]
-        UniqueKey: Types.Field list
+        UniqueKey: CoreTypes.Field list
     }
 
     [<RequireQualifiedAccess>]
     type PivotGroupByContainer =
-        | DateHistogram of TypesAggregations.DateHistogramAggregation
-        | GeotileGrid of TypesAggregations.GeoTileGridAggregation
-        | Histogram of TypesAggregations.HistogramAggregation
-        | Terms of TypesAggregations.TermsAggregation
+        | DateHistogram of CoreTypes.DateHistogramAggregation
+        | GeotileGrid of CoreTypes.GeoTileGridAggregation
+        | Histogram of CoreTypes.HistogramAggregation
+        | Terms of CoreTypes.TermsAggregation
 
     type Pivot = {
         [<System.Text.Json.Serialization.JsonPropertyName("aggregations")>]
-        Aggregations: Map<string, TypesAggregations.AggregationContainer> option
+        Aggregations: Map<string, CoreTypes.AggregationContainer> option
         [<System.Text.Json.Serialization.JsonPropertyName("group_by")>]
-        GroupBy: Map<string, TransformTypes.PivotGroupByContainer> option
+        GroupBy: Map<string, PivotGroupByContainer> option
     }
 
     type RetentionPolicy = {
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
-        Field: Types.Field
+        Field: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("max_age")>]
-        MaxAge: Types.Duration
+        MaxAge: CoreTypes.Duration
     }
 
     [<RequireQualifiedAccess>]
     type RetentionPolicyContainer =
-        | Time of TransformTypes.RetentionPolicy
+        | Time of RetentionPolicy
 
     /// The source of the data for the transform.
     type Settings = {
@@ -55,36 +55,36 @@ module TransformTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("deduce_mappings")>]
         DeduceMappings: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("docs_per_second")>]
-        DocsPerSecond: Types.Float option
+        DocsPerSecond: CoreTypes.Float option
         [<System.Text.Json.Serialization.JsonPropertyName("max_page_search_size")>]
-        MaxPageSearchSize: Types.Integer option
+        MaxPageSearchSize: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("use_point_in_time")>]
         UsePointInTime: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("num_failure_retries")>]
-        NumFailureRetries: Types.Integer option
+        NumFailureRetries: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("unattended")>]
         Unattended: bool option
     }
 
     type Source = {
         [<System.Text.Json.Serialization.JsonPropertyName("index")>]
-        Index: Types.Indices
+        Index: CoreTypes.Indices
         [<System.Text.Json.Serialization.JsonPropertyName("query")>]
-        Query: TypesQueryDsl.QueryContainer option
+        Query: CoreTypes.QueryContainer option
         [<System.Text.Json.Serialization.JsonPropertyName("runtime_mappings")>]
-        RuntimeMappings: TypesMapping.RuntimeFields option
+        RuntimeMappings: CoreTypes.RuntimeFields option
         [<System.Text.Json.Serialization.JsonPropertyName("project_routing")>]
-        ProjectRouting: Types.ProjectRouting option
+        ProjectRouting: CoreTypes.ProjectRouting option
     }
 
     type TimeSync = {
         [<System.Text.Json.Serialization.JsonPropertyName("delay")>]
-        Delay: Types.Duration option
+        Delay: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
-        Field: Types.Field
+        Field: CoreTypes.Field
     }
 
     [<RequireQualifiedAccess>]
     type SyncContainer =
-        | Time of TransformTypes.TimeSync
+        | Time of TimeSync
 

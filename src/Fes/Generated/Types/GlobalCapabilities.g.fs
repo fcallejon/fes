@@ -9,7 +9,7 @@ module GlobalCapabilities =
 
     type FailedNodeException = {
         [<System.Text.Json.Serialization.JsonPropertyName("node_id")>]
-        NodeId: Types.Id
+        NodeId: CoreTypes.Id
     }
 
     [<RequireQualifiedAccess>]

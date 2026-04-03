@@ -45,15 +45,15 @@ module XpackUsageBuilders =
             }
 
         [<CustomOperation("classification")>]
-        member _.Classification(state: MlDataFrameAnalyticsJobsAnalysis, value: Types.Integer) =
+        member _.Classification(state: MlDataFrameAnalyticsJobsAnalysis, value: CoreTypes.Integer) =
             { state with Classification = Some value }
 
         [<CustomOperation("outlierDetection")>]
-        member _.OutlierDetection(state: MlDataFrameAnalyticsJobsAnalysis, value: Types.Integer) =
+        member _.OutlierDetection(state: MlDataFrameAnalyticsJobsAnalysis, value: CoreTypes.Integer) =
             { state with OutlierDetection = Some value }
 
         [<CustomOperation("regression")>]
-        member _.Regression(state: MlDataFrameAnalyticsJobsAnalysis, value: Types.Integer) =
+        member _.Regression(state: MlDataFrameAnalyticsJobsAnalysis, value: CoreTypes.Integer) =
             { state with Regression = Some value }
 
     let mlDataFrameAnalyticsJobsAnalysis = MlDataFrameAnalyticsJobsAnalysisBuilder()
@@ -104,35 +104,35 @@ module XpackUsageBuilders =
             }
 
         [<CustomOperation("total")>]
-        member _.Total(state: MlInferenceTrainedModelsCount, value: Types.Long) =
+        member _.Total(state: MlInferenceTrainedModelsCount, value: CoreTypes.Long) =
             { state with Total = value }
 
         [<CustomOperation("prepackaged")>]
-        member _.Prepackaged(state: MlInferenceTrainedModelsCount, value: Types.Long) =
+        member _.Prepackaged(state: MlInferenceTrainedModelsCount, value: CoreTypes.Long) =
             { state with Prepackaged = value }
 
         [<CustomOperation("other")>]
-        member _.Other(state: MlInferenceTrainedModelsCount, value: Types.Long) =
+        member _.Other(state: MlInferenceTrainedModelsCount, value: CoreTypes.Long) =
             { state with Other = value }
 
         [<CustomOperation("passThrough")>]
-        member _.PassThrough(state: MlInferenceTrainedModelsCount, value: Types.Long) =
+        member _.PassThrough(state: MlInferenceTrainedModelsCount, value: CoreTypes.Long) =
             { state with PassThrough = Some value }
 
         [<CustomOperation("regression")>]
-        member _.Regression(state: MlInferenceTrainedModelsCount, value: Types.Long) =
+        member _.Regression(state: MlInferenceTrainedModelsCount, value: CoreTypes.Long) =
             { state with Regression = Some value }
 
         [<CustomOperation("classification")>]
-        member _.Classification(state: MlInferenceTrainedModelsCount, value: Types.Long) =
+        member _.Classification(state: MlInferenceTrainedModelsCount, value: CoreTypes.Long) =
             { state with Classification = Some value }
 
         [<CustomOperation("ner")>]
-        member _.Ner(state: MlInferenceTrainedModelsCount, value: Types.Long) =
+        member _.Ner(state: MlInferenceTrainedModelsCount, value: CoreTypes.Long) =
             { state with Ner = Some value }
 
         [<CustomOperation("textEmbedding")>]
-        member _.TextEmbedding(state: MlInferenceTrainedModelsCount, value: Types.Long) =
+        member _.TextEmbedding(state: MlInferenceTrainedModelsCount, value: CoreTypes.Long) =
             { state with TextEmbedding = Some value }
 
     let mlInferenceTrainedModelsCount = MlInferenceTrainedModelsCountBuilder()
@@ -179,19 +179,19 @@ module XpackUsageBuilders =
             }
 
         [<CustomOperation("count")>]
-        member _.Count(state: Query, value: Types.Integer) =
+        member _.Count(state: Query, value: CoreTypes.Integer) =
             { state with Count = Some value }
 
         [<CustomOperation("failed")>]
-        member _.Failed(state: Query, value: Types.Integer) =
+        member _.Failed(state: Query, value: CoreTypes.Integer) =
             { state with Failed = Some value }
 
         [<CustomOperation("paging")>]
-        member _.Paging(state: Query, value: Types.Integer) =
+        member _.Paging(state: Query, value: CoreTypes.Integer) =
             { state with Paging = Some value }
 
         [<CustomOperation("total")>]
-        member _.Total(state: Query, value: Types.Integer) =
+        member _.Total(state: Query, value: CoreTypes.Integer) =
             { state with Total = Some value }
 
     let query = QueryBuilder()
@@ -214,11 +214,11 @@ module XpackUsageBuilders =
             { state with Name = Some value }
 
         [<CustomOperation("order")>]
-        member _.Order(state: Realm, value: Types.Long list) =
+        member _.Order(state: Realm, value: CoreTypes.Long list) =
             { state with Order = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: Realm, value: Types.Long list) =
+        member _.Size(state: Realm, value: CoreTypes.Long list) =
             { state with Size = Some value }
 
         [<CustomOperation("cache")>]
@@ -252,15 +252,15 @@ module XpackUsageBuilders =
             }
 
         [<CustomOperation("indicesCount")>]
-        member _.IndicesCount(state: SearchableSnapshots, value: Types.Integer) =
+        member _.IndicesCount(state: SearchableSnapshots, value: CoreTypes.Integer) =
             { state with IndicesCount = value }
 
         [<CustomOperation("fullCopyIndicesCount")>]
-        member _.FullCopyIndicesCount(state: SearchableSnapshots, value: Types.Integer) =
+        member _.FullCopyIndicesCount(state: SearchableSnapshots, value: CoreTypes.Integer) =
             { state with FullCopyIndicesCount = Some value }
 
         [<CustomOperation("sharedCacheIndicesCount")>]
-        member _.SharedCacheIndicesCount(state: SearchableSnapshots, value: Types.Integer) =
+        member _.SharedCacheIndicesCount(state: SearchableSnapshots, value: CoreTypes.Integer) =
             { state with SharedCacheIndicesCount = Some value }
 
     let searchableSnapshots = SearchableSnapshotsBuilder()
@@ -273,7 +273,7 @@ module XpackUsageBuilders =
             }
 
         [<CustomOperation("policyCount")>]
-        member _.PolicyCount(state: Slm, value: Types.Integer) =
+        member _.PolicyCount(state: Slm, value: CoreTypes.Integer) =
             { state with PolicyCount = Some value }
 
         [<CustomOperation("policyStats")>]
@@ -292,15 +292,15 @@ module XpackUsageBuilders =
             }
 
         [<CustomOperation("input")>]
-        member _.Input(state: WatcherWatch, value: Map<Types.Name, XpackUsage.Counter>) =
+        member _.Input(state: WatcherWatch, value: Map<CoreTypes.Name, XpackUsage.Counter>) =
             { state with Input = value }
 
         [<CustomOperation("condition")>]
-        member _.Condition(state: WatcherWatch, value: Map<Types.Name, XpackUsage.Counter>) =
+        member _.Condition(state: WatcherWatch, value: Map<CoreTypes.Name, XpackUsage.Counter>) =
             { state with Condition = Some value }
 
         [<CustomOperation("action")>]
-        member _.Action(state: WatcherWatch, value: Map<Types.Name, XpackUsage.Counter>) =
+        member _.Action(state: WatcherWatch, value: Map<CoreTypes.Name, XpackUsage.Counter>) =
             { state with Action = Some value }
 
         [<CustomOperation("trigger")>]

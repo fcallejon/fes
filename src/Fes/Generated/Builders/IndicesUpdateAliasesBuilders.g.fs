@@ -37,7 +37,7 @@ module IndicesUpdateAliasesBuilders =
             }
 
         [<CustomOperation("alias")>]
-        member _.Alias(state: AddAction, value: Types.IndexAlias) =
+        member _.Alias(state: AddAction, value: CoreTypes.IndexAlias) =
             { state with Alias = Some value }
 
         [<CustomOperation("aliases")>]
@@ -45,15 +45,15 @@ module IndicesUpdateAliasesBuilders =
             { state with Aliases = Some value }
 
         [<CustomOperation("filter")>]
-        member _.Filter(state: AddAction, value: TypesQueryDsl.QueryContainer) =
+        member _.Filter(state: AddAction, value: CoreTypes.QueryContainer) =
             { state with Filter = Some value }
 
         [<CustomOperation("index")>]
-        member _.Index(state: AddAction, value: Types.IndexName) =
+        member _.Index(state: AddAction, value: CoreTypes.IndexName) =
             { state with Index = Some value }
 
         [<CustomOperation("indices")>]
-        member _.Indices(state: AddAction, value: Types.Indices) =
+        member _.Indices(state: AddAction, value: CoreTypes.Indices) =
             { state with Indices = Some value }
 
         [<CustomOperation("indexRouting")>]
@@ -93,7 +93,7 @@ module IndicesUpdateAliasesBuilders =
             }
 
         [<CustomOperation("alias")>]
-        member _.Alias(state: RemoveAction, value: Types.IndexAlias) =
+        member _.Alias(state: RemoveAction, value: CoreTypes.IndexAlias) =
             { state with Alias = Some value }
 
         [<CustomOperation("aliases")>]
@@ -101,11 +101,11 @@ module IndicesUpdateAliasesBuilders =
             { state with Aliases = Some value }
 
         [<CustomOperation("index")>]
-        member _.Index(state: RemoveAction, value: Types.IndexName) =
+        member _.Index(state: RemoveAction, value: CoreTypes.IndexName) =
             { state with Index = Some value }
 
         [<CustomOperation("indices")>]
-        member _.Indices(state: RemoveAction, value: Types.Indices) =
+        member _.Indices(state: RemoveAction, value: CoreTypes.Indices) =
             { state with Indices = Some value }
 
         [<CustomOperation("mustExist")>]
@@ -123,11 +123,11 @@ module IndicesUpdateAliasesBuilders =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: RemoveIndexAction, value: Types.IndexName) =
+        member _.Index(state: RemoveIndexAction, value: CoreTypes.IndexName) =
             { state with Index = Some value }
 
         [<CustomOperation("indices")>]
-        member _.Indices(state: RemoveIndexAction, value: Types.Indices) =
+        member _.Indices(state: RemoveIndexAction, value: CoreTypes.Indices) =
             { state with Indices = Some value }
 
         [<CustomOperation("mustExist")>]

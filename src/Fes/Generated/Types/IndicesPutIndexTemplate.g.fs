@@ -9,9 +9,9 @@ module IndicesPutIndexTemplate =
 
     type IndexTemplateMapping = {
         [<System.Text.Json.Serialization.JsonPropertyName("aliases")>]
-        Aliases: Map<Types.IndexName, IndicesTypes.Alias> option
+        Aliases: Map<CoreTypes.IndexName, IndicesTypes.Alias> option
         [<System.Text.Json.Serialization.JsonPropertyName("mappings")>]
-        Mappings: TypesMapping.TypeMapping option
+        Mappings: CoreTypes.TypeMapping option
         [<System.Text.Json.Serialization.JsonPropertyName("settings")>]
         Settings: IndicesTypes.IndexSettings option
         [<System.Text.Json.Serialization.JsonPropertyName("lifecycle")>]

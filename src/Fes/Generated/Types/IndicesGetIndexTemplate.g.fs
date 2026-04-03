@@ -9,7 +9,7 @@ module IndicesGetIndexTemplate =
 
     type IndexTemplateItem = {
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.Name
+        Name: CoreTypes.Name
         [<System.Text.Json.Serialization.JsonPropertyName("index_template")>]
         IndexTemplate: IndicesTypes.IndexTemplateWithRollover
     }

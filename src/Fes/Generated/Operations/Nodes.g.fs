@@ -12,8 +12,8 @@ open Fes
 module NodesOperations =
 
     type NodesClearRepositoriesMeteringArchiveRequest = {
-        NodeId: Types.NodeIds
-        MaxArchiveVersion: Types.Long
+        NodeId: CoreTypes.NodeIds
+        MaxArchiveVersion: CoreTypes.Long
     }
 
         with
@@ -37,17 +37,17 @@ module NodesOperations =
             }
 
         [<CustomOperation("nodeId")>]
-        member _.NodeId(state: NodesClearRepositoriesMeteringArchiveRequest, value: Types.NodeIds) =
+        member _.NodeId(state: NodesClearRepositoriesMeteringArchiveRequest, value: CoreTypes.NodeIds) =
             { state with NodeId = value }
 
         [<CustomOperation("maxArchiveVersion")>]
-        member _.MaxArchiveVersion(state: NodesClearRepositoriesMeteringArchiveRequest, value: Types.Long) =
+        member _.MaxArchiveVersion(state: NodesClearRepositoriesMeteringArchiveRequest, value: CoreTypes.Long) =
             { state with MaxArchiveVersion = value }
 
     let nodesClearRepositoriesMeteringArchiveRequest = NodesClearRepositoriesMeteringArchiveRequestBuilder()
 
     type NodesGetRepositoriesMeteringInfoRequest = {
-        NodeId: Types.NodeIds
+        NodeId: CoreTypes.NodeIds
     }
 
         with
@@ -70,20 +70,20 @@ module NodesOperations =
             }
 
         [<CustomOperation("nodeId")>]
-        member _.NodeId(state: NodesGetRepositoriesMeteringInfoRequest, value: Types.NodeIds) =
+        member _.NodeId(state: NodesGetRepositoriesMeteringInfoRequest, value: CoreTypes.NodeIds) =
             { state with NodeId = value }
 
     let nodesGetRepositoriesMeteringInfoRequest = NodesGetRepositoriesMeteringInfoRequestBuilder()
 
     type NodesHotThreadsRequest = {
-        NodeId: Types.NodeIds
+        NodeId: CoreTypes.NodeIds
         IgnoreIdleThreads: bool option
-        Interval: Types.Duration option
-        Snapshots: Types.Long option
-        Threads: Types.Long option
-        Timeout: Types.Duration option
-        Type: Types.ThreadType option
-        Sort: Types.ThreadType option
+        Interval: CoreTypes.Duration option
+        Snapshots: CoreTypes.Long option
+        Threads: CoreTypes.Long option
+        Timeout: CoreTypes.Duration option
+        Type: CoreTypes.ThreadType option
+        Sort: CoreTypes.ThreadType option
     }
 
         with
@@ -126,7 +126,7 @@ module NodesOperations =
             }
 
         [<CustomOperation("nodeId")>]
-        member _.NodeId(state: NodesHotThreadsRequest, value: Types.NodeIds) =
+        member _.NodeId(state: NodesHotThreadsRequest, value: CoreTypes.NodeIds) =
             { state with NodeId = value }
 
         [<CustomOperation("ignoreIdleThreads")>]
@@ -134,27 +134,27 @@ module NodesOperations =
             { state with IgnoreIdleThreads = Some value }
 
         [<CustomOperation("interval")>]
-        member _.Interval(state: NodesHotThreadsRequest, value: Types.Duration) =
+        member _.Interval(state: NodesHotThreadsRequest, value: CoreTypes.Duration) =
             { state with Interval = Some value }
 
         [<CustomOperation("snapshots")>]
-        member _.Snapshots(state: NodesHotThreadsRequest, value: Types.Long) =
+        member _.Snapshots(state: NodesHotThreadsRequest, value: CoreTypes.Long) =
             { state with Snapshots = Some value }
 
         [<CustomOperation("threads")>]
-        member _.Threads(state: NodesHotThreadsRequest, value: Types.Long) =
+        member _.Threads(state: NodesHotThreadsRequest, value: CoreTypes.Long) =
             { state with Threads = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: NodesHotThreadsRequest, value: Types.Duration) =
+        member _.Timeout(state: NodesHotThreadsRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: NodesHotThreadsRequest, value: Types.ThreadType) =
+        member _.Type(state: NodesHotThreadsRequest, value: CoreTypes.ThreadType) =
             { state with Type = Some value }
 
         [<CustomOperation("sort")>]
-        member _.Sort(state: NodesHotThreadsRequest, value: Types.ThreadType) =
+        member _.Sort(state: NodesHotThreadsRequest, value: CoreTypes.ThreadType) =
             { state with Sort = Some value }
 
     let nodesHotThreadsRequest = NodesHotThreadsRequestBuilder()
@@ -162,24 +162,24 @@ module NodesOperations =
     module HotThreads =
         let withIgnoreIdleThreads (value: bool) (req: NodesHotThreadsRequest) =
             { req with IgnoreIdleThreads = Some value }
-        let withInterval (value: Types.Duration) (req: NodesHotThreadsRequest) =
+        let withInterval (value: CoreTypes.Duration) (req: NodesHotThreadsRequest) =
             { req with Interval = Some value }
-        let withSnapshots (value: Types.Long) (req: NodesHotThreadsRequest) =
+        let withSnapshots (value: CoreTypes.Long) (req: NodesHotThreadsRequest) =
             { req with Snapshots = Some value }
-        let withThreads (value: Types.Long) (req: NodesHotThreadsRequest) =
+        let withThreads (value: CoreTypes.Long) (req: NodesHotThreadsRequest) =
             { req with Threads = Some value }
-        let withTimeout (value: Types.Duration) (req: NodesHotThreadsRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: NodesHotThreadsRequest) =
             { req with Timeout = Some value }
-        let withType (value: Types.ThreadType) (req: NodesHotThreadsRequest) =
+        let withType (value: CoreTypes.ThreadType) (req: NodesHotThreadsRequest) =
             { req with Type = Some value }
-        let withSort (value: Types.ThreadType) (req: NodesHotThreadsRequest) =
+        let withSort (value: CoreTypes.ThreadType) (req: NodesHotThreadsRequest) =
             { req with Sort = Some value }
 
     type NodesInfoRequest = {
-        NodeId: Types.NodeIds
+        NodeId: CoreTypes.NodeIds
         Metric: NodesInfo.NodesInfoMetrics
         FlatSettings: bool option
-        Timeout: Types.Duration option
+        Timeout: CoreTypes.Duration option
     }
 
         with
@@ -213,7 +213,7 @@ module NodesOperations =
             }
 
         [<CustomOperation("nodeId")>]
-        member _.NodeId(state: NodesInfoRequest, value: Types.NodeIds) =
+        member _.NodeId(state: NodesInfoRequest, value: CoreTypes.NodeIds) =
             { state with NodeId = value }
 
         [<CustomOperation("metric")>]
@@ -225,7 +225,7 @@ module NodesOperations =
             { state with FlatSettings = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: NodesInfoRequest, value: Types.Duration) =
+        member _.Timeout(state: NodesInfoRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
     let nodesInfoRequest = NodesInfoRequestBuilder()
@@ -233,13 +233,13 @@ module NodesOperations =
     module Info =
         let withFlatSettings (value: bool) (req: NodesInfoRequest) =
             { req with FlatSettings = Some value }
-        let withTimeout (value: Types.Duration) (req: NodesInfoRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: NodesInfoRequest) =
             { req with Timeout = Some value }
 
     type NodesReloadSecureSettingsRequest = {
-        NodeId: Types.NodeIds
-        Timeout: Types.Duration option
-        SecureSettingsPassword: Types.Password option
+        NodeId: CoreTypes.NodeIds
+        Timeout: CoreTypes.Duration option
+        SecureSettingsPassword: CoreTypes.Password option
     }
 
         with
@@ -272,36 +272,36 @@ module NodesOperations =
             }
 
         [<CustomOperation("nodeId")>]
-        member _.NodeId(state: NodesReloadSecureSettingsRequest, value: Types.NodeIds) =
+        member _.NodeId(state: NodesReloadSecureSettingsRequest, value: CoreTypes.NodeIds) =
             { state with NodeId = value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: NodesReloadSecureSettingsRequest, value: Types.Duration) =
+        member _.Timeout(state: NodesReloadSecureSettingsRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("secureSettingsPassword")>]
-        member _.SecureSettingsPassword(state: NodesReloadSecureSettingsRequest, value: Types.Password) =
+        member _.SecureSettingsPassword(state: NodesReloadSecureSettingsRequest, value: CoreTypes.Password) =
             { state with SecureSettingsPassword = Some value }
 
     let nodesReloadSecureSettingsRequest = NodesReloadSecureSettingsRequestBuilder()
 
     module ReloadSecureSettings =
-        let withTimeout (value: Types.Duration) (req: NodesReloadSecureSettingsRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: NodesReloadSecureSettingsRequest) =
             { req with Timeout = Some value }
-        let withSecureSettingsPassword (value: Types.Password) (req: NodesReloadSecureSettingsRequest) =
+        let withSecureSettingsPassword (value: CoreTypes.Password) (req: NodesReloadSecureSettingsRequest) =
             { req with SecureSettingsPassword = Some value }
 
     type NodesStatsRequest = {
-        NodeId: Types.NodeIds
+        NodeId: CoreTypes.NodeIds
         Metric: NodesStats.NodeStatsMetrics
-        IndexMetric: Types.CommonStatsFlags
-        CompletionFields: Types.Fields option
-        FielddataFields: Types.Fields option
-        Fields: Types.Fields option
+        IndexMetric: CoreTypes.CommonStatsFlags
+        CompletionFields: CoreTypes.Fields option
+        FielddataFields: CoreTypes.Fields option
+        Fields: CoreTypes.Fields option
         Groups: bool option
         IncludeSegmentFileSizes: bool option
-        Level: Types.NodeStatsLevel option
-        Timeout: Types.Duration option
+        Level: CoreTypes.NodeStatsLevel option
+        Timeout: CoreTypes.Duration option
         Types: string list option
         IncludeUnloadedSegments: bool option
     }
@@ -352,7 +352,7 @@ module NodesOperations =
             }
 
         [<CustomOperation("nodeId")>]
-        member _.NodeId(state: NodesStatsRequest, value: Types.NodeIds) =
+        member _.NodeId(state: NodesStatsRequest, value: CoreTypes.NodeIds) =
             { state with NodeId = value }
 
         [<CustomOperation("metric")>]
@@ -360,19 +360,19 @@ module NodesOperations =
             { state with Metric = value }
 
         [<CustomOperation("indexMetric")>]
-        member _.IndexMetric(state: NodesStatsRequest, value: Types.CommonStatsFlags) =
+        member _.IndexMetric(state: NodesStatsRequest, value: CoreTypes.CommonStatsFlags) =
             { state with IndexMetric = value }
 
         [<CustomOperation("completionFields")>]
-        member _.CompletionFields(state: NodesStatsRequest, value: Types.Fields) =
+        member _.CompletionFields(state: NodesStatsRequest, value: CoreTypes.Fields) =
             { state with CompletionFields = Some value }
 
         [<CustomOperation("fielddataFields")>]
-        member _.FielddataFields(state: NodesStatsRequest, value: Types.Fields) =
+        member _.FielddataFields(state: NodesStatsRequest, value: CoreTypes.Fields) =
             { state with FielddataFields = Some value }
 
         [<CustomOperation("fields")>]
-        member _.Fields(state: NodesStatsRequest, value: Types.Fields) =
+        member _.Fields(state: NodesStatsRequest, value: CoreTypes.Fields) =
             { state with Fields = Some value }
 
         [<CustomOperation("groups")>]
@@ -384,11 +384,11 @@ module NodesOperations =
             { state with IncludeSegmentFileSizes = Some value }
 
         [<CustomOperation("level")>]
-        member _.Level(state: NodesStatsRequest, value: Types.NodeStatsLevel) =
+        member _.Level(state: NodesStatsRequest, value: CoreTypes.NodeStatsLevel) =
             { state with Level = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: NodesStatsRequest, value: Types.Duration) =
+        member _.Timeout(state: NodesStatsRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("types")>]
@@ -402,19 +402,19 @@ module NodesOperations =
     let nodesStatsRequest = NodesStatsRequestBuilder()
 
     module Stats =
-        let withCompletionFields (value: Types.Fields) (req: NodesStatsRequest) =
+        let withCompletionFields (value: CoreTypes.Fields) (req: NodesStatsRequest) =
             { req with CompletionFields = Some value }
-        let withFielddataFields (value: Types.Fields) (req: NodesStatsRequest) =
+        let withFielddataFields (value: CoreTypes.Fields) (req: NodesStatsRequest) =
             { req with FielddataFields = Some value }
-        let withFields (value: Types.Fields) (req: NodesStatsRequest) =
+        let withFields (value: CoreTypes.Fields) (req: NodesStatsRequest) =
             { req with Fields = Some value }
         let withGroups (value: bool) (req: NodesStatsRequest) =
             { req with Groups = Some value }
         let withIncludeSegmentFileSizes (value: bool) (req: NodesStatsRequest) =
             { req with IncludeSegmentFileSizes = Some value }
-        let withLevel (value: Types.NodeStatsLevel) (req: NodesStatsRequest) =
+        let withLevel (value: CoreTypes.NodeStatsLevel) (req: NodesStatsRequest) =
             { req with Level = Some value }
-        let withTimeout (value: Types.Duration) (req: NodesStatsRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: NodesStatsRequest) =
             { req with Timeout = Some value }
         let withTypes (value: string list) (req: NodesStatsRequest) =
             { req with Types = Some value }
@@ -422,9 +422,9 @@ module NodesOperations =
             { req with IncludeUnloadedSegments = Some value }
 
     type NodesUsageRequest = {
-        NodeId: Types.NodeIds
+        NodeId: CoreTypes.NodeIds
         Metric: NodesUsage.NodesUsageMetrics
-        Timeout: Types.Duration option
+        Timeout: CoreTypes.Duration option
     }
 
         with
@@ -456,7 +456,7 @@ module NodesOperations =
             }
 
         [<CustomOperation("nodeId")>]
-        member _.NodeId(state: NodesUsageRequest, value: Types.NodeIds) =
+        member _.NodeId(state: NodesUsageRequest, value: CoreTypes.NodeIds) =
             { state with NodeId = value }
 
         [<CustomOperation("metric")>]
@@ -464,12 +464,12 @@ module NodesOperations =
             { state with Metric = value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: NodesUsageRequest, value: Types.Duration) =
+        member _.Timeout(state: NodesUsageRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
     let nodesUsageRequest = NodesUsageRequestBuilder()
 
     module Usage =
-        let withTimeout (value: Types.Duration) (req: NodesUsageRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: NodesUsageRequest) =
             { req with Timeout = Some value }
 

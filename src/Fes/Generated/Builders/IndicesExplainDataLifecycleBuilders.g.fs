@@ -24,7 +24,7 @@ module IndicesExplainDataLifecycleBuilders =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: DataStreamLifecycleExplain, value: Types.IndexName) =
+        member _.Index(state: DataStreamLifecycleExplain, value: CoreTypes.IndexName) =
             { state with Index = value }
 
         [<CustomOperation("managedByLifecycle")>]
@@ -32,19 +32,19 @@ module IndicesExplainDataLifecycleBuilders =
             { state with ManagedByLifecycle = value }
 
         [<CustomOperation("indexCreationDateMillis")>]
-        member _.IndexCreationDateMillis(state: DataStreamLifecycleExplain, value: Types.EpochTime<Types.UnitMillis>) =
+        member _.IndexCreationDateMillis(state: DataStreamLifecycleExplain, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
             { state with IndexCreationDateMillis = Some value }
 
         [<CustomOperation("timeSinceIndexCreation")>]
-        member _.TimeSinceIndexCreation(state: DataStreamLifecycleExplain, value: Types.Duration) =
+        member _.TimeSinceIndexCreation(state: DataStreamLifecycleExplain, value: CoreTypes.Duration) =
             { state with TimeSinceIndexCreation = Some value }
 
         [<CustomOperation("rolloverDateMillis")>]
-        member _.RolloverDateMillis(state: DataStreamLifecycleExplain, value: Types.EpochTime<Types.UnitMillis>) =
+        member _.RolloverDateMillis(state: DataStreamLifecycleExplain, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
             { state with RolloverDateMillis = Some value }
 
         [<CustomOperation("timeSinceRollover")>]
-        member _.TimeSinceRollover(state: DataStreamLifecycleExplain, value: Types.Duration) =
+        member _.TimeSinceRollover(state: DataStreamLifecycleExplain, value: CoreTypes.Duration) =
             { state with TimeSinceRollover = Some value }
 
         [<CustomOperation("lifecycle")>]
@@ -52,7 +52,7 @@ module IndicesExplainDataLifecycleBuilders =
             { state with Lifecycle = Some value }
 
         [<CustomOperation("generationTime")>]
-        member _.GenerationTime(state: DataStreamLifecycleExplain, value: Types.Duration) =
+        member _.GenerationTime(state: DataStreamLifecycleExplain, value: CoreTypes.Duration) =
             { state with GenerationTime = Some value }
 
         [<CustomOperation("error")>]

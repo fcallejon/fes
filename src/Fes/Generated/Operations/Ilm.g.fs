@@ -12,9 +12,9 @@ open Fes
 module IlmOperations =
 
     type IlmDeleteLifecycleRequest = {
-        Policy: Types.Name
-        MasterTimeout: Types.Duration option
-        Timeout: Types.Duration option
+        Policy: CoreTypes.Name
+        MasterTimeout: CoreTypes.Duration option
+        Timeout: CoreTypes.Duration option
     }
 
         with
@@ -36,7 +36,7 @@ module IlmOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type IlmDeleteLifecycleResponse = Types.AcknowledgedResponseBase
+    type IlmDeleteLifecycleResponse = CoreTypes.AcknowledgedResponseBase
 
     type IlmDeleteLifecycleRequestBuilder() =
         member _.Yield(_: unit) : IlmDeleteLifecycleRequest =
@@ -47,30 +47,30 @@ module IlmOperations =
             }
 
         [<CustomOperation("policy")>]
-        member _.Policy(state: IlmDeleteLifecycleRequest, value: Types.Name) =
+        member _.Policy(state: IlmDeleteLifecycleRequest, value: CoreTypes.Name) =
             { state with Policy = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IlmDeleteLifecycleRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: IlmDeleteLifecycleRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: IlmDeleteLifecycleRequest, value: Types.Duration) =
+        member _.Timeout(state: IlmDeleteLifecycleRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
     let ilmDeleteLifecycleRequest = IlmDeleteLifecycleRequestBuilder()
 
     module DeleteLifecycle =
-        let withMasterTimeout (value: Types.Duration) (req: IlmDeleteLifecycleRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: IlmDeleteLifecycleRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: Types.Duration) (req: IlmDeleteLifecycleRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: IlmDeleteLifecycleRequest) =
             { req with Timeout = Some value }
 
     type IlmExplainLifecycleRequest = {
-        Index: Types.IndexName
+        Index: CoreTypes.IndexName
         OnlyErrors: bool option
         OnlyManaged: bool option
-        MasterTimeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
     }
 
         with
@@ -105,7 +105,7 @@ module IlmOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: IlmExplainLifecycleRequest, value: Types.IndexName) =
+        member _.Index(state: IlmExplainLifecycleRequest, value: CoreTypes.IndexName) =
             { state with Index = value }
 
         [<CustomOperation("onlyErrors")>]
@@ -117,7 +117,7 @@ module IlmOperations =
             { state with OnlyManaged = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IlmExplainLifecycleRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: IlmExplainLifecycleRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
     let ilmExplainLifecycleRequest = IlmExplainLifecycleRequestBuilder()
@@ -127,13 +127,13 @@ module IlmOperations =
             { req with OnlyErrors = Some value }
         let withOnlyManaged (value: bool) (req: IlmExplainLifecycleRequest) =
             { req with OnlyManaged = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: IlmExplainLifecycleRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: IlmExplainLifecycleRequest) =
             { req with MasterTimeout = Some value }
 
     type IlmGetLifecycleRequest = {
-        Policy: Types.Name
-        MasterTimeout: Types.Duration option
-        Timeout: Types.Duration option
+        Policy: CoreTypes.Name
+        MasterTimeout: CoreTypes.Duration option
+        Timeout: CoreTypes.Duration option
     }
 
         with
@@ -166,23 +166,23 @@ module IlmOperations =
             }
 
         [<CustomOperation("policy")>]
-        member _.Policy(state: IlmGetLifecycleRequest, value: Types.Name) =
+        member _.Policy(state: IlmGetLifecycleRequest, value: CoreTypes.Name) =
             { state with Policy = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IlmGetLifecycleRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: IlmGetLifecycleRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: IlmGetLifecycleRequest, value: Types.Duration) =
+        member _.Timeout(state: IlmGetLifecycleRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
     let ilmGetLifecycleRequest = IlmGetLifecycleRequestBuilder()
 
     module GetLifecycle =
-        let withMasterTimeout (value: Types.Duration) (req: IlmGetLifecycleRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: IlmGetLifecycleRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: Types.Duration) (req: IlmGetLifecycleRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: IlmGetLifecycleRequest) =
             { req with Timeout = Some value }
 
     type IlmGetStatusRequest = | IlmGetStatusRequest
@@ -209,7 +209,7 @@ module IlmOperations =
 
     type IlmMigrateToDataTiersRequest = {
         DryRun: bool option
-        MasterTimeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
         LegacyTemplateToDelete: string option
         NodeAttribute: string option
     }
@@ -250,7 +250,7 @@ module IlmOperations =
             { state with DryRun = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IlmMigrateToDataTiersRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: IlmMigrateToDataTiersRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("legacyTemplateToDelete")>]
@@ -266,7 +266,7 @@ module IlmOperations =
     module MigrateToDataTiers =
         let withDryRun (value: bool) (req: IlmMigrateToDataTiersRequest) =
             { req with DryRun = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: IlmMigrateToDataTiersRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: IlmMigrateToDataTiersRequest) =
             { req with MasterTimeout = Some value }
         let withLegacyTemplateToDelete (value: string) (req: IlmMigrateToDataTiersRequest) =
             { req with LegacyTemplateToDelete = Some value }
@@ -274,7 +274,7 @@ module IlmOperations =
             { req with NodeAttribute = Some value }
 
     type IlmMoveToStepRequest = {
-        Index: Types.IndexName
+        Index: CoreTypes.IndexName
         CurrentStep: IlmMoveToStep.StepKey
         NextStep: IlmMoveToStep.StepKey
     }
@@ -291,7 +291,7 @@ module IlmOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type IlmMoveToStepResponse = Types.AcknowledgedResponseBase
+    type IlmMoveToStepResponse = CoreTypes.AcknowledgedResponseBase
 
     type IlmMoveToStepRequestBuilder() =
         member _.Yield(_: unit) : IlmMoveToStepRequest =
@@ -302,7 +302,7 @@ module IlmOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: IlmMoveToStepRequest, value: Types.IndexName) =
+        member _.Index(state: IlmMoveToStepRequest, value: CoreTypes.IndexName) =
             { state with Index = value }
 
         [<CustomOperation("currentStep")>]
@@ -322,9 +322,9 @@ module IlmOperations =
             { req with NextStep = value }
 
     type IlmPutLifecycleRequest = {
-        Policy: Types.Name
-        MasterTimeout: Types.Duration option
-        Timeout: Types.Duration option
+        Policy: CoreTypes.Name
+        MasterTimeout: CoreTypes.Duration option
+        Timeout: CoreTypes.Duration option
         Policy: IlmTypes.Policy option
     }
 
@@ -348,7 +348,7 @@ module IlmOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type IlmPutLifecycleResponse = Types.AcknowledgedResponseBase
+    type IlmPutLifecycleResponse = CoreTypes.AcknowledgedResponseBase
 
     type IlmPutLifecycleRequestBuilder() =
         member _.Yield(_: unit) : IlmPutLifecycleRequest =
@@ -360,15 +360,15 @@ module IlmOperations =
             }
 
         [<CustomOperation("policy")>]
-        member _.Policy(state: IlmPutLifecycleRequest, value: Types.Name) =
+        member _.Policy(state: IlmPutLifecycleRequest, value: CoreTypes.Name) =
             { state with Policy = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IlmPutLifecycleRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: IlmPutLifecycleRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: IlmPutLifecycleRequest, value: Types.Duration) =
+        member _.Timeout(state: IlmPutLifecycleRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("policy")>]
@@ -378,15 +378,15 @@ module IlmOperations =
     let ilmPutLifecycleRequest = IlmPutLifecycleRequestBuilder()
 
     module PutLifecycle =
-        let withMasterTimeout (value: Types.Duration) (req: IlmPutLifecycleRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: IlmPutLifecycleRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: Types.Duration) (req: IlmPutLifecycleRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: IlmPutLifecycleRequest) =
             { req with Timeout = Some value }
         let withPolicy (value: IlmTypes.Policy) (req: IlmPutLifecycleRequest) =
             { req with Policy = Some value }
 
     type IlmRemovePolicyRequest = {
-        Index: Types.IndexName
+        Index: CoreTypes.IndexName
     }
 
         with
@@ -409,13 +409,13 @@ module IlmOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: IlmRemovePolicyRequest, value: Types.IndexName) =
+        member _.Index(state: IlmRemovePolicyRequest, value: CoreTypes.IndexName) =
             { state with Index = value }
 
     let ilmRemovePolicyRequest = IlmRemovePolicyRequestBuilder()
 
     type IlmRetryRequest = {
-        Index: Types.IndexName
+        Index: CoreTypes.IndexName
     }
 
         with
@@ -429,7 +429,7 @@ module IlmOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type IlmRetryResponse = Types.AcknowledgedResponseBase
+    type IlmRetryResponse = CoreTypes.AcknowledgedResponseBase
 
     type IlmRetryRequestBuilder() =
         member _.Yield(_: unit) : IlmRetryRequest =
@@ -438,14 +438,14 @@ module IlmOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: IlmRetryRequest, value: Types.IndexName) =
+        member _.Index(state: IlmRetryRequest, value: CoreTypes.IndexName) =
             { state with Index = value }
 
     let ilmRetryRequest = IlmRetryRequestBuilder()
 
     type IlmStartRequest = {
-        MasterTimeout: Types.Duration option
-        Timeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
+        Timeout: CoreTypes.Duration option
     }
 
         with
@@ -467,7 +467,7 @@ module IlmOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type IlmStartResponse = Types.AcknowledgedResponseBase
+    type IlmStartResponse = CoreTypes.AcknowledgedResponseBase
 
     type IlmStartRequestBuilder() =
         member _.Yield(_: unit) : IlmStartRequest =
@@ -477,24 +477,24 @@ module IlmOperations =
             }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IlmStartRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: IlmStartRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: IlmStartRequest, value: Types.Duration) =
+        member _.Timeout(state: IlmStartRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
     let ilmStartRequest = IlmStartRequestBuilder()
 
     module Start =
-        let withMasterTimeout (value: Types.Duration) (req: IlmStartRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: IlmStartRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: Types.Duration) (req: IlmStartRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: IlmStartRequest) =
             { req with Timeout = Some value }
 
     type IlmStopRequest = {
-        MasterTimeout: Types.Duration option
-        Timeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
+        Timeout: CoreTypes.Duration option
     }
 
         with
@@ -516,7 +516,7 @@ module IlmOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type IlmStopResponse = Types.AcknowledgedResponseBase
+    type IlmStopResponse = CoreTypes.AcknowledgedResponseBase
 
     type IlmStopRequestBuilder() =
         member _.Yield(_: unit) : IlmStopRequest =
@@ -526,18 +526,18 @@ module IlmOperations =
             }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IlmStopRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: IlmStopRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: IlmStopRequest, value: Types.Duration) =
+        member _.Timeout(state: IlmStopRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
     let ilmStopRequest = IlmStopRequestBuilder()
 
     module Stop =
-        let withMasterTimeout (value: Types.Duration) (req: IlmStopRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: IlmStopRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: Types.Duration) (req: IlmStopRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: IlmStopRequest) =
             { req with Timeout = Some value }
 

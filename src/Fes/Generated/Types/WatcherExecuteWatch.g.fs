@@ -15,7 +15,7 @@ module WatcherExecuteWatch =
         [<System.Text.Json.Serialization.JsonPropertyName("messages")>]
         Messages: string list
         [<System.Text.Json.Serialization.JsonPropertyName("metadata")>]
-        Metadata: Types.Metadata option
+        Metadata: CoreTypes.Metadata option
         [<System.Text.Json.Serialization.JsonPropertyName("node")>]
         Node: string
         [<System.Text.Json.Serialization.JsonPropertyName("result")>]
@@ -25,9 +25,9 @@ module WatcherExecuteWatch =
         [<System.Text.Json.Serialization.JsonPropertyName("trigger_event")>]
         TriggerEvent: WatcherTypes.TriggerEventResult
         [<System.Text.Json.Serialization.JsonPropertyName("user")>]
-        User: Types.Username
+        User: CoreTypes.Username
         [<System.Text.Json.Serialization.JsonPropertyName("watch_id")>]
-        WatchId: Types.Id
+        WatchId: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("status")>]
         Status: WatcherTypes.WatchStatus option
     }

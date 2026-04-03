@@ -32,7 +32,7 @@ module MlPreviewDataFrameAnalyticsBuilders =
             { state with ModelMemoryLimit = Some value }
 
         [<CustomOperation("maxNumThreads")>]
-        member _.MaxNumThreads(state: DataframePreviewConfig, value: Types.Integer) =
+        member _.MaxNumThreads(state: DataframePreviewConfig, value: CoreTypes.Integer) =
             { state with MaxNumThreads = Some value }
 
         [<CustomOperation("analyzedFields")>]

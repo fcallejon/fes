@@ -9,10 +9,10 @@ module IndicesGetDataLifecycleStats =
 
     type DataStreamStats = {
         [<System.Text.Json.Serialization.JsonPropertyName("backing_indices_in_error")>]
-        BackingIndicesInError: Types.Integer
+        BackingIndicesInError: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("backing_indices_in_total")>]
-        BackingIndicesInTotal: Types.Integer
+        BackingIndicesInTotal: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.DataStreamName
+        Name: CoreTypes.DataStreamName
     }
 

@@ -11,7 +11,7 @@ module CatAliases =
         [<System.Text.Json.Serialization.JsonPropertyName("alias")>]
         Alias: string option
         [<System.Text.Json.Serialization.JsonPropertyName("index")>]
-        Index: Types.IndexName option
+        Index: CoreTypes.IndexName option
         [<System.Text.Json.Serialization.JsonPropertyName("filter")>]
         Filter: string option
         [<System.Text.Json.Serialization.JsonPropertyName("routing.index")>]

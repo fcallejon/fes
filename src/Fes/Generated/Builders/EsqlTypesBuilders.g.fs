@@ -28,7 +28,7 @@ module EsqlTypesBuilders =
             { state with Indices = value }
 
         [<CustomOperation("took")>]
-        member _.Took(state: EsqlClusterDetails, value: Types.DurationValue<Types.UnitMillis>) =
+        member _.Took(state: EsqlClusterDetails, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
             { state with Took = Some value }
 
         [<CustomOperation("shards")>]
@@ -54,7 +54,7 @@ module EsqlTypesBuilders =
             }
 
         [<CustomOperation("took")>]
-        member _.Took(state: EsqlResult, value: Types.DurationValue<Types.UnitMillis>) =
+        member _.Took(state: EsqlResult, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
             { state with Took = Some value }
 
         [<CustomOperation("isPartial")>]
@@ -70,7 +70,7 @@ module EsqlTypesBuilders =
             { state with Columns = value }
 
         [<CustomOperation("values")>]
-        member _.Values(state: EsqlResult, value: Types.FieldValue list list) =
+        member _.Values(state: EsqlResult, value: CoreTypes.FieldValue list list) =
             { state with Values = value }
 
         [<CustomOperation("clusters")>]
@@ -93,19 +93,19 @@ module EsqlTypesBuilders =
             }
 
         [<CustomOperation("total")>]
-        member _.Total(state: EsqlShardInfo, value: Types.Integer) =
+        member _.Total(state: EsqlShardInfo, value: CoreTypes.Integer) =
             { state with Total = value }
 
         [<CustomOperation("successful")>]
-        member _.Successful(state: EsqlShardInfo, value: Types.Integer) =
+        member _.Successful(state: EsqlShardInfo, value: CoreTypes.Integer) =
             { state with Successful = Some value }
 
         [<CustomOperation("skipped")>]
-        member _.Skipped(state: EsqlShardInfo, value: Types.Integer) =
+        member _.Skipped(state: EsqlShardInfo, value: CoreTypes.Integer) =
             { state with Skipped = Some value }
 
         [<CustomOperation("failed")>]
-        member _.Failed(state: EsqlShardInfo, value: Types.Integer) =
+        member _.Failed(state: EsqlShardInfo, value: CoreTypes.Integer) =
             { state with Failed = Some value }
 
     let esqlShardInfo = EsqlShardInfoBuilder()

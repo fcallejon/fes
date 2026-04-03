@@ -24,69 +24,69 @@ module EsqlTypes =
 
     type EsqlShardInfo = {
         [<System.Text.Json.Serialization.JsonPropertyName("total")>]
-        Total: Types.Integer
+        Total: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("successful")>]
-        Successful: Types.Integer option
+        Successful: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("skipped")>]
-        Skipped: Types.Integer option
+        Skipped: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("failed")>]
-        Failed: Types.Integer option
+        Failed: CoreTypes.Integer option
     }
 
     type EsqlShardFailure = {
         [<System.Text.Json.Serialization.JsonPropertyName("shard")>]
-        Shard: Types.Integer
+        Shard: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("index")>]
-        Index: Types.IndexName option
+        Index: CoreTypes.IndexName option
         [<System.Text.Json.Serialization.JsonPropertyName("node")>]
-        Node: Types.NodeId option
+        Node: CoreTypes.NodeId option
         [<System.Text.Json.Serialization.JsonPropertyName("reason")>]
-        Reason: Types.ErrorCause
+        Reason: CoreTypes.ErrorCause
     }
 
     type EsqlClusterDetails = {
         [<System.Text.Json.Serialization.JsonPropertyName("status")>]
-        Status: EsqlTypes.EsqlClusterStatus
+        Status: EsqlClusterStatus
         [<System.Text.Json.Serialization.JsonPropertyName("indices")>]
         Indices: string
         [<System.Text.Json.Serialization.JsonPropertyName("took")>]
-        Took: Types.DurationValue<Types.UnitMillis> option
+        Took: CoreTypes.DurationValue<CoreTypes.UnitMillis> option
         [<System.Text.Json.Serialization.JsonPropertyName("_shards")>]
-        Shards: EsqlTypes.EsqlShardInfo option
+        Shards: EsqlShardInfo option
         [<System.Text.Json.Serialization.JsonPropertyName("failures")>]
-        Failures: EsqlTypes.EsqlShardFailure list option
+        Failures: EsqlShardFailure list option
     }
 
     type EsqlClusterInfo = {
         [<System.Text.Json.Serialization.JsonPropertyName("total")>]
-        Total: Types.Integer
+        Total: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("successful")>]
-        Successful: Types.Integer
+        Successful: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("running")>]
-        Running: Types.Integer
+        Running: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("skipped")>]
-        Skipped: Types.Integer
+        Skipped: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("partial")>]
-        Partial: Types.Integer
+        Partial: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("failed")>]
-        Failed: Types.Integer
+        Failed: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("details")>]
-        Details: Map<string, EsqlTypes.EsqlClusterDetails>
+        Details: Map<string, EsqlClusterDetails>
     }
 
     type EsqlResult = {
         [<System.Text.Json.Serialization.JsonPropertyName("took")>]
-        Took: Types.DurationValue<Types.UnitMillis> option
+        Took: CoreTypes.DurationValue<CoreTypes.UnitMillis> option
         [<System.Text.Json.Serialization.JsonPropertyName("is_partial")>]
         IsPartial: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("all_columns")>]
-        AllColumns: EsqlTypes.EsqlColumnInfo list option
+        AllColumns: EsqlColumnInfo list option
         [<System.Text.Json.Serialization.JsonPropertyName("columns")>]
-        Columns: EsqlTypes.EsqlColumnInfo list
+        Columns: EsqlColumnInfo list
         [<System.Text.Json.Serialization.JsonPropertyName("values")>]
-        Values: Types.FieldValue list list
+        Values: CoreTypes.FieldValue list list
         [<System.Text.Json.Serialization.JsonPropertyName("_clusters")>]
-        Clusters: EsqlTypes.EsqlClusterInfo option
+        Clusters: EsqlClusterInfo option
         [<System.Text.Json.Serialization.JsonPropertyName("profile")>]
         Profile: System.Text.Json.JsonElement option
     }
@@ -100,15 +100,15 @@ module EsqlTypes =
 
     [<RequireQualifiedAccess>]
     type SingleOrMultiValue =
-        | FieldValue of Types.FieldValue
-        | Array of Types.FieldValue list
+        | FieldValue of CoreTypes.FieldValue
+        | Array of CoreTypes.FieldValue list
 
-    type NamedValue = Map<string, EsqlTypes.SingleOrMultiValue>
+    type NamedValue = Map<string, SingleOrMultiValue>
 
     [<RequireQualifiedAccess>]
     type ESQLParams =
-        | Array of EsqlTypes.SingleOrMultiValue list
-        | Array of EsqlTypes.NamedValue list
+        | Array of SingleOrMultiValue list
+        | Array of NamedValue list
 
     /// A non-materialized ES|QL view.
     type ESQLView = {
@@ -131,8 +131,8 @@ module EsqlTypes =
 
     [<RequireQualifiedAccess>]
     type TableValuesIntegerValue =
-        | Integer of Types.Integer
-        | Array of Types.Integer list
+        | Integer of CoreTypes.Integer
+        | Array of CoreTypes.Integer list
 
     [<RequireQualifiedAccess>]
     type TableValuesKeywordValue =
@@ -141,18 +141,18 @@ module EsqlTypes =
 
     [<RequireQualifiedAccess>]
     type TableValuesLongValue =
-        | Long of Types.Long
-        | Array of Types.Long list
+        | Long of CoreTypes.Long
+        | Array of CoreTypes.Long list
 
     [<RequireQualifiedAccess>]
     type TableValuesLongDouble =
-        | Double of Types.Double
-        | Array of Types.Double list
+        | Double of CoreTypes.Double
+        | Array of CoreTypes.Double list
 
     [<RequireQualifiedAccess>]
     type TableValuesContainer =
-        | Integer of EsqlTypes.TableValuesIntegerValue list
-        | Keyword of EsqlTypes.TableValuesKeywordValue list
-        | Long of EsqlTypes.TableValuesLongValue list
-        | Double of EsqlTypes.TableValuesLongDouble list
+        | Integer of TableValuesIntegerValue list
+        | Keyword of TableValuesKeywordValue list
+        | Long of TableValuesLongValue list
+        | Double of TableValuesLongDouble list
 

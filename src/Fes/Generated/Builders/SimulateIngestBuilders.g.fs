@@ -23,11 +23,11 @@ module SimulateIngestBuilders =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: IngestDocumentSimulation, value: Types.Id) =
+        member _.Id(state: IngestDocumentSimulation, value: CoreTypes.Id) =
             { state with Id = value }
 
         [<CustomOperation("index")>]
-        member _.Index(state: IngestDocumentSimulation, value: Types.IndexName) =
+        member _.Index(state: IngestDocumentSimulation, value: CoreTypes.IndexName) =
             { state with Index = value }
 
         [<CustomOperation("source")>]
@@ -35,7 +35,7 @@ module SimulateIngestBuilders =
             { state with Source = value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: IngestDocumentSimulation, value: SpecUtils.Stringified<Types.VersionNumber>) =
+        member _.Version(state: IngestDocumentSimulation, value: CoreTypes.Stringified<CoreTypes.VersionNumber>) =
             { state with Version = value }
 
         [<CustomOperation("executedPipelines")>]
@@ -47,11 +47,11 @@ module SimulateIngestBuilders =
             { state with IgnoredFields = Some value }
 
         [<CustomOperation("error")>]
-        member _.Error(state: IngestDocumentSimulation, value: Types.ErrorCause) =
+        member _.Error(state: IngestDocumentSimulation, value: CoreTypes.ErrorCause) =
             { state with Error = Some value }
 
         [<CustomOperation("effectiveMapping")>]
-        member _.EffectiveMapping(state: IngestDocumentSimulation, value: TypesMapping.TypeMapping) =
+        member _.EffectiveMapping(state: IngestDocumentSimulation, value: CoreTypes.TypeMapping) =
             { state with EffectiveMapping = Some value }
 
     let ingestDocumentSimulation = IngestDocumentSimulationBuilder()

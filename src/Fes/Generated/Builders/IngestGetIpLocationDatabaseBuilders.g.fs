@@ -20,19 +20,19 @@ module IngestGetIpLocationDatabaseBuilders =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: DatabaseConfigurationMetadata, value: Types.Id) =
+        member _.Id(state: DatabaseConfigurationMetadata, value: CoreTypes.Id) =
             { state with Id = value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: DatabaseConfigurationMetadata, value: Types.VersionNumber) =
+        member _.Version(state: DatabaseConfigurationMetadata, value: CoreTypes.VersionNumber) =
             { state with Version = value }
 
         [<CustomOperation("modifiedDateMillis")>]
-        member _.ModifiedDateMillis(state: DatabaseConfigurationMetadata, value: Types.EpochTime<Types.UnitMillis>) =
+        member _.ModifiedDateMillis(state: DatabaseConfigurationMetadata, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
             { state with ModifiedDateMillis = Some value }
 
         [<CustomOperation("modifiedDate")>]
-        member _.ModifiedDate(state: DatabaseConfigurationMetadata, value: Types.EpochTime<Types.UnitMillis>) =
+        member _.ModifiedDate(state: DatabaseConfigurationMetadata, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
             { state with ModifiedDate = Some value }
 
         [<CustomOperation("database")>]

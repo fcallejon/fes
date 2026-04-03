@@ -11,15 +11,15 @@ module TextStructureTestGrokPattern =
         [<System.Text.Json.Serialization.JsonPropertyName("match")>]
         Match: string
         [<System.Text.Json.Serialization.JsonPropertyName("offset")>]
-        Offset: Types.Integer
+        Offset: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("length")>]
-        Length: Types.Integer
+        Length: CoreTypes.Integer
     }
 
     type MatchedText = {
         [<System.Text.Json.Serialization.JsonPropertyName("matched")>]
         Matched: bool
         [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
-        Fields: Map<string, TextStructureTestGrokPattern.MatchedField list> option
+        Fields: Map<string, MatchedField list> option
     }
 

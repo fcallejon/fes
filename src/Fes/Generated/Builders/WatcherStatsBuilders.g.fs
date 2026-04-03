@@ -33,7 +33,7 @@ module WatcherStatsBuilders =
             { state with QueuedWatches = Some value }
 
         [<CustomOperation("watchCount")>]
-        member _.WatchCount(state: WatcherNodeStats, value: Types.Long) =
+        member _.WatchCount(state: WatcherNodeStats, value: CoreTypes.Long) =
             { state with WatchCount = value }
 
         [<CustomOperation("watcherState")>]
@@ -41,7 +41,7 @@ module WatcherStatsBuilders =
             { state with WatcherState = value }
 
         [<CustomOperation("nodeId")>]
-        member _.NodeId(state: WatcherNodeStats, value: Types.Id) =
+        member _.NodeId(state: WatcherNodeStats, value: CoreTypes.Id) =
             { state with NodeId = value }
 
     let watcherNodeStats = WatcherNodeStatsBuilder()

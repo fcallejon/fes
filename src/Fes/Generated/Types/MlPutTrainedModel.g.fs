@@ -9,18 +9,18 @@ module MlPutTrainedModel =
 
     type Weights = {
         [<System.Text.Json.Serialization.JsonPropertyName("weights")>]
-        Weights: Types.Double
+        Weights: CoreTypes.Double
     }
 
     type AggregateOutput = {
         [<System.Text.Json.Serialization.JsonPropertyName("logistic_regression")>]
-        LogisticRegression: MlPutTrainedModel.Weights option
+        LogisticRegression: Weights option
         [<System.Text.Json.Serialization.JsonPropertyName("weighted_sum")>]
-        WeightedSum: MlPutTrainedModel.Weights option
+        WeightedSum: Weights option
         [<System.Text.Json.Serialization.JsonPropertyName("weighted_mode")>]
-        WeightedMode: MlPutTrainedModel.Weights option
+        WeightedMode: Weights option
         [<System.Text.Json.Serialization.JsonPropertyName("exponent")>]
-        Exponent: MlPutTrainedModel.Weights option
+        Exponent: Weights option
     }
 
     type FrequencyEncodingPreprocessor = {
@@ -29,7 +29,7 @@ module MlPutTrainedModel =
         [<System.Text.Json.Serialization.JsonPropertyName("feature_name")>]
         FeatureName: string
         [<System.Text.Json.Serialization.JsonPropertyName("frequency_map")>]
-        FrequencyMap: Map<string, Types.Double>
+        FrequencyMap: Map<string, CoreTypes.Double>
     }
 
     type OneHotEncodingPreprocessor = {
@@ -45,16 +45,16 @@ module MlPutTrainedModel =
         [<System.Text.Json.Serialization.JsonPropertyName("feature_name")>]
         FeatureName: string
         [<System.Text.Json.Serialization.JsonPropertyName("target_map")>]
-        TargetMap: Map<string, Types.Double>
+        TargetMap: Map<string, CoreTypes.Double>
         [<System.Text.Json.Serialization.JsonPropertyName("default_value")>]
-        DefaultValue: Types.Double
+        DefaultValue: CoreTypes.Double
     }
 
     [<RequireQualifiedAccess>]
     type Preprocessor =
-        | FrequencyEncoding of MlPutTrainedModel.FrequencyEncodingPreprocessor
-        | OneHotEncoding of MlPutTrainedModel.OneHotEncodingPreprocessor
-        | TargetMeanEncoding of MlPutTrainedModel.TargetMeanEncodingPreprocessor
+        | FrequencyEncoding of FrequencyEncodingPreprocessor
+        | OneHotEncoding of OneHotEncodingPreprocessor
+        | TargetMeanEncoding of TargetMeanEncodingPreprocessor
 
     type TrainedModelTreeNode = {
         [<System.Text.Json.Serialization.JsonPropertyName("decision_type")>]
@@ -62,19 +62,19 @@ module MlPutTrainedModel =
         [<System.Text.Json.Serialization.JsonPropertyName("default_left")>]
         DefaultLeft: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("leaf_value")>]
-        LeafValue: Types.Double option
+        LeafValue: CoreTypes.Double option
         [<System.Text.Json.Serialization.JsonPropertyName("left_child")>]
-        LeftChild: Types.Integer option
+        LeftChild: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("node_index")>]
-        NodeIndex: Types.Integer
+        NodeIndex: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("right_child")>]
-        RightChild: Types.Integer option
+        RightChild: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("split_feature")>]
-        SplitFeature: Types.Integer option
+        SplitFeature: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("split_gain")>]
-        SplitGain: Types.Integer option
+        SplitGain: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("threshold")>]
-        Threshold: Types.Double option
+        Threshold: CoreTypes.Double option
     }
 
     type TrainedModelTree = {
@@ -85,21 +85,21 @@ module MlPutTrainedModel =
         [<System.Text.Json.Serialization.JsonPropertyName("target_type")>]
         TargetType: string option
         [<System.Text.Json.Serialization.JsonPropertyName("tree_structure")>]
-        TreeStructure: MlPutTrainedModel.TrainedModelTreeNode list
+        TreeStructure: TrainedModelTreeNode list
     }
 
     type TrainedModel = {
         [<System.Text.Json.Serialization.JsonPropertyName("tree")>]
-        Tree: MlPutTrainedModel.TrainedModelTree option
+        Tree: TrainedModelTree option
         [<System.Text.Json.Serialization.JsonPropertyName("tree_node")>]
-        TreeNode: MlPutTrainedModel.TrainedModelTreeNode option
+        TreeNode: TrainedModelTreeNode option
         [<System.Text.Json.Serialization.JsonPropertyName("ensemble")>]
-        Ensemble: MlPutTrainedModel.Ensemble option
+        Ensemble: Ensemble option
     }
 
     and Ensemble = {
         [<System.Text.Json.Serialization.JsonPropertyName("aggregate_output")>]
-        AggregateOutput: MlPutTrainedModel.AggregateOutput option
+        AggregateOutput: AggregateOutput option
         [<System.Text.Json.Serialization.JsonPropertyName("classification_labels")>]
         ClassificationLabels: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("feature_names")>]
@@ -107,18 +107,18 @@ module MlPutTrainedModel =
         [<System.Text.Json.Serialization.JsonPropertyName("target_type")>]
         TargetType: string option
         [<System.Text.Json.Serialization.JsonPropertyName("trained_models")>]
-        TrainedModels: MlPutTrainedModel.TrainedModel list
+        TrainedModels: TrainedModel list
     }
 
     type Definition = {
         [<System.Text.Json.Serialization.JsonPropertyName("preprocessors")>]
-        Preprocessors: MlPutTrainedModel.Preprocessor list option
+        Preprocessors: Preprocessor list option
         [<System.Text.Json.Serialization.JsonPropertyName("trained_model")>]
-        TrainedModel: MlPutTrainedModel.TrainedModel
+        TrainedModel: TrainedModel
     }
 
     type Input = {
         [<System.Text.Json.Serialization.JsonPropertyName("field_names")>]
-        FieldNames: Types.Names
+        FieldNames: CoreTypes.Names
     }
 

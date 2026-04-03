@@ -41,7 +41,7 @@ module CatRecoveryBuilders =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: RecoveryRecord, value: Types.IndexName) =
+        member _.Index(state: RecoveryRecord, value: CoreTypes.IndexName) =
             { state with Index = Some value }
 
         [<CustomOperation("shard")>]
@@ -49,23 +49,23 @@ module CatRecoveryBuilders =
             { state with Shard = Some value }
 
         [<CustomOperation("startTime")>]
-        member _.StartTime(state: RecoveryRecord, value: Types.DateTime) =
+        member _.StartTime(state: RecoveryRecord, value: CoreTypes.DateTime) =
             { state with StartTime = Some value }
 
         [<CustomOperation("startTimeMillis")>]
-        member _.StartTimeMillis(state: RecoveryRecord, value: Types.EpochTime<Types.UnitMillis>) =
+        member _.StartTimeMillis(state: RecoveryRecord, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
             { state with StartTimeMillis = Some value }
 
         [<CustomOperation("stopTime")>]
-        member _.StopTime(state: RecoveryRecord, value: Types.DateTime) =
+        member _.StopTime(state: RecoveryRecord, value: CoreTypes.DateTime) =
             { state with StopTime = Some value }
 
         [<CustomOperation("stopTimeMillis")>]
-        member _.StopTimeMillis(state: RecoveryRecord, value: Types.EpochTime<Types.UnitMillis>) =
+        member _.StopTimeMillis(state: RecoveryRecord, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
             { state with StopTimeMillis = Some value }
 
         [<CustomOperation("time")>]
-        member _.Time(state: RecoveryRecord, value: Types.Duration) =
+        member _.Time(state: RecoveryRecord, value: CoreTypes.Duration) =
             { state with Time = Some value }
 
         [<CustomOperation("type'")>]
@@ -109,7 +109,7 @@ module CatRecoveryBuilders =
             { state with FilesRecovered = Some value }
 
         [<CustomOperation("filesPercent")>]
-        member _.FilesPercent(state: RecoveryRecord, value: Types.Percentage) =
+        member _.FilesPercent(state: RecoveryRecord, value: CoreTypes.Percentage) =
             { state with FilesPercent = Some value }
 
         [<CustomOperation("filesTotal")>]
@@ -125,7 +125,7 @@ module CatRecoveryBuilders =
             { state with BytesRecovered = Some value }
 
         [<CustomOperation("bytesPercent")>]
-        member _.BytesPercent(state: RecoveryRecord, value: Types.Percentage) =
+        member _.BytesPercent(state: RecoveryRecord, value: CoreTypes.Percentage) =
             { state with BytesPercent = Some value }
 
         [<CustomOperation("bytesTotal")>]
@@ -141,7 +141,7 @@ module CatRecoveryBuilders =
             { state with TranslogOpsRecovered = Some value }
 
         [<CustomOperation("translogOpsPercent")>]
-        member _.TranslogOpsPercent(state: RecoveryRecord, value: Types.Percentage) =
+        member _.TranslogOpsPercent(state: RecoveryRecord, value: CoreTypes.Percentage) =
             { state with TranslogOpsPercent = Some value }
 
     let recoveryRecord = RecoveryRecordBuilder()

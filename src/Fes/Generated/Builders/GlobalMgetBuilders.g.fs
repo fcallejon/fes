@@ -22,15 +22,15 @@ module GlobalMgetBuilders =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: Operation, value: Types.Id) =
+        member _.Id(state: Operation, value: CoreTypes.Id) =
             { state with Id = value }
 
         [<CustomOperation("index")>]
-        member _.Index(state: Operation, value: Types.IndexName) =
+        member _.Index(state: Operation, value: CoreTypes.IndexName) =
             { state with Index = Some value }
 
         [<CustomOperation("routing")>]
-        member _.Routing(state: Operation, value: Types.Routing) =
+        member _.Routing(state: Operation, value: CoreTypes.Routing) =
             { state with Routing = Some value }
 
         [<CustomOperation("source")>]
@@ -38,15 +38,15 @@ module GlobalMgetBuilders =
             { state with Source = Some value }
 
         [<CustomOperation("storedFields")>]
-        member _.StoredFields(state: Operation, value: Types.Fields) =
+        member _.StoredFields(state: Operation, value: CoreTypes.Fields) =
             { state with StoredFields = Some value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: Operation, value: Types.VersionNumber) =
+        member _.Version(state: Operation, value: CoreTypes.VersionNumber) =
             { state with Version = Some value }
 
         [<CustomOperation("versionType")>]
-        member _.VersionType(state: Operation, value: Types.VersionType) =
+        member _.VersionType(state: Operation, value: CoreTypes.VersionType) =
             { state with VersionType = Some value }
 
     let operation = OperationBuilder()

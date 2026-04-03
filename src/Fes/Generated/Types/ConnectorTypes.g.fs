@@ -11,7 +11,7 @@ module ConnectorTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
         Field: string
         [<System.Text.Json.Serialization.JsonPropertyName("value")>]
-        Value: Types.ScalarValue
+        Value: CoreTypes.ScalarValue
     }
 
     [<RequireQualifiedAccess>]
@@ -26,7 +26,7 @@ module ConnectorTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("label")>]
         Label: string
         [<System.Text.Json.Serialization.JsonPropertyName("value")>]
-        Value: Types.ScalarValue
+        Value: CoreTypes.ScalarValue
     }
 
     [<RequireQualifiedAccess>]
@@ -40,14 +40,14 @@ module ConnectorTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("constraint")>]
-        Constraint: Types.Double
+        Constraint: CoreTypes.Double
     }
 
     type GreaterThanValidation = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("constraint")>]
-        Constraint: Types.Double
+        Constraint: CoreTypes.Double
     }
 
     type ListTypeValidation = {
@@ -61,7 +61,7 @@ module ConnectorTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("constraint")>]
-        Constraint: Types.ScalarValue list
+        Constraint: CoreTypes.ScalarValue list
     }
 
     type RegexValidation = {
@@ -73,27 +73,27 @@ module ConnectorTypes =
 
     [<RequireQualifiedAccess>]
     type Validation =
-        | LessThanValidation of ConnectorTypes.LessThanValidation
-        | GreaterThanValidation of ConnectorTypes.GreaterThanValidation
-        | ListTypeValidation of ConnectorTypes.ListTypeValidation
-        | IncludedInValidation of ConnectorTypes.IncludedInValidation
-        | RegexValidation of ConnectorTypes.RegexValidation
+        | LessThanValidation of LessThanValidation
+        | GreaterThanValidation of GreaterThanValidation
+        | ListTypeValidation of ListTypeValidation
+        | IncludedInValidation of IncludedInValidation
+        | RegexValidation of RegexValidation
 
     type ConnectorConfigProperties = {
         [<System.Text.Json.Serialization.JsonPropertyName("category")>]
         Category: string option
         [<System.Text.Json.Serialization.JsonPropertyName("default_value")>]
-        DefaultValue: Types.ScalarValue
+        DefaultValue: CoreTypes.ScalarValue
         [<System.Text.Json.Serialization.JsonPropertyName("depends_on")>]
-        DependsOn: ConnectorTypes.Dependency list
+        DependsOn: Dependency list
         [<System.Text.Json.Serialization.JsonPropertyName("display")>]
-        Display: ConnectorTypes.DisplayType
+        Display: DisplayType
         [<System.Text.Json.Serialization.JsonPropertyName("label")>]
         Label: string
         [<System.Text.Json.Serialization.JsonPropertyName("options")>]
-        Options: ConnectorTypes.SelectOption list
+        Options: SelectOption list
         [<System.Text.Json.Serialization.JsonPropertyName("order")>]
-        Order: Types.Integer option
+        Order: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("placeholder")>]
         Placeholder: string option
         [<System.Text.Json.Serialization.JsonPropertyName("required")>]
@@ -103,20 +103,20 @@ module ConnectorTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("tooltip")>]
         Tooltip: string option option
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
-        Type: ConnectorTypes.ConnectorFieldType option
+        Type: ConnectorFieldType option
         [<System.Text.Json.Serialization.JsonPropertyName("ui_restrictions")>]
         UiRestrictions: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("validations")>]
-        Validations: ConnectorTypes.Validation list option
+        Validations: Validation list option
         [<System.Text.Json.Serialization.JsonPropertyName("value")>]
         Value: System.Text.Json.JsonElement
     }
 
-    type ConnectorConfiguration = Map<string, ConnectorTypes.ConnectorConfigProperties>
+    type ConnectorConfiguration = Map<string, ConnectorConfigProperties>
 
     type CustomSchedulingConfigurationOverrides = {
         [<System.Text.Json.Serialization.JsonPropertyName("max_crawl_depth")>]
-        MaxCrawlDepth: Types.Integer option
+        MaxCrawlDepth: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("sitemap_discovery_disabled")>]
         SitemapDiscoveryDisabled: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("domain_allowlist")>]
@@ -129,18 +129,18 @@ module ConnectorTypes =
 
     type CustomScheduling = {
         [<System.Text.Json.Serialization.JsonPropertyName("configuration_overrides")>]
-        ConfigurationOverrides: ConnectorTypes.CustomSchedulingConfigurationOverrides
+        ConfigurationOverrides: CustomSchedulingConfigurationOverrides
         [<System.Text.Json.Serialization.JsonPropertyName("enabled")>]
         Enabled: bool
         [<System.Text.Json.Serialization.JsonPropertyName("interval")>]
         Interval: string
         [<System.Text.Json.Serialization.JsonPropertyName("last_synced")>]
-        LastSynced: Types.DateTime option
+        LastSynced: CoreTypes.DateTime option
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
         Name: string
     }
 
-    type ConnectorCustomScheduling = Map<string, ConnectorTypes.CustomScheduling>
+    type ConnectorCustomScheduling = Map<string, CustomScheduling>
 
     type FeatureEnabled = {
         [<System.Text.Json.Serialization.JsonPropertyName("enabled")>]
@@ -149,27 +149,27 @@ module ConnectorTypes =
 
     type SyncRulesFeature = {
         [<System.Text.Json.Serialization.JsonPropertyName("advanced")>]
-        Advanced: ConnectorTypes.FeatureEnabled option
+        Advanced: FeatureEnabled option
         [<System.Text.Json.Serialization.JsonPropertyName("basic")>]
-        Basic: ConnectorTypes.FeatureEnabled option
+        Basic: FeatureEnabled option
     }
 
     type ConnectorFeatures = {
         [<System.Text.Json.Serialization.JsonPropertyName("document_level_security")>]
-        DocumentLevelSecurity: ConnectorTypes.FeatureEnabled option
+        DocumentLevelSecurity: FeatureEnabled option
         [<System.Text.Json.Serialization.JsonPropertyName("incremental_sync")>]
-        IncrementalSync: ConnectorTypes.FeatureEnabled option
+        IncrementalSync: FeatureEnabled option
         [<System.Text.Json.Serialization.JsonPropertyName("native_connector_api_keys")>]
-        NativeConnectorApiKeys: ConnectorTypes.FeatureEnabled option
+        NativeConnectorApiKeys: FeatureEnabled option
         [<System.Text.Json.Serialization.JsonPropertyName("sync_rules")>]
-        SyncRules: ConnectorTypes.SyncRulesFeature option
+        SyncRules: SyncRulesFeature option
     }
 
     type FilteringAdvancedSnippet = {
         [<System.Text.Json.Serialization.JsonPropertyName("created_at")>]
-        CreatedAt: Types.DateTime option
+        CreatedAt: CoreTypes.DateTime option
         [<System.Text.Json.Serialization.JsonPropertyName("updated_at")>]
-        UpdatedAt: Types.DateTime option
+        UpdatedAt: CoreTypes.DateTime option
         [<System.Text.Json.Serialization.JsonPropertyName("value")>]
         Value: System.Text.Json.JsonElement
     }
@@ -191,26 +191,26 @@ module ConnectorTypes =
 
     type FilteringRule = {
         [<System.Text.Json.Serialization.JsonPropertyName("created_at")>]
-        CreatedAt: Types.DateTime option
+        CreatedAt: CoreTypes.DateTime option
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
-        Field: Types.Field
+        Field: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("id")>]
-        Id: Types.Id
+        Id: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("order")>]
-        Order: Types.Integer
+        Order: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("policy")>]
-        Policy: ConnectorTypes.FilteringPolicy
+        Policy: FilteringPolicy
         [<System.Text.Json.Serialization.JsonPropertyName("rule")>]
-        Rule: ConnectorTypes.FilteringRuleRule
+        Rule: FilteringRuleRule
         [<System.Text.Json.Serialization.JsonPropertyName("updated_at")>]
-        UpdatedAt: Types.DateTime option
+        UpdatedAt: CoreTypes.DateTime option
         [<System.Text.Json.Serialization.JsonPropertyName("value")>]
         Value: string
     }
 
     type FilteringValidation = {
         [<System.Text.Json.Serialization.JsonPropertyName("ids")>]
-        Ids: Types.Id list
+        Ids: CoreTypes.Id list
         [<System.Text.Json.Serialization.JsonPropertyName("messages")>]
         Messages: string list
     }
@@ -223,27 +223,27 @@ module ConnectorTypes =
 
     type FilteringRulesValidation = {
         [<System.Text.Json.Serialization.JsonPropertyName("errors")>]
-        Errors: ConnectorTypes.FilteringValidation list
+        Errors: FilteringValidation list
         [<System.Text.Json.Serialization.JsonPropertyName("state")>]
-        State: ConnectorTypes.FilteringValidationState
+        State: FilteringValidationState
     }
 
     type FilteringRules = {
         [<System.Text.Json.Serialization.JsonPropertyName("advanced_snippet")>]
-        AdvancedSnippet: ConnectorTypes.FilteringAdvancedSnippet
+        AdvancedSnippet: FilteringAdvancedSnippet
         [<System.Text.Json.Serialization.JsonPropertyName("rules")>]
-        Rules: ConnectorTypes.FilteringRule list
+        Rules: FilteringRule list
         [<System.Text.Json.Serialization.JsonPropertyName("validation")>]
-        Validation: ConnectorTypes.FilteringRulesValidation
+        Validation: FilteringRulesValidation
     }
 
     type FilteringConfig = {
         [<System.Text.Json.Serialization.JsonPropertyName("active")>]
-        Active: ConnectorTypes.FilteringRules
+        Active: FilteringRules
         [<System.Text.Json.Serialization.JsonPropertyName("domain")>]
         Domain: string option
         [<System.Text.Json.Serialization.JsonPropertyName("draft")>]
-        Draft: ConnectorTypes.FilteringRules
+        Draft: FilteringRules
     }
 
     [<RequireQualifiedAccess>]
@@ -276,11 +276,11 @@ module ConnectorTypes =
 
     type SchedulingConfiguration = {
         [<System.Text.Json.Serialization.JsonPropertyName("access_control")>]
-        AccessControl: ConnectorTypes.ConnectorScheduling option
+        AccessControl: ConnectorScheduling option
         [<System.Text.Json.Serialization.JsonPropertyName("full")>]
-        Full: ConnectorTypes.ConnectorScheduling option
+        Full: ConnectorScheduling option
         [<System.Text.Json.Serialization.JsonPropertyName("incremental")>]
-        Incremental: ConnectorTypes.ConnectorScheduling option
+        Incremental: ConnectorScheduling option
     }
 
     [<RequireQualifiedAccess>]
@@ -297,9 +297,9 @@ module ConnectorTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("api_key_secret_id")>]
         ApiKeySecretId: string option
         [<System.Text.Json.Serialization.JsonPropertyName("configuration")>]
-        Configuration: ConnectorTypes.ConnectorConfiguration
+        Configuration: ConnectorConfiguration
         [<System.Text.Json.Serialization.JsonPropertyName("custom_scheduling")>]
-        CustomScheduling: ConnectorTypes.ConnectorCustomScheduling
+        CustomScheduling: ConnectorCustomScheduling
         [<System.Text.Json.Serialization.JsonPropertyName("deleted")>]
         Deleted: bool
         [<System.Text.Json.Serialization.JsonPropertyName("description")>]
@@ -307,13 +307,13 @@ module ConnectorTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("error")>]
         Error: string option option
         [<System.Text.Json.Serialization.JsonPropertyName("features")>]
-        Features: ConnectorTypes.ConnectorFeatures option
+        Features: ConnectorFeatures option
         [<System.Text.Json.Serialization.JsonPropertyName("filtering")>]
-        Filtering: ConnectorTypes.FilteringConfig list
+        Filtering: FilteringConfig list
         [<System.Text.Json.Serialization.JsonPropertyName("id")>]
-        Id: Types.Id option
+        Id: CoreTypes.Id option
         [<System.Text.Json.Serialization.JsonPropertyName("index_name")>]
-        IndexName: Types.IndexName option option
+        IndexName: CoreTypes.IndexName option option
         [<System.Text.Json.Serialization.JsonPropertyName("is_native")>]
         IsNative: bool
         [<System.Text.Json.Serialization.JsonPropertyName("language")>]
@@ -321,35 +321,35 @@ module ConnectorTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("last_access_control_sync_error")>]
         LastAccessControlSyncError: string option
         [<System.Text.Json.Serialization.JsonPropertyName("last_access_control_sync_scheduled_at")>]
-        LastAccessControlSyncScheduledAt: Types.DateTime option
+        LastAccessControlSyncScheduledAt: CoreTypes.DateTime option
         [<System.Text.Json.Serialization.JsonPropertyName("last_access_control_sync_status")>]
-        LastAccessControlSyncStatus: ConnectorTypes.SyncStatus option
+        LastAccessControlSyncStatus: SyncStatus option
         [<System.Text.Json.Serialization.JsonPropertyName("last_deleted_document_count")>]
-        LastDeletedDocumentCount: Types.Long option
+        LastDeletedDocumentCount: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("last_incremental_sync_scheduled_at")>]
-        LastIncrementalSyncScheduledAt: Types.DateTime option
+        LastIncrementalSyncScheduledAt: CoreTypes.DateTime option
         [<System.Text.Json.Serialization.JsonPropertyName("last_indexed_document_count")>]
-        LastIndexedDocumentCount: Types.Long option
+        LastIndexedDocumentCount: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("last_seen")>]
-        LastSeen: Types.DateTime option
+        LastSeen: CoreTypes.DateTime option
         [<System.Text.Json.Serialization.JsonPropertyName("last_sync_error")>]
         LastSyncError: string option
         [<System.Text.Json.Serialization.JsonPropertyName("last_sync_scheduled_at")>]
-        LastSyncScheduledAt: Types.DateTime option
+        LastSyncScheduledAt: CoreTypes.DateTime option
         [<System.Text.Json.Serialization.JsonPropertyName("last_sync_status")>]
-        LastSyncStatus: ConnectorTypes.SyncStatus option
+        LastSyncStatus: SyncStatus option
         [<System.Text.Json.Serialization.JsonPropertyName("last_synced")>]
-        LastSynced: Types.DateTime option
+        LastSynced: CoreTypes.DateTime option
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
         Name: string option
         [<System.Text.Json.Serialization.JsonPropertyName("pipeline")>]
-        Pipeline: ConnectorTypes.IngestPipelineParams option
+        Pipeline: IngestPipelineParams option
         [<System.Text.Json.Serialization.JsonPropertyName("scheduling")>]
-        Scheduling: ConnectorTypes.SchedulingConfiguration
+        Scheduling: SchedulingConfiguration
         [<System.Text.Json.Serialization.JsonPropertyName("service_type")>]
         ServiceType: string option
         [<System.Text.Json.Serialization.JsonPropertyName("status")>]
-        Status: ConnectorTypes.ConnectorStatus
+        Status: ConnectorStatus
         [<System.Text.Json.Serialization.JsonPropertyName("sync_cursor")>]
         SyncCursor: System.Text.Json.JsonElement option
         [<System.Text.Json.Serialization.JsonPropertyName("sync_now")>]
@@ -358,17 +358,17 @@ module ConnectorTypes =
 
     type SyncJobConnectorReference = {
         [<System.Text.Json.Serialization.JsonPropertyName("configuration")>]
-        Configuration: ConnectorTypes.ConnectorConfiguration
+        Configuration: ConnectorConfiguration
         [<System.Text.Json.Serialization.JsonPropertyName("filtering")>]
-        Filtering: ConnectorTypes.FilteringRules
+        Filtering: FilteringRules
         [<System.Text.Json.Serialization.JsonPropertyName("id")>]
-        Id: Types.Id
+        Id: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("index_name")>]
         IndexName: string
         [<System.Text.Json.Serialization.JsonPropertyName("language")>]
         Language: string option
         [<System.Text.Json.Serialization.JsonPropertyName("pipeline")>]
-        Pipeline: ConnectorTypes.IngestPipelineParams option
+        Pipeline: IngestPipelineParams option
         [<System.Text.Json.Serialization.JsonPropertyName("service_type")>]
         ServiceType: string
         [<System.Text.Json.Serialization.JsonPropertyName("sync_cursor")>]
@@ -388,39 +388,39 @@ module ConnectorTypes =
 
     type ConnectorSyncJob = {
         [<System.Text.Json.Serialization.JsonPropertyName("cancelation_requested_at")>]
-        CancelationRequestedAt: Types.DateTime option
+        CancelationRequestedAt: CoreTypes.DateTime option
         [<System.Text.Json.Serialization.JsonPropertyName("canceled_at")>]
-        CanceledAt: Types.DateTime option
+        CanceledAt: CoreTypes.DateTime option
         [<System.Text.Json.Serialization.JsonPropertyName("completed_at")>]
-        CompletedAt: Types.DateTime option
+        CompletedAt: CoreTypes.DateTime option
         [<System.Text.Json.Serialization.JsonPropertyName("connector")>]
-        Connector: ConnectorTypes.SyncJobConnectorReference
+        Connector: SyncJobConnectorReference
         [<System.Text.Json.Serialization.JsonPropertyName("created_at")>]
-        CreatedAt: Types.DateTime
+        CreatedAt: CoreTypes.DateTime
         [<System.Text.Json.Serialization.JsonPropertyName("deleted_document_count")>]
-        DeletedDocumentCount: Types.Long
+        DeletedDocumentCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("error")>]
         Error: string option
         [<System.Text.Json.Serialization.JsonPropertyName("id")>]
-        Id: Types.Id
+        Id: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("indexed_document_count")>]
-        IndexedDocumentCount: Types.Long
+        IndexedDocumentCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("indexed_document_volume")>]
-        IndexedDocumentVolume: Types.Long
+        IndexedDocumentVolume: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("job_type")>]
-        JobType: ConnectorTypes.SyncJobType
+        JobType: SyncJobType
         [<System.Text.Json.Serialization.JsonPropertyName("last_seen")>]
-        LastSeen: Types.DateTime option
+        LastSeen: CoreTypes.DateTime option
         [<System.Text.Json.Serialization.JsonPropertyName("metadata")>]
         Metadata: Map<string, System.Text.Json.JsonElement>
         [<System.Text.Json.Serialization.JsonPropertyName("started_at")>]
-        StartedAt: Types.DateTime option
+        StartedAt: CoreTypes.DateTime option
         [<System.Text.Json.Serialization.JsonPropertyName("status")>]
-        Status: ConnectorTypes.SyncStatus
+        Status: SyncStatus
         [<System.Text.Json.Serialization.JsonPropertyName("total_document_count")>]
-        TotalDocumentCount: Types.Long
+        TotalDocumentCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("trigger_method")>]
-        TriggerMethod: ConnectorTypes.SyncJobTriggerMethod
+        TriggerMethod: SyncJobTriggerMethod
         [<System.Text.Json.Serialization.JsonPropertyName("worker_hostname")>]
         WorkerHostname: string option
     }

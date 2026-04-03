@@ -11,15 +11,15 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("enabled")>]
         Enabled: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("max_number_of_allocations")>]
-        MaxNumberOfAllocations: Types.Integer option
+        MaxNumberOfAllocations: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("min_number_of_allocations")>]
-        MinNumberOfAllocations: Types.Integer option
+        MinNumberOfAllocations: CoreTypes.Integer option
     }
 
     /// This setting helps to minimize the number of rate limit errors returned from the service.
     type RateLimitSetting = {
         [<System.Text.Json.Serialization.JsonPropertyName("requests_per_minute")>]
-        RequestsPerMinute: Types.Integer option
+        RequestsPerMinute: CoreTypes.Integer option
     }
 
     type Ai21ServiceSettings = {
@@ -28,7 +28,7 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("api_key")>]
         ApiKey: string option
         [<System.Text.Json.Serialization.JsonPropertyName("rate_limit")>]
-        RateLimit: InferenceTypes.RateLimitSetting option
+        RateLimit: RateLimitSetting option
     }
 
     [<RequireQualifiedAccess>]
@@ -46,7 +46,7 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("host")>]
         Host: string
         [<System.Text.Json.Serialization.JsonPropertyName("rate_limit")>]
-        RateLimit: InferenceTypes.RateLimitSetting option
+        RateLimit: RateLimitSetting option
         [<System.Text.Json.Serialization.JsonPropertyName("service_id")>]
         ServiceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("workspace")>]
@@ -81,7 +81,7 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("region")>]
         Region: string
         [<System.Text.Json.Serialization.JsonPropertyName("rate_limit")>]
-        RateLimit: InferenceTypes.RateLimitSetting option
+        RateLimit: RateLimitSetting option
         [<System.Text.Json.Serialization.JsonPropertyName("secret_key")>]
         SecretKey: string
     }
@@ -92,13 +92,13 @@ module InferenceTypes =
 
     type AmazonBedrockTaskSettings = {
         [<System.Text.Json.Serialization.JsonPropertyName("max_new_tokens")>]
-        MaxNewTokens: Types.Integer option
+        MaxNewTokens: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("temperature")>]
-        Temperature: Types.Float option
+        Temperature: CoreTypes.Float option
         [<System.Text.Json.Serialization.JsonPropertyName("top_k")>]
-        TopK: Types.Float option
+        TopK: CoreTypes.Float option
         [<System.Text.Json.Serialization.JsonPropertyName("top_p")>]
-        TopP: Types.Float option
+        TopP: CoreTypes.Float option
     }
 
     [<RequireQualifiedAccess>]
@@ -118,7 +118,7 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("endpoint_name")>]
         EndpointName: string
         [<System.Text.Json.Serialization.JsonPropertyName("api")>]
-        Api: InferenceTypes.AmazonSageMakerApi
+        Api: AmazonSageMakerApi
         [<System.Text.Json.Serialization.JsonPropertyName("region")>]
         Region: string
         [<System.Text.Json.Serialization.JsonPropertyName("secret_key")>]
@@ -130,9 +130,9 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("inference_component_name")>]
         InferenceComponentName: string option
         [<System.Text.Json.Serialization.JsonPropertyName("batch_size")>]
-        BatchSize: Types.Integer option
+        BatchSize: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("dimensions")>]
-        Dimensions: Types.Integer option
+        Dimensions: CoreTypes.Integer option
     }
 
     [<RequireQualifiedAccess>]
@@ -158,7 +158,7 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("model_id")>]
         ModelId: string
         [<System.Text.Json.Serialization.JsonPropertyName("rate_limit")>]
-        RateLimit: InferenceTypes.RateLimitSetting option
+        RateLimit: RateLimitSetting option
     }
 
     [<RequireQualifiedAccess>]
@@ -167,13 +167,13 @@ module InferenceTypes =
 
     type AnthropicTaskSettings = {
         [<System.Text.Json.Serialization.JsonPropertyName("max_tokens")>]
-        MaxTokens: Types.Integer
+        MaxTokens: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("temperature")>]
-        Temperature: Types.Float option
+        Temperature: CoreTypes.Float option
         [<System.Text.Json.Serialization.JsonPropertyName("top_k")>]
-        TopK: Types.Integer option
+        TopK: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("top_p")>]
-        TopP: Types.Float option
+        TopP: CoreTypes.Float option
     }
 
     [<RequireQualifiedAccess>]
@@ -190,7 +190,7 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("provider")>]
         Provider: string
         [<System.Text.Json.Serialization.JsonPropertyName("rate_limit")>]
-        RateLimit: InferenceTypes.RateLimitSetting option
+        RateLimit: RateLimitSetting option
     }
 
     [<RequireQualifiedAccess>]
@@ -199,19 +199,19 @@ module InferenceTypes =
 
     type AzureAiStudioTaskSettings = {
         [<System.Text.Json.Serialization.JsonPropertyName("do_sample")>]
-        DoSample: Types.Float option
+        DoSample: CoreTypes.Float option
         [<System.Text.Json.Serialization.JsonPropertyName("max_new_tokens")>]
-        MaxNewTokens: Types.Integer option
+        MaxNewTokens: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("temperature")>]
-        Temperature: Types.Float option
+        Temperature: CoreTypes.Float option
         [<System.Text.Json.Serialization.JsonPropertyName("top_p")>]
-        TopP: Types.Float option
+        TopP: CoreTypes.Float option
         [<System.Text.Json.Serialization.JsonPropertyName("user")>]
         User: string option
         [<System.Text.Json.Serialization.JsonPropertyName("return_documents")>]
         ReturnDocuments: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("top_n")>]
-        TopN: Types.Integer option
+        TopN: CoreTypes.Integer option
     }
 
     [<RequireQualifiedAccess>]
@@ -234,7 +234,7 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("entra_id")>]
         EntraId: string option
         [<System.Text.Json.Serialization.JsonPropertyName("rate_limit")>]
-        RateLimit: InferenceTypes.RateLimitSetting option
+        RateLimit: RateLimitSetting option
         [<System.Text.Json.Serialization.JsonPropertyName("resource_name")>]
         ResourceName: string
         [<System.Text.Json.Serialization.JsonPropertyName("scopes")>]
@@ -267,7 +267,7 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("id")>]
         Id: string option
         [<System.Text.Json.Serialization.JsonPropertyName("index")>]
-        Index: Types.Integer option
+        Index: CoreTypes.Integer option
     }
 
     [<RequireQualifiedAccess>]
@@ -295,13 +295,13 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("api_key")>]
         ApiKey: string
         [<System.Text.Json.Serialization.JsonPropertyName("embedding_type")>]
-        EmbeddingType: InferenceTypes.CohereEmbeddingType option
+        EmbeddingType: CohereEmbeddingType option
         [<System.Text.Json.Serialization.JsonPropertyName("model_id")>]
         ModelId: string
         [<System.Text.Json.Serialization.JsonPropertyName("rate_limit")>]
-        RateLimit: InferenceTypes.RateLimitSetting option
+        RateLimit: RateLimitSetting option
         [<System.Text.Json.Serialization.JsonPropertyName("similarity")>]
-        Similarity: InferenceTypes.CohereSimilarityType option
+        Similarity: CohereSimilarityType option
     }
 
     [<RequireQualifiedAccess>]
@@ -316,13 +316,13 @@ module InferenceTypes =
 
     type CohereTaskSettings = {
         [<System.Text.Json.Serialization.JsonPropertyName("input_type")>]
-        InputType: InferenceTypes.CohereInputType
+        InputType: CohereInputType
         [<System.Text.Json.Serialization.JsonPropertyName("return_documents")>]
         ReturnDocuments: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("top_n")>]
-        TopN: Types.Integer option
+        TopN: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("truncate")>]
-        Truncate: InferenceTypes.CohereTruncateType option
+        Truncate: CohereTruncateType option
     }
 
     [<RequireQualifiedAccess>]
@@ -340,7 +340,7 @@ module InferenceTypes =
     /// Defines the completion result.
     type CompletionInferenceResult = {
         [<System.Text.Json.Serialization.JsonPropertyName("completion")>]
-        Completion: InferenceTypes.CompletionResult list
+        Completion: CompletionResult list
     }
 
     /// The completion tool function definition.
@@ -360,7 +360,7 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("function")>]
-        Function: InferenceTypes.CompletionToolFunction
+        Function: CompletionToolFunction
     }
 
     /// The tool choice function.
@@ -374,13 +374,13 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("function")>]
-        Function: InferenceTypes.CompletionToolChoiceFunction
+        Function: CompletionToolChoiceFunction
     }
 
     [<RequireQualifiedAccess>]
     type CompletionToolType =
         | String of string
-        | CompletionToolChoice of InferenceTypes.CompletionToolChoice
+        | CompletionToolChoice of CompletionToolChoice
 
     [<RequireQualifiedAccess>]
     type ContentType =
@@ -398,7 +398,7 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("url")>]
         Url: string
         [<System.Text.Json.Serialization.JsonPropertyName("detail")>]
-        Detail: InferenceTypes.ImageUrlDetail option
+        Detail: ImageUrlDetail option
     }
 
     type FileContent = {
@@ -411,13 +411,13 @@ module InferenceTypes =
     /// An object style representation of a single portion of a conversation.
     type ContentObject = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
-        Type: InferenceTypes.ContentType
+        Type: ContentType
         [<System.Text.Json.Serialization.JsonPropertyName("text")>]
         Text: string
         [<System.Text.Json.Serialization.JsonPropertyName("image_url")>]
-        ImageUrl: InferenceTypes.ImageUrl
+        ImageUrl: ImageUrl
         [<System.Text.Json.Serialization.JsonPropertyName("file")>]
-        File: InferenceTypes.FileContent
+        File: FileContent
     }
 
     type ContextualAIServiceSettings = {
@@ -426,7 +426,7 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("model_id")>]
         ModelId: string
         [<System.Text.Json.Serialization.JsonPropertyName("rate_limit")>]
-        RateLimit: InferenceTypes.RateLimitSetting option
+        RateLimit: RateLimitSetting option
     }
 
     [<RequireQualifiedAccess>]
@@ -439,7 +439,7 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("return_documents")>]
         ReturnDocuments: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("top_k")>]
-        TopK: Types.Integer option
+        TopK: CoreTypes.Integer option
     }
 
     type CustomRequestParams = {
@@ -463,17 +463,17 @@ module InferenceTypes =
 
     type CustomServiceSettings = {
         [<System.Text.Json.Serialization.JsonPropertyName("batch_size")>]
-        BatchSize: Types.Integer option
+        BatchSize: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("headers")>]
         Headers: Map<string, string> option
         [<System.Text.Json.Serialization.JsonPropertyName("input_type")>]
-        InputType: Map<InferenceTypes.CustomServiceInputType, string> option
+        InputType: Map<CustomServiceInputType, string> option
         [<System.Text.Json.Serialization.JsonPropertyName("query_parameters")>]
-        QueryParameters: InferenceTypes.CustomServiceQueryParameter list option
+        QueryParameters: CustomServiceQueryParameter list option
         [<System.Text.Json.Serialization.JsonPropertyName("request")>]
-        Request: InferenceTypes.CustomRequestParams
+        Request: CustomRequestParams
         [<System.Text.Json.Serialization.JsonPropertyName("response")>]
-        Response: InferenceTypes.CustomResponseParams
+        Response: CustomResponseParams
         [<System.Text.Json.Serialization.JsonPropertyName("secret_parameters")>]
         SecretParameters: Map<string, string>
         [<System.Text.Json.Serialization.JsonPropertyName("url")>]
@@ -487,14 +487,14 @@ module InferenceTypes =
     [<RequireQualifiedAccess>]
     type CustomTaskParameter =
         | String of string
-        | Integer of Types.Integer
-        | Double of Types.Double
-        | Float of Types.Float
+        | Integer of CoreTypes.Integer
+        | Double of CoreTypes.Double
+        | Float of CoreTypes.Float
         | Boolean of bool
 
     type CustomTaskSettings = {
         [<System.Text.Json.Serialization.JsonPropertyName("parameters")>]
-        Parameters: Map<string, InferenceTypes.CustomTaskParameter> option
+        Parameters: Map<string, CustomTaskParameter> option
     }
 
     [<RequireQualifiedAccess>]
@@ -524,38 +524,38 @@ module InferenceTypes =
     }
 
     /// Dense Embedding results containing bytes are represented as Dense
-    type DenseByteVector = Types.Byte list
+    type DenseByteVector = CoreTypes.Byte list
 
     /// The dense embedding result object for byte representation
     type DenseEmbeddingByteResult = {
         [<System.Text.Json.Serialization.JsonPropertyName("embedding")>]
-        Embedding: InferenceTypes.DenseByteVector
+        Embedding: DenseByteVector
     }
 
     /// Dense Embedding results are represented as Dense Vectors
-    type DenseVector = Types.Float list
+    type DenseVector = CoreTypes.Float list
 
     /// The dense embedding result object for float representation
     type DenseEmbeddingResult = {
         [<System.Text.Json.Serialization.JsonPropertyName("embedding")>]
-        Embedding: InferenceTypes.DenseVector
+        Embedding: DenseVector
     }
 
     type ElasticsearchServiceSettings = {
         [<System.Text.Json.Serialization.JsonPropertyName("adaptive_allocations")>]
-        AdaptiveAllocations: InferenceTypes.AdaptiveAllocations option
+        AdaptiveAllocations: AdaptiveAllocations option
         [<System.Text.Json.Serialization.JsonPropertyName("deployment_id")>]
         DeploymentId: string option
         [<System.Text.Json.Serialization.JsonPropertyName("model_id")>]
         ModelId: string
         [<System.Text.Json.Serialization.JsonPropertyName("num_allocations")>]
-        NumAllocations: Types.Integer option
+        NumAllocations: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("num_threads")>]
-        NumThreads: Types.Integer
+        NumThreads: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("long_document_strategy")>]
         LongDocumentStrategy: string option
         [<System.Text.Json.Serialization.JsonPropertyName("max_chunks_per_doc")>]
-        MaxChunksPerDoc: Types.Integer option
+        MaxChunksPerDoc: CoreTypes.Integer option
     }
 
     [<RequireQualifiedAccess>]
@@ -575,11 +575,11 @@ module InferenceTypes =
 
     type ElserServiceSettings = {
         [<System.Text.Json.Serialization.JsonPropertyName("adaptive_allocations")>]
-        AdaptiveAllocations: InferenceTypes.AdaptiveAllocations option
+        AdaptiveAllocations: AdaptiveAllocations option
         [<System.Text.Json.Serialization.JsonPropertyName("num_allocations")>]
-        NumAllocations: Types.Integer
+        NumAllocations: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("num_threads")>]
-        NumThreads: Types.Integer
+        NumThreads: CoreTypes.Integer
     }
 
     [<RequireQualifiedAccess>]
@@ -603,9 +603,9 @@ module InferenceTypes =
     /// An object containing the input data for the model to embed.
     type EmbeddingContentObjectContents = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
-        Type: InferenceTypes.EmbeddingContentType
+        Type: EmbeddingContentType
         [<System.Text.Json.Serialization.JsonPropertyName("format")>]
-        Format: InferenceTypes.EmbeddingContentFormat option
+        Format: EmbeddingContentFormat option
         [<System.Text.Json.Serialization.JsonPropertyName("value")>]
         Value: string
     }
@@ -613,21 +613,21 @@ module InferenceTypes =
     /// A wrapper object which contains the fields required to specify multimodal inputs
     type EmbeddingContentObject = {
         [<System.Text.Json.Serialization.JsonPropertyName("content")>]
-        Content: InferenceTypes.EmbeddingContentObjectContents
+        Content: EmbeddingContentObjectContents
     }
 
     /// Allows specifying multimodal inputs for the `embedding` task.
     [<RequireQualifiedAccess>]
     type EmbeddingContentInput =
-        | EmbeddingContentObject of InferenceTypes.EmbeddingContentObject
-        | Array of InferenceTypes.EmbeddingContentObject list
+        | EmbeddingContentObject of EmbeddingContentObject
+        | Array of EmbeddingContentObject list
 
     /// EmbeddingInferenceResult is an aggregation of mutually exclusive embeddings variants
     [<RequireQualifiedAccess>]
     type EmbeddingInferenceResult =
-        | EmbeddingsBytes of InferenceTypes.DenseEmbeddingByteResult list
-        | EmbeddingsBits of InferenceTypes.DenseEmbeddingByteResult list
-        | Embeddings of InferenceTypes.DenseEmbeddingResult list
+        | EmbeddingsBytes of DenseEmbeddingByteResult list
+        | EmbeddingsBits of DenseEmbeddingByteResult list
+        | Embeddings of DenseEmbeddingResult list
 
     /// Allows specifying text-only inputs for the `embedding` task.
     [<RequireQualifiedAccess>]
@@ -638,8 +638,8 @@ module InferenceTypes =
     /// Inference input.
     [<RequireQualifiedAccess>]
     type EmbeddingInput =
-        | EmbeddingStringInput of InferenceTypes.EmbeddingStringInput
-        | EmbeddingContentInput of InferenceTypes.EmbeddingContentInput
+        | EmbeddingStringInput of EmbeddingStringInput
+        | EmbeddingContentInput of EmbeddingContentInput
 
     /// The reasoning detail with encrypted reasoning data that may be redacted or protected.
     type EncryptedReasoningDetail = {
@@ -663,11 +663,11 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("url")>]
         Url: string option
         [<System.Text.Json.Serialization.JsonPropertyName("dimensions")>]
-        Dimensions: Types.Integer option
+        Dimensions: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("similarity")>]
-        Similarity: InferenceTypes.FireworksAISimilarityType option
+        Similarity: FireworksAISimilarityType option
         [<System.Text.Json.Serialization.JsonPropertyName("rate_limit")>]
-        RateLimit: InferenceTypes.RateLimitSetting option
+        RateLimit: RateLimitSetting option
     }
 
     [<RequireQualifiedAccess>]
@@ -697,7 +697,7 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("model_id")>]
         ModelId: string
         [<System.Text.Json.Serialization.JsonPropertyName("rate_limit")>]
-        RateLimit: InferenceTypes.RateLimitSetting option
+        RateLimit: RateLimitSetting option
     }
 
     [<RequireQualifiedAccess>]
@@ -716,7 +716,7 @@ module InferenceTypes =
 
     type GoogleVertexAIServiceSettings = {
         [<System.Text.Json.Serialization.JsonPropertyName("provider")>]
-        Provider: InferenceTypes.GoogleModelGardenProvider option
+        Provider: GoogleModelGardenProvider option
         [<System.Text.Json.Serialization.JsonPropertyName("url")>]
         Url: string option
         [<System.Text.Json.Serialization.JsonPropertyName("streaming_url")>]
@@ -728,13 +728,13 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("project_id")>]
         ProjectId: string option
         [<System.Text.Json.Serialization.JsonPropertyName("rate_limit")>]
-        RateLimit: InferenceTypes.RateLimitSetting option
+        RateLimit: RateLimitSetting option
         [<System.Text.Json.Serialization.JsonPropertyName("service_account_json")>]
         ServiceAccountJson: string
         [<System.Text.Json.Serialization.JsonPropertyName("dimensions")>]
-        Dimensions: Types.Integer option
+        Dimensions: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("max_batch_size")>]
-        MaxBatchSize: Types.Integer option
+        MaxBatchSize: CoreTypes.Integer option
     }
 
     [<RequireQualifiedAccess>]
@@ -743,18 +743,18 @@ module InferenceTypes =
 
     type ThinkingConfig = {
         [<System.Text.Json.Serialization.JsonPropertyName("thinking_budget")>]
-        ThinkingBudget: Types.Integer option
+        ThinkingBudget: CoreTypes.Integer option
     }
 
     type GoogleVertexAITaskSettings = {
         [<System.Text.Json.Serialization.JsonPropertyName("auto_truncate")>]
         AutoTruncate: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("top_n")>]
-        TopN: Types.Integer option
+        TopN: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("thinking_config")>]
-        ThinkingConfig: InferenceTypes.ThinkingConfig option
+        ThinkingConfig: ThinkingConfig option
         [<System.Text.Json.Serialization.JsonPropertyName("max_tokens")>]
-        MaxTokens: Types.Integer option
+        MaxTokens: CoreTypes.Integer option
     }
 
     [<RequireQualifiedAccess>]
@@ -770,7 +770,7 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("api_key")>]
         ApiKey: string option
         [<System.Text.Json.Serialization.JsonPropertyName("rate_limit")>]
-        RateLimit: InferenceTypes.RateLimitSetting option
+        RateLimit: RateLimitSetting option
     }
 
     [<RequireQualifiedAccess>]
@@ -785,7 +785,7 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("api_key")>]
         ApiKey: string
         [<System.Text.Json.Serialization.JsonPropertyName("rate_limit")>]
-        RateLimit: InferenceTypes.RateLimitSetting option
+        RateLimit: RateLimitSetting option
         [<System.Text.Json.Serialization.JsonPropertyName("url")>]
         Url: string
         [<System.Text.Json.Serialization.JsonPropertyName("model_id")>]
@@ -800,7 +800,7 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("return_documents")>]
         ReturnDocuments: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("top_n")>]
-        TopN: Types.Integer option
+        TopN: CoreTypes.Integer option
     }
 
     [<RequireQualifiedAccess>]
@@ -813,11 +813,11 @@ module InferenceTypes =
     /// Chunking configuration object
     type InferenceChunkingSettings = {
         [<System.Text.Json.Serialization.JsonPropertyName("max_chunk_size")>]
-        MaxChunkSize: Types.Integer option
+        MaxChunkSize: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("overlap")>]
-        Overlap: Types.Integer option
+        Overlap: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("sentence_overlap")>]
-        SentenceOverlap: Types.Integer option
+        SentenceOverlap: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("separator_group")>]
         SeparatorGroup: string option
         [<System.Text.Json.Serialization.JsonPropertyName("separators")>]
@@ -833,13 +833,13 @@ module InferenceTypes =
     /// Configuration options when storing the inference endpoint
     type InferenceEndpoint = {
         [<System.Text.Json.Serialization.JsonPropertyName("chunking_settings")>]
-        ChunkingSettings: InferenceTypes.InferenceChunkingSettings option
+        ChunkingSettings: InferenceChunkingSettings option
         [<System.Text.Json.Serialization.JsonPropertyName("service")>]
         Service: string
         [<System.Text.Json.Serialization.JsonPropertyName("service_settings")>]
-        ServiceSettings: InferenceTypes.ServiceSettings
+        ServiceSettings: ServiceSettings
         [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
-        TaskSettings: InferenceTypes.TaskSettings option
+        TaskSettings: TaskSettings option
     }
 
     [<RequireQualifiedAccess>]
@@ -856,7 +856,7 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("inference_id")>]
         InferenceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("task_type")>]
-        TaskType: InferenceTypes.TaskType
+        TaskType: TaskType
     }
 
     [<RequireQualifiedAccess>]
@@ -868,7 +868,7 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("inference_id")>]
         InferenceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("task_type")>]
-        TaskType: InferenceTypes.TaskTypeAi21
+        TaskType: TaskTypeAi21
     }
 
     [<RequireQualifiedAccess>]
@@ -882,7 +882,7 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("inference_id")>]
         InferenceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("task_type")>]
-        TaskType: InferenceTypes.TaskTypeAlibabaCloudAI
+        TaskType: TaskTypeAlibabaCloudAI
     }
 
     [<RequireQualifiedAccess>]
@@ -895,7 +895,7 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("inference_id")>]
         InferenceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("task_type")>]
-        TaskType: InferenceTypes.TaskTypeAmazonBedrock
+        TaskType: TaskTypeAmazonBedrock
     }
 
     [<RequireQualifiedAccess>]
@@ -910,7 +910,7 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("inference_id")>]
         InferenceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("task_type")>]
-        TaskType: InferenceTypes.TaskTypeAmazonSageMaker
+        TaskType: TaskTypeAmazonSageMaker
     }
 
     [<RequireQualifiedAccess>]
@@ -921,7 +921,7 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("inference_id")>]
         InferenceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("task_type")>]
-        TaskType: InferenceTypes.TaskTypeAnthropic
+        TaskType: TaskTypeAnthropic
     }
 
     [<RequireQualifiedAccess>]
@@ -934,7 +934,7 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("inference_id")>]
         InferenceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("task_type")>]
-        TaskType: InferenceTypes.TaskTypeAzureAIStudio
+        TaskType: TaskTypeAzureAIStudio
     }
 
     [<RequireQualifiedAccess>]
@@ -947,7 +947,7 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("inference_id")>]
         InferenceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("task_type")>]
-        TaskType: InferenceTypes.TaskTypeAzureOpenAI
+        TaskType: TaskTypeAzureOpenAI
     }
 
     [<RequireQualifiedAccess>]
@@ -960,7 +960,7 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("inference_id")>]
         InferenceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("task_type")>]
-        TaskType: InferenceTypes.TaskTypeCohere
+        TaskType: TaskTypeCohere
     }
 
     [<RequireQualifiedAccess>]
@@ -971,7 +971,7 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("inference_id")>]
         InferenceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("task_type")>]
-        TaskType: InferenceTypes.TaskTypeContextualAI
+        TaskType: TaskTypeContextualAI
     }
 
     [<RequireQualifiedAccess>]
@@ -985,7 +985,7 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("inference_id")>]
         InferenceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("task_type")>]
-        TaskType: InferenceTypes.TaskTypeCustom
+        TaskType: TaskTypeCustom
     }
 
     [<RequireQualifiedAccess>]
@@ -997,7 +997,7 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("inference_id")>]
         InferenceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("task_type")>]
-        TaskType: InferenceTypes.TaskTypeDeepSeek
+        TaskType: TaskTypeDeepSeek
     }
 
     [<RequireQualifiedAccess>]
@@ -1008,7 +1008,7 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("inference_id")>]
         InferenceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("task_type")>]
-        TaskType: InferenceTypes.TaskTypeELSER
+        TaskType: TaskTypeELSER
     }
 
     [<RequireQualifiedAccess>]
@@ -1021,7 +1021,7 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("inference_id")>]
         InferenceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("task_type")>]
-        TaskType: InferenceTypes.TaskTypeElasticsearch
+        TaskType: TaskTypeElasticsearch
     }
 
     [<RequireQualifiedAccess>]
@@ -1034,7 +1034,7 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("inference_id")>]
         InferenceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("task_type")>]
-        TaskType: InferenceTypes.TaskTypeFireworksAI
+        TaskType: TaskTypeFireworksAI
     }
 
     [<RequireQualifiedAccess>]
@@ -1046,7 +1046,7 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("inference_id")>]
         InferenceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("task_type")>]
-        TaskType: InferenceTypes.TaskTypeGoogleAIStudio
+        TaskType: TaskTypeGoogleAIStudio
     }
 
     [<RequireQualifiedAccess>]
@@ -1060,7 +1060,7 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("inference_id")>]
         InferenceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("task_type")>]
-        TaskType: InferenceTypes.TaskTypeGoogleVertexAI
+        TaskType: TaskTypeGoogleVertexAI
     }
 
     [<RequireQualifiedAccess>]
@@ -1071,7 +1071,7 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("inference_id")>]
         InferenceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("task_type")>]
-        TaskType: InferenceTypes.TaskTypeGroq
+        TaskType: TaskTypeGroq
     }
 
     [<RequireQualifiedAccess>]
@@ -1085,7 +1085,7 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("inference_id")>]
         InferenceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("task_type")>]
-        TaskType: InferenceTypes.TaskTypeHuggingFace
+        TaskType: TaskTypeHuggingFace
     }
 
     [<RequireQualifiedAccess>]
@@ -1098,7 +1098,7 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("inference_id")>]
         InferenceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("task_type")>]
-        TaskType: InferenceTypes.TaskTypeJinaAi
+        TaskType: TaskTypeJinaAi
     }
 
     [<RequireQualifiedAccess>]
@@ -1111,7 +1111,7 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("inference_id")>]
         InferenceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("task_type")>]
-        TaskType: InferenceTypes.TaskTypeLlama
+        TaskType: TaskTypeLlama
     }
 
     [<RequireQualifiedAccess>]
@@ -1124,7 +1124,7 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("inference_id")>]
         InferenceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("task_type")>]
-        TaskType: InferenceTypes.TaskTypeMistral
+        TaskType: TaskTypeMistral
     }
 
     [<RequireQualifiedAccess>]
@@ -1138,7 +1138,7 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("inference_id")>]
         InferenceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("task_type")>]
-        TaskType: InferenceTypes.TaskTypeNvidia
+        TaskType: TaskTypeNvidia
     }
 
     [<RequireQualifiedAccess>]
@@ -1151,7 +1151,7 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("inference_id")>]
         InferenceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("task_type")>]
-        TaskType: InferenceTypes.TaskTypeOpenAI
+        TaskType: TaskTypeOpenAI
     }
 
     [<RequireQualifiedAccess>]
@@ -1165,7 +1165,7 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("inference_id")>]
         InferenceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("task_type")>]
-        TaskType: InferenceTypes.TaskTypeOpenShiftAi
+        TaskType: TaskTypeOpenShiftAi
     }
 
     [<RequireQualifiedAccess>]
@@ -1177,7 +1177,7 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("inference_id")>]
         InferenceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("task_type")>]
-        TaskType: InferenceTypes.TaskTypeVoyageAI
+        TaskType: TaskTypeVoyageAI
     }
 
     [<RequireQualifiedAccess>]
@@ -1190,25 +1190,25 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("inference_id")>]
         InferenceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("task_type")>]
-        TaskType: InferenceTypes.TaskTypeWatsonx
+        TaskType: TaskTypeWatsonx
     }
 
     /// Sparse Embedding tokens are represented as a dictionary
-    type SparseVector = Map<string, Types.Float>
+    type SparseVector = Map<string, CoreTypes.Float>
 
     type SparseEmbeddingResult = {
         [<System.Text.Json.Serialization.JsonPropertyName("is_truncated")>]
         IsTruncated: bool
         [<System.Text.Json.Serialization.JsonPropertyName("embedding")>]
-        Embedding: InferenceTypes.SparseVector
+        Embedding: SparseVector
     }
 
     /// The rerank result object representing a single ranked document
     type RankedDocument = {
         [<System.Text.Json.Serialization.JsonPropertyName("index")>]
-        Index: Types.Integer
+        Index: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("relevance_score")>]
-        RelevanceScore: Types.Float
+        RelevanceScore: CoreTypes.Float
         [<System.Text.Json.Serialization.JsonPropertyName("text")>]
         Text: string option
     }
@@ -1216,15 +1216,15 @@ module InferenceTypes =
     /// InferenceResult is an aggregation of mutually exclusive variants
     [<RequireQualifiedAccess>]
     type InferenceResult =
-        | EmbeddingsBytes of InferenceTypes.DenseEmbeddingByteResult list
-        | EmbeddingsBits of InferenceTypes.DenseEmbeddingByteResult list
-        | Embeddings of InferenceTypes.DenseEmbeddingResult list
-        | TextEmbeddingBytes of InferenceTypes.DenseEmbeddingByteResult list
-        | TextEmbeddingBits of InferenceTypes.DenseEmbeddingByteResult list
-        | TextEmbedding of InferenceTypes.DenseEmbeddingResult list
-        | SparseEmbedding of InferenceTypes.SparseEmbeddingResult list
-        | Completion of InferenceTypes.CompletionResult list
-        | Rerank of InferenceTypes.RankedDocument list
+        | EmbeddingsBytes of DenseEmbeddingByteResult list
+        | EmbeddingsBits of DenseEmbeddingByteResult list
+        | Embeddings of DenseEmbeddingResult list
+        | TextEmbeddingBytes of DenseEmbeddingByteResult list
+        | TextEmbeddingBits of DenseEmbeddingByteResult list
+        | TextEmbedding of DenseEmbeddingResult list
+        | SparseEmbedding of SparseEmbeddingResult list
+        | Completion of CompletionResult list
+        | Rerank of RankedDocument list
 
     [<RequireQualifiedAccess>]
     type JinaAIElementType =
@@ -1244,13 +1244,13 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("model_id")>]
         ModelId: string
         [<System.Text.Json.Serialization.JsonPropertyName("rate_limit")>]
-        RateLimit: InferenceTypes.RateLimitSetting option
+        RateLimit: RateLimitSetting option
         [<System.Text.Json.Serialization.JsonPropertyName("similarity")>]
-        Similarity: InferenceTypes.JinaAISimilarityType option
+        Similarity: JinaAISimilarityType option
         [<System.Text.Json.Serialization.JsonPropertyName("dimensions")>]
-        Dimensions: Types.Integer option
+        Dimensions: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("element_type")>]
-        ElementType: InferenceTypes.JinaAIElementType option
+        ElementType: JinaAIElementType option
         [<System.Text.Json.Serialization.JsonPropertyName("multimodal_model")>]
         MultimodalModel: bool option
     }
@@ -1270,11 +1270,11 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("return_documents")>]
         ReturnDocuments: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("input_type")>]
-        InputType: InferenceTypes.JinaAITextEmbeddingTask option
+        InputType: JinaAITextEmbeddingTask option
         [<System.Text.Json.Serialization.JsonPropertyName("late_chunking")>]
         LateChunking: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("top_n")>]
-        TopN: Types.Integer option
+        TopN: CoreTypes.Integer option
     }
 
     [<RequireQualifiedAccess>]
@@ -1295,11 +1295,11 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("model_id")>]
         ModelId: string
         [<System.Text.Json.Serialization.JsonPropertyName("max_input_tokens")>]
-        MaxInputTokens: Types.Integer option
+        MaxInputTokens: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("similarity")>]
-        Similarity: InferenceTypes.LlamaSimilarityType option
+        Similarity: LlamaSimilarityType option
         [<System.Text.Json.Serialization.JsonPropertyName("rate_limit")>]
-        RateLimit: InferenceTypes.RateLimitSetting option
+        RateLimit: RateLimitSetting option
     }
 
     [<RequireQualifiedAccess>]
@@ -1315,7 +1315,7 @@ module InferenceTypes =
     [<RequireQualifiedAccess>]
     type MessageContent =
         | String of string
-        | Array of InferenceTypes.ContentObject list
+        | Array of ContentObject list
 
     /// The function that the model called.
     type ToolCallFunction = {
@@ -1328,9 +1328,9 @@ module InferenceTypes =
     /// A tool call generated by the model.
     type ToolCall = {
         [<System.Text.Json.Serialization.JsonPropertyName("id")>]
-        Id: Types.Id
+        Id: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("function")>]
-        Function: InferenceTypes.ToolCallFunction
+        Function: ToolCallFunction
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
     }
@@ -1356,35 +1356,35 @@ module InferenceTypes =
     /// Type representing the different types of reasoning details that can be included in the response from the model.
     [<RequireQualifiedAccess>]
     type ReasoningDetail =
-        | EncryptedReasoningDetail of InferenceTypes.EncryptedReasoningDetail
-        | SummaryReasoningDetail of InferenceTypes.SummaryReasoningDetail
-        | TextReasoningDetail of InferenceTypes.TextReasoningDetail
+        | EncryptedReasoningDetail of EncryptedReasoningDetail
+        | SummaryReasoningDetail of SummaryReasoningDetail
+        | TextReasoningDetail of TextReasoningDetail
 
     /// An object representing part of the conversation.
     type Message = {
         [<System.Text.Json.Serialization.JsonPropertyName("content")>]
-        Content: InferenceTypes.MessageContent option
+        Content: MessageContent option
         [<System.Text.Json.Serialization.JsonPropertyName("role")>]
         Role: string
         [<System.Text.Json.Serialization.JsonPropertyName("tool_call_id")>]
-        ToolCallId: Types.Id option
+        ToolCallId: CoreTypes.Id option
         [<System.Text.Json.Serialization.JsonPropertyName("tool_calls")>]
-        ToolCalls: InferenceTypes.ToolCall list option
+        ToolCalls: ToolCall list option
         [<System.Text.Json.Serialization.JsonPropertyName("reasoning")>]
         Reasoning: string option
         [<System.Text.Json.Serialization.JsonPropertyName("reasoning_details")>]
-        ReasoningDetails: InferenceTypes.ReasoningDetail list option
+        ReasoningDetails: ReasoningDetail list option
     }
 
     type MistralServiceSettings = {
         [<System.Text.Json.Serialization.JsonPropertyName("api_key")>]
         ApiKey: string
         [<System.Text.Json.Serialization.JsonPropertyName("max_input_tokens")>]
-        MaxInputTokens: Types.Integer option
+        MaxInputTokens: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("model")>]
         Model: string
         [<System.Text.Json.Serialization.JsonPropertyName("rate_limit")>]
-        RateLimit: InferenceTypes.RateLimitSetting option
+        RateLimit: RateLimitSetting option
     }
 
     [<RequireQualifiedAccess>]
@@ -1416,11 +1416,11 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("model_id")>]
         ModelId: string
         [<System.Text.Json.Serialization.JsonPropertyName("max_input_tokens")>]
-        MaxInputTokens: Types.Integer option
+        MaxInputTokens: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("similarity")>]
-        Similarity: InferenceTypes.NvidiaSimilarityType option
+        Similarity: NvidiaSimilarityType option
         [<System.Text.Json.Serialization.JsonPropertyName("rate_limit")>]
-        RateLimit: InferenceTypes.RateLimitSetting option
+        RateLimit: RateLimitSetting option
     }
 
     [<RequireQualifiedAccess>]
@@ -1429,9 +1429,9 @@ module InferenceTypes =
 
     type NvidiaTaskSettings = {
         [<System.Text.Json.Serialization.JsonPropertyName("input_type")>]
-        InputType: InferenceTypes.NvidiaInputType option
+        InputType: NvidiaInputType option
         [<System.Text.Json.Serialization.JsonPropertyName("truncate")>]
-        Truncate: InferenceTypes.CohereTruncateType option
+        Truncate: CohereTruncateType option
     }
 
     [<RequireQualifiedAccess>]
@@ -1451,15 +1451,15 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("api_key")>]
         ApiKey: string
         [<System.Text.Json.Serialization.JsonPropertyName("dimensions")>]
-        Dimensions: Types.Integer option
+        Dimensions: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("model_id")>]
         ModelId: string
         [<System.Text.Json.Serialization.JsonPropertyName("organization_id")>]
         OrganizationId: string option
         [<System.Text.Json.Serialization.JsonPropertyName("rate_limit")>]
-        RateLimit: InferenceTypes.RateLimitSetting option
+        RateLimit: RateLimitSetting option
         [<System.Text.Json.Serialization.JsonPropertyName("similarity")>]
-        Similarity: InferenceTypes.OpenAISimilarityType option
+        Similarity: OpenAISimilarityType option
         [<System.Text.Json.Serialization.JsonPropertyName("url")>]
         Url: string option
     }
@@ -1495,11 +1495,11 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("model_id")>]
         ModelId: string option
         [<System.Text.Json.Serialization.JsonPropertyName("max_input_tokens")>]
-        MaxInputTokens: Types.Integer option
+        MaxInputTokens: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("similarity")>]
-        Similarity: InferenceTypes.OpenShiftAiSimilarityType option
+        Similarity: OpenShiftAiSimilarityType option
         [<System.Text.Json.Serialization.JsonPropertyName("rate_limit")>]
-        RateLimit: InferenceTypes.RateLimitSetting option
+        RateLimit: RateLimitSetting option
     }
 
     [<RequireQualifiedAccess>]
@@ -1510,7 +1510,7 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("return_documents")>]
         ReturnDocuments: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("top_n")>]
-        TopN: Types.Integer option
+        TopN: CoreTypes.Integer option
     }
 
     [<RequireQualifiedAccess>]
@@ -1538,73 +1538,73 @@ module InferenceTypes =
     /// The reasoning configuration to use for the completion request.
     type Reasoning = {
         [<System.Text.Json.Serialization.JsonPropertyName("effort")>]
-        Effort: InferenceTypes.ReasoningEffort option
+        Effort: ReasoningEffort option
         [<System.Text.Json.Serialization.JsonPropertyName("enabled")>]
         Enabled: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("exclude")>]
         Exclude: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("summary")>]
-        Summary: InferenceTypes.ReasoningSummary option
+        Summary: ReasoningSummary option
     }
 
     type RequestChatCompletion = {
         [<System.Text.Json.Serialization.JsonPropertyName("messages")>]
-        Messages: InferenceTypes.Message list
+        Messages: Message list
         [<System.Text.Json.Serialization.JsonPropertyName("model")>]
         Model: string option
         [<System.Text.Json.Serialization.JsonPropertyName("max_completion_tokens")>]
-        MaxCompletionTokens: Types.Long option
+        MaxCompletionTokens: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("reasoning")>]
-        Reasoning: InferenceTypes.Reasoning option
+        Reasoning: Reasoning option
         [<System.Text.Json.Serialization.JsonPropertyName("stop")>]
         Stop: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("temperature")>]
-        Temperature: Types.Float option
+        Temperature: CoreTypes.Float option
         [<System.Text.Json.Serialization.JsonPropertyName("tool_choice")>]
-        ToolChoice: InferenceTypes.CompletionToolType option
+        ToolChoice: CompletionToolType option
         [<System.Text.Json.Serialization.JsonPropertyName("tools")>]
-        Tools: InferenceTypes.CompletionTool list option
+        Tools: CompletionTool list option
         [<System.Text.Json.Serialization.JsonPropertyName("top_p")>]
-        TopP: Types.Float option
+        TopP: CoreTypes.Float option
     }
 
     type RequestEmbedding = {
         [<System.Text.Json.Serialization.JsonPropertyName("input")>]
-        Input: InferenceTypes.EmbeddingInput
+        Input: EmbeddingInput
         [<System.Text.Json.Serialization.JsonPropertyName("input_type")>]
         InputType: string option
         [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
-        TaskSettings: InferenceTypes.TaskSettings option
+        TaskSettings: TaskSettings option
     }
 
     /// Defines the response for a rerank request.
     type RerankedInferenceResult = {
         [<System.Text.Json.Serialization.JsonPropertyName("rerank")>]
-        Rerank: InferenceTypes.RankedDocument list
+        Rerank: RankedDocument list
     }
 
     /// The response format for the sparse embedding request.
     type SparseEmbeddingInferenceResult = {
         [<System.Text.Json.Serialization.JsonPropertyName("sparse_embedding")>]
-        SparseEmbedding: InferenceTypes.SparseEmbeddingResult list
+        SparseEmbedding: SparseEmbeddingResult list
     }
 
     /// TextEmbeddingInferenceResult is an aggregation of mutually exclusive text_embedding variants
     [<RequireQualifiedAccess>]
     type TextEmbeddingInferenceResult =
-        | TextEmbeddingBytes of InferenceTypes.DenseEmbeddingByteResult list
-        | TextEmbeddingBits of InferenceTypes.DenseEmbeddingByteResult list
-        | TextEmbedding of InferenceTypes.DenseEmbeddingResult list
+        | TextEmbeddingBytes of DenseEmbeddingByteResult list
+        | TextEmbeddingBits of DenseEmbeddingByteResult list
+        | TextEmbedding of DenseEmbeddingResult list
 
     type VoyageAIServiceSettings = {
         [<System.Text.Json.Serialization.JsonPropertyName("dimensions")>]
-        Dimensions: Types.Integer option
+        Dimensions: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("model_id")>]
         ModelId: string
         [<System.Text.Json.Serialization.JsonPropertyName("rate_limit")>]
-        RateLimit: InferenceTypes.RateLimitSetting option
+        RateLimit: RateLimitSetting option
         [<System.Text.Json.Serialization.JsonPropertyName("embedding_type")>]
-        EmbeddingType: Types.Float option
+        EmbeddingType: CoreTypes.Float option
     }
 
     [<RequireQualifiedAccess>]
@@ -1617,7 +1617,7 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("return_documents")>]
         ReturnDocuments: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("top_k")>]
-        TopK: Types.Integer option
+        TopK: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("truncation")>]
         Truncation: bool option
     }
@@ -1637,7 +1637,7 @@ module InferenceTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("project_id")>]
         ProjectId: string
         [<System.Text.Json.Serialization.JsonPropertyName("rate_limit")>]
-        RateLimit: InferenceTypes.RateLimitSetting option
+        RateLimit: RateLimitSetting option
         [<System.Text.Json.Serialization.JsonPropertyName("url")>]
         Url: string
     }

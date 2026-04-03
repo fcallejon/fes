@@ -16,21 +16,21 @@ module MigrationGetFeatureUpgradeStatus =
 
     type MigrationFeatureIndexInfo = {
         [<System.Text.Json.Serialization.JsonPropertyName("index")>]
-        Index: Types.IndexName
+        Index: CoreTypes.IndexName
         [<System.Text.Json.Serialization.JsonPropertyName("version")>]
-        Version: Types.VersionString
+        Version: CoreTypes.VersionString
         [<System.Text.Json.Serialization.JsonPropertyName("failure_cause")>]
-        FailureCause: Types.ErrorCause option
+        FailureCause: CoreTypes.ErrorCause option
     }
 
     type MigrationFeature = {
         [<System.Text.Json.Serialization.JsonPropertyName("feature_name")>]
         FeatureName: string
         [<System.Text.Json.Serialization.JsonPropertyName("minimum_index_version")>]
-        MinimumIndexVersion: Types.VersionString
+        MinimumIndexVersion: CoreTypes.VersionString
         [<System.Text.Json.Serialization.JsonPropertyName("migration_status")>]
-        MigrationStatus: MigrationGetFeatureUpgradeStatus.MigrationStatus
+        MigrationStatus: MigrationStatus
         [<System.Text.Json.Serialization.JsonPropertyName("indices")>]
-        Indices: MigrationGetFeatureUpgradeStatus.MigrationFeatureIndexInfo list
+        Indices: MigrationFeatureIndexInfo list
     }
 

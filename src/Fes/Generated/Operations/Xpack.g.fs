@@ -70,7 +70,7 @@ module XpackOperations =
             { req with Human = Some value }
 
     type XpackUsageRequest = {
-        MasterTimeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
     }
 
         with
@@ -100,12 +100,12 @@ module XpackOperations =
             }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: XpackUsageRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: XpackUsageRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
     let xpackUsageRequest = XpackUsageRequestBuilder()
 
     module Usage =
-        let withMasterTimeout (value: Types.Duration) (req: XpackUsageRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: XpackUsageRequest) =
             { req with MasterTimeout = Some value }
 

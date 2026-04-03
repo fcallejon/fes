@@ -9,36 +9,36 @@ module GraphTypes =
 
     type Connection = {
         [<System.Text.Json.Serialization.JsonPropertyName("doc_count")>]
-        DocCount: Types.Long
+        DocCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("source")>]
-        Source: Types.Long
+        Source: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("target")>]
-        Target: Types.Long
+        Target: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("weight")>]
-        Weight: Types.Double
+        Weight: CoreTypes.Double
     }
 
     type SampleDiversity = {
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
-        Field: Types.Field
+        Field: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("max_docs_per_value")>]
-        MaxDocsPerValue: Types.Integer
+        MaxDocsPerValue: CoreTypes.Integer
     }
 
     type ExploreControls = {
         [<System.Text.Json.Serialization.JsonPropertyName("sample_diversity")>]
-        SampleDiversity: GraphTypes.SampleDiversity option
+        SampleDiversity: SampleDiversity option
         [<System.Text.Json.Serialization.JsonPropertyName("sample_size")>]
-        SampleSize: Types.Integer option
+        SampleSize: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("timeout")>]
-        Timeout: Types.Duration option
+        Timeout: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("use_significance")>]
         UseSignificance: bool
     }
 
     type VertexInclude = {
         [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
-        Boost: Types.Double option
+        Boost: CoreTypes.Double option
         [<System.Text.Json.Serialization.JsonPropertyName("term")>]
         Term: string
     }
@@ -47,34 +47,34 @@ module GraphTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("exclude")>]
         Exclude: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
-        Field: Types.Field
+        Field: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("include")>]
-        Include: GraphTypes.VertexInclude list option
+        Include: VertexInclude list option
         [<System.Text.Json.Serialization.JsonPropertyName("min_doc_count")>]
-        MinDocCount: Types.Long option
+        MinDocCount: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("shard_min_doc_count")>]
-        ShardMinDocCount: Types.Long option
+        ShardMinDocCount: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("size")>]
-        Size: Types.Integer option
+        Size: CoreTypes.Integer option
     }
 
     type Hop = {
         [<System.Text.Json.Serialization.JsonPropertyName("connections")>]
-        Connections: GraphTypes.Hop option
+        Connections: Hop option
         [<System.Text.Json.Serialization.JsonPropertyName("query")>]
-        Query: TypesQueryDsl.QueryContainer option
+        Query: CoreTypes.QueryContainer option
         [<System.Text.Json.Serialization.JsonPropertyName("vertices")>]
-        Vertices: GraphTypes.VertexDefinition list
+        Vertices: VertexDefinition list
     }
 
     type Vertex = {
         [<System.Text.Json.Serialization.JsonPropertyName("depth")>]
-        Depth: Types.Long
+        Depth: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
-        Field: Types.Field
+        Field: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("term")>]
         Term: string
         [<System.Text.Json.Serialization.JsonPropertyName("weight")>]
-        Weight: Types.Double
+        Weight: CoreTypes.Double
     }
 

@@ -20,11 +20,11 @@ module IndicesPutIndexTemplateBuilders =
             }
 
         [<CustomOperation("aliases")>]
-        member _.Aliases(state: IndexTemplateMapping, value: Map<Types.IndexName, IndicesTypes.Alias>) =
+        member _.Aliases(state: IndexTemplateMapping, value: Map<CoreTypes.IndexName, IndicesTypes.Alias>) =
             { state with Aliases = Some value }
 
         [<CustomOperation("mappings")>]
-        member _.Mappings(state: IndexTemplateMapping, value: TypesMapping.TypeMapping) =
+        member _.Mappings(state: IndexTemplateMapping, value: CoreTypes.TypeMapping) =
             { state with Mappings = Some value }
 
         [<CustomOperation("settings")>]

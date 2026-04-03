@@ -17,132 +17,132 @@ module ClusterStats =
         [<System.Text.Json.Serialization.JsonPropertyName("transport.compress")>]
         TransportCompress: string
         [<System.Text.Json.Serialization.JsonPropertyName("status")>]
-        Status: Types.HealthStatus
+        Status: CoreTypes.HealthStatus
         [<System.Text.Json.Serialization.JsonPropertyName("version")>]
-        Version: Types.VersionString list
+        Version: CoreTypes.VersionString list
         [<System.Text.Json.Serialization.JsonPropertyName("nodes_count")>]
-        NodesCount: Types.Integer
+        NodesCount: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("shards_count")>]
-        ShardsCount: Types.Integer
+        ShardsCount: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("indices_count")>]
-        IndicesCount: Types.Integer
+        IndicesCount: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("indices_total_size_in_bytes")>]
-        IndicesTotalSizeInBytes: Types.Long
+        IndicesTotalSizeInBytes: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("indices_total_size")>]
         IndicesTotalSize: string option
         [<System.Text.Json.Serialization.JsonPropertyName("max_heap_in_bytes")>]
-        MaxHeapInBytes: Types.Long
+        MaxHeapInBytes: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("max_heap")>]
         MaxHeap: string option
         [<System.Text.Json.Serialization.JsonPropertyName("mem_total_in_bytes")>]
-        MemTotalInBytes: Types.Long
+        MemTotalInBytes: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("mem_total")>]
         MemTotal: string option
     }
 
     type CCSUsageTimeValue = {
         [<System.Text.Json.Serialization.JsonPropertyName("max")>]
-        Max: Types.DurationValue<Types.UnitMillis>
+        Max: CoreTypes.DurationValue<CoreTypes.UnitMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("avg")>]
-        Avg: Types.DurationValue<Types.UnitMillis>
+        Avg: CoreTypes.DurationValue<CoreTypes.UnitMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("p90")>]
-        P90: Types.DurationValue<Types.UnitMillis>
+        P90: CoreTypes.DurationValue<CoreTypes.UnitMillis>
     }
 
     type CCSUsageClusterStats = {
         [<System.Text.Json.Serialization.JsonPropertyName("total")>]
-        Total: Types.Integer
+        Total: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("skipped")>]
-        Skipped: Types.Integer
+        Skipped: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("took")>]
-        Took: ClusterStats.CCSUsageTimeValue
+        Took: CCSUsageTimeValue
     }
 
     type CCSUsageStats = {
         [<System.Text.Json.Serialization.JsonPropertyName("total")>]
-        Total: Types.Integer
+        Total: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("success")>]
-        Success: Types.Integer
+        Success: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("skipped")>]
-        Skipped: Types.Integer
+        Skipped: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("took")>]
-        Took: ClusterStats.CCSUsageTimeValue
+        Took: CCSUsageTimeValue
         [<System.Text.Json.Serialization.JsonPropertyName("took_mrt_true")>]
-        TookMrtTrue: ClusterStats.CCSUsageTimeValue option
+        TookMrtTrue: CCSUsageTimeValue option
         [<System.Text.Json.Serialization.JsonPropertyName("took_mrt_false")>]
-        TookMrtFalse: ClusterStats.CCSUsageTimeValue option
+        TookMrtFalse: CCSUsageTimeValue option
         [<System.Text.Json.Serialization.JsonPropertyName("remotes_per_search_max")>]
-        RemotesPerSearchMax: Types.Integer
+        RemotesPerSearchMax: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("remotes_per_search_avg")>]
-        RemotesPerSearchAvg: Types.Double
+        RemotesPerSearchAvg: CoreTypes.Double
         [<System.Text.Json.Serialization.JsonPropertyName("failure_reasons")>]
-        FailureReasons: Map<string, Types.Integer>
+        FailureReasons: Map<string, CoreTypes.Integer>
         [<System.Text.Json.Serialization.JsonPropertyName("features")>]
-        Features: Map<string, Types.Integer>
+        Features: Map<string, CoreTypes.Integer>
         [<System.Text.Json.Serialization.JsonPropertyName("clients")>]
-        Clients: Map<string, Types.Integer>
+        Clients: Map<string, CoreTypes.Integer>
         [<System.Text.Json.Serialization.JsonPropertyName("clusters")>]
-        Clusters: Map<string, ClusterStats.CCSUsageClusterStats>
+        Clusters: Map<string, CCSUsageClusterStats>
     }
 
     type CCSStats = {
         [<System.Text.Json.Serialization.JsonPropertyName("clusters")>]
-        Clusters: Map<string, ClusterStats.RemoteClusterInfo> option
+        Clusters: Map<string, RemoteClusterInfo> option
         [<System.Text.Json.Serialization.JsonPropertyName("_search")>]
-        Search: ClusterStats.CCSUsageStats
+        Search: CCSUsageStats
         [<System.Text.Json.Serialization.JsonPropertyName("_esql")>]
-        Esql: ClusterStats.CCSUsageStats option
+        Esql: CCSUsageStats option
     }
 
     type FieldTypes = {
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.Name
+        Name: CoreTypes.Name
         [<System.Text.Json.Serialization.JsonPropertyName("count")>]
-        Count: Types.Integer
+        Count: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("index_count")>]
-        IndexCount: Types.Integer
+        IndexCount: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("indexed_vector_count")>]
-        IndexedVectorCount: Types.Integer option
+        IndexedVectorCount: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("indexed_vector_dim_max")>]
-        IndexedVectorDimMax: Types.Integer option
+        IndexedVectorDimMax: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("indexed_vector_dim_min")>]
-        IndexedVectorDimMin: Types.Integer option
+        IndexedVectorDimMin: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("script_count")>]
-        ScriptCount: Types.Integer option
+        ScriptCount: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("vector_index_type_count")>]
-        VectorIndexTypeCount: Map<Types.Name, Types.Integer> option
+        VectorIndexTypeCount: Map<CoreTypes.Name, CoreTypes.Integer> option
         [<System.Text.Json.Serialization.JsonPropertyName("vector_similarity_type_count")>]
-        VectorSimilarityTypeCount: Map<Types.Name, Types.Integer> option
+        VectorSimilarityTypeCount: Map<CoreTypes.Name, CoreTypes.Integer> option
         [<System.Text.Json.Serialization.JsonPropertyName("vector_element_type_count")>]
-        VectorElementTypeCount: Map<Types.Name, Types.Integer> option
+        VectorElementTypeCount: Map<CoreTypes.Name, CoreTypes.Integer> option
     }
 
     type SynonymsStats = {
         [<System.Text.Json.Serialization.JsonPropertyName("count")>]
-        Count: Types.Integer
+        Count: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("index_count")>]
-        IndexCount: Types.Integer
+        IndexCount: CoreTypes.Integer
     }
 
     type CharFilterTypes = {
         [<System.Text.Json.Serialization.JsonPropertyName("analyzer_types")>]
-        AnalyzerTypes: ClusterStats.FieldTypes list
+        AnalyzerTypes: FieldTypes list
         [<System.Text.Json.Serialization.JsonPropertyName("built_in_analyzers")>]
-        BuiltInAnalyzers: ClusterStats.FieldTypes list
+        BuiltInAnalyzers: FieldTypes list
         [<System.Text.Json.Serialization.JsonPropertyName("built_in_char_filters")>]
-        BuiltInCharFilters: ClusterStats.FieldTypes list
+        BuiltInCharFilters: FieldTypes list
         [<System.Text.Json.Serialization.JsonPropertyName("built_in_filters")>]
-        BuiltInFilters: ClusterStats.FieldTypes list
+        BuiltInFilters: FieldTypes list
         [<System.Text.Json.Serialization.JsonPropertyName("built_in_tokenizers")>]
-        BuiltInTokenizers: ClusterStats.FieldTypes list
+        BuiltInTokenizers: FieldTypes list
         [<System.Text.Json.Serialization.JsonPropertyName("char_filter_types")>]
-        CharFilterTypes: ClusterStats.FieldTypes list
+        CharFilterTypes: FieldTypes list
         [<System.Text.Json.Serialization.JsonPropertyName("filter_types")>]
-        FilterTypes: ClusterStats.FieldTypes list
+        FilterTypes: FieldTypes list
         [<System.Text.Json.Serialization.JsonPropertyName("tokenizer_types")>]
-        TokenizerTypes: ClusterStats.FieldTypes list
+        TokenizerTypes: FieldTypes list
         [<System.Text.Json.Serialization.JsonPropertyName("synonyms")>]
-        Synonyms: Map<Types.Name, ClusterStats.SynonymsStats>
+        Synonyms: Map<CoreTypes.Name, SynonymsStats>
     }
 
     type ClusterFileSystem = {
@@ -153,43 +153,43 @@ module ClusterStats =
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string option
         [<System.Text.Json.Serialization.JsonPropertyName("available_in_bytes")>]
-        AvailableInBytes: Types.Long option
+        AvailableInBytes: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("available")>]
-        Available: Types.ByteSize option
+        Available: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("free_in_bytes")>]
-        FreeInBytes: Types.Long option
+        FreeInBytes: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("free")>]
-        Free: Types.ByteSize option
+        Free: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("total_in_bytes")>]
-        TotalInBytes: Types.Long option
+        TotalInBytes: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("total")>]
-        Total: Types.ByteSize option
+        Total: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("low_watermark_free_space")>]
-        LowWatermarkFreeSpace: Types.ByteSize option
+        LowWatermarkFreeSpace: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("low_watermark_free_space_in_bytes")>]
-        LowWatermarkFreeSpaceInBytes: Types.Long option
+        LowWatermarkFreeSpaceInBytes: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("high_watermark_free_space")>]
-        HighWatermarkFreeSpace: Types.ByteSize option
+        HighWatermarkFreeSpace: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("high_watermark_free_space_in_bytes")>]
-        HighWatermarkFreeSpaceInBytes: Types.Long option
+        HighWatermarkFreeSpaceInBytes: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("flood_stage_free_space")>]
-        FloodStageFreeSpace: Types.ByteSize option
+        FloodStageFreeSpace: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("flood_stage_free_space_in_bytes")>]
-        FloodStageFreeSpaceInBytes: Types.Long option
+        FloodStageFreeSpaceInBytes: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("frozen_flood_stage_free_space")>]
-        FrozenFloodStageFreeSpace: Types.ByteSize option
+        FrozenFloodStageFreeSpace: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("frozen_flood_stage_free_space_in_bytes")>]
-        FrozenFloodStageFreeSpaceInBytes: Types.Long option
+        FrozenFloodStageFreeSpaceInBytes: CoreTypes.Long option
     }
 
     type ExtendedTextSimilarityRetrieverUsage = {
         [<System.Text.Json.Serialization.JsonPropertyName("chunk_rescorer")>]
-        ChunkRescorer: Types.Long option
+        ChunkRescorer: CoreTypes.Long option
     }
 
     type ExtendedRetrieversSearchUsage = {
         [<System.Text.Json.Serialization.JsonPropertyName("text_similarity_reranker")>]
-        TextSimilarityReranker: ClusterStats.ExtendedTextSimilarityRetrieverUsage option
+        TextSimilarityReranker: ExtendedTextSimilarityRetrieverUsage option
     }
 
     [<RequireQualifiedAccess>]
@@ -202,299 +202,299 @@ module ClusterStats =
 
     type ExtendedSectionSearchUsage = {
         [<System.Text.Json.Serialization.JsonPropertyName("sort")>]
-        Sort: Map<ClusterStats.SortType, Types.Long> option
+        Sort: Map<SortType, CoreTypes.Long> option
     }
 
     type ExtendedSearchUsage = {
         [<System.Text.Json.Serialization.JsonPropertyName("retrievers")>]
-        Retrievers: ClusterStats.ExtendedRetrieversSearchUsage option
+        Retrievers: ExtendedRetrieversSearchUsage option
         [<System.Text.Json.Serialization.JsonPropertyName("section")>]
-        Section: ClusterStats.ExtendedSectionSearchUsage option
+        Section: ExtendedSectionSearchUsage option
     }
 
     type SearchUsageStats = {
         [<System.Text.Json.Serialization.JsonPropertyName("total")>]
-        Total: Types.Long
+        Total: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("queries")>]
-        Queries: Map<Types.Name, Types.Long>
+        Queries: Map<CoreTypes.Name, CoreTypes.Long>
         [<System.Text.Json.Serialization.JsonPropertyName("rescorers")>]
-        Rescorers: Map<Types.Name, Types.Long>
+        Rescorers: Map<CoreTypes.Name, CoreTypes.Long>
         [<System.Text.Json.Serialization.JsonPropertyName("sections")>]
-        Sections: Map<Types.Name, Types.Long>
+        Sections: Map<CoreTypes.Name, CoreTypes.Long>
         [<System.Text.Json.Serialization.JsonPropertyName("retrievers")>]
-        Retrievers: Map<Types.Name, Types.Long>
+        Retrievers: Map<CoreTypes.Name, CoreTypes.Long>
         [<System.Text.Json.Serialization.JsonPropertyName("extended")>]
-        Extended: ClusterStats.ExtendedSearchUsage
+        Extended: ExtendedSearchUsage
     }
 
     type ClusterShardMetrics = {
         [<System.Text.Json.Serialization.JsonPropertyName("avg")>]
-        Avg: Types.Double
+        Avg: CoreTypes.Double
         [<System.Text.Json.Serialization.JsonPropertyName("max")>]
-        Max: Types.Double
+        Max: CoreTypes.Double
         [<System.Text.Json.Serialization.JsonPropertyName("min")>]
-        Min: Types.Double
+        Min: CoreTypes.Double
     }
 
     type ClusterIndicesShardsIndex = {
         [<System.Text.Json.Serialization.JsonPropertyName("primaries")>]
-        Primaries: ClusterStats.ClusterShardMetrics
+        Primaries: ClusterShardMetrics
         [<System.Text.Json.Serialization.JsonPropertyName("replication")>]
-        Replication: ClusterStats.ClusterShardMetrics
+        Replication: ClusterShardMetrics
         [<System.Text.Json.Serialization.JsonPropertyName("shards")>]
-        Shards: ClusterStats.ClusterShardMetrics
+        Shards: ClusterShardMetrics
     }
 
     /// Contains statistics about shards assigned to selected nodes.
     type ClusterIndicesShards = {
         [<System.Text.Json.Serialization.JsonPropertyName("index")>]
-        Index: ClusterStats.ClusterIndicesShardsIndex option
+        Index: ClusterIndicesShardsIndex option
         [<System.Text.Json.Serialization.JsonPropertyName("primaries")>]
-        Primaries: Types.Double option
+        Primaries: CoreTypes.Double option
         [<System.Text.Json.Serialization.JsonPropertyName("replication")>]
-        Replication: Types.Double option
+        Replication: CoreTypes.Double option
         [<System.Text.Json.Serialization.JsonPropertyName("total")>]
-        Total: Types.Double option
+        Total: CoreTypes.Double option
     }
 
     type RuntimeFieldTypes = {
         [<System.Text.Json.Serialization.JsonPropertyName("chars_max")>]
-        CharsMax: Types.Integer
+        CharsMax: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("chars_total")>]
-        CharsTotal: Types.Integer
+        CharsTotal: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("count")>]
-        Count: Types.Integer
+        Count: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("doc_max")>]
-        DocMax: Types.Integer
+        DocMax: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("doc_total")>]
-        DocTotal: Types.Integer
+        DocTotal: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("index_count")>]
-        IndexCount: Types.Integer
+        IndexCount: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("lang")>]
         Lang: string list
         [<System.Text.Json.Serialization.JsonPropertyName("lines_max")>]
-        LinesMax: Types.Integer
+        LinesMax: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("lines_total")>]
-        LinesTotal: Types.Integer
+        LinesTotal: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.Name
+        Name: CoreTypes.Name
         [<System.Text.Json.Serialization.JsonPropertyName("scriptless_count")>]
-        ScriptlessCount: Types.Integer
+        ScriptlessCount: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("shadowed_count")>]
-        ShadowedCount: Types.Integer
+        ShadowedCount: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("source_max")>]
-        SourceMax: Types.Integer
+        SourceMax: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("source_total")>]
-        SourceTotal: Types.Integer
+        SourceTotal: CoreTypes.Integer
     }
 
     type FieldTypesMappings = {
         [<System.Text.Json.Serialization.JsonPropertyName("field_types")>]
-        FieldTypes: ClusterStats.FieldTypes list
+        FieldTypes: FieldTypes list
         [<System.Text.Json.Serialization.JsonPropertyName("runtime_field_types")>]
-        RuntimeFieldTypes: ClusterStats.RuntimeFieldTypes list
+        RuntimeFieldTypes: RuntimeFieldTypes list
         [<System.Text.Json.Serialization.JsonPropertyName("total_field_count")>]
-        TotalFieldCount: Types.Long option
+        TotalFieldCount: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("total_deduplicated_field_count")>]
-        TotalDeduplicatedFieldCount: Types.Long option
+        TotalDeduplicatedFieldCount: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("total_deduplicated_mapping_size")>]
-        TotalDeduplicatedMappingSize: Types.ByteSize option
+        TotalDeduplicatedMappingSize: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("total_deduplicated_mapping_size_in_bytes")>]
-        TotalDeduplicatedMappingSizeInBytes: Types.Long option
+        TotalDeduplicatedMappingSizeInBytes: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("source_modes")>]
-        SourceModes: Map<Types.Name, Types.Integer>
+        SourceModes: Map<CoreTypes.Name, CoreTypes.Integer>
     }
 
     type IndicesVersions = {
         [<System.Text.Json.Serialization.JsonPropertyName("index_count")>]
-        IndexCount: Types.Integer
+        IndexCount: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("primary_shard_count")>]
-        PrimaryShardCount: Types.Integer
+        PrimaryShardCount: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("total_primary_bytes")>]
-        TotalPrimaryBytes: Types.Long
+        TotalPrimaryBytes: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("total_primary_size")>]
-        TotalPrimarySize: Types.ByteSize option
+        TotalPrimarySize: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("version")>]
-        Version: Types.VersionString
+        Version: CoreTypes.VersionString
     }
 
     type DenseVectorOffHeapStats = {
         [<System.Text.Json.Serialization.JsonPropertyName("total_size_bytes")>]
-        TotalSizeBytes: Types.Long
+        TotalSizeBytes: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("total_size")>]
-        TotalSize: Types.ByteSize option
+        TotalSize: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("total_veb_size_bytes")>]
-        TotalVebSizeBytes: Types.Long
+        TotalVebSizeBytes: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("total_veb_size")>]
-        TotalVebSize: Types.ByteSize option
+        TotalVebSize: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("total_vec_size_bytes")>]
-        TotalVecSizeBytes: Types.Long
+        TotalVecSizeBytes: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("total_vec_size")>]
-        TotalVecSize: Types.ByteSize option
+        TotalVecSize: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("total_veq_size_bytes")>]
-        TotalVeqSizeBytes: Types.Long
+        TotalVeqSizeBytes: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("total_veq_size")>]
-        TotalVeqSize: Types.ByteSize option
+        TotalVeqSize: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("total_vex_size_bytes")>]
-        TotalVexSizeBytes: Types.Long
+        TotalVexSizeBytes: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("total_vex_size")>]
-        TotalVexSize: Types.ByteSize option
+        TotalVexSize: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("total_cenif_size_bytes")>]
-        TotalCenifSizeBytes: Types.Long
+        TotalCenifSizeBytes: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("total_cenif_size")>]
-        TotalCenifSize: Types.ByteSize option
+        TotalCenifSize: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("total_clivf_size_bytes")>]
-        TotalClivfSizeBytes: Types.Long
+        TotalClivfSizeBytes: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("total_clivf_size")>]
-        TotalClivfSize: Types.ByteSize option
+        TotalClivfSize: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("fielddata")>]
-        Fielddata: Map<string, Map<string, Types.Long>> option
+        Fielddata: Map<string, Map<string, CoreTypes.Long>> option
     }
 
     type DenseVectorStats = {
         [<System.Text.Json.Serialization.JsonPropertyName("value_count")>]
-        ValueCount: Types.Long
+        ValueCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("off_heap")>]
-        OffHeap: ClusterStats.DenseVectorOffHeapStats option
+        OffHeap: DenseVectorOffHeapStats option
     }
 
     type SparseVectorStats = {
         [<System.Text.Json.Serialization.JsonPropertyName("value_count")>]
-        ValueCount: Types.Long
+        ValueCount: CoreTypes.Long
     }
 
     type ClusterIndices = {
         [<System.Text.Json.Serialization.JsonPropertyName("analysis")>]
-        Analysis: ClusterStats.CharFilterTypes option
+        Analysis: CharFilterTypes option
         [<System.Text.Json.Serialization.JsonPropertyName("completion")>]
-        Completion: Types.CompletionStats
+        Completion: CoreTypes.CompletionStats
         [<System.Text.Json.Serialization.JsonPropertyName("count")>]
-        Count: Types.Long
+        Count: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("docs")>]
-        Docs: Types.DocStats
+        Docs: CoreTypes.DocStats
         [<System.Text.Json.Serialization.JsonPropertyName("fielddata")>]
-        Fielddata: Types.FielddataStats
+        Fielddata: CoreTypes.FielddataStats
         [<System.Text.Json.Serialization.JsonPropertyName("query_cache")>]
-        QueryCache: Types.QueryCacheStats
+        QueryCache: CoreTypes.QueryCacheStats
         [<System.Text.Json.Serialization.JsonPropertyName("search")>]
-        Search: ClusterStats.SearchUsageStats
+        Search: SearchUsageStats
         [<System.Text.Json.Serialization.JsonPropertyName("segments")>]
-        Segments: Types.SegmentsStats
+        Segments: CoreTypes.SegmentsStats
         [<System.Text.Json.Serialization.JsonPropertyName("shards")>]
-        Shards: ClusterStats.ClusterIndicesShards
+        Shards: ClusterIndicesShards
         [<System.Text.Json.Serialization.JsonPropertyName("store")>]
-        Store: Types.StoreStats
+        Store: CoreTypes.StoreStats
         [<System.Text.Json.Serialization.JsonPropertyName("mappings")>]
-        Mappings: ClusterStats.FieldTypesMappings option
+        Mappings: FieldTypesMappings option
         [<System.Text.Json.Serialization.JsonPropertyName("versions")>]
-        Versions: ClusterStats.IndicesVersions list option
+        Versions: IndicesVersions list option
         [<System.Text.Json.Serialization.JsonPropertyName("dense_vector")>]
-        DenseVector: ClusterStats.DenseVectorStats
+        DenseVector: DenseVectorStats
         [<System.Text.Json.Serialization.JsonPropertyName("sparse_vector")>]
-        SparseVector: ClusterStats.SparseVectorStats
+        SparseVector: SparseVectorStats
     }
 
     type ClusterProcessor = {
         [<System.Text.Json.Serialization.JsonPropertyName("count")>]
-        Count: Types.Long
+        Count: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("current")>]
-        Current: Types.Long
+        Current: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("failed")>]
-        Failed: Types.Long
+        Failed: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("time")>]
-        Time: Types.Duration option
+        Time: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("time_in_millis")>]
-        TimeInMillis: Types.DurationValue<Types.UnitMillis>
+        TimeInMillis: CoreTypes.DurationValue<CoreTypes.UnitMillis>
     }
 
     type ClusterIngest = {
         [<System.Text.Json.Serialization.JsonPropertyName("number_of_pipelines")>]
-        NumberOfPipelines: Types.Integer
+        NumberOfPipelines: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("processor_stats")>]
-        ProcessorStats: Map<string, ClusterStats.ClusterProcessor>
+        ProcessorStats: Map<string, ClusterProcessor>
     }
 
     type ClusterJvmMemory = {
         [<System.Text.Json.Serialization.JsonPropertyName("heap_max_in_bytes")>]
-        HeapMaxInBytes: Types.Long
+        HeapMaxInBytes: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("heap_max")>]
-        HeapMax: Types.ByteSize option
+        HeapMax: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("heap_used_in_bytes")>]
-        HeapUsedInBytes: Types.Long
+        HeapUsedInBytes: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("heap_used")>]
-        HeapUsed: Types.ByteSize option
+        HeapUsed: CoreTypes.ByteSize option
     }
 
     type ClusterJvmVersion = {
         [<System.Text.Json.Serialization.JsonPropertyName("bundled_jdk")>]
         BundledJdk: bool
         [<System.Text.Json.Serialization.JsonPropertyName("count")>]
-        Count: Types.Integer
+        Count: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("using_bundled_jdk")>]
         UsingBundledJdk: bool
         [<System.Text.Json.Serialization.JsonPropertyName("version")>]
-        Version: Types.VersionString
+        Version: CoreTypes.VersionString
         [<System.Text.Json.Serialization.JsonPropertyName("vm_name")>]
         VmName: string
         [<System.Text.Json.Serialization.JsonPropertyName("vm_vendor")>]
         VmVendor: string
         [<System.Text.Json.Serialization.JsonPropertyName("vm_version")>]
-        VmVersion: Types.VersionString
+        VmVersion: CoreTypes.VersionString
     }
 
     type ClusterJvm = {
         [<System.Text.Json.Serialization.JsonPropertyName("max_uptime_in_millis")>]
-        MaxUptimeInMillis: Types.DurationValue<Types.UnitMillis>
+        MaxUptimeInMillis: CoreTypes.DurationValue<CoreTypes.UnitMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("max_uptime")>]
-        MaxUptime: Types.Duration option
+        MaxUptime: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("mem")>]
-        Mem: ClusterStats.ClusterJvmMemory
+        Mem: ClusterJvmMemory
         [<System.Text.Json.Serialization.JsonPropertyName("threads")>]
-        Threads: Types.Long
+        Threads: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("versions")>]
-        Versions: ClusterStats.ClusterJvmVersion list
+        Versions: ClusterJvmVersion list
     }
 
     type ClusterNetworkTypes = {
         [<System.Text.Json.Serialization.JsonPropertyName("http_types")>]
-        HttpTypes: Map<string, Types.Integer>
+        HttpTypes: Map<string, CoreTypes.Integer>
         [<System.Text.Json.Serialization.JsonPropertyName("transport_types")>]
-        TransportTypes: Map<string, Types.Integer>
+        TransportTypes: Map<string, CoreTypes.Integer>
     }
 
     type ClusterNodeCount = {
         [<System.Text.Json.Serialization.JsonPropertyName("total")>]
-        Total: Types.Integer
+        Total: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("coordinating_only")>]
-        CoordinatingOnly: Types.Integer option
+        CoordinatingOnly: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("data")>]
-        Data: Types.Integer option
+        Data: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("data_cold")>]
-        DataCold: Types.Integer option
+        DataCold: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("data_content")>]
-        DataContent: Types.Integer option
+        DataContent: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("data_frozen")>]
-        DataFrozen: Types.Integer option
+        DataFrozen: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("data_hot")>]
-        DataHot: Types.Integer option
+        DataHot: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("data_warm")>]
-        DataWarm: Types.Integer option
+        DataWarm: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("index")>]
-        Index: Types.Integer option
+        Index: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("ingest")>]
-        Ingest: Types.Integer option
+        Ingest: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("master")>]
-        Master: Types.Integer option
+        Master: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("ml")>]
-        Ml: Types.Integer option
+        Ml: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("remote_cluster_client")>]
-        RemoteClusterClient: Types.Integer option
+        RemoteClusterClient: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("search")>]
-        Search: Types.Integer option
+        Search: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("transform")>]
-        Transform: Types.Integer option
+        Transform: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("voting_only")>]
-        VotingOnly: Types.Integer option
+        VotingOnly: CoreTypes.Integer option
     }
 
     type IndexingPressure = {
@@ -506,64 +506,64 @@ module ClusterStats =
         [<System.Text.Json.Serialization.JsonPropertyName("arch")>]
         Arch: string
         [<System.Text.Json.Serialization.JsonPropertyName("count")>]
-        Count: Types.Integer
+        Count: CoreTypes.Integer
     }
 
     type OperatingSystemMemoryInfo = {
         [<System.Text.Json.Serialization.JsonPropertyName("adjusted_total_in_bytes")>]
-        AdjustedTotalInBytes: Types.Long option
+        AdjustedTotalInBytes: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("adjusted_total")>]
-        AdjustedTotal: Types.ByteSize option
+        AdjustedTotal: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("free_in_bytes")>]
-        FreeInBytes: Types.Long
+        FreeInBytes: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("free")>]
-        Free: Types.ByteSize option
+        Free: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("free_percent")>]
-        FreePercent: Types.Integer
+        FreePercent: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("total_in_bytes")>]
-        TotalInBytes: Types.Long
+        TotalInBytes: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("total")>]
-        Total: Types.ByteSize option
+        Total: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("used_in_bytes")>]
-        UsedInBytes: Types.Long
+        UsedInBytes: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("used")>]
-        Used: Types.ByteSize option
+        Used: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("used_percent")>]
-        UsedPercent: Types.Integer
+        UsedPercent: CoreTypes.Integer
     }
 
     type ClusterOperatingSystemName = {
         [<System.Text.Json.Serialization.JsonPropertyName("count")>]
-        Count: Types.Integer
+        Count: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.Name
+        Name: CoreTypes.Name
     }
 
     type ClusterOperatingSystemPrettyName = {
         [<System.Text.Json.Serialization.JsonPropertyName("count")>]
-        Count: Types.Integer
+        Count: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("pretty_name")>]
-        PrettyName: Types.Name
+        PrettyName: CoreTypes.Name
     }
 
     type ClusterOperatingSystem = {
         [<System.Text.Json.Serialization.JsonPropertyName("allocated_processors")>]
-        AllocatedProcessors: Types.Integer
+        AllocatedProcessors: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("architectures")>]
-        Architectures: ClusterStats.ClusterOperatingSystemArchitecture list option
+        Architectures: ClusterOperatingSystemArchitecture list option
         [<System.Text.Json.Serialization.JsonPropertyName("available_processors")>]
-        AvailableProcessors: Types.Integer
+        AvailableProcessors: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("mem")>]
-        Mem: ClusterStats.OperatingSystemMemoryInfo
+        Mem: OperatingSystemMemoryInfo
         [<System.Text.Json.Serialization.JsonPropertyName("names")>]
-        Names: ClusterStats.ClusterOperatingSystemName list
+        Names: ClusterOperatingSystemName list
         [<System.Text.Json.Serialization.JsonPropertyName("pretty_names")>]
-        PrettyNames: ClusterStats.ClusterOperatingSystemPrettyName list
+        PrettyNames: ClusterOperatingSystemPrettyName list
     }
 
     type NodePackagingType = {
         [<System.Text.Json.Serialization.JsonPropertyName("count")>]
-        Count: Types.Integer
+        Count: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("flavor")>]
         Flavor: string
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
@@ -572,63 +572,63 @@ module ClusterStats =
 
     type ClusterProcessCpu = {
         [<System.Text.Json.Serialization.JsonPropertyName("percent")>]
-        Percent: Types.Integer
+        Percent: CoreTypes.Integer
     }
 
     type ClusterProcessOpenFileDescriptors = {
         [<System.Text.Json.Serialization.JsonPropertyName("avg")>]
-        Avg: Types.Long
+        Avg: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("max")>]
-        Max: Types.Long
+        Max: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("min")>]
-        Min: Types.Long
+        Min: CoreTypes.Long
     }
 
     type ClusterProcess = {
         [<System.Text.Json.Serialization.JsonPropertyName("cpu")>]
-        Cpu: ClusterStats.ClusterProcessCpu
+        Cpu: ClusterProcessCpu
         [<System.Text.Json.Serialization.JsonPropertyName("open_file_descriptors")>]
-        OpenFileDescriptors: ClusterStats.ClusterProcessOpenFileDescriptors
+        OpenFileDescriptors: ClusterProcessOpenFileDescriptors
     }
 
     type ClusterNodes = {
         [<System.Text.Json.Serialization.JsonPropertyName("count")>]
-        Count: ClusterStats.ClusterNodeCount
+        Count: ClusterNodeCount
         [<System.Text.Json.Serialization.JsonPropertyName("discovery_types")>]
-        DiscoveryTypes: Map<string, Types.Integer>
+        DiscoveryTypes: Map<string, CoreTypes.Integer>
         [<System.Text.Json.Serialization.JsonPropertyName("fs")>]
-        Fs: ClusterStats.ClusterFileSystem
+        Fs: ClusterFileSystem
         [<System.Text.Json.Serialization.JsonPropertyName("indexing_pressure")>]
-        IndexingPressure: ClusterStats.IndexingPressure
+        IndexingPressure: IndexingPressure
         [<System.Text.Json.Serialization.JsonPropertyName("ingest")>]
-        Ingest: ClusterStats.ClusterIngest
+        Ingest: ClusterIngest
         [<System.Text.Json.Serialization.JsonPropertyName("jvm")>]
-        Jvm: ClusterStats.ClusterJvm
+        Jvm: ClusterJvm
         [<System.Text.Json.Serialization.JsonPropertyName("network_types")>]
-        NetworkTypes: ClusterStats.ClusterNetworkTypes
+        NetworkTypes: ClusterNetworkTypes
         [<System.Text.Json.Serialization.JsonPropertyName("os")>]
-        Os: ClusterStats.ClusterOperatingSystem
+        Os: ClusterOperatingSystem
         [<System.Text.Json.Serialization.JsonPropertyName("packaging_types")>]
-        PackagingTypes: ClusterStats.NodePackagingType list
+        PackagingTypes: NodePackagingType list
         [<System.Text.Json.Serialization.JsonPropertyName("plugins")>]
-        Plugins: Types.PluginStats list
+        Plugins: CoreTypes.PluginStats list
         [<System.Text.Json.Serialization.JsonPropertyName("process")>]
-        Process: ClusterStats.ClusterProcess
+        Process: ClusterProcess
         [<System.Text.Json.Serialization.JsonPropertyName("versions")>]
-        Versions: Types.VersionString list
+        Versions: CoreTypes.VersionString list
     }
 
     type SnapshotCurrentCounts = {
         [<System.Text.Json.Serialization.JsonPropertyName("snapshots")>]
-        Snapshots: Types.Integer
+        Snapshots: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("shard_snapshots")>]
-        ShardSnapshots: Types.Integer
+        ShardSnapshots: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("snapshot_deletions")>]
-        SnapshotDeletions: Types.Integer
+        SnapshotDeletions: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("concurrent_operations")>]
-        ConcurrentOperations: Types.Integer
+        ConcurrentOperations: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("cleanups")>]
-        Cleanups: Types.Integer
+        Cleanups: CoreTypes.Integer
     }
 
     [<RequireQualifiedAccess>]
@@ -644,68 +644,68 @@ module ClusterStats =
 
     type RepositoryStatsShards = {
         [<System.Text.Json.Serialization.JsonPropertyName("total")>]
-        Total: Types.Integer
+        Total: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("complete")>]
-        Complete: Types.Integer
+        Complete: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("incomplete")>]
-        Incomplete: Types.Integer
+        Incomplete: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("states")>]
-        States: Map<ClusterStats.ShardState, Types.Integer>
+        States: Map<ShardState, CoreTypes.Integer>
     }
 
     type RepositoryStatsCurrentCounts = {
         [<System.Text.Json.Serialization.JsonPropertyName("snapshots")>]
-        Snapshots: Types.Integer
+        Snapshots: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("clones")>]
-        Clones: Types.Integer
+        Clones: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("finalizations")>]
-        Finalizations: Types.Integer
+        Finalizations: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("deletions")>]
-        Deletions: Types.Integer
+        Deletions: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("snapshot_deletions")>]
-        SnapshotDeletions: Types.Integer
+        SnapshotDeletions: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("active_deletions")>]
-        ActiveDeletions: Types.Integer
+        ActiveDeletions: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("shards")>]
-        Shards: ClusterStats.RepositoryStatsShards
+        Shards: RepositoryStatsShards
     }
 
     type PerRepositoryStats = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("oldest_start_time_millis")>]
-        OldestStartTimeMillis: Types.UnitMillis
+        OldestStartTimeMillis: CoreTypes.UnitMillis
         [<System.Text.Json.Serialization.JsonPropertyName("oldest_start_time")>]
-        OldestStartTime: Types.DateFormat option
+        OldestStartTime: CoreTypes.DateFormat option
         [<System.Text.Json.Serialization.JsonPropertyName("current_counts")>]
-        CurrentCounts: ClusterStats.RepositoryStatsCurrentCounts
+        CurrentCounts: RepositoryStatsCurrentCounts
     }
 
     type ClusterSnapshotStats = {
         [<System.Text.Json.Serialization.JsonPropertyName("current_counts")>]
-        CurrentCounts: ClusterStats.SnapshotCurrentCounts
+        CurrentCounts: SnapshotCurrentCounts
         [<System.Text.Json.Serialization.JsonPropertyName("repositories")>]
-        Repositories: Map<Types.Name, ClusterStats.PerRepositoryStats>
+        Repositories: Map<CoreTypes.Name, PerRepositoryStats>
     }
 
     type StatsResponseBase = {
         [<System.Text.Json.Serialization.JsonPropertyName("cluster_name")>]
-        ClusterName: Types.Name
+        ClusterName: CoreTypes.Name
         [<System.Text.Json.Serialization.JsonPropertyName("cluster_uuid")>]
-        ClusterUuid: Types.Uuid
+        ClusterUuid: CoreTypes.Uuid
         [<System.Text.Json.Serialization.JsonPropertyName("indices")>]
-        Indices: ClusterStats.ClusterIndices
+        Indices: ClusterIndices
         [<System.Text.Json.Serialization.JsonPropertyName("nodes")>]
-        Nodes: ClusterStats.ClusterNodes
+        Nodes: ClusterNodes
         [<System.Text.Json.Serialization.JsonPropertyName("repositories")>]
-        Repositories: Map<Types.Name, Map<Types.Name, Types.Long>>
+        Repositories: Map<CoreTypes.Name, Map<CoreTypes.Name, CoreTypes.Long>>
         [<System.Text.Json.Serialization.JsonPropertyName("snapshots")>]
-        Snapshots: ClusterStats.ClusterSnapshotStats
+        Snapshots: ClusterSnapshotStats
         [<System.Text.Json.Serialization.JsonPropertyName("status")>]
-        Status: Types.HealthStatus option
+        Status: CoreTypes.HealthStatus option
         [<System.Text.Json.Serialization.JsonPropertyName("timestamp")>]
-        Timestamp: Types.Long
+        Timestamp: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("ccs")>]
-        Ccs: ClusterStats.CCSStats
+        Ccs: CCSStats
     }
 

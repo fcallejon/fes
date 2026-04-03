@@ -9,7 +9,7 @@ module XpackInfo =
 
     type BuildInformation = {
         [<System.Text.Json.Serialization.JsonPropertyName("date")>]
-        Date: Types.DateTime
+        Date: CoreTypes.DateTime
         [<System.Text.Json.Serialization.JsonPropertyName("hash")>]
         Hash: string
     }
@@ -18,7 +18,7 @@ module XpackInfo =
         [<System.Text.Json.Serialization.JsonPropertyName("build_hash")>]
         BuildHash: string
         [<System.Text.Json.Serialization.JsonPropertyName("version")>]
-        Version: Types.VersionString
+        Version: CoreTypes.VersionString
     }
 
     type Feature = {
@@ -29,71 +29,71 @@ module XpackInfo =
         [<System.Text.Json.Serialization.JsonPropertyName("enabled")>]
         Enabled: bool
         [<System.Text.Json.Serialization.JsonPropertyName("native_code_info")>]
-        NativeCodeInfo: XpackInfo.NativeCodeInformation option
+        NativeCodeInfo: NativeCodeInformation option
     }
 
     type Features = {
         [<System.Text.Json.Serialization.JsonPropertyName("aggregate_metric")>]
-        AggregateMetric: XpackInfo.Feature
+        AggregateMetric: Feature
         [<System.Text.Json.Serialization.JsonPropertyName("analytics")>]
-        Analytics: XpackInfo.Feature
+        Analytics: Feature
         [<System.Text.Json.Serialization.JsonPropertyName("ccr")>]
-        Ccr: XpackInfo.Feature
+        Ccr: Feature
         [<System.Text.Json.Serialization.JsonPropertyName("data_streams")>]
-        DataStreams: XpackInfo.Feature
+        DataStreams: Feature
         [<System.Text.Json.Serialization.JsonPropertyName("data_tiers")>]
-        DataTiers: XpackInfo.Feature
+        DataTiers: Feature
         [<System.Text.Json.Serialization.JsonPropertyName("enrich")>]
-        Enrich: XpackInfo.Feature
+        Enrich: Feature
         [<System.Text.Json.Serialization.JsonPropertyName("enterprise_search")>]
-        EnterpriseSearch: XpackInfo.Feature
+        EnterpriseSearch: Feature
         [<System.Text.Json.Serialization.JsonPropertyName("eql")>]
-        Eql: XpackInfo.Feature
+        Eql: Feature
         [<System.Text.Json.Serialization.JsonPropertyName("esql")>]
-        Esql: XpackInfo.Feature
+        Esql: Feature
         [<System.Text.Json.Serialization.JsonPropertyName("graph")>]
-        Graph: XpackInfo.Feature
+        Graph: Feature
         [<System.Text.Json.Serialization.JsonPropertyName("gpu_vector_indexing")>]
-        GpuVectorIndexing: XpackInfo.Feature
+        GpuVectorIndexing: Feature
         [<System.Text.Json.Serialization.JsonPropertyName("ilm")>]
-        Ilm: XpackInfo.Feature
+        Ilm: Feature
         [<System.Text.Json.Serialization.JsonPropertyName("logstash")>]
-        Logstash: XpackInfo.Feature
+        Logstash: Feature
         [<System.Text.Json.Serialization.JsonPropertyName("logsdb")>]
-        Logsdb: XpackInfo.Feature
+        Logsdb: Feature
         [<System.Text.Json.Serialization.JsonPropertyName("ml")>]
-        Ml: XpackInfo.Feature
+        Ml: Feature
         [<System.Text.Json.Serialization.JsonPropertyName("monitoring")>]
-        Monitoring: XpackInfo.Feature
+        Monitoring: Feature
         [<System.Text.Json.Serialization.JsonPropertyName("rollup")>]
-        Rollup: XpackInfo.Feature
+        Rollup: Feature
         [<System.Text.Json.Serialization.JsonPropertyName("runtime_fields")>]
-        RuntimeFields: XpackInfo.Feature option
+        RuntimeFields: Feature option
         [<System.Text.Json.Serialization.JsonPropertyName("searchable_snapshots")>]
-        SearchableSnapshots: XpackInfo.Feature
+        SearchableSnapshots: Feature
         [<System.Text.Json.Serialization.JsonPropertyName("security")>]
-        Security: XpackInfo.Feature
+        Security: Feature
         [<System.Text.Json.Serialization.JsonPropertyName("slm")>]
-        Slm: XpackInfo.Feature
+        Slm: Feature
         [<System.Text.Json.Serialization.JsonPropertyName("spatial")>]
-        Spatial: XpackInfo.Feature
+        Spatial: Feature
         [<System.Text.Json.Serialization.JsonPropertyName("sql")>]
-        Sql: XpackInfo.Feature
+        Sql: Feature
         [<System.Text.Json.Serialization.JsonPropertyName("transform")>]
-        Transform: XpackInfo.Feature
+        Transform: Feature
         [<System.Text.Json.Serialization.JsonPropertyName("universal_profiling")>]
-        UniversalProfiling: XpackInfo.Feature
+        UniversalProfiling: Feature
         [<System.Text.Json.Serialization.JsonPropertyName("voting_only")>]
-        VotingOnly: XpackInfo.Feature
+        VotingOnly: Feature
         [<System.Text.Json.Serialization.JsonPropertyName("watcher")>]
-        Watcher: XpackInfo.Feature
+        Watcher: Feature
         [<System.Text.Json.Serialization.JsonPropertyName("archive")>]
-        Archive: XpackInfo.Feature
+        Archive: Feature
     }
 
     type MinimalLicenseInformation = {
         [<System.Text.Json.Serialization.JsonPropertyName("expiry_date_in_millis")>]
-        ExpiryDateInMillis: Types.EpochTime<Types.UnitMillis>
+        ExpiryDateInMillis: CoreTypes.EpochTime<CoreTypes.UnitMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("mode")>]
         Mode: LicenseTypes.LicenseType
         [<System.Text.Json.Serialization.JsonPropertyName("status")>]

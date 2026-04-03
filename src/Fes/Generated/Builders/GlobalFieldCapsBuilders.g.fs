@@ -31,19 +31,19 @@ module GlobalFieldCapsBuilders =
             { state with Aggregatable = value }
 
         [<CustomOperation("indices")>]
-        member _.Indices(state: FieldCapability, value: Types.Indices) =
+        member _.Indices(state: FieldCapability, value: CoreTypes.Indices) =
             { state with Indices = Some value }
 
         [<CustomOperation("meta")>]
-        member _.Meta(state: FieldCapability, value: Types.Metadata) =
+        member _.Meta(state: FieldCapability, value: CoreTypes.Metadata) =
             { state with Meta = Some value }
 
         [<CustomOperation("nonAggregatableIndices")>]
-        member _.NonAggregatableIndices(state: FieldCapability, value: Types.Indices) =
+        member _.NonAggregatableIndices(state: FieldCapability, value: CoreTypes.Indices) =
             { state with NonAggregatableIndices = Some value }
 
         [<CustomOperation("nonSearchableIndices")>]
-        member _.NonSearchableIndices(state: FieldCapability, value: Types.Indices) =
+        member _.NonSearchableIndices(state: FieldCapability, value: CoreTypes.Indices) =
             { state with NonSearchableIndices = Some value }
 
         [<CustomOperation("searchable")>]
@@ -63,15 +63,15 @@ module GlobalFieldCapsBuilders =
             { state with TimeSeriesDimension = Some value }
 
         [<CustomOperation("timeSeriesMetric")>]
-        member _.TimeSeriesMetric(state: FieldCapability, value: TypesMapping.TimeSeriesMetricType) =
+        member _.TimeSeriesMetric(state: FieldCapability, value: CoreTypes.TimeSeriesMetricType) =
             { state with TimeSeriesMetric = Some value }
 
         [<CustomOperation("nonDimensionIndices")>]
-        member _.NonDimensionIndices(state: FieldCapability, value: Types.IndexName list) =
+        member _.NonDimensionIndices(state: FieldCapability, value: CoreTypes.IndexName list) =
             { state with NonDimensionIndices = Some value }
 
         [<CustomOperation("metricConflictsIndices")>]
-        member _.MetricConflictsIndices(state: FieldCapability, value: Types.IndexName list) =
+        member _.MetricConflictsIndices(state: FieldCapability, value: CoreTypes.IndexName list) =
             { state with MetricConflictsIndices = Some value }
 
     let fieldCapability = FieldCapabilityBuilder()

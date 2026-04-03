@@ -13,19 +13,19 @@ module CcrGetAutoFollowPattern =
         [<System.Text.Json.Serialization.JsonPropertyName("remote_cluster")>]
         RemoteCluster: string
         [<System.Text.Json.Serialization.JsonPropertyName("follow_index_pattern")>]
-        FollowIndexPattern: Types.IndexPattern option
+        FollowIndexPattern: CoreTypes.IndexPattern option
         [<System.Text.Json.Serialization.JsonPropertyName("leader_index_patterns")>]
-        LeaderIndexPatterns: Types.IndexPatterns
+        LeaderIndexPatterns: CoreTypes.IndexPatterns
         [<System.Text.Json.Serialization.JsonPropertyName("leader_index_exclusion_patterns")>]
-        LeaderIndexExclusionPatterns: Types.IndexPatterns
+        LeaderIndexExclusionPatterns: CoreTypes.IndexPatterns
         [<System.Text.Json.Serialization.JsonPropertyName("max_outstanding_read_requests")>]
-        MaxOutstandingReadRequests: Types.Integer
+        MaxOutstandingReadRequests: CoreTypes.Integer
     }
 
     type AutoFollowPattern = {
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.Name
+        Name: CoreTypes.Name
         [<System.Text.Json.Serialization.JsonPropertyName("pattern")>]
-        Pattern: CcrGetAutoFollowPattern.AutoFollowPatternSummary
+        Pattern: AutoFollowPatternSummary
     }
 

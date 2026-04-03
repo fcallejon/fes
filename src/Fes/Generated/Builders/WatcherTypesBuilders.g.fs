@@ -41,23 +41,23 @@ module WatcherTypesBuilders =
             { state with Foreach = Some value }
 
         [<CustomOperation("maxIterations")>]
-        member _.MaxIterations(state: Action, value: Types.Integer) =
+        member _.MaxIterations(state: Action, value: CoreTypes.Integer) =
             { state with MaxIterations = Some value }
 
         [<CustomOperation("name")>]
-        member _.Name(state: Action, value: Types.Name) =
+        member _.Name(state: Action, value: CoreTypes.Name) =
             { state with Name = Some value }
 
         [<CustomOperation("throttlePeriod")>]
-        member _.ThrottlePeriod(state: Action, value: Types.Duration) =
+        member _.ThrottlePeriod(state: Action, value: CoreTypes.Duration) =
             { state with ThrottlePeriod = Some value }
 
         [<CustomOperation("throttlePeriodInMillis")>]
-        member _.ThrottlePeriodInMillis(state: Action, value: Types.DurationValue<Types.UnitMillis>) =
+        member _.ThrottlePeriodInMillis(state: Action, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
             { state with ThrottlePeriodInMillis = Some value }
 
         [<CustomOperation("transform")>]
-        member _.Transform(state: Action, value: Types.TransformContainer) =
+        member _.Transform(state: Action, value: CoreTypes.TransformContainer) =
             { state with Transform = Some value }
 
         [<CustomOperation("index")>]
@@ -121,7 +121,7 @@ module WatcherTypesBuilders =
         let arrayCompare (field: string) (value: WatcherTypes.ArrayCompareCondition) =
             ConditionContainer.ArrayCompare (field, value)
 
-        let compare (field: string) (value: Map<WatcherTypes.ConditionOp, Types.FieldValue>) =
+        let compare (field: string) (value: Map<WatcherTypes.ConditionOp, CoreTypes.FieldValue>) =
             ConditionContainer.Compare (field, value)
 
         let never (value: WatcherTypes.NeverCondition) =
@@ -147,7 +147,7 @@ module WatcherTypesBuilders =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: Email, value: Types.Id) =
+        member _.Id(state: Email, value: CoreTypes.Id) =
             { state with Id = Some value }
 
         [<CustomOperation("bcc")>]
@@ -175,7 +175,7 @@ module WatcherTypesBuilders =
             { state with ReplyTo = Some value }
 
         [<CustomOperation("sentDate")>]
-        member _.SentDate(state: Email, value: Types.DateTime) =
+        member _.SentDate(state: Email, value: CoreTypes.DateTime) =
             { state with SentDate = Some value }
 
         [<CustomOperation("subject")>]
@@ -263,7 +263,7 @@ module WatcherTypesBuilders =
             { state with Email = Some value }
 
         [<CustomOperation("id")>]
-        member _.Id(state: ExecutionResultAction, value: Types.Id) =
+        member _.Id(state: ExecutionResultAction, value: CoreTypes.Id) =
             { state with Id = value }
 
         [<CustomOperation("index")>]
@@ -299,7 +299,7 @@ module WatcherTypesBuilders =
             { state with Webhook = Some value }
 
         [<CustomOperation("error")>]
-        member _.Error(state: ExecutionResultAction, value: Types.ErrorCause) =
+        member _.Error(state: ExecutionResultAction, value: CoreTypes.ErrorCause) =
             { state with Error = Some value }
 
     let executionResultAction = ExecutionResultActionBuilder()
@@ -375,7 +375,7 @@ module WatcherTypesBuilders =
             { state with Body = Some value }
 
         [<CustomOperation("connectionTimeout")>]
-        member _.ConnectionTimeout(state: HttpInputRequestDefinition, value: Types.Duration) =
+        member _.ConnectionTimeout(state: HttpInputRequestDefinition, value: CoreTypes.Duration) =
             { state with ConnectionTimeout = Some value }
 
         [<CustomOperation("headers")>]
@@ -383,7 +383,7 @@ module WatcherTypesBuilders =
             { state with Headers = Some value }
 
         [<CustomOperation("host")>]
-        member _.Host(state: HttpInputRequestDefinition, value: Types.Host) =
+        member _.Host(state: HttpInputRequestDefinition, value: CoreTypes.Host) =
             { state with Host = Some value }
 
         [<CustomOperation("method")>]
@@ -399,7 +399,7 @@ module WatcherTypesBuilders =
             { state with Path = Some value }
 
         [<CustomOperation("port")>]
-        member _.Port(state: HttpInputRequestDefinition, value: Types.Uint) =
+        member _.Port(state: HttpInputRequestDefinition, value: CoreTypes.Uint) =
             { state with Port = Some value }
 
         [<CustomOperation("proxy")>]
@@ -407,7 +407,7 @@ module WatcherTypesBuilders =
             { state with Proxy = Some value }
 
         [<CustomOperation("readTimeout")>]
-        member _.ReadTimeout(state: HttpInputRequestDefinition, value: Types.Duration) =
+        member _.ReadTimeout(state: HttpInputRequestDefinition, value: CoreTypes.Duration) =
             { state with ReadTimeout = Some value }
 
         [<CustomOperation("scheme")>]
@@ -432,27 +432,27 @@ module WatcherTypesBuilders =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: IndexAction, value: Types.IndexName) =
+        member _.Index(state: IndexAction, value: CoreTypes.IndexName) =
             { state with Index = value }
 
         [<CustomOperation("docId")>]
-        member _.DocId(state: IndexAction, value: Types.Id) =
+        member _.DocId(state: IndexAction, value: CoreTypes.Id) =
             { state with DocId = Some value }
 
         [<CustomOperation("refresh")>]
-        member _.Refresh(state: IndexAction, value: Types.Refresh) =
+        member _.Refresh(state: IndexAction, value: CoreTypes.Refresh) =
             { state with Refresh = Some value }
 
         [<CustomOperation("opType")>]
-        member _.OpType(state: IndexAction, value: Types.OpType) =
+        member _.OpType(state: IndexAction, value: CoreTypes.OpType) =
             { state with OpType = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: IndexAction, value: Types.Duration) =
+        member _.Timeout(state: IndexAction, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("executionTimeField")>]
-        member _.ExecutionTimeField(state: IndexAction, value: Types.Field) =
+        member _.ExecutionTimeField(state: IndexAction, value: CoreTypes.Field) =
             { state with ExecutionTimeField = Some value }
 
     let indexAction = IndexActionBuilder()
@@ -575,11 +575,11 @@ module WatcherTypesBuilders =
             }
 
         [<CustomOperation("host")>]
-        member _.Host(state: PagerDutyEventProxy, value: Types.Host) =
+        member _.Host(state: PagerDutyEventProxy, value: CoreTypes.Host) =
             { state with Host = Some value }
 
         [<CustomOperation("port")>]
-        member _.Port(state: PagerDutyEventProxy, value: Types.Integer) =
+        member _.Port(state: PagerDutyEventProxy, value: CoreTypes.Integer) =
             { state with Port = Some value }
 
     let pagerDutyEventProxy = PagerDutyEventProxyBuilder()
@@ -622,7 +622,7 @@ module WatcherTypesBuilders =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: QueryWatch, value: Types.Id) =
+        member _.Id(state: QueryWatch, value: CoreTypes.Id) =
             { state with Id = value }
 
         [<CustomOperation("status")>]
@@ -634,11 +634,11 @@ module WatcherTypesBuilders =
             { state with Watch = Some value }
 
         [<CustomOperation("primaryTerm")>]
-        member _.PrimaryTerm(state: QueryWatch, value: Types.Integer) =
+        member _.PrimaryTerm(state: QueryWatch, value: CoreTypes.Integer) =
             { state with PrimaryTerm = Some value }
 
         [<CustomOperation("seqNo")>]
-        member _.SeqNo(state: QueryWatch, value: Types.SequenceNumber) =
+        member _.SeqNo(state: QueryWatch, value: CoreTypes.SequenceNumber) =
             { state with SeqNo = Some value }
 
     let queryWatch = QueryWatchBuilder()
@@ -662,11 +662,11 @@ module WatcherTypesBuilders =
             { state with Inline = Some value }
 
         [<CustomOperation("retries")>]
-        member _.Retries(state: ReportingEmailAttachment, value: Types.Integer) =
+        member _.Retries(state: ReportingEmailAttachment, value: CoreTypes.Integer) =
             { state with Retries = Some value }
 
         [<CustomOperation("interval")>]
-        member _.Interval(state: ReportingEmailAttachment, value: Types.Duration) =
+        member _.Interval(state: ReportingEmailAttachment, value: CoreTypes.Duration) =
             { state with Interval = Some value }
 
         [<CustomOperation("request")>]
@@ -689,7 +689,7 @@ module WatcherTypesBuilders =
         let hourly (value: WatcherTypes.HourlySchedule) =
             ScheduleContainer.Hourly value
 
-        let interval (value: Types.Duration) =
+        let interval (value: CoreTypes.Duration) =
             ScheduleContainer.Interval value
 
         let monthly (value: System.Text.Json.JsonElement) =
@@ -711,7 +711,7 @@ module WatcherTypesBuilders =
             }
 
         [<CustomOperation("lang")>]
-        member _.Lang(state: ScriptCondition, value: Types.ScriptLanguage) =
+        member _.Lang(state: ScriptCondition, value: CoreTypes.ScriptLanguage) =
             { state with Lang = Some value }
 
         [<CustomOperation("params")>]
@@ -719,7 +719,7 @@ module WatcherTypesBuilders =
             { state with Params = Some value }
 
         [<CustomOperation("source")>]
-        member _.Source(state: ScriptCondition, value: Types.ScriptSource) =
+        member _.Source(state: ScriptCondition, value: CoreTypes.ScriptSource) =
             { state with Source = Some value }
 
         [<CustomOperation("id")>]
@@ -745,7 +745,7 @@ module WatcherTypesBuilders =
             { state with Request = value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: SearchInput, value: Types.Duration) =
+        member _.Timeout(state: SearchInput, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
     let searchInput = SearchInputBuilder()
@@ -766,15 +766,15 @@ module WatcherTypesBuilders =
             { state with Body = Some value }
 
         [<CustomOperation("indices")>]
-        member _.Indices(state: SearchInputRequestDefinition, value: Types.IndexName list) =
+        member _.Indices(state: SearchInputRequestDefinition, value: CoreTypes.IndexName list) =
             { state with Indices = Some value }
 
         [<CustomOperation("indicesOptions")>]
-        member _.IndicesOptions(state: SearchInputRequestDefinition, value: Types.IndicesOptions) =
+        member _.IndicesOptions(state: SearchInputRequestDefinition, value: CoreTypes.IndicesOptions) =
             { state with IndicesOptions = Some value }
 
         [<CustomOperation("searchType")>]
-        member _.SearchType(state: SearchInputRequestDefinition, value: Types.SearchType) =
+        member _.SearchType(state: SearchInputRequestDefinition, value: CoreTypes.SearchType) =
             { state with SearchType = Some value }
 
         [<CustomOperation("template")>]
@@ -802,7 +802,7 @@ module WatcherTypesBuilders =
             { state with Explain = Some value }
 
         [<CustomOperation("id")>]
-        member _.Id(state: SearchTemplateRequestBody, value: Types.Id) =
+        member _.Id(state: SearchTemplateRequestBody, value: CoreTypes.Id) =
             { state with Id = Some value }
 
         [<CustomOperation("params")>]
@@ -896,7 +896,7 @@ module WatcherTypesBuilders =
             { state with TitleLink = Some value }
 
         [<CustomOperation("ts")>]
-        member _.Ts(state: SlackAttachment, value: Types.EpochTime<Types.UnitSeconds>) =
+        member _.Ts(state: SlackAttachment, value: CoreTypes.EpochTime<CoreTypes.UnitSeconds>) =
             { state with Ts = Some value }
 
     let slackAttachment = SlackAttachmentBuilder()
@@ -963,7 +963,7 @@ module WatcherTypesBuilders =
             }
 
         [<CustomOperation("actions")>]
-        member _.Actions(state: Watch, value: Map<Types.IndexName, WatcherTypes.Action>) =
+        member _.Actions(state: Watch, value: Map<CoreTypes.IndexName, WatcherTypes.Action>) =
             { state with Actions = value }
 
         [<CustomOperation("condition")>]
@@ -975,7 +975,7 @@ module WatcherTypesBuilders =
             { state with Input = value }
 
         [<CustomOperation("metadata")>]
-        member _.Metadata(state: Watch, value: Types.Metadata) =
+        member _.Metadata(state: Watch, value: CoreTypes.Metadata) =
             { state with Metadata = Some value }
 
         [<CustomOperation("status")>]
@@ -983,15 +983,15 @@ module WatcherTypesBuilders =
             { state with Status = Some value }
 
         [<CustomOperation("throttlePeriod")>]
-        member _.ThrottlePeriod(state: Watch, value: Types.Duration) =
+        member _.ThrottlePeriod(state: Watch, value: CoreTypes.Duration) =
             { state with ThrottlePeriod = Some value }
 
         [<CustomOperation("throttlePeriodInMillis")>]
-        member _.ThrottlePeriodInMillis(state: Watch, value: Types.DurationValue<Types.UnitMillis>) =
+        member _.ThrottlePeriodInMillis(state: Watch, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
             { state with ThrottlePeriodInMillis = Some value }
 
         [<CustomOperation("transform")>]
-        member _.Transform(state: Watch, value: Types.TransformContainer) =
+        member _.Transform(state: Watch, value: CoreTypes.TransformContainer) =
             { state with Transform = Some value }
 
         [<CustomOperation("trigger")>]
@@ -1016,11 +1016,11 @@ module WatcherTypesBuilders =
             { state with Actions = value }
 
         [<CustomOperation("lastChecked")>]
-        member _.LastChecked(state: WatchStatus, value: Types.DateTime) =
+        member _.LastChecked(state: WatchStatus, value: CoreTypes.DateTime) =
             { state with LastChecked = Some value }
 
         [<CustomOperation("lastMetCondition")>]
-        member _.LastMetCondition(state: WatchStatus, value: Types.DateTime) =
+        member _.LastMetCondition(state: WatchStatus, value: CoreTypes.DateTime) =
             { state with LastMetCondition = Some value }
 
         [<CustomOperation("state")>]
@@ -1028,7 +1028,7 @@ module WatcherTypesBuilders =
             { state with State = value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: WatchStatus, value: Types.VersionNumber) =
+        member _.Version(state: WatchStatus, value: CoreTypes.VersionNumber) =
             { state with Version = value }
 
         [<CustomOperation("executionState")>]

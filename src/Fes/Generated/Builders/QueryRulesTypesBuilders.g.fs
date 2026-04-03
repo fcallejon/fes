@@ -17,11 +17,11 @@ module QueryRulesTypesBuilders =
             }
 
         [<CustomOperation("ids")>]
-        member _.Ids(state: QueryRuleActions, value: Types.Id list) =
+        member _.Ids(state: QueryRuleActions, value: CoreTypes.Id list) =
             { state with Ids = Some value }
 
         [<CustomOperation("docs")>]
-        member _.Docs(state: QueryRuleActions, value: TypesQueryDsl.PinnedDoc list) =
+        member _.Docs(state: QueryRuleActions, value: CoreTypes.PinnedDoc list) =
             { state with Docs = Some value }
 
     let queryRuleActions = QueryRuleActionsBuilder()

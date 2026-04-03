@@ -28,11 +28,11 @@ module IndicesValidateQueryBuilders =
             { state with Explanation = Some value }
 
         [<CustomOperation("index")>]
-        member _.Index(state: IndicesValidationExplanation, value: Types.IndexName) =
+        member _.Index(state: IndicesValidationExplanation, value: CoreTypes.IndexName) =
             { state with Index = Some value }
 
         [<CustomOperation("shard")>]
-        member _.Shard(state: IndicesValidationExplanation, value: Types.Integer) =
+        member _.Shard(state: IndicesValidationExplanation, value: CoreTypes.Integer) =
             { state with Shard = Some value }
 
         [<CustomOperation("valid")>]

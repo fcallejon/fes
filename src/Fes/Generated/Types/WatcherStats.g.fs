@@ -9,20 +9,20 @@ module WatcherStats =
 
     type WatchRecordQueuedStats = {
         [<System.Text.Json.Serialization.JsonPropertyName("execution_time")>]
-        ExecutionTime: Types.DateTime
+        ExecutionTime: CoreTypes.DateTime
     }
 
     type WatchRecordStats = {
         [<System.Text.Json.Serialization.JsonPropertyName("execution_phase")>]
         ExecutionPhase: WatcherTypes.ExecutionPhase
         [<System.Text.Json.Serialization.JsonPropertyName("triggered_time")>]
-        TriggeredTime: Types.DateTime
+        TriggeredTime: CoreTypes.DateTime
         [<System.Text.Json.Serialization.JsonPropertyName("executed_actions")>]
         ExecutedActions: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("watch_id")>]
-        WatchId: Types.Id
+        WatchId: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("watch_record_id")>]
-        WatchRecordId: Types.Id
+        WatchRecordId: CoreTypes.Id
     }
 
     [<RequireQualifiedAccess>]
@@ -41,16 +41,16 @@ module WatcherStats =
 
     type WatcherNodeStats = {
         [<System.Text.Json.Serialization.JsonPropertyName("current_watches")>]
-        CurrentWatches: WatcherStats.WatchRecordStats list option
+        CurrentWatches: WatchRecordStats list option
         [<System.Text.Json.Serialization.JsonPropertyName("execution_thread_pool")>]
         ExecutionThreadPool: WatcherTypes.ExecutionThreadPool
         [<System.Text.Json.Serialization.JsonPropertyName("queued_watches")>]
-        QueuedWatches: WatcherStats.WatchRecordQueuedStats list option
+        QueuedWatches: WatchRecordQueuedStats list option
         [<System.Text.Json.Serialization.JsonPropertyName("watch_count")>]
-        WatchCount: Types.Long
+        WatchCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("watcher_state")>]
-        WatcherState: WatcherStats.WatcherState
+        WatcherState: WatcherState
         [<System.Text.Json.Serialization.JsonPropertyName("node_id")>]
-        NodeId: Types.Id
+        NodeId: CoreTypes.Id
     }
 

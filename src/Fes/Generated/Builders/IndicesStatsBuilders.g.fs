@@ -34,27 +34,27 @@ module IndicesStatsBuilders =
             }
 
         [<CustomOperation("completion")>]
-        member _.Completion(state: IndexStats, value: Types.CompletionStats) =
+        member _.Completion(state: IndexStats, value: CoreTypes.CompletionStats) =
             { state with Completion = Some value }
 
         [<CustomOperation("docs")>]
-        member _.Docs(state: IndexStats, value: Types.DocStats) =
+        member _.Docs(state: IndexStats, value: CoreTypes.DocStats) =
             { state with Docs = Some value }
 
         [<CustomOperation("fielddata")>]
-        member _.Fielddata(state: IndexStats, value: Types.FielddataStats) =
+        member _.Fielddata(state: IndexStats, value: CoreTypes.FielddataStats) =
             { state with Fielddata = Some value }
 
         [<CustomOperation("flush")>]
-        member _.Flush(state: IndexStats, value: Types.FlushStats) =
+        member _.Flush(state: IndexStats, value: CoreTypes.FlushStats) =
             { state with Flush = Some value }
 
         [<CustomOperation("get")>]
-        member _.Get(state: IndexStats, value: Types.GetStats) =
+        member _.Get(state: IndexStats, value: CoreTypes.GetStats) =
             { state with Get = Some value }
 
         [<CustomOperation("indexing")>]
-        member _.Indexing(state: IndexStats, value: Types.IndexingStats) =
+        member _.Indexing(state: IndexStats, value: CoreTypes.IndexingStats) =
             { state with Indexing = Some value }
 
         [<CustomOperation("indices")>]
@@ -62,47 +62,47 @@ module IndicesStatsBuilders =
             { state with Indices = Some value }
 
         [<CustomOperation("merges")>]
-        member _.Merges(state: IndexStats, value: Types.MergesStats) =
+        member _.Merges(state: IndexStats, value: CoreTypes.MergesStats) =
             { state with Merges = Some value }
 
         [<CustomOperation("queryCache")>]
-        member _.QueryCache(state: IndexStats, value: Types.QueryCacheStats) =
+        member _.QueryCache(state: IndexStats, value: CoreTypes.QueryCacheStats) =
             { state with QueryCache = Some value }
 
         [<CustomOperation("recovery")>]
-        member _.Recovery(state: IndexStats, value: Types.RecoveryStats) =
+        member _.Recovery(state: IndexStats, value: CoreTypes.RecoveryStats) =
             { state with Recovery = Some value }
 
         [<CustomOperation("refresh")>]
-        member _.Refresh(state: IndexStats, value: Types.RefreshStats) =
+        member _.Refresh(state: IndexStats, value: CoreTypes.RefreshStats) =
             { state with Refresh = Some value }
 
         [<CustomOperation("requestCache")>]
-        member _.RequestCache(state: IndexStats, value: Types.RequestCacheStats) =
+        member _.RequestCache(state: IndexStats, value: CoreTypes.RequestCacheStats) =
             { state with RequestCache = Some value }
 
         [<CustomOperation("search")>]
-        member _.Search(state: IndexStats, value: Types.SearchStats) =
+        member _.Search(state: IndexStats, value: CoreTypes.SearchStats) =
             { state with Search = Some value }
 
         [<CustomOperation("segments")>]
-        member _.Segments(state: IndexStats, value: Types.SegmentsStats) =
+        member _.Segments(state: IndexStats, value: CoreTypes.SegmentsStats) =
             { state with Segments = Some value }
 
         [<CustomOperation("store")>]
-        member _.Store(state: IndexStats, value: Types.StoreStats) =
+        member _.Store(state: IndexStats, value: CoreTypes.StoreStats) =
             { state with Store = Some value }
 
         [<CustomOperation("translog")>]
-        member _.Translog(state: IndexStats, value: Types.TranslogStats) =
+        member _.Translog(state: IndexStats, value: CoreTypes.TranslogStats) =
             { state with Translog = Some value }
 
         [<CustomOperation("warmer")>]
-        member _.Warmer(state: IndexStats, value: Types.WarmerStats) =
+        member _.Warmer(state: IndexStats, value: CoreTypes.WarmerStats) =
             { state with Warmer = Some value }
 
         [<CustomOperation("bulk")>]
-        member _.Bulk(state: IndexStats, value: Types.BulkStats) =
+        member _.Bulk(state: IndexStats, value: CoreTypes.BulkStats) =
             { state with Bulk = Some value }
 
         [<CustomOperation("shardStats")>]
@@ -135,11 +135,11 @@ module IndicesStatsBuilders =
             { state with Total = Some value }
 
         [<CustomOperation("uuid")>]
-        member _.Uuid(state: IndicesStats, value: Types.Uuid) =
+        member _.Uuid(state: IndicesStats, value: CoreTypes.Uuid) =
             { state with Uuid = Some value }
 
         [<CustomOperation("health")>]
-        member _.Health(state: IndicesStats, value: Types.HealthStatus) =
+        member _.Health(state: IndicesStats, value: CoreTypes.HealthStatus) =
             { state with Health = Some value }
 
         [<CustomOperation("status")>]
@@ -164,23 +164,23 @@ module IndicesStatsBuilders =
             { state with Description = value }
 
         [<CustomOperation("sizeInBytes")>]
-        member _.SizeInBytes(state: ShardFileSizeInfo, value: Types.Long) =
+        member _.SizeInBytes(state: ShardFileSizeInfo, value: CoreTypes.Long) =
             { state with SizeInBytes = value }
 
         [<CustomOperation("minSizeInBytes")>]
-        member _.MinSizeInBytes(state: ShardFileSizeInfo, value: Types.Long) =
+        member _.MinSizeInBytes(state: ShardFileSizeInfo, value: CoreTypes.Long) =
             { state with MinSizeInBytes = Some value }
 
         [<CustomOperation("maxSizeInBytes")>]
-        member _.MaxSizeInBytes(state: ShardFileSizeInfo, value: Types.Long) =
+        member _.MaxSizeInBytes(state: ShardFileSizeInfo, value: CoreTypes.Long) =
             { state with MaxSizeInBytes = Some value }
 
         [<CustomOperation("averageSizeInBytes")>]
-        member _.AverageSizeInBytes(state: ShardFileSizeInfo, value: Types.Long) =
+        member _.AverageSizeInBytes(state: ShardFileSizeInfo, value: CoreTypes.Long) =
             { state with AverageSizeInBytes = Some value }
 
         [<CustomOperation("count")>]
-        member _.Count(state: ShardFileSizeInfo, value: Types.Long) =
+        member _.Count(state: ShardFileSizeInfo, value: CoreTypes.Long) =
             { state with Count = Some value }
 
     let shardFileSizeInfo = ShardFileSizeInfoBuilder()
@@ -221,27 +221,27 @@ module IndicesStatsBuilders =
             { state with Commit = Some value }
 
         [<CustomOperation("completion")>]
-        member _.Completion(state: ShardStats, value: Types.CompletionStats) =
+        member _.Completion(state: ShardStats, value: CoreTypes.CompletionStats) =
             { state with Completion = Some value }
 
         [<CustomOperation("docs")>]
-        member _.Docs(state: ShardStats, value: Types.DocStats) =
+        member _.Docs(state: ShardStats, value: CoreTypes.DocStats) =
             { state with Docs = Some value }
 
         [<CustomOperation("fielddata")>]
-        member _.Fielddata(state: ShardStats, value: Types.FielddataStats) =
+        member _.Fielddata(state: ShardStats, value: CoreTypes.FielddataStats) =
             { state with Fielddata = Some value }
 
         [<CustomOperation("flush")>]
-        member _.Flush(state: ShardStats, value: Types.FlushStats) =
+        member _.Flush(state: ShardStats, value: CoreTypes.FlushStats) =
             { state with Flush = Some value }
 
         [<CustomOperation("get")>]
-        member _.Get(state: ShardStats, value: Types.GetStats) =
+        member _.Get(state: ShardStats, value: CoreTypes.GetStats) =
             { state with Get = Some value }
 
         [<CustomOperation("indexing")>]
-        member _.Indexing(state: ShardStats, value: Types.IndexingStats) =
+        member _.Indexing(state: ShardStats, value: CoreTypes.IndexingStats) =
             { state with Indexing = Some value }
 
         [<CustomOperation("mappings")>]
@@ -249,7 +249,7 @@ module IndicesStatsBuilders =
             { state with Mappings = Some value }
 
         [<CustomOperation("merges")>]
-        member _.Merges(state: ShardStats, value: Types.MergesStats) =
+        member _.Merges(state: ShardStats, value: CoreTypes.MergesStats) =
             { state with Merges = Some value }
 
         [<CustomOperation("shardPath")>]
@@ -261,15 +261,15 @@ module IndicesStatsBuilders =
             { state with QueryCache = Some value }
 
         [<CustomOperation("recovery")>]
-        member _.Recovery(state: ShardStats, value: Types.RecoveryStats) =
+        member _.Recovery(state: ShardStats, value: CoreTypes.RecoveryStats) =
             { state with Recovery = Some value }
 
         [<CustomOperation("refresh")>]
-        member _.Refresh(state: ShardStats, value: Types.RefreshStats) =
+        member _.Refresh(state: ShardStats, value: CoreTypes.RefreshStats) =
             { state with Refresh = Some value }
 
         [<CustomOperation("requestCache")>]
-        member _.RequestCache(state: ShardStats, value: Types.RequestCacheStats) =
+        member _.RequestCache(state: ShardStats, value: CoreTypes.RequestCacheStats) =
             { state with RequestCache = Some value }
 
         [<CustomOperation("retentionLeases")>]
@@ -281,11 +281,11 @@ module IndicesStatsBuilders =
             { state with Routing = Some value }
 
         [<CustomOperation("search")>]
-        member _.Search(state: ShardStats, value: Types.SearchStats) =
+        member _.Search(state: ShardStats, value: CoreTypes.SearchStats) =
             { state with Search = Some value }
 
         [<CustomOperation("segments")>]
-        member _.Segments(state: ShardStats, value: Types.SegmentsStats) =
+        member _.Segments(state: ShardStats, value: CoreTypes.SegmentsStats) =
             { state with Segments = Some value }
 
         [<CustomOperation("seqNo")>]
@@ -293,23 +293,23 @@ module IndicesStatsBuilders =
             { state with SeqNo = Some value }
 
         [<CustomOperation("store")>]
-        member _.Store(state: ShardStats, value: Types.StoreStats) =
+        member _.Store(state: ShardStats, value: CoreTypes.StoreStats) =
             { state with Store = Some value }
 
         [<CustomOperation("translog")>]
-        member _.Translog(state: ShardStats, value: Types.TranslogStats) =
+        member _.Translog(state: ShardStats, value: CoreTypes.TranslogStats) =
             { state with Translog = Some value }
 
         [<CustomOperation("warmer")>]
-        member _.Warmer(state: ShardStats, value: Types.WarmerStats) =
+        member _.Warmer(state: ShardStats, value: CoreTypes.WarmerStats) =
             { state with Warmer = Some value }
 
         [<CustomOperation("bulk")>]
-        member _.Bulk(state: ShardStats, value: Types.BulkStats) =
+        member _.Bulk(state: ShardStats, value: CoreTypes.BulkStats) =
             { state with Bulk = Some value }
 
         [<CustomOperation("shards")>]
-        member _.Shards(state: ShardStats, value: Map<Types.IndexName, System.Text.Json.JsonElement>) =
+        member _.Shards(state: ShardStats, value: Map<CoreTypes.IndexName, System.Text.Json.JsonElement>) =
             { state with Shards = Some value }
 
         [<CustomOperation("shardStats")>]

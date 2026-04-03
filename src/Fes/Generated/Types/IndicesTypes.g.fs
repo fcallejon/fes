@@ -9,7 +9,7 @@ module IndicesTypes =
 
     type Alias = {
         [<System.Text.Json.Serialization.JsonPropertyName("filter")>]
-        Filter: TypesQueryDsl.QueryContainer option
+        Filter: CoreTypes.QueryContainer option
         [<System.Text.Json.Serialization.JsonPropertyName("index_routing")>]
         IndexRouting: string option
         [<System.Text.Json.Serialization.JsonPropertyName("is_hidden")>]
@@ -24,7 +24,7 @@ module IndicesTypes =
 
     type AliasDefinition = {
         [<System.Text.Json.Serialization.JsonPropertyName("filter")>]
-        Filter: TypesQueryDsl.QueryContainer option
+        Filter: CoreTypes.QueryContainer option
         [<System.Text.Json.Serialization.JsonPropertyName("index_routing")>]
         IndexRouting: string option
         [<System.Text.Json.Serialization.JsonPropertyName("is_write_index")>]
@@ -57,56 +57,56 @@ module IndicesTypes =
 
     type DataStreamIndex = {
         [<System.Text.Json.Serialization.JsonPropertyName("index_name")>]
-        IndexName: Types.IndexName
+        IndexName: CoreTypes.IndexName
         [<System.Text.Json.Serialization.JsonPropertyName("index_uuid")>]
-        IndexUuid: Types.Uuid
+        IndexUuid: CoreTypes.Uuid
         [<System.Text.Json.Serialization.JsonPropertyName("ilm_policy")>]
-        IlmPolicy: Types.Name option
+        IlmPolicy: CoreTypes.Name option
         [<System.Text.Json.Serialization.JsonPropertyName("managed_by")>]
-        ManagedBy: IndicesTypes.ManagedBy option
+        ManagedBy: ManagedBy option
         [<System.Text.Json.Serialization.JsonPropertyName("prefer_ilm")>]
         PreferIlm: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("index_mode")>]
-        IndexMode: IndicesTypes.IndexMode option
+        IndexMode: IndexMode option
     }
 
     type FailureStore = {
         [<System.Text.Json.Serialization.JsonPropertyName("enabled")>]
         Enabled: bool
         [<System.Text.Json.Serialization.JsonPropertyName("indices")>]
-        Indices: IndicesTypes.DataStreamIndex list
+        Indices: DataStreamIndex list
         [<System.Text.Json.Serialization.JsonPropertyName("rollover_on_write")>]
         RolloverOnWrite: bool
     }
 
     type DataStreamLifecycleRolloverConditions = {
         [<System.Text.Json.Serialization.JsonPropertyName("min_age")>]
-        MinAge: Types.Duration option
+        MinAge: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("max_age")>]
         MaxAge: string option
         [<System.Text.Json.Serialization.JsonPropertyName("min_docs")>]
-        MinDocs: Types.Long option
+        MinDocs: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("max_docs")>]
-        MaxDocs: Types.Long option
+        MaxDocs: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("min_size")>]
-        MinSize: Types.ByteSize option
+        MinSize: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("max_size")>]
-        MaxSize: Types.ByteSize option
+        MaxSize: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("min_primary_shard_size")>]
-        MinPrimaryShardSize: Types.ByteSize option
+        MinPrimaryShardSize: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("max_primary_shard_size")>]
-        MaxPrimaryShardSize: Types.ByteSize option
+        MaxPrimaryShardSize: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("min_primary_shard_docs")>]
-        MinPrimaryShardDocs: Types.Long option
+        MinPrimaryShardDocs: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("max_primary_shard_docs")>]
-        MaxPrimaryShardDocs: Types.Long option
+        MaxPrimaryShardDocs: CoreTypes.Long option
     }
 
     type DownsamplingRound = {
         [<System.Text.Json.Serialization.JsonPropertyName("after")>]
-        After: Types.Duration
+        After: CoreTypes.Duration
         [<System.Text.Json.Serialization.JsonPropertyName("fixed_interval")>]
-        FixedInterval: Types.DurationLarge
+        FixedInterval: CoreTypes.DurationLarge
     }
 
     [<RequireQualifiedAccess>]
@@ -117,33 +117,33 @@ module IndicesTypes =
     /// Data stream lifecycle denotes that a data stream is managed by the data stream lifecycle and contains the configuration.
     type DataStreamLifecycle = {
         [<System.Text.Json.Serialization.JsonPropertyName("data_retention")>]
-        DataRetention: Types.Duration option
+        DataRetention: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("downsampling")>]
-        Downsampling: IndicesTypes.DownsamplingRound list option
+        Downsampling: DownsamplingRound list option
         [<System.Text.Json.Serialization.JsonPropertyName("downsampling_method")>]
-        DownsamplingMethod: IndicesTypes.SamplingMethod option
+        DownsamplingMethod: SamplingMethod option
         [<System.Text.Json.Serialization.JsonPropertyName("enabled")>]
         Enabled: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("frozen_after")>]
-        FrozenAfter: Types.Duration option
+        FrozenAfter: CoreTypes.Duration option
     }
 
     /// Data stream lifecycle with rollover can be used to display the configuration including the default rollover conditions,
     type DataStreamLifecycleWithRollover = {
         [<System.Text.Json.Serialization.JsonPropertyName("rollover")>]
-        Rollover: IndicesTypes.DataStreamLifecycleRolloverConditions option
+        Rollover: DataStreamLifecycleRolloverConditions option
     }
 
     type RetentionLease = {
         [<System.Text.Json.Serialization.JsonPropertyName("period")>]
-        Period: Types.Duration
+        Period: CoreTypes.Duration
     }
 
     type SoftDeletes = {
         [<System.Text.Json.Serialization.JsonPropertyName("enabled")>]
         Enabled: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("retention_lease")>]
-        RetentionLease: IndicesTypes.RetentionLease option
+        RetentionLease: RetentionLease option
     }
 
     [<RequireQualifiedAccess>]
@@ -163,7 +163,7 @@ module IndicesTypes =
 
     type IndexSegmentSort = {
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
-        Field: Types.Fields option
+        Field: CoreTypes.Fields option
         [<System.Text.Json.Serialization.JsonPropertyName("order")>]
         Order: System.Text.Json.JsonElement option
         [<System.Text.Json.Serialization.JsonPropertyName("mode")>]
@@ -180,78 +180,78 @@ module IndicesTypes =
 
     type MergeScheduler = {
         [<System.Text.Json.Serialization.JsonPropertyName("max_thread_count")>]
-        MaxThreadCount: SpecUtils.Stringified<Types.Integer> option
+        MaxThreadCount: CoreTypes.Stringified<CoreTypes.Integer> option
         [<System.Text.Json.Serialization.JsonPropertyName("max_merge_count")>]
-        MaxMergeCount: SpecUtils.Stringified<Types.Integer> option
+        MaxMergeCount: CoreTypes.Stringified<CoreTypes.Integer> option
     }
 
     type Merge = {
         [<System.Text.Json.Serialization.JsonPropertyName("scheduler")>]
-        Scheduler: IndicesTypes.MergeScheduler option
+        Scheduler: MergeScheduler option
     }
 
     type SearchIdle = {
         [<System.Text.Json.Serialization.JsonPropertyName("after")>]
-        After: Types.Duration option
+        After: CoreTypes.Duration option
     }
 
     type SlowlogTresholdLevels = {
         [<System.Text.Json.Serialization.JsonPropertyName("warn")>]
-        Warn: Types.Duration option
+        Warn: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("info")>]
-        Info: Types.Duration option
+        Info: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("debug")>]
-        Debug: Types.Duration option
+        Debug: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("trace")>]
-        Trace: Types.Duration option
+        Trace: CoreTypes.Duration option
     }
 
     type SlowlogTresholds = {
         [<System.Text.Json.Serialization.JsonPropertyName("query")>]
-        Query: IndicesTypes.SlowlogTresholdLevels option
+        Query: SlowlogTresholdLevels option
         [<System.Text.Json.Serialization.JsonPropertyName("fetch")>]
-        Fetch: IndicesTypes.SlowlogTresholdLevels option
+        Fetch: SlowlogTresholdLevels option
     }
 
     type SlowlogSettings = {
         [<System.Text.Json.Serialization.JsonPropertyName("level")>]
         Level: string option
         [<System.Text.Json.Serialization.JsonPropertyName("source")>]
-        Source: Types.Integer option
+        Source: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("reformat")>]
         Reformat: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("threshold")>]
-        Threshold: IndicesTypes.SlowlogTresholds option
+        Threshold: SlowlogTresholds option
     }
 
     type SettingsSearch = {
         [<System.Text.Json.Serialization.JsonPropertyName("idle")>]
-        Idle: IndicesTypes.SearchIdle option
+        Idle: SearchIdle option
         [<System.Text.Json.Serialization.JsonPropertyName("slowlog")>]
-        Slowlog: IndicesTypes.SlowlogSettings option
+        Slowlog: SlowlogSettings option
     }
 
     type IndexSettingBlocks = {
         [<System.Text.Json.Serialization.JsonPropertyName("read_only")>]
-        ReadOnly: SpecUtils.Stringified<bool> option
+        ReadOnly: CoreTypes.Stringified<bool> option
         [<System.Text.Json.Serialization.JsonPropertyName("read_only_allow_delete")>]
-        ReadOnlyAllowDelete: SpecUtils.Stringified<bool> option
+        ReadOnlyAllowDelete: CoreTypes.Stringified<bool> option
         [<System.Text.Json.Serialization.JsonPropertyName("read")>]
-        Read: SpecUtils.Stringified<bool> option
+        Read: CoreTypes.Stringified<bool> option
         [<System.Text.Json.Serialization.JsonPropertyName("write")>]
-        Write: SpecUtils.Stringified<bool> option
+        Write: CoreTypes.Stringified<bool> option
         [<System.Text.Json.Serialization.JsonPropertyName("metadata")>]
-        Metadata: SpecUtils.Stringified<bool> option
+        Metadata: CoreTypes.Stringified<bool> option
     }
 
     type SettingsAnalyze = {
         [<System.Text.Json.Serialization.JsonPropertyName("max_token_count")>]
-        MaxTokenCount: SpecUtils.Stringified<Types.Integer> option
+        MaxTokenCount: CoreTypes.Stringified<CoreTypes.Integer> option
     }
 
     type SettingsHighlight = {
         [<System.Text.Json.Serialization.JsonPropertyName("max_analyzed_offset")>]
-        MaxAnalyzedOffset: Types.Integer option
+        MaxAnalyzedOffset: CoreTypes.Integer option
     }
 
     [<RequireQualifiedAccess>]
@@ -265,12 +265,12 @@ module IndicesTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("_tier_preference")>]
         TierPreference: string option
         [<System.Text.Json.Serialization.JsonPropertyName("_id")>]
-        Id: Types.Id option
+        Id: CoreTypes.Id option
     }
 
     type IndexRoutingAllocationInitialRecovery = {
         [<System.Text.Json.Serialization.JsonPropertyName("_id")>]
-        Id: Types.Id option
+        Id: CoreTypes.Id option
     }
 
     type IndexRoutingAllocationDisk = {
@@ -280,13 +280,13 @@ module IndicesTypes =
 
     type IndexRoutingAllocation = {
         [<System.Text.Json.Serialization.JsonPropertyName("enable")>]
-        Enable: IndicesTypes.IndexRoutingAllocationOptions option
+        Enable: IndexRoutingAllocationOptions option
         [<System.Text.Json.Serialization.JsonPropertyName("include")>]
-        Include: IndicesTypes.IndexRoutingAllocationInclude option
+        Include: IndexRoutingAllocationInclude option
         [<System.Text.Json.Serialization.JsonPropertyName("initial_recovery")>]
-        InitialRecovery: IndicesTypes.IndexRoutingAllocationInitialRecovery option
+        InitialRecovery: IndexRoutingAllocationInitialRecovery option
         [<System.Text.Json.Serialization.JsonPropertyName("disk")>]
-        Disk: IndicesTypes.IndexRoutingAllocationDisk option
+        Disk: IndexRoutingAllocationDisk option
     }
 
     [<RequireQualifiedAccess>]
@@ -298,32 +298,32 @@ module IndicesTypes =
 
     type IndexRoutingRebalance = {
         [<System.Text.Json.Serialization.JsonPropertyName("enable")>]
-        Enable: IndicesTypes.IndexRoutingRebalanceOptions
+        Enable: IndexRoutingRebalanceOptions
     }
 
     type IndexRouting = {
         [<System.Text.Json.Serialization.JsonPropertyName("allocation")>]
-        Allocation: IndicesTypes.IndexRoutingAllocation option
+        Allocation: IndexRoutingAllocation option
         [<System.Text.Json.Serialization.JsonPropertyName("rebalance")>]
-        Rebalance: IndicesTypes.IndexRoutingRebalance option
+        Rebalance: IndexRoutingRebalance option
     }
 
     type IndexSettingsLifecycleStep = {
         [<System.Text.Json.Serialization.JsonPropertyName("wait_time_threshold")>]
-        WaitTimeThreshold: Types.Duration option
+        WaitTimeThreshold: CoreTypes.Duration option
     }
 
     type IndexSettingsLifecycle = {
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.Name option
+        Name: CoreTypes.Name option
         [<System.Text.Json.Serialization.JsonPropertyName("indexing_complete")>]
-        IndexingComplete: SpecUtils.Stringified<bool> option
+        IndexingComplete: CoreTypes.Stringified<bool> option
         [<System.Text.Json.Serialization.JsonPropertyName("origination_date")>]
-        OriginationDate: Types.Long option
+        OriginationDate: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("parse_origination_date")>]
         ParseOriginationDate: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("step")>]
-        Step: IndicesTypes.IndexSettingsLifecycleStep option
+        Step: IndexSettingsLifecycleStep option
         [<System.Text.Json.Serialization.JsonPropertyName("rollover_alias")>]
         RolloverAlias: string option
         [<System.Text.Json.Serialization.JsonPropertyName("prefer_ilm")>]
@@ -332,7 +332,7 @@ module IndicesTypes =
 
     type IndexVersioning = {
         [<System.Text.Json.Serialization.JsonPropertyName("created")>]
-        Created: Types.VersionString option
+        Created: CoreTypes.VersionString option
         [<System.Text.Json.Serialization.JsonPropertyName("created_string")>]
         CreatedString: string option
     }
@@ -344,61 +344,61 @@ module IndicesTypes =
 
     type TranslogRetention = {
         [<System.Text.Json.Serialization.JsonPropertyName("size")>]
-        Size: Types.ByteSize option
+        Size: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("age")>]
-        Age: Types.Duration option
+        Age: CoreTypes.Duration option
     }
 
     type Translog = {
         [<System.Text.Json.Serialization.JsonPropertyName("sync_interval")>]
-        SyncInterval: Types.Duration option
+        SyncInterval: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("durability")>]
-        Durability: IndicesTypes.TranslogDurability option
+        Durability: TranslogDurability option
         [<System.Text.Json.Serialization.JsonPropertyName("flush_threshold_size")>]
-        FlushThresholdSize: Types.ByteSize option
+        FlushThresholdSize: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("retention")>]
-        Retention: IndicesTypes.TranslogRetention option
+        Retention: TranslogRetention option
     }
 
     type SettingsQueryString = {
         [<System.Text.Json.Serialization.JsonPropertyName("lenient")>]
-        Lenient: SpecUtils.Stringified<bool>
+        Lenient: CoreTypes.Stringified<bool>
     }
 
     type IndexSettingsAnalysis = {
         [<System.Text.Json.Serialization.JsonPropertyName("analyzer")>]
-        Analyzer: Map<string, TypesAnalysis.Analyzer> option
+        Analyzer: Map<string, CoreTypes.Analyzer> option
         [<System.Text.Json.Serialization.JsonPropertyName("char_filter")>]
-        CharFilter: Map<string, TypesAnalysis.CharFilter> option
+        CharFilter: Map<string, CoreTypes.CharFilter> option
         [<System.Text.Json.Serialization.JsonPropertyName("filter")>]
-        Filter: Map<string, TypesAnalysis.TokenFilter> option
+        Filter: Map<string, CoreTypes.TokenFilter> option
         [<System.Text.Json.Serialization.JsonPropertyName("normalizer")>]
-        Normalizer: Map<string, TypesAnalysis.Normalizer> option
+        Normalizer: Map<string, CoreTypes.Normalizer> option
         [<System.Text.Json.Serialization.JsonPropertyName("tokenizer")>]
-        Tokenizer: Map<string, TypesAnalysis.Tokenizer> option
+        Tokenizer: Map<string, CoreTypes.Tokenizer> option
     }
 
     type IndexSettingsTimeSeries = {
         [<System.Text.Json.Serialization.JsonPropertyName("end_time")>]
-        EndTime: Types.DateTime option
+        EndTime: CoreTypes.DateTime option
         [<System.Text.Json.Serialization.JsonPropertyName("start_time")>]
-        StartTime: Types.DateTime option
+        StartTime: CoreTypes.DateTime option
     }
 
     type Queries = {
         [<System.Text.Json.Serialization.JsonPropertyName("cache")>]
-        Cache: IndicesTypes.CacheQueries option
+        Cache: CacheQueries option
     }
 
     type SettingsSimilarityBm25 = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("b")>]
-        B: Types.Double option
+        B: CoreTypes.Double option
         [<System.Text.Json.Serialization.JsonPropertyName("discount_overlaps")>]
         DiscountOverlaps: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("k1")>]
-        K1: Types.Double option
+        K1: CoreTypes.Double option
     }
 
     type SettingsSimilarityBoolean = {
@@ -410,64 +410,64 @@ module IndicesTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("independence_measure")>]
-        IndependenceMeasure: Types.DFIIndependenceMeasure
+        IndependenceMeasure: CoreTypes.DFIIndependenceMeasure
     }
 
     type SettingsSimilarityDfr = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("after_effect")>]
-        AfterEffect: Types.DFRAfterEffect
+        AfterEffect: CoreTypes.DFRAfterEffect
         [<System.Text.Json.Serialization.JsonPropertyName("basic_model")>]
-        BasicModel: Types.DFRBasicModel
+        BasicModel: CoreTypes.DFRBasicModel
         [<System.Text.Json.Serialization.JsonPropertyName("normalization")>]
-        Normalization: Types.Normalization
+        Normalization: CoreTypes.Normalization
     }
 
     type SettingsSimilarityIb = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("distribution")>]
-        Distribution: Types.IBDistribution
+        Distribution: CoreTypes.IBDistribution
         [<System.Text.Json.Serialization.JsonPropertyName("lambda")>]
-        Lambda: Types.IBLambda
+        Lambda: CoreTypes.IBLambda
         [<System.Text.Json.Serialization.JsonPropertyName("normalization")>]
-        Normalization: Types.Normalization
+        Normalization: CoreTypes.Normalization
     }
 
     type SettingsSimilarityLmd = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("mu")>]
-        Mu: Types.Double option
+        Mu: CoreTypes.Double option
     }
 
     type SettingsSimilarityLmj = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("lambda")>]
-        Lambda: Types.Double option
+        Lambda: CoreTypes.Double option
     }
 
     type SettingsSimilarityScripted = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("script")>]
-        Script: Types.Script
+        Script: CoreTypes.Script
         [<System.Text.Json.Serialization.JsonPropertyName("weight_script")>]
-        WeightScript: Types.Script option
+        WeightScript: CoreTypes.Script option
     }
 
     [<RequireQualifiedAccess>]
     type SettingsSimilarity =
-        | SettingsSimilarityBm25 of IndicesTypes.SettingsSimilarityBm25
-        | SettingsSimilarityBoolean of IndicesTypes.SettingsSimilarityBoolean
-        | SettingsSimilarityDfi of IndicesTypes.SettingsSimilarityDfi
-        | SettingsSimilarityDfr of IndicesTypes.SettingsSimilarityDfr
-        | SettingsSimilarityIb of IndicesTypes.SettingsSimilarityIb
-        | SettingsSimilarityLmd of IndicesTypes.SettingsSimilarityLmd
-        | SettingsSimilarityLmj of IndicesTypes.SettingsSimilarityLmj
-        | SettingsSimilarityScripted of IndicesTypes.SettingsSimilarityScripted
+        | SettingsSimilarityBm25 of SettingsSimilarityBm25
+        | SettingsSimilarityBoolean of SettingsSimilarityBoolean
+        | SettingsSimilarityDfi of SettingsSimilarityDfi
+        | SettingsSimilarityDfr of SettingsSimilarityDfr
+        | SettingsSimilarityIb of SettingsSimilarityIb
+        | SettingsSimilarityLmd of SettingsSimilarityLmd
+        | SettingsSimilarityLmj of SettingsSimilarityLmj
+        | SettingsSimilarityScripted of SettingsSimilarityScripted
         | Unknown of name: string * System.Text.Json.JsonElement
 
     type MappingLimitSettingsTotalFields = {
@@ -479,27 +479,27 @@ module IndicesTypes =
 
     type MappingLimitSettingsDepth = {
         [<System.Text.Json.Serialization.JsonPropertyName("limit")>]
-        Limit: Types.Long option
+        Limit: CoreTypes.Long option
     }
 
     type MappingLimitSettingsNestedFields = {
         [<System.Text.Json.Serialization.JsonPropertyName("limit")>]
-        Limit: Types.Long option
+        Limit: CoreTypes.Long option
     }
 
     type MappingLimitSettingsNestedObjects = {
         [<System.Text.Json.Serialization.JsonPropertyName("limit")>]
-        Limit: Types.Long option
+        Limit: CoreTypes.Long option
     }
 
     type MappingLimitSettingsFieldNameLength = {
         [<System.Text.Json.Serialization.JsonPropertyName("limit")>]
-        Limit: Types.Long option
+        Limit: CoreTypes.Long option
     }
 
     type MappingLimitSettingsDimensionFields = {
         [<System.Text.Json.Serialization.JsonPropertyName("limit")>]
-        Limit: Types.Long option
+        Limit: CoreTypes.Long option
     }
 
     [<RequireQualifiedAccess>]
@@ -510,7 +510,7 @@ module IndicesTypes =
 
     type MappingLimitSettingsSourceFields = {
         [<System.Text.Json.Serialization.JsonPropertyName("mode")>]
-        Mode: IndicesTypes.SourceMode
+        Mode: SourceMode
     }
 
     /// Mapping Limit Settings
@@ -518,47 +518,47 @@ module IndicesTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("coerce")>]
         Coerce: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("total_fields")>]
-        TotalFields: IndicesTypes.MappingLimitSettingsTotalFields option
+        TotalFields: MappingLimitSettingsTotalFields option
         [<System.Text.Json.Serialization.JsonPropertyName("depth")>]
-        Depth: IndicesTypes.MappingLimitSettingsDepth option
+        Depth: MappingLimitSettingsDepth option
         [<System.Text.Json.Serialization.JsonPropertyName("nested_fields")>]
-        NestedFields: IndicesTypes.MappingLimitSettingsNestedFields option
+        NestedFields: MappingLimitSettingsNestedFields option
         [<System.Text.Json.Serialization.JsonPropertyName("nested_objects")>]
-        NestedObjects: IndicesTypes.MappingLimitSettingsNestedObjects option
+        NestedObjects: MappingLimitSettingsNestedObjects option
         [<System.Text.Json.Serialization.JsonPropertyName("field_name_length")>]
-        FieldNameLength: IndicesTypes.MappingLimitSettingsFieldNameLength option
+        FieldNameLength: MappingLimitSettingsFieldNameLength option
         [<System.Text.Json.Serialization.JsonPropertyName("dimension_fields")>]
-        DimensionFields: IndicesTypes.MappingLimitSettingsDimensionFields option
+        DimensionFields: MappingLimitSettingsDimensionFields option
         [<System.Text.Json.Serialization.JsonPropertyName("source")>]
-        Source: IndicesTypes.MappingLimitSettingsSourceFields option
+        Source: MappingLimitSettingsSourceFields option
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_malformed")>]
         IgnoreMalformed: System.Text.Json.JsonElement option
     }
 
     type IndexingSlowlogTresholds = {
         [<System.Text.Json.Serialization.JsonPropertyName("index")>]
-        Index: IndicesTypes.SlowlogTresholdLevels option
+        Index: SlowlogTresholdLevels option
     }
 
     type IndexingSlowlogSettings = {
         [<System.Text.Json.Serialization.JsonPropertyName("level")>]
         Level: string option
         [<System.Text.Json.Serialization.JsonPropertyName("source")>]
-        Source: Types.Integer option
+        Source: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("reformat")>]
         Reformat: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("threshold")>]
-        Threshold: IndicesTypes.IndexingSlowlogTresholds option
+        Threshold: IndexingSlowlogTresholds option
     }
 
     type IndexingPressureMemory = {
         [<System.Text.Json.Serialization.JsonPropertyName("limit")>]
-        Limit: Types.Integer option
+        Limit: CoreTypes.Integer option
     }
 
     type IndexingPressure = {
         [<System.Text.Json.Serialization.JsonPropertyName("memory")>]
-        Memory: IndicesTypes.IndexingPressureMemory
+        Memory: IndexingPressureMemory
     }
 
     [<RequireQualifiedAccess>]
@@ -571,180 +571,180 @@ module IndicesTypes =
 
     type Storage = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
-        Type: IndicesTypes.StorageType
+        Type: StorageType
         [<System.Text.Json.Serialization.JsonPropertyName("allow_mmap")>]
         AllowMmap: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("stats_refresh_interval")>]
-        StatsRefreshInterval: Types.Duration option
+        StatsRefreshInterval: CoreTypes.Duration option
     }
 
     type IndexSettings = {
         [<System.Text.Json.Serialization.JsonPropertyName("index")>]
-        Index: IndicesTypes.IndexSettings option
+        Index: IndexSettings option
         [<System.Text.Json.Serialization.JsonPropertyName("mode")>]
         Mode: string option
         [<System.Text.Json.Serialization.JsonPropertyName("routing_path")>]
         RoutingPath: System.Text.Json.JsonElement option
         [<System.Text.Json.Serialization.JsonPropertyName("soft_deletes")>]
-        SoftDeletes: IndicesTypes.SoftDeletes option
+        SoftDeletes: SoftDeletes option
         [<System.Text.Json.Serialization.JsonPropertyName("sort")>]
-        Sort: IndicesTypes.IndexSegmentSort option
+        Sort: IndexSegmentSort option
         [<System.Text.Json.Serialization.JsonPropertyName("number_of_shards")>]
         NumberOfShards: System.Text.Json.JsonElement option
         [<System.Text.Json.Serialization.JsonPropertyName("number_of_replicas")>]
         NumberOfReplicas: System.Text.Json.JsonElement option
         [<System.Text.Json.Serialization.JsonPropertyName("number_of_routing_shards")>]
-        NumberOfRoutingShards: Types.Integer option
+        NumberOfRoutingShards: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("check_on_startup")>]
-        CheckOnStartup: IndicesTypes.IndexCheckOnStartup option
+        CheckOnStartup: IndexCheckOnStartup option
         [<System.Text.Json.Serialization.JsonPropertyName("codec")>]
         Codec: string option
         [<System.Text.Json.Serialization.JsonPropertyName("routing_partition_size")>]
-        RoutingPartitionSize: SpecUtils.Stringified<Types.Integer> option
+        RoutingPartitionSize: CoreTypes.Stringified<CoreTypes.Integer> option
         [<System.Text.Json.Serialization.JsonPropertyName("load_fixed_bitset_filters_eagerly")>]
         LoadFixedBitsetFiltersEagerly: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("hidden")>]
         Hidden: System.Text.Json.JsonElement option
         [<System.Text.Json.Serialization.JsonPropertyName("auto_expand_replicas")>]
-        AutoExpandReplicas: SpecUtils.WithNullValue<string> option
+        AutoExpandReplicas: CoreTypes.WithNullValue<string> option
         [<System.Text.Json.Serialization.JsonPropertyName("merge")>]
-        Merge: IndicesTypes.Merge option
+        Merge: Merge option
         [<System.Text.Json.Serialization.JsonPropertyName("search")>]
-        Search: IndicesTypes.SettingsSearch option
+        Search: SettingsSearch option
         [<System.Text.Json.Serialization.JsonPropertyName("refresh_interval")>]
-        RefreshInterval: Types.Duration option
+        RefreshInterval: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("max_result_window")>]
-        MaxResultWindow: Types.Integer option
+        MaxResultWindow: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("max_inner_result_window")>]
-        MaxInnerResultWindow: Types.Integer option
+        MaxInnerResultWindow: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("max_rescore_window")>]
-        MaxRescoreWindow: Types.Integer option
+        MaxRescoreWindow: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("max_docvalue_fields_search")>]
-        MaxDocvalueFieldsSearch: Types.Integer option
+        MaxDocvalueFieldsSearch: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("max_script_fields")>]
-        MaxScriptFields: Types.Integer option
+        MaxScriptFields: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("max_ngram_diff")>]
-        MaxNgramDiff: Types.Integer option
+        MaxNgramDiff: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("max_shingle_diff")>]
-        MaxShingleDiff: Types.Integer option
+        MaxShingleDiff: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("blocks")>]
-        Blocks: IndicesTypes.IndexSettingBlocks option
+        Blocks: IndexSettingBlocks option
         [<System.Text.Json.Serialization.JsonPropertyName("max_refresh_listeners")>]
-        MaxRefreshListeners: Types.Integer option
+        MaxRefreshListeners: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("analyze")>]
-        Analyze: IndicesTypes.SettingsAnalyze option
+        Analyze: SettingsAnalyze option
         [<System.Text.Json.Serialization.JsonPropertyName("highlight")>]
-        Highlight: IndicesTypes.SettingsHighlight option
+        Highlight: SettingsHighlight option
         [<System.Text.Json.Serialization.JsonPropertyName("max_terms_count")>]
-        MaxTermsCount: Types.Integer option
+        MaxTermsCount: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("max_regex_length")>]
-        MaxRegexLength: Types.Integer option
+        MaxRegexLength: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("routing")>]
-        Routing: IndicesTypes.IndexRouting option
+        Routing: IndexRouting option
         [<System.Text.Json.Serialization.JsonPropertyName("gc_deletes")>]
-        GcDeletes: Types.Duration option
+        GcDeletes: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("default_pipeline")>]
-        DefaultPipeline: Types.PipelineName option
+        DefaultPipeline: CoreTypes.PipelineName option
         [<System.Text.Json.Serialization.JsonPropertyName("final_pipeline")>]
-        FinalPipeline: Types.PipelineName option
+        FinalPipeline: CoreTypes.PipelineName option
         [<System.Text.Json.Serialization.JsonPropertyName("lifecycle")>]
-        Lifecycle: IndicesTypes.IndexSettingsLifecycle option
+        Lifecycle: IndexSettingsLifecycle option
         [<System.Text.Json.Serialization.JsonPropertyName("provided_name")>]
-        ProvidedName: Types.Name option
+        ProvidedName: CoreTypes.Name option
         [<System.Text.Json.Serialization.JsonPropertyName("creation_date")>]
-        CreationDate: SpecUtils.Stringified<Types.EpochTime<Types.UnitMillis>> option
+        CreationDate: CoreTypes.Stringified<CoreTypes.EpochTime<CoreTypes.UnitMillis>> option
         [<System.Text.Json.Serialization.JsonPropertyName("creation_date_string")>]
-        CreationDateString: Types.DateTime option
+        CreationDateString: CoreTypes.DateTime option
         [<System.Text.Json.Serialization.JsonPropertyName("uuid")>]
-        Uuid: Types.Uuid option
+        Uuid: CoreTypes.Uuid option
         [<System.Text.Json.Serialization.JsonPropertyName("version")>]
-        Version: IndicesTypes.IndexVersioning option
+        Version: IndexVersioning option
         [<System.Text.Json.Serialization.JsonPropertyName("verified_before_close")>]
         VerifiedBeforeClose: System.Text.Json.JsonElement option
         [<System.Text.Json.Serialization.JsonPropertyName("format")>]
         Format: System.Text.Json.JsonElement option
         [<System.Text.Json.Serialization.JsonPropertyName("max_slices_per_scroll")>]
-        MaxSlicesPerScroll: Types.Integer option
+        MaxSlicesPerScroll: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("translog")>]
-        Translog: IndicesTypes.Translog option
+        Translog: Translog option
         [<System.Text.Json.Serialization.JsonPropertyName("query_string")>]
-        QueryString: IndicesTypes.SettingsQueryString option
+        QueryString: SettingsQueryString option
         [<System.Text.Json.Serialization.JsonPropertyName("priority")>]
         Priority: System.Text.Json.JsonElement option
         [<System.Text.Json.Serialization.JsonPropertyName("top_metrics_max_size")>]
-        TopMetricsMaxSize: Types.Integer option
+        TopMetricsMaxSize: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("analysis")>]
-        Analysis: IndicesTypes.IndexSettingsAnalysis option
+        Analysis: IndexSettingsAnalysis option
         [<System.Text.Json.Serialization.JsonPropertyName("settings")>]
-        Settings: IndicesTypes.IndexSettings option
+        Settings: IndexSettings option
         [<System.Text.Json.Serialization.JsonPropertyName("time_series")>]
-        TimeSeries: IndicesTypes.IndexSettingsTimeSeries option
+        TimeSeries: IndexSettingsTimeSeries option
         [<System.Text.Json.Serialization.JsonPropertyName("queries")>]
-        Queries: IndicesTypes.Queries option
+        Queries: Queries option
         [<System.Text.Json.Serialization.JsonPropertyName("similarity")>]
-        Similarity: Map<string, IndicesTypes.SettingsSimilarity> option
+        Similarity: Map<string, SettingsSimilarity> option
         [<System.Text.Json.Serialization.JsonPropertyName("mapping")>]
-        Mapping: IndicesTypes.MappingLimitSettings option
+        Mapping: MappingLimitSettings option
         [<System.Text.Json.Serialization.JsonPropertyName("indexing.slowlog")>]
-        IndexingSlowlog: IndicesTypes.IndexingSlowlogSettings option
+        IndexingSlowlog: IndexingSlowlogSettings option
         [<System.Text.Json.Serialization.JsonPropertyName("indexing_pressure")>]
-        IndexingPressure: IndicesTypes.IndexingPressure option
+        IndexingPressure: IndexingPressure option
         [<System.Text.Json.Serialization.JsonPropertyName("store")>]
-        Store: IndicesTypes.Storage option
+        Store: Storage option
     }
 
     type DataStreamTimestampField = {
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.Field
+        Name: CoreTypes.Field
     }
 
     type DataStream = {
         [<System.Text.Json.Serialization.JsonPropertyName("_meta")>]
-        Meta: Types.Metadata option
+        Meta: CoreTypes.Metadata option
         [<System.Text.Json.Serialization.JsonPropertyName("allow_custom_routing")>]
         AllowCustomRouting: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("failure_store")>]
-        FailureStore: IndicesTypes.FailureStore option
+        FailureStore: FailureStore option
         [<System.Text.Json.Serialization.JsonPropertyName("generation")>]
-        Generation: Types.Integer
+        Generation: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("hidden")>]
         Hidden: bool
         [<System.Text.Json.Serialization.JsonPropertyName("ilm_policy")>]
-        IlmPolicy: Types.Name option
+        IlmPolicy: CoreTypes.Name option
         [<System.Text.Json.Serialization.JsonPropertyName("next_generation_managed_by")>]
-        NextGenerationManagedBy: IndicesTypes.ManagedBy
+        NextGenerationManagedBy: ManagedBy
         [<System.Text.Json.Serialization.JsonPropertyName("prefer_ilm")>]
         PreferIlm: bool
         [<System.Text.Json.Serialization.JsonPropertyName("indices")>]
-        Indices: IndicesTypes.DataStreamIndex list
+        Indices: DataStreamIndex list
         [<System.Text.Json.Serialization.JsonPropertyName("lifecycle")>]
-        Lifecycle: IndicesTypes.DataStreamLifecycleWithRollover option
+        Lifecycle: DataStreamLifecycleWithRollover option
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.DataStreamName
+        Name: CoreTypes.DataStreamName
         [<System.Text.Json.Serialization.JsonPropertyName("replicated")>]
         Replicated: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("rollover_on_write")>]
         RolloverOnWrite: bool
         [<System.Text.Json.Serialization.JsonPropertyName("settings")>]
-        Settings: IndicesTypes.IndexSettings
+        Settings: IndexSettings
         [<System.Text.Json.Serialization.JsonPropertyName("mappings")>]
-        Mappings: TypesMapping.TypeMapping option
+        Mappings: CoreTypes.TypeMapping option
         [<System.Text.Json.Serialization.JsonPropertyName("status")>]
-        Status: Types.HealthStatus
+        Status: CoreTypes.HealthStatus
         [<System.Text.Json.Serialization.JsonPropertyName("system")>]
         System: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("template")>]
-        Template: Types.Name
+        Template: CoreTypes.Name
         [<System.Text.Json.Serialization.JsonPropertyName("timestamp_field")>]
-        TimestampField: IndicesTypes.DataStreamTimestampField
+        TimestampField: DataStreamTimestampField
         [<System.Text.Json.Serialization.JsonPropertyName("index_mode")>]
-        IndexMode: IndicesTypes.IndexMode option
+        IndexMode: IndexMode option
     }
 
     /// The failure store lifecycle configures the data stream lifecycle configuration for failure indices.
     type FailureStoreLifecycle = {
         [<System.Text.Json.Serialization.JsonPropertyName("data_retention")>]
-        DataRetention: Types.Duration option
+        DataRetention: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("enabled")>]
         Enabled: bool option
     }
@@ -754,13 +754,13 @@ module IndicesTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("enabled")>]
         Enabled: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("lifecycle")>]
-        Lifecycle: IndicesTypes.FailureStoreLifecycle option
+        Lifecycle: FailureStoreLifecycle option
     }
 
     /// Template equivalent of FailureStoreLifecycle that allows nullable values.
     type FailureStoreLifecycleTemplate = {
         [<System.Text.Json.Serialization.JsonPropertyName("data_retention")>]
-        DataRetention: Types.Duration option option
+        DataRetention: CoreTypes.Duration option option
         [<System.Text.Json.Serialization.JsonPropertyName("enabled")>]
         Enabled: bool option
     }
@@ -770,19 +770,19 @@ module IndicesTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("enabled")>]
         Enabled: bool option option
         [<System.Text.Json.Serialization.JsonPropertyName("lifecycle")>]
-        Lifecycle: IndicesTypes.FailureStoreLifecycleTemplate option option
+        Lifecycle: FailureStoreLifecycleTemplate option option
     }
 
     /// Data stream options contain the configuration of data stream level features for a given data stream, for example,
     type DataStreamOptions = {
         [<System.Text.Json.Serialization.JsonPropertyName("failure_store")>]
-        FailureStore: IndicesTypes.DataStreamFailureStore option
+        FailureStore: DataStreamFailureStore option
     }
 
     /// Data stream options template contains the same information as DataStreamOptions but allows them to be set explicitly to null.
     type DataStreamOptionsTemplate = {
         [<System.Text.Json.Serialization.JsonPropertyName("failure_store")>]
-        FailureStore: IndicesTypes.DataStreamFailureStoreTemplate option option
+        FailureStore: DataStreamFailureStoreTemplate option option
     }
 
     type DataStreamVisibility = {
@@ -796,46 +796,46 @@ module IndicesTypes =
 
     type DownsampleConfig = {
         [<System.Text.Json.Serialization.JsonPropertyName("fixed_interval")>]
-        FixedInterval: Types.DurationLarge
+        FixedInterval: CoreTypes.DurationLarge
         [<System.Text.Json.Serialization.JsonPropertyName("sampling_method")>]
-        SamplingMethod: IndicesTypes.SamplingMethod option
+        SamplingMethod: SamplingMethod option
     }
 
     type FielddataFrequencyFilter = {
         [<System.Text.Json.Serialization.JsonPropertyName("max")>]
-        Max: Types.Double
+        Max: CoreTypes.Double
         [<System.Text.Json.Serialization.JsonPropertyName("min")>]
-        Min: Types.Double
+        Min: CoreTypes.Double
         [<System.Text.Json.Serialization.JsonPropertyName("min_segment_size")>]
-        MinSegmentSize: Types.Integer
+        MinSegmentSize: CoreTypes.Integer
     }
 
     type IndexState = {
         [<System.Text.Json.Serialization.JsonPropertyName("aliases")>]
-        Aliases: Map<Types.IndexName, IndicesTypes.Alias> option
+        Aliases: Map<CoreTypes.IndexName, Alias> option
         [<System.Text.Json.Serialization.JsonPropertyName("mappings")>]
-        Mappings: TypesMapping.TypeMapping option
+        Mappings: CoreTypes.TypeMapping option
         [<System.Text.Json.Serialization.JsonPropertyName("settings")>]
-        Settings: IndicesTypes.IndexSettings option
+        Settings: IndexSettings option
         [<System.Text.Json.Serialization.JsonPropertyName("defaults")>]
-        Defaults: IndicesTypes.IndexSettings option
+        Defaults: IndexSettings option
         [<System.Text.Json.Serialization.JsonPropertyName("data_stream")>]
-        DataStream: Types.DataStreamName option
+        DataStream: CoreTypes.DataStreamName option
         [<System.Text.Json.Serialization.JsonPropertyName("lifecycle")>]
-        Lifecycle: IndicesTypes.DataStreamLifecycle option
+        Lifecycle: DataStreamLifecycle option
     }
 
     type IndexTemplateSummary = {
         [<System.Text.Json.Serialization.JsonPropertyName("aliases")>]
-        Aliases: Map<Types.IndexName, IndicesTypes.Alias> option
+        Aliases: Map<CoreTypes.IndexName, Alias> option
         [<System.Text.Json.Serialization.JsonPropertyName("mappings")>]
-        Mappings: TypesMapping.TypeMapping option
+        Mappings: CoreTypes.TypeMapping option
         [<System.Text.Json.Serialization.JsonPropertyName("settings")>]
-        Settings: IndicesTypes.IndexSettings option
+        Settings: IndexSettings option
         [<System.Text.Json.Serialization.JsonPropertyName("lifecycle")>]
-        Lifecycle: IndicesTypes.DataStreamLifecycle option
+        Lifecycle: DataStreamLifecycle option
         [<System.Text.Json.Serialization.JsonPropertyName("data_stream_options")>]
-        DataStreamOptions: IndicesTypes.DataStreamOptions option
+        DataStreamOptions: DataStreamOptions option
     }
 
     type IndexTemplateDataStreamConfiguration = {
@@ -847,77 +847,77 @@ module IndicesTypes =
 
     type IndexTemplate = {
         [<System.Text.Json.Serialization.JsonPropertyName("index_patterns")>]
-        IndexPatterns: Types.Names
+        IndexPatterns: CoreTypes.Names
         [<System.Text.Json.Serialization.JsonPropertyName("composed_of")>]
-        ComposedOf: Types.Name list
+        ComposedOf: CoreTypes.Name list
         [<System.Text.Json.Serialization.JsonPropertyName("template")>]
-        Template: IndicesTypes.IndexTemplateSummary option
+        Template: IndexTemplateSummary option
         [<System.Text.Json.Serialization.JsonPropertyName("version")>]
-        Version: Types.VersionNumber option
+        Version: CoreTypes.VersionNumber option
         [<System.Text.Json.Serialization.JsonPropertyName("priority")>]
-        Priority: Types.Long option
+        Priority: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("_meta")>]
-        Meta: Types.Metadata option
+        Meta: CoreTypes.Metadata option
         [<System.Text.Json.Serialization.JsonPropertyName("allow_auto_create")>]
         AllowAutoCreate: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("data_stream")>]
-        DataStream: IndicesTypes.IndexTemplateDataStreamConfiguration option
+        DataStream: IndexTemplateDataStreamConfiguration option
         [<System.Text.Json.Serialization.JsonPropertyName("deprecated")>]
         Deprecated: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_missing_component_templates")>]
-        IgnoreMissingComponentTemplates: Types.Names option
+        IgnoreMissingComponentTemplates: CoreTypes.Names option
         [<System.Text.Json.Serialization.JsonPropertyName("created_date")>]
-        CreatedDate: Types.DateTime option
+        CreatedDate: CoreTypes.DateTime option
         [<System.Text.Json.Serialization.JsonPropertyName("created_date_millis")>]
-        CreatedDateMillis: Types.EpochTime<Types.UnitMillis> option
+        CreatedDateMillis: CoreTypes.EpochTime<CoreTypes.UnitMillis> option
         [<System.Text.Json.Serialization.JsonPropertyName("modified_date")>]
-        ModifiedDate: Types.DateTime option
+        ModifiedDate: CoreTypes.DateTime option
         [<System.Text.Json.Serialization.JsonPropertyName("modified_date_millis")>]
-        ModifiedDateMillis: Types.EpochTime<Types.UnitMillis> option
+        ModifiedDateMillis: CoreTypes.EpochTime<CoreTypes.UnitMillis> option
     }
 
     type IndexTemplateSummaryWithRollover = {
         [<System.Text.Json.Serialization.JsonPropertyName("lifecycle")>]
-        Lifecycle: IndicesTypes.DataStreamLifecycleWithRollover option
+        Lifecycle: DataStreamLifecycleWithRollover option
         [<System.Text.Json.Serialization.JsonPropertyName("aliases")>]
-        Aliases: Map<Types.IndexName, IndicesTypes.Alias> option
+        Aliases: Map<CoreTypes.IndexName, Alias> option
         [<System.Text.Json.Serialization.JsonPropertyName("mappings")>]
-        Mappings: TypesMapping.TypeMapping option
+        Mappings: CoreTypes.TypeMapping option
         [<System.Text.Json.Serialization.JsonPropertyName("settings")>]
-        Settings: IndicesTypes.IndexSettings option
+        Settings: IndexSettings option
         [<System.Text.Json.Serialization.JsonPropertyName("data_stream_options")>]
-        DataStreamOptions: IndicesTypes.DataStreamOptions option
+        DataStreamOptions: DataStreamOptions option
     }
 
     type IndexTemplateWithRollover = {
         [<System.Text.Json.Serialization.JsonPropertyName("template")>]
-        Template: IndicesTypes.IndexTemplateSummaryWithRollover option
+        Template: IndexTemplateSummaryWithRollover option
         [<System.Text.Json.Serialization.JsonPropertyName("index_patterns")>]
-        IndexPatterns: Types.Names
+        IndexPatterns: CoreTypes.Names
         [<System.Text.Json.Serialization.JsonPropertyName("composed_of")>]
-        ComposedOf: Types.Name list
+        ComposedOf: CoreTypes.Name list
         [<System.Text.Json.Serialization.JsonPropertyName("version")>]
-        Version: Types.VersionNumber option
+        Version: CoreTypes.VersionNumber option
         [<System.Text.Json.Serialization.JsonPropertyName("priority")>]
-        Priority: Types.Long option
+        Priority: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("_meta")>]
-        Meta: Types.Metadata option
+        Meta: CoreTypes.Metadata option
         [<System.Text.Json.Serialization.JsonPropertyName("allow_auto_create")>]
         AllowAutoCreate: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("data_stream")>]
-        DataStream: IndicesTypes.IndexTemplateDataStreamConfiguration option
+        DataStream: IndexTemplateDataStreamConfiguration option
         [<System.Text.Json.Serialization.JsonPropertyName("deprecated")>]
         Deprecated: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_missing_component_templates")>]
-        IgnoreMissingComponentTemplates: Types.Names option
+        IgnoreMissingComponentTemplates: CoreTypes.Names option
         [<System.Text.Json.Serialization.JsonPropertyName("created_date")>]
-        CreatedDate: Types.DateTime option
+        CreatedDate: CoreTypes.DateTime option
         [<System.Text.Json.Serialization.JsonPropertyName("created_date_millis")>]
-        CreatedDateMillis: Types.EpochTime<Types.UnitMillis> option
+        CreatedDateMillis: CoreTypes.EpochTime<CoreTypes.UnitMillis> option
         [<System.Text.Json.Serialization.JsonPropertyName("modified_date")>]
-        ModifiedDate: Types.DateTime option
+        ModifiedDate: CoreTypes.DateTime option
         [<System.Text.Json.Serialization.JsonPropertyName("modified_date_millis")>]
-        ModifiedDateMillis: Types.EpochTime<Types.UnitMillis> option
+        ModifiedDateMillis: CoreTypes.EpochTime<CoreTypes.UnitMillis> option
     }
 
     [<RequireQualifiedAccess>]
@@ -934,21 +934,21 @@ module IndicesTypes =
 
     type NumericFielddata = {
         [<System.Text.Json.Serialization.JsonPropertyName("format")>]
-        Format: IndicesTypes.NumericFielddataFormat
+        Format: NumericFielddataFormat
     }
 
     type TemplateMapping = {
         [<System.Text.Json.Serialization.JsonPropertyName("aliases")>]
-        Aliases: Map<Types.IndexName, IndicesTypes.Alias>
+        Aliases: Map<CoreTypes.IndexName, Alias>
         [<System.Text.Json.Serialization.JsonPropertyName("index_patterns")>]
-        IndexPatterns: Types.Name list
+        IndexPatterns: CoreTypes.Name list
         [<System.Text.Json.Serialization.JsonPropertyName("mappings")>]
-        Mappings: TypesMapping.TypeMapping
+        Mappings: CoreTypes.TypeMapping
         [<System.Text.Json.Serialization.JsonPropertyName("order")>]
-        Order: Types.Integer
+        Order: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("settings")>]
         Settings: Map<string, System.Text.Json.JsonElement>
         [<System.Text.Json.Serialization.JsonPropertyName("version")>]
-        Version: Types.VersionNumber option
+        Version: CoreTypes.VersionNumber option
     }
 

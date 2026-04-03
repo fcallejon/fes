@@ -18,7 +18,7 @@ module IndicesRemoveBlockBuilders =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: RemoveIndicesBlockStatus, value: Types.IndexName) =
+        member _.Name(state: RemoveIndicesBlockStatus, value: CoreTypes.IndexName) =
             { state with Name = value }
 
         [<CustomOperation("unblocked")>]
@@ -26,7 +26,7 @@ module IndicesRemoveBlockBuilders =
             { state with Unblocked = Some value }
 
         [<CustomOperation("exception'")>]
-        member _.Exception(state: RemoveIndicesBlockStatus, value: Types.ErrorCause) =
+        member _.Exception(state: RemoveIndicesBlockStatus, value: CoreTypes.ErrorCause) =
             { state with Exception = Some value }
 
     let removeIndicesBlockStatus = RemoveIndicesBlockStatusBuilder()

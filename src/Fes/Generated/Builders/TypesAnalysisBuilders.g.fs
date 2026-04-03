@@ -23,7 +23,7 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: ArabicAnalyzer, value: TypesAnalysis.StopWords) =
+        member _.Stopwords(state: ArabicAnalyzer, value: CoreTypes.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
@@ -50,7 +50,7 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: ArmenianAnalyzer, value: TypesAnalysis.StopWords) =
+        member _.Stopwords(state: ArmenianAnalyzer, value: CoreTypes.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
@@ -77,7 +77,7 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: BasqueAnalyzer, value: TypesAnalysis.StopWords) =
+        member _.Stopwords(state: BasqueAnalyzer, value: CoreTypes.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
@@ -104,7 +104,7 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: BengaliAnalyzer, value: TypesAnalysis.StopWords) =
+        member _.Stopwords(state: BengaliAnalyzer, value: CoreTypes.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
@@ -130,7 +130,7 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: BrazilianAnalyzer, value: TypesAnalysis.StopWords) =
+        member _.Stopwords(state: BrazilianAnalyzer, value: CoreTypes.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
@@ -153,7 +153,7 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: BulgarianAnalyzer, value: TypesAnalysis.StopWords) =
+        member _.Stopwords(state: BulgarianAnalyzer, value: CoreTypes.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
@@ -180,7 +180,7 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: CatalanAnalyzer, value: TypesAnalysis.StopWords) =
+        member _.Stopwords(state: CatalanAnalyzer, value: CoreTypes.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
@@ -206,7 +206,7 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: ChineseAnalyzer, value: TypesAnalysis.StopWords) =
+        member _.Stopwords(state: ChineseAnalyzer, value: CoreTypes.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
@@ -228,7 +228,7 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: CjkAnalyzer, value: TypesAnalysis.StopWords) =
+        member _.Stopwords(state: CjkAnalyzer, value: CoreTypes.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
@@ -250,7 +250,7 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("ignoredScripts")>]
-        member _.IgnoredScripts(state: CjkBigramTokenFilter, value: TypesAnalysis.CjkBigramIgnoredScript list) =
+        member _.IgnoredScripts(state: CjkBigramTokenFilter, value: CoreTypes.CjkBigramIgnoredScript list) =
             { state with IgnoredScripts = Some value }
 
         [<CustomOperation("outputUnigrams")>]
@@ -303,15 +303,15 @@ module TypesAnalysisBuilders =
             }
 
         [<CustomOperation("maxSubwordSize")>]
-        member _.MaxSubwordSize(state: CompoundWordTokenFilterBase, value: Types.Integer) =
+        member _.MaxSubwordSize(state: CompoundWordTokenFilterBase, value: CoreTypes.Integer) =
             { state with MaxSubwordSize = Some value }
 
         [<CustomOperation("minSubwordSize")>]
-        member _.MinSubwordSize(state: CompoundWordTokenFilterBase, value: Types.Integer) =
+        member _.MinSubwordSize(state: CompoundWordTokenFilterBase, value: CoreTypes.Integer) =
             { state with MinSubwordSize = Some value }
 
         [<CustomOperation("minWordSize")>]
-        member _.MinWordSize(state: CompoundWordTokenFilterBase, value: Types.Integer) =
+        member _.MinWordSize(state: CompoundWordTokenFilterBase, value: CoreTypes.Integer) =
             { state with MinWordSize = Some value }
 
         [<CustomOperation("onlyLongestMatch")>]
@@ -352,11 +352,11 @@ module TypesAnalysisBuilders =
             { state with Filter = Some value }
 
         [<CustomOperation("positionIncrementGap")>]
-        member _.PositionIncrementGap(state: CustomAnalyzer, value: Types.Integer) =
+        member _.PositionIncrementGap(state: CustomAnalyzer, value: CoreTypes.Integer) =
             { state with PositionIncrementGap = Some value }
 
         [<CustomOperation("positionOffsetGap")>]
-        member _.PositionOffsetGap(state: CustomAnalyzer, value: Types.Integer) =
+        member _.PositionOffsetGap(state: CustomAnalyzer, value: CoreTypes.Integer) =
             { state with PositionOffsetGap = Some value }
 
         [<CustomOperation("tokenizer")>]
@@ -401,7 +401,7 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: CzechAnalyzer, value: TypesAnalysis.StopWords) =
+        member _.Stopwords(state: CzechAnalyzer, value: CoreTypes.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
@@ -427,7 +427,7 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: DanishAnalyzer, value: TypesAnalysis.StopWords) =
+        member _.Stopwords(state: DanishAnalyzer, value: CoreTypes.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
@@ -453,7 +453,7 @@ module TypesAnalysisBuilders =
             { state with Delimiter = Some value }
 
         [<CustomOperation("encoding")>]
-        member _.Encoding(state: DelimitedPayloadTokenFilter, value: TypesAnalysis.DelimitedPayloadEncoding) =
+        member _.Encoding(state: DelimitedPayloadTokenFilter, value: CoreTypes.DelimitedPayloadEncoding) =
             { state with Encoding = Some value }
 
     let delimitedPayloadTokenFilter = DelimitedPayloadTokenFilterBuilder()
@@ -472,7 +472,7 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: DutchAnalyzer, value: TypesAnalysis.StopWords) =
+        member _.Stopwords(state: DutchAnalyzer, value: CoreTypes.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
@@ -500,19 +500,19 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("maxGram")>]
-        member _.MaxGram(state: EdgeNGramTokenFilter, value: Types.Integer) =
+        member _.MaxGram(state: EdgeNGramTokenFilter, value: CoreTypes.Integer) =
             { state with MaxGram = Some value }
 
         [<CustomOperation("minGram")>]
-        member _.MinGram(state: EdgeNGramTokenFilter, value: Types.Integer) =
+        member _.MinGram(state: EdgeNGramTokenFilter, value: CoreTypes.Integer) =
             { state with MinGram = Some value }
 
         [<CustomOperation("side")>]
-        member _.Side(state: EdgeNGramTokenFilter, value: TypesAnalysis.EdgeNGramSide) =
+        member _.Side(state: EdgeNGramTokenFilter, value: CoreTypes.EdgeNGramSide) =
             { state with Side = Some value }
 
         [<CustomOperation("preserveOriginal")>]
-        member _.PreserveOriginal(state: EdgeNGramTokenFilter, value: SpecUtils.Stringified<bool>) =
+        member _.PreserveOriginal(state: EdgeNGramTokenFilter, value: CoreTypes.Stringified<bool>) =
             { state with PreserveOriginal = Some value }
 
     let edgeNGramTokenFilter = EdgeNGramTokenFilterBuilder()
@@ -536,15 +536,15 @@ module TypesAnalysisBuilders =
             { state with CustomTokenChars = Some value }
 
         [<CustomOperation("maxGram")>]
-        member _.MaxGram(state: EdgeNGramTokenizer, value: Types.Integer) =
+        member _.MaxGram(state: EdgeNGramTokenizer, value: CoreTypes.Integer) =
             { state with MaxGram = Some value }
 
         [<CustomOperation("minGram")>]
-        member _.MinGram(state: EdgeNGramTokenizer, value: Types.Integer) =
+        member _.MinGram(state: EdgeNGramTokenizer, value: CoreTypes.Integer) =
             { state with MinGram = Some value }
 
         [<CustomOperation("tokenChars")>]
-        member _.TokenChars(state: EdgeNGramTokenizer, value: TypesAnalysis.TokenChar list) =
+        member _.TokenChars(state: EdgeNGramTokenizer, value: CoreTypes.TokenChar list) =
             { state with TokenChars = Some value }
 
     let edgeNGramTokenizer = EdgeNGramTokenizerBuilder()
@@ -571,7 +571,7 @@ module TypesAnalysisBuilders =
             { state with ArticlesPath = Some value }
 
         [<CustomOperation("articlesCase")>]
-        member _.ArticlesCase(state: ElisionTokenFilter, value: SpecUtils.Stringified<bool>) =
+        member _.ArticlesCase(state: ElisionTokenFilter, value: CoreTypes.Stringified<bool>) =
             { state with ArticlesCase = Some value }
 
     let elisionTokenFilter = ElisionTokenFilterBuilder()
@@ -590,7 +590,7 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: EnglishAnalyzer, value: TypesAnalysis.StopWords) =
+        member _.Stopwords(state: EnglishAnalyzer, value: CoreTypes.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
@@ -616,7 +616,7 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: EstonianAnalyzer, value: TypesAnalysis.StopWords) =
+        member _.Stopwords(state: EstonianAnalyzer, value: CoreTypes.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
@@ -641,11 +641,11 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: FingerprintAnalyzer, value: Types.VersionString) =
+        member _.Version(state: FingerprintAnalyzer, value: CoreTypes.VersionString) =
             { state with Version = Some value }
 
         [<CustomOperation("maxOutputSize")>]
-        member _.MaxOutputSize(state: FingerprintAnalyzer, value: Types.Integer) =
+        member _.MaxOutputSize(state: FingerprintAnalyzer, value: CoreTypes.Integer) =
             { state with MaxOutputSize = Some value }
 
         [<CustomOperation("separator")>]
@@ -653,7 +653,7 @@ module TypesAnalysisBuilders =
             { state with Separator = Some value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: FingerprintAnalyzer, value: TypesAnalysis.StopWords) =
+        member _.Stopwords(state: FingerprintAnalyzer, value: CoreTypes.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
@@ -675,7 +675,7 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("maxOutputSize")>]
-        member _.MaxOutputSize(state: FingerprintTokenFilter, value: Types.Integer) =
+        member _.MaxOutputSize(state: FingerprintTokenFilter, value: CoreTypes.Integer) =
             { state with MaxOutputSize = Some value }
 
         [<CustomOperation("separator")>]
@@ -698,7 +698,7 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: FinnishAnalyzer, value: TypesAnalysis.StopWords) =
+        member _.Stopwords(state: FinnishAnalyzer, value: CoreTypes.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
@@ -725,7 +725,7 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: FrenchAnalyzer, value: TypesAnalysis.StopWords) =
+        member _.Stopwords(state: FrenchAnalyzer, value: CoreTypes.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
@@ -752,7 +752,7 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: GalicianAnalyzer, value: TypesAnalysis.StopWords) =
+        member _.Stopwords(state: GalicianAnalyzer, value: CoreTypes.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
@@ -779,7 +779,7 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: GermanAnalyzer, value: TypesAnalysis.StopWords) =
+        member _.Stopwords(state: GermanAnalyzer, value: CoreTypes.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
@@ -805,7 +805,7 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: GreekAnalyzer, value: TypesAnalysis.StopWords) =
+        member _.Stopwords(state: GreekAnalyzer, value: CoreTypes.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
@@ -828,7 +828,7 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: HindiAnalyzer, value: TypesAnalysis.StopWords) =
+        member _.Stopwords(state: HindiAnalyzer, value: CoreTypes.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
@@ -855,7 +855,7 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: HungarianAnalyzer, value: TypesAnalysis.StopWords) =
+        member _.Stopwords(state: HungarianAnalyzer, value: CoreTypes.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
@@ -950,11 +950,11 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("alternate")>]
-        member _.Alternate(state: IcuCollationTokenFilter, value: TypesAnalysis.IcuCollationAlternate) =
+        member _.Alternate(state: IcuCollationTokenFilter, value: CoreTypes.IcuCollationAlternate) =
             { state with Alternate = Some value }
 
         [<CustomOperation("caseFirst")>]
-        member _.CaseFirst(state: IcuCollationTokenFilter, value: TypesAnalysis.IcuCollationCaseFirst) =
+        member _.CaseFirst(state: IcuCollationTokenFilter, value: CoreTypes.IcuCollationCaseFirst) =
             { state with CaseFirst = Some value }
 
         [<CustomOperation("caseLevel")>]
@@ -966,7 +966,7 @@ module TypesAnalysisBuilders =
             { state with Country = Some value }
 
         [<CustomOperation("decomposition")>]
-        member _.Decomposition(state: IcuCollationTokenFilter, value: TypesAnalysis.IcuCollationDecomposition) =
+        member _.Decomposition(state: IcuCollationTokenFilter, value: CoreTypes.IcuCollationDecomposition) =
             { state with Decomposition = Some value }
 
         [<CustomOperation("hiraganaQuaternaryMode")>]
@@ -986,7 +986,7 @@ module TypesAnalysisBuilders =
             { state with Rules = Some value }
 
         [<CustomOperation("strength")>]
-        member _.Strength(state: IcuCollationTokenFilter, value: TypesAnalysis.IcuCollationStrength) =
+        member _.Strength(state: IcuCollationTokenFilter, value: CoreTypes.IcuCollationStrength) =
             { state with Strength = Some value }
 
         [<CustomOperation("variableTop")>]
@@ -1013,11 +1013,11 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("mode")>]
-        member _.Mode(state: IcuNormalizationCharFilter, value: TypesAnalysis.IcuNormalizationMode) =
+        member _.Mode(state: IcuNormalizationCharFilter, value: CoreTypes.IcuNormalizationMode) =
             { state with Mode = Some value }
 
         [<CustomOperation("name")>]
-        member _.Name(state: IcuNormalizationCharFilter, value: TypesAnalysis.IcuNormalizationType) =
+        member _.Name(state: IcuNormalizationCharFilter, value: CoreTypes.IcuNormalizationType) =
             { state with Name = Some value }
 
         [<CustomOperation("unicodeSetFilter")>]
@@ -1040,7 +1040,7 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: IndonesianAnalyzer, value: TypesAnalysis.StopWords) =
+        member _.Stopwords(state: IndonesianAnalyzer, value: CoreTypes.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
@@ -1067,7 +1067,7 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: IrishAnalyzer, value: TypesAnalysis.StopWords) =
+        member _.Stopwords(state: IrishAnalyzer, value: CoreTypes.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
@@ -1094,7 +1094,7 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: ItalianAnalyzer, value: TypesAnalysis.StopWords) =
+        member _.Stopwords(state: ItalianAnalyzer, value: CoreTypes.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
@@ -1179,7 +1179,7 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("mode")>]
-        member _.Mode(state: KuromojiAnalyzer, value: TypesAnalysis.KuromojiTokenizationMode) =
+        member _.Mode(state: KuromojiAnalyzer, value: CoreTypes.KuromojiTokenizationMode) =
             { state with Mode = Some value }
 
         [<CustomOperation("userDictionary")>]
@@ -1210,11 +1210,11 @@ module TypesAnalysisBuilders =
             { state with DiscardPunctuation = Some value }
 
         [<CustomOperation("mode")>]
-        member _.Mode(state: KuromojiTokenizer, value: TypesAnalysis.KuromojiTokenizationMode) =
+        member _.Mode(state: KuromojiTokenizer, value: CoreTypes.KuromojiTokenizationMode) =
             { state with Mode = value }
 
         [<CustomOperation("nbestCost")>]
-        member _.NbestCost(state: KuromojiTokenizer, value: Types.Integer) =
+        member _.NbestCost(state: KuromojiTokenizer, value: CoreTypes.Integer) =
             { state with NbestCost = Some value }
 
         [<CustomOperation("nbestExamples")>]
@@ -1249,7 +1249,7 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: LatvianAnalyzer, value: TypesAnalysis.StopWords) =
+        member _.Stopwords(state: LatvianAnalyzer, value: CoreTypes.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
@@ -1275,11 +1275,11 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("max")>]
-        member _.Max(state: LengthTokenFilter, value: Types.Integer) =
+        member _.Max(state: LengthTokenFilter, value: CoreTypes.Integer) =
             { state with Max = Some value }
 
         [<CustomOperation("min")>]
-        member _.Min(state: LengthTokenFilter, value: Types.Integer) =
+        member _.Min(state: LengthTokenFilter, value: CoreTypes.Integer) =
             { state with Min = Some value }
 
     let lengthTokenFilter = LengthTokenFilterBuilder()
@@ -1301,7 +1301,7 @@ module TypesAnalysisBuilders =
             { state with ConsumeAllTokens = Some value }
 
         [<CustomOperation("maxTokenCount")>]
-        member _.MaxTokenCount(state: LimitTokenCountTokenFilter, value: SpecUtils.Stringified<Types.Integer>) =
+        member _.MaxTokenCount(state: LimitTokenCountTokenFilter, value: CoreTypes.Stringified<CoreTypes.Integer>) =
             { state with MaxTokenCount = Some value }
 
     let limitTokenCountTokenFilter = LimitTokenCountTokenFilterBuilder()
@@ -1320,7 +1320,7 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: LithuanianAnalyzer, value: TypesAnalysis.StopWords) =
+        member _.Stopwords(state: LithuanianAnalyzer, value: CoreTypes.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
@@ -1370,15 +1370,15 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("bucketCount")>]
-        member _.BucketCount(state: MinHashTokenFilter, value: Types.Integer) =
+        member _.BucketCount(state: MinHashTokenFilter, value: CoreTypes.Integer) =
             { state with BucketCount = Some value }
 
         [<CustomOperation("hashCount")>]
-        member _.HashCount(state: MinHashTokenFilter, value: Types.Integer) =
+        member _.HashCount(state: MinHashTokenFilter, value: CoreTypes.Integer) =
             { state with HashCount = Some value }
 
         [<CustomOperation("hashSetSize")>]
-        member _.HashSetSize(state: MinHashTokenFilter, value: Types.Integer) =
+        member _.HashSetSize(state: MinHashTokenFilter, value: CoreTypes.Integer) =
             { state with HashSetSize = Some value }
 
         [<CustomOperation("withRotation")>]
@@ -1401,15 +1401,15 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("maxGram")>]
-        member _.MaxGram(state: NGramTokenFilter, value: Types.Integer) =
+        member _.MaxGram(state: NGramTokenFilter, value: CoreTypes.Integer) =
             { state with MaxGram = Some value }
 
         [<CustomOperation("minGram")>]
-        member _.MinGram(state: NGramTokenFilter, value: Types.Integer) =
+        member _.MinGram(state: NGramTokenFilter, value: CoreTypes.Integer) =
             { state with MinGram = Some value }
 
         [<CustomOperation("preserveOriginal")>]
-        member _.PreserveOriginal(state: NGramTokenFilter, value: SpecUtils.Stringified<bool>) =
+        member _.PreserveOriginal(state: NGramTokenFilter, value: CoreTypes.Stringified<bool>) =
             { state with PreserveOriginal = Some value }
 
     let nGramTokenFilter = NGramTokenFilterBuilder()
@@ -1433,15 +1433,15 @@ module TypesAnalysisBuilders =
             { state with CustomTokenChars = Some value }
 
         [<CustomOperation("maxGram")>]
-        member _.MaxGram(state: NGramTokenizer, value: Types.Integer) =
+        member _.MaxGram(state: NGramTokenizer, value: CoreTypes.Integer) =
             { state with MaxGram = Some value }
 
         [<CustomOperation("minGram")>]
-        member _.MinGram(state: NGramTokenizer, value: Types.Integer) =
+        member _.MinGram(state: NGramTokenizer, value: CoreTypes.Integer) =
             { state with MinGram = Some value }
 
         [<CustomOperation("tokenChars")>]
-        member _.TokenChars(state: NGramTokenizer, value: TypesAnalysis.TokenChar list) =
+        member _.TokenChars(state: NGramTokenizer, value: CoreTypes.TokenChar list) =
             { state with TokenChars = Some value }
 
     let nGramTokenizer = NGramTokenizerBuilder()
@@ -1461,11 +1461,11 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: NoriAnalyzer, value: Types.VersionString) =
+        member _.Version(state: NoriAnalyzer, value: CoreTypes.VersionString) =
             { state with Version = Some value }
 
         [<CustomOperation("decompoundMode")>]
-        member _.DecompoundMode(state: NoriAnalyzer, value: TypesAnalysis.NoriDecompoundMode) =
+        member _.DecompoundMode(state: NoriAnalyzer, value: CoreTypes.NoriDecompoundMode) =
             { state with DecompoundMode = Some value }
 
         [<CustomOperation("stoptags")>]
@@ -1493,7 +1493,7 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("decompoundMode")>]
-        member _.DecompoundMode(state: NoriTokenizer, value: TypesAnalysis.NoriDecompoundMode) =
+        member _.DecompoundMode(state: NoriTokenizer, value: CoreTypes.NoriDecompoundMode) =
             { state with DecompoundMode = Some value }
 
         [<CustomOperation("discardPunctuation")>]
@@ -1524,7 +1524,7 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: NorwegianAnalyzer, value: TypesAnalysis.StopWords) =
+        member _.Stopwords(state: NorwegianAnalyzer, value: CoreTypes.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
@@ -1553,7 +1553,7 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("bufferSize")>]
-        member _.BufferSize(state: PathHierarchyTokenizer, value: SpecUtils.Stringified<Types.Integer>) =
+        member _.BufferSize(state: PathHierarchyTokenizer, value: CoreTypes.Stringified<CoreTypes.Integer>) =
             { state with BufferSize = Some value }
 
         [<CustomOperation("delimiter")>]
@@ -1565,11 +1565,11 @@ module TypesAnalysisBuilders =
             { state with Replacement = Some value }
 
         [<CustomOperation("reverse")>]
-        member _.Reverse(state: PathHierarchyTokenizer, value: SpecUtils.Stringified<bool>) =
+        member _.Reverse(state: PathHierarchyTokenizer, value: CoreTypes.Stringified<bool>) =
             { state with Reverse = Some value }
 
         [<CustomOperation("skip")>]
-        member _.Skip(state: PathHierarchyTokenizer, value: SpecUtils.Stringified<Types.Integer>) =
+        member _.Skip(state: PathHierarchyTokenizer, value: CoreTypes.Stringified<CoreTypes.Integer>) =
             { state with Skip = Some value }
 
     let pathHierarchyTokenizer = PathHierarchyTokenizerBuilder()
@@ -1591,7 +1591,7 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: PatternAnalyzer, value: Types.VersionString) =
+        member _.Version(state: PatternAnalyzer, value: CoreTypes.VersionString) =
             { state with Version = Some value }
 
         [<CustomOperation("flags")>]
@@ -1607,7 +1607,7 @@ module TypesAnalysisBuilders =
             { state with Pattern = Some value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: PatternAnalyzer, value: TypesAnalysis.StopWords) =
+        member _.Stopwords(state: PatternAnalyzer, value: CoreTypes.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
@@ -1693,7 +1693,7 @@ module TypesAnalysisBuilders =
             { state with Flags = Some value }
 
         [<CustomOperation("group")>]
-        member _.Group(state: PatternTokenizer, value: Types.Integer) =
+        member _.Group(state: PatternTokenizer, value: CoreTypes.Integer) =
             { state with Group = Some value }
 
         [<CustomOperation("pattern")>]
@@ -1715,7 +1715,7 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: PersianAnalyzer, value: TypesAnalysis.StopWords) =
+        member _.Stopwords(state: PersianAnalyzer, value: CoreTypes.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
@@ -1741,7 +1741,7 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("encoder")>]
-        member _.Encoder(state: PhoneticTokenFilter, value: TypesAnalysis.PhoneticEncoder) =
+        member _.Encoder(state: PhoneticTokenFilter, value: CoreTypes.PhoneticEncoder) =
             { state with Encoder = value }
 
         [<CustomOperation("languageset")>]
@@ -1749,11 +1749,11 @@ module TypesAnalysisBuilders =
             { state with Languageset = Some value }
 
         [<CustomOperation("maxCodeLen")>]
-        member _.MaxCodeLen(state: PhoneticTokenFilter, value: Types.Integer) =
+        member _.MaxCodeLen(state: PhoneticTokenFilter, value: CoreTypes.Integer) =
             { state with MaxCodeLen = Some value }
 
         [<CustomOperation("nameType")>]
-        member _.NameType(state: PhoneticTokenFilter, value: TypesAnalysis.PhoneticNameType) =
+        member _.NameType(state: PhoneticTokenFilter, value: CoreTypes.PhoneticNameType) =
             { state with NameType = Some value }
 
         [<CustomOperation("replace")>]
@@ -1761,7 +1761,7 @@ module TypesAnalysisBuilders =
             { state with Replace = Some value }
 
         [<CustomOperation("ruleType")>]
-        member _.RuleType(state: PhoneticTokenFilter, value: TypesAnalysis.PhoneticRuleType) =
+        member _.RuleType(state: PhoneticTokenFilter, value: CoreTypes.PhoneticRuleType) =
             { state with RuleType = Some value }
 
     let phoneticTokenFilter = PhoneticTokenFilterBuilder()
@@ -1780,7 +1780,7 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: PortugueseAnalyzer, value: TypesAnalysis.StopWords) =
+        member _.Stopwords(state: PortugueseAnalyzer, value: CoreTypes.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
@@ -1807,7 +1807,7 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: RomanianAnalyzer, value: TypesAnalysis.StopWords) =
+        member _.Stopwords(state: RomanianAnalyzer, value: CoreTypes.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
@@ -1834,7 +1834,7 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: RussianAnalyzer, value: TypesAnalysis.StopWords) =
+        member _.Stopwords(state: RussianAnalyzer, value: CoreTypes.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
@@ -1861,7 +1861,7 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: SerbianAnalyzer, value: TypesAnalysis.StopWords) =
+        member _.Stopwords(state: SerbianAnalyzer, value: CoreTypes.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
@@ -1895,11 +1895,11 @@ module TypesAnalysisBuilders =
             { state with FillerToken = Some value }
 
         [<CustomOperation("maxShingleSize")>]
-        member _.MaxShingleSize(state: ShingleTokenFilter, value: SpecUtils.Stringified<Types.Integer>) =
+        member _.MaxShingleSize(state: ShingleTokenFilter, value: CoreTypes.Stringified<CoreTypes.Integer>) =
             { state with MaxShingleSize = Some value }
 
         [<CustomOperation("minShingleSize")>]
-        member _.MinShingleSize(state: ShingleTokenFilter, value: SpecUtils.Stringified<Types.Integer>) =
+        member _.MinShingleSize(state: ShingleTokenFilter, value: CoreTypes.Stringified<CoreTypes.Integer>) =
             { state with MinShingleSize = Some value }
 
         [<CustomOperation("outputUnigrams")>]
@@ -1930,15 +1930,15 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: SnowballAnalyzer, value: Types.VersionString) =
+        member _.Version(state: SnowballAnalyzer, value: CoreTypes.VersionString) =
             { state with Version = Some value }
 
         [<CustomOperation("language")>]
-        member _.Language(state: SnowballAnalyzer, value: TypesAnalysis.SnowballLanguage) =
+        member _.Language(state: SnowballAnalyzer, value: CoreTypes.SnowballLanguage) =
             { state with Language = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: SnowballAnalyzer, value: TypesAnalysis.StopWords) =
+        member _.Stopwords(state: SnowballAnalyzer, value: CoreTypes.StopWords) =
             { state with Stopwords = Some value }
 
     let snowballAnalyzer = SnowballAnalyzerBuilder()
@@ -1957,7 +1957,7 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: SoraniAnalyzer, value: TypesAnalysis.StopWords) =
+        member _.Stopwords(state: SoraniAnalyzer, value: CoreTypes.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
@@ -1984,7 +1984,7 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: SpanishAnalyzer, value: TypesAnalysis.StopWords) =
+        member _.Stopwords(state: SpanishAnalyzer, value: CoreTypes.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
@@ -2011,11 +2011,11 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("maxTokenLength")>]
-        member _.MaxTokenLength(state: StandardAnalyzer, value: Types.Integer) =
+        member _.MaxTokenLength(state: StandardAnalyzer, value: CoreTypes.Integer) =
             { state with MaxTokenLength = Some value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: StandardAnalyzer, value: TypesAnalysis.StopWords) =
+        member _.Stopwords(state: StandardAnalyzer, value: CoreTypes.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
@@ -2060,11 +2060,11 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: StopAnalyzer, value: Types.VersionString) =
+        member _.Version(state: StopAnalyzer, value: CoreTypes.VersionString) =
             { state with Version = Some value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: StopAnalyzer, value: TypesAnalysis.StopWords) =
+        member _.Stopwords(state: StopAnalyzer, value: CoreTypes.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
@@ -2096,7 +2096,7 @@ module TypesAnalysisBuilders =
             { state with RemoveTrailing = Some value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: StopTokenFilter, value: TypesAnalysis.StopWords) =
+        member _.Stopwords(state: StopTokenFilter, value: CoreTypes.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
@@ -2119,7 +2119,7 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: SwedishAnalyzer, value: TypesAnalysis.StopWords) =
+        member _.Stopwords(state: SwedishAnalyzer, value: CoreTypes.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
@@ -2150,7 +2150,7 @@ module TypesAnalysisBuilders =
             { state with Expand = Some value }
 
         [<CustomOperation("format")>]
-        member _.Format(state: SynonymTokenFilterBase, value: TypesAnalysis.SynonymFormat) =
+        member _.Format(state: SynonymTokenFilterBase, value: CoreTypes.SynonymFormat) =
             { state with Format = Some value }
 
         [<CustomOperation("lenient")>]
@@ -2192,7 +2192,7 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: ThaiAnalyzer, value: TypesAnalysis.StopWords) =
+        member _.Stopwords(state: ThaiAnalyzer, value: CoreTypes.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
@@ -2215,7 +2215,7 @@ module TypesAnalysisBuilders =
             { state with Type = value }
 
         [<CustomOperation("stopwords")>]
-        member _.Stopwords(state: TurkishAnalyzer, value: TypesAnalysis.StopWords) =
+        member _.Stopwords(state: TurkishAnalyzer, value: CoreTypes.StopWords) =
             { state with Stopwords = Some value }
 
         [<CustomOperation("stopwordsPath")>]
@@ -2289,7 +2289,7 @@ module TypesAnalysisBuilders =
             { state with GenerateWordParts = Some value }
 
         [<CustomOperation("preserveOriginal")>]
-        member _.PreserveOriginal(state: WordDelimiterTokenFilterBase, value: SpecUtils.Stringified<bool>) =
+        member _.PreserveOriginal(state: WordDelimiterTokenFilterBase, value: CoreTypes.Stringified<bool>) =
             { state with PreserveOriginal = Some value }
 
         [<CustomOperation("protectedWords")>]

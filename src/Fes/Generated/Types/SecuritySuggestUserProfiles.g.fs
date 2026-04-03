@@ -16,8 +16,8 @@ module SecuritySuggestUserProfiles =
 
     type TotalUserProfiles = {
         [<System.Text.Json.Serialization.JsonPropertyName("value")>]
-        Value: Types.Long
+        Value: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("relation")>]
-        Relation: Types.RelationName
+        Relation: CoreTypes.RelationName
     }
 

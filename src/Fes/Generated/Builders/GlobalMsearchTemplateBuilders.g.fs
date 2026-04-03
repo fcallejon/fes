@@ -24,7 +24,7 @@ module GlobalMsearchTemplateBuilders =
             { state with Explain = Some value }
 
         [<CustomOperation("id")>]
-        member _.Id(state: TemplateConfig, value: Types.Id) =
+        member _.Id(state: TemplateConfig, value: CoreTypes.Id) =
             { state with Id = Some value }
 
         [<CustomOperation("params")>]
@@ -36,7 +36,7 @@ module GlobalMsearchTemplateBuilders =
             { state with Profile = Some value }
 
         [<CustomOperation("source")>]
-        member _.Source(state: TemplateConfig, value: Types.ScriptSource) =
+        member _.Source(state: TemplateConfig, value: CoreTypes.ScriptSource) =
             { state with Source = Some value }
 
     let templateConfig = TemplateConfigBuilder()

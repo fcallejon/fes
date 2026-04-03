@@ -31,7 +31,7 @@ module CatTasksBuilders =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: TasksRecord, value: Types.Id) =
+        member _.Id(state: TasksRecord, value: CoreTypes.Id) =
             { state with Id = Some value }
 
         [<CustomOperation("action")>]
@@ -39,7 +39,7 @@ module CatTasksBuilders =
             { state with Action = Some value }
 
         [<CustomOperation("taskId")>]
-        member _.TaskId(state: TasksRecord, value: Types.Id) =
+        member _.TaskId(state: TasksRecord, value: CoreTypes.Id) =
             { state with TaskId = Some value }
 
         [<CustomOperation("parentTaskId")>]
@@ -67,7 +67,7 @@ module CatTasksBuilders =
             { state with RunningTime = Some value }
 
         [<CustomOperation("nodeId")>]
-        member _.NodeId(state: TasksRecord, value: Types.NodeId) =
+        member _.NodeId(state: TasksRecord, value: CoreTypes.NodeId) =
             { state with NodeId = Some value }
 
         [<CustomOperation("ip")>]
@@ -83,7 +83,7 @@ module CatTasksBuilders =
             { state with Node = Some value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: TasksRecord, value: Types.VersionString) =
+        member _.Version(state: TasksRecord, value: CoreTypes.VersionString) =
             { state with Version = Some value }
 
         [<CustomOperation("xOpaqueId")>]

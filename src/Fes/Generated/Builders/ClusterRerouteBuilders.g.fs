@@ -57,23 +57,23 @@ module ClusterRerouteBuilders =
             { state with AllowPrimary = value }
 
         [<CustomOperation("index")>]
-        member _.Index(state: RerouteParameters, value: Types.IndexName) =
+        member _.Index(state: RerouteParameters, value: CoreTypes.IndexName) =
             { state with Index = value }
 
         [<CustomOperation("node")>]
-        member _.Node(state: RerouteParameters, value: Types.NodeName) =
+        member _.Node(state: RerouteParameters, value: CoreTypes.NodeName) =
             { state with Node = value }
 
         [<CustomOperation("shard")>]
-        member _.Shard(state: RerouteParameters, value: Types.Integer) =
+        member _.Shard(state: RerouteParameters, value: CoreTypes.Integer) =
             { state with Shard = value }
 
         [<CustomOperation("fromNode")>]
-        member _.FromNode(state: RerouteParameters, value: Types.NodeName) =
+        member _.FromNode(state: RerouteParameters, value: CoreTypes.NodeName) =
             { state with FromNode = Some value }
 
         [<CustomOperation("toNode")>]
-        member _.ToNode(state: RerouteParameters, value: Types.NodeName) =
+        member _.ToNode(state: RerouteParameters, value: CoreTypes.NodeName) =
             { state with ToNode = Some value }
 
     let rerouteParameters = RerouteParametersBuilder()

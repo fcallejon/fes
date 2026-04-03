@@ -72,8 +72,8 @@ module ProfilingOperations =
     let profilingStacktracesRequest = ProfilingStacktracesRequestBuilder()
 
     type ProfilingStatusRequest = {
-        MasterTimeout: Types.Duration option
-        Timeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
+        Timeout: CoreTypes.Duration option
         WaitForResourcesCreated: bool option
     }
 
@@ -108,11 +108,11 @@ module ProfilingOperations =
             }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: ProfilingStatusRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: ProfilingStatusRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: ProfilingStatusRequest, value: Types.Duration) =
+        member _.Timeout(state: ProfilingStatusRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("waitForResourcesCreated")>]
@@ -122,9 +122,9 @@ module ProfilingOperations =
     let profilingStatusRequest = ProfilingStatusRequestBuilder()
 
     module Status =
-        let withMasterTimeout (value: Types.Duration) (req: ProfilingStatusRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: ProfilingStatusRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: Types.Duration) (req: ProfilingStatusRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: ProfilingStatusRequest) =
             { req with Timeout = Some value }
         let withWaitForResourcesCreated (value: bool) (req: ProfilingStatusRequest) =
             { req with WaitForResourcesCreated = Some value }

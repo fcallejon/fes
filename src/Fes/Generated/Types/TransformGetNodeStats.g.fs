@@ -9,18 +9,18 @@ module TransformGetNodeStats =
 
     type TransformSchedulerStats = {
         [<System.Text.Json.Serialization.JsonPropertyName("registered_transform_count")>]
-        RegisteredTransformCount: Types.Integer
+        RegisteredTransformCount: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("peek_transform")>]
         PeekTransform: string option
     }
 
     type TransformNodeStats = {
         [<System.Text.Json.Serialization.JsonPropertyName("scheduler")>]
-        Scheduler: TransformGetNodeStats.TransformSchedulerStats
+        Scheduler: TransformSchedulerStats
     }
 
     type TransformNodeFullStats = {
         [<System.Text.Json.Serialization.JsonPropertyName("total")>]
-        Total: TransformGetNodeStats.TransformNodeStats
+        Total: TransformNodeStats
     }
 

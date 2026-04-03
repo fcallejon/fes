@@ -9,16 +9,16 @@ module IndicesSimulateTemplate =
 
     type Overlapping = {
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.Name
+        Name: CoreTypes.Name
         [<System.Text.Json.Serialization.JsonPropertyName("index_patterns")>]
         IndexPatterns: string list
     }
 
     type Template = {
         [<System.Text.Json.Serialization.JsonPropertyName("aliases")>]
-        Aliases: Map<Types.IndexName, IndicesTypes.Alias>
+        Aliases: Map<CoreTypes.IndexName, IndicesTypes.Alias>
         [<System.Text.Json.Serialization.JsonPropertyName("mappings")>]
-        Mappings: TypesMapping.TypeMapping
+        Mappings: CoreTypes.TypeMapping
         [<System.Text.Json.Serialization.JsonPropertyName("settings")>]
         Settings: IndicesTypes.IndexSettings
     }

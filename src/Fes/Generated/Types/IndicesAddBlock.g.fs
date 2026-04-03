@@ -9,7 +9,7 @@ module IndicesAddBlock =
 
     type AddIndicesBlockStatus = {
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.IndexName
+        Name: CoreTypes.IndexName
         [<System.Text.Json.Serialization.JsonPropertyName("blocked")>]
         Blocked: bool
     }

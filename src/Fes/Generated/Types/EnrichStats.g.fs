@@ -9,39 +9,39 @@ module EnrichStats =
 
     type CacheStats = {
         [<System.Text.Json.Serialization.JsonPropertyName("node_id")>]
-        NodeId: Types.Id
+        NodeId: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("count")>]
-        Count: Types.Integer
+        Count: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("hits")>]
-        Hits: Types.Integer
+        Hits: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("hits_time_in_millis")>]
-        HitsTimeInMillis: Types.DurationValue<Types.UnitMillis>
+        HitsTimeInMillis: CoreTypes.DurationValue<CoreTypes.UnitMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("misses")>]
-        Misses: Types.Integer
+        Misses: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("misses_time_in_millis")>]
-        MissesTimeInMillis: Types.DurationValue<Types.UnitMillis>
+        MissesTimeInMillis: CoreTypes.DurationValue<CoreTypes.UnitMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("evictions")>]
-        Evictions: Types.Integer
+        Evictions: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("size_in_bytes")>]
-        SizeInBytes: Types.Long
+        SizeInBytes: CoreTypes.Long
     }
 
     type CoordinatorStats = {
         [<System.Text.Json.Serialization.JsonPropertyName("executed_searches_total")>]
-        ExecutedSearchesTotal: Types.Long
+        ExecutedSearchesTotal: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("node_id")>]
-        NodeId: Types.Id
+        NodeId: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("queue_size")>]
-        QueueSize: Types.Integer
+        QueueSize: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("remote_requests_current")>]
-        RemoteRequestsCurrent: Types.Integer
+        RemoteRequestsCurrent: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("remote_requests_total")>]
-        RemoteRequestsTotal: Types.Long
+        RemoteRequestsTotal: CoreTypes.Long
     }
 
     type ExecutingPolicy = {
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.Name
+        Name: CoreTypes.Name
         [<System.Text.Json.Serialization.JsonPropertyName("task")>]
         Task: TasksTypes.TaskInfo
     }

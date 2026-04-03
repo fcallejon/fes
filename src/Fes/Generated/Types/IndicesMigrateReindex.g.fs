@@ -13,13 +13,13 @@ module IndicesMigrateReindex =
 
     type SourceIndex = {
         [<System.Text.Json.Serialization.JsonPropertyName("index")>]
-        Index: Types.IndexName
+        Index: CoreTypes.IndexName
     }
 
     type MigrateReindex = {
         [<System.Text.Json.Serialization.JsonPropertyName("mode")>]
-        Mode: IndicesMigrateReindex.ModeEnum
+        Mode: ModeEnum
         [<System.Text.Json.Serialization.JsonPropertyName("source")>]
-        Source: IndicesMigrateReindex.SourceIndex
+        Source: SourceIndex
     }
 

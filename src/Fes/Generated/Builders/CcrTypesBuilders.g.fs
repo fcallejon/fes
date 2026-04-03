@@ -48,27 +48,27 @@ module CcrTypesBuilders =
             }
 
         [<CustomOperation("bytesRead")>]
-        member _.BytesRead(state: ShardStats, value: Types.Long) =
+        member _.BytesRead(state: ShardStats, value: CoreTypes.Long) =
             { state with BytesRead = value }
 
         [<CustomOperation("failedReadRequests")>]
-        member _.FailedReadRequests(state: ShardStats, value: Types.Long) =
+        member _.FailedReadRequests(state: ShardStats, value: CoreTypes.Long) =
             { state with FailedReadRequests = value }
 
         [<CustomOperation("failedWriteRequests")>]
-        member _.FailedWriteRequests(state: ShardStats, value: Types.Long) =
+        member _.FailedWriteRequests(state: ShardStats, value: CoreTypes.Long) =
             { state with FailedWriteRequests = value }
 
         [<CustomOperation("fatalException")>]
-        member _.FatalException(state: ShardStats, value: Types.ErrorCause) =
+        member _.FatalException(state: ShardStats, value: CoreTypes.ErrorCause) =
             { state with FatalException = Some value }
 
         [<CustomOperation("followerAliasesVersion")>]
-        member _.FollowerAliasesVersion(state: ShardStats, value: Types.VersionNumber) =
+        member _.FollowerAliasesVersion(state: ShardStats, value: CoreTypes.VersionNumber) =
             { state with FollowerAliasesVersion = value }
 
         [<CustomOperation("followerGlobalCheckpoint")>]
-        member _.FollowerGlobalCheckpoint(state: ShardStats, value: Types.Long) =
+        member _.FollowerGlobalCheckpoint(state: ShardStats, value: CoreTypes.Long) =
             { state with FollowerGlobalCheckpoint = value }
 
         [<CustomOperation("followerIndex")>]
@@ -76,23 +76,23 @@ module CcrTypesBuilders =
             { state with FollowerIndex = value }
 
         [<CustomOperation("followerMappingVersion")>]
-        member _.FollowerMappingVersion(state: ShardStats, value: Types.VersionNumber) =
+        member _.FollowerMappingVersion(state: ShardStats, value: CoreTypes.VersionNumber) =
             { state with FollowerMappingVersion = value }
 
         [<CustomOperation("followerMaxSeqNo")>]
-        member _.FollowerMaxSeqNo(state: ShardStats, value: Types.SequenceNumber) =
+        member _.FollowerMaxSeqNo(state: ShardStats, value: CoreTypes.SequenceNumber) =
             { state with FollowerMaxSeqNo = value }
 
         [<CustomOperation("followerSettingsVersion")>]
-        member _.FollowerSettingsVersion(state: ShardStats, value: Types.VersionNumber) =
+        member _.FollowerSettingsVersion(state: ShardStats, value: CoreTypes.VersionNumber) =
             { state with FollowerSettingsVersion = value }
 
         [<CustomOperation("lastRequestedSeqNo")>]
-        member _.LastRequestedSeqNo(state: ShardStats, value: Types.SequenceNumber) =
+        member _.LastRequestedSeqNo(state: ShardStats, value: CoreTypes.SequenceNumber) =
             { state with LastRequestedSeqNo = value }
 
         [<CustomOperation("leaderGlobalCheckpoint")>]
-        member _.LeaderGlobalCheckpoint(state: ShardStats, value: Types.Long) =
+        member _.LeaderGlobalCheckpoint(state: ShardStats, value: CoreTypes.Long) =
             { state with LeaderGlobalCheckpoint = value }
 
         [<CustomOperation("leaderIndex")>]
@@ -100,23 +100,23 @@ module CcrTypesBuilders =
             { state with LeaderIndex = value }
 
         [<CustomOperation("leaderMaxSeqNo")>]
-        member _.LeaderMaxSeqNo(state: ShardStats, value: Types.SequenceNumber) =
+        member _.LeaderMaxSeqNo(state: ShardStats, value: CoreTypes.SequenceNumber) =
             { state with LeaderMaxSeqNo = value }
 
         [<CustomOperation("operationsRead")>]
-        member _.OperationsRead(state: ShardStats, value: Types.Long) =
+        member _.OperationsRead(state: ShardStats, value: CoreTypes.Long) =
             { state with OperationsRead = value }
 
         [<CustomOperation("operationsWritten")>]
-        member _.OperationsWritten(state: ShardStats, value: Types.Long) =
+        member _.OperationsWritten(state: ShardStats, value: CoreTypes.Long) =
             { state with OperationsWritten = value }
 
         [<CustomOperation("outstandingReadRequests")>]
-        member _.OutstandingReadRequests(state: ShardStats, value: Types.Integer) =
+        member _.OutstandingReadRequests(state: ShardStats, value: CoreTypes.Integer) =
             { state with OutstandingReadRequests = value }
 
         [<CustomOperation("outstandingWriteRequests")>]
-        member _.OutstandingWriteRequests(state: ShardStats, value: Types.Integer) =
+        member _.OutstandingWriteRequests(state: ShardStats, value: CoreTypes.Integer) =
             { state with OutstandingWriteRequests = value }
 
         [<CustomOperation("readExceptions")>]
@@ -128,55 +128,55 @@ module CcrTypesBuilders =
             { state with RemoteCluster = value }
 
         [<CustomOperation("shardId")>]
-        member _.ShardId(state: ShardStats, value: Types.Integer) =
+        member _.ShardId(state: ShardStats, value: CoreTypes.Integer) =
             { state with ShardId = value }
 
         [<CustomOperation("successfulReadRequests")>]
-        member _.SuccessfulReadRequests(state: ShardStats, value: Types.Long) =
+        member _.SuccessfulReadRequests(state: ShardStats, value: CoreTypes.Long) =
             { state with SuccessfulReadRequests = value }
 
         [<CustomOperation("successfulWriteRequests")>]
-        member _.SuccessfulWriteRequests(state: ShardStats, value: Types.Long) =
+        member _.SuccessfulWriteRequests(state: ShardStats, value: CoreTypes.Long) =
             { state with SuccessfulWriteRequests = value }
 
         [<CustomOperation("timeSinceLastRead")>]
-        member _.TimeSinceLastRead(state: ShardStats, value: Types.Duration) =
+        member _.TimeSinceLastRead(state: ShardStats, value: CoreTypes.Duration) =
             { state with TimeSinceLastRead = Some value }
 
         [<CustomOperation("timeSinceLastReadMillis")>]
-        member _.TimeSinceLastReadMillis(state: ShardStats, value: Types.DurationValue<Types.UnitMillis>) =
+        member _.TimeSinceLastReadMillis(state: ShardStats, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
             { state with TimeSinceLastReadMillis = value }
 
         [<CustomOperation("totalReadRemoteExecTime")>]
-        member _.TotalReadRemoteExecTime(state: ShardStats, value: Types.Duration) =
+        member _.TotalReadRemoteExecTime(state: ShardStats, value: CoreTypes.Duration) =
             { state with TotalReadRemoteExecTime = Some value }
 
         [<CustomOperation("totalReadRemoteExecTimeMillis")>]
-        member _.TotalReadRemoteExecTimeMillis(state: ShardStats, value: Types.DurationValue<Types.UnitMillis>) =
+        member _.TotalReadRemoteExecTimeMillis(state: ShardStats, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
             { state with TotalReadRemoteExecTimeMillis = value }
 
         [<CustomOperation("totalReadTime")>]
-        member _.TotalReadTime(state: ShardStats, value: Types.Duration) =
+        member _.TotalReadTime(state: ShardStats, value: CoreTypes.Duration) =
             { state with TotalReadTime = Some value }
 
         [<CustomOperation("totalReadTimeMillis")>]
-        member _.TotalReadTimeMillis(state: ShardStats, value: Types.DurationValue<Types.UnitMillis>) =
+        member _.TotalReadTimeMillis(state: ShardStats, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
             { state with TotalReadTimeMillis = value }
 
         [<CustomOperation("totalWriteTime")>]
-        member _.TotalWriteTime(state: ShardStats, value: Types.Duration) =
+        member _.TotalWriteTime(state: ShardStats, value: CoreTypes.Duration) =
             { state with TotalWriteTime = Some value }
 
         [<CustomOperation("totalWriteTimeMillis")>]
-        member _.TotalWriteTimeMillis(state: ShardStats, value: Types.DurationValue<Types.UnitMillis>) =
+        member _.TotalWriteTimeMillis(state: ShardStats, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
             { state with TotalWriteTimeMillis = value }
 
         [<CustomOperation("writeBufferOperationCount")>]
-        member _.WriteBufferOperationCount(state: ShardStats, value: Types.Long) =
+        member _.WriteBufferOperationCount(state: ShardStats, value: CoreTypes.Long) =
             { state with WriteBufferOperationCount = value }
 
         [<CustomOperation("writeBufferSizeInBytes")>]
-        member _.WriteBufferSizeInBytes(state: ShardStats, value: Types.ByteSize) =
+        member _.WriteBufferSizeInBytes(state: ShardStats, value: CoreTypes.ByteSize) =
             { state with WriteBufferSizeInBytes = value }
 
     let shardStats = ShardStatsBuilder()

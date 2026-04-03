@@ -28,11 +28,11 @@ module GlobalMtermvectorsBuilders =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: Operation, value: Types.Id) =
+        member _.Id(state: Operation, value: CoreTypes.Id) =
             { state with Id = Some value }
 
         [<CustomOperation("index")>]
-        member _.Index(state: Operation, value: Types.IndexName) =
+        member _.Index(state: Operation, value: CoreTypes.IndexName) =
             { state with Index = Some value }
 
         [<CustomOperation("doc")>]
@@ -40,7 +40,7 @@ module GlobalMtermvectorsBuilders =
             { state with Doc = Some value }
 
         [<CustomOperation("fields")>]
-        member _.Fields(state: Operation, value: Types.Fields) =
+        member _.Fields(state: Operation, value: CoreTypes.Fields) =
             { state with Fields = Some value }
 
         [<CustomOperation("fieldStatistics")>]
@@ -64,7 +64,7 @@ module GlobalMtermvectorsBuilders =
             { state with Positions = Some value }
 
         [<CustomOperation("routing")>]
-        member _.Routing(state: Operation, value: Types.Routing) =
+        member _.Routing(state: Operation, value: CoreTypes.Routing) =
             { state with Routing = Some value }
 
         [<CustomOperation("termStatistics")>]
@@ -72,11 +72,11 @@ module GlobalMtermvectorsBuilders =
             { state with TermStatistics = Some value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: Operation, value: Types.VersionNumber) =
+        member _.Version(state: Operation, value: CoreTypes.VersionNumber) =
             { state with Version = Some value }
 
         [<CustomOperation("versionType")>]
-        member _.VersionType(state: Operation, value: Types.VersionType) =
+        member _.VersionType(state: Operation, value: CoreTypes.VersionType) =
             { state with VersionType = Some value }
 
     let operation = OperationBuilder()
@@ -94,19 +94,19 @@ module GlobalMtermvectorsBuilders =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: TermVectorsResult, value: Types.Id) =
+        member _.Id(state: TermVectorsResult, value: CoreTypes.Id) =
             { state with Id = Some value }
 
         [<CustomOperation("index")>]
-        member _.Index(state: TermVectorsResult, value: Types.IndexName) =
+        member _.Index(state: TermVectorsResult, value: CoreTypes.IndexName) =
             { state with Index = value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: TermVectorsResult, value: Types.VersionNumber) =
+        member _.Version(state: TermVectorsResult, value: CoreTypes.VersionNumber) =
             { state with Version = Some value }
 
         [<CustomOperation("took")>]
-        member _.Took(state: TermVectorsResult, value: Types.Long) =
+        member _.Took(state: TermVectorsResult, value: CoreTypes.Long) =
             { state with Took = Some value }
 
         [<CustomOperation("found")>]
@@ -114,11 +114,11 @@ module GlobalMtermvectorsBuilders =
             { state with Found = Some value }
 
         [<CustomOperation("termVectors")>]
-        member _.TermVectors(state: TermVectorsResult, value: Map<Types.Field, GlobalTermvectors.TermVector>) =
+        member _.TermVectors(state: TermVectorsResult, value: Map<CoreTypes.Field, GlobalTermvectors.TermVector>) =
             { state with TermVectors = Some value }
 
         [<CustomOperation("error")>]
-        member _.Error(state: TermVectorsResult, value: Types.ErrorCause) =
+        member _.Error(state: TermVectorsResult, value: CoreTypes.ErrorCause) =
             { state with Error = Some value }
 
     let termVectorsResult = TermVectorsResultBuilder()

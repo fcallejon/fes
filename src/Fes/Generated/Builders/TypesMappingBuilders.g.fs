@@ -36,7 +36,7 @@ module TypesMappingBuilders =
             { state with Metrics = value }
 
         [<CustomOperation("timeSeriesMetric")>]
-        member _.TimeSeriesMetric(state: AggregateMetricDoubleProperty, value: TypesMapping.TimeSeriesMetricType) =
+        member _.TimeSeriesMetric(state: AggregateMetricDoubleProperty, value: CoreTypes.TimeSeriesMetricType) =
             { state with TimeSeriesMetric = Some value }
 
     let aggregateMetricDoubleProperty = AggregateMetricDoublePropertyBuilder()
@@ -56,7 +56,7 @@ module TypesMappingBuilders =
             }
 
         [<CustomOperation("boost")>]
-        member _.Boost(state: BooleanProperty, value: Types.Double) =
+        member _.Boost(state: BooleanProperty, value: CoreTypes.Double) =
             { state with Boost = Some value }
 
         [<CustomOperation("fielddata")>]
@@ -76,11 +76,11 @@ module TypesMappingBuilders =
             { state with IgnoreMalformed = Some value }
 
         [<CustomOperation("script")>]
-        member _.Script(state: BooleanProperty, value: Types.Script) =
+        member _.Script(state: BooleanProperty, value: CoreTypes.Script) =
             { state with Script = Some value }
 
         [<CustomOperation("onScriptError")>]
-        member _.OnScriptError(state: BooleanProperty, value: TypesMapping.OnScriptError) =
+        member _.OnScriptError(state: BooleanProperty, value: CoreTypes.OnScriptError) =
             { state with OnScriptError = Some value }
 
         [<CustomOperation("timeSeriesDimension")>]
@@ -105,15 +105,15 @@ module TypesMappingBuilders =
             }
 
         [<CustomOperation("maxChunkSize")>]
-        member _.MaxChunkSize(state: ChunkRescorerChunkingSettings, value: Types.Integer) =
+        member _.MaxChunkSize(state: ChunkRescorerChunkingSettings, value: CoreTypes.Integer) =
             { state with MaxChunkSize = value }
 
         [<CustomOperation("overlap")>]
-        member _.Overlap(state: ChunkRescorerChunkingSettings, value: Types.Integer) =
+        member _.Overlap(state: ChunkRescorerChunkingSettings, value: CoreTypes.Integer) =
             { state with Overlap = Some value }
 
         [<CustomOperation("sentenceOverlap")>]
-        member _.SentenceOverlap(state: ChunkRescorerChunkingSettings, value: Types.Integer) =
+        member _.SentenceOverlap(state: ChunkRescorerChunkingSettings, value: CoreTypes.Integer) =
             { state with SentenceOverlap = Some value }
 
         [<CustomOperation("separatorGroup")>]
@@ -146,15 +146,15 @@ module TypesMappingBuilders =
             { state with Strategy = value }
 
         [<CustomOperation("maxChunkSize")>]
-        member _.MaxChunkSize(state: ChunkingSettings, value: Types.Integer) =
+        member _.MaxChunkSize(state: ChunkingSettings, value: CoreTypes.Integer) =
             { state with MaxChunkSize = value }
 
         [<CustomOperation("overlap")>]
-        member _.Overlap(state: ChunkingSettings, value: Types.Integer) =
+        member _.Overlap(state: ChunkingSettings, value: CoreTypes.Integer) =
             { state with Overlap = Some value }
 
         [<CustomOperation("sentenceOverlap")>]
-        member _.SentenceOverlap(state: ChunkingSettings, value: Types.Integer) =
+        member _.SentenceOverlap(state: ChunkingSettings, value: CoreTypes.Integer) =
             { state with SentenceOverlap = Some value }
 
         [<CustomOperation("separatorGroup")>]
@@ -184,11 +184,11 @@ module TypesMappingBuilders =
             { state with Analyzer = Some value }
 
         [<CustomOperation("contexts")>]
-        member _.Contexts(state: CompletionProperty, value: TypesMapping.SuggestContext list) =
+        member _.Contexts(state: CompletionProperty, value: CoreTypes.SuggestContext list) =
             { state with Contexts = Some value }
 
         [<CustomOperation("maxInputLength")>]
-        member _.MaxInputLength(state: CompletionProperty, value: Types.Integer) =
+        member _.MaxInputLength(state: CompletionProperty, value: CoreTypes.Integer) =
             { state with MaxInputLength = Some value }
 
         [<CustomOperation("preservePositionIncrements")>]
@@ -217,7 +217,7 @@ module TypesMappingBuilders =
             }
 
         [<CustomOperation("copyTo")>]
-        member _.CopyTo(state: CorePropertyBase, value: Types.Fields) =
+        member _.CopyTo(state: CorePropertyBase, value: CoreTypes.Fields) =
             { state with CopyTo = Some value }
 
         [<CustomOperation("store")>]
@@ -241,7 +241,7 @@ module TypesMappingBuilders =
             }
 
         [<CustomOperation("boost")>]
-        member _.Boost(state: DateNanosProperty, value: Types.Double) =
+        member _.Boost(state: DateNanosProperty, value: CoreTypes.Double) =
             { state with Boost = Some value }
 
         [<CustomOperation("format")>]
@@ -257,19 +257,19 @@ module TypesMappingBuilders =
             { state with Index = Some value }
 
         [<CustomOperation("script")>]
-        member _.Script(state: DateNanosProperty, value: Types.Script) =
+        member _.Script(state: DateNanosProperty, value: CoreTypes.Script) =
             { state with Script = Some value }
 
         [<CustomOperation("onScriptError")>]
-        member _.OnScriptError(state: DateNanosProperty, value: TypesMapping.OnScriptError) =
+        member _.OnScriptError(state: DateNanosProperty, value: CoreTypes.OnScriptError) =
             { state with OnScriptError = Some value }
 
         [<CustomOperation("nullValue")>]
-        member _.NullValue(state: DateNanosProperty, value: Types.DateTime) =
+        member _.NullValue(state: DateNanosProperty, value: CoreTypes.DateTime) =
             { state with NullValue = Some value }
 
         [<CustomOperation("precisionStep")>]
-        member _.PrecisionStep(state: DateNanosProperty, value: Types.Integer) =
+        member _.PrecisionStep(state: DateNanosProperty, value: CoreTypes.Integer) =
             { state with PrecisionStep = Some value }
 
         [<CustomOperation("type'")>]
@@ -295,7 +295,7 @@ module TypesMappingBuilders =
             }
 
         [<CustomOperation("boost")>]
-        member _.Boost(state: DateProperty, value: Types.Double) =
+        member _.Boost(state: DateProperty, value: CoreTypes.Double) =
             { state with Boost = Some value }
 
         [<CustomOperation("fielddata")>]
@@ -315,19 +315,19 @@ module TypesMappingBuilders =
             { state with Index = Some value }
 
         [<CustomOperation("script")>]
-        member _.Script(state: DateProperty, value: Types.Script) =
+        member _.Script(state: DateProperty, value: CoreTypes.Script) =
             { state with Script = Some value }
 
         [<CustomOperation("onScriptError")>]
-        member _.OnScriptError(state: DateProperty, value: TypesMapping.OnScriptError) =
+        member _.OnScriptError(state: DateProperty, value: CoreTypes.OnScriptError) =
             { state with OnScriptError = Some value }
 
         [<CustomOperation("nullValue")>]
-        member _.NullValue(state: DateProperty, value: Types.DateTime) =
+        member _.NullValue(state: DateProperty, value: CoreTypes.DateTime) =
             { state with NullValue = Some value }
 
         [<CustomOperation("precisionStep")>]
-        member _.PrecisionStep(state: DateProperty, value: Types.Integer) =
+        member _.PrecisionStep(state: DateProperty, value: CoreTypes.Integer) =
             { state with PrecisionStep = Some value }
 
         [<CustomOperation("locale")>]
@@ -352,23 +352,23 @@ module TypesMappingBuilders =
             }
 
         [<CustomOperation("confidenceInterval")>]
-        member _.ConfidenceInterval(state: DenseVectorIndexOptions, value: Types.Float) =
+        member _.ConfidenceInterval(state: DenseVectorIndexOptions, value: CoreTypes.Float) =
             { state with ConfidenceInterval = Some value }
 
         [<CustomOperation("efConstruction")>]
-        member _.EfConstruction(state: DenseVectorIndexOptions, value: Types.Integer) =
+        member _.EfConstruction(state: DenseVectorIndexOptions, value: CoreTypes.Integer) =
             { state with EfConstruction = Some value }
 
         [<CustomOperation("m")>]
-        member _.M(state: DenseVectorIndexOptions, value: Types.Integer) =
+        member _.M(state: DenseVectorIndexOptions, value: CoreTypes.Integer) =
             { state with M = Some value }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: DenseVectorIndexOptions, value: TypesMapping.DenseVectorIndexOptionsType) =
+        member _.Type(state: DenseVectorIndexOptions, value: CoreTypes.DenseVectorIndexOptionsType) =
             { state with Type = value }
 
         [<CustomOperation("rescoreVector")>]
-        member _.RescoreVector(state: DenseVectorIndexOptions, value: TypesMapping.DenseVectorIndexOptionsRescoreVector) =
+        member _.RescoreVector(state: DenseVectorIndexOptions, value: CoreTypes.DenseVectorIndexOptionsRescoreVector) =
             { state with RescoreVector = Some value }
 
         [<CustomOperation("onDiskRescore")>]
@@ -393,11 +393,11 @@ module TypesMappingBuilders =
             { state with Type = value }
 
         [<CustomOperation("dims")>]
-        member _.Dims(state: DenseVectorProperty, value: Types.Integer) =
+        member _.Dims(state: DenseVectorProperty, value: CoreTypes.Integer) =
             { state with Dims = Some value }
 
         [<CustomOperation("elementType")>]
-        member _.ElementType(state: DenseVectorProperty, value: TypesMapping.DenseVectorElementType) =
+        member _.ElementType(state: DenseVectorProperty, value: CoreTypes.DenseVectorElementType) =
             { state with ElementType = Some value }
 
         [<CustomOperation("index")>]
@@ -405,11 +405,11 @@ module TypesMappingBuilders =
             { state with Index = Some value }
 
         [<CustomOperation("indexOptions")>]
-        member _.IndexOptions(state: DenseVectorProperty, value: TypesMapping.DenseVectorIndexOptions) =
+        member _.IndexOptions(state: DenseVectorProperty, value: CoreTypes.DenseVectorIndexOptions) =
             { state with IndexOptions = Some value }
 
         [<CustomOperation("similarity")>]
-        member _.Similarity(state: DenseVectorProperty, value: TypesMapping.DenseVectorSimilarity) =
+        member _.Similarity(state: DenseVectorProperty, value: CoreTypes.DenseVectorSimilarity) =
             { state with Similarity = Some value }
 
     let denseVectorProperty = DenseVectorPropertyBuilder()
@@ -451,11 +451,11 @@ module TypesMappingBuilders =
             { state with Enabled = Some value }
 
         [<CustomOperation("nullValue")>]
-        member _.NullValue(state: DynamicProperty, value: Types.FieldValue) =
+        member _.NullValue(state: DynamicProperty, value: CoreTypes.FieldValue) =
             { state with NullValue = Some value }
 
         [<CustomOperation("boost")>]
-        member _.Boost(state: DynamicProperty, value: Types.Double) =
+        member _.Boost(state: DynamicProperty, value: CoreTypes.Double) =
             { state with Boost = Some value }
 
         [<CustomOperation("coerce")>]
@@ -463,11 +463,11 @@ module TypesMappingBuilders =
             { state with Coerce = Some value }
 
         [<CustomOperation("script")>]
-        member _.Script(state: DynamicProperty, value: Types.Script) =
+        member _.Script(state: DynamicProperty, value: CoreTypes.Script) =
             { state with Script = Some value }
 
         [<CustomOperation("onScriptError")>]
-        member _.OnScriptError(state: DynamicProperty, value: TypesMapping.OnScriptError) =
+        member _.OnScriptError(state: DynamicProperty, value: CoreTypes.OnScriptError) =
             { state with OnScriptError = Some value }
 
         [<CustomOperation("ignoreMalformed")>]
@@ -475,7 +475,7 @@ module TypesMappingBuilders =
             { state with IgnoreMalformed = Some value }
 
         [<CustomOperation("timeSeriesMetric")>]
-        member _.TimeSeriesMetric(state: DynamicProperty, value: TypesMapping.TimeSeriesMetricType) =
+        member _.TimeSeriesMetric(state: DynamicProperty, value: CoreTypes.TimeSeriesMetricType) =
             { state with TimeSeriesMetric = Some value }
 
         [<CustomOperation("analyzer")>]
@@ -491,7 +491,7 @@ module TypesMappingBuilders =
             { state with Index = Some value }
 
         [<CustomOperation("indexOptions")>]
-        member _.IndexOptions(state: DynamicProperty, value: TypesMapping.IndexOptions) =
+        member _.IndexOptions(state: DynamicProperty, value: CoreTypes.IndexOptions) =
             { state with IndexOptions = Some value }
 
         [<CustomOperation("indexPhrases")>]
@@ -499,7 +499,7 @@ module TypesMappingBuilders =
             { state with IndexPhrases = Some value }
 
         [<CustomOperation("indexPrefixes")>]
-        member _.IndexPrefixes(state: DynamicProperty, value: TypesMapping.TextIndexPrefixes option) =
+        member _.IndexPrefixes(state: DynamicProperty, value: CoreTypes.TextIndexPrefixes option) =
             { state with IndexPrefixes = Some value }
 
         [<CustomOperation("norms")>]
@@ -507,7 +507,7 @@ module TypesMappingBuilders =
             { state with Norms = Some value }
 
         [<CustomOperation("positionIncrementGap")>]
-        member _.PositionIncrementGap(state: DynamicProperty, value: Types.Integer) =
+        member _.PositionIncrementGap(state: DynamicProperty, value: CoreTypes.Integer) =
             { state with PositionIncrementGap = Some value }
 
         [<CustomOperation("searchAnalyzer")>]
@@ -519,7 +519,7 @@ module TypesMappingBuilders =
             { state with SearchQuoteAnalyzer = Some value }
 
         [<CustomOperation("termVector")>]
-        member _.TermVector(state: DynamicProperty, value: TypesMapping.TermVectorOption) =
+        member _.TermVector(state: DynamicProperty, value: CoreTypes.TermVectorOption) =
             { state with TermVector = Some value }
 
         [<CustomOperation("format")>]
@@ -527,7 +527,7 @@ module TypesMappingBuilders =
             { state with Format = Some value }
 
         [<CustomOperation("precisionStep")>]
-        member _.PrecisionStep(state: DynamicProperty, value: Types.Integer) =
+        member _.PrecisionStep(state: DynamicProperty, value: CoreTypes.Integer) =
             { state with PrecisionStep = Some value }
 
         [<CustomOperation("locale")>]
@@ -538,10 +538,10 @@ module TypesMappingBuilders =
 
     module DynamicTemplate =
 
-        let mapping (value: TypesMapping.Property) =
+        let mapping (value: CoreTypes.Property) =
             DynamicTemplate.Mapping value
 
-        let runtime (value: TypesMapping.RuntimeField) =
+        let runtime (value: CoreTypes.RuntimeField) =
             DynamicTemplate.Runtime value
 
     type FlattenedPropertyBuilder() =
@@ -561,11 +561,11 @@ module TypesMappingBuilders =
             }
 
         [<CustomOperation("boost")>]
-        member _.Boost(state: FlattenedProperty, value: Types.Double) =
+        member _.Boost(state: FlattenedProperty, value: CoreTypes.Double) =
             { state with Boost = Some value }
 
         [<CustomOperation("depthLimit")>]
-        member _.DepthLimit(state: FlattenedProperty, value: Types.Integer) =
+        member _.DepthLimit(state: FlattenedProperty, value: CoreTypes.Integer) =
             { state with DepthLimit = Some value }
 
         [<CustomOperation("docValues")>]
@@ -581,7 +581,7 @@ module TypesMappingBuilders =
             { state with Index = Some value }
 
         [<CustomOperation("indexOptions")>]
-        member _.IndexOptions(state: FlattenedProperty, value: TypesMapping.IndexOptions) =
+        member _.IndexOptions(state: FlattenedProperty, value: CoreTypes.IndexOptions) =
             { state with IndexOptions = Some value }
 
         [<CustomOperation("nullValue")>]
@@ -628,7 +628,7 @@ module TypesMappingBuilders =
             { state with IgnoreZValue = Some value }
 
         [<CustomOperation("nullValue")>]
-        member _.NullValue(state: GeoPointProperty, value: Types.GeoLocation) =
+        member _.NullValue(state: GeoPointProperty, value: CoreTypes.GeoLocation) =
             { state with NullValue = Some value }
 
         [<CustomOperation("index")>]
@@ -636,11 +636,11 @@ module TypesMappingBuilders =
             { state with Index = Some value }
 
         [<CustomOperation("onScriptError")>]
-        member _.OnScriptError(state: GeoPointProperty, value: TypesMapping.OnScriptError) =
+        member _.OnScriptError(state: GeoPointProperty, value: CoreTypes.OnScriptError) =
             { state with OnScriptError = Some value }
 
         [<CustomOperation("script")>]
-        member _.Script(state: GeoPointProperty, value: Types.Script) =
+        member _.Script(state: GeoPointProperty, value: CoreTypes.Script) =
             { state with Script = Some value }
 
         [<CustomOperation("type'")>]
@@ -648,7 +648,7 @@ module TypesMappingBuilders =
             { state with Type = value }
 
         [<CustomOperation("timeSeriesMetric")>]
-        member _.TimeSeriesMetric(state: GeoPointProperty, value: TypesMapping.GeoPointMetricType) =
+        member _.TimeSeriesMetric(state: GeoPointProperty, value: CoreTypes.GeoPointMetricType) =
             { state with TimeSeriesMetric = Some value }
 
     let geoPointProperty = GeoPointPropertyBuilder()
@@ -682,11 +682,11 @@ module TypesMappingBuilders =
             { state with Index = Some value }
 
         [<CustomOperation("orientation")>]
-        member _.Orientation(state: GeoShapeProperty, value: TypesMapping.GeoOrientation) =
+        member _.Orientation(state: GeoShapeProperty, value: CoreTypes.GeoOrientation) =
             { state with Orientation = Some value }
 
         [<CustomOperation("strategy")>]
-        member _.Strategy(state: GeoShapeProperty, value: TypesMapping.GeoStrategy) =
+        member _.Strategy(state: GeoShapeProperty, value: CoreTypes.GeoStrategy) =
             { state with Strategy = Some value }
 
         [<CustomOperation("type'")>]
@@ -708,7 +708,7 @@ module TypesMappingBuilders =
             { state with IgnoreMalformed = Some value }
 
         [<CustomOperation("timeSeriesMetric")>]
-        member _.TimeSeriesMetric(state: HistogramProperty, value: TypesMapping.TimeSeriesMetricType) =
+        member _.TimeSeriesMetric(state: HistogramProperty, value: CoreTypes.TimeSeriesMetricType) =
             { state with TimeSeriesMetric = Some value }
 
         [<CustomOperation("type'")>]
@@ -748,7 +748,7 @@ module TypesMappingBuilders =
             { state with Norms = Some value }
 
         [<CustomOperation("indexOptions")>]
-        member _.IndexOptions(state: IcuCollationProperty, value: TypesMapping.IndexOptions) =
+        member _.IndexOptions(state: IcuCollationProperty, value: CoreTypes.IndexOptions) =
             { state with IndexOptions = Some value }
 
         [<CustomOperation("index")>]
@@ -776,15 +776,15 @@ module TypesMappingBuilders =
             { state with Variant = Some value }
 
         [<CustomOperation("strength")>]
-        member _.Strength(state: IcuCollationProperty, value: TypesAnalysis.IcuCollationStrength) =
+        member _.Strength(state: IcuCollationProperty, value: CoreTypes.IcuCollationStrength) =
             { state with Strength = Some value }
 
         [<CustomOperation("decomposition")>]
-        member _.Decomposition(state: IcuCollationProperty, value: TypesAnalysis.IcuCollationDecomposition) =
+        member _.Decomposition(state: IcuCollationProperty, value: CoreTypes.IcuCollationDecomposition) =
             { state with Decomposition = Some value }
 
         [<CustomOperation("alternate")>]
-        member _.Alternate(state: IcuCollationProperty, value: TypesAnalysis.IcuCollationAlternate) =
+        member _.Alternate(state: IcuCollationProperty, value: CoreTypes.IcuCollationAlternate) =
             { state with Alternate = Some value }
 
         [<CustomOperation("caseLevel")>]
@@ -792,7 +792,7 @@ module TypesMappingBuilders =
             { state with CaseLevel = Some value }
 
         [<CustomOperation("caseFirst")>]
-        member _.CaseFirst(state: IcuCollationProperty, value: TypesAnalysis.IcuCollationCaseFirst) =
+        member _.CaseFirst(state: IcuCollationProperty, value: CoreTypes.IcuCollationCaseFirst) =
             { state with CaseFirst = Some value }
 
         [<CustomOperation("numeric")>]
@@ -823,7 +823,7 @@ module TypesMappingBuilders =
             }
 
         [<CustomOperation("boost")>]
-        member _.Boost(state: IpProperty, value: Types.Double) =
+        member _.Boost(state: IpProperty, value: CoreTypes.Double) =
             { state with Boost = Some value }
 
         [<CustomOperation("index")>]
@@ -839,11 +839,11 @@ module TypesMappingBuilders =
             { state with NullValue = Some value }
 
         [<CustomOperation("onScriptError")>]
-        member _.OnScriptError(state: IpProperty, value: TypesMapping.OnScriptError) =
+        member _.OnScriptError(state: IpProperty, value: CoreTypes.OnScriptError) =
             { state with OnScriptError = Some value }
 
         [<CustomOperation("script")>]
-        member _.Script(state: IpProperty, value: Types.Script) =
+        member _.Script(state: IpProperty, value: CoreTypes.Script) =
             { state with Script = Some value }
 
         [<CustomOperation("timeSeriesDimension")>]
@@ -865,7 +865,7 @@ module TypesMappingBuilders =
             }
 
         [<CustomOperation("relations")>]
-        member _.Relations(state: JoinProperty, value: Map<Types.RelationName, System.Text.Json.JsonElement>) =
+        member _.Relations(state: JoinProperty, value: Map<CoreTypes.RelationName, System.Text.Json.JsonElement>) =
             { state with Relations = Some value }
 
         [<CustomOperation("eagerGlobalOrdinals")>]
@@ -897,7 +897,7 @@ module TypesMappingBuilders =
             }
 
         [<CustomOperation("boost")>]
-        member _.Boost(state: KeywordProperty, value: Types.Double) =
+        member _.Boost(state: KeywordProperty, value: CoreTypes.Double) =
             { state with Boost = Some value }
 
         [<CustomOperation("eagerGlobalOrdinals")>]
@@ -909,15 +909,15 @@ module TypesMappingBuilders =
             { state with Index = Some value }
 
         [<CustomOperation("indexOptions")>]
-        member _.IndexOptions(state: KeywordProperty, value: TypesMapping.IndexOptions) =
+        member _.IndexOptions(state: KeywordProperty, value: CoreTypes.IndexOptions) =
             { state with IndexOptions = Some value }
 
         [<CustomOperation("script")>]
-        member _.Script(state: KeywordProperty, value: Types.Script) =
+        member _.Script(state: KeywordProperty, value: CoreTypes.Script) =
             { state with Script = Some value }
 
         [<CustomOperation("onScriptError")>]
-        member _.OnScriptError(state: KeywordProperty, value: TypesMapping.OnScriptError) =
+        member _.OnScriptError(state: KeywordProperty, value: CoreTypes.OnScriptError) =
             { state with OnScriptError = Some value }
 
         [<CustomOperation("normalizer")>]
@@ -964,7 +964,7 @@ module TypesMappingBuilders =
             { state with Type = value }
 
         [<CustomOperation("fields")>]
-        member _.Fields(state: MatchOnlyTextProperty, value: Map<Types.PropertyName, TypesMapping.Property>) =
+        member _.Fields(state: MatchOnlyTextProperty, value: Map<CoreTypes.PropertyName, CoreTypes.Property>) =
             { state with Fields = Some value }
 
         [<CustomOperation("meta")>]
@@ -972,7 +972,7 @@ module TypesMappingBuilders =
             { state with Meta = Some value }
 
         [<CustomOperation("copyTo")>]
-        member _.CopyTo(state: MatchOnlyTextProperty, value: Types.Fields) =
+        member _.CopyTo(state: MatchOnlyTextProperty, value: CoreTypes.Fields) =
             { state with CopyTo = Some value }
 
     let matchOnlyTextProperty = MatchOnlyTextPropertyBuilder()
@@ -1018,7 +1018,7 @@ module TypesMappingBuilders =
             }
 
         [<CustomOperation("boost")>]
-        member _.Boost(state: NumberPropertyBase, value: Types.Double) =
+        member _.Boost(state: NumberPropertyBase, value: CoreTypes.Double) =
             { state with Boost = Some value }
 
         [<CustomOperation("coerce")>]
@@ -1034,15 +1034,15 @@ module TypesMappingBuilders =
             { state with Index = Some value }
 
         [<CustomOperation("onScriptError")>]
-        member _.OnScriptError(state: NumberPropertyBase, value: TypesMapping.OnScriptError) =
+        member _.OnScriptError(state: NumberPropertyBase, value: CoreTypes.OnScriptError) =
             { state with OnScriptError = Some value }
 
         [<CustomOperation("script")>]
-        member _.Script(state: NumberPropertyBase, value: Types.Script) =
+        member _.Script(state: NumberPropertyBase, value: CoreTypes.Script) =
             { state with Script = Some value }
 
         [<CustomOperation("timeSeriesMetric")>]
-        member _.TimeSeriesMetric(state: NumberPropertyBase, value: TypesMapping.TimeSeriesMetricType) =
+        member _.TimeSeriesMetric(state: NumberPropertyBase, value: CoreTypes.TimeSeriesMetricType) =
             { state with TimeSeriesMetric = Some value }
 
         [<CustomOperation("timeSeriesDimension")>]
@@ -1064,7 +1064,7 @@ module TypesMappingBuilders =
             { state with Enabled = Some value }
 
         [<CustomOperation("subobjects")>]
-        member _.Subobjects(state: ObjectProperty, value: TypesMapping.Subobjects) =
+        member _.Subobjects(state: ObjectProperty, value: CoreTypes.Subobjects) =
             { state with Subobjects = Some value }
 
         [<CustomOperation("type'")>]
@@ -1091,7 +1091,7 @@ module TypesMappingBuilders =
             { state with Enabled = Some value }
 
         [<CustomOperation("priority")>]
-        member _.Priority(state: PassthroughObjectProperty, value: Types.Integer) =
+        member _.Priority(state: PassthroughObjectProperty, value: CoreTypes.Integer) =
             { state with Priority = Some value }
 
         [<CustomOperation("timeSeriesDimension")>]
@@ -1143,23 +1143,23 @@ module TypesMappingBuilders =
             { state with Meta = Some value }
 
         [<CustomOperation("properties")>]
-        member _.Properties(state: PropertyBase, value: Map<Types.PropertyName, TypesMapping.Property>) =
+        member _.Properties(state: PropertyBase, value: Map<CoreTypes.PropertyName, CoreTypes.Property>) =
             { state with Properties = Some value }
 
         [<CustomOperation("ignoreAbove")>]
-        member _.IgnoreAbove(state: PropertyBase, value: Types.Integer) =
+        member _.IgnoreAbove(state: PropertyBase, value: CoreTypes.Integer) =
             { state with IgnoreAbove = Some value }
 
         [<CustomOperation("dynamic")>]
-        member _.Dynamic(state: PropertyBase, value: TypesMapping.DynamicMapping) =
+        member _.Dynamic(state: PropertyBase, value: CoreTypes.DynamicMapping) =
             { state with Dynamic = Some value }
 
         [<CustomOperation("fields")>]
-        member _.Fields(state: PropertyBase, value: Map<Types.PropertyName, TypesMapping.Property>) =
+        member _.Fields(state: PropertyBase, value: Map<CoreTypes.PropertyName, CoreTypes.Property>) =
             { state with Fields = Some value }
 
         [<CustomOperation("syntheticSourceKeep")>]
-        member _.SyntheticSourceKeep(state: PropertyBase, value: TypesMapping.SyntheticSourceKeepEnum) =
+        member _.SyntheticSourceKeep(state: PropertyBase, value: CoreTypes.SyntheticSourceKeepEnum) =
             { state with SyntheticSourceKeep = Some value }
 
     let propertyBase = PropertyBaseBuilder()
@@ -1173,7 +1173,7 @@ module TypesMappingBuilders =
             }
 
         [<CustomOperation("boost")>]
-        member _.Boost(state: RangePropertyBase, value: Types.Double) =
+        member _.Boost(state: RangePropertyBase, value: CoreTypes.Double) =
             { state with Boost = Some value }
 
         [<CustomOperation("coerce")>]
@@ -1199,11 +1199,11 @@ module TypesMappingBuilders =
             { state with Type = value }
 
         [<CustomOperation("elementType")>]
-        member _.ElementType(state: RankVectorProperty, value: TypesMapping.RankVectorElementType) =
+        member _.ElementType(state: RankVectorProperty, value: CoreTypes.RankVectorElementType) =
             { state with ElementType = Some value }
 
         [<CustomOperation("dims")>]
-        member _.Dims(state: RankVectorProperty, value: Types.Integer) =
+        member _.Dims(state: RankVectorProperty, value: CoreTypes.Integer) =
             { state with Dims = Some value }
 
     let rankVectorProperty = RankVectorPropertyBuilder()
@@ -1222,11 +1222,11 @@ module TypesMappingBuilders =
             }
 
         [<CustomOperation("fields")>]
-        member _.Fields(state: RuntimeField, value: Map<string, TypesMapping.CompositeSubField>) =
+        member _.Fields(state: RuntimeField, value: Map<string, CoreTypes.CompositeSubField>) =
             { state with Fields = Some value }
 
         [<CustomOperation("fetchFields")>]
-        member _.FetchFields(state: RuntimeField, value: TypesMapping.RuntimeFieldFetchFields list) =
+        member _.FetchFields(state: RuntimeField, value: CoreTypes.RuntimeFieldFetchFields list) =
             { state with FetchFields = Some value }
 
         [<CustomOperation("format")>]
@@ -1234,23 +1234,23 @@ module TypesMappingBuilders =
             { state with Format = Some value }
 
         [<CustomOperation("inputField")>]
-        member _.InputField(state: RuntimeField, value: Types.Field) =
+        member _.InputField(state: RuntimeField, value: CoreTypes.Field) =
             { state with InputField = Some value }
 
         [<CustomOperation("targetField")>]
-        member _.TargetField(state: RuntimeField, value: Types.Field) =
+        member _.TargetField(state: RuntimeField, value: CoreTypes.Field) =
             { state with TargetField = Some value }
 
         [<CustomOperation("targetIndex")>]
-        member _.TargetIndex(state: RuntimeField, value: Types.IndexName) =
+        member _.TargetIndex(state: RuntimeField, value: CoreTypes.IndexName) =
             { state with TargetIndex = Some value }
 
         [<CustomOperation("script")>]
-        member _.Script(state: RuntimeField, value: Types.Script) =
+        member _.Script(state: RuntimeField, value: CoreTypes.Script) =
             { state with Script = Some value }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: RuntimeField, value: TypesMapping.RuntimeFieldType) =
+        member _.Type(state: RuntimeField, value: CoreTypes.RuntimeFieldType) =
             { state with Type = value }
 
     let runtimeField = RuntimeFieldBuilder()
@@ -1268,11 +1268,11 @@ module TypesMappingBuilders =
             { state with Type = value }
 
         [<CustomOperation("nullValue")>]
-        member _.NullValue(state: ScaledFloatNumberProperty, value: Types.Double) =
+        member _.NullValue(state: ScaledFloatNumberProperty, value: CoreTypes.Double) =
             { state with NullValue = Some value }
 
         [<CustomOperation("scalingFactor")>]
-        member _.ScalingFactor(state: ScaledFloatNumberProperty, value: Types.Double) =
+        member _.ScalingFactor(state: ScaledFloatNumberProperty, value: CoreTypes.Double) =
             { state with ScalingFactor = Some value }
 
     let scaledFloatNumberProperty = ScaledFloatNumberPropertyBuilder()
@@ -1301,11 +1301,11 @@ module TypesMappingBuilders =
             { state with Index = Some value }
 
         [<CustomOperation("indexOptions")>]
-        member _.IndexOptions(state: SearchAsYouTypeProperty, value: TypesMapping.IndexOptions) =
+        member _.IndexOptions(state: SearchAsYouTypeProperty, value: CoreTypes.IndexOptions) =
             { state with IndexOptions = Some value }
 
         [<CustomOperation("maxShingleSize")>]
-        member _.MaxShingleSize(state: SearchAsYouTypeProperty, value: Types.Integer) =
+        member _.MaxShingleSize(state: SearchAsYouTypeProperty, value: CoreTypes.Integer) =
             { state with MaxShingleSize = Some value }
 
         [<CustomOperation("norms")>]
@@ -1325,7 +1325,7 @@ module TypesMappingBuilders =
             { state with Similarity = Some value }
 
         [<CustomOperation("termVector")>]
-        member _.TermVector(state: SearchAsYouTypeProperty, value: TypesMapping.TermVectorOption) =
+        member _.TermVector(state: SearchAsYouTypeProperty, value: CoreTypes.TermVectorOption) =
             { state with TermVector = Some value }
 
         [<CustomOperation("type'")>]
@@ -1342,11 +1342,11 @@ module TypesMappingBuilders =
             }
 
         [<CustomOperation("denseVector")>]
-        member _.DenseVector(state: SemanticTextIndexOptions, value: TypesMapping.DenseVectorIndexOptions) =
+        member _.DenseVector(state: SemanticTextIndexOptions, value: CoreTypes.DenseVectorIndexOptions) =
             { state with DenseVector = Some value }
 
         [<CustomOperation("sparseVector")>]
-        member _.SparseVector(state: SemanticTextIndexOptions, value: TypesMapping.SparseVectorIndexOptions) =
+        member _.SparseVector(state: SemanticTextIndexOptions, value: CoreTypes.SparseVectorIndexOptions) =
             { state with SparseVector = Some value }
 
     let semanticTextIndexOptions = SemanticTextIndexOptionsBuilder()
@@ -1372,23 +1372,23 @@ module TypesMappingBuilders =
             { state with Meta = Some value }
 
         [<CustomOperation("inferenceId")>]
-        member _.InferenceId(state: SemanticTextProperty, value: Types.Id) =
+        member _.InferenceId(state: SemanticTextProperty, value: CoreTypes.Id) =
             { state with InferenceId = Some value }
 
         [<CustomOperation("searchInferenceId")>]
-        member _.SearchInferenceId(state: SemanticTextProperty, value: Types.Id) =
+        member _.SearchInferenceId(state: SemanticTextProperty, value: CoreTypes.Id) =
             { state with SearchInferenceId = Some value }
 
         [<CustomOperation("indexOptions")>]
-        member _.IndexOptions(state: SemanticTextProperty, value: TypesMapping.SemanticTextIndexOptions) =
+        member _.IndexOptions(state: SemanticTextProperty, value: CoreTypes.SemanticTextIndexOptions) =
             { state with IndexOptions = Some value }
 
         [<CustomOperation("chunkingSettings")>]
-        member _.ChunkingSettings(state: SemanticTextProperty, value: TypesMapping.ChunkingSettings option) =
+        member _.ChunkingSettings(state: SemanticTextProperty, value: CoreTypes.ChunkingSettings option) =
             { state with ChunkingSettings = Some value }
 
         [<CustomOperation("fields")>]
-        member _.Fields(state: SemanticTextProperty, value: Map<Types.PropertyName, TypesMapping.Property>) =
+        member _.Fields(state: SemanticTextProperty, value: Map<CoreTypes.PropertyName, CoreTypes.Property>) =
             { state with Fields = Some value }
 
     let semanticTextProperty = SemanticTextPropertyBuilder()
@@ -1416,7 +1416,7 @@ module TypesMappingBuilders =
             { state with IgnoreZValue = Some value }
 
         [<CustomOperation("orientation")>]
-        member _.Orientation(state: ShapeProperty, value: TypesMapping.GeoOrientation) =
+        member _.Orientation(state: ShapeProperty, value: CoreTypes.GeoOrientation) =
             { state with Orientation = Some value }
 
         [<CustomOperation("type'")>]
@@ -1457,7 +1457,7 @@ module TypesMappingBuilders =
             { state with Includes = Some value }
 
         [<CustomOperation("mode")>]
-        member _.Mode(state: SourceField, value: TypesMapping.SourceFieldMode) =
+        member _.Mode(state: SourceField, value: CoreTypes.SourceFieldMode) =
             { state with Mode = Some value }
 
     let sourceField = SourceFieldBuilder()
@@ -1474,7 +1474,7 @@ module TypesMappingBuilders =
             { state with Prune = Some value }
 
         [<CustomOperation("pruningConfig")>]
-        member _.PruningConfig(state: SparseVectorIndexOptions, value: Types.TokenPruningConfig) =
+        member _.PruningConfig(state: SparseVectorIndexOptions, value: CoreTypes.TokenPruningConfig) =
             { state with PruningConfig = Some value }
 
     let sparseVectorIndexOptions = SparseVectorIndexOptionsBuilder()
@@ -1496,7 +1496,7 @@ module TypesMappingBuilders =
             { state with Type = value }
 
         [<CustomOperation("indexOptions")>]
-        member _.IndexOptions(state: SparseVectorProperty, value: TypesMapping.SparseVectorIndexOptions) =
+        member _.IndexOptions(state: SparseVectorProperty, value: CoreTypes.SparseVectorIndexOptions) =
             { state with IndexOptions = Some value }
 
     let sparseVectorProperty = SparseVectorPropertyBuilder()
@@ -1511,11 +1511,11 @@ module TypesMappingBuilders =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: SuggestContext, value: Types.Name) =
+        member _.Name(state: SuggestContext, value: CoreTypes.Name) =
             { state with Name = value }
 
         [<CustomOperation("path")>]
-        member _.Path(state: SuggestContext, value: Types.Field) =
+        member _.Path(state: SuggestContext, value: CoreTypes.Field) =
             { state with Path = Some value }
 
         [<CustomOperation("type'")>]
@@ -1554,7 +1554,7 @@ module TypesMappingBuilders =
             { state with Analyzer = Some value }
 
         [<CustomOperation("boost")>]
-        member _.Boost(state: TextProperty, value: Types.Double) =
+        member _.Boost(state: TextProperty, value: CoreTypes.Double) =
             { state with Boost = Some value }
 
         [<CustomOperation("eagerGlobalOrdinals")>]
@@ -1574,7 +1574,7 @@ module TypesMappingBuilders =
             { state with Index = Some value }
 
         [<CustomOperation("indexOptions")>]
-        member _.IndexOptions(state: TextProperty, value: TypesMapping.IndexOptions) =
+        member _.IndexOptions(state: TextProperty, value: CoreTypes.IndexOptions) =
             { state with IndexOptions = Some value }
 
         [<CustomOperation("indexPhrases")>]
@@ -1582,7 +1582,7 @@ module TypesMappingBuilders =
             { state with IndexPhrases = Some value }
 
         [<CustomOperation("indexPrefixes")>]
-        member _.IndexPrefixes(state: TextProperty, value: TypesMapping.TextIndexPrefixes option) =
+        member _.IndexPrefixes(state: TextProperty, value: CoreTypes.TextIndexPrefixes option) =
             { state with IndexPrefixes = Some value }
 
         [<CustomOperation("norms")>]
@@ -1590,7 +1590,7 @@ module TypesMappingBuilders =
             { state with Norms = Some value }
 
         [<CustomOperation("positionIncrementGap")>]
-        member _.PositionIncrementGap(state: TextProperty, value: Types.Integer) =
+        member _.PositionIncrementGap(state: TextProperty, value: CoreTypes.Integer) =
             { state with PositionIncrementGap = Some value }
 
         [<CustomOperation("searchAnalyzer")>]
@@ -1606,7 +1606,7 @@ module TypesMappingBuilders =
             { state with Similarity = Some value }
 
         [<CustomOperation("termVector")>]
-        member _.TermVector(state: TextProperty, value: TypesMapping.TermVectorOption) =
+        member _.TermVector(state: TextProperty, value: CoreTypes.TermVectorOption) =
             { state with TermVector = Some value }
 
         [<CustomOperation("type'")>]
@@ -1631,7 +1631,7 @@ module TypesMappingBuilders =
             { state with Analyzer = Some value }
 
         [<CustomOperation("boost")>]
-        member _.Boost(state: TokenCountProperty, value: Types.Double) =
+        member _.Boost(state: TokenCountProperty, value: CoreTypes.Double) =
             { state with Boost = Some value }
 
         [<CustomOperation("index")>]
@@ -1639,7 +1639,7 @@ module TypesMappingBuilders =
             { state with Index = Some value }
 
         [<CustomOperation("nullValue")>]
-        member _.NullValue(state: TokenCountProperty, value: Types.Double) =
+        member _.NullValue(state: TokenCountProperty, value: CoreTypes.Double) =
             { state with NullValue = Some value }
 
         [<CustomOperation("enablePositionIncrements")>]
@@ -1675,7 +1675,7 @@ module TypesMappingBuilders =
             }
 
         [<CustomOperation("allField")>]
-        member _.AllField(state: TypeMapping, value: TypesMapping.AllField) =
+        member _.AllField(state: TypeMapping, value: CoreTypes.AllField) =
             { state with AllField = Some value }
 
         [<CustomOperation("dateDetection")>]
@@ -1683,7 +1683,7 @@ module TypesMappingBuilders =
             { state with DateDetection = Some value }
 
         [<CustomOperation("dynamic")>]
-        member _.Dynamic(state: TypeMapping, value: TypesMapping.DynamicMapping) =
+        member _.Dynamic(state: TypeMapping, value: CoreTypes.DynamicMapping) =
             { state with Dynamic = Some value }
 
         [<CustomOperation("dynamicDateFormats")>]
@@ -1691,19 +1691,19 @@ module TypesMappingBuilders =
             { state with DynamicDateFormats = Some value }
 
         [<CustomOperation("dynamicTemplates")>]
-        member _.DynamicTemplates(state: TypeMapping, value: Map<string, TypesMapping.DynamicTemplate> list) =
+        member _.DynamicTemplates(state: TypeMapping, value: Map<string, CoreTypes.DynamicTemplate> list) =
             { state with DynamicTemplates = Some value }
 
         [<CustomOperation("fieldNames")>]
-        member _.FieldNames(state: TypeMapping, value: TypesMapping.FieldNamesField) =
+        member _.FieldNames(state: TypeMapping, value: CoreTypes.FieldNamesField) =
             { state with FieldNames = Some value }
 
         [<CustomOperation("indexField")>]
-        member _.IndexField(state: TypeMapping, value: TypesMapping.IndexField) =
+        member _.IndexField(state: TypeMapping, value: CoreTypes.IndexField) =
             { state with IndexField = Some value }
 
         [<CustomOperation("meta")>]
-        member _.Meta(state: TypeMapping, value: Types.Metadata) =
+        member _.Meta(state: TypeMapping, value: CoreTypes.Metadata) =
             { state with Meta = Some value }
 
         [<CustomOperation("numericDetection")>]
@@ -1711,23 +1711,23 @@ module TypesMappingBuilders =
             { state with NumericDetection = Some value }
 
         [<CustomOperation("properties")>]
-        member _.Properties(state: TypeMapping, value: Map<Types.PropertyName, TypesMapping.Property>) =
+        member _.Properties(state: TypeMapping, value: Map<CoreTypes.PropertyName, CoreTypes.Property>) =
             { state with Properties = Some value }
 
         [<CustomOperation("routing")>]
-        member _.Routing(state: TypeMapping, value: TypesMapping.RoutingField) =
+        member _.Routing(state: TypeMapping, value: CoreTypes.RoutingField) =
             { state with Routing = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: TypeMapping, value: TypesMapping.SizeField) =
+        member _.Size(state: TypeMapping, value: CoreTypes.SizeField) =
             { state with Size = Some value }
 
         [<CustomOperation("source")>]
-        member _.Source(state: TypeMapping, value: TypesMapping.SourceField) =
+        member _.Source(state: TypeMapping, value: CoreTypes.SourceField) =
             { state with Source = Some value }
 
         [<CustomOperation("runtime")>]
-        member _.Runtime(state: TypeMapping, value: Map<string, TypesMapping.RuntimeField>) =
+        member _.Runtime(state: TypeMapping, value: Map<string, CoreTypes.RuntimeField>) =
             { state with Runtime = Some value }
 
         [<CustomOperation("enabled")>]
@@ -1735,11 +1735,11 @@ module TypesMappingBuilders =
             { state with Enabled = Some value }
 
         [<CustomOperation("subobjects")>]
-        member _.Subobjects(state: TypeMapping, value: TypesMapping.Subobjects) =
+        member _.Subobjects(state: TypeMapping, value: CoreTypes.Subobjects) =
             { state with Subobjects = Some value }
 
         [<CustomOperation("dataStreamTimestamp")>]
-        member _.DataStreamTimestamp(state: TypeMapping, value: TypesMapping.DataStreamTimestamp) =
+        member _.DataStreamTimestamp(state: TypeMapping, value: CoreTypes.DataStreamTimestamp) =
             { state with DataStreamTimestamp = Some value }
 
     let typeMapping = TypeMappingBuilder()

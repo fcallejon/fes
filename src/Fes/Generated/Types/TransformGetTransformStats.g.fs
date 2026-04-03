@@ -9,47 +9,47 @@ module TransformGetTransformStats =
 
     type TransformProgress = {
         [<System.Text.Json.Serialization.JsonPropertyName("docs_indexed")>]
-        DocsIndexed: Types.Long
+        DocsIndexed: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("docs_processed")>]
-        DocsProcessed: Types.Long
+        DocsProcessed: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("docs_remaining")>]
-        DocsRemaining: Types.Long option
+        DocsRemaining: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("percent_complete")>]
-        PercentComplete: Types.Double option
+        PercentComplete: CoreTypes.Double option
         [<System.Text.Json.Serialization.JsonPropertyName("total_docs")>]
-        TotalDocs: Types.Long option
+        TotalDocs: CoreTypes.Long option
     }
 
     type CheckpointStats = {
         [<System.Text.Json.Serialization.JsonPropertyName("checkpoint")>]
-        Checkpoint: Types.Long
+        Checkpoint: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("checkpoint_progress")>]
-        CheckpointProgress: TransformGetTransformStats.TransformProgress option
+        CheckpointProgress: TransformProgress option
         [<System.Text.Json.Serialization.JsonPropertyName("timestamp")>]
-        Timestamp: Types.DateTime option
+        Timestamp: CoreTypes.DateTime option
         [<System.Text.Json.Serialization.JsonPropertyName("timestamp_millis")>]
-        TimestampMillis: Types.EpochTime<Types.UnitMillis> option
+        TimestampMillis: CoreTypes.EpochTime<CoreTypes.UnitMillis> option
         [<System.Text.Json.Serialization.JsonPropertyName("time_upper_bound")>]
-        TimeUpperBound: Types.DateTime option
+        TimeUpperBound: CoreTypes.DateTime option
         [<System.Text.Json.Serialization.JsonPropertyName("time_upper_bound_millis")>]
-        TimeUpperBoundMillis: Types.EpochTime<Types.UnitMillis> option
+        TimeUpperBoundMillis: CoreTypes.EpochTime<CoreTypes.UnitMillis> option
     }
 
     type Checkpointing = {
         [<System.Text.Json.Serialization.JsonPropertyName("changes_last_detected_at")>]
-        ChangesLastDetectedAt: Types.Long option
+        ChangesLastDetectedAt: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("changes_last_detected_at_string")>]
-        ChangesLastDetectedAtString: Types.DateTime option
+        ChangesLastDetectedAtString: CoreTypes.DateTime option
         [<System.Text.Json.Serialization.JsonPropertyName("last")>]
-        Last: TransformGetTransformStats.CheckpointStats
+        Last: CheckpointStats
         [<System.Text.Json.Serialization.JsonPropertyName("next")>]
-        Next: TransformGetTransformStats.CheckpointStats option
+        Next: CheckpointStats option
         [<System.Text.Json.Serialization.JsonPropertyName("operations_behind")>]
-        OperationsBehind: Types.Long option
+        OperationsBehind: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("last_search_time")>]
-        LastSearchTime: Types.Long option
+        LastSearchTime: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("last_search_time_string")>]
-        LastSearchTimeString: Types.DateTime option
+        LastSearchTimeString: CoreTypes.DateTime option
     }
 
     type TransformHealthIssue = {
@@ -60,71 +60,71 @@ module TransformGetTransformStats =
         [<System.Text.Json.Serialization.JsonPropertyName("details")>]
         Details: string option
         [<System.Text.Json.Serialization.JsonPropertyName("count")>]
-        Count: Types.Integer
+        Count: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("first_occurrence")>]
-        FirstOccurrence: Types.EpochTime<Types.UnitMillis> option
+        FirstOccurrence: CoreTypes.EpochTime<CoreTypes.UnitMillis> option
         [<System.Text.Json.Serialization.JsonPropertyName("first_occurence_string")>]
-        FirstOccurenceString: Types.DateTime option
+        FirstOccurenceString: CoreTypes.DateTime option
     }
 
     type TransformIndexerStats = {
         [<System.Text.Json.Serialization.JsonPropertyName("delete_time_in_ms")>]
-        DeleteTimeInMs: Types.EpochTime<Types.UnitMillis> option
+        DeleteTimeInMs: CoreTypes.EpochTime<CoreTypes.UnitMillis> option
         [<System.Text.Json.Serialization.JsonPropertyName("documents_indexed")>]
-        DocumentsIndexed: Types.Long
+        DocumentsIndexed: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("documents_deleted")>]
-        DocumentsDeleted: Types.Long option
+        DocumentsDeleted: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("documents_processed")>]
-        DocumentsProcessed: Types.Long
+        DocumentsProcessed: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("exponential_avg_checkpoint_duration_ms")>]
-        ExponentialAvgCheckpointDurationMs: Types.DurationValue<Types.UnitFloatMillis>
+        ExponentialAvgCheckpointDurationMs: CoreTypes.DurationValue<CoreTypes.UnitFloatMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("exponential_avg_documents_indexed")>]
-        ExponentialAvgDocumentsIndexed: Types.Double
+        ExponentialAvgDocumentsIndexed: CoreTypes.Double
         [<System.Text.Json.Serialization.JsonPropertyName("exponential_avg_documents_processed")>]
-        ExponentialAvgDocumentsProcessed: Types.Double
+        ExponentialAvgDocumentsProcessed: CoreTypes.Double
         [<System.Text.Json.Serialization.JsonPropertyName("index_failures")>]
-        IndexFailures: Types.Long
+        IndexFailures: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("index_time_in_ms")>]
-        IndexTimeInMs: Types.DurationValue<Types.UnitMillis>
+        IndexTimeInMs: CoreTypes.DurationValue<CoreTypes.UnitMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("index_total")>]
-        IndexTotal: Types.Long
+        IndexTotal: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("pages_processed")>]
-        PagesProcessed: Types.Long
+        PagesProcessed: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("processing_time_in_ms")>]
-        ProcessingTimeInMs: Types.DurationValue<Types.UnitMillis>
+        ProcessingTimeInMs: CoreTypes.DurationValue<CoreTypes.UnitMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("processing_total")>]
-        ProcessingTotal: Types.Long
+        ProcessingTotal: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("search_failures")>]
-        SearchFailures: Types.Long
+        SearchFailures: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("search_time_in_ms")>]
-        SearchTimeInMs: Types.DurationValue<Types.UnitMillis>
+        SearchTimeInMs: CoreTypes.DurationValue<CoreTypes.UnitMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("search_total")>]
-        SearchTotal: Types.Long
+        SearchTotal: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("trigger_count")>]
-        TriggerCount: Types.Long
+        TriggerCount: CoreTypes.Long
     }
 
     type TransformStatsHealth = {
         [<System.Text.Json.Serialization.JsonPropertyName("status")>]
-        Status: Types.HealthStatus
+        Status: CoreTypes.HealthStatus
         [<System.Text.Json.Serialization.JsonPropertyName("issues")>]
-        Issues: TransformGetTransformStats.TransformHealthIssue list option
+        Issues: TransformHealthIssue list option
     }
 
     type TransformStats = {
         [<System.Text.Json.Serialization.JsonPropertyName("checkpointing")>]
-        Checkpointing: TransformGetTransformStats.Checkpointing
+        Checkpointing: Checkpointing
         [<System.Text.Json.Serialization.JsonPropertyName("health")>]
-        Health: TransformGetTransformStats.TransformStatsHealth option
+        Health: TransformStatsHealth option
         [<System.Text.Json.Serialization.JsonPropertyName("id")>]
-        Id: Types.Id
+        Id: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("node")>]
-        Node: Types.NodeAttributes option
+        Node: CoreTypes.NodeAttributes option
         [<System.Text.Json.Serialization.JsonPropertyName("reason")>]
         Reason: string option
         [<System.Text.Json.Serialization.JsonPropertyName("state")>]
         State: string
         [<System.Text.Json.Serialization.JsonPropertyName("stats")>]
-        Stats: TransformGetTransformStats.TransformIndexerStats
+        Stats: TransformIndexerStats
     }
 

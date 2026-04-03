@@ -12,8 +12,8 @@ open Fes
 module LicenseOperations =
 
     type LicenseDeleteRequest = {
-        MasterTimeout: Types.Duration option
-        Timeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
+        Timeout: CoreTypes.Duration option
     }
 
         with
@@ -35,7 +35,7 @@ module LicenseOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type LicenseDeleteResponse = Types.AcknowledgedResponseBase
+    type LicenseDeleteResponse = CoreTypes.AcknowledgedResponseBase
 
     type LicenseDeleteRequestBuilder() =
         member _.Yield(_: unit) : LicenseDeleteRequest =
@@ -45,19 +45,19 @@ module LicenseOperations =
             }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: LicenseDeleteRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: LicenseDeleteRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: LicenseDeleteRequest, value: Types.Duration) =
+        member _.Timeout(state: LicenseDeleteRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
     let licenseDeleteRequest = LicenseDeleteRequestBuilder()
 
     module Delete =
-        let withMasterTimeout (value: Types.Duration) (req: LicenseDeleteRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: LicenseDeleteRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: Types.Duration) (req: LicenseDeleteRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: LicenseDeleteRequest) =
             { req with Timeout = Some value }
 
     type LicenseGetRequest = {
@@ -155,8 +155,8 @@ module LicenseOperations =
 
     type LicensePostRequest = {
         Acknowledge: bool option
-        MasterTimeout: Types.Duration option
-        Timeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
+        Timeout: CoreTypes.Duration option
         License: LicenseTypes.License option
         Licenses: LicenseTypes.License list option
     }
@@ -199,11 +199,11 @@ module LicenseOperations =
             { state with Acknowledge = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: LicensePostRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: LicensePostRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: LicensePostRequest, value: Types.Duration) =
+        member _.Timeout(state: LicensePostRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("license")>]
@@ -219,9 +219,9 @@ module LicenseOperations =
     module Post =
         let withAcknowledge (value: bool) (req: LicensePostRequest) =
             { req with Acknowledge = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: LicensePostRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: LicensePostRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: Types.Duration) (req: LicensePostRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: LicensePostRequest) =
             { req with Timeout = Some value }
         let withLicense (value: LicenseTypes.License) (req: LicensePostRequest) =
             { req with License = Some value }
@@ -230,8 +230,8 @@ module LicenseOperations =
 
     type LicensePostStartBasicRequest = {
         Acknowledge: bool option
-        MasterTimeout: Types.Duration option
-        Timeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
+        Timeout: CoreTypes.Duration option
     }
 
         with
@@ -269,11 +269,11 @@ module LicenseOperations =
             { state with Acknowledge = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: LicensePostStartBasicRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: LicensePostStartBasicRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: LicensePostStartBasicRequest, value: Types.Duration) =
+        member _.Timeout(state: LicensePostStartBasicRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
     let licensePostStartBasicRequest = LicensePostStartBasicRequestBuilder()
@@ -281,15 +281,15 @@ module LicenseOperations =
     module PostStartBasic =
         let withAcknowledge (value: bool) (req: LicensePostStartBasicRequest) =
             { req with Acknowledge = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: LicensePostStartBasicRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: LicensePostStartBasicRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: Types.Duration) (req: LicensePostStartBasicRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: LicensePostStartBasicRequest) =
             { req with Timeout = Some value }
 
     type LicensePostStartTrialRequest = {
         Acknowledge: bool option
         Type: string option
-        MasterTimeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
     }
 
         with
@@ -331,7 +331,7 @@ module LicenseOperations =
             { state with Type = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: LicensePostStartTrialRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: LicensePostStartTrialRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
     let licensePostStartTrialRequest = LicensePostStartTrialRequestBuilder()
@@ -341,6 +341,6 @@ module LicenseOperations =
             { req with Acknowledge = Some value }
         let withType (value: string) (req: LicensePostStartTrialRequest) =
             { req with Type = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: LicensePostStartTrialRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: LicensePostStartTrialRequest) =
             { req with MasterTimeout = Some value }
 

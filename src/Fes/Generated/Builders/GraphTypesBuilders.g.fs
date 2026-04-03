@@ -23,11 +23,11 @@ module GraphTypesBuilders =
             { state with SampleDiversity = Some value }
 
         [<CustomOperation("sampleSize")>]
-        member _.SampleSize(state: ExploreControls, value: Types.Integer) =
+        member _.SampleSize(state: ExploreControls, value: CoreTypes.Integer) =
             { state with SampleSize = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: ExploreControls, value: Types.Duration) =
+        member _.Timeout(state: ExploreControls, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("useSignificance")>]
@@ -49,7 +49,7 @@ module GraphTypesBuilders =
             { state with Connections = Some value }
 
         [<CustomOperation("query")>]
-        member _.Query(state: Hop, value: TypesQueryDsl.QueryContainer) =
+        member _.Query(state: Hop, value: CoreTypes.QueryContainer) =
             { state with Query = Some value }
 
         [<CustomOperation("vertices")>]
@@ -74,7 +74,7 @@ module GraphTypesBuilders =
             { state with Exclude = Some value }
 
         [<CustomOperation("field")>]
-        member _.Field(state: VertexDefinition, value: Types.Field) =
+        member _.Field(state: VertexDefinition, value: CoreTypes.Field) =
             { state with Field = value }
 
         [<CustomOperation("include")>]
@@ -82,15 +82,15 @@ module GraphTypesBuilders =
             { state with Include = Some value }
 
         [<CustomOperation("minDocCount")>]
-        member _.MinDocCount(state: VertexDefinition, value: Types.Long) =
+        member _.MinDocCount(state: VertexDefinition, value: CoreTypes.Long) =
             { state with MinDocCount = Some value }
 
         [<CustomOperation("shardMinDocCount")>]
-        member _.ShardMinDocCount(state: VertexDefinition, value: Types.Long) =
+        member _.ShardMinDocCount(state: VertexDefinition, value: CoreTypes.Long) =
             { state with ShardMinDocCount = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: VertexDefinition, value: Types.Integer) =
+        member _.Size(state: VertexDefinition, value: CoreTypes.Integer) =
             { state with Size = Some value }
 
     let vertexDefinition = VertexDefinitionBuilder()

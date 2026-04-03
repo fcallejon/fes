@@ -12,11 +12,11 @@ open Fes
 module CatOperations =
 
     type CatAliasesRequest = {
-        Name: Types.Names
+        Name: CoreTypes.Names
         H: CatTypes.CatAliasesColumns option
-        S: Types.Names option
-        ExpandWildcards: Types.ExpandWildcards option
-        MasterTimeout: Types.Duration option
+        S: CoreTypes.Names option
+        ExpandWildcards: CoreTypes.ExpandWildcards option
+        MasterTimeout: CoreTypes.Duration option
     }
 
         with
@@ -53,7 +53,7 @@ module CatOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: CatAliasesRequest, value: Types.Names) =
+        member _.Name(state: CatAliasesRequest, value: CoreTypes.Names) =
             { state with Name = value }
 
         [<CustomOperation("h")>]
@@ -61,15 +61,15 @@ module CatOperations =
             { state with H = Some value }
 
         [<CustomOperation("s")>]
-        member _.S(state: CatAliasesRequest, value: Types.Names) =
+        member _.S(state: CatAliasesRequest, value: CoreTypes.Names) =
             { state with S = Some value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: CatAliasesRequest, value: Types.ExpandWildcards) =
+        member _.ExpandWildcards(state: CatAliasesRequest, value: CoreTypes.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: CatAliasesRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: CatAliasesRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
     let catAliasesRequest = CatAliasesRequestBuilder()
@@ -77,19 +77,19 @@ module CatOperations =
     module Aliases =
         let withH (value: CatTypes.CatAliasesColumns) (req: CatAliasesRequest) =
             { req with H = Some value }
-        let withS (value: Types.Names) (req: CatAliasesRequest) =
+        let withS (value: CoreTypes.Names) (req: CatAliasesRequest) =
             { req with S = Some value }
-        let withExpandWildcards (value: Types.ExpandWildcards) (req: CatAliasesRequest) =
+        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: CatAliasesRequest) =
             { req with ExpandWildcards = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: CatAliasesRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: CatAliasesRequest) =
             { req with MasterTimeout = Some value }
 
     type CatAllocationRequest = {
-        NodeId: Types.NodeIds
+        NodeId: CoreTypes.NodeIds
         H: CatTypes.CatAllocationColumns option
-        S: Types.Names option
+        S: CoreTypes.Names option
         Local: bool option
-        MasterTimeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
     }
 
         with
@@ -126,7 +126,7 @@ module CatOperations =
             }
 
         [<CustomOperation("nodeId")>]
-        member _.NodeId(state: CatAllocationRequest, value: Types.NodeIds) =
+        member _.NodeId(state: CatAllocationRequest, value: CoreTypes.NodeIds) =
             { state with NodeId = value }
 
         [<CustomOperation("h")>]
@@ -134,7 +134,7 @@ module CatOperations =
             { state with H = Some value }
 
         [<CustomOperation("s")>]
-        member _.S(state: CatAllocationRequest, value: Types.Names) =
+        member _.S(state: CatAllocationRequest, value: CoreTypes.Names) =
             { state with S = Some value }
 
         [<CustomOperation("local")>]
@@ -142,7 +142,7 @@ module CatOperations =
             { state with Local = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: CatAllocationRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: CatAllocationRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
     let catAllocationRequest = CatAllocationRequestBuilder()
@@ -150,19 +150,19 @@ module CatOperations =
     module Allocation =
         let withH (value: CatTypes.CatAllocationColumns) (req: CatAllocationRequest) =
             { req with H = Some value }
-        let withS (value: Types.Names) (req: CatAllocationRequest) =
+        let withS (value: CoreTypes.Names) (req: CatAllocationRequest) =
             { req with S = Some value }
         let withLocal (value: bool) (req: CatAllocationRequest) =
             { req with Local = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: CatAllocationRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: CatAllocationRequest) =
             { req with MasterTimeout = Some value }
 
     type CatCircuitBreakerRequest = {
         CircuitBreakerPatterns: System.Text.Json.JsonElement
         H: CatTypes.CatCircuitBreakerColumns option
-        S: Types.Names option
+        S: CoreTypes.Names option
         Local: bool option
-        MasterTimeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
     }
 
         with
@@ -207,7 +207,7 @@ module CatOperations =
             { state with H = Some value }
 
         [<CustomOperation("s")>]
-        member _.S(state: CatCircuitBreakerRequest, value: Types.Names) =
+        member _.S(state: CatCircuitBreakerRequest, value: CoreTypes.Names) =
             { state with S = Some value }
 
         [<CustomOperation("local")>]
@@ -215,7 +215,7 @@ module CatOperations =
             { state with Local = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: CatCircuitBreakerRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: CatCircuitBreakerRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
     let catCircuitBreakerRequest = CatCircuitBreakerRequestBuilder()
@@ -223,19 +223,19 @@ module CatOperations =
     module CircuitBreaker =
         let withH (value: CatTypes.CatCircuitBreakerColumns) (req: CatCircuitBreakerRequest) =
             { req with H = Some value }
-        let withS (value: Types.Names) (req: CatCircuitBreakerRequest) =
+        let withS (value: CoreTypes.Names) (req: CatCircuitBreakerRequest) =
             { req with S = Some value }
         let withLocal (value: bool) (req: CatCircuitBreakerRequest) =
             { req with Local = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: CatCircuitBreakerRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: CatCircuitBreakerRequest) =
             { req with MasterTimeout = Some value }
 
     type CatComponentTemplatesRequest = {
         Name: string
         H: CatTypes.CatComponentColumns option
-        S: Types.Names option
+        S: CoreTypes.Names option
         Local: bool option
-        MasterTimeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
     }
 
         with
@@ -280,7 +280,7 @@ module CatOperations =
             { state with H = Some value }
 
         [<CustomOperation("s")>]
-        member _.S(state: CatComponentTemplatesRequest, value: Types.Names) =
+        member _.S(state: CatComponentTemplatesRequest, value: CoreTypes.Names) =
             { state with S = Some value }
 
         [<CustomOperation("local")>]
@@ -288,7 +288,7 @@ module CatOperations =
             { state with Local = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: CatComponentTemplatesRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: CatComponentTemplatesRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
     let catComponentTemplatesRequest = CatComponentTemplatesRequestBuilder()
@@ -296,18 +296,18 @@ module CatOperations =
     module ComponentTemplates =
         let withH (value: CatTypes.CatComponentColumns) (req: CatComponentTemplatesRequest) =
             { req with H = Some value }
-        let withS (value: Types.Names) (req: CatComponentTemplatesRequest) =
+        let withS (value: CoreTypes.Names) (req: CatComponentTemplatesRequest) =
             { req with S = Some value }
         let withLocal (value: bool) (req: CatComponentTemplatesRequest) =
             { req with Local = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: CatComponentTemplatesRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: CatComponentTemplatesRequest) =
             { req with MasterTimeout = Some value }
 
     type CatCountRequest = {
-        Index: Types.Indices
+        Index: CoreTypes.Indices
         H: CatTypes.CatCountColumns option
-        S: Types.Names option
-        ProjectRouting: Types.ProjectRouting option
+        S: CoreTypes.Names option
+        ProjectRouting: CoreTypes.ProjectRouting option
     }
 
         with
@@ -342,7 +342,7 @@ module CatOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: CatCountRequest, value: Types.Indices) =
+        member _.Index(state: CatCountRequest, value: CoreTypes.Indices) =
             { state with Index = value }
 
         [<CustomOperation("h")>]
@@ -350,11 +350,11 @@ module CatOperations =
             { state with H = Some value }
 
         [<CustomOperation("s")>]
-        member _.S(state: CatCountRequest, value: Types.Names) =
+        member _.S(state: CatCountRequest, value: CoreTypes.Names) =
             { state with S = Some value }
 
         [<CustomOperation("projectRouting")>]
-        member _.ProjectRouting(state: CatCountRequest, value: Types.ProjectRouting) =
+        member _.ProjectRouting(state: CatCountRequest, value: CoreTypes.ProjectRouting) =
             { state with ProjectRouting = Some value }
 
     let catCountRequest = CatCountRequestBuilder()
@@ -362,16 +362,16 @@ module CatOperations =
     module Count =
         let withH (value: CatTypes.CatCountColumns) (req: CatCountRequest) =
             { req with H = Some value }
-        let withS (value: Types.Names) (req: CatCountRequest) =
+        let withS (value: CoreTypes.Names) (req: CatCountRequest) =
             { req with S = Some value }
-        let withProjectRouting (value: Types.ProjectRouting) (req: CatCountRequest) =
+        let withProjectRouting (value: CoreTypes.ProjectRouting) (req: CatCountRequest) =
             { req with ProjectRouting = Some value }
 
     type CatFielddataRequest = {
-        Fields: Types.Fields
-        Fields: Types.Fields option
+        Fields: CoreTypes.Fields
+        Fields: CoreTypes.Fields option
         H: CatTypes.CatFieldDataColumns option
-        S: Types.Names option
+        S: CoreTypes.Names option
     }
 
         with
@@ -406,11 +406,11 @@ module CatOperations =
             }
 
         [<CustomOperation("fields")>]
-        member _.Fields(state: CatFielddataRequest, value: Types.Fields) =
+        member _.Fields(state: CatFielddataRequest, value: CoreTypes.Fields) =
             { state with Fields = value }
 
         [<CustomOperation("fields")>]
-        member _.Fields(state: CatFielddataRequest, value: Types.Fields) =
+        member _.Fields(state: CatFielddataRequest, value: CoreTypes.Fields) =
             { state with Fields = Some value }
 
         [<CustomOperation("h")>]
@@ -418,23 +418,23 @@ module CatOperations =
             { state with H = Some value }
 
         [<CustomOperation("s")>]
-        member _.S(state: CatFielddataRequest, value: Types.Names) =
+        member _.S(state: CatFielddataRequest, value: CoreTypes.Names) =
             { state with S = Some value }
 
     let catFielddataRequest = CatFielddataRequestBuilder()
 
     module Fielddata =
-        let withFields (value: Types.Fields) (req: CatFielddataRequest) =
+        let withFields (value: CoreTypes.Fields) (req: CatFielddataRequest) =
             { req with Fields = Some value }
         let withH (value: CatTypes.CatFieldDataColumns) (req: CatFielddataRequest) =
             { req with H = Some value }
-        let withS (value: Types.Names) (req: CatFielddataRequest) =
+        let withS (value: CoreTypes.Names) (req: CatFielddataRequest) =
             { req with S = Some value }
 
     type CatHealthRequest = {
         Ts: bool option
         H: CatTypes.CatHealthColumns option
-        S: Types.Names option
+        S: CoreTypes.Names option
     }
 
         with
@@ -476,7 +476,7 @@ module CatOperations =
             { state with H = Some value }
 
         [<CustomOperation("s")>]
-        member _.S(state: CatHealthRequest, value: Types.Names) =
+        member _.S(state: CatHealthRequest, value: CoreTypes.Names) =
             { state with S = Some value }
 
     let catHealthRequest = CatHealthRequestBuilder()
@@ -486,7 +486,7 @@ module CatOperations =
             { req with Ts = Some value }
         let withH (value: CatTypes.CatHealthColumns) (req: CatHealthRequest) =
             { req with H = Some value }
-        let withS (value: Types.Names) (req: CatHealthRequest) =
+        let withS (value: CoreTypes.Names) (req: CatHealthRequest) =
             { req with S = Some value }
 
     type CatHelpRequest = | CatHelpRequest
@@ -512,14 +512,14 @@ module CatOperations =
     let catHelpRequest = CatHelpRequestBuilder()
 
     type CatIndicesRequest = {
-        Index: Types.Indices
-        ExpandWildcards: Types.ExpandWildcards option
-        Health: Types.HealthStatus option
+        Index: CoreTypes.Indices
+        ExpandWildcards: CoreTypes.ExpandWildcards option
+        Health: CoreTypes.HealthStatus option
         IncludeUnloadedSegments: bool option
         Pri: bool option
-        MasterTimeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
         H: CatTypes.CatIndicesColumns option
-        S: Types.Names option
+        S: CoreTypes.Names option
     }
 
         with
@@ -562,15 +562,15 @@ module CatOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: CatIndicesRequest, value: Types.Indices) =
+        member _.Index(state: CatIndicesRequest, value: CoreTypes.Indices) =
             { state with Index = value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: CatIndicesRequest, value: Types.ExpandWildcards) =
+        member _.ExpandWildcards(state: CatIndicesRequest, value: CoreTypes.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("health")>]
-        member _.Health(state: CatIndicesRequest, value: Types.HealthStatus) =
+        member _.Health(state: CatIndicesRequest, value: CoreTypes.HealthStatus) =
             { state with Health = Some value }
 
         [<CustomOperation("includeUnloadedSegments")>]
@@ -582,7 +582,7 @@ module CatOperations =
             { state with Pri = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: CatIndicesRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: CatIndicesRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("h")>]
@@ -590,32 +590,32 @@ module CatOperations =
             { state with H = Some value }
 
         [<CustomOperation("s")>]
-        member _.S(state: CatIndicesRequest, value: Types.Names) =
+        member _.S(state: CatIndicesRequest, value: CoreTypes.Names) =
             { state with S = Some value }
 
     let catIndicesRequest = CatIndicesRequestBuilder()
 
     module Indices =
-        let withExpandWildcards (value: Types.ExpandWildcards) (req: CatIndicesRequest) =
+        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: CatIndicesRequest) =
             { req with ExpandWildcards = Some value }
-        let withHealth (value: Types.HealthStatus) (req: CatIndicesRequest) =
+        let withHealth (value: CoreTypes.HealthStatus) (req: CatIndicesRequest) =
             { req with Health = Some value }
         let withIncludeUnloadedSegments (value: bool) (req: CatIndicesRequest) =
             { req with IncludeUnloadedSegments = Some value }
         let withPri (value: bool) (req: CatIndicesRequest) =
             { req with Pri = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: CatIndicesRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: CatIndicesRequest) =
             { req with MasterTimeout = Some value }
         let withH (value: CatTypes.CatIndicesColumns) (req: CatIndicesRequest) =
             { req with H = Some value }
-        let withS (value: Types.Names) (req: CatIndicesRequest) =
+        let withS (value: CoreTypes.Names) (req: CatIndicesRequest) =
             { req with S = Some value }
 
     type CatMasterRequest = {
         H: CatTypes.CatMasterColumns option
-        S: Types.Names option
+        S: CoreTypes.Names option
         Local: bool option
-        MasterTimeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
     }
 
         with
@@ -655,7 +655,7 @@ module CatOperations =
             { state with H = Some value }
 
         [<CustomOperation("s")>]
-        member _.S(state: CatMasterRequest, value: Types.Names) =
+        member _.S(state: CatMasterRequest, value: CoreTypes.Names) =
             { state with S = Some value }
 
         [<CustomOperation("local")>]
@@ -663,7 +663,7 @@ module CatOperations =
             { state with Local = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: CatMasterRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: CatMasterRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
     let catMasterRequest = CatMasterRequestBuilder()
@@ -671,15 +671,15 @@ module CatOperations =
     module Master =
         let withH (value: CatTypes.CatMasterColumns) (req: CatMasterRequest) =
             { req with H = Some value }
-        let withS (value: Types.Names) (req: CatMasterRequest) =
+        let withS (value: CoreTypes.Names) (req: CatMasterRequest) =
             { req with S = Some value }
         let withLocal (value: bool) (req: CatMasterRequest) =
             { req with Local = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: CatMasterRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: CatMasterRequest) =
             { req with MasterTimeout = Some value }
 
     type CatMlDataFrameAnalyticsRequest = {
-        Id: Types.Id
+        Id: CoreTypes.Id
         AllowNoMatch: bool option
         H: CatTypes.CatDfaColumns option
         S: CatTypes.CatDfaColumns option
@@ -717,7 +717,7 @@ module CatOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: CatMlDataFrameAnalyticsRequest, value: Types.Id) =
+        member _.Id(state: CatMlDataFrameAnalyticsRequest, value: CoreTypes.Id) =
             { state with Id = value }
 
         [<CustomOperation("allowNoMatch")>]
@@ -743,7 +743,7 @@ module CatOperations =
             { req with S = Some value }
 
     type CatMlDatafeedsRequest = {
-        DatafeedId: Types.Id
+        DatafeedId: CoreTypes.Id
         AllowNoMatch: bool option
         H: CatTypes.CatDatafeedColumns option
         S: CatTypes.CatDatafeedColumns option
@@ -781,7 +781,7 @@ module CatOperations =
             }
 
         [<CustomOperation("datafeedId")>]
-        member _.DatafeedId(state: CatMlDatafeedsRequest, value: Types.Id) =
+        member _.DatafeedId(state: CatMlDatafeedsRequest, value: CoreTypes.Id) =
             { state with DatafeedId = value }
 
         [<CustomOperation("allowNoMatch")>]
@@ -807,7 +807,7 @@ module CatOperations =
             { req with S = Some value }
 
     type CatMlJobsRequest = {
-        JobId: Types.Id
+        JobId: CoreTypes.Id
         AllowNoMatch: bool option
         H: CatTypes.CatAnomalyDetectorColumns option
         S: CatTypes.CatAnomalyDetectorColumns option
@@ -845,7 +845,7 @@ module CatOperations =
             }
 
         [<CustomOperation("jobId")>]
-        member _.JobId(state: CatMlJobsRequest, value: Types.Id) =
+        member _.JobId(state: CatMlJobsRequest, value: CoreTypes.Id) =
             { state with JobId = value }
 
         [<CustomOperation("allowNoMatch")>]
@@ -871,12 +871,12 @@ module CatOperations =
             { req with S = Some value }
 
     type CatMlTrainedModelsRequest = {
-        ModelId: Types.Id
+        ModelId: CoreTypes.Id
         AllowNoMatch: bool option
         H: CatTypes.CatTrainedModelsColumns option
         S: CatTypes.CatTrainedModelsColumns option
-        From: Types.Integer option
-        Size: Types.Integer option
+        From: CoreTypes.Integer option
+        Size: CoreTypes.Integer option
     }
 
         with
@@ -915,7 +915,7 @@ module CatOperations =
             }
 
         [<CustomOperation("modelId")>]
-        member _.ModelId(state: CatMlTrainedModelsRequest, value: Types.Id) =
+        member _.ModelId(state: CatMlTrainedModelsRequest, value: CoreTypes.Id) =
             { state with ModelId = value }
 
         [<CustomOperation("allowNoMatch")>]
@@ -931,11 +931,11 @@ module CatOperations =
             { state with S = Some value }
 
         [<CustomOperation("from")>]
-        member _.From(state: CatMlTrainedModelsRequest, value: Types.Integer) =
+        member _.From(state: CatMlTrainedModelsRequest, value: CoreTypes.Integer) =
             { state with From = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: CatMlTrainedModelsRequest, value: Types.Integer) =
+        member _.Size(state: CatMlTrainedModelsRequest, value: CoreTypes.Integer) =
             { state with Size = Some value }
 
     let catMlTrainedModelsRequest = CatMlTrainedModelsRequestBuilder()
@@ -947,16 +947,16 @@ module CatOperations =
             { req with H = Some value }
         let withS (value: CatTypes.CatTrainedModelsColumns) (req: CatMlTrainedModelsRequest) =
             { req with S = Some value }
-        let withFrom (value: Types.Integer) (req: CatMlTrainedModelsRequest) =
+        let withFrom (value: CoreTypes.Integer) (req: CatMlTrainedModelsRequest) =
             { req with From = Some value }
-        let withSize (value: Types.Integer) (req: CatMlTrainedModelsRequest) =
+        let withSize (value: CoreTypes.Integer) (req: CatMlTrainedModelsRequest) =
             { req with Size = Some value }
 
     type CatNodeattrsRequest = {
         H: CatTypes.CatNodeattrsColumns option
-        S: Types.Names option
+        S: CoreTypes.Names option
         Local: bool option
-        MasterTimeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
     }
 
         with
@@ -996,7 +996,7 @@ module CatOperations =
             { state with H = Some value }
 
         [<CustomOperation("s")>]
-        member _.S(state: CatNodeattrsRequest, value: Types.Names) =
+        member _.S(state: CatNodeattrsRequest, value: CoreTypes.Names) =
             { state with S = Some value }
 
         [<CustomOperation("local")>]
@@ -1004,7 +1004,7 @@ module CatOperations =
             { state with Local = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: CatNodeattrsRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: CatNodeattrsRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
     let catNodeattrsRequest = CatNodeattrsRequestBuilder()
@@ -1012,19 +1012,19 @@ module CatOperations =
     module Nodeattrs =
         let withH (value: CatTypes.CatNodeattrsColumns) (req: CatNodeattrsRequest) =
             { req with H = Some value }
-        let withS (value: Types.Names) (req: CatNodeattrsRequest) =
+        let withS (value: CoreTypes.Names) (req: CatNodeattrsRequest) =
             { req with S = Some value }
         let withLocal (value: bool) (req: CatNodeattrsRequest) =
             { req with Local = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: CatNodeattrsRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: CatNodeattrsRequest) =
             { req with MasterTimeout = Some value }
 
     type CatNodesRequest = {
         FullId: bool option
         IncludeUnloadedSegments: bool option
         H: CatTypes.CatNodeColumns option
-        S: Types.Names option
-        MasterTimeout: Types.Duration option
+        S: CoreTypes.Names option
+        MasterTimeout: CoreTypes.Duration option
     }
 
         with
@@ -1074,11 +1074,11 @@ module CatOperations =
             { state with H = Some value }
 
         [<CustomOperation("s")>]
-        member _.S(state: CatNodesRequest, value: Types.Names) =
+        member _.S(state: CatNodesRequest, value: CoreTypes.Names) =
             { state with S = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: CatNodesRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: CatNodesRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
     let catNodesRequest = CatNodesRequestBuilder()
@@ -1090,16 +1090,16 @@ module CatOperations =
             { req with IncludeUnloadedSegments = Some value }
         let withH (value: CatTypes.CatNodeColumns) (req: CatNodesRequest) =
             { req with H = Some value }
-        let withS (value: Types.Names) (req: CatNodesRequest) =
+        let withS (value: CoreTypes.Names) (req: CatNodesRequest) =
             { req with S = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: CatNodesRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: CatNodesRequest) =
             { req with MasterTimeout = Some value }
 
     type CatPendingTasksRequest = {
         H: CatTypes.CatPendingTasksColumns option
-        S: Types.Names option
+        S: CoreTypes.Names option
         Local: bool option
-        MasterTimeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
     }
 
         with
@@ -1139,7 +1139,7 @@ module CatOperations =
             { state with H = Some value }
 
         [<CustomOperation("s")>]
-        member _.S(state: CatPendingTasksRequest, value: Types.Names) =
+        member _.S(state: CatPendingTasksRequest, value: CoreTypes.Names) =
             { state with S = Some value }
 
         [<CustomOperation("local")>]
@@ -1147,7 +1147,7 @@ module CatOperations =
             { state with Local = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: CatPendingTasksRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: CatPendingTasksRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
     let catPendingTasksRequest = CatPendingTasksRequestBuilder()
@@ -1155,19 +1155,19 @@ module CatOperations =
     module PendingTasks =
         let withH (value: CatTypes.CatPendingTasksColumns) (req: CatPendingTasksRequest) =
             { req with H = Some value }
-        let withS (value: Types.Names) (req: CatPendingTasksRequest) =
+        let withS (value: CoreTypes.Names) (req: CatPendingTasksRequest) =
             { req with S = Some value }
         let withLocal (value: bool) (req: CatPendingTasksRequest) =
             { req with Local = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: CatPendingTasksRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: CatPendingTasksRequest) =
             { req with MasterTimeout = Some value }
 
     type CatPluginsRequest = {
         H: CatTypes.CatPluginsColumns option
-        S: Types.Names option
+        S: CoreTypes.Names option
         IncludeBootstrap: bool option
         Local: bool option
-        MasterTimeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
     }
 
         with
@@ -1209,7 +1209,7 @@ module CatOperations =
             { state with H = Some value }
 
         [<CustomOperation("s")>]
-        member _.S(state: CatPluginsRequest, value: Types.Names) =
+        member _.S(state: CatPluginsRequest, value: CoreTypes.Names) =
             { state with S = Some value }
 
         [<CustomOperation("includeBootstrap")>]
@@ -1221,7 +1221,7 @@ module CatOperations =
             { state with Local = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: CatPluginsRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: CatPluginsRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
     let catPluginsRequest = CatPluginsRequestBuilder()
@@ -1229,22 +1229,22 @@ module CatOperations =
     module Plugins =
         let withH (value: CatTypes.CatPluginsColumns) (req: CatPluginsRequest) =
             { req with H = Some value }
-        let withS (value: Types.Names) (req: CatPluginsRequest) =
+        let withS (value: CoreTypes.Names) (req: CatPluginsRequest) =
             { req with S = Some value }
         let withIncludeBootstrap (value: bool) (req: CatPluginsRequest) =
             { req with IncludeBootstrap = Some value }
         let withLocal (value: bool) (req: CatPluginsRequest) =
             { req with Local = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: CatPluginsRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: CatPluginsRequest) =
             { req with MasterTimeout = Some value }
 
     type CatRecoveryRequest = {
-        Index: Types.Indices
+        Index: CoreTypes.Indices
         ActiveOnly: bool option
         Detailed: bool option
-        Index: Types.Indices option
+        Index: CoreTypes.Indices option
         H: CatTypes.CatRecoveryColumns option
-        S: Types.Names option
+        S: CoreTypes.Names option
     }
 
         with
@@ -1283,7 +1283,7 @@ module CatOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: CatRecoveryRequest, value: Types.Indices) =
+        member _.Index(state: CatRecoveryRequest, value: CoreTypes.Indices) =
             { state with Index = value }
 
         [<CustomOperation("activeOnly")>]
@@ -1295,7 +1295,7 @@ module CatOperations =
             { state with Detailed = Some value }
 
         [<CustomOperation("index")>]
-        member _.Index(state: CatRecoveryRequest, value: Types.Indices) =
+        member _.Index(state: CatRecoveryRequest, value: CoreTypes.Indices) =
             { state with Index = Some value }
 
         [<CustomOperation("h")>]
@@ -1303,7 +1303,7 @@ module CatOperations =
             { state with H = Some value }
 
         [<CustomOperation("s")>]
-        member _.S(state: CatRecoveryRequest, value: Types.Names) =
+        member _.S(state: CatRecoveryRequest, value: CoreTypes.Names) =
             { state with S = Some value }
 
     let catRecoveryRequest = CatRecoveryRequestBuilder()
@@ -1313,18 +1313,18 @@ module CatOperations =
             { req with ActiveOnly = Some value }
         let withDetailed (value: bool) (req: CatRecoveryRequest) =
             { req with Detailed = Some value }
-        let withIndex (value: Types.Indices) (req: CatRecoveryRequest) =
+        let withIndex (value: CoreTypes.Indices) (req: CatRecoveryRequest) =
             { req with Index = Some value }
         let withH (value: CatTypes.CatRecoveryColumns) (req: CatRecoveryRequest) =
             { req with H = Some value }
-        let withS (value: Types.Names) (req: CatRecoveryRequest) =
+        let withS (value: CoreTypes.Names) (req: CatRecoveryRequest) =
             { req with S = Some value }
 
     type CatRepositoriesRequest = {
-        H: Types.Names option
-        S: Types.Names option
+        H: CoreTypes.Names option
+        S: CoreTypes.Names option
         Local: bool option
-        MasterTimeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
     }
 
         with
@@ -1360,11 +1360,11 @@ module CatOperations =
             }
 
         [<CustomOperation("h")>]
-        member _.H(state: CatRepositoriesRequest, value: Types.Names) =
+        member _.H(state: CatRepositoriesRequest, value: CoreTypes.Names) =
             { state with H = Some value }
 
         [<CustomOperation("s")>]
-        member _.S(state: CatRepositoriesRequest, value: Types.Names) =
+        member _.S(state: CatRepositoriesRequest, value: CoreTypes.Names) =
             { state with S = Some value }
 
         [<CustomOperation("local")>]
@@ -1372,28 +1372,28 @@ module CatOperations =
             { state with Local = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: CatRepositoriesRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: CatRepositoriesRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
     let catRepositoriesRequest = CatRepositoriesRequestBuilder()
 
     module Repositories =
-        let withH (value: Types.Names) (req: CatRepositoriesRequest) =
+        let withH (value: CoreTypes.Names) (req: CatRepositoriesRequest) =
             { req with H = Some value }
-        let withS (value: Types.Names) (req: CatRepositoriesRequest) =
+        let withS (value: CoreTypes.Names) (req: CatRepositoriesRequest) =
             { req with S = Some value }
         let withLocal (value: bool) (req: CatRepositoriesRequest) =
             { req with Local = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: CatRepositoriesRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: CatRepositoriesRequest) =
             { req with MasterTimeout = Some value }
 
     type CatSegmentsRequest = {
-        Index: Types.Indices
+        Index: CoreTypes.Indices
         H: CatTypes.CatSegmentsColumns option
-        S: Types.Names option
+        S: CoreTypes.Names option
         Local: bool option
-        MasterTimeout: Types.Duration option
-        ExpandWildcards: Types.ExpandWildcards option
+        MasterTimeout: CoreTypes.Duration option
+        ExpandWildcards: CoreTypes.ExpandWildcards option
         AllowNoIndices: bool option
         IgnoreThrottled: bool option
         IgnoreUnavailable: bool option
@@ -1444,7 +1444,7 @@ module CatOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: CatSegmentsRequest, value: Types.Indices) =
+        member _.Index(state: CatSegmentsRequest, value: CoreTypes.Indices) =
             { state with Index = value }
 
         [<CustomOperation("h")>]
@@ -1452,7 +1452,7 @@ module CatOperations =
             { state with H = Some value }
 
         [<CustomOperation("s")>]
-        member _.S(state: CatSegmentsRequest, value: Types.Names) =
+        member _.S(state: CatSegmentsRequest, value: CoreTypes.Names) =
             { state with S = Some value }
 
         [<CustomOperation("local")>]
@@ -1460,11 +1460,11 @@ module CatOperations =
             { state with Local = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: CatSegmentsRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: CatSegmentsRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: CatSegmentsRequest, value: Types.ExpandWildcards) =
+        member _.ExpandWildcards(state: CatSegmentsRequest, value: CoreTypes.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("allowNoIndices")>]
@@ -1488,13 +1488,13 @@ module CatOperations =
     module Segments =
         let withH (value: CatTypes.CatSegmentsColumns) (req: CatSegmentsRequest) =
             { req with H = Some value }
-        let withS (value: Types.Names) (req: CatSegmentsRequest) =
+        let withS (value: CoreTypes.Names) (req: CatSegmentsRequest) =
             { req with S = Some value }
         let withLocal (value: bool) (req: CatSegmentsRequest) =
             { req with Local = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: CatSegmentsRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: CatSegmentsRequest) =
             { req with MasterTimeout = Some value }
-        let withExpandWildcards (value: Types.ExpandWildcards) (req: CatSegmentsRequest) =
+        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: CatSegmentsRequest) =
             { req with ExpandWildcards = Some value }
         let withAllowNoIndices (value: bool) (req: CatSegmentsRequest) =
             { req with AllowNoIndices = Some value }
@@ -1506,10 +1506,10 @@ module CatOperations =
             { req with AllowClosed = Some value }
 
     type CatShardsRequest = {
-        Index: Types.Indices
+        Index: CoreTypes.Indices
         H: CatTypes.CatShardColumns option
-        S: Types.Names option
-        MasterTimeout: Types.Duration option
+        S: CoreTypes.Names option
+        MasterTimeout: CoreTypes.Duration option
     }
 
         with
@@ -1544,7 +1544,7 @@ module CatOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: CatShardsRequest, value: Types.Indices) =
+        member _.Index(state: CatShardsRequest, value: CoreTypes.Indices) =
             { state with Index = value }
 
         [<CustomOperation("h")>]
@@ -1552,11 +1552,11 @@ module CatOperations =
             { state with H = Some value }
 
         [<CustomOperation("s")>]
-        member _.S(state: CatShardsRequest, value: Types.Names) =
+        member _.S(state: CatShardsRequest, value: CoreTypes.Names) =
             { state with S = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: CatShardsRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: CatShardsRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
     let catShardsRequest = CatShardsRequestBuilder()
@@ -1564,17 +1564,17 @@ module CatOperations =
     module Shards =
         let withH (value: CatTypes.CatShardColumns) (req: CatShardsRequest) =
             { req with H = Some value }
-        let withS (value: Types.Names) (req: CatShardsRequest) =
+        let withS (value: CoreTypes.Names) (req: CatShardsRequest) =
             { req with S = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: CatShardsRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: CatShardsRequest) =
             { req with MasterTimeout = Some value }
 
     type CatSnapshotsRequest = {
-        Repository: Types.Names
+        Repository: CoreTypes.Names
         IgnoreUnavailable: bool option
         H: CatTypes.CatSnapshotsColumns option
-        S: Types.Names option
-        MasterTimeout: Types.Duration option
+        S: CoreTypes.Names option
+        MasterTimeout: CoreTypes.Duration option
     }
 
         with
@@ -1611,7 +1611,7 @@ module CatOperations =
             }
 
         [<CustomOperation("repository")>]
-        member _.Repository(state: CatSnapshotsRequest, value: Types.Names) =
+        member _.Repository(state: CatSnapshotsRequest, value: CoreTypes.Names) =
             { state with Repository = value }
 
         [<CustomOperation("ignoreUnavailable")>]
@@ -1623,11 +1623,11 @@ module CatOperations =
             { state with H = Some value }
 
         [<CustomOperation("s")>]
-        member _.S(state: CatSnapshotsRequest, value: Types.Names) =
+        member _.S(state: CatSnapshotsRequest, value: CoreTypes.Names) =
             { state with S = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: CatSnapshotsRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: CatSnapshotsRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
     let catSnapshotsRequest = CatSnapshotsRequestBuilder()
@@ -1637,9 +1637,9 @@ module CatOperations =
             { req with IgnoreUnavailable = Some value }
         let withH (value: CatTypes.CatSnapshotsColumns) (req: CatSnapshotsRequest) =
             { req with H = Some value }
-        let withS (value: Types.Names) (req: CatSnapshotsRequest) =
+        let withS (value: CoreTypes.Names) (req: CatSnapshotsRequest) =
             { req with S = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: CatSnapshotsRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: CatSnapshotsRequest) =
             { req with MasterTimeout = Some value }
 
     type CatTasksRequest = {
@@ -1648,8 +1648,8 @@ module CatOperations =
         Nodes: string list option
         ParentTaskId: string option
         H: CatTypes.CatTasksColumns option
-        S: Types.Names option
-        Timeout: Types.Duration option
+        S: CoreTypes.Names option
+        Timeout: CoreTypes.Duration option
         WaitForCompletion: bool option
     }
 
@@ -1714,11 +1714,11 @@ module CatOperations =
             { state with H = Some value }
 
         [<CustomOperation("s")>]
-        member _.S(state: CatTasksRequest, value: Types.Names) =
+        member _.S(state: CatTasksRequest, value: CoreTypes.Names) =
             { state with S = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: CatTasksRequest, value: Types.Duration) =
+        member _.Timeout(state: CatTasksRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("waitForCompletion")>]
@@ -1738,19 +1738,19 @@ module CatOperations =
             { req with ParentTaskId = Some value }
         let withH (value: CatTypes.CatTasksColumns) (req: CatTasksRequest) =
             { req with H = Some value }
-        let withS (value: Types.Names) (req: CatTasksRequest) =
+        let withS (value: CoreTypes.Names) (req: CatTasksRequest) =
             { req with S = Some value }
-        let withTimeout (value: Types.Duration) (req: CatTasksRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: CatTasksRequest) =
             { req with Timeout = Some value }
         let withWaitForCompletion (value: bool) (req: CatTasksRequest) =
             { req with WaitForCompletion = Some value }
 
     type CatTemplatesRequest = {
-        Name: Types.Name
+        Name: CoreTypes.Name
         H: CatTypes.CatTemplatesColumns option
-        S: Types.Names option
+        S: CoreTypes.Names option
         Local: bool option
-        MasterTimeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
     }
 
         with
@@ -1787,7 +1787,7 @@ module CatOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: CatTemplatesRequest, value: Types.Name) =
+        member _.Name(state: CatTemplatesRequest, value: CoreTypes.Name) =
             { state with Name = value }
 
         [<CustomOperation("h")>]
@@ -1795,7 +1795,7 @@ module CatOperations =
             { state with H = Some value }
 
         [<CustomOperation("s")>]
-        member _.S(state: CatTemplatesRequest, value: Types.Names) =
+        member _.S(state: CatTemplatesRequest, value: CoreTypes.Names) =
             { state with S = Some value }
 
         [<CustomOperation("local")>]
@@ -1803,7 +1803,7 @@ module CatOperations =
             { state with Local = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: CatTemplatesRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: CatTemplatesRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
     let catTemplatesRequest = CatTemplatesRequestBuilder()
@@ -1811,19 +1811,19 @@ module CatOperations =
     module Templates =
         let withH (value: CatTypes.CatTemplatesColumns) (req: CatTemplatesRequest) =
             { req with H = Some value }
-        let withS (value: Types.Names) (req: CatTemplatesRequest) =
+        let withS (value: CoreTypes.Names) (req: CatTemplatesRequest) =
             { req with S = Some value }
         let withLocal (value: bool) (req: CatTemplatesRequest) =
             { req with Local = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: CatTemplatesRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: CatTemplatesRequest) =
             { req with MasterTimeout = Some value }
 
     type CatThreadPoolRequest = {
-        ThreadPoolPatterns: Types.Names
+        ThreadPoolPatterns: CoreTypes.Names
         H: CatTypes.CatThreadPoolColumns option
-        S: Types.Names option
+        S: CoreTypes.Names option
         Local: bool option
-        MasterTimeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
     }
 
         with
@@ -1860,7 +1860,7 @@ module CatOperations =
             }
 
         [<CustomOperation("threadPoolPatterns")>]
-        member _.ThreadPoolPatterns(state: CatThreadPoolRequest, value: Types.Names) =
+        member _.ThreadPoolPatterns(state: CatThreadPoolRequest, value: CoreTypes.Names) =
             { state with ThreadPoolPatterns = value }
 
         [<CustomOperation("h")>]
@@ -1868,7 +1868,7 @@ module CatOperations =
             { state with H = Some value }
 
         [<CustomOperation("s")>]
-        member _.S(state: CatThreadPoolRequest, value: Types.Names) =
+        member _.S(state: CatThreadPoolRequest, value: CoreTypes.Names) =
             { state with S = Some value }
 
         [<CustomOperation("local")>]
@@ -1876,7 +1876,7 @@ module CatOperations =
             { state with Local = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: CatThreadPoolRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: CatThreadPoolRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
     let catThreadPoolRequest = CatThreadPoolRequestBuilder()
@@ -1884,20 +1884,20 @@ module CatOperations =
     module ThreadPool =
         let withH (value: CatTypes.CatThreadPoolColumns) (req: CatThreadPoolRequest) =
             { req with H = Some value }
-        let withS (value: Types.Names) (req: CatThreadPoolRequest) =
+        let withS (value: CoreTypes.Names) (req: CatThreadPoolRequest) =
             { req with S = Some value }
         let withLocal (value: bool) (req: CatThreadPoolRequest) =
             { req with Local = Some value }
-        let withMasterTimeout (value: Types.Duration) (req: CatThreadPoolRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: CatThreadPoolRequest) =
             { req with MasterTimeout = Some value }
 
     type CatTransformsRequest = {
-        TransformId: Types.Id
+        TransformId: CoreTypes.Id
         AllowNoMatch: bool option
-        From: Types.Integer option
+        From: CoreTypes.Integer option
         H: CatTypes.CatTransformColumns option
         S: CatTypes.CatTransformColumns option
-        Size: Types.Integer option
+        Size: CoreTypes.Integer option
     }
 
         with
@@ -1936,7 +1936,7 @@ module CatOperations =
             }
 
         [<CustomOperation("transformId")>]
-        member _.TransformId(state: CatTransformsRequest, value: Types.Id) =
+        member _.TransformId(state: CatTransformsRequest, value: CoreTypes.Id) =
             { state with TransformId = value }
 
         [<CustomOperation("allowNoMatch")>]
@@ -1944,7 +1944,7 @@ module CatOperations =
             { state with AllowNoMatch = Some value }
 
         [<CustomOperation("from")>]
-        member _.From(state: CatTransformsRequest, value: Types.Integer) =
+        member _.From(state: CatTransformsRequest, value: CoreTypes.Integer) =
             { state with From = Some value }
 
         [<CustomOperation("h")>]
@@ -1956,7 +1956,7 @@ module CatOperations =
             { state with S = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: CatTransformsRequest, value: Types.Integer) =
+        member _.Size(state: CatTransformsRequest, value: CoreTypes.Integer) =
             { state with Size = Some value }
 
     let catTransformsRequest = CatTransformsRequestBuilder()
@@ -1964,12 +1964,12 @@ module CatOperations =
     module Transforms =
         let withAllowNoMatch (value: bool) (req: CatTransformsRequest) =
             { req with AllowNoMatch = Some value }
-        let withFrom (value: Types.Integer) (req: CatTransformsRequest) =
+        let withFrom (value: CoreTypes.Integer) (req: CatTransformsRequest) =
             { req with From = Some value }
         let withH (value: CatTypes.CatTransformColumns) (req: CatTransformsRequest) =
             { req with H = Some value }
         let withS (value: CatTypes.CatTransformColumns) (req: CatTransformsRequest) =
             { req with S = Some value }
-        let withSize (value: Types.Integer) (req: CatTransformsRequest) =
+        let withSize (value: CoreTypes.Integer) (req: CatTransformsRequest) =
             { req with Size = Some value }
 

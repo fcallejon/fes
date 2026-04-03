@@ -7,7 +7,7 @@ open System.Text.Json.Serialization
 
 module GlobalSearchMvtTypes =
 
-    type Coordinate = Types.Integer
+    type Coordinate = CoreTypes.Integer
 
     [<RequireQualifiedAccess>]
     type GridAggregationType =
@@ -20,5 +20,5 @@ module GlobalSearchMvtTypes =
         | Point
         | Centroid
 
-    type ZoomLevel = Types.Integer
+    type ZoomLevel = CoreTypes.Integer
 

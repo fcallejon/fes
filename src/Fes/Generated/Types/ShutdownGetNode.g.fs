@@ -21,35 +21,35 @@ module ShutdownGetNode =
 
     type ShardMigrationStatus = {
         [<System.Text.Json.Serialization.JsonPropertyName("status")>]
-        Status: ShutdownGetNode.ShutdownStatus
+        Status: ShutdownStatus
     }
 
     type PersistentTaskStatus = {
         [<System.Text.Json.Serialization.JsonPropertyName("status")>]
-        Status: ShutdownGetNode.ShutdownStatus
+        Status: ShutdownStatus
     }
 
     type PluginsStatus = {
         [<System.Text.Json.Serialization.JsonPropertyName("status")>]
-        Status: ShutdownGetNode.ShutdownStatus
+        Status: ShutdownStatus
     }
 
     type NodeShutdownStatus = {
         [<System.Text.Json.Serialization.JsonPropertyName("node_id")>]
-        NodeId: Types.NodeId
+        NodeId: CoreTypes.NodeId
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
-        Type: ShutdownGetNode.ShutdownType
+        Type: ShutdownType
         [<System.Text.Json.Serialization.JsonPropertyName("reason")>]
         Reason: string
         [<System.Text.Json.Serialization.JsonPropertyName("shutdown_startedmillis")>]
-        ShutdownStartedmillis: Types.EpochTime<Types.UnitMillis>
+        ShutdownStartedmillis: CoreTypes.EpochTime<CoreTypes.UnitMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("status")>]
-        Status: ShutdownGetNode.ShutdownStatus
+        Status: ShutdownStatus
         [<System.Text.Json.Serialization.JsonPropertyName("shard_migration")>]
-        ShardMigration: ShutdownGetNode.ShardMigrationStatus
+        ShardMigration: ShardMigrationStatus
         [<System.Text.Json.Serialization.JsonPropertyName("persistent_tasks")>]
-        PersistentTasks: ShutdownGetNode.PersistentTaskStatus
+        PersistentTasks: PersistentTaskStatus
         [<System.Text.Json.Serialization.JsonPropertyName("plugins")>]
-        Plugins: ShutdownGetNode.PluginsStatus
+        Plugins: PluginsStatus
     }
 

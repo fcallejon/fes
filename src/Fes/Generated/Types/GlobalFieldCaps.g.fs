@@ -11,13 +11,13 @@ module GlobalFieldCaps =
         [<System.Text.Json.Serialization.JsonPropertyName("aggregatable")>]
         Aggregatable: bool
         [<System.Text.Json.Serialization.JsonPropertyName("indices")>]
-        Indices: Types.Indices option
+        Indices: CoreTypes.Indices option
         [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
-        Meta: Types.Metadata option
+        Meta: CoreTypes.Metadata option
         [<System.Text.Json.Serialization.JsonPropertyName("non_aggregatable_indices")>]
-        NonAggregatableIndices: Types.Indices option
+        NonAggregatableIndices: CoreTypes.Indices option
         [<System.Text.Json.Serialization.JsonPropertyName("non_searchable_indices")>]
-        NonSearchableIndices: Types.Indices option
+        NonSearchableIndices: CoreTypes.Indices option
         [<System.Text.Json.Serialization.JsonPropertyName("searchable")>]
         Searchable: bool
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
@@ -27,10 +27,10 @@ module GlobalFieldCaps =
         [<System.Text.Json.Serialization.JsonPropertyName("time_series_dimension")>]
         TimeSeriesDimension: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("time_series_metric")>]
-        TimeSeriesMetric: TypesMapping.TimeSeriesMetricType option
+        TimeSeriesMetric: CoreTypes.TimeSeriesMetricType option
         [<System.Text.Json.Serialization.JsonPropertyName("non_dimension_indices")>]
-        NonDimensionIndices: Types.IndexName list option
+        NonDimensionIndices: CoreTypes.IndexName list option
         [<System.Text.Json.Serialization.JsonPropertyName("metric_conflicts_indices")>]
-        MetricConflictsIndices: Types.IndexName list option
+        MetricConflictsIndices: CoreTypes.IndexName list option
     }
 

@@ -18,7 +18,7 @@ module IndicesCreateFromBuilders =
             }
 
         [<CustomOperation("mappingsOverride")>]
-        member _.MappingsOverride(state: CreateFrom, value: TypesMapping.TypeMapping) =
+        member _.MappingsOverride(state: CreateFrom, value: CoreTypes.TypeMapping) =
             { state with MappingsOverride = Some value }
 
         [<CustomOperation("settingsOverride")>]

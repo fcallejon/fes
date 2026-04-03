@@ -12,7 +12,7 @@ open Fes
 module SynonymsOperations =
 
     type SynonymsDeleteSynonymRequest = {
-        Id: Types.Id
+        Id: CoreTypes.Id
     }
 
         with
@@ -26,7 +26,7 @@ module SynonymsOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type SynonymsDeleteSynonymResponse = Types.AcknowledgedResponseBase
+    type SynonymsDeleteSynonymResponse = CoreTypes.AcknowledgedResponseBase
 
     type SynonymsDeleteSynonymRequestBuilder() =
         member _.Yield(_: unit) : SynonymsDeleteSynonymRequest =
@@ -35,14 +35,14 @@ module SynonymsOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: SynonymsDeleteSynonymRequest, value: Types.Id) =
+        member _.Id(state: SynonymsDeleteSynonymRequest, value: CoreTypes.Id) =
             { state with Id = value }
 
     let synonymsDeleteSynonymRequest = SynonymsDeleteSynonymRequestBuilder()
 
     type SynonymsDeleteSynonymRuleRequest = {
-        SetId: Types.Id
-        RuleId: Types.Id
+        SetId: CoreTypes.Id
+        RuleId: CoreTypes.Id
         Refresh: bool option
     }
 
@@ -75,11 +75,11 @@ module SynonymsOperations =
             }
 
         [<CustomOperation("setId")>]
-        member _.SetId(state: SynonymsDeleteSynonymRuleRequest, value: Types.Id) =
+        member _.SetId(state: SynonymsDeleteSynonymRuleRequest, value: CoreTypes.Id) =
             { state with SetId = value }
 
         [<CustomOperation("ruleId")>]
-        member _.RuleId(state: SynonymsDeleteSynonymRuleRequest, value: Types.Id) =
+        member _.RuleId(state: SynonymsDeleteSynonymRuleRequest, value: CoreTypes.Id) =
             { state with RuleId = value }
 
         [<CustomOperation("refresh")>]
@@ -93,9 +93,9 @@ module SynonymsOperations =
             { req with Refresh = Some value }
 
     type SynonymsGetSynonymRequest = {
-        Id: Types.Id
-        From: Types.Integer option
-        Size: Types.Integer option
+        Id: CoreTypes.Id
+        From: CoreTypes.Integer option
+        Size: CoreTypes.Integer option
     }
 
         with
@@ -128,28 +128,28 @@ module SynonymsOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: SynonymsGetSynonymRequest, value: Types.Id) =
+        member _.Id(state: SynonymsGetSynonymRequest, value: CoreTypes.Id) =
             { state with Id = value }
 
         [<CustomOperation("from")>]
-        member _.From(state: SynonymsGetSynonymRequest, value: Types.Integer) =
+        member _.From(state: SynonymsGetSynonymRequest, value: CoreTypes.Integer) =
             { state with From = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: SynonymsGetSynonymRequest, value: Types.Integer) =
+        member _.Size(state: SynonymsGetSynonymRequest, value: CoreTypes.Integer) =
             { state with Size = Some value }
 
     let synonymsGetSynonymRequest = SynonymsGetSynonymRequestBuilder()
 
     module GetSynonym =
-        let withFrom (value: Types.Integer) (req: SynonymsGetSynonymRequest) =
+        let withFrom (value: CoreTypes.Integer) (req: SynonymsGetSynonymRequest) =
             { req with From = Some value }
-        let withSize (value: Types.Integer) (req: SynonymsGetSynonymRequest) =
+        let withSize (value: CoreTypes.Integer) (req: SynonymsGetSynonymRequest) =
             { req with Size = Some value }
 
     type SynonymsGetSynonymRuleRequest = {
-        SetId: Types.Id
-        RuleId: Types.Id
+        SetId: CoreTypes.Id
+        RuleId: CoreTypes.Id
     }
 
         with
@@ -173,18 +173,18 @@ module SynonymsOperations =
             }
 
         [<CustomOperation("setId")>]
-        member _.SetId(state: SynonymsGetSynonymRuleRequest, value: Types.Id) =
+        member _.SetId(state: SynonymsGetSynonymRuleRequest, value: CoreTypes.Id) =
             { state with SetId = value }
 
         [<CustomOperation("ruleId")>]
-        member _.RuleId(state: SynonymsGetSynonymRuleRequest, value: Types.Id) =
+        member _.RuleId(state: SynonymsGetSynonymRuleRequest, value: CoreTypes.Id) =
             { state with RuleId = value }
 
     let synonymsGetSynonymRuleRequest = SynonymsGetSynonymRuleRequestBuilder()
 
     type SynonymsGetSynonymsSetsRequest = {
-        From: Types.Integer option
-        Size: Types.Integer option
+        From: CoreTypes.Integer option
+        Size: CoreTypes.Integer option
     }
 
         with
@@ -216,23 +216,23 @@ module SynonymsOperations =
             }
 
         [<CustomOperation("from")>]
-        member _.From(state: SynonymsGetSynonymsSetsRequest, value: Types.Integer) =
+        member _.From(state: SynonymsGetSynonymsSetsRequest, value: CoreTypes.Integer) =
             { state with From = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: SynonymsGetSynonymsSetsRequest, value: Types.Integer) =
+        member _.Size(state: SynonymsGetSynonymsSetsRequest, value: CoreTypes.Integer) =
             { state with Size = Some value }
 
     let synonymsGetSynonymsSetsRequest = SynonymsGetSynonymsSetsRequestBuilder()
 
     module GetSynonymsSets =
-        let withFrom (value: Types.Integer) (req: SynonymsGetSynonymsSetsRequest) =
+        let withFrom (value: CoreTypes.Integer) (req: SynonymsGetSynonymsSetsRequest) =
             { req with From = Some value }
-        let withSize (value: Types.Integer) (req: SynonymsGetSynonymsSetsRequest) =
+        let withSize (value: CoreTypes.Integer) (req: SynonymsGetSynonymsSetsRequest) =
             { req with Size = Some value }
 
     type SynonymsPutSynonymRequest = {
-        Id: Types.Id
+        Id: CoreTypes.Id
         Refresh: bool option
         SynonymsSet: System.Text.Json.JsonElement
     }
@@ -267,7 +267,7 @@ module SynonymsOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: SynonymsPutSynonymRequest, value: Types.Id) =
+        member _.Id(state: SynonymsPutSynonymRequest, value: CoreTypes.Id) =
             { state with Id = value }
 
         [<CustomOperation("refresh")>]
@@ -287,8 +287,8 @@ module SynonymsOperations =
             { req with SynonymsSet = value }
 
     type SynonymsPutSynonymRuleRequest = {
-        SetId: Types.Id
-        RuleId: Types.Id
+        SetId: CoreTypes.Id
+        RuleId: CoreTypes.Id
         Refresh: bool option
         Synonyms: SynonymsTypes.SynonymString
     }
@@ -324,11 +324,11 @@ module SynonymsOperations =
             }
 
         [<CustomOperation("setId")>]
-        member _.SetId(state: SynonymsPutSynonymRuleRequest, value: Types.Id) =
+        member _.SetId(state: SynonymsPutSynonymRuleRequest, value: CoreTypes.Id) =
             { state with SetId = value }
 
         [<CustomOperation("ruleId")>]
-        member _.RuleId(state: SynonymsPutSynonymRuleRequest, value: Types.Id) =
+        member _.RuleId(state: SynonymsPutSynonymRuleRequest, value: CoreTypes.Id) =
             { state with RuleId = value }
 
         [<CustomOperation("refresh")>]

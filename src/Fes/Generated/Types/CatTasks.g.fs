@@ -9,11 +9,11 @@ module CatTasks =
 
     type TasksRecord = {
         [<System.Text.Json.Serialization.JsonPropertyName("id")>]
-        Id: Types.Id option
+        Id: CoreTypes.Id option
         [<System.Text.Json.Serialization.JsonPropertyName("action")>]
         Action: string option
         [<System.Text.Json.Serialization.JsonPropertyName("task_id")>]
-        TaskId: Types.Id option
+        TaskId: CoreTypes.Id option
         [<System.Text.Json.Serialization.JsonPropertyName("parent_task_id")>]
         ParentTaskId: string option
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
@@ -27,7 +27,7 @@ module CatTasks =
         [<System.Text.Json.Serialization.JsonPropertyName("running_time")>]
         RunningTime: string option
         [<System.Text.Json.Serialization.JsonPropertyName("node_id")>]
-        NodeId: Types.NodeId option
+        NodeId: CoreTypes.NodeId option
         [<System.Text.Json.Serialization.JsonPropertyName("ip")>]
         Ip: string option
         [<System.Text.Json.Serialization.JsonPropertyName("port")>]
@@ -35,7 +35,7 @@ module CatTasks =
         [<System.Text.Json.Serialization.JsonPropertyName("node")>]
         Node: string option
         [<System.Text.Json.Serialization.JsonPropertyName("version")>]
-        Version: Types.VersionString option
+        Version: CoreTypes.VersionString option
         [<System.Text.Json.Serialization.JsonPropertyName("x_opaque_id")>]
         XOpaqueId: string option
         [<System.Text.Json.Serialization.JsonPropertyName("description")>]

@@ -12,8 +12,8 @@ open Fes
 module EnrichOperations =
 
     type EnrichDeletePolicyRequest = {
-        Name: Types.Name
-        MasterTimeout: Types.Duration option
+        Name: CoreTypes.Name
+        MasterTimeout: CoreTypes.Duration option
     }
 
         with
@@ -34,7 +34,7 @@ module EnrichOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type EnrichDeletePolicyResponse = Types.AcknowledgedResponseBase
+    type EnrichDeletePolicyResponse = CoreTypes.AcknowledgedResponseBase
 
     type EnrichDeletePolicyRequestBuilder() =
         member _.Yield(_: unit) : EnrichDeletePolicyRequest =
@@ -44,22 +44,22 @@ module EnrichOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: EnrichDeletePolicyRequest, value: Types.Name) =
+        member _.Name(state: EnrichDeletePolicyRequest, value: CoreTypes.Name) =
             { state with Name = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: EnrichDeletePolicyRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: EnrichDeletePolicyRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
     let enrichDeletePolicyRequest = EnrichDeletePolicyRequestBuilder()
 
     module DeletePolicy =
-        let withMasterTimeout (value: Types.Duration) (req: EnrichDeletePolicyRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: EnrichDeletePolicyRequest) =
             { req with MasterTimeout = Some value }
 
     type EnrichExecutePolicyRequest = {
-        Name: Types.Name
-        MasterTimeout: Types.Duration option
+        Name: CoreTypes.Name
+        MasterTimeout: CoreTypes.Duration option
         WaitForCompletion: bool option
     }
 
@@ -93,11 +93,11 @@ module EnrichOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: EnrichExecutePolicyRequest, value: Types.Name) =
+        member _.Name(state: EnrichExecutePolicyRequest, value: CoreTypes.Name) =
             { state with Name = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: EnrichExecutePolicyRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: EnrichExecutePolicyRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("waitForCompletion")>]
@@ -107,14 +107,14 @@ module EnrichOperations =
     let enrichExecutePolicyRequest = EnrichExecutePolicyRequestBuilder()
 
     module ExecutePolicy =
-        let withMasterTimeout (value: Types.Duration) (req: EnrichExecutePolicyRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: EnrichExecutePolicyRequest) =
             { req with MasterTimeout = Some value }
         let withWaitForCompletion (value: bool) (req: EnrichExecutePolicyRequest) =
             { req with WaitForCompletion = Some value }
 
     type EnrichGetPolicyRequest = {
-        Name: Types.Names
-        MasterTimeout: Types.Duration option
+        Name: CoreTypes.Names
+        MasterTimeout: CoreTypes.Duration option
     }
 
         with
@@ -145,22 +145,22 @@ module EnrichOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: EnrichGetPolicyRequest, value: Types.Names) =
+        member _.Name(state: EnrichGetPolicyRequest, value: CoreTypes.Names) =
             { state with Name = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: EnrichGetPolicyRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: EnrichGetPolicyRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
     let enrichGetPolicyRequest = EnrichGetPolicyRequestBuilder()
 
     module GetPolicy =
-        let withMasterTimeout (value: Types.Duration) (req: EnrichGetPolicyRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: EnrichGetPolicyRequest) =
             { req with MasterTimeout = Some value }
 
     type EnrichPutPolicyRequest = {
-        Name: Types.Name
-        MasterTimeout: Types.Duration option
+        Name: CoreTypes.Name
+        MasterTimeout: CoreTypes.Duration option
         GeoMatch: EnrichTypes.Policy option
         Match: EnrichTypes.Policy option
         Range: EnrichTypes.Policy option
@@ -185,7 +185,7 @@ module EnrichOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type EnrichPutPolicyResponse = Types.AcknowledgedResponseBase
+    type EnrichPutPolicyResponse = CoreTypes.AcknowledgedResponseBase
 
     type EnrichPutPolicyRequestBuilder() =
         member _.Yield(_: unit) : EnrichPutPolicyRequest =
@@ -198,11 +198,11 @@ module EnrichOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: EnrichPutPolicyRequest, value: Types.Name) =
+        member _.Name(state: EnrichPutPolicyRequest, value: CoreTypes.Name) =
             { state with Name = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: EnrichPutPolicyRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: EnrichPutPolicyRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("geoMatch")>]
@@ -220,7 +220,7 @@ module EnrichOperations =
     let enrichPutPolicyRequest = EnrichPutPolicyRequestBuilder()
 
     module PutPolicy =
-        let withMasterTimeout (value: Types.Duration) (req: EnrichPutPolicyRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: EnrichPutPolicyRequest) =
             { req with MasterTimeout = Some value }
         let withGeoMatch (value: EnrichTypes.Policy) (req: EnrichPutPolicyRequest) =
             { req with GeoMatch = Some value }
@@ -230,7 +230,7 @@ module EnrichOperations =
             { req with Range = Some value }
 
     type EnrichStatsRequest = {
-        MasterTimeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
     }
 
         with
@@ -260,12 +260,12 @@ module EnrichOperations =
             }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: EnrichStatsRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: EnrichStatsRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
     let enrichStatsRequest = EnrichStatsRequestBuilder()
 
     module Stats =
-        let withMasterTimeout (value: Types.Duration) (req: EnrichStatsRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: EnrichStatsRequest) =
             { req with MasterTimeout = Some value }
 

@@ -9,86 +9,86 @@ module CcrTypes =
 
     type ReadException = {
         [<System.Text.Json.Serialization.JsonPropertyName("exception")>]
-        Exception: Types.ErrorCause
+        Exception: CoreTypes.ErrorCause
         [<System.Text.Json.Serialization.JsonPropertyName("from_seq_no")>]
-        FromSeqNo: Types.SequenceNumber
+        FromSeqNo: CoreTypes.SequenceNumber
         [<System.Text.Json.Serialization.JsonPropertyName("retries")>]
-        Retries: Types.Integer
+        Retries: CoreTypes.Integer
     }
 
     type ShardStats = {
         [<System.Text.Json.Serialization.JsonPropertyName("bytes_read")>]
-        BytesRead: Types.Long
+        BytesRead: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("failed_read_requests")>]
-        FailedReadRequests: Types.Long
+        FailedReadRequests: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("failed_write_requests")>]
-        FailedWriteRequests: Types.Long
+        FailedWriteRequests: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("fatal_exception")>]
-        FatalException: Types.ErrorCause option
+        FatalException: CoreTypes.ErrorCause option
         [<System.Text.Json.Serialization.JsonPropertyName("follower_aliases_version")>]
-        FollowerAliasesVersion: Types.VersionNumber
+        FollowerAliasesVersion: CoreTypes.VersionNumber
         [<System.Text.Json.Serialization.JsonPropertyName("follower_global_checkpoint")>]
-        FollowerGlobalCheckpoint: Types.Long
+        FollowerGlobalCheckpoint: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("follower_index")>]
         FollowerIndex: string
         [<System.Text.Json.Serialization.JsonPropertyName("follower_mapping_version")>]
-        FollowerMappingVersion: Types.VersionNumber
+        FollowerMappingVersion: CoreTypes.VersionNumber
         [<System.Text.Json.Serialization.JsonPropertyName("follower_max_seq_no")>]
-        FollowerMaxSeqNo: Types.SequenceNumber
+        FollowerMaxSeqNo: CoreTypes.SequenceNumber
         [<System.Text.Json.Serialization.JsonPropertyName("follower_settings_version")>]
-        FollowerSettingsVersion: Types.VersionNumber
+        FollowerSettingsVersion: CoreTypes.VersionNumber
         [<System.Text.Json.Serialization.JsonPropertyName("last_requested_seq_no")>]
-        LastRequestedSeqNo: Types.SequenceNumber
+        LastRequestedSeqNo: CoreTypes.SequenceNumber
         [<System.Text.Json.Serialization.JsonPropertyName("leader_global_checkpoint")>]
-        LeaderGlobalCheckpoint: Types.Long
+        LeaderGlobalCheckpoint: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("leader_index")>]
         LeaderIndex: string
         [<System.Text.Json.Serialization.JsonPropertyName("leader_max_seq_no")>]
-        LeaderMaxSeqNo: Types.SequenceNumber
+        LeaderMaxSeqNo: CoreTypes.SequenceNumber
         [<System.Text.Json.Serialization.JsonPropertyName("operations_read")>]
-        OperationsRead: Types.Long
+        OperationsRead: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("operations_written")>]
-        OperationsWritten: Types.Long
+        OperationsWritten: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("outstanding_read_requests")>]
-        OutstandingReadRequests: Types.Integer
+        OutstandingReadRequests: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("outstanding_write_requests")>]
-        OutstandingWriteRequests: Types.Integer
+        OutstandingWriteRequests: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("read_exceptions")>]
-        ReadExceptions: CcrTypes.ReadException list
+        ReadExceptions: ReadException list
         [<System.Text.Json.Serialization.JsonPropertyName("remote_cluster")>]
         RemoteCluster: string
         [<System.Text.Json.Serialization.JsonPropertyName("shard_id")>]
-        ShardId: Types.Integer
+        ShardId: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("successful_read_requests")>]
-        SuccessfulReadRequests: Types.Long
+        SuccessfulReadRequests: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("successful_write_requests")>]
-        SuccessfulWriteRequests: Types.Long
+        SuccessfulWriteRequests: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("time_since_last_read")>]
-        TimeSinceLastRead: Types.Duration option
+        TimeSinceLastRead: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("time_since_last_read_millis")>]
-        TimeSinceLastReadMillis: Types.DurationValue<Types.UnitMillis>
+        TimeSinceLastReadMillis: CoreTypes.DurationValue<CoreTypes.UnitMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("total_read_remote_exec_time")>]
-        TotalReadRemoteExecTime: Types.Duration option
+        TotalReadRemoteExecTime: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("total_read_remote_exec_time_millis")>]
-        TotalReadRemoteExecTimeMillis: Types.DurationValue<Types.UnitMillis>
+        TotalReadRemoteExecTimeMillis: CoreTypes.DurationValue<CoreTypes.UnitMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("total_read_time")>]
-        TotalReadTime: Types.Duration option
+        TotalReadTime: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("total_read_time_millis")>]
-        TotalReadTimeMillis: Types.DurationValue<Types.UnitMillis>
+        TotalReadTimeMillis: CoreTypes.DurationValue<CoreTypes.UnitMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("total_write_time")>]
-        TotalWriteTime: Types.Duration option
+        TotalWriteTime: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("total_write_time_millis")>]
-        TotalWriteTimeMillis: Types.DurationValue<Types.UnitMillis>
+        TotalWriteTimeMillis: CoreTypes.DurationValue<CoreTypes.UnitMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("write_buffer_operation_count")>]
-        WriteBufferOperationCount: Types.Long
+        WriteBufferOperationCount: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("write_buffer_size_in_bytes")>]
-        WriteBufferSizeInBytes: Types.ByteSize
+        WriteBufferSizeInBytes: CoreTypes.ByteSize
     }
 
     type FollowIndexStats = {
         [<System.Text.Json.Serialization.JsonPropertyName("index")>]
-        Index: Types.IndexName
+        Index: CoreTypes.IndexName
         [<System.Text.Json.Serialization.JsonPropertyName("shards")>]
-        Shards: CcrTypes.ShardStats list
+        Shards: ShardStats list
     }
 

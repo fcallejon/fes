@@ -44,7 +44,7 @@ module EqlTypesBuilders =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: EqlSearchResponseBase, value: Types.Id) =
+        member _.Id(state: EqlSearchResponseBase, value: CoreTypes.Id) =
             { state with Id = Some value }
 
         [<CustomOperation("isPartial")>]
@@ -56,7 +56,7 @@ module EqlTypesBuilders =
             { state with IsRunning = Some value }
 
         [<CustomOperation("took")>]
-        member _.Took(state: EqlSearchResponseBase, value: Types.DurationValue<Types.UnitMillis>) =
+        member _.Took(state: EqlSearchResponseBase, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
             { state with Took = Some value }
 
         [<CustomOperation("timedOut")>]
@@ -68,7 +68,7 @@ module EqlTypesBuilders =
             { state with Hits = value }
 
         [<CustomOperation("shardFailures")>]
-        member _.ShardFailures(state: EqlSearchResponseBase, value: Types.ShardFailure list) =
+        member _.ShardFailures(state: EqlSearchResponseBase, value: CoreTypes.ShardFailure list) =
             { state with ShardFailures = Some value }
 
     let eqlSearchResponseBase = EqlSearchResponseBaseBuilder()
@@ -84,11 +84,11 @@ module EqlTypesBuilders =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: HitsEvent, value: Types.IndexName) =
+        member _.Index(state: HitsEvent, value: CoreTypes.IndexName) =
             { state with Index = value }
 
         [<CustomOperation("id")>]
-        member _.Id(state: HitsEvent, value: Types.Id) =
+        member _.Id(state: HitsEvent, value: CoreTypes.Id) =
             { state with Id = value }
 
         [<CustomOperation("source")>]
@@ -100,7 +100,7 @@ module EqlTypesBuilders =
             { state with Missing = Some value }
 
         [<CustomOperation("fields")>]
-        member _.Fields(state: HitsEvent, value: Map<Types.Field, System.Text.Json.JsonElement list>) =
+        member _.Fields(state: HitsEvent, value: Map<CoreTypes.Field, System.Text.Json.JsonElement list>) =
             { state with Fields = Some value }
 
     let hitsEvent = HitsEventBuilder()

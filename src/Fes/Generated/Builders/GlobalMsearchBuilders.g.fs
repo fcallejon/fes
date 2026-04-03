@@ -31,7 +31,7 @@ module GlobalMsearchBuilders =
             { state with AllowNoIndices = Some value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: MultisearchHeader, value: Types.ExpandWildcards) =
+        member _.ExpandWildcards(state: MultisearchHeader, value: CoreTypes.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("ignoreUnavailable")>]
@@ -39,7 +39,7 @@ module GlobalMsearchBuilders =
             { state with IgnoreUnavailable = Some value }
 
         [<CustomOperation("index")>]
-        member _.Index(state: MultisearchHeader, value: Types.Indices) =
+        member _.Index(state: MultisearchHeader, value: CoreTypes.Indices) =
             { state with Index = Some value }
 
         [<CustomOperation("preference")>]
@@ -47,7 +47,7 @@ module GlobalMsearchBuilders =
             { state with Preference = Some value }
 
         [<CustomOperation("projectRouting")>]
-        member _.ProjectRouting(state: MultisearchHeader, value: Types.ProjectRouting) =
+        member _.ProjectRouting(state: MultisearchHeader, value: CoreTypes.ProjectRouting) =
             { state with ProjectRouting = Some value }
 
         [<CustomOperation("requestCache")>]
@@ -55,11 +55,11 @@ module GlobalMsearchBuilders =
             { state with RequestCache = Some value }
 
         [<CustomOperation("routing")>]
-        member _.Routing(state: MultisearchHeader, value: Types.Routing) =
+        member _.Routing(state: MultisearchHeader, value: CoreTypes.Routing) =
             { state with Routing = Some value }
 
         [<CustomOperation("searchType")>]
-        member _.SearchType(state: MultisearchHeader, value: Types.SearchType) =
+        member _.SearchType(state: MultisearchHeader, value: CoreTypes.SearchType) =
             { state with SearchType = Some value }
 
         [<CustomOperation("ccsMinimizeRoundtrips")>]

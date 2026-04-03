@@ -16,55 +16,55 @@ module NodesInfo =
         [<System.Text.Json.Serialization.JsonPropertyName("bound_address")>]
         BoundAddress: string list
         [<System.Text.Json.Serialization.JsonPropertyName("max_content_length")>]
-        MaxContentLength: Types.ByteSize option
+        MaxContentLength: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("max_content_length_in_bytes")>]
-        MaxContentLengthInBytes: Types.Long
+        MaxContentLengthInBytes: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("publish_address")>]
         PublishAddress: string
     }
 
     type NodeInfoJvmMemory = {
         [<System.Text.Json.Serialization.JsonPropertyName("direct_max")>]
-        DirectMax: Types.ByteSize option
+        DirectMax: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("direct_max_in_bytes")>]
-        DirectMaxInBytes: Types.Long
+        DirectMaxInBytes: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("heap_init")>]
-        HeapInit: Types.ByteSize option
+        HeapInit: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("heap_init_in_bytes")>]
-        HeapInitInBytes: Types.Long
+        HeapInitInBytes: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("heap_max")>]
-        HeapMax: Types.ByteSize option
+        HeapMax: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("heap_max_in_bytes")>]
-        HeapMaxInBytes: Types.Long
+        HeapMaxInBytes: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("non_heap_init")>]
-        NonHeapInit: Types.ByteSize option
+        NonHeapInit: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("non_heap_init_in_bytes")>]
-        NonHeapInitInBytes: Types.Long
+        NonHeapInitInBytes: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("non_heap_max")>]
-        NonHeapMax: Types.ByteSize option
+        NonHeapMax: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("non_heap_max_in_bytes")>]
-        NonHeapMaxInBytes: Types.Long
+        NonHeapMaxInBytes: CoreTypes.Long
     }
 
     type NodeJvmInfo = {
         [<System.Text.Json.Serialization.JsonPropertyName("gc_collectors")>]
         GcCollectors: string list
         [<System.Text.Json.Serialization.JsonPropertyName("mem")>]
-        Mem: NodesInfo.NodeInfoJvmMemory
+        Mem: NodeInfoJvmMemory
         [<System.Text.Json.Serialization.JsonPropertyName("memory_pools")>]
         MemoryPools: string list
         [<System.Text.Json.Serialization.JsonPropertyName("pid")>]
-        Pid: Types.Integer
+        Pid: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("start_time_in_millis")>]
-        StartTimeInMillis: Types.EpochTime<Types.UnitMillis>
+        StartTimeInMillis: CoreTypes.EpochTime<CoreTypes.UnitMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("version")>]
-        Version: Types.VersionString
+        Version: CoreTypes.VersionString
         [<System.Text.Json.Serialization.JsonPropertyName("vm_name")>]
-        VmName: Types.Name
+        VmName: CoreTypes.Name
         [<System.Text.Json.Serialization.JsonPropertyName("vm_vendor")>]
         VmVendor: string
         [<System.Text.Json.Serialization.JsonPropertyName("vm_version")>]
-        VmVersion: Types.VersionString
+        VmVersion: CoreTypes.VersionString
         [<System.Text.Json.Serialization.JsonPropertyName("using_bundled_jdk")>]
         UsingBundledJdk: bool
         [<System.Text.Json.Serialization.JsonPropertyName("using_compressed_ordinary_object_pointers")>]
@@ -77,17 +77,17 @@ module NodesInfo =
         [<System.Text.Json.Serialization.JsonPropertyName("cache_size")>]
         CacheSize: string
         [<System.Text.Json.Serialization.JsonPropertyName("cache_size_in_bytes")>]
-        CacheSizeInBytes: Types.Integer
+        CacheSizeInBytes: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("cores_per_socket")>]
-        CoresPerSocket: Types.Integer
+        CoresPerSocket: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("mhz")>]
-        Mhz: Types.Integer
+        Mhz: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("model")>]
         Model: string
         [<System.Text.Json.Serialization.JsonPropertyName("total_cores")>]
-        TotalCores: Types.Integer
+        TotalCores: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("total_sockets")>]
-        TotalSockets: Types.Integer
+        TotalSockets: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("vendor")>]
         Vendor: string
     }
@@ -96,62 +96,62 @@ module NodesInfo =
         [<System.Text.Json.Serialization.JsonPropertyName("total")>]
         Total: string
         [<System.Text.Json.Serialization.JsonPropertyName("total_in_bytes")>]
-        TotalInBytes: Types.Long
+        TotalInBytes: CoreTypes.Long
     }
 
     type NodeOperatingSystemInfo = {
         [<System.Text.Json.Serialization.JsonPropertyName("arch")>]
         Arch: string
         [<System.Text.Json.Serialization.JsonPropertyName("available_processors")>]
-        AvailableProcessors: Types.Integer
+        AvailableProcessors: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("allocated_processors")>]
-        AllocatedProcessors: Types.Integer option
+        AllocatedProcessors: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.Name
+        Name: CoreTypes.Name
         [<System.Text.Json.Serialization.JsonPropertyName("pretty_name")>]
-        PrettyName: Types.Name
+        PrettyName: CoreTypes.Name
         [<System.Text.Json.Serialization.JsonPropertyName("refresh_interval_in_millis")>]
-        RefreshIntervalInMillis: Types.DurationValue<Types.UnitMillis>
+        RefreshIntervalInMillis: CoreTypes.DurationValue<CoreTypes.UnitMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("version")>]
-        Version: Types.VersionString
+        Version: CoreTypes.VersionString
         [<System.Text.Json.Serialization.JsonPropertyName("cpu")>]
-        Cpu: NodesInfo.NodeInfoOSCPU option
+        Cpu: NodeInfoOSCPU option
         [<System.Text.Json.Serialization.JsonPropertyName("mem")>]
-        Mem: NodesInfo.NodeInfoMemory option
+        Mem: NodeInfoMemory option
         [<System.Text.Json.Serialization.JsonPropertyName("swap")>]
-        Swap: NodesInfo.NodeInfoMemory option
+        Swap: NodeInfoMemory option
     }
 
     type NodeProcessInfo = {
         [<System.Text.Json.Serialization.JsonPropertyName("id")>]
-        Id: Types.Long
+        Id: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("mlockall")>]
         Mlockall: bool
         [<System.Text.Json.Serialization.JsonPropertyName("refresh_interval_in_millis")>]
-        RefreshIntervalInMillis: Types.DurationValue<Types.UnitMillis>
+        RefreshIntervalInMillis: CoreTypes.DurationValue<CoreTypes.UnitMillis>
     }
 
     type NodeInfoSettingsClusterElection = {
         [<System.Text.Json.Serialization.JsonPropertyName("strategy")>]
-        Strategy: Types.Name
+        Strategy: CoreTypes.Name
     }
 
     type NodeInfoSettingsCluster = {
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.Name
+        Name: CoreTypes.Name
         [<System.Text.Json.Serialization.JsonPropertyName("routing")>]
         Routing: IndicesTypes.IndexRouting option
         [<System.Text.Json.Serialization.JsonPropertyName("election")>]
-        Election: NodesInfo.NodeInfoSettingsClusterElection
+        Election: NodeInfoSettingsClusterElection
         [<System.Text.Json.Serialization.JsonPropertyName("initial_master_nodes")>]
         InitialMasterNodes: System.Text.Json.JsonElement option
         [<System.Text.Json.Serialization.JsonPropertyName("deprecation_indexing")>]
-        DeprecationIndexing: NodesInfo.DeprecationIndexing option
+        DeprecationIndexing: DeprecationIndexing option
     }
 
     type NodeInfoSettingsNode = {
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.Name
+        Name: CoreTypes.Name
         [<System.Text.Json.Serialization.JsonPropertyName("attr")>]
         Attr: Map<string, System.Text.Json.JsonElement>
         [<System.Text.Json.Serialization.JsonPropertyName("max_local_storage_nodes")>]
@@ -176,7 +176,7 @@ module NodesInfo =
 
     type NodeInfoRepositories = {
         [<System.Text.Json.Serialization.JsonPropertyName("url")>]
-        Url: NodesInfo.NodeInfoRepositoriesUrl
+        Url: NodeInfoRepositoriesUrl
     }
 
     type NodeInfoDiscover = {
@@ -205,7 +205,7 @@ module NodesInfo =
 
     type NodeInfoSettingsHttp = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
-        Type: NodesInfo.NodeInfoSettingsHttpType
+        Type: NodeInfoSettingsHttpType
         [<System.Text.Json.Serialization.JsonPropertyName("type.default")>]
         TypeDefault: string option
         [<System.Text.Json.Serialization.JsonPropertyName("compression")>]
@@ -231,13 +231,13 @@ module NodesInfo =
 
     type NodeInfoSettingsTransport = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
-        Type: NodesInfo.NodeInfoSettingsTransportType
+        Type: NodeInfoSettingsTransportType
         [<System.Text.Json.Serialization.JsonPropertyName("type.default")>]
         TypeDefault: string option
         [<System.Text.Json.Serialization.JsonPropertyName("features")>]
-        Features: NodesInfo.NodeInfoSettingsTransportFeatures option
+        Features: NodeInfoSettingsTransportFeatures option
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_deserialization_errors")>]
-        IgnoreDeserializationErrors: SpecUtils.Stringified<bool> option
+        IgnoreDeserializationErrors: CoreTypes.Stringified<bool> option
     }
 
     type NodeInfoSettingsNetwork = {
@@ -252,7 +252,7 @@ module NodesInfo =
 
     type NodeInfoXpackLicense = {
         [<System.Text.Json.Serialization.JsonPropertyName("self_generated")>]
-        SelfGenerated: NodesInfo.NodeInfoXpackLicenseType
+        SelfGenerated: NodeInfoXpackLicenseType
     }
 
     type NodeInfoXpackSecuritySsl = {
@@ -269,11 +269,11 @@ module NodesInfo =
 
     type NodeInfoXpackSecurityAuthcRealms = {
         [<System.Text.Json.Serialization.JsonPropertyName("file")>]
-        File: Map<string, NodesInfo.NodeInfoXpackSecurityAuthcRealmsStatus> option
+        File: Map<string, NodeInfoXpackSecurityAuthcRealmsStatus> option
         [<System.Text.Json.Serialization.JsonPropertyName("native")>]
-        Native: Map<string, NodesInfo.NodeInfoXpackSecurityAuthcRealmsStatus> option
+        Native: Map<string, NodeInfoXpackSecurityAuthcRealmsStatus> option
         [<System.Text.Json.Serialization.JsonPropertyName("pki")>]
-        Pki: Map<string, NodesInfo.NodeInfoXpackSecurityAuthcRealmsStatus> option
+        Pki: Map<string, NodeInfoXpackSecurityAuthcRealmsStatus> option
     }
 
     type NodeInfoXpackSecurityAuthcToken = {
@@ -283,20 +283,20 @@ module NodesInfo =
 
     type NodeInfoXpackSecurityAuthc = {
         [<System.Text.Json.Serialization.JsonPropertyName("realms")>]
-        Realms: NodesInfo.NodeInfoXpackSecurityAuthcRealms option
+        Realms: NodeInfoXpackSecurityAuthcRealms option
         [<System.Text.Json.Serialization.JsonPropertyName("token")>]
-        Token: NodesInfo.NodeInfoXpackSecurityAuthcToken option
+        Token: NodeInfoXpackSecurityAuthcToken option
     }
 
     type NodeInfoXpackSecurity = {
         [<System.Text.Json.Serialization.JsonPropertyName("http")>]
-        Http: NodesInfo.NodeInfoXpackSecuritySsl option
+        Http: NodeInfoXpackSecuritySsl option
         [<System.Text.Json.Serialization.JsonPropertyName("enabled")>]
         Enabled: string
         [<System.Text.Json.Serialization.JsonPropertyName("transport")>]
-        Transport: NodesInfo.NodeInfoXpackSecuritySsl option
+        Transport: NodeInfoXpackSecuritySsl option
         [<System.Text.Json.Serialization.JsonPropertyName("authc")>]
-        Authc: NodesInfo.NodeInfoXpackSecurityAuthc option
+        Authc: NodeInfoXpackSecurityAuthc option
     }
 
     type NodeInfoXpackMl = {
@@ -306,13 +306,13 @@ module NodesInfo =
 
     type NodeInfoXpack = {
         [<System.Text.Json.Serialization.JsonPropertyName("license")>]
-        License: NodesInfo.NodeInfoXpackLicense option
+        License: NodeInfoXpackLicense option
         [<System.Text.Json.Serialization.JsonPropertyName("security")>]
-        Security: NodesInfo.NodeInfoXpackSecurity
+        Security: NodeInfoXpackSecurity
         [<System.Text.Json.Serialization.JsonPropertyName("notification")>]
         Notification: Map<string, System.Text.Json.JsonElement> option
         [<System.Text.Json.Serialization.JsonPropertyName("ml")>]
-        Ml: NodesInfo.NodeInfoXpackMl option
+        Ml: NodeInfoXpackMl option
     }
 
     type NodeInfoScript = {
@@ -329,7 +329,7 @@ module NodesInfo =
 
     type NodeInfoSearch = {
         [<System.Text.Json.Serialization.JsonPropertyName("remote")>]
-        Remote: NodesInfo.NodeInfoSearchRemote
+        Remote: NodeInfoSearchRemote
     }
 
     type NodeInfoIngestDownloader = {
@@ -339,124 +339,124 @@ module NodesInfo =
 
     type NodeInfoIngestInfo = {
         [<System.Text.Json.Serialization.JsonPropertyName("downloader")>]
-        Downloader: NodesInfo.NodeInfoIngestDownloader
+        Downloader: NodeInfoIngestDownloader
     }
 
     type NodeInfoSettingsIngest = {
         [<System.Text.Json.Serialization.JsonPropertyName("attachment")>]
-        Attachment: NodesInfo.NodeInfoIngestInfo option
+        Attachment: NodeInfoIngestInfo option
         [<System.Text.Json.Serialization.JsonPropertyName("append")>]
-        Append: NodesInfo.NodeInfoIngestInfo option
+        Append: NodeInfoIngestInfo option
         [<System.Text.Json.Serialization.JsonPropertyName("csv")>]
-        Csv: NodesInfo.NodeInfoIngestInfo option
+        Csv: NodeInfoIngestInfo option
         [<System.Text.Json.Serialization.JsonPropertyName("convert")>]
-        Convert: NodesInfo.NodeInfoIngestInfo option
+        Convert: NodeInfoIngestInfo option
         [<System.Text.Json.Serialization.JsonPropertyName("date")>]
-        Date: NodesInfo.NodeInfoIngestInfo option
+        Date: NodeInfoIngestInfo option
         [<System.Text.Json.Serialization.JsonPropertyName("date_index_name")>]
-        DateIndexName: NodesInfo.NodeInfoIngestInfo option
+        DateIndexName: NodeInfoIngestInfo option
         [<System.Text.Json.Serialization.JsonPropertyName("dot_expander")>]
-        DotExpander: NodesInfo.NodeInfoIngestInfo option
+        DotExpander: NodeInfoIngestInfo option
         [<System.Text.Json.Serialization.JsonPropertyName("enrich")>]
-        Enrich: NodesInfo.NodeInfoIngestInfo option
+        Enrich: NodeInfoIngestInfo option
         [<System.Text.Json.Serialization.JsonPropertyName("fail")>]
-        Fail: NodesInfo.NodeInfoIngestInfo option
+        Fail: NodeInfoIngestInfo option
         [<System.Text.Json.Serialization.JsonPropertyName("foreach")>]
-        Foreach: NodesInfo.NodeInfoIngestInfo option
+        Foreach: NodeInfoIngestInfo option
         [<System.Text.Json.Serialization.JsonPropertyName("json")>]
-        Json: NodesInfo.NodeInfoIngestInfo option
+        Json: NodeInfoIngestInfo option
         [<System.Text.Json.Serialization.JsonPropertyName("user_agent")>]
-        UserAgent: NodesInfo.NodeInfoIngestInfo option
+        UserAgent: NodeInfoIngestInfo option
         [<System.Text.Json.Serialization.JsonPropertyName("kv")>]
-        Kv: NodesInfo.NodeInfoIngestInfo option
+        Kv: NodeInfoIngestInfo option
         [<System.Text.Json.Serialization.JsonPropertyName("geoip")>]
-        Geoip: NodesInfo.NodeInfoIngestInfo option
+        Geoip: NodeInfoIngestInfo option
         [<System.Text.Json.Serialization.JsonPropertyName("grok")>]
-        Grok: NodesInfo.NodeInfoIngestInfo option
+        Grok: NodeInfoIngestInfo option
         [<System.Text.Json.Serialization.JsonPropertyName("gsub")>]
-        Gsub: NodesInfo.NodeInfoIngestInfo option
+        Gsub: NodeInfoIngestInfo option
         [<System.Text.Json.Serialization.JsonPropertyName("join")>]
-        Join: NodesInfo.NodeInfoIngestInfo option
+        Join: NodeInfoIngestInfo option
         [<System.Text.Json.Serialization.JsonPropertyName("lowercase")>]
-        Lowercase: NodesInfo.NodeInfoIngestInfo option
+        Lowercase: NodeInfoIngestInfo option
         [<System.Text.Json.Serialization.JsonPropertyName("remove")>]
-        Remove: NodesInfo.NodeInfoIngestInfo option
+        Remove: NodeInfoIngestInfo option
         [<System.Text.Json.Serialization.JsonPropertyName("rename")>]
-        Rename: NodesInfo.NodeInfoIngestInfo option
+        Rename: NodeInfoIngestInfo option
         [<System.Text.Json.Serialization.JsonPropertyName("script")>]
-        Script: NodesInfo.NodeInfoIngestInfo option
+        Script: NodeInfoIngestInfo option
         [<System.Text.Json.Serialization.JsonPropertyName("set")>]
-        Set: NodesInfo.NodeInfoIngestInfo option
+        Set: NodeInfoIngestInfo option
         [<System.Text.Json.Serialization.JsonPropertyName("sort")>]
-        Sort: NodesInfo.NodeInfoIngestInfo option
+        Sort: NodeInfoIngestInfo option
         [<System.Text.Json.Serialization.JsonPropertyName("split")>]
-        Split: NodesInfo.NodeInfoIngestInfo option
+        Split: NodeInfoIngestInfo option
         [<System.Text.Json.Serialization.JsonPropertyName("trim")>]
-        Trim: NodesInfo.NodeInfoIngestInfo option
+        Trim: NodeInfoIngestInfo option
         [<System.Text.Json.Serialization.JsonPropertyName("uppercase")>]
-        Uppercase: NodesInfo.NodeInfoIngestInfo option
+        Uppercase: NodeInfoIngestInfo option
         [<System.Text.Json.Serialization.JsonPropertyName("urldecode")>]
-        Urldecode: NodesInfo.NodeInfoIngestInfo option
+        Urldecode: NodeInfoIngestInfo option
         [<System.Text.Json.Serialization.JsonPropertyName("bytes")>]
-        Bytes: NodesInfo.NodeInfoIngestInfo option
+        Bytes: NodeInfoIngestInfo option
         [<System.Text.Json.Serialization.JsonPropertyName("dissect")>]
-        Dissect: NodesInfo.NodeInfoIngestInfo option
+        Dissect: NodeInfoIngestInfo option
         [<System.Text.Json.Serialization.JsonPropertyName("set_security_user")>]
-        SetSecurityUser: NodesInfo.NodeInfoIngestInfo option
+        SetSecurityUser: NodeInfoIngestInfo option
         [<System.Text.Json.Serialization.JsonPropertyName("pipeline")>]
-        Pipeline: NodesInfo.NodeInfoIngestInfo option
+        Pipeline: NodeInfoIngestInfo option
         [<System.Text.Json.Serialization.JsonPropertyName("drop")>]
-        Drop: NodesInfo.NodeInfoIngestInfo option
+        Drop: NodeInfoIngestInfo option
         [<System.Text.Json.Serialization.JsonPropertyName("circle")>]
-        Circle: NodesInfo.NodeInfoIngestInfo option
+        Circle: NodeInfoIngestInfo option
         [<System.Text.Json.Serialization.JsonPropertyName("inference")>]
-        Inference: NodesInfo.NodeInfoIngestInfo option
+        Inference: NodeInfoIngestInfo option
     }
 
     type NodeInfoSettings = {
         [<System.Text.Json.Serialization.JsonPropertyName("cluster")>]
-        Cluster: NodesInfo.NodeInfoSettingsCluster
+        Cluster: NodeInfoSettingsCluster
         [<System.Text.Json.Serialization.JsonPropertyName("node")>]
-        Node: NodesInfo.NodeInfoSettingsNode
+        Node: NodeInfoSettingsNode
         [<System.Text.Json.Serialization.JsonPropertyName("path")>]
-        Path: NodesInfo.NodeInfoPath option
+        Path: NodeInfoPath option
         [<System.Text.Json.Serialization.JsonPropertyName("repositories")>]
-        Repositories: NodesInfo.NodeInfoRepositories option
+        Repositories: NodeInfoRepositories option
         [<System.Text.Json.Serialization.JsonPropertyName("discovery")>]
-        Discovery: NodesInfo.NodeInfoDiscover option
+        Discovery: NodeInfoDiscover option
         [<System.Text.Json.Serialization.JsonPropertyName("action")>]
-        Action: NodesInfo.NodeInfoAction option
+        Action: NodeInfoAction option
         [<System.Text.Json.Serialization.JsonPropertyName("client")>]
-        Client: NodesInfo.NodeInfoClient option
+        Client: NodeInfoClient option
         [<System.Text.Json.Serialization.JsonPropertyName("http")>]
-        Http: NodesInfo.NodeInfoSettingsHttp
+        Http: NodeInfoSettingsHttp
         [<System.Text.Json.Serialization.JsonPropertyName("bootstrap")>]
-        Bootstrap: NodesInfo.NodeInfoBootstrap option
+        Bootstrap: NodeInfoBootstrap option
         [<System.Text.Json.Serialization.JsonPropertyName("transport")>]
-        Transport: NodesInfo.NodeInfoSettingsTransport
+        Transport: NodeInfoSettingsTransport
         [<System.Text.Json.Serialization.JsonPropertyName("network")>]
-        Network: NodesInfo.NodeInfoSettingsNetwork option
+        Network: NodeInfoSettingsNetwork option
         [<System.Text.Json.Serialization.JsonPropertyName("xpack")>]
-        Xpack: NodesInfo.NodeInfoXpack option
+        Xpack: NodeInfoXpack option
         [<System.Text.Json.Serialization.JsonPropertyName("script")>]
-        Script: NodesInfo.NodeInfoScript option
+        Script: NodeInfoScript option
         [<System.Text.Json.Serialization.JsonPropertyName("search")>]
-        Search: NodesInfo.NodeInfoSearch option
+        Search: NodeInfoSearch option
         [<System.Text.Json.Serialization.JsonPropertyName("ingest")>]
-        Ingest: NodesInfo.NodeInfoSettingsIngest option
+        Ingest: NodeInfoSettingsIngest option
     }
 
     type NodeThreadPoolInfo = {
         [<System.Text.Json.Serialization.JsonPropertyName("core")>]
-        Core: Types.Integer option
+        Core: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("keep_alive")>]
-        KeepAlive: Types.Duration option
+        KeepAlive: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("max")>]
-        Max: Types.Integer option
+        Max: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("queue_size")>]
-        QueueSize: Types.Integer
+        QueueSize: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("size")>]
-        Size: Types.Integer option
+        Size: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
     }
@@ -477,7 +477,7 @@ module NodesInfo =
 
     type NodeInfoIngest = {
         [<System.Text.Json.Serialization.JsonPropertyName("processors")>]
-        Processors: NodesInfo.NodeInfoIngestProcessor list
+        Processors: NodeInfoIngestProcessor list
     }
 
     type NodeInfoAggregation = {
@@ -487,9 +487,9 @@ module NodesInfo =
 
     type RemoveClusterServer = {
         [<System.Text.Json.Serialization.JsonPropertyName("bound_address")>]
-        BoundAddress: Types.TransportAddress list
+        BoundAddress: CoreTypes.TransportAddress list
         [<System.Text.Json.Serialization.JsonPropertyName("publish_address")>]
-        PublishAddress: Types.TransportAddress
+        PublishAddress: CoreTypes.TransportAddress
     }
 
     type NodeInfo = {
@@ -502,51 +502,51 @@ module NodesInfo =
         [<System.Text.Json.Serialization.JsonPropertyName("build_type")>]
         BuildType: string
         [<System.Text.Json.Serialization.JsonPropertyName("component_versions")>]
-        ComponentVersions: Map<Types.Name, Types.Integer>
+        ComponentVersions: Map<CoreTypes.Name, CoreTypes.Integer>
         [<System.Text.Json.Serialization.JsonPropertyName("host")>]
-        Host: Types.Host
+        Host: CoreTypes.Host
         [<System.Text.Json.Serialization.JsonPropertyName("http")>]
-        Http: NodesInfo.NodeInfoHttp option
+        Http: NodeInfoHttp option
         [<System.Text.Json.Serialization.JsonPropertyName("index_version")>]
-        IndexVersion: Types.VersionNumber
+        IndexVersion: CoreTypes.VersionNumber
         [<System.Text.Json.Serialization.JsonPropertyName("ip")>]
-        Ip: Types.Ip
+        Ip: CoreTypes.Ip
         [<System.Text.Json.Serialization.JsonPropertyName("jvm")>]
-        Jvm: NodesInfo.NodeJvmInfo option
+        Jvm: NodeJvmInfo option
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.Name
+        Name: CoreTypes.Name
         [<System.Text.Json.Serialization.JsonPropertyName("os")>]
-        Os: NodesInfo.NodeOperatingSystemInfo option
+        Os: NodeOperatingSystemInfo option
         [<System.Text.Json.Serialization.JsonPropertyName("plugins")>]
-        Plugins: Types.PluginStats list option
+        Plugins: CoreTypes.PluginStats list option
         [<System.Text.Json.Serialization.JsonPropertyName("process")>]
-        Process: NodesInfo.NodeProcessInfo option
+        Process: NodeProcessInfo option
         [<System.Text.Json.Serialization.JsonPropertyName("roles")>]
-        Roles: Types.NodeRoles
+        Roles: CoreTypes.NodeRoles
         [<System.Text.Json.Serialization.JsonPropertyName("settings")>]
-        Settings: NodesInfo.NodeInfoSettings option
+        Settings: NodeInfoSettings option
         [<System.Text.Json.Serialization.JsonPropertyName("thread_pool")>]
-        ThreadPool: Map<string, NodesInfo.NodeThreadPoolInfo> option
+        ThreadPool: Map<string, NodeThreadPoolInfo> option
         [<System.Text.Json.Serialization.JsonPropertyName("total_indexing_buffer")>]
-        TotalIndexingBuffer: Types.Long option
+        TotalIndexingBuffer: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("total_indexing_buffer_in_bytes")>]
-        TotalIndexingBufferInBytes: Types.ByteSize option
+        TotalIndexingBufferInBytes: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("transport")>]
-        Transport: NodesInfo.NodeInfoTransport option
+        Transport: NodeInfoTransport option
         [<System.Text.Json.Serialization.JsonPropertyName("transport_address")>]
-        TransportAddress: Types.TransportAddress
+        TransportAddress: CoreTypes.TransportAddress
         [<System.Text.Json.Serialization.JsonPropertyName("transport_version")>]
-        TransportVersion: Types.VersionNumber
+        TransportVersion: CoreTypes.VersionNumber
         [<System.Text.Json.Serialization.JsonPropertyName("version")>]
-        Version: Types.VersionString
+        Version: CoreTypes.VersionString
         [<System.Text.Json.Serialization.JsonPropertyName("modules")>]
-        Modules: Types.PluginStats list option
+        Modules: CoreTypes.PluginStats list option
         [<System.Text.Json.Serialization.JsonPropertyName("ingest")>]
-        Ingest: NodesInfo.NodeInfoIngest option
+        Ingest: NodeInfoIngest option
         [<System.Text.Json.Serialization.JsonPropertyName("aggregations")>]
-        Aggregations: Map<string, NodesInfo.NodeInfoAggregation> option
+        Aggregations: Map<string, NodeInfoAggregation> option
         [<System.Text.Json.Serialization.JsonPropertyName("remote_cluster_server")>]
-        RemoteClusterServer: NodesInfo.RemoveClusterServer option
+        RemoteClusterServer: RemoveClusterServer option
     }
 
     [<RequireQualifiedAccess>]
@@ -568,13 +568,13 @@ module NodesInfo =
 
     [<RequireQualifiedAccess>]
     type NodesInfoMetrics =
-        | NodesInfoMetric of NodesInfo.NodesInfoMetric
-        | Array of NodesInfo.NodesInfoMetric list
+        | NodesInfoMetric of NodesInfoMetric
+        | Array of NodesInfoMetric list
 
     type ResponseBase = {
         [<System.Text.Json.Serialization.JsonPropertyName("cluster_name")>]
-        ClusterName: Types.Name
+        ClusterName: CoreTypes.Name
         [<System.Text.Json.Serialization.JsonPropertyName("nodes")>]
-        Nodes: Map<string, NodesInfo.NodeInfo>
+        Nodes: Map<string, NodeInfo>
     }
 

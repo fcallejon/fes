@@ -9,9 +9,9 @@ module CatCount =
 
     type CountRecord = {
         [<System.Text.Json.Serialization.JsonPropertyName("epoch")>]
-        Epoch: SpecUtils.Stringified<Types.EpochTime<Types.UnitSeconds>> option
+        Epoch: CoreTypes.Stringified<CoreTypes.EpochTime<CoreTypes.UnitSeconds>> option
         [<System.Text.Json.Serialization.JsonPropertyName("timestamp")>]
-        Timestamp: Types.TimeOfDay option
+        Timestamp: CoreTypes.TimeOfDay option
         [<System.Text.Json.Serialization.JsonPropertyName("count")>]
         Count: string option
     }

@@ -49,11 +49,11 @@ module SecurityTypesBuilders =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: ApiKey, value: Types.Id) =
+        member _.Id(state: ApiKey, value: CoreTypes.Id) =
             { state with Id = value }
 
         [<CustomOperation("name")>]
-        member _.Name(state: ApiKey, value: Types.Name) =
+        member _.Name(state: ApiKey, value: CoreTypes.Name) =
             { state with Name = value }
 
         [<CustomOperation("type'")>]
@@ -61,11 +61,11 @@ module SecurityTypesBuilders =
             { state with Type = value }
 
         [<CustomOperation("creation")>]
-        member _.Creation(state: ApiKey, value: Types.EpochTime<Types.UnitMillis>) =
+        member _.Creation(state: ApiKey, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
             { state with Creation = value }
 
         [<CustomOperation("expiration")>]
-        member _.Expiration(state: ApiKey, value: Types.EpochTime<Types.UnitMillis>) =
+        member _.Expiration(state: ApiKey, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
             { state with Expiration = Some value }
 
         [<CustomOperation("invalidated")>]
@@ -73,11 +73,11 @@ module SecurityTypesBuilders =
             { state with Invalidated = value }
 
         [<CustomOperation("invalidation")>]
-        member _.Invalidation(state: ApiKey, value: Types.EpochTime<Types.UnitMillis>) =
+        member _.Invalidation(state: ApiKey, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
             { state with Invalidation = Some value }
 
         [<CustomOperation("username")>]
-        member _.Username(state: ApiKey, value: Types.Username) =
+        member _.Username(state: ApiKey, value: CoreTypes.Username) =
             { state with Username = value }
 
         [<CustomOperation("realm")>]
@@ -89,7 +89,7 @@ module SecurityTypesBuilders =
             { state with RealmType = Some value }
 
         [<CustomOperation("metadata")>]
-        member _.Metadata(state: ApiKey, value: Types.Metadata) =
+        member _.Metadata(state: ApiKey, value: CoreTypes.Metadata) =
             { state with Metadata = value }
 
         [<CustomOperation("roleDescriptors")>]
@@ -113,7 +113,7 @@ module SecurityTypesBuilders =
             { state with ProfileUid = Some value }
 
         [<CustomOperation("sort")>]
-        member _.Sort(state: ApiKey, value: Types.SortResults) =
+        member _.Sort(state: ApiKey, value: CoreTypes.SortResults) =
             { state with Sort = Some value }
 
     let apiKey = ApiKeyBuilder()
@@ -126,11 +126,11 @@ module SecurityTypesBuilders =
             }
 
         [<CustomOperation("except")>]
-        member _.Except(state: FieldSecurity, value: Types.Fields) =
+        member _.Except(state: FieldSecurity, value: CoreTypes.Fields) =
             { state with Except = Some value }
 
         [<CustomOperation("grant")>]
-        member _.Grant(state: FieldSecurity, value: Types.Fields) =
+        member _.Grant(state: FieldSecurity, value: CoreTypes.Fields) =
             { state with Grant = Some value }
 
     let fieldSecurity = FieldSecurityBuilder()
@@ -211,7 +211,7 @@ module SecurityTypesBuilders =
             }
 
         [<CustomOperation("clusters")>]
-        member _.Clusters(state: RemoteIndicesPrivileges, value: Types.Names) =
+        member _.Clusters(state: RemoteIndicesPrivileges, value: CoreTypes.Names) =
             { state with Clusters = value }
 
         [<CustomOperation("fieldSecurity")>]
@@ -314,7 +314,7 @@ module SecurityTypesBuilders =
             { state with Applications = Some value }
 
         [<CustomOperation("metadata")>]
-        member _.Metadata(state: RoleDescriptor, value: Types.Metadata) =
+        member _.Metadata(state: RoleDescriptor, value: CoreTypes.Metadata) =
             { state with Metadata = Some value }
 
         [<CustomOperation("runAs")>]
@@ -376,7 +376,7 @@ module SecurityTypesBuilders =
             { state with Applications = Some value }
 
         [<CustomOperation("metadata")>]
-        member _.Metadata(state: RoleDescriptorRead, value: Types.Metadata) =
+        member _.Metadata(state: RoleDescriptorRead, value: CoreTypes.Metadata) =
             { state with Metadata = Some value }
 
         [<CustomOperation("runAs")>]
@@ -412,7 +412,7 @@ module SecurityTypesBuilders =
             { state with Enabled = value }
 
         [<CustomOperation("metadata")>]
-        member _.Metadata(state: RoleMapping, value: Types.Metadata) =
+        member _.Metadata(state: RoleMapping, value: CoreTypes.Metadata) =
             { state with Metadata = value }
 
         [<CustomOperation("roles")>]
@@ -458,7 +458,7 @@ module SecurityTypesBuilders =
             { state with Source = Some value }
 
         [<CustomOperation("id")>]
-        member _.Id(state: RoleTemplateScript, value: Types.Id) =
+        member _.Id(state: RoleTemplateScript, value: CoreTypes.Id) =
             { state with Id = Some value }
 
         [<CustomOperation("params")>]
@@ -466,7 +466,7 @@ module SecurityTypesBuilders =
             { state with Params = Some value }
 
         [<CustomOperation("lang")>]
-        member _.Lang(state: RoleTemplateScript, value: Types.ScriptLanguage) =
+        member _.Lang(state: RoleTemplateScript, value: CoreTypes.ScriptLanguage) =
             { state with Lang = Some value }
 
         [<CustomOperation("options")>]
@@ -528,11 +528,11 @@ module SecurityTypesBuilders =
             { state with Email = Some value }
 
         [<CustomOperation("fullName")>]
-        member _.FullName(state: User, value: Types.Name option) =
+        member _.FullName(state: User, value: CoreTypes.Name option) =
             { state with FullName = Some value }
 
         [<CustomOperation("metadata")>]
-        member _.Metadata(state: User, value: Types.Metadata) =
+        member _.Metadata(state: User, value: CoreTypes.Metadata) =
             { state with Metadata = value }
 
         [<CustomOperation("roles")>]
@@ -540,7 +540,7 @@ module SecurityTypesBuilders =
             { state with Roles = value }
 
         [<CustomOperation("username")>]
-        member _.Username(state: User, value: Types.Username) =
+        member _.Username(state: User, value: CoreTypes.Username) =
             { state with Username = value }
 
         [<CustomOperation("enabled")>]
@@ -633,15 +633,15 @@ module SecurityTypesBuilders =
             { state with Email = Some value }
 
         [<CustomOperation("fullName")>]
-        member _.FullName(state: UserProfileUser, value: Types.Name option) =
+        member _.FullName(state: UserProfileUser, value: CoreTypes.Name option) =
             { state with FullName = Some value }
 
         [<CustomOperation("realmName")>]
-        member _.RealmName(state: UserProfileUser, value: Types.Name) =
+        member _.RealmName(state: UserProfileUser, value: CoreTypes.Name) =
             { state with RealmName = value }
 
         [<CustomOperation("realmDomain")>]
-        member _.RealmDomain(state: UserProfileUser, value: Types.Name) =
+        member _.RealmDomain(state: UserProfileUser, value: CoreTypes.Name) =
             { state with RealmDomain = Some value }
 
         [<CustomOperation("roles")>]
@@ -649,7 +649,7 @@ module SecurityTypesBuilders =
             { state with Roles = value }
 
         [<CustomOperation("username")>]
-        member _.Username(state: UserProfileUser, value: Types.Username) =
+        member _.Username(state: UserProfileUser, value: CoreTypes.Username) =
             { state with Username = value }
 
     let userProfileUser = UserProfileUserBuilder()

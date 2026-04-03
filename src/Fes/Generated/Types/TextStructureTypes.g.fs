@@ -14,26 +14,26 @@ module TextStructureTypes =
 
     type TopHit = {
         [<System.Text.Json.Serialization.JsonPropertyName("count")>]
-        Count: Types.Long
+        Count: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("value")>]
         Value: System.Text.Json.JsonElement
     }
 
     type FieldStat = {
         [<System.Text.Json.Serialization.JsonPropertyName("count")>]
-        Count: Types.Integer
+        Count: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("cardinality")>]
-        Cardinality: Types.Integer
+        Cardinality: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("top_hits")>]
-        TopHits: TextStructureTypes.TopHit list
+        TopHits: TopHit list
         [<System.Text.Json.Serialization.JsonPropertyName("mean_value")>]
-        MeanValue: Types.Integer option
+        MeanValue: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("median_value")>]
-        MedianValue: Types.Integer option
+        MedianValue: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("max_value")>]
-        MaxValue: Types.Integer option
+        MaxValue: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("min_value")>]
-        MinValue: Types.Integer option
+        MinValue: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("earliest")>]
         Earliest: string option
         [<System.Text.Json.Serialization.JsonPropertyName("latest")>]

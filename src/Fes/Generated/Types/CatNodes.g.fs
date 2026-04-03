@@ -9,7 +9,7 @@ module CatNodes =
 
     type NodesRecord = {
         [<System.Text.Json.Serialization.JsonPropertyName("id")>]
-        Id: Types.Id option
+        Id: CoreTypes.Id option
         [<System.Text.Json.Serialization.JsonPropertyName("pid")>]
         Pid: string option
         [<System.Text.Json.Serialization.JsonPropertyName("ip")>]
@@ -19,7 +19,7 @@ module CatNodes =
         [<System.Text.Json.Serialization.JsonPropertyName("http_address")>]
         HttpAddress: string option
         [<System.Text.Json.Serialization.JsonPropertyName("version")>]
-        Version: Types.VersionString option
+        Version: CoreTypes.VersionString option
         [<System.Text.Json.Serialization.JsonPropertyName("flavor")>]
         Flavor: string option
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
@@ -29,29 +29,29 @@ module CatNodes =
         [<System.Text.Json.Serialization.JsonPropertyName("jdk")>]
         Jdk: string option
         [<System.Text.Json.Serialization.JsonPropertyName("disk.total")>]
-        DiskTotal: Types.ByteSize option
+        DiskTotal: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("disk.used")>]
-        DiskUsed: Types.ByteSize option
+        DiskUsed: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("disk.avail")>]
-        DiskAvail: Types.ByteSize option
+        DiskAvail: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("disk.used_percent")>]
-        DiskUsedPercent: Types.Percentage option
+        DiskUsedPercent: CoreTypes.Percentage option
         [<System.Text.Json.Serialization.JsonPropertyName("heap.current")>]
         HeapCurrent: string option
         [<System.Text.Json.Serialization.JsonPropertyName("heap.percent")>]
-        HeapPercent: Types.Percentage option
+        HeapPercent: CoreTypes.Percentage option
         [<System.Text.Json.Serialization.JsonPropertyName("heap.max")>]
         HeapMax: string option
         [<System.Text.Json.Serialization.JsonPropertyName("ram.current")>]
         RamCurrent: string option
         [<System.Text.Json.Serialization.JsonPropertyName("ram.percent")>]
-        RamPercent: Types.Percentage option
+        RamPercent: CoreTypes.Percentage option
         [<System.Text.Json.Serialization.JsonPropertyName("ram.max")>]
         RamMax: string option
         [<System.Text.Json.Serialization.JsonPropertyName("file_desc.current")>]
         FileDescCurrent: string option
         [<System.Text.Json.Serialization.JsonPropertyName("file_desc.percent")>]
-        FileDescPercent: Types.Percentage option
+        FileDescPercent: CoreTypes.Percentage option
         [<System.Text.Json.Serialization.JsonPropertyName("file_desc.max")>]
         FileDescMax: string option
         [<System.Text.Json.Serialization.JsonPropertyName("cpu")>]
@@ -71,7 +71,7 @@ module CatNodes =
         [<System.Text.Json.Serialization.JsonPropertyName("master")>]
         Master: string option
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.Name option
+        Name: CoreTypes.Name option
         [<System.Text.Json.Serialization.JsonPropertyName("completion.size")>]
         CompletionSize: string option
         [<System.Text.Json.Serialization.JsonPropertyName("fielddata.memory_size")>]

@@ -12,7 +12,7 @@ open Fes
 module AsyncSearchOperations =
 
     type AsyncSearchDeleteRequest = {
-        Id: Types.Id
+        Id: CoreTypes.Id
     }
 
         with
@@ -26,7 +26,7 @@ module AsyncSearchOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type AsyncSearchDeleteResponse = Types.AcknowledgedResponseBase
+    type AsyncSearchDeleteResponse = CoreTypes.AcknowledgedResponseBase
 
     type AsyncSearchDeleteRequestBuilder() =
         member _.Yield(_: unit) : AsyncSearchDeleteRequest =
@@ -35,16 +35,16 @@ module AsyncSearchOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: AsyncSearchDeleteRequest, value: Types.Id) =
+        member _.Id(state: AsyncSearchDeleteRequest, value: CoreTypes.Id) =
             { state with Id = value }
 
     let asyncSearchDeleteRequest = AsyncSearchDeleteRequestBuilder()
 
     type AsyncSearchGetRequest = {
-        Id: Types.Id
-        KeepAlive: Types.Duration option
+        Id: CoreTypes.Id
+        KeepAlive: CoreTypes.Duration option
         TypedKeys: bool option
-        WaitForCompletionTimeout: Types.Duration option
+        WaitForCompletionTimeout: CoreTypes.Duration option
         ReturnIntermediateResults: bool option
     }
 
@@ -82,11 +82,11 @@ module AsyncSearchOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: AsyncSearchGetRequest, value: Types.Id) =
+        member _.Id(state: AsyncSearchGetRequest, value: CoreTypes.Id) =
             { state with Id = value }
 
         [<CustomOperation("keepAlive")>]
-        member _.KeepAlive(state: AsyncSearchGetRequest, value: Types.Duration) =
+        member _.KeepAlive(state: AsyncSearchGetRequest, value: CoreTypes.Duration) =
             { state with KeepAlive = Some value }
 
         [<CustomOperation("typedKeys")>]
@@ -94,7 +94,7 @@ module AsyncSearchOperations =
             { state with TypedKeys = Some value }
 
         [<CustomOperation("waitForCompletionTimeout")>]
-        member _.WaitForCompletionTimeout(state: AsyncSearchGetRequest, value: Types.Duration) =
+        member _.WaitForCompletionTimeout(state: AsyncSearchGetRequest, value: CoreTypes.Duration) =
             { state with WaitForCompletionTimeout = Some value }
 
         [<CustomOperation("returnIntermediateResults")>]
@@ -104,18 +104,18 @@ module AsyncSearchOperations =
     let asyncSearchGetRequest = AsyncSearchGetRequestBuilder()
 
     module Get =
-        let withKeepAlive (value: Types.Duration) (req: AsyncSearchGetRequest) =
+        let withKeepAlive (value: CoreTypes.Duration) (req: AsyncSearchGetRequest) =
             { req with KeepAlive = Some value }
         let withTypedKeys (value: bool) (req: AsyncSearchGetRequest) =
             { req with TypedKeys = Some value }
-        let withWaitForCompletionTimeout (value: Types.Duration) (req: AsyncSearchGetRequest) =
+        let withWaitForCompletionTimeout (value: CoreTypes.Duration) (req: AsyncSearchGetRequest) =
             { req with WaitForCompletionTimeout = Some value }
         let withReturnIntermediateResults (value: bool) (req: AsyncSearchGetRequest) =
             { req with ReturnIntermediateResults = Some value }
 
     type AsyncSearchStatusRequest = {
-        Id: Types.Id
-        KeepAlive: Types.Duration option
+        Id: CoreTypes.Id
+        KeepAlive: CoreTypes.Duration option
     }
 
         with
@@ -146,97 +146,97 @@ module AsyncSearchOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: AsyncSearchStatusRequest, value: Types.Id) =
+        member _.Id(state: AsyncSearchStatusRequest, value: CoreTypes.Id) =
             { state with Id = value }
 
         [<CustomOperation("keepAlive")>]
-        member _.KeepAlive(state: AsyncSearchStatusRequest, value: Types.Duration) =
+        member _.KeepAlive(state: AsyncSearchStatusRequest, value: CoreTypes.Duration) =
             { state with KeepAlive = Some value }
 
     let asyncSearchStatusRequest = AsyncSearchStatusRequestBuilder()
 
     module Status =
-        let withKeepAlive (value: Types.Duration) (req: AsyncSearchStatusRequest) =
+        let withKeepAlive (value: CoreTypes.Duration) (req: AsyncSearchStatusRequest) =
             { req with KeepAlive = Some value }
 
     type AsyncSearchSubmitRequest = {
-        Index: Types.Indices
-        WaitForCompletionTimeout: Types.Duration option
-        KeepAlive: Types.Duration option
+        Index: CoreTypes.Indices
+        WaitForCompletionTimeout: CoreTypes.Duration option
+        KeepAlive: CoreTypes.Duration option
         KeepOnCompletion: bool option
         AllowNoIndices: bool option
         AllowPartialSearchResults: bool option
         Analyzer: string option
         AnalyzeWildcard: bool option
-        BatchedReduceSize: Types.Long option
+        BatchedReduceSize: CoreTypes.Long option
         CcsMinimizeRoundtrips: bool option
-        DefaultOperator: TypesQueryDsl.Operator option
+        DefaultOperator: CoreTypes.Operator option
         Df: string option
-        DocvalueFields: Types.Fields option
-        ExpandWildcards: Types.ExpandWildcards option
+        DocvalueFields: CoreTypes.Fields option
+        ExpandWildcards: CoreTypes.ExpandWildcards option
         Explain: bool option
         IgnoreThrottled: bool option
         IgnoreUnavailable: bool option
         Lenient: bool option
-        MaxConcurrentShardRequests: Types.Integer option
+        MaxConcurrentShardRequests: CoreTypes.Integer option
         Preference: string option
         RequestCache: bool option
-        Routing: Types.Routing option
-        SearchType: Types.SearchType option
+        Routing: CoreTypes.Routing option
+        SearchType: CoreTypes.SearchType option
         Stats: string list option
-        StoredFields: Types.Fields option
-        SuggestField: Types.Field option
-        SuggestMode: Types.SuggestMode option
-        SuggestSize: Types.Long option
+        StoredFields: CoreTypes.Fields option
+        SuggestField: CoreTypes.Field option
+        SuggestMode: CoreTypes.SuggestMode option
+        SuggestSize: CoreTypes.Long option
         SuggestText: string option
-        TerminateAfter: Types.Long option
-        Timeout: Types.Duration option
+        TerminateAfter: CoreTypes.Long option
+        Timeout: CoreTypes.Duration option
         TrackTotalHits: GlobalSearchTypes.TrackHits option
         TrackScores: bool option
         TypedKeys: bool option
         RestTotalHitsAsInt: bool option
         Version: bool option
         Source: GlobalSearchTypes.SourceConfigParam option
-        SourceExcludes: Types.Fields option
-        SourceIncludes: Types.Fields option
+        SourceExcludes: CoreTypes.Fields option
+        SourceIncludes: CoreTypes.Fields option
         SeqNoPrimaryTerm: bool option
         Q: string option
-        Size: Types.Integer option
-        From: Types.Integer option
+        Size: CoreTypes.Integer option
+        From: CoreTypes.Integer option
         Sort: System.Text.Json.JsonElement option
-        Aggregations: Map<string, TypesAggregations.AggregationContainer> option
+        Aggregations: Map<string, CoreTypes.AggregationContainer> option
         Collapse: GlobalSearchTypes.FieldCollapse option
         Explain: bool option
         Ext: Map<string, System.Text.Json.JsonElement> option
-        From: Types.Integer option
+        From: CoreTypes.Integer option
         Highlight: GlobalSearchTypes.Highlight option
         TrackTotalHits: GlobalSearchTypes.TrackHits option
-        IndicesBoost: Map<Types.IndexName, Types.Double> list option
-        DocvalueFields: TypesQueryDsl.FieldAndFormat list option
+        IndicesBoost: Map<CoreTypes.IndexName, CoreTypes.Double> list option
+        DocvalueFields: CoreTypes.FieldAndFormat list option
         Knn: System.Text.Json.JsonElement option
-        MinScore: Types.Double option
-        PostFilter: TypesQueryDsl.QueryContainer option
+        MinScore: CoreTypes.Double option
+        PostFilter: CoreTypes.QueryContainer option
         Profile: bool option
-        Query: TypesQueryDsl.QueryContainer option
+        Query: CoreTypes.QueryContainer option
         Rescore: System.Text.Json.JsonElement option
-        ScriptFields: Map<string, Types.ScriptField> option
-        SearchAfter: Types.SortResults option
-        Size: Types.Integer option
-        Slice: Types.SlicedScroll option
-        Sort: Types.Sort option
+        ScriptFields: Map<string, CoreTypes.ScriptField> option
+        SearchAfter: CoreTypes.SortResults option
+        Size: CoreTypes.Integer option
+        Slice: CoreTypes.SlicedScroll option
+        Sort: CoreTypes.Sort option
         Source: GlobalSearchTypes.SourceConfig option
-        Fields: TypesQueryDsl.FieldAndFormat list option
+        Fields: CoreTypes.FieldAndFormat list option
         Suggest: GlobalSearchTypes.Suggester option
-        TerminateAfter: Types.Long option
+        TerminateAfter: CoreTypes.Long option
         Timeout: string option
         TrackScores: bool option
         Version: bool option
         SeqNoPrimaryTerm: bool option
-        StoredFields: Types.Fields option
+        StoredFields: CoreTypes.Fields option
         Pit: GlobalSearchTypes.PointInTimeReference option
-        RuntimeMappings: TypesMapping.RuntimeFields option
+        RuntimeMappings: CoreTypes.RuntimeFields option
         Stats: string list option
-        ProjectRouting: Types.ProjectRouting option
+        ProjectRouting: CoreTypes.ProjectRouting option
     }
 
         with
@@ -385,15 +385,15 @@ module AsyncSearchOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: AsyncSearchSubmitRequest, value: Types.Indices) =
+        member _.Index(state: AsyncSearchSubmitRequest, value: CoreTypes.Indices) =
             { state with Index = value }
 
         [<CustomOperation("waitForCompletionTimeout")>]
-        member _.WaitForCompletionTimeout(state: AsyncSearchSubmitRequest, value: Types.Duration) =
+        member _.WaitForCompletionTimeout(state: AsyncSearchSubmitRequest, value: CoreTypes.Duration) =
             { state with WaitForCompletionTimeout = Some value }
 
         [<CustomOperation("keepAlive")>]
-        member _.KeepAlive(state: AsyncSearchSubmitRequest, value: Types.Duration) =
+        member _.KeepAlive(state: AsyncSearchSubmitRequest, value: CoreTypes.Duration) =
             { state with KeepAlive = Some value }
 
         [<CustomOperation("keepOnCompletion")>]
@@ -417,7 +417,7 @@ module AsyncSearchOperations =
             { state with AnalyzeWildcard = Some value }
 
         [<CustomOperation("batchedReduceSize")>]
-        member _.BatchedReduceSize(state: AsyncSearchSubmitRequest, value: Types.Long) =
+        member _.BatchedReduceSize(state: AsyncSearchSubmitRequest, value: CoreTypes.Long) =
             { state with BatchedReduceSize = Some value }
 
         [<CustomOperation("ccsMinimizeRoundtrips")>]
@@ -425,7 +425,7 @@ module AsyncSearchOperations =
             { state with CcsMinimizeRoundtrips = Some value }
 
         [<CustomOperation("defaultOperator")>]
-        member _.DefaultOperator(state: AsyncSearchSubmitRequest, value: TypesQueryDsl.Operator) =
+        member _.DefaultOperator(state: AsyncSearchSubmitRequest, value: CoreTypes.Operator) =
             { state with DefaultOperator = Some value }
 
         [<CustomOperation("df")>]
@@ -433,11 +433,11 @@ module AsyncSearchOperations =
             { state with Df = Some value }
 
         [<CustomOperation("docvalueFields")>]
-        member _.DocvalueFields(state: AsyncSearchSubmitRequest, value: Types.Fields) =
+        member _.DocvalueFields(state: AsyncSearchSubmitRequest, value: CoreTypes.Fields) =
             { state with DocvalueFields = Some value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: AsyncSearchSubmitRequest, value: Types.ExpandWildcards) =
+        member _.ExpandWildcards(state: AsyncSearchSubmitRequest, value: CoreTypes.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("explain")>]
@@ -457,7 +457,7 @@ module AsyncSearchOperations =
             { state with Lenient = Some value }
 
         [<CustomOperation("maxConcurrentShardRequests")>]
-        member _.MaxConcurrentShardRequests(state: AsyncSearchSubmitRequest, value: Types.Integer) =
+        member _.MaxConcurrentShardRequests(state: AsyncSearchSubmitRequest, value: CoreTypes.Integer) =
             { state with MaxConcurrentShardRequests = Some value }
 
         [<CustomOperation("preference")>]
@@ -469,11 +469,11 @@ module AsyncSearchOperations =
             { state with RequestCache = Some value }
 
         [<CustomOperation("routing")>]
-        member _.Routing(state: AsyncSearchSubmitRequest, value: Types.Routing) =
+        member _.Routing(state: AsyncSearchSubmitRequest, value: CoreTypes.Routing) =
             { state with Routing = Some value }
 
         [<CustomOperation("searchType")>]
-        member _.SearchType(state: AsyncSearchSubmitRequest, value: Types.SearchType) =
+        member _.SearchType(state: AsyncSearchSubmitRequest, value: CoreTypes.SearchType) =
             { state with SearchType = Some value }
 
         [<CustomOperation("stats")>]
@@ -481,19 +481,19 @@ module AsyncSearchOperations =
             { state with Stats = Some value }
 
         [<CustomOperation("storedFields")>]
-        member _.StoredFields(state: AsyncSearchSubmitRequest, value: Types.Fields) =
+        member _.StoredFields(state: AsyncSearchSubmitRequest, value: CoreTypes.Fields) =
             { state with StoredFields = Some value }
 
         [<CustomOperation("suggestField")>]
-        member _.SuggestField(state: AsyncSearchSubmitRequest, value: Types.Field) =
+        member _.SuggestField(state: AsyncSearchSubmitRequest, value: CoreTypes.Field) =
             { state with SuggestField = Some value }
 
         [<CustomOperation("suggestMode")>]
-        member _.SuggestMode(state: AsyncSearchSubmitRequest, value: Types.SuggestMode) =
+        member _.SuggestMode(state: AsyncSearchSubmitRequest, value: CoreTypes.SuggestMode) =
             { state with SuggestMode = Some value }
 
         [<CustomOperation("suggestSize")>]
-        member _.SuggestSize(state: AsyncSearchSubmitRequest, value: Types.Long) =
+        member _.SuggestSize(state: AsyncSearchSubmitRequest, value: CoreTypes.Long) =
             { state with SuggestSize = Some value }
 
         [<CustomOperation("suggestText")>]
@@ -501,11 +501,11 @@ module AsyncSearchOperations =
             { state with SuggestText = Some value }
 
         [<CustomOperation("terminateAfter")>]
-        member _.TerminateAfter(state: AsyncSearchSubmitRequest, value: Types.Long) =
+        member _.TerminateAfter(state: AsyncSearchSubmitRequest, value: CoreTypes.Long) =
             { state with TerminateAfter = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: AsyncSearchSubmitRequest, value: Types.Duration) =
+        member _.Timeout(state: AsyncSearchSubmitRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("trackTotalHits")>]
@@ -533,11 +533,11 @@ module AsyncSearchOperations =
             { state with Source = Some value }
 
         [<CustomOperation("sourceExcludes")>]
-        member _.SourceExcludes(state: AsyncSearchSubmitRequest, value: Types.Fields) =
+        member _.SourceExcludes(state: AsyncSearchSubmitRequest, value: CoreTypes.Fields) =
             { state with SourceExcludes = Some value }
 
         [<CustomOperation("sourceIncludes")>]
-        member _.SourceIncludes(state: AsyncSearchSubmitRequest, value: Types.Fields) =
+        member _.SourceIncludes(state: AsyncSearchSubmitRequest, value: CoreTypes.Fields) =
             { state with SourceIncludes = Some value }
 
         [<CustomOperation("seqNoPrimaryTerm")>]
@@ -549,11 +549,11 @@ module AsyncSearchOperations =
             { state with Q = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: AsyncSearchSubmitRequest, value: Types.Integer) =
+        member _.Size(state: AsyncSearchSubmitRequest, value: CoreTypes.Integer) =
             { state with Size = Some value }
 
         [<CustomOperation("from")>]
-        member _.From(state: AsyncSearchSubmitRequest, value: Types.Integer) =
+        member _.From(state: AsyncSearchSubmitRequest, value: CoreTypes.Integer) =
             { state with From = Some value }
 
         [<CustomOperation("sort")>]
@@ -561,7 +561,7 @@ module AsyncSearchOperations =
             { state with Sort = Some value }
 
         [<CustomOperation("aggregations")>]
-        member _.Aggregations(state: AsyncSearchSubmitRequest, value: Map<string, TypesAggregations.AggregationContainer>) =
+        member _.Aggregations(state: AsyncSearchSubmitRequest, value: Map<string, CoreTypes.AggregationContainer>) =
             { state with Aggregations = Some value }
 
         [<CustomOperation("collapse")>]
@@ -577,7 +577,7 @@ module AsyncSearchOperations =
             { state with Ext = Some value }
 
         [<CustomOperation("from")>]
-        member _.From(state: AsyncSearchSubmitRequest, value: Types.Integer) =
+        member _.From(state: AsyncSearchSubmitRequest, value: CoreTypes.Integer) =
             { state with From = Some value }
 
         [<CustomOperation("highlight")>]
@@ -589,11 +589,11 @@ module AsyncSearchOperations =
             { state with TrackTotalHits = Some value }
 
         [<CustomOperation("indicesBoost")>]
-        member _.IndicesBoost(state: AsyncSearchSubmitRequest, value: Map<Types.IndexName, Types.Double> list) =
+        member _.IndicesBoost(state: AsyncSearchSubmitRequest, value: Map<CoreTypes.IndexName, CoreTypes.Double> list) =
             { state with IndicesBoost = Some value }
 
         [<CustomOperation("docvalueFields")>]
-        member _.DocvalueFields(state: AsyncSearchSubmitRequest, value: TypesQueryDsl.FieldAndFormat list) =
+        member _.DocvalueFields(state: AsyncSearchSubmitRequest, value: CoreTypes.FieldAndFormat list) =
             { state with DocvalueFields = Some value }
 
         [<CustomOperation("knn")>]
@@ -601,11 +601,11 @@ module AsyncSearchOperations =
             { state with Knn = Some value }
 
         [<CustomOperation("minScore")>]
-        member _.MinScore(state: AsyncSearchSubmitRequest, value: Types.Double) =
+        member _.MinScore(state: AsyncSearchSubmitRequest, value: CoreTypes.Double) =
             { state with MinScore = Some value }
 
         [<CustomOperation("postFilter")>]
-        member _.PostFilter(state: AsyncSearchSubmitRequest, value: TypesQueryDsl.QueryContainer) =
+        member _.PostFilter(state: AsyncSearchSubmitRequest, value: CoreTypes.QueryContainer) =
             { state with PostFilter = Some value }
 
         [<CustomOperation("profile")>]
@@ -613,7 +613,7 @@ module AsyncSearchOperations =
             { state with Profile = Some value }
 
         [<CustomOperation("query")>]
-        member _.Query(state: AsyncSearchSubmitRequest, value: TypesQueryDsl.QueryContainer) =
+        member _.Query(state: AsyncSearchSubmitRequest, value: CoreTypes.QueryContainer) =
             { state with Query = Some value }
 
         [<CustomOperation("rescore")>]
@@ -621,23 +621,23 @@ module AsyncSearchOperations =
             { state with Rescore = Some value }
 
         [<CustomOperation("scriptFields")>]
-        member _.ScriptFields(state: AsyncSearchSubmitRequest, value: Map<string, Types.ScriptField>) =
+        member _.ScriptFields(state: AsyncSearchSubmitRequest, value: Map<string, CoreTypes.ScriptField>) =
             { state with ScriptFields = Some value }
 
         [<CustomOperation("searchAfter")>]
-        member _.SearchAfter(state: AsyncSearchSubmitRequest, value: Types.SortResults) =
+        member _.SearchAfter(state: AsyncSearchSubmitRequest, value: CoreTypes.SortResults) =
             { state with SearchAfter = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: AsyncSearchSubmitRequest, value: Types.Integer) =
+        member _.Size(state: AsyncSearchSubmitRequest, value: CoreTypes.Integer) =
             { state with Size = Some value }
 
         [<CustomOperation("slice")>]
-        member _.Slice(state: AsyncSearchSubmitRequest, value: Types.SlicedScroll) =
+        member _.Slice(state: AsyncSearchSubmitRequest, value: CoreTypes.SlicedScroll) =
             { state with Slice = Some value }
 
         [<CustomOperation("sort")>]
-        member _.Sort(state: AsyncSearchSubmitRequest, value: Types.Sort) =
+        member _.Sort(state: AsyncSearchSubmitRequest, value: CoreTypes.Sort) =
             { state with Sort = Some value }
 
         [<CustomOperation("source")>]
@@ -645,7 +645,7 @@ module AsyncSearchOperations =
             { state with Source = Some value }
 
         [<CustomOperation("fields")>]
-        member _.Fields(state: AsyncSearchSubmitRequest, value: TypesQueryDsl.FieldAndFormat list) =
+        member _.Fields(state: AsyncSearchSubmitRequest, value: CoreTypes.FieldAndFormat list) =
             { state with Fields = Some value }
 
         [<CustomOperation("suggest")>]
@@ -653,7 +653,7 @@ module AsyncSearchOperations =
             { state with Suggest = Some value }
 
         [<CustomOperation("terminateAfter")>]
-        member _.TerminateAfter(state: AsyncSearchSubmitRequest, value: Types.Long) =
+        member _.TerminateAfter(state: AsyncSearchSubmitRequest, value: CoreTypes.Long) =
             { state with TerminateAfter = Some value }
 
         [<CustomOperation("timeout")>]
@@ -673,7 +673,7 @@ module AsyncSearchOperations =
             { state with SeqNoPrimaryTerm = Some value }
 
         [<CustomOperation("storedFields")>]
-        member _.StoredFields(state: AsyncSearchSubmitRequest, value: Types.Fields) =
+        member _.StoredFields(state: AsyncSearchSubmitRequest, value: CoreTypes.Fields) =
             { state with StoredFields = Some value }
 
         [<CustomOperation("pit")>]
@@ -681,7 +681,7 @@ module AsyncSearchOperations =
             { state with Pit = Some value }
 
         [<CustomOperation("runtimeMappings")>]
-        member _.RuntimeMappings(state: AsyncSearchSubmitRequest, value: TypesMapping.RuntimeFields) =
+        member _.RuntimeMappings(state: AsyncSearchSubmitRequest, value: CoreTypes.RuntimeFields) =
             { state with RuntimeMappings = Some value }
 
         [<CustomOperation("stats")>]
@@ -689,15 +689,15 @@ module AsyncSearchOperations =
             { state with Stats = Some value }
 
         [<CustomOperation("projectRouting")>]
-        member _.ProjectRouting(state: AsyncSearchSubmitRequest, value: Types.ProjectRouting) =
+        member _.ProjectRouting(state: AsyncSearchSubmitRequest, value: CoreTypes.ProjectRouting) =
             { state with ProjectRouting = Some value }
 
     let asyncSearchSubmitRequest = AsyncSearchSubmitRequestBuilder()
 
     module Submit =
-        let withWaitForCompletionTimeout (value: Types.Duration) (req: AsyncSearchSubmitRequest) =
+        let withWaitForCompletionTimeout (value: CoreTypes.Duration) (req: AsyncSearchSubmitRequest) =
             { req with WaitForCompletionTimeout = Some value }
-        let withKeepAlive (value: Types.Duration) (req: AsyncSearchSubmitRequest) =
+        let withKeepAlive (value: CoreTypes.Duration) (req: AsyncSearchSubmitRequest) =
             { req with KeepAlive = Some value }
         let withKeepOnCompletion (value: bool) (req: AsyncSearchSubmitRequest) =
             { req with KeepOnCompletion = Some value }
@@ -709,17 +709,17 @@ module AsyncSearchOperations =
             { req with Analyzer = Some value }
         let withAnalyzeWildcard (value: bool) (req: AsyncSearchSubmitRequest) =
             { req with AnalyzeWildcard = Some value }
-        let withBatchedReduceSize (value: Types.Long) (req: AsyncSearchSubmitRequest) =
+        let withBatchedReduceSize (value: CoreTypes.Long) (req: AsyncSearchSubmitRequest) =
             { req with BatchedReduceSize = Some value }
         let withCcsMinimizeRoundtrips (value: bool) (req: AsyncSearchSubmitRequest) =
             { req with CcsMinimizeRoundtrips = Some value }
-        let withDefaultOperator (value: TypesQueryDsl.Operator) (req: AsyncSearchSubmitRequest) =
+        let withDefaultOperator (value: CoreTypes.Operator) (req: AsyncSearchSubmitRequest) =
             { req with DefaultOperator = Some value }
         let withDf (value: string) (req: AsyncSearchSubmitRequest) =
             { req with Df = Some value }
-        let withDocvalueFields (value: Types.Fields) (req: AsyncSearchSubmitRequest) =
+        let withDocvalueFields (value: CoreTypes.Fields) (req: AsyncSearchSubmitRequest) =
             { req with DocvalueFields = Some value }
-        let withExpandWildcards (value: Types.ExpandWildcards) (req: AsyncSearchSubmitRequest) =
+        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: AsyncSearchSubmitRequest) =
             { req with ExpandWildcards = Some value }
         let withExplain (value: bool) (req: AsyncSearchSubmitRequest) =
             { req with Explain = Some value }
@@ -729,31 +729,31 @@ module AsyncSearchOperations =
             { req with IgnoreUnavailable = Some value }
         let withLenient (value: bool) (req: AsyncSearchSubmitRequest) =
             { req with Lenient = Some value }
-        let withMaxConcurrentShardRequests (value: Types.Integer) (req: AsyncSearchSubmitRequest) =
+        let withMaxConcurrentShardRequests (value: CoreTypes.Integer) (req: AsyncSearchSubmitRequest) =
             { req with MaxConcurrentShardRequests = Some value }
         let withPreference (value: string) (req: AsyncSearchSubmitRequest) =
             { req with Preference = Some value }
         let withRequestCache (value: bool) (req: AsyncSearchSubmitRequest) =
             { req with RequestCache = Some value }
-        let withRouting (value: Types.Routing) (req: AsyncSearchSubmitRequest) =
+        let withRouting (value: CoreTypes.Routing) (req: AsyncSearchSubmitRequest) =
             { req with Routing = Some value }
-        let withSearchType (value: Types.SearchType) (req: AsyncSearchSubmitRequest) =
+        let withSearchType (value: CoreTypes.SearchType) (req: AsyncSearchSubmitRequest) =
             { req with SearchType = Some value }
         let withStats (value: string list) (req: AsyncSearchSubmitRequest) =
             { req with Stats = Some value }
-        let withStoredFields (value: Types.Fields) (req: AsyncSearchSubmitRequest) =
+        let withStoredFields (value: CoreTypes.Fields) (req: AsyncSearchSubmitRequest) =
             { req with StoredFields = Some value }
-        let withSuggestField (value: Types.Field) (req: AsyncSearchSubmitRequest) =
+        let withSuggestField (value: CoreTypes.Field) (req: AsyncSearchSubmitRequest) =
             { req with SuggestField = Some value }
-        let withSuggestMode (value: Types.SuggestMode) (req: AsyncSearchSubmitRequest) =
+        let withSuggestMode (value: CoreTypes.SuggestMode) (req: AsyncSearchSubmitRequest) =
             { req with SuggestMode = Some value }
-        let withSuggestSize (value: Types.Long) (req: AsyncSearchSubmitRequest) =
+        let withSuggestSize (value: CoreTypes.Long) (req: AsyncSearchSubmitRequest) =
             { req with SuggestSize = Some value }
         let withSuggestText (value: string) (req: AsyncSearchSubmitRequest) =
             { req with SuggestText = Some value }
-        let withTerminateAfter (value: Types.Long) (req: AsyncSearchSubmitRequest) =
+        let withTerminateAfter (value: CoreTypes.Long) (req: AsyncSearchSubmitRequest) =
             { req with TerminateAfter = Some value }
-        let withTimeout (value: Types.Duration) (req: AsyncSearchSubmitRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: AsyncSearchSubmitRequest) =
             { req with Timeout = Some value }
         let withTrackTotalHits (value: GlobalSearchTypes.TrackHits) (req: AsyncSearchSubmitRequest) =
             { req with TrackTotalHits = Some value }
@@ -767,21 +767,21 @@ module AsyncSearchOperations =
             { req with Version = Some value }
         let withSource (value: GlobalSearchTypes.SourceConfigParam) (req: AsyncSearchSubmitRequest) =
             { req with Source = Some value }
-        let withSourceExcludes (value: Types.Fields) (req: AsyncSearchSubmitRequest) =
+        let withSourceExcludes (value: CoreTypes.Fields) (req: AsyncSearchSubmitRequest) =
             { req with SourceExcludes = Some value }
-        let withSourceIncludes (value: Types.Fields) (req: AsyncSearchSubmitRequest) =
+        let withSourceIncludes (value: CoreTypes.Fields) (req: AsyncSearchSubmitRequest) =
             { req with SourceIncludes = Some value }
         let withSeqNoPrimaryTerm (value: bool) (req: AsyncSearchSubmitRequest) =
             { req with SeqNoPrimaryTerm = Some value }
         let withQ (value: string) (req: AsyncSearchSubmitRequest) =
             { req with Q = Some value }
-        let withSize (value: Types.Integer) (req: AsyncSearchSubmitRequest) =
+        let withSize (value: CoreTypes.Integer) (req: AsyncSearchSubmitRequest) =
             { req with Size = Some value }
-        let withFrom (value: Types.Integer) (req: AsyncSearchSubmitRequest) =
+        let withFrom (value: CoreTypes.Integer) (req: AsyncSearchSubmitRequest) =
             { req with From = Some value }
         let withSort (value: System.Text.Json.JsonElement) (req: AsyncSearchSubmitRequest) =
             { req with Sort = Some value }
-        let withAggregations (value: Map<string, TypesAggregations.AggregationContainer>) (req: AsyncSearchSubmitRequest) =
+        let withAggregations (value: Map<string, CoreTypes.AggregationContainer>) (req: AsyncSearchSubmitRequest) =
             { req with Aggregations = Some value }
         let withCollapse (value: GlobalSearchTypes.FieldCollapse) (req: AsyncSearchSubmitRequest) =
             { req with Collapse = Some value }
@@ -789,45 +789,45 @@ module AsyncSearchOperations =
             { req with Explain = Some value }
         let withExt (value: Map<string, System.Text.Json.JsonElement>) (req: AsyncSearchSubmitRequest) =
             { req with Ext = Some value }
-        let withFrom (value: Types.Integer) (req: AsyncSearchSubmitRequest) =
+        let withFrom (value: CoreTypes.Integer) (req: AsyncSearchSubmitRequest) =
             { req with From = Some value }
         let withHighlight (value: GlobalSearchTypes.Highlight) (req: AsyncSearchSubmitRequest) =
             { req with Highlight = Some value }
         let withTrackTotalHits (value: GlobalSearchTypes.TrackHits) (req: AsyncSearchSubmitRequest) =
             { req with TrackTotalHits = Some value }
-        let withIndicesBoost (value: Map<Types.IndexName, Types.Double> list) (req: AsyncSearchSubmitRequest) =
+        let withIndicesBoost (value: Map<CoreTypes.IndexName, CoreTypes.Double> list) (req: AsyncSearchSubmitRequest) =
             { req with IndicesBoost = Some value }
-        let withDocvalueFields (value: TypesQueryDsl.FieldAndFormat list) (req: AsyncSearchSubmitRequest) =
+        let withDocvalueFields (value: CoreTypes.FieldAndFormat list) (req: AsyncSearchSubmitRequest) =
             { req with DocvalueFields = Some value }
         let withKnn (value: System.Text.Json.JsonElement) (req: AsyncSearchSubmitRequest) =
             { req with Knn = Some value }
-        let withMinScore (value: Types.Double) (req: AsyncSearchSubmitRequest) =
+        let withMinScore (value: CoreTypes.Double) (req: AsyncSearchSubmitRequest) =
             { req with MinScore = Some value }
-        let withPostFilter (value: TypesQueryDsl.QueryContainer) (req: AsyncSearchSubmitRequest) =
+        let withPostFilter (value: CoreTypes.QueryContainer) (req: AsyncSearchSubmitRequest) =
             { req with PostFilter = Some value }
         let withProfile (value: bool) (req: AsyncSearchSubmitRequest) =
             { req with Profile = Some value }
-        let withQuery (value: TypesQueryDsl.QueryContainer) (req: AsyncSearchSubmitRequest) =
+        let withQuery (value: CoreTypes.QueryContainer) (req: AsyncSearchSubmitRequest) =
             { req with Query = Some value }
         let withRescore (value: System.Text.Json.JsonElement) (req: AsyncSearchSubmitRequest) =
             { req with Rescore = Some value }
-        let withScriptFields (value: Map<string, Types.ScriptField>) (req: AsyncSearchSubmitRequest) =
+        let withScriptFields (value: Map<string, CoreTypes.ScriptField>) (req: AsyncSearchSubmitRequest) =
             { req with ScriptFields = Some value }
-        let withSearchAfter (value: Types.SortResults) (req: AsyncSearchSubmitRequest) =
+        let withSearchAfter (value: CoreTypes.SortResults) (req: AsyncSearchSubmitRequest) =
             { req with SearchAfter = Some value }
-        let withSize (value: Types.Integer) (req: AsyncSearchSubmitRequest) =
+        let withSize (value: CoreTypes.Integer) (req: AsyncSearchSubmitRequest) =
             { req with Size = Some value }
-        let withSlice (value: Types.SlicedScroll) (req: AsyncSearchSubmitRequest) =
+        let withSlice (value: CoreTypes.SlicedScroll) (req: AsyncSearchSubmitRequest) =
             { req with Slice = Some value }
-        let withSort (value: Types.Sort) (req: AsyncSearchSubmitRequest) =
+        let withSort (value: CoreTypes.Sort) (req: AsyncSearchSubmitRequest) =
             { req with Sort = Some value }
         let withSource (value: GlobalSearchTypes.SourceConfig) (req: AsyncSearchSubmitRequest) =
             { req with Source = Some value }
-        let withFields (value: TypesQueryDsl.FieldAndFormat list) (req: AsyncSearchSubmitRequest) =
+        let withFields (value: CoreTypes.FieldAndFormat list) (req: AsyncSearchSubmitRequest) =
             { req with Fields = Some value }
         let withSuggest (value: GlobalSearchTypes.Suggester) (req: AsyncSearchSubmitRequest) =
             { req with Suggest = Some value }
-        let withTerminateAfter (value: Types.Long) (req: AsyncSearchSubmitRequest) =
+        let withTerminateAfter (value: CoreTypes.Long) (req: AsyncSearchSubmitRequest) =
             { req with TerminateAfter = Some value }
         let withTimeout (value: string) (req: AsyncSearchSubmitRequest) =
             { req with Timeout = Some value }
@@ -837,14 +837,14 @@ module AsyncSearchOperations =
             { req with Version = Some value }
         let withSeqNoPrimaryTerm (value: bool) (req: AsyncSearchSubmitRequest) =
             { req with SeqNoPrimaryTerm = Some value }
-        let withStoredFields (value: Types.Fields) (req: AsyncSearchSubmitRequest) =
+        let withStoredFields (value: CoreTypes.Fields) (req: AsyncSearchSubmitRequest) =
             { req with StoredFields = Some value }
         let withPit (value: GlobalSearchTypes.PointInTimeReference) (req: AsyncSearchSubmitRequest) =
             { req with Pit = Some value }
-        let withRuntimeMappings (value: TypesMapping.RuntimeFields) (req: AsyncSearchSubmitRequest) =
+        let withRuntimeMappings (value: CoreTypes.RuntimeFields) (req: AsyncSearchSubmitRequest) =
             { req with RuntimeMappings = Some value }
         let withStats (value: string list) (req: AsyncSearchSubmitRequest) =
             { req with Stats = Some value }
-        let withProjectRouting (value: Types.ProjectRouting) (req: AsyncSearchSubmitRequest) =
+        let withProjectRouting (value: CoreTypes.ProjectRouting) (req: AsyncSearchSubmitRequest) =
             { req with ProjectRouting = Some value }
 

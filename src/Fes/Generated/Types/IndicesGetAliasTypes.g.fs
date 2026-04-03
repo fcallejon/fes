@@ -16,6 +16,6 @@ module IndicesGetAliasTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("error")>]
         Error: string
         [<System.Text.Json.Serialization.JsonPropertyName("status")>]
-        Status: Types.Integer
+        Status: CoreTypes.Integer
     }
 

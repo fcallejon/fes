@@ -25,43 +25,43 @@ module CcrFollowInfoBuilders =
             }
 
         [<CustomOperation("maxOutstandingReadRequests")>]
-        member _.MaxOutstandingReadRequests(state: FollowerIndexParameters, value: Types.Long) =
+        member _.MaxOutstandingReadRequests(state: FollowerIndexParameters, value: CoreTypes.Long) =
             { state with MaxOutstandingReadRequests = Some value }
 
         [<CustomOperation("maxOutstandingWriteRequests")>]
-        member _.MaxOutstandingWriteRequests(state: FollowerIndexParameters, value: Types.Integer) =
+        member _.MaxOutstandingWriteRequests(state: FollowerIndexParameters, value: CoreTypes.Integer) =
             { state with MaxOutstandingWriteRequests = Some value }
 
         [<CustomOperation("maxReadRequestOperationCount")>]
-        member _.MaxReadRequestOperationCount(state: FollowerIndexParameters, value: Types.Integer) =
+        member _.MaxReadRequestOperationCount(state: FollowerIndexParameters, value: CoreTypes.Integer) =
             { state with MaxReadRequestOperationCount = Some value }
 
         [<CustomOperation("maxReadRequestSize")>]
-        member _.MaxReadRequestSize(state: FollowerIndexParameters, value: Types.ByteSize) =
+        member _.MaxReadRequestSize(state: FollowerIndexParameters, value: CoreTypes.ByteSize) =
             { state with MaxReadRequestSize = Some value }
 
         [<CustomOperation("maxRetryDelay")>]
-        member _.MaxRetryDelay(state: FollowerIndexParameters, value: Types.Duration) =
+        member _.MaxRetryDelay(state: FollowerIndexParameters, value: CoreTypes.Duration) =
             { state with MaxRetryDelay = Some value }
 
         [<CustomOperation("maxWriteBufferCount")>]
-        member _.MaxWriteBufferCount(state: FollowerIndexParameters, value: Types.Integer) =
+        member _.MaxWriteBufferCount(state: FollowerIndexParameters, value: CoreTypes.Integer) =
             { state with MaxWriteBufferCount = Some value }
 
         [<CustomOperation("maxWriteBufferSize")>]
-        member _.MaxWriteBufferSize(state: FollowerIndexParameters, value: Types.ByteSize) =
+        member _.MaxWriteBufferSize(state: FollowerIndexParameters, value: CoreTypes.ByteSize) =
             { state with MaxWriteBufferSize = Some value }
 
         [<CustomOperation("maxWriteRequestOperationCount")>]
-        member _.MaxWriteRequestOperationCount(state: FollowerIndexParameters, value: Types.Integer) =
+        member _.MaxWriteRequestOperationCount(state: FollowerIndexParameters, value: CoreTypes.Integer) =
             { state with MaxWriteRequestOperationCount = Some value }
 
         [<CustomOperation("maxWriteRequestSize")>]
-        member _.MaxWriteRequestSize(state: FollowerIndexParameters, value: Types.ByteSize) =
+        member _.MaxWriteRequestSize(state: FollowerIndexParameters, value: CoreTypes.ByteSize) =
             { state with MaxWriteRequestSize = Some value }
 
         [<CustomOperation("readPollTimeout")>]
-        member _.ReadPollTimeout(state: FollowerIndexParameters, value: Types.Duration) =
+        member _.ReadPollTimeout(state: FollowerIndexParameters, value: CoreTypes.Duration) =
             { state with ReadPollTimeout = Some value }
 
     let followerIndexParameters = FollowerIndexParametersBuilder()

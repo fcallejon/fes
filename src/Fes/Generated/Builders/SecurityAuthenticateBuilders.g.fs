@@ -19,11 +19,11 @@ module SecurityAuthenticateBuilders =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: AuthenticateApiKey, value: Types.Id) =
+        member _.Id(state: AuthenticateApiKey, value: CoreTypes.Id) =
             { state with Id = value }
 
         [<CustomOperation("name")>]
-        member _.Name(state: AuthenticateApiKey, value: Types.Name) =
+        member _.Name(state: AuthenticateApiKey, value: CoreTypes.Name) =
             { state with Name = Some value }
 
         [<CustomOperation("managedBy")>]

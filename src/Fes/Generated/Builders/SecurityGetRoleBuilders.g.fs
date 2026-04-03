@@ -42,7 +42,7 @@ module SecurityGetRoleBuilders =
             { state with RemoteCluster = Some value }
 
         [<CustomOperation("metadata")>]
-        member _.Metadata(state: Role, value: Types.Metadata) =
+        member _.Metadata(state: Role, value: CoreTypes.Metadata) =
             { state with Metadata = value }
 
         [<CustomOperation("description")>]

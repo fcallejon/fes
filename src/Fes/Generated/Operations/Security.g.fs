@@ -92,7 +92,7 @@ module SecurityOperations =
     let securityAuthenticateRequest = SecurityAuthenticateRequestBuilder()
 
     type SecurityBulkDeleteRoleRequest = {
-        Refresh: Types.Refresh option
+        Refresh: CoreTypes.Refresh option
         Names: string list
     }
 
@@ -125,7 +125,7 @@ module SecurityOperations =
             }
 
         [<CustomOperation("refresh")>]
-        member _.Refresh(state: SecurityBulkDeleteRoleRequest, value: Types.Refresh) =
+        member _.Refresh(state: SecurityBulkDeleteRoleRequest, value: CoreTypes.Refresh) =
             { state with Refresh = Some value }
 
         [<CustomOperation("names")>]
@@ -135,13 +135,13 @@ module SecurityOperations =
     let securityBulkDeleteRoleRequest = SecurityBulkDeleteRoleRequestBuilder()
 
     module BulkDeleteRole =
-        let withRefresh (value: Types.Refresh) (req: SecurityBulkDeleteRoleRequest) =
+        let withRefresh (value: CoreTypes.Refresh) (req: SecurityBulkDeleteRoleRequest) =
             { req with Refresh = Some value }
         let withNames (value: string list) (req: SecurityBulkDeleteRoleRequest) =
             { req with Names = value }
 
     type SecurityBulkPutRoleRequest = {
-        Refresh: Types.Refresh option
+        Refresh: CoreTypes.Refresh option
         Roles: Map<string, SecurityTypes.RoleDescriptor>
     }
 
@@ -174,7 +174,7 @@ module SecurityOperations =
             }
 
         [<CustomOperation("refresh")>]
-        member _.Refresh(state: SecurityBulkPutRoleRequest, value: Types.Refresh) =
+        member _.Refresh(state: SecurityBulkPutRoleRequest, value: CoreTypes.Refresh) =
             { state with Refresh = Some value }
 
         [<CustomOperation("roles")>]
@@ -184,15 +184,15 @@ module SecurityOperations =
     let securityBulkPutRoleRequest = SecurityBulkPutRoleRequestBuilder()
 
     module BulkPutRole =
-        let withRefresh (value: Types.Refresh) (req: SecurityBulkPutRoleRequest) =
+        let withRefresh (value: CoreTypes.Refresh) (req: SecurityBulkPutRoleRequest) =
             { req with Refresh = Some value }
         let withRoles (value: Map<string, SecurityTypes.RoleDescriptor>) (req: SecurityBulkPutRoleRequest) =
             { req with Roles = value }
 
     type SecurityBulkUpdateApiKeysRequest = {
-        Expiration: Types.Duration option
+        Expiration: CoreTypes.Duration option
         Ids: System.Text.Json.JsonElement
-        Metadata: Types.Metadata option
+        Metadata: CoreTypes.Metadata option
         RoleDescriptors: Map<string, SecurityTypes.RoleDescriptor> option
     }
 
@@ -220,7 +220,7 @@ module SecurityOperations =
             }
 
         [<CustomOperation("expiration")>]
-        member _.Expiration(state: SecurityBulkUpdateApiKeysRequest, value: Types.Duration) =
+        member _.Expiration(state: SecurityBulkUpdateApiKeysRequest, value: CoreTypes.Duration) =
             { state with Expiration = Some value }
 
         [<CustomOperation("ids")>]
@@ -228,7 +228,7 @@ module SecurityOperations =
             { state with Ids = value }
 
         [<CustomOperation("metadata")>]
-        member _.Metadata(state: SecurityBulkUpdateApiKeysRequest, value: Types.Metadata) =
+        member _.Metadata(state: SecurityBulkUpdateApiKeysRequest, value: CoreTypes.Metadata) =
             { state with Metadata = Some value }
 
         [<CustomOperation("roleDescriptors")>]
@@ -238,19 +238,19 @@ module SecurityOperations =
     let securityBulkUpdateApiKeysRequest = SecurityBulkUpdateApiKeysRequestBuilder()
 
     module BulkUpdateApiKeys =
-        let withExpiration (value: Types.Duration) (req: SecurityBulkUpdateApiKeysRequest) =
+        let withExpiration (value: CoreTypes.Duration) (req: SecurityBulkUpdateApiKeysRequest) =
             { req with Expiration = Some value }
         let withIds (value: System.Text.Json.JsonElement) (req: SecurityBulkUpdateApiKeysRequest) =
             { req with Ids = value }
-        let withMetadata (value: Types.Metadata) (req: SecurityBulkUpdateApiKeysRequest) =
+        let withMetadata (value: CoreTypes.Metadata) (req: SecurityBulkUpdateApiKeysRequest) =
             { req with Metadata = Some value }
         let withRoleDescriptors (value: Map<string, SecurityTypes.RoleDescriptor>) (req: SecurityBulkUpdateApiKeysRequest) =
             { req with RoleDescriptors = Some value }
 
     type SecurityChangePasswordRequest = {
-        Username: Types.Username
-        Refresh: Types.Refresh option
-        Password: Types.Password option
+        Username: CoreTypes.Username
+        Refresh: CoreTypes.Refresh option
+        Password: CoreTypes.Password option
         PasswordHash: string option
     }
 
@@ -285,15 +285,15 @@ module SecurityOperations =
             }
 
         [<CustomOperation("username")>]
-        member _.Username(state: SecurityChangePasswordRequest, value: Types.Username) =
+        member _.Username(state: SecurityChangePasswordRequest, value: CoreTypes.Username) =
             { state with Username = value }
 
         [<CustomOperation("refresh")>]
-        member _.Refresh(state: SecurityChangePasswordRequest, value: Types.Refresh) =
+        member _.Refresh(state: SecurityChangePasswordRequest, value: CoreTypes.Refresh) =
             { state with Refresh = Some value }
 
         [<CustomOperation("password")>]
-        member _.Password(state: SecurityChangePasswordRequest, value: Types.Password) =
+        member _.Password(state: SecurityChangePasswordRequest, value: CoreTypes.Password) =
             { state with Password = Some value }
 
         [<CustomOperation("passwordHash")>]
@@ -303,15 +303,15 @@ module SecurityOperations =
     let securityChangePasswordRequest = SecurityChangePasswordRequestBuilder()
 
     module ChangePassword =
-        let withRefresh (value: Types.Refresh) (req: SecurityChangePasswordRequest) =
+        let withRefresh (value: CoreTypes.Refresh) (req: SecurityChangePasswordRequest) =
             { req with Refresh = Some value }
-        let withPassword (value: Types.Password) (req: SecurityChangePasswordRequest) =
+        let withPassword (value: CoreTypes.Password) (req: SecurityChangePasswordRequest) =
             { req with Password = Some value }
         let withPasswordHash (value: string) (req: SecurityChangePasswordRequest) =
             { req with PasswordHash = Some value }
 
     type SecurityClearApiKeyCacheRequest = {
-        Ids: Types.Ids
+        Ids: CoreTypes.Ids
     }
 
         with
@@ -334,13 +334,13 @@ module SecurityOperations =
             }
 
         [<CustomOperation("ids")>]
-        member _.Ids(state: SecurityClearApiKeyCacheRequest, value: Types.Ids) =
+        member _.Ids(state: SecurityClearApiKeyCacheRequest, value: CoreTypes.Ids) =
             { state with Ids = value }
 
     let securityClearApiKeyCacheRequest = SecurityClearApiKeyCacheRequestBuilder()
 
     type SecurityClearCachedPrivilegesRequest = {
-        Application: Types.Names
+        Application: CoreTypes.Names
     }
 
         with
@@ -363,13 +363,13 @@ module SecurityOperations =
             }
 
         [<CustomOperation("application")>]
-        member _.Application(state: SecurityClearCachedPrivilegesRequest, value: Types.Names) =
+        member _.Application(state: SecurityClearCachedPrivilegesRequest, value: CoreTypes.Names) =
             { state with Application = value }
 
     let securityClearCachedPrivilegesRequest = SecurityClearCachedPrivilegesRequestBuilder()
 
     type SecurityClearCachedRealmsRequest = {
-        Realms: Types.Names
+        Realms: CoreTypes.Names
         Usernames: string list option
     }
 
@@ -401,7 +401,7 @@ module SecurityOperations =
             }
 
         [<CustomOperation("realms")>]
-        member _.Realms(state: SecurityClearCachedRealmsRequest, value: Types.Names) =
+        member _.Realms(state: SecurityClearCachedRealmsRequest, value: CoreTypes.Names) =
             { state with Realms = value }
 
         [<CustomOperation("usernames")>]
@@ -415,7 +415,7 @@ module SecurityOperations =
             { req with Usernames = Some value }
 
     type SecurityClearCachedRolesRequest = {
-        Name: Types.Names
+        Name: CoreTypes.Names
     }
 
         with
@@ -438,15 +438,15 @@ module SecurityOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: SecurityClearCachedRolesRequest, value: Types.Names) =
+        member _.Name(state: SecurityClearCachedRolesRequest, value: CoreTypes.Names) =
             { state with Name = value }
 
     let securityClearCachedRolesRequest = SecurityClearCachedRolesRequestBuilder()
 
     type SecurityClearCachedServiceTokensRequest = {
-        Namespace: Types.Namespace
-        Service: Types.Service
-        Name: Types.Names
+        Namespace: CoreTypes.Namespace
+        Service: CoreTypes.Service
+        Name: CoreTypes.Names
     }
 
         with
@@ -471,25 +471,25 @@ module SecurityOperations =
             }
 
         [<CustomOperation("namespace'")>]
-        member _.Namespace(state: SecurityClearCachedServiceTokensRequest, value: Types.Namespace) =
+        member _.Namespace(state: SecurityClearCachedServiceTokensRequest, value: CoreTypes.Namespace) =
             { state with Namespace = value }
 
         [<CustomOperation("service")>]
-        member _.Service(state: SecurityClearCachedServiceTokensRequest, value: Types.Service) =
+        member _.Service(state: SecurityClearCachedServiceTokensRequest, value: CoreTypes.Service) =
             { state with Service = value }
 
         [<CustomOperation("name")>]
-        member _.Name(state: SecurityClearCachedServiceTokensRequest, value: Types.Names) =
+        member _.Name(state: SecurityClearCachedServiceTokensRequest, value: CoreTypes.Names) =
             { state with Name = value }
 
     let securityClearCachedServiceTokensRequest = SecurityClearCachedServiceTokensRequestBuilder()
 
     type SecurityCreateApiKeyRequest = {
-        Refresh: Types.Refresh option
-        Expiration: Types.Duration option
-        Name: Types.Name option
+        Refresh: CoreTypes.Refresh option
+        Expiration: CoreTypes.Duration option
+        Name: CoreTypes.Name option
         RoleDescriptors: Map<string, SecurityTypes.RoleDescriptor> option
-        Metadata: Types.Metadata option
+        Metadata: CoreTypes.Metadata option
     }
 
         with
@@ -524,15 +524,15 @@ module SecurityOperations =
             }
 
         [<CustomOperation("refresh")>]
-        member _.Refresh(state: SecurityCreateApiKeyRequest, value: Types.Refresh) =
+        member _.Refresh(state: SecurityCreateApiKeyRequest, value: CoreTypes.Refresh) =
             { state with Refresh = Some value }
 
         [<CustomOperation("expiration")>]
-        member _.Expiration(state: SecurityCreateApiKeyRequest, value: Types.Duration) =
+        member _.Expiration(state: SecurityCreateApiKeyRequest, value: CoreTypes.Duration) =
             { state with Expiration = Some value }
 
         [<CustomOperation("name")>]
-        member _.Name(state: SecurityCreateApiKeyRequest, value: Types.Name) =
+        member _.Name(state: SecurityCreateApiKeyRequest, value: CoreTypes.Name) =
             { state with Name = Some value }
 
         [<CustomOperation("roleDescriptors")>]
@@ -540,28 +540,28 @@ module SecurityOperations =
             { state with RoleDescriptors = Some value }
 
         [<CustomOperation("metadata")>]
-        member _.Metadata(state: SecurityCreateApiKeyRequest, value: Types.Metadata) =
+        member _.Metadata(state: SecurityCreateApiKeyRequest, value: CoreTypes.Metadata) =
             { state with Metadata = Some value }
 
     let securityCreateApiKeyRequest = SecurityCreateApiKeyRequestBuilder()
 
     module CreateApiKey =
-        let withRefresh (value: Types.Refresh) (req: SecurityCreateApiKeyRequest) =
+        let withRefresh (value: CoreTypes.Refresh) (req: SecurityCreateApiKeyRequest) =
             { req with Refresh = Some value }
-        let withExpiration (value: Types.Duration) (req: SecurityCreateApiKeyRequest) =
+        let withExpiration (value: CoreTypes.Duration) (req: SecurityCreateApiKeyRequest) =
             { req with Expiration = Some value }
-        let withName (value: Types.Name) (req: SecurityCreateApiKeyRequest) =
+        let withName (value: CoreTypes.Name) (req: SecurityCreateApiKeyRequest) =
             { req with Name = Some value }
         let withRoleDescriptors (value: Map<string, SecurityTypes.RoleDescriptor>) (req: SecurityCreateApiKeyRequest) =
             { req with RoleDescriptors = Some value }
-        let withMetadata (value: Types.Metadata) (req: SecurityCreateApiKeyRequest) =
+        let withMetadata (value: CoreTypes.Metadata) (req: SecurityCreateApiKeyRequest) =
             { req with Metadata = Some value }
 
     type SecurityCreateCrossClusterApiKeyRequest = {
         Access: SecurityTypes.Access
-        Expiration: Types.Duration option
-        Metadata: Types.Metadata option
-        Name: Types.Name
+        Expiration: CoreTypes.Duration option
+        Metadata: CoreTypes.Metadata option
+        Name: CoreTypes.Name
         CertificateIdentity: string option
     }
 
@@ -594,15 +594,15 @@ module SecurityOperations =
             { state with Access = value }
 
         [<CustomOperation("expiration")>]
-        member _.Expiration(state: SecurityCreateCrossClusterApiKeyRequest, value: Types.Duration) =
+        member _.Expiration(state: SecurityCreateCrossClusterApiKeyRequest, value: CoreTypes.Duration) =
             { state with Expiration = Some value }
 
         [<CustomOperation("metadata")>]
-        member _.Metadata(state: SecurityCreateCrossClusterApiKeyRequest, value: Types.Metadata) =
+        member _.Metadata(state: SecurityCreateCrossClusterApiKeyRequest, value: CoreTypes.Metadata) =
             { state with Metadata = Some value }
 
         [<CustomOperation("name")>]
-        member _.Name(state: SecurityCreateCrossClusterApiKeyRequest, value: Types.Name) =
+        member _.Name(state: SecurityCreateCrossClusterApiKeyRequest, value: CoreTypes.Name) =
             { state with Name = value }
 
         [<CustomOperation("certificateIdentity")>]
@@ -614,20 +614,20 @@ module SecurityOperations =
     module CreateCrossClusterApiKey =
         let withAccess (value: SecurityTypes.Access) (req: SecurityCreateCrossClusterApiKeyRequest) =
             { req with Access = value }
-        let withExpiration (value: Types.Duration) (req: SecurityCreateCrossClusterApiKeyRequest) =
+        let withExpiration (value: CoreTypes.Duration) (req: SecurityCreateCrossClusterApiKeyRequest) =
             { req with Expiration = Some value }
-        let withMetadata (value: Types.Metadata) (req: SecurityCreateCrossClusterApiKeyRequest) =
+        let withMetadata (value: CoreTypes.Metadata) (req: SecurityCreateCrossClusterApiKeyRequest) =
             { req with Metadata = Some value }
-        let withName (value: Types.Name) (req: SecurityCreateCrossClusterApiKeyRequest) =
+        let withName (value: CoreTypes.Name) (req: SecurityCreateCrossClusterApiKeyRequest) =
             { req with Name = value }
         let withCertificateIdentity (value: string) (req: SecurityCreateCrossClusterApiKeyRequest) =
             { req with CertificateIdentity = Some value }
 
     type SecurityCreateServiceTokenRequest = {
-        Namespace: Types.Namespace
-        Service: Types.Service
-        Name: Types.Name
-        Refresh: Types.Refresh option
+        Namespace: CoreTypes.Namespace
+        Service: CoreTypes.Service
+        Name: CoreTypes.Name
+        Refresh: CoreTypes.Refresh option
     }
 
         with
@@ -660,25 +660,25 @@ module SecurityOperations =
             }
 
         [<CustomOperation("namespace'")>]
-        member _.Namespace(state: SecurityCreateServiceTokenRequest, value: Types.Namespace) =
+        member _.Namespace(state: SecurityCreateServiceTokenRequest, value: CoreTypes.Namespace) =
             { state with Namespace = value }
 
         [<CustomOperation("service")>]
-        member _.Service(state: SecurityCreateServiceTokenRequest, value: Types.Service) =
+        member _.Service(state: SecurityCreateServiceTokenRequest, value: CoreTypes.Service) =
             { state with Service = value }
 
         [<CustomOperation("name")>]
-        member _.Name(state: SecurityCreateServiceTokenRequest, value: Types.Name) =
+        member _.Name(state: SecurityCreateServiceTokenRequest, value: CoreTypes.Name) =
             { state with Name = value }
 
         [<CustomOperation("refresh")>]
-        member _.Refresh(state: SecurityCreateServiceTokenRequest, value: Types.Refresh) =
+        member _.Refresh(state: SecurityCreateServiceTokenRequest, value: CoreTypes.Refresh) =
             { state with Refresh = Some value }
 
     let securityCreateServiceTokenRequest = SecurityCreateServiceTokenRequestBuilder()
 
     module CreateServiceToken =
-        let withRefresh (value: Types.Refresh) (req: SecurityCreateServiceTokenRequest) =
+        let withRefresh (value: CoreTypes.Refresh) (req: SecurityCreateServiceTokenRequest) =
             { req with Refresh = Some value }
 
     type SecurityDelegatePkiRequest = {
@@ -716,9 +716,9 @@ module SecurityOperations =
             { req with X509CertificateChain = value }
 
     type SecurityDeletePrivilegesRequest = {
-        Application: Types.Name
-        Name: Types.Names
-        Refresh: Types.Refresh option
+        Application: CoreTypes.Name
+        Name: CoreTypes.Names
+        Refresh: CoreTypes.Refresh option
     }
 
         with
@@ -750,26 +750,26 @@ module SecurityOperations =
             }
 
         [<CustomOperation("application")>]
-        member _.Application(state: SecurityDeletePrivilegesRequest, value: Types.Name) =
+        member _.Application(state: SecurityDeletePrivilegesRequest, value: CoreTypes.Name) =
             { state with Application = value }
 
         [<CustomOperation("name")>]
-        member _.Name(state: SecurityDeletePrivilegesRequest, value: Types.Names) =
+        member _.Name(state: SecurityDeletePrivilegesRequest, value: CoreTypes.Names) =
             { state with Name = value }
 
         [<CustomOperation("refresh")>]
-        member _.Refresh(state: SecurityDeletePrivilegesRequest, value: Types.Refresh) =
+        member _.Refresh(state: SecurityDeletePrivilegesRequest, value: CoreTypes.Refresh) =
             { state with Refresh = Some value }
 
     let securityDeletePrivilegesRequest = SecurityDeletePrivilegesRequestBuilder()
 
     module DeletePrivileges =
-        let withRefresh (value: Types.Refresh) (req: SecurityDeletePrivilegesRequest) =
+        let withRefresh (value: CoreTypes.Refresh) (req: SecurityDeletePrivilegesRequest) =
             { req with Refresh = Some value }
 
     type SecurityDeleteRoleRequest = {
-        Name: Types.Name
-        Refresh: Types.Refresh option
+        Name: CoreTypes.Name
+        Refresh: CoreTypes.Refresh option
     }
 
         with
@@ -800,22 +800,22 @@ module SecurityOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: SecurityDeleteRoleRequest, value: Types.Name) =
+        member _.Name(state: SecurityDeleteRoleRequest, value: CoreTypes.Name) =
             { state with Name = value }
 
         [<CustomOperation("refresh")>]
-        member _.Refresh(state: SecurityDeleteRoleRequest, value: Types.Refresh) =
+        member _.Refresh(state: SecurityDeleteRoleRequest, value: CoreTypes.Refresh) =
             { state with Refresh = Some value }
 
     let securityDeleteRoleRequest = SecurityDeleteRoleRequestBuilder()
 
     module DeleteRole =
-        let withRefresh (value: Types.Refresh) (req: SecurityDeleteRoleRequest) =
+        let withRefresh (value: CoreTypes.Refresh) (req: SecurityDeleteRoleRequest) =
             { req with Refresh = Some value }
 
     type SecurityDeleteRoleMappingRequest = {
-        Name: Types.Name
-        Refresh: Types.Refresh option
+        Name: CoreTypes.Name
+        Refresh: CoreTypes.Refresh option
     }
 
         with
@@ -846,24 +846,24 @@ module SecurityOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: SecurityDeleteRoleMappingRequest, value: Types.Name) =
+        member _.Name(state: SecurityDeleteRoleMappingRequest, value: CoreTypes.Name) =
             { state with Name = value }
 
         [<CustomOperation("refresh")>]
-        member _.Refresh(state: SecurityDeleteRoleMappingRequest, value: Types.Refresh) =
+        member _.Refresh(state: SecurityDeleteRoleMappingRequest, value: CoreTypes.Refresh) =
             { state with Refresh = Some value }
 
     let securityDeleteRoleMappingRequest = SecurityDeleteRoleMappingRequestBuilder()
 
     module DeleteRoleMapping =
-        let withRefresh (value: Types.Refresh) (req: SecurityDeleteRoleMappingRequest) =
+        let withRefresh (value: CoreTypes.Refresh) (req: SecurityDeleteRoleMappingRequest) =
             { req with Refresh = Some value }
 
     type SecurityDeleteServiceTokenRequest = {
-        Namespace: Types.Namespace
-        Service: Types.Service
-        Name: Types.Name
-        Refresh: Types.Refresh option
+        Namespace: CoreTypes.Namespace
+        Service: CoreTypes.Service
+        Name: CoreTypes.Name
+        Refresh: CoreTypes.Refresh option
     }
 
         with
@@ -896,30 +896,30 @@ module SecurityOperations =
             }
 
         [<CustomOperation("namespace'")>]
-        member _.Namespace(state: SecurityDeleteServiceTokenRequest, value: Types.Namespace) =
+        member _.Namespace(state: SecurityDeleteServiceTokenRequest, value: CoreTypes.Namespace) =
             { state with Namespace = value }
 
         [<CustomOperation("service")>]
-        member _.Service(state: SecurityDeleteServiceTokenRequest, value: Types.Service) =
+        member _.Service(state: SecurityDeleteServiceTokenRequest, value: CoreTypes.Service) =
             { state with Service = value }
 
         [<CustomOperation("name")>]
-        member _.Name(state: SecurityDeleteServiceTokenRequest, value: Types.Name) =
+        member _.Name(state: SecurityDeleteServiceTokenRequest, value: CoreTypes.Name) =
             { state with Name = value }
 
         [<CustomOperation("refresh")>]
-        member _.Refresh(state: SecurityDeleteServiceTokenRequest, value: Types.Refresh) =
+        member _.Refresh(state: SecurityDeleteServiceTokenRequest, value: CoreTypes.Refresh) =
             { state with Refresh = Some value }
 
     let securityDeleteServiceTokenRequest = SecurityDeleteServiceTokenRequestBuilder()
 
     module DeleteServiceToken =
-        let withRefresh (value: Types.Refresh) (req: SecurityDeleteServiceTokenRequest) =
+        let withRefresh (value: CoreTypes.Refresh) (req: SecurityDeleteServiceTokenRequest) =
             { req with Refresh = Some value }
 
     type SecurityDeleteUserRequest = {
-        Username: Types.Username
-        Refresh: Types.Refresh option
+        Username: CoreTypes.Username
+        Refresh: CoreTypes.Refresh option
     }
 
         with
@@ -950,22 +950,22 @@ module SecurityOperations =
             }
 
         [<CustomOperation("username")>]
-        member _.Username(state: SecurityDeleteUserRequest, value: Types.Username) =
+        member _.Username(state: SecurityDeleteUserRequest, value: CoreTypes.Username) =
             { state with Username = value }
 
         [<CustomOperation("refresh")>]
-        member _.Refresh(state: SecurityDeleteUserRequest, value: Types.Refresh) =
+        member _.Refresh(state: SecurityDeleteUserRequest, value: CoreTypes.Refresh) =
             { state with Refresh = Some value }
 
     let securityDeleteUserRequest = SecurityDeleteUserRequestBuilder()
 
     module DeleteUser =
-        let withRefresh (value: Types.Refresh) (req: SecurityDeleteUserRequest) =
+        let withRefresh (value: CoreTypes.Refresh) (req: SecurityDeleteUserRequest) =
             { req with Refresh = Some value }
 
     type SecurityDisableUserRequest = {
-        Username: Types.Username
-        Refresh: Types.Refresh option
+        Username: CoreTypes.Username
+        Refresh: CoreTypes.Refresh option
     }
 
         with
@@ -996,22 +996,22 @@ module SecurityOperations =
             }
 
         [<CustomOperation("username")>]
-        member _.Username(state: SecurityDisableUserRequest, value: Types.Username) =
+        member _.Username(state: SecurityDisableUserRequest, value: CoreTypes.Username) =
             { state with Username = value }
 
         [<CustomOperation("refresh")>]
-        member _.Refresh(state: SecurityDisableUserRequest, value: Types.Refresh) =
+        member _.Refresh(state: SecurityDisableUserRequest, value: CoreTypes.Refresh) =
             { state with Refresh = Some value }
 
     let securityDisableUserRequest = SecurityDisableUserRequestBuilder()
 
     module DisableUser =
-        let withRefresh (value: Types.Refresh) (req: SecurityDisableUserRequest) =
+        let withRefresh (value: CoreTypes.Refresh) (req: SecurityDisableUserRequest) =
             { req with Refresh = Some value }
 
     type SecurityDisableUserProfileRequest = {
         Uid: SecurityTypes.UserProfileId
-        Refresh: Types.Refresh option
+        Refresh: CoreTypes.Refresh option
     }
 
         with
@@ -1032,7 +1032,7 @@ module SecurityOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type SecurityDisableUserProfileResponse = Types.AcknowledgedResponseBase
+    type SecurityDisableUserProfileResponse = CoreTypes.AcknowledgedResponseBase
 
     type SecurityDisableUserProfileRequestBuilder() =
         member _.Yield(_: unit) : SecurityDisableUserProfileRequest =
@@ -1046,18 +1046,18 @@ module SecurityOperations =
             { state with Uid = value }
 
         [<CustomOperation("refresh")>]
-        member _.Refresh(state: SecurityDisableUserProfileRequest, value: Types.Refresh) =
+        member _.Refresh(state: SecurityDisableUserProfileRequest, value: CoreTypes.Refresh) =
             { state with Refresh = Some value }
 
     let securityDisableUserProfileRequest = SecurityDisableUserProfileRequestBuilder()
 
     module DisableUserProfile =
-        let withRefresh (value: Types.Refresh) (req: SecurityDisableUserProfileRequest) =
+        let withRefresh (value: CoreTypes.Refresh) (req: SecurityDisableUserProfileRequest) =
             { req with Refresh = Some value }
 
     type SecurityEnableUserRequest = {
-        Username: Types.Username
-        Refresh: Types.Refresh option
+        Username: CoreTypes.Username
+        Refresh: CoreTypes.Refresh option
     }
 
         with
@@ -1088,22 +1088,22 @@ module SecurityOperations =
             }
 
         [<CustomOperation("username")>]
-        member _.Username(state: SecurityEnableUserRequest, value: Types.Username) =
+        member _.Username(state: SecurityEnableUserRequest, value: CoreTypes.Username) =
             { state with Username = value }
 
         [<CustomOperation("refresh")>]
-        member _.Refresh(state: SecurityEnableUserRequest, value: Types.Refresh) =
+        member _.Refresh(state: SecurityEnableUserRequest, value: CoreTypes.Refresh) =
             { state with Refresh = Some value }
 
     let securityEnableUserRequest = SecurityEnableUserRequestBuilder()
 
     module EnableUser =
-        let withRefresh (value: Types.Refresh) (req: SecurityEnableUserRequest) =
+        let withRefresh (value: CoreTypes.Refresh) (req: SecurityEnableUserRequest) =
             { req with Refresh = Some value }
 
     type SecurityEnableUserProfileRequest = {
         Uid: SecurityTypes.UserProfileId
-        Refresh: Types.Refresh option
+        Refresh: CoreTypes.Refresh option
     }
 
         with
@@ -1124,7 +1124,7 @@ module SecurityOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type SecurityEnableUserProfileResponse = Types.AcknowledgedResponseBase
+    type SecurityEnableUserProfileResponse = CoreTypes.AcknowledgedResponseBase
 
     type SecurityEnableUserProfileRequestBuilder() =
         member _.Yield(_: unit) : SecurityEnableUserProfileRequest =
@@ -1138,13 +1138,13 @@ module SecurityOperations =
             { state with Uid = value }
 
         [<CustomOperation("refresh")>]
-        member _.Refresh(state: SecurityEnableUserProfileRequest, value: Types.Refresh) =
+        member _.Refresh(state: SecurityEnableUserProfileRequest, value: CoreTypes.Refresh) =
             { state with Refresh = Some value }
 
     let securityEnableUserProfileRequest = SecurityEnableUserProfileRequestBuilder()
 
     module EnableUserProfile =
-        let withRefresh (value: Types.Refresh) (req: SecurityEnableUserProfileRequest) =
+        let withRefresh (value: CoreTypes.Refresh) (req: SecurityEnableUserProfileRequest) =
             { req with Refresh = Some value }
 
     type SecurityEnrollKibanaRequest = | SecurityEnrollKibanaRequest
@@ -1192,11 +1192,11 @@ module SecurityOperations =
     let securityEnrollNodeRequest = SecurityEnrollNodeRequestBuilder()
 
     type SecurityGetApiKeyRequest = {
-        Id: Types.Id option
-        Name: Types.Name option
+        Id: CoreTypes.Id option
+        Name: CoreTypes.Name option
         Owner: bool option
-        RealmName: Types.Name option
-        Username: Types.Username option
+        RealmName: CoreTypes.Name option
+        Username: CoreTypes.Username option
         WithLimitedBy: bool option
         ActiveOnly: bool option
         WithProfileUid: bool option
@@ -1243,11 +1243,11 @@ module SecurityOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: SecurityGetApiKeyRequest, value: Types.Id) =
+        member _.Id(state: SecurityGetApiKeyRequest, value: CoreTypes.Id) =
             { state with Id = Some value }
 
         [<CustomOperation("name")>]
-        member _.Name(state: SecurityGetApiKeyRequest, value: Types.Name) =
+        member _.Name(state: SecurityGetApiKeyRequest, value: CoreTypes.Name) =
             { state with Name = Some value }
 
         [<CustomOperation("owner")>]
@@ -1255,11 +1255,11 @@ module SecurityOperations =
             { state with Owner = Some value }
 
         [<CustomOperation("realmName")>]
-        member _.RealmName(state: SecurityGetApiKeyRequest, value: Types.Name) =
+        member _.RealmName(state: SecurityGetApiKeyRequest, value: CoreTypes.Name) =
             { state with RealmName = Some value }
 
         [<CustomOperation("username")>]
-        member _.Username(state: SecurityGetApiKeyRequest, value: Types.Username) =
+        member _.Username(state: SecurityGetApiKeyRequest, value: CoreTypes.Username) =
             { state with Username = Some value }
 
         [<CustomOperation("withLimitedBy")>]
@@ -1277,15 +1277,15 @@ module SecurityOperations =
     let securityGetApiKeyRequest = SecurityGetApiKeyRequestBuilder()
 
     module GetApiKey =
-        let withId (value: Types.Id) (req: SecurityGetApiKeyRequest) =
+        let withId (value: CoreTypes.Id) (req: SecurityGetApiKeyRequest) =
             { req with Id = Some value }
-        let withName (value: Types.Name) (req: SecurityGetApiKeyRequest) =
+        let withName (value: CoreTypes.Name) (req: SecurityGetApiKeyRequest) =
             { req with Name = Some value }
         let withOwner (value: bool) (req: SecurityGetApiKeyRequest) =
             { req with Owner = Some value }
-        let withRealmName (value: Types.Name) (req: SecurityGetApiKeyRequest) =
+        let withRealmName (value: CoreTypes.Name) (req: SecurityGetApiKeyRequest) =
             { req with RealmName = Some value }
-        let withUsername (value: Types.Username) (req: SecurityGetApiKeyRequest) =
+        let withUsername (value: CoreTypes.Username) (req: SecurityGetApiKeyRequest) =
             { req with Username = Some value }
         let withWithLimitedBy (value: bool) (req: SecurityGetApiKeyRequest) =
             { req with WithLimitedBy = Some value }
@@ -1317,8 +1317,8 @@ module SecurityOperations =
     let securityGetBuiltinPrivilegesRequest = SecurityGetBuiltinPrivilegesRequestBuilder()
 
     type SecurityGetPrivilegesRequest = {
-        Application: Types.Name
-        Name: Types.Names
+        Application: CoreTypes.Name
+        Name: CoreTypes.Names
     }
 
         with
@@ -1342,17 +1342,17 @@ module SecurityOperations =
             }
 
         [<CustomOperation("application")>]
-        member _.Application(state: SecurityGetPrivilegesRequest, value: Types.Name) =
+        member _.Application(state: SecurityGetPrivilegesRequest, value: CoreTypes.Name) =
             { state with Application = value }
 
         [<CustomOperation("name")>]
-        member _.Name(state: SecurityGetPrivilegesRequest, value: Types.Names) =
+        member _.Name(state: SecurityGetPrivilegesRequest, value: CoreTypes.Names) =
             { state with Name = value }
 
     let securityGetPrivilegesRequest = SecurityGetPrivilegesRequestBuilder()
 
     type SecurityGetRoleRequest = {
-        Name: Types.Names
+        Name: CoreTypes.Names
     }
 
         with
@@ -1375,13 +1375,13 @@ module SecurityOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: SecurityGetRoleRequest, value: Types.Names) =
+        member _.Name(state: SecurityGetRoleRequest, value: CoreTypes.Names) =
             { state with Name = value }
 
     let securityGetRoleRequest = SecurityGetRoleRequestBuilder()
 
     type SecurityGetRoleMappingRequest = {
-        Name: Types.Names
+        Name: CoreTypes.Names
     }
 
         with
@@ -1404,14 +1404,14 @@ module SecurityOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: SecurityGetRoleMappingRequest, value: Types.Names) =
+        member _.Name(state: SecurityGetRoleMappingRequest, value: CoreTypes.Names) =
             { state with Name = value }
 
     let securityGetRoleMappingRequest = SecurityGetRoleMappingRequestBuilder()
 
     type SecurityGetServiceAccountsRequest = {
-        Namespace: Types.Namespace
-        Service: Types.Service
+        Namespace: CoreTypes.Namespace
+        Service: CoreTypes.Service
     }
 
         with
@@ -1435,18 +1435,18 @@ module SecurityOperations =
             }
 
         [<CustomOperation("namespace'")>]
-        member _.Namespace(state: SecurityGetServiceAccountsRequest, value: Types.Namespace) =
+        member _.Namespace(state: SecurityGetServiceAccountsRequest, value: CoreTypes.Namespace) =
             { state with Namespace = value }
 
         [<CustomOperation("service")>]
-        member _.Service(state: SecurityGetServiceAccountsRequest, value: Types.Service) =
+        member _.Service(state: SecurityGetServiceAccountsRequest, value: CoreTypes.Service) =
             { state with Service = value }
 
     let securityGetServiceAccountsRequest = SecurityGetServiceAccountsRequestBuilder()
 
     type SecurityGetServiceCredentialsRequest = {
-        Namespace: Types.Namespace
-        Service: Types.Name
+        Namespace: CoreTypes.Namespace
+        Service: CoreTypes.Name
     }
 
         with
@@ -1470,17 +1470,17 @@ module SecurityOperations =
             }
 
         [<CustomOperation("namespace'")>]
-        member _.Namespace(state: SecurityGetServiceCredentialsRequest, value: Types.Namespace) =
+        member _.Namespace(state: SecurityGetServiceCredentialsRequest, value: CoreTypes.Namespace) =
             { state with Namespace = value }
 
         [<CustomOperation("service")>]
-        member _.Service(state: SecurityGetServiceCredentialsRequest, value: Types.Name) =
+        member _.Service(state: SecurityGetServiceCredentialsRequest, value: CoreTypes.Name) =
             { state with Service = value }
 
     let securityGetServiceCredentialsRequest = SecurityGetServiceCredentialsRequestBuilder()
 
     type SecurityGetSettingsRequest = {
-        MasterTimeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
     }
 
         with
@@ -1510,13 +1510,13 @@ module SecurityOperations =
             }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: SecurityGetSettingsRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: SecurityGetSettingsRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
     let securityGetSettingsRequest = SecurityGetSettingsRequestBuilder()
 
     module GetSettings =
-        let withMasterTimeout (value: Types.Duration) (req: SecurityGetSettingsRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: SecurityGetSettingsRequest) =
             { req with MasterTimeout = Some value }
 
     type SecurityGetStatsRequest = | SecurityGetStatsRequest
@@ -1544,10 +1544,10 @@ module SecurityOperations =
     type SecurityGetTokenRequest = {
         GrantType: SecurityGetToken.AccessTokenGrantType option
         Scope: string option
-        Password: Types.Password option
+        Password: CoreTypes.Password option
         KerberosTicket: string option
         RefreshToken: string option
-        Username: Types.Username option
+        Username: CoreTypes.Username option
     }
 
         with
@@ -1584,7 +1584,7 @@ module SecurityOperations =
             { state with Scope = Some value }
 
         [<CustomOperation("password")>]
-        member _.Password(state: SecurityGetTokenRequest, value: Types.Password) =
+        member _.Password(state: SecurityGetTokenRequest, value: CoreTypes.Password) =
             { state with Password = Some value }
 
         [<CustomOperation("kerberosTicket")>]
@@ -1596,7 +1596,7 @@ module SecurityOperations =
             { state with RefreshToken = Some value }
 
         [<CustomOperation("username")>]
-        member _.Username(state: SecurityGetTokenRequest, value: Types.Username) =
+        member _.Username(state: SecurityGetTokenRequest, value: CoreTypes.Username) =
             { state with Username = Some value }
 
     let securityGetTokenRequest = SecurityGetTokenRequestBuilder()
@@ -1606,13 +1606,13 @@ module SecurityOperations =
             { req with GrantType = Some value }
         let withScope (value: string) (req: SecurityGetTokenRequest) =
             { req with Scope = Some value }
-        let withPassword (value: Types.Password) (req: SecurityGetTokenRequest) =
+        let withPassword (value: CoreTypes.Password) (req: SecurityGetTokenRequest) =
             { req with Password = Some value }
         let withKerberosTicket (value: string) (req: SecurityGetTokenRequest) =
             { req with KerberosTicket = Some value }
         let withRefreshToken (value: string) (req: SecurityGetTokenRequest) =
             { req with RefreshToken = Some value }
-        let withUsername (value: Types.Username) (req: SecurityGetTokenRequest) =
+        let withUsername (value: CoreTypes.Username) (req: SecurityGetTokenRequest) =
             { req with Username = Some value }
 
     type SecurityGetUserRequest = {
@@ -1730,13 +1730,13 @@ module SecurityOperations =
             { req with Data = Some value }
 
     type SecurityGrantApiKeyRequest = {
-        Refresh: Types.Refresh option
+        Refresh: CoreTypes.Refresh option
         ApiKey: SecurityGrantApiKey.GrantApiKey
         GrantType: SecurityGrantApiKey.ApiKeyGrantType
         AccessToken: string option
-        Username: Types.Username option
-        Password: Types.Password option
-        RunAs: Types.Username option
+        Username: CoreTypes.Username option
+        Password: CoreTypes.Password option
+        RunAs: CoreTypes.Username option
     }
 
         with
@@ -1773,7 +1773,7 @@ module SecurityOperations =
             }
 
         [<CustomOperation("refresh")>]
-        member _.Refresh(state: SecurityGrantApiKeyRequest, value: Types.Refresh) =
+        member _.Refresh(state: SecurityGrantApiKeyRequest, value: CoreTypes.Refresh) =
             { state with Refresh = Some value }
 
         [<CustomOperation("apiKey")>]
@@ -1789,21 +1789,21 @@ module SecurityOperations =
             { state with AccessToken = Some value }
 
         [<CustomOperation("username")>]
-        member _.Username(state: SecurityGrantApiKeyRequest, value: Types.Username) =
+        member _.Username(state: SecurityGrantApiKeyRequest, value: CoreTypes.Username) =
             { state with Username = Some value }
 
         [<CustomOperation("password")>]
-        member _.Password(state: SecurityGrantApiKeyRequest, value: Types.Password) =
+        member _.Password(state: SecurityGrantApiKeyRequest, value: CoreTypes.Password) =
             { state with Password = Some value }
 
         [<CustomOperation("runAs")>]
-        member _.RunAs(state: SecurityGrantApiKeyRequest, value: Types.Username) =
+        member _.RunAs(state: SecurityGrantApiKeyRequest, value: CoreTypes.Username) =
             { state with RunAs = Some value }
 
     let securityGrantApiKeyRequest = SecurityGrantApiKeyRequestBuilder()
 
     module GrantApiKey =
-        let withRefresh (value: Types.Refresh) (req: SecurityGrantApiKeyRequest) =
+        let withRefresh (value: CoreTypes.Refresh) (req: SecurityGrantApiKeyRequest) =
             { req with Refresh = Some value }
         let withApiKey (value: SecurityGrantApiKey.GrantApiKey) (req: SecurityGrantApiKeyRequest) =
             { req with ApiKey = value }
@@ -1811,15 +1811,15 @@ module SecurityOperations =
             { req with GrantType = value }
         let withAccessToken (value: string) (req: SecurityGrantApiKeyRequest) =
             { req with AccessToken = Some value }
-        let withUsername (value: Types.Username) (req: SecurityGrantApiKeyRequest) =
+        let withUsername (value: CoreTypes.Username) (req: SecurityGrantApiKeyRequest) =
             { req with Username = Some value }
-        let withPassword (value: Types.Password) (req: SecurityGrantApiKeyRequest) =
+        let withPassword (value: CoreTypes.Password) (req: SecurityGrantApiKeyRequest) =
             { req with Password = Some value }
-        let withRunAs (value: Types.Username) (req: SecurityGrantApiKeyRequest) =
+        let withRunAs (value: CoreTypes.Username) (req: SecurityGrantApiKeyRequest) =
             { req with RunAs = Some value }
 
     type SecurityHasPrivilegesRequest = {
-        User: Types.Name
+        User: CoreTypes.Name
         Application: SecurityHasPrivileges.ApplicationPrivilegesCheck list option
         Cluster: SecurityTypes.ClusterPrivilege list option
         Index: SecurityHasPrivileges.IndexPrivilegesCheck list option
@@ -1849,7 +1849,7 @@ module SecurityOperations =
             }
 
         [<CustomOperation("user")>]
-        member _.User(state: SecurityHasPrivilegesRequest, value: Types.Name) =
+        member _.User(state: SecurityHasPrivilegesRequest, value: CoreTypes.Name) =
             { state with User = value }
 
         [<CustomOperation("application")>]
@@ -1917,12 +1917,12 @@ module SecurityOperations =
             { req with Privileges = value }
 
     type SecurityInvalidateApiKeyRequest = {
-        Id: Types.Id option
-        Ids: Types.Id list option
-        Name: Types.Name option
+        Id: CoreTypes.Id option
+        Ids: CoreTypes.Id list option
+        Name: CoreTypes.Name option
         Owner: bool option
         RealmName: string option
-        Username: Types.Username option
+        Username: CoreTypes.Username option
     }
 
         with
@@ -1951,15 +1951,15 @@ module SecurityOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: SecurityInvalidateApiKeyRequest, value: Types.Id) =
+        member _.Id(state: SecurityInvalidateApiKeyRequest, value: CoreTypes.Id) =
             { state with Id = Some value }
 
         [<CustomOperation("ids")>]
-        member _.Ids(state: SecurityInvalidateApiKeyRequest, value: Types.Id list) =
+        member _.Ids(state: SecurityInvalidateApiKeyRequest, value: CoreTypes.Id list) =
             { state with Ids = Some value }
 
         [<CustomOperation("name")>]
-        member _.Name(state: SecurityInvalidateApiKeyRequest, value: Types.Name) =
+        member _.Name(state: SecurityInvalidateApiKeyRequest, value: CoreTypes.Name) =
             { state with Name = Some value }
 
         [<CustomOperation("owner")>]
@@ -1971,30 +1971,30 @@ module SecurityOperations =
             { state with RealmName = Some value }
 
         [<CustomOperation("username")>]
-        member _.Username(state: SecurityInvalidateApiKeyRequest, value: Types.Username) =
+        member _.Username(state: SecurityInvalidateApiKeyRequest, value: CoreTypes.Username) =
             { state with Username = Some value }
 
     let securityInvalidateApiKeyRequest = SecurityInvalidateApiKeyRequestBuilder()
 
     module InvalidateApiKey =
-        let withId (value: Types.Id) (req: SecurityInvalidateApiKeyRequest) =
+        let withId (value: CoreTypes.Id) (req: SecurityInvalidateApiKeyRequest) =
             { req with Id = Some value }
-        let withIds (value: Types.Id list) (req: SecurityInvalidateApiKeyRequest) =
+        let withIds (value: CoreTypes.Id list) (req: SecurityInvalidateApiKeyRequest) =
             { req with Ids = Some value }
-        let withName (value: Types.Name) (req: SecurityInvalidateApiKeyRequest) =
+        let withName (value: CoreTypes.Name) (req: SecurityInvalidateApiKeyRequest) =
             { req with Name = Some value }
         let withOwner (value: bool) (req: SecurityInvalidateApiKeyRequest) =
             { req with Owner = Some value }
         let withRealmName (value: string) (req: SecurityInvalidateApiKeyRequest) =
             { req with RealmName = Some value }
-        let withUsername (value: Types.Username) (req: SecurityInvalidateApiKeyRequest) =
+        let withUsername (value: CoreTypes.Username) (req: SecurityInvalidateApiKeyRequest) =
             { req with Username = Some value }
 
     type SecurityInvalidateTokenRequest = {
         Token: string option
         RefreshToken: string option
-        RealmName: Types.Name option
-        Username: Types.Username option
+        RealmName: CoreTypes.Name option
+        Username: CoreTypes.Username option
     }
 
         with
@@ -2029,11 +2029,11 @@ module SecurityOperations =
             { state with RefreshToken = Some value }
 
         [<CustomOperation("realmName")>]
-        member _.RealmName(state: SecurityInvalidateTokenRequest, value: Types.Name) =
+        member _.RealmName(state: SecurityInvalidateTokenRequest, value: CoreTypes.Name) =
             { state with RealmName = Some value }
 
         [<CustomOperation("username")>]
-        member _.Username(state: SecurityInvalidateTokenRequest, value: Types.Username) =
+        member _.Username(state: SecurityInvalidateTokenRequest, value: CoreTypes.Username) =
             { state with Username = Some value }
 
     let securityInvalidateTokenRequest = SecurityInvalidateTokenRequestBuilder()
@@ -2043,9 +2043,9 @@ module SecurityOperations =
             { req with Token = Some value }
         let withRefreshToken (value: string) (req: SecurityInvalidateTokenRequest) =
             { req with RefreshToken = Some value }
-        let withRealmName (value: Types.Name) (req: SecurityInvalidateTokenRequest) =
+        let withRealmName (value: CoreTypes.Name) (req: SecurityInvalidateTokenRequest) =
             { req with RealmName = Some value }
-        let withUsername (value: Types.Username) (req: SecurityInvalidateTokenRequest) =
+        let withUsername (value: CoreTypes.Username) (req: SecurityInvalidateTokenRequest) =
             { req with Username = Some value }
 
     type SecurityOidcAuthenticateRequest = {
@@ -2215,7 +2215,7 @@ module SecurityOperations =
             { req with State = Some value }
 
     type SecurityPutPrivilegesRequest = {
-        Refresh: Types.Refresh option
+        Refresh: CoreTypes.Refresh option
         Document: obj
     }
 
@@ -2248,7 +2248,7 @@ module SecurityOperations =
             }
 
         [<CustomOperation("refresh")>]
-        member _.Refresh(state: SecurityPutPrivilegesRequest, value: Types.Refresh) =
+        member _.Refresh(state: SecurityPutPrivilegesRequest, value: CoreTypes.Refresh) =
             { state with Refresh = Some value }
 
         [<CustomOperation("document")>]
@@ -2258,19 +2258,19 @@ module SecurityOperations =
     let securityPutPrivilegesRequest = SecurityPutPrivilegesRequestBuilder()
 
     module PutPrivileges =
-        let withRefresh (value: Types.Refresh) (req: SecurityPutPrivilegesRequest) =
+        let withRefresh (value: CoreTypes.Refresh) (req: SecurityPutPrivilegesRequest) =
             { req with Refresh = Some value }
 
     type SecurityPutRoleRequest = {
-        Name: Types.Name
-        Refresh: Types.Refresh option
+        Name: CoreTypes.Name
+        Refresh: CoreTypes.Refresh option
         Applications: SecurityTypes.ApplicationPrivileges list option
         Cluster: SecurityTypes.ClusterPrivilege list option
         Global: Map<string, System.Text.Json.JsonElement> option
         Indices: SecurityTypes.IndicesPrivileges list option
         RemoteIndices: SecurityTypes.RemoteIndicesPrivileges list option
         RemoteCluster: SecurityTypes.RemoteClusterPrivileges list option
-        Metadata: Types.Metadata option
+        Metadata: CoreTypes.Metadata option
         RunAs: string list option
         Description: string option
         TransientMetadata: Map<string, System.Text.Json.JsonElement> option
@@ -2315,11 +2315,11 @@ module SecurityOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: SecurityPutRoleRequest, value: Types.Name) =
+        member _.Name(state: SecurityPutRoleRequest, value: CoreTypes.Name) =
             { state with Name = value }
 
         [<CustomOperation("refresh")>]
-        member _.Refresh(state: SecurityPutRoleRequest, value: Types.Refresh) =
+        member _.Refresh(state: SecurityPutRoleRequest, value: CoreTypes.Refresh) =
             { state with Refresh = Some value }
 
         [<CustomOperation("applications")>]
@@ -2347,7 +2347,7 @@ module SecurityOperations =
             { state with RemoteCluster = Some value }
 
         [<CustomOperation("metadata")>]
-        member _.Metadata(state: SecurityPutRoleRequest, value: Types.Metadata) =
+        member _.Metadata(state: SecurityPutRoleRequest, value: CoreTypes.Metadata) =
             { state with Metadata = Some value }
 
         [<CustomOperation("runAs")>]
@@ -2365,7 +2365,7 @@ module SecurityOperations =
     let securityPutRoleRequest = SecurityPutRoleRequestBuilder()
 
     module PutRole =
-        let withRefresh (value: Types.Refresh) (req: SecurityPutRoleRequest) =
+        let withRefresh (value: CoreTypes.Refresh) (req: SecurityPutRoleRequest) =
             { req with Refresh = Some value }
         let withApplications (value: SecurityTypes.ApplicationPrivileges list) (req: SecurityPutRoleRequest) =
             { req with Applications = Some value }
@@ -2379,7 +2379,7 @@ module SecurityOperations =
             { req with RemoteIndices = Some value }
         let withRemoteCluster (value: SecurityTypes.RemoteClusterPrivileges list) (req: SecurityPutRoleRequest) =
             { req with RemoteCluster = Some value }
-        let withMetadata (value: Types.Metadata) (req: SecurityPutRoleRequest) =
+        let withMetadata (value: CoreTypes.Metadata) (req: SecurityPutRoleRequest) =
             { req with Metadata = Some value }
         let withRunAs (value: string list) (req: SecurityPutRoleRequest) =
             { req with RunAs = Some value }
@@ -2389,10 +2389,10 @@ module SecurityOperations =
             { req with TransientMetadata = Some value }
 
     type SecurityPutRoleMappingRequest = {
-        Name: Types.Name
-        Refresh: Types.Refresh option
+        Name: CoreTypes.Name
+        Refresh: CoreTypes.Refresh option
         Enabled: bool option
-        Metadata: Types.Metadata option
+        Metadata: CoreTypes.Metadata option
         Roles: string list option
         RoleTemplates: SecurityTypes.RoleTemplate list option
         Rules: SecurityTypes.RoleMappingRule option
@@ -2434,11 +2434,11 @@ module SecurityOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: SecurityPutRoleMappingRequest, value: Types.Name) =
+        member _.Name(state: SecurityPutRoleMappingRequest, value: CoreTypes.Name) =
             { state with Name = value }
 
         [<CustomOperation("refresh")>]
-        member _.Refresh(state: SecurityPutRoleMappingRequest, value: Types.Refresh) =
+        member _.Refresh(state: SecurityPutRoleMappingRequest, value: CoreTypes.Refresh) =
             { state with Refresh = Some value }
 
         [<CustomOperation("enabled")>]
@@ -2446,7 +2446,7 @@ module SecurityOperations =
             { state with Enabled = Some value }
 
         [<CustomOperation("metadata")>]
-        member _.Metadata(state: SecurityPutRoleMappingRequest, value: Types.Metadata) =
+        member _.Metadata(state: SecurityPutRoleMappingRequest, value: CoreTypes.Metadata) =
             { state with Metadata = Some value }
 
         [<CustomOperation("roles")>]
@@ -2468,11 +2468,11 @@ module SecurityOperations =
     let securityPutRoleMappingRequest = SecurityPutRoleMappingRequestBuilder()
 
     module PutRoleMapping =
-        let withRefresh (value: Types.Refresh) (req: SecurityPutRoleMappingRequest) =
+        let withRefresh (value: CoreTypes.Refresh) (req: SecurityPutRoleMappingRequest) =
             { req with Refresh = Some value }
         let withEnabled (value: bool) (req: SecurityPutRoleMappingRequest) =
             { req with Enabled = Some value }
-        let withMetadata (value: Types.Metadata) (req: SecurityPutRoleMappingRequest) =
+        let withMetadata (value: CoreTypes.Metadata) (req: SecurityPutRoleMappingRequest) =
             { req with Metadata = Some value }
         let withRoles (value: string list) (req: SecurityPutRoleMappingRequest) =
             { req with Roles = Some value }
@@ -2484,13 +2484,13 @@ module SecurityOperations =
             { req with RunAs = Some value }
 
     type SecurityPutUserRequest = {
-        Username: Types.Username
-        Refresh: Types.Refresh option
-        Username: Types.Username option
+        Username: CoreTypes.Username
+        Refresh: CoreTypes.Refresh option
+        Username: CoreTypes.Username option
         Email: string option option
         FullName: string option option
-        Metadata: Types.Metadata option
-        Password: Types.Password option
+        Metadata: CoreTypes.Metadata option
+        Password: CoreTypes.Password option
         PasswordHash: string option
         Roles: string list option
         Enabled: bool option
@@ -2533,15 +2533,15 @@ module SecurityOperations =
             }
 
         [<CustomOperation("username")>]
-        member _.Username(state: SecurityPutUserRequest, value: Types.Username) =
+        member _.Username(state: SecurityPutUserRequest, value: CoreTypes.Username) =
             { state with Username = value }
 
         [<CustomOperation("refresh")>]
-        member _.Refresh(state: SecurityPutUserRequest, value: Types.Refresh) =
+        member _.Refresh(state: SecurityPutUserRequest, value: CoreTypes.Refresh) =
             { state with Refresh = Some value }
 
         [<CustomOperation("username")>]
-        member _.Username(state: SecurityPutUserRequest, value: Types.Username) =
+        member _.Username(state: SecurityPutUserRequest, value: CoreTypes.Username) =
             { state with Username = Some value }
 
         [<CustomOperation("email")>]
@@ -2553,11 +2553,11 @@ module SecurityOperations =
             { state with FullName = Some value }
 
         [<CustomOperation("metadata")>]
-        member _.Metadata(state: SecurityPutUserRequest, value: Types.Metadata) =
+        member _.Metadata(state: SecurityPutUserRequest, value: CoreTypes.Metadata) =
             { state with Metadata = Some value }
 
         [<CustomOperation("password")>]
-        member _.Password(state: SecurityPutUserRequest, value: Types.Password) =
+        member _.Password(state: SecurityPutUserRequest, value: CoreTypes.Password) =
             { state with Password = Some value }
 
         [<CustomOperation("passwordHash")>]
@@ -2575,17 +2575,17 @@ module SecurityOperations =
     let securityPutUserRequest = SecurityPutUserRequestBuilder()
 
     module PutUser =
-        let withRefresh (value: Types.Refresh) (req: SecurityPutUserRequest) =
+        let withRefresh (value: CoreTypes.Refresh) (req: SecurityPutUserRequest) =
             { req with Refresh = Some value }
-        let withUsername (value: Types.Username) (req: SecurityPutUserRequest) =
+        let withUsername (value: CoreTypes.Username) (req: SecurityPutUserRequest) =
             { req with Username = Some value }
         let withEmail (value: string option) (req: SecurityPutUserRequest) =
             { req with Email = Some value }
         let withFullName (value: string option) (req: SecurityPutUserRequest) =
             { req with FullName = Some value }
-        let withMetadata (value: Types.Metadata) (req: SecurityPutUserRequest) =
+        let withMetadata (value: CoreTypes.Metadata) (req: SecurityPutUserRequest) =
             { req with Metadata = Some value }
-        let withPassword (value: Types.Password) (req: SecurityPutUserRequest) =
+        let withPassword (value: CoreTypes.Password) (req: SecurityPutUserRequest) =
             { req with Password = Some value }
         let withPasswordHash (value: string) (req: SecurityPutUserRequest) =
             { req with PasswordHash = Some value }
@@ -2600,10 +2600,10 @@ module SecurityOperations =
         TypedKeys: bool option
         Aggregations: Map<string, SecurityQueryApiKeys.ApiKeyAggregationContainer> option
         Query: SecurityQueryApiKeys.ApiKeyQueryContainer option
-        From: Types.Integer option
-        Sort: Types.Sort option
-        Size: Types.Integer option
-        SearchAfter: Types.SortResults option
+        From: CoreTypes.Integer option
+        Sort: CoreTypes.Sort option
+        Size: CoreTypes.Integer option
+        SearchAfter: CoreTypes.SortResults option
     }
 
         with
@@ -2664,19 +2664,19 @@ module SecurityOperations =
             { state with Query = Some value }
 
         [<CustomOperation("from")>]
-        member _.From(state: SecurityQueryApiKeysRequest, value: Types.Integer) =
+        member _.From(state: SecurityQueryApiKeysRequest, value: CoreTypes.Integer) =
             { state with From = Some value }
 
         [<CustomOperation("sort")>]
-        member _.Sort(state: SecurityQueryApiKeysRequest, value: Types.Sort) =
+        member _.Sort(state: SecurityQueryApiKeysRequest, value: CoreTypes.Sort) =
             { state with Sort = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: SecurityQueryApiKeysRequest, value: Types.Integer) =
+        member _.Size(state: SecurityQueryApiKeysRequest, value: CoreTypes.Integer) =
             { state with Size = Some value }
 
         [<CustomOperation("searchAfter")>]
-        member _.SearchAfter(state: SecurityQueryApiKeysRequest, value: Types.SortResults) =
+        member _.SearchAfter(state: SecurityQueryApiKeysRequest, value: CoreTypes.SortResults) =
             { state with SearchAfter = Some value }
 
     let securityQueryApiKeysRequest = SecurityQueryApiKeysRequestBuilder()
@@ -2692,21 +2692,21 @@ module SecurityOperations =
             { req with Aggregations = Some value }
         let withQuery (value: SecurityQueryApiKeys.ApiKeyQueryContainer) (req: SecurityQueryApiKeysRequest) =
             { req with Query = Some value }
-        let withFrom (value: Types.Integer) (req: SecurityQueryApiKeysRequest) =
+        let withFrom (value: CoreTypes.Integer) (req: SecurityQueryApiKeysRequest) =
             { req with From = Some value }
-        let withSort (value: Types.Sort) (req: SecurityQueryApiKeysRequest) =
+        let withSort (value: CoreTypes.Sort) (req: SecurityQueryApiKeysRequest) =
             { req with Sort = Some value }
-        let withSize (value: Types.Integer) (req: SecurityQueryApiKeysRequest) =
+        let withSize (value: CoreTypes.Integer) (req: SecurityQueryApiKeysRequest) =
             { req with Size = Some value }
-        let withSearchAfter (value: Types.SortResults) (req: SecurityQueryApiKeysRequest) =
+        let withSearchAfter (value: CoreTypes.SortResults) (req: SecurityQueryApiKeysRequest) =
             { req with SearchAfter = Some value }
 
     type SecurityQueryRoleRequest = {
         Query: SecurityQueryRole.RoleQueryContainer option
-        From: Types.Integer option
-        Sort: Types.Sort option
-        Size: Types.Integer option
-        SearchAfter: Types.SortResults option
+        From: CoreTypes.Integer option
+        Sort: CoreTypes.Sort option
+        Size: CoreTypes.Integer option
+        SearchAfter: CoreTypes.SortResults option
     }
 
         with
@@ -2738,19 +2738,19 @@ module SecurityOperations =
             { state with Query = Some value }
 
         [<CustomOperation("from")>]
-        member _.From(state: SecurityQueryRoleRequest, value: Types.Integer) =
+        member _.From(state: SecurityQueryRoleRequest, value: CoreTypes.Integer) =
             { state with From = Some value }
 
         [<CustomOperation("sort")>]
-        member _.Sort(state: SecurityQueryRoleRequest, value: Types.Sort) =
+        member _.Sort(state: SecurityQueryRoleRequest, value: CoreTypes.Sort) =
             { state with Sort = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: SecurityQueryRoleRequest, value: Types.Integer) =
+        member _.Size(state: SecurityQueryRoleRequest, value: CoreTypes.Integer) =
             { state with Size = Some value }
 
         [<CustomOperation("searchAfter")>]
-        member _.SearchAfter(state: SecurityQueryRoleRequest, value: Types.SortResults) =
+        member _.SearchAfter(state: SecurityQueryRoleRequest, value: CoreTypes.SortResults) =
             { state with SearchAfter = Some value }
 
     let securityQueryRoleRequest = SecurityQueryRoleRequestBuilder()
@@ -2758,22 +2758,22 @@ module SecurityOperations =
     module QueryRole =
         let withQuery (value: SecurityQueryRole.RoleQueryContainer) (req: SecurityQueryRoleRequest) =
             { req with Query = Some value }
-        let withFrom (value: Types.Integer) (req: SecurityQueryRoleRequest) =
+        let withFrom (value: CoreTypes.Integer) (req: SecurityQueryRoleRequest) =
             { req with From = Some value }
-        let withSort (value: Types.Sort) (req: SecurityQueryRoleRequest) =
+        let withSort (value: CoreTypes.Sort) (req: SecurityQueryRoleRequest) =
             { req with Sort = Some value }
-        let withSize (value: Types.Integer) (req: SecurityQueryRoleRequest) =
+        let withSize (value: CoreTypes.Integer) (req: SecurityQueryRoleRequest) =
             { req with Size = Some value }
-        let withSearchAfter (value: Types.SortResults) (req: SecurityQueryRoleRequest) =
+        let withSearchAfter (value: CoreTypes.SortResults) (req: SecurityQueryRoleRequest) =
             { req with SearchAfter = Some value }
 
     type SecurityQueryUserRequest = {
         WithProfileUid: bool option
         Query: SecurityQueryUser.UserQueryContainer option
-        From: Types.Integer option
-        Sort: Types.Sort option
-        Size: Types.Integer option
-        SearchAfter: Types.SortResults option
+        From: CoreTypes.Integer option
+        Sort: CoreTypes.Sort option
+        Size: CoreTypes.Integer option
+        SearchAfter: CoreTypes.SortResults option
     }
 
         with
@@ -2817,19 +2817,19 @@ module SecurityOperations =
             { state with Query = Some value }
 
         [<CustomOperation("from")>]
-        member _.From(state: SecurityQueryUserRequest, value: Types.Integer) =
+        member _.From(state: SecurityQueryUserRequest, value: CoreTypes.Integer) =
             { state with From = Some value }
 
         [<CustomOperation("sort")>]
-        member _.Sort(state: SecurityQueryUserRequest, value: Types.Sort) =
+        member _.Sort(state: SecurityQueryUserRequest, value: CoreTypes.Sort) =
             { state with Sort = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: SecurityQueryUserRequest, value: Types.Integer) =
+        member _.Size(state: SecurityQueryUserRequest, value: CoreTypes.Integer) =
             { state with Size = Some value }
 
         [<CustomOperation("searchAfter")>]
-        member _.SearchAfter(state: SecurityQueryUserRequest, value: Types.SortResults) =
+        member _.SearchAfter(state: SecurityQueryUserRequest, value: CoreTypes.SortResults) =
             { state with SearchAfter = Some value }
 
     let securityQueryUserRequest = SecurityQueryUserRequestBuilder()
@@ -2839,18 +2839,18 @@ module SecurityOperations =
             { req with WithProfileUid = Some value }
         let withQuery (value: SecurityQueryUser.UserQueryContainer) (req: SecurityQueryUserRequest) =
             { req with Query = Some value }
-        let withFrom (value: Types.Integer) (req: SecurityQueryUserRequest) =
+        let withFrom (value: CoreTypes.Integer) (req: SecurityQueryUserRequest) =
             { req with From = Some value }
-        let withSort (value: Types.Sort) (req: SecurityQueryUserRequest) =
+        let withSort (value: CoreTypes.Sort) (req: SecurityQueryUserRequest) =
             { req with Sort = Some value }
-        let withSize (value: Types.Integer) (req: SecurityQueryUserRequest) =
+        let withSize (value: CoreTypes.Integer) (req: SecurityQueryUserRequest) =
             { req with Size = Some value }
-        let withSearchAfter (value: Types.SortResults) (req: SecurityQueryUserRequest) =
+        let withSearchAfter (value: CoreTypes.SortResults) (req: SecurityQueryUserRequest) =
             { req with SearchAfter = Some value }
 
     type SecuritySamlAuthenticateRequest = {
         Content: string
-        Ids: Types.Ids
+        Ids: CoreTypes.Ids
         Realm: string option
     }
 
@@ -2881,7 +2881,7 @@ module SecurityOperations =
             { state with Content = value }
 
         [<CustomOperation("ids")>]
-        member _.Ids(state: SecuritySamlAuthenticateRequest, value: Types.Ids) =
+        member _.Ids(state: SecuritySamlAuthenticateRequest, value: CoreTypes.Ids) =
             { state with Ids = value }
 
         [<CustomOperation("realm")>]
@@ -2893,14 +2893,14 @@ module SecurityOperations =
     module SamlAuthenticate =
         let withContent (value: string) (req: SecuritySamlAuthenticateRequest) =
             { req with Content = value }
-        let withIds (value: Types.Ids) (req: SecuritySamlAuthenticateRequest) =
+        let withIds (value: CoreTypes.Ids) (req: SecuritySamlAuthenticateRequest) =
             { req with Ids = value }
         let withRealm (value: string) (req: SecuritySamlAuthenticateRequest) =
             { req with Realm = Some value }
 
     type SecuritySamlCompleteLogoutRequest = {
         Realm: string
-        Ids: Types.Ids
+        Ids: CoreTypes.Ids
         QueryString: string option
         Content: string option
     }
@@ -2933,7 +2933,7 @@ module SecurityOperations =
             { state with Realm = value }
 
         [<CustomOperation("ids")>]
-        member _.Ids(state: SecuritySamlCompleteLogoutRequest, value: Types.Ids) =
+        member _.Ids(state: SecuritySamlCompleteLogoutRequest, value: CoreTypes.Ids) =
             { state with Ids = value }
 
         [<CustomOperation("queryString")>]
@@ -2949,7 +2949,7 @@ module SecurityOperations =
     module SamlCompleteLogout =
         let withRealm (value: string) (req: SecuritySamlCompleteLogoutRequest) =
             { req with Realm = value }
-        let withIds (value: Types.Ids) (req: SecuritySamlCompleteLogoutRequest) =
+        let withIds (value: CoreTypes.Ids) (req: SecuritySamlCompleteLogoutRequest) =
             { req with Ids = value }
         let withQueryString (value: string) (req: SecuritySamlCompleteLogoutRequest) =
             { req with QueryString = Some value }
@@ -3099,7 +3099,7 @@ module SecurityOperations =
             { req with RelayState = Some value }
 
     type SecuritySamlServiceProviderMetadataRequest = {
-        RealmName: Types.Name
+        RealmName: CoreTypes.Name
     }
 
         with
@@ -3122,7 +3122,7 @@ module SecurityOperations =
             }
 
         [<CustomOperation("realmName")>]
-        member _.RealmName(state: SecuritySamlServiceProviderMetadataRequest, value: Types.Name) =
+        member _.RealmName(state: SecuritySamlServiceProviderMetadataRequest, value: CoreTypes.Name) =
             { state with RealmName = value }
 
     let securitySamlServiceProviderMetadataRequest = SecuritySamlServiceProviderMetadataRequestBuilder()
@@ -3130,7 +3130,7 @@ module SecurityOperations =
     type SecuritySuggestUserProfilesRequest = {
         Data: System.Text.Json.JsonElement option
         Name: string option
-        Size: Types.Long option
+        Size: CoreTypes.Long option
         Data: System.Text.Json.JsonElement option
         Hint: SecuritySuggestUserProfiles.Hint option
     }
@@ -3175,7 +3175,7 @@ module SecurityOperations =
             { state with Name = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: SecuritySuggestUserProfilesRequest, value: Types.Long) =
+        member _.Size(state: SecuritySuggestUserProfilesRequest, value: CoreTypes.Long) =
             { state with Size = Some value }
 
         [<CustomOperation("data")>]
@@ -3193,7 +3193,7 @@ module SecurityOperations =
             { req with Data = Some value }
         let withName (value: string) (req: SecuritySuggestUserProfilesRequest) =
             { req with Name = Some value }
-        let withSize (value: Types.Long) (req: SecuritySuggestUserProfilesRequest) =
+        let withSize (value: CoreTypes.Long) (req: SecuritySuggestUserProfilesRequest) =
             { req with Size = Some value }
         let withData (value: System.Text.Json.JsonElement) (req: SecuritySuggestUserProfilesRequest) =
             { req with Data = Some value }
@@ -3201,10 +3201,10 @@ module SecurityOperations =
             { req with Hint = Some value }
 
     type SecurityUpdateApiKeyRequest = {
-        Id: Types.Id
+        Id: CoreTypes.Id
         RoleDescriptors: Map<string, SecurityTypes.RoleDescriptor> option
-        Metadata: Types.Metadata option
-        Expiration: Types.Duration option
+        Metadata: CoreTypes.Metadata option
+        Expiration: CoreTypes.Duration option
     }
 
         with
@@ -3231,7 +3231,7 @@ module SecurityOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: SecurityUpdateApiKeyRequest, value: Types.Id) =
+        member _.Id(state: SecurityUpdateApiKeyRequest, value: CoreTypes.Id) =
             { state with Id = value }
 
         [<CustomOperation("roleDescriptors")>]
@@ -3239,11 +3239,11 @@ module SecurityOperations =
             { state with RoleDescriptors = Some value }
 
         [<CustomOperation("metadata")>]
-        member _.Metadata(state: SecurityUpdateApiKeyRequest, value: Types.Metadata) =
+        member _.Metadata(state: SecurityUpdateApiKeyRequest, value: CoreTypes.Metadata) =
             { state with Metadata = Some value }
 
         [<CustomOperation("expiration")>]
-        member _.Expiration(state: SecurityUpdateApiKeyRequest, value: Types.Duration) =
+        member _.Expiration(state: SecurityUpdateApiKeyRequest, value: CoreTypes.Duration) =
             { state with Expiration = Some value }
 
     let securityUpdateApiKeyRequest = SecurityUpdateApiKeyRequestBuilder()
@@ -3251,16 +3251,16 @@ module SecurityOperations =
     module UpdateApiKey =
         let withRoleDescriptors (value: Map<string, SecurityTypes.RoleDescriptor>) (req: SecurityUpdateApiKeyRequest) =
             { req with RoleDescriptors = Some value }
-        let withMetadata (value: Types.Metadata) (req: SecurityUpdateApiKeyRequest) =
+        let withMetadata (value: CoreTypes.Metadata) (req: SecurityUpdateApiKeyRequest) =
             { req with Metadata = Some value }
-        let withExpiration (value: Types.Duration) (req: SecurityUpdateApiKeyRequest) =
+        let withExpiration (value: CoreTypes.Duration) (req: SecurityUpdateApiKeyRequest) =
             { req with Expiration = Some value }
 
     type SecurityUpdateCrossClusterApiKeyRequest = {
-        Id: Types.Id
+        Id: CoreTypes.Id
         Access: SecurityTypes.Access
-        Expiration: Types.Duration option
-        Metadata: Types.Metadata option
+        Expiration: CoreTypes.Duration option
+        Metadata: CoreTypes.Metadata option
         CertificateIdentity: string option
     }
 
@@ -3289,7 +3289,7 @@ module SecurityOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: SecurityUpdateCrossClusterApiKeyRequest, value: Types.Id) =
+        member _.Id(state: SecurityUpdateCrossClusterApiKeyRequest, value: CoreTypes.Id) =
             { state with Id = value }
 
         [<CustomOperation("access")>]
@@ -3297,11 +3297,11 @@ module SecurityOperations =
             { state with Access = value }
 
         [<CustomOperation("expiration")>]
-        member _.Expiration(state: SecurityUpdateCrossClusterApiKeyRequest, value: Types.Duration) =
+        member _.Expiration(state: SecurityUpdateCrossClusterApiKeyRequest, value: CoreTypes.Duration) =
             { state with Expiration = Some value }
 
         [<CustomOperation("metadata")>]
-        member _.Metadata(state: SecurityUpdateCrossClusterApiKeyRequest, value: Types.Metadata) =
+        member _.Metadata(state: SecurityUpdateCrossClusterApiKeyRequest, value: CoreTypes.Metadata) =
             { state with Metadata = Some value }
 
         [<CustomOperation("certificateIdentity")>]
@@ -3313,16 +3313,16 @@ module SecurityOperations =
     module UpdateCrossClusterApiKey =
         let withAccess (value: SecurityTypes.Access) (req: SecurityUpdateCrossClusterApiKeyRequest) =
             { req with Access = value }
-        let withExpiration (value: Types.Duration) (req: SecurityUpdateCrossClusterApiKeyRequest) =
+        let withExpiration (value: CoreTypes.Duration) (req: SecurityUpdateCrossClusterApiKeyRequest) =
             { req with Expiration = Some value }
-        let withMetadata (value: Types.Metadata) (req: SecurityUpdateCrossClusterApiKeyRequest) =
+        let withMetadata (value: CoreTypes.Metadata) (req: SecurityUpdateCrossClusterApiKeyRequest) =
             { req with Metadata = Some value }
         let withCertificateIdentity (value: string) (req: SecurityUpdateCrossClusterApiKeyRequest) =
             { req with CertificateIdentity = Some value }
 
     type SecurityUpdateSettingsRequest = {
-        MasterTimeout: Types.Duration option
-        Timeout: Types.Duration option
+        MasterTimeout: CoreTypes.Duration option
+        Timeout: CoreTypes.Duration option
         Security: SecurityTypes.SecuritySettings option
         SecurityProfile: SecurityTypes.SecuritySettings option
         SecurityTokens: SecurityTypes.SecuritySettings option
@@ -3361,11 +3361,11 @@ module SecurityOperations =
             }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: SecurityUpdateSettingsRequest, value: Types.Duration) =
+        member _.MasterTimeout(state: SecurityUpdateSettingsRequest, value: CoreTypes.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: SecurityUpdateSettingsRequest, value: Types.Duration) =
+        member _.Timeout(state: SecurityUpdateSettingsRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("security")>]
@@ -3383,9 +3383,9 @@ module SecurityOperations =
     let securityUpdateSettingsRequest = SecurityUpdateSettingsRequestBuilder()
 
     module UpdateSettings =
-        let withMasterTimeout (value: Types.Duration) (req: SecurityUpdateSettingsRequest) =
+        let withMasterTimeout (value: CoreTypes.Duration) (req: SecurityUpdateSettingsRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: Types.Duration) (req: SecurityUpdateSettingsRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: SecurityUpdateSettingsRequest) =
             { req with Timeout = Some value }
         let withSecurity (value: SecurityTypes.SecuritySettings) (req: SecurityUpdateSettingsRequest) =
             { req with Security = Some value }
@@ -3396,9 +3396,9 @@ module SecurityOperations =
 
     type SecurityUpdateUserProfileDataRequest = {
         Uid: SecurityTypes.UserProfileId
-        IfSeqNo: Types.SequenceNumber option
-        IfPrimaryTerm: Types.Long option
-        Refresh: Types.Refresh option
+        IfSeqNo: CoreTypes.SequenceNumber option
+        IfPrimaryTerm: CoreTypes.Long option
+        Refresh: CoreTypes.Refresh option
         Labels: Map<string, System.Text.Json.JsonElement> option
         Data: Map<string, System.Text.Json.JsonElement> option
     }
@@ -3424,7 +3424,7 @@ module SecurityOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type SecurityUpdateUserProfileDataResponse = Types.AcknowledgedResponseBase
+    type SecurityUpdateUserProfileDataResponse = CoreTypes.AcknowledgedResponseBase
 
     type SecurityUpdateUserProfileDataRequestBuilder() =
         member _.Yield(_: unit) : SecurityUpdateUserProfileDataRequest =
@@ -3442,15 +3442,15 @@ module SecurityOperations =
             { state with Uid = value }
 
         [<CustomOperation("ifSeqNo")>]
-        member _.IfSeqNo(state: SecurityUpdateUserProfileDataRequest, value: Types.SequenceNumber) =
+        member _.IfSeqNo(state: SecurityUpdateUserProfileDataRequest, value: CoreTypes.SequenceNumber) =
             { state with IfSeqNo = Some value }
 
         [<CustomOperation("ifPrimaryTerm")>]
-        member _.IfPrimaryTerm(state: SecurityUpdateUserProfileDataRequest, value: Types.Long) =
+        member _.IfPrimaryTerm(state: SecurityUpdateUserProfileDataRequest, value: CoreTypes.Long) =
             { state with IfPrimaryTerm = Some value }
 
         [<CustomOperation("refresh")>]
-        member _.Refresh(state: SecurityUpdateUserProfileDataRequest, value: Types.Refresh) =
+        member _.Refresh(state: SecurityUpdateUserProfileDataRequest, value: CoreTypes.Refresh) =
             { state with Refresh = Some value }
 
         [<CustomOperation("labels")>]
@@ -3464,11 +3464,11 @@ module SecurityOperations =
     let securityUpdateUserProfileDataRequest = SecurityUpdateUserProfileDataRequestBuilder()
 
     module UpdateUserProfileData =
-        let withIfSeqNo (value: Types.SequenceNumber) (req: SecurityUpdateUserProfileDataRequest) =
+        let withIfSeqNo (value: CoreTypes.SequenceNumber) (req: SecurityUpdateUserProfileDataRequest) =
             { req with IfSeqNo = Some value }
-        let withIfPrimaryTerm (value: Types.Long) (req: SecurityUpdateUserProfileDataRequest) =
+        let withIfPrimaryTerm (value: CoreTypes.Long) (req: SecurityUpdateUserProfileDataRequest) =
             { req with IfPrimaryTerm = Some value }
-        let withRefresh (value: Types.Refresh) (req: SecurityUpdateUserProfileDataRequest) =
+        let withRefresh (value: CoreTypes.Refresh) (req: SecurityUpdateUserProfileDataRequest) =
             { req with Refresh = Some value }
         let withLabels (value: Map<string, System.Text.Json.JsonElement>) (req: SecurityUpdateUserProfileDataRequest) =
             { req with Labels = Some value }

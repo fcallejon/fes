@@ -9,7 +9,7 @@ module SecurityCreateServiceToken =
 
     type Token = {
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.Name
+        Name: CoreTypes.Name
         [<System.Text.Json.Serialization.JsonPropertyName("value")>]
         Value: string
     }

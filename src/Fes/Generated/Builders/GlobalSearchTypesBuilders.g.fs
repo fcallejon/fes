@@ -27,51 +27,51 @@ module GlobalSearchTypesBuilders =
             }
 
         [<CustomOperation("buildAggregation")>]
-        member _.BuildAggregation(state: AggregationBreakdown, value: Types.Long) =
+        member _.BuildAggregation(state: AggregationBreakdown, value: CoreTypes.Long) =
             { state with BuildAggregation = value }
 
         [<CustomOperation("buildAggregationCount")>]
-        member _.BuildAggregationCount(state: AggregationBreakdown, value: Types.Long) =
+        member _.BuildAggregationCount(state: AggregationBreakdown, value: CoreTypes.Long) =
             { state with BuildAggregationCount = value }
 
         [<CustomOperation("buildLeafCollector")>]
-        member _.BuildLeafCollector(state: AggregationBreakdown, value: Types.Long) =
+        member _.BuildLeafCollector(state: AggregationBreakdown, value: CoreTypes.Long) =
             { state with BuildLeafCollector = value }
 
         [<CustomOperation("buildLeafCollectorCount")>]
-        member _.BuildLeafCollectorCount(state: AggregationBreakdown, value: Types.Long) =
+        member _.BuildLeafCollectorCount(state: AggregationBreakdown, value: CoreTypes.Long) =
             { state with BuildLeafCollectorCount = value }
 
         [<CustomOperation("collect")>]
-        member _.Collect(state: AggregationBreakdown, value: Types.Long) =
+        member _.Collect(state: AggregationBreakdown, value: CoreTypes.Long) =
             { state with Collect = value }
 
         [<CustomOperation("collectCount")>]
-        member _.CollectCount(state: AggregationBreakdown, value: Types.Long) =
+        member _.CollectCount(state: AggregationBreakdown, value: CoreTypes.Long) =
             { state with CollectCount = value }
 
         [<CustomOperation("initialize")>]
-        member _.Initialize(state: AggregationBreakdown, value: Types.Long) =
+        member _.Initialize(state: AggregationBreakdown, value: CoreTypes.Long) =
             { state with Initialize = value }
 
         [<CustomOperation("initializeCount")>]
-        member _.InitializeCount(state: AggregationBreakdown, value: Types.Long) =
+        member _.InitializeCount(state: AggregationBreakdown, value: CoreTypes.Long) =
             { state with InitializeCount = value }
 
         [<CustomOperation("postCollection")>]
-        member _.PostCollection(state: AggregationBreakdown, value: Types.Long) =
+        member _.PostCollection(state: AggregationBreakdown, value: CoreTypes.Long) =
             { state with PostCollection = Some value }
 
         [<CustomOperation("postCollectionCount")>]
-        member _.PostCollectionCount(state: AggregationBreakdown, value: Types.Long) =
+        member _.PostCollectionCount(state: AggregationBreakdown, value: CoreTypes.Long) =
             { state with PostCollectionCount = Some value }
 
         [<CustomOperation("reduce")>]
-        member _.Reduce(state: AggregationBreakdown, value: Types.Long) =
+        member _.Reduce(state: AggregationBreakdown, value: CoreTypes.Long) =
             { state with Reduce = value }
 
         [<CustomOperation("reduceCount")>]
-        member _.ReduceCount(state: AggregationBreakdown, value: Types.Long) =
+        member _.ReduceCount(state: AggregationBreakdown, value: CoreTypes.Long) =
             { state with ReduceCount = value }
 
     let aggregationBreakdown = AggregationBreakdownBuilder()
@@ -96,7 +96,7 @@ module GlobalSearchTypesBuilders =
             { state with Description = value }
 
         [<CustomOperation("timeInNanos")>]
-        member _.TimeInNanos(state: AggregationProfile, value: Types.DurationValue<Types.UnitNanos>) =
+        member _.TimeInNanos(state: AggregationProfile, value: CoreTypes.DurationValue<CoreTypes.UnitNanos>) =
             { state with TimeInNanos = value }
 
         [<CustomOperation("type'")>]
@@ -151,7 +151,7 @@ module GlobalSearchTypesBuilders =
             }
 
         [<CustomOperation("segmentsWithMultiValuedOrds")>]
-        member _.SegmentsWithMultiValuedOrds(state: AggregationProfileDebug, value: Types.Integer) =
+        member _.SegmentsWithMultiValuedOrds(state: AggregationProfileDebug, value: CoreTypes.Integer) =
             { state with SegmentsWithMultiValuedOrds = Some value }
 
         [<CustomOperation("collectionStrategy")>]
@@ -159,15 +159,15 @@ module GlobalSearchTypesBuilders =
             { state with CollectionStrategy = Some value }
 
         [<CustomOperation("segmentsWithSingleValuedOrds")>]
-        member _.SegmentsWithSingleValuedOrds(state: AggregationProfileDebug, value: Types.Integer) =
+        member _.SegmentsWithSingleValuedOrds(state: AggregationProfileDebug, value: CoreTypes.Integer) =
             { state with SegmentsWithSingleValuedOrds = Some value }
 
         [<CustomOperation("totalBuckets")>]
-        member _.TotalBuckets(state: AggregationProfileDebug, value: Types.Integer) =
+        member _.TotalBuckets(state: AggregationProfileDebug, value: CoreTypes.Integer) =
             { state with TotalBuckets = Some value }
 
         [<CustomOperation("builtBuckets")>]
-        member _.BuiltBuckets(state: AggregationProfileDebug, value: Types.Integer) =
+        member _.BuiltBuckets(state: AggregationProfileDebug, value: CoreTypes.Integer) =
             { state with BuiltBuckets = Some value }
 
         [<CustomOperation("resultStrategy")>]
@@ -187,51 +187,51 @@ module GlobalSearchTypesBuilders =
             { state with DelegateDebug = Some value }
 
         [<CustomOperation("charsFetched")>]
-        member _.CharsFetched(state: AggregationProfileDebug, value: Types.Integer) =
+        member _.CharsFetched(state: AggregationProfileDebug, value: CoreTypes.Integer) =
             { state with CharsFetched = Some value }
 
         [<CustomOperation("extractCount")>]
-        member _.ExtractCount(state: AggregationProfileDebug, value: Types.Integer) =
+        member _.ExtractCount(state: AggregationProfileDebug, value: CoreTypes.Integer) =
             { state with ExtractCount = Some value }
 
         [<CustomOperation("extractNs")>]
-        member _.ExtractNs(state: AggregationProfileDebug, value: Types.Integer) =
+        member _.ExtractNs(state: AggregationProfileDebug, value: CoreTypes.Integer) =
             { state with ExtractNs = Some value }
 
         [<CustomOperation("valuesFetched")>]
-        member _.ValuesFetched(state: AggregationProfileDebug, value: Types.Integer) =
+        member _.ValuesFetched(state: AggregationProfileDebug, value: CoreTypes.Integer) =
             { state with ValuesFetched = Some value }
 
         [<CustomOperation("collectAnalyzedNs")>]
-        member _.CollectAnalyzedNs(state: AggregationProfileDebug, value: Types.Integer) =
+        member _.CollectAnalyzedNs(state: AggregationProfileDebug, value: CoreTypes.Integer) =
             { state with CollectAnalyzedNs = Some value }
 
         [<CustomOperation("collectAnalyzedCount")>]
-        member _.CollectAnalyzedCount(state: AggregationProfileDebug, value: Types.Integer) =
+        member _.CollectAnalyzedCount(state: AggregationProfileDebug, value: CoreTypes.Integer) =
             { state with CollectAnalyzedCount = Some value }
 
         [<CustomOperation("survivingBuckets")>]
-        member _.SurvivingBuckets(state: AggregationProfileDebug, value: Types.Integer) =
+        member _.SurvivingBuckets(state: AggregationProfileDebug, value: CoreTypes.Integer) =
             { state with SurvivingBuckets = Some value }
 
         [<CustomOperation("ordinalsCollectorsUsed")>]
-        member _.OrdinalsCollectorsUsed(state: AggregationProfileDebug, value: Types.Integer) =
+        member _.OrdinalsCollectorsUsed(state: AggregationProfileDebug, value: CoreTypes.Integer) =
             { state with OrdinalsCollectorsUsed = Some value }
 
         [<CustomOperation("ordinalsCollectorsOverheadTooHigh")>]
-        member _.OrdinalsCollectorsOverheadTooHigh(state: AggregationProfileDebug, value: Types.Integer) =
+        member _.OrdinalsCollectorsOverheadTooHigh(state: AggregationProfileDebug, value: CoreTypes.Integer) =
             { state with OrdinalsCollectorsOverheadTooHigh = Some value }
 
         [<CustomOperation("stringHashingCollectorsUsed")>]
-        member _.StringHashingCollectorsUsed(state: AggregationProfileDebug, value: Types.Integer) =
+        member _.StringHashingCollectorsUsed(state: AggregationProfileDebug, value: CoreTypes.Integer) =
             { state with StringHashingCollectorsUsed = Some value }
 
         [<CustomOperation("numericCollectorsUsed")>]
-        member _.NumericCollectorsUsed(state: AggregationProfileDebug, value: Types.Integer) =
+        member _.NumericCollectorsUsed(state: AggregationProfileDebug, value: CoreTypes.Integer) =
             { state with NumericCollectorsUsed = Some value }
 
         [<CustomOperation("emptyCollectorsUsed")>]
-        member _.EmptyCollectorsUsed(state: AggregationProfileDebug, value: Types.Integer) =
+        member _.EmptyCollectorsUsed(state: AggregationProfileDebug, value: CoreTypes.Integer) =
             { state with EmptyCollectorsUsed = Some value }
 
         [<CustomOperation("deferredAggregators")>]
@@ -239,11 +239,11 @@ module GlobalSearchTypesBuilders =
             { state with DeferredAggregators = Some value }
 
         [<CustomOperation("segmentsWithDocCountField")>]
-        member _.SegmentsWithDocCountField(state: AggregationProfileDebug, value: Types.Integer) =
+        member _.SegmentsWithDocCountField(state: AggregationProfileDebug, value: CoreTypes.Integer) =
             { state with SegmentsWithDocCountField = Some value }
 
         [<CustomOperation("segmentsWithDeletedDocs")>]
-        member _.SegmentsWithDeletedDocs(state: AggregationProfileDebug, value: Types.Integer) =
+        member _.SegmentsWithDeletedDocs(state: AggregationProfileDebug, value: CoreTypes.Integer) =
             { state with SegmentsWithDeletedDocs = Some value }
 
         [<CustomOperation("filters")>]
@@ -251,11 +251,11 @@ module GlobalSearchTypesBuilders =
             { state with Filters = Some value }
 
         [<CustomOperation("segmentsCounted")>]
-        member _.SegmentsCounted(state: AggregationProfileDebug, value: Types.Integer) =
+        member _.SegmentsCounted(state: AggregationProfileDebug, value: CoreTypes.Integer) =
             { state with SegmentsCounted = Some value }
 
         [<CustomOperation("segmentsCollected")>]
-        member _.SegmentsCollected(state: AggregationProfileDebug, value: Types.Integer) =
+        member _.SegmentsCollected(state: AggregationProfileDebug, value: CoreTypes.Integer) =
             { state with SegmentsCollected = Some value }
 
         [<CustomOperation("mapReducer")>]
@@ -263,19 +263,19 @@ module GlobalSearchTypesBuilders =
             { state with MapReducer = Some value }
 
         [<CustomOperation("bruteForceUsed")>]
-        member _.BruteForceUsed(state: AggregationProfileDebug, value: Types.Integer) =
+        member _.BruteForceUsed(state: AggregationProfileDebug, value: CoreTypes.Integer) =
             { state with BruteForceUsed = Some value }
 
         [<CustomOperation("dynamicPruningAttempted")>]
-        member _.DynamicPruningAttempted(state: AggregationProfileDebug, value: Types.Integer) =
+        member _.DynamicPruningAttempted(state: AggregationProfileDebug, value: CoreTypes.Integer) =
             { state with DynamicPruningAttempted = Some value }
 
         [<CustomOperation("dynamicPruningUsed")>]
-        member _.DynamicPruningUsed(state: AggregationProfileDebug, value: Types.Integer) =
+        member _.DynamicPruningUsed(state: AggregationProfileDebug, value: CoreTypes.Integer) =
             { state with DynamicPruningUsed = Some value }
 
         [<CustomOperation("skippedDueToNoData")>]
-        member _.SkippedDueToNoData(state: AggregationProfileDebug, value: Types.Integer) =
+        member _.SkippedDueToNoData(state: AggregationProfileDebug, value: CoreTypes.Integer) =
             { state with SkippedDueToNoData = Some value }
 
     let aggregationProfileDebug = AggregationProfileDebugBuilder()
@@ -290,7 +290,7 @@ module GlobalSearchTypesBuilders =
             }
 
         [<CustomOperation("resultsFromMetadata")>]
-        member _.ResultsFromMetadata(state: AggregationProfileDelegateDebugFilter, value: Types.Integer) =
+        member _.ResultsFromMetadata(state: AggregationProfileDelegateDebugFilter, value: CoreTypes.Integer) =
             { state with ResultsFromMetadata = Some value }
 
         [<CustomOperation("query")>]
@@ -302,7 +302,7 @@ module GlobalSearchTypesBuilders =
             { state with SpecializedFor = Some value }
 
         [<CustomOperation("segmentsCountedInConstantTime")>]
-        member _.SegmentsCountedInConstantTime(state: AggregationProfileDelegateDebugFilter, value: Types.Integer) =
+        member _.SegmentsCountedInConstantTime(state: AggregationProfileDelegateDebugFilter, value: CoreTypes.Integer) =
             { state with SegmentsCountedInConstantTime = Some value }
 
     let aggregationProfileDelegateDebugFilter = AggregationProfileDelegateDebugFilterBuilder()
@@ -318,7 +318,7 @@ module GlobalSearchTypesBuilders =
             }
 
         [<CustomOperation("boost")>]
-        member _.Boost(state: CompletionContext, value: Types.Double) =
+        member _.Boost(state: CompletionContext, value: CoreTypes.Double) =
             { state with Boost = Some value }
 
         [<CustomOperation("context")>]
@@ -326,11 +326,11 @@ module GlobalSearchTypesBuilders =
             { state with Context = value }
 
         [<CustomOperation("neighbours")>]
-        member _.Neighbours(state: CompletionContext, value: Types.GeoHashPrecision list) =
+        member _.Neighbours(state: CompletionContext, value: CoreTypes.GeoHashPrecision list) =
             { state with Neighbours = Some value }
 
         [<CustomOperation("precision")>]
-        member _.Precision(state: CompletionContext, value: Types.GeoHashPrecision) =
+        member _.Precision(state: CompletionContext, value: CoreTypes.GeoHashPrecision) =
             { state with Precision = Some value }
 
         [<CustomOperation("prefix")>]
@@ -380,7 +380,7 @@ module GlobalSearchTypesBuilders =
             { state with Id = Some value }
 
         [<CustomOperation("index")>]
-        member _.Index(state: CompletionSuggestOption, value: Types.IndexName) =
+        member _.Index(state: CompletionSuggestOption, value: CoreTypes.IndexName) =
             { state with Index = Some value }
 
         [<CustomOperation("routing")>]
@@ -388,7 +388,7 @@ module GlobalSearchTypesBuilders =
             { state with Routing = Some value }
 
         [<CustomOperation("score")>]
-        member _.Score(state: CompletionSuggestOption, value: Types.Double) =
+        member _.Score(state: CompletionSuggestOption, value: CoreTypes.Double) =
             { state with Score = Some value }
 
         [<CustomOperation("source")>]
@@ -400,7 +400,7 @@ module GlobalSearchTypesBuilders =
             { state with Text = value }
 
         [<CustomOperation("score")>]
-        member _.Score(state: CompletionSuggestOption, value: Types.Double) =
+        member _.Score(state: CompletionSuggestOption, value: CoreTypes.Double) =
             { state with Score = Some value }
 
     let completionSuggestOption = CompletionSuggestOptionBuilder()
@@ -415,7 +415,7 @@ module GlobalSearchTypesBuilders =
             }
 
         [<CustomOperation("contexts")>]
-        member _.Contexts(state: CompletionSuggester, value: Map<Types.Field, System.Text.Json.JsonElement>) =
+        member _.Contexts(state: CompletionSuggester, value: Map<CoreTypes.Field, System.Text.Json.JsonElement>) =
             { state with Contexts = Some value }
 
         [<CustomOperation("fuzzy")>]
@@ -470,11 +470,11 @@ module GlobalSearchTypesBuilders =
             { state with Description = value }
 
         [<CustomOperation("time")>]
-        member _.Time(state: DfsStatisticsProfile, value: Types.Duration) =
+        member _.Time(state: DfsStatisticsProfile, value: CoreTypes.Duration) =
             { state with Time = Some value }
 
         [<CustomOperation("timeInNanos")>]
-        member _.TimeInNanos(state: DfsStatisticsProfile, value: Types.DurationValue<Types.UnitNanos>) =
+        member _.TimeInNanos(state: DfsStatisticsProfile, value: CoreTypes.DurationValue<CoreTypes.UnitNanos>) =
             { state with TimeInNanos = value }
 
         [<CustomOperation("breakdown")>]
@@ -508,27 +508,27 @@ module GlobalSearchTypesBuilders =
             }
 
         [<CustomOperation("field")>]
-        member _.Field(state: DirectGenerator, value: Types.Field) =
+        member _.Field(state: DirectGenerator, value: CoreTypes.Field) =
             { state with Field = value }
 
         [<CustomOperation("maxEdits")>]
-        member _.MaxEdits(state: DirectGenerator, value: Types.Integer) =
+        member _.MaxEdits(state: DirectGenerator, value: CoreTypes.Integer) =
             { state with MaxEdits = Some value }
 
         [<CustomOperation("maxInspections")>]
-        member _.MaxInspections(state: DirectGenerator, value: Types.Float) =
+        member _.MaxInspections(state: DirectGenerator, value: CoreTypes.Float) =
             { state with MaxInspections = Some value }
 
         [<CustomOperation("maxTermFreq")>]
-        member _.MaxTermFreq(state: DirectGenerator, value: Types.Float) =
+        member _.MaxTermFreq(state: DirectGenerator, value: CoreTypes.Float) =
             { state with MaxTermFreq = Some value }
 
         [<CustomOperation("minDocFreq")>]
-        member _.MinDocFreq(state: DirectGenerator, value: Types.Float) =
+        member _.MinDocFreq(state: DirectGenerator, value: CoreTypes.Float) =
             { state with MinDocFreq = Some value }
 
         [<CustomOperation("minWordLength")>]
-        member _.MinWordLength(state: DirectGenerator, value: Types.Integer) =
+        member _.MinWordLength(state: DirectGenerator, value: CoreTypes.Integer) =
             { state with MinWordLength = Some value }
 
         [<CustomOperation("postFilter")>]
@@ -540,15 +540,15 @@ module GlobalSearchTypesBuilders =
             { state with PreFilter = Some value }
 
         [<CustomOperation("prefixLength")>]
-        member _.PrefixLength(state: DirectGenerator, value: Types.Integer) =
+        member _.PrefixLength(state: DirectGenerator, value: CoreTypes.Integer) =
             { state with PrefixLength = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: DirectGenerator, value: Types.Integer) =
+        member _.Size(state: DirectGenerator, value: CoreTypes.Integer) =
             { state with Size = Some value }
 
         [<CustomOperation("suggestMode")>]
-        member _.SuggestMode(state: DirectGenerator, value: Types.SuggestMode) =
+        member _.SuggestMode(state: DirectGenerator, value: CoreTypes.SuggestMode) =
             { state with SuggestMode = Some value }
 
     let directGenerator = DirectGeneratorBuilder()
@@ -573,7 +573,7 @@ module GlobalSearchTypesBuilders =
             { state with Description = value }
 
         [<CustomOperation("timeInNanos")>]
-        member _.TimeInNanos(state: FetchProfile, value: Types.DurationValue<Types.UnitNanos>) =
+        member _.TimeInNanos(state: FetchProfile, value: CoreTypes.DurationValue<CoreTypes.UnitNanos>) =
             { state with TimeInNanos = value }
 
         [<CustomOperation("breakdown")>]
@@ -604,35 +604,35 @@ module GlobalSearchTypesBuilders =
             }
 
         [<CustomOperation("loadSource")>]
-        member _.LoadSource(state: FetchProfileBreakdown, value: Types.Integer) =
+        member _.LoadSource(state: FetchProfileBreakdown, value: CoreTypes.Integer) =
             { state with LoadSource = Some value }
 
         [<CustomOperation("loadSourceCount")>]
-        member _.LoadSourceCount(state: FetchProfileBreakdown, value: Types.Integer) =
+        member _.LoadSourceCount(state: FetchProfileBreakdown, value: CoreTypes.Integer) =
             { state with LoadSourceCount = Some value }
 
         [<CustomOperation("loadStoredFields")>]
-        member _.LoadStoredFields(state: FetchProfileBreakdown, value: Types.Integer) =
+        member _.LoadStoredFields(state: FetchProfileBreakdown, value: CoreTypes.Integer) =
             { state with LoadStoredFields = Some value }
 
         [<CustomOperation("loadStoredFieldsCount")>]
-        member _.LoadStoredFieldsCount(state: FetchProfileBreakdown, value: Types.Integer) =
+        member _.LoadStoredFieldsCount(state: FetchProfileBreakdown, value: CoreTypes.Integer) =
             { state with LoadStoredFieldsCount = Some value }
 
         [<CustomOperation("nextReader")>]
-        member _.NextReader(state: FetchProfileBreakdown, value: Types.Integer) =
+        member _.NextReader(state: FetchProfileBreakdown, value: CoreTypes.Integer) =
             { state with NextReader = Some value }
 
         [<CustomOperation("nextReaderCount")>]
-        member _.NextReaderCount(state: FetchProfileBreakdown, value: Types.Integer) =
+        member _.NextReaderCount(state: FetchProfileBreakdown, value: CoreTypes.Integer) =
             { state with NextReaderCount = Some value }
 
         [<CustomOperation("processCount")>]
-        member _.ProcessCount(state: FetchProfileBreakdown, value: Types.Integer) =
+        member _.ProcessCount(state: FetchProfileBreakdown, value: CoreTypes.Integer) =
             { state with ProcessCount = Some value }
 
         [<CustomOperation("process")>]
-        member _.Process(state: FetchProfileBreakdown, value: Types.Integer) =
+        member _.Process(state: FetchProfileBreakdown, value: CoreTypes.Integer) =
             { state with Process = Some value }
 
     let fetchProfileBreakdown = FetchProfileBreakdownBuilder()
@@ -649,7 +649,7 @@ module GlobalSearchTypesBuilders =
             { state with StoredFields = Some value }
 
         [<CustomOperation("fastPath")>]
-        member _.FastPath(state: FetchProfileDebug, value: Types.Integer) =
+        member _.FastPath(state: FetchProfileDebug, value: CoreTypes.Integer) =
             { state with FastPath = Some value }
 
     let fetchProfileDebug = FetchProfileDebugBuilder()
@@ -664,7 +664,7 @@ module GlobalSearchTypesBuilders =
             }
 
         [<CustomOperation("field")>]
-        member _.Field(state: FieldCollapse, value: Types.Field) =
+        member _.Field(state: FieldCollapse, value: CoreTypes.Field) =
             { state with Field = value }
 
         [<CustomOperation("innerHits")>]
@@ -672,7 +672,7 @@ module GlobalSearchTypesBuilders =
             { state with InnerHits = Some value }
 
         [<CustomOperation("maxConcurrentGroupSearches")>]
-        member _.MaxConcurrentGroupSearches(state: FieldCollapse, value: Types.Integer) =
+        member _.MaxConcurrentGroupSearches(state: FieldCollapse, value: CoreTypes.Integer) =
             { state with MaxConcurrentGroupSearches = Some value }
 
         [<CustomOperation("collapse")>]
@@ -727,7 +727,7 @@ module GlobalSearchTypesBuilders =
             { state with BoundaryChars = Some value }
 
         [<CustomOperation("boundaryMaxScan")>]
-        member _.BoundaryMaxScan(state: HighlightBase, value: Types.Integer) =
+        member _.BoundaryMaxScan(state: HighlightBase, value: CoreTypes.Integer) =
             { state with BoundaryMaxScan = Some value }
 
         [<CustomOperation("boundaryScanner")>]
@@ -747,7 +747,7 @@ module GlobalSearchTypesBuilders =
             { state with Fragmenter = Some value }
 
         [<CustomOperation("fragmentSize")>]
-        member _.FragmentSize(state: HighlightBase, value: Types.Integer) =
+        member _.FragmentSize(state: HighlightBase, value: CoreTypes.Integer) =
             { state with FragmentSize = Some value }
 
         [<CustomOperation("highlightFilter")>]
@@ -755,23 +755,23 @@ module GlobalSearchTypesBuilders =
             { state with HighlightFilter = Some value }
 
         [<CustomOperation("highlightQuery")>]
-        member _.HighlightQuery(state: HighlightBase, value: TypesQueryDsl.QueryContainer) =
+        member _.HighlightQuery(state: HighlightBase, value: CoreTypes.QueryContainer) =
             { state with HighlightQuery = Some value }
 
         [<CustomOperation("maxFragmentLength")>]
-        member _.MaxFragmentLength(state: HighlightBase, value: Types.Integer) =
+        member _.MaxFragmentLength(state: HighlightBase, value: CoreTypes.Integer) =
             { state with MaxFragmentLength = Some value }
 
         [<CustomOperation("maxAnalyzedOffset")>]
-        member _.MaxAnalyzedOffset(state: HighlightBase, value: Types.Integer) =
+        member _.MaxAnalyzedOffset(state: HighlightBase, value: CoreTypes.Integer) =
             { state with MaxAnalyzedOffset = Some value }
 
         [<CustomOperation("noMatchSize")>]
-        member _.NoMatchSize(state: HighlightBase, value: Types.Integer) =
+        member _.NoMatchSize(state: HighlightBase, value: CoreTypes.Integer) =
             { state with NoMatchSize = Some value }
 
         [<CustomOperation("numberOfFragments")>]
-        member _.NumberOfFragments(state: HighlightBase, value: Types.Integer) =
+        member _.NumberOfFragments(state: HighlightBase, value: CoreTypes.Integer) =
             { state with NumberOfFragments = Some value }
 
         [<CustomOperation("options")>]
@@ -783,7 +783,7 @@ module GlobalSearchTypesBuilders =
             { state with Order = Some value }
 
         [<CustomOperation("phraseLimit")>]
-        member _.PhraseLimit(state: HighlightBase, value: Types.Integer) =
+        member _.PhraseLimit(state: HighlightBase, value: CoreTypes.Integer) =
             { state with PhraseLimit = Some value }
 
         [<CustomOperation("postTags")>]
@@ -812,11 +812,11 @@ module GlobalSearchTypesBuilders =
             }
 
         [<CustomOperation("fragmentOffset")>]
-        member _.FragmentOffset(state: HighlightField, value: Types.Integer) =
+        member _.FragmentOffset(state: HighlightField, value: CoreTypes.Integer) =
             { state with FragmentOffset = Some value }
 
         [<CustomOperation("matchedFields")>]
-        member _.MatchedFields(state: HighlightField, value: Types.Fields) =
+        member _.MatchedFields(state: HighlightField, value: CoreTypes.Fields) =
             { state with MatchedFields = Some value }
 
     let highlightField = HighlightFieldBuilder()
@@ -847,15 +847,15 @@ module GlobalSearchTypesBuilders =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: Hit, value: Types.IndexName) =
+        member _.Index(state: Hit, value: CoreTypes.IndexName) =
             { state with Index = value }
 
         [<CustomOperation("id")>]
-        member _.Id(state: Hit, value: Types.Id) =
+        member _.Id(state: Hit, value: CoreTypes.Id) =
             { state with Id = Some value }
 
         [<CustomOperation("score")>]
-        member _.Score(state: Hit, value: Types.Double option) =
+        member _.Score(state: Hit, value: CoreTypes.Double option) =
             { state with Score = Some value }
 
         [<CustomOperation("explanation")>]
@@ -907,23 +907,23 @@ module GlobalSearchTypesBuilders =
             { state with Source = Some value }
 
         [<CustomOperation("rank")>]
-        member _.Rank(state: Hit, value: Types.Integer) =
+        member _.Rank(state: Hit, value: CoreTypes.Integer) =
             { state with Rank = Some value }
 
         [<CustomOperation("seqNo")>]
-        member _.SeqNo(state: Hit, value: Types.SequenceNumber) =
+        member _.SeqNo(state: Hit, value: CoreTypes.SequenceNumber) =
             { state with SeqNo = Some value }
 
         [<CustomOperation("primaryTerm")>]
-        member _.PrimaryTerm(state: Hit, value: Types.Long) =
+        member _.PrimaryTerm(state: Hit, value: CoreTypes.Long) =
             { state with PrimaryTerm = Some value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: Hit, value: Types.VersionNumber) =
+        member _.Version(state: Hit, value: CoreTypes.VersionNumber) =
             { state with Version = Some value }
 
         [<CustomOperation("sort")>]
-        member _.Sort(state: Hit, value: Types.SortResults) =
+        member _.Sort(state: Hit, value: CoreTypes.SortResults) =
             { state with Sort = Some value }
 
     let hit = HitBuilder()
@@ -945,7 +945,7 @@ module GlobalSearchTypesBuilders =
             { state with Hits = value }
 
         [<CustomOperation("maxScore")>]
-        member _.MaxScore(state: HitsMetadata, value: Types.Double option) =
+        member _.MaxScore(state: HitsMetadata, value: CoreTypes.Double option) =
             { state with MaxScore = Some value }
 
     let hitsMetadata = HitsMetadataBuilder()
@@ -972,15 +972,15 @@ module GlobalSearchTypesBuilders =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: InnerHits, value: Types.Name) =
+        member _.Name(state: InnerHits, value: CoreTypes.Name) =
             { state with Name = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: InnerHits, value: Types.Integer) =
+        member _.Size(state: InnerHits, value: CoreTypes.Integer) =
             { state with Size = Some value }
 
         [<CustomOperation("from")>]
-        member _.From(state: InnerHits, value: Types.Integer) =
+        member _.From(state: InnerHits, value: CoreTypes.Integer) =
             { state with From = Some value }
 
         [<CustomOperation("collapse")>]
@@ -988,7 +988,7 @@ module GlobalSearchTypesBuilders =
             { state with Collapse = Some value }
 
         [<CustomOperation("docvalueFields")>]
-        member _.DocvalueFields(state: InnerHits, value: TypesQueryDsl.FieldAndFormat list) =
+        member _.DocvalueFields(state: InnerHits, value: CoreTypes.FieldAndFormat list) =
             { state with DocvalueFields = Some value }
 
         [<CustomOperation("explain")>]
@@ -1004,7 +1004,7 @@ module GlobalSearchTypesBuilders =
             { state with IgnoreUnmapped = Some value }
 
         [<CustomOperation("scriptFields")>]
-        member _.ScriptFields(state: InnerHits, value: Map<Types.Field, Types.ScriptField>) =
+        member _.ScriptFields(state: InnerHits, value: Map<CoreTypes.Field, CoreTypes.ScriptField>) =
             { state with ScriptFields = Some value }
 
         [<CustomOperation("seqNoPrimaryTerm")>]
@@ -1012,11 +1012,11 @@ module GlobalSearchTypesBuilders =
             { state with SeqNoPrimaryTerm = Some value }
 
         [<CustomOperation("fields")>]
-        member _.Fields(state: InnerHits, value: Types.Field list) =
+        member _.Fields(state: InnerHits, value: CoreTypes.Field list) =
             { state with Fields = Some value }
 
         [<CustomOperation("sort")>]
-        member _.Sort(state: InnerHits, value: Types.Sort) =
+        member _.Sort(state: InnerHits, value: CoreTypes.Sort) =
             { state with Sort = Some value }
 
         [<CustomOperation("source")>]
@@ -1024,7 +1024,7 @@ module GlobalSearchTypesBuilders =
             { state with Source = Some value }
 
         [<CustomOperation("storedFields")>]
-        member _.StoredFields(state: InnerHits, value: Types.Fields) =
+        member _.StoredFields(state: InnerHits, value: CoreTypes.Fields) =
             { state with StoredFields = Some value }
 
         [<CustomOperation("trackScores")>]
@@ -1056,11 +1056,11 @@ module GlobalSearchTypesBuilders =
             { state with Reason = value }
 
         [<CustomOperation("time")>]
-        member _.Time(state: KnnCollectorResult, value: Types.Duration) =
+        member _.Time(state: KnnCollectorResult, value: CoreTypes.Duration) =
             { state with Time = Some value }
 
         [<CustomOperation("timeInNanos")>]
-        member _.TimeInNanos(state: KnnCollectorResult, value: Types.DurationValue<Types.UnitNanos>) =
+        member _.TimeInNanos(state: KnnCollectorResult, value: CoreTypes.DurationValue<CoreTypes.UnitNanos>) =
             { state with TimeInNanos = value }
 
         [<CustomOperation("children")>]
@@ -1090,11 +1090,11 @@ module GlobalSearchTypesBuilders =
             { state with Description = value }
 
         [<CustomOperation("time")>]
-        member _.Time(state: KnnQueryProfileResult, value: Types.Duration) =
+        member _.Time(state: KnnQueryProfileResult, value: CoreTypes.Duration) =
             { state with Time = Some value }
 
         [<CustomOperation("timeInNanos")>]
-        member _.TimeInNanos(state: KnnQueryProfileResult, value: Types.DurationValue<Types.UnitNanos>) =
+        member _.TimeInNanos(state: KnnQueryProfileResult, value: CoreTypes.DurationValue<CoreTypes.UnitNanos>) =
             { state with TimeInNanos = value }
 
         [<CustomOperation("breakdown")>]
@@ -1141,11 +1141,11 @@ module GlobalSearchTypesBuilders =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: PhraseSuggestCollateQuery, value: Types.Id) =
+        member _.Id(state: PhraseSuggestCollateQuery, value: CoreTypes.Id) =
             { state with Id = Some value }
 
         [<CustomOperation("source")>]
-        member _.Source(state: PhraseSuggestCollateQuery, value: Types.ScriptSource) =
+        member _.Source(state: PhraseSuggestCollateQuery, value: CoreTypes.ScriptSource) =
             { state with Source = Some value }
 
     let phraseSuggestCollateQuery = PhraseSuggestCollateQueryBuilder()
@@ -1164,7 +1164,7 @@ module GlobalSearchTypesBuilders =
             { state with Text = value }
 
         [<CustomOperation("score")>]
-        member _.Score(state: PhraseSuggestOption, value: Types.Double) =
+        member _.Score(state: PhraseSuggestOption, value: CoreTypes.Double) =
             { state with Score = value }
 
         [<CustomOperation("highlighted")>]
@@ -1199,7 +1199,7 @@ module GlobalSearchTypesBuilders =
             { state with Collate = Some value }
 
         [<CustomOperation("confidence")>]
-        member _.Confidence(state: PhraseSuggester, value: Types.Double) =
+        member _.Confidence(state: PhraseSuggester, value: CoreTypes.Double) =
             { state with Confidence = Some value }
 
         [<CustomOperation("directGenerator")>]
@@ -1211,7 +1211,7 @@ module GlobalSearchTypesBuilders =
             { state with ForceUnigrams = Some value }
 
         [<CustomOperation("gramSize")>]
-        member _.GramSize(state: PhraseSuggester, value: Types.Integer) =
+        member _.GramSize(state: PhraseSuggester, value: CoreTypes.Integer) =
             { state with GramSize = Some value }
 
         [<CustomOperation("highlight")>]
@@ -1219,11 +1219,11 @@ module GlobalSearchTypesBuilders =
             { state with Highlight = Some value }
 
         [<CustomOperation("maxErrors")>]
-        member _.MaxErrors(state: PhraseSuggester, value: Types.Double) =
+        member _.MaxErrors(state: PhraseSuggester, value: CoreTypes.Double) =
             { state with MaxErrors = Some value }
 
         [<CustomOperation("realWordErrorLikelihood")>]
-        member _.RealWordErrorLikelihood(state: PhraseSuggester, value: Types.Double) =
+        member _.RealWordErrorLikelihood(state: PhraseSuggester, value: CoreTypes.Double) =
             { state with RealWordErrorLikelihood = Some value }
 
         [<CustomOperation("separator")>]
@@ -1231,7 +1231,7 @@ module GlobalSearchTypesBuilders =
             { state with Separator = Some value }
 
         [<CustomOperation("shardSize")>]
-        member _.ShardSize(state: PhraseSuggester, value: Types.Integer) =
+        member _.ShardSize(state: PhraseSuggester, value: CoreTypes.Integer) =
             { state with ShardSize = Some value }
 
         [<CustomOperation("smoothing")>]
@@ -1239,7 +1239,7 @@ module GlobalSearchTypesBuilders =
             { state with Smoothing = Some value }
 
         [<CustomOperation("tokenLimit")>]
-        member _.TokenLimit(state: PhraseSuggester, value: Types.Integer) =
+        member _.TokenLimit(state: PhraseSuggester, value: CoreTypes.Integer) =
             { state with TokenLimit = Some value }
 
     let phraseSuggester = PhraseSuggesterBuilder()
@@ -1256,7 +1256,7 @@ module GlobalSearchTypesBuilders =
             { state with Flags = Some value }
 
         [<CustomOperation("maxDeterminizedStates")>]
-        member _.MaxDeterminizedStates(state: RegexOptions, value: Types.Integer) =
+        member _.MaxDeterminizedStates(state: RegexOptions, value: CoreTypes.Integer) =
             { state with MaxDeterminizedStates = Some value }
 
     let regexOptions = RegexOptionsBuilder()
@@ -1282,15 +1282,15 @@ module GlobalSearchTypesBuilders =
             }
 
         [<CustomOperation("rescoreQuery")>]
-        member _.RescoreQuery(state: RescoreQuery, value: TypesQueryDsl.QueryContainer) =
+        member _.RescoreQuery(state: RescoreQuery, value: CoreTypes.QueryContainer) =
             { state with RescoreQuery = value }
 
         [<CustomOperation("queryWeight")>]
-        member _.QueryWeight(state: RescoreQuery, value: Types.Double) =
+        member _.QueryWeight(state: RescoreQuery, value: CoreTypes.Double) =
             { state with QueryWeight = Some value }
 
         [<CustomOperation("rescoreQueryWeight")>]
-        member _.RescoreQueryWeight(state: RescoreQuery, value: Types.Double) =
+        member _.RescoreQueryWeight(state: RescoreQuery, value: CoreTypes.Double) =
             { state with RescoreQueryWeight = Some value }
 
         [<CustomOperation("scoreMode")>]
@@ -1339,7 +1339,7 @@ module GlobalSearchTypesBuilders =
             }
 
         [<CustomOperation("aggregations")>]
-        member _.Aggregations(state: SearchRequestBody, value: Map<string, TypesAggregations.AggregationContainer>) =
+        member _.Aggregations(state: SearchRequestBody, value: Map<string, CoreTypes.AggregationContainer>) =
             { state with Aggregations = Some value }
 
         [<CustomOperation("collapse")>]
@@ -1355,7 +1355,7 @@ module GlobalSearchTypesBuilders =
             { state with Ext = Some value }
 
         [<CustomOperation("from")>]
-        member _.From(state: SearchRequestBody, value: Types.Integer) =
+        member _.From(state: SearchRequestBody, value: CoreTypes.Integer) =
             { state with From = Some value }
 
         [<CustomOperation("highlight")>]
@@ -1367,11 +1367,11 @@ module GlobalSearchTypesBuilders =
             { state with TrackTotalHits = Some value }
 
         [<CustomOperation("indicesBoost")>]
-        member _.IndicesBoost(state: SearchRequestBody, value: Map<Types.IndexName, Types.Double> list) =
+        member _.IndicesBoost(state: SearchRequestBody, value: Map<CoreTypes.IndexName, CoreTypes.Double> list) =
             { state with IndicesBoost = Some value }
 
         [<CustomOperation("docvalueFields")>]
-        member _.DocvalueFields(state: SearchRequestBody, value: TypesQueryDsl.FieldAndFormat list) =
+        member _.DocvalueFields(state: SearchRequestBody, value: CoreTypes.FieldAndFormat list) =
             { state with DocvalueFields = Some value }
 
         [<CustomOperation("knn")>]
@@ -1379,15 +1379,15 @@ module GlobalSearchTypesBuilders =
             { state with Knn = Some value }
 
         [<CustomOperation("rank")>]
-        member _.Rank(state: SearchRequestBody, value: Types.RankContainer) =
+        member _.Rank(state: SearchRequestBody, value: CoreTypes.RankContainer) =
             { state with Rank = Some value }
 
         [<CustomOperation("minScore")>]
-        member _.MinScore(state: SearchRequestBody, value: Types.Double) =
+        member _.MinScore(state: SearchRequestBody, value: CoreTypes.Double) =
             { state with MinScore = Some value }
 
         [<CustomOperation("postFilter")>]
-        member _.PostFilter(state: SearchRequestBody, value: TypesQueryDsl.QueryContainer) =
+        member _.PostFilter(state: SearchRequestBody, value: CoreTypes.QueryContainer) =
             { state with PostFilter = Some value }
 
         [<CustomOperation("profile")>]
@@ -1395,7 +1395,7 @@ module GlobalSearchTypesBuilders =
             { state with Profile = Some value }
 
         [<CustomOperation("query")>]
-        member _.Query(state: SearchRequestBody, value: TypesQueryDsl.QueryContainer) =
+        member _.Query(state: SearchRequestBody, value: CoreTypes.QueryContainer) =
             { state with Query = Some value }
 
         [<CustomOperation("rescore")>]
@@ -1403,27 +1403,27 @@ module GlobalSearchTypesBuilders =
             { state with Rescore = Some value }
 
         [<CustomOperation("retriever")>]
-        member _.Retriever(state: SearchRequestBody, value: Types.RetrieverContainer) =
+        member _.Retriever(state: SearchRequestBody, value: CoreTypes.RetrieverContainer) =
             { state with Retriever = Some value }
 
         [<CustomOperation("scriptFields")>]
-        member _.ScriptFields(state: SearchRequestBody, value: Map<string, Types.ScriptField>) =
+        member _.ScriptFields(state: SearchRequestBody, value: Map<string, CoreTypes.ScriptField>) =
             { state with ScriptFields = Some value }
 
         [<CustomOperation("searchAfter")>]
-        member _.SearchAfter(state: SearchRequestBody, value: Types.SortResults) =
+        member _.SearchAfter(state: SearchRequestBody, value: CoreTypes.SortResults) =
             { state with SearchAfter = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: SearchRequestBody, value: Types.Integer) =
+        member _.Size(state: SearchRequestBody, value: CoreTypes.Integer) =
             { state with Size = Some value }
 
         [<CustomOperation("slice")>]
-        member _.Slice(state: SearchRequestBody, value: Types.SlicedScroll) =
+        member _.Slice(state: SearchRequestBody, value: CoreTypes.SlicedScroll) =
             { state with Slice = Some value }
 
         [<CustomOperation("sort")>]
-        member _.Sort(state: SearchRequestBody, value: Types.Sort) =
+        member _.Sort(state: SearchRequestBody, value: CoreTypes.Sort) =
             { state with Sort = Some value }
 
         [<CustomOperation("source")>]
@@ -1431,7 +1431,7 @@ module GlobalSearchTypesBuilders =
             { state with Source = Some value }
 
         [<CustomOperation("fields")>]
-        member _.Fields(state: SearchRequestBody, value: TypesQueryDsl.FieldAndFormat list) =
+        member _.Fields(state: SearchRequestBody, value: CoreTypes.FieldAndFormat list) =
             { state with Fields = Some value }
 
         [<CustomOperation("suggest")>]
@@ -1439,7 +1439,7 @@ module GlobalSearchTypesBuilders =
             { state with Suggest = Some value }
 
         [<CustomOperation("terminateAfter")>]
-        member _.TerminateAfter(state: SearchRequestBody, value: Types.Long) =
+        member _.TerminateAfter(state: SearchRequestBody, value: CoreTypes.Long) =
             { state with TerminateAfter = Some value }
 
         [<CustomOperation("timeout")>]
@@ -1459,7 +1459,7 @@ module GlobalSearchTypesBuilders =
             { state with SeqNoPrimaryTerm = Some value }
 
         [<CustomOperation("storedFields")>]
-        member _.StoredFields(state: SearchRequestBody, value: Types.Fields) =
+        member _.StoredFields(state: SearchRequestBody, value: CoreTypes.Fields) =
             { state with StoredFields = Some value }
 
         [<CustomOperation("pit")>]
@@ -1467,7 +1467,7 @@ module GlobalSearchTypesBuilders =
             { state with Pit = Some value }
 
         [<CustomOperation("runtimeMappings")>]
-        member _.RuntimeMappings(state: SearchRequestBody, value: TypesMapping.RuntimeFields) =
+        member _.RuntimeMappings(state: SearchRequestBody, value: CoreTypes.RuntimeFields) =
             { state with RuntimeMappings = Some value }
 
         [<CustomOperation("stats")>]
@@ -1511,11 +1511,11 @@ module GlobalSearchTypesBuilders =
             { state with Id = value }
 
         [<CustomOperation("index")>]
-        member _.Index(state: ShardProfile, value: Types.IndexName) =
+        member _.Index(state: ShardProfile, value: CoreTypes.IndexName) =
             { state with Index = value }
 
         [<CustomOperation("nodeId")>]
-        member _.NodeId(state: ShardProfile, value: Types.NodeId) =
+        member _.NodeId(state: ShardProfile, value: CoreTypes.NodeId) =
             { state with NodeId = value }
 
         [<CustomOperation("searches")>]
@@ -1523,7 +1523,7 @@ module GlobalSearchTypesBuilders =
             { state with Searches = value }
 
         [<CustomOperation("shardId")>]
-        member _.ShardId(state: ShardProfile, value: Types.Integer) =
+        member _.ShardId(state: ShardProfile, value: CoreTypes.Integer) =
             { state with ShardId = value }
 
     let shardProfile = ShardProfileBuilder()
@@ -1552,16 +1552,16 @@ module GlobalSearchTypesBuilders =
             { state with ExcludeVectors = Some value }
 
         [<CustomOperation("excludes")>]
-        member _.Excludes(state: SourceFilter, value: Types.Fields) =
+        member _.Excludes(state: SourceFilter, value: CoreTypes.Fields) =
             { state with Excludes = Some value }
 
         [<CustomOperation("includes")>]
-        member _.Includes(state: SourceFilter, value: Types.Fields) =
+        member _.Includes(state: SourceFilter, value: CoreTypes.Fields) =
             { state with Includes = Some value }
 
     let sourceFilter = SourceFilterBuilder()
 
-    let ofIncludes (value: Types.Fields) : SourceFilter =
+    let ofIncludes (value: CoreTypes.Fields) : SourceFilter =
         {
             ExcludeVectors = None
             Excludes = None
@@ -1579,15 +1579,15 @@ module GlobalSearchTypesBuilders =
             }
 
         [<CustomOperation("fuzziness")>]
-        member _.Fuzziness(state: SuggestFuzziness, value: Types.Fuzziness) =
+        member _.Fuzziness(state: SuggestFuzziness, value: CoreTypes.Fuzziness) =
             { state with Fuzziness = Some value }
 
         [<CustomOperation("minLength")>]
-        member _.MinLength(state: SuggestFuzziness, value: Types.Integer) =
+        member _.MinLength(state: SuggestFuzziness, value: CoreTypes.Integer) =
             { state with MinLength = Some value }
 
         [<CustomOperation("prefixLength")>]
-        member _.PrefixLength(state: SuggestFuzziness, value: Types.Integer) =
+        member _.PrefixLength(state: SuggestFuzziness, value: CoreTypes.Integer) =
             { state with PrefixLength = Some value }
 
         [<CustomOperation("transpositions")>]
@@ -1609,7 +1609,7 @@ module GlobalSearchTypesBuilders =
             }
 
         [<CustomOperation("field")>]
-        member _.Field(state: SuggesterBase, value: Types.Field) =
+        member _.Field(state: SuggesterBase, value: CoreTypes.Field) =
             { state with Field = value }
 
         [<CustomOperation("analyzer")>]
@@ -1617,7 +1617,7 @@ module GlobalSearchTypesBuilders =
             { state with Analyzer = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: SuggesterBase, value: Types.Integer) =
+        member _.Size(state: SuggesterBase, value: CoreTypes.Integer) =
             { state with Size = Some value }
 
     let suggesterBase = SuggesterBaseBuilder()
@@ -1637,11 +1637,11 @@ module GlobalSearchTypesBuilders =
             { state with Text = value }
 
         [<CustomOperation("score")>]
-        member _.Score(state: TermSuggestOption, value: Types.Double) =
+        member _.Score(state: TermSuggestOption, value: CoreTypes.Double) =
             { state with Score = value }
 
         [<CustomOperation("freq")>]
-        member _.Freq(state: TermSuggestOption, value: Types.Long) =
+        member _.Freq(state: TermSuggestOption, value: CoreTypes.Long) =
             { state with Freq = value }
 
         [<CustomOperation("highlighted")>]
@@ -1675,31 +1675,31 @@ module GlobalSearchTypesBuilders =
             { state with LowercaseTerms = Some value }
 
         [<CustomOperation("maxEdits")>]
-        member _.MaxEdits(state: TermSuggester, value: Types.Integer) =
+        member _.MaxEdits(state: TermSuggester, value: CoreTypes.Integer) =
             { state with MaxEdits = Some value }
 
         [<CustomOperation("maxInspections")>]
-        member _.MaxInspections(state: TermSuggester, value: Types.Integer) =
+        member _.MaxInspections(state: TermSuggester, value: CoreTypes.Integer) =
             { state with MaxInspections = Some value }
 
         [<CustomOperation("maxTermFreq")>]
-        member _.MaxTermFreq(state: TermSuggester, value: Types.Float) =
+        member _.MaxTermFreq(state: TermSuggester, value: CoreTypes.Float) =
             { state with MaxTermFreq = Some value }
 
         [<CustomOperation("minDocFreq")>]
-        member _.MinDocFreq(state: TermSuggester, value: Types.Float) =
+        member _.MinDocFreq(state: TermSuggester, value: CoreTypes.Float) =
             { state with MinDocFreq = Some value }
 
         [<CustomOperation("minWordLength")>]
-        member _.MinWordLength(state: TermSuggester, value: Types.Integer) =
+        member _.MinWordLength(state: TermSuggester, value: CoreTypes.Integer) =
             { state with MinWordLength = Some value }
 
         [<CustomOperation("prefixLength")>]
-        member _.PrefixLength(state: TermSuggester, value: Types.Integer) =
+        member _.PrefixLength(state: TermSuggester, value: CoreTypes.Integer) =
             { state with PrefixLength = Some value }
 
         [<CustomOperation("shardSize")>]
-        member _.ShardSize(state: TermSuggester, value: Types.Integer) =
+        member _.ShardSize(state: TermSuggester, value: CoreTypes.Integer) =
             { state with ShardSize = Some value }
 
         [<CustomOperation("sort")>]
@@ -1711,7 +1711,7 @@ module GlobalSearchTypesBuilders =
             { state with StringDistance = Some value }
 
         [<CustomOperation("suggestMode")>]
-        member _.SuggestMode(state: TermSuggester, value: Types.SuggestMode) =
+        member _.SuggestMode(state: TermSuggester, value: CoreTypes.SuggestMode) =
             { state with SuggestMode = Some value }
 
     let termSuggester = TermSuggesterBuilder()

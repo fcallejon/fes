@@ -55,11 +55,11 @@ module MlEvaluateDataFrameBuilders =
             { state with AucRoc = Some value }
 
         [<CustomOperation("precision")>]
-        member _.Precision(state: DataframeOutlierDetectionSummary, value: Map<string, Types.Double>) =
+        member _.Precision(state: DataframeOutlierDetectionSummary, value: Map<string, CoreTypes.Double>) =
             { state with Precision = Some value }
 
         [<CustomOperation("recall")>]
-        member _.Recall(state: DataframeOutlierDetectionSummary, value: Map<string, Types.Double>) =
+        member _.Recall(state: DataframeOutlierDetectionSummary, value: Map<string, CoreTypes.Double>) =
             { state with Recall = Some value }
 
         [<CustomOperation("confusionMatrix")>]

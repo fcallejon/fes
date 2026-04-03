@@ -9,8 +9,8 @@ module SnapshotCleanupRepository =
 
     type CleanupRepositoryResults = {
         [<System.Text.Json.Serialization.JsonPropertyName("deleted_blobs")>]
-        DeletedBlobs: Types.Long
+        DeletedBlobs: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("deleted_bytes")>]
-        DeletedBytes: Types.Long
+        DeletedBytes: CoreTypes.Long
     }
 

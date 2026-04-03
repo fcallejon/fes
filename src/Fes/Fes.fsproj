@@ -17,12 +17,7 @@
         <Compile Include="TaskResult.fs"/>
         <Compile Include="Exceptions.fs"/>
         <!-- Generated types -->
-        <Compile Include="Generated/Types/Types.g.fs"/>
-        <Compile Include="Generated/Types/TypesAggregations.g.fs"/>
-        <Compile Include="Generated/Types/TypesAnalysis.g.fs"/>
-        <Compile Include="Generated/Types/TypesMapping.g.fs"/>
-        <Compile Include="Generated/Types/TypesQueryDsl.g.fs"/>
-        <Compile Include="Generated/Types/SpecUtils.g.fs"/>
+        <Compile Include="Generated/Types/CoreTypes.g.fs"/>
         <Compile Include="Generated/Types/AsyncSearchStatus.g.fs"/>
         <Compile Include="Generated/Types/AsyncSearchTypes.g.fs"/>
         <Compile Include="Generated/Types/AutoscalingGetAutoscalingCapacity.g.fs"/>

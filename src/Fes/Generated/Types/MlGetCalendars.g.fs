@@ -9,10 +9,10 @@ module MlGetCalendars =
 
     type Calendar = {
         [<System.Text.Json.Serialization.JsonPropertyName("calendar_id")>]
-        CalendarId: Types.Id
+        CalendarId: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("description")>]
         Description: string option
         [<System.Text.Json.Serialization.JsonPropertyName("job_ids")>]
-        JobIds: Types.Id list
+        JobIds: CoreTypes.Id list
     }
 

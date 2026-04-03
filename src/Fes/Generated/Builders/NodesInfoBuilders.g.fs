@@ -58,11 +58,11 @@ module NodesInfoBuilders =
             { state with BuildType = value }
 
         [<CustomOperation("componentVersions")>]
-        member _.ComponentVersions(state: NodeInfo, value: Map<Types.Name, Types.Integer>) =
+        member _.ComponentVersions(state: NodeInfo, value: Map<CoreTypes.Name, CoreTypes.Integer>) =
             { state with ComponentVersions = value }
 
         [<CustomOperation("host")>]
-        member _.Host(state: NodeInfo, value: Types.Host) =
+        member _.Host(state: NodeInfo, value: CoreTypes.Host) =
             { state with Host = value }
 
         [<CustomOperation("http")>]
@@ -70,11 +70,11 @@ module NodesInfoBuilders =
             { state with Http = Some value }
 
         [<CustomOperation("indexVersion")>]
-        member _.IndexVersion(state: NodeInfo, value: Types.VersionNumber) =
+        member _.IndexVersion(state: NodeInfo, value: CoreTypes.VersionNumber) =
             { state with IndexVersion = value }
 
         [<CustomOperation("ip")>]
-        member _.Ip(state: NodeInfo, value: Types.Ip) =
+        member _.Ip(state: NodeInfo, value: CoreTypes.Ip) =
             { state with Ip = value }
 
         [<CustomOperation("jvm")>]
@@ -82,7 +82,7 @@ module NodesInfoBuilders =
             { state with Jvm = Some value }
 
         [<CustomOperation("name")>]
-        member _.Name(state: NodeInfo, value: Types.Name) =
+        member _.Name(state: NodeInfo, value: CoreTypes.Name) =
             { state with Name = value }
 
         [<CustomOperation("os")>]
@@ -90,7 +90,7 @@ module NodesInfoBuilders =
             { state with Os = Some value }
 
         [<CustomOperation("plugins")>]
-        member _.Plugins(state: NodeInfo, value: Types.PluginStats list) =
+        member _.Plugins(state: NodeInfo, value: CoreTypes.PluginStats list) =
             { state with Plugins = Some value }
 
         [<CustomOperation("process")>]
@@ -98,7 +98,7 @@ module NodesInfoBuilders =
             { state with Process = Some value }
 
         [<CustomOperation("roles")>]
-        member _.Roles(state: NodeInfo, value: Types.NodeRoles) =
+        member _.Roles(state: NodeInfo, value: CoreTypes.NodeRoles) =
             { state with Roles = value }
 
         [<CustomOperation("settings")>]
@@ -110,11 +110,11 @@ module NodesInfoBuilders =
             { state with ThreadPool = Some value }
 
         [<CustomOperation("totalIndexingBuffer")>]
-        member _.TotalIndexingBuffer(state: NodeInfo, value: Types.Long) =
+        member _.TotalIndexingBuffer(state: NodeInfo, value: CoreTypes.Long) =
             { state with TotalIndexingBuffer = Some value }
 
         [<CustomOperation("totalIndexingBufferInBytes")>]
-        member _.TotalIndexingBufferInBytes(state: NodeInfo, value: Types.ByteSize) =
+        member _.TotalIndexingBufferInBytes(state: NodeInfo, value: CoreTypes.ByteSize) =
             { state with TotalIndexingBufferInBytes = Some value }
 
         [<CustomOperation("transport")>]
@@ -122,19 +122,19 @@ module NodesInfoBuilders =
             { state with Transport = Some value }
 
         [<CustomOperation("transportAddress")>]
-        member _.TransportAddress(state: NodeInfo, value: Types.TransportAddress) =
+        member _.TransportAddress(state: NodeInfo, value: CoreTypes.TransportAddress) =
             { state with TransportAddress = value }
 
         [<CustomOperation("transportVersion")>]
-        member _.TransportVersion(state: NodeInfo, value: Types.VersionNumber) =
+        member _.TransportVersion(state: NodeInfo, value: CoreTypes.VersionNumber) =
             { state with TransportVersion = value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: NodeInfo, value: Types.VersionString) =
+        member _.Version(state: NodeInfo, value: CoreTypes.VersionString) =
             { state with Version = value }
 
         [<CustomOperation("modules")>]
-        member _.Modules(state: NodeInfo, value: Types.PluginStats list) =
+        member _.Modules(state: NodeInfo, value: CoreTypes.PluginStats list) =
             { state with Modules = Some value }
 
         [<CustomOperation("ingest")>]
@@ -189,43 +189,43 @@ module NodesInfoBuilders =
             }
 
         [<CustomOperation("directMax")>]
-        member _.DirectMax(state: NodeInfoJvmMemory, value: Types.ByteSize) =
+        member _.DirectMax(state: NodeInfoJvmMemory, value: CoreTypes.ByteSize) =
             { state with DirectMax = Some value }
 
         [<CustomOperation("directMaxInBytes")>]
-        member _.DirectMaxInBytes(state: NodeInfoJvmMemory, value: Types.Long) =
+        member _.DirectMaxInBytes(state: NodeInfoJvmMemory, value: CoreTypes.Long) =
             { state with DirectMaxInBytes = value }
 
         [<CustomOperation("heapInit")>]
-        member _.HeapInit(state: NodeInfoJvmMemory, value: Types.ByteSize) =
+        member _.HeapInit(state: NodeInfoJvmMemory, value: CoreTypes.ByteSize) =
             { state with HeapInit = Some value }
 
         [<CustomOperation("heapInitInBytes")>]
-        member _.HeapInitInBytes(state: NodeInfoJvmMemory, value: Types.Long) =
+        member _.HeapInitInBytes(state: NodeInfoJvmMemory, value: CoreTypes.Long) =
             { state with HeapInitInBytes = value }
 
         [<CustomOperation("heapMax")>]
-        member _.HeapMax(state: NodeInfoJvmMemory, value: Types.ByteSize) =
+        member _.HeapMax(state: NodeInfoJvmMemory, value: CoreTypes.ByteSize) =
             { state with HeapMax = Some value }
 
         [<CustomOperation("heapMaxInBytes")>]
-        member _.HeapMaxInBytes(state: NodeInfoJvmMemory, value: Types.Long) =
+        member _.HeapMaxInBytes(state: NodeInfoJvmMemory, value: CoreTypes.Long) =
             { state with HeapMaxInBytes = value }
 
         [<CustomOperation("nonHeapInit")>]
-        member _.NonHeapInit(state: NodeInfoJvmMemory, value: Types.ByteSize) =
+        member _.NonHeapInit(state: NodeInfoJvmMemory, value: CoreTypes.ByteSize) =
             { state with NonHeapInit = Some value }
 
         [<CustomOperation("nonHeapInitInBytes")>]
-        member _.NonHeapInitInBytes(state: NodeInfoJvmMemory, value: Types.Long) =
+        member _.NonHeapInitInBytes(state: NodeInfoJvmMemory, value: CoreTypes.Long) =
             { state with NonHeapInitInBytes = value }
 
         [<CustomOperation("nonHeapMax")>]
-        member _.NonHeapMax(state: NodeInfoJvmMemory, value: Types.ByteSize) =
+        member _.NonHeapMax(state: NodeInfoJvmMemory, value: CoreTypes.ByteSize) =
             { state with NonHeapMax = Some value }
 
         [<CustomOperation("nonHeapMaxInBytes")>]
-        member _.NonHeapMaxInBytes(state: NodeInfoJvmMemory, value: Types.Long) =
+        member _.NonHeapMaxInBytes(state: NodeInfoJvmMemory, value: CoreTypes.Long) =
             { state with NonHeapMaxInBytes = value }
 
     let nodeInfoJvmMemory = NodeInfoJvmMemoryBuilder()
@@ -350,7 +350,7 @@ module NodesInfoBuilders =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: NodeInfoSettingsCluster, value: Types.Name) =
+        member _.Name(state: NodeInfoSettingsCluster, value: CoreTypes.Name) =
             { state with Name = value }
 
         [<CustomOperation("routing")>]
@@ -597,7 +597,7 @@ module NodesInfoBuilders =
             { state with Features = Some value }
 
         [<CustomOperation("ignoreDeserializationErrors")>]
-        member _.IgnoreDeserializationErrors(state: NodeInfoSettingsTransport, value: SpecUtils.Stringified<bool>) =
+        member _.IgnoreDeserializationErrors(state: NodeInfoSettingsTransport, value: CoreTypes.Stringified<bool>) =
             { state with IgnoreDeserializationErrors = Some value }
 
     let nodeInfoSettingsTransport = NodeInfoSettingsTransportBuilder()
@@ -715,27 +715,27 @@ module NodesInfoBuilders =
             { state with Arch = value }
 
         [<CustomOperation("availableProcessors")>]
-        member _.AvailableProcessors(state: NodeOperatingSystemInfo, value: Types.Integer) =
+        member _.AvailableProcessors(state: NodeOperatingSystemInfo, value: CoreTypes.Integer) =
             { state with AvailableProcessors = value }
 
         [<CustomOperation("allocatedProcessors")>]
-        member _.AllocatedProcessors(state: NodeOperatingSystemInfo, value: Types.Integer) =
+        member _.AllocatedProcessors(state: NodeOperatingSystemInfo, value: CoreTypes.Integer) =
             { state with AllocatedProcessors = Some value }
 
         [<CustomOperation("name")>]
-        member _.Name(state: NodeOperatingSystemInfo, value: Types.Name) =
+        member _.Name(state: NodeOperatingSystemInfo, value: CoreTypes.Name) =
             { state with Name = value }
 
         [<CustomOperation("prettyName")>]
-        member _.PrettyName(state: NodeOperatingSystemInfo, value: Types.Name) =
+        member _.PrettyName(state: NodeOperatingSystemInfo, value: CoreTypes.Name) =
             { state with PrettyName = value }
 
         [<CustomOperation("refreshIntervalInMillis")>]
-        member _.RefreshIntervalInMillis(state: NodeOperatingSystemInfo, value: Types.DurationValue<Types.UnitMillis>) =
+        member _.RefreshIntervalInMillis(state: NodeOperatingSystemInfo, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
             { state with RefreshIntervalInMillis = value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: NodeOperatingSystemInfo, value: Types.VersionString) =
+        member _.Version(state: NodeOperatingSystemInfo, value: CoreTypes.VersionString) =
             { state with Version = value }
 
         [<CustomOperation("cpu")>]
@@ -764,23 +764,23 @@ module NodesInfoBuilders =
             }
 
         [<CustomOperation("core")>]
-        member _.Core(state: NodeThreadPoolInfo, value: Types.Integer) =
+        member _.Core(state: NodeThreadPoolInfo, value: CoreTypes.Integer) =
             { state with Core = Some value }
 
         [<CustomOperation("keepAlive")>]
-        member _.KeepAlive(state: NodeThreadPoolInfo, value: Types.Duration) =
+        member _.KeepAlive(state: NodeThreadPoolInfo, value: CoreTypes.Duration) =
             { state with KeepAlive = Some value }
 
         [<CustomOperation("max")>]
-        member _.Max(state: NodeThreadPoolInfo, value: Types.Integer) =
+        member _.Max(state: NodeThreadPoolInfo, value: CoreTypes.Integer) =
             { state with Max = Some value }
 
         [<CustomOperation("queueSize")>]
-        member _.QueueSize(state: NodeThreadPoolInfo, value: Types.Integer) =
+        member _.QueueSize(state: NodeThreadPoolInfo, value: CoreTypes.Integer) =
             { state with QueueSize = value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: NodeThreadPoolInfo, value: Types.Integer) =
+        member _.Size(state: NodeThreadPoolInfo, value: CoreTypes.Integer) =
             { state with Size = Some value }
 
         [<CustomOperation("type'")>]

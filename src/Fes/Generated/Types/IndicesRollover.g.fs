@@ -9,34 +9,34 @@ module IndicesRollover =
 
     type RolloverConditions = {
         [<System.Text.Json.Serialization.JsonPropertyName("min_age")>]
-        MinAge: Types.Duration option
+        MinAge: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("max_age")>]
-        MaxAge: Types.Duration option
+        MaxAge: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("max_age_millis")>]
-        MaxAgeMillis: Types.DurationValue<Types.UnitMillis> option
+        MaxAgeMillis: CoreTypes.DurationValue<CoreTypes.UnitMillis> option
         [<System.Text.Json.Serialization.JsonPropertyName("min_docs")>]
-        MinDocs: Types.Long option
+        MinDocs: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("max_docs")>]
-        MaxDocs: Types.Long option
+        MaxDocs: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("max_size")>]
-        MaxSize: Types.ByteSize option
+        MaxSize: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("max_size_bytes")>]
-        MaxSizeBytes: Types.Long option
+        MaxSizeBytes: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("min_size")>]
-        MinSize: Types.ByteSize option
+        MinSize: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("min_size_bytes")>]
-        MinSizeBytes: Types.Long option
+        MinSizeBytes: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("max_primary_shard_size")>]
-        MaxPrimaryShardSize: Types.ByteSize option
+        MaxPrimaryShardSize: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("max_primary_shard_size_bytes")>]
-        MaxPrimaryShardSizeBytes: Types.Long option
+        MaxPrimaryShardSizeBytes: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("min_primary_shard_size")>]
-        MinPrimaryShardSize: Types.ByteSize option
+        MinPrimaryShardSize: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("min_primary_shard_size_bytes")>]
-        MinPrimaryShardSizeBytes: Types.Long option
+        MinPrimaryShardSizeBytes: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("max_primary_shard_docs")>]
-        MaxPrimaryShardDocs: Types.Long option
+        MaxPrimaryShardDocs: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("min_primary_shard_docs")>]
-        MinPrimaryShardDocs: Types.Long option
+        MinPrimaryShardDocs: CoreTypes.Long option
     }
 

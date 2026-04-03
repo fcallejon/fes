@@ -9,21 +9,21 @@ module AutoscalingGetAutoscalingCapacity =
 
     type AutoscalingResources = {
         [<System.Text.Json.Serialization.JsonPropertyName("storage")>]
-        Storage: Types.Integer
+        Storage: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("memory")>]
-        Memory: Types.Integer
+        Memory: CoreTypes.Integer
     }
 
     type AutoscalingCapacity = {
         [<System.Text.Json.Serialization.JsonPropertyName("node")>]
-        Node: AutoscalingGetAutoscalingCapacity.AutoscalingResources
+        Node: AutoscalingResources
         [<System.Text.Json.Serialization.JsonPropertyName("total")>]
-        Total: AutoscalingGetAutoscalingCapacity.AutoscalingResources
+        Total: AutoscalingResources
     }
 
     type AutoscalingDecider = {
         [<System.Text.Json.Serialization.JsonPropertyName("required_capacity")>]
-        RequiredCapacity: AutoscalingGetAutoscalingCapacity.AutoscalingCapacity
+        RequiredCapacity: AutoscalingCapacity
         [<System.Text.Json.Serialization.JsonPropertyName("reason_summary")>]
         ReasonSummary: string option
         [<System.Text.Json.Serialization.JsonPropertyName("reason_details")>]
@@ -32,17 +32,17 @@ module AutoscalingGetAutoscalingCapacity =
 
     type AutoscalingNode = {
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.NodeName
+        Name: CoreTypes.NodeName
     }
 
     type AutoscalingDeciders = {
         [<System.Text.Json.Serialization.JsonPropertyName("required_capacity")>]
-        RequiredCapacity: AutoscalingGetAutoscalingCapacity.AutoscalingCapacity
+        RequiredCapacity: AutoscalingCapacity
         [<System.Text.Json.Serialization.JsonPropertyName("current_capacity")>]
-        CurrentCapacity: AutoscalingGetAutoscalingCapacity.AutoscalingCapacity
+        CurrentCapacity: AutoscalingCapacity
         [<System.Text.Json.Serialization.JsonPropertyName("current_nodes")>]
-        CurrentNodes: AutoscalingGetAutoscalingCapacity.AutoscalingNode list
+        CurrentNodes: AutoscalingNode list
         [<System.Text.Json.Serialization.JsonPropertyName("deciders")>]
-        Deciders: Map<string, AutoscalingGetAutoscalingCapacity.AutoscalingDecider>
+        Deciders: Map<string, AutoscalingDecider>
     }
 

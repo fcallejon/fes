@@ -12,7 +12,7 @@ open Fes
 module RollupOperations =
 
     type RollupDeleteJobRequest = {
-        Id: Types.Id
+        Id: CoreTypes.Id
     }
 
         with
@@ -35,13 +35,13 @@ module RollupOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: RollupDeleteJobRequest, value: Types.Id) =
+        member _.Id(state: RollupDeleteJobRequest, value: CoreTypes.Id) =
             { state with Id = value }
 
     let rollupDeleteJobRequest = RollupDeleteJobRequestBuilder()
 
     type RollupGetJobsRequest = {
-        Id: Types.Id
+        Id: CoreTypes.Id
     }
 
         with
@@ -64,13 +64,13 @@ module RollupOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: RollupGetJobsRequest, value: Types.Id) =
+        member _.Id(state: RollupGetJobsRequest, value: CoreTypes.Id) =
             { state with Id = value }
 
     let rollupGetJobsRequest = RollupGetJobsRequestBuilder()
 
     type RollupGetRollupCapsRequest = {
-        Id: Types.Id
+        Id: CoreTypes.Id
     }
 
         with
@@ -84,7 +84,7 @@ module RollupOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type RollupGetRollupCapsResponse = Map<Types.IndexName, RollupGetRollupCaps.RollupCapabilities>
+    type RollupGetRollupCapsResponse = Map<CoreTypes.IndexName, RollupGetRollupCaps.RollupCapabilities>
 
     type RollupGetRollupCapsRequestBuilder() =
         member _.Yield(_: unit) : RollupGetRollupCapsRequest =
@@ -93,13 +93,13 @@ module RollupOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: RollupGetRollupCapsRequest, value: Types.Id) =
+        member _.Id(state: RollupGetRollupCapsRequest, value: CoreTypes.Id) =
             { state with Id = value }
 
     let rollupGetRollupCapsRequest = RollupGetRollupCapsRequestBuilder()
 
     type RollupGetRollupIndexCapsRequest = {
-        Index: Types.Ids
+        Index: CoreTypes.Ids
     }
 
         with
@@ -113,7 +113,7 @@ module RollupOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type RollupGetRollupIndexCapsResponse = Map<Types.IndexName, RollupGetRollupIndexCaps.IndexCapabilities>
+    type RollupGetRollupIndexCapsResponse = Map<CoreTypes.IndexName, RollupGetRollupIndexCaps.IndexCapabilities>
 
     type RollupGetRollupIndexCapsRequestBuilder() =
         member _.Yield(_: unit) : RollupGetRollupIndexCapsRequest =
@@ -122,21 +122,21 @@ module RollupOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: RollupGetRollupIndexCapsRequest, value: Types.Ids) =
+        member _.Index(state: RollupGetRollupIndexCapsRequest, value: CoreTypes.Ids) =
             { state with Index = value }
 
     let rollupGetRollupIndexCapsRequest = RollupGetRollupIndexCapsRequestBuilder()
 
     type RollupPutJobRequest = {
-        Id: Types.Id
+        Id: CoreTypes.Id
         Cron: string
         Groups: RollupTypes.Groupings
         IndexPattern: string
         Metrics: RollupTypes.FieldMetric list option
-        PageSize: Types.Integer
-        RollupIndex: Types.IndexName
-        Timeout: Types.Duration option
-        Headers: Types.HttpHeaders option
+        PageSize: CoreTypes.Integer
+        RollupIndex: CoreTypes.IndexName
+        Timeout: CoreTypes.Duration option
+        Headers: CoreTypes.HttpHeaders option
     }
 
         with
@@ -151,7 +151,7 @@ module RollupOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type RollupPutJobResponse = Types.AcknowledgedResponseBase
+    type RollupPutJobResponse = CoreTypes.AcknowledgedResponseBase
 
     type RollupPutJobRequestBuilder() =
         member _.Yield(_: unit) : RollupPutJobRequest =
@@ -168,7 +168,7 @@ module RollupOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: RollupPutJobRequest, value: Types.Id) =
+        member _.Id(state: RollupPutJobRequest, value: CoreTypes.Id) =
             { state with Id = value }
 
         [<CustomOperation("cron")>]
@@ -188,19 +188,19 @@ module RollupOperations =
             { state with Metrics = Some value }
 
         [<CustomOperation("pageSize")>]
-        member _.PageSize(state: RollupPutJobRequest, value: Types.Integer) =
+        member _.PageSize(state: RollupPutJobRequest, value: CoreTypes.Integer) =
             { state with PageSize = value }
 
         [<CustomOperation("rollupIndex")>]
-        member _.RollupIndex(state: RollupPutJobRequest, value: Types.IndexName) =
+        member _.RollupIndex(state: RollupPutJobRequest, value: CoreTypes.IndexName) =
             { state with RollupIndex = value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: RollupPutJobRequest, value: Types.Duration) =
+        member _.Timeout(state: RollupPutJobRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("headers")>]
-        member _.Headers(state: RollupPutJobRequest, value: Types.HttpHeaders) =
+        member _.Headers(state: RollupPutJobRequest, value: CoreTypes.HttpHeaders) =
             { state with Headers = Some value }
 
     let rollupPutJobRequest = RollupPutJobRequestBuilder()
@@ -214,22 +214,22 @@ module RollupOperations =
             { req with IndexPattern = value }
         let withMetrics (value: RollupTypes.FieldMetric list) (req: RollupPutJobRequest) =
             { req with Metrics = Some value }
-        let withPageSize (value: Types.Integer) (req: RollupPutJobRequest) =
+        let withPageSize (value: CoreTypes.Integer) (req: RollupPutJobRequest) =
             { req with PageSize = value }
-        let withRollupIndex (value: Types.IndexName) (req: RollupPutJobRequest) =
+        let withRollupIndex (value: CoreTypes.IndexName) (req: RollupPutJobRequest) =
             { req with RollupIndex = value }
-        let withTimeout (value: Types.Duration) (req: RollupPutJobRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: RollupPutJobRequest) =
             { req with Timeout = Some value }
-        let withHeaders (value: Types.HttpHeaders) (req: RollupPutJobRequest) =
+        let withHeaders (value: CoreTypes.HttpHeaders) (req: RollupPutJobRequest) =
             { req with Headers = Some value }
 
     type RollupRollupSearchRequest = {
-        Index: Types.Indices
+        Index: CoreTypes.Indices
         RestTotalHitsAsInt: bool option
         TypedKeys: bool option
-        Aggregations: Map<string, TypesAggregations.AggregationContainer> option
-        Query: TypesQueryDsl.QueryContainer option
-        Size: Types.Integer option
+        Aggregations: Map<string, CoreTypes.AggregationContainer> option
+        Query: CoreTypes.QueryContainer option
+        Size: CoreTypes.Integer option
     }
 
         with
@@ -266,7 +266,7 @@ module RollupOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: RollupRollupSearchRequest, value: Types.Indices) =
+        member _.Index(state: RollupRollupSearchRequest, value: CoreTypes.Indices) =
             { state with Index = value }
 
         [<CustomOperation("restTotalHitsAsInt")>]
@@ -278,15 +278,15 @@ module RollupOperations =
             { state with TypedKeys = Some value }
 
         [<CustomOperation("aggregations")>]
-        member _.Aggregations(state: RollupRollupSearchRequest, value: Map<string, TypesAggregations.AggregationContainer>) =
+        member _.Aggregations(state: RollupRollupSearchRequest, value: Map<string, CoreTypes.AggregationContainer>) =
             { state with Aggregations = Some value }
 
         [<CustomOperation("query")>]
-        member _.Query(state: RollupRollupSearchRequest, value: TypesQueryDsl.QueryContainer) =
+        member _.Query(state: RollupRollupSearchRequest, value: CoreTypes.QueryContainer) =
             { state with Query = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: RollupRollupSearchRequest, value: Types.Integer) =
+        member _.Size(state: RollupRollupSearchRequest, value: CoreTypes.Integer) =
             { state with Size = Some value }
 
     let rollupRollupSearchRequest = RollupRollupSearchRequestBuilder()
@@ -296,15 +296,15 @@ module RollupOperations =
             { req with RestTotalHitsAsInt = Some value }
         let withTypedKeys (value: bool) (req: RollupRollupSearchRequest) =
             { req with TypedKeys = Some value }
-        let withAggregations (value: Map<string, TypesAggregations.AggregationContainer>) (req: RollupRollupSearchRequest) =
+        let withAggregations (value: Map<string, CoreTypes.AggregationContainer>) (req: RollupRollupSearchRequest) =
             { req with Aggregations = Some value }
-        let withQuery (value: TypesQueryDsl.QueryContainer) (req: RollupRollupSearchRequest) =
+        let withQuery (value: CoreTypes.QueryContainer) (req: RollupRollupSearchRequest) =
             { req with Query = Some value }
-        let withSize (value: Types.Integer) (req: RollupRollupSearchRequest) =
+        let withSize (value: CoreTypes.Integer) (req: RollupRollupSearchRequest) =
             { req with Size = Some value }
 
     type RollupStartJobRequest = {
-        Id: Types.Id
+        Id: CoreTypes.Id
     }
 
         with
@@ -327,14 +327,14 @@ module RollupOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: RollupStartJobRequest, value: Types.Id) =
+        member _.Id(state: RollupStartJobRequest, value: CoreTypes.Id) =
             { state with Id = value }
 
     let rollupStartJobRequest = RollupStartJobRequestBuilder()
 
     type RollupStopJobRequest = {
-        Id: Types.Id
-        Timeout: Types.Duration option
+        Id: CoreTypes.Id
+        Timeout: CoreTypes.Duration option
         WaitForCompletion: bool option
     }
 
@@ -368,11 +368,11 @@ module RollupOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: RollupStopJobRequest, value: Types.Id) =
+        member _.Id(state: RollupStopJobRequest, value: CoreTypes.Id) =
             { state with Id = value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: RollupStopJobRequest, value: Types.Duration) =
+        member _.Timeout(state: RollupStopJobRequest, value: CoreTypes.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("waitForCompletion")>]
@@ -382,7 +382,7 @@ module RollupOperations =
     let rollupStopJobRequest = RollupStopJobRequestBuilder()
 
     module StopJob =
-        let withTimeout (value: Types.Duration) (req: RollupStopJobRequest) =
+        let withTimeout (value: CoreTypes.Duration) (req: RollupStopJobRequest) =
             { req with Timeout = Some value }
         let withWaitForCompletion (value: bool) (req: RollupStopJobRequest) =
             { req with WaitForCompletion = Some value }

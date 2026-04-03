@@ -14,8 +14,8 @@ module SecurityGetServiceCredentials =
 
     type NodesCredentials = {
         [<System.Text.Json.Serialization.JsonPropertyName("_nodes")>]
-        Nodes: Types.NodeStatistics
+        Nodes: CoreTypes.NodeStatistics
         [<System.Text.Json.Serialization.JsonPropertyName("file_tokens")>]
-        FileTokens: Map<string, SecurityGetServiceCredentials.NodesCredentialsFileToken>
+        FileTokens: Map<string, NodesCredentialsFileToken>
     }
 

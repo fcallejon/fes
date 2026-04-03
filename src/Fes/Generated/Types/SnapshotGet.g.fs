@@ -9,10 +9,10 @@ module SnapshotGet =
 
     type SnapshotResponseItem = {
         [<System.Text.Json.Serialization.JsonPropertyName("repository")>]
-        Repository: Types.Name
+        Repository: CoreTypes.Name
         [<System.Text.Json.Serialization.JsonPropertyName("snapshots")>]
         Snapshots: SnapshotTypes.SnapshotInfo list option
         [<System.Text.Json.Serialization.JsonPropertyName("error")>]
-        Error: Types.ErrorCause option
+        Error: CoreTypes.ErrorCause option
     }
 

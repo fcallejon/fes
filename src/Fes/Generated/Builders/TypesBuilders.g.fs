@@ -24,39 +24,39 @@ module TypesBuilders =
             }
 
         [<CustomOperation("totalOperations")>]
-        member _.TotalOperations(state: BulkStats, value: Types.Long) =
+        member _.TotalOperations(state: BulkStats, value: CoreTypes.Long) =
             { state with TotalOperations = value }
 
         [<CustomOperation("totalTime")>]
-        member _.TotalTime(state: BulkStats, value: Types.Duration) =
+        member _.TotalTime(state: BulkStats, value: CoreTypes.Duration) =
             { state with TotalTime = Some value }
 
         [<CustomOperation("totalTimeInMillis")>]
-        member _.TotalTimeInMillis(state: BulkStats, value: Types.DurationValue<Types.UnitMillis>) =
+        member _.TotalTimeInMillis(state: BulkStats, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
             { state with TotalTimeInMillis = value }
 
         [<CustomOperation("totalSize")>]
-        member _.TotalSize(state: BulkStats, value: Types.ByteSize) =
+        member _.TotalSize(state: BulkStats, value: CoreTypes.ByteSize) =
             { state with TotalSize = Some value }
 
         [<CustomOperation("totalSizeInBytes")>]
-        member _.TotalSizeInBytes(state: BulkStats, value: Types.Long) =
+        member _.TotalSizeInBytes(state: BulkStats, value: CoreTypes.Long) =
             { state with TotalSizeInBytes = value }
 
         [<CustomOperation("avgTime")>]
-        member _.AvgTime(state: BulkStats, value: Types.Duration) =
+        member _.AvgTime(state: BulkStats, value: CoreTypes.Duration) =
             { state with AvgTime = Some value }
 
         [<CustomOperation("avgTimeInMillis")>]
-        member _.AvgTimeInMillis(state: BulkStats, value: Types.DurationValue<Types.UnitMillis>) =
+        member _.AvgTimeInMillis(state: BulkStats, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
             { state with AvgTimeInMillis = value }
 
         [<CustomOperation("avgSize")>]
-        member _.AvgSize(state: BulkStats, value: Types.ByteSize) =
+        member _.AvgSize(state: BulkStats, value: CoreTypes.ByteSize) =
             { state with AvgSize = Some value }
 
         [<CustomOperation("avgSizeInBytes")>]
-        member _.AvgSizeInBytes(state: BulkStats, value: Types.Long) =
+        member _.AvgSizeInBytes(state: BulkStats, value: CoreTypes.Long) =
             { state with AvgSizeInBytes = value }
 
     let bulkStats = BulkStatsBuilder()
@@ -69,11 +69,11 @@ module TypesBuilders =
             }
 
         [<CustomOperation("size")>]
-        member _.Size(state: ChunkRescorer, value: Types.Integer) =
+        member _.Size(state: ChunkRescorer, value: CoreTypes.Integer) =
             { state with Size = Some value }
 
         [<CustomOperation("chunkingSettings")>]
-        member _.ChunkingSettings(state: ChunkRescorer, value: TypesMapping.ChunkRescorerChunkingSettings) =
+        member _.ChunkingSettings(state: ChunkRescorer, value: CoreTypes.ChunkRescorerChunkingSettings) =
             { state with ChunkingSettings = Some value }
 
     let chunkRescorer = ChunkRescorerBuilder()
@@ -90,7 +90,7 @@ module TypesBuilders =
             }
 
         [<CustomOperation("status")>]
-        member _.Status(state: ClusterDetails, value: Types.ClusterSearchStatus) =
+        member _.Status(state: ClusterDetails, value: CoreTypes.ClusterSearchStatus) =
             { state with Status = value }
 
         [<CustomOperation("indices")>]
@@ -98,7 +98,7 @@ module TypesBuilders =
             { state with Indices = value }
 
         [<CustomOperation("took")>]
-        member _.Took(state: ClusterDetails, value: Types.DurationValue<Types.UnitMillis>) =
+        member _.Took(state: ClusterDetails, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
             { state with Took = Some value }
 
         [<CustomOperation("timedOut")>]
@@ -106,11 +106,11 @@ module TypesBuilders =
             { state with TimedOut = value }
 
         [<CustomOperation("shards")>]
-        member _.Shards(state: ClusterDetails, value: Types.ShardStatistics) =
+        member _.Shards(state: ClusterDetails, value: CoreTypes.ShardStatistics) =
             { state with Shards = Some value }
 
         [<CustomOperation("failures")>]
-        member _.Failures(state: ClusterDetails, value: Types.ShardFailure list) =
+        member _.Failures(state: ClusterDetails, value: CoreTypes.ShardFailure list) =
             { state with Failures = Some value }
 
     let clusterDetails = ClusterDetailsBuilder()
@@ -124,15 +124,15 @@ module TypesBuilders =
             }
 
         [<CustomOperation("sizeInBytes")>]
-        member _.SizeInBytes(state: CompletionStats, value: Types.Long) =
+        member _.SizeInBytes(state: CompletionStats, value: CoreTypes.Long) =
             { state with SizeInBytes = value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: CompletionStats, value: Types.ByteSize) =
+        member _.Size(state: CompletionStats, value: CoreTypes.ByteSize) =
             { state with Size = Some value }
 
         [<CustomOperation("fields")>]
-        member _.Fields(state: CompletionStats, value: Map<Types.Field, Types.FieldSizeUsage>) =
+        member _.Fields(state: CompletionStats, value: Map<CoreTypes.Field, CoreTypes.FieldSizeUsage>) =
             { state with Fields = Some value }
 
     let completionStats = CompletionStatsBuilder()
@@ -151,7 +151,7 @@ module TypesBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: DiversifyRetriever, value: Types.DiversifyRetrieverTypes) =
+        member _.Type(state: DiversifyRetriever, value: CoreTypes.DiversifyRetrieverTypes) =
             { state with Type = value }
 
         [<CustomOperation("field")>]
@@ -159,27 +159,27 @@ module TypesBuilders =
             { state with Field = value }
 
         [<CustomOperation("retriever")>]
-        member _.Retriever(state: DiversifyRetriever, value: Types.RetrieverContainer) =
+        member _.Retriever(state: DiversifyRetriever, value: CoreTypes.RetrieverContainer) =
             { state with Retriever = value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: DiversifyRetriever, value: Types.Integer) =
+        member _.Size(state: DiversifyRetriever, value: CoreTypes.Integer) =
             { state with Size = Some value }
 
         [<CustomOperation("rankWindowSize")>]
-        member _.RankWindowSize(state: DiversifyRetriever, value: Types.Integer) =
+        member _.RankWindowSize(state: DiversifyRetriever, value: CoreTypes.Integer) =
             { state with RankWindowSize = Some value }
 
         [<CustomOperation("queryVector")>]
-        member _.QueryVector(state: DiversifyRetriever, value: Types.QueryVector) =
+        member _.QueryVector(state: DiversifyRetriever, value: CoreTypes.QueryVector) =
             { state with QueryVector = Some value }
 
         [<CustomOperation("queryVectorBuilder")>]
-        member _.QueryVectorBuilder(state: DiversifyRetriever, value: Types.QueryVectorBuilder) =
+        member _.QueryVectorBuilder(state: DiversifyRetriever, value: CoreTypes.QueryVectorBuilder) =
             { state with QueryVectorBuilder = Some value }
 
         [<CustomOperation("lambda")>]
-        member _.Lambda(state: DiversifyRetriever, value: Types.Float) =
+        member _.Lambda(state: DiversifyRetriever, value: CoreTypes.Float) =
             { state with Lambda = Some value }
 
     let diversifyRetriever = DiversifyRetrieverBuilder()
@@ -194,19 +194,19 @@ module TypesBuilders =
             }
 
         [<CustomOperation("count")>]
-        member _.Count(state: DocStats, value: Types.Long) =
+        member _.Count(state: DocStats, value: CoreTypes.Long) =
             { state with Count = value }
 
         [<CustomOperation("deleted")>]
-        member _.Deleted(state: DocStats, value: Types.Long) =
+        member _.Deleted(state: DocStats, value: CoreTypes.Long) =
             { state with Deleted = Some value }
 
         [<CustomOperation("totalSizeInBytes")>]
-        member _.TotalSizeInBytes(state: DocStats, value: Types.Long) =
+        member _.TotalSizeInBytes(state: DocStats, value: CoreTypes.Long) =
             { state with TotalSizeInBytes = value }
 
         [<CustomOperation("totalSize")>]
-        member _.TotalSize(state: DocStats, value: Types.ByteSize) =
+        member _.TotalSize(state: DocStats, value: CoreTypes.ByteSize) =
             { state with TotalSize = Some value }
 
     let docStats = DocStatsBuilder()
@@ -235,15 +235,15 @@ module TypesBuilders =
             { state with StackTrace = Some value }
 
         [<CustomOperation("causedBy")>]
-        member _.CausedBy(state: ErrorCause, value: Types.ErrorCause) =
+        member _.CausedBy(state: ErrorCause, value: CoreTypes.ErrorCause) =
             { state with CausedBy = Some value }
 
         [<CustomOperation("rootCause")>]
-        member _.RootCause(state: ErrorCause, value: Types.ErrorCause list) =
+        member _.RootCause(state: ErrorCause, value: CoreTypes.ErrorCause list) =
             { state with RootCause = Some value }
 
         [<CustomOperation("suppressed")>]
-        member _.Suppressed(state: ErrorCause, value: Types.ErrorCause list) =
+        member _.Suppressed(state: ErrorCause, value: CoreTypes.ErrorCause list) =
             { state with Suppressed = Some value }
 
     let errorCause = ErrorCauseBuilder()
@@ -261,27 +261,27 @@ module TypesBuilders =
             }
 
         [<CustomOperation("missing")>]
-        member _.Missing(state: FieldSort, value: TypesAggregations.Missing) =
+        member _.Missing(state: FieldSort, value: CoreTypes.Missing) =
             { state with Missing = Some value }
 
         [<CustomOperation("mode")>]
-        member _.Mode(state: FieldSort, value: Types.SortMode) =
+        member _.Mode(state: FieldSort, value: CoreTypes.SortMode) =
             { state with Mode = Some value }
 
         [<CustomOperation("nested")>]
-        member _.Nested(state: FieldSort, value: Types.NestedSortValue) =
+        member _.Nested(state: FieldSort, value: CoreTypes.NestedSortValue) =
             { state with Nested = Some value }
 
         [<CustomOperation("order")>]
-        member _.Order(state: FieldSort, value: Types.SortOrder) =
+        member _.Order(state: FieldSort, value: CoreTypes.SortOrder) =
             { state with Order = Some value }
 
         [<CustomOperation("unmappedType")>]
-        member _.UnmappedType(state: FieldSort, value: TypesMapping.FieldType) =
+        member _.UnmappedType(state: FieldSort, value: CoreTypes.FieldType) =
             { state with UnmappedType = Some value }
 
         [<CustomOperation("numericType")>]
-        member _.NumericType(state: FieldSort, value: Types.FieldSortNumericType) =
+        member _.NumericType(state: FieldSort, value: CoreTypes.FieldSortNumericType) =
             { state with NumericType = Some value }
 
         [<CustomOperation("format")>]
@@ -290,7 +290,7 @@ module TypesBuilders =
 
     let fieldSort = FieldSortBuilder()
 
-    let ofOrder (value: Types.SortOrder) : FieldSort =
+    let ofOrder (value: CoreTypes.SortOrder) : FieldSort =
         {
             Missing = None
             Mode = None
@@ -312,23 +312,23 @@ module TypesBuilders =
             }
 
         [<CustomOperation("evictions")>]
-        member _.Evictions(state: FielddataStats, value: Types.Long) =
+        member _.Evictions(state: FielddataStats, value: CoreTypes.Long) =
             { state with Evictions = Some value }
 
         [<CustomOperation("memorySize")>]
-        member _.MemorySize(state: FielddataStats, value: Types.ByteSize) =
+        member _.MemorySize(state: FielddataStats, value: CoreTypes.ByteSize) =
             { state with MemorySize = Some value }
 
         [<CustomOperation("memorySizeInBytes")>]
-        member _.MemorySizeInBytes(state: FielddataStats, value: Types.Long) =
+        member _.MemorySizeInBytes(state: FielddataStats, value: CoreTypes.Long) =
             { state with MemorySizeInBytes = value }
 
         [<CustomOperation("fields")>]
-        member _.Fields(state: FielddataStats, value: Map<Types.Field, Types.FieldMemoryUsage>) =
+        member _.Fields(state: FielddataStats, value: Map<CoreTypes.Field, CoreTypes.FieldMemoryUsage>) =
             { state with Fields = Some value }
 
         [<CustomOperation("globalOrdinals")>]
-        member _.GlobalOrdinals(state: FielddataStats, value: Types.GlobalOrdinalsStats) =
+        member _.GlobalOrdinals(state: FielddataStats, value: CoreTypes.GlobalOrdinalsStats) =
             { state with GlobalOrdinals = value }
 
     let fielddataStats = FielddataStatsBuilder()
@@ -345,11 +345,11 @@ module TypesBuilders =
             }
 
         [<CustomOperation("mode")>]
-        member _.Mode(state: GeoDistanceSort, value: Types.SortMode) =
+        member _.Mode(state: GeoDistanceSort, value: CoreTypes.SortMode) =
             { state with Mode = Some value }
 
         [<CustomOperation("distanceType")>]
-        member _.DistanceType(state: GeoDistanceSort, value: Types.GeoDistanceType) =
+        member _.DistanceType(state: GeoDistanceSort, value: CoreTypes.GeoDistanceType) =
             { state with DistanceType = Some value }
 
         [<CustomOperation("ignoreUnmapped")>]
@@ -357,15 +357,15 @@ module TypesBuilders =
             { state with IgnoreUnmapped = Some value }
 
         [<CustomOperation("order")>]
-        member _.Order(state: GeoDistanceSort, value: Types.SortOrder) =
+        member _.Order(state: GeoDistanceSort, value: CoreTypes.SortOrder) =
             { state with Order = Some value }
 
         [<CustomOperation("unit")>]
-        member _.Unit(state: GeoDistanceSort, value: Types.DistanceUnit) =
+        member _.Unit(state: GeoDistanceSort, value: CoreTypes.DistanceUnit) =
             { state with Unit = Some value }
 
         [<CustomOperation("nested")>]
-        member _.Nested(state: GeoDistanceSort, value: Types.NestedSortValue) =
+        member _.Nested(state: GeoDistanceSort, value: CoreTypes.NestedSortValue) =
             { state with Nested = Some value }
 
     let geoDistanceSort = GeoDistanceSortBuilder()
@@ -386,43 +386,43 @@ module TypesBuilders =
             }
 
         [<CustomOperation("current")>]
-        member _.Current(state: GetStats, value: Types.Long) =
+        member _.Current(state: GetStats, value: CoreTypes.Long) =
             { state with Current = value }
 
         [<CustomOperation("existsTime")>]
-        member _.ExistsTime(state: GetStats, value: Types.Duration) =
+        member _.ExistsTime(state: GetStats, value: CoreTypes.Duration) =
             { state with ExistsTime = Some value }
 
         [<CustomOperation("existsTimeInMillis")>]
-        member _.ExistsTimeInMillis(state: GetStats, value: Types.DurationValue<Types.UnitMillis>) =
+        member _.ExistsTimeInMillis(state: GetStats, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
             { state with ExistsTimeInMillis = value }
 
         [<CustomOperation("existsTotal")>]
-        member _.ExistsTotal(state: GetStats, value: Types.Long) =
+        member _.ExistsTotal(state: GetStats, value: CoreTypes.Long) =
             { state with ExistsTotal = value }
 
         [<CustomOperation("missingTime")>]
-        member _.MissingTime(state: GetStats, value: Types.Duration) =
+        member _.MissingTime(state: GetStats, value: CoreTypes.Duration) =
             { state with MissingTime = Some value }
 
         [<CustomOperation("missingTimeInMillis")>]
-        member _.MissingTimeInMillis(state: GetStats, value: Types.DurationValue<Types.UnitMillis>) =
+        member _.MissingTimeInMillis(state: GetStats, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
             { state with MissingTimeInMillis = value }
 
         [<CustomOperation("missingTotal")>]
-        member _.MissingTotal(state: GetStats, value: Types.Long) =
+        member _.MissingTotal(state: GetStats, value: CoreTypes.Long) =
             { state with MissingTotal = value }
 
         [<CustomOperation("time")>]
-        member _.Time(state: GetStats, value: Types.Duration) =
+        member _.Time(state: GetStats, value: CoreTypes.Duration) =
             { state with Time = Some value }
 
         [<CustomOperation("timeInMillis")>]
-        member _.TimeInMillis(state: GetStats, value: Types.DurationValue<Types.UnitMillis>) =
+        member _.TimeInMillis(state: GetStats, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
             { state with TimeInMillis = value }
 
         [<CustomOperation("total")>]
-        member _.Total(state: GetStats, value: Types.Long) =
+        member _.Total(state: GetStats, value: CoreTypes.Long) =
             { state with Total = value }
 
     let getStats = GetStatsBuilder()
@@ -436,7 +436,7 @@ module TypesBuilders =
             }
 
         [<CustomOperation("buildTimeInMillis")>]
-        member _.BuildTimeInMillis(state: GlobalOrdinalsStats, value: Types.UnitMillis) =
+        member _.BuildTimeInMillis(state: GlobalOrdinalsStats, value: CoreTypes.UnitMillis) =
             { state with BuildTimeInMillis = value }
 
         [<CustomOperation("buildTime")>]
@@ -444,7 +444,7 @@ module TypesBuilders =
             { state with BuildTime = Some value }
 
         [<CustomOperation("fields")>]
-        member _.Fields(state: GlobalOrdinalsStats, value: Map<Types.Name, Types.GlobalOrdinalFieldStats>) =
+        member _.Fields(state: GlobalOrdinalsStats, value: Map<CoreTypes.Name, CoreTypes.GlobalOrdinalFieldStats>) =
             { state with Fields = Some value }
 
     let globalOrdinalsStats = GlobalOrdinalsStatsBuilder()
@@ -472,23 +472,23 @@ module TypesBuilders =
             }
 
         [<CustomOperation("indexCurrent")>]
-        member _.IndexCurrent(state: IndexingStats, value: Types.Long) =
+        member _.IndexCurrent(state: IndexingStats, value: CoreTypes.Long) =
             { state with IndexCurrent = value }
 
         [<CustomOperation("deleteCurrent")>]
-        member _.DeleteCurrent(state: IndexingStats, value: Types.Long) =
+        member _.DeleteCurrent(state: IndexingStats, value: CoreTypes.Long) =
             { state with DeleteCurrent = value }
 
         [<CustomOperation("deleteTime")>]
-        member _.DeleteTime(state: IndexingStats, value: Types.Duration) =
+        member _.DeleteTime(state: IndexingStats, value: CoreTypes.Duration) =
             { state with DeleteTime = Some value }
 
         [<CustomOperation("deleteTimeInMillis")>]
-        member _.DeleteTimeInMillis(state: IndexingStats, value: Types.DurationValue<Types.UnitMillis>) =
+        member _.DeleteTimeInMillis(state: IndexingStats, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
             { state with DeleteTimeInMillis = value }
 
         [<CustomOperation("deleteTotal")>]
-        member _.DeleteTotal(state: IndexingStats, value: Types.Long) =
+        member _.DeleteTotal(state: IndexingStats, value: CoreTypes.Long) =
             { state with DeleteTotal = value }
 
         [<CustomOperation("isThrottled")>]
@@ -496,47 +496,47 @@ module TypesBuilders =
             { state with IsThrottled = value }
 
         [<CustomOperation("noopUpdateTotal")>]
-        member _.NoopUpdateTotal(state: IndexingStats, value: Types.Long) =
+        member _.NoopUpdateTotal(state: IndexingStats, value: CoreTypes.Long) =
             { state with NoopUpdateTotal = value }
 
         [<CustomOperation("throttleTime")>]
-        member _.ThrottleTime(state: IndexingStats, value: Types.Duration) =
+        member _.ThrottleTime(state: IndexingStats, value: CoreTypes.Duration) =
             { state with ThrottleTime = Some value }
 
         [<CustomOperation("throttleTimeInMillis")>]
-        member _.ThrottleTimeInMillis(state: IndexingStats, value: Types.DurationValue<Types.UnitMillis>) =
+        member _.ThrottleTimeInMillis(state: IndexingStats, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
             { state with ThrottleTimeInMillis = value }
 
         [<CustomOperation("indexTime")>]
-        member _.IndexTime(state: IndexingStats, value: Types.Duration) =
+        member _.IndexTime(state: IndexingStats, value: CoreTypes.Duration) =
             { state with IndexTime = Some value }
 
         [<CustomOperation("indexTimeInMillis")>]
-        member _.IndexTimeInMillis(state: IndexingStats, value: Types.DurationValue<Types.UnitMillis>) =
+        member _.IndexTimeInMillis(state: IndexingStats, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
             { state with IndexTimeInMillis = value }
 
         [<CustomOperation("indexTotal")>]
-        member _.IndexTotal(state: IndexingStats, value: Types.Long) =
+        member _.IndexTotal(state: IndexingStats, value: CoreTypes.Long) =
             { state with IndexTotal = value }
 
         [<CustomOperation("indexFailed")>]
-        member _.IndexFailed(state: IndexingStats, value: Types.Long) =
+        member _.IndexFailed(state: IndexingStats, value: CoreTypes.Long) =
             { state with IndexFailed = value }
 
         [<CustomOperation("types")>]
-        member _.Types(state: IndexingStats, value: Map<string, Types.IndexingStats>) =
+        member _.Types(state: IndexingStats, value: Map<string, CoreTypes.IndexingStats>) =
             { state with Types = Some value }
 
         [<CustomOperation("writeLoad")>]
-        member _.WriteLoad(state: IndexingStats, value: Types.Double) =
+        member _.WriteLoad(state: IndexingStats, value: CoreTypes.Double) =
             { state with WriteLoad = Some value }
 
         [<CustomOperation("recentWriteLoad")>]
-        member _.RecentWriteLoad(state: IndexingStats, value: Types.Double) =
+        member _.RecentWriteLoad(state: IndexingStats, value: CoreTypes.Double) =
             { state with RecentWriteLoad = Some value }
 
         [<CustomOperation("peakWriteLoad")>]
-        member _.PeakWriteLoad(state: IndexingStats, value: Types.Double) =
+        member _.PeakWriteLoad(state: IndexingStats, value: CoreTypes.Double) =
             { state with PeakWriteLoad = Some value }
 
     let indexingStats = IndexingStatsBuilder()
@@ -555,7 +555,7 @@ module TypesBuilders =
             { state with AllowNoIndices = Some value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: IndicesOptions, value: Types.ExpandWildcards) =
+        member _.ExpandWildcards(state: IndicesOptions, value: CoreTypes.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("ignoreUnavailable")>]
@@ -588,15 +588,15 @@ module TypesBuilders =
             { state with Found = value }
 
         [<CustomOperation("seqNo")>]
-        member _.SeqNo(state: InlineGet, value: Types.SequenceNumber) =
+        member _.SeqNo(state: InlineGet, value: CoreTypes.SequenceNumber) =
             { state with SeqNo = Some value }
 
         [<CustomOperation("primaryTerm")>]
-        member _.PrimaryTerm(state: InlineGet, value: Types.Long) =
+        member _.PrimaryTerm(state: InlineGet, value: CoreTypes.Long) =
             { state with PrimaryTerm = Some value }
 
         [<CustomOperation("routing")>]
-        member _.Routing(state: InlineGet, value: Types.Routing) =
+        member _.Routing(state: InlineGet, value: CoreTypes.Routing) =
             { state with Routing = Some value }
 
         [<CustomOperation("source")>]
@@ -620,27 +620,27 @@ module TypesBuilders =
             }
 
         [<CustomOperation("field")>]
-        member _.Field(state: KnnQuery, value: Types.Field) =
+        member _.Field(state: KnnQuery, value: CoreTypes.Field) =
             { state with Field = value }
 
         [<CustomOperation("queryVector")>]
-        member _.QueryVector(state: KnnQuery, value: Types.QueryVector) =
+        member _.QueryVector(state: KnnQuery, value: CoreTypes.QueryVector) =
             { state with QueryVector = Some value }
 
         [<CustomOperation("queryVectorBuilder")>]
-        member _.QueryVectorBuilder(state: KnnQuery, value: Types.QueryVectorBuilder) =
+        member _.QueryVectorBuilder(state: KnnQuery, value: CoreTypes.QueryVectorBuilder) =
             { state with QueryVectorBuilder = Some value }
 
         [<CustomOperation("numCandidates")>]
-        member _.NumCandidates(state: KnnQuery, value: Types.Integer) =
+        member _.NumCandidates(state: KnnQuery, value: CoreTypes.Integer) =
             { state with NumCandidates = Some value }
 
         [<CustomOperation("visitPercentage")>]
-        member _.VisitPercentage(state: KnnQuery, value: Types.Float) =
+        member _.VisitPercentage(state: KnnQuery, value: CoreTypes.Float) =
             { state with VisitPercentage = Some value }
 
         [<CustomOperation("k")>]
-        member _.K(state: KnnQuery, value: Types.Integer) =
+        member _.K(state: KnnQuery, value: CoreTypes.Integer) =
             { state with K = Some value }
 
         [<CustomOperation("filter")>]
@@ -648,11 +648,11 @@ module TypesBuilders =
             { state with Filter = Some value }
 
         [<CustomOperation("similarity")>]
-        member _.Similarity(state: KnnQuery, value: Types.Float) =
+        member _.Similarity(state: KnnQuery, value: CoreTypes.Float) =
             { state with Similarity = Some value }
 
         [<CustomOperation("rescoreVector")>]
-        member _.RescoreVector(state: KnnQuery, value: Types.RescoreVector) =
+        member _.RescoreVector(state: KnnQuery, value: CoreTypes.RescoreVector) =
             { state with RescoreVector = Some value }
 
     let knnQuery = KnnQueryBuilder()
@@ -675,31 +675,31 @@ module TypesBuilders =
             { state with Field = value }
 
         [<CustomOperation("queryVector")>]
-        member _.QueryVector(state: KnnRetriever, value: Types.QueryVector) =
+        member _.QueryVector(state: KnnRetriever, value: CoreTypes.QueryVector) =
             { state with QueryVector = Some value }
 
         [<CustomOperation("queryVectorBuilder")>]
-        member _.QueryVectorBuilder(state: KnnRetriever, value: Types.QueryVectorBuilder) =
+        member _.QueryVectorBuilder(state: KnnRetriever, value: CoreTypes.QueryVectorBuilder) =
             { state with QueryVectorBuilder = Some value }
 
         [<CustomOperation("k")>]
-        member _.K(state: KnnRetriever, value: Types.Integer) =
+        member _.K(state: KnnRetriever, value: CoreTypes.Integer) =
             { state with K = value }
 
         [<CustomOperation("numCandidates")>]
-        member _.NumCandidates(state: KnnRetriever, value: Types.Integer) =
+        member _.NumCandidates(state: KnnRetriever, value: CoreTypes.Integer) =
             { state with NumCandidates = value }
 
         [<CustomOperation("visitPercentage")>]
-        member _.VisitPercentage(state: KnnRetriever, value: Types.Float) =
+        member _.VisitPercentage(state: KnnRetriever, value: CoreTypes.Float) =
             { state with VisitPercentage = Some value }
 
         [<CustomOperation("similarity")>]
-        member _.Similarity(state: KnnRetriever, value: Types.Float) =
+        member _.Similarity(state: KnnRetriever, value: CoreTypes.Float) =
             { state with Similarity = Some value }
 
         [<CustomOperation("rescoreVector")>]
-        member _.RescoreVector(state: KnnRetriever, value: Types.RescoreVector) =
+        member _.RescoreVector(state: KnnRetriever, value: CoreTypes.RescoreVector) =
             { state with RescoreVector = Some value }
 
     let knnRetriever = KnnRetrieverBuilder()
@@ -722,31 +722,31 @@ module TypesBuilders =
             }
 
         [<CustomOperation("field")>]
-        member _.Field(state: KnnSearch, value: Types.Field) =
+        member _.Field(state: KnnSearch, value: CoreTypes.Field) =
             { state with Field = value }
 
         [<CustomOperation("queryVector")>]
-        member _.QueryVector(state: KnnSearch, value: Types.QueryVector) =
+        member _.QueryVector(state: KnnSearch, value: CoreTypes.QueryVector) =
             { state with QueryVector = Some value }
 
         [<CustomOperation("queryVectorBuilder")>]
-        member _.QueryVectorBuilder(state: KnnSearch, value: Types.QueryVectorBuilder) =
+        member _.QueryVectorBuilder(state: KnnSearch, value: CoreTypes.QueryVectorBuilder) =
             { state with QueryVectorBuilder = Some value }
 
         [<CustomOperation("k")>]
-        member _.K(state: KnnSearch, value: Types.Integer) =
+        member _.K(state: KnnSearch, value: CoreTypes.Integer) =
             { state with K = Some value }
 
         [<CustomOperation("numCandidates")>]
-        member _.NumCandidates(state: KnnSearch, value: Types.Integer) =
+        member _.NumCandidates(state: KnnSearch, value: CoreTypes.Integer) =
             { state with NumCandidates = Some value }
 
         [<CustomOperation("visitPercentage")>]
-        member _.VisitPercentage(state: KnnSearch, value: Types.Float) =
+        member _.VisitPercentage(state: KnnSearch, value: CoreTypes.Float) =
             { state with VisitPercentage = Some value }
 
         [<CustomOperation("boost")>]
-        member _.Boost(state: KnnSearch, value: Types.Float) =
+        member _.Boost(state: KnnSearch, value: CoreTypes.Float) =
             { state with Boost = Some value }
 
         [<CustomOperation("filter")>]
@@ -754,7 +754,7 @@ module TypesBuilders =
             { state with Filter = Some value }
 
         [<CustomOperation("similarity")>]
-        member _.Similarity(state: KnnSearch, value: Types.Float) =
+        member _.Similarity(state: KnnSearch, value: CoreTypes.Float) =
             { state with Similarity = Some value }
 
         [<CustomOperation("innerHits")>]
@@ -762,7 +762,7 @@ module TypesBuilders =
             { state with InnerHits = Some value }
 
         [<CustomOperation("rescoreVector")>]
-        member _.RescoreVector(state: KnnSearch, value: Types.RescoreVector) =
+        member _.RescoreVector(state: KnnSearch, value: CoreTypes.RescoreVector) =
             { state with RescoreVector = Some value }
 
         [<CustomOperation("name")>]
@@ -782,11 +782,11 @@ module TypesBuilders =
             }
 
         [<CustomOperation("retrievers")>]
-        member _.Retrievers(state: LinearRetriever, value: Types.InnerRetriever list) =
+        member _.Retrievers(state: LinearRetriever, value: CoreTypes.InnerRetriever list) =
             { state with Retrievers = Some value }
 
         [<CustomOperation("rankWindowSize")>]
-        member _.RankWindowSize(state: LinearRetriever, value: Types.Integer) =
+        member _.RankWindowSize(state: LinearRetriever, value: CoreTypes.Integer) =
             { state with RankWindowSize = Some value }
 
         [<CustomOperation("query")>]
@@ -798,7 +798,7 @@ module TypesBuilders =
             { state with Fields = Some value }
 
         [<CustomOperation("normalizer")>]
-        member _.Normalizer(state: LinearRetriever, value: Types.ScoreNormalizer) =
+        member _.Normalizer(state: LinearRetriever, value: CoreTypes.ScoreNormalizer) =
             { state with Normalizer = Some value }
 
     let linearRetriever = LinearRetrieverBuilder()
@@ -825,11 +825,11 @@ module TypesBuilders =
             }
 
         [<CustomOperation("current")>]
-        member _.Current(state: MergesStats, value: Types.Long) =
+        member _.Current(state: MergesStats, value: CoreTypes.Long) =
             { state with Current = value }
 
         [<CustomOperation("currentDocs")>]
-        member _.CurrentDocs(state: MergesStats, value: Types.Long) =
+        member _.CurrentDocs(state: MergesStats, value: CoreTypes.Long) =
             { state with CurrentDocs = value }
 
         [<CustomOperation("currentSize")>]
@@ -837,11 +837,11 @@ module TypesBuilders =
             { state with CurrentSize = Some value }
 
         [<CustomOperation("currentSizeInBytes")>]
-        member _.CurrentSizeInBytes(state: MergesStats, value: Types.Long) =
+        member _.CurrentSizeInBytes(state: MergesStats, value: CoreTypes.Long) =
             { state with CurrentSizeInBytes = value }
 
         [<CustomOperation("total")>]
-        member _.Total(state: MergesStats, value: Types.Long) =
+        member _.Total(state: MergesStats, value: CoreTypes.Long) =
             { state with Total = value }
 
         [<CustomOperation("totalAutoThrottle")>]
@@ -849,11 +849,11 @@ module TypesBuilders =
             { state with TotalAutoThrottle = Some value }
 
         [<CustomOperation("totalAutoThrottleInBytes")>]
-        member _.TotalAutoThrottleInBytes(state: MergesStats, value: Types.Long) =
+        member _.TotalAutoThrottleInBytes(state: MergesStats, value: CoreTypes.Long) =
             { state with TotalAutoThrottleInBytes = value }
 
         [<CustomOperation("totalDocs")>]
-        member _.TotalDocs(state: MergesStats, value: Types.Long) =
+        member _.TotalDocs(state: MergesStats, value: CoreTypes.Long) =
             { state with TotalDocs = value }
 
         [<CustomOperation("totalSize")>]
@@ -861,31 +861,31 @@ module TypesBuilders =
             { state with TotalSize = Some value }
 
         [<CustomOperation("totalSizeInBytes")>]
-        member _.TotalSizeInBytes(state: MergesStats, value: Types.Long) =
+        member _.TotalSizeInBytes(state: MergesStats, value: CoreTypes.Long) =
             { state with TotalSizeInBytes = value }
 
         [<CustomOperation("totalStoppedTime")>]
-        member _.TotalStoppedTime(state: MergesStats, value: Types.Duration) =
+        member _.TotalStoppedTime(state: MergesStats, value: CoreTypes.Duration) =
             { state with TotalStoppedTime = Some value }
 
         [<CustomOperation("totalStoppedTimeInMillis")>]
-        member _.TotalStoppedTimeInMillis(state: MergesStats, value: Types.DurationValue<Types.UnitMillis>) =
+        member _.TotalStoppedTimeInMillis(state: MergesStats, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
             { state with TotalStoppedTimeInMillis = value }
 
         [<CustomOperation("totalThrottledTime")>]
-        member _.TotalThrottledTime(state: MergesStats, value: Types.Duration) =
+        member _.TotalThrottledTime(state: MergesStats, value: CoreTypes.Duration) =
             { state with TotalThrottledTime = Some value }
 
         [<CustomOperation("totalThrottledTimeInMillis")>]
-        member _.TotalThrottledTimeInMillis(state: MergesStats, value: Types.DurationValue<Types.UnitMillis>) =
+        member _.TotalThrottledTimeInMillis(state: MergesStats, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
             { state with TotalThrottledTimeInMillis = value }
 
         [<CustomOperation("totalTime")>]
-        member _.TotalTime(state: MergesStats, value: Types.Duration) =
+        member _.TotalTime(state: MergesStats, value: CoreTypes.Duration) =
             { state with TotalTime = Some value }
 
         [<CustomOperation("totalTimeInMillis")>]
-        member _.TotalTimeInMillis(state: MergesStats, value: Types.DurationValue<Types.UnitMillis>) =
+        member _.TotalTimeInMillis(state: MergesStats, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
             { state with TotalTimeInMillis = value }
 
     let mergesStats = MergesStatsBuilder()
@@ -900,19 +900,19 @@ module TypesBuilders =
             }
 
         [<CustomOperation("filter")>]
-        member _.Filter(state: NestedSortValue, value: TypesQueryDsl.QueryContainer) =
+        member _.Filter(state: NestedSortValue, value: CoreTypes.QueryContainer) =
             { state with Filter = Some value }
 
         [<CustomOperation("maxChildren")>]
-        member _.MaxChildren(state: NestedSortValue, value: Types.Integer) =
+        member _.MaxChildren(state: NestedSortValue, value: CoreTypes.Integer) =
             { state with MaxChildren = Some value }
 
         [<CustomOperation("nested")>]
-        member _.Nested(state: NestedSortValue, value: Types.NestedSortValue) =
+        member _.Nested(state: NestedSortValue, value: CoreTypes.NestedSortValue) =
             { state with Nested = Some value }
 
         [<CustomOperation("path")>]
-        member _.Path(state: NestedSortValue, value: Types.Field) =
+        member _.Path(state: NestedSortValue, value: CoreTypes.Field) =
             { state with Path = value }
 
     let nestedSortValue = NestedSortValueBuilder()
@@ -941,23 +941,23 @@ module TypesBuilders =
             { state with Primary = value }
 
         [<CustomOperation("node")>]
-        member _.Node(state: NodeShard, value: Types.NodeName) =
+        member _.Node(state: NodeShard, value: CoreTypes.NodeName) =
             { state with Node = Some value }
 
         [<CustomOperation("shard")>]
-        member _.Shard(state: NodeShard, value: Types.Integer) =
+        member _.Shard(state: NodeShard, value: CoreTypes.Integer) =
             { state with Shard = value }
 
         [<CustomOperation("index")>]
-        member _.Index(state: NodeShard, value: Types.IndexName) =
+        member _.Index(state: NodeShard, value: CoreTypes.IndexName) =
             { state with Index = value }
 
         [<CustomOperation("allocationId")>]
-        member _.AllocationId(state: NodeShard, value: Map<string, Types.Id>) =
+        member _.AllocationId(state: NodeShard, value: Map<string, CoreTypes.Id>) =
             { state with AllocationId = Some value }
 
         [<CustomOperation("recoverySource")>]
-        member _.RecoverySource(state: NodeShard, value: Map<string, Types.Id>) =
+        member _.RecoverySource(state: NodeShard, value: Map<string, CoreTypes.Id>) =
             { state with RecoverySource = Some value }
 
         [<CustomOperation("unassignedInfo")>]
@@ -965,11 +965,11 @@ module TypesBuilders =
             { state with UnassignedInfo = Some value }
 
         [<CustomOperation("relocatingNode")>]
-        member _.RelocatingNode(state: NodeShard, value: Types.NodeId option) =
+        member _.RelocatingNode(state: NodeShard, value: CoreTypes.NodeId option) =
             { state with RelocatingNode = Some value }
 
         [<CustomOperation("relocationFailureInfo")>]
-        member _.RelocationFailureInfo(state: NodeShard, value: Types.RelocationFailureInfo) =
+        member _.RelocationFailureInfo(state: NodeShard, value: CoreTypes.RelocationFailureInfo) =
             { state with RelocationFailureInfo = Some value }
 
     let nodeShard = NodeShardBuilder()
@@ -984,7 +984,7 @@ module TypesBuilders =
             }
 
         [<CustomOperation("retriever")>]
-        member _.Retriever(state: PinnedRetriever, value: Types.RetrieverContainer) =
+        member _.Retriever(state: PinnedRetriever, value: CoreTypes.RetrieverContainer) =
             { state with Retriever = value }
 
         [<CustomOperation("ids")>]
@@ -992,21 +992,21 @@ module TypesBuilders =
             { state with Ids = Some value }
 
         [<CustomOperation("docs")>]
-        member _.Docs(state: PinnedRetriever, value: Types.SpecifiedDocument list) =
+        member _.Docs(state: PinnedRetriever, value: CoreTypes.SpecifiedDocument list) =
             { state with Docs = Some value }
 
         [<CustomOperation("rankWindowSize")>]
-        member _.RankWindowSize(state: PinnedRetriever, value: Types.Integer) =
+        member _.RankWindowSize(state: PinnedRetriever, value: CoreTypes.Integer) =
             { state with RankWindowSize = Some value }
 
     let pinnedRetriever = PinnedRetrieverBuilder()
 
     module QueryVectorBuilder =
 
-        let textEmbedding (value: Types.TextEmbedding) =
+        let textEmbedding (value: CoreTypes.TextEmbedding) =
             QueryVectorBuilder.TextEmbedding value
 
-        let lookup (value: Types.LookupQueryVectorBuilder) =
+        let lookup (value: CoreTypes.LookupQueryVectorBuilder) =
             QueryVectorBuilder.Lookup value
 
     type RRFRetrieverBuilder() =
@@ -1020,15 +1020,15 @@ module TypesBuilders =
             }
 
         [<CustomOperation("retrievers")>]
-        member _.Retrievers(state: RRFRetriever, value: Types.RRFRetrieverEntry list) =
+        member _.Retrievers(state: RRFRetriever, value: CoreTypes.RRFRetrieverEntry list) =
             { state with Retrievers = value }
 
         [<CustomOperation("rankConstant")>]
-        member _.RankConstant(state: RRFRetriever, value: Types.Integer) =
+        member _.RankConstant(state: RRFRetriever, value: CoreTypes.Integer) =
             { state with RankConstant = Some value }
 
         [<CustomOperation("rankWindowSize")>]
-        member _.RankWindowSize(state: RRFRetriever, value: Types.Integer) =
+        member _.RankWindowSize(state: RRFRetriever, value: CoreTypes.Integer) =
             { state with RankWindowSize = Some value }
 
         [<CustomOperation("query")>]
@@ -1043,7 +1043,7 @@ module TypesBuilders =
 
     module Rank =
 
-        let rrf (value: Types.RrfRank) =
+        let rrf (value: CoreTypes.RrfRank) =
             RankContainer.Rrf value
 
     type ReindexStatusBuilder() =
@@ -1067,59 +1067,59 @@ module TypesBuilders =
             }
 
         [<CustomOperation("sliceId")>]
-        member _.SliceId(state: ReindexStatus, value: Types.Integer) =
+        member _.SliceId(state: ReindexStatus, value: CoreTypes.Integer) =
             { state with SliceId = Some value }
 
         [<CustomOperation("batches")>]
-        member _.Batches(state: ReindexStatus, value: Types.Long) =
+        member _.Batches(state: ReindexStatus, value: CoreTypes.Long) =
             { state with Batches = value }
 
         [<CustomOperation("created")>]
-        member _.Created(state: ReindexStatus, value: Types.Long) =
+        member _.Created(state: ReindexStatus, value: CoreTypes.Long) =
             { state with Created = Some value }
 
         [<CustomOperation("deleted")>]
-        member _.Deleted(state: ReindexStatus, value: Types.Long) =
+        member _.Deleted(state: ReindexStatus, value: CoreTypes.Long) =
             { state with Deleted = value }
 
         [<CustomOperation("noops")>]
-        member _.Noops(state: ReindexStatus, value: Types.Long) =
+        member _.Noops(state: ReindexStatus, value: CoreTypes.Long) =
             { state with Noops = value }
 
         [<CustomOperation("requestsPerSecond")>]
-        member _.RequestsPerSecond(state: ReindexStatus, value: Types.Float) =
+        member _.RequestsPerSecond(state: ReindexStatus, value: CoreTypes.Float) =
             { state with RequestsPerSecond = value }
 
         [<CustomOperation("retries")>]
-        member _.Retries(state: ReindexStatus, value: Types.Retries) =
+        member _.Retries(state: ReindexStatus, value: CoreTypes.Retries) =
             { state with Retries = value }
 
         [<CustomOperation("throttled")>]
-        member _.Throttled(state: ReindexStatus, value: Types.Duration) =
+        member _.Throttled(state: ReindexStatus, value: CoreTypes.Duration) =
             { state with Throttled = Some value }
 
         [<CustomOperation("throttledMillis")>]
-        member _.ThrottledMillis(state: ReindexStatus, value: Types.DurationValue<Types.UnitMillis>) =
+        member _.ThrottledMillis(state: ReindexStatus, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
             { state with ThrottledMillis = value }
 
         [<CustomOperation("throttledUntil")>]
-        member _.ThrottledUntil(state: ReindexStatus, value: Types.Duration) =
+        member _.ThrottledUntil(state: ReindexStatus, value: CoreTypes.Duration) =
             { state with ThrottledUntil = Some value }
 
         [<CustomOperation("throttledUntilMillis")>]
-        member _.ThrottledUntilMillis(state: ReindexStatus, value: Types.DurationValue<Types.UnitMillis>) =
+        member _.ThrottledUntilMillis(state: ReindexStatus, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
             { state with ThrottledUntilMillis = value }
 
         [<CustomOperation("total")>]
-        member _.Total(state: ReindexStatus, value: Types.Long) =
+        member _.Total(state: ReindexStatus, value: CoreTypes.Long) =
             { state with Total = value }
 
         [<CustomOperation("updated")>]
-        member _.Updated(state: ReindexStatus, value: Types.Long) =
+        member _.Updated(state: ReindexStatus, value: CoreTypes.Long) =
             { state with Updated = Some value }
 
         [<CustomOperation("versionConflicts")>]
-        member _.VersionConflicts(state: ReindexStatus, value: Types.Long) =
+        member _.VersionConflicts(state: ReindexStatus, value: CoreTypes.Long) =
             { state with VersionConflicts = value }
 
         [<CustomOperation("cancelled")>]
@@ -1141,7 +1141,7 @@ module TypesBuilders =
             { state with Filter = Some value }
 
         [<CustomOperation("minScore")>]
-        member _.MinScore(state: RetrieverBase, value: Types.Float) =
+        member _.MinScore(state: RetrieverBase, value: CoreTypes.Float) =
             { state with MinScore = Some value }
 
         [<CustomOperation("name")>]
@@ -1152,31 +1152,31 @@ module TypesBuilders =
 
     module Retriever =
 
-        let standard (value: Types.StandardRetriever) =
+        let standard (value: CoreTypes.StandardRetriever) =
             RetrieverContainer.Standard value
 
-        let knn (value: Types.KnnRetriever) =
+        let knn (value: CoreTypes.KnnRetriever) =
             RetrieverContainer.Knn value
 
-        let rrf (value: Types.RRFRetriever) =
+        let rrf (value: CoreTypes.RRFRetriever) =
             RetrieverContainer.Rrf value
 
-        let textSimilarityReranker (value: Types.TextSimilarityReranker) =
+        let textSimilarityReranker (value: CoreTypes.TextSimilarityReranker) =
             RetrieverContainer.TextSimilarityReranker value
 
-        let rule (value: Types.RuleRetriever) =
+        let rule (value: CoreTypes.RuleRetriever) =
             RetrieverContainer.Rule value
 
-        let rescorer (value: Types.RescorerRetriever) =
+        let rescorer (value: CoreTypes.RescorerRetriever) =
             RetrieverContainer.Rescorer value
 
-        let linear (value: Types.LinearRetriever) =
+        let linear (value: CoreTypes.LinearRetriever) =
             RetrieverContainer.Linear value
 
-        let pinned (value: Types.PinnedRetriever) =
+        let pinned (value: CoreTypes.PinnedRetriever) =
             RetrieverContainer.Pinned value
 
-        let diversify (value: Types.DiversifyRetriever) =
+        let diversify (value: CoreTypes.DiversifyRetriever) =
             RetrieverContainer.Diversify value
 
     type RrfRankBuilder() =
@@ -1187,11 +1187,11 @@ module TypesBuilders =
             }
 
         [<CustomOperation("rankConstant")>]
-        member _.RankConstant(state: RrfRank, value: Types.Long) =
+        member _.RankConstant(state: RrfRank, value: CoreTypes.Long) =
             { state with RankConstant = Some value }
 
         [<CustomOperation("rankWindowSize")>]
-        member _.RankWindowSize(state: RrfRank, value: Types.Long) =
+        member _.RankWindowSize(state: RrfRank, value: CoreTypes.Long) =
             { state with RankWindowSize = Some value }
 
     let rrfRank = RrfRankBuilder()
@@ -1207,11 +1207,11 @@ module TypesBuilders =
             }
 
         [<CustomOperation("source")>]
-        member _.Source(state: Script, value: Types.ScriptSource) =
+        member _.Source(state: Script, value: CoreTypes.ScriptSource) =
             { state with Source = Some value }
 
         [<CustomOperation("id")>]
-        member _.Id(state: Script, value: Types.Id) =
+        member _.Id(state: Script, value: CoreTypes.Id) =
             { state with Id = Some value }
 
         [<CustomOperation("params")>]
@@ -1219,7 +1219,7 @@ module TypesBuilders =
             { state with Params = Some value }
 
         [<CustomOperation("lang")>]
-        member _.Lang(state: Script, value: Types.ScriptLanguage) =
+        member _.Lang(state: Script, value: CoreTypes.ScriptLanguage) =
             { state with Lang = Some value }
 
         [<CustomOperation("options")>]
@@ -1228,7 +1228,7 @@ module TypesBuilders =
 
     let script = ScriptBuilder()
 
-    let ofSource (value: Types.ScriptSource) : Script =
+    let ofSource (value: CoreTypes.ScriptSource) : Script =
         {
             Source = value
             Id = None
@@ -1248,23 +1248,23 @@ module TypesBuilders =
             }
 
         [<CustomOperation("order")>]
-        member _.Order(state: ScriptSort, value: Types.SortOrder) =
+        member _.Order(state: ScriptSort, value: CoreTypes.SortOrder) =
             { state with Order = Some value }
 
         [<CustomOperation("script")>]
-        member _.Script(state: ScriptSort, value: Types.Script) =
+        member _.Script(state: ScriptSort, value: CoreTypes.Script) =
             { state with Script = value }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: ScriptSort, value: Types.ScriptSortType) =
+        member _.Type(state: ScriptSort, value: CoreTypes.ScriptSortType) =
             { state with Type = Some value }
 
         [<CustomOperation("mode")>]
-        member _.Mode(state: ScriptSort, value: Types.SortMode) =
+        member _.Mode(state: ScriptSort, value: CoreTypes.SortMode) =
             { state with Mode = Some value }
 
         [<CustomOperation("nested")>]
-        member _.Nested(state: ScriptSort, value: Types.NestedSortValue) =
+        member _.Nested(state: ScriptSort, value: CoreTypes.NestedSortValue) =
             { state with Nested = Some value }
 
     let scriptSort = ScriptSortBuilder()
@@ -1287,7 +1287,7 @@ module TypesBuilders =
             { state with Params = Some value }
 
         [<CustomOperation("source")>]
-        member _.Source(state: ScriptTransform, value: Types.ScriptSource) =
+        member _.Source(state: ScriptTransform, value: CoreTypes.ScriptSource) =
             { state with Source = Some value }
 
         [<CustomOperation("id")>]
@@ -1321,79 +1321,79 @@ module TypesBuilders =
             }
 
         [<CustomOperation("fetchCurrent")>]
-        member _.FetchCurrent(state: SearchStats, value: Types.Long) =
+        member _.FetchCurrent(state: SearchStats, value: CoreTypes.Long) =
             { state with FetchCurrent = value }
 
         [<CustomOperation("fetchTime")>]
-        member _.FetchTime(state: SearchStats, value: Types.Duration) =
+        member _.FetchTime(state: SearchStats, value: CoreTypes.Duration) =
             { state with FetchTime = Some value }
 
         [<CustomOperation("fetchTimeInMillis")>]
-        member _.FetchTimeInMillis(state: SearchStats, value: Types.DurationValue<Types.UnitMillis>) =
+        member _.FetchTimeInMillis(state: SearchStats, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
             { state with FetchTimeInMillis = value }
 
         [<CustomOperation("fetchTotal")>]
-        member _.FetchTotal(state: SearchStats, value: Types.Long) =
+        member _.FetchTotal(state: SearchStats, value: CoreTypes.Long) =
             { state with FetchTotal = value }
 
         [<CustomOperation("openContexts")>]
-        member _.OpenContexts(state: SearchStats, value: Types.Long) =
+        member _.OpenContexts(state: SearchStats, value: CoreTypes.Long) =
             { state with OpenContexts = Some value }
 
         [<CustomOperation("queryCurrent")>]
-        member _.QueryCurrent(state: SearchStats, value: Types.Long) =
+        member _.QueryCurrent(state: SearchStats, value: CoreTypes.Long) =
             { state with QueryCurrent = value }
 
         [<CustomOperation("queryTime")>]
-        member _.QueryTime(state: SearchStats, value: Types.Duration) =
+        member _.QueryTime(state: SearchStats, value: CoreTypes.Duration) =
             { state with QueryTime = Some value }
 
         [<CustomOperation("queryTimeInMillis")>]
-        member _.QueryTimeInMillis(state: SearchStats, value: Types.DurationValue<Types.UnitMillis>) =
+        member _.QueryTimeInMillis(state: SearchStats, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
             { state with QueryTimeInMillis = value }
 
         [<CustomOperation("queryTotal")>]
-        member _.QueryTotal(state: SearchStats, value: Types.Long) =
+        member _.QueryTotal(state: SearchStats, value: CoreTypes.Long) =
             { state with QueryTotal = value }
 
         [<CustomOperation("scrollCurrent")>]
-        member _.ScrollCurrent(state: SearchStats, value: Types.Long) =
+        member _.ScrollCurrent(state: SearchStats, value: CoreTypes.Long) =
             { state with ScrollCurrent = value }
 
         [<CustomOperation("scrollTime")>]
-        member _.ScrollTime(state: SearchStats, value: Types.Duration) =
+        member _.ScrollTime(state: SearchStats, value: CoreTypes.Duration) =
             { state with ScrollTime = Some value }
 
         [<CustomOperation("scrollTimeInMillis")>]
-        member _.ScrollTimeInMillis(state: SearchStats, value: Types.DurationValue<Types.UnitMillis>) =
+        member _.ScrollTimeInMillis(state: SearchStats, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
             { state with ScrollTimeInMillis = value }
 
         [<CustomOperation("scrollTotal")>]
-        member _.ScrollTotal(state: SearchStats, value: Types.Long) =
+        member _.ScrollTotal(state: SearchStats, value: CoreTypes.Long) =
             { state with ScrollTotal = value }
 
         [<CustomOperation("suggestCurrent")>]
-        member _.SuggestCurrent(state: SearchStats, value: Types.Long) =
+        member _.SuggestCurrent(state: SearchStats, value: CoreTypes.Long) =
             { state with SuggestCurrent = value }
 
         [<CustomOperation("suggestTime")>]
-        member _.SuggestTime(state: SearchStats, value: Types.Duration) =
+        member _.SuggestTime(state: SearchStats, value: CoreTypes.Duration) =
             { state with SuggestTime = Some value }
 
         [<CustomOperation("suggestTimeInMillis")>]
-        member _.SuggestTimeInMillis(state: SearchStats, value: Types.DurationValue<Types.UnitMillis>) =
+        member _.SuggestTimeInMillis(state: SearchStats, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
             { state with SuggestTimeInMillis = value }
 
         [<CustomOperation("suggestTotal")>]
-        member _.SuggestTotal(state: SearchStats, value: Types.Long) =
+        member _.SuggestTotal(state: SearchStats, value: CoreTypes.Long) =
             { state with SuggestTotal = value }
 
         [<CustomOperation("recentSearchLoad")>]
-        member _.RecentSearchLoad(state: SearchStats, value: Types.Double) =
+        member _.RecentSearchLoad(state: SearchStats, value: CoreTypes.Double) =
             { state with RecentSearchLoad = Some value }
 
         [<CustomOperation("groups")>]
-        member _.Groups(state: SearchStats, value: Map<string, Types.SearchStats>) =
+        member _.Groups(state: SearchStats, value: Map<string, CoreTypes.SearchStats>) =
             { state with Groups = Some value }
 
     let searchStats = SearchStatsBuilder()
@@ -1427,15 +1427,15 @@ module TypesBuilders =
             }
 
         [<CustomOperation("count")>]
-        member _.Count(state: SegmentsStats, value: Types.Integer) =
+        member _.Count(state: SegmentsStats, value: CoreTypes.Integer) =
             { state with Count = value }
 
         [<CustomOperation("docValuesMemory")>]
-        member _.DocValuesMemory(state: SegmentsStats, value: Types.ByteSize) =
+        member _.DocValuesMemory(state: SegmentsStats, value: CoreTypes.ByteSize) =
             { state with DocValuesMemory = Some value }
 
         [<CustomOperation("docValuesMemoryInBytes")>]
-        member _.DocValuesMemoryInBytes(state: SegmentsStats, value: Types.Long) =
+        member _.DocValuesMemoryInBytes(state: SegmentsStats, value: CoreTypes.Long) =
             { state with DocValuesMemoryInBytes = value }
 
         [<CustomOperation("fileSizes")>]
@@ -1443,79 +1443,79 @@ module TypesBuilders =
             { state with FileSizes = value }
 
         [<CustomOperation("fixedBitSet")>]
-        member _.FixedBitSet(state: SegmentsStats, value: Types.ByteSize) =
+        member _.FixedBitSet(state: SegmentsStats, value: CoreTypes.ByteSize) =
             { state with FixedBitSet = Some value }
 
         [<CustomOperation("fixedBitSetMemoryInBytes")>]
-        member _.FixedBitSetMemoryInBytes(state: SegmentsStats, value: Types.Long) =
+        member _.FixedBitSetMemoryInBytes(state: SegmentsStats, value: CoreTypes.Long) =
             { state with FixedBitSetMemoryInBytes = value }
 
         [<CustomOperation("indexWriterMemory")>]
-        member _.IndexWriterMemory(state: SegmentsStats, value: Types.ByteSize) =
+        member _.IndexWriterMemory(state: SegmentsStats, value: CoreTypes.ByteSize) =
             { state with IndexWriterMemory = Some value }
 
         [<CustomOperation("indexWriterMemoryInBytes")>]
-        member _.IndexWriterMemoryInBytes(state: SegmentsStats, value: Types.Long) =
+        member _.IndexWriterMemoryInBytes(state: SegmentsStats, value: CoreTypes.Long) =
             { state with IndexWriterMemoryInBytes = value }
 
         [<CustomOperation("maxUnsafeAutoIdTimestamp")>]
-        member _.MaxUnsafeAutoIdTimestamp(state: SegmentsStats, value: Types.Long) =
+        member _.MaxUnsafeAutoIdTimestamp(state: SegmentsStats, value: CoreTypes.Long) =
             { state with MaxUnsafeAutoIdTimestamp = value }
 
         [<CustomOperation("memory")>]
-        member _.Memory(state: SegmentsStats, value: Types.ByteSize) =
+        member _.Memory(state: SegmentsStats, value: CoreTypes.ByteSize) =
             { state with Memory = Some value }
 
         [<CustomOperation("memoryInBytes")>]
-        member _.MemoryInBytes(state: SegmentsStats, value: Types.Long) =
+        member _.MemoryInBytes(state: SegmentsStats, value: CoreTypes.Long) =
             { state with MemoryInBytes = value }
 
         [<CustomOperation("normsMemory")>]
-        member _.NormsMemory(state: SegmentsStats, value: Types.ByteSize) =
+        member _.NormsMemory(state: SegmentsStats, value: CoreTypes.ByteSize) =
             { state with NormsMemory = Some value }
 
         [<CustomOperation("normsMemoryInBytes")>]
-        member _.NormsMemoryInBytes(state: SegmentsStats, value: Types.Long) =
+        member _.NormsMemoryInBytes(state: SegmentsStats, value: CoreTypes.Long) =
             { state with NormsMemoryInBytes = value }
 
         [<CustomOperation("pointsMemory")>]
-        member _.PointsMemory(state: SegmentsStats, value: Types.ByteSize) =
+        member _.PointsMemory(state: SegmentsStats, value: CoreTypes.ByteSize) =
             { state with PointsMemory = Some value }
 
         [<CustomOperation("pointsMemoryInBytes")>]
-        member _.PointsMemoryInBytes(state: SegmentsStats, value: Types.Long) =
+        member _.PointsMemoryInBytes(state: SegmentsStats, value: CoreTypes.Long) =
             { state with PointsMemoryInBytes = value }
 
         [<CustomOperation("storedFieldsMemoryInBytes")>]
-        member _.StoredFieldsMemoryInBytes(state: SegmentsStats, value: Types.Long) =
+        member _.StoredFieldsMemoryInBytes(state: SegmentsStats, value: CoreTypes.Long) =
             { state with StoredFieldsMemoryInBytes = value }
 
         [<CustomOperation("storedFieldsMemory")>]
-        member _.StoredFieldsMemory(state: SegmentsStats, value: Types.ByteSize) =
+        member _.StoredFieldsMemory(state: SegmentsStats, value: CoreTypes.ByteSize) =
             { state with StoredFieldsMemory = Some value }
 
         [<CustomOperation("termsMemoryInBytes")>]
-        member _.TermsMemoryInBytes(state: SegmentsStats, value: Types.Long) =
+        member _.TermsMemoryInBytes(state: SegmentsStats, value: CoreTypes.Long) =
             { state with TermsMemoryInBytes = value }
 
         [<CustomOperation("termsMemory")>]
-        member _.TermsMemory(state: SegmentsStats, value: Types.ByteSize) =
+        member _.TermsMemory(state: SegmentsStats, value: CoreTypes.ByteSize) =
             { state with TermsMemory = Some value }
 
         [<CustomOperation("termVectorsMemory")>]
-        member _.TermVectorsMemory(state: SegmentsStats, value: Types.ByteSize) =
+        member _.TermVectorsMemory(state: SegmentsStats, value: CoreTypes.ByteSize) =
             { state with TermVectorsMemory = Some value }
 
         [<CustomOperation("termVectorsMemoryInBytes")>]
-        member _.TermVectorsMemoryInBytes(state: SegmentsStats, value: Types.Long) =
+        member _.TermVectorsMemoryInBytes(state: SegmentsStats, value: CoreTypes.Long) =
             { state with TermVectorsMemoryInBytes = value }
 
         [<CustomOperation("versionMapMemory")>]
-        member _.VersionMapMemory(state: SegmentsStats, value: Types.ByteSize) =
+        member _.VersionMapMemory(state: SegmentsStats, value: CoreTypes.ByteSize) =
             { state with VersionMapMemory = Some value }
 
         [<CustomOperation("versionMapMemoryInBytes")>]
-        member _.VersionMapMemoryInBytes(state: SegmentsStats, value: Types.Long) =
+        member _.VersionMapMemoryInBytes(state: SegmentsStats, value: CoreTypes.Long) =
             { state with VersionMapMemoryInBytes = value }
 
     let segmentsStats = SegmentsStatsBuilder()
@@ -1532,7 +1532,7 @@ module TypesBuilders =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: ShardFailure, value: Types.IndexName) =
+        member _.Index(state: ShardFailure, value: CoreTypes.IndexName) =
             { state with Index = Some value }
 
         [<CustomOperation("node")>]
@@ -1540,11 +1540,11 @@ module TypesBuilders =
             { state with Node = Some value }
 
         [<CustomOperation("reason")>]
-        member _.Reason(state: ShardFailure, value: Types.ErrorCause) =
+        member _.Reason(state: ShardFailure, value: CoreTypes.ErrorCause) =
             { state with Reason = value }
 
         [<CustomOperation("shard")>]
-        member _.Shard(state: ShardFailure, value: Types.Integer) =
+        member _.Shard(state: ShardFailure, value: CoreTypes.Integer) =
             { state with Shard = Some value }
 
         [<CustomOperation("status")>]
@@ -1568,39 +1568,39 @@ module TypesBuilders =
             }
 
         [<CustomOperation("failed")>]
-        member _.Failed(state: ShardStatistics, value: Types.Uint) =
+        member _.Failed(state: ShardStatistics, value: CoreTypes.Uint) =
             { state with Failed = value }
 
         [<CustomOperation("successful")>]
-        member _.Successful(state: ShardStatistics, value: Types.Uint) =
+        member _.Successful(state: ShardStatistics, value: CoreTypes.Uint) =
             { state with Successful = value }
 
         [<CustomOperation("total")>]
-        member _.Total(state: ShardStatistics, value: Types.Uint) =
+        member _.Total(state: ShardStatistics, value: CoreTypes.Uint) =
             { state with Total = value }
 
         [<CustomOperation("failures")>]
-        member _.Failures(state: ShardStatistics, value: Types.ShardFailure list) =
+        member _.Failures(state: ShardStatistics, value: CoreTypes.ShardFailure list) =
             { state with Failures = Some value }
 
         [<CustomOperation("skipped")>]
-        member _.Skipped(state: ShardStatistics, value: Types.Uint) =
+        member _.Skipped(state: ShardStatistics, value: CoreTypes.Uint) =
             { state with Skipped = Some value }
 
     let shardStatistics = ShardStatisticsBuilder()
 
     module SortOptions =
 
-        let score (value: Types.ScoreSort) =
+        let score (value: CoreTypes.ScoreSort) =
             SortOptions.Score value
 
-        let doc (value: Types.ScoreSort) =
+        let doc (value: CoreTypes.ScoreSort) =
             SortOptions.Doc value
 
-        let geoDistance (value: Types.GeoDistanceSort) =
+        let geoDistance (value: CoreTypes.GeoDistanceSort) =
             SortOptions.GeoDistance value
 
-        let script (value: Types.ScriptSort) =
+        let script (value: CoreTypes.ScriptSort) =
             SortOptions.Script value
 
     type StandardRetrieverBuilder() =
@@ -1614,19 +1614,19 @@ module TypesBuilders =
             }
 
         [<CustomOperation("query")>]
-        member _.Query(state: StandardRetriever, value: TypesQueryDsl.QueryContainer) =
+        member _.Query(state: StandardRetriever, value: CoreTypes.QueryContainer) =
             { state with Query = Some value }
 
         [<CustomOperation("searchAfter")>]
-        member _.SearchAfter(state: StandardRetriever, value: Types.SortResults) =
+        member _.SearchAfter(state: StandardRetriever, value: CoreTypes.SortResults) =
             { state with SearchAfter = Some value }
 
         [<CustomOperation("terminateAfter")>]
-        member _.TerminateAfter(state: StandardRetriever, value: Types.Integer) =
+        member _.TerminateAfter(state: StandardRetriever, value: CoreTypes.Integer) =
             { state with TerminateAfter = Some value }
 
         [<CustomOperation("sort")>]
-        member _.Sort(state: StandardRetriever, value: Types.Sort) =
+        member _.Sort(state: StandardRetriever, value: CoreTypes.Sort) =
             { state with Sort = Some value }
 
         [<CustomOperation("collapse")>]
@@ -1647,27 +1647,27 @@ module TypesBuilders =
             }
 
         [<CustomOperation("size")>]
-        member _.Size(state: StoreStats, value: Types.ByteSize) =
+        member _.Size(state: StoreStats, value: CoreTypes.ByteSize) =
             { state with Size = Some value }
 
         [<CustomOperation("sizeInBytes")>]
-        member _.SizeInBytes(state: StoreStats, value: Types.Long) =
+        member _.SizeInBytes(state: StoreStats, value: CoreTypes.Long) =
             { state with SizeInBytes = value }
 
         [<CustomOperation("reserved")>]
-        member _.Reserved(state: StoreStats, value: Types.ByteSize) =
+        member _.Reserved(state: StoreStats, value: CoreTypes.ByteSize) =
             { state with Reserved = Some value }
 
         [<CustomOperation("reservedInBytes")>]
-        member _.ReservedInBytes(state: StoreStats, value: Types.Long) =
+        member _.ReservedInBytes(state: StoreStats, value: CoreTypes.Long) =
             { state with ReservedInBytes = value }
 
         [<CustomOperation("totalDataSetSize")>]
-        member _.TotalDataSetSize(state: StoreStats, value: Types.ByteSize) =
+        member _.TotalDataSetSize(state: StoreStats, value: CoreTypes.ByteSize) =
             { state with TotalDataSetSize = Some value }
 
         [<CustomOperation("totalDataSetSizeInBytes")>]
-        member _.TotalDataSetSizeInBytes(state: StoreStats, value: Types.Long) =
+        member _.TotalDataSetSizeInBytes(state: StoreStats, value: CoreTypes.Long) =
             { state with TotalDataSetSizeInBytes = Some value }
 
     let storeStats = StoreStatsBuilder()
@@ -1684,11 +1684,11 @@ module TypesBuilders =
             }
 
         [<CustomOperation("retriever")>]
-        member _.Retriever(state: TextSimilarityReranker, value: Types.RetrieverContainer) =
+        member _.Retriever(state: TextSimilarityReranker, value: CoreTypes.RetrieverContainer) =
             { state with Retriever = value }
 
         [<CustomOperation("rankWindowSize")>]
-        member _.RankWindowSize(state: TextSimilarityReranker, value: Types.Integer) =
+        member _.RankWindowSize(state: TextSimilarityReranker, value: CoreTypes.Integer) =
             { state with RankWindowSize = Some value }
 
         [<CustomOperation("inferenceId")>]
@@ -1704,7 +1704,7 @@ module TypesBuilders =
             { state with Field = value }
 
         [<CustomOperation("chunkRescorer")>]
-        member _.ChunkRescorer(state: TextSimilarityReranker, value: Types.ChunkRescorer) =
+        member _.ChunkRescorer(state: TextSimilarityReranker, value: CoreTypes.ChunkRescorer) =
             { state with ChunkRescorer = Some value }
 
     let textSimilarityReranker = TextSimilarityRerankerBuilder()
@@ -1718,11 +1718,11 @@ module TypesBuilders =
             }
 
         [<CustomOperation("tokensFreqRatioThreshold")>]
-        member _.TokensFreqRatioThreshold(state: TokenPruningConfig, value: Types.Integer) =
+        member _.TokensFreqRatioThreshold(state: TokenPruningConfig, value: CoreTypes.Integer) =
             { state with TokensFreqRatioThreshold = Some value }
 
         [<CustomOperation("tokensWeightThreshold")>]
-        member _.TokensWeightThreshold(state: TokenPruningConfig, value: Types.Float) =
+        member _.TokensWeightThreshold(state: TokenPruningConfig, value: CoreTypes.Float) =
             { state with TokensWeightThreshold = Some value }
 
         [<CustomOperation("onlyScorePrunedTokens")>]
@@ -1733,13 +1733,13 @@ module TypesBuilders =
 
     module Transform =
 
-        let chain (value: Types.TransformContainer list) =
+        let chain (value: CoreTypes.TransformContainer list) =
             TransformContainer.Chain value
 
-        let script (value: Types.ScriptTransform) =
+        let script (value: CoreTypes.ScriptTransform) =
             TransformContainer.Script value
 
-        let search (value: Types.SearchTransform) =
+        let search (value: CoreTypes.SearchTransform) =
             TransformContainer.Search value
 
     type TranslogStatsBuilder() =
@@ -1755,11 +1755,11 @@ module TypesBuilders =
             }
 
         [<CustomOperation("earliestLastModifiedAge")>]
-        member _.EarliestLastModifiedAge(state: TranslogStats, value: Types.Long) =
+        member _.EarliestLastModifiedAge(state: TranslogStats, value: CoreTypes.Long) =
             { state with EarliestLastModifiedAge = value }
 
         [<CustomOperation("operations")>]
-        member _.Operations(state: TranslogStats, value: Types.Long) =
+        member _.Operations(state: TranslogStats, value: CoreTypes.Long) =
             { state with Operations = value }
 
         [<CustomOperation("size")>]
@@ -1767,11 +1767,11 @@ module TypesBuilders =
             { state with Size = Some value }
 
         [<CustomOperation("sizeInBytes")>]
-        member _.SizeInBytes(state: TranslogStats, value: Types.Long) =
+        member _.SizeInBytes(state: TranslogStats, value: CoreTypes.Long) =
             { state with SizeInBytes = value }
 
         [<CustomOperation("uncommittedOperations")>]
-        member _.UncommittedOperations(state: TranslogStats, value: Types.Integer) =
+        member _.UncommittedOperations(state: TranslogStats, value: CoreTypes.Integer) =
             { state with UncommittedOperations = value }
 
         [<CustomOperation("uncommittedSize")>]
@@ -1779,7 +1779,7 @@ module TypesBuilders =
             { state with UncommittedSize = Some value }
 
         [<CustomOperation("uncommittedSizeInBytes")>]
-        member _.UncommittedSizeInBytes(state: TranslogStats, value: Types.Long) =
+        member _.UncommittedSizeInBytes(state: TranslogStats, value: CoreTypes.Long) =
             { state with UncommittedSizeInBytes = value }
 
     let translogStats = TranslogStatsBuilder()
@@ -1799,31 +1799,31 @@ module TypesBuilders =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: WriteResponseBase, value: Types.Id) =
+        member _.Id(state: WriteResponseBase, value: CoreTypes.Id) =
             { state with Id = value }
 
         [<CustomOperation("index")>]
-        member _.Index(state: WriteResponseBase, value: Types.IndexName) =
+        member _.Index(state: WriteResponseBase, value: CoreTypes.IndexName) =
             { state with Index = value }
 
         [<CustomOperation("primaryTerm")>]
-        member _.PrimaryTerm(state: WriteResponseBase, value: Types.Long) =
+        member _.PrimaryTerm(state: WriteResponseBase, value: CoreTypes.Long) =
             { state with PrimaryTerm = Some value }
 
         [<CustomOperation("result")>]
-        member _.Result(state: WriteResponseBase, value: Types.Result) =
+        member _.Result(state: WriteResponseBase, value: CoreTypes.Result) =
             { state with Result = value }
 
         [<CustomOperation("seqNo")>]
-        member _.SeqNo(state: WriteResponseBase, value: Types.SequenceNumber) =
+        member _.SeqNo(state: WriteResponseBase, value: CoreTypes.SequenceNumber) =
             { state with SeqNo = Some value }
 
         [<CustomOperation("shards")>]
-        member _.Shards(state: WriteResponseBase, value: Types.ShardStatistics) =
+        member _.Shards(state: WriteResponseBase, value: CoreTypes.ShardStatistics) =
             { state with Shards = value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: WriteResponseBase, value: Types.VersionNumber) =
+        member _.Version(state: WriteResponseBase, value: CoreTypes.VersionNumber) =
             { state with Version = value }
 
         [<CustomOperation("failureStore")>]

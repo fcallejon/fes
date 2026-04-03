@@ -39,7 +39,7 @@ module CatThreadPoolBuilders =
             { state with NodeName = Some value }
 
         [<CustomOperation("nodeId")>]
-        member _.NodeId(state: ThreadPoolRecord, value: Types.NodeId) =
+        member _.NodeId(state: ThreadPoolRecord, value: CoreTypes.NodeId) =
             { state with NodeId = Some value }
 
         [<CustomOperation("ephemeralNodeId")>]

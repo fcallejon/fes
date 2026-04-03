@@ -9,7 +9,7 @@ module CatCircuitBreaker =
 
     type CircuitBreakerRecord = {
         [<System.Text.Json.Serialization.JsonPropertyName("node_id")>]
-        NodeId: Types.NodeId option
+        NodeId: CoreTypes.NodeId option
         [<System.Text.Json.Serialization.JsonPropertyName("node_name")>]
         NodeName: string option
         [<System.Text.Json.Serialization.JsonPropertyName("breaker")>]
@@ -17,11 +17,11 @@ module CatCircuitBreaker =
         [<System.Text.Json.Serialization.JsonPropertyName("limit")>]
         Limit: string option
         [<System.Text.Json.Serialization.JsonPropertyName("limit_bytes")>]
-        LimitBytes: Types.ByteSize option
+        LimitBytes: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("estimated")>]
         Estimated: string option
         [<System.Text.Json.Serialization.JsonPropertyName("estimated_bytes")>]
-        EstimatedBytes: Types.ByteSize option
+        EstimatedBytes: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("tripped")>]
         Tripped: string option
         [<System.Text.Json.Serialization.JsonPropertyName("overhead")>]

@@ -38,7 +38,7 @@ module WatcherExecuteWatchBuilders =
             { state with Messages = value }
 
         [<CustomOperation("metadata")>]
-        member _.Metadata(state: WatchRecord, value: Types.Metadata) =
+        member _.Metadata(state: WatchRecord, value: CoreTypes.Metadata) =
             { state with Metadata = Some value }
 
         [<CustomOperation("node")>]
@@ -58,11 +58,11 @@ module WatcherExecuteWatchBuilders =
             { state with TriggerEvent = value }
 
         [<CustomOperation("user")>]
-        member _.User(state: WatchRecord, value: Types.Username) =
+        member _.User(state: WatchRecord, value: CoreTypes.Username) =
             { state with User = value }
 
         [<CustomOperation("watchId")>]
-        member _.WatchId(state: WatchRecord, value: Types.Id) =
+        member _.WatchId(state: WatchRecord, value: CoreTypes.Id) =
             { state with WatchId = value }
 
         [<CustomOperation("status")>]

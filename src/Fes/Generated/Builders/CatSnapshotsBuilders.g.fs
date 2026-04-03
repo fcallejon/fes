@@ -40,7 +40,7 @@ module CatSnapshotsBuilders =
             { state with Status = Some value }
 
         [<CustomOperation("startEpoch")>]
-        member _.StartEpoch(state: SnapshotsRecord, value: SpecUtils.Stringified<Types.EpochTime<Types.UnitSeconds>>) =
+        member _.StartEpoch(state: SnapshotsRecord, value: CoreTypes.Stringified<CoreTypes.EpochTime<CoreTypes.UnitSeconds>>) =
             { state with StartEpoch = Some value }
 
         [<CustomOperation("startTime")>]
@@ -48,15 +48,15 @@ module CatSnapshotsBuilders =
             { state with StartTime = Some value }
 
         [<CustomOperation("endEpoch")>]
-        member _.EndEpoch(state: SnapshotsRecord, value: SpecUtils.Stringified<Types.EpochTime<Types.UnitSeconds>>) =
+        member _.EndEpoch(state: SnapshotsRecord, value: CoreTypes.Stringified<CoreTypes.EpochTime<CoreTypes.UnitSeconds>>) =
             { state with EndEpoch = Some value }
 
         [<CustomOperation("endTime")>]
-        member _.EndTime(state: SnapshotsRecord, value: Types.TimeOfDay) =
+        member _.EndTime(state: SnapshotsRecord, value: CoreTypes.TimeOfDay) =
             { state with EndTime = Some value }
 
         [<CustomOperation("duration")>]
-        member _.Duration(state: SnapshotsRecord, value: Types.Duration) =
+        member _.Duration(state: SnapshotsRecord, value: CoreTypes.Duration) =
             { state with Duration = Some value }
 
         [<CustomOperation("indices")>]

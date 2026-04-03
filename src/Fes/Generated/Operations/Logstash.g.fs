@@ -12,7 +12,7 @@ open Fes
 module LogstashOperations =
 
     type LogstashDeletePipelineRequest = {
-        Id: Types.Id
+        Id: CoreTypes.Id
     }
 
         with
@@ -35,13 +35,13 @@ module LogstashOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: LogstashDeletePipelineRequest, value: Types.Id) =
+        member _.Id(state: LogstashDeletePipelineRequest, value: CoreTypes.Id) =
             { state with Id = value }
 
     let logstashDeletePipelineRequest = LogstashDeletePipelineRequestBuilder()
 
     type LogstashGetPipelineRequest = {
-        Id: Types.Ids
+        Id: CoreTypes.Ids
     }
 
         with
@@ -55,7 +55,7 @@ module LogstashOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type LogstashGetPipelineResponse = Map<Types.Id, LogstashTypes.Pipeline>
+    type LogstashGetPipelineResponse = Map<CoreTypes.Id, LogstashTypes.Pipeline>
 
     type LogstashGetPipelineRequestBuilder() =
         member _.Yield(_: unit) : LogstashGetPipelineRequest =
@@ -64,13 +64,13 @@ module LogstashOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: LogstashGetPipelineRequest, value: Types.Ids) =
+        member _.Id(state: LogstashGetPipelineRequest, value: CoreTypes.Ids) =
             { state with Id = value }
 
     let logstashGetPipelineRequest = LogstashGetPipelineRequestBuilder()
 
     type LogstashPutPipelineRequest = {
-        Id: Types.Id
+        Id: CoreTypes.Id
         Document: obj
     }
 
@@ -96,7 +96,7 @@ module LogstashOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: LogstashPutPipelineRequest, value: Types.Id) =
+        member _.Id(state: LogstashPutPipelineRequest, value: CoreTypes.Id) =
             { state with Id = value }
 
         [<CustomOperation("document")>]

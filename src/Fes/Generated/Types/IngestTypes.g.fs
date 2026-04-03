@@ -44,28 +44,28 @@ module IngestTypes =
 
     type InferenceConfigRegression = {
         [<System.Text.Json.Serialization.JsonPropertyName("results_field")>]
-        ResultsField: Types.Field option
+        ResultsField: CoreTypes.Field option
         [<System.Text.Json.Serialization.JsonPropertyName("num_top_feature_importance_values")>]
-        NumTopFeatureImportanceValues: Types.Integer option
+        NumTopFeatureImportanceValues: CoreTypes.Integer option
     }
 
     type InferenceConfigClassification = {
         [<System.Text.Json.Serialization.JsonPropertyName("num_top_classes")>]
-        NumTopClasses: Types.Integer option
+        NumTopClasses: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("num_top_feature_importance_values")>]
-        NumTopFeatureImportanceValues: Types.Integer option
+        NumTopFeatureImportanceValues: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("results_field")>]
-        ResultsField: Types.Field option
+        ResultsField: CoreTypes.Field option
         [<System.Text.Json.Serialization.JsonPropertyName("top_classes_results_field")>]
-        TopClassesResultsField: Types.Field option
+        TopClassesResultsField: CoreTypes.Field option
         [<System.Text.Json.Serialization.JsonPropertyName("prediction_field_type")>]
         PredictionFieldType: string option
     }
 
     [<RequireQualifiedAccess>]
     type InferenceConfig =
-        | Regression of IngestTypes.InferenceConfigRegression
-        | Classification of IngestTypes.InferenceConfigClassification
+        | Regression of InferenceConfigRegression
+        | Classification of InferenceConfigClassification
 
     type InputConfig = {
         [<System.Text.Json.Serialization.JsonPropertyName("input_field")>]
@@ -89,13 +89,13 @@ module IngestTypes =
 
     type AppendProcessor = {
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
-        Field: Types.Field
+        Field: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("value")>]
         Value: System.Text.Json.JsonElement option
         [<System.Text.Json.Serialization.JsonPropertyName("media_type")>]
         MediaType: string option
         [<System.Text.Json.Serialization.JsonPropertyName("copy_from")>]
-        CopyFrom: Types.Field option
+        CopyFrom: CoreTypes.Field option
         [<System.Text.Json.Serialization.JsonPropertyName("allow_duplicates")>]
         AllowDuplicates: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_empty_values")>]
@@ -106,77 +106,77 @@ module IngestTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("description")>]
         Description: string option
         [<System.Text.Json.Serialization.JsonPropertyName("if")>]
-        If: Types.Script option
+        If: CoreTypes.Script option
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_failure")>]
         IgnoreFailure: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("on_failure")>]
-        OnFailure: IngestTypes.ProcessorContainer list option
+        OnFailure: ProcessorContainer list option
         [<System.Text.Json.Serialization.JsonPropertyName("tag")>]
         Tag: string option
     }
 
     and [<RequireQualifiedAccess>] ProcessorContainer =
-        | Append of IngestTypes.AppendProcessor
-        | Attachment of IngestTypes.AttachmentProcessor
-        | Bytes of IngestTypes.BytesProcessor
-        | Cef of IngestTypes.CefProcessor
-        | Circle of IngestTypes.CircleProcessor
-        | CommunityId of IngestTypes.CommunityIDProcessor
-        | Convert of IngestTypes.ConvertProcessor
-        | Csv of IngestTypes.CsvProcessor
-        | Date of IngestTypes.DateProcessor
-        | DateIndexName of IngestTypes.DateIndexNameProcessor
-        | Dissect of IngestTypes.DissectProcessor
-        | DotExpander of IngestTypes.DotExpanderProcessor
-        | Drop of IngestTypes.DropProcessor
-        | Enrich of IngestTypes.EnrichProcessor
-        | Fail of IngestTypes.FailProcessor
-        | Fingerprint of IngestTypes.FingerprintProcessor
-        | Foreach of IngestTypes.ForeachProcessor
-        | IpLocation of IngestTypes.IpLocationProcessor
-        | GeoGrid of IngestTypes.GeoGridProcessor
-        | Geoip of IngestTypes.GeoIpProcessor
-        | Grok of IngestTypes.GrokProcessor
-        | Gsub of IngestTypes.GsubProcessor
-        | HtmlStrip of IngestTypes.HtmlStripProcessor
-        | Inference of IngestTypes.InferenceProcessor
-        | Join of IngestTypes.JoinProcessor
-        | Json of IngestTypes.JsonProcessor
-        | Kv of IngestTypes.KeyValueProcessor
-        | Lowercase of IngestTypes.LowercaseProcessor
-        | NetworkDirection of IngestTypes.NetworkDirectionProcessor
-        | Pipeline of IngestTypes.PipelineProcessor
-        | Redact of IngestTypes.RedactProcessor
-        | RegisteredDomain of IngestTypes.RegisteredDomainProcessor
-        | Remove of IngestTypes.RemoveProcessor
-        | Rename of IngestTypes.RenameProcessor
-        | Reroute of IngestTypes.RerouteProcessor
-        | Script of IngestTypes.ScriptProcessor
-        | Set of IngestTypes.SetProcessor
-        | SetSecurityUser of IngestTypes.SetSecurityUserProcessor
-        | Sort of IngestTypes.SortProcessor
-        | Split of IngestTypes.SplitProcessor
-        | Terminate of IngestTypes.TerminateProcessor
-        | Trim of IngestTypes.TrimProcessor
-        | Uppercase of IngestTypes.UppercaseProcessor
-        | Urldecode of IngestTypes.UrlDecodeProcessor
-        | UriParts of IngestTypes.UriPartsProcessor
-        | UserAgent of IngestTypes.UserAgentProcessor
+        | Append of AppendProcessor
+        | Attachment of AttachmentProcessor
+        | Bytes of BytesProcessor
+        | Cef of CefProcessor
+        | Circle of CircleProcessor
+        | CommunityId of CommunityIDProcessor
+        | Convert of ConvertProcessor
+        | Csv of CsvProcessor
+        | Date of DateProcessor
+        | DateIndexName of DateIndexNameProcessor
+        | Dissect of DissectProcessor
+        | DotExpander of DotExpanderProcessor
+        | Drop of DropProcessor
+        | Enrich of EnrichProcessor
+        | Fail of FailProcessor
+        | Fingerprint of FingerprintProcessor
+        | Foreach of ForeachProcessor
+        | IpLocation of IpLocationProcessor
+        | GeoGrid of GeoGridProcessor
+        | Geoip of GeoIpProcessor
+        | Grok of GrokProcessor
+        | Gsub of GsubProcessor
+        | HtmlStrip of HtmlStripProcessor
+        | Inference of InferenceProcessor
+        | Join of JoinProcessor
+        | Json of JsonProcessor
+        | Kv of KeyValueProcessor
+        | Lowercase of LowercaseProcessor
+        | NetworkDirection of NetworkDirectionProcessor
+        | Pipeline of PipelineProcessor
+        | Redact of RedactProcessor
+        | RegisteredDomain of RegisteredDomainProcessor
+        | Remove of RemoveProcessor
+        | Rename of RenameProcessor
+        | Reroute of RerouteProcessor
+        | Script of ScriptProcessor
+        | Set of SetProcessor
+        | SetSecurityUser of SetSecurityUserProcessor
+        | Sort of SortProcessor
+        | Split of SplitProcessor
+        | Terminate of TerminateProcessor
+        | Trim of TrimProcessor
+        | Uppercase of UppercaseProcessor
+        | Urldecode of UrlDecodeProcessor
+        | UriParts of UriPartsProcessor
+        | UserAgent of UserAgentProcessor
         | Unknown of name: string * System.Text.Json.JsonElement
 
     and AttachmentProcessor = {
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
-        Field: Types.Field
+        Field: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_missing")>]
         IgnoreMissing: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("indexed_chars")>]
-        IndexedChars: Types.Long option
+        IndexedChars: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("indexed_chars_field")>]
-        IndexedCharsField: Types.Field option
+        IndexedCharsField: CoreTypes.Field option
         [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
         Properties: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("target_field")>]
-        TargetField: Types.Field option
+        TargetField: CoreTypes.Field option
         [<System.Text.Json.Serialization.JsonPropertyName("remove_binary")>]
         RemoveBinary: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("resource_name")>]
@@ -185,20 +185,20 @@ module IngestTypes =
 
     and BytesProcessor = {
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
-        Field: Types.Field
+        Field: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_missing")>]
         IgnoreMissing: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("target_field")>]
-        TargetField: Types.Field option
+        TargetField: CoreTypes.Field option
     }
 
     and CefProcessor = {
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
-        Field: Types.Field
+        Field: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_missing")>]
         IgnoreMissing: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("target_field")>]
-        TargetField: Types.Field option
+        TargetField: CoreTypes.Field option
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_empty_values")>]
         IgnoreEmptyValues: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("timezone")>]
@@ -207,58 +207,58 @@ module IngestTypes =
 
     and CircleProcessor = {
         [<System.Text.Json.Serialization.JsonPropertyName("error_distance")>]
-        ErrorDistance: Types.Double
+        ErrorDistance: CoreTypes.Double
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
-        Field: Types.Field
+        Field: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_missing")>]
         IgnoreMissing: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("shape_type")>]
-        ShapeType: IngestTypes.ShapeType
+        ShapeType: ShapeType
         [<System.Text.Json.Serialization.JsonPropertyName("target_field")>]
-        TargetField: Types.Field option
+        TargetField: CoreTypes.Field option
     }
 
     and CommunityIDProcessor = {
         [<System.Text.Json.Serialization.JsonPropertyName("source_ip")>]
-        SourceIp: Types.Field option
+        SourceIp: CoreTypes.Field option
         [<System.Text.Json.Serialization.JsonPropertyName("source_port")>]
-        SourcePort: Types.Field option
+        SourcePort: CoreTypes.Field option
         [<System.Text.Json.Serialization.JsonPropertyName("destination_ip")>]
-        DestinationIp: Types.Field option
+        DestinationIp: CoreTypes.Field option
         [<System.Text.Json.Serialization.JsonPropertyName("destination_port")>]
-        DestinationPort: Types.Field option
+        DestinationPort: CoreTypes.Field option
         [<System.Text.Json.Serialization.JsonPropertyName("iana_number")>]
-        IanaNumber: Types.Field option
+        IanaNumber: CoreTypes.Field option
         [<System.Text.Json.Serialization.JsonPropertyName("icmp_type")>]
-        IcmpType: Types.Field option
+        IcmpType: CoreTypes.Field option
         [<System.Text.Json.Serialization.JsonPropertyName("icmp_code")>]
-        IcmpCode: Types.Field option
+        IcmpCode: CoreTypes.Field option
         [<System.Text.Json.Serialization.JsonPropertyName("transport")>]
-        Transport: Types.Field option
+        Transport: CoreTypes.Field option
         [<System.Text.Json.Serialization.JsonPropertyName("target_field")>]
-        TargetField: Types.Field option
+        TargetField: CoreTypes.Field option
         [<System.Text.Json.Serialization.JsonPropertyName("seed")>]
-        Seed: Types.Integer option
+        Seed: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_missing")>]
         IgnoreMissing: bool option
     }
 
     and ConvertProcessor = {
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
-        Field: Types.Field
+        Field: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_missing")>]
         IgnoreMissing: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("target_field")>]
-        TargetField: Types.Field option
+        TargetField: CoreTypes.Field option
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
-        Type: IngestTypes.ConvertType
+        Type: ConvertType
     }
 
     and CsvProcessor = {
         [<System.Text.Json.Serialization.JsonPropertyName("empty_value")>]
         EmptyValue: System.Text.Json.JsonElement option
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
-        Field: Types.Field
+        Field: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_missing")>]
         IgnoreMissing: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("quote")>]
@@ -266,20 +266,20 @@ module IngestTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("separator")>]
         Separator: string option
         [<System.Text.Json.Serialization.JsonPropertyName("target_fields")>]
-        TargetFields: Types.Fields
+        TargetFields: CoreTypes.Fields
         [<System.Text.Json.Serialization.JsonPropertyName("trim")>]
         Trim: bool option
     }
 
     and DateProcessor = {
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
-        Field: Types.Field
+        Field: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("formats")>]
         Formats: string list
         [<System.Text.Json.Serialization.JsonPropertyName("locale")>]
         Locale: string option
         [<System.Text.Json.Serialization.JsonPropertyName("target_field")>]
-        TargetField: Types.Field option
+        TargetField: CoreTypes.Field option
         [<System.Text.Json.Serialization.JsonPropertyName("timezone")>]
         Timezone: string option
         [<System.Text.Json.Serialization.JsonPropertyName("output_format")>]
@@ -292,7 +292,7 @@ module IngestTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("date_rounding")>]
         DateRounding: string
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
-        Field: Types.Field
+        Field: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("index_name_format")>]
         IndexNameFormat: string option
         [<System.Text.Json.Serialization.JsonPropertyName("index_name_prefix")>]
@@ -307,7 +307,7 @@ module IngestTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("append_separator")>]
         AppendSeparator: string option
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
-        Field: Types.Field
+        Field: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_missing")>]
         IgnoreMissing: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("pattern")>]
@@ -316,7 +316,7 @@ module IngestTypes =
 
     and DotExpanderProcessor = {
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
-        Field: Types.Field
+        Field: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("override")>]
         Override: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("path")>]
@@ -327,19 +327,19 @@ module IngestTypes =
 
     and EnrichProcessor = {
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
-        Field: Types.Field
+        Field: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_missing")>]
         IgnoreMissing: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("max_matches")>]
-        MaxMatches: Types.Integer option
+        MaxMatches: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("override")>]
         Override: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("policy_name")>]
         PolicyName: string
         [<System.Text.Json.Serialization.JsonPropertyName("shape_relation")>]
-        ShapeRelation: Types.GeoShapeRelation option
+        ShapeRelation: CoreTypes.GeoShapeRelation option
         [<System.Text.Json.Serialization.JsonPropertyName("target_field")>]
-        TargetField: Types.Field
+        TargetField: CoreTypes.Field
     }
 
     and FailProcessor = {
@@ -349,31 +349,31 @@ module IngestTypes =
 
     and FingerprintProcessor = {
         [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
-        Fields: Types.Fields
+        Fields: CoreTypes.Fields
         [<System.Text.Json.Serialization.JsonPropertyName("target_field")>]
-        TargetField: Types.Field option
+        TargetField: CoreTypes.Field option
         [<System.Text.Json.Serialization.JsonPropertyName("salt")>]
         Salt: string option
         [<System.Text.Json.Serialization.JsonPropertyName("method")>]
-        Method: IngestTypes.FingerprintDigest option
+        Method: FingerprintDigest option
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_missing")>]
         IgnoreMissing: bool option
     }
 
     and ForeachProcessor = {
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
-        Field: Types.Field
+        Field: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_missing")>]
         IgnoreMissing: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("processor")>]
-        Processor: IngestTypes.ProcessorContainer
+        Processor: ProcessorContainer
     }
 
     and IpLocationProcessor = {
         [<System.Text.Json.Serialization.JsonPropertyName("database_file")>]
         DatabaseFile: string option
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
-        Field: Types.Field
+        Field: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("first_only")>]
         FirstOnly: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_missing")>]
@@ -381,7 +381,7 @@ module IngestTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
         Properties: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("target_field")>]
-        TargetField: Types.Field option
+        TargetField: CoreTypes.Field option
         [<System.Text.Json.Serialization.JsonPropertyName("download_database_on_pipeline_creation")>]
         DownloadDatabaseOnPipelineCreation: bool option
     }
@@ -390,28 +390,28 @@ module IngestTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
         Field: string
         [<System.Text.Json.Serialization.JsonPropertyName("tile_type")>]
-        TileType: IngestTypes.GeoGridTileType
+        TileType: GeoGridTileType
         [<System.Text.Json.Serialization.JsonPropertyName("target_field")>]
-        TargetField: Types.Field option
+        TargetField: CoreTypes.Field option
         [<System.Text.Json.Serialization.JsonPropertyName("parent_field")>]
-        ParentField: Types.Field option
+        ParentField: CoreTypes.Field option
         [<System.Text.Json.Serialization.JsonPropertyName("children_field")>]
-        ChildrenField: Types.Field option
+        ChildrenField: CoreTypes.Field option
         [<System.Text.Json.Serialization.JsonPropertyName("non_children_field")>]
-        NonChildrenField: Types.Field option
+        NonChildrenField: CoreTypes.Field option
         [<System.Text.Json.Serialization.JsonPropertyName("precision_field")>]
-        PrecisionField: Types.Field option
+        PrecisionField: CoreTypes.Field option
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_missing")>]
         IgnoreMissing: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("target_format")>]
-        TargetFormat: IngestTypes.GeoGridTargetFormat option
+        TargetFormat: GeoGridTargetFormat option
     }
 
     and GeoIpProcessor = {
         [<System.Text.Json.Serialization.JsonPropertyName("database_file")>]
         DatabaseFile: string option
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
-        Field: Types.Field
+        Field: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("first_only")>]
         FirstOnly: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_missing")>]
@@ -419,7 +419,7 @@ module IngestTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
         Properties: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("target_field")>]
-        TargetField: Types.Field option
+        TargetField: CoreTypes.Field option
         [<System.Text.Json.Serialization.JsonPropertyName("download_database_on_pipeline_creation")>]
         DownloadDatabaseOnPipelineCreation: bool option
     }
@@ -428,13 +428,13 @@ module IngestTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("ecs_compatibility")>]
         EcsCompatibility: string option
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
-        Field: Types.Field
+        Field: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_missing")>]
         IgnoreMissing: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("pattern_definitions")>]
         PatternDefinitions: Map<string, string> option
         [<System.Text.Json.Serialization.JsonPropertyName("patterns")>]
-        Patterns: Types.GrokPattern list
+        Patterns: CoreTypes.GrokPattern list
         [<System.Text.Json.Serialization.JsonPropertyName("trace_match")>]
         TraceMatch: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("validate_only")>]
@@ -443,7 +443,7 @@ module IngestTypes =
 
     and GsubProcessor = {
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
-        Field: Types.Field
+        Field: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_missing")>]
         IgnoreMissing: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("pattern")>]
@@ -451,27 +451,27 @@ module IngestTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("replacement")>]
         Replacement: string
         [<System.Text.Json.Serialization.JsonPropertyName("target_field")>]
-        TargetField: Types.Field option
+        TargetField: CoreTypes.Field option
     }
 
     and HtmlStripProcessor = {
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
-        Field: Types.Field
+        Field: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_missing")>]
         IgnoreMissing: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("target_field")>]
-        TargetField: Types.Field option
+        TargetField: CoreTypes.Field option
     }
 
     and InferenceProcessor = {
         [<System.Text.Json.Serialization.JsonPropertyName("model_id")>]
-        ModelId: Types.Id
+        ModelId: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("target_field")>]
-        TargetField: Types.Field option
+        TargetField: CoreTypes.Field option
         [<System.Text.Json.Serialization.JsonPropertyName("field_map")>]
-        FieldMap: Map<Types.Field, System.Text.Json.JsonElement> option
+        FieldMap: Map<CoreTypes.Field, System.Text.Json.JsonElement> option
         [<System.Text.Json.Serialization.JsonPropertyName("inference_config")>]
-        InferenceConfig: IngestTypes.InferenceConfig option
+        InferenceConfig: InferenceConfig option
         [<System.Text.Json.Serialization.JsonPropertyName("input_output")>]
         InputOutput: System.Text.Json.JsonElement option
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_missing")>]
@@ -480,31 +480,31 @@ module IngestTypes =
 
     and JoinProcessor = {
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
-        Field: Types.Field
+        Field: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("separator")>]
         Separator: string
         [<System.Text.Json.Serialization.JsonPropertyName("target_field")>]
-        TargetField: Types.Field option
+        TargetField: CoreTypes.Field option
     }
 
     and JsonProcessor = {
         [<System.Text.Json.Serialization.JsonPropertyName("add_to_root")>]
         AddToRoot: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("add_to_root_conflict_strategy")>]
-        AddToRootConflictStrategy: IngestTypes.JsonProcessorConflictStrategy option
+        AddToRootConflictStrategy: JsonProcessorConflictStrategy option
         [<System.Text.Json.Serialization.JsonPropertyName("allow_duplicate_keys")>]
         AllowDuplicateKeys: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
-        Field: Types.Field
+        Field: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("target_field")>]
-        TargetField: Types.Field option
+        TargetField: CoreTypes.Field option
     }
 
     and KeyValueProcessor = {
         [<System.Text.Json.Serialization.JsonPropertyName("exclude_keys")>]
         ExcludeKeys: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
-        Field: Types.Field
+        Field: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("field_split")>]
         FieldSplit: string
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_missing")>]
@@ -516,7 +516,7 @@ module IngestTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("strip_brackets")>]
         StripBrackets: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("target_field")>]
-        TargetField: Types.Field option
+        TargetField: CoreTypes.Field option
         [<System.Text.Json.Serialization.JsonPropertyName("trim_key")>]
         TrimKey: string option
         [<System.Text.Json.Serialization.JsonPropertyName("trim_value")>]
@@ -527,40 +527,40 @@ module IngestTypes =
 
     and LowercaseProcessor = {
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
-        Field: Types.Field
+        Field: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_missing")>]
         IgnoreMissing: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("target_field")>]
-        TargetField: Types.Field option
+        TargetField: CoreTypes.Field option
     }
 
     and NetworkDirectionProcessor = {
         [<System.Text.Json.Serialization.JsonPropertyName("source_ip")>]
-        SourceIp: Types.Field option
+        SourceIp: CoreTypes.Field option
         [<System.Text.Json.Serialization.JsonPropertyName("destination_ip")>]
-        DestinationIp: Types.Field option
+        DestinationIp: CoreTypes.Field option
         [<System.Text.Json.Serialization.JsonPropertyName("target_field")>]
-        TargetField: Types.Field option
+        TargetField: CoreTypes.Field option
         [<System.Text.Json.Serialization.JsonPropertyName("internal_networks")>]
         InternalNetworks: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("internal_networks_field")>]
-        InternalNetworksField: Types.Field option
+        InternalNetworksField: CoreTypes.Field option
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_missing")>]
         IgnoreMissing: bool option
     }
 
     and PipelineProcessor = {
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.Name
+        Name: CoreTypes.Name
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_missing_pipeline")>]
         IgnoreMissingPipeline: bool option
     }
 
     and RedactProcessor = {
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
-        Field: Types.Field
+        Field: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("patterns")>]
-        Patterns: Types.GrokPattern list
+        Patterns: CoreTypes.GrokPattern list
         [<System.Text.Json.Serialization.JsonPropertyName("pattern_definitions")>]
         PatternDefinitions: Map<string, string> option
         [<System.Text.Json.Serialization.JsonPropertyName("prefix")>]
@@ -577,29 +577,29 @@ module IngestTypes =
 
     and RegisteredDomainProcessor = {
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
-        Field: Types.Field
+        Field: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("target_field")>]
-        TargetField: Types.Field option
+        TargetField: CoreTypes.Field option
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_missing")>]
         IgnoreMissing: bool option
     }
 
     and RemoveProcessor = {
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
-        Field: Types.Fields
+        Field: CoreTypes.Fields
         [<System.Text.Json.Serialization.JsonPropertyName("keep")>]
-        Keep: Types.Fields option
+        Keep: CoreTypes.Fields option
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_missing")>]
         IgnoreMissing: bool option
     }
 
     and RenameProcessor = {
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
-        Field: Types.Field
+        Field: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_missing")>]
         IgnoreMissing: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("target_field")>]
-        TargetField: Types.Field
+        TargetField: CoreTypes.Field
     }
 
     and RerouteProcessor = {
@@ -613,20 +613,20 @@ module IngestTypes =
 
     and ScriptProcessor = {
         [<System.Text.Json.Serialization.JsonPropertyName("id")>]
-        Id: Types.Id option
+        Id: CoreTypes.Id option
         [<System.Text.Json.Serialization.JsonPropertyName("lang")>]
-        Lang: Types.ScriptLanguage option
+        Lang: CoreTypes.ScriptLanguage option
         [<System.Text.Json.Serialization.JsonPropertyName("params")>]
         Params: Map<string, System.Text.Json.JsonElement> option
         [<System.Text.Json.Serialization.JsonPropertyName("source")>]
-        Source: Types.ScriptSource option
+        Source: CoreTypes.ScriptSource option
     }
 
     and SetProcessor = {
         [<System.Text.Json.Serialization.JsonPropertyName("copy_from")>]
-        CopyFrom: Types.Field option
+        CopyFrom: CoreTypes.Field option
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
-        Field: Types.Field
+        Field: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_empty_value")>]
         IgnoreEmptyValue: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("media_type")>]
@@ -639,23 +639,23 @@ module IngestTypes =
 
     and SetSecurityUserProcessor = {
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
-        Field: Types.Field
+        Field: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
         Properties: string list option
     }
 
     and SortProcessor = {
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
-        Field: Types.Field
+        Field: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("order")>]
-        Order: Types.SortOrder option
+        Order: CoreTypes.SortOrder option
         [<System.Text.Json.Serialization.JsonPropertyName("target_field")>]
-        TargetField: Types.Field option
+        TargetField: CoreTypes.Field option
     }
 
     and SplitProcessor = {
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
-        Field: Types.Field
+        Field: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_missing")>]
         IgnoreMissing: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("preserve_trailing")>]
@@ -663,41 +663,41 @@ module IngestTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("separator")>]
         Separator: string
         [<System.Text.Json.Serialization.JsonPropertyName("target_field")>]
-        TargetField: Types.Field option
+        TargetField: CoreTypes.Field option
     }
 
     and TerminateProcessor = System.Text.Json.JsonElement
 
     and TrimProcessor = {
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
-        Field: Types.Field
+        Field: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_missing")>]
         IgnoreMissing: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("target_field")>]
-        TargetField: Types.Field option
+        TargetField: CoreTypes.Field option
     }
 
     and UppercaseProcessor = {
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
-        Field: Types.Field
+        Field: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_missing")>]
         IgnoreMissing: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("target_field")>]
-        TargetField: Types.Field option
+        TargetField: CoreTypes.Field option
     }
 
     and UrlDecodeProcessor = {
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
-        Field: Types.Field
+        Field: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_missing")>]
         IgnoreMissing: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("target_field")>]
-        TargetField: Types.Field option
+        TargetField: CoreTypes.Field option
     }
 
     and UriPartsProcessor = {
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
-        Field: Types.Field
+        Field: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_missing")>]
         IgnoreMissing: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("keep_original")>]
@@ -705,27 +705,27 @@ module IngestTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("remove_if_successful")>]
         RemoveIfSuccessful: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("target_field")>]
-        TargetField: Types.Field option
+        TargetField: CoreTypes.Field option
     }
 
     and UserAgentProcessor = {
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
-        Field: Types.Field
+        Field: CoreTypes.Field
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_missing")>]
         IgnoreMissing: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("regex_file")>]
         RegexFile: string option
         [<System.Text.Json.Serialization.JsonPropertyName("target_field")>]
-        TargetField: Types.Field option
+        TargetField: CoreTypes.Field option
         [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
-        Properties: IngestTypes.UserAgentProperty list option
+        Properties: UserAgentProperty list option
         [<System.Text.Json.Serialization.JsonPropertyName("extract_device_type")>]
         ExtractDeviceType: bool option
     }
 
     type Maxmind = {
         [<System.Text.Json.Serialization.JsonPropertyName("account_id")>]
-        AccountId: Types.Id
+        AccountId: CoreTypes.Id
     }
 
     type Ipinfo = System.Text.Json.JsonElement
@@ -733,12 +733,12 @@ module IngestTypes =
     /// The configuration necessary to identify which IP geolocation provider to use to download a database, as well as any provider-specific configuration necessary for such downloading.
     [<RequireQualifiedAccess>]
     type DatabaseConfiguration =
-        | Maxmind of IngestTypes.Maxmind
-        | Ipinfo of IngestTypes.Ipinfo
+        | Maxmind of Maxmind
+        | Ipinfo of Ipinfo
 
     and DatabaseConfigurationMeta = {
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.Name
+        Name: CoreTypes.Name
     }
 
     type Web = System.Text.Json.JsonElement
@@ -750,21 +750,21 @@ module IngestTypes =
 
     [<RequireQualifiedAccess>]
     type DatabaseConfigurationFull =
-        | Web of IngestTypes.Web
-        | Local of IngestTypes.Local
-        | Maxmind of IngestTypes.Maxmind
-        | Ipinfo of IngestTypes.Ipinfo
+        | Web of Web
+        | Local of Local
+        | Maxmind of Maxmind
+        | Ipinfo of Ipinfo
 
     and DatabaseConfigurationFullMeta = {
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.Name
+        Name: CoreTypes.Name
     }
 
     type Document = {
         [<System.Text.Json.Serialization.JsonPropertyName("_id")>]
-        Id: Types.Id option
+        Id: CoreTypes.Id option
         [<System.Text.Json.Serialization.JsonPropertyName("_index")>]
-        Index: Types.IndexName option
+        Index: CoreTypes.IndexName option
         [<System.Text.Json.Serialization.JsonPropertyName("_source")>]
         Source: System.Text.Json.JsonElement
     }
@@ -776,29 +776,29 @@ module IngestTypes =
 
     type Ingest = {
         [<System.Text.Json.Serialization.JsonPropertyName("_redact")>]
-        Redact: IngestTypes.Redact option
+        Redact: Redact option
         [<System.Text.Json.Serialization.JsonPropertyName("timestamp")>]
-        Timestamp: Types.DateTime
+        Timestamp: CoreTypes.DateTime
         [<System.Text.Json.Serialization.JsonPropertyName("pipeline")>]
-        Pipeline: Types.Name option
+        Pipeline: CoreTypes.Name option
     }
 
     /// The simulated document, with optional metadata.
     type DocumentSimulation = {
         [<System.Text.Json.Serialization.JsonPropertyName("_id")>]
-        Id: Types.Id
+        Id: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("_index")>]
-        Index: Types.IndexName
+        Index: CoreTypes.IndexName
         [<System.Text.Json.Serialization.JsonPropertyName("_ingest")>]
-        Ingest: IngestTypes.Ingest
+        Ingest: Ingest
         [<System.Text.Json.Serialization.JsonPropertyName("_routing")>]
         Routing: string option
         [<System.Text.Json.Serialization.JsonPropertyName("_source")>]
         Source: Map<string, System.Text.Json.JsonElement>
         [<System.Text.Json.Serialization.JsonPropertyName("_version")>]
-        Version: SpecUtils.Stringified<Types.VersionNumber> option
+        Version: CoreTypes.Stringified<CoreTypes.VersionNumber> option
         [<System.Text.Json.Serialization.JsonPropertyName("_version_type")>]
-        VersionType: Types.VersionType option
+        VersionType: CoreTypes.VersionType option
     }
 
     [<RequireQualifiedAccess>]
@@ -810,34 +810,34 @@ module IngestTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("description")>]
         Description: string option
         [<System.Text.Json.Serialization.JsonPropertyName("on_failure")>]
-        OnFailure: IngestTypes.ProcessorContainer list option
+        OnFailure: ProcessorContainer list option
         [<System.Text.Json.Serialization.JsonPropertyName("processors")>]
-        Processors: IngestTypes.ProcessorContainer list option
+        Processors: ProcessorContainer list option
         [<System.Text.Json.Serialization.JsonPropertyName("version")>]
-        Version: Types.VersionNumber option
+        Version: CoreTypes.VersionNumber option
         [<System.Text.Json.Serialization.JsonPropertyName("deprecated")>]
         Deprecated: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("_meta")>]
-        Meta: Types.Metadata option
+        Meta: CoreTypes.Metadata option
         [<System.Text.Json.Serialization.JsonPropertyName("created_date")>]
-        CreatedDate: Types.DateTime option
+        CreatedDate: CoreTypes.DateTime option
         [<System.Text.Json.Serialization.JsonPropertyName("created_date_millis")>]
-        CreatedDateMillis: Types.EpochTime<Types.UnitMillis> option
+        CreatedDateMillis: CoreTypes.EpochTime<CoreTypes.UnitMillis> option
         [<System.Text.Json.Serialization.JsonPropertyName("modified_date")>]
-        ModifiedDate: Types.DateTime option
+        ModifiedDate: CoreTypes.DateTime option
         [<System.Text.Json.Serialization.JsonPropertyName("modified_date_millis")>]
-        ModifiedDateMillis: Types.EpochTime<Types.UnitMillis> option
+        ModifiedDateMillis: CoreTypes.EpochTime<CoreTypes.UnitMillis> option
         [<System.Text.Json.Serialization.JsonPropertyName("field_access_pattern")>]
-        FieldAccessPattern: IngestTypes.FieldAccessPattern option
+        FieldAccessPattern: FieldAccessPattern option
     }
 
     type PipelineConfig = {
         [<System.Text.Json.Serialization.JsonPropertyName("description")>]
         Description: string option
         [<System.Text.Json.Serialization.JsonPropertyName("version")>]
-        Version: Types.VersionNumber option
+        Version: CoreTypes.VersionNumber option
         [<System.Text.Json.Serialization.JsonPropertyName("processors")>]
-        Processors: IngestTypes.ProcessorContainer list
+        Processors: ProcessorContainer list
     }
 
     [<RequireQualifiedAccess>]
@@ -850,27 +850,27 @@ module IngestTypes =
 
     type PipelineProcessorResult = {
         [<System.Text.Json.Serialization.JsonPropertyName("doc")>]
-        Doc: IngestTypes.DocumentSimulation option
+        Doc: DocumentSimulation option
         [<System.Text.Json.Serialization.JsonPropertyName("tag")>]
         Tag: string option
         [<System.Text.Json.Serialization.JsonPropertyName("processor_type")>]
         ProcessorType: string option
         [<System.Text.Json.Serialization.JsonPropertyName("status")>]
-        Status: IngestTypes.PipelineSimulationStatusOptions option
+        Status: PipelineSimulationStatusOptions option
         [<System.Text.Json.Serialization.JsonPropertyName("description")>]
         Description: string option
         [<System.Text.Json.Serialization.JsonPropertyName("ignored_error")>]
-        IgnoredError: Types.ErrorCause option
+        IgnoredError: CoreTypes.ErrorCause option
         [<System.Text.Json.Serialization.JsonPropertyName("error")>]
-        Error: Types.ErrorCause option
+        Error: CoreTypes.ErrorCause option
     }
 
     type SimulateDocumentResult = {
         [<System.Text.Json.Serialization.JsonPropertyName("doc")>]
-        Doc: IngestTypes.DocumentSimulation option
+        Doc: DocumentSimulation option
         [<System.Text.Json.Serialization.JsonPropertyName("error")>]
-        Error: Types.ErrorCause option
+        Error: CoreTypes.ErrorCause option
         [<System.Text.Json.Serialization.JsonPropertyName("processor_results")>]
-        ProcessorResults: IngestTypes.PipelineProcessorResult list option
+        ProcessorResults: PipelineProcessorResult list option
     }
 

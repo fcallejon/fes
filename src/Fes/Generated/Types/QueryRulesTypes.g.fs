@@ -28,7 +28,7 @@ module QueryRulesTypes =
 
     type QueryRuleCriteria = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
-        Type: QueryRulesTypes.QueryRuleCriteriaType
+        Type: QueryRuleCriteriaType
         [<System.Text.Json.Serialization.JsonPropertyName("metadata")>]
         Metadata: string option
         [<System.Text.Json.Serialization.JsonPropertyName("values")>]
@@ -37,28 +37,28 @@ module QueryRulesTypes =
 
     type QueryRuleActions = {
         [<System.Text.Json.Serialization.JsonPropertyName("ids")>]
-        Ids: Types.Id list option
+        Ids: CoreTypes.Id list option
         [<System.Text.Json.Serialization.JsonPropertyName("docs")>]
-        Docs: TypesQueryDsl.PinnedDoc list option
+        Docs: CoreTypes.PinnedDoc list option
     }
 
     type QueryRule = {
         [<System.Text.Json.Serialization.JsonPropertyName("rule_id")>]
-        RuleId: Types.Id
+        RuleId: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
-        Type: QueryRulesTypes.QueryRuleType
+        Type: QueryRuleType
         [<System.Text.Json.Serialization.JsonPropertyName("criteria")>]
         Criteria: System.Text.Json.JsonElement
         [<System.Text.Json.Serialization.JsonPropertyName("actions")>]
-        Actions: QueryRulesTypes.QueryRuleActions
+        Actions: QueryRuleActions
         [<System.Text.Json.Serialization.JsonPropertyName("priority")>]
-        Priority: Types.Integer option
+        Priority: CoreTypes.Integer option
     }
 
     type QueryRuleset = {
         [<System.Text.Json.Serialization.JsonPropertyName("ruleset_id")>]
-        RulesetId: Types.Id
+        RulesetId: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("rules")>]
-        Rules: QueryRulesTypes.QueryRule list
+        Rules: QueryRule list
     }
 

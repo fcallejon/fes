@@ -36,39 +36,39 @@ module CatAllocationBuilders =
             { state with ShardsUndesired = Some value }
 
         [<CustomOperation("writeLoadForecast")>]
-        member _.WriteLoadForecast(state: AllocationRecord, value: SpecUtils.Stringified<Types.Double> option) =
+        member _.WriteLoadForecast(state: AllocationRecord, value: CoreTypes.Stringified<CoreTypes.Double> option) =
             { state with WriteLoadForecast = Some value }
 
         [<CustomOperation("diskIndicesForecast")>]
-        member _.DiskIndicesForecast(state: AllocationRecord, value: Types.ByteSize option) =
+        member _.DiskIndicesForecast(state: AllocationRecord, value: CoreTypes.ByteSize option) =
             { state with DiskIndicesForecast = Some value }
 
         [<CustomOperation("diskIndices")>]
-        member _.DiskIndices(state: AllocationRecord, value: Types.ByteSize option) =
+        member _.DiskIndices(state: AllocationRecord, value: CoreTypes.ByteSize option) =
             { state with DiskIndices = Some value }
 
         [<CustomOperation("diskUsed")>]
-        member _.DiskUsed(state: AllocationRecord, value: Types.ByteSize option) =
+        member _.DiskUsed(state: AllocationRecord, value: CoreTypes.ByteSize option) =
             { state with DiskUsed = Some value }
 
         [<CustomOperation("diskAvail")>]
-        member _.DiskAvail(state: AllocationRecord, value: Types.ByteSize option) =
+        member _.DiskAvail(state: AllocationRecord, value: CoreTypes.ByteSize option) =
             { state with DiskAvail = Some value }
 
         [<CustomOperation("diskTotal")>]
-        member _.DiskTotal(state: AllocationRecord, value: Types.ByteSize option) =
+        member _.DiskTotal(state: AllocationRecord, value: CoreTypes.ByteSize option) =
             { state with DiskTotal = Some value }
 
         [<CustomOperation("diskPercent")>]
-        member _.DiskPercent(state: AllocationRecord, value: Types.Percentage option) =
+        member _.DiskPercent(state: AllocationRecord, value: CoreTypes.Percentage option) =
             { state with DiskPercent = Some value }
 
         [<CustomOperation("host")>]
-        member _.Host(state: AllocationRecord, value: Types.Host option) =
+        member _.Host(state: AllocationRecord, value: CoreTypes.Host option) =
             { state with Host = Some value }
 
         [<CustomOperation("ip")>]
-        member _.Ip(state: AllocationRecord, value: Types.Ip option) =
+        member _.Ip(state: AllocationRecord, value: CoreTypes.Ip option) =
             { state with Ip = Some value }
 
         [<CustomOperation("node")>]

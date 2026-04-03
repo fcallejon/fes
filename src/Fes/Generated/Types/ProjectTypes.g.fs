@@ -11,8 +11,8 @@ module ProjectTypes =
 
     type ProjectRoutingExpression = {
         [<System.Text.Json.Serialization.JsonPropertyName("expression")>]
-        Expression: ProjectTypes.RoutingExpression
+        Expression: RoutingExpression
     }
 
-    type NamedProjectRoutingExpressions = Map<string, ProjectTypes.ProjectRoutingExpression>
+    type NamedProjectRoutingExpressions = Map<string, ProjectRoutingExpression>
 

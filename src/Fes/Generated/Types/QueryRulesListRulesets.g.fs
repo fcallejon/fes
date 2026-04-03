@@ -9,12 +9,12 @@ module QueryRulesListRulesets =
 
     type QueryRulesetListItem = {
         [<System.Text.Json.Serialization.JsonPropertyName("ruleset_id")>]
-        RulesetId: Types.Id
+        RulesetId: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("rule_total_count")>]
-        RuleTotalCount: Types.Integer
+        RuleTotalCount: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("rule_criteria_types_counts")>]
-        RuleCriteriaTypesCounts: Map<string, Types.Integer>
+        RuleCriteriaTypesCounts: Map<string, CoreTypes.Integer>
         [<System.Text.Json.Serialization.JsonPropertyName("rule_type_counts")>]
-        RuleTypeCounts: Map<string, Types.Integer>
+        RuleTypeCounts: Map<string, CoreTypes.Integer>
     }
 

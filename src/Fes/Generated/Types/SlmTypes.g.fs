@@ -11,113 +11,113 @@ module SlmTypes =
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_unavailable")>]
         IgnoreUnavailable: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("indices")>]
-        Indices: Types.Indices option
+        Indices: CoreTypes.Indices option
         [<System.Text.Json.Serialization.JsonPropertyName("include_global_state")>]
         IncludeGlobalState: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("feature_states")>]
         FeatureStates: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("metadata")>]
-        Metadata: Types.Metadata option
+        Metadata: CoreTypes.Metadata option
         [<System.Text.Json.Serialization.JsonPropertyName("partial")>]
         Partial: bool option
     }
 
     type InProgress = {
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.Name
+        Name: CoreTypes.Name
         [<System.Text.Json.Serialization.JsonPropertyName("start_time_millis")>]
-        StartTimeMillis: Types.EpochTime<Types.UnitMillis>
+        StartTimeMillis: CoreTypes.EpochTime<CoreTypes.UnitMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("state")>]
         State: string
         [<System.Text.Json.Serialization.JsonPropertyName("uuid")>]
-        Uuid: Types.Uuid
+        Uuid: CoreTypes.Uuid
     }
 
     type Invocation = {
         [<System.Text.Json.Serialization.JsonPropertyName("snapshot_name")>]
-        SnapshotName: Types.Name
+        SnapshotName: CoreTypes.Name
         [<System.Text.Json.Serialization.JsonPropertyName("time")>]
-        Time: Types.DateTime
+        Time: CoreTypes.DateTime
     }
 
     type Retention = {
         [<System.Text.Json.Serialization.JsonPropertyName("expire_after")>]
-        ExpireAfter: Types.Duration
+        ExpireAfter: CoreTypes.Duration
         [<System.Text.Json.Serialization.JsonPropertyName("max_count")>]
-        MaxCount: Types.Integer
+        MaxCount: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("min_count")>]
-        MinCount: Types.Integer
+        MinCount: CoreTypes.Integer
     }
 
     type Policy = {
         [<System.Text.Json.Serialization.JsonPropertyName("config")>]
-        Config: SlmTypes.Configuration option
+        Config: Configuration option
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.Name
+        Name: CoreTypes.Name
         [<System.Text.Json.Serialization.JsonPropertyName("repository")>]
         Repository: string
         [<System.Text.Json.Serialization.JsonPropertyName("retention")>]
-        Retention: SlmTypes.Retention option
+        Retention: Retention option
         [<System.Text.Json.Serialization.JsonPropertyName("schedule")>]
         Schedule: WatcherTypes.CronExpression
     }
 
     type Statistics = {
         [<System.Text.Json.Serialization.JsonPropertyName("retention_deletion_time")>]
-        RetentionDeletionTime: Types.Duration option
+        RetentionDeletionTime: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("retention_deletion_time_millis")>]
-        RetentionDeletionTimeMillis: Types.DurationValue<Types.UnitMillis> option
+        RetentionDeletionTimeMillis: CoreTypes.DurationValue<CoreTypes.UnitMillis> option
         [<System.Text.Json.Serialization.JsonPropertyName("retention_failed")>]
-        RetentionFailed: Types.Long option
+        RetentionFailed: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("retention_runs")>]
-        RetentionRuns: Types.Long option
+        RetentionRuns: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("retention_timed_out")>]
-        RetentionTimedOut: Types.Long option
+        RetentionTimedOut: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("policy")>]
-        Policy: Types.Id option
+        Policy: CoreTypes.Id option
         [<System.Text.Json.Serialization.JsonPropertyName("total_snapshots_deleted")>]
-        TotalSnapshotsDeleted: Types.Long option
+        TotalSnapshotsDeleted: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("total_snapshot_deletion_failures")>]
-        TotalSnapshotDeletionFailures: Types.Long option
+        TotalSnapshotDeletionFailures: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("total_snapshots_failed")>]
-        TotalSnapshotsFailed: Types.Long option
+        TotalSnapshotsFailed: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("total_snapshots_taken")>]
-        TotalSnapshotsTaken: Types.Long option
+        TotalSnapshotsTaken: CoreTypes.Long option
     }
 
     type SnapshotLifecycle = {
         [<System.Text.Json.Serialization.JsonPropertyName("in_progress")>]
-        InProgress: SlmTypes.InProgress option
+        InProgress: InProgress option
         [<System.Text.Json.Serialization.JsonPropertyName("last_failure")>]
-        LastFailure: SlmTypes.Invocation option
+        LastFailure: Invocation option
         [<System.Text.Json.Serialization.JsonPropertyName("last_success")>]
-        LastSuccess: SlmTypes.Invocation option
+        LastSuccess: Invocation option
         [<System.Text.Json.Serialization.JsonPropertyName("modified_date")>]
-        ModifiedDate: Types.DateTime option
+        ModifiedDate: CoreTypes.DateTime option
         [<System.Text.Json.Serialization.JsonPropertyName("modified_date_millis")>]
-        ModifiedDateMillis: Types.EpochTime<Types.UnitMillis>
+        ModifiedDateMillis: CoreTypes.EpochTime<CoreTypes.UnitMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("next_execution")>]
-        NextExecution: Types.DateTime option
+        NextExecution: CoreTypes.DateTime option
         [<System.Text.Json.Serialization.JsonPropertyName("next_execution_millis")>]
-        NextExecutionMillis: Types.EpochTime<Types.UnitMillis>
+        NextExecutionMillis: CoreTypes.EpochTime<CoreTypes.UnitMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("policy")>]
-        Policy: SlmTypes.Policy
+        Policy: Policy
         [<System.Text.Json.Serialization.JsonPropertyName("version")>]
-        Version: Types.VersionNumber
+        Version: CoreTypes.VersionNumber
         [<System.Text.Json.Serialization.JsonPropertyName("stats")>]
-        Stats: SlmTypes.Statistics
+        Stats: Statistics
     }
 
     type SnapshotPolicyStats = {
         [<System.Text.Json.Serialization.JsonPropertyName("policy")>]
         Policy: string
         [<System.Text.Json.Serialization.JsonPropertyName("snapshots_taken")>]
-        SnapshotsTaken: Types.Long
+        SnapshotsTaken: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("snapshots_failed")>]
-        SnapshotsFailed: Types.Long
+        SnapshotsFailed: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("snapshots_deleted")>]
-        SnapshotsDeleted: Types.Long
+        SnapshotsDeleted: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("snapshot_deletion_failures")>]
-        SnapshotDeletionFailures: Types.Long
+        SnapshotDeletionFailures: CoreTypes.Long
     }
 

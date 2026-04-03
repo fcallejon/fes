@@ -9,8 +9,8 @@ module SynonymsGetSynonymsSets =
 
     type SynonymsSetItem = {
         [<System.Text.Json.Serialization.JsonPropertyName("synonyms_set")>]
-        SynonymsSet: Types.Id
+        SynonymsSet: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("count")>]
-        Count: Types.Integer
+        Count: CoreTypes.Integer
     }
 

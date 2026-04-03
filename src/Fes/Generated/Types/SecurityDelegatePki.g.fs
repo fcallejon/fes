@@ -28,13 +28,13 @@ module SecurityDelegatePki =
         [<System.Text.Json.Serialization.JsonPropertyName("token")>]
         Token: Map<string, string> option
         [<System.Text.Json.Serialization.JsonPropertyName("metadata")>]
-        Metadata: Types.Metadata
+        Metadata: CoreTypes.Metadata
         [<System.Text.Json.Serialization.JsonPropertyName("enabled")>]
         Enabled: bool
         [<System.Text.Json.Serialization.JsonPropertyName("authentication_realm")>]
-        AuthenticationRealm: SecurityDelegatePki.AuthenticationRealm
+        AuthenticationRealm: AuthenticationRealm
         [<System.Text.Json.Serialization.JsonPropertyName("lookup_realm")>]
-        LookupRealm: SecurityDelegatePki.AuthenticationRealm
+        LookupRealm: AuthenticationRealm
         [<System.Text.Json.Serialization.JsonPropertyName("authentication_type")>]
         AuthenticationType: string
         [<System.Text.Json.Serialization.JsonPropertyName("api_key")>]

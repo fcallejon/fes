@@ -27,7 +27,7 @@ module ProjectOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type ProjectCreateManyRoutingResponse = Types.AcknowledgedResponseBase
+    type ProjectCreateManyRoutingResponse = CoreTypes.AcknowledgedResponseBase
 
     type ProjectCreateManyRoutingRequestBuilder() =
         member _.Yield(_: unit) : ProjectCreateManyRoutingRequest =
@@ -58,7 +58,7 @@ module ProjectOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type ProjectCreateRoutingResponse = Types.AcknowledgedResponseBase
+    type ProjectCreateRoutingResponse = CoreTypes.AcknowledgedResponseBase
 
     type ProjectCreateRoutingRequestBuilder() =
         member _.Yield(_: unit) : ProjectCreateRoutingRequest =
@@ -92,7 +92,7 @@ module ProjectOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type ProjectDeleteRoutingResponse = Types.AcknowledgedResponseBase
+    type ProjectDeleteRoutingResponse = CoreTypes.AcknowledgedResponseBase
 
     type ProjectDeleteRoutingRequestBuilder() =
         member _.Yield(_: unit) : ProjectDeleteRoutingRequest =
@@ -158,7 +158,7 @@ module ProjectOperations =
     let projectGetRoutingRequest = ProjectGetRoutingRequestBuilder()
 
     type ProjectTagsRequest = {
-        ProjectRouting: Types.ProjectRouting option
+        ProjectRouting: CoreTypes.ProjectRouting option
     }
 
         with
@@ -182,12 +182,12 @@ module ProjectOperations =
             }
 
         [<CustomOperation("projectRouting")>]
-        member _.ProjectRouting(state: ProjectTagsRequest, value: Types.ProjectRouting) =
+        member _.ProjectRouting(state: ProjectTagsRequest, value: CoreTypes.ProjectRouting) =
             { state with ProjectRouting = Some value }
 
     let projectTagsRequest = ProjectTagsRequestBuilder()
 
     module Tags =
-        let withProjectRouting (value: Types.ProjectRouting) (req: ProjectTagsRequest) =
+        let withProjectRouting (value: CoreTypes.ProjectRouting) (req: ProjectTagsRequest) =
             { req with ProjectRouting = Some value }
 

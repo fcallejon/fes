@@ -9,19 +9,19 @@ module CatRecovery =
 
     type RecoveryRecord = {
         [<System.Text.Json.Serialization.JsonPropertyName("index")>]
-        Index: Types.IndexName option
+        Index: CoreTypes.IndexName option
         [<System.Text.Json.Serialization.JsonPropertyName("shard")>]
         Shard: string option
         [<System.Text.Json.Serialization.JsonPropertyName("start_time")>]
-        StartTime: Types.DateTime option
+        StartTime: CoreTypes.DateTime option
         [<System.Text.Json.Serialization.JsonPropertyName("start_time_millis")>]
-        StartTimeMillis: Types.EpochTime<Types.UnitMillis> option
+        StartTimeMillis: CoreTypes.EpochTime<CoreTypes.UnitMillis> option
         [<System.Text.Json.Serialization.JsonPropertyName("stop_time")>]
-        StopTime: Types.DateTime option
+        StopTime: CoreTypes.DateTime option
         [<System.Text.Json.Serialization.JsonPropertyName("stop_time_millis")>]
-        StopTimeMillis: Types.EpochTime<Types.UnitMillis> option
+        StopTimeMillis: CoreTypes.EpochTime<CoreTypes.UnitMillis> option
         [<System.Text.Json.Serialization.JsonPropertyName("time")>]
-        Time: Types.Duration option
+        Time: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string option
         [<System.Text.Json.Serialization.JsonPropertyName("stage")>]
@@ -43,7 +43,7 @@ module CatRecovery =
         [<System.Text.Json.Serialization.JsonPropertyName("files_recovered")>]
         FilesRecovered: string option
         [<System.Text.Json.Serialization.JsonPropertyName("files_percent")>]
-        FilesPercent: Types.Percentage option
+        FilesPercent: CoreTypes.Percentage option
         [<System.Text.Json.Serialization.JsonPropertyName("files_total")>]
         FilesTotal: string option
         [<System.Text.Json.Serialization.JsonPropertyName("bytes")>]
@@ -51,7 +51,7 @@ module CatRecovery =
         [<System.Text.Json.Serialization.JsonPropertyName("bytes_recovered")>]
         BytesRecovered: string option
         [<System.Text.Json.Serialization.JsonPropertyName("bytes_percent")>]
-        BytesPercent: Types.Percentage option
+        BytesPercent: CoreTypes.Percentage option
         [<System.Text.Json.Serialization.JsonPropertyName("bytes_total")>]
         BytesTotal: string option
         [<System.Text.Json.Serialization.JsonPropertyName("translog_ops")>]
@@ -59,6 +59,6 @@ module CatRecovery =
         [<System.Text.Json.Serialization.JsonPropertyName("translog_ops_recovered")>]
         TranslogOpsRecovered: string option
         [<System.Text.Json.Serialization.JsonPropertyName("translog_ops_percent")>]
-        TranslogOpsPercent: Types.Percentage option
+        TranslogOpsPercent: CoreTypes.Percentage option
     }
 

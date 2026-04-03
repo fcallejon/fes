@@ -46,7 +46,7 @@ module SecurityDelegatePkiBuilders =
             { state with Token = Some value }
 
         [<CustomOperation("metadata")>]
-        member _.Metadata(state: Authentication, value: Types.Metadata) =
+        member _.Metadata(state: Authentication, value: CoreTypes.Metadata) =
             { state with Metadata = value }
 
         [<CustomOperation("enabled")>]

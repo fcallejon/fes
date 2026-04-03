@@ -15,7 +15,7 @@ module MlPreviewDataFrameAnalytics =
         [<System.Text.Json.Serialization.JsonPropertyName("model_memory_limit")>]
         ModelMemoryLimit: string option
         [<System.Text.Json.Serialization.JsonPropertyName("max_num_threads")>]
-        MaxNumThreads: Types.Integer option
+        MaxNumThreads: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("analyzed_fields")>]
         AnalyzedFields: MlTypes.DataframeAnalysisAnalyzedFields option
     }

@@ -17,7 +17,7 @@ module EnrichExecutePolicy =
 
     type ExecuteEnrichPolicyStatus = {
         [<System.Text.Json.Serialization.JsonPropertyName("phase")>]
-        Phase: EnrichExecutePolicy.EnrichPolicyPhase
+        Phase: EnrichPolicyPhase
         [<System.Text.Json.Serialization.JsonPropertyName("step")>]
         Step: string option
     }

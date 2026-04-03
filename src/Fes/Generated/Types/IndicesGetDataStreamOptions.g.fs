@@ -9,7 +9,7 @@ module IndicesGetDataStreamOptions =
 
     type DataStreamWithOptions = {
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
-        Name: Types.DataStreamName
+        Name: CoreTypes.DataStreamName
         [<System.Text.Json.Serialization.JsonPropertyName("options")>]
         Options: IndicesTypes.DataStreamOptions option
     }

@@ -9,37 +9,37 @@ module GlobalRankEval =
 
     type DocumentRating = {
         [<System.Text.Json.Serialization.JsonPropertyName("_id")>]
-        Id: Types.Id
+        Id: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("_index")>]
-        Index: Types.IndexName
+        Index: CoreTypes.IndexName
         [<System.Text.Json.Serialization.JsonPropertyName("rating")>]
-        Rating: Types.Integer
+        Rating: CoreTypes.Integer
     }
 
     type RankEvalHit = {
         [<System.Text.Json.Serialization.JsonPropertyName("_id")>]
-        Id: Types.Id
+        Id: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("_index")>]
-        Index: Types.IndexName
+        Index: CoreTypes.IndexName
         [<System.Text.Json.Serialization.JsonPropertyName("_score")>]
-        Score: Types.Double
+        Score: CoreTypes.Double
     }
 
     type RankEvalHitItem = {
         [<System.Text.Json.Serialization.JsonPropertyName("hit")>]
-        Hit: GlobalRankEval.RankEvalHit
+        Hit: RankEvalHit
         [<System.Text.Json.Serialization.JsonPropertyName("rating")>]
-        Rating: Types.Double option option
+        Rating: CoreTypes.Double option option
     }
 
     type RankEvalMetricBase = {
         [<System.Text.Json.Serialization.JsonPropertyName("k")>]
-        K: Types.Integer option
+        K: CoreTypes.Integer option
     }
 
     type RankEvalMetricRatingTreshold = {
         [<System.Text.Json.Serialization.JsonPropertyName("relevant_rating_threshold")>]
-        RelevantRatingThreshold: Types.Integer option
+        RelevantRatingThreshold: CoreTypes.Integer option
     }
 
     /// Precision at K (P@k)
@@ -63,56 +63,56 @@ module GlobalRankEval =
     /// Expected Reciprocal Rank (ERR)
     type RankEvalMetricExpectedReciprocalRank = {
         [<System.Text.Json.Serialization.JsonPropertyName("maximum_relevance")>]
-        MaximumRelevance: Types.Integer
+        MaximumRelevance: CoreTypes.Integer
     }
 
     type RankEvalMetric = {
         [<System.Text.Json.Serialization.JsonPropertyName("precision")>]
-        Precision: GlobalRankEval.RankEvalMetricPrecision option
+        Precision: RankEvalMetricPrecision option
         [<System.Text.Json.Serialization.JsonPropertyName("recall")>]
-        Recall: GlobalRankEval.RankEvalMetricRecall option
+        Recall: RankEvalMetricRecall option
         [<System.Text.Json.Serialization.JsonPropertyName("mean_reciprocal_rank")>]
-        MeanReciprocalRank: GlobalRankEval.RankEvalMetricMeanReciprocalRank option
+        MeanReciprocalRank: RankEvalMetricMeanReciprocalRank option
         [<System.Text.Json.Serialization.JsonPropertyName("dcg")>]
-        Dcg: GlobalRankEval.RankEvalMetricDiscountedCumulativeGain option
+        Dcg: RankEvalMetricDiscountedCumulativeGain option
         [<System.Text.Json.Serialization.JsonPropertyName("expected_reciprocal_rank")>]
-        ExpectedReciprocalRank: GlobalRankEval.RankEvalMetricExpectedReciprocalRank option
+        ExpectedReciprocalRank: RankEvalMetricExpectedReciprocalRank option
     }
 
     type UnratedDocument = {
         [<System.Text.Json.Serialization.JsonPropertyName("_id")>]
-        Id: Types.Id
+        Id: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("_index")>]
-        Index: Types.IndexName
+        Index: CoreTypes.IndexName
     }
 
     type RankEvalMetricDetail = {
         [<System.Text.Json.Serialization.JsonPropertyName("metric_score")>]
-        MetricScore: Types.Double
+        MetricScore: CoreTypes.Double
         [<System.Text.Json.Serialization.JsonPropertyName("unrated_docs")>]
-        UnratedDocs: GlobalRankEval.UnratedDocument list
+        UnratedDocs: UnratedDocument list
         [<System.Text.Json.Serialization.JsonPropertyName("hits")>]
-        Hits: GlobalRankEval.RankEvalHitItem list
+        Hits: RankEvalHitItem list
         [<System.Text.Json.Serialization.JsonPropertyName("metric_details")>]
         MetricDetails: Map<string, Map<string, System.Text.Json.JsonElement>>
     }
 
     type RankEvalQuery = {
         [<System.Text.Json.Serialization.JsonPropertyName("query")>]
-        Query: TypesQueryDsl.QueryContainer
+        Query: CoreTypes.QueryContainer
         [<System.Text.Json.Serialization.JsonPropertyName("size")>]
-        Size: Types.Integer option
+        Size: CoreTypes.Integer option
     }
 
     type RankEvalRequestItem = {
         [<System.Text.Json.Serialization.JsonPropertyName("id")>]
-        Id: Types.Id
+        Id: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("request")>]
-        Request: GlobalRankEval.RankEvalQuery option
+        Request: RankEvalQuery option
         [<System.Text.Json.Serialization.JsonPropertyName("ratings")>]
-        Ratings: GlobalRankEval.DocumentRating list
+        Ratings: DocumentRating list
         [<System.Text.Json.Serialization.JsonPropertyName("template_id")>]
-        TemplateId: Types.Id option
+        TemplateId: CoreTypes.Id option
         [<System.Text.Json.Serialization.JsonPropertyName("params")>]
         Params: Map<string, System.Text.Json.JsonElement> option
     }

@@ -22,7 +22,7 @@ module IndicesShardStoresBuilders =
             { state with Allocation = value }
 
         [<CustomOperation("allocationId")>]
-        member _.AllocationId(state: ShardStore, value: Types.Id) =
+        member _.AllocationId(state: ShardStore, value: CoreTypes.Id) =
             { state with AllocationId = Some value }
 
         [<CustomOperation("storeException")>]
@@ -55,7 +55,7 @@ module IndicesShardStoresBuilders =
             { state with ExternalId = Some value }
 
         [<CustomOperation("name")>]
-        member _.Name(state: ShardStoreNode, value: Types.Name) =
+        member _.Name(state: ShardStoreNode, value: CoreTypes.Name) =
             { state with Name = value }
 
         [<CustomOperation("roles")>]
@@ -63,7 +63,7 @@ module IndicesShardStoresBuilders =
             { state with Roles = value }
 
         [<CustomOperation("transportAddress")>]
-        member _.TransportAddress(state: ShardStoreNode, value: Types.TransportAddress) =
+        member _.TransportAddress(state: ShardStoreNode, value: CoreTypes.TransportAddress) =
             { state with TransportAddress = value }
 
     let shardStoreNode = ShardStoreNodeBuilder()

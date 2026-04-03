@@ -24,28 +24,28 @@ module IndicesSegments =
         [<System.Text.Json.Serialization.JsonPropertyName("compound")>]
         Compound: bool
         [<System.Text.Json.Serialization.JsonPropertyName("deleted_docs")>]
-        DeletedDocs: Types.Long
+        DeletedDocs: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("generation")>]
-        Generation: Types.Integer
+        Generation: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("search")>]
         Search: bool
         [<System.Text.Json.Serialization.JsonPropertyName("size_in_bytes")>]
-        SizeInBytes: Types.Double
+        SizeInBytes: CoreTypes.Double
         [<System.Text.Json.Serialization.JsonPropertyName("num_docs")>]
-        NumDocs: Types.Long
+        NumDocs: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("version")>]
-        Version: Types.VersionString
+        Version: CoreTypes.VersionString
     }
 
     type ShardsSegment = {
         [<System.Text.Json.Serialization.JsonPropertyName("num_committed_segments")>]
-        NumCommittedSegments: Types.Integer
+        NumCommittedSegments: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("routing")>]
-        Routing: IndicesSegments.ShardSegmentRouting
+        Routing: ShardSegmentRouting
         [<System.Text.Json.Serialization.JsonPropertyName("num_search_segments")>]
-        NumSearchSegments: Types.Integer
+        NumSearchSegments: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("segments")>]
-        Segments: Map<string, IndicesSegments.Segment>
+        Segments: Map<string, Segment>
     }
 
     type IndexSegment = {

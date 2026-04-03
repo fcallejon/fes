@@ -14,7 +14,7 @@ module MonitoringOperations =
     type MonitoringBulkRequest = {
         SystemId: string
         SystemApiVersion: string
-        Interval: Types.Duration
+        Interval: CoreTypes.Duration
         Document: obj
     }
 
@@ -50,7 +50,7 @@ module MonitoringOperations =
             { state with SystemApiVersion = value }
 
         [<CustomOperation("interval")>]
-        member _.Interval(state: MonitoringBulkRequest, value: Types.Duration) =
+        member _.Interval(state: MonitoringBulkRequest, value: CoreTypes.Duration) =
             { state with Interval = value }
 
         [<CustomOperation("document")>]
@@ -64,6 +64,6 @@ module MonitoringOperations =
             { req with SystemId = value }
         let withSystemApiVersion (value: string) (req: MonitoringBulkRequest) =
             { req with SystemApiVersion = value }
-        let withInterval (value: Types.Duration) (req: MonitoringBulkRequest) =
+        let withInterval (value: CoreTypes.Duration) (req: MonitoringBulkRequest) =
             { req with Interval = value }
 

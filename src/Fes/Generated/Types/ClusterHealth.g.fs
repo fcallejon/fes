@@ -9,87 +9,87 @@ module ClusterHealth =
 
     type ShardHealthStats = {
         [<System.Text.Json.Serialization.JsonPropertyName("active_shards")>]
-        ActiveShards: Types.Integer
+        ActiveShards: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("initializing_shards")>]
-        InitializingShards: Types.Integer
+        InitializingShards: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("primary_active")>]
         PrimaryActive: bool
         [<System.Text.Json.Serialization.JsonPropertyName("relocating_shards")>]
-        RelocatingShards: Types.Integer
+        RelocatingShards: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("status")>]
-        Status: Types.HealthStatus
+        Status: CoreTypes.HealthStatus
         [<System.Text.Json.Serialization.JsonPropertyName("unassigned_shards")>]
-        UnassignedShards: Types.Integer
+        UnassignedShards: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("unassigned_primary_shards")>]
-        UnassignedPrimaryShards: Types.Integer
+        UnassignedPrimaryShards: CoreTypes.Integer
     }
 
     type IndexHealthStats = {
         [<System.Text.Json.Serialization.JsonPropertyName("active_primary_shards")>]
-        ActivePrimaryShards: Types.Integer
+        ActivePrimaryShards: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("active_shards")>]
-        ActiveShards: Types.Integer
+        ActiveShards: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("initializing_shards")>]
-        InitializingShards: Types.Integer
+        InitializingShards: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("number_of_replicas")>]
-        NumberOfReplicas: Types.Integer
+        NumberOfReplicas: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("number_of_shards")>]
-        NumberOfShards: Types.Integer
+        NumberOfShards: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("relocating_shards")>]
-        RelocatingShards: Types.Integer
+        RelocatingShards: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("shards")>]
-        Shards: Map<string, ClusterHealth.ShardHealthStats> option
+        Shards: Map<string, ShardHealthStats> option
         [<System.Text.Json.Serialization.JsonPropertyName("status")>]
-        Status: Types.HealthStatus
+        Status: CoreTypes.HealthStatus
         [<System.Text.Json.Serialization.JsonPropertyName("unassigned_shards")>]
-        UnassignedShards: Types.Integer
+        UnassignedShards: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("unassigned_primary_shards")>]
-        UnassignedPrimaryShards: Types.Integer
+        UnassignedPrimaryShards: CoreTypes.Integer
     }
 
     type HealthResponseBody = {
         [<System.Text.Json.Serialization.JsonPropertyName("active_primary_shards")>]
-        ActivePrimaryShards: Types.Integer
+        ActivePrimaryShards: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("active_shards")>]
-        ActiveShards: Types.Integer
+        ActiveShards: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("active_shards_percent")>]
         ActiveShardsPercent: string option
         [<System.Text.Json.Serialization.JsonPropertyName("active_shards_percent_as_number")>]
-        ActiveShardsPercentAsNumber: Types.Double
+        ActiveShardsPercentAsNumber: CoreTypes.Double
         [<System.Text.Json.Serialization.JsonPropertyName("cluster_name")>]
-        ClusterName: Types.Name
+        ClusterName: CoreTypes.Name
         [<System.Text.Json.Serialization.JsonPropertyName("delayed_unassigned_shards")>]
-        DelayedUnassignedShards: Types.Integer
+        DelayedUnassignedShards: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("indices")>]
-        Indices: Map<Types.IndexName, ClusterHealth.IndexHealthStats> option
+        Indices: Map<CoreTypes.IndexName, IndexHealthStats> option
         [<System.Text.Json.Serialization.JsonPropertyName("initializing_shards")>]
-        InitializingShards: Types.Integer
+        InitializingShards: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("number_of_data_nodes")>]
-        NumberOfDataNodes: Types.Integer
+        NumberOfDataNodes: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("number_of_in_flight_fetch")>]
-        NumberOfInFlightFetch: Types.Integer
+        NumberOfInFlightFetch: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("number_of_nodes")>]
-        NumberOfNodes: Types.Integer
+        NumberOfNodes: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("number_of_pending_tasks")>]
-        NumberOfPendingTasks: Types.Integer
+        NumberOfPendingTasks: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("relocating_shards")>]
-        RelocatingShards: Types.Integer
+        RelocatingShards: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("status")>]
-        Status: Types.HealthStatus
+        Status: CoreTypes.HealthStatus
         [<System.Text.Json.Serialization.JsonPropertyName("task_max_waiting_in_queue")>]
-        TaskMaxWaitingInQueue: Types.Duration option
+        TaskMaxWaitingInQueue: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("task_max_waiting_in_queue_millis")>]
-        TaskMaxWaitingInQueueMillis: Types.DurationValue<Types.UnitMillis>
+        TaskMaxWaitingInQueueMillis: CoreTypes.DurationValue<CoreTypes.UnitMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("timed_out")>]
         TimedOut: bool
         [<System.Text.Json.Serialization.JsonPropertyName("unassigned_primary_shards")>]
-        UnassignedPrimaryShards: Types.Integer
+        UnassignedPrimaryShards: CoreTypes.Integer
         [<System.Text.Json.Serialization.JsonPropertyName("unassigned_shards")>]
-        UnassignedShards: Types.Integer
+        UnassignedShards: CoreTypes.Integer
     }
 
     [<RequireQualifiedAccess>]
     type WaitForNodes =
         | String of string
-        | Integer of Types.Integer
+        | Integer of CoreTypes.Integer
 

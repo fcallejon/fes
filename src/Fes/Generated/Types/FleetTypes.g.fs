@@ -7,5 +7,5 @@ open System.Text.Json.Serialization
 
 module FleetTypes =
 
-    type Checkpoint = Types.Long
+    type Checkpoint = CoreTypes.Long
 

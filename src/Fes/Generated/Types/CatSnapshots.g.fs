@@ -15,15 +15,15 @@ module CatSnapshots =
         [<System.Text.Json.Serialization.JsonPropertyName("status")>]
         Status: string option
         [<System.Text.Json.Serialization.JsonPropertyName("start_epoch")>]
-        StartEpoch: SpecUtils.Stringified<Types.EpochTime<Types.UnitSeconds>> option
+        StartEpoch: CoreTypes.Stringified<CoreTypes.EpochTime<CoreTypes.UnitSeconds>> option
         [<System.Text.Json.Serialization.JsonPropertyName("start_time")>]
         StartTime: WatcherTypes.ScheduleTimeOfDay option
         [<System.Text.Json.Serialization.JsonPropertyName("end_epoch")>]
-        EndEpoch: SpecUtils.Stringified<Types.EpochTime<Types.UnitSeconds>> option
+        EndEpoch: CoreTypes.Stringified<CoreTypes.EpochTime<CoreTypes.UnitSeconds>> option
         [<System.Text.Json.Serialization.JsonPropertyName("end_time")>]
-        EndTime: Types.TimeOfDay option
+        EndTime: CoreTypes.TimeOfDay option
         [<System.Text.Json.Serialization.JsonPropertyName("duration")>]
-        Duration: Types.Duration option
+        Duration: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("indices")>]
         Indices: string option
         [<System.Text.Json.Serialization.JsonPropertyName("successful_shards")>]

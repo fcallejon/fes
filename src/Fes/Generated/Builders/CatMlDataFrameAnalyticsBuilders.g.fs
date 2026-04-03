@@ -31,7 +31,7 @@ module CatMlDataFrameAnalyticsBuilders =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: DataFrameAnalyticsRecord, value: Types.Id) =
+        member _.Id(state: DataFrameAnalyticsRecord, value: CoreTypes.Id) =
             { state with Id = Some value }
 
         [<CustomOperation("type'")>]
@@ -43,15 +43,15 @@ module CatMlDataFrameAnalyticsBuilders =
             { state with CreateTime = Some value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: DataFrameAnalyticsRecord, value: Types.VersionString) =
+        member _.Version(state: DataFrameAnalyticsRecord, value: CoreTypes.VersionString) =
             { state with Version = Some value }
 
         [<CustomOperation("sourceIndex")>]
-        member _.SourceIndex(state: DataFrameAnalyticsRecord, value: Types.IndexName) =
+        member _.SourceIndex(state: DataFrameAnalyticsRecord, value: CoreTypes.IndexName) =
             { state with SourceIndex = Some value }
 
         [<CustomOperation("destIndex")>]
-        member _.DestIndex(state: DataFrameAnalyticsRecord, value: Types.IndexName) =
+        member _.DestIndex(state: DataFrameAnalyticsRecord, value: CoreTypes.IndexName) =
             { state with DestIndex = Some value }
 
         [<CustomOperation("description")>]
@@ -79,15 +79,15 @@ module CatMlDataFrameAnalyticsBuilders =
             { state with AssignmentExplanation = Some value }
 
         [<CustomOperation("nodeId")>]
-        member _.NodeId(state: DataFrameAnalyticsRecord, value: Types.Id) =
+        member _.NodeId(state: DataFrameAnalyticsRecord, value: CoreTypes.Id) =
             { state with NodeId = Some value }
 
         [<CustomOperation("nodeName")>]
-        member _.NodeName(state: DataFrameAnalyticsRecord, value: Types.Name) =
+        member _.NodeName(state: DataFrameAnalyticsRecord, value: CoreTypes.Name) =
             { state with NodeName = Some value }
 
         [<CustomOperation("nodeEphemeralId")>]
-        member _.NodeEphemeralId(state: DataFrameAnalyticsRecord, value: Types.Id) =
+        member _.NodeEphemeralId(state: DataFrameAnalyticsRecord, value: CoreTypes.Id) =
             { state with NodeEphemeralId = Some value }
 
         [<CustomOperation("nodeAddress")>]

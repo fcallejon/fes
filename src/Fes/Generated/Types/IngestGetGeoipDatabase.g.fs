@@ -9,11 +9,11 @@ module IngestGetGeoipDatabase =
 
     type DatabaseConfigurationMetadata = {
         [<System.Text.Json.Serialization.JsonPropertyName("id")>]
-        Id: Types.Id
+        Id: CoreTypes.Id
         [<System.Text.Json.Serialization.JsonPropertyName("version")>]
-        Version: Types.Long
+        Version: CoreTypes.Long
         [<System.Text.Json.Serialization.JsonPropertyName("modified_date_millis")>]
-        ModifiedDateMillis: Types.EpochTime<Types.UnitMillis>
+        ModifiedDateMillis: CoreTypes.EpochTime<CoreTypes.UnitMillis>
         [<System.Text.Json.Serialization.JsonPropertyName("database")>]
         Database: IngestTypes.DatabaseConfiguration
     }

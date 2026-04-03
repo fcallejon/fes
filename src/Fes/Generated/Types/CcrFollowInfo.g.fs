@@ -9,25 +9,25 @@ module CcrFollowInfo =
 
     type FollowerIndexParameters = {
         [<System.Text.Json.Serialization.JsonPropertyName("max_outstanding_read_requests")>]
-        MaxOutstandingReadRequests: Types.Long option
+        MaxOutstandingReadRequests: CoreTypes.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("max_outstanding_write_requests")>]
-        MaxOutstandingWriteRequests: Types.Integer option
+        MaxOutstandingWriteRequests: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("max_read_request_operation_count")>]
-        MaxReadRequestOperationCount: Types.Integer option
+        MaxReadRequestOperationCount: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("max_read_request_size")>]
-        MaxReadRequestSize: Types.ByteSize option
+        MaxReadRequestSize: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("max_retry_delay")>]
-        MaxRetryDelay: Types.Duration option
+        MaxRetryDelay: CoreTypes.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("max_write_buffer_count")>]
-        MaxWriteBufferCount: Types.Integer option
+        MaxWriteBufferCount: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("max_write_buffer_size")>]
-        MaxWriteBufferSize: Types.ByteSize option
+        MaxWriteBufferSize: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("max_write_request_operation_count")>]
-        MaxWriteRequestOperationCount: Types.Integer option
+        MaxWriteRequestOperationCount: CoreTypes.Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("max_write_request_size")>]
-        MaxWriteRequestSize: Types.ByteSize option
+        MaxWriteRequestSize: CoreTypes.ByteSize option
         [<System.Text.Json.Serialization.JsonPropertyName("read_poll_timeout")>]
-        ReadPollTimeout: Types.Duration option
+        ReadPollTimeout: CoreTypes.Duration option
     }
 
     [<RequireQualifiedAccess>]
@@ -37,14 +37,14 @@ module CcrFollowInfo =
 
     type FollowerIndex = {
         [<System.Text.Json.Serialization.JsonPropertyName("follower_index")>]
-        FollowerIndex: Types.IndexName
+        FollowerIndex: CoreTypes.IndexName
         [<System.Text.Json.Serialization.JsonPropertyName("leader_index")>]
-        LeaderIndex: Types.IndexName
+        LeaderIndex: CoreTypes.IndexName
         [<System.Text.Json.Serialization.JsonPropertyName("parameters")>]
-        Parameters: CcrFollowInfo.FollowerIndexParameters option
+        Parameters: FollowerIndexParameters option
         [<System.Text.Json.Serialization.JsonPropertyName("remote_cluster")>]
-        RemoteCluster: Types.Name
+        RemoteCluster: CoreTypes.Name
         [<System.Text.Json.Serialization.JsonPropertyName("status")>]
-        Status: CcrFollowInfo.FollowerIndexStatus
+        Status: FollowerIndexStatus
     }
 

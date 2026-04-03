@@ -9,10 +9,10 @@ module AsyncSearchStatus =
 
     type StatusResponseBase = {
         [<System.Text.Json.Serialization.JsonPropertyName("_shards")>]
-        Shards: Types.ShardStatistics
+        Shards: CoreTypes.ShardStatistics
         [<System.Text.Json.Serialization.JsonPropertyName("_clusters")>]
-        Clusters: Types.ClusterStatistics option
+        Clusters: CoreTypes.ClusterStatistics option
         [<System.Text.Json.Serialization.JsonPropertyName("completion_status")>]
-        CompletionStatus: Types.Integer option
+        CompletionStatus: CoreTypes.Integer option
     }
 

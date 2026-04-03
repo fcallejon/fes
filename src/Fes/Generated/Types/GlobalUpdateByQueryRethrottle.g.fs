@@ -9,6 +9,6 @@ module GlobalUpdateByQueryRethrottle =
 
     type UpdateByQueryRethrottleNode = {
         [<System.Text.Json.Serialization.JsonPropertyName("tasks")>]
-        Tasks: Map<Types.TaskId, TasksTypes.TaskInfo>
+        Tasks: Map<CoreTypes.TaskId, TasksTypes.TaskInfo>
     }
 

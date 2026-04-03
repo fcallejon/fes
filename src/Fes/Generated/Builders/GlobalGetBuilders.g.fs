@@ -25,7 +25,7 @@ module GlobalGetBuilders =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: GetResult, value: Types.IndexName) =
+        member _.Index(state: GetResult, value: CoreTypes.IndexName) =
             { state with Index = value }
 
         [<CustomOperation("fields")>]
@@ -41,11 +41,11 @@ module GlobalGetBuilders =
             { state with Found = value }
 
         [<CustomOperation("id")>]
-        member _.Id(state: GetResult, value: Types.Id) =
+        member _.Id(state: GetResult, value: CoreTypes.Id) =
             { state with Id = value }
 
         [<CustomOperation("primaryTerm")>]
-        member _.PrimaryTerm(state: GetResult, value: Types.Long) =
+        member _.PrimaryTerm(state: GetResult, value: CoreTypes.Long) =
             { state with PrimaryTerm = Some value }
 
         [<CustomOperation("routing")>]
@@ -53,7 +53,7 @@ module GlobalGetBuilders =
             { state with Routing = Some value }
 
         [<CustomOperation("seqNo")>]
-        member _.SeqNo(state: GetResult, value: Types.SequenceNumber) =
+        member _.SeqNo(state: GetResult, value: CoreTypes.SequenceNumber) =
             { state with SeqNo = Some value }
 
         [<CustomOperation("source")>]
@@ -61,7 +61,7 @@ module GlobalGetBuilders =
             { state with Source = Some value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: GetResult, value: Types.VersionNumber) =
+        member _.Version(state: GetResult, value: CoreTypes.VersionNumber) =
             { state with Version = Some value }
 
     let getResult = GetResultBuilder()

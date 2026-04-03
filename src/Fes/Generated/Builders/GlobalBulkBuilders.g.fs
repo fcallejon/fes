@@ -22,11 +22,11 @@ module GlobalBulkBuilders =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: OperationBase, value: Types.Id) =
+        member _.Id(state: OperationBase, value: CoreTypes.Id) =
             { state with Id = Some value }
 
         [<CustomOperation("index")>]
-        member _.Index(state: OperationBase, value: Types.IndexName) =
+        member _.Index(state: OperationBase, value: CoreTypes.IndexName) =
             { state with Index = Some value }
 
         [<CustomOperation("routing")>]
@@ -34,19 +34,19 @@ module GlobalBulkBuilders =
             { state with Routing = Some value }
 
         [<CustomOperation("ifPrimaryTerm")>]
-        member _.IfPrimaryTerm(state: OperationBase, value: Types.Long) =
+        member _.IfPrimaryTerm(state: OperationBase, value: CoreTypes.Long) =
             { state with IfPrimaryTerm = Some value }
 
         [<CustomOperation("ifSeqNo")>]
-        member _.IfSeqNo(state: OperationBase, value: Types.SequenceNumber) =
+        member _.IfSeqNo(state: OperationBase, value: CoreTypes.SequenceNumber) =
             { state with IfSeqNo = Some value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: OperationBase, value: Types.VersionNumber) =
+        member _.Version(state: OperationBase, value: CoreTypes.VersionNumber) =
             { state with Version = Some value }
 
         [<CustomOperation("versionType")>]
-        member _.VersionType(state: OperationBase, value: Types.VersionType) =
+        member _.VersionType(state: OperationBase, value: CoreTypes.VersionType) =
             { state with VersionType = Some value }
 
     let operationBase = OperationBaseBuilder()
@@ -91,7 +91,7 @@ module GlobalBulkBuilders =
             { state with Index = value }
 
         [<CustomOperation("status")>]
-        member _.Status(state: ResponseItem, value: Types.Integer) =
+        member _.Status(state: ResponseItem, value: CoreTypes.Integer) =
             { state with Status = value }
 
         [<CustomOperation("failureStore")>]
@@ -99,11 +99,11 @@ module GlobalBulkBuilders =
             { state with FailureStore = Some value }
 
         [<CustomOperation("error")>]
-        member _.Error(state: ResponseItem, value: Types.ErrorCause) =
+        member _.Error(state: ResponseItem, value: CoreTypes.ErrorCause) =
             { state with Error = Some value }
 
         [<CustomOperation("primaryTerm")>]
-        member _.PrimaryTerm(state: ResponseItem, value: Types.Long) =
+        member _.PrimaryTerm(state: ResponseItem, value: CoreTypes.Long) =
             { state with PrimaryTerm = Some value }
 
         [<CustomOperation("result")>]
@@ -111,15 +111,15 @@ module GlobalBulkBuilders =
             { state with Result = Some value }
 
         [<CustomOperation("seqNo")>]
-        member _.SeqNo(state: ResponseItem, value: Types.SequenceNumber) =
+        member _.SeqNo(state: ResponseItem, value: CoreTypes.SequenceNumber) =
             { state with SeqNo = Some value }
 
         [<CustomOperation("shards")>]
-        member _.Shards(state: ResponseItem, value: Types.ShardStatistics) =
+        member _.Shards(state: ResponseItem, value: CoreTypes.ShardStatistics) =
             { state with Shards = Some value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: ResponseItem, value: Types.VersionNumber) =
+        member _.Version(state: ResponseItem, value: CoreTypes.VersionNumber) =
             { state with Version = Some value }
 
         [<CustomOperation("forcedRefresh")>]
@@ -127,7 +127,7 @@ module GlobalBulkBuilders =
             { state with ForcedRefresh = Some value }
 
         [<CustomOperation("get")>]
-        member _.Get(state: ResponseItem, value: Types.InlineGet<Map<string, System.Text.Json.JsonElement>>) =
+        member _.Get(state: ResponseItem, value: CoreTypes.InlineGet<Map<string, System.Text.Json.JsonElement>>) =
             { state with Get = Some value }
 
     let responseItem = ResponseItemBuilder()
@@ -157,7 +157,7 @@ module GlobalBulkBuilders =
             { state with DocAsUpsert = Some value }
 
         [<CustomOperation("script")>]
-        member _.Script(state: UpdateAction, value: Types.Script) =
+        member _.Script(state: UpdateAction, value: CoreTypes.Script) =
             { state with Script = Some value }
 
         [<CustomOperation("scriptedUpsert")>]
@@ -186,7 +186,7 @@ module GlobalBulkBuilders =
             { state with RequireAlias = Some value }
 
         [<CustomOperation("retryOnConflict")>]
-        member _.RetryOnConflict(state: UpdateOperation, value: Types.Integer) =
+        member _.RetryOnConflict(state: UpdateOperation, value: CoreTypes.Integer) =
             { state with RetryOnConflict = Some value }
 
     let updateOperation = UpdateOperationBuilder()
