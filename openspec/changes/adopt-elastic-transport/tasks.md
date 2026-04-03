@@ -24,17 +24,17 @@
 
 ## 5. Generator Changes
 
-- [ ] 5.1 Update `OperationEmitter.fs`: change `emitToRequest` to `emitToEndpoint` — produce `EndpointPath * PostData option` instead of `Result<HttpRequestMessage, exn>`
-- [ ] 5.2 Update `ESModuleEmitter.fs`: change `ES.send` signature and opens
-- [ ] 5.3 Regenerate all operation files and ES module
-- [ ] 5.4 Verify Fes.fsproj compiles with regenerated code
+- [x] 5.1 Update `OperationEmitter.fs`: change `emitToRequest` to `emitToEndpoint` — produce `EndpointPath * PostData voption` instead of `Result<HttpRequestMessage, exn>`
+- [x] 5.2 Update `ESModuleEmitter.fs`: rename to Endpoints module, remove old send
+- [x] 5.3 Regenerate all operation files and ES module
+- [x] 5.4 Verify Fes.fsproj compiles with regenerated code
 
 ## 6. Cleanup
 
-- [ ] 6.1 Remove `Http.fs` (replaced by `Transport.fs`)
-- [ ] 6.2 Adapt `Exceptions.fs` — simplify to work with `TransportException`/`ApiCallDetails` instead of custom parsing
-- [ ] 6.3 Remove old DSL files (`src/Fes/DSL/`) and old generator (`scripts/generate-dsl.fsx`, `scripts/esapi.2025-01.yaml`)
-- [ ] 6.4 Update `Fes.fsproj` compile order and remove old file references
+- [x] 6.1 Slim `Http.fs` to just `toQueryValue` utility (still used by generated code)
+- [ ] 6.2 Adapt `Exceptions.fs` — simplify to work with `TransportException`/`ApiCallDetails` instead of custom parsing (deferred)
+- [x] 6.3 Remove old DSL files (`src/Fes/DSL/`) and old generator (`scripts/generate-dsl.fsx`, `scripts/esapi.2025-01.yaml`)
+- [x] 6.4 Update `Fes.fsproj` compile order and remove old file references
 
 ## 7. Tests
 
