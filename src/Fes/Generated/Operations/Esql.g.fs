@@ -456,13 +456,6 @@ module EsqlOperations =
 
     type EsqlListQueriesResponse = System.Text.Json.JsonElement
 
-    type EsqlListQueriesRequestBuilder() =
-        member _.Yield(_: unit) : EsqlListQueriesRequest =
-            {
-            }
-
-    let esqlListQueriesRequest = EsqlListQueriesRequestBuilder()
-
     type EsqlPutViewRequest = {
         Name: Types.Id
         [<System.Text.Json.Serialization.JsonPropertyName("query")>]

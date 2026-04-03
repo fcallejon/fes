@@ -89,13 +89,6 @@ module SecurityOperations =
 
     type SecurityAuthenticateResponse = System.Text.Json.JsonElement
 
-    type SecurityAuthenticateRequestBuilder() =
-        member _.Yield(_: unit) : SecurityAuthenticateRequest =
-            {
-            }
-
-    let securityAuthenticateRequest = SecurityAuthenticateRequestBuilder()
-
     type SecurityBulkDeleteRoleRequest = {
         Refresh: Types.Refresh option
         [<System.Text.Json.Serialization.JsonPropertyName("names")>]
@@ -1185,13 +1178,6 @@ module SecurityOperations =
 
     type SecurityEnrollKibanaResponse = System.Text.Json.JsonElement
 
-    type SecurityEnrollKibanaRequestBuilder() =
-        member _.Yield(_: unit) : SecurityEnrollKibanaRequest =
-            {
-            }
-
-    let securityEnrollKibanaRequest = SecurityEnrollKibanaRequestBuilder()
-
     type SecurityEnrollNodeRequest = | SecurityEnrollNodeRequest
 
         with
@@ -1206,13 +1192,6 @@ module SecurityOperations =
             with ex -> Result.Error ex
 
     type SecurityEnrollNodeResponse = System.Text.Json.JsonElement
-
-    type SecurityEnrollNodeRequestBuilder() =
-        member _.Yield(_: unit) : SecurityEnrollNodeRequest =
-            {
-            }
-
-    let securityEnrollNodeRequest = SecurityEnrollNodeRequestBuilder()
 
     type SecurityGetApiKeyRequest = {
         Id: Types.Id option
@@ -1331,13 +1310,6 @@ module SecurityOperations =
             with ex -> Result.Error ex
 
     type SecurityGetBuiltinPrivilegesResponse = System.Text.Json.JsonElement
-
-    type SecurityGetBuiltinPrivilegesRequestBuilder() =
-        member _.Yield(_: unit) : SecurityGetBuiltinPrivilegesRequest =
-            {
-            }
-
-    let securityGetBuiltinPrivilegesRequest = SecurityGetBuiltinPrivilegesRequestBuilder()
 
     type SecurityGetPrivilegesRequest = {
         Application: Types.Name
@@ -1557,13 +1529,6 @@ module SecurityOperations =
 
     type SecurityGetStatsResponse = System.Text.Json.JsonElement
 
-    type SecurityGetStatsRequestBuilder() =
-        member _.Yield(_: unit) : SecurityGetStatsRequest =
-            {
-            }
-
-    let securityGetStatsRequest = SecurityGetStatsRequestBuilder()
-
     type SecurityGetTokenRequest = {
         [<System.Text.Json.Serialization.JsonPropertyName("grant_type")>]
         GrantType: Types.AccessTokenGrantType option
@@ -1704,13 +1669,6 @@ module SecurityOperations =
             with ex -> Result.Error ex
 
     type SecurityGetUserPrivilegesResponse = System.Text.Json.JsonElement
-
-    type SecurityGetUserPrivilegesRequestBuilder() =
-        member _.Yield(_: unit) : SecurityGetUserPrivilegesRequest =
-            {
-            }
-
-    let securityGetUserPrivilegesRequest = SecurityGetUserPrivilegesRequestBuilder()
 
     type SecurityGetUserProfileRequest = {
         Uid: System.Text.Json.JsonElement
@@ -2626,7 +2584,7 @@ module SecurityOperations =
             { state with Refresh = Some value }
 
         [<CustomOperation("username")>]
-        member _.Username(state: SecurityPutUserRequest, value: Types.Username) =
+        member _.BodyUsername(state: SecurityPutUserRequest, value: Types.Username) =
             { state with bodyUsername = Some value }
 
         [<CustomOperation("email")>]
@@ -2662,7 +2620,7 @@ module SecurityOperations =
     module PutUser =
         let withRefresh (value: Types.Refresh) (req: SecurityPutUserRequest) =
             { req with Refresh = Some value }
-        let withUsername (value: Types.Username) (req: SecurityPutUserRequest) =
+        let withBodyUsername (value: Types.Username) (req: SecurityPutUserRequest) =
             { req with bodyUsername = Some value }
         let withEmail (value: string option) (req: SecurityPutUserRequest) =
             { req with Email = Some value }
@@ -3298,8 +3256,8 @@ module SecurityOperations =
         member _.Size(state: SecuritySuggestUserProfilesRequest, value: Types.Long) =
             { state with Size = Some value }
 
-        [<CustomOperation("data")>]
-        member _.Data(state: SecuritySuggestUserProfilesRequest, value: System.Text.Json.JsonElement) =
+        [<CustomOperation("bodyData")>]
+        member _.BodyData(state: SecuritySuggestUserProfilesRequest, value: System.Text.Json.JsonElement) =
             { state with bodyData = Some value }
 
         [<CustomOperation("hint")>]
@@ -3310,12 +3268,12 @@ module SecurityOperations =
 
     module SuggestUserProfiles =
         let withData (value: System.Text.Json.JsonElement) (req: SecuritySuggestUserProfilesRequest) =
-            { req with bodyData = Some value }
+            { req with Data = Some value }
         let withName (value: string) (req: SecuritySuggestUserProfilesRequest) =
             { req with Name = Some value }
         let withSize (value: Types.Long) (req: SecuritySuggestUserProfilesRequest) =
             { req with Size = Some value }
-        let withData (value: System.Text.Json.JsonElement) (req: SecuritySuggestUserProfilesRequest) =
+        let withBodyData (value: System.Text.Json.JsonElement) (req: SecuritySuggestUserProfilesRequest) =
             { req with bodyData = Some value }
         let withHint (value: Types.Hint) (req: SecuritySuggestUserProfilesRequest) =
             { req with Hint = Some value }

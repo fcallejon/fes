@@ -308,24 +308,24 @@ module EqlOperations =
         member _.Filter(state: EqlSearchRequest, value: System.Text.Json.JsonElement) =
             { state with Filter = Some value }
 
-        [<CustomOperation("keepAlive")>]
-        member _.KeepAlive(state: EqlSearchRequest, value: Types.Duration) =
+        [<CustomOperation("bodyKeepAlive")>]
+        member _.BodyKeepAlive(state: EqlSearchRequest, value: Types.Duration) =
             { state with bodyKeepAlive = Some value }
 
-        [<CustomOperation("keepOnCompletion")>]
-        member _.KeepOnCompletion(state: EqlSearchRequest, value: bool) =
+        [<CustomOperation("bodyKeepOnCompletion")>]
+        member _.BodyKeepOnCompletion(state: EqlSearchRequest, value: bool) =
             { state with bodyKeepOnCompletion = Some value }
 
-        [<CustomOperation("waitForCompletionTimeout")>]
-        member _.WaitForCompletionTimeout(state: EqlSearchRequest, value: Types.Duration) =
+        [<CustomOperation("bodyWaitForCompletionTimeout")>]
+        member _.BodyWaitForCompletionTimeout(state: EqlSearchRequest, value: Types.Duration) =
             { state with bodyWaitForCompletionTimeout = Some value }
 
-        [<CustomOperation("allowPartialSearchResults")>]
-        member _.AllowPartialSearchResults(state: EqlSearchRequest, value: bool) =
+        [<CustomOperation("bodyAllowPartialSearchResults")>]
+        member _.BodyAllowPartialSearchResults(state: EqlSearchRequest, value: bool) =
             { state with bodyAllowPartialSearchResults = Some value }
 
-        [<CustomOperation("allowPartialSequenceResults")>]
-        member _.AllowPartialSequenceResults(state: EqlSearchRequest, value: bool) =
+        [<CustomOperation("bodyAllowPartialSequenceResults")>]
+        member _.BodyAllowPartialSequenceResults(state: EqlSearchRequest, value: bool) =
             { state with bodyAllowPartialSequenceResults = Some value }
 
         [<CustomOperation("size")>]
@@ -354,9 +354,9 @@ module EqlOperations =
         let withAllowNoIndices (value: bool) (req: EqlSearchRequest) =
             { req with AllowNoIndices = Some value }
         let withAllowPartialSearchResults (value: bool) (req: EqlSearchRequest) =
-            { req with bodyAllowPartialSearchResults = Some value }
+            { req with AllowPartialSearchResults = Some value }
         let withAllowPartialSequenceResults (value: bool) (req: EqlSearchRequest) =
-            { req with bodyAllowPartialSequenceResults = Some value }
+            { req with AllowPartialSequenceResults = Some value }
         let withExpandWildcards (value: Types.ExpandWildcards) (req: EqlSearchRequest) =
             { req with ExpandWildcards = Some value }
         let withCcsMinimizeRoundtrips (value: bool) (req: EqlSearchRequest) =
@@ -364,11 +364,11 @@ module EqlOperations =
         let withIgnoreUnavailable (value: bool) (req: EqlSearchRequest) =
             { req with IgnoreUnavailable = Some value }
         let withKeepAlive (value: Types.Duration) (req: EqlSearchRequest) =
-            { req with bodyKeepAlive = Some value }
+            { req with KeepAlive = Some value }
         let withKeepOnCompletion (value: bool) (req: EqlSearchRequest) =
-            { req with bodyKeepOnCompletion = Some value }
+            { req with KeepOnCompletion = Some value }
         let withWaitForCompletionTimeout (value: Types.Duration) (req: EqlSearchRequest) =
-            { req with bodyWaitForCompletionTimeout = Some value }
+            { req with WaitForCompletionTimeout = Some value }
         let withProjectRouting (value: Types.ProjectRouting) (req: EqlSearchRequest) =
             { req with ProjectRouting = Some value }
         let withQuery (value: string) (req: EqlSearchRequest) =
@@ -385,15 +385,15 @@ module EqlOperations =
             { req with FetchSize = Some value }
         let withFilter (value: System.Text.Json.JsonElement) (req: EqlSearchRequest) =
             { req with Filter = Some value }
-        let withKeepAlive (value: Types.Duration) (req: EqlSearchRequest) =
+        let withBodyKeepAlive (value: Types.Duration) (req: EqlSearchRequest) =
             { req with bodyKeepAlive = Some value }
-        let withKeepOnCompletion (value: bool) (req: EqlSearchRequest) =
+        let withBodyKeepOnCompletion (value: bool) (req: EqlSearchRequest) =
             { req with bodyKeepOnCompletion = Some value }
-        let withWaitForCompletionTimeout (value: Types.Duration) (req: EqlSearchRequest) =
+        let withBodyWaitForCompletionTimeout (value: Types.Duration) (req: EqlSearchRequest) =
             { req with bodyWaitForCompletionTimeout = Some value }
-        let withAllowPartialSearchResults (value: bool) (req: EqlSearchRequest) =
+        let withBodyAllowPartialSearchResults (value: bool) (req: EqlSearchRequest) =
             { req with bodyAllowPartialSearchResults = Some value }
-        let withAllowPartialSequenceResults (value: bool) (req: EqlSearchRequest) =
+        let withBodyAllowPartialSequenceResults (value: bool) (req: EqlSearchRequest) =
             { req with bodyAllowPartialSequenceResults = Some value }
         let withSize (value: Types.Uint) (req: EqlSearchRequest) =
             { req with Size = Some value }

@@ -583,7 +583,7 @@ module WatcherOperations =
                 let queryParams =
                     [
                         req.EmitStacktraces |> Option.map (fun v -> "emit_stacktraces", Fes.Http.toQueryValue v)
-                        req.Metric |> Option.map (fun v -> "metric", Fes.Http.toQueryValue v)
+                        req.queryMetric |> Option.map (fun v -> "metric", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -613,8 +613,8 @@ module WatcherOperations =
         member _.EmitStacktraces(state: WatcherStatsRequest, value: bool) =
             { state with EmitStacktraces = Some value }
 
-        [<CustomOperation("metric")>]
-        member _.Metric(state: WatcherStatsRequest, value: System.Text.Json.JsonElement) =
+        [<CustomOperation("queryMetric")>]
+        member _.QueryMetric(state: WatcherStatsRequest, value: System.Text.Json.JsonElement) =
             { state with queryMetric = Some value }
 
     let watcherStatsRequest = WatcherStatsRequestBuilder()

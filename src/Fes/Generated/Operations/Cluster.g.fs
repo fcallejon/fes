@@ -101,46 +101,46 @@ module ClusterOperations =
         member _.MasterTimeout(state: ClusterAllocationExplainRequest, value: Types.Duration) =
             { state with MasterTimeout = Some value }
 
-        [<CustomOperation("index")>]
-        member _.Index(state: ClusterAllocationExplainRequest, value: Types.IndexName) =
+        [<CustomOperation("bodyIndex")>]
+        member _.BodyIndex(state: ClusterAllocationExplainRequest, value: Types.IndexName) =
             { state with bodyIndex = Some value }
 
-        [<CustomOperation("shard")>]
-        member _.Shard(state: ClusterAllocationExplainRequest, value: Types.Integer) =
+        [<CustomOperation("bodyShard")>]
+        member _.BodyShard(state: ClusterAllocationExplainRequest, value: Types.Integer) =
             { state with bodyShard = Some value }
 
-        [<CustomOperation("primary")>]
-        member _.Primary(state: ClusterAllocationExplainRequest, value: bool) =
+        [<CustomOperation("bodyPrimary")>]
+        member _.BodyPrimary(state: ClusterAllocationExplainRequest, value: bool) =
             { state with bodyPrimary = Some value }
 
-        [<CustomOperation("currentNode")>]
-        member _.CurrentNode(state: ClusterAllocationExplainRequest, value: Types.NodeId) =
+        [<CustomOperation("bodyCurrentNode")>]
+        member _.BodyCurrentNode(state: ClusterAllocationExplainRequest, value: Types.NodeId) =
             { state with bodyCurrentNode = Some value }
 
     let clusterAllocationExplainRequest = ClusterAllocationExplainRequestBuilder()
 
     module AllocationExplain =
         let withIndex (value: Types.IndexName) (req: ClusterAllocationExplainRequest) =
-            { req with bodyIndex = Some value }
+            { req with Index = Some value }
         let withShard (value: Types.Integer) (req: ClusterAllocationExplainRequest) =
-            { req with bodyShard = Some value }
+            { req with Shard = Some value }
         let withPrimary (value: bool) (req: ClusterAllocationExplainRequest) =
-            { req with bodyPrimary = Some value }
+            { req with Primary = Some value }
         let withCurrentNode (value: Types.NodeId) (req: ClusterAllocationExplainRequest) =
-            { req with bodyCurrentNode = Some value }
+            { req with CurrentNode = Some value }
         let withIncludeDiskInfo (value: bool) (req: ClusterAllocationExplainRequest) =
             { req with IncludeDiskInfo = Some value }
         let withIncludeYesDecisions (value: bool) (req: ClusterAllocationExplainRequest) =
             { req with IncludeYesDecisions = Some value }
         let withMasterTimeout (value: Types.Duration) (req: ClusterAllocationExplainRequest) =
             { req with MasterTimeout = Some value }
-        let withIndex (value: Types.IndexName) (req: ClusterAllocationExplainRequest) =
+        let withBodyIndex (value: Types.IndexName) (req: ClusterAllocationExplainRequest) =
             { req with bodyIndex = Some value }
-        let withShard (value: Types.Integer) (req: ClusterAllocationExplainRequest) =
+        let withBodyShard (value: Types.Integer) (req: ClusterAllocationExplainRequest) =
             { req with bodyShard = Some value }
-        let withPrimary (value: bool) (req: ClusterAllocationExplainRequest) =
+        let withBodyPrimary (value: bool) (req: ClusterAllocationExplainRequest) =
             { req with bodyPrimary = Some value }
-        let withCurrentNode (value: Types.NodeId) (req: ClusterAllocationExplainRequest) =
+        let withBodyCurrentNode (value: Types.NodeId) (req: ClusterAllocationExplainRequest) =
             { req with bodyCurrentNode = Some value }
 
     type ClusterDeleteComponentTemplateRequest = {
@@ -924,13 +924,6 @@ module ClusterOperations =
             with ex -> Result.Error ex
 
     type ClusterRemoteInfoResponse = Map<string, Types.ClusterRemoteInfo>
-
-    type ClusterRemoteInfoRequestBuilder() =
-        member _.Yield(_: unit) : ClusterRemoteInfoRequest =
-            {
-            }
-
-    let clusterRemoteInfoRequest = ClusterRemoteInfoRequestBuilder()
 
     type ClusterRerouteRequest = {
         DryRun: bool option

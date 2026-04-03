@@ -192,13 +192,6 @@ module IngestOperations =
 
     type IngestGeoIpStatsResponse = System.Text.Json.JsonElement
 
-    type IngestGeoIpStatsRequestBuilder() =
-        member _.Yield(_: unit) : IngestGeoIpStatsRequest =
-            {
-            }
-
-    let ingestGeoIpStatsRequest = IngestGeoIpStatsRequestBuilder()
-
     type IngestGetGeoipDatabaseRequest = {
         Id: Types.Ids
     }
@@ -326,13 +319,6 @@ module IngestOperations =
             with ex -> Result.Error ex
 
     type IngestProcessorGrokResponse = System.Text.Json.JsonElement
-
-    type IngestProcessorGrokRequestBuilder() =
-        member _.Yield(_: unit) : IngestProcessorGrokRequest =
-            {
-            }
-
-    let ingestProcessorGrokRequest = IngestProcessorGrokRequestBuilder()
 
     type IngestPutGeoipDatabaseRequest = {
         Id: Types.Id

@@ -201,13 +201,6 @@ module IlmOperations =
 
     type IlmGetStatusResponse = System.Text.Json.JsonElement
 
-    type IlmGetStatusRequestBuilder() =
-        member _.Yield(_: unit) : IlmGetStatusRequest =
-            {
-            }
-
-    let ilmGetStatusRequest = IlmGetStatusRequestBuilder()
-
     type IlmMigrateToDataTiersRequest = {
         DryRun: bool option
         MasterTimeout: Types.Duration option
@@ -378,7 +371,7 @@ module IlmOperations =
             { state with Timeout = Some value }
 
         [<CustomOperation("policy")>]
-        member _.Policy(state: IlmPutLifecycleRequest, value: Types.IlmTypesPolicy) =
+        member _.BodyPolicy(state: IlmPutLifecycleRequest, value: Types.IlmTypesPolicy) =
             { state with bodyPolicy = Some value }
 
     let ilmPutLifecycleRequest = IlmPutLifecycleRequestBuilder()
@@ -388,7 +381,7 @@ module IlmOperations =
             { req with MasterTimeout = Some value }
         let withTimeout (value: Types.Duration) (req: IlmPutLifecycleRequest) =
             { req with Timeout = Some value }
-        let withPolicy (value: Types.IlmTypesPolicy) (req: IlmPutLifecycleRequest) =
+        let withBodyPolicy (value: Types.IlmTypesPolicy) (req: IlmPutLifecycleRequest) =
             { req with bodyPolicy = Some value }
 
     type IlmRemovePolicyRequest = {

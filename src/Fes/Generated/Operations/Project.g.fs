@@ -122,13 +122,6 @@ module ProjectOperations =
 
     type ProjectGetManyRoutingResponse = Types.NamedProjectRoutingExpressions
 
-    type ProjectGetManyRoutingRequestBuilder() =
-        member _.Yield(_: unit) : ProjectGetManyRoutingRequest =
-            {
-            }
-
-    let projectGetManyRoutingRequest = ProjectGetManyRoutingRequestBuilder()
-
     type ProjectGetRoutingRequest = {
         Name: string
     }

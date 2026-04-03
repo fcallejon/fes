@@ -49,7 +49,7 @@ let emitESModule (index: TypeIndex.TypeIndex) : string * string =
 
                 let reqTd = TypeIndex.resolve index ep.Request
                 match reqTd with
-                | TypeDefinition.Request request ->
+                | TypeDefinition.Request request when request.Generics.IsEmpty ->
                     let pathParams = request.Path
                     let ctx = TypeResolver.makeContext index request.Generics
 
@@ -83,27 +83,41 @@ let emitESModule (index: TypeIndex.TypeIndex) : string * string =
                         w.Line "req"
                         w.Dedent()
                     else
-                        w.Line $"let {funcName} {paramList} : {reqTypeName} ="
-                        w.Indent()
-                        w.Line "{"
-                        w.Indent()
-                        for p in pathParams do
-                            let fieldName = Namespacing.toFieldName p.Name
-                            let argName = Namespacing.toFunctionName p.Name
-                            w.Line $"{fieldName} = {argName}"
-                        w.Dedent()
-                        w.Line "}"
-                        w.Dedent()
+                        if pathParams.IsEmpty then
+                            w.Line $"let {funcName} {paramList} : {reqTypeName} ="
+                            w.Indent()
+                            w.Line $"Unchecked.defaultof<{reqTypeName}>"
+                            w.Dedent()
+                        else
+                            w.Line $"let {funcName} {paramList} : {reqTypeName} ="
+                            w.Indent()
+                            w.Line "{"
+                            w.Indent()
+                            for p in pathParams do
+                                let fieldName = Namespacing.toFieldName p.Name
+                                let argName = Namespacing.toFunctionName p.Name
+                                w.Line $"{fieldName} = {argName}"
+                            w.Dedent()
+                            w.Line "}"
+                            w.Dedent()
                     w.BlankLine()
                 | _ -> ()
 
         | Some nsName, endpoints ->
+            // Filter to non-generic endpoints only
+            let nonGenericEndpoints =
+                endpoints |> List.filter (fun ep ->
+                    match TypeIndex.tryResolve index ep.Request with
+                    | Some (TypeDefinition.Request r) -> r.Generics.IsEmpty
+                    | _ -> false)
+            if nonGenericEndpoints.IsEmpty then () else
+
             // Sub-module for namespaced endpoints
             w.Line $"module {nsName} ="
             w.BlankLine()
             w.Indent()
 
-            for ep in endpoints do
+            for ep in nonGenericEndpoints do
                 let parts = ep.Name.Split('.')
                 let funcName = Namespacing.toFunctionName (parts |> Array.last)
                 let reqTypeName =
@@ -112,7 +126,7 @@ let emitESModule (index: TypeIndex.TypeIndex) : string * string =
 
                 let reqTd = TypeIndex.resolve index ep.Request
                 match reqTd with
-                | TypeDefinition.Request request ->
+                | TypeDefinition.Request request when request.Generics.IsEmpty ->
                     let pathParams = request.Path
                     let ctx = TypeResolver.makeContext index request.Generics
 

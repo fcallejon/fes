@@ -91,13 +91,6 @@ module TransformOperations =
 
     type TransformGetNodeStatsResponse = Types.TransformNodeFullStats
 
-    type TransformGetNodeStatsRequestBuilder() =
-        member _.Yield(_: unit) : TransformGetNodeStatsRequest =
-            {
-            }
-
-    let transformGetNodeStatsRequest = TransformGetNodeStatsRequestBuilder()
-
     type TransformGetTransformRequest = {
         TransformId: Types.Names
         AllowNoMatch: bool option
