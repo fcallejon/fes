@@ -437,7 +437,7 @@ module SecurityTypesBuilders =
         let all (value: Types.RoleMappingRule list) =
             Types.RoleMappingRule.All value
 
-        let field (field: string) (value: System.Text.Json.JsonElement) =
+        let field (field: Types.Field) (value: System.Text.Json.JsonElement) =
             Types.RoleMappingRule.Field (field, value)
 
         let except (value: Types.RoleMappingRule) =

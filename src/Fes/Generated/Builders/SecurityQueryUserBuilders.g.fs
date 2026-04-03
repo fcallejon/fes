@@ -20,27 +20,27 @@ module SecurityQueryUserBuilders =
         let exists (value: Types.ExistsQuery) =
             Types.UserQueryContainer.Exists value
 
-        let match' (field: string) (value: Types.MatchQuery) =
+        let match' (field: Types.Field) (value: Types.MatchQuery) =
             Types.UserQueryContainer.Match (field, value)
 
         let matchAll (value: Types.MatchAllQuery) =
             Types.UserQueryContainer.MatchAll value
 
-        let prefix (field: string) (value: Types.PrefixQuery) =
+        let prefix (field: Types.Field) (value: Types.PrefixQuery) =
             Types.UserQueryContainer.Prefix (field, value)
 
-        let range (field: string) (value: Types.RangeQuery) =
+        let range (field: Types.Field) (value: Types.RangeQuery) =
             Types.UserQueryContainer.Range (field, value)
 
         let simpleQueryString (value: Types.SimpleQueryStringQuery) =
             Types.UserQueryContainer.SimpleQueryString value
 
-        let term (field: string) (value: Types.TermQuery) =
+        let term (field: Types.Field) (value: Types.TermQuery) =
             Types.UserQueryContainer.Term (field, value)
 
         let terms (value: Types.TermsQuery) =
             Types.UserQueryContainer.Terms value
 
-        let wildcard (field: string) (value: Types.WildcardQuery) =
+        let wildcard (field: Types.Field) (value: Types.WildcardQuery) =
             Types.UserQueryContainer.Wildcard (field, value)
 

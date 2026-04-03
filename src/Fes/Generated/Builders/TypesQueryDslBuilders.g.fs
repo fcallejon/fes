@@ -1431,7 +1431,7 @@ module TypesQueryDslBuilders =
         let boosting (value: Types.BoostingQuery) =
             Types.QueryContainer.Boosting value
 
-        let common (field: string) (value: Types.CommonTermsQuery) =
+        let common (field: Types.Field) (value: Types.CommonTermsQuery) =
             Types.QueryContainer.Common (field, value)
 
         let combinedFields (value: Types.CombinedFieldsQuery) =
@@ -1452,7 +1452,7 @@ module TypesQueryDslBuilders =
         let functionScore (value: Types.FunctionScoreQuery) =
             Types.QueryContainer.FunctionScore value
 
-        let fuzzy (field: string) (value: Types.FuzzyQuery) =
+        let fuzzy (field: Types.Field) (value: Types.FuzzyQuery) =
             Types.QueryContainer.Fuzzy (field, value)
 
         let geoBoundingBox (value: Types.GeoBoundingBoxQuery) =
@@ -1461,7 +1461,7 @@ module TypesQueryDslBuilders =
         let geoDistance (value: Types.GeoDistanceQuery) =
             Types.QueryContainer.GeoDistance value
 
-        let geoGrid (field: string) (value: Types.GeoGridQuery) =
+        let geoGrid (field: Types.Field) (value: Types.GeoGridQuery) =
             Types.QueryContainer.GeoGrid (field, value)
 
         let geoPolygon (value: Types.GeoPolygonQuery) =
@@ -1479,28 +1479,28 @@ module TypesQueryDslBuilders =
         let ids (value: Types.IdsQuery) =
             Types.QueryContainer.Ids value
 
-        let intervals (field: string) (value: Types.IntervalsQuery) =
+        let intervals (field: Types.Field) (value: Types.IntervalsQuery) =
             Types.QueryContainer.Intervals (field, value)
 
         let knn (value: Types.KnnQuery) =
             Types.QueryContainer.Knn value
 
-        let match' (field: string) (value: Types.MatchQuery) =
+        let match' (field: Types.Field) (value: Types.MatchQuery) =
             Types.QueryContainer.Match (field, value)
 
         let matchAll (value: Types.MatchAllQuery) =
             Types.QueryContainer.MatchAll value
 
-        let matchBoolPrefix (field: string) (value: Types.MatchBoolPrefixQuery) =
+        let matchBoolPrefix (field: Types.Field) (value: Types.MatchBoolPrefixQuery) =
             Types.QueryContainer.MatchBoolPrefix (field, value)
 
         let matchNone (value: Types.MatchNoneQuery) =
             Types.QueryContainer.MatchNone value
 
-        let matchPhrase (field: string) (value: Types.MatchPhraseQuery) =
+        let matchPhrase (field: Types.Field) (value: Types.MatchPhraseQuery) =
             Types.QueryContainer.MatchPhrase (field, value)
 
-        let matchPhrasePrefix (field: string) (value: Types.MatchPhrasePrefixQuery) =
+        let matchPhrasePrefix (field: Types.Field) (value: Types.MatchPhrasePrefixQuery) =
             Types.QueryContainer.MatchPhrasePrefix (field, value)
 
         let moreLikeThis (value: Types.MoreLikeThisQuery) =
@@ -1521,19 +1521,19 @@ module TypesQueryDslBuilders =
         let pinned (value: Types.PinnedQuery) =
             Types.QueryContainer.Pinned value
 
-        let prefix (field: string) (value: Types.PrefixQuery) =
+        let prefix (field: Types.Field) (value: Types.PrefixQuery) =
             Types.QueryContainer.Prefix (field, value)
 
         let queryString (value: Types.QueryStringQuery) =
             Types.QueryContainer.QueryString value
 
-        let range (field: string) (value: Types.RangeQuery) =
+        let range (field: Types.Field) (value: Types.RangeQuery) =
             Types.QueryContainer.Range (field, value)
 
         let rankFeature (value: Types.RankFeatureQuery) =
             Types.QueryContainer.RankFeature value
 
-        let regexp (field: string) (value: Types.RegexpQuery) =
+        let regexp (field: Types.Field) (value: Types.RegexpQuery) =
             Types.QueryContainer.Regexp (field, value)
 
         let rule (value: Types.RuleQuery) =
@@ -1575,7 +1575,7 @@ module TypesQueryDslBuilders =
         let spanOr (value: Types.SpanOrQuery) =
             Types.QueryContainer.SpanOr value
 
-        let spanTerm (field: string) (value: Types.SpanTermQuery) =
+        let spanTerm (field: Types.Field) (value: Types.SpanTermQuery) =
             Types.QueryContainer.SpanTerm (field, value)
 
         let spanWithin (value: Types.SpanWithinQuery) =
@@ -1584,22 +1584,22 @@ module TypesQueryDslBuilders =
         let sparseVector (value: Types.SparseVectorQuery) =
             Types.QueryContainer.SparseVector value
 
-        let term (field: string) (value: Types.TermQuery) =
+        let term (field: Types.Field) (value: Types.TermQuery) =
             Types.QueryContainer.Term (field, value)
 
         let terms (value: Types.TermsQuery) =
             Types.QueryContainer.Terms value
 
-        let termsSet (field: string) (value: Types.TermsSetQuery) =
+        let termsSet (field: Types.Field) (value: Types.TermsSetQuery) =
             Types.QueryContainer.TermsSet (field, value)
 
-        let textExpansion (field: string) (value: Types.TextExpansionQuery) =
+        let textExpansion (field: Types.Field) (value: Types.TextExpansionQuery) =
             Types.QueryContainer.TextExpansion (field, value)
 
-        let weightedTokens (field: string) (value: Types.WeightedTokensQuery) =
+        let weightedTokens (field: Types.Field) (value: Types.WeightedTokensQuery) =
             Types.QueryContainer.WeightedTokens (field, value)
 
-        let wildcard (field: string) (value: Types.WildcardQuery) =
+        let wildcard (field: Types.Field) (value: Types.WildcardQuery) =
             Types.QueryContainer.Wildcard (field, value)
 
         let wrapper (value: Types.WrapperQuery) =
@@ -2031,7 +2031,7 @@ module TypesQueryDslBuilders =
         let spanOr (value: Types.SpanOrQuery) =
             Types.SpanQuery.SpanOr value
 
-        let spanTerm (field: string) (value: Types.SpanTermQuery) =
+        let spanTerm (field: Types.Field) (value: Types.SpanTermQuery) =
             Types.SpanQuery.SpanTerm (field, value)
 
         let spanWithin (value: Types.SpanWithinQuery) =

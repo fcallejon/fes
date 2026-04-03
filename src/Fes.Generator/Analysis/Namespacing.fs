@@ -24,7 +24,7 @@ let escapeKeyword (name: string) =
 /// Convert a string to PascalCase
 let toPascalCase (s: string) =
     let sanitised =
-        s.Replace(">", "Gt").Replace("<", "Lt").Replace(">=", "Gte").Replace("<=", "Lte")
+        s.Replace(">=", "Gte").Replace("<=", "Lte").Replace(">", "Gt").Replace("<", "Lt")
          .Replace("@", "At").Replace("#", "Hash").Replace("$", "Dollar")
          .Replace("%", "Percent").Replace("&", "And").Replace("*", "Star")
          .Replace("+", "Plus").Replace("=", "Eq").Replace("!", "Bang")

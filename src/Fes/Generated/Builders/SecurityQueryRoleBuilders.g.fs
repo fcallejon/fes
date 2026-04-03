@@ -20,27 +20,27 @@ module SecurityQueryRoleBuilders =
         let ids (value: Types.IdsQuery) =
             Types.RoleQueryContainer.Ids value
 
-        let match' (field: string) (value: Types.MatchQuery) =
+        let match' (field: Types.Field) (value: Types.MatchQuery) =
             Types.RoleQueryContainer.Match (field, value)
 
         let matchAll (value: Types.MatchAllQuery) =
             Types.RoleQueryContainer.MatchAll value
 
-        let prefix (field: string) (value: Types.PrefixQuery) =
+        let prefix (field: Types.Field) (value: Types.PrefixQuery) =
             Types.RoleQueryContainer.Prefix (field, value)
 
-        let range (field: string) (value: Types.RangeQuery) =
+        let range (field: Types.Field) (value: Types.RangeQuery) =
             Types.RoleQueryContainer.Range (field, value)
 
         let simpleQueryString (value: Types.SimpleQueryStringQuery) =
             Types.RoleQueryContainer.SimpleQueryString value
 
-        let term (field: string) (value: Types.TermQuery) =
+        let term (field: Types.Field) (value: Types.TermQuery) =
             Types.RoleQueryContainer.Term (field, value)
 
         let terms (value: Types.TermsQuery) =
             Types.RoleQueryContainer.Terms value
 
-        let wildcard (field: string) (value: Types.WildcardQuery) =
+        let wildcard (field: Types.Field) (value: Types.WildcardQuery) =
             Types.RoleQueryContainer.Wildcard (field, value)
 
