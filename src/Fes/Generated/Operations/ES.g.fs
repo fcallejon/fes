@@ -61,7 +61,7 @@ module Endpoints =
             req
 
     /// Checks if the specified combination of method, API, parameters, and arbitrary capabilities are supported.
-    let capabilities  =
+    let capabilities () =
         let mutable req = Unchecked.defaultof<CapabilitiesRequest>
         req
 
@@ -72,7 +72,7 @@ module Endpoints =
         req
 
     /// Close a point in time.
-    let closePointInTime  =
+    let closePointInTime () =
         let mutable req = Unchecked.defaultof<ClosePointInTimeRequest>
         req
 
@@ -226,7 +226,7 @@ module Endpoints =
         req
 
     /// Reindex documents.
-    let reindex  =
+    let reindex () =
         let mutable req = Unchecked.defaultof<ReindexRequest>
         req
 
@@ -243,7 +243,7 @@ module Endpoints =
         req
 
     /// Run a script.
-    let scriptsPainlessExecute  =
+    let scriptsPainlessExecute () =
         let mutable req = Unchecked.defaultof<ScriptsPainlessExecuteRequest>
         req
 

@@ -35,9 +35,15 @@ let main args =
         1
     else
 
-    let model = SchemaReader.readSchemaFile schemaPath
-    let nameMap = FileEmitter.buildNameMap model.Types
-    let index = TypeIndex.build model |> TypeIndex.withNameMap nameMap
+    let model, nameMap, index =
+        try
+            let model = SchemaReader.readSchemaFile schemaPath
+            let nameMap = FileEmitter.buildNameMap model.Types
+            let index = TypeIndex.build model |> TypeIndex.withNameMap nameMap
+            model, nameMap, index
+        with ex ->
+            eprintfn $"Error: failed to read schema '{schemaPath}': {ex.Message}"
+            exit 1
 
     let endpointsToGenerate = index.EndpointsToGenerate.Length
 

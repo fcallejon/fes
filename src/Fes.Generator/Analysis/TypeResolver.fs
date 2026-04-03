@@ -76,8 +76,11 @@ let rec resolveValueOf (ctx: ResolveContext) (v: ValueOf) : string =
         $"Map<{resolveValueOf ctx key}, {resolveValueOf ctx value}>"
     | ValueOf.UserDefinedValue ->
         "System.Text.Json.JsonElement"
-    | ValueOf.LiteralValue _ ->
-        "string" // literals are typically string constants
+    | ValueOf.LiteralValue literal ->
+        match literal with
+        | LiteralValue.String _ -> "string"
+        | LiteralValue.Bool _ -> "bool"
+        | LiteralValue.Number _ -> "float"
 
 and private isNullType (v: ValueOf) =
     match v with

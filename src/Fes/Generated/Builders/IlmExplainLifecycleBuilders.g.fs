@@ -96,7 +96,7 @@ module IlmExplainLifecycleBuilders =
             { state with LifecycleDateMillis = Some value }
 
         [<CustomOperation("managed")>]
-        member _.Managed(state: Types.LifecycleExplainManaged, value: string) =
+        member _.Managed(state: Types.LifecycleExplainManaged, value: bool) =
             { state with Managed = value }
 
         [<CustomOperation("phase")>]
