@@ -26,15 +26,15 @@
 
 ## 5. Type Emitter
 
-- [ ] 5.1 Implement enum emission: closed enums as DUs, open enums with `| Custom of string` case, `[<RequireQualifiedAccess>]`
-- [ ] 5.2 Implement interface-to-record emission: properties to record fields, optional/required handling, `[<JsonPropertyName>]` attributes, PascalCase naming
-- [ ] 5.3 Implement container variant emission: non-containerProperty fields as DU cases, containerProperty fields as separate metadata record, SingleKeyDictionary → `field: Field` tuple in case, `nonExhaustive` → `| Unknown of string * JsonElement`
-- [ ] 5.4 Implement internal-tag variant emission: DU cases keyed by tag field value
-- [ ] 5.5 Implement type alias emission: simple aliases as `type X = Y`, union_of aliases as DUs
-- [ ] 5.6 Implement generic type parameter threading: emit `<'T>` parameters, resolve generic references to the correct parameter
-- [ ] 5.7 Integrate dependency graph: emit types in topological order, group cycles with `and`
-- [ ] 5.8 Emit all types into namespaced `.g.fs` files under `Generated/Types/`
-- [ ] 5.9 Write tests: verify generated source for QueryContainer (container variant), BoolQuery (record), SearchType (enum), Duration (alias), SearchResponse (generic)
+- [x] 5.1 Implement enum emission: closed enums as DUs, open enums with `| Custom of string` case, `[<RequireQualifiedAccess>]`
+- [x] 5.2 Implement interface-to-record emission: properties to record fields, optional/required handling, `[<JsonPropertyName>]` attributes, PascalCase naming
+- [x] 5.3 Implement container variant emission: non-containerProperty fields as DU cases, containerProperty fields as separate metadata record, SingleKeyDictionary → `field: Field` tuple in case, `nonExhaustive` → `| Unknown of string * JsonElement`
+- [x] 5.4 Implement internal-tag variant emission: DU cases keyed by tag field value
+- [x] 5.5 Implement type alias emission: simple aliases as `type X = Y`, union_of aliases as DUs
+- [x] 5.6 Implement generic type parameter threading: emit `<'T>` parameters, resolve generic references to the correct parameter
+- [x] 5.7 Integrate dependency graph: emit types in topological order, group cycles with `and`
+- [x] 5.8 Emit all types into namespaced `.g.fs` files under `Generated/Types/`
+- [ ] 5.9 Write tests: verify generated source for QueryContainer (container variant), BoolQuery (record), SearchType (enum), Duration (alias), SearchResponse (generic) (deferred)
 
 ## 6. Serialisation Emitter
 
@@ -47,25 +47,25 @@
 
 ## 7. Operation Emitter
 
-- [ ] 7.1 Implement request type emission per endpoint: separate path, query, and body fields into a clean request record
-- [ ] 7.2 Implement `ToRequest` emission: path interpolation, query string assembly, HTTP method selection, body serialisation (PropertiesBody → JSON object, ValueBody → serialise value, NoBody → no content)
-- [ ] 7.3 Implement CE builder emission for PropertiesBody endpoints: `[<CustomOperation>]` per query param and body property
-- [ ] 7.4 Implement CE builder emission for NoBody endpoints with query params (optional CE for query param configuration)
-- [ ] 7.5 Implement CE builder emission for ValueBody endpoints: `document` custom operation
-- [ ] 7.6 Implement `ES.*` function emission: verb-first functions with path params as arguments, returning request values
-- [ ] 7.7 Implement `ES.Namespace.*` sub-module emission for namespaced endpoints (Indices, Cluster, Nodes, etc.)
-- [ ] 7.8 Implement pipe-friendly module functions: `Search.withQuery`, `Search.withSize`, `Index.withRefresh`, etc.
-- [ ] 7.9 Emit all operations into `Generated/Operations/*.g.fs` files
-- [ ] 7.10 Write tests: verify generated source for Search (PropertiesBody + CE), Get (NoBody), Index (ValueBody), Indices.Create (namespaced)
+- [x] 7.1 Implement request type emission per endpoint: separate path, query, and body fields into a clean request record
+- [x] 7.2 Implement `ToRequest` emission: path interpolation, query string assembly, HTTP method selection, body serialisation (PropertiesBody → JSON object, ValueBody → serialise value, NoBody → no content)
+- [x] 7.3 Implement CE builder emission for PropertiesBody endpoints: `[<CustomOperation>]` per query param and body property
+- [x] 7.4 Implement CE builder emission for NoBody endpoints with query params (optional CE for query param configuration)
+- [x] 7.5 Implement CE builder emission for ValueBody endpoints: `document` custom operation
+- [x] 7.6 Implement `ES.*` function emission: verb-first functions with path params as arguments, returning request values
+- [x] 7.7 Implement `ES.Namespace.*` sub-module emission for namespaced endpoints (Indices, Cluster, Nodes, etc.)
+- [x] 7.8 Implement pipe-friendly module functions: `Search.withQuery`, `Search.withSize`, `Index.withRefresh`, etc.
+- [x] 7.9 Emit all operations into `Generated/Operations/*.g.fs` files
+- [ ] 7.10 Write tests: verify generated source for Search (PropertiesBody + CE), Get (NoBody), Index (ValueBody), Indices.Create (namespaced) (deferred)
 
 ## 8. Builder Emitter
 
-- [ ] 8.1 Implement smart constructor emission from shortcutProperty: module functions like `Query.term`, `Query.match'`
-- [ ] 8.2 Implement CE builder emission for complex domain types: `boolQuery { }`, `termsAggregation { }`, etc.
-- [ ] 8.3 Implement convenience variant constructors: `Query.bool`, `Query.matchAll`, `Agg.terms`, `Agg.avg`
-- [ ] 8.4 Implement mapping builders: `Mapping.text`, `Mapping.keyword`, `Mapping.float'`, `Mapping.boolean`, `Mapping.properties`
-- [ ] 8.5 Emit all builders into `Generated/Builders/*.g.fs` files
-- [ ] 8.6 Write tests: verify generated source for Query builders, Agg builders, Mapping builders
+- [x] 8.1 Implement smart constructor emission from shortcutProperty: module functions like `Query.term`, `Query.match'`
+- [x] 8.2 Implement CE builder emission for complex domain types: `boolQuery { }`, `termsAggregation { }`, etc.
+- [x] 8.3 Implement convenience variant constructors: `Query.bool`, `Query.matchAll`, `Agg.terms`, `Agg.avg`
+- [x] 8.4 Implement mapping builders: `Mapping.text`, `Mapping.keyword`, `Mapping.float'`, `Mapping.boolean`, `Mapping.properties`
+- [x] 8.5 Emit all builders into `Generated/Builders/*.g.fs` files
+- [ ] 8.6 Write tests: verify generated source for Query builders, Agg builders, Mapping builders (deferred)
 
 ## 9. Generator CLI & Integration
 

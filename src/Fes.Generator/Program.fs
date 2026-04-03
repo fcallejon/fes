@@ -77,8 +77,27 @@ let main args =
     printfn "Generating type files..."
     let typeFiles = FileEmitter.emitAllTypeFiles index model.Types
     FileEmitter.writeFiles outputDir typeFiles
+    printfn $"  {typeFiles.Length} type files"
+
+    // Generate operation files
+    printfn "Generating operation files..."
+    let operationFiles = OperationEmitter.emitAllOperationFiles index
+    FileEmitter.writeFiles outputDir operationFiles
+    printfn $"  {operationFiles.Length} operation files"
+
+    // Generate builder files
+    printfn "Generating builder files..."
+    let builderFiles = BuilderEmitter.emitAllBuilderFiles index model.Types
+    FileEmitter.writeFiles outputDir builderFiles
+    printfn $"  {builderFiles.Length} builder files"
+
+    // Generate ES module
+    printfn "Generating ES module..."
+    let esModule = ESModuleEmitter.emitESModule index
+    FileEmitter.writeFiles outputDir [ esModule ]
+    printfn "  1 ES module file"
 
     printfn ""
-    printfn $"Generated {typeFiles.Length} type files"
+    printfn $"Generation complete: {typeFiles.Length + operationFiles.Length} files total"
 
     0

@@ -129,7 +129,6 @@ module IndicesTypes =
     }
 
     /// Data stream lifecycle with rollover can be used to display the configuration including the default rollover conditions,
-if asked.
     type DataStreamLifecycleWithRollover = {
         [<System.Text.Json.Serialization.JsonPropertyName("rollover")>]
         Rollover: IndicesTypes.DataStreamLifecycleRolloverConditions option
@@ -775,7 +774,6 @@ if asked.
     }
 
     /// Data stream options contain the configuration of data stream level features for a given data stream, for example,
-the failure store configuration.
     type DataStreamOptions = {
         [<System.Text.Json.Serialization.JsonPropertyName("failure_store")>]
         FailureStore: IndicesTypes.DataStreamFailureStore option

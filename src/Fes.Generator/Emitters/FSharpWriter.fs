@@ -62,9 +62,14 @@ type Writer() =
         match text with
         | Some desc when not (String.IsNullOrWhiteSpace desc) ->
             let escaped = desc.Replace("&", "&amp;").Replace("<", "&lt;").Replace(">", "&gt;")
-            let truncated =
-                if escaped.Length > 200 then escaped.Substring(0, 200) + "..."
+            // Take only the first line, truncated
+            let firstLine =
+                let idx = escaped.IndexOfAny([| '\n'; '\r' |])
+                if idx >= 0 then escaped.Substring(0, idx)
                 else escaped
+            let truncated =
+                if firstLine.Length > 200 then firstLine.Substring(0, 200) + "..."
+                else firstLine
             this.Line $"/// {truncated}"
         | _ -> ()
 

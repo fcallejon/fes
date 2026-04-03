@@ -18,6 +18,9 @@
     <Compile Include="Analysis/DependencyGraph.fs" />
     <Compile Include="Emitters/FSharpWriter.fs" />
     <Compile Include="Emitters/TypeEmitter.fs" />
+    <Compile Include="Emitters/OperationEmitter.fs" />
+    <Compile Include="Emitters/BuilderEmitter.fs" />
+    <Compile Include="Emitters/ESModuleEmitter.fs" />
     <Compile Include="Emitters/FileEmitter.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>

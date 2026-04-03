@@ -63,7 +63,6 @@ module TypesAnalysis =
         | None
 
     /// Language value, such as _arabic_ or _thai_. Defaults to _english_.
-Each language value corresponds to a predefined list of stop words in Lucene. See Stop words by language for supported language value...
     [<RequireQualifiedAccess>]
     type StopWords =
         | StopWordLanguage of TypesAnalysis.StopWordLanguage

@@ -735,7 +735,6 @@ module IngestTypes =
     }
 
     /// The configuration necessary to identify which IP geolocation provider to use to download a database, as well as any provider-specific configuration necessary for such downloading.
-At present, the only...
     [<RequireQualifiedAccess>]
     type DatabaseConfiguration =
         | Maxmind of IngestTypes.Maxmind

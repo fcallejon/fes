@@ -943,8 +943,6 @@ module GlobalSearchTypes =
     }
 
     /// Number of hits matching the query to count accurately. If true, the exact
-number of hits is returned at the cost of some performance. If false, the
-response does not include the total number of hits m...
     [<RequireQualifiedAccess>]
     type TrackHits =
         | Boolean of bool
@@ -1027,7 +1025,6 @@ response does not include the total number of hits m...
     }
 
     /// Defines how to fetch a source. Fetching can be disabled entirely, or the source can be filtered.
-Used as a query parameter along with the `_source_includes` and `_source_excludes` parameters.
     [<RequireQualifiedAccess>]
     type SourceConfigParam =
         | Boolean of bool

@@ -45,9 +45,6 @@ module SecurityTypes =
     }
 
     /// While creating or updating a role you can provide either a JSON structure or a string to the API.
-However, the response provided by Elasticsearch will only be string with a json-as-text content.
-
-Sinc...
     [<RequireQualifiedAccess>]
     type IndicesPrivilegesQuery =
         | String of string
