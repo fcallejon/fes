@@ -85,17 +85,21 @@ tests/Fes.Tests/
       ...
 ```
 
-### D3: Each test verifies exact JSON, not substrings
+### D3: Use the C# client's .verified.txt snapshot files as golden truth
 
-Instead of `Assert.Contains("bool", json)`, tests SHALL compare against the full expected JSON structure:
+The C# client has ~170 `.verified.txt` files in `tests/Tests/_VerifySnapshots/` that contain the expected JSON for every serialisation test. We SHALL:
+
+1. Download all `.verified.txt` files from the C# repo into `tests/Fes.Tests/snapshots/`
+2. Each F# test reads the corresponding snapshot file and compares its serialised output against it
+3. JSON comparison is order-independent for object keys (using parsed JsonElement comparison)
 
 ```fsharp
-let expectedJson = """{"query":{"bool":{"must":[{"match_all":{}}],"should":[{"term":{"name":{"value":"Steve"}}},{"term":{"name":{"value":"David"}}}]}}}"""
 let actual = Json.serialize searchRequest
-assertJsonEqual expectedJson actual
+let expected = Snapshot.load "BoolQueryUsageTests.VerifyDescriptorJson"
+assertJsonEqual expected actual
 ```
 
-Where `assertJsonEqual` compares parsed JSON trees (order-independent for objects).
+This ensures our JSON output matches exactly what the C# client produces — same source of truth, no reinventing.
 
 ### D4: Response types that are JsonElement need typed wrappers
 

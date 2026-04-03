@@ -1,10 +1,12 @@
 ## 1. Test Infrastructure
 
-- [ ] 1.1 Create `assertJsonEqual` helper (order-independent JSON comparison using parsed JSON trees)
-- [ ] 1.2 Create `assertUrl` helper (construct request, call `ToEndpoint`, assert path and HTTP method)
-- [ ] 1.3 Create `assertDeserialise` helper (JSON string to typed object, assert fields match expected values)
-- [ ] 1.4 Create `assertJsonBody` helper (construct request, serialise body, compare with expected JSON)
-- [ ] 1.5 Create `assertNdjsonBody` helper (construct bulk request, serialise, compare NDJSON lines)
+- [ ] 1.1 Download all ~170 `.verified.txt` snapshot files from `elasticsearch-net/tests/Tests/_VerifySnapshots/` into `tests/Fes.Tests/snapshots/`
+- [ ] 1.2 Update `Snapshot.fs` to load snapshot files by name and return the expected JSON string
+- [ ] 1.3 Create `assertJsonEqual` helper (order-independent JSON comparison using parsed JSON element trees)
+- [ ] 1.4 Create `assertUrl` helper (construct request, call `ToEndpoint`, assert path and HTTP method)
+- [ ] 1.5 Create `assertDeserialise` helper (JSON string to typed object, assert fields match expected values)
+- [ ] 1.6 Create `assertJsonBody` helper (construct request, serialise body, compare with snapshot file)
+- [ ] 1.7 Create `assertNdjsonBody` helper (construct bulk request, serialise, compare NDJSON lines)
 
 ## 2. Query DSL Tests (15 files)
 
