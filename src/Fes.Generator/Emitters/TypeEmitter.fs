@@ -5,16 +5,33 @@ open Fes.Generator.Analysis
 open Fes.Generator.Emitters.FSharpWriter
 
 // ============================================================================
+// Helpers
+// ============================================================================
+
+/// Filter generic params to only those that actually appear in generated output
+let filterUsedGenerics (generics: TypeName list) (bodyText: string) =
+    match generics with
+    | [] -> ""
+    | gs ->
+        let used =
+            gs |> List.filter (fun g ->
+                let paramStr = $"'{Namespacing.toCamelCase g.Name}"
+                bodyText.Contains(paramStr))
+        match used with
+        | [] -> ""
+        | us -> "<" + (us |> List.map (fun g -> $"'{Namespacing.toCamelCase g.Name}") |> String.concat ", ") + ">"
+
+// ============================================================================
 // Emit Enums
 // ============================================================================
 
-let emitEnum (w: Writer) (isFirst: bool) (def: EnumDefinition) =
+let emitEnumWithName (w: Writer) (isFirst: bool) (def: EnumDefinition) (typeName: string) =
     w.DocComment def.Description
     if isFirst then
         w.Attribute "RequireQualifiedAccess"
-        w.Line $"type {Namespacing.toFSharpTypeName def.Name.Name} ="
+        w.Line $"type {typeName} ="
     else
-        w.Line $"and [<RequireQualifiedAccess>] {Namespacing.toFSharpTypeName def.Name.Name} ="
+        w.Line $"and [<RequireQualifiedAccess>] {typeName} ="
 
     w.Indent()
     for m in def.Members do
@@ -54,19 +71,44 @@ let emitRecordField (w: Writer) (ctx: TypeResolver.ResolveContext) (p: Property)
 let emitRecord (w: Writer) (isFirst: bool) (ctx: TypeResolver.ResolveContext) (name: string) (properties: Property list) (generics: TypeName list) (description: string option) =
     w.DocComment description
     let keyword = w.TypeKeyword isFirst
-    let genericParams =
-        match generics with
-        | [] -> ""
-        | gs -> "<" + (gs |> List.map (fun g -> $"'{Namespacing.toCamelCase g.Name}") |> String.concat ", ") + ">"
 
     if properties.IsEmpty then
-        // F# records cannot be empty — use a type alias to JsonElement
-        w.Line $"{keyword} {Namespacing.toFSharpTypeName name}{genericParams} = System.Text.Json.JsonElement"
+        // F# records cannot be empty — use a type alias to JsonElement (no generics needed)
+        w.Line $"{keyword} {name} = System.Text.Json.JsonElement"
     else
-        w.Line $"{keyword} {Namespacing.toFSharpTypeName name}{genericParams} = {{"
+        // For records, keep all declared generic params (they may be used indirectly
+        // via fields that resolve to JsonElement for complex unions)
+        let genericParams =
+            match generics with
+            | [] -> ""
+            | gs -> "<" + (gs |> List.map (fun g -> $"'{Namespacing.toCamelCase g.Name}") |> String.concat ", ") + ">"
+
+        // Deduplicate field names
+        let mutable seenFields = Set.empty
+        let dedupedProperties =
+            properties |> List.map (fun p ->
+                let fieldName = Namespacing.toFieldName p.Name
+                if Set.contains fieldName seenFields then
+                    // Disambiguate by prefixing with raw name parts
+                    let altName = Namespacing.toPascalCase ($"{p.Name}_field")
+                    seenFields <- Set.add altName seenFields
+                    { p with CodegenName = Some altName }
+                else
+                    seenFields <- Set.add fieldName seenFields
+                    p)
+
+        w.Line $"{keyword} {name}{genericParams} = {{"
         w.Indent()
-        for p in properties do
-            emitRecordField w ctx p
+        for p in dedupedProperties do
+            match p.CodegenName with
+            | Some altName ->
+                if p.Name <> altName then
+                    w.Line $"[<System.Text.Json.Serialization.JsonPropertyName(\"{p.Name}\")>]"
+                let fieldType = TypeResolver.resolveValueOf ctx p.Type
+                let finalType = if p.Required then fieldType else $"{fieldType} option"
+                w.Line $"{altName}: {finalType}"
+            | None ->
+                emitRecordField w ctx p
         w.Dedent()
         w.Line "}"
 
@@ -76,13 +118,12 @@ let emitRecord (w: Writer) (isFirst: bool) (ctx: TypeResolver.ResolveContext) (n
 // Emit Container Variants (DUs)
 // ============================================================================
 
-let emitContainerVariant (w: Writer) (isFirst: bool) (ctx: TypeResolver.ResolveContext) (def: InterfaceDefinition) (nonExhaustive: bool) =
+let emitContainerVariantWithName (w: Writer) (isFirst: bool) (ctx: TypeResolver.ResolveContext) (def: InterfaceDefinition) (nonExhaustive: bool) (duName: string) =
     let containerProps = def.Properties |> List.filter _.ContainerProperty
     let variantProps = def.Properties |> List.filter (fun p -> not p.ContainerProperty)
 
     // Emit the DU
     w.DocComment def.Description
-    let duName = Namespacing.toFSharpTypeName def.Name.Name
     if isFirst then
         w.Attribute "RequireQualifiedAccess"
         w.Line $"type {duName} ="
@@ -122,11 +163,8 @@ let emitContainerVariant (w: Writer) (isFirst: bool) (ctx: TypeResolver.ResolveC
 // Emit Internal Tag Variants (DUs via type_alias)
 // ============================================================================
 
-let emitInternalTagVariant (w: Writer) (isFirst: bool) (ctx: TypeResolver.ResolveContext) (def: TypeAliasDefinition) (_tag: string) (_defaultTag: string option) (nonExhaustive: bool) =
-    // The type_alias wraps a union_of where each item is a concrete type
-    // whose tag field value determines the case name
+let emitInternalTagVariantWithName (w: Writer) (isFirst: bool) (ctx: TypeResolver.ResolveContext) (def: TypeAliasDefinition) (_tag: string) (_defaultTag: string option) (nonExhaustive: bool) (duName: string) =
     w.DocComment def.Description
-    let duName = Namespacing.toFSharpTypeName def.Name.Name
     if isFirst then
         w.Attribute "RequireQualifiedAccess"
         w.Line $"type {duName} ="
@@ -159,53 +197,46 @@ let emitInternalTagVariant (w: Writer) (isFirst: bool) (ctx: TypeResolver.Resolv
 // Emit Type Aliases
 // ============================================================================
 
-let emitTypeAlias (w: Writer) (isFirst: bool) (ctx: TypeResolver.ResolveContext) (def: TypeAliasDefinition) =
+let emitTypeAliasWithName (w: Writer) (isFirst: bool) (ctx: TypeResolver.ResolveContext) (def: TypeAliasDefinition) (name: string) =
     w.DocComment def.Description
-    let keyword = w.TypeKeyword isFirst
-    let name = Namespacing.toFSharpTypeName def.Name.Name
-    let genericParams =
-        match def.Generics with
-        | [] -> ""
-        | gs -> "<" + (gs |> List.map (fun g -> $"'{Namespacing.toCamelCase g.Name}") |> String.concat ", ") + ">"
 
     match def.Type with
     | ValueOf.UnionOf items when items.Length >= 2 ->
-        // Emit as DU for unions
+        // Emit as DU for unions — collect all case types to check generic usage
+        let cases =
+            items |> List.mapi (fun i item ->
+                let caseType = TypeResolver.resolveValueOf ctx item
+                let caseName =
+                    match item with
+                    | ValueOf.InstanceOf (tn, _) -> Namespacing.toPascalCase tn.Name
+                    | ValueOf.ArrayOf _ -> "Array"
+                    | ValueOf.DictionaryOf _ -> "Dictionary"
+                    | _ -> $"Case{i}"
+                caseName, caseType)
+        // Dedup case names
+        let mutable seenCases = Map.empty<string, int>
+        let dedupedCases =
+            cases |> List.map (fun (caseName, caseType) ->
+                let count = Map.tryFind caseName seenCases |> Option.defaultValue 0
+                seenCases <- Map.add caseName (count + 1) seenCases
+                let finalName = if count > 0 then $"{caseName}{count + 1}" else caseName
+                finalName, caseType)
+        let allCaseTypes = dedupedCases |> List.map snd |> String.concat " "
+        let genericParams = filterUsedGenerics def.Generics allCaseTypes
         if isFirst then
             w.Attribute "RequireQualifiedAccess"
             w.Line $"type {name}{genericParams} ="
         else
             w.Line $"and [<RequireQualifiedAccess>] {name}{genericParams} ="
         w.Indent()
-        for i, item in items |> List.indexed do
-            let caseType = TypeResolver.resolveValueOf ctx item
-            let caseName =
-                match item with
-                | ValueOf.InstanceOf (tn, _) ->
-                    if tn.Namespace = "_builtins" then Namespacing.toPascalCase tn.Name
-                    else Namespacing.toPascalCase tn.Name
-                | ValueOf.ArrayOf _ -> $"Array"
-                | ValueOf.DictionaryOf _ -> $"Dictionary"
-                | _ -> $"Case{i}"
+        for caseName, caseType in dedupedCases do
             w.Line $"| {caseName} of {caseType}"
         w.Dedent()
     | _ ->
         let keyword = w.TypeKeyword isFirst
         let resolved = TypeResolver.resolveValueOf ctx def.Type
-        // Only include generic params that appear in the resolved type
-        let usedGenericParams =
-            match def.Generics with
-            | [] -> ""
-            | gs ->
-                let used =
-                    gs
-                    |> List.filter (fun g ->
-                        let paramStr = $"'{Namespacing.toCamelCase g.Name}"
-                        resolved.Contains(paramStr))
-                match used with
-                | [] -> ""
-                | us -> "<" + (us |> List.map (fun g -> $"'{Namespacing.toCamelCase g.Name}") |> String.concat ", ") + ">"
-        w.Line $"{keyword} {name}{usedGenericParams} = {resolved}"
+        let genericParams = filterUsedGenerics def.Generics resolved
+        w.Line $"{keyword} {name}{genericParams} = {resolved}"
 
     w.BlankLine()
 
@@ -213,27 +244,35 @@ let emitTypeAlias (w: Writer) (isFirst: bool) (ctx: TypeResolver.ResolveContext)
 // Emit a single TypeDefinition
 // ============================================================================
 
+let private lookupName (nameMap: Map<TypeName, string>) (tn: TypeName) =
+    match Map.tryFind tn nameMap with
+    | Some n -> n
+    | None -> Namespacing.toFSharpTypeName tn.Name
+
 let emitTypeDefinition (w: Writer) (index: TypeIndex.TypeIndex) (isFirst: bool) (currentNamespace: string) (td: TypeDefinition) =
     let mkCtx generics = TypeResolver.makeContextInNamespace index generics currentNamespace
+    let getName (tn: TypeName) = lookupName index.NameMap tn
     match td with
     | TypeDefinition.Enum def ->
-        emitEnum w isFirst def
+        emitEnumWithName w isFirst def (getName def.Name)
 
     | TypeDefinition.Interface def ->
+        let name = getName def.Name
         match def.Variants with
         | Some (VariantKind.Container nonExhaustive) ->
-            emitContainerVariant w isFirst (mkCtx def.Generics) def nonExhaustive
+            emitContainerVariantWithName w isFirst (mkCtx def.Generics) def nonExhaustive name
         | Some (VariantKind.InternalTag _) ->
-            emitRecord w isFirst (mkCtx def.Generics) def.Name.Name def.Properties def.Generics def.Description
+            emitRecord w isFirst (mkCtx def.Generics) name def.Properties def.Generics def.Description
         | _ ->
-            emitRecord w isFirst (mkCtx def.Generics) def.Name.Name def.Properties def.Generics def.Description
+            emitRecord w isFirst (mkCtx def.Generics) name def.Properties def.Generics def.Description
 
     | TypeDefinition.TypeAlias def ->
+        let name = getName def.Name
         match def.Variants with
         | Some (VariantKind.InternalTag (tag, defaultTag, nonExhaustive)) ->
-            emitInternalTagVariant w isFirst (mkCtx def.Generics) def tag defaultTag nonExhaustive
+            emitInternalTagVariantWithName w isFirst (mkCtx def.Generics) def tag defaultTag nonExhaustive name
         | _ ->
-            emitTypeAlias w isFirst (mkCtx def.Generics) def
+            emitTypeAliasWithName w isFirst (mkCtx def.Generics) def name
 
     | TypeDefinition.Request _ -> ()
     | TypeDefinition.Response _ -> ()

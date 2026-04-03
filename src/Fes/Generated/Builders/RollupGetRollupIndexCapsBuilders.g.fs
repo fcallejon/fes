@@ -4,13 +4,13 @@ namespace Fes.Generated.Builders
 
 
 open System.Text.Json.Serialization
-open Fes.Generated.Types
+open Fes.Generated
 
 [<AutoOpen>]
 module RollupGetRollupIndexCapsBuilders =
 
     type RollupJobSummaryFieldBuilder() =
-        member _.Yield(_: unit) : RollupJobSummaryField =
+        member _.Yield(_: unit) : Types.RollupJobSummaryField =
             {
                 Agg = Unchecked.defaultof<_>
                 TimeZone = None
@@ -18,15 +18,15 @@ module RollupGetRollupIndexCapsBuilders =
             }
 
         [<CustomOperation("agg")>]
-        member _.Agg(state: RollupJobSummaryField, value: string) =
+        member _.Agg(state: Types.RollupJobSummaryField, value: string) =
             { state with Agg = value }
 
         [<CustomOperation("timeZone")>]
-        member _.TimeZone(state: RollupJobSummaryField, value: CoreTypes.TimeZone) =
+        member _.TimeZone(state: Types.RollupJobSummaryField, value: Types.TimeZone) =
             { state with TimeZone = Some value }
 
         [<CustomOperation("calendarInterval")>]
-        member _.CalendarInterval(state: RollupJobSummaryField, value: CoreTypes.Duration) =
+        member _.CalendarInterval(state: Types.RollupJobSummaryField, value: Types.Duration) =
             { state with CalendarInterval = Some value }
 
     let rollupJobSummaryField = RollupJobSummaryFieldBuilder()

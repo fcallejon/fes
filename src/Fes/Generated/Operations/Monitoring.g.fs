@@ -7,6 +7,7 @@ open System
 open System.Text.Json
 open System.Text.Json.Serialization
 open Fes
+open Fes.Generated
 
 [<AutoOpen>]
 module MonitoringOperations =
@@ -14,7 +15,7 @@ module MonitoringOperations =
     type MonitoringBulkRequest = {
         SystemId: string
         SystemApiVersion: string
-        Interval: CoreTypes.Duration
+        Interval: Types.Duration
         Document: obj
     }
 
@@ -50,7 +51,7 @@ module MonitoringOperations =
             { state with SystemApiVersion = value }
 
         [<CustomOperation("interval")>]
-        member _.Interval(state: MonitoringBulkRequest, value: CoreTypes.Duration) =
+        member _.Interval(state: MonitoringBulkRequest, value: Types.Duration) =
             { state with Interval = value }
 
         [<CustomOperation("document")>]
@@ -64,6 +65,6 @@ module MonitoringOperations =
             { req with SystemId = value }
         let withSystemApiVersion (value: string) (req: MonitoringBulkRequest) =
             { req with SystemApiVersion = value }
-        let withInterval (value: CoreTypes.Duration) (req: MonitoringBulkRequest) =
+        let withInterval (value: Types.Duration) (req: MonitoringBulkRequest) =
             { req with Interval = value }
 

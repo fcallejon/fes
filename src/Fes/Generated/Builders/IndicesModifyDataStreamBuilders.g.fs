@@ -4,16 +4,16 @@ namespace Fes.Generated.Builders
 
 
 open System.Text.Json.Serialization
-open Fes.Generated.Types
+open Fes.Generated
 
 [<AutoOpen>]
 module IndicesModifyDataStreamBuilders =
 
     module Action =
 
-        let addBackingIndex (value: IndicesModifyDataStream.IndexAndDataStreamAction) =
-            Action.AddBackingIndex value
+        let addBackingIndex (value: Types.IndexAndDataStreamAction) =
+            Types.IndicesModifyDataStreamAction.AddBackingIndex value
 
-        let removeBackingIndex (value: IndicesModifyDataStream.IndexAndDataStreamAction) =
-            Action.RemoveBackingIndex value
+        let removeBackingIndex (value: Types.IndexAndDataStreamAction) =
+            Types.IndicesModifyDataStreamAction.RemoveBackingIndex value
 

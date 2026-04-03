@@ -4,13 +4,13 @@ namespace Fes.Generated.Builders
 
 
 open System.Text.Json.Serialization
-open Fes.Generated.Types
+open Fes.Generated
 
 [<AutoOpen>]
 module MlPreviewDataFrameAnalyticsBuilders =
 
     type DataframePreviewConfigBuilder() =
-        member _.Yield(_: unit) : DataframePreviewConfig =
+        member _.Yield(_: unit) : Types.DataframePreviewConfig =
             {
                 Source = Unchecked.defaultof<_>
                 Analysis = Unchecked.defaultof<_>
@@ -20,23 +20,23 @@ module MlPreviewDataFrameAnalyticsBuilders =
             }
 
         [<CustomOperation("source")>]
-        member _.Source(state: DataframePreviewConfig, value: MlTypes.DataframeAnalyticsSource) =
+        member _.Source(state: Types.DataframePreviewConfig, value: Types.DataframeAnalyticsSource) =
             { state with Source = value }
 
         [<CustomOperation("analysis")>]
-        member _.Analysis(state: DataframePreviewConfig, value: MlTypes.DataframeAnalysisContainer) =
+        member _.Analysis(state: Types.DataframePreviewConfig, value: Types.DataframeAnalysisContainer) =
             { state with Analysis = value }
 
         [<CustomOperation("modelMemoryLimit")>]
-        member _.ModelMemoryLimit(state: DataframePreviewConfig, value: string) =
+        member _.ModelMemoryLimit(state: Types.DataframePreviewConfig, value: string) =
             { state with ModelMemoryLimit = Some value }
 
         [<CustomOperation("maxNumThreads")>]
-        member _.MaxNumThreads(state: DataframePreviewConfig, value: CoreTypes.Integer) =
+        member _.MaxNumThreads(state: Types.DataframePreviewConfig, value: Types.Integer) =
             { state with MaxNumThreads = Some value }
 
         [<CustomOperation("analyzedFields")>]
-        member _.AnalyzedFields(state: DataframePreviewConfig, value: MlTypes.DataframeAnalysisAnalyzedFields) =
+        member _.AnalyzedFields(state: Types.DataframePreviewConfig, value: Types.DataframeAnalysisAnalyzedFields) =
             { state with AnalyzedFields = Some value }
 
     let dataframePreviewConfig = DataframePreviewConfigBuilder()

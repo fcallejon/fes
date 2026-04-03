@@ -4,24 +4,24 @@ namespace Fes.Generated.Builders
 
 
 open System.Text.Json.Serialization
-open Fes.Generated.Types
+open Fes.Generated
 
 [<AutoOpen>]
 module CatRepositoriesBuilders =
 
     type RepositoriesRecordBuilder() =
-        member _.Yield(_: unit) : RepositoriesRecord =
+        member _.Yield(_: unit) : Types.RepositoriesRecord =
             {
                 Id = None
                 Type = None
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: RepositoriesRecord, value: string) =
+        member _.Id(state: Types.RepositoriesRecord, value: string) =
             { state with Id = Some value }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: RepositoriesRecord, value: string) =
+        member _.Type(state: Types.RepositoriesRecord, value: string) =
             { state with Type = Some value }
 
     let repositoriesRecord = RepositoriesRecordBuilder()

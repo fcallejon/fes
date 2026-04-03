@@ -4,13 +4,13 @@ namespace Fes.Generated.Builders
 
 
 open System.Text.Json.Serialization
-open Fes.Generated.Types
+open Fes.Generated
 
 [<AutoOpen>]
 module CatMlJobsBuilders =
 
     type JobsRecordBuilder() =
-        member _.Yield(_: unit) : JobsRecord =
+        member _.Yield(_: unit) : Types.JobsRecord =
             {
                 Id = None
                 State = None
@@ -75,243 +75,243 @@ module CatMlJobsBuilders =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: JobsRecord, value: CoreTypes.Id) =
+        member _.Id(state: Types.JobsRecord, value: Types.Id) =
             { state with Id = Some value }
 
         [<CustomOperation("state")>]
-        member _.State(state: JobsRecord, value: MlTypes.JobState) =
+        member _.State(state: Types.JobsRecord, value: Types.JobState) =
             { state with State = Some value }
 
         [<CustomOperation("openedTime")>]
-        member _.OpenedTime(state: JobsRecord, value: string) =
+        member _.OpenedTime(state: Types.JobsRecord, value: string) =
             { state with OpenedTime = Some value }
 
         [<CustomOperation("assignmentExplanation")>]
-        member _.AssignmentExplanation(state: JobsRecord, value: string) =
+        member _.AssignmentExplanation(state: Types.JobsRecord, value: string) =
             { state with AssignmentExplanation = Some value }
 
         [<CustomOperation("dataProcessedRecords")>]
-        member _.DataProcessedRecords(state: JobsRecord, value: string) =
+        member _.DataProcessedRecords(state: Types.JobsRecord, value: string) =
             { state with DataProcessedRecords = Some value }
 
         [<CustomOperation("dataProcessedFields")>]
-        member _.DataProcessedFields(state: JobsRecord, value: string) =
+        member _.DataProcessedFields(state: Types.JobsRecord, value: string) =
             { state with DataProcessedFields = Some value }
 
         [<CustomOperation("dataInputBytes")>]
-        member _.DataInputBytes(state: JobsRecord, value: CoreTypes.ByteSize) =
+        member _.DataInputBytes(state: Types.JobsRecord, value: Types.ByteSize) =
             { state with DataInputBytes = Some value }
 
         [<CustomOperation("dataInputRecords")>]
-        member _.DataInputRecords(state: JobsRecord, value: string) =
+        member _.DataInputRecords(state: Types.JobsRecord, value: string) =
             { state with DataInputRecords = Some value }
 
         [<CustomOperation("dataInputFields")>]
-        member _.DataInputFields(state: JobsRecord, value: string) =
+        member _.DataInputFields(state: Types.JobsRecord, value: string) =
             { state with DataInputFields = Some value }
 
         [<CustomOperation("dataInvalidDates")>]
-        member _.DataInvalidDates(state: JobsRecord, value: string) =
+        member _.DataInvalidDates(state: Types.JobsRecord, value: string) =
             { state with DataInvalidDates = Some value }
 
         [<CustomOperation("dataMissingFields")>]
-        member _.DataMissingFields(state: JobsRecord, value: string) =
+        member _.DataMissingFields(state: Types.JobsRecord, value: string) =
             { state with DataMissingFields = Some value }
 
         [<CustomOperation("dataOutOfOrderTimestamps")>]
-        member _.DataOutOfOrderTimestamps(state: JobsRecord, value: string) =
+        member _.DataOutOfOrderTimestamps(state: Types.JobsRecord, value: string) =
             { state with DataOutOfOrderTimestamps = Some value }
 
         [<CustomOperation("dataEmptyBuckets")>]
-        member _.DataEmptyBuckets(state: JobsRecord, value: string) =
+        member _.DataEmptyBuckets(state: Types.JobsRecord, value: string) =
             { state with DataEmptyBuckets = Some value }
 
         [<CustomOperation("dataSparseBuckets")>]
-        member _.DataSparseBuckets(state: JobsRecord, value: string) =
+        member _.DataSparseBuckets(state: Types.JobsRecord, value: string) =
             { state with DataSparseBuckets = Some value }
 
         [<CustomOperation("dataBuckets")>]
-        member _.DataBuckets(state: JobsRecord, value: string) =
+        member _.DataBuckets(state: Types.JobsRecord, value: string) =
             { state with DataBuckets = Some value }
 
         [<CustomOperation("dataEarliestRecord")>]
-        member _.DataEarliestRecord(state: JobsRecord, value: string) =
+        member _.DataEarliestRecord(state: Types.JobsRecord, value: string) =
             { state with DataEarliestRecord = Some value }
 
         [<CustomOperation("dataLatestRecord")>]
-        member _.DataLatestRecord(state: JobsRecord, value: string) =
+        member _.DataLatestRecord(state: Types.JobsRecord, value: string) =
             { state with DataLatestRecord = Some value }
 
         [<CustomOperation("dataLast")>]
-        member _.DataLast(state: JobsRecord, value: string) =
+        member _.DataLast(state: Types.JobsRecord, value: string) =
             { state with DataLast = Some value }
 
         [<CustomOperation("dataLastEmptyBucket")>]
-        member _.DataLastEmptyBucket(state: JobsRecord, value: string) =
+        member _.DataLastEmptyBucket(state: Types.JobsRecord, value: string) =
             { state with DataLastEmptyBucket = Some value }
 
         [<CustomOperation("dataLastSparseBucket")>]
-        member _.DataLastSparseBucket(state: JobsRecord, value: string) =
+        member _.DataLastSparseBucket(state: Types.JobsRecord, value: string) =
             { state with DataLastSparseBucket = Some value }
 
         [<CustomOperation("modelBytes")>]
-        member _.ModelBytes(state: JobsRecord, value: CoreTypes.ByteSize) =
+        member _.ModelBytes(state: Types.JobsRecord, value: Types.ByteSize) =
             { state with ModelBytes = Some value }
 
         [<CustomOperation("modelMemoryStatus")>]
-        member _.ModelMemoryStatus(state: JobsRecord, value: MlTypes.MemoryStatus) =
+        member _.ModelMemoryStatus(state: Types.JobsRecord, value: Types.MemoryStatus) =
             { state with ModelMemoryStatus = Some value }
 
         [<CustomOperation("modelBytesExceeded")>]
-        member _.ModelBytesExceeded(state: JobsRecord, value: CoreTypes.ByteSize) =
+        member _.ModelBytesExceeded(state: Types.JobsRecord, value: Types.ByteSize) =
             { state with ModelBytesExceeded = Some value }
 
         [<CustomOperation("modelMemoryLimit")>]
-        member _.ModelMemoryLimit(state: JobsRecord, value: string) =
+        member _.ModelMemoryLimit(state: Types.JobsRecord, value: string) =
             { state with ModelMemoryLimit = Some value }
 
         [<CustomOperation("modelByFields")>]
-        member _.ModelByFields(state: JobsRecord, value: string) =
+        member _.ModelByFields(state: Types.JobsRecord, value: string) =
             { state with ModelByFields = Some value }
 
         [<CustomOperation("modelOverFields")>]
-        member _.ModelOverFields(state: JobsRecord, value: string) =
+        member _.ModelOverFields(state: Types.JobsRecord, value: string) =
             { state with ModelOverFields = Some value }
 
         [<CustomOperation("modelPartitionFields")>]
-        member _.ModelPartitionFields(state: JobsRecord, value: string) =
+        member _.ModelPartitionFields(state: Types.JobsRecord, value: string) =
             { state with ModelPartitionFields = Some value }
 
         [<CustomOperation("modelBucketAllocationFailures")>]
-        member _.ModelBucketAllocationFailures(state: JobsRecord, value: string) =
+        member _.ModelBucketAllocationFailures(state: Types.JobsRecord, value: string) =
             { state with ModelBucketAllocationFailures = Some value }
 
         [<CustomOperation("modelCategorizationStatus")>]
-        member _.ModelCategorizationStatus(state: JobsRecord, value: MlTypes.CategorizationStatus) =
+        member _.ModelCategorizationStatus(state: Types.JobsRecord, value: Types.CategorizationStatus) =
             { state with ModelCategorizationStatus = Some value }
 
         [<CustomOperation("modelCategorizedDocCount")>]
-        member _.ModelCategorizedDocCount(state: JobsRecord, value: string) =
+        member _.ModelCategorizedDocCount(state: Types.JobsRecord, value: string) =
             { state with ModelCategorizedDocCount = Some value }
 
         [<CustomOperation("modelTotalCategoryCount")>]
-        member _.ModelTotalCategoryCount(state: JobsRecord, value: string) =
+        member _.ModelTotalCategoryCount(state: Types.JobsRecord, value: string) =
             { state with ModelTotalCategoryCount = Some value }
 
         [<CustomOperation("modelFrequentCategoryCount")>]
-        member _.ModelFrequentCategoryCount(state: JobsRecord, value: string) =
+        member _.ModelFrequentCategoryCount(state: Types.JobsRecord, value: string) =
             { state with ModelFrequentCategoryCount = Some value }
 
         [<CustomOperation("modelRareCategoryCount")>]
-        member _.ModelRareCategoryCount(state: JobsRecord, value: string) =
+        member _.ModelRareCategoryCount(state: Types.JobsRecord, value: string) =
             { state with ModelRareCategoryCount = Some value }
 
         [<CustomOperation("modelDeadCategoryCount")>]
-        member _.ModelDeadCategoryCount(state: JobsRecord, value: string) =
+        member _.ModelDeadCategoryCount(state: Types.JobsRecord, value: string) =
             { state with ModelDeadCategoryCount = Some value }
 
         [<CustomOperation("modelFailedCategoryCount")>]
-        member _.ModelFailedCategoryCount(state: JobsRecord, value: string) =
+        member _.ModelFailedCategoryCount(state: Types.JobsRecord, value: string) =
             { state with ModelFailedCategoryCount = Some value }
 
         [<CustomOperation("modelLogTime")>]
-        member _.ModelLogTime(state: JobsRecord, value: string) =
+        member _.ModelLogTime(state: Types.JobsRecord, value: string) =
             { state with ModelLogTime = Some value }
 
         [<CustomOperation("modelTimestamp")>]
-        member _.ModelTimestamp(state: JobsRecord, value: string) =
+        member _.ModelTimestamp(state: Types.JobsRecord, value: string) =
             { state with ModelTimestamp = Some value }
 
         [<CustomOperation("forecastsTotal")>]
-        member _.ForecastsTotal(state: JobsRecord, value: string) =
+        member _.ForecastsTotal(state: Types.JobsRecord, value: string) =
             { state with ForecastsTotal = Some value }
 
         [<CustomOperation("forecastsMemoryMin")>]
-        member _.ForecastsMemoryMin(state: JobsRecord, value: string) =
+        member _.ForecastsMemoryMin(state: Types.JobsRecord, value: string) =
             { state with ForecastsMemoryMin = Some value }
 
         [<CustomOperation("forecastsMemoryMax")>]
-        member _.ForecastsMemoryMax(state: JobsRecord, value: string) =
+        member _.ForecastsMemoryMax(state: Types.JobsRecord, value: string) =
             { state with ForecastsMemoryMax = Some value }
 
         [<CustomOperation("forecastsMemoryAvg")>]
-        member _.ForecastsMemoryAvg(state: JobsRecord, value: string) =
+        member _.ForecastsMemoryAvg(state: Types.JobsRecord, value: string) =
             { state with ForecastsMemoryAvg = Some value }
 
         [<CustomOperation("forecastsMemoryTotal")>]
-        member _.ForecastsMemoryTotal(state: JobsRecord, value: string) =
+        member _.ForecastsMemoryTotal(state: Types.JobsRecord, value: string) =
             { state with ForecastsMemoryTotal = Some value }
 
         [<CustomOperation("forecastsRecordsMin")>]
-        member _.ForecastsRecordsMin(state: JobsRecord, value: string) =
+        member _.ForecastsRecordsMin(state: Types.JobsRecord, value: string) =
             { state with ForecastsRecordsMin = Some value }
 
         [<CustomOperation("forecastsRecordsMax")>]
-        member _.ForecastsRecordsMax(state: JobsRecord, value: string) =
+        member _.ForecastsRecordsMax(state: Types.JobsRecord, value: string) =
             { state with ForecastsRecordsMax = Some value }
 
         [<CustomOperation("forecastsRecordsAvg")>]
-        member _.ForecastsRecordsAvg(state: JobsRecord, value: string) =
+        member _.ForecastsRecordsAvg(state: Types.JobsRecord, value: string) =
             { state with ForecastsRecordsAvg = Some value }
 
         [<CustomOperation("forecastsRecordsTotal")>]
-        member _.ForecastsRecordsTotal(state: JobsRecord, value: string) =
+        member _.ForecastsRecordsTotal(state: Types.JobsRecord, value: string) =
             { state with ForecastsRecordsTotal = Some value }
 
         [<CustomOperation("forecastsTimeMin")>]
-        member _.ForecastsTimeMin(state: JobsRecord, value: string) =
+        member _.ForecastsTimeMin(state: Types.JobsRecord, value: string) =
             { state with ForecastsTimeMin = Some value }
 
         [<CustomOperation("forecastsTimeMax")>]
-        member _.ForecastsTimeMax(state: JobsRecord, value: string) =
+        member _.ForecastsTimeMax(state: Types.JobsRecord, value: string) =
             { state with ForecastsTimeMax = Some value }
 
         [<CustomOperation("forecastsTimeAvg")>]
-        member _.ForecastsTimeAvg(state: JobsRecord, value: string) =
+        member _.ForecastsTimeAvg(state: Types.JobsRecord, value: string) =
             { state with ForecastsTimeAvg = Some value }
 
         [<CustomOperation("forecastsTimeTotal")>]
-        member _.ForecastsTimeTotal(state: JobsRecord, value: string) =
+        member _.ForecastsTimeTotal(state: Types.JobsRecord, value: string) =
             { state with ForecastsTimeTotal = Some value }
 
         [<CustomOperation("nodeId")>]
-        member _.NodeId(state: JobsRecord, value: CoreTypes.NodeId) =
+        member _.NodeId(state: Types.JobsRecord, value: Types.NodeId) =
             { state with NodeId = Some value }
 
         [<CustomOperation("nodeName")>]
-        member _.NodeName(state: JobsRecord, value: string) =
+        member _.NodeName(state: Types.JobsRecord, value: string) =
             { state with NodeName = Some value }
 
         [<CustomOperation("nodeEphemeralId")>]
-        member _.NodeEphemeralId(state: JobsRecord, value: CoreTypes.NodeId) =
+        member _.NodeEphemeralId(state: Types.JobsRecord, value: Types.NodeId) =
             { state with NodeEphemeralId = Some value }
 
         [<CustomOperation("nodeAddress")>]
-        member _.NodeAddress(state: JobsRecord, value: string) =
+        member _.NodeAddress(state: Types.JobsRecord, value: string) =
             { state with NodeAddress = Some value }
 
         [<CustomOperation("bucketsCount")>]
-        member _.BucketsCount(state: JobsRecord, value: string) =
+        member _.BucketsCount(state: Types.JobsRecord, value: string) =
             { state with BucketsCount = Some value }
 
         [<CustomOperation("bucketsTimeTotal")>]
-        member _.BucketsTimeTotal(state: JobsRecord, value: string) =
+        member _.BucketsTimeTotal(state: Types.JobsRecord, value: string) =
             { state with BucketsTimeTotal = Some value }
 
         [<CustomOperation("bucketsTimeMin")>]
-        member _.BucketsTimeMin(state: JobsRecord, value: string) =
+        member _.BucketsTimeMin(state: Types.JobsRecord, value: string) =
             { state with BucketsTimeMin = Some value }
 
         [<CustomOperation("bucketsTimeMax")>]
-        member _.BucketsTimeMax(state: JobsRecord, value: string) =
+        member _.BucketsTimeMax(state: Types.JobsRecord, value: string) =
             { state with BucketsTimeMax = Some value }
 
         [<CustomOperation("bucketsTimeExpAvg")>]
-        member _.BucketsTimeExpAvg(state: JobsRecord, value: string) =
+        member _.BucketsTimeExpAvg(state: Types.JobsRecord, value: string) =
             { state with BucketsTimeExpAvg = Some value }
 
         [<CustomOperation("bucketsTimeExpAvgHour")>]
-        member _.BucketsTimeExpAvgHour(state: JobsRecord, value: string) =
+        member _.BucketsTimeExpAvgHour(state: Types.JobsRecord, value: string) =
             { state with BucketsTimeExpAvgHour = Some value }
 
     let jobsRecord = JobsRecordBuilder()

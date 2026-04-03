@@ -4,13 +4,13 @@ namespace Fes.Generated.Builders
 
 
 open System.Text.Json.Serialization
-open Fes.Generated.Types
+open Fes.Generated
 
 [<AutoOpen>]
 module ClusterAllocationExplainBuilders =
 
     type NodeAllocationExplanationBuilder() =
-        member _.Yield(_: unit) : NodeAllocationExplanation =
+        member _.Yield(_: unit) : Types.NodeAllocationExplanation =
             {
                 Deciders = None
                 NodeAttributes = Unchecked.defaultof<_>
@@ -24,45 +24,45 @@ module ClusterAllocationExplainBuilders =
             }
 
         [<CustomOperation("deciders")>]
-        member _.Deciders(state: NodeAllocationExplanation, value: ClusterAllocationExplain.AllocationDecision list) =
+        member _.Deciders(state: Types.NodeAllocationExplanation, value: Types.AllocationDecision list) =
             { state with Deciders = Some value }
 
         [<CustomOperation("nodeAttributes")>]
-        member _.NodeAttributes(state: NodeAllocationExplanation, value: Map<string, string>) =
+        member _.NodeAttributes(state: Types.NodeAllocationExplanation, value: Map<string, string>) =
             { state with NodeAttributes = value }
 
         [<CustomOperation("nodeDecision")>]
-        member _.NodeDecision(state: NodeAllocationExplanation, value: ClusterAllocationExplain.Decision) =
+        member _.NodeDecision(state: Types.NodeAllocationExplanation, value: Types.Decision) =
             { state with NodeDecision = value }
 
         [<CustomOperation("nodeId")>]
-        member _.NodeId(state: NodeAllocationExplanation, value: CoreTypes.Id) =
+        member _.NodeId(state: Types.NodeAllocationExplanation, value: Types.Id) =
             { state with NodeId = value }
 
         [<CustomOperation("nodeName")>]
-        member _.NodeName(state: NodeAllocationExplanation, value: CoreTypes.Name) =
+        member _.NodeName(state: Types.NodeAllocationExplanation, value: Types.Name) =
             { state with NodeName = value }
 
         [<CustomOperation("roles")>]
-        member _.Roles(state: NodeAllocationExplanation, value: CoreTypes.NodeRoles) =
+        member _.Roles(state: Types.NodeAllocationExplanation, value: Types.NodeRoles) =
             { state with Roles = value }
 
         [<CustomOperation("store")>]
-        member _.Store(state: NodeAllocationExplanation, value: ClusterAllocationExplain.AllocationStore) =
+        member _.Store(state: Types.NodeAllocationExplanation, value: Types.AllocationStore) =
             { state with Store = Some value }
 
         [<CustomOperation("transportAddress")>]
-        member _.TransportAddress(state: NodeAllocationExplanation, value: CoreTypes.TransportAddress) =
+        member _.TransportAddress(state: Types.NodeAllocationExplanation, value: Types.TransportAddress) =
             { state with TransportAddress = value }
 
         [<CustomOperation("weightRanking")>]
-        member _.WeightRanking(state: NodeAllocationExplanation, value: CoreTypes.Integer) =
+        member _.WeightRanking(state: Types.NodeAllocationExplanation, value: Types.Integer) =
             { state with WeightRanking = Some value }
 
     let nodeAllocationExplanation = NodeAllocationExplanationBuilder()
 
     type UnassignedInformationBuilder() =
-        member _.Yield(_: unit) : UnassignedInformation =
+        member _.Yield(_: unit) : Types.UnassignedInformation =
             {
                 At = Unchecked.defaultof<_>
                 LastAllocationStatus = None
@@ -74,31 +74,31 @@ module ClusterAllocationExplainBuilders =
             }
 
         [<CustomOperation("at")>]
-        member _.At(state: UnassignedInformation, value: CoreTypes.DateTime) =
+        member _.At(state: Types.UnassignedInformation, value: Types.DateTime) =
             { state with At = value }
 
         [<CustomOperation("lastAllocationStatus")>]
-        member _.LastAllocationStatus(state: UnassignedInformation, value: string) =
+        member _.LastAllocationStatus(state: Types.UnassignedInformation, value: string) =
             { state with LastAllocationStatus = Some value }
 
         [<CustomOperation("reason")>]
-        member _.Reason(state: UnassignedInformation, value: ClusterAllocationExplain.UnassignedInformationReason) =
+        member _.Reason(state: Types.UnassignedInformation, value: Types.UnassignedInformationReason) =
             { state with Reason = value }
 
         [<CustomOperation("details")>]
-        member _.Details(state: UnassignedInformation, value: string) =
+        member _.Details(state: Types.UnassignedInformation, value: string) =
             { state with Details = Some value }
 
         [<CustomOperation("failedAllocationAttempts")>]
-        member _.FailedAllocationAttempts(state: UnassignedInformation, value: CoreTypes.Integer) =
+        member _.FailedAllocationAttempts(state: Types.UnassignedInformation, value: Types.Integer) =
             { state with FailedAllocationAttempts = Some value }
 
         [<CustomOperation("delayed")>]
-        member _.Delayed(state: UnassignedInformation, value: bool) =
+        member _.Delayed(state: Types.UnassignedInformation, value: bool) =
             { state with Delayed = Some value }
 
         [<CustomOperation("allocationStatus")>]
-        member _.AllocationStatus(state: UnassignedInformation, value: string) =
+        member _.AllocationStatus(state: Types.UnassignedInformation, value: string) =
             { state with AllocationStatus = Some value }
 
     let unassignedInformation = UnassignedInformationBuilder()

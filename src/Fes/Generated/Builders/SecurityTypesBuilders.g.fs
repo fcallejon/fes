@@ -4,30 +4,30 @@ namespace Fes.Generated.Builders
 
 
 open System.Text.Json.Serialization
-open Fes.Generated.Types
+open Fes.Generated
 
 [<AutoOpen>]
 module SecurityTypesBuilders =
 
     type AccessBuilder() =
-        member _.Yield(_: unit) : Access =
+        member _.Yield(_: unit) : Types.Access =
             {
                 Replication = None
                 Search = None
             }
 
         [<CustomOperation("replication")>]
-        member _.Replication(state: Access, value: SecurityTypes.ReplicationAccess list) =
+        member _.Replication(state: Types.Access, value: Types.ReplicationAccess list) =
             { state with Replication = Some value }
 
         [<CustomOperation("search")>]
-        member _.Search(state: Access, value: SecurityTypes.SearchAccess list) =
+        member _.Search(state: Types.Access, value: Types.SearchAccess list) =
             { state with Search = Some value }
 
     let access = AccessBuilder()
 
     type ApiKeyBuilder() =
-        member _.Yield(_: unit) : ApiKey =
+        member _.Yield(_: unit) : Types.ApiKey =
             {
                 Id = Unchecked.defaultof<_>
                 Name = Unchecked.defaultof<_>
@@ -49,94 +49,94 @@ module SecurityTypesBuilders =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: ApiKey, value: CoreTypes.Id) =
+        member _.Id(state: Types.ApiKey, value: Types.Id) =
             { state with Id = value }
 
         [<CustomOperation("name")>]
-        member _.Name(state: ApiKey, value: CoreTypes.Name) =
+        member _.Name(state: Types.ApiKey, value: Types.Name) =
             { state with Name = value }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: ApiKey, value: SecurityTypes.ApiKeyType) =
+        member _.Type(state: Types.ApiKey, value: Types.ApiKeyType) =
             { state with Type = value }
 
         [<CustomOperation("creation")>]
-        member _.Creation(state: ApiKey, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
+        member _.Creation(state: Types.ApiKey, value: Types.EpochTime<Types.UnitMillis>) =
             { state with Creation = value }
 
         [<CustomOperation("expiration")>]
-        member _.Expiration(state: ApiKey, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
+        member _.Expiration(state: Types.ApiKey, value: Types.EpochTime<Types.UnitMillis>) =
             { state with Expiration = Some value }
 
         [<CustomOperation("invalidated")>]
-        member _.Invalidated(state: ApiKey, value: bool) =
+        member _.Invalidated(state: Types.ApiKey, value: bool) =
             { state with Invalidated = value }
 
         [<CustomOperation("invalidation")>]
-        member _.Invalidation(state: ApiKey, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
+        member _.Invalidation(state: Types.ApiKey, value: Types.EpochTime<Types.UnitMillis>) =
             { state with Invalidation = Some value }
 
         [<CustomOperation("username")>]
-        member _.Username(state: ApiKey, value: CoreTypes.Username) =
+        member _.Username(state: Types.ApiKey, value: Types.Username) =
             { state with Username = value }
 
         [<CustomOperation("realm")>]
-        member _.Realm(state: ApiKey, value: string) =
+        member _.Realm(state: Types.ApiKey, value: string) =
             { state with Realm = value }
 
         [<CustomOperation("realmType")>]
-        member _.RealmType(state: ApiKey, value: string) =
+        member _.RealmType(state: Types.ApiKey, value: string) =
             { state with RealmType = Some value }
 
         [<CustomOperation("metadata")>]
-        member _.Metadata(state: ApiKey, value: CoreTypes.Metadata) =
+        member _.Metadata(state: Types.ApiKey, value: Types.Metadata) =
             { state with Metadata = value }
 
         [<CustomOperation("roleDescriptors")>]
-        member _.RoleDescriptors(state: ApiKey, value: Map<string, SecurityTypes.RoleDescriptor>) =
+        member _.RoleDescriptors(state: Types.ApiKey, value: Map<string, Types.RoleDescriptor>) =
             { state with RoleDescriptors = Some value }
 
         [<CustomOperation("limitedBy")>]
-        member _.LimitedBy(state: ApiKey, value: Map<string, SecurityTypes.RoleDescriptor> list) =
+        member _.LimitedBy(state: Types.ApiKey, value: Map<string, Types.RoleDescriptor> list) =
             { state with LimitedBy = Some value }
 
         [<CustomOperation("access")>]
-        member _.Access(state: ApiKey, value: SecurityTypes.Access) =
+        member _.Access(state: Types.ApiKey, value: Types.Access) =
             { state with Access = Some value }
 
         [<CustomOperation("certificateIdentity")>]
-        member _.CertificateIdentity(state: ApiKey, value: string) =
+        member _.CertificateIdentity(state: Types.ApiKey, value: string) =
             { state with CertificateIdentity = Some value }
 
         [<CustomOperation("profileUid")>]
-        member _.ProfileUid(state: ApiKey, value: string) =
+        member _.ProfileUid(state: Types.ApiKey, value: string) =
             { state with ProfileUid = Some value }
 
         [<CustomOperation("sort")>]
-        member _.Sort(state: ApiKey, value: CoreTypes.SortResults) =
+        member _.Sort(state: Types.ApiKey, value: Types.SortResults) =
             { state with Sort = Some value }
 
     let apiKey = ApiKeyBuilder()
 
     type FieldSecurityBuilder() =
-        member _.Yield(_: unit) : FieldSecurity =
+        member _.Yield(_: unit) : Types.FieldSecurity =
             {
                 Except = None
                 Grant = None
             }
 
         [<CustomOperation("except")>]
-        member _.Except(state: FieldSecurity, value: CoreTypes.Fields) =
+        member _.Except(state: Types.FieldSecurity, value: Types.Fields) =
             { state with Except = Some value }
 
         [<CustomOperation("grant")>]
-        member _.Grant(state: FieldSecurity, value: CoreTypes.Fields) =
+        member _.Grant(state: Types.FieldSecurity, value: Types.Fields) =
             { state with Grant = Some value }
 
     let fieldSecurity = FieldSecurityBuilder()
 
     type IndicesPrivilegesBuilder() =
-        member _.Yield(_: unit) : IndicesPrivileges =
+        member _.Yield(_: unit) : Types.IndicesPrivileges =
             {
                 FieldSecurity = None
                 Names = Unchecked.defaultof<_>
@@ -146,29 +146,29 @@ module SecurityTypesBuilders =
             }
 
         [<CustomOperation("fieldSecurity")>]
-        member _.FieldSecurity(state: IndicesPrivileges, value: SecurityTypes.FieldSecurity) =
+        member _.FieldSecurity(state: Types.IndicesPrivileges, value: Types.FieldSecurity) =
             { state with FieldSecurity = Some value }
 
         [<CustomOperation("names")>]
-        member _.Names(state: IndicesPrivileges, value: System.Text.Json.JsonElement) =
+        member _.Names(state: Types.IndicesPrivileges, value: System.Text.Json.JsonElement) =
             { state with Names = value }
 
         [<CustomOperation("privileges")>]
-        member _.Privileges(state: IndicesPrivileges, value: SecurityTypes.IndexPrivilege list) =
+        member _.Privileges(state: Types.IndicesPrivileges, value: Types.IndexPrivilege list) =
             { state with Privileges = value }
 
         [<CustomOperation("query")>]
-        member _.Query(state: IndicesPrivileges, value: SecurityTypes.IndicesPrivilegesQuery) =
+        member _.Query(state: Types.IndicesPrivileges, value: Types.IndicesPrivilegesQuery) =
             { state with Query = Some value }
 
         [<CustomOperation("allowRestrictedIndices")>]
-        member _.AllowRestrictedIndices(state: IndicesPrivileges, value: bool) =
+        member _.AllowRestrictedIndices(state: Types.IndicesPrivileges, value: bool) =
             { state with AllowRestrictedIndices = Some value }
 
     let indicesPrivileges = IndicesPrivilegesBuilder()
 
     type IndicesPrivilegesBaseBuilder() =
-        member _.Yield(_: unit) : IndicesPrivilegesBase =
+        member _.Yield(_: unit) : Types.IndicesPrivilegesBase =
             {
                 FieldSecurity = None
                 Names = Unchecked.defaultof<_>
@@ -178,29 +178,29 @@ module SecurityTypesBuilders =
             }
 
         [<CustomOperation("fieldSecurity")>]
-        member _.FieldSecurity(state: IndicesPrivilegesBase, value: SecurityTypes.FieldSecurity) =
+        member _.FieldSecurity(state: Types.IndicesPrivilegesBase, value: Types.FieldSecurity) =
             { state with FieldSecurity = Some value }
 
         [<CustomOperation("names")>]
-        member _.Names(state: IndicesPrivilegesBase, value: System.Text.Json.JsonElement) =
+        member _.Names(state: Types.IndicesPrivilegesBase, value: System.Text.Json.JsonElement) =
             { state with Names = value }
 
         [<CustomOperation("privileges")>]
-        member _.Privileges(state: IndicesPrivilegesBase, value: SecurityTypes.IndexPrivilege list) =
+        member _.Privileges(state: Types.IndicesPrivilegesBase, value: Types.IndexPrivilege list) =
             { state with Privileges = value }
 
         [<CustomOperation("query")>]
-        member _.Query(state: IndicesPrivilegesBase, value: SecurityTypes.IndicesPrivilegesQuery) =
+        member _.Query(state: Types.IndicesPrivilegesBase, value: Types.IndicesPrivilegesQuery) =
             { state with Query = Some value }
 
         [<CustomOperation("allowRestrictedIndices")>]
-        member _.AllowRestrictedIndices(state: IndicesPrivilegesBase, value: bool) =
+        member _.AllowRestrictedIndices(state: Types.IndicesPrivilegesBase, value: bool) =
             { state with AllowRestrictedIndices = Some value }
 
     let indicesPrivilegesBase = IndicesPrivilegesBaseBuilder()
 
     type RemoteIndicesPrivilegesBuilder() =
-        member _.Yield(_: unit) : RemoteIndicesPrivileges =
+        member _.Yield(_: unit) : Types.RemoteIndicesPrivileges =
             {
                 Clusters = Unchecked.defaultof<_>
                 FieldSecurity = None
@@ -211,33 +211,33 @@ module SecurityTypesBuilders =
             }
 
         [<CustomOperation("clusters")>]
-        member _.Clusters(state: RemoteIndicesPrivileges, value: CoreTypes.Names) =
+        member _.Clusters(state: Types.RemoteIndicesPrivileges, value: Types.Names) =
             { state with Clusters = value }
 
         [<CustomOperation("fieldSecurity")>]
-        member _.FieldSecurity(state: RemoteIndicesPrivileges, value: SecurityTypes.FieldSecurity) =
+        member _.FieldSecurity(state: Types.RemoteIndicesPrivileges, value: Types.FieldSecurity) =
             { state with FieldSecurity = Some value }
 
         [<CustomOperation("names")>]
-        member _.Names(state: RemoteIndicesPrivileges, value: System.Text.Json.JsonElement) =
+        member _.Names(state: Types.RemoteIndicesPrivileges, value: System.Text.Json.JsonElement) =
             { state with Names = value }
 
         [<CustomOperation("privileges")>]
-        member _.Privileges(state: RemoteIndicesPrivileges, value: SecurityTypes.IndexPrivilege list) =
+        member _.Privileges(state: Types.RemoteIndicesPrivileges, value: Types.IndexPrivilege list) =
             { state with Privileges = value }
 
         [<CustomOperation("query")>]
-        member _.Query(state: RemoteIndicesPrivileges, value: SecurityTypes.IndicesPrivilegesQuery) =
+        member _.Query(state: Types.RemoteIndicesPrivileges, value: Types.IndicesPrivilegesQuery) =
             { state with Query = Some value }
 
         [<CustomOperation("allowRestrictedIndices")>]
-        member _.AllowRestrictedIndices(state: RemoteIndicesPrivileges, value: bool) =
+        member _.AllowRestrictedIndices(state: Types.RemoteIndicesPrivileges, value: bool) =
             { state with AllowRestrictedIndices = Some value }
 
     let remoteIndicesPrivileges = RemoteIndicesPrivilegesBuilder()
 
     type RemoteUserIndicesPrivilegesBuilder() =
-        member _.Yield(_: unit) : RemoteUserIndicesPrivileges =
+        member _.Yield(_: unit) : Types.RemoteUserIndicesPrivileges =
             {
                 Clusters = Unchecked.defaultof<_>
                 FieldSecurity = None
@@ -248,33 +248,33 @@ module SecurityTypesBuilders =
             }
 
         [<CustomOperation("clusters")>]
-        member _.Clusters(state: RemoteUserIndicesPrivileges, value: string list) =
+        member _.Clusters(state: Types.RemoteUserIndicesPrivileges, value: string list) =
             { state with Clusters = value }
 
         [<CustomOperation("fieldSecurity")>]
-        member _.FieldSecurity(state: RemoteUserIndicesPrivileges, value: SecurityTypes.FieldSecurity list) =
+        member _.FieldSecurity(state: Types.RemoteUserIndicesPrivileges, value: Types.FieldSecurity list) =
             { state with FieldSecurity = Some value }
 
         [<CustomOperation("names")>]
-        member _.Names(state: RemoteUserIndicesPrivileges, value: System.Text.Json.JsonElement) =
+        member _.Names(state: Types.RemoteUserIndicesPrivileges, value: System.Text.Json.JsonElement) =
             { state with Names = value }
 
         [<CustomOperation("privileges")>]
-        member _.Privileges(state: RemoteUserIndicesPrivileges, value: SecurityTypes.IndexPrivilege list) =
+        member _.Privileges(state: Types.RemoteUserIndicesPrivileges, value: Types.IndexPrivilege list) =
             { state with Privileges = value }
 
         [<CustomOperation("query")>]
-        member _.Query(state: RemoteUserIndicesPrivileges, value: SecurityTypes.IndicesPrivilegesQuery list) =
+        member _.Query(state: Types.RemoteUserIndicesPrivileges, value: Types.IndicesPrivilegesQuery list) =
             { state with Query = Some value }
 
         [<CustomOperation("allowRestrictedIndices")>]
-        member _.AllowRestrictedIndices(state: RemoteUserIndicesPrivileges, value: bool) =
+        member _.AllowRestrictedIndices(state: Types.RemoteUserIndicesPrivileges, value: bool) =
             { state with AllowRestrictedIndices = value }
 
     let remoteUserIndicesPrivileges = RemoteUserIndicesPrivilegesBuilder()
 
     type RoleDescriptorBuilder() =
-        member _.Yield(_: unit) : RoleDescriptor =
+        member _.Yield(_: unit) : Types.RoleDescriptor =
             {
                 Cluster = None
                 Indices = None
@@ -290,53 +290,53 @@ module SecurityTypesBuilders =
             }
 
         [<CustomOperation("cluster")>]
-        member _.Cluster(state: RoleDescriptor, value: SecurityTypes.ClusterPrivilege list) =
+        member _.Cluster(state: Types.RoleDescriptor, value: Types.ClusterPrivilege list) =
             { state with Cluster = Some value }
 
         [<CustomOperation("indices")>]
-        member _.Indices(state: RoleDescriptor, value: SecurityTypes.IndicesPrivileges list) =
+        member _.Indices(state: Types.RoleDescriptor, value: Types.IndicesPrivileges list) =
             { state with Indices = Some value }
 
         [<CustomOperation("remoteIndices")>]
-        member _.RemoteIndices(state: RoleDescriptor, value: SecurityTypes.RemoteIndicesPrivileges list) =
+        member _.RemoteIndices(state: Types.RoleDescriptor, value: Types.RemoteIndicesPrivileges list) =
             { state with RemoteIndices = Some value }
 
         [<CustomOperation("remoteCluster")>]
-        member _.RemoteCluster(state: RoleDescriptor, value: SecurityTypes.RemoteClusterPrivileges list) =
+        member _.RemoteCluster(state: Types.RoleDescriptor, value: Types.RemoteClusterPrivileges list) =
             { state with RemoteCluster = Some value }
 
         [<CustomOperation("global'")>]
-        member _.Global(state: RoleDescriptor, value: System.Text.Json.JsonElement) =
+        member _.Global(state: Types.RoleDescriptor, value: System.Text.Json.JsonElement) =
             { state with Global = Some value }
 
         [<CustomOperation("applications")>]
-        member _.Applications(state: RoleDescriptor, value: SecurityTypes.ApplicationPrivileges list) =
+        member _.Applications(state: Types.RoleDescriptor, value: Types.ApplicationPrivileges list) =
             { state with Applications = Some value }
 
         [<CustomOperation("metadata")>]
-        member _.Metadata(state: RoleDescriptor, value: CoreTypes.Metadata) =
+        member _.Metadata(state: Types.RoleDescriptor, value: Types.Metadata) =
             { state with Metadata = Some value }
 
         [<CustomOperation("runAs")>]
-        member _.RunAs(state: RoleDescriptor, value: string list) =
+        member _.RunAs(state: Types.RoleDescriptor, value: string list) =
             { state with RunAs = Some value }
 
         [<CustomOperation("description")>]
-        member _.Description(state: RoleDescriptor, value: string) =
+        member _.Description(state: Types.RoleDescriptor, value: string) =
             { state with Description = Some value }
 
         [<CustomOperation("restriction")>]
-        member _.Restriction(state: RoleDescriptor, value: SecurityTypes.Restriction) =
+        member _.Restriction(state: Types.RoleDescriptor, value: Types.Restriction) =
             { state with Restriction = Some value }
 
         [<CustomOperation("transientMetadata")>]
-        member _.TransientMetadata(state: RoleDescriptor, value: Map<string, System.Text.Json.JsonElement>) =
+        member _.TransientMetadata(state: Types.RoleDescriptor, value: Map<string, System.Text.Json.JsonElement>) =
             { state with TransientMetadata = Some value }
 
     let roleDescriptor = RoleDescriptorBuilder()
 
     type RoleDescriptorReadBuilder() =
-        member _.Yield(_: unit) : RoleDescriptorRead =
+        member _.Yield(_: unit) : Types.RoleDescriptorRead =
             {
                 Cluster = Unchecked.defaultof<_>
                 Indices = Unchecked.defaultof<_>
@@ -352,53 +352,53 @@ module SecurityTypesBuilders =
             }
 
         [<CustomOperation("cluster")>]
-        member _.Cluster(state: RoleDescriptorRead, value: SecurityTypes.ClusterPrivilege list) =
+        member _.Cluster(state: Types.RoleDescriptorRead, value: Types.ClusterPrivilege list) =
             { state with Cluster = value }
 
         [<CustomOperation("indices")>]
-        member _.Indices(state: RoleDescriptorRead, value: SecurityTypes.IndicesPrivileges list) =
+        member _.Indices(state: Types.RoleDescriptorRead, value: Types.IndicesPrivileges list) =
             { state with Indices = value }
 
         [<CustomOperation("remoteIndices")>]
-        member _.RemoteIndices(state: RoleDescriptorRead, value: SecurityTypes.RemoteIndicesPrivileges list) =
+        member _.RemoteIndices(state: Types.RoleDescriptorRead, value: Types.RemoteIndicesPrivileges list) =
             { state with RemoteIndices = Some value }
 
         [<CustomOperation("remoteCluster")>]
-        member _.RemoteCluster(state: RoleDescriptorRead, value: SecurityTypes.RemoteClusterPrivileges list) =
+        member _.RemoteCluster(state: Types.RoleDescriptorRead, value: Types.RemoteClusterPrivileges list) =
             { state with RemoteCluster = Some value }
 
         [<CustomOperation("global'")>]
-        member _.Global(state: RoleDescriptorRead, value: System.Text.Json.JsonElement) =
+        member _.Global(state: Types.RoleDescriptorRead, value: System.Text.Json.JsonElement) =
             { state with Global = Some value }
 
         [<CustomOperation("applications")>]
-        member _.Applications(state: RoleDescriptorRead, value: SecurityTypes.ApplicationPrivileges list) =
+        member _.Applications(state: Types.RoleDescriptorRead, value: Types.ApplicationPrivileges list) =
             { state with Applications = Some value }
 
         [<CustomOperation("metadata")>]
-        member _.Metadata(state: RoleDescriptorRead, value: CoreTypes.Metadata) =
+        member _.Metadata(state: Types.RoleDescriptorRead, value: Types.Metadata) =
             { state with Metadata = Some value }
 
         [<CustomOperation("runAs")>]
-        member _.RunAs(state: RoleDescriptorRead, value: string list) =
+        member _.RunAs(state: Types.RoleDescriptorRead, value: string list) =
             { state with RunAs = Some value }
 
         [<CustomOperation("description")>]
-        member _.Description(state: RoleDescriptorRead, value: string) =
+        member _.Description(state: Types.RoleDescriptorRead, value: string) =
             { state with Description = Some value }
 
         [<CustomOperation("restriction")>]
-        member _.Restriction(state: RoleDescriptorRead, value: SecurityTypes.Restriction) =
+        member _.Restriction(state: Types.RoleDescriptorRead, value: Types.Restriction) =
             { state with Restriction = Some value }
 
         [<CustomOperation("transientMetadata")>]
-        member _.TransientMetadata(state: RoleDescriptorRead, value: Map<string, System.Text.Json.JsonElement>) =
+        member _.TransientMetadata(state: Types.RoleDescriptorRead, value: Map<string, System.Text.Json.JsonElement>) =
             { state with TransientMetadata = Some value }
 
     let roleDescriptorRead = RoleDescriptorReadBuilder()
 
-    type RoleMappingBuilder() =
-        member _.Yield(_: unit) : RoleMapping =
+    type SecurityTypesRoleMappingBuilder() =
+        member _.Yield(_: unit) : Types.SecurityTypesRoleMapping =
             {
                 Enabled = Unchecked.defaultof<_>
                 Metadata = Unchecked.defaultof<_>
@@ -408,43 +408,43 @@ module SecurityTypesBuilders =
             }
 
         [<CustomOperation("enabled")>]
-        member _.Enabled(state: RoleMapping, value: bool) =
+        member _.Enabled(state: Types.SecurityTypesRoleMapping, value: bool) =
             { state with Enabled = value }
 
         [<CustomOperation("metadata")>]
-        member _.Metadata(state: RoleMapping, value: CoreTypes.Metadata) =
+        member _.Metadata(state: Types.SecurityTypesRoleMapping, value: Types.Metadata) =
             { state with Metadata = value }
 
         [<CustomOperation("roles")>]
-        member _.Roles(state: RoleMapping, value: string list) =
+        member _.Roles(state: Types.SecurityTypesRoleMapping, value: string list) =
             { state with Roles = Some value }
 
         [<CustomOperation("roleTemplates")>]
-        member _.RoleTemplates(state: RoleMapping, value: SecurityTypes.RoleTemplate list) =
+        member _.RoleTemplates(state: Types.SecurityTypesRoleMapping, value: Types.RoleTemplate list) =
             { state with RoleTemplates = Some value }
 
         [<CustomOperation("rules")>]
-        member _.Rules(state: RoleMapping, value: SecurityTypes.RoleMappingRule) =
+        member _.Rules(state: Types.SecurityTypesRoleMapping, value: Types.RoleMappingRule) =
             { state with Rules = value }
 
-    let roleMapping = RoleMappingBuilder()
+    let securityTypesRoleMapping = SecurityTypesRoleMappingBuilder()
 
     module RoleMappingRule =
 
-        let any (value: SecurityTypes.RoleMappingRule list) =
-            RoleMappingRule.Any value
+        let any (value: Types.RoleMappingRule list) =
+            Types.RoleMappingRule.Any value
 
-        let all (value: SecurityTypes.RoleMappingRule list) =
-            RoleMappingRule.All value
+        let all (value: Types.RoleMappingRule list) =
+            Types.RoleMappingRule.All value
 
         let field (field: string) (value: System.Text.Json.JsonElement) =
-            RoleMappingRule.Field (field, value)
+            Types.RoleMappingRule.Field (field, value)
 
-        let except (value: SecurityTypes.RoleMappingRule) =
-            RoleMappingRule.Except value
+        let except (value: Types.RoleMappingRule) =
+            Types.RoleMappingRule.Except value
 
     type RoleTemplateScriptBuilder() =
-        member _.Yield(_: unit) : RoleTemplateScript =
+        member _.Yield(_: unit) : Types.RoleTemplateScript =
             {
                 Source = None
                 Id = None
@@ -454,28 +454,28 @@ module SecurityTypesBuilders =
             }
 
         [<CustomOperation("source")>]
-        member _.Source(state: RoleTemplateScript, value: SecurityTypes.RoleTemplateInlineQuery) =
+        member _.Source(state: Types.RoleTemplateScript, value: Types.RoleTemplateInlineQuery) =
             { state with Source = Some value }
 
         [<CustomOperation("id")>]
-        member _.Id(state: RoleTemplateScript, value: CoreTypes.Id) =
+        member _.Id(state: Types.RoleTemplateScript, value: Types.Id) =
             { state with Id = Some value }
 
         [<CustomOperation("params")>]
-        member _.Params(state: RoleTemplateScript, value: Map<string, System.Text.Json.JsonElement>) =
+        member _.Params(state: Types.RoleTemplateScript, value: Map<string, System.Text.Json.JsonElement>) =
             { state with Params = Some value }
 
         [<CustomOperation("lang")>]
-        member _.Lang(state: RoleTemplateScript, value: CoreTypes.ScriptLanguage) =
+        member _.Lang(state: Types.RoleTemplateScript, value: Types.ScriptLanguage) =
             { state with Lang = Some value }
 
         [<CustomOperation("options")>]
-        member _.Options(state: RoleTemplateScript, value: Map<string, string>) =
+        member _.Options(state: Types.RoleTemplateScript, value: Map<string, string>) =
             { state with Options = Some value }
 
     let roleTemplateScript = RoleTemplateScriptBuilder()
 
-    let ofSource (value: SecurityTypes.RoleTemplateInlineQuery) : RoleTemplateScript =
+    let ofSource (value: Types.RoleTemplateInlineQuery) : Types.RoleTemplateScript =
         {
             Source = value
             Id = None
@@ -485,7 +485,7 @@ module SecurityTypesBuilders =
         }
 
     type SearchAccessBuilder() =
-        member _.Yield(_: unit) : SearchAccess =
+        member _.Yield(_: unit) : Types.SearchAccess =
             {
                 FieldSecurity = None
                 Names = Unchecked.defaultof<_>
@@ -494,25 +494,25 @@ module SecurityTypesBuilders =
             }
 
         [<CustomOperation("fieldSecurity")>]
-        member _.FieldSecurity(state: SearchAccess, value: SecurityTypes.FieldSecurity) =
+        member _.FieldSecurity(state: Types.SearchAccess, value: Types.FieldSecurity) =
             { state with FieldSecurity = Some value }
 
         [<CustomOperation("names")>]
-        member _.Names(state: SearchAccess, value: System.Text.Json.JsonElement) =
+        member _.Names(state: Types.SearchAccess, value: System.Text.Json.JsonElement) =
             { state with Names = value }
 
         [<CustomOperation("query")>]
-        member _.Query(state: SearchAccess, value: SecurityTypes.IndicesPrivilegesQuery) =
+        member _.Query(state: Types.SearchAccess, value: Types.IndicesPrivilegesQuery) =
             { state with Query = Some value }
 
         [<CustomOperation("allowRestrictedIndices")>]
-        member _.AllowRestrictedIndices(state: SearchAccess, value: bool) =
+        member _.AllowRestrictedIndices(state: Types.SearchAccess, value: bool) =
             { state with AllowRestrictedIndices = Some value }
 
     let searchAccess = SearchAccessBuilder()
 
     type UserBuilder() =
-        member _.Yield(_: unit) : User =
+        member _.Yield(_: unit) : Types.User =
             {
                 Email = None
                 FullName = None
@@ -524,37 +524,37 @@ module SecurityTypesBuilders =
             }
 
         [<CustomOperation("email")>]
-        member _.Email(state: User, value: string option) =
+        member _.Email(state: Types.User, value: string option) =
             { state with Email = Some value }
 
         [<CustomOperation("fullName")>]
-        member _.FullName(state: User, value: CoreTypes.Name option) =
+        member _.FullName(state: Types.User, value: Types.Name option) =
             { state with FullName = Some value }
 
         [<CustomOperation("metadata")>]
-        member _.Metadata(state: User, value: CoreTypes.Metadata) =
+        member _.Metadata(state: Types.User, value: Types.Metadata) =
             { state with Metadata = value }
 
         [<CustomOperation("roles")>]
-        member _.Roles(state: User, value: string list) =
+        member _.Roles(state: Types.User, value: string list) =
             { state with Roles = value }
 
         [<CustomOperation("username")>]
-        member _.Username(state: User, value: CoreTypes.Username) =
+        member _.Username(state: Types.User, value: Types.Username) =
             { state with Username = value }
 
         [<CustomOperation("enabled")>]
-        member _.Enabled(state: User, value: bool) =
+        member _.Enabled(state: Types.User, value: bool) =
             { state with Enabled = value }
 
         [<CustomOperation("profileUid")>]
-        member _.ProfileUid(state: User, value: SecurityTypes.UserProfileId) =
+        member _.ProfileUid(state: Types.User, value: Types.UserProfileId) =
             { state with ProfileUid = Some value }
 
     let user = UserBuilder()
 
     type UserIndicesPrivilegesBuilder() =
-        member _.Yield(_: unit) : UserIndicesPrivileges =
+        member _.Yield(_: unit) : Types.UserIndicesPrivileges =
             {
                 FieldSecurity = None
                 Names = Unchecked.defaultof<_>
@@ -564,29 +564,29 @@ module SecurityTypesBuilders =
             }
 
         [<CustomOperation("fieldSecurity")>]
-        member _.FieldSecurity(state: UserIndicesPrivileges, value: SecurityTypes.FieldSecurity list) =
+        member _.FieldSecurity(state: Types.UserIndicesPrivileges, value: Types.FieldSecurity list) =
             { state with FieldSecurity = Some value }
 
         [<CustomOperation("names")>]
-        member _.Names(state: UserIndicesPrivileges, value: System.Text.Json.JsonElement) =
+        member _.Names(state: Types.UserIndicesPrivileges, value: System.Text.Json.JsonElement) =
             { state with Names = value }
 
         [<CustomOperation("privileges")>]
-        member _.Privileges(state: UserIndicesPrivileges, value: SecurityTypes.IndexPrivilege list) =
+        member _.Privileges(state: Types.UserIndicesPrivileges, value: Types.IndexPrivilege list) =
             { state with Privileges = value }
 
         [<CustomOperation("query")>]
-        member _.Query(state: UserIndicesPrivileges, value: SecurityTypes.IndicesPrivilegesQuery list) =
+        member _.Query(state: Types.UserIndicesPrivileges, value: Types.IndicesPrivilegesQuery list) =
             { state with Query = Some value }
 
         [<CustomOperation("allowRestrictedIndices")>]
-        member _.AllowRestrictedIndices(state: UserIndicesPrivileges, value: bool) =
+        member _.AllowRestrictedIndices(state: Types.UserIndicesPrivileges, value: bool) =
             { state with AllowRestrictedIndices = value }
 
     let userIndicesPrivileges = UserIndicesPrivilegesBuilder()
 
     type UserIndicesPrivilegesBaseBuilder() =
-        member _.Yield(_: unit) : UserIndicesPrivilegesBase =
+        member _.Yield(_: unit) : Types.UserIndicesPrivilegesBase =
             {
                 FieldSecurity = None
                 Names = Unchecked.defaultof<_>
@@ -596,29 +596,29 @@ module SecurityTypesBuilders =
             }
 
         [<CustomOperation("fieldSecurity")>]
-        member _.FieldSecurity(state: UserIndicesPrivilegesBase, value: SecurityTypes.FieldSecurity list) =
+        member _.FieldSecurity(state: Types.UserIndicesPrivilegesBase, value: Types.FieldSecurity list) =
             { state with FieldSecurity = Some value }
 
         [<CustomOperation("names")>]
-        member _.Names(state: UserIndicesPrivilegesBase, value: System.Text.Json.JsonElement) =
+        member _.Names(state: Types.UserIndicesPrivilegesBase, value: System.Text.Json.JsonElement) =
             { state with Names = value }
 
         [<CustomOperation("privileges")>]
-        member _.Privileges(state: UserIndicesPrivilegesBase, value: SecurityTypes.IndexPrivilege list) =
+        member _.Privileges(state: Types.UserIndicesPrivilegesBase, value: Types.IndexPrivilege list) =
             { state with Privileges = value }
 
         [<CustomOperation("query")>]
-        member _.Query(state: UserIndicesPrivilegesBase, value: SecurityTypes.IndicesPrivilegesQuery list) =
+        member _.Query(state: Types.UserIndicesPrivilegesBase, value: Types.IndicesPrivilegesQuery list) =
             { state with Query = Some value }
 
         [<CustomOperation("allowRestrictedIndices")>]
-        member _.AllowRestrictedIndices(state: UserIndicesPrivilegesBase, value: bool) =
+        member _.AllowRestrictedIndices(state: Types.UserIndicesPrivilegesBase, value: bool) =
             { state with AllowRestrictedIndices = value }
 
     let userIndicesPrivilegesBase = UserIndicesPrivilegesBaseBuilder()
 
     type UserProfileUserBuilder() =
-        member _.Yield(_: unit) : UserProfileUser =
+        member _.Yield(_: unit) : Types.UserProfileUser =
             {
                 Email = None
                 FullName = None
@@ -629,27 +629,27 @@ module SecurityTypesBuilders =
             }
 
         [<CustomOperation("email")>]
-        member _.Email(state: UserProfileUser, value: string option) =
+        member _.Email(state: Types.UserProfileUser, value: string option) =
             { state with Email = Some value }
 
         [<CustomOperation("fullName")>]
-        member _.FullName(state: UserProfileUser, value: CoreTypes.Name option) =
+        member _.FullName(state: Types.UserProfileUser, value: Types.Name option) =
             { state with FullName = Some value }
 
         [<CustomOperation("realmName")>]
-        member _.RealmName(state: UserProfileUser, value: CoreTypes.Name) =
+        member _.RealmName(state: Types.UserProfileUser, value: Types.Name) =
             { state with RealmName = value }
 
         [<CustomOperation("realmDomain")>]
-        member _.RealmDomain(state: UserProfileUser, value: CoreTypes.Name) =
+        member _.RealmDomain(state: Types.UserProfileUser, value: Types.Name) =
             { state with RealmDomain = Some value }
 
         [<CustomOperation("roles")>]
-        member _.Roles(state: UserProfileUser, value: string list) =
+        member _.Roles(state: Types.UserProfileUser, value: string list) =
             { state with Roles = value }
 
         [<CustomOperation("username")>]
-        member _.Username(state: UserProfileUser, value: CoreTypes.Username) =
+        member _.Username(state: Types.UserProfileUser, value: Types.Username) =
             { state with Username = value }
 
     let userProfileUser = UserProfileUserBuilder()

@@ -4,13 +4,13 @@ namespace Fes.Generated.Builders
 
 
 open System.Text.Json.Serialization
-open Fes.Generated.Types
+open Fes.Generated
 
 [<AutoOpen>]
 module ClusterHealthBuilders =
 
     type HealthResponseBodyBuilder() =
-        member _.Yield(_: unit) : HealthResponseBody =
+        member _.Yield(_: unit) : Types.HealthResponseBody =
             {
                 ActivePrimaryShards = Unchecked.defaultof<_>
                 ActiveShards = Unchecked.defaultof<_>
@@ -34,79 +34,79 @@ module ClusterHealthBuilders =
             }
 
         [<CustomOperation("activePrimaryShards")>]
-        member _.ActivePrimaryShards(state: HealthResponseBody, value: CoreTypes.Integer) =
+        member _.ActivePrimaryShards(state: Types.HealthResponseBody, value: Types.Integer) =
             { state with ActivePrimaryShards = value }
 
         [<CustomOperation("activeShards")>]
-        member _.ActiveShards(state: HealthResponseBody, value: CoreTypes.Integer) =
+        member _.ActiveShards(state: Types.HealthResponseBody, value: Types.Integer) =
             { state with ActiveShards = value }
 
         [<CustomOperation("activeShardsPercent")>]
-        member _.ActiveShardsPercent(state: HealthResponseBody, value: string) =
+        member _.ActiveShardsPercent(state: Types.HealthResponseBody, value: string) =
             { state with ActiveShardsPercent = Some value }
 
         [<CustomOperation("activeShardsPercentAsNumber")>]
-        member _.ActiveShardsPercentAsNumber(state: HealthResponseBody, value: CoreTypes.Double) =
+        member _.ActiveShardsPercentAsNumber(state: Types.HealthResponseBody, value: Types.Double) =
             { state with ActiveShardsPercentAsNumber = value }
 
         [<CustomOperation("clusterName")>]
-        member _.ClusterName(state: HealthResponseBody, value: CoreTypes.Name) =
+        member _.ClusterName(state: Types.HealthResponseBody, value: Types.Name) =
             { state with ClusterName = value }
 
         [<CustomOperation("delayedUnassignedShards")>]
-        member _.DelayedUnassignedShards(state: HealthResponseBody, value: CoreTypes.Integer) =
+        member _.DelayedUnassignedShards(state: Types.HealthResponseBody, value: Types.Integer) =
             { state with DelayedUnassignedShards = value }
 
         [<CustomOperation("indices")>]
-        member _.Indices(state: HealthResponseBody, value: Map<CoreTypes.IndexName, ClusterHealth.IndexHealthStats>) =
+        member _.Indices(state: Types.HealthResponseBody, value: Map<Types.IndexName, Types.IndexHealthStats>) =
             { state with Indices = Some value }
 
         [<CustomOperation("initializingShards")>]
-        member _.InitializingShards(state: HealthResponseBody, value: CoreTypes.Integer) =
+        member _.InitializingShards(state: Types.HealthResponseBody, value: Types.Integer) =
             { state with InitializingShards = value }
 
         [<CustomOperation("numberOfDataNodes")>]
-        member _.NumberOfDataNodes(state: HealthResponseBody, value: CoreTypes.Integer) =
+        member _.NumberOfDataNodes(state: Types.HealthResponseBody, value: Types.Integer) =
             { state with NumberOfDataNodes = value }
 
         [<CustomOperation("numberOfInFlightFetch")>]
-        member _.NumberOfInFlightFetch(state: HealthResponseBody, value: CoreTypes.Integer) =
+        member _.NumberOfInFlightFetch(state: Types.HealthResponseBody, value: Types.Integer) =
             { state with NumberOfInFlightFetch = value }
 
         [<CustomOperation("numberOfNodes")>]
-        member _.NumberOfNodes(state: HealthResponseBody, value: CoreTypes.Integer) =
+        member _.NumberOfNodes(state: Types.HealthResponseBody, value: Types.Integer) =
             { state with NumberOfNodes = value }
 
         [<CustomOperation("numberOfPendingTasks")>]
-        member _.NumberOfPendingTasks(state: HealthResponseBody, value: CoreTypes.Integer) =
+        member _.NumberOfPendingTasks(state: Types.HealthResponseBody, value: Types.Integer) =
             { state with NumberOfPendingTasks = value }
 
         [<CustomOperation("relocatingShards")>]
-        member _.RelocatingShards(state: HealthResponseBody, value: CoreTypes.Integer) =
+        member _.RelocatingShards(state: Types.HealthResponseBody, value: Types.Integer) =
             { state with RelocatingShards = value }
 
         [<CustomOperation("status")>]
-        member _.Status(state: HealthResponseBody, value: CoreTypes.HealthStatus) =
+        member _.Status(state: Types.HealthResponseBody, value: Types.HealthStatus) =
             { state with Status = value }
 
         [<CustomOperation("taskMaxWaitingInQueue")>]
-        member _.TaskMaxWaitingInQueue(state: HealthResponseBody, value: CoreTypes.Duration) =
+        member _.TaskMaxWaitingInQueue(state: Types.HealthResponseBody, value: Types.Duration) =
             { state with TaskMaxWaitingInQueue = Some value }
 
         [<CustomOperation("taskMaxWaitingInQueueMillis")>]
-        member _.TaskMaxWaitingInQueueMillis(state: HealthResponseBody, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
+        member _.TaskMaxWaitingInQueueMillis(state: Types.HealthResponseBody, value: Types.DurationValue<Types.UnitMillis>) =
             { state with TaskMaxWaitingInQueueMillis = value }
 
         [<CustomOperation("timedOut")>]
-        member _.TimedOut(state: HealthResponseBody, value: bool) =
+        member _.TimedOut(state: Types.HealthResponseBody, value: bool) =
             { state with TimedOut = value }
 
         [<CustomOperation("unassignedPrimaryShards")>]
-        member _.UnassignedPrimaryShards(state: HealthResponseBody, value: CoreTypes.Integer) =
+        member _.UnassignedPrimaryShards(state: Types.HealthResponseBody, value: Types.Integer) =
             { state with UnassignedPrimaryShards = value }
 
         [<CustomOperation("unassignedShards")>]
-        member _.UnassignedShards(state: HealthResponseBody, value: CoreTypes.Integer) =
+        member _.UnassignedShards(state: Types.HealthResponseBody, value: Types.Integer) =
             { state with UnassignedShards = value }
 
     let healthResponseBody = HealthResponseBodyBuilder()

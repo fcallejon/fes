@@ -4,13 +4,13 @@ namespace Fes.Generated.Builders
 
 
 open System.Text.Json.Serialization
-open Fes.Generated.Types
+open Fes.Generated
 
 [<AutoOpen>]
 module MigrationDeprecationsBuilders =
 
     type DeprecationBuilder() =
-        member _.Yield(_: unit) : Deprecation =
+        member _.Yield(_: unit) : Types.Deprecation =
             {
                 Details = None
                 Level = Unchecked.defaultof<_>
@@ -21,27 +21,27 @@ module MigrationDeprecationsBuilders =
             }
 
         [<CustomOperation("details")>]
-        member _.Details(state: Deprecation, value: string) =
+        member _.Details(state: Types.Deprecation, value: string) =
             { state with Details = Some value }
 
         [<CustomOperation("level")>]
-        member _.Level(state: Deprecation, value: MigrationDeprecations.DeprecationLevel) =
+        member _.Level(state: Types.Deprecation, value: Types.DeprecationLevel) =
             { state with Level = value }
 
         [<CustomOperation("message")>]
-        member _.Message(state: Deprecation, value: string) =
+        member _.Message(state: Types.Deprecation, value: string) =
             { state with Message = value }
 
         [<CustomOperation("url")>]
-        member _.Url(state: Deprecation, value: string) =
+        member _.Url(state: Types.Deprecation, value: string) =
             { state with Url = value }
 
         [<CustomOperation("resolveDuringRollingUpgrade")>]
-        member _.ResolveDuringRollingUpgrade(state: Deprecation, value: bool) =
+        member _.ResolveDuringRollingUpgrade(state: Types.Deprecation, value: bool) =
             { state with ResolveDuringRollingUpgrade = value }
 
         [<CustomOperation("meta")>]
-        member _.Meta(state: Deprecation, value: Map<string, System.Text.Json.JsonElement>) =
+        member _.Meta(state: Types.Deprecation, value: Map<string, System.Text.Json.JsonElement>) =
             { state with Meta = Some value }
 
     let deprecation = DeprecationBuilder()

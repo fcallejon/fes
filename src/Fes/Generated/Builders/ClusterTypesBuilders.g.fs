@@ -4,13 +4,13 @@ namespace Fes.Generated.Builders
 
 
 open System.Text.Json.Serialization
-open Fes.Generated.Types
+open Fes.Generated
 
 [<AutoOpen>]
 module ClusterTypesBuilders =
 
     type ComponentTemplateNodeBuilder() =
-        member _.Yield(_: unit) : ComponentTemplateNode =
+        member _.Yield(_: unit) : Types.ComponentTemplateNode =
             {
                 Template = Unchecked.defaultof<_>
                 Version = None
@@ -23,41 +23,41 @@ module ClusterTypesBuilders =
             }
 
         [<CustomOperation("template")>]
-        member _.Template(state: ComponentTemplateNode, value: ClusterTypes.ComponentTemplateSummary) =
+        member _.Template(state: Types.ComponentTemplateNode, value: Types.ComponentTemplateSummary) =
             { state with Template = value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: ComponentTemplateNode, value: CoreTypes.VersionNumber) =
+        member _.Version(state: Types.ComponentTemplateNode, value: Types.VersionNumber) =
             { state with Version = Some value }
 
         [<CustomOperation("meta")>]
-        member _.Meta(state: ComponentTemplateNode, value: CoreTypes.Metadata) =
+        member _.Meta(state: Types.ComponentTemplateNode, value: Types.Metadata) =
             { state with Meta = Some value }
 
         [<CustomOperation("deprecated")>]
-        member _.Deprecated(state: ComponentTemplateNode, value: bool) =
+        member _.Deprecated(state: Types.ComponentTemplateNode, value: bool) =
             { state with Deprecated = Some value }
 
         [<CustomOperation("createdDate")>]
-        member _.CreatedDate(state: ComponentTemplateNode, value: CoreTypes.DateTime) =
+        member _.CreatedDate(state: Types.ComponentTemplateNode, value: Types.DateTime) =
             { state with CreatedDate = Some value }
 
         [<CustomOperation("createdDateMillis")>]
-        member _.CreatedDateMillis(state: ComponentTemplateNode, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
+        member _.CreatedDateMillis(state: Types.ComponentTemplateNode, value: Types.EpochTime<Types.UnitMillis>) =
             { state with CreatedDateMillis = Some value }
 
         [<CustomOperation("modifiedDate")>]
-        member _.ModifiedDate(state: ComponentTemplateNode, value: CoreTypes.DateTime) =
+        member _.ModifiedDate(state: Types.ComponentTemplateNode, value: Types.DateTime) =
             { state with ModifiedDate = Some value }
 
         [<CustomOperation("modifiedDateMillis")>]
-        member _.ModifiedDateMillis(state: ComponentTemplateNode, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
+        member _.ModifiedDateMillis(state: Types.ComponentTemplateNode, value: Types.EpochTime<Types.UnitMillis>) =
             { state with ModifiedDateMillis = Some value }
 
     let componentTemplateNode = ComponentTemplateNodeBuilder()
 
     type ComponentTemplateNodeWithRolloverBuilder() =
-        member _.Yield(_: unit) : ComponentTemplateNodeWithRollover =
+        member _.Yield(_: unit) : Types.ComponentTemplateNodeWithRollover =
             {
                 Template = Unchecked.defaultof<_>
                 Version = None
@@ -70,41 +70,41 @@ module ClusterTypesBuilders =
             }
 
         [<CustomOperation("template")>]
-        member _.Template(state: ComponentTemplateNodeWithRollover, value: ClusterTypes.ComponentTemplateSummaryRes) =
+        member _.Template(state: Types.ComponentTemplateNodeWithRollover, value: Types.ComponentTemplateSummaryRes) =
             { state with Template = value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: ComponentTemplateNodeWithRollover, value: CoreTypes.VersionNumber) =
+        member _.Version(state: Types.ComponentTemplateNodeWithRollover, value: Types.VersionNumber) =
             { state with Version = Some value }
 
         [<CustomOperation("meta")>]
-        member _.Meta(state: ComponentTemplateNodeWithRollover, value: CoreTypes.Metadata) =
+        member _.Meta(state: Types.ComponentTemplateNodeWithRollover, value: Types.Metadata) =
             { state with Meta = Some value }
 
         [<CustomOperation("deprecated")>]
-        member _.Deprecated(state: ComponentTemplateNodeWithRollover, value: bool) =
+        member _.Deprecated(state: Types.ComponentTemplateNodeWithRollover, value: bool) =
             { state with Deprecated = Some value }
 
         [<CustomOperation("createdDate")>]
-        member _.CreatedDate(state: ComponentTemplateNodeWithRollover, value: CoreTypes.DateTime) =
+        member _.CreatedDate(state: Types.ComponentTemplateNodeWithRollover, value: Types.DateTime) =
             { state with CreatedDate = Some value }
 
         [<CustomOperation("createdDateMillis")>]
-        member _.CreatedDateMillis(state: ComponentTemplateNodeWithRollover, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
+        member _.CreatedDateMillis(state: Types.ComponentTemplateNodeWithRollover, value: Types.EpochTime<Types.UnitMillis>) =
             { state with CreatedDateMillis = Some value }
 
         [<CustomOperation("modifiedDate")>]
-        member _.ModifiedDate(state: ComponentTemplateNodeWithRollover, value: CoreTypes.DateTime) =
+        member _.ModifiedDate(state: Types.ComponentTemplateNodeWithRollover, value: Types.DateTime) =
             { state with ModifiedDate = Some value }
 
         [<CustomOperation("modifiedDateMillis")>]
-        member _.ModifiedDateMillis(state: ComponentTemplateNodeWithRollover, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
+        member _.ModifiedDateMillis(state: Types.ComponentTemplateNodeWithRollover, value: Types.EpochTime<Types.UnitMillis>) =
             { state with ModifiedDateMillis = Some value }
 
     let componentTemplateNodeWithRollover = ComponentTemplateNodeWithRolloverBuilder()
 
     type ComponentTemplateSummaryBuilder() =
-        member _.Yield(_: unit) : ComponentTemplateSummary =
+        member _.Yield(_: unit) : Types.ComponentTemplateSummary =
             {
                 Meta = None
                 Version = None
@@ -116,37 +116,37 @@ module ClusterTypesBuilders =
             }
 
         [<CustomOperation("meta")>]
-        member _.Meta(state: ComponentTemplateSummary, value: CoreTypes.Metadata) =
+        member _.Meta(state: Types.ComponentTemplateSummary, value: Types.Metadata) =
             { state with Meta = Some value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: ComponentTemplateSummary, value: CoreTypes.VersionNumber) =
+        member _.Version(state: Types.ComponentTemplateSummary, value: Types.VersionNumber) =
             { state with Version = Some value }
 
         [<CustomOperation("settings")>]
-        member _.Settings(state: ComponentTemplateSummary, value: Map<CoreTypes.IndexName, IndicesTypes.IndexSettings>) =
+        member _.Settings(state: Types.ComponentTemplateSummary, value: Map<Types.IndexName, Types.IndexSettings>) =
             { state with Settings = Some value }
 
         [<CustomOperation("mappings")>]
-        member _.Mappings(state: ComponentTemplateSummary, value: CoreTypes.TypeMapping) =
+        member _.Mappings(state: Types.ComponentTemplateSummary, value: Types.TypeMapping) =
             { state with Mappings = Some value }
 
         [<CustomOperation("aliases")>]
-        member _.Aliases(state: ComponentTemplateSummary, value: Map<string, IndicesTypes.AliasDefinition>) =
+        member _.Aliases(state: Types.ComponentTemplateSummary, value: Map<string, Types.AliasDefinition>) =
             { state with Aliases = Some value }
 
         [<CustomOperation("lifecycle")>]
-        member _.Lifecycle(state: ComponentTemplateSummary, value: IndicesTypes.DataStreamLifecycle) =
+        member _.Lifecycle(state: Types.ComponentTemplateSummary, value: Types.DataStreamLifecycle) =
             { state with Lifecycle = Some value }
 
         [<CustomOperation("dataStreamOptions")>]
-        member _.DataStreamOptions(state: ComponentTemplateSummary, value: IndicesTypes.DataStreamOptions) =
+        member _.DataStreamOptions(state: Types.ComponentTemplateSummary, value: Types.DataStreamOptions) =
             { state with DataStreamOptions = Some value }
 
     let componentTemplateSummary = ComponentTemplateSummaryBuilder()
 
     type ComponentTemplateSummaryResBuilder() =
-        member _.Yield(_: unit) : ComponentTemplateSummaryRes =
+        member _.Yield(_: unit) : Types.ComponentTemplateSummaryRes =
             {
                 Lifecycle = None
                 Meta = None
@@ -158,31 +158,31 @@ module ClusterTypesBuilders =
             }
 
         [<CustomOperation("lifecycle")>]
-        member _.Lifecycle(state: ComponentTemplateSummaryRes, value: IndicesTypes.DataStreamLifecycleWithRollover) =
+        member _.Lifecycle(state: Types.ComponentTemplateSummaryRes, value: Types.DataStreamLifecycleWithRollover) =
             { state with Lifecycle = Some value }
 
         [<CustomOperation("meta")>]
-        member _.Meta(state: ComponentTemplateSummaryRes, value: CoreTypes.Metadata) =
+        member _.Meta(state: Types.ComponentTemplateSummaryRes, value: Types.Metadata) =
             { state with Meta = Some value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: ComponentTemplateSummaryRes, value: CoreTypes.VersionNumber) =
+        member _.Version(state: Types.ComponentTemplateSummaryRes, value: Types.VersionNumber) =
             { state with Version = Some value }
 
         [<CustomOperation("settings")>]
-        member _.Settings(state: ComponentTemplateSummaryRes, value: Map<CoreTypes.IndexName, IndicesTypes.IndexSettings>) =
+        member _.Settings(state: Types.ComponentTemplateSummaryRes, value: Map<Types.IndexName, Types.IndexSettings>) =
             { state with Settings = Some value }
 
         [<CustomOperation("mappings")>]
-        member _.Mappings(state: ComponentTemplateSummaryRes, value: CoreTypes.TypeMapping) =
+        member _.Mappings(state: Types.ComponentTemplateSummaryRes, value: Types.TypeMapping) =
             { state with Mappings = Some value }
 
         [<CustomOperation("aliases")>]
-        member _.Aliases(state: ComponentTemplateSummaryRes, value: Map<string, IndicesTypes.AliasDefinition>) =
+        member _.Aliases(state: Types.ComponentTemplateSummaryRes, value: Map<string, Types.AliasDefinition>) =
             { state with Aliases = Some value }
 
         [<CustomOperation("dataStreamOptions")>]
-        member _.DataStreamOptions(state: ComponentTemplateSummaryRes, value: IndicesTypes.DataStreamOptions) =
+        member _.DataStreamOptions(state: Types.ComponentTemplateSummaryRes, value: Types.DataStreamOptions) =
             { state with DataStreamOptions = Some value }
 
     let componentTemplateSummaryRes = ComponentTemplateSummaryResBuilder()

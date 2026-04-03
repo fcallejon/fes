@@ -7,12 +7,13 @@ open System
 open System.Text.Json
 open System.Text.Json.Serialization
 open Fes
+open Fes.Generated
 
 [<AutoOpen>]
 module MlOperations =
 
     type MlClearTrainedModelDeploymentCacheRequest = {
-        ModelId: CoreTypes.Id
+        ModelId: Types.Id
     }
 
         with
@@ -35,19 +36,19 @@ module MlOperations =
             }
 
         [<CustomOperation("modelId")>]
-        member _.ModelId(state: MlClearTrainedModelDeploymentCacheRequest, value: CoreTypes.Id) =
+        member _.ModelId(state: MlClearTrainedModelDeploymentCacheRequest, value: Types.Id) =
             { state with ModelId = value }
 
     let mlClearTrainedModelDeploymentCacheRequest = MlClearTrainedModelDeploymentCacheRequestBuilder()
 
     type MlCloseJobRequest = {
-        JobId: CoreTypes.Id
+        JobId: Types.Id
         AllowNoMatch: bool option
         Force: bool option
-        Timeout: CoreTypes.Duration option
+        Timeout: Types.Duration option
         AllowNoMatch: bool option
         Force: bool option
-        Timeout: CoreTypes.Duration option
+        Timeout: Types.Duration option
     }
 
         with
@@ -86,7 +87,7 @@ module MlOperations =
             }
 
         [<CustomOperation("jobId")>]
-        member _.JobId(state: MlCloseJobRequest, value: CoreTypes.Id) =
+        member _.JobId(state: MlCloseJobRequest, value: Types.Id) =
             { state with JobId = value }
 
         [<CustomOperation("allowNoMatch")>]
@@ -98,7 +99,7 @@ module MlOperations =
             { state with Force = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: MlCloseJobRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: MlCloseJobRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("allowNoMatch")>]
@@ -110,7 +111,7 @@ module MlOperations =
             { state with Force = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: MlCloseJobRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: MlCloseJobRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
     let mlCloseJobRequest = MlCloseJobRequestBuilder()
@@ -120,17 +121,17 @@ module MlOperations =
             { req with AllowNoMatch = Some value }
         let withForce (value: bool) (req: MlCloseJobRequest) =
             { req with Force = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: MlCloseJobRequest) =
+        let withTimeout (value: Types.Duration) (req: MlCloseJobRequest) =
             { req with Timeout = Some value }
         let withAllowNoMatch (value: bool) (req: MlCloseJobRequest) =
             { req with AllowNoMatch = Some value }
         let withForce (value: bool) (req: MlCloseJobRequest) =
             { req with Force = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: MlCloseJobRequest) =
+        let withTimeout (value: Types.Duration) (req: MlCloseJobRequest) =
             { req with Timeout = Some value }
 
     type MlDeleteCalendarRequest = {
-        CalendarId: CoreTypes.Id
+        CalendarId: Types.Id
     }
 
         with
@@ -144,7 +145,7 @@ module MlOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type MlDeleteCalendarResponse = CoreTypes.AcknowledgedResponseBase
+    type MlDeleteCalendarResponse = Types.AcknowledgedResponseBase
 
     type MlDeleteCalendarRequestBuilder() =
         member _.Yield(_: unit) : MlDeleteCalendarRequest =
@@ -153,14 +154,14 @@ module MlOperations =
             }
 
         [<CustomOperation("calendarId")>]
-        member _.CalendarId(state: MlDeleteCalendarRequest, value: CoreTypes.Id) =
+        member _.CalendarId(state: MlDeleteCalendarRequest, value: Types.Id) =
             { state with CalendarId = value }
 
     let mlDeleteCalendarRequest = MlDeleteCalendarRequestBuilder()
 
     type MlDeleteCalendarEventRequest = {
-        CalendarId: CoreTypes.Id
-        EventId: CoreTypes.Id
+        CalendarId: Types.Id
+        EventId: Types.Id
     }
 
         with
@@ -174,7 +175,7 @@ module MlOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type MlDeleteCalendarEventResponse = CoreTypes.AcknowledgedResponseBase
+    type MlDeleteCalendarEventResponse = Types.AcknowledgedResponseBase
 
     type MlDeleteCalendarEventRequestBuilder() =
         member _.Yield(_: unit) : MlDeleteCalendarEventRequest =
@@ -184,18 +185,18 @@ module MlOperations =
             }
 
         [<CustomOperation("calendarId")>]
-        member _.CalendarId(state: MlDeleteCalendarEventRequest, value: CoreTypes.Id) =
+        member _.CalendarId(state: MlDeleteCalendarEventRequest, value: Types.Id) =
             { state with CalendarId = value }
 
         [<CustomOperation("eventId")>]
-        member _.EventId(state: MlDeleteCalendarEventRequest, value: CoreTypes.Id) =
+        member _.EventId(state: MlDeleteCalendarEventRequest, value: Types.Id) =
             { state with EventId = value }
 
     let mlDeleteCalendarEventRequest = MlDeleteCalendarEventRequestBuilder()
 
     type MlDeleteCalendarJobRequest = {
-        CalendarId: CoreTypes.Id
-        JobId: CoreTypes.Ids
+        CalendarId: Types.Id
+        JobId: Types.Ids
     }
 
         with
@@ -219,19 +220,19 @@ module MlOperations =
             }
 
         [<CustomOperation("calendarId")>]
-        member _.CalendarId(state: MlDeleteCalendarJobRequest, value: CoreTypes.Id) =
+        member _.CalendarId(state: MlDeleteCalendarJobRequest, value: Types.Id) =
             { state with CalendarId = value }
 
         [<CustomOperation("jobId")>]
-        member _.JobId(state: MlDeleteCalendarJobRequest, value: CoreTypes.Ids) =
+        member _.JobId(state: MlDeleteCalendarJobRequest, value: Types.Ids) =
             { state with JobId = value }
 
     let mlDeleteCalendarJobRequest = MlDeleteCalendarJobRequestBuilder()
 
     type MlDeleteDataFrameAnalyticsRequest = {
-        Id: CoreTypes.Id
+        Id: Types.Id
         Force: bool option
-        Timeout: CoreTypes.Duration option
+        Timeout: Types.Duration option
     }
 
         with
@@ -253,7 +254,7 @@ module MlOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type MlDeleteDataFrameAnalyticsResponse = CoreTypes.AcknowledgedResponseBase
+    type MlDeleteDataFrameAnalyticsResponse = Types.AcknowledgedResponseBase
 
     type MlDeleteDataFrameAnalyticsRequestBuilder() =
         member _.Yield(_: unit) : MlDeleteDataFrameAnalyticsRequest =
@@ -264,7 +265,7 @@ module MlOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: MlDeleteDataFrameAnalyticsRequest, value: CoreTypes.Id) =
+        member _.Id(state: MlDeleteDataFrameAnalyticsRequest, value: Types.Id) =
             { state with Id = value }
 
         [<CustomOperation("force")>]
@@ -272,7 +273,7 @@ module MlOperations =
             { state with Force = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: MlDeleteDataFrameAnalyticsRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: MlDeleteDataFrameAnalyticsRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
     let mlDeleteDataFrameAnalyticsRequest = MlDeleteDataFrameAnalyticsRequestBuilder()
@@ -280,11 +281,11 @@ module MlOperations =
     module DeleteDataFrameAnalytics =
         let withForce (value: bool) (req: MlDeleteDataFrameAnalyticsRequest) =
             { req with Force = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: MlDeleteDataFrameAnalyticsRequest) =
+        let withTimeout (value: Types.Duration) (req: MlDeleteDataFrameAnalyticsRequest) =
             { req with Timeout = Some value }
 
     type MlDeleteDatafeedRequest = {
-        DatafeedId: CoreTypes.Id
+        DatafeedId: Types.Id
         Force: bool option
     }
 
@@ -306,7 +307,7 @@ module MlOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type MlDeleteDatafeedResponse = CoreTypes.AcknowledgedResponseBase
+    type MlDeleteDatafeedResponse = Types.AcknowledgedResponseBase
 
     type MlDeleteDatafeedRequestBuilder() =
         member _.Yield(_: unit) : MlDeleteDatafeedRequest =
@@ -316,7 +317,7 @@ module MlOperations =
             }
 
         [<CustomOperation("datafeedId")>]
-        member _.DatafeedId(state: MlDeleteDatafeedRequest, value: CoreTypes.Id) =
+        member _.DatafeedId(state: MlDeleteDatafeedRequest, value: Types.Id) =
             { state with DatafeedId = value }
 
         [<CustomOperation("force")>]
@@ -330,11 +331,11 @@ module MlOperations =
             { req with Force = Some value }
 
     type MlDeleteExpiredDataRequest = {
-        JobId: CoreTypes.Id
-        RequestsPerSecond: CoreTypes.Float option
-        Timeout: CoreTypes.Duration option
-        RequestsPerSecond: CoreTypes.Float option
-        Timeout: CoreTypes.Duration option
+        JobId: Types.Id
+        RequestsPerSecond: Types.Float option
+        Timeout: Types.Duration option
+        RequestsPerSecond: Types.Float option
+        Timeout: Types.Duration option
     }
 
         with
@@ -370,39 +371,39 @@ module MlOperations =
             }
 
         [<CustomOperation("jobId")>]
-        member _.JobId(state: MlDeleteExpiredDataRequest, value: CoreTypes.Id) =
+        member _.JobId(state: MlDeleteExpiredDataRequest, value: Types.Id) =
             { state with JobId = value }
 
         [<CustomOperation("requestsPerSecond")>]
-        member _.RequestsPerSecond(state: MlDeleteExpiredDataRequest, value: CoreTypes.Float) =
+        member _.RequestsPerSecond(state: MlDeleteExpiredDataRequest, value: Types.Float) =
             { state with RequestsPerSecond = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: MlDeleteExpiredDataRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: MlDeleteExpiredDataRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("requestsPerSecond")>]
-        member _.RequestsPerSecond(state: MlDeleteExpiredDataRequest, value: CoreTypes.Float) =
+        member _.RequestsPerSecond(state: MlDeleteExpiredDataRequest, value: Types.Float) =
             { state with RequestsPerSecond = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: MlDeleteExpiredDataRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: MlDeleteExpiredDataRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
     let mlDeleteExpiredDataRequest = MlDeleteExpiredDataRequestBuilder()
 
     module DeleteExpiredData =
-        let withRequestsPerSecond (value: CoreTypes.Float) (req: MlDeleteExpiredDataRequest) =
+        let withRequestsPerSecond (value: Types.Float) (req: MlDeleteExpiredDataRequest) =
             { req with RequestsPerSecond = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: MlDeleteExpiredDataRequest) =
+        let withTimeout (value: Types.Duration) (req: MlDeleteExpiredDataRequest) =
             { req with Timeout = Some value }
-        let withRequestsPerSecond (value: CoreTypes.Float) (req: MlDeleteExpiredDataRequest) =
+        let withRequestsPerSecond (value: Types.Float) (req: MlDeleteExpiredDataRequest) =
             { req with RequestsPerSecond = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: MlDeleteExpiredDataRequest) =
+        let withTimeout (value: Types.Duration) (req: MlDeleteExpiredDataRequest) =
             { req with Timeout = Some value }
 
     type MlDeleteFilterRequest = {
-        FilterId: CoreTypes.Id
+        FilterId: Types.Id
     }
 
         with
@@ -416,7 +417,7 @@ module MlOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type MlDeleteFilterResponse = CoreTypes.AcknowledgedResponseBase
+    type MlDeleteFilterResponse = Types.AcknowledgedResponseBase
 
     type MlDeleteFilterRequestBuilder() =
         member _.Yield(_: unit) : MlDeleteFilterRequest =
@@ -425,16 +426,16 @@ module MlOperations =
             }
 
         [<CustomOperation("filterId")>]
-        member _.FilterId(state: MlDeleteFilterRequest, value: CoreTypes.Id) =
+        member _.FilterId(state: MlDeleteFilterRequest, value: Types.Id) =
             { state with FilterId = value }
 
     let mlDeleteFilterRequest = MlDeleteFilterRequestBuilder()
 
     type MlDeleteForecastRequest = {
-        JobId: CoreTypes.Id
-        ForecastId: CoreTypes.Id
+        JobId: Types.Id
+        ForecastId: Types.Id
         AllowNoForecasts: bool option
-        Timeout: CoreTypes.Duration option
+        Timeout: Types.Duration option
     }
 
         with
@@ -456,7 +457,7 @@ module MlOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type MlDeleteForecastResponse = CoreTypes.AcknowledgedResponseBase
+    type MlDeleteForecastResponse = Types.AcknowledgedResponseBase
 
     type MlDeleteForecastRequestBuilder() =
         member _.Yield(_: unit) : MlDeleteForecastRequest =
@@ -468,11 +469,11 @@ module MlOperations =
             }
 
         [<CustomOperation("jobId")>]
-        member _.JobId(state: MlDeleteForecastRequest, value: CoreTypes.Id) =
+        member _.JobId(state: MlDeleteForecastRequest, value: Types.Id) =
             { state with JobId = value }
 
         [<CustomOperation("forecastId")>]
-        member _.ForecastId(state: MlDeleteForecastRequest, value: CoreTypes.Id) =
+        member _.ForecastId(state: MlDeleteForecastRequest, value: Types.Id) =
             { state with ForecastId = value }
 
         [<CustomOperation("allowNoForecasts")>]
@@ -480,7 +481,7 @@ module MlOperations =
             { state with AllowNoForecasts = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: MlDeleteForecastRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: MlDeleteForecastRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
     let mlDeleteForecastRequest = MlDeleteForecastRequestBuilder()
@@ -488,11 +489,11 @@ module MlOperations =
     module DeleteForecast =
         let withAllowNoForecasts (value: bool) (req: MlDeleteForecastRequest) =
             { req with AllowNoForecasts = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: MlDeleteForecastRequest) =
+        let withTimeout (value: Types.Duration) (req: MlDeleteForecastRequest) =
             { req with Timeout = Some value }
 
     type MlDeleteJobRequest = {
-        JobId: CoreTypes.Id
+        JobId: Types.Id
         Force: bool option
         DeleteUserAnnotations: bool option
         WaitForCompletion: bool option
@@ -518,7 +519,7 @@ module MlOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type MlDeleteJobResponse = CoreTypes.AcknowledgedResponseBase
+    type MlDeleteJobResponse = Types.AcknowledgedResponseBase
 
     type MlDeleteJobRequestBuilder() =
         member _.Yield(_: unit) : MlDeleteJobRequest =
@@ -530,7 +531,7 @@ module MlOperations =
             }
 
         [<CustomOperation("jobId")>]
-        member _.JobId(state: MlDeleteJobRequest, value: CoreTypes.Id) =
+        member _.JobId(state: MlDeleteJobRequest, value: Types.Id) =
             { state with JobId = value }
 
         [<CustomOperation("force")>]
@@ -556,8 +557,8 @@ module MlOperations =
             { req with WaitForCompletion = Some value }
 
     type MlDeleteModelSnapshotRequest = {
-        JobId: CoreTypes.Id
-        SnapshotId: CoreTypes.Id
+        JobId: Types.Id
+        SnapshotId: Types.Id
     }
 
         with
@@ -571,7 +572,7 @@ module MlOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type MlDeleteModelSnapshotResponse = CoreTypes.AcknowledgedResponseBase
+    type MlDeleteModelSnapshotResponse = Types.AcknowledgedResponseBase
 
     type MlDeleteModelSnapshotRequestBuilder() =
         member _.Yield(_: unit) : MlDeleteModelSnapshotRequest =
@@ -581,19 +582,19 @@ module MlOperations =
             }
 
         [<CustomOperation("jobId")>]
-        member _.JobId(state: MlDeleteModelSnapshotRequest, value: CoreTypes.Id) =
+        member _.JobId(state: MlDeleteModelSnapshotRequest, value: Types.Id) =
             { state with JobId = value }
 
         [<CustomOperation("snapshotId")>]
-        member _.SnapshotId(state: MlDeleteModelSnapshotRequest, value: CoreTypes.Id) =
+        member _.SnapshotId(state: MlDeleteModelSnapshotRequest, value: Types.Id) =
             { state with SnapshotId = value }
 
     let mlDeleteModelSnapshotRequest = MlDeleteModelSnapshotRequestBuilder()
 
     type MlDeleteTrainedModelRequest = {
-        ModelId: CoreTypes.Id
+        ModelId: Types.Id
         Force: bool option
-        Timeout: CoreTypes.Duration option
+        Timeout: Types.Duration option
     }
 
         with
@@ -615,7 +616,7 @@ module MlOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type MlDeleteTrainedModelResponse = CoreTypes.AcknowledgedResponseBase
+    type MlDeleteTrainedModelResponse = Types.AcknowledgedResponseBase
 
     type MlDeleteTrainedModelRequestBuilder() =
         member _.Yield(_: unit) : MlDeleteTrainedModelRequest =
@@ -626,7 +627,7 @@ module MlOperations =
             }
 
         [<CustomOperation("modelId")>]
-        member _.ModelId(state: MlDeleteTrainedModelRequest, value: CoreTypes.Id) =
+        member _.ModelId(state: MlDeleteTrainedModelRequest, value: Types.Id) =
             { state with ModelId = value }
 
         [<CustomOperation("force")>]
@@ -634,7 +635,7 @@ module MlOperations =
             { state with Force = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: MlDeleteTrainedModelRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: MlDeleteTrainedModelRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
     let mlDeleteTrainedModelRequest = MlDeleteTrainedModelRequestBuilder()
@@ -642,12 +643,12 @@ module MlOperations =
     module DeleteTrainedModel =
         let withForce (value: bool) (req: MlDeleteTrainedModelRequest) =
             { req with Force = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: MlDeleteTrainedModelRequest) =
+        let withTimeout (value: Types.Duration) (req: MlDeleteTrainedModelRequest) =
             { req with Timeout = Some value }
 
     type MlDeleteTrainedModelAliasRequest = {
-        ModelAlias: CoreTypes.Name
-        ModelId: CoreTypes.Id
+        ModelAlias: Types.Name
+        ModelId: Types.Id
     }
 
         with
@@ -661,7 +662,7 @@ module MlOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type MlDeleteTrainedModelAliasResponse = CoreTypes.AcknowledgedResponseBase
+    type MlDeleteTrainedModelAliasResponse = Types.AcknowledgedResponseBase
 
     type MlDeleteTrainedModelAliasRequestBuilder() =
         member _.Yield(_: unit) : MlDeleteTrainedModelAliasRequest =
@@ -671,19 +672,19 @@ module MlOperations =
             }
 
         [<CustomOperation("modelAlias")>]
-        member _.ModelAlias(state: MlDeleteTrainedModelAliasRequest, value: CoreTypes.Name) =
+        member _.ModelAlias(state: MlDeleteTrainedModelAliasRequest, value: Types.Name) =
             { state with ModelAlias = value }
 
         [<CustomOperation("modelId")>]
-        member _.ModelId(state: MlDeleteTrainedModelAliasRequest, value: CoreTypes.Id) =
+        member _.ModelId(state: MlDeleteTrainedModelAliasRequest, value: Types.Id) =
             { state with ModelId = value }
 
     let mlDeleteTrainedModelAliasRequest = MlDeleteTrainedModelAliasRequestBuilder()
 
     type MlEstimateModelMemoryRequest = {
-        AnalysisConfig: MlTypes.AnalysisConfig option
-        MaxBucketCardinality: Map<CoreTypes.Field, CoreTypes.Long> option
-        OverallCardinality: Map<CoreTypes.Field, CoreTypes.Long> option
+        AnalysisConfig: Types.AnalysisConfig option
+        MaxBucketCardinality: Map<Types.Field, Types.Long> option
+        OverallCardinality: Map<Types.Field, Types.Long> option
     }
 
         with
@@ -709,31 +710,31 @@ module MlOperations =
             }
 
         [<CustomOperation("analysisConfig")>]
-        member _.AnalysisConfig(state: MlEstimateModelMemoryRequest, value: MlTypes.AnalysisConfig) =
+        member _.AnalysisConfig(state: MlEstimateModelMemoryRequest, value: Types.AnalysisConfig) =
             { state with AnalysisConfig = Some value }
 
         [<CustomOperation("maxBucketCardinality")>]
-        member _.MaxBucketCardinality(state: MlEstimateModelMemoryRequest, value: Map<CoreTypes.Field, CoreTypes.Long>) =
+        member _.MaxBucketCardinality(state: MlEstimateModelMemoryRequest, value: Map<Types.Field, Types.Long>) =
             { state with MaxBucketCardinality = Some value }
 
         [<CustomOperation("overallCardinality")>]
-        member _.OverallCardinality(state: MlEstimateModelMemoryRequest, value: Map<CoreTypes.Field, CoreTypes.Long>) =
+        member _.OverallCardinality(state: MlEstimateModelMemoryRequest, value: Map<Types.Field, Types.Long>) =
             { state with OverallCardinality = Some value }
 
     let mlEstimateModelMemoryRequest = MlEstimateModelMemoryRequestBuilder()
 
     module EstimateModelMemory =
-        let withAnalysisConfig (value: MlTypes.AnalysisConfig) (req: MlEstimateModelMemoryRequest) =
+        let withAnalysisConfig (value: Types.AnalysisConfig) (req: MlEstimateModelMemoryRequest) =
             { req with AnalysisConfig = Some value }
-        let withMaxBucketCardinality (value: Map<CoreTypes.Field, CoreTypes.Long>) (req: MlEstimateModelMemoryRequest) =
+        let withMaxBucketCardinality (value: Map<Types.Field, Types.Long>) (req: MlEstimateModelMemoryRequest) =
             { req with MaxBucketCardinality = Some value }
-        let withOverallCardinality (value: Map<CoreTypes.Field, CoreTypes.Long>) (req: MlEstimateModelMemoryRequest) =
+        let withOverallCardinality (value: Map<Types.Field, Types.Long>) (req: MlEstimateModelMemoryRequest) =
             { req with OverallCardinality = Some value }
 
     type MlEvaluateDataFrameRequest = {
-        Evaluation: MlTypes.DataframeEvaluationContainer
-        Index: CoreTypes.IndexName
-        Query: CoreTypes.QueryContainer option
+        Evaluation: Types.DataframeEvaluationContainer
+        Index: Types.IndexName
+        Query: Types.QueryContainer option
     }
 
         with
@@ -759,36 +760,36 @@ module MlOperations =
             }
 
         [<CustomOperation("evaluation")>]
-        member _.Evaluation(state: MlEvaluateDataFrameRequest, value: MlTypes.DataframeEvaluationContainer) =
+        member _.Evaluation(state: MlEvaluateDataFrameRequest, value: Types.DataframeEvaluationContainer) =
             { state with Evaluation = value }
 
         [<CustomOperation("index")>]
-        member _.Index(state: MlEvaluateDataFrameRequest, value: CoreTypes.IndexName) =
+        member _.Index(state: MlEvaluateDataFrameRequest, value: Types.IndexName) =
             { state with Index = value }
 
         [<CustomOperation("query")>]
-        member _.Query(state: MlEvaluateDataFrameRequest, value: CoreTypes.QueryContainer) =
+        member _.Query(state: MlEvaluateDataFrameRequest, value: Types.QueryContainer) =
             { state with Query = Some value }
 
     let mlEvaluateDataFrameRequest = MlEvaluateDataFrameRequestBuilder()
 
     module EvaluateDataFrame =
-        let withEvaluation (value: MlTypes.DataframeEvaluationContainer) (req: MlEvaluateDataFrameRequest) =
+        let withEvaluation (value: Types.DataframeEvaluationContainer) (req: MlEvaluateDataFrameRequest) =
             { req with Evaluation = value }
-        let withIndex (value: CoreTypes.IndexName) (req: MlEvaluateDataFrameRequest) =
+        let withIndex (value: Types.IndexName) (req: MlEvaluateDataFrameRequest) =
             { req with Index = value }
-        let withQuery (value: CoreTypes.QueryContainer) (req: MlEvaluateDataFrameRequest) =
+        let withQuery (value: Types.QueryContainer) (req: MlEvaluateDataFrameRequest) =
             { req with Query = Some value }
 
     type MlExplainDataFrameAnalyticsRequest = {
-        Id: CoreTypes.Id
-        Source: MlTypes.DataframeAnalyticsSource option
-        Dest: MlTypes.DataframeAnalyticsDestination option
-        Analysis: MlTypes.DataframeAnalysisContainer option
+        Id: Types.Id
+        Source: Types.DataframeAnalyticsSource option
+        Dest: Types.DataframeAnalyticsDestination option
+        Analysis: Types.DataframeAnalysisContainer option
         Description: string option
         ModelMemoryLimit: string option
-        MaxNumThreads: CoreTypes.Integer option
-        AnalyzedFields: MlTypes.DataframeAnalysisAnalyzedFields option
+        MaxNumThreads: Types.Integer option
+        AnalyzedFields: Types.DataframeAnalysisAnalyzedFields option
         AllowLazyStart: bool option
     }
 
@@ -821,19 +822,19 @@ module MlOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: MlExplainDataFrameAnalyticsRequest, value: CoreTypes.Id) =
+        member _.Id(state: MlExplainDataFrameAnalyticsRequest, value: Types.Id) =
             { state with Id = value }
 
         [<CustomOperation("source")>]
-        member _.Source(state: MlExplainDataFrameAnalyticsRequest, value: MlTypes.DataframeAnalyticsSource) =
+        member _.Source(state: MlExplainDataFrameAnalyticsRequest, value: Types.DataframeAnalyticsSource) =
             { state with Source = Some value }
 
         [<CustomOperation("dest")>]
-        member _.Dest(state: MlExplainDataFrameAnalyticsRequest, value: MlTypes.DataframeAnalyticsDestination) =
+        member _.Dest(state: MlExplainDataFrameAnalyticsRequest, value: Types.DataframeAnalyticsDestination) =
             { state with Dest = Some value }
 
         [<CustomOperation("analysis")>]
-        member _.Analysis(state: MlExplainDataFrameAnalyticsRequest, value: MlTypes.DataframeAnalysisContainer) =
+        member _.Analysis(state: MlExplainDataFrameAnalyticsRequest, value: Types.DataframeAnalysisContainer) =
             { state with Analysis = Some value }
 
         [<CustomOperation("description")>]
@@ -845,11 +846,11 @@ module MlOperations =
             { state with ModelMemoryLimit = Some value }
 
         [<CustomOperation("maxNumThreads")>]
-        member _.MaxNumThreads(state: MlExplainDataFrameAnalyticsRequest, value: CoreTypes.Integer) =
+        member _.MaxNumThreads(state: MlExplainDataFrameAnalyticsRequest, value: Types.Integer) =
             { state with MaxNumThreads = Some value }
 
         [<CustomOperation("analyzedFields")>]
-        member _.AnalyzedFields(state: MlExplainDataFrameAnalyticsRequest, value: MlTypes.DataframeAnalysisAnalyzedFields) =
+        member _.AnalyzedFields(state: MlExplainDataFrameAnalyticsRequest, value: Types.DataframeAnalysisAnalyzedFields) =
             { state with AnalyzedFields = Some value }
 
         [<CustomOperation("allowLazyStart")>]
@@ -859,35 +860,35 @@ module MlOperations =
     let mlExplainDataFrameAnalyticsRequest = MlExplainDataFrameAnalyticsRequestBuilder()
 
     module ExplainDataFrameAnalytics =
-        let withSource (value: MlTypes.DataframeAnalyticsSource) (req: MlExplainDataFrameAnalyticsRequest) =
+        let withSource (value: Types.DataframeAnalyticsSource) (req: MlExplainDataFrameAnalyticsRequest) =
             { req with Source = Some value }
-        let withDest (value: MlTypes.DataframeAnalyticsDestination) (req: MlExplainDataFrameAnalyticsRequest) =
+        let withDest (value: Types.DataframeAnalyticsDestination) (req: MlExplainDataFrameAnalyticsRequest) =
             { req with Dest = Some value }
-        let withAnalysis (value: MlTypes.DataframeAnalysisContainer) (req: MlExplainDataFrameAnalyticsRequest) =
+        let withAnalysis (value: Types.DataframeAnalysisContainer) (req: MlExplainDataFrameAnalyticsRequest) =
             { req with Analysis = Some value }
         let withDescription (value: string) (req: MlExplainDataFrameAnalyticsRequest) =
             { req with Description = Some value }
         let withModelMemoryLimit (value: string) (req: MlExplainDataFrameAnalyticsRequest) =
             { req with ModelMemoryLimit = Some value }
-        let withMaxNumThreads (value: CoreTypes.Integer) (req: MlExplainDataFrameAnalyticsRequest) =
+        let withMaxNumThreads (value: Types.Integer) (req: MlExplainDataFrameAnalyticsRequest) =
             { req with MaxNumThreads = Some value }
-        let withAnalyzedFields (value: MlTypes.DataframeAnalysisAnalyzedFields) (req: MlExplainDataFrameAnalyticsRequest) =
+        let withAnalyzedFields (value: Types.DataframeAnalysisAnalyzedFields) (req: MlExplainDataFrameAnalyticsRequest) =
             { req with AnalyzedFields = Some value }
         let withAllowLazyStart (value: bool) (req: MlExplainDataFrameAnalyticsRequest) =
             { req with AllowLazyStart = Some value }
 
     type MlFlushJobRequest = {
-        JobId: CoreTypes.Id
-        AdvanceTime: CoreTypes.DateTime option
+        JobId: Types.Id
+        AdvanceTime: Types.DateTime option
         CalcInterim: bool option
-        End: CoreTypes.DateTime option
-        SkipTime: CoreTypes.DateTime option
-        Start: CoreTypes.DateTime option
-        AdvanceTime: CoreTypes.DateTime option
+        End: Types.DateTime option
+        SkipTime: Types.DateTime option
+        Start: Types.DateTime option
+        AdvanceTime: Types.DateTime option
         CalcInterim: bool option
-        End: CoreTypes.DateTime option
-        SkipTime: CoreTypes.DateTime option
-        Start: CoreTypes.DateTime option
+        End: Types.DateTime option
+        SkipTime: Types.DateTime option
+        Start: Types.DateTime option
     }
 
         with
@@ -932,11 +933,11 @@ module MlOperations =
             }
 
         [<CustomOperation("jobId")>]
-        member _.JobId(state: MlFlushJobRequest, value: CoreTypes.Id) =
+        member _.JobId(state: MlFlushJobRequest, value: Types.Id) =
             { state with JobId = value }
 
         [<CustomOperation("advanceTime")>]
-        member _.AdvanceTime(state: MlFlushJobRequest, value: CoreTypes.DateTime) =
+        member _.AdvanceTime(state: MlFlushJobRequest, value: Types.DateTime) =
             { state with AdvanceTime = Some value }
 
         [<CustomOperation("calcInterim")>]
@@ -944,19 +945,19 @@ module MlOperations =
             { state with CalcInterim = Some value }
 
         [<CustomOperation("end'")>]
-        member _.End(state: MlFlushJobRequest, value: CoreTypes.DateTime) =
+        member _.End(state: MlFlushJobRequest, value: Types.DateTime) =
             { state with End = Some value }
 
         [<CustomOperation("skipTime")>]
-        member _.SkipTime(state: MlFlushJobRequest, value: CoreTypes.DateTime) =
+        member _.SkipTime(state: MlFlushJobRequest, value: Types.DateTime) =
             { state with SkipTime = Some value }
 
         [<CustomOperation("start")>]
-        member _.Start(state: MlFlushJobRequest, value: CoreTypes.DateTime) =
+        member _.Start(state: MlFlushJobRequest, value: Types.DateTime) =
             { state with Start = Some value }
 
         [<CustomOperation("advanceTime")>]
-        member _.AdvanceTime(state: MlFlushJobRequest, value: CoreTypes.DateTime) =
+        member _.AdvanceTime(state: MlFlushJobRequest, value: Types.DateTime) =
             { state with AdvanceTime = Some value }
 
         [<CustomOperation("calcInterim")>]
@@ -964,48 +965,48 @@ module MlOperations =
             { state with CalcInterim = Some value }
 
         [<CustomOperation("end'")>]
-        member _.End(state: MlFlushJobRequest, value: CoreTypes.DateTime) =
+        member _.End(state: MlFlushJobRequest, value: Types.DateTime) =
             { state with End = Some value }
 
         [<CustomOperation("skipTime")>]
-        member _.SkipTime(state: MlFlushJobRequest, value: CoreTypes.DateTime) =
+        member _.SkipTime(state: MlFlushJobRequest, value: Types.DateTime) =
             { state with SkipTime = Some value }
 
         [<CustomOperation("start")>]
-        member _.Start(state: MlFlushJobRequest, value: CoreTypes.DateTime) =
+        member _.Start(state: MlFlushJobRequest, value: Types.DateTime) =
             { state with Start = Some value }
 
     let mlFlushJobRequest = MlFlushJobRequestBuilder()
 
     module FlushJob =
-        let withAdvanceTime (value: CoreTypes.DateTime) (req: MlFlushJobRequest) =
+        let withAdvanceTime (value: Types.DateTime) (req: MlFlushJobRequest) =
             { req with AdvanceTime = Some value }
         let withCalcInterim (value: bool) (req: MlFlushJobRequest) =
             { req with CalcInterim = Some value }
-        let withEnd (value: CoreTypes.DateTime) (req: MlFlushJobRequest) =
+        let withEnd (value: Types.DateTime) (req: MlFlushJobRequest) =
             { req with End = Some value }
-        let withSkipTime (value: CoreTypes.DateTime) (req: MlFlushJobRequest) =
+        let withSkipTime (value: Types.DateTime) (req: MlFlushJobRequest) =
             { req with SkipTime = Some value }
-        let withStart (value: CoreTypes.DateTime) (req: MlFlushJobRequest) =
+        let withStart (value: Types.DateTime) (req: MlFlushJobRequest) =
             { req with Start = Some value }
-        let withAdvanceTime (value: CoreTypes.DateTime) (req: MlFlushJobRequest) =
+        let withAdvanceTime (value: Types.DateTime) (req: MlFlushJobRequest) =
             { req with AdvanceTime = Some value }
         let withCalcInterim (value: bool) (req: MlFlushJobRequest) =
             { req with CalcInterim = Some value }
-        let withEnd (value: CoreTypes.DateTime) (req: MlFlushJobRequest) =
+        let withEnd (value: Types.DateTime) (req: MlFlushJobRequest) =
             { req with End = Some value }
-        let withSkipTime (value: CoreTypes.DateTime) (req: MlFlushJobRequest) =
+        let withSkipTime (value: Types.DateTime) (req: MlFlushJobRequest) =
             { req with SkipTime = Some value }
-        let withStart (value: CoreTypes.DateTime) (req: MlFlushJobRequest) =
+        let withStart (value: Types.DateTime) (req: MlFlushJobRequest) =
             { req with Start = Some value }
 
     type MlForecastRequest = {
-        JobId: CoreTypes.Id
-        Duration: CoreTypes.Duration option
-        ExpiresIn: CoreTypes.Duration option
+        JobId: Types.Id
+        Duration: Types.Duration option
+        ExpiresIn: Types.Duration option
         MaxModelMemory: string option
-        Duration: CoreTypes.Duration option
-        ExpiresIn: CoreTypes.Duration option
+        Duration: Types.Duration option
+        ExpiresIn: Types.Duration option
         MaxModelMemory: string option
     }
 
@@ -1045,15 +1046,15 @@ module MlOperations =
             }
 
         [<CustomOperation("jobId")>]
-        member _.JobId(state: MlForecastRequest, value: CoreTypes.Id) =
+        member _.JobId(state: MlForecastRequest, value: Types.Id) =
             { state with JobId = value }
 
         [<CustomOperation("duration")>]
-        member _.Duration(state: MlForecastRequest, value: CoreTypes.Duration) =
+        member _.Duration(state: MlForecastRequest, value: Types.Duration) =
             { state with Duration = Some value }
 
         [<CustomOperation("expiresIn")>]
-        member _.ExpiresIn(state: MlForecastRequest, value: CoreTypes.Duration) =
+        member _.ExpiresIn(state: MlForecastRequest, value: Types.Duration) =
             { state with ExpiresIn = Some value }
 
         [<CustomOperation("maxModelMemory")>]
@@ -1061,11 +1062,11 @@ module MlOperations =
             { state with MaxModelMemory = Some value }
 
         [<CustomOperation("duration")>]
-        member _.Duration(state: MlForecastRequest, value: CoreTypes.Duration) =
+        member _.Duration(state: MlForecastRequest, value: Types.Duration) =
             { state with Duration = Some value }
 
         [<CustomOperation("expiresIn")>]
-        member _.ExpiresIn(state: MlForecastRequest, value: CoreTypes.Duration) =
+        member _.ExpiresIn(state: MlForecastRequest, value: Types.Duration) =
             { state with ExpiresIn = Some value }
 
         [<CustomOperation("maxModelMemory")>]
@@ -1075,39 +1076,39 @@ module MlOperations =
     let mlForecastRequest = MlForecastRequestBuilder()
 
     module Forecast =
-        let withDuration (value: CoreTypes.Duration) (req: MlForecastRequest) =
+        let withDuration (value: Types.Duration) (req: MlForecastRequest) =
             { req with Duration = Some value }
-        let withExpiresIn (value: CoreTypes.Duration) (req: MlForecastRequest) =
+        let withExpiresIn (value: Types.Duration) (req: MlForecastRequest) =
             { req with ExpiresIn = Some value }
         let withMaxModelMemory (value: string) (req: MlForecastRequest) =
             { req with MaxModelMemory = Some value }
-        let withDuration (value: CoreTypes.Duration) (req: MlForecastRequest) =
+        let withDuration (value: Types.Duration) (req: MlForecastRequest) =
             { req with Duration = Some value }
-        let withExpiresIn (value: CoreTypes.Duration) (req: MlForecastRequest) =
+        let withExpiresIn (value: Types.Duration) (req: MlForecastRequest) =
             { req with ExpiresIn = Some value }
         let withMaxModelMemory (value: string) (req: MlForecastRequest) =
             { req with MaxModelMemory = Some value }
 
     type MlGetBucketsRequest = {
-        JobId: CoreTypes.Id
-        Timestamp: CoreTypes.DateTime
-        AnomalyScore: CoreTypes.Double option
+        JobId: Types.Id
+        Timestamp: Types.DateTime
+        AnomalyScore: Types.Double option
         Desc: bool option
-        End: CoreTypes.DateTime option
+        End: Types.DateTime option
         ExcludeInterim: bool option
         Expand: bool option
-        From: CoreTypes.Integer option
-        Size: CoreTypes.Integer option
-        Sort: CoreTypes.Field option
-        Start: CoreTypes.DateTime option
-        AnomalyScore: CoreTypes.Double option
+        From: Types.Integer option
+        Size: Types.Integer option
+        Sort: Types.Field option
+        Start: Types.DateTime option
+        AnomalyScore: Types.Double option
         Desc: bool option
-        End: CoreTypes.DateTime option
+        End: Types.DateTime option
         ExcludeInterim: bool option
         Expand: bool option
-        Page: MlTypes.Page option
-        Sort: CoreTypes.Field option
-        Start: CoreTypes.DateTime option
+        Page: Types.Page option
+        Sort: Types.Field option
+        Start: Types.DateTime option
     }
 
         with
@@ -1164,15 +1165,15 @@ module MlOperations =
             }
 
         [<CustomOperation("jobId")>]
-        member _.JobId(state: MlGetBucketsRequest, value: CoreTypes.Id) =
+        member _.JobId(state: MlGetBucketsRequest, value: Types.Id) =
             { state with JobId = value }
 
         [<CustomOperation("timestamp")>]
-        member _.Timestamp(state: MlGetBucketsRequest, value: CoreTypes.DateTime) =
+        member _.Timestamp(state: MlGetBucketsRequest, value: Types.DateTime) =
             { state with Timestamp = value }
 
         [<CustomOperation("anomalyScore")>]
-        member _.AnomalyScore(state: MlGetBucketsRequest, value: CoreTypes.Double) =
+        member _.AnomalyScore(state: MlGetBucketsRequest, value: Types.Double) =
             { state with AnomalyScore = Some value }
 
         [<CustomOperation("desc")>]
@@ -1180,7 +1181,7 @@ module MlOperations =
             { state with Desc = Some value }
 
         [<CustomOperation("end'")>]
-        member _.End(state: MlGetBucketsRequest, value: CoreTypes.DateTime) =
+        member _.End(state: MlGetBucketsRequest, value: Types.DateTime) =
             { state with End = Some value }
 
         [<CustomOperation("excludeInterim")>]
@@ -1192,23 +1193,23 @@ module MlOperations =
             { state with Expand = Some value }
 
         [<CustomOperation("from")>]
-        member _.From(state: MlGetBucketsRequest, value: CoreTypes.Integer) =
+        member _.From(state: MlGetBucketsRequest, value: Types.Integer) =
             { state with From = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: MlGetBucketsRequest, value: CoreTypes.Integer) =
+        member _.Size(state: MlGetBucketsRequest, value: Types.Integer) =
             { state with Size = Some value }
 
         [<CustomOperation("sort")>]
-        member _.Sort(state: MlGetBucketsRequest, value: CoreTypes.Field) =
+        member _.Sort(state: MlGetBucketsRequest, value: Types.Field) =
             { state with Sort = Some value }
 
         [<CustomOperation("start")>]
-        member _.Start(state: MlGetBucketsRequest, value: CoreTypes.DateTime) =
+        member _.Start(state: MlGetBucketsRequest, value: Types.DateTime) =
             { state with Start = Some value }
 
         [<CustomOperation("anomalyScore")>]
-        member _.AnomalyScore(state: MlGetBucketsRequest, value: CoreTypes.Double) =
+        member _.AnomalyScore(state: MlGetBucketsRequest, value: Types.Double) =
             { state with AnomalyScore = Some value }
 
         [<CustomOperation("desc")>]
@@ -1216,7 +1217,7 @@ module MlOperations =
             { state with Desc = Some value }
 
         [<CustomOperation("end'")>]
-        member _.End(state: MlGetBucketsRequest, value: CoreTypes.DateTime) =
+        member _.End(state: MlGetBucketsRequest, value: Types.DateTime) =
             { state with End = Some value }
 
         [<CustomOperation("excludeInterim")>]
@@ -1228,62 +1229,62 @@ module MlOperations =
             { state with Expand = Some value }
 
         [<CustomOperation("page")>]
-        member _.Page(state: MlGetBucketsRequest, value: MlTypes.Page) =
+        member _.Page(state: MlGetBucketsRequest, value: Types.Page) =
             { state with Page = Some value }
 
         [<CustomOperation("sort")>]
-        member _.Sort(state: MlGetBucketsRequest, value: CoreTypes.Field) =
+        member _.Sort(state: MlGetBucketsRequest, value: Types.Field) =
             { state with Sort = Some value }
 
         [<CustomOperation("start")>]
-        member _.Start(state: MlGetBucketsRequest, value: CoreTypes.DateTime) =
+        member _.Start(state: MlGetBucketsRequest, value: Types.DateTime) =
             { state with Start = Some value }
 
     let mlGetBucketsRequest = MlGetBucketsRequestBuilder()
 
     module GetBuckets =
-        let withAnomalyScore (value: CoreTypes.Double) (req: MlGetBucketsRequest) =
+        let withAnomalyScore (value: Types.Double) (req: MlGetBucketsRequest) =
             { req with AnomalyScore = Some value }
         let withDesc (value: bool) (req: MlGetBucketsRequest) =
             { req with Desc = Some value }
-        let withEnd (value: CoreTypes.DateTime) (req: MlGetBucketsRequest) =
+        let withEnd (value: Types.DateTime) (req: MlGetBucketsRequest) =
             { req with End = Some value }
         let withExcludeInterim (value: bool) (req: MlGetBucketsRequest) =
             { req with ExcludeInterim = Some value }
         let withExpand (value: bool) (req: MlGetBucketsRequest) =
             { req with Expand = Some value }
-        let withFrom (value: CoreTypes.Integer) (req: MlGetBucketsRequest) =
+        let withFrom (value: Types.Integer) (req: MlGetBucketsRequest) =
             { req with From = Some value }
-        let withSize (value: CoreTypes.Integer) (req: MlGetBucketsRequest) =
+        let withSize (value: Types.Integer) (req: MlGetBucketsRequest) =
             { req with Size = Some value }
-        let withSort (value: CoreTypes.Field) (req: MlGetBucketsRequest) =
+        let withSort (value: Types.Field) (req: MlGetBucketsRequest) =
             { req with Sort = Some value }
-        let withStart (value: CoreTypes.DateTime) (req: MlGetBucketsRequest) =
+        let withStart (value: Types.DateTime) (req: MlGetBucketsRequest) =
             { req with Start = Some value }
-        let withAnomalyScore (value: CoreTypes.Double) (req: MlGetBucketsRequest) =
+        let withAnomalyScore (value: Types.Double) (req: MlGetBucketsRequest) =
             { req with AnomalyScore = Some value }
         let withDesc (value: bool) (req: MlGetBucketsRequest) =
             { req with Desc = Some value }
-        let withEnd (value: CoreTypes.DateTime) (req: MlGetBucketsRequest) =
+        let withEnd (value: Types.DateTime) (req: MlGetBucketsRequest) =
             { req with End = Some value }
         let withExcludeInterim (value: bool) (req: MlGetBucketsRequest) =
             { req with ExcludeInterim = Some value }
         let withExpand (value: bool) (req: MlGetBucketsRequest) =
             { req with Expand = Some value }
-        let withPage (value: MlTypes.Page) (req: MlGetBucketsRequest) =
+        let withPage (value: Types.Page) (req: MlGetBucketsRequest) =
             { req with Page = Some value }
-        let withSort (value: CoreTypes.Field) (req: MlGetBucketsRequest) =
+        let withSort (value: Types.Field) (req: MlGetBucketsRequest) =
             { req with Sort = Some value }
-        let withStart (value: CoreTypes.DateTime) (req: MlGetBucketsRequest) =
+        let withStart (value: Types.DateTime) (req: MlGetBucketsRequest) =
             { req with Start = Some value }
 
     type MlGetCalendarEventsRequest = {
-        CalendarId: CoreTypes.Id
-        End: CoreTypes.DateTime option
-        From: CoreTypes.Integer option
-        JobId: CoreTypes.Id option
-        Size: CoreTypes.Integer option
-        Start: CoreTypes.DateTime option
+        CalendarId: Types.Id
+        End: Types.DateTime option
+        From: Types.Integer option
+        JobId: Types.Id option
+        Size: Types.Integer option
+        Start: Types.DateTime option
     }
 
         with
@@ -1322,48 +1323,48 @@ module MlOperations =
             }
 
         [<CustomOperation("calendarId")>]
-        member _.CalendarId(state: MlGetCalendarEventsRequest, value: CoreTypes.Id) =
+        member _.CalendarId(state: MlGetCalendarEventsRequest, value: Types.Id) =
             { state with CalendarId = value }
 
         [<CustomOperation("end'")>]
-        member _.End(state: MlGetCalendarEventsRequest, value: CoreTypes.DateTime) =
+        member _.End(state: MlGetCalendarEventsRequest, value: Types.DateTime) =
             { state with End = Some value }
 
         [<CustomOperation("from")>]
-        member _.From(state: MlGetCalendarEventsRequest, value: CoreTypes.Integer) =
+        member _.From(state: MlGetCalendarEventsRequest, value: Types.Integer) =
             { state with From = Some value }
 
         [<CustomOperation("jobId")>]
-        member _.JobId(state: MlGetCalendarEventsRequest, value: CoreTypes.Id) =
+        member _.JobId(state: MlGetCalendarEventsRequest, value: Types.Id) =
             { state with JobId = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: MlGetCalendarEventsRequest, value: CoreTypes.Integer) =
+        member _.Size(state: MlGetCalendarEventsRequest, value: Types.Integer) =
             { state with Size = Some value }
 
         [<CustomOperation("start")>]
-        member _.Start(state: MlGetCalendarEventsRequest, value: CoreTypes.DateTime) =
+        member _.Start(state: MlGetCalendarEventsRequest, value: Types.DateTime) =
             { state with Start = Some value }
 
     let mlGetCalendarEventsRequest = MlGetCalendarEventsRequestBuilder()
 
     module GetCalendarEvents =
-        let withEnd (value: CoreTypes.DateTime) (req: MlGetCalendarEventsRequest) =
+        let withEnd (value: Types.DateTime) (req: MlGetCalendarEventsRequest) =
             { req with End = Some value }
-        let withFrom (value: CoreTypes.Integer) (req: MlGetCalendarEventsRequest) =
+        let withFrom (value: Types.Integer) (req: MlGetCalendarEventsRequest) =
             { req with From = Some value }
-        let withJobId (value: CoreTypes.Id) (req: MlGetCalendarEventsRequest) =
+        let withJobId (value: Types.Id) (req: MlGetCalendarEventsRequest) =
             { req with JobId = Some value }
-        let withSize (value: CoreTypes.Integer) (req: MlGetCalendarEventsRequest) =
+        let withSize (value: Types.Integer) (req: MlGetCalendarEventsRequest) =
             { req with Size = Some value }
-        let withStart (value: CoreTypes.DateTime) (req: MlGetCalendarEventsRequest) =
+        let withStart (value: Types.DateTime) (req: MlGetCalendarEventsRequest) =
             { req with Start = Some value }
 
     type MlGetCalendarsRequest = {
-        CalendarId: CoreTypes.Id
-        From: CoreTypes.Integer option
-        Size: CoreTypes.Integer option
-        Page: MlTypes.Page option
+        CalendarId: Types.Id
+        From: Types.Integer option
+        Size: Types.Integer option
+        Page: Types.Page option
     }
 
         with
@@ -1398,38 +1399,38 @@ module MlOperations =
             }
 
         [<CustomOperation("calendarId")>]
-        member _.CalendarId(state: MlGetCalendarsRequest, value: CoreTypes.Id) =
+        member _.CalendarId(state: MlGetCalendarsRequest, value: Types.Id) =
             { state with CalendarId = value }
 
         [<CustomOperation("from")>]
-        member _.From(state: MlGetCalendarsRequest, value: CoreTypes.Integer) =
+        member _.From(state: MlGetCalendarsRequest, value: Types.Integer) =
             { state with From = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: MlGetCalendarsRequest, value: CoreTypes.Integer) =
+        member _.Size(state: MlGetCalendarsRequest, value: Types.Integer) =
             { state with Size = Some value }
 
         [<CustomOperation("page")>]
-        member _.Page(state: MlGetCalendarsRequest, value: MlTypes.Page) =
+        member _.Page(state: MlGetCalendarsRequest, value: Types.Page) =
             { state with Page = Some value }
 
     let mlGetCalendarsRequest = MlGetCalendarsRequestBuilder()
 
     module GetCalendars =
-        let withFrom (value: CoreTypes.Integer) (req: MlGetCalendarsRequest) =
+        let withFrom (value: Types.Integer) (req: MlGetCalendarsRequest) =
             { req with From = Some value }
-        let withSize (value: CoreTypes.Integer) (req: MlGetCalendarsRequest) =
+        let withSize (value: Types.Integer) (req: MlGetCalendarsRequest) =
             { req with Size = Some value }
-        let withPage (value: MlTypes.Page) (req: MlGetCalendarsRequest) =
+        let withPage (value: Types.Page) (req: MlGetCalendarsRequest) =
             { req with Page = Some value }
 
     type MlGetCategoriesRequest = {
-        JobId: CoreTypes.Id
-        CategoryId: CoreTypes.CategoryId
-        From: CoreTypes.Integer option
+        JobId: Types.Id
+        CategoryId: Types.CategoryId
+        From: Types.Integer option
         PartitionFieldValue: string option
-        Size: CoreTypes.Integer option
-        Page: MlTypes.Page option
+        Size: Types.Integer option
+        Page: Types.Page option
     }
 
         with
@@ -1467,15 +1468,15 @@ module MlOperations =
             }
 
         [<CustomOperation("jobId")>]
-        member _.JobId(state: MlGetCategoriesRequest, value: CoreTypes.Id) =
+        member _.JobId(state: MlGetCategoriesRequest, value: Types.Id) =
             { state with JobId = value }
 
         [<CustomOperation("categoryId")>]
-        member _.CategoryId(state: MlGetCategoriesRequest, value: CoreTypes.CategoryId) =
+        member _.CategoryId(state: MlGetCategoriesRequest, value: Types.CategoryId) =
             { state with CategoryId = value }
 
         [<CustomOperation("from")>]
-        member _.From(state: MlGetCategoriesRequest, value: CoreTypes.Integer) =
+        member _.From(state: MlGetCategoriesRequest, value: Types.Integer) =
             { state with From = Some value }
 
         [<CustomOperation("partitionFieldValue")>]
@@ -1483,30 +1484,30 @@ module MlOperations =
             { state with PartitionFieldValue = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: MlGetCategoriesRequest, value: CoreTypes.Integer) =
+        member _.Size(state: MlGetCategoriesRequest, value: Types.Integer) =
             { state with Size = Some value }
 
         [<CustomOperation("page")>]
-        member _.Page(state: MlGetCategoriesRequest, value: MlTypes.Page) =
+        member _.Page(state: MlGetCategoriesRequest, value: Types.Page) =
             { state with Page = Some value }
 
     let mlGetCategoriesRequest = MlGetCategoriesRequestBuilder()
 
     module GetCategories =
-        let withFrom (value: CoreTypes.Integer) (req: MlGetCategoriesRequest) =
+        let withFrom (value: Types.Integer) (req: MlGetCategoriesRequest) =
             { req with From = Some value }
         let withPartitionFieldValue (value: string) (req: MlGetCategoriesRequest) =
             { req with PartitionFieldValue = Some value }
-        let withSize (value: CoreTypes.Integer) (req: MlGetCategoriesRequest) =
+        let withSize (value: Types.Integer) (req: MlGetCategoriesRequest) =
             { req with Size = Some value }
-        let withPage (value: MlTypes.Page) (req: MlGetCategoriesRequest) =
+        let withPage (value: Types.Page) (req: MlGetCategoriesRequest) =
             { req with Page = Some value }
 
     type MlGetDataFrameAnalyticsRequest = {
-        Id: CoreTypes.Id
+        Id: Types.Id
         AllowNoMatch: bool option
-        From: CoreTypes.Integer option
-        Size: CoreTypes.Integer option
+        From: Types.Integer option
+        Size: Types.Integer option
         ExcludeGenerated: bool option
     }
 
@@ -1544,7 +1545,7 @@ module MlOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: MlGetDataFrameAnalyticsRequest, value: CoreTypes.Id) =
+        member _.Id(state: MlGetDataFrameAnalyticsRequest, value: Types.Id) =
             { state with Id = value }
 
         [<CustomOperation("allowNoMatch")>]
@@ -1552,11 +1553,11 @@ module MlOperations =
             { state with AllowNoMatch = Some value }
 
         [<CustomOperation("from")>]
-        member _.From(state: MlGetDataFrameAnalyticsRequest, value: CoreTypes.Integer) =
+        member _.From(state: MlGetDataFrameAnalyticsRequest, value: Types.Integer) =
             { state with From = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: MlGetDataFrameAnalyticsRequest, value: CoreTypes.Integer) =
+        member _.Size(state: MlGetDataFrameAnalyticsRequest, value: Types.Integer) =
             { state with Size = Some value }
 
         [<CustomOperation("excludeGenerated")>]
@@ -1568,18 +1569,18 @@ module MlOperations =
     module GetDataFrameAnalytics =
         let withAllowNoMatch (value: bool) (req: MlGetDataFrameAnalyticsRequest) =
             { req with AllowNoMatch = Some value }
-        let withFrom (value: CoreTypes.Integer) (req: MlGetDataFrameAnalyticsRequest) =
+        let withFrom (value: Types.Integer) (req: MlGetDataFrameAnalyticsRequest) =
             { req with From = Some value }
-        let withSize (value: CoreTypes.Integer) (req: MlGetDataFrameAnalyticsRequest) =
+        let withSize (value: Types.Integer) (req: MlGetDataFrameAnalyticsRequest) =
             { req with Size = Some value }
         let withExcludeGenerated (value: bool) (req: MlGetDataFrameAnalyticsRequest) =
             { req with ExcludeGenerated = Some value }
 
     type MlGetDataFrameAnalyticsStatsRequest = {
-        Id: CoreTypes.Id
+        Id: Types.Id
         AllowNoMatch: bool option
-        From: CoreTypes.Integer option
-        Size: CoreTypes.Integer option
+        From: Types.Integer option
+        Size: Types.Integer option
         Verbose: bool option
     }
 
@@ -1617,7 +1618,7 @@ module MlOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: MlGetDataFrameAnalyticsStatsRequest, value: CoreTypes.Id) =
+        member _.Id(state: MlGetDataFrameAnalyticsStatsRequest, value: Types.Id) =
             { state with Id = value }
 
         [<CustomOperation("allowNoMatch")>]
@@ -1625,11 +1626,11 @@ module MlOperations =
             { state with AllowNoMatch = Some value }
 
         [<CustomOperation("from")>]
-        member _.From(state: MlGetDataFrameAnalyticsStatsRequest, value: CoreTypes.Integer) =
+        member _.From(state: MlGetDataFrameAnalyticsStatsRequest, value: Types.Integer) =
             { state with From = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: MlGetDataFrameAnalyticsStatsRequest, value: CoreTypes.Integer) =
+        member _.Size(state: MlGetDataFrameAnalyticsStatsRequest, value: Types.Integer) =
             { state with Size = Some value }
 
         [<CustomOperation("verbose")>]
@@ -1641,15 +1642,15 @@ module MlOperations =
     module GetDataFrameAnalyticsStats =
         let withAllowNoMatch (value: bool) (req: MlGetDataFrameAnalyticsStatsRequest) =
             { req with AllowNoMatch = Some value }
-        let withFrom (value: CoreTypes.Integer) (req: MlGetDataFrameAnalyticsStatsRequest) =
+        let withFrom (value: Types.Integer) (req: MlGetDataFrameAnalyticsStatsRequest) =
             { req with From = Some value }
-        let withSize (value: CoreTypes.Integer) (req: MlGetDataFrameAnalyticsStatsRequest) =
+        let withSize (value: Types.Integer) (req: MlGetDataFrameAnalyticsStatsRequest) =
             { req with Size = Some value }
         let withVerbose (value: bool) (req: MlGetDataFrameAnalyticsStatsRequest) =
             { req with Verbose = Some value }
 
     type MlGetDatafeedStatsRequest = {
-        DatafeedId: CoreTypes.Ids
+        DatafeedId: Types.Ids
         AllowNoMatch: bool option
     }
 
@@ -1681,7 +1682,7 @@ module MlOperations =
             }
 
         [<CustomOperation("datafeedId")>]
-        member _.DatafeedId(state: MlGetDatafeedStatsRequest, value: CoreTypes.Ids) =
+        member _.DatafeedId(state: MlGetDatafeedStatsRequest, value: Types.Ids) =
             { state with DatafeedId = value }
 
         [<CustomOperation("allowNoMatch")>]
@@ -1695,7 +1696,7 @@ module MlOperations =
             { req with AllowNoMatch = Some value }
 
     type MlGetDatafeedsRequest = {
-        DatafeedId: CoreTypes.Ids
+        DatafeedId: Types.Ids
         AllowNoMatch: bool option
         ExcludeGenerated: bool option
     }
@@ -1730,7 +1731,7 @@ module MlOperations =
             }
 
         [<CustomOperation("datafeedId")>]
-        member _.DatafeedId(state: MlGetDatafeedsRequest, value: CoreTypes.Ids) =
+        member _.DatafeedId(state: MlGetDatafeedsRequest, value: Types.Ids) =
             { state with DatafeedId = value }
 
         [<CustomOperation("allowNoMatch")>]
@@ -1750,9 +1751,9 @@ module MlOperations =
             { req with ExcludeGenerated = Some value }
 
     type MlGetFiltersRequest = {
-        FilterId: CoreTypes.Ids
-        From: CoreTypes.Integer option
-        Size: CoreTypes.Integer option
+        FilterId: Types.Ids
+        From: Types.Integer option
+        Size: Types.Integer option
     }
 
         with
@@ -1785,36 +1786,36 @@ module MlOperations =
             }
 
         [<CustomOperation("filterId")>]
-        member _.FilterId(state: MlGetFiltersRequest, value: CoreTypes.Ids) =
+        member _.FilterId(state: MlGetFiltersRequest, value: Types.Ids) =
             { state with FilterId = value }
 
         [<CustomOperation("from")>]
-        member _.From(state: MlGetFiltersRequest, value: CoreTypes.Integer) =
+        member _.From(state: MlGetFiltersRequest, value: Types.Integer) =
             { state with From = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: MlGetFiltersRequest, value: CoreTypes.Integer) =
+        member _.Size(state: MlGetFiltersRequest, value: Types.Integer) =
             { state with Size = Some value }
 
     let mlGetFiltersRequest = MlGetFiltersRequestBuilder()
 
     module GetFilters =
-        let withFrom (value: CoreTypes.Integer) (req: MlGetFiltersRequest) =
+        let withFrom (value: Types.Integer) (req: MlGetFiltersRequest) =
             { req with From = Some value }
-        let withSize (value: CoreTypes.Integer) (req: MlGetFiltersRequest) =
+        let withSize (value: Types.Integer) (req: MlGetFiltersRequest) =
             { req with Size = Some value }
 
     type MlGetInfluencersRequest = {
-        JobId: CoreTypes.Id
+        JobId: Types.Id
         Desc: bool option
-        End: CoreTypes.DateTime option
+        End: Types.DateTime option
         ExcludeInterim: bool option
-        InfluencerScore: CoreTypes.Double option
-        From: CoreTypes.Integer option
-        Size: CoreTypes.Integer option
-        Sort: CoreTypes.Field option
-        Start: CoreTypes.DateTime option
-        Page: MlTypes.Page option
+        InfluencerScore: Types.Double option
+        From: Types.Integer option
+        Size: Types.Integer option
+        Sort: Types.Field option
+        Start: Types.DateTime option
+        Page: Types.Page option
     }
 
         with
@@ -1861,7 +1862,7 @@ module MlOperations =
             }
 
         [<CustomOperation("jobId")>]
-        member _.JobId(state: MlGetInfluencersRequest, value: CoreTypes.Id) =
+        member _.JobId(state: MlGetInfluencersRequest, value: Types.Id) =
             { state with JobId = value }
 
         [<CustomOperation("desc")>]
@@ -1869,7 +1870,7 @@ module MlOperations =
             { state with Desc = Some value }
 
         [<CustomOperation("end'")>]
-        member _.End(state: MlGetInfluencersRequest, value: CoreTypes.DateTime) =
+        member _.End(state: MlGetInfluencersRequest, value: Types.DateTime) =
             { state with End = Some value }
 
         [<CustomOperation("excludeInterim")>]
@@ -1877,27 +1878,27 @@ module MlOperations =
             { state with ExcludeInterim = Some value }
 
         [<CustomOperation("influencerScore")>]
-        member _.InfluencerScore(state: MlGetInfluencersRequest, value: CoreTypes.Double) =
+        member _.InfluencerScore(state: MlGetInfluencersRequest, value: Types.Double) =
             { state with InfluencerScore = Some value }
 
         [<CustomOperation("from")>]
-        member _.From(state: MlGetInfluencersRequest, value: CoreTypes.Integer) =
+        member _.From(state: MlGetInfluencersRequest, value: Types.Integer) =
             { state with From = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: MlGetInfluencersRequest, value: CoreTypes.Integer) =
+        member _.Size(state: MlGetInfluencersRequest, value: Types.Integer) =
             { state with Size = Some value }
 
         [<CustomOperation("sort")>]
-        member _.Sort(state: MlGetInfluencersRequest, value: CoreTypes.Field) =
+        member _.Sort(state: MlGetInfluencersRequest, value: Types.Field) =
             { state with Sort = Some value }
 
         [<CustomOperation("start")>]
-        member _.Start(state: MlGetInfluencersRequest, value: CoreTypes.DateTime) =
+        member _.Start(state: MlGetInfluencersRequest, value: Types.DateTime) =
             { state with Start = Some value }
 
         [<CustomOperation("page")>]
-        member _.Page(state: MlGetInfluencersRequest, value: MlTypes.Page) =
+        member _.Page(state: MlGetInfluencersRequest, value: Types.Page) =
             { state with Page = Some value }
 
     let mlGetInfluencersRequest = MlGetInfluencersRequestBuilder()
@@ -1905,25 +1906,25 @@ module MlOperations =
     module GetInfluencers =
         let withDesc (value: bool) (req: MlGetInfluencersRequest) =
             { req with Desc = Some value }
-        let withEnd (value: CoreTypes.DateTime) (req: MlGetInfluencersRequest) =
+        let withEnd (value: Types.DateTime) (req: MlGetInfluencersRequest) =
             { req with End = Some value }
         let withExcludeInterim (value: bool) (req: MlGetInfluencersRequest) =
             { req with ExcludeInterim = Some value }
-        let withInfluencerScore (value: CoreTypes.Double) (req: MlGetInfluencersRequest) =
+        let withInfluencerScore (value: Types.Double) (req: MlGetInfluencersRequest) =
             { req with InfluencerScore = Some value }
-        let withFrom (value: CoreTypes.Integer) (req: MlGetInfluencersRequest) =
+        let withFrom (value: Types.Integer) (req: MlGetInfluencersRequest) =
             { req with From = Some value }
-        let withSize (value: CoreTypes.Integer) (req: MlGetInfluencersRequest) =
+        let withSize (value: Types.Integer) (req: MlGetInfluencersRequest) =
             { req with Size = Some value }
-        let withSort (value: CoreTypes.Field) (req: MlGetInfluencersRequest) =
+        let withSort (value: Types.Field) (req: MlGetInfluencersRequest) =
             { req with Sort = Some value }
-        let withStart (value: CoreTypes.DateTime) (req: MlGetInfluencersRequest) =
+        let withStart (value: Types.DateTime) (req: MlGetInfluencersRequest) =
             { req with Start = Some value }
-        let withPage (value: MlTypes.Page) (req: MlGetInfluencersRequest) =
+        let withPage (value: Types.Page) (req: MlGetInfluencersRequest) =
             { req with Page = Some value }
 
     type MlGetJobStatsRequest = {
-        JobId: CoreTypes.Id
+        JobId: Types.Id
         AllowNoMatch: bool option
     }
 
@@ -1955,7 +1956,7 @@ module MlOperations =
             }
 
         [<CustomOperation("jobId")>]
-        member _.JobId(state: MlGetJobStatsRequest, value: CoreTypes.Id) =
+        member _.JobId(state: MlGetJobStatsRequest, value: Types.Id) =
             { state with JobId = value }
 
         [<CustomOperation("allowNoMatch")>]
@@ -1969,7 +1970,7 @@ module MlOperations =
             { req with AllowNoMatch = Some value }
 
     type MlGetJobsRequest = {
-        JobId: CoreTypes.Ids
+        JobId: Types.Ids
         AllowNoMatch: bool option
         ExcludeGenerated: bool option
     }
@@ -2004,7 +2005,7 @@ module MlOperations =
             }
 
         [<CustomOperation("jobId")>]
-        member _.JobId(state: MlGetJobsRequest, value: CoreTypes.Ids) =
+        member _.JobId(state: MlGetJobsRequest, value: Types.Ids) =
             { state with JobId = value }
 
         [<CustomOperation("allowNoMatch")>]
@@ -2024,9 +2025,9 @@ module MlOperations =
             { req with ExcludeGenerated = Some value }
 
     type MlGetMemoryStatsRequest = {
-        NodeId: CoreTypes.Id
-        MasterTimeout: CoreTypes.Duration option
-        Timeout: CoreTypes.Duration option
+        NodeId: Types.Id
+        MasterTimeout: Types.Duration option
+        Timeout: Types.Duration option
     }
 
         with
@@ -2059,28 +2060,28 @@ module MlOperations =
             }
 
         [<CustomOperation("nodeId")>]
-        member _.NodeId(state: MlGetMemoryStatsRequest, value: CoreTypes.Id) =
+        member _.NodeId(state: MlGetMemoryStatsRequest, value: Types.Id) =
             { state with NodeId = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: MlGetMemoryStatsRequest, value: CoreTypes.Duration) =
+        member _.MasterTimeout(state: MlGetMemoryStatsRequest, value: Types.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: MlGetMemoryStatsRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: MlGetMemoryStatsRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
     let mlGetMemoryStatsRequest = MlGetMemoryStatsRequestBuilder()
 
     module GetMemoryStats =
-        let withMasterTimeout (value: CoreTypes.Duration) (req: MlGetMemoryStatsRequest) =
+        let withMasterTimeout (value: Types.Duration) (req: MlGetMemoryStatsRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: MlGetMemoryStatsRequest) =
+        let withTimeout (value: Types.Duration) (req: MlGetMemoryStatsRequest) =
             { req with Timeout = Some value }
 
     type MlGetModelSnapshotUpgradeStatsRequest = {
-        JobId: CoreTypes.Id
-        SnapshotId: CoreTypes.Id
+        JobId: Types.Id
+        SnapshotId: Types.Id
         AllowNoMatch: bool option
     }
 
@@ -2113,11 +2114,11 @@ module MlOperations =
             }
 
         [<CustomOperation("jobId")>]
-        member _.JobId(state: MlGetModelSnapshotUpgradeStatsRequest, value: CoreTypes.Id) =
+        member _.JobId(state: MlGetModelSnapshotUpgradeStatsRequest, value: Types.Id) =
             { state with JobId = value }
 
         [<CustomOperation("snapshotId")>]
-        member _.SnapshotId(state: MlGetModelSnapshotUpgradeStatsRequest, value: CoreTypes.Id) =
+        member _.SnapshotId(state: MlGetModelSnapshotUpgradeStatsRequest, value: Types.Id) =
             { state with SnapshotId = value }
 
         [<CustomOperation("allowNoMatch")>]
@@ -2131,19 +2132,19 @@ module MlOperations =
             { req with AllowNoMatch = Some value }
 
     type MlGetModelSnapshotsRequest = {
-        JobId: CoreTypes.Id
-        SnapshotId: CoreTypes.Id
+        JobId: Types.Id
+        SnapshotId: Types.Id
         Desc: bool option
-        End: CoreTypes.DateTime option
-        From: CoreTypes.Integer option
-        Size: CoreTypes.Integer option
-        Sort: CoreTypes.Field option
-        Start: CoreTypes.DateTime option
+        End: Types.DateTime option
+        From: Types.Integer option
+        Size: Types.Integer option
+        Sort: Types.Field option
+        Start: Types.DateTime option
         Desc: bool option
-        End: CoreTypes.DateTime option
-        Page: MlTypes.Page option
-        Sort: CoreTypes.Field option
-        Start: CoreTypes.DateTime option
+        End: Types.DateTime option
+        Page: Types.Page option
+        Sort: Types.Field option
+        Start: Types.DateTime option
     }
 
         with
@@ -2191,11 +2192,11 @@ module MlOperations =
             }
 
         [<CustomOperation("jobId")>]
-        member _.JobId(state: MlGetModelSnapshotsRequest, value: CoreTypes.Id) =
+        member _.JobId(state: MlGetModelSnapshotsRequest, value: Types.Id) =
             { state with JobId = value }
 
         [<CustomOperation("snapshotId")>]
-        member _.SnapshotId(state: MlGetModelSnapshotsRequest, value: CoreTypes.Id) =
+        member _.SnapshotId(state: MlGetModelSnapshotsRequest, value: Types.Id) =
             { state with SnapshotId = value }
 
         [<CustomOperation("desc")>]
@@ -2203,23 +2204,23 @@ module MlOperations =
             { state with Desc = Some value }
 
         [<CustomOperation("end'")>]
-        member _.End(state: MlGetModelSnapshotsRequest, value: CoreTypes.DateTime) =
+        member _.End(state: MlGetModelSnapshotsRequest, value: Types.DateTime) =
             { state with End = Some value }
 
         [<CustomOperation("from")>]
-        member _.From(state: MlGetModelSnapshotsRequest, value: CoreTypes.Integer) =
+        member _.From(state: MlGetModelSnapshotsRequest, value: Types.Integer) =
             { state with From = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: MlGetModelSnapshotsRequest, value: CoreTypes.Integer) =
+        member _.Size(state: MlGetModelSnapshotsRequest, value: Types.Integer) =
             { state with Size = Some value }
 
         [<CustomOperation("sort")>]
-        member _.Sort(state: MlGetModelSnapshotsRequest, value: CoreTypes.Field) =
+        member _.Sort(state: MlGetModelSnapshotsRequest, value: Types.Field) =
             { state with Sort = Some value }
 
         [<CustomOperation("start")>]
-        member _.Start(state: MlGetModelSnapshotsRequest, value: CoreTypes.DateTime) =
+        member _.Start(state: MlGetModelSnapshotsRequest, value: Types.DateTime) =
             { state with Start = Some value }
 
         [<CustomOperation("desc")>]
@@ -2227,19 +2228,19 @@ module MlOperations =
             { state with Desc = Some value }
 
         [<CustomOperation("end'")>]
-        member _.End(state: MlGetModelSnapshotsRequest, value: CoreTypes.DateTime) =
+        member _.End(state: MlGetModelSnapshotsRequest, value: Types.DateTime) =
             { state with End = Some value }
 
         [<CustomOperation("page")>]
-        member _.Page(state: MlGetModelSnapshotsRequest, value: MlTypes.Page) =
+        member _.Page(state: MlGetModelSnapshotsRequest, value: Types.Page) =
             { state with Page = Some value }
 
         [<CustomOperation("sort")>]
-        member _.Sort(state: MlGetModelSnapshotsRequest, value: CoreTypes.Field) =
+        member _.Sort(state: MlGetModelSnapshotsRequest, value: Types.Field) =
             { state with Sort = Some value }
 
         [<CustomOperation("start")>]
-        member _.Start(state: MlGetModelSnapshotsRequest, value: CoreTypes.DateTime) =
+        member _.Start(state: MlGetModelSnapshotsRequest, value: Types.DateTime) =
             { state with Start = Some value }
 
     let mlGetModelSnapshotsRequest = MlGetModelSnapshotsRequestBuilder()
@@ -2247,43 +2248,43 @@ module MlOperations =
     module GetModelSnapshots =
         let withDesc (value: bool) (req: MlGetModelSnapshotsRequest) =
             { req with Desc = Some value }
-        let withEnd (value: CoreTypes.DateTime) (req: MlGetModelSnapshotsRequest) =
+        let withEnd (value: Types.DateTime) (req: MlGetModelSnapshotsRequest) =
             { req with End = Some value }
-        let withFrom (value: CoreTypes.Integer) (req: MlGetModelSnapshotsRequest) =
+        let withFrom (value: Types.Integer) (req: MlGetModelSnapshotsRequest) =
             { req with From = Some value }
-        let withSize (value: CoreTypes.Integer) (req: MlGetModelSnapshotsRequest) =
+        let withSize (value: Types.Integer) (req: MlGetModelSnapshotsRequest) =
             { req with Size = Some value }
-        let withSort (value: CoreTypes.Field) (req: MlGetModelSnapshotsRequest) =
+        let withSort (value: Types.Field) (req: MlGetModelSnapshotsRequest) =
             { req with Sort = Some value }
-        let withStart (value: CoreTypes.DateTime) (req: MlGetModelSnapshotsRequest) =
+        let withStart (value: Types.DateTime) (req: MlGetModelSnapshotsRequest) =
             { req with Start = Some value }
         let withDesc (value: bool) (req: MlGetModelSnapshotsRequest) =
             { req with Desc = Some value }
-        let withEnd (value: CoreTypes.DateTime) (req: MlGetModelSnapshotsRequest) =
+        let withEnd (value: Types.DateTime) (req: MlGetModelSnapshotsRequest) =
             { req with End = Some value }
-        let withPage (value: MlTypes.Page) (req: MlGetModelSnapshotsRequest) =
+        let withPage (value: Types.Page) (req: MlGetModelSnapshotsRequest) =
             { req with Page = Some value }
-        let withSort (value: CoreTypes.Field) (req: MlGetModelSnapshotsRequest) =
+        let withSort (value: Types.Field) (req: MlGetModelSnapshotsRequest) =
             { req with Sort = Some value }
-        let withStart (value: CoreTypes.DateTime) (req: MlGetModelSnapshotsRequest) =
+        let withStart (value: Types.DateTime) (req: MlGetModelSnapshotsRequest) =
             { req with Start = Some value }
 
     type MlGetOverallBucketsRequest = {
-        JobId: CoreTypes.Id
+        JobId: Types.Id
         AllowNoMatch: bool option
-        BucketSpan: CoreTypes.Duration option
-        End: CoreTypes.DateTime option
+        BucketSpan: Types.Duration option
+        End: Types.DateTime option
         ExcludeInterim: bool option
-        OverallScore: CoreTypes.Double option
-        Start: CoreTypes.DateTime option
-        TopN: CoreTypes.Integer option
+        OverallScore: Types.Double option
+        Start: Types.DateTime option
+        TopN: Types.Integer option
         AllowNoMatch: bool option
-        BucketSpan: CoreTypes.Duration option
-        End: CoreTypes.DateTime option
+        BucketSpan: Types.Duration option
+        End: Types.DateTime option
         ExcludeInterim: bool option
-        OverallScore: CoreTypes.Double option
-        Start: CoreTypes.DateTime option
-        TopN: CoreTypes.Integer option
+        OverallScore: Types.Double option
+        Start: Types.DateTime option
+        TopN: Types.Integer option
     }
 
         with
@@ -2334,7 +2335,7 @@ module MlOperations =
             }
 
         [<CustomOperation("jobId")>]
-        member _.JobId(state: MlGetOverallBucketsRequest, value: CoreTypes.Id) =
+        member _.JobId(state: MlGetOverallBucketsRequest, value: Types.Id) =
             { state with JobId = value }
 
         [<CustomOperation("allowNoMatch")>]
@@ -2342,11 +2343,11 @@ module MlOperations =
             { state with AllowNoMatch = Some value }
 
         [<CustomOperation("bucketSpan")>]
-        member _.BucketSpan(state: MlGetOverallBucketsRequest, value: CoreTypes.Duration) =
+        member _.BucketSpan(state: MlGetOverallBucketsRequest, value: Types.Duration) =
             { state with BucketSpan = Some value }
 
         [<CustomOperation("end'")>]
-        member _.End(state: MlGetOverallBucketsRequest, value: CoreTypes.DateTime) =
+        member _.End(state: MlGetOverallBucketsRequest, value: Types.DateTime) =
             { state with End = Some value }
 
         [<CustomOperation("excludeInterim")>]
@@ -2354,15 +2355,15 @@ module MlOperations =
             { state with ExcludeInterim = Some value }
 
         [<CustomOperation("overallScore")>]
-        member _.OverallScore(state: MlGetOverallBucketsRequest, value: CoreTypes.Double) =
+        member _.OverallScore(state: MlGetOverallBucketsRequest, value: Types.Double) =
             { state with OverallScore = Some value }
 
         [<CustomOperation("start")>]
-        member _.Start(state: MlGetOverallBucketsRequest, value: CoreTypes.DateTime) =
+        member _.Start(state: MlGetOverallBucketsRequest, value: Types.DateTime) =
             { state with Start = Some value }
 
         [<CustomOperation("topN")>]
-        member _.TopN(state: MlGetOverallBucketsRequest, value: CoreTypes.Integer) =
+        member _.TopN(state: MlGetOverallBucketsRequest, value: Types.Integer) =
             { state with TopN = Some value }
 
         [<CustomOperation("allowNoMatch")>]
@@ -2370,11 +2371,11 @@ module MlOperations =
             { state with AllowNoMatch = Some value }
 
         [<CustomOperation("bucketSpan")>]
-        member _.BucketSpan(state: MlGetOverallBucketsRequest, value: CoreTypes.Duration) =
+        member _.BucketSpan(state: MlGetOverallBucketsRequest, value: Types.Duration) =
             { state with BucketSpan = Some value }
 
         [<CustomOperation("end'")>]
-        member _.End(state: MlGetOverallBucketsRequest, value: CoreTypes.DateTime) =
+        member _.End(state: MlGetOverallBucketsRequest, value: Types.DateTime) =
             { state with End = Some value }
 
         [<CustomOperation("excludeInterim")>]
@@ -2382,15 +2383,15 @@ module MlOperations =
             { state with ExcludeInterim = Some value }
 
         [<CustomOperation("overallScore")>]
-        member _.OverallScore(state: MlGetOverallBucketsRequest, value: CoreTypes.Double) =
+        member _.OverallScore(state: MlGetOverallBucketsRequest, value: Types.Double) =
             { state with OverallScore = Some value }
 
         [<CustomOperation("start")>]
-        member _.Start(state: MlGetOverallBucketsRequest, value: CoreTypes.DateTime) =
+        member _.Start(state: MlGetOverallBucketsRequest, value: Types.DateTime) =
             { state with Start = Some value }
 
         [<CustomOperation("topN")>]
-        member _.TopN(state: MlGetOverallBucketsRequest, value: CoreTypes.Integer) =
+        member _.TopN(state: MlGetOverallBucketsRequest, value: Types.Integer) =
             { state with TopN = Some value }
 
     let mlGetOverallBucketsRequest = MlGetOverallBucketsRequestBuilder()
@@ -2398,50 +2399,50 @@ module MlOperations =
     module GetOverallBuckets =
         let withAllowNoMatch (value: bool) (req: MlGetOverallBucketsRequest) =
             { req with AllowNoMatch = Some value }
-        let withBucketSpan (value: CoreTypes.Duration) (req: MlGetOverallBucketsRequest) =
+        let withBucketSpan (value: Types.Duration) (req: MlGetOverallBucketsRequest) =
             { req with BucketSpan = Some value }
-        let withEnd (value: CoreTypes.DateTime) (req: MlGetOverallBucketsRequest) =
+        let withEnd (value: Types.DateTime) (req: MlGetOverallBucketsRequest) =
             { req with End = Some value }
         let withExcludeInterim (value: bool) (req: MlGetOverallBucketsRequest) =
             { req with ExcludeInterim = Some value }
-        let withOverallScore (value: CoreTypes.Double) (req: MlGetOverallBucketsRequest) =
+        let withOverallScore (value: Types.Double) (req: MlGetOverallBucketsRequest) =
             { req with OverallScore = Some value }
-        let withStart (value: CoreTypes.DateTime) (req: MlGetOverallBucketsRequest) =
+        let withStart (value: Types.DateTime) (req: MlGetOverallBucketsRequest) =
             { req with Start = Some value }
-        let withTopN (value: CoreTypes.Integer) (req: MlGetOverallBucketsRequest) =
+        let withTopN (value: Types.Integer) (req: MlGetOverallBucketsRequest) =
             { req with TopN = Some value }
         let withAllowNoMatch (value: bool) (req: MlGetOverallBucketsRequest) =
             { req with AllowNoMatch = Some value }
-        let withBucketSpan (value: CoreTypes.Duration) (req: MlGetOverallBucketsRequest) =
+        let withBucketSpan (value: Types.Duration) (req: MlGetOverallBucketsRequest) =
             { req with BucketSpan = Some value }
-        let withEnd (value: CoreTypes.DateTime) (req: MlGetOverallBucketsRequest) =
+        let withEnd (value: Types.DateTime) (req: MlGetOverallBucketsRequest) =
             { req with End = Some value }
         let withExcludeInterim (value: bool) (req: MlGetOverallBucketsRequest) =
             { req with ExcludeInterim = Some value }
-        let withOverallScore (value: CoreTypes.Double) (req: MlGetOverallBucketsRequest) =
+        let withOverallScore (value: Types.Double) (req: MlGetOverallBucketsRequest) =
             { req with OverallScore = Some value }
-        let withStart (value: CoreTypes.DateTime) (req: MlGetOverallBucketsRequest) =
+        let withStart (value: Types.DateTime) (req: MlGetOverallBucketsRequest) =
             { req with Start = Some value }
-        let withTopN (value: CoreTypes.Integer) (req: MlGetOverallBucketsRequest) =
+        let withTopN (value: Types.Integer) (req: MlGetOverallBucketsRequest) =
             { req with TopN = Some value }
 
     type MlGetRecordsRequest = {
-        JobId: CoreTypes.Id
+        JobId: Types.Id
         Desc: bool option
-        End: CoreTypes.DateTime option
+        End: Types.DateTime option
         ExcludeInterim: bool option
-        From: CoreTypes.Integer option
-        RecordScore: CoreTypes.Double option
-        Size: CoreTypes.Integer option
-        Sort: CoreTypes.Field option
-        Start: CoreTypes.DateTime option
+        From: Types.Integer option
+        RecordScore: Types.Double option
+        Size: Types.Integer option
+        Sort: Types.Field option
+        Start: Types.DateTime option
         Desc: bool option
-        End: CoreTypes.DateTime option
+        End: Types.DateTime option
         ExcludeInterim: bool option
-        Page: MlTypes.Page option
-        RecordScore: CoreTypes.Double option
-        Sort: CoreTypes.Field option
-        Start: CoreTypes.DateTime option
+        Page: Types.Page option
+        RecordScore: Types.Double option
+        Sort: Types.Field option
+        Start: Types.DateTime option
     }
 
         with
@@ -2494,7 +2495,7 @@ module MlOperations =
             }
 
         [<CustomOperation("jobId")>]
-        member _.JobId(state: MlGetRecordsRequest, value: CoreTypes.Id) =
+        member _.JobId(state: MlGetRecordsRequest, value: Types.Id) =
             { state with JobId = value }
 
         [<CustomOperation("desc")>]
@@ -2502,7 +2503,7 @@ module MlOperations =
             { state with Desc = Some value }
 
         [<CustomOperation("end'")>]
-        member _.End(state: MlGetRecordsRequest, value: CoreTypes.DateTime) =
+        member _.End(state: MlGetRecordsRequest, value: Types.DateTime) =
             { state with End = Some value }
 
         [<CustomOperation("excludeInterim")>]
@@ -2510,23 +2511,23 @@ module MlOperations =
             { state with ExcludeInterim = Some value }
 
         [<CustomOperation("from")>]
-        member _.From(state: MlGetRecordsRequest, value: CoreTypes.Integer) =
+        member _.From(state: MlGetRecordsRequest, value: Types.Integer) =
             { state with From = Some value }
 
         [<CustomOperation("recordScore")>]
-        member _.RecordScore(state: MlGetRecordsRequest, value: CoreTypes.Double) =
+        member _.RecordScore(state: MlGetRecordsRequest, value: Types.Double) =
             { state with RecordScore = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: MlGetRecordsRequest, value: CoreTypes.Integer) =
+        member _.Size(state: MlGetRecordsRequest, value: Types.Integer) =
             { state with Size = Some value }
 
         [<CustomOperation("sort")>]
-        member _.Sort(state: MlGetRecordsRequest, value: CoreTypes.Field) =
+        member _.Sort(state: MlGetRecordsRequest, value: Types.Field) =
             { state with Sort = Some value }
 
         [<CustomOperation("start")>]
-        member _.Start(state: MlGetRecordsRequest, value: CoreTypes.DateTime) =
+        member _.Start(state: MlGetRecordsRequest, value: Types.DateTime) =
             { state with Start = Some value }
 
         [<CustomOperation("desc")>]
@@ -2534,7 +2535,7 @@ module MlOperations =
             { state with Desc = Some value }
 
         [<CustomOperation("end'")>]
-        member _.End(state: MlGetRecordsRequest, value: CoreTypes.DateTime) =
+        member _.End(state: MlGetRecordsRequest, value: Types.DateTime) =
             { state with End = Some value }
 
         [<CustomOperation("excludeInterim")>]
@@ -2542,19 +2543,19 @@ module MlOperations =
             { state with ExcludeInterim = Some value }
 
         [<CustomOperation("page")>]
-        member _.Page(state: MlGetRecordsRequest, value: MlTypes.Page) =
+        member _.Page(state: MlGetRecordsRequest, value: Types.Page) =
             { state with Page = Some value }
 
         [<CustomOperation("recordScore")>]
-        member _.RecordScore(state: MlGetRecordsRequest, value: CoreTypes.Double) =
+        member _.RecordScore(state: MlGetRecordsRequest, value: Types.Double) =
             { state with RecordScore = Some value }
 
         [<CustomOperation("sort")>]
-        member _.Sort(state: MlGetRecordsRequest, value: CoreTypes.Field) =
+        member _.Sort(state: MlGetRecordsRequest, value: Types.Field) =
             { state with Sort = Some value }
 
         [<CustomOperation("start")>]
-        member _.Start(state: MlGetRecordsRequest, value: CoreTypes.DateTime) =
+        member _.Start(state: MlGetRecordsRequest, value: Types.DateTime) =
             { state with Start = Some value }
 
     let mlGetRecordsRequest = MlGetRecordsRequestBuilder()
@@ -2562,43 +2563,43 @@ module MlOperations =
     module GetRecords =
         let withDesc (value: bool) (req: MlGetRecordsRequest) =
             { req with Desc = Some value }
-        let withEnd (value: CoreTypes.DateTime) (req: MlGetRecordsRequest) =
+        let withEnd (value: Types.DateTime) (req: MlGetRecordsRequest) =
             { req with End = Some value }
         let withExcludeInterim (value: bool) (req: MlGetRecordsRequest) =
             { req with ExcludeInterim = Some value }
-        let withFrom (value: CoreTypes.Integer) (req: MlGetRecordsRequest) =
+        let withFrom (value: Types.Integer) (req: MlGetRecordsRequest) =
             { req with From = Some value }
-        let withRecordScore (value: CoreTypes.Double) (req: MlGetRecordsRequest) =
+        let withRecordScore (value: Types.Double) (req: MlGetRecordsRequest) =
             { req with RecordScore = Some value }
-        let withSize (value: CoreTypes.Integer) (req: MlGetRecordsRequest) =
+        let withSize (value: Types.Integer) (req: MlGetRecordsRequest) =
             { req with Size = Some value }
-        let withSort (value: CoreTypes.Field) (req: MlGetRecordsRequest) =
+        let withSort (value: Types.Field) (req: MlGetRecordsRequest) =
             { req with Sort = Some value }
-        let withStart (value: CoreTypes.DateTime) (req: MlGetRecordsRequest) =
+        let withStart (value: Types.DateTime) (req: MlGetRecordsRequest) =
             { req with Start = Some value }
         let withDesc (value: bool) (req: MlGetRecordsRequest) =
             { req with Desc = Some value }
-        let withEnd (value: CoreTypes.DateTime) (req: MlGetRecordsRequest) =
+        let withEnd (value: Types.DateTime) (req: MlGetRecordsRequest) =
             { req with End = Some value }
         let withExcludeInterim (value: bool) (req: MlGetRecordsRequest) =
             { req with ExcludeInterim = Some value }
-        let withPage (value: MlTypes.Page) (req: MlGetRecordsRequest) =
+        let withPage (value: Types.Page) (req: MlGetRecordsRequest) =
             { req with Page = Some value }
-        let withRecordScore (value: CoreTypes.Double) (req: MlGetRecordsRequest) =
+        let withRecordScore (value: Types.Double) (req: MlGetRecordsRequest) =
             { req with RecordScore = Some value }
-        let withSort (value: CoreTypes.Field) (req: MlGetRecordsRequest) =
+        let withSort (value: Types.Field) (req: MlGetRecordsRequest) =
             { req with Sort = Some value }
-        let withStart (value: CoreTypes.DateTime) (req: MlGetRecordsRequest) =
+        let withStart (value: Types.DateTime) (req: MlGetRecordsRequest) =
             { req with Start = Some value }
 
     type MlGetTrainedModelsRequest = {
-        ModelId: CoreTypes.Ids
+        ModelId: Types.Ids
         AllowNoMatch: bool option
         DecompressDefinition: bool option
         ExcludeGenerated: bool option
-        From: CoreTypes.Integer option
-        Include: MlTypes.Include option
-        Size: CoreTypes.Integer option
+        From: Types.Integer option
+        Include: Types.Include option
+        Size: Types.Integer option
         Tags: System.Text.Json.JsonElement option
     }
 
@@ -2642,7 +2643,7 @@ module MlOperations =
             }
 
         [<CustomOperation("modelId")>]
-        member _.ModelId(state: MlGetTrainedModelsRequest, value: CoreTypes.Ids) =
+        member _.ModelId(state: MlGetTrainedModelsRequest, value: Types.Ids) =
             { state with ModelId = value }
 
         [<CustomOperation("allowNoMatch")>]
@@ -2658,15 +2659,15 @@ module MlOperations =
             { state with ExcludeGenerated = Some value }
 
         [<CustomOperation("from")>]
-        member _.From(state: MlGetTrainedModelsRequest, value: CoreTypes.Integer) =
+        member _.From(state: MlGetTrainedModelsRequest, value: Types.Integer) =
             { state with From = Some value }
 
         [<CustomOperation("include")>]
-        member _.Include(state: MlGetTrainedModelsRequest, value: MlTypes.Include) =
+        member _.Include(state: MlGetTrainedModelsRequest, value: Types.Include) =
             { state with Include = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: MlGetTrainedModelsRequest, value: CoreTypes.Integer) =
+        member _.Size(state: MlGetTrainedModelsRequest, value: Types.Integer) =
             { state with Size = Some value }
 
         [<CustomOperation("tags")>]
@@ -2682,20 +2683,20 @@ module MlOperations =
             { req with DecompressDefinition = Some value }
         let withExcludeGenerated (value: bool) (req: MlGetTrainedModelsRequest) =
             { req with ExcludeGenerated = Some value }
-        let withFrom (value: CoreTypes.Integer) (req: MlGetTrainedModelsRequest) =
+        let withFrom (value: Types.Integer) (req: MlGetTrainedModelsRequest) =
             { req with From = Some value }
-        let withInclude (value: MlTypes.Include) (req: MlGetTrainedModelsRequest) =
+        let withInclude (value: Types.Include) (req: MlGetTrainedModelsRequest) =
             { req with Include = Some value }
-        let withSize (value: CoreTypes.Integer) (req: MlGetTrainedModelsRequest) =
+        let withSize (value: Types.Integer) (req: MlGetTrainedModelsRequest) =
             { req with Size = Some value }
         let withTags (value: System.Text.Json.JsonElement) (req: MlGetTrainedModelsRequest) =
             { req with Tags = Some value }
 
     type MlGetTrainedModelsStatsRequest = {
-        ModelId: CoreTypes.Ids
+        ModelId: Types.Ids
         AllowNoMatch: bool option
-        From: CoreTypes.Integer option
-        Size: CoreTypes.Integer option
+        From: Types.Integer option
+        Size: Types.Integer option
     }
 
         with
@@ -2730,7 +2731,7 @@ module MlOperations =
             }
 
         [<CustomOperation("modelId")>]
-        member _.ModelId(state: MlGetTrainedModelsStatsRequest, value: CoreTypes.Ids) =
+        member _.ModelId(state: MlGetTrainedModelsStatsRequest, value: Types.Ids) =
             { state with ModelId = value }
 
         [<CustomOperation("allowNoMatch")>]
@@ -2738,11 +2739,11 @@ module MlOperations =
             { state with AllowNoMatch = Some value }
 
         [<CustomOperation("from")>]
-        member _.From(state: MlGetTrainedModelsStatsRequest, value: CoreTypes.Integer) =
+        member _.From(state: MlGetTrainedModelsStatsRequest, value: Types.Integer) =
             { state with From = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: MlGetTrainedModelsStatsRequest, value: CoreTypes.Integer) =
+        member _.Size(state: MlGetTrainedModelsStatsRequest, value: Types.Integer) =
             { state with Size = Some value }
 
     let mlGetTrainedModelsStatsRequest = MlGetTrainedModelsStatsRequestBuilder()
@@ -2750,16 +2751,16 @@ module MlOperations =
     module GetTrainedModelsStats =
         let withAllowNoMatch (value: bool) (req: MlGetTrainedModelsStatsRequest) =
             { req with AllowNoMatch = Some value }
-        let withFrom (value: CoreTypes.Integer) (req: MlGetTrainedModelsStatsRequest) =
+        let withFrom (value: Types.Integer) (req: MlGetTrainedModelsStatsRequest) =
             { req with From = Some value }
-        let withSize (value: CoreTypes.Integer) (req: MlGetTrainedModelsStatsRequest) =
+        let withSize (value: Types.Integer) (req: MlGetTrainedModelsStatsRequest) =
             { req with Size = Some value }
 
     type MlInferTrainedModelRequest = {
-        ModelId: CoreTypes.Id
-        Timeout: CoreTypes.Duration option
+        ModelId: Types.Id
+        Timeout: Types.Duration option
         Docs: Map<string, System.Text.Json.JsonElement> list
-        InferenceConfig: MlTypes.InferenceConfigUpdateContainer option
+        InferenceConfig: Types.InferenceConfigUpdateContainer option
     }
 
         with
@@ -2793,11 +2794,11 @@ module MlOperations =
             }
 
         [<CustomOperation("modelId")>]
-        member _.ModelId(state: MlInferTrainedModelRequest, value: CoreTypes.Id) =
+        member _.ModelId(state: MlInferTrainedModelRequest, value: Types.Id) =
             { state with ModelId = value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: MlInferTrainedModelRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: MlInferTrainedModelRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("docs")>]
@@ -2805,17 +2806,17 @@ module MlOperations =
             { state with Docs = value }
 
         [<CustomOperation("inferenceConfig")>]
-        member _.InferenceConfig(state: MlInferTrainedModelRequest, value: MlTypes.InferenceConfigUpdateContainer) =
+        member _.InferenceConfig(state: MlInferTrainedModelRequest, value: Types.InferenceConfigUpdateContainer) =
             { state with InferenceConfig = Some value }
 
     let mlInferTrainedModelRequest = MlInferTrainedModelRequestBuilder()
 
     module InferTrainedModel =
-        let withTimeout (value: CoreTypes.Duration) (req: MlInferTrainedModelRequest) =
+        let withTimeout (value: Types.Duration) (req: MlInferTrainedModelRequest) =
             { req with Timeout = Some value }
         let withDocs (value: Map<string, System.Text.Json.JsonElement> list) (req: MlInferTrainedModelRequest) =
             { req with Docs = value }
-        let withInferenceConfig (value: MlTypes.InferenceConfigUpdateContainer) (req: MlInferTrainedModelRequest) =
+        let withInferenceConfig (value: Types.InferenceConfigUpdateContainer) (req: MlInferTrainedModelRequest) =
             { req with InferenceConfig = Some value }
 
     type MlInfoRequest = | MlInfoRequest
@@ -2841,9 +2842,9 @@ module MlOperations =
     let mlInfoRequest = MlInfoRequestBuilder()
 
     type MlOpenJobRequest = {
-        JobId: CoreTypes.Id
-        Timeout: CoreTypes.Duration option
-        Timeout: CoreTypes.Duration option
+        JobId: Types.Id
+        Timeout: Types.Duration option
+        Timeout: Types.Duration option
     }
 
         with
@@ -2876,28 +2877,28 @@ module MlOperations =
             }
 
         [<CustomOperation("jobId")>]
-        member _.JobId(state: MlOpenJobRequest, value: CoreTypes.Id) =
+        member _.JobId(state: MlOpenJobRequest, value: Types.Id) =
             { state with JobId = value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: MlOpenJobRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: MlOpenJobRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: MlOpenJobRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: MlOpenJobRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
     let mlOpenJobRequest = MlOpenJobRequestBuilder()
 
     module OpenJob =
-        let withTimeout (value: CoreTypes.Duration) (req: MlOpenJobRequest) =
+        let withTimeout (value: Types.Duration) (req: MlOpenJobRequest) =
             { req with Timeout = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: MlOpenJobRequest) =
+        let withTimeout (value: Types.Duration) (req: MlOpenJobRequest) =
             { req with Timeout = Some value }
 
     type MlPostCalendarEventsRequest = {
-        CalendarId: CoreTypes.Id
-        Events: MlTypes.CalendarEvent list
+        CalendarId: Types.Id
+        Events: Types.CalendarEvent list
     }
 
         with
@@ -2922,23 +2923,23 @@ module MlOperations =
             }
 
         [<CustomOperation("calendarId")>]
-        member _.CalendarId(state: MlPostCalendarEventsRequest, value: CoreTypes.Id) =
+        member _.CalendarId(state: MlPostCalendarEventsRequest, value: Types.Id) =
             { state with CalendarId = value }
 
         [<CustomOperation("events")>]
-        member _.Events(state: MlPostCalendarEventsRequest, value: MlTypes.CalendarEvent list) =
+        member _.Events(state: MlPostCalendarEventsRequest, value: Types.CalendarEvent list) =
             { state with Events = value }
 
     let mlPostCalendarEventsRequest = MlPostCalendarEventsRequestBuilder()
 
     module PostCalendarEvents =
-        let withEvents (value: MlTypes.CalendarEvent list) (req: MlPostCalendarEventsRequest) =
+        let withEvents (value: Types.CalendarEvent list) (req: MlPostCalendarEventsRequest) =
             { req with Events = value }
 
     type MlPostDataRequest = {
-        JobId: CoreTypes.Id
-        ResetEnd: CoreTypes.DateTime option
-        ResetStart: CoreTypes.DateTime option
+        JobId: Types.Id
+        ResetEnd: Types.DateTime option
+        ResetStart: Types.DateTime option
         Document: obj
     }
 
@@ -2974,15 +2975,15 @@ module MlOperations =
             }
 
         [<CustomOperation("jobId")>]
-        member _.JobId(state: MlPostDataRequest, value: CoreTypes.Id) =
+        member _.JobId(state: MlPostDataRequest, value: Types.Id) =
             { state with JobId = value }
 
         [<CustomOperation("resetEnd")>]
-        member _.ResetEnd(state: MlPostDataRequest, value: CoreTypes.DateTime) =
+        member _.ResetEnd(state: MlPostDataRequest, value: Types.DateTime) =
             { state with ResetEnd = Some value }
 
         [<CustomOperation("resetStart")>]
-        member _.ResetStart(state: MlPostDataRequest, value: CoreTypes.DateTime) =
+        member _.ResetStart(state: MlPostDataRequest, value: Types.DateTime) =
             { state with ResetStart = Some value }
 
         [<CustomOperation("document")>]
@@ -2992,14 +2993,14 @@ module MlOperations =
     let mlPostDataRequest = MlPostDataRequestBuilder()
 
     module PostData =
-        let withResetEnd (value: CoreTypes.DateTime) (req: MlPostDataRequest) =
+        let withResetEnd (value: Types.DateTime) (req: MlPostDataRequest) =
             { req with ResetEnd = Some value }
-        let withResetStart (value: CoreTypes.DateTime) (req: MlPostDataRequest) =
+        let withResetStart (value: Types.DateTime) (req: MlPostDataRequest) =
             { req with ResetStart = Some value }
 
     type MlPreviewDataFrameAnalyticsRequest = {
-        Id: CoreTypes.Id
-        Config: MlPreviewDataFrameAnalytics.DataframePreviewConfig option
+        Id: Types.Id
+        Config: Types.DataframePreviewConfig option
     }
 
         with
@@ -3024,25 +3025,25 @@ module MlOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: MlPreviewDataFrameAnalyticsRequest, value: CoreTypes.Id) =
+        member _.Id(state: MlPreviewDataFrameAnalyticsRequest, value: Types.Id) =
             { state with Id = value }
 
         [<CustomOperation("config")>]
-        member _.Config(state: MlPreviewDataFrameAnalyticsRequest, value: MlPreviewDataFrameAnalytics.DataframePreviewConfig) =
+        member _.Config(state: MlPreviewDataFrameAnalyticsRequest, value: Types.DataframePreviewConfig) =
             { state with Config = Some value }
 
     let mlPreviewDataFrameAnalyticsRequest = MlPreviewDataFrameAnalyticsRequestBuilder()
 
     module PreviewDataFrameAnalytics =
-        let withConfig (value: MlPreviewDataFrameAnalytics.DataframePreviewConfig) (req: MlPreviewDataFrameAnalyticsRequest) =
+        let withConfig (value: Types.DataframePreviewConfig) (req: MlPreviewDataFrameAnalyticsRequest) =
             { req with Config = Some value }
 
     type MlPreviewDatafeedRequest = {
-        DatafeedId: CoreTypes.Id
-        Start: CoreTypes.DateTime option
-        End: CoreTypes.DateTime option
-        DatafeedConfig: MlTypes.DatafeedConfig option
-        JobConfig: MlTypes.JobConfig option
+        DatafeedId: Types.Id
+        Start: Types.DateTime option
+        End: Types.DateTime option
+        DatafeedConfig: Types.DatafeedConfig option
+        JobConfig: Types.JobConfig option
     }
 
         with
@@ -3065,7 +3066,7 @@ module MlOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type MlPreviewDatafeedResponse = MlPreviewDatafeedResponse.TDocument list
+    type MlPreviewDatafeedResponse = Types.TDocument list
 
     type MlPreviewDatafeedRequestBuilder() =
         member _.Yield(_: unit) : MlPreviewDatafeedRequest =
@@ -3078,40 +3079,40 @@ module MlOperations =
             }
 
         [<CustomOperation("datafeedId")>]
-        member _.DatafeedId(state: MlPreviewDatafeedRequest, value: CoreTypes.Id) =
+        member _.DatafeedId(state: MlPreviewDatafeedRequest, value: Types.Id) =
             { state with DatafeedId = value }
 
         [<CustomOperation("start")>]
-        member _.Start(state: MlPreviewDatafeedRequest, value: CoreTypes.DateTime) =
+        member _.Start(state: MlPreviewDatafeedRequest, value: Types.DateTime) =
             { state with Start = Some value }
 
         [<CustomOperation("end'")>]
-        member _.End(state: MlPreviewDatafeedRequest, value: CoreTypes.DateTime) =
+        member _.End(state: MlPreviewDatafeedRequest, value: Types.DateTime) =
             { state with End = Some value }
 
         [<CustomOperation("datafeedConfig")>]
-        member _.DatafeedConfig(state: MlPreviewDatafeedRequest, value: MlTypes.DatafeedConfig) =
+        member _.DatafeedConfig(state: MlPreviewDatafeedRequest, value: Types.DatafeedConfig) =
             { state with DatafeedConfig = Some value }
 
         [<CustomOperation("jobConfig")>]
-        member _.JobConfig(state: MlPreviewDatafeedRequest, value: MlTypes.JobConfig) =
+        member _.JobConfig(state: MlPreviewDatafeedRequest, value: Types.JobConfig) =
             { state with JobConfig = Some value }
 
     let mlPreviewDatafeedRequest = MlPreviewDatafeedRequestBuilder()
 
     module PreviewDatafeed =
-        let withStart (value: CoreTypes.DateTime) (req: MlPreviewDatafeedRequest) =
+        let withStart (value: Types.DateTime) (req: MlPreviewDatafeedRequest) =
             { req with Start = Some value }
-        let withEnd (value: CoreTypes.DateTime) (req: MlPreviewDatafeedRequest) =
+        let withEnd (value: Types.DateTime) (req: MlPreviewDatafeedRequest) =
             { req with End = Some value }
-        let withDatafeedConfig (value: MlTypes.DatafeedConfig) (req: MlPreviewDatafeedRequest) =
+        let withDatafeedConfig (value: Types.DatafeedConfig) (req: MlPreviewDatafeedRequest) =
             { req with DatafeedConfig = Some value }
-        let withJobConfig (value: MlTypes.JobConfig) (req: MlPreviewDatafeedRequest) =
+        let withJobConfig (value: Types.JobConfig) (req: MlPreviewDatafeedRequest) =
             { req with JobConfig = Some value }
 
     type MlPutCalendarRequest = {
-        CalendarId: CoreTypes.Id
-        JobIds: CoreTypes.Id list option
+        CalendarId: Types.Id
+        JobIds: Types.Id list option
         Description: string option
     }
 
@@ -3138,11 +3139,11 @@ module MlOperations =
             }
 
         [<CustomOperation("calendarId")>]
-        member _.CalendarId(state: MlPutCalendarRequest, value: CoreTypes.Id) =
+        member _.CalendarId(state: MlPutCalendarRequest, value: Types.Id) =
             { state with CalendarId = value }
 
         [<CustomOperation("jobIds")>]
-        member _.JobIds(state: MlPutCalendarRequest, value: CoreTypes.Id list) =
+        member _.JobIds(state: MlPutCalendarRequest, value: Types.Id list) =
             { state with JobIds = Some value }
 
         [<CustomOperation("description")>]
@@ -3152,14 +3153,14 @@ module MlOperations =
     let mlPutCalendarRequest = MlPutCalendarRequestBuilder()
 
     module PutCalendar =
-        let withJobIds (value: CoreTypes.Id list) (req: MlPutCalendarRequest) =
+        let withJobIds (value: Types.Id list) (req: MlPutCalendarRequest) =
             { req with JobIds = Some value }
         let withDescription (value: string) (req: MlPutCalendarRequest) =
             { req with Description = Some value }
 
     type MlPutCalendarJobRequest = {
-        CalendarId: CoreTypes.Id
-        JobId: CoreTypes.Ids
+        CalendarId: Types.Id
+        JobId: Types.Ids
     }
 
         with
@@ -3183,28 +3184,28 @@ module MlOperations =
             }
 
         [<CustomOperation("calendarId")>]
-        member _.CalendarId(state: MlPutCalendarJobRequest, value: CoreTypes.Id) =
+        member _.CalendarId(state: MlPutCalendarJobRequest, value: Types.Id) =
             { state with CalendarId = value }
 
         [<CustomOperation("jobId")>]
-        member _.JobId(state: MlPutCalendarJobRequest, value: CoreTypes.Ids) =
+        member _.JobId(state: MlPutCalendarJobRequest, value: Types.Ids) =
             { state with JobId = value }
 
     let mlPutCalendarJobRequest = MlPutCalendarJobRequestBuilder()
 
     type MlPutDataFrameAnalyticsRequest = {
-        Id: CoreTypes.Id
+        Id: Types.Id
         AllowLazyStart: bool option
-        Analysis: MlTypes.DataframeAnalysisContainer
-        AnalyzedFields: MlTypes.DataframeAnalysisAnalyzedFields option
+        Analysis: Types.DataframeAnalysisContainer
+        AnalyzedFields: Types.DataframeAnalysisAnalyzedFields option
         Description: string option
-        Dest: MlTypes.DataframeAnalyticsDestination
-        MaxNumThreads: CoreTypes.Integer option
-        Meta: CoreTypes.Metadata option
+        Dest: Types.DataframeAnalyticsDestination
+        MaxNumThreads: Types.Integer option
+        Meta: Types.Metadata option
         ModelMemoryLimit: string option
-        Source: MlTypes.DataframeAnalyticsSource
-        Headers: CoreTypes.HttpHeaders option
-        Version: CoreTypes.VersionString option
+        Source: Types.DataframeAnalyticsSource
+        Headers: Types.HttpHeaders option
+        Version: Types.VersionString option
     }
 
         with
@@ -3239,7 +3240,7 @@ module MlOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: MlPutDataFrameAnalyticsRequest, value: CoreTypes.Id) =
+        member _.Id(state: MlPutDataFrameAnalyticsRequest, value: Types.Id) =
             { state with Id = value }
 
         [<CustomOperation("allowLazyStart")>]
@@ -3247,11 +3248,11 @@ module MlOperations =
             { state with AllowLazyStart = Some value }
 
         [<CustomOperation("analysis")>]
-        member _.Analysis(state: MlPutDataFrameAnalyticsRequest, value: MlTypes.DataframeAnalysisContainer) =
+        member _.Analysis(state: MlPutDataFrameAnalyticsRequest, value: Types.DataframeAnalysisContainer) =
             { state with Analysis = value }
 
         [<CustomOperation("analyzedFields")>]
-        member _.AnalyzedFields(state: MlPutDataFrameAnalyticsRequest, value: MlTypes.DataframeAnalysisAnalyzedFields) =
+        member _.AnalyzedFields(state: MlPutDataFrameAnalyticsRequest, value: Types.DataframeAnalysisAnalyzedFields) =
             { state with AnalyzedFields = Some value }
 
         [<CustomOperation("description")>]
@@ -3259,15 +3260,15 @@ module MlOperations =
             { state with Description = Some value }
 
         [<CustomOperation("dest")>]
-        member _.Dest(state: MlPutDataFrameAnalyticsRequest, value: MlTypes.DataframeAnalyticsDestination) =
+        member _.Dest(state: MlPutDataFrameAnalyticsRequest, value: Types.DataframeAnalyticsDestination) =
             { state with Dest = value }
 
         [<CustomOperation("maxNumThreads")>]
-        member _.MaxNumThreads(state: MlPutDataFrameAnalyticsRequest, value: CoreTypes.Integer) =
+        member _.MaxNumThreads(state: MlPutDataFrameAnalyticsRequest, value: Types.Integer) =
             { state with MaxNumThreads = Some value }
 
         [<CustomOperation("meta")>]
-        member _.Meta(state: MlPutDataFrameAnalyticsRequest, value: CoreTypes.Metadata) =
+        member _.Meta(state: MlPutDataFrameAnalyticsRequest, value: Types.Metadata) =
             { state with Meta = Some value }
 
         [<CustomOperation("modelMemoryLimit")>]
@@ -3275,15 +3276,15 @@ module MlOperations =
             { state with ModelMemoryLimit = Some value }
 
         [<CustomOperation("source")>]
-        member _.Source(state: MlPutDataFrameAnalyticsRequest, value: MlTypes.DataframeAnalyticsSource) =
+        member _.Source(state: MlPutDataFrameAnalyticsRequest, value: Types.DataframeAnalyticsSource) =
             { state with Source = value }
 
         [<CustomOperation("headers")>]
-        member _.Headers(state: MlPutDataFrameAnalyticsRequest, value: CoreTypes.HttpHeaders) =
+        member _.Headers(state: MlPutDataFrameAnalyticsRequest, value: Types.HttpHeaders) =
             { state with Headers = Some value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: MlPutDataFrameAnalyticsRequest, value: CoreTypes.VersionString) =
+        member _.Version(state: MlPutDataFrameAnalyticsRequest, value: Types.VersionString) =
             { state with Version = Some value }
 
     let mlPutDataFrameAnalyticsRequest = MlPutDataFrameAnalyticsRequestBuilder()
@@ -3291,47 +3292,47 @@ module MlOperations =
     module PutDataFrameAnalytics =
         let withAllowLazyStart (value: bool) (req: MlPutDataFrameAnalyticsRequest) =
             { req with AllowLazyStart = Some value }
-        let withAnalysis (value: MlTypes.DataframeAnalysisContainer) (req: MlPutDataFrameAnalyticsRequest) =
+        let withAnalysis (value: Types.DataframeAnalysisContainer) (req: MlPutDataFrameAnalyticsRequest) =
             { req with Analysis = value }
-        let withAnalyzedFields (value: MlTypes.DataframeAnalysisAnalyzedFields) (req: MlPutDataFrameAnalyticsRequest) =
+        let withAnalyzedFields (value: Types.DataframeAnalysisAnalyzedFields) (req: MlPutDataFrameAnalyticsRequest) =
             { req with AnalyzedFields = Some value }
         let withDescription (value: string) (req: MlPutDataFrameAnalyticsRequest) =
             { req with Description = Some value }
-        let withDest (value: MlTypes.DataframeAnalyticsDestination) (req: MlPutDataFrameAnalyticsRequest) =
+        let withDest (value: Types.DataframeAnalyticsDestination) (req: MlPutDataFrameAnalyticsRequest) =
             { req with Dest = value }
-        let withMaxNumThreads (value: CoreTypes.Integer) (req: MlPutDataFrameAnalyticsRequest) =
+        let withMaxNumThreads (value: Types.Integer) (req: MlPutDataFrameAnalyticsRequest) =
             { req with MaxNumThreads = Some value }
-        let withMeta (value: CoreTypes.Metadata) (req: MlPutDataFrameAnalyticsRequest) =
+        let withMeta (value: Types.Metadata) (req: MlPutDataFrameAnalyticsRequest) =
             { req with Meta = Some value }
         let withModelMemoryLimit (value: string) (req: MlPutDataFrameAnalyticsRequest) =
             { req with ModelMemoryLimit = Some value }
-        let withSource (value: MlTypes.DataframeAnalyticsSource) (req: MlPutDataFrameAnalyticsRequest) =
+        let withSource (value: Types.DataframeAnalyticsSource) (req: MlPutDataFrameAnalyticsRequest) =
             { req with Source = value }
-        let withHeaders (value: CoreTypes.HttpHeaders) (req: MlPutDataFrameAnalyticsRequest) =
+        let withHeaders (value: Types.HttpHeaders) (req: MlPutDataFrameAnalyticsRequest) =
             { req with Headers = Some value }
-        let withVersion (value: CoreTypes.VersionString) (req: MlPutDataFrameAnalyticsRequest) =
+        let withVersion (value: Types.VersionString) (req: MlPutDataFrameAnalyticsRequest) =
             { req with Version = Some value }
 
     type MlPutDatafeedRequest = {
-        DatafeedId: CoreTypes.Id
+        DatafeedId: Types.Id
         AllowNoIndices: bool option
-        ExpandWildcards: CoreTypes.ExpandWildcards option
+        ExpandWildcards: Types.ExpandWildcards option
         IgnoreThrottled: bool option
         IgnoreUnavailable: bool option
-        Aggregations: Map<string, CoreTypes.AggregationContainer> option
-        ChunkingConfig: MlTypes.ChunkingConfig option
-        DelayedDataCheckConfig: MlTypes.DelayedDataCheckConfig option
-        Frequency: CoreTypes.Duration option
-        Indices: CoreTypes.Indices option
-        IndicesOptions: CoreTypes.IndicesOptions option
-        JobId: CoreTypes.Id option
-        MaxEmptySearches: CoreTypes.Integer option
-        Query: CoreTypes.QueryContainer option
-        QueryDelay: CoreTypes.Duration option
-        RuntimeMappings: CoreTypes.RuntimeFields option
-        ScriptFields: Map<string, CoreTypes.ScriptField> option
-        ScrollSize: CoreTypes.Integer option
-        Headers: CoreTypes.HttpHeaders option
+        Aggregations: Map<string, Types.AggregationContainer> option
+        ChunkingConfig: Types.ChunkingConfig option
+        DelayedDataCheckConfig: Types.DelayedDataCheckConfig option
+        Frequency: Types.Duration option
+        Indices: Types.Indices option
+        IndicesOptions: Types.IndicesOptions option
+        JobId: Types.Id option
+        MaxEmptySearches: Types.Integer option
+        Query: Types.QueryContainer option
+        QueryDelay: Types.Duration option
+        RuntimeMappings: Types.RuntimeFields option
+        ScriptFields: Map<string, Types.ScriptField> option
+        ScrollSize: Types.Integer option
+        Headers: Types.HttpHeaders option
     }
 
         with
@@ -3383,7 +3384,7 @@ module MlOperations =
             }
 
         [<CustomOperation("datafeedId")>]
-        member _.DatafeedId(state: MlPutDatafeedRequest, value: CoreTypes.Id) =
+        member _.DatafeedId(state: MlPutDatafeedRequest, value: Types.Id) =
             { state with DatafeedId = value }
 
         [<CustomOperation("allowNoIndices")>]
@@ -3391,7 +3392,7 @@ module MlOperations =
             { state with AllowNoIndices = Some value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: MlPutDatafeedRequest, value: CoreTypes.ExpandWildcards) =
+        member _.ExpandWildcards(state: MlPutDatafeedRequest, value: Types.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("ignoreThrottled")>]
@@ -3403,59 +3404,59 @@ module MlOperations =
             { state with IgnoreUnavailable = Some value }
 
         [<CustomOperation("aggregations")>]
-        member _.Aggregations(state: MlPutDatafeedRequest, value: Map<string, CoreTypes.AggregationContainer>) =
+        member _.Aggregations(state: MlPutDatafeedRequest, value: Map<string, Types.AggregationContainer>) =
             { state with Aggregations = Some value }
 
         [<CustomOperation("chunkingConfig")>]
-        member _.ChunkingConfig(state: MlPutDatafeedRequest, value: MlTypes.ChunkingConfig) =
+        member _.ChunkingConfig(state: MlPutDatafeedRequest, value: Types.ChunkingConfig) =
             { state with ChunkingConfig = Some value }
 
         [<CustomOperation("delayedDataCheckConfig")>]
-        member _.DelayedDataCheckConfig(state: MlPutDatafeedRequest, value: MlTypes.DelayedDataCheckConfig) =
+        member _.DelayedDataCheckConfig(state: MlPutDatafeedRequest, value: Types.DelayedDataCheckConfig) =
             { state with DelayedDataCheckConfig = Some value }
 
         [<CustomOperation("frequency")>]
-        member _.Frequency(state: MlPutDatafeedRequest, value: CoreTypes.Duration) =
+        member _.Frequency(state: MlPutDatafeedRequest, value: Types.Duration) =
             { state with Frequency = Some value }
 
         [<CustomOperation("indices")>]
-        member _.Indices(state: MlPutDatafeedRequest, value: CoreTypes.Indices) =
+        member _.Indices(state: MlPutDatafeedRequest, value: Types.Indices) =
             { state with Indices = Some value }
 
         [<CustomOperation("indicesOptions")>]
-        member _.IndicesOptions(state: MlPutDatafeedRequest, value: CoreTypes.IndicesOptions) =
+        member _.IndicesOptions(state: MlPutDatafeedRequest, value: Types.IndicesOptions) =
             { state with IndicesOptions = Some value }
 
         [<CustomOperation("jobId")>]
-        member _.JobId(state: MlPutDatafeedRequest, value: CoreTypes.Id) =
+        member _.JobId(state: MlPutDatafeedRequest, value: Types.Id) =
             { state with JobId = Some value }
 
         [<CustomOperation("maxEmptySearches")>]
-        member _.MaxEmptySearches(state: MlPutDatafeedRequest, value: CoreTypes.Integer) =
+        member _.MaxEmptySearches(state: MlPutDatafeedRequest, value: Types.Integer) =
             { state with MaxEmptySearches = Some value }
 
         [<CustomOperation("query")>]
-        member _.Query(state: MlPutDatafeedRequest, value: CoreTypes.QueryContainer) =
+        member _.Query(state: MlPutDatafeedRequest, value: Types.QueryContainer) =
             { state with Query = Some value }
 
         [<CustomOperation("queryDelay")>]
-        member _.QueryDelay(state: MlPutDatafeedRequest, value: CoreTypes.Duration) =
+        member _.QueryDelay(state: MlPutDatafeedRequest, value: Types.Duration) =
             { state with QueryDelay = Some value }
 
         [<CustomOperation("runtimeMappings")>]
-        member _.RuntimeMappings(state: MlPutDatafeedRequest, value: CoreTypes.RuntimeFields) =
+        member _.RuntimeMappings(state: MlPutDatafeedRequest, value: Types.RuntimeFields) =
             { state with RuntimeMappings = Some value }
 
         [<CustomOperation("scriptFields")>]
-        member _.ScriptFields(state: MlPutDatafeedRequest, value: Map<string, CoreTypes.ScriptField>) =
+        member _.ScriptFields(state: MlPutDatafeedRequest, value: Map<string, Types.ScriptField>) =
             { state with ScriptFields = Some value }
 
         [<CustomOperation("scrollSize")>]
-        member _.ScrollSize(state: MlPutDatafeedRequest, value: CoreTypes.Integer) =
+        member _.ScrollSize(state: MlPutDatafeedRequest, value: Types.Integer) =
             { state with ScrollSize = Some value }
 
         [<CustomOperation("headers")>]
-        member _.Headers(state: MlPutDatafeedRequest, value: CoreTypes.HttpHeaders) =
+        member _.Headers(state: MlPutDatafeedRequest, value: Types.HttpHeaders) =
             { state with Headers = Some value }
 
     let mlPutDatafeedRequest = MlPutDatafeedRequestBuilder()
@@ -3463,43 +3464,43 @@ module MlOperations =
     module PutDatafeed =
         let withAllowNoIndices (value: bool) (req: MlPutDatafeedRequest) =
             { req with AllowNoIndices = Some value }
-        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: MlPutDatafeedRequest) =
+        let withExpandWildcards (value: Types.ExpandWildcards) (req: MlPutDatafeedRequest) =
             { req with ExpandWildcards = Some value }
         let withIgnoreThrottled (value: bool) (req: MlPutDatafeedRequest) =
             { req with IgnoreThrottled = Some value }
         let withIgnoreUnavailable (value: bool) (req: MlPutDatafeedRequest) =
             { req with IgnoreUnavailable = Some value }
-        let withAggregations (value: Map<string, CoreTypes.AggregationContainer>) (req: MlPutDatafeedRequest) =
+        let withAggregations (value: Map<string, Types.AggregationContainer>) (req: MlPutDatafeedRequest) =
             { req with Aggregations = Some value }
-        let withChunkingConfig (value: MlTypes.ChunkingConfig) (req: MlPutDatafeedRequest) =
+        let withChunkingConfig (value: Types.ChunkingConfig) (req: MlPutDatafeedRequest) =
             { req with ChunkingConfig = Some value }
-        let withDelayedDataCheckConfig (value: MlTypes.DelayedDataCheckConfig) (req: MlPutDatafeedRequest) =
+        let withDelayedDataCheckConfig (value: Types.DelayedDataCheckConfig) (req: MlPutDatafeedRequest) =
             { req with DelayedDataCheckConfig = Some value }
-        let withFrequency (value: CoreTypes.Duration) (req: MlPutDatafeedRequest) =
+        let withFrequency (value: Types.Duration) (req: MlPutDatafeedRequest) =
             { req with Frequency = Some value }
-        let withIndices (value: CoreTypes.Indices) (req: MlPutDatafeedRequest) =
+        let withIndices (value: Types.Indices) (req: MlPutDatafeedRequest) =
             { req with Indices = Some value }
-        let withIndicesOptions (value: CoreTypes.IndicesOptions) (req: MlPutDatafeedRequest) =
+        let withIndicesOptions (value: Types.IndicesOptions) (req: MlPutDatafeedRequest) =
             { req with IndicesOptions = Some value }
-        let withJobId (value: CoreTypes.Id) (req: MlPutDatafeedRequest) =
+        let withJobId (value: Types.Id) (req: MlPutDatafeedRequest) =
             { req with JobId = Some value }
-        let withMaxEmptySearches (value: CoreTypes.Integer) (req: MlPutDatafeedRequest) =
+        let withMaxEmptySearches (value: Types.Integer) (req: MlPutDatafeedRequest) =
             { req with MaxEmptySearches = Some value }
-        let withQuery (value: CoreTypes.QueryContainer) (req: MlPutDatafeedRequest) =
+        let withQuery (value: Types.QueryContainer) (req: MlPutDatafeedRequest) =
             { req with Query = Some value }
-        let withQueryDelay (value: CoreTypes.Duration) (req: MlPutDatafeedRequest) =
+        let withQueryDelay (value: Types.Duration) (req: MlPutDatafeedRequest) =
             { req with QueryDelay = Some value }
-        let withRuntimeMappings (value: CoreTypes.RuntimeFields) (req: MlPutDatafeedRequest) =
+        let withRuntimeMappings (value: Types.RuntimeFields) (req: MlPutDatafeedRequest) =
             { req with RuntimeMappings = Some value }
-        let withScriptFields (value: Map<string, CoreTypes.ScriptField>) (req: MlPutDatafeedRequest) =
+        let withScriptFields (value: Map<string, Types.ScriptField>) (req: MlPutDatafeedRequest) =
             { req with ScriptFields = Some value }
-        let withScrollSize (value: CoreTypes.Integer) (req: MlPutDatafeedRequest) =
+        let withScrollSize (value: Types.Integer) (req: MlPutDatafeedRequest) =
             { req with ScrollSize = Some value }
-        let withHeaders (value: CoreTypes.HttpHeaders) (req: MlPutDatafeedRequest) =
+        let withHeaders (value: Types.HttpHeaders) (req: MlPutDatafeedRequest) =
             { req with Headers = Some value }
 
     type MlPutFilterRequest = {
-        FilterId: CoreTypes.Id
+        FilterId: Types.Id
         Description: string option
         Items: string list option
     }
@@ -3527,7 +3528,7 @@ module MlOperations =
             }
 
         [<CustomOperation("filterId")>]
-        member _.FilterId(state: MlPutFilterRequest, value: CoreTypes.Id) =
+        member _.FilterId(state: MlPutFilterRequest, value: Types.Id) =
             { state with FilterId = value }
 
         [<CustomOperation("description")>]
@@ -3547,27 +3548,27 @@ module MlOperations =
             { req with Items = Some value }
 
     type MlPutJobRequest = {
-        JobId: CoreTypes.Id
+        JobId: Types.Id
         AllowNoIndices: bool option
-        ExpandWildcards: CoreTypes.ExpandWildcards option
+        ExpandWildcards: Types.ExpandWildcards option
         IgnoreThrottled: bool option
         IgnoreUnavailable: bool option
         AllowLazyOpen: bool option
-        AnalysisConfig: MlTypes.AnalysisConfig
-        AnalysisLimits: MlTypes.AnalysisLimits option
-        BackgroundPersistInterval: CoreTypes.Duration option
-        CustomSettings: MlTypes.CustomSettings option
-        DailyModelSnapshotRetentionAfterDays: CoreTypes.Long option
-        DataDescription: MlTypes.DataDescription
-        DatafeedConfig: MlTypes.DatafeedConfig option
+        AnalysisConfig: Types.AnalysisConfig
+        AnalysisLimits: Types.AnalysisLimits option
+        BackgroundPersistInterval: Types.Duration option
+        CustomSettings: Types.CustomSettings option
+        DailyModelSnapshotRetentionAfterDays: Types.Long option
+        DataDescription: Types.DataDescription
+        DatafeedConfig: Types.DatafeedConfig option
         Description: string option
-        JobId: CoreTypes.Id option
+        JobId: Types.Id option
         Groups: string list option
-        ModelPlotConfig: MlTypes.ModelPlotConfig option
-        ModelSnapshotRetentionDays: CoreTypes.Long option
-        RenormalizationWindowDays: CoreTypes.Long option
-        ResultsIndexName: CoreTypes.IndexName option
-        ResultsRetentionDays: CoreTypes.Long option
+        ModelPlotConfig: Types.ModelPlotConfig option
+        ModelSnapshotRetentionDays: Types.Long option
+        RenormalizationWindowDays: Types.Long option
+        ResultsIndexName: Types.IndexName option
+        ResultsRetentionDays: Types.Long option
     }
 
         with
@@ -3621,7 +3622,7 @@ module MlOperations =
             }
 
         [<CustomOperation("jobId")>]
-        member _.JobId(state: MlPutJobRequest, value: CoreTypes.Id) =
+        member _.JobId(state: MlPutJobRequest, value: Types.Id) =
             { state with JobId = value }
 
         [<CustomOperation("allowNoIndices")>]
@@ -3629,7 +3630,7 @@ module MlOperations =
             { state with AllowNoIndices = Some value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: MlPutJobRequest, value: CoreTypes.ExpandWildcards) =
+        member _.ExpandWildcards(state: MlPutJobRequest, value: Types.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("ignoreThrottled")>]
@@ -3645,31 +3646,31 @@ module MlOperations =
             { state with AllowLazyOpen = Some value }
 
         [<CustomOperation("analysisConfig")>]
-        member _.AnalysisConfig(state: MlPutJobRequest, value: MlTypes.AnalysisConfig) =
+        member _.AnalysisConfig(state: MlPutJobRequest, value: Types.AnalysisConfig) =
             { state with AnalysisConfig = value }
 
         [<CustomOperation("analysisLimits")>]
-        member _.AnalysisLimits(state: MlPutJobRequest, value: MlTypes.AnalysisLimits) =
+        member _.AnalysisLimits(state: MlPutJobRequest, value: Types.AnalysisLimits) =
             { state with AnalysisLimits = Some value }
 
         [<CustomOperation("backgroundPersistInterval")>]
-        member _.BackgroundPersistInterval(state: MlPutJobRequest, value: CoreTypes.Duration) =
+        member _.BackgroundPersistInterval(state: MlPutJobRequest, value: Types.Duration) =
             { state with BackgroundPersistInterval = Some value }
 
         [<CustomOperation("customSettings")>]
-        member _.CustomSettings(state: MlPutJobRequest, value: MlTypes.CustomSettings) =
+        member _.CustomSettings(state: MlPutJobRequest, value: Types.CustomSettings) =
             { state with CustomSettings = Some value }
 
         [<CustomOperation("dailyModelSnapshotRetentionAfterDays")>]
-        member _.DailyModelSnapshotRetentionAfterDays(state: MlPutJobRequest, value: CoreTypes.Long) =
+        member _.DailyModelSnapshotRetentionAfterDays(state: MlPutJobRequest, value: Types.Long) =
             { state with DailyModelSnapshotRetentionAfterDays = Some value }
 
         [<CustomOperation("dataDescription")>]
-        member _.DataDescription(state: MlPutJobRequest, value: MlTypes.DataDescription) =
+        member _.DataDescription(state: MlPutJobRequest, value: Types.DataDescription) =
             { state with DataDescription = value }
 
         [<CustomOperation("datafeedConfig")>]
-        member _.DatafeedConfig(state: MlPutJobRequest, value: MlTypes.DatafeedConfig) =
+        member _.DatafeedConfig(state: MlPutJobRequest, value: Types.DatafeedConfig) =
             { state with DatafeedConfig = Some value }
 
         [<CustomOperation("description")>]
@@ -3677,7 +3678,7 @@ module MlOperations =
             { state with Description = Some value }
 
         [<CustomOperation("jobId")>]
-        member _.JobId(state: MlPutJobRequest, value: CoreTypes.Id) =
+        member _.JobId(state: MlPutJobRequest, value: Types.Id) =
             { state with JobId = Some value }
 
         [<CustomOperation("groups")>]
@@ -3685,23 +3686,23 @@ module MlOperations =
             { state with Groups = Some value }
 
         [<CustomOperation("modelPlotConfig")>]
-        member _.ModelPlotConfig(state: MlPutJobRequest, value: MlTypes.ModelPlotConfig) =
+        member _.ModelPlotConfig(state: MlPutJobRequest, value: Types.ModelPlotConfig) =
             { state with ModelPlotConfig = Some value }
 
         [<CustomOperation("modelSnapshotRetentionDays")>]
-        member _.ModelSnapshotRetentionDays(state: MlPutJobRequest, value: CoreTypes.Long) =
+        member _.ModelSnapshotRetentionDays(state: MlPutJobRequest, value: Types.Long) =
             { state with ModelSnapshotRetentionDays = Some value }
 
         [<CustomOperation("renormalizationWindowDays")>]
-        member _.RenormalizationWindowDays(state: MlPutJobRequest, value: CoreTypes.Long) =
+        member _.RenormalizationWindowDays(state: MlPutJobRequest, value: Types.Long) =
             { state with RenormalizationWindowDays = Some value }
 
         [<CustomOperation("resultsIndexName")>]
-        member _.ResultsIndexName(state: MlPutJobRequest, value: CoreTypes.IndexName) =
+        member _.ResultsIndexName(state: MlPutJobRequest, value: Types.IndexName) =
             { state with ResultsIndexName = Some value }
 
         [<CustomOperation("resultsRetentionDays")>]
-        member _.ResultsRetentionDays(state: MlPutJobRequest, value: CoreTypes.Long) =
+        member _.ResultsRetentionDays(state: MlPutJobRequest, value: Types.Long) =
             { state with ResultsRetentionDays = Some value }
 
     let mlPutJobRequest = MlPutJobRequestBuilder()
@@ -3709,7 +3710,7 @@ module MlOperations =
     module PutJob =
         let withAllowNoIndices (value: bool) (req: MlPutJobRequest) =
             { req with AllowNoIndices = Some value }
-        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: MlPutJobRequest) =
+        let withExpandWildcards (value: Types.ExpandWildcards) (req: MlPutJobRequest) =
             { req with ExpandWildcards = Some value }
         let withIgnoreThrottled (value: bool) (req: MlPutJobRequest) =
             { req with IgnoreThrottled = Some value }
@@ -3717,52 +3718,52 @@ module MlOperations =
             { req with IgnoreUnavailable = Some value }
         let withAllowLazyOpen (value: bool) (req: MlPutJobRequest) =
             { req with AllowLazyOpen = Some value }
-        let withAnalysisConfig (value: MlTypes.AnalysisConfig) (req: MlPutJobRequest) =
+        let withAnalysisConfig (value: Types.AnalysisConfig) (req: MlPutJobRequest) =
             { req with AnalysisConfig = value }
-        let withAnalysisLimits (value: MlTypes.AnalysisLimits) (req: MlPutJobRequest) =
+        let withAnalysisLimits (value: Types.AnalysisLimits) (req: MlPutJobRequest) =
             { req with AnalysisLimits = Some value }
-        let withBackgroundPersistInterval (value: CoreTypes.Duration) (req: MlPutJobRequest) =
+        let withBackgroundPersistInterval (value: Types.Duration) (req: MlPutJobRequest) =
             { req with BackgroundPersistInterval = Some value }
-        let withCustomSettings (value: MlTypes.CustomSettings) (req: MlPutJobRequest) =
+        let withCustomSettings (value: Types.CustomSettings) (req: MlPutJobRequest) =
             { req with CustomSettings = Some value }
-        let withDailyModelSnapshotRetentionAfterDays (value: CoreTypes.Long) (req: MlPutJobRequest) =
+        let withDailyModelSnapshotRetentionAfterDays (value: Types.Long) (req: MlPutJobRequest) =
             { req with DailyModelSnapshotRetentionAfterDays = Some value }
-        let withDataDescription (value: MlTypes.DataDescription) (req: MlPutJobRequest) =
+        let withDataDescription (value: Types.DataDescription) (req: MlPutJobRequest) =
             { req with DataDescription = value }
-        let withDatafeedConfig (value: MlTypes.DatafeedConfig) (req: MlPutJobRequest) =
+        let withDatafeedConfig (value: Types.DatafeedConfig) (req: MlPutJobRequest) =
             { req with DatafeedConfig = Some value }
         let withDescription (value: string) (req: MlPutJobRequest) =
             { req with Description = Some value }
-        let withJobId (value: CoreTypes.Id) (req: MlPutJobRequest) =
+        let withJobId (value: Types.Id) (req: MlPutJobRequest) =
             { req with JobId = Some value }
         let withGroups (value: string list) (req: MlPutJobRequest) =
             { req with Groups = Some value }
-        let withModelPlotConfig (value: MlTypes.ModelPlotConfig) (req: MlPutJobRequest) =
+        let withModelPlotConfig (value: Types.ModelPlotConfig) (req: MlPutJobRequest) =
             { req with ModelPlotConfig = Some value }
-        let withModelSnapshotRetentionDays (value: CoreTypes.Long) (req: MlPutJobRequest) =
+        let withModelSnapshotRetentionDays (value: Types.Long) (req: MlPutJobRequest) =
             { req with ModelSnapshotRetentionDays = Some value }
-        let withRenormalizationWindowDays (value: CoreTypes.Long) (req: MlPutJobRequest) =
+        let withRenormalizationWindowDays (value: Types.Long) (req: MlPutJobRequest) =
             { req with RenormalizationWindowDays = Some value }
-        let withResultsIndexName (value: CoreTypes.IndexName) (req: MlPutJobRequest) =
+        let withResultsIndexName (value: Types.IndexName) (req: MlPutJobRequest) =
             { req with ResultsIndexName = Some value }
-        let withResultsRetentionDays (value: CoreTypes.Long) (req: MlPutJobRequest) =
+        let withResultsRetentionDays (value: Types.Long) (req: MlPutJobRequest) =
             { req with ResultsRetentionDays = Some value }
 
     type MlPutTrainedModelRequest = {
-        ModelId: CoreTypes.Id
+        ModelId: Types.Id
         DeferDefinitionDecompression: bool option
         WaitForCompletion: bool option
         CompressedDefinition: string option
-        Definition: MlPutTrainedModel.Definition option
+        Definition: Types.Definition option
         Description: string option
-        InferenceConfig: MlTypes.InferenceConfigCreateContainer option
-        Input: MlPutTrainedModel.Input option
+        InferenceConfig: Types.InferenceConfigCreateContainer option
+        Input: Types.Input option
         Metadata: System.Text.Json.JsonElement option
-        ModelType: MlTypes.TrainedModelType option
-        ModelSizeBytes: CoreTypes.Long option
+        ModelType: Types.TrainedModelType option
+        ModelSizeBytes: Types.Long option
         PlatformArchitecture: string option
         Tags: string list option
-        PrefixStrings: MlTypes.TrainedModelPrefixStrings option
+        PrefixStrings: Types.TrainedModelPrefixStrings option
     }
 
         with
@@ -3785,7 +3786,7 @@ module MlOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type MlPutTrainedModelResponse = MlTypes.TrainedModelConfig
+    type MlPutTrainedModelResponse = Types.TrainedModelConfig
 
     type MlPutTrainedModelRequestBuilder() =
         member _.Yield(_: unit) : MlPutTrainedModelRequest =
@@ -3807,7 +3808,7 @@ module MlOperations =
             }
 
         [<CustomOperation("modelId")>]
-        member _.ModelId(state: MlPutTrainedModelRequest, value: CoreTypes.Id) =
+        member _.ModelId(state: MlPutTrainedModelRequest, value: Types.Id) =
             { state with ModelId = value }
 
         [<CustomOperation("deferDefinitionDecompression")>]
@@ -3823,7 +3824,7 @@ module MlOperations =
             { state with CompressedDefinition = Some value }
 
         [<CustomOperation("definition")>]
-        member _.Definition(state: MlPutTrainedModelRequest, value: MlPutTrainedModel.Definition) =
+        member _.Definition(state: MlPutTrainedModelRequest, value: Types.Definition) =
             { state with Definition = Some value }
 
         [<CustomOperation("description")>]
@@ -3831,11 +3832,11 @@ module MlOperations =
             { state with Description = Some value }
 
         [<CustomOperation("inferenceConfig")>]
-        member _.InferenceConfig(state: MlPutTrainedModelRequest, value: MlTypes.InferenceConfigCreateContainer) =
+        member _.InferenceConfig(state: MlPutTrainedModelRequest, value: Types.InferenceConfigCreateContainer) =
             { state with InferenceConfig = Some value }
 
         [<CustomOperation("input")>]
-        member _.Input(state: MlPutTrainedModelRequest, value: MlPutTrainedModel.Input) =
+        member _.Input(state: MlPutTrainedModelRequest, value: Types.Input) =
             { state with Input = Some value }
 
         [<CustomOperation("metadata")>]
@@ -3843,11 +3844,11 @@ module MlOperations =
             { state with Metadata = Some value }
 
         [<CustomOperation("modelType")>]
-        member _.ModelType(state: MlPutTrainedModelRequest, value: MlTypes.TrainedModelType) =
+        member _.ModelType(state: MlPutTrainedModelRequest, value: Types.TrainedModelType) =
             { state with ModelType = Some value }
 
         [<CustomOperation("modelSizeBytes")>]
-        member _.ModelSizeBytes(state: MlPutTrainedModelRequest, value: CoreTypes.Long) =
+        member _.ModelSizeBytes(state: MlPutTrainedModelRequest, value: Types.Long) =
             { state with ModelSizeBytes = Some value }
 
         [<CustomOperation("platformArchitecture")>]
@@ -3859,7 +3860,7 @@ module MlOperations =
             { state with Tags = Some value }
 
         [<CustomOperation("prefixStrings")>]
-        member _.PrefixStrings(state: MlPutTrainedModelRequest, value: MlTypes.TrainedModelPrefixStrings) =
+        member _.PrefixStrings(state: MlPutTrainedModelRequest, value: Types.TrainedModelPrefixStrings) =
             { state with PrefixStrings = Some value }
 
     let mlPutTrainedModelRequest = MlPutTrainedModelRequestBuilder()
@@ -3871,30 +3872,30 @@ module MlOperations =
             { req with WaitForCompletion = Some value }
         let withCompressedDefinition (value: string) (req: MlPutTrainedModelRequest) =
             { req with CompressedDefinition = Some value }
-        let withDefinition (value: MlPutTrainedModel.Definition) (req: MlPutTrainedModelRequest) =
+        let withDefinition (value: Types.Definition) (req: MlPutTrainedModelRequest) =
             { req with Definition = Some value }
         let withDescription (value: string) (req: MlPutTrainedModelRequest) =
             { req with Description = Some value }
-        let withInferenceConfig (value: MlTypes.InferenceConfigCreateContainer) (req: MlPutTrainedModelRequest) =
+        let withInferenceConfig (value: Types.InferenceConfigCreateContainer) (req: MlPutTrainedModelRequest) =
             { req with InferenceConfig = Some value }
-        let withInput (value: MlPutTrainedModel.Input) (req: MlPutTrainedModelRequest) =
+        let withInput (value: Types.Input) (req: MlPutTrainedModelRequest) =
             { req with Input = Some value }
         let withMetadata (value: System.Text.Json.JsonElement) (req: MlPutTrainedModelRequest) =
             { req with Metadata = Some value }
-        let withModelType (value: MlTypes.TrainedModelType) (req: MlPutTrainedModelRequest) =
+        let withModelType (value: Types.TrainedModelType) (req: MlPutTrainedModelRequest) =
             { req with ModelType = Some value }
-        let withModelSizeBytes (value: CoreTypes.Long) (req: MlPutTrainedModelRequest) =
+        let withModelSizeBytes (value: Types.Long) (req: MlPutTrainedModelRequest) =
             { req with ModelSizeBytes = Some value }
         let withPlatformArchitecture (value: string) (req: MlPutTrainedModelRequest) =
             { req with PlatformArchitecture = Some value }
         let withTags (value: string list) (req: MlPutTrainedModelRequest) =
             { req with Tags = Some value }
-        let withPrefixStrings (value: MlTypes.TrainedModelPrefixStrings) (req: MlPutTrainedModelRequest) =
+        let withPrefixStrings (value: Types.TrainedModelPrefixStrings) (req: MlPutTrainedModelRequest) =
             { req with PrefixStrings = Some value }
 
     type MlPutTrainedModelAliasRequest = {
-        ModelAlias: CoreTypes.Name
-        ModelId: CoreTypes.Id
+        ModelAlias: Types.Name
+        ModelId: Types.Id
         Reassign: bool option
     }
 
@@ -3916,7 +3917,7 @@ module MlOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type MlPutTrainedModelAliasResponse = CoreTypes.AcknowledgedResponseBase
+    type MlPutTrainedModelAliasResponse = Types.AcknowledgedResponseBase
 
     type MlPutTrainedModelAliasRequestBuilder() =
         member _.Yield(_: unit) : MlPutTrainedModelAliasRequest =
@@ -3927,11 +3928,11 @@ module MlOperations =
             }
 
         [<CustomOperation("modelAlias")>]
-        member _.ModelAlias(state: MlPutTrainedModelAliasRequest, value: CoreTypes.Name) =
+        member _.ModelAlias(state: MlPutTrainedModelAliasRequest, value: Types.Name) =
             { state with ModelAlias = value }
 
         [<CustomOperation("modelId")>]
-        member _.ModelId(state: MlPutTrainedModelAliasRequest, value: CoreTypes.Id) =
+        member _.ModelId(state: MlPutTrainedModelAliasRequest, value: Types.Id) =
             { state with ModelId = value }
 
         [<CustomOperation("reassign")>]
@@ -3945,11 +3946,11 @@ module MlOperations =
             { req with Reassign = Some value }
 
     type MlPutTrainedModelDefinitionPartRequest = {
-        ModelId: CoreTypes.Id
-        Part: CoreTypes.Integer
+        ModelId: Types.Id
+        Part: Types.Integer
         Definition: string
-        TotalDefinitionLength: CoreTypes.Long
-        TotalParts: CoreTypes.Integer
+        TotalDefinitionLength: Types.Long
+        TotalParts: Types.Integer
     }
 
         with
@@ -3964,7 +3965,7 @@ module MlOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type MlPutTrainedModelDefinitionPartResponse = CoreTypes.AcknowledgedResponseBase
+    type MlPutTrainedModelDefinitionPartResponse = Types.AcknowledgedResponseBase
 
     type MlPutTrainedModelDefinitionPartRequestBuilder() =
         member _.Yield(_: unit) : MlPutTrainedModelDefinitionPartRequest =
@@ -3977,11 +3978,11 @@ module MlOperations =
             }
 
         [<CustomOperation("modelId")>]
-        member _.ModelId(state: MlPutTrainedModelDefinitionPartRequest, value: CoreTypes.Id) =
+        member _.ModelId(state: MlPutTrainedModelDefinitionPartRequest, value: Types.Id) =
             { state with ModelId = value }
 
         [<CustomOperation("part")>]
-        member _.Part(state: MlPutTrainedModelDefinitionPartRequest, value: CoreTypes.Integer) =
+        member _.Part(state: MlPutTrainedModelDefinitionPartRequest, value: Types.Integer) =
             { state with Part = value }
 
         [<CustomOperation("definition")>]
@@ -3989,11 +3990,11 @@ module MlOperations =
             { state with Definition = value }
 
         [<CustomOperation("totalDefinitionLength")>]
-        member _.TotalDefinitionLength(state: MlPutTrainedModelDefinitionPartRequest, value: CoreTypes.Long) =
+        member _.TotalDefinitionLength(state: MlPutTrainedModelDefinitionPartRequest, value: Types.Long) =
             { state with TotalDefinitionLength = value }
 
         [<CustomOperation("totalParts")>]
-        member _.TotalParts(state: MlPutTrainedModelDefinitionPartRequest, value: CoreTypes.Integer) =
+        member _.TotalParts(state: MlPutTrainedModelDefinitionPartRequest, value: Types.Integer) =
             { state with TotalParts = value }
 
     let mlPutTrainedModelDefinitionPartRequest = MlPutTrainedModelDefinitionPartRequestBuilder()
@@ -4001,16 +4002,16 @@ module MlOperations =
     module PutTrainedModelDefinitionPart =
         let withDefinition (value: string) (req: MlPutTrainedModelDefinitionPartRequest) =
             { req with Definition = value }
-        let withTotalDefinitionLength (value: CoreTypes.Long) (req: MlPutTrainedModelDefinitionPartRequest) =
+        let withTotalDefinitionLength (value: Types.Long) (req: MlPutTrainedModelDefinitionPartRequest) =
             { req with TotalDefinitionLength = value }
-        let withTotalParts (value: CoreTypes.Integer) (req: MlPutTrainedModelDefinitionPartRequest) =
+        let withTotalParts (value: Types.Integer) (req: MlPutTrainedModelDefinitionPartRequest) =
             { req with TotalParts = value }
 
     type MlPutTrainedModelVocabularyRequest = {
-        ModelId: CoreTypes.Id
+        ModelId: Types.Id
         Vocabulary: string list
         Merges: string list option
-        Scores: CoreTypes.Double list option
+        Scores: Types.Double list option
     }
 
         with
@@ -4025,7 +4026,7 @@ module MlOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type MlPutTrainedModelVocabularyResponse = CoreTypes.AcknowledgedResponseBase
+    type MlPutTrainedModelVocabularyResponse = Types.AcknowledgedResponseBase
 
     type MlPutTrainedModelVocabularyRequestBuilder() =
         member _.Yield(_: unit) : MlPutTrainedModelVocabularyRequest =
@@ -4037,7 +4038,7 @@ module MlOperations =
             }
 
         [<CustomOperation("modelId")>]
-        member _.ModelId(state: MlPutTrainedModelVocabularyRequest, value: CoreTypes.Id) =
+        member _.ModelId(state: MlPutTrainedModelVocabularyRequest, value: Types.Id) =
             { state with ModelId = value }
 
         [<CustomOperation("vocabulary")>]
@@ -4049,7 +4050,7 @@ module MlOperations =
             { state with Merges = Some value }
 
         [<CustomOperation("scores")>]
-        member _.Scores(state: MlPutTrainedModelVocabularyRequest, value: CoreTypes.Double list) =
+        member _.Scores(state: MlPutTrainedModelVocabularyRequest, value: Types.Double list) =
             { state with Scores = Some value }
 
     let mlPutTrainedModelVocabularyRequest = MlPutTrainedModelVocabularyRequestBuilder()
@@ -4059,11 +4060,11 @@ module MlOperations =
             { req with Vocabulary = value }
         let withMerges (value: string list) (req: MlPutTrainedModelVocabularyRequest) =
             { req with Merges = Some value }
-        let withScores (value: CoreTypes.Double list) (req: MlPutTrainedModelVocabularyRequest) =
+        let withScores (value: Types.Double list) (req: MlPutTrainedModelVocabularyRequest) =
             { req with Scores = Some value }
 
     type MlResetJobRequest = {
-        JobId: CoreTypes.Id
+        JobId: Types.Id
         WaitForCompletion: bool option
         DeleteUserAnnotations: bool option
     }
@@ -4087,7 +4088,7 @@ module MlOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type MlResetJobResponse = CoreTypes.AcknowledgedResponseBase
+    type MlResetJobResponse = Types.AcknowledgedResponseBase
 
     type MlResetJobRequestBuilder() =
         member _.Yield(_: unit) : MlResetJobRequest =
@@ -4098,7 +4099,7 @@ module MlOperations =
             }
 
         [<CustomOperation("jobId")>]
-        member _.JobId(state: MlResetJobRequest, value: CoreTypes.Id) =
+        member _.JobId(state: MlResetJobRequest, value: Types.Id) =
             { state with JobId = value }
 
         [<CustomOperation("waitForCompletion")>]
@@ -4118,8 +4119,8 @@ module MlOperations =
             { req with DeleteUserAnnotations = Some value }
 
     type MlRevertModelSnapshotRequest = {
-        JobId: CoreTypes.Id
-        SnapshotId: CoreTypes.Id
+        JobId: Types.Id
+        SnapshotId: Types.Id
         DeleteInterveningResults: bool option
         DeleteInterveningResults: bool option
     }
@@ -4155,11 +4156,11 @@ module MlOperations =
             }
 
         [<CustomOperation("jobId")>]
-        member _.JobId(state: MlRevertModelSnapshotRequest, value: CoreTypes.Id) =
+        member _.JobId(state: MlRevertModelSnapshotRequest, value: Types.Id) =
             { state with JobId = value }
 
         [<CustomOperation("snapshotId")>]
-        member _.SnapshotId(state: MlRevertModelSnapshotRequest, value: CoreTypes.Id) =
+        member _.SnapshotId(state: MlRevertModelSnapshotRequest, value: Types.Id) =
             { state with SnapshotId = value }
 
         [<CustomOperation("deleteInterveningResults")>]
@@ -4180,7 +4181,7 @@ module MlOperations =
 
     type MlSetUpgradeModeRequest = {
         Enabled: bool option
-        Timeout: CoreTypes.Duration option
+        Timeout: Types.Duration option
     }
 
         with
@@ -4202,7 +4203,7 @@ module MlOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type MlSetUpgradeModeResponse = CoreTypes.AcknowledgedResponseBase
+    type MlSetUpgradeModeResponse = Types.AcknowledgedResponseBase
 
     type MlSetUpgradeModeRequestBuilder() =
         member _.Yield(_: unit) : MlSetUpgradeModeRequest =
@@ -4216,7 +4217,7 @@ module MlOperations =
             { state with Enabled = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: MlSetUpgradeModeRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: MlSetUpgradeModeRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
     let mlSetUpgradeModeRequest = MlSetUpgradeModeRequestBuilder()
@@ -4224,14 +4225,14 @@ module MlOperations =
     module SetUpgradeMode =
         let withEnabled (value: bool) (req: MlSetUpgradeModeRequest) =
             { req with Enabled = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: MlSetUpgradeModeRequest) =
+        let withTimeout (value: Types.Duration) (req: MlSetUpgradeModeRequest) =
             { req with Timeout = Some value }
 
     type MlStartDataFrameAnalyticsRequest = {
-        Id: CoreTypes.Id
-        Timeout: CoreTypes.Duration option
-        Id: CoreTypes.Id option
-        Timeout: CoreTypes.Duration option
+        Id: Types.Id
+        Timeout: Types.Duration option
+        Id: Types.Id option
+        Timeout: Types.Duration option
     }
 
         with
@@ -4265,39 +4266,39 @@ module MlOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: MlStartDataFrameAnalyticsRequest, value: CoreTypes.Id) =
+        member _.Id(state: MlStartDataFrameAnalyticsRequest, value: Types.Id) =
             { state with Id = value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: MlStartDataFrameAnalyticsRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: MlStartDataFrameAnalyticsRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("id")>]
-        member _.Id(state: MlStartDataFrameAnalyticsRequest, value: CoreTypes.Id) =
+        member _.Id(state: MlStartDataFrameAnalyticsRequest, value: Types.Id) =
             { state with Id = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: MlStartDataFrameAnalyticsRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: MlStartDataFrameAnalyticsRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
     let mlStartDataFrameAnalyticsRequest = MlStartDataFrameAnalyticsRequestBuilder()
 
     module StartDataFrameAnalytics =
-        let withTimeout (value: CoreTypes.Duration) (req: MlStartDataFrameAnalyticsRequest) =
+        let withTimeout (value: Types.Duration) (req: MlStartDataFrameAnalyticsRequest) =
             { req with Timeout = Some value }
-        let withId (value: CoreTypes.Id) (req: MlStartDataFrameAnalyticsRequest) =
+        let withId (value: Types.Id) (req: MlStartDataFrameAnalyticsRequest) =
             { req with Id = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: MlStartDataFrameAnalyticsRequest) =
+        let withTimeout (value: Types.Duration) (req: MlStartDataFrameAnalyticsRequest) =
             { req with Timeout = Some value }
 
     type MlStartDatafeedRequest = {
-        DatafeedId: CoreTypes.Id
-        End: CoreTypes.DateTime option
-        Start: CoreTypes.DateTime option
-        Timeout: CoreTypes.Duration option
-        End: CoreTypes.DateTime option
-        Start: CoreTypes.DateTime option
-        Timeout: CoreTypes.Duration option
+        DatafeedId: Types.Id
+        End: Types.DateTime option
+        Start: Types.DateTime option
+        Timeout: Types.Duration option
+        End: Types.DateTime option
+        Start: Types.DateTime option
+        Timeout: Types.Duration option
     }
 
         with
@@ -4336,60 +4337,60 @@ module MlOperations =
             }
 
         [<CustomOperation("datafeedId")>]
-        member _.DatafeedId(state: MlStartDatafeedRequest, value: CoreTypes.Id) =
+        member _.DatafeedId(state: MlStartDatafeedRequest, value: Types.Id) =
             { state with DatafeedId = value }
 
         [<CustomOperation("end'")>]
-        member _.End(state: MlStartDatafeedRequest, value: CoreTypes.DateTime) =
+        member _.End(state: MlStartDatafeedRequest, value: Types.DateTime) =
             { state with End = Some value }
 
         [<CustomOperation("start")>]
-        member _.Start(state: MlStartDatafeedRequest, value: CoreTypes.DateTime) =
+        member _.Start(state: MlStartDatafeedRequest, value: Types.DateTime) =
             { state with Start = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: MlStartDatafeedRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: MlStartDatafeedRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("end'")>]
-        member _.End(state: MlStartDatafeedRequest, value: CoreTypes.DateTime) =
+        member _.End(state: MlStartDatafeedRequest, value: Types.DateTime) =
             { state with End = Some value }
 
         [<CustomOperation("start")>]
-        member _.Start(state: MlStartDatafeedRequest, value: CoreTypes.DateTime) =
+        member _.Start(state: MlStartDatafeedRequest, value: Types.DateTime) =
             { state with Start = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: MlStartDatafeedRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: MlStartDatafeedRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
     let mlStartDatafeedRequest = MlStartDatafeedRequestBuilder()
 
     module StartDatafeed =
-        let withEnd (value: CoreTypes.DateTime) (req: MlStartDatafeedRequest) =
+        let withEnd (value: Types.DateTime) (req: MlStartDatafeedRequest) =
             { req with End = Some value }
-        let withStart (value: CoreTypes.DateTime) (req: MlStartDatafeedRequest) =
+        let withStart (value: Types.DateTime) (req: MlStartDatafeedRequest) =
             { req with Start = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: MlStartDatafeedRequest) =
+        let withTimeout (value: Types.Duration) (req: MlStartDatafeedRequest) =
             { req with Timeout = Some value }
-        let withEnd (value: CoreTypes.DateTime) (req: MlStartDatafeedRequest) =
+        let withEnd (value: Types.DateTime) (req: MlStartDatafeedRequest) =
             { req with End = Some value }
-        let withStart (value: CoreTypes.DateTime) (req: MlStartDatafeedRequest) =
+        let withStart (value: Types.DateTime) (req: MlStartDatafeedRequest) =
             { req with Start = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: MlStartDatafeedRequest) =
+        let withTimeout (value: Types.Duration) (req: MlStartDatafeedRequest) =
             { req with Timeout = Some value }
 
     type MlStartTrainedModelDeploymentRequest = {
-        ModelId: CoreTypes.Id
-        CacheSize: CoreTypes.ByteSize option
+        ModelId: Types.Id
+        CacheSize: Types.ByteSize option
         DeploymentId: string option
-        NumberOfAllocations: CoreTypes.Integer option
-        Priority: MlTypes.TrainingPriority option
-        QueueCapacity: CoreTypes.Integer option
-        ThreadsPerAllocation: CoreTypes.Integer option
-        Timeout: CoreTypes.Duration option
-        WaitFor: MlTypes.DeploymentAllocationState option
-        AdaptiveAllocations: MlTypes.AdaptiveAllocationsSettings option
+        NumberOfAllocations: Types.Integer option
+        Priority: Types.TrainingPriority option
+        QueueCapacity: Types.Integer option
+        ThreadsPerAllocation: Types.Integer option
+        Timeout: Types.Duration option
+        WaitFor: Types.DeploymentAllocationState option
+        AdaptiveAllocations: Types.AdaptiveAllocationsSettings option
     }
 
         with
@@ -4436,11 +4437,11 @@ module MlOperations =
             }
 
         [<CustomOperation("modelId")>]
-        member _.ModelId(state: MlStartTrainedModelDeploymentRequest, value: CoreTypes.Id) =
+        member _.ModelId(state: MlStartTrainedModelDeploymentRequest, value: Types.Id) =
             { state with ModelId = value }
 
         [<CustomOperation("cacheSize")>]
-        member _.CacheSize(state: MlStartTrainedModelDeploymentRequest, value: CoreTypes.ByteSize) =
+        member _.CacheSize(state: MlStartTrainedModelDeploymentRequest, value: Types.ByteSize) =
             { state with CacheSize = Some value }
 
         [<CustomOperation("deploymentId")>]
@@ -4448,64 +4449,64 @@ module MlOperations =
             { state with DeploymentId = Some value }
 
         [<CustomOperation("numberOfAllocations")>]
-        member _.NumberOfAllocations(state: MlStartTrainedModelDeploymentRequest, value: CoreTypes.Integer) =
+        member _.NumberOfAllocations(state: MlStartTrainedModelDeploymentRequest, value: Types.Integer) =
             { state with NumberOfAllocations = Some value }
 
         [<CustomOperation("priority")>]
-        member _.Priority(state: MlStartTrainedModelDeploymentRequest, value: MlTypes.TrainingPriority) =
+        member _.Priority(state: MlStartTrainedModelDeploymentRequest, value: Types.TrainingPriority) =
             { state with Priority = Some value }
 
         [<CustomOperation("queueCapacity")>]
-        member _.QueueCapacity(state: MlStartTrainedModelDeploymentRequest, value: CoreTypes.Integer) =
+        member _.QueueCapacity(state: MlStartTrainedModelDeploymentRequest, value: Types.Integer) =
             { state with QueueCapacity = Some value }
 
         [<CustomOperation("threadsPerAllocation")>]
-        member _.ThreadsPerAllocation(state: MlStartTrainedModelDeploymentRequest, value: CoreTypes.Integer) =
+        member _.ThreadsPerAllocation(state: MlStartTrainedModelDeploymentRequest, value: Types.Integer) =
             { state with ThreadsPerAllocation = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: MlStartTrainedModelDeploymentRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: MlStartTrainedModelDeploymentRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("waitFor")>]
-        member _.WaitFor(state: MlStartTrainedModelDeploymentRequest, value: MlTypes.DeploymentAllocationState) =
+        member _.WaitFor(state: MlStartTrainedModelDeploymentRequest, value: Types.DeploymentAllocationState) =
             { state with WaitFor = Some value }
 
         [<CustomOperation("adaptiveAllocations")>]
-        member _.AdaptiveAllocations(state: MlStartTrainedModelDeploymentRequest, value: MlTypes.AdaptiveAllocationsSettings) =
+        member _.AdaptiveAllocations(state: MlStartTrainedModelDeploymentRequest, value: Types.AdaptiveAllocationsSettings) =
             { state with AdaptiveAllocations = Some value }
 
     let mlStartTrainedModelDeploymentRequest = MlStartTrainedModelDeploymentRequestBuilder()
 
     module StartTrainedModelDeployment =
-        let withCacheSize (value: CoreTypes.ByteSize) (req: MlStartTrainedModelDeploymentRequest) =
+        let withCacheSize (value: Types.ByteSize) (req: MlStartTrainedModelDeploymentRequest) =
             { req with CacheSize = Some value }
         let withDeploymentId (value: string) (req: MlStartTrainedModelDeploymentRequest) =
             { req with DeploymentId = Some value }
-        let withNumberOfAllocations (value: CoreTypes.Integer) (req: MlStartTrainedModelDeploymentRequest) =
+        let withNumberOfAllocations (value: Types.Integer) (req: MlStartTrainedModelDeploymentRequest) =
             { req with NumberOfAllocations = Some value }
-        let withPriority (value: MlTypes.TrainingPriority) (req: MlStartTrainedModelDeploymentRequest) =
+        let withPriority (value: Types.TrainingPriority) (req: MlStartTrainedModelDeploymentRequest) =
             { req with Priority = Some value }
-        let withQueueCapacity (value: CoreTypes.Integer) (req: MlStartTrainedModelDeploymentRequest) =
+        let withQueueCapacity (value: Types.Integer) (req: MlStartTrainedModelDeploymentRequest) =
             { req with QueueCapacity = Some value }
-        let withThreadsPerAllocation (value: CoreTypes.Integer) (req: MlStartTrainedModelDeploymentRequest) =
+        let withThreadsPerAllocation (value: Types.Integer) (req: MlStartTrainedModelDeploymentRequest) =
             { req with ThreadsPerAllocation = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: MlStartTrainedModelDeploymentRequest) =
+        let withTimeout (value: Types.Duration) (req: MlStartTrainedModelDeploymentRequest) =
             { req with Timeout = Some value }
-        let withWaitFor (value: MlTypes.DeploymentAllocationState) (req: MlStartTrainedModelDeploymentRequest) =
+        let withWaitFor (value: Types.DeploymentAllocationState) (req: MlStartTrainedModelDeploymentRequest) =
             { req with WaitFor = Some value }
-        let withAdaptiveAllocations (value: MlTypes.AdaptiveAllocationsSettings) (req: MlStartTrainedModelDeploymentRequest) =
+        let withAdaptiveAllocations (value: Types.AdaptiveAllocationsSettings) (req: MlStartTrainedModelDeploymentRequest) =
             { req with AdaptiveAllocations = Some value }
 
     type MlStopDataFrameAnalyticsRequest = {
-        Id: CoreTypes.Id
+        Id: Types.Id
         AllowNoMatch: bool option
         Force: bool option
-        Timeout: CoreTypes.Duration option
-        Id: CoreTypes.Id option
+        Timeout: Types.Duration option
+        Id: Types.Id option
         AllowNoMatch: bool option
         Force: bool option
-        Timeout: CoreTypes.Duration option
+        Timeout: Types.Duration option
     }
 
         with
@@ -4545,7 +4546,7 @@ module MlOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: MlStopDataFrameAnalyticsRequest, value: CoreTypes.Id) =
+        member _.Id(state: MlStopDataFrameAnalyticsRequest, value: Types.Id) =
             { state with Id = value }
 
         [<CustomOperation("allowNoMatch")>]
@@ -4557,11 +4558,11 @@ module MlOperations =
             { state with Force = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: MlStopDataFrameAnalyticsRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: MlStopDataFrameAnalyticsRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("id")>]
-        member _.Id(state: MlStopDataFrameAnalyticsRequest, value: CoreTypes.Id) =
+        member _.Id(state: MlStopDataFrameAnalyticsRequest, value: Types.Id) =
             { state with Id = Some value }
 
         [<CustomOperation("allowNoMatch")>]
@@ -4573,7 +4574,7 @@ module MlOperations =
             { state with Force = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: MlStopDataFrameAnalyticsRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: MlStopDataFrameAnalyticsRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
     let mlStopDataFrameAnalyticsRequest = MlStopDataFrameAnalyticsRequestBuilder()
@@ -4583,26 +4584,26 @@ module MlOperations =
             { req with AllowNoMatch = Some value }
         let withForce (value: bool) (req: MlStopDataFrameAnalyticsRequest) =
             { req with Force = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: MlStopDataFrameAnalyticsRequest) =
+        let withTimeout (value: Types.Duration) (req: MlStopDataFrameAnalyticsRequest) =
             { req with Timeout = Some value }
-        let withId (value: CoreTypes.Id) (req: MlStopDataFrameAnalyticsRequest) =
+        let withId (value: Types.Id) (req: MlStopDataFrameAnalyticsRequest) =
             { req with Id = Some value }
         let withAllowNoMatch (value: bool) (req: MlStopDataFrameAnalyticsRequest) =
             { req with AllowNoMatch = Some value }
         let withForce (value: bool) (req: MlStopDataFrameAnalyticsRequest) =
             { req with Force = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: MlStopDataFrameAnalyticsRequest) =
+        let withTimeout (value: Types.Duration) (req: MlStopDataFrameAnalyticsRequest) =
             { req with Timeout = Some value }
 
     type MlStopDatafeedRequest = {
-        DatafeedId: CoreTypes.Id
+        DatafeedId: Types.Id
         AllowNoMatch: bool option
         Force: bool option
-        Timeout: CoreTypes.Duration option
+        Timeout: Types.Duration option
         CloseJob: bool option
         AllowNoMatch: bool option
         Force: bool option
-        Timeout: CoreTypes.Duration option
+        Timeout: Types.Duration option
         CloseJob: bool option
     }
 
@@ -4645,7 +4646,7 @@ module MlOperations =
             }
 
         [<CustomOperation("datafeedId")>]
-        member _.DatafeedId(state: MlStopDatafeedRequest, value: CoreTypes.Id) =
+        member _.DatafeedId(state: MlStopDatafeedRequest, value: Types.Id) =
             { state with DatafeedId = value }
 
         [<CustomOperation("allowNoMatch")>]
@@ -4657,7 +4658,7 @@ module MlOperations =
             { state with Force = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: MlStopDatafeedRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: MlStopDatafeedRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("closeJob")>]
@@ -4673,7 +4674,7 @@ module MlOperations =
             { state with Force = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: MlStopDatafeedRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: MlStopDatafeedRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("closeJob")>]
@@ -4687,7 +4688,7 @@ module MlOperations =
             { req with AllowNoMatch = Some value }
         let withForce (value: bool) (req: MlStopDatafeedRequest) =
             { req with Force = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: MlStopDatafeedRequest) =
+        let withTimeout (value: Types.Duration) (req: MlStopDatafeedRequest) =
             { req with Timeout = Some value }
         let withCloseJob (value: bool) (req: MlStopDatafeedRequest) =
             { req with CloseJob = Some value }
@@ -4695,16 +4696,16 @@ module MlOperations =
             { req with AllowNoMatch = Some value }
         let withForce (value: bool) (req: MlStopDatafeedRequest) =
             { req with Force = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: MlStopDatafeedRequest) =
+        let withTimeout (value: Types.Duration) (req: MlStopDatafeedRequest) =
             { req with Timeout = Some value }
         let withCloseJob (value: bool) (req: MlStopDatafeedRequest) =
             { req with CloseJob = Some value }
 
     type MlStopTrainedModelDeploymentRequest = {
-        ModelId: CoreTypes.Id
+        ModelId: Types.Id
         AllowNoMatch: bool option
         Force: bool option
-        Id: CoreTypes.Id option
+        Id: Types.Id option
         AllowNoMatch: bool option
         Force: bool option
     }
@@ -4743,7 +4744,7 @@ module MlOperations =
             }
 
         [<CustomOperation("modelId")>]
-        member _.ModelId(state: MlStopTrainedModelDeploymentRequest, value: CoreTypes.Id) =
+        member _.ModelId(state: MlStopTrainedModelDeploymentRequest, value: Types.Id) =
             { state with ModelId = value }
 
         [<CustomOperation("allowNoMatch")>]
@@ -4755,7 +4756,7 @@ module MlOperations =
             { state with Force = Some value }
 
         [<CustomOperation("id")>]
-        member _.Id(state: MlStopTrainedModelDeploymentRequest, value: CoreTypes.Id) =
+        member _.Id(state: MlStopTrainedModelDeploymentRequest, value: Types.Id) =
             { state with Id = Some value }
 
         [<CustomOperation("allowNoMatch")>]
@@ -4773,7 +4774,7 @@ module MlOperations =
             { req with AllowNoMatch = Some value }
         let withForce (value: bool) (req: MlStopTrainedModelDeploymentRequest) =
             { req with Force = Some value }
-        let withId (value: CoreTypes.Id) (req: MlStopTrainedModelDeploymentRequest) =
+        let withId (value: Types.Id) (req: MlStopTrainedModelDeploymentRequest) =
             { req with Id = Some value }
         let withAllowNoMatch (value: bool) (req: MlStopTrainedModelDeploymentRequest) =
             { req with AllowNoMatch = Some value }
@@ -4781,10 +4782,10 @@ module MlOperations =
             { req with Force = Some value }
 
     type MlUpdateDataFrameAnalyticsRequest = {
-        Id: CoreTypes.Id
+        Id: Types.Id
         Description: string option
         ModelMemoryLimit: string option
-        MaxNumThreads: CoreTypes.Integer option
+        MaxNumThreads: Types.Integer option
         AllowLazyStart: bool option
     }
 
@@ -4813,7 +4814,7 @@ module MlOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: MlUpdateDataFrameAnalyticsRequest, value: CoreTypes.Id) =
+        member _.Id(state: MlUpdateDataFrameAnalyticsRequest, value: Types.Id) =
             { state with Id = value }
 
         [<CustomOperation("description")>]
@@ -4825,7 +4826,7 @@ module MlOperations =
             { state with ModelMemoryLimit = Some value }
 
         [<CustomOperation("maxNumThreads")>]
-        member _.MaxNumThreads(state: MlUpdateDataFrameAnalyticsRequest, value: CoreTypes.Integer) =
+        member _.MaxNumThreads(state: MlUpdateDataFrameAnalyticsRequest, value: Types.Integer) =
             { state with MaxNumThreads = Some value }
 
         [<CustomOperation("allowLazyStart")>]
@@ -4839,30 +4840,30 @@ module MlOperations =
             { req with Description = Some value }
         let withModelMemoryLimit (value: string) (req: MlUpdateDataFrameAnalyticsRequest) =
             { req with ModelMemoryLimit = Some value }
-        let withMaxNumThreads (value: CoreTypes.Integer) (req: MlUpdateDataFrameAnalyticsRequest) =
+        let withMaxNumThreads (value: Types.Integer) (req: MlUpdateDataFrameAnalyticsRequest) =
             { req with MaxNumThreads = Some value }
         let withAllowLazyStart (value: bool) (req: MlUpdateDataFrameAnalyticsRequest) =
             { req with AllowLazyStart = Some value }
 
     type MlUpdateDatafeedRequest = {
-        DatafeedId: CoreTypes.Id
+        DatafeedId: Types.Id
         AllowNoIndices: bool option
-        ExpandWildcards: CoreTypes.ExpandWildcards option
+        ExpandWildcards: Types.ExpandWildcards option
         IgnoreThrottled: bool option
         IgnoreUnavailable: bool option
-        Aggregations: Map<string, CoreTypes.AggregationContainer> option
-        ChunkingConfig: MlTypes.ChunkingConfig option
-        DelayedDataCheckConfig: MlTypes.DelayedDataCheckConfig option
-        Frequency: CoreTypes.Duration option
+        Aggregations: Map<string, Types.AggregationContainer> option
+        ChunkingConfig: Types.ChunkingConfig option
+        DelayedDataCheckConfig: Types.DelayedDataCheckConfig option
+        Frequency: Types.Duration option
         Indices: string list option
-        IndicesOptions: CoreTypes.IndicesOptions option
-        JobId: CoreTypes.Id option
-        MaxEmptySearches: CoreTypes.Integer option
-        Query: CoreTypes.QueryContainer option
-        QueryDelay: CoreTypes.Duration option
-        RuntimeMappings: CoreTypes.RuntimeFields option
-        ScriptFields: Map<string, CoreTypes.ScriptField> option
-        ScrollSize: CoreTypes.Integer option
+        IndicesOptions: Types.IndicesOptions option
+        JobId: Types.Id option
+        MaxEmptySearches: Types.Integer option
+        Query: Types.QueryContainer option
+        QueryDelay: Types.Duration option
+        RuntimeMappings: Types.RuntimeFields option
+        ScriptFields: Map<string, Types.ScriptField> option
+        ScrollSize: Types.Integer option
     }
 
         with
@@ -4913,7 +4914,7 @@ module MlOperations =
             }
 
         [<CustomOperation("datafeedId")>]
-        member _.DatafeedId(state: MlUpdateDatafeedRequest, value: CoreTypes.Id) =
+        member _.DatafeedId(state: MlUpdateDatafeedRequest, value: Types.Id) =
             { state with DatafeedId = value }
 
         [<CustomOperation("allowNoIndices")>]
@@ -4921,7 +4922,7 @@ module MlOperations =
             { state with AllowNoIndices = Some value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: MlUpdateDatafeedRequest, value: CoreTypes.ExpandWildcards) =
+        member _.ExpandWildcards(state: MlUpdateDatafeedRequest, value: Types.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("ignoreThrottled")>]
@@ -4933,19 +4934,19 @@ module MlOperations =
             { state with IgnoreUnavailable = Some value }
 
         [<CustomOperation("aggregations")>]
-        member _.Aggregations(state: MlUpdateDatafeedRequest, value: Map<string, CoreTypes.AggregationContainer>) =
+        member _.Aggregations(state: MlUpdateDatafeedRequest, value: Map<string, Types.AggregationContainer>) =
             { state with Aggregations = Some value }
 
         [<CustomOperation("chunkingConfig")>]
-        member _.ChunkingConfig(state: MlUpdateDatafeedRequest, value: MlTypes.ChunkingConfig) =
+        member _.ChunkingConfig(state: MlUpdateDatafeedRequest, value: Types.ChunkingConfig) =
             { state with ChunkingConfig = Some value }
 
         [<CustomOperation("delayedDataCheckConfig")>]
-        member _.DelayedDataCheckConfig(state: MlUpdateDatafeedRequest, value: MlTypes.DelayedDataCheckConfig) =
+        member _.DelayedDataCheckConfig(state: MlUpdateDatafeedRequest, value: Types.DelayedDataCheckConfig) =
             { state with DelayedDataCheckConfig = Some value }
 
         [<CustomOperation("frequency")>]
-        member _.Frequency(state: MlUpdateDatafeedRequest, value: CoreTypes.Duration) =
+        member _.Frequency(state: MlUpdateDatafeedRequest, value: Types.Duration) =
             { state with Frequency = Some value }
 
         [<CustomOperation("indices")>]
@@ -4953,35 +4954,35 @@ module MlOperations =
             { state with Indices = Some value }
 
         [<CustomOperation("indicesOptions")>]
-        member _.IndicesOptions(state: MlUpdateDatafeedRequest, value: CoreTypes.IndicesOptions) =
+        member _.IndicesOptions(state: MlUpdateDatafeedRequest, value: Types.IndicesOptions) =
             { state with IndicesOptions = Some value }
 
         [<CustomOperation("jobId")>]
-        member _.JobId(state: MlUpdateDatafeedRequest, value: CoreTypes.Id) =
+        member _.JobId(state: MlUpdateDatafeedRequest, value: Types.Id) =
             { state with JobId = Some value }
 
         [<CustomOperation("maxEmptySearches")>]
-        member _.MaxEmptySearches(state: MlUpdateDatafeedRequest, value: CoreTypes.Integer) =
+        member _.MaxEmptySearches(state: MlUpdateDatafeedRequest, value: Types.Integer) =
             { state with MaxEmptySearches = Some value }
 
         [<CustomOperation("query")>]
-        member _.Query(state: MlUpdateDatafeedRequest, value: CoreTypes.QueryContainer) =
+        member _.Query(state: MlUpdateDatafeedRequest, value: Types.QueryContainer) =
             { state with Query = Some value }
 
         [<CustomOperation("queryDelay")>]
-        member _.QueryDelay(state: MlUpdateDatafeedRequest, value: CoreTypes.Duration) =
+        member _.QueryDelay(state: MlUpdateDatafeedRequest, value: Types.Duration) =
             { state with QueryDelay = Some value }
 
         [<CustomOperation("runtimeMappings")>]
-        member _.RuntimeMappings(state: MlUpdateDatafeedRequest, value: CoreTypes.RuntimeFields) =
+        member _.RuntimeMappings(state: MlUpdateDatafeedRequest, value: Types.RuntimeFields) =
             { state with RuntimeMappings = Some value }
 
         [<CustomOperation("scriptFields")>]
-        member _.ScriptFields(state: MlUpdateDatafeedRequest, value: Map<string, CoreTypes.ScriptField>) =
+        member _.ScriptFields(state: MlUpdateDatafeedRequest, value: Map<string, Types.ScriptField>) =
             { state with ScriptFields = Some value }
 
         [<CustomOperation("scrollSize")>]
-        member _.ScrollSize(state: MlUpdateDatafeedRequest, value: CoreTypes.Integer) =
+        member _.ScrollSize(state: MlUpdateDatafeedRequest, value: Types.Integer) =
             { state with ScrollSize = Some value }
 
     let mlUpdateDatafeedRequest = MlUpdateDatafeedRequestBuilder()
@@ -4989,41 +4990,41 @@ module MlOperations =
     module UpdateDatafeed =
         let withAllowNoIndices (value: bool) (req: MlUpdateDatafeedRequest) =
             { req with AllowNoIndices = Some value }
-        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: MlUpdateDatafeedRequest) =
+        let withExpandWildcards (value: Types.ExpandWildcards) (req: MlUpdateDatafeedRequest) =
             { req with ExpandWildcards = Some value }
         let withIgnoreThrottled (value: bool) (req: MlUpdateDatafeedRequest) =
             { req with IgnoreThrottled = Some value }
         let withIgnoreUnavailable (value: bool) (req: MlUpdateDatafeedRequest) =
             { req with IgnoreUnavailable = Some value }
-        let withAggregations (value: Map<string, CoreTypes.AggregationContainer>) (req: MlUpdateDatafeedRequest) =
+        let withAggregations (value: Map<string, Types.AggregationContainer>) (req: MlUpdateDatafeedRequest) =
             { req with Aggregations = Some value }
-        let withChunkingConfig (value: MlTypes.ChunkingConfig) (req: MlUpdateDatafeedRequest) =
+        let withChunkingConfig (value: Types.ChunkingConfig) (req: MlUpdateDatafeedRequest) =
             { req with ChunkingConfig = Some value }
-        let withDelayedDataCheckConfig (value: MlTypes.DelayedDataCheckConfig) (req: MlUpdateDatafeedRequest) =
+        let withDelayedDataCheckConfig (value: Types.DelayedDataCheckConfig) (req: MlUpdateDatafeedRequest) =
             { req with DelayedDataCheckConfig = Some value }
-        let withFrequency (value: CoreTypes.Duration) (req: MlUpdateDatafeedRequest) =
+        let withFrequency (value: Types.Duration) (req: MlUpdateDatafeedRequest) =
             { req with Frequency = Some value }
         let withIndices (value: string list) (req: MlUpdateDatafeedRequest) =
             { req with Indices = Some value }
-        let withIndicesOptions (value: CoreTypes.IndicesOptions) (req: MlUpdateDatafeedRequest) =
+        let withIndicesOptions (value: Types.IndicesOptions) (req: MlUpdateDatafeedRequest) =
             { req with IndicesOptions = Some value }
-        let withJobId (value: CoreTypes.Id) (req: MlUpdateDatafeedRequest) =
+        let withJobId (value: Types.Id) (req: MlUpdateDatafeedRequest) =
             { req with JobId = Some value }
-        let withMaxEmptySearches (value: CoreTypes.Integer) (req: MlUpdateDatafeedRequest) =
+        let withMaxEmptySearches (value: Types.Integer) (req: MlUpdateDatafeedRequest) =
             { req with MaxEmptySearches = Some value }
-        let withQuery (value: CoreTypes.QueryContainer) (req: MlUpdateDatafeedRequest) =
+        let withQuery (value: Types.QueryContainer) (req: MlUpdateDatafeedRequest) =
             { req with Query = Some value }
-        let withQueryDelay (value: CoreTypes.Duration) (req: MlUpdateDatafeedRequest) =
+        let withQueryDelay (value: Types.Duration) (req: MlUpdateDatafeedRequest) =
             { req with QueryDelay = Some value }
-        let withRuntimeMappings (value: CoreTypes.RuntimeFields) (req: MlUpdateDatafeedRequest) =
+        let withRuntimeMappings (value: Types.RuntimeFields) (req: MlUpdateDatafeedRequest) =
             { req with RuntimeMappings = Some value }
-        let withScriptFields (value: Map<string, CoreTypes.ScriptField>) (req: MlUpdateDatafeedRequest) =
+        let withScriptFields (value: Map<string, Types.ScriptField>) (req: MlUpdateDatafeedRequest) =
             { req with ScriptFields = Some value }
-        let withScrollSize (value: CoreTypes.Integer) (req: MlUpdateDatafeedRequest) =
+        let withScrollSize (value: Types.Integer) (req: MlUpdateDatafeedRequest) =
             { req with ScrollSize = Some value }
 
     type MlUpdateFilterRequest = {
-        FilterId: CoreTypes.Id
+        FilterId: Types.Id
         AddItems: string list option
         Description: string option
         RemoveItems: string list option
@@ -5053,7 +5054,7 @@ module MlOperations =
             }
 
         [<CustomOperation("filterId")>]
-        member _.FilterId(state: MlUpdateFilterRequest, value: CoreTypes.Id) =
+        member _.FilterId(state: MlUpdateFilterRequest, value: Types.Id) =
             { state with FilterId = value }
 
         [<CustomOperation("addItems")>]
@@ -5079,22 +5080,22 @@ module MlOperations =
             { req with RemoveItems = Some value }
 
     type MlUpdateJobRequest = {
-        JobId: CoreTypes.Id
+        JobId: Types.Id
         AllowLazyOpen: bool option
-        AnalysisLimits: MlTypes.AnalysisMemoryLimit option
-        BackgroundPersistInterval: CoreTypes.Duration option
+        AnalysisLimits: Types.AnalysisMemoryLimit option
+        BackgroundPersistInterval: Types.Duration option
         CustomSettings: Map<string, System.Text.Json.JsonElement> option
         CategorizationFilters: string list option
         Description: string option
-        ModelPlotConfig: MlTypes.ModelPlotConfig option
-        ModelPruneWindow: CoreTypes.Duration option
-        DailyModelSnapshotRetentionAfterDays: CoreTypes.Long option
-        ModelSnapshotRetentionDays: CoreTypes.Long option
-        RenormalizationWindowDays: CoreTypes.Long option
-        ResultsRetentionDays: CoreTypes.Long option
+        ModelPlotConfig: Types.ModelPlotConfig option
+        ModelPruneWindow: Types.Duration option
+        DailyModelSnapshotRetentionAfterDays: Types.Long option
+        ModelSnapshotRetentionDays: Types.Long option
+        RenormalizationWindowDays: Types.Long option
+        ResultsRetentionDays: Types.Long option
         Groups: string list option
-        Detectors: MlTypes.DetectorUpdate list option
-        PerPartitionCategorization: MlTypes.PerPartitionCategorization option
+        Detectors: Types.DetectorUpdate list option
+        PerPartitionCategorization: Types.PerPartitionCategorization option
     }
 
         with
@@ -5133,7 +5134,7 @@ module MlOperations =
             }
 
         [<CustomOperation("jobId")>]
-        member _.JobId(state: MlUpdateJobRequest, value: CoreTypes.Id) =
+        member _.JobId(state: MlUpdateJobRequest, value: Types.Id) =
             { state with JobId = value }
 
         [<CustomOperation("allowLazyOpen")>]
@@ -5141,11 +5142,11 @@ module MlOperations =
             { state with AllowLazyOpen = Some value }
 
         [<CustomOperation("analysisLimits")>]
-        member _.AnalysisLimits(state: MlUpdateJobRequest, value: MlTypes.AnalysisMemoryLimit) =
+        member _.AnalysisLimits(state: MlUpdateJobRequest, value: Types.AnalysisMemoryLimit) =
             { state with AnalysisLimits = Some value }
 
         [<CustomOperation("backgroundPersistInterval")>]
-        member _.BackgroundPersistInterval(state: MlUpdateJobRequest, value: CoreTypes.Duration) =
+        member _.BackgroundPersistInterval(state: MlUpdateJobRequest, value: Types.Duration) =
             { state with BackgroundPersistInterval = Some value }
 
         [<CustomOperation("customSettings")>]
@@ -5161,27 +5162,27 @@ module MlOperations =
             { state with Description = Some value }
 
         [<CustomOperation("modelPlotConfig")>]
-        member _.ModelPlotConfig(state: MlUpdateJobRequest, value: MlTypes.ModelPlotConfig) =
+        member _.ModelPlotConfig(state: MlUpdateJobRequest, value: Types.ModelPlotConfig) =
             { state with ModelPlotConfig = Some value }
 
         [<CustomOperation("modelPruneWindow")>]
-        member _.ModelPruneWindow(state: MlUpdateJobRequest, value: CoreTypes.Duration) =
+        member _.ModelPruneWindow(state: MlUpdateJobRequest, value: Types.Duration) =
             { state with ModelPruneWindow = Some value }
 
         [<CustomOperation("dailyModelSnapshotRetentionAfterDays")>]
-        member _.DailyModelSnapshotRetentionAfterDays(state: MlUpdateJobRequest, value: CoreTypes.Long) =
+        member _.DailyModelSnapshotRetentionAfterDays(state: MlUpdateJobRequest, value: Types.Long) =
             { state with DailyModelSnapshotRetentionAfterDays = Some value }
 
         [<CustomOperation("modelSnapshotRetentionDays")>]
-        member _.ModelSnapshotRetentionDays(state: MlUpdateJobRequest, value: CoreTypes.Long) =
+        member _.ModelSnapshotRetentionDays(state: MlUpdateJobRequest, value: Types.Long) =
             { state with ModelSnapshotRetentionDays = Some value }
 
         [<CustomOperation("renormalizationWindowDays")>]
-        member _.RenormalizationWindowDays(state: MlUpdateJobRequest, value: CoreTypes.Long) =
+        member _.RenormalizationWindowDays(state: MlUpdateJobRequest, value: Types.Long) =
             { state with RenormalizationWindowDays = Some value }
 
         [<CustomOperation("resultsRetentionDays")>]
-        member _.ResultsRetentionDays(state: MlUpdateJobRequest, value: CoreTypes.Long) =
+        member _.ResultsRetentionDays(state: MlUpdateJobRequest, value: Types.Long) =
             { state with ResultsRetentionDays = Some value }
 
         [<CustomOperation("groups")>]
@@ -5189,11 +5190,11 @@ module MlOperations =
             { state with Groups = Some value }
 
         [<CustomOperation("detectors")>]
-        member _.Detectors(state: MlUpdateJobRequest, value: MlTypes.DetectorUpdate list) =
+        member _.Detectors(state: MlUpdateJobRequest, value: Types.DetectorUpdate list) =
             { state with Detectors = Some value }
 
         [<CustomOperation("perPartitionCategorization")>]
-        member _.PerPartitionCategorization(state: MlUpdateJobRequest, value: MlTypes.PerPartitionCategorization) =
+        member _.PerPartitionCategorization(state: MlUpdateJobRequest, value: Types.PerPartitionCategorization) =
             { state with PerPartitionCategorization = Some value }
 
     let mlUpdateJobRequest = MlUpdateJobRequestBuilder()
@@ -5201,9 +5202,9 @@ module MlOperations =
     module UpdateJob =
         let withAllowLazyOpen (value: bool) (req: MlUpdateJobRequest) =
             { req with AllowLazyOpen = Some value }
-        let withAnalysisLimits (value: MlTypes.AnalysisMemoryLimit) (req: MlUpdateJobRequest) =
+        let withAnalysisLimits (value: Types.AnalysisMemoryLimit) (req: MlUpdateJobRequest) =
             { req with AnalysisLimits = Some value }
-        let withBackgroundPersistInterval (value: CoreTypes.Duration) (req: MlUpdateJobRequest) =
+        let withBackgroundPersistInterval (value: Types.Duration) (req: MlUpdateJobRequest) =
             { req with BackgroundPersistInterval = Some value }
         let withCustomSettings (value: Map<string, System.Text.Json.JsonElement>) (req: MlUpdateJobRequest) =
             { req with CustomSettings = Some value }
@@ -5211,28 +5212,28 @@ module MlOperations =
             { req with CategorizationFilters = Some value }
         let withDescription (value: string) (req: MlUpdateJobRequest) =
             { req with Description = Some value }
-        let withModelPlotConfig (value: MlTypes.ModelPlotConfig) (req: MlUpdateJobRequest) =
+        let withModelPlotConfig (value: Types.ModelPlotConfig) (req: MlUpdateJobRequest) =
             { req with ModelPlotConfig = Some value }
-        let withModelPruneWindow (value: CoreTypes.Duration) (req: MlUpdateJobRequest) =
+        let withModelPruneWindow (value: Types.Duration) (req: MlUpdateJobRequest) =
             { req with ModelPruneWindow = Some value }
-        let withDailyModelSnapshotRetentionAfterDays (value: CoreTypes.Long) (req: MlUpdateJobRequest) =
+        let withDailyModelSnapshotRetentionAfterDays (value: Types.Long) (req: MlUpdateJobRequest) =
             { req with DailyModelSnapshotRetentionAfterDays = Some value }
-        let withModelSnapshotRetentionDays (value: CoreTypes.Long) (req: MlUpdateJobRequest) =
+        let withModelSnapshotRetentionDays (value: Types.Long) (req: MlUpdateJobRequest) =
             { req with ModelSnapshotRetentionDays = Some value }
-        let withRenormalizationWindowDays (value: CoreTypes.Long) (req: MlUpdateJobRequest) =
+        let withRenormalizationWindowDays (value: Types.Long) (req: MlUpdateJobRequest) =
             { req with RenormalizationWindowDays = Some value }
-        let withResultsRetentionDays (value: CoreTypes.Long) (req: MlUpdateJobRequest) =
+        let withResultsRetentionDays (value: Types.Long) (req: MlUpdateJobRequest) =
             { req with ResultsRetentionDays = Some value }
         let withGroups (value: string list) (req: MlUpdateJobRequest) =
             { req with Groups = Some value }
-        let withDetectors (value: MlTypes.DetectorUpdate list) (req: MlUpdateJobRequest) =
+        let withDetectors (value: Types.DetectorUpdate list) (req: MlUpdateJobRequest) =
             { req with Detectors = Some value }
-        let withPerPartitionCategorization (value: MlTypes.PerPartitionCategorization) (req: MlUpdateJobRequest) =
+        let withPerPartitionCategorization (value: Types.PerPartitionCategorization) (req: MlUpdateJobRequest) =
             { req with PerPartitionCategorization = Some value }
 
     type MlUpdateModelSnapshotRequest = {
-        JobId: CoreTypes.Id
-        SnapshotId: CoreTypes.Id
+        JobId: Types.Id
+        SnapshotId: Types.Id
         Description: string option
         Retain: bool option
     }
@@ -5261,11 +5262,11 @@ module MlOperations =
             }
 
         [<CustomOperation("jobId")>]
-        member _.JobId(state: MlUpdateModelSnapshotRequest, value: CoreTypes.Id) =
+        member _.JobId(state: MlUpdateModelSnapshotRequest, value: Types.Id) =
             { state with JobId = value }
 
         [<CustomOperation("snapshotId")>]
-        member _.SnapshotId(state: MlUpdateModelSnapshotRequest, value: CoreTypes.Id) =
+        member _.SnapshotId(state: MlUpdateModelSnapshotRequest, value: Types.Id) =
             { state with SnapshotId = value }
 
         [<CustomOperation("description")>]
@@ -5285,10 +5286,10 @@ module MlOperations =
             { req with Retain = Some value }
 
     type MlUpdateTrainedModelDeploymentRequest = {
-        ModelId: CoreTypes.Id
-        NumberOfAllocations: CoreTypes.Integer option
-        NumberOfAllocations: CoreTypes.Integer option
-        AdaptiveAllocations: MlTypes.AdaptiveAllocationsSettings option
+        ModelId: Types.Id
+        NumberOfAllocations: Types.Integer option
+        NumberOfAllocations: Types.Integer option
+        AdaptiveAllocations: Types.AdaptiveAllocationsSettings option
     }
 
         with
@@ -5322,36 +5323,36 @@ module MlOperations =
             }
 
         [<CustomOperation("modelId")>]
-        member _.ModelId(state: MlUpdateTrainedModelDeploymentRequest, value: CoreTypes.Id) =
+        member _.ModelId(state: MlUpdateTrainedModelDeploymentRequest, value: Types.Id) =
             { state with ModelId = value }
 
         [<CustomOperation("numberOfAllocations")>]
-        member _.NumberOfAllocations(state: MlUpdateTrainedModelDeploymentRequest, value: CoreTypes.Integer) =
+        member _.NumberOfAllocations(state: MlUpdateTrainedModelDeploymentRequest, value: Types.Integer) =
             { state with NumberOfAllocations = Some value }
 
         [<CustomOperation("numberOfAllocations")>]
-        member _.NumberOfAllocations(state: MlUpdateTrainedModelDeploymentRequest, value: CoreTypes.Integer) =
+        member _.NumberOfAllocations(state: MlUpdateTrainedModelDeploymentRequest, value: Types.Integer) =
             { state with NumberOfAllocations = Some value }
 
         [<CustomOperation("adaptiveAllocations")>]
-        member _.AdaptiveAllocations(state: MlUpdateTrainedModelDeploymentRequest, value: MlTypes.AdaptiveAllocationsSettings) =
+        member _.AdaptiveAllocations(state: MlUpdateTrainedModelDeploymentRequest, value: Types.AdaptiveAllocationsSettings) =
             { state with AdaptiveAllocations = Some value }
 
     let mlUpdateTrainedModelDeploymentRequest = MlUpdateTrainedModelDeploymentRequestBuilder()
 
     module UpdateTrainedModelDeployment =
-        let withNumberOfAllocations (value: CoreTypes.Integer) (req: MlUpdateTrainedModelDeploymentRequest) =
+        let withNumberOfAllocations (value: Types.Integer) (req: MlUpdateTrainedModelDeploymentRequest) =
             { req with NumberOfAllocations = Some value }
-        let withNumberOfAllocations (value: CoreTypes.Integer) (req: MlUpdateTrainedModelDeploymentRequest) =
+        let withNumberOfAllocations (value: Types.Integer) (req: MlUpdateTrainedModelDeploymentRequest) =
             { req with NumberOfAllocations = Some value }
-        let withAdaptiveAllocations (value: MlTypes.AdaptiveAllocationsSettings) (req: MlUpdateTrainedModelDeploymentRequest) =
+        let withAdaptiveAllocations (value: Types.AdaptiveAllocationsSettings) (req: MlUpdateTrainedModelDeploymentRequest) =
             { req with AdaptiveAllocations = Some value }
 
     type MlUpgradeJobSnapshotRequest = {
-        JobId: CoreTypes.Id
-        SnapshotId: CoreTypes.Id
+        JobId: Types.Id
+        SnapshotId: Types.Id
         WaitForCompletion: bool option
-        Timeout: CoreTypes.Duration option
+        Timeout: Types.Duration option
     }
 
         with
@@ -5385,11 +5386,11 @@ module MlOperations =
             }
 
         [<CustomOperation("jobId")>]
-        member _.JobId(state: MlUpgradeJobSnapshotRequest, value: CoreTypes.Id) =
+        member _.JobId(state: MlUpgradeJobSnapshotRequest, value: Types.Id) =
             { state with JobId = value }
 
         [<CustomOperation("snapshotId")>]
-        member _.SnapshotId(state: MlUpgradeJobSnapshotRequest, value: CoreTypes.Id) =
+        member _.SnapshotId(state: MlUpgradeJobSnapshotRequest, value: Types.Id) =
             { state with SnapshotId = value }
 
         [<CustomOperation("waitForCompletion")>]
@@ -5397,7 +5398,7 @@ module MlOperations =
             { state with WaitForCompletion = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: MlUpgradeJobSnapshotRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: MlUpgradeJobSnapshotRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
     let mlUpgradeJobSnapshotRequest = MlUpgradeJobSnapshotRequestBuilder()
@@ -5405,19 +5406,19 @@ module MlOperations =
     module UpgradeJobSnapshot =
         let withWaitForCompletion (value: bool) (req: MlUpgradeJobSnapshotRequest) =
             { req with WaitForCompletion = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: MlUpgradeJobSnapshotRequest) =
+        let withTimeout (value: Types.Duration) (req: MlUpgradeJobSnapshotRequest) =
             { req with Timeout = Some value }
 
     type MlValidateRequest = {
-        JobId: CoreTypes.Id option
-        AnalysisConfig: MlTypes.AnalysisConfig option
-        AnalysisLimits: MlTypes.AnalysisLimits option
-        DataDescription: MlTypes.DataDescription option
+        JobId: Types.Id option
+        AnalysisConfig: Types.AnalysisConfig option
+        AnalysisLimits: Types.AnalysisLimits option
+        DataDescription: Types.DataDescription option
         Description: string option
-        ModelPlot: MlTypes.ModelPlotConfig option
-        ModelSnapshotId: CoreTypes.Id option
-        ModelSnapshotRetentionDays: CoreTypes.Long option
-        ResultsIndexName: CoreTypes.IndexName option
+        ModelPlot: Types.ModelPlotConfig option
+        ModelSnapshotId: Types.Id option
+        ModelSnapshotRetentionDays: Types.Long option
+        ResultsIndexName: Types.IndexName option
     }
 
         with
@@ -5432,7 +5433,7 @@ module MlOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type MlValidateResponse = CoreTypes.AcknowledgedResponseBase
+    type MlValidateResponse = Types.AcknowledgedResponseBase
 
     type MlValidateRequestBuilder() =
         member _.Yield(_: unit) : MlValidateRequest =
@@ -5449,19 +5450,19 @@ module MlOperations =
             }
 
         [<CustomOperation("jobId")>]
-        member _.JobId(state: MlValidateRequest, value: CoreTypes.Id) =
+        member _.JobId(state: MlValidateRequest, value: Types.Id) =
             { state with JobId = Some value }
 
         [<CustomOperation("analysisConfig")>]
-        member _.AnalysisConfig(state: MlValidateRequest, value: MlTypes.AnalysisConfig) =
+        member _.AnalysisConfig(state: MlValidateRequest, value: Types.AnalysisConfig) =
             { state with AnalysisConfig = Some value }
 
         [<CustomOperation("analysisLimits")>]
-        member _.AnalysisLimits(state: MlValidateRequest, value: MlTypes.AnalysisLimits) =
+        member _.AnalysisLimits(state: MlValidateRequest, value: Types.AnalysisLimits) =
             { state with AnalysisLimits = Some value }
 
         [<CustomOperation("dataDescription")>]
-        member _.DataDescription(state: MlValidateRequest, value: MlTypes.DataDescription) =
+        member _.DataDescription(state: MlValidateRequest, value: Types.DataDescription) =
             { state with DataDescription = Some value }
 
         [<CustomOperation("description")>]
@@ -5469,41 +5470,41 @@ module MlOperations =
             { state with Description = Some value }
 
         [<CustomOperation("modelPlot")>]
-        member _.ModelPlot(state: MlValidateRequest, value: MlTypes.ModelPlotConfig) =
+        member _.ModelPlot(state: MlValidateRequest, value: Types.ModelPlotConfig) =
             { state with ModelPlot = Some value }
 
         [<CustomOperation("modelSnapshotId")>]
-        member _.ModelSnapshotId(state: MlValidateRequest, value: CoreTypes.Id) =
+        member _.ModelSnapshotId(state: MlValidateRequest, value: Types.Id) =
             { state with ModelSnapshotId = Some value }
 
         [<CustomOperation("modelSnapshotRetentionDays")>]
-        member _.ModelSnapshotRetentionDays(state: MlValidateRequest, value: CoreTypes.Long) =
+        member _.ModelSnapshotRetentionDays(state: MlValidateRequest, value: Types.Long) =
             { state with ModelSnapshotRetentionDays = Some value }
 
         [<CustomOperation("resultsIndexName")>]
-        member _.ResultsIndexName(state: MlValidateRequest, value: CoreTypes.IndexName) =
+        member _.ResultsIndexName(state: MlValidateRequest, value: Types.IndexName) =
             { state with ResultsIndexName = Some value }
 
     let mlValidateRequest = MlValidateRequestBuilder()
 
     module Validate =
-        let withJobId (value: CoreTypes.Id) (req: MlValidateRequest) =
+        let withJobId (value: Types.Id) (req: MlValidateRequest) =
             { req with JobId = Some value }
-        let withAnalysisConfig (value: MlTypes.AnalysisConfig) (req: MlValidateRequest) =
+        let withAnalysisConfig (value: Types.AnalysisConfig) (req: MlValidateRequest) =
             { req with AnalysisConfig = Some value }
-        let withAnalysisLimits (value: MlTypes.AnalysisLimits) (req: MlValidateRequest) =
+        let withAnalysisLimits (value: Types.AnalysisLimits) (req: MlValidateRequest) =
             { req with AnalysisLimits = Some value }
-        let withDataDescription (value: MlTypes.DataDescription) (req: MlValidateRequest) =
+        let withDataDescription (value: Types.DataDescription) (req: MlValidateRequest) =
             { req with DataDescription = Some value }
         let withDescription (value: string) (req: MlValidateRequest) =
             { req with Description = Some value }
-        let withModelPlot (value: MlTypes.ModelPlotConfig) (req: MlValidateRequest) =
+        let withModelPlot (value: Types.ModelPlotConfig) (req: MlValidateRequest) =
             { req with ModelPlot = Some value }
-        let withModelSnapshotId (value: CoreTypes.Id) (req: MlValidateRequest) =
+        let withModelSnapshotId (value: Types.Id) (req: MlValidateRequest) =
             { req with ModelSnapshotId = Some value }
-        let withModelSnapshotRetentionDays (value: CoreTypes.Long) (req: MlValidateRequest) =
+        let withModelSnapshotRetentionDays (value: Types.Long) (req: MlValidateRequest) =
             { req with ModelSnapshotRetentionDays = Some value }
-        let withResultsIndexName (value: CoreTypes.IndexName) (req: MlValidateRequest) =
+        let withResultsIndexName (value: Types.IndexName) (req: MlValidateRequest) =
             { req with ResultsIndexName = Some value }
 
     type MlValidateDetectorRequest = {
@@ -5522,7 +5523,7 @@ module MlOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type MlValidateDetectorResponse = CoreTypes.AcknowledgedResponseBase
+    type MlValidateDetectorResponse = Types.AcknowledgedResponseBase
 
     type MlValidateDetectorRequestBuilder() =
         member _.Yield(_: unit) : MlValidateDetectorRequest =

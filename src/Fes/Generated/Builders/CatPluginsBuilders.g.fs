@@ -4,13 +4,13 @@ namespace Fes.Generated.Builders
 
 
 open System.Text.Json.Serialization
-open Fes.Generated.Types
+open Fes.Generated
 
 [<AutoOpen>]
 module CatPluginsBuilders =
 
     type PluginsRecordBuilder() =
-        member _.Yield(_: unit) : PluginsRecord =
+        member _.Yield(_: unit) : Types.PluginsRecord =
             {
                 Id = None
                 Name = None
@@ -21,27 +21,27 @@ module CatPluginsBuilders =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: PluginsRecord, value: CoreTypes.NodeId) =
+        member _.Id(state: Types.PluginsRecord, value: Types.NodeId) =
             { state with Id = Some value }
 
         [<CustomOperation("name")>]
-        member _.Name(state: PluginsRecord, value: CoreTypes.Name) =
+        member _.Name(state: Types.PluginsRecord, value: Types.Name) =
             { state with Name = Some value }
 
         [<CustomOperation("component")>]
-        member _.Component(state: PluginsRecord, value: string) =
+        member _.Component(state: Types.PluginsRecord, value: string) =
             { state with Component = Some value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: PluginsRecord, value: CoreTypes.VersionString) =
+        member _.Version(state: Types.PluginsRecord, value: Types.VersionString) =
             { state with Version = Some value }
 
         [<CustomOperation("description")>]
-        member _.Description(state: PluginsRecord, value: string) =
+        member _.Description(state: Types.PluginsRecord, value: string) =
             { state with Description = Some value }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: PluginsRecord, value: string) =
+        member _.Type(state: Types.PluginsRecord, value: string) =
             { state with Type = Some value }
 
     let pluginsRecord = PluginsRecordBuilder()

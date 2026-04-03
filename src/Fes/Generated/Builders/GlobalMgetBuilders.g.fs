@@ -4,13 +4,13 @@ namespace Fes.Generated.Builders
 
 
 open System.Text.Json.Serialization
-open Fes.Generated.Types
+open Fes.Generated
 
 [<AutoOpen>]
 module GlobalMgetBuilders =
 
-    type OperationBuilder() =
-        member _.Yield(_: unit) : Operation =
+    type GlobalMgetOperationBuilder() =
+        member _.Yield(_: unit) : Types.GlobalMgetOperation =
             {
                 Id = Unchecked.defaultof<_>
                 Index = None
@@ -22,32 +22,32 @@ module GlobalMgetBuilders =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: Operation, value: CoreTypes.Id) =
+        member _.Id(state: Types.GlobalMgetOperation, value: Types.Id) =
             { state with Id = value }
 
         [<CustomOperation("index")>]
-        member _.Index(state: Operation, value: CoreTypes.IndexName) =
+        member _.Index(state: Types.GlobalMgetOperation, value: Types.IndexName) =
             { state with Index = Some value }
 
         [<CustomOperation("routing")>]
-        member _.Routing(state: Operation, value: CoreTypes.Routing) =
+        member _.Routing(state: Types.GlobalMgetOperation, value: Types.Routing) =
             { state with Routing = Some value }
 
         [<CustomOperation("source")>]
-        member _.Source(state: Operation, value: GlobalSearchTypes.SourceConfig) =
+        member _.Source(state: Types.GlobalMgetOperation, value: Types.SourceConfig) =
             { state with Source = Some value }
 
         [<CustomOperation("storedFields")>]
-        member _.StoredFields(state: Operation, value: CoreTypes.Fields) =
+        member _.StoredFields(state: Types.GlobalMgetOperation, value: Types.Fields) =
             { state with StoredFields = Some value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: Operation, value: CoreTypes.VersionNumber) =
+        member _.Version(state: Types.GlobalMgetOperation, value: Types.VersionNumber) =
             { state with Version = Some value }
 
         [<CustomOperation("versionType")>]
-        member _.VersionType(state: Operation, value: CoreTypes.VersionType) =
+        member _.VersionType(state: Types.GlobalMgetOperation, value: Types.VersionType) =
             { state with VersionType = Some value }
 
-    let operation = OperationBuilder()
+    let globalMgetOperation = GlobalMgetOperationBuilder()
 

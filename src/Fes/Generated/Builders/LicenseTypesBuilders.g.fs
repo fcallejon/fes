@@ -4,13 +4,13 @@ namespace Fes.Generated.Builders
 
 
 open System.Text.Json.Serialization
-open Fes.Generated.Types
+open Fes.Generated
 
 [<AutoOpen>]
 module LicenseTypesBuilders =
 
     type LicenseBuilder() =
-        member _.Yield(_: unit) : License =
+        member _.Yield(_: unit) : Types.License =
             {
                 ExpiryDateInMillis = Unchecked.defaultof<_>
                 IssueDateInMillis = Unchecked.defaultof<_>
@@ -25,43 +25,43 @@ module LicenseTypesBuilders =
             }
 
         [<CustomOperation("expiryDateInMillis")>]
-        member _.ExpiryDateInMillis(state: License, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
+        member _.ExpiryDateInMillis(state: Types.License, value: Types.EpochTime<Types.UnitMillis>) =
             { state with ExpiryDateInMillis = value }
 
         [<CustomOperation("issueDateInMillis")>]
-        member _.IssueDateInMillis(state: License, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
+        member _.IssueDateInMillis(state: Types.License, value: Types.EpochTime<Types.UnitMillis>) =
             { state with IssueDateInMillis = value }
 
         [<CustomOperation("startDateInMillis")>]
-        member _.StartDateInMillis(state: License, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
+        member _.StartDateInMillis(state: Types.License, value: Types.EpochTime<Types.UnitMillis>) =
             { state with StartDateInMillis = Some value }
 
         [<CustomOperation("issuedTo")>]
-        member _.IssuedTo(state: License, value: string) =
+        member _.IssuedTo(state: Types.License, value: string) =
             { state with IssuedTo = value }
 
         [<CustomOperation("issuer")>]
-        member _.Issuer(state: License, value: string) =
+        member _.Issuer(state: Types.License, value: string) =
             { state with Issuer = value }
 
         [<CustomOperation("maxNodes")>]
-        member _.MaxNodes(state: License, value: CoreTypes.Long option) =
+        member _.MaxNodes(state: Types.License, value: Types.Long option) =
             { state with MaxNodes = Some value }
 
         [<CustomOperation("maxResourceUnits")>]
-        member _.MaxResourceUnits(state: License, value: CoreTypes.Long) =
+        member _.MaxResourceUnits(state: Types.License, value: Types.Long) =
             { state with MaxResourceUnits = Some value }
 
         [<CustomOperation("signature")>]
-        member _.Signature(state: License, value: string) =
+        member _.Signature(state: Types.License, value: string) =
             { state with Signature = value }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: License, value: LicenseTypes.LicenseType) =
+        member _.Type(state: Types.License, value: Types.LicenseType) =
             { state with Type = value }
 
         [<CustomOperation("uid")>]
-        member _.Uid(state: License, value: string) =
+        member _.Uid(state: Types.License, value: string) =
             { state with Uid = value }
 
     let license = LicenseBuilder()

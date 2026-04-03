@@ -30,7 +30,8 @@ let main args =
     else
 
     let model = SchemaReader.readSchemaFile schemaPath
-    let index = TypeIndex.build model
+    let nameMap = FileEmitter.buildNameMap model.Types
+    let index = TypeIndex.build model |> TypeIndex.withNameMap nameMap
 
     let endpointsToGenerate = index.EndpointsToGenerate.Length
 

@@ -7,22 +7,23 @@ open System
 open System.Text.Json
 open System.Text.Json.Serialization
 open Fes
+open Fes.Generated
 
 [<AutoOpen>]
 module GlobalOperations =
 
     type BulkRequest = {
-        Index: CoreTypes.IndexName
+        Index: Types.IndexName
         IncludeSourceOnError: bool option
         ListExecutedPipelines: bool option
         Pipeline: string option
-        Refresh: CoreTypes.Refresh option
-        Routing: CoreTypes.Routing option
-        Source: GlobalSearchTypes.SourceConfigParam option
-        SourceExcludes: CoreTypes.Fields option
-        SourceIncludes: CoreTypes.Fields option
-        Timeout: CoreTypes.Duration option
-        WaitForActiveShards: CoreTypes.WaitForActiveShards option
+        Refresh: Types.Refresh option
+        Routing: Types.Routing option
+        Source: Types.SourceConfigParam option
+        SourceExcludes: Types.Fields option
+        SourceIncludes: Types.Fields option
+        Timeout: Types.Duration option
+        WaitForActiveShards: Types.WaitForActiveShards option
         RequireAlias: bool option
         RequireDataStream: bool option
         Document: obj
@@ -80,7 +81,7 @@ module GlobalOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: BulkRequest, value: CoreTypes.IndexName) =
+        member _.Index(state: BulkRequest, value: Types.IndexName) =
             { state with Index = value }
 
         [<CustomOperation("includeSourceOnError")>]
@@ -96,31 +97,31 @@ module GlobalOperations =
             { state with Pipeline = Some value }
 
         [<CustomOperation("refresh")>]
-        member _.Refresh(state: BulkRequest, value: CoreTypes.Refresh) =
+        member _.Refresh(state: BulkRequest, value: Types.Refresh) =
             { state with Refresh = Some value }
 
         [<CustomOperation("routing")>]
-        member _.Routing(state: BulkRequest, value: CoreTypes.Routing) =
+        member _.Routing(state: BulkRequest, value: Types.Routing) =
             { state with Routing = Some value }
 
         [<CustomOperation("source")>]
-        member _.Source(state: BulkRequest, value: GlobalSearchTypes.SourceConfigParam) =
+        member _.Source(state: BulkRequest, value: Types.SourceConfigParam) =
             { state with Source = Some value }
 
         [<CustomOperation("sourceExcludes")>]
-        member _.SourceExcludes(state: BulkRequest, value: CoreTypes.Fields) =
+        member _.SourceExcludes(state: BulkRequest, value: Types.Fields) =
             { state with SourceExcludes = Some value }
 
         [<CustomOperation("sourceIncludes")>]
-        member _.SourceIncludes(state: BulkRequest, value: CoreTypes.Fields) =
+        member _.SourceIncludes(state: BulkRequest, value: Types.Fields) =
             { state with SourceIncludes = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: BulkRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: BulkRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("waitForActiveShards")>]
-        member _.WaitForActiveShards(state: BulkRequest, value: CoreTypes.WaitForActiveShards) =
+        member _.WaitForActiveShards(state: BulkRequest, value: Types.WaitForActiveShards) =
             { state with WaitForActiveShards = Some value }
 
         [<CustomOperation("requireAlias")>]
@@ -144,19 +145,19 @@ module GlobalOperations =
             { req with ListExecutedPipelines = Some value }
         let withPipeline (value: string) (req: BulkRequest) =
             { req with Pipeline = Some value }
-        let withRefresh (value: CoreTypes.Refresh) (req: BulkRequest) =
+        let withRefresh (value: Types.Refresh) (req: BulkRequest) =
             { req with Refresh = Some value }
-        let withRouting (value: CoreTypes.Routing) (req: BulkRequest) =
+        let withRouting (value: Types.Routing) (req: BulkRequest) =
             { req with Routing = Some value }
-        let withSource (value: GlobalSearchTypes.SourceConfigParam) (req: BulkRequest) =
+        let withSource (value: Types.SourceConfigParam) (req: BulkRequest) =
             { req with Source = Some value }
-        let withSourceExcludes (value: CoreTypes.Fields) (req: BulkRequest) =
+        let withSourceExcludes (value: Types.Fields) (req: BulkRequest) =
             { req with SourceExcludes = Some value }
-        let withSourceIncludes (value: CoreTypes.Fields) (req: BulkRequest) =
+        let withSourceIncludes (value: Types.Fields) (req: BulkRequest) =
             { req with SourceIncludes = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: BulkRequest) =
+        let withTimeout (value: Types.Duration) (req: BulkRequest) =
             { req with Timeout = Some value }
-        let withWaitForActiveShards (value: CoreTypes.WaitForActiveShards) (req: BulkRequest) =
+        let withWaitForActiveShards (value: Types.WaitForActiveShards) (req: BulkRequest) =
             { req with WaitForActiveShards = Some value }
         let withRequireAlias (value: bool) (req: BulkRequest) =
             { req with RequireAlias = Some value }
@@ -164,12 +165,12 @@ module GlobalOperations =
             { req with RequireDataStream = Some value }
 
     type CapabilitiesRequest = {
-        Method: GlobalCapabilities.RestMethod option
+        Method: Types.RestMethod option
         Path: string option
         Parameters: System.Text.Json.JsonElement option
         Capabilities: System.Text.Json.JsonElement option
         LocalOnly: bool option
-        Timeout: CoreTypes.Duration option
+        Timeout: Types.Duration option
     }
 
         with
@@ -209,7 +210,7 @@ module GlobalOperations =
             }
 
         [<CustomOperation("method")>]
-        member _.Method(state: CapabilitiesRequest, value: GlobalCapabilities.RestMethod) =
+        member _.Method(state: CapabilitiesRequest, value: Types.RestMethod) =
             { state with Method = Some value }
 
         [<CustomOperation("path")>]
@@ -229,13 +230,13 @@ module GlobalOperations =
             { state with LocalOnly = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: CapabilitiesRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: CapabilitiesRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
     let capabilitiesRequest = CapabilitiesRequestBuilder()
 
     module Capabilities =
-        let withMethod (value: GlobalCapabilities.RestMethod) (req: CapabilitiesRequest) =
+        let withMethod (value: Types.RestMethod) (req: CapabilitiesRequest) =
             { req with Method = Some value }
         let withPath (value: string) (req: CapabilitiesRequest) =
             { req with Path = Some value }
@@ -245,12 +246,12 @@ module GlobalOperations =
             { req with Capabilities = Some value }
         let withLocalOnly (value: bool) (req: CapabilitiesRequest) =
             { req with LocalOnly = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: CapabilitiesRequest) =
+        let withTimeout (value: Types.Duration) (req: CapabilitiesRequest) =
             { req with Timeout = Some value }
 
     type ClearScrollRequest = {
-        ScrollId: CoreTypes.ScrollIds
-        ScrollId: CoreTypes.ScrollIds option
+        ScrollId: Types.ScrollIds
+        ScrollId: Types.ScrollIds option
     }
 
         with
@@ -275,21 +276,21 @@ module GlobalOperations =
             }
 
         [<CustomOperation("scrollId")>]
-        member _.ScrollId(state: ClearScrollRequest, value: CoreTypes.ScrollIds) =
+        member _.ScrollId(state: ClearScrollRequest, value: Types.ScrollIds) =
             { state with ScrollId = value }
 
         [<CustomOperation("scrollId")>]
-        member _.ScrollId(state: ClearScrollRequest, value: CoreTypes.ScrollIds) =
+        member _.ScrollId(state: ClearScrollRequest, value: Types.ScrollIds) =
             { state with ScrollId = Some value }
 
     let clearScrollRequest = ClearScrollRequestBuilder()
 
     module ClearScroll =
-        let withScrollId (value: CoreTypes.ScrollIds) (req: ClearScrollRequest) =
+        let withScrollId (value: Types.ScrollIds) (req: ClearScrollRequest) =
             { req with ScrollId = Some value }
 
     type ClosePointInTimeRequest = {
-        Id: CoreTypes.Id
+        Id: Types.Id
     }
 
         with
@@ -313,33 +314,33 @@ module GlobalOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: ClosePointInTimeRequest, value: CoreTypes.Id) =
+        member _.Id(state: ClosePointInTimeRequest, value: Types.Id) =
             { state with Id = value }
 
     let closePointInTimeRequest = ClosePointInTimeRequestBuilder()
 
     module ClosePointInTime =
-        let withId (value: CoreTypes.Id) (req: ClosePointInTimeRequest) =
+        let withId (value: Types.Id) (req: ClosePointInTimeRequest) =
             { req with Id = value }
 
     type CountRequest = {
-        Index: CoreTypes.Indices
+        Index: Types.Indices
         AllowNoIndices: bool option
         Analyzer: string option
         AnalyzeWildcard: bool option
-        DefaultOperator: CoreTypes.Operator option
+        DefaultOperator: Types.Operator option
         Df: string option
-        ExpandWildcards: CoreTypes.ExpandWildcards option
+        ExpandWildcards: Types.ExpandWildcards option
         IgnoreThrottled: bool option
         IgnoreUnavailable: bool option
         Lenient: bool option
-        MinScore: CoreTypes.Double option
+        MinScore: Types.Double option
         Preference: string option
-        Routing: CoreTypes.Routing option
-        TerminateAfter: CoreTypes.Long option
+        Routing: Types.Routing option
+        TerminateAfter: Types.Long option
         Q: string option
-        Query: CoreTypes.QueryContainer option
-        ProjectRouting: CoreTypes.ProjectRouting option
+        Query: Types.QueryContainer option
+        ProjectRouting: Types.ProjectRouting option
     }
 
         with
@@ -399,7 +400,7 @@ module GlobalOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: CountRequest, value: CoreTypes.Indices) =
+        member _.Index(state: CountRequest, value: Types.Indices) =
             { state with Index = value }
 
         [<CustomOperation("allowNoIndices")>]
@@ -415,7 +416,7 @@ module GlobalOperations =
             { state with AnalyzeWildcard = Some value }
 
         [<CustomOperation("defaultOperator")>]
-        member _.DefaultOperator(state: CountRequest, value: CoreTypes.Operator) =
+        member _.DefaultOperator(state: CountRequest, value: Types.Operator) =
             { state with DefaultOperator = Some value }
 
         [<CustomOperation("df")>]
@@ -423,7 +424,7 @@ module GlobalOperations =
             { state with Df = Some value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: CountRequest, value: CoreTypes.ExpandWildcards) =
+        member _.ExpandWildcards(state: CountRequest, value: Types.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("ignoreThrottled")>]
@@ -439,7 +440,7 @@ module GlobalOperations =
             { state with Lenient = Some value }
 
         [<CustomOperation("minScore")>]
-        member _.MinScore(state: CountRequest, value: CoreTypes.Double) =
+        member _.MinScore(state: CountRequest, value: Types.Double) =
             { state with MinScore = Some value }
 
         [<CustomOperation("preference")>]
@@ -447,11 +448,11 @@ module GlobalOperations =
             { state with Preference = Some value }
 
         [<CustomOperation("routing")>]
-        member _.Routing(state: CountRequest, value: CoreTypes.Routing) =
+        member _.Routing(state: CountRequest, value: Types.Routing) =
             { state with Routing = Some value }
 
         [<CustomOperation("terminateAfter")>]
-        member _.TerminateAfter(state: CountRequest, value: CoreTypes.Long) =
+        member _.TerminateAfter(state: CountRequest, value: Types.Long) =
             { state with TerminateAfter = Some value }
 
         [<CustomOperation("q")>]
@@ -459,11 +460,11 @@ module GlobalOperations =
             { state with Q = Some value }
 
         [<CustomOperation("query")>]
-        member _.Query(state: CountRequest, value: CoreTypes.QueryContainer) =
+        member _.Query(state: CountRequest, value: Types.QueryContainer) =
             { state with Query = Some value }
 
         [<CustomOperation("projectRouting")>]
-        member _.ProjectRouting(state: CountRequest, value: CoreTypes.ProjectRouting) =
+        member _.ProjectRouting(state: CountRequest, value: Types.ProjectRouting) =
             { state with ProjectRouting = Some value }
 
     let countRequest = CountRequestBuilder()
@@ -475,11 +476,11 @@ module GlobalOperations =
             { req with Analyzer = Some value }
         let withAnalyzeWildcard (value: bool) (req: CountRequest) =
             { req with AnalyzeWildcard = Some value }
-        let withDefaultOperator (value: CoreTypes.Operator) (req: CountRequest) =
+        let withDefaultOperator (value: Types.Operator) (req: CountRequest) =
             { req with DefaultOperator = Some value }
         let withDf (value: string) (req: CountRequest) =
             { req with Df = Some value }
-        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: CountRequest) =
+        let withExpandWildcards (value: Types.ExpandWildcards) (req: CountRequest) =
             { req with ExpandWildcards = Some value }
         let withIgnoreThrottled (value: bool) (req: CountRequest) =
             { req with IgnoreThrottled = Some value }
@@ -487,34 +488,34 @@ module GlobalOperations =
             { req with IgnoreUnavailable = Some value }
         let withLenient (value: bool) (req: CountRequest) =
             { req with Lenient = Some value }
-        let withMinScore (value: CoreTypes.Double) (req: CountRequest) =
+        let withMinScore (value: Types.Double) (req: CountRequest) =
             { req with MinScore = Some value }
         let withPreference (value: string) (req: CountRequest) =
             { req with Preference = Some value }
-        let withRouting (value: CoreTypes.Routing) (req: CountRequest) =
+        let withRouting (value: Types.Routing) (req: CountRequest) =
             { req with Routing = Some value }
-        let withTerminateAfter (value: CoreTypes.Long) (req: CountRequest) =
+        let withTerminateAfter (value: Types.Long) (req: CountRequest) =
             { req with TerminateAfter = Some value }
         let withQ (value: string) (req: CountRequest) =
             { req with Q = Some value }
-        let withQuery (value: CoreTypes.QueryContainer) (req: CountRequest) =
+        let withQuery (value: Types.QueryContainer) (req: CountRequest) =
             { req with Query = Some value }
-        let withProjectRouting (value: CoreTypes.ProjectRouting) (req: CountRequest) =
+        let withProjectRouting (value: Types.ProjectRouting) (req: CountRequest) =
             { req with ProjectRouting = Some value }
 
     type CreateRequest = {
-        Id: CoreTypes.Id
-        Index: CoreTypes.IndexName
+        Id: Types.Id
+        Index: Types.IndexName
         IncludeSourceOnError: bool option
         Pipeline: string option
-        Refresh: CoreTypes.Refresh option
+        Refresh: Types.Refresh option
         RequireAlias: bool option
         RequireDataStream: bool option
-        Routing: CoreTypes.Routing option
-        Timeout: CoreTypes.Duration option
-        Version: CoreTypes.VersionNumber option
-        VersionType: CoreTypes.VersionType option
-        WaitForActiveShards: CoreTypes.WaitForActiveShards option
+        Routing: Types.Routing option
+        Timeout: Types.Duration option
+        Version: Types.VersionNumber option
+        VersionType: Types.VersionType option
+        WaitForActiveShards: Types.WaitForActiveShards option
         Document: obj
     }
 
@@ -546,7 +547,7 @@ module GlobalOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type CreateResponse = CoreTypes.WriteResponseBase
+    type CreateResponse = Types.WriteResponseBase
 
     type CreateRequestBuilder() =
         member _.Yield(_: unit) : CreateRequest =
@@ -567,11 +568,11 @@ module GlobalOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: CreateRequest, value: CoreTypes.Id) =
+        member _.Id(state: CreateRequest, value: Types.Id) =
             { state with Id = value }
 
         [<CustomOperation("index")>]
-        member _.Index(state: CreateRequest, value: CoreTypes.IndexName) =
+        member _.Index(state: CreateRequest, value: Types.IndexName) =
             { state with Index = value }
 
         [<CustomOperation("includeSourceOnError")>]
@@ -583,7 +584,7 @@ module GlobalOperations =
             { state with Pipeline = Some value }
 
         [<CustomOperation("refresh")>]
-        member _.Refresh(state: CreateRequest, value: CoreTypes.Refresh) =
+        member _.Refresh(state: CreateRequest, value: Types.Refresh) =
             { state with Refresh = Some value }
 
         [<CustomOperation("requireAlias")>]
@@ -595,23 +596,23 @@ module GlobalOperations =
             { state with RequireDataStream = Some value }
 
         [<CustomOperation("routing")>]
-        member _.Routing(state: CreateRequest, value: CoreTypes.Routing) =
+        member _.Routing(state: CreateRequest, value: Types.Routing) =
             { state with Routing = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: CreateRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: CreateRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: CreateRequest, value: CoreTypes.VersionNumber) =
+        member _.Version(state: CreateRequest, value: Types.VersionNumber) =
             { state with Version = Some value }
 
         [<CustomOperation("versionType")>]
-        member _.VersionType(state: CreateRequest, value: CoreTypes.VersionType) =
+        member _.VersionType(state: CreateRequest, value: Types.VersionType) =
             { state with VersionType = Some value }
 
         [<CustomOperation("waitForActiveShards")>]
-        member _.WaitForActiveShards(state: CreateRequest, value: CoreTypes.WaitForActiveShards) =
+        member _.WaitForActiveShards(state: CreateRequest, value: Types.WaitForActiveShards) =
             { state with WaitForActiveShards = Some value }
 
         [<CustomOperation("document")>]
@@ -625,34 +626,34 @@ module GlobalOperations =
             { req with IncludeSourceOnError = Some value }
         let withPipeline (value: string) (req: CreateRequest) =
             { req with Pipeline = Some value }
-        let withRefresh (value: CoreTypes.Refresh) (req: CreateRequest) =
+        let withRefresh (value: Types.Refresh) (req: CreateRequest) =
             { req with Refresh = Some value }
         let withRequireAlias (value: bool) (req: CreateRequest) =
             { req with RequireAlias = Some value }
         let withRequireDataStream (value: bool) (req: CreateRequest) =
             { req with RequireDataStream = Some value }
-        let withRouting (value: CoreTypes.Routing) (req: CreateRequest) =
+        let withRouting (value: Types.Routing) (req: CreateRequest) =
             { req with Routing = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: CreateRequest) =
+        let withTimeout (value: Types.Duration) (req: CreateRequest) =
             { req with Timeout = Some value }
-        let withVersion (value: CoreTypes.VersionNumber) (req: CreateRequest) =
+        let withVersion (value: Types.VersionNumber) (req: CreateRequest) =
             { req with Version = Some value }
-        let withVersionType (value: CoreTypes.VersionType) (req: CreateRequest) =
+        let withVersionType (value: Types.VersionType) (req: CreateRequest) =
             { req with VersionType = Some value }
-        let withWaitForActiveShards (value: CoreTypes.WaitForActiveShards) (req: CreateRequest) =
+        let withWaitForActiveShards (value: Types.WaitForActiveShards) (req: CreateRequest) =
             { req with WaitForActiveShards = Some value }
 
     type DeleteRequest = {
-        Id: CoreTypes.Id
-        Index: CoreTypes.IndexName
-        IfPrimaryTerm: CoreTypes.Long option
-        IfSeqNo: CoreTypes.SequenceNumber option
-        Refresh: CoreTypes.Refresh option
-        Routing: CoreTypes.Routing option
-        Timeout: CoreTypes.Duration option
-        Version: CoreTypes.VersionNumber option
-        VersionType: CoreTypes.VersionType option
-        WaitForActiveShards: CoreTypes.WaitForActiveShards option
+        Id: Types.Id
+        Index: Types.IndexName
+        IfPrimaryTerm: Types.Long option
+        IfSeqNo: Types.SequenceNumber option
+        Refresh: Types.Refresh option
+        Routing: Types.Routing option
+        Timeout: Types.Duration option
+        Version: Types.VersionNumber option
+        VersionType: Types.VersionType option
+        WaitForActiveShards: Types.WaitForActiveShards option
     }
 
         with
@@ -680,7 +681,7 @@ module GlobalOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type DeleteResponse = CoreTypes.WriteResponseBase
+    type DeleteResponse = Types.WriteResponseBase
 
     type DeleteRequestBuilder() =
         member _.Yield(_: unit) : DeleteRequest =
@@ -698,100 +699,100 @@ module GlobalOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: DeleteRequest, value: CoreTypes.Id) =
+        member _.Id(state: DeleteRequest, value: Types.Id) =
             { state with Id = value }
 
         [<CustomOperation("index")>]
-        member _.Index(state: DeleteRequest, value: CoreTypes.IndexName) =
+        member _.Index(state: DeleteRequest, value: Types.IndexName) =
             { state with Index = value }
 
         [<CustomOperation("ifPrimaryTerm")>]
-        member _.IfPrimaryTerm(state: DeleteRequest, value: CoreTypes.Long) =
+        member _.IfPrimaryTerm(state: DeleteRequest, value: Types.Long) =
             { state with IfPrimaryTerm = Some value }
 
         [<CustomOperation("ifSeqNo")>]
-        member _.IfSeqNo(state: DeleteRequest, value: CoreTypes.SequenceNumber) =
+        member _.IfSeqNo(state: DeleteRequest, value: Types.SequenceNumber) =
             { state with IfSeqNo = Some value }
 
         [<CustomOperation("refresh")>]
-        member _.Refresh(state: DeleteRequest, value: CoreTypes.Refresh) =
+        member _.Refresh(state: DeleteRequest, value: Types.Refresh) =
             { state with Refresh = Some value }
 
         [<CustomOperation("routing")>]
-        member _.Routing(state: DeleteRequest, value: CoreTypes.Routing) =
+        member _.Routing(state: DeleteRequest, value: Types.Routing) =
             { state with Routing = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: DeleteRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: DeleteRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: DeleteRequest, value: CoreTypes.VersionNumber) =
+        member _.Version(state: DeleteRequest, value: Types.VersionNumber) =
             { state with Version = Some value }
 
         [<CustomOperation("versionType")>]
-        member _.VersionType(state: DeleteRequest, value: CoreTypes.VersionType) =
+        member _.VersionType(state: DeleteRequest, value: Types.VersionType) =
             { state with VersionType = Some value }
 
         [<CustomOperation("waitForActiveShards")>]
-        member _.WaitForActiveShards(state: DeleteRequest, value: CoreTypes.WaitForActiveShards) =
+        member _.WaitForActiveShards(state: DeleteRequest, value: Types.WaitForActiveShards) =
             { state with WaitForActiveShards = Some value }
 
     let deleteRequest = DeleteRequestBuilder()
 
     module Delete =
-        let withIfPrimaryTerm (value: CoreTypes.Long) (req: DeleteRequest) =
+        let withIfPrimaryTerm (value: Types.Long) (req: DeleteRequest) =
             { req with IfPrimaryTerm = Some value }
-        let withIfSeqNo (value: CoreTypes.SequenceNumber) (req: DeleteRequest) =
+        let withIfSeqNo (value: Types.SequenceNumber) (req: DeleteRequest) =
             { req with IfSeqNo = Some value }
-        let withRefresh (value: CoreTypes.Refresh) (req: DeleteRequest) =
+        let withRefresh (value: Types.Refresh) (req: DeleteRequest) =
             { req with Refresh = Some value }
-        let withRouting (value: CoreTypes.Routing) (req: DeleteRequest) =
+        let withRouting (value: Types.Routing) (req: DeleteRequest) =
             { req with Routing = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: DeleteRequest) =
+        let withTimeout (value: Types.Duration) (req: DeleteRequest) =
             { req with Timeout = Some value }
-        let withVersion (value: CoreTypes.VersionNumber) (req: DeleteRequest) =
+        let withVersion (value: Types.VersionNumber) (req: DeleteRequest) =
             { req with Version = Some value }
-        let withVersionType (value: CoreTypes.VersionType) (req: DeleteRequest) =
+        let withVersionType (value: Types.VersionType) (req: DeleteRequest) =
             { req with VersionType = Some value }
-        let withWaitForActiveShards (value: CoreTypes.WaitForActiveShards) (req: DeleteRequest) =
+        let withWaitForActiveShards (value: Types.WaitForActiveShards) (req: DeleteRequest) =
             { req with WaitForActiveShards = Some value }
 
     type DeleteByQueryRequest = {
-        Index: CoreTypes.Indices
+        Index: Types.Indices
         AllowNoIndices: bool option
         Analyzer: string option
         AnalyzeWildcard: bool option
-        Conflicts: CoreTypes.Conflicts option
-        DefaultOperator: CoreTypes.Operator option
+        Conflicts: Types.Conflicts option
+        DefaultOperator: Types.Operator option
         Df: string option
-        ExpandWildcards: CoreTypes.ExpandWildcards option
-        From: CoreTypes.Long option
+        ExpandWildcards: Types.ExpandWildcards option
+        From: Types.Long option
         IgnoreUnavailable: bool option
         Lenient: bool option
-        MaxDocs: CoreTypes.Long option
+        MaxDocs: Types.Long option
         Preference: string option
         Refresh: bool option
         RequestCache: bool option
-        RequestsPerSecond: CoreTypes.Float option
-        Routing: CoreTypes.Routing option
+        RequestsPerSecond: Types.Float option
+        Routing: Types.Routing option
         Q: string option
-        Scroll: CoreTypes.Duration option
-        ScrollSize: CoreTypes.Long option
-        SearchTimeout: CoreTypes.Duration option
-        SearchType: CoreTypes.SearchType option
-        Slices: CoreTypes.Slices option
+        Scroll: Types.Duration option
+        ScrollSize: Types.Long option
+        SearchTimeout: Types.Duration option
+        SearchType: Types.SearchType option
+        Slices: Types.Slices option
         Sort: string list option
         Stats: string list option
-        TerminateAfter: CoreTypes.Long option
-        Timeout: CoreTypes.Duration option
+        TerminateAfter: Types.Long option
+        Timeout: Types.Duration option
         Version: bool option
-        WaitForActiveShards: CoreTypes.WaitForActiveShards option
+        WaitForActiveShards: Types.WaitForActiveShards option
         WaitForCompletion: bool option
-        MaxDocs: CoreTypes.Long option
-        Query: CoreTypes.QueryContainer option
-        Slice: CoreTypes.SlicedScroll option
-        Sort: CoreTypes.Sort option
+        MaxDocs: Types.Long option
+        Query: Types.QueryContainer option
+        Slice: Types.SlicedScroll option
+        Sort: Types.Sort option
     }
 
         with
@@ -883,7 +884,7 @@ module GlobalOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: DeleteByQueryRequest, value: CoreTypes.Indices) =
+        member _.Index(state: DeleteByQueryRequest, value: Types.Indices) =
             { state with Index = value }
 
         [<CustomOperation("allowNoIndices")>]
@@ -899,11 +900,11 @@ module GlobalOperations =
             { state with AnalyzeWildcard = Some value }
 
         [<CustomOperation("conflicts")>]
-        member _.Conflicts(state: DeleteByQueryRequest, value: CoreTypes.Conflicts) =
+        member _.Conflicts(state: DeleteByQueryRequest, value: Types.Conflicts) =
             { state with Conflicts = Some value }
 
         [<CustomOperation("defaultOperator")>]
-        member _.DefaultOperator(state: DeleteByQueryRequest, value: CoreTypes.Operator) =
+        member _.DefaultOperator(state: DeleteByQueryRequest, value: Types.Operator) =
             { state with DefaultOperator = Some value }
 
         [<CustomOperation("df")>]
@@ -911,11 +912,11 @@ module GlobalOperations =
             { state with Df = Some value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: DeleteByQueryRequest, value: CoreTypes.ExpandWildcards) =
+        member _.ExpandWildcards(state: DeleteByQueryRequest, value: Types.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("from")>]
-        member _.From(state: DeleteByQueryRequest, value: CoreTypes.Long) =
+        member _.From(state: DeleteByQueryRequest, value: Types.Long) =
             { state with From = Some value }
 
         [<CustomOperation("ignoreUnavailable")>]
@@ -927,7 +928,7 @@ module GlobalOperations =
             { state with Lenient = Some value }
 
         [<CustomOperation("maxDocs")>]
-        member _.MaxDocs(state: DeleteByQueryRequest, value: CoreTypes.Long) =
+        member _.MaxDocs(state: DeleteByQueryRequest, value: Types.Long) =
             { state with MaxDocs = Some value }
 
         [<CustomOperation("preference")>]
@@ -943,11 +944,11 @@ module GlobalOperations =
             { state with RequestCache = Some value }
 
         [<CustomOperation("requestsPerSecond")>]
-        member _.RequestsPerSecond(state: DeleteByQueryRequest, value: CoreTypes.Float) =
+        member _.RequestsPerSecond(state: DeleteByQueryRequest, value: Types.Float) =
             { state with RequestsPerSecond = Some value }
 
         [<CustomOperation("routing")>]
-        member _.Routing(state: DeleteByQueryRequest, value: CoreTypes.Routing) =
+        member _.Routing(state: DeleteByQueryRequest, value: Types.Routing) =
             { state with Routing = Some value }
 
         [<CustomOperation("q")>]
@@ -955,23 +956,23 @@ module GlobalOperations =
             { state with Q = Some value }
 
         [<CustomOperation("scroll")>]
-        member _.Scroll(state: DeleteByQueryRequest, value: CoreTypes.Duration) =
+        member _.Scroll(state: DeleteByQueryRequest, value: Types.Duration) =
             { state with Scroll = Some value }
 
         [<CustomOperation("scrollSize")>]
-        member _.ScrollSize(state: DeleteByQueryRequest, value: CoreTypes.Long) =
+        member _.ScrollSize(state: DeleteByQueryRequest, value: Types.Long) =
             { state with ScrollSize = Some value }
 
         [<CustomOperation("searchTimeout")>]
-        member _.SearchTimeout(state: DeleteByQueryRequest, value: CoreTypes.Duration) =
+        member _.SearchTimeout(state: DeleteByQueryRequest, value: Types.Duration) =
             { state with SearchTimeout = Some value }
 
         [<CustomOperation("searchType")>]
-        member _.SearchType(state: DeleteByQueryRequest, value: CoreTypes.SearchType) =
+        member _.SearchType(state: DeleteByQueryRequest, value: Types.SearchType) =
             { state with SearchType = Some value }
 
         [<CustomOperation("slices")>]
-        member _.Slices(state: DeleteByQueryRequest, value: CoreTypes.Slices) =
+        member _.Slices(state: DeleteByQueryRequest, value: Types.Slices) =
             { state with Slices = Some value }
 
         [<CustomOperation("sort")>]
@@ -983,11 +984,11 @@ module GlobalOperations =
             { state with Stats = Some value }
 
         [<CustomOperation("terminateAfter")>]
-        member _.TerminateAfter(state: DeleteByQueryRequest, value: CoreTypes.Long) =
+        member _.TerminateAfter(state: DeleteByQueryRequest, value: Types.Long) =
             { state with TerminateAfter = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: DeleteByQueryRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: DeleteByQueryRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("version")>]
@@ -995,7 +996,7 @@ module GlobalOperations =
             { state with Version = Some value }
 
         [<CustomOperation("waitForActiveShards")>]
-        member _.WaitForActiveShards(state: DeleteByQueryRequest, value: CoreTypes.WaitForActiveShards) =
+        member _.WaitForActiveShards(state: DeleteByQueryRequest, value: Types.WaitForActiveShards) =
             { state with WaitForActiveShards = Some value }
 
         [<CustomOperation("waitForCompletion")>]
@@ -1003,19 +1004,19 @@ module GlobalOperations =
             { state with WaitForCompletion = Some value }
 
         [<CustomOperation("maxDocs")>]
-        member _.MaxDocs(state: DeleteByQueryRequest, value: CoreTypes.Long) =
+        member _.MaxDocs(state: DeleteByQueryRequest, value: Types.Long) =
             { state with MaxDocs = Some value }
 
         [<CustomOperation("query")>]
-        member _.Query(state: DeleteByQueryRequest, value: CoreTypes.QueryContainer) =
+        member _.Query(state: DeleteByQueryRequest, value: Types.QueryContainer) =
             { state with Query = Some value }
 
         [<CustomOperation("slice")>]
-        member _.Slice(state: DeleteByQueryRequest, value: CoreTypes.SlicedScroll) =
+        member _.Slice(state: DeleteByQueryRequest, value: Types.SlicedScroll) =
             { state with Slice = Some value }
 
         [<CustomOperation("sort")>]
-        member _.Sort(state: DeleteByQueryRequest, value: CoreTypes.Sort) =
+        member _.Sort(state: DeleteByQueryRequest, value: Types.Sort) =
             { state with Sort = Some value }
 
     let deleteByQueryRequest = DeleteByQueryRequestBuilder()
@@ -1027,21 +1028,21 @@ module GlobalOperations =
             { req with Analyzer = Some value }
         let withAnalyzeWildcard (value: bool) (req: DeleteByQueryRequest) =
             { req with AnalyzeWildcard = Some value }
-        let withConflicts (value: CoreTypes.Conflicts) (req: DeleteByQueryRequest) =
+        let withConflicts (value: Types.Conflicts) (req: DeleteByQueryRequest) =
             { req with Conflicts = Some value }
-        let withDefaultOperator (value: CoreTypes.Operator) (req: DeleteByQueryRequest) =
+        let withDefaultOperator (value: Types.Operator) (req: DeleteByQueryRequest) =
             { req with DefaultOperator = Some value }
         let withDf (value: string) (req: DeleteByQueryRequest) =
             { req with Df = Some value }
-        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: DeleteByQueryRequest) =
+        let withExpandWildcards (value: Types.ExpandWildcards) (req: DeleteByQueryRequest) =
             { req with ExpandWildcards = Some value }
-        let withFrom (value: CoreTypes.Long) (req: DeleteByQueryRequest) =
+        let withFrom (value: Types.Long) (req: DeleteByQueryRequest) =
             { req with From = Some value }
         let withIgnoreUnavailable (value: bool) (req: DeleteByQueryRequest) =
             { req with IgnoreUnavailable = Some value }
         let withLenient (value: bool) (req: DeleteByQueryRequest) =
             { req with Lenient = Some value }
-        let withMaxDocs (value: CoreTypes.Long) (req: DeleteByQueryRequest) =
+        let withMaxDocs (value: Types.Long) (req: DeleteByQueryRequest) =
             { req with MaxDocs = Some value }
         let withPreference (value: string) (req: DeleteByQueryRequest) =
             { req with Preference = Some value }
@@ -1049,48 +1050,48 @@ module GlobalOperations =
             { req with Refresh = Some value }
         let withRequestCache (value: bool) (req: DeleteByQueryRequest) =
             { req with RequestCache = Some value }
-        let withRequestsPerSecond (value: CoreTypes.Float) (req: DeleteByQueryRequest) =
+        let withRequestsPerSecond (value: Types.Float) (req: DeleteByQueryRequest) =
             { req with RequestsPerSecond = Some value }
-        let withRouting (value: CoreTypes.Routing) (req: DeleteByQueryRequest) =
+        let withRouting (value: Types.Routing) (req: DeleteByQueryRequest) =
             { req with Routing = Some value }
         let withQ (value: string) (req: DeleteByQueryRequest) =
             { req with Q = Some value }
-        let withScroll (value: CoreTypes.Duration) (req: DeleteByQueryRequest) =
+        let withScroll (value: Types.Duration) (req: DeleteByQueryRequest) =
             { req with Scroll = Some value }
-        let withScrollSize (value: CoreTypes.Long) (req: DeleteByQueryRequest) =
+        let withScrollSize (value: Types.Long) (req: DeleteByQueryRequest) =
             { req with ScrollSize = Some value }
-        let withSearchTimeout (value: CoreTypes.Duration) (req: DeleteByQueryRequest) =
+        let withSearchTimeout (value: Types.Duration) (req: DeleteByQueryRequest) =
             { req with SearchTimeout = Some value }
-        let withSearchType (value: CoreTypes.SearchType) (req: DeleteByQueryRequest) =
+        let withSearchType (value: Types.SearchType) (req: DeleteByQueryRequest) =
             { req with SearchType = Some value }
-        let withSlices (value: CoreTypes.Slices) (req: DeleteByQueryRequest) =
+        let withSlices (value: Types.Slices) (req: DeleteByQueryRequest) =
             { req with Slices = Some value }
         let withSort (value: string list) (req: DeleteByQueryRequest) =
             { req with Sort = Some value }
         let withStats (value: string list) (req: DeleteByQueryRequest) =
             { req with Stats = Some value }
-        let withTerminateAfter (value: CoreTypes.Long) (req: DeleteByQueryRequest) =
+        let withTerminateAfter (value: Types.Long) (req: DeleteByQueryRequest) =
             { req with TerminateAfter = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: DeleteByQueryRequest) =
+        let withTimeout (value: Types.Duration) (req: DeleteByQueryRequest) =
             { req with Timeout = Some value }
         let withVersion (value: bool) (req: DeleteByQueryRequest) =
             { req with Version = Some value }
-        let withWaitForActiveShards (value: CoreTypes.WaitForActiveShards) (req: DeleteByQueryRequest) =
+        let withWaitForActiveShards (value: Types.WaitForActiveShards) (req: DeleteByQueryRequest) =
             { req with WaitForActiveShards = Some value }
         let withWaitForCompletion (value: bool) (req: DeleteByQueryRequest) =
             { req with WaitForCompletion = Some value }
-        let withMaxDocs (value: CoreTypes.Long) (req: DeleteByQueryRequest) =
+        let withMaxDocs (value: Types.Long) (req: DeleteByQueryRequest) =
             { req with MaxDocs = Some value }
-        let withQuery (value: CoreTypes.QueryContainer) (req: DeleteByQueryRequest) =
+        let withQuery (value: Types.QueryContainer) (req: DeleteByQueryRequest) =
             { req with Query = Some value }
-        let withSlice (value: CoreTypes.SlicedScroll) (req: DeleteByQueryRequest) =
+        let withSlice (value: Types.SlicedScroll) (req: DeleteByQueryRequest) =
             { req with Slice = Some value }
-        let withSort (value: CoreTypes.Sort) (req: DeleteByQueryRequest) =
+        let withSort (value: Types.Sort) (req: DeleteByQueryRequest) =
             { req with Sort = Some value }
 
     type DeleteByQueryRethrottleRequest = {
-        TaskId: CoreTypes.TaskId
-        RequestsPerSecond: CoreTypes.Float
+        TaskId: Types.TaskId
+        RequestsPerSecond: Types.Float
     }
 
         with
@@ -1104,7 +1105,7 @@ module GlobalOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type DeleteByQueryRethrottleResponse = TasksTypes.TaskListResponseBase
+    type DeleteByQueryRethrottleResponse = Types.TaskListResponseBase
 
     type DeleteByQueryRethrottleRequestBuilder() =
         member _.Yield(_: unit) : DeleteByQueryRethrottleRequest =
@@ -1114,23 +1115,23 @@ module GlobalOperations =
             }
 
         [<CustomOperation("taskId")>]
-        member _.TaskId(state: DeleteByQueryRethrottleRequest, value: CoreTypes.TaskId) =
+        member _.TaskId(state: DeleteByQueryRethrottleRequest, value: Types.TaskId) =
             { state with TaskId = value }
 
         [<CustomOperation("requestsPerSecond")>]
-        member _.RequestsPerSecond(state: DeleteByQueryRethrottleRequest, value: CoreTypes.Float) =
+        member _.RequestsPerSecond(state: DeleteByQueryRethrottleRequest, value: Types.Float) =
             { state with RequestsPerSecond = value }
 
     let deleteByQueryRethrottleRequest = DeleteByQueryRethrottleRequestBuilder()
 
     module DeleteByQueryRethrottle =
-        let withRequestsPerSecond (value: CoreTypes.Float) (req: DeleteByQueryRethrottleRequest) =
+        let withRequestsPerSecond (value: Types.Float) (req: DeleteByQueryRethrottleRequest) =
             { req with RequestsPerSecond = value }
 
     type DeleteScriptRequest = {
-        Id: CoreTypes.Id
-        MasterTimeout: CoreTypes.Duration option
-        Timeout: CoreTypes.Duration option
+        Id: Types.Id
+        MasterTimeout: Types.Duration option
+        Timeout: Types.Duration option
     }
 
         with
@@ -1152,7 +1153,7 @@ module GlobalOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type DeleteScriptResponse = CoreTypes.AcknowledgedResponseBase
+    type DeleteScriptResponse = Types.AcknowledgedResponseBase
 
     type DeleteScriptRequestBuilder() =
         member _.Yield(_: unit) : DeleteScriptRequest =
@@ -1163,38 +1164,38 @@ module GlobalOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: DeleteScriptRequest, value: CoreTypes.Id) =
+        member _.Id(state: DeleteScriptRequest, value: Types.Id) =
             { state with Id = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: DeleteScriptRequest, value: CoreTypes.Duration) =
+        member _.MasterTimeout(state: DeleteScriptRequest, value: Types.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: DeleteScriptRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: DeleteScriptRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
     let deleteScriptRequest = DeleteScriptRequestBuilder()
 
     module DeleteScript =
-        let withMasterTimeout (value: CoreTypes.Duration) (req: DeleteScriptRequest) =
+        let withMasterTimeout (value: Types.Duration) (req: DeleteScriptRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: DeleteScriptRequest) =
+        let withTimeout (value: Types.Duration) (req: DeleteScriptRequest) =
             { req with Timeout = Some value }
 
     type ExistsRequest = {
-        Id: CoreTypes.Id
-        Index: CoreTypes.IndexName
+        Id: Types.Id
+        Index: Types.IndexName
         Preference: string option
         Realtime: bool option
         Refresh: bool option
-        Routing: CoreTypes.Routing option
-        Source: GlobalSearchTypes.SourceConfigParam option
-        SourceExcludes: CoreTypes.Fields option
-        SourceIncludes: CoreTypes.Fields option
-        StoredFields: CoreTypes.Fields option
-        Version: CoreTypes.VersionNumber option
-        VersionType: CoreTypes.VersionType option
+        Routing: Types.Routing option
+        Source: Types.SourceConfigParam option
+        SourceExcludes: Types.Fields option
+        SourceIncludes: Types.Fields option
+        StoredFields: Types.Fields option
+        Version: Types.VersionNumber option
+        VersionType: Types.VersionType option
     }
 
         with
@@ -1244,11 +1245,11 @@ module GlobalOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: ExistsRequest, value: CoreTypes.Id) =
+        member _.Id(state: ExistsRequest, value: Types.Id) =
             { state with Id = value }
 
         [<CustomOperation("index")>]
-        member _.Index(state: ExistsRequest, value: CoreTypes.IndexName) =
+        member _.Index(state: ExistsRequest, value: Types.IndexName) =
             { state with Index = value }
 
         [<CustomOperation("preference")>]
@@ -1264,31 +1265,31 @@ module GlobalOperations =
             { state with Refresh = Some value }
 
         [<CustomOperation("routing")>]
-        member _.Routing(state: ExistsRequest, value: CoreTypes.Routing) =
+        member _.Routing(state: ExistsRequest, value: Types.Routing) =
             { state with Routing = Some value }
 
         [<CustomOperation("source")>]
-        member _.Source(state: ExistsRequest, value: GlobalSearchTypes.SourceConfigParam) =
+        member _.Source(state: ExistsRequest, value: Types.SourceConfigParam) =
             { state with Source = Some value }
 
         [<CustomOperation("sourceExcludes")>]
-        member _.SourceExcludes(state: ExistsRequest, value: CoreTypes.Fields) =
+        member _.SourceExcludes(state: ExistsRequest, value: Types.Fields) =
             { state with SourceExcludes = Some value }
 
         [<CustomOperation("sourceIncludes")>]
-        member _.SourceIncludes(state: ExistsRequest, value: CoreTypes.Fields) =
+        member _.SourceIncludes(state: ExistsRequest, value: Types.Fields) =
             { state with SourceIncludes = Some value }
 
         [<CustomOperation("storedFields")>]
-        member _.StoredFields(state: ExistsRequest, value: CoreTypes.Fields) =
+        member _.StoredFields(state: ExistsRequest, value: Types.Fields) =
             { state with StoredFields = Some value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: ExistsRequest, value: CoreTypes.VersionNumber) =
+        member _.Version(state: ExistsRequest, value: Types.VersionNumber) =
             { state with Version = Some value }
 
         [<CustomOperation("versionType")>]
-        member _.VersionType(state: ExistsRequest, value: CoreTypes.VersionType) =
+        member _.VersionType(state: ExistsRequest, value: Types.VersionType) =
             { state with VersionType = Some value }
 
     let existsRequest = ExistsRequestBuilder()
@@ -1300,33 +1301,33 @@ module GlobalOperations =
             { req with Realtime = Some value }
         let withRefresh (value: bool) (req: ExistsRequest) =
             { req with Refresh = Some value }
-        let withRouting (value: CoreTypes.Routing) (req: ExistsRequest) =
+        let withRouting (value: Types.Routing) (req: ExistsRequest) =
             { req with Routing = Some value }
-        let withSource (value: GlobalSearchTypes.SourceConfigParam) (req: ExistsRequest) =
+        let withSource (value: Types.SourceConfigParam) (req: ExistsRequest) =
             { req with Source = Some value }
-        let withSourceExcludes (value: CoreTypes.Fields) (req: ExistsRequest) =
+        let withSourceExcludes (value: Types.Fields) (req: ExistsRequest) =
             { req with SourceExcludes = Some value }
-        let withSourceIncludes (value: CoreTypes.Fields) (req: ExistsRequest) =
+        let withSourceIncludes (value: Types.Fields) (req: ExistsRequest) =
             { req with SourceIncludes = Some value }
-        let withStoredFields (value: CoreTypes.Fields) (req: ExistsRequest) =
+        let withStoredFields (value: Types.Fields) (req: ExistsRequest) =
             { req with StoredFields = Some value }
-        let withVersion (value: CoreTypes.VersionNumber) (req: ExistsRequest) =
+        let withVersion (value: Types.VersionNumber) (req: ExistsRequest) =
             { req with Version = Some value }
-        let withVersionType (value: CoreTypes.VersionType) (req: ExistsRequest) =
+        let withVersionType (value: Types.VersionType) (req: ExistsRequest) =
             { req with VersionType = Some value }
 
     type ExistsSourceRequest = {
-        Id: CoreTypes.Id
-        Index: CoreTypes.IndexName
+        Id: Types.Id
+        Index: Types.IndexName
         Preference: string option
         Realtime: bool option
         Refresh: bool option
-        Routing: CoreTypes.Routing option
-        Source: GlobalSearchTypes.SourceConfigParam option
-        SourceExcludes: CoreTypes.Fields option
-        SourceIncludes: CoreTypes.Fields option
-        Version: CoreTypes.VersionNumber option
-        VersionType: CoreTypes.VersionType option
+        Routing: Types.Routing option
+        Source: Types.SourceConfigParam option
+        SourceExcludes: Types.Fields option
+        SourceIncludes: Types.Fields option
+        Version: Types.VersionNumber option
+        VersionType: Types.VersionType option
     }
 
         with
@@ -1374,11 +1375,11 @@ module GlobalOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: ExistsSourceRequest, value: CoreTypes.Id) =
+        member _.Id(state: ExistsSourceRequest, value: Types.Id) =
             { state with Id = value }
 
         [<CustomOperation("index")>]
-        member _.Index(state: ExistsSourceRequest, value: CoreTypes.IndexName) =
+        member _.Index(state: ExistsSourceRequest, value: Types.IndexName) =
             { state with Index = value }
 
         [<CustomOperation("preference")>]
@@ -1394,27 +1395,27 @@ module GlobalOperations =
             { state with Refresh = Some value }
 
         [<CustomOperation("routing")>]
-        member _.Routing(state: ExistsSourceRequest, value: CoreTypes.Routing) =
+        member _.Routing(state: ExistsSourceRequest, value: Types.Routing) =
             { state with Routing = Some value }
 
         [<CustomOperation("source")>]
-        member _.Source(state: ExistsSourceRequest, value: GlobalSearchTypes.SourceConfigParam) =
+        member _.Source(state: ExistsSourceRequest, value: Types.SourceConfigParam) =
             { state with Source = Some value }
 
         [<CustomOperation("sourceExcludes")>]
-        member _.SourceExcludes(state: ExistsSourceRequest, value: CoreTypes.Fields) =
+        member _.SourceExcludes(state: ExistsSourceRequest, value: Types.Fields) =
             { state with SourceExcludes = Some value }
 
         [<CustomOperation("sourceIncludes")>]
-        member _.SourceIncludes(state: ExistsSourceRequest, value: CoreTypes.Fields) =
+        member _.SourceIncludes(state: ExistsSourceRequest, value: Types.Fields) =
             { state with SourceIncludes = Some value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: ExistsSourceRequest, value: CoreTypes.VersionNumber) =
+        member _.Version(state: ExistsSourceRequest, value: Types.VersionNumber) =
             { state with Version = Some value }
 
         [<CustomOperation("versionType")>]
-        member _.VersionType(state: ExistsSourceRequest, value: CoreTypes.VersionType) =
+        member _.VersionType(state: ExistsSourceRequest, value: Types.VersionType) =
             { state with VersionType = Some value }
 
     let existsSourceRequest = ExistsSourceRequestBuilder()
@@ -1426,35 +1427,35 @@ module GlobalOperations =
             { req with Realtime = Some value }
         let withRefresh (value: bool) (req: ExistsSourceRequest) =
             { req with Refresh = Some value }
-        let withRouting (value: CoreTypes.Routing) (req: ExistsSourceRequest) =
+        let withRouting (value: Types.Routing) (req: ExistsSourceRequest) =
             { req with Routing = Some value }
-        let withSource (value: GlobalSearchTypes.SourceConfigParam) (req: ExistsSourceRequest) =
+        let withSource (value: Types.SourceConfigParam) (req: ExistsSourceRequest) =
             { req with Source = Some value }
-        let withSourceExcludes (value: CoreTypes.Fields) (req: ExistsSourceRequest) =
+        let withSourceExcludes (value: Types.Fields) (req: ExistsSourceRequest) =
             { req with SourceExcludes = Some value }
-        let withSourceIncludes (value: CoreTypes.Fields) (req: ExistsSourceRequest) =
+        let withSourceIncludes (value: Types.Fields) (req: ExistsSourceRequest) =
             { req with SourceIncludes = Some value }
-        let withVersion (value: CoreTypes.VersionNumber) (req: ExistsSourceRequest) =
+        let withVersion (value: Types.VersionNumber) (req: ExistsSourceRequest) =
             { req with Version = Some value }
-        let withVersionType (value: CoreTypes.VersionType) (req: ExistsSourceRequest) =
+        let withVersionType (value: Types.VersionType) (req: ExistsSourceRequest) =
             { req with VersionType = Some value }
 
     type ExplainRequest = {
-        Id: CoreTypes.Id
-        Index: CoreTypes.IndexName
+        Id: Types.Id
+        Index: Types.IndexName
         Analyzer: string option
         AnalyzeWildcard: bool option
-        DefaultOperator: CoreTypes.Operator option
+        DefaultOperator: Types.Operator option
         Df: string option
         Lenient: bool option
         Preference: string option
-        Routing: CoreTypes.Routing option
-        Source: GlobalSearchTypes.SourceConfigParam option
-        SourceExcludes: CoreTypes.Fields option
-        SourceIncludes: CoreTypes.Fields option
-        StoredFields: CoreTypes.Fields option
+        Routing: Types.Routing option
+        Source: Types.SourceConfigParam option
+        SourceExcludes: Types.Fields option
+        SourceIncludes: Types.Fields option
+        StoredFields: Types.Fields option
         Q: string option
-        Query: CoreTypes.QueryContainer option
+        Query: Types.QueryContainer option
     }
 
         with
@@ -1510,11 +1511,11 @@ module GlobalOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: ExplainRequest, value: CoreTypes.Id) =
+        member _.Id(state: ExplainRequest, value: Types.Id) =
             { state with Id = value }
 
         [<CustomOperation("index")>]
-        member _.Index(state: ExplainRequest, value: CoreTypes.IndexName) =
+        member _.Index(state: ExplainRequest, value: Types.IndexName) =
             { state with Index = value }
 
         [<CustomOperation("analyzer")>]
@@ -1526,7 +1527,7 @@ module GlobalOperations =
             { state with AnalyzeWildcard = Some value }
 
         [<CustomOperation("defaultOperator")>]
-        member _.DefaultOperator(state: ExplainRequest, value: CoreTypes.Operator) =
+        member _.DefaultOperator(state: ExplainRequest, value: Types.Operator) =
             { state with DefaultOperator = Some value }
 
         [<CustomOperation("df")>]
@@ -1542,23 +1543,23 @@ module GlobalOperations =
             { state with Preference = Some value }
 
         [<CustomOperation("routing")>]
-        member _.Routing(state: ExplainRequest, value: CoreTypes.Routing) =
+        member _.Routing(state: ExplainRequest, value: Types.Routing) =
             { state with Routing = Some value }
 
         [<CustomOperation("source")>]
-        member _.Source(state: ExplainRequest, value: GlobalSearchTypes.SourceConfigParam) =
+        member _.Source(state: ExplainRequest, value: Types.SourceConfigParam) =
             { state with Source = Some value }
 
         [<CustomOperation("sourceExcludes")>]
-        member _.SourceExcludes(state: ExplainRequest, value: CoreTypes.Fields) =
+        member _.SourceExcludes(state: ExplainRequest, value: Types.Fields) =
             { state with SourceExcludes = Some value }
 
         [<CustomOperation("sourceIncludes")>]
-        member _.SourceIncludes(state: ExplainRequest, value: CoreTypes.Fields) =
+        member _.SourceIncludes(state: ExplainRequest, value: Types.Fields) =
             { state with SourceIncludes = Some value }
 
         [<CustomOperation("storedFields")>]
-        member _.StoredFields(state: ExplainRequest, value: CoreTypes.Fields) =
+        member _.StoredFields(state: ExplainRequest, value: Types.Fields) =
             { state with StoredFields = Some value }
 
         [<CustomOperation("q")>]
@@ -1566,7 +1567,7 @@ module GlobalOperations =
             { state with Q = Some value }
 
         [<CustomOperation("query")>]
-        member _.Query(state: ExplainRequest, value: CoreTypes.QueryContainer) =
+        member _.Query(state: ExplainRequest, value: Types.QueryContainer) =
             { state with Query = Some value }
 
     let explainRequest = ExplainRequestBuilder()
@@ -1576,7 +1577,7 @@ module GlobalOperations =
             { req with Analyzer = Some value }
         let withAnalyzeWildcard (value: bool) (req: ExplainRequest) =
             { req with AnalyzeWildcard = Some value }
-        let withDefaultOperator (value: CoreTypes.Operator) (req: ExplainRequest) =
+        let withDefaultOperator (value: Types.Operator) (req: ExplainRequest) =
             { req with DefaultOperator = Some value }
         let withDf (value: string) (req: ExplainRequest) =
             { req with Df = Some value }
@@ -1584,35 +1585,35 @@ module GlobalOperations =
             { req with Lenient = Some value }
         let withPreference (value: string) (req: ExplainRequest) =
             { req with Preference = Some value }
-        let withRouting (value: CoreTypes.Routing) (req: ExplainRequest) =
+        let withRouting (value: Types.Routing) (req: ExplainRequest) =
             { req with Routing = Some value }
-        let withSource (value: GlobalSearchTypes.SourceConfigParam) (req: ExplainRequest) =
+        let withSource (value: Types.SourceConfigParam) (req: ExplainRequest) =
             { req with Source = Some value }
-        let withSourceExcludes (value: CoreTypes.Fields) (req: ExplainRequest) =
+        let withSourceExcludes (value: Types.Fields) (req: ExplainRequest) =
             { req with SourceExcludes = Some value }
-        let withSourceIncludes (value: CoreTypes.Fields) (req: ExplainRequest) =
+        let withSourceIncludes (value: Types.Fields) (req: ExplainRequest) =
             { req with SourceIncludes = Some value }
-        let withStoredFields (value: CoreTypes.Fields) (req: ExplainRequest) =
+        let withStoredFields (value: Types.Fields) (req: ExplainRequest) =
             { req with StoredFields = Some value }
         let withQ (value: string) (req: ExplainRequest) =
             { req with Q = Some value }
-        let withQuery (value: CoreTypes.QueryContainer) (req: ExplainRequest) =
+        let withQuery (value: Types.QueryContainer) (req: ExplainRequest) =
             { req with Query = Some value }
 
     type FieldCapsRequest = {
-        Index: CoreTypes.Indices
+        Index: Types.Indices
         AllowNoIndices: bool option
-        ExpandWildcards: CoreTypes.ExpandWildcards option
-        Fields: CoreTypes.Fields option
+        ExpandWildcards: Types.ExpandWildcards option
+        Fields: Types.Fields option
         IgnoreUnavailable: bool option
         IncludeUnmapped: bool option
         Filters: System.Text.Json.JsonElement option
         Types: string list option
         IncludeEmptyFields: bool option
-        Fields: CoreTypes.Fields option
-        IndexFilter: CoreTypes.QueryContainer option
-        RuntimeMappings: CoreTypes.RuntimeFields option
-        ProjectRouting: CoreTypes.ProjectRouting option
+        Fields: Types.Fields option
+        IndexFilter: Types.QueryContainer option
+        RuntimeMappings: Types.RuntimeFields option
+        ProjectRouting: Types.ProjectRouting option
     }
 
         with
@@ -1662,7 +1663,7 @@ module GlobalOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: FieldCapsRequest, value: CoreTypes.Indices) =
+        member _.Index(state: FieldCapsRequest, value: Types.Indices) =
             { state with Index = value }
 
         [<CustomOperation("allowNoIndices")>]
@@ -1670,11 +1671,11 @@ module GlobalOperations =
             { state with AllowNoIndices = Some value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: FieldCapsRequest, value: CoreTypes.ExpandWildcards) =
+        member _.ExpandWildcards(state: FieldCapsRequest, value: Types.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("fields")>]
-        member _.Fields(state: FieldCapsRequest, value: CoreTypes.Fields) =
+        member _.Fields(state: FieldCapsRequest, value: Types.Fields) =
             { state with Fields = Some value }
 
         [<CustomOperation("ignoreUnavailable")>]
@@ -1698,19 +1699,19 @@ module GlobalOperations =
             { state with IncludeEmptyFields = Some value }
 
         [<CustomOperation("fields")>]
-        member _.Fields(state: FieldCapsRequest, value: CoreTypes.Fields) =
+        member _.Fields(state: FieldCapsRequest, value: Types.Fields) =
             { state with Fields = Some value }
 
         [<CustomOperation("indexFilter")>]
-        member _.IndexFilter(state: FieldCapsRequest, value: CoreTypes.QueryContainer) =
+        member _.IndexFilter(state: FieldCapsRequest, value: Types.QueryContainer) =
             { state with IndexFilter = Some value }
 
         [<CustomOperation("runtimeMappings")>]
-        member _.RuntimeMappings(state: FieldCapsRequest, value: CoreTypes.RuntimeFields) =
+        member _.RuntimeMappings(state: FieldCapsRequest, value: Types.RuntimeFields) =
             { state with RuntimeMappings = Some value }
 
         [<CustomOperation("projectRouting")>]
-        member _.ProjectRouting(state: FieldCapsRequest, value: CoreTypes.ProjectRouting) =
+        member _.ProjectRouting(state: FieldCapsRequest, value: Types.ProjectRouting) =
             { state with ProjectRouting = Some value }
 
     let fieldCapsRequest = FieldCapsRequestBuilder()
@@ -1718,9 +1719,9 @@ module GlobalOperations =
     module FieldCaps =
         let withAllowNoIndices (value: bool) (req: FieldCapsRequest) =
             { req with AllowNoIndices = Some value }
-        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: FieldCapsRequest) =
+        let withExpandWildcards (value: Types.ExpandWildcards) (req: FieldCapsRequest) =
             { req with ExpandWildcards = Some value }
-        let withFields (value: CoreTypes.Fields) (req: FieldCapsRequest) =
+        let withFields (value: Types.Fields) (req: FieldCapsRequest) =
             { req with Fields = Some value }
         let withIgnoreUnavailable (value: bool) (req: FieldCapsRequest) =
             { req with IgnoreUnavailable = Some value }
@@ -1732,30 +1733,30 @@ module GlobalOperations =
             { req with Types = Some value }
         let withIncludeEmptyFields (value: bool) (req: FieldCapsRequest) =
             { req with IncludeEmptyFields = Some value }
-        let withFields (value: CoreTypes.Fields) (req: FieldCapsRequest) =
+        let withFields (value: Types.Fields) (req: FieldCapsRequest) =
             { req with Fields = Some value }
-        let withIndexFilter (value: CoreTypes.QueryContainer) (req: FieldCapsRequest) =
+        let withIndexFilter (value: Types.QueryContainer) (req: FieldCapsRequest) =
             { req with IndexFilter = Some value }
-        let withRuntimeMappings (value: CoreTypes.RuntimeFields) (req: FieldCapsRequest) =
+        let withRuntimeMappings (value: Types.RuntimeFields) (req: FieldCapsRequest) =
             { req with RuntimeMappings = Some value }
-        let withProjectRouting (value: CoreTypes.ProjectRouting) (req: FieldCapsRequest) =
+        let withProjectRouting (value: Types.ProjectRouting) (req: FieldCapsRequest) =
             { req with ProjectRouting = Some value }
 
     type GetRequest = {
-        Id: CoreTypes.Id
-        Index: CoreTypes.IndexName
+        Id: Types.Id
+        Index: Types.IndexName
         ForceSyntheticSource: bool option
         Preference: string option
         Realtime: bool option
         Refresh: bool option
-        Routing: CoreTypes.Routing option
-        Source: GlobalSearchTypes.SourceConfigParam option
-        SourceExcludes: CoreTypes.Fields option
+        Routing: Types.Routing option
+        Source: Types.SourceConfigParam option
+        SourceExcludes: Types.Fields option
         SourceExcludeVectors: bool option
-        SourceIncludes: CoreTypes.Fields option
-        StoredFields: CoreTypes.Fields option
-        Version: CoreTypes.VersionNumber option
-        VersionType: CoreTypes.VersionType option
+        SourceIncludes: Types.Fields option
+        StoredFields: Types.Fields option
+        Version: Types.VersionNumber option
+        VersionType: Types.VersionType option
     }
 
         with
@@ -1787,7 +1788,7 @@ module GlobalOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type GetResponse = GlobalGet.GetResult<GlobalGetResponse.TDocument>
+    type GetResponse = Types.GetResult<Types.TDocument>
 
     type GetRequestBuilder() =
         member _.Yield(_: unit) : GetRequest =
@@ -1809,11 +1810,11 @@ module GlobalOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: GetRequest, value: CoreTypes.Id) =
+        member _.Id(state: GetRequest, value: Types.Id) =
             { state with Id = value }
 
         [<CustomOperation("index")>]
-        member _.Index(state: GetRequest, value: CoreTypes.IndexName) =
+        member _.Index(state: GetRequest, value: Types.IndexName) =
             { state with Index = value }
 
         [<CustomOperation("forceSyntheticSource")>]
@@ -1833,15 +1834,15 @@ module GlobalOperations =
             { state with Refresh = Some value }
 
         [<CustomOperation("routing")>]
-        member _.Routing(state: GetRequest, value: CoreTypes.Routing) =
+        member _.Routing(state: GetRequest, value: Types.Routing) =
             { state with Routing = Some value }
 
         [<CustomOperation("source")>]
-        member _.Source(state: GetRequest, value: GlobalSearchTypes.SourceConfigParam) =
+        member _.Source(state: GetRequest, value: Types.SourceConfigParam) =
             { state with Source = Some value }
 
         [<CustomOperation("sourceExcludes")>]
-        member _.SourceExcludes(state: GetRequest, value: CoreTypes.Fields) =
+        member _.SourceExcludes(state: GetRequest, value: Types.Fields) =
             { state with SourceExcludes = Some value }
 
         [<CustomOperation("sourceExcludeVectors")>]
@@ -1849,19 +1850,19 @@ module GlobalOperations =
             { state with SourceExcludeVectors = Some value }
 
         [<CustomOperation("sourceIncludes")>]
-        member _.SourceIncludes(state: GetRequest, value: CoreTypes.Fields) =
+        member _.SourceIncludes(state: GetRequest, value: Types.Fields) =
             { state with SourceIncludes = Some value }
 
         [<CustomOperation("storedFields")>]
-        member _.StoredFields(state: GetRequest, value: CoreTypes.Fields) =
+        member _.StoredFields(state: GetRequest, value: Types.Fields) =
             { state with StoredFields = Some value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: GetRequest, value: CoreTypes.VersionNumber) =
+        member _.Version(state: GetRequest, value: Types.VersionNumber) =
             { state with Version = Some value }
 
         [<CustomOperation("versionType")>]
-        member _.VersionType(state: GetRequest, value: CoreTypes.VersionType) =
+        member _.VersionType(state: GetRequest, value: Types.VersionType) =
             { state with VersionType = Some value }
 
     let getRequest = GetRequestBuilder()
@@ -1875,26 +1876,26 @@ module GlobalOperations =
             { req with Realtime = Some value }
         let withRefresh (value: bool) (req: GetRequest) =
             { req with Refresh = Some value }
-        let withRouting (value: CoreTypes.Routing) (req: GetRequest) =
+        let withRouting (value: Types.Routing) (req: GetRequest) =
             { req with Routing = Some value }
-        let withSource (value: GlobalSearchTypes.SourceConfigParam) (req: GetRequest) =
+        let withSource (value: Types.SourceConfigParam) (req: GetRequest) =
             { req with Source = Some value }
-        let withSourceExcludes (value: CoreTypes.Fields) (req: GetRequest) =
+        let withSourceExcludes (value: Types.Fields) (req: GetRequest) =
             { req with SourceExcludes = Some value }
         let withSourceExcludeVectors (value: bool) (req: GetRequest) =
             { req with SourceExcludeVectors = Some value }
-        let withSourceIncludes (value: CoreTypes.Fields) (req: GetRequest) =
+        let withSourceIncludes (value: Types.Fields) (req: GetRequest) =
             { req with SourceIncludes = Some value }
-        let withStoredFields (value: CoreTypes.Fields) (req: GetRequest) =
+        let withStoredFields (value: Types.Fields) (req: GetRequest) =
             { req with StoredFields = Some value }
-        let withVersion (value: CoreTypes.VersionNumber) (req: GetRequest) =
+        let withVersion (value: Types.VersionNumber) (req: GetRequest) =
             { req with Version = Some value }
-        let withVersionType (value: CoreTypes.VersionType) (req: GetRequest) =
+        let withVersionType (value: Types.VersionType) (req: GetRequest) =
             { req with VersionType = Some value }
 
     type GetScriptRequest = {
-        Id: CoreTypes.Id
-        MasterTimeout: CoreTypes.Duration option
+        Id: Types.Id
+        MasterTimeout: Types.Duration option
     }
 
         with
@@ -1925,17 +1926,17 @@ module GlobalOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: GetScriptRequest, value: CoreTypes.Id) =
+        member _.Id(state: GetScriptRequest, value: Types.Id) =
             { state with Id = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: GetScriptRequest, value: CoreTypes.Duration) =
+        member _.MasterTimeout(state: GetScriptRequest, value: Types.Duration) =
             { state with MasterTimeout = Some value }
 
     let getScriptRequest = GetScriptRequestBuilder()
 
     module GetScript =
-        let withMasterTimeout (value: CoreTypes.Duration) (req: GetScriptRequest) =
+        let withMasterTimeout (value: Types.Duration) (req: GetScriptRequest) =
             { req with MasterTimeout = Some value }
 
     type GetScriptContextRequest = | GetScriptContextRequest
@@ -1983,17 +1984,17 @@ module GlobalOperations =
     let getScriptLanguagesRequest = GetScriptLanguagesRequestBuilder()
 
     type GetSourceRequest = {
-        Id: CoreTypes.Id
-        Index: CoreTypes.IndexName
+        Id: Types.Id
+        Index: Types.IndexName
         Preference: string option
         Realtime: bool option
         Refresh: bool option
-        Routing: CoreTypes.Routing option
-        Source: GlobalSearchTypes.SourceConfigParam option
-        SourceExcludes: CoreTypes.Fields option
-        SourceIncludes: CoreTypes.Fields option
-        Version: CoreTypes.VersionNumber option
-        VersionType: CoreTypes.VersionType option
+        Routing: Types.Routing option
+        Source: Types.SourceConfigParam option
+        SourceExcludes: Types.Fields option
+        SourceIncludes: Types.Fields option
+        Version: Types.VersionNumber option
+        VersionType: Types.VersionType option
     }
 
         with
@@ -2022,7 +2023,7 @@ module GlobalOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type GetSourceResponse = GlobalGetSourceResponse.TDocument
+    type GetSourceResponse = Types.TDocument
 
     type GetSourceRequestBuilder() =
         member _.Yield(_: unit) : GetSourceRequest =
@@ -2041,11 +2042,11 @@ module GlobalOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: GetSourceRequest, value: CoreTypes.Id) =
+        member _.Id(state: GetSourceRequest, value: Types.Id) =
             { state with Id = value }
 
         [<CustomOperation("index")>]
-        member _.Index(state: GetSourceRequest, value: CoreTypes.IndexName) =
+        member _.Index(state: GetSourceRequest, value: Types.IndexName) =
             { state with Index = value }
 
         [<CustomOperation("preference")>]
@@ -2061,27 +2062,27 @@ module GlobalOperations =
             { state with Refresh = Some value }
 
         [<CustomOperation("routing")>]
-        member _.Routing(state: GetSourceRequest, value: CoreTypes.Routing) =
+        member _.Routing(state: GetSourceRequest, value: Types.Routing) =
             { state with Routing = Some value }
 
         [<CustomOperation("source")>]
-        member _.Source(state: GetSourceRequest, value: GlobalSearchTypes.SourceConfigParam) =
+        member _.Source(state: GetSourceRequest, value: Types.SourceConfigParam) =
             { state with Source = Some value }
 
         [<CustomOperation("sourceExcludes")>]
-        member _.SourceExcludes(state: GetSourceRequest, value: CoreTypes.Fields) =
+        member _.SourceExcludes(state: GetSourceRequest, value: Types.Fields) =
             { state with SourceExcludes = Some value }
 
         [<CustomOperation("sourceIncludes")>]
-        member _.SourceIncludes(state: GetSourceRequest, value: CoreTypes.Fields) =
+        member _.SourceIncludes(state: GetSourceRequest, value: Types.Fields) =
             { state with SourceIncludes = Some value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: GetSourceRequest, value: CoreTypes.VersionNumber) =
+        member _.Version(state: GetSourceRequest, value: Types.VersionNumber) =
             { state with Version = Some value }
 
         [<CustomOperation("versionType")>]
-        member _.VersionType(state: GetSourceRequest, value: CoreTypes.VersionType) =
+        member _.VersionType(state: GetSourceRequest, value: Types.VersionType) =
             { state with VersionType = Some value }
 
     let getSourceRequest = GetSourceRequestBuilder()
@@ -2093,24 +2094,24 @@ module GlobalOperations =
             { req with Realtime = Some value }
         let withRefresh (value: bool) (req: GetSourceRequest) =
             { req with Refresh = Some value }
-        let withRouting (value: CoreTypes.Routing) (req: GetSourceRequest) =
+        let withRouting (value: Types.Routing) (req: GetSourceRequest) =
             { req with Routing = Some value }
-        let withSource (value: GlobalSearchTypes.SourceConfigParam) (req: GetSourceRequest) =
+        let withSource (value: Types.SourceConfigParam) (req: GetSourceRequest) =
             { req with Source = Some value }
-        let withSourceExcludes (value: CoreTypes.Fields) (req: GetSourceRequest) =
+        let withSourceExcludes (value: Types.Fields) (req: GetSourceRequest) =
             { req with SourceExcludes = Some value }
-        let withSourceIncludes (value: CoreTypes.Fields) (req: GetSourceRequest) =
+        let withSourceIncludes (value: Types.Fields) (req: GetSourceRequest) =
             { req with SourceIncludes = Some value }
-        let withVersion (value: CoreTypes.VersionNumber) (req: GetSourceRequest) =
+        let withVersion (value: Types.VersionNumber) (req: GetSourceRequest) =
             { req with Version = Some value }
-        let withVersionType (value: CoreTypes.VersionType) (req: GetSourceRequest) =
+        let withVersionType (value: Types.VersionType) (req: GetSourceRequest) =
             { req with VersionType = Some value }
 
     type HealthReportRequest = {
         Feature: System.Text.Json.JsonElement
-        Timeout: CoreTypes.Duration option
+        Timeout: Types.Duration option
         Verbose: bool option
-        Size: CoreTypes.Integer option
+        Size: Types.Integer option
     }
 
         with
@@ -2149,7 +2150,7 @@ module GlobalOperations =
             { state with Feature = value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: HealthReportRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: HealthReportRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("verbose")>]
@@ -2157,33 +2158,33 @@ module GlobalOperations =
             { state with Verbose = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: HealthReportRequest, value: CoreTypes.Integer) =
+        member _.Size(state: HealthReportRequest, value: Types.Integer) =
             { state with Size = Some value }
 
     let healthReportRequest = HealthReportRequestBuilder()
 
     module HealthReport =
-        let withTimeout (value: CoreTypes.Duration) (req: HealthReportRequest) =
+        let withTimeout (value: Types.Duration) (req: HealthReportRequest) =
             { req with Timeout = Some value }
         let withVerbose (value: bool) (req: HealthReportRequest) =
             { req with Verbose = Some value }
-        let withSize (value: CoreTypes.Integer) (req: HealthReportRequest) =
+        let withSize (value: Types.Integer) (req: HealthReportRequest) =
             { req with Size = Some value }
 
     type IndexRequest = {
-        Id: CoreTypes.Id
-        Index: CoreTypes.IndexName
-        IfPrimaryTerm: CoreTypes.Long option
-        IfSeqNo: CoreTypes.SequenceNumber option
+        Id: Types.Id
+        Index: Types.IndexName
+        IfPrimaryTerm: Types.Long option
+        IfSeqNo: Types.SequenceNumber option
         IncludeSourceOnError: bool option
-        OpType: CoreTypes.OpType option
+        OpType: Types.OpType option
         Pipeline: string option
-        Refresh: CoreTypes.Refresh option
-        Routing: CoreTypes.Routing option
-        Timeout: CoreTypes.Duration option
-        Version: CoreTypes.VersionNumber option
-        VersionType: CoreTypes.VersionType option
-        WaitForActiveShards: CoreTypes.WaitForActiveShards option
+        Refresh: Types.Refresh option
+        Routing: Types.Routing option
+        Timeout: Types.Duration option
+        Version: Types.VersionNumber option
+        VersionType: Types.VersionType option
+        WaitForActiveShards: Types.WaitForActiveShards option
         RequireAlias: bool option
         RequireDataStream: bool option
         Document: obj
@@ -2220,7 +2221,7 @@ module GlobalOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type IndexResponse = CoreTypes.WriteResponseBase
+    type IndexResponse = Types.WriteResponseBase
 
     type IndexRequestBuilder() =
         member _.Yield(_: unit) : IndexRequest =
@@ -2244,19 +2245,19 @@ module GlobalOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: IndexRequest, value: CoreTypes.Id) =
+        member _.Id(state: IndexRequest, value: Types.Id) =
             { state with Id = value }
 
         [<CustomOperation("index")>]
-        member _.Index(state: IndexRequest, value: CoreTypes.IndexName) =
+        member _.Index(state: IndexRequest, value: Types.IndexName) =
             { state with Index = value }
 
         [<CustomOperation("ifPrimaryTerm")>]
-        member _.IfPrimaryTerm(state: IndexRequest, value: CoreTypes.Long) =
+        member _.IfPrimaryTerm(state: IndexRequest, value: Types.Long) =
             { state with IfPrimaryTerm = Some value }
 
         [<CustomOperation("ifSeqNo")>]
-        member _.IfSeqNo(state: IndexRequest, value: CoreTypes.SequenceNumber) =
+        member _.IfSeqNo(state: IndexRequest, value: Types.SequenceNumber) =
             { state with IfSeqNo = Some value }
 
         [<CustomOperation("includeSourceOnError")>]
@@ -2264,7 +2265,7 @@ module GlobalOperations =
             { state with IncludeSourceOnError = Some value }
 
         [<CustomOperation("opType")>]
-        member _.OpType(state: IndexRequest, value: CoreTypes.OpType) =
+        member _.OpType(state: IndexRequest, value: Types.OpType) =
             { state with OpType = Some value }
 
         [<CustomOperation("pipeline")>]
@@ -2272,27 +2273,27 @@ module GlobalOperations =
             { state with Pipeline = Some value }
 
         [<CustomOperation("refresh")>]
-        member _.Refresh(state: IndexRequest, value: CoreTypes.Refresh) =
+        member _.Refresh(state: IndexRequest, value: Types.Refresh) =
             { state with Refresh = Some value }
 
         [<CustomOperation("routing")>]
-        member _.Routing(state: IndexRequest, value: CoreTypes.Routing) =
+        member _.Routing(state: IndexRequest, value: Types.Routing) =
             { state with Routing = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: IndexRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: IndexRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: IndexRequest, value: CoreTypes.VersionNumber) =
+        member _.Version(state: IndexRequest, value: Types.VersionNumber) =
             { state with Version = Some value }
 
         [<CustomOperation("versionType")>]
-        member _.VersionType(state: IndexRequest, value: CoreTypes.VersionType) =
+        member _.VersionType(state: IndexRequest, value: Types.VersionType) =
             { state with VersionType = Some value }
 
         [<CustomOperation("waitForActiveShards")>]
-        member _.WaitForActiveShards(state: IndexRequest, value: CoreTypes.WaitForActiveShards) =
+        member _.WaitForActiveShards(state: IndexRequest, value: Types.WaitForActiveShards) =
             { state with WaitForActiveShards = Some value }
 
         [<CustomOperation("requireAlias")>]
@@ -2310,27 +2311,27 @@ module GlobalOperations =
     let indexRequest = IndexRequestBuilder()
 
     module Index =
-        let withIfPrimaryTerm (value: CoreTypes.Long) (req: IndexRequest) =
+        let withIfPrimaryTerm (value: Types.Long) (req: IndexRequest) =
             { req with IfPrimaryTerm = Some value }
-        let withIfSeqNo (value: CoreTypes.SequenceNumber) (req: IndexRequest) =
+        let withIfSeqNo (value: Types.SequenceNumber) (req: IndexRequest) =
             { req with IfSeqNo = Some value }
         let withIncludeSourceOnError (value: bool) (req: IndexRequest) =
             { req with IncludeSourceOnError = Some value }
-        let withOpType (value: CoreTypes.OpType) (req: IndexRequest) =
+        let withOpType (value: Types.OpType) (req: IndexRequest) =
             { req with OpType = Some value }
         let withPipeline (value: string) (req: IndexRequest) =
             { req with Pipeline = Some value }
-        let withRefresh (value: CoreTypes.Refresh) (req: IndexRequest) =
+        let withRefresh (value: Types.Refresh) (req: IndexRequest) =
             { req with Refresh = Some value }
-        let withRouting (value: CoreTypes.Routing) (req: IndexRequest) =
+        let withRouting (value: Types.Routing) (req: IndexRequest) =
             { req with Routing = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: IndexRequest) =
+        let withTimeout (value: Types.Duration) (req: IndexRequest) =
             { req with Timeout = Some value }
-        let withVersion (value: CoreTypes.VersionNumber) (req: IndexRequest) =
+        let withVersion (value: Types.VersionNumber) (req: IndexRequest) =
             { req with Version = Some value }
-        let withVersionType (value: CoreTypes.VersionType) (req: IndexRequest) =
+        let withVersionType (value: Types.VersionType) (req: IndexRequest) =
             { req with VersionType = Some value }
-        let withWaitForActiveShards (value: CoreTypes.WaitForActiveShards) (req: IndexRequest) =
+        let withWaitForActiveShards (value: Types.WaitForActiveShards) (req: IndexRequest) =
             { req with WaitForActiveShards = Some value }
         let withRequireAlias (value: bool) (req: IndexRequest) =
             { req with RequireAlias = Some value }
@@ -2360,14 +2361,14 @@ module GlobalOperations =
     let infoRequest = InfoRequestBuilder()
 
     type KnnSearchRequest = {
-        Index: CoreTypes.Indices
-        Routing: CoreTypes.Routing option
-        Source: GlobalSearchTypes.SourceConfig option
-        DocvalueFields: CoreTypes.FieldAndFormat list option
-        StoredFields: CoreTypes.Fields option
-        Fields: CoreTypes.Fields option
+        Index: Types.Indices
+        Routing: Types.Routing option
+        Source: Types.SourceConfig option
+        DocvalueFields: Types.FieldAndFormat list option
+        StoredFields: Types.Fields option
+        Fields: Types.Fields option
         Filter: System.Text.Json.JsonElement option
-        Knn: GlobalKnnSearchTypes.KnnSearchQuery
+        Knn: Types.KnnSearchQuery
     }
 
         with
@@ -2405,27 +2406,27 @@ module GlobalOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: KnnSearchRequest, value: CoreTypes.Indices) =
+        member _.Index(state: KnnSearchRequest, value: Types.Indices) =
             { state with Index = value }
 
         [<CustomOperation("routing")>]
-        member _.Routing(state: KnnSearchRequest, value: CoreTypes.Routing) =
+        member _.Routing(state: KnnSearchRequest, value: Types.Routing) =
             { state with Routing = Some value }
 
         [<CustomOperation("source")>]
-        member _.Source(state: KnnSearchRequest, value: GlobalSearchTypes.SourceConfig) =
+        member _.Source(state: KnnSearchRequest, value: Types.SourceConfig) =
             { state with Source = Some value }
 
         [<CustomOperation("docvalueFields")>]
-        member _.DocvalueFields(state: KnnSearchRequest, value: CoreTypes.FieldAndFormat list) =
+        member _.DocvalueFields(state: KnnSearchRequest, value: Types.FieldAndFormat list) =
             { state with DocvalueFields = Some value }
 
         [<CustomOperation("storedFields")>]
-        member _.StoredFields(state: KnnSearchRequest, value: CoreTypes.Fields) =
+        member _.StoredFields(state: KnnSearchRequest, value: Types.Fields) =
             { state with StoredFields = Some value }
 
         [<CustomOperation("fields")>]
-        member _.Fields(state: KnnSearchRequest, value: CoreTypes.Fields) =
+        member _.Fields(state: KnnSearchRequest, value: Types.Fields) =
             { state with Fields = Some value }
 
         [<CustomOperation("filter")>]
@@ -2433,40 +2434,40 @@ module GlobalOperations =
             { state with Filter = Some value }
 
         [<CustomOperation("knn")>]
-        member _.Knn(state: KnnSearchRequest, value: GlobalKnnSearchTypes.KnnSearchQuery) =
+        member _.Knn(state: KnnSearchRequest, value: Types.KnnSearchQuery) =
             { state with Knn = value }
 
     let knnSearchRequest = KnnSearchRequestBuilder()
 
     module KnnSearch =
-        let withRouting (value: CoreTypes.Routing) (req: KnnSearchRequest) =
+        let withRouting (value: Types.Routing) (req: KnnSearchRequest) =
             { req with Routing = Some value }
-        let withSource (value: GlobalSearchTypes.SourceConfig) (req: KnnSearchRequest) =
+        let withSource (value: Types.SourceConfig) (req: KnnSearchRequest) =
             { req with Source = Some value }
-        let withDocvalueFields (value: CoreTypes.FieldAndFormat list) (req: KnnSearchRequest) =
+        let withDocvalueFields (value: Types.FieldAndFormat list) (req: KnnSearchRequest) =
             { req with DocvalueFields = Some value }
-        let withStoredFields (value: CoreTypes.Fields) (req: KnnSearchRequest) =
+        let withStoredFields (value: Types.Fields) (req: KnnSearchRequest) =
             { req with StoredFields = Some value }
-        let withFields (value: CoreTypes.Fields) (req: KnnSearchRequest) =
+        let withFields (value: Types.Fields) (req: KnnSearchRequest) =
             { req with Fields = Some value }
         let withFilter (value: System.Text.Json.JsonElement) (req: KnnSearchRequest) =
             { req with Filter = Some value }
-        let withKnn (value: GlobalKnnSearchTypes.KnnSearchQuery) (req: KnnSearchRequest) =
+        let withKnn (value: Types.KnnSearchQuery) (req: KnnSearchRequest) =
             { req with Knn = value }
 
     type MgetRequest = {
-        Index: CoreTypes.IndexName
+        Index: Types.IndexName
         ForceSyntheticSource: bool option
         Preference: string option
         Realtime: bool option
         Refresh: bool option
-        Routing: CoreTypes.Routing option
-        Source: GlobalSearchTypes.SourceConfigParam option
-        SourceExcludes: CoreTypes.Fields option
-        SourceIncludes: CoreTypes.Fields option
-        StoredFields: CoreTypes.Fields option
-        Docs: GlobalMget.Operation list option
-        Ids: CoreTypes.Ids option
+        Routing: Types.Routing option
+        Source: Types.SourceConfigParam option
+        SourceExcludes: Types.Fields option
+        SourceIncludes: Types.Fields option
+        StoredFields: Types.Fields option
+        Docs: Types.GlobalMgetOperation list option
+        Ids: Types.Ids option
     }
 
         with
@@ -2516,7 +2517,7 @@ module GlobalOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: MgetRequest, value: CoreTypes.IndexName) =
+        member _.Index(state: MgetRequest, value: Types.IndexName) =
             { state with Index = value }
 
         [<CustomOperation("forceSyntheticSource")>]
@@ -2536,31 +2537,31 @@ module GlobalOperations =
             { state with Refresh = Some value }
 
         [<CustomOperation("routing")>]
-        member _.Routing(state: MgetRequest, value: CoreTypes.Routing) =
+        member _.Routing(state: MgetRequest, value: Types.Routing) =
             { state with Routing = Some value }
 
         [<CustomOperation("source")>]
-        member _.Source(state: MgetRequest, value: GlobalSearchTypes.SourceConfigParam) =
+        member _.Source(state: MgetRequest, value: Types.SourceConfigParam) =
             { state with Source = Some value }
 
         [<CustomOperation("sourceExcludes")>]
-        member _.SourceExcludes(state: MgetRequest, value: CoreTypes.Fields) =
+        member _.SourceExcludes(state: MgetRequest, value: Types.Fields) =
             { state with SourceExcludes = Some value }
 
         [<CustomOperation("sourceIncludes")>]
-        member _.SourceIncludes(state: MgetRequest, value: CoreTypes.Fields) =
+        member _.SourceIncludes(state: MgetRequest, value: Types.Fields) =
             { state with SourceIncludes = Some value }
 
         [<CustomOperation("storedFields")>]
-        member _.StoredFields(state: MgetRequest, value: CoreTypes.Fields) =
+        member _.StoredFields(state: MgetRequest, value: Types.Fields) =
             { state with StoredFields = Some value }
 
         [<CustomOperation("docs")>]
-        member _.Docs(state: MgetRequest, value: GlobalMget.Operation list) =
+        member _.Docs(state: MgetRequest, value: Types.GlobalMgetOperation list) =
             { state with Docs = Some value }
 
         [<CustomOperation("ids")>]
-        member _.Ids(state: MgetRequest, value: CoreTypes.Ids) =
+        member _.Ids(state: MgetRequest, value: Types.Ids) =
             { state with Ids = Some value }
 
     let mgetRequest = MgetRequestBuilder()
@@ -2574,37 +2575,37 @@ module GlobalOperations =
             { req with Realtime = Some value }
         let withRefresh (value: bool) (req: MgetRequest) =
             { req with Refresh = Some value }
-        let withRouting (value: CoreTypes.Routing) (req: MgetRequest) =
+        let withRouting (value: Types.Routing) (req: MgetRequest) =
             { req with Routing = Some value }
-        let withSource (value: GlobalSearchTypes.SourceConfigParam) (req: MgetRequest) =
+        let withSource (value: Types.SourceConfigParam) (req: MgetRequest) =
             { req with Source = Some value }
-        let withSourceExcludes (value: CoreTypes.Fields) (req: MgetRequest) =
+        let withSourceExcludes (value: Types.Fields) (req: MgetRequest) =
             { req with SourceExcludes = Some value }
-        let withSourceIncludes (value: CoreTypes.Fields) (req: MgetRequest) =
+        let withSourceIncludes (value: Types.Fields) (req: MgetRequest) =
             { req with SourceIncludes = Some value }
-        let withStoredFields (value: CoreTypes.Fields) (req: MgetRequest) =
+        let withStoredFields (value: Types.Fields) (req: MgetRequest) =
             { req with StoredFields = Some value }
-        let withDocs (value: GlobalMget.Operation list) (req: MgetRequest) =
+        let withDocs (value: Types.GlobalMgetOperation list) (req: MgetRequest) =
             { req with Docs = Some value }
-        let withIds (value: CoreTypes.Ids) (req: MgetRequest) =
+        let withIds (value: Types.Ids) (req: MgetRequest) =
             { req with Ids = Some value }
 
     type MsearchRequest = {
-        Index: CoreTypes.Indices
+        Index: Types.Indices
         AllowNoIndices: bool option
         CcsMinimizeRoundtrips: bool option
-        ExpandWildcards: CoreTypes.ExpandWildcards option
+        ExpandWildcards: Types.ExpandWildcards option
         IgnoreThrottled: bool option
         IgnoreUnavailable: bool option
         IncludeNamedQueriesScore: bool option
-        Index: CoreTypes.Indices option
-        MaxConcurrentSearches: CoreTypes.Integer option
-        MaxConcurrentShardRequests: CoreTypes.Integer option
-        PreFilterShardSize: CoreTypes.Long option
-        ProjectRouting: CoreTypes.ProjectRouting option
+        Index: Types.Indices option
+        MaxConcurrentSearches: Types.Integer option
+        MaxConcurrentShardRequests: Types.Integer option
+        PreFilterShardSize: Types.Long option
+        ProjectRouting: Types.ProjectRouting option
         RestTotalHitsAsInt: bool option
-        Routing: CoreTypes.Routing option
-        SearchType: CoreTypes.SearchType option
+        Routing: Types.Routing option
+        SearchType: Types.SearchType option
         TypedKeys: bool option
         Document: obj
     }
@@ -2642,7 +2643,7 @@ module GlobalOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type MsearchResponse = GlobalMsearch.MultiSearchResult<GlobalMsearchResponse.TDocument>
+    type MsearchResponse = Types.MultiSearchResult<Types.TDocument>
 
     type MsearchRequestBuilder() =
         member _.Yield(_: unit) : MsearchRequest =
@@ -2667,7 +2668,7 @@ module GlobalOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: MsearchRequest, value: CoreTypes.Indices) =
+        member _.Index(state: MsearchRequest, value: Types.Indices) =
             { state with Index = value }
 
         [<CustomOperation("allowNoIndices")>]
@@ -2679,7 +2680,7 @@ module GlobalOperations =
             { state with CcsMinimizeRoundtrips = Some value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: MsearchRequest, value: CoreTypes.ExpandWildcards) =
+        member _.ExpandWildcards(state: MsearchRequest, value: Types.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("ignoreThrottled")>]
@@ -2695,23 +2696,23 @@ module GlobalOperations =
             { state with IncludeNamedQueriesScore = Some value }
 
         [<CustomOperation("index")>]
-        member _.Index(state: MsearchRequest, value: CoreTypes.Indices) =
+        member _.Index(state: MsearchRequest, value: Types.Indices) =
             { state with Index = Some value }
 
         [<CustomOperation("maxConcurrentSearches")>]
-        member _.MaxConcurrentSearches(state: MsearchRequest, value: CoreTypes.Integer) =
+        member _.MaxConcurrentSearches(state: MsearchRequest, value: Types.Integer) =
             { state with MaxConcurrentSearches = Some value }
 
         [<CustomOperation("maxConcurrentShardRequests")>]
-        member _.MaxConcurrentShardRequests(state: MsearchRequest, value: CoreTypes.Integer) =
+        member _.MaxConcurrentShardRequests(state: MsearchRequest, value: Types.Integer) =
             { state with MaxConcurrentShardRequests = Some value }
 
         [<CustomOperation("preFilterShardSize")>]
-        member _.PreFilterShardSize(state: MsearchRequest, value: CoreTypes.Long) =
+        member _.PreFilterShardSize(state: MsearchRequest, value: Types.Long) =
             { state with PreFilterShardSize = Some value }
 
         [<CustomOperation("projectRouting")>]
-        member _.ProjectRouting(state: MsearchRequest, value: CoreTypes.ProjectRouting) =
+        member _.ProjectRouting(state: MsearchRequest, value: Types.ProjectRouting) =
             { state with ProjectRouting = Some value }
 
         [<CustomOperation("restTotalHitsAsInt")>]
@@ -2719,11 +2720,11 @@ module GlobalOperations =
             { state with RestTotalHitsAsInt = Some value }
 
         [<CustomOperation("routing")>]
-        member _.Routing(state: MsearchRequest, value: CoreTypes.Routing) =
+        member _.Routing(state: MsearchRequest, value: Types.Routing) =
             { state with Routing = Some value }
 
         [<CustomOperation("searchType")>]
-        member _.SearchType(state: MsearchRequest, value: CoreTypes.SearchType) =
+        member _.SearchType(state: MsearchRequest, value: Types.SearchType) =
             { state with SearchType = Some value }
 
         [<CustomOperation("typedKeys")>]
@@ -2741,7 +2742,7 @@ module GlobalOperations =
             { req with AllowNoIndices = Some value }
         let withCcsMinimizeRoundtrips (value: bool) (req: MsearchRequest) =
             { req with CcsMinimizeRoundtrips = Some value }
-        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: MsearchRequest) =
+        let withExpandWildcards (value: Types.ExpandWildcards) (req: MsearchRequest) =
             { req with ExpandWildcards = Some value }
         let withIgnoreThrottled (value: bool) (req: MsearchRequest) =
             { req with IgnoreThrottled = Some value }
@@ -2749,31 +2750,31 @@ module GlobalOperations =
             { req with IgnoreUnavailable = Some value }
         let withIncludeNamedQueriesScore (value: bool) (req: MsearchRequest) =
             { req with IncludeNamedQueriesScore = Some value }
-        let withIndex (value: CoreTypes.Indices) (req: MsearchRequest) =
+        let withIndex (value: Types.Indices) (req: MsearchRequest) =
             { req with Index = Some value }
-        let withMaxConcurrentSearches (value: CoreTypes.Integer) (req: MsearchRequest) =
+        let withMaxConcurrentSearches (value: Types.Integer) (req: MsearchRequest) =
             { req with MaxConcurrentSearches = Some value }
-        let withMaxConcurrentShardRequests (value: CoreTypes.Integer) (req: MsearchRequest) =
+        let withMaxConcurrentShardRequests (value: Types.Integer) (req: MsearchRequest) =
             { req with MaxConcurrentShardRequests = Some value }
-        let withPreFilterShardSize (value: CoreTypes.Long) (req: MsearchRequest) =
+        let withPreFilterShardSize (value: Types.Long) (req: MsearchRequest) =
             { req with PreFilterShardSize = Some value }
-        let withProjectRouting (value: CoreTypes.ProjectRouting) (req: MsearchRequest) =
+        let withProjectRouting (value: Types.ProjectRouting) (req: MsearchRequest) =
             { req with ProjectRouting = Some value }
         let withRestTotalHitsAsInt (value: bool) (req: MsearchRequest) =
             { req with RestTotalHitsAsInt = Some value }
-        let withRouting (value: CoreTypes.Routing) (req: MsearchRequest) =
+        let withRouting (value: Types.Routing) (req: MsearchRequest) =
             { req with Routing = Some value }
-        let withSearchType (value: CoreTypes.SearchType) (req: MsearchRequest) =
+        let withSearchType (value: Types.SearchType) (req: MsearchRequest) =
             { req with SearchType = Some value }
         let withTypedKeys (value: bool) (req: MsearchRequest) =
             { req with TypedKeys = Some value }
 
     type MsearchTemplateRequest = {
-        Index: CoreTypes.Indices
+        Index: Types.Indices
         CcsMinimizeRoundtrips: bool option
-        MaxConcurrentSearches: CoreTypes.Long option
-        ProjectRouting: CoreTypes.ProjectRouting option
-        SearchType: CoreTypes.SearchType option
+        MaxConcurrentSearches: Types.Long option
+        ProjectRouting: Types.ProjectRouting option
+        SearchType: Types.SearchType option
         RestTotalHitsAsInt: bool option
         TypedKeys: bool option
         Document: obj
@@ -2803,7 +2804,7 @@ module GlobalOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type MsearchTemplateResponse = GlobalMsearch.MultiSearchResult<GlobalMsearchTemplateResponse.TDocument>
+    type MsearchTemplateResponse = Types.MultiSearchResult<Types.TDocument>
 
     type MsearchTemplateRequestBuilder() =
         member _.Yield(_: unit) : MsearchTemplateRequest =
@@ -2819,7 +2820,7 @@ module GlobalOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: MsearchTemplateRequest, value: CoreTypes.Indices) =
+        member _.Index(state: MsearchTemplateRequest, value: Types.Indices) =
             { state with Index = value }
 
         [<CustomOperation("ccsMinimizeRoundtrips")>]
@@ -2827,15 +2828,15 @@ module GlobalOperations =
             { state with CcsMinimizeRoundtrips = Some value }
 
         [<CustomOperation("maxConcurrentSearches")>]
-        member _.MaxConcurrentSearches(state: MsearchTemplateRequest, value: CoreTypes.Long) =
+        member _.MaxConcurrentSearches(state: MsearchTemplateRequest, value: Types.Long) =
             { state with MaxConcurrentSearches = Some value }
 
         [<CustomOperation("projectRouting")>]
-        member _.ProjectRouting(state: MsearchTemplateRequest, value: CoreTypes.ProjectRouting) =
+        member _.ProjectRouting(state: MsearchTemplateRequest, value: Types.ProjectRouting) =
             { state with ProjectRouting = Some value }
 
         [<CustomOperation("searchType")>]
-        member _.SearchType(state: MsearchTemplateRequest, value: CoreTypes.SearchType) =
+        member _.SearchType(state: MsearchTemplateRequest, value: Types.SearchType) =
             { state with SearchType = Some value }
 
         [<CustomOperation("restTotalHitsAsInt")>]
@@ -2855,11 +2856,11 @@ module GlobalOperations =
     module MsearchTemplate =
         let withCcsMinimizeRoundtrips (value: bool) (req: MsearchTemplateRequest) =
             { req with CcsMinimizeRoundtrips = Some value }
-        let withMaxConcurrentSearches (value: CoreTypes.Long) (req: MsearchTemplateRequest) =
+        let withMaxConcurrentSearches (value: Types.Long) (req: MsearchTemplateRequest) =
             { req with MaxConcurrentSearches = Some value }
-        let withProjectRouting (value: CoreTypes.ProjectRouting) (req: MsearchTemplateRequest) =
+        let withProjectRouting (value: Types.ProjectRouting) (req: MsearchTemplateRequest) =
             { req with ProjectRouting = Some value }
-        let withSearchType (value: CoreTypes.SearchType) (req: MsearchTemplateRequest) =
+        let withSearchType (value: Types.SearchType) (req: MsearchTemplateRequest) =
             { req with SearchType = Some value }
         let withRestTotalHitsAsInt (value: bool) (req: MsearchTemplateRequest) =
             { req with RestTotalHitsAsInt = Some value }
@@ -2867,21 +2868,21 @@ module GlobalOperations =
             { req with TypedKeys = Some value }
 
     type MtermvectorsRequest = {
-        Index: CoreTypes.IndexName
-        Ids: CoreTypes.Id list option
-        Fields: CoreTypes.Fields option
+        Index: Types.IndexName
+        Ids: Types.Id list option
+        Fields: Types.Fields option
         FieldStatistics: bool option
         Offsets: bool option
         Payloads: bool option
         Positions: bool option
         Preference: string option
         Realtime: bool option
-        Routing: CoreTypes.Routing option
+        Routing: Types.Routing option
         TermStatistics: bool option
-        Version: CoreTypes.VersionNumber option
-        VersionType: CoreTypes.VersionType option
-        Docs: GlobalMtermvectors.Operation list option
-        Ids: CoreTypes.Id list option
+        Version: Types.VersionNumber option
+        VersionType: Types.VersionType option
+        Docs: Types.GlobalMtermvectorsOperation list option
+        Ids: Types.Id list option
     }
 
         with
@@ -2937,15 +2938,15 @@ module GlobalOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: MtermvectorsRequest, value: CoreTypes.IndexName) =
+        member _.Index(state: MtermvectorsRequest, value: Types.IndexName) =
             { state with Index = value }
 
         [<CustomOperation("ids")>]
-        member _.Ids(state: MtermvectorsRequest, value: CoreTypes.Id list) =
+        member _.Ids(state: MtermvectorsRequest, value: Types.Id list) =
             { state with Ids = Some value }
 
         [<CustomOperation("fields")>]
-        member _.Fields(state: MtermvectorsRequest, value: CoreTypes.Fields) =
+        member _.Fields(state: MtermvectorsRequest, value: Types.Fields) =
             { state with Fields = Some value }
 
         [<CustomOperation("fieldStatistics")>]
@@ -2973,7 +2974,7 @@ module GlobalOperations =
             { state with Realtime = Some value }
 
         [<CustomOperation("routing")>]
-        member _.Routing(state: MtermvectorsRequest, value: CoreTypes.Routing) =
+        member _.Routing(state: MtermvectorsRequest, value: Types.Routing) =
             { state with Routing = Some value }
 
         [<CustomOperation("termStatistics")>]
@@ -2981,27 +2982,27 @@ module GlobalOperations =
             { state with TermStatistics = Some value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: MtermvectorsRequest, value: CoreTypes.VersionNumber) =
+        member _.Version(state: MtermvectorsRequest, value: Types.VersionNumber) =
             { state with Version = Some value }
 
         [<CustomOperation("versionType")>]
-        member _.VersionType(state: MtermvectorsRequest, value: CoreTypes.VersionType) =
+        member _.VersionType(state: MtermvectorsRequest, value: Types.VersionType) =
             { state with VersionType = Some value }
 
         [<CustomOperation("docs")>]
-        member _.Docs(state: MtermvectorsRequest, value: GlobalMtermvectors.Operation list) =
+        member _.Docs(state: MtermvectorsRequest, value: Types.GlobalMtermvectorsOperation list) =
             { state with Docs = Some value }
 
         [<CustomOperation("ids")>]
-        member _.Ids(state: MtermvectorsRequest, value: CoreTypes.Id list) =
+        member _.Ids(state: MtermvectorsRequest, value: Types.Id list) =
             { state with Ids = Some value }
 
     let mtermvectorsRequest = MtermvectorsRequestBuilder()
 
     module Mtermvectors =
-        let withIds (value: CoreTypes.Id list) (req: MtermvectorsRequest) =
+        let withIds (value: Types.Id list) (req: MtermvectorsRequest) =
             { req with Ids = Some value }
-        let withFields (value: CoreTypes.Fields) (req: MtermvectorsRequest) =
+        let withFields (value: Types.Fields) (req: MtermvectorsRequest) =
             { req with Fields = Some value }
         let withFieldStatistics (value: bool) (req: MtermvectorsRequest) =
             { req with FieldStatistics = Some value }
@@ -3015,30 +3016,30 @@ module GlobalOperations =
             { req with Preference = Some value }
         let withRealtime (value: bool) (req: MtermvectorsRequest) =
             { req with Realtime = Some value }
-        let withRouting (value: CoreTypes.Routing) (req: MtermvectorsRequest) =
+        let withRouting (value: Types.Routing) (req: MtermvectorsRequest) =
             { req with Routing = Some value }
         let withTermStatistics (value: bool) (req: MtermvectorsRequest) =
             { req with TermStatistics = Some value }
-        let withVersion (value: CoreTypes.VersionNumber) (req: MtermvectorsRequest) =
+        let withVersion (value: Types.VersionNumber) (req: MtermvectorsRequest) =
             { req with Version = Some value }
-        let withVersionType (value: CoreTypes.VersionType) (req: MtermvectorsRequest) =
+        let withVersionType (value: Types.VersionType) (req: MtermvectorsRequest) =
             { req with VersionType = Some value }
-        let withDocs (value: GlobalMtermvectors.Operation list) (req: MtermvectorsRequest) =
+        let withDocs (value: Types.GlobalMtermvectorsOperation list) (req: MtermvectorsRequest) =
             { req with Docs = Some value }
-        let withIds (value: CoreTypes.Id list) (req: MtermvectorsRequest) =
+        let withIds (value: Types.Id list) (req: MtermvectorsRequest) =
             { req with Ids = Some value }
 
     type OpenPointInTimeRequest = {
-        Index: CoreTypes.Indices
-        KeepAlive: CoreTypes.Duration
+        Index: Types.Indices
+        KeepAlive: Types.Duration
         IgnoreUnavailable: bool option
         Preference: string option
-        Routing: CoreTypes.Routing option
-        ExpandWildcards: CoreTypes.ExpandWildcards option
+        Routing: Types.Routing option
+        ExpandWildcards: Types.ExpandWildcards option
         AllowPartialSearchResults: bool option
-        MaxConcurrentShardRequests: CoreTypes.Integer option
-        IndexFilter: CoreTypes.QueryContainer option
-        ProjectRouting: CoreTypes.ProjectRouting option
+        MaxConcurrentShardRequests: Types.Integer option
+        IndexFilter: Types.QueryContainer option
+        ProjectRouting: Types.ProjectRouting option
     }
 
         with
@@ -3083,11 +3084,11 @@ module GlobalOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: OpenPointInTimeRequest, value: CoreTypes.Indices) =
+        member _.Index(state: OpenPointInTimeRequest, value: Types.Indices) =
             { state with Index = value }
 
         [<CustomOperation("keepAlive")>]
-        member _.KeepAlive(state: OpenPointInTimeRequest, value: CoreTypes.Duration) =
+        member _.KeepAlive(state: OpenPointInTimeRequest, value: Types.Duration) =
             { state with KeepAlive = value }
 
         [<CustomOperation("ignoreUnavailable")>]
@@ -3099,11 +3100,11 @@ module GlobalOperations =
             { state with Preference = Some value }
 
         [<CustomOperation("routing")>]
-        member _.Routing(state: OpenPointInTimeRequest, value: CoreTypes.Routing) =
+        member _.Routing(state: OpenPointInTimeRequest, value: Types.Routing) =
             { state with Routing = Some value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: OpenPointInTimeRequest, value: CoreTypes.ExpandWildcards) =
+        member _.ExpandWildcards(state: OpenPointInTimeRequest, value: Types.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("allowPartialSearchResults")>]
@@ -3111,37 +3112,37 @@ module GlobalOperations =
             { state with AllowPartialSearchResults = Some value }
 
         [<CustomOperation("maxConcurrentShardRequests")>]
-        member _.MaxConcurrentShardRequests(state: OpenPointInTimeRequest, value: CoreTypes.Integer) =
+        member _.MaxConcurrentShardRequests(state: OpenPointInTimeRequest, value: Types.Integer) =
             { state with MaxConcurrentShardRequests = Some value }
 
         [<CustomOperation("indexFilter")>]
-        member _.IndexFilter(state: OpenPointInTimeRequest, value: CoreTypes.QueryContainer) =
+        member _.IndexFilter(state: OpenPointInTimeRequest, value: Types.QueryContainer) =
             { state with IndexFilter = Some value }
 
         [<CustomOperation("projectRouting")>]
-        member _.ProjectRouting(state: OpenPointInTimeRequest, value: CoreTypes.ProjectRouting) =
+        member _.ProjectRouting(state: OpenPointInTimeRequest, value: Types.ProjectRouting) =
             { state with ProjectRouting = Some value }
 
     let openPointInTimeRequest = OpenPointInTimeRequestBuilder()
 
     module OpenPointInTime =
-        let withKeepAlive (value: CoreTypes.Duration) (req: OpenPointInTimeRequest) =
+        let withKeepAlive (value: Types.Duration) (req: OpenPointInTimeRequest) =
             { req with KeepAlive = value }
         let withIgnoreUnavailable (value: bool) (req: OpenPointInTimeRequest) =
             { req with IgnoreUnavailable = Some value }
         let withPreference (value: string) (req: OpenPointInTimeRequest) =
             { req with Preference = Some value }
-        let withRouting (value: CoreTypes.Routing) (req: OpenPointInTimeRequest) =
+        let withRouting (value: Types.Routing) (req: OpenPointInTimeRequest) =
             { req with Routing = Some value }
-        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: OpenPointInTimeRequest) =
+        let withExpandWildcards (value: Types.ExpandWildcards) (req: OpenPointInTimeRequest) =
             { req with ExpandWildcards = Some value }
         let withAllowPartialSearchResults (value: bool) (req: OpenPointInTimeRequest) =
             { req with AllowPartialSearchResults = Some value }
-        let withMaxConcurrentShardRequests (value: CoreTypes.Integer) (req: OpenPointInTimeRequest) =
+        let withMaxConcurrentShardRequests (value: Types.Integer) (req: OpenPointInTimeRequest) =
             { req with MaxConcurrentShardRequests = Some value }
-        let withIndexFilter (value: CoreTypes.QueryContainer) (req: OpenPointInTimeRequest) =
+        let withIndexFilter (value: Types.QueryContainer) (req: OpenPointInTimeRequest) =
             { req with IndexFilter = Some value }
-        let withProjectRouting (value: CoreTypes.ProjectRouting) (req: OpenPointInTimeRequest) =
+        let withProjectRouting (value: Types.ProjectRouting) (req: OpenPointInTimeRequest) =
             { req with ProjectRouting = Some value }
 
     type PingRequest = | PingRequest
@@ -3167,12 +3168,12 @@ module GlobalOperations =
     let pingRequest = PingRequestBuilder()
 
     type PutScriptRequest = {
-        Id: CoreTypes.Id
-        Context: CoreTypes.Name
-        Context: CoreTypes.Name option
-        MasterTimeout: CoreTypes.Duration option
-        Timeout: CoreTypes.Duration option
-        Script: CoreTypes.StoredScript
+        Id: Types.Id
+        Context: Types.Name
+        Context: Types.Name option
+        MasterTimeout: Types.Duration option
+        Timeout: Types.Duration option
+        Script: Types.StoredScript
     }
 
         with
@@ -3196,7 +3197,7 @@ module GlobalOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type PutScriptResponse = CoreTypes.AcknowledgedResponseBase
+    type PutScriptResponse = Types.AcknowledgedResponseBase
 
     type PutScriptRequestBuilder() =
         member _.Yield(_: unit) : PutScriptRequest =
@@ -3210,49 +3211,49 @@ module GlobalOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: PutScriptRequest, value: CoreTypes.Id) =
+        member _.Id(state: PutScriptRequest, value: Types.Id) =
             { state with Id = value }
 
         [<CustomOperation("context")>]
-        member _.Context(state: PutScriptRequest, value: CoreTypes.Name) =
+        member _.Context(state: PutScriptRequest, value: Types.Name) =
             { state with Context = value }
 
         [<CustomOperation("context")>]
-        member _.Context(state: PutScriptRequest, value: CoreTypes.Name) =
+        member _.Context(state: PutScriptRequest, value: Types.Name) =
             { state with Context = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: PutScriptRequest, value: CoreTypes.Duration) =
+        member _.MasterTimeout(state: PutScriptRequest, value: Types.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: PutScriptRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: PutScriptRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("script")>]
-        member _.Script(state: PutScriptRequest, value: CoreTypes.StoredScript) =
+        member _.Script(state: PutScriptRequest, value: Types.StoredScript) =
             { state with Script = value }
 
     let putScriptRequest = PutScriptRequestBuilder()
 
     module PutScript =
-        let withContext (value: CoreTypes.Name) (req: PutScriptRequest) =
+        let withContext (value: Types.Name) (req: PutScriptRequest) =
             { req with Context = Some value }
-        let withMasterTimeout (value: CoreTypes.Duration) (req: PutScriptRequest) =
+        let withMasterTimeout (value: Types.Duration) (req: PutScriptRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: PutScriptRequest) =
+        let withTimeout (value: Types.Duration) (req: PutScriptRequest) =
             { req with Timeout = Some value }
-        let withScript (value: CoreTypes.StoredScript) (req: PutScriptRequest) =
+        let withScript (value: Types.StoredScript) (req: PutScriptRequest) =
             { req with Script = value }
 
     type RankEvalRequest = {
-        Index: CoreTypes.Indices
+        Index: Types.Indices
         AllowNoIndices: bool option
-        ExpandWildcards: CoreTypes.ExpandWildcards option
+        ExpandWildcards: Types.ExpandWildcards option
         IgnoreUnavailable: bool option
-        SearchType: CoreTypes.SearchType option
-        Requests: GlobalRankEval.RankEvalRequestItem list
-        Metric: GlobalRankEval.RankEvalMetric option
+        SearchType: Types.SearchType option
+        Requests: Types.RankEvalRequestItem list
+        Metric: Types.RankEvalMetric option
     }
 
         with
@@ -3292,7 +3293,7 @@ module GlobalOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: RankEvalRequest, value: CoreTypes.Indices) =
+        member _.Index(state: RankEvalRequest, value: Types.Indices) =
             { state with Index = value }
 
         [<CustomOperation("allowNoIndices")>]
@@ -3300,7 +3301,7 @@ module GlobalOperations =
             { state with AllowNoIndices = Some value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: RankEvalRequest, value: CoreTypes.ExpandWildcards) =
+        member _.ExpandWildcards(state: RankEvalRequest, value: Types.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("ignoreUnavailable")>]
@@ -3308,15 +3309,15 @@ module GlobalOperations =
             { state with IgnoreUnavailable = Some value }
 
         [<CustomOperation("searchType")>]
-        member _.SearchType(state: RankEvalRequest, value: CoreTypes.SearchType) =
+        member _.SearchType(state: RankEvalRequest, value: Types.SearchType) =
             { state with SearchType = Some value }
 
         [<CustomOperation("requests")>]
-        member _.Requests(state: RankEvalRequest, value: GlobalRankEval.RankEvalRequestItem list) =
+        member _.Requests(state: RankEvalRequest, value: Types.RankEvalRequestItem list) =
             { state with Requests = value }
 
         [<CustomOperation("metric")>]
-        member _.Metric(state: RankEvalRequest, value: GlobalRankEval.RankEvalMetric) =
+        member _.Metric(state: RankEvalRequest, value: Types.RankEvalMetric) =
             { state with Metric = Some value }
 
     let rankEvalRequest = RankEvalRequestBuilder()
@@ -3324,32 +3325,32 @@ module GlobalOperations =
     module RankEval =
         let withAllowNoIndices (value: bool) (req: RankEvalRequest) =
             { req with AllowNoIndices = Some value }
-        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: RankEvalRequest) =
+        let withExpandWildcards (value: Types.ExpandWildcards) (req: RankEvalRequest) =
             { req with ExpandWildcards = Some value }
         let withIgnoreUnavailable (value: bool) (req: RankEvalRequest) =
             { req with IgnoreUnavailable = Some value }
-        let withSearchType (value: CoreTypes.SearchType) (req: RankEvalRequest) =
+        let withSearchType (value: Types.SearchType) (req: RankEvalRequest) =
             { req with SearchType = Some value }
-        let withRequests (value: GlobalRankEval.RankEvalRequestItem list) (req: RankEvalRequest) =
+        let withRequests (value: Types.RankEvalRequestItem list) (req: RankEvalRequest) =
             { req with Requests = value }
-        let withMetric (value: GlobalRankEval.RankEvalMetric) (req: RankEvalRequest) =
+        let withMetric (value: Types.RankEvalMetric) (req: RankEvalRequest) =
             { req with Metric = Some value }
 
     type ReindexRequest = {
         Refresh: bool option
-        RequestsPerSecond: CoreTypes.Float option
-        Scroll: CoreTypes.Duration option
-        Slices: CoreTypes.Slices option
-        MaxDocs: CoreTypes.Integer option
-        Timeout: CoreTypes.Duration option
-        WaitForActiveShards: CoreTypes.WaitForActiveShards option
+        RequestsPerSecond: Types.Float option
+        Scroll: Types.Duration option
+        Slices: Types.Slices option
+        MaxDocs: Types.Integer option
+        Timeout: Types.Duration option
+        WaitForActiveShards: Types.WaitForActiveShards option
         WaitForCompletion: bool option
         RequireAlias: bool option
-        Conflicts: CoreTypes.Conflicts option
-        Dest: GlobalReindex.Destination
-        MaxDocs: CoreTypes.Long option
-        Script: CoreTypes.Script option
-        Source: GlobalReindex.Source
+        Conflicts: Types.Conflicts option
+        Dest: Types.GlobalReindexDestination
+        MaxDocs: Types.Long option
+        Script: Types.Script option
+        Source: Types.GlobalReindexSource
     }
 
         with
@@ -3405,27 +3406,27 @@ module GlobalOperations =
             { state with Refresh = Some value }
 
         [<CustomOperation("requestsPerSecond")>]
-        member _.RequestsPerSecond(state: ReindexRequest, value: CoreTypes.Float) =
+        member _.RequestsPerSecond(state: ReindexRequest, value: Types.Float) =
             { state with RequestsPerSecond = Some value }
 
         [<CustomOperation("scroll")>]
-        member _.Scroll(state: ReindexRequest, value: CoreTypes.Duration) =
+        member _.Scroll(state: ReindexRequest, value: Types.Duration) =
             { state with Scroll = Some value }
 
         [<CustomOperation("slices")>]
-        member _.Slices(state: ReindexRequest, value: CoreTypes.Slices) =
+        member _.Slices(state: ReindexRequest, value: Types.Slices) =
             { state with Slices = Some value }
 
         [<CustomOperation("maxDocs")>]
-        member _.MaxDocs(state: ReindexRequest, value: CoreTypes.Integer) =
+        member _.MaxDocs(state: ReindexRequest, value: Types.Integer) =
             { state with MaxDocs = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: ReindexRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: ReindexRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("waitForActiveShards")>]
-        member _.WaitForActiveShards(state: ReindexRequest, value: CoreTypes.WaitForActiveShards) =
+        member _.WaitForActiveShards(state: ReindexRequest, value: Types.WaitForActiveShards) =
             { state with WaitForActiveShards = Some value }
 
         [<CustomOperation("waitForCompletion")>]
@@ -3437,23 +3438,23 @@ module GlobalOperations =
             { state with RequireAlias = Some value }
 
         [<CustomOperation("conflicts")>]
-        member _.Conflicts(state: ReindexRequest, value: CoreTypes.Conflicts) =
+        member _.Conflicts(state: ReindexRequest, value: Types.Conflicts) =
             { state with Conflicts = Some value }
 
         [<CustomOperation("dest")>]
-        member _.Dest(state: ReindexRequest, value: GlobalReindex.Destination) =
+        member _.Dest(state: ReindexRequest, value: Types.GlobalReindexDestination) =
             { state with Dest = value }
 
         [<CustomOperation("maxDocs")>]
-        member _.MaxDocs(state: ReindexRequest, value: CoreTypes.Long) =
+        member _.MaxDocs(state: ReindexRequest, value: Types.Long) =
             { state with MaxDocs = Some value }
 
         [<CustomOperation("script")>]
-        member _.Script(state: ReindexRequest, value: CoreTypes.Script) =
+        member _.Script(state: ReindexRequest, value: Types.Script) =
             { state with Script = Some value }
 
         [<CustomOperation("source")>]
-        member _.Source(state: ReindexRequest, value: GlobalReindex.Source) =
+        member _.Source(state: ReindexRequest, value: Types.GlobalReindexSource) =
             { state with Source = value }
 
     let reindexRequest = ReindexRequestBuilder()
@@ -3461,37 +3462,37 @@ module GlobalOperations =
     module Reindex =
         let withRefresh (value: bool) (req: ReindexRequest) =
             { req with Refresh = Some value }
-        let withRequestsPerSecond (value: CoreTypes.Float) (req: ReindexRequest) =
+        let withRequestsPerSecond (value: Types.Float) (req: ReindexRequest) =
             { req with RequestsPerSecond = Some value }
-        let withScroll (value: CoreTypes.Duration) (req: ReindexRequest) =
+        let withScroll (value: Types.Duration) (req: ReindexRequest) =
             { req with Scroll = Some value }
-        let withSlices (value: CoreTypes.Slices) (req: ReindexRequest) =
+        let withSlices (value: Types.Slices) (req: ReindexRequest) =
             { req with Slices = Some value }
-        let withMaxDocs (value: CoreTypes.Integer) (req: ReindexRequest) =
+        let withMaxDocs (value: Types.Integer) (req: ReindexRequest) =
             { req with MaxDocs = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: ReindexRequest) =
+        let withTimeout (value: Types.Duration) (req: ReindexRequest) =
             { req with Timeout = Some value }
-        let withWaitForActiveShards (value: CoreTypes.WaitForActiveShards) (req: ReindexRequest) =
+        let withWaitForActiveShards (value: Types.WaitForActiveShards) (req: ReindexRequest) =
             { req with WaitForActiveShards = Some value }
         let withWaitForCompletion (value: bool) (req: ReindexRequest) =
             { req with WaitForCompletion = Some value }
         let withRequireAlias (value: bool) (req: ReindexRequest) =
             { req with RequireAlias = Some value }
-        let withConflicts (value: CoreTypes.Conflicts) (req: ReindexRequest) =
+        let withConflicts (value: Types.Conflicts) (req: ReindexRequest) =
             { req with Conflicts = Some value }
-        let withDest (value: GlobalReindex.Destination) (req: ReindexRequest) =
+        let withDest (value: Types.GlobalReindexDestination) (req: ReindexRequest) =
             { req with Dest = value }
-        let withMaxDocs (value: CoreTypes.Long) (req: ReindexRequest) =
+        let withMaxDocs (value: Types.Long) (req: ReindexRequest) =
             { req with MaxDocs = Some value }
-        let withScript (value: CoreTypes.Script) (req: ReindexRequest) =
+        let withScript (value: Types.Script) (req: ReindexRequest) =
             { req with Script = Some value }
-        let withSource (value: GlobalReindex.Source) (req: ReindexRequest) =
+        let withSource (value: Types.GlobalReindexSource) (req: ReindexRequest) =
             { req with Source = value }
 
     type ReindexRethrottleRequest = {
-        TaskId: CoreTypes.Id
-        RequestsPerSecond: CoreTypes.Float
-        GroupBy: TasksTypes.GroupBy option
+        TaskId: Types.Id
+        RequestsPerSecond: Types.Float
+        GroupBy: Types.GroupBy option
     }
 
         with
@@ -3523,31 +3524,31 @@ module GlobalOperations =
             }
 
         [<CustomOperation("taskId")>]
-        member _.TaskId(state: ReindexRethrottleRequest, value: CoreTypes.Id) =
+        member _.TaskId(state: ReindexRethrottleRequest, value: Types.Id) =
             { state with TaskId = value }
 
         [<CustomOperation("requestsPerSecond")>]
-        member _.RequestsPerSecond(state: ReindexRethrottleRequest, value: CoreTypes.Float) =
+        member _.RequestsPerSecond(state: ReindexRethrottleRequest, value: Types.Float) =
             { state with RequestsPerSecond = value }
 
         [<CustomOperation("groupBy")>]
-        member _.GroupBy(state: ReindexRethrottleRequest, value: TasksTypes.GroupBy) =
+        member _.GroupBy(state: ReindexRethrottleRequest, value: Types.GroupBy) =
             { state with GroupBy = Some value }
 
     let reindexRethrottleRequest = ReindexRethrottleRequestBuilder()
 
     module ReindexRethrottle =
-        let withRequestsPerSecond (value: CoreTypes.Float) (req: ReindexRethrottleRequest) =
+        let withRequestsPerSecond (value: Types.Float) (req: ReindexRethrottleRequest) =
             { req with RequestsPerSecond = value }
-        let withGroupBy (value: TasksTypes.GroupBy) (req: ReindexRethrottleRequest) =
+        let withGroupBy (value: Types.GroupBy) (req: ReindexRethrottleRequest) =
             { req with GroupBy = Some value }
 
     type RenderSearchTemplateRequest = {
-        Id: CoreTypes.Id
-        Id: CoreTypes.Id option
+        Id: Types.Id
+        Id: Types.Id option
         File: string option
         Params: Map<string, System.Text.Json.JsonElement> option
-        Source: CoreTypes.ScriptSource option
+        Source: Types.ScriptSource option
     }
 
         with
@@ -3575,11 +3576,11 @@ module GlobalOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: RenderSearchTemplateRequest, value: CoreTypes.Id) =
+        member _.Id(state: RenderSearchTemplateRequest, value: Types.Id) =
             { state with Id = value }
 
         [<CustomOperation("id")>]
-        member _.Id(state: RenderSearchTemplateRequest, value: CoreTypes.Id) =
+        member _.Id(state: RenderSearchTemplateRequest, value: Types.Id) =
             { state with Id = Some value }
 
         [<CustomOperation("file")>]
@@ -3591,25 +3592,25 @@ module GlobalOperations =
             { state with Params = Some value }
 
         [<CustomOperation("source")>]
-        member _.Source(state: RenderSearchTemplateRequest, value: CoreTypes.ScriptSource) =
+        member _.Source(state: RenderSearchTemplateRequest, value: Types.ScriptSource) =
             { state with Source = Some value }
 
     let renderSearchTemplateRequest = RenderSearchTemplateRequestBuilder()
 
     module RenderSearchTemplate =
-        let withId (value: CoreTypes.Id) (req: RenderSearchTemplateRequest) =
+        let withId (value: Types.Id) (req: RenderSearchTemplateRequest) =
             { req with Id = Some value }
         let withFile (value: string) (req: RenderSearchTemplateRequest) =
             { req with File = Some value }
         let withParams (value: Map<string, System.Text.Json.JsonElement>) (req: RenderSearchTemplateRequest) =
             { req with Params = Some value }
-        let withSource (value: CoreTypes.ScriptSource) (req: RenderSearchTemplateRequest) =
+        let withSource (value: Types.ScriptSource) (req: RenderSearchTemplateRequest) =
             { req with Source = Some value }
 
     type ScriptsPainlessExecuteRequest = {
-        Context: GlobalScriptsPainlessExecute.PainlessContext option
-        ContextSetup: GlobalScriptsPainlessExecute.PainlessContextSetup option
-        Script: CoreTypes.Script option
+        Context: Types.PainlessContext option
+        ContextSetup: Types.PainlessContextSetup option
+        Script: Types.Script option
     }
 
         with
@@ -3635,34 +3636,34 @@ module GlobalOperations =
             }
 
         [<CustomOperation("context")>]
-        member _.Context(state: ScriptsPainlessExecuteRequest, value: GlobalScriptsPainlessExecute.PainlessContext) =
+        member _.Context(state: ScriptsPainlessExecuteRequest, value: Types.PainlessContext) =
             { state with Context = Some value }
 
         [<CustomOperation("contextSetup")>]
-        member _.ContextSetup(state: ScriptsPainlessExecuteRequest, value: GlobalScriptsPainlessExecute.PainlessContextSetup) =
+        member _.ContextSetup(state: ScriptsPainlessExecuteRequest, value: Types.PainlessContextSetup) =
             { state with ContextSetup = Some value }
 
         [<CustomOperation("script")>]
-        member _.Script(state: ScriptsPainlessExecuteRequest, value: CoreTypes.Script) =
+        member _.Script(state: ScriptsPainlessExecuteRequest, value: Types.Script) =
             { state with Script = Some value }
 
     let scriptsPainlessExecuteRequest = ScriptsPainlessExecuteRequestBuilder()
 
     module ScriptsPainlessExecute =
-        let withContext (value: GlobalScriptsPainlessExecute.PainlessContext) (req: ScriptsPainlessExecuteRequest) =
+        let withContext (value: Types.PainlessContext) (req: ScriptsPainlessExecuteRequest) =
             { req with Context = Some value }
-        let withContextSetup (value: GlobalScriptsPainlessExecute.PainlessContextSetup) (req: ScriptsPainlessExecuteRequest) =
+        let withContextSetup (value: Types.PainlessContextSetup) (req: ScriptsPainlessExecuteRequest) =
             { req with ContextSetup = Some value }
-        let withScript (value: CoreTypes.Script) (req: ScriptsPainlessExecuteRequest) =
+        let withScript (value: Types.Script) (req: ScriptsPainlessExecuteRequest) =
             { req with Script = Some value }
 
     type ScrollRequest = {
-        ScrollId: CoreTypes.ScrollId
-        Scroll: CoreTypes.Duration option
-        ScrollId: CoreTypes.ScrollId option
+        ScrollId: Types.ScrollId
+        Scroll: Types.Duration option
+        ScrollId: Types.ScrollId option
         RestTotalHitsAsInt: bool option
-        Scroll: CoreTypes.Duration option
-        ScrollId: CoreTypes.ScrollId
+        Scroll: Types.Duration option
+        ScrollId: Types.ScrollId
     }
 
         with
@@ -3686,7 +3687,7 @@ module GlobalOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type ScrollResponse = GlobalSearch.ResponseBody<GlobalScrollResponse.TDocument>
+    type ScrollResponse = Types.ResponseBody<Types.TDocument>
 
     type ScrollRequestBuilder() =
         member _.Yield(_: unit) : ScrollRequest =
@@ -3700,15 +3701,15 @@ module GlobalOperations =
             }
 
         [<CustomOperation("scrollId")>]
-        member _.ScrollId(state: ScrollRequest, value: CoreTypes.ScrollId) =
+        member _.ScrollId(state: ScrollRequest, value: Types.ScrollId) =
             { state with ScrollId = value }
 
         [<CustomOperation("scroll")>]
-        member _.Scroll(state: ScrollRequest, value: CoreTypes.Duration) =
+        member _.Scroll(state: ScrollRequest, value: Types.Duration) =
             { state with Scroll = Some value }
 
         [<CustomOperation("scrollId")>]
-        member _.ScrollId(state: ScrollRequest, value: CoreTypes.ScrollId) =
+        member _.ScrollId(state: ScrollRequest, value: Types.ScrollId) =
             { state with ScrollId = Some value }
 
         [<CustomOperation("restTotalHitsAsInt")>]
@@ -3716,109 +3717,109 @@ module GlobalOperations =
             { state with RestTotalHitsAsInt = Some value }
 
         [<CustomOperation("scroll")>]
-        member _.Scroll(state: ScrollRequest, value: CoreTypes.Duration) =
+        member _.Scroll(state: ScrollRequest, value: Types.Duration) =
             { state with Scroll = Some value }
 
         [<CustomOperation("scrollId")>]
-        member _.ScrollId(state: ScrollRequest, value: CoreTypes.ScrollId) =
+        member _.ScrollId(state: ScrollRequest, value: Types.ScrollId) =
             { state with ScrollId = value }
 
     let scrollRequest = ScrollRequestBuilder()
 
     module Scroll =
-        let withScroll (value: CoreTypes.Duration) (req: ScrollRequest) =
+        let withScroll (value: Types.Duration) (req: ScrollRequest) =
             { req with Scroll = Some value }
-        let withScrollId (value: CoreTypes.ScrollId) (req: ScrollRequest) =
+        let withScrollId (value: Types.ScrollId) (req: ScrollRequest) =
             { req with ScrollId = Some value }
         let withRestTotalHitsAsInt (value: bool) (req: ScrollRequest) =
             { req with RestTotalHitsAsInt = Some value }
-        let withScroll (value: CoreTypes.Duration) (req: ScrollRequest) =
+        let withScroll (value: Types.Duration) (req: ScrollRequest) =
             { req with Scroll = Some value }
-        let withScrollId (value: CoreTypes.ScrollId) (req: ScrollRequest) =
+        let withScrollId (value: Types.ScrollId) (req: ScrollRequest) =
             { req with ScrollId = value }
 
     type SearchRequest = {
-        Index: CoreTypes.Indices
+        Index: Types.Indices
         AllowNoIndices: bool option
         AllowPartialSearchResults: bool option
         Analyzer: string option
         AnalyzeWildcard: bool option
-        BatchedReduceSize: CoreTypes.Long option
+        BatchedReduceSize: Types.Long option
         CcsMinimizeRoundtrips: bool option
-        DefaultOperator: CoreTypes.Operator option
+        DefaultOperator: Types.Operator option
         Df: string option
-        DocvalueFields: CoreTypes.Fields option
-        ExpandWildcards: CoreTypes.ExpandWildcards option
+        DocvalueFields: Types.Fields option
+        ExpandWildcards: Types.ExpandWildcards option
         Explain: bool option
         IgnoreThrottled: bool option
         IgnoreUnavailable: bool option
         IncludeNamedQueriesScore: bool option
         Lenient: bool option
-        MaxConcurrentShardRequests: CoreTypes.Integer option
+        MaxConcurrentShardRequests: Types.Integer option
         Preference: string option
-        PreFilterShardSize: CoreTypes.Long option
+        PreFilterShardSize: Types.Long option
         RequestCache: bool option
-        Routing: CoreTypes.Routing option
-        Scroll: CoreTypes.Duration option
-        SearchType: CoreTypes.SearchType option
+        Routing: Types.Routing option
+        Scroll: Types.Duration option
+        SearchType: Types.SearchType option
         Stats: string list option
-        StoredFields: CoreTypes.Fields option
-        SuggestField: CoreTypes.Field option
-        SuggestMode: CoreTypes.SuggestMode option
-        SuggestSize: CoreTypes.Long option
+        StoredFields: Types.Fields option
+        SuggestField: Types.Field option
+        SuggestMode: Types.SuggestMode option
+        SuggestSize: Types.Long option
         SuggestText: string option
-        TerminateAfter: CoreTypes.Long option
-        Timeout: CoreTypes.Duration option
-        TrackTotalHits: GlobalSearchTypes.TrackHits option
+        TerminateAfter: Types.Long option
+        Timeout: Types.Duration option
+        TrackTotalHits: Types.TrackHits option
         TrackScores: bool option
         TypedKeys: bool option
         RestTotalHitsAsInt: bool option
         Version: bool option
-        Source: GlobalSearchTypes.SourceConfigParam option
-        SourceExcludes: CoreTypes.Fields option
+        Source: Types.SourceConfigParam option
+        SourceExcludes: Types.Fields option
         SourceExcludeVectors: bool option
-        SourceIncludes: CoreTypes.Fields option
+        SourceIncludes: Types.Fields option
         SeqNoPrimaryTerm: bool option
         Q: string option
-        Size: CoreTypes.Integer option
-        From: CoreTypes.Integer option
+        Size: Types.Integer option
+        From: Types.Integer option
         Sort: System.Text.Json.JsonElement option
         ForceSyntheticSource: bool option
-        Aggregations: Map<string, CoreTypes.AggregationContainer> option
-        Collapse: GlobalSearchTypes.FieldCollapse option
+        Aggregations: Map<string, Types.AggregationContainer> option
+        Collapse: Types.FieldCollapse option
         Explain: bool option
         Ext: Map<string, System.Text.Json.JsonElement> option
-        From: CoreTypes.Integer option
-        Highlight: GlobalSearchTypes.Highlight option
-        TrackTotalHits: GlobalSearchTypes.TrackHits option
-        IndicesBoost: Map<CoreTypes.IndexName, CoreTypes.Double> list option
-        DocvalueFields: CoreTypes.FieldAndFormat list option
+        From: Types.Integer option
+        Highlight: Types.Highlight option
+        TrackTotalHits: Types.TrackHits option
+        IndicesBoost: Map<Types.IndexName, Types.Double> list option
+        DocvalueFields: Types.FieldAndFormat list option
         Knn: System.Text.Json.JsonElement option
-        Rank: CoreTypes.RankContainer option
-        MinScore: CoreTypes.Double option
-        PostFilter: CoreTypes.QueryContainer option
+        Rank: Types.RankContainer option
+        MinScore: Types.Double option
+        PostFilter: Types.QueryContainer option
         Profile: bool option
-        Query: CoreTypes.QueryContainer option
+        Query: Types.QueryContainer option
         Rescore: System.Text.Json.JsonElement option
-        Retriever: CoreTypes.RetrieverContainer option
-        ScriptFields: Map<string, CoreTypes.ScriptField> option
-        SearchAfter: CoreTypes.SortResults option
-        Size: CoreTypes.Integer option
-        Slice: CoreTypes.SlicedScroll option
-        Sort: CoreTypes.Sort option
-        Source: GlobalSearchTypes.SourceConfig option
-        Fields: CoreTypes.FieldAndFormat list option
-        Suggest: GlobalSearchTypes.Suggester option
-        TerminateAfter: CoreTypes.Long option
+        Retriever: Types.RetrieverContainer option
+        ScriptFields: Map<string, Types.ScriptField> option
+        SearchAfter: Types.SortResults option
+        Size: Types.Integer option
+        Slice: Types.SlicedScroll option
+        Sort: Types.Sort option
+        Source: Types.SourceConfig option
+        Fields: Types.FieldAndFormat list option
+        Suggest: Types.Suggester option
+        TerminateAfter: Types.Long option
         Timeout: string option
         TrackScores: bool option
         Version: bool option
         SeqNoPrimaryTerm: bool option
-        StoredFields: CoreTypes.Fields option
-        Pit: GlobalSearchTypes.PointInTimeReference option
-        RuntimeMappings: CoreTypes.RuntimeFields option
+        StoredFields: Types.Fields option
+        Pit: Types.PointInTimeReference option
+        RuntimeMappings: Types.RuntimeFields option
         Stats: string list option
-        ProjectRouting: CoreTypes.ProjectRouting option
+        ProjectRouting: Types.ProjectRouting option
     }
 
         with
@@ -3884,7 +3885,7 @@ module GlobalOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type SearchResponse = GlobalSearch.ResponseBody<GlobalSearchResponse.TDocument>
+    type SearchResponse = Types.ResponseBody<Types.TDocument>
 
     type SearchRequestBuilder() =
         member _.Yield(_: unit) : SearchRequest =
@@ -3973,7 +3974,7 @@ module GlobalOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: SearchRequest, value: CoreTypes.Indices) =
+        member _.Index(state: SearchRequest, value: Types.Indices) =
             { state with Index = value }
 
         [<CustomOperation("allowNoIndices")>]
@@ -3993,7 +3994,7 @@ module GlobalOperations =
             { state with AnalyzeWildcard = Some value }
 
         [<CustomOperation("batchedReduceSize")>]
-        member _.BatchedReduceSize(state: SearchRequest, value: CoreTypes.Long) =
+        member _.BatchedReduceSize(state: SearchRequest, value: Types.Long) =
             { state with BatchedReduceSize = Some value }
 
         [<CustomOperation("ccsMinimizeRoundtrips")>]
@@ -4001,7 +4002,7 @@ module GlobalOperations =
             { state with CcsMinimizeRoundtrips = Some value }
 
         [<CustomOperation("defaultOperator")>]
-        member _.DefaultOperator(state: SearchRequest, value: CoreTypes.Operator) =
+        member _.DefaultOperator(state: SearchRequest, value: Types.Operator) =
             { state with DefaultOperator = Some value }
 
         [<CustomOperation("df")>]
@@ -4009,11 +4010,11 @@ module GlobalOperations =
             { state with Df = Some value }
 
         [<CustomOperation("docvalueFields")>]
-        member _.DocvalueFields(state: SearchRequest, value: CoreTypes.Fields) =
+        member _.DocvalueFields(state: SearchRequest, value: Types.Fields) =
             { state with DocvalueFields = Some value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: SearchRequest, value: CoreTypes.ExpandWildcards) =
+        member _.ExpandWildcards(state: SearchRequest, value: Types.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("explain")>]
@@ -4037,7 +4038,7 @@ module GlobalOperations =
             { state with Lenient = Some value }
 
         [<CustomOperation("maxConcurrentShardRequests")>]
-        member _.MaxConcurrentShardRequests(state: SearchRequest, value: CoreTypes.Integer) =
+        member _.MaxConcurrentShardRequests(state: SearchRequest, value: Types.Integer) =
             { state with MaxConcurrentShardRequests = Some value }
 
         [<CustomOperation("preference")>]
@@ -4045,7 +4046,7 @@ module GlobalOperations =
             { state with Preference = Some value }
 
         [<CustomOperation("preFilterShardSize")>]
-        member _.PreFilterShardSize(state: SearchRequest, value: CoreTypes.Long) =
+        member _.PreFilterShardSize(state: SearchRequest, value: Types.Long) =
             { state with PreFilterShardSize = Some value }
 
         [<CustomOperation("requestCache")>]
@@ -4053,15 +4054,15 @@ module GlobalOperations =
             { state with RequestCache = Some value }
 
         [<CustomOperation("routing")>]
-        member _.Routing(state: SearchRequest, value: CoreTypes.Routing) =
+        member _.Routing(state: SearchRequest, value: Types.Routing) =
             { state with Routing = Some value }
 
         [<CustomOperation("scroll")>]
-        member _.Scroll(state: SearchRequest, value: CoreTypes.Duration) =
+        member _.Scroll(state: SearchRequest, value: Types.Duration) =
             { state with Scroll = Some value }
 
         [<CustomOperation("searchType")>]
-        member _.SearchType(state: SearchRequest, value: CoreTypes.SearchType) =
+        member _.SearchType(state: SearchRequest, value: Types.SearchType) =
             { state with SearchType = Some value }
 
         [<CustomOperation("stats")>]
@@ -4069,19 +4070,19 @@ module GlobalOperations =
             { state with Stats = Some value }
 
         [<CustomOperation("storedFields")>]
-        member _.StoredFields(state: SearchRequest, value: CoreTypes.Fields) =
+        member _.StoredFields(state: SearchRequest, value: Types.Fields) =
             { state with StoredFields = Some value }
 
         [<CustomOperation("suggestField")>]
-        member _.SuggestField(state: SearchRequest, value: CoreTypes.Field) =
+        member _.SuggestField(state: SearchRequest, value: Types.Field) =
             { state with SuggestField = Some value }
 
         [<CustomOperation("suggestMode")>]
-        member _.SuggestMode(state: SearchRequest, value: CoreTypes.SuggestMode) =
+        member _.SuggestMode(state: SearchRequest, value: Types.SuggestMode) =
             { state with SuggestMode = Some value }
 
         [<CustomOperation("suggestSize")>]
-        member _.SuggestSize(state: SearchRequest, value: CoreTypes.Long) =
+        member _.SuggestSize(state: SearchRequest, value: Types.Long) =
             { state with SuggestSize = Some value }
 
         [<CustomOperation("suggestText")>]
@@ -4089,15 +4090,15 @@ module GlobalOperations =
             { state with SuggestText = Some value }
 
         [<CustomOperation("terminateAfter")>]
-        member _.TerminateAfter(state: SearchRequest, value: CoreTypes.Long) =
+        member _.TerminateAfter(state: SearchRequest, value: Types.Long) =
             { state with TerminateAfter = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: SearchRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: SearchRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("trackTotalHits")>]
-        member _.TrackTotalHits(state: SearchRequest, value: GlobalSearchTypes.TrackHits) =
+        member _.TrackTotalHits(state: SearchRequest, value: Types.TrackHits) =
             { state with TrackTotalHits = Some value }
 
         [<CustomOperation("trackScores")>]
@@ -4117,11 +4118,11 @@ module GlobalOperations =
             { state with Version = Some value }
 
         [<CustomOperation("source")>]
-        member _.Source(state: SearchRequest, value: GlobalSearchTypes.SourceConfigParam) =
+        member _.Source(state: SearchRequest, value: Types.SourceConfigParam) =
             { state with Source = Some value }
 
         [<CustomOperation("sourceExcludes")>]
-        member _.SourceExcludes(state: SearchRequest, value: CoreTypes.Fields) =
+        member _.SourceExcludes(state: SearchRequest, value: Types.Fields) =
             { state with SourceExcludes = Some value }
 
         [<CustomOperation("sourceExcludeVectors")>]
@@ -4129,7 +4130,7 @@ module GlobalOperations =
             { state with SourceExcludeVectors = Some value }
 
         [<CustomOperation("sourceIncludes")>]
-        member _.SourceIncludes(state: SearchRequest, value: CoreTypes.Fields) =
+        member _.SourceIncludes(state: SearchRequest, value: Types.Fields) =
             { state with SourceIncludes = Some value }
 
         [<CustomOperation("seqNoPrimaryTerm")>]
@@ -4141,11 +4142,11 @@ module GlobalOperations =
             { state with Q = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: SearchRequest, value: CoreTypes.Integer) =
+        member _.Size(state: SearchRequest, value: Types.Integer) =
             { state with Size = Some value }
 
         [<CustomOperation("from")>]
-        member _.From(state: SearchRequest, value: CoreTypes.Integer) =
+        member _.From(state: SearchRequest, value: Types.Integer) =
             { state with From = Some value }
 
         [<CustomOperation("sort")>]
@@ -4157,11 +4158,11 @@ module GlobalOperations =
             { state with ForceSyntheticSource = Some value }
 
         [<CustomOperation("aggregations")>]
-        member _.Aggregations(state: SearchRequest, value: Map<string, CoreTypes.AggregationContainer>) =
+        member _.Aggregations(state: SearchRequest, value: Map<string, Types.AggregationContainer>) =
             { state with Aggregations = Some value }
 
         [<CustomOperation("collapse")>]
-        member _.Collapse(state: SearchRequest, value: GlobalSearchTypes.FieldCollapse) =
+        member _.Collapse(state: SearchRequest, value: Types.FieldCollapse) =
             { state with Collapse = Some value }
 
         [<CustomOperation("explain")>]
@@ -4173,23 +4174,23 @@ module GlobalOperations =
             { state with Ext = Some value }
 
         [<CustomOperation("from")>]
-        member _.From(state: SearchRequest, value: CoreTypes.Integer) =
+        member _.From(state: SearchRequest, value: Types.Integer) =
             { state with From = Some value }
 
         [<CustomOperation("highlight")>]
-        member _.Highlight(state: SearchRequest, value: GlobalSearchTypes.Highlight) =
+        member _.Highlight(state: SearchRequest, value: Types.Highlight) =
             { state with Highlight = Some value }
 
         [<CustomOperation("trackTotalHits")>]
-        member _.TrackTotalHits(state: SearchRequest, value: GlobalSearchTypes.TrackHits) =
+        member _.TrackTotalHits(state: SearchRequest, value: Types.TrackHits) =
             { state with TrackTotalHits = Some value }
 
         [<CustomOperation("indicesBoost")>]
-        member _.IndicesBoost(state: SearchRequest, value: Map<CoreTypes.IndexName, CoreTypes.Double> list) =
+        member _.IndicesBoost(state: SearchRequest, value: Map<Types.IndexName, Types.Double> list) =
             { state with IndicesBoost = Some value }
 
         [<CustomOperation("docvalueFields")>]
-        member _.DocvalueFields(state: SearchRequest, value: CoreTypes.FieldAndFormat list) =
+        member _.DocvalueFields(state: SearchRequest, value: Types.FieldAndFormat list) =
             { state with DocvalueFields = Some value }
 
         [<CustomOperation("knn")>]
@@ -4197,15 +4198,15 @@ module GlobalOperations =
             { state with Knn = Some value }
 
         [<CustomOperation("rank")>]
-        member _.Rank(state: SearchRequest, value: CoreTypes.RankContainer) =
+        member _.Rank(state: SearchRequest, value: Types.RankContainer) =
             { state with Rank = Some value }
 
         [<CustomOperation("minScore")>]
-        member _.MinScore(state: SearchRequest, value: CoreTypes.Double) =
+        member _.MinScore(state: SearchRequest, value: Types.Double) =
             { state with MinScore = Some value }
 
         [<CustomOperation("postFilter")>]
-        member _.PostFilter(state: SearchRequest, value: CoreTypes.QueryContainer) =
+        member _.PostFilter(state: SearchRequest, value: Types.QueryContainer) =
             { state with PostFilter = Some value }
 
         [<CustomOperation("profile")>]
@@ -4213,7 +4214,7 @@ module GlobalOperations =
             { state with Profile = Some value }
 
         [<CustomOperation("query")>]
-        member _.Query(state: SearchRequest, value: CoreTypes.QueryContainer) =
+        member _.Query(state: SearchRequest, value: Types.QueryContainer) =
             { state with Query = Some value }
 
         [<CustomOperation("rescore")>]
@@ -4221,43 +4222,43 @@ module GlobalOperations =
             { state with Rescore = Some value }
 
         [<CustomOperation("retriever")>]
-        member _.Retriever(state: SearchRequest, value: CoreTypes.RetrieverContainer) =
+        member _.Retriever(state: SearchRequest, value: Types.RetrieverContainer) =
             { state with Retriever = Some value }
 
         [<CustomOperation("scriptFields")>]
-        member _.ScriptFields(state: SearchRequest, value: Map<string, CoreTypes.ScriptField>) =
+        member _.ScriptFields(state: SearchRequest, value: Map<string, Types.ScriptField>) =
             { state with ScriptFields = Some value }
 
         [<CustomOperation("searchAfter")>]
-        member _.SearchAfter(state: SearchRequest, value: CoreTypes.SortResults) =
+        member _.SearchAfter(state: SearchRequest, value: Types.SortResults) =
             { state with SearchAfter = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: SearchRequest, value: CoreTypes.Integer) =
+        member _.Size(state: SearchRequest, value: Types.Integer) =
             { state with Size = Some value }
 
         [<CustomOperation("slice")>]
-        member _.Slice(state: SearchRequest, value: CoreTypes.SlicedScroll) =
+        member _.Slice(state: SearchRequest, value: Types.SlicedScroll) =
             { state with Slice = Some value }
 
         [<CustomOperation("sort")>]
-        member _.Sort(state: SearchRequest, value: CoreTypes.Sort) =
+        member _.Sort(state: SearchRequest, value: Types.Sort) =
             { state with Sort = Some value }
 
         [<CustomOperation("source")>]
-        member _.Source(state: SearchRequest, value: GlobalSearchTypes.SourceConfig) =
+        member _.Source(state: SearchRequest, value: Types.SourceConfig) =
             { state with Source = Some value }
 
         [<CustomOperation("fields")>]
-        member _.Fields(state: SearchRequest, value: CoreTypes.FieldAndFormat list) =
+        member _.Fields(state: SearchRequest, value: Types.FieldAndFormat list) =
             { state with Fields = Some value }
 
         [<CustomOperation("suggest")>]
-        member _.Suggest(state: SearchRequest, value: GlobalSearchTypes.Suggester) =
+        member _.Suggest(state: SearchRequest, value: Types.Suggester) =
             { state with Suggest = Some value }
 
         [<CustomOperation("terminateAfter")>]
-        member _.TerminateAfter(state: SearchRequest, value: CoreTypes.Long) =
+        member _.TerminateAfter(state: SearchRequest, value: Types.Long) =
             { state with TerminateAfter = Some value }
 
         [<CustomOperation("timeout")>]
@@ -4277,15 +4278,15 @@ module GlobalOperations =
             { state with SeqNoPrimaryTerm = Some value }
 
         [<CustomOperation("storedFields")>]
-        member _.StoredFields(state: SearchRequest, value: CoreTypes.Fields) =
+        member _.StoredFields(state: SearchRequest, value: Types.Fields) =
             { state with StoredFields = Some value }
 
         [<CustomOperation("pit")>]
-        member _.Pit(state: SearchRequest, value: GlobalSearchTypes.PointInTimeReference) =
+        member _.Pit(state: SearchRequest, value: Types.PointInTimeReference) =
             { state with Pit = Some value }
 
         [<CustomOperation("runtimeMappings")>]
-        member _.RuntimeMappings(state: SearchRequest, value: CoreTypes.RuntimeFields) =
+        member _.RuntimeMappings(state: SearchRequest, value: Types.RuntimeFields) =
             { state with RuntimeMappings = Some value }
 
         [<CustomOperation("stats")>]
@@ -4293,7 +4294,7 @@ module GlobalOperations =
             { state with Stats = Some value }
 
         [<CustomOperation("projectRouting")>]
-        member _.ProjectRouting(state: SearchRequest, value: CoreTypes.ProjectRouting) =
+        member _.ProjectRouting(state: SearchRequest, value: Types.ProjectRouting) =
             { state with ProjectRouting = Some value }
 
     let searchRequest = SearchRequestBuilder()
@@ -4307,17 +4308,17 @@ module GlobalOperations =
             { req with Analyzer = Some value }
         let withAnalyzeWildcard (value: bool) (req: SearchRequest) =
             { req with AnalyzeWildcard = Some value }
-        let withBatchedReduceSize (value: CoreTypes.Long) (req: SearchRequest) =
+        let withBatchedReduceSize (value: Types.Long) (req: SearchRequest) =
             { req with BatchedReduceSize = Some value }
         let withCcsMinimizeRoundtrips (value: bool) (req: SearchRequest) =
             { req with CcsMinimizeRoundtrips = Some value }
-        let withDefaultOperator (value: CoreTypes.Operator) (req: SearchRequest) =
+        let withDefaultOperator (value: Types.Operator) (req: SearchRequest) =
             { req with DefaultOperator = Some value }
         let withDf (value: string) (req: SearchRequest) =
             { req with Df = Some value }
-        let withDocvalueFields (value: CoreTypes.Fields) (req: SearchRequest) =
+        let withDocvalueFields (value: Types.Fields) (req: SearchRequest) =
             { req with DocvalueFields = Some value }
-        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: SearchRequest) =
+        let withExpandWildcards (value: Types.ExpandWildcards) (req: SearchRequest) =
             { req with ExpandWildcards = Some value }
         let withExplain (value: bool) (req: SearchRequest) =
             { req with Explain = Some value }
@@ -4329,37 +4330,37 @@ module GlobalOperations =
             { req with IncludeNamedQueriesScore = Some value }
         let withLenient (value: bool) (req: SearchRequest) =
             { req with Lenient = Some value }
-        let withMaxConcurrentShardRequests (value: CoreTypes.Integer) (req: SearchRequest) =
+        let withMaxConcurrentShardRequests (value: Types.Integer) (req: SearchRequest) =
             { req with MaxConcurrentShardRequests = Some value }
         let withPreference (value: string) (req: SearchRequest) =
             { req with Preference = Some value }
-        let withPreFilterShardSize (value: CoreTypes.Long) (req: SearchRequest) =
+        let withPreFilterShardSize (value: Types.Long) (req: SearchRequest) =
             { req with PreFilterShardSize = Some value }
         let withRequestCache (value: bool) (req: SearchRequest) =
             { req with RequestCache = Some value }
-        let withRouting (value: CoreTypes.Routing) (req: SearchRequest) =
+        let withRouting (value: Types.Routing) (req: SearchRequest) =
             { req with Routing = Some value }
-        let withScroll (value: CoreTypes.Duration) (req: SearchRequest) =
+        let withScroll (value: Types.Duration) (req: SearchRequest) =
             { req with Scroll = Some value }
-        let withSearchType (value: CoreTypes.SearchType) (req: SearchRequest) =
+        let withSearchType (value: Types.SearchType) (req: SearchRequest) =
             { req with SearchType = Some value }
         let withStats (value: string list) (req: SearchRequest) =
             { req with Stats = Some value }
-        let withStoredFields (value: CoreTypes.Fields) (req: SearchRequest) =
+        let withStoredFields (value: Types.Fields) (req: SearchRequest) =
             { req with StoredFields = Some value }
-        let withSuggestField (value: CoreTypes.Field) (req: SearchRequest) =
+        let withSuggestField (value: Types.Field) (req: SearchRequest) =
             { req with SuggestField = Some value }
-        let withSuggestMode (value: CoreTypes.SuggestMode) (req: SearchRequest) =
+        let withSuggestMode (value: Types.SuggestMode) (req: SearchRequest) =
             { req with SuggestMode = Some value }
-        let withSuggestSize (value: CoreTypes.Long) (req: SearchRequest) =
+        let withSuggestSize (value: Types.Long) (req: SearchRequest) =
             { req with SuggestSize = Some value }
         let withSuggestText (value: string) (req: SearchRequest) =
             { req with SuggestText = Some value }
-        let withTerminateAfter (value: CoreTypes.Long) (req: SearchRequest) =
+        let withTerminateAfter (value: Types.Long) (req: SearchRequest) =
             { req with TerminateAfter = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: SearchRequest) =
+        let withTimeout (value: Types.Duration) (req: SearchRequest) =
             { req with Timeout = Some value }
-        let withTrackTotalHits (value: GlobalSearchTypes.TrackHits) (req: SearchRequest) =
+        let withTrackTotalHits (value: Types.TrackHits) (req: SearchRequest) =
             { req with TrackTotalHits = Some value }
         let withTrackScores (value: bool) (req: SearchRequest) =
             { req with TrackScores = Some value }
@@ -4369,77 +4370,77 @@ module GlobalOperations =
             { req with RestTotalHitsAsInt = Some value }
         let withVersion (value: bool) (req: SearchRequest) =
             { req with Version = Some value }
-        let withSource (value: GlobalSearchTypes.SourceConfigParam) (req: SearchRequest) =
+        let withSource (value: Types.SourceConfigParam) (req: SearchRequest) =
             { req with Source = Some value }
-        let withSourceExcludes (value: CoreTypes.Fields) (req: SearchRequest) =
+        let withSourceExcludes (value: Types.Fields) (req: SearchRequest) =
             { req with SourceExcludes = Some value }
         let withSourceExcludeVectors (value: bool) (req: SearchRequest) =
             { req with SourceExcludeVectors = Some value }
-        let withSourceIncludes (value: CoreTypes.Fields) (req: SearchRequest) =
+        let withSourceIncludes (value: Types.Fields) (req: SearchRequest) =
             { req with SourceIncludes = Some value }
         let withSeqNoPrimaryTerm (value: bool) (req: SearchRequest) =
             { req with SeqNoPrimaryTerm = Some value }
         let withQ (value: string) (req: SearchRequest) =
             { req with Q = Some value }
-        let withSize (value: CoreTypes.Integer) (req: SearchRequest) =
+        let withSize (value: Types.Integer) (req: SearchRequest) =
             { req with Size = Some value }
-        let withFrom (value: CoreTypes.Integer) (req: SearchRequest) =
+        let withFrom (value: Types.Integer) (req: SearchRequest) =
             { req with From = Some value }
         let withSort (value: System.Text.Json.JsonElement) (req: SearchRequest) =
             { req with Sort = Some value }
         let withForceSyntheticSource (value: bool) (req: SearchRequest) =
             { req with ForceSyntheticSource = Some value }
-        let withAggregations (value: Map<string, CoreTypes.AggregationContainer>) (req: SearchRequest) =
+        let withAggregations (value: Map<string, Types.AggregationContainer>) (req: SearchRequest) =
             { req with Aggregations = Some value }
-        let withCollapse (value: GlobalSearchTypes.FieldCollapse) (req: SearchRequest) =
+        let withCollapse (value: Types.FieldCollapse) (req: SearchRequest) =
             { req with Collapse = Some value }
         let withExplain (value: bool) (req: SearchRequest) =
             { req with Explain = Some value }
         let withExt (value: Map<string, System.Text.Json.JsonElement>) (req: SearchRequest) =
             { req with Ext = Some value }
-        let withFrom (value: CoreTypes.Integer) (req: SearchRequest) =
+        let withFrom (value: Types.Integer) (req: SearchRequest) =
             { req with From = Some value }
-        let withHighlight (value: GlobalSearchTypes.Highlight) (req: SearchRequest) =
+        let withHighlight (value: Types.Highlight) (req: SearchRequest) =
             { req with Highlight = Some value }
-        let withTrackTotalHits (value: GlobalSearchTypes.TrackHits) (req: SearchRequest) =
+        let withTrackTotalHits (value: Types.TrackHits) (req: SearchRequest) =
             { req with TrackTotalHits = Some value }
-        let withIndicesBoost (value: Map<CoreTypes.IndexName, CoreTypes.Double> list) (req: SearchRequest) =
+        let withIndicesBoost (value: Map<Types.IndexName, Types.Double> list) (req: SearchRequest) =
             { req with IndicesBoost = Some value }
-        let withDocvalueFields (value: CoreTypes.FieldAndFormat list) (req: SearchRequest) =
+        let withDocvalueFields (value: Types.FieldAndFormat list) (req: SearchRequest) =
             { req with DocvalueFields = Some value }
         let withKnn (value: System.Text.Json.JsonElement) (req: SearchRequest) =
             { req with Knn = Some value }
-        let withRank (value: CoreTypes.RankContainer) (req: SearchRequest) =
+        let withRank (value: Types.RankContainer) (req: SearchRequest) =
             { req with Rank = Some value }
-        let withMinScore (value: CoreTypes.Double) (req: SearchRequest) =
+        let withMinScore (value: Types.Double) (req: SearchRequest) =
             { req with MinScore = Some value }
-        let withPostFilter (value: CoreTypes.QueryContainer) (req: SearchRequest) =
+        let withPostFilter (value: Types.QueryContainer) (req: SearchRequest) =
             { req with PostFilter = Some value }
         let withProfile (value: bool) (req: SearchRequest) =
             { req with Profile = Some value }
-        let withQuery (value: CoreTypes.QueryContainer) (req: SearchRequest) =
+        let withQuery (value: Types.QueryContainer) (req: SearchRequest) =
             { req with Query = Some value }
         let withRescore (value: System.Text.Json.JsonElement) (req: SearchRequest) =
             { req with Rescore = Some value }
-        let withRetriever (value: CoreTypes.RetrieverContainer) (req: SearchRequest) =
+        let withRetriever (value: Types.RetrieverContainer) (req: SearchRequest) =
             { req with Retriever = Some value }
-        let withScriptFields (value: Map<string, CoreTypes.ScriptField>) (req: SearchRequest) =
+        let withScriptFields (value: Map<string, Types.ScriptField>) (req: SearchRequest) =
             { req with ScriptFields = Some value }
-        let withSearchAfter (value: CoreTypes.SortResults) (req: SearchRequest) =
+        let withSearchAfter (value: Types.SortResults) (req: SearchRequest) =
             { req with SearchAfter = Some value }
-        let withSize (value: CoreTypes.Integer) (req: SearchRequest) =
+        let withSize (value: Types.Integer) (req: SearchRequest) =
             { req with Size = Some value }
-        let withSlice (value: CoreTypes.SlicedScroll) (req: SearchRequest) =
+        let withSlice (value: Types.SlicedScroll) (req: SearchRequest) =
             { req with Slice = Some value }
-        let withSort (value: CoreTypes.Sort) (req: SearchRequest) =
+        let withSort (value: Types.Sort) (req: SearchRequest) =
             { req with Sort = Some value }
-        let withSource (value: GlobalSearchTypes.SourceConfig) (req: SearchRequest) =
+        let withSource (value: Types.SourceConfig) (req: SearchRequest) =
             { req with Source = Some value }
-        let withFields (value: CoreTypes.FieldAndFormat list) (req: SearchRequest) =
+        let withFields (value: Types.FieldAndFormat list) (req: SearchRequest) =
             { req with Fields = Some value }
-        let withSuggest (value: GlobalSearchTypes.Suggester) (req: SearchRequest) =
+        let withSuggest (value: Types.Suggester) (req: SearchRequest) =
             { req with Suggest = Some value }
-        let withTerminateAfter (value: CoreTypes.Long) (req: SearchRequest) =
+        let withTerminateAfter (value: Types.Long) (req: SearchRequest) =
             { req with TerminateAfter = Some value }
         let withTimeout (value: string) (req: SearchRequest) =
             { req with Timeout = Some value }
@@ -4449,46 +4450,46 @@ module GlobalOperations =
             { req with Version = Some value }
         let withSeqNoPrimaryTerm (value: bool) (req: SearchRequest) =
             { req with SeqNoPrimaryTerm = Some value }
-        let withStoredFields (value: CoreTypes.Fields) (req: SearchRequest) =
+        let withStoredFields (value: Types.Fields) (req: SearchRequest) =
             { req with StoredFields = Some value }
-        let withPit (value: GlobalSearchTypes.PointInTimeReference) (req: SearchRequest) =
+        let withPit (value: Types.PointInTimeReference) (req: SearchRequest) =
             { req with Pit = Some value }
-        let withRuntimeMappings (value: CoreTypes.RuntimeFields) (req: SearchRequest) =
+        let withRuntimeMappings (value: Types.RuntimeFields) (req: SearchRequest) =
             { req with RuntimeMappings = Some value }
         let withStats (value: string list) (req: SearchRequest) =
             { req with Stats = Some value }
-        let withProjectRouting (value: CoreTypes.ProjectRouting) (req: SearchRequest) =
+        let withProjectRouting (value: Types.ProjectRouting) (req: SearchRequest) =
             { req with ProjectRouting = Some value }
 
     type SearchMvtRequest = {
-        Index: CoreTypes.Indices
-        Field: CoreTypes.Field
-        Zoom: GlobalSearchMvtTypes.ZoomLevel
-        X: GlobalSearchMvtTypes.Coordinate
-        Y: GlobalSearchMvtTypes.Coordinate
+        Index: Types.Indices
+        Field: Types.Field
+        Zoom: Types.ZoomLevel
+        X: Types.Coordinate
+        Y: Types.Coordinate
         ExactBounds: bool option
-        Extent: CoreTypes.Integer option
-        GridAgg: GlobalSearchMvtTypes.GridAggregationType option
-        GridPrecision: CoreTypes.Integer option
-        GridType: GlobalSearchMvtTypes.GridType option
-        Size: CoreTypes.Integer option
-        TrackTotalHits: GlobalSearchTypes.TrackHits option
+        Extent: Types.Integer option
+        GridAgg: Types.GridAggregationType option
+        GridPrecision: Types.Integer option
+        GridType: Types.GridType option
+        Size: Types.Integer option
+        TrackTotalHits: Types.TrackHits option
         WithLabels: bool option
-        Aggs: Map<string, CoreTypes.AggregationContainer> option
-        Buffer: CoreTypes.Integer option
+        Aggs: Map<string, Types.AggregationContainer> option
+        Buffer: Types.Integer option
         ExactBounds: bool option
-        Extent: CoreTypes.Integer option
-        Fields: CoreTypes.Fields option
-        GridAgg: GlobalSearchMvtTypes.GridAggregationType option
-        GridPrecision: CoreTypes.Integer option
-        GridType: GlobalSearchMvtTypes.GridType option
-        Query: CoreTypes.QueryContainer option
-        RuntimeMappings: CoreTypes.RuntimeFields option
-        Size: CoreTypes.Integer option
-        Sort: CoreTypes.Sort option
-        TrackTotalHits: GlobalSearchTypes.TrackHits option
+        Extent: Types.Integer option
+        Fields: Types.Fields option
+        GridAgg: Types.GridAggregationType option
+        GridPrecision: Types.Integer option
+        GridType: Types.GridType option
+        Query: Types.QueryContainer option
+        RuntimeMappings: Types.RuntimeFields option
+        Size: Types.Integer option
+        Sort: Types.Sort option
+        TrackTotalHits: Types.TrackHits option
         WithLabels: bool option
-        ProjectRouting: CoreTypes.ProjectRouting option
+        ProjectRouting: Types.ProjectRouting option
     }
 
         with
@@ -4517,7 +4518,7 @@ module GlobalOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type SearchMvtResponse = CoreTypes.MapboxVectorTiles
+    type SearchMvtResponse = Types.MapboxVectorTiles
 
     type SearchMvtRequestBuilder() =
         member _.Yield(_: unit) : SearchMvtRequest =
@@ -4553,23 +4554,23 @@ module GlobalOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: SearchMvtRequest, value: CoreTypes.Indices) =
+        member _.Index(state: SearchMvtRequest, value: Types.Indices) =
             { state with Index = value }
 
         [<CustomOperation("field")>]
-        member _.Field(state: SearchMvtRequest, value: CoreTypes.Field) =
+        member _.Field(state: SearchMvtRequest, value: Types.Field) =
             { state with Field = value }
 
         [<CustomOperation("zoom")>]
-        member _.Zoom(state: SearchMvtRequest, value: GlobalSearchMvtTypes.ZoomLevel) =
+        member _.Zoom(state: SearchMvtRequest, value: Types.ZoomLevel) =
             { state with Zoom = value }
 
         [<CustomOperation("x")>]
-        member _.X(state: SearchMvtRequest, value: GlobalSearchMvtTypes.Coordinate) =
+        member _.X(state: SearchMvtRequest, value: Types.Coordinate) =
             { state with X = value }
 
         [<CustomOperation("y")>]
-        member _.Y(state: SearchMvtRequest, value: GlobalSearchMvtTypes.Coordinate) =
+        member _.Y(state: SearchMvtRequest, value: Types.Coordinate) =
             { state with Y = value }
 
         [<CustomOperation("exactBounds")>]
@@ -4577,27 +4578,27 @@ module GlobalOperations =
             { state with ExactBounds = Some value }
 
         [<CustomOperation("extent")>]
-        member _.Extent(state: SearchMvtRequest, value: CoreTypes.Integer) =
+        member _.Extent(state: SearchMvtRequest, value: Types.Integer) =
             { state with Extent = Some value }
 
         [<CustomOperation("gridAgg")>]
-        member _.GridAgg(state: SearchMvtRequest, value: GlobalSearchMvtTypes.GridAggregationType) =
+        member _.GridAgg(state: SearchMvtRequest, value: Types.GridAggregationType) =
             { state with GridAgg = Some value }
 
         [<CustomOperation("gridPrecision")>]
-        member _.GridPrecision(state: SearchMvtRequest, value: CoreTypes.Integer) =
+        member _.GridPrecision(state: SearchMvtRequest, value: Types.Integer) =
             { state with GridPrecision = Some value }
 
         [<CustomOperation("gridType")>]
-        member _.GridType(state: SearchMvtRequest, value: GlobalSearchMvtTypes.GridType) =
+        member _.GridType(state: SearchMvtRequest, value: Types.GridType) =
             { state with GridType = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: SearchMvtRequest, value: CoreTypes.Integer) =
+        member _.Size(state: SearchMvtRequest, value: Types.Integer) =
             { state with Size = Some value }
 
         [<CustomOperation("trackTotalHits")>]
-        member _.TrackTotalHits(state: SearchMvtRequest, value: GlobalSearchTypes.TrackHits) =
+        member _.TrackTotalHits(state: SearchMvtRequest, value: Types.TrackHits) =
             { state with TrackTotalHits = Some value }
 
         [<CustomOperation("withLabels")>]
@@ -4605,11 +4606,11 @@ module GlobalOperations =
             { state with WithLabels = Some value }
 
         [<CustomOperation("aggs")>]
-        member _.Aggs(state: SearchMvtRequest, value: Map<string, CoreTypes.AggregationContainer>) =
+        member _.Aggs(state: SearchMvtRequest, value: Map<string, Types.AggregationContainer>) =
             { state with Aggs = Some value }
 
         [<CustomOperation("buffer")>]
-        member _.Buffer(state: SearchMvtRequest, value: CoreTypes.Integer) =
+        member _.Buffer(state: SearchMvtRequest, value: Types.Integer) =
             { state with Buffer = Some value }
 
         [<CustomOperation("exactBounds")>]
@@ -4617,43 +4618,43 @@ module GlobalOperations =
             { state with ExactBounds = Some value }
 
         [<CustomOperation("extent")>]
-        member _.Extent(state: SearchMvtRequest, value: CoreTypes.Integer) =
+        member _.Extent(state: SearchMvtRequest, value: Types.Integer) =
             { state with Extent = Some value }
 
         [<CustomOperation("fields")>]
-        member _.Fields(state: SearchMvtRequest, value: CoreTypes.Fields) =
+        member _.Fields(state: SearchMvtRequest, value: Types.Fields) =
             { state with Fields = Some value }
 
         [<CustomOperation("gridAgg")>]
-        member _.GridAgg(state: SearchMvtRequest, value: GlobalSearchMvtTypes.GridAggregationType) =
+        member _.GridAgg(state: SearchMvtRequest, value: Types.GridAggregationType) =
             { state with GridAgg = Some value }
 
         [<CustomOperation("gridPrecision")>]
-        member _.GridPrecision(state: SearchMvtRequest, value: CoreTypes.Integer) =
+        member _.GridPrecision(state: SearchMvtRequest, value: Types.Integer) =
             { state with GridPrecision = Some value }
 
         [<CustomOperation("gridType")>]
-        member _.GridType(state: SearchMvtRequest, value: GlobalSearchMvtTypes.GridType) =
+        member _.GridType(state: SearchMvtRequest, value: Types.GridType) =
             { state with GridType = Some value }
 
         [<CustomOperation("query")>]
-        member _.Query(state: SearchMvtRequest, value: CoreTypes.QueryContainer) =
+        member _.Query(state: SearchMvtRequest, value: Types.QueryContainer) =
             { state with Query = Some value }
 
         [<CustomOperation("runtimeMappings")>]
-        member _.RuntimeMappings(state: SearchMvtRequest, value: CoreTypes.RuntimeFields) =
+        member _.RuntimeMappings(state: SearchMvtRequest, value: Types.RuntimeFields) =
             { state with RuntimeMappings = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: SearchMvtRequest, value: CoreTypes.Integer) =
+        member _.Size(state: SearchMvtRequest, value: Types.Integer) =
             { state with Size = Some value }
 
         [<CustomOperation("sort")>]
-        member _.Sort(state: SearchMvtRequest, value: CoreTypes.Sort) =
+        member _.Sort(state: SearchMvtRequest, value: Types.Sort) =
             { state with Sort = Some value }
 
         [<CustomOperation("trackTotalHits")>]
-        member _.TrackTotalHits(state: SearchMvtRequest, value: GlobalSearchTypes.TrackHits) =
+        member _.TrackTotalHits(state: SearchMvtRequest, value: Types.TrackHits) =
             { state with TrackTotalHits = Some value }
 
         [<CustomOperation("withLabels")>]
@@ -4661,7 +4662,7 @@ module GlobalOperations =
             { state with WithLabels = Some value }
 
         [<CustomOperation("projectRouting")>]
-        member _.ProjectRouting(state: SearchMvtRequest, value: CoreTypes.ProjectRouting) =
+        member _.ProjectRouting(state: SearchMvtRequest, value: Types.ProjectRouting) =
             { state with ProjectRouting = Some value }
 
     let searchMvtRequest = SearchMvtRequestBuilder()
@@ -4669,60 +4670,60 @@ module GlobalOperations =
     module SearchMvt =
         let withExactBounds (value: bool) (req: SearchMvtRequest) =
             { req with ExactBounds = Some value }
-        let withExtent (value: CoreTypes.Integer) (req: SearchMvtRequest) =
+        let withExtent (value: Types.Integer) (req: SearchMvtRequest) =
             { req with Extent = Some value }
-        let withGridAgg (value: GlobalSearchMvtTypes.GridAggregationType) (req: SearchMvtRequest) =
+        let withGridAgg (value: Types.GridAggregationType) (req: SearchMvtRequest) =
             { req with GridAgg = Some value }
-        let withGridPrecision (value: CoreTypes.Integer) (req: SearchMvtRequest) =
+        let withGridPrecision (value: Types.Integer) (req: SearchMvtRequest) =
             { req with GridPrecision = Some value }
-        let withGridType (value: GlobalSearchMvtTypes.GridType) (req: SearchMvtRequest) =
+        let withGridType (value: Types.GridType) (req: SearchMvtRequest) =
             { req with GridType = Some value }
-        let withSize (value: CoreTypes.Integer) (req: SearchMvtRequest) =
+        let withSize (value: Types.Integer) (req: SearchMvtRequest) =
             { req with Size = Some value }
-        let withTrackTotalHits (value: GlobalSearchTypes.TrackHits) (req: SearchMvtRequest) =
+        let withTrackTotalHits (value: Types.TrackHits) (req: SearchMvtRequest) =
             { req with TrackTotalHits = Some value }
         let withWithLabels (value: bool) (req: SearchMvtRequest) =
             { req with WithLabels = Some value }
-        let withAggs (value: Map<string, CoreTypes.AggregationContainer>) (req: SearchMvtRequest) =
+        let withAggs (value: Map<string, Types.AggregationContainer>) (req: SearchMvtRequest) =
             { req with Aggs = Some value }
-        let withBuffer (value: CoreTypes.Integer) (req: SearchMvtRequest) =
+        let withBuffer (value: Types.Integer) (req: SearchMvtRequest) =
             { req with Buffer = Some value }
         let withExactBounds (value: bool) (req: SearchMvtRequest) =
             { req with ExactBounds = Some value }
-        let withExtent (value: CoreTypes.Integer) (req: SearchMvtRequest) =
+        let withExtent (value: Types.Integer) (req: SearchMvtRequest) =
             { req with Extent = Some value }
-        let withFields (value: CoreTypes.Fields) (req: SearchMvtRequest) =
+        let withFields (value: Types.Fields) (req: SearchMvtRequest) =
             { req with Fields = Some value }
-        let withGridAgg (value: GlobalSearchMvtTypes.GridAggregationType) (req: SearchMvtRequest) =
+        let withGridAgg (value: Types.GridAggregationType) (req: SearchMvtRequest) =
             { req with GridAgg = Some value }
-        let withGridPrecision (value: CoreTypes.Integer) (req: SearchMvtRequest) =
+        let withGridPrecision (value: Types.Integer) (req: SearchMvtRequest) =
             { req with GridPrecision = Some value }
-        let withGridType (value: GlobalSearchMvtTypes.GridType) (req: SearchMvtRequest) =
+        let withGridType (value: Types.GridType) (req: SearchMvtRequest) =
             { req with GridType = Some value }
-        let withQuery (value: CoreTypes.QueryContainer) (req: SearchMvtRequest) =
+        let withQuery (value: Types.QueryContainer) (req: SearchMvtRequest) =
             { req with Query = Some value }
-        let withRuntimeMappings (value: CoreTypes.RuntimeFields) (req: SearchMvtRequest) =
+        let withRuntimeMappings (value: Types.RuntimeFields) (req: SearchMvtRequest) =
             { req with RuntimeMappings = Some value }
-        let withSize (value: CoreTypes.Integer) (req: SearchMvtRequest) =
+        let withSize (value: Types.Integer) (req: SearchMvtRequest) =
             { req with Size = Some value }
-        let withSort (value: CoreTypes.Sort) (req: SearchMvtRequest) =
+        let withSort (value: Types.Sort) (req: SearchMvtRequest) =
             { req with Sort = Some value }
-        let withTrackTotalHits (value: GlobalSearchTypes.TrackHits) (req: SearchMvtRequest) =
+        let withTrackTotalHits (value: Types.TrackHits) (req: SearchMvtRequest) =
             { req with TrackTotalHits = Some value }
         let withWithLabels (value: bool) (req: SearchMvtRequest) =
             { req with WithLabels = Some value }
-        let withProjectRouting (value: CoreTypes.ProjectRouting) (req: SearchMvtRequest) =
+        let withProjectRouting (value: Types.ProjectRouting) (req: SearchMvtRequest) =
             { req with ProjectRouting = Some value }
 
     type SearchShardsRequest = {
-        Index: CoreTypes.Indices
+        Index: Types.Indices
         AllowNoIndices: bool option
-        ExpandWildcards: CoreTypes.ExpandWildcards option
+        ExpandWildcards: Types.ExpandWildcards option
         IgnoreUnavailable: bool option
         Local: bool option
-        MasterTimeout: CoreTypes.Duration option
+        MasterTimeout: Types.Duration option
         Preference: string option
-        Routing: CoreTypes.Routing option
+        Routing: Types.Routing option
     }
 
         with
@@ -4765,7 +4766,7 @@ module GlobalOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: SearchShardsRequest, value: CoreTypes.Indices) =
+        member _.Index(state: SearchShardsRequest, value: Types.Indices) =
             { state with Index = value }
 
         [<CustomOperation("allowNoIndices")>]
@@ -4773,7 +4774,7 @@ module GlobalOperations =
             { state with AllowNoIndices = Some value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: SearchShardsRequest, value: CoreTypes.ExpandWildcards) =
+        member _.ExpandWildcards(state: SearchShardsRequest, value: Types.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("ignoreUnavailable")>]
@@ -4785,7 +4786,7 @@ module GlobalOperations =
             { state with Local = Some value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: SearchShardsRequest, value: CoreTypes.Duration) =
+        member _.MasterTimeout(state: SearchShardsRequest, value: Types.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("preference")>]
@@ -4793,7 +4794,7 @@ module GlobalOperations =
             { state with Preference = Some value }
 
         [<CustomOperation("routing")>]
-        member _.Routing(state: SearchShardsRequest, value: CoreTypes.Routing) =
+        member _.Routing(state: SearchShardsRequest, value: Types.Routing) =
             { state with Routing = Some value }
 
     let searchShardsRequest = SearchShardsRequestBuilder()
@@ -4801,40 +4802,40 @@ module GlobalOperations =
     module SearchShards =
         let withAllowNoIndices (value: bool) (req: SearchShardsRequest) =
             { req with AllowNoIndices = Some value }
-        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: SearchShardsRequest) =
+        let withExpandWildcards (value: Types.ExpandWildcards) (req: SearchShardsRequest) =
             { req with ExpandWildcards = Some value }
         let withIgnoreUnavailable (value: bool) (req: SearchShardsRequest) =
             { req with IgnoreUnavailable = Some value }
         let withLocal (value: bool) (req: SearchShardsRequest) =
             { req with Local = Some value }
-        let withMasterTimeout (value: CoreTypes.Duration) (req: SearchShardsRequest) =
+        let withMasterTimeout (value: Types.Duration) (req: SearchShardsRequest) =
             { req with MasterTimeout = Some value }
         let withPreference (value: string) (req: SearchShardsRequest) =
             { req with Preference = Some value }
-        let withRouting (value: CoreTypes.Routing) (req: SearchShardsRequest) =
+        let withRouting (value: Types.Routing) (req: SearchShardsRequest) =
             { req with Routing = Some value }
 
     type SearchTemplateRequest = {
-        Index: CoreTypes.Indices
+        Index: Types.Indices
         AllowNoIndices: bool option
         CcsMinimizeRoundtrips: bool option
-        ExpandWildcards: CoreTypes.ExpandWildcards option
+        ExpandWildcards: Types.ExpandWildcards option
         Explain: bool option
         IgnoreThrottled: bool option
         IgnoreUnavailable: bool option
         Preference: string option
         Profile: bool option
-        Routing: CoreTypes.Routing option
-        Scroll: CoreTypes.Duration option
-        SearchType: CoreTypes.SearchType option
+        Routing: Types.Routing option
+        Scroll: Types.Duration option
+        SearchType: Types.SearchType option
         RestTotalHitsAsInt: bool option
         TypedKeys: bool option
         Explain: bool option
-        Id: CoreTypes.Id option
+        Id: Types.Id option
         Params: Map<string, System.Text.Json.JsonElement> option
         Profile: bool option
-        Source: CoreTypes.ScriptSource option
-        ProjectRouting: CoreTypes.ProjectRouting option
+        Source: Types.ScriptSource option
+        ProjectRouting: Types.ProjectRouting option
     }
 
         with
@@ -4896,7 +4897,7 @@ module GlobalOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: SearchTemplateRequest, value: CoreTypes.Indices) =
+        member _.Index(state: SearchTemplateRequest, value: Types.Indices) =
             { state with Index = value }
 
         [<CustomOperation("allowNoIndices")>]
@@ -4908,7 +4909,7 @@ module GlobalOperations =
             { state with CcsMinimizeRoundtrips = Some value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: SearchTemplateRequest, value: CoreTypes.ExpandWildcards) =
+        member _.ExpandWildcards(state: SearchTemplateRequest, value: Types.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("explain")>]
@@ -4932,15 +4933,15 @@ module GlobalOperations =
             { state with Profile = Some value }
 
         [<CustomOperation("routing")>]
-        member _.Routing(state: SearchTemplateRequest, value: CoreTypes.Routing) =
+        member _.Routing(state: SearchTemplateRequest, value: Types.Routing) =
             { state with Routing = Some value }
 
         [<CustomOperation("scroll")>]
-        member _.Scroll(state: SearchTemplateRequest, value: CoreTypes.Duration) =
+        member _.Scroll(state: SearchTemplateRequest, value: Types.Duration) =
             { state with Scroll = Some value }
 
         [<CustomOperation("searchType")>]
-        member _.SearchType(state: SearchTemplateRequest, value: CoreTypes.SearchType) =
+        member _.SearchType(state: SearchTemplateRequest, value: Types.SearchType) =
             { state with SearchType = Some value }
 
         [<CustomOperation("restTotalHitsAsInt")>]
@@ -4956,7 +4957,7 @@ module GlobalOperations =
             { state with Explain = Some value }
 
         [<CustomOperation("id")>]
-        member _.Id(state: SearchTemplateRequest, value: CoreTypes.Id) =
+        member _.Id(state: SearchTemplateRequest, value: Types.Id) =
             { state with Id = Some value }
 
         [<CustomOperation("params")>]
@@ -4968,11 +4969,11 @@ module GlobalOperations =
             { state with Profile = Some value }
 
         [<CustomOperation("source")>]
-        member _.Source(state: SearchTemplateRequest, value: CoreTypes.ScriptSource) =
+        member _.Source(state: SearchTemplateRequest, value: Types.ScriptSource) =
             { state with Source = Some value }
 
         [<CustomOperation("projectRouting")>]
-        member _.ProjectRouting(state: SearchTemplateRequest, value: CoreTypes.ProjectRouting) =
+        member _.ProjectRouting(state: SearchTemplateRequest, value: Types.ProjectRouting) =
             { state with ProjectRouting = Some value }
 
     let searchTemplateRequest = SearchTemplateRequestBuilder()
@@ -4982,7 +4983,7 @@ module GlobalOperations =
             { req with AllowNoIndices = Some value }
         let withCcsMinimizeRoundtrips (value: bool) (req: SearchTemplateRequest) =
             { req with CcsMinimizeRoundtrips = Some value }
-        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: SearchTemplateRequest) =
+        let withExpandWildcards (value: Types.ExpandWildcards) (req: SearchTemplateRequest) =
             { req with ExpandWildcards = Some value }
         let withExplain (value: bool) (req: SearchTemplateRequest) =
             { req with Explain = Some value }
@@ -4994,11 +4995,11 @@ module GlobalOperations =
             { req with Preference = Some value }
         let withProfile (value: bool) (req: SearchTemplateRequest) =
             { req with Profile = Some value }
-        let withRouting (value: CoreTypes.Routing) (req: SearchTemplateRequest) =
+        let withRouting (value: Types.Routing) (req: SearchTemplateRequest) =
             { req with Routing = Some value }
-        let withScroll (value: CoreTypes.Duration) (req: SearchTemplateRequest) =
+        let withScroll (value: Types.Duration) (req: SearchTemplateRequest) =
             { req with Scroll = Some value }
-        let withSearchType (value: CoreTypes.SearchType) (req: SearchTemplateRequest) =
+        let withSearchType (value: Types.SearchType) (req: SearchTemplateRequest) =
             { req with SearchType = Some value }
         let withRestTotalHitsAsInt (value: bool) (req: SearchTemplateRequest) =
             { req with RestTotalHitsAsInt = Some value }
@@ -5006,24 +5007,24 @@ module GlobalOperations =
             { req with TypedKeys = Some value }
         let withExplain (value: bool) (req: SearchTemplateRequest) =
             { req with Explain = Some value }
-        let withId (value: CoreTypes.Id) (req: SearchTemplateRequest) =
+        let withId (value: Types.Id) (req: SearchTemplateRequest) =
             { req with Id = Some value }
         let withParams (value: Map<string, System.Text.Json.JsonElement>) (req: SearchTemplateRequest) =
             { req with Params = Some value }
         let withProfile (value: bool) (req: SearchTemplateRequest) =
             { req with Profile = Some value }
-        let withSource (value: CoreTypes.ScriptSource) (req: SearchTemplateRequest) =
+        let withSource (value: Types.ScriptSource) (req: SearchTemplateRequest) =
             { req with Source = Some value }
-        let withProjectRouting (value: CoreTypes.ProjectRouting) (req: SearchTemplateRequest) =
+        let withProjectRouting (value: Types.ProjectRouting) (req: SearchTemplateRequest) =
             { req with ProjectRouting = Some value }
 
     type TermsEnumRequest = {
-        Index: CoreTypes.Indices
-        Field: CoreTypes.Field
-        Size: CoreTypes.Integer option
-        Timeout: CoreTypes.Duration option
+        Index: Types.Indices
+        Field: Types.Field
+        Size: Types.Integer option
+        Timeout: Types.Duration option
         CaseInsensitive: bool option
-        IndexFilter: CoreTypes.QueryContainer option
+        IndexFilter: Types.QueryContainer option
         String: string option
         SearchAfter: string option
     }
@@ -5056,19 +5057,19 @@ module GlobalOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: TermsEnumRequest, value: CoreTypes.Indices) =
+        member _.Index(state: TermsEnumRequest, value: Types.Indices) =
             { state with Index = value }
 
         [<CustomOperation("field")>]
-        member _.Field(state: TermsEnumRequest, value: CoreTypes.Field) =
+        member _.Field(state: TermsEnumRequest, value: Types.Field) =
             { state with Field = value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: TermsEnumRequest, value: CoreTypes.Integer) =
+        member _.Size(state: TermsEnumRequest, value: Types.Integer) =
             { state with Size = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: TermsEnumRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: TermsEnumRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("caseInsensitive")>]
@@ -5076,7 +5077,7 @@ module GlobalOperations =
             { state with CaseInsensitive = Some value }
 
         [<CustomOperation("indexFilter")>]
-        member _.IndexFilter(state: TermsEnumRequest, value: CoreTypes.QueryContainer) =
+        member _.IndexFilter(state: TermsEnumRequest, value: Types.QueryContainer) =
             { state with IndexFilter = Some value }
 
         [<CustomOperation("string")>]
@@ -5090,15 +5091,15 @@ module GlobalOperations =
     let termsEnumRequest = TermsEnumRequestBuilder()
 
     module TermsEnum =
-        let withField (value: CoreTypes.Field) (req: TermsEnumRequest) =
+        let withField (value: Types.Field) (req: TermsEnumRequest) =
             { req with Field = value }
-        let withSize (value: CoreTypes.Integer) (req: TermsEnumRequest) =
+        let withSize (value: Types.Integer) (req: TermsEnumRequest) =
             { req with Size = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: TermsEnumRequest) =
+        let withTimeout (value: Types.Duration) (req: TermsEnumRequest) =
             { req with Timeout = Some value }
         let withCaseInsensitive (value: bool) (req: TermsEnumRequest) =
             { req with CaseInsensitive = Some value }
-        let withIndexFilter (value: CoreTypes.QueryContainer) (req: TermsEnumRequest) =
+        let withIndexFilter (value: Types.QueryContainer) (req: TermsEnumRequest) =
             { req with IndexFilter = Some value }
         let withString (value: string) (req: TermsEnumRequest) =
             { req with String = Some value }
@@ -5106,31 +5107,31 @@ module GlobalOperations =
             { req with SearchAfter = Some value }
 
     type TermvectorsRequest = {
-        Index: CoreTypes.IndexName
-        Id: CoreTypes.Id
-        Fields: CoreTypes.Fields option
+        Index: Types.IndexName
+        Id: Types.Id
+        Fields: Types.Fields option
         FieldStatistics: bool option
         Offsets: bool option
         Payloads: bool option
         Positions: bool option
         Preference: string option
         Realtime: bool option
-        Routing: CoreTypes.Routing option
+        Routing: Types.Routing option
         TermStatistics: bool option
-        Version: CoreTypes.VersionNumber option
-        VersionType: CoreTypes.VersionType option
+        Version: Types.VersionNumber option
+        VersionType: Types.VersionType option
         Doc: 'tDocument option
-        Filter: GlobalTermvectors.Filter option
-        PerFieldAnalyzer: Map<CoreTypes.Field, string> option
-        Fields: CoreTypes.Field list option
+        Filter: Types.GlobalTermvectorsFilter option
+        PerFieldAnalyzer: Map<Types.Field, string> option
+        Fields: Types.Field list option
         FieldStatistics: bool option
         Offsets: bool option
         Payloads: bool option
         Positions: bool option
         TermStatistics: bool option
-        Routing: CoreTypes.Routing option
-        Version: CoreTypes.VersionNumber option
-        VersionType: CoreTypes.VersionType option
+        Routing: Types.Routing option
+        Version: Types.VersionNumber option
+        VersionType: Types.VersionType option
     }
 
         with
@@ -5195,15 +5196,15 @@ module GlobalOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: TermvectorsRequest, value: CoreTypes.IndexName) =
+        member _.Index(state: TermvectorsRequest, value: Types.IndexName) =
             { state with Index = value }
 
         [<CustomOperation("id")>]
-        member _.Id(state: TermvectorsRequest, value: CoreTypes.Id) =
+        member _.Id(state: TermvectorsRequest, value: Types.Id) =
             { state with Id = value }
 
         [<CustomOperation("fields")>]
-        member _.Fields(state: TermvectorsRequest, value: CoreTypes.Fields) =
+        member _.Fields(state: TermvectorsRequest, value: Types.Fields) =
             { state with Fields = Some value }
 
         [<CustomOperation("fieldStatistics")>]
@@ -5231,7 +5232,7 @@ module GlobalOperations =
             { state with Realtime = Some value }
 
         [<CustomOperation("routing")>]
-        member _.Routing(state: TermvectorsRequest, value: CoreTypes.Routing) =
+        member _.Routing(state: TermvectorsRequest, value: Types.Routing) =
             { state with Routing = Some value }
 
         [<CustomOperation("termStatistics")>]
@@ -5239,11 +5240,11 @@ module GlobalOperations =
             { state with TermStatistics = Some value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: TermvectorsRequest, value: CoreTypes.VersionNumber) =
+        member _.Version(state: TermvectorsRequest, value: Types.VersionNumber) =
             { state with Version = Some value }
 
         [<CustomOperation("versionType")>]
-        member _.VersionType(state: TermvectorsRequest, value: CoreTypes.VersionType) =
+        member _.VersionType(state: TermvectorsRequest, value: Types.VersionType) =
             { state with VersionType = Some value }
 
         [<CustomOperation("doc")>]
@@ -5251,15 +5252,15 @@ module GlobalOperations =
             { state with Doc = Some value }
 
         [<CustomOperation("filter")>]
-        member _.Filter(state: TermvectorsRequest, value: GlobalTermvectors.Filter) =
+        member _.Filter(state: TermvectorsRequest, value: Types.GlobalTermvectorsFilter) =
             { state with Filter = Some value }
 
         [<CustomOperation("perFieldAnalyzer")>]
-        member _.PerFieldAnalyzer(state: TermvectorsRequest, value: Map<CoreTypes.Field, string>) =
+        member _.PerFieldAnalyzer(state: TermvectorsRequest, value: Map<Types.Field, string>) =
             { state with PerFieldAnalyzer = Some value }
 
         [<CustomOperation("fields")>]
-        member _.Fields(state: TermvectorsRequest, value: CoreTypes.Field list) =
+        member _.Fields(state: TermvectorsRequest, value: Types.Field list) =
             { state with Fields = Some value }
 
         [<CustomOperation("fieldStatistics")>]
@@ -5283,21 +5284,21 @@ module GlobalOperations =
             { state with TermStatistics = Some value }
 
         [<CustomOperation("routing")>]
-        member _.Routing(state: TermvectorsRequest, value: CoreTypes.Routing) =
+        member _.Routing(state: TermvectorsRequest, value: Types.Routing) =
             { state with Routing = Some value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: TermvectorsRequest, value: CoreTypes.VersionNumber) =
+        member _.Version(state: TermvectorsRequest, value: Types.VersionNumber) =
             { state with Version = Some value }
 
         [<CustomOperation("versionType")>]
-        member _.VersionType(state: TermvectorsRequest, value: CoreTypes.VersionType) =
+        member _.VersionType(state: TermvectorsRequest, value: Types.VersionType) =
             { state with VersionType = Some value }
 
     let termvectorsRequest = TermvectorsRequestBuilder()
 
     module Termvectors =
-        let withFields (value: CoreTypes.Fields) (req: TermvectorsRequest) =
+        let withFields (value: Types.Fields) (req: TermvectorsRequest) =
             { req with Fields = Some value }
         let withFieldStatistics (value: bool) (req: TermvectorsRequest) =
             { req with FieldStatistics = Some value }
@@ -5311,21 +5312,21 @@ module GlobalOperations =
             { req with Preference = Some value }
         let withRealtime (value: bool) (req: TermvectorsRequest) =
             { req with Realtime = Some value }
-        let withRouting (value: CoreTypes.Routing) (req: TermvectorsRequest) =
+        let withRouting (value: Types.Routing) (req: TermvectorsRequest) =
             { req with Routing = Some value }
         let withTermStatistics (value: bool) (req: TermvectorsRequest) =
             { req with TermStatistics = Some value }
-        let withVersion (value: CoreTypes.VersionNumber) (req: TermvectorsRequest) =
+        let withVersion (value: Types.VersionNumber) (req: TermvectorsRequest) =
             { req with Version = Some value }
-        let withVersionType (value: CoreTypes.VersionType) (req: TermvectorsRequest) =
+        let withVersionType (value: Types.VersionType) (req: TermvectorsRequest) =
             { req with VersionType = Some value }
         let withDoc (value: 'tDocument) (req: TermvectorsRequest) =
             { req with Doc = Some value }
-        let withFilter (value: GlobalTermvectors.Filter) (req: TermvectorsRequest) =
+        let withFilter (value: Types.GlobalTermvectorsFilter) (req: TermvectorsRequest) =
             { req with Filter = Some value }
-        let withPerFieldAnalyzer (value: Map<CoreTypes.Field, string>) (req: TermvectorsRequest) =
+        let withPerFieldAnalyzer (value: Map<Types.Field, string>) (req: TermvectorsRequest) =
             { req with PerFieldAnalyzer = Some value }
-        let withFields (value: CoreTypes.Field list) (req: TermvectorsRequest) =
+        let withFields (value: Types.Field list) (req: TermvectorsRequest) =
             { req with Fields = Some value }
         let withFieldStatistics (value: bool) (req: TermvectorsRequest) =
             { req with FieldStatistics = Some value }
@@ -5337,35 +5338,35 @@ module GlobalOperations =
             { req with Positions = Some value }
         let withTermStatistics (value: bool) (req: TermvectorsRequest) =
             { req with TermStatistics = Some value }
-        let withRouting (value: CoreTypes.Routing) (req: TermvectorsRequest) =
+        let withRouting (value: Types.Routing) (req: TermvectorsRequest) =
             { req with Routing = Some value }
-        let withVersion (value: CoreTypes.VersionNumber) (req: TermvectorsRequest) =
+        let withVersion (value: Types.VersionNumber) (req: TermvectorsRequest) =
             { req with Version = Some value }
-        let withVersionType (value: CoreTypes.VersionType) (req: TermvectorsRequest) =
+        let withVersionType (value: Types.VersionType) (req: TermvectorsRequest) =
             { req with VersionType = Some value }
 
     type UpdateRequest = {
-        Id: CoreTypes.Id
-        Index: CoreTypes.IndexName
-        IfPrimaryTerm: CoreTypes.Long option
-        IfSeqNo: CoreTypes.SequenceNumber option
+        Id: Types.Id
+        Index: Types.IndexName
+        IfPrimaryTerm: Types.Long option
+        IfSeqNo: Types.SequenceNumber option
         IncludeSourceOnError: bool option
         Lang: string option
-        Refresh: CoreTypes.Refresh option
+        Refresh: Types.Refresh option
         RequireAlias: bool option
-        RetryOnConflict: CoreTypes.Integer option
-        Routing: CoreTypes.Routing option
-        Timeout: CoreTypes.Duration option
-        WaitForActiveShards: CoreTypes.WaitForActiveShards option
-        Source: GlobalSearchTypes.SourceConfigParam option
-        SourceExcludes: CoreTypes.Fields option
-        SourceIncludes: CoreTypes.Fields option
+        RetryOnConflict: Types.Integer option
+        Routing: Types.Routing option
+        Timeout: Types.Duration option
+        WaitForActiveShards: Types.WaitForActiveShards option
+        Source: Types.SourceConfigParam option
+        SourceExcludes: Types.Fields option
+        SourceIncludes: Types.Fields option
         DetectNoop: bool option
         Doc: 'tPartialDocument option
         DocAsUpsert: bool option
-        Script: CoreTypes.Script option
+        Script: Types.Script option
         ScriptedUpsert: bool option
-        Source: GlobalSearchTypes.SourceConfig option
+        Source: Types.SourceConfig option
         Upsert: 'tDocument option
     }
 
@@ -5400,7 +5401,7 @@ module GlobalOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type UpdateResponse = GlobalUpdate.UpdateWriteResponseBase<'tDocument>
+    type UpdateResponse = Types.UpdateWriteResponseBase<'tDocument>
 
     type UpdateRequestBuilder() =
         member _.Yield(_: unit) : UpdateRequest =
@@ -5430,19 +5431,19 @@ module GlobalOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: UpdateRequest, value: CoreTypes.Id) =
+        member _.Id(state: UpdateRequest, value: Types.Id) =
             { state with Id = value }
 
         [<CustomOperation("index")>]
-        member _.Index(state: UpdateRequest, value: CoreTypes.IndexName) =
+        member _.Index(state: UpdateRequest, value: Types.IndexName) =
             { state with Index = value }
 
         [<CustomOperation("ifPrimaryTerm")>]
-        member _.IfPrimaryTerm(state: UpdateRequest, value: CoreTypes.Long) =
+        member _.IfPrimaryTerm(state: UpdateRequest, value: Types.Long) =
             { state with IfPrimaryTerm = Some value }
 
         [<CustomOperation("ifSeqNo")>]
-        member _.IfSeqNo(state: UpdateRequest, value: CoreTypes.SequenceNumber) =
+        member _.IfSeqNo(state: UpdateRequest, value: Types.SequenceNumber) =
             { state with IfSeqNo = Some value }
 
         [<CustomOperation("includeSourceOnError")>]
@@ -5454,7 +5455,7 @@ module GlobalOperations =
             { state with Lang = Some value }
 
         [<CustomOperation("refresh")>]
-        member _.Refresh(state: UpdateRequest, value: CoreTypes.Refresh) =
+        member _.Refresh(state: UpdateRequest, value: Types.Refresh) =
             { state with Refresh = Some value }
 
         [<CustomOperation("requireAlias")>]
@@ -5462,31 +5463,31 @@ module GlobalOperations =
             { state with RequireAlias = Some value }
 
         [<CustomOperation("retryOnConflict")>]
-        member _.RetryOnConflict(state: UpdateRequest, value: CoreTypes.Integer) =
+        member _.RetryOnConflict(state: UpdateRequest, value: Types.Integer) =
             { state with RetryOnConflict = Some value }
 
         [<CustomOperation("routing")>]
-        member _.Routing(state: UpdateRequest, value: CoreTypes.Routing) =
+        member _.Routing(state: UpdateRequest, value: Types.Routing) =
             { state with Routing = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: UpdateRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: UpdateRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("waitForActiveShards")>]
-        member _.WaitForActiveShards(state: UpdateRequest, value: CoreTypes.WaitForActiveShards) =
+        member _.WaitForActiveShards(state: UpdateRequest, value: Types.WaitForActiveShards) =
             { state with WaitForActiveShards = Some value }
 
         [<CustomOperation("source")>]
-        member _.Source(state: UpdateRequest, value: GlobalSearchTypes.SourceConfigParam) =
+        member _.Source(state: UpdateRequest, value: Types.SourceConfigParam) =
             { state with Source = Some value }
 
         [<CustomOperation("sourceExcludes")>]
-        member _.SourceExcludes(state: UpdateRequest, value: CoreTypes.Fields) =
+        member _.SourceExcludes(state: UpdateRequest, value: Types.Fields) =
             { state with SourceExcludes = Some value }
 
         [<CustomOperation("sourceIncludes")>]
-        member _.SourceIncludes(state: UpdateRequest, value: CoreTypes.Fields) =
+        member _.SourceIncludes(state: UpdateRequest, value: Types.Fields) =
             { state with SourceIncludes = Some value }
 
         [<CustomOperation("detectNoop")>]
@@ -5502,7 +5503,7 @@ module GlobalOperations =
             { state with DocAsUpsert = Some value }
 
         [<CustomOperation("script")>]
-        member _.Script(state: UpdateRequest, value: CoreTypes.Script) =
+        member _.Script(state: UpdateRequest, value: Types.Script) =
             { state with Script = Some value }
 
         [<CustomOperation("scriptedUpsert")>]
@@ -5510,7 +5511,7 @@ module GlobalOperations =
             { state with ScriptedUpsert = Some value }
 
         [<CustomOperation("source")>]
-        member _.Source(state: UpdateRequest, value: GlobalSearchTypes.SourceConfig) =
+        member _.Source(state: UpdateRequest, value: Types.SourceConfig) =
             { state with Source = Some value }
 
         [<CustomOperation("upsert")>]
@@ -5520,31 +5521,31 @@ module GlobalOperations =
     let updateRequest = UpdateRequestBuilder()
 
     module Update =
-        let withIfPrimaryTerm (value: CoreTypes.Long) (req: UpdateRequest) =
+        let withIfPrimaryTerm (value: Types.Long) (req: UpdateRequest) =
             { req with IfPrimaryTerm = Some value }
-        let withIfSeqNo (value: CoreTypes.SequenceNumber) (req: UpdateRequest) =
+        let withIfSeqNo (value: Types.SequenceNumber) (req: UpdateRequest) =
             { req with IfSeqNo = Some value }
         let withIncludeSourceOnError (value: bool) (req: UpdateRequest) =
             { req with IncludeSourceOnError = Some value }
         let withLang (value: string) (req: UpdateRequest) =
             { req with Lang = Some value }
-        let withRefresh (value: CoreTypes.Refresh) (req: UpdateRequest) =
+        let withRefresh (value: Types.Refresh) (req: UpdateRequest) =
             { req with Refresh = Some value }
         let withRequireAlias (value: bool) (req: UpdateRequest) =
             { req with RequireAlias = Some value }
-        let withRetryOnConflict (value: CoreTypes.Integer) (req: UpdateRequest) =
+        let withRetryOnConflict (value: Types.Integer) (req: UpdateRequest) =
             { req with RetryOnConflict = Some value }
-        let withRouting (value: CoreTypes.Routing) (req: UpdateRequest) =
+        let withRouting (value: Types.Routing) (req: UpdateRequest) =
             { req with Routing = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: UpdateRequest) =
+        let withTimeout (value: Types.Duration) (req: UpdateRequest) =
             { req with Timeout = Some value }
-        let withWaitForActiveShards (value: CoreTypes.WaitForActiveShards) (req: UpdateRequest) =
+        let withWaitForActiveShards (value: Types.WaitForActiveShards) (req: UpdateRequest) =
             { req with WaitForActiveShards = Some value }
-        let withSource (value: GlobalSearchTypes.SourceConfigParam) (req: UpdateRequest) =
+        let withSource (value: Types.SourceConfigParam) (req: UpdateRequest) =
             { req with Source = Some value }
-        let withSourceExcludes (value: CoreTypes.Fields) (req: UpdateRequest) =
+        let withSourceExcludes (value: Types.Fields) (req: UpdateRequest) =
             { req with SourceExcludes = Some value }
-        let withSourceIncludes (value: CoreTypes.Fields) (req: UpdateRequest) =
+        let withSourceIncludes (value: Types.Fields) (req: UpdateRequest) =
             { req with SourceIncludes = Some value }
         let withDetectNoop (value: bool) (req: UpdateRequest) =
             { req with DetectNoop = Some value }
@@ -5552,53 +5553,53 @@ module GlobalOperations =
             { req with Doc = Some value }
         let withDocAsUpsert (value: bool) (req: UpdateRequest) =
             { req with DocAsUpsert = Some value }
-        let withScript (value: CoreTypes.Script) (req: UpdateRequest) =
+        let withScript (value: Types.Script) (req: UpdateRequest) =
             { req with Script = Some value }
         let withScriptedUpsert (value: bool) (req: UpdateRequest) =
             { req with ScriptedUpsert = Some value }
-        let withSource (value: GlobalSearchTypes.SourceConfig) (req: UpdateRequest) =
+        let withSource (value: Types.SourceConfig) (req: UpdateRequest) =
             { req with Source = Some value }
         let withUpsert (value: 'tDocument) (req: UpdateRequest) =
             { req with Upsert = Some value }
 
     type UpdateByQueryRequest = {
-        Index: CoreTypes.Indices
+        Index: Types.Indices
         AllowNoIndices: bool option
         Analyzer: string option
         AnalyzeWildcard: bool option
-        Conflicts: CoreTypes.Conflicts option
-        DefaultOperator: CoreTypes.Operator option
+        Conflicts: Types.Conflicts option
+        DefaultOperator: Types.Operator option
         Df: string option
-        ExpandWildcards: CoreTypes.ExpandWildcards option
-        From: CoreTypes.Long option
+        ExpandWildcards: Types.ExpandWildcards option
+        From: Types.Long option
         IgnoreUnavailable: bool option
         Lenient: bool option
-        MaxDocs: CoreTypes.Long option
+        MaxDocs: Types.Long option
         Pipeline: string option
         Preference: string option
         Q: string option
         Refresh: bool option
         RequestCache: bool option
-        RequestsPerSecond: CoreTypes.Float option
-        Routing: CoreTypes.Routing option
-        Scroll: CoreTypes.Duration option
-        ScrollSize: CoreTypes.Long option
-        SearchTimeout: CoreTypes.Duration option
-        SearchType: CoreTypes.SearchType option
-        Slices: CoreTypes.Slices option
+        RequestsPerSecond: Types.Float option
+        Routing: Types.Routing option
+        Scroll: Types.Duration option
+        ScrollSize: Types.Long option
+        SearchTimeout: Types.Duration option
+        SearchType: Types.SearchType option
+        Slices: Types.Slices option
         Sort: string list option
         Stats: string list option
-        TerminateAfter: CoreTypes.Long option
-        Timeout: CoreTypes.Duration option
+        TerminateAfter: Types.Long option
+        Timeout: Types.Duration option
         Version: bool option
         VersionType: bool option
-        WaitForActiveShards: CoreTypes.WaitForActiveShards option
+        WaitForActiveShards: Types.WaitForActiveShards option
         WaitForCompletion: bool option
-        MaxDocs: CoreTypes.Long option
-        Query: CoreTypes.QueryContainer option
-        Script: CoreTypes.Script option
-        Slice: CoreTypes.SlicedScroll option
-        Conflicts: CoreTypes.Conflicts option
+        MaxDocs: Types.Long option
+        Query: Types.QueryContainer option
+        Script: Types.Script option
+        Slice: Types.SlicedScroll option
+        Conflicts: Types.Conflicts option
     }
 
         with
@@ -5695,7 +5696,7 @@ module GlobalOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: UpdateByQueryRequest, value: CoreTypes.Indices) =
+        member _.Index(state: UpdateByQueryRequest, value: Types.Indices) =
             { state with Index = value }
 
         [<CustomOperation("allowNoIndices")>]
@@ -5711,11 +5712,11 @@ module GlobalOperations =
             { state with AnalyzeWildcard = Some value }
 
         [<CustomOperation("conflicts")>]
-        member _.Conflicts(state: UpdateByQueryRequest, value: CoreTypes.Conflicts) =
+        member _.Conflicts(state: UpdateByQueryRequest, value: Types.Conflicts) =
             { state with Conflicts = Some value }
 
         [<CustomOperation("defaultOperator")>]
-        member _.DefaultOperator(state: UpdateByQueryRequest, value: CoreTypes.Operator) =
+        member _.DefaultOperator(state: UpdateByQueryRequest, value: Types.Operator) =
             { state with DefaultOperator = Some value }
 
         [<CustomOperation("df")>]
@@ -5723,11 +5724,11 @@ module GlobalOperations =
             { state with Df = Some value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: UpdateByQueryRequest, value: CoreTypes.ExpandWildcards) =
+        member _.ExpandWildcards(state: UpdateByQueryRequest, value: Types.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("from")>]
-        member _.From(state: UpdateByQueryRequest, value: CoreTypes.Long) =
+        member _.From(state: UpdateByQueryRequest, value: Types.Long) =
             { state with From = Some value }
 
         [<CustomOperation("ignoreUnavailable")>]
@@ -5739,7 +5740,7 @@ module GlobalOperations =
             { state with Lenient = Some value }
 
         [<CustomOperation("maxDocs")>]
-        member _.MaxDocs(state: UpdateByQueryRequest, value: CoreTypes.Long) =
+        member _.MaxDocs(state: UpdateByQueryRequest, value: Types.Long) =
             { state with MaxDocs = Some value }
 
         [<CustomOperation("pipeline")>]
@@ -5763,31 +5764,31 @@ module GlobalOperations =
             { state with RequestCache = Some value }
 
         [<CustomOperation("requestsPerSecond")>]
-        member _.RequestsPerSecond(state: UpdateByQueryRequest, value: CoreTypes.Float) =
+        member _.RequestsPerSecond(state: UpdateByQueryRequest, value: Types.Float) =
             { state with RequestsPerSecond = Some value }
 
         [<CustomOperation("routing")>]
-        member _.Routing(state: UpdateByQueryRequest, value: CoreTypes.Routing) =
+        member _.Routing(state: UpdateByQueryRequest, value: Types.Routing) =
             { state with Routing = Some value }
 
         [<CustomOperation("scroll")>]
-        member _.Scroll(state: UpdateByQueryRequest, value: CoreTypes.Duration) =
+        member _.Scroll(state: UpdateByQueryRequest, value: Types.Duration) =
             { state with Scroll = Some value }
 
         [<CustomOperation("scrollSize")>]
-        member _.ScrollSize(state: UpdateByQueryRequest, value: CoreTypes.Long) =
+        member _.ScrollSize(state: UpdateByQueryRequest, value: Types.Long) =
             { state with ScrollSize = Some value }
 
         [<CustomOperation("searchTimeout")>]
-        member _.SearchTimeout(state: UpdateByQueryRequest, value: CoreTypes.Duration) =
+        member _.SearchTimeout(state: UpdateByQueryRequest, value: Types.Duration) =
             { state with SearchTimeout = Some value }
 
         [<CustomOperation("searchType")>]
-        member _.SearchType(state: UpdateByQueryRequest, value: CoreTypes.SearchType) =
+        member _.SearchType(state: UpdateByQueryRequest, value: Types.SearchType) =
             { state with SearchType = Some value }
 
         [<CustomOperation("slices")>]
-        member _.Slices(state: UpdateByQueryRequest, value: CoreTypes.Slices) =
+        member _.Slices(state: UpdateByQueryRequest, value: Types.Slices) =
             { state with Slices = Some value }
 
         [<CustomOperation("sort")>]
@@ -5799,11 +5800,11 @@ module GlobalOperations =
             { state with Stats = Some value }
 
         [<CustomOperation("terminateAfter")>]
-        member _.TerminateAfter(state: UpdateByQueryRequest, value: CoreTypes.Long) =
+        member _.TerminateAfter(state: UpdateByQueryRequest, value: Types.Long) =
             { state with TerminateAfter = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: UpdateByQueryRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: UpdateByQueryRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("version")>]
@@ -5815,7 +5816,7 @@ module GlobalOperations =
             { state with VersionType = Some value }
 
         [<CustomOperation("waitForActiveShards")>]
-        member _.WaitForActiveShards(state: UpdateByQueryRequest, value: CoreTypes.WaitForActiveShards) =
+        member _.WaitForActiveShards(state: UpdateByQueryRequest, value: Types.WaitForActiveShards) =
             { state with WaitForActiveShards = Some value }
 
         [<CustomOperation("waitForCompletion")>]
@@ -5823,23 +5824,23 @@ module GlobalOperations =
             { state with WaitForCompletion = Some value }
 
         [<CustomOperation("maxDocs")>]
-        member _.MaxDocs(state: UpdateByQueryRequest, value: CoreTypes.Long) =
+        member _.MaxDocs(state: UpdateByQueryRequest, value: Types.Long) =
             { state with MaxDocs = Some value }
 
         [<CustomOperation("query")>]
-        member _.Query(state: UpdateByQueryRequest, value: CoreTypes.QueryContainer) =
+        member _.Query(state: UpdateByQueryRequest, value: Types.QueryContainer) =
             { state with Query = Some value }
 
         [<CustomOperation("script")>]
-        member _.Script(state: UpdateByQueryRequest, value: CoreTypes.Script) =
+        member _.Script(state: UpdateByQueryRequest, value: Types.Script) =
             { state with Script = Some value }
 
         [<CustomOperation("slice")>]
-        member _.Slice(state: UpdateByQueryRequest, value: CoreTypes.SlicedScroll) =
+        member _.Slice(state: UpdateByQueryRequest, value: Types.SlicedScroll) =
             { state with Slice = Some value }
 
         [<CustomOperation("conflicts")>]
-        member _.Conflicts(state: UpdateByQueryRequest, value: CoreTypes.Conflicts) =
+        member _.Conflicts(state: UpdateByQueryRequest, value: Types.Conflicts) =
             { state with Conflicts = Some value }
 
     let updateByQueryRequest = UpdateByQueryRequestBuilder()
@@ -5851,21 +5852,21 @@ module GlobalOperations =
             { req with Analyzer = Some value }
         let withAnalyzeWildcard (value: bool) (req: UpdateByQueryRequest) =
             { req with AnalyzeWildcard = Some value }
-        let withConflicts (value: CoreTypes.Conflicts) (req: UpdateByQueryRequest) =
+        let withConflicts (value: Types.Conflicts) (req: UpdateByQueryRequest) =
             { req with Conflicts = Some value }
-        let withDefaultOperator (value: CoreTypes.Operator) (req: UpdateByQueryRequest) =
+        let withDefaultOperator (value: Types.Operator) (req: UpdateByQueryRequest) =
             { req with DefaultOperator = Some value }
         let withDf (value: string) (req: UpdateByQueryRequest) =
             { req with Df = Some value }
-        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: UpdateByQueryRequest) =
+        let withExpandWildcards (value: Types.ExpandWildcards) (req: UpdateByQueryRequest) =
             { req with ExpandWildcards = Some value }
-        let withFrom (value: CoreTypes.Long) (req: UpdateByQueryRequest) =
+        let withFrom (value: Types.Long) (req: UpdateByQueryRequest) =
             { req with From = Some value }
         let withIgnoreUnavailable (value: bool) (req: UpdateByQueryRequest) =
             { req with IgnoreUnavailable = Some value }
         let withLenient (value: bool) (req: UpdateByQueryRequest) =
             { req with Lenient = Some value }
-        let withMaxDocs (value: CoreTypes.Long) (req: UpdateByQueryRequest) =
+        let withMaxDocs (value: Types.Long) (req: UpdateByQueryRequest) =
             { req with MaxDocs = Some value }
         let withPipeline (value: string) (req: UpdateByQueryRequest) =
             { req with Pipeline = Some value }
@@ -5877,50 +5878,50 @@ module GlobalOperations =
             { req with Refresh = Some value }
         let withRequestCache (value: bool) (req: UpdateByQueryRequest) =
             { req with RequestCache = Some value }
-        let withRequestsPerSecond (value: CoreTypes.Float) (req: UpdateByQueryRequest) =
+        let withRequestsPerSecond (value: Types.Float) (req: UpdateByQueryRequest) =
             { req with RequestsPerSecond = Some value }
-        let withRouting (value: CoreTypes.Routing) (req: UpdateByQueryRequest) =
+        let withRouting (value: Types.Routing) (req: UpdateByQueryRequest) =
             { req with Routing = Some value }
-        let withScroll (value: CoreTypes.Duration) (req: UpdateByQueryRequest) =
+        let withScroll (value: Types.Duration) (req: UpdateByQueryRequest) =
             { req with Scroll = Some value }
-        let withScrollSize (value: CoreTypes.Long) (req: UpdateByQueryRequest) =
+        let withScrollSize (value: Types.Long) (req: UpdateByQueryRequest) =
             { req with ScrollSize = Some value }
-        let withSearchTimeout (value: CoreTypes.Duration) (req: UpdateByQueryRequest) =
+        let withSearchTimeout (value: Types.Duration) (req: UpdateByQueryRequest) =
             { req with SearchTimeout = Some value }
-        let withSearchType (value: CoreTypes.SearchType) (req: UpdateByQueryRequest) =
+        let withSearchType (value: Types.SearchType) (req: UpdateByQueryRequest) =
             { req with SearchType = Some value }
-        let withSlices (value: CoreTypes.Slices) (req: UpdateByQueryRequest) =
+        let withSlices (value: Types.Slices) (req: UpdateByQueryRequest) =
             { req with Slices = Some value }
         let withSort (value: string list) (req: UpdateByQueryRequest) =
             { req with Sort = Some value }
         let withStats (value: string list) (req: UpdateByQueryRequest) =
             { req with Stats = Some value }
-        let withTerminateAfter (value: CoreTypes.Long) (req: UpdateByQueryRequest) =
+        let withTerminateAfter (value: Types.Long) (req: UpdateByQueryRequest) =
             { req with TerminateAfter = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: UpdateByQueryRequest) =
+        let withTimeout (value: Types.Duration) (req: UpdateByQueryRequest) =
             { req with Timeout = Some value }
         let withVersion (value: bool) (req: UpdateByQueryRequest) =
             { req with Version = Some value }
         let withVersionType (value: bool) (req: UpdateByQueryRequest) =
             { req with VersionType = Some value }
-        let withWaitForActiveShards (value: CoreTypes.WaitForActiveShards) (req: UpdateByQueryRequest) =
+        let withWaitForActiveShards (value: Types.WaitForActiveShards) (req: UpdateByQueryRequest) =
             { req with WaitForActiveShards = Some value }
         let withWaitForCompletion (value: bool) (req: UpdateByQueryRequest) =
             { req with WaitForCompletion = Some value }
-        let withMaxDocs (value: CoreTypes.Long) (req: UpdateByQueryRequest) =
+        let withMaxDocs (value: Types.Long) (req: UpdateByQueryRequest) =
             { req with MaxDocs = Some value }
-        let withQuery (value: CoreTypes.QueryContainer) (req: UpdateByQueryRequest) =
+        let withQuery (value: Types.QueryContainer) (req: UpdateByQueryRequest) =
             { req with Query = Some value }
-        let withScript (value: CoreTypes.Script) (req: UpdateByQueryRequest) =
+        let withScript (value: Types.Script) (req: UpdateByQueryRequest) =
             { req with Script = Some value }
-        let withSlice (value: CoreTypes.SlicedScroll) (req: UpdateByQueryRequest) =
+        let withSlice (value: Types.SlicedScroll) (req: UpdateByQueryRequest) =
             { req with Slice = Some value }
-        let withConflicts (value: CoreTypes.Conflicts) (req: UpdateByQueryRequest) =
+        let withConflicts (value: Types.Conflicts) (req: UpdateByQueryRequest) =
             { req with Conflicts = Some value }
 
     type UpdateByQueryRethrottleRequest = {
-        TaskId: CoreTypes.Id
-        RequestsPerSecond: CoreTypes.Float
+        TaskId: Types.Id
+        RequestsPerSecond: Types.Float
     }
 
         with
@@ -5944,16 +5945,16 @@ module GlobalOperations =
             }
 
         [<CustomOperation("taskId")>]
-        member _.TaskId(state: UpdateByQueryRethrottleRequest, value: CoreTypes.Id) =
+        member _.TaskId(state: UpdateByQueryRethrottleRequest, value: Types.Id) =
             { state with TaskId = value }
 
         [<CustomOperation("requestsPerSecond")>]
-        member _.RequestsPerSecond(state: UpdateByQueryRethrottleRequest, value: CoreTypes.Float) =
+        member _.RequestsPerSecond(state: UpdateByQueryRethrottleRequest, value: Types.Float) =
             { state with RequestsPerSecond = value }
 
     let updateByQueryRethrottleRequest = UpdateByQueryRethrottleRequestBuilder()
 
     module UpdateByQueryRethrottle =
-        let withRequestsPerSecond (value: CoreTypes.Float) (req: UpdateByQueryRethrottleRequest) =
+        let withRequestsPerSecond (value: Types.Float) (req: UpdateByQueryRethrottleRequest) =
             { req with RequestsPerSecond = value }
 

@@ -4,13 +4,13 @@ namespace Fes.Generated.Builders
 
 
 open System.Text.Json.Serialization
-open Fes.Generated.Types
+open Fes.Generated
 
 [<AutoOpen>]
 module InferenceTypesBuilders =
 
     type AdaptiveAllocationsBuilder() =
-        member _.Yield(_: unit) : AdaptiveAllocations =
+        member _.Yield(_: unit) : Types.AdaptiveAllocations =
             {
                 Enabled = None
                 MaxNumberOfAllocations = None
@@ -18,21 +18,21 @@ module InferenceTypesBuilders =
             }
 
         [<CustomOperation("enabled")>]
-        member _.Enabled(state: AdaptiveAllocations, value: bool) =
+        member _.Enabled(state: Types.AdaptiveAllocations, value: bool) =
             { state with Enabled = Some value }
 
         [<CustomOperation("maxNumberOfAllocations")>]
-        member _.MaxNumberOfAllocations(state: AdaptiveAllocations, value: CoreTypes.Integer) =
+        member _.MaxNumberOfAllocations(state: Types.AdaptiveAllocations, value: Types.Integer) =
             { state with MaxNumberOfAllocations = Some value }
 
         [<CustomOperation("minNumberOfAllocations")>]
-        member _.MinNumberOfAllocations(state: AdaptiveAllocations, value: CoreTypes.Integer) =
+        member _.MinNumberOfAllocations(state: Types.AdaptiveAllocations, value: Types.Integer) =
             { state with MinNumberOfAllocations = Some value }
 
     let adaptiveAllocations = AdaptiveAllocationsBuilder()
 
     type Ai21ServiceSettingsBuilder() =
-        member _.Yield(_: unit) : Ai21ServiceSettings =
+        member _.Yield(_: unit) : Types.Ai21ServiceSettings =
             {
                 ModelId = Unchecked.defaultof<_>
                 ApiKey = None
@@ -40,38 +40,38 @@ module InferenceTypesBuilders =
             }
 
         [<CustomOperation("modelId")>]
-        member _.ModelId(state: Ai21ServiceSettings, value: string) =
+        member _.ModelId(state: Types.Ai21ServiceSettings, value: string) =
             { state with ModelId = value }
 
         [<CustomOperation("apiKey")>]
-        member _.ApiKey(state: Ai21ServiceSettings, value: string) =
+        member _.ApiKey(state: Types.Ai21ServiceSettings, value: string) =
             { state with ApiKey = Some value }
 
         [<CustomOperation("rateLimit")>]
-        member _.RateLimit(state: Ai21ServiceSettings, value: InferenceTypes.RateLimitSetting) =
+        member _.RateLimit(state: Types.Ai21ServiceSettings, value: Types.RateLimitSetting) =
             { state with RateLimit = Some value }
 
     let ai21ServiceSettings = Ai21ServiceSettingsBuilder()
 
     type AlibabaCloudTaskSettingsBuilder() =
-        member _.Yield(_: unit) : AlibabaCloudTaskSettings =
+        member _.Yield(_: unit) : Types.AlibabaCloudTaskSettings =
             {
                 InputType = None
                 ReturnToken = None
             }
 
         [<CustomOperation("inputType")>]
-        member _.InputType(state: AlibabaCloudTaskSettings, value: string) =
+        member _.InputType(state: Types.AlibabaCloudTaskSettings, value: string) =
             { state with InputType = Some value }
 
         [<CustomOperation("returnToken")>]
-        member _.ReturnToken(state: AlibabaCloudTaskSettings, value: bool) =
+        member _.ReturnToken(state: Types.AlibabaCloudTaskSettings, value: bool) =
             { state with ReturnToken = Some value }
 
     let alibabaCloudTaskSettings = AlibabaCloudTaskSettingsBuilder()
 
     type AmazonBedrockServiceSettingsBuilder() =
-        member _.Yield(_: unit) : AmazonBedrockServiceSettings =
+        member _.Yield(_: unit) : Types.AmazonBedrockServiceSettings =
             {
                 AccessKey = Unchecked.defaultof<_>
                 Model = Unchecked.defaultof<_>
@@ -82,33 +82,33 @@ module InferenceTypesBuilders =
             }
 
         [<CustomOperation("accessKey")>]
-        member _.AccessKey(state: AmazonBedrockServiceSettings, value: string) =
+        member _.AccessKey(state: Types.AmazonBedrockServiceSettings, value: string) =
             { state with AccessKey = value }
 
         [<CustomOperation("model")>]
-        member _.Model(state: AmazonBedrockServiceSettings, value: string) =
+        member _.Model(state: Types.AmazonBedrockServiceSettings, value: string) =
             { state with Model = value }
 
         [<CustomOperation("provider")>]
-        member _.Provider(state: AmazonBedrockServiceSettings, value: string) =
+        member _.Provider(state: Types.AmazonBedrockServiceSettings, value: string) =
             { state with Provider = Some value }
 
         [<CustomOperation("region")>]
-        member _.Region(state: AmazonBedrockServiceSettings, value: string) =
+        member _.Region(state: Types.AmazonBedrockServiceSettings, value: string) =
             { state with Region = value }
 
         [<CustomOperation("rateLimit")>]
-        member _.RateLimit(state: AmazonBedrockServiceSettings, value: InferenceTypes.RateLimitSetting) =
+        member _.RateLimit(state: Types.AmazonBedrockServiceSettings, value: Types.RateLimitSetting) =
             { state with RateLimit = Some value }
 
         [<CustomOperation("secretKey")>]
-        member _.SecretKey(state: AmazonBedrockServiceSettings, value: string) =
+        member _.SecretKey(state: Types.AmazonBedrockServiceSettings, value: string) =
             { state with SecretKey = value }
 
     let amazonBedrockServiceSettings = AmazonBedrockServiceSettingsBuilder()
 
     type AmazonBedrockTaskSettingsBuilder() =
-        member _.Yield(_: unit) : AmazonBedrockTaskSettings =
+        member _.Yield(_: unit) : Types.AmazonBedrockTaskSettings =
             {
                 MaxNewTokens = None
                 Temperature = None
@@ -117,25 +117,25 @@ module InferenceTypesBuilders =
             }
 
         [<CustomOperation("maxNewTokens")>]
-        member _.MaxNewTokens(state: AmazonBedrockTaskSettings, value: CoreTypes.Integer) =
+        member _.MaxNewTokens(state: Types.AmazonBedrockTaskSettings, value: Types.Integer) =
             { state with MaxNewTokens = Some value }
 
         [<CustomOperation("temperature")>]
-        member _.Temperature(state: AmazonBedrockTaskSettings, value: CoreTypes.Float) =
+        member _.Temperature(state: Types.AmazonBedrockTaskSettings, value: Types.Float) =
             { state with Temperature = Some value }
 
         [<CustomOperation("topK")>]
-        member _.TopK(state: AmazonBedrockTaskSettings, value: CoreTypes.Float) =
+        member _.TopK(state: Types.AmazonBedrockTaskSettings, value: Types.Float) =
             { state with TopK = Some value }
 
         [<CustomOperation("topP")>]
-        member _.TopP(state: AmazonBedrockTaskSettings, value: CoreTypes.Float) =
+        member _.TopP(state: Types.AmazonBedrockTaskSettings, value: Types.Float) =
             { state with TopP = Some value }
 
     let amazonBedrockTaskSettings = AmazonBedrockTaskSettingsBuilder()
 
     type AmazonSageMakerServiceSettingsBuilder() =
-        member _.Yield(_: unit) : AmazonSageMakerServiceSettings =
+        member _.Yield(_: unit) : Types.AmazonSageMakerServiceSettings =
             {
                 AccessKey = Unchecked.defaultof<_>
                 EndpointName = Unchecked.defaultof<_>
@@ -150,49 +150,49 @@ module InferenceTypesBuilders =
             }
 
         [<CustomOperation("accessKey")>]
-        member _.AccessKey(state: AmazonSageMakerServiceSettings, value: string) =
+        member _.AccessKey(state: Types.AmazonSageMakerServiceSettings, value: string) =
             { state with AccessKey = value }
 
         [<CustomOperation("endpointName")>]
-        member _.EndpointName(state: AmazonSageMakerServiceSettings, value: string) =
+        member _.EndpointName(state: Types.AmazonSageMakerServiceSettings, value: string) =
             { state with EndpointName = value }
 
         [<CustomOperation("api")>]
-        member _.Api(state: AmazonSageMakerServiceSettings, value: InferenceTypes.AmazonSageMakerApi) =
+        member _.Api(state: Types.AmazonSageMakerServiceSettings, value: Types.AmazonSageMakerApi) =
             { state with Api = value }
 
         [<CustomOperation("region")>]
-        member _.Region(state: AmazonSageMakerServiceSettings, value: string) =
+        member _.Region(state: Types.AmazonSageMakerServiceSettings, value: string) =
             { state with Region = value }
 
         [<CustomOperation("secretKey")>]
-        member _.SecretKey(state: AmazonSageMakerServiceSettings, value: string) =
+        member _.SecretKey(state: Types.AmazonSageMakerServiceSettings, value: string) =
             { state with SecretKey = value }
 
         [<CustomOperation("targetModel")>]
-        member _.TargetModel(state: AmazonSageMakerServiceSettings, value: string) =
+        member _.TargetModel(state: Types.AmazonSageMakerServiceSettings, value: string) =
             { state with TargetModel = Some value }
 
         [<CustomOperation("targetContainerHostname")>]
-        member _.TargetContainerHostname(state: AmazonSageMakerServiceSettings, value: string) =
+        member _.TargetContainerHostname(state: Types.AmazonSageMakerServiceSettings, value: string) =
             { state with TargetContainerHostname = Some value }
 
         [<CustomOperation("inferenceComponentName")>]
-        member _.InferenceComponentName(state: AmazonSageMakerServiceSettings, value: string) =
+        member _.InferenceComponentName(state: Types.AmazonSageMakerServiceSettings, value: string) =
             { state with InferenceComponentName = Some value }
 
         [<CustomOperation("batchSize")>]
-        member _.BatchSize(state: AmazonSageMakerServiceSettings, value: CoreTypes.Integer) =
+        member _.BatchSize(state: Types.AmazonSageMakerServiceSettings, value: Types.Integer) =
             { state with BatchSize = Some value }
 
         [<CustomOperation("dimensions")>]
-        member _.Dimensions(state: AmazonSageMakerServiceSettings, value: CoreTypes.Integer) =
+        member _.Dimensions(state: Types.AmazonSageMakerServiceSettings, value: Types.Integer) =
             { state with Dimensions = Some value }
 
     let amazonSageMakerServiceSettings = AmazonSageMakerServiceSettingsBuilder()
 
     type AmazonSageMakerTaskSettingsBuilder() =
-        member _.Yield(_: unit) : AmazonSageMakerTaskSettings =
+        member _.Yield(_: unit) : Types.AmazonSageMakerTaskSettings =
             {
                 CustomAttributes = None
                 EnableExplanations = None
@@ -202,29 +202,29 @@ module InferenceTypesBuilders =
             }
 
         [<CustomOperation("customAttributes")>]
-        member _.CustomAttributes(state: AmazonSageMakerTaskSettings, value: string) =
+        member _.CustomAttributes(state: Types.AmazonSageMakerTaskSettings, value: string) =
             { state with CustomAttributes = Some value }
 
         [<CustomOperation("enableExplanations")>]
-        member _.EnableExplanations(state: AmazonSageMakerTaskSettings, value: string) =
+        member _.EnableExplanations(state: Types.AmazonSageMakerTaskSettings, value: string) =
             { state with EnableExplanations = Some value }
 
         [<CustomOperation("inferenceId")>]
-        member _.InferenceId(state: AmazonSageMakerTaskSettings, value: string) =
+        member _.InferenceId(state: Types.AmazonSageMakerTaskSettings, value: string) =
             { state with InferenceId = Some value }
 
         [<CustomOperation("sessionId")>]
-        member _.SessionId(state: AmazonSageMakerTaskSettings, value: string) =
+        member _.SessionId(state: Types.AmazonSageMakerTaskSettings, value: string) =
             { state with SessionId = Some value }
 
         [<CustomOperation("targetVariant")>]
-        member _.TargetVariant(state: AmazonSageMakerTaskSettings, value: string) =
+        member _.TargetVariant(state: Types.AmazonSageMakerTaskSettings, value: string) =
             { state with TargetVariant = Some value }
 
     let amazonSageMakerTaskSettings = AmazonSageMakerTaskSettingsBuilder()
 
     type AnthropicTaskSettingsBuilder() =
-        member _.Yield(_: unit) : AnthropicTaskSettings =
+        member _.Yield(_: unit) : Types.AnthropicTaskSettings =
             {
                 MaxTokens = Unchecked.defaultof<_>
                 Temperature = None
@@ -233,25 +233,25 @@ module InferenceTypesBuilders =
             }
 
         [<CustomOperation("maxTokens")>]
-        member _.MaxTokens(state: AnthropicTaskSettings, value: CoreTypes.Integer) =
+        member _.MaxTokens(state: Types.AnthropicTaskSettings, value: Types.Integer) =
             { state with MaxTokens = value }
 
         [<CustomOperation("temperature")>]
-        member _.Temperature(state: AnthropicTaskSettings, value: CoreTypes.Float) =
+        member _.Temperature(state: Types.AnthropicTaskSettings, value: Types.Float) =
             { state with Temperature = Some value }
 
         [<CustomOperation("topK")>]
-        member _.TopK(state: AnthropicTaskSettings, value: CoreTypes.Integer) =
+        member _.TopK(state: Types.AnthropicTaskSettings, value: Types.Integer) =
             { state with TopK = Some value }
 
         [<CustomOperation("topP")>]
-        member _.TopP(state: AnthropicTaskSettings, value: CoreTypes.Float) =
+        member _.TopP(state: Types.AnthropicTaskSettings, value: Types.Float) =
             { state with TopP = Some value }
 
     let anthropicTaskSettings = AnthropicTaskSettingsBuilder()
 
     type AzureAiStudioTaskSettingsBuilder() =
-        member _.Yield(_: unit) : AzureAiStudioTaskSettings =
+        member _.Yield(_: unit) : Types.AzureAiStudioTaskSettings =
             {
                 DoSample = None
                 MaxNewTokens = None
@@ -263,37 +263,37 @@ module InferenceTypesBuilders =
             }
 
         [<CustomOperation("doSample")>]
-        member _.DoSample(state: AzureAiStudioTaskSettings, value: CoreTypes.Float) =
+        member _.DoSample(state: Types.AzureAiStudioTaskSettings, value: Types.Float) =
             { state with DoSample = Some value }
 
         [<CustomOperation("maxNewTokens")>]
-        member _.MaxNewTokens(state: AzureAiStudioTaskSettings, value: CoreTypes.Integer) =
+        member _.MaxNewTokens(state: Types.AzureAiStudioTaskSettings, value: Types.Integer) =
             { state with MaxNewTokens = Some value }
 
         [<CustomOperation("temperature")>]
-        member _.Temperature(state: AzureAiStudioTaskSettings, value: CoreTypes.Float) =
+        member _.Temperature(state: Types.AzureAiStudioTaskSettings, value: Types.Float) =
             { state with Temperature = Some value }
 
         [<CustomOperation("topP")>]
-        member _.TopP(state: AzureAiStudioTaskSettings, value: CoreTypes.Float) =
+        member _.TopP(state: Types.AzureAiStudioTaskSettings, value: Types.Float) =
             { state with TopP = Some value }
 
         [<CustomOperation("user")>]
-        member _.User(state: AzureAiStudioTaskSettings, value: string) =
+        member _.User(state: Types.AzureAiStudioTaskSettings, value: string) =
             { state with User = Some value }
 
         [<CustomOperation("returnDocuments")>]
-        member _.ReturnDocuments(state: AzureAiStudioTaskSettings, value: bool) =
+        member _.ReturnDocuments(state: Types.AzureAiStudioTaskSettings, value: bool) =
             { state with ReturnDocuments = Some value }
 
         [<CustomOperation("topN")>]
-        member _.TopN(state: AzureAiStudioTaskSettings, value: CoreTypes.Integer) =
+        member _.TopN(state: Types.AzureAiStudioTaskSettings, value: Types.Integer) =
             { state with TopN = Some value }
 
     let azureAiStudioTaskSettings = AzureAiStudioTaskSettingsBuilder()
 
     type AzureOpenAIServiceSettingsBuilder() =
-        member _.Yield(_: unit) : AzureOpenAIServiceSettings =
+        member _.Yield(_: unit) : Types.AzureOpenAIServiceSettings =
             {
                 ApiKey = None
                 ApiVersion = Unchecked.defaultof<_>
@@ -308,66 +308,66 @@ module InferenceTypesBuilders =
             }
 
         [<CustomOperation("apiKey")>]
-        member _.ApiKey(state: AzureOpenAIServiceSettings, value: string) =
+        member _.ApiKey(state: Types.AzureOpenAIServiceSettings, value: string) =
             { state with ApiKey = Some value }
 
         [<CustomOperation("apiVersion")>]
-        member _.ApiVersion(state: AzureOpenAIServiceSettings, value: string) =
+        member _.ApiVersion(state: Types.AzureOpenAIServiceSettings, value: string) =
             { state with ApiVersion = value }
 
         [<CustomOperation("clientId")>]
-        member _.ClientId(state: AzureOpenAIServiceSettings, value: string) =
+        member _.ClientId(state: Types.AzureOpenAIServiceSettings, value: string) =
             { state with ClientId = Some value }
 
         [<CustomOperation("clientSecret")>]
-        member _.ClientSecret(state: AzureOpenAIServiceSettings, value: string) =
+        member _.ClientSecret(state: Types.AzureOpenAIServiceSettings, value: string) =
             { state with ClientSecret = Some value }
 
         [<CustomOperation("deploymentId")>]
-        member _.DeploymentId(state: AzureOpenAIServiceSettings, value: string) =
+        member _.DeploymentId(state: Types.AzureOpenAIServiceSettings, value: string) =
             { state with DeploymentId = value }
 
         [<CustomOperation("entraId")>]
-        member _.EntraId(state: AzureOpenAIServiceSettings, value: string) =
+        member _.EntraId(state: Types.AzureOpenAIServiceSettings, value: string) =
             { state with EntraId = Some value }
 
         [<CustomOperation("rateLimit")>]
-        member _.RateLimit(state: AzureOpenAIServiceSettings, value: InferenceTypes.RateLimitSetting) =
+        member _.RateLimit(state: Types.AzureOpenAIServiceSettings, value: Types.RateLimitSetting) =
             { state with RateLimit = Some value }
 
         [<CustomOperation("resourceName")>]
-        member _.ResourceName(state: AzureOpenAIServiceSettings, value: string) =
+        member _.ResourceName(state: Types.AzureOpenAIServiceSettings, value: string) =
             { state with ResourceName = value }
 
         [<CustomOperation("scopes")>]
-        member _.Scopes(state: AzureOpenAIServiceSettings, value: string list) =
+        member _.Scopes(state: Types.AzureOpenAIServiceSettings, value: string list) =
             { state with Scopes = Some value }
 
         [<CustomOperation("tenantId")>]
-        member _.TenantId(state: AzureOpenAIServiceSettings, value: string) =
+        member _.TenantId(state: Types.AzureOpenAIServiceSettings, value: string) =
             { state with TenantId = Some value }
 
     let azureOpenAIServiceSettings = AzureOpenAIServiceSettingsBuilder()
 
     type AzureOpenAITaskSettingsBuilder() =
-        member _.Yield(_: unit) : AzureOpenAITaskSettings =
+        member _.Yield(_: unit) : Types.AzureOpenAITaskSettings =
             {
                 User = None
                 Headers = None
             }
 
         [<CustomOperation("user")>]
-        member _.User(state: AzureOpenAITaskSettings, value: string) =
+        member _.User(state: Types.AzureOpenAITaskSettings, value: string) =
             { state with User = Some value }
 
         [<CustomOperation("headers")>]
-        member _.Headers(state: AzureOpenAITaskSettings, value: Map<string, string>) =
+        member _.Headers(state: Types.AzureOpenAITaskSettings, value: Map<string, string>) =
             { state with Headers = Some value }
 
     let azureOpenAITaskSettings = AzureOpenAITaskSettingsBuilder()
 
     type BaseReasoningDetailBuilder() =
-        member _.Yield(_: unit) : BaseReasoningDetail =
+        member _.Yield(_: unit) : Types.BaseReasoningDetail =
             {
                 Format = None
                 Id = None
@@ -375,21 +375,21 @@ module InferenceTypesBuilders =
             }
 
         [<CustomOperation("format")>]
-        member _.Format(state: BaseReasoningDetail, value: string) =
+        member _.Format(state: Types.BaseReasoningDetail, value: string) =
             { state with Format = Some value }
 
         [<CustomOperation("id")>]
-        member _.Id(state: BaseReasoningDetail, value: string) =
+        member _.Id(state: Types.BaseReasoningDetail, value: string) =
             { state with Id = Some value }
 
         [<CustomOperation("index")>]
-        member _.Index(state: BaseReasoningDetail, value: CoreTypes.Integer) =
+        member _.Index(state: Types.BaseReasoningDetail, value: Types.Integer) =
             { state with Index = Some value }
 
     let baseReasoningDetail = BaseReasoningDetailBuilder()
 
     type CohereServiceSettingsBuilder() =
-        member _.Yield(_: unit) : CohereServiceSettings =
+        member _.Yield(_: unit) : Types.CohereServiceSettings =
             {
                 ApiKey = Unchecked.defaultof<_>
                 EmbeddingType = None
@@ -399,29 +399,29 @@ module InferenceTypesBuilders =
             }
 
         [<CustomOperation("apiKey")>]
-        member _.ApiKey(state: CohereServiceSettings, value: string) =
+        member _.ApiKey(state: Types.CohereServiceSettings, value: string) =
             { state with ApiKey = value }
 
         [<CustomOperation("embeddingType")>]
-        member _.EmbeddingType(state: CohereServiceSettings, value: InferenceTypes.CohereEmbeddingType) =
+        member _.EmbeddingType(state: Types.CohereServiceSettings, value: Types.CohereEmbeddingType) =
             { state with EmbeddingType = Some value }
 
         [<CustomOperation("modelId")>]
-        member _.ModelId(state: CohereServiceSettings, value: string) =
+        member _.ModelId(state: Types.CohereServiceSettings, value: string) =
             { state with ModelId = value }
 
         [<CustomOperation("rateLimit")>]
-        member _.RateLimit(state: CohereServiceSettings, value: InferenceTypes.RateLimitSetting) =
+        member _.RateLimit(state: Types.CohereServiceSettings, value: Types.RateLimitSetting) =
             { state with RateLimit = Some value }
 
         [<CustomOperation("similarity")>]
-        member _.Similarity(state: CohereServiceSettings, value: InferenceTypes.CohereSimilarityType) =
+        member _.Similarity(state: Types.CohereServiceSettings, value: Types.CohereSimilarityType) =
             { state with Similarity = Some value }
 
     let cohereServiceSettings = CohereServiceSettingsBuilder()
 
     type CohereTaskSettingsBuilder() =
-        member _.Yield(_: unit) : CohereTaskSettings =
+        member _.Yield(_: unit) : Types.CohereTaskSettings =
             {
                 InputType = Unchecked.defaultof<_>
                 ReturnDocuments = None
@@ -430,25 +430,25 @@ module InferenceTypesBuilders =
             }
 
         [<CustomOperation("inputType")>]
-        member _.InputType(state: CohereTaskSettings, value: InferenceTypes.CohereInputType) =
+        member _.InputType(state: Types.CohereTaskSettings, value: Types.CohereInputType) =
             { state with InputType = value }
 
         [<CustomOperation("returnDocuments")>]
-        member _.ReturnDocuments(state: CohereTaskSettings, value: bool) =
+        member _.ReturnDocuments(state: Types.CohereTaskSettings, value: bool) =
             { state with ReturnDocuments = Some value }
 
         [<CustomOperation("topN")>]
-        member _.TopN(state: CohereTaskSettings, value: CoreTypes.Integer) =
+        member _.TopN(state: Types.CohereTaskSettings, value: Types.Integer) =
             { state with TopN = Some value }
 
         [<CustomOperation("truncate")>]
-        member _.Truncate(state: CohereTaskSettings, value: InferenceTypes.CohereTruncateType) =
+        member _.Truncate(state: Types.CohereTaskSettings, value: Types.CohereTruncateType) =
             { state with Truncate = Some value }
 
     let cohereTaskSettings = CohereTaskSettingsBuilder()
 
     type CompletionToolFunctionBuilder() =
-        member _.Yield(_: unit) : CompletionToolFunction =
+        member _.Yield(_: unit) : Types.CompletionToolFunction =
             {
                 Description = None
                 Name = Unchecked.defaultof<_>
@@ -457,25 +457,25 @@ module InferenceTypesBuilders =
             }
 
         [<CustomOperation("description")>]
-        member _.Description(state: CompletionToolFunction, value: string) =
+        member _.Description(state: Types.CompletionToolFunction, value: string) =
             { state with Description = Some value }
 
         [<CustomOperation("name")>]
-        member _.Name(state: CompletionToolFunction, value: string) =
+        member _.Name(state: Types.CompletionToolFunction, value: string) =
             { state with Name = value }
 
         [<CustomOperation("parameters")>]
-        member _.Parameters(state: CompletionToolFunction, value: System.Text.Json.JsonElement) =
+        member _.Parameters(state: Types.CompletionToolFunction, value: System.Text.Json.JsonElement) =
             { state with Parameters = Some value }
 
         [<CustomOperation("strict")>]
-        member _.Strict(state: CompletionToolFunction, value: bool) =
+        member _.Strict(state: Types.CompletionToolFunction, value: bool) =
             { state with Strict = Some value }
 
     let completionToolFunction = CompletionToolFunctionBuilder()
 
     type ContextualAITaskSettingsBuilder() =
-        member _.Yield(_: unit) : ContextualAITaskSettings =
+        member _.Yield(_: unit) : Types.ContextualAITaskSettings =
             {
                 Instruction = None
                 ReturnDocuments = None
@@ -483,21 +483,21 @@ module InferenceTypesBuilders =
             }
 
         [<CustomOperation("instruction")>]
-        member _.Instruction(state: ContextualAITaskSettings, value: string) =
+        member _.Instruction(state: Types.ContextualAITaskSettings, value: string) =
             { state with Instruction = Some value }
 
         [<CustomOperation("returnDocuments")>]
-        member _.ReturnDocuments(state: ContextualAITaskSettings, value: bool) =
+        member _.ReturnDocuments(state: Types.ContextualAITaskSettings, value: bool) =
             { state with ReturnDocuments = Some value }
 
         [<CustomOperation("topK")>]
-        member _.TopK(state: ContextualAITaskSettings, value: CoreTypes.Integer) =
+        member _.TopK(state: Types.ContextualAITaskSettings, value: Types.Integer) =
             { state with TopK = Some value }
 
     let contextualAITaskSettings = ContextualAITaskSettingsBuilder()
 
     type CustomServiceSettingsBuilder() =
-        member _.Yield(_: unit) : CustomServiceSettings =
+        member _.Yield(_: unit) : Types.CustomServiceSettings =
             {
                 BatchSize = None
                 Headers = None
@@ -510,41 +510,41 @@ module InferenceTypesBuilders =
             }
 
         [<CustomOperation("batchSize")>]
-        member _.BatchSize(state: CustomServiceSettings, value: CoreTypes.Integer) =
+        member _.BatchSize(state: Types.CustomServiceSettings, value: Types.Integer) =
             { state with BatchSize = Some value }
 
         [<CustomOperation("headers")>]
-        member _.Headers(state: CustomServiceSettings, value: Map<string, string>) =
+        member _.Headers(state: Types.CustomServiceSettings, value: Map<string, string>) =
             { state with Headers = Some value }
 
         [<CustomOperation("inputType")>]
-        member _.InputType(state: CustomServiceSettings, value: Map<InferenceTypes.CustomServiceInputType, string>) =
+        member _.InputType(state: Types.CustomServiceSettings, value: Map<Types.CustomServiceInputType, string>) =
             { state with InputType = Some value }
 
         [<CustomOperation("queryParameters")>]
-        member _.QueryParameters(state: CustomServiceSettings, value: InferenceTypes.CustomServiceQueryParameter list) =
+        member _.QueryParameters(state: Types.CustomServiceSettings, value: Types.CustomServiceQueryParameter list) =
             { state with QueryParameters = Some value }
 
         [<CustomOperation("request")>]
-        member _.Request(state: CustomServiceSettings, value: InferenceTypes.CustomRequestParams) =
+        member _.Request(state: Types.CustomServiceSettings, value: Types.CustomRequestParams) =
             { state with Request = value }
 
         [<CustomOperation("response")>]
-        member _.Response(state: CustomServiceSettings, value: InferenceTypes.CustomResponseParams) =
+        member _.Response(state: Types.CustomServiceSettings, value: Types.CustomResponseParams) =
             { state with Response = value }
 
         [<CustomOperation("secretParameters")>]
-        member _.SecretParameters(state: CustomServiceSettings, value: Map<string, string>) =
+        member _.SecretParameters(state: Types.CustomServiceSettings, value: Map<string, string>) =
             { state with SecretParameters = value }
 
         [<CustomOperation("url")>]
-        member _.Url(state: CustomServiceSettings, value: string) =
+        member _.Url(state: Types.CustomServiceSettings, value: string) =
             { state with Url = Some value }
 
     let customServiceSettings = CustomServiceSettingsBuilder()
 
     type ElasticsearchServiceSettingsBuilder() =
-        member _.Yield(_: unit) : ElasticsearchServiceSettings =
+        member _.Yield(_: unit) : Types.ElasticsearchServiceSettings =
             {
                 AdaptiveAllocations = None
                 DeploymentId = None
@@ -556,48 +556,48 @@ module InferenceTypesBuilders =
             }
 
         [<CustomOperation("adaptiveAllocations")>]
-        member _.AdaptiveAllocations(state: ElasticsearchServiceSettings, value: InferenceTypes.AdaptiveAllocations) =
+        member _.AdaptiveAllocations(state: Types.ElasticsearchServiceSettings, value: Types.AdaptiveAllocations) =
             { state with AdaptiveAllocations = Some value }
 
         [<CustomOperation("deploymentId")>]
-        member _.DeploymentId(state: ElasticsearchServiceSettings, value: string) =
+        member _.DeploymentId(state: Types.ElasticsearchServiceSettings, value: string) =
             { state with DeploymentId = Some value }
 
         [<CustomOperation("modelId")>]
-        member _.ModelId(state: ElasticsearchServiceSettings, value: string) =
+        member _.ModelId(state: Types.ElasticsearchServiceSettings, value: string) =
             { state with ModelId = value }
 
         [<CustomOperation("numAllocations")>]
-        member _.NumAllocations(state: ElasticsearchServiceSettings, value: CoreTypes.Integer) =
+        member _.NumAllocations(state: Types.ElasticsearchServiceSettings, value: Types.Integer) =
             { state with NumAllocations = Some value }
 
         [<CustomOperation("numThreads")>]
-        member _.NumThreads(state: ElasticsearchServiceSettings, value: CoreTypes.Integer) =
+        member _.NumThreads(state: Types.ElasticsearchServiceSettings, value: Types.Integer) =
             { state with NumThreads = value }
 
         [<CustomOperation("longDocumentStrategy")>]
-        member _.LongDocumentStrategy(state: ElasticsearchServiceSettings, value: string) =
+        member _.LongDocumentStrategy(state: Types.ElasticsearchServiceSettings, value: string) =
             { state with LongDocumentStrategy = Some value }
 
         [<CustomOperation("maxChunksPerDoc")>]
-        member _.MaxChunksPerDoc(state: ElasticsearchServiceSettings, value: CoreTypes.Integer) =
+        member _.MaxChunksPerDoc(state: Types.ElasticsearchServiceSettings, value: Types.Integer) =
             { state with MaxChunksPerDoc = Some value }
 
     let elasticsearchServiceSettings = ElasticsearchServiceSettingsBuilder()
 
     module EmbeddingInferenceResult =
 
-        let embeddingsBytes (value: InferenceTypes.DenseEmbeddingByteResult list) =
-            EmbeddingInferenceResult.EmbeddingsBytes value
+        let embeddingsBytes (value: Types.DenseEmbeddingByteResult list) =
+            Types.EmbeddingInferenceResult.EmbeddingsBytes value
 
-        let embeddingsBits (value: InferenceTypes.DenseEmbeddingByteResult list) =
-            EmbeddingInferenceResult.EmbeddingsBits value
+        let embeddingsBits (value: Types.DenseEmbeddingByteResult list) =
+            Types.EmbeddingInferenceResult.EmbeddingsBits value
 
-        let embeddings (value: InferenceTypes.DenseEmbeddingResult list) =
-            EmbeddingInferenceResult.Embeddings value
+        let embeddings (value: Types.DenseEmbeddingResult list) =
+            Types.EmbeddingInferenceResult.Embeddings value
 
     type FireworksAIServiceSettingsBuilder() =
-        member _.Yield(_: unit) : FireworksAIServiceSettings =
+        member _.Yield(_: unit) : Types.FireworksAIServiceSettings =
             {
                 ApiKey = Unchecked.defaultof<_>
                 ModelId = Unchecked.defaultof<_>
@@ -608,50 +608,50 @@ module InferenceTypesBuilders =
             }
 
         [<CustomOperation("apiKey")>]
-        member _.ApiKey(state: FireworksAIServiceSettings, value: string) =
+        member _.ApiKey(state: Types.FireworksAIServiceSettings, value: string) =
             { state with ApiKey = value }
 
         [<CustomOperation("modelId")>]
-        member _.ModelId(state: FireworksAIServiceSettings, value: string) =
+        member _.ModelId(state: Types.FireworksAIServiceSettings, value: string) =
             { state with ModelId = value }
 
         [<CustomOperation("url")>]
-        member _.Url(state: FireworksAIServiceSettings, value: string) =
+        member _.Url(state: Types.FireworksAIServiceSettings, value: string) =
             { state with Url = Some value }
 
         [<CustomOperation("dimensions")>]
-        member _.Dimensions(state: FireworksAIServiceSettings, value: CoreTypes.Integer) =
+        member _.Dimensions(state: Types.FireworksAIServiceSettings, value: Types.Integer) =
             { state with Dimensions = Some value }
 
         [<CustomOperation("similarity")>]
-        member _.Similarity(state: FireworksAIServiceSettings, value: InferenceTypes.FireworksAISimilarityType) =
+        member _.Similarity(state: Types.FireworksAIServiceSettings, value: Types.FireworksAISimilarityType) =
             { state with Similarity = Some value }
 
         [<CustomOperation("rateLimit")>]
-        member _.RateLimit(state: FireworksAIServiceSettings, value: InferenceTypes.RateLimitSetting) =
+        member _.RateLimit(state: Types.FireworksAIServiceSettings, value: Types.RateLimitSetting) =
             { state with RateLimit = Some value }
 
     let fireworksAIServiceSettings = FireworksAIServiceSettingsBuilder()
 
     type FireworksAITaskSettingsBuilder() =
-        member _.Yield(_: unit) : FireworksAITaskSettings =
+        member _.Yield(_: unit) : Types.FireworksAITaskSettings =
             {
                 User = None
                 Headers = None
             }
 
         [<CustomOperation("user")>]
-        member _.User(state: FireworksAITaskSettings, value: string) =
+        member _.User(state: Types.FireworksAITaskSettings, value: string) =
             { state with User = Some value }
 
         [<CustomOperation("headers")>]
-        member _.Headers(state: FireworksAITaskSettings, value: Map<string, string>) =
+        member _.Headers(state: Types.FireworksAITaskSettings, value: Map<string, string>) =
             { state with Headers = Some value }
 
     let fireworksAITaskSettings = FireworksAITaskSettingsBuilder()
 
     type GoogleVertexAIServiceSettingsBuilder() =
-        member _.Yield(_: unit) : GoogleVertexAIServiceSettings =
+        member _.Yield(_: unit) : Types.GoogleVertexAIServiceSettings =
             {
                 Provider = None
                 Url = None
@@ -666,49 +666,49 @@ module InferenceTypesBuilders =
             }
 
         [<CustomOperation("provider")>]
-        member _.Provider(state: GoogleVertexAIServiceSettings, value: InferenceTypes.GoogleModelGardenProvider) =
+        member _.Provider(state: Types.GoogleVertexAIServiceSettings, value: Types.GoogleModelGardenProvider) =
             { state with Provider = Some value }
 
         [<CustomOperation("url")>]
-        member _.Url(state: GoogleVertexAIServiceSettings, value: string) =
+        member _.Url(state: Types.GoogleVertexAIServiceSettings, value: string) =
             { state with Url = Some value }
 
         [<CustomOperation("streamingUrl")>]
-        member _.StreamingUrl(state: GoogleVertexAIServiceSettings, value: string) =
+        member _.StreamingUrl(state: Types.GoogleVertexAIServiceSettings, value: string) =
             { state with StreamingUrl = Some value }
 
         [<CustomOperation("location")>]
-        member _.Location(state: GoogleVertexAIServiceSettings, value: string) =
+        member _.Location(state: Types.GoogleVertexAIServiceSettings, value: string) =
             { state with Location = Some value }
 
         [<CustomOperation("modelId")>]
-        member _.ModelId(state: GoogleVertexAIServiceSettings, value: string) =
+        member _.ModelId(state: Types.GoogleVertexAIServiceSettings, value: string) =
             { state with ModelId = Some value }
 
         [<CustomOperation("projectId")>]
-        member _.ProjectId(state: GoogleVertexAIServiceSettings, value: string) =
+        member _.ProjectId(state: Types.GoogleVertexAIServiceSettings, value: string) =
             { state with ProjectId = Some value }
 
         [<CustomOperation("rateLimit")>]
-        member _.RateLimit(state: GoogleVertexAIServiceSettings, value: InferenceTypes.RateLimitSetting) =
+        member _.RateLimit(state: Types.GoogleVertexAIServiceSettings, value: Types.RateLimitSetting) =
             { state with RateLimit = Some value }
 
         [<CustomOperation("serviceAccountJson")>]
-        member _.ServiceAccountJson(state: GoogleVertexAIServiceSettings, value: string) =
+        member _.ServiceAccountJson(state: Types.GoogleVertexAIServiceSettings, value: string) =
             { state with ServiceAccountJson = value }
 
         [<CustomOperation("dimensions")>]
-        member _.Dimensions(state: GoogleVertexAIServiceSettings, value: CoreTypes.Integer) =
+        member _.Dimensions(state: Types.GoogleVertexAIServiceSettings, value: Types.Integer) =
             { state with Dimensions = Some value }
 
         [<CustomOperation("maxBatchSize")>]
-        member _.MaxBatchSize(state: GoogleVertexAIServiceSettings, value: CoreTypes.Integer) =
+        member _.MaxBatchSize(state: Types.GoogleVertexAIServiceSettings, value: Types.Integer) =
             { state with MaxBatchSize = Some value }
 
     let googleVertexAIServiceSettings = GoogleVertexAIServiceSettingsBuilder()
 
     type GoogleVertexAITaskSettingsBuilder() =
-        member _.Yield(_: unit) : GoogleVertexAITaskSettings =
+        member _.Yield(_: unit) : Types.GoogleVertexAITaskSettings =
             {
                 AutoTruncate = None
                 TopN = None
@@ -717,25 +717,25 @@ module InferenceTypesBuilders =
             }
 
         [<CustomOperation("autoTruncate")>]
-        member _.AutoTruncate(state: GoogleVertexAITaskSettings, value: bool) =
+        member _.AutoTruncate(state: Types.GoogleVertexAITaskSettings, value: bool) =
             { state with AutoTruncate = Some value }
 
         [<CustomOperation("topN")>]
-        member _.TopN(state: GoogleVertexAITaskSettings, value: CoreTypes.Integer) =
+        member _.TopN(state: Types.GoogleVertexAITaskSettings, value: Types.Integer) =
             { state with TopN = Some value }
 
         [<CustomOperation("thinkingConfig")>]
-        member _.ThinkingConfig(state: GoogleVertexAITaskSettings, value: InferenceTypes.ThinkingConfig) =
+        member _.ThinkingConfig(state: Types.GoogleVertexAITaskSettings, value: Types.ThinkingConfig) =
             { state with ThinkingConfig = Some value }
 
         [<CustomOperation("maxTokens")>]
-        member _.MaxTokens(state: GoogleVertexAITaskSettings, value: CoreTypes.Integer) =
+        member _.MaxTokens(state: Types.GoogleVertexAITaskSettings, value: Types.Integer) =
             { state with MaxTokens = Some value }
 
     let googleVertexAITaskSettings = GoogleVertexAITaskSettingsBuilder()
 
     type GroqServiceSettingsBuilder() =
-        member _.Yield(_: unit) : GroqServiceSettings =
+        member _.Yield(_: unit) : Types.GroqServiceSettings =
             {
                 ModelId = Unchecked.defaultof<_>
                 ApiKey = None
@@ -743,21 +743,21 @@ module InferenceTypesBuilders =
             }
 
         [<CustomOperation("modelId")>]
-        member _.ModelId(state: GroqServiceSettings, value: string) =
+        member _.ModelId(state: Types.GroqServiceSettings, value: string) =
             { state with ModelId = value }
 
         [<CustomOperation("apiKey")>]
-        member _.ApiKey(state: GroqServiceSettings, value: string) =
+        member _.ApiKey(state: Types.GroqServiceSettings, value: string) =
             { state with ApiKey = Some value }
 
         [<CustomOperation("rateLimit")>]
-        member _.RateLimit(state: GroqServiceSettings, value: InferenceTypes.RateLimitSetting) =
+        member _.RateLimit(state: Types.GroqServiceSettings, value: Types.RateLimitSetting) =
             { state with RateLimit = Some value }
 
     let groqServiceSettings = GroqServiceSettingsBuilder()
 
     type HuggingFaceServiceSettingsBuilder() =
-        member _.Yield(_: unit) : HuggingFaceServiceSettings =
+        member _.Yield(_: unit) : Types.HuggingFaceServiceSettings =
             {
                 ApiKey = Unchecked.defaultof<_>
                 RateLimit = None
@@ -766,42 +766,42 @@ module InferenceTypesBuilders =
             }
 
         [<CustomOperation("apiKey")>]
-        member _.ApiKey(state: HuggingFaceServiceSettings, value: string) =
+        member _.ApiKey(state: Types.HuggingFaceServiceSettings, value: string) =
             { state with ApiKey = value }
 
         [<CustomOperation("rateLimit")>]
-        member _.RateLimit(state: HuggingFaceServiceSettings, value: InferenceTypes.RateLimitSetting) =
+        member _.RateLimit(state: Types.HuggingFaceServiceSettings, value: Types.RateLimitSetting) =
             { state with RateLimit = Some value }
 
         [<CustomOperation("url")>]
-        member _.Url(state: HuggingFaceServiceSettings, value: string) =
+        member _.Url(state: Types.HuggingFaceServiceSettings, value: string) =
             { state with Url = value }
 
         [<CustomOperation("modelId")>]
-        member _.ModelId(state: HuggingFaceServiceSettings, value: string) =
+        member _.ModelId(state: Types.HuggingFaceServiceSettings, value: string) =
             { state with ModelId = Some value }
 
     let huggingFaceServiceSettings = HuggingFaceServiceSettingsBuilder()
 
     type HuggingFaceTaskSettingsBuilder() =
-        member _.Yield(_: unit) : HuggingFaceTaskSettings =
+        member _.Yield(_: unit) : Types.HuggingFaceTaskSettings =
             {
                 ReturnDocuments = None
                 TopN = None
             }
 
         [<CustomOperation("returnDocuments")>]
-        member _.ReturnDocuments(state: HuggingFaceTaskSettings, value: bool) =
+        member _.ReturnDocuments(state: Types.HuggingFaceTaskSettings, value: bool) =
             { state with ReturnDocuments = Some value }
 
         [<CustomOperation("topN")>]
-        member _.TopN(state: HuggingFaceTaskSettings, value: CoreTypes.Integer) =
+        member _.TopN(state: Types.HuggingFaceTaskSettings, value: Types.Integer) =
             { state with TopN = Some value }
 
     let huggingFaceTaskSettings = HuggingFaceTaskSettingsBuilder()
 
     type InferenceChunkingSettingsBuilder() =
-        member _.Yield(_: unit) : InferenceChunkingSettings =
+        member _.Yield(_: unit) : Types.InferenceChunkingSettings =
             {
                 MaxChunkSize = None
                 Overlap = None
@@ -812,33 +812,33 @@ module InferenceTypesBuilders =
             }
 
         [<CustomOperation("maxChunkSize")>]
-        member _.MaxChunkSize(state: InferenceChunkingSettings, value: CoreTypes.Integer) =
+        member _.MaxChunkSize(state: Types.InferenceChunkingSettings, value: Types.Integer) =
             { state with MaxChunkSize = Some value }
 
         [<CustomOperation("overlap")>]
-        member _.Overlap(state: InferenceChunkingSettings, value: CoreTypes.Integer) =
+        member _.Overlap(state: Types.InferenceChunkingSettings, value: Types.Integer) =
             { state with Overlap = Some value }
 
         [<CustomOperation("sentenceOverlap")>]
-        member _.SentenceOverlap(state: InferenceChunkingSettings, value: CoreTypes.Integer) =
+        member _.SentenceOverlap(state: Types.InferenceChunkingSettings, value: Types.Integer) =
             { state with SentenceOverlap = Some value }
 
         [<CustomOperation("separatorGroup")>]
-        member _.SeparatorGroup(state: InferenceChunkingSettings, value: string) =
+        member _.SeparatorGroup(state: Types.InferenceChunkingSettings, value: string) =
             { state with SeparatorGroup = Some value }
 
         [<CustomOperation("separators")>]
-        member _.Separators(state: InferenceChunkingSettings, value: string list) =
+        member _.Separators(state: Types.InferenceChunkingSettings, value: string list) =
             { state with Separators = Some value }
 
         [<CustomOperation("strategy")>]
-        member _.Strategy(state: InferenceChunkingSettings, value: string) =
+        member _.Strategy(state: Types.InferenceChunkingSettings, value: string) =
             { state with Strategy = Some value }
 
     let inferenceChunkingSettings = InferenceChunkingSettingsBuilder()
 
     type InferenceEndpointBuilder() =
-        member _.Yield(_: unit) : InferenceEndpoint =
+        member _.Yield(_: unit) : Types.InferenceEndpoint =
             {
                 ChunkingSettings = None
                 Service = Unchecked.defaultof<_>
@@ -847,54 +847,54 @@ module InferenceTypesBuilders =
             }
 
         [<CustomOperation("chunkingSettings")>]
-        member _.ChunkingSettings(state: InferenceEndpoint, value: InferenceTypes.InferenceChunkingSettings) =
+        member _.ChunkingSettings(state: Types.InferenceEndpoint, value: Types.InferenceChunkingSettings) =
             { state with ChunkingSettings = Some value }
 
         [<CustomOperation("service")>]
-        member _.Service(state: InferenceEndpoint, value: string) =
+        member _.Service(state: Types.InferenceEndpoint, value: string) =
             { state with Service = value }
 
         [<CustomOperation("serviceSettings")>]
-        member _.ServiceSettings(state: InferenceEndpoint, value: InferenceTypes.ServiceSettings) =
+        member _.ServiceSettings(state: Types.InferenceEndpoint, value: Types.ServiceSettings) =
             { state with ServiceSettings = value }
 
         [<CustomOperation("taskSettings")>]
-        member _.TaskSettings(state: InferenceEndpoint, value: InferenceTypes.TaskSettings) =
+        member _.TaskSettings(state: Types.InferenceEndpoint, value: Types.TaskSettings) =
             { state with TaskSettings = Some value }
 
     let inferenceEndpoint = InferenceEndpointBuilder()
 
     module InferenceResult =
 
-        let embeddingsBytes (value: InferenceTypes.DenseEmbeddingByteResult list) =
-            InferenceResult.EmbeddingsBytes value
+        let embeddingsBytes (value: Types.DenseEmbeddingByteResult list) =
+            Types.InferenceResult.EmbeddingsBytes value
 
-        let embeddingsBits (value: InferenceTypes.DenseEmbeddingByteResult list) =
-            InferenceResult.EmbeddingsBits value
+        let embeddingsBits (value: Types.DenseEmbeddingByteResult list) =
+            Types.InferenceResult.EmbeddingsBits value
 
-        let embeddings (value: InferenceTypes.DenseEmbeddingResult list) =
-            InferenceResult.Embeddings value
+        let embeddings (value: Types.DenseEmbeddingResult list) =
+            Types.InferenceResult.Embeddings value
 
-        let textEmbeddingBytes (value: InferenceTypes.DenseEmbeddingByteResult list) =
-            InferenceResult.TextEmbeddingBytes value
+        let textEmbeddingBytes (value: Types.DenseEmbeddingByteResult list) =
+            Types.InferenceResult.TextEmbeddingBytes value
 
-        let textEmbeddingBits (value: InferenceTypes.DenseEmbeddingByteResult list) =
-            InferenceResult.TextEmbeddingBits value
+        let textEmbeddingBits (value: Types.DenseEmbeddingByteResult list) =
+            Types.InferenceResult.TextEmbeddingBits value
 
-        let textEmbedding (value: InferenceTypes.DenseEmbeddingResult list) =
-            InferenceResult.TextEmbedding value
+        let textEmbedding (value: Types.DenseEmbeddingResult list) =
+            Types.InferenceResult.TextEmbedding value
 
-        let sparseEmbedding (value: InferenceTypes.SparseEmbeddingResult list) =
-            InferenceResult.SparseEmbedding value
+        let sparseEmbedding (value: Types.SparseEmbeddingResult list) =
+            Types.InferenceResult.SparseEmbedding value
 
-        let completion (value: InferenceTypes.CompletionResult list) =
-            InferenceResult.Completion value
+        let completion (value: Types.CompletionResult list) =
+            Types.InferenceResult.Completion value
 
-        let rerank (value: InferenceTypes.RankedDocument list) =
-            InferenceResult.Rerank value
+        let rerank (value: Types.RankedDocument list) =
+            Types.InferenceResult.Rerank value
 
     type JinaAIServiceSettingsBuilder() =
-        member _.Yield(_: unit) : JinaAIServiceSettings =
+        member _.Yield(_: unit) : Types.JinaAIServiceSettings =
             {
                 ApiKey = Unchecked.defaultof<_>
                 ModelId = Unchecked.defaultof<_>
@@ -906,37 +906,37 @@ module InferenceTypesBuilders =
             }
 
         [<CustomOperation("apiKey")>]
-        member _.ApiKey(state: JinaAIServiceSettings, value: string) =
+        member _.ApiKey(state: Types.JinaAIServiceSettings, value: string) =
             { state with ApiKey = value }
 
         [<CustomOperation("modelId")>]
-        member _.ModelId(state: JinaAIServiceSettings, value: string) =
+        member _.ModelId(state: Types.JinaAIServiceSettings, value: string) =
             { state with ModelId = value }
 
         [<CustomOperation("rateLimit")>]
-        member _.RateLimit(state: JinaAIServiceSettings, value: InferenceTypes.RateLimitSetting) =
+        member _.RateLimit(state: Types.JinaAIServiceSettings, value: Types.RateLimitSetting) =
             { state with RateLimit = Some value }
 
         [<CustomOperation("similarity")>]
-        member _.Similarity(state: JinaAIServiceSettings, value: InferenceTypes.JinaAISimilarityType) =
+        member _.Similarity(state: Types.JinaAIServiceSettings, value: Types.JinaAISimilarityType) =
             { state with Similarity = Some value }
 
         [<CustomOperation("dimensions")>]
-        member _.Dimensions(state: JinaAIServiceSettings, value: CoreTypes.Integer) =
+        member _.Dimensions(state: Types.JinaAIServiceSettings, value: Types.Integer) =
             { state with Dimensions = Some value }
 
         [<CustomOperation("elementType")>]
-        member _.ElementType(state: JinaAIServiceSettings, value: InferenceTypes.JinaAIElementType) =
+        member _.ElementType(state: Types.JinaAIServiceSettings, value: Types.JinaAIElementType) =
             { state with ElementType = Some value }
 
         [<CustomOperation("multimodalModel")>]
-        member _.MultimodalModel(state: JinaAIServiceSettings, value: bool) =
+        member _.MultimodalModel(state: Types.JinaAIServiceSettings, value: bool) =
             { state with MultimodalModel = Some value }
 
     let jinaAIServiceSettings = JinaAIServiceSettingsBuilder()
 
     type JinaAITaskSettingsBuilder() =
-        member _.Yield(_: unit) : JinaAITaskSettings =
+        member _.Yield(_: unit) : Types.JinaAITaskSettings =
             {
                 ReturnDocuments = None
                 InputType = None
@@ -945,25 +945,25 @@ module InferenceTypesBuilders =
             }
 
         [<CustomOperation("returnDocuments")>]
-        member _.ReturnDocuments(state: JinaAITaskSettings, value: bool) =
+        member _.ReturnDocuments(state: Types.JinaAITaskSettings, value: bool) =
             { state with ReturnDocuments = Some value }
 
         [<CustomOperation("inputType")>]
-        member _.InputType(state: JinaAITaskSettings, value: InferenceTypes.JinaAITextEmbeddingTask) =
+        member _.InputType(state: Types.JinaAITaskSettings, value: Types.JinaAITextEmbeddingTask) =
             { state with InputType = Some value }
 
         [<CustomOperation("lateChunking")>]
-        member _.LateChunking(state: JinaAITaskSettings, value: bool) =
+        member _.LateChunking(state: Types.JinaAITaskSettings, value: bool) =
             { state with LateChunking = Some value }
 
         [<CustomOperation("topN")>]
-        member _.TopN(state: JinaAITaskSettings, value: CoreTypes.Integer) =
+        member _.TopN(state: Types.JinaAITaskSettings, value: Types.Integer) =
             { state with TopN = Some value }
 
     let jinaAITaskSettings = JinaAITaskSettingsBuilder()
 
     type LlamaServiceSettingsBuilder() =
-        member _.Yield(_: unit) : LlamaServiceSettings =
+        member _.Yield(_: unit) : Types.LlamaServiceSettings =
             {
                 Url = Unchecked.defaultof<_>
                 ModelId = Unchecked.defaultof<_>
@@ -973,29 +973,29 @@ module InferenceTypesBuilders =
             }
 
         [<CustomOperation("url")>]
-        member _.Url(state: LlamaServiceSettings, value: string) =
+        member _.Url(state: Types.LlamaServiceSettings, value: string) =
             { state with Url = value }
 
         [<CustomOperation("modelId")>]
-        member _.ModelId(state: LlamaServiceSettings, value: string) =
+        member _.ModelId(state: Types.LlamaServiceSettings, value: string) =
             { state with ModelId = value }
 
         [<CustomOperation("maxInputTokens")>]
-        member _.MaxInputTokens(state: LlamaServiceSettings, value: CoreTypes.Integer) =
+        member _.MaxInputTokens(state: Types.LlamaServiceSettings, value: Types.Integer) =
             { state with MaxInputTokens = Some value }
 
         [<CustomOperation("similarity")>]
-        member _.Similarity(state: LlamaServiceSettings, value: InferenceTypes.LlamaSimilarityType) =
+        member _.Similarity(state: Types.LlamaServiceSettings, value: Types.LlamaSimilarityType) =
             { state with Similarity = Some value }
 
         [<CustomOperation("rateLimit")>]
-        member _.RateLimit(state: LlamaServiceSettings, value: InferenceTypes.RateLimitSetting) =
+        member _.RateLimit(state: Types.LlamaServiceSettings, value: Types.RateLimitSetting) =
             { state with RateLimit = Some value }
 
     let llamaServiceSettings = LlamaServiceSettingsBuilder()
 
     type MessageBuilder() =
-        member _.Yield(_: unit) : Message =
+        member _.Yield(_: unit) : Types.Message =
             {
                 Content = None
                 Role = Unchecked.defaultof<_>
@@ -1006,33 +1006,33 @@ module InferenceTypesBuilders =
             }
 
         [<CustomOperation("content")>]
-        member _.Content(state: Message, value: InferenceTypes.MessageContent) =
+        member _.Content(state: Types.Message, value: Types.MessageContent) =
             { state with Content = Some value }
 
         [<CustomOperation("role")>]
-        member _.Role(state: Message, value: string) =
+        member _.Role(state: Types.Message, value: string) =
             { state with Role = value }
 
         [<CustomOperation("toolCallId")>]
-        member _.ToolCallId(state: Message, value: CoreTypes.Id) =
+        member _.ToolCallId(state: Types.Message, value: Types.Id) =
             { state with ToolCallId = Some value }
 
         [<CustomOperation("toolCalls")>]
-        member _.ToolCalls(state: Message, value: InferenceTypes.ToolCall list) =
+        member _.ToolCalls(state: Types.Message, value: Types.ToolCall list) =
             { state with ToolCalls = Some value }
 
         [<CustomOperation("reasoning")>]
-        member _.Reasoning(state: Message, value: string) =
+        member _.Reasoning(state: Types.Message, value: string) =
             { state with Reasoning = Some value }
 
         [<CustomOperation("reasoningDetails")>]
-        member _.ReasoningDetails(state: Message, value: InferenceTypes.ReasoningDetail list) =
+        member _.ReasoningDetails(state: Types.Message, value: Types.ReasoningDetail list) =
             { state with ReasoningDetails = Some value }
 
     let message = MessageBuilder()
 
     type MistralServiceSettingsBuilder() =
-        member _.Yield(_: unit) : MistralServiceSettings =
+        member _.Yield(_: unit) : Types.MistralServiceSettings =
             {
                 ApiKey = Unchecked.defaultof<_>
                 MaxInputTokens = None
@@ -1041,25 +1041,25 @@ module InferenceTypesBuilders =
             }
 
         [<CustomOperation("apiKey")>]
-        member _.ApiKey(state: MistralServiceSettings, value: string) =
+        member _.ApiKey(state: Types.MistralServiceSettings, value: string) =
             { state with ApiKey = value }
 
         [<CustomOperation("maxInputTokens")>]
-        member _.MaxInputTokens(state: MistralServiceSettings, value: CoreTypes.Integer) =
+        member _.MaxInputTokens(state: Types.MistralServiceSettings, value: Types.Integer) =
             { state with MaxInputTokens = Some value }
 
         [<CustomOperation("model")>]
-        member _.Model(state: MistralServiceSettings, value: string) =
+        member _.Model(state: Types.MistralServiceSettings, value: string) =
             { state with Model = value }
 
         [<CustomOperation("rateLimit")>]
-        member _.RateLimit(state: MistralServiceSettings, value: InferenceTypes.RateLimitSetting) =
+        member _.RateLimit(state: Types.MistralServiceSettings, value: Types.RateLimitSetting) =
             { state with RateLimit = Some value }
 
     let mistralServiceSettings = MistralServiceSettingsBuilder()
 
     type NvidiaServiceSettingsBuilder() =
-        member _.Yield(_: unit) : NvidiaServiceSettings =
+        member _.Yield(_: unit) : Types.NvidiaServiceSettings =
             {
                 ApiKey = Unchecked.defaultof<_>
                 Url = None
@@ -1070,50 +1070,50 @@ module InferenceTypesBuilders =
             }
 
         [<CustomOperation("apiKey")>]
-        member _.ApiKey(state: NvidiaServiceSettings, value: string) =
+        member _.ApiKey(state: Types.NvidiaServiceSettings, value: string) =
             { state with ApiKey = value }
 
         [<CustomOperation("url")>]
-        member _.Url(state: NvidiaServiceSettings, value: string) =
+        member _.Url(state: Types.NvidiaServiceSettings, value: string) =
             { state with Url = Some value }
 
         [<CustomOperation("modelId")>]
-        member _.ModelId(state: NvidiaServiceSettings, value: string) =
+        member _.ModelId(state: Types.NvidiaServiceSettings, value: string) =
             { state with ModelId = value }
 
         [<CustomOperation("maxInputTokens")>]
-        member _.MaxInputTokens(state: NvidiaServiceSettings, value: CoreTypes.Integer) =
+        member _.MaxInputTokens(state: Types.NvidiaServiceSettings, value: Types.Integer) =
             { state with MaxInputTokens = Some value }
 
         [<CustomOperation("similarity")>]
-        member _.Similarity(state: NvidiaServiceSettings, value: InferenceTypes.NvidiaSimilarityType) =
+        member _.Similarity(state: Types.NvidiaServiceSettings, value: Types.NvidiaSimilarityType) =
             { state with Similarity = Some value }
 
         [<CustomOperation("rateLimit")>]
-        member _.RateLimit(state: NvidiaServiceSettings, value: InferenceTypes.RateLimitSetting) =
+        member _.RateLimit(state: Types.NvidiaServiceSettings, value: Types.RateLimitSetting) =
             { state with RateLimit = Some value }
 
     let nvidiaServiceSettings = NvidiaServiceSettingsBuilder()
 
     type NvidiaTaskSettingsBuilder() =
-        member _.Yield(_: unit) : NvidiaTaskSettings =
+        member _.Yield(_: unit) : Types.NvidiaTaskSettings =
             {
                 InputType = None
                 Truncate = None
             }
 
         [<CustomOperation("inputType")>]
-        member _.InputType(state: NvidiaTaskSettings, value: InferenceTypes.NvidiaInputType) =
+        member _.InputType(state: Types.NvidiaTaskSettings, value: Types.NvidiaInputType) =
             { state with InputType = Some value }
 
         [<CustomOperation("truncate")>]
-        member _.Truncate(state: NvidiaTaskSettings, value: InferenceTypes.CohereTruncateType) =
+        member _.Truncate(state: Types.NvidiaTaskSettings, value: Types.CohereTruncateType) =
             { state with Truncate = Some value }
 
     let nvidiaTaskSettings = NvidiaTaskSettingsBuilder()
 
     type OpenAIServiceSettingsBuilder() =
-        member _.Yield(_: unit) : OpenAIServiceSettings =
+        member _.Yield(_: unit) : Types.OpenAIServiceSettings =
             {
                 ApiKey = Unchecked.defaultof<_>
                 Dimensions = None
@@ -1125,54 +1125,54 @@ module InferenceTypesBuilders =
             }
 
         [<CustomOperation("apiKey")>]
-        member _.ApiKey(state: OpenAIServiceSettings, value: string) =
+        member _.ApiKey(state: Types.OpenAIServiceSettings, value: string) =
             { state with ApiKey = value }
 
         [<CustomOperation("dimensions")>]
-        member _.Dimensions(state: OpenAIServiceSettings, value: CoreTypes.Integer) =
+        member _.Dimensions(state: Types.OpenAIServiceSettings, value: Types.Integer) =
             { state with Dimensions = Some value }
 
         [<CustomOperation("modelId")>]
-        member _.ModelId(state: OpenAIServiceSettings, value: string) =
+        member _.ModelId(state: Types.OpenAIServiceSettings, value: string) =
             { state with ModelId = value }
 
         [<CustomOperation("organizationId")>]
-        member _.OrganizationId(state: OpenAIServiceSettings, value: string) =
+        member _.OrganizationId(state: Types.OpenAIServiceSettings, value: string) =
             { state with OrganizationId = Some value }
 
         [<CustomOperation("rateLimit")>]
-        member _.RateLimit(state: OpenAIServiceSettings, value: InferenceTypes.RateLimitSetting) =
+        member _.RateLimit(state: Types.OpenAIServiceSettings, value: Types.RateLimitSetting) =
             { state with RateLimit = Some value }
 
         [<CustomOperation("similarity")>]
-        member _.Similarity(state: OpenAIServiceSettings, value: InferenceTypes.OpenAISimilarityType) =
+        member _.Similarity(state: Types.OpenAIServiceSettings, value: Types.OpenAISimilarityType) =
             { state with Similarity = Some value }
 
         [<CustomOperation("url")>]
-        member _.Url(state: OpenAIServiceSettings, value: string) =
+        member _.Url(state: Types.OpenAIServiceSettings, value: string) =
             { state with Url = Some value }
 
     let openAIServiceSettings = OpenAIServiceSettingsBuilder()
 
     type OpenAITaskSettingsBuilder() =
-        member _.Yield(_: unit) : OpenAITaskSettings =
+        member _.Yield(_: unit) : Types.OpenAITaskSettings =
             {
                 User = None
                 Headers = None
             }
 
         [<CustomOperation("user")>]
-        member _.User(state: OpenAITaskSettings, value: string) =
+        member _.User(state: Types.OpenAITaskSettings, value: string) =
             { state with User = Some value }
 
         [<CustomOperation("headers")>]
-        member _.Headers(state: OpenAITaskSettings, value: Map<string, string>) =
+        member _.Headers(state: Types.OpenAITaskSettings, value: Map<string, string>) =
             { state with Headers = Some value }
 
     let openAITaskSettings = OpenAITaskSettingsBuilder()
 
     type OpenShiftAiServiceSettingsBuilder() =
-        member _.Yield(_: unit) : OpenShiftAiServiceSettings =
+        member _.Yield(_: unit) : Types.OpenShiftAiServiceSettings =
             {
                 ApiKey = Unchecked.defaultof<_>
                 Url = Unchecked.defaultof<_>
@@ -1183,50 +1183,50 @@ module InferenceTypesBuilders =
             }
 
         [<CustomOperation("apiKey")>]
-        member _.ApiKey(state: OpenShiftAiServiceSettings, value: string) =
+        member _.ApiKey(state: Types.OpenShiftAiServiceSettings, value: string) =
             { state with ApiKey = value }
 
         [<CustomOperation("url")>]
-        member _.Url(state: OpenShiftAiServiceSettings, value: string) =
+        member _.Url(state: Types.OpenShiftAiServiceSettings, value: string) =
             { state with Url = value }
 
         [<CustomOperation("modelId")>]
-        member _.ModelId(state: OpenShiftAiServiceSettings, value: string) =
+        member _.ModelId(state: Types.OpenShiftAiServiceSettings, value: string) =
             { state with ModelId = Some value }
 
         [<CustomOperation("maxInputTokens")>]
-        member _.MaxInputTokens(state: OpenShiftAiServiceSettings, value: CoreTypes.Integer) =
+        member _.MaxInputTokens(state: Types.OpenShiftAiServiceSettings, value: Types.Integer) =
             { state with MaxInputTokens = Some value }
 
         [<CustomOperation("similarity")>]
-        member _.Similarity(state: OpenShiftAiServiceSettings, value: InferenceTypes.OpenShiftAiSimilarityType) =
+        member _.Similarity(state: Types.OpenShiftAiServiceSettings, value: Types.OpenShiftAiSimilarityType) =
             { state with Similarity = Some value }
 
         [<CustomOperation("rateLimit")>]
-        member _.RateLimit(state: OpenShiftAiServiceSettings, value: InferenceTypes.RateLimitSetting) =
+        member _.RateLimit(state: Types.OpenShiftAiServiceSettings, value: Types.RateLimitSetting) =
             { state with RateLimit = Some value }
 
     let openShiftAiServiceSettings = OpenShiftAiServiceSettingsBuilder()
 
     type OpenShiftAiTaskSettingsBuilder() =
-        member _.Yield(_: unit) : OpenShiftAiTaskSettings =
+        member _.Yield(_: unit) : Types.OpenShiftAiTaskSettings =
             {
                 ReturnDocuments = None
                 TopN = None
             }
 
         [<CustomOperation("returnDocuments")>]
-        member _.ReturnDocuments(state: OpenShiftAiTaskSettings, value: bool) =
+        member _.ReturnDocuments(state: Types.OpenShiftAiTaskSettings, value: bool) =
             { state with ReturnDocuments = Some value }
 
         [<CustomOperation("topN")>]
-        member _.TopN(state: OpenShiftAiTaskSettings, value: CoreTypes.Integer) =
+        member _.TopN(state: Types.OpenShiftAiTaskSettings, value: Types.Integer) =
             { state with TopN = Some value }
 
     let openShiftAiTaskSettings = OpenShiftAiTaskSettingsBuilder()
 
     type ReasoningBuilder() =
-        member _.Yield(_: unit) : Reasoning =
+        member _.Yield(_: unit) : Types.Reasoning =
             {
                 Effort = None
                 Enabled = None
@@ -1235,25 +1235,25 @@ module InferenceTypesBuilders =
             }
 
         [<CustomOperation("effort")>]
-        member _.Effort(state: Reasoning, value: InferenceTypes.ReasoningEffort) =
+        member _.Effort(state: Types.Reasoning, value: Types.ReasoningEffort) =
             { state with Effort = Some value }
 
         [<CustomOperation("enabled")>]
-        member _.Enabled(state: Reasoning, value: bool) =
+        member _.Enabled(state: Types.Reasoning, value: bool) =
             { state with Enabled = Some value }
 
         [<CustomOperation("exclude")>]
-        member _.Exclude(state: Reasoning, value: bool) =
+        member _.Exclude(state: Types.Reasoning, value: bool) =
             { state with Exclude = Some value }
 
         [<CustomOperation("summary")>]
-        member _.Summary(state: Reasoning, value: InferenceTypes.ReasoningSummary) =
+        member _.Summary(state: Types.Reasoning, value: Types.ReasoningSummary) =
             { state with Summary = Some value }
 
     let reasoning = ReasoningBuilder()
 
     type RequestChatCompletionBuilder() =
-        member _.Yield(_: unit) : RequestChatCompletion =
+        member _.Yield(_: unit) : Types.RequestChatCompletion =
             {
                 Messages = Unchecked.defaultof<_>
                 Model = None
@@ -1267,45 +1267,45 @@ module InferenceTypesBuilders =
             }
 
         [<CustomOperation("messages")>]
-        member _.Messages(state: RequestChatCompletion, value: InferenceTypes.Message list) =
+        member _.Messages(state: Types.RequestChatCompletion, value: Types.Message list) =
             { state with Messages = value }
 
         [<CustomOperation("model")>]
-        member _.Model(state: RequestChatCompletion, value: string) =
+        member _.Model(state: Types.RequestChatCompletion, value: string) =
             { state with Model = Some value }
 
         [<CustomOperation("maxCompletionTokens")>]
-        member _.MaxCompletionTokens(state: RequestChatCompletion, value: CoreTypes.Long) =
+        member _.MaxCompletionTokens(state: Types.RequestChatCompletion, value: Types.Long) =
             { state with MaxCompletionTokens = Some value }
 
         [<CustomOperation("reasoning")>]
-        member _.Reasoning(state: RequestChatCompletion, value: InferenceTypes.Reasoning) =
+        member _.Reasoning(state: Types.RequestChatCompletion, value: Types.Reasoning) =
             { state with Reasoning = Some value }
 
         [<CustomOperation("stop")>]
-        member _.Stop(state: RequestChatCompletion, value: string list) =
+        member _.Stop(state: Types.RequestChatCompletion, value: string list) =
             { state with Stop = Some value }
 
         [<CustomOperation("temperature")>]
-        member _.Temperature(state: RequestChatCompletion, value: CoreTypes.Float) =
+        member _.Temperature(state: Types.RequestChatCompletion, value: Types.Float) =
             { state with Temperature = Some value }
 
         [<CustomOperation("toolChoice")>]
-        member _.ToolChoice(state: RequestChatCompletion, value: InferenceTypes.CompletionToolType) =
+        member _.ToolChoice(state: Types.RequestChatCompletion, value: Types.CompletionToolType) =
             { state with ToolChoice = Some value }
 
         [<CustomOperation("tools")>]
-        member _.Tools(state: RequestChatCompletion, value: InferenceTypes.CompletionTool list) =
+        member _.Tools(state: Types.RequestChatCompletion, value: Types.CompletionTool list) =
             { state with Tools = Some value }
 
         [<CustomOperation("topP")>]
-        member _.TopP(state: RequestChatCompletion, value: CoreTypes.Float) =
+        member _.TopP(state: Types.RequestChatCompletion, value: Types.Float) =
             { state with TopP = Some value }
 
     let requestChatCompletion = RequestChatCompletionBuilder()
 
     type RequestEmbeddingBuilder() =
-        member _.Yield(_: unit) : RequestEmbedding =
+        member _.Yield(_: unit) : Types.RequestEmbedding =
             {
                 Input = Unchecked.defaultof<_>
                 InputType = None
@@ -1313,32 +1313,32 @@ module InferenceTypesBuilders =
             }
 
         [<CustomOperation("input")>]
-        member _.Input(state: RequestEmbedding, value: InferenceTypes.EmbeddingInput) =
+        member _.Input(state: Types.RequestEmbedding, value: Types.EmbeddingInput) =
             { state with Input = value }
 
         [<CustomOperation("inputType")>]
-        member _.InputType(state: RequestEmbedding, value: string) =
+        member _.InputType(state: Types.RequestEmbedding, value: string) =
             { state with InputType = Some value }
 
         [<CustomOperation("taskSettings")>]
-        member _.TaskSettings(state: RequestEmbedding, value: InferenceTypes.TaskSettings) =
+        member _.TaskSettings(state: Types.RequestEmbedding, value: Types.TaskSettings) =
             { state with TaskSettings = Some value }
 
     let requestEmbedding = RequestEmbeddingBuilder()
 
     module TextEmbeddingInferenceResult =
 
-        let textEmbeddingBytes (value: InferenceTypes.DenseEmbeddingByteResult list) =
-            TextEmbeddingInferenceResult.TextEmbeddingBytes value
+        let textEmbeddingBytes (value: Types.DenseEmbeddingByteResult list) =
+            Types.TextEmbeddingInferenceResult.TextEmbeddingBytes value
 
-        let textEmbeddingBits (value: InferenceTypes.DenseEmbeddingByteResult list) =
-            TextEmbeddingInferenceResult.TextEmbeddingBits value
+        let textEmbeddingBits (value: Types.DenseEmbeddingByteResult list) =
+            Types.TextEmbeddingInferenceResult.TextEmbeddingBits value
 
-        let textEmbedding (value: InferenceTypes.DenseEmbeddingResult list) =
-            TextEmbeddingInferenceResult.TextEmbedding value
+        let textEmbedding (value: Types.DenseEmbeddingResult list) =
+            Types.TextEmbeddingInferenceResult.TextEmbedding value
 
     type TextReasoningDetailBuilder() =
-        member _.Yield(_: unit) : TextReasoningDetail =
+        member _.Yield(_: unit) : Types.TextReasoningDetail =
             {
                 Type = Unchecked.defaultof<_>
                 Signature = None
@@ -1346,21 +1346,21 @@ module InferenceTypesBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: TextReasoningDetail, value: string) =
+        member _.Type(state: Types.TextReasoningDetail, value: string) =
             { state with Type = value }
 
         [<CustomOperation("signature")>]
-        member _.Signature(state: TextReasoningDetail, value: string) =
+        member _.Signature(state: Types.TextReasoningDetail, value: string) =
             { state with Signature = Some value }
 
         [<CustomOperation("text")>]
-        member _.Text(state: TextReasoningDetail, value: string) =
+        member _.Text(state: Types.TextReasoningDetail, value: string) =
             { state with Text = Some value }
 
     let textReasoningDetail = TextReasoningDetailBuilder()
 
     type VoyageAIServiceSettingsBuilder() =
-        member _.Yield(_: unit) : VoyageAIServiceSettings =
+        member _.Yield(_: unit) : Types.VoyageAIServiceSettings =
             {
                 Dimensions = None
                 ModelId = Unchecked.defaultof<_>
@@ -1369,25 +1369,25 @@ module InferenceTypesBuilders =
             }
 
         [<CustomOperation("dimensions")>]
-        member _.Dimensions(state: VoyageAIServiceSettings, value: CoreTypes.Integer) =
+        member _.Dimensions(state: Types.VoyageAIServiceSettings, value: Types.Integer) =
             { state with Dimensions = Some value }
 
         [<CustomOperation("modelId")>]
-        member _.ModelId(state: VoyageAIServiceSettings, value: string) =
+        member _.ModelId(state: Types.VoyageAIServiceSettings, value: string) =
             { state with ModelId = value }
 
         [<CustomOperation("rateLimit")>]
-        member _.RateLimit(state: VoyageAIServiceSettings, value: InferenceTypes.RateLimitSetting) =
+        member _.RateLimit(state: Types.VoyageAIServiceSettings, value: Types.RateLimitSetting) =
             { state with RateLimit = Some value }
 
         [<CustomOperation("embeddingType")>]
-        member _.EmbeddingType(state: VoyageAIServiceSettings, value: CoreTypes.Float) =
+        member _.EmbeddingType(state: Types.VoyageAIServiceSettings, value: Types.Float) =
             { state with EmbeddingType = Some value }
 
     let voyageAIServiceSettings = VoyageAIServiceSettingsBuilder()
 
     type VoyageAITaskSettingsBuilder() =
-        member _.Yield(_: unit) : VoyageAITaskSettings =
+        member _.Yield(_: unit) : Types.VoyageAITaskSettings =
             {
                 InputType = None
                 ReturnDocuments = None
@@ -1396,19 +1396,19 @@ module InferenceTypesBuilders =
             }
 
         [<CustomOperation("inputType")>]
-        member _.InputType(state: VoyageAITaskSettings, value: string) =
+        member _.InputType(state: Types.VoyageAITaskSettings, value: string) =
             { state with InputType = Some value }
 
         [<CustomOperation("returnDocuments")>]
-        member _.ReturnDocuments(state: VoyageAITaskSettings, value: bool) =
+        member _.ReturnDocuments(state: Types.VoyageAITaskSettings, value: bool) =
             { state with ReturnDocuments = Some value }
 
         [<CustomOperation("topK")>]
-        member _.TopK(state: VoyageAITaskSettings, value: CoreTypes.Integer) =
+        member _.TopK(state: Types.VoyageAITaskSettings, value: Types.Integer) =
             { state with TopK = Some value }
 
         [<CustomOperation("truncation")>]
-        member _.Truncation(state: VoyageAITaskSettings, value: bool) =
+        member _.Truncation(state: Types.VoyageAITaskSettings, value: bool) =
             { state with Truncation = Some value }
 
     let voyageAITaskSettings = VoyageAITaskSettingsBuilder()

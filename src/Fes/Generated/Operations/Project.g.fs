@@ -7,6 +7,7 @@ open System
 open System.Text.Json
 open System.Text.Json.Serialization
 open Fes
+open Fes.Generated
 
 [<AutoOpen>]
 module ProjectOperations =
@@ -27,7 +28,7 @@ module ProjectOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type ProjectCreateManyRoutingResponse = CoreTypes.AcknowledgedResponseBase
+    type ProjectCreateManyRoutingResponse = Types.AcknowledgedResponseBase
 
     type ProjectCreateManyRoutingRequestBuilder() =
         member _.Yield(_: unit) : ProjectCreateManyRoutingRequest =
@@ -58,7 +59,7 @@ module ProjectOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type ProjectCreateRoutingResponse = CoreTypes.AcknowledgedResponseBase
+    type ProjectCreateRoutingResponse = Types.AcknowledgedResponseBase
 
     type ProjectCreateRoutingRequestBuilder() =
         member _.Yield(_: unit) : ProjectCreateRoutingRequest =
@@ -92,7 +93,7 @@ module ProjectOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type ProjectDeleteRoutingResponse = CoreTypes.AcknowledgedResponseBase
+    type ProjectDeleteRoutingResponse = Types.AcknowledgedResponseBase
 
     type ProjectDeleteRoutingRequestBuilder() =
         member _.Yield(_: unit) : ProjectDeleteRoutingRequest =
@@ -119,7 +120,7 @@ module ProjectOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type ProjectGetManyRoutingResponse = ProjectTypes.NamedProjectRoutingExpressions
+    type ProjectGetManyRoutingResponse = Types.NamedProjectRoutingExpressions
 
     type ProjectGetManyRoutingRequestBuilder() =
         member _.Yield(_: unit) : ProjectGetManyRoutingRequest =
@@ -143,7 +144,7 @@ module ProjectOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type ProjectGetRoutingResponse = ProjectTypes.ProjectRoutingExpression
+    type ProjectGetRoutingResponse = Types.ProjectRoutingExpression
 
     type ProjectGetRoutingRequestBuilder() =
         member _.Yield(_: unit) : ProjectGetRoutingRequest =
@@ -158,7 +159,7 @@ module ProjectOperations =
     let projectGetRoutingRequest = ProjectGetRoutingRequestBuilder()
 
     type ProjectTagsRequest = {
-        ProjectRouting: CoreTypes.ProjectRouting option
+        ProjectRouting: Types.ProjectRouting option
     }
 
         with
@@ -173,7 +174,7 @@ module ProjectOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type ProjectTagsResponse = ProjectTags.ProjectTags
+    type ProjectTagsResponse = Types.ProjectTags
 
     type ProjectTagsRequestBuilder() =
         member _.Yield(_: unit) : ProjectTagsRequest =
@@ -182,12 +183,12 @@ module ProjectOperations =
             }
 
         [<CustomOperation("projectRouting")>]
-        member _.ProjectRouting(state: ProjectTagsRequest, value: CoreTypes.ProjectRouting) =
+        member _.ProjectRouting(state: ProjectTagsRequest, value: Types.ProjectRouting) =
             { state with ProjectRouting = Some value }
 
     let projectTagsRequest = ProjectTagsRequestBuilder()
 
     module Tags =
-        let withProjectRouting (value: CoreTypes.ProjectRouting) (req: ProjectTagsRequest) =
+        let withProjectRouting (value: Types.ProjectRouting) (req: ProjectTagsRequest) =
             { req with ProjectRouting = Some value }
 

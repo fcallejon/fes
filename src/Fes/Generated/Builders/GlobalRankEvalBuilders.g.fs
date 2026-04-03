@@ -4,13 +4,13 @@ namespace Fes.Generated.Builders
 
 
 open System.Text.Json.Serialization
-open Fes.Generated.Types
+open Fes.Generated
 
 [<AutoOpen>]
 module GlobalRankEvalBuilders =
 
     type RankEvalMetricBuilder() =
-        member _.Yield(_: unit) : RankEvalMetric =
+        member _.Yield(_: unit) : Types.RankEvalMetric =
             {
                 Precision = None
                 Recall = None
@@ -20,29 +20,29 @@ module GlobalRankEvalBuilders =
             }
 
         [<CustomOperation("precision")>]
-        member _.Precision(state: RankEvalMetric, value: GlobalRankEval.RankEvalMetricPrecision) =
+        member _.Precision(state: Types.RankEvalMetric, value: Types.RankEvalMetricPrecision) =
             { state with Precision = Some value }
 
         [<CustomOperation("recall")>]
-        member _.Recall(state: RankEvalMetric, value: GlobalRankEval.RankEvalMetricRecall) =
+        member _.Recall(state: Types.RankEvalMetric, value: Types.RankEvalMetricRecall) =
             { state with Recall = Some value }
 
         [<CustomOperation("meanReciprocalRank")>]
-        member _.MeanReciprocalRank(state: RankEvalMetric, value: GlobalRankEval.RankEvalMetricMeanReciprocalRank) =
+        member _.MeanReciprocalRank(state: Types.RankEvalMetric, value: Types.RankEvalMetricMeanReciprocalRank) =
             { state with MeanReciprocalRank = Some value }
 
         [<CustomOperation("dcg")>]
-        member _.Dcg(state: RankEvalMetric, value: GlobalRankEval.RankEvalMetricDiscountedCumulativeGain) =
+        member _.Dcg(state: Types.RankEvalMetric, value: Types.RankEvalMetricDiscountedCumulativeGain) =
             { state with Dcg = Some value }
 
         [<CustomOperation("expectedReciprocalRank")>]
-        member _.ExpectedReciprocalRank(state: RankEvalMetric, value: GlobalRankEval.RankEvalMetricExpectedReciprocalRank) =
+        member _.ExpectedReciprocalRank(state: Types.RankEvalMetric, value: Types.RankEvalMetricExpectedReciprocalRank) =
             { state with ExpectedReciprocalRank = Some value }
 
     let rankEvalMetric = RankEvalMetricBuilder()
 
     type RankEvalRequestItemBuilder() =
-        member _.Yield(_: unit) : RankEvalRequestItem =
+        member _.Yield(_: unit) : Types.RankEvalRequestItem =
             {
                 Id = Unchecked.defaultof<_>
                 Request = None
@@ -52,23 +52,23 @@ module GlobalRankEvalBuilders =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: RankEvalRequestItem, value: CoreTypes.Id) =
+        member _.Id(state: Types.RankEvalRequestItem, value: Types.Id) =
             { state with Id = value }
 
         [<CustomOperation("request")>]
-        member _.Request(state: RankEvalRequestItem, value: GlobalRankEval.RankEvalQuery) =
+        member _.Request(state: Types.RankEvalRequestItem, value: Types.RankEvalQuery) =
             { state with Request = Some value }
 
         [<CustomOperation("ratings")>]
-        member _.Ratings(state: RankEvalRequestItem, value: GlobalRankEval.DocumentRating list) =
+        member _.Ratings(state: Types.RankEvalRequestItem, value: Types.DocumentRating list) =
             { state with Ratings = value }
 
         [<CustomOperation("templateId")>]
-        member _.TemplateId(state: RankEvalRequestItem, value: CoreTypes.Id) =
+        member _.TemplateId(state: Types.RankEvalRequestItem, value: Types.Id) =
             { state with TemplateId = Some value }
 
         [<CustomOperation("params")>]
-        member _.Params(state: RankEvalRequestItem, value: Map<string, System.Text.Json.JsonElement>) =
+        member _.Params(state: Types.RankEvalRequestItem, value: Map<string, System.Text.Json.JsonElement>) =
             { state with Params = Some value }
 
     let rankEvalRequestItem = RankEvalRequestItemBuilder()

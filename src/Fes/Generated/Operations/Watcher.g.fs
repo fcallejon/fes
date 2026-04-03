@@ -7,13 +7,14 @@ open System
 open System.Text.Json
 open System.Text.Json.Serialization
 open Fes
+open Fes.Generated
 
 [<AutoOpen>]
 module WatcherOperations =
 
     type WatcherAckWatchRequest = {
-        WatchId: CoreTypes.Name
-        ActionId: CoreTypes.Names
+        WatchId: Types.Name
+        ActionId: Types.Names
     }
 
         with
@@ -37,17 +38,17 @@ module WatcherOperations =
             }
 
         [<CustomOperation("watchId")>]
-        member _.WatchId(state: WatcherAckWatchRequest, value: CoreTypes.Name) =
+        member _.WatchId(state: WatcherAckWatchRequest, value: Types.Name) =
             { state with WatchId = value }
 
         [<CustomOperation("actionId")>]
-        member _.ActionId(state: WatcherAckWatchRequest, value: CoreTypes.Names) =
+        member _.ActionId(state: WatcherAckWatchRequest, value: Types.Names) =
             { state with ActionId = value }
 
     let watcherAckWatchRequest = WatcherAckWatchRequestBuilder()
 
     type WatcherActivateWatchRequest = {
-        WatchId: CoreTypes.Name
+        WatchId: Types.Name
     }
 
         with
@@ -70,13 +71,13 @@ module WatcherOperations =
             }
 
         [<CustomOperation("watchId")>]
-        member _.WatchId(state: WatcherActivateWatchRequest, value: CoreTypes.Name) =
+        member _.WatchId(state: WatcherActivateWatchRequest, value: Types.Name) =
             { state with WatchId = value }
 
     let watcherActivateWatchRequest = WatcherActivateWatchRequestBuilder()
 
     type WatcherDeactivateWatchRequest = {
-        WatchId: CoreTypes.Name
+        WatchId: Types.Name
     }
 
         with
@@ -99,13 +100,13 @@ module WatcherOperations =
             }
 
         [<CustomOperation("watchId")>]
-        member _.WatchId(state: WatcherDeactivateWatchRequest, value: CoreTypes.Name) =
+        member _.WatchId(state: WatcherDeactivateWatchRequest, value: Types.Name) =
             { state with WatchId = value }
 
     let watcherDeactivateWatchRequest = WatcherDeactivateWatchRequestBuilder()
 
     type WatcherDeleteWatchRequest = {
-        Id: CoreTypes.Name
+        Id: Types.Name
     }
 
         with
@@ -128,21 +129,21 @@ module WatcherOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: WatcherDeleteWatchRequest, value: CoreTypes.Name) =
+        member _.Id(state: WatcherDeleteWatchRequest, value: Types.Name) =
             { state with Id = value }
 
     let watcherDeleteWatchRequest = WatcherDeleteWatchRequestBuilder()
 
     type WatcherExecuteWatchRequest = {
-        Id: CoreTypes.Id
+        Id: Types.Id
         Debug: bool option
-        ActionModes: Map<string, WatcherTypes.ActionExecutionMode> option
+        ActionModes: Map<string, Types.ActionExecutionMode> option
         AlternativeInput: Map<string, System.Text.Json.JsonElement> option
         IgnoreCondition: bool option
         RecordExecution: bool option
-        SimulatedActions: WatcherTypes.SimulatedActions option
-        TriggerData: WatcherTypes.ScheduleTriggerEvent option
-        Watch: WatcherTypes.Watch option
+        SimulatedActions: Types.SimulatedActions option
+        TriggerData: Types.ScheduleTriggerEvent option
+        Watch: Types.Watch option
     }
 
         with
@@ -181,7 +182,7 @@ module WatcherOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: WatcherExecuteWatchRequest, value: CoreTypes.Id) =
+        member _.Id(state: WatcherExecuteWatchRequest, value: Types.Id) =
             { state with Id = value }
 
         [<CustomOperation("debug")>]
@@ -189,7 +190,7 @@ module WatcherOperations =
             { state with Debug = Some value }
 
         [<CustomOperation("actionModes")>]
-        member _.ActionModes(state: WatcherExecuteWatchRequest, value: Map<string, WatcherTypes.ActionExecutionMode>) =
+        member _.ActionModes(state: WatcherExecuteWatchRequest, value: Map<string, Types.ActionExecutionMode>) =
             { state with ActionModes = Some value }
 
         [<CustomOperation("alternativeInput")>]
@@ -205,15 +206,15 @@ module WatcherOperations =
             { state with RecordExecution = Some value }
 
         [<CustomOperation("simulatedActions")>]
-        member _.SimulatedActions(state: WatcherExecuteWatchRequest, value: WatcherTypes.SimulatedActions) =
+        member _.SimulatedActions(state: WatcherExecuteWatchRequest, value: Types.SimulatedActions) =
             { state with SimulatedActions = Some value }
 
         [<CustomOperation("triggerData")>]
-        member _.TriggerData(state: WatcherExecuteWatchRequest, value: WatcherTypes.ScheduleTriggerEvent) =
+        member _.TriggerData(state: WatcherExecuteWatchRequest, value: Types.ScheduleTriggerEvent) =
             { state with TriggerData = Some value }
 
         [<CustomOperation("watch")>]
-        member _.Watch(state: WatcherExecuteWatchRequest, value: WatcherTypes.Watch) =
+        member _.Watch(state: WatcherExecuteWatchRequest, value: Types.Watch) =
             { state with Watch = Some value }
 
     let watcherExecuteWatchRequest = WatcherExecuteWatchRequestBuilder()
@@ -221,7 +222,7 @@ module WatcherOperations =
     module ExecuteWatch =
         let withDebug (value: bool) (req: WatcherExecuteWatchRequest) =
             { req with Debug = Some value }
-        let withActionModes (value: Map<string, WatcherTypes.ActionExecutionMode>) (req: WatcherExecuteWatchRequest) =
+        let withActionModes (value: Map<string, Types.ActionExecutionMode>) (req: WatcherExecuteWatchRequest) =
             { req with ActionModes = Some value }
         let withAlternativeInput (value: Map<string, System.Text.Json.JsonElement>) (req: WatcherExecuteWatchRequest) =
             { req with AlternativeInput = Some value }
@@ -229,15 +230,15 @@ module WatcherOperations =
             { req with IgnoreCondition = Some value }
         let withRecordExecution (value: bool) (req: WatcherExecuteWatchRequest) =
             { req with RecordExecution = Some value }
-        let withSimulatedActions (value: WatcherTypes.SimulatedActions) (req: WatcherExecuteWatchRequest) =
+        let withSimulatedActions (value: Types.SimulatedActions) (req: WatcherExecuteWatchRequest) =
             { req with SimulatedActions = Some value }
-        let withTriggerData (value: WatcherTypes.ScheduleTriggerEvent) (req: WatcherExecuteWatchRequest) =
+        let withTriggerData (value: Types.ScheduleTriggerEvent) (req: WatcherExecuteWatchRequest) =
             { req with TriggerData = Some value }
-        let withWatch (value: WatcherTypes.Watch) (req: WatcherExecuteWatchRequest) =
+        let withWatch (value: Types.Watch) (req: WatcherExecuteWatchRequest) =
             { req with Watch = Some value }
 
     type WatcherGetSettingsRequest = {
-        MasterTimeout: CoreTypes.Duration option
+        MasterTimeout: Types.Duration option
     }
 
         with
@@ -267,17 +268,17 @@ module WatcherOperations =
             }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: WatcherGetSettingsRequest, value: CoreTypes.Duration) =
+        member _.MasterTimeout(state: WatcherGetSettingsRequest, value: Types.Duration) =
             { state with MasterTimeout = Some value }
 
     let watcherGetSettingsRequest = WatcherGetSettingsRequestBuilder()
 
     module GetSettings =
-        let withMasterTimeout (value: CoreTypes.Duration) (req: WatcherGetSettingsRequest) =
+        let withMasterTimeout (value: Types.Duration) (req: WatcherGetSettingsRequest) =
             { req with MasterTimeout = Some value }
 
     type WatcherGetWatchRequest = {
-        Id: CoreTypes.Name
+        Id: Types.Name
     }
 
         with
@@ -300,25 +301,25 @@ module WatcherOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: WatcherGetWatchRequest, value: CoreTypes.Name) =
+        member _.Id(state: WatcherGetWatchRequest, value: Types.Name) =
             { state with Id = value }
 
     let watcherGetWatchRequest = WatcherGetWatchRequestBuilder()
 
     type WatcherPutWatchRequest = {
-        Id: CoreTypes.Id
+        Id: Types.Id
         Active: bool option
-        IfPrimaryTerm: CoreTypes.Long option
-        IfSeqNo: CoreTypes.SequenceNumber option
-        Version: CoreTypes.VersionNumber option
-        Actions: Map<string, WatcherTypes.Action> option
-        Condition: WatcherTypes.ConditionContainer option
-        Input: WatcherTypes.InputContainer option
-        Metadata: CoreTypes.Metadata option
-        ThrottlePeriod: CoreTypes.Duration option
-        ThrottlePeriodInMillis: CoreTypes.DurationValue<CoreTypes.UnitMillis> option
-        Transform: CoreTypes.TransformContainer option
-        Trigger: WatcherTypes.TriggerContainer option
+        IfPrimaryTerm: Types.Long option
+        IfSeqNo: Types.SequenceNumber option
+        Version: Types.VersionNumber option
+        Actions: Map<string, Types.WatcherTypesAction> option
+        Condition: Types.ConditionContainer option
+        Input: Types.InputContainer option
+        Metadata: Types.Metadata option
+        ThrottlePeriod: Types.Duration option
+        ThrottlePeriodInMillis: Types.DurationValue<Types.UnitMillis> option
+        Transform: Types.TransformContainer option
+        Trigger: Types.TriggerContainer option
     }
 
         with
@@ -364,7 +365,7 @@ module WatcherOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: WatcherPutWatchRequest, value: CoreTypes.Id) =
+        member _.Id(state: WatcherPutWatchRequest, value: Types.Id) =
             { state with Id = value }
 
         [<CustomOperation("active")>]
@@ -372,47 +373,47 @@ module WatcherOperations =
             { state with Active = Some value }
 
         [<CustomOperation("ifPrimaryTerm")>]
-        member _.IfPrimaryTerm(state: WatcherPutWatchRequest, value: CoreTypes.Long) =
+        member _.IfPrimaryTerm(state: WatcherPutWatchRequest, value: Types.Long) =
             { state with IfPrimaryTerm = Some value }
 
         [<CustomOperation("ifSeqNo")>]
-        member _.IfSeqNo(state: WatcherPutWatchRequest, value: CoreTypes.SequenceNumber) =
+        member _.IfSeqNo(state: WatcherPutWatchRequest, value: Types.SequenceNumber) =
             { state with IfSeqNo = Some value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: WatcherPutWatchRequest, value: CoreTypes.VersionNumber) =
+        member _.Version(state: WatcherPutWatchRequest, value: Types.VersionNumber) =
             { state with Version = Some value }
 
         [<CustomOperation("actions")>]
-        member _.Actions(state: WatcherPutWatchRequest, value: Map<string, WatcherTypes.Action>) =
+        member _.Actions(state: WatcherPutWatchRequest, value: Map<string, Types.WatcherTypesAction>) =
             { state with Actions = Some value }
 
         [<CustomOperation("condition")>]
-        member _.Condition(state: WatcherPutWatchRequest, value: WatcherTypes.ConditionContainer) =
+        member _.Condition(state: WatcherPutWatchRequest, value: Types.ConditionContainer) =
             { state with Condition = Some value }
 
         [<CustomOperation("input")>]
-        member _.Input(state: WatcherPutWatchRequest, value: WatcherTypes.InputContainer) =
+        member _.Input(state: WatcherPutWatchRequest, value: Types.InputContainer) =
             { state with Input = Some value }
 
         [<CustomOperation("metadata")>]
-        member _.Metadata(state: WatcherPutWatchRequest, value: CoreTypes.Metadata) =
+        member _.Metadata(state: WatcherPutWatchRequest, value: Types.Metadata) =
             { state with Metadata = Some value }
 
         [<CustomOperation("throttlePeriod")>]
-        member _.ThrottlePeriod(state: WatcherPutWatchRequest, value: CoreTypes.Duration) =
+        member _.ThrottlePeriod(state: WatcherPutWatchRequest, value: Types.Duration) =
             { state with ThrottlePeriod = Some value }
 
         [<CustomOperation("throttlePeriodInMillis")>]
-        member _.ThrottlePeriodInMillis(state: WatcherPutWatchRequest, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
+        member _.ThrottlePeriodInMillis(state: WatcherPutWatchRequest, value: Types.DurationValue<Types.UnitMillis>) =
             { state with ThrottlePeriodInMillis = Some value }
 
         [<CustomOperation("transform")>]
-        member _.Transform(state: WatcherPutWatchRequest, value: CoreTypes.TransformContainer) =
+        member _.Transform(state: WatcherPutWatchRequest, value: Types.TransformContainer) =
             { state with Transform = Some value }
 
         [<CustomOperation("trigger")>]
-        member _.Trigger(state: WatcherPutWatchRequest, value: WatcherTypes.TriggerContainer) =
+        member _.Trigger(state: WatcherPutWatchRequest, value: Types.TriggerContainer) =
             { state with Trigger = Some value }
 
     let watcherPutWatchRequest = WatcherPutWatchRequestBuilder()
@@ -420,35 +421,35 @@ module WatcherOperations =
     module PutWatch =
         let withActive (value: bool) (req: WatcherPutWatchRequest) =
             { req with Active = Some value }
-        let withIfPrimaryTerm (value: CoreTypes.Long) (req: WatcherPutWatchRequest) =
+        let withIfPrimaryTerm (value: Types.Long) (req: WatcherPutWatchRequest) =
             { req with IfPrimaryTerm = Some value }
-        let withIfSeqNo (value: CoreTypes.SequenceNumber) (req: WatcherPutWatchRequest) =
+        let withIfSeqNo (value: Types.SequenceNumber) (req: WatcherPutWatchRequest) =
             { req with IfSeqNo = Some value }
-        let withVersion (value: CoreTypes.VersionNumber) (req: WatcherPutWatchRequest) =
+        let withVersion (value: Types.VersionNumber) (req: WatcherPutWatchRequest) =
             { req with Version = Some value }
-        let withActions (value: Map<string, WatcherTypes.Action>) (req: WatcherPutWatchRequest) =
+        let withActions (value: Map<string, Types.WatcherTypesAction>) (req: WatcherPutWatchRequest) =
             { req with Actions = Some value }
-        let withCondition (value: WatcherTypes.ConditionContainer) (req: WatcherPutWatchRequest) =
+        let withCondition (value: Types.ConditionContainer) (req: WatcherPutWatchRequest) =
             { req with Condition = Some value }
-        let withInput (value: WatcherTypes.InputContainer) (req: WatcherPutWatchRequest) =
+        let withInput (value: Types.InputContainer) (req: WatcherPutWatchRequest) =
             { req with Input = Some value }
-        let withMetadata (value: CoreTypes.Metadata) (req: WatcherPutWatchRequest) =
+        let withMetadata (value: Types.Metadata) (req: WatcherPutWatchRequest) =
             { req with Metadata = Some value }
-        let withThrottlePeriod (value: CoreTypes.Duration) (req: WatcherPutWatchRequest) =
+        let withThrottlePeriod (value: Types.Duration) (req: WatcherPutWatchRequest) =
             { req with ThrottlePeriod = Some value }
-        let withThrottlePeriodInMillis (value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) (req: WatcherPutWatchRequest) =
+        let withThrottlePeriodInMillis (value: Types.DurationValue<Types.UnitMillis>) (req: WatcherPutWatchRequest) =
             { req with ThrottlePeriodInMillis = Some value }
-        let withTransform (value: CoreTypes.TransformContainer) (req: WatcherPutWatchRequest) =
+        let withTransform (value: Types.TransformContainer) (req: WatcherPutWatchRequest) =
             { req with Transform = Some value }
-        let withTrigger (value: WatcherTypes.TriggerContainer) (req: WatcherPutWatchRequest) =
+        let withTrigger (value: Types.TriggerContainer) (req: WatcherPutWatchRequest) =
             { req with Trigger = Some value }
 
     type WatcherQueryWatchesRequest = {
-        From: CoreTypes.Integer option
-        Size: CoreTypes.Integer option
-        Query: CoreTypes.QueryContainer option
-        Sort: CoreTypes.Sort option
-        SearchAfter: CoreTypes.SortResults option
+        From: Types.Integer option
+        Size: Types.Integer option
+        Query: Types.QueryContainer option
+        Sort: Types.Sort option
+        SearchAfter: Types.SortResults option
     }
 
         with
@@ -476,41 +477,41 @@ module WatcherOperations =
             }
 
         [<CustomOperation("from")>]
-        member _.From(state: WatcherQueryWatchesRequest, value: CoreTypes.Integer) =
+        member _.From(state: WatcherQueryWatchesRequest, value: Types.Integer) =
             { state with From = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: WatcherQueryWatchesRequest, value: CoreTypes.Integer) =
+        member _.Size(state: WatcherQueryWatchesRequest, value: Types.Integer) =
             { state with Size = Some value }
 
         [<CustomOperation("query")>]
-        member _.Query(state: WatcherQueryWatchesRequest, value: CoreTypes.QueryContainer) =
+        member _.Query(state: WatcherQueryWatchesRequest, value: Types.QueryContainer) =
             { state with Query = Some value }
 
         [<CustomOperation("sort")>]
-        member _.Sort(state: WatcherQueryWatchesRequest, value: CoreTypes.Sort) =
+        member _.Sort(state: WatcherQueryWatchesRequest, value: Types.Sort) =
             { state with Sort = Some value }
 
         [<CustomOperation("searchAfter")>]
-        member _.SearchAfter(state: WatcherQueryWatchesRequest, value: CoreTypes.SortResults) =
+        member _.SearchAfter(state: WatcherQueryWatchesRequest, value: Types.SortResults) =
             { state with SearchAfter = Some value }
 
     let watcherQueryWatchesRequest = WatcherQueryWatchesRequestBuilder()
 
     module QueryWatches =
-        let withFrom (value: CoreTypes.Integer) (req: WatcherQueryWatchesRequest) =
+        let withFrom (value: Types.Integer) (req: WatcherQueryWatchesRequest) =
             { req with From = Some value }
-        let withSize (value: CoreTypes.Integer) (req: WatcherQueryWatchesRequest) =
+        let withSize (value: Types.Integer) (req: WatcherQueryWatchesRequest) =
             { req with Size = Some value }
-        let withQuery (value: CoreTypes.QueryContainer) (req: WatcherQueryWatchesRequest) =
+        let withQuery (value: Types.QueryContainer) (req: WatcherQueryWatchesRequest) =
             { req with Query = Some value }
-        let withSort (value: CoreTypes.Sort) (req: WatcherQueryWatchesRequest) =
+        let withSort (value: Types.Sort) (req: WatcherQueryWatchesRequest) =
             { req with Sort = Some value }
-        let withSearchAfter (value: CoreTypes.SortResults) (req: WatcherQueryWatchesRequest) =
+        let withSearchAfter (value: Types.SortResults) (req: WatcherQueryWatchesRequest) =
             { req with SearchAfter = Some value }
 
     type WatcherStartRequest = {
-        MasterTimeout: CoreTypes.Duration option
+        MasterTimeout: Types.Duration option
     }
 
         with
@@ -531,7 +532,7 @@ module WatcherOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type WatcherStartResponse = CoreTypes.AcknowledgedResponseBase
+    type WatcherStartResponse = Types.AcknowledgedResponseBase
 
     type WatcherStartRequestBuilder() =
         member _.Yield(_: unit) : WatcherStartRequest =
@@ -540,13 +541,13 @@ module WatcherOperations =
             }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: WatcherStartRequest, value: CoreTypes.Duration) =
+        member _.MasterTimeout(state: WatcherStartRequest, value: Types.Duration) =
             { state with MasterTimeout = Some value }
 
     let watcherStartRequest = WatcherStartRequestBuilder()
 
     module Start =
-        let withMasterTimeout (value: CoreTypes.Duration) (req: WatcherStartRequest) =
+        let withMasterTimeout (value: Types.Duration) (req: WatcherStartRequest) =
             { req with MasterTimeout = Some value }
 
     type WatcherStatsRequest = {
@@ -605,7 +606,7 @@ module WatcherOperations =
             { req with Metric = Some value }
 
     type WatcherStopRequest = {
-        MasterTimeout: CoreTypes.Duration option
+        MasterTimeout: Types.Duration option
     }
 
         with
@@ -626,7 +627,7 @@ module WatcherOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type WatcherStopResponse = CoreTypes.AcknowledgedResponseBase
+    type WatcherStopResponse = Types.AcknowledgedResponseBase
 
     type WatcherStopRequestBuilder() =
         member _.Yield(_: unit) : WatcherStopRequest =
@@ -635,20 +636,20 @@ module WatcherOperations =
             }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: WatcherStopRequest, value: CoreTypes.Duration) =
+        member _.MasterTimeout(state: WatcherStopRequest, value: Types.Duration) =
             { state with MasterTimeout = Some value }
 
     let watcherStopRequest = WatcherStopRequestBuilder()
 
     module Stop =
-        let withMasterTimeout (value: CoreTypes.Duration) (req: WatcherStopRequest) =
+        let withMasterTimeout (value: Types.Duration) (req: WatcherStopRequest) =
             { req with MasterTimeout = Some value }
 
     type WatcherUpdateSettingsRequest = {
-        MasterTimeout: CoreTypes.Duration option
-        Timeout: CoreTypes.Duration option
+        MasterTimeout: Types.Duration option
+        Timeout: Types.Duration option
         IndexAutoExpandReplicas: string option
-        IndexNumberOfReplicas: CoreTypes.Integer option
+        IndexNumberOfReplicas: Types.Integer option
     }
 
         with
@@ -683,11 +684,11 @@ module WatcherOperations =
             }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: WatcherUpdateSettingsRequest, value: CoreTypes.Duration) =
+        member _.MasterTimeout(state: WatcherUpdateSettingsRequest, value: Types.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: WatcherUpdateSettingsRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: WatcherUpdateSettingsRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("indexAutoExpandReplicas")>]
@@ -695,18 +696,18 @@ module WatcherOperations =
             { state with IndexAutoExpandReplicas = Some value }
 
         [<CustomOperation("indexNumberOfReplicas")>]
-        member _.IndexNumberOfReplicas(state: WatcherUpdateSettingsRequest, value: CoreTypes.Integer) =
+        member _.IndexNumberOfReplicas(state: WatcherUpdateSettingsRequest, value: Types.Integer) =
             { state with IndexNumberOfReplicas = Some value }
 
     let watcherUpdateSettingsRequest = WatcherUpdateSettingsRequestBuilder()
 
     module UpdateSettings =
-        let withMasterTimeout (value: CoreTypes.Duration) (req: WatcherUpdateSettingsRequest) =
+        let withMasterTimeout (value: Types.Duration) (req: WatcherUpdateSettingsRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: WatcherUpdateSettingsRequest) =
+        let withTimeout (value: Types.Duration) (req: WatcherUpdateSettingsRequest) =
             { req with Timeout = Some value }
         let withIndexAutoExpandReplicas (value: string) (req: WatcherUpdateSettingsRequest) =
             { req with IndexAutoExpandReplicas = Some value }
-        let withIndexNumberOfReplicas (value: CoreTypes.Integer) (req: WatcherUpdateSettingsRequest) =
+        let withIndexNumberOfReplicas (value: Types.Integer) (req: WatcherUpdateSettingsRequest) =
             { req with IndexNumberOfReplicas = Some value }
 

@@ -4,13 +4,13 @@ namespace Fes.Generated.Builders
 
 
 open System.Text.Json.Serialization
-open Fes.Generated.Types
+open Fes.Generated
 
 [<AutoOpen>]
 module TextStructureTypesBuilders =
 
     type FieldStatBuilder() =
-        member _.Yield(_: unit) : FieldStat =
+        member _.Yield(_: unit) : Types.FieldStat =
             {
                 Count = Unchecked.defaultof<_>
                 Cardinality = Unchecked.defaultof<_>
@@ -24,39 +24,39 @@ module TextStructureTypesBuilders =
             }
 
         [<CustomOperation("count")>]
-        member _.Count(state: FieldStat, value: CoreTypes.Integer) =
+        member _.Count(state: Types.FieldStat, value: Types.Integer) =
             { state with Count = value }
 
         [<CustomOperation("cardinality")>]
-        member _.Cardinality(state: FieldStat, value: CoreTypes.Integer) =
+        member _.Cardinality(state: Types.FieldStat, value: Types.Integer) =
             { state with Cardinality = value }
 
         [<CustomOperation("topHits")>]
-        member _.TopHits(state: FieldStat, value: TextStructureTypes.TopHit list) =
+        member _.TopHits(state: Types.FieldStat, value: Types.TopHit list) =
             { state with TopHits = value }
 
         [<CustomOperation("meanValue")>]
-        member _.MeanValue(state: FieldStat, value: CoreTypes.Integer) =
+        member _.MeanValue(state: Types.FieldStat, value: Types.Integer) =
             { state with MeanValue = Some value }
 
         [<CustomOperation("medianValue")>]
-        member _.MedianValue(state: FieldStat, value: CoreTypes.Integer) =
+        member _.MedianValue(state: Types.FieldStat, value: Types.Integer) =
             { state with MedianValue = Some value }
 
         [<CustomOperation("maxValue")>]
-        member _.MaxValue(state: FieldStat, value: CoreTypes.Integer) =
+        member _.MaxValue(state: Types.FieldStat, value: Types.Integer) =
             { state with MaxValue = Some value }
 
         [<CustomOperation("minValue")>]
-        member _.MinValue(state: FieldStat, value: CoreTypes.Integer) =
+        member _.MinValue(state: Types.FieldStat, value: Types.Integer) =
             { state with MinValue = Some value }
 
         [<CustomOperation("earliest")>]
-        member _.Earliest(state: FieldStat, value: string) =
+        member _.Earliest(state: Types.FieldStat, value: string) =
             { state with Earliest = Some value }
 
         [<CustomOperation("latest")>]
-        member _.Latest(state: FieldStat, value: string) =
+        member _.Latest(state: Types.FieldStat, value: string) =
             { state with Latest = Some value }
 
     let fieldStat = FieldStatBuilder()

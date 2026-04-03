@@ -7,12 +7,13 @@ open System
 open System.Text.Json
 open System.Text.Json.Serialization
 open Fes
+open Fes.Generated
 
 [<AutoOpen>]
 module XpackOperations =
 
     type XpackInfoRequest = {
-        Categories: XpackInfo.XPackCategory list option
+        Categories: Types.XPackCategory list option
         AcceptEnterprise: bool option
         Human: bool option
     }
@@ -48,7 +49,7 @@ module XpackOperations =
             }
 
         [<CustomOperation("categories")>]
-        member _.Categories(state: XpackInfoRequest, value: XpackInfo.XPackCategory list) =
+        member _.Categories(state: XpackInfoRequest, value: Types.XPackCategory list) =
             { state with Categories = Some value }
 
         [<CustomOperation("acceptEnterprise")>]
@@ -62,7 +63,7 @@ module XpackOperations =
     let xpackInfoRequest = XpackInfoRequestBuilder()
 
     module Info =
-        let withCategories (value: XpackInfo.XPackCategory list) (req: XpackInfoRequest) =
+        let withCategories (value: Types.XPackCategory list) (req: XpackInfoRequest) =
             { req with Categories = Some value }
         let withAcceptEnterprise (value: bool) (req: XpackInfoRequest) =
             { req with AcceptEnterprise = Some value }
@@ -70,7 +71,7 @@ module XpackOperations =
             { req with Human = Some value }
 
     type XpackUsageRequest = {
-        MasterTimeout: CoreTypes.Duration option
+        MasterTimeout: Types.Duration option
     }
 
         with
@@ -100,12 +101,12 @@ module XpackOperations =
             }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: XpackUsageRequest, value: CoreTypes.Duration) =
+        member _.MasterTimeout(state: XpackUsageRequest, value: Types.Duration) =
             { state with MasterTimeout = Some value }
 
     let xpackUsageRequest = XpackUsageRequestBuilder()
 
     module Usage =
-        let withMasterTimeout (value: CoreTypes.Duration) (req: XpackUsageRequest) =
+        let withMasterTimeout (value: Types.Duration) (req: XpackUsageRequest) =
             { req with MasterTimeout = Some value }
 

@@ -4,13 +4,13 @@ namespace Fes.Generated.Builders
 
 
 open System.Text.Json.Serialization
-open Fes.Generated.Types
+open Fes.Generated
 
 [<AutoOpen>]
 module RollupGetJobsBuilders =
 
     type RollupJobStatusBuilder() =
-        member _.Yield(_: unit) : RollupJobStatus =
+        member _.Yield(_: unit) : Types.RollupJobStatus =
             {
                 CurrentPosition = None
                 JobState = Unchecked.defaultof<_>
@@ -18,15 +18,15 @@ module RollupGetJobsBuilders =
             }
 
         [<CustomOperation("currentPosition")>]
-        member _.CurrentPosition(state: RollupJobStatus, value: Map<string, System.Text.Json.JsonElement>) =
+        member _.CurrentPosition(state: Types.RollupJobStatus, value: Map<string, System.Text.Json.JsonElement>) =
             { state with CurrentPosition = Some value }
 
         [<CustomOperation("jobState")>]
-        member _.JobState(state: RollupJobStatus, value: RollupGetJobs.IndexingJobState) =
+        member _.JobState(state: Types.RollupJobStatus, value: Types.IndexingJobState) =
             { state with JobState = value }
 
         [<CustomOperation("upgradedDocId")>]
-        member _.UpgradedDocId(state: RollupJobStatus, value: bool) =
+        member _.UpgradedDocId(state: Types.RollupJobStatus, value: bool) =
             { state with UpgradedDocId = Some value }
 
     let rollupJobStatus = RollupJobStatusBuilder()

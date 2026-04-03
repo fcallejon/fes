@@ -7,12 +7,13 @@ open System
 open System.Text.Json
 open System.Text.Json.Serialization
 open Fes
+open Fes.Generated
 
 [<AutoOpen>]
 module ConnectorOperations =
 
     type ConnectorCheckInRequest = {
-        ConnectorId: CoreTypes.Id
+        ConnectorId: Types.Id
     }
 
         with
@@ -35,13 +36,13 @@ module ConnectorOperations =
             }
 
         [<CustomOperation("connectorId")>]
-        member _.ConnectorId(state: ConnectorCheckInRequest, value: CoreTypes.Id) =
+        member _.ConnectorId(state: ConnectorCheckInRequest, value: Types.Id) =
             { state with ConnectorId = value }
 
     let connectorCheckInRequest = ConnectorCheckInRequestBuilder()
 
     type ConnectorDeleteRequest = {
-        ConnectorId: CoreTypes.Id
+        ConnectorId: Types.Id
         DeleteSyncJobs: bool option
         Hard: bool option
     }
@@ -65,7 +66,7 @@ module ConnectorOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type ConnectorDeleteResponse = CoreTypes.AcknowledgedResponseBase
+    type ConnectorDeleteResponse = Types.AcknowledgedResponseBase
 
     type ConnectorDeleteRequestBuilder() =
         member _.Yield(_: unit) : ConnectorDeleteRequest =
@@ -76,7 +77,7 @@ module ConnectorOperations =
             }
 
         [<CustomOperation("connectorId")>]
-        member _.ConnectorId(state: ConnectorDeleteRequest, value: CoreTypes.Id) =
+        member _.ConnectorId(state: ConnectorDeleteRequest, value: Types.Id) =
             { state with ConnectorId = value }
 
         [<CustomOperation("deleteSyncJobs")>]
@@ -96,7 +97,7 @@ module ConnectorOperations =
             { req with Hard = Some value }
 
     type ConnectorGetRequest = {
-        ConnectorId: CoreTypes.Id
+        ConnectorId: Types.Id
         IncludeDeleted: bool option
     }
 
@@ -118,7 +119,7 @@ module ConnectorOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type ConnectorGetResponse = ConnectorTypes.Connector
+    type ConnectorGetResponse = Types.Connector
 
     type ConnectorGetRequestBuilder() =
         member _.Yield(_: unit) : ConnectorGetRequest =
@@ -128,7 +129,7 @@ module ConnectorOperations =
             }
 
         [<CustomOperation("connectorId")>]
-        member _.ConnectorId(state: ConnectorGetRequest, value: CoreTypes.Id) =
+        member _.ConnectorId(state: ConnectorGetRequest, value: Types.Id) =
             { state with ConnectorId = value }
 
         [<CustomOperation("includeDeleted")>]
@@ -142,18 +143,18 @@ module ConnectorOperations =
             { req with IncludeDeleted = Some value }
 
     type ConnectorLastSyncRequest = {
-        ConnectorId: CoreTypes.Id
+        ConnectorId: Types.Id
         LastAccessControlSyncError: string option
-        LastAccessControlSyncScheduledAt: CoreTypes.DateTime option
-        LastAccessControlSyncStatus: ConnectorTypes.SyncStatus option
-        LastDeletedDocumentCount: CoreTypes.Long option
-        LastIncrementalSyncScheduledAt: CoreTypes.DateTime option
-        LastIndexedDocumentCount: CoreTypes.Long option
-        LastSeen: CoreTypes.DateTime option
+        LastAccessControlSyncScheduledAt: Types.DateTime option
+        LastAccessControlSyncStatus: Types.SyncStatus option
+        LastDeletedDocumentCount: Types.Long option
+        LastIncrementalSyncScheduledAt: Types.DateTime option
+        LastIndexedDocumentCount: Types.Long option
+        LastSeen: Types.DateTime option
         LastSyncError: string option
-        LastSyncScheduledAt: CoreTypes.DateTime option
-        LastSyncStatus: ConnectorTypes.SyncStatus option
-        LastSynced: CoreTypes.DateTime option
+        LastSyncScheduledAt: Types.DateTime option
+        LastSyncStatus: Types.SyncStatus option
+        LastSynced: Types.DateTime option
         SyncCursor: System.Text.Json.JsonElement option
     }
 
@@ -190,7 +191,7 @@ module ConnectorOperations =
             }
 
         [<CustomOperation("connectorId")>]
-        member _.ConnectorId(state: ConnectorLastSyncRequest, value: CoreTypes.Id) =
+        member _.ConnectorId(state: ConnectorLastSyncRequest, value: Types.Id) =
             { state with ConnectorId = value }
 
         [<CustomOperation("lastAccessControlSyncError")>]
@@ -198,27 +199,27 @@ module ConnectorOperations =
             { state with LastAccessControlSyncError = Some value }
 
         [<CustomOperation("lastAccessControlSyncScheduledAt")>]
-        member _.LastAccessControlSyncScheduledAt(state: ConnectorLastSyncRequest, value: CoreTypes.DateTime) =
+        member _.LastAccessControlSyncScheduledAt(state: ConnectorLastSyncRequest, value: Types.DateTime) =
             { state with LastAccessControlSyncScheduledAt = Some value }
 
         [<CustomOperation("lastAccessControlSyncStatus")>]
-        member _.LastAccessControlSyncStatus(state: ConnectorLastSyncRequest, value: ConnectorTypes.SyncStatus) =
+        member _.LastAccessControlSyncStatus(state: ConnectorLastSyncRequest, value: Types.SyncStatus) =
             { state with LastAccessControlSyncStatus = Some value }
 
         [<CustomOperation("lastDeletedDocumentCount")>]
-        member _.LastDeletedDocumentCount(state: ConnectorLastSyncRequest, value: CoreTypes.Long) =
+        member _.LastDeletedDocumentCount(state: ConnectorLastSyncRequest, value: Types.Long) =
             { state with LastDeletedDocumentCount = Some value }
 
         [<CustomOperation("lastIncrementalSyncScheduledAt")>]
-        member _.LastIncrementalSyncScheduledAt(state: ConnectorLastSyncRequest, value: CoreTypes.DateTime) =
+        member _.LastIncrementalSyncScheduledAt(state: ConnectorLastSyncRequest, value: Types.DateTime) =
             { state with LastIncrementalSyncScheduledAt = Some value }
 
         [<CustomOperation("lastIndexedDocumentCount")>]
-        member _.LastIndexedDocumentCount(state: ConnectorLastSyncRequest, value: CoreTypes.Long) =
+        member _.LastIndexedDocumentCount(state: ConnectorLastSyncRequest, value: Types.Long) =
             { state with LastIndexedDocumentCount = Some value }
 
         [<CustomOperation("lastSeen")>]
-        member _.LastSeen(state: ConnectorLastSyncRequest, value: CoreTypes.DateTime) =
+        member _.LastSeen(state: ConnectorLastSyncRequest, value: Types.DateTime) =
             { state with LastSeen = Some value }
 
         [<CustomOperation("lastSyncError")>]
@@ -226,15 +227,15 @@ module ConnectorOperations =
             { state with LastSyncError = Some value }
 
         [<CustomOperation("lastSyncScheduledAt")>]
-        member _.LastSyncScheduledAt(state: ConnectorLastSyncRequest, value: CoreTypes.DateTime) =
+        member _.LastSyncScheduledAt(state: ConnectorLastSyncRequest, value: Types.DateTime) =
             { state with LastSyncScheduledAt = Some value }
 
         [<CustomOperation("lastSyncStatus")>]
-        member _.LastSyncStatus(state: ConnectorLastSyncRequest, value: ConnectorTypes.SyncStatus) =
+        member _.LastSyncStatus(state: ConnectorLastSyncRequest, value: Types.SyncStatus) =
             { state with LastSyncStatus = Some value }
 
         [<CustomOperation("lastSynced")>]
-        member _.LastSynced(state: ConnectorLastSyncRequest, value: CoreTypes.DateTime) =
+        member _.LastSynced(state: ConnectorLastSyncRequest, value: Types.DateTime) =
             { state with LastSynced = Some value }
 
         [<CustomOperation("syncCursor")>]
@@ -246,35 +247,35 @@ module ConnectorOperations =
     module LastSync =
         let withLastAccessControlSyncError (value: string) (req: ConnectorLastSyncRequest) =
             { req with LastAccessControlSyncError = Some value }
-        let withLastAccessControlSyncScheduledAt (value: CoreTypes.DateTime) (req: ConnectorLastSyncRequest) =
+        let withLastAccessControlSyncScheduledAt (value: Types.DateTime) (req: ConnectorLastSyncRequest) =
             { req with LastAccessControlSyncScheduledAt = Some value }
-        let withLastAccessControlSyncStatus (value: ConnectorTypes.SyncStatus) (req: ConnectorLastSyncRequest) =
+        let withLastAccessControlSyncStatus (value: Types.SyncStatus) (req: ConnectorLastSyncRequest) =
             { req with LastAccessControlSyncStatus = Some value }
-        let withLastDeletedDocumentCount (value: CoreTypes.Long) (req: ConnectorLastSyncRequest) =
+        let withLastDeletedDocumentCount (value: Types.Long) (req: ConnectorLastSyncRequest) =
             { req with LastDeletedDocumentCount = Some value }
-        let withLastIncrementalSyncScheduledAt (value: CoreTypes.DateTime) (req: ConnectorLastSyncRequest) =
+        let withLastIncrementalSyncScheduledAt (value: Types.DateTime) (req: ConnectorLastSyncRequest) =
             { req with LastIncrementalSyncScheduledAt = Some value }
-        let withLastIndexedDocumentCount (value: CoreTypes.Long) (req: ConnectorLastSyncRequest) =
+        let withLastIndexedDocumentCount (value: Types.Long) (req: ConnectorLastSyncRequest) =
             { req with LastIndexedDocumentCount = Some value }
-        let withLastSeen (value: CoreTypes.DateTime) (req: ConnectorLastSyncRequest) =
+        let withLastSeen (value: Types.DateTime) (req: ConnectorLastSyncRequest) =
             { req with LastSeen = Some value }
         let withLastSyncError (value: string) (req: ConnectorLastSyncRequest) =
             { req with LastSyncError = Some value }
-        let withLastSyncScheduledAt (value: CoreTypes.DateTime) (req: ConnectorLastSyncRequest) =
+        let withLastSyncScheduledAt (value: Types.DateTime) (req: ConnectorLastSyncRequest) =
             { req with LastSyncScheduledAt = Some value }
-        let withLastSyncStatus (value: ConnectorTypes.SyncStatus) (req: ConnectorLastSyncRequest) =
+        let withLastSyncStatus (value: Types.SyncStatus) (req: ConnectorLastSyncRequest) =
             { req with LastSyncStatus = Some value }
-        let withLastSynced (value: CoreTypes.DateTime) (req: ConnectorLastSyncRequest) =
+        let withLastSynced (value: Types.DateTime) (req: ConnectorLastSyncRequest) =
             { req with LastSynced = Some value }
         let withSyncCursor (value: System.Text.Json.JsonElement) (req: ConnectorLastSyncRequest) =
             { req with SyncCursor = Some value }
 
     type ConnectorListRequest = {
-        From: CoreTypes.Integer option
-        Size: CoreTypes.Integer option
-        IndexName: CoreTypes.Indices option
-        ConnectorName: CoreTypes.Names option
-        ServiceType: CoreTypes.Names option
+        From: Types.Integer option
+        Size: Types.Integer option
+        IndexName: Types.Indices option
+        ConnectorName: Types.Names option
+        ServiceType: Types.Names option
         IncludeDeleted: bool option
         Query: string option
     }
@@ -318,23 +319,23 @@ module ConnectorOperations =
             }
 
         [<CustomOperation("from")>]
-        member _.From(state: ConnectorListRequest, value: CoreTypes.Integer) =
+        member _.From(state: ConnectorListRequest, value: Types.Integer) =
             { state with From = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: ConnectorListRequest, value: CoreTypes.Integer) =
+        member _.Size(state: ConnectorListRequest, value: Types.Integer) =
             { state with Size = Some value }
 
         [<CustomOperation("indexName")>]
-        member _.IndexName(state: ConnectorListRequest, value: CoreTypes.Indices) =
+        member _.IndexName(state: ConnectorListRequest, value: Types.Indices) =
             { state with IndexName = Some value }
 
         [<CustomOperation("connectorName")>]
-        member _.ConnectorName(state: ConnectorListRequest, value: CoreTypes.Names) =
+        member _.ConnectorName(state: ConnectorListRequest, value: Types.Names) =
             { state with ConnectorName = Some value }
 
         [<CustomOperation("serviceType")>]
-        member _.ServiceType(state: ConnectorListRequest, value: CoreTypes.Names) =
+        member _.ServiceType(state: ConnectorListRequest, value: Types.Names) =
             { state with ServiceType = Some value }
 
         [<CustomOperation("includeDeleted")>]
@@ -348,15 +349,15 @@ module ConnectorOperations =
     let connectorListRequest = ConnectorListRequestBuilder()
 
     module List =
-        let withFrom (value: CoreTypes.Integer) (req: ConnectorListRequest) =
+        let withFrom (value: Types.Integer) (req: ConnectorListRequest) =
             { req with From = Some value }
-        let withSize (value: CoreTypes.Integer) (req: ConnectorListRequest) =
+        let withSize (value: Types.Integer) (req: ConnectorListRequest) =
             { req with Size = Some value }
-        let withIndexName (value: CoreTypes.Indices) (req: ConnectorListRequest) =
+        let withIndexName (value: Types.Indices) (req: ConnectorListRequest) =
             { req with IndexName = Some value }
-        let withConnectorName (value: CoreTypes.Names) (req: ConnectorListRequest) =
+        let withConnectorName (value: Types.Names) (req: ConnectorListRequest) =
             { req with ConnectorName = Some value }
-        let withServiceType (value: CoreTypes.Names) (req: ConnectorListRequest) =
+        let withServiceType (value: Types.Names) (req: ConnectorListRequest) =
             { req with ServiceType = Some value }
         let withIncludeDeleted (value: bool) (req: ConnectorListRequest) =
             { req with IncludeDeleted = Some value }
@@ -365,7 +366,7 @@ module ConnectorOperations =
 
     type ConnectorPostRequest = {
         Description: string option
-        IndexName: CoreTypes.IndexName option
+        IndexName: Types.IndexName option
         IsNative: bool option
         Language: string option
         Name: string option
@@ -402,7 +403,7 @@ module ConnectorOperations =
             { state with Description = Some value }
 
         [<CustomOperation("indexName")>]
-        member _.IndexName(state: ConnectorPostRequest, value: CoreTypes.IndexName) =
+        member _.IndexName(state: ConnectorPostRequest, value: Types.IndexName) =
             { state with IndexName = Some value }
 
         [<CustomOperation("isNative")>]
@@ -426,7 +427,7 @@ module ConnectorOperations =
     module Post =
         let withDescription (value: string) (req: ConnectorPostRequest) =
             { req with Description = Some value }
-        let withIndexName (value: CoreTypes.IndexName) (req: ConnectorPostRequest) =
+        let withIndexName (value: Types.IndexName) (req: ConnectorPostRequest) =
             { req with IndexName = Some value }
         let withIsNative (value: bool) (req: ConnectorPostRequest) =
             { req with IsNative = Some value }
@@ -438,9 +439,9 @@ module ConnectorOperations =
             { req with ServiceType = Some value }
 
     type ConnectorPutRequest = {
-        ConnectorId: CoreTypes.Id
+        ConnectorId: Types.Id
         Description: string option
-        IndexName: CoreTypes.IndexName option
+        IndexName: Types.IndexName option
         IsNative: bool option
         Language: string option
         Name: string option
@@ -474,7 +475,7 @@ module ConnectorOperations =
             }
 
         [<CustomOperation("connectorId")>]
-        member _.ConnectorId(state: ConnectorPutRequest, value: CoreTypes.Id) =
+        member _.ConnectorId(state: ConnectorPutRequest, value: Types.Id) =
             { state with ConnectorId = value }
 
         [<CustomOperation("description")>]
@@ -482,7 +483,7 @@ module ConnectorOperations =
             { state with Description = Some value }
 
         [<CustomOperation("indexName")>]
-        member _.IndexName(state: ConnectorPutRequest, value: CoreTypes.IndexName) =
+        member _.IndexName(state: ConnectorPutRequest, value: Types.IndexName) =
             { state with IndexName = Some value }
 
         [<CustomOperation("isNative")>]
@@ -506,7 +507,7 @@ module ConnectorOperations =
     module Put =
         let withDescription (value: string) (req: ConnectorPutRequest) =
             { req with Description = Some value }
-        let withIndexName (value: CoreTypes.IndexName) (req: ConnectorPutRequest) =
+        let withIndexName (value: Types.IndexName) (req: ConnectorPutRequest) =
             { req with IndexName = Some value }
         let withIsNative (value: bool) (req: ConnectorPutRequest) =
             { req with IsNative = Some value }
@@ -650,7 +651,7 @@ module ConnectorOperations =
             { req with Value = value }
 
     type ConnectorSyncJobCancelRequest = {
-        ConnectorSyncJobId: CoreTypes.Id
+        ConnectorSyncJobId: Types.Id
     }
 
         with
@@ -673,13 +674,13 @@ module ConnectorOperations =
             }
 
         [<CustomOperation("connectorSyncJobId")>]
-        member _.ConnectorSyncJobId(state: ConnectorSyncJobCancelRequest, value: CoreTypes.Id) =
+        member _.ConnectorSyncJobId(state: ConnectorSyncJobCancelRequest, value: Types.Id) =
             { state with ConnectorSyncJobId = value }
 
     let connectorSyncJobCancelRequest = ConnectorSyncJobCancelRequestBuilder()
 
     type ConnectorSyncJobCheckInRequest = {
-        ConnectorSyncJobId: CoreTypes.Id
+        ConnectorSyncJobId: Types.Id
     }
 
         with
@@ -702,13 +703,13 @@ module ConnectorOperations =
             }
 
         [<CustomOperation("connectorSyncJobId")>]
-        member _.ConnectorSyncJobId(state: ConnectorSyncJobCheckInRequest, value: CoreTypes.Id) =
+        member _.ConnectorSyncJobId(state: ConnectorSyncJobCheckInRequest, value: Types.Id) =
             { state with ConnectorSyncJobId = value }
 
     let connectorSyncJobCheckInRequest = ConnectorSyncJobCheckInRequestBuilder()
 
     type ConnectorSyncJobClaimRequest = {
-        ConnectorSyncJobId: CoreTypes.Id
+        ConnectorSyncJobId: Types.Id
         SyncCursor: System.Text.Json.JsonElement option
         WorkerHostname: string
     }
@@ -736,7 +737,7 @@ module ConnectorOperations =
             }
 
         [<CustomOperation("connectorSyncJobId")>]
-        member _.ConnectorSyncJobId(state: ConnectorSyncJobClaimRequest, value: CoreTypes.Id) =
+        member _.ConnectorSyncJobId(state: ConnectorSyncJobClaimRequest, value: Types.Id) =
             { state with ConnectorSyncJobId = value }
 
         [<CustomOperation("syncCursor")>]
@@ -756,7 +757,7 @@ module ConnectorOperations =
             { req with WorkerHostname = value }
 
     type ConnectorSyncJobDeleteRequest = {
-        ConnectorSyncJobId: CoreTypes.Id
+        ConnectorSyncJobId: Types.Id
     }
 
         with
@@ -770,7 +771,7 @@ module ConnectorOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type ConnectorSyncJobDeleteResponse = CoreTypes.AcknowledgedResponseBase
+    type ConnectorSyncJobDeleteResponse = Types.AcknowledgedResponseBase
 
     type ConnectorSyncJobDeleteRequestBuilder() =
         member _.Yield(_: unit) : ConnectorSyncJobDeleteRequest =
@@ -779,13 +780,13 @@ module ConnectorOperations =
             }
 
         [<CustomOperation("connectorSyncJobId")>]
-        member _.ConnectorSyncJobId(state: ConnectorSyncJobDeleteRequest, value: CoreTypes.Id) =
+        member _.ConnectorSyncJobId(state: ConnectorSyncJobDeleteRequest, value: Types.Id) =
             { state with ConnectorSyncJobId = value }
 
     let connectorSyncJobDeleteRequest = ConnectorSyncJobDeleteRequestBuilder()
 
     type ConnectorSyncJobErrorRequest = {
-        ConnectorSyncJobId: CoreTypes.Id
+        ConnectorSyncJobId: Types.Id
         Error: string
     }
 
@@ -811,7 +812,7 @@ module ConnectorOperations =
             }
 
         [<CustomOperation("connectorSyncJobId")>]
-        member _.ConnectorSyncJobId(state: ConnectorSyncJobErrorRequest, value: CoreTypes.Id) =
+        member _.ConnectorSyncJobId(state: ConnectorSyncJobErrorRequest, value: Types.Id) =
             { state with ConnectorSyncJobId = value }
 
         [<CustomOperation("error")>]
@@ -825,7 +826,7 @@ module ConnectorOperations =
             { req with Error = value }
 
     type ConnectorSyncJobGetRequest = {
-        ConnectorSyncJobId: CoreTypes.Id
+        ConnectorSyncJobId: Types.Id
     }
 
         with
@@ -839,7 +840,7 @@ module ConnectorOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type ConnectorSyncJobGetResponse = ConnectorTypes.ConnectorSyncJob
+    type ConnectorSyncJobGetResponse = Types.ConnectorSyncJob
 
     type ConnectorSyncJobGetRequestBuilder() =
         member _.Yield(_: unit) : ConnectorSyncJobGetRequest =
@@ -848,16 +849,16 @@ module ConnectorOperations =
             }
 
         [<CustomOperation("connectorSyncJobId")>]
-        member _.ConnectorSyncJobId(state: ConnectorSyncJobGetRequest, value: CoreTypes.Id) =
+        member _.ConnectorSyncJobId(state: ConnectorSyncJobGetRequest, value: Types.Id) =
             { state with ConnectorSyncJobId = value }
 
     let connectorSyncJobGetRequest = ConnectorSyncJobGetRequestBuilder()
 
     type ConnectorSyncJobListRequest = {
-        From: CoreTypes.Integer option
-        Size: CoreTypes.Integer option
-        Status: ConnectorTypes.SyncStatus option
-        ConnectorId: CoreTypes.Id option
+        From: Types.Integer option
+        Size: Types.Integer option
+        Status: Types.SyncStatus option
+        ConnectorId: Types.Id option
         JobType: System.Text.Json.JsonElement option
     }
 
@@ -896,19 +897,19 @@ module ConnectorOperations =
             }
 
         [<CustomOperation("from")>]
-        member _.From(state: ConnectorSyncJobListRequest, value: CoreTypes.Integer) =
+        member _.From(state: ConnectorSyncJobListRequest, value: Types.Integer) =
             { state with From = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: ConnectorSyncJobListRequest, value: CoreTypes.Integer) =
+        member _.Size(state: ConnectorSyncJobListRequest, value: Types.Integer) =
             { state with Size = Some value }
 
         [<CustomOperation("status")>]
-        member _.Status(state: ConnectorSyncJobListRequest, value: ConnectorTypes.SyncStatus) =
+        member _.Status(state: ConnectorSyncJobListRequest, value: Types.SyncStatus) =
             { state with Status = Some value }
 
         [<CustomOperation("connectorId")>]
-        member _.ConnectorId(state: ConnectorSyncJobListRequest, value: CoreTypes.Id) =
+        member _.ConnectorId(state: ConnectorSyncJobListRequest, value: Types.Id) =
             { state with ConnectorId = Some value }
 
         [<CustomOperation("jobType")>]
@@ -918,21 +919,21 @@ module ConnectorOperations =
     let connectorSyncJobListRequest = ConnectorSyncJobListRequestBuilder()
 
     module SyncJobList =
-        let withFrom (value: CoreTypes.Integer) (req: ConnectorSyncJobListRequest) =
+        let withFrom (value: Types.Integer) (req: ConnectorSyncJobListRequest) =
             { req with From = Some value }
-        let withSize (value: CoreTypes.Integer) (req: ConnectorSyncJobListRequest) =
+        let withSize (value: Types.Integer) (req: ConnectorSyncJobListRequest) =
             { req with Size = Some value }
-        let withStatus (value: ConnectorTypes.SyncStatus) (req: ConnectorSyncJobListRequest) =
+        let withStatus (value: Types.SyncStatus) (req: ConnectorSyncJobListRequest) =
             { req with Status = Some value }
-        let withConnectorId (value: CoreTypes.Id) (req: ConnectorSyncJobListRequest) =
+        let withConnectorId (value: Types.Id) (req: ConnectorSyncJobListRequest) =
             { req with ConnectorId = Some value }
         let withJobType (value: System.Text.Json.JsonElement) (req: ConnectorSyncJobListRequest) =
             { req with JobType = Some value }
 
     type ConnectorSyncJobPostRequest = {
-        Id: CoreTypes.Id
-        JobType: ConnectorTypes.SyncJobType option
-        TriggerMethod: ConnectorTypes.SyncJobTriggerMethod option
+        Id: Types.Id
+        JobType: Types.SyncJobType option
+        TriggerMethod: Types.SyncJobTriggerMethod option
     }
 
         with
@@ -958,35 +959,35 @@ module ConnectorOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: ConnectorSyncJobPostRequest, value: CoreTypes.Id) =
+        member _.Id(state: ConnectorSyncJobPostRequest, value: Types.Id) =
             { state with Id = value }
 
         [<CustomOperation("jobType")>]
-        member _.JobType(state: ConnectorSyncJobPostRequest, value: ConnectorTypes.SyncJobType) =
+        member _.JobType(state: ConnectorSyncJobPostRequest, value: Types.SyncJobType) =
             { state with JobType = Some value }
 
         [<CustomOperation("triggerMethod")>]
-        member _.TriggerMethod(state: ConnectorSyncJobPostRequest, value: ConnectorTypes.SyncJobTriggerMethod) =
+        member _.TriggerMethod(state: ConnectorSyncJobPostRequest, value: Types.SyncJobTriggerMethod) =
             { state with TriggerMethod = Some value }
 
     let connectorSyncJobPostRequest = ConnectorSyncJobPostRequestBuilder()
 
     module SyncJobPost =
-        let withId (value: CoreTypes.Id) (req: ConnectorSyncJobPostRequest) =
+        let withId (value: Types.Id) (req: ConnectorSyncJobPostRequest) =
             { req with Id = value }
-        let withJobType (value: ConnectorTypes.SyncJobType) (req: ConnectorSyncJobPostRequest) =
+        let withJobType (value: Types.SyncJobType) (req: ConnectorSyncJobPostRequest) =
             { req with JobType = Some value }
-        let withTriggerMethod (value: ConnectorTypes.SyncJobTriggerMethod) (req: ConnectorSyncJobPostRequest) =
+        let withTriggerMethod (value: Types.SyncJobTriggerMethod) (req: ConnectorSyncJobPostRequest) =
             { req with TriggerMethod = Some value }
 
     type ConnectorSyncJobUpdateStatsRequest = {
-        ConnectorSyncJobId: CoreTypes.Id
-        DeletedDocumentCount: CoreTypes.Long
-        IndexedDocumentCount: CoreTypes.Long
-        IndexedDocumentVolume: CoreTypes.Long
-        LastSeen: CoreTypes.Duration option
-        Metadata: CoreTypes.Metadata option
-        TotalDocumentCount: CoreTypes.Integer option
+        ConnectorSyncJobId: Types.Id
+        DeletedDocumentCount: Types.Long
+        IndexedDocumentCount: Types.Long
+        IndexedDocumentVolume: Types.Long
+        LastSeen: Types.Duration option
+        Metadata: Types.Metadata option
+        TotalDocumentCount: Types.Integer option
     }
 
         with
@@ -1016,51 +1017,51 @@ module ConnectorOperations =
             }
 
         [<CustomOperation("connectorSyncJobId")>]
-        member _.ConnectorSyncJobId(state: ConnectorSyncJobUpdateStatsRequest, value: CoreTypes.Id) =
+        member _.ConnectorSyncJobId(state: ConnectorSyncJobUpdateStatsRequest, value: Types.Id) =
             { state with ConnectorSyncJobId = value }
 
         [<CustomOperation("deletedDocumentCount")>]
-        member _.DeletedDocumentCount(state: ConnectorSyncJobUpdateStatsRequest, value: CoreTypes.Long) =
+        member _.DeletedDocumentCount(state: ConnectorSyncJobUpdateStatsRequest, value: Types.Long) =
             { state with DeletedDocumentCount = value }
 
         [<CustomOperation("indexedDocumentCount")>]
-        member _.IndexedDocumentCount(state: ConnectorSyncJobUpdateStatsRequest, value: CoreTypes.Long) =
+        member _.IndexedDocumentCount(state: ConnectorSyncJobUpdateStatsRequest, value: Types.Long) =
             { state with IndexedDocumentCount = value }
 
         [<CustomOperation("indexedDocumentVolume")>]
-        member _.IndexedDocumentVolume(state: ConnectorSyncJobUpdateStatsRequest, value: CoreTypes.Long) =
+        member _.IndexedDocumentVolume(state: ConnectorSyncJobUpdateStatsRequest, value: Types.Long) =
             { state with IndexedDocumentVolume = value }
 
         [<CustomOperation("lastSeen")>]
-        member _.LastSeen(state: ConnectorSyncJobUpdateStatsRequest, value: CoreTypes.Duration) =
+        member _.LastSeen(state: ConnectorSyncJobUpdateStatsRequest, value: Types.Duration) =
             { state with LastSeen = Some value }
 
         [<CustomOperation("metadata")>]
-        member _.Metadata(state: ConnectorSyncJobUpdateStatsRequest, value: CoreTypes.Metadata) =
+        member _.Metadata(state: ConnectorSyncJobUpdateStatsRequest, value: Types.Metadata) =
             { state with Metadata = Some value }
 
         [<CustomOperation("totalDocumentCount")>]
-        member _.TotalDocumentCount(state: ConnectorSyncJobUpdateStatsRequest, value: CoreTypes.Integer) =
+        member _.TotalDocumentCount(state: ConnectorSyncJobUpdateStatsRequest, value: Types.Integer) =
             { state with TotalDocumentCount = Some value }
 
     let connectorSyncJobUpdateStatsRequest = ConnectorSyncJobUpdateStatsRequestBuilder()
 
     module SyncJobUpdateStats =
-        let withDeletedDocumentCount (value: CoreTypes.Long) (req: ConnectorSyncJobUpdateStatsRequest) =
+        let withDeletedDocumentCount (value: Types.Long) (req: ConnectorSyncJobUpdateStatsRequest) =
             { req with DeletedDocumentCount = value }
-        let withIndexedDocumentCount (value: CoreTypes.Long) (req: ConnectorSyncJobUpdateStatsRequest) =
+        let withIndexedDocumentCount (value: Types.Long) (req: ConnectorSyncJobUpdateStatsRequest) =
             { req with IndexedDocumentCount = value }
-        let withIndexedDocumentVolume (value: CoreTypes.Long) (req: ConnectorSyncJobUpdateStatsRequest) =
+        let withIndexedDocumentVolume (value: Types.Long) (req: ConnectorSyncJobUpdateStatsRequest) =
             { req with IndexedDocumentVolume = value }
-        let withLastSeen (value: CoreTypes.Duration) (req: ConnectorSyncJobUpdateStatsRequest) =
+        let withLastSeen (value: Types.Duration) (req: ConnectorSyncJobUpdateStatsRequest) =
             { req with LastSeen = Some value }
-        let withMetadata (value: CoreTypes.Metadata) (req: ConnectorSyncJobUpdateStatsRequest) =
+        let withMetadata (value: Types.Metadata) (req: ConnectorSyncJobUpdateStatsRequest) =
             { req with Metadata = Some value }
-        let withTotalDocumentCount (value: CoreTypes.Integer) (req: ConnectorSyncJobUpdateStatsRequest) =
+        let withTotalDocumentCount (value: Types.Integer) (req: ConnectorSyncJobUpdateStatsRequest) =
             { req with TotalDocumentCount = Some value }
 
     type ConnectorUpdateActiveFilteringRequest = {
-        ConnectorId: CoreTypes.Id
+        ConnectorId: Types.Id
     }
 
         with
@@ -1083,13 +1084,13 @@ module ConnectorOperations =
             }
 
         [<CustomOperation("connectorId")>]
-        member _.ConnectorId(state: ConnectorUpdateActiveFilteringRequest, value: CoreTypes.Id) =
+        member _.ConnectorId(state: ConnectorUpdateActiveFilteringRequest, value: Types.Id) =
             { state with ConnectorId = value }
 
     let connectorUpdateActiveFilteringRequest = ConnectorUpdateActiveFilteringRequestBuilder()
 
     type ConnectorUpdateApiKeyIdRequest = {
-        ConnectorId: CoreTypes.Id
+        ConnectorId: Types.Id
         ApiKeyId: string option
         ApiKeySecretId: string option
     }
@@ -1117,7 +1118,7 @@ module ConnectorOperations =
             }
 
         [<CustomOperation("connectorId")>]
-        member _.ConnectorId(state: ConnectorUpdateApiKeyIdRequest, value: CoreTypes.Id) =
+        member _.ConnectorId(state: ConnectorUpdateApiKeyIdRequest, value: Types.Id) =
             { state with ConnectorId = value }
 
         [<CustomOperation("apiKeyId")>]
@@ -1137,8 +1138,8 @@ module ConnectorOperations =
             { req with ApiKeySecretId = Some value }
 
     type ConnectorUpdateConfigurationRequest = {
-        ConnectorId: CoreTypes.Id
-        Configuration: ConnectorTypes.ConnectorConfiguration option
+        ConnectorId: Types.Id
+        Configuration: Types.ConnectorConfiguration option
         Values: Map<string, System.Text.Json.JsonElement> option
     }
 
@@ -1165,11 +1166,11 @@ module ConnectorOperations =
             }
 
         [<CustomOperation("connectorId")>]
-        member _.ConnectorId(state: ConnectorUpdateConfigurationRequest, value: CoreTypes.Id) =
+        member _.ConnectorId(state: ConnectorUpdateConfigurationRequest, value: Types.Id) =
             { state with ConnectorId = value }
 
         [<CustomOperation("configuration")>]
-        member _.Configuration(state: ConnectorUpdateConfigurationRequest, value: ConnectorTypes.ConnectorConfiguration) =
+        member _.Configuration(state: ConnectorUpdateConfigurationRequest, value: Types.ConnectorConfiguration) =
             { state with Configuration = Some value }
 
         [<CustomOperation("values")>]
@@ -1179,14 +1180,14 @@ module ConnectorOperations =
     let connectorUpdateConfigurationRequest = ConnectorUpdateConfigurationRequestBuilder()
 
     module UpdateConfiguration =
-        let withConfiguration (value: ConnectorTypes.ConnectorConfiguration) (req: ConnectorUpdateConfigurationRequest) =
+        let withConfiguration (value: Types.ConnectorConfiguration) (req: ConnectorUpdateConfigurationRequest) =
             { req with Configuration = Some value }
         let withValues (value: Map<string, System.Text.Json.JsonElement>) (req: ConnectorUpdateConfigurationRequest) =
             { req with Values = Some value }
 
     type ConnectorUpdateErrorRequest = {
-        ConnectorId: CoreTypes.Id
-        Error: CoreTypes.WithNullValue<string>
+        ConnectorId: Types.Id
+        Error: Types.WithNullValue<string>
     }
 
         with
@@ -1211,22 +1212,22 @@ module ConnectorOperations =
             }
 
         [<CustomOperation("connectorId")>]
-        member _.ConnectorId(state: ConnectorUpdateErrorRequest, value: CoreTypes.Id) =
+        member _.ConnectorId(state: ConnectorUpdateErrorRequest, value: Types.Id) =
             { state with ConnectorId = value }
 
         [<CustomOperation("error")>]
-        member _.Error(state: ConnectorUpdateErrorRequest, value: CoreTypes.WithNullValue<string>) =
+        member _.Error(state: ConnectorUpdateErrorRequest, value: Types.WithNullValue<string>) =
             { state with Error = value }
 
     let connectorUpdateErrorRequest = ConnectorUpdateErrorRequestBuilder()
 
     module UpdateError =
-        let withError (value: CoreTypes.WithNullValue<string>) (req: ConnectorUpdateErrorRequest) =
+        let withError (value: Types.WithNullValue<string>) (req: ConnectorUpdateErrorRequest) =
             { req with Error = value }
 
     type ConnectorUpdateFeaturesRequest = {
-        ConnectorId: CoreTypes.Id
-        Features: ConnectorTypes.ConnectorFeatures
+        ConnectorId: Types.Id
+        Features: Types.ConnectorFeatures
     }
 
         with
@@ -1251,24 +1252,24 @@ module ConnectorOperations =
             }
 
         [<CustomOperation("connectorId")>]
-        member _.ConnectorId(state: ConnectorUpdateFeaturesRequest, value: CoreTypes.Id) =
+        member _.ConnectorId(state: ConnectorUpdateFeaturesRequest, value: Types.Id) =
             { state with ConnectorId = value }
 
         [<CustomOperation("features")>]
-        member _.Features(state: ConnectorUpdateFeaturesRequest, value: ConnectorTypes.ConnectorFeatures) =
+        member _.Features(state: ConnectorUpdateFeaturesRequest, value: Types.ConnectorFeatures) =
             { state with Features = value }
 
     let connectorUpdateFeaturesRequest = ConnectorUpdateFeaturesRequestBuilder()
 
     module UpdateFeatures =
-        let withFeatures (value: ConnectorTypes.ConnectorFeatures) (req: ConnectorUpdateFeaturesRequest) =
+        let withFeatures (value: Types.ConnectorFeatures) (req: ConnectorUpdateFeaturesRequest) =
             { req with Features = value }
 
     type ConnectorUpdateFilteringRequest = {
-        ConnectorId: CoreTypes.Id
-        Filtering: ConnectorTypes.FilteringConfig list option
-        Rules: ConnectorTypes.FilteringRule list option
-        AdvancedSnippet: ConnectorTypes.FilteringAdvancedSnippet option
+        ConnectorId: Types.Id
+        Filtering: Types.FilteringConfig list option
+        Rules: Types.FilteringRule list option
+        AdvancedSnippet: Types.FilteringAdvancedSnippet option
     }
 
         with
@@ -1295,34 +1296,34 @@ module ConnectorOperations =
             }
 
         [<CustomOperation("connectorId")>]
-        member _.ConnectorId(state: ConnectorUpdateFilteringRequest, value: CoreTypes.Id) =
+        member _.ConnectorId(state: ConnectorUpdateFilteringRequest, value: Types.Id) =
             { state with ConnectorId = value }
 
         [<CustomOperation("filtering")>]
-        member _.Filtering(state: ConnectorUpdateFilteringRequest, value: ConnectorTypes.FilteringConfig list) =
+        member _.Filtering(state: ConnectorUpdateFilteringRequest, value: Types.FilteringConfig list) =
             { state with Filtering = Some value }
 
         [<CustomOperation("rules")>]
-        member _.Rules(state: ConnectorUpdateFilteringRequest, value: ConnectorTypes.FilteringRule list) =
+        member _.Rules(state: ConnectorUpdateFilteringRequest, value: Types.FilteringRule list) =
             { state with Rules = Some value }
 
         [<CustomOperation("advancedSnippet")>]
-        member _.AdvancedSnippet(state: ConnectorUpdateFilteringRequest, value: ConnectorTypes.FilteringAdvancedSnippet) =
+        member _.AdvancedSnippet(state: ConnectorUpdateFilteringRequest, value: Types.FilteringAdvancedSnippet) =
             { state with AdvancedSnippet = Some value }
 
     let connectorUpdateFilteringRequest = ConnectorUpdateFilteringRequestBuilder()
 
     module UpdateFiltering =
-        let withFiltering (value: ConnectorTypes.FilteringConfig list) (req: ConnectorUpdateFilteringRequest) =
+        let withFiltering (value: Types.FilteringConfig list) (req: ConnectorUpdateFilteringRequest) =
             { req with Filtering = Some value }
-        let withRules (value: ConnectorTypes.FilteringRule list) (req: ConnectorUpdateFilteringRequest) =
+        let withRules (value: Types.FilteringRule list) (req: ConnectorUpdateFilteringRequest) =
             { req with Rules = Some value }
-        let withAdvancedSnippet (value: ConnectorTypes.FilteringAdvancedSnippet) (req: ConnectorUpdateFilteringRequest) =
+        let withAdvancedSnippet (value: Types.FilteringAdvancedSnippet) (req: ConnectorUpdateFilteringRequest) =
             { req with AdvancedSnippet = Some value }
 
     type ConnectorUpdateFilteringValidationRequest = {
-        ConnectorId: CoreTypes.Id
-        Validation: ConnectorTypes.FilteringRulesValidation
+        ConnectorId: Types.Id
+        Validation: Types.FilteringRulesValidation
     }
 
         with
@@ -1347,22 +1348,22 @@ module ConnectorOperations =
             }
 
         [<CustomOperation("connectorId")>]
-        member _.ConnectorId(state: ConnectorUpdateFilteringValidationRequest, value: CoreTypes.Id) =
+        member _.ConnectorId(state: ConnectorUpdateFilteringValidationRequest, value: Types.Id) =
             { state with ConnectorId = value }
 
         [<CustomOperation("validation")>]
-        member _.Validation(state: ConnectorUpdateFilteringValidationRequest, value: ConnectorTypes.FilteringRulesValidation) =
+        member _.Validation(state: ConnectorUpdateFilteringValidationRequest, value: Types.FilteringRulesValidation) =
             { state with Validation = value }
 
     let connectorUpdateFilteringValidationRequest = ConnectorUpdateFilteringValidationRequestBuilder()
 
     module UpdateFilteringValidation =
-        let withValidation (value: ConnectorTypes.FilteringRulesValidation) (req: ConnectorUpdateFilteringValidationRequest) =
+        let withValidation (value: Types.FilteringRulesValidation) (req: ConnectorUpdateFilteringValidationRequest) =
             { req with Validation = value }
 
     type ConnectorUpdateIndexNameRequest = {
-        ConnectorId: CoreTypes.Id
-        IndexName: CoreTypes.WithNullValue<CoreTypes.IndexName>
+        ConnectorId: Types.Id
+        IndexName: Types.WithNullValue<Types.IndexName>
     }
 
         with
@@ -1387,21 +1388,21 @@ module ConnectorOperations =
             }
 
         [<CustomOperation("connectorId")>]
-        member _.ConnectorId(state: ConnectorUpdateIndexNameRequest, value: CoreTypes.Id) =
+        member _.ConnectorId(state: ConnectorUpdateIndexNameRequest, value: Types.Id) =
             { state with ConnectorId = value }
 
         [<CustomOperation("indexName")>]
-        member _.IndexName(state: ConnectorUpdateIndexNameRequest, value: CoreTypes.WithNullValue<CoreTypes.IndexName>) =
+        member _.IndexName(state: ConnectorUpdateIndexNameRequest, value: Types.WithNullValue<Types.IndexName>) =
             { state with IndexName = value }
 
     let connectorUpdateIndexNameRequest = ConnectorUpdateIndexNameRequestBuilder()
 
     module UpdateIndexName =
-        let withIndexName (value: CoreTypes.WithNullValue<CoreTypes.IndexName>) (req: ConnectorUpdateIndexNameRequest) =
+        let withIndexName (value: Types.WithNullValue<Types.IndexName>) (req: ConnectorUpdateIndexNameRequest) =
             { req with IndexName = value }
 
     type ConnectorUpdateNameRequest = {
-        ConnectorId: CoreTypes.Id
+        ConnectorId: Types.Id
         Name: string option
         Description: string option
     }
@@ -1429,7 +1430,7 @@ module ConnectorOperations =
             }
 
         [<CustomOperation("connectorId")>]
-        member _.ConnectorId(state: ConnectorUpdateNameRequest, value: CoreTypes.Id) =
+        member _.ConnectorId(state: ConnectorUpdateNameRequest, value: Types.Id) =
             { state with ConnectorId = value }
 
         [<CustomOperation("name")>]
@@ -1449,7 +1450,7 @@ module ConnectorOperations =
             { req with Description = Some value }
 
     type ConnectorUpdateNativeRequest = {
-        ConnectorId: CoreTypes.Id
+        ConnectorId: Types.Id
         IsNative: bool
     }
 
@@ -1475,7 +1476,7 @@ module ConnectorOperations =
             }
 
         [<CustomOperation("connectorId")>]
-        member _.ConnectorId(state: ConnectorUpdateNativeRequest, value: CoreTypes.Id) =
+        member _.ConnectorId(state: ConnectorUpdateNativeRequest, value: Types.Id) =
             { state with ConnectorId = value }
 
         [<CustomOperation("isNative")>]
@@ -1489,8 +1490,8 @@ module ConnectorOperations =
             { req with IsNative = value }
 
     type ConnectorUpdatePipelineRequest = {
-        ConnectorId: CoreTypes.Id
-        Pipeline: ConnectorTypes.IngestPipelineParams
+        ConnectorId: Types.Id
+        Pipeline: Types.IngestPipelineParams
     }
 
         with
@@ -1515,22 +1516,22 @@ module ConnectorOperations =
             }
 
         [<CustomOperation("connectorId")>]
-        member _.ConnectorId(state: ConnectorUpdatePipelineRequest, value: CoreTypes.Id) =
+        member _.ConnectorId(state: ConnectorUpdatePipelineRequest, value: Types.Id) =
             { state with ConnectorId = value }
 
         [<CustomOperation("pipeline")>]
-        member _.Pipeline(state: ConnectorUpdatePipelineRequest, value: ConnectorTypes.IngestPipelineParams) =
+        member _.Pipeline(state: ConnectorUpdatePipelineRequest, value: Types.IngestPipelineParams) =
             { state with Pipeline = value }
 
     let connectorUpdatePipelineRequest = ConnectorUpdatePipelineRequestBuilder()
 
     module UpdatePipeline =
-        let withPipeline (value: ConnectorTypes.IngestPipelineParams) (req: ConnectorUpdatePipelineRequest) =
+        let withPipeline (value: Types.IngestPipelineParams) (req: ConnectorUpdatePipelineRequest) =
             { req with Pipeline = value }
 
     type ConnectorUpdateSchedulingRequest = {
-        ConnectorId: CoreTypes.Id
-        Scheduling: ConnectorTypes.SchedulingConfiguration
+        ConnectorId: Types.Id
+        Scheduling: Types.SchedulingConfiguration
     }
 
         with
@@ -1555,21 +1556,21 @@ module ConnectorOperations =
             }
 
         [<CustomOperation("connectorId")>]
-        member _.ConnectorId(state: ConnectorUpdateSchedulingRequest, value: CoreTypes.Id) =
+        member _.ConnectorId(state: ConnectorUpdateSchedulingRequest, value: Types.Id) =
             { state with ConnectorId = value }
 
         [<CustomOperation("scheduling")>]
-        member _.Scheduling(state: ConnectorUpdateSchedulingRequest, value: ConnectorTypes.SchedulingConfiguration) =
+        member _.Scheduling(state: ConnectorUpdateSchedulingRequest, value: Types.SchedulingConfiguration) =
             { state with Scheduling = value }
 
     let connectorUpdateSchedulingRequest = ConnectorUpdateSchedulingRequestBuilder()
 
     module UpdateScheduling =
-        let withScheduling (value: ConnectorTypes.SchedulingConfiguration) (req: ConnectorUpdateSchedulingRequest) =
+        let withScheduling (value: Types.SchedulingConfiguration) (req: ConnectorUpdateSchedulingRequest) =
             { req with Scheduling = value }
 
     type ConnectorUpdateServiceTypeRequest = {
-        ConnectorId: CoreTypes.Id
+        ConnectorId: Types.Id
         ServiceType: string
     }
 
@@ -1595,7 +1596,7 @@ module ConnectorOperations =
             }
 
         [<CustomOperation("connectorId")>]
-        member _.ConnectorId(state: ConnectorUpdateServiceTypeRequest, value: CoreTypes.Id) =
+        member _.ConnectorId(state: ConnectorUpdateServiceTypeRequest, value: Types.Id) =
             { state with ConnectorId = value }
 
         [<CustomOperation("serviceType")>]
@@ -1609,8 +1610,8 @@ module ConnectorOperations =
             { req with ServiceType = value }
 
     type ConnectorUpdateStatusRequest = {
-        ConnectorId: CoreTypes.Id
-        Status: ConnectorTypes.ConnectorStatus
+        ConnectorId: Types.Id
+        Status: Types.ConnectorStatus
     }
 
         with
@@ -1635,16 +1636,16 @@ module ConnectorOperations =
             }
 
         [<CustomOperation("connectorId")>]
-        member _.ConnectorId(state: ConnectorUpdateStatusRequest, value: CoreTypes.Id) =
+        member _.ConnectorId(state: ConnectorUpdateStatusRequest, value: Types.Id) =
             { state with ConnectorId = value }
 
         [<CustomOperation("status")>]
-        member _.Status(state: ConnectorUpdateStatusRequest, value: ConnectorTypes.ConnectorStatus) =
+        member _.Status(state: ConnectorUpdateStatusRequest, value: Types.ConnectorStatus) =
             { state with Status = value }
 
     let connectorUpdateStatusRequest = ConnectorUpdateStatusRequestBuilder()
 
     module UpdateStatus =
-        let withStatus (value: ConnectorTypes.ConnectorStatus) (req: ConnectorUpdateStatusRequest) =
+        let withStatus (value: Types.ConnectorStatus) (req: ConnectorUpdateStatusRequest) =
             { req with Status = value }
 

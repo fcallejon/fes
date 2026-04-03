@@ -4,13 +4,13 @@ namespace Fes.Generated.Builders
 
 
 open System.Text.Json.Serialization
-open Fes.Generated.Types
+open Fes.Generated
 
 [<AutoOpen>]
 module XpackUsageBuilders =
 
     type MlDataFrameAnalyticsJobsBuilder() =
-        member _.Yield(_: unit) : MlDataFrameAnalyticsJobs =
+        member _.Yield(_: unit) : Types.MlDataFrameAnalyticsJobs =
             {
                 MemoryUsage = None
                 All = Unchecked.defaultof<_>
@@ -19,25 +19,25 @@ module XpackUsageBuilders =
             }
 
         [<CustomOperation("memoryUsage")>]
-        member _.MemoryUsage(state: MlDataFrameAnalyticsJobs, value: XpackUsage.MlDataFrameAnalyticsJobsMemory) =
+        member _.MemoryUsage(state: Types.MlDataFrameAnalyticsJobs, value: Types.MlDataFrameAnalyticsJobsMemory) =
             { state with MemoryUsage = Some value }
 
         [<CustomOperation("all")>]
-        member _.All(state: MlDataFrameAnalyticsJobs, value: XpackUsage.MlDataFrameAnalyticsJobsCount) =
+        member _.All(state: Types.MlDataFrameAnalyticsJobs, value: Types.MlDataFrameAnalyticsJobsCount) =
             { state with All = value }
 
         [<CustomOperation("analysisCounts")>]
-        member _.AnalysisCounts(state: MlDataFrameAnalyticsJobs, value: XpackUsage.MlDataFrameAnalyticsJobsAnalysis) =
+        member _.AnalysisCounts(state: Types.MlDataFrameAnalyticsJobs, value: Types.MlDataFrameAnalyticsJobsAnalysis) =
             { state with AnalysisCounts = Some value }
 
         [<CustomOperation("stopped")>]
-        member _.Stopped(state: MlDataFrameAnalyticsJobs, value: XpackUsage.MlDataFrameAnalyticsJobsCount) =
+        member _.Stopped(state: Types.MlDataFrameAnalyticsJobs, value: Types.MlDataFrameAnalyticsJobsCount) =
             { state with Stopped = Some value }
 
     let mlDataFrameAnalyticsJobs = MlDataFrameAnalyticsJobsBuilder()
 
     type MlDataFrameAnalyticsJobsAnalysisBuilder() =
-        member _.Yield(_: unit) : MlDataFrameAnalyticsJobsAnalysis =
+        member _.Yield(_: unit) : Types.MlDataFrameAnalyticsJobsAnalysis =
             {
                 Classification = None
                 OutlierDetection = None
@@ -45,21 +45,21 @@ module XpackUsageBuilders =
             }
 
         [<CustomOperation("classification")>]
-        member _.Classification(state: MlDataFrameAnalyticsJobsAnalysis, value: CoreTypes.Integer) =
+        member _.Classification(state: Types.MlDataFrameAnalyticsJobsAnalysis, value: Types.Integer) =
             { state with Classification = Some value }
 
         [<CustomOperation("outlierDetection")>]
-        member _.OutlierDetection(state: MlDataFrameAnalyticsJobsAnalysis, value: CoreTypes.Integer) =
+        member _.OutlierDetection(state: Types.MlDataFrameAnalyticsJobsAnalysis, value: Types.Integer) =
             { state with OutlierDetection = Some value }
 
         [<CustomOperation("regression")>]
-        member _.Regression(state: MlDataFrameAnalyticsJobsAnalysis, value: CoreTypes.Integer) =
+        member _.Regression(state: Types.MlDataFrameAnalyticsJobsAnalysis, value: Types.Integer) =
             { state with Regression = Some value }
 
     let mlDataFrameAnalyticsJobsAnalysis = MlDataFrameAnalyticsJobsAnalysisBuilder()
 
     type MlInferenceTrainedModelsBuilder() =
-        member _.Yield(_: unit) : MlInferenceTrainedModels =
+        member _.Yield(_: unit) : Types.MlInferenceTrainedModels =
             {
                 EstimatedOperations = None
                 EstimatedHeapMemoryUsageBytes = None
@@ -69,29 +69,29 @@ module XpackUsageBuilders =
             }
 
         [<CustomOperation("estimatedOperations")>]
-        member _.EstimatedOperations(state: MlInferenceTrainedModels, value: MlTypes.JobStatistics) =
+        member _.EstimatedOperations(state: Types.MlInferenceTrainedModels, value: Types.JobStatistics) =
             { state with EstimatedOperations = Some value }
 
         [<CustomOperation("estimatedHeapMemoryUsageBytes")>]
-        member _.EstimatedHeapMemoryUsageBytes(state: MlInferenceTrainedModels, value: MlTypes.JobStatistics) =
+        member _.EstimatedHeapMemoryUsageBytes(state: Types.MlInferenceTrainedModels, value: Types.JobStatistics) =
             { state with EstimatedHeapMemoryUsageBytes = Some value }
 
         [<CustomOperation("count")>]
-        member _.Count(state: MlInferenceTrainedModels, value: XpackUsage.MlInferenceTrainedModelsCount) =
+        member _.Count(state: Types.MlInferenceTrainedModels, value: Types.MlInferenceTrainedModelsCount) =
             { state with Count = Some value }
 
         [<CustomOperation("all")>]
-        member _.All(state: MlInferenceTrainedModels, value: XpackUsage.MlCounter) =
+        member _.All(state: Types.MlInferenceTrainedModels, value: Types.MlCounter) =
             { state with All = value }
 
         [<CustomOperation("modelSizeBytes")>]
-        member _.ModelSizeBytes(state: MlInferenceTrainedModels, value: MlTypes.JobStatistics) =
+        member _.ModelSizeBytes(state: Types.MlInferenceTrainedModels, value: Types.JobStatistics) =
             { state with ModelSizeBytes = Some value }
 
     let mlInferenceTrainedModels = MlInferenceTrainedModelsBuilder()
 
     type MlInferenceTrainedModelsCountBuilder() =
-        member _.Yield(_: unit) : MlInferenceTrainedModelsCount =
+        member _.Yield(_: unit) : Types.MlInferenceTrainedModelsCount =
             {
                 Total = Unchecked.defaultof<_>
                 Prepackaged = Unchecked.defaultof<_>
@@ -104,41 +104,41 @@ module XpackUsageBuilders =
             }
 
         [<CustomOperation("total")>]
-        member _.Total(state: MlInferenceTrainedModelsCount, value: CoreTypes.Long) =
+        member _.Total(state: Types.MlInferenceTrainedModelsCount, value: Types.Long) =
             { state with Total = value }
 
         [<CustomOperation("prepackaged")>]
-        member _.Prepackaged(state: MlInferenceTrainedModelsCount, value: CoreTypes.Long) =
+        member _.Prepackaged(state: Types.MlInferenceTrainedModelsCount, value: Types.Long) =
             { state with Prepackaged = value }
 
         [<CustomOperation("other")>]
-        member _.Other(state: MlInferenceTrainedModelsCount, value: CoreTypes.Long) =
+        member _.Other(state: Types.MlInferenceTrainedModelsCount, value: Types.Long) =
             { state with Other = value }
 
         [<CustomOperation("passThrough")>]
-        member _.PassThrough(state: MlInferenceTrainedModelsCount, value: CoreTypes.Long) =
+        member _.PassThrough(state: Types.MlInferenceTrainedModelsCount, value: Types.Long) =
             { state with PassThrough = Some value }
 
         [<CustomOperation("regression")>]
-        member _.Regression(state: MlInferenceTrainedModelsCount, value: CoreTypes.Long) =
+        member _.Regression(state: Types.MlInferenceTrainedModelsCount, value: Types.Long) =
             { state with Regression = Some value }
 
         [<CustomOperation("classification")>]
-        member _.Classification(state: MlInferenceTrainedModelsCount, value: CoreTypes.Long) =
+        member _.Classification(state: Types.MlInferenceTrainedModelsCount, value: Types.Long) =
             { state with Classification = Some value }
 
         [<CustomOperation("ner")>]
-        member _.Ner(state: MlInferenceTrainedModelsCount, value: CoreTypes.Long) =
+        member _.Ner(state: Types.MlInferenceTrainedModelsCount, value: Types.Long) =
             { state with Ner = Some value }
 
         [<CustomOperation("textEmbedding")>]
-        member _.TextEmbedding(state: MlInferenceTrainedModelsCount, value: CoreTypes.Long) =
+        member _.TextEmbedding(state: Types.MlInferenceTrainedModelsCount, value: Types.Long) =
             { state with TextEmbedding = Some value }
 
     let mlInferenceTrainedModelsCount = MlInferenceTrainedModelsCountBuilder()
 
-    type PhasesBuilder() =
-        member _.Yield(_: unit) : Phases =
+    type XpackUsagePhasesBuilder() =
+        member _.Yield(_: unit) : Types.XpackUsagePhases =
             {
                 Cold = None
                 Delete = None
@@ -148,29 +148,29 @@ module XpackUsageBuilders =
             }
 
         [<CustomOperation("cold")>]
-        member _.Cold(state: Phases, value: XpackUsage.Phase) =
+        member _.Cold(state: Types.XpackUsagePhases, value: Types.XpackUsagePhase) =
             { state with Cold = Some value }
 
         [<CustomOperation("delete")>]
-        member _.Delete(state: Phases, value: XpackUsage.Phase) =
+        member _.Delete(state: Types.XpackUsagePhases, value: Types.XpackUsagePhase) =
             { state with Delete = Some value }
 
         [<CustomOperation("frozen")>]
-        member _.Frozen(state: Phases, value: XpackUsage.Phase) =
+        member _.Frozen(state: Types.XpackUsagePhases, value: Types.XpackUsagePhase) =
             { state with Frozen = Some value }
 
         [<CustomOperation("hot")>]
-        member _.Hot(state: Phases, value: XpackUsage.Phase) =
+        member _.Hot(state: Types.XpackUsagePhases, value: Types.XpackUsagePhase) =
             { state with Hot = Some value }
 
         [<CustomOperation("warm")>]
-        member _.Warm(state: Phases, value: XpackUsage.Phase) =
+        member _.Warm(state: Types.XpackUsagePhases, value: Types.XpackUsagePhase) =
             { state with Warm = Some value }
 
-    let phases = PhasesBuilder()
+    let xpackUsagePhases = XpackUsagePhasesBuilder()
 
     type QueryBuilder() =
-        member _.Yield(_: unit) : Query =
+        member _.Yield(_: unit) : Types.Query =
             {
                 Count = None
                 Failed = None
@@ -179,25 +179,25 @@ module XpackUsageBuilders =
             }
 
         [<CustomOperation("count")>]
-        member _.Count(state: Query, value: CoreTypes.Integer) =
+        member _.Count(state: Types.Query, value: Types.Integer) =
             { state with Count = Some value }
 
         [<CustomOperation("failed")>]
-        member _.Failed(state: Query, value: CoreTypes.Integer) =
+        member _.Failed(state: Types.Query, value: Types.Integer) =
             { state with Failed = Some value }
 
         [<CustomOperation("paging")>]
-        member _.Paging(state: Query, value: CoreTypes.Integer) =
+        member _.Paging(state: Types.Query, value: Types.Integer) =
             { state with Paging = Some value }
 
         [<CustomOperation("total")>]
-        member _.Total(state: Query, value: CoreTypes.Integer) =
+        member _.Total(state: Types.Query, value: Types.Integer) =
             { state with Total = Some value }
 
     let query = QueryBuilder()
 
     type RealmBuilder() =
-        member _.Yield(_: unit) : Realm =
+        member _.Yield(_: unit) : Types.Realm =
             {
                 Name = None
                 Order = None
@@ -210,41 +210,41 @@ module XpackUsageBuilders =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: Realm, value: string list) =
+        member _.Name(state: Types.Realm, value: string list) =
             { state with Name = Some value }
 
         [<CustomOperation("order")>]
-        member _.Order(state: Realm, value: CoreTypes.Long list) =
+        member _.Order(state: Types.Realm, value: Types.Long list) =
             { state with Order = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: Realm, value: CoreTypes.Long list) =
+        member _.Size(state: Types.Realm, value: Types.Long list) =
             { state with Size = Some value }
 
         [<CustomOperation("cache")>]
-        member _.Cache(state: Realm, value: XpackUsage.RealmCache list) =
+        member _.Cache(state: Types.Realm, value: Types.RealmCache list) =
             { state with Cache = Some value }
 
         [<CustomOperation("hasAuthorizationRealms")>]
-        member _.HasAuthorizationRealms(state: Realm, value: bool list) =
+        member _.HasAuthorizationRealms(state: Types.Realm, value: bool list) =
             { state with HasAuthorizationRealms = Some value }
 
         [<CustomOperation("hasDefaultUsernamePattern")>]
-        member _.HasDefaultUsernamePattern(state: Realm, value: bool list) =
+        member _.HasDefaultUsernamePattern(state: Types.Realm, value: bool list) =
             { state with HasDefaultUsernamePattern = Some value }
 
         [<CustomOperation("hasTruststore")>]
-        member _.HasTruststore(state: Realm, value: bool list) =
+        member _.HasTruststore(state: Types.Realm, value: bool list) =
             { state with HasTruststore = Some value }
 
         [<CustomOperation("isAuthenticationDelegated")>]
-        member _.IsAuthenticationDelegated(state: Realm, value: bool list) =
+        member _.IsAuthenticationDelegated(state: Types.Realm, value: bool list) =
             { state with IsAuthenticationDelegated = Some value }
 
     let realm = RealmBuilder()
 
     type SearchableSnapshotsBuilder() =
-        member _.Yield(_: unit) : SearchableSnapshots =
+        member _.Yield(_: unit) : Types.SearchableSnapshots =
             {
                 IndicesCount = Unchecked.defaultof<_>
                 FullCopyIndicesCount = None
@@ -252,38 +252,38 @@ module XpackUsageBuilders =
             }
 
         [<CustomOperation("indicesCount")>]
-        member _.IndicesCount(state: SearchableSnapshots, value: CoreTypes.Integer) =
+        member _.IndicesCount(state: Types.SearchableSnapshots, value: Types.Integer) =
             { state with IndicesCount = value }
 
         [<CustomOperation("fullCopyIndicesCount")>]
-        member _.FullCopyIndicesCount(state: SearchableSnapshots, value: CoreTypes.Integer) =
+        member _.FullCopyIndicesCount(state: Types.SearchableSnapshots, value: Types.Integer) =
             { state with FullCopyIndicesCount = Some value }
 
         [<CustomOperation("sharedCacheIndicesCount")>]
-        member _.SharedCacheIndicesCount(state: SearchableSnapshots, value: CoreTypes.Integer) =
+        member _.SharedCacheIndicesCount(state: Types.SearchableSnapshots, value: Types.Integer) =
             { state with SharedCacheIndicesCount = Some value }
 
     let searchableSnapshots = SearchableSnapshotsBuilder()
 
     type SlmBuilder() =
-        member _.Yield(_: unit) : Slm =
+        member _.Yield(_: unit) : Types.Slm =
             {
                 PolicyCount = None
                 PolicyStats = None
             }
 
         [<CustomOperation("policyCount")>]
-        member _.PolicyCount(state: Slm, value: CoreTypes.Integer) =
+        member _.PolicyCount(state: Types.Slm, value: Types.Integer) =
             { state with PolicyCount = Some value }
 
         [<CustomOperation("policyStats")>]
-        member _.PolicyStats(state: Slm, value: SlmTypes.Statistics) =
+        member _.PolicyStats(state: Types.Slm, value: Types.Statistics) =
             { state with PolicyStats = Some value }
 
     let slm = SlmBuilder()
 
     type WatcherWatchBuilder() =
-        member _.Yield(_: unit) : WatcherWatch =
+        member _.Yield(_: unit) : Types.WatcherWatch =
             {
                 Input = Unchecked.defaultof<_>
                 Condition = None
@@ -292,19 +292,19 @@ module XpackUsageBuilders =
             }
 
         [<CustomOperation("input")>]
-        member _.Input(state: WatcherWatch, value: Map<CoreTypes.Name, XpackUsage.Counter>) =
+        member _.Input(state: Types.WatcherWatch, value: Map<Types.Name, Types.Counter>) =
             { state with Input = value }
 
         [<CustomOperation("condition")>]
-        member _.Condition(state: WatcherWatch, value: Map<CoreTypes.Name, XpackUsage.Counter>) =
+        member _.Condition(state: Types.WatcherWatch, value: Map<Types.Name, Types.Counter>) =
             { state with Condition = Some value }
 
         [<CustomOperation("action")>]
-        member _.Action(state: WatcherWatch, value: Map<CoreTypes.Name, XpackUsage.Counter>) =
+        member _.Action(state: Types.WatcherWatch, value: Map<Types.Name, Types.Counter>) =
             { state with Action = Some value }
 
         [<CustomOperation("trigger")>]
-        member _.Trigger(state: WatcherWatch, value: XpackUsage.WatcherWatchTrigger) =
+        member _.Trigger(state: Types.WatcherWatch, value: Types.WatcherWatchTrigger) =
             { state with Trigger = value }
 
     let watcherWatch = WatcherWatchBuilder()

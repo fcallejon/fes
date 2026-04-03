@@ -4,13 +4,13 @@ namespace Fes.Generated.Builders
 
 
 open System.Text.Json.Serialization
-open Fes.Generated.Types
+open Fes.Generated
 
 [<AutoOpen>]
 module MlTypesBuilders =
 
     type AdaptiveAllocationsSettingsBuilder() =
-        member _.Yield(_: unit) : AdaptiveAllocationsSettings =
+        member _.Yield(_: unit) : Types.AdaptiveAllocationsSettings =
             {
                 Enabled = Unchecked.defaultof<_>
                 MinNumberOfAllocations = None
@@ -18,21 +18,21 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("enabled")>]
-        member _.Enabled(state: AdaptiveAllocationsSettings, value: bool) =
+        member _.Enabled(state: Types.AdaptiveAllocationsSettings, value: bool) =
             { state with Enabled = value }
 
         [<CustomOperation("minNumberOfAllocations")>]
-        member _.MinNumberOfAllocations(state: AdaptiveAllocationsSettings, value: CoreTypes.Integer) =
+        member _.MinNumberOfAllocations(state: Types.AdaptiveAllocationsSettings, value: Types.Integer) =
             { state with MinNumberOfAllocations = Some value }
 
         [<CustomOperation("maxNumberOfAllocations")>]
-        member _.MaxNumberOfAllocations(state: AdaptiveAllocationsSettings, value: CoreTypes.Integer) =
+        member _.MaxNumberOfAllocations(state: Types.AdaptiveAllocationsSettings, value: Types.Integer) =
             { state with MaxNumberOfAllocations = Some value }
 
     let adaptiveAllocationsSettings = AdaptiveAllocationsSettingsBuilder()
 
     type AnalysisConfigBuilder() =
-        member _.Yield(_: unit) : AnalysisConfig =
+        member _.Yield(_: unit) : Types.AnalysisConfig =
             {
                 BucketSpan = None
                 CategorizationAnalyzer = None
@@ -48,53 +48,53 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("bucketSpan")>]
-        member _.BucketSpan(state: AnalysisConfig, value: CoreTypes.Duration) =
+        member _.BucketSpan(state: Types.AnalysisConfig, value: Types.Duration) =
             { state with BucketSpan = Some value }
 
         [<CustomOperation("categorizationAnalyzer")>]
-        member _.CategorizationAnalyzer(state: AnalysisConfig, value: MlTypes.CategorizationAnalyzer) =
+        member _.CategorizationAnalyzer(state: Types.AnalysisConfig, value: Types.CategorizationAnalyzer) =
             { state with CategorizationAnalyzer = Some value }
 
         [<CustomOperation("categorizationFieldName")>]
-        member _.CategorizationFieldName(state: AnalysisConfig, value: CoreTypes.Field) =
+        member _.CategorizationFieldName(state: Types.AnalysisConfig, value: Types.Field) =
             { state with CategorizationFieldName = Some value }
 
         [<CustomOperation("categorizationFilters")>]
-        member _.CategorizationFilters(state: AnalysisConfig, value: string list) =
+        member _.CategorizationFilters(state: Types.AnalysisConfig, value: string list) =
             { state with CategorizationFilters = Some value }
 
         [<CustomOperation("detectors")>]
-        member _.Detectors(state: AnalysisConfig, value: MlTypes.Detector list) =
+        member _.Detectors(state: Types.AnalysisConfig, value: Types.Detector list) =
             { state with Detectors = value }
 
         [<CustomOperation("influencers")>]
-        member _.Influencers(state: AnalysisConfig, value: CoreTypes.Field list) =
+        member _.Influencers(state: Types.AnalysisConfig, value: Types.Field list) =
             { state with Influencers = Some value }
 
         [<CustomOperation("latency")>]
-        member _.Latency(state: AnalysisConfig, value: CoreTypes.Duration) =
+        member _.Latency(state: Types.AnalysisConfig, value: Types.Duration) =
             { state with Latency = Some value }
 
         [<CustomOperation("modelPruneWindow")>]
-        member _.ModelPruneWindow(state: AnalysisConfig, value: CoreTypes.Duration) =
+        member _.ModelPruneWindow(state: Types.AnalysisConfig, value: Types.Duration) =
             { state with ModelPruneWindow = Some value }
 
         [<CustomOperation("multivariateByFields")>]
-        member _.MultivariateByFields(state: AnalysisConfig, value: bool) =
+        member _.MultivariateByFields(state: Types.AnalysisConfig, value: bool) =
             { state with MultivariateByFields = Some value }
 
         [<CustomOperation("perPartitionCategorization")>]
-        member _.PerPartitionCategorization(state: AnalysisConfig, value: MlTypes.PerPartitionCategorization) =
+        member _.PerPartitionCategorization(state: Types.AnalysisConfig, value: Types.PerPartitionCategorization) =
             { state with PerPartitionCategorization = Some value }
 
         [<CustomOperation("summaryCountFieldName")>]
-        member _.SummaryCountFieldName(state: AnalysisConfig, value: CoreTypes.Field) =
+        member _.SummaryCountFieldName(state: Types.AnalysisConfig, value: Types.Field) =
             { state with SummaryCountFieldName = Some value }
 
     let analysisConfig = AnalysisConfigBuilder()
 
     type AnalysisConfigReadBuilder() =
-        member _.Yield(_: unit) : AnalysisConfigRead =
+        member _.Yield(_: unit) : Types.AnalysisConfigRead =
             {
                 BucketSpan = Unchecked.defaultof<_>
                 Detectors = Unchecked.defaultof<_>
@@ -110,70 +110,70 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("bucketSpan")>]
-        member _.BucketSpan(state: AnalysisConfigRead, value: CoreTypes.Duration) =
+        member _.BucketSpan(state: Types.AnalysisConfigRead, value: Types.Duration) =
             { state with BucketSpan = value }
 
         [<CustomOperation("detectors")>]
-        member _.Detectors(state: AnalysisConfigRead, value: MlTypes.DetectorRead list) =
+        member _.Detectors(state: Types.AnalysisConfigRead, value: Types.DetectorRead list) =
             { state with Detectors = value }
 
         [<CustomOperation("influencers")>]
-        member _.Influencers(state: AnalysisConfigRead, value: CoreTypes.Field list) =
+        member _.Influencers(state: Types.AnalysisConfigRead, value: Types.Field list) =
             { state with Influencers = value }
 
         [<CustomOperation("categorizationAnalyzer")>]
-        member _.CategorizationAnalyzer(state: AnalysisConfigRead, value: MlTypes.CategorizationAnalyzer) =
+        member _.CategorizationAnalyzer(state: Types.AnalysisConfigRead, value: Types.CategorizationAnalyzer) =
             { state with CategorizationAnalyzer = Some value }
 
         [<CustomOperation("categorizationFieldName")>]
-        member _.CategorizationFieldName(state: AnalysisConfigRead, value: CoreTypes.Field) =
+        member _.CategorizationFieldName(state: Types.AnalysisConfigRead, value: Types.Field) =
             { state with CategorizationFieldName = Some value }
 
         [<CustomOperation("categorizationFilters")>]
-        member _.CategorizationFilters(state: AnalysisConfigRead, value: string list) =
+        member _.CategorizationFilters(state: Types.AnalysisConfigRead, value: string list) =
             { state with CategorizationFilters = Some value }
 
         [<CustomOperation("latency")>]
-        member _.Latency(state: AnalysisConfigRead, value: CoreTypes.Duration) =
+        member _.Latency(state: Types.AnalysisConfigRead, value: Types.Duration) =
             { state with Latency = Some value }
 
         [<CustomOperation("modelPruneWindow")>]
-        member _.ModelPruneWindow(state: AnalysisConfigRead, value: CoreTypes.Duration) =
+        member _.ModelPruneWindow(state: Types.AnalysisConfigRead, value: Types.Duration) =
             { state with ModelPruneWindow = Some value }
 
         [<CustomOperation("multivariateByFields")>]
-        member _.MultivariateByFields(state: AnalysisConfigRead, value: bool) =
+        member _.MultivariateByFields(state: Types.AnalysisConfigRead, value: bool) =
             { state with MultivariateByFields = Some value }
 
         [<CustomOperation("perPartitionCategorization")>]
-        member _.PerPartitionCategorization(state: AnalysisConfigRead, value: MlTypes.PerPartitionCategorization) =
+        member _.PerPartitionCategorization(state: Types.AnalysisConfigRead, value: Types.PerPartitionCategorization) =
             { state with PerPartitionCategorization = Some value }
 
         [<CustomOperation("summaryCountFieldName")>]
-        member _.SummaryCountFieldName(state: AnalysisConfigRead, value: CoreTypes.Field) =
+        member _.SummaryCountFieldName(state: Types.AnalysisConfigRead, value: Types.Field) =
             { state with SummaryCountFieldName = Some value }
 
     let analysisConfigRead = AnalysisConfigReadBuilder()
 
     type AnalysisLimitsBuilder() =
-        member _.Yield(_: unit) : AnalysisLimits =
+        member _.Yield(_: unit) : Types.AnalysisLimits =
             {
                 CategorizationExamplesLimit = None
                 ModelMemoryLimit = None
             }
 
         [<CustomOperation("categorizationExamplesLimit")>]
-        member _.CategorizationExamplesLimit(state: AnalysisLimits, value: CoreTypes.Long) =
+        member _.CategorizationExamplesLimit(state: Types.AnalysisLimits, value: Types.Long) =
             { state with CategorizationExamplesLimit = Some value }
 
         [<CustomOperation("modelMemoryLimit")>]
-        member _.ModelMemoryLimit(state: AnalysisLimits, value: CoreTypes.ByteSize) =
+        member _.ModelMemoryLimit(state: Types.AnalysisLimits, value: Types.ByteSize) =
             { state with ModelMemoryLimit = Some value }
 
     let analysisLimits = AnalysisLimitsBuilder()
 
     type AnomalyBuilder() =
-        member _.Yield(_: unit) : Anomaly =
+        member _.Yield(_: unit) : Types.Anomaly =
             {
                 Actual = None
                 AnomalyScoreExplanation = None
@@ -202,105 +202,105 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("actual")>]
-        member _.Actual(state: Anomaly, value: CoreTypes.Double list) =
+        member _.Actual(state: Types.Anomaly, value: Types.Double list) =
             { state with Actual = Some value }
 
         [<CustomOperation("anomalyScoreExplanation")>]
-        member _.AnomalyScoreExplanation(state: Anomaly, value: MlTypes.AnomalyExplanation) =
+        member _.AnomalyScoreExplanation(state: Types.Anomaly, value: Types.AnomalyExplanation) =
             { state with AnomalyScoreExplanation = Some value }
 
         [<CustomOperation("bucketSpan")>]
-        member _.BucketSpan(state: Anomaly, value: CoreTypes.DurationValue<CoreTypes.UnitSeconds>) =
+        member _.BucketSpan(state: Types.Anomaly, value: Types.DurationValue<Types.UnitSeconds>) =
             { state with BucketSpan = value }
 
         [<CustomOperation("byFieldName")>]
-        member _.ByFieldName(state: Anomaly, value: string) =
+        member _.ByFieldName(state: Types.Anomaly, value: string) =
             { state with ByFieldName = Some value }
 
         [<CustomOperation("byFieldValue")>]
-        member _.ByFieldValue(state: Anomaly, value: string) =
+        member _.ByFieldValue(state: Types.Anomaly, value: string) =
             { state with ByFieldValue = Some value }
 
         [<CustomOperation("causes")>]
-        member _.Causes(state: Anomaly, value: MlTypes.AnomalyCause list) =
+        member _.Causes(state: Types.Anomaly, value: Types.AnomalyCause list) =
             { state with Causes = Some value }
 
         [<CustomOperation("detectorIndex")>]
-        member _.DetectorIndex(state: Anomaly, value: CoreTypes.Integer) =
+        member _.DetectorIndex(state: Types.Anomaly, value: Types.Integer) =
             { state with DetectorIndex = value }
 
         [<CustomOperation("fieldName")>]
-        member _.FieldName(state: Anomaly, value: string) =
+        member _.FieldName(state: Types.Anomaly, value: string) =
             { state with FieldName = Some value }
 
         [<CustomOperation("function'")>]
-        member _.Function(state: Anomaly, value: string) =
+        member _.Function(state: Types.Anomaly, value: string) =
             { state with Function = Some value }
 
         [<CustomOperation("functionDescription")>]
-        member _.FunctionDescription(state: Anomaly, value: string) =
+        member _.FunctionDescription(state: Types.Anomaly, value: string) =
             { state with FunctionDescription = Some value }
 
         [<CustomOperation("geoResults")>]
-        member _.GeoResults(state: Anomaly, value: MlTypes.GeoResults) =
+        member _.GeoResults(state: Types.Anomaly, value: Types.GeoResults) =
             { state with GeoResults = Some value }
 
         [<CustomOperation("influencers")>]
-        member _.Influencers(state: Anomaly, value: MlTypes.Influence list) =
+        member _.Influencers(state: Types.Anomaly, value: Types.Influence list) =
             { state with Influencers = Some value }
 
         [<CustomOperation("initialRecordScore")>]
-        member _.InitialRecordScore(state: Anomaly, value: CoreTypes.Double) =
+        member _.InitialRecordScore(state: Types.Anomaly, value: Types.Double) =
             { state with InitialRecordScore = value }
 
         [<CustomOperation("isInterim")>]
-        member _.IsInterim(state: Anomaly, value: bool) =
+        member _.IsInterim(state: Types.Anomaly, value: bool) =
             { state with IsInterim = value }
 
         [<CustomOperation("jobId")>]
-        member _.JobId(state: Anomaly, value: string) =
+        member _.JobId(state: Types.Anomaly, value: string) =
             { state with JobId = value }
 
         [<CustomOperation("overFieldName")>]
-        member _.OverFieldName(state: Anomaly, value: string) =
+        member _.OverFieldName(state: Types.Anomaly, value: string) =
             { state with OverFieldName = Some value }
 
         [<CustomOperation("overFieldValue")>]
-        member _.OverFieldValue(state: Anomaly, value: string) =
+        member _.OverFieldValue(state: Types.Anomaly, value: string) =
             { state with OverFieldValue = Some value }
 
         [<CustomOperation("partitionFieldName")>]
-        member _.PartitionFieldName(state: Anomaly, value: string) =
+        member _.PartitionFieldName(state: Types.Anomaly, value: string) =
             { state with PartitionFieldName = Some value }
 
         [<CustomOperation("partitionFieldValue")>]
-        member _.PartitionFieldValue(state: Anomaly, value: string) =
+        member _.PartitionFieldValue(state: Types.Anomaly, value: string) =
             { state with PartitionFieldValue = Some value }
 
         [<CustomOperation("probability")>]
-        member _.Probability(state: Anomaly, value: CoreTypes.Double) =
+        member _.Probability(state: Types.Anomaly, value: Types.Double) =
             { state with Probability = value }
 
         [<CustomOperation("recordScore")>]
-        member _.RecordScore(state: Anomaly, value: CoreTypes.Double) =
+        member _.RecordScore(state: Types.Anomaly, value: Types.Double) =
             { state with RecordScore = value }
 
         [<CustomOperation("resultType")>]
-        member _.ResultType(state: Anomaly, value: string) =
+        member _.ResultType(state: Types.Anomaly, value: string) =
             { state with ResultType = value }
 
         [<CustomOperation("timestamp")>]
-        member _.Timestamp(state: Anomaly, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
+        member _.Timestamp(state: Types.Anomaly, value: Types.EpochTime<Types.UnitMillis>) =
             { state with Timestamp = value }
 
         [<CustomOperation("typical")>]
-        member _.Typical(state: Anomaly, value: CoreTypes.Double list) =
+        member _.Typical(state: Types.Anomaly, value: Types.Double list) =
             { state with Typical = Some value }
 
     let anomaly = AnomalyBuilder()
 
     type AnomalyCauseBuilder() =
-        member _.Yield(_: unit) : AnomalyCause =
+        member _.Yield(_: unit) : Types.AnomalyCause =
             {
                 Actual = None
                 ByFieldName = None
@@ -320,69 +320,69 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("actual")>]
-        member _.Actual(state: AnomalyCause, value: CoreTypes.Double list) =
+        member _.Actual(state: Types.AnomalyCause, value: Types.Double list) =
             { state with Actual = Some value }
 
         [<CustomOperation("byFieldName")>]
-        member _.ByFieldName(state: AnomalyCause, value: CoreTypes.Name) =
+        member _.ByFieldName(state: Types.AnomalyCause, value: Types.Name) =
             { state with ByFieldName = Some value }
 
         [<CustomOperation("byFieldValue")>]
-        member _.ByFieldValue(state: AnomalyCause, value: string) =
+        member _.ByFieldValue(state: Types.AnomalyCause, value: string) =
             { state with ByFieldValue = Some value }
 
         [<CustomOperation("correlatedByFieldValue")>]
-        member _.CorrelatedByFieldValue(state: AnomalyCause, value: string) =
+        member _.CorrelatedByFieldValue(state: Types.AnomalyCause, value: string) =
             { state with CorrelatedByFieldValue = Some value }
 
         [<CustomOperation("fieldName")>]
-        member _.FieldName(state: AnomalyCause, value: CoreTypes.Field) =
+        member _.FieldName(state: Types.AnomalyCause, value: Types.Field) =
             { state with FieldName = Some value }
 
         [<CustomOperation("function'")>]
-        member _.Function(state: AnomalyCause, value: string) =
+        member _.Function(state: Types.AnomalyCause, value: string) =
             { state with Function = Some value }
 
         [<CustomOperation("functionDescription")>]
-        member _.FunctionDescription(state: AnomalyCause, value: string) =
+        member _.FunctionDescription(state: Types.AnomalyCause, value: string) =
             { state with FunctionDescription = Some value }
 
         [<CustomOperation("geoResults")>]
-        member _.GeoResults(state: AnomalyCause, value: MlTypes.GeoResults) =
+        member _.GeoResults(state: Types.AnomalyCause, value: Types.GeoResults) =
             { state with GeoResults = Some value }
 
         [<CustomOperation("influencers")>]
-        member _.Influencers(state: AnomalyCause, value: MlTypes.Influence list) =
+        member _.Influencers(state: Types.AnomalyCause, value: Types.Influence list) =
             { state with Influencers = Some value }
 
         [<CustomOperation("overFieldName")>]
-        member _.OverFieldName(state: AnomalyCause, value: CoreTypes.Name) =
+        member _.OverFieldName(state: Types.AnomalyCause, value: Types.Name) =
             { state with OverFieldName = Some value }
 
         [<CustomOperation("overFieldValue")>]
-        member _.OverFieldValue(state: AnomalyCause, value: string) =
+        member _.OverFieldValue(state: Types.AnomalyCause, value: string) =
             { state with OverFieldValue = Some value }
 
         [<CustomOperation("partitionFieldName")>]
-        member _.PartitionFieldName(state: AnomalyCause, value: string) =
+        member _.PartitionFieldName(state: Types.AnomalyCause, value: string) =
             { state with PartitionFieldName = Some value }
 
         [<CustomOperation("partitionFieldValue")>]
-        member _.PartitionFieldValue(state: AnomalyCause, value: string) =
+        member _.PartitionFieldValue(state: Types.AnomalyCause, value: string) =
             { state with PartitionFieldValue = Some value }
 
         [<CustomOperation("probability")>]
-        member _.Probability(state: AnomalyCause, value: CoreTypes.Double) =
+        member _.Probability(state: Types.AnomalyCause, value: Types.Double) =
             { state with Probability = value }
 
         [<CustomOperation("typical")>]
-        member _.Typical(state: AnomalyCause, value: CoreTypes.Double list) =
+        member _.Typical(state: Types.AnomalyCause, value: Types.Double list) =
             { state with Typical = Some value }
 
     let anomalyCause = AnomalyCauseBuilder()
 
     type AnomalyExplanationBuilder() =
-        member _.Yield(_: unit) : AnomalyExplanation =
+        member _.Yield(_: unit) : Types.AnomalyExplanation =
             {
                 AnomalyCharacteristicsImpact = None
                 AnomalyLength = None
@@ -397,49 +397,49 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("anomalyCharacteristicsImpact")>]
-        member _.AnomalyCharacteristicsImpact(state: AnomalyExplanation, value: CoreTypes.Integer) =
+        member _.AnomalyCharacteristicsImpact(state: Types.AnomalyExplanation, value: Types.Integer) =
             { state with AnomalyCharacteristicsImpact = Some value }
 
         [<CustomOperation("anomalyLength")>]
-        member _.AnomalyLength(state: AnomalyExplanation, value: CoreTypes.Integer) =
+        member _.AnomalyLength(state: Types.AnomalyExplanation, value: Types.Integer) =
             { state with AnomalyLength = Some value }
 
         [<CustomOperation("anomalyType")>]
-        member _.AnomalyType(state: AnomalyExplanation, value: string) =
+        member _.AnomalyType(state: Types.AnomalyExplanation, value: string) =
             { state with AnomalyType = Some value }
 
         [<CustomOperation("highVariancePenalty")>]
-        member _.HighVariancePenalty(state: AnomalyExplanation, value: bool) =
+        member _.HighVariancePenalty(state: Types.AnomalyExplanation, value: bool) =
             { state with HighVariancePenalty = Some value }
 
         [<CustomOperation("incompleteBucketPenalty")>]
-        member _.IncompleteBucketPenalty(state: AnomalyExplanation, value: bool) =
+        member _.IncompleteBucketPenalty(state: Types.AnomalyExplanation, value: bool) =
             { state with IncompleteBucketPenalty = Some value }
 
         [<CustomOperation("lowerConfidenceBound")>]
-        member _.LowerConfidenceBound(state: AnomalyExplanation, value: CoreTypes.Double) =
+        member _.LowerConfidenceBound(state: Types.AnomalyExplanation, value: Types.Double) =
             { state with LowerConfidenceBound = Some value }
 
         [<CustomOperation("multiBucketImpact")>]
-        member _.MultiBucketImpact(state: AnomalyExplanation, value: CoreTypes.Integer) =
+        member _.MultiBucketImpact(state: Types.AnomalyExplanation, value: Types.Integer) =
             { state with MultiBucketImpact = Some value }
 
         [<CustomOperation("singleBucketImpact")>]
-        member _.SingleBucketImpact(state: AnomalyExplanation, value: CoreTypes.Integer) =
+        member _.SingleBucketImpact(state: Types.AnomalyExplanation, value: Types.Integer) =
             { state with SingleBucketImpact = Some value }
 
         [<CustomOperation("typicalValue")>]
-        member _.TypicalValue(state: AnomalyExplanation, value: CoreTypes.Double) =
+        member _.TypicalValue(state: Types.AnomalyExplanation, value: Types.Double) =
             { state with TypicalValue = Some value }
 
         [<CustomOperation("upperConfidenceBound")>]
-        member _.UpperConfidenceBound(state: AnomalyExplanation, value: CoreTypes.Double) =
+        member _.UpperConfidenceBound(state: Types.AnomalyExplanation, value: Types.Double) =
             { state with UpperConfidenceBound = Some value }
 
     let anomalyExplanation = AnomalyExplanationBuilder()
 
     type CalendarEventBuilder() =
-        member _.Yield(_: unit) : CalendarEvent =
+        member _.Yield(_: unit) : Types.CalendarEvent =
             {
                 CalendarId = None
                 EventId = None
@@ -452,41 +452,41 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("calendarId")>]
-        member _.CalendarId(state: CalendarEvent, value: CoreTypes.Id) =
+        member _.CalendarId(state: Types.CalendarEvent, value: Types.Id) =
             { state with CalendarId = Some value }
 
         [<CustomOperation("eventId")>]
-        member _.EventId(state: CalendarEvent, value: CoreTypes.Id) =
+        member _.EventId(state: Types.CalendarEvent, value: Types.Id) =
             { state with EventId = Some value }
 
         [<CustomOperation("description")>]
-        member _.Description(state: CalendarEvent, value: string) =
+        member _.Description(state: Types.CalendarEvent, value: string) =
             { state with Description = value }
 
         [<CustomOperation("endTime")>]
-        member _.EndTime(state: CalendarEvent, value: CoreTypes.DateTime) =
+        member _.EndTime(state: Types.CalendarEvent, value: Types.DateTime) =
             { state with EndTime = value }
 
         [<CustomOperation("startTime")>]
-        member _.StartTime(state: CalendarEvent, value: CoreTypes.DateTime) =
+        member _.StartTime(state: Types.CalendarEvent, value: Types.DateTime) =
             { state with StartTime = value }
 
         [<CustomOperation("skipResult")>]
-        member _.SkipResult(state: CalendarEvent, value: bool) =
+        member _.SkipResult(state: Types.CalendarEvent, value: bool) =
             { state with SkipResult = Some value }
 
         [<CustomOperation("skipModelUpdate")>]
-        member _.SkipModelUpdate(state: CalendarEvent, value: bool) =
+        member _.SkipModelUpdate(state: Types.CalendarEvent, value: bool) =
             { state with SkipModelUpdate = Some value }
 
         [<CustomOperation("forceTimeShift")>]
-        member _.ForceTimeShift(state: CalendarEvent, value: CoreTypes.Integer) =
+        member _.ForceTimeShift(state: Types.CalendarEvent, value: Types.Integer) =
             { state with ForceTimeShift = Some value }
 
     let calendarEvent = CalendarEventBuilder()
 
     type CategorizationAnalyzerDefinitionBuilder() =
-        member _.Yield(_: unit) : CategorizationAnalyzerDefinition =
+        member _.Yield(_: unit) : Types.CategorizationAnalyzerDefinition =
             {
                 CharFilter = None
                 Filter = None
@@ -494,21 +494,21 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("charFilter")>]
-        member _.CharFilter(state: CategorizationAnalyzerDefinition, value: CoreTypes.CharFilter list) =
+        member _.CharFilter(state: Types.CategorizationAnalyzerDefinition, value: Types.CharFilter list) =
             { state with CharFilter = Some value }
 
         [<CustomOperation("filter")>]
-        member _.Filter(state: CategorizationAnalyzerDefinition, value: CoreTypes.TokenFilter list) =
+        member _.Filter(state: Types.CategorizationAnalyzerDefinition, value: Types.TokenFilter list) =
             { state with Filter = Some value }
 
         [<CustomOperation("tokenizer")>]
-        member _.Tokenizer(state: CategorizationAnalyzerDefinition, value: CoreTypes.Tokenizer) =
+        member _.Tokenizer(state: Types.CategorizationAnalyzerDefinition, value: Types.Tokenizer) =
             { state with Tokenizer = Some value }
 
     let categorizationAnalyzerDefinition = CategorizationAnalyzerDefinitionBuilder()
 
     type CategoryBuilder() =
-        member _.Yield(_: unit) : Category =
+        member _.Yield(_: unit) : Types.Category =
             {
                 CategoryId = Unchecked.defaultof<_>
                 Examples = Unchecked.defaultof<_>
@@ -527,65 +527,65 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("categoryId")>]
-        member _.CategoryId(state: Category, value: CoreTypes.Ulong) =
+        member _.CategoryId(state: Types.Category, value: Types.Ulong) =
             { state with CategoryId = value }
 
         [<CustomOperation("examples")>]
-        member _.Examples(state: Category, value: string list) =
+        member _.Examples(state: Types.Category, value: string list) =
             { state with Examples = value }
 
         [<CustomOperation("grokPattern")>]
-        member _.GrokPattern(state: Category, value: CoreTypes.GrokPattern) =
+        member _.GrokPattern(state: Types.Category, value: Types.GrokPattern) =
             { state with GrokPattern = Some value }
 
         [<CustomOperation("jobId")>]
-        member _.JobId(state: Category, value: CoreTypes.Id) =
+        member _.JobId(state: Types.Category, value: Types.Id) =
             { state with JobId = value }
 
         [<CustomOperation("maxMatchingLength")>]
-        member _.MaxMatchingLength(state: Category, value: CoreTypes.Ulong) =
+        member _.MaxMatchingLength(state: Types.Category, value: Types.Ulong) =
             { state with MaxMatchingLength = value }
 
         [<CustomOperation("partitionFieldName")>]
-        member _.PartitionFieldName(state: Category, value: string) =
+        member _.PartitionFieldName(state: Types.Category, value: string) =
             { state with PartitionFieldName = Some value }
 
         [<CustomOperation("partitionFieldValue")>]
-        member _.PartitionFieldValue(state: Category, value: string) =
+        member _.PartitionFieldValue(state: Types.Category, value: string) =
             { state with PartitionFieldValue = Some value }
 
         [<CustomOperation("regex")>]
-        member _.Regex(state: Category, value: string) =
+        member _.Regex(state: Types.Category, value: string) =
             { state with Regex = value }
 
         [<CustomOperation("terms")>]
-        member _.Terms(state: Category, value: string) =
+        member _.Terms(state: Types.Category, value: string) =
             { state with Terms = value }
 
         [<CustomOperation("numMatches")>]
-        member _.NumMatches(state: Category, value: CoreTypes.Long) =
+        member _.NumMatches(state: Types.Category, value: Types.Long) =
             { state with NumMatches = Some value }
 
         [<CustomOperation("preferredToCategories")>]
-        member _.PreferredToCategories(state: Category, value: CoreTypes.Id list) =
+        member _.PreferredToCategories(state: Types.Category, value: Types.Id list) =
             { state with PreferredToCategories = Some value }
 
         [<CustomOperation("p")>]
-        member _.P(state: Category, value: string) =
+        member _.P(state: Types.Category, value: string) =
             { state with P = Some value }
 
         [<CustomOperation("resultType")>]
-        member _.ResultType(state: Category, value: string) =
+        member _.ResultType(state: Types.Category, value: string) =
             { state with ResultType = value }
 
         [<CustomOperation("mlcategory")>]
-        member _.Mlcategory(state: Category, value: string) =
+        member _.Mlcategory(state: Types.Category, value: string) =
             { state with Mlcategory = value }
 
     let category = CategoryBuilder()
 
     type ClassificationInferenceOptionsBuilder() =
-        member _.Yield(_: unit) : ClassificationInferenceOptions =
+        member _.Yield(_: unit) : Types.ClassificationInferenceOptions =
             {
                 NumTopClasses = None
                 NumTopFeatureImportanceValues = None
@@ -595,29 +595,29 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("numTopClasses")>]
-        member _.NumTopClasses(state: ClassificationInferenceOptions, value: CoreTypes.Integer) =
+        member _.NumTopClasses(state: Types.ClassificationInferenceOptions, value: Types.Integer) =
             { state with NumTopClasses = Some value }
 
         [<CustomOperation("numTopFeatureImportanceValues")>]
-        member _.NumTopFeatureImportanceValues(state: ClassificationInferenceOptions, value: CoreTypes.Integer) =
+        member _.NumTopFeatureImportanceValues(state: Types.ClassificationInferenceOptions, value: Types.Integer) =
             { state with NumTopFeatureImportanceValues = Some value }
 
         [<CustomOperation("predictionFieldType")>]
-        member _.PredictionFieldType(state: ClassificationInferenceOptions, value: string) =
+        member _.PredictionFieldType(state: Types.ClassificationInferenceOptions, value: string) =
             { state with PredictionFieldType = Some value }
 
         [<CustomOperation("resultsField")>]
-        member _.ResultsField(state: ClassificationInferenceOptions, value: string) =
+        member _.ResultsField(state: Types.ClassificationInferenceOptions, value: string) =
             { state with ResultsField = Some value }
 
         [<CustomOperation("topClassesResultsField")>]
-        member _.TopClassesResultsField(state: ClassificationInferenceOptions, value: string) =
+        member _.TopClassesResultsField(state: Types.ClassificationInferenceOptions, value: string) =
             { state with TopClassesResultsField = Some value }
 
     let classificationInferenceOptions = ClassificationInferenceOptionsBuilder()
 
     type CommonTokenizationConfigBuilder() =
-        member _.Yield(_: unit) : CommonTokenizationConfig =
+        member _.Yield(_: unit) : Types.CommonTokenizationConfig =
             {
                 DoLowerCase = None
                 MaxSequenceLength = None
@@ -627,29 +627,29 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("doLowerCase")>]
-        member _.DoLowerCase(state: CommonTokenizationConfig, value: bool) =
+        member _.DoLowerCase(state: Types.CommonTokenizationConfig, value: bool) =
             { state with DoLowerCase = Some value }
 
         [<CustomOperation("maxSequenceLength")>]
-        member _.MaxSequenceLength(state: CommonTokenizationConfig, value: CoreTypes.Integer) =
+        member _.MaxSequenceLength(state: Types.CommonTokenizationConfig, value: Types.Integer) =
             { state with MaxSequenceLength = Some value }
 
         [<CustomOperation("span")>]
-        member _.Span(state: CommonTokenizationConfig, value: CoreTypes.Integer) =
+        member _.Span(state: Types.CommonTokenizationConfig, value: Types.Integer) =
             { state with Span = Some value }
 
         [<CustomOperation("truncate")>]
-        member _.Truncate(state: CommonTokenizationConfig, value: MlTypes.TokenizationTruncate) =
+        member _.Truncate(state: Types.CommonTokenizationConfig, value: Types.TokenizationTruncate) =
             { state with Truncate = Some value }
 
         [<CustomOperation("withSpecialTokens")>]
-        member _.WithSpecialTokens(state: CommonTokenizationConfig, value: bool) =
+        member _.WithSpecialTokens(state: Types.CommonTokenizationConfig, value: bool) =
             { state with WithSpecialTokens = Some value }
 
     let commonTokenizationConfig = CommonTokenizationConfigBuilder()
 
     type DataCountsBuilder() =
-        member _.Yield(_: unit) : DataCounts =
+        member _.Yield(_: unit) : Types.DataCounts =
             {
                 BucketCount = Unchecked.defaultof<_>
                 EarliestRecordTimestamp = None
@@ -673,85 +673,85 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("bucketCount")>]
-        member _.BucketCount(state: DataCounts, value: CoreTypes.Long) =
+        member _.BucketCount(state: Types.DataCounts, value: Types.Long) =
             { state with BucketCount = value }
 
         [<CustomOperation("earliestRecordTimestamp")>]
-        member _.EarliestRecordTimestamp(state: DataCounts, value: CoreTypes.Long) =
+        member _.EarliestRecordTimestamp(state: Types.DataCounts, value: Types.Long) =
             { state with EarliestRecordTimestamp = Some value }
 
         [<CustomOperation("emptyBucketCount")>]
-        member _.EmptyBucketCount(state: DataCounts, value: CoreTypes.Long) =
+        member _.EmptyBucketCount(state: Types.DataCounts, value: Types.Long) =
             { state with EmptyBucketCount = value }
 
         [<CustomOperation("inputBytes")>]
-        member _.InputBytes(state: DataCounts, value: CoreTypes.Long) =
+        member _.InputBytes(state: Types.DataCounts, value: Types.Long) =
             { state with InputBytes = value }
 
         [<CustomOperation("inputFieldCount")>]
-        member _.InputFieldCount(state: DataCounts, value: CoreTypes.Long) =
+        member _.InputFieldCount(state: Types.DataCounts, value: Types.Long) =
             { state with InputFieldCount = value }
 
         [<CustomOperation("inputRecordCount")>]
-        member _.InputRecordCount(state: DataCounts, value: CoreTypes.Long) =
+        member _.InputRecordCount(state: Types.DataCounts, value: Types.Long) =
             { state with InputRecordCount = value }
 
         [<CustomOperation("invalidDateCount")>]
-        member _.InvalidDateCount(state: DataCounts, value: CoreTypes.Long) =
+        member _.InvalidDateCount(state: Types.DataCounts, value: Types.Long) =
             { state with InvalidDateCount = value }
 
         [<CustomOperation("jobId")>]
-        member _.JobId(state: DataCounts, value: CoreTypes.Id) =
+        member _.JobId(state: Types.DataCounts, value: Types.Id) =
             { state with JobId = value }
 
         [<CustomOperation("lastDataTime")>]
-        member _.LastDataTime(state: DataCounts, value: CoreTypes.Long) =
+        member _.LastDataTime(state: Types.DataCounts, value: Types.Long) =
             { state with LastDataTime = Some value }
 
         [<CustomOperation("latestEmptyBucketTimestamp")>]
-        member _.LatestEmptyBucketTimestamp(state: DataCounts, value: CoreTypes.Long) =
+        member _.LatestEmptyBucketTimestamp(state: Types.DataCounts, value: Types.Long) =
             { state with LatestEmptyBucketTimestamp = Some value }
 
         [<CustomOperation("latestRecordTimestamp")>]
-        member _.LatestRecordTimestamp(state: DataCounts, value: CoreTypes.Long) =
+        member _.LatestRecordTimestamp(state: Types.DataCounts, value: Types.Long) =
             { state with LatestRecordTimestamp = Some value }
 
         [<CustomOperation("latestSparseBucketTimestamp")>]
-        member _.LatestSparseBucketTimestamp(state: DataCounts, value: CoreTypes.Long) =
+        member _.LatestSparseBucketTimestamp(state: Types.DataCounts, value: Types.Long) =
             { state with LatestSparseBucketTimestamp = Some value }
 
         [<CustomOperation("latestBucketTimestamp")>]
-        member _.LatestBucketTimestamp(state: DataCounts, value: CoreTypes.Long) =
+        member _.LatestBucketTimestamp(state: Types.DataCounts, value: Types.Long) =
             { state with LatestBucketTimestamp = Some value }
 
         [<CustomOperation("logTime")>]
-        member _.LogTime(state: DataCounts, value: CoreTypes.Long) =
+        member _.LogTime(state: Types.DataCounts, value: Types.Long) =
             { state with LogTime = Some value }
 
         [<CustomOperation("missingFieldCount")>]
-        member _.MissingFieldCount(state: DataCounts, value: CoreTypes.Long) =
+        member _.MissingFieldCount(state: Types.DataCounts, value: Types.Long) =
             { state with MissingFieldCount = value }
 
         [<CustomOperation("outOfOrderTimestampCount")>]
-        member _.OutOfOrderTimestampCount(state: DataCounts, value: CoreTypes.Long) =
+        member _.OutOfOrderTimestampCount(state: Types.DataCounts, value: Types.Long) =
             { state with OutOfOrderTimestampCount = value }
 
         [<CustomOperation("processedFieldCount")>]
-        member _.ProcessedFieldCount(state: DataCounts, value: CoreTypes.Long) =
+        member _.ProcessedFieldCount(state: Types.DataCounts, value: Types.Long) =
             { state with ProcessedFieldCount = value }
 
         [<CustomOperation("processedRecordCount")>]
-        member _.ProcessedRecordCount(state: DataCounts, value: CoreTypes.Long) =
+        member _.ProcessedRecordCount(state: Types.DataCounts, value: Types.Long) =
             { state with ProcessedRecordCount = value }
 
         [<CustomOperation("sparseBucketCount")>]
-        member _.SparseBucketCount(state: DataCounts, value: CoreTypes.Long) =
+        member _.SparseBucketCount(state: Types.DataCounts, value: Types.Long) =
             { state with SparseBucketCount = value }
 
     let dataCounts = DataCountsBuilder()
 
     type DataDescriptionBuilder() =
-        member _.Yield(_: unit) : DataDescription =
+        member _.Yield(_: unit) : Types.DataDescription =
             {
                 Format = None
                 TimeField = None
@@ -760,25 +760,25 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("format")>]
-        member _.Format(state: DataDescription, value: string) =
+        member _.Format(state: Types.DataDescription, value: string) =
             { state with Format = Some value }
 
         [<CustomOperation("timeField")>]
-        member _.TimeField(state: DataDescription, value: CoreTypes.Field) =
+        member _.TimeField(state: Types.DataDescription, value: Types.Field) =
             { state with TimeField = Some value }
 
         [<CustomOperation("timeFormat")>]
-        member _.TimeFormat(state: DataDescription, value: string) =
+        member _.TimeFormat(state: Types.DataDescription, value: string) =
             { state with TimeFormat = Some value }
 
         [<CustomOperation("fieldDelimiter")>]
-        member _.FieldDelimiter(state: DataDescription, value: string) =
+        member _.FieldDelimiter(state: Types.DataDescription, value: string) =
             { state with FieldDelimiter = Some value }
 
     let dataDescription = DataDescriptionBuilder()
 
-    type DatafeedBuilder() =
-        member _.Yield(_: unit) : Datafeed =
+    type MlTypesDatafeedBuilder() =
+        member _.Yield(_: unit) : Types.MlTypesDatafeed =
             {
                 Aggregations = None
                 Authorization = None
@@ -799,73 +799,73 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("aggregations")>]
-        member _.Aggregations(state: Datafeed, value: Map<string, CoreTypes.AggregationContainer>) =
+        member _.Aggregations(state: Types.MlTypesDatafeed, value: Map<string, Types.AggregationContainer>) =
             { state with Aggregations = Some value }
 
         [<CustomOperation("authorization")>]
-        member _.Authorization(state: Datafeed, value: MlTypes.DatafeedAuthorization) =
+        member _.Authorization(state: Types.MlTypesDatafeed, value: Types.DatafeedAuthorization) =
             { state with Authorization = Some value }
 
         [<CustomOperation("chunkingConfig")>]
-        member _.ChunkingConfig(state: Datafeed, value: MlTypes.ChunkingConfig) =
+        member _.ChunkingConfig(state: Types.MlTypesDatafeed, value: Types.ChunkingConfig) =
             { state with ChunkingConfig = Some value }
 
         [<CustomOperation("datafeedId")>]
-        member _.DatafeedId(state: Datafeed, value: CoreTypes.Id) =
+        member _.DatafeedId(state: Types.MlTypesDatafeed, value: Types.Id) =
             { state with DatafeedId = value }
 
         [<CustomOperation("frequency")>]
-        member _.Frequency(state: Datafeed, value: CoreTypes.Duration) =
+        member _.Frequency(state: Types.MlTypesDatafeed, value: Types.Duration) =
             { state with Frequency = Some value }
 
         [<CustomOperation("indices")>]
-        member _.Indices(state: Datafeed, value: string list) =
+        member _.Indices(state: Types.MlTypesDatafeed, value: string list) =
             { state with Indices = value }
 
         [<CustomOperation("indexes")>]
-        member _.Indexes(state: Datafeed, value: string list) =
+        member _.Indexes(state: Types.MlTypesDatafeed, value: string list) =
             { state with Indexes = Some value }
 
         [<CustomOperation("jobId")>]
-        member _.JobId(state: Datafeed, value: CoreTypes.Id) =
+        member _.JobId(state: Types.MlTypesDatafeed, value: Types.Id) =
             { state with JobId = value }
 
         [<CustomOperation("maxEmptySearches")>]
-        member _.MaxEmptySearches(state: Datafeed, value: CoreTypes.Integer) =
+        member _.MaxEmptySearches(state: Types.MlTypesDatafeed, value: Types.Integer) =
             { state with MaxEmptySearches = Some value }
 
         [<CustomOperation("query")>]
-        member _.Query(state: Datafeed, value: CoreTypes.QueryContainer) =
+        member _.Query(state: Types.MlTypesDatafeed, value: Types.QueryContainer) =
             { state with Query = value }
 
         [<CustomOperation("queryDelay")>]
-        member _.QueryDelay(state: Datafeed, value: CoreTypes.Duration) =
+        member _.QueryDelay(state: Types.MlTypesDatafeed, value: Types.Duration) =
             { state with QueryDelay = Some value }
 
         [<CustomOperation("scriptFields")>]
-        member _.ScriptFields(state: Datafeed, value: Map<string, CoreTypes.ScriptField>) =
+        member _.ScriptFields(state: Types.MlTypesDatafeed, value: Map<string, Types.ScriptField>) =
             { state with ScriptFields = Some value }
 
         [<CustomOperation("scrollSize")>]
-        member _.ScrollSize(state: Datafeed, value: CoreTypes.Integer) =
+        member _.ScrollSize(state: Types.MlTypesDatafeed, value: Types.Integer) =
             { state with ScrollSize = Some value }
 
         [<CustomOperation("delayedDataCheckConfig")>]
-        member _.DelayedDataCheckConfig(state: Datafeed, value: MlTypes.DelayedDataCheckConfig) =
+        member _.DelayedDataCheckConfig(state: Types.MlTypesDatafeed, value: Types.DelayedDataCheckConfig) =
             { state with DelayedDataCheckConfig = value }
 
         [<CustomOperation("runtimeMappings")>]
-        member _.RuntimeMappings(state: Datafeed, value: CoreTypes.RuntimeFields) =
+        member _.RuntimeMappings(state: Types.MlTypesDatafeed, value: Types.RuntimeFields) =
             { state with RuntimeMappings = Some value }
 
         [<CustomOperation("indicesOptions")>]
-        member _.IndicesOptions(state: Datafeed, value: CoreTypes.IndicesOptions) =
+        member _.IndicesOptions(state: Types.MlTypesDatafeed, value: Types.IndicesOptions) =
             { state with IndicesOptions = Some value }
 
-    let datafeed = DatafeedBuilder()
+    let mlTypesDatafeed = MlTypesDatafeedBuilder()
 
     type DatafeedAuthorizationBuilder() =
-        member _.Yield(_: unit) : DatafeedAuthorization =
+        member _.Yield(_: unit) : Types.DatafeedAuthorization =
             {
                 ApiKey = None
                 Roles = None
@@ -873,21 +873,21 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("apiKey")>]
-        member _.ApiKey(state: DatafeedAuthorization, value: MlTypes.ApiKeyAuthorization) =
+        member _.ApiKey(state: Types.DatafeedAuthorization, value: Types.ApiKeyAuthorization) =
             { state with ApiKey = Some value }
 
         [<CustomOperation("roles")>]
-        member _.Roles(state: DatafeedAuthorization, value: string list) =
+        member _.Roles(state: Types.DatafeedAuthorization, value: string list) =
             { state with Roles = Some value }
 
         [<CustomOperation("serviceAccount")>]
-        member _.ServiceAccount(state: DatafeedAuthorization, value: string) =
+        member _.ServiceAccount(state: Types.DatafeedAuthorization, value: string) =
             { state with ServiceAccount = Some value }
 
     let datafeedAuthorization = DatafeedAuthorizationBuilder()
 
     type DatafeedConfigBuilder() =
-        member _.Yield(_: unit) : DatafeedConfig =
+        member _.Yield(_: unit) : Types.DatafeedConfig =
             {
                 Aggregations = None
                 ChunkingConfig = None
@@ -906,65 +906,65 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("aggregations")>]
-        member _.Aggregations(state: DatafeedConfig, value: Map<string, CoreTypes.AggregationContainer>) =
+        member _.Aggregations(state: Types.DatafeedConfig, value: Map<string, Types.AggregationContainer>) =
             { state with Aggregations = Some value }
 
         [<CustomOperation("chunkingConfig")>]
-        member _.ChunkingConfig(state: DatafeedConfig, value: MlTypes.ChunkingConfig) =
+        member _.ChunkingConfig(state: Types.DatafeedConfig, value: Types.ChunkingConfig) =
             { state with ChunkingConfig = Some value }
 
         [<CustomOperation("datafeedId")>]
-        member _.DatafeedId(state: DatafeedConfig, value: CoreTypes.Id) =
+        member _.DatafeedId(state: Types.DatafeedConfig, value: Types.Id) =
             { state with DatafeedId = Some value }
 
         [<CustomOperation("delayedDataCheckConfig")>]
-        member _.DelayedDataCheckConfig(state: DatafeedConfig, value: MlTypes.DelayedDataCheckConfig) =
+        member _.DelayedDataCheckConfig(state: Types.DatafeedConfig, value: Types.DelayedDataCheckConfig) =
             { state with DelayedDataCheckConfig = Some value }
 
         [<CustomOperation("frequency")>]
-        member _.Frequency(state: DatafeedConfig, value: CoreTypes.Duration) =
+        member _.Frequency(state: Types.DatafeedConfig, value: Types.Duration) =
             { state with Frequency = Some value }
 
         [<CustomOperation("indices")>]
-        member _.Indices(state: DatafeedConfig, value: CoreTypes.Indices) =
+        member _.Indices(state: Types.DatafeedConfig, value: Types.Indices) =
             { state with Indices = Some value }
 
         [<CustomOperation("indicesOptions")>]
-        member _.IndicesOptions(state: DatafeedConfig, value: CoreTypes.IndicesOptions) =
+        member _.IndicesOptions(state: Types.DatafeedConfig, value: Types.IndicesOptions) =
             { state with IndicesOptions = Some value }
 
         [<CustomOperation("jobId")>]
-        member _.JobId(state: DatafeedConfig, value: CoreTypes.Id) =
+        member _.JobId(state: Types.DatafeedConfig, value: Types.Id) =
             { state with JobId = Some value }
 
         [<CustomOperation("maxEmptySearches")>]
-        member _.MaxEmptySearches(state: DatafeedConfig, value: CoreTypes.Integer) =
+        member _.MaxEmptySearches(state: Types.DatafeedConfig, value: Types.Integer) =
             { state with MaxEmptySearches = Some value }
 
         [<CustomOperation("query")>]
-        member _.Query(state: DatafeedConfig, value: CoreTypes.QueryContainer) =
+        member _.Query(state: Types.DatafeedConfig, value: Types.QueryContainer) =
             { state with Query = Some value }
 
         [<CustomOperation("queryDelay")>]
-        member _.QueryDelay(state: DatafeedConfig, value: CoreTypes.Duration) =
+        member _.QueryDelay(state: Types.DatafeedConfig, value: Types.Duration) =
             { state with QueryDelay = Some value }
 
         [<CustomOperation("runtimeMappings")>]
-        member _.RuntimeMappings(state: DatafeedConfig, value: CoreTypes.RuntimeFields) =
+        member _.RuntimeMappings(state: Types.DatafeedConfig, value: Types.RuntimeFields) =
             { state with RuntimeMappings = Some value }
 
         [<CustomOperation("scriptFields")>]
-        member _.ScriptFields(state: DatafeedConfig, value: Map<string, CoreTypes.ScriptField>) =
+        member _.ScriptFields(state: Types.DatafeedConfig, value: Map<string, Types.ScriptField>) =
             { state with ScriptFields = Some value }
 
         [<CustomOperation("scrollSize")>]
-        member _.ScrollSize(state: DatafeedConfig, value: CoreTypes.Integer) =
+        member _.ScrollSize(state: Types.DatafeedConfig, value: Types.Integer) =
             { state with ScrollSize = Some value }
 
     let datafeedConfig = DatafeedConfigBuilder()
 
     type DatafeedStatsBuilder() =
-        member _.Yield(_: unit) : DatafeedStats =
+        member _.Yield(_: unit) : Types.DatafeedStats =
             {
                 AssignmentExplanation = None
                 DatafeedId = Unchecked.defaultof<_>
@@ -975,33 +975,33 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("assignmentExplanation")>]
-        member _.AssignmentExplanation(state: DatafeedStats, value: string) =
+        member _.AssignmentExplanation(state: Types.DatafeedStats, value: string) =
             { state with AssignmentExplanation = Some value }
 
         [<CustomOperation("datafeedId")>]
-        member _.DatafeedId(state: DatafeedStats, value: CoreTypes.Id) =
+        member _.DatafeedId(state: Types.DatafeedStats, value: Types.Id) =
             { state with DatafeedId = value }
 
         [<CustomOperation("node")>]
-        member _.Node(state: DatafeedStats, value: MlTypes.DiscoveryNodeCompact) =
+        member _.Node(state: Types.DatafeedStats, value: Types.DiscoveryNodeCompact) =
             { state with Node = Some value }
 
         [<CustomOperation("state")>]
-        member _.State(state: DatafeedStats, value: MlTypes.DatafeedState) =
+        member _.State(state: Types.DatafeedStats, value: Types.DatafeedState) =
             { state with State = value }
 
         [<CustomOperation("timingStats")>]
-        member _.TimingStats(state: DatafeedStats, value: MlTypes.DatafeedTimingStats) =
+        member _.TimingStats(state: Types.DatafeedStats, value: Types.DatafeedTimingStats) =
             { state with TimingStats = Some value }
 
         [<CustomOperation("runningState")>]
-        member _.RunningState(state: DatafeedStats, value: MlTypes.DatafeedRunningState) =
+        member _.RunningState(state: Types.DatafeedStats, value: Types.DatafeedRunningState) =
             { state with RunningState = Some value }
 
     let datafeedStats = DatafeedStatsBuilder()
 
     type DatafeedTimingStatsBuilder() =
-        member _.Yield(_: unit) : DatafeedTimingStats =
+        member _.Yield(_: unit) : Types.DatafeedTimingStats =
             {
                 BucketCount = Unchecked.defaultof<_>
                 ExponentialAverageSearchTimePerHourMs = Unchecked.defaultof<_>
@@ -1013,37 +1013,37 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("bucketCount")>]
-        member _.BucketCount(state: DatafeedTimingStats, value: CoreTypes.Long) =
+        member _.BucketCount(state: Types.DatafeedTimingStats, value: Types.Long) =
             { state with BucketCount = value }
 
         [<CustomOperation("exponentialAverageSearchTimePerHourMs")>]
-        member _.ExponentialAverageSearchTimePerHourMs(state: DatafeedTimingStats, value: CoreTypes.DurationValue<CoreTypes.UnitFloatMillis>) =
+        member _.ExponentialAverageSearchTimePerHourMs(state: Types.DatafeedTimingStats, value: Types.DurationValue<Types.UnitFloatMillis>) =
             { state with ExponentialAverageSearchTimePerHourMs = value }
 
         [<CustomOperation("exponentialAverageCalculationContext")>]
-        member _.ExponentialAverageCalculationContext(state: DatafeedTimingStats, value: MlTypes.ExponentialAverageCalculationContext) =
+        member _.ExponentialAverageCalculationContext(state: Types.DatafeedTimingStats, value: Types.ExponentialAverageCalculationContext) =
             { state with ExponentialAverageCalculationContext = Some value }
 
         [<CustomOperation("jobId")>]
-        member _.JobId(state: DatafeedTimingStats, value: CoreTypes.Id) =
+        member _.JobId(state: Types.DatafeedTimingStats, value: Types.Id) =
             { state with JobId = value }
 
         [<CustomOperation("searchCount")>]
-        member _.SearchCount(state: DatafeedTimingStats, value: CoreTypes.Long) =
+        member _.SearchCount(state: Types.DatafeedTimingStats, value: Types.Long) =
             { state with SearchCount = value }
 
         [<CustomOperation("totalSearchTimeMs")>]
-        member _.TotalSearchTimeMs(state: DatafeedTimingStats, value: CoreTypes.DurationValue<CoreTypes.UnitFloatMillis>) =
+        member _.TotalSearchTimeMs(state: Types.DatafeedTimingStats, value: Types.DurationValue<Types.UnitFloatMillis>) =
             { state with TotalSearchTimeMs = value }
 
         [<CustomOperation("averageSearchTimePerBucketMs")>]
-        member _.AverageSearchTimePerBucketMs(state: DatafeedTimingStats, value: CoreTypes.DurationValue<CoreTypes.UnitFloatMillis>) =
+        member _.AverageSearchTimePerBucketMs(state: Types.DatafeedTimingStats, value: Types.DurationValue<Types.UnitFloatMillis>) =
             { state with AverageSearchTimePerBucketMs = Some value }
 
     let datafeedTimingStats = DatafeedTimingStatsBuilder()
 
     type DataframeAnalysisBuilder() =
-        member _.Yield(_: unit) : DataframeAnalysis =
+        member _.Yield(_: unit) : Types.DataframeAnalysis =
             {
                 Alpha = None
                 DependentVariable = Unchecked.defaultof<_>
@@ -1066,149 +1066,149 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("alpha")>]
-        member _.Alpha(state: DataframeAnalysis, value: CoreTypes.Double) =
+        member _.Alpha(state: Types.DataframeAnalysis, value: Types.Double) =
             { state with Alpha = Some value }
 
         [<CustomOperation("dependentVariable")>]
-        member _.DependentVariable(state: DataframeAnalysis, value: string) =
+        member _.DependentVariable(state: Types.DataframeAnalysis, value: string) =
             { state with DependentVariable = value }
 
         [<CustomOperation("downsampleFactor")>]
-        member _.DownsampleFactor(state: DataframeAnalysis, value: CoreTypes.Double) =
+        member _.DownsampleFactor(state: Types.DataframeAnalysis, value: Types.Double) =
             { state with DownsampleFactor = Some value }
 
         [<CustomOperation("earlyStoppingEnabled")>]
-        member _.EarlyStoppingEnabled(state: DataframeAnalysis, value: bool) =
+        member _.EarlyStoppingEnabled(state: Types.DataframeAnalysis, value: bool) =
             { state with EarlyStoppingEnabled = Some value }
 
         [<CustomOperation("eta")>]
-        member _.Eta(state: DataframeAnalysis, value: CoreTypes.Double) =
+        member _.Eta(state: Types.DataframeAnalysis, value: Types.Double) =
             { state with Eta = Some value }
 
         [<CustomOperation("etaGrowthRatePerTree")>]
-        member _.EtaGrowthRatePerTree(state: DataframeAnalysis, value: CoreTypes.Double) =
+        member _.EtaGrowthRatePerTree(state: Types.DataframeAnalysis, value: Types.Double) =
             { state with EtaGrowthRatePerTree = Some value }
 
         [<CustomOperation("featureBagFraction")>]
-        member _.FeatureBagFraction(state: DataframeAnalysis, value: CoreTypes.Double) =
+        member _.FeatureBagFraction(state: Types.DataframeAnalysis, value: Types.Double) =
             { state with FeatureBagFraction = Some value }
 
         [<CustomOperation("featureProcessors")>]
-        member _.FeatureProcessors(state: DataframeAnalysis, value: MlTypes.DataframeAnalysisFeatureProcessor list) =
+        member _.FeatureProcessors(state: Types.DataframeAnalysis, value: Types.DataframeAnalysisFeatureProcessor list) =
             { state with FeatureProcessors = Some value }
 
         [<CustomOperation("gamma")>]
-        member _.Gamma(state: DataframeAnalysis, value: CoreTypes.Double) =
+        member _.Gamma(state: Types.DataframeAnalysis, value: Types.Double) =
             { state with Gamma = Some value }
 
         [<CustomOperation("lambda")>]
-        member _.Lambda(state: DataframeAnalysis, value: CoreTypes.Double) =
+        member _.Lambda(state: Types.DataframeAnalysis, value: Types.Double) =
             { state with Lambda = Some value }
 
         [<CustomOperation("maxOptimizationRoundsPerHyperparameter")>]
-        member _.MaxOptimizationRoundsPerHyperparameter(state: DataframeAnalysis, value: CoreTypes.Integer) =
+        member _.MaxOptimizationRoundsPerHyperparameter(state: Types.DataframeAnalysis, value: Types.Integer) =
             { state with MaxOptimizationRoundsPerHyperparameter = Some value }
 
         [<CustomOperation("maxTrees")>]
-        member _.MaxTrees(state: DataframeAnalysis, value: CoreTypes.Integer) =
+        member _.MaxTrees(state: Types.DataframeAnalysis, value: Types.Integer) =
             { state with MaxTrees = Some value }
 
         [<CustomOperation("numTopFeatureImportanceValues")>]
-        member _.NumTopFeatureImportanceValues(state: DataframeAnalysis, value: CoreTypes.Integer) =
+        member _.NumTopFeatureImportanceValues(state: Types.DataframeAnalysis, value: Types.Integer) =
             { state with NumTopFeatureImportanceValues = Some value }
 
         [<CustomOperation("predictionFieldName")>]
-        member _.PredictionFieldName(state: DataframeAnalysis, value: CoreTypes.Field) =
+        member _.PredictionFieldName(state: Types.DataframeAnalysis, value: Types.Field) =
             { state with PredictionFieldName = Some value }
 
         [<CustomOperation("randomizeSeed")>]
-        member _.RandomizeSeed(state: DataframeAnalysis, value: CoreTypes.Double) =
+        member _.RandomizeSeed(state: Types.DataframeAnalysis, value: Types.Double) =
             { state with RandomizeSeed = Some value }
 
         [<CustomOperation("softTreeDepthLimit")>]
-        member _.SoftTreeDepthLimit(state: DataframeAnalysis, value: CoreTypes.Integer) =
+        member _.SoftTreeDepthLimit(state: Types.DataframeAnalysis, value: Types.Integer) =
             { state with SoftTreeDepthLimit = Some value }
 
         [<CustomOperation("softTreeDepthTolerance")>]
-        member _.SoftTreeDepthTolerance(state: DataframeAnalysis, value: CoreTypes.Double) =
+        member _.SoftTreeDepthTolerance(state: Types.DataframeAnalysis, value: Types.Double) =
             { state with SoftTreeDepthTolerance = Some value }
 
         [<CustomOperation("trainingPercent")>]
-        member _.TrainingPercent(state: DataframeAnalysis, value: CoreTypes.Percentage) =
+        member _.TrainingPercent(state: Types.DataframeAnalysis, value: Types.Percentage) =
             { state with TrainingPercent = Some value }
 
     let dataframeAnalysis = DataframeAnalysisBuilder()
 
     type DataframeAnalysisAnalyzedFieldsBuilder() =
-        member _.Yield(_: unit) : DataframeAnalysisAnalyzedFields =
+        member _.Yield(_: unit) : Types.DataframeAnalysisAnalyzedFields =
             {
                 Includes = None
                 Excludes = None
             }
 
         [<CustomOperation("includes")>]
-        member _.Includes(state: DataframeAnalysisAnalyzedFields, value: string list) =
+        member _.Includes(state: Types.DataframeAnalysisAnalyzedFields, value: string list) =
             { state with Includes = Some value }
 
         [<CustomOperation("excludes")>]
-        member _.Excludes(state: DataframeAnalysisAnalyzedFields, value: string list) =
+        member _.Excludes(state: Types.DataframeAnalysisAnalyzedFields, value: string list) =
             { state with Excludes = Some value }
 
     let dataframeAnalysisAnalyzedFields = DataframeAnalysisAnalyzedFieldsBuilder()
 
-    let ofIncludes (value: string list) : DataframeAnalysisAnalyzedFields =
+    let ofIncludes (value: string list) : Types.DataframeAnalysisAnalyzedFields =
         {
             Includes = value
             Excludes = None
         }
 
     type DataframeAnalysisClassificationBuilder() =
-        member _.Yield(_: unit) : DataframeAnalysisClassification =
+        member _.Yield(_: unit) : Types.DataframeAnalysisClassification =
             {
                 ClassAssignmentObjective = None
                 NumTopClasses = None
             }
 
         [<CustomOperation("classAssignmentObjective")>]
-        member _.ClassAssignmentObjective(state: DataframeAnalysisClassification, value: string) =
+        member _.ClassAssignmentObjective(state: Types.DataframeAnalysisClassification, value: string) =
             { state with ClassAssignmentObjective = Some value }
 
         [<CustomOperation("numTopClasses")>]
-        member _.NumTopClasses(state: DataframeAnalysisClassification, value: CoreTypes.Integer) =
+        member _.NumTopClasses(state: Types.DataframeAnalysisClassification, value: Types.Integer) =
             { state with NumTopClasses = Some value }
 
     let dataframeAnalysisClassification = DataframeAnalysisClassificationBuilder()
 
     module DataframeAnalysis =
 
-        let classification (value: MlTypes.DataframeAnalysisClassification) =
-            DataframeAnalysisContainer.Classification value
+        let classification (value: Types.DataframeAnalysisClassification) =
+            Types.DataframeAnalysisContainer.Classification value
 
-        let outlierDetection (value: MlTypes.DataframeAnalysisOutlierDetection) =
-            DataframeAnalysisContainer.OutlierDetection value
+        let outlierDetection (value: Types.DataframeAnalysisOutlierDetection) =
+            Types.DataframeAnalysisContainer.OutlierDetection value
 
-        let regression (value: MlTypes.DataframeAnalysisRegression) =
-            DataframeAnalysisContainer.Regression value
+        let regression (value: Types.DataframeAnalysisRegression) =
+            Types.DataframeAnalysisContainer.Regression value
 
     module DataframeAnalysisFeatureProcessor =
 
-        let frequencyEncoding (value: MlTypes.DataframeAnalysisFeatureProcessorFrequencyEncoding) =
-            DataframeAnalysisFeatureProcessor.FrequencyEncoding value
+        let frequencyEncoding (value: Types.DataframeAnalysisFeatureProcessorFrequencyEncoding) =
+            Types.DataframeAnalysisFeatureProcessor.FrequencyEncoding value
 
-        let multiEncoding (value: MlTypes.DataframeAnalysisFeatureProcessorMultiEncoding) =
-            DataframeAnalysisFeatureProcessor.MultiEncoding value
+        let multiEncoding (value: Types.DataframeAnalysisFeatureProcessorMultiEncoding) =
+            Types.DataframeAnalysisFeatureProcessor.MultiEncoding value
 
-        let nGramEncoding (value: MlTypes.DataframeAnalysisFeatureProcessorNGramEncoding) =
-            DataframeAnalysisFeatureProcessor.NGramEncoding value
+        let nGramEncoding (value: Types.DataframeAnalysisFeatureProcessorNGramEncoding) =
+            Types.DataframeAnalysisFeatureProcessor.NGramEncoding value
 
-        let oneHotEncoding (value: MlTypes.DataframeAnalysisFeatureProcessorOneHotEncoding) =
-            DataframeAnalysisFeatureProcessor.OneHotEncoding value
+        let oneHotEncoding (value: Types.DataframeAnalysisFeatureProcessorOneHotEncoding) =
+            Types.DataframeAnalysisFeatureProcessor.OneHotEncoding value
 
-        let targetMeanEncoding (value: MlTypes.DataframeAnalysisFeatureProcessorTargetMeanEncoding) =
-            DataframeAnalysisFeatureProcessor.TargetMeanEncoding value
+        let targetMeanEncoding (value: Types.DataframeAnalysisFeatureProcessorTargetMeanEncoding) =
+            Types.DataframeAnalysisFeatureProcessor.TargetMeanEncoding value
 
     type DataframeAnalysisFeatureProcessorNGramEncodingBuilder() =
-        member _.Yield(_: unit) : DataframeAnalysisFeatureProcessorNGramEncoding =
+        member _.Yield(_: unit) : Types.DataframeAnalysisFeatureProcessorNGramEncoding =
             {
                 FeaturePrefix = None
                 Field = Unchecked.defaultof<_>
@@ -1219,33 +1219,33 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("featurePrefix")>]
-        member _.FeaturePrefix(state: DataframeAnalysisFeatureProcessorNGramEncoding, value: string) =
+        member _.FeaturePrefix(state: Types.DataframeAnalysisFeatureProcessorNGramEncoding, value: string) =
             { state with FeaturePrefix = Some value }
 
         [<CustomOperation("field")>]
-        member _.Field(state: DataframeAnalysisFeatureProcessorNGramEncoding, value: CoreTypes.Field) =
+        member _.Field(state: Types.DataframeAnalysisFeatureProcessorNGramEncoding, value: Types.Field) =
             { state with Field = value }
 
         [<CustomOperation("length")>]
-        member _.Length(state: DataframeAnalysisFeatureProcessorNGramEncoding, value: CoreTypes.Integer) =
+        member _.Length(state: Types.DataframeAnalysisFeatureProcessorNGramEncoding, value: Types.Integer) =
             { state with Length = Some value }
 
         [<CustomOperation("nGrams")>]
-        member _.NGrams(state: DataframeAnalysisFeatureProcessorNGramEncoding, value: CoreTypes.Integer list) =
+        member _.NGrams(state: Types.DataframeAnalysisFeatureProcessorNGramEncoding, value: Types.Integer list) =
             { state with NGrams = value }
 
         [<CustomOperation("start")>]
-        member _.Start(state: DataframeAnalysisFeatureProcessorNGramEncoding, value: CoreTypes.Integer) =
+        member _.Start(state: Types.DataframeAnalysisFeatureProcessorNGramEncoding, value: Types.Integer) =
             { state with Start = Some value }
 
         [<CustomOperation("custom")>]
-        member _.Custom(state: DataframeAnalysisFeatureProcessorNGramEncoding, value: bool) =
+        member _.Custom(state: Types.DataframeAnalysisFeatureProcessorNGramEncoding, value: bool) =
             { state with Custom = Some value }
 
     let dataframeAnalysisFeatureProcessorNGramEncoding = DataframeAnalysisFeatureProcessorNGramEncodingBuilder()
 
     type DataframeAnalysisOutlierDetectionBuilder() =
-        member _.Yield(_: unit) : DataframeAnalysisOutlierDetection =
+        member _.Yield(_: unit) : Types.DataframeAnalysisOutlierDetection =
             {
                 ComputeFeatureInfluence = None
                 FeatureInfluenceThreshold = None
@@ -1256,50 +1256,50 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("computeFeatureInfluence")>]
-        member _.ComputeFeatureInfluence(state: DataframeAnalysisOutlierDetection, value: bool) =
+        member _.ComputeFeatureInfluence(state: Types.DataframeAnalysisOutlierDetection, value: bool) =
             { state with ComputeFeatureInfluence = Some value }
 
         [<CustomOperation("featureInfluenceThreshold")>]
-        member _.FeatureInfluenceThreshold(state: DataframeAnalysisOutlierDetection, value: CoreTypes.Double) =
+        member _.FeatureInfluenceThreshold(state: Types.DataframeAnalysisOutlierDetection, value: Types.Double) =
             { state with FeatureInfluenceThreshold = Some value }
 
         [<CustomOperation("method")>]
-        member _.Method(state: DataframeAnalysisOutlierDetection, value: string) =
+        member _.Method(state: Types.DataframeAnalysisOutlierDetection, value: string) =
             { state with Method = Some value }
 
         [<CustomOperation("nNeighbors")>]
-        member _.NNeighbors(state: DataframeAnalysisOutlierDetection, value: CoreTypes.Integer) =
+        member _.NNeighbors(state: Types.DataframeAnalysisOutlierDetection, value: Types.Integer) =
             { state with NNeighbors = Some value }
 
         [<CustomOperation("outlierFraction")>]
-        member _.OutlierFraction(state: DataframeAnalysisOutlierDetection, value: CoreTypes.Double) =
+        member _.OutlierFraction(state: Types.DataframeAnalysisOutlierDetection, value: Types.Double) =
             { state with OutlierFraction = Some value }
 
         [<CustomOperation("standardizationEnabled")>]
-        member _.StandardizationEnabled(state: DataframeAnalysisOutlierDetection, value: bool) =
+        member _.StandardizationEnabled(state: Types.DataframeAnalysisOutlierDetection, value: bool) =
             { state with StandardizationEnabled = Some value }
 
     let dataframeAnalysisOutlierDetection = DataframeAnalysisOutlierDetectionBuilder()
 
     type DataframeAnalysisRegressionBuilder() =
-        member _.Yield(_: unit) : DataframeAnalysisRegression =
+        member _.Yield(_: unit) : Types.DataframeAnalysisRegression =
             {
                 LossFunction = None
                 LossFunctionParameter = None
             }
 
         [<CustomOperation("lossFunction")>]
-        member _.LossFunction(state: DataframeAnalysisRegression, value: string) =
+        member _.LossFunction(state: Types.DataframeAnalysisRegression, value: string) =
             { state with LossFunction = Some value }
 
         [<CustomOperation("lossFunctionParameter")>]
-        member _.LossFunctionParameter(state: DataframeAnalysisRegression, value: CoreTypes.Double) =
+        member _.LossFunctionParameter(state: Types.DataframeAnalysisRegression, value: Types.Double) =
             { state with LossFunctionParameter = Some value }
 
     let dataframeAnalysisRegression = DataframeAnalysisRegressionBuilder()
 
     type DataframeAnalyticsBuilder() =
-        member _.Yield(_: unit) : DataframeAnalytics =
+        member _.Yield(_: unit) : Types.DataframeAnalytics =
             {
                 AnalysisStats = None
                 AssignmentExplanation = None
@@ -1312,41 +1312,41 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("analysisStats")>]
-        member _.AnalysisStats(state: DataframeAnalytics, value: MlTypes.DataframeAnalyticsStatsContainer) =
+        member _.AnalysisStats(state: Types.DataframeAnalytics, value: Types.DataframeAnalyticsStatsContainer) =
             { state with AnalysisStats = Some value }
 
         [<CustomOperation("assignmentExplanation")>]
-        member _.AssignmentExplanation(state: DataframeAnalytics, value: string) =
+        member _.AssignmentExplanation(state: Types.DataframeAnalytics, value: string) =
             { state with AssignmentExplanation = Some value }
 
         [<CustomOperation("dataCounts")>]
-        member _.DataCounts(state: DataframeAnalytics, value: MlTypes.DataframeAnalyticsStatsDataCounts) =
+        member _.DataCounts(state: Types.DataframeAnalytics, value: Types.DataframeAnalyticsStatsDataCounts) =
             { state with DataCounts = value }
 
         [<CustomOperation("id")>]
-        member _.Id(state: DataframeAnalytics, value: CoreTypes.Id) =
+        member _.Id(state: Types.DataframeAnalytics, value: Types.Id) =
             { state with Id = value }
 
         [<CustomOperation("memoryUsage")>]
-        member _.MemoryUsage(state: DataframeAnalytics, value: MlTypes.DataframeAnalyticsStatsMemoryUsage) =
+        member _.MemoryUsage(state: Types.DataframeAnalytics, value: Types.DataframeAnalyticsStatsMemoryUsage) =
             { state with MemoryUsage = value }
 
         [<CustomOperation("node")>]
-        member _.Node(state: DataframeAnalytics, value: CoreTypes.NodeAttributes) =
+        member _.Node(state: Types.DataframeAnalytics, value: Types.NodeAttributes) =
             { state with Node = Some value }
 
         [<CustomOperation("progress")>]
-        member _.Progress(state: DataframeAnalytics, value: MlTypes.DataframeAnalyticsStatsProgress list) =
+        member _.Progress(state: Types.DataframeAnalytics, value: Types.DataframeAnalyticsStatsProgress list) =
             { state with Progress = value }
 
         [<CustomOperation("state")>]
-        member _.State(state: DataframeAnalytics, value: MlTypes.DataframeState) =
+        member _.State(state: Types.DataframeAnalytics, value: Types.DataframeState) =
             { state with State = value }
 
     let dataframeAnalytics = DataframeAnalyticsBuilder()
 
     type DataframeAnalyticsAuthorizationBuilder() =
-        member _.Yield(_: unit) : DataframeAnalyticsAuthorization =
+        member _.Yield(_: unit) : Types.DataframeAnalyticsAuthorization =
             {
                 ApiKey = None
                 Roles = None
@@ -1354,21 +1354,21 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("apiKey")>]
-        member _.ApiKey(state: DataframeAnalyticsAuthorization, value: MlTypes.ApiKeyAuthorization) =
+        member _.ApiKey(state: Types.DataframeAnalyticsAuthorization, value: Types.ApiKeyAuthorization) =
             { state with ApiKey = Some value }
 
         [<CustomOperation("roles")>]
-        member _.Roles(state: DataframeAnalyticsAuthorization, value: string list) =
+        member _.Roles(state: Types.DataframeAnalyticsAuthorization, value: string list) =
             { state with Roles = Some value }
 
         [<CustomOperation("serviceAccount")>]
-        member _.ServiceAccount(state: DataframeAnalyticsAuthorization, value: string) =
+        member _.ServiceAccount(state: Types.DataframeAnalyticsAuthorization, value: string) =
             { state with ServiceAccount = Some value }
 
     let dataframeAnalyticsAuthorization = DataframeAnalyticsAuthorizationBuilder()
 
     type DataframeAnalyticsFieldSelectionBuilder() =
-        member _.Yield(_: unit) : DataframeAnalyticsFieldSelection =
+        member _.Yield(_: unit) : Types.DataframeAnalyticsFieldSelection =
             {
                 IsIncluded = Unchecked.defaultof<_>
                 IsRequired = Unchecked.defaultof<_>
@@ -1379,33 +1379,33 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("isIncluded")>]
-        member _.IsIncluded(state: DataframeAnalyticsFieldSelection, value: bool) =
+        member _.IsIncluded(state: Types.DataframeAnalyticsFieldSelection, value: bool) =
             { state with IsIncluded = value }
 
         [<CustomOperation("isRequired")>]
-        member _.IsRequired(state: DataframeAnalyticsFieldSelection, value: bool) =
+        member _.IsRequired(state: Types.DataframeAnalyticsFieldSelection, value: bool) =
             { state with IsRequired = value }
 
         [<CustomOperation("featureType")>]
-        member _.FeatureType(state: DataframeAnalyticsFieldSelection, value: string) =
+        member _.FeatureType(state: Types.DataframeAnalyticsFieldSelection, value: string) =
             { state with FeatureType = Some value }
 
         [<CustomOperation("mappingTypes")>]
-        member _.MappingTypes(state: DataframeAnalyticsFieldSelection, value: string list) =
+        member _.MappingTypes(state: Types.DataframeAnalyticsFieldSelection, value: string list) =
             { state with MappingTypes = value }
 
         [<CustomOperation("name")>]
-        member _.Name(state: DataframeAnalyticsFieldSelection, value: CoreTypes.Field) =
+        member _.Name(state: Types.DataframeAnalyticsFieldSelection, value: Types.Field) =
             { state with Name = value }
 
         [<CustomOperation("reason")>]
-        member _.Reason(state: DataframeAnalyticsFieldSelection, value: string) =
+        member _.Reason(state: Types.DataframeAnalyticsFieldSelection, value: string) =
             { state with Reason = Some value }
 
     let dataframeAnalyticsFieldSelection = DataframeAnalyticsFieldSelectionBuilder()
 
     type DataframeAnalyticsSourceBuilder() =
-        member _.Yield(_: unit) : DataframeAnalyticsSource =
+        member _.Yield(_: unit) : Types.DataframeAnalyticsSource =
             {
                 Index = Unchecked.defaultof<_>
                 Query = None
@@ -1414,36 +1414,36 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: DataframeAnalyticsSource, value: CoreTypes.Indices) =
+        member _.Index(state: Types.DataframeAnalyticsSource, value: Types.Indices) =
             { state with Index = value }
 
         [<CustomOperation("query")>]
-        member _.Query(state: DataframeAnalyticsSource, value: CoreTypes.QueryContainer) =
+        member _.Query(state: Types.DataframeAnalyticsSource, value: Types.QueryContainer) =
             { state with Query = Some value }
 
         [<CustomOperation("runtimeMappings")>]
-        member _.RuntimeMappings(state: DataframeAnalyticsSource, value: CoreTypes.RuntimeFields) =
+        member _.RuntimeMappings(state: Types.DataframeAnalyticsSource, value: Types.RuntimeFields) =
             { state with RuntimeMappings = Some value }
 
         [<CustomOperation("source")>]
-        member _.Source(state: DataframeAnalyticsSource, value: MlTypes.DataframeAnalysisAnalyzedFields) =
+        member _.Source(state: Types.DataframeAnalyticsSource, value: Types.DataframeAnalysisAnalyzedFields) =
             { state with Source = Some value }
 
     let dataframeAnalyticsSource = DataframeAnalyticsSourceBuilder()
 
     module DataframeAnalyticsStats =
 
-        let classificationStats (value: MlTypes.DataframeAnalyticsStatsHyperparameters) =
-            DataframeAnalyticsStatsContainer.ClassificationStats value
+        let classificationStats (value: Types.DataframeAnalyticsStatsHyperparameters) =
+            Types.DataframeAnalyticsStatsContainer.ClassificationStats value
 
-        let outlierDetectionStats (value: MlTypes.DataframeAnalyticsStatsOutlierDetection) =
-            DataframeAnalyticsStatsContainer.OutlierDetectionStats value
+        let outlierDetectionStats (value: Types.DataframeAnalyticsStatsOutlierDetection) =
+            Types.DataframeAnalyticsStatsContainer.OutlierDetectionStats value
 
-        let regressionStats (value: MlTypes.DataframeAnalyticsStatsHyperparameters) =
-            DataframeAnalyticsStatsContainer.RegressionStats value
+        let regressionStats (value: Types.DataframeAnalyticsStatsHyperparameters) =
+            Types.DataframeAnalyticsStatsContainer.RegressionStats value
 
     type DataframeAnalyticsStatsMemoryUsageBuilder() =
-        member _.Yield(_: unit) : DataframeAnalyticsStatsMemoryUsage =
+        member _.Yield(_: unit) : Types.DataframeAnalyticsStatsMemoryUsage =
             {
                 MemoryReestimateBytes = None
                 PeakUsageBytes = Unchecked.defaultof<_>
@@ -1452,25 +1452,25 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("memoryReestimateBytes")>]
-        member _.MemoryReestimateBytes(state: DataframeAnalyticsStatsMemoryUsage, value: CoreTypes.Long) =
+        member _.MemoryReestimateBytes(state: Types.DataframeAnalyticsStatsMemoryUsage, value: Types.Long) =
             { state with MemoryReestimateBytes = Some value }
 
         [<CustomOperation("peakUsageBytes")>]
-        member _.PeakUsageBytes(state: DataframeAnalyticsStatsMemoryUsage, value: CoreTypes.Long) =
+        member _.PeakUsageBytes(state: Types.DataframeAnalyticsStatsMemoryUsage, value: Types.Long) =
             { state with PeakUsageBytes = value }
 
         [<CustomOperation("status")>]
-        member _.Status(state: DataframeAnalyticsStatsMemoryUsage, value: string) =
+        member _.Status(state: Types.DataframeAnalyticsStatsMemoryUsage, value: string) =
             { state with Status = value }
 
         [<CustomOperation("timestamp")>]
-        member _.Timestamp(state: DataframeAnalyticsStatsMemoryUsage, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
+        member _.Timestamp(state: Types.DataframeAnalyticsStatsMemoryUsage, value: Types.EpochTime<Types.UnitMillis>) =
             { state with Timestamp = Some value }
 
     let dataframeAnalyticsStatsMemoryUsage = DataframeAnalyticsStatsMemoryUsageBuilder()
 
     type DataframeAnalyticsSummaryBuilder() =
-        member _.Yield(_: unit) : DataframeAnalyticsSummary =
+        member _.Yield(_: unit) : Types.DataframeAnalyticsSummary =
             {
                 AllowLazyStart = None
                 Analysis = Unchecked.defaultof<_>
@@ -1488,61 +1488,61 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("allowLazyStart")>]
-        member _.AllowLazyStart(state: DataframeAnalyticsSummary, value: bool) =
+        member _.AllowLazyStart(state: Types.DataframeAnalyticsSummary, value: bool) =
             { state with AllowLazyStart = Some value }
 
         [<CustomOperation("analysis")>]
-        member _.Analysis(state: DataframeAnalyticsSummary, value: MlTypes.DataframeAnalysisContainer) =
+        member _.Analysis(state: Types.DataframeAnalyticsSummary, value: Types.DataframeAnalysisContainer) =
             { state with Analysis = value }
 
         [<CustomOperation("analyzedFields")>]
-        member _.AnalyzedFields(state: DataframeAnalyticsSummary, value: MlTypes.DataframeAnalysisAnalyzedFields) =
+        member _.AnalyzedFields(state: Types.DataframeAnalyticsSummary, value: Types.DataframeAnalysisAnalyzedFields) =
             { state with AnalyzedFields = Some value }
 
         [<CustomOperation("authorization")>]
-        member _.Authorization(state: DataframeAnalyticsSummary, value: MlTypes.DataframeAnalyticsAuthorization) =
+        member _.Authorization(state: Types.DataframeAnalyticsSummary, value: Types.DataframeAnalyticsAuthorization) =
             { state with Authorization = Some value }
 
         [<CustomOperation("createTime")>]
-        member _.CreateTime(state: DataframeAnalyticsSummary, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
+        member _.CreateTime(state: Types.DataframeAnalyticsSummary, value: Types.EpochTime<Types.UnitMillis>) =
             { state with CreateTime = Some value }
 
         [<CustomOperation("description")>]
-        member _.Description(state: DataframeAnalyticsSummary, value: string) =
+        member _.Description(state: Types.DataframeAnalyticsSummary, value: string) =
             { state with Description = Some value }
 
         [<CustomOperation("dest")>]
-        member _.Dest(state: DataframeAnalyticsSummary, value: MlTypes.DataframeAnalyticsDestination) =
+        member _.Dest(state: Types.DataframeAnalyticsSummary, value: Types.DataframeAnalyticsDestination) =
             { state with Dest = value }
 
         [<CustomOperation("id")>]
-        member _.Id(state: DataframeAnalyticsSummary, value: CoreTypes.Id) =
+        member _.Id(state: Types.DataframeAnalyticsSummary, value: Types.Id) =
             { state with Id = value }
 
         [<CustomOperation("maxNumThreads")>]
-        member _.MaxNumThreads(state: DataframeAnalyticsSummary, value: CoreTypes.Integer) =
+        member _.MaxNumThreads(state: Types.DataframeAnalyticsSummary, value: Types.Integer) =
             { state with MaxNumThreads = Some value }
 
         [<CustomOperation("modelMemoryLimit")>]
-        member _.ModelMemoryLimit(state: DataframeAnalyticsSummary, value: string) =
+        member _.ModelMemoryLimit(state: Types.DataframeAnalyticsSummary, value: string) =
             { state with ModelMemoryLimit = Some value }
 
         [<CustomOperation("source")>]
-        member _.Source(state: DataframeAnalyticsSummary, value: MlTypes.DataframeAnalyticsSource) =
+        member _.Source(state: Types.DataframeAnalyticsSummary, value: Types.DataframeAnalyticsSource) =
             { state with Source = value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: DataframeAnalyticsSummary, value: CoreTypes.VersionString) =
+        member _.Version(state: Types.DataframeAnalyticsSummary, value: Types.VersionString) =
             { state with Version = Some value }
 
         [<CustomOperation("meta")>]
-        member _.Meta(state: DataframeAnalyticsSummary, value: CoreTypes.Metadata) =
+        member _.Meta(state: Types.DataframeAnalyticsSummary, value: Types.Metadata) =
             { state with Meta = Some value }
 
     let dataframeAnalyticsSummary = DataframeAnalyticsSummaryBuilder()
 
     type DataframeEvaluationClassificationBuilder() =
-        member _.Yield(_: unit) : DataframeEvaluationClassification =
+        member _.Yield(_: unit) : Types.DataframeEvaluationClassification =
             {
                 ActualField = Unchecked.defaultof<_>
                 PredictedField = None
@@ -1551,70 +1551,70 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("actualField")>]
-        member _.ActualField(state: DataframeEvaluationClassification, value: CoreTypes.Field) =
+        member _.ActualField(state: Types.DataframeEvaluationClassification, value: Types.Field) =
             { state with ActualField = value }
 
         [<CustomOperation("predictedField")>]
-        member _.PredictedField(state: DataframeEvaluationClassification, value: CoreTypes.Field) =
+        member _.PredictedField(state: Types.DataframeEvaluationClassification, value: Types.Field) =
             { state with PredictedField = Some value }
 
         [<CustomOperation("topClassesField")>]
-        member _.TopClassesField(state: DataframeEvaluationClassification, value: CoreTypes.Field) =
+        member _.TopClassesField(state: Types.DataframeEvaluationClassification, value: Types.Field) =
             { state with TopClassesField = Some value }
 
         [<CustomOperation("metrics")>]
-        member _.Metrics(state: DataframeEvaluationClassification, value: MlTypes.DataframeEvaluationClassificationMetrics) =
+        member _.Metrics(state: Types.DataframeEvaluationClassification, value: Types.DataframeEvaluationClassificationMetrics) =
             { state with Metrics = Some value }
 
     let dataframeEvaluationClassification = DataframeEvaluationClassificationBuilder()
 
     type DataframeEvaluationClassificationMetricsBuilder() =
-        member _.Yield(_: unit) : DataframeEvaluationClassificationMetrics =
+        member _.Yield(_: unit) : Types.DataframeEvaluationClassificationMetrics =
             {
                 Accuracy = None
                 MulticlassConfusionMatrix = None
             }
 
         [<CustomOperation("accuracy")>]
-        member _.Accuracy(state: DataframeEvaluationClassificationMetrics, value: Map<string, System.Text.Json.JsonElement>) =
+        member _.Accuracy(state: Types.DataframeEvaluationClassificationMetrics, value: Map<string, System.Text.Json.JsonElement>) =
             { state with Accuracy = Some value }
 
         [<CustomOperation("multiclassConfusionMatrix")>]
-        member _.MulticlassConfusionMatrix(state: DataframeEvaluationClassificationMetrics, value: Map<string, System.Text.Json.JsonElement>) =
+        member _.MulticlassConfusionMatrix(state: Types.DataframeEvaluationClassificationMetrics, value: Map<string, System.Text.Json.JsonElement>) =
             { state with MulticlassConfusionMatrix = Some value }
 
     let dataframeEvaluationClassificationMetrics = DataframeEvaluationClassificationMetricsBuilder()
 
     type DataframeEvaluationClassificationMetricsAucRocBuilder() =
-        member _.Yield(_: unit) : DataframeEvaluationClassificationMetricsAucRoc =
+        member _.Yield(_: unit) : Types.DataframeEvaluationClassificationMetricsAucRoc =
             {
                 ClassName = None
                 IncludeCurve = None
             }
 
         [<CustomOperation("className")>]
-        member _.ClassName(state: DataframeEvaluationClassificationMetricsAucRoc, value: CoreTypes.Name) =
+        member _.ClassName(state: Types.DataframeEvaluationClassificationMetricsAucRoc, value: Types.Name) =
             { state with ClassName = Some value }
 
         [<CustomOperation("includeCurve")>]
-        member _.IncludeCurve(state: DataframeEvaluationClassificationMetricsAucRoc, value: bool) =
+        member _.IncludeCurve(state: Types.DataframeEvaluationClassificationMetricsAucRoc, value: bool) =
             { state with IncludeCurve = Some value }
 
     let dataframeEvaluationClassificationMetricsAucRoc = DataframeEvaluationClassificationMetricsAucRocBuilder()
 
     module DataframeEvaluation =
 
-        let classification (value: MlTypes.DataframeEvaluationClassification) =
-            DataframeEvaluationContainer.Classification value
+        let classification (value: Types.DataframeEvaluationClassification) =
+            Types.DataframeEvaluationContainer.Classification value
 
-        let outlierDetection (value: MlTypes.DataframeEvaluationOutlierDetection) =
-            DataframeEvaluationContainer.OutlierDetection value
+        let outlierDetection (value: Types.DataframeEvaluationOutlierDetection) =
+            Types.DataframeEvaluationContainer.OutlierDetection value
 
-        let regression (value: MlTypes.DataframeEvaluationRegression) =
-            DataframeEvaluationContainer.Regression value
+        let regression (value: Types.DataframeEvaluationRegression) =
+            Types.DataframeEvaluationContainer.Regression value
 
     type DataframeEvaluationMetricsBuilder() =
-        member _.Yield(_: unit) : DataframeEvaluationMetrics =
+        member _.Yield(_: unit) : Types.DataframeEvaluationMetrics =
             {
                 AucRoc = None
                 Precision = None
@@ -1622,21 +1622,21 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("aucRoc")>]
-        member _.AucRoc(state: DataframeEvaluationMetrics, value: MlTypes.DataframeEvaluationClassificationMetricsAucRoc) =
+        member _.AucRoc(state: Types.DataframeEvaluationMetrics, value: Types.DataframeEvaluationClassificationMetricsAucRoc) =
             { state with AucRoc = Some value }
 
         [<CustomOperation("precision")>]
-        member _.Precision(state: DataframeEvaluationMetrics, value: Map<string, System.Text.Json.JsonElement>) =
+        member _.Precision(state: Types.DataframeEvaluationMetrics, value: Map<string, System.Text.Json.JsonElement>) =
             { state with Precision = Some value }
 
         [<CustomOperation("recall")>]
-        member _.Recall(state: DataframeEvaluationMetrics, value: Map<string, System.Text.Json.JsonElement>) =
+        member _.Recall(state: Types.DataframeEvaluationMetrics, value: Map<string, System.Text.Json.JsonElement>) =
             { state with Recall = Some value }
 
     let dataframeEvaluationMetrics = DataframeEvaluationMetricsBuilder()
 
     type DataframeEvaluationRegressionMetricsBuilder() =
-        member _.Yield(_: unit) : DataframeEvaluationRegressionMetrics =
+        member _.Yield(_: unit) : Types.DataframeEvaluationRegressionMetrics =
             {
                 Mse = None
                 Msle = None
@@ -1645,25 +1645,25 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("mse")>]
-        member _.Mse(state: DataframeEvaluationRegressionMetrics, value: Map<string, System.Text.Json.JsonElement>) =
+        member _.Mse(state: Types.DataframeEvaluationRegressionMetrics, value: Map<string, System.Text.Json.JsonElement>) =
             { state with Mse = Some value }
 
         [<CustomOperation("msle")>]
-        member _.Msle(state: DataframeEvaluationRegressionMetrics, value: MlTypes.DataframeEvaluationRegressionMetricsMsle) =
+        member _.Msle(state: Types.DataframeEvaluationRegressionMetrics, value: Types.DataframeEvaluationRegressionMetricsMsle) =
             { state with Msle = Some value }
 
         [<CustomOperation("huber")>]
-        member _.Huber(state: DataframeEvaluationRegressionMetrics, value: MlTypes.DataframeEvaluationRegressionMetricsHuber) =
+        member _.Huber(state: Types.DataframeEvaluationRegressionMetrics, value: Types.DataframeEvaluationRegressionMetricsHuber) =
             { state with Huber = Some value }
 
         [<CustomOperation("rSquared")>]
-        member _.RSquared(state: DataframeEvaluationRegressionMetrics, value: Map<string, System.Text.Json.JsonElement>) =
+        member _.RSquared(state: Types.DataframeEvaluationRegressionMetrics, value: Map<string, System.Text.Json.JsonElement>) =
             { state with RSquared = Some value }
 
     let dataframeEvaluationRegressionMetrics = DataframeEvaluationRegressionMetricsBuilder()
 
     type DetectionRuleBuilder() =
-        member _.Yield(_: unit) : DetectionRule =
+        member _.Yield(_: unit) : Types.DetectionRule =
             {
                 Actions = None
                 Conditions = None
@@ -1671,21 +1671,21 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("actions")>]
-        member _.Actions(state: DetectionRule, value: MlTypes.RuleAction list) =
+        member _.Actions(state: Types.DetectionRule, value: Types.RuleAction list) =
             { state with Actions = Some value }
 
         [<CustomOperation("conditions")>]
-        member _.Conditions(state: DetectionRule, value: MlTypes.RuleCondition list) =
+        member _.Conditions(state: Types.DetectionRule, value: Types.RuleCondition list) =
             { state with Conditions = Some value }
 
         [<CustomOperation("scope")>]
-        member _.Scope(state: DetectionRule, value: Map<CoreTypes.Field, MlTypes.FilterRef>) =
+        member _.Scope(state: Types.DetectionRule, value: Map<Types.Field, Types.FilterRef>) =
             { state with Scope = Some value }
 
     let detectionRule = DetectionRuleBuilder()
 
     type DetectorBuilder() =
-        member _.Yield(_: unit) : Detector =
+        member _.Yield(_: unit) : Types.Detector =
             {
                 ByFieldName = None
                 CustomRules = None
@@ -1700,49 +1700,49 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("byFieldName")>]
-        member _.ByFieldName(state: Detector, value: CoreTypes.Field) =
+        member _.ByFieldName(state: Types.Detector, value: Types.Field) =
             { state with ByFieldName = Some value }
 
         [<CustomOperation("customRules")>]
-        member _.CustomRules(state: Detector, value: MlTypes.DetectionRule list) =
+        member _.CustomRules(state: Types.Detector, value: Types.DetectionRule list) =
             { state with CustomRules = Some value }
 
         [<CustomOperation("detectorDescription")>]
-        member _.DetectorDescription(state: Detector, value: string) =
+        member _.DetectorDescription(state: Types.Detector, value: string) =
             { state with DetectorDescription = Some value }
 
         [<CustomOperation("detectorIndex")>]
-        member _.DetectorIndex(state: Detector, value: CoreTypes.Integer) =
+        member _.DetectorIndex(state: Types.Detector, value: Types.Integer) =
             { state with DetectorIndex = Some value }
 
         [<CustomOperation("excludeFrequent")>]
-        member _.ExcludeFrequent(state: Detector, value: MlTypes.ExcludeFrequent) =
+        member _.ExcludeFrequent(state: Types.Detector, value: Types.ExcludeFrequent) =
             { state with ExcludeFrequent = Some value }
 
         [<CustomOperation("fieldName")>]
-        member _.FieldName(state: Detector, value: CoreTypes.Field) =
+        member _.FieldName(state: Types.Detector, value: Types.Field) =
             { state with FieldName = Some value }
 
         [<CustomOperation("function'")>]
-        member _.Function(state: Detector, value: string) =
+        member _.Function(state: Types.Detector, value: string) =
             { state with Function = Some value }
 
         [<CustomOperation("overFieldName")>]
-        member _.OverFieldName(state: Detector, value: CoreTypes.Field) =
+        member _.OverFieldName(state: Types.Detector, value: Types.Field) =
             { state with OverFieldName = Some value }
 
         [<CustomOperation("partitionFieldName")>]
-        member _.PartitionFieldName(state: Detector, value: CoreTypes.Field) =
+        member _.PartitionFieldName(state: Types.Detector, value: Types.Field) =
             { state with PartitionFieldName = Some value }
 
         [<CustomOperation("useNull")>]
-        member _.UseNull(state: Detector, value: bool) =
+        member _.UseNull(state: Types.Detector, value: bool) =
             { state with UseNull = Some value }
 
     let detector = DetectorBuilder()
 
     type DetectorReadBuilder() =
-        member _.Yield(_: unit) : DetectorRead =
+        member _.Yield(_: unit) : Types.DetectorRead =
             {
                 Function = Unchecked.defaultof<_>
                 ByFieldName = None
@@ -1757,49 +1757,49 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("function'")>]
-        member _.Function(state: DetectorRead, value: string) =
+        member _.Function(state: Types.DetectorRead, value: string) =
             { state with Function = value }
 
         [<CustomOperation("byFieldName")>]
-        member _.ByFieldName(state: DetectorRead, value: CoreTypes.Field) =
+        member _.ByFieldName(state: Types.DetectorRead, value: Types.Field) =
             { state with ByFieldName = Some value }
 
         [<CustomOperation("customRules")>]
-        member _.CustomRules(state: DetectorRead, value: MlTypes.DetectionRule list) =
+        member _.CustomRules(state: Types.DetectorRead, value: Types.DetectionRule list) =
             { state with CustomRules = Some value }
 
         [<CustomOperation("detectorDescription")>]
-        member _.DetectorDescription(state: DetectorRead, value: string) =
+        member _.DetectorDescription(state: Types.DetectorRead, value: string) =
             { state with DetectorDescription = Some value }
 
         [<CustomOperation("detectorIndex")>]
-        member _.DetectorIndex(state: DetectorRead, value: CoreTypes.Integer) =
+        member _.DetectorIndex(state: Types.DetectorRead, value: Types.Integer) =
             { state with DetectorIndex = Some value }
 
         [<CustomOperation("excludeFrequent")>]
-        member _.ExcludeFrequent(state: DetectorRead, value: MlTypes.ExcludeFrequent) =
+        member _.ExcludeFrequent(state: Types.DetectorRead, value: Types.ExcludeFrequent) =
             { state with ExcludeFrequent = Some value }
 
         [<CustomOperation("fieldName")>]
-        member _.FieldName(state: DetectorRead, value: CoreTypes.Field) =
+        member _.FieldName(state: Types.DetectorRead, value: Types.Field) =
             { state with FieldName = Some value }
 
         [<CustomOperation("overFieldName")>]
-        member _.OverFieldName(state: DetectorRead, value: CoreTypes.Field) =
+        member _.OverFieldName(state: Types.DetectorRead, value: Types.Field) =
             { state with OverFieldName = Some value }
 
         [<CustomOperation("partitionFieldName")>]
-        member _.PartitionFieldName(state: DetectorRead, value: CoreTypes.Field) =
+        member _.PartitionFieldName(state: Types.DetectorRead, value: Types.Field) =
             { state with PartitionFieldName = Some value }
 
         [<CustomOperation("useNull")>]
-        member _.UseNull(state: DetectorRead, value: bool) =
+        member _.UseNull(state: Types.DetectorRead, value: bool) =
             { state with UseNull = Some value }
 
     let detectorRead = DetectorReadBuilder()
 
     type DetectorUpdateBuilder() =
-        member _.Yield(_: unit) : DetectorUpdate =
+        member _.Yield(_: unit) : Types.DetectorUpdate =
             {
                 DetectorIndex = Unchecked.defaultof<_>
                 Description = None
@@ -1807,21 +1807,21 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("detectorIndex")>]
-        member _.DetectorIndex(state: DetectorUpdate, value: CoreTypes.Integer) =
+        member _.DetectorIndex(state: Types.DetectorUpdate, value: Types.Integer) =
             { state with DetectorIndex = value }
 
         [<CustomOperation("description")>]
-        member _.Description(state: DetectorUpdate, value: string) =
+        member _.Description(state: Types.DetectorUpdate, value: string) =
             { state with Description = Some value }
 
         [<CustomOperation("customRules")>]
-        member _.CustomRules(state: DetectorUpdate, value: MlTypes.DetectionRule list) =
+        member _.CustomRules(state: Types.DetectorUpdate, value: Types.DetectionRule list) =
             { state with CustomRules = Some value }
 
     let detectorUpdate = DetectorUpdateBuilder()
 
     type ExponentialAverageCalculationContextBuilder() =
-        member _.Yield(_: unit) : ExponentialAverageCalculationContext =
+        member _.Yield(_: unit) : Types.ExponentialAverageCalculationContext =
             {
                 IncrementalMetricValueMs = Unchecked.defaultof<_>
                 LatestTimestamp = None
@@ -1829,21 +1829,21 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("incrementalMetricValueMs")>]
-        member _.IncrementalMetricValueMs(state: ExponentialAverageCalculationContext, value: CoreTypes.DurationValue<CoreTypes.UnitFloatMillis>) =
+        member _.IncrementalMetricValueMs(state: Types.ExponentialAverageCalculationContext, value: Types.DurationValue<Types.UnitFloatMillis>) =
             { state with IncrementalMetricValueMs = value }
 
         [<CustomOperation("latestTimestamp")>]
-        member _.LatestTimestamp(state: ExponentialAverageCalculationContext, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
+        member _.LatestTimestamp(state: Types.ExponentialAverageCalculationContext, value: Types.EpochTime<Types.UnitMillis>) =
             { state with LatestTimestamp = Some value }
 
         [<CustomOperation("previousExponentialAverageMs")>]
-        member _.PreviousExponentialAverageMs(state: ExponentialAverageCalculationContext, value: CoreTypes.DurationValue<CoreTypes.UnitFloatMillis>) =
+        member _.PreviousExponentialAverageMs(state: Types.ExponentialAverageCalculationContext, value: Types.DurationValue<Types.UnitFloatMillis>) =
             { state with PreviousExponentialAverageMs = Some value }
 
     let exponentialAverageCalculationContext = ExponentialAverageCalculationContextBuilder()
 
     type FillMaskInferenceOptionsBuilder() =
-        member _.Yield(_: unit) : FillMaskInferenceOptions =
+        member _.Yield(_: unit) : Types.FillMaskInferenceOptions =
             {
                 MaskToken = None
                 NumTopClasses = None
@@ -1853,29 +1853,29 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("maskToken")>]
-        member _.MaskToken(state: FillMaskInferenceOptions, value: string) =
+        member _.MaskToken(state: Types.FillMaskInferenceOptions, value: string) =
             { state with MaskToken = Some value }
 
         [<CustomOperation("numTopClasses")>]
-        member _.NumTopClasses(state: FillMaskInferenceOptions, value: CoreTypes.Integer) =
+        member _.NumTopClasses(state: Types.FillMaskInferenceOptions, value: Types.Integer) =
             { state with NumTopClasses = Some value }
 
         [<CustomOperation("tokenization")>]
-        member _.Tokenization(state: FillMaskInferenceOptions, value: MlTypes.TokenizationConfigContainer) =
+        member _.Tokenization(state: Types.FillMaskInferenceOptions, value: Types.TokenizationConfigContainer) =
             { state with Tokenization = Some value }
 
         [<CustomOperation("resultsField")>]
-        member _.ResultsField(state: FillMaskInferenceOptions, value: string) =
+        member _.ResultsField(state: Types.FillMaskInferenceOptions, value: string) =
             { state with ResultsField = Some value }
 
         [<CustomOperation("vocabulary")>]
-        member _.Vocabulary(state: FillMaskInferenceOptions, value: MlTypes.Vocabulary) =
+        member _.Vocabulary(state: Types.FillMaskInferenceOptions, value: Types.Vocabulary) =
             { state with Vocabulary = Some value }
 
     let fillMaskInferenceOptions = FillMaskInferenceOptionsBuilder()
 
     type FillMaskInferenceUpdateOptionsBuilder() =
-        member _.Yield(_: unit) : FillMaskInferenceUpdateOptions =
+        member _.Yield(_: unit) : Types.FillMaskInferenceUpdateOptions =
             {
                 NumTopClasses = None
                 Tokenization = None
@@ -1883,38 +1883,38 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("numTopClasses")>]
-        member _.NumTopClasses(state: FillMaskInferenceUpdateOptions, value: CoreTypes.Integer) =
+        member _.NumTopClasses(state: Types.FillMaskInferenceUpdateOptions, value: Types.Integer) =
             { state with NumTopClasses = Some value }
 
         [<CustomOperation("tokenization")>]
-        member _.Tokenization(state: FillMaskInferenceUpdateOptions, value: MlTypes.NlpTokenizationUpdateOptions) =
+        member _.Tokenization(state: Types.FillMaskInferenceUpdateOptions, value: Types.NlpTokenizationUpdateOptions) =
             { state with Tokenization = Some value }
 
         [<CustomOperation("resultsField")>]
-        member _.ResultsField(state: FillMaskInferenceUpdateOptions, value: string) =
+        member _.ResultsField(state: Types.FillMaskInferenceUpdateOptions, value: string) =
             { state with ResultsField = Some value }
 
     let fillMaskInferenceUpdateOptions = FillMaskInferenceUpdateOptionsBuilder()
 
     type GeoResultsBuilder() =
-        member _.Yield(_: unit) : GeoResults =
+        member _.Yield(_: unit) : Types.GeoResults =
             {
                 ActualPoint = None
                 TypicalPoint = None
             }
 
         [<CustomOperation("actualPoint")>]
-        member _.ActualPoint(state: GeoResults, value: string) =
+        member _.ActualPoint(state: Types.GeoResults, value: string) =
             { state with ActualPoint = Some value }
 
         [<CustomOperation("typicalPoint")>]
-        member _.TypicalPoint(state: GeoResults, value: string) =
+        member _.TypicalPoint(state: Types.GeoResults, value: string) =
             { state with TypicalPoint = Some value }
 
     let geoResults = GeoResultsBuilder()
 
     type HyperparameterBuilder() =
-        member _.Yield(_: unit) : Hyperparameter =
+        member _.Yield(_: unit) : Types.Hyperparameter =
             {
                 AbsoluteImportance = None
                 Name = Unchecked.defaultof<_>
@@ -1924,29 +1924,29 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("absoluteImportance")>]
-        member _.AbsoluteImportance(state: Hyperparameter, value: CoreTypes.Double) =
+        member _.AbsoluteImportance(state: Types.Hyperparameter, value: Types.Double) =
             { state with AbsoluteImportance = Some value }
 
         [<CustomOperation("name")>]
-        member _.Name(state: Hyperparameter, value: CoreTypes.Name) =
+        member _.Name(state: Types.Hyperparameter, value: Types.Name) =
             { state with Name = value }
 
         [<CustomOperation("relativeImportance")>]
-        member _.RelativeImportance(state: Hyperparameter, value: CoreTypes.Double) =
+        member _.RelativeImportance(state: Types.Hyperparameter, value: Types.Double) =
             { state with RelativeImportance = Some value }
 
         [<CustomOperation("supplied")>]
-        member _.Supplied(state: Hyperparameter, value: bool) =
+        member _.Supplied(state: Types.Hyperparameter, value: bool) =
             { state with Supplied = value }
 
         [<CustomOperation("value")>]
-        member _.Value(state: Hyperparameter, value: CoreTypes.Double) =
+        member _.Value(state: Types.Hyperparameter, value: Types.Double) =
             { state with Value = value }
 
     let hyperparameter = HyperparameterBuilder()
 
     type HyperparametersBuilder() =
-        member _.Yield(_: unit) : Hyperparameters =
+        member _.Yield(_: unit) : Types.Hyperparameters =
             {
                 Alpha = None
                 Lambda = None
@@ -1965,132 +1965,132 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("alpha")>]
-        member _.Alpha(state: Hyperparameters, value: CoreTypes.Double) =
+        member _.Alpha(state: Types.Hyperparameters, value: Types.Double) =
             { state with Alpha = Some value }
 
         [<CustomOperation("lambda")>]
-        member _.Lambda(state: Hyperparameters, value: CoreTypes.Double) =
+        member _.Lambda(state: Types.Hyperparameters, value: Types.Double) =
             { state with Lambda = Some value }
 
         [<CustomOperation("gamma")>]
-        member _.Gamma(state: Hyperparameters, value: CoreTypes.Double) =
+        member _.Gamma(state: Types.Hyperparameters, value: Types.Double) =
             { state with Gamma = Some value }
 
         [<CustomOperation("eta")>]
-        member _.Eta(state: Hyperparameters, value: CoreTypes.Double) =
+        member _.Eta(state: Types.Hyperparameters, value: Types.Double) =
             { state with Eta = Some value }
 
         [<CustomOperation("etaGrowthRatePerTree")>]
-        member _.EtaGrowthRatePerTree(state: Hyperparameters, value: CoreTypes.Double) =
+        member _.EtaGrowthRatePerTree(state: Types.Hyperparameters, value: Types.Double) =
             { state with EtaGrowthRatePerTree = Some value }
 
         [<CustomOperation("featureBagFraction")>]
-        member _.FeatureBagFraction(state: Hyperparameters, value: CoreTypes.Double) =
+        member _.FeatureBagFraction(state: Types.Hyperparameters, value: Types.Double) =
             { state with FeatureBagFraction = Some value }
 
         [<CustomOperation("downsampleFactor")>]
-        member _.DownsampleFactor(state: Hyperparameters, value: CoreTypes.Double) =
+        member _.DownsampleFactor(state: Types.Hyperparameters, value: Types.Double) =
             { state with DownsampleFactor = Some value }
 
         [<CustomOperation("maxAttemptsToAddTree")>]
-        member _.MaxAttemptsToAddTree(state: Hyperparameters, value: CoreTypes.Integer) =
+        member _.MaxAttemptsToAddTree(state: Types.Hyperparameters, value: Types.Integer) =
             { state with MaxAttemptsToAddTree = Some value }
 
         [<CustomOperation("maxOptimizationRoundsPerHyperparameter")>]
-        member _.MaxOptimizationRoundsPerHyperparameter(state: Hyperparameters, value: CoreTypes.Integer) =
+        member _.MaxOptimizationRoundsPerHyperparameter(state: Types.Hyperparameters, value: Types.Integer) =
             { state with MaxOptimizationRoundsPerHyperparameter = Some value }
 
         [<CustomOperation("maxTrees")>]
-        member _.MaxTrees(state: Hyperparameters, value: CoreTypes.Integer) =
+        member _.MaxTrees(state: Types.Hyperparameters, value: Types.Integer) =
             { state with MaxTrees = Some value }
 
         [<CustomOperation("numFolds")>]
-        member _.NumFolds(state: Hyperparameters, value: CoreTypes.Integer) =
+        member _.NumFolds(state: Types.Hyperparameters, value: Types.Integer) =
             { state with NumFolds = Some value }
 
         [<CustomOperation("numSplitsPerFeature")>]
-        member _.NumSplitsPerFeature(state: Hyperparameters, value: CoreTypes.Integer) =
+        member _.NumSplitsPerFeature(state: Types.Hyperparameters, value: Types.Integer) =
             { state with NumSplitsPerFeature = Some value }
 
         [<CustomOperation("softTreeDepthLimit")>]
-        member _.SoftTreeDepthLimit(state: Hyperparameters, value: CoreTypes.Integer) =
+        member _.SoftTreeDepthLimit(state: Types.Hyperparameters, value: Types.Integer) =
             { state with SoftTreeDepthLimit = Some value }
 
         [<CustomOperation("softTreeDepthTolerance")>]
-        member _.SoftTreeDepthTolerance(state: Hyperparameters, value: CoreTypes.Double) =
+        member _.SoftTreeDepthTolerance(state: Types.Hyperparameters, value: Types.Double) =
             { state with SoftTreeDepthTolerance = Some value }
 
     let hyperparameters = HyperparametersBuilder()
 
     module InferenceConfigCreate =
 
-        let regression (value: MlTypes.RegressionInferenceOptions) =
-            InferenceConfigCreateContainer.Regression value
+        let regression (value: Types.RegressionInferenceOptions) =
+            Types.InferenceConfigCreateContainer.Regression value
 
-        let classification (value: MlTypes.ClassificationInferenceOptions) =
-            InferenceConfigCreateContainer.Classification value
+        let classification (value: Types.ClassificationInferenceOptions) =
+            Types.InferenceConfigCreateContainer.Classification value
 
-        let textClassification (value: MlTypes.TextClassificationInferenceOptions) =
-            InferenceConfigCreateContainer.TextClassification value
+        let textClassification (value: Types.TextClassificationInferenceOptions) =
+            Types.InferenceConfigCreateContainer.TextClassification value
 
-        let zeroShotClassification (value: MlTypes.ZeroShotClassificationInferenceOptions) =
-            InferenceConfigCreateContainer.ZeroShotClassification value
+        let zeroShotClassification (value: Types.ZeroShotClassificationInferenceOptions) =
+            Types.InferenceConfigCreateContainer.ZeroShotClassification value
 
-        let fillMask (value: MlTypes.FillMaskInferenceOptions) =
-            InferenceConfigCreateContainer.FillMask value
+        let fillMask (value: Types.FillMaskInferenceOptions) =
+            Types.InferenceConfigCreateContainer.FillMask value
 
-        let learningToRank (value: MlTypes.LearningToRankConfig) =
-            InferenceConfigCreateContainer.LearningToRank value
+        let learningToRank (value: Types.LearningToRankConfig) =
+            Types.InferenceConfigCreateContainer.LearningToRank value
 
-        let ner (value: MlTypes.NerInferenceOptions) =
-            InferenceConfigCreateContainer.Ner value
+        let ner (value: Types.NerInferenceOptions) =
+            Types.InferenceConfigCreateContainer.Ner value
 
-        let passThrough (value: MlTypes.PassThroughInferenceOptions) =
-            InferenceConfigCreateContainer.PassThrough value
+        let passThrough (value: Types.PassThroughInferenceOptions) =
+            Types.InferenceConfigCreateContainer.PassThrough value
 
-        let textEmbedding (value: MlTypes.TextEmbeddingInferenceOptions) =
-            InferenceConfigCreateContainer.TextEmbedding value
+        let textEmbedding (value: Types.TextEmbeddingInferenceOptions) =
+            Types.InferenceConfigCreateContainer.TextEmbedding value
 
-        let textExpansion (value: MlTypes.TextExpansionInferenceOptions) =
-            InferenceConfigCreateContainer.TextExpansion value
+        let textExpansion (value: Types.TextExpansionInferenceOptions) =
+            Types.InferenceConfigCreateContainer.TextExpansion value
 
-        let questionAnswering (value: MlTypes.QuestionAnsweringInferenceOptions) =
-            InferenceConfigCreateContainer.QuestionAnswering value
+        let questionAnswering (value: Types.QuestionAnsweringInferenceOptions) =
+            Types.InferenceConfigCreateContainer.QuestionAnswering value
 
     module InferenceConfigUpdate =
 
-        let regression (value: MlTypes.RegressionInferenceOptions) =
-            InferenceConfigUpdateContainer.Regression value
+        let regression (value: Types.RegressionInferenceOptions) =
+            Types.InferenceConfigUpdateContainer.Regression value
 
-        let classification (value: MlTypes.ClassificationInferenceOptions) =
-            InferenceConfigUpdateContainer.Classification value
+        let classification (value: Types.ClassificationInferenceOptions) =
+            Types.InferenceConfigUpdateContainer.Classification value
 
-        let textClassification (value: MlTypes.TextClassificationInferenceUpdateOptions) =
-            InferenceConfigUpdateContainer.TextClassification value
+        let textClassification (value: Types.TextClassificationInferenceUpdateOptions) =
+            Types.InferenceConfigUpdateContainer.TextClassification value
 
-        let zeroShotClassification (value: MlTypes.ZeroShotClassificationInferenceUpdateOptions) =
-            InferenceConfigUpdateContainer.ZeroShotClassification value
+        let zeroShotClassification (value: Types.ZeroShotClassificationInferenceUpdateOptions) =
+            Types.InferenceConfigUpdateContainer.ZeroShotClassification value
 
-        let fillMask (value: MlTypes.FillMaskInferenceUpdateOptions) =
-            InferenceConfigUpdateContainer.FillMask value
+        let fillMask (value: Types.FillMaskInferenceUpdateOptions) =
+            Types.InferenceConfigUpdateContainer.FillMask value
 
-        let ner (value: MlTypes.NerInferenceUpdateOptions) =
-            InferenceConfigUpdateContainer.Ner value
+        let ner (value: Types.NerInferenceUpdateOptions) =
+            Types.InferenceConfigUpdateContainer.Ner value
 
-        let passThrough (value: MlTypes.PassThroughInferenceUpdateOptions) =
-            InferenceConfigUpdateContainer.PassThrough value
+        let passThrough (value: Types.PassThroughInferenceUpdateOptions) =
+            Types.InferenceConfigUpdateContainer.PassThrough value
 
-        let textEmbedding (value: MlTypes.TextEmbeddingInferenceUpdateOptions) =
-            InferenceConfigUpdateContainer.TextEmbedding value
+        let textEmbedding (value: Types.TextEmbeddingInferenceUpdateOptions) =
+            Types.InferenceConfigUpdateContainer.TextEmbedding value
 
-        let textExpansion (value: MlTypes.TextExpansionInferenceUpdateOptions) =
-            InferenceConfigUpdateContainer.TextExpansion value
+        let textExpansion (value: Types.TextExpansionInferenceUpdateOptions) =
+            Types.InferenceConfigUpdateContainer.TextExpansion value
 
-        let questionAnswering (value: MlTypes.QuestionAnsweringInferenceUpdateOptions) =
-            InferenceConfigUpdateContainer.QuestionAnswering value
+        let questionAnswering (value: Types.QuestionAnsweringInferenceUpdateOptions) =
+            Types.InferenceConfigUpdateContainer.QuestionAnswering value
 
     type InferenceResponseResultBuilder() =
-        member _.Yield(_: unit) : InferenceResponseResult =
+        member _.Yield(_: unit) : Types.InferenceResponseResult =
             {
                 Entities = None
                 IsTruncated = None
@@ -2104,45 +2104,45 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("entities")>]
-        member _.Entities(state: InferenceResponseResult, value: MlTypes.TrainedModelEntities list) =
+        member _.Entities(state: Types.InferenceResponseResult, value: Types.TrainedModelEntities list) =
             { state with Entities = Some value }
 
         [<CustomOperation("isTruncated")>]
-        member _.IsTruncated(state: InferenceResponseResult, value: bool) =
+        member _.IsTruncated(state: Types.InferenceResponseResult, value: bool) =
             { state with IsTruncated = Some value }
 
         [<CustomOperation("predictedValue")>]
-        member _.PredictedValue(state: InferenceResponseResult, value: System.Text.Json.JsonElement) =
+        member _.PredictedValue(state: Types.InferenceResponseResult, value: System.Text.Json.JsonElement) =
             { state with PredictedValue = Some value }
 
         [<CustomOperation("predictedValueSequence")>]
-        member _.PredictedValueSequence(state: InferenceResponseResult, value: string) =
+        member _.PredictedValueSequence(state: Types.InferenceResponseResult, value: string) =
             { state with PredictedValueSequence = Some value }
 
         [<CustomOperation("predictionProbability")>]
-        member _.PredictionProbability(state: InferenceResponseResult, value: CoreTypes.Double) =
+        member _.PredictionProbability(state: Types.InferenceResponseResult, value: Types.Double) =
             { state with PredictionProbability = Some value }
 
         [<CustomOperation("predictionScore")>]
-        member _.PredictionScore(state: InferenceResponseResult, value: CoreTypes.Double) =
+        member _.PredictionScore(state: Types.InferenceResponseResult, value: Types.Double) =
             { state with PredictionScore = Some value }
 
         [<CustomOperation("topClasses")>]
-        member _.TopClasses(state: InferenceResponseResult, value: MlTypes.TopClassEntry list) =
+        member _.TopClasses(state: Types.InferenceResponseResult, value: Types.TopClassEntry list) =
             { state with TopClasses = Some value }
 
         [<CustomOperation("warning")>]
-        member _.Warning(state: InferenceResponseResult, value: string) =
+        member _.Warning(state: Types.InferenceResponseResult, value: string) =
             { state with Warning = Some value }
 
         [<CustomOperation("featureImportance")>]
-        member _.FeatureImportance(state: InferenceResponseResult, value: MlTypes.TrainedModelInferenceFeatureImportance list) =
+        member _.FeatureImportance(state: Types.InferenceResponseResult, value: Types.TrainedModelInferenceFeatureImportance list) =
             { state with FeatureImportance = Some value }
 
     let inferenceResponseResult = InferenceResponseResultBuilder()
 
     type JobBuilder() =
-        member _.Yield(_: unit) : Job =
+        member _.Yield(_: unit) : Types.Job =
             {
                 AllowLazyOpen = Unchecked.defaultof<_>
                 AnalysisConfig = Unchecked.defaultof<_>
@@ -2170,101 +2170,101 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("allowLazyOpen")>]
-        member _.AllowLazyOpen(state: Job, value: bool) =
+        member _.AllowLazyOpen(state: Types.Job, value: bool) =
             { state with AllowLazyOpen = value }
 
         [<CustomOperation("analysisConfig")>]
-        member _.AnalysisConfig(state: Job, value: MlTypes.AnalysisConfig) =
+        member _.AnalysisConfig(state: Types.Job, value: Types.AnalysisConfig) =
             { state with AnalysisConfig = value }
 
         [<CustomOperation("analysisLimits")>]
-        member _.AnalysisLimits(state: Job, value: MlTypes.AnalysisLimits) =
+        member _.AnalysisLimits(state: Types.Job, value: Types.AnalysisLimits) =
             { state with AnalysisLimits = Some value }
 
         [<CustomOperation("backgroundPersistInterval")>]
-        member _.BackgroundPersistInterval(state: Job, value: CoreTypes.Duration) =
+        member _.BackgroundPersistInterval(state: Types.Job, value: Types.Duration) =
             { state with BackgroundPersistInterval = Some value }
 
         [<CustomOperation("blocked")>]
-        member _.Blocked(state: Job, value: MlTypes.JobBlocked) =
+        member _.Blocked(state: Types.Job, value: Types.JobBlocked) =
             { state with Blocked = Some value }
 
         [<CustomOperation("createTime")>]
-        member _.CreateTime(state: Job, value: CoreTypes.DateTime) =
+        member _.CreateTime(state: Types.Job, value: Types.DateTime) =
             { state with CreateTime = Some value }
 
         [<CustomOperation("customSettings")>]
-        member _.CustomSettings(state: Job, value: MlTypes.CustomSettings) =
+        member _.CustomSettings(state: Types.Job, value: Types.CustomSettings) =
             { state with CustomSettings = Some value }
 
         [<CustomOperation("dailyModelSnapshotRetentionAfterDays")>]
-        member _.DailyModelSnapshotRetentionAfterDays(state: Job, value: CoreTypes.Long) =
+        member _.DailyModelSnapshotRetentionAfterDays(state: Types.Job, value: Types.Long) =
             { state with DailyModelSnapshotRetentionAfterDays = Some value }
 
         [<CustomOperation("dataDescription")>]
-        member _.DataDescription(state: Job, value: MlTypes.DataDescription) =
+        member _.DataDescription(state: Types.Job, value: Types.DataDescription) =
             { state with DataDescription = value }
 
         [<CustomOperation("datafeedConfig")>]
-        member _.DatafeedConfig(state: Job, value: MlTypes.Datafeed) =
+        member _.DatafeedConfig(state: Types.Job, value: Types.MlTypesDatafeed) =
             { state with DatafeedConfig = Some value }
 
         [<CustomOperation("deleting")>]
-        member _.Deleting(state: Job, value: bool) =
+        member _.Deleting(state: Types.Job, value: bool) =
             { state with Deleting = Some value }
 
         [<CustomOperation("description")>]
-        member _.Description(state: Job, value: string) =
+        member _.Description(state: Types.Job, value: string) =
             { state with Description = Some value }
 
         [<CustomOperation("finishedTime")>]
-        member _.FinishedTime(state: Job, value: CoreTypes.DateTime) =
+        member _.FinishedTime(state: Types.Job, value: Types.DateTime) =
             { state with FinishedTime = Some value }
 
         [<CustomOperation("groups")>]
-        member _.Groups(state: Job, value: string list) =
+        member _.Groups(state: Types.Job, value: string list) =
             { state with Groups = Some value }
 
         [<CustomOperation("jobId")>]
-        member _.JobId(state: Job, value: CoreTypes.Id) =
+        member _.JobId(state: Types.Job, value: Types.Id) =
             { state with JobId = value }
 
         [<CustomOperation("jobType")>]
-        member _.JobType(state: Job, value: string) =
+        member _.JobType(state: Types.Job, value: string) =
             { state with JobType = Some value }
 
         [<CustomOperation("jobVersion")>]
-        member _.JobVersion(state: Job, value: CoreTypes.VersionString) =
+        member _.JobVersion(state: Types.Job, value: Types.VersionString) =
             { state with JobVersion = Some value }
 
         [<CustomOperation("modelPlotConfig")>]
-        member _.ModelPlotConfig(state: Job, value: MlTypes.ModelPlotConfig) =
+        member _.ModelPlotConfig(state: Types.Job, value: Types.ModelPlotConfig) =
             { state with ModelPlotConfig = Some value }
 
         [<CustomOperation("modelSnapshotId")>]
-        member _.ModelSnapshotId(state: Job, value: CoreTypes.Id) =
+        member _.ModelSnapshotId(state: Types.Job, value: Types.Id) =
             { state with ModelSnapshotId = Some value }
 
         [<CustomOperation("modelSnapshotRetentionDays")>]
-        member _.ModelSnapshotRetentionDays(state: Job, value: CoreTypes.Long) =
+        member _.ModelSnapshotRetentionDays(state: Types.Job, value: Types.Long) =
             { state with ModelSnapshotRetentionDays = value }
 
         [<CustomOperation("renormalizationWindowDays")>]
-        member _.RenormalizationWindowDays(state: Job, value: CoreTypes.Long) =
+        member _.RenormalizationWindowDays(state: Types.Job, value: Types.Long) =
             { state with RenormalizationWindowDays = Some value }
 
         [<CustomOperation("resultsIndexName")>]
-        member _.ResultsIndexName(state: Job, value: CoreTypes.IndexName) =
+        member _.ResultsIndexName(state: Types.Job, value: Types.IndexName) =
             { state with ResultsIndexName = value }
 
         [<CustomOperation("resultsRetentionDays")>]
-        member _.ResultsRetentionDays(state: Job, value: CoreTypes.Long) =
+        member _.ResultsRetentionDays(state: Types.Job, value: Types.Long) =
             { state with ResultsRetentionDays = Some value }
 
     let job = JobBuilder()
 
     type JobConfigBuilder() =
-        member _.Yield(_: unit) : JobConfig =
+        member _.Yield(_: unit) : Types.JobConfig =
             {
                 AllowLazyOpen = None
                 AnalysisConfig = Unchecked.defaultof<_>
@@ -2286,77 +2286,77 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("allowLazyOpen")>]
-        member _.AllowLazyOpen(state: JobConfig, value: bool) =
+        member _.AllowLazyOpen(state: Types.JobConfig, value: bool) =
             { state with AllowLazyOpen = Some value }
 
         [<CustomOperation("analysisConfig")>]
-        member _.AnalysisConfig(state: JobConfig, value: MlTypes.AnalysisConfig) =
+        member _.AnalysisConfig(state: Types.JobConfig, value: Types.AnalysisConfig) =
             { state with AnalysisConfig = value }
 
         [<CustomOperation("analysisLimits")>]
-        member _.AnalysisLimits(state: JobConfig, value: MlTypes.AnalysisLimits) =
+        member _.AnalysisLimits(state: Types.JobConfig, value: Types.AnalysisLimits) =
             { state with AnalysisLimits = Some value }
 
         [<CustomOperation("backgroundPersistInterval")>]
-        member _.BackgroundPersistInterval(state: JobConfig, value: CoreTypes.Duration) =
+        member _.BackgroundPersistInterval(state: Types.JobConfig, value: Types.Duration) =
             { state with BackgroundPersistInterval = Some value }
 
         [<CustomOperation("customSettings")>]
-        member _.CustomSettings(state: JobConfig, value: MlTypes.CustomSettings) =
+        member _.CustomSettings(state: Types.JobConfig, value: Types.CustomSettings) =
             { state with CustomSettings = Some value }
 
         [<CustomOperation("dailyModelSnapshotRetentionAfterDays")>]
-        member _.DailyModelSnapshotRetentionAfterDays(state: JobConfig, value: CoreTypes.Long) =
+        member _.DailyModelSnapshotRetentionAfterDays(state: Types.JobConfig, value: Types.Long) =
             { state with DailyModelSnapshotRetentionAfterDays = Some value }
 
         [<CustomOperation("dataDescription")>]
-        member _.DataDescription(state: JobConfig, value: MlTypes.DataDescription) =
+        member _.DataDescription(state: Types.JobConfig, value: Types.DataDescription) =
             { state with DataDescription = value }
 
         [<CustomOperation("datafeedConfig")>]
-        member _.DatafeedConfig(state: JobConfig, value: MlTypes.DatafeedConfig) =
+        member _.DatafeedConfig(state: Types.JobConfig, value: Types.DatafeedConfig) =
             { state with DatafeedConfig = Some value }
 
         [<CustomOperation("description")>]
-        member _.Description(state: JobConfig, value: string) =
+        member _.Description(state: Types.JobConfig, value: string) =
             { state with Description = Some value }
 
         [<CustomOperation("groups")>]
-        member _.Groups(state: JobConfig, value: string list) =
+        member _.Groups(state: Types.JobConfig, value: string list) =
             { state with Groups = Some value }
 
         [<CustomOperation("jobId")>]
-        member _.JobId(state: JobConfig, value: CoreTypes.Id) =
+        member _.JobId(state: Types.JobConfig, value: Types.Id) =
             { state with JobId = Some value }
 
         [<CustomOperation("jobType")>]
-        member _.JobType(state: JobConfig, value: string) =
+        member _.JobType(state: Types.JobConfig, value: string) =
             { state with JobType = Some value }
 
         [<CustomOperation("modelPlotConfig")>]
-        member _.ModelPlotConfig(state: JobConfig, value: MlTypes.ModelPlotConfig) =
+        member _.ModelPlotConfig(state: Types.JobConfig, value: Types.ModelPlotConfig) =
             { state with ModelPlotConfig = Some value }
 
         [<CustomOperation("modelSnapshotRetentionDays")>]
-        member _.ModelSnapshotRetentionDays(state: JobConfig, value: CoreTypes.Long) =
+        member _.ModelSnapshotRetentionDays(state: Types.JobConfig, value: Types.Long) =
             { state with ModelSnapshotRetentionDays = Some value }
 
         [<CustomOperation("renormalizationWindowDays")>]
-        member _.RenormalizationWindowDays(state: JobConfig, value: CoreTypes.Long) =
+        member _.RenormalizationWindowDays(state: Types.JobConfig, value: Types.Long) =
             { state with RenormalizationWindowDays = Some value }
 
         [<CustomOperation("resultsIndexName")>]
-        member _.ResultsIndexName(state: JobConfig, value: CoreTypes.IndexName) =
+        member _.ResultsIndexName(state: Types.JobConfig, value: Types.IndexName) =
             { state with ResultsIndexName = Some value }
 
         [<CustomOperation("resultsRetentionDays")>]
-        member _.ResultsRetentionDays(state: JobConfig, value: CoreTypes.Long) =
+        member _.ResultsRetentionDays(state: Types.JobConfig, value: Types.Long) =
             { state with ResultsRetentionDays = Some value }
 
     let jobConfig = JobConfigBuilder()
 
     type JobForecastStatisticsBuilder() =
-        member _.Yield(_: unit) : JobForecastStatistics =
+        member _.Yield(_: unit) : Types.JobForecastStatistics =
             {
                 MemoryBytes = None
                 ProcessingTimeMs = None
@@ -2367,33 +2367,33 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("memoryBytes")>]
-        member _.MemoryBytes(state: JobForecastStatistics, value: MlTypes.JobStatistics) =
+        member _.MemoryBytes(state: Types.JobForecastStatistics, value: Types.JobStatistics) =
             { state with MemoryBytes = Some value }
 
         [<CustomOperation("processingTimeMs")>]
-        member _.ProcessingTimeMs(state: JobForecastStatistics, value: MlTypes.JobStatistics) =
+        member _.ProcessingTimeMs(state: Types.JobForecastStatistics, value: Types.JobStatistics) =
             { state with ProcessingTimeMs = Some value }
 
         [<CustomOperation("records")>]
-        member _.Records(state: JobForecastStatistics, value: MlTypes.JobStatistics) =
+        member _.Records(state: Types.JobForecastStatistics, value: Types.JobStatistics) =
             { state with Records = Some value }
 
         [<CustomOperation("status")>]
-        member _.Status(state: JobForecastStatistics, value: Map<string, CoreTypes.Long>) =
+        member _.Status(state: Types.JobForecastStatistics, value: Map<string, Types.Long>) =
             { state with Status = Some value }
 
         [<CustomOperation("total")>]
-        member _.Total(state: JobForecastStatistics, value: CoreTypes.Long) =
+        member _.Total(state: Types.JobForecastStatistics, value: Types.Long) =
             { state with Total = value }
 
         [<CustomOperation("forecastedJobs")>]
-        member _.ForecastedJobs(state: JobForecastStatistics, value: CoreTypes.Integer) =
+        member _.ForecastedJobs(state: Types.JobForecastStatistics, value: Types.Integer) =
             { state with ForecastedJobs = value }
 
     let jobForecastStatistics = JobForecastStatisticsBuilder()
 
     type JobStatsBuilder() =
-        member _.Yield(_: unit) : JobStats =
+        member _.Yield(_: unit) : Types.JobStats =
             {
                 AssignmentExplanation = None
                 DataCounts = Unchecked.defaultof<_>
@@ -2408,49 +2408,49 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("assignmentExplanation")>]
-        member _.AssignmentExplanation(state: JobStats, value: string) =
+        member _.AssignmentExplanation(state: Types.JobStats, value: string) =
             { state with AssignmentExplanation = Some value }
 
         [<CustomOperation("dataCounts")>]
-        member _.DataCounts(state: JobStats, value: MlTypes.DataCounts) =
+        member _.DataCounts(state: Types.JobStats, value: Types.DataCounts) =
             { state with DataCounts = value }
 
         [<CustomOperation("forecastsStats")>]
-        member _.ForecastsStats(state: JobStats, value: MlTypes.JobForecastStatistics) =
+        member _.ForecastsStats(state: Types.JobStats, value: Types.JobForecastStatistics) =
             { state with ForecastsStats = value }
 
         [<CustomOperation("jobId")>]
-        member _.JobId(state: JobStats, value: string) =
+        member _.JobId(state: Types.JobStats, value: string) =
             { state with JobId = value }
 
         [<CustomOperation("modelSizeStats")>]
-        member _.ModelSizeStats(state: JobStats, value: MlTypes.ModelSizeStats) =
+        member _.ModelSizeStats(state: Types.JobStats, value: Types.ModelSizeStats) =
             { state with ModelSizeStats = value }
 
         [<CustomOperation("node")>]
-        member _.Node(state: JobStats, value: MlTypes.DiscoveryNodeCompact) =
+        member _.Node(state: Types.JobStats, value: Types.DiscoveryNodeCompact) =
             { state with Node = Some value }
 
         [<CustomOperation("openTime")>]
-        member _.OpenTime(state: JobStats, value: CoreTypes.DateTime) =
+        member _.OpenTime(state: Types.JobStats, value: Types.DateTime) =
             { state with OpenTime = Some value }
 
         [<CustomOperation("state")>]
-        member _.State(state: JobStats, value: MlTypes.JobState) =
+        member _.State(state: Types.JobStats, value: Types.JobState) =
             { state with State = value }
 
         [<CustomOperation("timingStats")>]
-        member _.TimingStats(state: JobStats, value: MlTypes.JobTimingStats) =
+        member _.TimingStats(state: Types.JobStats, value: Types.JobTimingStats) =
             { state with TimingStats = value }
 
         [<CustomOperation("deleting")>]
-        member _.Deleting(state: JobStats, value: bool) =
+        member _.Deleting(state: Types.JobStats, value: bool) =
             { state with Deleting = Some value }
 
     let jobStats = JobStatsBuilder()
 
     type JobTimingStatsBuilder() =
-        member _.Yield(_: unit) : JobTimingStats =
+        member _.Yield(_: unit) : Types.JobTimingStats =
             {
                 AverageBucketProcessingTimeMs = None
                 BucketCount = Unchecked.defaultof<_>
@@ -2463,41 +2463,41 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("averageBucketProcessingTimeMs")>]
-        member _.AverageBucketProcessingTimeMs(state: JobTimingStats, value: CoreTypes.DurationValue<CoreTypes.UnitFloatMillis>) =
+        member _.AverageBucketProcessingTimeMs(state: Types.JobTimingStats, value: Types.DurationValue<Types.UnitFloatMillis>) =
             { state with AverageBucketProcessingTimeMs = Some value }
 
         [<CustomOperation("bucketCount")>]
-        member _.BucketCount(state: JobTimingStats, value: CoreTypes.Long) =
+        member _.BucketCount(state: Types.JobTimingStats, value: Types.Long) =
             { state with BucketCount = value }
 
         [<CustomOperation("exponentialAverageBucketProcessingTimeMs")>]
-        member _.ExponentialAverageBucketProcessingTimeMs(state: JobTimingStats, value: CoreTypes.DurationValue<CoreTypes.UnitFloatMillis>) =
+        member _.ExponentialAverageBucketProcessingTimeMs(state: Types.JobTimingStats, value: Types.DurationValue<Types.UnitFloatMillis>) =
             { state with ExponentialAverageBucketProcessingTimeMs = Some value }
 
         [<CustomOperation("exponentialAverageBucketProcessingTimePerHourMs")>]
-        member _.ExponentialAverageBucketProcessingTimePerHourMs(state: JobTimingStats, value: CoreTypes.DurationValue<CoreTypes.UnitFloatMillis>) =
+        member _.ExponentialAverageBucketProcessingTimePerHourMs(state: Types.JobTimingStats, value: Types.DurationValue<Types.UnitFloatMillis>) =
             { state with ExponentialAverageBucketProcessingTimePerHourMs = value }
 
         [<CustomOperation("jobId")>]
-        member _.JobId(state: JobTimingStats, value: CoreTypes.Id) =
+        member _.JobId(state: Types.JobTimingStats, value: Types.Id) =
             { state with JobId = value }
 
         [<CustomOperation("totalBucketProcessingTimeMs")>]
-        member _.TotalBucketProcessingTimeMs(state: JobTimingStats, value: CoreTypes.DurationValue<CoreTypes.UnitFloatMillis>) =
+        member _.TotalBucketProcessingTimeMs(state: Types.JobTimingStats, value: Types.DurationValue<Types.UnitFloatMillis>) =
             { state with TotalBucketProcessingTimeMs = value }
 
         [<CustomOperation("maximumBucketProcessingTimeMs")>]
-        member _.MaximumBucketProcessingTimeMs(state: JobTimingStats, value: CoreTypes.DurationValue<CoreTypes.UnitFloatMillis>) =
+        member _.MaximumBucketProcessingTimeMs(state: Types.JobTimingStats, value: Types.DurationValue<Types.UnitFloatMillis>) =
             { state with MaximumBucketProcessingTimeMs = Some value }
 
         [<CustomOperation("minimumBucketProcessingTimeMs")>]
-        member _.MinimumBucketProcessingTimeMs(state: JobTimingStats, value: CoreTypes.DurationValue<CoreTypes.UnitFloatMillis>) =
+        member _.MinimumBucketProcessingTimeMs(state: Types.JobTimingStats, value: Types.DurationValue<Types.UnitFloatMillis>) =
             { state with MinimumBucketProcessingTimeMs = Some value }
 
     let jobTimingStats = JobTimingStatsBuilder()
 
     type LearningToRankConfigBuilder() =
-        member _.Yield(_: unit) : LearningToRankConfig =
+        member _.Yield(_: unit) : Types.LearningToRankConfig =
             {
                 DefaultParams = None
                 FeatureExtractors = None
@@ -2505,21 +2505,21 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("defaultParams")>]
-        member _.DefaultParams(state: LearningToRankConfig, value: Map<string, System.Text.Json.JsonElement>) =
+        member _.DefaultParams(state: Types.LearningToRankConfig, value: Map<string, System.Text.Json.JsonElement>) =
             { state with DefaultParams = Some value }
 
         [<CustomOperation("featureExtractors")>]
-        member _.FeatureExtractors(state: LearningToRankConfig, value: Map<string, MlTypes.FeatureExtractor> list) =
+        member _.FeatureExtractors(state: Types.LearningToRankConfig, value: Map<string, Types.FeatureExtractor> list) =
             { state with FeatureExtractors = Some value }
 
         [<CustomOperation("numTopFeatureImportanceValues")>]
-        member _.NumTopFeatureImportanceValues(state: LearningToRankConfig, value: CoreTypes.Integer) =
+        member _.NumTopFeatureImportanceValues(state: Types.LearningToRankConfig, value: Types.Integer) =
             { state with NumTopFeatureImportanceValues = value }
 
     let learningToRankConfig = LearningToRankConfigBuilder()
 
     type ModelPackageConfigBuilder() =
-        member _.Yield(_: unit) : ModelPackageConfig =
+        member _.Yield(_: unit) : Types.ModelPackageConfig =
             {
                 CreateTime = None
                 Description = None
@@ -2538,65 +2538,65 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("createTime")>]
-        member _.CreateTime(state: ModelPackageConfig, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
+        member _.CreateTime(state: Types.ModelPackageConfig, value: Types.EpochTime<Types.UnitMillis>) =
             { state with CreateTime = Some value }
 
         [<CustomOperation("description")>]
-        member _.Description(state: ModelPackageConfig, value: string) =
+        member _.Description(state: Types.ModelPackageConfig, value: string) =
             { state with Description = Some value }
 
         [<CustomOperation("inferenceConfig")>]
-        member _.InferenceConfig(state: ModelPackageConfig, value: Map<string, System.Text.Json.JsonElement>) =
+        member _.InferenceConfig(state: Types.ModelPackageConfig, value: Map<string, System.Text.Json.JsonElement>) =
             { state with InferenceConfig = Some value }
 
         [<CustomOperation("metadata")>]
-        member _.Metadata(state: ModelPackageConfig, value: CoreTypes.Metadata) =
+        member _.Metadata(state: Types.ModelPackageConfig, value: Types.Metadata) =
             { state with Metadata = Some value }
 
         [<CustomOperation("minimumVersion")>]
-        member _.MinimumVersion(state: ModelPackageConfig, value: string) =
+        member _.MinimumVersion(state: Types.ModelPackageConfig, value: string) =
             { state with MinimumVersion = Some value }
 
         [<CustomOperation("modelRepository")>]
-        member _.ModelRepository(state: ModelPackageConfig, value: string) =
+        member _.ModelRepository(state: Types.ModelPackageConfig, value: string) =
             { state with ModelRepository = Some value }
 
         [<CustomOperation("modelType")>]
-        member _.ModelType(state: ModelPackageConfig, value: string) =
+        member _.ModelType(state: Types.ModelPackageConfig, value: string) =
             { state with ModelType = Some value }
 
         [<CustomOperation("packagedModelId")>]
-        member _.PackagedModelId(state: ModelPackageConfig, value: CoreTypes.Id) =
+        member _.PackagedModelId(state: Types.ModelPackageConfig, value: Types.Id) =
             { state with PackagedModelId = value }
 
         [<CustomOperation("platformArchitecture")>]
-        member _.PlatformArchitecture(state: ModelPackageConfig, value: string) =
+        member _.PlatformArchitecture(state: Types.ModelPackageConfig, value: string) =
             { state with PlatformArchitecture = Some value }
 
         [<CustomOperation("prefixStrings")>]
-        member _.PrefixStrings(state: ModelPackageConfig, value: MlTypes.TrainedModelPrefixStrings) =
+        member _.PrefixStrings(state: Types.ModelPackageConfig, value: Types.TrainedModelPrefixStrings) =
             { state with PrefixStrings = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: ModelPackageConfig, value: CoreTypes.ByteSize) =
+        member _.Size(state: Types.ModelPackageConfig, value: Types.ByteSize) =
             { state with Size = Some value }
 
         [<CustomOperation("sha256")>]
-        member _.Sha256(state: ModelPackageConfig, value: string) =
+        member _.Sha256(state: Types.ModelPackageConfig, value: string) =
             { state with Sha256 = Some value }
 
         [<CustomOperation("tags")>]
-        member _.Tags(state: ModelPackageConfig, value: string list) =
+        member _.Tags(state: Types.ModelPackageConfig, value: string list) =
             { state with Tags = Some value }
 
         [<CustomOperation("vocabularyFile")>]
-        member _.VocabularyFile(state: ModelPackageConfig, value: string) =
+        member _.VocabularyFile(state: Types.ModelPackageConfig, value: string) =
             { state with VocabularyFile = Some value }
 
     let modelPackageConfig = ModelPackageConfigBuilder()
 
     type ModelPlotConfigBuilder() =
-        member _.Yield(_: unit) : ModelPlotConfig =
+        member _.Yield(_: unit) : Types.ModelPlotConfig =
             {
                 AnnotationsEnabled = None
                 Enabled = None
@@ -2604,21 +2604,21 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("annotationsEnabled")>]
-        member _.AnnotationsEnabled(state: ModelPlotConfig, value: bool) =
+        member _.AnnotationsEnabled(state: Types.ModelPlotConfig, value: bool) =
             { state with AnnotationsEnabled = Some value }
 
         [<CustomOperation("enabled")>]
-        member _.Enabled(state: ModelPlotConfig, value: bool) =
+        member _.Enabled(state: Types.ModelPlotConfig, value: bool) =
             { state with Enabled = Some value }
 
         [<CustomOperation("terms")>]
-        member _.Terms(state: ModelPlotConfig, value: CoreTypes.Field) =
+        member _.Terms(state: Types.ModelPlotConfig, value: Types.Field) =
             { state with Terms = Some value }
 
     let modelPlotConfig = ModelPlotConfigBuilder()
 
     type ModelSizeStatsBuilder() =
-        member _.Yield(_: unit) : ModelSizeStats =
+        member _.Yield(_: unit) : Types.ModelSizeStats =
             {
                 BucketAllocationFailuresCount = Unchecked.defaultof<_>
                 JobId = Unchecked.defaultof<_>
@@ -2645,97 +2645,97 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("bucketAllocationFailuresCount")>]
-        member _.BucketAllocationFailuresCount(state: ModelSizeStats, value: CoreTypes.Long) =
+        member _.BucketAllocationFailuresCount(state: Types.ModelSizeStats, value: Types.Long) =
             { state with BucketAllocationFailuresCount = value }
 
         [<CustomOperation("jobId")>]
-        member _.JobId(state: ModelSizeStats, value: CoreTypes.Id) =
+        member _.JobId(state: Types.ModelSizeStats, value: Types.Id) =
             { state with JobId = value }
 
         [<CustomOperation("logTime")>]
-        member _.LogTime(state: ModelSizeStats, value: CoreTypes.DateTime) =
+        member _.LogTime(state: Types.ModelSizeStats, value: Types.DateTime) =
             { state with LogTime = value }
 
         [<CustomOperation("memoryStatus")>]
-        member _.MemoryStatus(state: ModelSizeStats, value: MlTypes.MemoryStatus) =
+        member _.MemoryStatus(state: Types.ModelSizeStats, value: Types.MemoryStatus) =
             { state with MemoryStatus = value }
 
         [<CustomOperation("modelBytes")>]
-        member _.ModelBytes(state: ModelSizeStats, value: CoreTypes.ByteSize) =
+        member _.ModelBytes(state: Types.ModelSizeStats, value: Types.ByteSize) =
             { state with ModelBytes = value }
 
         [<CustomOperation("modelBytesExceeded")>]
-        member _.ModelBytesExceeded(state: ModelSizeStats, value: CoreTypes.ByteSize) =
+        member _.ModelBytesExceeded(state: Types.ModelSizeStats, value: Types.ByteSize) =
             { state with ModelBytesExceeded = Some value }
 
         [<CustomOperation("modelBytesMemoryLimit")>]
-        member _.ModelBytesMemoryLimit(state: ModelSizeStats, value: CoreTypes.ByteSize) =
+        member _.ModelBytesMemoryLimit(state: Types.ModelSizeStats, value: Types.ByteSize) =
             { state with ModelBytesMemoryLimit = Some value }
 
         [<CustomOperation("outputMemoryAllocatorBytes")>]
-        member _.OutputMemoryAllocatorBytes(state: ModelSizeStats, value: CoreTypes.ByteSize) =
+        member _.OutputMemoryAllocatorBytes(state: Types.ModelSizeStats, value: Types.ByteSize) =
             { state with OutputMemoryAllocatorBytes = Some value }
 
         [<CustomOperation("peakModelBytes")>]
-        member _.PeakModelBytes(state: ModelSizeStats, value: CoreTypes.ByteSize) =
+        member _.PeakModelBytes(state: Types.ModelSizeStats, value: Types.ByteSize) =
             { state with PeakModelBytes = Some value }
 
         [<CustomOperation("assignmentMemoryBasis")>]
-        member _.AssignmentMemoryBasis(state: ModelSizeStats, value: string) =
+        member _.AssignmentMemoryBasis(state: Types.ModelSizeStats, value: string) =
             { state with AssignmentMemoryBasis = Some value }
 
         [<CustomOperation("resultType")>]
-        member _.ResultType(state: ModelSizeStats, value: string) =
+        member _.ResultType(state: Types.ModelSizeStats, value: string) =
             { state with ResultType = value }
 
         [<CustomOperation("totalByFieldCount")>]
-        member _.TotalByFieldCount(state: ModelSizeStats, value: CoreTypes.Long) =
+        member _.TotalByFieldCount(state: Types.ModelSizeStats, value: Types.Long) =
             { state with TotalByFieldCount = value }
 
         [<CustomOperation("totalOverFieldCount")>]
-        member _.TotalOverFieldCount(state: ModelSizeStats, value: CoreTypes.Long) =
+        member _.TotalOverFieldCount(state: Types.ModelSizeStats, value: Types.Long) =
             { state with TotalOverFieldCount = value }
 
         [<CustomOperation("totalPartitionFieldCount")>]
-        member _.TotalPartitionFieldCount(state: ModelSizeStats, value: CoreTypes.Long) =
+        member _.TotalPartitionFieldCount(state: Types.ModelSizeStats, value: Types.Long) =
             { state with TotalPartitionFieldCount = value }
 
         [<CustomOperation("categorizationStatus")>]
-        member _.CategorizationStatus(state: ModelSizeStats, value: MlTypes.CategorizationStatus) =
+        member _.CategorizationStatus(state: Types.ModelSizeStats, value: Types.CategorizationStatus) =
             { state with CategorizationStatus = value }
 
         [<CustomOperation("categorizedDocCount")>]
-        member _.CategorizedDocCount(state: ModelSizeStats, value: CoreTypes.Integer) =
+        member _.CategorizedDocCount(state: Types.ModelSizeStats, value: Types.Integer) =
             { state with CategorizedDocCount = value }
 
         [<CustomOperation("deadCategoryCount")>]
-        member _.DeadCategoryCount(state: ModelSizeStats, value: CoreTypes.Integer) =
+        member _.DeadCategoryCount(state: Types.ModelSizeStats, value: Types.Integer) =
             { state with DeadCategoryCount = value }
 
         [<CustomOperation("failedCategoryCount")>]
-        member _.FailedCategoryCount(state: ModelSizeStats, value: CoreTypes.Integer) =
+        member _.FailedCategoryCount(state: Types.ModelSizeStats, value: Types.Integer) =
             { state with FailedCategoryCount = value }
 
         [<CustomOperation("frequentCategoryCount")>]
-        member _.FrequentCategoryCount(state: ModelSizeStats, value: CoreTypes.Integer) =
+        member _.FrequentCategoryCount(state: Types.ModelSizeStats, value: Types.Integer) =
             { state with FrequentCategoryCount = value }
 
         [<CustomOperation("rareCategoryCount")>]
-        member _.RareCategoryCount(state: ModelSizeStats, value: CoreTypes.Integer) =
+        member _.RareCategoryCount(state: Types.ModelSizeStats, value: Types.Integer) =
             { state with RareCategoryCount = value }
 
         [<CustomOperation("totalCategoryCount")>]
-        member _.TotalCategoryCount(state: ModelSizeStats, value: CoreTypes.Integer) =
+        member _.TotalCategoryCount(state: Types.ModelSizeStats, value: Types.Integer) =
             { state with TotalCategoryCount = value }
 
         [<CustomOperation("timestamp")>]
-        member _.Timestamp(state: ModelSizeStats, value: CoreTypes.Long) =
+        member _.Timestamp(state: Types.ModelSizeStats, value: Types.Long) =
             { state with Timestamp = Some value }
 
     let modelSizeStats = ModelSizeStatsBuilder()
 
     type ModelSnapshotBuilder() =
-        member _.Yield(_: unit) : ModelSnapshot =
+        member _.Yield(_: unit) : Types.ModelSnapshot =
             {
                 Description = None
                 JobId = Unchecked.defaultof<_>
@@ -2750,49 +2750,49 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("description")>]
-        member _.Description(state: ModelSnapshot, value: string) =
+        member _.Description(state: Types.ModelSnapshot, value: string) =
             { state with Description = Some value }
 
         [<CustomOperation("jobId")>]
-        member _.JobId(state: ModelSnapshot, value: CoreTypes.Id) =
+        member _.JobId(state: Types.ModelSnapshot, value: Types.Id) =
             { state with JobId = value }
 
         [<CustomOperation("latestRecordTimeStamp")>]
-        member _.LatestRecordTimeStamp(state: ModelSnapshot, value: CoreTypes.Integer) =
+        member _.LatestRecordTimeStamp(state: Types.ModelSnapshot, value: Types.Integer) =
             { state with LatestRecordTimeStamp = Some value }
 
         [<CustomOperation("latestResultTimeStamp")>]
-        member _.LatestResultTimeStamp(state: ModelSnapshot, value: CoreTypes.Integer) =
+        member _.LatestResultTimeStamp(state: Types.ModelSnapshot, value: Types.Integer) =
             { state with LatestResultTimeStamp = Some value }
 
         [<CustomOperation("minVersion")>]
-        member _.MinVersion(state: ModelSnapshot, value: CoreTypes.VersionString) =
+        member _.MinVersion(state: Types.ModelSnapshot, value: Types.VersionString) =
             { state with MinVersion = value }
 
         [<CustomOperation("modelSizeStats")>]
-        member _.ModelSizeStats(state: ModelSnapshot, value: MlTypes.ModelSizeStats) =
+        member _.ModelSizeStats(state: Types.ModelSnapshot, value: Types.ModelSizeStats) =
             { state with ModelSizeStats = Some value }
 
         [<CustomOperation("retain")>]
-        member _.Retain(state: ModelSnapshot, value: bool) =
+        member _.Retain(state: Types.ModelSnapshot, value: bool) =
             { state with Retain = value }
 
         [<CustomOperation("snapshotDocCount")>]
-        member _.SnapshotDocCount(state: ModelSnapshot, value: CoreTypes.Long) =
+        member _.SnapshotDocCount(state: Types.ModelSnapshot, value: Types.Long) =
             { state with SnapshotDocCount = value }
 
         [<CustomOperation("snapshotId")>]
-        member _.SnapshotId(state: ModelSnapshot, value: CoreTypes.Id) =
+        member _.SnapshotId(state: Types.ModelSnapshot, value: Types.Id) =
             { state with SnapshotId = value }
 
         [<CustomOperation("timestamp")>]
-        member _.Timestamp(state: ModelSnapshot, value: CoreTypes.Long) =
+        member _.Timestamp(state: Types.ModelSnapshot, value: Types.Long) =
             { state with Timestamp = value }
 
     let modelSnapshot = ModelSnapshotBuilder()
 
     type NerInferenceOptionsBuilder() =
-        member _.Yield(_: unit) : NerInferenceOptions =
+        member _.Yield(_: unit) : Types.NerInferenceOptions =
             {
                 Tokenization = None
                 ResultsField = None
@@ -2801,59 +2801,59 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("tokenization")>]
-        member _.Tokenization(state: NerInferenceOptions, value: MlTypes.TokenizationConfigContainer) =
+        member _.Tokenization(state: Types.NerInferenceOptions, value: Types.TokenizationConfigContainer) =
             { state with Tokenization = Some value }
 
         [<CustomOperation("resultsField")>]
-        member _.ResultsField(state: NerInferenceOptions, value: string) =
+        member _.ResultsField(state: Types.NerInferenceOptions, value: string) =
             { state with ResultsField = Some value }
 
         [<CustomOperation("classificationLabels")>]
-        member _.ClassificationLabels(state: NerInferenceOptions, value: string list) =
+        member _.ClassificationLabels(state: Types.NerInferenceOptions, value: string list) =
             { state with ClassificationLabels = Some value }
 
         [<CustomOperation("vocabulary")>]
-        member _.Vocabulary(state: NerInferenceOptions, value: MlTypes.Vocabulary) =
+        member _.Vocabulary(state: Types.NerInferenceOptions, value: Types.Vocabulary) =
             { state with Vocabulary = Some value }
 
     let nerInferenceOptions = NerInferenceOptionsBuilder()
 
     type NerInferenceUpdateOptionsBuilder() =
-        member _.Yield(_: unit) : NerInferenceUpdateOptions =
+        member _.Yield(_: unit) : Types.NerInferenceUpdateOptions =
             {
                 Tokenization = None
                 ResultsField = None
             }
 
         [<CustomOperation("tokenization")>]
-        member _.Tokenization(state: NerInferenceUpdateOptions, value: MlTypes.NlpTokenizationUpdateOptions) =
+        member _.Tokenization(state: Types.NerInferenceUpdateOptions, value: Types.NlpTokenizationUpdateOptions) =
             { state with Tokenization = Some value }
 
         [<CustomOperation("resultsField")>]
-        member _.ResultsField(state: NerInferenceUpdateOptions, value: string) =
+        member _.ResultsField(state: Types.NerInferenceUpdateOptions, value: string) =
             { state with ResultsField = Some value }
 
     let nerInferenceUpdateOptions = NerInferenceUpdateOptionsBuilder()
 
     type NlpTokenizationUpdateOptionsBuilder() =
-        member _.Yield(_: unit) : NlpTokenizationUpdateOptions =
+        member _.Yield(_: unit) : Types.NlpTokenizationUpdateOptions =
             {
                 Truncate = None
                 Span = None
             }
 
         [<CustomOperation("truncate")>]
-        member _.Truncate(state: NlpTokenizationUpdateOptions, value: MlTypes.TokenizationTruncate) =
+        member _.Truncate(state: Types.NlpTokenizationUpdateOptions, value: Types.TokenizationTruncate) =
             { state with Truncate = Some value }
 
         [<CustomOperation("span")>]
-        member _.Span(state: NlpTokenizationUpdateOptions, value: CoreTypes.Integer) =
+        member _.Span(state: Types.NlpTokenizationUpdateOptions, value: Types.Integer) =
             { state with Span = Some value }
 
     let nlpTokenizationUpdateOptions = NlpTokenizationUpdateOptionsBuilder()
 
     type OutlierDetectionParametersBuilder() =
-        member _.Yield(_: unit) : OutlierDetectionParameters =
+        member _.Yield(_: unit) : Types.OutlierDetectionParameters =
             {
                 ComputeFeatureInfluence = None
                 FeatureInfluenceThreshold = None
@@ -2864,50 +2864,50 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("computeFeatureInfluence")>]
-        member _.ComputeFeatureInfluence(state: OutlierDetectionParameters, value: bool) =
+        member _.ComputeFeatureInfluence(state: Types.OutlierDetectionParameters, value: bool) =
             { state with ComputeFeatureInfluence = Some value }
 
         [<CustomOperation("featureInfluenceThreshold")>]
-        member _.FeatureInfluenceThreshold(state: OutlierDetectionParameters, value: CoreTypes.Double) =
+        member _.FeatureInfluenceThreshold(state: Types.OutlierDetectionParameters, value: Types.Double) =
             { state with FeatureInfluenceThreshold = Some value }
 
         [<CustomOperation("method")>]
-        member _.Method(state: OutlierDetectionParameters, value: string) =
+        member _.Method(state: Types.OutlierDetectionParameters, value: string) =
             { state with Method = Some value }
 
         [<CustomOperation("nNeighbors")>]
-        member _.NNeighbors(state: OutlierDetectionParameters, value: CoreTypes.Integer) =
+        member _.NNeighbors(state: Types.OutlierDetectionParameters, value: Types.Integer) =
             { state with NNeighbors = Some value }
 
         [<CustomOperation("outlierFraction")>]
-        member _.OutlierFraction(state: OutlierDetectionParameters, value: CoreTypes.Double) =
+        member _.OutlierFraction(state: Types.OutlierDetectionParameters, value: Types.Double) =
             { state with OutlierFraction = Some value }
 
         [<CustomOperation("standardizationEnabled")>]
-        member _.StandardizationEnabled(state: OutlierDetectionParameters, value: bool) =
+        member _.StandardizationEnabled(state: Types.OutlierDetectionParameters, value: bool) =
             { state with StandardizationEnabled = Some value }
 
     let outlierDetectionParameters = OutlierDetectionParametersBuilder()
 
     type PageBuilder() =
-        member _.Yield(_: unit) : Page =
+        member _.Yield(_: unit) : Types.Page =
             {
                 From = None
                 Size = None
             }
 
         [<CustomOperation("from")>]
-        member _.From(state: Page, value: CoreTypes.Integer) =
+        member _.From(state: Types.Page, value: Types.Integer) =
             { state with From = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: Page, value: CoreTypes.Integer) =
+        member _.Size(state: Types.Page, value: Types.Integer) =
             { state with Size = Some value }
 
     let page = PageBuilder()
 
     type PassThroughInferenceOptionsBuilder() =
-        member _.Yield(_: unit) : PassThroughInferenceOptions =
+        member _.Yield(_: unit) : Types.PassThroughInferenceOptions =
             {
                 Tokenization = None
                 ResultsField = None
@@ -2915,55 +2915,55 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("tokenization")>]
-        member _.Tokenization(state: PassThroughInferenceOptions, value: MlTypes.TokenizationConfigContainer) =
+        member _.Tokenization(state: Types.PassThroughInferenceOptions, value: Types.TokenizationConfigContainer) =
             { state with Tokenization = Some value }
 
         [<CustomOperation("resultsField")>]
-        member _.ResultsField(state: PassThroughInferenceOptions, value: string) =
+        member _.ResultsField(state: Types.PassThroughInferenceOptions, value: string) =
             { state with ResultsField = Some value }
 
         [<CustomOperation("vocabulary")>]
-        member _.Vocabulary(state: PassThroughInferenceOptions, value: MlTypes.Vocabulary) =
+        member _.Vocabulary(state: Types.PassThroughInferenceOptions, value: Types.Vocabulary) =
             { state with Vocabulary = Some value }
 
     let passThroughInferenceOptions = PassThroughInferenceOptionsBuilder()
 
     type PassThroughInferenceUpdateOptionsBuilder() =
-        member _.Yield(_: unit) : PassThroughInferenceUpdateOptions =
+        member _.Yield(_: unit) : Types.PassThroughInferenceUpdateOptions =
             {
                 Tokenization = None
                 ResultsField = None
             }
 
         [<CustomOperation("tokenization")>]
-        member _.Tokenization(state: PassThroughInferenceUpdateOptions, value: MlTypes.NlpTokenizationUpdateOptions) =
+        member _.Tokenization(state: Types.PassThroughInferenceUpdateOptions, value: Types.NlpTokenizationUpdateOptions) =
             { state with Tokenization = Some value }
 
         [<CustomOperation("resultsField")>]
-        member _.ResultsField(state: PassThroughInferenceUpdateOptions, value: string) =
+        member _.ResultsField(state: Types.PassThroughInferenceUpdateOptions, value: string) =
             { state with ResultsField = Some value }
 
     let passThroughInferenceUpdateOptions = PassThroughInferenceUpdateOptionsBuilder()
 
     type PerPartitionCategorizationBuilder() =
-        member _.Yield(_: unit) : PerPartitionCategorization =
+        member _.Yield(_: unit) : Types.PerPartitionCategorization =
             {
                 Enabled = None
                 StopOnWarn = None
             }
 
         [<CustomOperation("enabled")>]
-        member _.Enabled(state: PerPartitionCategorization, value: bool) =
+        member _.Enabled(state: Types.PerPartitionCategorization, value: bool) =
             { state with Enabled = Some value }
 
         [<CustomOperation("stopOnWarn")>]
-        member _.StopOnWarn(state: PerPartitionCategorization, value: bool) =
+        member _.StopOnWarn(state: Types.PerPartitionCategorization, value: bool) =
             { state with StopOnWarn = Some value }
 
     let perPartitionCategorization = PerPartitionCategorizationBuilder()
 
     type QuestionAnsweringInferenceOptionsBuilder() =
-        member _.Yield(_: unit) : QuestionAnsweringInferenceOptions =
+        member _.Yield(_: unit) : Types.QuestionAnsweringInferenceOptions =
             {
                 NumTopClasses = None
                 Tokenization = None
@@ -2972,25 +2972,25 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("numTopClasses")>]
-        member _.NumTopClasses(state: QuestionAnsweringInferenceOptions, value: CoreTypes.Integer) =
+        member _.NumTopClasses(state: Types.QuestionAnsweringInferenceOptions, value: Types.Integer) =
             { state with NumTopClasses = Some value }
 
         [<CustomOperation("tokenization")>]
-        member _.Tokenization(state: QuestionAnsweringInferenceOptions, value: MlTypes.TokenizationConfigContainer) =
+        member _.Tokenization(state: Types.QuestionAnsweringInferenceOptions, value: Types.TokenizationConfigContainer) =
             { state with Tokenization = Some value }
 
         [<CustomOperation("resultsField")>]
-        member _.ResultsField(state: QuestionAnsweringInferenceOptions, value: string) =
+        member _.ResultsField(state: Types.QuestionAnsweringInferenceOptions, value: string) =
             { state with ResultsField = Some value }
 
         [<CustomOperation("maxAnswerLength")>]
-        member _.MaxAnswerLength(state: QuestionAnsweringInferenceOptions, value: CoreTypes.Integer) =
+        member _.MaxAnswerLength(state: Types.QuestionAnsweringInferenceOptions, value: Types.Integer) =
             { state with MaxAnswerLength = Some value }
 
     let questionAnsweringInferenceOptions = QuestionAnsweringInferenceOptionsBuilder()
 
     type QuestionAnsweringInferenceUpdateOptionsBuilder() =
-        member _.Yield(_: unit) : QuestionAnsweringInferenceUpdateOptions =
+        member _.Yield(_: unit) : Types.QuestionAnsweringInferenceUpdateOptions =
             {
                 Question = Unchecked.defaultof<_>
                 NumTopClasses = None
@@ -3000,46 +3000,46 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("question")>]
-        member _.Question(state: QuestionAnsweringInferenceUpdateOptions, value: string) =
+        member _.Question(state: Types.QuestionAnsweringInferenceUpdateOptions, value: string) =
             { state with Question = value }
 
         [<CustomOperation("numTopClasses")>]
-        member _.NumTopClasses(state: QuestionAnsweringInferenceUpdateOptions, value: CoreTypes.Integer) =
+        member _.NumTopClasses(state: Types.QuestionAnsweringInferenceUpdateOptions, value: Types.Integer) =
             { state with NumTopClasses = Some value }
 
         [<CustomOperation("tokenization")>]
-        member _.Tokenization(state: QuestionAnsweringInferenceUpdateOptions, value: MlTypes.NlpTokenizationUpdateOptions) =
+        member _.Tokenization(state: Types.QuestionAnsweringInferenceUpdateOptions, value: Types.NlpTokenizationUpdateOptions) =
             { state with Tokenization = Some value }
 
         [<CustomOperation("resultsField")>]
-        member _.ResultsField(state: QuestionAnsweringInferenceUpdateOptions, value: string) =
+        member _.ResultsField(state: Types.QuestionAnsweringInferenceUpdateOptions, value: string) =
             { state with ResultsField = Some value }
 
         [<CustomOperation("maxAnswerLength")>]
-        member _.MaxAnswerLength(state: QuestionAnsweringInferenceUpdateOptions, value: CoreTypes.Integer) =
+        member _.MaxAnswerLength(state: Types.QuestionAnsweringInferenceUpdateOptions, value: Types.Integer) =
             { state with MaxAnswerLength = Some value }
 
     let questionAnsweringInferenceUpdateOptions = QuestionAnsweringInferenceUpdateOptionsBuilder()
 
     type RegressionInferenceOptionsBuilder() =
-        member _.Yield(_: unit) : RegressionInferenceOptions =
+        member _.Yield(_: unit) : Types.RegressionInferenceOptions =
             {
                 ResultsField = None
                 NumTopFeatureImportanceValues = None
             }
 
         [<CustomOperation("resultsField")>]
-        member _.ResultsField(state: RegressionInferenceOptions, value: CoreTypes.Field) =
+        member _.ResultsField(state: Types.RegressionInferenceOptions, value: Types.Field) =
             { state with ResultsField = Some value }
 
         [<CustomOperation("numTopFeatureImportanceValues")>]
-        member _.NumTopFeatureImportanceValues(state: RegressionInferenceOptions, value: CoreTypes.Integer) =
+        member _.NumTopFeatureImportanceValues(state: Types.RegressionInferenceOptions, value: Types.Integer) =
             { state with NumTopFeatureImportanceValues = Some value }
 
     let regressionInferenceOptions = RegressionInferenceOptionsBuilder()
 
     type RunningStateSearchIntervalBuilder() =
-        member _.Yield(_: unit) : RunningStateSearchInterval =
+        member _.Yield(_: unit) : Types.RunningStateSearchInterval =
             {
                 End = None
                 EndMs = Unchecked.defaultof<_>
@@ -3048,25 +3048,25 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("end'")>]
-        member _.End(state: RunningStateSearchInterval, value: CoreTypes.Duration) =
+        member _.End(state: Types.RunningStateSearchInterval, value: Types.Duration) =
             { state with End = Some value }
 
         [<CustomOperation("endMs")>]
-        member _.EndMs(state: RunningStateSearchInterval, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
+        member _.EndMs(state: Types.RunningStateSearchInterval, value: Types.DurationValue<Types.UnitMillis>) =
             { state with EndMs = value }
 
         [<CustomOperation("start")>]
-        member _.Start(state: RunningStateSearchInterval, value: CoreTypes.Duration) =
+        member _.Start(state: Types.RunningStateSearchInterval, value: Types.Duration) =
             { state with Start = Some value }
 
         [<CustomOperation("startMs")>]
-        member _.StartMs(state: RunningStateSearchInterval, value: CoreTypes.DurationValue<CoreTypes.UnitMillis>) =
+        member _.StartMs(state: Types.RunningStateSearchInterval, value: Types.DurationValue<Types.UnitMillis>) =
             { state with StartMs = value }
 
     let runningStateSearchInterval = RunningStateSearchIntervalBuilder()
 
     type TextClassificationInferenceOptionsBuilder() =
-        member _.Yield(_: unit) : TextClassificationInferenceOptions =
+        member _.Yield(_: unit) : Types.TextClassificationInferenceOptions =
             {
                 NumTopClasses = None
                 Tokenization = None
@@ -3076,29 +3076,29 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("numTopClasses")>]
-        member _.NumTopClasses(state: TextClassificationInferenceOptions, value: CoreTypes.Integer) =
+        member _.NumTopClasses(state: Types.TextClassificationInferenceOptions, value: Types.Integer) =
             { state with NumTopClasses = Some value }
 
         [<CustomOperation("tokenization")>]
-        member _.Tokenization(state: TextClassificationInferenceOptions, value: MlTypes.TokenizationConfigContainer) =
+        member _.Tokenization(state: Types.TextClassificationInferenceOptions, value: Types.TokenizationConfigContainer) =
             { state with Tokenization = Some value }
 
         [<CustomOperation("resultsField")>]
-        member _.ResultsField(state: TextClassificationInferenceOptions, value: string) =
+        member _.ResultsField(state: Types.TextClassificationInferenceOptions, value: string) =
             { state with ResultsField = Some value }
 
         [<CustomOperation("classificationLabels")>]
-        member _.ClassificationLabels(state: TextClassificationInferenceOptions, value: string list) =
+        member _.ClassificationLabels(state: Types.TextClassificationInferenceOptions, value: string list) =
             { state with ClassificationLabels = Some value }
 
         [<CustomOperation("vocabulary")>]
-        member _.Vocabulary(state: TextClassificationInferenceOptions, value: MlTypes.Vocabulary) =
+        member _.Vocabulary(state: Types.TextClassificationInferenceOptions, value: Types.Vocabulary) =
             { state with Vocabulary = Some value }
 
     let textClassificationInferenceOptions = TextClassificationInferenceOptionsBuilder()
 
     type TextClassificationInferenceUpdateOptionsBuilder() =
-        member _.Yield(_: unit) : TextClassificationInferenceUpdateOptions =
+        member _.Yield(_: unit) : Types.TextClassificationInferenceUpdateOptions =
             {
                 NumTopClasses = None
                 Tokenization = None
@@ -3107,25 +3107,25 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("numTopClasses")>]
-        member _.NumTopClasses(state: TextClassificationInferenceUpdateOptions, value: CoreTypes.Integer) =
+        member _.NumTopClasses(state: Types.TextClassificationInferenceUpdateOptions, value: Types.Integer) =
             { state with NumTopClasses = Some value }
 
         [<CustomOperation("tokenization")>]
-        member _.Tokenization(state: TextClassificationInferenceUpdateOptions, value: MlTypes.NlpTokenizationUpdateOptions) =
+        member _.Tokenization(state: Types.TextClassificationInferenceUpdateOptions, value: Types.NlpTokenizationUpdateOptions) =
             { state with Tokenization = Some value }
 
         [<CustomOperation("resultsField")>]
-        member _.ResultsField(state: TextClassificationInferenceUpdateOptions, value: string) =
+        member _.ResultsField(state: Types.TextClassificationInferenceUpdateOptions, value: string) =
             { state with ResultsField = Some value }
 
         [<CustomOperation("classificationLabels")>]
-        member _.ClassificationLabels(state: TextClassificationInferenceUpdateOptions, value: string list) =
+        member _.ClassificationLabels(state: Types.TextClassificationInferenceUpdateOptions, value: string list) =
             { state with ClassificationLabels = Some value }
 
     let textClassificationInferenceUpdateOptions = TextClassificationInferenceUpdateOptionsBuilder()
 
     type TextEmbeddingInferenceOptionsBuilder() =
-        member _.Yield(_: unit) : TextEmbeddingInferenceOptions =
+        member _.Yield(_: unit) : Types.TextEmbeddingInferenceOptions =
             {
                 EmbeddingSize = None
                 Tokenization = None
@@ -3134,42 +3134,42 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("embeddingSize")>]
-        member _.EmbeddingSize(state: TextEmbeddingInferenceOptions, value: CoreTypes.Integer) =
+        member _.EmbeddingSize(state: Types.TextEmbeddingInferenceOptions, value: Types.Integer) =
             { state with EmbeddingSize = Some value }
 
         [<CustomOperation("tokenization")>]
-        member _.Tokenization(state: TextEmbeddingInferenceOptions, value: MlTypes.TokenizationConfigContainer) =
+        member _.Tokenization(state: Types.TextEmbeddingInferenceOptions, value: Types.TokenizationConfigContainer) =
             { state with Tokenization = Some value }
 
         [<CustomOperation("resultsField")>]
-        member _.ResultsField(state: TextEmbeddingInferenceOptions, value: string) =
+        member _.ResultsField(state: Types.TextEmbeddingInferenceOptions, value: string) =
             { state with ResultsField = Some value }
 
         [<CustomOperation("vocabulary")>]
-        member _.Vocabulary(state: TextEmbeddingInferenceOptions, value: MlTypes.Vocabulary) =
+        member _.Vocabulary(state: Types.TextEmbeddingInferenceOptions, value: Types.Vocabulary) =
             { state with Vocabulary = Some value }
 
     let textEmbeddingInferenceOptions = TextEmbeddingInferenceOptionsBuilder()
 
     type TextEmbeddingInferenceUpdateOptionsBuilder() =
-        member _.Yield(_: unit) : TextEmbeddingInferenceUpdateOptions =
+        member _.Yield(_: unit) : Types.TextEmbeddingInferenceUpdateOptions =
             {
                 Tokenization = None
                 ResultsField = None
             }
 
         [<CustomOperation("tokenization")>]
-        member _.Tokenization(state: TextEmbeddingInferenceUpdateOptions, value: MlTypes.NlpTokenizationUpdateOptions) =
+        member _.Tokenization(state: Types.TextEmbeddingInferenceUpdateOptions, value: Types.NlpTokenizationUpdateOptions) =
             { state with Tokenization = Some value }
 
         [<CustomOperation("resultsField")>]
-        member _.ResultsField(state: TextEmbeddingInferenceUpdateOptions, value: string) =
+        member _.ResultsField(state: Types.TextEmbeddingInferenceUpdateOptions, value: string) =
             { state with ResultsField = Some value }
 
     let textEmbeddingInferenceUpdateOptions = TextEmbeddingInferenceUpdateOptionsBuilder()
 
     type TextExpansionInferenceOptionsBuilder() =
-        member _.Yield(_: unit) : TextExpansionInferenceOptions =
+        member _.Yield(_: unit) : Types.TextExpansionInferenceOptions =
             {
                 Tokenization = None
                 ResultsField = None
@@ -3177,55 +3177,55 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("tokenization")>]
-        member _.Tokenization(state: TextExpansionInferenceOptions, value: MlTypes.TokenizationConfigContainer) =
+        member _.Tokenization(state: Types.TextExpansionInferenceOptions, value: Types.TokenizationConfigContainer) =
             { state with Tokenization = Some value }
 
         [<CustomOperation("resultsField")>]
-        member _.ResultsField(state: TextExpansionInferenceOptions, value: string) =
+        member _.ResultsField(state: Types.TextExpansionInferenceOptions, value: string) =
             { state with ResultsField = Some value }
 
         [<CustomOperation("vocabulary")>]
-        member _.Vocabulary(state: TextExpansionInferenceOptions, value: MlTypes.Vocabulary) =
+        member _.Vocabulary(state: Types.TextExpansionInferenceOptions, value: Types.Vocabulary) =
             { state with Vocabulary = Some value }
 
     let textExpansionInferenceOptions = TextExpansionInferenceOptionsBuilder()
 
     type TextExpansionInferenceUpdateOptionsBuilder() =
-        member _.Yield(_: unit) : TextExpansionInferenceUpdateOptions =
+        member _.Yield(_: unit) : Types.TextExpansionInferenceUpdateOptions =
             {
                 Tokenization = None
                 ResultsField = None
             }
 
         [<CustomOperation("tokenization")>]
-        member _.Tokenization(state: TextExpansionInferenceUpdateOptions, value: MlTypes.NlpTokenizationUpdateOptions) =
+        member _.Tokenization(state: Types.TextExpansionInferenceUpdateOptions, value: Types.NlpTokenizationUpdateOptions) =
             { state with Tokenization = Some value }
 
         [<CustomOperation("resultsField")>]
-        member _.ResultsField(state: TextExpansionInferenceUpdateOptions, value: string) =
+        member _.ResultsField(state: Types.TextExpansionInferenceUpdateOptions, value: string) =
             { state with ResultsField = Some value }
 
     let textExpansionInferenceUpdateOptions = TextExpansionInferenceUpdateOptionsBuilder()
 
     module TokenizationConfig =
 
-        let bert (value: MlTypes.NlpBertTokenizationConfig) =
-            TokenizationConfigContainer.Bert value
+        let bert (value: Types.NlpBertTokenizationConfig) =
+            Types.TokenizationConfigContainer.Bert value
 
-        let bertJa (value: MlTypes.NlpBertTokenizationConfig) =
-            TokenizationConfigContainer.BertJa value
+        let bertJa (value: Types.NlpBertTokenizationConfig) =
+            Types.TokenizationConfigContainer.BertJa value
 
-        let mpnet (value: MlTypes.NlpBertTokenizationConfig) =
-            TokenizationConfigContainer.Mpnet value
+        let mpnet (value: Types.NlpBertTokenizationConfig) =
+            Types.TokenizationConfigContainer.Mpnet value
 
-        let roberta (value: MlTypes.NlpRobertaTokenizationConfig) =
-            TokenizationConfigContainer.Roberta value
+        let roberta (value: Types.NlpRobertaTokenizationConfig) =
+            Types.TokenizationConfigContainer.Roberta value
 
-        let xlmRoberta (value: MlTypes.XlmRobertaTokenizationConfig) =
-            TokenizationConfigContainer.XlmRoberta value
+        let xlmRoberta (value: Types.XlmRobertaTokenizationConfig) =
+            Types.TokenizationConfigContainer.XlmRoberta value
 
     type TrainedModelAssignmentBuilder() =
-        member _.Yield(_: unit) : TrainedModelAssignment =
+        member _.Yield(_: unit) : Types.TrainedModelAssignment =
             {
                 AdaptiveAllocations = None
                 AssignmentState = Unchecked.defaultof<_>
@@ -3237,37 +3237,37 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("adaptiveAllocations")>]
-        member _.AdaptiveAllocations(state: TrainedModelAssignment, value: MlTypes.AdaptiveAllocationsSettings option) =
+        member _.AdaptiveAllocations(state: Types.TrainedModelAssignment, value: Types.AdaptiveAllocationsSettings option) =
             { state with AdaptiveAllocations = Some value }
 
         [<CustomOperation("assignmentState")>]
-        member _.AssignmentState(state: TrainedModelAssignment, value: MlTypes.DeploymentAssignmentState) =
+        member _.AssignmentState(state: Types.TrainedModelAssignment, value: Types.DeploymentAssignmentState) =
             { state with AssignmentState = value }
 
         [<CustomOperation("maxAssignedAllocations")>]
-        member _.MaxAssignedAllocations(state: TrainedModelAssignment, value: CoreTypes.Integer) =
+        member _.MaxAssignedAllocations(state: Types.TrainedModelAssignment, value: Types.Integer) =
             { state with MaxAssignedAllocations = Some value }
 
         [<CustomOperation("reason")>]
-        member _.Reason(state: TrainedModelAssignment, value: string) =
+        member _.Reason(state: Types.TrainedModelAssignment, value: string) =
             { state with Reason = Some value }
 
         [<CustomOperation("routingTable")>]
-        member _.RoutingTable(state: TrainedModelAssignment, value: Map<string, MlTypes.TrainedModelAssignmentRoutingTable>) =
+        member _.RoutingTable(state: Types.TrainedModelAssignment, value: Map<string, Types.TrainedModelAssignmentRoutingTable>) =
             { state with RoutingTable = value }
 
         [<CustomOperation("startTime")>]
-        member _.StartTime(state: TrainedModelAssignment, value: CoreTypes.DateTime) =
+        member _.StartTime(state: Types.TrainedModelAssignment, value: Types.DateTime) =
             { state with StartTime = value }
 
         [<CustomOperation("taskParameters")>]
-        member _.TaskParameters(state: TrainedModelAssignment, value: MlTypes.TrainedModelAssignmentTaskParameters) =
+        member _.TaskParameters(state: Types.TrainedModelAssignment, value: Types.TrainedModelAssignmentTaskParameters) =
             { state with TaskParameters = value }
 
     let trainedModelAssignment = TrainedModelAssignmentBuilder()
 
     type TrainedModelConfigBuilder() =
-        member _.Yield(_: unit) : TrainedModelConfig =
+        member _.Yield(_: unit) : Types.TrainedModelConfig =
             {
                 ModelId = Unchecked.defaultof<_>
                 ModelType = None
@@ -3293,93 +3293,93 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("modelId")>]
-        member _.ModelId(state: TrainedModelConfig, value: CoreTypes.Id) =
+        member _.ModelId(state: Types.TrainedModelConfig, value: Types.Id) =
             { state with ModelId = value }
 
         [<CustomOperation("modelType")>]
-        member _.ModelType(state: TrainedModelConfig, value: MlTypes.TrainedModelType) =
+        member _.ModelType(state: Types.TrainedModelConfig, value: Types.TrainedModelType) =
             { state with ModelType = Some value }
 
         [<CustomOperation("tags")>]
-        member _.Tags(state: TrainedModelConfig, value: string list) =
+        member _.Tags(state: Types.TrainedModelConfig, value: string list) =
             { state with Tags = value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: TrainedModelConfig, value: CoreTypes.VersionString) =
+        member _.Version(state: Types.TrainedModelConfig, value: Types.VersionString) =
             { state with Version = Some value }
 
         [<CustomOperation("compressedDefinition")>]
-        member _.CompressedDefinition(state: TrainedModelConfig, value: string) =
+        member _.CompressedDefinition(state: Types.TrainedModelConfig, value: string) =
             { state with CompressedDefinition = Some value }
 
         [<CustomOperation("createdBy")>]
-        member _.CreatedBy(state: TrainedModelConfig, value: string) =
+        member _.CreatedBy(state: Types.TrainedModelConfig, value: string) =
             { state with CreatedBy = Some value }
 
         [<CustomOperation("createTime")>]
-        member _.CreateTime(state: TrainedModelConfig, value: CoreTypes.DateTime) =
+        member _.CreateTime(state: Types.TrainedModelConfig, value: Types.DateTime) =
             { state with CreateTime = Some value }
 
         [<CustomOperation("defaultFieldMap")>]
-        member _.DefaultFieldMap(state: TrainedModelConfig, value: Map<string, string>) =
+        member _.DefaultFieldMap(state: Types.TrainedModelConfig, value: Map<string, string>) =
             { state with DefaultFieldMap = Some value }
 
         [<CustomOperation("description")>]
-        member _.Description(state: TrainedModelConfig, value: string) =
+        member _.Description(state: Types.TrainedModelConfig, value: string) =
             { state with Description = Some value }
 
         [<CustomOperation("estimatedHeapMemoryUsageBytes")>]
-        member _.EstimatedHeapMemoryUsageBytes(state: TrainedModelConfig, value: CoreTypes.Integer) =
+        member _.EstimatedHeapMemoryUsageBytes(state: Types.TrainedModelConfig, value: Types.Integer) =
             { state with EstimatedHeapMemoryUsageBytes = Some value }
 
         [<CustomOperation("estimatedOperations")>]
-        member _.EstimatedOperations(state: TrainedModelConfig, value: CoreTypes.Integer) =
+        member _.EstimatedOperations(state: Types.TrainedModelConfig, value: Types.Integer) =
             { state with EstimatedOperations = Some value }
 
         [<CustomOperation("fullyDefined")>]
-        member _.FullyDefined(state: TrainedModelConfig, value: bool) =
+        member _.FullyDefined(state: Types.TrainedModelConfig, value: bool) =
             { state with FullyDefined = Some value }
 
         [<CustomOperation("inferenceConfig")>]
-        member _.InferenceConfig(state: TrainedModelConfig, value: MlTypes.InferenceConfigCreateContainer) =
+        member _.InferenceConfig(state: Types.TrainedModelConfig, value: Types.InferenceConfigCreateContainer) =
             { state with InferenceConfig = Some value }
 
         [<CustomOperation("input")>]
-        member _.Input(state: TrainedModelConfig, value: MlTypes.TrainedModelConfigInput) =
+        member _.Input(state: Types.TrainedModelConfig, value: Types.TrainedModelConfigInput) =
             { state with Input = value }
 
         [<CustomOperation("licenseLevel")>]
-        member _.LicenseLevel(state: TrainedModelConfig, value: string) =
+        member _.LicenseLevel(state: Types.TrainedModelConfig, value: string) =
             { state with LicenseLevel = Some value }
 
         [<CustomOperation("metadata")>]
-        member _.Metadata(state: TrainedModelConfig, value: MlTypes.TrainedModelConfigMetadata) =
+        member _.Metadata(state: Types.TrainedModelConfig, value: Types.TrainedModelConfigMetadata) =
             { state with Metadata = Some value }
 
         [<CustomOperation("modelSizeBytes")>]
-        member _.ModelSizeBytes(state: TrainedModelConfig, value: CoreTypes.ByteSize) =
+        member _.ModelSizeBytes(state: Types.TrainedModelConfig, value: Types.ByteSize) =
             { state with ModelSizeBytes = Some value }
 
         [<CustomOperation("modelPackage")>]
-        member _.ModelPackage(state: TrainedModelConfig, value: MlTypes.ModelPackageConfig) =
+        member _.ModelPackage(state: Types.TrainedModelConfig, value: Types.ModelPackageConfig) =
             { state with ModelPackage = Some value }
 
         [<CustomOperation("location")>]
-        member _.Location(state: TrainedModelConfig, value: MlTypes.TrainedModelLocation) =
+        member _.Location(state: Types.TrainedModelConfig, value: Types.TrainedModelLocation) =
             { state with Location = Some value }
 
         [<CustomOperation("platformArchitecture")>]
-        member _.PlatformArchitecture(state: TrainedModelConfig, value: string) =
+        member _.PlatformArchitecture(state: Types.TrainedModelConfig, value: string) =
             { state with PlatformArchitecture = Some value }
 
         [<CustomOperation("prefixStrings")>]
-        member _.PrefixStrings(state: TrainedModelConfig, value: MlTypes.TrainedModelPrefixStrings) =
+        member _.PrefixStrings(state: Types.TrainedModelConfig, value: Types.TrainedModelPrefixStrings) =
             { state with PrefixStrings = Some value }
 
     let trainedModelConfig = TrainedModelConfigBuilder()
 
     type TrainedModelConfigMetadataBuilder() =
-        member _.Yield(_: unit) : TrainedModelConfigMetadata =
+        member _.Yield(_: unit) : Types.TrainedModelConfigMetadata =
             {
                 ModelAliases = None
                 FeatureImportanceBaseline = None
@@ -3388,25 +3388,25 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("modelAliases")>]
-        member _.ModelAliases(state: TrainedModelConfigMetadata, value: string list) =
+        member _.ModelAliases(state: Types.TrainedModelConfigMetadata, value: string list) =
             { state with ModelAliases = Some value }
 
         [<CustomOperation("featureImportanceBaseline")>]
-        member _.FeatureImportanceBaseline(state: TrainedModelConfigMetadata, value: Map<string, string>) =
+        member _.FeatureImportanceBaseline(state: Types.TrainedModelConfigMetadata, value: Map<string, string>) =
             { state with FeatureImportanceBaseline = Some value }
 
         [<CustomOperation("hyperparameters")>]
-        member _.Hyperparameters(state: TrainedModelConfigMetadata, value: MlTypes.Hyperparameter list) =
+        member _.Hyperparameters(state: Types.TrainedModelConfigMetadata, value: Types.Hyperparameter list) =
             { state with Hyperparameters = Some value }
 
         [<CustomOperation("totalFeatureImportance")>]
-        member _.TotalFeatureImportance(state: TrainedModelConfigMetadata, value: MlTypes.TotalFeatureImportance list) =
+        member _.TotalFeatureImportance(state: Types.TrainedModelConfigMetadata, value: Types.TotalFeatureImportance list) =
             { state with TotalFeatureImportance = Some value }
 
     let trainedModelConfigMetadata = TrainedModelConfigMetadataBuilder()
 
     type TrainedModelDeploymentNodesStatsBuilder() =
-        member _.Yield(_: unit) : TrainedModelDeploymentNodesStats =
+        member _.Yield(_: unit) : Types.TrainedModelDeploymentNodesStats =
             {
                 AverageInferenceTimeMs = None
                 AverageInferenceTimeMsLastMinute = None
@@ -3429,81 +3429,81 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("averageInferenceTimeMs")>]
-        member _.AverageInferenceTimeMs(state: TrainedModelDeploymentNodesStats, value: CoreTypes.DurationValue<CoreTypes.UnitFloatMillis>) =
+        member _.AverageInferenceTimeMs(state: Types.TrainedModelDeploymentNodesStats, value: Types.DurationValue<Types.UnitFloatMillis>) =
             { state with AverageInferenceTimeMs = Some value }
 
         [<CustomOperation("averageInferenceTimeMsLastMinute")>]
-        member _.AverageInferenceTimeMsLastMinute(state: TrainedModelDeploymentNodesStats, value: CoreTypes.DurationValue<CoreTypes.UnitFloatMillis>) =
+        member _.AverageInferenceTimeMsLastMinute(state: Types.TrainedModelDeploymentNodesStats, value: Types.DurationValue<Types.UnitFloatMillis>) =
             { state with AverageInferenceTimeMsLastMinute = Some value }
 
         [<CustomOperation("averageInferenceTimeMsExcludingCacheHits")>]
-        member _.AverageInferenceTimeMsExcludingCacheHits(state: TrainedModelDeploymentNodesStats, value: CoreTypes.DurationValue<CoreTypes.UnitFloatMillis>) =
+        member _.AverageInferenceTimeMsExcludingCacheHits(state: Types.TrainedModelDeploymentNodesStats, value: Types.DurationValue<Types.UnitFloatMillis>) =
             { state with AverageInferenceTimeMsExcludingCacheHits = Some value }
 
         [<CustomOperation("errorCount")>]
-        member _.ErrorCount(state: TrainedModelDeploymentNodesStats, value: CoreTypes.Integer) =
+        member _.ErrorCount(state: Types.TrainedModelDeploymentNodesStats, value: Types.Integer) =
             { state with ErrorCount = Some value }
 
         [<CustomOperation("inferenceCount")>]
-        member _.InferenceCount(state: TrainedModelDeploymentNodesStats, value: CoreTypes.Long) =
+        member _.InferenceCount(state: Types.TrainedModelDeploymentNodesStats, value: Types.Long) =
             { state with InferenceCount = Some value }
 
         [<CustomOperation("inferenceCacheHitCount")>]
-        member _.InferenceCacheHitCount(state: TrainedModelDeploymentNodesStats, value: CoreTypes.Long) =
+        member _.InferenceCacheHitCount(state: Types.TrainedModelDeploymentNodesStats, value: Types.Long) =
             { state with InferenceCacheHitCount = Some value }
 
         [<CustomOperation("inferenceCacheHitCountLastMinute")>]
-        member _.InferenceCacheHitCountLastMinute(state: TrainedModelDeploymentNodesStats, value: CoreTypes.Long) =
+        member _.InferenceCacheHitCountLastMinute(state: Types.TrainedModelDeploymentNodesStats, value: Types.Long) =
             { state with InferenceCacheHitCountLastMinute = Some value }
 
         [<CustomOperation("lastAccess")>]
-        member _.LastAccess(state: TrainedModelDeploymentNodesStats, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
+        member _.LastAccess(state: Types.TrainedModelDeploymentNodesStats, value: Types.EpochTime<Types.UnitMillis>) =
             { state with LastAccess = Some value }
 
         [<CustomOperation("node")>]
-        member _.Node(state: TrainedModelDeploymentNodesStats, value: MlTypes.DiscoveryNode) =
+        member _.Node(state: Types.TrainedModelDeploymentNodesStats, value: Types.DiscoveryNode) =
             { state with Node = Some value }
 
         [<CustomOperation("numberOfAllocations")>]
-        member _.NumberOfAllocations(state: TrainedModelDeploymentNodesStats, value: CoreTypes.Integer) =
+        member _.NumberOfAllocations(state: Types.TrainedModelDeploymentNodesStats, value: Types.Integer) =
             { state with NumberOfAllocations = Some value }
 
         [<CustomOperation("numberOfPendingRequests")>]
-        member _.NumberOfPendingRequests(state: TrainedModelDeploymentNodesStats, value: CoreTypes.Integer) =
+        member _.NumberOfPendingRequests(state: Types.TrainedModelDeploymentNodesStats, value: Types.Integer) =
             { state with NumberOfPendingRequests = Some value }
 
         [<CustomOperation("peakThroughputPerMinute")>]
-        member _.PeakThroughputPerMinute(state: TrainedModelDeploymentNodesStats, value: CoreTypes.Long) =
+        member _.PeakThroughputPerMinute(state: Types.TrainedModelDeploymentNodesStats, value: Types.Long) =
             { state with PeakThroughputPerMinute = value }
 
         [<CustomOperation("rejectedExecutionCount")>]
-        member _.RejectedExecutionCount(state: TrainedModelDeploymentNodesStats, value: CoreTypes.Integer) =
+        member _.RejectedExecutionCount(state: Types.TrainedModelDeploymentNodesStats, value: Types.Integer) =
             { state with RejectedExecutionCount = Some value }
 
         [<CustomOperation("routingState")>]
-        member _.RoutingState(state: TrainedModelDeploymentNodesStats, value: MlTypes.TrainedModelAssignmentRoutingStateAndReason) =
+        member _.RoutingState(state: Types.TrainedModelDeploymentNodesStats, value: Types.TrainedModelAssignmentRoutingStateAndReason) =
             { state with RoutingState = value }
 
         [<CustomOperation("startTime")>]
-        member _.StartTime(state: TrainedModelDeploymentNodesStats, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
+        member _.StartTime(state: Types.TrainedModelDeploymentNodesStats, value: Types.EpochTime<Types.UnitMillis>) =
             { state with StartTime = Some value }
 
         [<CustomOperation("threadsPerAllocation")>]
-        member _.ThreadsPerAllocation(state: TrainedModelDeploymentNodesStats, value: CoreTypes.Integer) =
+        member _.ThreadsPerAllocation(state: Types.TrainedModelDeploymentNodesStats, value: Types.Integer) =
             { state with ThreadsPerAllocation = Some value }
 
         [<CustomOperation("throughputLastMinute")>]
-        member _.ThroughputLastMinute(state: TrainedModelDeploymentNodesStats, value: CoreTypes.Integer) =
+        member _.ThroughputLastMinute(state: Types.TrainedModelDeploymentNodesStats, value: Types.Integer) =
             { state with ThroughputLastMinute = value }
 
         [<CustomOperation("timeoutCount")>]
-        member _.TimeoutCount(state: TrainedModelDeploymentNodesStats, value: CoreTypes.Integer) =
+        member _.TimeoutCount(state: Types.TrainedModelDeploymentNodesStats, value: Types.Integer) =
             { state with TimeoutCount = Some value }
 
     let trainedModelDeploymentNodesStats = TrainedModelDeploymentNodesStatsBuilder()
 
     type TrainedModelDeploymentStatsBuilder() =
-        member _.Yield(_: unit) : TrainedModelDeploymentStats =
+        member _.Yield(_: unit) : Types.TrainedModelDeploymentStats =
             {
                 AdaptiveAllocations = None
                 AllocationStatus = None
@@ -3526,81 +3526,81 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("adaptiveAllocations")>]
-        member _.AdaptiveAllocations(state: TrainedModelDeploymentStats, value: MlTypes.AdaptiveAllocationsSettings) =
+        member _.AdaptiveAllocations(state: Types.TrainedModelDeploymentStats, value: Types.AdaptiveAllocationsSettings) =
             { state with AdaptiveAllocations = Some value }
 
         [<CustomOperation("allocationStatus")>]
-        member _.AllocationStatus(state: TrainedModelDeploymentStats, value: MlTypes.TrainedModelDeploymentAllocationStatus) =
+        member _.AllocationStatus(state: Types.TrainedModelDeploymentStats, value: Types.TrainedModelDeploymentAllocationStatus) =
             { state with AllocationStatus = Some value }
 
         [<CustomOperation("cacheSize")>]
-        member _.CacheSize(state: TrainedModelDeploymentStats, value: CoreTypes.ByteSize) =
+        member _.CacheSize(state: Types.TrainedModelDeploymentStats, value: Types.ByteSize) =
             { state with CacheSize = Some value }
 
         [<CustomOperation("deploymentId")>]
-        member _.DeploymentId(state: TrainedModelDeploymentStats, value: CoreTypes.Id) =
+        member _.DeploymentId(state: Types.TrainedModelDeploymentStats, value: Types.Id) =
             { state with DeploymentId = value }
 
         [<CustomOperation("errorCount")>]
-        member _.ErrorCount(state: TrainedModelDeploymentStats, value: CoreTypes.Integer) =
+        member _.ErrorCount(state: Types.TrainedModelDeploymentStats, value: Types.Integer) =
             { state with ErrorCount = Some value }
 
         [<CustomOperation("inferenceCount")>]
-        member _.InferenceCount(state: TrainedModelDeploymentStats, value: CoreTypes.Integer) =
+        member _.InferenceCount(state: Types.TrainedModelDeploymentStats, value: Types.Integer) =
             { state with InferenceCount = Some value }
 
         [<CustomOperation("modelId")>]
-        member _.ModelId(state: TrainedModelDeploymentStats, value: CoreTypes.Id) =
+        member _.ModelId(state: Types.TrainedModelDeploymentStats, value: Types.Id) =
             { state with ModelId = value }
 
         [<CustomOperation("nodes")>]
-        member _.Nodes(state: TrainedModelDeploymentStats, value: MlTypes.TrainedModelDeploymentNodesStats list) =
+        member _.Nodes(state: Types.TrainedModelDeploymentStats, value: Types.TrainedModelDeploymentNodesStats list) =
             { state with Nodes = value }
 
         [<CustomOperation("numberOfAllocations")>]
-        member _.NumberOfAllocations(state: TrainedModelDeploymentStats, value: CoreTypes.Integer) =
+        member _.NumberOfAllocations(state: Types.TrainedModelDeploymentStats, value: Types.Integer) =
             { state with NumberOfAllocations = Some value }
 
         [<CustomOperation("peakThroughputPerMinute")>]
-        member _.PeakThroughputPerMinute(state: TrainedModelDeploymentStats, value: CoreTypes.Long) =
+        member _.PeakThroughputPerMinute(state: Types.TrainedModelDeploymentStats, value: Types.Long) =
             { state with PeakThroughputPerMinute = value }
 
         [<CustomOperation("priority")>]
-        member _.Priority(state: TrainedModelDeploymentStats, value: MlTypes.TrainingPriority) =
+        member _.Priority(state: Types.TrainedModelDeploymentStats, value: Types.TrainingPriority) =
             { state with Priority = value }
 
         [<CustomOperation("queueCapacity")>]
-        member _.QueueCapacity(state: TrainedModelDeploymentStats, value: CoreTypes.Integer) =
+        member _.QueueCapacity(state: Types.TrainedModelDeploymentStats, value: Types.Integer) =
             { state with QueueCapacity = Some value }
 
         [<CustomOperation("rejectedExecutionCount")>]
-        member _.RejectedExecutionCount(state: TrainedModelDeploymentStats, value: CoreTypes.Integer) =
+        member _.RejectedExecutionCount(state: Types.TrainedModelDeploymentStats, value: Types.Integer) =
             { state with RejectedExecutionCount = Some value }
 
         [<CustomOperation("reason")>]
-        member _.Reason(state: TrainedModelDeploymentStats, value: string) =
+        member _.Reason(state: Types.TrainedModelDeploymentStats, value: string) =
             { state with Reason = Some value }
 
         [<CustomOperation("startTime")>]
-        member _.StartTime(state: TrainedModelDeploymentStats, value: CoreTypes.EpochTime<CoreTypes.UnitMillis>) =
+        member _.StartTime(state: Types.TrainedModelDeploymentStats, value: Types.EpochTime<Types.UnitMillis>) =
             { state with StartTime = value }
 
         [<CustomOperation("state")>]
-        member _.State(state: TrainedModelDeploymentStats, value: MlTypes.DeploymentAssignmentState) =
+        member _.State(state: Types.TrainedModelDeploymentStats, value: Types.DeploymentAssignmentState) =
             { state with State = Some value }
 
         [<CustomOperation("threadsPerAllocation")>]
-        member _.ThreadsPerAllocation(state: TrainedModelDeploymentStats, value: CoreTypes.Integer) =
+        member _.ThreadsPerAllocation(state: Types.TrainedModelDeploymentStats, value: Types.Integer) =
             { state with ThreadsPerAllocation = Some value }
 
         [<CustomOperation("timeoutCount")>]
-        member _.TimeoutCount(state: TrainedModelDeploymentStats, value: CoreTypes.Integer) =
+        member _.TimeoutCount(state: Types.TrainedModelDeploymentStats, value: Types.Integer) =
             { state with TimeoutCount = Some value }
 
     let trainedModelDeploymentStats = TrainedModelDeploymentStatsBuilder()
 
     type TrainedModelInferenceFeatureImportanceBuilder() =
-        member _.Yield(_: unit) : TrainedModelInferenceFeatureImportance =
+        member _.Yield(_: unit) : Types.TrainedModelInferenceFeatureImportance =
             {
                 FeatureName = Unchecked.defaultof<_>
                 Importance = None
@@ -3608,38 +3608,38 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("featureName")>]
-        member _.FeatureName(state: TrainedModelInferenceFeatureImportance, value: string) =
+        member _.FeatureName(state: Types.TrainedModelInferenceFeatureImportance, value: string) =
             { state with FeatureName = value }
 
         [<CustomOperation("importance")>]
-        member _.Importance(state: TrainedModelInferenceFeatureImportance, value: CoreTypes.Double) =
+        member _.Importance(state: Types.TrainedModelInferenceFeatureImportance, value: Types.Double) =
             { state with Importance = Some value }
 
         [<CustomOperation("classes")>]
-        member _.Classes(state: TrainedModelInferenceFeatureImportance, value: MlTypes.TrainedModelInferenceClassImportance list) =
+        member _.Classes(state: Types.TrainedModelInferenceFeatureImportance, value: Types.TrainedModelInferenceClassImportance list) =
             { state with Classes = Some value }
 
     let trainedModelInferenceFeatureImportance = TrainedModelInferenceFeatureImportanceBuilder()
 
     type TrainedModelPrefixStringsBuilder() =
-        member _.Yield(_: unit) : TrainedModelPrefixStrings =
+        member _.Yield(_: unit) : Types.TrainedModelPrefixStrings =
             {
                 Ingest = None
                 Search = None
             }
 
         [<CustomOperation("ingest")>]
-        member _.Ingest(state: TrainedModelPrefixStrings, value: string) =
+        member _.Ingest(state: Types.TrainedModelPrefixStrings, value: string) =
             { state with Ingest = Some value }
 
         [<CustomOperation("search")>]
-        member _.Search(state: TrainedModelPrefixStrings, value: string) =
+        member _.Search(state: Types.TrainedModelPrefixStrings, value: string) =
             { state with Search = Some value }
 
     let trainedModelPrefixStrings = TrainedModelPrefixStringsBuilder()
 
     type TrainedModelStatsBuilder() =
-        member _.Yield(_: unit) : TrainedModelStats =
+        member _.Yield(_: unit) : Types.TrainedModelStats =
             {
                 DeploymentStats = None
                 InferenceStats = None
@@ -3650,33 +3650,33 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("deploymentStats")>]
-        member _.DeploymentStats(state: TrainedModelStats, value: MlTypes.TrainedModelDeploymentStats) =
+        member _.DeploymentStats(state: Types.TrainedModelStats, value: Types.TrainedModelDeploymentStats) =
             { state with DeploymentStats = Some value }
 
         [<CustomOperation("inferenceStats")>]
-        member _.InferenceStats(state: TrainedModelStats, value: MlTypes.TrainedModelInferenceStats) =
+        member _.InferenceStats(state: Types.TrainedModelStats, value: Types.TrainedModelInferenceStats) =
             { state with InferenceStats = Some value }
 
         [<CustomOperation("ingest")>]
-        member _.Ingest(state: TrainedModelStats, value: Map<string, System.Text.Json.JsonElement>) =
+        member _.Ingest(state: Types.TrainedModelStats, value: Map<string, System.Text.Json.JsonElement>) =
             { state with Ingest = Some value }
 
         [<CustomOperation("modelId")>]
-        member _.ModelId(state: TrainedModelStats, value: CoreTypes.Id) =
+        member _.ModelId(state: Types.TrainedModelStats, value: Types.Id) =
             { state with ModelId = value }
 
         [<CustomOperation("modelSizeStats")>]
-        member _.ModelSizeStats(state: TrainedModelStats, value: MlTypes.TrainedModelSizeStats) =
+        member _.ModelSizeStats(state: Types.TrainedModelStats, value: Types.TrainedModelSizeStats) =
             { state with ModelSizeStats = value }
 
         [<CustomOperation("pipelineCount")>]
-        member _.PipelineCount(state: TrainedModelStats, value: CoreTypes.Integer) =
+        member _.PipelineCount(state: Types.TrainedModelStats, value: Types.Integer) =
             { state with PipelineCount = value }
 
     let trainedModelStats = TrainedModelStatsBuilder()
 
     type TransformAuthorizationBuilder() =
-        member _.Yield(_: unit) : TransformAuthorization =
+        member _.Yield(_: unit) : Types.TransformAuthorization =
             {
                 ApiKey = None
                 Roles = None
@@ -3684,21 +3684,21 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("apiKey")>]
-        member _.ApiKey(state: TransformAuthorization, value: MlTypes.ApiKeyAuthorization) =
+        member _.ApiKey(state: Types.TransformAuthorization, value: Types.ApiKeyAuthorization) =
             { state with ApiKey = Some value }
 
         [<CustomOperation("roles")>]
-        member _.Roles(state: TransformAuthorization, value: string list) =
+        member _.Roles(state: Types.TransformAuthorization, value: string list) =
             { state with Roles = Some value }
 
         [<CustomOperation("serviceAccount")>]
-        member _.ServiceAccount(state: TransformAuthorization, value: string) =
+        member _.ServiceAccount(state: Types.TransformAuthorization, value: string) =
             { state with ServiceAccount = Some value }
 
     let transformAuthorization = TransformAuthorizationBuilder()
 
     type ZeroShotClassificationInferenceOptionsBuilder() =
-        member _.Yield(_: unit) : ZeroShotClassificationInferenceOptions =
+        member _.Yield(_: unit) : Types.ZeroShotClassificationInferenceOptions =
             {
                 Tokenization = None
                 HypothesisTemplate = None
@@ -3709,33 +3709,33 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("tokenization")>]
-        member _.Tokenization(state: ZeroShotClassificationInferenceOptions, value: MlTypes.TokenizationConfigContainer) =
+        member _.Tokenization(state: Types.ZeroShotClassificationInferenceOptions, value: Types.TokenizationConfigContainer) =
             { state with Tokenization = Some value }
 
         [<CustomOperation("hypothesisTemplate")>]
-        member _.HypothesisTemplate(state: ZeroShotClassificationInferenceOptions, value: string) =
+        member _.HypothesisTemplate(state: Types.ZeroShotClassificationInferenceOptions, value: string) =
             { state with HypothesisTemplate = Some value }
 
         [<CustomOperation("classificationLabels")>]
-        member _.ClassificationLabels(state: ZeroShotClassificationInferenceOptions, value: string list) =
+        member _.ClassificationLabels(state: Types.ZeroShotClassificationInferenceOptions, value: string list) =
             { state with ClassificationLabels = value }
 
         [<CustomOperation("resultsField")>]
-        member _.ResultsField(state: ZeroShotClassificationInferenceOptions, value: string) =
+        member _.ResultsField(state: Types.ZeroShotClassificationInferenceOptions, value: string) =
             { state with ResultsField = Some value }
 
         [<CustomOperation("multiLabel")>]
-        member _.MultiLabel(state: ZeroShotClassificationInferenceOptions, value: bool) =
+        member _.MultiLabel(state: Types.ZeroShotClassificationInferenceOptions, value: bool) =
             { state with MultiLabel = Some value }
 
         [<CustomOperation("labels")>]
-        member _.Labels(state: ZeroShotClassificationInferenceOptions, value: string list) =
+        member _.Labels(state: Types.ZeroShotClassificationInferenceOptions, value: string list) =
             { state with Labels = Some value }
 
     let zeroShotClassificationInferenceOptions = ZeroShotClassificationInferenceOptionsBuilder()
 
     type ZeroShotClassificationInferenceUpdateOptionsBuilder() =
-        member _.Yield(_: unit) : ZeroShotClassificationInferenceUpdateOptions =
+        member _.Yield(_: unit) : Types.ZeroShotClassificationInferenceUpdateOptions =
             {
                 Tokenization = None
                 ResultsField = None
@@ -3744,19 +3744,19 @@ module MlTypesBuilders =
             }
 
         [<CustomOperation("tokenization")>]
-        member _.Tokenization(state: ZeroShotClassificationInferenceUpdateOptions, value: MlTypes.NlpTokenizationUpdateOptions) =
+        member _.Tokenization(state: Types.ZeroShotClassificationInferenceUpdateOptions, value: Types.NlpTokenizationUpdateOptions) =
             { state with Tokenization = Some value }
 
         [<CustomOperation("resultsField")>]
-        member _.ResultsField(state: ZeroShotClassificationInferenceUpdateOptions, value: string) =
+        member _.ResultsField(state: Types.ZeroShotClassificationInferenceUpdateOptions, value: string) =
             { state with ResultsField = Some value }
 
         [<CustomOperation("multiLabel")>]
-        member _.MultiLabel(state: ZeroShotClassificationInferenceUpdateOptions, value: bool) =
+        member _.MultiLabel(state: Types.ZeroShotClassificationInferenceUpdateOptions, value: bool) =
             { state with MultiLabel = Some value }
 
         [<CustomOperation("labels")>]
-        member _.Labels(state: ZeroShotClassificationInferenceUpdateOptions, value: string list) =
+        member _.Labels(state: Types.ZeroShotClassificationInferenceUpdateOptions, value: string list) =
             { state with Labels = value }
 
     let zeroShotClassificationInferenceUpdateOptions = ZeroShotClassificationInferenceUpdateOptionsBuilder()

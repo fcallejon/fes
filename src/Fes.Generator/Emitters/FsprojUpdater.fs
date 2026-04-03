@@ -25,10 +25,7 @@ let updateFsproj (fsprojPath: string) (generatedDir: string) =
     // Order: Core types first (_types.*), then other types, then Converters, then Builders, then Operations
     // Within types, ensure foundational namespaces come first
     let allTypeFiles = generatedFiles |> List.filter (fun f -> f.Contains("/Types/"))
-    // CoreTypes.g.fs must come first (merged _types + _spec_utils), then everything else
-    let coreTypesFile = allTypeFiles |> List.filter (fun f -> System.IO.Path.GetFileName(f) = "CoreTypes.g.fs")
-    let otherTypeFiles = allTypeFiles |> List.filter (fun f -> System.IO.Path.GetFileName(f) <> "CoreTypes.g.fs")
-    let typeFiles = coreTypesFile @ otherTypeFiles
+    let typeFiles = allTypeFiles // Single file (AllTypes.g.fs)
     let converterFiles = generatedFiles |> List.filter (fun f -> f.EndsWith("Converters.g.fs"))
     let builderFiles = generatedFiles |> List.filter (fun f -> f.Contains("/Builders/"))
     let esModule = generatedFiles |> List.filter (fun f -> f.EndsWith("/ES.g.fs"))

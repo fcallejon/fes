@@ -11,7 +11,11 @@ open Fes.Generator.Emitters.FSharpWriter
 /// Emit a module with convenience functions for each DU case
 let emitContainerBuilders (w: Writer) (ctx: TypeResolver.ResolveContext) (def: InterfaceDefinition) =
     let variantProps = def.Properties |> List.filter (fun p -> not p.ContainerProperty)
-    let duName = Namespacing.toFSharpTypeName def.Name.Name
+    let resolvedName =
+        match Map.tryFind def.Name ctx.TypeIndex.NameMap with
+        | Some n -> n
+        | None -> Namespacing.toFSharpTypeName def.Name.Name
+    let duName = $"Types.{resolvedName}"
     let moduleName = Namespacing.toPascalCase def.Name.Name |> Namespacing.escapeKeyword
 
     // Remove "Container" suffix for the module name if present
@@ -51,8 +55,10 @@ let emitContainerBuilders (w: Writer) (ctx: TypeResolver.ResolveContext) (def: I
 // ============================================================================
 
 let emitRecordCeBuilder (w: Writer) (ctx: TypeResolver.ResolveContext) (typeName: string) (properties: Property list) =
-    let builderTypeName = $"{typeName}Builder"
-    let builderInstanceName = Namespacing.toCamelCase typeName |> Namespacing.escapeKeyword
+    // typeName may be qualified like "Types.Foo" — strip prefix for builder class name
+    let shortName = typeName.Split('.') |> Array.last
+    let builderTypeName = $"{shortName}Builder"
+    let builderInstanceName = Namespacing.toCamelCase shortName |> Namespacing.escapeKeyword
 
     w.Line $"type {builderTypeName}() ="
     w.Indent()
@@ -104,7 +110,11 @@ let emitShortcutConstructor (w: Writer) (ctx: TypeResolver.ResolveContext) (def:
             def.Properties |> List.tryFind (fun p -> p.Name = shortcutPropName)
         match shortcutProp with
         | Some prop ->
-            let typeName = Namespacing.toFSharpTypeName def.Name.Name
+            let resolvedName =
+                match Map.tryFind def.Name ctx.TypeIndex.NameMap with
+                | Some n -> n
+                | None -> Namespacing.toFSharpTypeName def.Name.Name
+            let typeName = $"Types.{resolvedName}"
             let funcName = $"of{Namespacing.toPascalCase shortcutPropName}"
             let paramType = TypeResolver.resolveValueOf ctx prop.Type
             w.Line $"let {funcName} (value: {paramType}) : {typeName} ="
@@ -140,11 +150,15 @@ let emitBuildersForNamespace (w: Writer) (index: TypeIndex.TypeIndex) (types: Ty
                 let ctx = TypeResolver.makeContext index def.Generics
                 emitContainerBuilders w ctx def
             | None ->
-                // Regular interface: emit CE builder if it has optional properties
+                // Regular interface: emit CE builder if it has properties and enough optionals
                 let optionalCount = def.Properties |> List.filter (fun p -> not p.Required) |> List.length
-                if optionalCount >= 2 then
+                if not def.Properties.IsEmpty && optionalCount >= 2 && def.Generics.IsEmpty then
                     let ctx = TypeResolver.makeContext index def.Generics
-                    let typeName = Namespacing.toFSharpTypeName def.Name.Name
+                    let resolvedName =
+                        match Map.tryFind def.Name index.NameMap with
+                        | Some n -> n
+                        | None -> Namespacing.toFSharpTypeName def.Name.Name
+                    let typeName = $"Types.{resolvedName}"
                     emitRecordCeBuilder w ctx typeName def.Properties
                     emitShortcutConstructor w ctx def
             | _ -> ()
@@ -163,7 +177,7 @@ let emitBuilderFile (index: TypeIndex.TypeIndex) (ns: string) (types: TypeDefini
     w.Namespace "Fes.Generated.Builders"
     w.BlankLine()
     w.Open "System.Text.Json.Serialization"
-    w.Open "Fes.Generated.Types"
+    w.Open "Fes.Generated"
     w.BlankLine()
 
     w.AutoOpenModule $"{moduleName}Builders"
@@ -181,7 +195,7 @@ let emitAllBuilderFiles (index: TypeIndex.TypeIndex) (types: TypeDefinition list
             | TypeDefinition.Interface def ->
                 match def.Variants with
                 | Some (VariantKind.Container _) -> Some (def.Name.Namespace, td)
-                | None when def.Properties |> List.filter (fun p -> not p.Required) |> List.length >= 2 ->
+                | None when not def.Properties.IsEmpty && def.Generics.IsEmpty && (def.Properties |> List.filter (fun p -> not p.Required) |> List.length >= 2) ->
                     Some (def.Name.Namespace, td)
                 | _ -> None
             | _ -> None)
@@ -190,3 +204,6 @@ let emitAllBuilderFiles (index: TypeIndex.TypeIndex) (types: TypeDefinition list
 
     grouped
     |> List.map (fun (ns, nsTypes) -> emitBuilderFile index ns nsTypes)
+    |> List.filter (fun (_, content) ->
+        // Skip empty builder modules (module declaration + nothing else)
+        content.Split('\n').Length > 12)

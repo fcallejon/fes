@@ -31,6 +31,7 @@ type ResolveContext = {
     GenericParams: Set<string>
     TypeIndex: TypeIndex.TypeIndex
     CurrentNamespace: string option
+    NameMap: Map<TypeName, string>
 }
 
 /// Check if a TypeName refers to a generic parameter in scope
@@ -46,20 +47,16 @@ let rec resolveValueOf (ctx: ResolveContext) (v: ValueOf) : string =
         elif isGenericParam ctx tn then
             $"'{toCamelCase tn.Name}"
         else
-            // Map core type namespaces to CoreTypes module
-            let effectiveModule =
-                if tn.Namespace.StartsWith("_types") || tn.Namespace = "_spec_utils" then "CoreTypes"
-                else toModuleName tn.Namespace
-            // Omit module prefix when referencing types in the same effective module
-            let currentModule =
-                ctx.CurrentNamespace
-                |> Option.map (fun ns ->
-                    if ns.StartsWith("_types") || ns = "_spec_utils" then "CoreTypes"
-                    else toModuleName ns)
+            // Look up the disambiguated name from the name map
+            let resolvedName =
+                match Map.tryFind tn ctx.NameMap with
+                | Some n -> n
+                | None -> toFSharpTypeName tn.Name
+            // When in the merged all-types context, no prefix needed
             let baseName =
-                match currentModule with
-                | Some m when m = effectiveModule -> toFSharpTypeName tn.Name
-                | _ -> $"{effectiveModule}.{toFSharpTypeName tn.Name}"
+                match ctx.CurrentNamespace with
+                | Some "__all__" -> resolvedName
+                | _ -> $"Types.{resolvedName}"
             match generics with
             | [] -> baseName
             | gs ->
@@ -91,10 +88,12 @@ and private isNullType (v: ValueOf) =
 let makeContext (index: TypeIndex.TypeIndex) (generics: TypeName list) : ResolveContext =
     { GenericParams = generics |> List.map _.Name |> Set.ofList
       TypeIndex = index
-      CurrentNamespace = None }
+      CurrentNamespace = None
+      NameMap = index.NameMap }
 
 /// Create a resolve context with a current namespace for self-reference resolution
 let makeContextInNamespace (index: TypeIndex.TypeIndex) (generics: TypeName list) (ns: string) : ResolveContext =
     { GenericParams = generics |> List.map _.Name |> Set.ofList
       TypeIndex = index
-      CurrentNamespace = Some ns }
+      CurrentNamespace = Some ns
+      NameMap = index.NameMap }

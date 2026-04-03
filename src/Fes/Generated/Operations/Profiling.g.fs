@@ -7,6 +7,7 @@ open System
 open System.Text.Json
 open System.Text.Json.Serialization
 open Fes
+open Fes.Generated
 
 [<AutoOpen>]
 module ProfilingOperations =
@@ -72,8 +73,8 @@ module ProfilingOperations =
     let profilingStacktracesRequest = ProfilingStacktracesRequestBuilder()
 
     type ProfilingStatusRequest = {
-        MasterTimeout: CoreTypes.Duration option
-        Timeout: CoreTypes.Duration option
+        MasterTimeout: Types.Duration option
+        Timeout: Types.Duration option
         WaitForResourcesCreated: bool option
     }
 
@@ -108,11 +109,11 @@ module ProfilingOperations =
             }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: ProfilingStatusRequest, value: CoreTypes.Duration) =
+        member _.MasterTimeout(state: ProfilingStatusRequest, value: Types.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: ProfilingStatusRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: ProfilingStatusRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("waitForResourcesCreated")>]
@@ -122,9 +123,9 @@ module ProfilingOperations =
     let profilingStatusRequest = ProfilingStatusRequestBuilder()
 
     module Status =
-        let withMasterTimeout (value: CoreTypes.Duration) (req: ProfilingStatusRequest) =
+        let withMasterTimeout (value: Types.Duration) (req: ProfilingStatusRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: ProfilingStatusRequest) =
+        let withTimeout (value: Types.Duration) (req: ProfilingStatusRequest) =
             { req with Timeout = Some value }
         let withWaitForResourcesCreated (value: bool) (req: ProfilingStatusRequest) =
             { req with WaitForResourcesCreated = Some value }

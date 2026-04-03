@@ -7,13 +7,14 @@ open System
 open System.Text.Json
 open System.Text.Json.Serialization
 open Fes
+open Fes.Generated
 
 [<AutoOpen>]
 module CcrOperations =
 
     type CcrDeleteAutoFollowPatternRequest = {
-        Name: CoreTypes.Name
-        MasterTimeout: CoreTypes.Duration option
+        Name: Types.Name
+        MasterTimeout: Types.Duration option
     }
 
         with
@@ -34,7 +35,7 @@ module CcrOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type CcrDeleteAutoFollowPatternResponse = CoreTypes.AcknowledgedResponseBase
+    type CcrDeleteAutoFollowPatternResponse = Types.AcknowledgedResponseBase
 
     type CcrDeleteAutoFollowPatternRequestBuilder() =
         member _.Yield(_: unit) : CcrDeleteAutoFollowPatternRequest =
@@ -44,37 +45,37 @@ module CcrOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: CcrDeleteAutoFollowPatternRequest, value: CoreTypes.Name) =
+        member _.Name(state: CcrDeleteAutoFollowPatternRequest, value: Types.Name) =
             { state with Name = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: CcrDeleteAutoFollowPatternRequest, value: CoreTypes.Duration) =
+        member _.MasterTimeout(state: CcrDeleteAutoFollowPatternRequest, value: Types.Duration) =
             { state with MasterTimeout = Some value }
 
     let ccrDeleteAutoFollowPatternRequest = CcrDeleteAutoFollowPatternRequestBuilder()
 
     module DeleteAutoFollowPattern =
-        let withMasterTimeout (value: CoreTypes.Duration) (req: CcrDeleteAutoFollowPatternRequest) =
+        let withMasterTimeout (value: Types.Duration) (req: CcrDeleteAutoFollowPatternRequest) =
             { req with MasterTimeout = Some value }
 
     type CcrFollowRequest = {
-        Index: CoreTypes.IndexName
-        MasterTimeout: CoreTypes.Duration option
-        WaitForActiveShards: CoreTypes.WaitForActiveShards option
+        Index: Types.IndexName
+        MasterTimeout: Types.Duration option
+        WaitForActiveShards: Types.WaitForActiveShards option
         DataStreamName: string option
-        LeaderIndex: CoreTypes.IndexName
-        MaxOutstandingReadRequests: CoreTypes.Long option
-        MaxOutstandingWriteRequests: CoreTypes.Integer option
-        MaxReadRequestOperationCount: CoreTypes.Integer option
-        MaxReadRequestSize: CoreTypes.ByteSize option
-        MaxRetryDelay: CoreTypes.Duration option
-        MaxWriteBufferCount: CoreTypes.Integer option
-        MaxWriteBufferSize: CoreTypes.ByteSize option
-        MaxWriteRequestOperationCount: CoreTypes.Integer option
-        MaxWriteRequestSize: CoreTypes.ByteSize option
-        ReadPollTimeout: CoreTypes.Duration option
+        LeaderIndex: Types.IndexName
+        MaxOutstandingReadRequests: Types.Long option
+        MaxOutstandingWriteRequests: Types.Integer option
+        MaxReadRequestOperationCount: Types.Integer option
+        MaxReadRequestSize: Types.ByteSize option
+        MaxRetryDelay: Types.Duration option
+        MaxWriteBufferCount: Types.Integer option
+        MaxWriteBufferSize: Types.ByteSize option
+        MaxWriteRequestOperationCount: Types.Integer option
+        MaxWriteRequestSize: Types.ByteSize option
+        ReadPollTimeout: Types.Duration option
         RemoteCluster: string
-        Settings: IndicesTypes.IndexSettings option
+        Settings: Types.IndexSettings option
     }
 
         with
@@ -122,15 +123,15 @@ module CcrOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: CcrFollowRequest, value: CoreTypes.IndexName) =
+        member _.Index(state: CcrFollowRequest, value: Types.IndexName) =
             { state with Index = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: CcrFollowRequest, value: CoreTypes.Duration) =
+        member _.MasterTimeout(state: CcrFollowRequest, value: Types.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("waitForActiveShards")>]
-        member _.WaitForActiveShards(state: CcrFollowRequest, value: CoreTypes.WaitForActiveShards) =
+        member _.WaitForActiveShards(state: CcrFollowRequest, value: Types.WaitForActiveShards) =
             { state with WaitForActiveShards = Some value }
 
         [<CustomOperation("dataStreamName")>]
@@ -138,47 +139,47 @@ module CcrOperations =
             { state with DataStreamName = Some value }
 
         [<CustomOperation("leaderIndex")>]
-        member _.LeaderIndex(state: CcrFollowRequest, value: CoreTypes.IndexName) =
+        member _.LeaderIndex(state: CcrFollowRequest, value: Types.IndexName) =
             { state with LeaderIndex = value }
 
         [<CustomOperation("maxOutstandingReadRequests")>]
-        member _.MaxOutstandingReadRequests(state: CcrFollowRequest, value: CoreTypes.Long) =
+        member _.MaxOutstandingReadRequests(state: CcrFollowRequest, value: Types.Long) =
             { state with MaxOutstandingReadRequests = Some value }
 
         [<CustomOperation("maxOutstandingWriteRequests")>]
-        member _.MaxOutstandingWriteRequests(state: CcrFollowRequest, value: CoreTypes.Integer) =
+        member _.MaxOutstandingWriteRequests(state: CcrFollowRequest, value: Types.Integer) =
             { state with MaxOutstandingWriteRequests = Some value }
 
         [<CustomOperation("maxReadRequestOperationCount")>]
-        member _.MaxReadRequestOperationCount(state: CcrFollowRequest, value: CoreTypes.Integer) =
+        member _.MaxReadRequestOperationCount(state: CcrFollowRequest, value: Types.Integer) =
             { state with MaxReadRequestOperationCount = Some value }
 
         [<CustomOperation("maxReadRequestSize")>]
-        member _.MaxReadRequestSize(state: CcrFollowRequest, value: CoreTypes.ByteSize) =
+        member _.MaxReadRequestSize(state: CcrFollowRequest, value: Types.ByteSize) =
             { state with MaxReadRequestSize = Some value }
 
         [<CustomOperation("maxRetryDelay")>]
-        member _.MaxRetryDelay(state: CcrFollowRequest, value: CoreTypes.Duration) =
+        member _.MaxRetryDelay(state: CcrFollowRequest, value: Types.Duration) =
             { state with MaxRetryDelay = Some value }
 
         [<CustomOperation("maxWriteBufferCount")>]
-        member _.MaxWriteBufferCount(state: CcrFollowRequest, value: CoreTypes.Integer) =
+        member _.MaxWriteBufferCount(state: CcrFollowRequest, value: Types.Integer) =
             { state with MaxWriteBufferCount = Some value }
 
         [<CustomOperation("maxWriteBufferSize")>]
-        member _.MaxWriteBufferSize(state: CcrFollowRequest, value: CoreTypes.ByteSize) =
+        member _.MaxWriteBufferSize(state: CcrFollowRequest, value: Types.ByteSize) =
             { state with MaxWriteBufferSize = Some value }
 
         [<CustomOperation("maxWriteRequestOperationCount")>]
-        member _.MaxWriteRequestOperationCount(state: CcrFollowRequest, value: CoreTypes.Integer) =
+        member _.MaxWriteRequestOperationCount(state: CcrFollowRequest, value: Types.Integer) =
             { state with MaxWriteRequestOperationCount = Some value }
 
         [<CustomOperation("maxWriteRequestSize")>]
-        member _.MaxWriteRequestSize(state: CcrFollowRequest, value: CoreTypes.ByteSize) =
+        member _.MaxWriteRequestSize(state: CcrFollowRequest, value: Types.ByteSize) =
             { state with MaxWriteRequestSize = Some value }
 
         [<CustomOperation("readPollTimeout")>]
-        member _.ReadPollTimeout(state: CcrFollowRequest, value: CoreTypes.Duration) =
+        member _.ReadPollTimeout(state: CcrFollowRequest, value: Types.Duration) =
             { state with ReadPollTimeout = Some value }
 
         [<CustomOperation("remoteCluster")>]
@@ -186,48 +187,48 @@ module CcrOperations =
             { state with RemoteCluster = value }
 
         [<CustomOperation("settings")>]
-        member _.Settings(state: CcrFollowRequest, value: IndicesTypes.IndexSettings) =
+        member _.Settings(state: CcrFollowRequest, value: Types.IndexSettings) =
             { state with Settings = Some value }
 
     let ccrFollowRequest = CcrFollowRequestBuilder()
 
     module Follow =
-        let withMasterTimeout (value: CoreTypes.Duration) (req: CcrFollowRequest) =
+        let withMasterTimeout (value: Types.Duration) (req: CcrFollowRequest) =
             { req with MasterTimeout = Some value }
-        let withWaitForActiveShards (value: CoreTypes.WaitForActiveShards) (req: CcrFollowRequest) =
+        let withWaitForActiveShards (value: Types.WaitForActiveShards) (req: CcrFollowRequest) =
             { req with WaitForActiveShards = Some value }
         let withDataStreamName (value: string) (req: CcrFollowRequest) =
             { req with DataStreamName = Some value }
-        let withLeaderIndex (value: CoreTypes.IndexName) (req: CcrFollowRequest) =
+        let withLeaderIndex (value: Types.IndexName) (req: CcrFollowRequest) =
             { req with LeaderIndex = value }
-        let withMaxOutstandingReadRequests (value: CoreTypes.Long) (req: CcrFollowRequest) =
+        let withMaxOutstandingReadRequests (value: Types.Long) (req: CcrFollowRequest) =
             { req with MaxOutstandingReadRequests = Some value }
-        let withMaxOutstandingWriteRequests (value: CoreTypes.Integer) (req: CcrFollowRequest) =
+        let withMaxOutstandingWriteRequests (value: Types.Integer) (req: CcrFollowRequest) =
             { req with MaxOutstandingWriteRequests = Some value }
-        let withMaxReadRequestOperationCount (value: CoreTypes.Integer) (req: CcrFollowRequest) =
+        let withMaxReadRequestOperationCount (value: Types.Integer) (req: CcrFollowRequest) =
             { req with MaxReadRequestOperationCount = Some value }
-        let withMaxReadRequestSize (value: CoreTypes.ByteSize) (req: CcrFollowRequest) =
+        let withMaxReadRequestSize (value: Types.ByteSize) (req: CcrFollowRequest) =
             { req with MaxReadRequestSize = Some value }
-        let withMaxRetryDelay (value: CoreTypes.Duration) (req: CcrFollowRequest) =
+        let withMaxRetryDelay (value: Types.Duration) (req: CcrFollowRequest) =
             { req with MaxRetryDelay = Some value }
-        let withMaxWriteBufferCount (value: CoreTypes.Integer) (req: CcrFollowRequest) =
+        let withMaxWriteBufferCount (value: Types.Integer) (req: CcrFollowRequest) =
             { req with MaxWriteBufferCount = Some value }
-        let withMaxWriteBufferSize (value: CoreTypes.ByteSize) (req: CcrFollowRequest) =
+        let withMaxWriteBufferSize (value: Types.ByteSize) (req: CcrFollowRequest) =
             { req with MaxWriteBufferSize = Some value }
-        let withMaxWriteRequestOperationCount (value: CoreTypes.Integer) (req: CcrFollowRequest) =
+        let withMaxWriteRequestOperationCount (value: Types.Integer) (req: CcrFollowRequest) =
             { req with MaxWriteRequestOperationCount = Some value }
-        let withMaxWriteRequestSize (value: CoreTypes.ByteSize) (req: CcrFollowRequest) =
+        let withMaxWriteRequestSize (value: Types.ByteSize) (req: CcrFollowRequest) =
             { req with MaxWriteRequestSize = Some value }
-        let withReadPollTimeout (value: CoreTypes.Duration) (req: CcrFollowRequest) =
+        let withReadPollTimeout (value: Types.Duration) (req: CcrFollowRequest) =
             { req with ReadPollTimeout = Some value }
         let withRemoteCluster (value: string) (req: CcrFollowRequest) =
             { req with RemoteCluster = value }
-        let withSettings (value: IndicesTypes.IndexSettings) (req: CcrFollowRequest) =
+        let withSettings (value: Types.IndexSettings) (req: CcrFollowRequest) =
             { req with Settings = Some value }
 
     type CcrFollowInfoRequest = {
-        Index: CoreTypes.Indices
-        MasterTimeout: CoreTypes.Duration option
+        Index: Types.Indices
+        MasterTimeout: Types.Duration option
     }
 
         with
@@ -258,22 +259,22 @@ module CcrOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: CcrFollowInfoRequest, value: CoreTypes.Indices) =
+        member _.Index(state: CcrFollowInfoRequest, value: Types.Indices) =
             { state with Index = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: CcrFollowInfoRequest, value: CoreTypes.Duration) =
+        member _.MasterTimeout(state: CcrFollowInfoRequest, value: Types.Duration) =
             { state with MasterTimeout = Some value }
 
     let ccrFollowInfoRequest = CcrFollowInfoRequestBuilder()
 
     module FollowInfo =
-        let withMasterTimeout (value: CoreTypes.Duration) (req: CcrFollowInfoRequest) =
+        let withMasterTimeout (value: Types.Duration) (req: CcrFollowInfoRequest) =
             { req with MasterTimeout = Some value }
 
     type CcrFollowStatsRequest = {
-        Index: CoreTypes.Indices
-        Timeout: CoreTypes.Duration option
+        Index: Types.Indices
+        Timeout: Types.Duration option
     }
 
         with
@@ -304,25 +305,25 @@ module CcrOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: CcrFollowStatsRequest, value: CoreTypes.Indices) =
+        member _.Index(state: CcrFollowStatsRequest, value: Types.Indices) =
             { state with Index = value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: CcrFollowStatsRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: CcrFollowStatsRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
     let ccrFollowStatsRequest = CcrFollowStatsRequestBuilder()
 
     module FollowStats =
-        let withTimeout (value: CoreTypes.Duration) (req: CcrFollowStatsRequest) =
+        let withTimeout (value: Types.Duration) (req: CcrFollowStatsRequest) =
             { req with Timeout = Some value }
 
     type CcrForgetFollowerRequest = {
-        Index: CoreTypes.IndexName
-        Timeout: CoreTypes.Duration option
+        Index: Types.IndexName
+        Timeout: Types.Duration option
         FollowerCluster: string option
-        FollowerIndex: CoreTypes.IndexName option
-        FollowerIndexUuid: CoreTypes.Uuid option
+        FollowerIndex: Types.IndexName option
+        FollowerIndexUuid: Types.Uuid option
         LeaderRemoteCluster: string option
     }
 
@@ -359,11 +360,11 @@ module CcrOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: CcrForgetFollowerRequest, value: CoreTypes.IndexName) =
+        member _.Index(state: CcrForgetFollowerRequest, value: Types.IndexName) =
             { state with Index = value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: CcrForgetFollowerRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: CcrForgetFollowerRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("followerCluster")>]
@@ -371,11 +372,11 @@ module CcrOperations =
             { state with FollowerCluster = Some value }
 
         [<CustomOperation("followerIndex")>]
-        member _.FollowerIndex(state: CcrForgetFollowerRequest, value: CoreTypes.IndexName) =
+        member _.FollowerIndex(state: CcrForgetFollowerRequest, value: Types.IndexName) =
             { state with FollowerIndex = Some value }
 
         [<CustomOperation("followerIndexUuid")>]
-        member _.FollowerIndexUuid(state: CcrForgetFollowerRequest, value: CoreTypes.Uuid) =
+        member _.FollowerIndexUuid(state: CcrForgetFollowerRequest, value: Types.Uuid) =
             { state with FollowerIndexUuid = Some value }
 
         [<CustomOperation("leaderRemoteCluster")>]
@@ -385,20 +386,20 @@ module CcrOperations =
     let ccrForgetFollowerRequest = CcrForgetFollowerRequestBuilder()
 
     module ForgetFollower =
-        let withTimeout (value: CoreTypes.Duration) (req: CcrForgetFollowerRequest) =
+        let withTimeout (value: Types.Duration) (req: CcrForgetFollowerRequest) =
             { req with Timeout = Some value }
         let withFollowerCluster (value: string) (req: CcrForgetFollowerRequest) =
             { req with FollowerCluster = Some value }
-        let withFollowerIndex (value: CoreTypes.IndexName) (req: CcrForgetFollowerRequest) =
+        let withFollowerIndex (value: Types.IndexName) (req: CcrForgetFollowerRequest) =
             { req with FollowerIndex = Some value }
-        let withFollowerIndexUuid (value: CoreTypes.Uuid) (req: CcrForgetFollowerRequest) =
+        let withFollowerIndexUuid (value: Types.Uuid) (req: CcrForgetFollowerRequest) =
             { req with FollowerIndexUuid = Some value }
         let withLeaderRemoteCluster (value: string) (req: CcrForgetFollowerRequest) =
             { req with LeaderRemoteCluster = Some value }
 
     type CcrGetAutoFollowPatternRequest = {
-        Name: CoreTypes.Name
-        MasterTimeout: CoreTypes.Duration option
+        Name: Types.Name
+        MasterTimeout: Types.Duration option
     }
 
         with
@@ -429,22 +430,22 @@ module CcrOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: CcrGetAutoFollowPatternRequest, value: CoreTypes.Name) =
+        member _.Name(state: CcrGetAutoFollowPatternRequest, value: Types.Name) =
             { state with Name = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: CcrGetAutoFollowPatternRequest, value: CoreTypes.Duration) =
+        member _.MasterTimeout(state: CcrGetAutoFollowPatternRequest, value: Types.Duration) =
             { state with MasterTimeout = Some value }
 
     let ccrGetAutoFollowPatternRequest = CcrGetAutoFollowPatternRequestBuilder()
 
     module GetAutoFollowPattern =
-        let withMasterTimeout (value: CoreTypes.Duration) (req: CcrGetAutoFollowPatternRequest) =
+        let withMasterTimeout (value: Types.Duration) (req: CcrGetAutoFollowPatternRequest) =
             { req with MasterTimeout = Some value }
 
     type CcrPauseAutoFollowPatternRequest = {
-        Name: CoreTypes.Name
-        MasterTimeout: CoreTypes.Duration option
+        Name: Types.Name
+        MasterTimeout: Types.Duration option
     }
 
         with
@@ -465,7 +466,7 @@ module CcrOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type CcrPauseAutoFollowPatternResponse = CoreTypes.AcknowledgedResponseBase
+    type CcrPauseAutoFollowPatternResponse = Types.AcknowledgedResponseBase
 
     type CcrPauseAutoFollowPatternRequestBuilder() =
         member _.Yield(_: unit) : CcrPauseAutoFollowPatternRequest =
@@ -475,22 +476,22 @@ module CcrOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: CcrPauseAutoFollowPatternRequest, value: CoreTypes.Name) =
+        member _.Name(state: CcrPauseAutoFollowPatternRequest, value: Types.Name) =
             { state with Name = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: CcrPauseAutoFollowPatternRequest, value: CoreTypes.Duration) =
+        member _.MasterTimeout(state: CcrPauseAutoFollowPatternRequest, value: Types.Duration) =
             { state with MasterTimeout = Some value }
 
     let ccrPauseAutoFollowPatternRequest = CcrPauseAutoFollowPatternRequestBuilder()
 
     module PauseAutoFollowPattern =
-        let withMasterTimeout (value: CoreTypes.Duration) (req: CcrPauseAutoFollowPatternRequest) =
+        let withMasterTimeout (value: Types.Duration) (req: CcrPauseAutoFollowPatternRequest) =
             { req with MasterTimeout = Some value }
 
     type CcrPauseFollowRequest = {
-        Index: CoreTypes.IndexName
-        MasterTimeout: CoreTypes.Duration option
+        Index: Types.IndexName
+        MasterTimeout: Types.Duration option
     }
 
         with
@@ -511,7 +512,7 @@ module CcrOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type CcrPauseFollowResponse = CoreTypes.AcknowledgedResponseBase
+    type CcrPauseFollowResponse = Types.AcknowledgedResponseBase
 
     type CcrPauseFollowRequestBuilder() =
         member _.Yield(_: unit) : CcrPauseFollowRequest =
@@ -521,37 +522,37 @@ module CcrOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: CcrPauseFollowRequest, value: CoreTypes.IndexName) =
+        member _.Index(state: CcrPauseFollowRequest, value: Types.IndexName) =
             { state with Index = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: CcrPauseFollowRequest, value: CoreTypes.Duration) =
+        member _.MasterTimeout(state: CcrPauseFollowRequest, value: Types.Duration) =
             { state with MasterTimeout = Some value }
 
     let ccrPauseFollowRequest = CcrPauseFollowRequestBuilder()
 
     module PauseFollow =
-        let withMasterTimeout (value: CoreTypes.Duration) (req: CcrPauseFollowRequest) =
+        let withMasterTimeout (value: Types.Duration) (req: CcrPauseFollowRequest) =
             { req with MasterTimeout = Some value }
 
     type CcrPutAutoFollowPatternRequest = {
-        Name: CoreTypes.Name
-        MasterTimeout: CoreTypes.Duration option
+        Name: Types.Name
+        MasterTimeout: Types.Duration option
         RemoteCluster: string
-        FollowIndexPattern: CoreTypes.IndexPattern option
-        LeaderIndexPatterns: CoreTypes.IndexPatterns option
-        LeaderIndexExclusionPatterns: CoreTypes.IndexPatterns option
-        MaxOutstandingReadRequests: CoreTypes.Integer option
+        FollowIndexPattern: Types.IndexPattern option
+        LeaderIndexPatterns: Types.IndexPatterns option
+        LeaderIndexExclusionPatterns: Types.IndexPatterns option
+        MaxOutstandingReadRequests: Types.Integer option
         Settings: Map<string, System.Text.Json.JsonElement> option
-        MaxOutstandingWriteRequests: CoreTypes.Integer option
-        ReadPollTimeout: CoreTypes.Duration option
-        MaxReadRequestOperationCount: CoreTypes.Integer option
-        MaxReadRequestSize: CoreTypes.ByteSize option
-        MaxRetryDelay: CoreTypes.Duration option
-        MaxWriteBufferCount: CoreTypes.Integer option
-        MaxWriteBufferSize: CoreTypes.ByteSize option
-        MaxWriteRequestOperationCount: CoreTypes.Integer option
-        MaxWriteRequestSize: CoreTypes.ByteSize option
+        MaxOutstandingWriteRequests: Types.Integer option
+        ReadPollTimeout: Types.Duration option
+        MaxReadRequestOperationCount: Types.Integer option
+        MaxReadRequestSize: Types.ByteSize option
+        MaxRetryDelay: Types.Duration option
+        MaxWriteBufferCount: Types.Integer option
+        MaxWriteBufferSize: Types.ByteSize option
+        MaxWriteRequestOperationCount: Types.Integer option
+        MaxWriteRequestSize: Types.ByteSize option
     }
 
         with
@@ -573,7 +574,7 @@ module CcrOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type CcrPutAutoFollowPatternResponse = CoreTypes.AcknowledgedResponseBase
+    type CcrPutAutoFollowPatternResponse = Types.AcknowledgedResponseBase
 
     type CcrPutAutoFollowPatternRequestBuilder() =
         member _.Yield(_: unit) : CcrPutAutoFollowPatternRequest =
@@ -598,11 +599,11 @@ module CcrOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: CcrPutAutoFollowPatternRequest, value: CoreTypes.Name) =
+        member _.Name(state: CcrPutAutoFollowPatternRequest, value: Types.Name) =
             { state with Name = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: CcrPutAutoFollowPatternRequest, value: CoreTypes.Duration) =
+        member _.MasterTimeout(state: CcrPutAutoFollowPatternRequest, value: Types.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("remoteCluster")>]
@@ -610,19 +611,19 @@ module CcrOperations =
             { state with RemoteCluster = value }
 
         [<CustomOperation("followIndexPattern")>]
-        member _.FollowIndexPattern(state: CcrPutAutoFollowPatternRequest, value: CoreTypes.IndexPattern) =
+        member _.FollowIndexPattern(state: CcrPutAutoFollowPatternRequest, value: Types.IndexPattern) =
             { state with FollowIndexPattern = Some value }
 
         [<CustomOperation("leaderIndexPatterns")>]
-        member _.LeaderIndexPatterns(state: CcrPutAutoFollowPatternRequest, value: CoreTypes.IndexPatterns) =
+        member _.LeaderIndexPatterns(state: CcrPutAutoFollowPatternRequest, value: Types.IndexPatterns) =
             { state with LeaderIndexPatterns = Some value }
 
         [<CustomOperation("leaderIndexExclusionPatterns")>]
-        member _.LeaderIndexExclusionPatterns(state: CcrPutAutoFollowPatternRequest, value: CoreTypes.IndexPatterns) =
+        member _.LeaderIndexExclusionPatterns(state: CcrPutAutoFollowPatternRequest, value: Types.IndexPatterns) =
             { state with LeaderIndexExclusionPatterns = Some value }
 
         [<CustomOperation("maxOutstandingReadRequests")>]
-        member _.MaxOutstandingReadRequests(state: CcrPutAutoFollowPatternRequest, value: CoreTypes.Integer) =
+        member _.MaxOutstandingReadRequests(state: CcrPutAutoFollowPatternRequest, value: Types.Integer) =
             { state with MaxOutstandingReadRequests = Some value }
 
         [<CustomOperation("settings")>]
@@ -630,80 +631,80 @@ module CcrOperations =
             { state with Settings = Some value }
 
         [<CustomOperation("maxOutstandingWriteRequests")>]
-        member _.MaxOutstandingWriteRequests(state: CcrPutAutoFollowPatternRequest, value: CoreTypes.Integer) =
+        member _.MaxOutstandingWriteRequests(state: CcrPutAutoFollowPatternRequest, value: Types.Integer) =
             { state with MaxOutstandingWriteRequests = Some value }
 
         [<CustomOperation("readPollTimeout")>]
-        member _.ReadPollTimeout(state: CcrPutAutoFollowPatternRequest, value: CoreTypes.Duration) =
+        member _.ReadPollTimeout(state: CcrPutAutoFollowPatternRequest, value: Types.Duration) =
             { state with ReadPollTimeout = Some value }
 
         [<CustomOperation("maxReadRequestOperationCount")>]
-        member _.MaxReadRequestOperationCount(state: CcrPutAutoFollowPatternRequest, value: CoreTypes.Integer) =
+        member _.MaxReadRequestOperationCount(state: CcrPutAutoFollowPatternRequest, value: Types.Integer) =
             { state with MaxReadRequestOperationCount = Some value }
 
         [<CustomOperation("maxReadRequestSize")>]
-        member _.MaxReadRequestSize(state: CcrPutAutoFollowPatternRequest, value: CoreTypes.ByteSize) =
+        member _.MaxReadRequestSize(state: CcrPutAutoFollowPatternRequest, value: Types.ByteSize) =
             { state with MaxReadRequestSize = Some value }
 
         [<CustomOperation("maxRetryDelay")>]
-        member _.MaxRetryDelay(state: CcrPutAutoFollowPatternRequest, value: CoreTypes.Duration) =
+        member _.MaxRetryDelay(state: CcrPutAutoFollowPatternRequest, value: Types.Duration) =
             { state with MaxRetryDelay = Some value }
 
         [<CustomOperation("maxWriteBufferCount")>]
-        member _.MaxWriteBufferCount(state: CcrPutAutoFollowPatternRequest, value: CoreTypes.Integer) =
+        member _.MaxWriteBufferCount(state: CcrPutAutoFollowPatternRequest, value: Types.Integer) =
             { state with MaxWriteBufferCount = Some value }
 
         [<CustomOperation("maxWriteBufferSize")>]
-        member _.MaxWriteBufferSize(state: CcrPutAutoFollowPatternRequest, value: CoreTypes.ByteSize) =
+        member _.MaxWriteBufferSize(state: CcrPutAutoFollowPatternRequest, value: Types.ByteSize) =
             { state with MaxWriteBufferSize = Some value }
 
         [<CustomOperation("maxWriteRequestOperationCount")>]
-        member _.MaxWriteRequestOperationCount(state: CcrPutAutoFollowPatternRequest, value: CoreTypes.Integer) =
+        member _.MaxWriteRequestOperationCount(state: CcrPutAutoFollowPatternRequest, value: Types.Integer) =
             { state with MaxWriteRequestOperationCount = Some value }
 
         [<CustomOperation("maxWriteRequestSize")>]
-        member _.MaxWriteRequestSize(state: CcrPutAutoFollowPatternRequest, value: CoreTypes.ByteSize) =
+        member _.MaxWriteRequestSize(state: CcrPutAutoFollowPatternRequest, value: Types.ByteSize) =
             { state with MaxWriteRequestSize = Some value }
 
     let ccrPutAutoFollowPatternRequest = CcrPutAutoFollowPatternRequestBuilder()
 
     module PutAutoFollowPattern =
-        let withMasterTimeout (value: CoreTypes.Duration) (req: CcrPutAutoFollowPatternRequest) =
+        let withMasterTimeout (value: Types.Duration) (req: CcrPutAutoFollowPatternRequest) =
             { req with MasterTimeout = Some value }
         let withRemoteCluster (value: string) (req: CcrPutAutoFollowPatternRequest) =
             { req with RemoteCluster = value }
-        let withFollowIndexPattern (value: CoreTypes.IndexPattern) (req: CcrPutAutoFollowPatternRequest) =
+        let withFollowIndexPattern (value: Types.IndexPattern) (req: CcrPutAutoFollowPatternRequest) =
             { req with FollowIndexPattern = Some value }
-        let withLeaderIndexPatterns (value: CoreTypes.IndexPatterns) (req: CcrPutAutoFollowPatternRequest) =
+        let withLeaderIndexPatterns (value: Types.IndexPatterns) (req: CcrPutAutoFollowPatternRequest) =
             { req with LeaderIndexPatterns = Some value }
-        let withLeaderIndexExclusionPatterns (value: CoreTypes.IndexPatterns) (req: CcrPutAutoFollowPatternRequest) =
+        let withLeaderIndexExclusionPatterns (value: Types.IndexPatterns) (req: CcrPutAutoFollowPatternRequest) =
             { req with LeaderIndexExclusionPatterns = Some value }
-        let withMaxOutstandingReadRequests (value: CoreTypes.Integer) (req: CcrPutAutoFollowPatternRequest) =
+        let withMaxOutstandingReadRequests (value: Types.Integer) (req: CcrPutAutoFollowPatternRequest) =
             { req with MaxOutstandingReadRequests = Some value }
         let withSettings (value: Map<string, System.Text.Json.JsonElement>) (req: CcrPutAutoFollowPatternRequest) =
             { req with Settings = Some value }
-        let withMaxOutstandingWriteRequests (value: CoreTypes.Integer) (req: CcrPutAutoFollowPatternRequest) =
+        let withMaxOutstandingWriteRequests (value: Types.Integer) (req: CcrPutAutoFollowPatternRequest) =
             { req with MaxOutstandingWriteRequests = Some value }
-        let withReadPollTimeout (value: CoreTypes.Duration) (req: CcrPutAutoFollowPatternRequest) =
+        let withReadPollTimeout (value: Types.Duration) (req: CcrPutAutoFollowPatternRequest) =
             { req with ReadPollTimeout = Some value }
-        let withMaxReadRequestOperationCount (value: CoreTypes.Integer) (req: CcrPutAutoFollowPatternRequest) =
+        let withMaxReadRequestOperationCount (value: Types.Integer) (req: CcrPutAutoFollowPatternRequest) =
             { req with MaxReadRequestOperationCount = Some value }
-        let withMaxReadRequestSize (value: CoreTypes.ByteSize) (req: CcrPutAutoFollowPatternRequest) =
+        let withMaxReadRequestSize (value: Types.ByteSize) (req: CcrPutAutoFollowPatternRequest) =
             { req with MaxReadRequestSize = Some value }
-        let withMaxRetryDelay (value: CoreTypes.Duration) (req: CcrPutAutoFollowPatternRequest) =
+        let withMaxRetryDelay (value: Types.Duration) (req: CcrPutAutoFollowPatternRequest) =
             { req with MaxRetryDelay = Some value }
-        let withMaxWriteBufferCount (value: CoreTypes.Integer) (req: CcrPutAutoFollowPatternRequest) =
+        let withMaxWriteBufferCount (value: Types.Integer) (req: CcrPutAutoFollowPatternRequest) =
             { req with MaxWriteBufferCount = Some value }
-        let withMaxWriteBufferSize (value: CoreTypes.ByteSize) (req: CcrPutAutoFollowPatternRequest) =
+        let withMaxWriteBufferSize (value: Types.ByteSize) (req: CcrPutAutoFollowPatternRequest) =
             { req with MaxWriteBufferSize = Some value }
-        let withMaxWriteRequestOperationCount (value: CoreTypes.Integer) (req: CcrPutAutoFollowPatternRequest) =
+        let withMaxWriteRequestOperationCount (value: Types.Integer) (req: CcrPutAutoFollowPatternRequest) =
             { req with MaxWriteRequestOperationCount = Some value }
-        let withMaxWriteRequestSize (value: CoreTypes.ByteSize) (req: CcrPutAutoFollowPatternRequest) =
+        let withMaxWriteRequestSize (value: Types.ByteSize) (req: CcrPutAutoFollowPatternRequest) =
             { req with MaxWriteRequestSize = Some value }
 
     type CcrResumeAutoFollowPatternRequest = {
-        Name: CoreTypes.Name
-        MasterTimeout: CoreTypes.Duration option
+        Name: Types.Name
+        MasterTimeout: Types.Duration option
     }
 
         with
@@ -724,7 +725,7 @@ module CcrOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type CcrResumeAutoFollowPatternResponse = CoreTypes.AcknowledgedResponseBase
+    type CcrResumeAutoFollowPatternResponse = Types.AcknowledgedResponseBase
 
     type CcrResumeAutoFollowPatternRequestBuilder() =
         member _.Yield(_: unit) : CcrResumeAutoFollowPatternRequest =
@@ -734,32 +735,32 @@ module CcrOperations =
             }
 
         [<CustomOperation("name")>]
-        member _.Name(state: CcrResumeAutoFollowPatternRequest, value: CoreTypes.Name) =
+        member _.Name(state: CcrResumeAutoFollowPatternRequest, value: Types.Name) =
             { state with Name = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: CcrResumeAutoFollowPatternRequest, value: CoreTypes.Duration) =
+        member _.MasterTimeout(state: CcrResumeAutoFollowPatternRequest, value: Types.Duration) =
             { state with MasterTimeout = Some value }
 
     let ccrResumeAutoFollowPatternRequest = CcrResumeAutoFollowPatternRequestBuilder()
 
     module ResumeAutoFollowPattern =
-        let withMasterTimeout (value: CoreTypes.Duration) (req: CcrResumeAutoFollowPatternRequest) =
+        let withMasterTimeout (value: Types.Duration) (req: CcrResumeAutoFollowPatternRequest) =
             { req with MasterTimeout = Some value }
 
     type CcrResumeFollowRequest = {
-        Index: CoreTypes.IndexName
-        MasterTimeout: CoreTypes.Duration option
-        MaxOutstandingReadRequests: CoreTypes.Long option
-        MaxOutstandingWriteRequests: CoreTypes.Long option
-        MaxReadRequestOperationCount: CoreTypes.Long option
+        Index: Types.IndexName
+        MasterTimeout: Types.Duration option
+        MaxOutstandingReadRequests: Types.Long option
+        MaxOutstandingWriteRequests: Types.Long option
+        MaxReadRequestOperationCount: Types.Long option
         MaxReadRequestSize: string option
-        MaxRetryDelay: CoreTypes.Duration option
-        MaxWriteBufferCount: CoreTypes.Long option
+        MaxRetryDelay: Types.Duration option
+        MaxWriteBufferCount: Types.Long option
         MaxWriteBufferSize: string option
-        MaxWriteRequestOperationCount: CoreTypes.Long option
+        MaxWriteRequestOperationCount: Types.Long option
         MaxWriteRequestSize: string option
-        ReadPollTimeout: CoreTypes.Duration option
+        ReadPollTimeout: Types.Duration option
     }
 
         with
@@ -781,7 +782,7 @@ module CcrOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type CcrResumeFollowResponse = CoreTypes.AcknowledgedResponseBase
+    type CcrResumeFollowResponse = Types.AcknowledgedResponseBase
 
     type CcrResumeFollowRequestBuilder() =
         member _.Yield(_: unit) : CcrResumeFollowRequest =
@@ -801,23 +802,23 @@ module CcrOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: CcrResumeFollowRequest, value: CoreTypes.IndexName) =
+        member _.Index(state: CcrResumeFollowRequest, value: Types.IndexName) =
             { state with Index = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: CcrResumeFollowRequest, value: CoreTypes.Duration) =
+        member _.MasterTimeout(state: CcrResumeFollowRequest, value: Types.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("maxOutstandingReadRequests")>]
-        member _.MaxOutstandingReadRequests(state: CcrResumeFollowRequest, value: CoreTypes.Long) =
+        member _.MaxOutstandingReadRequests(state: CcrResumeFollowRequest, value: Types.Long) =
             { state with MaxOutstandingReadRequests = Some value }
 
         [<CustomOperation("maxOutstandingWriteRequests")>]
-        member _.MaxOutstandingWriteRequests(state: CcrResumeFollowRequest, value: CoreTypes.Long) =
+        member _.MaxOutstandingWriteRequests(state: CcrResumeFollowRequest, value: Types.Long) =
             { state with MaxOutstandingWriteRequests = Some value }
 
         [<CustomOperation("maxReadRequestOperationCount")>]
-        member _.MaxReadRequestOperationCount(state: CcrResumeFollowRequest, value: CoreTypes.Long) =
+        member _.MaxReadRequestOperationCount(state: CcrResumeFollowRequest, value: Types.Long) =
             { state with MaxReadRequestOperationCount = Some value }
 
         [<CustomOperation("maxReadRequestSize")>]
@@ -825,11 +826,11 @@ module CcrOperations =
             { state with MaxReadRequestSize = Some value }
 
         [<CustomOperation("maxRetryDelay")>]
-        member _.MaxRetryDelay(state: CcrResumeFollowRequest, value: CoreTypes.Duration) =
+        member _.MaxRetryDelay(state: CcrResumeFollowRequest, value: Types.Duration) =
             { state with MaxRetryDelay = Some value }
 
         [<CustomOperation("maxWriteBufferCount")>]
-        member _.MaxWriteBufferCount(state: CcrResumeFollowRequest, value: CoreTypes.Long) =
+        member _.MaxWriteBufferCount(state: CcrResumeFollowRequest, value: Types.Long) =
             { state with MaxWriteBufferCount = Some value }
 
         [<CustomOperation("maxWriteBufferSize")>]
@@ -837,7 +838,7 @@ module CcrOperations =
             { state with MaxWriteBufferSize = Some value }
 
         [<CustomOperation("maxWriteRequestOperationCount")>]
-        member _.MaxWriteRequestOperationCount(state: CcrResumeFollowRequest, value: CoreTypes.Long) =
+        member _.MaxWriteRequestOperationCount(state: CcrResumeFollowRequest, value: Types.Long) =
             { state with MaxWriteRequestOperationCount = Some value }
 
         [<CustomOperation("maxWriteRequestSize")>]
@@ -845,38 +846,38 @@ module CcrOperations =
             { state with MaxWriteRequestSize = Some value }
 
         [<CustomOperation("readPollTimeout")>]
-        member _.ReadPollTimeout(state: CcrResumeFollowRequest, value: CoreTypes.Duration) =
+        member _.ReadPollTimeout(state: CcrResumeFollowRequest, value: Types.Duration) =
             { state with ReadPollTimeout = Some value }
 
     let ccrResumeFollowRequest = CcrResumeFollowRequestBuilder()
 
     module ResumeFollow =
-        let withMasterTimeout (value: CoreTypes.Duration) (req: CcrResumeFollowRequest) =
+        let withMasterTimeout (value: Types.Duration) (req: CcrResumeFollowRequest) =
             { req with MasterTimeout = Some value }
-        let withMaxOutstandingReadRequests (value: CoreTypes.Long) (req: CcrResumeFollowRequest) =
+        let withMaxOutstandingReadRequests (value: Types.Long) (req: CcrResumeFollowRequest) =
             { req with MaxOutstandingReadRequests = Some value }
-        let withMaxOutstandingWriteRequests (value: CoreTypes.Long) (req: CcrResumeFollowRequest) =
+        let withMaxOutstandingWriteRequests (value: Types.Long) (req: CcrResumeFollowRequest) =
             { req with MaxOutstandingWriteRequests = Some value }
-        let withMaxReadRequestOperationCount (value: CoreTypes.Long) (req: CcrResumeFollowRequest) =
+        let withMaxReadRequestOperationCount (value: Types.Long) (req: CcrResumeFollowRequest) =
             { req with MaxReadRequestOperationCount = Some value }
         let withMaxReadRequestSize (value: string) (req: CcrResumeFollowRequest) =
             { req with MaxReadRequestSize = Some value }
-        let withMaxRetryDelay (value: CoreTypes.Duration) (req: CcrResumeFollowRequest) =
+        let withMaxRetryDelay (value: Types.Duration) (req: CcrResumeFollowRequest) =
             { req with MaxRetryDelay = Some value }
-        let withMaxWriteBufferCount (value: CoreTypes.Long) (req: CcrResumeFollowRequest) =
+        let withMaxWriteBufferCount (value: Types.Long) (req: CcrResumeFollowRequest) =
             { req with MaxWriteBufferCount = Some value }
         let withMaxWriteBufferSize (value: string) (req: CcrResumeFollowRequest) =
             { req with MaxWriteBufferSize = Some value }
-        let withMaxWriteRequestOperationCount (value: CoreTypes.Long) (req: CcrResumeFollowRequest) =
+        let withMaxWriteRequestOperationCount (value: Types.Long) (req: CcrResumeFollowRequest) =
             { req with MaxWriteRequestOperationCount = Some value }
         let withMaxWriteRequestSize (value: string) (req: CcrResumeFollowRequest) =
             { req with MaxWriteRequestSize = Some value }
-        let withReadPollTimeout (value: CoreTypes.Duration) (req: CcrResumeFollowRequest) =
+        let withReadPollTimeout (value: Types.Duration) (req: CcrResumeFollowRequest) =
             { req with ReadPollTimeout = Some value }
 
     type CcrStatsRequest = {
-        MasterTimeout: CoreTypes.Duration option
-        Timeout: CoreTypes.Duration option
+        MasterTimeout: Types.Duration option
+        Timeout: Types.Duration option
     }
 
         with
@@ -908,24 +909,24 @@ module CcrOperations =
             }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: CcrStatsRequest, value: CoreTypes.Duration) =
+        member _.MasterTimeout(state: CcrStatsRequest, value: Types.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: CcrStatsRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: CcrStatsRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
     let ccrStatsRequest = CcrStatsRequestBuilder()
 
     module Stats =
-        let withMasterTimeout (value: CoreTypes.Duration) (req: CcrStatsRequest) =
+        let withMasterTimeout (value: Types.Duration) (req: CcrStatsRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: CcrStatsRequest) =
+        let withTimeout (value: Types.Duration) (req: CcrStatsRequest) =
             { req with Timeout = Some value }
 
     type CcrUnfollowRequest = {
-        Index: CoreTypes.IndexName
-        MasterTimeout: CoreTypes.Duration option
+        Index: Types.IndexName
+        MasterTimeout: Types.Duration option
     }
 
         with
@@ -946,7 +947,7 @@ module CcrOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type CcrUnfollowResponse = CoreTypes.AcknowledgedResponseBase
+    type CcrUnfollowResponse = Types.AcknowledgedResponseBase
 
     type CcrUnfollowRequestBuilder() =
         member _.Yield(_: unit) : CcrUnfollowRequest =
@@ -956,16 +957,16 @@ module CcrOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: CcrUnfollowRequest, value: CoreTypes.IndexName) =
+        member _.Index(state: CcrUnfollowRequest, value: Types.IndexName) =
             { state with Index = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: CcrUnfollowRequest, value: CoreTypes.Duration) =
+        member _.MasterTimeout(state: CcrUnfollowRequest, value: Types.Duration) =
             { state with MasterTimeout = Some value }
 
     let ccrUnfollowRequest = CcrUnfollowRequestBuilder()
 
     module Unfollow =
-        let withMasterTimeout (value: CoreTypes.Duration) (req: CcrUnfollowRequest) =
+        let withMasterTimeout (value: Types.Duration) (req: CcrUnfollowRequest) =
             { req with MasterTimeout = Some value }
 

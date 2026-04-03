@@ -7,14 +7,15 @@ open System
 open System.Text.Json
 open System.Text.Json.Serialization
 open Fes
+open Fes.Generated
 
 [<AutoOpen>]
 module IngestOperations =
 
     type IngestDeleteGeoipDatabaseRequest = {
-        Id: CoreTypes.Ids
-        MasterTimeout: CoreTypes.Duration option
-        Timeout: CoreTypes.Duration option
+        Id: Types.Ids
+        MasterTimeout: Types.Duration option
+        Timeout: Types.Duration option
     }
 
         with
@@ -36,7 +37,7 @@ module IngestOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type IngestDeleteGeoipDatabaseResponse = CoreTypes.AcknowledgedResponseBase
+    type IngestDeleteGeoipDatabaseResponse = Types.AcknowledgedResponseBase
 
     type IngestDeleteGeoipDatabaseRequestBuilder() =
         member _.Yield(_: unit) : IngestDeleteGeoipDatabaseRequest =
@@ -47,29 +48,29 @@ module IngestOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: IngestDeleteGeoipDatabaseRequest, value: CoreTypes.Ids) =
+        member _.Id(state: IngestDeleteGeoipDatabaseRequest, value: Types.Ids) =
             { state with Id = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IngestDeleteGeoipDatabaseRequest, value: CoreTypes.Duration) =
+        member _.MasterTimeout(state: IngestDeleteGeoipDatabaseRequest, value: Types.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: IngestDeleteGeoipDatabaseRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: IngestDeleteGeoipDatabaseRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
     let ingestDeleteGeoipDatabaseRequest = IngestDeleteGeoipDatabaseRequestBuilder()
 
     module DeleteGeoipDatabase =
-        let withMasterTimeout (value: CoreTypes.Duration) (req: IngestDeleteGeoipDatabaseRequest) =
+        let withMasterTimeout (value: Types.Duration) (req: IngestDeleteGeoipDatabaseRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: IngestDeleteGeoipDatabaseRequest) =
+        let withTimeout (value: Types.Duration) (req: IngestDeleteGeoipDatabaseRequest) =
             { req with Timeout = Some value }
 
     type IngestDeleteIpLocationDatabaseRequest = {
-        Id: CoreTypes.Ids
-        MasterTimeout: CoreTypes.Duration option
-        Timeout: CoreTypes.Duration option
+        Id: Types.Ids
+        MasterTimeout: Types.Duration option
+        Timeout: Types.Duration option
     }
 
         with
@@ -91,7 +92,7 @@ module IngestOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type IngestDeleteIpLocationDatabaseResponse = CoreTypes.AcknowledgedResponseBase
+    type IngestDeleteIpLocationDatabaseResponse = Types.AcknowledgedResponseBase
 
     type IngestDeleteIpLocationDatabaseRequestBuilder() =
         member _.Yield(_: unit) : IngestDeleteIpLocationDatabaseRequest =
@@ -102,29 +103,29 @@ module IngestOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: IngestDeleteIpLocationDatabaseRequest, value: CoreTypes.Ids) =
+        member _.Id(state: IngestDeleteIpLocationDatabaseRequest, value: Types.Ids) =
             { state with Id = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IngestDeleteIpLocationDatabaseRequest, value: CoreTypes.Duration) =
+        member _.MasterTimeout(state: IngestDeleteIpLocationDatabaseRequest, value: Types.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: IngestDeleteIpLocationDatabaseRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: IngestDeleteIpLocationDatabaseRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
     let ingestDeleteIpLocationDatabaseRequest = IngestDeleteIpLocationDatabaseRequestBuilder()
 
     module DeleteIpLocationDatabase =
-        let withMasterTimeout (value: CoreTypes.Duration) (req: IngestDeleteIpLocationDatabaseRequest) =
+        let withMasterTimeout (value: Types.Duration) (req: IngestDeleteIpLocationDatabaseRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: IngestDeleteIpLocationDatabaseRequest) =
+        let withTimeout (value: Types.Duration) (req: IngestDeleteIpLocationDatabaseRequest) =
             { req with Timeout = Some value }
 
     type IngestDeletePipelineRequest = {
-        Id: CoreTypes.Id
-        MasterTimeout: CoreTypes.Duration option
-        Timeout: CoreTypes.Duration option
+        Id: Types.Id
+        MasterTimeout: Types.Duration option
+        Timeout: Types.Duration option
     }
 
         with
@@ -146,7 +147,7 @@ module IngestOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type IngestDeletePipelineResponse = CoreTypes.AcknowledgedResponseBase
+    type IngestDeletePipelineResponse = Types.AcknowledgedResponseBase
 
     type IngestDeletePipelineRequestBuilder() =
         member _.Yield(_: unit) : IngestDeletePipelineRequest =
@@ -157,23 +158,23 @@ module IngestOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: IngestDeletePipelineRequest, value: CoreTypes.Id) =
+        member _.Id(state: IngestDeletePipelineRequest, value: Types.Id) =
             { state with Id = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IngestDeletePipelineRequest, value: CoreTypes.Duration) =
+        member _.MasterTimeout(state: IngestDeletePipelineRequest, value: Types.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: IngestDeletePipelineRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: IngestDeletePipelineRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
     let ingestDeletePipelineRequest = IngestDeletePipelineRequestBuilder()
 
     module DeletePipeline =
-        let withMasterTimeout (value: CoreTypes.Duration) (req: IngestDeletePipelineRequest) =
+        let withMasterTimeout (value: Types.Duration) (req: IngestDeletePipelineRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: IngestDeletePipelineRequest) =
+        let withTimeout (value: Types.Duration) (req: IngestDeletePipelineRequest) =
             { req with Timeout = Some value }
 
     type IngestGeoIpStatsRequest = | IngestGeoIpStatsRequest
@@ -199,7 +200,7 @@ module IngestOperations =
     let ingestGeoIpStatsRequest = IngestGeoIpStatsRequestBuilder()
 
     type IngestGetGeoipDatabaseRequest = {
-        Id: CoreTypes.Ids
+        Id: Types.Ids
     }
 
         with
@@ -222,13 +223,13 @@ module IngestOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: IngestGetGeoipDatabaseRequest, value: CoreTypes.Ids) =
+        member _.Id(state: IngestGetGeoipDatabaseRequest, value: Types.Ids) =
             { state with Id = value }
 
     let ingestGetGeoipDatabaseRequest = IngestGetGeoipDatabaseRequestBuilder()
 
     type IngestGetIpLocationDatabaseRequest = {
-        Id: CoreTypes.Ids
+        Id: Types.Ids
     }
 
         with
@@ -251,14 +252,14 @@ module IngestOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: IngestGetIpLocationDatabaseRequest, value: CoreTypes.Ids) =
+        member _.Id(state: IngestGetIpLocationDatabaseRequest, value: Types.Ids) =
             { state with Id = value }
 
     let ingestGetIpLocationDatabaseRequest = IngestGetIpLocationDatabaseRequestBuilder()
 
     type IngestGetPipelineRequest = {
-        Id: CoreTypes.Id
-        MasterTimeout: CoreTypes.Duration option
+        Id: Types.Id
+        MasterTimeout: Types.Duration option
         Summary: bool option
     }
 
@@ -281,7 +282,7 @@ module IngestOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type IngestGetPipelineResponse = Map<string, IngestTypes.Pipeline>
+    type IngestGetPipelineResponse = Map<string, Types.IngestTypesPipeline>
 
     type IngestGetPipelineRequestBuilder() =
         member _.Yield(_: unit) : IngestGetPipelineRequest =
@@ -292,11 +293,11 @@ module IngestOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: IngestGetPipelineRequest, value: CoreTypes.Id) =
+        member _.Id(state: IngestGetPipelineRequest, value: Types.Id) =
             { state with Id = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IngestGetPipelineRequest, value: CoreTypes.Duration) =
+        member _.MasterTimeout(state: IngestGetPipelineRequest, value: Types.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("summary")>]
@@ -306,7 +307,7 @@ module IngestOperations =
     let ingestGetPipelineRequest = IngestGetPipelineRequestBuilder()
 
     module GetPipeline =
-        let withMasterTimeout (value: CoreTypes.Duration) (req: IngestGetPipelineRequest) =
+        let withMasterTimeout (value: Types.Duration) (req: IngestGetPipelineRequest) =
             { req with MasterTimeout = Some value }
         let withSummary (value: bool) (req: IngestGetPipelineRequest) =
             { req with Summary = Some value }
@@ -334,11 +335,11 @@ module IngestOperations =
     let ingestProcessorGrokRequest = IngestProcessorGrokRequestBuilder()
 
     type IngestPutGeoipDatabaseRequest = {
-        Id: CoreTypes.Id
-        MasterTimeout: CoreTypes.Duration option
-        Timeout: CoreTypes.Duration option
-        Name: CoreTypes.Name
-        Maxmind: IngestTypes.Maxmind
+        Id: Types.Id
+        MasterTimeout: Types.Duration option
+        Timeout: Types.Duration option
+        Name: Types.Name
+        Maxmind: Types.Maxmind
     }
 
         with
@@ -361,7 +362,7 @@ module IngestOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type IngestPutGeoipDatabaseResponse = CoreTypes.AcknowledgedResponseBase
+    type IngestPutGeoipDatabaseResponse = Types.AcknowledgedResponseBase
 
     type IngestPutGeoipDatabaseRequestBuilder() =
         member _.Yield(_: unit) : IngestPutGeoipDatabaseRequest =
@@ -374,41 +375,41 @@ module IngestOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: IngestPutGeoipDatabaseRequest, value: CoreTypes.Id) =
+        member _.Id(state: IngestPutGeoipDatabaseRequest, value: Types.Id) =
             { state with Id = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IngestPutGeoipDatabaseRequest, value: CoreTypes.Duration) =
+        member _.MasterTimeout(state: IngestPutGeoipDatabaseRequest, value: Types.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: IngestPutGeoipDatabaseRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: IngestPutGeoipDatabaseRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("name")>]
-        member _.Name(state: IngestPutGeoipDatabaseRequest, value: CoreTypes.Name) =
+        member _.Name(state: IngestPutGeoipDatabaseRequest, value: Types.Name) =
             { state with Name = value }
 
         [<CustomOperation("maxmind")>]
-        member _.Maxmind(state: IngestPutGeoipDatabaseRequest, value: IngestTypes.Maxmind) =
+        member _.Maxmind(state: IngestPutGeoipDatabaseRequest, value: Types.Maxmind) =
             { state with Maxmind = value }
 
     let ingestPutGeoipDatabaseRequest = IngestPutGeoipDatabaseRequestBuilder()
 
     module PutGeoipDatabase =
-        let withMasterTimeout (value: CoreTypes.Duration) (req: IngestPutGeoipDatabaseRequest) =
+        let withMasterTimeout (value: Types.Duration) (req: IngestPutGeoipDatabaseRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: IngestPutGeoipDatabaseRequest) =
+        let withTimeout (value: Types.Duration) (req: IngestPutGeoipDatabaseRequest) =
             { req with Timeout = Some value }
-        let withName (value: CoreTypes.Name) (req: IngestPutGeoipDatabaseRequest) =
+        let withName (value: Types.Name) (req: IngestPutGeoipDatabaseRequest) =
             { req with Name = value }
-        let withMaxmind (value: IngestTypes.Maxmind) (req: IngestPutGeoipDatabaseRequest) =
+        let withMaxmind (value: Types.Maxmind) (req: IngestPutGeoipDatabaseRequest) =
             { req with Maxmind = value }
 
     type IngestPutIpLocationDatabaseRequest = {
-        Id: CoreTypes.Id
-        MasterTimeout: CoreTypes.Duration option
-        Timeout: CoreTypes.Duration option
+        Id: Types.Id
+        MasterTimeout: Types.Duration option
+        Timeout: Types.Duration option
         Document: obj
     }
 
@@ -432,7 +433,7 @@ module IngestOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type IngestPutIpLocationDatabaseResponse = CoreTypes.AcknowledgedResponseBase
+    type IngestPutIpLocationDatabaseResponse = Types.AcknowledgedResponseBase
 
     type IngestPutIpLocationDatabaseRequestBuilder() =
         member _.Yield(_: unit) : IngestPutIpLocationDatabaseRequest =
@@ -444,15 +445,15 @@ module IngestOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: IngestPutIpLocationDatabaseRequest, value: CoreTypes.Id) =
+        member _.Id(state: IngestPutIpLocationDatabaseRequest, value: Types.Id) =
             { state with Id = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IngestPutIpLocationDatabaseRequest, value: CoreTypes.Duration) =
+        member _.MasterTimeout(state: IngestPutIpLocationDatabaseRequest, value: Types.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: IngestPutIpLocationDatabaseRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: IngestPutIpLocationDatabaseRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("document")>]
@@ -462,23 +463,23 @@ module IngestOperations =
     let ingestPutIpLocationDatabaseRequest = IngestPutIpLocationDatabaseRequestBuilder()
 
     module PutIpLocationDatabase =
-        let withMasterTimeout (value: CoreTypes.Duration) (req: IngestPutIpLocationDatabaseRequest) =
+        let withMasterTimeout (value: Types.Duration) (req: IngestPutIpLocationDatabaseRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: IngestPutIpLocationDatabaseRequest) =
+        let withTimeout (value: Types.Duration) (req: IngestPutIpLocationDatabaseRequest) =
             { req with Timeout = Some value }
 
     type IngestPutPipelineRequest = {
-        Id: CoreTypes.Id
-        MasterTimeout: CoreTypes.Duration option
-        Timeout: CoreTypes.Duration option
-        IfVersion: CoreTypes.Integer option
-        Meta: CoreTypes.Metadata option
+        Id: Types.Id
+        MasterTimeout: Types.Duration option
+        Timeout: Types.Duration option
+        IfVersion: Types.Integer option
+        Meta: Types.Metadata option
         Description: string option
-        OnFailure: IngestTypes.ProcessorContainer list option
-        Processors: IngestTypes.ProcessorContainer list option
-        Version: CoreTypes.VersionNumber option
+        OnFailure: Types.ProcessorContainer list option
+        Processors: Types.ProcessorContainer list option
+        Version: Types.VersionNumber option
         Deprecated: bool option
-        FieldAccessPattern: IngestTypes.FieldAccessPattern option
+        FieldAccessPattern: Types.FieldAccessPattern option
     }
 
         with
@@ -502,7 +503,7 @@ module IngestOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type IngestPutPipelineResponse = CoreTypes.AcknowledgedResponseBase
+    type IngestPutPipelineResponse = Types.AcknowledgedResponseBase
 
     type IngestPutPipelineRequestBuilder() =
         member _.Yield(_: unit) : IngestPutPipelineRequest =
@@ -521,23 +522,23 @@ module IngestOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: IngestPutPipelineRequest, value: CoreTypes.Id) =
+        member _.Id(state: IngestPutPipelineRequest, value: Types.Id) =
             { state with Id = value }
 
         [<CustomOperation("masterTimeout")>]
-        member _.MasterTimeout(state: IngestPutPipelineRequest, value: CoreTypes.Duration) =
+        member _.MasterTimeout(state: IngestPutPipelineRequest, value: Types.Duration) =
             { state with MasterTimeout = Some value }
 
         [<CustomOperation("timeout")>]
-        member _.Timeout(state: IngestPutPipelineRequest, value: CoreTypes.Duration) =
+        member _.Timeout(state: IngestPutPipelineRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
         [<CustomOperation("ifVersion")>]
-        member _.IfVersion(state: IngestPutPipelineRequest, value: CoreTypes.Integer) =
+        member _.IfVersion(state: IngestPutPipelineRequest, value: Types.Integer) =
             { state with IfVersion = Some value }
 
         [<CustomOperation("meta")>]
-        member _.Meta(state: IngestPutPipelineRequest, value: CoreTypes.Metadata) =
+        member _.Meta(state: IngestPutPipelineRequest, value: Types.Metadata) =
             { state with Meta = Some value }
 
         [<CustomOperation("description")>]
@@ -545,15 +546,15 @@ module IngestOperations =
             { state with Description = Some value }
 
         [<CustomOperation("onFailure")>]
-        member _.OnFailure(state: IngestPutPipelineRequest, value: IngestTypes.ProcessorContainer list) =
+        member _.OnFailure(state: IngestPutPipelineRequest, value: Types.ProcessorContainer list) =
             { state with OnFailure = Some value }
 
         [<CustomOperation("processors")>]
-        member _.Processors(state: IngestPutPipelineRequest, value: IngestTypes.ProcessorContainer list) =
+        member _.Processors(state: IngestPutPipelineRequest, value: Types.ProcessorContainer list) =
             { state with Processors = Some value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: IngestPutPipelineRequest, value: CoreTypes.VersionNumber) =
+        member _.Version(state: IngestPutPipelineRequest, value: Types.VersionNumber) =
             { state with Version = Some value }
 
         [<CustomOperation("deprecated")>]
@@ -561,38 +562,38 @@ module IngestOperations =
             { state with Deprecated = Some value }
 
         [<CustomOperation("fieldAccessPattern")>]
-        member _.FieldAccessPattern(state: IngestPutPipelineRequest, value: IngestTypes.FieldAccessPattern) =
+        member _.FieldAccessPattern(state: IngestPutPipelineRequest, value: Types.FieldAccessPattern) =
             { state with FieldAccessPattern = Some value }
 
     let ingestPutPipelineRequest = IngestPutPipelineRequestBuilder()
 
     module PutPipeline =
-        let withMasterTimeout (value: CoreTypes.Duration) (req: IngestPutPipelineRequest) =
+        let withMasterTimeout (value: Types.Duration) (req: IngestPutPipelineRequest) =
             { req with MasterTimeout = Some value }
-        let withTimeout (value: CoreTypes.Duration) (req: IngestPutPipelineRequest) =
+        let withTimeout (value: Types.Duration) (req: IngestPutPipelineRequest) =
             { req with Timeout = Some value }
-        let withIfVersion (value: CoreTypes.Integer) (req: IngestPutPipelineRequest) =
+        let withIfVersion (value: Types.Integer) (req: IngestPutPipelineRequest) =
             { req with IfVersion = Some value }
-        let withMeta (value: CoreTypes.Metadata) (req: IngestPutPipelineRequest) =
+        let withMeta (value: Types.Metadata) (req: IngestPutPipelineRequest) =
             { req with Meta = Some value }
         let withDescription (value: string) (req: IngestPutPipelineRequest) =
             { req with Description = Some value }
-        let withOnFailure (value: IngestTypes.ProcessorContainer list) (req: IngestPutPipelineRequest) =
+        let withOnFailure (value: Types.ProcessorContainer list) (req: IngestPutPipelineRequest) =
             { req with OnFailure = Some value }
-        let withProcessors (value: IngestTypes.ProcessorContainer list) (req: IngestPutPipelineRequest) =
+        let withProcessors (value: Types.ProcessorContainer list) (req: IngestPutPipelineRequest) =
             { req with Processors = Some value }
-        let withVersion (value: CoreTypes.VersionNumber) (req: IngestPutPipelineRequest) =
+        let withVersion (value: Types.VersionNumber) (req: IngestPutPipelineRequest) =
             { req with Version = Some value }
         let withDeprecated (value: bool) (req: IngestPutPipelineRequest) =
             { req with Deprecated = Some value }
-        let withFieldAccessPattern (value: IngestTypes.FieldAccessPattern) (req: IngestPutPipelineRequest) =
+        let withFieldAccessPattern (value: Types.FieldAccessPattern) (req: IngestPutPipelineRequest) =
             { req with FieldAccessPattern = Some value }
 
     type IngestSimulateRequest = {
-        Id: CoreTypes.Id
+        Id: Types.Id
         Verbose: bool option
-        Docs: IngestTypes.Document list
-        Pipeline: IngestTypes.Pipeline option
+        Docs: Types.Document list
+        Pipeline: Types.IngestTypesPipeline option
     }
 
         with
@@ -626,7 +627,7 @@ module IngestOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: IngestSimulateRequest, value: CoreTypes.Id) =
+        member _.Id(state: IngestSimulateRequest, value: Types.Id) =
             { state with Id = value }
 
         [<CustomOperation("verbose")>]
@@ -634,11 +635,11 @@ module IngestOperations =
             { state with Verbose = Some value }
 
         [<CustomOperation("docs")>]
-        member _.Docs(state: IngestSimulateRequest, value: IngestTypes.Document list) =
+        member _.Docs(state: IngestSimulateRequest, value: Types.Document list) =
             { state with Docs = value }
 
         [<CustomOperation("pipeline")>]
-        member _.Pipeline(state: IngestSimulateRequest, value: IngestTypes.Pipeline) =
+        member _.Pipeline(state: IngestSimulateRequest, value: Types.IngestTypesPipeline) =
             { state with Pipeline = Some value }
 
     let ingestSimulateRequest = IngestSimulateRequestBuilder()
@@ -646,8 +647,8 @@ module IngestOperations =
     module Simulate =
         let withVerbose (value: bool) (req: IngestSimulateRequest) =
             { req with Verbose = Some value }
-        let withDocs (value: IngestTypes.Document list) (req: IngestSimulateRequest) =
+        let withDocs (value: Types.Document list) (req: IngestSimulateRequest) =
             { req with Docs = value }
-        let withPipeline (value: IngestTypes.Pipeline) (req: IngestSimulateRequest) =
+        let withPipeline (value: Types.IngestTypesPipeline) (req: IngestSimulateRequest) =
             { req with Pipeline = Some value }
 

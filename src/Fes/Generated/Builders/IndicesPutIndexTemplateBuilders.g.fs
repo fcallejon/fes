@@ -4,13 +4,13 @@ namespace Fes.Generated.Builders
 
 
 open System.Text.Json.Serialization
-open Fes.Generated.Types
+open Fes.Generated
 
 [<AutoOpen>]
 module IndicesPutIndexTemplateBuilders =
 
     type IndexTemplateMappingBuilder() =
-        member _.Yield(_: unit) : IndexTemplateMapping =
+        member _.Yield(_: unit) : Types.IndexTemplateMapping =
             {
                 Aliases = None
                 Mappings = None
@@ -20,23 +20,23 @@ module IndicesPutIndexTemplateBuilders =
             }
 
         [<CustomOperation("aliases")>]
-        member _.Aliases(state: IndexTemplateMapping, value: Map<CoreTypes.IndexName, IndicesTypes.Alias>) =
+        member _.Aliases(state: Types.IndexTemplateMapping, value: Map<Types.IndexName, Types.Alias>) =
             { state with Aliases = Some value }
 
         [<CustomOperation("mappings")>]
-        member _.Mappings(state: IndexTemplateMapping, value: CoreTypes.TypeMapping) =
+        member _.Mappings(state: Types.IndexTemplateMapping, value: Types.TypeMapping) =
             { state with Mappings = Some value }
 
         [<CustomOperation("settings")>]
-        member _.Settings(state: IndexTemplateMapping, value: IndicesTypes.IndexSettings) =
+        member _.Settings(state: Types.IndexTemplateMapping, value: Types.IndexSettings) =
             { state with Settings = Some value }
 
         [<CustomOperation("lifecycle")>]
-        member _.Lifecycle(state: IndexTemplateMapping, value: IndicesTypes.DataStreamLifecycle) =
+        member _.Lifecycle(state: Types.IndexTemplateMapping, value: Types.DataStreamLifecycle) =
             { state with Lifecycle = Some value }
 
         [<CustomOperation("dataStreamOptions")>]
-        member _.DataStreamOptions(state: IndexTemplateMapping, value: IndicesTypes.DataStreamOptionsTemplate option) =
+        member _.DataStreamOptions(state: Types.IndexTemplateMapping, value: Types.DataStreamOptionsTemplate option) =
             { state with DataStreamOptions = Some value }
 
     let indexTemplateMapping = IndexTemplateMappingBuilder()

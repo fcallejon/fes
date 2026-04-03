@@ -4,13 +4,13 @@ namespace Fes.Generated.Builders
 
 
 open System.Text.Json.Serialization
-open Fes.Generated.Types
+open Fes.Generated
 
 [<AutoOpen>]
 module IlmMoveToStepBuilders =
 
     type StepKeyBuilder() =
-        member _.Yield(_: unit) : StepKey =
+        member _.Yield(_: unit) : Types.StepKey =
             {
                 Action = None
                 Name = None
@@ -18,15 +18,15 @@ module IlmMoveToStepBuilders =
             }
 
         [<CustomOperation("action")>]
-        member _.Action(state: StepKey, value: string) =
+        member _.Action(state: Types.StepKey, value: string) =
             { state with Action = Some value }
 
         [<CustomOperation("name")>]
-        member _.Name(state: StepKey, value: string) =
+        member _.Name(state: Types.StepKey, value: string) =
             { state with Name = Some value }
 
         [<CustomOperation("phase")>]
-        member _.Phase(state: StepKey, value: string) =
+        member _.Phase(state: Types.StepKey, value: string) =
             { state with Phase = value }
 
     let stepKey = StepKeyBuilder()

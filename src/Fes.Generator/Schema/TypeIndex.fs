@@ -6,6 +6,7 @@ type TypeIndex = {
     ByName: Map<TypeName, TypeDefinition>
     Endpoints: Endpoint list
     EndpointsToGenerate: Endpoint list
+    NameMap: Map<TypeName, string>
 }
 
 let build (model: Model) : TypeIndex =
@@ -20,7 +21,11 @@ let build (model: Model) : TypeIndex =
 
     { ByName = byName
       Endpoints = model.Endpoints
-      EndpointsToGenerate = toGenerate }
+      EndpointsToGenerate = toGenerate
+      NameMap = Map.empty }
+
+let withNameMap (nameMap: Map<TypeName, string>) (index: TypeIndex) : TypeIndex =
+    { index with NameMap = nameMap }
 
 let tryResolve (index: TypeIndex) (name: TypeName) : TypeDefinition option =
     Map.tryFind name index.ByName

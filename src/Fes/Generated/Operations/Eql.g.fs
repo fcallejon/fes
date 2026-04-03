@@ -7,12 +7,13 @@ open System
 open System.Text.Json
 open System.Text.Json.Serialization
 open Fes
+open Fes.Generated
 
 [<AutoOpen>]
 module EqlOperations =
 
     type EqlDeleteRequest = {
-        Id: CoreTypes.Id
+        Id: Types.Id
     }
 
         with
@@ -26,7 +27,7 @@ module EqlOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type EqlDeleteResponse = CoreTypes.AcknowledgedResponseBase
+    type EqlDeleteResponse = Types.AcknowledgedResponseBase
 
     type EqlDeleteRequestBuilder() =
         member _.Yield(_: unit) : EqlDeleteRequest =
@@ -35,15 +36,15 @@ module EqlOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: EqlDeleteRequest, value: CoreTypes.Id) =
+        member _.Id(state: EqlDeleteRequest, value: Types.Id) =
             { state with Id = value }
 
     let eqlDeleteRequest = EqlDeleteRequestBuilder()
 
     type EqlGetRequest = {
-        Id: CoreTypes.Id
-        KeepAlive: CoreTypes.Duration option
-        WaitForCompletionTimeout: CoreTypes.Duration option
+        Id: Types.Id
+        KeepAlive: Types.Duration option
+        WaitForCompletionTimeout: Types.Duration option
     }
 
         with
@@ -65,7 +66,7 @@ module EqlOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type EqlGetResponse = EqlTypes.EqlSearchResponseBase<EqlGetResponse.TEvent>
+    type EqlGetResponse = Types.EqlSearchResponseBase<Types.TEvent>
 
     type EqlGetRequestBuilder() =
         member _.Yield(_: unit) : EqlGetRequest =
@@ -76,27 +77,27 @@ module EqlOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: EqlGetRequest, value: CoreTypes.Id) =
+        member _.Id(state: EqlGetRequest, value: Types.Id) =
             { state with Id = value }
 
         [<CustomOperation("keepAlive")>]
-        member _.KeepAlive(state: EqlGetRequest, value: CoreTypes.Duration) =
+        member _.KeepAlive(state: EqlGetRequest, value: Types.Duration) =
             { state with KeepAlive = Some value }
 
         [<CustomOperation("waitForCompletionTimeout")>]
-        member _.WaitForCompletionTimeout(state: EqlGetRequest, value: CoreTypes.Duration) =
+        member _.WaitForCompletionTimeout(state: EqlGetRequest, value: Types.Duration) =
             { state with WaitForCompletionTimeout = Some value }
 
     let eqlGetRequest = EqlGetRequestBuilder()
 
     module Get =
-        let withKeepAlive (value: CoreTypes.Duration) (req: EqlGetRequest) =
+        let withKeepAlive (value: Types.Duration) (req: EqlGetRequest) =
             { req with KeepAlive = Some value }
-        let withWaitForCompletionTimeout (value: CoreTypes.Duration) (req: EqlGetRequest) =
+        let withWaitForCompletionTimeout (value: Types.Duration) (req: EqlGetRequest) =
             { req with WaitForCompletionTimeout = Some value }
 
     type EqlGetStatusRequest = {
-        Id: CoreTypes.Id
+        Id: Types.Id
     }
 
         with
@@ -119,40 +120,40 @@ module EqlOperations =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: EqlGetStatusRequest, value: CoreTypes.Id) =
+        member _.Id(state: EqlGetStatusRequest, value: Types.Id) =
             { state with Id = value }
 
     let eqlGetStatusRequest = EqlGetStatusRequestBuilder()
 
     type EqlSearchRequest = {
-        Index: CoreTypes.Indices
+        Index: Types.Indices
         AllowNoIndices: bool option
         AllowPartialSearchResults: bool option
         AllowPartialSequenceResults: bool option
-        ExpandWildcards: CoreTypes.ExpandWildcards option
+        ExpandWildcards: Types.ExpandWildcards option
         CcsMinimizeRoundtrips: bool option
         IgnoreUnavailable: bool option
-        KeepAlive: CoreTypes.Duration option
+        KeepAlive: Types.Duration option
         KeepOnCompletion: bool option
-        WaitForCompletionTimeout: CoreTypes.Duration option
-        ProjectRouting: CoreTypes.ProjectRouting option
+        WaitForCompletionTimeout: Types.Duration option
+        ProjectRouting: Types.ProjectRouting option
         Query: string
         CaseSensitive: bool option
-        EventCategoryField: CoreTypes.Field option
-        TiebreakerField: CoreTypes.Field option
-        TimestampField: CoreTypes.Field option
-        FetchSize: CoreTypes.Uint option
+        EventCategoryField: Types.Field option
+        TiebreakerField: Types.Field option
+        TimestampField: Types.Field option
+        FetchSize: Types.Uint option
         Filter: System.Text.Json.JsonElement option
-        KeepAlive: CoreTypes.Duration option
+        KeepAlive: Types.Duration option
         KeepOnCompletion: bool option
-        WaitForCompletionTimeout: CoreTypes.Duration option
+        WaitForCompletionTimeout: Types.Duration option
         AllowPartialSearchResults: bool option
         AllowPartialSequenceResults: bool option
-        Size: CoreTypes.Uint option
+        Size: Types.Uint option
         Fields: System.Text.Json.JsonElement option
-        ResultPosition: EqlSearch.ResultPosition option
-        RuntimeMappings: CoreTypes.RuntimeFields option
-        MaxSamplesPerKey: CoreTypes.Integer option
+        ResultPosition: Types.ResultPosition option
+        RuntimeMappings: Types.RuntimeFields option
+        MaxSamplesPerKey: Types.Integer option
     }
 
         with
@@ -182,7 +183,7 @@ module EqlOperations =
                 |> Result.Ok
             with ex -> Result.Error ex
 
-    type EqlSearchResponse = EqlTypes.EqlSearchResponseBase<EqlSearchResponse.TEvent>
+    type EqlSearchResponse = Types.EqlSearchResponseBase<Types.TEvent>
 
     type EqlSearchRequestBuilder() =
         member _.Yield(_: unit) : EqlSearchRequest =
@@ -218,7 +219,7 @@ module EqlOperations =
             }
 
         [<CustomOperation("index")>]
-        member _.Index(state: EqlSearchRequest, value: CoreTypes.Indices) =
+        member _.Index(state: EqlSearchRequest, value: Types.Indices) =
             { state with Index = value }
 
         [<CustomOperation("allowNoIndices")>]
@@ -234,7 +235,7 @@ module EqlOperations =
             { state with AllowPartialSequenceResults = Some value }
 
         [<CustomOperation("expandWildcards")>]
-        member _.ExpandWildcards(state: EqlSearchRequest, value: CoreTypes.ExpandWildcards) =
+        member _.ExpandWildcards(state: EqlSearchRequest, value: Types.ExpandWildcards) =
             { state with ExpandWildcards = Some value }
 
         [<CustomOperation("ccsMinimizeRoundtrips")>]
@@ -246,7 +247,7 @@ module EqlOperations =
             { state with IgnoreUnavailable = Some value }
 
         [<CustomOperation("keepAlive")>]
-        member _.KeepAlive(state: EqlSearchRequest, value: CoreTypes.Duration) =
+        member _.KeepAlive(state: EqlSearchRequest, value: Types.Duration) =
             { state with KeepAlive = Some value }
 
         [<CustomOperation("keepOnCompletion")>]
@@ -254,11 +255,11 @@ module EqlOperations =
             { state with KeepOnCompletion = Some value }
 
         [<CustomOperation("waitForCompletionTimeout")>]
-        member _.WaitForCompletionTimeout(state: EqlSearchRequest, value: CoreTypes.Duration) =
+        member _.WaitForCompletionTimeout(state: EqlSearchRequest, value: Types.Duration) =
             { state with WaitForCompletionTimeout = Some value }
 
         [<CustomOperation("projectRouting")>]
-        member _.ProjectRouting(state: EqlSearchRequest, value: CoreTypes.ProjectRouting) =
+        member _.ProjectRouting(state: EqlSearchRequest, value: Types.ProjectRouting) =
             { state with ProjectRouting = Some value }
 
         [<CustomOperation("query")>]
@@ -270,19 +271,19 @@ module EqlOperations =
             { state with CaseSensitive = Some value }
 
         [<CustomOperation("eventCategoryField")>]
-        member _.EventCategoryField(state: EqlSearchRequest, value: CoreTypes.Field) =
+        member _.EventCategoryField(state: EqlSearchRequest, value: Types.Field) =
             { state with EventCategoryField = Some value }
 
         [<CustomOperation("tiebreakerField")>]
-        member _.TiebreakerField(state: EqlSearchRequest, value: CoreTypes.Field) =
+        member _.TiebreakerField(state: EqlSearchRequest, value: Types.Field) =
             { state with TiebreakerField = Some value }
 
         [<CustomOperation("timestampField")>]
-        member _.TimestampField(state: EqlSearchRequest, value: CoreTypes.Field) =
+        member _.TimestampField(state: EqlSearchRequest, value: Types.Field) =
             { state with TimestampField = Some value }
 
         [<CustomOperation("fetchSize")>]
-        member _.FetchSize(state: EqlSearchRequest, value: CoreTypes.Uint) =
+        member _.FetchSize(state: EqlSearchRequest, value: Types.Uint) =
             { state with FetchSize = Some value }
 
         [<CustomOperation("filter")>]
@@ -290,7 +291,7 @@ module EqlOperations =
             { state with Filter = Some value }
 
         [<CustomOperation("keepAlive")>]
-        member _.KeepAlive(state: EqlSearchRequest, value: CoreTypes.Duration) =
+        member _.KeepAlive(state: EqlSearchRequest, value: Types.Duration) =
             { state with KeepAlive = Some value }
 
         [<CustomOperation("keepOnCompletion")>]
@@ -298,7 +299,7 @@ module EqlOperations =
             { state with KeepOnCompletion = Some value }
 
         [<CustomOperation("waitForCompletionTimeout")>]
-        member _.WaitForCompletionTimeout(state: EqlSearchRequest, value: CoreTypes.Duration) =
+        member _.WaitForCompletionTimeout(state: EqlSearchRequest, value: Types.Duration) =
             { state with WaitForCompletionTimeout = Some value }
 
         [<CustomOperation("allowPartialSearchResults")>]
@@ -310,7 +311,7 @@ module EqlOperations =
             { state with AllowPartialSequenceResults = Some value }
 
         [<CustomOperation("size")>]
-        member _.Size(state: EqlSearchRequest, value: CoreTypes.Uint) =
+        member _.Size(state: EqlSearchRequest, value: Types.Uint) =
             { state with Size = Some value }
 
         [<CustomOperation("fields")>]
@@ -318,15 +319,15 @@ module EqlOperations =
             { state with Fields = Some value }
 
         [<CustomOperation("resultPosition")>]
-        member _.ResultPosition(state: EqlSearchRequest, value: EqlSearch.ResultPosition) =
+        member _.ResultPosition(state: EqlSearchRequest, value: Types.ResultPosition) =
             { state with ResultPosition = Some value }
 
         [<CustomOperation("runtimeMappings")>]
-        member _.RuntimeMappings(state: EqlSearchRequest, value: CoreTypes.RuntimeFields) =
+        member _.RuntimeMappings(state: EqlSearchRequest, value: Types.RuntimeFields) =
             { state with RuntimeMappings = Some value }
 
         [<CustomOperation("maxSamplesPerKey")>]
-        member _.MaxSamplesPerKey(state: EqlSearchRequest, value: CoreTypes.Integer) =
+        member _.MaxSamplesPerKey(state: EqlSearchRequest, value: Types.Integer) =
             { state with MaxSamplesPerKey = Some value }
 
     let eqlSearchRequest = EqlSearchRequestBuilder()
@@ -338,52 +339,52 @@ module EqlOperations =
             { req with AllowPartialSearchResults = Some value }
         let withAllowPartialSequenceResults (value: bool) (req: EqlSearchRequest) =
             { req with AllowPartialSequenceResults = Some value }
-        let withExpandWildcards (value: CoreTypes.ExpandWildcards) (req: EqlSearchRequest) =
+        let withExpandWildcards (value: Types.ExpandWildcards) (req: EqlSearchRequest) =
             { req with ExpandWildcards = Some value }
         let withCcsMinimizeRoundtrips (value: bool) (req: EqlSearchRequest) =
             { req with CcsMinimizeRoundtrips = Some value }
         let withIgnoreUnavailable (value: bool) (req: EqlSearchRequest) =
             { req with IgnoreUnavailable = Some value }
-        let withKeepAlive (value: CoreTypes.Duration) (req: EqlSearchRequest) =
+        let withKeepAlive (value: Types.Duration) (req: EqlSearchRequest) =
             { req with KeepAlive = Some value }
         let withKeepOnCompletion (value: bool) (req: EqlSearchRequest) =
             { req with KeepOnCompletion = Some value }
-        let withWaitForCompletionTimeout (value: CoreTypes.Duration) (req: EqlSearchRequest) =
+        let withWaitForCompletionTimeout (value: Types.Duration) (req: EqlSearchRequest) =
             { req with WaitForCompletionTimeout = Some value }
-        let withProjectRouting (value: CoreTypes.ProjectRouting) (req: EqlSearchRequest) =
+        let withProjectRouting (value: Types.ProjectRouting) (req: EqlSearchRequest) =
             { req with ProjectRouting = Some value }
         let withQuery (value: string) (req: EqlSearchRequest) =
             { req with Query = value }
         let withCaseSensitive (value: bool) (req: EqlSearchRequest) =
             { req with CaseSensitive = Some value }
-        let withEventCategoryField (value: CoreTypes.Field) (req: EqlSearchRequest) =
+        let withEventCategoryField (value: Types.Field) (req: EqlSearchRequest) =
             { req with EventCategoryField = Some value }
-        let withTiebreakerField (value: CoreTypes.Field) (req: EqlSearchRequest) =
+        let withTiebreakerField (value: Types.Field) (req: EqlSearchRequest) =
             { req with TiebreakerField = Some value }
-        let withTimestampField (value: CoreTypes.Field) (req: EqlSearchRequest) =
+        let withTimestampField (value: Types.Field) (req: EqlSearchRequest) =
             { req with TimestampField = Some value }
-        let withFetchSize (value: CoreTypes.Uint) (req: EqlSearchRequest) =
+        let withFetchSize (value: Types.Uint) (req: EqlSearchRequest) =
             { req with FetchSize = Some value }
         let withFilter (value: System.Text.Json.JsonElement) (req: EqlSearchRequest) =
             { req with Filter = Some value }
-        let withKeepAlive (value: CoreTypes.Duration) (req: EqlSearchRequest) =
+        let withKeepAlive (value: Types.Duration) (req: EqlSearchRequest) =
             { req with KeepAlive = Some value }
         let withKeepOnCompletion (value: bool) (req: EqlSearchRequest) =
             { req with KeepOnCompletion = Some value }
-        let withWaitForCompletionTimeout (value: CoreTypes.Duration) (req: EqlSearchRequest) =
+        let withWaitForCompletionTimeout (value: Types.Duration) (req: EqlSearchRequest) =
             { req with WaitForCompletionTimeout = Some value }
         let withAllowPartialSearchResults (value: bool) (req: EqlSearchRequest) =
             { req with AllowPartialSearchResults = Some value }
         let withAllowPartialSequenceResults (value: bool) (req: EqlSearchRequest) =
             { req with AllowPartialSequenceResults = Some value }
-        let withSize (value: CoreTypes.Uint) (req: EqlSearchRequest) =
+        let withSize (value: Types.Uint) (req: EqlSearchRequest) =
             { req with Size = Some value }
         let withFields (value: System.Text.Json.JsonElement) (req: EqlSearchRequest) =
             { req with Fields = Some value }
-        let withResultPosition (value: EqlSearch.ResultPosition) (req: EqlSearchRequest) =
+        let withResultPosition (value: Types.ResultPosition) (req: EqlSearchRequest) =
             { req with ResultPosition = Some value }
-        let withRuntimeMappings (value: CoreTypes.RuntimeFields) (req: EqlSearchRequest) =
+        let withRuntimeMappings (value: Types.RuntimeFields) (req: EqlSearchRequest) =
             { req with RuntimeMappings = Some value }
-        let withMaxSamplesPerKey (value: CoreTypes.Integer) (req: EqlSearchRequest) =
+        let withMaxSamplesPerKey (value: Types.Integer) (req: EqlSearchRequest) =
             { req with MaxSamplesPerKey = Some value }
 

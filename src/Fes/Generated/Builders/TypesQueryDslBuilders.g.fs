@@ -4,13 +4,13 @@ namespace Fes.Generated.Builders
 
 
 open System.Text.Json.Serialization
-open Fes.Generated.Types
+open Fes.Generated
 
 [<AutoOpen>]
 module TypesQueryDslBuilders =
 
     type BoolQueryBuilder() =
-        member _.Yield(_: unit) : BoolQuery =
+        member _.Yield(_: unit) : Types.BoolQuery =
             {
                 Filter = None
                 MinimumShouldMatch = None
@@ -20,29 +20,29 @@ module TypesQueryDslBuilders =
             }
 
         [<CustomOperation("filter")>]
-        member _.Filter(state: BoolQuery, value: System.Text.Json.JsonElement) =
+        member _.Filter(state: Types.BoolQuery, value: System.Text.Json.JsonElement) =
             { state with Filter = Some value }
 
         [<CustomOperation("minimumShouldMatch")>]
-        member _.MinimumShouldMatch(state: BoolQuery, value: CoreTypes.MinimumShouldMatch) =
+        member _.MinimumShouldMatch(state: Types.BoolQuery, value: Types.MinimumShouldMatch) =
             { state with MinimumShouldMatch = Some value }
 
         [<CustomOperation("must")>]
-        member _.Must(state: BoolQuery, value: System.Text.Json.JsonElement) =
+        member _.Must(state: Types.BoolQuery, value: System.Text.Json.JsonElement) =
             { state with Must = Some value }
 
         [<CustomOperation("mustNot")>]
-        member _.MustNot(state: BoolQuery, value: System.Text.Json.JsonElement) =
+        member _.MustNot(state: Types.BoolQuery, value: System.Text.Json.JsonElement) =
             { state with MustNot = Some value }
 
         [<CustomOperation("should")>]
-        member _.Should(state: BoolQuery, value: System.Text.Json.JsonElement) =
+        member _.Should(state: Types.BoolQuery, value: System.Text.Json.JsonElement) =
             { state with Should = Some value }
 
     let boolQuery = BoolQueryBuilder()
 
     type CombinedFieldsQueryBuilder() =
-        member _.Yield(_: unit) : CombinedFieldsQuery =
+        member _.Yield(_: unit) : Types.CombinedFieldsQuery =
             {
                 Fields = Unchecked.defaultof<_>
                 Query = Unchecked.defaultof<_>
@@ -53,33 +53,33 @@ module TypesQueryDslBuilders =
             }
 
         [<CustomOperation("fields")>]
-        member _.Fields(state: CombinedFieldsQuery, value: CoreTypes.Field list) =
+        member _.Fields(state: Types.CombinedFieldsQuery, value: Types.Field list) =
             { state with Fields = value }
 
         [<CustomOperation("query")>]
-        member _.Query(state: CombinedFieldsQuery, value: string) =
+        member _.Query(state: Types.CombinedFieldsQuery, value: string) =
             { state with Query = value }
 
         [<CustomOperation("autoGenerateSynonymsPhraseQuery")>]
-        member _.AutoGenerateSynonymsPhraseQuery(state: CombinedFieldsQuery, value: bool) =
+        member _.AutoGenerateSynonymsPhraseQuery(state: Types.CombinedFieldsQuery, value: bool) =
             { state with AutoGenerateSynonymsPhraseQuery = Some value }
 
         [<CustomOperation("operator")>]
-        member _.Operator(state: CombinedFieldsQuery, value: CoreTypes.CombinedFieldsOperator) =
+        member _.Operator(state: Types.CombinedFieldsQuery, value: Types.CombinedFieldsOperator) =
             { state with Operator = Some value }
 
         [<CustomOperation("minimumShouldMatch")>]
-        member _.MinimumShouldMatch(state: CombinedFieldsQuery, value: CoreTypes.MinimumShouldMatch) =
+        member _.MinimumShouldMatch(state: Types.CombinedFieldsQuery, value: Types.MinimumShouldMatch) =
             { state with MinimumShouldMatch = Some value }
 
         [<CustomOperation("zeroTermsQuery")>]
-        member _.ZeroTermsQuery(state: CombinedFieldsQuery, value: CoreTypes.CombinedFieldsZeroTerms) =
+        member _.ZeroTermsQuery(state: Types.CombinedFieldsQuery, value: Types.CombinedFieldsZeroTerms) =
             { state with ZeroTermsQuery = Some value }
 
     let combinedFieldsQuery = CombinedFieldsQueryBuilder()
 
     type CommonTermsQueryBuilder() =
-        member _.Yield(_: unit) : CommonTermsQuery =
+        member _.Yield(_: unit) : Types.CommonTermsQuery =
             {
                 Analyzer = None
                 CutoffFrequency = None
@@ -90,32 +90,32 @@ module TypesQueryDslBuilders =
             }
 
         [<CustomOperation("analyzer")>]
-        member _.Analyzer(state: CommonTermsQuery, value: string) =
+        member _.Analyzer(state: Types.CommonTermsQuery, value: string) =
             { state with Analyzer = Some value }
 
         [<CustomOperation("cutoffFrequency")>]
-        member _.CutoffFrequency(state: CommonTermsQuery, value: CoreTypes.Double) =
+        member _.CutoffFrequency(state: Types.CommonTermsQuery, value: Types.Double) =
             { state with CutoffFrequency = Some value }
 
         [<CustomOperation("highFreqOperator")>]
-        member _.HighFreqOperator(state: CommonTermsQuery, value: CoreTypes.Operator) =
+        member _.HighFreqOperator(state: Types.CommonTermsQuery, value: Types.Operator) =
             { state with HighFreqOperator = Some value }
 
         [<CustomOperation("lowFreqOperator")>]
-        member _.LowFreqOperator(state: CommonTermsQuery, value: CoreTypes.Operator) =
+        member _.LowFreqOperator(state: Types.CommonTermsQuery, value: Types.Operator) =
             { state with LowFreqOperator = Some value }
 
         [<CustomOperation("minimumShouldMatch")>]
-        member _.MinimumShouldMatch(state: CommonTermsQuery, value: CoreTypes.MinimumShouldMatch) =
+        member _.MinimumShouldMatch(state: Types.CommonTermsQuery, value: Types.MinimumShouldMatch) =
             { state with MinimumShouldMatch = Some value }
 
         [<CustomOperation("query")>]
-        member _.Query(state: CommonTermsQuery, value: string) =
+        member _.Query(state: Types.CommonTermsQuery, value: string) =
             { state with Query = value }
 
     let commonTermsQuery = CommonTermsQueryBuilder()
 
-    let ofQuery (value: string) : CommonTermsQuery =
+    let ofQuery (value: string) : Types.CommonTermsQuery =
         {
             Analyzer = None
             CutoffFrequency = None
@@ -126,51 +126,24 @@ module TypesQueryDslBuilders =
         }
 
     type DateRangeQueryBuilder() =
-        member _.Yield(_: unit) : DateRangeQuery =
+        member _.Yield(_: unit) : Types.DateRangeQuery =
             {
                 Format = None
                 TimeZone = None
             }
 
         [<CustomOperation("format")>]
-        member _.Format(state: DateRangeQuery, value: CoreTypes.DateFormat) =
+        member _.Format(state: Types.DateRangeQuery, value: Types.DateFormat) =
             { state with Format = Some value }
 
         [<CustomOperation("timeZone")>]
-        member _.TimeZone(state: DateRangeQuery, value: CoreTypes.TimeZone) =
+        member _.TimeZone(state: Types.DateRangeQuery, value: Types.TimeZone) =
             { state with TimeZone = Some value }
 
     let dateRangeQuery = DateRangeQueryBuilder()
 
-    type DecayPlacementBuilder() =
-        member _.Yield(_: unit) : DecayPlacement =
-            {
-                Decay = None
-                Offset = None
-                Scale = None
-                Origin = None
-            }
-
-        [<CustomOperation("decay")>]
-        member _.Decay(state: DecayPlacement, value: CoreTypes.Double) =
-            { state with Decay = Some value }
-
-        [<CustomOperation("offset")>]
-        member _.Offset(state: DecayPlacement, value: 'tScale) =
-            { state with Offset = Some value }
-
-        [<CustomOperation("scale")>]
-        member _.Scale(state: DecayPlacement, value: 'tScale) =
-            { state with Scale = Some value }
-
-        [<CustomOperation("origin")>]
-        member _.Origin(state: DecayPlacement, value: 'tOrigin) =
-            { state with Origin = Some value }
-
-    let decayPlacement = DecayPlacementBuilder()
-
     type FieldAndFormatBuilder() =
-        member _.Yield(_: unit) : FieldAndFormat =
+        member _.Yield(_: unit) : Types.FieldAndFormat =
             {
                 Field = Unchecked.defaultof<_>
                 Format = None
@@ -178,20 +151,20 @@ module TypesQueryDslBuilders =
             }
 
         [<CustomOperation("field")>]
-        member _.Field(state: FieldAndFormat, value: CoreTypes.Field) =
+        member _.Field(state: Types.FieldAndFormat, value: Types.Field) =
             { state with Field = value }
 
         [<CustomOperation("format")>]
-        member _.Format(state: FieldAndFormat, value: string) =
+        member _.Format(state: Types.FieldAndFormat, value: string) =
             { state with Format = Some value }
 
         [<CustomOperation("includeUnmapped")>]
-        member _.IncludeUnmapped(state: FieldAndFormat, value: bool) =
+        member _.IncludeUnmapped(state: Types.FieldAndFormat, value: bool) =
             { state with IncludeUnmapped = Some value }
 
     let fieldAndFormat = FieldAndFormatBuilder()
 
-    let ofField (value: CoreTypes.Field) : FieldAndFormat =
+    let ofField (value: Types.Field) : Types.FieldAndFormat =
         {
             Field = value
             Format = None
@@ -199,7 +172,7 @@ module TypesQueryDslBuilders =
         }
 
     type FieldLookupBuilder() =
-        member _.Yield(_: unit) : FieldLookup =
+        member _.Yield(_: unit) : Types.FieldLookup =
             {
                 Id = Unchecked.defaultof<_>
                 Index = None
@@ -208,25 +181,25 @@ module TypesQueryDslBuilders =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: FieldLookup, value: CoreTypes.Id) =
+        member _.Id(state: Types.FieldLookup, value: Types.Id) =
             { state with Id = value }
 
         [<CustomOperation("index")>]
-        member _.Index(state: FieldLookup, value: CoreTypes.IndexName) =
+        member _.Index(state: Types.FieldLookup, value: Types.IndexName) =
             { state with Index = Some value }
 
         [<CustomOperation("path")>]
-        member _.Path(state: FieldLookup, value: CoreTypes.Field) =
+        member _.Path(state: Types.FieldLookup, value: Types.Field) =
             { state with Path = Some value }
 
         [<CustomOperation("routing")>]
-        member _.Routing(state: FieldLookup, value: string) =
+        member _.Routing(state: Types.FieldLookup, value: string) =
             { state with Routing = Some value }
 
     let fieldLookup = FieldLookupBuilder()
 
     type FieldValueFactorScoreFunctionBuilder() =
-        member _.Yield(_: unit) : FieldValueFactorScoreFunction =
+        member _.Yield(_: unit) : Types.FieldValueFactorScoreFunction =
             {
                 Field = Unchecked.defaultof<_>
                 Factor = None
@@ -235,45 +208,45 @@ module TypesQueryDslBuilders =
             }
 
         [<CustomOperation("field")>]
-        member _.Field(state: FieldValueFactorScoreFunction, value: CoreTypes.Field) =
+        member _.Field(state: Types.FieldValueFactorScoreFunction, value: Types.Field) =
             { state with Field = value }
 
         [<CustomOperation("factor")>]
-        member _.Factor(state: FieldValueFactorScoreFunction, value: CoreTypes.Double) =
+        member _.Factor(state: Types.FieldValueFactorScoreFunction, value: Types.Double) =
             { state with Factor = Some value }
 
         [<CustomOperation("missing")>]
-        member _.Missing(state: FieldValueFactorScoreFunction, value: CoreTypes.Double) =
+        member _.Missing(state: Types.FieldValueFactorScoreFunction, value: Types.Double) =
             { state with Missing = Some value }
 
         [<CustomOperation("modifier")>]
-        member _.Modifier(state: FieldValueFactorScoreFunction, value: CoreTypes.FieldValueFactorModifier) =
+        member _.Modifier(state: Types.FieldValueFactorScoreFunction, value: Types.FieldValueFactorModifier) =
             { state with Modifier = Some value }
 
     let fieldValueFactorScoreFunction = FieldValueFactorScoreFunctionBuilder()
 
     module FunctionScore =
 
-        let exp (value: CoreTypes.DecayFunction) =
-            FunctionScoreContainer.Exp value
+        let exp (value: Types.DecayFunction) =
+            Types.FunctionScoreContainer.Exp value
 
-        let gauss (value: CoreTypes.DecayFunction) =
-            FunctionScoreContainer.Gauss value
+        let gauss (value: Types.DecayFunction) =
+            Types.FunctionScoreContainer.Gauss value
 
-        let linear (value: CoreTypes.DecayFunction) =
-            FunctionScoreContainer.Linear value
+        let linear (value: Types.DecayFunction) =
+            Types.FunctionScoreContainer.Linear value
 
-        let fieldValueFactor (value: CoreTypes.FieldValueFactorScoreFunction) =
-            FunctionScoreContainer.FieldValueFactor value
+        let fieldValueFactor (value: Types.FieldValueFactorScoreFunction) =
+            Types.FunctionScoreContainer.FieldValueFactor value
 
-        let randomScore (value: CoreTypes.RandomScoreFunction) =
-            FunctionScoreContainer.RandomScore value
+        let randomScore (value: Types.RandomScoreFunction) =
+            Types.FunctionScoreContainer.RandomScore value
 
-        let scriptScore (value: CoreTypes.ScriptScoreFunction) =
-            FunctionScoreContainer.ScriptScore value
+        let scriptScore (value: Types.ScriptScoreFunction) =
+            Types.FunctionScoreContainer.ScriptScore value
 
     type FunctionScoreQueryBuilder() =
-        member _.Yield(_: unit) : FunctionScoreQuery =
+        member _.Yield(_: unit) : Types.FunctionScoreQuery =
             {
                 BoostMode = None
                 Functions = None
@@ -284,32 +257,32 @@ module TypesQueryDslBuilders =
             }
 
         [<CustomOperation("boostMode")>]
-        member _.BoostMode(state: FunctionScoreQuery, value: CoreTypes.FunctionBoostMode) =
+        member _.BoostMode(state: Types.FunctionScoreQuery, value: Types.FunctionBoostMode) =
             { state with BoostMode = Some value }
 
         [<CustomOperation("functions")>]
-        member _.Functions(state: FunctionScoreQuery, value: CoreTypes.FunctionScoreContainer list) =
+        member _.Functions(state: Types.FunctionScoreQuery, value: Types.FunctionScoreContainer list) =
             { state with Functions = Some value }
 
         [<CustomOperation("maxBoost")>]
-        member _.MaxBoost(state: FunctionScoreQuery, value: CoreTypes.Double) =
+        member _.MaxBoost(state: Types.FunctionScoreQuery, value: Types.Double) =
             { state with MaxBoost = Some value }
 
         [<CustomOperation("minScore")>]
-        member _.MinScore(state: FunctionScoreQuery, value: CoreTypes.Double) =
+        member _.MinScore(state: Types.FunctionScoreQuery, value: Types.Double) =
             { state with MinScore = Some value }
 
         [<CustomOperation("query")>]
-        member _.Query(state: FunctionScoreQuery, value: CoreTypes.QueryContainer) =
+        member _.Query(state: Types.FunctionScoreQuery, value: Types.QueryContainer) =
             { state with Query = Some value }
 
         [<CustomOperation("scoreMode")>]
-        member _.ScoreMode(state: FunctionScoreQuery, value: CoreTypes.FunctionScoreMode) =
+        member _.ScoreMode(state: Types.FunctionScoreQuery, value: Types.FunctionScoreMode) =
             { state with ScoreMode = Some value }
 
     let functionScoreQuery = FunctionScoreQueryBuilder()
 
-    let ofFunctions (value: CoreTypes.FunctionScoreContainer list) : FunctionScoreQuery =
+    let ofFunctions (value: Types.FunctionScoreContainer list) : Types.FunctionScoreQuery =
         {
             BoostMode = None
             Functions = value
@@ -320,7 +293,7 @@ module TypesQueryDslBuilders =
         }
 
     type FuzzyQueryBuilder() =
-        member _.Yield(_: unit) : FuzzyQuery =
+        member _.Yield(_: unit) : Types.FuzzyQuery =
             {
                 MaxExpansions = None
                 PrefixLength = None
@@ -331,32 +304,32 @@ module TypesQueryDslBuilders =
             }
 
         [<CustomOperation("maxExpansions")>]
-        member _.MaxExpansions(state: FuzzyQuery, value: CoreTypes.Integer) =
+        member _.MaxExpansions(state: Types.FuzzyQuery, value: Types.Integer) =
             { state with MaxExpansions = Some value }
 
         [<CustomOperation("prefixLength")>]
-        member _.PrefixLength(state: FuzzyQuery, value: CoreTypes.Integer) =
+        member _.PrefixLength(state: Types.FuzzyQuery, value: Types.Integer) =
             { state with PrefixLength = Some value }
 
         [<CustomOperation("rewrite")>]
-        member _.Rewrite(state: FuzzyQuery, value: CoreTypes.MultiTermQueryRewrite) =
+        member _.Rewrite(state: Types.FuzzyQuery, value: Types.MultiTermQueryRewrite) =
             { state with Rewrite = Some value }
 
         [<CustomOperation("transpositions")>]
-        member _.Transpositions(state: FuzzyQuery, value: bool) =
+        member _.Transpositions(state: Types.FuzzyQuery, value: bool) =
             { state with Transpositions = Some value }
 
         [<CustomOperation("fuzziness")>]
-        member _.Fuzziness(state: FuzzyQuery, value: CoreTypes.Fuzziness) =
+        member _.Fuzziness(state: Types.FuzzyQuery, value: Types.Fuzziness) =
             { state with Fuzziness = Some value }
 
         [<CustomOperation("value")>]
-        member _.Value(state: FuzzyQuery, value: System.Text.Json.JsonElement) =
+        member _.Value(state: Types.FuzzyQuery, value: System.Text.Json.JsonElement) =
             { state with Value = value }
 
     let fuzzyQuery = FuzzyQueryBuilder()
 
-    let ofValue (value: System.Text.Json.JsonElement) : FuzzyQuery =
+    let ofValue (value: System.Text.Json.JsonElement) : Types.FuzzyQuery =
         {
             MaxExpansions = None
             PrefixLength = None
@@ -367,7 +340,7 @@ module TypesQueryDslBuilders =
         }
 
     type GeoBoundingBoxQueryBuilder() =
-        member _.Yield(_: unit) : GeoBoundingBoxQuery =
+        member _.Yield(_: unit) : Types.GeoBoundingBoxQuery =
             {
                 Type = None
                 ValidationMethod = None
@@ -375,21 +348,21 @@ module TypesQueryDslBuilders =
             }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: GeoBoundingBoxQuery, value: CoreTypes.GeoExecution) =
+        member _.Type(state: Types.GeoBoundingBoxQuery, value: Types.GeoExecution) =
             { state with Type = Some value }
 
         [<CustomOperation("validationMethod")>]
-        member _.ValidationMethod(state: GeoBoundingBoxQuery, value: CoreTypes.GeoValidationMethod) =
+        member _.ValidationMethod(state: Types.GeoBoundingBoxQuery, value: Types.GeoValidationMethod) =
             { state with ValidationMethod = Some value }
 
         [<CustomOperation("ignoreUnmapped")>]
-        member _.IgnoreUnmapped(state: GeoBoundingBoxQuery, value: bool) =
+        member _.IgnoreUnmapped(state: Types.GeoBoundingBoxQuery, value: bool) =
             { state with IgnoreUnmapped = Some value }
 
     let geoBoundingBoxQuery = GeoBoundingBoxQueryBuilder()
 
     type GeoDistanceQueryBuilder() =
-        member _.Yield(_: unit) : GeoDistanceQuery =
+        member _.Yield(_: unit) : Types.GeoDistanceQuery =
             {
                 Distance = Unchecked.defaultof<_>
                 DistanceType = None
@@ -398,53 +371,53 @@ module TypesQueryDslBuilders =
             }
 
         [<CustomOperation("distance")>]
-        member _.Distance(state: GeoDistanceQuery, value: CoreTypes.Distance) =
+        member _.Distance(state: Types.GeoDistanceQuery, value: Types.Distance) =
             { state with Distance = value }
 
         [<CustomOperation("distanceType")>]
-        member _.DistanceType(state: GeoDistanceQuery, value: CoreTypes.GeoDistanceType) =
+        member _.DistanceType(state: Types.GeoDistanceQuery, value: Types.GeoDistanceType) =
             { state with DistanceType = Some value }
 
         [<CustomOperation("validationMethod")>]
-        member _.ValidationMethod(state: GeoDistanceQuery, value: CoreTypes.GeoValidationMethod) =
+        member _.ValidationMethod(state: Types.GeoDistanceQuery, value: Types.GeoValidationMethod) =
             { state with ValidationMethod = Some value }
 
         [<CustomOperation("ignoreUnmapped")>]
-        member _.IgnoreUnmapped(state: GeoDistanceQuery, value: bool) =
+        member _.IgnoreUnmapped(state: Types.GeoDistanceQuery, value: bool) =
             { state with IgnoreUnmapped = Some value }
 
     let geoDistanceQuery = GeoDistanceQueryBuilder()
 
     module GeoGridQuery =
 
-        let geotile (value: CoreTypes.GeoTile) =
-            GeoGridQuery.Geotile value
+        let geotile (value: Types.GeoTile) =
+            Types.GeoGridQuery.Geotile value
 
-        let geohash (value: CoreTypes.GeoHash) =
-            GeoGridQuery.Geohash value
+        let geohash (value: Types.GeoHash) =
+            Types.GeoGridQuery.Geohash value
 
-        let geohex (value: CoreTypes.GeoHexCell) =
-            GeoGridQuery.Geohex value
+        let geohex (value: Types.GeoHexCell) =
+            Types.GeoGridQuery.Geohex value
 
     type GeoPolygonQueryBuilder() =
-        member _.Yield(_: unit) : GeoPolygonQuery =
+        member _.Yield(_: unit) : Types.GeoPolygonQuery =
             {
                 ValidationMethod = None
                 IgnoreUnmapped = None
             }
 
         [<CustomOperation("validationMethod")>]
-        member _.ValidationMethod(state: GeoPolygonQuery, value: CoreTypes.GeoValidationMethod) =
+        member _.ValidationMethod(state: Types.GeoPolygonQuery, value: Types.GeoValidationMethod) =
             { state with ValidationMethod = Some value }
 
         [<CustomOperation("ignoreUnmapped")>]
-        member _.IgnoreUnmapped(state: GeoPolygonQuery, value: bool) =
+        member _.IgnoreUnmapped(state: Types.GeoPolygonQuery, value: bool) =
             { state with IgnoreUnmapped = Some value }
 
     let geoPolygonQuery = GeoPolygonQueryBuilder()
 
     type GeoShapeFieldQueryBuilder() =
-        member _.Yield(_: unit) : GeoShapeFieldQuery =
+        member _.Yield(_: unit) : Types.GeoShapeFieldQuery =
             {
                 Shape = None
                 IndexedShape = None
@@ -452,21 +425,21 @@ module TypesQueryDslBuilders =
             }
 
         [<CustomOperation("shape")>]
-        member _.Shape(state: GeoShapeFieldQuery, value: CoreTypes.GeoShape) =
+        member _.Shape(state: Types.GeoShapeFieldQuery, value: Types.GeoShape) =
             { state with Shape = Some value }
 
         [<CustomOperation("indexedShape")>]
-        member _.IndexedShape(state: GeoShapeFieldQuery, value: CoreTypes.FieldLookup) =
+        member _.IndexedShape(state: Types.GeoShapeFieldQuery, value: Types.FieldLookup) =
             { state with IndexedShape = Some value }
 
         [<CustomOperation("relation")>]
-        member _.Relation(state: GeoShapeFieldQuery, value: CoreTypes.GeoShapeRelation) =
+        member _.Relation(state: Types.GeoShapeFieldQuery, value: Types.GeoShapeRelation) =
             { state with Relation = Some value }
 
     let geoShapeFieldQuery = GeoShapeFieldQueryBuilder()
 
     type HasChildQueryBuilder() =
-        member _.Yield(_: unit) : HasChildQuery =
+        member _.Yield(_: unit) : Types.HasChildQuery =
             {
                 IgnoreUnmapped = None
                 InnerHits = None
@@ -478,37 +451,37 @@ module TypesQueryDslBuilders =
             }
 
         [<CustomOperation("ignoreUnmapped")>]
-        member _.IgnoreUnmapped(state: HasChildQuery, value: bool) =
+        member _.IgnoreUnmapped(state: Types.HasChildQuery, value: bool) =
             { state with IgnoreUnmapped = Some value }
 
         [<CustomOperation("innerHits")>]
-        member _.InnerHits(state: HasChildQuery, value: GlobalSearchTypes.InnerHits) =
+        member _.InnerHits(state: Types.HasChildQuery, value: Types.InnerHits) =
             { state with InnerHits = Some value }
 
         [<CustomOperation("maxChildren")>]
-        member _.MaxChildren(state: HasChildQuery, value: CoreTypes.Integer) =
+        member _.MaxChildren(state: Types.HasChildQuery, value: Types.Integer) =
             { state with MaxChildren = Some value }
 
         [<CustomOperation("minChildren")>]
-        member _.MinChildren(state: HasChildQuery, value: CoreTypes.Integer) =
+        member _.MinChildren(state: Types.HasChildQuery, value: Types.Integer) =
             { state with MinChildren = Some value }
 
         [<CustomOperation("query")>]
-        member _.Query(state: HasChildQuery, value: CoreTypes.QueryContainer) =
+        member _.Query(state: Types.HasChildQuery, value: Types.QueryContainer) =
             { state with Query = value }
 
         [<CustomOperation("scoreMode")>]
-        member _.ScoreMode(state: HasChildQuery, value: CoreTypes.ChildScoreMode) =
+        member _.ScoreMode(state: Types.HasChildQuery, value: Types.ChildScoreMode) =
             { state with ScoreMode = Some value }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: HasChildQuery, value: CoreTypes.RelationName) =
+        member _.Type(state: Types.HasChildQuery, value: Types.RelationName) =
             { state with Type = value }
 
     let hasChildQuery = HasChildQueryBuilder()
 
     type HasParentQueryBuilder() =
-        member _.Yield(_: unit) : HasParentQuery =
+        member _.Yield(_: unit) : Types.HasParentQuery =
             {
                 IgnoreUnmapped = None
                 InnerHits = None
@@ -518,29 +491,29 @@ module TypesQueryDslBuilders =
             }
 
         [<CustomOperation("ignoreUnmapped")>]
-        member _.IgnoreUnmapped(state: HasParentQuery, value: bool) =
+        member _.IgnoreUnmapped(state: Types.HasParentQuery, value: bool) =
             { state with IgnoreUnmapped = Some value }
 
         [<CustomOperation("innerHits")>]
-        member _.InnerHits(state: HasParentQuery, value: GlobalSearchTypes.InnerHits) =
+        member _.InnerHits(state: Types.HasParentQuery, value: Types.InnerHits) =
             { state with InnerHits = Some value }
 
         [<CustomOperation("parentType")>]
-        member _.ParentType(state: HasParentQuery, value: CoreTypes.RelationName) =
+        member _.ParentType(state: Types.HasParentQuery, value: Types.RelationName) =
             { state with ParentType = value }
 
         [<CustomOperation("query")>]
-        member _.Query(state: HasParentQuery, value: CoreTypes.QueryContainer) =
+        member _.Query(state: Types.HasParentQuery, value: Types.QueryContainer) =
             { state with Query = value }
 
         [<CustomOperation("score")>]
-        member _.Score(state: HasParentQuery, value: bool) =
+        member _.Score(state: Types.HasParentQuery, value: bool) =
             { state with Score = Some value }
 
     let hasParentQuery = HasParentQueryBuilder()
 
     type IntervalsAllOfBuilder() =
-        member _.Yield(_: unit) : IntervalsAllOf =
+        member _.Yield(_: unit) : Types.IntervalsAllOf =
             {
                 Intervals = Unchecked.defaultof<_>
                 MaxGaps = None
@@ -549,80 +522,80 @@ module TypesQueryDslBuilders =
             }
 
         [<CustomOperation("intervals")>]
-        member _.Intervals(state: IntervalsAllOf, value: CoreTypes.IntervalsContainer list) =
+        member _.Intervals(state: Types.IntervalsAllOf, value: Types.IntervalsContainer list) =
             { state with Intervals = value }
 
         [<CustomOperation("maxGaps")>]
-        member _.MaxGaps(state: IntervalsAllOf, value: CoreTypes.Integer) =
+        member _.MaxGaps(state: Types.IntervalsAllOf, value: Types.Integer) =
             { state with MaxGaps = Some value }
 
         [<CustomOperation("ordered")>]
-        member _.Ordered(state: IntervalsAllOf, value: bool) =
+        member _.Ordered(state: Types.IntervalsAllOf, value: bool) =
             { state with Ordered = Some value }
 
         [<CustomOperation("filter")>]
-        member _.Filter(state: IntervalsAllOf, value: CoreTypes.IntervalsFilter) =
+        member _.Filter(state: Types.IntervalsAllOf, value: Types.IntervalsFilter) =
             { state with Filter = Some value }
 
     let intervalsAllOf = IntervalsAllOfBuilder()
 
     module Intervals =
 
-        let allOf (value: CoreTypes.IntervalsAllOf) =
-            IntervalsContainer.AllOf value
+        let allOf (value: Types.IntervalsAllOf) =
+            Types.IntervalsContainer.AllOf value
 
-        let anyOf (value: CoreTypes.IntervalsAnyOf) =
-            IntervalsContainer.AnyOf value
+        let anyOf (value: Types.IntervalsAnyOf) =
+            Types.IntervalsContainer.AnyOf value
 
-        let fuzzy (value: CoreTypes.IntervalsFuzzy) =
-            IntervalsContainer.Fuzzy value
+        let fuzzy (value: Types.IntervalsFuzzy) =
+            Types.IntervalsContainer.Fuzzy value
 
-        let match' (value: CoreTypes.IntervalsMatch) =
-            IntervalsContainer.Match value
+        let match' (value: Types.IntervalsMatch) =
+            Types.IntervalsContainer.Match value
 
-        let prefix (value: CoreTypes.IntervalsPrefix) =
-            IntervalsContainer.Prefix value
+        let prefix (value: Types.IntervalsPrefix) =
+            Types.IntervalsContainer.Prefix value
 
-        let range (value: CoreTypes.IntervalsRange) =
-            IntervalsContainer.Range value
+        let range (value: Types.IntervalsRange) =
+            Types.IntervalsContainer.Range value
 
-        let regexp (value: CoreTypes.IntervalsRegexp) =
-            IntervalsContainer.Regexp value
+        let regexp (value: Types.IntervalsRegexp) =
+            Types.IntervalsContainer.Regexp value
 
-        let wildcard (value: CoreTypes.IntervalsWildcard) =
-            IntervalsContainer.Wildcard value
+        let wildcard (value: Types.IntervalsWildcard) =
+            Types.IntervalsContainer.Wildcard value
 
     module IntervalsFilter =
 
-        let after (value: CoreTypes.IntervalsContainer) =
-            IntervalsFilter.After value
+        let after (value: Types.IntervalsContainer) =
+            Types.IntervalsFilter.After value
 
-        let before (value: CoreTypes.IntervalsContainer) =
-            IntervalsFilter.Before value
+        let before (value: Types.IntervalsContainer) =
+            Types.IntervalsFilter.Before value
 
-        let containedBy (value: CoreTypes.IntervalsContainer) =
-            IntervalsFilter.ContainedBy value
+        let containedBy (value: Types.IntervalsContainer) =
+            Types.IntervalsFilter.ContainedBy value
 
-        let containing (value: CoreTypes.IntervalsContainer) =
-            IntervalsFilter.Containing value
+        let containing (value: Types.IntervalsContainer) =
+            Types.IntervalsFilter.Containing value
 
-        let notContainedBy (value: CoreTypes.IntervalsContainer) =
-            IntervalsFilter.NotContainedBy value
+        let notContainedBy (value: Types.IntervalsContainer) =
+            Types.IntervalsFilter.NotContainedBy value
 
-        let notContaining (value: CoreTypes.IntervalsContainer) =
-            IntervalsFilter.NotContaining value
+        let notContaining (value: Types.IntervalsContainer) =
+            Types.IntervalsFilter.NotContaining value
 
-        let notOverlapping (value: CoreTypes.IntervalsContainer) =
-            IntervalsFilter.NotOverlapping value
+        let notOverlapping (value: Types.IntervalsContainer) =
+            Types.IntervalsFilter.NotOverlapping value
 
-        let overlapping (value: CoreTypes.IntervalsContainer) =
-            IntervalsFilter.Overlapping value
+        let overlapping (value: Types.IntervalsContainer) =
+            Types.IntervalsFilter.Overlapping value
 
-        let script (value: CoreTypes.Script) =
-            IntervalsFilter.Script value
+        let script (value: Types.Script) =
+            Types.IntervalsFilter.Script value
 
     type IntervalsFuzzyBuilder() =
-        member _.Yield(_: unit) : IntervalsFuzzy =
+        member _.Yield(_: unit) : Types.IntervalsFuzzy =
             {
                 Analyzer = None
                 Fuzziness = None
@@ -633,33 +606,33 @@ module TypesQueryDslBuilders =
             }
 
         [<CustomOperation("analyzer")>]
-        member _.Analyzer(state: IntervalsFuzzy, value: string) =
+        member _.Analyzer(state: Types.IntervalsFuzzy, value: string) =
             { state with Analyzer = Some value }
 
         [<CustomOperation("fuzziness")>]
-        member _.Fuzziness(state: IntervalsFuzzy, value: CoreTypes.Fuzziness) =
+        member _.Fuzziness(state: Types.IntervalsFuzzy, value: Types.Fuzziness) =
             { state with Fuzziness = Some value }
 
         [<CustomOperation("prefixLength")>]
-        member _.PrefixLength(state: IntervalsFuzzy, value: CoreTypes.Integer) =
+        member _.PrefixLength(state: Types.IntervalsFuzzy, value: Types.Integer) =
             { state with PrefixLength = Some value }
 
         [<CustomOperation("term")>]
-        member _.Term(state: IntervalsFuzzy, value: string) =
+        member _.Term(state: Types.IntervalsFuzzy, value: string) =
             { state with Term = value }
 
         [<CustomOperation("transpositions")>]
-        member _.Transpositions(state: IntervalsFuzzy, value: bool) =
+        member _.Transpositions(state: Types.IntervalsFuzzy, value: bool) =
             { state with Transpositions = Some value }
 
         [<CustomOperation("useField")>]
-        member _.UseField(state: IntervalsFuzzy, value: CoreTypes.Field) =
+        member _.UseField(state: Types.IntervalsFuzzy, value: Types.Field) =
             { state with UseField = Some value }
 
     let intervalsFuzzy = IntervalsFuzzyBuilder()
 
     type IntervalsMatchBuilder() =
-        member _.Yield(_: unit) : IntervalsMatch =
+        member _.Yield(_: unit) : Types.IntervalsMatch =
             {
                 Analyzer = None
                 MaxGaps = None
@@ -670,33 +643,33 @@ module TypesQueryDslBuilders =
             }
 
         [<CustomOperation("analyzer")>]
-        member _.Analyzer(state: IntervalsMatch, value: string) =
+        member _.Analyzer(state: Types.IntervalsMatch, value: string) =
             { state with Analyzer = Some value }
 
         [<CustomOperation("maxGaps")>]
-        member _.MaxGaps(state: IntervalsMatch, value: CoreTypes.Integer) =
+        member _.MaxGaps(state: Types.IntervalsMatch, value: Types.Integer) =
             { state with MaxGaps = Some value }
 
         [<CustomOperation("ordered")>]
-        member _.Ordered(state: IntervalsMatch, value: bool) =
+        member _.Ordered(state: Types.IntervalsMatch, value: bool) =
             { state with Ordered = Some value }
 
         [<CustomOperation("query")>]
-        member _.Query(state: IntervalsMatch, value: string) =
+        member _.Query(state: Types.IntervalsMatch, value: string) =
             { state with Query = value }
 
         [<CustomOperation("useField")>]
-        member _.UseField(state: IntervalsMatch, value: CoreTypes.Field) =
+        member _.UseField(state: Types.IntervalsMatch, value: Types.Field) =
             { state with UseField = Some value }
 
         [<CustomOperation("filter")>]
-        member _.Filter(state: IntervalsMatch, value: CoreTypes.IntervalsFilter) =
+        member _.Filter(state: Types.IntervalsMatch, value: Types.IntervalsFilter) =
             { state with Filter = Some value }
 
     let intervalsMatch = IntervalsMatchBuilder()
 
     type IntervalsPrefixBuilder() =
-        member _.Yield(_: unit) : IntervalsPrefix =
+        member _.Yield(_: unit) : Types.IntervalsPrefix =
             {
                 Analyzer = None
                 Prefix = Unchecked.defaultof<_>
@@ -704,47 +677,47 @@ module TypesQueryDslBuilders =
             }
 
         [<CustomOperation("analyzer")>]
-        member _.Analyzer(state: IntervalsPrefix, value: string) =
+        member _.Analyzer(state: Types.IntervalsPrefix, value: string) =
             { state with Analyzer = Some value }
 
         [<CustomOperation("prefix")>]
-        member _.Prefix(state: IntervalsPrefix, value: string) =
+        member _.Prefix(state: Types.IntervalsPrefix, value: string) =
             { state with Prefix = value }
 
         [<CustomOperation("useField")>]
-        member _.UseField(state: IntervalsPrefix, value: CoreTypes.Field) =
+        member _.UseField(state: Types.IntervalsPrefix, value: Types.Field) =
             { state with UseField = Some value }
 
     let intervalsPrefix = IntervalsPrefixBuilder()
 
     module IntervalsQuery =
 
-        let allOf (value: CoreTypes.IntervalsAllOf) =
-            IntervalsQuery.AllOf value
+        let allOf (value: Types.IntervalsAllOf) =
+            Types.IntervalsQuery.AllOf value
 
-        let anyOf (value: CoreTypes.IntervalsAnyOf) =
-            IntervalsQuery.AnyOf value
+        let anyOf (value: Types.IntervalsAnyOf) =
+            Types.IntervalsQuery.AnyOf value
 
-        let fuzzy (value: CoreTypes.IntervalsFuzzy) =
-            IntervalsQuery.Fuzzy value
+        let fuzzy (value: Types.IntervalsFuzzy) =
+            Types.IntervalsQuery.Fuzzy value
 
-        let match' (value: CoreTypes.IntervalsMatch) =
-            IntervalsQuery.Match value
+        let match' (value: Types.IntervalsMatch) =
+            Types.IntervalsQuery.Match value
 
-        let prefix (value: CoreTypes.IntervalsPrefix) =
-            IntervalsQuery.Prefix value
+        let prefix (value: Types.IntervalsPrefix) =
+            Types.IntervalsQuery.Prefix value
 
-        let range (value: CoreTypes.IntervalsRange) =
-            IntervalsQuery.Range value
+        let range (value: Types.IntervalsRange) =
+            Types.IntervalsQuery.Range value
 
-        let regexp (value: CoreTypes.IntervalsRegexp) =
-            IntervalsQuery.Regexp value
+        let regexp (value: Types.IntervalsRegexp) =
+            Types.IntervalsQuery.Regexp value
 
-        let wildcard (value: CoreTypes.IntervalsWildcard) =
-            IntervalsQuery.Wildcard value
+        let wildcard (value: Types.IntervalsWildcard) =
+            Types.IntervalsQuery.Wildcard value
 
     type IntervalsRangeBuilder() =
-        member _.Yield(_: unit) : IntervalsRange =
+        member _.Yield(_: unit) : Types.IntervalsRange =
             {
                 Analyzer = None
                 Gte = None
@@ -755,33 +728,33 @@ module TypesQueryDslBuilders =
             }
 
         [<CustomOperation("analyzer")>]
-        member _.Analyzer(state: IntervalsRange, value: string) =
+        member _.Analyzer(state: Types.IntervalsRange, value: string) =
             { state with Analyzer = Some value }
 
         [<CustomOperation("gte")>]
-        member _.Gte(state: IntervalsRange, value: string) =
+        member _.Gte(state: Types.IntervalsRange, value: string) =
             { state with Gte = Some value }
 
         [<CustomOperation("gt")>]
-        member _.Gt(state: IntervalsRange, value: string) =
+        member _.Gt(state: Types.IntervalsRange, value: string) =
             { state with Gt = Some value }
 
         [<CustomOperation("lte")>]
-        member _.Lte(state: IntervalsRange, value: string) =
+        member _.Lte(state: Types.IntervalsRange, value: string) =
             { state with Lte = Some value }
 
         [<CustomOperation("lt")>]
-        member _.Lt(state: IntervalsRange, value: string) =
+        member _.Lt(state: Types.IntervalsRange, value: string) =
             { state with Lt = Some value }
 
         [<CustomOperation("useField")>]
-        member _.UseField(state: IntervalsRange, value: CoreTypes.Field) =
+        member _.UseField(state: Types.IntervalsRange, value: Types.Field) =
             { state with UseField = Some value }
 
     let intervalsRange = IntervalsRangeBuilder()
 
     type IntervalsRegexpBuilder() =
-        member _.Yield(_: unit) : IntervalsRegexp =
+        member _.Yield(_: unit) : Types.IntervalsRegexp =
             {
                 Analyzer = None
                 Pattern = Unchecked.defaultof<_>
@@ -789,21 +762,21 @@ module TypesQueryDslBuilders =
             }
 
         [<CustomOperation("analyzer")>]
-        member _.Analyzer(state: IntervalsRegexp, value: string) =
+        member _.Analyzer(state: Types.IntervalsRegexp, value: string) =
             { state with Analyzer = Some value }
 
         [<CustomOperation("pattern")>]
-        member _.Pattern(state: IntervalsRegexp, value: string) =
+        member _.Pattern(state: Types.IntervalsRegexp, value: string) =
             { state with Pattern = value }
 
         [<CustomOperation("useField")>]
-        member _.UseField(state: IntervalsRegexp, value: CoreTypes.Field) =
+        member _.UseField(state: Types.IntervalsRegexp, value: Types.Field) =
             { state with UseField = Some value }
 
     let intervalsRegexp = IntervalsRegexpBuilder()
 
     type IntervalsWildcardBuilder() =
-        member _.Yield(_: unit) : IntervalsWildcard =
+        member _.Yield(_: unit) : Types.IntervalsWildcard =
             {
                 Analyzer = None
                 Pattern = Unchecked.defaultof<_>
@@ -811,21 +784,21 @@ module TypesQueryDslBuilders =
             }
 
         [<CustomOperation("analyzer")>]
-        member _.Analyzer(state: IntervalsWildcard, value: string) =
+        member _.Analyzer(state: Types.IntervalsWildcard, value: string) =
             { state with Analyzer = Some value }
 
         [<CustomOperation("pattern")>]
-        member _.Pattern(state: IntervalsWildcard, value: string) =
+        member _.Pattern(state: Types.IntervalsWildcard, value: string) =
             { state with Pattern = value }
 
         [<CustomOperation("useField")>]
-        member _.UseField(state: IntervalsWildcard, value: CoreTypes.Field) =
+        member _.UseField(state: Types.IntervalsWildcard, value: Types.Field) =
             { state with UseField = Some value }
 
     let intervalsWildcard = IntervalsWildcardBuilder()
 
     type LikeDocumentBuilder() =
-        member _.Yield(_: unit) : LikeDocument =
+        member _.Yield(_: unit) : Types.LikeDocument =
             {
                 Doc = None
                 Fields = None
@@ -838,41 +811,41 @@ module TypesQueryDslBuilders =
             }
 
         [<CustomOperation("doc")>]
-        member _.Doc(state: LikeDocument, value: System.Text.Json.JsonElement) =
+        member _.Doc(state: Types.LikeDocument, value: System.Text.Json.JsonElement) =
             { state with Doc = Some value }
 
         [<CustomOperation("fields")>]
-        member _.Fields(state: LikeDocument, value: CoreTypes.Field list) =
+        member _.Fields(state: Types.LikeDocument, value: Types.Field list) =
             { state with Fields = Some value }
 
         [<CustomOperation("id")>]
-        member _.Id(state: LikeDocument, value: CoreTypes.Id) =
+        member _.Id(state: Types.LikeDocument, value: Types.Id) =
             { state with Id = Some value }
 
         [<CustomOperation("index")>]
-        member _.Index(state: LikeDocument, value: CoreTypes.IndexName) =
+        member _.Index(state: Types.LikeDocument, value: Types.IndexName) =
             { state with Index = Some value }
 
         [<CustomOperation("perFieldAnalyzer")>]
-        member _.PerFieldAnalyzer(state: LikeDocument, value: Map<CoreTypes.Field, string>) =
+        member _.PerFieldAnalyzer(state: Types.LikeDocument, value: Map<Types.Field, string>) =
             { state with PerFieldAnalyzer = Some value }
 
         [<CustomOperation("routing")>]
-        member _.Routing(state: LikeDocument, value: CoreTypes.Routing) =
+        member _.Routing(state: Types.LikeDocument, value: Types.Routing) =
             { state with Routing = Some value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: LikeDocument, value: CoreTypes.VersionNumber) =
+        member _.Version(state: Types.LikeDocument, value: Types.VersionNumber) =
             { state with Version = Some value }
 
         [<CustomOperation("versionType")>]
-        member _.VersionType(state: LikeDocument, value: CoreTypes.VersionType) =
+        member _.VersionType(state: Types.LikeDocument, value: Types.VersionType) =
             { state with VersionType = Some value }
 
     let likeDocument = LikeDocumentBuilder()
 
     type MatchBoolPrefixQueryBuilder() =
-        member _.Yield(_: unit) : MatchBoolPrefixQuery =
+        member _.Yield(_: unit) : Types.MatchBoolPrefixQuery =
             {
                 Analyzer = None
                 Fuzziness = None
@@ -886,44 +859,44 @@ module TypesQueryDslBuilders =
             }
 
         [<CustomOperation("analyzer")>]
-        member _.Analyzer(state: MatchBoolPrefixQuery, value: string) =
+        member _.Analyzer(state: Types.MatchBoolPrefixQuery, value: string) =
             { state with Analyzer = Some value }
 
         [<CustomOperation("fuzziness")>]
-        member _.Fuzziness(state: MatchBoolPrefixQuery, value: CoreTypes.Fuzziness) =
+        member _.Fuzziness(state: Types.MatchBoolPrefixQuery, value: Types.Fuzziness) =
             { state with Fuzziness = Some value }
 
         [<CustomOperation("fuzzyRewrite")>]
-        member _.FuzzyRewrite(state: MatchBoolPrefixQuery, value: CoreTypes.MultiTermQueryRewrite) =
+        member _.FuzzyRewrite(state: Types.MatchBoolPrefixQuery, value: Types.MultiTermQueryRewrite) =
             { state with FuzzyRewrite = Some value }
 
         [<CustomOperation("fuzzyTranspositions")>]
-        member _.FuzzyTranspositions(state: MatchBoolPrefixQuery, value: bool) =
+        member _.FuzzyTranspositions(state: Types.MatchBoolPrefixQuery, value: bool) =
             { state with FuzzyTranspositions = Some value }
 
         [<CustomOperation("maxExpansions")>]
-        member _.MaxExpansions(state: MatchBoolPrefixQuery, value: CoreTypes.Integer) =
+        member _.MaxExpansions(state: Types.MatchBoolPrefixQuery, value: Types.Integer) =
             { state with MaxExpansions = Some value }
 
         [<CustomOperation("minimumShouldMatch")>]
-        member _.MinimumShouldMatch(state: MatchBoolPrefixQuery, value: CoreTypes.MinimumShouldMatch) =
+        member _.MinimumShouldMatch(state: Types.MatchBoolPrefixQuery, value: Types.MinimumShouldMatch) =
             { state with MinimumShouldMatch = Some value }
 
         [<CustomOperation("operator")>]
-        member _.Operator(state: MatchBoolPrefixQuery, value: CoreTypes.Operator) =
+        member _.Operator(state: Types.MatchBoolPrefixQuery, value: Types.Operator) =
             { state with Operator = Some value }
 
         [<CustomOperation("prefixLength")>]
-        member _.PrefixLength(state: MatchBoolPrefixQuery, value: CoreTypes.Integer) =
+        member _.PrefixLength(state: Types.MatchBoolPrefixQuery, value: Types.Integer) =
             { state with PrefixLength = Some value }
 
         [<CustomOperation("query")>]
-        member _.Query(state: MatchBoolPrefixQuery, value: string) =
+        member _.Query(state: Types.MatchBoolPrefixQuery, value: string) =
             { state with Query = value }
 
     let matchBoolPrefixQuery = MatchBoolPrefixQueryBuilder()
 
-    let ofQuery (value: string) : MatchBoolPrefixQuery =
+    let ofQuery (value: string) : Types.MatchBoolPrefixQuery =
         {
             Analyzer = None
             Fuzziness = None
@@ -937,7 +910,7 @@ module TypesQueryDslBuilders =
         }
 
     type MatchPhrasePrefixQueryBuilder() =
-        member _.Yield(_: unit) : MatchPhrasePrefixQuery =
+        member _.Yield(_: unit) : Types.MatchPhrasePrefixQuery =
             {
                 Analyzer = None
                 MaxExpansions = None
@@ -947,28 +920,28 @@ module TypesQueryDslBuilders =
             }
 
         [<CustomOperation("analyzer")>]
-        member _.Analyzer(state: MatchPhrasePrefixQuery, value: string) =
+        member _.Analyzer(state: Types.MatchPhrasePrefixQuery, value: string) =
             { state with Analyzer = Some value }
 
         [<CustomOperation("maxExpansions")>]
-        member _.MaxExpansions(state: MatchPhrasePrefixQuery, value: CoreTypes.Integer) =
+        member _.MaxExpansions(state: Types.MatchPhrasePrefixQuery, value: Types.Integer) =
             { state with MaxExpansions = Some value }
 
         [<CustomOperation("query")>]
-        member _.Query(state: MatchPhrasePrefixQuery, value: string) =
+        member _.Query(state: Types.MatchPhrasePrefixQuery, value: string) =
             { state with Query = value }
 
         [<CustomOperation("slop")>]
-        member _.Slop(state: MatchPhrasePrefixQuery, value: CoreTypes.Integer) =
+        member _.Slop(state: Types.MatchPhrasePrefixQuery, value: Types.Integer) =
             { state with Slop = Some value }
 
         [<CustomOperation("zeroTermsQuery")>]
-        member _.ZeroTermsQuery(state: MatchPhrasePrefixQuery, value: CoreTypes.ZeroTermsQuery) =
+        member _.ZeroTermsQuery(state: Types.MatchPhrasePrefixQuery, value: Types.ZeroTermsQuery) =
             { state with ZeroTermsQuery = Some value }
 
     let matchPhrasePrefixQuery = MatchPhrasePrefixQueryBuilder()
 
-    let ofQuery (value: string) : MatchPhrasePrefixQuery =
+    let ofQuery (value: string) : Types.MatchPhrasePrefixQuery =
         {
             Analyzer = None
             MaxExpansions = None
@@ -978,7 +951,7 @@ module TypesQueryDslBuilders =
         }
 
     type MatchPhraseQueryBuilder() =
-        member _.Yield(_: unit) : MatchPhraseQuery =
+        member _.Yield(_: unit) : Types.MatchPhraseQuery =
             {
                 Analyzer = None
                 Query = Unchecked.defaultof<_>
@@ -987,24 +960,24 @@ module TypesQueryDslBuilders =
             }
 
         [<CustomOperation("analyzer")>]
-        member _.Analyzer(state: MatchPhraseQuery, value: string) =
+        member _.Analyzer(state: Types.MatchPhraseQuery, value: string) =
             { state with Analyzer = Some value }
 
         [<CustomOperation("query")>]
-        member _.Query(state: MatchPhraseQuery, value: string) =
+        member _.Query(state: Types.MatchPhraseQuery, value: string) =
             { state with Query = value }
 
         [<CustomOperation("slop")>]
-        member _.Slop(state: MatchPhraseQuery, value: CoreTypes.Integer) =
+        member _.Slop(state: Types.MatchPhraseQuery, value: Types.Integer) =
             { state with Slop = Some value }
 
         [<CustomOperation("zeroTermsQuery")>]
-        member _.ZeroTermsQuery(state: MatchPhraseQuery, value: CoreTypes.ZeroTermsQuery) =
+        member _.ZeroTermsQuery(state: Types.MatchPhraseQuery, value: Types.ZeroTermsQuery) =
             { state with ZeroTermsQuery = Some value }
 
     let matchPhraseQuery = MatchPhraseQueryBuilder()
 
-    let ofQuery (value: string) : MatchPhraseQuery =
+    let ofQuery (value: string) : Types.MatchPhraseQuery =
         {
             Analyzer = None
             Query = value
@@ -1013,7 +986,7 @@ module TypesQueryDslBuilders =
         }
 
     type MatchQueryBuilder() =
-        member _.Yield(_: unit) : MatchQuery =
+        member _.Yield(_: unit) : Types.MatchQuery =
             {
                 Analyzer = None
                 AutoGenerateSynonymsPhraseQuery = None
@@ -1031,60 +1004,60 @@ module TypesQueryDslBuilders =
             }
 
         [<CustomOperation("analyzer")>]
-        member _.Analyzer(state: MatchQuery, value: string) =
+        member _.Analyzer(state: Types.MatchQuery, value: string) =
             { state with Analyzer = Some value }
 
         [<CustomOperation("autoGenerateSynonymsPhraseQuery")>]
-        member _.AutoGenerateSynonymsPhraseQuery(state: MatchQuery, value: bool) =
+        member _.AutoGenerateSynonymsPhraseQuery(state: Types.MatchQuery, value: bool) =
             { state with AutoGenerateSynonymsPhraseQuery = Some value }
 
         [<CustomOperation("cutoffFrequency")>]
-        member _.CutoffFrequency(state: MatchQuery, value: CoreTypes.Double) =
+        member _.CutoffFrequency(state: Types.MatchQuery, value: Types.Double) =
             { state with CutoffFrequency = Some value }
 
         [<CustomOperation("fuzziness")>]
-        member _.Fuzziness(state: MatchQuery, value: CoreTypes.Fuzziness) =
+        member _.Fuzziness(state: Types.MatchQuery, value: Types.Fuzziness) =
             { state with Fuzziness = Some value }
 
         [<CustomOperation("fuzzyRewrite")>]
-        member _.FuzzyRewrite(state: MatchQuery, value: CoreTypes.MultiTermQueryRewrite) =
+        member _.FuzzyRewrite(state: Types.MatchQuery, value: Types.MultiTermQueryRewrite) =
             { state with FuzzyRewrite = Some value }
 
         [<CustomOperation("fuzzyTranspositions")>]
-        member _.FuzzyTranspositions(state: MatchQuery, value: bool) =
+        member _.FuzzyTranspositions(state: Types.MatchQuery, value: bool) =
             { state with FuzzyTranspositions = Some value }
 
         [<CustomOperation("lenient")>]
-        member _.Lenient(state: MatchQuery, value: bool) =
+        member _.Lenient(state: Types.MatchQuery, value: bool) =
             { state with Lenient = Some value }
 
         [<CustomOperation("maxExpansions")>]
-        member _.MaxExpansions(state: MatchQuery, value: CoreTypes.Integer) =
+        member _.MaxExpansions(state: Types.MatchQuery, value: Types.Integer) =
             { state with MaxExpansions = Some value }
 
         [<CustomOperation("minimumShouldMatch")>]
-        member _.MinimumShouldMatch(state: MatchQuery, value: CoreTypes.MinimumShouldMatch) =
+        member _.MinimumShouldMatch(state: Types.MatchQuery, value: Types.MinimumShouldMatch) =
             { state with MinimumShouldMatch = Some value }
 
         [<CustomOperation("operator")>]
-        member _.Operator(state: MatchQuery, value: CoreTypes.Operator) =
+        member _.Operator(state: Types.MatchQuery, value: Types.Operator) =
             { state with Operator = Some value }
 
         [<CustomOperation("prefixLength")>]
-        member _.PrefixLength(state: MatchQuery, value: CoreTypes.Integer) =
+        member _.PrefixLength(state: Types.MatchQuery, value: Types.Integer) =
             { state with PrefixLength = Some value }
 
         [<CustomOperation("query")>]
-        member _.Query(state: MatchQuery, value: System.Text.Json.JsonElement) =
+        member _.Query(state: Types.MatchQuery, value: System.Text.Json.JsonElement) =
             { state with Query = value }
 
         [<CustomOperation("zeroTermsQuery")>]
-        member _.ZeroTermsQuery(state: MatchQuery, value: CoreTypes.ZeroTermsQuery) =
+        member _.ZeroTermsQuery(state: Types.MatchQuery, value: Types.ZeroTermsQuery) =
             { state with ZeroTermsQuery = Some value }
 
     let matchQuery = MatchQueryBuilder()
 
-    let ofQuery (value: System.Text.Json.JsonElement) : MatchQuery =
+    let ofQuery (value: System.Text.Json.JsonElement) : Types.MatchQuery =
         {
             Analyzer = None
             AutoGenerateSynonymsPhraseQuery = None
@@ -1102,7 +1075,7 @@ module TypesQueryDslBuilders =
         }
 
     type MoreLikeThisQueryBuilder() =
-        member _.Yield(_: unit) : MoreLikeThisQuery =
+        member _.Yield(_: unit) : Types.MoreLikeThisQuery =
             {
                 Analyzer = None
                 BoostTerms = None
@@ -1125,81 +1098,81 @@ module TypesQueryDslBuilders =
             }
 
         [<CustomOperation("analyzer")>]
-        member _.Analyzer(state: MoreLikeThisQuery, value: string) =
+        member _.Analyzer(state: Types.MoreLikeThisQuery, value: string) =
             { state with Analyzer = Some value }
 
         [<CustomOperation("boostTerms")>]
-        member _.BoostTerms(state: MoreLikeThisQuery, value: CoreTypes.Double) =
+        member _.BoostTerms(state: Types.MoreLikeThisQuery, value: Types.Double) =
             { state with BoostTerms = Some value }
 
         [<CustomOperation("failOnUnsupportedField")>]
-        member _.FailOnUnsupportedField(state: MoreLikeThisQuery, value: bool) =
+        member _.FailOnUnsupportedField(state: Types.MoreLikeThisQuery, value: bool) =
             { state with FailOnUnsupportedField = Some value }
 
         [<CustomOperation("fields")>]
-        member _.Fields(state: MoreLikeThisQuery, value: CoreTypes.Field list) =
+        member _.Fields(state: Types.MoreLikeThisQuery, value: Types.Field list) =
             { state with Fields = Some value }
 
         [<CustomOperation("include")>]
-        member _.Include(state: MoreLikeThisQuery, value: bool) =
+        member _.Include(state: Types.MoreLikeThisQuery, value: bool) =
             { state with Include = Some value }
 
         [<CustomOperation("like")>]
-        member _.Like(state: MoreLikeThisQuery, value: System.Text.Json.JsonElement) =
+        member _.Like(state: Types.MoreLikeThisQuery, value: System.Text.Json.JsonElement) =
             { state with Like = value }
 
         [<CustomOperation("maxDocFreq")>]
-        member _.MaxDocFreq(state: MoreLikeThisQuery, value: CoreTypes.Integer) =
+        member _.MaxDocFreq(state: Types.MoreLikeThisQuery, value: Types.Integer) =
             { state with MaxDocFreq = Some value }
 
         [<CustomOperation("maxQueryTerms")>]
-        member _.MaxQueryTerms(state: MoreLikeThisQuery, value: CoreTypes.Integer) =
+        member _.MaxQueryTerms(state: Types.MoreLikeThisQuery, value: Types.Integer) =
             { state with MaxQueryTerms = Some value }
 
         [<CustomOperation("maxWordLength")>]
-        member _.MaxWordLength(state: MoreLikeThisQuery, value: CoreTypes.Integer) =
+        member _.MaxWordLength(state: Types.MoreLikeThisQuery, value: Types.Integer) =
             { state with MaxWordLength = Some value }
 
         [<CustomOperation("minDocFreq")>]
-        member _.MinDocFreq(state: MoreLikeThisQuery, value: CoreTypes.Integer) =
+        member _.MinDocFreq(state: Types.MoreLikeThisQuery, value: Types.Integer) =
             { state with MinDocFreq = Some value }
 
         [<CustomOperation("minimumShouldMatch")>]
-        member _.MinimumShouldMatch(state: MoreLikeThisQuery, value: CoreTypes.MinimumShouldMatch) =
+        member _.MinimumShouldMatch(state: Types.MoreLikeThisQuery, value: Types.MinimumShouldMatch) =
             { state with MinimumShouldMatch = Some value }
 
         [<CustomOperation("minTermFreq")>]
-        member _.MinTermFreq(state: MoreLikeThisQuery, value: CoreTypes.Integer) =
+        member _.MinTermFreq(state: Types.MoreLikeThisQuery, value: Types.Integer) =
             { state with MinTermFreq = Some value }
 
         [<CustomOperation("minWordLength")>]
-        member _.MinWordLength(state: MoreLikeThisQuery, value: CoreTypes.Integer) =
+        member _.MinWordLength(state: Types.MoreLikeThisQuery, value: Types.Integer) =
             { state with MinWordLength = Some value }
 
         [<CustomOperation("routing")>]
-        member _.Routing(state: MoreLikeThisQuery, value: string) =
+        member _.Routing(state: Types.MoreLikeThisQuery, value: string) =
             { state with Routing = Some value }
 
         [<CustomOperation("stopWords")>]
-        member _.StopWords(state: MoreLikeThisQuery, value: CoreTypes.StopWords) =
+        member _.StopWords(state: Types.MoreLikeThisQuery, value: Types.StopWords) =
             { state with StopWords = Some value }
 
         [<CustomOperation("unlike")>]
-        member _.Unlike(state: MoreLikeThisQuery, value: System.Text.Json.JsonElement) =
+        member _.Unlike(state: Types.MoreLikeThisQuery, value: System.Text.Json.JsonElement) =
             { state with Unlike = Some value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: MoreLikeThisQuery, value: CoreTypes.VersionNumber) =
+        member _.Version(state: Types.MoreLikeThisQuery, value: Types.VersionNumber) =
             { state with Version = Some value }
 
         [<CustomOperation("versionType")>]
-        member _.VersionType(state: MoreLikeThisQuery, value: CoreTypes.VersionType) =
+        member _.VersionType(state: Types.MoreLikeThisQuery, value: Types.VersionType) =
             { state with VersionType = Some value }
 
     let moreLikeThisQuery = MoreLikeThisQueryBuilder()
 
     type MultiMatchQueryBuilder() =
-        member _.Yield(_: unit) : MultiMatchQuery =
+        member _.Yield(_: unit) : Types.MultiMatchQuery =
             {
                 Analyzer = None
                 AutoGenerateSynonymsPhraseQuery = None
@@ -1221,77 +1194,77 @@ module TypesQueryDslBuilders =
             }
 
         [<CustomOperation("analyzer")>]
-        member _.Analyzer(state: MultiMatchQuery, value: string) =
+        member _.Analyzer(state: Types.MultiMatchQuery, value: string) =
             { state with Analyzer = Some value }
 
         [<CustomOperation("autoGenerateSynonymsPhraseQuery")>]
-        member _.AutoGenerateSynonymsPhraseQuery(state: MultiMatchQuery, value: bool) =
+        member _.AutoGenerateSynonymsPhraseQuery(state: Types.MultiMatchQuery, value: bool) =
             { state with AutoGenerateSynonymsPhraseQuery = Some value }
 
         [<CustomOperation("cutoffFrequency")>]
-        member _.CutoffFrequency(state: MultiMatchQuery, value: CoreTypes.Double) =
+        member _.CutoffFrequency(state: Types.MultiMatchQuery, value: Types.Double) =
             { state with CutoffFrequency = Some value }
 
         [<CustomOperation("fields")>]
-        member _.Fields(state: MultiMatchQuery, value: CoreTypes.Fields) =
+        member _.Fields(state: Types.MultiMatchQuery, value: Types.Fields) =
             { state with Fields = Some value }
 
         [<CustomOperation("fuzziness")>]
-        member _.Fuzziness(state: MultiMatchQuery, value: CoreTypes.Fuzziness) =
+        member _.Fuzziness(state: Types.MultiMatchQuery, value: Types.Fuzziness) =
             { state with Fuzziness = Some value }
 
         [<CustomOperation("fuzzyRewrite")>]
-        member _.FuzzyRewrite(state: MultiMatchQuery, value: CoreTypes.MultiTermQueryRewrite) =
+        member _.FuzzyRewrite(state: Types.MultiMatchQuery, value: Types.MultiTermQueryRewrite) =
             { state with FuzzyRewrite = Some value }
 
         [<CustomOperation("fuzzyTranspositions")>]
-        member _.FuzzyTranspositions(state: MultiMatchQuery, value: bool) =
+        member _.FuzzyTranspositions(state: Types.MultiMatchQuery, value: bool) =
             { state with FuzzyTranspositions = Some value }
 
         [<CustomOperation("lenient")>]
-        member _.Lenient(state: MultiMatchQuery, value: bool) =
+        member _.Lenient(state: Types.MultiMatchQuery, value: bool) =
             { state with Lenient = Some value }
 
         [<CustomOperation("maxExpansions")>]
-        member _.MaxExpansions(state: MultiMatchQuery, value: CoreTypes.Integer) =
+        member _.MaxExpansions(state: Types.MultiMatchQuery, value: Types.Integer) =
             { state with MaxExpansions = Some value }
 
         [<CustomOperation("minimumShouldMatch")>]
-        member _.MinimumShouldMatch(state: MultiMatchQuery, value: CoreTypes.MinimumShouldMatch) =
+        member _.MinimumShouldMatch(state: Types.MultiMatchQuery, value: Types.MinimumShouldMatch) =
             { state with MinimumShouldMatch = Some value }
 
         [<CustomOperation("operator")>]
-        member _.Operator(state: MultiMatchQuery, value: CoreTypes.Operator) =
+        member _.Operator(state: Types.MultiMatchQuery, value: Types.Operator) =
             { state with Operator = Some value }
 
         [<CustomOperation("prefixLength")>]
-        member _.PrefixLength(state: MultiMatchQuery, value: CoreTypes.Integer) =
+        member _.PrefixLength(state: Types.MultiMatchQuery, value: Types.Integer) =
             { state with PrefixLength = Some value }
 
         [<CustomOperation("query")>]
-        member _.Query(state: MultiMatchQuery, value: string) =
+        member _.Query(state: Types.MultiMatchQuery, value: string) =
             { state with Query = value }
 
         [<CustomOperation("slop")>]
-        member _.Slop(state: MultiMatchQuery, value: CoreTypes.Integer) =
+        member _.Slop(state: Types.MultiMatchQuery, value: Types.Integer) =
             { state with Slop = Some value }
 
         [<CustomOperation("tieBreaker")>]
-        member _.TieBreaker(state: MultiMatchQuery, value: CoreTypes.Double) =
+        member _.TieBreaker(state: Types.MultiMatchQuery, value: Types.Double) =
             { state with TieBreaker = Some value }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: MultiMatchQuery, value: CoreTypes.TextQueryType) =
+        member _.Type(state: Types.MultiMatchQuery, value: Types.TextQueryType) =
             { state with Type = Some value }
 
         [<CustomOperation("zeroTermsQuery")>]
-        member _.ZeroTermsQuery(state: MultiMatchQuery, value: CoreTypes.ZeroTermsQuery) =
+        member _.ZeroTermsQuery(state: Types.MultiMatchQuery, value: Types.ZeroTermsQuery) =
             { state with ZeroTermsQuery = Some value }
 
     let multiMatchQuery = MultiMatchQueryBuilder()
 
     type NestedQueryBuilder() =
-        member _.Yield(_: unit) : NestedQuery =
+        member _.Yield(_: unit) : Types.NestedQuery =
             {
                 IgnoreUnmapped = None
                 InnerHits = None
@@ -1301,29 +1274,29 @@ module TypesQueryDslBuilders =
             }
 
         [<CustomOperation("ignoreUnmapped")>]
-        member _.IgnoreUnmapped(state: NestedQuery, value: bool) =
+        member _.IgnoreUnmapped(state: Types.NestedQuery, value: bool) =
             { state with IgnoreUnmapped = Some value }
 
         [<CustomOperation("innerHits")>]
-        member _.InnerHits(state: NestedQuery, value: GlobalSearchTypes.InnerHits) =
+        member _.InnerHits(state: Types.NestedQuery, value: Types.InnerHits) =
             { state with InnerHits = Some value }
 
         [<CustomOperation("path")>]
-        member _.Path(state: NestedQuery, value: CoreTypes.Field) =
+        member _.Path(state: Types.NestedQuery, value: Types.Field) =
             { state with Path = value }
 
         [<CustomOperation("query")>]
-        member _.Query(state: NestedQuery, value: CoreTypes.QueryContainer) =
+        member _.Query(state: Types.NestedQuery, value: Types.QueryContainer) =
             { state with Query = value }
 
         [<CustomOperation("scoreMode")>]
-        member _.ScoreMode(state: NestedQuery, value: CoreTypes.ChildScoreMode) =
+        member _.ScoreMode(state: Types.NestedQuery, value: Types.ChildScoreMode) =
             { state with ScoreMode = Some value }
 
     let nestedQuery = NestedQueryBuilder()
 
     type ParentIdQueryBuilder() =
-        member _.Yield(_: unit) : ParentIdQuery =
+        member _.Yield(_: unit) : Types.ParentIdQuery =
             {
                 Id = None
                 IgnoreUnmapped = None
@@ -1331,21 +1304,21 @@ module TypesQueryDslBuilders =
             }
 
         [<CustomOperation("id")>]
-        member _.Id(state: ParentIdQuery, value: CoreTypes.Id) =
+        member _.Id(state: Types.ParentIdQuery, value: Types.Id) =
             { state with Id = Some value }
 
         [<CustomOperation("ignoreUnmapped")>]
-        member _.IgnoreUnmapped(state: ParentIdQuery, value: bool) =
+        member _.IgnoreUnmapped(state: Types.ParentIdQuery, value: bool) =
             { state with IgnoreUnmapped = Some value }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: ParentIdQuery, value: CoreTypes.RelationName) =
+        member _.Type(state: Types.ParentIdQuery, value: Types.RelationName) =
             { state with Type = Some value }
 
     let parentIdQuery = ParentIdQueryBuilder()
 
     type PercolateQueryBuilder() =
-        member _.Yield(_: unit) : PercolateQuery =
+        member _.Yield(_: unit) : Types.PercolateQuery =
             {
                 Document = None
                 Documents = None
@@ -1359,53 +1332,53 @@ module TypesQueryDslBuilders =
             }
 
         [<CustomOperation("document")>]
-        member _.Document(state: PercolateQuery, value: System.Text.Json.JsonElement) =
+        member _.Document(state: Types.PercolateQuery, value: System.Text.Json.JsonElement) =
             { state with Document = Some value }
 
         [<CustomOperation("documents")>]
-        member _.Documents(state: PercolateQuery, value: System.Text.Json.JsonElement list) =
+        member _.Documents(state: Types.PercolateQuery, value: System.Text.Json.JsonElement list) =
             { state with Documents = Some value }
 
         [<CustomOperation("field")>]
-        member _.Field(state: PercolateQuery, value: CoreTypes.Field) =
+        member _.Field(state: Types.PercolateQuery, value: Types.Field) =
             { state with Field = value }
 
         [<CustomOperation("id")>]
-        member _.Id(state: PercolateQuery, value: CoreTypes.Id) =
+        member _.Id(state: Types.PercolateQuery, value: Types.Id) =
             { state with Id = Some value }
 
         [<CustomOperation("index")>]
-        member _.Index(state: PercolateQuery, value: CoreTypes.IndexName) =
+        member _.Index(state: Types.PercolateQuery, value: Types.IndexName) =
             { state with Index = Some value }
 
         [<CustomOperation("name")>]
-        member _.Name(state: PercolateQuery, value: string) =
+        member _.Name(state: Types.PercolateQuery, value: string) =
             { state with Name = Some value }
 
         [<CustomOperation("preference")>]
-        member _.Preference(state: PercolateQuery, value: string) =
+        member _.Preference(state: Types.PercolateQuery, value: string) =
             { state with Preference = Some value }
 
         [<CustomOperation("routing")>]
-        member _.Routing(state: PercolateQuery, value: string) =
+        member _.Routing(state: Types.PercolateQuery, value: string) =
             { state with Routing = Some value }
 
         [<CustomOperation("version")>]
-        member _.Version(state: PercolateQuery, value: CoreTypes.VersionNumber) =
+        member _.Version(state: Types.PercolateQuery, value: Types.VersionNumber) =
             { state with Version = Some value }
 
     let percolateQuery = PercolateQueryBuilder()
 
     module PinnedQuery =
 
-        let ids (value: CoreTypes.Id list) =
-            PinnedQuery.Ids value
+        let ids (value: Types.Id list) =
+            Types.PinnedQuery.Ids value
 
-        let docs (value: CoreTypes.PinnedDoc list) =
-            PinnedQuery.Docs value
+        let docs (value: Types.PinnedDoc list) =
+            Types.PinnedQuery.Docs value
 
     type PrefixQueryBuilder() =
-        member _.Yield(_: unit) : PrefixQuery =
+        member _.Yield(_: unit) : Types.PrefixQuery =
             {
                 Rewrite = None
                 Value = Unchecked.defaultof<_>
@@ -1413,20 +1386,20 @@ module TypesQueryDslBuilders =
             }
 
         [<CustomOperation("rewrite")>]
-        member _.Rewrite(state: PrefixQuery, value: CoreTypes.MultiTermQueryRewrite) =
+        member _.Rewrite(state: Types.PrefixQuery, value: Types.MultiTermQueryRewrite) =
             { state with Rewrite = Some value }
 
         [<CustomOperation("value")>]
-        member _.Value(state: PrefixQuery, value: string) =
+        member _.Value(state: Types.PrefixQuery, value: string) =
             { state with Value = value }
 
         [<CustomOperation("caseInsensitive")>]
-        member _.CaseInsensitive(state: PrefixQuery, value: bool) =
+        member _.CaseInsensitive(state: Types.PrefixQuery, value: bool) =
             { state with CaseInsensitive = Some value }
 
     let prefixQuery = PrefixQueryBuilder()
 
-    let ofValue (value: string) : PrefixQuery =
+    let ofValue (value: string) : Types.PrefixQuery =
         {
             Rewrite = None
             Value = value
@@ -1434,209 +1407,209 @@ module TypesQueryDslBuilders =
         }
 
     type QueryBaseBuilder() =
-        member _.Yield(_: unit) : QueryBase =
+        member _.Yield(_: unit) : Types.QueryBase =
             {
                 Boost = None
                 Name = None
             }
 
         [<CustomOperation("boost")>]
-        member _.Boost(state: QueryBase, value: CoreTypes.Float) =
+        member _.Boost(state: Types.QueryBase, value: Types.Float) =
             { state with Boost = Some value }
 
         [<CustomOperation("name")>]
-        member _.Name(state: QueryBase, value: string) =
+        member _.Name(state: Types.QueryBase, value: string) =
             { state with Name = Some value }
 
     let queryBase = QueryBaseBuilder()
 
     module Query =
 
-        let bool (value: CoreTypes.BoolQuery) =
-            QueryContainer.Bool value
+        let bool (value: Types.BoolQuery) =
+            Types.QueryContainer.Bool value
 
-        let boosting (value: CoreTypes.BoostingQuery) =
-            QueryContainer.Boosting value
+        let boosting (value: Types.BoostingQuery) =
+            Types.QueryContainer.Boosting value
 
-        let common (field: string) (value: CoreTypes.CommonTermsQuery) =
-            QueryContainer.Common (field, value)
+        let common (field: string) (value: Types.CommonTermsQuery) =
+            Types.QueryContainer.Common (field, value)
 
-        let combinedFields (value: CoreTypes.CombinedFieldsQuery) =
-            QueryContainer.CombinedFields value
+        let combinedFields (value: Types.CombinedFieldsQuery) =
+            Types.QueryContainer.CombinedFields value
 
-        let constantScore (value: CoreTypes.ConstantScoreQuery) =
-            QueryContainer.ConstantScore value
+        let constantScore (value: Types.ConstantScoreQuery) =
+            Types.QueryContainer.ConstantScore value
 
-        let disMax (value: CoreTypes.DisMaxQuery) =
-            QueryContainer.DisMax value
+        let disMax (value: Types.DisMaxQuery) =
+            Types.QueryContainer.DisMax value
 
-        let distanceFeature (value: CoreTypes.DistanceFeatureQuery) =
-            QueryContainer.DistanceFeature value
+        let distanceFeature (value: Types.DistanceFeatureQuery) =
+            Types.QueryContainer.DistanceFeature value
 
-        let exists (value: CoreTypes.ExistsQuery) =
-            QueryContainer.Exists value
+        let exists (value: Types.ExistsQuery) =
+            Types.QueryContainer.Exists value
 
-        let functionScore (value: CoreTypes.FunctionScoreQuery) =
-            QueryContainer.FunctionScore value
+        let functionScore (value: Types.FunctionScoreQuery) =
+            Types.QueryContainer.FunctionScore value
 
-        let fuzzy (field: string) (value: CoreTypes.FuzzyQuery) =
-            QueryContainer.Fuzzy (field, value)
+        let fuzzy (field: string) (value: Types.FuzzyQuery) =
+            Types.QueryContainer.Fuzzy (field, value)
 
-        let geoBoundingBox (value: CoreTypes.GeoBoundingBoxQuery) =
-            QueryContainer.GeoBoundingBox value
+        let geoBoundingBox (value: Types.GeoBoundingBoxQuery) =
+            Types.QueryContainer.GeoBoundingBox value
 
-        let geoDistance (value: CoreTypes.GeoDistanceQuery) =
-            QueryContainer.GeoDistance value
+        let geoDistance (value: Types.GeoDistanceQuery) =
+            Types.QueryContainer.GeoDistance value
 
-        let geoGrid (field: string) (value: CoreTypes.GeoGridQuery) =
-            QueryContainer.GeoGrid (field, value)
+        let geoGrid (field: string) (value: Types.GeoGridQuery) =
+            Types.QueryContainer.GeoGrid (field, value)
 
-        let geoPolygon (value: CoreTypes.GeoPolygonQuery) =
-            QueryContainer.GeoPolygon value
+        let geoPolygon (value: Types.GeoPolygonQuery) =
+            Types.QueryContainer.GeoPolygon value
 
-        let geoShape (value: CoreTypes.GeoShapeQuery) =
-            QueryContainer.GeoShape value
+        let geoShape (value: Types.GeoShapeQuery) =
+            Types.QueryContainer.GeoShape value
 
-        let hasChild (value: CoreTypes.HasChildQuery) =
-            QueryContainer.HasChild value
+        let hasChild (value: Types.HasChildQuery) =
+            Types.QueryContainer.HasChild value
 
-        let hasParent (value: CoreTypes.HasParentQuery) =
-            QueryContainer.HasParent value
+        let hasParent (value: Types.HasParentQuery) =
+            Types.QueryContainer.HasParent value
 
-        let ids (value: CoreTypes.IdsQuery) =
-            QueryContainer.Ids value
+        let ids (value: Types.IdsQuery) =
+            Types.QueryContainer.Ids value
 
-        let intervals (field: string) (value: CoreTypes.IntervalsQuery) =
-            QueryContainer.Intervals (field, value)
+        let intervals (field: string) (value: Types.IntervalsQuery) =
+            Types.QueryContainer.Intervals (field, value)
 
-        let knn (value: CoreTypes.KnnQuery) =
-            QueryContainer.Knn value
+        let knn (value: Types.KnnQuery) =
+            Types.QueryContainer.Knn value
 
-        let match' (field: string) (value: CoreTypes.MatchQuery) =
-            QueryContainer.Match (field, value)
+        let match' (field: string) (value: Types.MatchQuery) =
+            Types.QueryContainer.Match (field, value)
 
-        let matchAll (value: CoreTypes.MatchAllQuery) =
-            QueryContainer.MatchAll value
+        let matchAll (value: Types.MatchAllQuery) =
+            Types.QueryContainer.MatchAll value
 
-        let matchBoolPrefix (field: string) (value: CoreTypes.MatchBoolPrefixQuery) =
-            QueryContainer.MatchBoolPrefix (field, value)
+        let matchBoolPrefix (field: string) (value: Types.MatchBoolPrefixQuery) =
+            Types.QueryContainer.MatchBoolPrefix (field, value)
 
-        let matchNone (value: CoreTypes.MatchNoneQuery) =
-            QueryContainer.MatchNone value
+        let matchNone (value: Types.MatchNoneQuery) =
+            Types.QueryContainer.MatchNone value
 
-        let matchPhrase (field: string) (value: CoreTypes.MatchPhraseQuery) =
-            QueryContainer.MatchPhrase (field, value)
+        let matchPhrase (field: string) (value: Types.MatchPhraseQuery) =
+            Types.QueryContainer.MatchPhrase (field, value)
 
-        let matchPhrasePrefix (field: string) (value: CoreTypes.MatchPhrasePrefixQuery) =
-            QueryContainer.MatchPhrasePrefix (field, value)
+        let matchPhrasePrefix (field: string) (value: Types.MatchPhrasePrefixQuery) =
+            Types.QueryContainer.MatchPhrasePrefix (field, value)
 
-        let moreLikeThis (value: CoreTypes.MoreLikeThisQuery) =
-            QueryContainer.MoreLikeThis value
+        let moreLikeThis (value: Types.MoreLikeThisQuery) =
+            Types.QueryContainer.MoreLikeThis value
 
-        let multiMatch (value: CoreTypes.MultiMatchQuery) =
-            QueryContainer.MultiMatch value
+        let multiMatch (value: Types.MultiMatchQuery) =
+            Types.QueryContainer.MultiMatch value
 
-        let nested (value: CoreTypes.NestedQuery) =
-            QueryContainer.Nested value
+        let nested (value: Types.NestedQuery) =
+            Types.QueryContainer.Nested value
 
-        let parentId (value: CoreTypes.ParentIdQuery) =
-            QueryContainer.ParentId value
+        let parentId (value: Types.ParentIdQuery) =
+            Types.QueryContainer.ParentId value
 
-        let percolate (value: CoreTypes.PercolateQuery) =
-            QueryContainer.Percolate value
+        let percolate (value: Types.PercolateQuery) =
+            Types.QueryContainer.Percolate value
 
-        let pinned (value: CoreTypes.PinnedQuery) =
-            QueryContainer.Pinned value
+        let pinned (value: Types.PinnedQuery) =
+            Types.QueryContainer.Pinned value
 
-        let prefix (field: string) (value: CoreTypes.PrefixQuery) =
-            QueryContainer.Prefix (field, value)
+        let prefix (field: string) (value: Types.PrefixQuery) =
+            Types.QueryContainer.Prefix (field, value)
 
-        let queryString (value: CoreTypes.QueryStringQuery) =
-            QueryContainer.QueryString value
+        let queryString (value: Types.QueryStringQuery) =
+            Types.QueryContainer.QueryString value
 
-        let range (field: string) (value: CoreTypes.RangeQuery) =
-            QueryContainer.Range (field, value)
+        let range (field: string) (value: Types.RangeQuery) =
+            Types.QueryContainer.Range (field, value)
 
-        let rankFeature (value: CoreTypes.RankFeatureQuery) =
-            QueryContainer.RankFeature value
+        let rankFeature (value: Types.RankFeatureQuery) =
+            Types.QueryContainer.RankFeature value
 
-        let regexp (field: string) (value: CoreTypes.RegexpQuery) =
-            QueryContainer.Regexp (field, value)
+        let regexp (field: string) (value: Types.RegexpQuery) =
+            Types.QueryContainer.Regexp (field, value)
 
-        let rule (value: CoreTypes.RuleQuery) =
-            QueryContainer.Rule value
+        let rule (value: Types.RuleQuery) =
+            Types.QueryContainer.Rule value
 
-        let script (value: CoreTypes.ScriptQuery) =
-            QueryContainer.Script value
+        let script (value: Types.ScriptQuery) =
+            Types.QueryContainer.Script value
 
-        let scriptScore (value: CoreTypes.ScriptScoreQuery) =
-            QueryContainer.ScriptScore value
+        let scriptScore (value: Types.ScriptScoreQuery) =
+            Types.QueryContainer.ScriptScore value
 
-        let semantic (value: CoreTypes.SemanticQuery) =
-            QueryContainer.Semantic value
+        let semantic (value: Types.SemanticQuery) =
+            Types.QueryContainer.Semantic value
 
-        let shape (value: CoreTypes.ShapeQuery) =
-            QueryContainer.Shape value
+        let shape (value: Types.ShapeQuery) =
+            Types.QueryContainer.Shape value
 
-        let simpleQueryString (value: CoreTypes.SimpleQueryStringQuery) =
-            QueryContainer.SimpleQueryString value
+        let simpleQueryString (value: Types.SimpleQueryStringQuery) =
+            Types.QueryContainer.SimpleQueryString value
 
-        let spanContaining (value: CoreTypes.SpanContainingQuery) =
-            QueryContainer.SpanContaining value
+        let spanContaining (value: Types.SpanContainingQuery) =
+            Types.QueryContainer.SpanContaining value
 
-        let spanFieldMasking (value: CoreTypes.SpanFieldMaskingQuery) =
-            QueryContainer.SpanFieldMasking value
+        let spanFieldMasking (value: Types.SpanFieldMaskingQuery) =
+            Types.QueryContainer.SpanFieldMasking value
 
-        let spanFirst (value: CoreTypes.SpanFirstQuery) =
-            QueryContainer.SpanFirst value
+        let spanFirst (value: Types.SpanFirstQuery) =
+            Types.QueryContainer.SpanFirst value
 
-        let spanMulti (value: CoreTypes.SpanMultiTermQuery) =
-            QueryContainer.SpanMulti value
+        let spanMulti (value: Types.SpanMultiTermQuery) =
+            Types.QueryContainer.SpanMulti value
 
-        let spanNear (value: CoreTypes.SpanNearQuery) =
-            QueryContainer.SpanNear value
+        let spanNear (value: Types.SpanNearQuery) =
+            Types.QueryContainer.SpanNear value
 
-        let spanNot (value: CoreTypes.SpanNotQuery) =
-            QueryContainer.SpanNot value
+        let spanNot (value: Types.SpanNotQuery) =
+            Types.QueryContainer.SpanNot value
 
-        let spanOr (value: CoreTypes.SpanOrQuery) =
-            QueryContainer.SpanOr value
+        let spanOr (value: Types.SpanOrQuery) =
+            Types.QueryContainer.SpanOr value
 
-        let spanTerm (field: string) (value: CoreTypes.SpanTermQuery) =
-            QueryContainer.SpanTerm (field, value)
+        let spanTerm (field: string) (value: Types.SpanTermQuery) =
+            Types.QueryContainer.SpanTerm (field, value)
 
-        let spanWithin (value: CoreTypes.SpanWithinQuery) =
-            QueryContainer.SpanWithin value
+        let spanWithin (value: Types.SpanWithinQuery) =
+            Types.QueryContainer.SpanWithin value
 
-        let sparseVector (value: CoreTypes.SparseVectorQuery) =
-            QueryContainer.SparseVector value
+        let sparseVector (value: Types.SparseVectorQuery) =
+            Types.QueryContainer.SparseVector value
 
-        let term (field: string) (value: CoreTypes.TermQuery) =
-            QueryContainer.Term (field, value)
+        let term (field: string) (value: Types.TermQuery) =
+            Types.QueryContainer.Term (field, value)
 
-        let terms (value: CoreTypes.TermsQuery) =
-            QueryContainer.Terms value
+        let terms (value: Types.TermsQuery) =
+            Types.QueryContainer.Terms value
 
-        let termsSet (field: string) (value: CoreTypes.TermsSetQuery) =
-            QueryContainer.TermsSet (field, value)
+        let termsSet (field: string) (value: Types.TermsSetQuery) =
+            Types.QueryContainer.TermsSet (field, value)
 
-        let textExpansion (field: string) (value: CoreTypes.TextExpansionQuery) =
-            QueryContainer.TextExpansion (field, value)
+        let textExpansion (field: string) (value: Types.TextExpansionQuery) =
+            Types.QueryContainer.TextExpansion (field, value)
 
-        let weightedTokens (field: string) (value: CoreTypes.WeightedTokensQuery) =
-            QueryContainer.WeightedTokens (field, value)
+        let weightedTokens (field: string) (value: Types.WeightedTokensQuery) =
+            Types.QueryContainer.WeightedTokens (field, value)
 
-        let wildcard (field: string) (value: CoreTypes.WildcardQuery) =
-            QueryContainer.Wildcard (field, value)
+        let wildcard (field: string) (value: Types.WildcardQuery) =
+            Types.QueryContainer.Wildcard (field, value)
 
-        let wrapper (value: CoreTypes.WrapperQuery) =
-            QueryContainer.Wrapper value
+        let wrapper (value: Types.WrapperQuery) =
+            Types.QueryContainer.Wrapper value
 
-        let type' (value: CoreTypes.TypeQuery) =
-            QueryContainer.Type value
+        let type' (value: Types.TypeQuery) =
+            Types.QueryContainer.Type value
 
     type QueryStringQueryBuilder() =
-        member _.Yield(_: unit) : QueryStringQuery =
+        member _.Yield(_: unit) : Types.QueryStringQuery =
             {
                 AllowLeadingWildcard = None
                 Analyzer = None
@@ -1666,158 +1639,126 @@ module TypesQueryDslBuilders =
             }
 
         [<CustomOperation("allowLeadingWildcard")>]
-        member _.AllowLeadingWildcard(state: QueryStringQuery, value: bool) =
+        member _.AllowLeadingWildcard(state: Types.QueryStringQuery, value: bool) =
             { state with AllowLeadingWildcard = Some value }
 
         [<CustomOperation("analyzer")>]
-        member _.Analyzer(state: QueryStringQuery, value: string) =
+        member _.Analyzer(state: Types.QueryStringQuery, value: string) =
             { state with Analyzer = Some value }
 
         [<CustomOperation("analyzeWildcard")>]
-        member _.AnalyzeWildcard(state: QueryStringQuery, value: bool) =
+        member _.AnalyzeWildcard(state: Types.QueryStringQuery, value: bool) =
             { state with AnalyzeWildcard = Some value }
 
         [<CustomOperation("autoGenerateSynonymsPhraseQuery")>]
-        member _.AutoGenerateSynonymsPhraseQuery(state: QueryStringQuery, value: bool) =
+        member _.AutoGenerateSynonymsPhraseQuery(state: Types.QueryStringQuery, value: bool) =
             { state with AutoGenerateSynonymsPhraseQuery = Some value }
 
         [<CustomOperation("defaultField")>]
-        member _.DefaultField(state: QueryStringQuery, value: CoreTypes.Field) =
+        member _.DefaultField(state: Types.QueryStringQuery, value: Types.Field) =
             { state with DefaultField = Some value }
 
         [<CustomOperation("defaultOperator")>]
-        member _.DefaultOperator(state: QueryStringQuery, value: CoreTypes.Operator) =
+        member _.DefaultOperator(state: Types.QueryStringQuery, value: Types.Operator) =
             { state with DefaultOperator = Some value }
 
         [<CustomOperation("enablePositionIncrements")>]
-        member _.EnablePositionIncrements(state: QueryStringQuery, value: bool) =
+        member _.EnablePositionIncrements(state: Types.QueryStringQuery, value: bool) =
             { state with EnablePositionIncrements = Some value }
 
         [<CustomOperation("escape")>]
-        member _.Escape(state: QueryStringQuery, value: bool) =
+        member _.Escape(state: Types.QueryStringQuery, value: bool) =
             { state with Escape = Some value }
 
         [<CustomOperation("fields")>]
-        member _.Fields(state: QueryStringQuery, value: CoreTypes.Field list) =
+        member _.Fields(state: Types.QueryStringQuery, value: Types.Field list) =
             { state with Fields = Some value }
 
         [<CustomOperation("fuzziness")>]
-        member _.Fuzziness(state: QueryStringQuery, value: CoreTypes.Fuzziness) =
+        member _.Fuzziness(state: Types.QueryStringQuery, value: Types.Fuzziness) =
             { state with Fuzziness = Some value }
 
         [<CustomOperation("fuzzyMaxExpansions")>]
-        member _.FuzzyMaxExpansions(state: QueryStringQuery, value: CoreTypes.Integer) =
+        member _.FuzzyMaxExpansions(state: Types.QueryStringQuery, value: Types.Integer) =
             { state with FuzzyMaxExpansions = Some value }
 
         [<CustomOperation("fuzzyPrefixLength")>]
-        member _.FuzzyPrefixLength(state: QueryStringQuery, value: CoreTypes.Integer) =
+        member _.FuzzyPrefixLength(state: Types.QueryStringQuery, value: Types.Integer) =
             { state with FuzzyPrefixLength = Some value }
 
         [<CustomOperation("fuzzyRewrite")>]
-        member _.FuzzyRewrite(state: QueryStringQuery, value: CoreTypes.MultiTermQueryRewrite) =
+        member _.FuzzyRewrite(state: Types.QueryStringQuery, value: Types.MultiTermQueryRewrite) =
             { state with FuzzyRewrite = Some value }
 
         [<CustomOperation("fuzzyTranspositions")>]
-        member _.FuzzyTranspositions(state: QueryStringQuery, value: bool) =
+        member _.FuzzyTranspositions(state: Types.QueryStringQuery, value: bool) =
             { state with FuzzyTranspositions = Some value }
 
         [<CustomOperation("lenient")>]
-        member _.Lenient(state: QueryStringQuery, value: bool) =
+        member _.Lenient(state: Types.QueryStringQuery, value: bool) =
             { state with Lenient = Some value }
 
         [<CustomOperation("maxDeterminizedStates")>]
-        member _.MaxDeterminizedStates(state: QueryStringQuery, value: CoreTypes.Integer) =
+        member _.MaxDeterminizedStates(state: Types.QueryStringQuery, value: Types.Integer) =
             { state with MaxDeterminizedStates = Some value }
 
         [<CustomOperation("minimumShouldMatch")>]
-        member _.MinimumShouldMatch(state: QueryStringQuery, value: CoreTypes.MinimumShouldMatch) =
+        member _.MinimumShouldMatch(state: Types.QueryStringQuery, value: Types.MinimumShouldMatch) =
             { state with MinimumShouldMatch = Some value }
 
         [<CustomOperation("phraseSlop")>]
-        member _.PhraseSlop(state: QueryStringQuery, value: CoreTypes.Double) =
+        member _.PhraseSlop(state: Types.QueryStringQuery, value: Types.Double) =
             { state with PhraseSlop = Some value }
 
         [<CustomOperation("query")>]
-        member _.Query(state: QueryStringQuery, value: string) =
+        member _.Query(state: Types.QueryStringQuery, value: string) =
             { state with Query = value }
 
         [<CustomOperation("quoteAnalyzer")>]
-        member _.QuoteAnalyzer(state: QueryStringQuery, value: string) =
+        member _.QuoteAnalyzer(state: Types.QueryStringQuery, value: string) =
             { state with QuoteAnalyzer = Some value }
 
         [<CustomOperation("quoteFieldSuffix")>]
-        member _.QuoteFieldSuffix(state: QueryStringQuery, value: string) =
+        member _.QuoteFieldSuffix(state: Types.QueryStringQuery, value: string) =
             { state with QuoteFieldSuffix = Some value }
 
         [<CustomOperation("rewrite")>]
-        member _.Rewrite(state: QueryStringQuery, value: CoreTypes.MultiTermQueryRewrite) =
+        member _.Rewrite(state: Types.QueryStringQuery, value: Types.MultiTermQueryRewrite) =
             { state with Rewrite = Some value }
 
         [<CustomOperation("tieBreaker")>]
-        member _.TieBreaker(state: QueryStringQuery, value: CoreTypes.Double) =
+        member _.TieBreaker(state: Types.QueryStringQuery, value: Types.Double) =
             { state with TieBreaker = Some value }
 
         [<CustomOperation("timeZone")>]
-        member _.TimeZone(state: QueryStringQuery, value: CoreTypes.TimeZone) =
+        member _.TimeZone(state: Types.QueryStringQuery, value: Types.TimeZone) =
             { state with TimeZone = Some value }
 
         [<CustomOperation("type'")>]
-        member _.Type(state: QueryStringQuery, value: CoreTypes.TextQueryType) =
+        member _.Type(state: Types.QueryStringQuery, value: Types.TextQueryType) =
             { state with Type = Some value }
 
     let queryStringQuery = QueryStringQueryBuilder()
 
     type RandomScoreFunctionBuilder() =
-        member _.Yield(_: unit) : RandomScoreFunction =
+        member _.Yield(_: unit) : Types.RandomScoreFunction =
             {
                 Field = None
                 Seed = None
             }
 
         [<CustomOperation("field")>]
-        member _.Field(state: RandomScoreFunction, value: CoreTypes.Field) =
+        member _.Field(state: Types.RandomScoreFunction, value: Types.Field) =
             { state with Field = Some value }
 
         [<CustomOperation("seed")>]
-        member _.Seed(state: RandomScoreFunction, value: System.Text.Json.JsonElement) =
+        member _.Seed(state: Types.RandomScoreFunction, value: System.Text.Json.JsonElement) =
             { state with Seed = Some value }
 
     let randomScoreFunction = RandomScoreFunctionBuilder()
 
-    type RangeQueryBaseBuilder() =
-        member _.Yield(_: unit) : RangeQueryBase =
-            {
-                Relation = None
-                Gt = None
-                Gte = None
-                Lt = None
-                Lte = None
-            }
-
-        [<CustomOperation("relation")>]
-        member _.Relation(state: RangeQueryBase, value: CoreTypes.RangeRelation) =
-            { state with Relation = Some value }
-
-        [<CustomOperation("gt")>]
-        member _.Gt(state: RangeQueryBase, value: 't) =
-            { state with Gt = Some value }
-
-        [<CustomOperation("gte")>]
-        member _.Gte(state: RangeQueryBase, value: 't) =
-            { state with Gte = Some value }
-
-        [<CustomOperation("lt")>]
-        member _.Lt(state: RangeQueryBase, value: 't) =
-            { state with Lt = Some value }
-
-        [<CustomOperation("lte")>]
-        member _.Lte(state: RangeQueryBase, value: 't) =
-            { state with Lte = Some value }
-
-    let rangeQueryBase = RangeQueryBaseBuilder()
-
     type RankFeatureQueryBuilder() =
-        member _.Yield(_: unit) : RankFeatureQuery =
+        member _.Yield(_: unit) : Types.RankFeatureQuery =
             {
                 Field = Unchecked.defaultof<_>
                 Saturation = None
@@ -1827,29 +1768,29 @@ module TypesQueryDslBuilders =
             }
 
         [<CustomOperation("field")>]
-        member _.Field(state: RankFeatureQuery, value: CoreTypes.Field) =
+        member _.Field(state: Types.RankFeatureQuery, value: Types.Field) =
             { state with Field = value }
 
         [<CustomOperation("saturation")>]
-        member _.Saturation(state: RankFeatureQuery, value: CoreTypes.RankFeatureFunctionSaturation) =
+        member _.Saturation(state: Types.RankFeatureQuery, value: Types.RankFeatureFunctionSaturation) =
             { state with Saturation = Some value }
 
         [<CustomOperation("log")>]
-        member _.Log(state: RankFeatureQuery, value: CoreTypes.RankFeatureFunctionLogarithm) =
+        member _.Log(state: Types.RankFeatureQuery, value: Types.RankFeatureFunctionLogarithm) =
             { state with Log = Some value }
 
         [<CustomOperation("linear")>]
-        member _.Linear(state: RankFeatureQuery, value: CoreTypes.RankFeatureFunctionLinear) =
+        member _.Linear(state: Types.RankFeatureQuery, value: Types.RankFeatureFunctionLinear) =
             { state with Linear = Some value }
 
         [<CustomOperation("sigmoid")>]
-        member _.Sigmoid(state: RankFeatureQuery, value: CoreTypes.RankFeatureFunctionSigmoid) =
+        member _.Sigmoid(state: Types.RankFeatureQuery, value: Types.RankFeatureFunctionSigmoid) =
             { state with Sigmoid = Some value }
 
     let rankFeatureQuery = RankFeatureQueryBuilder()
 
     type RegexpQueryBuilder() =
-        member _.Yield(_: unit) : RegexpQuery =
+        member _.Yield(_: unit) : Types.RegexpQuery =
             {
                 CaseInsensitive = None
                 Flags = None
@@ -1859,28 +1800,28 @@ module TypesQueryDslBuilders =
             }
 
         [<CustomOperation("caseInsensitive")>]
-        member _.CaseInsensitive(state: RegexpQuery, value: bool) =
+        member _.CaseInsensitive(state: Types.RegexpQuery, value: bool) =
             { state with CaseInsensitive = Some value }
 
         [<CustomOperation("flags")>]
-        member _.Flags(state: RegexpQuery, value: string) =
+        member _.Flags(state: Types.RegexpQuery, value: string) =
             { state with Flags = Some value }
 
         [<CustomOperation("maxDeterminizedStates")>]
-        member _.MaxDeterminizedStates(state: RegexpQuery, value: CoreTypes.Integer) =
+        member _.MaxDeterminizedStates(state: Types.RegexpQuery, value: Types.Integer) =
             { state with MaxDeterminizedStates = Some value }
 
         [<CustomOperation("rewrite")>]
-        member _.Rewrite(state: RegexpQuery, value: CoreTypes.MultiTermQueryRewrite) =
+        member _.Rewrite(state: Types.RegexpQuery, value: Types.MultiTermQueryRewrite) =
             { state with Rewrite = Some value }
 
         [<CustomOperation("value")>]
-        member _.Value(state: RegexpQuery, value: string) =
+        member _.Value(state: Types.RegexpQuery, value: string) =
             { state with Value = value }
 
     let regexpQuery = RegexpQueryBuilder()
 
-    let ofValue (value: string) : RegexpQuery =
+    let ofValue (value: string) : Types.RegexpQuery =
         {
             CaseInsensitive = None
             Flags = None
@@ -1890,7 +1831,7 @@ module TypesQueryDslBuilders =
         }
 
     type RuleQueryBuilder() =
-        member _.Yield(_: unit) : RuleQuery =
+        member _.Yield(_: unit) : Types.RuleQuery =
             {
                 Organic = Unchecked.defaultof<_>
                 RulesetIds = None
@@ -1899,25 +1840,25 @@ module TypesQueryDslBuilders =
             }
 
         [<CustomOperation("organic")>]
-        member _.Organic(state: RuleQuery, value: CoreTypes.QueryContainer) =
+        member _.Organic(state: Types.RuleQuery, value: Types.QueryContainer) =
             { state with Organic = value }
 
         [<CustomOperation("rulesetIds")>]
-        member _.RulesetIds(state: RuleQuery, value: System.Text.Json.JsonElement) =
+        member _.RulesetIds(state: Types.RuleQuery, value: System.Text.Json.JsonElement) =
             { state with RulesetIds = Some value }
 
         [<CustomOperation("rulesetId")>]
-        member _.RulesetId(state: RuleQuery, value: string) =
+        member _.RulesetId(state: Types.RuleQuery, value: string) =
             { state with RulesetId = Some value }
 
         [<CustomOperation("matchCriteria")>]
-        member _.MatchCriteria(state: RuleQuery, value: System.Text.Json.JsonElement) =
+        member _.MatchCriteria(state: Types.RuleQuery, value: System.Text.Json.JsonElement) =
             { state with MatchCriteria = value }
 
     let ruleQuery = RuleQueryBuilder()
 
     type ShapeFieldQueryBuilder() =
-        member _.Yield(_: unit) : ShapeFieldQuery =
+        member _.Yield(_: unit) : Types.ShapeFieldQuery =
             {
                 IndexedShape = None
                 Relation = None
@@ -1925,21 +1866,21 @@ module TypesQueryDslBuilders =
             }
 
         [<CustomOperation("indexedShape")>]
-        member _.IndexedShape(state: ShapeFieldQuery, value: CoreTypes.FieldLookup) =
+        member _.IndexedShape(state: Types.ShapeFieldQuery, value: Types.FieldLookup) =
             { state with IndexedShape = Some value }
 
         [<CustomOperation("relation")>]
-        member _.Relation(state: ShapeFieldQuery, value: CoreTypes.GeoShapeRelation) =
+        member _.Relation(state: Types.ShapeFieldQuery, value: Types.GeoShapeRelation) =
             { state with Relation = Some value }
 
         [<CustomOperation("shape")>]
-        member _.Shape(state: ShapeFieldQuery, value: CoreTypes.GeoShape) =
+        member _.Shape(state: Types.ShapeFieldQuery, value: Types.GeoShape) =
             { state with Shape = Some value }
 
     let shapeFieldQuery = ShapeFieldQueryBuilder()
 
     type SimpleQueryStringQueryBuilder() =
-        member _.Yield(_: unit) : SimpleQueryStringQuery =
+        member _.Yield(_: unit) : Types.SimpleQueryStringQuery =
             {
                 Analyzer = None
                 AnalyzeWildcard = None
@@ -1957,61 +1898,61 @@ module TypesQueryDslBuilders =
             }
 
         [<CustomOperation("analyzer")>]
-        member _.Analyzer(state: SimpleQueryStringQuery, value: string) =
+        member _.Analyzer(state: Types.SimpleQueryStringQuery, value: string) =
             { state with Analyzer = Some value }
 
         [<CustomOperation("analyzeWildcard")>]
-        member _.AnalyzeWildcard(state: SimpleQueryStringQuery, value: bool) =
+        member _.AnalyzeWildcard(state: Types.SimpleQueryStringQuery, value: bool) =
             { state with AnalyzeWildcard = Some value }
 
         [<CustomOperation("autoGenerateSynonymsPhraseQuery")>]
-        member _.AutoGenerateSynonymsPhraseQuery(state: SimpleQueryStringQuery, value: bool) =
+        member _.AutoGenerateSynonymsPhraseQuery(state: Types.SimpleQueryStringQuery, value: bool) =
             { state with AutoGenerateSynonymsPhraseQuery = Some value }
 
         [<CustomOperation("defaultOperator")>]
-        member _.DefaultOperator(state: SimpleQueryStringQuery, value: CoreTypes.Operator) =
+        member _.DefaultOperator(state: Types.SimpleQueryStringQuery, value: Types.Operator) =
             { state with DefaultOperator = Some value }
 
         [<CustomOperation("fields")>]
-        member _.Fields(state: SimpleQueryStringQuery, value: CoreTypes.Field list) =
+        member _.Fields(state: Types.SimpleQueryStringQuery, value: Types.Field list) =
             { state with Fields = Some value }
 
         [<CustomOperation("flags")>]
-        member _.Flags(state: SimpleQueryStringQuery, value: CoreTypes.SimpleQueryStringFlags) =
+        member _.Flags(state: Types.SimpleQueryStringQuery, value: Types.SimpleQueryStringFlags) =
             { state with Flags = Some value }
 
         [<CustomOperation("fuzzyMaxExpansions")>]
-        member _.FuzzyMaxExpansions(state: SimpleQueryStringQuery, value: CoreTypes.Integer) =
+        member _.FuzzyMaxExpansions(state: Types.SimpleQueryStringQuery, value: Types.Integer) =
             { state with FuzzyMaxExpansions = Some value }
 
         [<CustomOperation("fuzzyPrefixLength")>]
-        member _.FuzzyPrefixLength(state: SimpleQueryStringQuery, value: CoreTypes.Integer) =
+        member _.FuzzyPrefixLength(state: Types.SimpleQueryStringQuery, value: Types.Integer) =
             { state with FuzzyPrefixLength = Some value }
 
         [<CustomOperation("fuzzyTranspositions")>]
-        member _.FuzzyTranspositions(state: SimpleQueryStringQuery, value: bool) =
+        member _.FuzzyTranspositions(state: Types.SimpleQueryStringQuery, value: bool) =
             { state with FuzzyTranspositions = Some value }
 
         [<CustomOperation("lenient")>]
-        member _.Lenient(state: SimpleQueryStringQuery, value: bool) =
+        member _.Lenient(state: Types.SimpleQueryStringQuery, value: bool) =
             { state with Lenient = Some value }
 
         [<CustomOperation("minimumShouldMatch")>]
-        member _.MinimumShouldMatch(state: SimpleQueryStringQuery, value: CoreTypes.MinimumShouldMatch) =
+        member _.MinimumShouldMatch(state: Types.SimpleQueryStringQuery, value: Types.MinimumShouldMatch) =
             { state with MinimumShouldMatch = Some value }
 
         [<CustomOperation("query")>]
-        member _.Query(state: SimpleQueryStringQuery, value: string) =
+        member _.Query(state: Types.SimpleQueryStringQuery, value: string) =
             { state with Query = value }
 
         [<CustomOperation("quoteFieldSuffix")>]
-        member _.QuoteFieldSuffix(state: SimpleQueryStringQuery, value: string) =
+        member _.QuoteFieldSuffix(state: Types.SimpleQueryStringQuery, value: string) =
             { state with QuoteFieldSuffix = Some value }
 
     let simpleQueryStringQuery = SimpleQueryStringQueryBuilder()
 
     type SpanNearQueryBuilder() =
-        member _.Yield(_: unit) : SpanNearQuery =
+        member _.Yield(_: unit) : Types.SpanNearQuery =
             {
                 Clauses = Unchecked.defaultof<_>
                 InOrder = None
@@ -2019,21 +1960,21 @@ module TypesQueryDslBuilders =
             }
 
         [<CustomOperation("clauses")>]
-        member _.Clauses(state: SpanNearQuery, value: CoreTypes.SpanQuery list) =
+        member _.Clauses(state: Types.SpanNearQuery, value: Types.SpanQuery list) =
             { state with Clauses = value }
 
         [<CustomOperation("inOrder")>]
-        member _.InOrder(state: SpanNearQuery, value: bool) =
+        member _.InOrder(state: Types.SpanNearQuery, value: bool) =
             { state with InOrder = Some value }
 
         [<CustomOperation("slop")>]
-        member _.Slop(state: SpanNearQuery, value: CoreTypes.Integer) =
+        member _.Slop(state: Types.SpanNearQuery, value: Types.Integer) =
             { state with Slop = Some value }
 
     let spanNearQuery = SpanNearQueryBuilder()
 
     type SpanNotQueryBuilder() =
-        member _.Yield(_: unit) : SpanNotQuery =
+        member _.Yield(_: unit) : Types.SpanNotQuery =
             {
                 Dist = None
                 Exclude = Unchecked.defaultof<_>
@@ -2043,69 +1984,69 @@ module TypesQueryDslBuilders =
             }
 
         [<CustomOperation("dist")>]
-        member _.Dist(state: SpanNotQuery, value: CoreTypes.Integer) =
+        member _.Dist(state: Types.SpanNotQuery, value: Types.Integer) =
             { state with Dist = Some value }
 
         [<CustomOperation("exclude")>]
-        member _.Exclude(state: SpanNotQuery, value: CoreTypes.SpanQuery) =
+        member _.Exclude(state: Types.SpanNotQuery, value: Types.SpanQuery) =
             { state with Exclude = value }
 
         [<CustomOperation("include")>]
-        member _.Include(state: SpanNotQuery, value: CoreTypes.SpanQuery) =
+        member _.Include(state: Types.SpanNotQuery, value: Types.SpanQuery) =
             { state with Include = value }
 
         [<CustomOperation("post")>]
-        member _.Post(state: SpanNotQuery, value: CoreTypes.Integer) =
+        member _.Post(state: Types.SpanNotQuery, value: Types.Integer) =
             { state with Post = Some value }
 
         [<CustomOperation("pre")>]
-        member _.Pre(state: SpanNotQuery, value: CoreTypes.Integer) =
+        member _.Pre(state: Types.SpanNotQuery, value: Types.Integer) =
             { state with Pre = Some value }
 
     let spanNotQuery = SpanNotQueryBuilder()
 
     module SpanQuery =
 
-        let spanContaining (value: CoreTypes.SpanContainingQuery) =
-            SpanQuery.SpanContaining value
+        let spanContaining (value: Types.SpanContainingQuery) =
+            Types.SpanQuery.SpanContaining value
 
-        let spanFieldMasking (value: CoreTypes.SpanFieldMaskingQuery) =
-            SpanQuery.SpanFieldMasking value
+        let spanFieldMasking (value: Types.SpanFieldMaskingQuery) =
+            Types.SpanQuery.SpanFieldMasking value
 
-        let spanFirst (value: CoreTypes.SpanFirstQuery) =
-            SpanQuery.SpanFirst value
+        let spanFirst (value: Types.SpanFirstQuery) =
+            Types.SpanQuery.SpanFirst value
 
-        let spanGap (value: CoreTypes.SpanGapQuery) =
-            SpanQuery.SpanGap value
+        let spanGap (value: Types.SpanGapQuery) =
+            Types.SpanQuery.SpanGap value
 
-        let spanMulti (value: CoreTypes.SpanMultiTermQuery) =
-            SpanQuery.SpanMulti value
+        let spanMulti (value: Types.SpanMultiTermQuery) =
+            Types.SpanQuery.SpanMulti value
 
-        let spanNear (value: CoreTypes.SpanNearQuery) =
-            SpanQuery.SpanNear value
+        let spanNear (value: Types.SpanNearQuery) =
+            Types.SpanQuery.SpanNear value
 
-        let spanNot (value: CoreTypes.SpanNotQuery) =
-            SpanQuery.SpanNot value
+        let spanNot (value: Types.SpanNotQuery) =
+            Types.SpanQuery.SpanNot value
 
-        let spanOr (value: CoreTypes.SpanOrQuery) =
-            SpanQuery.SpanOr value
+        let spanOr (value: Types.SpanOrQuery) =
+            Types.SpanQuery.SpanOr value
 
-        let spanTerm (field: string) (value: CoreTypes.SpanTermQuery) =
-            SpanQuery.SpanTerm (field, value)
+        let spanTerm (field: string) (value: Types.SpanTermQuery) =
+            Types.SpanQuery.SpanTerm (field, value)
 
-        let spanWithin (value: CoreTypes.SpanWithinQuery) =
-            SpanQuery.SpanWithin value
+        let spanWithin (value: Types.SpanWithinQuery) =
+            Types.SpanQuery.SpanWithin value
 
     module SparseVectorQuery =
 
-        let queryVector (value: Map<string, CoreTypes.Float>) =
-            SparseVectorQuery.QueryVector value
+        let queryVector (value: Map<string, Types.Float>) =
+            Types.SparseVectorQuery.QueryVector value
 
-        let inferenceId (value: CoreTypes.Id) =
-            SparseVectorQuery.InferenceId value
+        let inferenceId (value: Types.Id) =
+            Types.SparseVectorQuery.InferenceId value
 
     type TermsSetQueryBuilder() =
-        member _.Yield(_: unit) : TermsSetQuery =
+        member _.Yield(_: unit) : Types.TermsSetQuery =
             {
                 MinimumShouldMatch = None
                 MinimumShouldMatchField = None
@@ -2114,42 +2055,42 @@ module TypesQueryDslBuilders =
             }
 
         [<CustomOperation("minimumShouldMatch")>]
-        member _.MinimumShouldMatch(state: TermsSetQuery, value: CoreTypes.MinimumShouldMatch) =
+        member _.MinimumShouldMatch(state: Types.TermsSetQuery, value: Types.MinimumShouldMatch) =
             { state with MinimumShouldMatch = Some value }
 
         [<CustomOperation("minimumShouldMatchField")>]
-        member _.MinimumShouldMatchField(state: TermsSetQuery, value: CoreTypes.Field) =
+        member _.MinimumShouldMatchField(state: Types.TermsSetQuery, value: Types.Field) =
             { state with MinimumShouldMatchField = Some value }
 
         [<CustomOperation("minimumShouldMatchScript")>]
-        member _.MinimumShouldMatchScript(state: TermsSetQuery, value: CoreTypes.Script) =
+        member _.MinimumShouldMatchScript(state: Types.TermsSetQuery, value: Types.Script) =
             { state with MinimumShouldMatchScript = Some value }
 
         [<CustomOperation("terms")>]
-        member _.Terms(state: TermsSetQuery, value: CoreTypes.FieldValue list) =
+        member _.Terms(state: Types.TermsSetQuery, value: Types.FieldValue list) =
             { state with Terms = value }
 
     let termsSetQuery = TermsSetQueryBuilder()
 
     type UntypedRangeQueryBuilder() =
-        member _.Yield(_: unit) : UntypedRangeQuery =
+        member _.Yield(_: unit) : Types.UntypedRangeQuery =
             {
                 Format = None
                 TimeZone = None
             }
 
         [<CustomOperation("format")>]
-        member _.Format(state: UntypedRangeQuery, value: CoreTypes.DateFormat) =
+        member _.Format(state: Types.UntypedRangeQuery, value: Types.DateFormat) =
             { state with Format = Some value }
 
         [<CustomOperation("timeZone")>]
-        member _.TimeZone(state: UntypedRangeQuery, value: CoreTypes.TimeZone) =
+        member _.TimeZone(state: Types.UntypedRangeQuery, value: Types.TimeZone) =
             { state with TimeZone = Some value }
 
     let untypedRangeQuery = UntypedRangeQueryBuilder()
 
     type WildcardQueryBuilder() =
-        member _.Yield(_: unit) : WildcardQuery =
+        member _.Yield(_: unit) : Types.WildcardQuery =
             {
                 CaseInsensitive = None
                 Rewrite = None
@@ -2158,24 +2099,24 @@ module TypesQueryDslBuilders =
             }
 
         [<CustomOperation("caseInsensitive")>]
-        member _.CaseInsensitive(state: WildcardQuery, value: bool) =
+        member _.CaseInsensitive(state: Types.WildcardQuery, value: bool) =
             { state with CaseInsensitive = Some value }
 
         [<CustomOperation("rewrite")>]
-        member _.Rewrite(state: WildcardQuery, value: CoreTypes.MultiTermQueryRewrite) =
+        member _.Rewrite(state: Types.WildcardQuery, value: Types.MultiTermQueryRewrite) =
             { state with Rewrite = Some value }
 
         [<CustomOperation("value")>]
-        member _.Value(state: WildcardQuery, value: string) =
+        member _.Value(state: Types.WildcardQuery, value: string) =
             { state with Value = Some value }
 
         [<CustomOperation("wildcard")>]
-        member _.Wildcard(state: WildcardQuery, value: string) =
+        member _.Wildcard(state: Types.WildcardQuery, value: string) =
             { state with Wildcard = Some value }
 
     let wildcardQuery = WildcardQueryBuilder()
 
-    let ofValue (value: string) : WildcardQuery =
+    let ofValue (value: string) : Types.WildcardQuery =
         {
             CaseInsensitive = None
             Rewrite = None
