@@ -1,9 +1,0 @@
-{
-  "query": {
-    "match": {
-      "name": {
-        "query": "NEST"
-      }
-    }
-  }
-}

@@ -1,9 +1,0 @@
-{
-  aggregations: {
-    my-terms-agg: {
-      terms: {
-        field: name
-      }
-    }
-  }
-}

@@ -1,7 +1,0 @@
-{
-  match: {
-    description: {
-      query: testing
-    }
-  }
-}
