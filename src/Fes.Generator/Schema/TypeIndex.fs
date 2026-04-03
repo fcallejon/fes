@@ -33,4 +33,11 @@ let tryResolve (index: TypeIndex) (name: TypeName) : TypeDefinition option =
 let resolve (index: TypeIndex) (name: TypeName) : TypeDefinition =
     match tryResolve index name with
     | Some t -> t
-    | None -> failwith $"Unresolvable type reference: {name.Namespace}.{name.Name}"
+    | None ->
+        eprintfn $"Warning: unresolvable type reference: {name.Namespace}.{name.Name}"
+        // Return a dummy empty interface so generation can continue
+        TypeDefinition.Interface {
+            Name = name; Properties = []; Inherits = None
+            Generics = []; Variants = None; ShortcutProperty = None
+            Behaviours = []; Description = None
+        }

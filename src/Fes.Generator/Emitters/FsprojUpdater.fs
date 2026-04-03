@@ -45,10 +45,14 @@ let updateFsproj (fsprojPath: string) (generatedDir: string) =
     sb.AppendLine("        <!-- Generated converters -->") |> ignore
     for f in converterFiles do
         sb.AppendLine($"        <Compile Include=\"{f}\"/>") |> ignore
-    sb.AppendLine("        <!-- Core library files (after types/converters) -->") |> ignore
+    sb.AppendLine("    </ItemGroup>") |> ignore
+    sb.AppendLine("    <ItemGroup>") |> ignore
+    sb.AppendLine("        <!-- Core library files (after types/converters, before builders) -->") |> ignore
     sb.AppendLine("        <Compile Include=\"Json.fs\"/>") |> ignore
     sb.AppendLine("        <Compile Include=\"Http.fs\"/>") |> ignore
     sb.AppendLine("        <Compile Include=\"Transport.fs\"/>") |> ignore
+    sb.AppendLine("    </ItemGroup>") |> ignore
+    sb.AppendLine("    <ItemGroup>") |> ignore
     sb.AppendLine("        <!-- Generated builders -->") |> ignore
     for f in builderFiles do
         sb.AppendLine($"        <Compile Include=\"{f}\"/>") |> ignore

@@ -43,9 +43,6 @@ jobs:
       - name: Build
         run: dotnet build --no-restore
 
-      - name: Run Tests
-        run: dotnet test --no-build --no-restore
-
       - name: Verify generator output is up to date
         run: |
           dotnet run --project src/Fes.Generator -- \
@@ -59,3 +56,6 @@ jobs:
             exit 1
           fi
           echo "Generated files are up to date."
+
+      - name: Run Tests
+        run: dotnet test --no-build --no-restore
