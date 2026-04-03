@@ -1,1 +1,1 @@
-{"r":"23942574785","m":"2026-04","mi":"aw_mi2604","n":"56 open PRs. OOM build (exit 137). #183 fixes teeOk. #120 fixes StackTrace. My PRs: TaskResult generic 'e types, ElasticsearchStackTrace rename."}
+{"r":"23948202964","m":"2026-04","mi":"aw_mi2604","n":"10 open Repo Assist PRs. Build OOM (exit 137). #183 fixes teeOk/teeError. #176 core tests (updated: added mapIn/mapOut/bindIn/bindOut/after, fixed skip PR ref #153->#183). #188 StackTrace rename. #187 generic error types."}
