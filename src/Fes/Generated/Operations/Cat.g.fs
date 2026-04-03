@@ -382,7 +382,7 @@ module CatOperations =
                 let path = $"/_cat/fielddata/{req.Fields}"
                 let queryParams =
                     [
-                        req.Fields |> Option.map (fun v -> "fields", Fes.Http.toQueryValue v)
+                        req.queryFields |> Option.map (fun v -> "fields", Fes.Http.toQueryValue v)
                         req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
                         req.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
                     ] |> List.choose id
@@ -411,8 +411,8 @@ module CatOperations =
         member _.Fields(state: CatFielddataRequest, value: Types.Fields) =
             { state with Fields = value }
 
-        [<CustomOperation("fields")>]
-        member _.Fields(state: CatFielddataRequest, value: Types.Fields) =
+        [<CustomOperation("queryFields")>]
+        member _.QueryFields(state: CatFielddataRequest, value: Types.Fields) =
             { state with queryFields = Some value }
 
         [<CustomOperation("h")>]
@@ -505,13 +505,6 @@ module CatOperations =
             with ex -> Result.Error ex
 
     type CatHelpResponse = System.Text.Json.JsonElement
-
-    type CatHelpRequestBuilder() =
-        member _.Yield(_: unit) : CatHelpRequest =
-            {
-            }
-
-    let catHelpRequest = CatHelpRequestBuilder()
 
     type CatIndicesRequest = {
         Index: Types.Indices
@@ -1257,7 +1250,7 @@ module CatOperations =
                     [
                         req.ActiveOnly |> Option.map (fun v -> "active_only", Fes.Http.toQueryValue v)
                         req.Detailed |> Option.map (fun v -> "detailed", Fes.Http.toQueryValue v)
-                        req.Index |> Option.map (fun v -> "index", Fes.Http.toQueryValue v)
+                        req.queryIndex |> Option.map (fun v -> "index", Fes.Http.toQueryValue v)
                         req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
                         req.S |> Option.map (fun v -> "s", Fes.Http.toQueryValue v)
                     ] |> List.choose id
@@ -1296,8 +1289,8 @@ module CatOperations =
         member _.Detailed(state: CatRecoveryRequest, value: bool) =
             { state with Detailed = Some value }
 
-        [<CustomOperation("index")>]
-        member _.Index(state: CatRecoveryRequest, value: Types.Indices) =
+        [<CustomOperation("queryIndex")>]
+        member _.QueryIndex(state: CatRecoveryRequest, value: Types.Indices) =
             { state with queryIndex = Some value }
 
         [<CustomOperation("h")>]

@@ -775,32 +775,32 @@ module FleetOperations =
         member _.Collapse(state: FleetSearchRequest, value: Types.FieldCollapse) =
             { state with Collapse = Some value }
 
-        [<CustomOperation("explain")>]
-        member _.Explain(state: FleetSearchRequest, value: bool) =
+        [<CustomOperation("bodyExplain")>]
+        member _.BodyExplain(state: FleetSearchRequest, value: bool) =
             { state with bodyExplain = Some value }
 
         [<CustomOperation("ext")>]
         member _.Ext(state: FleetSearchRequest, value: Map<string, System.Text.Json.JsonElement>) =
             { state with Ext = Some value }
 
-        [<CustomOperation("from")>]
-        member _.From(state: FleetSearchRequest, value: Types.Integer) =
+        [<CustomOperation("bodyFrom")>]
+        member _.BodyFrom(state: FleetSearchRequest, value: Types.Integer) =
             { state with bodyFrom = Some value }
 
         [<CustomOperation("highlight")>]
         member _.Highlight(state: FleetSearchRequest, value: Types.Highlight) =
             { state with Highlight = Some value }
 
-        [<CustomOperation("trackTotalHits")>]
-        member _.TrackTotalHits(state: FleetSearchRequest, value: Types.TrackHits) =
+        [<CustomOperation("bodyTrackTotalHits")>]
+        member _.BodyTrackTotalHits(state: FleetSearchRequest, value: Types.TrackHits) =
             { state with bodyTrackTotalHits = Some value }
 
         [<CustomOperation("indicesBoost")>]
         member _.IndicesBoost(state: FleetSearchRequest, value: Map<Types.IndexName, Types.Double> list) =
             { state with IndicesBoost = Some value }
 
-        [<CustomOperation("docvalueFields")>]
-        member _.DocvalueFields(state: FleetSearchRequest, value: Types.FieldAndFormat list) =
+        [<CustomOperation("bodyDocvalueFields")>]
+        member _.BodyDocvalueFields(state: FleetSearchRequest, value: Types.FieldAndFormat list) =
             { state with bodyDocvalueFields = Some value }
 
         [<CustomOperation("minScore")>]
@@ -831,20 +831,20 @@ module FleetOperations =
         member _.SearchAfter(state: FleetSearchRequest, value: Types.SortResults) =
             { state with SearchAfter = Some value }
 
-        [<CustomOperation("size")>]
-        member _.Size(state: FleetSearchRequest, value: Types.Integer) =
+        [<CustomOperation("bodySize")>]
+        member _.BodySize(state: FleetSearchRequest, value: Types.Integer) =
             { state with bodySize = Some value }
 
         [<CustomOperation("slice")>]
         member _.Slice(state: FleetSearchRequest, value: Types.SlicedScroll) =
             { state with Slice = Some value }
 
-        [<CustomOperation("sort")>]
-        member _.Sort(state: FleetSearchRequest, value: Types.Sort) =
+        [<CustomOperation("bodySort")>]
+        member _.BodySort(state: FleetSearchRequest, value: Types.Sort) =
             { state with bodySort = Some value }
 
-        [<CustomOperation("source")>]
-        member _.Source(state: FleetSearchRequest, value: Types.SourceConfig) =
+        [<CustomOperation("bodySource")>]
+        member _.BodySource(state: FleetSearchRequest, value: Types.SourceConfig) =
             { state with bodySource = Some value }
 
         [<CustomOperation("fields")>]
@@ -855,28 +855,28 @@ module FleetOperations =
         member _.Suggest(state: FleetSearchRequest, value: Types.Suggester) =
             { state with Suggest = Some value }
 
-        [<CustomOperation("terminateAfter")>]
-        member _.TerminateAfter(state: FleetSearchRequest, value: Types.Long) =
+        [<CustomOperation("bodyTerminateAfter")>]
+        member _.BodyTerminateAfter(state: FleetSearchRequest, value: Types.Long) =
             { state with bodyTerminateAfter = Some value }
 
-        [<CustomOperation("timeout")>]
-        member _.Timeout(state: FleetSearchRequest, value: string) =
+        [<CustomOperation("bodyTimeout")>]
+        member _.BodyTimeout(state: FleetSearchRequest, value: string) =
             { state with bodyTimeout = Some value }
 
-        [<CustomOperation("trackScores")>]
-        member _.TrackScores(state: FleetSearchRequest, value: bool) =
+        [<CustomOperation("bodyTrackScores")>]
+        member _.BodyTrackScores(state: FleetSearchRequest, value: bool) =
             { state with bodyTrackScores = Some value }
 
-        [<CustomOperation("version")>]
-        member _.Version(state: FleetSearchRequest, value: bool) =
+        [<CustomOperation("bodyVersion")>]
+        member _.BodyVersion(state: FleetSearchRequest, value: bool) =
             { state with bodyVersion = Some value }
 
-        [<CustomOperation("seqNoPrimaryTerm")>]
-        member _.SeqNoPrimaryTerm(state: FleetSearchRequest, value: bool) =
+        [<CustomOperation("bodySeqNoPrimaryTerm")>]
+        member _.BodySeqNoPrimaryTerm(state: FleetSearchRequest, value: bool) =
             { state with bodySeqNoPrimaryTerm = Some value }
 
-        [<CustomOperation("storedFields")>]
-        member _.StoredFields(state: FleetSearchRequest, value: Types.Fields) =
+        [<CustomOperation("bodyStoredFields")>]
+        member _.BodyStoredFields(state: FleetSearchRequest, value: Types.Fields) =
             { state with bodyStoredFields = Some value }
 
         [<CustomOperation("pit")>]
@@ -887,8 +887,8 @@ module FleetOperations =
         member _.RuntimeMappings(state: FleetSearchRequest, value: Types.RuntimeFields) =
             { state with RuntimeMappings = Some value }
 
-        [<CustomOperation("stats")>]
-        member _.Stats(state: FleetSearchRequest, value: string list) =
+        [<CustomOperation("bodyStats")>]
+        member _.BodyStats(state: FleetSearchRequest, value: string list) =
             { state with bodyStats = Some value }
 
     let fleetSearchRequest = FleetSearchRequestBuilder()
@@ -909,11 +909,11 @@ module FleetOperations =
         let withDf (value: string) (req: FleetSearchRequest) =
             { req with Df = Some value }
         let withDocvalueFields (value: Types.Fields) (req: FleetSearchRequest) =
-            { req with bodyDocvalueFields = Some value }
+            { req with DocvalueFields = Some value }
         let withExpandWildcards (value: Types.ExpandWildcards) (req: FleetSearchRequest) =
             { req with ExpandWildcards = Some value }
         let withExplain (value: bool) (req: FleetSearchRequest) =
-            { req with bodyExplain = Some value }
+            { req with Explain = Some value }
         let withIgnoreThrottled (value: bool) (req: FleetSearchRequest) =
             { req with IgnoreThrottled = Some value }
         let withIgnoreUnavailable (value: bool) (req: FleetSearchRequest) =
@@ -935,9 +935,9 @@ module FleetOperations =
         let withSearchType (value: Types.SearchType) (req: FleetSearchRequest) =
             { req with SearchType = Some value }
         let withStats (value: string list) (req: FleetSearchRequest) =
-            { req with bodyStats = Some value }
+            { req with Stats = Some value }
         let withStoredFields (value: Types.Fields) (req: FleetSearchRequest) =
-            { req with bodyStoredFields = Some value }
+            { req with StoredFields = Some value }
         let withSuggestField (value: Types.Field) (req: FleetSearchRequest) =
             { req with SuggestField = Some value }
         let withSuggestMode (value: Types.SuggestMode) (req: FleetSearchRequest) =
@@ -947,35 +947,35 @@ module FleetOperations =
         let withSuggestText (value: string) (req: FleetSearchRequest) =
             { req with SuggestText = Some value }
         let withTerminateAfter (value: Types.Long) (req: FleetSearchRequest) =
-            { req with bodyTerminateAfter = Some value }
+            { req with TerminateAfter = Some value }
         let withTimeout (value: Types.Duration) (req: FleetSearchRequest) =
-            { req with bodyTimeout = Some value }
+            { req with Timeout = Some value }
         let withTrackTotalHits (value: Types.TrackHits) (req: FleetSearchRequest) =
-            { req with bodyTrackTotalHits = Some value }
+            { req with TrackTotalHits = Some value }
         let withTrackScores (value: bool) (req: FleetSearchRequest) =
-            { req with bodyTrackScores = Some value }
+            { req with TrackScores = Some value }
         let withTypedKeys (value: bool) (req: FleetSearchRequest) =
             { req with TypedKeys = Some value }
         let withRestTotalHitsAsInt (value: bool) (req: FleetSearchRequest) =
             { req with RestTotalHitsAsInt = Some value }
         let withVersion (value: bool) (req: FleetSearchRequest) =
-            { req with bodyVersion = Some value }
+            { req with Version = Some value }
         let withSource (value: Types.SourceConfigParam) (req: FleetSearchRequest) =
-            { req with bodySource = Some value }
+            { req with Source = Some value }
         let withSourceExcludes (value: Types.Fields) (req: FleetSearchRequest) =
             { req with SourceExcludes = Some value }
         let withSourceIncludes (value: Types.Fields) (req: FleetSearchRequest) =
             { req with SourceIncludes = Some value }
         let withSeqNoPrimaryTerm (value: bool) (req: FleetSearchRequest) =
-            { req with bodySeqNoPrimaryTerm = Some value }
+            { req with SeqNoPrimaryTerm = Some value }
         let withQ (value: string) (req: FleetSearchRequest) =
             { req with Q = Some value }
         let withSize (value: Types.Integer) (req: FleetSearchRequest) =
-            { req with bodySize = Some value }
+            { req with Size = Some value }
         let withFrom (value: Types.Integer) (req: FleetSearchRequest) =
-            { req with bodyFrom = Some value }
+            { req with From = Some value }
         let withSort (value: System.Text.Json.JsonElement) (req: FleetSearchRequest) =
-            { req with bodySort = Some value }
+            { req with Sort = Some value }
         let withWaitForCheckpoints (value: Types.Checkpoint list) (req: FleetSearchRequest) =
             { req with WaitForCheckpoints = Some value }
         let withAllowPartialSearchResults (value: bool) (req: FleetSearchRequest) =
@@ -984,19 +984,19 @@ module FleetOperations =
             { req with Aggregations = Some value }
         let withCollapse (value: Types.FieldCollapse) (req: FleetSearchRequest) =
             { req with Collapse = Some value }
-        let withExplain (value: bool) (req: FleetSearchRequest) =
+        let withBodyExplain (value: bool) (req: FleetSearchRequest) =
             { req with bodyExplain = Some value }
         let withExt (value: Map<string, System.Text.Json.JsonElement>) (req: FleetSearchRequest) =
             { req with Ext = Some value }
-        let withFrom (value: Types.Integer) (req: FleetSearchRequest) =
+        let withBodyFrom (value: Types.Integer) (req: FleetSearchRequest) =
             { req with bodyFrom = Some value }
         let withHighlight (value: Types.Highlight) (req: FleetSearchRequest) =
             { req with Highlight = Some value }
-        let withTrackTotalHits (value: Types.TrackHits) (req: FleetSearchRequest) =
+        let withBodyTrackTotalHits (value: Types.TrackHits) (req: FleetSearchRequest) =
             { req with bodyTrackTotalHits = Some value }
         let withIndicesBoost (value: Map<Types.IndexName, Types.Double> list) (req: FleetSearchRequest) =
             { req with IndicesBoost = Some value }
-        let withDocvalueFields (value: Types.FieldAndFormat list) (req: FleetSearchRequest) =
+        let withBodyDocvalueFields (value: Types.FieldAndFormat list) (req: FleetSearchRequest) =
             { req with bodyDocvalueFields = Some value }
         let withMinScore (value: Types.Double) (req: FleetSearchRequest) =
             { req with MinScore = Some value }
@@ -1012,34 +1012,34 @@ module FleetOperations =
             { req with ScriptFields = Some value }
         let withSearchAfter (value: Types.SortResults) (req: FleetSearchRequest) =
             { req with SearchAfter = Some value }
-        let withSize (value: Types.Integer) (req: FleetSearchRequest) =
+        let withBodySize (value: Types.Integer) (req: FleetSearchRequest) =
             { req with bodySize = Some value }
         let withSlice (value: Types.SlicedScroll) (req: FleetSearchRequest) =
             { req with Slice = Some value }
-        let withSort (value: Types.Sort) (req: FleetSearchRequest) =
+        let withBodySort (value: Types.Sort) (req: FleetSearchRequest) =
             { req with bodySort = Some value }
-        let withSource (value: Types.SourceConfig) (req: FleetSearchRequest) =
+        let withBodySource (value: Types.SourceConfig) (req: FleetSearchRequest) =
             { req with bodySource = Some value }
         let withFields (value: Types.FieldAndFormat list) (req: FleetSearchRequest) =
             { req with Fields = Some value }
         let withSuggest (value: Types.Suggester) (req: FleetSearchRequest) =
             { req with Suggest = Some value }
-        let withTerminateAfter (value: Types.Long) (req: FleetSearchRequest) =
+        let withBodyTerminateAfter (value: Types.Long) (req: FleetSearchRequest) =
             { req with bodyTerminateAfter = Some value }
-        let withTimeout (value: string) (req: FleetSearchRequest) =
+        let withBodyTimeout (value: string) (req: FleetSearchRequest) =
             { req with bodyTimeout = Some value }
-        let withTrackScores (value: bool) (req: FleetSearchRequest) =
+        let withBodyTrackScores (value: bool) (req: FleetSearchRequest) =
             { req with bodyTrackScores = Some value }
-        let withVersion (value: bool) (req: FleetSearchRequest) =
+        let withBodyVersion (value: bool) (req: FleetSearchRequest) =
             { req with bodyVersion = Some value }
-        let withSeqNoPrimaryTerm (value: bool) (req: FleetSearchRequest) =
+        let withBodySeqNoPrimaryTerm (value: bool) (req: FleetSearchRequest) =
             { req with bodySeqNoPrimaryTerm = Some value }
-        let withStoredFields (value: Types.Fields) (req: FleetSearchRequest) =
+        let withBodyStoredFields (value: Types.Fields) (req: FleetSearchRequest) =
             { req with bodyStoredFields = Some value }
         let withPit (value: Types.PointInTimeReference) (req: FleetSearchRequest) =
             { req with Pit = Some value }
         let withRuntimeMappings (value: Types.RuntimeFields) (req: FleetSearchRequest) =
             { req with RuntimeMappings = Some value }
-        let withStats (value: string list) (req: FleetSearchRequest) =
+        let withBodyStats (value: string list) (req: FleetSearchRequest) =
             { req with bodyStats = Some value }
 

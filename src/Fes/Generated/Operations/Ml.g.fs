@@ -105,32 +105,32 @@ module MlOperations =
         member _.Timeout(state: MlCloseJobRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
-        [<CustomOperation("allowNoMatch")>]
-        member _.AllowNoMatch(state: MlCloseJobRequest, value: bool) =
+        [<CustomOperation("bodyAllowNoMatch")>]
+        member _.BodyAllowNoMatch(state: MlCloseJobRequest, value: bool) =
             { state with bodyAllowNoMatch = Some value }
 
-        [<CustomOperation("force")>]
-        member _.Force(state: MlCloseJobRequest, value: bool) =
+        [<CustomOperation("bodyForce")>]
+        member _.BodyForce(state: MlCloseJobRequest, value: bool) =
             { state with bodyForce = Some value }
 
-        [<CustomOperation("timeout")>]
-        member _.Timeout(state: MlCloseJobRequest, value: Types.Duration) =
+        [<CustomOperation("bodyTimeout")>]
+        member _.BodyTimeout(state: MlCloseJobRequest, value: Types.Duration) =
             { state with bodyTimeout = Some value }
 
     let mlCloseJobRequest = MlCloseJobRequestBuilder()
 
     module CloseJob =
         let withAllowNoMatch (value: bool) (req: MlCloseJobRequest) =
-            { req with bodyAllowNoMatch = Some value }
+            { req with AllowNoMatch = Some value }
         let withForce (value: bool) (req: MlCloseJobRequest) =
-            { req with bodyForce = Some value }
+            { req with Force = Some value }
         let withTimeout (value: Types.Duration) (req: MlCloseJobRequest) =
-            { req with bodyTimeout = Some value }
-        let withAllowNoMatch (value: bool) (req: MlCloseJobRequest) =
+            { req with Timeout = Some value }
+        let withBodyAllowNoMatch (value: bool) (req: MlCloseJobRequest) =
             { req with bodyAllowNoMatch = Some value }
-        let withForce (value: bool) (req: MlCloseJobRequest) =
+        let withBodyForce (value: bool) (req: MlCloseJobRequest) =
             { req with bodyForce = Some value }
-        let withTimeout (value: Types.Duration) (req: MlCloseJobRequest) =
+        let withBodyTimeout (value: Types.Duration) (req: MlCloseJobRequest) =
             { req with bodyTimeout = Some value }
 
     type MlDeleteCalendarRequest = {
@@ -387,24 +387,24 @@ module MlOperations =
         member _.Timeout(state: MlDeleteExpiredDataRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
-        [<CustomOperation("requestsPerSecond")>]
-        member _.RequestsPerSecond(state: MlDeleteExpiredDataRequest, value: Types.Float) =
+        [<CustomOperation("bodyRequestsPerSecond")>]
+        member _.BodyRequestsPerSecond(state: MlDeleteExpiredDataRequest, value: Types.Float) =
             { state with bodyRequestsPerSecond = Some value }
 
-        [<CustomOperation("timeout")>]
-        member _.Timeout(state: MlDeleteExpiredDataRequest, value: Types.Duration) =
+        [<CustomOperation("bodyTimeout")>]
+        member _.BodyTimeout(state: MlDeleteExpiredDataRequest, value: Types.Duration) =
             { state with bodyTimeout = Some value }
 
     let mlDeleteExpiredDataRequest = MlDeleteExpiredDataRequestBuilder()
 
     module DeleteExpiredData =
         let withRequestsPerSecond (value: Types.Float) (req: MlDeleteExpiredDataRequest) =
-            { req with bodyRequestsPerSecond = Some value }
+            { req with RequestsPerSecond = Some value }
         let withTimeout (value: Types.Duration) (req: MlDeleteExpiredDataRequest) =
-            { req with bodyTimeout = Some value }
-        let withRequestsPerSecond (value: Types.Float) (req: MlDeleteExpiredDataRequest) =
+            { req with Timeout = Some value }
+        let withBodyRequestsPerSecond (value: Types.Float) (req: MlDeleteExpiredDataRequest) =
             { req with bodyRequestsPerSecond = Some value }
-        let withTimeout (value: Types.Duration) (req: MlDeleteExpiredDataRequest) =
+        let withBodyTimeout (value: Types.Duration) (req: MlDeleteExpiredDataRequest) =
             { req with bodyTimeout = Some value }
 
     type MlDeleteFilterRequest = {
@@ -980,48 +980,48 @@ module MlOperations =
         member _.Start(state: MlFlushJobRequest, value: Types.DateTime) =
             { state with Start = Some value }
 
-        [<CustomOperation("advanceTime")>]
-        member _.AdvanceTime(state: MlFlushJobRequest, value: Types.DateTime) =
+        [<CustomOperation("bodyAdvanceTime")>]
+        member _.BodyAdvanceTime(state: MlFlushJobRequest, value: Types.DateTime) =
             { state with bodyAdvanceTime = Some value }
 
-        [<CustomOperation("calcInterim")>]
-        member _.CalcInterim(state: MlFlushJobRequest, value: bool) =
+        [<CustomOperation("bodyCalcInterim")>]
+        member _.BodyCalcInterim(state: MlFlushJobRequest, value: bool) =
             { state with bodyCalcInterim = Some value }
 
-        [<CustomOperation("end'")>]
-        member _.End(state: MlFlushJobRequest, value: Types.DateTime) =
+        [<CustomOperation("bodyEnd")>]
+        member _.BodyEnd(state: MlFlushJobRequest, value: Types.DateTime) =
             { state with bodyEnd = Some value }
 
-        [<CustomOperation("skipTime")>]
-        member _.SkipTime(state: MlFlushJobRequest, value: Types.DateTime) =
+        [<CustomOperation("bodySkipTime")>]
+        member _.BodySkipTime(state: MlFlushJobRequest, value: Types.DateTime) =
             { state with bodySkipTime = Some value }
 
-        [<CustomOperation("start")>]
-        member _.Start(state: MlFlushJobRequest, value: Types.DateTime) =
+        [<CustomOperation("bodyStart")>]
+        member _.BodyStart(state: MlFlushJobRequest, value: Types.DateTime) =
             { state with bodyStart = Some value }
 
     let mlFlushJobRequest = MlFlushJobRequestBuilder()
 
     module FlushJob =
         let withAdvanceTime (value: Types.DateTime) (req: MlFlushJobRequest) =
-            { req with bodyAdvanceTime = Some value }
+            { req with AdvanceTime = Some value }
         let withCalcInterim (value: bool) (req: MlFlushJobRequest) =
-            { req with bodyCalcInterim = Some value }
+            { req with CalcInterim = Some value }
         let withEnd (value: Types.DateTime) (req: MlFlushJobRequest) =
-            { req with bodyEnd = Some value }
+            { req with End = Some value }
         let withSkipTime (value: Types.DateTime) (req: MlFlushJobRequest) =
-            { req with bodySkipTime = Some value }
+            { req with SkipTime = Some value }
         let withStart (value: Types.DateTime) (req: MlFlushJobRequest) =
-            { req with bodyStart = Some value }
-        let withAdvanceTime (value: Types.DateTime) (req: MlFlushJobRequest) =
+            { req with Start = Some value }
+        let withBodyAdvanceTime (value: Types.DateTime) (req: MlFlushJobRequest) =
             { req with bodyAdvanceTime = Some value }
-        let withCalcInterim (value: bool) (req: MlFlushJobRequest) =
+        let withBodyCalcInterim (value: bool) (req: MlFlushJobRequest) =
             { req with bodyCalcInterim = Some value }
-        let withEnd (value: Types.DateTime) (req: MlFlushJobRequest) =
+        let withBodyEnd (value: Types.DateTime) (req: MlFlushJobRequest) =
             { req with bodyEnd = Some value }
-        let withSkipTime (value: Types.DateTime) (req: MlFlushJobRequest) =
+        let withBodySkipTime (value: Types.DateTime) (req: MlFlushJobRequest) =
             { req with bodySkipTime = Some value }
-        let withStart (value: Types.DateTime) (req: MlFlushJobRequest) =
+        let withBodyStart (value: Types.DateTime) (req: MlFlushJobRequest) =
             { req with bodyStart = Some value }
 
     type MlForecastRequest = {
@@ -1088,32 +1088,32 @@ module MlOperations =
         member _.MaxModelMemory(state: MlForecastRequest, value: string) =
             { state with MaxModelMemory = Some value }
 
-        [<CustomOperation("duration")>]
-        member _.Duration(state: MlForecastRequest, value: Types.Duration) =
+        [<CustomOperation("bodyDuration")>]
+        member _.BodyDuration(state: MlForecastRequest, value: Types.Duration) =
             { state with bodyDuration = Some value }
 
-        [<CustomOperation("expiresIn")>]
-        member _.ExpiresIn(state: MlForecastRequest, value: Types.Duration) =
+        [<CustomOperation("bodyExpiresIn")>]
+        member _.BodyExpiresIn(state: MlForecastRequest, value: Types.Duration) =
             { state with bodyExpiresIn = Some value }
 
-        [<CustomOperation("maxModelMemory")>]
-        member _.MaxModelMemory(state: MlForecastRequest, value: string) =
+        [<CustomOperation("bodyMaxModelMemory")>]
+        member _.BodyMaxModelMemory(state: MlForecastRequest, value: string) =
             { state with bodyMaxModelMemory = Some value }
 
     let mlForecastRequest = MlForecastRequestBuilder()
 
     module Forecast =
         let withDuration (value: Types.Duration) (req: MlForecastRequest) =
-            { req with bodyDuration = Some value }
+            { req with Duration = Some value }
         let withExpiresIn (value: Types.Duration) (req: MlForecastRequest) =
-            { req with bodyExpiresIn = Some value }
+            { req with ExpiresIn = Some value }
         let withMaxModelMemory (value: string) (req: MlForecastRequest) =
-            { req with bodyMaxModelMemory = Some value }
-        let withDuration (value: Types.Duration) (req: MlForecastRequest) =
+            { req with MaxModelMemory = Some value }
+        let withBodyDuration (value: Types.Duration) (req: MlForecastRequest) =
             { req with bodyDuration = Some value }
-        let withExpiresIn (value: Types.Duration) (req: MlForecastRequest) =
+        let withBodyExpiresIn (value: Types.Duration) (req: MlForecastRequest) =
             { req with bodyExpiresIn = Some value }
-        let withMaxModelMemory (value: string) (req: MlForecastRequest) =
+        let withBodyMaxModelMemory (value: string) (req: MlForecastRequest) =
             { req with bodyMaxModelMemory = Some value }
 
     type MlGetBucketsRequest = {
@@ -1243,74 +1243,74 @@ module MlOperations =
         member _.Start(state: MlGetBucketsRequest, value: Types.DateTime) =
             { state with Start = Some value }
 
-        [<CustomOperation("anomalyScore")>]
-        member _.AnomalyScore(state: MlGetBucketsRequest, value: Types.Double) =
+        [<CustomOperation("bodyAnomalyScore")>]
+        member _.BodyAnomalyScore(state: MlGetBucketsRequest, value: Types.Double) =
             { state with bodyAnomalyScore = Some value }
 
-        [<CustomOperation("desc")>]
-        member _.Desc(state: MlGetBucketsRequest, value: bool) =
+        [<CustomOperation("bodyDesc")>]
+        member _.BodyDesc(state: MlGetBucketsRequest, value: bool) =
             { state with bodyDesc = Some value }
 
-        [<CustomOperation("end'")>]
-        member _.End(state: MlGetBucketsRequest, value: Types.DateTime) =
+        [<CustomOperation("bodyEnd")>]
+        member _.BodyEnd(state: MlGetBucketsRequest, value: Types.DateTime) =
             { state with bodyEnd = Some value }
 
-        [<CustomOperation("excludeInterim")>]
-        member _.ExcludeInterim(state: MlGetBucketsRequest, value: bool) =
+        [<CustomOperation("bodyExcludeInterim")>]
+        member _.BodyExcludeInterim(state: MlGetBucketsRequest, value: bool) =
             { state with bodyExcludeInterim = Some value }
 
-        [<CustomOperation("expand")>]
-        member _.Expand(state: MlGetBucketsRequest, value: bool) =
+        [<CustomOperation("bodyExpand")>]
+        member _.BodyExpand(state: MlGetBucketsRequest, value: bool) =
             { state with bodyExpand = Some value }
 
         [<CustomOperation("page")>]
         member _.Page(state: MlGetBucketsRequest, value: Types.Page) =
             { state with Page = Some value }
 
-        [<CustomOperation("sort")>]
-        member _.Sort(state: MlGetBucketsRequest, value: Types.Field) =
+        [<CustomOperation("bodySort")>]
+        member _.BodySort(state: MlGetBucketsRequest, value: Types.Field) =
             { state with bodySort = Some value }
 
-        [<CustomOperation("start")>]
-        member _.Start(state: MlGetBucketsRequest, value: Types.DateTime) =
+        [<CustomOperation("bodyStart")>]
+        member _.BodyStart(state: MlGetBucketsRequest, value: Types.DateTime) =
             { state with bodyStart = Some value }
 
     let mlGetBucketsRequest = MlGetBucketsRequestBuilder()
 
     module GetBuckets =
         let withAnomalyScore (value: Types.Double) (req: MlGetBucketsRequest) =
-            { req with bodyAnomalyScore = Some value }
+            { req with AnomalyScore = Some value }
         let withDesc (value: bool) (req: MlGetBucketsRequest) =
-            { req with bodyDesc = Some value }
+            { req with Desc = Some value }
         let withEnd (value: Types.DateTime) (req: MlGetBucketsRequest) =
-            { req with bodyEnd = Some value }
+            { req with End = Some value }
         let withExcludeInterim (value: bool) (req: MlGetBucketsRequest) =
-            { req with bodyExcludeInterim = Some value }
+            { req with ExcludeInterim = Some value }
         let withExpand (value: bool) (req: MlGetBucketsRequest) =
-            { req with bodyExpand = Some value }
+            { req with Expand = Some value }
         let withFrom (value: Types.Integer) (req: MlGetBucketsRequest) =
             { req with From = Some value }
         let withSize (value: Types.Integer) (req: MlGetBucketsRequest) =
             { req with Size = Some value }
         let withSort (value: Types.Field) (req: MlGetBucketsRequest) =
-            { req with bodySort = Some value }
+            { req with Sort = Some value }
         let withStart (value: Types.DateTime) (req: MlGetBucketsRequest) =
-            { req with bodyStart = Some value }
-        let withAnomalyScore (value: Types.Double) (req: MlGetBucketsRequest) =
+            { req with Start = Some value }
+        let withBodyAnomalyScore (value: Types.Double) (req: MlGetBucketsRequest) =
             { req with bodyAnomalyScore = Some value }
-        let withDesc (value: bool) (req: MlGetBucketsRequest) =
+        let withBodyDesc (value: bool) (req: MlGetBucketsRequest) =
             { req with bodyDesc = Some value }
-        let withEnd (value: Types.DateTime) (req: MlGetBucketsRequest) =
+        let withBodyEnd (value: Types.DateTime) (req: MlGetBucketsRequest) =
             { req with bodyEnd = Some value }
-        let withExcludeInterim (value: bool) (req: MlGetBucketsRequest) =
+        let withBodyExcludeInterim (value: bool) (req: MlGetBucketsRequest) =
             { req with bodyExcludeInterim = Some value }
-        let withExpand (value: bool) (req: MlGetBucketsRequest) =
+        let withBodyExpand (value: bool) (req: MlGetBucketsRequest) =
             { req with bodyExpand = Some value }
         let withPage (value: Types.Page) (req: MlGetBucketsRequest) =
             { req with Page = Some value }
-        let withSort (value: Types.Field) (req: MlGetBucketsRequest) =
+        let withBodySort (value: Types.Field) (req: MlGetBucketsRequest) =
             { req with bodySort = Some value }
-        let withStart (value: Types.DateTime) (req: MlGetBucketsRequest) =
+        let withBodyStart (value: Types.DateTime) (req: MlGetBucketsRequest) =
             { req with bodyStart = Some value }
 
     type MlGetCalendarEventsRequest = {
@@ -2266,50 +2266,50 @@ module MlOperations =
         member _.Start(state: MlGetModelSnapshotsRequest, value: Types.DateTime) =
             { state with Start = Some value }
 
-        [<CustomOperation("desc")>]
-        member _.Desc(state: MlGetModelSnapshotsRequest, value: bool) =
+        [<CustomOperation("bodyDesc")>]
+        member _.BodyDesc(state: MlGetModelSnapshotsRequest, value: bool) =
             { state with bodyDesc = Some value }
 
-        [<CustomOperation("end'")>]
-        member _.End(state: MlGetModelSnapshotsRequest, value: Types.DateTime) =
+        [<CustomOperation("bodyEnd")>]
+        member _.BodyEnd(state: MlGetModelSnapshotsRequest, value: Types.DateTime) =
             { state with bodyEnd = Some value }
 
         [<CustomOperation("page")>]
         member _.Page(state: MlGetModelSnapshotsRequest, value: Types.Page) =
             { state with Page = Some value }
 
-        [<CustomOperation("sort")>]
-        member _.Sort(state: MlGetModelSnapshotsRequest, value: Types.Field) =
+        [<CustomOperation("bodySort")>]
+        member _.BodySort(state: MlGetModelSnapshotsRequest, value: Types.Field) =
             { state with bodySort = Some value }
 
-        [<CustomOperation("start")>]
-        member _.Start(state: MlGetModelSnapshotsRequest, value: Types.DateTime) =
+        [<CustomOperation("bodyStart")>]
+        member _.BodyStart(state: MlGetModelSnapshotsRequest, value: Types.DateTime) =
             { state with bodyStart = Some value }
 
     let mlGetModelSnapshotsRequest = MlGetModelSnapshotsRequestBuilder()
 
     module GetModelSnapshots =
         let withDesc (value: bool) (req: MlGetModelSnapshotsRequest) =
-            { req with bodyDesc = Some value }
+            { req with Desc = Some value }
         let withEnd (value: Types.DateTime) (req: MlGetModelSnapshotsRequest) =
-            { req with bodyEnd = Some value }
+            { req with End = Some value }
         let withFrom (value: Types.Integer) (req: MlGetModelSnapshotsRequest) =
             { req with From = Some value }
         let withSize (value: Types.Integer) (req: MlGetModelSnapshotsRequest) =
             { req with Size = Some value }
         let withSort (value: Types.Field) (req: MlGetModelSnapshotsRequest) =
-            { req with bodySort = Some value }
+            { req with Sort = Some value }
         let withStart (value: Types.DateTime) (req: MlGetModelSnapshotsRequest) =
-            { req with bodyStart = Some value }
-        let withDesc (value: bool) (req: MlGetModelSnapshotsRequest) =
+            { req with Start = Some value }
+        let withBodyDesc (value: bool) (req: MlGetModelSnapshotsRequest) =
             { req with bodyDesc = Some value }
-        let withEnd (value: Types.DateTime) (req: MlGetModelSnapshotsRequest) =
+        let withBodyEnd (value: Types.DateTime) (req: MlGetModelSnapshotsRequest) =
             { req with bodyEnd = Some value }
         let withPage (value: Types.Page) (req: MlGetModelSnapshotsRequest) =
             { req with Page = Some value }
-        let withSort (value: Types.Field) (req: MlGetModelSnapshotsRequest) =
+        let withBodySort (value: Types.Field) (req: MlGetModelSnapshotsRequest) =
             { req with bodySort = Some value }
-        let withStart (value: Types.DateTime) (req: MlGetModelSnapshotsRequest) =
+        let withBodyStart (value: Types.DateTime) (req: MlGetModelSnapshotsRequest) =
             { req with bodyStart = Some value }
 
     type MlGetOverallBucketsRequest = {
@@ -2416,64 +2416,64 @@ module MlOperations =
         member _.TopN(state: MlGetOverallBucketsRequest, value: Types.Integer) =
             { state with TopN = Some value }
 
-        [<CustomOperation("allowNoMatch")>]
-        member _.AllowNoMatch(state: MlGetOverallBucketsRequest, value: bool) =
+        [<CustomOperation("bodyAllowNoMatch")>]
+        member _.BodyAllowNoMatch(state: MlGetOverallBucketsRequest, value: bool) =
             { state with bodyAllowNoMatch = Some value }
 
-        [<CustomOperation("bucketSpan")>]
-        member _.BucketSpan(state: MlGetOverallBucketsRequest, value: Types.Duration) =
+        [<CustomOperation("bodyBucketSpan")>]
+        member _.BodyBucketSpan(state: MlGetOverallBucketsRequest, value: Types.Duration) =
             { state with bodyBucketSpan = Some value }
 
-        [<CustomOperation("end'")>]
-        member _.End(state: MlGetOverallBucketsRequest, value: Types.DateTime) =
+        [<CustomOperation("bodyEnd")>]
+        member _.BodyEnd(state: MlGetOverallBucketsRequest, value: Types.DateTime) =
             { state with bodyEnd = Some value }
 
-        [<CustomOperation("excludeInterim")>]
-        member _.ExcludeInterim(state: MlGetOverallBucketsRequest, value: bool) =
+        [<CustomOperation("bodyExcludeInterim")>]
+        member _.BodyExcludeInterim(state: MlGetOverallBucketsRequest, value: bool) =
             { state with bodyExcludeInterim = Some value }
 
-        [<CustomOperation("overallScore")>]
-        member _.OverallScore(state: MlGetOverallBucketsRequest, value: Types.Double) =
+        [<CustomOperation("bodyOverallScore")>]
+        member _.BodyOverallScore(state: MlGetOverallBucketsRequest, value: Types.Double) =
             { state with bodyOverallScore = Some value }
 
-        [<CustomOperation("start")>]
-        member _.Start(state: MlGetOverallBucketsRequest, value: Types.DateTime) =
+        [<CustomOperation("bodyStart")>]
+        member _.BodyStart(state: MlGetOverallBucketsRequest, value: Types.DateTime) =
             { state with bodyStart = Some value }
 
-        [<CustomOperation("topN")>]
-        member _.TopN(state: MlGetOverallBucketsRequest, value: Types.Integer) =
+        [<CustomOperation("bodyTopN")>]
+        member _.BodyTopN(state: MlGetOverallBucketsRequest, value: Types.Integer) =
             { state with bodyTopN = Some value }
 
     let mlGetOverallBucketsRequest = MlGetOverallBucketsRequestBuilder()
 
     module GetOverallBuckets =
         let withAllowNoMatch (value: bool) (req: MlGetOverallBucketsRequest) =
-            { req with bodyAllowNoMatch = Some value }
+            { req with AllowNoMatch = Some value }
         let withBucketSpan (value: Types.Duration) (req: MlGetOverallBucketsRequest) =
-            { req with bodyBucketSpan = Some value }
+            { req with BucketSpan = Some value }
         let withEnd (value: Types.DateTime) (req: MlGetOverallBucketsRequest) =
-            { req with bodyEnd = Some value }
+            { req with End = Some value }
         let withExcludeInterim (value: bool) (req: MlGetOverallBucketsRequest) =
-            { req with bodyExcludeInterim = Some value }
+            { req with ExcludeInterim = Some value }
         let withOverallScore (value: Types.Double) (req: MlGetOverallBucketsRequest) =
-            { req with bodyOverallScore = Some value }
+            { req with OverallScore = Some value }
         let withStart (value: Types.DateTime) (req: MlGetOverallBucketsRequest) =
-            { req with bodyStart = Some value }
+            { req with Start = Some value }
         let withTopN (value: Types.Integer) (req: MlGetOverallBucketsRequest) =
-            { req with bodyTopN = Some value }
-        let withAllowNoMatch (value: bool) (req: MlGetOverallBucketsRequest) =
+            { req with TopN = Some value }
+        let withBodyAllowNoMatch (value: bool) (req: MlGetOverallBucketsRequest) =
             { req with bodyAllowNoMatch = Some value }
-        let withBucketSpan (value: Types.Duration) (req: MlGetOverallBucketsRequest) =
+        let withBodyBucketSpan (value: Types.Duration) (req: MlGetOverallBucketsRequest) =
             { req with bodyBucketSpan = Some value }
-        let withEnd (value: Types.DateTime) (req: MlGetOverallBucketsRequest) =
+        let withBodyEnd (value: Types.DateTime) (req: MlGetOverallBucketsRequest) =
             { req with bodyEnd = Some value }
-        let withExcludeInterim (value: bool) (req: MlGetOverallBucketsRequest) =
+        let withBodyExcludeInterim (value: bool) (req: MlGetOverallBucketsRequest) =
             { req with bodyExcludeInterim = Some value }
-        let withOverallScore (value: Types.Double) (req: MlGetOverallBucketsRequest) =
+        let withBodyOverallScore (value: Types.Double) (req: MlGetOverallBucketsRequest) =
             { req with bodyOverallScore = Some value }
-        let withStart (value: Types.DateTime) (req: MlGetOverallBucketsRequest) =
+        let withBodyStart (value: Types.DateTime) (req: MlGetOverallBucketsRequest) =
             { req with bodyStart = Some value }
-        let withTopN (value: Types.Integer) (req: MlGetOverallBucketsRequest) =
+        let withBodyTopN (value: Types.Integer) (req: MlGetOverallBucketsRequest) =
             { req with bodyTopN = Some value }
 
     type MlGetRecordsRequest = {
@@ -2587,66 +2587,66 @@ module MlOperations =
         member _.Start(state: MlGetRecordsRequest, value: Types.DateTime) =
             { state with Start = Some value }
 
-        [<CustomOperation("desc")>]
-        member _.Desc(state: MlGetRecordsRequest, value: bool) =
+        [<CustomOperation("bodyDesc")>]
+        member _.BodyDesc(state: MlGetRecordsRequest, value: bool) =
             { state with bodyDesc = Some value }
 
-        [<CustomOperation("end'")>]
-        member _.End(state: MlGetRecordsRequest, value: Types.DateTime) =
+        [<CustomOperation("bodyEnd")>]
+        member _.BodyEnd(state: MlGetRecordsRequest, value: Types.DateTime) =
             { state with bodyEnd = Some value }
 
-        [<CustomOperation("excludeInterim")>]
-        member _.ExcludeInterim(state: MlGetRecordsRequest, value: bool) =
+        [<CustomOperation("bodyExcludeInterim")>]
+        member _.BodyExcludeInterim(state: MlGetRecordsRequest, value: bool) =
             { state with bodyExcludeInterim = Some value }
 
         [<CustomOperation("page")>]
         member _.Page(state: MlGetRecordsRequest, value: Types.Page) =
             { state with Page = Some value }
 
-        [<CustomOperation("recordScore")>]
-        member _.RecordScore(state: MlGetRecordsRequest, value: Types.Double) =
+        [<CustomOperation("bodyRecordScore")>]
+        member _.BodyRecordScore(state: MlGetRecordsRequest, value: Types.Double) =
             { state with bodyRecordScore = Some value }
 
-        [<CustomOperation("sort")>]
-        member _.Sort(state: MlGetRecordsRequest, value: Types.Field) =
+        [<CustomOperation("bodySort")>]
+        member _.BodySort(state: MlGetRecordsRequest, value: Types.Field) =
             { state with bodySort = Some value }
 
-        [<CustomOperation("start")>]
-        member _.Start(state: MlGetRecordsRequest, value: Types.DateTime) =
+        [<CustomOperation("bodyStart")>]
+        member _.BodyStart(state: MlGetRecordsRequest, value: Types.DateTime) =
             { state with bodyStart = Some value }
 
     let mlGetRecordsRequest = MlGetRecordsRequestBuilder()
 
     module GetRecords =
         let withDesc (value: bool) (req: MlGetRecordsRequest) =
-            { req with bodyDesc = Some value }
+            { req with Desc = Some value }
         let withEnd (value: Types.DateTime) (req: MlGetRecordsRequest) =
-            { req with bodyEnd = Some value }
+            { req with End = Some value }
         let withExcludeInterim (value: bool) (req: MlGetRecordsRequest) =
-            { req with bodyExcludeInterim = Some value }
+            { req with ExcludeInterim = Some value }
         let withFrom (value: Types.Integer) (req: MlGetRecordsRequest) =
             { req with From = Some value }
         let withRecordScore (value: Types.Double) (req: MlGetRecordsRequest) =
-            { req with bodyRecordScore = Some value }
+            { req with RecordScore = Some value }
         let withSize (value: Types.Integer) (req: MlGetRecordsRequest) =
             { req with Size = Some value }
         let withSort (value: Types.Field) (req: MlGetRecordsRequest) =
-            { req with bodySort = Some value }
+            { req with Sort = Some value }
         let withStart (value: Types.DateTime) (req: MlGetRecordsRequest) =
-            { req with bodyStart = Some value }
-        let withDesc (value: bool) (req: MlGetRecordsRequest) =
+            { req with Start = Some value }
+        let withBodyDesc (value: bool) (req: MlGetRecordsRequest) =
             { req with bodyDesc = Some value }
-        let withEnd (value: Types.DateTime) (req: MlGetRecordsRequest) =
+        let withBodyEnd (value: Types.DateTime) (req: MlGetRecordsRequest) =
             { req with bodyEnd = Some value }
-        let withExcludeInterim (value: bool) (req: MlGetRecordsRequest) =
+        let withBodyExcludeInterim (value: bool) (req: MlGetRecordsRequest) =
             { req with bodyExcludeInterim = Some value }
         let withPage (value: Types.Page) (req: MlGetRecordsRequest) =
             { req with Page = Some value }
-        let withRecordScore (value: Types.Double) (req: MlGetRecordsRequest) =
+        let withBodyRecordScore (value: Types.Double) (req: MlGetRecordsRequest) =
             { req with bodyRecordScore = Some value }
-        let withSort (value: Types.Field) (req: MlGetRecordsRequest) =
+        let withBodySort (value: Types.Field) (req: MlGetRecordsRequest) =
             { req with bodySort = Some value }
-        let withStart (value: Types.DateTime) (req: MlGetRecordsRequest) =
+        let withBodyStart (value: Types.DateTime) (req: MlGetRecordsRequest) =
             { req with bodyStart = Some value }
 
     type MlGetTrainedModelsRequest = {
@@ -2893,13 +2893,6 @@ module MlOperations =
 
     type MlInfoResponse = System.Text.Json.JsonElement
 
-    type MlInfoRequestBuilder() =
-        member _.Yield(_: unit) : MlInfoRequest =
-            {
-            }
-
-    let mlInfoRequest = MlInfoRequestBuilder()
-
     type MlOpenJobRequest = {
         JobId: Types.Id
         Timeout: Types.Duration option
@@ -2944,16 +2937,16 @@ module MlOperations =
         member _.Timeout(state: MlOpenJobRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
-        [<CustomOperation("timeout")>]
-        member _.Timeout(state: MlOpenJobRequest, value: Types.Duration) =
+        [<CustomOperation("bodyTimeout")>]
+        member _.BodyTimeout(state: MlOpenJobRequest, value: Types.Duration) =
             { state with bodyTimeout = Some value }
 
     let mlOpenJobRequest = MlOpenJobRequestBuilder()
 
     module OpenJob =
         let withTimeout (value: Types.Duration) (req: MlOpenJobRequest) =
-            { req with bodyTimeout = Some value }
-        let withTimeout (value: Types.Duration) (req: MlOpenJobRequest) =
+            { req with Timeout = Some value }
+        let withBodyTimeout (value: Types.Duration) (req: MlOpenJobRequest) =
             { req with bodyTimeout = Some value }
 
     type MlPostCalendarEventsRequest = {
@@ -2997,67 +2990,14 @@ module MlOperations =
         let withEvents (value: Types.CalendarEvent list) (req: MlPostCalendarEventsRequest) =
             { req with Events = value }
 
-    type MlPostDataRequest = {
+    type MlPostDataRequest<'tData> = {
         JobId: Types.Id
         ResetEnd: Types.DateTime option
         ResetStart: Types.DateTime option
         Document: obj
     }
 
-        with
-        static member ToRequest(req: MlPostDataRequest) : Result<Fes.Http.RequestMsg, exn> =
-            try
-                let path = $"/_ml/anomaly_detectors/{req.JobId}/_data"
-                let queryParams =
-                    [
-                        req.ResetEnd |> Option.map (fun v -> "reset_end", Fes.Http.toQueryValue v)
-                        req.ResetStart |> Option.map (fun v -> "reset_start", Fes.Http.toQueryValue v)
-                    ] |> List.choose id
-                let queryString =
-                    if List.isEmpty queryParams then ""
-                    else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
-                let fullPath = path + queryString
-                fullPath
-                |> Fes.Http.Request.fromPath
-                |> Fes.Http.Request.withMethod Fes.Http.Method.Post
-                |> Fes.Http.Request.withJsonBody req.Document
-                |> Result.Ok
-            with ex -> Result.Error ex
-
     type MlPostDataResponse = System.Text.Json.JsonElement
-
-    type MlPostDataRequestBuilder() =
-        member _.Yield(_: unit) : MlPostDataRequest =
-            {
-                JobId = Unchecked.defaultof<_>
-                ResetEnd = None
-                ResetStart = None
-                Document = Unchecked.defaultof<_>
-            }
-
-        [<CustomOperation("jobId")>]
-        member _.JobId(state: MlPostDataRequest, value: Types.Id) =
-            { state with JobId = value }
-
-        [<CustomOperation("resetEnd")>]
-        member _.ResetEnd(state: MlPostDataRequest, value: Types.DateTime) =
-            { state with ResetEnd = Some value }
-
-        [<CustomOperation("resetStart")>]
-        member _.ResetStart(state: MlPostDataRequest, value: Types.DateTime) =
-            { state with ResetStart = Some value }
-
-        [<CustomOperation("document")>]
-        member _.Document(state: MlPostDataRequest, value) =
-            { state with Document = value }
-
-    let mlPostDataRequest = MlPostDataRequestBuilder()
-
-    module PostData =
-        let withResetEnd (value: Types.DateTime) (req: MlPostDataRequest) =
-            { req with ResetEnd = Some value }
-        let withResetStart (value: Types.DateTime) (req: MlPostDataRequest) =
-            { req with ResetStart = Some value }
 
     type MlPreviewDataFrameAnalyticsRequest = {
         Id: Types.Id
@@ -3787,7 +3727,7 @@ module MlOperations =
             { state with Description = Some value }
 
         [<CustomOperation("jobId")>]
-        member _.JobId(state: MlPutJobRequest, value: Types.Id) =
+        member _.BodyJobId(state: MlPutJobRequest, value: Types.Id) =
             { state with bodyJobId = Some value }
 
         [<CustomOperation("groups")>]
@@ -3843,7 +3783,7 @@ module MlOperations =
             { req with DatafeedConfig = Some value }
         let withDescription (value: string) (req: MlPutJobRequest) =
             { req with Description = Some value }
-        let withJobId (value: Types.Id) (req: MlPutJobRequest) =
+        let withBodyJobId (value: Types.Id) (req: MlPutJobRequest) =
             { req with bodyJobId = Some value }
         let withGroups (value: string list) (req: MlPutJobRequest) =
             { req with Groups = Some value }
@@ -4294,16 +4234,16 @@ module MlOperations =
         member _.DeleteInterveningResults(state: MlRevertModelSnapshotRequest, value: bool) =
             { state with DeleteInterveningResults = Some value }
 
-        [<CustomOperation("deleteInterveningResults")>]
-        member _.DeleteInterveningResults(state: MlRevertModelSnapshotRequest, value: bool) =
+        [<CustomOperation("bodyDeleteInterveningResults")>]
+        member _.BodyDeleteInterveningResults(state: MlRevertModelSnapshotRequest, value: bool) =
             { state with bodyDeleteInterveningResults = Some value }
 
     let mlRevertModelSnapshotRequest = MlRevertModelSnapshotRequestBuilder()
 
     module RevertModelSnapshot =
         let withDeleteInterveningResults (value: bool) (req: MlRevertModelSnapshotRequest) =
-            { req with bodyDeleteInterveningResults = Some value }
-        let withDeleteInterveningResults (value: bool) (req: MlRevertModelSnapshotRequest) =
+            { req with DeleteInterveningResults = Some value }
+        let withBodyDeleteInterveningResults (value: bool) (req: MlRevertModelSnapshotRequest) =
             { req with bodyDeleteInterveningResults = Some value }
 
     type MlSetUpgradeModeRequest = {
@@ -4403,21 +4343,21 @@ module MlOperations =
             { state with Timeout = Some value }
 
         [<CustomOperation("id")>]
-        member _.Id(state: MlStartDataFrameAnalyticsRequest, value: Types.Id) =
+        member _.BodyId(state: MlStartDataFrameAnalyticsRequest, value: Types.Id) =
             { state with bodyId = Some value }
 
-        [<CustomOperation("timeout")>]
-        member _.Timeout(state: MlStartDataFrameAnalyticsRequest, value: Types.Duration) =
+        [<CustomOperation("bodyTimeout")>]
+        member _.BodyTimeout(state: MlStartDataFrameAnalyticsRequest, value: Types.Duration) =
             { state with bodyTimeout = Some value }
 
     let mlStartDataFrameAnalyticsRequest = MlStartDataFrameAnalyticsRequestBuilder()
 
     module StartDataFrameAnalytics =
         let withTimeout (value: Types.Duration) (req: MlStartDataFrameAnalyticsRequest) =
-            { req with bodyTimeout = Some value }
-        let withId (value: Types.Id) (req: MlStartDataFrameAnalyticsRequest) =
+            { req with Timeout = Some value }
+        let withBodyId (value: Types.Id) (req: MlStartDataFrameAnalyticsRequest) =
             { req with bodyId = Some value }
-        let withTimeout (value: Types.Duration) (req: MlStartDataFrameAnalyticsRequest) =
+        let withBodyTimeout (value: Types.Duration) (req: MlStartDataFrameAnalyticsRequest) =
             { req with bodyTimeout = Some value }
 
     type MlStartDatafeedRequest = {
@@ -4484,32 +4424,32 @@ module MlOperations =
         member _.Timeout(state: MlStartDatafeedRequest, value: Types.Duration) =
             { state with Timeout = Some value }
 
-        [<CustomOperation("end'")>]
-        member _.End(state: MlStartDatafeedRequest, value: Types.DateTime) =
+        [<CustomOperation("bodyEnd")>]
+        member _.BodyEnd(state: MlStartDatafeedRequest, value: Types.DateTime) =
             { state with bodyEnd = Some value }
 
-        [<CustomOperation("start")>]
-        member _.Start(state: MlStartDatafeedRequest, value: Types.DateTime) =
+        [<CustomOperation("bodyStart")>]
+        member _.BodyStart(state: MlStartDatafeedRequest, value: Types.DateTime) =
             { state with bodyStart = Some value }
 
-        [<CustomOperation("timeout")>]
-        member _.Timeout(state: MlStartDatafeedRequest, value: Types.Duration) =
+        [<CustomOperation("bodyTimeout")>]
+        member _.BodyTimeout(state: MlStartDatafeedRequest, value: Types.Duration) =
             { state with bodyTimeout = Some value }
 
     let mlStartDatafeedRequest = MlStartDatafeedRequestBuilder()
 
     module StartDatafeed =
         let withEnd (value: Types.DateTime) (req: MlStartDatafeedRequest) =
-            { req with bodyEnd = Some value }
+            { req with End = Some value }
         let withStart (value: Types.DateTime) (req: MlStartDatafeedRequest) =
-            { req with bodyStart = Some value }
+            { req with Start = Some value }
         let withTimeout (value: Types.Duration) (req: MlStartDatafeedRequest) =
-            { req with bodyTimeout = Some value }
-        let withEnd (value: Types.DateTime) (req: MlStartDatafeedRequest) =
+            { req with Timeout = Some value }
+        let withBodyEnd (value: Types.DateTime) (req: MlStartDatafeedRequest) =
             { req with bodyEnd = Some value }
-        let withStart (value: Types.DateTime) (req: MlStartDatafeedRequest) =
+        let withBodyStart (value: Types.DateTime) (req: MlStartDatafeedRequest) =
             { req with bodyStart = Some value }
-        let withTimeout (value: Types.Duration) (req: MlStartDatafeedRequest) =
+        let withBodyTimeout (value: Types.Duration) (req: MlStartDatafeedRequest) =
             { req with bodyTimeout = Some value }
 
     type MlStartTrainedModelDeploymentRequest = {
@@ -4699,37 +4639,37 @@ module MlOperations =
             { state with Timeout = Some value }
 
         [<CustomOperation("id")>]
-        member _.Id(state: MlStopDataFrameAnalyticsRequest, value: Types.Id) =
+        member _.BodyId(state: MlStopDataFrameAnalyticsRequest, value: Types.Id) =
             { state with bodyId = Some value }
 
-        [<CustomOperation("allowNoMatch")>]
-        member _.AllowNoMatch(state: MlStopDataFrameAnalyticsRequest, value: bool) =
+        [<CustomOperation("bodyAllowNoMatch")>]
+        member _.BodyAllowNoMatch(state: MlStopDataFrameAnalyticsRequest, value: bool) =
             { state with bodyAllowNoMatch = Some value }
 
-        [<CustomOperation("force")>]
-        member _.Force(state: MlStopDataFrameAnalyticsRequest, value: bool) =
+        [<CustomOperation("bodyForce")>]
+        member _.BodyForce(state: MlStopDataFrameAnalyticsRequest, value: bool) =
             { state with bodyForce = Some value }
 
-        [<CustomOperation("timeout")>]
-        member _.Timeout(state: MlStopDataFrameAnalyticsRequest, value: Types.Duration) =
+        [<CustomOperation("bodyTimeout")>]
+        member _.BodyTimeout(state: MlStopDataFrameAnalyticsRequest, value: Types.Duration) =
             { state with bodyTimeout = Some value }
 
     let mlStopDataFrameAnalyticsRequest = MlStopDataFrameAnalyticsRequestBuilder()
 
     module StopDataFrameAnalytics =
         let withAllowNoMatch (value: bool) (req: MlStopDataFrameAnalyticsRequest) =
-            { req with bodyAllowNoMatch = Some value }
+            { req with AllowNoMatch = Some value }
         let withForce (value: bool) (req: MlStopDataFrameAnalyticsRequest) =
-            { req with bodyForce = Some value }
+            { req with Force = Some value }
         let withTimeout (value: Types.Duration) (req: MlStopDataFrameAnalyticsRequest) =
-            { req with bodyTimeout = Some value }
-        let withId (value: Types.Id) (req: MlStopDataFrameAnalyticsRequest) =
+            { req with Timeout = Some value }
+        let withBodyId (value: Types.Id) (req: MlStopDataFrameAnalyticsRequest) =
             { req with bodyId = Some value }
-        let withAllowNoMatch (value: bool) (req: MlStopDataFrameAnalyticsRequest) =
+        let withBodyAllowNoMatch (value: bool) (req: MlStopDataFrameAnalyticsRequest) =
             { req with bodyAllowNoMatch = Some value }
-        let withForce (value: bool) (req: MlStopDataFrameAnalyticsRequest) =
+        let withBodyForce (value: bool) (req: MlStopDataFrameAnalyticsRequest) =
             { req with bodyForce = Some value }
-        let withTimeout (value: Types.Duration) (req: MlStopDataFrameAnalyticsRequest) =
+        let withBodyTimeout (value: Types.Duration) (req: MlStopDataFrameAnalyticsRequest) =
             { req with bodyTimeout = Some value }
 
     type MlStopDatafeedRequest = {
@@ -4806,40 +4746,40 @@ module MlOperations =
         member _.CloseJob(state: MlStopDatafeedRequest, value: bool) =
             { state with CloseJob = Some value }
 
-        [<CustomOperation("allowNoMatch")>]
-        member _.AllowNoMatch(state: MlStopDatafeedRequest, value: bool) =
+        [<CustomOperation("bodyAllowNoMatch")>]
+        member _.BodyAllowNoMatch(state: MlStopDatafeedRequest, value: bool) =
             { state with bodyAllowNoMatch = Some value }
 
-        [<CustomOperation("force")>]
-        member _.Force(state: MlStopDatafeedRequest, value: bool) =
+        [<CustomOperation("bodyForce")>]
+        member _.BodyForce(state: MlStopDatafeedRequest, value: bool) =
             { state with bodyForce = Some value }
 
-        [<CustomOperation("timeout")>]
-        member _.Timeout(state: MlStopDatafeedRequest, value: Types.Duration) =
+        [<CustomOperation("bodyTimeout")>]
+        member _.BodyTimeout(state: MlStopDatafeedRequest, value: Types.Duration) =
             { state with bodyTimeout = Some value }
 
-        [<CustomOperation("closeJob")>]
-        member _.CloseJob(state: MlStopDatafeedRequest, value: bool) =
+        [<CustomOperation("bodyCloseJob")>]
+        member _.BodyCloseJob(state: MlStopDatafeedRequest, value: bool) =
             { state with bodyCloseJob = Some value }
 
     let mlStopDatafeedRequest = MlStopDatafeedRequestBuilder()
 
     module StopDatafeed =
         let withAllowNoMatch (value: bool) (req: MlStopDatafeedRequest) =
-            { req with bodyAllowNoMatch = Some value }
+            { req with AllowNoMatch = Some value }
         let withForce (value: bool) (req: MlStopDatafeedRequest) =
-            { req with bodyForce = Some value }
+            { req with Force = Some value }
         let withTimeout (value: Types.Duration) (req: MlStopDatafeedRequest) =
-            { req with bodyTimeout = Some value }
+            { req with Timeout = Some value }
         let withCloseJob (value: bool) (req: MlStopDatafeedRequest) =
-            { req with bodyCloseJob = Some value }
-        let withAllowNoMatch (value: bool) (req: MlStopDatafeedRequest) =
+            { req with CloseJob = Some value }
+        let withBodyAllowNoMatch (value: bool) (req: MlStopDatafeedRequest) =
             { req with bodyAllowNoMatch = Some value }
-        let withForce (value: bool) (req: MlStopDatafeedRequest) =
+        let withBodyForce (value: bool) (req: MlStopDatafeedRequest) =
             { req with bodyForce = Some value }
-        let withTimeout (value: Types.Duration) (req: MlStopDatafeedRequest) =
+        let withBodyTimeout (value: Types.Duration) (req: MlStopDatafeedRequest) =
             { req with bodyTimeout = Some value }
-        let withCloseJob (value: bool) (req: MlStopDatafeedRequest) =
+        let withBodyCloseJob (value: bool) (req: MlStopDatafeedRequest) =
             { req with bodyCloseJob = Some value }
 
     type MlStopTrainedModelDeploymentRequest = {
@@ -4903,26 +4843,26 @@ module MlOperations =
         member _.Id(state: MlStopTrainedModelDeploymentRequest, value: Types.Id) =
             { state with Id = Some value }
 
-        [<CustomOperation("allowNoMatch")>]
-        member _.AllowNoMatch(state: MlStopTrainedModelDeploymentRequest, value: bool) =
+        [<CustomOperation("bodyAllowNoMatch")>]
+        member _.BodyAllowNoMatch(state: MlStopTrainedModelDeploymentRequest, value: bool) =
             { state with bodyAllowNoMatch = Some value }
 
-        [<CustomOperation("force")>]
-        member _.Force(state: MlStopTrainedModelDeploymentRequest, value: bool) =
+        [<CustomOperation("bodyForce")>]
+        member _.BodyForce(state: MlStopTrainedModelDeploymentRequest, value: bool) =
             { state with bodyForce = Some value }
 
     let mlStopTrainedModelDeploymentRequest = MlStopTrainedModelDeploymentRequestBuilder()
 
     module StopTrainedModelDeployment =
         let withAllowNoMatch (value: bool) (req: MlStopTrainedModelDeploymentRequest) =
-            { req with bodyAllowNoMatch = Some value }
+            { req with AllowNoMatch = Some value }
         let withForce (value: bool) (req: MlStopTrainedModelDeploymentRequest) =
-            { req with bodyForce = Some value }
+            { req with Force = Some value }
         let withId (value: Types.Id) (req: MlStopTrainedModelDeploymentRequest) =
             { req with Id = Some value }
-        let withAllowNoMatch (value: bool) (req: MlStopTrainedModelDeploymentRequest) =
+        let withBodyAllowNoMatch (value: bool) (req: MlStopTrainedModelDeploymentRequest) =
             { req with bodyAllowNoMatch = Some value }
-        let withForce (value: bool) (req: MlStopTrainedModelDeploymentRequest) =
+        let withBodyForce (value: bool) (req: MlStopTrainedModelDeploymentRequest) =
             { req with bodyForce = Some value }
 
     type MlUpdateDataFrameAnalyticsRequest = {
@@ -5513,8 +5453,8 @@ module MlOperations =
         member _.NumberOfAllocations(state: MlUpdateTrainedModelDeploymentRequest, value: Types.Integer) =
             { state with NumberOfAllocations = Some value }
 
-        [<CustomOperation("numberOfAllocations")>]
-        member _.NumberOfAllocations(state: MlUpdateTrainedModelDeploymentRequest, value: Types.Integer) =
+        [<CustomOperation("bodyNumberOfAllocations")>]
+        member _.BodyNumberOfAllocations(state: MlUpdateTrainedModelDeploymentRequest, value: Types.Integer) =
             { state with bodyNumberOfAllocations = Some value }
 
         [<CustomOperation("adaptiveAllocations")>]
@@ -5525,8 +5465,8 @@ module MlOperations =
 
     module UpdateTrainedModelDeployment =
         let withNumberOfAllocations (value: Types.Integer) (req: MlUpdateTrainedModelDeploymentRequest) =
-            { req with bodyNumberOfAllocations = Some value }
-        let withNumberOfAllocations (value: Types.Integer) (req: MlUpdateTrainedModelDeploymentRequest) =
+            { req with NumberOfAllocations = Some value }
+        let withBodyNumberOfAllocations (value: Types.Integer) (req: MlUpdateTrainedModelDeploymentRequest) =
             { req with bodyNumberOfAllocations = Some value }
         let withAdaptiveAllocations (value: Types.AdaptiveAllocationsSettings) (req: MlUpdateTrainedModelDeploymentRequest) =
             { req with AdaptiveAllocations = Some value }

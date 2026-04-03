@@ -125,13 +125,6 @@ module LicenseOperations =
 
     type LicenseGetBasicStatusResponse = System.Text.Json.JsonElement
 
-    type LicenseGetBasicStatusRequestBuilder() =
-        member _.Yield(_: unit) : LicenseGetBasicStatusRequest =
-            {
-            }
-
-    let licenseGetBasicStatusRequest = LicenseGetBasicStatusRequestBuilder()
-
     type LicenseGetTrialStatusRequest = | LicenseGetTrialStatusRequest
 
         with
@@ -146,13 +139,6 @@ module LicenseOperations =
             with ex -> Result.Error ex
 
     type LicenseGetTrialStatusResponse = System.Text.Json.JsonElement
-
-    type LicenseGetTrialStatusRequestBuilder() =
-        member _.Yield(_: unit) : LicenseGetTrialStatusRequest =
-            {
-            }
-
-    let licenseGetTrialStatusRequest = LicenseGetTrialStatusRequestBuilder()
 
     type LicensePostRequest = {
         Acknowledge: bool option

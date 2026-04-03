@@ -129,7 +129,7 @@ module IndicesOperations =
                 let path = $"/{req.Index}/_analyze"
                 let queryParams =
                     [
-                        req.Index |> Option.map (fun v -> "index", Fes.Http.toQueryValue v)
+                        req.queryIndex |> Option.map (fun v -> "index", Fes.Http.toQueryValue v)
                     ] |> List.choose id
                 let queryString =
                     if List.isEmpty queryParams then ""
@@ -164,8 +164,8 @@ module IndicesOperations =
         member _.Index(state: IndicesAnalyzeRequest, value: Types.IndexName) =
             { state with Index = value }
 
-        [<CustomOperation("index")>]
-        member _.Index(state: IndicesAnalyzeRequest, value: Types.IndexName) =
+        [<CustomOperation("queryIndex")>]
+        member _.QueryIndex(state: IndicesAnalyzeRequest, value: Types.IndexName) =
             { state with queryIndex = Some value }
 
         [<CustomOperation("analyzer")>]
@@ -275,7 +275,7 @@ module IndicesOperations =
                 let path = $"/{req.Index}/_cache/clear"
                 let queryParams =
                     [
-                        req.Index |> Option.map (fun v -> "index", Fes.Http.toQueryValue v)
+                        req.queryIndex |> Option.map (fun v -> "index", Fes.Http.toQueryValue v)
                         req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
                         req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
                         req.Fielddata |> Option.map (fun v -> "fielddata", Fes.Http.toQueryValue v)
@@ -314,8 +314,8 @@ module IndicesOperations =
         member _.Index(state: IndicesClearCacheRequest, value: Types.Indices) =
             { state with Index = value }
 
-        [<CustomOperation("index")>]
-        member _.Index(state: IndicesClearCacheRequest, value: Types.Indices) =
+        [<CustomOperation("queryIndex")>]
+        member _.QueryIndex(state: IndicesClearCacheRequest, value: Types.Indices) =
             { state with queryIndex = Some value }
 
         [<CustomOperation("allowNoIndices")>]
@@ -2216,13 +2216,6 @@ module IndicesOperations =
 
     type IndicesGetDataLifecycleStatsResponse = System.Text.Json.JsonElement
 
-    type IndicesGetDataLifecycleStatsRequestBuilder() =
-        member _.Yield(_: unit) : IndicesGetDataLifecycleStatsRequest =
-            {
-            }
-
-    let indicesGetDataLifecycleStatsRequest = IndicesGetDataLifecycleStatsRequestBuilder()
-
     type IndicesGetDataStreamRequest = {
         Name: Types.DataStreamNames
         ExpandWildcards: Types.ExpandWildcards option
@@ -4111,8 +4104,8 @@ module IndicesOperations =
         member _.Mappings(state: IndicesPutTemplateRequest, value: Types.TypeMapping) =
             { state with Mappings = Some value }
 
-        [<CustomOperation("order")>]
-        member _.Order(state: IndicesPutTemplateRequest, value: Types.Integer) =
+        [<CustomOperation("bodyOrder")>]
+        member _.BodyOrder(state: IndicesPutTemplateRequest, value: Types.Integer) =
             { state with bodyOrder = Some value }
 
         [<CustomOperation("settings")>]
@@ -4131,7 +4124,7 @@ module IndicesOperations =
         let withMasterTimeout (value: Types.Duration) (req: IndicesPutTemplateRequest) =
             { req with MasterTimeout = Some value }
         let withOrder (value: Types.Integer) (req: IndicesPutTemplateRequest) =
-            { req with bodyOrder = Some value }
+            { req with Order = Some value }
         let withCause (value: string) (req: IndicesPutTemplateRequest) =
             { req with Cause = Some value }
         let withAliases (value: Map<Types.IndexName, Types.Alias>) (req: IndicesPutTemplateRequest) =
@@ -4140,7 +4133,7 @@ module IndicesOperations =
             { req with IndexPatterns = Some value }
         let withMappings (value: Types.TypeMapping) (req: IndicesPutTemplateRequest) =
             { req with Mappings = Some value }
-        let withOrder (value: Types.Integer) (req: IndicesPutTemplateRequest) =
+        let withBodyOrder (value: Types.Integer) (req: IndicesPutTemplateRequest) =
             { req with bodyOrder = Some value }
         let withSettings (value: Types.IndexSettings) (req: IndicesPutTemplateRequest) =
             { req with Settings = Some value }

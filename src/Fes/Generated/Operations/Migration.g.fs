@@ -56,13 +56,6 @@ module MigrationOperations =
 
     type MigrationGetFeatureUpgradeStatusResponse = System.Text.Json.JsonElement
 
-    type MigrationGetFeatureUpgradeStatusRequestBuilder() =
-        member _.Yield(_: unit) : MigrationGetFeatureUpgradeStatusRequest =
-            {
-            }
-
-    let migrationGetFeatureUpgradeStatusRequest = MigrationGetFeatureUpgradeStatusRequestBuilder()
-
     type MigrationPostFeatureUpgradeRequest = | MigrationPostFeatureUpgradeRequest
 
         with
@@ -77,11 +70,4 @@ module MigrationOperations =
             with ex -> Result.Error ex
 
     type MigrationPostFeatureUpgradeResponse = System.Text.Json.JsonElement
-
-    type MigrationPostFeatureUpgradeRequestBuilder() =
-        member _.Yield(_: unit) : MigrationPostFeatureUpgradeRequest =
-            {
-            }
-
-    let migrationPostFeatureUpgradeRequest = MigrationPostFeatureUpgradeRequestBuilder()
 

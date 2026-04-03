@@ -65,12 +65,6 @@ module ES =
             req <- { req with Name = name }
             req
 
-    /// Bulk index or delete documents.
-    let bulk (index: Types.IndexName) =
-        let mutable req = Unchecked.defaultof<BulkRequest>
-        req <- { req with Index = index }
-        req
-
     /// Checks if the specified combination of method, API, parameters, and arbitrary capabilities are supported.
     let capabilities  =
         let mutable req = Unchecked.defaultof<CapabilitiesRequest>
@@ -90,13 +84,6 @@ module ES =
     /// Count search results.
     let count (index: Types.Indices) =
         let mutable req = Unchecked.defaultof<CountRequest>
-        req <- { req with Index = index }
-        req
-
-    /// Create a new document in the index.
-    let create (id: Types.Id) (index: Types.IndexName) =
-        let mutable req = Unchecked.defaultof<CreateRequest>
-        req <- { req with Id = id }
         req <- { req with Index = index }
         req
 
@@ -167,13 +154,11 @@ module ES =
 
     /// Get script contexts.
     let getScriptContext  : GetScriptContextRequest =
-        {
-        }
+        Unchecked.defaultof<GetScriptContextRequest>
 
     /// Get script languages.
     let getScriptLanguages  : GetScriptLanguagesRequest =
-        {
-        }
+        Unchecked.defaultof<GetScriptLanguagesRequest>
 
     /// Get a document's source.
     let getSource (id: Types.Id) (index: Types.IndexName) =
@@ -188,17 +173,9 @@ module ES =
         req <- { req with Feature = feature }
         req
 
-    /// Create or update a document in an index.
-    let index (id: Types.Id) (index: Types.IndexName) =
-        let mutable req = Unchecked.defaultof<IndexRequest>
-        req <- { req with Id = id }
-        req <- { req with Index = index }
-        req
-
     /// Get cluster info.
     let info  : InfoRequest =
-        {
-        }
+        Unchecked.defaultof<InfoRequest>
 
     /// Run a knn search.
     let knnSearch (index: Types.Indices) =
@@ -238,8 +215,7 @@ module ES =
 
     /// Ping the cluster.
     let ping  : PingRequest =
-        {
-        }
+        Unchecked.defaultof<PingRequest>
 
     /// Create or update a script or search template.
     let putScript (id: Types.Id) (context: Types.Name) =
@@ -313,20 +289,6 @@ module ES =
     /// Get terms in an index.
     let termsEnum (index: Types.Indices) =
         let mutable req = Unchecked.defaultof<TermsEnumRequest>
-        req <- { req with Index = index }
-        req
-
-    /// Get term vector information.
-    let termvectors (index: Types.IndexName) (id: Types.Id) =
-        let mutable req = Unchecked.defaultof<TermvectorsRequest>
-        req <- { req with Index = index }
-        req <- { req with Id = id }
-        req
-
-    /// Update a document.
-    let update (id: Types.Id) (index: Types.IndexName) =
-        let mutable req = Unchecked.defaultof<UpdateRequest>
-        req <- { req with Id = id }
         req <- { req with Index = index }
         req
 
@@ -2178,12 +2140,6 @@ module ES =
             req <- { req with CalendarId = calendarId }
             req
 
-        /// Send data to an anomaly detection job for analysis.
-        let postData (jobId: Types.Id) =
-            let mutable req = Unchecked.defaultof<MlPostDataRequest>
-            req <- { req with JobId = jobId }
-            req
-
         /// Preview features used by data frame analytics.
         let previewDataFrameAnalytics (id: Types.Id) =
             let mutable req = Unchecked.defaultof<MlPreviewDataFrameAnalyticsRequest>
@@ -2363,12 +2319,6 @@ module ES =
         /// Validate an anomaly detection job.
         let validateDetector () =
             Unchecked.defaultof<MlValidateDetectorRequest>
-
-    module Monitoring =
-
-        /// Send monitoring data.
-        let bulk () =
-            Unchecked.defaultof<MonitoringBulkRequest>
 
     module Nodes =
 
@@ -3281,10 +3231,6 @@ module ES =
         /// Find the structure of text messages.
         let findMessageStructure () =
             Unchecked.defaultof<TextStructureFindMessageStructureRequest>
-
-        /// Find the structure of a text file.
-        let findStructure () =
-            Unchecked.defaultof<TextStructureFindStructureRequest>
 
         /// Test a Grok pattern.
         let testGrokPattern () =

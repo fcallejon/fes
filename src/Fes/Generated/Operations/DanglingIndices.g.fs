@@ -155,10 +155,3 @@ module DanglingIndicesOperations =
 
     type DanglingIndicesListDanglingIndicesResponse = System.Text.Json.JsonElement
 
-    type DanglingIndicesListDanglingIndicesRequestBuilder() =
-        member _.Yield(_: unit) : DanglingIndicesListDanglingIndicesRequest =
-            {
-            }
-
-    let danglingIndicesListDanglingIndicesRequest = DanglingIndicesListDanglingIndicesRequestBuilder()
-

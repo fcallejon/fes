@@ -27,10 +27,3 @@ module SslOperations =
 
     type SslCertificatesResponse = Types.CertificateInformation list
 
-    type SslCertificatesRequestBuilder() =
-        member _.Yield(_: unit) : SslCertificatesRequest =
-            {
-            }
-
-    let sslCertificatesRequest = SslCertificatesRequestBuilder()
-

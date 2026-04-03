@@ -101,14 +101,18 @@ let private getFieldName (fnm: FieldNameMap) (prefix: string) (p: Property) =
 // Emit Request Type
 // ============================================================================
 
-let private emitRequestRecord (w: Writer) (ctx: TypeResolver.ResolveContext) (reqTypeName: string) (fnm: FieldNameMap) (pathProps: Property list) (queryProps: Property list) (bodyProps: Property list) =
+let private emitRequestRecord (w: Writer) (ctx: TypeResolver.ResolveContext) (reqTypeName: string) (fnm: FieldNameMap) (generics: TypeName list) (pathProps: Property list) (queryProps: Property list) (bodyProps: Property list) =
     let allProps = pathProps @ queryProps @ bodyProps
+    let genericParams =
+        match generics with
+        | [] -> ""
+        | gs -> "<" + (gs |> List.map (fun g -> $"'{Namespacing.toCamelCase g.Name}") |> String.concat ", ") + ">"
     if allProps.IsEmpty then
         w.Line $"type {reqTypeName} = | {reqTypeName}"
         w.BlankLine()
     else
 
-    w.Line $"type {reqTypeName} = {{"
+    w.Line $"type {reqTypeName}{genericParams} = {{"
     w.Indent()
 
     for p in pathProps do
@@ -137,7 +141,7 @@ let private emitRequestRecord (w: Writer) (ctx: TypeResolver.ResolveContext) (re
 // Emit ToRequest static method
 // ============================================================================
 
-let private emitToRequest (w: Writer) (reqTypeName: string) (endpoint: Endpoint) (request: RequestDefinition) =
+let private emitToRequest (w: Writer) (reqTypeName: string) (endpoint: Endpoint) (request: RequestDefinition) (fnm: FieldNameMap) =
     let url = bestUrl endpoint.Urls
     let httpMethod = httpMethodString url.Methods
 
@@ -152,7 +156,12 @@ let private emitToRequest (w: Writer) (reqTypeName: string) (endpoint: Endpoint)
     let pathExpr =
         let mutable p = url.Path
         for param in pathParams do
-            let fieldName = Namespacing.toFieldName param
+            // Find the matching path property to get the deduped field name
+            let pathProp = request.Path |> List.tryFind (fun pp -> pp.Name = param)
+            let fieldName =
+                match pathProp with
+                | Some pp -> getFieldName fnm "path" pp
+                | None -> Namespacing.toFieldName param
             p <- p.Replace($"{{{param}}}", $"{{req.{fieldName}}}")
         $"$\"{p}\""
     w.Line $"let path = {pathExpr}"
@@ -165,7 +174,7 @@ let private emitToRequest (w: Writer) (reqTypeName: string) (endpoint: Endpoint)
         w.Line "["
         w.Indent()
         for p in queryProps do
-            let fieldName = Namespacing.toFieldName p.Name
+            let fieldName = getFieldName fnm "query" p
             w.Line $"req.{fieldName} |> Option.map (fun v -> \"{p.Name}\", Fes.Http.toQueryValue v)"
         w.Dedent()
         w.Line "] |> List.choose id"
@@ -233,39 +242,44 @@ let private emitCeBuilder (w: Writer) (ctx: TypeResolver.ResolveContext) (reqTyp
 
     // Custom operations for path params
     for p in pathProps do
-        let opName = Namespacing.toFunctionName p.Name
         let fieldName = getFieldName fnm "path" p
+        let opName = Namespacing.toFunctionName fieldName
+        let memberName = Namespacing.toPascalCase fieldName
         let fieldType = TypeResolver.resolveValueOf ctx p.Type
         w.Line $"[<CustomOperation(\"{opName}\")>]"
-        w.Line $"member _.{Namespacing.toPascalCase p.Name}(state: {reqTypeName}, value: {fieldType}) ="
+        w.Line $"member _.{memberName}(state: {reqTypeName}, value: {fieldType}) ="
         w.Line $"    {{ state with {fieldName} = value }}"
         w.BlankLine()
 
     // Custom operations for query params
     for p in queryProps do
-        let opName = Namespacing.toFunctionName p.Name
         let fieldName = getFieldName fnm "query" p
+        let opName = Namespacing.toFunctionName fieldName
+        let memberName = Namespacing.toPascalCase fieldName
         let fieldType = TypeResolver.resolveValueOf ctx p.Type
         w.Line $"[<CustomOperation(\"{opName}\")>]"
         if p.Required then
-            w.Line $"member _.{Namespacing.toPascalCase p.Name}(state: {reqTypeName}, value: {fieldType}) ="
+            w.Line $"member _.{memberName}(state: {reqTypeName}, value: {fieldType}) ="
             w.Line $"    {{ state with {fieldName} = value }}"
         else
-            w.Line $"member _.{Namespacing.toPascalCase p.Name}(state: {reqTypeName}, value: {fieldType}) ="
+            w.Line $"member _.{memberName}(state: {reqTypeName}, value: {fieldType}) ="
             w.Line $"    {{ state with {fieldName} = Some value }}"
         w.BlankLine()
 
-    // Custom operations for body props
+    // Custom operations for body props — use deduped names when they collide with query ops
+    let queryOpNames = queryProps |> List.map (fun p -> Namespacing.toFunctionName p.Name) |> Set.ofList
     for p in bodyProps do
-        let opName = Namespacing.toFunctionName p.Name
         let fieldName = getFieldName fnm "body" p
+        let baseOpName = Namespacing.toFunctionName p.Name
+        let opName = if Set.contains baseOpName queryOpNames then Namespacing.toFunctionName fieldName else baseOpName
+        let memberName = Namespacing.toPascalCase fieldName
         let fieldType = TypeResolver.resolveValueOf ctx p.Type
         w.Line $"[<CustomOperation(\"{opName}\")>]"
         if p.Required then
-            w.Line $"member _.{Namespacing.toPascalCase p.Name}(state: {reqTypeName}, value: {fieldType}) ="
+            w.Line $"member _.{memberName}(state: {reqTypeName}, value: {fieldType}) ="
             w.Line $"    {{ state with {fieldName} = value }}"
         else
-            w.Line $"member _.{Namespacing.toPascalCase p.Name}(state: {reqTypeName}, value: {fieldType}) ="
+            w.Line $"member _.{memberName}(state: {reqTypeName}, value: {fieldType}) ="
             w.Line $"    {{ state with {fieldName} = Some value }}"
         w.BlankLine()
 
@@ -290,11 +304,20 @@ let private emitPipeFunctions (w: Writer) (ctx: TypeResolver.ResolveContext) (re
     w.Line $"module {moduleName} ="
     w.Indent()
 
-    for p in queryProps @ bodyProps do
+    for p in queryProps do
         let funcName = $"with{Namespacing.toPascalCase p.Name}"
-        let isBody = bodyProps |> List.exists (fun bp -> bp.Name = p.Name)
-        let prefix = if isBody then "body" else "query"
-        let fieldName = getFieldName fnm prefix p
+        let fieldName = getFieldName fnm "query" p
+        let fieldType = TypeResolver.resolveValueOf ctx p.Type
+        if p.Required then
+            w.Line $"let {funcName} (value: {fieldType}) (req: {reqTypeName}) ="
+            w.Line $"    {{ req with {fieldName} = value }}"
+        else
+            w.Line $"let {funcName} (value: {fieldType}) (req: {reqTypeName}) ="
+            w.Line $"    {{ req with {fieldName} = Some value }}"
+
+    for p in bodyProps do
+        let fieldName = getFieldName fnm "body" p
+        let funcName = $"with{Namespacing.toPascalCase fieldName}"
         let fieldType = TypeResolver.resolveValueOf ctx p.Type
         if p.Required then
             w.Line $"let {funcName} (value: {fieldType}) (req: {reqTypeName}) ="
@@ -332,14 +355,18 @@ let emitEndpoint (w: Writer) (index: TypeIndex.TypeIndex) (endpoint: Endpoint) =
         // Request record
         if hasValueBody then
             // For ValueBody, add a Document field to the request
-            w.Line $"type {reqTN} = {{"
+            let genericParams =
+                match request.Generics with
+                | [] -> ""
+                | gs -> "<" + (gs |> List.map (fun g -> $"'{Namespacing.toCamelCase g.Name}") |> String.concat ", ") + ">"
+            w.Line $"type {reqTN}{genericParams} = {{"
             w.Indent()
             for p in pathProps do
-                let fieldName = Namespacing.toFieldName p.Name
+                let fieldName = getFieldName fnm "path" p
                 let fieldType = TypeResolver.resolveValueOf ctx p.Type
                 w.Line $"{fieldName}: {fieldType}"
             for p in queryProps do
-                let fieldName = Namespacing.toFieldName p.Name
+                let fieldName = getFieldName fnm "query" p
                 let fieldType = TypeResolver.resolveValueOf ctx p.Type
                 if p.Required then w.Line $"{fieldName}: {fieldType}"
                 else w.Line $"{fieldName}: {fieldType} option"
@@ -348,11 +375,12 @@ let emitEndpoint (w: Writer) (index: TypeIndex.TypeIndex) (endpoint: Endpoint) =
             w.Line "}"
             w.BlankLine()
         else
-            emitRequestRecord w ctx reqTN fnm pathProps queryProps bodyProps
+            emitRequestRecord w ctx reqTN fnm request.Generics pathProps queryProps bodyProps
 
-        // ToRequest method
-        w.Line $"    with"
-        emitToRequest w reqTN endpoint request
+        // ToRequest method — skip for generic requests (needs generic threading)
+        if request.Generics.IsEmpty then
+            w.Line $"    with"
+            emitToRequest w reqTN endpoint request fnm
 
         // Response type alias
         let respTd = TypeIndex.resolve index endpoint.Response
@@ -374,13 +402,16 @@ let emitEndpoint (w: Writer) (index: TypeIndex.TypeIndex) (endpoint: Endpoint) =
             w.BlankLine()
         | _ -> ()
 
-        // CE builder (always, for consistency)
-        emitCeBuilder w ctx reqTN builderName fnm pathProps queryProps bodyProps hasValueBody
+        // CE builder — skip for empty request types (marker DUs) and generic requests
+        let hasAnyProps = not pathProps.IsEmpty || not queryProps.IsEmpty || not bodyProps.IsEmpty || hasValueBody
+        if hasAnyProps && request.Generics.IsEmpty then
+            emitCeBuilder w ctx reqTN builderName fnm pathProps queryProps bodyProps hasValueBody
 
-        // Pipe-friendly module
-        let pipeModuleName = Namespacing.toPascalCase (endpoint.Name.Split('.') |> Array.last)
-        if not queryProps.IsEmpty || not bodyProps.IsEmpty then
-            emitPipeFunctions w ctx reqTN pipeModuleName fnm queryProps bodyProps
+        // Pipe-friendly module — also skip for generic requests
+        if request.Generics.IsEmpty then
+            let pipeModuleName = Namespacing.toPascalCase (endpoint.Name.Split('.') |> Array.last)
+            if not queryProps.IsEmpty || not bodyProps.IsEmpty then
+                emitPipeFunctions w ctx reqTN pipeModuleName fnm queryProps bodyProps
 
     | _ ->
         w.Line $"// Skipping endpoint {endpoint.Name}: request type is not a Request definition"
