@@ -19,7 +19,7 @@ module CcrOperations =
 
         with
         static member ToEndpoint(req: CcrDeleteAutoFollowPatternRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ccr/auto_follow/{req.Name}"
+            let path = $"/_ccr/auto_follow/{Fes.Http.toPathSegment req.Name}"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -90,7 +90,7 @@ module CcrOperations =
 
         with
         static member ToEndpoint(req: CcrFollowRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_ccr/follow"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_ccr/follow"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -239,7 +239,7 @@ module CcrOperations =
 
         with
         static member ToEndpoint(req: CcrFollowInfoRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_ccr/info"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_ccr/info"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -281,7 +281,7 @@ module CcrOperations =
 
         with
         static member ToEndpoint(req: CcrFollowStatsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_ccr/stats"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_ccr/stats"
             let queryParams =
                 [
                     req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
@@ -331,7 +331,7 @@ module CcrOperations =
 
         with
         static member ToEndpoint(req: CcrForgetFollowerRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_ccr/forget_follower"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_ccr/forget_follower"
             let queryParams =
                 [
                     req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
@@ -402,7 +402,7 @@ module CcrOperations =
 
         with
         static member ToEndpoint(req: CcrGetAutoFollowPatternRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ccr/auto_follow/{req.Name}"
+            let path = $"/_ccr/auto_follow/{Fes.Http.toPathSegment req.Name}"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -444,7 +444,7 @@ module CcrOperations =
 
         with
         static member ToEndpoint(req: CcrPauseAutoFollowPatternRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ccr/auto_follow/{req.Name}/pause"
+            let path = $"/_ccr/auto_follow/{Fes.Http.toPathSegment req.Name}/pause"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -486,7 +486,7 @@ module CcrOperations =
 
         with
         static member ToEndpoint(req: CcrPauseFollowRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_ccr/pause_follow"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_ccr/pause_follow"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -558,7 +558,7 @@ module CcrOperations =
 
         with
         static member ToEndpoint(req: CcrPutAutoFollowPatternRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ccr/auto_follow/{req.Name}"
+            let path = $"/_ccr/auto_follow/{Fes.Http.toPathSegment req.Name}"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -706,7 +706,7 @@ module CcrOperations =
 
         with
         static member ToEndpoint(req: CcrResumeAutoFollowPatternRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_ccr/auto_follow/{req.Name}/resume"
+            let path = $"/_ccr/auto_follow/{Fes.Http.toPathSegment req.Name}/resume"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -768,7 +768,7 @@ module CcrOperations =
 
         with
         static member ToEndpoint(req: CcrResumeFollowRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_ccr/resume_follow"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_ccr/resume_follow"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -926,7 +926,7 @@ module CcrOperations =
 
         with
         static member ToEndpoint(req: CcrUnfollowRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_ccr/unfollow"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_ccr/unfollow"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)

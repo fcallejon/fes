@@ -20,7 +20,7 @@ module AutoscalingOperations =
 
         with
         static member ToEndpoint(req: AutoscalingDeleteAutoscalingPolicyRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_autoscaling/policy/{req.Name}"
+            let path = $"/_autoscaling/policy/{Fes.Http.toPathSegment req.Name}"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -106,7 +106,7 @@ module AutoscalingOperations =
 
         with
         static member ToEndpoint(req: AutoscalingGetAutoscalingPolicyRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_autoscaling/policy/{req.Name}"
+            let path = $"/_autoscaling/policy/{Fes.Http.toPathSegment req.Name}"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -150,7 +150,7 @@ module AutoscalingOperations =
 
         with
         static member ToEndpoint(req: AutoscalingPutAutoscalingPolicyRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_autoscaling/policy/{req.Name}"
+            let path = $"/_autoscaling/policy/{Fes.Http.toPathSegment req.Name}"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)

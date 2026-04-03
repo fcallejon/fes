@@ -18,7 +18,7 @@ module SearchApplicationOperations =
 
         with
         static member ToEndpoint(req: SearchApplicationDeleteRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_application/search_application/{req.Name}"
+            let path = $"/_application/search_application/{Fes.Http.toPathSegment req.Name}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
             endpoint, ValueNone
@@ -43,7 +43,7 @@ module SearchApplicationOperations =
 
         with
         static member ToEndpoint(req: SearchApplicationDeleteBehavioralAnalyticsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_application/analytics/{req.Name}"
+            let path = $"/_application/analytics/{Fes.Http.toPathSegment req.Name}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
             endpoint, ValueNone
@@ -68,7 +68,7 @@ module SearchApplicationOperations =
 
         with
         static member ToEndpoint(req: SearchApplicationGetRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_application/search_application/{req.Name}"
+            let path = $"/_application/search_application/{Fes.Http.toPathSegment req.Name}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
             endpoint, ValueNone
@@ -93,7 +93,7 @@ module SearchApplicationOperations =
 
         with
         static member ToEndpoint(req: SearchApplicationGetBehavioralAnalyticsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_application/analytics/{req.Name}"
+            let path = $"/_application/analytics/{Fes.Http.toPathSegment req.Name}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
             endpoint, ValueNone
@@ -175,7 +175,7 @@ module SearchApplicationOperations =
 
         with
         static member ToEndpoint(req: SearchApplicationPostBehavioralAnalyticsEventRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_application/analytics/{req.CollectionName}/event/{req.EventType}"
+            let path = $"/_application/analytics/{Fes.Http.toPathSegment req.CollectionName}/event/{Fes.Http.toPathSegment req.EventType}"
             let queryParams =
                 [
                     req.Debug |> Option.map (fun v -> "debug", Fes.Http.toQueryValue v)
@@ -229,7 +229,7 @@ module SearchApplicationOperations =
 
         with
         static member ToEndpoint(req: SearchApplicationPutRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_application/search_application/{req.Name}"
+            let path = $"/_application/search_application/{Fes.Http.toPathSegment req.Name}"
             let queryParams =
                 [
                     req.Create |> Option.map (fun v -> "create", Fes.Http.toQueryValue v)
@@ -276,7 +276,7 @@ module SearchApplicationOperations =
 
         with
         static member ToEndpoint(req: SearchApplicationPutBehavioralAnalyticsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_application/analytics/{req.Name}"
+            let path = $"/_application/analytics/{Fes.Http.toPathSegment req.Name}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
             endpoint, ValueNone
@@ -303,7 +303,7 @@ module SearchApplicationOperations =
 
         with
         static member ToEndpoint(req: SearchApplicationRenderQueryRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_application/search_application/{req.Name}/_render_query"
+            let path = $"/_application/search_application/{Fes.Http.toPathSegment req.Name}/_render_query"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
             let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
@@ -341,7 +341,7 @@ module SearchApplicationOperations =
 
         with
         static member ToEndpoint(req: SearchApplicationSearchRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_application/search_application/{req.Name}/_search"
+            let path = $"/_application/search_application/{Fes.Http.toPathSegment req.Name}/_search"
             let queryParams =
                 [
                     req.TypedKeys |> Option.map (fun v -> "typed_keys", Fes.Http.toQueryValue v)

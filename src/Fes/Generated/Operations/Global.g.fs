@@ -120,7 +120,7 @@ module GlobalOperations =
 
         with
         static member ToEndpoint(req: ClearScrollRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_search/scroll/{req.ScrollId}"
+            let path = $"/_search/scroll/{Fes.Http.toPathSegment req.ScrollId}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
             let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
@@ -204,7 +204,7 @@ module GlobalOperations =
 
         with
         static member ToEndpoint(req: CountRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_count"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_count"
             let queryParams =
                 [
                     req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
@@ -391,7 +391,7 @@ module GlobalOperations =
 
         with
         static member ToEndpoint(req: DeleteRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_doc/{req.Id}"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_doc/{Fes.Http.toPathSegment req.Id}"
             let queryParams =
                 [
                     req.IfPrimaryTerm |> Option.map (fun v -> "if_primary_term", Fes.Http.toQueryValue v)
@@ -530,7 +530,7 @@ module GlobalOperations =
 
         with
         static member ToEndpoint(req: DeleteByQueryRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_delete_by_query"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_delete_by_query"
             let queryParams =
                 [
                     req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
@@ -825,7 +825,7 @@ module GlobalOperations =
 
         with
         static member ToEndpoint(req: DeleteByQueryRethrottleRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_delete_by_query/{req.TaskId}/_rethrottle"
+            let path = $"/_delete_by_query/{Fes.Http.toPathSegment req.TaskId}/_rethrottle"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
             endpoint, ValueNone
@@ -861,7 +861,7 @@ module GlobalOperations =
 
         with
         static member ToEndpoint(req: DeleteScriptRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_scripts/{req.Id}"
+            let path = $"/_scripts/{Fes.Http.toPathSegment req.Id}"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -921,7 +921,7 @@ module GlobalOperations =
 
         with
         static member ToEndpoint(req: ExistsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_doc/{req.Id}"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_doc/{Fes.Http.toPathSegment req.Id}"
             let queryParams =
                 [
                     req.Preference |> Option.map (fun v -> "preference", Fes.Http.toQueryValue v)
@@ -1049,7 +1049,7 @@ module GlobalOperations =
 
         with
         static member ToEndpoint(req: ExistsSourceRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_source/{req.Id}"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_source/{Fes.Http.toPathSegment req.Id}"
             let queryParams =
                 [
                     req.Preference |> Option.map (fun v -> "preference", Fes.Http.toQueryValue v)
@@ -1174,7 +1174,7 @@ module GlobalOperations =
 
         with
         static member ToEndpoint(req: ExplainRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_explain/{req.Id}"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_explain/{Fes.Http.toPathSegment req.Id}"
             let queryParams =
                 [
                     req.Analyzer |> Option.map (fun v -> "analyzer", Fes.Http.toQueryValue v)
@@ -1332,7 +1332,7 @@ module GlobalOperations =
 
         with
         static member ToEndpoint(req: FieldCapsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_field_caps"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_field_caps"
             let queryParams =
                 [
                     req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
@@ -1471,7 +1471,7 @@ module GlobalOperations =
 
         with
         static member ToEndpoint(req: GetRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_doc/{req.Id}"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_doc/{Fes.Http.toPathSegment req.Id}"
             let queryParams =
                 [
                     req.ForceSyntheticSource |> Option.map (fun v -> "force_synthetic_source", Fes.Http.toQueryValue v)
@@ -1606,7 +1606,7 @@ module GlobalOperations =
 
         with
         static member ToEndpoint(req: GetScriptRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_scripts/{req.Id}"
+            let path = $"/_scripts/{Fes.Http.toPathSegment req.Id}"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -1679,7 +1679,7 @@ module GlobalOperations =
 
         with
         static member ToEndpoint(req: GetSourceRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_source/{req.Id}"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_source/{Fes.Http.toPathSegment req.Id}"
             let queryParams =
                 [
                     req.Preference |> Option.map (fun v -> "preference", Fes.Http.toQueryValue v)
@@ -1792,7 +1792,7 @@ module GlobalOperations =
 
         with
         static member ToEndpoint(req: HealthReportRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_health_report/{req.Feature}"
+            let path = $"/_health_report/{Fes.Http.toPathSegment req.Feature}"
             let queryParams =
                 [
                     req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
@@ -1894,7 +1894,7 @@ module GlobalOperations =
 
         with
         static member ToEndpoint(req: KnnSearchRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_knn_search"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_knn_search"
             let queryParams =
                 [
                     req.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
@@ -1991,7 +1991,7 @@ module GlobalOperations =
 
         with
         static member ToEndpoint(req: MgetRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_mget"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_mget"
             let queryParams =
                 [
                     req.ForceSyntheticSource |> Option.map (fun v -> "force_synthetic_source", Fes.Http.toQueryValue v)
@@ -2127,7 +2127,7 @@ module GlobalOperations =
 
         with
         static member ToEndpoint(req: MsearchRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_msearch"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_msearch"
             let queryParams =
                 [
                     req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
@@ -2293,7 +2293,7 @@ module GlobalOperations =
 
         with
         static member ToEndpoint(req: MsearchTemplateRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_msearch/template"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_msearch/template"
             let queryParams =
                 [
                     req.CcsMinimizeRoundtrips |> Option.map (fun v -> "ccs_minimize_roundtrips", Fes.Http.toQueryValue v)
@@ -2396,7 +2396,7 @@ module GlobalOperations =
 
         with
         static member ToEndpoint(req: MtermvectorsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_mtermvectors"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_mtermvectors"
             let queryParams =
                 [
                     req.Ids |> Option.map (fun v -> "ids", Fes.Http.toQueryValue v)
@@ -2551,7 +2551,7 @@ module GlobalOperations =
 
         with
         static member ToEndpoint(req: OpenPointInTimeRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_pit"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_pit"
             let queryParams =
                 [
                     req.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
@@ -2671,7 +2671,7 @@ module GlobalOperations =
 
         with
         static member ToEndpoint(req: PutScriptRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_scripts/{req.Id}/{req.Context}"
+            let path = $"/_scripts/{Fes.Http.toPathSegment req.Id}/{Fes.Http.toPathSegment req.Context}"
             let queryParams =
                 [
                     req.queryContext |> Option.map (fun v -> "context", Fes.Http.toQueryValue v)
@@ -2749,7 +2749,7 @@ module GlobalOperations =
 
         with
         static member ToEndpoint(req: RankEvalRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_rank_eval"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_rank_eval"
             let queryParams =
                 [
                     req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
@@ -2985,7 +2985,7 @@ module GlobalOperations =
 
         with
         static member ToEndpoint(req: ReindexRethrottleRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_reindex/{req.TaskId}/_rethrottle"
+            let path = $"/_reindex/{Fes.Http.toPathSegment req.TaskId}/_rethrottle"
             let queryParams =
                 [
                     req.GroupBy |> Option.map (fun v -> "group_by", Fes.Http.toQueryValue v)
@@ -3041,7 +3041,7 @@ module GlobalOperations =
 
         with
         static member ToEndpoint(req: RenderSearchTemplateRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_render/template/{req.Id}"
+            let path = $"/_render/template/{Fes.Http.toPathSegment req.Id}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
             let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
@@ -3153,7 +3153,7 @@ module GlobalOperations =
 
         with
         static member ToEndpoint(req: ScrollRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_search/scroll/{req.ScrollId}"
+            let path = $"/_search/scroll/{Fes.Http.toPathSegment req.ScrollId}"
             let queryParams =
                 [
                     req.Scroll |> Option.map (fun v -> "scroll", Fes.Http.toQueryValue v)
@@ -3340,7 +3340,7 @@ module GlobalOperations =
 
         with
         static member ToEndpoint(req: SearchRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_search"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_search"
             let queryParams =
                 [
                     req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
@@ -4021,7 +4021,7 @@ module GlobalOperations =
 
         with
         static member ToEndpoint(req: SearchMvtRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_mvt/{req.Field}/{req.Zoom}/{req.X}/{req.Y}"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_mvt/{Fes.Http.toPathSegment req.Field}/{Fes.Http.toPathSegment req.Zoom}/{Fes.Http.toPathSegment req.X}/{Fes.Http.toPathSegment req.Y}"
             let queryParams =
                 [
                     req.ExactBounds |> Option.map (fun v -> "exact_bounds", Fes.Http.toQueryValue v)
@@ -4251,7 +4251,7 @@ module GlobalOperations =
 
         with
         static member ToEndpoint(req: SearchShardsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_search_shards"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_search_shards"
             let queryParams =
                 [
                     req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
@@ -4365,7 +4365,7 @@ module GlobalOperations =
 
         with
         static member ToEndpoint(req: SearchTemplateRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_search/template"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_search/template"
             let queryParams =
                 [
                     req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
@@ -4559,7 +4559,7 @@ module GlobalOperations =
 
         with
         static member ToEndpoint(req: TermsEnumRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_terms_enum"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_terms_enum"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
             let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
@@ -4753,7 +4753,7 @@ module GlobalOperations =
 
         with
         static member ToEndpoint(req: UpdateByQueryRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_update_by_query"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_update_by_query"
             let queryParams =
                 [
                     req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
@@ -5071,7 +5071,7 @@ module GlobalOperations =
 
         with
         static member ToEndpoint(req: UpdateByQueryRethrottleRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_update_by_query/{req.TaskId}/_rethrottle"
+            let path = $"/_update_by_query/{Fes.Http.toPathSegment req.TaskId}/_rethrottle"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
             endpoint, ValueNone

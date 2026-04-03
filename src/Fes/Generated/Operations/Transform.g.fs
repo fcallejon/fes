@@ -21,7 +21,7 @@ module TransformOperations =
 
         with
         static member ToEndpoint(req: TransformDeleteTransformRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_transform/{req.TransformId}"
+            let path = $"/_transform/{Fes.Http.toPathSegment req.TransformId}"
             let queryParams =
                 [
                     req.Force |> Option.map (fun v -> "force", Fes.Http.toQueryValue v)
@@ -93,7 +93,7 @@ module TransformOperations =
 
         with
         static member ToEndpoint(req: TransformGetTransformRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_transform/{req.TransformId}"
+            let path = $"/_transform/{Fes.Http.toPathSegment req.TransformId}"
             let queryParams =
                 [
                     req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
@@ -162,7 +162,7 @@ module TransformOperations =
 
         with
         static member ToEndpoint(req: TransformGetTransformStatsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_transform/{req.TransformId}/_stats"
+            let path = $"/_transform/{Fes.Http.toPathSegment req.TransformId}/_stats"
             let queryParams =
                 [
                     req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
@@ -246,7 +246,7 @@ module TransformOperations =
 
         with
         static member ToEndpoint(req: TransformPreviewTransformRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_transform/{req.TransformId}/_preview"
+            let path = $"/_transform/{Fes.Http.toPathSegment req.TransformId}/_preview"
             let queryParams =
                 [
                     req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
@@ -373,7 +373,7 @@ module TransformOperations =
 
         with
         static member ToEndpoint(req: TransformPutTransformRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_transform/{req.TransformId}"
+            let path = $"/_transform/{Fes.Http.toPathSegment req.TransformId}"
             let queryParams =
                 [
                     req.DeferValidation |> Option.map (fun v -> "defer_validation", Fes.Http.toQueryValue v)
@@ -495,7 +495,7 @@ module TransformOperations =
 
         with
         static member ToEndpoint(req: TransformResetTransformRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_transform/{req.TransformId}/_reset"
+            let path = $"/_transform/{Fes.Http.toPathSegment req.TransformId}/_reset"
             let queryParams =
                 [
                     req.Force |> Option.map (fun v -> "force", Fes.Http.toQueryValue v)
@@ -545,7 +545,7 @@ module TransformOperations =
 
         with
         static member ToEndpoint(req: TransformScheduleNowTransformRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_transform/{req.TransformId}/_schedule_now"
+            let path = $"/_transform/{Fes.Http.toPathSegment req.TransformId}/_schedule_now"
             let queryParams =
                 [
                     req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
@@ -633,7 +633,7 @@ module TransformOperations =
 
         with
         static member ToEndpoint(req: TransformStartTransformRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_transform/{req.TransformId}/_start"
+            let path = $"/_transform/{Fes.Http.toPathSegment req.TransformId}/_start"
             let queryParams =
                 [
                     req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
@@ -687,7 +687,7 @@ module TransformOperations =
 
         with
         static member ToEndpoint(req: TransformStopTransformRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_transform/{req.TransformId}/_stop"
+            let path = $"/_transform/{Fes.Http.toPathSegment req.TransformId}/_stop"
             let queryParams =
                 [
                     req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
@@ -778,7 +778,7 @@ module TransformOperations =
 
         with
         static member ToEndpoint(req: TransformUpdateTransformRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_transform/{req.TransformId}/_update"
+            let path = $"/_transform/{Fes.Http.toPathSegment req.TransformId}/_update"
             let queryParams =
                 [
                     req.DeferValidation |> Option.map (fun v -> "defer_validation", Fes.Http.toQueryValue v)

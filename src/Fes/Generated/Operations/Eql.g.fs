@@ -18,7 +18,7 @@ module EqlOperations =
 
         with
         static member ToEndpoint(req: EqlDeleteRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_eql/search/{req.Id}"
+            let path = $"/_eql/search/{Fes.Http.toPathSegment req.Id}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
             endpoint, ValueNone
@@ -45,7 +45,7 @@ module EqlOperations =
 
         with
         static member ToEndpoint(req: EqlGetRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_eql/search/{req.Id}"
+            let path = $"/_eql/search/{Fes.Http.toPathSegment req.Id}"
             let queryParams =
                 [
                     req.KeepAlive |> Option.map (fun v -> "keep_alive", Fes.Http.toQueryValue v)
@@ -94,7 +94,7 @@ module EqlOperations =
 
         with
         static member ToEndpoint(req: EqlGetStatusRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_eql/search/status/{req.Id}"
+            let path = $"/_eql/search/status/{Fes.Http.toPathSegment req.Id}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
             endpoint, ValueNone
@@ -164,7 +164,7 @@ module EqlOperations =
 
         with
         static member ToEndpoint(req: EqlSearchRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_eql/search"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_eql/search"
             let queryParams =
                 [
                     req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)

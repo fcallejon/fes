@@ -208,7 +208,7 @@ module EsqlOperations =
 
         with
         static member ToEndpoint(req: EsqlAsyncQueryDeleteRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_query/async/{req.Id}"
+            let path = $"/_query/async/{Fes.Http.toPathSegment req.Id}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
             endpoint, ValueNone
@@ -237,7 +237,7 @@ module EsqlOperations =
 
         with
         static member ToEndpoint(req: EsqlAsyncQueryGetRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_query/async/{req.Id}"
+            let path = $"/_query/async/{Fes.Http.toPathSegment req.Id}"
             let queryParams =
                 [
                     req.DropNullColumns |> Option.map (fun v -> "drop_null_columns", Fes.Http.toQueryValue v)
@@ -303,7 +303,7 @@ module EsqlOperations =
 
         with
         static member ToEndpoint(req: EsqlAsyncQueryStopRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_query/async/{req.Id}/stop"
+            let path = $"/_query/async/{Fes.Http.toPathSegment req.Id}/stop"
             let queryParams =
                 [
                     req.DropNullColumns |> Option.map (fun v -> "drop_null_columns", Fes.Http.toQueryValue v)
@@ -344,7 +344,7 @@ module EsqlOperations =
 
         with
         static member ToEndpoint(req: EsqlDeleteViewRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_query/view/{req.Name}"
+            let path = $"/_query/view/{Fes.Http.toPathSegment req.Name}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
             endpoint, ValueNone
@@ -369,7 +369,7 @@ module EsqlOperations =
 
         with
         static member ToEndpoint(req: EsqlGetQueryRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_query/queries/{req.Id}"
+            let path = $"/_query/queries/{Fes.Http.toPathSegment req.Id}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
             endpoint, ValueNone
@@ -394,7 +394,7 @@ module EsqlOperations =
 
         with
         static member ToEndpoint(req: EsqlGetViewRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_query/view/{req.Name}"
+            let path = $"/_query/view/{Fes.Http.toPathSegment req.Name}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
             endpoint, ValueNone
@@ -432,7 +432,7 @@ module EsqlOperations =
 
         with
         static member ToEndpoint(req: EsqlPutViewRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_query/view/{req.Name}"
+            let path = $"/_query/view/{Fes.Http.toPathSegment req.Name}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
             let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)

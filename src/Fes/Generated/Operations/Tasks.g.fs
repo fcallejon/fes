@@ -22,7 +22,7 @@ module TasksOperations =
 
         with
         static member ToEndpoint(req: TasksCancelRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_tasks/{req.TaskId}/_cancel"
+            let path = $"/_tasks/{Fes.Http.toPathSegment req.TaskId}/_cancel"
             let queryParams =
                 [
                     req.Actions |> Option.map (fun v -> "actions", Fes.Http.toQueryValue v)
@@ -89,7 +89,7 @@ module TasksOperations =
 
         with
         static member ToEndpoint(req: TasksGetRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_tasks/{req.TaskId}"
+            let path = $"/_tasks/{Fes.Http.toPathSegment req.TaskId}"
             let queryParams =
                 [
                     req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)

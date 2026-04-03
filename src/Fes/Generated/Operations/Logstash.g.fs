@@ -18,7 +18,7 @@ module LogstashOperations =
 
         with
         static member ToEndpoint(req: LogstashDeletePipelineRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_logstash/pipeline/{req.Id}"
+            let path = $"/_logstash/pipeline/{Fes.Http.toPathSegment req.Id}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
             endpoint, ValueNone
@@ -43,7 +43,7 @@ module LogstashOperations =
 
         with
         static member ToEndpoint(req: LogstashGetPipelineRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_logstash/pipeline/{req.Id}"
+            let path = $"/_logstash/pipeline/{Fes.Http.toPathSegment req.Id}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
             endpoint, ValueNone
@@ -69,7 +69,7 @@ module LogstashOperations =
 
         with
         static member ToEndpoint(req: LogstashPutPipelineRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_logstash/pipeline/{req.Id}"
+            let path = $"/_logstash/pipeline/{Fes.Http.toPathSegment req.Id}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
             let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req.Document)

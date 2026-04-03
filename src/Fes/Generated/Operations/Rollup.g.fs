@@ -18,7 +18,7 @@ module RollupOperations =
 
         with
         static member ToEndpoint(req: RollupDeleteJobRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_rollup/job/{req.Id}"
+            let path = $"/_rollup/job/{Fes.Http.toPathSegment req.Id}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
             endpoint, ValueNone
@@ -43,7 +43,7 @@ module RollupOperations =
 
         with
         static member ToEndpoint(req: RollupGetJobsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_rollup/job/{req.Id}"
+            let path = $"/_rollup/job/{Fes.Http.toPathSegment req.Id}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
             endpoint, ValueNone
@@ -68,7 +68,7 @@ module RollupOperations =
 
         with
         static member ToEndpoint(req: RollupGetRollupCapsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_rollup/data/{req.Id}"
+            let path = $"/_rollup/data/{Fes.Http.toPathSegment req.Id}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
             endpoint, ValueNone
@@ -93,7 +93,7 @@ module RollupOperations =
 
         with
         static member ToEndpoint(req: RollupGetRollupIndexCapsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_rollup/data"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_rollup/data"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
             endpoint, ValueNone
@@ -134,7 +134,7 @@ module RollupOperations =
 
         with
         static member ToEndpoint(req: RollupPutJobRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_rollup/job/{req.Id}"
+            let path = $"/_rollup/job/{Fes.Http.toPathSegment req.Id}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
             let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
@@ -226,7 +226,7 @@ module RollupOperations =
 
         with
         static member ToEndpoint(req: RollupRollupSearchRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_rollup_search"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_rollup_search"
             let queryParams =
                 [
                     req.RestTotalHitsAsInt |> Option.map (fun v -> "rest_total_hits_as_int", Fes.Http.toQueryValue v)
@@ -297,7 +297,7 @@ module RollupOperations =
 
         with
         static member ToEndpoint(req: RollupStartJobRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_rollup/job/{req.Id}/_start"
+            let path = $"/_rollup/job/{Fes.Http.toPathSegment req.Id}/_start"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
             endpoint, ValueNone
@@ -324,7 +324,7 @@ module RollupOperations =
 
         with
         static member ToEndpoint(req: RollupStopJobRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_rollup/job/{req.Id}/_stop"
+            let path = $"/_rollup/job/{Fes.Http.toPathSegment req.Id}/_stop"
             let queryParams =
                 [
                     req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)

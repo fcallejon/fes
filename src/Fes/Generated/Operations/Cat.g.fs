@@ -22,7 +22,7 @@ module CatOperations =
 
         with
         static member ToEndpoint(req: CatAliasesRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_cat/aliases/{req.Name}"
+            let path = $"/_cat/aliases/{Fes.Http.toPathSegment req.Name}"
             let queryParams =
                 [
                     req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
@@ -91,7 +91,7 @@ module CatOperations =
 
         with
         static member ToEndpoint(req: CatAllocationRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_cat/allocation/{req.NodeId}"
+            let path = $"/_cat/allocation/{Fes.Http.toPathSegment req.NodeId}"
             let queryParams =
                 [
                     req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
@@ -160,7 +160,7 @@ module CatOperations =
 
         with
         static member ToEndpoint(req: CatCircuitBreakerRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_cat/circuit_breaker/{req.CircuitBreakerPatterns}"
+            let path = $"/_cat/circuit_breaker/{Fes.Http.toPathSegment req.CircuitBreakerPatterns}"
             let queryParams =
                 [
                     req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
@@ -229,7 +229,7 @@ module CatOperations =
 
         with
         static member ToEndpoint(req: CatComponentTemplatesRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_cat/component_templates/{req.Name}"
+            let path = $"/_cat/component_templates/{Fes.Http.toPathSegment req.Name}"
             let queryParams =
                 [
                     req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
@@ -298,7 +298,7 @@ module CatOperations =
 
         with
         static member ToEndpoint(req: CatCountRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_cat/count/{req.Index}"
+            let path = $"/_cat/count/{Fes.Http.toPathSegment req.Index}"
             let queryParams =
                 [
                     req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
@@ -358,7 +358,7 @@ module CatOperations =
 
         with
         static member ToEndpoint(req: CatFielddataRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_cat/fielddata/{req.Fields}"
+            let path = $"/_cat/fielddata/{Fes.Http.toPathSegment req.Fields}"
             let queryParams =
                 [
                     req.queryFields |> Option.map (fun v -> "fields", Fes.Http.toQueryValue v)
@@ -487,7 +487,7 @@ module CatOperations =
 
         with
         static member ToEndpoint(req: CatIndicesRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_cat/indices/{req.Index}"
+            let path = $"/_cat/indices/{Fes.Http.toPathSegment req.Index}"
             let queryParams =
                 [
                     req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
@@ -642,7 +642,7 @@ module CatOperations =
 
         with
         static member ToEndpoint(req: CatMlDataFrameAnalyticsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_cat/ml/data_frame/analytics/{req.Id}"
+            let path = $"/_cat/ml/data_frame/analytics/{Fes.Http.toPathSegment req.Id}"
             let queryParams =
                 [
                     req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
@@ -702,7 +702,7 @@ module CatOperations =
 
         with
         static member ToEndpoint(req: CatMlDatafeedsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_cat/ml/datafeeds/{req.DatafeedId}"
+            let path = $"/_cat/ml/datafeeds/{Fes.Http.toPathSegment req.DatafeedId}"
             let queryParams =
                 [
                     req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
@@ -762,7 +762,7 @@ module CatOperations =
 
         with
         static member ToEndpoint(req: CatMlJobsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_cat/ml/anomaly_detectors/{req.JobId}"
+            let path = $"/_cat/ml/anomaly_detectors/{Fes.Http.toPathSegment req.JobId}"
             let queryParams =
                 [
                     req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
@@ -824,7 +824,7 @@ module CatOperations =
 
         with
         static member ToEndpoint(req: CatMlTrainedModelsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_cat/ml/trained_models/{req.ModelId}"
+            let path = $"/_cat/ml/trained_models/{Fes.Http.toPathSegment req.ModelId}"
             let queryParams =
                 [
                     req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)
@@ -1172,7 +1172,7 @@ module CatOperations =
 
         with
         static member ToEndpoint(req: CatRecoveryRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_cat/recovery/{req.Index}"
+            let path = $"/_cat/recovery/{Fes.Http.toPathSegment req.Index}"
             let queryParams =
                 [
                     req.ActiveOnly |> Option.map (fun v -> "active_only", Fes.Http.toQueryValue v)
@@ -1317,7 +1317,7 @@ module CatOperations =
 
         with
         static member ToEndpoint(req: CatSegmentsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_cat/segments/{req.Index}"
+            let path = $"/_cat/segments/{Fes.Http.toPathSegment req.Index}"
             let queryParams =
                 [
                     req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
@@ -1425,7 +1425,7 @@ module CatOperations =
 
         with
         static member ToEndpoint(req: CatShardsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_cat/shards/{req.Index}"
+            let path = $"/_cat/shards/{Fes.Http.toPathSegment req.Index}"
             let queryParams =
                 [
                     req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
@@ -1486,7 +1486,7 @@ module CatOperations =
 
         with
         static member ToEndpoint(req: CatSnapshotsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_cat/snapshots/{req.Repository}"
+            let path = $"/_cat/snapshots/{Fes.Http.toPathSegment req.Repository}"
             let queryParams =
                 [
                     req.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
@@ -1654,7 +1654,7 @@ module CatOperations =
 
         with
         static member ToEndpoint(req: CatTemplatesRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_cat/templates/{req.Name}"
+            let path = $"/_cat/templates/{Fes.Http.toPathSegment req.Name}"
             let queryParams =
                 [
                     req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
@@ -1723,7 +1723,7 @@ module CatOperations =
 
         with
         static member ToEndpoint(req: CatThreadPoolRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_cat/thread_pool/{req.ThreadPoolPatterns}"
+            let path = $"/_cat/thread_pool/{Fes.Http.toPathSegment req.ThreadPoolPatterns}"
             let queryParams =
                 [
                     req.H |> Option.map (fun v -> "h", Fes.Http.toQueryValue v)
@@ -1793,7 +1793,7 @@ module CatOperations =
 
         with
         static member ToEndpoint(req: CatTransformsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_cat/transforms/{req.TransformId}"
+            let path = $"/_cat/transforms/{Fes.Http.toPathSegment req.TransformId}"
             let queryParams =
                 [
                     req.AllowNoMatch |> Option.map (fun v -> "allow_no_match", Fes.Http.toQueryValue v)

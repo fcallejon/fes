@@ -147,7 +147,7 @@ module ClusterOperations =
 
         with
         static member ToEndpoint(req: ClusterDeleteComponentTemplateRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_component_template/{req.Name}"
+            let path = $"/_component_template/{Fes.Http.toPathSegment req.Name}"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -243,7 +243,7 @@ module ClusterOperations =
 
         with
         static member ToEndpoint(req: ClusterExistsComponentTemplateRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_component_template/{req.Name}"
+            let path = $"/_component_template/{Fes.Http.toPathSegment req.Name}"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -297,7 +297,7 @@ module ClusterOperations =
 
         with
         static member ToEndpoint(req: ClusterGetComponentTemplateRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_component_template/{req.Name}"
+            let path = $"/_component_template/{Fes.Http.toPathSegment req.Name}"
             let queryParams =
                 [
                     req.FlatSettings |> Option.map (fun v -> "flat_settings", Fes.Http.toQueryValue v)
@@ -444,7 +444,7 @@ module ClusterOperations =
 
         with
         static member ToEndpoint(req: ClusterHealthRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_cluster/health/{req.Index}"
+            let path = $"/_cluster/health/{Fes.Http.toPathSegment req.Index}"
             let queryParams =
                 [
                     req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
@@ -565,7 +565,7 @@ module ClusterOperations =
 
         with
         static member ToEndpoint(req: ClusterInfoRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_info/{req.Target}"
+            let path = $"/_info/{Fes.Http.toPathSegment req.Target}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
             endpoint, ValueNone
@@ -709,7 +709,7 @@ module ClusterOperations =
 
         with
         static member ToEndpoint(req: ClusterPutComponentTemplateRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_component_template/{req.Name}"
+            let path = $"/_component_template/{Fes.Http.toPathSegment req.Name}"
             let queryParams =
                 [
                     req.Create |> Option.map (fun v -> "create", Fes.Http.toQueryValue v)
@@ -979,7 +979,7 @@ module ClusterOperations =
 
         with
         static member ToEndpoint(req: ClusterStateRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_cluster/state/{req.Metric}/{req.Index}"
+            let path = $"/_cluster/state/{Fes.Http.toPathSegment req.Metric}/{Fes.Http.toPathSegment req.Index}"
             let queryParams =
                 [
                     req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
@@ -1083,7 +1083,7 @@ module ClusterOperations =
 
         with
         static member ToEndpoint(req: ClusterStatsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_cluster/stats/nodes/{req.NodeId}"
+            let path = $"/_cluster/stats/nodes/{Fes.Http.toPathSegment req.NodeId}"
             let queryParams =
                 [
                     req.IncludeRemotes |> Option.map (fun v -> "include_remotes", Fes.Http.toQueryValue v)

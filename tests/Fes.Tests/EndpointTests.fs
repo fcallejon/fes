@@ -58,6 +58,25 @@ let ``Indices create request produces PUT method`` () =
     postData.IsSome |> should be True
 
 [<Fact>]
+let ``Search request path contains index name not DU representation`` () =
+    let req = searchRequest {
+        index (Types.Indices.IndexName "products")
+    }
+    let (endpoint, _) = SearchRequest.ToEndpoint(req)
+    endpoint.PathAndQuery |> should haveSubstring "/products/_search"
+    endpoint.PathAndQuery |> should not' (haveSubstring "IndexName")
+
+[<Fact>]
+let ``Get request path contains index and id`` () =
+    let req = getRequest {
+        index "my-index"
+        id "doc-123"
+    }
+    let (endpoint, _) = GetRequest.ToEndpoint(req)
+    endpoint.PathAndQuery |> should haveSubstring "/my-index/"
+    endpoint.PathAndQuery |> should haveSubstring "/doc-123"
+
+[<Fact>]
 let ``Boolean query params serialise as lowercase`` () =
     let req = searchRequest {
         index (Types.Indices.IndexName "products")

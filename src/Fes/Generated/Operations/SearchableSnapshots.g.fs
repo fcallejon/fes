@@ -18,7 +18,7 @@ module SearchableSnapshotsOperations =
 
         with
         static member ToEndpoint(req: SearchableSnapshotsCacheStatsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_searchable_snapshots/{req.NodeId}/cache/stats"
+            let path = $"/_searchable_snapshots/{Fes.Http.toPathSegment req.NodeId}/cache/stats"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
             endpoint, ValueNone
@@ -46,7 +46,7 @@ module SearchableSnapshotsOperations =
 
         with
         static member ToEndpoint(req: SearchableSnapshotsClearCacheRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_searchable_snapshots/cache/clear"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_searchable_snapshots/cache/clear"
             let queryParams =
                 [
                     req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
@@ -115,7 +115,7 @@ module SearchableSnapshotsOperations =
 
         with
         static member ToEndpoint(req: SearchableSnapshotsMountRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_snapshot/{req.Repository}/{req.Snapshot}/_mount"
+            let path = $"/_snapshot/{Fes.Http.toPathSegment req.Repository}/{Fes.Http.toPathSegment req.Snapshot}/_mount"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -207,7 +207,7 @@ module SearchableSnapshotsOperations =
 
         with
         static member ToEndpoint(req: SearchableSnapshotsStatsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_searchable_snapshots/stats"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_searchable_snapshots/stats"
             let queryParams =
                 [
                     req.Level |> Option.map (fun v -> "level", Fes.Http.toQueryValue v)

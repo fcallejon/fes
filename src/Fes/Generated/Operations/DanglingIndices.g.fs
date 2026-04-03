@@ -21,7 +21,7 @@ module DanglingIndicesOperations =
 
         with
         static member ToEndpoint(req: DanglingIndicesDeleteDanglingIndexRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_dangling/{req.IndexUuid}"
+            let path = $"/_dangling/{Fes.Http.toPathSegment req.IndexUuid}"
             let queryParams =
                 [
                     req.AcceptDataLoss |> Option.map (fun v -> "accept_data_loss", Fes.Http.toQueryValue v)
@@ -81,7 +81,7 @@ module DanglingIndicesOperations =
 
         with
         static member ToEndpoint(req: DanglingIndicesImportDanglingIndexRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_dangling/{req.IndexUuid}"
+            let path = $"/_dangling/{Fes.Http.toPathSegment req.IndexUuid}"
             let queryParams =
                 [
                     req.AcceptDataLoss |> Option.map (fun v -> "accept_data_loss", Fes.Http.toQueryValue v)

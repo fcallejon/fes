@@ -20,7 +20,7 @@ module ShutdownOperations =
 
         with
         static member ToEndpoint(req: ShutdownDeleteNodeRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_nodes/{req.NodeId}/shutdown"
+            let path = $"/_nodes/{Fes.Http.toPathSegment req.NodeId}/shutdown"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -70,7 +70,7 @@ module ShutdownOperations =
 
         with
         static member ToEndpoint(req: ShutdownGetNodeRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_nodes/{req.NodeId}/shutdown"
+            let path = $"/_nodes/{Fes.Http.toPathSegment req.NodeId}/shutdown"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -121,7 +121,7 @@ module ShutdownOperations =
 
         with
         static member ToEndpoint(req: ShutdownPutNodeRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_nodes/{req.NodeId}/shutdown"
+            let path = $"/_nodes/{Fes.Http.toPathSegment req.NodeId}/shutdown"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)

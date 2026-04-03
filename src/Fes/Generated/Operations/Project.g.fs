@@ -45,7 +45,7 @@ module ProjectOperations =
 
         with
         static member ToEndpoint(req: ProjectCreateRoutingRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_project_routing/{req.Name}"
+            let path = $"/_project_routing/{Fes.Http.toPathSegment req.Name}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.PUT, fullPath)
             let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req.Document)
@@ -76,7 +76,7 @@ module ProjectOperations =
 
         with
         static member ToEndpoint(req: ProjectDeleteRoutingRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_project_routing/{req.Name}"
+            let path = $"/_project_routing/{Fes.Http.toPathSegment req.Name}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.DELETE, fullPath)
             endpoint, ValueNone
@@ -112,7 +112,7 @@ module ProjectOperations =
 
         with
         static member ToEndpoint(req: ProjectGetRoutingRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_project_routing/{req.Name}"
+            let path = $"/_project_routing/{Fes.Http.toPathSegment req.Name}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
             endpoint, ValueNone

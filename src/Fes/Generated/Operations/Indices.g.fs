@@ -24,7 +24,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesAddBlockRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_block/{req.Block}"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_block/{Fes.Http.toPathSegment req.Block}"
             let queryParams =
                 [
                     req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
@@ -121,7 +121,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesAnalyzeRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_analyze"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_analyze"
             let queryParams =
                 [
                     req.queryIndex |> Option.map (fun v -> "index", Fes.Http.toQueryValue v)
@@ -226,7 +226,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesCancelMigrateReindexRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_migration/reindex/{req.Index}/_cancel"
+            let path = $"/_migration/reindex/{Fes.Http.toPathSegment req.Index}/_cancel"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
             endpoint, ValueNone
@@ -259,7 +259,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesClearCacheRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_cache/clear"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_cache/clear"
             let queryParams =
                 [
                     req.queryIndex |> Option.map (fun v -> "index", Fes.Http.toQueryValue v)
@@ -364,7 +364,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesCloneRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_clone/{req.Target}"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_clone/{Fes.Http.toPathSegment req.Target}"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -447,7 +447,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesCloseRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_close"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_close"
             let queryParams =
                 [
                     req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
@@ -537,7 +537,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesCreateRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}"
+            let path = $"/{Fes.Http.toPathSegment req.Index}"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -618,7 +618,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesCreateDataStreamRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_data_stream/{req.Name}"
+            let path = $"/_data_stream/{Fes.Http.toPathSegment req.Name}"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -669,7 +669,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesCreateFromRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_create_from/{req.Source}/{req.Dest}"
+            let path = $"/_create_from/{Fes.Http.toPathSegment req.Source}/{Fes.Http.toPathSegment req.Dest}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
             let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req.Document)
@@ -706,7 +706,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesDataStreamsStatsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_data_stream/{req.Name}/_stats"
+            let path = $"/_data_stream/{Fes.Http.toPathSegment req.Name}/_stats"
             let queryParams =
                 [
                     req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
@@ -752,7 +752,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesDeleteRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}"
+            let path = $"/{Fes.Http.toPathSegment req.Index}"
             let queryParams =
                 [
                     req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
@@ -828,7 +828,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesDeleteAliasRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_alias/{req.Name}"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_alias/{Fes.Http.toPathSegment req.Name}"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -885,7 +885,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesDeleteDataLifecycleRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_data_stream/{req.Name}/_lifecycle"
+            let path = $"/_data_stream/{Fes.Http.toPathSegment req.Name}/_lifecycle"
             let queryParams =
                 [
                     req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
@@ -944,7 +944,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesDeleteDataStreamRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_data_stream/{req.Name}"
+            let path = $"/_data_stream/{Fes.Http.toPathSegment req.Name}"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -996,7 +996,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesDeleteDataStreamOptionsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_data_stream/{req.Name}/_options"
+            let path = $"/_data_stream/{Fes.Http.toPathSegment req.Name}/_options"
             let queryParams =
                 [
                     req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
@@ -1055,7 +1055,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesDeleteIndexTemplateRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_index_template/{req.Name}"
+            let path = $"/_index_template/{Fes.Http.toPathSegment req.Name}"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -1106,7 +1106,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesDeleteTemplateRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_template/{req.Name}"
+            let path = $"/_template/{Fes.Http.toPathSegment req.Name}"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -1160,7 +1160,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesDiskUsageRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_disk_usage"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_disk_usage"
             let queryParams =
                 [
                     req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
@@ -1235,7 +1235,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesDownsampleRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_downsample/{req.TargetIndex}"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_downsample/{Fes.Http.toPathSegment req.TargetIndex}"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
             let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req.Document)
@@ -1277,7 +1277,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesExistsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}"
+            let path = $"/{Fes.Http.toPathSegment req.Index}"
             let queryParams =
                 [
                     req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
@@ -1363,7 +1363,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesExistsAliasRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_alias/{req.Name}"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_alias/{Fes.Http.toPathSegment req.Name}"
             let queryParams =
                 [
                     req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
@@ -1436,7 +1436,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesExistsIndexTemplateRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_index_template/{req.Name}"
+            let path = $"/_index_template/{Fes.Http.toPathSegment req.Name}"
             let queryParams =
                 [
                     req.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
@@ -1496,7 +1496,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesExistsTemplateRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_template/{req.Name}"
+            let path = $"/_template/{Fes.Http.toPathSegment req.Name}"
             let queryParams =
                 [
                     req.FlatSettings |> Option.map (fun v -> "flat_settings", Fes.Http.toQueryValue v)
@@ -1555,7 +1555,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesExplainDataLifecycleRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_lifecycle/explain"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_lifecycle/explain"
             let queryParams =
                 [
                     req.IncludeDefaults |> Option.map (fun v -> "include_defaults", Fes.Http.toQueryValue v)
@@ -1608,7 +1608,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesFieldUsageStatsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_field_usage_stats"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_field_usage_stats"
             let queryParams =
                 [
                     req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
@@ -1678,7 +1678,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesFlushRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_flush"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_flush"
             let queryParams =
                 [
                     req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
@@ -1758,7 +1758,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesForcemergeRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_forcemerge"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_forcemerge"
             let queryParams =
                 [
                     req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
@@ -1855,7 +1855,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesGetRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}"
+            let path = $"/{Fes.Http.toPathSegment req.Index}"
             let queryParams =
                 [
                     req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
@@ -1957,7 +1957,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesGetAliasRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_alias/{req.Name}"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_alias/{Fes.Http.toPathSegment req.Name}"
             let queryParams =
                 [
                     req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
@@ -2030,7 +2030,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesGetDataLifecycleRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_data_stream/{req.Name}/_lifecycle"
+            let path = $"/_data_stream/{Fes.Http.toPathSegment req.Name}/_lifecycle"
             let queryParams =
                 [
                     req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
@@ -2102,7 +2102,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesGetDataStreamRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_data_stream/{req.Name}"
+            let path = $"/_data_stream/{Fes.Http.toPathSegment req.Name}"
             let queryParams =
                 [
                     req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
@@ -2168,7 +2168,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesGetDataStreamMappingsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_data_stream/{req.Name}/_mappings"
+            let path = $"/_data_stream/{Fes.Http.toPathSegment req.Name}/_mappings"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -2211,7 +2211,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesGetDataStreamOptionsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_data_stream/{req.Name}/_options"
+            let path = $"/_data_stream/{Fes.Http.toPathSegment req.Name}/_options"
             let queryParams =
                 [
                     req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
@@ -2261,7 +2261,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesGetDataStreamSettingsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_data_stream/{req.Name}/_settings"
+            let path = $"/_data_stream/{Fes.Http.toPathSegment req.Name}/_settings"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -2307,7 +2307,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesGetFieldMappingRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_mapping/field/{req.Fields}"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_mapping/field/{Fes.Http.toPathSegment req.Fields}"
             let queryParams =
                 [
                     req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
@@ -2381,7 +2381,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesGetIndexTemplateRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_index_template/{req.Name}"
+            let path = $"/_index_template/{Fes.Http.toPathSegment req.Name}"
             let queryParams =
                 [
                     req.Local |> Option.map (fun v -> "local", Fes.Http.toQueryValue v)
@@ -2451,7 +2451,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesGetMappingRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_mapping"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_mapping"
             let queryParams =
                 [
                     req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
@@ -2524,7 +2524,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesGetMigrateReindexStatusRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_migration/reindex/{req.Index}/_status"
+            let path = $"/_migration/reindex/{Fes.Http.toPathSegment req.Index}/_status"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
             endpoint, ValueNone
@@ -2557,7 +2557,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesGetSettingsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_settings/{req.Name}"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_settings/{Fes.Http.toPathSegment req.Name}"
             let queryParams =
                 [
                     req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
@@ -2654,7 +2654,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesGetTemplateRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_template/{req.Name}"
+            let path = $"/_template/{Fes.Http.toPathSegment req.Name}"
             let queryParams =
                 [
                     req.FlatSettings |> Option.map (fun v -> "flat_settings", Fes.Http.toQueryValue v)
@@ -2739,7 +2739,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesMigrateToDataStreamRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_data_stream/_migrate/{req.Name}"
+            let path = $"/_data_stream/_migrate/{Fes.Http.toPathSegment req.Name}"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -2825,7 +2825,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesOpenRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_open"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_open"
             let queryParams =
                 [
                     req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
@@ -2907,7 +2907,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesPromoteDataStreamRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_data_stream/_promote/{req.Name}"
+            let path = $"/_data_stream/_promote/{Fes.Http.toPathSegment req.Name}"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -2961,7 +2961,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesPutAliasRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_alias/{req.Name}"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_alias/{Fes.Http.toPathSegment req.Name}"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -3062,7 +3062,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesPutDataLifecycleRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_data_stream/{req.Name}/_lifecycle"
+            let path = $"/_data_stream/{Fes.Http.toPathSegment req.Name}/_lifecycle"
             let queryParams =
                 [
                     req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
@@ -3152,7 +3152,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesPutDataStreamMappingsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_data_stream/{req.Name}/_mappings"
+            let path = $"/_data_stream/{Fes.Http.toPathSegment req.Name}/_mappings"
             let queryParams =
                 [
                     req.DryRun |> Option.map (fun v -> "dry_run", Fes.Http.toQueryValue v)
@@ -3220,7 +3220,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesPutDataStreamOptionsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_data_stream/{req.Name}/_options"
+            let path = $"/_data_stream/{Fes.Http.toPathSegment req.Name}/_options"
             let queryParams =
                 [
                     req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
@@ -3289,7 +3289,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesPutDataStreamSettingsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_data_stream/{req.Name}/_settings"
+            let path = $"/_data_stream/{Fes.Http.toPathSegment req.Name}/_settings"
             let queryParams =
                 [
                     req.DryRun |> Option.map (fun v -> "dry_run", Fes.Http.toQueryValue v)
@@ -3375,7 +3375,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesPutIndexTemplateRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_index_template/{req.Name}"
+            let path = $"/_index_template/{Fes.Http.toPathSegment req.Name}"
             let queryParams =
                 [
                     req.Create |> Option.map (fun v -> "create", Fes.Http.toQueryValue v)
@@ -3531,7 +3531,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesPutMappingRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_mapping"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_mapping"
             let queryParams =
                 [
                     req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
@@ -3699,7 +3699,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesPutSettingsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_settings"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_settings"
             let queryParams =
                 [
                     req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
@@ -3818,7 +3818,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesPutTemplateRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_template/{req.Name}"
+            let path = $"/_template/{Fes.Http.toPathSegment req.Name}"
             let queryParams =
                 [
                     req.Create |> Option.map (fun v -> "create", Fes.Http.toQueryValue v)
@@ -3931,7 +3931,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesRecoveryRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_recovery"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_recovery"
             let queryParams =
                 [
                     req.ActiveOnly |> Option.map (fun v -> "active_only", Fes.Http.toQueryValue v)
@@ -4007,7 +4007,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesRefreshRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_refresh"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_refresh"
             let queryParams =
                 [
                     req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
@@ -4068,7 +4068,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesReloadSearchAnalyzersRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_reload_search_analyzers"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_reload_search_analyzers"
             let queryParams =
                 [
                     req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
@@ -4139,7 +4139,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesRemoveBlockRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_block/{req.Block}"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_block/{Fes.Http.toPathSegment req.Block}"
             let queryParams =
                 [
                     req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
@@ -4222,7 +4222,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesResolveClusterRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_resolve/cluster/{req.Name}"
+            let path = $"/_resolve/cluster/{Fes.Http.toPathSegment req.Name}"
             let queryParams =
                 [
                     req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
@@ -4301,7 +4301,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesResolveIndexRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_resolve/index/{req.Name}"
+            let path = $"/_resolve/index/{Fes.Http.toPathSegment req.Name}"
             let queryParams =
                 [
                     req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
@@ -4388,7 +4388,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesRolloverRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Alias}/_rollover/{req.NewIndex}"
+            let path = $"/{Fes.Http.toPathSegment req.Alias}/_rollover/{Fes.Http.toPathSegment req.NewIndex}"
             let queryParams =
                 [
                     req.DryRun |> Option.map (fun v -> "dry_run", Fes.Http.toQueryValue v)
@@ -4498,7 +4498,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesSegmentsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_segments"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_segments"
             let queryParams =
                 [
                     req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
@@ -4559,7 +4559,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesShardStoresRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_shard_stores"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_shard_stores"
             let queryParams =
                 [
                     req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)
@@ -4632,7 +4632,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesShrinkRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_shrink/{req.Target}"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_shrink/{Fes.Http.toPathSegment req.Target}"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -4714,7 +4714,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesSimulateIndexTemplateRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_index_template/_simulate_index/{req.Name}"
+            let path = $"/_index_template/_simulate_index/{Fes.Http.toPathSegment req.Name}"
             let queryParams =
                 [
                     req.Create |> Option.map (fun v -> "create", Fes.Http.toQueryValue v)
@@ -4809,7 +4809,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesSimulateTemplateRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/_index_template/_simulate/{req.Name}"
+            let path = $"/_index_template/_simulate/{Fes.Http.toPathSegment req.Name}"
             let queryParams =
                 [
                     req.Create |> Option.map (fun v -> "create", Fes.Http.toQueryValue v)
@@ -4953,7 +4953,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesSplitRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_split/{req.Target}"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_split/{Fes.Http.toPathSegment req.Target}"
             let queryParams =
                 [
                     req.MasterTimeout |> Option.map (fun v -> "master_timeout", Fes.Http.toQueryValue v)
@@ -5040,7 +5040,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesStatsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_stats/{req.Metric}"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_stats/{Fes.Http.toPathSegment req.Metric}"
             let queryParams =
                 [
                     req.CompletionFields |> Option.map (fun v -> "completion_fields", Fes.Http.toQueryValue v)
@@ -5219,7 +5219,7 @@ module IndicesOperations =
 
         with
         static member ToEndpoint(req: IndicesValidateQueryRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_validate/query"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_validate/query"
             let queryParams =
                 [
                     req.AllowNoIndices |> Option.map (fun v -> "allow_no_indices", Fes.Http.toQueryValue v)

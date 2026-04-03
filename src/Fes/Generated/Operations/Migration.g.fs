@@ -18,7 +18,7 @@ module MigrationOperations =
 
         with
         static member ToEndpoint(req: MigrationDeprecationsRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
-            let path = $"/{req.Index}/_migration/deprecations"
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_migration/deprecations"
             let fullPath = path
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
             endpoint, ValueNone
