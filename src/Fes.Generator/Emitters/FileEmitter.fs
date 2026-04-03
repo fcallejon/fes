@@ -41,8 +41,8 @@ let emitTypeFile (index: TypeIndex.TypeIndex) (ns: string) (types: TypeDefinitio
     filePath, w.ToString()
 
 /// Build a name map: TypeName → unique F# name.
-/// Types in _types namespace keep short names, others get namespace-prefixed names.
-/// Duplicates always get prefixed.
+/// Types with unique short names keep them as-is.
+/// Types with duplicate short names get namespace-prefixed names to disambiguate.
 let buildNameMap (types: TypeDefinition list) : Map<TypeName, string> =
     let emittable =
         types |> List.filter (fun td ->
@@ -83,8 +83,7 @@ let emitAllTypeFiles (index: TypeIndex.TypeIndex) (types: TypeDefinition list) :
             | TypeDefinition.Request _ | TypeDefinition.Response _ -> false
             | _ -> true)
 
-    let nameMap = buildNameMap types
-    let index = TypeIndex.withNameMap nameMap index
+    // Reuse the nameMap already computed and stored on the index
     let sorted = DependencyGraph.topologicalSort allEmittableTypes
 
     let w = FSharpWriter.Writer()

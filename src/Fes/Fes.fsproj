@@ -24,10 +24,14 @@
         <Compile Include="Generated/Types/AllTypes.g.fs"/>
         <!-- Generated converters -->
         <Compile Include="Generated/Converters.g.fs"/>
-        <!-- Core library files (after types/converters) -->
+    </ItemGroup>
+    <ItemGroup>
+        <!-- Core library files (after types/converters, before builders) -->
         <Compile Include="Json.fs"/>
         <Compile Include="Http.fs"/>
         <Compile Include="Transport.fs"/>
+    </ItemGroup>
+    <ItemGroup>
         <!-- Generated builders -->
         <Compile Include="Generated/Builders/AsyncSearchStatusBuilders.g.fs"/>
         <Compile Include="Generated/Builders/AsyncSearchTypesBuilders.g.fs"/>
