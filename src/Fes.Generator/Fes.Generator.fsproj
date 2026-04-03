@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FSharp.Core" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Schema/Metamodel.fs" />
+    <Compile Include="Schema/SchemaReader.fs" />
+    <Compile Include="Schema/TypeIndex.fs" />
+    <Compile Include="Analysis/Namespacing.fs" />
+    <Compile Include="Analysis/TypeResolver.fs" />
+    <Compile Include="Analysis/DependencyGraph.fs" />
+    <Compile Include="Emitters/FSharpWriter.fs" />
+    <Compile Include="Emitters/TypeEmitter.fs" />
+    <Compile Include="Emitters/FileEmitter.fs" />
+    <Compile Include="Program.fs" />
+  </ItemGroup>
+
+</Project>
