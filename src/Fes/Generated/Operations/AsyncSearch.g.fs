@@ -62,7 +62,7 @@ module AsyncSearchOperations =
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
             endpoint, ValueNone
 
-    type AsyncSearchGetResponse<'tDocument> = Types.AsyncSearchDocumentResponseBase<'tDocument>
+    type AsyncSearchGetResponse<'TDocument> = Types.AsyncSearchDocumentResponseBase<'TDocument>
 
     type AsyncSearchGetRequestBuilder() =
         member _.Yield(_: unit) : AsyncSearchGetRequest =
@@ -318,7 +318,7 @@ module AsyncSearchOperations =
             let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
             endpoint, ValueSome postData
 
-    type AsyncSearchSubmitResponse<'tDocument> = Types.AsyncSearchDocumentResponseBase<'tDocument>
+    type AsyncSearchSubmitResponse<'TDocument> = Types.AsyncSearchDocumentResponseBase<'TDocument>
 
     type AsyncSearchSubmitRequestBuilder() =
         member _.Yield(_: unit) : AsyncSearchSubmitRequest =

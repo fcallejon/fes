@@ -664,7 +664,7 @@ module IndicesOperations =
     type IndicesCreateFromRequest = {
         Source: Types.IndexName
         Dest: Types.IndexName
-        Document: obj
+        Document: Types.CreateFrom
     }
 
         with
@@ -1230,7 +1230,7 @@ module IndicesOperations =
     type IndicesDownsampleRequest = {
         Index: Types.IndexName
         TargetIndex: Types.IndexName
-        Document: obj
+        Document: Types.DownsampleConfig
     }
 
         with
@@ -2706,7 +2706,7 @@ module IndicesOperations =
             { req with MasterTimeout = Some value }
 
     type IndicesMigrateReindexRequest = {
-        Document: obj
+        Document: Types.MigrateReindex
     }
 
         with
@@ -3147,7 +3147,7 @@ module IndicesOperations =
         DryRun: bool option
         MasterTimeout: Types.Duration option
         Timeout: Types.Duration option
-        Document: obj
+        Document: Types.TypeMapping
     }
 
         with
@@ -3284,7 +3284,7 @@ module IndicesOperations =
         DryRun: bool option
         MasterTimeout: Types.Duration option
         Timeout: Types.Duration option
-        Document: obj
+        Document: Types.IndexSettings
     }
 
         with
@@ -3694,7 +3694,7 @@ module IndicesOperations =
         PreserveExisting: bool option
         Reopen: bool option
         Timeout: Types.Duration option
-        Document: obj
+        Document: Types.IndexSettings
     }
 
         with
@@ -4709,7 +4709,7 @@ module IndicesOperations =
         Cause: string option
         MasterTimeout: Types.Duration option
         IncludeDefaults: bool option
-        Document: obj
+        Document: Types.IndexTemplate
     }
 
         with

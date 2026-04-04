@@ -13,7 +13,7 @@ open Fes.Generated
 module ProfilingOperations =
 
     type ProfilingFlamegraphRequest = {
-        Document: obj
+        Document: System.Text.Json.JsonElement
     }
 
         with
@@ -39,7 +39,7 @@ module ProfilingOperations =
     let profilingFlamegraphRequest = ProfilingFlamegraphRequestBuilder()
 
     type ProfilingStacktracesRequest = {
-        Document: obj
+        Document: System.Text.Json.JsonElement
     }
 
         with
@@ -119,7 +119,7 @@ module ProfilingOperations =
             { req with WaitForResourcesCreated = Some value }
 
     type ProfilingTopnFunctionsRequest = {
-        Document: obj
+        Document: System.Text.Json.JsonElement
     }
 
         with

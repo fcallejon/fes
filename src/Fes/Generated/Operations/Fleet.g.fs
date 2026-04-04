@@ -146,7 +146,7 @@ module FleetOperations =
         TypedKeys: bool option
         WaitForCheckpoints: Types.Checkpoint list option
         AllowPartialSearchResults: bool option
-        Document: obj
+        Document: Types.GlobalMsearchRequestItem list
     }
 
         with

@@ -13,7 +13,7 @@ open Fes.Generated
 module ProjectOperations =
 
     type ProjectCreateManyRoutingRequest = {
-        Document: obj
+        Document: Types.NamedProjectRoutingExpressions
     }
 
         with
@@ -40,7 +40,7 @@ module ProjectOperations =
 
     type ProjectCreateRoutingRequest = {
         Name: string
-        Document: obj
+        Document: Types.ProjectRoutingExpression
     }
 
         with

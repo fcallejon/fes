@@ -102,11 +102,11 @@ module Types =
         ZeroTermsQuery: CombinedFieldsZeroTerms option
     }
 
-    type DistanceFeatureQueryBase<'tOrigin, 'tDistance> = {
+    type DistanceFeatureQueryBase<'TOrigin, 'TDistance> = {
         [<System.Text.Json.Serialization.JsonPropertyName("origin")>]
-        Origin: 'tOrigin
+        Origin: 'TOrigin
         [<System.Text.Json.Serialization.JsonPropertyName("pivot")>]
-        Pivot: 'tDistance
+        Pivot: 'TDistance
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
         Field: Field
     }
@@ -177,7 +177,7 @@ module Types =
         | Avg
         | Sum
 
-    type DecayFunctionBase<'tOrigin, 'tScale> = {
+    type DecayFunctionBase<'TOrigin, 'TScale> = {
         [<System.Text.Json.Serialization.JsonPropertyName("multi_value_mode")>]
         MultiValueMode: MultiValueMode option
     }
@@ -246,7 +246,7 @@ module Types =
         | Month
         | Year
 
-    type EpochTime<'unit> = 'unit
+    type EpochTime<'Unit> = 'Unit
 
     /// Time unit for milliseconds
     type UnitMillis = Long
@@ -515,11 +515,11 @@ module Types =
         | Quarter
         | Year
 
-    type ExtendedBounds<'t> = {
+    type ExtendedBounds<'T> = {
         [<System.Text.Json.Serialization.JsonPropertyName("max")>]
-        Max: 't option
+        Max: 'T option
         [<System.Text.Json.Serialization.JsonPropertyName("min")>]
-        Min: 't option
+        Min: 'T option
     }
 
     /// A date range limit, represented either as a DateMath expression or a number expressed
@@ -599,9 +599,9 @@ module Types =
 
     /// Aggregation buckets. By default they are returned as an array, but if the aggregation has keys configured for
     [<RequireQualifiedAccess>]
-    type Buckets<'tBucket> =
-        | Dictionary of Map<string, 'tBucket>
-        | Array of 'tBucket list
+    type Buckets<'TBucket> =
+        | Dictionary of Map<string, 'TBucket>
+        | Array of 'TBucket list
 
     type AggregationRange = {
         [<System.Text.Json.Serialization.JsonPropertyName("from")>]
@@ -1777,17 +1777,17 @@ module Types =
         | Contains
         | Intersects
 
-    type RangeQueryBase<'t> = {
+    type RangeQueryBase<'T> = {
         [<System.Text.Json.Serialization.JsonPropertyName("relation")>]
         Relation: RangeRelation option
         [<System.Text.Json.Serialization.JsonPropertyName("gt")>]
-        Gt: 't option
+        Gt: 'T option
         [<System.Text.Json.Serialization.JsonPropertyName("gte")>]
-        Gte: 't option
+        Gte: 'T option
         [<System.Text.Json.Serialization.JsonPropertyName("lt")>]
-        Lt: 't option
+        Lt: 'T option
         [<System.Text.Json.Serialization.JsonPropertyName("lte")>]
-        Lte: 't option
+        Lte: 'T option
     }
 
     type UntypedRangeQuery = {
@@ -1876,8 +1876,8 @@ module Types =
 
     /// A set of flags that can be represented as a single enum value or a set of values that are encoded
     [<RequireQualifiedAccess>]
-    type PipeSeparatedFlags<'t> =
-        | T of 't
+    type PipeSeparatedFlags<'T> =
+        | T of 'T
         | String of string
 
     [<RequireQualifiedAccess>]
@@ -3741,7 +3741,7 @@ module Types =
         | Never of NeverCondition
         | Script of ScriptCondition
 
-    type DurationValue<'unit> = 'unit
+    type DurationValue<'Unit> = 'Unit
 
     type ScriptTransform = {
         [<System.Text.Json.Serialization.JsonPropertyName("lang")>]
@@ -4415,9 +4415,9 @@ module Types =
         Meta: Metadata option
     }
 
-    type MultiBucketAggregateBase<'tBucket> = {
+    type MultiBucketAggregateBase<'TBucket> = {
         [<System.Text.Json.Serialization.JsonPropertyName("buckets")>]
-        Buckets: Buckets<'tBucket>
+        Buckets: Buckets<'TBucket>
     }
 
     /// Base type for multi-bucket aggregation results that can hold sub-aggregations results.
@@ -4721,7 +4721,7 @@ module Types =
 
     type VariableWidthHistogramAggregate = System.Text.Json.JsonElement
 
-    type TermsAggregateBase<'tBucket> = {
+    type TermsAggregateBase<'TBucket> = {
         [<System.Text.Json.Serialization.JsonPropertyName("doc_count_error_upper_bound")>]
         DocCountErrorUpperBound: Long option
         [<System.Text.Json.Serialization.JsonPropertyName("sum_other_doc_count")>]
@@ -4896,7 +4896,7 @@ module Types =
 
     type FiltersAggregate = System.Text.Json.JsonElement
 
-    type SignificantTermsAggregateBase<'t> = {
+    type SignificantTermsAggregateBase<'T> = {
         [<System.Text.Json.Serialization.JsonPropertyName("bg_count")>]
         BgCount: Long option
         [<System.Text.Json.Serialization.JsonPropertyName("doc_count")>]
@@ -5001,16 +5001,16 @@ module Types =
 
     type SequenceNumber = Long
 
-    type HitsMetadata<'t> = {
+    type HitsMetadata<'T> = {
         [<System.Text.Json.Serialization.JsonPropertyName("total")>]
         Total: System.Text.Json.JsonElement option
         [<System.Text.Json.Serialization.JsonPropertyName("hits")>]
-        Hits: Hit<'t> list
+        Hits: Hit<'T> list
         [<System.Text.Json.Serialization.JsonPropertyName("max_score")>]
         MaxScore: Double option option
     }
 
-    and Hit<'tDocument> = {
+    and Hit<'TDocument> = {
         [<System.Text.Json.Serialization.JsonPropertyName("_index")>]
         Index: IndexName
         [<System.Text.Json.Serialization.JsonPropertyName("_id")>]
@@ -5040,7 +5040,7 @@ module Types =
         [<System.Text.Json.Serialization.JsonPropertyName("_routing")>]
         Routing: string option
         [<System.Text.Json.Serialization.JsonPropertyName("_source")>]
-        Source: 'tDocument option
+        Source: 'TDocument option
         [<System.Text.Json.Serialization.JsonPropertyName("_rank")>]
         Rank: Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("_seq_no")>]
@@ -6581,8 +6581,8 @@ module Types =
 
     /// Some APIs will return values such as numbers also as a string (notably epoch timestamps). This behavior
     [<RequireQualifiedAccess>]
-    type Stringified<'t> =
-        | T of 't
+    type Stringified<'T> =
+        | T of 'T
         | String of string
 
     [<RequireQualifiedAccess>]
@@ -10430,7 +10430,7 @@ module Types =
         | String of string
         | GeoLocation of GeoLocation
 
-    type CompletionSuggestOption<'tDocument> = {
+    type CompletionSuggestOption<'TDocument> = {
         [<System.Text.Json.Serialization.JsonPropertyName("collate_match")>]
         CollateMatch: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("contexts")>]
@@ -10446,7 +10446,7 @@ module Types =
         [<System.Text.Json.Serialization.JsonPropertyName("_score")>]
         Score: Double option
         [<System.Text.Json.Serialization.JsonPropertyName("_source")>]
-        Source: 'tDocument option
+        Source: 'TDocument option
         [<System.Text.Json.Serialization.JsonPropertyName("text")>]
         Text: string
         [<System.Text.Json.Serialization.JsonPropertyName("score")>]
@@ -10462,7 +10462,7 @@ module Types =
         Text: string
     }
 
-    type CompletionSuggest<'tDocument> = {
+    type CompletionSuggest<'TDocument> = {
         [<System.Text.Json.Serialization.JsonPropertyName("options")>]
         Options: System.Text.Json.JsonElement
     }
@@ -10502,12 +10502,12 @@ module Types =
     }
 
     [<RequireQualifiedAccess>]
-    type Suggest<'tDocument> =
-        | CompletionSuggest of CompletionSuggest<'tDocument>
+    type Suggest<'TDocument> =
+        | CompletionSuggest of CompletionSuggest<'TDocument>
         | PhraseSuggest of PhraseSuggest
         | TermSuggest of TermSuggest
 
-    type AsyncSearch<'tDocument> = {
+    type AsyncSearch<'TDocument> = {
         [<System.Text.Json.Serialization.JsonPropertyName("aggregations")>]
         Aggregations: Map<AggregateName, Aggregate> option
         [<System.Text.Json.Serialization.JsonPropertyName("_clusters")>]
@@ -10515,7 +10515,7 @@ module Types =
         [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
         Fields: Map<string, System.Text.Json.JsonElement> option
         [<System.Text.Json.Serialization.JsonPropertyName("hits")>]
-        Hits: HitsMetadata<'tDocument>
+        Hits: HitsMetadata<'TDocument>
         [<System.Text.Json.Serialization.JsonPropertyName("max_score")>]
         MaxScore: Double option
         [<System.Text.Json.Serialization.JsonPropertyName("num_reduce_phases")>]
@@ -10529,7 +10529,7 @@ module Types =
         [<System.Text.Json.Serialization.JsonPropertyName("_shards")>]
         Shards: ShardStatistics
         [<System.Text.Json.Serialization.JsonPropertyName("suggest")>]
-        Suggest: Map<SuggestionName, Suggest<'tDocument> list> option
+        Suggest: Map<SuggestionName, Suggest<'TDocument> list> option
         [<System.Text.Json.Serialization.JsonPropertyName("terminated_early")>]
         TerminatedEarly: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("timed_out")>]
@@ -10561,12 +10561,12 @@ module Types =
         Error: ErrorCause option
     }
 
-    type AsyncSearchDocumentResponseBase<'tDocument> = {
+    type AsyncSearchDocumentResponseBase<'TDocument> = {
         [<System.Text.Json.Serialization.JsonPropertyName("response")>]
-        Response: AsyncSearch<'tDocument>
+        Response: AsyncSearch<'TDocument>
     }
 
-    type AsyncSearchResponseException<'tDocument> = {
+    type AsyncSearchResponseException<'TDocument> = {
         [<System.Text.Json.Serialization.JsonPropertyName("is_partial")>]
         IsPartial: bool
         [<System.Text.Json.Serialization.JsonPropertyName("is_running")>]
@@ -10586,7 +10586,7 @@ module Types =
         [<System.Text.Json.Serialization.JsonPropertyName("error")>]
         Error: ErrorCause option
         [<System.Text.Json.Serialization.JsonPropertyName("response")>]
-        Response: AsyncSearch<'tDocument> option
+        Response: AsyncSearch<'TDocument> option
     }
 
     type FeatureToggle = {
@@ -13902,8 +13902,8 @@ module Types =
 
     /// `WithNullValue&lt;T&gt;` allows for explicit null assignments in contexts where `null` should be interpreted as an
     [<RequireQualifiedAccess>]
-    type WithNullValue<'t> =
-        | T of 't
+    type WithNullValue<'T> =
+        | T of 'T
         | NullValue of NullValue
 
     type MergeScheduler = {
@@ -16725,15 +16725,15 @@ module Types =
         | Friday
         | Saturday
 
-    type DecayPlacement<'tOrigin, 'tScale> = {
+    type DecayPlacement<'TOrigin, 'TScale> = {
         [<System.Text.Json.Serialization.JsonPropertyName("decay")>]
         Decay: Double option
         [<System.Text.Json.Serialization.JsonPropertyName("offset")>]
-        Offset: 'tScale option
+        Offset: 'TScale option
         [<System.Text.Json.Serialization.JsonPropertyName("scale")>]
-        Scale: 'tScale option
+        Scale: 'TScale option
         [<System.Text.Json.Serialization.JsonPropertyName("origin")>]
-        Origin: 'tOrigin option
+        Origin: 'TOrigin option
     }
 
     [<RequireQualifiedAccess>]
@@ -17413,36 +17413,36 @@ module Types =
         Queries: Map<string, Query>
     }
 
-    type HitsEvent<'tEvent> = {
+    type HitsEvent<'TEvent> = {
         [<System.Text.Json.Serialization.JsonPropertyName("_index")>]
         Index: IndexName
         [<System.Text.Json.Serialization.JsonPropertyName("_id")>]
         Id: Id
         [<System.Text.Json.Serialization.JsonPropertyName("_source")>]
-        Source: 'tEvent
+        Source: 'TEvent
         [<System.Text.Json.Serialization.JsonPropertyName("missing")>]
         Missing: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
         Fields: Map<Field, System.Text.Json.JsonElement list> option
     }
 
-    type HitsSequence<'tEvent> = {
+    type HitsSequence<'TEvent> = {
         [<System.Text.Json.Serialization.JsonPropertyName("events")>]
-        Events: HitsEvent<'tEvent> list
+        Events: HitsEvent<'TEvent> list
         [<System.Text.Json.Serialization.JsonPropertyName("join_keys")>]
         JoinKeys: System.Text.Json.JsonElement list option
     }
 
-    type EqlHits<'tEvent> = {
+    type EqlHits<'TEvent> = {
         [<System.Text.Json.Serialization.JsonPropertyName("total")>]
         Total: TotalHits option
         [<System.Text.Json.Serialization.JsonPropertyName("events")>]
-        Events: HitsEvent<'tEvent> list option
+        Events: HitsEvent<'TEvent> list option
         [<System.Text.Json.Serialization.JsonPropertyName("sequences")>]
-        Sequences: HitsSequence<'tEvent> list option
+        Sequences: HitsSequence<'TEvent> list option
     }
 
-    type EqlSearchResponseBase<'tEvent> = {
+    type EqlSearchResponseBase<'TEvent> = {
         [<System.Text.Json.Serialization.JsonPropertyName("id")>]
         Id: Id option
         [<System.Text.Json.Serialization.JsonPropertyName("is_partial")>]
@@ -17454,7 +17454,7 @@ module Types =
         [<System.Text.Json.Serialization.JsonPropertyName("timed_out")>]
         TimedOut: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("hits")>]
-        Hits: EqlHits<'tEvent>
+        Hits: EqlHits<'TEvent>
         [<System.Text.Json.Serialization.JsonPropertyName("shard_failures")>]
         ShardFailures: ShardFailure list option
     }
@@ -18668,7 +18668,7 @@ module Types =
         Relation: GeoShapeRelation option
     }
 
-    type GetResult<'tDocument> = {
+    type GetResult<'TDocument> = {
         [<System.Text.Json.Serialization.JsonPropertyName("_index")>]
         Index: IndexName
         [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
@@ -18686,7 +18686,7 @@ module Types =
         [<System.Text.Json.Serialization.JsonPropertyName("_seq_no")>]
         SeqNo: SequenceNumber option
         [<System.Text.Json.Serialization.JsonPropertyName("_source")>]
-        Source: 'tDocument option
+        Source: 'TDocument option
         [<System.Text.Json.Serialization.JsonPropertyName("_version")>]
         Version: VersionNumber option
     }
@@ -21161,7 +21161,7 @@ module Types =
         EffectiveMapping: TypeMapping option
     }
 
-    type InlineGet<'tDocument> = {
+    type InlineGet<'TDocument> = {
         [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
         Fields: Map<string, System.Text.Json.JsonElement> option
         [<System.Text.Json.Serialization.JsonPropertyName("found")>]
@@ -21173,7 +21173,7 @@ module Types =
         [<System.Text.Json.Serialization.JsonPropertyName("_routing")>]
         Routing: Routing option
         [<System.Text.Json.Serialization.JsonPropertyName("_source")>]
-        Source: 'tDocument option
+        Source: 'TDocument option
     }
 
     type Input = {
@@ -22466,7 +22466,7 @@ module Types =
         Index: IndexName
     }
 
-    type ResponseBody<'tDocument> = {
+    type ResponseBody<'TDocument> = {
         [<System.Text.Json.Serialization.JsonPropertyName("took")>]
         Took: Long
         [<System.Text.Json.Serialization.JsonPropertyName("timed_out")>]
@@ -22474,7 +22474,7 @@ module Types =
         [<System.Text.Json.Serialization.JsonPropertyName("_shards")>]
         Shards: ShardStatistics
         [<System.Text.Json.Serialization.JsonPropertyName("hits")>]
-        Hits: HitsMetadata<'tDocument>
+        Hits: HitsMetadata<'TDocument>
         [<System.Text.Json.Serialization.JsonPropertyName("aggregations")>]
         Aggregations: Map<AggregateName, Aggregate> option
         [<System.Text.Json.Serialization.JsonPropertyName("_clusters")>]
@@ -22492,26 +22492,26 @@ module Types =
         [<System.Text.Json.Serialization.JsonPropertyName("_scroll_id")>]
         ScrollId: ScrollId option
         [<System.Text.Json.Serialization.JsonPropertyName("suggest")>]
-        Suggest: Map<SuggestionName, Suggest<'tDocument> list> option
+        Suggest: Map<SuggestionName, Suggest<'TDocument> list> option
         [<System.Text.Json.Serialization.JsonPropertyName("terminated_early")>]
         TerminatedEarly: bool option
     }
 
-    type MultiSearchItem<'tDocument> = {
+    type MultiSearchItem<'TDocument> = {
         [<System.Text.Json.Serialization.JsonPropertyName("status")>]
         Status: Integer option
     }
 
     [<RequireQualifiedAccess>]
-    type GlobalMsearchResponseItem<'tDocument> =
-        | MultiSearchItem of MultiSearchItem<'tDocument>
+    type GlobalMsearchResponseItem<'TDocument> =
+        | MultiSearchItem of MultiSearchItem<'TDocument>
         | ErrorResponseBase of ErrorResponseBase
 
-    type MultiSearchResult<'tDocument> = {
+    type MultiSearchResult<'TDocument> = {
         [<System.Text.Json.Serialization.JsonPropertyName("took")>]
         Took: Long
         [<System.Text.Json.Serialization.JsonPropertyName("responses")>]
-        Responses: GlobalMsearchResponseItem<'tDocument> list
+        Responses: GlobalMsearchResponseItem<'TDocument> list
     }
 
     type ProjectRouting = string
@@ -25363,8 +25363,8 @@ module Types =
     }
 
     [<RequireQualifiedAccess>]
-    type GlobalMgetResponseItem<'tDocument> =
-        | GetResult of GetResult<'tDocument>
+    type GlobalMgetResponseItem<'TDocument> =
+        | GetResult of GetResult<'TDocument>
         | MultiGetError of MultiGetError
 
     [<RequireQualifiedAccess>]
@@ -27423,11 +27423,11 @@ module Types =
         Mappings: Map<Field, FieldMapping>
     }
 
-    type UpdateAction<'tDocument, 'tPartialDocument> = {
+    type UpdateAction<'TDocument, 'TPartialDocument> = {
         [<System.Text.Json.Serialization.JsonPropertyName("detect_noop")>]
         DetectNoop: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("doc")>]
-        Doc: 'tPartialDocument option
+        Doc: 'TPartialDocument option
         [<System.Text.Json.Serialization.JsonPropertyName("doc_as_upsert")>]
         DocAsUpsert: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("script")>]
@@ -27437,7 +27437,7 @@ module Types =
         [<System.Text.Json.Serialization.JsonPropertyName("_source")>]
         Source: SourceConfig option
         [<System.Text.Json.Serialization.JsonPropertyName("upsert")>]
-        Upsert: 'tDocument option
+        Upsert: 'TDocument option
     }
 
     type UpdateByQueryRethrottleNode = {
@@ -27466,9 +27466,9 @@ module Types =
         ForcedRefresh: bool option
     }
 
-    type UpdateWriteResponseBase<'tDocument> = {
+    type UpdateWriteResponseBase<'TDocument> = {
         [<System.Text.Json.Serialization.JsonPropertyName("get")>]
-        Get: InlineGet<'tDocument> option
+        Get: InlineGet<'TDocument> option
     }
 
     type UpdatedDataStreamMappings = {

@@ -170,7 +170,7 @@ module SearchApplicationOperations =
         CollectionName: Types.Name
         EventType: Types.EventType
         Debug: bool option
-        Document: obj
+        Document: System.Text.Json.JsonElement
     }
 
         with
@@ -224,7 +224,7 @@ module SearchApplicationOperations =
     type SearchApplicationPutRequest = {
         Name: Types.Name
         Create: bool option
-        Document: obj
+        Document: Types.SearchApplicationParameters
     }
 
         with
@@ -354,7 +354,7 @@ module SearchApplicationOperations =
             let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
             endpoint, ValueSome postData
 
-    type SearchApplicationSearchResponse<'tDocument> = Types.ResponseBody<'tDocument>
+    type SearchApplicationSearchResponse<'TDocument> = Types.ResponseBody<'TDocument>
 
     type SearchApplicationSearchRequestBuilder() =
         member _.Yield(_: unit) : SearchApplicationSearchRequest =
