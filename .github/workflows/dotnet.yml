@@ -6,28 +6,26 @@ on:
   pull_request:
     branches: [ main ]
 
-# NOTE: When adding integration tests, use Elasticsearch 9.3.x
-# (matching the schema.json from elasticsearch-specification main branch).
-# The service block below is ready to uncomment:
-#
-#   services:
-#     elasticsearch:
-#       image: docker.elastic.co/elasticsearch/elasticsearch:9.3.2
-#       ports:
-#         - 9200:9200
-#       env:
-#         discovery.type: single-node
-#         xpack.security.enabled: "false"
-#         ES_JAVA_OPTS: "-Xms512m -Xmx512m"
-#       options: >-
-#         --health-cmd "curl -s http://localhost:9200/_cluster/health | grep -qE 'yellow|green'"
-#         --health-interval 10s
-#         --health-timeout 5s
-#         --health-retries 10
+# NOTE: Elasticsearch 9.x service container is configured below in the build job.
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    services:
+      elasticsearch:
+        image: docker.elastic.co/elasticsearch/elasticsearch:9.0.0
+        ports:
+          - 9200:9200
+        env:
+          discovery.type: single-node
+          xpack.security.enabled: "false"
+          ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+        options: >-
+          --health-cmd "curl -s http://localhost:9200/_cluster/health | grep -qE 'yellow|green'"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 10
 
     steps:
       - uses: actions/checkout@v4

@@ -15,11 +15,11 @@ let filterUsedGenerics (generics: TypeName list) (bodyText: string) =
     | gs ->
         let used =
             gs |> List.filter (fun g ->
-                let paramStr = $"'{Namespacing.toCamelCase g.Name}"
+                let paramStr = $"'{g.Name}"
                 bodyText.Contains(paramStr))
         match used with
         | [] -> ""
-        | us -> "<" + (us |> List.map (fun g -> $"'{Namespacing.toCamelCase g.Name}") |> String.concat ", ") + ">"
+        | us -> "<" + (us |> List.map (fun g -> $"'{g.Name}") |> String.concat ", ") + ">"
 
 /// Deduplicate record field names — returns properties with CodegenName set for collisions
 let dedupRecordFields (properties: Property list) : Property list =
@@ -87,6 +87,17 @@ let emitRecordField (w: Writer) (ctx: TypeResolver.ResolveContext) (p: Property)
 
     w.Line $"{fieldName}: {finalType}"
 
+/// Generate the default value expression for a required field.
+/// LiteralValue fields produce their fixed value; others fall back to Unchecked.defaultof.
+let defaultValueExpr (p: Property) : string =
+    match p.Type with
+    | ValueOf.LiteralValue (LiteralValue.String s) -> $"\"{s}\""
+    | ValueOf.LiteralValue (LiteralValue.Bool b) -> if b then "true" else "false"
+    | ValueOf.LiteralValue (LiteralValue.Number n) ->
+        let s = n.ToString(System.Globalization.CultureInfo.InvariantCulture)
+        if s.Contains('.') then s else $"{s}.0"
+    | _ -> "Unchecked.defaultof<_>"
+
 let emitRecord (w: Writer) (isFirst: bool) (ctx: TypeResolver.ResolveContext) (name: string) (properties: Property list) (generics: TypeName list) (description: string option) =
     w.DocComment description
     let keyword = w.TypeKeyword isFirst
@@ -100,7 +111,7 @@ let emitRecord (w: Writer) (isFirst: bool) (ctx: TypeResolver.ResolveContext) (n
         let genericParams =
             match generics with
             | [] -> ""
-            | gs -> "<" + (gs |> List.map (fun g -> $"'{Namespacing.toCamelCase g.Name}") |> String.concat ", ") + ">"
+            | gs -> "<" + (gs |> List.map (fun g -> $"'{g.Name}") |> String.concat ", ") + ">"
 
         let dedupedProperties = dedupRecordFields properties
 
@@ -118,6 +129,26 @@ let emitRecord (w: Writer) (isFirst: bool) (ctx: TypeResolver.ResolveContext) (n
                 emitRecordField w ctx p
         w.Dedent()
         w.Line "}"
+
+        // Generate static member empty for non-generic records
+        if generics.IsEmpty then
+            w.BlankLine()
+            w.Indent()
+            w.Line "with"
+            w.Line $"static member empty : {name} ="
+            w.Indent()
+            w.Line "{"
+            w.Indent()
+            for p in dedupedProperties do
+                let fieldName = getRecordFieldName p
+                if p.Required then
+                    w.Line $"{fieldName} = {defaultValueExpr p}"
+                else
+                    w.Line $"{fieldName} = None"
+            w.Dedent()
+            w.Line "}"
+            w.Dedent()
+            w.Dedent()
 
     w.BlankLine()
 

@@ -3,6 +3,41 @@ open System.IO
 open Fes.Generator.Schema
 open Fes.Generator.Emitters
 
+// ============================================================================
+// Inheritance flattening — copies ancestor properties into each derived type
+// so generated records are self-contained (no phantom inherited fields).
+// Only plain interface records are flattened; container/variant types are left
+// untouched because their DU structure must not gain extra fields.
+// Generic parent instantiations are skipped to avoid arity conflicts.
+// ============================================================================
+
+let rec private collectInheritedProps (index: TypeIndex.TypeIndex) (inh: Inherits option) : Property list =
+    match inh with
+    | None -> []
+    | Some i when not i.Generics.IsEmpty -> []  // generic instantiation — skip
+    | Some i ->
+        match TypeIndex.tryResolve index i.Type with
+        | Some (TypeDefinition.Interface d) ->
+            // grandparent properties first, then parent's own
+            collectInheritedProps index d.Inherits @ d.Properties
+        | _ -> []
+
+let private flattenInterface (index: TypeIndex.TypeIndex) (def: InterfaceDefinition) : InterfaceDefinition =
+    match def.Variants with
+    | Some _ -> def  // leave container/variant DUs untouched
+    | None ->
+        let inherited = collectInheritedProps index def.Inherits
+        let childNames = def.Properties |> List.map _.Name |> Set.ofList
+        // Append parent props that are not already explicitly declared
+        let extra = inherited |> List.filter (fun p -> not (Set.contains p.Name childNames))
+        { def with Properties = def.Properties @ extra }
+
+let private flattenInheritance (index: TypeIndex.TypeIndex) (types: TypeDefinition list) : TypeDefinition list =
+    types |> List.map (fun td ->
+        match td with
+        | TypeDefinition.Interface def -> TypeDefinition.Interface (flattenInterface index def)
+        | _ -> td)
+
 [<EntryPoint>]
 let main args =
     let schemaPath =
@@ -86,9 +121,18 @@ let main args =
         for f in Directory.GetFiles(outputDir, "*.g.fs", SearchOption.AllDirectories) do
             File.Delete f
 
+    // Flatten inherited properties into derived interface types before emission
+    let flatTypes = flattenInheritance index model.Types
+
+    // Build a secondary index whose ByName map reflects the flattened types.
+    // The primary index keeps the original types for name-map resolution; the
+    // flat index is used by the test emitter to check whether a type has properties.
+    let flatIndex =
+        { index with ByName = flatTypes |> List.map (fun t -> TypeDefinition.name t, t) |> Map.ofList }
+
     // Generate type files
     printfn "Generating type files..."
-    let typeFiles = FileEmitter.emitAllTypeFiles index model.Types
+    let typeFiles = FileEmitter.emitAllTypeFiles index flatTypes
     FileEmitter.writeFiles outputDir typeFiles
     printfn $"  {typeFiles.Length} type files"
 
@@ -100,13 +144,13 @@ let main args =
 
     // Generate converter files
     printfn "Generating serialisation converters..."
-    let converterFiles = SerialiserEmitter.emitAllConverters index model.Types
+    let converterFiles = SerialiserEmitter.emitAllConverters index flatTypes
     FileEmitter.writeFiles outputDir converterFiles
     printfn $"  {converterFiles.Length} converter files"
 
     // Generate builder files (Query.bool, Agg.terms, boolQuery { } etc.)
     printfn "Generating builder files..."
-    let builderFiles = BuilderEmitter.emitAllBuilderFiles index model.Types
+    let builderFiles = BuilderEmitter.emitAllBuilderFiles index flatTypes
     FileEmitter.writeFiles outputDir builderFiles
     printfn $"  {builderFiles.Length} builder files"
 
@@ -148,11 +192,11 @@ let main args =
         System.IO.File.WriteAllText(System.IO.Path.Combine(genDir, "EndpointTests.g.fs"), endpointTests)
         printfn "  Wrote EndpointTests.g.fs"
 
-        let enumTests = TestEmitter.emitEnumTests index model.Types
+        let enumTests = TestEmitter.emitEnumTests flatIndex flatTypes
         System.IO.File.WriteAllText(System.IO.Path.Combine(genDir, "EnumRoundTripTests.g.fs"), enumTests)
         printfn "  Wrote EnumRoundTripTests.g.fs"
 
-        let variantTests = TestEmitter.emitVariantTests index model.Types
+        let variantTests = TestEmitter.emitVariantTests flatIndex flatTypes
         System.IO.File.WriteAllText(System.IO.Path.Combine(genDir, "VariantTests.g.fs"), variantTests)
         printfn "  Wrote VariantTests.g.fs"
     | None -> ()

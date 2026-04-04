@@ -175,7 +175,7 @@ module QueryRulesOperations =
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: Types.QueryRuleType
         [<System.Text.Json.Serialization.JsonPropertyName("criteria")>]
-        Criteria: System.Text.Json.JsonElement
+        Criteria: Types.QueryRuleCriteria list
         [<System.Text.Json.Serialization.JsonPropertyName("actions")>]
         Actions: Types.QueryRuleActions
         [<System.Text.Json.Serialization.JsonPropertyName("priority")>]
@@ -216,7 +216,7 @@ module QueryRulesOperations =
             { state with Type = value }
 
         [<CustomOperation("criteria")>]
-        member _.Criteria(state: QueryRulesPutRuleRequest, value: System.Text.Json.JsonElement) =
+        member _.Criteria(state: QueryRulesPutRuleRequest, value: Types.QueryRuleCriteria list) =
             { state with Criteria = value }
 
         [<CustomOperation("actions")>]
@@ -232,7 +232,7 @@ module QueryRulesOperations =
     module PutRule =
         let withType (value: Types.QueryRuleType) (req: QueryRulesPutRuleRequest) =
             { req with Type = value }
-        let withCriteria (value: System.Text.Json.JsonElement) (req: QueryRulesPutRuleRequest) =
+        let withCriteria (value: Types.QueryRuleCriteria list) (req: QueryRulesPutRuleRequest) =
             { req with Criteria = value }
         let withActions (value: Types.QueryRuleActions) (req: QueryRulesPutRuleRequest) =
             { req with Actions = value }
@@ -242,7 +242,7 @@ module QueryRulesOperations =
     type QueryRulesPutRulesetRequest = {
         RulesetId: Types.Id
         [<System.Text.Json.Serialization.JsonPropertyName("rules")>]
-        Rules: System.Text.Json.JsonElement
+        Rules: Types.QueryRule list
     }
 
         with
@@ -267,13 +267,13 @@ module QueryRulesOperations =
             { state with RulesetId = value }
 
         [<CustomOperation("rules")>]
-        member _.Rules(state: QueryRulesPutRulesetRequest, value: System.Text.Json.JsonElement) =
+        member _.Rules(state: QueryRulesPutRulesetRequest, value: Types.QueryRule list) =
             { state with Rules = value }
 
     let queryRulesPutRulesetRequest = QueryRulesPutRulesetRequestBuilder()
 
     module PutRuleset =
-        let withRules (value: System.Text.Json.JsonElement) (req: QueryRulesPutRulesetRequest) =
+        let withRules (value: Types.QueryRule list) (req: QueryRulesPutRulesetRequest) =
             { req with Rules = value }
 
     type QueryRulesTestRequest = {

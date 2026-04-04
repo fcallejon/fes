@@ -1167,6 +1167,24 @@ module MlTypesBuilders =
             {
                 ClassAssignmentObjective = None
                 NumTopClasses = None
+                Alpha = None
+                DependentVariable = Unchecked.defaultof<_>
+                DownsampleFactor = None
+                EarlyStoppingEnabled = None
+                Eta = None
+                EtaGrowthRatePerTree = None
+                FeatureBagFraction = None
+                FeatureProcessors = None
+                Gamma = None
+                Lambda = None
+                MaxOptimizationRoundsPerHyperparameter = None
+                MaxTrees = None
+                NumTopFeatureImportanceValues = None
+                PredictionFieldName = None
+                RandomizeSeed = None
+                SoftTreeDepthLimit = None
+                SoftTreeDepthTolerance = None
+                TrainingPercent = None
             }
 
         [<CustomOperation("classAssignmentObjective")>]
@@ -1176,6 +1194,78 @@ module MlTypesBuilders =
         [<CustomOperation("numTopClasses")>]
         member _.NumTopClasses(state: Types.DataframeAnalysisClassification, value: Types.Integer) =
             { state with NumTopClasses = Some value }
+
+        [<CustomOperation("alpha")>]
+        member _.Alpha(state: Types.DataframeAnalysisClassification, value: Types.Double) =
+            { state with Alpha = Some value }
+
+        [<CustomOperation("dependentVariable")>]
+        member _.DependentVariable(state: Types.DataframeAnalysisClassification, value: string) =
+            { state with DependentVariable = value }
+
+        [<CustomOperation("downsampleFactor")>]
+        member _.DownsampleFactor(state: Types.DataframeAnalysisClassification, value: Types.Double) =
+            { state with DownsampleFactor = Some value }
+
+        [<CustomOperation("earlyStoppingEnabled")>]
+        member _.EarlyStoppingEnabled(state: Types.DataframeAnalysisClassification, value: bool) =
+            { state with EarlyStoppingEnabled = Some value }
+
+        [<CustomOperation("eta")>]
+        member _.Eta(state: Types.DataframeAnalysisClassification, value: Types.Double) =
+            { state with Eta = Some value }
+
+        [<CustomOperation("etaGrowthRatePerTree")>]
+        member _.EtaGrowthRatePerTree(state: Types.DataframeAnalysisClassification, value: Types.Double) =
+            { state with EtaGrowthRatePerTree = Some value }
+
+        [<CustomOperation("featureBagFraction")>]
+        member _.FeatureBagFraction(state: Types.DataframeAnalysisClassification, value: Types.Double) =
+            { state with FeatureBagFraction = Some value }
+
+        [<CustomOperation("featureProcessors")>]
+        member _.FeatureProcessors(state: Types.DataframeAnalysisClassification, value: Types.DataframeAnalysisFeatureProcessor list) =
+            { state with FeatureProcessors = Some value }
+
+        [<CustomOperation("gamma")>]
+        member _.Gamma(state: Types.DataframeAnalysisClassification, value: Types.Double) =
+            { state with Gamma = Some value }
+
+        [<CustomOperation("lambda")>]
+        member _.Lambda(state: Types.DataframeAnalysisClassification, value: Types.Double) =
+            { state with Lambda = Some value }
+
+        [<CustomOperation("maxOptimizationRoundsPerHyperparameter")>]
+        member _.MaxOptimizationRoundsPerHyperparameter(state: Types.DataframeAnalysisClassification, value: Types.Integer) =
+            { state with MaxOptimizationRoundsPerHyperparameter = Some value }
+
+        [<CustomOperation("maxTrees")>]
+        member _.MaxTrees(state: Types.DataframeAnalysisClassification, value: Types.Integer) =
+            { state with MaxTrees = Some value }
+
+        [<CustomOperation("numTopFeatureImportanceValues")>]
+        member _.NumTopFeatureImportanceValues(state: Types.DataframeAnalysisClassification, value: Types.Integer) =
+            { state with NumTopFeatureImportanceValues = Some value }
+
+        [<CustomOperation("predictionFieldName")>]
+        member _.PredictionFieldName(state: Types.DataframeAnalysisClassification, value: Types.Field) =
+            { state with PredictionFieldName = Some value }
+
+        [<CustomOperation("randomizeSeed")>]
+        member _.RandomizeSeed(state: Types.DataframeAnalysisClassification, value: Types.Double) =
+            { state with RandomizeSeed = Some value }
+
+        [<CustomOperation("softTreeDepthLimit")>]
+        member _.SoftTreeDepthLimit(state: Types.DataframeAnalysisClassification, value: Types.Integer) =
+            { state with SoftTreeDepthLimit = Some value }
+
+        [<CustomOperation("softTreeDepthTolerance")>]
+        member _.SoftTreeDepthTolerance(state: Types.DataframeAnalysisClassification, value: Types.Double) =
+            { state with SoftTreeDepthTolerance = Some value }
+
+        [<CustomOperation("trainingPercent")>]
+        member _.TrainingPercent(state: Types.DataframeAnalysisClassification, value: Types.Percentage) =
+            { state with TrainingPercent = Some value }
 
     let dataframeAnalysisClassification = DataframeAnalysisClassificationBuilder()
 
@@ -1286,6 +1376,24 @@ module MlTypesBuilders =
             {
                 LossFunction = None
                 LossFunctionParameter = None
+                Alpha = None
+                DependentVariable = Unchecked.defaultof<_>
+                DownsampleFactor = None
+                EarlyStoppingEnabled = None
+                Eta = None
+                EtaGrowthRatePerTree = None
+                FeatureBagFraction = None
+                FeatureProcessors = None
+                Gamma = None
+                Lambda = None
+                MaxOptimizationRoundsPerHyperparameter = None
+                MaxTrees = None
+                NumTopFeatureImportanceValues = None
+                PredictionFieldName = None
+                RandomizeSeed = None
+                SoftTreeDepthLimit = None
+                SoftTreeDepthTolerance = None
+                TrainingPercent = None
             }
 
         [<CustomOperation("lossFunction")>]
@@ -1295,6 +1403,78 @@ module MlTypesBuilders =
         [<CustomOperation("lossFunctionParameter")>]
         member _.LossFunctionParameter(state: Types.DataframeAnalysisRegression, value: Types.Double) =
             { state with LossFunctionParameter = Some value }
+
+        [<CustomOperation("alpha")>]
+        member _.Alpha(state: Types.DataframeAnalysisRegression, value: Types.Double) =
+            { state with Alpha = Some value }
+
+        [<CustomOperation("dependentVariable")>]
+        member _.DependentVariable(state: Types.DataframeAnalysisRegression, value: string) =
+            { state with DependentVariable = value }
+
+        [<CustomOperation("downsampleFactor")>]
+        member _.DownsampleFactor(state: Types.DataframeAnalysisRegression, value: Types.Double) =
+            { state with DownsampleFactor = Some value }
+
+        [<CustomOperation("earlyStoppingEnabled")>]
+        member _.EarlyStoppingEnabled(state: Types.DataframeAnalysisRegression, value: bool) =
+            { state with EarlyStoppingEnabled = Some value }
+
+        [<CustomOperation("eta")>]
+        member _.Eta(state: Types.DataframeAnalysisRegression, value: Types.Double) =
+            { state with Eta = Some value }
+
+        [<CustomOperation("etaGrowthRatePerTree")>]
+        member _.EtaGrowthRatePerTree(state: Types.DataframeAnalysisRegression, value: Types.Double) =
+            { state with EtaGrowthRatePerTree = Some value }
+
+        [<CustomOperation("featureBagFraction")>]
+        member _.FeatureBagFraction(state: Types.DataframeAnalysisRegression, value: Types.Double) =
+            { state with FeatureBagFraction = Some value }
+
+        [<CustomOperation("featureProcessors")>]
+        member _.FeatureProcessors(state: Types.DataframeAnalysisRegression, value: Types.DataframeAnalysisFeatureProcessor list) =
+            { state with FeatureProcessors = Some value }
+
+        [<CustomOperation("gamma")>]
+        member _.Gamma(state: Types.DataframeAnalysisRegression, value: Types.Double) =
+            { state with Gamma = Some value }
+
+        [<CustomOperation("lambda")>]
+        member _.Lambda(state: Types.DataframeAnalysisRegression, value: Types.Double) =
+            { state with Lambda = Some value }
+
+        [<CustomOperation("maxOptimizationRoundsPerHyperparameter")>]
+        member _.MaxOptimizationRoundsPerHyperparameter(state: Types.DataframeAnalysisRegression, value: Types.Integer) =
+            { state with MaxOptimizationRoundsPerHyperparameter = Some value }
+
+        [<CustomOperation("maxTrees")>]
+        member _.MaxTrees(state: Types.DataframeAnalysisRegression, value: Types.Integer) =
+            { state with MaxTrees = Some value }
+
+        [<CustomOperation("numTopFeatureImportanceValues")>]
+        member _.NumTopFeatureImportanceValues(state: Types.DataframeAnalysisRegression, value: Types.Integer) =
+            { state with NumTopFeatureImportanceValues = Some value }
+
+        [<CustomOperation("predictionFieldName")>]
+        member _.PredictionFieldName(state: Types.DataframeAnalysisRegression, value: Types.Field) =
+            { state with PredictionFieldName = Some value }
+
+        [<CustomOperation("randomizeSeed")>]
+        member _.RandomizeSeed(state: Types.DataframeAnalysisRegression, value: Types.Double) =
+            { state with RandomizeSeed = Some value }
+
+        [<CustomOperation("softTreeDepthLimit")>]
+        member _.SoftTreeDepthLimit(state: Types.DataframeAnalysisRegression, value: Types.Integer) =
+            { state with SoftTreeDepthLimit = Some value }
+
+        [<CustomOperation("softTreeDepthTolerance")>]
+        member _.SoftTreeDepthTolerance(state: Types.DataframeAnalysisRegression, value: Types.Double) =
+            { state with SoftTreeDepthTolerance = Some value }
+
+        [<CustomOperation("trainingPercent")>]
+        member _.TrainingPercent(state: Types.DataframeAnalysisRegression, value: Types.Percentage) =
+            { state with TrainingPercent = Some value }
 
     let dataframeAnalysisRegression = DataframeAnalysisRegressionBuilder()
 
@@ -1573,6 +1753,9 @@ module MlTypesBuilders =
             {
                 Accuracy = None
                 MulticlassConfusionMatrix = None
+                AucRoc = None
+                Precision = None
+                Recall = None
             }
 
         [<CustomOperation("accuracy")>]
@@ -1582,6 +1765,18 @@ module MlTypesBuilders =
         [<CustomOperation("multiclassConfusionMatrix")>]
         member _.MulticlassConfusionMatrix(state: Types.DataframeEvaluationClassificationMetrics, value: Map<string, System.Text.Json.JsonElement>) =
             { state with MulticlassConfusionMatrix = Some value }
+
+        [<CustomOperation("aucRoc")>]
+        member _.AucRoc(state: Types.DataframeEvaluationClassificationMetrics, value: Types.DataframeEvaluationClassificationMetricsAucRoc) =
+            { state with AucRoc = Some value }
+
+        [<CustomOperation("precision")>]
+        member _.Precision(state: Types.DataframeEvaluationClassificationMetrics, value: Map<string, System.Text.Json.JsonElement>) =
+            { state with Precision = Some value }
+
+        [<CustomOperation("recall")>]
+        member _.Recall(state: Types.DataframeEvaluationClassificationMetrics, value: Map<string, System.Text.Json.JsonElement>) =
+            { state with Recall = Some value }
 
     let dataframeEvaluationClassificationMetrics = DataframeEvaluationClassificationMetricsBuilder()
 
@@ -1634,6 +1829,33 @@ module MlTypesBuilders =
             { state with Recall = Some value }
 
     let dataframeEvaluationMetrics = DataframeEvaluationMetricsBuilder()
+
+    type DataframeEvaluationOutlierDetectionMetricsBuilder() =
+        member _.Yield(_: unit) : Types.DataframeEvaluationOutlierDetectionMetrics =
+            {
+                ConfusionMatrix = None
+                AucRoc = None
+                Precision = None
+                Recall = None
+            }
+
+        [<CustomOperation("confusionMatrix")>]
+        member _.ConfusionMatrix(state: Types.DataframeEvaluationOutlierDetectionMetrics, value: Map<string, System.Text.Json.JsonElement>) =
+            { state with ConfusionMatrix = Some value }
+
+        [<CustomOperation("aucRoc")>]
+        member _.AucRoc(state: Types.DataframeEvaluationOutlierDetectionMetrics, value: Types.DataframeEvaluationClassificationMetricsAucRoc) =
+            { state with AucRoc = Some value }
+
+        [<CustomOperation("precision")>]
+        member _.Precision(state: Types.DataframeEvaluationOutlierDetectionMetrics, value: Map<string, System.Text.Json.JsonElement>) =
+            { state with Precision = Some value }
+
+        [<CustomOperation("recall")>]
+        member _.Recall(state: Types.DataframeEvaluationOutlierDetectionMetrics, value: Map<string, System.Text.Json.JsonElement>) =
+            { state with Recall = Some value }
+
+    let dataframeEvaluationOutlierDetectionMetrics = DataframeEvaluationOutlierDetectionMetricsBuilder()
 
     type DataframeEvaluationRegressionMetricsBuilder() =
         member _.Yield(_: unit) : Types.DataframeEvaluationRegressionMetrics =
@@ -2112,7 +2334,7 @@ module MlTypesBuilders =
             { state with IsTruncated = Some value }
 
         [<CustomOperation("predictedValue")>]
-        member _.PredictedValue(state: Types.InferenceResponseResult, value: System.Text.Json.JsonElement) =
+        member _.PredictedValue(state: Types.InferenceResponseResult, value: Types.PredictedValue list) =
             { state with PredictedValue = Some value }
 
         [<CustomOperation("predictedValueSequence")>]
@@ -2834,6 +3056,75 @@ module MlTypesBuilders =
             { state with ResultsField = Some value }
 
     let nerInferenceUpdateOptions = NerInferenceUpdateOptionsBuilder()
+
+    type NlpBertTokenizationConfigBuilder() =
+        member _.Yield(_: unit) : Types.NlpBertTokenizationConfig =
+            {
+                DoLowerCase = None
+                MaxSequenceLength = None
+                Span = None
+                Truncate = None
+                WithSpecialTokens = None
+            }
+
+        [<CustomOperation("doLowerCase")>]
+        member _.DoLowerCase(state: Types.NlpBertTokenizationConfig, value: bool) =
+            { state with DoLowerCase = Some value }
+
+        [<CustomOperation("maxSequenceLength")>]
+        member _.MaxSequenceLength(state: Types.NlpBertTokenizationConfig, value: Types.Integer) =
+            { state with MaxSequenceLength = Some value }
+
+        [<CustomOperation("span")>]
+        member _.Span(state: Types.NlpBertTokenizationConfig, value: Types.Integer) =
+            { state with Span = Some value }
+
+        [<CustomOperation("truncate")>]
+        member _.Truncate(state: Types.NlpBertTokenizationConfig, value: Types.TokenizationTruncate) =
+            { state with Truncate = Some value }
+
+        [<CustomOperation("withSpecialTokens")>]
+        member _.WithSpecialTokens(state: Types.NlpBertTokenizationConfig, value: bool) =
+            { state with WithSpecialTokens = Some value }
+
+    let nlpBertTokenizationConfig = NlpBertTokenizationConfigBuilder()
+
+    type NlpRobertaTokenizationConfigBuilder() =
+        member _.Yield(_: unit) : Types.NlpRobertaTokenizationConfig =
+            {
+                AddPrefixSpace = None
+                DoLowerCase = None
+                MaxSequenceLength = None
+                Span = None
+                Truncate = None
+                WithSpecialTokens = None
+            }
+
+        [<CustomOperation("addPrefixSpace")>]
+        member _.AddPrefixSpace(state: Types.NlpRobertaTokenizationConfig, value: bool) =
+            { state with AddPrefixSpace = Some value }
+
+        [<CustomOperation("doLowerCase")>]
+        member _.DoLowerCase(state: Types.NlpRobertaTokenizationConfig, value: bool) =
+            { state with DoLowerCase = Some value }
+
+        [<CustomOperation("maxSequenceLength")>]
+        member _.MaxSequenceLength(state: Types.NlpRobertaTokenizationConfig, value: Types.Integer) =
+            { state with MaxSequenceLength = Some value }
+
+        [<CustomOperation("span")>]
+        member _.Span(state: Types.NlpRobertaTokenizationConfig, value: Types.Integer) =
+            { state with Span = Some value }
+
+        [<CustomOperation("truncate")>]
+        member _.Truncate(state: Types.NlpRobertaTokenizationConfig, value: Types.TokenizationTruncate) =
+            { state with Truncate = Some value }
+
+        [<CustomOperation("withSpecialTokens")>]
+        member _.WithSpecialTokens(state: Types.NlpRobertaTokenizationConfig, value: bool) =
+            { state with WithSpecialTokens = Some value }
+
+    let nlpRobertaTokenizationConfig = NlpRobertaTokenizationConfigBuilder()
 
     type NlpTokenizationUpdateOptionsBuilder() =
         member _.Yield(_: unit) : Types.NlpTokenizationUpdateOptions =
@@ -3696,6 +3987,38 @@ module MlTypesBuilders =
             { state with ServiceAccount = Some value }
 
     let transformAuthorization = TransformAuthorizationBuilder()
+
+    type XlmRobertaTokenizationConfigBuilder() =
+        member _.Yield(_: unit) : Types.XlmRobertaTokenizationConfig =
+            {
+                DoLowerCase = None
+                MaxSequenceLength = None
+                Span = None
+                Truncate = None
+                WithSpecialTokens = None
+            }
+
+        [<CustomOperation("doLowerCase")>]
+        member _.DoLowerCase(state: Types.XlmRobertaTokenizationConfig, value: bool) =
+            { state with DoLowerCase = Some value }
+
+        [<CustomOperation("maxSequenceLength")>]
+        member _.MaxSequenceLength(state: Types.XlmRobertaTokenizationConfig, value: Types.Integer) =
+            { state with MaxSequenceLength = Some value }
+
+        [<CustomOperation("span")>]
+        member _.Span(state: Types.XlmRobertaTokenizationConfig, value: Types.Integer) =
+            { state with Span = Some value }
+
+        [<CustomOperation("truncate")>]
+        member _.Truncate(state: Types.XlmRobertaTokenizationConfig, value: Types.TokenizationTruncate) =
+            { state with Truncate = Some value }
+
+        [<CustomOperation("withSpecialTokens")>]
+        member _.WithSpecialTokens(state: Types.XlmRobertaTokenizationConfig, value: bool) =
+            { state with WithSpecialTokens = Some value }
+
+    let xlmRobertaTokenizationConfig = XlmRobertaTokenizationConfigBuilder()
 
     type ZeroShotClassificationInferenceOptionsBuilder() =
         member _.Yield(_: unit) : Types.ZeroShotClassificationInferenceOptions =

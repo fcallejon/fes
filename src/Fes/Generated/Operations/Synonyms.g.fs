@@ -216,7 +216,7 @@ module SynonymsOperations =
         Id: Types.Id
         Refresh: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("synonyms_set")>]
-        SynonymsSet: System.Text.Json.JsonElement
+        SynonymsSet: Types.SynonymRule list
     }
 
         with
@@ -253,7 +253,7 @@ module SynonymsOperations =
             { state with Refresh = Some value }
 
         [<CustomOperation("synonymsSet")>]
-        member _.SynonymsSet(state: SynonymsPutSynonymRequest, value: System.Text.Json.JsonElement) =
+        member _.SynonymsSet(state: SynonymsPutSynonymRequest, value: Types.SynonymRule list) =
             { state with SynonymsSet = value }
 
     let synonymsPutSynonymRequest = SynonymsPutSynonymRequestBuilder()
@@ -261,7 +261,7 @@ module SynonymsOperations =
     module PutSynonym =
         let withRefresh (value: bool) (req: SynonymsPutSynonymRequest) =
             { req with Refresh = Some value }
-        let withSynonymsSet (value: System.Text.Json.JsonElement) (req: SynonymsPutSynonymRequest) =
+        let withSynonymsSet (value: Types.SynonymRule list) (req: SynonymsPutSynonymRequest) =
             { req with SynonymsSet = value }
 
     type SynonymsPutSynonymRuleRequest = {

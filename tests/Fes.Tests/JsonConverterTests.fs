@@ -40,16 +40,13 @@ let ``SearchType enum round-trips`` () =
 
 [<Fact>]
 let ``QueryContainer.Bool serialises with bool key`` () =
-    let q = Types.QueryContainer.Bool {
-        Filter = None; MinimumShouldMatch = None
-        Must = None; MustNot = None; Should = None
-    }
+    let q = Types.QueryContainer.Bool Types.BoolQuery.empty
     let json = Json.serialize q
     json |> should haveSubstring "\"bool\""
 
 [<Fact>]
 let ``QueryContainer.Term serialises with field-keyed structure`` () =
-    let q = Types.QueryContainer.Term ("status", { CaseInsensitive = None; Value = Unchecked.defaultof<_> })
+    let q = Types.QueryContainer.Term ("status", Types.TermQuery.empty)
     let json = Json.serialize q
     json |> should haveSubstring "\"term\""
     json |> should haveSubstring "\"status\""

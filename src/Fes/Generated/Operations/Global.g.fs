@@ -12,7 +12,7 @@ open Fes.Generated
 [<AutoOpen>]
 module GlobalOperations =
 
-    type BulkRequest<'tDocument, 'tPartialDocument> = {
+    type BulkRequest<'TDocument, 'TPartialDocument> = {
         Index: Types.IndexName
         IncludeSourceOnError: bool option
         ListExecutedPipelines: bool option
@@ -26,16 +26,145 @@ module GlobalOperations =
         WaitForActiveShards: Types.WaitForActiveShards option
         RequireAlias: bool option
         RequireDataStream: bool option
-        Document: obj
+        Document: System.Text.Json.JsonElement list
     }
 
+        with
+        static member ToEndpoint(req: BulkRequest<'TDocument, 'TPartialDocument>) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_bulk"
+            let queryParams =
+                [
+                    req.IncludeSourceOnError |> Option.map (fun v -> "include_source_on_error", Fes.Http.toQueryValue v)
+                    req.ListExecutedPipelines |> Option.map (fun v -> "list_executed_pipelines", Fes.Http.toQueryValue v)
+                    req.Pipeline |> Option.map (fun v -> "pipeline", Fes.Http.toQueryValue v)
+                    req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
+                    req.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
+                    req.Source |> Option.map (fun v -> "_source", Fes.Http.toQueryValue v)
+                    req.SourceExcludes |> Option.map (fun v -> "_source_excludes", Fes.Http.toQueryValue v)
+                    req.SourceIncludes |> Option.map (fun v -> "_source_includes", Fes.Http.toQueryValue v)
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                    req.WaitForActiveShards |> Option.map (fun v -> "wait_for_active_shards", Fes.Http.toQueryValue v)
+                    req.RequireAlias |> Option.map (fun v -> "require_alias", Fes.Http.toQueryValue v)
+                    req.RequireDataStream |> Option.map (fun v -> "require_data_stream", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req.Document)
+            endpoint, ValueSome postData
+
     type BulkResponse = System.Text.Json.JsonElement
+
+    type BulkRequestBuilder() =
+        member _.Yield(_: unit) : BulkRequest<_, _> =
+            {
+                Index = Unchecked.defaultof<_>
+                IncludeSourceOnError = None
+                ListExecutedPipelines = None
+                Pipeline = None
+                Refresh = None
+                Routing = None
+                Source = None
+                SourceExcludes = None
+                SourceIncludes = None
+                Timeout = None
+                WaitForActiveShards = None
+                RequireAlias = None
+                RequireDataStream = None
+                Document = Unchecked.defaultof<_>
+            }
+
+        [<CustomOperation("index")>]
+        member _.Index(state: BulkRequest<_, _>, value: Types.IndexName) =
+            { state with Index = value }
+
+        [<CustomOperation("includeSourceOnError")>]
+        member _.IncludeSourceOnError(state: BulkRequest<_, _>, value: bool) =
+            { state with IncludeSourceOnError = Some value }
+
+        [<CustomOperation("listExecutedPipelines")>]
+        member _.ListExecutedPipelines(state: BulkRequest<_, _>, value: bool) =
+            { state with ListExecutedPipelines = Some value }
+
+        [<CustomOperation("pipeline")>]
+        member _.Pipeline(state: BulkRequest<_, _>, value: string) =
+            { state with Pipeline = Some value }
+
+        [<CustomOperation("refresh")>]
+        member _.Refresh(state: BulkRequest<_, _>, value: Types.Refresh) =
+            { state with Refresh = Some value }
+
+        [<CustomOperation("routing")>]
+        member _.Routing(state: BulkRequest<_, _>, value: Types.Routing) =
+            { state with Routing = Some value }
+
+        [<CustomOperation("source")>]
+        member _.Source(state: BulkRequest<_, _>, value: Types.SourceConfigParam) =
+            { state with Source = Some value }
+
+        [<CustomOperation("sourceExcludes")>]
+        member _.SourceExcludes(state: BulkRequest<_, _>, value: Types.Fields) =
+            { state with SourceExcludes = Some value }
+
+        [<CustomOperation("sourceIncludes")>]
+        member _.SourceIncludes(state: BulkRequest<_, _>, value: Types.Fields) =
+            { state with SourceIncludes = Some value }
+
+        [<CustomOperation("timeout")>]
+        member _.Timeout(state: BulkRequest<_, _>, value: Types.Duration) =
+            { state with Timeout = Some value }
+
+        [<CustomOperation("waitForActiveShards")>]
+        member _.WaitForActiveShards(state: BulkRequest<_, _>, value: Types.WaitForActiveShards) =
+            { state with WaitForActiveShards = Some value }
+
+        [<CustomOperation("requireAlias")>]
+        member _.RequireAlias(state: BulkRequest<_, _>, value: bool) =
+            { state with RequireAlias = Some value }
+
+        [<CustomOperation("requireDataStream")>]
+        member _.RequireDataStream(state: BulkRequest<_, _>, value: bool) =
+            { state with RequireDataStream = Some value }
+
+        [<CustomOperation("document")>]
+        member _.Document(state: BulkRequest<_, _>, value) =
+            { state with Document = value }
+
+    let bulkRequest = BulkRequestBuilder()
+
+    module Bulk =
+        let withIncludeSourceOnError (value: bool) (req: BulkRequest<_, _>) =
+            { req with IncludeSourceOnError = Some value }
+        let withListExecutedPipelines (value: bool) (req: BulkRequest<_, _>) =
+            { req with ListExecutedPipelines = Some value }
+        let withPipeline (value: string) (req: BulkRequest<_, _>) =
+            { req with Pipeline = Some value }
+        let withRefresh (value: Types.Refresh) (req: BulkRequest<_, _>) =
+            { req with Refresh = Some value }
+        let withRouting (value: Types.Routing) (req: BulkRequest<_, _>) =
+            { req with Routing = Some value }
+        let withSource (value: Types.SourceConfigParam) (req: BulkRequest<_, _>) =
+            { req with Source = Some value }
+        let withSourceExcludes (value: Types.Fields) (req: BulkRequest<_, _>) =
+            { req with SourceExcludes = Some value }
+        let withSourceIncludes (value: Types.Fields) (req: BulkRequest<_, _>) =
+            { req with SourceIncludes = Some value }
+        let withTimeout (value: Types.Duration) (req: BulkRequest<_, _>) =
+            { req with Timeout = Some value }
+        let withWaitForActiveShards (value: Types.WaitForActiveShards) (req: BulkRequest<_, _>) =
+            { req with WaitForActiveShards = Some value }
+        let withRequireAlias (value: bool) (req: BulkRequest<_, _>) =
+            { req with RequireAlias = Some value }
+        let withRequireDataStream (value: bool) (req: BulkRequest<_, _>) =
+            { req with RequireDataStream = Some value }
 
     type CapabilitiesRequest = {
         Method: Types.RestMethod option
         Path: string option
-        Parameters: System.Text.Json.JsonElement option
-        Capabilities: System.Text.Json.JsonElement option
+        Parameters: string list option
+        Capabilities: string list option
         LocalOnly: bool option
         Timeout: Types.Duration option
     }
@@ -81,11 +210,11 @@ module GlobalOperations =
             { state with Path = Some value }
 
         [<CustomOperation("parameters")>]
-        member _.Parameters(state: CapabilitiesRequest, value: System.Text.Json.JsonElement) =
+        member _.Parameters(state: CapabilitiesRequest, value: string list) =
             { state with Parameters = Some value }
 
         [<CustomOperation("capabilities")>]
-        member _.Capabilities(state: CapabilitiesRequest, value: System.Text.Json.JsonElement) =
+        member _.Capabilities(state: CapabilitiesRequest, value: string list) =
             { state with Capabilities = Some value }
 
         [<CustomOperation("localOnly")>]
@@ -103,9 +232,9 @@ module GlobalOperations =
             { req with Method = Some value }
         let withPath (value: string) (req: CapabilitiesRequest) =
             { req with Path = Some value }
-        let withParameters (value: System.Text.Json.JsonElement) (req: CapabilitiesRequest) =
+        let withParameters (value: string list) (req: CapabilitiesRequest) =
             { req with Parameters = Some value }
-        let withCapabilities (value: System.Text.Json.JsonElement) (req: CapabilitiesRequest) =
+        let withCapabilities (value: string list) (req: CapabilitiesRequest) =
             { req with Capabilities = Some value }
         let withLocalOnly (value: bool) (req: CapabilitiesRequest) =
             { req with LocalOnly = Some value }
@@ -358,7 +487,7 @@ module GlobalOperations =
         let withProjectRouting (value: Types.ProjectRouting) (req: CountRequest) =
             { req with ProjectRouting = Some value }
 
-    type CreateRequest<'tDocument> = {
+    type CreateRequest<'TDocument> = {
         Id: Types.Id
         Index: Types.IndexName
         IncludeSourceOnError: bool option
@@ -371,10 +500,128 @@ module GlobalOperations =
         Version: Types.VersionNumber option
         VersionType: Types.VersionType option
         WaitForActiveShards: Types.WaitForActiveShards option
-        Document: obj
+        Document: 'TDocument
     }
 
+        with
+        static member ToEndpoint(req: CreateRequest<'TDocument>) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_create/{Fes.Http.toPathSegment req.Id}"
+            let queryParams =
+                [
+                    req.IncludeSourceOnError |> Option.map (fun v -> "include_source_on_error", Fes.Http.toQueryValue v)
+                    req.Pipeline |> Option.map (fun v -> "pipeline", Fes.Http.toQueryValue v)
+                    req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
+                    req.RequireAlias |> Option.map (fun v -> "require_alias", Fes.Http.toQueryValue v)
+                    req.RequireDataStream |> Option.map (fun v -> "require_data_stream", Fes.Http.toQueryValue v)
+                    req.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                    req.Version |> Option.map (fun v -> "version", Fes.Http.toQueryValue v)
+                    req.VersionType |> Option.map (fun v -> "version_type", Fes.Http.toQueryValue v)
+                    req.WaitForActiveShards |> Option.map (fun v -> "wait_for_active_shards", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req.Document)
+            endpoint, ValueSome postData
+
     type CreateResponse = Types.WriteResponseBase
+
+    type CreateRequestBuilder() =
+        member _.Yield(_: unit) : CreateRequest<_> =
+            {
+                Id = Unchecked.defaultof<_>
+                Index = Unchecked.defaultof<_>
+                IncludeSourceOnError = None
+                Pipeline = None
+                Refresh = None
+                RequireAlias = None
+                RequireDataStream = None
+                Routing = None
+                Timeout = None
+                Version = None
+                VersionType = None
+                WaitForActiveShards = None
+                Document = Unchecked.defaultof<_>
+            }
+
+        [<CustomOperation("id")>]
+        member _.Id(state: CreateRequest<_>, value: Types.Id) =
+            { state with Id = value }
+
+        [<CustomOperation("index")>]
+        member _.Index(state: CreateRequest<_>, value: Types.IndexName) =
+            { state with Index = value }
+
+        [<CustomOperation("includeSourceOnError")>]
+        member _.IncludeSourceOnError(state: CreateRequest<_>, value: bool) =
+            { state with IncludeSourceOnError = Some value }
+
+        [<CustomOperation("pipeline")>]
+        member _.Pipeline(state: CreateRequest<_>, value: string) =
+            { state with Pipeline = Some value }
+
+        [<CustomOperation("refresh")>]
+        member _.Refresh(state: CreateRequest<_>, value: Types.Refresh) =
+            { state with Refresh = Some value }
+
+        [<CustomOperation("requireAlias")>]
+        member _.RequireAlias(state: CreateRequest<_>, value: bool) =
+            { state with RequireAlias = Some value }
+
+        [<CustomOperation("requireDataStream")>]
+        member _.RequireDataStream(state: CreateRequest<_>, value: bool) =
+            { state with RequireDataStream = Some value }
+
+        [<CustomOperation("routing")>]
+        member _.Routing(state: CreateRequest<_>, value: Types.Routing) =
+            { state with Routing = Some value }
+
+        [<CustomOperation("timeout")>]
+        member _.Timeout(state: CreateRequest<_>, value: Types.Duration) =
+            { state with Timeout = Some value }
+
+        [<CustomOperation("version")>]
+        member _.Version(state: CreateRequest<_>, value: Types.VersionNumber) =
+            { state with Version = Some value }
+
+        [<CustomOperation("versionType")>]
+        member _.VersionType(state: CreateRequest<_>, value: Types.VersionType) =
+            { state with VersionType = Some value }
+
+        [<CustomOperation("waitForActiveShards")>]
+        member _.WaitForActiveShards(state: CreateRequest<_>, value: Types.WaitForActiveShards) =
+            { state with WaitForActiveShards = Some value }
+
+        [<CustomOperation("document")>]
+        member _.Document(state: CreateRequest<_>, value) =
+            { state with Document = value }
+
+    let createRequest = CreateRequestBuilder()
+
+    module Create =
+        let withIncludeSourceOnError (value: bool) (req: CreateRequest<_>) =
+            { req with IncludeSourceOnError = Some value }
+        let withPipeline (value: string) (req: CreateRequest<_>) =
+            { req with Pipeline = Some value }
+        let withRefresh (value: Types.Refresh) (req: CreateRequest<_>) =
+            { req with Refresh = Some value }
+        let withRequireAlias (value: bool) (req: CreateRequest<_>) =
+            { req with RequireAlias = Some value }
+        let withRequireDataStream (value: bool) (req: CreateRequest<_>) =
+            { req with RequireDataStream = Some value }
+        let withRouting (value: Types.Routing) (req: CreateRequest<_>) =
+            { req with Routing = Some value }
+        let withTimeout (value: Types.Duration) (req: CreateRequest<_>) =
+            { req with Timeout = Some value }
+        let withVersion (value: Types.VersionNumber) (req: CreateRequest<_>) =
+            { req with Version = Some value }
+        let withVersionType (value: Types.VersionType) (req: CreateRequest<_>) =
+            { req with VersionType = Some value }
+        let withWaitForActiveShards (value: Types.WaitForActiveShards) (req: CreateRequest<_>) =
+            { req with WaitForActiveShards = Some value }
 
     type DeleteRequest = {
         Id: Types.Id
@@ -1317,7 +1564,7 @@ module GlobalOperations =
         Fields: Types.Fields option
         IgnoreUnavailable: bool option
         IncludeUnmapped: bool option
-        Filters: System.Text.Json.JsonElement option
+        Filters: string list option
         Types: string list option
         IncludeEmptyFields: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
@@ -1397,7 +1644,7 @@ module GlobalOperations =
             { state with IncludeUnmapped = Some value }
 
         [<CustomOperation("filters")>]
-        member _.Filters(state: FieldCapsRequest, value: System.Text.Json.JsonElement) =
+        member _.Filters(state: FieldCapsRequest, value: string list) =
             { state with Filters = Some value }
 
         [<CustomOperation("types")>]
@@ -1437,7 +1684,7 @@ module GlobalOperations =
             { req with IgnoreUnavailable = Some value }
         let withIncludeUnmapped (value: bool) (req: FieldCapsRequest) =
             { req with IncludeUnmapped = Some value }
-        let withFilters (value: System.Text.Json.JsonElement) (req: FieldCapsRequest) =
+        let withFilters (value: string list) (req: FieldCapsRequest) =
             { req with Filters = Some value }
         let withTypes (value: string list) (req: FieldCapsRequest) =
             { req with Types = Some value }
@@ -1494,7 +1741,7 @@ module GlobalOperations =
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
             endpoint, ValueNone
 
-    type GetResponse<'tDocument> = Types.GetResult<'tDocument>
+    type GetResponse<'TDocument> = Types.GetResult<'TDocument>
 
     type GetRequestBuilder() =
         member _.Yield(_: unit) : GetRequest =
@@ -1699,7 +1946,7 @@ module GlobalOperations =
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
             endpoint, ValueNone
 
-    type GetSourceResponse<'tDocument> = 'tDocument
+    type GetSourceResponse<'TDocument> = 'TDocument
 
     type GetSourceRequestBuilder() =
         member _.Yield(_: unit) : GetSourceRequest =
@@ -1784,7 +2031,7 @@ module GlobalOperations =
             { req with VersionType = Some value }
 
     type HealthReportRequest = {
-        Feature: System.Text.Json.JsonElement
+        Feature: string list
         Timeout: Types.Duration option
         Verbose: bool option
         Size: Types.Integer option
@@ -1818,7 +2065,7 @@ module GlobalOperations =
             }
 
         [<CustomOperation("feature")>]
-        member _.Feature(state: HealthReportRequest, value: System.Text.Json.JsonElement) =
+        member _.Feature(state: HealthReportRequest, value: string list) =
             { state with Feature = value }
 
         [<CustomOperation("timeout")>]
@@ -1843,7 +2090,7 @@ module GlobalOperations =
         let withSize (value: Types.Integer) (req: HealthReportRequest) =
             { req with Size = Some value }
 
-    type IndexRequest<'tDocument> = {
+    type IndexRequest<'TDocument> = {
         Id: Types.Id
         Index: Types.IndexName
         IfPrimaryTerm: Types.Long option
@@ -1859,10 +2106,152 @@ module GlobalOperations =
         WaitForActiveShards: Types.WaitForActiveShards option
         RequireAlias: bool option
         RequireDataStream: bool option
-        Document: obj
+        Document: 'TDocument
     }
 
+        with
+        static member ToEndpoint(req: IndexRequest<'TDocument>) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_doc/{Fes.Http.toPathSegment req.Id}"
+            let queryParams =
+                [
+                    req.IfPrimaryTerm |> Option.map (fun v -> "if_primary_term", Fes.Http.toQueryValue v)
+                    req.IfSeqNo |> Option.map (fun v -> "if_seq_no", Fes.Http.toQueryValue v)
+                    req.IncludeSourceOnError |> Option.map (fun v -> "include_source_on_error", Fes.Http.toQueryValue v)
+                    req.OpType |> Option.map (fun v -> "op_type", Fes.Http.toQueryValue v)
+                    req.Pipeline |> Option.map (fun v -> "pipeline", Fes.Http.toQueryValue v)
+                    req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
+                    req.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                    req.Version |> Option.map (fun v -> "version", Fes.Http.toQueryValue v)
+                    req.VersionType |> Option.map (fun v -> "version_type", Fes.Http.toQueryValue v)
+                    req.WaitForActiveShards |> Option.map (fun v -> "wait_for_active_shards", Fes.Http.toQueryValue v)
+                    req.RequireAlias |> Option.map (fun v -> "require_alias", Fes.Http.toQueryValue v)
+                    req.RequireDataStream |> Option.map (fun v -> "require_data_stream", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req.Document)
+            endpoint, ValueSome postData
+
     type IndexResponse = Types.WriteResponseBase
+
+    type IndexRequestBuilder() =
+        member _.Yield(_: unit) : IndexRequest<_> =
+            {
+                Id = Unchecked.defaultof<_>
+                Index = Unchecked.defaultof<_>
+                IfPrimaryTerm = None
+                IfSeqNo = None
+                IncludeSourceOnError = None
+                OpType = None
+                Pipeline = None
+                Refresh = None
+                Routing = None
+                Timeout = None
+                Version = None
+                VersionType = None
+                WaitForActiveShards = None
+                RequireAlias = None
+                RequireDataStream = None
+                Document = Unchecked.defaultof<_>
+            }
+
+        [<CustomOperation("id")>]
+        member _.Id(state: IndexRequest<_>, value: Types.Id) =
+            { state with Id = value }
+
+        [<CustomOperation("index")>]
+        member _.Index(state: IndexRequest<_>, value: Types.IndexName) =
+            { state with Index = value }
+
+        [<CustomOperation("ifPrimaryTerm")>]
+        member _.IfPrimaryTerm(state: IndexRequest<_>, value: Types.Long) =
+            { state with IfPrimaryTerm = Some value }
+
+        [<CustomOperation("ifSeqNo")>]
+        member _.IfSeqNo(state: IndexRequest<_>, value: Types.SequenceNumber) =
+            { state with IfSeqNo = Some value }
+
+        [<CustomOperation("includeSourceOnError")>]
+        member _.IncludeSourceOnError(state: IndexRequest<_>, value: bool) =
+            { state with IncludeSourceOnError = Some value }
+
+        [<CustomOperation("opType")>]
+        member _.OpType(state: IndexRequest<_>, value: Types.OpType) =
+            { state with OpType = Some value }
+
+        [<CustomOperation("pipeline")>]
+        member _.Pipeline(state: IndexRequest<_>, value: string) =
+            { state with Pipeline = Some value }
+
+        [<CustomOperation("refresh")>]
+        member _.Refresh(state: IndexRequest<_>, value: Types.Refresh) =
+            { state with Refresh = Some value }
+
+        [<CustomOperation("routing")>]
+        member _.Routing(state: IndexRequest<_>, value: Types.Routing) =
+            { state with Routing = Some value }
+
+        [<CustomOperation("timeout")>]
+        member _.Timeout(state: IndexRequest<_>, value: Types.Duration) =
+            { state with Timeout = Some value }
+
+        [<CustomOperation("version")>]
+        member _.Version(state: IndexRequest<_>, value: Types.VersionNumber) =
+            { state with Version = Some value }
+
+        [<CustomOperation("versionType")>]
+        member _.VersionType(state: IndexRequest<_>, value: Types.VersionType) =
+            { state with VersionType = Some value }
+
+        [<CustomOperation("waitForActiveShards")>]
+        member _.WaitForActiveShards(state: IndexRequest<_>, value: Types.WaitForActiveShards) =
+            { state with WaitForActiveShards = Some value }
+
+        [<CustomOperation("requireAlias")>]
+        member _.RequireAlias(state: IndexRequest<_>, value: bool) =
+            { state with RequireAlias = Some value }
+
+        [<CustomOperation("requireDataStream")>]
+        member _.RequireDataStream(state: IndexRequest<_>, value: bool) =
+            { state with RequireDataStream = Some value }
+
+        [<CustomOperation("document")>]
+        member _.Document(state: IndexRequest<_>, value) =
+            { state with Document = value }
+
+    let indexRequest = IndexRequestBuilder()
+
+    module Index =
+        let withIfPrimaryTerm (value: Types.Long) (req: IndexRequest<_>) =
+            { req with IfPrimaryTerm = Some value }
+        let withIfSeqNo (value: Types.SequenceNumber) (req: IndexRequest<_>) =
+            { req with IfSeqNo = Some value }
+        let withIncludeSourceOnError (value: bool) (req: IndexRequest<_>) =
+            { req with IncludeSourceOnError = Some value }
+        let withOpType (value: Types.OpType) (req: IndexRequest<_>) =
+            { req with OpType = Some value }
+        let withPipeline (value: string) (req: IndexRequest<_>) =
+            { req with Pipeline = Some value }
+        let withRefresh (value: Types.Refresh) (req: IndexRequest<_>) =
+            { req with Refresh = Some value }
+        let withRouting (value: Types.Routing) (req: IndexRequest<_>) =
+            { req with Routing = Some value }
+        let withTimeout (value: Types.Duration) (req: IndexRequest<_>) =
+            { req with Timeout = Some value }
+        let withVersion (value: Types.VersionNumber) (req: IndexRequest<_>) =
+            { req with Version = Some value }
+        let withVersionType (value: Types.VersionType) (req: IndexRequest<_>) =
+            { req with VersionType = Some value }
+        let withWaitForActiveShards (value: Types.WaitForActiveShards) (req: IndexRequest<_>) =
+            { req with WaitForActiveShards = Some value }
+        let withRequireAlias (value: bool) (req: IndexRequest<_>) =
+            { req with RequireAlias = Some value }
+        let withRequireDataStream (value: bool) (req: IndexRequest<_>) =
+            { req with RequireDataStream = Some value }
 
     type InfoRequest = | InfoRequest
 
@@ -1887,7 +2276,7 @@ module GlobalOperations =
         [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
         Fields: Types.Fields option
         [<System.Text.Json.Serialization.JsonPropertyName("filter")>]
-        Filter: System.Text.Json.JsonElement option
+        Filter: Types.QueryContainer list option
         [<System.Text.Json.Serialization.JsonPropertyName("knn")>]
         Knn: Types.KnnSearchQuery
     }
@@ -1947,7 +2336,7 @@ module GlobalOperations =
             { state with Fields = Some value }
 
         [<CustomOperation("filter")>]
-        member _.Filter(state: KnnSearchRequest, value: System.Text.Json.JsonElement) =
+        member _.Filter(state: KnnSearchRequest, value: Types.QueryContainer list) =
             { state with Filter = Some value }
 
         [<CustomOperation("knn")>]
@@ -1967,7 +2356,7 @@ module GlobalOperations =
             { req with StoredFields = Some value }
         let withFields (value: Types.Fields) (req: KnnSearchRequest) =
             { req with Fields = Some value }
-        let withFilter (value: System.Text.Json.JsonElement) (req: KnnSearchRequest) =
+        let withFilter (value: Types.QueryContainer list) (req: KnnSearchRequest) =
             { req with Filter = Some value }
         let withKnn (value: Types.KnnSearchQuery) (req: KnnSearchRequest) =
             { req with Knn = value }
@@ -2122,7 +2511,7 @@ module GlobalOperations =
         Routing: Types.Routing option
         SearchType: Types.SearchType option
         TypedKeys: bool option
-        Document: obj
+        Document: Types.GlobalMsearchRequestItem list
     }
 
         with
@@ -2154,7 +2543,7 @@ module GlobalOperations =
             let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req.Document)
             endpoint, ValueSome postData
 
-    type MsearchResponse<'tDocument> = Types.MultiSearchResult<'tDocument>
+    type MsearchResponse<'TDocument> = Types.MultiSearchResult<'TDocument>
 
     type MsearchRequestBuilder() =
         member _.Yield(_: unit) : MsearchRequest =
@@ -2288,7 +2677,7 @@ module GlobalOperations =
         SearchType: Types.SearchType option
         RestTotalHitsAsInt: bool option
         TypedKeys: bool option
-        Document: obj
+        Document: Types.GlobalMsearchTemplateRequestItem list
     }
 
         with
@@ -2311,7 +2700,7 @@ module GlobalOperations =
             let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req.Document)
             endpoint, ValueSome postData
 
-    type MsearchTemplateResponse<'tDocument> = Types.MultiSearchResult<'tDocument>
+    type MsearchTemplateResponse<'TDocument> = Types.MultiSearchResult<'TDocument>
 
     type MsearchTemplateRequestBuilder() =
         member _.Yield(_: unit) : MsearchTemplateRequest =
@@ -3168,7 +3557,7 @@ module GlobalOperations =
             let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
             endpoint, ValueSome postData
 
-    type ScrollResponse<'tDocument> = Types.ResponseBody<'tDocument>
+    type ScrollResponse<'TDocument> = Types.ResponseBody<'TDocument>
 
     type ScrollRequestBuilder() =
         member _.Yield(_: unit) : ScrollRequest =
@@ -3264,7 +3653,7 @@ module GlobalOperations =
         Q: string option
         Size: Types.Integer option
         From: Types.Integer option
-        Sort: System.Text.Json.JsonElement option
+        Sort: string list option
         ForceSyntheticSource: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("aggregations")>]
         Aggregations: Map<string, Types.AggregationContainer> option
@@ -3285,7 +3674,7 @@ module GlobalOperations =
         [<System.Text.Json.Serialization.JsonPropertyName("docvalue_fields")>]
         bodyDocvalueFields: Types.FieldAndFormat list option
         [<System.Text.Json.Serialization.JsonPropertyName("knn")>]
-        Knn: System.Text.Json.JsonElement option
+        Knn: Types.KnnSearch list option
         [<System.Text.Json.Serialization.JsonPropertyName("rank")>]
         Rank: Types.RankContainer option
         [<System.Text.Json.Serialization.JsonPropertyName("min_score")>]
@@ -3297,7 +3686,7 @@ module GlobalOperations =
         [<System.Text.Json.Serialization.JsonPropertyName("query")>]
         Query: Types.QueryContainer option
         [<System.Text.Json.Serialization.JsonPropertyName("rescore")>]
-        Rescore: System.Text.Json.JsonElement option
+        Rescore: Types.Rescore list option
         [<System.Text.Json.Serialization.JsonPropertyName("retriever")>]
         Retriever: Types.RetrieverContainer option
         [<System.Text.Json.Serialization.JsonPropertyName("script_fields")>]
@@ -3397,7 +3786,7 @@ module GlobalOperations =
             let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
             endpoint, ValueSome postData
 
-    type SearchResponse<'tDocument> = Types.ResponseBody<'tDocument>
+    type SearchResponse<'TDocument> = Types.ResponseBody<'TDocument>
 
     type SearchRequestBuilder() =
         member _.Yield(_: unit) : SearchRequest =
@@ -3662,7 +4051,7 @@ module GlobalOperations =
             { state with From = Some value }
 
         [<CustomOperation("sort")>]
-        member _.Sort(state: SearchRequest, value: System.Text.Json.JsonElement) =
+        member _.Sort(state: SearchRequest, value: string list) =
             { state with Sort = Some value }
 
         [<CustomOperation("forceSyntheticSource")>]
@@ -3706,7 +4095,7 @@ module GlobalOperations =
             { state with bodyDocvalueFields = Some value }
 
         [<CustomOperation("knn")>]
-        member _.Knn(state: SearchRequest, value: System.Text.Json.JsonElement) =
+        member _.Knn(state: SearchRequest, value: Types.KnnSearch list) =
             { state with Knn = Some value }
 
         [<CustomOperation("rank")>]
@@ -3730,7 +4119,7 @@ module GlobalOperations =
             { state with Query = Some value }
 
         [<CustomOperation("rescore")>]
-        member _.Rescore(state: SearchRequest, value: System.Text.Json.JsonElement) =
+        member _.Rescore(state: SearchRequest, value: Types.Rescore list) =
             { state with Rescore = Some value }
 
         [<CustomOperation("retriever")>]
@@ -3898,7 +4287,7 @@ module GlobalOperations =
             { req with Size = Some value }
         let withFrom (value: Types.Integer) (req: SearchRequest) =
             { req with From = Some value }
-        let withSort (value: System.Text.Json.JsonElement) (req: SearchRequest) =
+        let withSort (value: string list) (req: SearchRequest) =
             { req with Sort = Some value }
         let withForceSyntheticSource (value: bool) (req: SearchRequest) =
             { req with ForceSyntheticSource = Some value }
@@ -3920,7 +4309,7 @@ module GlobalOperations =
             { req with IndicesBoost = Some value }
         let withBodyDocvalueFields (value: Types.FieldAndFormat list) (req: SearchRequest) =
             { req with bodyDocvalueFields = Some value }
-        let withKnn (value: System.Text.Json.JsonElement) (req: SearchRequest) =
+        let withKnn (value: Types.KnnSearch list) (req: SearchRequest) =
             { req with Knn = Some value }
         let withRank (value: Types.RankContainer) (req: SearchRequest) =
             { req with Rank = Some value }
@@ -3932,7 +4321,7 @@ module GlobalOperations =
             { req with Profile = Some value }
         let withQuery (value: Types.QueryContainer) (req: SearchRequest) =
             { req with Query = Some value }
-        let withRescore (value: System.Text.Json.JsonElement) (req: SearchRequest) =
+        let withRescore (value: Types.Rescore list) (req: SearchRequest) =
             { req with Rescore = Some value }
         let withRetriever (value: Types.RetrieverContainer) (req: SearchRequest) =
             { req with Retriever = Some value }
@@ -4630,7 +5019,7 @@ module GlobalOperations =
         let withSearchAfter (value: string) (req: TermsEnumRequest) =
             { req with SearchAfter = Some value }
 
-    type TermvectorsRequest<'tDocument> = {
+    type TermvectorsRequest<'TDocument> = {
         Index: Types.IndexName
         Id: Types.Id
         Fields: Types.Fields option
@@ -4645,7 +5034,7 @@ module GlobalOperations =
         Version: Types.VersionNumber option
         VersionType: Types.VersionType option
         [<System.Text.Json.Serialization.JsonPropertyName("doc")>]
-        Doc: 'tDocument option
+        Doc: 'TDocument option
         [<System.Text.Json.Serialization.JsonPropertyName("filter")>]
         Filter: Types.GlobalTermvectorsFilter option
         [<System.Text.Json.Serialization.JsonPropertyName("per_field_analyzer")>]
@@ -4670,9 +5059,214 @@ module GlobalOperations =
         bodyVersionType: Types.VersionType option
     }
 
+        with
+        static member ToEndpoint(req: TermvectorsRequest<'TDocument>) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_termvectors/{Fes.Http.toPathSegment req.Id}"
+            let queryParams =
+                [
+                    req.Fields |> Option.map (fun v -> "fields", Fes.Http.toQueryValue v)
+                    req.FieldStatistics |> Option.map (fun v -> "field_statistics", Fes.Http.toQueryValue v)
+                    req.Offsets |> Option.map (fun v -> "offsets", Fes.Http.toQueryValue v)
+                    req.Payloads |> Option.map (fun v -> "payloads", Fes.Http.toQueryValue v)
+                    req.Positions |> Option.map (fun v -> "positions", Fes.Http.toQueryValue v)
+                    req.Preference |> Option.map (fun v -> "preference", Fes.Http.toQueryValue v)
+                    req.Realtime |> Option.map (fun v -> "realtime", Fes.Http.toQueryValue v)
+                    req.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
+                    req.TermStatistics |> Option.map (fun v -> "term_statistics", Fes.Http.toQueryValue v)
+                    req.Version |> Option.map (fun v -> "version", Fes.Http.toQueryValue v)
+                    req.VersionType |> Option.map (fun v -> "version_type", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
+
     type TermvectorsResponse = System.Text.Json.JsonElement
 
-    type UpdateRequest<'tDocument, 'tPartialDocument> = {
+    type TermvectorsRequestBuilder() =
+        member _.Yield(_: unit) : TermvectorsRequest<_> =
+            {
+                Index = Unchecked.defaultof<_>
+                Id = Unchecked.defaultof<_>
+                Fields = None
+                FieldStatistics = None
+                Offsets = None
+                Payloads = None
+                Positions = None
+                Preference = None
+                Realtime = None
+                Routing = None
+                TermStatistics = None
+                Version = None
+                VersionType = None
+                Doc = None
+                Filter = None
+                PerFieldAnalyzer = None
+                bodyFields = None
+                bodyFieldStatistics = None
+                bodyOffsets = None
+                bodyPayloads = None
+                bodyPositions = None
+                bodyTermStatistics = None
+                bodyRouting = None
+                bodyVersion = None
+                bodyVersionType = None
+            }
+
+        [<CustomOperation("index")>]
+        member _.Index(state: TermvectorsRequest<_>, value: Types.IndexName) =
+            { state with Index = value }
+
+        [<CustomOperation("id")>]
+        member _.Id(state: TermvectorsRequest<_>, value: Types.Id) =
+            { state with Id = value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: TermvectorsRequest<_>, value: Types.Fields) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("fieldStatistics")>]
+        member _.FieldStatistics(state: TermvectorsRequest<_>, value: bool) =
+            { state with FieldStatistics = Some value }
+
+        [<CustomOperation("offsets")>]
+        member _.Offsets(state: TermvectorsRequest<_>, value: bool) =
+            { state with Offsets = Some value }
+
+        [<CustomOperation("payloads")>]
+        member _.Payloads(state: TermvectorsRequest<_>, value: bool) =
+            { state with Payloads = Some value }
+
+        [<CustomOperation("positions")>]
+        member _.Positions(state: TermvectorsRequest<_>, value: bool) =
+            { state with Positions = Some value }
+
+        [<CustomOperation("preference")>]
+        member _.Preference(state: TermvectorsRequest<_>, value: string) =
+            { state with Preference = Some value }
+
+        [<CustomOperation("realtime")>]
+        member _.Realtime(state: TermvectorsRequest<_>, value: bool) =
+            { state with Realtime = Some value }
+
+        [<CustomOperation("routing")>]
+        member _.Routing(state: TermvectorsRequest<_>, value: Types.Routing) =
+            { state with Routing = Some value }
+
+        [<CustomOperation("termStatistics")>]
+        member _.TermStatistics(state: TermvectorsRequest<_>, value: bool) =
+            { state with TermStatistics = Some value }
+
+        [<CustomOperation("version")>]
+        member _.Version(state: TermvectorsRequest<_>, value: Types.VersionNumber) =
+            { state with Version = Some value }
+
+        [<CustomOperation("versionType")>]
+        member _.VersionType(state: TermvectorsRequest<_>, value: Types.VersionType) =
+            { state with VersionType = Some value }
+
+        [<CustomOperation("doc")>]
+        member _.Doc(state: TermvectorsRequest<_>, value: 'TDocument) =
+            { state with Doc = Some value }
+
+        [<CustomOperation("filter")>]
+        member _.Filter(state: TermvectorsRequest<_>, value: Types.GlobalTermvectorsFilter) =
+            { state with Filter = Some value }
+
+        [<CustomOperation("perFieldAnalyzer")>]
+        member _.PerFieldAnalyzer(state: TermvectorsRequest<_>, value: Map<Types.Field, string>) =
+            { state with PerFieldAnalyzer = Some value }
+
+        [<CustomOperation("bodyFields")>]
+        member _.BodyFields(state: TermvectorsRequest<_>, value: Types.Field list) =
+            { state with bodyFields = Some value }
+
+        [<CustomOperation("bodyFieldStatistics")>]
+        member _.BodyFieldStatistics(state: TermvectorsRequest<_>, value: bool) =
+            { state with bodyFieldStatistics = Some value }
+
+        [<CustomOperation("bodyOffsets")>]
+        member _.BodyOffsets(state: TermvectorsRequest<_>, value: bool) =
+            { state with bodyOffsets = Some value }
+
+        [<CustomOperation("bodyPayloads")>]
+        member _.BodyPayloads(state: TermvectorsRequest<_>, value: bool) =
+            { state with bodyPayloads = Some value }
+
+        [<CustomOperation("bodyPositions")>]
+        member _.BodyPositions(state: TermvectorsRequest<_>, value: bool) =
+            { state with bodyPositions = Some value }
+
+        [<CustomOperation("bodyTermStatistics")>]
+        member _.BodyTermStatistics(state: TermvectorsRequest<_>, value: bool) =
+            { state with bodyTermStatistics = Some value }
+
+        [<CustomOperation("bodyRouting")>]
+        member _.BodyRouting(state: TermvectorsRequest<_>, value: Types.Routing) =
+            { state with bodyRouting = Some value }
+
+        [<CustomOperation("bodyVersion")>]
+        member _.BodyVersion(state: TermvectorsRequest<_>, value: Types.VersionNumber) =
+            { state with bodyVersion = Some value }
+
+        [<CustomOperation("bodyVersionType")>]
+        member _.BodyVersionType(state: TermvectorsRequest<_>, value: Types.VersionType) =
+            { state with bodyVersionType = Some value }
+
+    let termvectorsRequest = TermvectorsRequestBuilder()
+
+    module Termvectors =
+        let withFields (value: Types.Fields) (req: TermvectorsRequest<_>) =
+            { req with Fields = Some value }
+        let withFieldStatistics (value: bool) (req: TermvectorsRequest<_>) =
+            { req with FieldStatistics = Some value }
+        let withOffsets (value: bool) (req: TermvectorsRequest<_>) =
+            { req with Offsets = Some value }
+        let withPayloads (value: bool) (req: TermvectorsRequest<_>) =
+            { req with Payloads = Some value }
+        let withPositions (value: bool) (req: TermvectorsRequest<_>) =
+            { req with Positions = Some value }
+        let withPreference (value: string) (req: TermvectorsRequest<_>) =
+            { req with Preference = Some value }
+        let withRealtime (value: bool) (req: TermvectorsRequest<_>) =
+            { req with Realtime = Some value }
+        let withRouting (value: Types.Routing) (req: TermvectorsRequest<_>) =
+            { req with Routing = Some value }
+        let withTermStatistics (value: bool) (req: TermvectorsRequest<_>) =
+            { req with TermStatistics = Some value }
+        let withVersion (value: Types.VersionNumber) (req: TermvectorsRequest<_>) =
+            { req with Version = Some value }
+        let withVersionType (value: Types.VersionType) (req: TermvectorsRequest<_>) =
+            { req with VersionType = Some value }
+        let withDoc (value: 'TDocument) (req: TermvectorsRequest<_>) =
+            { req with Doc = Some value }
+        let withFilter (value: Types.GlobalTermvectorsFilter) (req: TermvectorsRequest<_>) =
+            { req with Filter = Some value }
+        let withPerFieldAnalyzer (value: Map<Types.Field, string>) (req: TermvectorsRequest<_>) =
+            { req with PerFieldAnalyzer = Some value }
+        let withBodyFields (value: Types.Field list) (req: TermvectorsRequest<_>) =
+            { req with bodyFields = Some value }
+        let withBodyFieldStatistics (value: bool) (req: TermvectorsRequest<_>) =
+            { req with bodyFieldStatistics = Some value }
+        let withBodyOffsets (value: bool) (req: TermvectorsRequest<_>) =
+            { req with bodyOffsets = Some value }
+        let withBodyPayloads (value: bool) (req: TermvectorsRequest<_>) =
+            { req with bodyPayloads = Some value }
+        let withBodyPositions (value: bool) (req: TermvectorsRequest<_>) =
+            { req with bodyPositions = Some value }
+        let withBodyTermStatistics (value: bool) (req: TermvectorsRequest<_>) =
+            { req with bodyTermStatistics = Some value }
+        let withBodyRouting (value: Types.Routing) (req: TermvectorsRequest<_>) =
+            { req with bodyRouting = Some value }
+        let withBodyVersion (value: Types.VersionNumber) (req: TermvectorsRequest<_>) =
+            { req with bodyVersion = Some value }
+        let withBodyVersionType (value: Types.VersionType) (req: TermvectorsRequest<_>) =
+            { req with bodyVersionType = Some value }
+
+    type UpdateRequest<'TDocument, 'TPartialDocument> = {
         Id: Types.Id
         Index: Types.IndexName
         IfPrimaryTerm: Types.Long option
@@ -4691,7 +5285,7 @@ module GlobalOperations =
         [<System.Text.Json.Serialization.JsonPropertyName("detect_noop")>]
         DetectNoop: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("doc")>]
-        Doc: 'tPartialDocument option
+        Doc: 'TPartialDocument option
         [<System.Text.Json.Serialization.JsonPropertyName("doc_as_upsert")>]
         DocAsUpsert: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("script")>]
@@ -4701,10 +5295,196 @@ module GlobalOperations =
         [<System.Text.Json.Serialization.JsonPropertyName("_source")>]
         bodySource: Types.SourceConfig option
         [<System.Text.Json.Serialization.JsonPropertyName("upsert")>]
-        Upsert: 'tDocument option
+        Upsert: 'TDocument option
     }
 
-    type UpdateResponse<'tDocument> = Types.UpdateWriteResponseBase<'tDocument>
+        with
+        static member ToEndpoint(req: UpdateRequest<'TDocument, 'TPartialDocument>) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/{Fes.Http.toPathSegment req.Index}/_update/{Fes.Http.toPathSegment req.Id}"
+            let queryParams =
+                [
+                    req.IfPrimaryTerm |> Option.map (fun v -> "if_primary_term", Fes.Http.toQueryValue v)
+                    req.IfSeqNo |> Option.map (fun v -> "if_seq_no", Fes.Http.toQueryValue v)
+                    req.IncludeSourceOnError |> Option.map (fun v -> "include_source_on_error", Fes.Http.toQueryValue v)
+                    req.Lang |> Option.map (fun v -> "lang", Fes.Http.toQueryValue v)
+                    req.Refresh |> Option.map (fun v -> "refresh", Fes.Http.toQueryValue v)
+                    req.RequireAlias |> Option.map (fun v -> "require_alias", Fes.Http.toQueryValue v)
+                    req.RetryOnConflict |> Option.map (fun v -> "retry_on_conflict", Fes.Http.toQueryValue v)
+                    req.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
+                    req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                    req.WaitForActiveShards |> Option.map (fun v -> "wait_for_active_shards", Fes.Http.toQueryValue v)
+                    req.Source |> Option.map (fun v -> "_source", Fes.Http.toQueryValue v)
+                    req.SourceExcludes |> Option.map (fun v -> "_source_excludes", Fes.Http.toQueryValue v)
+                    req.SourceIncludes |> Option.map (fun v -> "_source_includes", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
+            endpoint, ValueSome postData
+
+    type UpdateResponse<'TDocument> = Types.UpdateWriteResponseBase<'TDocument>
+
+    type UpdateRequestBuilder() =
+        member _.Yield(_: unit) : UpdateRequest<_, _> =
+            {
+                Id = Unchecked.defaultof<_>
+                Index = Unchecked.defaultof<_>
+                IfPrimaryTerm = None
+                IfSeqNo = None
+                IncludeSourceOnError = None
+                Lang = None
+                Refresh = None
+                RequireAlias = None
+                RetryOnConflict = None
+                Routing = None
+                Timeout = None
+                WaitForActiveShards = None
+                Source = None
+                SourceExcludes = None
+                SourceIncludes = None
+                DetectNoop = None
+                Doc = None
+                DocAsUpsert = None
+                Script = None
+                ScriptedUpsert = None
+                bodySource = None
+                Upsert = None
+            }
+
+        [<CustomOperation("id")>]
+        member _.Id(state: UpdateRequest<_, _>, value: Types.Id) =
+            { state with Id = value }
+
+        [<CustomOperation("index")>]
+        member _.Index(state: UpdateRequest<_, _>, value: Types.IndexName) =
+            { state with Index = value }
+
+        [<CustomOperation("ifPrimaryTerm")>]
+        member _.IfPrimaryTerm(state: UpdateRequest<_, _>, value: Types.Long) =
+            { state with IfPrimaryTerm = Some value }
+
+        [<CustomOperation("ifSeqNo")>]
+        member _.IfSeqNo(state: UpdateRequest<_, _>, value: Types.SequenceNumber) =
+            { state with IfSeqNo = Some value }
+
+        [<CustomOperation("includeSourceOnError")>]
+        member _.IncludeSourceOnError(state: UpdateRequest<_, _>, value: bool) =
+            { state with IncludeSourceOnError = Some value }
+
+        [<CustomOperation("lang")>]
+        member _.Lang(state: UpdateRequest<_, _>, value: string) =
+            { state with Lang = Some value }
+
+        [<CustomOperation("refresh")>]
+        member _.Refresh(state: UpdateRequest<_, _>, value: Types.Refresh) =
+            { state with Refresh = Some value }
+
+        [<CustomOperation("requireAlias")>]
+        member _.RequireAlias(state: UpdateRequest<_, _>, value: bool) =
+            { state with RequireAlias = Some value }
+
+        [<CustomOperation("retryOnConflict")>]
+        member _.RetryOnConflict(state: UpdateRequest<_, _>, value: Types.Integer) =
+            { state with RetryOnConflict = Some value }
+
+        [<CustomOperation("routing")>]
+        member _.Routing(state: UpdateRequest<_, _>, value: Types.Routing) =
+            { state with Routing = Some value }
+
+        [<CustomOperation("timeout")>]
+        member _.Timeout(state: UpdateRequest<_, _>, value: Types.Duration) =
+            { state with Timeout = Some value }
+
+        [<CustomOperation("waitForActiveShards")>]
+        member _.WaitForActiveShards(state: UpdateRequest<_, _>, value: Types.WaitForActiveShards) =
+            { state with WaitForActiveShards = Some value }
+
+        [<CustomOperation("source")>]
+        member _.Source(state: UpdateRequest<_, _>, value: Types.SourceConfigParam) =
+            { state with Source = Some value }
+
+        [<CustomOperation("sourceExcludes")>]
+        member _.SourceExcludes(state: UpdateRequest<_, _>, value: Types.Fields) =
+            { state with SourceExcludes = Some value }
+
+        [<CustomOperation("sourceIncludes")>]
+        member _.SourceIncludes(state: UpdateRequest<_, _>, value: Types.Fields) =
+            { state with SourceIncludes = Some value }
+
+        [<CustomOperation("detectNoop")>]
+        member _.DetectNoop(state: UpdateRequest<_, _>, value: bool) =
+            { state with DetectNoop = Some value }
+
+        [<CustomOperation("doc")>]
+        member _.Doc(state: UpdateRequest<_, _>, value: 'TPartialDocument) =
+            { state with Doc = Some value }
+
+        [<CustomOperation("docAsUpsert")>]
+        member _.DocAsUpsert(state: UpdateRequest<_, _>, value: bool) =
+            { state with DocAsUpsert = Some value }
+
+        [<CustomOperation("script")>]
+        member _.Script(state: UpdateRequest<_, _>, value: Types.Script) =
+            { state with Script = Some value }
+
+        [<CustomOperation("scriptedUpsert")>]
+        member _.ScriptedUpsert(state: UpdateRequest<_, _>, value: bool) =
+            { state with ScriptedUpsert = Some value }
+
+        [<CustomOperation("bodySource")>]
+        member _.BodySource(state: UpdateRequest<_, _>, value: Types.SourceConfig) =
+            { state with bodySource = Some value }
+
+        [<CustomOperation("upsert")>]
+        member _.Upsert(state: UpdateRequest<_, _>, value: 'TDocument) =
+            { state with Upsert = Some value }
+
+    let updateRequest = UpdateRequestBuilder()
+
+    module Update =
+        let withIfPrimaryTerm (value: Types.Long) (req: UpdateRequest<_, _>) =
+            { req with IfPrimaryTerm = Some value }
+        let withIfSeqNo (value: Types.SequenceNumber) (req: UpdateRequest<_, _>) =
+            { req with IfSeqNo = Some value }
+        let withIncludeSourceOnError (value: bool) (req: UpdateRequest<_, _>) =
+            { req with IncludeSourceOnError = Some value }
+        let withLang (value: string) (req: UpdateRequest<_, _>) =
+            { req with Lang = Some value }
+        let withRefresh (value: Types.Refresh) (req: UpdateRequest<_, _>) =
+            { req with Refresh = Some value }
+        let withRequireAlias (value: bool) (req: UpdateRequest<_, _>) =
+            { req with RequireAlias = Some value }
+        let withRetryOnConflict (value: Types.Integer) (req: UpdateRequest<_, _>) =
+            { req with RetryOnConflict = Some value }
+        let withRouting (value: Types.Routing) (req: UpdateRequest<_, _>) =
+            { req with Routing = Some value }
+        let withTimeout (value: Types.Duration) (req: UpdateRequest<_, _>) =
+            { req with Timeout = Some value }
+        let withWaitForActiveShards (value: Types.WaitForActiveShards) (req: UpdateRequest<_, _>) =
+            { req with WaitForActiveShards = Some value }
+        let withSource (value: Types.SourceConfigParam) (req: UpdateRequest<_, _>) =
+            { req with Source = Some value }
+        let withSourceExcludes (value: Types.Fields) (req: UpdateRequest<_, _>) =
+            { req with SourceExcludes = Some value }
+        let withSourceIncludes (value: Types.Fields) (req: UpdateRequest<_, _>) =
+            { req with SourceIncludes = Some value }
+        let withDetectNoop (value: bool) (req: UpdateRequest<_, _>) =
+            { req with DetectNoop = Some value }
+        let withDoc (value: 'TPartialDocument) (req: UpdateRequest<_, _>) =
+            { req with Doc = Some value }
+        let withDocAsUpsert (value: bool) (req: UpdateRequest<_, _>) =
+            { req with DocAsUpsert = Some value }
+        let withScript (value: Types.Script) (req: UpdateRequest<_, _>) =
+            { req with Script = Some value }
+        let withScriptedUpsert (value: bool) (req: UpdateRequest<_, _>) =
+            { req with ScriptedUpsert = Some value }
+        let withBodySource (value: Types.SourceConfig) (req: UpdateRequest<_, _>) =
+            { req with bodySource = Some value }
+        let withUpsert (value: 'TDocument) (req: UpdateRequest<_, _>) =
+            { req with Upsert = Some value }
 
     type UpdateByQueryRequest = {
         Index: Types.Indices

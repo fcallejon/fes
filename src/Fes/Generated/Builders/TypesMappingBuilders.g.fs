@@ -12,11 +12,17 @@ module TypesMappingBuilders =
     type AggregateMetricDoublePropertyBuilder() =
         member _.Yield(_: unit) : Types.AggregateMetricDoubleProperty =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "aggregate_metric_double"
                 DefaultMetric = Unchecked.defaultof<_>
                 IgnoreMalformed = None
                 Metrics = Unchecked.defaultof<_>
                 TimeSeriesMetric = None
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
             }
 
         [<CustomOperation("type'")>]
@@ -39,7 +45,88 @@ module TypesMappingBuilders =
         member _.TimeSeriesMetric(state: Types.AggregateMetricDoubleProperty, value: Types.TimeSeriesMetricType) =
             { state with TimeSeriesMetric = Some value }
 
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.AggregateMetricDoubleProperty, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.AggregateMetricDoubleProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.AggregateMetricDoubleProperty, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.AggregateMetricDoubleProperty, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.AggregateMetricDoubleProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.AggregateMetricDoubleProperty, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
+
     let aggregateMetricDoubleProperty = AggregateMetricDoublePropertyBuilder()
+
+    type BinaryPropertyBuilder() =
+        member _.Yield(_: unit) : Types.BinaryProperty =
+            {
+                Type = "binary"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
+            }
+
+        [<CustomOperation("type'")>]
+        member _.Type(state: Types.BinaryProperty, value: string) =
+            { state with Type = value }
+
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.BinaryProperty, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.BinaryProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.BinaryProperty, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.BinaryProperty, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.BinaryProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.BinaryProperty, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
+
+        [<CustomOperation("copyTo")>]
+        member _.CopyTo(state: Types.BinaryProperty, value: Types.Fields) =
+            { state with CopyTo = Some value }
+
+        [<CustomOperation("store")>]
+        member _.Store(state: Types.BinaryProperty, value: bool) =
+            { state with Store = Some value }
+
+        [<CustomOperation("docValues")>]
+        member _.DocValues(state: Types.BinaryProperty, value: bool) =
+            { state with DocValues = Some value }
+
+    let binaryProperty = BinaryPropertyBuilder()
 
     type BooleanPropertyBuilder() =
         member _.Yield(_: unit) : Types.BooleanProperty =
@@ -52,7 +139,16 @@ module TypesMappingBuilders =
                 Script = None
                 OnScriptError = None
                 TimeSeriesDimension = None
-                Type = Unchecked.defaultof<_>
+                Type = "boolean"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
             }
 
         [<CustomOperation("boost")>]
@@ -91,7 +187,145 @@ module TypesMappingBuilders =
         member _.Type(state: Types.BooleanProperty, value: string) =
             { state with Type = value }
 
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.BooleanProperty, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.BooleanProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.BooleanProperty, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.BooleanProperty, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.BooleanProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.BooleanProperty, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
+
+        [<CustomOperation("copyTo")>]
+        member _.CopyTo(state: Types.BooleanProperty, value: Types.Fields) =
+            { state with CopyTo = Some value }
+
+        [<CustomOperation("store")>]
+        member _.Store(state: Types.BooleanProperty, value: bool) =
+            { state with Store = Some value }
+
+        [<CustomOperation("docValues")>]
+        member _.DocValues(state: Types.BooleanProperty, value: bool) =
+            { state with DocValues = Some value }
+
     let booleanProperty = BooleanPropertyBuilder()
+
+    type ByteNumberPropertyBuilder() =
+        member _.Yield(_: unit) : Types.ByteNumberProperty =
+            {
+                Type = "byte"
+                NullValue = None
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
+                Boost = None
+                Coerce = None
+                IgnoreMalformed = None
+                Index = None
+                OnScriptError = None
+                Script = None
+                TimeSeriesMetric = None
+                TimeSeriesDimension = None
+            }
+
+        [<CustomOperation("type'")>]
+        member _.Type(state: Types.ByteNumberProperty, value: string) =
+            { state with Type = value }
+
+        [<CustomOperation("nullValue")>]
+        member _.NullValue(state: Types.ByteNumberProperty, value: Types.Byte) =
+            { state with NullValue = Some value }
+
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.ByteNumberProperty, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.ByteNumberProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.ByteNumberProperty, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.ByteNumberProperty, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.ByteNumberProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.ByteNumberProperty, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
+
+        [<CustomOperation("copyTo")>]
+        member _.CopyTo(state: Types.ByteNumberProperty, value: Types.Fields) =
+            { state with CopyTo = Some value }
+
+        [<CustomOperation("store")>]
+        member _.Store(state: Types.ByteNumberProperty, value: bool) =
+            { state with Store = Some value }
+
+        [<CustomOperation("docValues")>]
+        member _.DocValues(state: Types.ByteNumberProperty, value: bool) =
+            { state with DocValues = Some value }
+
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.ByteNumberProperty, value: Types.Double) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("coerce")>]
+        member _.Coerce(state: Types.ByteNumberProperty, value: bool) =
+            { state with Coerce = Some value }
+
+        [<CustomOperation("ignoreMalformed")>]
+        member _.IgnoreMalformed(state: Types.ByteNumberProperty, value: bool) =
+            { state with IgnoreMalformed = Some value }
+
+        [<CustomOperation("index")>]
+        member _.Index(state: Types.ByteNumberProperty, value: bool) =
+            { state with Index = Some value }
+
+        [<CustomOperation("onScriptError")>]
+        member _.OnScriptError(state: Types.ByteNumberProperty, value: Types.OnScriptError) =
+            { state with OnScriptError = Some value }
+
+        [<CustomOperation("script")>]
+        member _.Script(state: Types.ByteNumberProperty, value: Types.Script) =
+            { state with Script = Some value }
+
+        [<CustomOperation("timeSeriesMetric")>]
+        member _.TimeSeriesMetric(state: Types.ByteNumberProperty, value: Types.TimeSeriesMetricType) =
+            { state with TimeSeriesMetric = Some value }
+
+        [<CustomOperation("timeSeriesDimension")>]
+        member _.TimeSeriesDimension(state: Types.ByteNumberProperty, value: bool) =
+            { state with TimeSeriesDimension = Some value }
+
+    let byteNumberProperty = ByteNumberPropertyBuilder()
 
     type ChunkRescorerChunkingSettingsBuilder() =
         member _.Yield(_: unit) : Types.ChunkRescorerChunkingSettings =
@@ -176,7 +410,16 @@ module TypesMappingBuilders =
                 PreservePositionIncrements = None
                 PreserveSeparators = None
                 SearchAnalyzer = None
-                Type = Unchecked.defaultof<_>
+                Type = "completion"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
             }
 
         [<CustomOperation("analyzer")>]
@@ -207,13 +450,102 @@ module TypesMappingBuilders =
         member _.Type(state: Types.CompletionProperty, value: string) =
             { state with Type = value }
 
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.CompletionProperty, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.CompletionProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.CompletionProperty, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.CompletionProperty, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.CompletionProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.CompletionProperty, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
+
+        [<CustomOperation("copyTo")>]
+        member _.CopyTo(state: Types.CompletionProperty, value: Types.Fields) =
+            { state with CopyTo = Some value }
+
+        [<CustomOperation("store")>]
+        member _.Store(state: Types.CompletionProperty, value: bool) =
+            { state with Store = Some value }
+
+        [<CustomOperation("docValues")>]
+        member _.DocValues(state: Types.CompletionProperty, value: bool) =
+            { state with DocValues = Some value }
+
     let completionProperty = CompletionPropertyBuilder()
+
+    type ConstantKeywordPropertyBuilder() =
+        member _.Yield(_: unit) : Types.ConstantKeywordProperty =
+            {
+                Value = None
+                Type = "constant_keyword"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+            }
+
+        [<CustomOperation("value")>]
+        member _.Value(state: Types.ConstantKeywordProperty, value: System.Text.Json.JsonElement) =
+            { state with Value = Some value }
+
+        [<CustomOperation("type'")>]
+        member _.Type(state: Types.ConstantKeywordProperty, value: string) =
+            { state with Type = value }
+
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.ConstantKeywordProperty, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.ConstantKeywordProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.ConstantKeywordProperty, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.ConstantKeywordProperty, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.ConstantKeywordProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.ConstantKeywordProperty, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
+
+    let constantKeywordProperty = ConstantKeywordPropertyBuilder()
 
     type CorePropertyBaseBuilder() =
         member _.Yield(_: unit) : Types.CorePropertyBase =
             {
                 CopyTo = None
                 Store = None
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
             }
 
         [<CustomOperation("copyTo")>]
@@ -224,7 +556,78 @@ module TypesMappingBuilders =
         member _.Store(state: Types.CorePropertyBase, value: bool) =
             { state with Store = Some value }
 
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.CorePropertyBase, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.CorePropertyBase, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.CorePropertyBase, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.CorePropertyBase, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.CorePropertyBase, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.CorePropertyBase, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
+
     let corePropertyBase = CorePropertyBaseBuilder()
+
+    type CountedKeywordPropertyBuilder() =
+        member _.Yield(_: unit) : Types.CountedKeywordProperty =
+            {
+                Type = "counted_keyword"
+                Index = None
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+            }
+
+        [<CustomOperation("type'")>]
+        member _.Type(state: Types.CountedKeywordProperty, value: string) =
+            { state with Type = value }
+
+        [<CustomOperation("index")>]
+        member _.Index(state: Types.CountedKeywordProperty, value: bool) =
+            { state with Index = Some value }
+
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.CountedKeywordProperty, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.CountedKeywordProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.CountedKeywordProperty, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.CountedKeywordProperty, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.CountedKeywordProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.CountedKeywordProperty, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
+
+    let countedKeywordProperty = CountedKeywordPropertyBuilder()
 
     type DateNanosPropertyBuilder() =
         member _.Yield(_: unit) : Types.DateNanosProperty =
@@ -237,7 +640,16 @@ module TypesMappingBuilders =
                 OnScriptError = None
                 NullValue = None
                 PrecisionStep = None
-                Type = Unchecked.defaultof<_>
+                Type = "date_nanos"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
             }
 
         [<CustomOperation("boost")>]
@@ -276,6 +688,42 @@ module TypesMappingBuilders =
         member _.Type(state: Types.DateNanosProperty, value: string) =
             { state with Type = value }
 
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.DateNanosProperty, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.DateNanosProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.DateNanosProperty, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.DateNanosProperty, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.DateNanosProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.DateNanosProperty, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
+
+        [<CustomOperation("copyTo")>]
+        member _.CopyTo(state: Types.DateNanosProperty, value: Types.Fields) =
+            { state with CopyTo = Some value }
+
+        [<CustomOperation("store")>]
+        member _.Store(state: Types.DateNanosProperty, value: bool) =
+            { state with Store = Some value }
+
+        [<CustomOperation("docValues")>]
+        member _.DocValues(state: Types.DateNanosProperty, value: bool) =
+            { state with DocValues = Some value }
+
     let dateNanosProperty = DateNanosPropertyBuilder()
 
     type DatePropertyBuilder() =
@@ -291,7 +739,16 @@ module TypesMappingBuilders =
                 NullValue = None
                 PrecisionStep = None
                 Locale = None
-                Type = Unchecked.defaultof<_>
+                Type = "date"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
             }
 
         [<CustomOperation("boost")>]
@@ -338,7 +795,120 @@ module TypesMappingBuilders =
         member _.Type(state: Types.DateProperty, value: string) =
             { state with Type = value }
 
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.DateProperty, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.DateProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.DateProperty, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.DateProperty, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.DateProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.DateProperty, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
+
+        [<CustomOperation("copyTo")>]
+        member _.CopyTo(state: Types.DateProperty, value: Types.Fields) =
+            { state with CopyTo = Some value }
+
+        [<CustomOperation("store")>]
+        member _.Store(state: Types.DateProperty, value: bool) =
+            { state with Store = Some value }
+
+        [<CustomOperation("docValues")>]
+        member _.DocValues(state: Types.DateProperty, value: bool) =
+            { state with DocValues = Some value }
+
     let dateProperty = DatePropertyBuilder()
+
+    type DateRangePropertyBuilder() =
+        member _.Yield(_: unit) : Types.DateRangeProperty =
+            {
+                Format = None
+                Type = "date_range"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
+                Boost = None
+                Coerce = None
+                Index = None
+            }
+
+        [<CustomOperation("format")>]
+        member _.Format(state: Types.DateRangeProperty, value: string) =
+            { state with Format = Some value }
+
+        [<CustomOperation("type'")>]
+        member _.Type(state: Types.DateRangeProperty, value: string) =
+            { state with Type = value }
+
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.DateRangeProperty, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.DateRangeProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.DateRangeProperty, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.DateRangeProperty, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.DateRangeProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.DateRangeProperty, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
+
+        [<CustomOperation("copyTo")>]
+        member _.CopyTo(state: Types.DateRangeProperty, value: Types.Fields) =
+            { state with CopyTo = Some value }
+
+        [<CustomOperation("store")>]
+        member _.Store(state: Types.DateRangeProperty, value: bool) =
+            { state with Store = Some value }
+
+        [<CustomOperation("docValues")>]
+        member _.DocValues(state: Types.DateRangeProperty, value: bool) =
+            { state with DocValues = Some value }
+
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.DateRangeProperty, value: Types.Double) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("coerce")>]
+        member _.Coerce(state: Types.DateRangeProperty, value: bool) =
+            { state with Coerce = Some value }
+
+        [<CustomOperation("index")>]
+        member _.Index(state: Types.DateRangeProperty, value: bool) =
+            { state with Index = Some value }
+
+    let dateRangeProperty = DateRangePropertyBuilder()
 
     type DenseVectorIndexOptionsBuilder() =
         member _.Yield(_: unit) : Types.DenseVectorIndexOptions =
@@ -380,12 +950,18 @@ module TypesMappingBuilders =
     type DenseVectorPropertyBuilder() =
         member _.Yield(_: unit) : Types.DenseVectorProperty =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "dense_vector"
                 Dims = None
                 ElementType = None
                 Index = None
                 IndexOptions = None
                 Similarity = None
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
             }
 
         [<CustomOperation("type'")>]
@@ -412,12 +988,262 @@ module TypesMappingBuilders =
         member _.Similarity(state: Types.DenseVectorProperty, value: Types.DenseVectorSimilarity) =
             { state with Similarity = Some value }
 
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.DenseVectorProperty, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.DenseVectorProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.DenseVectorProperty, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.DenseVectorProperty, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.DenseVectorProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.DenseVectorProperty, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
+
     let denseVectorProperty = DenseVectorPropertyBuilder()
+
+    type DocValuesPropertyBaseBuilder() =
+        member _.Yield(_: unit) : Types.DocValuesPropertyBase =
+            {
+                DocValues = None
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+            }
+
+        [<CustomOperation("docValues")>]
+        member _.DocValues(state: Types.DocValuesPropertyBase, value: bool) =
+            { state with DocValues = Some value }
+
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.DocValuesPropertyBase, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.DocValuesPropertyBase, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.DocValuesPropertyBase, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.DocValuesPropertyBase, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.DocValuesPropertyBase, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.DocValuesPropertyBase, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
+
+        [<CustomOperation("copyTo")>]
+        member _.CopyTo(state: Types.DocValuesPropertyBase, value: Types.Fields) =
+            { state with CopyTo = Some value }
+
+        [<CustomOperation("store")>]
+        member _.Store(state: Types.DocValuesPropertyBase, value: bool) =
+            { state with Store = Some value }
+
+    let docValuesPropertyBase = DocValuesPropertyBaseBuilder()
+
+    type DoubleNumberPropertyBuilder() =
+        member _.Yield(_: unit) : Types.DoubleNumberProperty =
+            {
+                Type = "double"
+                NullValue = None
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
+                Boost = None
+                Coerce = None
+                IgnoreMalformed = None
+                Index = None
+                OnScriptError = None
+                Script = None
+                TimeSeriesMetric = None
+                TimeSeriesDimension = None
+            }
+
+        [<CustomOperation("type'")>]
+        member _.Type(state: Types.DoubleNumberProperty, value: string) =
+            { state with Type = value }
+
+        [<CustomOperation("nullValue")>]
+        member _.NullValue(state: Types.DoubleNumberProperty, value: Types.Double) =
+            { state with NullValue = Some value }
+
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.DoubleNumberProperty, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.DoubleNumberProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.DoubleNumberProperty, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.DoubleNumberProperty, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.DoubleNumberProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.DoubleNumberProperty, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
+
+        [<CustomOperation("copyTo")>]
+        member _.CopyTo(state: Types.DoubleNumberProperty, value: Types.Fields) =
+            { state with CopyTo = Some value }
+
+        [<CustomOperation("store")>]
+        member _.Store(state: Types.DoubleNumberProperty, value: bool) =
+            { state with Store = Some value }
+
+        [<CustomOperation("docValues")>]
+        member _.DocValues(state: Types.DoubleNumberProperty, value: bool) =
+            { state with DocValues = Some value }
+
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.DoubleNumberProperty, value: Types.Double) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("coerce")>]
+        member _.Coerce(state: Types.DoubleNumberProperty, value: bool) =
+            { state with Coerce = Some value }
+
+        [<CustomOperation("ignoreMalformed")>]
+        member _.IgnoreMalformed(state: Types.DoubleNumberProperty, value: bool) =
+            { state with IgnoreMalformed = Some value }
+
+        [<CustomOperation("index")>]
+        member _.Index(state: Types.DoubleNumberProperty, value: bool) =
+            { state with Index = Some value }
+
+        [<CustomOperation("onScriptError")>]
+        member _.OnScriptError(state: Types.DoubleNumberProperty, value: Types.OnScriptError) =
+            { state with OnScriptError = Some value }
+
+        [<CustomOperation("script")>]
+        member _.Script(state: Types.DoubleNumberProperty, value: Types.Script) =
+            { state with Script = Some value }
+
+        [<CustomOperation("timeSeriesMetric")>]
+        member _.TimeSeriesMetric(state: Types.DoubleNumberProperty, value: Types.TimeSeriesMetricType) =
+            { state with TimeSeriesMetric = Some value }
+
+        [<CustomOperation("timeSeriesDimension")>]
+        member _.TimeSeriesDimension(state: Types.DoubleNumberProperty, value: bool) =
+            { state with TimeSeriesDimension = Some value }
+
+    let doubleNumberProperty = DoubleNumberPropertyBuilder()
+
+    type DoubleRangePropertyBuilder() =
+        member _.Yield(_: unit) : Types.DoubleRangeProperty =
+            {
+                Type = "double_range"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
+                Boost = None
+                Coerce = None
+                Index = None
+            }
+
+        [<CustomOperation("type'")>]
+        member _.Type(state: Types.DoubleRangeProperty, value: string) =
+            { state with Type = value }
+
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.DoubleRangeProperty, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.DoubleRangeProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.DoubleRangeProperty, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.DoubleRangeProperty, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.DoubleRangeProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.DoubleRangeProperty, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
+
+        [<CustomOperation("copyTo")>]
+        member _.CopyTo(state: Types.DoubleRangeProperty, value: Types.Fields) =
+            { state with CopyTo = Some value }
+
+        [<CustomOperation("store")>]
+        member _.Store(state: Types.DoubleRangeProperty, value: bool) =
+            { state with Store = Some value }
+
+        [<CustomOperation("docValues")>]
+        member _.DocValues(state: Types.DoubleRangeProperty, value: bool) =
+            { state with DocValues = Some value }
+
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.DoubleRangeProperty, value: Types.Double) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("coerce")>]
+        member _.Coerce(state: Types.DoubleRangeProperty, value: bool) =
+            { state with Coerce = Some value }
+
+        [<CustomOperation("index")>]
+        member _.Index(state: Types.DoubleRangeProperty, value: bool) =
+            { state with Index = Some value }
+
+    let doubleRangeProperty = DoubleRangePropertyBuilder()
 
     type DynamicPropertyBuilder() =
         member _.Yield(_: unit) : Types.DynamicProperty =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "{dynamic_type}"
                 Enabled = None
                 NullValue = None
                 Boost = None
@@ -440,6 +1266,15 @@ module TypesMappingBuilders =
                 Format = None
                 PrecisionStep = None
                 Locale = None
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
             }
 
         [<CustomOperation("type'")>]
@@ -534,6 +1369,42 @@ module TypesMappingBuilders =
         member _.Locale(state: Types.DynamicProperty, value: string) =
             { state with Locale = Some value }
 
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.DynamicProperty, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.DynamicProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.DynamicProperty, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.DynamicProperty, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.DynamicProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.DynamicProperty, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
+
+        [<CustomOperation("copyTo")>]
+        member _.CopyTo(state: Types.DynamicProperty, value: Types.Fields) =
+            { state with CopyTo = Some value }
+
+        [<CustomOperation("store")>]
+        member _.Store(state: Types.DynamicProperty, value: bool) =
+            { state with Store = Some value }
+
+        [<CustomOperation("docValues")>]
+        member _.DocValues(state: Types.DynamicProperty, value: bool) =
+            { state with DocValues = Some value }
+
     let dynamicProperty = DynamicPropertyBuilder()
 
     module DynamicTemplate =
@@ -543,6 +1414,100 @@ module TypesMappingBuilders =
 
         let runtime (value: Types.RuntimeField) =
             Types.DynamicTemplate.Runtime value
+
+    type ExponentialHistogramPropertyBuilder() =
+        member _.Yield(_: unit) : Types.ExponentialHistogramProperty =
+            {
+                TimeSeriesMetric = None
+                Type = "exponential_histogram"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+            }
+
+        [<CustomOperation("timeSeriesMetric")>]
+        member _.TimeSeriesMetric(state: Types.ExponentialHistogramProperty, value: Types.TimeSeriesMetricType) =
+            { state with TimeSeriesMetric = Some value }
+
+        [<CustomOperation("type'")>]
+        member _.Type(state: Types.ExponentialHistogramProperty, value: string) =
+            { state with Type = value }
+
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.ExponentialHistogramProperty, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.ExponentialHistogramProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.ExponentialHistogramProperty, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.ExponentialHistogramProperty, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.ExponentialHistogramProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.ExponentialHistogramProperty, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
+
+    let exponentialHistogramProperty = ExponentialHistogramPropertyBuilder()
+
+    type FieldAliasPropertyBuilder() =
+        member _.Yield(_: unit) : Types.FieldAliasProperty =
+            {
+                Path = None
+                Type = "alias"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+            }
+
+        [<CustomOperation("path")>]
+        member _.Path(state: Types.FieldAliasProperty, value: Types.Field) =
+            { state with Path = Some value }
+
+        [<CustomOperation("type'")>]
+        member _.Type(state: Types.FieldAliasProperty, value: string) =
+            { state with Type = value }
+
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.FieldAliasProperty, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.FieldAliasProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.FieldAliasProperty, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.FieldAliasProperty, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.FieldAliasProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.FieldAliasProperty, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
+
+    let fieldAliasProperty = FieldAliasPropertyBuilder()
 
     type FlattenedPropertyBuilder() =
         member _.Yield(_: unit) : Types.FlattenedProperty =
@@ -557,7 +1522,13 @@ module TypesMappingBuilders =
                 Similarity = None
                 SplitQueriesOnWhitespace = None
                 TimeSeriesDimensions = None
-                Type = Unchecked.defaultof<_>
+                Type = "flattened"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
             }
 
         [<CustomOperation("boost")>]
@@ -604,7 +1575,205 @@ module TypesMappingBuilders =
         member _.Type(state: Types.FlattenedProperty, value: string) =
             { state with Type = value }
 
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.FlattenedProperty, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.FlattenedProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.FlattenedProperty, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.FlattenedProperty, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.FlattenedProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.FlattenedProperty, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
+
     let flattenedProperty = FlattenedPropertyBuilder()
+
+    type FloatNumberPropertyBuilder() =
+        member _.Yield(_: unit) : Types.FloatNumberProperty =
+            {
+                Type = "float"
+                NullValue = None
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
+                Boost = None
+                Coerce = None
+                IgnoreMalformed = None
+                Index = None
+                OnScriptError = None
+                Script = None
+                TimeSeriesMetric = None
+                TimeSeriesDimension = None
+            }
+
+        [<CustomOperation("type'")>]
+        member _.Type(state: Types.FloatNumberProperty, value: string) =
+            { state with Type = value }
+
+        [<CustomOperation("nullValue")>]
+        member _.NullValue(state: Types.FloatNumberProperty, value: Types.Float) =
+            { state with NullValue = Some value }
+
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.FloatNumberProperty, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.FloatNumberProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.FloatNumberProperty, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.FloatNumberProperty, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.FloatNumberProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.FloatNumberProperty, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
+
+        [<CustomOperation("copyTo")>]
+        member _.CopyTo(state: Types.FloatNumberProperty, value: Types.Fields) =
+            { state with CopyTo = Some value }
+
+        [<CustomOperation("store")>]
+        member _.Store(state: Types.FloatNumberProperty, value: bool) =
+            { state with Store = Some value }
+
+        [<CustomOperation("docValues")>]
+        member _.DocValues(state: Types.FloatNumberProperty, value: bool) =
+            { state with DocValues = Some value }
+
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.FloatNumberProperty, value: Types.Double) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("coerce")>]
+        member _.Coerce(state: Types.FloatNumberProperty, value: bool) =
+            { state with Coerce = Some value }
+
+        [<CustomOperation("ignoreMalformed")>]
+        member _.IgnoreMalformed(state: Types.FloatNumberProperty, value: bool) =
+            { state with IgnoreMalformed = Some value }
+
+        [<CustomOperation("index")>]
+        member _.Index(state: Types.FloatNumberProperty, value: bool) =
+            { state with Index = Some value }
+
+        [<CustomOperation("onScriptError")>]
+        member _.OnScriptError(state: Types.FloatNumberProperty, value: Types.OnScriptError) =
+            { state with OnScriptError = Some value }
+
+        [<CustomOperation("script")>]
+        member _.Script(state: Types.FloatNumberProperty, value: Types.Script) =
+            { state with Script = Some value }
+
+        [<CustomOperation("timeSeriesMetric")>]
+        member _.TimeSeriesMetric(state: Types.FloatNumberProperty, value: Types.TimeSeriesMetricType) =
+            { state with TimeSeriesMetric = Some value }
+
+        [<CustomOperation("timeSeriesDimension")>]
+        member _.TimeSeriesDimension(state: Types.FloatNumberProperty, value: bool) =
+            { state with TimeSeriesDimension = Some value }
+
+    let floatNumberProperty = FloatNumberPropertyBuilder()
+
+    type FloatRangePropertyBuilder() =
+        member _.Yield(_: unit) : Types.FloatRangeProperty =
+            {
+                Type = "float_range"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
+                Boost = None
+                Coerce = None
+                Index = None
+            }
+
+        [<CustomOperation("type'")>]
+        member _.Type(state: Types.FloatRangeProperty, value: string) =
+            { state with Type = value }
+
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.FloatRangeProperty, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.FloatRangeProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.FloatRangeProperty, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.FloatRangeProperty, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.FloatRangeProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.FloatRangeProperty, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
+
+        [<CustomOperation("copyTo")>]
+        member _.CopyTo(state: Types.FloatRangeProperty, value: Types.Fields) =
+            { state with CopyTo = Some value }
+
+        [<CustomOperation("store")>]
+        member _.Store(state: Types.FloatRangeProperty, value: bool) =
+            { state with Store = Some value }
+
+        [<CustomOperation("docValues")>]
+        member _.DocValues(state: Types.FloatRangeProperty, value: bool) =
+            { state with DocValues = Some value }
+
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.FloatRangeProperty, value: Types.Double) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("coerce")>]
+        member _.Coerce(state: Types.FloatRangeProperty, value: bool) =
+            { state with Coerce = Some value }
+
+        [<CustomOperation("index")>]
+        member _.Index(state: Types.FloatRangeProperty, value: bool) =
+            { state with Index = Some value }
+
+    let floatRangeProperty = FloatRangePropertyBuilder()
 
     type GeoPointPropertyBuilder() =
         member _.Yield(_: unit) : Types.GeoPointProperty =
@@ -615,8 +1784,17 @@ module TypesMappingBuilders =
                 Index = None
                 OnScriptError = None
                 Script = None
-                Type = Unchecked.defaultof<_>
+                Type = "geo_point"
                 TimeSeriesMetric = None
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
             }
 
         [<CustomOperation("ignoreMalformed")>]
@@ -651,6 +1829,42 @@ module TypesMappingBuilders =
         member _.TimeSeriesMetric(state: Types.GeoPointProperty, value: Types.GeoPointMetricType) =
             { state with TimeSeriesMetric = Some value }
 
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.GeoPointProperty, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.GeoPointProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.GeoPointProperty, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.GeoPointProperty, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.GeoPointProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.GeoPointProperty, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
+
+        [<CustomOperation("copyTo")>]
+        member _.CopyTo(state: Types.GeoPointProperty, value: Types.Fields) =
+            { state with CopyTo = Some value }
+
+        [<CustomOperation("store")>]
+        member _.Store(state: Types.GeoPointProperty, value: bool) =
+            { state with Store = Some value }
+
+        [<CustomOperation("docValues")>]
+        member _.DocValues(state: Types.GeoPointProperty, value: bool) =
+            { state with DocValues = Some value }
+
     let geoPointProperty = GeoPointPropertyBuilder()
 
     type GeoShapePropertyBuilder() =
@@ -662,7 +1876,16 @@ module TypesMappingBuilders =
                 Index = None
                 Orientation = None
                 Strategy = None
-                Type = Unchecked.defaultof<_>
+                Type = "geo_shape"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
             }
 
         [<CustomOperation("coerce")>]
@@ -693,14 +1916,158 @@ module TypesMappingBuilders =
         member _.Type(state: Types.GeoShapeProperty, value: string) =
             { state with Type = value }
 
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.GeoShapeProperty, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.GeoShapeProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.GeoShapeProperty, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.GeoShapeProperty, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.GeoShapeProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.GeoShapeProperty, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
+
+        [<CustomOperation("copyTo")>]
+        member _.CopyTo(state: Types.GeoShapeProperty, value: Types.Fields) =
+            { state with CopyTo = Some value }
+
+        [<CustomOperation("store")>]
+        member _.Store(state: Types.GeoShapeProperty, value: bool) =
+            { state with Store = Some value }
+
+        [<CustomOperation("docValues")>]
+        member _.DocValues(state: Types.GeoShapeProperty, value: bool) =
+            { state with DocValues = Some value }
+
     let geoShapeProperty = GeoShapePropertyBuilder()
+
+    type HalfFloatNumberPropertyBuilder() =
+        member _.Yield(_: unit) : Types.HalfFloatNumberProperty =
+            {
+                Type = "half_float"
+                NullValue = None
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
+                Boost = None
+                Coerce = None
+                IgnoreMalformed = None
+                Index = None
+                OnScriptError = None
+                Script = None
+                TimeSeriesMetric = None
+                TimeSeriesDimension = None
+            }
+
+        [<CustomOperation("type'")>]
+        member _.Type(state: Types.HalfFloatNumberProperty, value: string) =
+            { state with Type = value }
+
+        [<CustomOperation("nullValue")>]
+        member _.NullValue(state: Types.HalfFloatNumberProperty, value: Types.Float) =
+            { state with NullValue = Some value }
+
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.HalfFloatNumberProperty, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.HalfFloatNumberProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.HalfFloatNumberProperty, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.HalfFloatNumberProperty, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.HalfFloatNumberProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.HalfFloatNumberProperty, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
+
+        [<CustomOperation("copyTo")>]
+        member _.CopyTo(state: Types.HalfFloatNumberProperty, value: Types.Fields) =
+            { state with CopyTo = Some value }
+
+        [<CustomOperation("store")>]
+        member _.Store(state: Types.HalfFloatNumberProperty, value: bool) =
+            { state with Store = Some value }
+
+        [<CustomOperation("docValues")>]
+        member _.DocValues(state: Types.HalfFloatNumberProperty, value: bool) =
+            { state with DocValues = Some value }
+
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.HalfFloatNumberProperty, value: Types.Double) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("coerce")>]
+        member _.Coerce(state: Types.HalfFloatNumberProperty, value: bool) =
+            { state with Coerce = Some value }
+
+        [<CustomOperation("ignoreMalformed")>]
+        member _.IgnoreMalformed(state: Types.HalfFloatNumberProperty, value: bool) =
+            { state with IgnoreMalformed = Some value }
+
+        [<CustomOperation("index")>]
+        member _.Index(state: Types.HalfFloatNumberProperty, value: bool) =
+            { state with Index = Some value }
+
+        [<CustomOperation("onScriptError")>]
+        member _.OnScriptError(state: Types.HalfFloatNumberProperty, value: Types.OnScriptError) =
+            { state with OnScriptError = Some value }
+
+        [<CustomOperation("script")>]
+        member _.Script(state: Types.HalfFloatNumberProperty, value: Types.Script) =
+            { state with Script = Some value }
+
+        [<CustomOperation("timeSeriesMetric")>]
+        member _.TimeSeriesMetric(state: Types.HalfFloatNumberProperty, value: Types.TimeSeriesMetricType) =
+            { state with TimeSeriesMetric = Some value }
+
+        [<CustomOperation("timeSeriesDimension")>]
+        member _.TimeSeriesDimension(state: Types.HalfFloatNumberProperty, value: bool) =
+            { state with TimeSeriesDimension = Some value }
+
+    let halfFloatNumberProperty = HalfFloatNumberPropertyBuilder()
 
     type HistogramPropertyBuilder() =
         member _.Yield(_: unit) : Types.HistogramProperty =
             {
                 IgnoreMalformed = None
                 TimeSeriesMetric = None
-                Type = Unchecked.defaultof<_>
+                Type = "histogram"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
             }
 
         [<CustomOperation("ignoreMalformed")>]
@@ -715,12 +2082,36 @@ module TypesMappingBuilders =
         member _.Type(state: Types.HistogramProperty, value: string) =
             { state with Type = value }
 
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.HistogramProperty, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.HistogramProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.HistogramProperty, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.HistogramProperty, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.HistogramProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.HistogramProperty, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
+
     let histogramProperty = HistogramPropertyBuilder()
 
     type IcuCollationPropertyBuilder() =
         member _.Yield(_: unit) : Types.IcuCollationProperty =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "icu_collation_keyword"
                 Norms = None
                 IndexOptions = None
                 Index = None
@@ -737,6 +2128,15 @@ module TypesMappingBuilders =
                 Numeric = None
                 VariableTop = None
                 HiraganaQuaternaryMode = None
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
             }
 
         [<CustomOperation("type'")>]
@@ -807,7 +2207,217 @@ module TypesMappingBuilders =
         member _.HiraganaQuaternaryMode(state: Types.IcuCollationProperty, value: bool) =
             { state with HiraganaQuaternaryMode = Some value }
 
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.IcuCollationProperty, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.IcuCollationProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.IcuCollationProperty, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.IcuCollationProperty, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.IcuCollationProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.IcuCollationProperty, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
+
+        [<CustomOperation("copyTo")>]
+        member _.CopyTo(state: Types.IcuCollationProperty, value: Types.Fields) =
+            { state with CopyTo = Some value }
+
+        [<CustomOperation("store")>]
+        member _.Store(state: Types.IcuCollationProperty, value: bool) =
+            { state with Store = Some value }
+
+        [<CustomOperation("docValues")>]
+        member _.DocValues(state: Types.IcuCollationProperty, value: bool) =
+            { state with DocValues = Some value }
+
     let icuCollationProperty = IcuCollationPropertyBuilder()
+
+    type IntegerNumberPropertyBuilder() =
+        member _.Yield(_: unit) : Types.IntegerNumberProperty =
+            {
+                Type = "integer"
+                NullValue = None
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
+                Boost = None
+                Coerce = None
+                IgnoreMalformed = None
+                Index = None
+                OnScriptError = None
+                Script = None
+                TimeSeriesMetric = None
+                TimeSeriesDimension = None
+            }
+
+        [<CustomOperation("type'")>]
+        member _.Type(state: Types.IntegerNumberProperty, value: string) =
+            { state with Type = value }
+
+        [<CustomOperation("nullValue")>]
+        member _.NullValue(state: Types.IntegerNumberProperty, value: Types.Integer) =
+            { state with NullValue = Some value }
+
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.IntegerNumberProperty, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.IntegerNumberProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.IntegerNumberProperty, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.IntegerNumberProperty, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.IntegerNumberProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.IntegerNumberProperty, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
+
+        [<CustomOperation("copyTo")>]
+        member _.CopyTo(state: Types.IntegerNumberProperty, value: Types.Fields) =
+            { state with CopyTo = Some value }
+
+        [<CustomOperation("store")>]
+        member _.Store(state: Types.IntegerNumberProperty, value: bool) =
+            { state with Store = Some value }
+
+        [<CustomOperation("docValues")>]
+        member _.DocValues(state: Types.IntegerNumberProperty, value: bool) =
+            { state with DocValues = Some value }
+
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.IntegerNumberProperty, value: Types.Double) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("coerce")>]
+        member _.Coerce(state: Types.IntegerNumberProperty, value: bool) =
+            { state with Coerce = Some value }
+
+        [<CustomOperation("ignoreMalformed")>]
+        member _.IgnoreMalformed(state: Types.IntegerNumberProperty, value: bool) =
+            { state with IgnoreMalformed = Some value }
+
+        [<CustomOperation("index")>]
+        member _.Index(state: Types.IntegerNumberProperty, value: bool) =
+            { state with Index = Some value }
+
+        [<CustomOperation("onScriptError")>]
+        member _.OnScriptError(state: Types.IntegerNumberProperty, value: Types.OnScriptError) =
+            { state with OnScriptError = Some value }
+
+        [<CustomOperation("script")>]
+        member _.Script(state: Types.IntegerNumberProperty, value: Types.Script) =
+            { state with Script = Some value }
+
+        [<CustomOperation("timeSeriesMetric")>]
+        member _.TimeSeriesMetric(state: Types.IntegerNumberProperty, value: Types.TimeSeriesMetricType) =
+            { state with TimeSeriesMetric = Some value }
+
+        [<CustomOperation("timeSeriesDimension")>]
+        member _.TimeSeriesDimension(state: Types.IntegerNumberProperty, value: bool) =
+            { state with TimeSeriesDimension = Some value }
+
+    let integerNumberProperty = IntegerNumberPropertyBuilder()
+
+    type IntegerRangePropertyBuilder() =
+        member _.Yield(_: unit) : Types.IntegerRangeProperty =
+            {
+                Type = "integer_range"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
+                Boost = None
+                Coerce = None
+                Index = None
+            }
+
+        [<CustomOperation("type'")>]
+        member _.Type(state: Types.IntegerRangeProperty, value: string) =
+            { state with Type = value }
+
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.IntegerRangeProperty, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.IntegerRangeProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.IntegerRangeProperty, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.IntegerRangeProperty, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.IntegerRangeProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.IntegerRangeProperty, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
+
+        [<CustomOperation("copyTo")>]
+        member _.CopyTo(state: Types.IntegerRangeProperty, value: Types.Fields) =
+            { state with CopyTo = Some value }
+
+        [<CustomOperation("store")>]
+        member _.Store(state: Types.IntegerRangeProperty, value: bool) =
+            { state with Store = Some value }
+
+        [<CustomOperation("docValues")>]
+        member _.DocValues(state: Types.IntegerRangeProperty, value: bool) =
+            { state with DocValues = Some value }
+
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.IntegerRangeProperty, value: Types.Double) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("coerce")>]
+        member _.Coerce(state: Types.IntegerRangeProperty, value: bool) =
+            { state with Coerce = Some value }
+
+        [<CustomOperation("index")>]
+        member _.Index(state: Types.IntegerRangeProperty, value: bool) =
+            { state with Index = Some value }
+
+    let integerRangeProperty = IntegerRangePropertyBuilder()
 
     type IpPropertyBuilder() =
         member _.Yield(_: unit) : Types.IpProperty =
@@ -819,7 +2429,16 @@ module TypesMappingBuilders =
                 OnScriptError = None
                 Script = None
                 TimeSeriesDimension = None
-                Type = Unchecked.defaultof<_>
+                Type = "ip"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
             }
 
         [<CustomOperation("boost")>]
@@ -854,18 +2473,132 @@ module TypesMappingBuilders =
         member _.Type(state: Types.IpProperty, value: string) =
             { state with Type = value }
 
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.IpProperty, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.IpProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.IpProperty, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.IpProperty, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.IpProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.IpProperty, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
+
+        [<CustomOperation("copyTo")>]
+        member _.CopyTo(state: Types.IpProperty, value: Types.Fields) =
+            { state with CopyTo = Some value }
+
+        [<CustomOperation("store")>]
+        member _.Store(state: Types.IpProperty, value: bool) =
+            { state with Store = Some value }
+
+        [<CustomOperation("docValues")>]
+        member _.DocValues(state: Types.IpProperty, value: bool) =
+            { state with DocValues = Some value }
+
     let ipProperty = IpPropertyBuilder()
+
+    type IpRangePropertyBuilder() =
+        member _.Yield(_: unit) : Types.IpRangeProperty =
+            {
+                Type = "ip_range"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
+                Boost = None
+                Coerce = None
+                Index = None
+            }
+
+        [<CustomOperation("type'")>]
+        member _.Type(state: Types.IpRangeProperty, value: string) =
+            { state with Type = value }
+
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.IpRangeProperty, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.IpRangeProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.IpRangeProperty, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.IpRangeProperty, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.IpRangeProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.IpRangeProperty, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
+
+        [<CustomOperation("copyTo")>]
+        member _.CopyTo(state: Types.IpRangeProperty, value: Types.Fields) =
+            { state with CopyTo = Some value }
+
+        [<CustomOperation("store")>]
+        member _.Store(state: Types.IpRangeProperty, value: bool) =
+            { state with Store = Some value }
+
+        [<CustomOperation("docValues")>]
+        member _.DocValues(state: Types.IpRangeProperty, value: bool) =
+            { state with DocValues = Some value }
+
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.IpRangeProperty, value: Types.Double) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("coerce")>]
+        member _.Coerce(state: Types.IpRangeProperty, value: bool) =
+            { state with Coerce = Some value }
+
+        [<CustomOperation("index")>]
+        member _.Index(state: Types.IpRangeProperty, value: bool) =
+            { state with Index = Some value }
+
+    let ipRangeProperty = IpRangePropertyBuilder()
 
     type JoinPropertyBuilder() =
         member _.Yield(_: unit) : Types.JoinProperty =
             {
                 Relations = None
                 EagerGlobalOrdinals = None
-                Type = Unchecked.defaultof<_>
+                Type = "join"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
             }
 
         [<CustomOperation("relations")>]
-        member _.Relations(state: Types.JoinProperty, value: Map<Types.RelationName, System.Text.Json.JsonElement>) =
+        member _.Relations(state: Types.JoinProperty, value: Map<Types.RelationName, Types.RelationName list>) =
             { state with Relations = Some value }
 
         [<CustomOperation("eagerGlobalOrdinals")>]
@@ -875,6 +2608,30 @@ module TypesMappingBuilders =
         [<CustomOperation("type'")>]
         member _.Type(state: Types.JoinProperty, value: string) =
             { state with Type = value }
+
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.JoinProperty, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.JoinProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.JoinProperty, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.JoinProperty, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.JoinProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.JoinProperty, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
 
     let joinProperty = JoinPropertyBuilder()
 
@@ -893,7 +2650,16 @@ module TypesMappingBuilders =
                 Similarity = None
                 SplitQueriesOnWhitespace = None
                 TimeSeriesDimension = None
-                Type = Unchecked.defaultof<_>
+                Type = "keyword"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
             }
 
         [<CustomOperation("boost")>]
@@ -948,12 +2714,222 @@ module TypesMappingBuilders =
         member _.Type(state: Types.KeywordProperty, value: string) =
             { state with Type = value }
 
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.KeywordProperty, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.KeywordProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.KeywordProperty, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.KeywordProperty, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.KeywordProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.KeywordProperty, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
+
+        [<CustomOperation("copyTo")>]
+        member _.CopyTo(state: Types.KeywordProperty, value: Types.Fields) =
+            { state with CopyTo = Some value }
+
+        [<CustomOperation("store")>]
+        member _.Store(state: Types.KeywordProperty, value: bool) =
+            { state with Store = Some value }
+
+        [<CustomOperation("docValues")>]
+        member _.DocValues(state: Types.KeywordProperty, value: bool) =
+            { state with DocValues = Some value }
+
     let keywordProperty = KeywordPropertyBuilder()
+
+    type LongNumberPropertyBuilder() =
+        member _.Yield(_: unit) : Types.LongNumberProperty =
+            {
+                Type = "long"
+                NullValue = None
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
+                Boost = None
+                Coerce = None
+                IgnoreMalformed = None
+                Index = None
+                OnScriptError = None
+                Script = None
+                TimeSeriesMetric = None
+                TimeSeriesDimension = None
+            }
+
+        [<CustomOperation("type'")>]
+        member _.Type(state: Types.LongNumberProperty, value: string) =
+            { state with Type = value }
+
+        [<CustomOperation("nullValue")>]
+        member _.NullValue(state: Types.LongNumberProperty, value: Types.Long) =
+            { state with NullValue = Some value }
+
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.LongNumberProperty, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.LongNumberProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.LongNumberProperty, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.LongNumberProperty, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.LongNumberProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.LongNumberProperty, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
+
+        [<CustomOperation("copyTo")>]
+        member _.CopyTo(state: Types.LongNumberProperty, value: Types.Fields) =
+            { state with CopyTo = Some value }
+
+        [<CustomOperation("store")>]
+        member _.Store(state: Types.LongNumberProperty, value: bool) =
+            { state with Store = Some value }
+
+        [<CustomOperation("docValues")>]
+        member _.DocValues(state: Types.LongNumberProperty, value: bool) =
+            { state with DocValues = Some value }
+
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.LongNumberProperty, value: Types.Double) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("coerce")>]
+        member _.Coerce(state: Types.LongNumberProperty, value: bool) =
+            { state with Coerce = Some value }
+
+        [<CustomOperation("ignoreMalformed")>]
+        member _.IgnoreMalformed(state: Types.LongNumberProperty, value: bool) =
+            { state with IgnoreMalformed = Some value }
+
+        [<CustomOperation("index")>]
+        member _.Index(state: Types.LongNumberProperty, value: bool) =
+            { state with Index = Some value }
+
+        [<CustomOperation("onScriptError")>]
+        member _.OnScriptError(state: Types.LongNumberProperty, value: Types.OnScriptError) =
+            { state with OnScriptError = Some value }
+
+        [<CustomOperation("script")>]
+        member _.Script(state: Types.LongNumberProperty, value: Types.Script) =
+            { state with Script = Some value }
+
+        [<CustomOperation("timeSeriesMetric")>]
+        member _.TimeSeriesMetric(state: Types.LongNumberProperty, value: Types.TimeSeriesMetricType) =
+            { state with TimeSeriesMetric = Some value }
+
+        [<CustomOperation("timeSeriesDimension")>]
+        member _.TimeSeriesDimension(state: Types.LongNumberProperty, value: bool) =
+            { state with TimeSeriesDimension = Some value }
+
+    let longNumberProperty = LongNumberPropertyBuilder()
+
+    type LongRangePropertyBuilder() =
+        member _.Yield(_: unit) : Types.LongRangeProperty =
+            {
+                Type = "long_range"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
+                Boost = None
+                Coerce = None
+                Index = None
+            }
+
+        [<CustomOperation("type'")>]
+        member _.Type(state: Types.LongRangeProperty, value: string) =
+            { state with Type = value }
+
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.LongRangeProperty, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.LongRangeProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.LongRangeProperty, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.LongRangeProperty, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.LongRangeProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.LongRangeProperty, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
+
+        [<CustomOperation("copyTo")>]
+        member _.CopyTo(state: Types.LongRangeProperty, value: Types.Fields) =
+            { state with CopyTo = Some value }
+
+        [<CustomOperation("store")>]
+        member _.Store(state: Types.LongRangeProperty, value: bool) =
+            { state with Store = Some value }
+
+        [<CustomOperation("docValues")>]
+        member _.DocValues(state: Types.LongRangeProperty, value: bool) =
+            { state with DocValues = Some value }
+
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.LongRangeProperty, value: Types.Double) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("coerce")>]
+        member _.Coerce(state: Types.LongRangeProperty, value: bool) =
+            { state with Coerce = Some value }
+
+        [<CustomOperation("index")>]
+        member _.Index(state: Types.LongRangeProperty, value: bool) =
+            { state with Index = Some value }
+
+    let longRangeProperty = LongRangePropertyBuilder()
 
     type MatchOnlyTextPropertyBuilder() =
         member _.Yield(_: unit) : Types.MatchOnlyTextProperty =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "match_only_text"
                 Fields = None
                 Meta = None
                 CopyTo = None
@@ -977,13 +2953,78 @@ module TypesMappingBuilders =
 
     let matchOnlyTextProperty = MatchOnlyTextPropertyBuilder()
 
+    type Murmur3HashPropertyBuilder() =
+        member _.Yield(_: unit) : Types.Murmur3HashProperty =
+            {
+                Type = "murmur3"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
+            }
+
+        [<CustomOperation("type'")>]
+        member _.Type(state: Types.Murmur3HashProperty, value: string) =
+            { state with Type = value }
+
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.Murmur3HashProperty, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.Murmur3HashProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.Murmur3HashProperty, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.Murmur3HashProperty, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.Murmur3HashProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.Murmur3HashProperty, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
+
+        [<CustomOperation("copyTo")>]
+        member _.CopyTo(state: Types.Murmur3HashProperty, value: Types.Fields) =
+            { state with CopyTo = Some value }
+
+        [<CustomOperation("store")>]
+        member _.Store(state: Types.Murmur3HashProperty, value: bool) =
+            { state with Store = Some value }
+
+        [<CustomOperation("docValues")>]
+        member _.DocValues(state: Types.Murmur3HashProperty, value: bool) =
+            { state with DocValues = Some value }
+
+    let murmur3HashProperty = Murmur3HashPropertyBuilder()
+
     type NestedPropertyBuilder() =
         member _.Yield(_: unit) : Types.NestedProperty =
             {
                 Enabled = None
                 IncludeInParent = None
                 IncludeInRoot = None
-                Type = Unchecked.defaultof<_>
+                Type = "nested"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
             }
 
         [<CustomOperation("enabled")>]
@@ -1002,6 +3043,38 @@ module TypesMappingBuilders =
         member _.Type(state: Types.NestedProperty, value: string) =
             { state with Type = value }
 
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.NestedProperty, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.NestedProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.NestedProperty, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.NestedProperty, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.NestedProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.NestedProperty, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
+
+        [<CustomOperation("copyTo")>]
+        member _.CopyTo(state: Types.NestedProperty, value: Types.Fields) =
+            { state with CopyTo = Some value }
+
+        [<CustomOperation("store")>]
+        member _.Store(state: Types.NestedProperty, value: bool) =
+            { state with Store = Some value }
+
     let nestedProperty = NestedPropertyBuilder()
 
     type NumberPropertyBaseBuilder() =
@@ -1015,6 +3088,15 @@ module TypesMappingBuilders =
                 Script = None
                 TimeSeriesMetric = None
                 TimeSeriesDimension = None
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
             }
 
         [<CustomOperation("boost")>]
@@ -1049,6 +3131,42 @@ module TypesMappingBuilders =
         member _.TimeSeriesDimension(state: Types.NumberPropertyBase, value: bool) =
             { state with TimeSeriesDimension = Some value }
 
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.NumberPropertyBase, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.NumberPropertyBase, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.NumberPropertyBase, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.NumberPropertyBase, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.NumberPropertyBase, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.NumberPropertyBase, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
+
+        [<CustomOperation("copyTo")>]
+        member _.CopyTo(state: Types.NumberPropertyBase, value: Types.Fields) =
+            { state with CopyTo = Some value }
+
+        [<CustomOperation("store")>]
+        member _.Store(state: Types.NumberPropertyBase, value: bool) =
+            { state with Store = Some value }
+
+        [<CustomOperation("docValues")>]
+        member _.DocValues(state: Types.NumberPropertyBase, value: bool) =
+            { state with DocValues = Some value }
+
     let numberPropertyBase = NumberPropertyBaseBuilder()
 
     type ObjectPropertyBuilder() =
@@ -1057,6 +3175,14 @@ module TypesMappingBuilders =
                 Enabled = None
                 Subobjects = None
                 Type = None
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
             }
 
         [<CustomOperation("enabled")>]
@@ -1071,6 +3197,38 @@ module TypesMappingBuilders =
         member _.Type(state: Types.ObjectProperty, value: string) =
             { state with Type = Some value }
 
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.ObjectProperty, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.ObjectProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.ObjectProperty, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.ObjectProperty, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.ObjectProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.ObjectProperty, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
+
+        [<CustomOperation("copyTo")>]
+        member _.CopyTo(state: Types.ObjectProperty, value: Types.Fields) =
+            { state with CopyTo = Some value }
+
+        [<CustomOperation("store")>]
+        member _.Store(state: Types.ObjectProperty, value: bool) =
+            { state with Store = Some value }
+
     let objectProperty = ObjectPropertyBuilder()
 
     type PassthroughObjectPropertyBuilder() =
@@ -1080,6 +3238,14 @@ module TypesMappingBuilders =
                 Enabled = None
                 Priority = None
                 TimeSeriesDimension = None
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
             }
 
         [<CustomOperation("type'")>]
@@ -1098,7 +3264,81 @@ module TypesMappingBuilders =
         member _.TimeSeriesDimension(state: Types.PassthroughObjectProperty, value: bool) =
             { state with TimeSeriesDimension = Some value }
 
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.PassthroughObjectProperty, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.PassthroughObjectProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.PassthroughObjectProperty, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.PassthroughObjectProperty, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.PassthroughObjectProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.PassthroughObjectProperty, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
+
+        [<CustomOperation("copyTo")>]
+        member _.CopyTo(state: Types.PassthroughObjectProperty, value: Types.Fields) =
+            { state with CopyTo = Some value }
+
+        [<CustomOperation("store")>]
+        member _.Store(state: Types.PassthroughObjectProperty, value: bool) =
+            { state with Store = Some value }
+
     let passthroughObjectProperty = PassthroughObjectPropertyBuilder()
+
+    type PercolatorPropertyBuilder() =
+        member _.Yield(_: unit) : Types.PercolatorProperty =
+            {
+                Type = "percolator"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+            }
+
+        [<CustomOperation("type'")>]
+        member _.Type(state: Types.PercolatorProperty, value: string) =
+            { state with Type = value }
+
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.PercolatorProperty, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.PercolatorProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.PercolatorProperty, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.PercolatorProperty, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.PercolatorProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.PercolatorProperty, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
+
+    let percolatorProperty = PercolatorPropertyBuilder()
 
     type PointPropertyBuilder() =
         member _.Yield(_: unit) : Types.PointProperty =
@@ -1106,7 +3346,16 @@ module TypesMappingBuilders =
                 IgnoreMalformed = None
                 IgnoreZValue = None
                 NullValue = None
-                Type = Unchecked.defaultof<_>
+                Type = "point"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
             }
 
         [<CustomOperation("ignoreMalformed")>]
@@ -1124,6 +3373,42 @@ module TypesMappingBuilders =
         [<CustomOperation("type'")>]
         member _.Type(state: Types.PointProperty, value: string) =
             { state with Type = value }
+
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.PointProperty, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.PointProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.PointProperty, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.PointProperty, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.PointProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.PointProperty, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
+
+        [<CustomOperation("copyTo")>]
+        member _.CopyTo(state: Types.PointProperty, value: Types.Fields) =
+            { state with CopyTo = Some value }
+
+        [<CustomOperation("store")>]
+        member _.Store(state: Types.PointProperty, value: bool) =
+            { state with Store = Some value }
+
+        [<CustomOperation("docValues")>]
+        member _.DocValues(state: Types.PointProperty, value: bool) =
+            { state with DocValues = Some value }
 
     let pointProperty = PointPropertyBuilder()
 
@@ -1170,6 +3455,15 @@ module TypesMappingBuilders =
                 Boost = None
                 Coerce = None
                 Index = None
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
             }
 
         [<CustomOperation("boost")>]
@@ -1184,14 +3478,150 @@ module TypesMappingBuilders =
         member _.Index(state: Types.RangePropertyBase, value: bool) =
             { state with Index = Some value }
 
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.RangePropertyBase, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.RangePropertyBase, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.RangePropertyBase, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.RangePropertyBase, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.RangePropertyBase, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.RangePropertyBase, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
+
+        [<CustomOperation("copyTo")>]
+        member _.CopyTo(state: Types.RangePropertyBase, value: Types.Fields) =
+            { state with CopyTo = Some value }
+
+        [<CustomOperation("store")>]
+        member _.Store(state: Types.RangePropertyBase, value: bool) =
+            { state with Store = Some value }
+
+        [<CustomOperation("docValues")>]
+        member _.DocValues(state: Types.RangePropertyBase, value: bool) =
+            { state with DocValues = Some value }
+
     let rangePropertyBase = RangePropertyBaseBuilder()
+
+    type RankFeaturePropertyBuilder() =
+        member _.Yield(_: unit) : Types.RankFeatureProperty =
+            {
+                PositiveScoreImpact = None
+                Type = "rank_feature"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+            }
+
+        [<CustomOperation("positiveScoreImpact")>]
+        member _.PositiveScoreImpact(state: Types.RankFeatureProperty, value: bool) =
+            { state with PositiveScoreImpact = Some value }
+
+        [<CustomOperation("type'")>]
+        member _.Type(state: Types.RankFeatureProperty, value: string) =
+            { state with Type = value }
+
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.RankFeatureProperty, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.RankFeatureProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.RankFeatureProperty, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.RankFeatureProperty, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.RankFeatureProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.RankFeatureProperty, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
+
+    let rankFeatureProperty = RankFeaturePropertyBuilder()
+
+    type RankFeaturesPropertyBuilder() =
+        member _.Yield(_: unit) : Types.RankFeaturesProperty =
+            {
+                PositiveScoreImpact = None
+                Type = "rank_features"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+            }
+
+        [<CustomOperation("positiveScoreImpact")>]
+        member _.PositiveScoreImpact(state: Types.RankFeaturesProperty, value: bool) =
+            { state with PositiveScoreImpact = Some value }
+
+        [<CustomOperation("type'")>]
+        member _.Type(state: Types.RankFeaturesProperty, value: string) =
+            { state with Type = value }
+
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.RankFeaturesProperty, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.RankFeaturesProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.RankFeaturesProperty, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.RankFeaturesProperty, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.RankFeaturesProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.RankFeaturesProperty, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
+
+    let rankFeaturesProperty = RankFeaturesPropertyBuilder()
 
     type RankVectorPropertyBuilder() =
         member _.Yield(_: unit) : Types.RankVectorProperty =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "rank_vectors"
                 ElementType = None
                 Dims = None
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
             }
 
         [<CustomOperation("type'")>]
@@ -1205,6 +3635,30 @@ module TypesMappingBuilders =
         [<CustomOperation("dims")>]
         member _.Dims(state: Types.RankVectorProperty, value: Types.Integer) =
             { state with Dims = Some value }
+
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.RankVectorProperty, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.RankVectorProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.RankVectorProperty, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.RankVectorProperty, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.RankVectorProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.RankVectorProperty, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
 
     let rankVectorProperty = RankVectorPropertyBuilder()
 
@@ -1258,9 +3712,26 @@ module TypesMappingBuilders =
     type ScaledFloatNumberPropertyBuilder() =
         member _.Yield(_: unit) : Types.ScaledFloatNumberProperty =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "scaled_float"
                 NullValue = None
                 ScalingFactor = None
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
+                Boost = None
+                Coerce = None
+                IgnoreMalformed = None
+                Index = None
+                OnScriptError = None
+                Script = None
+                TimeSeriesMetric = None
+                TimeSeriesDimension = None
             }
 
         [<CustomOperation("type'")>]
@@ -1274,6 +3745,74 @@ module TypesMappingBuilders =
         [<CustomOperation("scalingFactor")>]
         member _.ScalingFactor(state: Types.ScaledFloatNumberProperty, value: Types.Double) =
             { state with ScalingFactor = Some value }
+
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.ScaledFloatNumberProperty, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.ScaledFloatNumberProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.ScaledFloatNumberProperty, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.ScaledFloatNumberProperty, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.ScaledFloatNumberProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.ScaledFloatNumberProperty, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
+
+        [<CustomOperation("copyTo")>]
+        member _.CopyTo(state: Types.ScaledFloatNumberProperty, value: Types.Fields) =
+            { state with CopyTo = Some value }
+
+        [<CustomOperation("store")>]
+        member _.Store(state: Types.ScaledFloatNumberProperty, value: bool) =
+            { state with Store = Some value }
+
+        [<CustomOperation("docValues")>]
+        member _.DocValues(state: Types.ScaledFloatNumberProperty, value: bool) =
+            { state with DocValues = Some value }
+
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.ScaledFloatNumberProperty, value: Types.Double) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("coerce")>]
+        member _.Coerce(state: Types.ScaledFloatNumberProperty, value: bool) =
+            { state with Coerce = Some value }
+
+        [<CustomOperation("ignoreMalformed")>]
+        member _.IgnoreMalformed(state: Types.ScaledFloatNumberProperty, value: bool) =
+            { state with IgnoreMalformed = Some value }
+
+        [<CustomOperation("index")>]
+        member _.Index(state: Types.ScaledFloatNumberProperty, value: bool) =
+            { state with Index = Some value }
+
+        [<CustomOperation("onScriptError")>]
+        member _.OnScriptError(state: Types.ScaledFloatNumberProperty, value: Types.OnScriptError) =
+            { state with OnScriptError = Some value }
+
+        [<CustomOperation("script")>]
+        member _.Script(state: Types.ScaledFloatNumberProperty, value: Types.Script) =
+            { state with Script = Some value }
+
+        [<CustomOperation("timeSeriesMetric")>]
+        member _.TimeSeriesMetric(state: Types.ScaledFloatNumberProperty, value: Types.TimeSeriesMetricType) =
+            { state with TimeSeriesMetric = Some value }
+
+        [<CustomOperation("timeSeriesDimension")>]
+        member _.TimeSeriesDimension(state: Types.ScaledFloatNumberProperty, value: bool) =
+            { state with TimeSeriesDimension = Some value }
 
     let scaledFloatNumberProperty = ScaledFloatNumberPropertyBuilder()
 
@@ -1289,7 +3828,15 @@ module TypesMappingBuilders =
                 SearchQuoteAnalyzer = None
                 Similarity = None
                 TermVector = None
-                Type = Unchecked.defaultof<_>
+                Type = "search_as_you_type"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
             }
 
         [<CustomOperation("analyzer")>]
@@ -1332,6 +3879,38 @@ module TypesMappingBuilders =
         member _.Type(state: Types.SearchAsYouTypeProperty, value: string) =
             { state with Type = value }
 
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.SearchAsYouTypeProperty, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.SearchAsYouTypeProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.SearchAsYouTypeProperty, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.SearchAsYouTypeProperty, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.SearchAsYouTypeProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.SearchAsYouTypeProperty, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
+
+        [<CustomOperation("copyTo")>]
+        member _.CopyTo(state: Types.SearchAsYouTypeProperty, value: Types.Fields) =
+            { state with CopyTo = Some value }
+
+        [<CustomOperation("store")>]
+        member _.Store(state: Types.SearchAsYouTypeProperty, value: bool) =
+            { state with Store = Some value }
+
     let searchAsYouTypeProperty = SearchAsYouTypePropertyBuilder()
 
     type SemanticTextIndexOptionsBuilder() =
@@ -1354,7 +3933,7 @@ module TypesMappingBuilders =
     type SemanticTextPropertyBuilder() =
         member _.Yield(_: unit) : Types.SemanticTextProperty =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "semantic_text"
                 Meta = None
                 InferenceId = None
                 SearchInferenceId = None
@@ -1400,7 +3979,16 @@ module TypesMappingBuilders =
                 IgnoreMalformed = None
                 IgnoreZValue = None
                 Orientation = None
-                Type = Unchecked.defaultof<_>
+                Type = "shape"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
             }
 
         [<CustomOperation("coerce")>]
@@ -1423,7 +4011,145 @@ module TypesMappingBuilders =
         member _.Type(state: Types.ShapeProperty, value: string) =
             { state with Type = value }
 
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.ShapeProperty, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.ShapeProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.ShapeProperty, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.ShapeProperty, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.ShapeProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.ShapeProperty, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
+
+        [<CustomOperation("copyTo")>]
+        member _.CopyTo(state: Types.ShapeProperty, value: Types.Fields) =
+            { state with CopyTo = Some value }
+
+        [<CustomOperation("store")>]
+        member _.Store(state: Types.ShapeProperty, value: bool) =
+            { state with Store = Some value }
+
+        [<CustomOperation("docValues")>]
+        member _.DocValues(state: Types.ShapeProperty, value: bool) =
+            { state with DocValues = Some value }
+
     let shapeProperty = ShapePropertyBuilder()
+
+    type ShortNumberPropertyBuilder() =
+        member _.Yield(_: unit) : Types.ShortNumberProperty =
+            {
+                Type = "short"
+                NullValue = None
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
+                Boost = None
+                Coerce = None
+                IgnoreMalformed = None
+                Index = None
+                OnScriptError = None
+                Script = None
+                TimeSeriesMetric = None
+                TimeSeriesDimension = None
+            }
+
+        [<CustomOperation("type'")>]
+        member _.Type(state: Types.ShortNumberProperty, value: string) =
+            { state with Type = value }
+
+        [<CustomOperation("nullValue")>]
+        member _.NullValue(state: Types.ShortNumberProperty, value: Types.Short) =
+            { state with NullValue = Some value }
+
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.ShortNumberProperty, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.ShortNumberProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.ShortNumberProperty, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.ShortNumberProperty, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.ShortNumberProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.ShortNumberProperty, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
+
+        [<CustomOperation("copyTo")>]
+        member _.CopyTo(state: Types.ShortNumberProperty, value: Types.Fields) =
+            { state with CopyTo = Some value }
+
+        [<CustomOperation("store")>]
+        member _.Store(state: Types.ShortNumberProperty, value: bool) =
+            { state with Store = Some value }
+
+        [<CustomOperation("docValues")>]
+        member _.DocValues(state: Types.ShortNumberProperty, value: bool) =
+            { state with DocValues = Some value }
+
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.ShortNumberProperty, value: Types.Double) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("coerce")>]
+        member _.Coerce(state: Types.ShortNumberProperty, value: bool) =
+            { state with Coerce = Some value }
+
+        [<CustomOperation("ignoreMalformed")>]
+        member _.IgnoreMalformed(state: Types.ShortNumberProperty, value: bool) =
+            { state with IgnoreMalformed = Some value }
+
+        [<CustomOperation("index")>]
+        member _.Index(state: Types.ShortNumberProperty, value: bool) =
+            { state with Index = Some value }
+
+        [<CustomOperation("onScriptError")>]
+        member _.OnScriptError(state: Types.ShortNumberProperty, value: Types.OnScriptError) =
+            { state with OnScriptError = Some value }
+
+        [<CustomOperation("script")>]
+        member _.Script(state: Types.ShortNumberProperty, value: Types.Script) =
+            { state with Script = Some value }
+
+        [<CustomOperation("timeSeriesMetric")>]
+        member _.TimeSeriesMetric(state: Types.ShortNumberProperty, value: Types.TimeSeriesMetricType) =
+            { state with TimeSeriesMetric = Some value }
+
+        [<CustomOperation("timeSeriesDimension")>]
+        member _.TimeSeriesDimension(state: Types.ShortNumberProperty, value: bool) =
+            { state with TimeSeriesDimension = Some value }
+
+    let shortNumberProperty = ShortNumberPropertyBuilder()
 
     type SourceFieldBuilder() =
         member _.Yield(_: unit) : Types.SourceField =
@@ -1483,8 +4209,14 @@ module TypesMappingBuilders =
         member _.Yield(_: unit) : Types.SparseVectorProperty =
             {
                 Store = None
-                Type = Unchecked.defaultof<_>
+                Type = "sparse_vector"
                 IndexOptions = None
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
             }
 
         [<CustomOperation("store")>]
@@ -1498,6 +4230,30 @@ module TypesMappingBuilders =
         [<CustomOperation("indexOptions")>]
         member _.IndexOptions(state: Types.SparseVectorProperty, value: Types.SparseVectorIndexOptions) =
             { state with IndexOptions = Some value }
+
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.SparseVectorProperty, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.SparseVectorProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.SparseVectorProperty, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.SparseVectorProperty, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.SparseVectorProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.SparseVectorProperty, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
 
     let sparseVectorProperty = SparseVectorPropertyBuilder()
 
@@ -1546,7 +4302,15 @@ module TypesMappingBuilders =
                 SearchQuoteAnalyzer = None
                 Similarity = None
                 TermVector = None
-                Type = Unchecked.defaultof<_>
+                Type = "text"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
             }
 
         [<CustomOperation("analyzer")>]
@@ -1613,6 +4377,38 @@ module TypesMappingBuilders =
         member _.Type(state: Types.TextProperty, value: string) =
             { state with Type = value }
 
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.TextProperty, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.TextProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.TextProperty, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.TextProperty, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.TextProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.TextProperty, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
+
+        [<CustomOperation("copyTo")>]
+        member _.CopyTo(state: Types.TextProperty, value: Types.Fields) =
+            { state with CopyTo = Some value }
+
+        [<CustomOperation("store")>]
+        member _.Store(state: Types.TextProperty, value: bool) =
+            { state with Store = Some value }
+
     let textProperty = TextPropertyBuilder()
 
     type TokenCountPropertyBuilder() =
@@ -1623,7 +4419,16 @@ module TypesMappingBuilders =
                 Index = None
                 NullValue = None
                 EnablePositionIncrements = None
-                Type = Unchecked.defaultof<_>
+                Type = "token_count"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
             }
 
         [<CustomOperation("analyzer")>]
@@ -1649,6 +4454,42 @@ module TypesMappingBuilders =
         [<CustomOperation("type'")>]
         member _.Type(state: Types.TokenCountProperty, value: string) =
             { state with Type = value }
+
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.TokenCountProperty, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.TokenCountProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.TokenCountProperty, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.TokenCountProperty, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.TokenCountProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.TokenCountProperty, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
+
+        [<CustomOperation("copyTo")>]
+        member _.CopyTo(state: Types.TokenCountProperty, value: Types.Fields) =
+            { state with CopyTo = Some value }
+
+        [<CustomOperation("store")>]
+        member _.Store(state: Types.TokenCountProperty, value: bool) =
+            { state with Store = Some value }
+
+        [<CustomOperation("docValues")>]
+        member _.DocValues(state: Types.TokenCountProperty, value: bool) =
+            { state with DocValues = Some value }
 
     let tokenCountProperty = TokenCountPropertyBuilder()
 
@@ -1743,4 +4584,225 @@ module TypesMappingBuilders =
             { state with DataStreamTimestamp = Some value }
 
     let typeMapping = TypeMappingBuilder()
+
+    type UnsignedLongNumberPropertyBuilder() =
+        member _.Yield(_: unit) : Types.UnsignedLongNumberProperty =
+            {
+                Type = "unsigned_long"
+                NullValue = None
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
+                Boost = None
+                Coerce = None
+                IgnoreMalformed = None
+                Index = None
+                OnScriptError = None
+                Script = None
+                TimeSeriesMetric = None
+                TimeSeriesDimension = None
+            }
+
+        [<CustomOperation("type'")>]
+        member _.Type(state: Types.UnsignedLongNumberProperty, value: string) =
+            { state with Type = value }
+
+        [<CustomOperation("nullValue")>]
+        member _.NullValue(state: Types.UnsignedLongNumberProperty, value: Types.Ulong) =
+            { state with NullValue = Some value }
+
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.UnsignedLongNumberProperty, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.UnsignedLongNumberProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.UnsignedLongNumberProperty, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.UnsignedLongNumberProperty, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.UnsignedLongNumberProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.UnsignedLongNumberProperty, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
+
+        [<CustomOperation("copyTo")>]
+        member _.CopyTo(state: Types.UnsignedLongNumberProperty, value: Types.Fields) =
+            { state with CopyTo = Some value }
+
+        [<CustomOperation("store")>]
+        member _.Store(state: Types.UnsignedLongNumberProperty, value: bool) =
+            { state with Store = Some value }
+
+        [<CustomOperation("docValues")>]
+        member _.DocValues(state: Types.UnsignedLongNumberProperty, value: bool) =
+            { state with DocValues = Some value }
+
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.UnsignedLongNumberProperty, value: Types.Double) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("coerce")>]
+        member _.Coerce(state: Types.UnsignedLongNumberProperty, value: bool) =
+            { state with Coerce = Some value }
+
+        [<CustomOperation("ignoreMalformed")>]
+        member _.IgnoreMalformed(state: Types.UnsignedLongNumberProperty, value: bool) =
+            { state with IgnoreMalformed = Some value }
+
+        [<CustomOperation("index")>]
+        member _.Index(state: Types.UnsignedLongNumberProperty, value: bool) =
+            { state with Index = Some value }
+
+        [<CustomOperation("onScriptError")>]
+        member _.OnScriptError(state: Types.UnsignedLongNumberProperty, value: Types.OnScriptError) =
+            { state with OnScriptError = Some value }
+
+        [<CustomOperation("script")>]
+        member _.Script(state: Types.UnsignedLongNumberProperty, value: Types.Script) =
+            { state with Script = Some value }
+
+        [<CustomOperation("timeSeriesMetric")>]
+        member _.TimeSeriesMetric(state: Types.UnsignedLongNumberProperty, value: Types.TimeSeriesMetricType) =
+            { state with TimeSeriesMetric = Some value }
+
+        [<CustomOperation("timeSeriesDimension")>]
+        member _.TimeSeriesDimension(state: Types.UnsignedLongNumberProperty, value: bool) =
+            { state with TimeSeriesDimension = Some value }
+
+    let unsignedLongNumberProperty = UnsignedLongNumberPropertyBuilder()
+
+    type VersionPropertyBuilder() =
+        member _.Yield(_: unit) : Types.VersionProperty =
+            {
+                Type = "version"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
+            }
+
+        [<CustomOperation("type'")>]
+        member _.Type(state: Types.VersionProperty, value: string) =
+            { state with Type = value }
+
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.VersionProperty, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.VersionProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.VersionProperty, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.VersionProperty, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.VersionProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.VersionProperty, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
+
+        [<CustomOperation("copyTo")>]
+        member _.CopyTo(state: Types.VersionProperty, value: Types.Fields) =
+            { state with CopyTo = Some value }
+
+        [<CustomOperation("store")>]
+        member _.Store(state: Types.VersionProperty, value: bool) =
+            { state with Store = Some value }
+
+        [<CustomOperation("docValues")>]
+        member _.DocValues(state: Types.VersionProperty, value: bool) =
+            { state with DocValues = Some value }
+
+    let versionProperty = VersionPropertyBuilder()
+
+    type WildcardPropertyBuilder() =
+        member _.Yield(_: unit) : Types.WildcardProperty =
+            {
+                Type = "wildcard"
+                NullValue = None
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
+            }
+
+        [<CustomOperation("type'")>]
+        member _.Type(state: Types.WildcardProperty, value: string) =
+            { state with Type = value }
+
+        [<CustomOperation("nullValue")>]
+        member _.NullValue(state: Types.WildcardProperty, value: string) =
+            { state with NullValue = Some value }
+
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.WildcardProperty, value: Map<string, string>) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.WildcardProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("ignoreAbove")>]
+        member _.IgnoreAbove(state: Types.WildcardProperty, value: Types.Integer) =
+            { state with IgnoreAbove = Some value }
+
+        [<CustomOperation("dynamic")>]
+        member _.Dynamic(state: Types.WildcardProperty, value: Types.DynamicMapping) =
+            { state with Dynamic = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.WildcardProperty, value: Map<Types.PropertyName, Types.Property>) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("syntheticSourceKeep")>]
+        member _.SyntheticSourceKeep(state: Types.WildcardProperty, value: Types.SyntheticSourceKeepEnum) =
+            { state with SyntheticSourceKeep = Some value }
+
+        [<CustomOperation("copyTo")>]
+        member _.CopyTo(state: Types.WildcardProperty, value: Types.Fields) =
+            { state with CopyTo = Some value }
+
+        [<CustomOperation("store")>]
+        member _.Store(state: Types.WildcardProperty, value: bool) =
+            { state with Store = Some value }
+
+        [<CustomOperation("docValues")>]
+        member _.DocValues(state: Types.WildcardProperty, value: bool) =
+            { state with DocValues = Some value }
+
+    let wildcardProperty = WildcardPropertyBuilder()
 

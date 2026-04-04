@@ -41,7 +41,7 @@ module IndicesUpdateAliasesBuilders =
             { state with Alias = Some value }
 
         [<CustomOperation("aliases")>]
-        member _.Aliases(state: Types.AddAction, value: System.Text.Json.JsonElement) =
+        member _.Aliases(state: Types.AddAction, value: Types.IndexAlias list) =
             { state with Aliases = Some value }
 
         [<CustomOperation("filter")>]
@@ -97,7 +97,7 @@ module IndicesUpdateAliasesBuilders =
             { state with Alias = Some value }
 
         [<CustomOperation("aliases")>]
-        member _.Aliases(state: Types.RemoveAction, value: System.Text.Json.JsonElement) =
+        member _.Aliases(state: Types.RemoveAction, value: Types.IndexAlias list) =
             { state with Aliases = Some value }
 
         [<CustomOperation("index")>]

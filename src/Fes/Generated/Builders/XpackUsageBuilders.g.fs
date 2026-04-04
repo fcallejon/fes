@@ -207,6 +207,8 @@ module XpackUsageBuilders =
                 HasDefaultUsernamePattern = None
                 HasTruststore = None
                 IsAuthenticationDelegated = None
+                Available = Unchecked.defaultof<_>
+                Enabled = Unchecked.defaultof<_>
             }
 
         [<CustomOperation("name")>]
@@ -241,6 +243,14 @@ module XpackUsageBuilders =
         member _.IsAuthenticationDelegated(state: Types.Realm, value: bool list) =
             { state with IsAuthenticationDelegated = Some value }
 
+        [<CustomOperation("available")>]
+        member _.Available(state: Types.Realm, value: bool) =
+            { state with Available = value }
+
+        [<CustomOperation("enabled")>]
+        member _.Enabled(state: Types.Realm, value: bool) =
+            { state with Enabled = value }
+
     let realm = RealmBuilder()
 
     type SearchableSnapshotsBuilder() =
@@ -249,6 +259,8 @@ module XpackUsageBuilders =
                 IndicesCount = Unchecked.defaultof<_>
                 FullCopyIndicesCount = None
                 SharedCacheIndicesCount = None
+                Available = Unchecked.defaultof<_>
+                Enabled = Unchecked.defaultof<_>
             }
 
         [<CustomOperation("indicesCount")>]
@@ -263,6 +275,14 @@ module XpackUsageBuilders =
         member _.SharedCacheIndicesCount(state: Types.SearchableSnapshots, value: Types.Integer) =
             { state with SharedCacheIndicesCount = Some value }
 
+        [<CustomOperation("available")>]
+        member _.Available(state: Types.SearchableSnapshots, value: bool) =
+            { state with Available = value }
+
+        [<CustomOperation("enabled")>]
+        member _.Enabled(state: Types.SearchableSnapshots, value: bool) =
+            { state with Enabled = value }
+
     let searchableSnapshots = SearchableSnapshotsBuilder()
 
     type SlmBuilder() =
@@ -270,6 +290,8 @@ module XpackUsageBuilders =
             {
                 PolicyCount = None
                 PolicyStats = None
+                Available = Unchecked.defaultof<_>
+                Enabled = Unchecked.defaultof<_>
             }
 
         [<CustomOperation("policyCount")>]
@@ -279,6 +301,14 @@ module XpackUsageBuilders =
         [<CustomOperation("policyStats")>]
         member _.PolicyStats(state: Types.Slm, value: Types.Statistics) =
             { state with PolicyStats = Some value }
+
+        [<CustomOperation("available")>]
+        member _.Available(state: Types.Slm, value: bool) =
+            { state with Available = value }
+
+        [<CustomOperation("enabled")>]
+        member _.Enabled(state: Types.Slm, value: bool) =
+            { state with Enabled = value }
 
     let slm = SlmBuilder()
 

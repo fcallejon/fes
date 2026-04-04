@@ -30,6 +30,8 @@
         <Compile Include="Json.fs"/>
         <Compile Include="Http.fs"/>
         <Compile Include="Transport.fs"/>
+        <Compile Include="Mapping.fs"/>
+        <Compile Include="Analysis.fs"/>
     </ItemGroup>
     <ItemGroup>
         <!-- Generated builders -->
@@ -90,6 +92,7 @@
         <Compile Include="Generated/Builders/IndicesAnalyzeBuilders.g.fs"/>
         <Compile Include="Generated/Builders/IndicesCreateFromBuilders.g.fs"/>
         <Compile Include="Generated/Builders/IndicesExplainDataLifecycleBuilders.g.fs"/>
+        <Compile Include="Generated/Builders/IndicesForcemergeTypesBuilders.g.fs"/>
         <Compile Include="Generated/Builders/IndicesModifyDataStreamBuilders.g.fs"/>
         <Compile Include="Generated/Builders/IndicesPutDataStreamMappingsBuilders.g.fs"/>
         <Compile Include="Generated/Builders/IndicesPutIndexTemplateBuilders.g.fs"/>
@@ -116,6 +119,7 @@
         <Compile Include="Generated/Builders/MlPutTrainedModelBuilders.g.fs"/>
         <Compile Include="Generated/Builders/MlTypesBuilders.g.fs"/>
         <Compile Include="Generated/Builders/NodesInfoBuilders.g.fs"/>
+        <Compile Include="Generated/Builders/NodesStatsBuilders.g.fs"/>
         <Compile Include="Generated/Builders/NodesTypesBuilders.g.fs"/>
         <Compile Include="Generated/Builders/QueryRulesTypesBuilders.g.fs"/>
         <Compile Include="Generated/Builders/RollupGetJobsBuilders.g.fs"/>
@@ -126,6 +130,7 @@
         <Compile Include="Generated/Builders/SecurityAuthenticateBuilders.g.fs"/>
         <Compile Include="Generated/Builders/SecurityDelegatePkiBuilders.g.fs"/>
         <Compile Include="Generated/Builders/SecurityGetRoleBuilders.g.fs"/>
+        <Compile Include="Generated/Builders/SecurityGetTokenBuilders.g.fs"/>
         <Compile Include="Generated/Builders/SecurityGrantApiKeyBuilders.g.fs"/>
         <Compile Include="Generated/Builders/SecurityHasPrivilegesUserProfileBuilders.g.fs"/>
         <Compile Include="Generated/Builders/SecurityPutPrivilegesBuilders.g.fs"/>

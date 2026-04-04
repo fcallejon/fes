@@ -9,6 +9,28 @@ open Fes.Generated
 [<AutoOpen>]
 module SnapshotTypesBuilders =
 
+    type AzureRepositoryBuilder() =
+        member _.Yield(_: unit) : Types.AzureRepository =
+            {
+                Type = "azure"
+                Settings = None
+                Uuid = None
+            }
+
+        [<CustomOperation("type'")>]
+        member _.Type(state: Types.AzureRepository, value: string) =
+            { state with Type = value }
+
+        [<CustomOperation("settings")>]
+        member _.Settings(state: Types.AzureRepository, value: Types.AzureRepositorySettings) =
+            { state with Settings = Some value }
+
+        [<CustomOperation("uuid")>]
+        member _.Uuid(state: Types.AzureRepository, value: Types.Uuid) =
+            { state with Uuid = Some value }
+
+    let azureRepository = AzureRepositoryBuilder()
+
     type AzureRepositorySettingsBuilder() =
         member _.Yield(_: unit) : Types.AzureRepositorySettings =
             {
@@ -19,6 +41,10 @@ module SnapshotTypesBuilders =
                 LocationMode = None
                 MaxConcurrentBatchDeletes = None
                 Readonly = None
+                ChunkSize = None
+                Compress = None
+                MaxRestoreBytesPerSec = None
+                MaxSnapshotBytesPerSec = None
             }
 
         [<CustomOperation("basePath")>]
@@ -49,6 +75,22 @@ module SnapshotTypesBuilders =
         member _.Readonly(state: Types.AzureRepositorySettings, value: bool) =
             { state with Readonly = Some value }
 
+        [<CustomOperation("chunkSize")>]
+        member _.ChunkSize(state: Types.AzureRepositorySettings, value: Types.ByteSize) =
+            { state with ChunkSize = Some value }
+
+        [<CustomOperation("compress")>]
+        member _.Compress(state: Types.AzureRepositorySettings, value: bool) =
+            { state with Compress = Some value }
+
+        [<CustomOperation("maxRestoreBytesPerSec")>]
+        member _.MaxRestoreBytesPerSec(state: Types.AzureRepositorySettings, value: Types.ByteSize) =
+            { state with MaxRestoreBytesPerSec = Some value }
+
+        [<CustomOperation("maxSnapshotBytesPerSec")>]
+        member _.MaxSnapshotBytesPerSec(state: Types.AzureRepositorySettings, value: Types.ByteSize) =
+            { state with MaxSnapshotBytesPerSec = Some value }
+
     let azureRepositorySettings = AzureRepositorySettingsBuilder()
 
     type GcsRepositorySettingsBuilder() =
@@ -59,6 +101,10 @@ module SnapshotTypesBuilders =
                 BasePath = None
                 Client = None
                 Readonly = None
+                ChunkSize = None
+                Compress = None
+                MaxRestoreBytesPerSec = None
+                MaxSnapshotBytesPerSec = None
             }
 
         [<CustomOperation("bucket")>]
@@ -81,6 +127,22 @@ module SnapshotTypesBuilders =
         member _.Readonly(state: Types.GcsRepositorySettings, value: bool) =
             { state with Readonly = Some value }
 
+        [<CustomOperation("chunkSize")>]
+        member _.ChunkSize(state: Types.GcsRepositorySettings, value: Types.ByteSize) =
+            { state with ChunkSize = Some value }
+
+        [<CustomOperation("compress")>]
+        member _.Compress(state: Types.GcsRepositorySettings, value: bool) =
+            { state with Compress = Some value }
+
+        [<CustomOperation("maxRestoreBytesPerSec")>]
+        member _.MaxRestoreBytesPerSec(state: Types.GcsRepositorySettings, value: Types.ByteSize) =
+            { state with MaxRestoreBytesPerSec = Some value }
+
+        [<CustomOperation("maxSnapshotBytesPerSec")>]
+        member _.MaxSnapshotBytesPerSec(state: Types.GcsRepositorySettings, value: Types.ByteSize) =
+            { state with MaxSnapshotBytesPerSec = Some value }
+
     let gcsRepositorySettings = GcsRepositorySettingsBuilder()
 
     type ReadOnlyUrlRepositorySettingsBuilder() =
@@ -90,6 +152,10 @@ module SnapshotTypesBuilders =
                 HttpSocketTimeout = None
                 MaxNumberOfSnapshots = None
                 Url = Unchecked.defaultof<_>
+                ChunkSize = None
+                Compress = None
+                MaxRestoreBytesPerSec = None
+                MaxSnapshotBytesPerSec = None
             }
 
         [<CustomOperation("httpMaxRetries")>]
@@ -107,6 +173,22 @@ module SnapshotTypesBuilders =
         [<CustomOperation("url")>]
         member _.Url(state: Types.ReadOnlyUrlRepositorySettings, value: string) =
             { state with Url = value }
+
+        [<CustomOperation("chunkSize")>]
+        member _.ChunkSize(state: Types.ReadOnlyUrlRepositorySettings, value: Types.ByteSize) =
+            { state with ChunkSize = Some value }
+
+        [<CustomOperation("compress")>]
+        member _.Compress(state: Types.ReadOnlyUrlRepositorySettings, value: bool) =
+            { state with Compress = Some value }
+
+        [<CustomOperation("maxRestoreBytesPerSec")>]
+        member _.MaxRestoreBytesPerSec(state: Types.ReadOnlyUrlRepositorySettings, value: Types.ByteSize) =
+            { state with MaxRestoreBytesPerSec = Some value }
+
+        [<CustomOperation("maxSnapshotBytesPerSec")>]
+        member _.MaxSnapshotBytesPerSec(state: Types.ReadOnlyUrlRepositorySettings, value: Types.ByteSize) =
+            { state with MaxSnapshotBytesPerSec = Some value }
 
     let readOnlyUrlRepositorySettings = ReadOnlyUrlRepositorySettingsBuilder()
 
@@ -155,6 +237,10 @@ module SnapshotTypesBuilders =
                 ThrottledDeleteRetryDelayIncrement = None
                 ThrottledDeleteRetryMaximumDelay = None
                 ThrottledDeleteRetryMaximumNumberOfRetries = None
+                ChunkSize = None
+                Compress = None
+                MaxRestoreBytesPerSec = None
+                MaxSnapshotBytesPerSec = None
             }
 
         [<CustomOperation("bucket")>]
@@ -217,6 +303,22 @@ module SnapshotTypesBuilders =
         member _.ThrottledDeleteRetryMaximumNumberOfRetries(state: Types.S3RepositorySettings, value: Types.Integer) =
             { state with ThrottledDeleteRetryMaximumNumberOfRetries = Some value }
 
+        [<CustomOperation("chunkSize")>]
+        member _.ChunkSize(state: Types.S3RepositorySettings, value: Types.ByteSize) =
+            { state with ChunkSize = Some value }
+
+        [<CustomOperation("compress")>]
+        member _.Compress(state: Types.S3RepositorySettings, value: bool) =
+            { state with Compress = Some value }
+
+        [<CustomOperation("maxRestoreBytesPerSec")>]
+        member _.MaxRestoreBytesPerSec(state: Types.S3RepositorySettings, value: Types.ByteSize) =
+            { state with MaxRestoreBytesPerSec = Some value }
+
+        [<CustomOperation("maxSnapshotBytesPerSec")>]
+        member _.MaxSnapshotBytesPerSec(state: Types.S3RepositorySettings, value: Types.ByteSize) =
+            { state with MaxSnapshotBytesPerSec = Some value }
+
     let s3RepositorySettings = S3RepositorySettingsBuilder()
 
     type SharedFileSystemRepositorySettingsBuilder() =
@@ -225,6 +327,10 @@ module SnapshotTypesBuilders =
                 Location = Unchecked.defaultof<_>
                 MaxNumberOfSnapshots = None
                 Readonly = None
+                ChunkSize = None
+                Compress = None
+                MaxRestoreBytesPerSec = None
+                MaxSnapshotBytesPerSec = None
             }
 
         [<CustomOperation("location")>]
@@ -238,6 +344,22 @@ module SnapshotTypesBuilders =
         [<CustomOperation("readonly")>]
         member _.Readonly(state: Types.SharedFileSystemRepositorySettings, value: bool) =
             { state with Readonly = Some value }
+
+        [<CustomOperation("chunkSize")>]
+        member _.ChunkSize(state: Types.SharedFileSystemRepositorySettings, value: Types.ByteSize) =
+            { state with ChunkSize = Some value }
+
+        [<CustomOperation("compress")>]
+        member _.Compress(state: Types.SharedFileSystemRepositorySettings, value: bool) =
+            { state with Compress = Some value }
+
+        [<CustomOperation("maxRestoreBytesPerSec")>]
+        member _.MaxRestoreBytesPerSec(state: Types.SharedFileSystemRepositorySettings, value: Types.ByteSize) =
+            { state with MaxRestoreBytesPerSec = Some value }
+
+        [<CustomOperation("maxSnapshotBytesPerSec")>]
+        member _.MaxSnapshotBytesPerSec(state: Types.SharedFileSystemRepositorySettings, value: Types.ByteSize) =
+            { state with MaxSnapshotBytesPerSec = Some value }
 
     let sharedFileSystemRepositorySettings = SharedFileSystemRepositorySettingsBuilder()
 
@@ -359,6 +481,10 @@ module SnapshotTypesBuilders =
                 DelegateType = None
                 MaxNumberOfSnapshots = None
                 ReadOnly = None
+                ChunkSize = None
+                Compress = None
+                MaxRestoreBytesPerSec = None
+                MaxSnapshotBytesPerSec = None
             }
 
         [<CustomOperation("delegateType")>]
@@ -372,6 +498,22 @@ module SnapshotTypesBuilders =
         [<CustomOperation("readOnly")>]
         member _.ReadOnly(state: Types.SourceOnlyRepositorySettings, value: bool) =
             { state with ReadOnly = Some value }
+
+        [<CustomOperation("chunkSize")>]
+        member _.ChunkSize(state: Types.SourceOnlyRepositorySettings, value: Types.ByteSize) =
+            { state with ChunkSize = Some value }
+
+        [<CustomOperation("compress")>]
+        member _.Compress(state: Types.SourceOnlyRepositorySettings, value: bool) =
+            { state with Compress = Some value }
+
+        [<CustomOperation("maxRestoreBytesPerSec")>]
+        member _.MaxRestoreBytesPerSec(state: Types.SourceOnlyRepositorySettings, value: Types.ByteSize) =
+            { state with MaxRestoreBytesPerSec = Some value }
+
+        [<CustomOperation("maxSnapshotBytesPerSec")>]
+        member _.MaxSnapshotBytesPerSec(state: Types.SourceOnlyRepositorySettings, value: Types.ByteSize) =
+            { state with MaxSnapshotBytesPerSec = Some value }
 
     let sourceOnlyRepositorySettings = SourceOnlyRepositorySettingsBuilder()
 

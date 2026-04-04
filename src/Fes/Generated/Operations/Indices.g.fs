@@ -664,7 +664,7 @@ module IndicesOperations =
     type IndicesCreateFromRequest = {
         Source: Types.IndexName
         Dest: Types.IndexName
-        Document: obj
+        Document: Types.CreateFrom
     }
 
         with
@@ -1230,7 +1230,7 @@ module IndicesOperations =
     type IndicesDownsampleRequest = {
         Index: Types.IndexName
         TargetIndex: Types.IndexName
-        Document: obj
+        Document: Types.DownsampleConfig
     }
 
         with
@@ -2706,7 +2706,7 @@ module IndicesOperations =
             { req with MasterTimeout = Some value }
 
     type IndicesMigrateReindexRequest = {
-        Document: obj
+        Document: Types.MigrateReindex
     }
 
         with
@@ -3147,7 +3147,7 @@ module IndicesOperations =
         DryRun: bool option
         MasterTimeout: Types.Duration option
         Timeout: Types.Duration option
-        Document: obj
+        Document: Types.TypeMapping
     }
 
         with
@@ -3284,7 +3284,7 @@ module IndicesOperations =
         DryRun: bool option
         MasterTimeout: Types.Duration option
         Timeout: Types.Duration option
-        Document: obj
+        Document: Types.IndexSettings
     }
 
         with
@@ -3694,7 +3694,7 @@ module IndicesOperations =
         PreserveExisting: bool option
         Reopen: bool option
         Timeout: Types.Duration option
-        Document: obj
+        Document: Types.IndexSettings
     }
 
         with
@@ -3805,7 +3805,7 @@ module IndicesOperations =
         [<System.Text.Json.Serialization.JsonPropertyName("aliases")>]
         Aliases: Map<Types.IndexName, Types.Alias> option
         [<System.Text.Json.Serialization.JsonPropertyName("index_patterns")>]
-        IndexPatterns: System.Text.Json.JsonElement option
+        IndexPatterns: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("mappings")>]
         Mappings: Types.TypeMapping option
         [<System.Text.Json.Serialization.JsonPropertyName("order")>]
@@ -3877,7 +3877,7 @@ module IndicesOperations =
             { state with Aliases = Some value }
 
         [<CustomOperation("indexPatterns")>]
-        member _.IndexPatterns(state: IndicesPutTemplateRequest, value: System.Text.Json.JsonElement) =
+        member _.IndexPatterns(state: IndicesPutTemplateRequest, value: string list) =
             { state with IndexPatterns = Some value }
 
         [<CustomOperation("mappings")>]
@@ -3909,7 +3909,7 @@ module IndicesOperations =
             { req with Cause = Some value }
         let withAliases (value: Map<Types.IndexName, Types.Alias>) (req: IndicesPutTemplateRequest) =
             { req with Aliases = Some value }
-        let withIndexPatterns (value: System.Text.Json.JsonElement) (req: IndicesPutTemplateRequest) =
+        let withIndexPatterns (value: string list) (req: IndicesPutTemplateRequest) =
             { req with IndexPatterns = Some value }
         let withMappings (value: Types.TypeMapping) (req: IndicesPutTemplateRequest) =
             { req with Mappings = Some value }
@@ -4294,7 +4294,7 @@ module IndicesOperations =
         ExpandWildcards: Types.ExpandWildcards option
         IgnoreUnavailable: bool option
         AllowNoIndices: bool option
-        Mode: System.Text.Json.JsonElement option
+        Mode: Types.IndexMode list option
         [<System.Text.Json.Serialization.JsonPropertyName("project_routing")>]
         ProjectRouting: Types.ProjectRouting option
     }
@@ -4347,7 +4347,7 @@ module IndicesOperations =
             { state with AllowNoIndices = Some value }
 
         [<CustomOperation("mode")>]
-        member _.Mode(state: IndicesResolveIndexRequest, value: System.Text.Json.JsonElement) =
+        member _.Mode(state: IndicesResolveIndexRequest, value: Types.IndexMode list) =
             { state with Mode = Some value }
 
         [<CustomOperation("projectRouting")>]
@@ -4363,7 +4363,7 @@ module IndicesOperations =
             { req with IgnoreUnavailable = Some value }
         let withAllowNoIndices (value: bool) (req: IndicesResolveIndexRequest) =
             { req with AllowNoIndices = Some value }
-        let withMode (value: System.Text.Json.JsonElement) (req: IndicesResolveIndexRequest) =
+        let withMode (value: Types.IndexMode list) (req: IndicesResolveIndexRequest) =
             { req with Mode = Some value }
         let withProjectRouting (value: Types.ProjectRouting) (req: IndicesResolveIndexRequest) =
             { req with ProjectRouting = Some value }
@@ -4554,7 +4554,7 @@ module IndicesOperations =
         AllowNoIndices: bool option
         ExpandWildcards: Types.ExpandWildcards option
         IgnoreUnavailable: bool option
-        Status: System.Text.Json.JsonElement option
+        Status: Types.ShardStoreStatus list option
     }
 
         with
@@ -4603,7 +4603,7 @@ module IndicesOperations =
             { state with IgnoreUnavailable = Some value }
 
         [<CustomOperation("status")>]
-        member _.Status(state: IndicesShardStoresRequest, value: System.Text.Json.JsonElement) =
+        member _.Status(state: IndicesShardStoresRequest, value: Types.ShardStoreStatus list) =
             { state with Status = Some value }
 
     let indicesShardStoresRequest = IndicesShardStoresRequestBuilder()
@@ -4615,7 +4615,7 @@ module IndicesOperations =
             { req with ExpandWildcards = Some value }
         let withIgnoreUnavailable (value: bool) (req: IndicesShardStoresRequest) =
             { req with IgnoreUnavailable = Some value }
-        let withStatus (value: System.Text.Json.JsonElement) (req: IndicesShardStoresRequest) =
+        let withStatus (value: Types.ShardStoreStatus list) (req: IndicesShardStoresRequest) =
             { req with Status = Some value }
 
     type IndicesShrinkRequest = {
@@ -4709,7 +4709,7 @@ module IndicesOperations =
         Cause: string option
         MasterTimeout: Types.Duration option
         IncludeDefaults: bool option
-        Document: obj
+        Document: Types.IndexTemplate
     }
 
         with
@@ -5032,7 +5032,7 @@ module IndicesOperations =
         FielddataFields: Types.Fields option
         Fields: Types.Fields option
         ForbidClosedIndices: bool option
-        Groups: System.Text.Json.JsonElement option
+        Groups: string list option
         IncludeSegmentFileSizes: bool option
         IncludeUnloadedSegments: bool option
         Level: Types.Level option
@@ -5107,7 +5107,7 @@ module IndicesOperations =
             { state with ForbidClosedIndices = Some value }
 
         [<CustomOperation("groups")>]
-        member _.Groups(state: IndicesStatsRequest, value: System.Text.Json.JsonElement) =
+        member _.Groups(state: IndicesStatsRequest, value: string list) =
             { state with Groups = Some value }
 
         [<CustomOperation("includeSegmentFileSizes")>]
@@ -5135,7 +5135,7 @@ module IndicesOperations =
             { req with Fields = Some value }
         let withForbidClosedIndices (value: bool) (req: IndicesStatsRequest) =
             { req with ForbidClosedIndices = Some value }
-        let withGroups (value: System.Text.Json.JsonElement) (req: IndicesStatsRequest) =
+        let withGroups (value: string list) (req: IndicesStatsRequest) =
             { req with Groups = Some value }
         let withIncludeSegmentFileSizes (value: bool) (req: IndicesStatsRequest) =
             { req with IncludeSegmentFileSizes = Some value }

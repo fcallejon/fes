@@ -362,7 +362,7 @@ module IngestOperations =
         Id: Types.Id
         MasterTimeout: Types.Duration option
         Timeout: Types.Duration option
-        Document: obj
+        Document: Types.DatabaseConfiguration
     }
 
         with

@@ -562,6 +562,16 @@ module NodesTypesBuilders =
             {
                 FreePercent = None
                 UsedPercent = None
+                AdjustedTotalInBytes = None
+                Resident = None
+                ResidentInBytes = None
+                Share = None
+                ShareInBytes = None
+                TotalVirtual = None
+                TotalVirtualInBytes = None
+                TotalInBytes = None
+                FreeInBytes = None
+                UsedInBytes = None
             }
 
         [<CustomOperation("freePercent")>]
@@ -571,6 +581,46 @@ module NodesTypesBuilders =
         [<CustomOperation("usedPercent")>]
         member _.UsedPercent(state: Types.ExtendedMemoryStats, value: Types.Integer) =
             { state with UsedPercent = Some value }
+
+        [<CustomOperation("adjustedTotalInBytes")>]
+        member _.AdjustedTotalInBytes(state: Types.ExtendedMemoryStats, value: Types.Long) =
+            { state with AdjustedTotalInBytes = Some value }
+
+        [<CustomOperation("resident")>]
+        member _.Resident(state: Types.ExtendedMemoryStats, value: string) =
+            { state with Resident = Some value }
+
+        [<CustomOperation("residentInBytes")>]
+        member _.ResidentInBytes(state: Types.ExtendedMemoryStats, value: Types.Long) =
+            { state with ResidentInBytes = Some value }
+
+        [<CustomOperation("share")>]
+        member _.Share(state: Types.ExtendedMemoryStats, value: string) =
+            { state with Share = Some value }
+
+        [<CustomOperation("shareInBytes")>]
+        member _.ShareInBytes(state: Types.ExtendedMemoryStats, value: Types.Long) =
+            { state with ShareInBytes = Some value }
+
+        [<CustomOperation("totalVirtual")>]
+        member _.TotalVirtual(state: Types.ExtendedMemoryStats, value: string) =
+            { state with TotalVirtual = Some value }
+
+        [<CustomOperation("totalVirtualInBytes")>]
+        member _.TotalVirtualInBytes(state: Types.ExtendedMemoryStats, value: Types.Long) =
+            { state with TotalVirtualInBytes = Some value }
+
+        [<CustomOperation("totalInBytes")>]
+        member _.TotalInBytes(state: Types.ExtendedMemoryStats, value: Types.Long) =
+            { state with TotalInBytes = Some value }
+
+        [<CustomOperation("freeInBytes")>]
+        member _.FreeInBytes(state: Types.ExtendedMemoryStats, value: Types.Long) =
+            { state with FreeInBytes = Some value }
+
+        [<CustomOperation("usedInBytes")>]
+        member _.UsedInBytes(state: Types.ExtendedMemoryStats, value: Types.Long) =
+            { state with UsedInBytes = Some value }
 
     let extendedMemoryStats = ExtendedMemoryStatsBuilder()
 
@@ -1628,7 +1678,7 @@ module NodesTypesBuilders =
             { state with Ingest = Some value }
 
         [<CustomOperation("ip")>]
-        member _.Ip(state: Types.Stats, value: System.Text.Json.JsonElement) =
+        member _.Ip(state: Types.Stats, value: Types.Ip list) =
             { state with Ip = Some value }
 
         [<CustomOperation("jvm")>]
@@ -1656,7 +1706,7 @@ module NodesTypesBuilders =
             { state with Script = Some value }
 
         [<CustomOperation("scriptCache")>]
-        member _.ScriptCache(state: Types.Stats, value: Map<string, System.Text.Json.JsonElement>) =
+        member _.ScriptCache(state: Types.Stats, value: Map<string, Types.ScriptCache list>) =
             { state with ScriptCache = Some value }
 
         [<CustomOperation("threadPool")>]

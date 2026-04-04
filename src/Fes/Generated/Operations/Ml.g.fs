@@ -2513,7 +2513,7 @@ module MlOperations =
         From: Types.Integer option
         Include: Types.Include option
         Size: Types.Integer option
-        Tags: System.Text.Json.JsonElement option
+        Tags: string list option
     }
 
         with
@@ -2580,7 +2580,7 @@ module MlOperations =
             { state with Size = Some value }
 
         [<CustomOperation("tags")>]
-        member _.Tags(state: MlGetTrainedModelsRequest, value: System.Text.Json.JsonElement) =
+        member _.Tags(state: MlGetTrainedModelsRequest, value: string list) =
             { state with Tags = Some value }
 
     let mlGetTrainedModelsRequest = MlGetTrainedModelsRequestBuilder()
@@ -2598,7 +2598,7 @@ module MlOperations =
             { req with Include = Some value }
         let withSize (value: Types.Integer) (req: MlGetTrainedModelsRequest) =
             { req with Size = Some value }
-        let withTags (value: System.Text.Json.JsonElement) (req: MlGetTrainedModelsRequest) =
+        let withTags (value: string list) (req: MlGetTrainedModelsRequest) =
             { req with Tags = Some value }
 
     type MlGetTrainedModelsStatsRequest = {
@@ -2822,14 +2822,63 @@ module MlOperations =
         let withEvents (value: Types.CalendarEvent list) (req: MlPostCalendarEventsRequest) =
             { req with Events = value }
 
-    type MlPostDataRequest<'tData> = {
+    type MlPostDataRequest<'TData> = {
         JobId: Types.Id
         ResetEnd: Types.DateTime option
         ResetStart: Types.DateTime option
-        Document: obj
+        Document: 'TData list
     }
 
+        with
+        static member ToEndpoint(req: MlPostDataRequest<'TData>) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+            let path = $"/_ml/anomaly_detectors/{Fes.Http.toPathSegment req.JobId}/_data"
+            let queryParams =
+                [
+                    req.ResetEnd |> Option.map (fun v -> "reset_end", Fes.Http.toQueryValue v)
+                    req.ResetStart |> Option.map (fun v -> "reset_start", Fes.Http.toQueryValue v)
+                ] |> List.choose id
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
+            let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+            let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req.Document)
+            endpoint, ValueSome postData
+
     type MlPostDataResponse = System.Text.Json.JsonElement
+
+    type MlPostDataRequestBuilder() =
+        member _.Yield(_: unit) : MlPostDataRequest<_> =
+            {
+                JobId = Unchecked.defaultof<_>
+                ResetEnd = None
+                ResetStart = None
+                Document = Unchecked.defaultof<_>
+            }
+
+        [<CustomOperation("jobId")>]
+        member _.JobId(state: MlPostDataRequest<_>, value: Types.Id) =
+            { state with JobId = value }
+
+        [<CustomOperation("resetEnd")>]
+        member _.ResetEnd(state: MlPostDataRequest<_>, value: Types.DateTime) =
+            { state with ResetEnd = Some value }
+
+        [<CustomOperation("resetStart")>]
+        member _.ResetStart(state: MlPostDataRequest<_>, value: Types.DateTime) =
+            { state with ResetStart = Some value }
+
+        [<CustomOperation("document")>]
+        member _.Document(state: MlPostDataRequest<_>, value) =
+            { state with Document = value }
+
+    let mlPostDataRequest = MlPostDataRequestBuilder()
+
+    module PostData =
+        let withResetEnd (value: Types.DateTime) (req: MlPostDataRequest<_>) =
+            { req with ResetEnd = Some value }
+        let withResetStart (value: Types.DateTime) (req: MlPostDataRequest<_>) =
+            { req with ResetStart = Some value }
 
     type MlPreviewDataFrameAnalyticsRequest = {
         Id: Types.Id
@@ -2894,7 +2943,7 @@ module MlOperations =
             let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
             endpoint, ValueSome postData
 
-    type MlPreviewDatafeedResponse<'tDocument> = 'tDocument list
+    type MlPreviewDatafeedResponse<'TDocument> = 'TDocument list
 
     type MlPreviewDatafeedRequestBuilder() =
         member _.Yield(_: unit) : MlPreviewDatafeedRequest =
@@ -5356,7 +5405,7 @@ module MlOperations =
             { req with ResultsIndexName = Some value }
 
     type MlValidateDetectorRequest = {
-        Document: obj
+        Document: Types.Detector
     }
 
         with

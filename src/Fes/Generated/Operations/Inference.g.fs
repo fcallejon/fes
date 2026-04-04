@@ -15,7 +15,7 @@ module InferenceOperations =
     type InferenceChatCompletionUnifiedRequest = {
         InferenceId: Types.Id
         Timeout: Types.Duration option
-        Document: obj
+        Document: Types.RequestChatCompletion
     }
 
         with
@@ -65,7 +65,7 @@ module InferenceOperations =
         InferenceId: Types.Id
         Timeout: Types.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("input")>]
-        Input: System.Text.Json.JsonElement
+        Input: string list
         [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
         TaskSettings: Types.TaskSettings option
     }
@@ -105,7 +105,7 @@ module InferenceOperations =
             { state with Timeout = Some value }
 
         [<CustomOperation("input")>]
-        member _.Input(state: InferenceCompletionRequest, value: System.Text.Json.JsonElement) =
+        member _.Input(state: InferenceCompletionRequest, value: string list) =
             { state with Input = value }
 
         [<CustomOperation("taskSettings")>]
@@ -117,7 +117,7 @@ module InferenceOperations =
     module Completion =
         let withTimeout (value: Types.Duration) (req: InferenceCompletionRequest) =
             { req with Timeout = Some value }
-        let withInput (value: System.Text.Json.JsonElement) (req: InferenceCompletionRequest) =
+        let withInput (value: string list) (req: InferenceCompletionRequest) =
             { req with Input = value }
         let withTaskSettings (value: Types.TaskSettings) (req: InferenceCompletionRequest) =
             { req with TaskSettings = Some value }
@@ -182,7 +182,7 @@ module InferenceOperations =
     type InferenceEmbeddingRequest = {
         InferenceId: Types.Id
         Timeout: Types.Duration option
-        Document: obj
+        Document: Types.RequestEmbedding
     }
 
         with
@@ -266,7 +266,7 @@ module InferenceOperations =
         [<System.Text.Json.Serialization.JsonPropertyName("query")>]
         Query: string option
         [<System.Text.Json.Serialization.JsonPropertyName("input")>]
-        Input: System.Text.Json.JsonElement
+        Input: string list
         [<System.Text.Json.Serialization.JsonPropertyName("input_type")>]
         InputType: string option
         [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
@@ -319,7 +319,7 @@ module InferenceOperations =
             { state with Query = Some value }
 
         [<CustomOperation("input")>]
-        member _.Input(state: InferenceInferenceRequest, value: System.Text.Json.JsonElement) =
+        member _.Input(state: InferenceInferenceRequest, value: string list) =
             { state with Input = value }
 
         [<CustomOperation("inputType")>]
@@ -337,7 +337,7 @@ module InferenceOperations =
             { req with Timeout = Some value }
         let withQuery (value: string) (req: InferenceInferenceRequest) =
             { req with Query = Some value }
-        let withInput (value: System.Text.Json.JsonElement) (req: InferenceInferenceRequest) =
+        let withInput (value: string list) (req: InferenceInferenceRequest) =
             { req with Input = value }
         let withInputType (value: string) (req: InferenceInferenceRequest) =
             { req with InputType = Some value }
@@ -348,7 +348,7 @@ module InferenceOperations =
         TaskType: Types.TaskType
         InferenceId: Types.Id
         Timeout: Types.Duration option
-        Document: obj
+        Document: Types.InferenceEndpoint
     }
 
         with
@@ -2569,7 +2569,7 @@ module InferenceOperations =
         InferenceId: Types.Id
         Timeout: Types.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("input")>]
-        Input: System.Text.Json.JsonElement
+        Input: string list
         [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
         TaskSettings: Types.TaskSettings option
     }
@@ -2609,7 +2609,7 @@ module InferenceOperations =
             { state with Timeout = Some value }
 
         [<CustomOperation("input")>]
-        member _.Input(state: InferenceSparseEmbeddingRequest, value: System.Text.Json.JsonElement) =
+        member _.Input(state: InferenceSparseEmbeddingRequest, value: string list) =
             { state with Input = value }
 
         [<CustomOperation("taskSettings")>]
@@ -2621,7 +2621,7 @@ module InferenceOperations =
     module SparseEmbedding =
         let withTimeout (value: Types.Duration) (req: InferenceSparseEmbeddingRequest) =
             { req with Timeout = Some value }
-        let withInput (value: System.Text.Json.JsonElement) (req: InferenceSparseEmbeddingRequest) =
+        let withInput (value: string list) (req: InferenceSparseEmbeddingRequest) =
             { req with Input = value }
         let withTaskSettings (value: Types.TaskSettings) (req: InferenceSparseEmbeddingRequest) =
             { req with TaskSettings = Some value }
@@ -2630,7 +2630,7 @@ module InferenceOperations =
         InferenceId: Types.Id
         Timeout: Types.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("input")>]
-        Input: System.Text.Json.JsonElement
+        Input: string list
         [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
         TaskSettings: Types.TaskSettings option
     }
@@ -2670,7 +2670,7 @@ module InferenceOperations =
             { state with Timeout = Some value }
 
         [<CustomOperation("input")>]
-        member _.Input(state: InferenceStreamCompletionRequest, value: System.Text.Json.JsonElement) =
+        member _.Input(state: InferenceStreamCompletionRequest, value: string list) =
             { state with Input = value }
 
         [<CustomOperation("taskSettings")>]
@@ -2682,7 +2682,7 @@ module InferenceOperations =
     module StreamCompletion =
         let withTimeout (value: Types.Duration) (req: InferenceStreamCompletionRequest) =
             { req with Timeout = Some value }
-        let withInput (value: System.Text.Json.JsonElement) (req: InferenceStreamCompletionRequest) =
+        let withInput (value: string list) (req: InferenceStreamCompletionRequest) =
             { req with Input = value }
         let withTaskSettings (value: Types.TaskSettings) (req: InferenceStreamCompletionRequest) =
             { req with TaskSettings = Some value }
@@ -2691,7 +2691,7 @@ module InferenceOperations =
         InferenceId: Types.Id
         Timeout: Types.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("input")>]
-        Input: System.Text.Json.JsonElement
+        Input: string list
         [<System.Text.Json.Serialization.JsonPropertyName("input_type")>]
         InputType: string option
         [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
@@ -2734,7 +2734,7 @@ module InferenceOperations =
             { state with Timeout = Some value }
 
         [<CustomOperation("input")>]
-        member _.Input(state: InferenceTextEmbeddingRequest, value: System.Text.Json.JsonElement) =
+        member _.Input(state: InferenceTextEmbeddingRequest, value: string list) =
             { state with Input = value }
 
         [<CustomOperation("inputType")>]
@@ -2750,7 +2750,7 @@ module InferenceOperations =
     module TextEmbedding =
         let withTimeout (value: Types.Duration) (req: InferenceTextEmbeddingRequest) =
             { req with Timeout = Some value }
-        let withInput (value: System.Text.Json.JsonElement) (req: InferenceTextEmbeddingRequest) =
+        let withInput (value: string list) (req: InferenceTextEmbeddingRequest) =
             { req with Input = value }
         let withInputType (value: string) (req: InferenceTextEmbeddingRequest) =
             { req with InputType = Some value }
@@ -2760,7 +2760,7 @@ module InferenceOperations =
     type InferenceUpdateRequest = {
         InferenceId: Types.Id
         TaskType: Types.TaskType
-        Document: obj
+        Document: Types.InferenceEndpoint
     }
 
         with

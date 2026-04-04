@@ -11,10 +11,7 @@ open Fes.Generated.Builders
 
 [<Fact>]
 let ``Query.bool wraps BoolQuery in QueryContainer.Bool`` () =
-    let bq : Types.BoolQuery = {
-        Filter = None; MinimumShouldMatch = None
-        Must = None; MustNot = None; Should = None
-    }
+    let bq = Types.BoolQuery.empty
     let q = Query.bool bq
     // Verify it's the Bool case by serialising — should contain "bool" key
     let json = Fes.Json.serialize q
@@ -31,10 +28,7 @@ let ``Query.match' creates Match case with field`` () =
 
 [<Fact>]
 let ``Query.term wraps TermQuery with field name`` () =
-    let tq : Types.TermQuery = {
-        CaseInsensitive = None
-        Value = Unchecked.defaultof<_>
-    }
+    let tq = Types.TermQuery.empty
     let q = Query.term "status" tq
     let json = Fes.Json.serialize q
     json |> should haveSubstring "\"term\""
@@ -55,7 +49,7 @@ let ``matchQuery CE sets query field`` () =
 [<Fact>]
 let ``matchQuery CE sets optional fields`` () =
     let mq : Types.MatchQuery = matchQuery {
-        query (Unchecked.defaultof<_>)
+        query (System.Text.Json.JsonDocument.Parse("\"test\"").RootElement)
         analyzer "english"
     }
     mq.Analyzer |> should equal (Some "english")

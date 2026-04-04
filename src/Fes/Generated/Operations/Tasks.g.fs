@@ -14,7 +14,7 @@ module TasksOperations =
 
     type TasksCancelRequest = {
         TaskId: Types.TaskId
-        Actions: System.Text.Json.JsonElement option
+        Actions: string list option
         Nodes: string list option
         ParentTaskId: string option
         WaitForCompletion: bool option
@@ -54,7 +54,7 @@ module TasksOperations =
             { state with TaskId = value }
 
         [<CustomOperation("actions")>]
-        member _.Actions(state: TasksCancelRequest, value: System.Text.Json.JsonElement) =
+        member _.Actions(state: TasksCancelRequest, value: string list) =
             { state with Actions = Some value }
 
         [<CustomOperation("nodes")>]
@@ -72,7 +72,7 @@ module TasksOperations =
     let tasksCancelRequest = TasksCancelRequestBuilder()
 
     module Cancel =
-        let withActions (value: System.Text.Json.JsonElement) (req: TasksCancelRequest) =
+        let withActions (value: string list) (req: TasksCancelRequest) =
             { req with Actions = Some value }
         let withNodes (value: string list) (req: TasksCancelRequest) =
             { req with Nodes = Some value }
@@ -133,7 +133,7 @@ module TasksOperations =
             { req with WaitForCompletion = Some value }
 
     type TasksListRequest = {
-        Actions: System.Text.Json.JsonElement option
+        Actions: string list option
         Detailed: bool option
         GroupBy: Types.GroupBy option
         Nodes: Types.NodeIds option
@@ -177,7 +177,7 @@ module TasksOperations =
             }
 
         [<CustomOperation("actions")>]
-        member _.Actions(state: TasksListRequest, value: System.Text.Json.JsonElement) =
+        member _.Actions(state: TasksListRequest, value: string list) =
             { state with Actions = Some value }
 
         [<CustomOperation("detailed")>]
@@ -207,7 +207,7 @@ module TasksOperations =
     let tasksListRequest = TasksListRequestBuilder()
 
     module List =
-        let withActions (value: System.Text.Json.JsonElement) (req: TasksListRequest) =
+        let withActions (value: string list) (req: TasksListRequest) =
             { req with Actions = Some value }
         let withDetailed (value: bool) (req: TasksListRequest) =
             { req with Detailed = Some value }

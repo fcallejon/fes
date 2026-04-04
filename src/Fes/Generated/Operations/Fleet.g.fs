@@ -146,7 +146,7 @@ module FleetOperations =
         TypedKeys: bool option
         WaitForCheckpoints: Types.Checkpoint list option
         AllowPartialSearchResults: bool option
-        Document: obj
+        Document: Types.GlobalMsearchRequestItem list
     }
 
         with
@@ -361,7 +361,7 @@ module FleetOperations =
         Q: string option
         Size: Types.Integer option
         From: Types.Integer option
-        Sort: System.Text.Json.JsonElement option
+        Sort: string list option
         WaitForCheckpoints: Types.Checkpoint list option
         AllowPartialSearchResults: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("aggregations")>]
@@ -391,7 +391,7 @@ module FleetOperations =
         [<System.Text.Json.Serialization.JsonPropertyName("query")>]
         Query: Types.QueryContainer option
         [<System.Text.Json.Serialization.JsonPropertyName("rescore")>]
-        Rescore: System.Text.Json.JsonElement option
+        Rescore: Types.Rescore list option
         [<System.Text.Json.Serialization.JsonPropertyName("script_fields")>]
         ScriptFields: Map<string, Types.ScriptField> option
         [<System.Text.Json.Serialization.JsonPropertyName("search_after")>]
@@ -732,7 +732,7 @@ module FleetOperations =
             { state with From = Some value }
 
         [<CustomOperation("sort")>]
-        member _.Sort(state: FleetSearchRequest, value: System.Text.Json.JsonElement) =
+        member _.Sort(state: FleetSearchRequest, value: string list) =
             { state with Sort = Some value }
 
         [<CustomOperation("waitForCheckpoints")>]
@@ -796,7 +796,7 @@ module FleetOperations =
             { state with Query = Some value }
 
         [<CustomOperation("rescore")>]
-        member _.Rescore(state: FleetSearchRequest, value: System.Text.Json.JsonElement) =
+        member _.Rescore(state: FleetSearchRequest, value: Types.Rescore list) =
             { state with Rescore = Some value }
 
         [<CustomOperation("scriptFields")>]
@@ -950,7 +950,7 @@ module FleetOperations =
             { req with Size = Some value }
         let withFrom (value: Types.Integer) (req: FleetSearchRequest) =
             { req with From = Some value }
-        let withSort (value: System.Text.Json.JsonElement) (req: FleetSearchRequest) =
+        let withSort (value: string list) (req: FleetSearchRequest) =
             { req with Sort = Some value }
         let withWaitForCheckpoints (value: Types.Checkpoint list) (req: FleetSearchRequest) =
             { req with WaitForCheckpoints = Some value }
@@ -982,7 +982,7 @@ module FleetOperations =
             { req with Profile = Some value }
         let withQuery (value: Types.QueryContainer) (req: FleetSearchRequest) =
             { req with Query = Some value }
-        let withRescore (value: System.Text.Json.JsonElement) (req: FleetSearchRequest) =
+        let withRescore (value: Types.Rescore list) (req: FleetSearchRequest) =
             { req with Rescore = Some value }
         let withScriptFields (value: Map<string, Types.ScriptField>) (req: FleetSearchRequest) =
             { req with ScriptFields = Some value }

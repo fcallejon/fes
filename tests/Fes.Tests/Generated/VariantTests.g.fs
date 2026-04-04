@@ -8,76 +8,10 @@ open Fes
 open Fes.Generated
 
 [<Fact>]
-let ``OperationContainer.Index serialises with index key`` () =
-    let value = Types.OperationContainer.Index (System.Text.Json.JsonDocument.Parse("{}").RootElement)
-    let json = Json.serialize value
-    json |> should haveSubstring "\"index\""
-
-[<Fact>]
-let ``OperationContainer.Create serialises with create key`` () =
-    let value = Types.OperationContainer.Create (System.Text.Json.JsonDocument.Parse("{}").RootElement)
-    let json = Json.serialize value
-    json |> should haveSubstring "\"create\""
-
-[<Fact>]
-let ``OperationContainer.Delete serialises with delete key`` () =
-    let value = Types.OperationContainer.Delete (System.Text.Json.JsonDocument.Parse("{}").RootElement)
-    let json = Json.serialize value
-    json |> should haveSubstring "\"delete\""
-
-[<Fact>]
 let ``TransformContainer.Chain serialises with chain key`` () =
     let value = Types.TransformContainer.Chain []
     let json = Json.serialize value
     json |> should haveSubstring "\"chain\""
-
-[<Fact>]
-let ``AggregationContainer.Avg serialises with avg key`` () =
-    let value = Types.AggregationContainer.Avg (System.Text.Json.JsonDocument.Parse("{}").RootElement)
-    let json = Json.serialize value
-    json |> should haveSubstring "\"avg\""
-
-[<Fact>]
-let ``AggregationContainer.AvgBucket serialises with avg_bucket key`` () =
-    let value = Types.AggregationContainer.AvgBucket (System.Text.Json.JsonDocument.Parse("{}").RootElement)
-    let json = Json.serialize value
-    json |> should haveSubstring "\"avg_bucket\""
-
-[<Fact>]
-let ``AggregationContainer.CartesianBounds serialises with cartesian_bounds key`` () =
-    let value = Types.AggregationContainer.CartesianBounds (System.Text.Json.JsonDocument.Parse("{}").RootElement)
-    let json = Json.serialize value
-    json |> should haveSubstring "\"cartesian_bounds\""
-
-[<Fact>]
-let ``AggregationContainer.CartesianCentroid serialises with cartesian_centroid key`` () =
-    let value = Types.AggregationContainer.CartesianCentroid (System.Text.Json.JsonDocument.Parse("{}").RootElement)
-    let json = Json.serialize value
-    json |> should haveSubstring "\"cartesian_centroid\""
-
-[<Fact>]
-let ``AggregationContainer.ChangePoint serialises with change_point key`` () =
-    let value = Types.AggregationContainer.ChangePoint (System.Text.Json.JsonDocument.Parse("{}").RootElement)
-    let json = Json.serialize value
-    json |> should haveSubstring "\"change_point\""
-
-[<Fact>]
-let ``AggregationContainer.CumulativeCardinality serialises with cumulative_cardinality key`` () =
-    let value = Types.AggregationContainer.CumulativeCardinality (System.Text.Json.JsonDocument.Parse("{}").RootElement)
-    let json = Json.serialize value
-    json |> should haveSubstring "\"cumulative_cardinality\""
-
-[<Fact>]
-let ``AggregationContainer.CumulativeSum serialises with cumulative_sum key`` () =
-    let value = Types.AggregationContainer.CumulativeSum (System.Text.Json.JsonDocument.Parse("{}").RootElement)
-    let json = Json.serialize value
-    json |> should haveSubstring "\"cumulative_sum\""
-
-[<Fact>]
-let ``AggregationContainer.Derivative serialises with derivative key`` () =
-    let value = Types.AggregationContainer.Derivative (System.Text.Json.JsonDocument.Parse("{}").RootElement)
-    let json = Json.serialize value
-    json |> should haveSubstring "\"derivative\""
 
 [<Fact>]
 let ``AggregationContainer.Global serialises with global key`` () =
@@ -86,94 +20,10 @@ let ``AggregationContainer.Global serialises with global key`` () =
     json |> should haveSubstring "\"global\""
 
 [<Fact>]
-let ``AggregationContainer.Max serialises with max key`` () =
-    let value = Types.AggregationContainer.Max (System.Text.Json.JsonDocument.Parse("{}").RootElement)
-    let json = Json.serialize value
-    json |> should haveSubstring "\"max\""
-
-[<Fact>]
-let ``AggregationContainer.MaxBucket serialises with max_bucket key`` () =
-    let value = Types.AggregationContainer.MaxBucket (System.Text.Json.JsonDocument.Parse("{}").RootElement)
-    let json = Json.serialize value
-    json |> should haveSubstring "\"max_bucket\""
-
-[<Fact>]
-let ``AggregationContainer.Min serialises with min key`` () =
-    let value = Types.AggregationContainer.Min (System.Text.Json.JsonDocument.Parse("{}").RootElement)
-    let json = Json.serialize value
-    json |> should haveSubstring "\"min\""
-
-[<Fact>]
-let ``AggregationContainer.MinBucket serialises with min_bucket key`` () =
-    let value = Types.AggregationContainer.MinBucket (System.Text.Json.JsonDocument.Parse("{}").RootElement)
-    let json = Json.serialize value
-    json |> should haveSubstring "\"min_bucket\""
-
-[<Fact>]
-let ``AggregationContainer.Stats serialises with stats key`` () =
-    let value = Types.AggregationContainer.Stats (System.Text.Json.JsonDocument.Parse("{}").RootElement)
-    let json = Json.serialize value
-    json |> should haveSubstring "\"stats\""
-
-[<Fact>]
-let ``AggregationContainer.StatsBucket serialises with stats_bucket key`` () =
-    let value = Types.AggregationContainer.StatsBucket (System.Text.Json.JsonDocument.Parse("{}").RootElement)
-    let json = Json.serialize value
-    json |> should haveSubstring "\"stats_bucket\""
-
-[<Fact>]
-let ``AggregationContainer.Sum serialises with sum key`` () =
-    let value = Types.AggregationContainer.Sum (System.Text.Json.JsonDocument.Parse("{}").RootElement)
-    let json = Json.serialize value
-    json |> should haveSubstring "\"sum\""
-
-[<Fact>]
-let ``AggregationContainer.SumBucket serialises with sum_bucket key`` () =
-    let value = Types.AggregationContainer.SumBucket (System.Text.Json.JsonDocument.Parse("{}").RootElement)
-    let json = Json.serialize value
-    json |> should haveSubstring "\"sum_bucket\""
-
-[<Fact>]
-let ``AggregationContainer.ValueCount serialises with value_count key`` () =
-    let value = Types.AggregationContainer.ValueCount (System.Text.Json.JsonDocument.Parse("{}").RootElement)
-    let json = Json.serialize value
-    json |> should haveSubstring "\"value_count\""
-
-[<Fact>]
-let ``ChangeType.Dip serialises with dip key`` () =
-    let value = Types.ChangeType.Dip (System.Text.Json.JsonDocument.Parse("{}").RootElement)
-    let json = Json.serialize value
-    json |> should haveSubstring "\"dip\""
-
-[<Fact>]
-let ``ChangeType.DistributionChange serialises with distribution_change key`` () =
-    let value = Types.ChangeType.DistributionChange (System.Text.Json.JsonDocument.Parse("{}").RootElement)
-    let json = Json.serialize value
-    json |> should haveSubstring "\"distribution_change\""
-
-[<Fact>]
-let ``ChangeType.Spike serialises with spike key`` () =
-    let value = Types.ChangeType.Spike (System.Text.Json.JsonDocument.Parse("{}").RootElement)
-    let json = Json.serialize value
-    json |> should haveSubstring "\"spike\""
-
-[<Fact>]
 let ``ChangeType.Stationary serialises with stationary key`` () =
     let value = Types.ChangeType.Stationary (System.Text.Json.JsonDocument.Parse("{}").RootElement)
     let json = Json.serialize value
     json |> should haveSubstring "\"stationary\""
-
-[<Fact>]
-let ``ChangeType.StepChange serialises with step_change key`` () =
-    let value = Types.ChangeType.StepChange (System.Text.Json.JsonDocument.Parse("{}").RootElement)
-    let json = Json.serialize value
-    json |> should haveSubstring "\"step_change\""
-
-[<Fact>]
-let ``CompositeAggregationSource.Terms serialises with terms key`` () =
-    let value = Types.CompositeAggregationSource.Terms (System.Text.Json.JsonDocument.Parse("{}").RootElement)
-    let json = Json.serialize value
-    json |> should haveSubstring "\"terms\""
 
 [<Fact>]
 let ``MultiTermLookup.Field serialises with field key`` () =
@@ -210,24 +60,6 @@ let ``PinnedQuery.Docs serialises with docs key`` () =
     let value = Types.PinnedQuery.Docs []
     let json = Json.serialize value
     json |> should haveSubstring "\"docs\""
-
-[<Fact>]
-let ``QueryContainer.MatchAll serialises with match_all key`` () =
-    let value = Types.QueryContainer.MatchAll (System.Text.Json.JsonDocument.Parse("{}").RootElement)
-    let json = Json.serialize value
-    json |> should haveSubstring "\"match_all\""
-
-[<Fact>]
-let ``QueryContainer.MatchNone serialises with match_none key`` () =
-    let value = Types.QueryContainer.MatchNone (System.Text.Json.JsonDocument.Parse("{}").RootElement)
-    let json = Json.serialize value
-    json |> should haveSubstring "\"match_none\""
-
-[<Fact>]
-let ``QueryContainer.Terms serialises with terms key`` () =
-    let value = Types.QueryContainer.Terms (System.Text.Json.JsonDocument.Parse("{}").RootElement)
-    let json = Json.serialize value
-    json |> should haveSubstring "\"terms\""
 
 [<Fact>]
 let ``SparseVectorQuery.QueryVector serialises with query_vector key`` () =
@@ -374,42 +206,6 @@ let ``DatabaseConfigurationFull.Ipinfo serialises with ipinfo key`` () =
     json |> should haveSubstring "\"ipinfo\""
 
 [<Fact>]
-let ``ProcessorContainer.Drop serialises with drop key`` () =
-    let value = Types.ProcessorContainer.Drop (System.Text.Json.JsonDocument.Parse("{}").RootElement)
-    let json = Json.serialize value
-    json |> should haveSubstring "\"drop\""
-
-[<Fact>]
-let ``ProcessorContainer.Terminate serialises with terminate key`` () =
-    let value = Types.ProcessorContainer.Terminate (System.Text.Json.JsonDocument.Parse("{}").RootElement)
-    let json = Json.serialize value
-    json |> should haveSubstring "\"terminate\""
-
-[<Fact>]
-let ``TokenizationConfigContainer.Bert serialises with bert key`` () =
-    let value = Types.TokenizationConfigContainer.Bert (System.Text.Json.JsonDocument.Parse("{}").RootElement)
-    let json = Json.serialize value
-    json |> should haveSubstring "\"bert\""
-
-[<Fact>]
-let ``TokenizationConfigContainer.BertJa serialises with bert_ja key`` () =
-    let value = Types.TokenizationConfigContainer.BertJa (System.Text.Json.JsonDocument.Parse("{}").RootElement)
-    let json = Json.serialize value
-    json |> should haveSubstring "\"bert_ja\""
-
-[<Fact>]
-let ``TokenizationConfigContainer.Mpnet serialises with mpnet key`` () =
-    let value = Types.TokenizationConfigContainer.Mpnet (System.Text.Json.JsonDocument.Parse("{}").RootElement)
-    let json = Json.serialize value
-    json |> should haveSubstring "\"mpnet\""
-
-[<Fact>]
-let ``TokenizationConfigContainer.XlmRoberta serialises with xlm_roberta key`` () =
-    let value = Types.TokenizationConfigContainer.XlmRoberta (System.Text.Json.JsonDocument.Parse("{}").RootElement)
-    let json = Json.serialize value
-    json |> should haveSubstring "\"xlm_roberta\""
-
-[<Fact>]
 let ``RoleMappingRule.Any serialises with any key`` () =
     let value = Types.RoleMappingRule.Any []
     let json = Json.serialize value
@@ -420,48 +216,6 @@ let ``RoleMappingRule.All serialises with all key`` () =
     let value = Types.RoleMappingRule.All []
     let json = Json.serialize value
     json |> should haveSubstring "\"all\""
-
-[<Fact>]
-let ``ApiKeyAggregationContainer.ValueCount serialises with value_count key`` () =
-    let value = Types.ApiKeyAggregationContainer.ValueCount (System.Text.Json.JsonDocument.Parse("{}").RootElement)
-    let json = Json.serialize value
-    json |> should haveSubstring "\"value_count\""
-
-[<Fact>]
-let ``ApiKeyQueryContainer.MatchAll serialises with match_all key`` () =
-    let value = Types.ApiKeyQueryContainer.MatchAll (System.Text.Json.JsonDocument.Parse("{}").RootElement)
-    let json = Json.serialize value
-    json |> should haveSubstring "\"match_all\""
-
-[<Fact>]
-let ``ApiKeyQueryContainer.Terms serialises with terms key`` () =
-    let value = Types.ApiKeyQueryContainer.Terms (System.Text.Json.JsonDocument.Parse("{}").RootElement)
-    let json = Json.serialize value
-    json |> should haveSubstring "\"terms\""
-
-[<Fact>]
-let ``RoleQueryContainer.MatchAll serialises with match_all key`` () =
-    let value = Types.RoleQueryContainer.MatchAll (System.Text.Json.JsonDocument.Parse("{}").RootElement)
-    let json = Json.serialize value
-    json |> should haveSubstring "\"match_all\""
-
-[<Fact>]
-let ``RoleQueryContainer.Terms serialises with terms key`` () =
-    let value = Types.RoleQueryContainer.Terms (System.Text.Json.JsonDocument.Parse("{}").RootElement)
-    let json = Json.serialize value
-    json |> should haveSubstring "\"terms\""
-
-[<Fact>]
-let ``UserQueryContainer.MatchAll serialises with match_all key`` () =
-    let value = Types.UserQueryContainer.MatchAll (System.Text.Json.JsonDocument.Parse("{}").RootElement)
-    let json = Json.serialize value
-    json |> should haveSubstring "\"match_all\""
-
-[<Fact>]
-let ``UserQueryContainer.Terms serialises with terms key`` () =
-    let value = Types.UserQueryContainer.Terms (System.Text.Json.JsonDocument.Parse("{}").RootElement)
-    let json = Json.serialize value
-    json |> should haveSubstring "\"terms\""
 
 [<Fact>]
 let ``ConditionContainer.Always serialises with always key`` () =

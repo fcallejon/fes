@@ -145,7 +145,7 @@ module AutoscalingOperations =
         Name: Types.Name
         MasterTimeout: Types.Duration option
         Timeout: Types.Duration option
-        Document: obj
+        Document: Types.AutoscalingPolicy
     }
 
         with

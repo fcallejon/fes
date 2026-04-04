@@ -355,10 +355,13 @@ module GlobalSearchTypesBuilders =
                 Fuzzy = None
                 Regex = None
                 SkipDuplicates = None
+                Field = Unchecked.defaultof<_>
+                Analyzer = None
+                Size = None
             }
 
         [<CustomOperation("contexts")>]
-        member _.Contexts(state: Types.CompletionSuggester, value: Map<Types.Field, System.Text.Json.JsonElement>) =
+        member _.Contexts(state: Types.CompletionSuggester, value: Map<Types.Field, Types.CompletionContext list>) =
             { state with Contexts = Some value }
 
         [<CustomOperation("fuzzy")>]
@@ -372,6 +375,18 @@ module GlobalSearchTypesBuilders =
         [<CustomOperation("skipDuplicates")>]
         member _.SkipDuplicates(state: Types.CompletionSuggester, value: bool) =
             { state with SkipDuplicates = Some value }
+
+        [<CustomOperation("field")>]
+        member _.Field(state: Types.CompletionSuggester, value: Types.Field) =
+            { state with Field = value }
+
+        [<CustomOperation("analyzer")>]
+        member _.Analyzer(state: Types.CompletionSuggester, value: string) =
+            { state with Analyzer = Some value }
+
+        [<CustomOperation("size")>]
+        member _.Size(state: Types.CompletionSuggester, value: Types.Integer) =
+            { state with Size = Some value }
 
     let completionSuggester = CompletionSuggesterBuilder()
 
@@ -611,7 +626,7 @@ module GlobalSearchTypesBuilders =
             { state with Field = value }
 
         [<CustomOperation("innerHits")>]
-        member _.InnerHits(state: Types.FieldCollapse, value: System.Text.Json.JsonElement) =
+        member _.InnerHits(state: Types.FieldCollapse, value: Types.InnerHits list) =
             { state with InnerHits = Some value }
 
         [<CustomOperation("maxConcurrentGroupSearches")>]
@@ -634,6 +649,128 @@ module GlobalSearchTypesBuilders =
 
         let term (value: Types.TermSuggester) =
             Types.FieldSuggester.Term value
+
+    type HighlightBuilder() =
+        member _.Yield(_: unit) : Types.Highlight =
+            {
+                Encoder = None
+                Fields = Unchecked.defaultof<_>
+                Type = None
+                BoundaryChars = None
+                BoundaryMaxScan = None
+                BoundaryScanner = None
+                BoundaryScannerLocale = None
+                ForceSource = None
+                Fragmenter = None
+                FragmentSize = None
+                HighlightFilter = None
+                HighlightQuery = None
+                MaxFragmentLength = None
+                MaxAnalyzedOffset = None
+                NoMatchSize = None
+                NumberOfFragments = None
+                Options = None
+                Order = None
+                PhraseLimit = None
+                PostTags = None
+                PreTags = None
+                RequireFieldMatch = None
+                TagsSchema = None
+            }
+
+        [<CustomOperation("encoder")>]
+        member _.Encoder(state: Types.Highlight, value: Types.HighlighterEncoder) =
+            { state with Encoder = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.Highlight, value: System.Text.Json.JsonElement) =
+            { state with Fields = value }
+
+        [<CustomOperation("type'")>]
+        member _.Type(state: Types.Highlight, value: Types.HighlighterType) =
+            { state with Type = Some value }
+
+        [<CustomOperation("boundaryChars")>]
+        member _.BoundaryChars(state: Types.Highlight, value: string) =
+            { state with BoundaryChars = Some value }
+
+        [<CustomOperation("boundaryMaxScan")>]
+        member _.BoundaryMaxScan(state: Types.Highlight, value: Types.Integer) =
+            { state with BoundaryMaxScan = Some value }
+
+        [<CustomOperation("boundaryScanner")>]
+        member _.BoundaryScanner(state: Types.Highlight, value: Types.BoundaryScanner) =
+            { state with BoundaryScanner = Some value }
+
+        [<CustomOperation("boundaryScannerLocale")>]
+        member _.BoundaryScannerLocale(state: Types.Highlight, value: string) =
+            { state with BoundaryScannerLocale = Some value }
+
+        [<CustomOperation("forceSource")>]
+        member _.ForceSource(state: Types.Highlight, value: bool) =
+            { state with ForceSource = Some value }
+
+        [<CustomOperation("fragmenter")>]
+        member _.Fragmenter(state: Types.Highlight, value: Types.HighlighterFragmenter) =
+            { state with Fragmenter = Some value }
+
+        [<CustomOperation("fragmentSize")>]
+        member _.FragmentSize(state: Types.Highlight, value: Types.Integer) =
+            { state with FragmentSize = Some value }
+
+        [<CustomOperation("highlightFilter")>]
+        member _.HighlightFilter(state: Types.Highlight, value: bool) =
+            { state with HighlightFilter = Some value }
+
+        [<CustomOperation("highlightQuery")>]
+        member _.HighlightQuery(state: Types.Highlight, value: Types.QueryContainer) =
+            { state with HighlightQuery = Some value }
+
+        [<CustomOperation("maxFragmentLength")>]
+        member _.MaxFragmentLength(state: Types.Highlight, value: Types.Integer) =
+            { state with MaxFragmentLength = Some value }
+
+        [<CustomOperation("maxAnalyzedOffset")>]
+        member _.MaxAnalyzedOffset(state: Types.Highlight, value: Types.Integer) =
+            { state with MaxAnalyzedOffset = Some value }
+
+        [<CustomOperation("noMatchSize")>]
+        member _.NoMatchSize(state: Types.Highlight, value: Types.Integer) =
+            { state with NoMatchSize = Some value }
+
+        [<CustomOperation("numberOfFragments")>]
+        member _.NumberOfFragments(state: Types.Highlight, value: Types.Integer) =
+            { state with NumberOfFragments = Some value }
+
+        [<CustomOperation("options")>]
+        member _.Options(state: Types.Highlight, value: Map<string, System.Text.Json.JsonElement>) =
+            { state with Options = Some value }
+
+        [<CustomOperation("order")>]
+        member _.Order(state: Types.Highlight, value: Types.HighlighterOrder) =
+            { state with Order = Some value }
+
+        [<CustomOperation("phraseLimit")>]
+        member _.PhraseLimit(state: Types.Highlight, value: Types.Integer) =
+            { state with PhraseLimit = Some value }
+
+        [<CustomOperation("postTags")>]
+        member _.PostTags(state: Types.Highlight, value: string list) =
+            { state with PostTags = Some value }
+
+        [<CustomOperation("preTags")>]
+        member _.PreTags(state: Types.Highlight, value: string list) =
+            { state with PreTags = Some value }
+
+        [<CustomOperation("requireFieldMatch")>]
+        member _.RequireFieldMatch(state: Types.Highlight, value: bool) =
+            { state with RequireFieldMatch = Some value }
+
+        [<CustomOperation("tagsSchema")>]
+        member _.TagsSchema(state: Types.Highlight, value: Types.HighlighterTagsSchema) =
+            { state with TagsSchema = Some value }
+
+    let highlight = HighlightBuilder()
 
     type HighlightBaseBuilder() =
         member _.Yield(_: unit) : Types.HighlightBase =
@@ -752,6 +889,27 @@ module GlobalSearchTypesBuilders =
             {
                 FragmentOffset = None
                 MatchedFields = None
+                Type = None
+                BoundaryChars = None
+                BoundaryMaxScan = None
+                BoundaryScanner = None
+                BoundaryScannerLocale = None
+                ForceSource = None
+                Fragmenter = None
+                FragmentSize = None
+                HighlightFilter = None
+                HighlightQuery = None
+                MaxFragmentLength = None
+                MaxAnalyzedOffset = None
+                NoMatchSize = None
+                NumberOfFragments = None
+                Options = None
+                Order = None
+                PhraseLimit = None
+                PostTags = None
+                PreTags = None
+                RequireFieldMatch = None
+                TagsSchema = None
             }
 
         [<CustomOperation("fragmentOffset")>]
@@ -761,6 +919,90 @@ module GlobalSearchTypesBuilders =
         [<CustomOperation("matchedFields")>]
         member _.MatchedFields(state: Types.HighlightField, value: Types.Fields) =
             { state with MatchedFields = Some value }
+
+        [<CustomOperation("type'")>]
+        member _.Type(state: Types.HighlightField, value: Types.HighlighterType) =
+            { state with Type = Some value }
+
+        [<CustomOperation("boundaryChars")>]
+        member _.BoundaryChars(state: Types.HighlightField, value: string) =
+            { state with BoundaryChars = Some value }
+
+        [<CustomOperation("boundaryMaxScan")>]
+        member _.BoundaryMaxScan(state: Types.HighlightField, value: Types.Integer) =
+            { state with BoundaryMaxScan = Some value }
+
+        [<CustomOperation("boundaryScanner")>]
+        member _.BoundaryScanner(state: Types.HighlightField, value: Types.BoundaryScanner) =
+            { state with BoundaryScanner = Some value }
+
+        [<CustomOperation("boundaryScannerLocale")>]
+        member _.BoundaryScannerLocale(state: Types.HighlightField, value: string) =
+            { state with BoundaryScannerLocale = Some value }
+
+        [<CustomOperation("forceSource")>]
+        member _.ForceSource(state: Types.HighlightField, value: bool) =
+            { state with ForceSource = Some value }
+
+        [<CustomOperation("fragmenter")>]
+        member _.Fragmenter(state: Types.HighlightField, value: Types.HighlighterFragmenter) =
+            { state with Fragmenter = Some value }
+
+        [<CustomOperation("fragmentSize")>]
+        member _.FragmentSize(state: Types.HighlightField, value: Types.Integer) =
+            { state with FragmentSize = Some value }
+
+        [<CustomOperation("highlightFilter")>]
+        member _.HighlightFilter(state: Types.HighlightField, value: bool) =
+            { state with HighlightFilter = Some value }
+
+        [<CustomOperation("highlightQuery")>]
+        member _.HighlightQuery(state: Types.HighlightField, value: Types.QueryContainer) =
+            { state with HighlightQuery = Some value }
+
+        [<CustomOperation("maxFragmentLength")>]
+        member _.MaxFragmentLength(state: Types.HighlightField, value: Types.Integer) =
+            { state with MaxFragmentLength = Some value }
+
+        [<CustomOperation("maxAnalyzedOffset")>]
+        member _.MaxAnalyzedOffset(state: Types.HighlightField, value: Types.Integer) =
+            { state with MaxAnalyzedOffset = Some value }
+
+        [<CustomOperation("noMatchSize")>]
+        member _.NoMatchSize(state: Types.HighlightField, value: Types.Integer) =
+            { state with NoMatchSize = Some value }
+
+        [<CustomOperation("numberOfFragments")>]
+        member _.NumberOfFragments(state: Types.HighlightField, value: Types.Integer) =
+            { state with NumberOfFragments = Some value }
+
+        [<CustomOperation("options")>]
+        member _.Options(state: Types.HighlightField, value: Map<string, System.Text.Json.JsonElement>) =
+            { state with Options = Some value }
+
+        [<CustomOperation("order")>]
+        member _.Order(state: Types.HighlightField, value: Types.HighlighterOrder) =
+            { state with Order = Some value }
+
+        [<CustomOperation("phraseLimit")>]
+        member _.PhraseLimit(state: Types.HighlightField, value: Types.Integer) =
+            { state with PhraseLimit = Some value }
+
+        [<CustomOperation("postTags")>]
+        member _.PostTags(state: Types.HighlightField, value: string list) =
+            { state with PostTags = Some value }
+
+        [<CustomOperation("preTags")>]
+        member _.PreTags(state: Types.HighlightField, value: string list) =
+            { state with PreTags = Some value }
+
+        [<CustomOperation("requireFieldMatch")>]
+        member _.RequireFieldMatch(state: Types.HighlightField, value: bool) =
+            { state with RequireFieldMatch = Some value }
+
+        [<CustomOperation("tagsSchema")>]
+        member _.TagsSchema(state: Types.HighlightField, value: Types.HighlighterTagsSchema) =
+            { state with TagsSchema = Some value }
 
     let highlightField = HighlightFieldBuilder()
 
@@ -1006,6 +1248,9 @@ module GlobalSearchTypesBuilders =
                 ShardSize = None
                 Smoothing = None
                 TokenLimit = None
+                Field = Unchecked.defaultof<_>
+                Analyzer = None
+                Size = None
             }
 
         [<CustomOperation("collate")>]
@@ -1055,6 +1300,18 @@ module GlobalSearchTypesBuilders =
         [<CustomOperation("tokenLimit")>]
         member _.TokenLimit(state: Types.PhraseSuggester, value: Types.Integer) =
             { state with TokenLimit = Some value }
+
+        [<CustomOperation("field")>]
+        member _.Field(state: Types.PhraseSuggester, value: Types.Field) =
+            { state with Field = value }
+
+        [<CustomOperation("analyzer")>]
+        member _.Analyzer(state: Types.PhraseSuggester, value: string) =
+            { state with Analyzer = Some value }
+
+        [<CustomOperation("size")>]
+        member _.Size(state: Types.PhraseSuggester, value: Types.Integer) =
+            { state with Size = Some value }
 
     let phraseSuggester = PhraseSuggesterBuilder()
 
@@ -1189,7 +1446,7 @@ module GlobalSearchTypesBuilders =
             { state with DocvalueFields = Some value }
 
         [<CustomOperation("knn")>]
-        member _.Knn(state: Types.SearchRequestBody, value: System.Text.Json.JsonElement) =
+        member _.Knn(state: Types.SearchRequestBody, value: Types.KnnSearch list) =
             { state with Knn = Some value }
 
         [<CustomOperation("rank")>]
@@ -1213,7 +1470,7 @@ module GlobalSearchTypesBuilders =
             { state with Query = Some value }
 
         [<CustomOperation("rescore")>]
-        member _.Rescore(state: Types.SearchRequestBody, value: System.Text.Json.JsonElement) =
+        member _.Rescore(state: Types.SearchRequestBody, value: Types.Rescore list) =
             { state with Rescore = Some value }
 
         [<CustomOperation("retriever")>]
@@ -1482,6 +1739,9 @@ module GlobalSearchTypesBuilders =
                 Sort = None
                 StringDistance = None
                 SuggestMode = None
+                Field = Unchecked.defaultof<_>
+                Analyzer = None
+                Size = None
             }
 
         [<CustomOperation("lowercaseTerms")>]
@@ -1527,6 +1787,18 @@ module GlobalSearchTypesBuilders =
         [<CustomOperation("suggestMode")>]
         member _.SuggestMode(state: Types.TermSuggester, value: Types.SuggestMode) =
             { state with SuggestMode = Some value }
+
+        [<CustomOperation("field")>]
+        member _.Field(state: Types.TermSuggester, value: Types.Field) =
+            { state with Field = value }
+
+        [<CustomOperation("analyzer")>]
+        member _.Analyzer(state: Types.TermSuggester, value: string) =
+            { state with Analyzer = Some value }
+
+        [<CustomOperation("size")>]
+        member _.Size(state: Types.TermSuggester, value: Types.Integer) =
+            { state with Size = Some value }
 
     let termSuggester = TermSuggesterBuilder()
 

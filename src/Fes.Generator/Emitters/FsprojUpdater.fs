@@ -51,6 +51,8 @@ let updateFsproj (fsprojPath: string) (generatedDir: string) =
     sb.AppendLine("        <Compile Include=\"Json.fs\"/>") |> ignore
     sb.AppendLine("        <Compile Include=\"Http.fs\"/>") |> ignore
     sb.AppendLine("        <Compile Include=\"Transport.fs\"/>") |> ignore
+    sb.AppendLine("        <Compile Include=\"Mapping.fs\"/>") |> ignore
+    sb.AppendLine("        <Compile Include=\"Analysis.fs\"/>") |> ignore
     sb.AppendLine("    </ItemGroup>") |> ignore
     sb.AppendLine("    <ItemGroup>") |> ignore
     sb.AppendLine("        <!-- Generated builders -->") |> ignore

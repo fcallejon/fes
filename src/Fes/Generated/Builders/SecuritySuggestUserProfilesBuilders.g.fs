@@ -21,7 +21,7 @@ module SecuritySuggestUserProfilesBuilders =
             { state with Uids = Some value }
 
         [<CustomOperation("labels")>]
-        member _.Labels(state: Types.Hint, value: Map<string, System.Text.Json.JsonElement>) =
+        member _.Labels(state: Types.Hint, value: Map<string, string list>) =
             { state with Labels = Some value }
 
     let hint = HintBuilder()

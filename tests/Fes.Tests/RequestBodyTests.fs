@@ -13,18 +13,13 @@ open Fes.Generated.Builders
 
 [<Fact>]
 let ``bool query serialises with bool key`` () =
-    let q = QueryContainer.Bool {
-        Must = None; Should = None; MustNot = None; Filter = None
-        MinimumShouldMatch = None
-    }
+    let q = QueryContainer.Bool Types.BoolQuery.empty
     let json = Json.serialize q
     Assert.Contains("bool", json)
 
 [<Fact>]
 let ``term query serialises with field name`` () =
-    let q = QueryContainer.Term ("status", {
-        Value = Unchecked.defaultof<_>; CaseInsensitive = None
-    })
+    let q = QueryContainer.Term ("status", Types.TermQuery.empty)
     let json = Json.serialize q
     Assert.Contains("term", json)
     Assert.Contains("status", json)
@@ -83,10 +78,7 @@ let ``HealthStatus enum round-trips`` () =
 
 [<Fact>]
 let ``QueryContainer.Bool round-trips through JSON`` () =
-    let original = QueryContainer.Bool {
-        Must = None; Should = None; MustNot = None; Filter = None
-        MinimumShouldMatch = None
-    }
+    let original = QueryContainer.Bool Types.BoolQuery.empty
     let json = Json.serialize original
     let roundTripped = Json.deserialize<QueryContainer> json
     match roundTripped with

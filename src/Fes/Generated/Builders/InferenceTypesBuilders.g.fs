@@ -596,6 +596,38 @@ module InferenceTypesBuilders =
         let embeddings (value: Types.DenseEmbeddingResult list) =
             Types.EmbeddingInferenceResult.Embeddings value
 
+    type EncryptedReasoningDetailBuilder() =
+        member _.Yield(_: unit) : Types.EncryptedReasoningDetail =
+            {
+                Type = "reasoning.encrypted"
+                Data = Unchecked.defaultof<_>
+                Format = None
+                Id = None
+                Index = None
+            }
+
+        [<CustomOperation("type'")>]
+        member _.Type(state: Types.EncryptedReasoningDetail, value: string) =
+            { state with Type = value }
+
+        [<CustomOperation("data")>]
+        member _.Data(state: Types.EncryptedReasoningDetail, value: string) =
+            { state with Data = value }
+
+        [<CustomOperation("format")>]
+        member _.Format(state: Types.EncryptedReasoningDetail, value: string) =
+            { state with Format = Some value }
+
+        [<CustomOperation("id")>]
+        member _.Id(state: Types.EncryptedReasoningDetail, value: string) =
+            { state with Id = Some value }
+
+        [<CustomOperation("index")>]
+        member _.Index(state: Types.EncryptedReasoningDetail, value: Types.Integer) =
+            { state with Index = Some value }
+
+    let encryptedReasoningDetail = EncryptedReasoningDetailBuilder()
+
     type FireworksAIServiceSettingsBuilder() =
         member _.Yield(_: unit) : Types.FireworksAIServiceSettings =
             {
@@ -863,6 +895,1005 @@ module InferenceTypesBuilders =
             { state with TaskSettings = Some value }
 
     let inferenceEndpoint = InferenceEndpointBuilder()
+
+    type InferenceEndpointInfoBuilder() =
+        member _.Yield(_: unit) : Types.InferenceEndpointInfo =
+            {
+                InferenceId = Unchecked.defaultof<_>
+                TaskType = Unchecked.defaultof<_>
+                ChunkingSettings = None
+                Service = Unchecked.defaultof<_>
+                ServiceSettings = Unchecked.defaultof<_>
+                TaskSettings = None
+            }
+
+        [<CustomOperation("inferenceId")>]
+        member _.InferenceId(state: Types.InferenceEndpointInfo, value: string) =
+            { state with InferenceId = value }
+
+        [<CustomOperation("taskType")>]
+        member _.TaskType(state: Types.InferenceEndpointInfo, value: Types.TaskType) =
+            { state with TaskType = value }
+
+        [<CustomOperation("chunkingSettings")>]
+        member _.ChunkingSettings(state: Types.InferenceEndpointInfo, value: Types.InferenceChunkingSettings) =
+            { state with ChunkingSettings = Some value }
+
+        [<CustomOperation("service")>]
+        member _.Service(state: Types.InferenceEndpointInfo, value: string) =
+            { state with Service = value }
+
+        [<CustomOperation("serviceSettings")>]
+        member _.ServiceSettings(state: Types.InferenceEndpointInfo, value: Types.ServiceSettings) =
+            { state with ServiceSettings = value }
+
+        [<CustomOperation("taskSettings")>]
+        member _.TaskSettings(state: Types.InferenceEndpointInfo, value: Types.TaskSettings) =
+            { state with TaskSettings = Some value }
+
+    let inferenceEndpointInfo = InferenceEndpointInfoBuilder()
+
+    type InferenceEndpointInfoAi21Builder() =
+        member _.Yield(_: unit) : Types.InferenceEndpointInfoAi21 =
+            {
+                InferenceId = Unchecked.defaultof<_>
+                TaskType = Unchecked.defaultof<_>
+                ChunkingSettings = None
+                Service = Unchecked.defaultof<_>
+                ServiceSettings = Unchecked.defaultof<_>
+                TaskSettings = None
+            }
+
+        [<CustomOperation("inferenceId")>]
+        member _.InferenceId(state: Types.InferenceEndpointInfoAi21, value: string) =
+            { state with InferenceId = value }
+
+        [<CustomOperation("taskType")>]
+        member _.TaskType(state: Types.InferenceEndpointInfoAi21, value: Types.TaskTypeAi21) =
+            { state with TaskType = value }
+
+        [<CustomOperation("chunkingSettings")>]
+        member _.ChunkingSettings(state: Types.InferenceEndpointInfoAi21, value: Types.InferenceChunkingSettings) =
+            { state with ChunkingSettings = Some value }
+
+        [<CustomOperation("service")>]
+        member _.Service(state: Types.InferenceEndpointInfoAi21, value: string) =
+            { state with Service = value }
+
+        [<CustomOperation("serviceSettings")>]
+        member _.ServiceSettings(state: Types.InferenceEndpointInfoAi21, value: Types.ServiceSettings) =
+            { state with ServiceSettings = value }
+
+        [<CustomOperation("taskSettings")>]
+        member _.TaskSettings(state: Types.InferenceEndpointInfoAi21, value: Types.TaskSettings) =
+            { state with TaskSettings = Some value }
+
+    let inferenceEndpointInfoAi21 = InferenceEndpointInfoAi21Builder()
+
+    type InferenceEndpointInfoAlibabaCloudAIBuilder() =
+        member _.Yield(_: unit) : Types.InferenceEndpointInfoAlibabaCloudAI =
+            {
+                InferenceId = Unchecked.defaultof<_>
+                TaskType = Unchecked.defaultof<_>
+                ChunkingSettings = None
+                Service = Unchecked.defaultof<_>
+                ServiceSettings = Unchecked.defaultof<_>
+                TaskSettings = None
+            }
+
+        [<CustomOperation("inferenceId")>]
+        member _.InferenceId(state: Types.InferenceEndpointInfoAlibabaCloudAI, value: string) =
+            { state with InferenceId = value }
+
+        [<CustomOperation("taskType")>]
+        member _.TaskType(state: Types.InferenceEndpointInfoAlibabaCloudAI, value: Types.TaskTypeAlibabaCloudAI) =
+            { state with TaskType = value }
+
+        [<CustomOperation("chunkingSettings")>]
+        member _.ChunkingSettings(state: Types.InferenceEndpointInfoAlibabaCloudAI, value: Types.InferenceChunkingSettings) =
+            { state with ChunkingSettings = Some value }
+
+        [<CustomOperation("service")>]
+        member _.Service(state: Types.InferenceEndpointInfoAlibabaCloudAI, value: string) =
+            { state with Service = value }
+
+        [<CustomOperation("serviceSettings")>]
+        member _.ServiceSettings(state: Types.InferenceEndpointInfoAlibabaCloudAI, value: Types.ServiceSettings) =
+            { state with ServiceSettings = value }
+
+        [<CustomOperation("taskSettings")>]
+        member _.TaskSettings(state: Types.InferenceEndpointInfoAlibabaCloudAI, value: Types.TaskSettings) =
+            { state with TaskSettings = Some value }
+
+    let inferenceEndpointInfoAlibabaCloudAI = InferenceEndpointInfoAlibabaCloudAIBuilder()
+
+    type InferenceEndpointInfoAmazonBedrockBuilder() =
+        member _.Yield(_: unit) : Types.InferenceEndpointInfoAmazonBedrock =
+            {
+                InferenceId = Unchecked.defaultof<_>
+                TaskType = Unchecked.defaultof<_>
+                ChunkingSettings = None
+                Service = Unchecked.defaultof<_>
+                ServiceSettings = Unchecked.defaultof<_>
+                TaskSettings = None
+            }
+
+        [<CustomOperation("inferenceId")>]
+        member _.InferenceId(state: Types.InferenceEndpointInfoAmazonBedrock, value: string) =
+            { state with InferenceId = value }
+
+        [<CustomOperation("taskType")>]
+        member _.TaskType(state: Types.InferenceEndpointInfoAmazonBedrock, value: Types.TaskTypeAmazonBedrock) =
+            { state with TaskType = value }
+
+        [<CustomOperation("chunkingSettings")>]
+        member _.ChunkingSettings(state: Types.InferenceEndpointInfoAmazonBedrock, value: Types.InferenceChunkingSettings) =
+            { state with ChunkingSettings = Some value }
+
+        [<CustomOperation("service")>]
+        member _.Service(state: Types.InferenceEndpointInfoAmazonBedrock, value: string) =
+            { state with Service = value }
+
+        [<CustomOperation("serviceSettings")>]
+        member _.ServiceSettings(state: Types.InferenceEndpointInfoAmazonBedrock, value: Types.ServiceSettings) =
+            { state with ServiceSettings = value }
+
+        [<CustomOperation("taskSettings")>]
+        member _.TaskSettings(state: Types.InferenceEndpointInfoAmazonBedrock, value: Types.TaskSettings) =
+            { state with TaskSettings = Some value }
+
+    let inferenceEndpointInfoAmazonBedrock = InferenceEndpointInfoAmazonBedrockBuilder()
+
+    type InferenceEndpointInfoAmazonSageMakerBuilder() =
+        member _.Yield(_: unit) : Types.InferenceEndpointInfoAmazonSageMaker =
+            {
+                InferenceId = Unchecked.defaultof<_>
+                TaskType = Unchecked.defaultof<_>
+                ChunkingSettings = None
+                Service = Unchecked.defaultof<_>
+                ServiceSettings = Unchecked.defaultof<_>
+                TaskSettings = None
+            }
+
+        [<CustomOperation("inferenceId")>]
+        member _.InferenceId(state: Types.InferenceEndpointInfoAmazonSageMaker, value: string) =
+            { state with InferenceId = value }
+
+        [<CustomOperation("taskType")>]
+        member _.TaskType(state: Types.InferenceEndpointInfoAmazonSageMaker, value: Types.TaskTypeAmazonSageMaker) =
+            { state with TaskType = value }
+
+        [<CustomOperation("chunkingSettings")>]
+        member _.ChunkingSettings(state: Types.InferenceEndpointInfoAmazonSageMaker, value: Types.InferenceChunkingSettings) =
+            { state with ChunkingSettings = Some value }
+
+        [<CustomOperation("service")>]
+        member _.Service(state: Types.InferenceEndpointInfoAmazonSageMaker, value: string) =
+            { state with Service = value }
+
+        [<CustomOperation("serviceSettings")>]
+        member _.ServiceSettings(state: Types.InferenceEndpointInfoAmazonSageMaker, value: Types.ServiceSettings) =
+            { state with ServiceSettings = value }
+
+        [<CustomOperation("taskSettings")>]
+        member _.TaskSettings(state: Types.InferenceEndpointInfoAmazonSageMaker, value: Types.TaskSettings) =
+            { state with TaskSettings = Some value }
+
+    let inferenceEndpointInfoAmazonSageMaker = InferenceEndpointInfoAmazonSageMakerBuilder()
+
+    type InferenceEndpointInfoAnthropicBuilder() =
+        member _.Yield(_: unit) : Types.InferenceEndpointInfoAnthropic =
+            {
+                InferenceId = Unchecked.defaultof<_>
+                TaskType = Unchecked.defaultof<_>
+                ChunkingSettings = None
+                Service = Unchecked.defaultof<_>
+                ServiceSettings = Unchecked.defaultof<_>
+                TaskSettings = None
+            }
+
+        [<CustomOperation("inferenceId")>]
+        member _.InferenceId(state: Types.InferenceEndpointInfoAnthropic, value: string) =
+            { state with InferenceId = value }
+
+        [<CustomOperation("taskType")>]
+        member _.TaskType(state: Types.InferenceEndpointInfoAnthropic, value: Types.TaskTypeAnthropic) =
+            { state with TaskType = value }
+
+        [<CustomOperation("chunkingSettings")>]
+        member _.ChunkingSettings(state: Types.InferenceEndpointInfoAnthropic, value: Types.InferenceChunkingSettings) =
+            { state with ChunkingSettings = Some value }
+
+        [<CustomOperation("service")>]
+        member _.Service(state: Types.InferenceEndpointInfoAnthropic, value: string) =
+            { state with Service = value }
+
+        [<CustomOperation("serviceSettings")>]
+        member _.ServiceSettings(state: Types.InferenceEndpointInfoAnthropic, value: Types.ServiceSettings) =
+            { state with ServiceSettings = value }
+
+        [<CustomOperation("taskSettings")>]
+        member _.TaskSettings(state: Types.InferenceEndpointInfoAnthropic, value: Types.TaskSettings) =
+            { state with TaskSettings = Some value }
+
+    let inferenceEndpointInfoAnthropic = InferenceEndpointInfoAnthropicBuilder()
+
+    type InferenceEndpointInfoAzureAIStudioBuilder() =
+        member _.Yield(_: unit) : Types.InferenceEndpointInfoAzureAIStudio =
+            {
+                InferenceId = Unchecked.defaultof<_>
+                TaskType = Unchecked.defaultof<_>
+                ChunkingSettings = None
+                Service = Unchecked.defaultof<_>
+                ServiceSettings = Unchecked.defaultof<_>
+                TaskSettings = None
+            }
+
+        [<CustomOperation("inferenceId")>]
+        member _.InferenceId(state: Types.InferenceEndpointInfoAzureAIStudio, value: string) =
+            { state with InferenceId = value }
+
+        [<CustomOperation("taskType")>]
+        member _.TaskType(state: Types.InferenceEndpointInfoAzureAIStudio, value: Types.TaskTypeAzureAIStudio) =
+            { state with TaskType = value }
+
+        [<CustomOperation("chunkingSettings")>]
+        member _.ChunkingSettings(state: Types.InferenceEndpointInfoAzureAIStudio, value: Types.InferenceChunkingSettings) =
+            { state with ChunkingSettings = Some value }
+
+        [<CustomOperation("service")>]
+        member _.Service(state: Types.InferenceEndpointInfoAzureAIStudio, value: string) =
+            { state with Service = value }
+
+        [<CustomOperation("serviceSettings")>]
+        member _.ServiceSettings(state: Types.InferenceEndpointInfoAzureAIStudio, value: Types.ServiceSettings) =
+            { state with ServiceSettings = value }
+
+        [<CustomOperation("taskSettings")>]
+        member _.TaskSettings(state: Types.InferenceEndpointInfoAzureAIStudio, value: Types.TaskSettings) =
+            { state with TaskSettings = Some value }
+
+    let inferenceEndpointInfoAzureAIStudio = InferenceEndpointInfoAzureAIStudioBuilder()
+
+    type InferenceEndpointInfoAzureOpenAIBuilder() =
+        member _.Yield(_: unit) : Types.InferenceEndpointInfoAzureOpenAI =
+            {
+                InferenceId = Unchecked.defaultof<_>
+                TaskType = Unchecked.defaultof<_>
+                ChunkingSettings = None
+                Service = Unchecked.defaultof<_>
+                ServiceSettings = Unchecked.defaultof<_>
+                TaskSettings = None
+            }
+
+        [<CustomOperation("inferenceId")>]
+        member _.InferenceId(state: Types.InferenceEndpointInfoAzureOpenAI, value: string) =
+            { state with InferenceId = value }
+
+        [<CustomOperation("taskType")>]
+        member _.TaskType(state: Types.InferenceEndpointInfoAzureOpenAI, value: Types.TaskTypeAzureOpenAI) =
+            { state with TaskType = value }
+
+        [<CustomOperation("chunkingSettings")>]
+        member _.ChunkingSettings(state: Types.InferenceEndpointInfoAzureOpenAI, value: Types.InferenceChunkingSettings) =
+            { state with ChunkingSettings = Some value }
+
+        [<CustomOperation("service")>]
+        member _.Service(state: Types.InferenceEndpointInfoAzureOpenAI, value: string) =
+            { state with Service = value }
+
+        [<CustomOperation("serviceSettings")>]
+        member _.ServiceSettings(state: Types.InferenceEndpointInfoAzureOpenAI, value: Types.ServiceSettings) =
+            { state with ServiceSettings = value }
+
+        [<CustomOperation("taskSettings")>]
+        member _.TaskSettings(state: Types.InferenceEndpointInfoAzureOpenAI, value: Types.TaskSettings) =
+            { state with TaskSettings = Some value }
+
+    let inferenceEndpointInfoAzureOpenAI = InferenceEndpointInfoAzureOpenAIBuilder()
+
+    type InferenceEndpointInfoCohereBuilder() =
+        member _.Yield(_: unit) : Types.InferenceEndpointInfoCohere =
+            {
+                InferenceId = Unchecked.defaultof<_>
+                TaskType = Unchecked.defaultof<_>
+                ChunkingSettings = None
+                Service = Unchecked.defaultof<_>
+                ServiceSettings = Unchecked.defaultof<_>
+                TaskSettings = None
+            }
+
+        [<CustomOperation("inferenceId")>]
+        member _.InferenceId(state: Types.InferenceEndpointInfoCohere, value: string) =
+            { state with InferenceId = value }
+
+        [<CustomOperation("taskType")>]
+        member _.TaskType(state: Types.InferenceEndpointInfoCohere, value: Types.TaskTypeCohere) =
+            { state with TaskType = value }
+
+        [<CustomOperation("chunkingSettings")>]
+        member _.ChunkingSettings(state: Types.InferenceEndpointInfoCohere, value: Types.InferenceChunkingSettings) =
+            { state with ChunkingSettings = Some value }
+
+        [<CustomOperation("service")>]
+        member _.Service(state: Types.InferenceEndpointInfoCohere, value: string) =
+            { state with Service = value }
+
+        [<CustomOperation("serviceSettings")>]
+        member _.ServiceSettings(state: Types.InferenceEndpointInfoCohere, value: Types.ServiceSettings) =
+            { state with ServiceSettings = value }
+
+        [<CustomOperation("taskSettings")>]
+        member _.TaskSettings(state: Types.InferenceEndpointInfoCohere, value: Types.TaskSettings) =
+            { state with TaskSettings = Some value }
+
+    let inferenceEndpointInfoCohere = InferenceEndpointInfoCohereBuilder()
+
+    type InferenceEndpointInfoContextualAiBuilder() =
+        member _.Yield(_: unit) : Types.InferenceEndpointInfoContextualAi =
+            {
+                InferenceId = Unchecked.defaultof<_>
+                TaskType = Unchecked.defaultof<_>
+                ChunkingSettings = None
+                Service = Unchecked.defaultof<_>
+                ServiceSettings = Unchecked.defaultof<_>
+                TaskSettings = None
+            }
+
+        [<CustomOperation("inferenceId")>]
+        member _.InferenceId(state: Types.InferenceEndpointInfoContextualAi, value: string) =
+            { state with InferenceId = value }
+
+        [<CustomOperation("taskType")>]
+        member _.TaskType(state: Types.InferenceEndpointInfoContextualAi, value: Types.TaskTypeContextualAI) =
+            { state with TaskType = value }
+
+        [<CustomOperation("chunkingSettings")>]
+        member _.ChunkingSettings(state: Types.InferenceEndpointInfoContextualAi, value: Types.InferenceChunkingSettings) =
+            { state with ChunkingSettings = Some value }
+
+        [<CustomOperation("service")>]
+        member _.Service(state: Types.InferenceEndpointInfoContextualAi, value: string) =
+            { state with Service = value }
+
+        [<CustomOperation("serviceSettings")>]
+        member _.ServiceSettings(state: Types.InferenceEndpointInfoContextualAi, value: Types.ServiceSettings) =
+            { state with ServiceSettings = value }
+
+        [<CustomOperation("taskSettings")>]
+        member _.TaskSettings(state: Types.InferenceEndpointInfoContextualAi, value: Types.TaskSettings) =
+            { state with TaskSettings = Some value }
+
+    let inferenceEndpointInfoContextualAi = InferenceEndpointInfoContextualAiBuilder()
+
+    type InferenceEndpointInfoCustomBuilder() =
+        member _.Yield(_: unit) : Types.InferenceEndpointInfoCustom =
+            {
+                InferenceId = Unchecked.defaultof<_>
+                TaskType = Unchecked.defaultof<_>
+                ChunkingSettings = None
+                Service = Unchecked.defaultof<_>
+                ServiceSettings = Unchecked.defaultof<_>
+                TaskSettings = None
+            }
+
+        [<CustomOperation("inferenceId")>]
+        member _.InferenceId(state: Types.InferenceEndpointInfoCustom, value: string) =
+            { state with InferenceId = value }
+
+        [<CustomOperation("taskType")>]
+        member _.TaskType(state: Types.InferenceEndpointInfoCustom, value: Types.TaskTypeCustom) =
+            { state with TaskType = value }
+
+        [<CustomOperation("chunkingSettings")>]
+        member _.ChunkingSettings(state: Types.InferenceEndpointInfoCustom, value: Types.InferenceChunkingSettings) =
+            { state with ChunkingSettings = Some value }
+
+        [<CustomOperation("service")>]
+        member _.Service(state: Types.InferenceEndpointInfoCustom, value: string) =
+            { state with Service = value }
+
+        [<CustomOperation("serviceSettings")>]
+        member _.ServiceSettings(state: Types.InferenceEndpointInfoCustom, value: Types.ServiceSettings) =
+            { state with ServiceSettings = value }
+
+        [<CustomOperation("taskSettings")>]
+        member _.TaskSettings(state: Types.InferenceEndpointInfoCustom, value: Types.TaskSettings) =
+            { state with TaskSettings = Some value }
+
+    let inferenceEndpointInfoCustom = InferenceEndpointInfoCustomBuilder()
+
+    type InferenceEndpointInfoDeepSeekBuilder() =
+        member _.Yield(_: unit) : Types.InferenceEndpointInfoDeepSeek =
+            {
+                InferenceId = Unchecked.defaultof<_>
+                TaskType = Unchecked.defaultof<_>
+                ChunkingSettings = None
+                Service = Unchecked.defaultof<_>
+                ServiceSettings = Unchecked.defaultof<_>
+                TaskSettings = None
+            }
+
+        [<CustomOperation("inferenceId")>]
+        member _.InferenceId(state: Types.InferenceEndpointInfoDeepSeek, value: string) =
+            { state with InferenceId = value }
+
+        [<CustomOperation("taskType")>]
+        member _.TaskType(state: Types.InferenceEndpointInfoDeepSeek, value: Types.TaskTypeDeepSeek) =
+            { state with TaskType = value }
+
+        [<CustomOperation("chunkingSettings")>]
+        member _.ChunkingSettings(state: Types.InferenceEndpointInfoDeepSeek, value: Types.InferenceChunkingSettings) =
+            { state with ChunkingSettings = Some value }
+
+        [<CustomOperation("service")>]
+        member _.Service(state: Types.InferenceEndpointInfoDeepSeek, value: string) =
+            { state with Service = value }
+
+        [<CustomOperation("serviceSettings")>]
+        member _.ServiceSettings(state: Types.InferenceEndpointInfoDeepSeek, value: Types.ServiceSettings) =
+            { state with ServiceSettings = value }
+
+        [<CustomOperation("taskSettings")>]
+        member _.TaskSettings(state: Types.InferenceEndpointInfoDeepSeek, value: Types.TaskSettings) =
+            { state with TaskSettings = Some value }
+
+    let inferenceEndpointInfoDeepSeek = InferenceEndpointInfoDeepSeekBuilder()
+
+    type InferenceEndpointInfoELSERBuilder() =
+        member _.Yield(_: unit) : Types.InferenceEndpointInfoELSER =
+            {
+                InferenceId = Unchecked.defaultof<_>
+                TaskType = Unchecked.defaultof<_>
+                ChunkingSettings = None
+                Service = Unchecked.defaultof<_>
+                ServiceSettings = Unchecked.defaultof<_>
+                TaskSettings = None
+            }
+
+        [<CustomOperation("inferenceId")>]
+        member _.InferenceId(state: Types.InferenceEndpointInfoELSER, value: string) =
+            { state with InferenceId = value }
+
+        [<CustomOperation("taskType")>]
+        member _.TaskType(state: Types.InferenceEndpointInfoELSER, value: Types.TaskTypeELSER) =
+            { state with TaskType = value }
+
+        [<CustomOperation("chunkingSettings")>]
+        member _.ChunkingSettings(state: Types.InferenceEndpointInfoELSER, value: Types.InferenceChunkingSettings) =
+            { state with ChunkingSettings = Some value }
+
+        [<CustomOperation("service")>]
+        member _.Service(state: Types.InferenceEndpointInfoELSER, value: string) =
+            { state with Service = value }
+
+        [<CustomOperation("serviceSettings")>]
+        member _.ServiceSettings(state: Types.InferenceEndpointInfoELSER, value: Types.ServiceSettings) =
+            { state with ServiceSettings = value }
+
+        [<CustomOperation("taskSettings")>]
+        member _.TaskSettings(state: Types.InferenceEndpointInfoELSER, value: Types.TaskSettings) =
+            { state with TaskSettings = Some value }
+
+    let inferenceEndpointInfoELSER = InferenceEndpointInfoELSERBuilder()
+
+    type InferenceEndpointInfoElasticsearchBuilder() =
+        member _.Yield(_: unit) : Types.InferenceEndpointInfoElasticsearch =
+            {
+                InferenceId = Unchecked.defaultof<_>
+                TaskType = Unchecked.defaultof<_>
+                ChunkingSettings = None
+                Service = Unchecked.defaultof<_>
+                ServiceSettings = Unchecked.defaultof<_>
+                TaskSettings = None
+            }
+
+        [<CustomOperation("inferenceId")>]
+        member _.InferenceId(state: Types.InferenceEndpointInfoElasticsearch, value: string) =
+            { state with InferenceId = value }
+
+        [<CustomOperation("taskType")>]
+        member _.TaskType(state: Types.InferenceEndpointInfoElasticsearch, value: Types.TaskTypeElasticsearch) =
+            { state with TaskType = value }
+
+        [<CustomOperation("chunkingSettings")>]
+        member _.ChunkingSettings(state: Types.InferenceEndpointInfoElasticsearch, value: Types.InferenceChunkingSettings) =
+            { state with ChunkingSettings = Some value }
+
+        [<CustomOperation("service")>]
+        member _.Service(state: Types.InferenceEndpointInfoElasticsearch, value: string) =
+            { state with Service = value }
+
+        [<CustomOperation("serviceSettings")>]
+        member _.ServiceSettings(state: Types.InferenceEndpointInfoElasticsearch, value: Types.ServiceSettings) =
+            { state with ServiceSettings = value }
+
+        [<CustomOperation("taskSettings")>]
+        member _.TaskSettings(state: Types.InferenceEndpointInfoElasticsearch, value: Types.TaskSettings) =
+            { state with TaskSettings = Some value }
+
+    let inferenceEndpointInfoElasticsearch = InferenceEndpointInfoElasticsearchBuilder()
+
+    type InferenceEndpointInfoFireworksAIBuilder() =
+        member _.Yield(_: unit) : Types.InferenceEndpointInfoFireworksAI =
+            {
+                InferenceId = Unchecked.defaultof<_>
+                TaskType = Unchecked.defaultof<_>
+                ChunkingSettings = None
+                Service = Unchecked.defaultof<_>
+                ServiceSettings = Unchecked.defaultof<_>
+                TaskSettings = None
+            }
+
+        [<CustomOperation("inferenceId")>]
+        member _.InferenceId(state: Types.InferenceEndpointInfoFireworksAI, value: string) =
+            { state with InferenceId = value }
+
+        [<CustomOperation("taskType")>]
+        member _.TaskType(state: Types.InferenceEndpointInfoFireworksAI, value: Types.TaskTypeFireworksAI) =
+            { state with TaskType = value }
+
+        [<CustomOperation("chunkingSettings")>]
+        member _.ChunkingSettings(state: Types.InferenceEndpointInfoFireworksAI, value: Types.InferenceChunkingSettings) =
+            { state with ChunkingSettings = Some value }
+
+        [<CustomOperation("service")>]
+        member _.Service(state: Types.InferenceEndpointInfoFireworksAI, value: string) =
+            { state with Service = value }
+
+        [<CustomOperation("serviceSettings")>]
+        member _.ServiceSettings(state: Types.InferenceEndpointInfoFireworksAI, value: Types.ServiceSettings) =
+            { state with ServiceSettings = value }
+
+        [<CustomOperation("taskSettings")>]
+        member _.TaskSettings(state: Types.InferenceEndpointInfoFireworksAI, value: Types.TaskSettings) =
+            { state with TaskSettings = Some value }
+
+    let inferenceEndpointInfoFireworksAI = InferenceEndpointInfoFireworksAIBuilder()
+
+    type InferenceEndpointInfoGoogleAIStudioBuilder() =
+        member _.Yield(_: unit) : Types.InferenceEndpointInfoGoogleAIStudio =
+            {
+                InferenceId = Unchecked.defaultof<_>
+                TaskType = Unchecked.defaultof<_>
+                ChunkingSettings = None
+                Service = Unchecked.defaultof<_>
+                ServiceSettings = Unchecked.defaultof<_>
+                TaskSettings = None
+            }
+
+        [<CustomOperation("inferenceId")>]
+        member _.InferenceId(state: Types.InferenceEndpointInfoGoogleAIStudio, value: string) =
+            { state with InferenceId = value }
+
+        [<CustomOperation("taskType")>]
+        member _.TaskType(state: Types.InferenceEndpointInfoGoogleAIStudio, value: Types.TaskTypeGoogleAIStudio) =
+            { state with TaskType = value }
+
+        [<CustomOperation("chunkingSettings")>]
+        member _.ChunkingSettings(state: Types.InferenceEndpointInfoGoogleAIStudio, value: Types.InferenceChunkingSettings) =
+            { state with ChunkingSettings = Some value }
+
+        [<CustomOperation("service")>]
+        member _.Service(state: Types.InferenceEndpointInfoGoogleAIStudio, value: string) =
+            { state with Service = value }
+
+        [<CustomOperation("serviceSettings")>]
+        member _.ServiceSettings(state: Types.InferenceEndpointInfoGoogleAIStudio, value: Types.ServiceSettings) =
+            { state with ServiceSettings = value }
+
+        [<CustomOperation("taskSettings")>]
+        member _.TaskSettings(state: Types.InferenceEndpointInfoGoogleAIStudio, value: Types.TaskSettings) =
+            { state with TaskSettings = Some value }
+
+    let inferenceEndpointInfoGoogleAIStudio = InferenceEndpointInfoGoogleAIStudioBuilder()
+
+    type InferenceEndpointInfoGoogleVertexAIBuilder() =
+        member _.Yield(_: unit) : Types.InferenceEndpointInfoGoogleVertexAI =
+            {
+                InferenceId = Unchecked.defaultof<_>
+                TaskType = Unchecked.defaultof<_>
+                ChunkingSettings = None
+                Service = Unchecked.defaultof<_>
+                ServiceSettings = Unchecked.defaultof<_>
+                TaskSettings = None
+            }
+
+        [<CustomOperation("inferenceId")>]
+        member _.InferenceId(state: Types.InferenceEndpointInfoGoogleVertexAI, value: string) =
+            { state with InferenceId = value }
+
+        [<CustomOperation("taskType")>]
+        member _.TaskType(state: Types.InferenceEndpointInfoGoogleVertexAI, value: Types.TaskTypeGoogleVertexAI) =
+            { state with TaskType = value }
+
+        [<CustomOperation("chunkingSettings")>]
+        member _.ChunkingSettings(state: Types.InferenceEndpointInfoGoogleVertexAI, value: Types.InferenceChunkingSettings) =
+            { state with ChunkingSettings = Some value }
+
+        [<CustomOperation("service")>]
+        member _.Service(state: Types.InferenceEndpointInfoGoogleVertexAI, value: string) =
+            { state with Service = value }
+
+        [<CustomOperation("serviceSettings")>]
+        member _.ServiceSettings(state: Types.InferenceEndpointInfoGoogleVertexAI, value: Types.ServiceSettings) =
+            { state with ServiceSettings = value }
+
+        [<CustomOperation("taskSettings")>]
+        member _.TaskSettings(state: Types.InferenceEndpointInfoGoogleVertexAI, value: Types.TaskSettings) =
+            { state with TaskSettings = Some value }
+
+    let inferenceEndpointInfoGoogleVertexAI = InferenceEndpointInfoGoogleVertexAIBuilder()
+
+    type InferenceEndpointInfoGroqBuilder() =
+        member _.Yield(_: unit) : Types.InferenceEndpointInfoGroq =
+            {
+                InferenceId = Unchecked.defaultof<_>
+                TaskType = Unchecked.defaultof<_>
+                ChunkingSettings = None
+                Service = Unchecked.defaultof<_>
+                ServiceSettings = Unchecked.defaultof<_>
+                TaskSettings = None
+            }
+
+        [<CustomOperation("inferenceId")>]
+        member _.InferenceId(state: Types.InferenceEndpointInfoGroq, value: string) =
+            { state with InferenceId = value }
+
+        [<CustomOperation("taskType")>]
+        member _.TaskType(state: Types.InferenceEndpointInfoGroq, value: Types.TaskTypeGroq) =
+            { state with TaskType = value }
+
+        [<CustomOperation("chunkingSettings")>]
+        member _.ChunkingSettings(state: Types.InferenceEndpointInfoGroq, value: Types.InferenceChunkingSettings) =
+            { state with ChunkingSettings = Some value }
+
+        [<CustomOperation("service")>]
+        member _.Service(state: Types.InferenceEndpointInfoGroq, value: string) =
+            { state with Service = value }
+
+        [<CustomOperation("serviceSettings")>]
+        member _.ServiceSettings(state: Types.InferenceEndpointInfoGroq, value: Types.ServiceSettings) =
+            { state with ServiceSettings = value }
+
+        [<CustomOperation("taskSettings")>]
+        member _.TaskSettings(state: Types.InferenceEndpointInfoGroq, value: Types.TaskSettings) =
+            { state with TaskSettings = Some value }
+
+    let inferenceEndpointInfoGroq = InferenceEndpointInfoGroqBuilder()
+
+    type InferenceEndpointInfoHuggingFaceBuilder() =
+        member _.Yield(_: unit) : Types.InferenceEndpointInfoHuggingFace =
+            {
+                InferenceId = Unchecked.defaultof<_>
+                TaskType = Unchecked.defaultof<_>
+                ChunkingSettings = None
+                Service = Unchecked.defaultof<_>
+                ServiceSettings = Unchecked.defaultof<_>
+                TaskSettings = None
+            }
+
+        [<CustomOperation("inferenceId")>]
+        member _.InferenceId(state: Types.InferenceEndpointInfoHuggingFace, value: string) =
+            { state with InferenceId = value }
+
+        [<CustomOperation("taskType")>]
+        member _.TaskType(state: Types.InferenceEndpointInfoHuggingFace, value: Types.TaskTypeHuggingFace) =
+            { state with TaskType = value }
+
+        [<CustomOperation("chunkingSettings")>]
+        member _.ChunkingSettings(state: Types.InferenceEndpointInfoHuggingFace, value: Types.InferenceChunkingSettings) =
+            { state with ChunkingSettings = Some value }
+
+        [<CustomOperation("service")>]
+        member _.Service(state: Types.InferenceEndpointInfoHuggingFace, value: string) =
+            { state with Service = value }
+
+        [<CustomOperation("serviceSettings")>]
+        member _.ServiceSettings(state: Types.InferenceEndpointInfoHuggingFace, value: Types.ServiceSettings) =
+            { state with ServiceSettings = value }
+
+        [<CustomOperation("taskSettings")>]
+        member _.TaskSettings(state: Types.InferenceEndpointInfoHuggingFace, value: Types.TaskSettings) =
+            { state with TaskSettings = Some value }
+
+    let inferenceEndpointInfoHuggingFace = InferenceEndpointInfoHuggingFaceBuilder()
+
+    type InferenceEndpointInfoJinaAiBuilder() =
+        member _.Yield(_: unit) : Types.InferenceEndpointInfoJinaAi =
+            {
+                InferenceId = Unchecked.defaultof<_>
+                TaskType = Unchecked.defaultof<_>
+                ChunkingSettings = None
+                Service = Unchecked.defaultof<_>
+                ServiceSettings = Unchecked.defaultof<_>
+                TaskSettings = None
+            }
+
+        [<CustomOperation("inferenceId")>]
+        member _.InferenceId(state: Types.InferenceEndpointInfoJinaAi, value: string) =
+            { state with InferenceId = value }
+
+        [<CustomOperation("taskType")>]
+        member _.TaskType(state: Types.InferenceEndpointInfoJinaAi, value: Types.TaskTypeJinaAi) =
+            { state with TaskType = value }
+
+        [<CustomOperation("chunkingSettings")>]
+        member _.ChunkingSettings(state: Types.InferenceEndpointInfoJinaAi, value: Types.InferenceChunkingSettings) =
+            { state with ChunkingSettings = Some value }
+
+        [<CustomOperation("service")>]
+        member _.Service(state: Types.InferenceEndpointInfoJinaAi, value: string) =
+            { state with Service = value }
+
+        [<CustomOperation("serviceSettings")>]
+        member _.ServiceSettings(state: Types.InferenceEndpointInfoJinaAi, value: Types.ServiceSettings) =
+            { state with ServiceSettings = value }
+
+        [<CustomOperation("taskSettings")>]
+        member _.TaskSettings(state: Types.InferenceEndpointInfoJinaAi, value: Types.TaskSettings) =
+            { state with TaskSettings = Some value }
+
+    let inferenceEndpointInfoJinaAi = InferenceEndpointInfoJinaAiBuilder()
+
+    type InferenceEndpointInfoLlamaBuilder() =
+        member _.Yield(_: unit) : Types.InferenceEndpointInfoLlama =
+            {
+                InferenceId = Unchecked.defaultof<_>
+                TaskType = Unchecked.defaultof<_>
+                ChunkingSettings = None
+                Service = Unchecked.defaultof<_>
+                ServiceSettings = Unchecked.defaultof<_>
+                TaskSettings = None
+            }
+
+        [<CustomOperation("inferenceId")>]
+        member _.InferenceId(state: Types.InferenceEndpointInfoLlama, value: string) =
+            { state with InferenceId = value }
+
+        [<CustomOperation("taskType")>]
+        member _.TaskType(state: Types.InferenceEndpointInfoLlama, value: Types.TaskTypeLlama) =
+            { state with TaskType = value }
+
+        [<CustomOperation("chunkingSettings")>]
+        member _.ChunkingSettings(state: Types.InferenceEndpointInfoLlama, value: Types.InferenceChunkingSettings) =
+            { state with ChunkingSettings = Some value }
+
+        [<CustomOperation("service")>]
+        member _.Service(state: Types.InferenceEndpointInfoLlama, value: string) =
+            { state with Service = value }
+
+        [<CustomOperation("serviceSettings")>]
+        member _.ServiceSettings(state: Types.InferenceEndpointInfoLlama, value: Types.ServiceSettings) =
+            { state with ServiceSettings = value }
+
+        [<CustomOperation("taskSettings")>]
+        member _.TaskSettings(state: Types.InferenceEndpointInfoLlama, value: Types.TaskSettings) =
+            { state with TaskSettings = Some value }
+
+    let inferenceEndpointInfoLlama = InferenceEndpointInfoLlamaBuilder()
+
+    type InferenceEndpointInfoMistralBuilder() =
+        member _.Yield(_: unit) : Types.InferenceEndpointInfoMistral =
+            {
+                InferenceId = Unchecked.defaultof<_>
+                TaskType = Unchecked.defaultof<_>
+                ChunkingSettings = None
+                Service = Unchecked.defaultof<_>
+                ServiceSettings = Unchecked.defaultof<_>
+                TaskSettings = None
+            }
+
+        [<CustomOperation("inferenceId")>]
+        member _.InferenceId(state: Types.InferenceEndpointInfoMistral, value: string) =
+            { state with InferenceId = value }
+
+        [<CustomOperation("taskType")>]
+        member _.TaskType(state: Types.InferenceEndpointInfoMistral, value: Types.TaskTypeMistral) =
+            { state with TaskType = value }
+
+        [<CustomOperation("chunkingSettings")>]
+        member _.ChunkingSettings(state: Types.InferenceEndpointInfoMistral, value: Types.InferenceChunkingSettings) =
+            { state with ChunkingSettings = Some value }
+
+        [<CustomOperation("service")>]
+        member _.Service(state: Types.InferenceEndpointInfoMistral, value: string) =
+            { state with Service = value }
+
+        [<CustomOperation("serviceSettings")>]
+        member _.ServiceSettings(state: Types.InferenceEndpointInfoMistral, value: Types.ServiceSettings) =
+            { state with ServiceSettings = value }
+
+        [<CustomOperation("taskSettings")>]
+        member _.TaskSettings(state: Types.InferenceEndpointInfoMistral, value: Types.TaskSettings) =
+            { state with TaskSettings = Some value }
+
+    let inferenceEndpointInfoMistral = InferenceEndpointInfoMistralBuilder()
+
+    type InferenceEndpointInfoNvidiaBuilder() =
+        member _.Yield(_: unit) : Types.InferenceEndpointInfoNvidia =
+            {
+                InferenceId = Unchecked.defaultof<_>
+                TaskType = Unchecked.defaultof<_>
+                ChunkingSettings = None
+                Service = Unchecked.defaultof<_>
+                ServiceSettings = Unchecked.defaultof<_>
+                TaskSettings = None
+            }
+
+        [<CustomOperation("inferenceId")>]
+        member _.InferenceId(state: Types.InferenceEndpointInfoNvidia, value: string) =
+            { state with InferenceId = value }
+
+        [<CustomOperation("taskType")>]
+        member _.TaskType(state: Types.InferenceEndpointInfoNvidia, value: Types.TaskTypeNvidia) =
+            { state with TaskType = value }
+
+        [<CustomOperation("chunkingSettings")>]
+        member _.ChunkingSettings(state: Types.InferenceEndpointInfoNvidia, value: Types.InferenceChunkingSettings) =
+            { state with ChunkingSettings = Some value }
+
+        [<CustomOperation("service")>]
+        member _.Service(state: Types.InferenceEndpointInfoNvidia, value: string) =
+            { state with Service = value }
+
+        [<CustomOperation("serviceSettings")>]
+        member _.ServiceSettings(state: Types.InferenceEndpointInfoNvidia, value: Types.ServiceSettings) =
+            { state with ServiceSettings = value }
+
+        [<CustomOperation("taskSettings")>]
+        member _.TaskSettings(state: Types.InferenceEndpointInfoNvidia, value: Types.TaskSettings) =
+            { state with TaskSettings = Some value }
+
+    let inferenceEndpointInfoNvidia = InferenceEndpointInfoNvidiaBuilder()
+
+    type InferenceEndpointInfoOpenAIBuilder() =
+        member _.Yield(_: unit) : Types.InferenceEndpointInfoOpenAI =
+            {
+                InferenceId = Unchecked.defaultof<_>
+                TaskType = Unchecked.defaultof<_>
+                ChunkingSettings = None
+                Service = Unchecked.defaultof<_>
+                ServiceSettings = Unchecked.defaultof<_>
+                TaskSettings = None
+            }
+
+        [<CustomOperation("inferenceId")>]
+        member _.InferenceId(state: Types.InferenceEndpointInfoOpenAI, value: string) =
+            { state with InferenceId = value }
+
+        [<CustomOperation("taskType")>]
+        member _.TaskType(state: Types.InferenceEndpointInfoOpenAI, value: Types.TaskTypeOpenAI) =
+            { state with TaskType = value }
+
+        [<CustomOperation("chunkingSettings")>]
+        member _.ChunkingSettings(state: Types.InferenceEndpointInfoOpenAI, value: Types.InferenceChunkingSettings) =
+            { state with ChunkingSettings = Some value }
+
+        [<CustomOperation("service")>]
+        member _.Service(state: Types.InferenceEndpointInfoOpenAI, value: string) =
+            { state with Service = value }
+
+        [<CustomOperation("serviceSettings")>]
+        member _.ServiceSettings(state: Types.InferenceEndpointInfoOpenAI, value: Types.ServiceSettings) =
+            { state with ServiceSettings = value }
+
+        [<CustomOperation("taskSettings")>]
+        member _.TaskSettings(state: Types.InferenceEndpointInfoOpenAI, value: Types.TaskSettings) =
+            { state with TaskSettings = Some value }
+
+    let inferenceEndpointInfoOpenAI = InferenceEndpointInfoOpenAIBuilder()
+
+    type InferenceEndpointInfoOpenShiftAiBuilder() =
+        member _.Yield(_: unit) : Types.InferenceEndpointInfoOpenShiftAi =
+            {
+                InferenceId = Unchecked.defaultof<_>
+                TaskType = Unchecked.defaultof<_>
+                ChunkingSettings = None
+                Service = Unchecked.defaultof<_>
+                ServiceSettings = Unchecked.defaultof<_>
+                TaskSettings = None
+            }
+
+        [<CustomOperation("inferenceId")>]
+        member _.InferenceId(state: Types.InferenceEndpointInfoOpenShiftAi, value: string) =
+            { state with InferenceId = value }
+
+        [<CustomOperation("taskType")>]
+        member _.TaskType(state: Types.InferenceEndpointInfoOpenShiftAi, value: Types.TaskTypeOpenShiftAi) =
+            { state with TaskType = value }
+
+        [<CustomOperation("chunkingSettings")>]
+        member _.ChunkingSettings(state: Types.InferenceEndpointInfoOpenShiftAi, value: Types.InferenceChunkingSettings) =
+            { state with ChunkingSettings = Some value }
+
+        [<CustomOperation("service")>]
+        member _.Service(state: Types.InferenceEndpointInfoOpenShiftAi, value: string) =
+            { state with Service = value }
+
+        [<CustomOperation("serviceSettings")>]
+        member _.ServiceSettings(state: Types.InferenceEndpointInfoOpenShiftAi, value: Types.ServiceSettings) =
+            { state with ServiceSettings = value }
+
+        [<CustomOperation("taskSettings")>]
+        member _.TaskSettings(state: Types.InferenceEndpointInfoOpenShiftAi, value: Types.TaskSettings) =
+            { state with TaskSettings = Some value }
+
+    let inferenceEndpointInfoOpenShiftAi = InferenceEndpointInfoOpenShiftAiBuilder()
+
+    type InferenceEndpointInfoVoyageAIBuilder() =
+        member _.Yield(_: unit) : Types.InferenceEndpointInfoVoyageAI =
+            {
+                InferenceId = Unchecked.defaultof<_>
+                TaskType = Unchecked.defaultof<_>
+                ChunkingSettings = None
+                Service = Unchecked.defaultof<_>
+                ServiceSettings = Unchecked.defaultof<_>
+                TaskSettings = None
+            }
+
+        [<CustomOperation("inferenceId")>]
+        member _.InferenceId(state: Types.InferenceEndpointInfoVoyageAI, value: string) =
+            { state with InferenceId = value }
+
+        [<CustomOperation("taskType")>]
+        member _.TaskType(state: Types.InferenceEndpointInfoVoyageAI, value: Types.TaskTypeVoyageAI) =
+            { state with TaskType = value }
+
+        [<CustomOperation("chunkingSettings")>]
+        member _.ChunkingSettings(state: Types.InferenceEndpointInfoVoyageAI, value: Types.InferenceChunkingSettings) =
+            { state with ChunkingSettings = Some value }
+
+        [<CustomOperation("service")>]
+        member _.Service(state: Types.InferenceEndpointInfoVoyageAI, value: string) =
+            { state with Service = value }
+
+        [<CustomOperation("serviceSettings")>]
+        member _.ServiceSettings(state: Types.InferenceEndpointInfoVoyageAI, value: Types.ServiceSettings) =
+            { state with ServiceSettings = value }
+
+        [<CustomOperation("taskSettings")>]
+        member _.TaskSettings(state: Types.InferenceEndpointInfoVoyageAI, value: Types.TaskSettings) =
+            { state with TaskSettings = Some value }
+
+    let inferenceEndpointInfoVoyageAI = InferenceEndpointInfoVoyageAIBuilder()
+
+    type InferenceEndpointInfoWatsonxBuilder() =
+        member _.Yield(_: unit) : Types.InferenceEndpointInfoWatsonx =
+            {
+                InferenceId = Unchecked.defaultof<_>
+                TaskType = Unchecked.defaultof<_>
+                ChunkingSettings = None
+                Service = Unchecked.defaultof<_>
+                ServiceSettings = Unchecked.defaultof<_>
+                TaskSettings = None
+            }
+
+        [<CustomOperation("inferenceId")>]
+        member _.InferenceId(state: Types.InferenceEndpointInfoWatsonx, value: string) =
+            { state with InferenceId = value }
+
+        [<CustomOperation("taskType")>]
+        member _.TaskType(state: Types.InferenceEndpointInfoWatsonx, value: Types.TaskTypeWatsonx) =
+            { state with TaskType = value }
+
+        [<CustomOperation("chunkingSettings")>]
+        member _.ChunkingSettings(state: Types.InferenceEndpointInfoWatsonx, value: Types.InferenceChunkingSettings) =
+            { state with ChunkingSettings = Some value }
+
+        [<CustomOperation("service")>]
+        member _.Service(state: Types.InferenceEndpointInfoWatsonx, value: string) =
+            { state with Service = value }
+
+        [<CustomOperation("serviceSettings")>]
+        member _.ServiceSettings(state: Types.InferenceEndpointInfoWatsonx, value: Types.ServiceSettings) =
+            { state with ServiceSettings = value }
+
+        [<CustomOperation("taskSettings")>]
+        member _.TaskSettings(state: Types.InferenceEndpointInfoWatsonx, value: Types.TaskSettings) =
+            { state with TaskSettings = Some value }
+
+    let inferenceEndpointInfoWatsonx = InferenceEndpointInfoWatsonxBuilder()
 
     module InferenceResult =
 
@@ -1326,6 +2357,38 @@ module InferenceTypesBuilders =
 
     let requestEmbedding = RequestEmbeddingBuilder()
 
+    type SummaryReasoningDetailBuilder() =
+        member _.Yield(_: unit) : Types.SummaryReasoningDetail =
+            {
+                Type = "reasoning.summary"
+                Summary = Unchecked.defaultof<_>
+                Format = None
+                Id = None
+                Index = None
+            }
+
+        [<CustomOperation("type'")>]
+        member _.Type(state: Types.SummaryReasoningDetail, value: string) =
+            { state with Type = value }
+
+        [<CustomOperation("summary")>]
+        member _.Summary(state: Types.SummaryReasoningDetail, value: string) =
+            { state with Summary = value }
+
+        [<CustomOperation("format")>]
+        member _.Format(state: Types.SummaryReasoningDetail, value: string) =
+            { state with Format = Some value }
+
+        [<CustomOperation("id")>]
+        member _.Id(state: Types.SummaryReasoningDetail, value: string) =
+            { state with Id = Some value }
+
+        [<CustomOperation("index")>]
+        member _.Index(state: Types.SummaryReasoningDetail, value: Types.Integer) =
+            { state with Index = Some value }
+
+    let summaryReasoningDetail = SummaryReasoningDetailBuilder()
+
     module TextEmbeddingInferenceResult =
 
         let textEmbeddingBytes (value: Types.DenseEmbeddingByteResult list) =
@@ -1340,9 +2403,12 @@ module InferenceTypesBuilders =
     type TextReasoningDetailBuilder() =
         member _.Yield(_: unit) : Types.TextReasoningDetail =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "reasoning.text"
                 Signature = None
                 Text = None
+                Format = None
+                Id = None
+                Index = None
             }
 
         [<CustomOperation("type'")>]
@@ -1356,6 +2422,18 @@ module InferenceTypesBuilders =
         [<CustomOperation("text")>]
         member _.Text(state: Types.TextReasoningDetail, value: string) =
             { state with Text = Some value }
+
+        [<CustomOperation("format")>]
+        member _.Format(state: Types.TextReasoningDetail, value: string) =
+            { state with Format = Some value }
+
+        [<CustomOperation("id")>]
+        member _.Id(state: Types.TextReasoningDetail, value: string) =
+            { state with Id = Some value }
+
+        [<CustomOperation("index")>]
+        member _.Index(state: Types.TextReasoningDetail, value: Types.Integer) =
+            { state with Index = Some value }
 
     let textReasoningDetail = TextReasoningDetailBuilder()
 

@@ -160,7 +160,7 @@ module NodesInfoBuilders =
             }
 
         [<CustomOperation("seedHosts")>]
-        member _.SeedHosts(state: Types.NodeInfoDiscover, value: System.Text.Json.JsonElement) =
+        member _.SeedHosts(state: Types.NodeInfoDiscover, value: string list) =
             { state with SeedHosts = Some value }
 
         [<CustomOperation("type'")>]
@@ -252,7 +252,7 @@ module NodesInfoBuilders =
             { state with Repo = Some value }
 
         [<CustomOperation("data")>]
-        member _.Data(state: Types.NodeInfoPath, value: System.Text.Json.JsonElement) =
+        member _.Data(state: Types.NodeInfoPath, value: string list) =
             { state with Data = Some value }
 
     let nodeInfoPath = NodeInfoPathBuilder()
@@ -362,7 +362,7 @@ module NodesInfoBuilders =
             { state with Election = value }
 
         [<CustomOperation("initialMasterNodes")>]
-        member _.InitialMasterNodes(state: Types.NodeInfoSettingsCluster, value: System.Text.Json.JsonElement) =
+        member _.InitialMasterNodes(state: Types.NodeInfoSettingsCluster, value: string list) =
             { state with InitialMasterNodes = Some value }
 
         [<CustomOperation("deprecationIndexing")>]
