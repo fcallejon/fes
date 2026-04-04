@@ -1340,7 +1340,7 @@ module InferenceTypesBuilders =
     type TextReasoningDetailBuilder() =
         member _.Yield(_: unit) : Types.TextReasoningDetail =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "reasoning.text"
                 Signature = None
                 Text = None
             }

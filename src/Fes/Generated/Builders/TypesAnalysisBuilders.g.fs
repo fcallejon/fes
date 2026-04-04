@@ -12,7 +12,7 @@ module TypesAnalysisBuilders =
     type ArabicAnalyzerBuilder() =
         member _.Yield(_: unit) : Types.ArabicAnalyzer =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "arabic"
                 Stopwords = None
                 StopwordsPath = None
                 StemExclusion = None
@@ -39,7 +39,7 @@ module TypesAnalysisBuilders =
     type ArmenianAnalyzerBuilder() =
         member _.Yield(_: unit) : Types.ArmenianAnalyzer =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "armenian"
                 Stopwords = None
                 StopwordsPath = None
                 StemExclusion = None
@@ -66,7 +66,7 @@ module TypesAnalysisBuilders =
     type BasqueAnalyzerBuilder() =
         member _.Yield(_: unit) : Types.BasqueAnalyzer =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "basque"
                 Stopwords = None
                 StopwordsPath = None
                 StemExclusion = None
@@ -93,7 +93,7 @@ module TypesAnalysisBuilders =
     type BengaliAnalyzerBuilder() =
         member _.Yield(_: unit) : Types.BengaliAnalyzer =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "bengali"
                 Stopwords = None
                 StopwordsPath = None
                 StemExclusion = None
@@ -120,7 +120,7 @@ module TypesAnalysisBuilders =
     type BrazilianAnalyzerBuilder() =
         member _.Yield(_: unit) : Types.BrazilianAnalyzer =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "brazilian"
                 Stopwords = None
                 StopwordsPath = None
             }
@@ -142,7 +142,7 @@ module TypesAnalysisBuilders =
     type BulgarianAnalyzerBuilder() =
         member _.Yield(_: unit) : Types.BulgarianAnalyzer =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "bulgarian"
                 Stopwords = None
                 StopwordsPath = None
                 StemExclusion = None
@@ -169,7 +169,7 @@ module TypesAnalysisBuilders =
     type CatalanAnalyzerBuilder() =
         member _.Yield(_: unit) : Types.CatalanAnalyzer =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "catalan"
                 Stopwords = None
                 StopwordsPath = None
                 StemExclusion = None
@@ -196,7 +196,7 @@ module TypesAnalysisBuilders =
     type ChineseAnalyzerBuilder() =
         member _.Yield(_: unit) : Types.ChineseAnalyzer =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "chinese"
                 Stopwords = None
                 StopwordsPath = None
             }
@@ -218,7 +218,7 @@ module TypesAnalysisBuilders =
     type CjkAnalyzerBuilder() =
         member _.Yield(_: unit) : Types.CjkAnalyzer =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "cjk"
                 Stopwords = None
                 StopwordsPath = None
             }
@@ -240,7 +240,7 @@ module TypesAnalysisBuilders =
     type CjkBigramTokenFilterBuilder() =
         member _.Yield(_: unit) : Types.CjkBigramTokenFilter =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "cjk_bigram"
                 IgnoredScripts = None
                 OutputUnigrams = None
             }
@@ -262,7 +262,7 @@ module TypesAnalysisBuilders =
     type CommonGramsTokenFilterBuilder() =
         member _.Yield(_: unit) : Types.CommonGramsTokenFilter =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "common_grams"
                 CommonWords = None
                 CommonWordsPath = None
                 IgnoreCase = None
@@ -331,7 +331,7 @@ module TypesAnalysisBuilders =
     type CustomAnalyzerBuilder() =
         member _.Yield(_: unit) : Types.CustomAnalyzer =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "custom"
                 CharFilter = None
                 Filter = None
                 PositionIncrementGap = None
@@ -368,7 +368,7 @@ module TypesAnalysisBuilders =
     type CustomNormalizerBuilder() =
         member _.Yield(_: unit) : Types.CustomNormalizer =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "custom"
                 CharFilter = None
                 Filter = None
             }
@@ -390,7 +390,7 @@ module TypesAnalysisBuilders =
     type CzechAnalyzerBuilder() =
         member _.Yield(_: unit) : Types.CzechAnalyzer =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "czech"
                 Stopwords = None
                 StopwordsPath = None
                 StemExclusion = None
@@ -417,7 +417,7 @@ module TypesAnalysisBuilders =
     type DanishAnalyzerBuilder() =
         member _.Yield(_: unit) : Types.DanishAnalyzer =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "danish"
                 Stopwords = None
                 StopwordsPath = None
             }
@@ -439,7 +439,7 @@ module TypesAnalysisBuilders =
     type DelimitedPayloadTokenFilterBuilder() =
         member _.Yield(_: unit) : Types.DelimitedPayloadTokenFilter =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "delimited_payload"
                 Delimiter = None
                 Encoding = None
             }
@@ -461,7 +461,7 @@ module TypesAnalysisBuilders =
     type DutchAnalyzerBuilder() =
         member _.Yield(_: unit) : Types.DutchAnalyzer =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "dutch"
                 Stopwords = None
                 StopwordsPath = None
                 StemExclusion = None
@@ -488,7 +488,7 @@ module TypesAnalysisBuilders =
     type EdgeNGramTokenFilterBuilder() =
         member _.Yield(_: unit) : Types.EdgeNGramTokenFilter =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "edge_ngram"
                 MaxGram = None
                 MinGram = None
                 Side = None
@@ -520,7 +520,7 @@ module TypesAnalysisBuilders =
     type EdgeNGramTokenizerBuilder() =
         member _.Yield(_: unit) : Types.EdgeNGramTokenizer =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "edge_ngram"
                 CustomTokenChars = None
                 MaxGram = None
                 MinGram = None
@@ -552,7 +552,7 @@ module TypesAnalysisBuilders =
     type ElisionTokenFilterBuilder() =
         member _.Yield(_: unit) : Types.ElisionTokenFilter =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "elision"
                 Articles = None
                 ArticlesPath = None
                 ArticlesCase = None
@@ -579,7 +579,7 @@ module TypesAnalysisBuilders =
     type EnglishAnalyzerBuilder() =
         member _.Yield(_: unit) : Types.EnglishAnalyzer =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "english"
                 Stopwords = None
                 StopwordsPath = None
                 StemExclusion = None
@@ -606,7 +606,7 @@ module TypesAnalysisBuilders =
     type EstonianAnalyzerBuilder() =
         member _.Yield(_: unit) : Types.EstonianAnalyzer =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "estonian"
                 Stopwords = None
                 StopwordsPath = None
             }
@@ -628,7 +628,7 @@ module TypesAnalysisBuilders =
     type FingerprintAnalyzerBuilder() =
         member _.Yield(_: unit) : Types.FingerprintAnalyzer =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "fingerprint"
                 Version = None
                 MaxOutputSize = None
                 Separator = None
@@ -665,7 +665,7 @@ module TypesAnalysisBuilders =
     type FingerprintTokenFilterBuilder() =
         member _.Yield(_: unit) : Types.FingerprintTokenFilter =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "fingerprint"
                 MaxOutputSize = None
                 Separator = None
             }
@@ -687,7 +687,7 @@ module TypesAnalysisBuilders =
     type FinnishAnalyzerBuilder() =
         member _.Yield(_: unit) : Types.FinnishAnalyzer =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "finnish"
                 Stopwords = None
                 StopwordsPath = None
                 StemExclusion = None
@@ -714,7 +714,7 @@ module TypesAnalysisBuilders =
     type FrenchAnalyzerBuilder() =
         member _.Yield(_: unit) : Types.FrenchAnalyzer =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "french"
                 Stopwords = None
                 StopwordsPath = None
                 StemExclusion = None
@@ -741,7 +741,7 @@ module TypesAnalysisBuilders =
     type GalicianAnalyzerBuilder() =
         member _.Yield(_: unit) : Types.GalicianAnalyzer =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "galician"
                 Stopwords = None
                 StopwordsPath = None
                 StemExclusion = None
@@ -768,7 +768,7 @@ module TypesAnalysisBuilders =
     type GermanAnalyzerBuilder() =
         member _.Yield(_: unit) : Types.GermanAnalyzer =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "german"
                 Stopwords = None
                 StopwordsPath = None
                 StemExclusion = None
@@ -795,7 +795,7 @@ module TypesAnalysisBuilders =
     type GreekAnalyzerBuilder() =
         member _.Yield(_: unit) : Types.GreekAnalyzer =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "greek"
                 Stopwords = None
                 StopwordsPath = None
             }
@@ -817,7 +817,7 @@ module TypesAnalysisBuilders =
     type HindiAnalyzerBuilder() =
         member _.Yield(_: unit) : Types.HindiAnalyzer =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "hindi"
                 Stopwords = None
                 StopwordsPath = None
                 StemExclusion = None
@@ -844,7 +844,7 @@ module TypesAnalysisBuilders =
     type HungarianAnalyzerBuilder() =
         member _.Yield(_: unit) : Types.HungarianAnalyzer =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "hungarian"
                 Stopwords = None
                 StopwordsPath = None
                 StemExclusion = None
@@ -871,7 +871,7 @@ module TypesAnalysisBuilders =
     type HunspellTokenFilterBuilder() =
         member _.Yield(_: unit) : Types.HunspellTokenFilter =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "hunspell"
                 Dedup = None
                 Dictionary = None
                 Locale = Unchecked.defaultof<_>
@@ -903,7 +903,7 @@ module TypesAnalysisBuilders =
     type HyphenationDecompounderTokenFilterBuilder() =
         member _.Yield(_: unit) : Types.HyphenationDecompounderTokenFilter =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "hyphenation_decompounder"
                 HyphenationPatternsPath = Unchecked.defaultof<_>
                 NoSubMatches = None
                 NoOverlappingMatches = None
@@ -930,7 +930,7 @@ module TypesAnalysisBuilders =
     type IcuCollationTokenFilterBuilder() =
         member _.Yield(_: unit) : Types.IcuCollationTokenFilter =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "icu_collation"
                 Alternate = None
                 CaseFirst = None
                 CaseLevel = None
@@ -1002,7 +1002,7 @@ module TypesAnalysisBuilders =
     type IcuNormalizationCharFilterBuilder() =
         member _.Yield(_: unit) : Types.IcuNormalizationCharFilter =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "icu_normalizer"
                 Mode = None
                 Name = None
                 UnicodeSetFilter = None
@@ -1029,7 +1029,7 @@ module TypesAnalysisBuilders =
     type IndonesianAnalyzerBuilder() =
         member _.Yield(_: unit) : Types.IndonesianAnalyzer =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "indonesian"
                 Stopwords = None
                 StopwordsPath = None
                 StemExclusion = None
@@ -1056,7 +1056,7 @@ module TypesAnalysisBuilders =
     type IrishAnalyzerBuilder() =
         member _.Yield(_: unit) : Types.IrishAnalyzer =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "irish"
                 Stopwords = None
                 StopwordsPath = None
                 StemExclusion = None
@@ -1083,7 +1083,7 @@ module TypesAnalysisBuilders =
     type ItalianAnalyzerBuilder() =
         member _.Yield(_: unit) : Types.ItalianAnalyzer =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "italian"
                 Stopwords = None
                 StopwordsPath = None
                 StemExclusion = None
@@ -1110,7 +1110,7 @@ module TypesAnalysisBuilders =
     type KeepWordsTokenFilterBuilder() =
         member _.Yield(_: unit) : Types.KeepWordsTokenFilter =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "keep"
                 KeepWords = None
                 KeepWordsCase = None
                 KeepWordsPath = None
@@ -1137,7 +1137,7 @@ module TypesAnalysisBuilders =
     type KeywordMarkerTokenFilterBuilder() =
         member _.Yield(_: unit) : Types.KeywordMarkerTokenFilter =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "keyword_marker"
                 IgnoreCase = None
                 Keywords = None
                 KeywordsPath = None
@@ -1169,7 +1169,7 @@ module TypesAnalysisBuilders =
     type KuromojiAnalyzerBuilder() =
         member _.Yield(_: unit) : Types.KuromojiAnalyzer =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "kuromoji"
                 Mode = None
                 UserDictionary = None
             }
@@ -1191,7 +1191,7 @@ module TypesAnalysisBuilders =
     type KuromojiTokenizerBuilder() =
         member _.Yield(_: unit) : Types.KuromojiTokenizer =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "kuromoji_tokenizer"
                 DiscardPunctuation = None
                 Mode = Unchecked.defaultof<_>
                 NbestCost = None
@@ -1238,7 +1238,7 @@ module TypesAnalysisBuilders =
     type LatvianAnalyzerBuilder() =
         member _.Yield(_: unit) : Types.LatvianAnalyzer =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "latvian"
                 Stopwords = None
                 StopwordsPath = None
                 StemExclusion = None
@@ -1265,7 +1265,7 @@ module TypesAnalysisBuilders =
     type LengthTokenFilterBuilder() =
         member _.Yield(_: unit) : Types.LengthTokenFilter =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "length"
                 Max = None
                 Min = None
             }
@@ -1287,7 +1287,7 @@ module TypesAnalysisBuilders =
     type LimitTokenCountTokenFilterBuilder() =
         member _.Yield(_: unit) : Types.LimitTokenCountTokenFilter =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "limit"
                 ConsumeAllTokens = None
                 MaxTokenCount = None
             }
@@ -1309,7 +1309,7 @@ module TypesAnalysisBuilders =
     type LithuanianAnalyzerBuilder() =
         member _.Yield(_: unit) : Types.LithuanianAnalyzer =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "lithuanian"
                 Stopwords = None
                 StopwordsPath = None
                 StemExclusion = None
@@ -1336,7 +1336,7 @@ module TypesAnalysisBuilders =
     type MappingCharFilterBuilder() =
         member _.Yield(_: unit) : Types.MappingCharFilter =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "mapping"
                 Mappings = None
                 MappingsPath = None
             }
@@ -1358,7 +1358,7 @@ module TypesAnalysisBuilders =
     type MinHashTokenFilterBuilder() =
         member _.Yield(_: unit) : Types.MinHashTokenFilter =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "min_hash"
                 BucketCount = None
                 HashCount = None
                 HashSetSize = None
@@ -1390,7 +1390,7 @@ module TypesAnalysisBuilders =
     type NGramTokenFilterBuilder() =
         member _.Yield(_: unit) : Types.NGramTokenFilter =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "ngram"
                 MaxGram = None
                 MinGram = None
                 PreserveOriginal = None
@@ -1417,7 +1417,7 @@ module TypesAnalysisBuilders =
     type NGramTokenizerBuilder() =
         member _.Yield(_: unit) : Types.NGramTokenizer =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "ngram"
                 CustomTokenChars = None
                 MaxGram = None
                 MinGram = None
@@ -1449,7 +1449,7 @@ module TypesAnalysisBuilders =
     type NoriAnalyzerBuilder() =
         member _.Yield(_: unit) : Types.NoriAnalyzer =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "nori"
                 Version = None
                 DecompoundMode = None
                 Stoptags = None
@@ -1481,7 +1481,7 @@ module TypesAnalysisBuilders =
     type NoriTokenizerBuilder() =
         member _.Yield(_: unit) : Types.NoriTokenizer =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "nori_tokenizer"
                 DecompoundMode = None
                 DiscardPunctuation = None
                 UserDictionary = None
@@ -1513,7 +1513,7 @@ module TypesAnalysisBuilders =
     type NorwegianAnalyzerBuilder() =
         member _.Yield(_: unit) : Types.NorwegianAnalyzer =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "norwegian"
                 Stopwords = None
                 StopwordsPath = None
                 StemExclusion = None
@@ -1540,7 +1540,7 @@ module TypesAnalysisBuilders =
     type PathHierarchyTokenizerBuilder() =
         member _.Yield(_: unit) : Types.PathHierarchyTokenizer =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "path_hierarchy"
                 BufferSize = None
                 Delimiter = None
                 Replacement = None
@@ -1577,7 +1577,7 @@ module TypesAnalysisBuilders =
     type PatternAnalyzerBuilder() =
         member _.Yield(_: unit) : Types.PatternAnalyzer =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "pattern"
                 Version = None
                 Flags = None
                 Lowercase = None
@@ -1619,7 +1619,7 @@ module TypesAnalysisBuilders =
     type PatternReplaceCharFilterBuilder() =
         member _.Yield(_: unit) : Types.PatternReplaceCharFilter =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "pattern_replace"
                 Flags = None
                 Pattern = Unchecked.defaultof<_>
                 Replacement = None
@@ -1646,7 +1646,7 @@ module TypesAnalysisBuilders =
     type PatternReplaceTokenFilterBuilder() =
         member _.Yield(_: unit) : Types.PatternReplaceTokenFilter =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "pattern_replace"
                 All = None
                 Flags = None
                 Pattern = Unchecked.defaultof<_>
@@ -1678,7 +1678,7 @@ module TypesAnalysisBuilders =
     type PatternTokenizerBuilder() =
         member _.Yield(_: unit) : Types.PatternTokenizer =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "pattern"
                 Flags = None
                 Group = None
                 Pattern = None
@@ -1705,7 +1705,7 @@ module TypesAnalysisBuilders =
     type PersianAnalyzerBuilder() =
         member _.Yield(_: unit) : Types.PersianAnalyzer =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "persian"
                 Stopwords = None
                 StopwordsPath = None
             }
@@ -1727,7 +1727,7 @@ module TypesAnalysisBuilders =
     type PhoneticTokenFilterBuilder() =
         member _.Yield(_: unit) : Types.PhoneticTokenFilter =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "phonetic"
                 Encoder = Unchecked.defaultof<_>
                 Languageset = None
                 MaxCodeLen = None
@@ -1769,7 +1769,7 @@ module TypesAnalysisBuilders =
     type PortugueseAnalyzerBuilder() =
         member _.Yield(_: unit) : Types.PortugueseAnalyzer =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "portuguese"
                 Stopwords = None
                 StopwordsPath = None
                 StemExclusion = None
@@ -1796,7 +1796,7 @@ module TypesAnalysisBuilders =
     type RomanianAnalyzerBuilder() =
         member _.Yield(_: unit) : Types.RomanianAnalyzer =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "romanian"
                 Stopwords = None
                 StopwordsPath = None
                 StemExclusion = None
@@ -1823,7 +1823,7 @@ module TypesAnalysisBuilders =
     type RussianAnalyzerBuilder() =
         member _.Yield(_: unit) : Types.RussianAnalyzer =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "russian"
                 Stopwords = None
                 StopwordsPath = None
                 StemExclusion = None
@@ -1850,7 +1850,7 @@ module TypesAnalysisBuilders =
     type SerbianAnalyzerBuilder() =
         member _.Yield(_: unit) : Types.SerbianAnalyzer =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "serbian"
                 Stopwords = None
                 StopwordsPath = None
                 StemExclusion = None
@@ -1877,7 +1877,7 @@ module TypesAnalysisBuilders =
     type ShingleTokenFilterBuilder() =
         member _.Yield(_: unit) : Types.ShingleTokenFilter =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "shingle"
                 FillerToken = None
                 MaxShingleSize = None
                 MinShingleSize = None
@@ -1919,7 +1919,7 @@ module TypesAnalysisBuilders =
     type SnowballAnalyzerBuilder() =
         member _.Yield(_: unit) : Types.SnowballAnalyzer =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "snowball"
                 Version = None
                 Language = Unchecked.defaultof<_>
                 Stopwords = None
@@ -1946,7 +1946,7 @@ module TypesAnalysisBuilders =
     type SoraniAnalyzerBuilder() =
         member _.Yield(_: unit) : Types.SoraniAnalyzer =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "sorani"
                 Stopwords = None
                 StopwordsPath = None
                 StemExclusion = None
@@ -1973,7 +1973,7 @@ module TypesAnalysisBuilders =
     type SpanishAnalyzerBuilder() =
         member _.Yield(_: unit) : Types.SpanishAnalyzer =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "spanish"
                 Stopwords = None
                 StopwordsPath = None
                 StemExclusion = None
@@ -2000,7 +2000,7 @@ module TypesAnalysisBuilders =
     type StandardAnalyzerBuilder() =
         member _.Yield(_: unit) : Types.StandardAnalyzer =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "standard"
                 MaxTokenLength = None
                 Stopwords = None
                 StopwordsPath = None
@@ -2027,7 +2027,7 @@ module TypesAnalysisBuilders =
     type StemmerOverrideTokenFilterBuilder() =
         member _.Yield(_: unit) : Types.StemmerOverrideTokenFilter =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "stemmer_override"
                 Rules = None
                 RulesPath = None
             }
@@ -2049,7 +2049,7 @@ module TypesAnalysisBuilders =
     type StopAnalyzerBuilder() =
         member _.Yield(_: unit) : Types.StopAnalyzer =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "stop"
                 Version = None
                 Stopwords = None
                 StopwordsPath = None
@@ -2076,7 +2076,7 @@ module TypesAnalysisBuilders =
     type StopTokenFilterBuilder() =
         member _.Yield(_: unit) : Types.StopTokenFilter =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "stop"
                 IgnoreCase = None
                 RemoveTrailing = None
                 Stopwords = None
@@ -2108,7 +2108,7 @@ module TypesAnalysisBuilders =
     type SwedishAnalyzerBuilder() =
         member _.Yield(_: unit) : Types.SwedishAnalyzer =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "swedish"
                 Stopwords = None
                 StopwordsPath = None
                 StemExclusion = None
@@ -2182,7 +2182,7 @@ module TypesAnalysisBuilders =
     type ThaiAnalyzerBuilder() =
         member _.Yield(_: unit) : Types.ThaiAnalyzer =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "thai"
                 Stopwords = None
                 StopwordsPath = None
             }
@@ -2204,7 +2204,7 @@ module TypesAnalysisBuilders =
     type TurkishAnalyzerBuilder() =
         member _.Yield(_: unit) : Types.TurkishAnalyzer =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "turkish"
                 Stopwords = None
                 StopwordsPath = None
                 StemExclusion = None
@@ -2231,7 +2231,7 @@ module TypesAnalysisBuilders =
     type WordDelimiterGraphTokenFilterBuilder() =
         member _.Yield(_: unit) : Types.WordDelimiterGraphTokenFilter =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "word_delimiter_graph"
                 AdjustOffsets = None
                 IgnoreKeywords = None
             }

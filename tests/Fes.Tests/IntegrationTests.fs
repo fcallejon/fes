@@ -59,10 +59,10 @@ let ``Create index with explicit property mappings`` () =
 
     try
         // Use the settings/mappings body to define explicit mappings with a text and a float field
-        let textProp : Types.TextProperty = { Unchecked.defaultof<Types.TextProperty> with Analyzer = Some "standard" }
-        let floatProp : Types.FloatNumberProperty = { Type = "float"; NullValue = None }
-        let mapping : Types.TypeMapping = {
-            Unchecked.defaultof<Types.TypeMapping> with
+        let textProp = { Types.TextProperty.empty with Analyzer = Some "standard" }
+        let floatProp = Types.FloatNumberProperty.empty
+        let mapping = {
+            Types.TypeMapping.empty with
                 Properties = Some (Map.ofList [
                     "title", Types.Property.TextProperty textProp
                     "price", Types.Property.FloatNumberProperty floatProp
@@ -251,7 +251,7 @@ let ``Search with match query`` () =
 
         // Search with match query on specific field
         let matchQuery = Types.QueryContainer.Match ("title", {
-            Unchecked.defaultof<Types.MatchQuery> with
+            Types.MatchQuery.empty with
                 Query = jsonElement "\"Wireless\""
         })
         let searchReq = searchRequest {
@@ -301,7 +301,7 @@ let ``Search with bool query combining must and filter`` () =
         // Bool query: must match "Wireless" AND filter category = "electronics"
         let mustJson = Json.serialize [
             Types.QueryContainer.Match ("title", {
-                Unchecked.defaultof<Types.MatchQuery> with
+                Types.MatchQuery.empty with
                     Query = jsonElement "\"Wireless\""
             })
         ]

@@ -74,7 +74,7 @@ let emitRecordCeBuilder (w: Writer) (ctx: TypeResolver.ResolveContext) (typeName
     for p in dedupedProps do
         let fieldName = TypeEmitter.getRecordFieldName p
         if p.Required then
-            w.Line $"{fieldName} = Unchecked.defaultof<_>"
+            w.Line $"{fieldName} = {TypeEmitter.defaultValueExpr p}"
         else
             w.Line $"{fieldName} = None"
     w.Dedent()
@@ -131,7 +131,7 @@ let emitShortcutConstructor (w: Writer) (ctx: TypeResolver.ResolveContext) (def:
                     if p.Required then w.Line $"{fieldName} = value"
                     else w.Line $"{fieldName} = Some value"
                 elif p.Required then
-                    w.Line $"{fieldName} = Unchecked.defaultof<_>"
+                    w.Line $"{fieldName} = {TypeEmitter.defaultValueExpr p}"
                 else
                     w.Line $"{fieldName} = None"
             w.Dedent()

@@ -22,9 +22,7 @@ let ``bool query serialises with bool key`` () =
 
 [<Fact>]
 let ``term query serialises with field name`` () =
-    let q = QueryContainer.Term ("status", {
-        Value = Unchecked.defaultof<_>; CaseInsensitive = None
-    })
+    let q = QueryContainer.Term ("status", Types.TermQuery.empty)
     let json = Json.serialize q
     Assert.Contains("term", json)
     Assert.Contains("status", json)

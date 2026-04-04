@@ -49,7 +49,7 @@ let ``QueryContainer.Bool serialises with bool key`` () =
 
 [<Fact>]
 let ``QueryContainer.Term serialises with field-keyed structure`` () =
-    let q = Types.QueryContainer.Term ("status", { CaseInsensitive = None; Value = Unchecked.defaultof<_> })
+    let q = Types.QueryContainer.Term ("status", Types.TermQuery.empty)
     let json = Json.serialize q
     json |> should haveSubstring "\"term\""
     json |> should haveSubstring "\"status\""

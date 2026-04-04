@@ -1326,7 +1326,7 @@ module IndicesTypesBuilders =
     type SettingsSimilarityBm25Builder() =
         member _.Yield(_: unit) : Types.SettingsSimilarityBm25 =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "BM25"
                 B = None
                 DiscountOverlaps = None
                 K1 = None
