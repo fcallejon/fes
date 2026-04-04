@@ -63,4 +63,3 @@ module MonitoringOperations =
             { req with SystemApiVersion = value }
         let withInterval (value: Types.Duration) (req: MonitoringBulkRequest<_, _>) =
             { req with Interval = value }
-
