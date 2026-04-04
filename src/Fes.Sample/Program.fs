@@ -62,7 +62,7 @@ let main _ =
 
     // Term query with field
     let termQ =
-        Query.term "status" { CaseInsensitive = None; Value = Unchecked.defaultof<_> }
+        Query.term "status" { Types.TermQuery.empty with Value = Types.FieldValue.String "active" }
     let termJson = Json.serialize termQ
     printfn $"  Term query: {termJson}"
 
