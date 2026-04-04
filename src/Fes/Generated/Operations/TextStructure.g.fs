@@ -549,4 +549,3 @@ module TextStructureOperations =
             { req with GrokPattern = value }
         let withText (value: string list) (req: TextStructureTestGrokPatternRequest) =
             { req with Text = value }
-
