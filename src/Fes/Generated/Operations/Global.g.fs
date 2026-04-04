@@ -1073,7 +1073,14 @@ module GlobalOperations =
         with
         static member ToEndpoint(req: DeleteByQueryRethrottleRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
             let path = $"/_delete_by_query/{Fes.Http.toPathSegment req.TaskId}/_rethrottle"
-            let fullPath = path
+            let queryParams =
+                [
+                    "requests_per_second", Fes.Http.toQueryValue req.RequestsPerSecond
+                ]
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
             endpoint, ValueNone
 
@@ -2650,7 +2657,7 @@ module GlobalOperations =
             { req with IgnoreUnavailable = Some value }
         let withIncludeNamedQueriesScore (value: bool) (req: MsearchRequest) =
             { req with IncludeNamedQueriesScore = Some value }
-        let withIndex (value: Types.Indices) (req: MsearchRequest) =
+        let withQueryIndex (value: Types.Indices) (req: MsearchRequest) =
             { req with queryIndex = Some value }
         let withMaxConcurrentSearches (value: Types.Integer) (req: MsearchRequest) =
             { req with MaxConcurrentSearches = Some value }
@@ -2943,13 +2950,16 @@ module GlobalOperations =
             let path = $"/{Fes.Http.toPathSegment req.Index}/_pit"
             let queryParams =
                 [
+                    "keep_alive", Fes.Http.toQueryValue req.KeepAlive
+                ] @
+                ([
                     req.IgnoreUnavailable |> Option.map (fun v -> "ignore_unavailable", Fes.Http.toQueryValue v)
                     req.Preference |> Option.map (fun v -> "preference", Fes.Http.toQueryValue v)
                     req.Routing |> Option.map (fun v -> "routing", Fes.Http.toQueryValue v)
                     req.ExpandWildcards |> Option.map (fun v -> "expand_wildcards", Fes.Http.toQueryValue v)
                     req.AllowPartialSearchResults |> Option.map (fun v -> "allow_partial_search_results", Fes.Http.toQueryValue v)
                     req.MaxConcurrentShardRequests |> Option.map (fun v -> "max_concurrent_shard_requests", Fes.Http.toQueryValue v)
-                ] |> List.choose id
+                ] |> List.choose id)
             let queryString =
                 if List.isEmpty queryParams then ""
                 else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
@@ -3115,7 +3125,7 @@ module GlobalOperations =
     let putScriptRequest = PutScriptRequestBuilder()
 
     module PutScript =
-        let withContext (value: Types.Name) (req: PutScriptRequest) =
+        let withQueryContext (value: Types.Name) (req: PutScriptRequest) =
             { req with queryContext = Some value }
         let withMasterTimeout (value: Types.Duration) (req: PutScriptRequest) =
             { req with MasterTimeout = Some value }
@@ -3377,8 +3387,11 @@ module GlobalOperations =
             let path = $"/_reindex/{Fes.Http.toPathSegment req.TaskId}/_rethrottle"
             let queryParams =
                 [
+                    "requests_per_second", Fes.Http.toQueryValue req.RequestsPerSecond
+                ] @
+                ([
                     req.GroupBy |> Option.map (fun v -> "group_by", Fes.Http.toQueryValue v)
-                ] |> List.choose id
+                ] |> List.choose id)
             let queryString =
                 if List.isEmpty queryParams then ""
                 else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
@@ -3599,7 +3612,7 @@ module GlobalOperations =
     module Scroll =
         let withScroll (value: Types.Duration) (req: ScrollRequest) =
             { req with Scroll = Some value }
-        let withScrollId (value: Types.ScrollId) (req: ScrollRequest) =
+        let withQueryScrollId (value: Types.ScrollId) (req: ScrollRequest) =
             { req with queryScrollId = Some value }
         let withRestTotalHitsAsInt (value: bool) (req: ScrollRequest) =
             { req with RestTotalHitsAsInt = Some value }
@@ -5852,7 +5865,14 @@ module GlobalOperations =
         with
         static member ToEndpoint(req: UpdateByQueryRethrottleRequest) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
             let path = $"/_update_by_query/{Fes.Http.toPathSegment req.TaskId}/_rethrottle"
-            let fullPath = path
+            let queryParams =
+                [
+                    "requests_per_second", Fes.Http.toQueryValue req.RequestsPerSecond
+                ]
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
             endpoint, ValueNone
 
