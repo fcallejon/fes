@@ -150,7 +150,7 @@ module SecurityTypesBuilders =
             { state with FieldSecurity = Some value }
 
         [<CustomOperation("names")>]
-        member _.Names(state: Types.IndicesPrivileges, value: System.Text.Json.JsonElement) =
+        member _.Names(state: Types.IndicesPrivileges, value: Types.IndexName list) =
             { state with Names = value }
 
         [<CustomOperation("privileges")>]
@@ -182,7 +182,7 @@ module SecurityTypesBuilders =
             { state with FieldSecurity = Some value }
 
         [<CustomOperation("names")>]
-        member _.Names(state: Types.IndicesPrivilegesBase, value: System.Text.Json.JsonElement) =
+        member _.Names(state: Types.IndicesPrivilegesBase, value: Types.IndexName list) =
             { state with Names = value }
 
         [<CustomOperation("privileges")>]
@@ -219,7 +219,7 @@ module SecurityTypesBuilders =
             { state with FieldSecurity = Some value }
 
         [<CustomOperation("names")>]
-        member _.Names(state: Types.RemoteIndicesPrivileges, value: System.Text.Json.JsonElement) =
+        member _.Names(state: Types.RemoteIndicesPrivileges, value: Types.IndexName list) =
             { state with Names = value }
 
         [<CustomOperation("privileges")>]
@@ -256,7 +256,7 @@ module SecurityTypesBuilders =
             { state with FieldSecurity = Some value }
 
         [<CustomOperation("names")>]
-        member _.Names(state: Types.RemoteUserIndicesPrivileges, value: System.Text.Json.JsonElement) =
+        member _.Names(state: Types.RemoteUserIndicesPrivileges, value: Types.IndexName list) =
             { state with Names = value }
 
         [<CustomOperation("privileges")>]
@@ -306,7 +306,7 @@ module SecurityTypesBuilders =
             { state with RemoteCluster = Some value }
 
         [<CustomOperation("global'")>]
-        member _.Global(state: Types.RoleDescriptor, value: System.Text.Json.JsonElement) =
+        member _.Global(state: Types.RoleDescriptor, value: Types.GlobalPrivilege list) =
             { state with Global = Some value }
 
         [<CustomOperation("applications")>]
@@ -368,7 +368,7 @@ module SecurityTypesBuilders =
             { state with RemoteCluster = Some value }
 
         [<CustomOperation("global'")>]
-        member _.Global(state: Types.RoleDescriptorRead, value: System.Text.Json.JsonElement) =
+        member _.Global(state: Types.RoleDescriptorRead, value: Types.GlobalPrivilege list) =
             { state with Global = Some value }
 
         [<CustomOperation("applications")>]
@@ -437,7 +437,7 @@ module SecurityTypesBuilders =
         let all (value: Types.RoleMappingRule list) =
             Types.RoleMappingRule.All value
 
-        let field (field: Types.Field) (value: System.Text.Json.JsonElement) =
+        let field (field: Types.Field) (value: Types.FieldValue list) =
             Types.RoleMappingRule.Field (field, value)
 
         let except (value: Types.RoleMappingRule) =
@@ -498,7 +498,7 @@ module SecurityTypesBuilders =
             { state with FieldSecurity = Some value }
 
         [<CustomOperation("names")>]
-        member _.Names(state: Types.SearchAccess, value: System.Text.Json.JsonElement) =
+        member _.Names(state: Types.SearchAccess, value: Types.IndexName list) =
             { state with Names = value }
 
         [<CustomOperation("query")>]
@@ -568,7 +568,7 @@ module SecurityTypesBuilders =
             { state with FieldSecurity = Some value }
 
         [<CustomOperation("names")>]
-        member _.Names(state: Types.UserIndicesPrivileges, value: System.Text.Json.JsonElement) =
+        member _.Names(state: Types.UserIndicesPrivileges, value: Types.IndexName list) =
             { state with Names = value }
 
         [<CustomOperation("privileges")>]
@@ -600,7 +600,7 @@ module SecurityTypesBuilders =
             { state with FieldSecurity = Some value }
 
         [<CustomOperation("names")>]
-        member _.Names(state: Types.UserIndicesPrivilegesBase, value: System.Text.Json.JsonElement) =
+        member _.Names(state: Types.UserIndicesPrivilegesBase, value: Types.IndexName list) =
             { state with Names = value }
 
         [<CustomOperation("privileges")>]

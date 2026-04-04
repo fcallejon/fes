@@ -69,6 +69,11 @@ let rec resolveValueOf (ctx: ResolveContext) (v: ValueOf) : string =
         match items with
         | [ a; b ] when isNullType a -> $"{resolveValueOf ctx b} option"
         | [ a; b ] when isNullType b -> $"{resolveValueOf ctx a} option"
+        // T | T[] and T[] | T → T list (single value is just a one-element list)
+        | [ ValueOf.InstanceOf (tn1, []); ValueOf.ArrayOf (ValueOf.InstanceOf (tn2, [])) ] when tn1 = tn2 ->
+            $"{resolveValueOf ctx (ValueOf.InstanceOf (tn1, []))} list"
+        | [ ValueOf.ArrayOf (ValueOf.InstanceOf (tn1, [])); ValueOf.InstanceOf (tn2, []) ] when tn1 = tn2 ->
+            $"{resolveValueOf ctx (ValueOf.InstanceOf (tn1, []))} list"
         | _ ->
             // Fallback: use JsonElement for complex unions without a type_alias wrapper
             "System.Text.Json.JsonElement"

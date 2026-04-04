@@ -40,10 +40,7 @@ let ``SearchType enum round-trips`` () =
 
 [<Fact>]
 let ``QueryContainer.Bool serialises with bool key`` () =
-    let q = Types.QueryContainer.Bool {
-        Filter = None; MinimumShouldMatch = None
-        Must = None; MustNot = None; Should = None
-    }
+    let q = Types.QueryContainer.Bool Types.BoolQuery.empty
     let json = Json.serialize q
     json |> should haveSubstring "\"bool\""
 

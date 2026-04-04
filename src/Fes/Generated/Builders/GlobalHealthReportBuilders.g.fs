@@ -36,6 +36,38 @@ module GlobalHealthReportBuilders =
 
     let baseIndicator = BaseIndicatorBuilder()
 
+    type DataStreamLifecycleIndicatorBuilder() =
+        member _.Yield(_: unit) : Types.DataStreamLifecycleIndicator =
+            {
+                Details = None
+                Status = Unchecked.defaultof<_>
+                Symptom = Unchecked.defaultof<_>
+                Impacts = None
+                Diagnosis = None
+            }
+
+        [<CustomOperation("details")>]
+        member _.Details(state: Types.DataStreamLifecycleIndicator, value: Types.DataStreamLifecycleDetails) =
+            { state with Details = Some value }
+
+        [<CustomOperation("status")>]
+        member _.Status(state: Types.DataStreamLifecycleIndicator, value: Types.IndicatorHealthStatus) =
+            { state with Status = value }
+
+        [<CustomOperation("symptom")>]
+        member _.Symptom(state: Types.DataStreamLifecycleIndicator, value: string) =
+            { state with Symptom = value }
+
+        [<CustomOperation("impacts")>]
+        member _.Impacts(state: Types.DataStreamLifecycleIndicator, value: Types.Impact list) =
+            { state with Impacts = Some value }
+
+        [<CustomOperation("diagnosis")>]
+        member _.Diagnosis(state: Types.DataStreamLifecycleIndicator, value: Types.Diagnosis list) =
+            { state with Diagnosis = Some value }
+
+    let dataStreamLifecycleIndicator = DataStreamLifecycleIndicatorBuilder()
+
     type DiagnosisAffectedResourcesBuilder() =
         member _.Yield(_: unit) : Types.DiagnosisAffectedResources =
             {
@@ -67,6 +99,102 @@ module GlobalHealthReportBuilders =
             { state with SnapshotRepositories = Some value }
 
     let diagnosisAffectedResources = DiagnosisAffectedResourcesBuilder()
+
+    type DiskIndicatorBuilder() =
+        member _.Yield(_: unit) : Types.DiskIndicator =
+            {
+                Details = None
+                Status = Unchecked.defaultof<_>
+                Symptom = Unchecked.defaultof<_>
+                Impacts = None
+                Diagnosis = None
+            }
+
+        [<CustomOperation("details")>]
+        member _.Details(state: Types.DiskIndicator, value: Types.DiskIndicatorDetails) =
+            { state with Details = Some value }
+
+        [<CustomOperation("status")>]
+        member _.Status(state: Types.DiskIndicator, value: Types.IndicatorHealthStatus) =
+            { state with Status = value }
+
+        [<CustomOperation("symptom")>]
+        member _.Symptom(state: Types.DiskIndicator, value: string) =
+            { state with Symptom = value }
+
+        [<CustomOperation("impacts")>]
+        member _.Impacts(state: Types.DiskIndicator, value: Types.Impact list) =
+            { state with Impacts = Some value }
+
+        [<CustomOperation("diagnosis")>]
+        member _.Diagnosis(state: Types.DiskIndicator, value: Types.Diagnosis list) =
+            { state with Diagnosis = Some value }
+
+    let diskIndicator = DiskIndicatorBuilder()
+
+    type FileSettingsIndicatorBuilder() =
+        member _.Yield(_: unit) : Types.FileSettingsIndicator =
+            {
+                Details = None
+                Status = Unchecked.defaultof<_>
+                Symptom = Unchecked.defaultof<_>
+                Impacts = None
+                Diagnosis = None
+            }
+
+        [<CustomOperation("details")>]
+        member _.Details(state: Types.FileSettingsIndicator, value: Types.FileSettingsIndicatorDetails) =
+            { state with Details = Some value }
+
+        [<CustomOperation("status")>]
+        member _.Status(state: Types.FileSettingsIndicator, value: Types.IndicatorHealthStatus) =
+            { state with Status = value }
+
+        [<CustomOperation("symptom")>]
+        member _.Symptom(state: Types.FileSettingsIndicator, value: string) =
+            { state with Symptom = value }
+
+        [<CustomOperation("impacts")>]
+        member _.Impacts(state: Types.FileSettingsIndicator, value: Types.Impact list) =
+            { state with Impacts = Some value }
+
+        [<CustomOperation("diagnosis")>]
+        member _.Diagnosis(state: Types.FileSettingsIndicator, value: Types.Diagnosis list) =
+            { state with Diagnosis = Some value }
+
+    let fileSettingsIndicator = FileSettingsIndicatorBuilder()
+
+    type IlmIndicatorBuilder() =
+        member _.Yield(_: unit) : Types.IlmIndicator =
+            {
+                Details = None
+                Status = Unchecked.defaultof<_>
+                Symptom = Unchecked.defaultof<_>
+                Impacts = None
+                Diagnosis = None
+            }
+
+        [<CustomOperation("details")>]
+        member _.Details(state: Types.IlmIndicator, value: Types.IlmIndicatorDetails) =
+            { state with Details = Some value }
+
+        [<CustomOperation("status")>]
+        member _.Status(state: Types.IlmIndicator, value: Types.IndicatorHealthStatus) =
+            { state with Status = value }
+
+        [<CustomOperation("symptom")>]
+        member _.Symptom(state: Types.IlmIndicator, value: string) =
+            { state with Symptom = value }
+
+        [<CustomOperation("impacts")>]
+        member _.Impacts(state: Types.IlmIndicator, value: Types.Impact list) =
+            { state with Impacts = Some value }
+
+        [<CustomOperation("diagnosis")>]
+        member _.Diagnosis(state: Types.IlmIndicator, value: Types.Diagnosis list) =
+            { state with Diagnosis = Some value }
+
+    let ilmIndicator = IlmIndicatorBuilder()
 
     type IndicatorsBuilder() =
         member _.Yield(_: unit) : Types.Indicators =
@@ -120,6 +248,38 @@ module GlobalHealthReportBuilders =
 
     let indicators = IndicatorsBuilder()
 
+    type MasterIsStableIndicatorBuilder() =
+        member _.Yield(_: unit) : Types.MasterIsStableIndicator =
+            {
+                Details = None
+                Status = Unchecked.defaultof<_>
+                Symptom = Unchecked.defaultof<_>
+                Impacts = None
+                Diagnosis = None
+            }
+
+        [<CustomOperation("details")>]
+        member _.Details(state: Types.MasterIsStableIndicator, value: Types.MasterIsStableIndicatorDetails) =
+            { state with Details = Some value }
+
+        [<CustomOperation("status")>]
+        member _.Status(state: Types.MasterIsStableIndicator, value: Types.IndicatorHealthStatus) =
+            { state with Status = value }
+
+        [<CustomOperation("symptom")>]
+        member _.Symptom(state: Types.MasterIsStableIndicator, value: string) =
+            { state with Symptom = value }
+
+        [<CustomOperation("impacts")>]
+        member _.Impacts(state: Types.MasterIsStableIndicator, value: Types.Impact list) =
+            { state with Impacts = Some value }
+
+        [<CustomOperation("diagnosis")>]
+        member _.Diagnosis(state: Types.MasterIsStableIndicator, value: Types.Diagnosis list) =
+            { state with Diagnosis = Some value }
+
+    let masterIsStableIndicator = MasterIsStableIndicatorBuilder()
+
     type MasterIsStableIndicatorDetailsBuilder() =
         member _.Yield(_: unit) : Types.MasterIsStableIndicatorDetails =
             {
@@ -147,6 +307,38 @@ module GlobalHealthReportBuilders =
 
     let masterIsStableIndicatorDetails = MasterIsStableIndicatorDetailsBuilder()
 
+    type RepositoryIntegrityIndicatorBuilder() =
+        member _.Yield(_: unit) : Types.RepositoryIntegrityIndicator =
+            {
+                Details = None
+                Status = Unchecked.defaultof<_>
+                Symptom = Unchecked.defaultof<_>
+                Impacts = None
+                Diagnosis = None
+            }
+
+        [<CustomOperation("details")>]
+        member _.Details(state: Types.RepositoryIntegrityIndicator, value: Types.RepositoryIntegrityIndicatorDetails) =
+            { state with Details = Some value }
+
+        [<CustomOperation("status")>]
+        member _.Status(state: Types.RepositoryIntegrityIndicator, value: Types.IndicatorHealthStatus) =
+            { state with Status = value }
+
+        [<CustomOperation("symptom")>]
+        member _.Symptom(state: Types.RepositoryIntegrityIndicator, value: string) =
+            { state with Symptom = value }
+
+        [<CustomOperation("impacts")>]
+        member _.Impacts(state: Types.RepositoryIntegrityIndicator, value: Types.Impact list) =
+            { state with Impacts = Some value }
+
+        [<CustomOperation("diagnosis")>]
+        member _.Diagnosis(state: Types.RepositoryIntegrityIndicator, value: Types.Diagnosis list) =
+            { state with Diagnosis = Some value }
+
+    let repositoryIntegrityIndicator = RepositoryIntegrityIndicatorBuilder()
+
     type RepositoryIntegrityIndicatorDetailsBuilder() =
         member _.Yield(_: unit) : Types.RepositoryIntegrityIndicatorDetails =
             {
@@ -168,4 +360,100 @@ module GlobalHealthReportBuilders =
             { state with Corrupted = Some value }
 
     let repositoryIntegrityIndicatorDetails = RepositoryIntegrityIndicatorDetailsBuilder()
+
+    type ShardsAvailabilityIndicatorBuilder() =
+        member _.Yield(_: unit) : Types.ShardsAvailabilityIndicator =
+            {
+                Details = None
+                Status = Unchecked.defaultof<_>
+                Symptom = Unchecked.defaultof<_>
+                Impacts = None
+                Diagnosis = None
+            }
+
+        [<CustomOperation("details")>]
+        member _.Details(state: Types.ShardsAvailabilityIndicator, value: Types.ShardsAvailabilityIndicatorDetails) =
+            { state with Details = Some value }
+
+        [<CustomOperation("status")>]
+        member _.Status(state: Types.ShardsAvailabilityIndicator, value: Types.IndicatorHealthStatus) =
+            { state with Status = value }
+
+        [<CustomOperation("symptom")>]
+        member _.Symptom(state: Types.ShardsAvailabilityIndicator, value: string) =
+            { state with Symptom = value }
+
+        [<CustomOperation("impacts")>]
+        member _.Impacts(state: Types.ShardsAvailabilityIndicator, value: Types.Impact list) =
+            { state with Impacts = Some value }
+
+        [<CustomOperation("diagnosis")>]
+        member _.Diagnosis(state: Types.ShardsAvailabilityIndicator, value: Types.Diagnosis list) =
+            { state with Diagnosis = Some value }
+
+    let shardsAvailabilityIndicator = ShardsAvailabilityIndicatorBuilder()
+
+    type ShardsCapacityIndicatorBuilder() =
+        member _.Yield(_: unit) : Types.ShardsCapacityIndicator =
+            {
+                Details = None
+                Status = Unchecked.defaultof<_>
+                Symptom = Unchecked.defaultof<_>
+                Impacts = None
+                Diagnosis = None
+            }
+
+        [<CustomOperation("details")>]
+        member _.Details(state: Types.ShardsCapacityIndicator, value: Types.ShardsCapacityIndicatorDetails) =
+            { state with Details = Some value }
+
+        [<CustomOperation("status")>]
+        member _.Status(state: Types.ShardsCapacityIndicator, value: Types.IndicatorHealthStatus) =
+            { state with Status = value }
+
+        [<CustomOperation("symptom")>]
+        member _.Symptom(state: Types.ShardsCapacityIndicator, value: string) =
+            { state with Symptom = value }
+
+        [<CustomOperation("impacts")>]
+        member _.Impacts(state: Types.ShardsCapacityIndicator, value: Types.Impact list) =
+            { state with Impacts = Some value }
+
+        [<CustomOperation("diagnosis")>]
+        member _.Diagnosis(state: Types.ShardsCapacityIndicator, value: Types.Diagnosis list) =
+            { state with Diagnosis = Some value }
+
+    let shardsCapacityIndicator = ShardsCapacityIndicatorBuilder()
+
+    type SlmIndicatorBuilder() =
+        member _.Yield(_: unit) : Types.SlmIndicator =
+            {
+                Details = None
+                Status = Unchecked.defaultof<_>
+                Symptom = Unchecked.defaultof<_>
+                Impacts = None
+                Diagnosis = None
+            }
+
+        [<CustomOperation("details")>]
+        member _.Details(state: Types.SlmIndicator, value: Types.SlmIndicatorDetails) =
+            { state with Details = Some value }
+
+        [<CustomOperation("status")>]
+        member _.Status(state: Types.SlmIndicator, value: Types.IndicatorHealthStatus) =
+            { state with Status = value }
+
+        [<CustomOperation("symptom")>]
+        member _.Symptom(state: Types.SlmIndicator, value: string) =
+            { state with Symptom = value }
+
+        [<CustomOperation("impacts")>]
+        member _.Impacts(state: Types.SlmIndicator, value: Types.Impact list) =
+            { state with Impacts = Some value }
+
+        [<CustomOperation("diagnosis")>]
+        member _.Diagnosis(state: Types.SlmIndicator, value: Types.Diagnosis list) =
+            { state with Diagnosis = Some value }
+
+    let slmIndicator = SlmIndicatorBuilder()
 

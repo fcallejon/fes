@@ -2513,7 +2513,7 @@ module MlOperations =
         From: Types.Integer option
         Include: Types.Include option
         Size: Types.Integer option
-        Tags: System.Text.Json.JsonElement option
+        Tags: string list option
     }
 
         with
@@ -2580,7 +2580,7 @@ module MlOperations =
             { state with Size = Some value }
 
         [<CustomOperation("tags")>]
-        member _.Tags(state: MlGetTrainedModelsRequest, value: System.Text.Json.JsonElement) =
+        member _.Tags(state: MlGetTrainedModelsRequest, value: string list) =
             { state with Tags = Some value }
 
     let mlGetTrainedModelsRequest = MlGetTrainedModelsRequestBuilder()
@@ -2598,7 +2598,7 @@ module MlOperations =
             { req with Include = Some value }
         let withSize (value: Types.Integer) (req: MlGetTrainedModelsRequest) =
             { req with Size = Some value }
-        let withTags (value: System.Text.Json.JsonElement) (req: MlGetTrainedModelsRequest) =
+        let withTags (value: string list) (req: MlGetTrainedModelsRequest) =
             { req with Tags = Some value }
 
     type MlGetTrainedModelsStatsRequest = {

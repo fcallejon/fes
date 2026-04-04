@@ -289,7 +289,7 @@ module ClusterOperations =
     type ClusterGetComponentTemplateRequest = {
         Name: Types.Name
         FlatSettings: bool option
-        SettingsFilter: System.Text.Json.JsonElement option
+        SettingsFilter: string list option
         IncludeDefaults: bool option
         Local: bool option
         MasterTimeout: Types.Duration option
@@ -335,7 +335,7 @@ module ClusterOperations =
             { state with FlatSettings = Some value }
 
         [<CustomOperation("settingsFilter")>]
-        member _.SettingsFilter(state: ClusterGetComponentTemplateRequest, value: System.Text.Json.JsonElement) =
+        member _.SettingsFilter(state: ClusterGetComponentTemplateRequest, value: string list) =
             { state with SettingsFilter = Some value }
 
         [<CustomOperation("includeDefaults")>]
@@ -355,7 +355,7 @@ module ClusterOperations =
     module GetComponentTemplate =
         let withFlatSettings (value: bool) (req: ClusterGetComponentTemplateRequest) =
             { req with FlatSettings = Some value }
-        let withSettingsFilter (value: System.Text.Json.JsonElement) (req: ClusterGetComponentTemplateRequest) =
+        let withSettingsFilter (value: string list) (req: ClusterGetComponentTemplateRequest) =
             { req with SettingsFilter = Some value }
         let withIncludeDefaults (value: bool) (req: ClusterGetComponentTemplateRequest) =
             { req with IncludeDefaults = Some value }
@@ -876,7 +876,7 @@ module ClusterOperations =
     type ClusterRerouteRequest = {
         DryRun: bool option
         Explain: bool option
-        Metric: System.Text.Json.JsonElement option
+        Metric: string list option
         RetryFailed: bool option
         MasterTimeout: Types.Duration option
         Timeout: Types.Duration option
@@ -927,7 +927,7 @@ module ClusterOperations =
             { state with Explain = Some value }
 
         [<CustomOperation("metric")>]
-        member _.Metric(state: ClusterRerouteRequest, value: System.Text.Json.JsonElement) =
+        member _.Metric(state: ClusterRerouteRequest, value: string list) =
             { state with Metric = Some value }
 
         [<CustomOperation("retryFailed")>]
@@ -953,7 +953,7 @@ module ClusterOperations =
             { req with DryRun = Some value }
         let withExplain (value: bool) (req: ClusterRerouteRequest) =
             { req with Explain = Some value }
-        let withMetric (value: System.Text.Json.JsonElement) (req: ClusterRerouteRequest) =
+        let withMetric (value: string list) (req: ClusterRerouteRequest) =
             { req with Metric = Some value }
         let withRetryFailed (value: bool) (req: ClusterRerouteRequest) =
             { req with RetryFailed = Some value }

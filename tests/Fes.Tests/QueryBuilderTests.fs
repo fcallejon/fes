@@ -11,10 +11,7 @@ open Fes.Generated.Builders
 
 [<Fact>]
 let ``Query.bool wraps BoolQuery in QueryContainer.Bool`` () =
-    let bq : Types.BoolQuery = {
-        Filter = None; MinimumShouldMatch = None
-        Must = None; MustNot = None; Should = None
-    }
+    let bq = Types.BoolQuery.empty
     let q = Query.bool bq
     // Verify it's the Bool case by serialising — should contain "bool" key
     let json = Fes.Json.serialize q

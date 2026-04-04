@@ -23,7 +23,7 @@ module SpecUtilsBuilders =
             { state with ErrorTrace = Some value }
 
         [<CustomOperation("filterPath")>]
-        member _.FilterPath(state: Types.CommonQueryParameters, value: System.Text.Json.JsonElement) =
+        member _.FilterPath(state: Types.CommonQueryParameters, value: string list) =
             { state with FilterPath = Some value }
 
         [<CustomOperation("human")>]

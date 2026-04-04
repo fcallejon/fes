@@ -148,6 +148,9 @@ module TypesBuilders =
                 QueryVector = None
                 QueryVectorBuilder = None
                 Lambda = None
+                Filter = None
+                MinScore = None
+                Name = None
             }
 
         [<CustomOperation("type'")>]
@@ -181,6 +184,18 @@ module TypesBuilders =
         [<CustomOperation("lambda")>]
         member _.Lambda(state: Types.DiversifyRetriever, value: Types.Float) =
             { state with Lambda = Some value }
+
+        [<CustomOperation("filter")>]
+        member _.Filter(state: Types.DiversifyRetriever, value: Types.QueryContainer list) =
+            { state with Filter = Some value }
+
+        [<CustomOperation("minScore")>]
+        member _.MinScore(state: Types.DiversifyRetriever, value: Types.Float) =
+            { state with MinScore = Some value }
+
+        [<CustomOperation("name")>]
+        member _.Name(state: Types.DiversifyRetriever, value: string) =
+            { state with Name = Some value }
 
     let diversifyRetriever = DiversifyRetrieverBuilder()
 
@@ -580,6 +595,8 @@ module TypesBuilders =
                 Filter = None
                 Similarity = None
                 RescoreVector = None
+                Boost = None
+                query_name = None
             }
 
         [<CustomOperation("field")>]
@@ -607,7 +624,7 @@ module TypesBuilders =
             { state with K = Some value }
 
         [<CustomOperation("filter")>]
-        member _.Filter(state: Types.KnnQuery, value: System.Text.Json.JsonElement) =
+        member _.Filter(state: Types.KnnQuery, value: Types.QueryContainer list) =
             { state with Filter = Some value }
 
         [<CustomOperation("similarity")>]
@@ -617,6 +634,14 @@ module TypesBuilders =
         [<CustomOperation("rescoreVector")>]
         member _.RescoreVector(state: Types.KnnQuery, value: Types.RescoreVector) =
             { state with RescoreVector = Some value }
+
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.KnnQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("queryName")>]
+        member _.QueryName(state: Types.KnnQuery, value: string) =
+            { state with query_name = Some value }
 
     let knnQuery = KnnQueryBuilder()
 
@@ -631,6 +656,9 @@ module TypesBuilders =
                 VisitPercentage = None
                 Similarity = None
                 RescoreVector = None
+                Filter = None
+                MinScore = None
+                Name = None
             }
 
         [<CustomOperation("field")>]
@@ -664,6 +692,18 @@ module TypesBuilders =
         [<CustomOperation("rescoreVector")>]
         member _.RescoreVector(state: Types.KnnRetriever, value: Types.RescoreVector) =
             { state with RescoreVector = Some value }
+
+        [<CustomOperation("filter")>]
+        member _.Filter(state: Types.KnnRetriever, value: Types.QueryContainer list) =
+            { state with Filter = Some value }
+
+        [<CustomOperation("minScore")>]
+        member _.MinScore(state: Types.KnnRetriever, value: Types.Float) =
+            { state with MinScore = Some value }
+
+        [<CustomOperation("name")>]
+        member _.Name(state: Types.KnnRetriever, value: string) =
+            { state with Name = Some value }
 
     let knnRetriever = KnnRetrieverBuilder()
 
@@ -713,7 +753,7 @@ module TypesBuilders =
             { state with Boost = Some value }
 
         [<CustomOperation("filter")>]
-        member _.Filter(state: Types.KnnSearch, value: System.Text.Json.JsonElement) =
+        member _.Filter(state: Types.KnnSearch, value: Types.QueryContainer list) =
             { state with Filter = Some value }
 
         [<CustomOperation("similarity")>]
@@ -742,6 +782,9 @@ module TypesBuilders =
                 Query = None
                 Fields = None
                 Normalizer = None
+                Filter = None
+                MinScore = None
+                Name = None
             }
 
         [<CustomOperation("retrievers")>]
@@ -763,6 +806,18 @@ module TypesBuilders =
         [<CustomOperation("normalizer")>]
         member _.Normalizer(state: Types.LinearRetriever, value: Types.ScoreNormalizer) =
             { state with Normalizer = Some value }
+
+        [<CustomOperation("filter")>]
+        member _.Filter(state: Types.LinearRetriever, value: Types.QueryContainer list) =
+            { state with Filter = Some value }
+
+        [<CustomOperation("minScore")>]
+        member _.MinScore(state: Types.LinearRetriever, value: Types.Float) =
+            { state with MinScore = Some value }
+
+        [<CustomOperation("name")>]
+        member _.Name(state: Types.LinearRetriever, value: string) =
+            { state with Name = Some value }
 
     let linearRetriever = LinearRetrieverBuilder()
 
@@ -944,6 +999,9 @@ module TypesBuilders =
                 Ids = None
                 Docs = None
                 RankWindowSize = None
+                Filter = None
+                MinScore = None
+                Name = None
             }
 
         [<CustomOperation("retriever")>]
@@ -961,6 +1019,18 @@ module TypesBuilders =
         [<CustomOperation("rankWindowSize")>]
         member _.RankWindowSize(state: Types.PinnedRetriever, value: Types.Integer) =
             { state with RankWindowSize = Some value }
+
+        [<CustomOperation("filter")>]
+        member _.Filter(state: Types.PinnedRetriever, value: Types.QueryContainer list) =
+            { state with Filter = Some value }
+
+        [<CustomOperation("minScore")>]
+        member _.MinScore(state: Types.PinnedRetriever, value: Types.Float) =
+            { state with MinScore = Some value }
+
+        [<CustomOperation("name")>]
+        member _.Name(state: Types.PinnedRetriever, value: string) =
+            { state with Name = Some value }
 
     let pinnedRetriever = PinnedRetrieverBuilder()
 
@@ -980,6 +1050,9 @@ module TypesBuilders =
                 RankWindowSize = None
                 Query = None
                 Fields = None
+                Filter = None
+                MinScore = None
+                Name = None
             }
 
         [<CustomOperation("retrievers")>]
@@ -1001,6 +1074,18 @@ module TypesBuilders =
         [<CustomOperation("fields")>]
         member _.Fields(state: Types.RRFRetriever, value: string list) =
             { state with Fields = Some value }
+
+        [<CustomOperation("filter")>]
+        member _.Filter(state: Types.RRFRetriever, value: Types.QueryContainer list) =
+            { state with Filter = Some value }
+
+        [<CustomOperation("minScore")>]
+        member _.MinScore(state: Types.RRFRetriever, value: Types.Float) =
+            { state with MinScore = Some value }
+
+        [<CustomOperation("name")>]
+        member _.Name(state: Types.RRFRetriever, value: string) =
+            { state with Name = Some value }
 
     let rRFRetriever = RRFRetrieverBuilder()
 
@@ -1091,6 +1176,38 @@ module TypesBuilders =
 
     let reindexStatus = ReindexStatusBuilder()
 
+    type RescorerRetrieverBuilder() =
+        member _.Yield(_: unit) : Types.RescorerRetriever =
+            {
+                Retriever = Unchecked.defaultof<_>
+                Rescore = Unchecked.defaultof<_>
+                Filter = None
+                MinScore = None
+                Name = None
+            }
+
+        [<CustomOperation("retriever")>]
+        member _.Retriever(state: Types.RescorerRetriever, value: Types.RetrieverContainer) =
+            { state with Retriever = value }
+
+        [<CustomOperation("rescore")>]
+        member _.Rescore(state: Types.RescorerRetriever, value: Types.Rescore list) =
+            { state with Rescore = value }
+
+        [<CustomOperation("filter")>]
+        member _.Filter(state: Types.RescorerRetriever, value: Types.QueryContainer list) =
+            { state with Filter = Some value }
+
+        [<CustomOperation("minScore")>]
+        member _.MinScore(state: Types.RescorerRetriever, value: Types.Float) =
+            { state with MinScore = Some value }
+
+        [<CustomOperation("name")>]
+        member _.Name(state: Types.RescorerRetriever, value: string) =
+            { state with Name = Some value }
+
+    let rescorerRetriever = RescorerRetrieverBuilder()
+
     type RetrieverBaseBuilder() =
         member _.Yield(_: unit) : Types.RetrieverBase =
             {
@@ -1100,7 +1217,7 @@ module TypesBuilders =
             }
 
         [<CustomOperation("filter")>]
-        member _.Filter(state: Types.RetrieverBase, value: System.Text.Json.JsonElement) =
+        member _.Filter(state: Types.RetrieverBase, value: Types.QueryContainer list) =
             { state with Filter = Some value }
 
         [<CustomOperation("minScore")>]
@@ -1158,6 +1275,48 @@ module TypesBuilders =
             { state with RankWindowSize = Some value }
 
     let rrfRank = RrfRankBuilder()
+
+    type RuleRetrieverBuilder() =
+        member _.Yield(_: unit) : Types.RuleRetriever =
+            {
+                RulesetIds = Unchecked.defaultof<_>
+                MatchCriteria = Unchecked.defaultof<_>
+                Retriever = Unchecked.defaultof<_>
+                RankWindowSize = None
+                Filter = None
+                MinScore = None
+                Name = None
+            }
+
+        [<CustomOperation("rulesetIds")>]
+        member _.RulesetIds(state: Types.RuleRetriever, value: Types.Id list) =
+            { state with RulesetIds = value }
+
+        [<CustomOperation("matchCriteria")>]
+        member _.MatchCriteria(state: Types.RuleRetriever, value: System.Text.Json.JsonElement) =
+            { state with MatchCriteria = value }
+
+        [<CustomOperation("retriever")>]
+        member _.Retriever(state: Types.RuleRetriever, value: Types.RetrieverContainer) =
+            { state with Retriever = value }
+
+        [<CustomOperation("rankWindowSize")>]
+        member _.RankWindowSize(state: Types.RuleRetriever, value: Types.Integer) =
+            { state with RankWindowSize = Some value }
+
+        [<CustomOperation("filter")>]
+        member _.Filter(state: Types.RuleRetriever, value: Types.QueryContainer list) =
+            { state with Filter = Some value }
+
+        [<CustomOperation("minScore")>]
+        member _.MinScore(state: Types.RuleRetriever, value: Types.Float) =
+            { state with MinScore = Some value }
+
+        [<CustomOperation("name")>]
+        member _.Name(state: Types.RuleRetriever, value: string) =
+            { state with Name = Some value }
+
+    let ruleRetriever = RuleRetrieverBuilder()
 
     type ScriptBuilder() =
         member _.Yield(_: unit) : Types.Script =
@@ -1574,6 +1733,9 @@ module TypesBuilders =
                 TerminateAfter = None
                 Sort = None
                 Collapse = None
+                Filter = None
+                MinScore = None
+                Name = None
             }
 
         [<CustomOperation("query")>]
@@ -1595,6 +1757,18 @@ module TypesBuilders =
         [<CustomOperation("collapse")>]
         member _.Collapse(state: Types.StandardRetriever, value: Types.FieldCollapse) =
             { state with Collapse = Some value }
+
+        [<CustomOperation("filter")>]
+        member _.Filter(state: Types.StandardRetriever, value: Types.QueryContainer list) =
+            { state with Filter = Some value }
+
+        [<CustomOperation("minScore")>]
+        member _.MinScore(state: Types.StandardRetriever, value: Types.Float) =
+            { state with MinScore = Some value }
+
+        [<CustomOperation("name")>]
+        member _.Name(state: Types.StandardRetriever, value: string) =
+            { state with Name = Some value }
 
     let standardRetriever = StandardRetrieverBuilder()
 
@@ -1644,6 +1818,9 @@ module TypesBuilders =
                 InferenceText = Unchecked.defaultof<_>
                 Field = Unchecked.defaultof<_>
                 ChunkRescorer = None
+                Filter = None
+                MinScore = None
+                Name = None
             }
 
         [<CustomOperation("retriever")>]
@@ -1669,6 +1846,18 @@ module TypesBuilders =
         [<CustomOperation("chunkRescorer")>]
         member _.ChunkRescorer(state: Types.TextSimilarityReranker, value: Types.ChunkRescorer) =
             { state with ChunkRescorer = Some value }
+
+        [<CustomOperation("filter")>]
+        member _.Filter(state: Types.TextSimilarityReranker, value: Types.QueryContainer list) =
+            { state with Filter = Some value }
+
+        [<CustomOperation("minScore")>]
+        member _.MinScore(state: Types.TextSimilarityReranker, value: Types.Float) =
+            { state with MinScore = Some value }
+
+        [<CustomOperation("name")>]
+        member _.Name(state: Types.TextSimilarityReranker, value: string) =
+            { state with Name = Some value }
 
     let textSimilarityReranker = TextSimilarityRerankerBuilder()
 

@@ -13,7 +13,7 @@ open Fes.Generated
 module TextStructureOperations =
 
     type TextStructureFindFieldStructureRequest = {
-        ColumnNames: System.Text.Json.JsonElement option
+        ColumnNames: string list option
         Delimiter: string option
         DocumentsToSample: Types.Uint option
         EcsCompatibility: Types.EcsCompatibilityType option
@@ -79,7 +79,7 @@ module TextStructureOperations =
             }
 
         [<CustomOperation("columnNames")>]
-        member _.ColumnNames(state: TextStructureFindFieldStructureRequest, value: System.Text.Json.JsonElement) =
+        member _.ColumnNames(state: TextStructureFindFieldStructureRequest, value: string list) =
             { state with ColumnNames = Some value }
 
         [<CustomOperation("delimiter")>]
@@ -141,7 +141,7 @@ module TextStructureOperations =
     let textStructureFindFieldStructureRequest = TextStructureFindFieldStructureRequestBuilder()
 
     module FindFieldStructure =
-        let withColumnNames (value: System.Text.Json.JsonElement) (req: TextStructureFindFieldStructureRequest) =
+        let withColumnNames (value: string list) (req: TextStructureFindFieldStructureRequest) =
             { req with ColumnNames = Some value }
         let withDelimiter (value: string) (req: TextStructureFindFieldStructureRequest) =
             { req with Delimiter = Some value }
@@ -173,7 +173,7 @@ module TextStructureOperations =
             { req with TimestampFormat = Some value }
 
     type TextStructureFindMessageStructureRequest = {
-        ColumnNames: System.Text.Json.JsonElement option
+        ColumnNames: string list option
         Delimiter: string option
         EcsCompatibility: Types.EcsCompatibilityType option
         Explain: bool option
@@ -236,7 +236,7 @@ module TextStructureOperations =
             }
 
         [<CustomOperation("columnNames")>]
-        member _.ColumnNames(state: TextStructureFindMessageStructureRequest, value: System.Text.Json.JsonElement) =
+        member _.ColumnNames(state: TextStructureFindMessageStructureRequest, value: string list) =
             { state with ColumnNames = Some value }
 
         [<CustomOperation("delimiter")>]
@@ -290,7 +290,7 @@ module TextStructureOperations =
     let textStructureFindMessageStructureRequest = TextStructureFindMessageStructureRequestBuilder()
 
     module FindMessageStructure =
-        let withColumnNames (value: System.Text.Json.JsonElement) (req: TextStructureFindMessageStructureRequest) =
+        let withColumnNames (value: string list) (req: TextStructureFindMessageStructureRequest) =
             { req with ColumnNames = Some value }
         let withDelimiter (value: string) (req: TextStructureFindMessageStructureRequest) =
             { req with Delimiter = Some value }
@@ -319,7 +319,7 @@ module TextStructureOperations =
 
     type TextStructureFindStructureRequest<'TJsonDocument> = {
         Charset: string option
-        ColumnNames: System.Text.Json.JsonElement option
+        ColumnNames: string list option
         Delimiter: string option
         EcsCompatibility: string option
         Explain: bool option
@@ -396,7 +396,7 @@ module TextStructureOperations =
             { state with Charset = Some value }
 
         [<CustomOperation("columnNames")>]
-        member _.ColumnNames(state: TextStructureFindStructureRequest<_>, value: System.Text.Json.JsonElement) =
+        member _.ColumnNames(state: TextStructureFindStructureRequest<_>, value: string list) =
             { state with ColumnNames = Some value }
 
         [<CustomOperation("delimiter")>]
@@ -464,7 +464,7 @@ module TextStructureOperations =
     module FindStructure =
         let withCharset (value: string) (req: TextStructureFindStructureRequest<_>) =
             { req with Charset = Some value }
-        let withColumnNames (value: System.Text.Json.JsonElement) (req: TextStructureFindStructureRequest<_>) =
+        let withColumnNames (value: string list) (req: TextStructureFindStructureRequest<_>) =
             { req with ColumnNames = Some value }
         let withDelimiter (value: string) (req: TextStructureFindStructureRequest<_>) =
             { req with Delimiter = Some value }

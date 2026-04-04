@@ -29,7 +29,7 @@ module Types =
 
     type ReplicationAccess = {
         [<System.Text.Json.Serialization.JsonPropertyName("names")>]
-        Names: System.Text.Json.JsonElement
+        Names: IndexName list
         [<System.Text.Json.Serialization.JsonPropertyName("allow_restricted_indices")>]
         AllowRestrictedIndices: bool option
     }
@@ -103,6 +103,10 @@ module Types =
         MinimumShouldMatch: MinimumShouldMatch option
         [<System.Text.Json.Serialization.JsonPropertyName("query")>]
         Query: string
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
     }
 
         with
@@ -114,6 +118,8 @@ module Types =
                 LowFreqOperator = None
                 MinimumShouldMatch = None
                 Query = Unchecked.defaultof<_>
+                Boost = None
+                query_name = None
             }
 
     [<RequireQualifiedAccess>]
@@ -139,6 +145,10 @@ module Types =
         MinimumShouldMatch: MinimumShouldMatch option
         [<System.Text.Json.Serialization.JsonPropertyName("zero_terms_query")>]
         ZeroTermsQuery: CombinedFieldsZeroTerms option
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
     }
 
         with
@@ -150,6 +160,8 @@ module Types =
                 Operator = None
                 MinimumShouldMatch = None
                 ZeroTermsQuery = None
+                Boost = None
+                query_name = None
             }
 
     type DistanceFeatureQueryBase<'TOrigin, 'TDistance> = {
@@ -159,6 +171,10 @@ module Types =
         Pivot: 'TDistance
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
         Field: Field
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
     }
 
     type UntypedDistanceFeatureQuery = System.Text.Json.JsonElement
@@ -222,12 +238,18 @@ module Types =
     type ExistsQuery = {
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
         Field: Field
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
     }
 
         with
         static member empty : ExistsQuery =
             {
                 Field = Unchecked.defaultof<_>
+                Boost = None
+                query_name = None
             }
 
     [<RequireQualifiedAccess>]
@@ -351,18 +373,18 @@ module Types =
         | Double of Double
         | Boolean of bool
 
-    [<RequireQualifiedAccess>]
-    type GapPolicy =
-        | Skip
-        | InsertZeros
-        | KeepValues
-
     /// Buckets path can be expressed in different ways, and an aggregation may accept some or all of these
     [<RequireQualifiedAccess>]
     type BucketsPath =
         | String of string
         | Array of string list
         | Dictionary of Map<string, string>
+
+    [<RequireQualifiedAccess>]
+    type GapPolicy =
+        | Skip
+        | InsertZeros
+        | KeepValues
 
     type BucketPathAggregation = {
         [<System.Text.Json.Serialization.JsonPropertyName("buckets_path")>]
@@ -380,6 +402,8 @@ module Types =
         Format: string option
         [<System.Text.Json.Serialization.JsonPropertyName("gap_policy")>]
         GapPolicy: GapPolicy option
+        [<System.Text.Json.Serialization.JsonPropertyName("buckets_path")>]
+        BucketsPath: BucketsPath option
     }
 
         with
@@ -387,9 +411,25 @@ module Types =
             {
                 Format = None
                 GapPolicy = None
+                BucketsPath = None
             }
 
-    type AverageBucketAggregation = System.Text.Json.JsonElement
+    type AverageBucketAggregation = {
+        [<System.Text.Json.Serialization.JsonPropertyName("buckets_path")>]
+        BucketsPath: BucketsPath option
+        [<System.Text.Json.Serialization.JsonPropertyName("format")>]
+        Format: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("gap_policy")>]
+        GapPolicy: GapPolicy option
+    }
+
+        with
+        static member empty : AverageBucketAggregation =
+            {
+                BucketsPath = None
+                Format = None
+                GapPolicy = None
+            }
 
     [<RequireQualifiedAccess>]
     type TDigestExecutionHint =
@@ -451,6 +491,8 @@ module Types =
         Fractions: Double list option
         [<System.Text.Json.Serialization.JsonPropertyName("sampling_method")>]
         SamplingMethod: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("buckets_path")>]
+        BucketsPath: BucketsPath option
     }
 
         with
@@ -459,6 +501,7 @@ module Types =
                 Alternative = None
                 Fractions = None
                 SamplingMethod = None
+                BucketsPath = None
             }
 
     type BucketCorrelationFunctionCountCorrelationIndicator = {
@@ -504,12 +547,15 @@ module Types =
     type BucketCorrelationAggregation = {
         [<System.Text.Json.Serialization.JsonPropertyName("function")>]
         Function: BucketCorrelationFunction
+        [<System.Text.Json.Serialization.JsonPropertyName("buckets_path")>]
+        BucketsPath: BucketsPath option
     }
 
         with
         static member empty : BucketCorrelationAggregation =
             {
                 Function = Unchecked.defaultof<_>
+                BucketsPath = None
             }
 
     [<RequireQualifiedAccess>]
@@ -581,7 +627,22 @@ module Types =
                 ShardMinDocCount = None
             }
 
-    type ChangePointAggregation = System.Text.Json.JsonElement
+    type ChangePointAggregation = {
+        [<System.Text.Json.Serialization.JsonPropertyName("buckets_path")>]
+        BucketsPath: BucketsPath option
+        [<System.Text.Json.Serialization.JsonPropertyName("format")>]
+        Format: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("gap_policy")>]
+        GapPolicy: GapPolicy option
+    }
+
+        with
+        static member empty : ChangePointAggregation =
+            {
+                BucketsPath = None
+                Format = None
+                GapPolicy = None
+            }
 
     type RelationName = string
 
@@ -696,9 +757,39 @@ module Types =
         | TopRightBottomLeftGeoBounds of TopRightBottomLeftGeoBounds
         | WktGeoBounds of WktGeoBounds
 
-    type CumulativeCardinalityAggregation = System.Text.Json.JsonElement
+    type CumulativeCardinalityAggregation = {
+        [<System.Text.Json.Serialization.JsonPropertyName("buckets_path")>]
+        BucketsPath: BucketsPath option
+        [<System.Text.Json.Serialization.JsonPropertyName("format")>]
+        Format: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("gap_policy")>]
+        GapPolicy: GapPolicy option
+    }
 
-    type CumulativeSumAggregation = System.Text.Json.JsonElement
+        with
+        static member empty : CumulativeCardinalityAggregation =
+            {
+                BucketsPath = None
+                Format = None
+                GapPolicy = None
+            }
+
+    type CumulativeSumAggregation = {
+        [<System.Text.Json.Serialization.JsonPropertyName("buckets_path")>]
+        BucketsPath: BucketsPath option
+        [<System.Text.Json.Serialization.JsonPropertyName("format")>]
+        Format: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("gap_policy")>]
+        GapPolicy: GapPolicy option
+    }
+
+        with
+        static member empty : CumulativeSumAggregation =
+            {
+                BucketsPath = None
+                Format = None
+                GapPolicy = None
+            }
 
     [<RequireQualifiedAccess>]
     type CalendarInterval =
@@ -772,7 +863,22 @@ module Types =
                 Keyed = None
             }
 
-    type DerivativeAggregation = System.Text.Json.JsonElement
+    type DerivativeAggregation = {
+        [<System.Text.Json.Serialization.JsonPropertyName("buckets_path")>]
+        BucketsPath: BucketsPath option
+        [<System.Text.Json.Serialization.JsonPropertyName("format")>]
+        Format: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("gap_policy")>]
+        GapPolicy: GapPolicy option
+    }
+
+        with
+        static member empty : DerivativeAggregation =
+            {
+                BucketsPath = None
+                Format = None
+                GapPolicy = None
+            }
 
     [<RequireQualifiedAccess>]
     type SamplerAggregationExecutionHint =
@@ -783,12 +889,21 @@ module Types =
     type ExtendedStatsBucketAggregation = {
         [<System.Text.Json.Serialization.JsonPropertyName("sigma")>]
         Sigma: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("buckets_path")>]
+        BucketsPath: BucketsPath option
+        [<System.Text.Json.Serialization.JsonPropertyName("format")>]
+        Format: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("gap_policy")>]
+        GapPolicy: GapPolicy option
     }
 
         with
         static member empty : ExtendedStatsBucketAggregation =
             {
                 Sigma = None
+                BucketsPath = None
+                Format = None
+                GapPolicy = None
             }
 
     [<RequireQualifiedAccess>]
@@ -1109,6 +1224,12 @@ module Types =
         ModelId: Name
         [<System.Text.Json.Serialization.JsonPropertyName("inference_config")>]
         InferenceConfig: InferenceConfigContainer option
+        [<System.Text.Json.Serialization.JsonPropertyName("buckets_path")>]
+        BucketsPath: BucketsPath option
+        [<System.Text.Json.Serialization.JsonPropertyName("format")>]
+        Format: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("gap_policy")>]
+        GapPolicy: GapPolicy option
     }
 
         with
@@ -1116,6 +1237,9 @@ module Types =
             {
                 ModelId = Unchecked.defaultof<_>
                 InferenceConfig = None
+                BucketsPath = None
+                Format = None
+                GapPolicy = None
             }
 
     type MatrixAggregation = {
@@ -1135,17 +1259,53 @@ module Types =
     type MatrixStatsAggregation = {
         [<System.Text.Json.Serialization.JsonPropertyName("mode")>]
         Mode: SortMode option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Fields option
+        [<System.Text.Json.Serialization.JsonPropertyName("missing")>]
+        Missing: Map<Field, Double> option
     }
 
         with
         static member empty : MatrixStatsAggregation =
             {
                 Mode = None
+                Fields = None
+                Missing = None
             }
 
-    type MaxBucketAggregation = System.Text.Json.JsonElement
+    type MaxBucketAggregation = {
+        [<System.Text.Json.Serialization.JsonPropertyName("buckets_path")>]
+        BucketsPath: BucketsPath option
+        [<System.Text.Json.Serialization.JsonPropertyName("format")>]
+        Format: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("gap_policy")>]
+        GapPolicy: GapPolicy option
+    }
 
-    type MinBucketAggregation = System.Text.Json.JsonElement
+        with
+        static member empty : MaxBucketAggregation =
+            {
+                BucketsPath = None
+                Format = None
+                GapPolicy = None
+            }
+
+    type MinBucketAggregation = {
+        [<System.Text.Json.Serialization.JsonPropertyName("buckets_path")>]
+        BucketsPath: BucketsPath option
+        [<System.Text.Json.Serialization.JsonPropertyName("format")>]
+        Format: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("gap_policy")>]
+        GapPolicy: GapPolicy option
+    }
+
+        with
+        static member empty : MinBucketAggregation =
+            {
+                BucketsPath = None
+                Format = None
+                GapPolicy = None
+            }
 
     type MissingAggregation = {
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
@@ -1171,6 +1331,12 @@ module Types =
         Predict: Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("window")>]
         Window: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("buckets_path")>]
+        BucketsPath: BucketsPath option
+        [<System.Text.Json.Serialization.JsonPropertyName("format")>]
+        Format: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("gap_policy")>]
+        GapPolicy: GapPolicy option
     }
 
         with
@@ -1179,6 +1345,9 @@ module Types =
                 Minimize = None
                 Predict = None
                 Window = None
+                BucketsPath = None
+                Format = None
+                GapPolicy = None
             }
 
     type LinearMovingAverageAggregation = {
@@ -1186,6 +1355,18 @@ module Types =
         Model: string
         [<System.Text.Json.Serialization.JsonPropertyName("settings")>]
         Settings: EmptyObject
+        [<System.Text.Json.Serialization.JsonPropertyName("buckets_path")>]
+        BucketsPath: BucketsPath option
+        [<System.Text.Json.Serialization.JsonPropertyName("format")>]
+        Format: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("gap_policy")>]
+        GapPolicy: GapPolicy option
+        [<System.Text.Json.Serialization.JsonPropertyName("minimize")>]
+        Minimize: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("predict")>]
+        Predict: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("window")>]
+        Window: Integer option
     }
 
         with
@@ -1193,6 +1374,12 @@ module Types =
             {
                 Model = "linear"
                 Settings = Unchecked.defaultof<_>
+                BucketsPath = None
+                Format = None
+                GapPolicy = None
+                Minimize = None
+                Predict = None
+                Window = None
             }
 
     type SimpleMovingAverageAggregation = {
@@ -1200,6 +1387,18 @@ module Types =
         Model: string
         [<System.Text.Json.Serialization.JsonPropertyName("settings")>]
         Settings: EmptyObject
+        [<System.Text.Json.Serialization.JsonPropertyName("buckets_path")>]
+        BucketsPath: BucketsPath option
+        [<System.Text.Json.Serialization.JsonPropertyName("format")>]
+        Format: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("gap_policy")>]
+        GapPolicy: GapPolicy option
+        [<System.Text.Json.Serialization.JsonPropertyName("minimize")>]
+        Minimize: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("predict")>]
+        Predict: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("window")>]
+        Window: Integer option
     }
 
         with
@@ -1207,6 +1406,12 @@ module Types =
             {
                 Model = "simple"
                 Settings = Unchecked.defaultof<_>
+                BucketsPath = None
+                Format = None
+                GapPolicy = None
+                Minimize = None
+                Predict = None
+                Window = None
             }
 
     type EwmaModelSettings = {
@@ -1225,6 +1430,18 @@ module Types =
         Model: string
         [<System.Text.Json.Serialization.JsonPropertyName("settings")>]
         Settings: EwmaModelSettings
+        [<System.Text.Json.Serialization.JsonPropertyName("buckets_path")>]
+        BucketsPath: BucketsPath option
+        [<System.Text.Json.Serialization.JsonPropertyName("format")>]
+        Format: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("gap_policy")>]
+        GapPolicy: GapPolicy option
+        [<System.Text.Json.Serialization.JsonPropertyName("minimize")>]
+        Minimize: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("predict")>]
+        Predict: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("window")>]
+        Window: Integer option
     }
 
         with
@@ -1232,6 +1449,12 @@ module Types =
             {
                 Model = "ewma"
                 Settings = Unchecked.defaultof<_>
+                BucketsPath = None
+                Format = None
+                GapPolicy = None
+                Minimize = None
+                Predict = None
+                Window = None
             }
 
     type HoltLinearModelSettings = {
@@ -1253,6 +1476,18 @@ module Types =
         Model: string
         [<System.Text.Json.Serialization.JsonPropertyName("settings")>]
         Settings: HoltLinearModelSettings
+        [<System.Text.Json.Serialization.JsonPropertyName("buckets_path")>]
+        BucketsPath: BucketsPath option
+        [<System.Text.Json.Serialization.JsonPropertyName("format")>]
+        Format: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("gap_policy")>]
+        GapPolicy: GapPolicy option
+        [<System.Text.Json.Serialization.JsonPropertyName("minimize")>]
+        Minimize: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("predict")>]
+        Predict: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("window")>]
+        Window: Integer option
     }
 
         with
@@ -1260,6 +1495,12 @@ module Types =
             {
                 Model = "holt"
                 Settings = Unchecked.defaultof<_>
+                BucketsPath = None
+                Format = None
+                GapPolicy = None
+                Minimize = None
+                Predict = None
+                Window = None
             }
 
     [<RequireQualifiedAccess>]
@@ -1298,6 +1539,18 @@ module Types =
         Model: string
         [<System.Text.Json.Serialization.JsonPropertyName("settings")>]
         Settings: HoltWintersModelSettings
+        [<System.Text.Json.Serialization.JsonPropertyName("buckets_path")>]
+        BucketsPath: BucketsPath option
+        [<System.Text.Json.Serialization.JsonPropertyName("format")>]
+        Format: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("gap_policy")>]
+        GapPolicy: GapPolicy option
+        [<System.Text.Json.Serialization.JsonPropertyName("minimize")>]
+        Minimize: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("predict")>]
+        Predict: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("window")>]
+        Window: Integer option
     }
 
         with
@@ -1305,6 +1558,12 @@ module Types =
             {
                 Model = "holt_winters"
                 Settings = Unchecked.defaultof<_>
+                BucketsPath = None
+                Format = None
+                GapPolicy = None
+                Minimize = None
+                Predict = None
+                Window = None
             }
 
     [<RequireQualifiedAccess>]
@@ -1322,6 +1581,12 @@ module Types =
         Shift: Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("keyed")>]
         Keyed: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("buckets_path")>]
+        BucketsPath: BucketsPath option
+        [<System.Text.Json.Serialization.JsonPropertyName("format")>]
+        Format: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("gap_policy")>]
+        GapPolicy: GapPolicy option
     }
 
         with
@@ -1330,6 +1595,9 @@ module Types =
                 Window = None
                 Shift = None
                 Keyed = None
+                BucketsPath = None
+                Format = None
+                GapPolicy = None
             }
 
     type MovingFunctionAggregation = {
@@ -1339,6 +1607,12 @@ module Types =
         Shift: Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("window")>]
         Window: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("buckets_path")>]
+        BucketsPath: BucketsPath option
+        [<System.Text.Json.Serialization.JsonPropertyName("format")>]
+        Format: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("gap_policy")>]
+        GapPolicy: GapPolicy option
     }
 
         with
@@ -1347,6 +1621,9 @@ module Types =
                 Script = None
                 Shift = None
                 Window = None
+                BucketsPath = None
+                Format = None
+                GapPolicy = None
             }
 
     [<RequireQualifiedAccess>]
@@ -1377,12 +1654,21 @@ module Types =
     type NormalizeAggregation = {
         [<System.Text.Json.Serialization.JsonPropertyName("method")>]
         Method: NormalizeMethod option
+        [<System.Text.Json.Serialization.JsonPropertyName("buckets_path")>]
+        BucketsPath: BucketsPath option
+        [<System.Text.Json.Serialization.JsonPropertyName("format")>]
+        Format: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("gap_policy")>]
+        GapPolicy: GapPolicy option
     }
 
         with
         static member empty : NormalizeAggregation =
             {
                 Method = None
+                BucketsPath = None
+                Format = None
+                GapPolicy = None
             }
 
     type ParentAggregation = {
@@ -1424,12 +1710,21 @@ module Types =
     type PercentilesBucketAggregation = {
         [<System.Text.Json.Serialization.JsonPropertyName("percents")>]
         Percents: Double list option
+        [<System.Text.Json.Serialization.JsonPropertyName("buckets_path")>]
+        BucketsPath: BucketsPath option
+        [<System.Text.Json.Serialization.JsonPropertyName("format")>]
+        Format: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("gap_policy")>]
+        GapPolicy: GapPolicy option
     }
 
         with
         static member empty : PercentilesBucketAggregation =
             {
                 Percents = None
+                BucketsPath = None
+                Format = None
+                GapPolicy = None
             }
 
     type RareTermsAggregation = {
@@ -1508,12 +1803,21 @@ module Types =
     type SerialDifferencingAggregation = {
         [<System.Text.Json.Serialization.JsonPropertyName("lag")>]
         Lag: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("buckets_path")>]
+        BucketsPath: BucketsPath option
+        [<System.Text.Json.Serialization.JsonPropertyName("format")>]
+        Format: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("gap_policy")>]
+        GapPolicy: GapPolicy option
     }
 
         with
         static member empty : SerialDifferencingAggregation =
             {
                 Lag = None
+                BucketsPath = None
+                Format = None
+                GapPolicy = None
             }
 
     type ChiSquareHeuristic = {
@@ -1578,9 +1882,39 @@ module Types =
                 NormalizeAbove = None
             }
 
-    type StatsBucketAggregation = System.Text.Json.JsonElement
+    type StatsBucketAggregation = {
+        [<System.Text.Json.Serialization.JsonPropertyName("buckets_path")>]
+        BucketsPath: BucketsPath option
+        [<System.Text.Json.Serialization.JsonPropertyName("format")>]
+        Format: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("gap_policy")>]
+        GapPolicy: GapPolicy option
+    }
 
-    type SumBucketAggregation = System.Text.Json.JsonElement
+        with
+        static member empty : StatsBucketAggregation =
+            {
+                BucketsPath = None
+                Format = None
+                GapPolicy = None
+            }
+
+    type SumBucketAggregation = {
+        [<System.Text.Json.Serialization.JsonPropertyName("buckets_path")>]
+        BucketsPath: BucketsPath option
+        [<System.Text.Json.Serialization.JsonPropertyName("format")>]
+        Format: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("gap_policy")>]
+        GapPolicy: GapPolicy option
+    }
+
+        with
+        static member empty : SumBucketAggregation =
+            {
+                BucketsPath = None
+                Format = None
+                GapPolicy = None
+            }
 
     type TimeSeriesAggregation = {
         [<System.Text.Json.Serialization.JsonPropertyName("size")>]
@@ -1970,6 +2304,10 @@ module Types =
         Fuzziness: Fuzziness option
         [<System.Text.Json.Serialization.JsonPropertyName("value")>]
         Value: System.Text.Json.JsonElement
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
     }
 
         with
@@ -1981,6 +2319,8 @@ module Types =
                 Transpositions = None
                 Fuzziness = None
                 Value = Unchecked.defaultof<_>
+                Boost = None
+                query_name = None
             }
 
     [<RequireQualifiedAccess>]
@@ -2001,6 +2341,10 @@ module Types =
         ValidationMethod: GeoValidationMethod option
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_unmapped")>]
         IgnoreUnmapped: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
     }
 
         with
@@ -2009,6 +2353,8 @@ module Types =
                 Type = None
                 ValidationMethod = None
                 IgnoreUnmapped = None
+                Boost = None
+                query_name = None
             }
 
     type GeoDistanceQuery = {
@@ -2020,6 +2366,10 @@ module Types =
         ValidationMethod: GeoValidationMethod option
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_unmapped")>]
         IgnoreUnmapped: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
     }
 
         with
@@ -2029,6 +2379,8 @@ module Types =
                 DistanceType = None
                 ValidationMethod = None
                 IgnoreUnmapped = None
+                Boost = None
+                query_name = None
             }
 
     /// A map tile reference, represented as `{zoom}/{x}/{y}`
@@ -2048,6 +2400,10 @@ module Types =
         ValidationMethod: GeoValidationMethod option
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_unmapped")>]
         IgnoreUnmapped: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
     }
 
         with
@@ -2055,17 +2411,25 @@ module Types =
             {
                 ValidationMethod = None
                 IgnoreUnmapped = None
+                Boost = None
+                query_name = None
             }
 
     type GeoShapeQuery = {
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_unmapped")>]
         IgnoreUnmapped: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
     }
 
         with
         static member empty : GeoShapeQuery =
             {
                 IgnoreUnmapped = None
+                Boost = None
+                query_name = None
             }
 
     [<RequireQualifiedAccess>]
@@ -2084,12 +2448,18 @@ module Types =
     type IdsQuery = {
         [<System.Text.Json.Serialization.JsonPropertyName("values")>]
         Values: Ids option
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
     }
 
         with
         static member empty : IdsQuery =
             {
                 Values = None
+                Boost = None
+                query_name = None
             }
 
     type IntervalsFuzzy = {
@@ -2227,6 +2597,10 @@ module Types =
         Query: System.Text.Json.JsonElement
         [<System.Text.Json.Serialization.JsonPropertyName("zero_terms_query")>]
         ZeroTermsQuery: ZeroTermsQuery option
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
     }
 
         with
@@ -2245,9 +2619,23 @@ module Types =
                 PrefixLength = None
                 Query = Unchecked.defaultof<_>
                 ZeroTermsQuery = None
+                Boost = None
+                query_name = None
             }
 
-    type MatchAllQuery = System.Text.Json.JsonElement
+    type MatchAllQuery = {
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
+    }
+
+        with
+        static member empty : MatchAllQuery =
+            {
+                Boost = None
+                query_name = None
+            }
 
     type MatchBoolPrefixQuery = {
         [<System.Text.Json.Serialization.JsonPropertyName("analyzer")>]
@@ -2268,6 +2656,10 @@ module Types =
         PrefixLength: Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("query")>]
         Query: string
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
     }
 
         with
@@ -2282,9 +2674,23 @@ module Types =
                 Operator = None
                 PrefixLength = None
                 Query = Unchecked.defaultof<_>
+                Boost = None
+                query_name = None
             }
 
-    type MatchNoneQuery = System.Text.Json.JsonElement
+    type MatchNoneQuery = {
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
+    }
+
+        with
+        static member empty : MatchNoneQuery =
+            {
+                Boost = None
+                query_name = None
+            }
 
     type MatchPhraseQuery = {
         [<System.Text.Json.Serialization.JsonPropertyName("analyzer")>]
@@ -2295,6 +2701,10 @@ module Types =
         Slop: Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("zero_terms_query")>]
         ZeroTermsQuery: ZeroTermsQuery option
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
     }
 
         with
@@ -2304,6 +2714,8 @@ module Types =
                 Query = Unchecked.defaultof<_>
                 Slop = None
                 ZeroTermsQuery = None
+                Boost = None
+                query_name = None
             }
 
     type MatchPhrasePrefixQuery = {
@@ -2317,6 +2729,10 @@ module Types =
         Slop: Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("zero_terms_query")>]
         ZeroTermsQuery: ZeroTermsQuery option
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
     }
 
         with
@@ -2327,6 +2743,8 @@ module Types =
                 Query = Unchecked.defaultof<_>
                 Slop = None
                 ZeroTermsQuery = None
+                Boost = None
+                query_name = None
             }
 
     /// Only to be used in query and path parameters, as the array form is actually a csv
@@ -2439,7 +2857,7 @@ module Types =
         [<System.Text.Json.Serialization.JsonPropertyName("include")>]
         Include: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("like")>]
-        Like: System.Text.Json.JsonElement
+        Like: Like list
         [<System.Text.Json.Serialization.JsonPropertyName("max_doc_freq")>]
         MaxDocFreq: Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("max_query_terms")>]
@@ -2459,11 +2877,15 @@ module Types =
         [<System.Text.Json.Serialization.JsonPropertyName("stop_words")>]
         StopWords: StopWords option
         [<System.Text.Json.Serialization.JsonPropertyName("unlike")>]
-        Unlike: System.Text.Json.JsonElement option
+        Unlike: Like list option
         [<System.Text.Json.Serialization.JsonPropertyName("version")>]
         Version: VersionNumber option
         [<System.Text.Json.Serialization.JsonPropertyName("version_type")>]
         VersionType: VersionType option
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
     }
 
         with
@@ -2487,6 +2909,8 @@ module Types =
                 Unlike = None
                 Version = None
                 VersionType = None
+                Boost = None
+                query_name = None
             }
 
     [<RequireQualifiedAccess>]
@@ -2533,6 +2957,10 @@ module Types =
         Type: TextQueryType option
         [<System.Text.Json.Serialization.JsonPropertyName("zero_terms_query")>]
         ZeroTermsQuery: ZeroTermsQuery option
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
     }
 
         with
@@ -2555,6 +2983,8 @@ module Types =
                 TieBreaker = None
                 Type = None
                 ZeroTermsQuery = None
+                Boost = None
+                query_name = None
             }
 
     type ParentIdQuery = {
@@ -2564,6 +2994,10 @@ module Types =
         IgnoreUnmapped: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: RelationName option
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
     }
 
         with
@@ -2572,6 +3006,8 @@ module Types =
                 Id = None
                 IgnoreUnmapped = None
                 Type = None
+                Boost = None
+                query_name = None
             }
 
     type PercolateQuery = {
@@ -2593,6 +3029,10 @@ module Types =
         Routing: string option
         [<System.Text.Json.Serialization.JsonPropertyName("version")>]
         Version: VersionNumber option
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        NameField: string option
     }
 
         with
@@ -2607,6 +3047,8 @@ module Types =
                 Preference = None
                 Routing = None
                 Version = None
+                Boost = None
+                NameField = None
             }
 
     type PinnedDoc = {
@@ -2630,6 +3072,10 @@ module Types =
         Value: string
         [<System.Text.Json.Serialization.JsonPropertyName("case_insensitive")>]
         CaseInsensitive: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
     }
 
         with
@@ -2638,6 +3084,8 @@ module Types =
                 Rewrite = None
                 Value = Unchecked.defaultof<_>
                 CaseInsensitive = None
+                Boost = None
+                query_name = None
             }
 
     type QueryStringQuery = {
@@ -2691,6 +3139,10 @@ module Types =
         TimeZone: TimeZone option
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: TextQueryType option
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
     }
 
         with
@@ -2721,6 +3173,8 @@ module Types =
                 TieBreaker = None
                 TimeZone = None
                 Type = None
+                Boost = None
+                query_name = None
             }
 
     type DateFormat = string
@@ -2742,6 +3196,10 @@ module Types =
         Lt: 'T option
         [<System.Text.Json.Serialization.JsonPropertyName("lte")>]
         Lte: 'T option
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
     }
 
     type UntypedRangeQuery = {
@@ -2834,6 +3292,10 @@ module Types =
         Linear: RankFeatureFunctionLinear option
         [<System.Text.Json.Serialization.JsonPropertyName("sigmoid")>]
         Sigmoid: RankFeatureFunctionSigmoid option
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
     }
 
         with
@@ -2844,6 +3306,8 @@ module Types =
                 Log = None
                 Linear = None
                 Sigmoid = None
+                Boost = None
+                query_name = None
             }
 
     type RegexpQuery = {
@@ -2857,6 +3321,10 @@ module Types =
         Rewrite: MultiTermQueryRewrite option
         [<System.Text.Json.Serialization.JsonPropertyName("value")>]
         Value: string
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
     }
 
         with
@@ -2867,6 +3335,8 @@ module Types =
                 MaxDeterminizedStates = None
                 Rewrite = None
                 Value = Unchecked.defaultof<_>
+                Boost = None
+                query_name = None
             }
 
     type SemanticQuery = {
@@ -2874,6 +3344,10 @@ module Types =
         Field: string
         [<System.Text.Json.Serialization.JsonPropertyName("query")>]
         Query: string
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
     }
 
         with
@@ -2881,17 +3355,25 @@ module Types =
             {
                 Field = Unchecked.defaultof<_>
                 Query = Unchecked.defaultof<_>
+                Boost = None
+                query_name = None
             }
 
     type ShapeQuery = {
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_unmapped")>]
         IgnoreUnmapped: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
     }
 
         with
         static member empty : ShapeQuery =
             {
                 IgnoreUnmapped = None
+                Boost = None
+                query_name = None
             }
 
     /// A set of flags that can be represented as a single enum value or a set of values that are encoded
@@ -2946,6 +3428,10 @@ module Types =
         Query: string
         [<System.Text.Json.Serialization.JsonPropertyName("quote_field_suffix")>]
         QuoteFieldSuffix: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
     }
 
         with
@@ -2964,6 +3450,8 @@ module Types =
                 MinimumShouldMatch = None
                 Query = Unchecked.defaultof<_>
                 QuoteFieldSuffix = None
+                Boost = None
+                query_name = None
             }
 
     /// Can only be used as a clause in a span_near query.
@@ -2972,12 +3460,18 @@ module Types =
     type SpanTermQuery = {
         [<System.Text.Json.Serialization.JsonPropertyName("value")>]
         Value: FieldValue
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
     }
 
         with
         static member empty : SpanTermQuery =
             {
                 Value = Unchecked.defaultof<_>
+                Boost = None
+                query_name = None
             }
 
     type TokenPruningConfig = {
@@ -3018,6 +3512,10 @@ module Types =
         Value: FieldValue
         [<System.Text.Json.Serialization.JsonPropertyName("case_insensitive")>]
         CaseInsensitive: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
     }
 
         with
@@ -3025,9 +3523,23 @@ module Types =
             {
                 Value = Unchecked.defaultof<_>
                 CaseInsensitive = None
+                Boost = None
+                query_name = None
             }
 
-    type TermsQuery = System.Text.Json.JsonElement
+    type TermsQuery = {
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
+    }
+
+        with
+        static member empty : TermsQuery =
+            {
+                Boost = None
+                query_name = None
+            }
 
     type TextExpansionQuery = {
         [<System.Text.Json.Serialization.JsonPropertyName("model_id")>]
@@ -3036,6 +3548,10 @@ module Types =
         ModelText: string
         [<System.Text.Json.Serialization.JsonPropertyName("pruning_config")>]
         PruningConfig: TokenPruningConfig option
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
     }
 
         with
@@ -3044,6 +3560,8 @@ module Types =
                 ModelId = Unchecked.defaultof<_>
                 ModelText = Unchecked.defaultof<_>
                 PruningConfig = None
+                Boost = None
+                query_name = None
             }
 
     type WeightedTokensQuery = {
@@ -3051,6 +3569,10 @@ module Types =
         Tokens: System.Text.Json.JsonElement
         [<System.Text.Json.Serialization.JsonPropertyName("pruning_config")>]
         PruningConfig: TokenPruningConfig option
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
     }
 
         with
@@ -3058,6 +3580,8 @@ module Types =
             {
                 Tokens = Unchecked.defaultof<_>
                 PruningConfig = None
+                Boost = None
+                query_name = None
             }
 
     type WildcardQuery = {
@@ -3069,6 +3593,10 @@ module Types =
         Value: string option
         [<System.Text.Json.Serialization.JsonPropertyName("wildcard")>]
         Wildcard: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
     }
 
         with
@@ -3078,28 +3606,42 @@ module Types =
                 Rewrite = None
                 Value = None
                 Wildcard = None
+                Boost = None
+                query_name = None
             }
 
     type WrapperQuery = {
         [<System.Text.Json.Serialization.JsonPropertyName("query")>]
         Query: string
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
     }
 
         with
         static member empty : WrapperQuery =
             {
                 Query = Unchecked.defaultof<_>
+                Boost = None
+                query_name = None
             }
 
     type TypeQuery = {
         [<System.Text.Json.Serialization.JsonPropertyName("value")>]
         Value: string
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
     }
 
         with
         static member empty : TypeQuery =
             {
                 Value = Unchecked.defaultof<_>
+                Boost = None
+                query_name = None
             }
 
     /// An Elasticsearch Query DSL (Domain Specific Language) object that defines a query.
@@ -3170,15 +3712,19 @@ module Types =
 
     and BoolQuery = {
         [<System.Text.Json.Serialization.JsonPropertyName("filter")>]
-        Filter: System.Text.Json.JsonElement option
+        Filter: QueryContainer list option
         [<System.Text.Json.Serialization.JsonPropertyName("minimum_should_match")>]
         MinimumShouldMatch: MinimumShouldMatch option
         [<System.Text.Json.Serialization.JsonPropertyName("must")>]
-        Must: System.Text.Json.JsonElement option
+        Must: QueryContainer list option
         [<System.Text.Json.Serialization.JsonPropertyName("must_not")>]
-        MustNot: System.Text.Json.JsonElement option
+        MustNot: QueryContainer list option
         [<System.Text.Json.Serialization.JsonPropertyName("should")>]
-        Should: System.Text.Json.JsonElement option
+        Should: QueryContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
     }
 
         with
@@ -3189,6 +3735,8 @@ module Types =
                 Must = None
                 MustNot = None
                 Should = None
+                Boost = None
+                query_name = None
             }
 
     and BoostingQuery = {
@@ -3198,6 +3746,10 @@ module Types =
         Negative: QueryContainer
         [<System.Text.Json.Serialization.JsonPropertyName("positive")>]
         Positive: QueryContainer
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
     }
 
         with
@@ -3206,17 +3758,25 @@ module Types =
                 NegativeBoost = Unchecked.defaultof<_>
                 Negative = Unchecked.defaultof<_>
                 Positive = Unchecked.defaultof<_>
+                Boost = None
+                query_name = None
             }
 
     and ConstantScoreQuery = {
         [<System.Text.Json.Serialization.JsonPropertyName("filter")>]
         Filter: QueryContainer
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
     }
 
         with
         static member empty : ConstantScoreQuery =
             {
                 Filter = Unchecked.defaultof<_>
+                Boost = None
+                query_name = None
             }
 
     and DisMaxQuery = {
@@ -3224,6 +3784,10 @@ module Types =
         Queries: QueryContainer list
         [<System.Text.Json.Serialization.JsonPropertyName("tie_breaker")>]
         TieBreaker: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
     }
 
         with
@@ -3231,6 +3795,8 @@ module Types =
             {
                 Queries = Unchecked.defaultof<_>
                 TieBreaker = None
+                Boost = None
+                query_name = None
             }
 
     and FunctionScoreQuery = {
@@ -3246,6 +3812,10 @@ module Types =
         Query: QueryContainer option
         [<System.Text.Json.Serialization.JsonPropertyName("score_mode")>]
         ScoreMode: FunctionScoreMode option
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
     }
 
         with
@@ -3257,6 +3827,8 @@ module Types =
                 MinScore = None
                 Query = None
                 ScoreMode = None
+                Boost = None
+                query_name = None
             }
 
     and [<RequireQualifiedAccess>] FunctionScoreContainer =
@@ -3334,7 +3906,7 @@ module Types =
         [<System.Text.Json.Serialization.JsonPropertyName("docvalue_fields")>]
         DocvalueFields: FieldAndFormat list option
         [<System.Text.Json.Serialization.JsonPropertyName("knn")>]
-        Knn: System.Text.Json.JsonElement option
+        Knn: KnnSearch list option
         [<System.Text.Json.Serialization.JsonPropertyName("rank")>]
         Rank: RankContainer option
         [<System.Text.Json.Serialization.JsonPropertyName("min_score")>]
@@ -3346,7 +3918,7 @@ module Types =
         [<System.Text.Json.Serialization.JsonPropertyName("query")>]
         Query: QueryContainer option
         [<System.Text.Json.Serialization.JsonPropertyName("rescore")>]
-        Rescore: System.Text.Json.JsonElement option
+        Rescore: Rescore list option
         [<System.Text.Json.Serialization.JsonPropertyName("retriever")>]
         Retriever: RetrieverContainer option
         [<System.Text.Json.Serialization.JsonPropertyName("script_fields")>]
@@ -3564,17 +4136,44 @@ module Types =
                 TimeZone = None
             }
 
-    and AverageAggregation = System.Text.Json.JsonElement
+    and AverageAggregation = {
+        [<System.Text.Json.Serialization.JsonPropertyName("field")>]
+        Field: Field option
+        [<System.Text.Json.Serialization.JsonPropertyName("missing")>]
+        Missing: Missing option
+        [<System.Text.Json.Serialization.JsonPropertyName("script")>]
+        Script: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("format")>]
+        Format: string option
+    }
+
+        with
+        static member empty : AverageAggregation =
+            {
+                Field = None
+                Missing = None
+                Script = None
+                Format = None
+            }
 
     and FormatMetricAggregationBase = {
         [<System.Text.Json.Serialization.JsonPropertyName("format")>]
         Format: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("field")>]
+        Field: Field option
+        [<System.Text.Json.Serialization.JsonPropertyName("missing")>]
+        Missing: Missing option
+        [<System.Text.Json.Serialization.JsonPropertyName("script")>]
+        Script: Script option
     }
 
         with
         static member empty : FormatMetricAggregationBase =
             {
                 Format = None
+                Field = None
+                Missing = None
+                Script = None
             }
 
     and MetricAggregationBase = {
@@ -3599,6 +4198,12 @@ module Types =
         Compression: Double option
         [<System.Text.Json.Serialization.JsonPropertyName("execution_hint")>]
         ExecutionHint: TDigestExecutionHint option
+        [<System.Text.Json.Serialization.JsonPropertyName("field")>]
+        Field: Field option
+        [<System.Text.Json.Serialization.JsonPropertyName("missing")>]
+        Missing: Missing option
+        [<System.Text.Json.Serialization.JsonPropertyName("script")>]
+        Script: Script option
     }
 
         with
@@ -3606,28 +4211,49 @@ module Types =
             {
                 Compression = None
                 ExecutionHint = None
+                Field = None
+                Missing = None
+                Script = None
             }
 
     and BucketScriptAggregation = {
         [<System.Text.Json.Serialization.JsonPropertyName("script")>]
         Script: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("buckets_path")>]
+        BucketsPath: BucketsPath option
+        [<System.Text.Json.Serialization.JsonPropertyName("format")>]
+        Format: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("gap_policy")>]
+        GapPolicy: GapPolicy option
     }
 
         with
         static member empty : BucketScriptAggregation =
             {
                 Script = None
+                BucketsPath = None
+                Format = None
+                GapPolicy = None
             }
 
     and BucketSelectorAggregation = {
         [<System.Text.Json.Serialization.JsonPropertyName("script")>]
         Script: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("buckets_path")>]
+        BucketsPath: BucketsPath option
+        [<System.Text.Json.Serialization.JsonPropertyName("format")>]
+        Format: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("gap_policy")>]
+        GapPolicy: GapPolicy option
     }
 
         with
         static member empty : BucketSelectorAggregation =
             {
                 Script = None
+                BucketsPath = None
+                Format = None
+                GapPolicy = None
             }
 
     and BucketSortAggregation = {
@@ -3740,6 +4366,12 @@ module Types =
         Rehash: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("execution_hint")>]
         ExecutionHint: CardinalityExecutionMode option
+        [<System.Text.Json.Serialization.JsonPropertyName("field")>]
+        Field: Field option
+        [<System.Text.Json.Serialization.JsonPropertyName("missing")>]
+        Missing: Missing option
+        [<System.Text.Json.Serialization.JsonPropertyName("script")>]
+        Script: Script option
     }
 
         with
@@ -3748,11 +4380,44 @@ module Types =
                 PrecisionThreshold = None
                 Rehash = None
                 ExecutionHint = None
+                Field = None
+                Missing = None
+                Script = None
             }
 
-    and CartesianBoundsAggregation = System.Text.Json.JsonElement
+    and CartesianBoundsAggregation = {
+        [<System.Text.Json.Serialization.JsonPropertyName("field")>]
+        Field: Field option
+        [<System.Text.Json.Serialization.JsonPropertyName("missing")>]
+        Missing: Missing option
+        [<System.Text.Json.Serialization.JsonPropertyName("script")>]
+        Script: Script option
+    }
 
-    and CartesianCentroidAggregation = System.Text.Json.JsonElement
+        with
+        static member empty : CartesianBoundsAggregation =
+            {
+                Field = None
+                Missing = None
+                Script = None
+            }
+
+    and CartesianCentroidAggregation = {
+        [<System.Text.Json.Serialization.JsonPropertyName("field")>]
+        Field: Field option
+        [<System.Text.Json.Serialization.JsonPropertyName("missing")>]
+        Missing: Missing option
+        [<System.Text.Json.Serialization.JsonPropertyName("script")>]
+        Script: Script option
+    }
+
+        with
+        static member empty : CartesianCentroidAggregation =
+            {
+                Field = None
+                Missing = None
+                Script = None
+            }
 
     and CompositeAggregation = {
         [<System.Text.Json.Serialization.JsonPropertyName("after")>]
@@ -3777,7 +4442,31 @@ module Types =
         | DateHistogram of CompositeDateHistogramAggregation
         | GeotileGrid of CompositeGeoTileGridAggregation
 
-    and CompositeTermsAggregation = System.Text.Json.JsonElement
+    and CompositeTermsAggregation = {
+        [<System.Text.Json.Serialization.JsonPropertyName("field")>]
+        Field: Field option
+        [<System.Text.Json.Serialization.JsonPropertyName("missing_bucket")>]
+        MissingBucket: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("missing_order")>]
+        MissingOrder: MissingOrder option
+        [<System.Text.Json.Serialization.JsonPropertyName("script")>]
+        Script: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("value_type")>]
+        ValueType: ValueType option
+        [<System.Text.Json.Serialization.JsonPropertyName("order")>]
+        Order: SortOrder option
+    }
+
+        with
+        static member empty : CompositeTermsAggregation =
+            {
+                Field = None
+                MissingBucket = None
+                MissingOrder = None
+                Script = None
+                ValueType = None
+                Order = None
+            }
 
     and CompositeAggregationBase = {
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
@@ -3808,12 +4497,30 @@ module Types =
     and CompositeHistogramAggregation = {
         [<System.Text.Json.Serialization.JsonPropertyName("interval")>]
         Interval: Double
+        [<System.Text.Json.Serialization.JsonPropertyName("field")>]
+        Field: Field option
+        [<System.Text.Json.Serialization.JsonPropertyName("missing_bucket")>]
+        MissingBucket: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("missing_order")>]
+        MissingOrder: MissingOrder option
+        [<System.Text.Json.Serialization.JsonPropertyName("script")>]
+        Script: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("value_type")>]
+        ValueType: ValueType option
+        [<System.Text.Json.Serialization.JsonPropertyName("order")>]
+        Order: SortOrder option
     }
 
         with
         static member empty : CompositeHistogramAggregation =
             {
                 Interval = Unchecked.defaultof<_>
+                Field = None
+                MissingBucket = None
+                MissingOrder = None
+                Script = None
+                ValueType = None
+                Order = None
             }
 
     and CompositeDateHistogramAggregation = {
@@ -3827,6 +4534,18 @@ module Types =
         Offset: Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("time_zone")>]
         TimeZone: TimeZone option
+        [<System.Text.Json.Serialization.JsonPropertyName("field")>]
+        Field: Field option
+        [<System.Text.Json.Serialization.JsonPropertyName("missing_bucket")>]
+        MissingBucket: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("missing_order")>]
+        MissingOrder: MissingOrder option
+        [<System.Text.Json.Serialization.JsonPropertyName("script")>]
+        Script: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("value_type")>]
+        ValueType: ValueType option
+        [<System.Text.Json.Serialization.JsonPropertyName("order")>]
+        Order: SortOrder option
     }
 
         with
@@ -3837,6 +4556,12 @@ module Types =
                 FixedInterval = None
                 Offset = None
                 TimeZone = None
+                Field = None
+                MissingBucket = None
+                MissingOrder = None
+                Script = None
+                ValueType = None
+                Order = None
             }
 
     and CompositeGeoTileGridAggregation = {
@@ -3844,6 +4569,18 @@ module Types =
         Precision: Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("bounds")>]
         Bounds: GeoBounds option
+        [<System.Text.Json.Serialization.JsonPropertyName("field")>]
+        Field: Field option
+        [<System.Text.Json.Serialization.JsonPropertyName("missing_bucket")>]
+        MissingBucket: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("missing_order")>]
+        MissingOrder: MissingOrder option
+        [<System.Text.Json.Serialization.JsonPropertyName("script")>]
+        Script: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("value_type")>]
+        ValueType: ValueType option
+        [<System.Text.Json.Serialization.JsonPropertyName("order")>]
+        Order: SortOrder option
     }
 
         with
@@ -3851,6 +4588,12 @@ module Types =
             {
                 Precision = None
                 Bounds = None
+                Field = None
+                MissingBucket = None
+                MissingOrder = None
+                Script = None
+                ValueType = None
+                Order = None
             }
 
     and DateHistogramAggregation = {
@@ -3932,12 +4675,24 @@ module Types =
     and ExtendedStatsAggregation = {
         [<System.Text.Json.Serialization.JsonPropertyName("sigma")>]
         Sigma: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("field")>]
+        Field: Field option
+        [<System.Text.Json.Serialization.JsonPropertyName("missing")>]
+        Missing: Missing option
+        [<System.Text.Json.Serialization.JsonPropertyName("script")>]
+        Script: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("format")>]
+        Format: string option
     }
 
         with
         static member empty : ExtendedStatsAggregation =
             {
                 Sigma = None
+                Field = None
+                Missing = None
+                Script = None
+                Format = None
             }
 
     and FrequentItemSetsAggregation = {
@@ -3986,12 +4741,21 @@ module Types =
     and GeoBoundsAggregation = {
         [<System.Text.Json.Serialization.JsonPropertyName("wrap_longitude")>]
         WrapLongitude: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("field")>]
+        Field: Field option
+        [<System.Text.Json.Serialization.JsonPropertyName("missing")>]
+        Missing: Missing option
+        [<System.Text.Json.Serialization.JsonPropertyName("script")>]
+        Script: Script option
     }
 
         with
         static member empty : GeoBoundsAggregation =
             {
                 WrapLongitude = None
+                Field = None
+                Missing = None
+                Script = None
             }
 
     and GeoCentroidAggregation = {
@@ -3999,6 +4763,12 @@ module Types =
         Count: Long option
         [<System.Text.Json.Serialization.JsonPropertyName("location")>]
         Location: GeoLocation option
+        [<System.Text.Json.Serialization.JsonPropertyName("field")>]
+        Field: Field option
+        [<System.Text.Json.Serialization.JsonPropertyName("missing")>]
+        Missing: Missing option
+        [<System.Text.Json.Serialization.JsonPropertyName("script")>]
+        Script: Script option
     }
 
         with
@@ -4006,6 +4776,9 @@ module Types =
             {
                 Count = None
                 Location = None
+                Field = None
+                Missing = None
+                Script = None
             }
 
     and HistogramAggregation = {
@@ -4049,13 +4822,39 @@ module Types =
                 Keyed = None
             }
 
-    and MaxAggregation = System.Text.Json.JsonElement
+    and MaxAggregation = {
+        [<System.Text.Json.Serialization.JsonPropertyName("field")>]
+        Field: Field option
+        [<System.Text.Json.Serialization.JsonPropertyName("missing")>]
+        Missing: Missing option
+        [<System.Text.Json.Serialization.JsonPropertyName("script")>]
+        Script: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("format")>]
+        Format: string option
+    }
+
+        with
+        static member empty : MaxAggregation =
+            {
+                Field = None
+                Missing = None
+                Script = None
+                Format = None
+            }
 
     and MedianAbsoluteDeviationAggregation = {
         [<System.Text.Json.Serialization.JsonPropertyName("compression")>]
         Compression: Double option
         [<System.Text.Json.Serialization.JsonPropertyName("execution_hint")>]
         ExecutionHint: TDigestExecutionHint option
+        [<System.Text.Json.Serialization.JsonPropertyName("field")>]
+        Field: Field option
+        [<System.Text.Json.Serialization.JsonPropertyName("missing")>]
+        Missing: Missing option
+        [<System.Text.Json.Serialization.JsonPropertyName("script")>]
+        Script: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("format")>]
+        Format: string option
     }
 
         with
@@ -4063,9 +4862,31 @@ module Types =
             {
                 Compression = None
                 ExecutionHint = None
+                Field = None
+                Missing = None
+                Script = None
+                Format = None
             }
 
-    and MinAggregation = System.Text.Json.JsonElement
+    and MinAggregation = {
+        [<System.Text.Json.Serialization.JsonPropertyName("field")>]
+        Field: Field option
+        [<System.Text.Json.Serialization.JsonPropertyName("missing")>]
+        Missing: Missing option
+        [<System.Text.Json.Serialization.JsonPropertyName("script")>]
+        Script: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("format")>]
+        Format: string option
+    }
+
+        with
+        static member empty : MinAggregation =
+            {
+                Field = None
+                Missing = None
+                Script = None
+                Format = None
+            }
 
     and MultiTermsAggregation = {
         [<System.Text.Json.Serialization.JsonPropertyName("collect_mode")>]
@@ -4117,6 +4938,14 @@ module Types =
         Hdr: HdrMethod option
         [<System.Text.Json.Serialization.JsonPropertyName("tdigest")>]
         Tdigest: TDigest option
+        [<System.Text.Json.Serialization.JsonPropertyName("field")>]
+        Field: Field option
+        [<System.Text.Json.Serialization.JsonPropertyName("missing")>]
+        Missing: Missing option
+        [<System.Text.Json.Serialization.JsonPropertyName("script")>]
+        Script: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("format")>]
+        Format: string option
     }
 
         with
@@ -4126,17 +4955,29 @@ module Types =
                 Values = None
                 Hdr = None
                 Tdigest = None
+                Field = None
+                Missing = None
+                Script = None
+                Format = None
             }
 
     and PercentilesAggregation = {
         [<System.Text.Json.Serialization.JsonPropertyName("keyed")>]
         Keyed: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("percents")>]
-        Percents: System.Text.Json.JsonElement option
+        Percents: Double list option
         [<System.Text.Json.Serialization.JsonPropertyName("hdr")>]
         Hdr: HdrMethod option
         [<System.Text.Json.Serialization.JsonPropertyName("tdigest")>]
         Tdigest: TDigest option
+        [<System.Text.Json.Serialization.JsonPropertyName("field")>]
+        Field: Field option
+        [<System.Text.Json.Serialization.JsonPropertyName("missing")>]
+        Missing: Missing option
+        [<System.Text.Json.Serialization.JsonPropertyName("script")>]
+        Script: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("format")>]
+        Format: string option
     }
 
         with
@@ -4146,6 +4987,10 @@ module Types =
                 Percents = None
                 Hdr = None
                 Tdigest = None
+                Field = None
+                Missing = None
+                Script = None
+                Format = None
             }
 
     and RangeAggregation = {
@@ -4179,6 +5024,14 @@ module Types =
         Unit: CalendarInterval option
         [<System.Text.Json.Serialization.JsonPropertyName("mode")>]
         Mode: RateMode option
+        [<System.Text.Json.Serialization.JsonPropertyName("field")>]
+        Field: Field option
+        [<System.Text.Json.Serialization.JsonPropertyName("missing")>]
+        Missing: Missing option
+        [<System.Text.Json.Serialization.JsonPropertyName("script")>]
+        Script: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("format")>]
+        Format: string option
     }
 
         with
@@ -4186,6 +5039,10 @@ module Types =
             {
                 Unit = None
                 Mode = None
+                Field = None
+                Missing = None
+                Script = None
+                Format = None
             }
 
     and ScriptedMetricAggregation = {
@@ -4199,6 +5056,12 @@ module Types =
         Params: Map<string, System.Text.Json.JsonElement> option
         [<System.Text.Json.Serialization.JsonPropertyName("reduce_script")>]
         ReduceScript: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("field")>]
+        Field: Field option
+        [<System.Text.Json.Serialization.JsonPropertyName("missing")>]
+        Missing: Missing option
+        [<System.Text.Json.Serialization.JsonPropertyName("script")>]
+        Script: Script option
     }
 
         with
@@ -4209,6 +5072,9 @@ module Types =
                 MapScript = None
                 Params = None
                 ReduceScript = None
+                Field = None
+                Missing = None
+                Script = None
             }
 
     and SignificantTermsAggregation = {
@@ -4337,20 +5203,65 @@ module Types =
                 SourceFields = None
             }
 
-    and StatsAggregation = System.Text.Json.JsonElement
+    and StatsAggregation = {
+        [<System.Text.Json.Serialization.JsonPropertyName("field")>]
+        Field: Field option
+        [<System.Text.Json.Serialization.JsonPropertyName("missing")>]
+        Missing: Missing option
+        [<System.Text.Json.Serialization.JsonPropertyName("script")>]
+        Script: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("format")>]
+        Format: string option
+    }
+
+        with
+        static member empty : StatsAggregation =
+            {
+                Field = None
+                Missing = None
+                Script = None
+                Format = None
+            }
 
     and StringStatsAggregation = {
         [<System.Text.Json.Serialization.JsonPropertyName("show_distribution")>]
         ShowDistribution: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("field")>]
+        Field: Field option
+        [<System.Text.Json.Serialization.JsonPropertyName("missing")>]
+        Missing: Missing option
+        [<System.Text.Json.Serialization.JsonPropertyName("script")>]
+        Script: Script option
     }
 
         with
         static member empty : StringStatsAggregation =
             {
                 ShowDistribution = None
+                Field = None
+                Missing = None
+                Script = None
             }
 
-    and SumAggregation = System.Text.Json.JsonElement
+    and SumAggregation = {
+        [<System.Text.Json.Serialization.JsonPropertyName("field")>]
+        Field: Field option
+        [<System.Text.Json.Serialization.JsonPropertyName("missing")>]
+        Missing: Missing option
+        [<System.Text.Json.Serialization.JsonPropertyName("script")>]
+        Script: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("format")>]
+        Format: string option
+    }
+
+        with
+        static member empty : SumAggregation =
+            {
+                Field = None
+                Missing = None
+                Script = None
+                Format = None
+            }
 
     and TermsAggregation = {
         [<System.Text.Json.Serialization.JsonPropertyName("collect_mode")>]
@@ -4438,6 +5349,12 @@ module Types =
         Version: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("seq_no_primary_term")>]
         SeqNoPrimaryTerm: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("field")>]
+        Field: Field option
+        [<System.Text.Json.Serialization.JsonPropertyName("missing")>]
+        Missing: Missing option
+        [<System.Text.Json.Serialization.JsonPropertyName("script")>]
+        Script: Script option
     }
 
         with
@@ -4456,6 +5373,9 @@ module Types =
                 TrackScores = None
                 Version = None
                 SeqNoPrimaryTerm = None
+                Field = None
+                Missing = None
+                Script = None
             }
 
     and Highlight = {
@@ -4463,6 +5383,48 @@ module Types =
         Encoder: HighlighterEncoder option
         [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
         Fields: System.Text.Json.JsonElement
+        [<System.Text.Json.Serialization.JsonPropertyName("type")>]
+        Type: HighlighterType option
+        [<System.Text.Json.Serialization.JsonPropertyName("boundary_chars")>]
+        BoundaryChars: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("boundary_max_scan")>]
+        BoundaryMaxScan: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("boundary_scanner")>]
+        BoundaryScanner: BoundaryScanner option
+        [<System.Text.Json.Serialization.JsonPropertyName("boundary_scanner_locale")>]
+        BoundaryScannerLocale: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("force_source")>]
+        ForceSource: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("fragmenter")>]
+        Fragmenter: HighlighterFragmenter option
+        [<System.Text.Json.Serialization.JsonPropertyName("fragment_size")>]
+        FragmentSize: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("highlight_filter")>]
+        HighlightFilter: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("highlight_query")>]
+        HighlightQuery: QueryContainer option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_fragment_length")>]
+        MaxFragmentLength: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_analyzed_offset")>]
+        MaxAnalyzedOffset: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("no_match_size")>]
+        NoMatchSize: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("number_of_fragments")>]
+        NumberOfFragments: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("options")>]
+        Options: Map<string, System.Text.Json.JsonElement> option
+        [<System.Text.Json.Serialization.JsonPropertyName("order")>]
+        Order: HighlighterOrder option
+        [<System.Text.Json.Serialization.JsonPropertyName("phrase_limit")>]
+        PhraseLimit: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("post_tags")>]
+        PostTags: string list option
+        [<System.Text.Json.Serialization.JsonPropertyName("pre_tags")>]
+        PreTags: string list option
+        [<System.Text.Json.Serialization.JsonPropertyName("require_field_match")>]
+        RequireFieldMatch: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("tags_schema")>]
+        TagsSchema: HighlighterTagsSchema option
     }
 
         with
@@ -4470,6 +5432,27 @@ module Types =
             {
                 Encoder = None
                 Fields = Unchecked.defaultof<_>
+                Type = None
+                BoundaryChars = None
+                BoundaryMaxScan = None
+                BoundaryScanner = None
+                BoundaryScannerLocale = None
+                ForceSource = None
+                Fragmenter = None
+                FragmentSize = None
+                HighlightFilter = None
+                HighlightQuery = None
+                MaxFragmentLength = None
+                MaxAnalyzedOffset = None
+                NoMatchSize = None
+                NumberOfFragments = None
+                Options = None
+                Order = None
+                PhraseLimit = None
+                PostTags = None
+                PreTags = None
+                RequireFieldMatch = None
+                TagsSchema = None
             }
 
     and HighlightField = {
@@ -4477,6 +5460,48 @@ module Types =
         FragmentOffset: Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("matched_fields")>]
         MatchedFields: Fields option
+        [<System.Text.Json.Serialization.JsonPropertyName("type")>]
+        Type: HighlighterType option
+        [<System.Text.Json.Serialization.JsonPropertyName("boundary_chars")>]
+        BoundaryChars: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("boundary_max_scan")>]
+        BoundaryMaxScan: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("boundary_scanner")>]
+        BoundaryScanner: BoundaryScanner option
+        [<System.Text.Json.Serialization.JsonPropertyName("boundary_scanner_locale")>]
+        BoundaryScannerLocale: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("force_source")>]
+        ForceSource: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("fragmenter")>]
+        Fragmenter: HighlighterFragmenter option
+        [<System.Text.Json.Serialization.JsonPropertyName("fragment_size")>]
+        FragmentSize: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("highlight_filter")>]
+        HighlightFilter: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("highlight_query")>]
+        HighlightQuery: QueryContainer option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_fragment_length")>]
+        MaxFragmentLength: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_analyzed_offset")>]
+        MaxAnalyzedOffset: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("no_match_size")>]
+        NoMatchSize: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("number_of_fragments")>]
+        NumberOfFragments: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("options")>]
+        Options: Map<string, System.Text.Json.JsonElement> option
+        [<System.Text.Json.Serialization.JsonPropertyName("order")>]
+        Order: HighlighterOrder option
+        [<System.Text.Json.Serialization.JsonPropertyName("phrase_limit")>]
+        PhraseLimit: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("post_tags")>]
+        PostTags: string list option
+        [<System.Text.Json.Serialization.JsonPropertyName("pre_tags")>]
+        PreTags: string list option
+        [<System.Text.Json.Serialization.JsonPropertyName("require_field_match")>]
+        RequireFieldMatch: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("tags_schema")>]
+        TagsSchema: HighlighterTagsSchema option
     }
 
         with
@@ -4484,6 +5509,27 @@ module Types =
             {
                 FragmentOffset = None
                 MatchedFields = None
+                Type = None
+                BoundaryChars = None
+                BoundaryMaxScan = None
+                BoundaryScanner = None
+                BoundaryScannerLocale = None
+                ForceSource = None
+                Fragmenter = None
+                FragmentSize = None
+                HighlightFilter = None
+                HighlightQuery = None
+                MaxFragmentLength = None
+                MaxAnalyzedOffset = None
+                NoMatchSize = None
+                NumberOfFragments = None
+                Options = None
+                Order = None
+                PhraseLimit = None
+                PostTags = None
+                PreTags = None
+                RequireFieldMatch = None
+                TagsSchema = None
             }
 
     and HighlightBase = {
@@ -4607,11 +5653,17 @@ module Types =
 
     and TopMetricsAggregation = {
         [<System.Text.Json.Serialization.JsonPropertyName("metrics")>]
-        Metrics: System.Text.Json.JsonElement option
+        Metrics: TopMetricsValue list option
         [<System.Text.Json.Serialization.JsonPropertyName("size")>]
         Size: Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("sort")>]
         Sort: Sort option
+        [<System.Text.Json.Serialization.JsonPropertyName("field")>]
+        Field: Field option
+        [<System.Text.Json.Serialization.JsonPropertyName("missing")>]
+        Missing: Missing option
+        [<System.Text.Json.Serialization.JsonPropertyName("script")>]
+        Script: Script option
     }
 
         with
@@ -4620,19 +5672,49 @@ module Types =
                 Metrics = None
                 Size = None
                 Sort = None
+                Field = None
+                Missing = None
+                Script = None
             }
 
-    and ValueCountAggregation = System.Text.Json.JsonElement
+    and ValueCountAggregation = {
+        [<System.Text.Json.Serialization.JsonPropertyName("field")>]
+        Field: Field option
+        [<System.Text.Json.Serialization.JsonPropertyName("missing")>]
+        Missing: Missing option
+        [<System.Text.Json.Serialization.JsonPropertyName("script")>]
+        Script: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("format")>]
+        Format: string option
+    }
+
+        with
+        static member empty : ValueCountAggregation =
+            {
+                Field = None
+                Missing = None
+                Script = None
+                Format = None
+            }
 
     and FormattableMetricAggregation = {
         [<System.Text.Json.Serialization.JsonPropertyName("format")>]
         Format: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("field")>]
+        Field: Field option
+        [<System.Text.Json.Serialization.JsonPropertyName("missing")>]
+        Missing: Missing option
+        [<System.Text.Json.Serialization.JsonPropertyName("script")>]
+        Script: Script option
     }
 
         with
         static member empty : FormattableMetricAggregation =
             {
                 Format = None
+                Field = None
+                Missing = None
+                Script = None
             }
 
     and WeightedAverageAggregation = {
@@ -4699,7 +5781,7 @@ module Types =
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
         Field: Field
         [<System.Text.Json.Serialization.JsonPropertyName("inner_hits")>]
-        InnerHits: System.Text.Json.JsonElement option
+        InnerHits: InnerHits list option
         [<System.Text.Json.Serialization.JsonPropertyName("max_concurrent_group_searches")>]
         MaxConcurrentGroupSearches: Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("collapse")>]
@@ -4787,7 +5869,7 @@ module Types =
         [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
         Boost: Float option
         [<System.Text.Json.Serialization.JsonPropertyName("filter")>]
-        Filter: System.Text.Json.JsonElement option
+        Filter: QueryContainer list option
         [<System.Text.Json.Serialization.JsonPropertyName("similarity")>]
         Similarity: Float option
         [<System.Text.Json.Serialization.JsonPropertyName("inner_hits")>]
@@ -4879,6 +5961,12 @@ module Types =
         Sort: Sort option
         [<System.Text.Json.Serialization.JsonPropertyName("collapse")>]
         Collapse: FieldCollapse option
+        [<System.Text.Json.Serialization.JsonPropertyName("filter")>]
+        Filter: QueryContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("min_score")>]
+        MinScore: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        Name: string option
     }
 
         with
@@ -4889,11 +5977,14 @@ module Types =
                 TerminateAfter = None
                 Sort = None
                 Collapse = None
+                Filter = None
+                MinScore = None
+                Name = None
             }
 
     and RetrieverBase = {
         [<System.Text.Json.Serialization.JsonPropertyName("filter")>]
-        Filter: System.Text.Json.JsonElement option
+        Filter: QueryContainer list option
         [<System.Text.Json.Serialization.JsonPropertyName("min_score")>]
         MinScore: Float option
         [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
@@ -4925,6 +6016,12 @@ module Types =
         Similarity: Float option
         [<System.Text.Json.Serialization.JsonPropertyName("rescore_vector")>]
         RescoreVector: RescoreVector option
+        [<System.Text.Json.Serialization.JsonPropertyName("filter")>]
+        Filter: QueryContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("min_score")>]
+        MinScore: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        Name: string option
     }
 
         with
@@ -4938,6 +6035,9 @@ module Types =
                 VisitPercentage = None
                 Similarity = None
                 RescoreVector = None
+                Filter = None
+                MinScore = None
+                Name = None
             }
 
     and RRFRetriever = {
@@ -4951,6 +6051,12 @@ module Types =
         Query: string option
         [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
         Fields: string list option
+        [<System.Text.Json.Serialization.JsonPropertyName("filter")>]
+        Filter: QueryContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("min_score")>]
+        MinScore: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        Name: string option
     }
 
         with
@@ -4961,6 +6067,9 @@ module Types =
                 RankWindowSize = None
                 Query = None
                 Fields = None
+                Filter = None
+                MinScore = None
+                Name = None
             }
 
     /// Either a direct RetrieverContainer (backward compatible) or an RRFRetrieverComponent with weight.
@@ -4996,6 +6105,12 @@ module Types =
         Field: string
         [<System.Text.Json.Serialization.JsonPropertyName("chunk_rescorer")>]
         ChunkRescorer: ChunkRescorer option
+        [<System.Text.Json.Serialization.JsonPropertyName("filter")>]
+        Filter: QueryContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("min_score")>]
+        MinScore: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        Name: string option
     }
 
         with
@@ -5007,17 +6122,26 @@ module Types =
                 InferenceText = Unchecked.defaultof<_>
                 Field = Unchecked.defaultof<_>
                 ChunkRescorer = None
+                Filter = None
+                MinScore = None
+                Name = None
             }
 
     and RuleRetriever = {
         [<System.Text.Json.Serialization.JsonPropertyName("ruleset_ids")>]
-        RulesetIds: System.Text.Json.JsonElement
+        RulesetIds: Id list
         [<System.Text.Json.Serialization.JsonPropertyName("match_criteria")>]
         MatchCriteria: System.Text.Json.JsonElement
         [<System.Text.Json.Serialization.JsonPropertyName("retriever")>]
         Retriever: RetrieverContainer
         [<System.Text.Json.Serialization.JsonPropertyName("rank_window_size")>]
         RankWindowSize: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("filter")>]
+        Filter: QueryContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("min_score")>]
+        MinScore: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        Name: string option
     }
 
         with
@@ -5027,13 +6151,22 @@ module Types =
                 MatchCriteria = Unchecked.defaultof<_>
                 Retriever = Unchecked.defaultof<_>
                 RankWindowSize = None
+                Filter = None
+                MinScore = None
+                Name = None
             }
 
     and RescorerRetriever = {
         [<System.Text.Json.Serialization.JsonPropertyName("retriever")>]
         Retriever: RetrieverContainer
         [<System.Text.Json.Serialization.JsonPropertyName("rescore")>]
-        Rescore: System.Text.Json.JsonElement
+        Rescore: Rescore list
+        [<System.Text.Json.Serialization.JsonPropertyName("filter")>]
+        Filter: QueryContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("min_score")>]
+        MinScore: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        Name: string option
     }
 
         with
@@ -5041,6 +6174,9 @@ module Types =
             {
                 Retriever = Unchecked.defaultof<_>
                 Rescore = Unchecked.defaultof<_>
+                Filter = None
+                MinScore = None
+                Name = None
             }
 
     and LinearRetriever = {
@@ -5054,6 +6190,12 @@ module Types =
         Fields: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("normalizer")>]
         Normalizer: ScoreNormalizer option
+        [<System.Text.Json.Serialization.JsonPropertyName("filter")>]
+        Filter: QueryContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("min_score")>]
+        MinScore: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        Name: string option
     }
 
         with
@@ -5064,6 +6206,9 @@ module Types =
                 Query = None
                 Fields = None
                 Normalizer = None
+                Filter = None
+                MinScore = None
+                Name = None
             }
 
     and InnerRetriever = {
@@ -5092,6 +6237,12 @@ module Types =
         Docs: SpecifiedDocument list option
         [<System.Text.Json.Serialization.JsonPropertyName("rank_window_size")>]
         RankWindowSize: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("filter")>]
+        Filter: QueryContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("min_score")>]
+        MinScore: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        Name: string option
     }
 
         with
@@ -5101,6 +6252,9 @@ module Types =
                 Ids = None
                 Docs = None
                 RankWindowSize = None
+                Filter = None
+                MinScore = None
+                Name = None
             }
 
     and DiversifyRetriever = {
@@ -5120,6 +6274,12 @@ module Types =
         QueryVectorBuilder: QueryVectorBuilder option
         [<System.Text.Json.Serialization.JsonPropertyName("lambda")>]
         Lambda: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("filter")>]
+        Filter: QueryContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("min_score")>]
+        MinScore: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        Name: string option
     }
 
         with
@@ -5133,6 +6293,9 @@ module Types =
                 QueryVector = None
                 QueryVectorBuilder = None
                 Lambda = None
+                Filter = None
+                MinScore = None
+                Name = None
             }
 
     and RuntimeFields = Map<Field, RuntimeField>
@@ -5184,6 +6347,10 @@ module Types =
         ScoreMode: ChildScoreMode option
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: RelationName
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
     }
 
         with
@@ -5196,6 +6363,8 @@ module Types =
                 Query = Unchecked.defaultof<_>
                 ScoreMode = None
                 Type = Unchecked.defaultof<_>
+                Boost = None
+                query_name = None
             }
 
     and HasParentQuery = {
@@ -5209,6 +6378,10 @@ module Types =
         Query: QueryContainer
         [<System.Text.Json.Serialization.JsonPropertyName("score")>]
         Score: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
     }
 
         with
@@ -5219,6 +6392,8 @@ module Types =
                 ParentType = Unchecked.defaultof<_>
                 Query = Unchecked.defaultof<_>
                 Score = None
+                Boost = None
+                query_name = None
             }
 
     and [<RequireQualifiedAccess>] IntervalsQuery =
@@ -5326,11 +6501,15 @@ module Types =
         [<System.Text.Json.Serialization.JsonPropertyName("k")>]
         K: Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("filter")>]
-        Filter: System.Text.Json.JsonElement option
+        Filter: QueryContainer list option
         [<System.Text.Json.Serialization.JsonPropertyName("similarity")>]
         Similarity: Float option
         [<System.Text.Json.Serialization.JsonPropertyName("rescore_vector")>]
         RescoreVector: RescoreVector option
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
     }
 
         with
@@ -5345,6 +6524,8 @@ module Types =
                 Filter = None
                 Similarity = None
                 RescoreVector = None
+                Boost = None
+                query_name = None
             }
 
     and NestedQuery = {
@@ -5358,6 +6539,10 @@ module Types =
         Query: QueryContainer
         [<System.Text.Json.Serialization.JsonPropertyName("score_mode")>]
         ScoreMode: ChildScoreMode option
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
     }
 
         with
@@ -5368,6 +6553,8 @@ module Types =
                 Path = Unchecked.defaultof<_>
                 Query = Unchecked.defaultof<_>
                 ScoreMode = None
+                Boost = None
+                query_name = None
             }
 
     and [<RequireQualifiedAccess>] PinnedQuery =
@@ -5383,11 +6570,15 @@ module Types =
         [<System.Text.Json.Serialization.JsonPropertyName("organic")>]
         Organic: QueryContainer
         [<System.Text.Json.Serialization.JsonPropertyName("ruleset_ids")>]
-        RulesetIds: System.Text.Json.JsonElement option
+        RulesetIds: Id list option
         [<System.Text.Json.Serialization.JsonPropertyName("ruleset_id")>]
         RulesetId: string option
         [<System.Text.Json.Serialization.JsonPropertyName("match_criteria")>]
         MatchCriteria: System.Text.Json.JsonElement
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
     }
 
         with
@@ -5397,17 +6588,25 @@ module Types =
                 RulesetIds = None
                 RulesetId = None
                 MatchCriteria = Unchecked.defaultof<_>
+                Boost = None
+                query_name = None
             }
 
     and ScriptQuery = {
         [<System.Text.Json.Serialization.JsonPropertyName("script")>]
         Script: Script
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
     }
 
         with
         static member empty : ScriptQuery =
             {
                 Script = Unchecked.defaultof<_>
+                Boost = None
+                query_name = None
             }
 
     and ScriptScoreQuery = {
@@ -5417,6 +6616,10 @@ module Types =
         Query: QueryContainer
         [<System.Text.Json.Serialization.JsonPropertyName("script")>]
         Script: Script
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
     }
 
         with
@@ -5425,6 +6628,8 @@ module Types =
                 MinScore = None
                 Query = Unchecked.defaultof<_>
                 Script = Unchecked.defaultof<_>
+                Boost = None
+                query_name = None
             }
 
     and SpanContainingQuery = {
@@ -5432,6 +6637,10 @@ module Types =
         Big: SpanQuery
         [<System.Text.Json.Serialization.JsonPropertyName("little")>]
         Little: SpanQuery
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
     }
 
         with
@@ -5439,6 +6648,8 @@ module Types =
             {
                 Big = Unchecked.defaultof<_>
                 Little = Unchecked.defaultof<_>
+                Boost = None
+                query_name = None
             }
 
     and [<RequireQualifiedAccess>] SpanQuery =
@@ -5459,6 +6670,10 @@ module Types =
         Field: Field
         [<System.Text.Json.Serialization.JsonPropertyName("query")>]
         Query: SpanQuery
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
     }
 
         with
@@ -5466,6 +6681,8 @@ module Types =
             {
                 Field = Unchecked.defaultof<_>
                 Query = Unchecked.defaultof<_>
+                Boost = None
+                query_name = None
             }
 
     and SpanFirstQuery = {
@@ -5473,6 +6690,10 @@ module Types =
         End: Integer
         [<System.Text.Json.Serialization.JsonPropertyName("match")>]
         Match: SpanQuery
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
     }
 
         with
@@ -5480,17 +6701,25 @@ module Types =
             {
                 End = Unchecked.defaultof<_>
                 Match = Unchecked.defaultof<_>
+                Boost = None
+                query_name = None
             }
 
     and SpanMultiTermQuery = {
         [<System.Text.Json.Serialization.JsonPropertyName("match")>]
         Match: QueryContainer
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
     }
 
         with
         static member empty : SpanMultiTermQuery =
             {
                 Match = Unchecked.defaultof<_>
+                Boost = None
+                query_name = None
             }
 
     and SpanNearQuery = {
@@ -5500,6 +6729,10 @@ module Types =
         InOrder: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("slop")>]
         Slop: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
     }
 
         with
@@ -5508,6 +6741,8 @@ module Types =
                 Clauses = Unchecked.defaultof<_>
                 InOrder = None
                 Slop = None
+                Boost = None
+                query_name = None
             }
 
     and SpanNotQuery = {
@@ -5521,6 +6756,10 @@ module Types =
         Post: Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("pre")>]
         Pre: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
     }
 
         with
@@ -5531,17 +6770,25 @@ module Types =
                 Include = Unchecked.defaultof<_>
                 Post = None
                 Pre = None
+                Boost = None
+                query_name = None
             }
 
     and SpanOrQuery = {
         [<System.Text.Json.Serialization.JsonPropertyName("clauses")>]
         Clauses: SpanQuery list
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
     }
 
         with
         static member empty : SpanOrQuery =
             {
                 Clauses = Unchecked.defaultof<_>
+                Boost = None
+                query_name = None
             }
 
     and SpanWithinQuery = {
@@ -5549,6 +6796,10 @@ module Types =
         Big: SpanQuery
         [<System.Text.Json.Serialization.JsonPropertyName("little")>]
         Little: SpanQuery
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
     }
 
         with
@@ -5556,6 +6807,8 @@ module Types =
             {
                 Big = Unchecked.defaultof<_>
                 Little = Unchecked.defaultof<_>
+                Boost = None
+                query_name = None
             }
 
     and TermsSetQuery = {
@@ -5567,6 +6820,10 @@ module Types =
         MinimumShouldMatchScript: Script option
         [<System.Text.Json.Serialization.JsonPropertyName("terms")>]
         Terms: FieldValue list
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("_name")>]
+        query_name: string option
     }
 
         with
@@ -5576,6 +6833,8 @@ module Types =
                 MinimumShouldMatchField = None
                 MinimumShouldMatchScript = None
                 Terms = Unchecked.defaultof<_>
+                Boost = None
+                query_name = None
             }
 
     [<RequireQualifiedAccess>]
@@ -5628,7 +6887,7 @@ module Types =
         [<System.Text.Json.Serialization.JsonPropertyName("field_security")>]
         FieldSecurity: FieldSecurity option
         [<System.Text.Json.Serialization.JsonPropertyName("names")>]
-        Names: System.Text.Json.JsonElement
+        Names: IndexName list
         [<System.Text.Json.Serialization.JsonPropertyName("query")>]
         Query: IndicesPrivilegesQuery option
         [<System.Text.Json.Serialization.JsonPropertyName("allow_restricted_indices")>]
@@ -5742,7 +7001,7 @@ module Types =
         [<System.Text.Json.Serialization.JsonPropertyName("alias")>]
         Alias: IndexAlias option
         [<System.Text.Json.Serialization.JsonPropertyName("aliases")>]
-        Aliases: System.Text.Json.JsonElement option
+        Aliases: IndexAlias list option
         [<System.Text.Json.Serialization.JsonPropertyName("filter")>]
         Filter: QueryContainer option
         [<System.Text.Json.Serialization.JsonPropertyName("index")>]
@@ -5783,7 +7042,7 @@ module Types =
         [<System.Text.Json.Serialization.JsonPropertyName("alias")>]
         Alias: IndexAlias option
         [<System.Text.Json.Serialization.JsonPropertyName("aliases")>]
-        Aliases: System.Text.Json.JsonElement option
+        Aliases: IndexAlias list option
         [<System.Text.Json.Serialization.JsonPropertyName("index")>]
         Index: IndexName option
         [<System.Text.Json.Serialization.JsonPropertyName("indices")>]
@@ -6276,23 +7535,23 @@ module Types =
         [<System.Text.Json.Serialization.JsonPropertyName("id")>]
         Id: Id option
         [<System.Text.Json.Serialization.JsonPropertyName("bcc")>]
-        Bcc: System.Text.Json.JsonElement option
+        Bcc: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("body")>]
         Body: EmailBody option
         [<System.Text.Json.Serialization.JsonPropertyName("cc")>]
-        Cc: System.Text.Json.JsonElement option
+        Cc: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("from")>]
         From: string option
         [<System.Text.Json.Serialization.JsonPropertyName("priority")>]
         Priority: EmailPriority option
         [<System.Text.Json.Serialization.JsonPropertyName("reply_to")>]
-        ReplyTo: System.Text.Json.JsonElement option
+        ReplyTo: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("sent_date")>]
         SentDate: DateTime option
         [<System.Text.Json.Serialization.JsonPropertyName("subject")>]
         Subject: string
         [<System.Text.Json.Serialization.JsonPropertyName("to")>]
-        To: System.Text.Json.JsonElement
+        To: string list
         [<System.Text.Json.Serialization.JsonPropertyName("attachments")>]
         Attachments: Map<string, EmailAttachmentContainer> option
     }
@@ -6313,7 +7572,46 @@ module Types =
                 Attachments = None
             }
 
-    type EmailAction = System.Text.Json.JsonElement
+    type EmailAction = {
+        [<System.Text.Json.Serialization.JsonPropertyName("id")>]
+        Id: Id option
+        [<System.Text.Json.Serialization.JsonPropertyName("bcc")>]
+        Bcc: string list option
+        [<System.Text.Json.Serialization.JsonPropertyName("body")>]
+        Body: EmailBody option
+        [<System.Text.Json.Serialization.JsonPropertyName("cc")>]
+        Cc: string list option
+        [<System.Text.Json.Serialization.JsonPropertyName("from")>]
+        From: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("priority")>]
+        Priority: EmailPriority option
+        [<System.Text.Json.Serialization.JsonPropertyName("reply_to")>]
+        ReplyTo: string list option
+        [<System.Text.Json.Serialization.JsonPropertyName("sent_date")>]
+        SentDate: DateTime option
+        [<System.Text.Json.Serialization.JsonPropertyName("subject")>]
+        Subject: string
+        [<System.Text.Json.Serialization.JsonPropertyName("to")>]
+        To: string list
+        [<System.Text.Json.Serialization.JsonPropertyName("attachments")>]
+        Attachments: Map<string, EmailAttachmentContainer> option
+    }
+
+        with
+        static member empty : EmailAction =
+            {
+                Id = None
+                Bcc = None
+                Body = None
+                Cc = None
+                From = None
+                Priority = None
+                ReplyTo = None
+                SentDate = None
+                Subject = Unchecked.defaultof<_>
+                To = Unchecked.defaultof<_>
+                Attachments = None
+            }
 
     [<RequireQualifiedAccess>]
     type PagerDutyContextType =
@@ -6392,7 +7690,40 @@ module Types =
                 Proxy = None
             }
 
-    type PagerDutyAction = System.Text.Json.JsonElement
+    type PagerDutyAction = {
+        [<System.Text.Json.Serialization.JsonPropertyName("account")>]
+        Account: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("attach_payload")>]
+        AttachPayload: bool
+        [<System.Text.Json.Serialization.JsonPropertyName("client")>]
+        Client: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("client_url")>]
+        ClientUrl: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("contexts")>]
+        Contexts: PagerDutyContext list option
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
+        Description: string
+        [<System.Text.Json.Serialization.JsonPropertyName("event_type")>]
+        EventType: PagerDutyEventType option
+        [<System.Text.Json.Serialization.JsonPropertyName("incident_key")>]
+        IncidentKey: string
+        [<System.Text.Json.Serialization.JsonPropertyName("proxy")>]
+        Proxy: PagerDutyEventProxy option
+    }
+
+        with
+        static member empty : PagerDutyAction =
+            {
+                Account = None
+                AttachPayload = Unchecked.defaultof<_>
+                Client = None
+                ClientUrl = None
+                Contexts = None
+                Description = Unchecked.defaultof<_>
+                EventType = None
+                IncidentKey = Unchecked.defaultof<_>
+                Proxy = None
+            }
 
     type SlackAttachmentField = {
         [<System.Text.Json.Serialization.JsonPropertyName("short")>]
@@ -6521,7 +7852,52 @@ module Types =
                 Message = Unchecked.defaultof<_>
             }
 
-    type WebhookAction = System.Text.Json.JsonElement
+    type WebhookAction = {
+        [<System.Text.Json.Serialization.JsonPropertyName("auth")>]
+        Auth: HttpInputAuthentication option
+        [<System.Text.Json.Serialization.JsonPropertyName("body")>]
+        Body: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("connection_timeout")>]
+        ConnectionTimeout: Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("headers")>]
+        Headers: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("host")>]
+        Host: Host option
+        [<System.Text.Json.Serialization.JsonPropertyName("method")>]
+        Method: HttpInputMethod option
+        [<System.Text.Json.Serialization.JsonPropertyName("params")>]
+        Params: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("path")>]
+        Path: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("port")>]
+        Port: Uint option
+        [<System.Text.Json.Serialization.JsonPropertyName("proxy")>]
+        Proxy: HttpInputProxy option
+        [<System.Text.Json.Serialization.JsonPropertyName("read_timeout")>]
+        ReadTimeout: Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("scheme")>]
+        Scheme: ConnectionScheme option
+        [<System.Text.Json.Serialization.JsonPropertyName("url")>]
+        Url: string option
+    }
+
+        with
+        static member empty : WebhookAction =
+            {
+                Auth = None
+                Body = None
+                ConnectionTimeout = None
+                Headers = None
+                Host = None
+                Method = None
+                Params = None
+                Path = None
+                Port = None
+                Proxy = None
+                ReadTimeout = None
+                Scheme = None
+                Url = None
+            }
 
     type WatcherTypesAction = {
         [<System.Text.Json.Serialization.JsonPropertyName("action_type")>]
@@ -7005,6 +8381,8 @@ module Types =
     type MultiBucketAggregateBase<'TBucket> = {
         [<System.Text.Json.Serialization.JsonPropertyName("buckets")>]
         Buckets: Buckets<'TBucket>
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Metadata option
     }
 
     /// Base type for multi-bucket aggregation results that can hold sub-aggregations results.
@@ -7022,12 +8400,15 @@ module Types =
     type AdjacencyMatrixBucket = {
         [<System.Text.Json.Serialization.JsonPropertyName("key")>]
         Key: string
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_count")>]
+        DocCount: Long
     }
 
         with
         static member empty : AdjacencyMatrixBucket =
             {
                 Key = Unchecked.defaultof<_>
+                DocCount = Unchecked.defaultof<_>
             }
 
     type AdjacencyMatrixAggregate = System.Text.Json.JsonElement
@@ -7035,12 +8416,15 @@ module Types =
     type CardinalityAggregate = {
         [<System.Text.Json.Serialization.JsonPropertyName("value")>]
         Value: Long
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Metadata option
     }
 
         with
         static member empty : CardinalityAggregate =
             {
                 Value = Unchecked.defaultof<_>
+                Meta = None
             }
 
     type KeyedPercentiles = Map<string, System.Text.Json.JsonElement>
@@ -7070,29 +8454,94 @@ module Types =
     type PercentilesAggregateBase = {
         [<System.Text.Json.Serialization.JsonPropertyName("values")>]
         Values: Percentiles
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Metadata option
     }
 
         with
         static member empty : PercentilesAggregateBase =
             {
                 Values = Unchecked.defaultof<_>
+                Meta = None
             }
 
-    type HdrPercentilesAggregate = System.Text.Json.JsonElement
+    type HdrPercentilesAggregate = {
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Metadata option
+        [<System.Text.Json.Serialization.JsonPropertyName("values")>]
+        Values: Percentiles
+    }
 
-    type HdrPercentileRanksAggregate = System.Text.Json.JsonElement
+        with
+        static member empty : HdrPercentilesAggregate =
+            {
+                Meta = None
+                Values = Unchecked.defaultof<_>
+            }
 
-    type TDigestPercentilesAggregate = System.Text.Json.JsonElement
+    type HdrPercentileRanksAggregate = {
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Metadata option
+        [<System.Text.Json.Serialization.JsonPropertyName("values")>]
+        Values: Percentiles
+    }
 
-    type TDigestPercentileRanksAggregate = System.Text.Json.JsonElement
+        with
+        static member empty : HdrPercentileRanksAggregate =
+            {
+                Meta = None
+                Values = Unchecked.defaultof<_>
+            }
 
-    type PercentilesBucketAggregate = System.Text.Json.JsonElement
+    type TDigestPercentilesAggregate = {
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Metadata option
+        [<System.Text.Json.Serialization.JsonPropertyName("values")>]
+        Values: Percentiles
+    }
+
+        with
+        static member empty : TDigestPercentilesAggregate =
+            {
+                Meta = None
+                Values = Unchecked.defaultof<_>
+            }
+
+    type TDigestPercentileRanksAggregate = {
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Metadata option
+        [<System.Text.Json.Serialization.JsonPropertyName("values")>]
+        Values: Percentiles
+    }
+
+        with
+        static member empty : TDigestPercentileRanksAggregate =
+            {
+                Meta = None
+                Values = Unchecked.defaultof<_>
+            }
+
+    type PercentilesBucketAggregate = {
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Metadata option
+        [<System.Text.Json.Serialization.JsonPropertyName("values")>]
+        Values: Percentiles
+    }
+
+        with
+        static member empty : PercentilesBucketAggregate =
+            {
+                Meta = None
+                Values = Unchecked.defaultof<_>
+            }
 
     type SingleMetricAggregateBase = {
         [<System.Text.Json.Serialization.JsonPropertyName("value")>]
         Value: Double option
         [<System.Text.Json.Serialization.JsonPropertyName("value_as_string")>]
         ValueAsString: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Metadata option
     }
 
         with
@@ -7100,32 +8549,159 @@ module Types =
             {
                 Value = Unchecked.defaultof<_>
                 ValueAsString = None
+                Meta = None
             }
 
-    type MedianAbsoluteDeviationAggregate = System.Text.Json.JsonElement
+    type MedianAbsoluteDeviationAggregate = {
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Metadata option
+        [<System.Text.Json.Serialization.JsonPropertyName("value")>]
+        Value: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("value_as_string")>]
+        ValueAsString: string option
+    }
 
-    type MinAggregate = System.Text.Json.JsonElement
+        with
+        static member empty : MedianAbsoluteDeviationAggregate =
+            {
+                Meta = None
+                Value = Unchecked.defaultof<_>
+                ValueAsString = None
+            }
 
-    type MaxAggregate = System.Text.Json.JsonElement
+    type MinAggregate = {
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Metadata option
+        [<System.Text.Json.Serialization.JsonPropertyName("value")>]
+        Value: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("value_as_string")>]
+        ValueAsString: string option
+    }
+
+        with
+        static member empty : MinAggregate =
+            {
+                Meta = None
+                Value = Unchecked.defaultof<_>
+                ValueAsString = None
+            }
+
+    type MaxAggregate = {
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Metadata option
+        [<System.Text.Json.Serialization.JsonPropertyName("value")>]
+        Value: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("value_as_string")>]
+        ValueAsString: string option
+    }
+
+        with
+        static member empty : MaxAggregate =
+            {
+                Meta = None
+                Value = Unchecked.defaultof<_>
+                ValueAsString = None
+            }
 
     /// Sum aggregation result. `value` is always present and is zero if there were no values to process.
-    type SumAggregate = System.Text.Json.JsonElement
+    type SumAggregate = {
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Metadata option
+        [<System.Text.Json.Serialization.JsonPropertyName("value")>]
+        Value: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("value_as_string")>]
+        ValueAsString: string option
+    }
 
-    type AvgAggregate = System.Text.Json.JsonElement
+        with
+        static member empty : SumAggregate =
+            {
+                Meta = None
+                Value = Unchecked.defaultof<_>
+                ValueAsString = None
+            }
+
+    type AvgAggregate = {
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Metadata option
+        [<System.Text.Json.Serialization.JsonPropertyName("value")>]
+        Value: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("value_as_string")>]
+        ValueAsString: string option
+    }
+
+        with
+        static member empty : AvgAggregate =
+            {
+                Meta = None
+                Value = Unchecked.defaultof<_>
+                ValueAsString = None
+            }
 
     /// Weighted average aggregation result. `value` is missing if the weight was set to zero.
-    type WeightedAvgAggregate = System.Text.Json.JsonElement
+    type WeightedAvgAggregate = {
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Metadata option
+        [<System.Text.Json.Serialization.JsonPropertyName("value")>]
+        Value: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("value_as_string")>]
+        ValueAsString: string option
+    }
+
+        with
+        static member empty : WeightedAvgAggregate =
+            {
+                Meta = None
+                Value = Unchecked.defaultof<_>
+                ValueAsString = None
+            }
 
     /// Value count aggregation result. `value` is always present.
-    type ValueCountAggregate = System.Text.Json.JsonElement
+    type ValueCountAggregate = {
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Metadata option
+        [<System.Text.Json.Serialization.JsonPropertyName("value")>]
+        Value: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("value_as_string")>]
+        ValueAsString: string option
+    }
 
-    type SimpleValueAggregate = System.Text.Json.JsonElement
+        with
+        static member empty : ValueCountAggregate =
+            {
+                Meta = None
+                Value = Unchecked.defaultof<_>
+                ValueAsString = None
+            }
+
+    type SimpleValueAggregate = {
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Metadata option
+        [<System.Text.Json.Serialization.JsonPropertyName("value")>]
+        Value: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("value_as_string")>]
+        ValueAsString: string option
+    }
+
+        with
+        static member empty : SimpleValueAggregate =
+            {
+                Meta = None
+                Value = Unchecked.defaultof<_>
+                ValueAsString = None
+            }
 
     type DerivativeAggregate = {
         [<System.Text.Json.Serialization.JsonPropertyName("normalized_value")>]
         NormalizedValue: Double option
         [<System.Text.Json.Serialization.JsonPropertyName("normalized_value_as_string")>]
         NormalizedValueAsString: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Metadata option
+        [<System.Text.Json.Serialization.JsonPropertyName("value")>]
+        Value: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("value_as_string")>]
+        ValueAsString: string option
     }
 
         with
@@ -7133,22 +8709,58 @@ module Types =
             {
                 NormalizedValue = None
                 NormalizedValueAsString = None
+                Meta = None
+                Value = Unchecked.defaultof<_>
+                ValueAsString = None
             }
 
     type BucketMetricValueAggregate = {
         [<System.Text.Json.Serialization.JsonPropertyName("keys")>]
         Keys: string list
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Metadata option
+        [<System.Text.Json.Serialization.JsonPropertyName("value")>]
+        Value: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("value_as_string")>]
+        ValueAsString: string option
     }
 
         with
         static member empty : BucketMetricValueAggregate =
             {
                 Keys = Unchecked.defaultof<_>
+                Meta = None
+                Value = Unchecked.defaultof<_>
+                ValueAsString = None
             }
 
-    type Dip = System.Text.Json.JsonElement
+    type Dip = {
+        [<System.Text.Json.Serialization.JsonPropertyName("p_value")>]
+        PValue: Double
+        [<System.Text.Json.Serialization.JsonPropertyName("change_point")>]
+        ChangePoint: Integer
+    }
 
-    type DistributionChange = System.Text.Json.JsonElement
+        with
+        static member empty : Dip =
+            {
+                PValue = Unchecked.defaultof<_>
+                ChangePoint = Unchecked.defaultof<_>
+            }
+
+    type DistributionChange = {
+        [<System.Text.Json.Serialization.JsonPropertyName("p_value")>]
+        PValue: Double
+        [<System.Text.Json.Serialization.JsonPropertyName("change_point")>]
+        ChangePoint: Integer
+    }
+
+        with
+        static member empty : DistributionChange =
+            {
+                PValue = Unchecked.defaultof<_>
+                ChangePoint = Unchecked.defaultof<_>
+            }
 
     type Indeterminable = {
         [<System.Text.Json.Serialization.JsonPropertyName("reason")>]
@@ -7178,11 +8790,35 @@ module Types =
                 Trend = Unchecked.defaultof<_>
             }
 
-    type Spike = System.Text.Json.JsonElement
+    type Spike = {
+        [<System.Text.Json.Serialization.JsonPropertyName("p_value")>]
+        PValue: Double
+        [<System.Text.Json.Serialization.JsonPropertyName("change_point")>]
+        ChangePoint: Integer
+    }
+
+        with
+        static member empty : Spike =
+            {
+                PValue = Unchecked.defaultof<_>
+                ChangePoint = Unchecked.defaultof<_>
+            }
 
     type Stationary = System.Text.Json.JsonElement
 
-    type StepChange = System.Text.Json.JsonElement
+    type StepChange = {
+        [<System.Text.Json.Serialization.JsonPropertyName("p_value")>]
+        PValue: Double
+        [<System.Text.Json.Serialization.JsonPropertyName("change_point")>]
+        ChangePoint: Integer
+    }
+
+        with
+        static member empty : StepChange =
+            {
+                PValue = Unchecked.defaultof<_>
+                ChangePoint = Unchecked.defaultof<_>
+            }
 
     type TrendChange = {
         [<System.Text.Json.Serialization.JsonPropertyName("p_value")>]
@@ -7215,12 +8851,15 @@ module Types =
     type ChangePointBucket = {
         [<System.Text.Json.Serialization.JsonPropertyName("key")>]
         Key: FieldValue
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_count")>]
+        DocCount: Long
     }
 
         with
         static member empty : ChangePointBucket =
             {
                 Key = Unchecked.defaultof<_>
+                DocCount = Unchecked.defaultof<_>
             }
 
     type ChangePointAggregate = {
@@ -7228,6 +8867,8 @@ module Types =
         Type: ChangeType
         [<System.Text.Json.Serialization.JsonPropertyName("bucket")>]
         Bucket: ChangePointBucket option
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Metadata option
     }
 
         with
@@ -7235,6 +8876,7 @@ module Types =
             {
                 Type = Unchecked.defaultof<_>
                 Bucket = None
+                Meta = None
             }
 
     /// Statistics aggregation result. `min`, `max` and `avg` are missing if there were no values to process
@@ -7257,6 +8899,8 @@ module Types =
         AvgAsString: string option
         [<System.Text.Json.Serialization.JsonPropertyName("sum_as_string")>]
         SumAsString: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Metadata option
     }
 
         with
@@ -7271,9 +8915,46 @@ module Types =
                 MaxAsString = None
                 AvgAsString = None
                 SumAsString = None
+                Meta = None
             }
 
-    type StatsBucketAggregate = System.Text.Json.JsonElement
+    type StatsBucketAggregate = {
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Metadata option
+        [<System.Text.Json.Serialization.JsonPropertyName("count")>]
+        Count: Long
+        [<System.Text.Json.Serialization.JsonPropertyName("min")>]
+        Min: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("max")>]
+        Max: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("avg")>]
+        Avg: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("sum")>]
+        Sum: Double
+        [<System.Text.Json.Serialization.JsonPropertyName("min_as_string")>]
+        MinAsString: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_as_string")>]
+        MaxAsString: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("avg_as_string")>]
+        AvgAsString: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("sum_as_string")>]
+        SumAsString: string option
+    }
+
+        with
+        static member empty : StatsBucketAggregate =
+            {
+                Meta = None
+                Count = Unchecked.defaultof<_>
+                Min = Unchecked.defaultof<_>
+                Max = Unchecked.defaultof<_>
+                Avg = Unchecked.defaultof<_>
+                Sum = Unchecked.defaultof<_>
+                MinAsString = None
+                MaxAsString = None
+                AvgAsString = None
+                SumAsString = None
+            }
 
     type StandardDeviationBounds = {
         [<System.Text.Json.Serialization.JsonPropertyName("upper")>]
@@ -7356,6 +9037,26 @@ module Types =
         StdDeviationAsString: string option
         [<System.Text.Json.Serialization.JsonPropertyName("std_deviation_bounds_as_string")>]
         StdDeviationBoundsAsString: StandardDeviationBoundsAsString option
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Metadata option
+        [<System.Text.Json.Serialization.JsonPropertyName("count")>]
+        Count: Long
+        [<System.Text.Json.Serialization.JsonPropertyName("min")>]
+        Min: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("max")>]
+        Max: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("avg")>]
+        Avg: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("sum")>]
+        Sum: Double
+        [<System.Text.Json.Serialization.JsonPropertyName("min_as_string")>]
+        MinAsString: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_as_string")>]
+        MaxAsString: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("avg_as_string")>]
+        AvgAsString: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("sum_as_string")>]
+        SumAsString: string option
     }
 
         with
@@ -7375,19 +9076,110 @@ module Types =
                 VarianceSamplingAsString = None
                 StdDeviationAsString = None
                 StdDeviationBoundsAsString = None
+                Meta = None
+                Count = Unchecked.defaultof<_>
+                Min = Unchecked.defaultof<_>
+                Max = Unchecked.defaultof<_>
+                Avg = Unchecked.defaultof<_>
+                Sum = Unchecked.defaultof<_>
+                MinAsString = None
+                MaxAsString = None
+                AvgAsString = None
+                SumAsString = None
             }
 
-    type ExtendedStatsBucketAggregate = System.Text.Json.JsonElement
+    type ExtendedStatsBucketAggregate = {
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Metadata option
+        [<System.Text.Json.Serialization.JsonPropertyName("count")>]
+        Count: Long
+        [<System.Text.Json.Serialization.JsonPropertyName("min")>]
+        Min: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("max")>]
+        Max: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("avg")>]
+        Avg: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("sum")>]
+        Sum: Double
+        [<System.Text.Json.Serialization.JsonPropertyName("min_as_string")>]
+        MinAsString: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_as_string")>]
+        MaxAsString: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("avg_as_string")>]
+        AvgAsString: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("sum_as_string")>]
+        SumAsString: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("sum_of_squares")>]
+        SumOfSquares: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("variance")>]
+        Variance: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("variance_population")>]
+        VariancePopulation: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("variance_sampling")>]
+        VarianceSampling: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("std_deviation")>]
+        StdDeviation: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("std_deviation_population")>]
+        StdDeviationPopulation: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("std_deviation_sampling")>]
+        StdDeviationSampling: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("std_deviation_bounds")>]
+        StdDeviationBounds: StandardDeviationBounds option
+        [<System.Text.Json.Serialization.JsonPropertyName("sum_of_squares_as_string")>]
+        SumOfSquaresAsString: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("variance_as_string")>]
+        VarianceAsString: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("variance_population_as_string")>]
+        VariancePopulationAsString: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("variance_sampling_as_string")>]
+        VarianceSamplingAsString: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("std_deviation_as_string")>]
+        StdDeviationAsString: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("std_deviation_bounds_as_string")>]
+        StdDeviationBoundsAsString: StandardDeviationBoundsAsString option
+    }
+
+        with
+        static member empty : ExtendedStatsBucketAggregate =
+            {
+                Meta = None
+                Count = Unchecked.defaultof<_>
+                Min = Unchecked.defaultof<_>
+                Max = Unchecked.defaultof<_>
+                Avg = Unchecked.defaultof<_>
+                Sum = Unchecked.defaultof<_>
+                MinAsString = None
+                MaxAsString = None
+                AvgAsString = None
+                SumAsString = None
+                SumOfSquares = Unchecked.defaultof<_>
+                Variance = Unchecked.defaultof<_>
+                VariancePopulation = Unchecked.defaultof<_>
+                VarianceSampling = Unchecked.defaultof<_>
+                StdDeviation = Unchecked.defaultof<_>
+                StdDeviationPopulation = Unchecked.defaultof<_>
+                StdDeviationSampling = Unchecked.defaultof<_>
+                StdDeviationBounds = None
+                SumOfSquaresAsString = None
+                VarianceAsString = None
+                VariancePopulationAsString = None
+                VarianceSamplingAsString = None
+                StdDeviationAsString = None
+                StdDeviationBoundsAsString = None
+            }
 
     type CartesianBoundsAggregate = {
         [<System.Text.Json.Serialization.JsonPropertyName("bounds")>]
         Bounds: TopLeftBottomRightGeoBounds option
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Metadata option
     }
 
         with
         static member empty : CartesianBoundsAggregate =
             {
                 Bounds = None
+                Meta = None
             }
 
     type CartesianPoint = {
@@ -7409,6 +9201,8 @@ module Types =
         Count: Long
         [<System.Text.Json.Serialization.JsonPropertyName("location")>]
         Location: CartesianPoint option
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Metadata option
     }
 
         with
@@ -7416,17 +9210,21 @@ module Types =
             {
                 Count = Unchecked.defaultof<_>
                 Location = None
+                Meta = None
             }
 
     type GeoBoundsAggregate = {
         [<System.Text.Json.Serialization.JsonPropertyName("bounds")>]
         Bounds: GeoBounds option
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Metadata option
     }
 
         with
         static member empty : GeoBoundsAggregate =
             {
                 Bounds = None
+                Meta = None
             }
 
     type GeoCentroidAggregate = {
@@ -7434,6 +9232,8 @@ module Types =
         Count: Long
         [<System.Text.Json.Serialization.JsonPropertyName("location")>]
         Location: GeoLocation option
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Metadata option
     }
 
         with
@@ -7441,6 +9241,7 @@ module Types =
             {
                 Count = Unchecked.defaultof<_>
                 Location = None
+                Meta = None
             }
 
     type HistogramBucket = {
@@ -7448,6 +9249,8 @@ module Types =
         KeyAsString: string option
         [<System.Text.Json.Serialization.JsonPropertyName("key")>]
         Key: Double
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_count")>]
+        DocCount: Long
     }
 
         with
@@ -7455,6 +9258,7 @@ module Types =
             {
                 KeyAsString = None
                 Key = Unchecked.defaultof<_>
+                DocCount = Unchecked.defaultof<_>
             }
 
     type HistogramAggregate = System.Text.Json.JsonElement
@@ -7464,6 +9268,8 @@ module Types =
         KeyAsString: string option
         [<System.Text.Json.Serialization.JsonPropertyName("key")>]
         Key: EpochTime<UnitMillis>
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_count")>]
+        DocCount: Long
     }
 
         with
@@ -7471,6 +9277,7 @@ module Types =
             {
                 KeyAsString = None
                 Key = Unchecked.defaultof<_>
+                DocCount = Unchecked.defaultof<_>
             }
 
     type DateHistogramAggregate = System.Text.Json.JsonElement
@@ -7499,6 +9306,8 @@ module Types =
         KeyAsString: string option
         [<System.Text.Json.Serialization.JsonPropertyName("max_as_string")>]
         MaxAsString: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_count")>]
+        DocCount: Long
     }
 
         with
@@ -7510,6 +9319,7 @@ module Types =
                 MinAsString = None
                 KeyAsString = None
                 MaxAsString = None
+                DocCount = Unchecked.defaultof<_>
             }
 
     type VariableWidthHistogramAggregate = System.Text.Json.JsonElement
@@ -7524,23 +9334,32 @@ module Types =
     type TermsBucketBase = {
         [<System.Text.Json.Serialization.JsonPropertyName("doc_count_error_upper_bound")>]
         DocCountErrorUpperBound: Long option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_count")>]
+        DocCount: Long
     }
 
         with
         static member empty : TermsBucketBase =
             {
                 DocCountErrorUpperBound = None
+                DocCount = Unchecked.defaultof<_>
             }
 
     type StringTermsBucket = {
         [<System.Text.Json.Serialization.JsonPropertyName("key")>]
         Key: FieldValue
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_count")>]
+        DocCount: Long
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_count_error_upper_bound")>]
+        DocCountErrorUpperBound: Long option
     }
 
         with
         static member empty : StringTermsBucket =
             {
                 Key = Unchecked.defaultof<_>
+                DocCount = Unchecked.defaultof<_>
+                DocCountErrorUpperBound = None
             }
 
     /// Result of a `terms` aggregation when the field is a string.
@@ -7551,6 +9370,10 @@ module Types =
         Key: Long
         [<System.Text.Json.Serialization.JsonPropertyName("key_as_string")>]
         KeyAsString: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_count")>]
+        DocCount: Long
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_count_error_upper_bound")>]
+        DocCountErrorUpperBound: Long option
     }
 
         with
@@ -7558,6 +9381,8 @@ module Types =
             {
                 Key = Unchecked.defaultof<_>
                 KeyAsString = None
+                DocCount = Unchecked.defaultof<_>
+                DocCountErrorUpperBound = None
             }
 
     /// Result of a `terms` aggregation when the field is some kind of whole number like a integer, long, or a date.
@@ -7568,6 +9393,10 @@ module Types =
         Key: Double
         [<System.Text.Json.Serialization.JsonPropertyName("key_as_string")>]
         KeyAsString: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_count")>]
+        DocCount: Long
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_count_error_upper_bound")>]
+        DocCountErrorUpperBound: Long option
     }
 
         with
@@ -7575,6 +9404,8 @@ module Types =
             {
                 Key = Unchecked.defaultof<_>
                 KeyAsString = None
+                DocCount = Unchecked.defaultof<_>
+                DocCountErrorUpperBound = None
             }
 
     /// Result of a `terms` aggregation when the field is some kind of decimal number like a float, double, or distance.
@@ -7591,6 +9422,8 @@ module Types =
         Key: Long
         [<System.Text.Json.Serialization.JsonPropertyName("key_as_string")>]
         KeyAsString: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_count")>]
+        DocCount: Long
     }
 
         with
@@ -7598,6 +9431,7 @@ module Types =
             {
                 Key = Unchecked.defaultof<_>
                 KeyAsString = None
+                DocCount = Unchecked.defaultof<_>
             }
 
     /// Result of the `rare_terms` aggregation when the field is some kind of whole number like a integer, long, or a date.
@@ -7606,12 +9440,15 @@ module Types =
     type StringRareTermsBucket = {
         [<System.Text.Json.Serialization.JsonPropertyName("key")>]
         Key: string
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_count")>]
+        DocCount: Long
     }
 
         with
         static member empty : StringRareTermsBucket =
             {
                 Key = Unchecked.defaultof<_>
+                DocCount = Unchecked.defaultof<_>
             }
 
     /// Result of the `rare_terms` aggregation when the field is a string.
@@ -7627,6 +9464,8 @@ module Types =
         KeyAsString: string option
         [<System.Text.Json.Serialization.JsonPropertyName("doc_count_error_upper_bound")>]
         DocCountErrorUpperBound: Long option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_count")>]
+        DocCount: Long
     }
 
         with
@@ -7635,6 +9474,7 @@ module Types =
                 Key = Unchecked.defaultof<_>
                 KeyAsString = None
                 DocCountErrorUpperBound = None
+                DocCount = Unchecked.defaultof<_>
             }
 
     type MultiTermsAggregate = System.Text.Json.JsonElement
@@ -7643,41 +9483,155 @@ module Types =
     type SingleBucketAggregateBase = {
         [<System.Text.Json.Serialization.JsonPropertyName("doc_count")>]
         DocCount: Long
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Metadata option
     }
 
         with
         static member empty : SingleBucketAggregateBase =
             {
                 DocCount = Unchecked.defaultof<_>
+                Meta = None
             }
 
-    type MissingAggregate = System.Text.Json.JsonElement
+    type MissingAggregate = {
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Metadata option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_count")>]
+        DocCount: Long
+    }
 
-    type NestedAggregate = System.Text.Json.JsonElement
+        with
+        static member empty : MissingAggregate =
+            {
+                Meta = None
+                DocCount = Unchecked.defaultof<_>
+            }
 
-    type ReverseNestedAggregate = System.Text.Json.JsonElement
+    type NestedAggregate = {
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Metadata option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_count")>]
+        DocCount: Long
+    }
 
-    type GlobalAggregate = System.Text.Json.JsonElement
+        with
+        static member empty : NestedAggregate =
+            {
+                Meta = None
+                DocCount = Unchecked.defaultof<_>
+            }
 
-    type FilterAggregate = System.Text.Json.JsonElement
+    type ReverseNestedAggregate = {
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Metadata option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_count")>]
+        DocCount: Long
+    }
 
-    type ChildrenAggregate = System.Text.Json.JsonElement
+        with
+        static member empty : ReverseNestedAggregate =
+            {
+                Meta = None
+                DocCount = Unchecked.defaultof<_>
+            }
 
-    type ParentAggregate = System.Text.Json.JsonElement
+    type GlobalAggregate = {
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Metadata option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_count")>]
+        DocCount: Long
+    }
 
-    type SamplerAggregate = System.Text.Json.JsonElement
+        with
+        static member empty : GlobalAggregate =
+            {
+                Meta = None
+                DocCount = Unchecked.defaultof<_>
+            }
 
-    type UnmappedSamplerAggregate = System.Text.Json.JsonElement
+    type FilterAggregate = {
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Metadata option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_count")>]
+        DocCount: Long
+    }
+
+        with
+        static member empty : FilterAggregate =
+            {
+                Meta = None
+                DocCount = Unchecked.defaultof<_>
+            }
+
+    type ChildrenAggregate = {
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Metadata option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_count")>]
+        DocCount: Long
+    }
+
+        with
+        static member empty : ChildrenAggregate =
+            {
+                Meta = None
+                DocCount = Unchecked.defaultof<_>
+            }
+
+    type ParentAggregate = {
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Metadata option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_count")>]
+        DocCount: Long
+    }
+
+        with
+        static member empty : ParentAggregate =
+            {
+                Meta = None
+                DocCount = Unchecked.defaultof<_>
+            }
+
+    type SamplerAggregate = {
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Metadata option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_count")>]
+        DocCount: Long
+    }
+
+        with
+        static member empty : SamplerAggregate =
+            {
+                Meta = None
+                DocCount = Unchecked.defaultof<_>
+            }
+
+    type UnmappedSamplerAggregate = {
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Metadata option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_count")>]
+        DocCount: Long
+    }
+
+        with
+        static member empty : UnmappedSamplerAggregate =
+            {
+                Meta = None
+                DocCount = Unchecked.defaultof<_>
+            }
 
     type GeoHashGridBucket = {
         [<System.Text.Json.Serialization.JsonPropertyName("key")>]
         Key: GeoHash
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_count")>]
+        DocCount: Long
     }
 
         with
         static member empty : GeoHashGridBucket =
             {
                 Key = Unchecked.defaultof<_>
+                DocCount = Unchecked.defaultof<_>
             }
 
     type GeoHashGridAggregate = System.Text.Json.JsonElement
@@ -7685,12 +9639,15 @@ module Types =
     type GeoTileGridBucket = {
         [<System.Text.Json.Serialization.JsonPropertyName("key")>]
         Key: GeoTile
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_count")>]
+        DocCount: Long
     }
 
         with
         static member empty : GeoTileGridBucket =
             {
                 Key = Unchecked.defaultof<_>
+                DocCount = Unchecked.defaultof<_>
             }
 
     type GeoTileGridAggregate = System.Text.Json.JsonElement
@@ -7698,12 +9655,15 @@ module Types =
     type GeoHexGridBucket = {
         [<System.Text.Json.Serialization.JsonPropertyName("key")>]
         Key: GeoHexCell
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_count")>]
+        DocCount: Long
     }
 
         with
         static member empty : GeoHexGridBucket =
             {
                 Key = Unchecked.defaultof<_>
+                DocCount = Unchecked.defaultof<_>
             }
 
     type GeoHexGridAggregate = System.Text.Json.JsonElement
@@ -7719,6 +9679,8 @@ module Types =
         ToAsString: string option
         [<System.Text.Json.Serialization.JsonPropertyName("key")>]
         Key: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_count")>]
+        DocCount: Long
     }
 
         with
@@ -7729,6 +9691,7 @@ module Types =
                 FromAsString = None
                 ToAsString = None
                 Key = None
+                DocCount = Unchecked.defaultof<_>
             }
 
     type RangeAggregate = System.Text.Json.JsonElement
@@ -7746,6 +9709,8 @@ module Types =
         From: string option
         [<System.Text.Json.Serialization.JsonPropertyName("to")>]
         To: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_count")>]
+        DocCount: Long
     }
 
         with
@@ -7754,6 +9719,7 @@ module Types =
                 Key = None
                 From = None
                 To = None
+                DocCount = Unchecked.defaultof<_>
             }
 
     type IpRangeAggregate = System.Text.Json.JsonElement
@@ -7767,6 +9733,8 @@ module Types =
         PrefixLength: Integer
         [<System.Text.Json.Serialization.JsonPropertyName("netmask")>]
         Netmask: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_count")>]
+        DocCount: Long
     }
 
         with
@@ -7776,6 +9744,7 @@ module Types =
                 Key = Unchecked.defaultof<_>
                 PrefixLength = Unchecked.defaultof<_>
                 Netmask = None
+                DocCount = Unchecked.defaultof<_>
             }
 
     type IpPrefixAggregate = System.Text.Json.JsonElement
@@ -7783,12 +9752,15 @@ module Types =
     type FiltersBucket = {
         [<System.Text.Json.Serialization.JsonPropertyName("key")>]
         Key: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_count")>]
+        DocCount: Long
     }
 
         with
         static member empty : FiltersBucket =
             {
                 Key = None
+                DocCount = Unchecked.defaultof<_>
             }
 
     type FiltersAggregate = System.Text.Json.JsonElement
@@ -7805,6 +9777,8 @@ module Types =
         Score: Double
         [<System.Text.Json.Serialization.JsonPropertyName("bg_count")>]
         BgCount: Long
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_count")>]
+        DocCount: Long
     }
 
         with
@@ -7812,6 +9786,7 @@ module Types =
             {
                 Score = Unchecked.defaultof<_>
                 BgCount = Unchecked.defaultof<_>
+                DocCount = Unchecked.defaultof<_>
             }
 
     type SignificantLongTermsBucket = {
@@ -7819,6 +9794,12 @@ module Types =
         Key: Long
         [<System.Text.Json.Serialization.JsonPropertyName("key_as_string")>]
         KeyAsString: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_count")>]
+        DocCount: Long
+        [<System.Text.Json.Serialization.JsonPropertyName("score")>]
+        Score: Double
+        [<System.Text.Json.Serialization.JsonPropertyName("bg_count")>]
+        BgCount: Long
     }
 
         with
@@ -7826,6 +9807,9 @@ module Types =
             {
                 Key = Unchecked.defaultof<_>
                 KeyAsString = None
+                DocCount = Unchecked.defaultof<_>
+                Score = Unchecked.defaultof<_>
+                BgCount = Unchecked.defaultof<_>
             }
 
     type SignificantLongTermsAggregate = System.Text.Json.JsonElement
@@ -7833,12 +9817,21 @@ module Types =
     type SignificantStringTermsBucket = {
         [<System.Text.Json.Serialization.JsonPropertyName("key")>]
         Key: string
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_count")>]
+        DocCount: Long
+        [<System.Text.Json.Serialization.JsonPropertyName("score")>]
+        Score: Double
+        [<System.Text.Json.Serialization.JsonPropertyName("bg_count")>]
+        BgCount: Long
     }
 
         with
         static member empty : SignificantStringTermsBucket =
             {
                 Key = Unchecked.defaultof<_>
+                DocCount = Unchecked.defaultof<_>
+                Score = Unchecked.defaultof<_>
+                BgCount = Unchecked.defaultof<_>
             }
 
     type SignificantStringTermsAggregate = System.Text.Json.JsonElement
@@ -7849,12 +9842,15 @@ module Types =
     type CompositeBucket = {
         [<System.Text.Json.Serialization.JsonPropertyName("key")>]
         Key: CompositeAggregateKey
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_count")>]
+        DocCount: Long
     }
 
         with
         static member empty : CompositeBucket =
             {
                 Key = Unchecked.defaultof<_>
+                DocCount = Unchecked.defaultof<_>
             }
 
     type CompositeAggregate = {
@@ -7873,6 +9869,8 @@ module Types =
         Key: Map<Field, string list>
         [<System.Text.Json.Serialization.JsonPropertyName("support")>]
         Support: Double
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_count")>]
+        DocCount: Long
     }
 
         with
@@ -7880,6 +9878,7 @@ module Types =
             {
                 Key = Unchecked.defaultof<_>
                 Support = Unchecked.defaultof<_>
+                DocCount = Unchecked.defaultof<_>
             }
 
     type FrequentItemSetsAggregate = System.Text.Json.JsonElement
@@ -7887,12 +9886,15 @@ module Types =
     type TimeSeriesBucket = {
         [<System.Text.Json.Serialization.JsonPropertyName("key")>]
         Key: Map<Field, FieldValue>
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_count")>]
+        DocCount: Long
     }
 
         with
         static member empty : TimeSeriesBucket =
             {
                 Key = Unchecked.defaultof<_>
+                DocCount = Unchecked.defaultof<_>
             }
 
     type TimeSeriesAggregate = System.Text.Json.JsonElement
@@ -7900,12 +9902,15 @@ module Types =
     type ScriptedMetricAggregate = {
         [<System.Text.Json.Serialization.JsonPropertyName("value")>]
         Value: System.Text.Json.JsonElement
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Metadata option
     }
 
         with
         static member empty : ScriptedMetricAggregate =
             {
                 Value = Unchecked.defaultof<_>
+                Meta = None
             }
 
     [<RequireQualifiedAccess>]
@@ -8046,12 +10051,15 @@ module Types =
     type TopHitsAggregate = {
         [<System.Text.Json.Serialization.JsonPropertyName("hits")>]
         Hits: HitsMetadata<System.Text.Json.JsonElement>
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Metadata option
     }
 
         with
         static member empty : TopHitsAggregate =
             {
                 Hits = Unchecked.defaultof<_>
+                Meta = None
             }
 
     type InferenceClassImportance = {
@@ -8111,6 +10119,8 @@ module Types =
         TopClasses: InferenceTopClassEntry list option
         [<System.Text.Json.Serialization.JsonPropertyName("warning")>]
         Warning: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Metadata option
     }
 
         with
@@ -8120,6 +10130,7 @@ module Types =
                 FeatureImportance = None
                 TopClasses = None
                 Warning = None
+                Meta = None
             }
 
     type StringStatsAggregate = {
@@ -8141,6 +10152,8 @@ module Types =
         MaxLengthAsString: string option
         [<System.Text.Json.Serialization.JsonPropertyName("avg_length_as_string")>]
         AvgLengthAsString: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Metadata option
     }
 
         with
@@ -8155,6 +10168,7 @@ module Types =
                 MinLengthAsString = None
                 MaxLengthAsString = None
                 AvgLengthAsString = None
+                Meta = None
             }
 
     type BoxPlotAggregate = {
@@ -8186,6 +10200,8 @@ module Types =
         LowerAsString: string option
         [<System.Text.Json.Serialization.JsonPropertyName("upper_as_string")>]
         UpperAsString: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Metadata option
     }
 
         with
@@ -8205,6 +10221,7 @@ module Types =
                 Q3AsString = None
                 LowerAsString = None
                 UpperAsString = None
+                Meta = None
             }
 
     type TopMetrics = {
@@ -8224,12 +10241,15 @@ module Types =
     type TopMetricsAggregate = {
         [<System.Text.Json.Serialization.JsonPropertyName("top")>]
         Top: TopMetrics list
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Metadata option
     }
 
         with
         static member empty : TopMetricsAggregate =
             {
                 Top = Unchecked.defaultof<_>
+                Meta = None
             }
 
     type TTestAggregate = {
@@ -8237,6 +10257,8 @@ module Types =
         Value: Double option
         [<System.Text.Json.Serialization.JsonPropertyName("value_as_string")>]
         ValueAsString: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Metadata option
     }
 
         with
@@ -8244,6 +10266,7 @@ module Types =
             {
                 Value = Unchecked.defaultof<_>
                 ValueAsString = None
+                Meta = None
             }
 
     type RateAggregate = {
@@ -8251,6 +10274,8 @@ module Types =
         Value: Double
         [<System.Text.Json.Serialization.JsonPropertyName("value_as_string")>]
         ValueAsString: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Metadata option
     }
 
         with
@@ -8258,6 +10283,7 @@ module Types =
             {
                 Value = Unchecked.defaultof<_>
                 ValueAsString = None
+                Meta = None
             }
 
     /// Result of the `cumulative_cardinality` aggregation
@@ -8266,6 +10292,8 @@ module Types =
         Value: Long
         [<System.Text.Json.Serialization.JsonPropertyName("value_as_string")>]
         ValueAsString: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Metadata option
     }
 
         with
@@ -8273,6 +10301,7 @@ module Types =
             {
                 Value = Unchecked.defaultof<_>
                 ValueAsString = None
+                Meta = None
             }
 
     type MatrixStatsFields = {
@@ -8312,6 +10341,8 @@ module Types =
         DocCount: Long
         [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
         Fields: MatrixStatsFields list option
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Metadata option
     }
 
         with
@@ -8319,6 +10350,7 @@ module Types =
             {
                 DocCount = Unchecked.defaultof<_>
                 Fields = None
+                Meta = None
             }
 
     /// A GeoJson GeoLine.
@@ -8343,6 +10375,8 @@ module Types =
         Geometry: GeoLine
         [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
         Properties: System.Text.Json.JsonElement
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Metadata option
     }
 
         with
@@ -8351,6 +10385,7 @@ module Types =
                 Type = Unchecked.defaultof<_>
                 Geometry = Unchecked.defaultof<_>
                 Properties = Unchecked.defaultof<_>
+                Meta = None
             }
 
     [<RequireQualifiedAccess>]
@@ -8438,6 +10473,19 @@ module Types =
         | Position
 
     type PropertyName = string
+
+    [<RequireQualifiedAccess>]
+    type DynamicMapping =
+        | Strict
+        | Runtime
+        | True
+        | False
+
+    [<RequireQualifiedAccess>]
+    type SyntheticSourceKeepEnum =
+        | None
+        | Arrays
+        | All
 
     [<RequireQualifiedAccess>]
     type NumericFielddataFormat =
@@ -8702,19 +10750,6 @@ module Types =
         | Lower
         | Upper
 
-    [<RequireQualifiedAccess>]
-    type DynamicMapping =
-        | Strict
-        | Runtime
-        | True
-        | False
-
-    [<RequireQualifiedAccess>]
-    type SyntheticSourceKeepEnum =
-        | None
-        | Arrays
-        | All
-
     type AggregateMetricDoubleProperty = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
@@ -8726,19 +10761,6 @@ module Types =
         Metrics: string list
         [<System.Text.Json.Serialization.JsonPropertyName("time_series_metric")>]
         TimeSeriesMetric: TimeSeriesMetricType option
-    }
-
-        with
-        static member empty : AggregateMetricDoubleProperty =
-            {
-                Type = "aggregate_metric_double"
-                DefaultMetric = Unchecked.defaultof<_>
-                IgnoreMalformed = None
-                Metrics = Unchecked.defaultof<_>
-                TimeSeriesMetric = None
-            }
-
-    and PropertyBase = {
         [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
         Meta: Map<string, string> option
         [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
@@ -8754,8 +10776,13 @@ module Types =
     }
 
         with
-        static member empty : PropertyBase =
+        static member empty : AggregateMetricDoubleProperty =
             {
+                Type = "aggregate_metric_double"
+                DefaultMetric = Unchecked.defaultof<_>
+                IgnoreMalformed = None
+                Metrics = Unchecked.defaultof<_>
+                TimeSeriesMetric = None
                 Meta = None
                 Properties = None
                 IgnoreAbove = None
@@ -8823,26 +10850,56 @@ module Types =
     and BinaryProperty = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
+        [<System.Text.Json.Serialization.JsonPropertyName("copy_to")>]
+        CopyTo: Fields option
+        [<System.Text.Json.Serialization.JsonPropertyName("store")>]
+        Store: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_values")>]
+        DocValues: bool option
     }
 
         with
         static member empty : BinaryProperty =
             {
                 Type = "binary"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
             }
 
     and DocValuesPropertyBase = {
         [<System.Text.Json.Serialization.JsonPropertyName("doc_values")>]
         DocValues: bool option
-    }
-
-        with
-        static member empty : DocValuesPropertyBase =
-            {
-                DocValues = None
-            }
-
-    and CorePropertyBase = {
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
         [<System.Text.Json.Serialization.JsonPropertyName("copy_to")>]
         CopyTo: Fields option
         [<System.Text.Json.Serialization.JsonPropertyName("store")>]
@@ -8850,10 +10907,75 @@ module Types =
     }
 
         with
+        static member empty : DocValuesPropertyBase =
+            {
+                DocValues = None
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+            }
+
+    and CorePropertyBase = {
+        [<System.Text.Json.Serialization.JsonPropertyName("copy_to")>]
+        CopyTo: Fields option
+        [<System.Text.Json.Serialization.JsonPropertyName("store")>]
+        Store: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
+    }
+
+        with
         static member empty : CorePropertyBase =
             {
                 CopyTo = None
                 Store = None
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+            }
+
+    and PropertyBase = {
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
+    }
+
+        with
+        static member empty : PropertyBase =
+            {
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
             }
 
     and BooleanProperty = {
@@ -8875,6 +10997,24 @@ module Types =
         TimeSeriesDimension: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
+        [<System.Text.Json.Serialization.JsonPropertyName("copy_to")>]
+        CopyTo: Fields option
+        [<System.Text.Json.Serialization.JsonPropertyName("store")>]
+        Store: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_values")>]
+        DocValues: bool option
     }
 
         with
@@ -8889,6 +11029,15 @@ module Types =
                 OnScriptError = None
                 TimeSeriesDimension = None
                 Type = "boolean"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
             }
 
     and DynamicProperty = {
@@ -8938,6 +11087,24 @@ module Types =
         PrecisionStep: Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("locale")>]
         Locale: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
+        [<System.Text.Json.Serialization.JsonPropertyName("copy_to")>]
+        CopyTo: Fields option
+        [<System.Text.Json.Serialization.JsonPropertyName("store")>]
+        Store: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_values")>]
+        DocValues: bool option
     }
 
         with
@@ -8966,15 +11133,36 @@ module Types =
                 Format = None
                 PrecisionStep = None
                 Locale = None
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
             }
 
     and JoinProperty = {
         [<System.Text.Json.Serialization.JsonPropertyName("relations")>]
-        Relations: Map<RelationName, System.Text.Json.JsonElement> option
+        Relations: Map<RelationName, RelationName list> option
         [<System.Text.Json.Serialization.JsonPropertyName("eager_global_ordinals")>]
         EagerGlobalOrdinals: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
     }
 
         with
@@ -8983,6 +11171,12 @@ module Types =
                 Relations = None
                 EagerGlobalOrdinals = None
                 Type = "join"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
             }
 
     and KeywordProperty = {
@@ -9012,6 +11206,24 @@ module Types =
         TimeSeriesDimension: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
+        [<System.Text.Json.Serialization.JsonPropertyName("copy_to")>]
+        CopyTo: Fields option
+        [<System.Text.Json.Serialization.JsonPropertyName("store")>]
+        Store: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_values")>]
+        DocValues: bool option
     }
 
         with
@@ -9030,6 +11242,15 @@ module Types =
                 SplitQueriesOnWhitespace = None
                 TimeSeriesDimension = None
                 Type = "keyword"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
             }
 
     /// A variant of text that trades scoring and efficiency of positional queries for space efficiency. This field
@@ -9056,12 +11277,30 @@ module Types =
     and PercolatorProperty = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
     }
 
         with
         static member empty : PercolatorProperty =
             {
                 Type = "percolator"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
             }
 
     and RankFeatureProperty = {
@@ -9069,6 +11308,18 @@ module Types =
         PositiveScoreImpact: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
     }
 
         with
@@ -9076,6 +11327,12 @@ module Types =
             {
                 PositiveScoreImpact = None
                 Type = "rank_feature"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
             }
 
     and RankFeaturesProperty = {
@@ -9083,6 +11340,18 @@ module Types =
         PositiveScoreImpact: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
     }
 
         with
@@ -9090,6 +11359,12 @@ module Types =
             {
                 PositiveScoreImpact = None
                 Type = "rank_features"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
             }
 
     and SearchAsYouTypeProperty = {
@@ -9113,6 +11388,22 @@ module Types =
         TermVector: TermVectorOption option
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
+        [<System.Text.Json.Serialization.JsonPropertyName("copy_to")>]
+        CopyTo: Fields option
+        [<System.Text.Json.Serialization.JsonPropertyName("store")>]
+        Store: bool option
     }
 
         with
@@ -9128,6 +11419,14 @@ module Types =
                 Similarity = None
                 TermVector = None
                 Type = "search_as_you_type"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
             }
 
     and TextProperty = {
@@ -9163,6 +11462,22 @@ module Types =
         TermVector: TermVectorOption option
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
+        [<System.Text.Json.Serialization.JsonPropertyName("copy_to")>]
+        CopyTo: Fields option
+        [<System.Text.Json.Serialization.JsonPropertyName("store")>]
+        Store: bool option
     }
 
         with
@@ -9184,17 +11499,52 @@ module Types =
                 Similarity = None
                 TermVector = None
                 Type = "text"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
             }
 
     and VersionProperty = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
+        [<System.Text.Json.Serialization.JsonPropertyName("copy_to")>]
+        CopyTo: Fields option
+        [<System.Text.Json.Serialization.JsonPropertyName("store")>]
+        Store: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_values")>]
+        DocValues: bool option
     }
 
         with
         static member empty : VersionProperty =
             {
                 Type = "version"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
             }
 
     and WildcardProperty = {
@@ -9202,6 +11552,24 @@ module Types =
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("null_value")>]
         NullValue: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
+        [<System.Text.Json.Serialization.JsonPropertyName("copy_to")>]
+        CopyTo: Fields option
+        [<System.Text.Json.Serialization.JsonPropertyName("store")>]
+        Store: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_values")>]
+        DocValues: bool option
     }
 
         with
@@ -9209,6 +11577,15 @@ module Types =
             {
                 Type = "wildcard"
                 NullValue = None
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
             }
 
     and DateNanosProperty = {
@@ -9230,6 +11607,24 @@ module Types =
         PrecisionStep: Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
+        [<System.Text.Json.Serialization.JsonPropertyName("copy_to")>]
+        CopyTo: Fields option
+        [<System.Text.Json.Serialization.JsonPropertyName("store")>]
+        Store: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_values")>]
+        DocValues: bool option
     }
 
         with
@@ -9244,6 +11639,15 @@ module Types =
                 NullValue = None
                 PrecisionStep = None
                 Type = "date_nanos"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
             }
 
     and DateProperty = {
@@ -9269,6 +11673,24 @@ module Types =
         Locale: string option
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
+        [<System.Text.Json.Serialization.JsonPropertyName("copy_to")>]
+        CopyTo: Fields option
+        [<System.Text.Json.Serialization.JsonPropertyName("store")>]
+        Store: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_values")>]
+        DocValues: bool option
     }
 
         with
@@ -9285,6 +11707,15 @@ module Types =
                 PrecisionStep = None
                 Locale = None
                 Type = "date"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
             }
 
     and DenseVectorProperty = {
@@ -9300,6 +11731,18 @@ module Types =
         IndexOptions: DenseVectorIndexOptions option
         [<System.Text.Json.Serialization.JsonPropertyName("similarity")>]
         Similarity: DenseVectorSimilarity option
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
     }
 
         with
@@ -9311,6 +11754,12 @@ module Types =
                 Index = None
                 IndexOptions = None
                 Similarity = None
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
             }
 
     and FlattenedProperty = {
@@ -9336,6 +11785,18 @@ module Types =
         TimeSeriesDimensions: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
     }
 
         with
@@ -9352,6 +11813,12 @@ module Types =
                 SplitQueriesOnWhitespace = None
                 TimeSeriesDimensions = None
                 Type = "flattened"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
             }
 
     and NestedProperty = {
@@ -9363,6 +11830,22 @@ module Types =
         IncludeInRoot: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
+        [<System.Text.Json.Serialization.JsonPropertyName("copy_to")>]
+        CopyTo: Fields option
+        [<System.Text.Json.Serialization.JsonPropertyName("store")>]
+        Store: bool option
     }
 
         with
@@ -9372,6 +11855,14 @@ module Types =
                 IncludeInParent = None
                 IncludeInRoot = None
                 Type = "nested"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
             }
 
     and ObjectProperty = {
@@ -9381,6 +11872,22 @@ module Types =
         Subobjects: Subobjects option
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
+        [<System.Text.Json.Serialization.JsonPropertyName("copy_to")>]
+        CopyTo: Fields option
+        [<System.Text.Json.Serialization.JsonPropertyName("store")>]
+        Store: bool option
     }
 
         with
@@ -9389,6 +11896,14 @@ module Types =
                 Enabled = None
                 Subobjects = None
                 Type = None
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
             }
 
     and PassthroughObjectProperty = {
@@ -9400,6 +11915,22 @@ module Types =
         Priority: Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("time_series_dimension")>]
         TimeSeriesDimension: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
+        [<System.Text.Json.Serialization.JsonPropertyName("copy_to")>]
+        CopyTo: Fields option
+        [<System.Text.Json.Serialization.JsonPropertyName("store")>]
+        Store: bool option
     }
 
         with
@@ -9409,6 +11940,14 @@ module Types =
                 Enabled = None
                 Priority = None
                 TimeSeriesDimension = None
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
             }
 
     /// Technical preview
@@ -9419,6 +11958,18 @@ module Types =
         ElementType: RankVectorElementType option
         [<System.Text.Json.Serialization.JsonPropertyName("dims")>]
         Dims: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
     }
 
         with
@@ -9427,6 +11978,12 @@ module Types =
                 Type = "rank_vectors"
                 ElementType = None
                 Dims = None
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
             }
 
     and SemanticTextProperty = {
@@ -9465,6 +12022,18 @@ module Types =
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("index_options")>]
         IndexOptions: SparseVectorIndexOptions option
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
     }
 
         with
@@ -9473,6 +12042,12 @@ module Types =
                 Store = None
                 Type = "sparse_vector"
                 IndexOptions = None
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
             }
 
     and CompletionProperty = {
@@ -9490,6 +12065,24 @@ module Types =
         SearchAnalyzer: string option
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
+        [<System.Text.Json.Serialization.JsonPropertyName("copy_to")>]
+        CopyTo: Fields option
+        [<System.Text.Json.Serialization.JsonPropertyName("store")>]
+        Store: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_values")>]
+        DocValues: bool option
     }
 
         with
@@ -9502,6 +12095,15 @@ module Types =
                 PreserveSeparators = None
                 SearchAnalyzer = None
                 Type = "completion"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
             }
 
     and ConstantKeywordProperty = {
@@ -9509,6 +12111,18 @@ module Types =
         Value: System.Text.Json.JsonElement option
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
     }
 
         with
@@ -9516,6 +12130,12 @@ module Types =
             {
                 Value = None
                 Type = "constant_keyword"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
             }
 
     and CountedKeywordProperty = {
@@ -9523,6 +12143,18 @@ module Types =
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("index")>]
         Index: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
     }
 
         with
@@ -9530,6 +12162,12 @@ module Types =
             {
                 Type = "counted_keyword"
                 Index = None
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
             }
 
     and FieldAliasProperty = {
@@ -9537,6 +12175,18 @@ module Types =
         Path: Field option
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
     }
 
         with
@@ -9544,6 +12194,12 @@ module Types =
             {
                 Path = None
                 Type = "alias"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
             }
 
     and HistogramProperty = {
@@ -9553,6 +12209,18 @@ module Types =
         TimeSeriesMetric: TimeSeriesMetricType option
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
     }
 
         with
@@ -9561,6 +12229,12 @@ module Types =
                 IgnoreMalformed = None
                 TimeSeriesMetric = None
                 Type = "histogram"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
             }
 
     and ExponentialHistogramProperty = {
@@ -9568,6 +12242,18 @@ module Types =
         TimeSeriesMetric: TimeSeriesMetricType option
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
     }
 
         with
@@ -9575,6 +12261,12 @@ module Types =
             {
                 TimeSeriesMetric = None
                 Type = "exponential_histogram"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
             }
 
     and IpProperty = {
@@ -9594,6 +12286,24 @@ module Types =
         TimeSeriesDimension: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
+        [<System.Text.Json.Serialization.JsonPropertyName("copy_to")>]
+        CopyTo: Fields option
+        [<System.Text.Json.Serialization.JsonPropertyName("store")>]
+        Store: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_values")>]
+        DocValues: bool option
     }
 
         with
@@ -9607,17 +12317,53 @@ module Types =
                 Script = None
                 TimeSeriesDimension = None
                 Type = "ip"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
             }
 
     and Murmur3HashProperty = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
+        [<System.Text.Json.Serialization.JsonPropertyName("copy_to")>]
+        CopyTo: Fields option
+        [<System.Text.Json.Serialization.JsonPropertyName("store")>]
+        Store: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_values")>]
+        DocValues: bool option
     }
 
         with
         static member empty : Murmur3HashProperty =
             {
                 Type = "murmur3"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
             }
 
     and TokenCountProperty = {
@@ -9633,6 +12379,24 @@ module Types =
         EnablePositionIncrements: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
+        [<System.Text.Json.Serialization.JsonPropertyName("copy_to")>]
+        CopyTo: Fields option
+        [<System.Text.Json.Serialization.JsonPropertyName("store")>]
+        Store: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_values")>]
+        DocValues: bool option
     }
 
         with
@@ -9644,6 +12408,15 @@ module Types =
                 NullValue = None
                 EnablePositionIncrements = None
                 Type = "token_count"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
             }
 
     and GeoPointProperty = {
@@ -9663,6 +12436,24 @@ module Types =
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("time_series_metric")>]
         TimeSeriesMetric: GeoPointMetricType option
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
+        [<System.Text.Json.Serialization.JsonPropertyName("copy_to")>]
+        CopyTo: Fields option
+        [<System.Text.Json.Serialization.JsonPropertyName("store")>]
+        Store: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_values")>]
+        DocValues: bool option
     }
 
         with
@@ -9676,6 +12467,15 @@ module Types =
                 Script = None
                 Type = "geo_point"
                 TimeSeriesMetric = None
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
             }
 
     /// The `geo_shape` data type facilitates the indexing of and searching with arbitrary geo shapes such as rectangles
@@ -9694,6 +12494,24 @@ module Types =
         Strategy: GeoStrategy option
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
+        [<System.Text.Json.Serialization.JsonPropertyName("copy_to")>]
+        CopyTo: Fields option
+        [<System.Text.Json.Serialization.JsonPropertyName("store")>]
+        Store: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_values")>]
+        DocValues: bool option
     }
 
         with
@@ -9706,6 +12524,15 @@ module Types =
                 Orientation = None
                 Strategy = None
                 Type = "geo_shape"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
             }
 
     and PointProperty = {
@@ -9717,6 +12544,24 @@ module Types =
         NullValue: string option
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
+        [<System.Text.Json.Serialization.JsonPropertyName("copy_to")>]
+        CopyTo: Fields option
+        [<System.Text.Json.Serialization.JsonPropertyName("store")>]
+        Store: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_values")>]
+        DocValues: bool option
     }
 
         with
@@ -9726,6 +12571,15 @@ module Types =
                 IgnoreZValue = None
                 NullValue = None
                 Type = "point"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
             }
 
     /// The `shape` data type facilitates the indexing of and searching with arbitrary `x, y` cartesian shapes such as
@@ -9740,6 +12594,24 @@ module Types =
         Orientation: GeoOrientation option
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
+        [<System.Text.Json.Serialization.JsonPropertyName("copy_to")>]
+        CopyTo: Fields option
+        [<System.Text.Json.Serialization.JsonPropertyName("store")>]
+        Store: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_values")>]
+        DocValues: bool option
     }
 
         with
@@ -9750,6 +12622,15 @@ module Types =
                 IgnoreZValue = None
                 Orientation = None
                 Type = "shape"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
             }
 
     and ByteNumberProperty = {
@@ -9757,16 +12638,24 @@ module Types =
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("null_value")>]
         NullValue: Byte option
-    }
-
-        with
-        static member empty : ByteNumberProperty =
-            {
-                Type = "byte"
-                NullValue = None
-            }
-
-    and NumberPropertyBase = {
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
+        [<System.Text.Json.Serialization.JsonPropertyName("copy_to")>]
+        CopyTo: Fields option
+        [<System.Text.Json.Serialization.JsonPropertyName("store")>]
+        Store: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_values")>]
+        DocValues: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
         Boost: Double option
         [<System.Text.Json.Serialization.JsonPropertyName("coerce")>]
@@ -9786,8 +12675,19 @@ module Types =
     }
 
         with
-        static member empty : NumberPropertyBase =
+        static member empty : ByteNumberProperty =
             {
+                Type = "byte"
+                NullValue = None
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
                 Boost = None
                 Coerce = None
                 IgnoreMalformed = None
@@ -9798,11 +12698,104 @@ module Types =
                 TimeSeriesDimension = None
             }
 
+    and NumberPropertyBase = {
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("coerce")>]
+        Coerce: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_malformed")>]
+        IgnoreMalformed: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("index")>]
+        Index: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_script_error")>]
+        OnScriptError: OnScriptError option
+        [<System.Text.Json.Serialization.JsonPropertyName("script")>]
+        Script: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("time_series_metric")>]
+        TimeSeriesMetric: TimeSeriesMetricType option
+        [<System.Text.Json.Serialization.JsonPropertyName("time_series_dimension")>]
+        TimeSeriesDimension: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
+        [<System.Text.Json.Serialization.JsonPropertyName("copy_to")>]
+        CopyTo: Fields option
+        [<System.Text.Json.Serialization.JsonPropertyName("store")>]
+        Store: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_values")>]
+        DocValues: bool option
+    }
+
+        with
+        static member empty : NumberPropertyBase =
+            {
+                Boost = None
+                Coerce = None
+                IgnoreMalformed = None
+                Index = None
+                OnScriptError = None
+                Script = None
+                TimeSeriesMetric = None
+                TimeSeriesDimension = None
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
+            }
+
     and DoubleNumberProperty = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("null_value")>]
         NullValue: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
+        [<System.Text.Json.Serialization.JsonPropertyName("copy_to")>]
+        CopyTo: Fields option
+        [<System.Text.Json.Serialization.JsonPropertyName("store")>]
+        Store: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_values")>]
+        DocValues: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("coerce")>]
+        Coerce: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_malformed")>]
+        IgnoreMalformed: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("index")>]
+        Index: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_script_error")>]
+        OnScriptError: OnScriptError option
+        [<System.Text.Json.Serialization.JsonPropertyName("script")>]
+        Script: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("time_series_metric")>]
+        TimeSeriesMetric: TimeSeriesMetricType option
+        [<System.Text.Json.Serialization.JsonPropertyName("time_series_dimension")>]
+        TimeSeriesDimension: bool option
     }
 
         with
@@ -9810,6 +12803,23 @@ module Types =
             {
                 Type = "double"
                 NullValue = None
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
+                Boost = None
+                Coerce = None
+                IgnoreMalformed = None
+                Index = None
+                OnScriptError = None
+                Script = None
+                TimeSeriesMetric = None
+                TimeSeriesDimension = None
             }
 
     and FloatNumberProperty = {
@@ -9817,6 +12827,40 @@ module Types =
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("null_value")>]
         NullValue: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
+        [<System.Text.Json.Serialization.JsonPropertyName("copy_to")>]
+        CopyTo: Fields option
+        [<System.Text.Json.Serialization.JsonPropertyName("store")>]
+        Store: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_values")>]
+        DocValues: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("coerce")>]
+        Coerce: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_malformed")>]
+        IgnoreMalformed: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("index")>]
+        Index: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_script_error")>]
+        OnScriptError: OnScriptError option
+        [<System.Text.Json.Serialization.JsonPropertyName("script")>]
+        Script: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("time_series_metric")>]
+        TimeSeriesMetric: TimeSeriesMetricType option
+        [<System.Text.Json.Serialization.JsonPropertyName("time_series_dimension")>]
+        TimeSeriesDimension: bool option
     }
 
         with
@@ -9824,6 +12868,23 @@ module Types =
             {
                 Type = "float"
                 NullValue = None
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
+                Boost = None
+                Coerce = None
+                IgnoreMalformed = None
+                Index = None
+                OnScriptError = None
+                Script = None
+                TimeSeriesMetric = None
+                TimeSeriesDimension = None
             }
 
     and HalfFloatNumberProperty = {
@@ -9831,6 +12892,40 @@ module Types =
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("null_value")>]
         NullValue: Float option
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
+        [<System.Text.Json.Serialization.JsonPropertyName("copy_to")>]
+        CopyTo: Fields option
+        [<System.Text.Json.Serialization.JsonPropertyName("store")>]
+        Store: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_values")>]
+        DocValues: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("coerce")>]
+        Coerce: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_malformed")>]
+        IgnoreMalformed: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("index")>]
+        Index: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_script_error")>]
+        OnScriptError: OnScriptError option
+        [<System.Text.Json.Serialization.JsonPropertyName("script")>]
+        Script: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("time_series_metric")>]
+        TimeSeriesMetric: TimeSeriesMetricType option
+        [<System.Text.Json.Serialization.JsonPropertyName("time_series_dimension")>]
+        TimeSeriesDimension: bool option
     }
 
         with
@@ -9838,6 +12933,23 @@ module Types =
             {
                 Type = "half_float"
                 NullValue = None
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
+                Boost = None
+                Coerce = None
+                IgnoreMalformed = None
+                Index = None
+                OnScriptError = None
+                Script = None
+                TimeSeriesMetric = None
+                TimeSeriesDimension = None
             }
 
     and IntegerNumberProperty = {
@@ -9845,6 +12957,40 @@ module Types =
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("null_value")>]
         NullValue: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
+        [<System.Text.Json.Serialization.JsonPropertyName("copy_to")>]
+        CopyTo: Fields option
+        [<System.Text.Json.Serialization.JsonPropertyName("store")>]
+        Store: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_values")>]
+        DocValues: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("coerce")>]
+        Coerce: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_malformed")>]
+        IgnoreMalformed: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("index")>]
+        Index: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_script_error")>]
+        OnScriptError: OnScriptError option
+        [<System.Text.Json.Serialization.JsonPropertyName("script")>]
+        Script: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("time_series_metric")>]
+        TimeSeriesMetric: TimeSeriesMetricType option
+        [<System.Text.Json.Serialization.JsonPropertyName("time_series_dimension")>]
+        TimeSeriesDimension: bool option
     }
 
         with
@@ -9852,6 +12998,23 @@ module Types =
             {
                 Type = "integer"
                 NullValue = None
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
+                Boost = None
+                Coerce = None
+                IgnoreMalformed = None
+                Index = None
+                OnScriptError = None
+                Script = None
+                TimeSeriesMetric = None
+                TimeSeriesDimension = None
             }
 
     and LongNumberProperty = {
@@ -9859,6 +13022,40 @@ module Types =
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("null_value")>]
         NullValue: Long option
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
+        [<System.Text.Json.Serialization.JsonPropertyName("copy_to")>]
+        CopyTo: Fields option
+        [<System.Text.Json.Serialization.JsonPropertyName("store")>]
+        Store: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_values")>]
+        DocValues: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("coerce")>]
+        Coerce: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_malformed")>]
+        IgnoreMalformed: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("index")>]
+        Index: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_script_error")>]
+        OnScriptError: OnScriptError option
+        [<System.Text.Json.Serialization.JsonPropertyName("script")>]
+        Script: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("time_series_metric")>]
+        TimeSeriesMetric: TimeSeriesMetricType option
+        [<System.Text.Json.Serialization.JsonPropertyName("time_series_dimension")>]
+        TimeSeriesDimension: bool option
     }
 
         with
@@ -9866,6 +13063,23 @@ module Types =
             {
                 Type = "long"
                 NullValue = None
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
+                Boost = None
+                Coerce = None
+                IgnoreMalformed = None
+                Index = None
+                OnScriptError = None
+                Script = None
+                TimeSeriesMetric = None
+                TimeSeriesDimension = None
             }
 
     and ScaledFloatNumberProperty = {
@@ -9875,6 +13089,40 @@ module Types =
         NullValue: Double option
         [<System.Text.Json.Serialization.JsonPropertyName("scaling_factor")>]
         ScalingFactor: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
+        [<System.Text.Json.Serialization.JsonPropertyName("copy_to")>]
+        CopyTo: Fields option
+        [<System.Text.Json.Serialization.JsonPropertyName("store")>]
+        Store: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_values")>]
+        DocValues: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("coerce")>]
+        Coerce: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_malformed")>]
+        IgnoreMalformed: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("index")>]
+        Index: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_script_error")>]
+        OnScriptError: OnScriptError option
+        [<System.Text.Json.Serialization.JsonPropertyName("script")>]
+        Script: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("time_series_metric")>]
+        TimeSeriesMetric: TimeSeriesMetricType option
+        [<System.Text.Json.Serialization.JsonPropertyName("time_series_dimension")>]
+        TimeSeriesDimension: bool option
     }
 
         with
@@ -9883,6 +13131,23 @@ module Types =
                 Type = "scaled_float"
                 NullValue = None
                 ScalingFactor = None
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
+                Boost = None
+                Coerce = None
+                IgnoreMalformed = None
+                Index = None
+                OnScriptError = None
+                Script = None
+                TimeSeriesMetric = None
+                TimeSeriesDimension = None
             }
 
     and ShortNumberProperty = {
@@ -9890,6 +13155,40 @@ module Types =
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("null_value")>]
         NullValue: Short option
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
+        [<System.Text.Json.Serialization.JsonPropertyName("copy_to")>]
+        CopyTo: Fields option
+        [<System.Text.Json.Serialization.JsonPropertyName("store")>]
+        Store: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_values")>]
+        DocValues: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("coerce")>]
+        Coerce: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_malformed")>]
+        IgnoreMalformed: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("index")>]
+        Index: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_script_error")>]
+        OnScriptError: OnScriptError option
+        [<System.Text.Json.Serialization.JsonPropertyName("script")>]
+        Script: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("time_series_metric")>]
+        TimeSeriesMetric: TimeSeriesMetricType option
+        [<System.Text.Json.Serialization.JsonPropertyName("time_series_dimension")>]
+        TimeSeriesDimension: bool option
     }
 
         with
@@ -9897,6 +13196,23 @@ module Types =
             {
                 Type = "short"
                 NullValue = None
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
+                Boost = None
+                Coerce = None
+                IgnoreMalformed = None
+                Index = None
+                OnScriptError = None
+                Script = None
+                TimeSeriesMetric = None
+                TimeSeriesDimension = None
             }
 
     and UnsignedLongNumberProperty = {
@@ -9904,6 +13220,40 @@ module Types =
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("null_value")>]
         NullValue: Ulong option
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
+        [<System.Text.Json.Serialization.JsonPropertyName("copy_to")>]
+        CopyTo: Fields option
+        [<System.Text.Json.Serialization.JsonPropertyName("store")>]
+        Store: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_values")>]
+        DocValues: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("coerce")>]
+        Coerce: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_malformed")>]
+        IgnoreMalformed: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("index")>]
+        Index: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_script_error")>]
+        OnScriptError: OnScriptError option
+        [<System.Text.Json.Serialization.JsonPropertyName("script")>]
+        Script: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("time_series_metric")>]
+        TimeSeriesMetric: TimeSeriesMetricType option
+        [<System.Text.Json.Serialization.JsonPropertyName("time_series_dimension")>]
+        TimeSeriesDimension: bool option
     }
 
         with
@@ -9911,6 +13261,23 @@ module Types =
             {
                 Type = "unsigned_long"
                 NullValue = None
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
+                Boost = None
+                Coerce = None
+                IgnoreMalformed = None
+                Index = None
+                OnScriptError = None
+                Script = None
+                TimeSeriesMetric = None
+                TimeSeriesDimension = None
             }
 
     and DateRangeProperty = {
@@ -9918,16 +13285,24 @@ module Types =
         Format: string option
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
-    }
-
-        with
-        static member empty : DateRangeProperty =
-            {
-                Format = None
-                Type = "date_range"
-            }
-
-    and RangePropertyBase = {
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
+        [<System.Text.Json.Serialization.JsonPropertyName("copy_to")>]
+        CopyTo: Fields option
+        [<System.Text.Json.Serialization.JsonPropertyName("store")>]
+        Store: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_values")>]
+        DocValues: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
         Boost: Double option
         [<System.Text.Json.Serialization.JsonPropertyName("coerce")>]
@@ -9937,66 +13312,301 @@ module Types =
     }
 
         with
-        static member empty : RangePropertyBase =
+        static member empty : DateRangeProperty =
             {
+                Format = None
+                Type = "date_range"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
                 Boost = None
                 Coerce = None
                 Index = None
             }
 
+    and RangePropertyBase = {
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("coerce")>]
+        Coerce: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("index")>]
+        Index: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
+        [<System.Text.Json.Serialization.JsonPropertyName("copy_to")>]
+        CopyTo: Fields option
+        [<System.Text.Json.Serialization.JsonPropertyName("store")>]
+        Store: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_values")>]
+        DocValues: bool option
+    }
+
+        with
+        static member empty : RangePropertyBase =
+            {
+                Boost = None
+                Coerce = None
+                Index = None
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
+            }
+
     and DoubleRangeProperty = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
+        [<System.Text.Json.Serialization.JsonPropertyName("copy_to")>]
+        CopyTo: Fields option
+        [<System.Text.Json.Serialization.JsonPropertyName("store")>]
+        Store: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_values")>]
+        DocValues: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("coerce")>]
+        Coerce: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("index")>]
+        Index: bool option
     }
 
         with
         static member empty : DoubleRangeProperty =
             {
                 Type = "double_range"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
+                Boost = None
+                Coerce = None
+                Index = None
             }
 
     and FloatRangeProperty = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
+        [<System.Text.Json.Serialization.JsonPropertyName("copy_to")>]
+        CopyTo: Fields option
+        [<System.Text.Json.Serialization.JsonPropertyName("store")>]
+        Store: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_values")>]
+        DocValues: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("coerce")>]
+        Coerce: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("index")>]
+        Index: bool option
     }
 
         with
         static member empty : FloatRangeProperty =
             {
                 Type = "float_range"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
+                Boost = None
+                Coerce = None
+                Index = None
             }
 
     and IntegerRangeProperty = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
+        [<System.Text.Json.Serialization.JsonPropertyName("copy_to")>]
+        CopyTo: Fields option
+        [<System.Text.Json.Serialization.JsonPropertyName("store")>]
+        Store: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_values")>]
+        DocValues: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("coerce")>]
+        Coerce: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("index")>]
+        Index: bool option
     }
 
         with
         static member empty : IntegerRangeProperty =
             {
                 Type = "integer_range"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
+                Boost = None
+                Coerce = None
+                Index = None
             }
 
     and IpRangeProperty = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
+        [<System.Text.Json.Serialization.JsonPropertyName("copy_to")>]
+        CopyTo: Fields option
+        [<System.Text.Json.Serialization.JsonPropertyName("store")>]
+        Store: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_values")>]
+        DocValues: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("coerce")>]
+        Coerce: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("index")>]
+        Index: bool option
     }
 
         with
         static member empty : IpRangeProperty =
             {
                 Type = "ip_range"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
+                Boost = None
+                Coerce = None
+                Index = None
             }
 
     and LongRangeProperty = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
+        [<System.Text.Json.Serialization.JsonPropertyName("copy_to")>]
+        CopyTo: Fields option
+        [<System.Text.Json.Serialization.JsonPropertyName("store")>]
+        Store: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_values")>]
+        DocValues: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("boost")>]
+        Boost: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("coerce")>]
+        Coerce: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("index")>]
+        Index: bool option
     }
 
         with
         static member empty : LongRangeProperty =
             {
                 Type = "long_range"
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
+                Boost = None
+                Coerce = None
+                Index = None
             }
 
     and IcuCollationProperty = {
@@ -10034,6 +13644,24 @@ module Types =
         VariableTop: string option
         [<System.Text.Json.Serialization.JsonPropertyName("hiragana_quaternary_mode")>]
         HiraganaQuaternaryMode: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("meta")>]
+        Meta: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
+        Properties: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_above")>]
+        IgnoreAbove: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic")>]
+        Dynamic: DynamicMapping option
+        [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
+        Fields: Map<PropertyName, Property> option
+        [<System.Text.Json.Serialization.JsonPropertyName("synthetic_source_keep")>]
+        SyntheticSourceKeep: SyntheticSourceKeepEnum option
+        [<System.Text.Json.Serialization.JsonPropertyName("copy_to")>]
+        CopyTo: Fields option
+        [<System.Text.Json.Serialization.JsonPropertyName("store")>]
+        Store: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("doc_values")>]
+        DocValues: bool option
     }
 
         with
@@ -10056,6 +13684,15 @@ module Types =
                 Numeric = None
                 VariableTop = None
                 HiraganaQuaternaryMode = None
+                Meta = None
+                Properties = None
+                IgnoreAbove = None
+                Dynamic = None
+                Fields = None
+                SyntheticSourceKeep = None
+                CopyTo = None
+                Store = None
+                DocValues = None
             }
 
     /// The aggregation name as returned from the server. Depending whether typed_keys is specified this could come back
@@ -10745,6 +14382,8 @@ module Types =
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("escaped_tags")>]
         EscapedTags: string list option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -10752,6 +14391,7 @@ module Types =
             {
                 Type = "html_strip"
                 EscapedTags = None
+                Version = None
             }
 
     type MappingCharFilter = {
@@ -10761,6 +14401,8 @@ module Types =
         Mappings: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("mappings_path")>]
         MappingsPath: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -10769,6 +14411,7 @@ module Types =
                 Type = "mapping"
                 Mappings = None
                 MappingsPath = None
+                Version = None
             }
 
     type PatternReplaceCharFilter = {
@@ -10780,6 +14423,8 @@ module Types =
         Pattern: string
         [<System.Text.Json.Serialization.JsonPropertyName("replacement")>]
         Replacement: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -10789,6 +14434,7 @@ module Types =
                 Flags = None
                 Pattern = Unchecked.defaultof<_>
                 Replacement = None
+                Version = None
             }
 
     [<RequireQualifiedAccess>]
@@ -10811,6 +14457,8 @@ module Types =
         Name: IcuNormalizationType option
         [<System.Text.Json.Serialization.JsonPropertyName("unicode_set_filter")>]
         UnicodeSetFilter: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -10820,6 +14468,7 @@ module Types =
                 Mode = None
                 Name = None
                 UnicodeSetFilter = None
+                Version = None
             }
 
     type KuromojiIterationMarkCharFilter = {
@@ -10829,6 +14478,8 @@ module Types =
         NormalizeKana: bool
         [<System.Text.Json.Serialization.JsonPropertyName("normalize_kanji")>]
         NormalizeKanji: bool
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -10837,6 +14488,7 @@ module Types =
                 Type = "kuromoji_iteration_mark"
                 NormalizeKana = Unchecked.defaultof<_>
                 NormalizeKanji = Unchecked.defaultof<_>
+                Version = None
             }
 
     [<RequireQualifiedAccess>]
@@ -10867,34 +14519,43 @@ module Types =
     type ApostropheTokenFilter = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
         static member empty : ApostropheTokenFilter =
             {
                 Type = "apostrophe"
+                Version = None
             }
 
     type ArabicStemTokenFilter = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
         static member empty : ArabicStemTokenFilter =
             {
                 Type = "arabic_stem"
+                Version = None
             }
 
     type ArabicNormalizationTokenFilter = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
         static member empty : ArabicNormalizationTokenFilter =
             {
                 Type = "arabic_normalization"
+                Version = None
             }
 
     type AsciiFoldingTokenFilter = {
@@ -10902,6 +14563,8 @@ module Types =
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("preserve_original")>]
         PreserveOriginal: Stringified<bool> option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -10909,28 +14572,35 @@ module Types =
             {
                 Type = "asciifolding"
                 PreserveOriginal = None
+                Version = None
             }
 
     type BengaliNormalizationTokenFilter = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
         static member empty : BengaliNormalizationTokenFilter =
             {
                 Type = "bengali_normalization"
+                Version = None
             }
 
     type BrazilianStemTokenFilter = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
         static member empty : BrazilianStemTokenFilter =
             {
                 Type = "brazilian_stem"
+                Version = None
             }
 
     [<RequireQualifiedAccess>]
@@ -10947,6 +14617,8 @@ module Types =
         IgnoredScripts: CjkBigramIgnoredScript list option
         [<System.Text.Json.Serialization.JsonPropertyName("output_unigrams")>]
         OutputUnigrams: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -10955,28 +14627,35 @@ module Types =
                 Type = "cjk_bigram"
                 IgnoredScripts = None
                 OutputUnigrams = None
+                Version = None
             }
 
     type CjkWidthTokenFilter = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
         static member empty : CjkWidthTokenFilter =
             {
                 Type = "cjk_width"
+                Version = None
             }
 
     type ClassicTokenFilter = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
         static member empty : ClassicTokenFilter =
             {
                 Type = "classic"
+                Version = None
             }
 
     type CommonGramsTokenFilter = {
@@ -10990,6 +14669,8 @@ module Types =
         IgnoreCase: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("query_mode")>]
         QueryMode: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -11000,6 +14681,7 @@ module Types =
                 CommonWordsPath = None
                 IgnoreCase = None
                 QueryMode = None
+                Version = None
             }
 
     type ConditionTokenFilter = {
@@ -11009,6 +14691,8 @@ module Types =
         Filter: string list
         [<System.Text.Json.Serialization.JsonPropertyName("script")>]
         Script: Script
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -11017,28 +14701,35 @@ module Types =
                 Type = "condition"
                 Filter = Unchecked.defaultof<_>
                 Script = Unchecked.defaultof<_>
+                Version = None
             }
 
     type CzechStemTokenFilter = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
         static member empty : CzechStemTokenFilter =
             {
                 Type = "czech_stem"
+                Version = None
             }
 
     type DecimalDigitTokenFilter = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
         static member empty : DecimalDigitTokenFilter =
             {
                 Type = "decimal_digit"
+                Version = None
             }
 
     [<RequireQualifiedAccess>]
@@ -11054,6 +14745,8 @@ module Types =
         Delimiter: string option
         [<System.Text.Json.Serialization.JsonPropertyName("encoding")>]
         Encoding: DelimitedPayloadEncoding option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -11062,17 +14755,21 @@ module Types =
                 Type = "delimited_payload"
                 Delimiter = None
                 Encoding = None
+                Version = None
             }
 
     type DutchStemTokenFilter = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
         static member empty : DutchStemTokenFilter =
             {
                 Type = "dutch_stem"
+                Version = None
             }
 
     [<RequireQualifiedAccess>]
@@ -11091,6 +14788,8 @@ module Types =
         Side: EdgeNGramSide option
         [<System.Text.Json.Serialization.JsonPropertyName("preserve_original")>]
         PreserveOriginal: Stringified<bool> option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -11101,6 +14800,7 @@ module Types =
                 MinGram = None
                 Side = None
                 PreserveOriginal = None
+                Version = None
             }
 
     type ElisionTokenFilter = {
@@ -11112,6 +14812,8 @@ module Types =
         ArticlesPath: string option
         [<System.Text.Json.Serialization.JsonPropertyName("articles_case")>]
         ArticlesCase: Stringified<bool> option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -11121,6 +14823,7 @@ module Types =
                 Articles = None
                 ArticlesPath = None
                 ArticlesCase = None
+                Version = None
             }
 
     type FingerprintTokenFilter = {
@@ -11130,6 +14833,8 @@ module Types =
         MaxOutputSize: Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("separator")>]
         Separator: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -11138,61 +14843,77 @@ module Types =
                 Type = "fingerprint"
                 MaxOutputSize = None
                 Separator = None
+                Version = None
             }
 
     type FlattenGraphTokenFilter = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
         static member empty : FlattenGraphTokenFilter =
             {
                 Type = "flatten_graph"
+                Version = None
             }
 
     type FrenchStemTokenFilter = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
         static member empty : FrenchStemTokenFilter =
             {
                 Type = "french_stem"
+                Version = None
             }
 
     type GermanNormalizationTokenFilter = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
         static member empty : GermanNormalizationTokenFilter =
             {
                 Type = "german_normalization"
+                Version = None
             }
 
     type GermanStemTokenFilter = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
         static member empty : GermanStemTokenFilter =
             {
                 Type = "german_stem"
+                Version = None
             }
 
     type HindiNormalizationTokenFilter = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
         static member empty : HindiNormalizationTokenFilter =
             {
                 Type = "hindi_normalization"
+                Version = None
             }
 
     type HunspellTokenFilter = {
@@ -11206,6 +14927,8 @@ module Types =
         Locale: string
         [<System.Text.Json.Serialization.JsonPropertyName("longest_only")>]
         LongestOnly: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -11216,6 +14939,7 @@ module Types =
                 Dictionary = None
                 Locale = Unchecked.defaultof<_>
                 LongestOnly = None
+                Version = None
             }
 
     type CompoundWordTokenFilterBase = {
@@ -11231,6 +14955,8 @@ module Types =
         WordList: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("word_list_path")>]
         WordListPath: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -11242,6 +14968,7 @@ module Types =
                 OnlyLongestMatch = None
                 WordList = None
                 WordListPath = None
+                Version = None
             }
 
     type HyphenationDecompounderTokenFilter = {
@@ -11253,6 +14980,20 @@ module Types =
         NoSubMatches: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("no_overlapping_matches")>]
         NoOverlappingMatches: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_subword_size")>]
+        MaxSubwordSize: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("min_subword_size")>]
+        MinSubwordSize: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("min_word_size")>]
+        MinWordSize: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("only_longest_match")>]
+        OnlyLongestMatch: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("word_list")>]
+        WordList: string list option
+        [<System.Text.Json.Serialization.JsonPropertyName("word_list_path")>]
+        WordListPath: string option
     }
 
         with
@@ -11262,17 +15003,27 @@ module Types =
                 HyphenationPatternsPath = Unchecked.defaultof<_>
                 NoSubMatches = None
                 NoOverlappingMatches = None
+                Version = None
+                MaxSubwordSize = None
+                MinSubwordSize = None
+                MinWordSize = None
+                OnlyLongestMatch = None
+                WordList = None
+                WordListPath = None
             }
 
     type IndicNormalizationTokenFilter = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
         static member empty : IndicNormalizationTokenFilter =
             {
                 Type = "indic_normalization"
+                Version = None
             }
 
     [<RequireQualifiedAccess>]
@@ -11287,6 +15038,8 @@ module Types =
         Mode: KeepTypesMode option
         [<System.Text.Json.Serialization.JsonPropertyName("types")>]
         Types: string list
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -11295,6 +15048,7 @@ module Types =
                 Type = "keep_types"
                 Mode = None
                 Types = Unchecked.defaultof<_>
+                Version = None
             }
 
     type KeepWordsTokenFilter = {
@@ -11306,6 +15060,8 @@ module Types =
         KeepWordsCase: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("keep_words_path")>]
         KeepWordsPath: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -11315,6 +15071,7 @@ module Types =
                 KeepWords = None
                 KeepWordsCase = None
                 KeepWordsPath = None
+                Version = None
             }
 
     type KeywordMarkerTokenFilter = {
@@ -11323,11 +15080,13 @@ module Types =
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_case")>]
         IgnoreCase: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("keywords")>]
-        Keywords: System.Text.Json.JsonElement option
+        Keywords: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("keywords_path")>]
         KeywordsPath: string option
         [<System.Text.Json.Serialization.JsonPropertyName("keywords_pattern")>]
         KeywordsPattern: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -11338,28 +15097,35 @@ module Types =
                 Keywords = None
                 KeywordsPath = None
                 KeywordsPattern = None
+                Version = None
             }
 
     type KeywordRepeatTokenFilter = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
         static member empty : KeywordRepeatTokenFilter =
             {
                 Type = "keyword_repeat"
+                Version = None
             }
 
     type KStemTokenFilter = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
         static member empty : KStemTokenFilter =
             {
                 Type = "kstem"
+                Version = None
             }
 
     type LengthTokenFilter = {
@@ -11369,6 +15135,8 @@ module Types =
         Max: Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("min")>]
         Min: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -11377,6 +15145,7 @@ module Types =
                 Type = "length"
                 Max = None
                 Min = None
+                Version = None
             }
 
     type LimitTokenCountTokenFilter = {
@@ -11386,6 +15155,8 @@ module Types =
         ConsumeAllTokens: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("max_token_count")>]
         MaxTokenCount: Stringified<Integer> option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -11394,6 +15165,7 @@ module Types =
                 Type = "limit"
                 ConsumeAllTokens = None
                 MaxTokenCount = None
+                Version = None
             }
 
     [<RequireQualifiedAccess>]
@@ -11407,6 +15179,8 @@ module Types =
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("language")>]
         Language: LowercaseTokenFilterLanguages option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -11414,6 +15188,7 @@ module Types =
             {
                 Type = "lowercase"
                 Language = None
+                Version = None
             }
 
     type MinHashTokenFilter = {
@@ -11427,6 +15202,8 @@ module Types =
         HashSetSize: Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("with_rotation")>]
         WithRotation: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -11437,6 +15214,7 @@ module Types =
                 HashCount = None
                 HashSetSize = None
                 WithRotation = None
+                Version = None
             }
 
     type MultiplexerTokenFilter = {
@@ -11446,6 +15224,8 @@ module Types =
         Filters: string list
         [<System.Text.Json.Serialization.JsonPropertyName("preserve_original")>]
         PreserveOriginal: Stringified<bool> option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -11454,6 +15234,7 @@ module Types =
                 Type = "multiplexer"
                 Filters = Unchecked.defaultof<_>
                 PreserveOriginal = None
+                Version = None
             }
 
     type NGramTokenFilter = {
@@ -11465,6 +15246,8 @@ module Types =
         MinGram: Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("preserve_original")>]
         PreserveOriginal: Stringified<bool> option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -11474,6 +15257,7 @@ module Types =
                 MaxGram = None
                 MinGram = None
                 PreserveOriginal = None
+                Version = None
             }
 
     type NoriPartOfSpeechTokenFilter = {
@@ -11481,6 +15265,8 @@ module Types =
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("stoptags")>]
         Stoptags: string list option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -11488,6 +15274,7 @@ module Types =
             {
                 Type = "nori_part_of_speech"
                 Stoptags = None
+                Version = None
             }
 
     type PatternCaptureTokenFilter = {
@@ -11497,6 +15284,8 @@ module Types =
         Patterns: string list
         [<System.Text.Json.Serialization.JsonPropertyName("preserve_original")>]
         PreserveOriginal: Stringified<bool> option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -11505,6 +15294,7 @@ module Types =
                 Type = "pattern_capture"
                 Patterns = Unchecked.defaultof<_>
                 PreserveOriginal = None
+                Version = None
             }
 
     type PatternReplaceTokenFilter = {
@@ -11518,6 +15308,8 @@ module Types =
         Pattern: string
         [<System.Text.Json.Serialization.JsonPropertyName("replacement")>]
         Replacement: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -11528,39 +15320,49 @@ module Types =
                 Flags = None
                 Pattern = Unchecked.defaultof<_>
                 Replacement = None
+                Version = None
             }
 
     type PersianNormalizationTokenFilter = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
         static member empty : PersianNormalizationTokenFilter =
             {
                 Type = "persian_normalization"
+                Version = None
             }
 
     type PersianStemTokenFilter = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
         static member empty : PersianStemTokenFilter =
             {
                 Type = "persian_stem"
+                Version = None
             }
 
     type PorterStemTokenFilter = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
         static member empty : PorterStemTokenFilter =
             {
                 Type = "porter_stem"
+                Version = None
             }
 
     type PredicateTokenFilter = {
@@ -11568,6 +15370,8 @@ module Types =
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("script")>]
         Script: Script
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -11575,72 +15379,91 @@ module Types =
             {
                 Type = "predicate_token_filter"
                 Script = Unchecked.defaultof<_>
+                Version = None
             }
 
     type RemoveDuplicatesTokenFilter = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
         static member empty : RemoveDuplicatesTokenFilter =
             {
                 Type = "remove_duplicates"
+                Version = None
             }
 
     type ReverseTokenFilter = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
         static member empty : ReverseTokenFilter =
             {
                 Type = "reverse"
+                Version = None
             }
 
     type RussianStemTokenFilter = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
         static member empty : RussianStemTokenFilter =
             {
                 Type = "russian_stem"
+                Version = None
             }
 
     type ScandinavianFoldingTokenFilter = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
         static member empty : ScandinavianFoldingTokenFilter =
             {
                 Type = "scandinavian_folding"
+                Version = None
             }
 
     type ScandinavianNormalizationTokenFilter = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
         static member empty : ScandinavianNormalizationTokenFilter =
             {
                 Type = "scandinavian_normalization"
+                Version = None
             }
 
     type SerbianNormalizationTokenFilter = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
         static member empty : SerbianNormalizationTokenFilter =
             {
                 Type = "serbian_normalization"
+                Version = None
             }
 
     type ShingleTokenFilter = {
@@ -11658,6 +15481,8 @@ module Types =
         OutputUnigramsIfNoShingles: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("token_separator")>]
         TokenSeparator: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -11670,6 +15495,7 @@ module Types =
                 OutputUnigrams = None
                 OutputUnigramsIfNoShingles = None
                 TokenSeparator = None
+                Version = None
             }
 
     [<RequireQualifiedAccess>]
@@ -11707,6 +15533,8 @@ module Types =
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("language")>]
         Language: SnowballLanguage option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -11714,17 +15542,21 @@ module Types =
             {
                 Type = "snowball"
                 Language = None
+                Version = None
             }
 
     type SoraniNormalizationTokenFilter = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
         static member empty : SoraniNormalizationTokenFilter =
             {
                 Type = "sorani_normalization"
+                Version = None
             }
 
     type StemmerOverrideTokenFilter = {
@@ -11734,6 +15566,8 @@ module Types =
         Rules: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("rules_path")>]
         RulesPath: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -11742,6 +15576,7 @@ module Types =
                 Type = "stemmer_override"
                 Rules = None
                 RulesPath = None
+                Version = None
             }
 
     type StemmerTokenFilter = {
@@ -11749,6 +15584,8 @@ module Types =
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("language")>]
         Language: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -11756,6 +15593,7 @@ module Types =
             {
                 Type = "stemmer"
                 Language = None
+                Version = None
             }
 
     type StopTokenFilter = {
@@ -11769,6 +15607,8 @@ module Types =
         Stopwords: StopWords option
         [<System.Text.Json.Serialization.JsonPropertyName("stopwords_path")>]
         StopwordsPath: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -11779,6 +15619,7 @@ module Types =
                 RemoveTrailing = None
                 Stopwords = None
                 StopwordsPath = None
+                Version = None
             }
 
     [<RequireQualifiedAccess>]
@@ -11803,6 +15644,8 @@ module Types =
         Tokenizer: string option
         [<System.Text.Json.Serialization.JsonPropertyName("updateable")>]
         Updateable: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -11816,39 +15659,97 @@ module Types =
                 SynonymsSet = None
                 Tokenizer = None
                 Updateable = None
+                Version = None
             }
 
     type SynonymGraphTokenFilter = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
+        [<System.Text.Json.Serialization.JsonPropertyName("expand")>]
+        Expand: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("format")>]
+        Format: SynonymFormat option
+        [<System.Text.Json.Serialization.JsonPropertyName("lenient")>]
+        Lenient: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("synonyms")>]
+        Synonyms: string list option
+        [<System.Text.Json.Serialization.JsonPropertyName("synonyms_path")>]
+        SynonymsPath: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("synonyms_set")>]
+        SynonymsSet: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("tokenizer")>]
+        Tokenizer: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("updateable")>]
+        Updateable: bool option
     }
 
         with
         static member empty : SynonymGraphTokenFilter =
             {
                 Type = "synonym_graph"
+                Version = None
+                Expand = None
+                Format = None
+                Lenient = None
+                Synonyms = None
+                SynonymsPath = None
+                SynonymsSet = None
+                Tokenizer = None
+                Updateable = None
             }
 
     type SynonymTokenFilter = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
+        [<System.Text.Json.Serialization.JsonPropertyName("expand")>]
+        Expand: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("format")>]
+        Format: SynonymFormat option
+        [<System.Text.Json.Serialization.JsonPropertyName("lenient")>]
+        Lenient: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("synonyms")>]
+        Synonyms: string list option
+        [<System.Text.Json.Serialization.JsonPropertyName("synonyms_path")>]
+        SynonymsPath: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("synonyms_set")>]
+        SynonymsSet: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("tokenizer")>]
+        Tokenizer: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("updateable")>]
+        Updateable: bool option
     }
 
         with
         static member empty : SynonymTokenFilter =
             {
                 Type = "synonym"
+                Version = None
+                Expand = None
+                Format = None
+                Lenient = None
+                Synonyms = None
+                SynonymsPath = None
+                SynonymsSet = None
+                Tokenizer = None
+                Updateable = None
             }
 
     type TrimTokenFilter = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
         static member empty : TrimTokenFilter =
             {
                 Type = "trim"
+                Version = None
             }
 
     type TruncateTokenFilter = {
@@ -11856,6 +15757,8 @@ module Types =
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("length")>]
         Length: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -11863,6 +15766,7 @@ module Types =
             {
                 Type = "truncate"
                 Length = None
+                Version = None
             }
 
     type UniqueTokenFilter = {
@@ -11870,6 +15774,8 @@ module Types =
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("only_on_same_position")>]
         OnlyOnSamePosition: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -11877,17 +15783,21 @@ module Types =
             {
                 Type = "unique"
                 OnlyOnSamePosition = None
+                Version = None
             }
 
     type UppercaseTokenFilter = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
         static member empty : UppercaseTokenFilter =
             {
                 Type = "uppercase"
+                Version = None
             }
 
     type WordDelimiterTokenFilterBase = {
@@ -11917,6 +15827,8 @@ module Types =
         TypeTable: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("type_table_path")>]
         TypeTablePath: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -11935,6 +15847,7 @@ module Types =
                 StemEnglishPossessive = None
                 TypeTable = None
                 TypeTablePath = None
+                Version = None
             }
 
     type WordDelimiterGraphTokenFilter = {
@@ -11944,6 +15857,34 @@ module Types =
         AdjustOffsets: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_keywords")>]
         IgnoreKeywords: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
+        [<System.Text.Json.Serialization.JsonPropertyName("catenate_all")>]
+        CatenateAll: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("catenate_numbers")>]
+        CatenateNumbers: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("catenate_words")>]
+        CatenateWords: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("generate_number_parts")>]
+        GenerateNumberParts: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("generate_word_parts")>]
+        GenerateWordParts: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("preserve_original")>]
+        PreserveOriginal: Stringified<bool> option
+        [<System.Text.Json.Serialization.JsonPropertyName("protected_words")>]
+        ProtectedWords: string list option
+        [<System.Text.Json.Serialization.JsonPropertyName("protected_words_path")>]
+        ProtectedWordsPath: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("split_on_case_change")>]
+        SplitOnCaseChange: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("split_on_numerics")>]
+        SplitOnNumerics: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("stem_english_possessive")>]
+        StemEnglishPossessive: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("type_table")>]
+        TypeTable: string list option
+        [<System.Text.Json.Serialization.JsonPropertyName("type_table_path")>]
+        TypeTablePath: string option
     }
 
         with
@@ -11952,17 +15893,73 @@ module Types =
                 Type = "word_delimiter_graph"
                 AdjustOffsets = None
                 IgnoreKeywords = None
+                Version = None
+                CatenateAll = None
+                CatenateNumbers = None
+                CatenateWords = None
+                GenerateNumberParts = None
+                GenerateWordParts = None
+                PreserveOriginal = None
+                ProtectedWords = None
+                ProtectedWordsPath = None
+                SplitOnCaseChange = None
+                SplitOnNumerics = None
+                StemEnglishPossessive = None
+                TypeTable = None
+                TypeTablePath = None
             }
 
     type WordDelimiterTokenFilter = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
+        [<System.Text.Json.Serialization.JsonPropertyName("catenate_all")>]
+        CatenateAll: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("catenate_numbers")>]
+        CatenateNumbers: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("catenate_words")>]
+        CatenateWords: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("generate_number_parts")>]
+        GenerateNumberParts: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("generate_word_parts")>]
+        GenerateWordParts: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("preserve_original")>]
+        PreserveOriginal: Stringified<bool> option
+        [<System.Text.Json.Serialization.JsonPropertyName("protected_words")>]
+        ProtectedWords: string list option
+        [<System.Text.Json.Serialization.JsonPropertyName("protected_words_path")>]
+        ProtectedWordsPath: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("split_on_case_change")>]
+        SplitOnCaseChange: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("split_on_numerics")>]
+        SplitOnNumerics: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("stem_english_possessive")>]
+        StemEnglishPossessive: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("type_table")>]
+        TypeTable: string list option
+        [<System.Text.Json.Serialization.JsonPropertyName("type_table_path")>]
+        TypeTablePath: string option
     }
 
         with
         static member empty : WordDelimiterTokenFilter =
             {
                 Type = "word_delimiter"
+                Version = None
+                CatenateAll = None
+                CatenateNumbers = None
+                CatenateWords = None
+                GenerateNumberParts = None
+                GenerateWordParts = None
+                PreserveOriginal = None
+                ProtectedWords = None
+                ProtectedWordsPath = None
+                SplitOnCaseChange = None
+                SplitOnNumerics = None
+                StemEnglishPossessive = None
+                TypeTable = None
+                TypeTablePath = None
             }
 
     type JaStopTokenFilter = {
@@ -11970,6 +15967,8 @@ module Types =
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("stopwords")>]
         Stopwords: StopWords option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -11977,6 +15976,7 @@ module Types =
             {
                 Type = "ja_stop"
                 Stopwords = None
+                Version = None
             }
 
     type KuromojiStemmerTokenFilter = {
@@ -11984,6 +15984,8 @@ module Types =
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("minimum_length")>]
         MinimumLength: Integer
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -11991,6 +15993,7 @@ module Types =
             {
                 Type = "kuromoji_stemmer"
                 MinimumLength = Unchecked.defaultof<_>
+                Version = None
             }
 
     type KuromojiReadingFormTokenFilter = {
@@ -11998,6 +16001,8 @@ module Types =
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("use_romaji")>]
         UseRomaji: bool
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -12005,6 +16010,7 @@ module Types =
             {
                 Type = "kuromoji_readingform"
                 UseRomaji = Unchecked.defaultof<_>
+                Version = None
             }
 
     type KuromojiPartOfSpeechTokenFilter = {
@@ -12012,6 +16018,8 @@ module Types =
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("stoptags")>]
         Stoptags: string list
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -12019,6 +16027,7 @@ module Types =
             {
                 Type = "kuromoji_part_of_speech"
                 Stoptags = Unchecked.defaultof<_>
+                Version = None
             }
 
     type IcuCollationTokenFilter = {
@@ -12048,6 +16057,8 @@ module Types =
         VariableTop: string option
         [<System.Text.Json.Serialization.JsonPropertyName("variant")>]
         Variant: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -12066,6 +16077,7 @@ module Types =
                 Strength = None
                 VariableTop = None
                 Variant = None
+                Version = None
             }
 
     type IcuFoldingTokenFilter = {
@@ -12073,6 +16085,8 @@ module Types =
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("unicode_set_filter")>]
         UnicodeSetFilter: string
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -12080,6 +16094,7 @@ module Types =
             {
                 Type = "icu_folding"
                 UnicodeSetFilter = Unchecked.defaultof<_>
+                Version = None
             }
 
     type IcuNormalizationTokenFilter = {
@@ -12087,6 +16102,8 @@ module Types =
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
         Name: IcuNormalizationType
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -12094,6 +16111,7 @@ module Types =
             {
                 Type = "icu_normalizer"
                 Name = Unchecked.defaultof<_>
+                Version = None
             }
 
     [<RequireQualifiedAccess>]
@@ -12108,6 +16126,8 @@ module Types =
         Dir: IcuTransformDirection option
         [<System.Text.Json.Serialization.JsonPropertyName("id")>]
         Id: string
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -12116,6 +16136,7 @@ module Types =
                 Type = "icu_transform"
                 Dir = None
                 Id = Unchecked.defaultof<_>
+                Version = None
             }
 
     [<RequireQualifiedAccess>]
@@ -12165,7 +16186,7 @@ module Types =
         [<System.Text.Json.Serialization.JsonPropertyName("encoder")>]
         Encoder: PhoneticEncoder
         [<System.Text.Json.Serialization.JsonPropertyName("languageset")>]
-        Languageset: System.Text.Json.JsonElement option
+        Languageset: PhoneticLanguage list option
         [<System.Text.Json.Serialization.JsonPropertyName("max_code_len")>]
         MaxCodeLen: Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("name_type")>]
@@ -12174,6 +16195,8 @@ module Types =
         Replace: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("rule_type")>]
         RuleType: PhoneticRuleType option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -12186,17 +16209,39 @@ module Types =
                 NameType = None
                 Replace = None
                 RuleType = None
+                Version = None
             }
 
     type DictionaryDecompounderTokenFilter = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_subword_size")>]
+        MaxSubwordSize: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("min_subword_size")>]
+        MinSubwordSize: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("min_word_size")>]
+        MinWordSize: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("only_longest_match")>]
+        OnlyLongestMatch: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("word_list")>]
+        WordList: string list option
+        [<System.Text.Json.Serialization.JsonPropertyName("word_list_path")>]
+        WordListPath: string option
     }
 
         with
         static member empty : DictionaryDecompounderTokenFilter =
             {
                 Type = "dictionary_decompounder"
+                Version = None
+                MaxSubwordSize = None
+                MinSubwordSize = None
+                MinWordSize = None
+                OnlyLongestMatch = None
+                WordList = None
+                WordListPath = None
             }
 
     [<RequireQualifiedAccess>]
@@ -12300,6 +16345,8 @@ module Types =
         TokenizeOnChars: string list
         [<System.Text.Json.Serialization.JsonPropertyName("max_token_length")>]
         MaxTokenLength: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -12308,6 +16355,7 @@ module Types =
                 Type = "char_group"
                 TokenizeOnChars = Unchecked.defaultof<_>
                 MaxTokenLength = None
+                Version = None
             }
 
     type ClassicTokenizer = {
@@ -12315,6 +16363,8 @@ module Types =
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("max_token_length")>]
         MaxTokenLength: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -12322,6 +16372,7 @@ module Types =
             {
                 Type = "classic"
                 MaxTokenLength = None
+                Version = None
             }
 
     [<RequireQualifiedAccess>]
@@ -12344,6 +16395,8 @@ module Types =
         MinGram: Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("token_chars")>]
         TokenChars: TokenChar list option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -12354,6 +16407,7 @@ module Types =
                 MaxGram = None
                 MinGram = None
                 TokenChars = None
+                Version = None
             }
 
     type KeywordTokenizer = {
@@ -12361,6 +16415,8 @@ module Types =
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("buffer_size")>]
         BufferSize: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -12368,28 +16424,35 @@ module Types =
             {
                 Type = "keyword"
                 BufferSize = None
+                Version = None
             }
 
     type LetterTokenizer = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
         static member empty : LetterTokenizer =
             {
                 Type = "letter"
+                Version = None
             }
 
     type LowercaseTokenizer = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
         static member empty : LowercaseTokenizer =
             {
                 Type = "lowercase"
+                Version = None
             }
 
     type NGramTokenizer = {
@@ -12403,6 +16466,8 @@ module Types =
         MinGram: Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("token_chars")>]
         TokenChars: TokenChar list option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -12413,6 +16478,7 @@ module Types =
                 MaxGram = None
                 MinGram = None
                 TokenChars = None
+                Version = None
             }
 
     type PathHierarchyTokenizer = {
@@ -12428,6 +16494,8 @@ module Types =
         Reverse: Stringified<bool> option
         [<System.Text.Json.Serialization.JsonPropertyName("skip")>]
         Skip: Stringified<Integer> option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -12439,6 +16507,7 @@ module Types =
                 Replacement = None
                 Reverse = None
                 Skip = None
+                Version = None
             }
 
     type PatternTokenizer = {
@@ -12450,6 +16519,8 @@ module Types =
         Group: Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("pattern")>]
         Pattern: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -12459,6 +16530,7 @@ module Types =
                 Flags = None
                 Group = None
                 Pattern = None
+                Version = None
             }
 
     type SimplePatternTokenizer = {
@@ -12466,6 +16538,8 @@ module Types =
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("pattern")>]
         Pattern: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -12473,6 +16547,7 @@ module Types =
             {
                 Type = "simple_pattern"
                 Pattern = None
+                Version = None
             }
 
     type SimplePatternSplitTokenizer = {
@@ -12480,6 +16555,8 @@ module Types =
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("pattern")>]
         Pattern: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -12487,6 +16564,7 @@ module Types =
             {
                 Type = "simple_pattern_split"
                 Pattern = None
+                Version = None
             }
 
     type StandardTokenizer = {
@@ -12494,6 +16572,8 @@ module Types =
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("max_token_length")>]
         MaxTokenLength: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -12501,17 +16581,21 @@ module Types =
             {
                 Type = "standard"
                 MaxTokenLength = None
+                Version = None
             }
 
     type ThaiTokenizer = {
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
         static member empty : ThaiTokenizer =
             {
                 Type = "thai"
+                Version = None
             }
 
     type UaxEmailUrlTokenizer = {
@@ -12519,6 +16603,8 @@ module Types =
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("max_token_length")>]
         MaxTokenLength: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -12526,6 +16612,7 @@ module Types =
             {
                 Type = "uax_url_email"
                 MaxTokenLength = None
+                Version = None
             }
 
     type WhitespaceTokenizer = {
@@ -12533,6 +16620,8 @@ module Types =
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("max_token_length")>]
         MaxTokenLength: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -12540,6 +16629,7 @@ module Types =
             {
                 Type = "whitespace"
                 MaxTokenLength = None
+                Version = None
             }
 
     type IcuTokenizer = {
@@ -12547,6 +16637,8 @@ module Types =
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("rule_files")>]
         RuleFiles: string
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -12554,6 +16646,7 @@ module Types =
             {
                 Type = "icu_tokenizer"
                 RuleFiles = Unchecked.defaultof<_>
+                Version = None
             }
 
     [<RequireQualifiedAccess>]
@@ -12579,6 +16672,8 @@ module Types =
         UserDictionaryRules: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("discard_compound_token")>]
         DiscardCompoundToken: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -12592,6 +16687,7 @@ module Types =
                 UserDictionary = None
                 UserDictionaryRules = None
                 DiscardCompoundToken = None
+                Version = None
             }
 
     [<RequireQualifiedAccess>]
@@ -12611,6 +16707,8 @@ module Types =
         UserDictionary: string option
         [<System.Text.Json.Serialization.JsonPropertyName("user_dictionary_rules")>]
         UserDictionaryRules: string list option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionString option
     }
 
         with
@@ -12621,6 +16719,7 @@ module Types =
                 DiscardPunctuation = None
                 UserDictionary = None
                 UserDictionaryRules = None
+                Version = None
             }
 
     [<RequireQualifiedAccess>]
@@ -13000,23 +17099,32 @@ module Types =
     type Analytics = {
         [<System.Text.Json.Serialization.JsonPropertyName("stats")>]
         Stats: AnalyticsStatistics
+        [<System.Text.Json.Serialization.JsonPropertyName("available")>]
+        Available: bool
+        [<System.Text.Json.Serialization.JsonPropertyName("enabled")>]
+        Enabled: bool
     }
 
         with
         static member empty : Analytics =
             {
                 Stats = Unchecked.defaultof<_>
+                Available = Unchecked.defaultof<_>
+                Enabled = Unchecked.defaultof<_>
             }
 
     type AnalyticsAcknowledgeResponseBase = {
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
         Name: Name
+        [<System.Text.Json.Serialization.JsonPropertyName("acknowledged")>]
+        Acknowledged: bool
     }
 
         with
         static member empty : AnalyticsAcknowledgeResponseBase =
             {
                 Name = Unchecked.defaultof<_>
+                Acknowledged = Unchecked.defaultof<_>
             }
 
     type EventDataStream = {
@@ -13171,9 +17279,9 @@ module Types =
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("char_filter")>]
-        CharFilter: System.Text.Json.JsonElement option
+        CharFilter: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("filter")>]
-        Filter: System.Text.Json.JsonElement option
+        Filter: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("position_increment_gap")>]
         PositionIncrementGap: Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("position_offset_gap")>]
@@ -14549,7 +18657,7 @@ module Types =
         [<System.Text.Json.Serialization.JsonPropertyName("field_security")>]
         FieldSecurity: FieldSecurity option
         [<System.Text.Json.Serialization.JsonPropertyName("names")>]
-        Names: System.Text.Json.JsonElement
+        Names: IndexName list
         [<System.Text.Json.Serialization.JsonPropertyName("privileges")>]
         Privileges: IndexPrivilege list
         [<System.Text.Json.Serialization.JsonPropertyName("query")>]
@@ -14580,7 +18688,7 @@ module Types =
         [<System.Text.Json.Serialization.JsonPropertyName("field_security")>]
         FieldSecurity: FieldSecurity option
         [<System.Text.Json.Serialization.JsonPropertyName("names")>]
-        Names: System.Text.Json.JsonElement
+        Names: IndexName list
         [<System.Text.Json.Serialization.JsonPropertyName("privileges")>]
         Privileges: IndexPrivilege list
         [<System.Text.Json.Serialization.JsonPropertyName("query")>]
@@ -14696,7 +18804,7 @@ module Types =
         [<System.Text.Json.Serialization.JsonPropertyName("remote_cluster")>]
         RemoteCluster: RemoteClusterPrivileges list option
         [<System.Text.Json.Serialization.JsonPropertyName("global")>]
-        Global: System.Text.Json.JsonElement option
+        Global: GlobalPrivilege list option
         [<System.Text.Json.Serialization.JsonPropertyName("applications")>]
         Applications: ApplicationPrivileges list option
         [<System.Text.Json.Serialization.JsonPropertyName("metadata")>]
@@ -15007,20 +19115,6 @@ module Types =
         AllowDuplicates: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_empty_values")>]
         IgnoreEmptyValues: bool option
-    }
-
-        with
-        static member empty : AppendProcessor =
-            {
-                Field = Unchecked.defaultof<_>
-                Value = None
-                MediaType = None
-                CopyFrom = None
-                AllowDuplicates = None
-                IgnoreEmptyValues = None
-            }
-
-    and ProcessorBase = {
         [<System.Text.Json.Serialization.JsonPropertyName("description")>]
         Description: string option
         [<System.Text.Json.Serialization.JsonPropertyName("if")>]
@@ -15034,8 +19128,14 @@ module Types =
     }
 
         with
-        static member empty : ProcessorBase =
+        static member empty : AppendProcessor =
             {
+                Field = Unchecked.defaultof<_>
+                Value = None
+                MediaType = None
+                CopyFrom = None
+                AllowDuplicates = None
+                IgnoreEmptyValues = None
                 Description = None
                 If = None
                 IgnoreFailure = None
@@ -15109,6 +19209,16 @@ module Types =
         RemoveBinary: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("resource_name")>]
         ResourceName: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
+        Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("if")>]
+        If: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_failure")>]
+        IgnoreFailure: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_failure")>]
+        OnFailure: ProcessorContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("tag")>]
+        Tag: string option
     }
 
         with
@@ -15122,6 +19232,34 @@ module Types =
                 TargetField = None
                 RemoveBinary = None
                 ResourceName = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
+            }
+
+    and ProcessorBase = {
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
+        Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("if")>]
+        If: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_failure")>]
+        IgnoreFailure: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_failure")>]
+        OnFailure: ProcessorContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("tag")>]
+        Tag: string option
+    }
+
+        with
+        static member empty : ProcessorBase =
+            {
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
     and BytesProcessor = {
@@ -15131,6 +19269,16 @@ module Types =
         IgnoreMissing: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("target_field")>]
         TargetField: Field option
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
+        Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("if")>]
+        If: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_failure")>]
+        IgnoreFailure: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_failure")>]
+        OnFailure: ProcessorContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("tag")>]
+        Tag: string option
     }
 
         with
@@ -15139,6 +19287,11 @@ module Types =
                 Field = Unchecked.defaultof<_>
                 IgnoreMissing = None
                 TargetField = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
     and CefProcessor = {
@@ -15152,6 +19305,16 @@ module Types =
         IgnoreEmptyValues: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("timezone")>]
         Timezone: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
+        Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("if")>]
+        If: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_failure")>]
+        IgnoreFailure: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_failure")>]
+        OnFailure: ProcessorContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("tag")>]
+        Tag: string option
     }
 
         with
@@ -15162,6 +19325,11 @@ module Types =
                 TargetField = None
                 IgnoreEmptyValues = None
                 Timezone = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
     and CircleProcessor = {
@@ -15175,6 +19343,16 @@ module Types =
         ShapeType: ShapeType
         [<System.Text.Json.Serialization.JsonPropertyName("target_field")>]
         TargetField: Field option
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
+        Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("if")>]
+        If: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_failure")>]
+        IgnoreFailure: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_failure")>]
+        OnFailure: ProcessorContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("tag")>]
+        Tag: string option
     }
 
         with
@@ -15185,6 +19363,11 @@ module Types =
                 IgnoreMissing = None
                 ShapeType = Unchecked.defaultof<_>
                 TargetField = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
     and CommunityIDProcessor = {
@@ -15210,6 +19393,16 @@ module Types =
         Seed: Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_missing")>]
         IgnoreMissing: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
+        Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("if")>]
+        If: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_failure")>]
+        IgnoreFailure: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_failure")>]
+        OnFailure: ProcessorContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("tag")>]
+        Tag: string option
     }
 
         with
@@ -15226,6 +19419,11 @@ module Types =
                 TargetField = None
                 Seed = None
                 IgnoreMissing = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
     and ConvertProcessor = {
@@ -15237,6 +19435,16 @@ module Types =
         TargetField: Field option
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: ConvertType
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
+        Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("if")>]
+        If: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_failure")>]
+        IgnoreFailure: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_failure")>]
+        OnFailure: ProcessorContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("tag")>]
+        Tag: string option
     }
 
         with
@@ -15246,6 +19454,11 @@ module Types =
                 IgnoreMissing = None
                 TargetField = None
                 Type = Unchecked.defaultof<_>
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
     and CsvProcessor = {
@@ -15263,6 +19476,16 @@ module Types =
         TargetFields: Fields
         [<System.Text.Json.Serialization.JsonPropertyName("trim")>]
         Trim: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
+        Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("if")>]
+        If: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_failure")>]
+        IgnoreFailure: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_failure")>]
+        OnFailure: ProcessorContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("tag")>]
+        Tag: string option
     }
 
         with
@@ -15275,6 +19498,11 @@ module Types =
                 Separator = None
                 TargetFields = Unchecked.defaultof<_>
                 Trim = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
     and DateProcessor = {
@@ -15290,6 +19518,16 @@ module Types =
         Timezone: string option
         [<System.Text.Json.Serialization.JsonPropertyName("output_format")>]
         OutputFormat: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
+        Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("if")>]
+        If: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_failure")>]
+        IgnoreFailure: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_failure")>]
+        OnFailure: ProcessorContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("tag")>]
+        Tag: string option
     }
 
         with
@@ -15301,6 +19539,11 @@ module Types =
                 TargetField = None
                 Timezone = None
                 OutputFormat = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
     and DateIndexNameProcessor = {
@@ -15318,6 +19561,16 @@ module Types =
         Locale: string option
         [<System.Text.Json.Serialization.JsonPropertyName("timezone")>]
         Timezone: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
+        Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("if")>]
+        If: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_failure")>]
+        IgnoreFailure: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_failure")>]
+        OnFailure: ProcessorContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("tag")>]
+        Tag: string option
     }
 
         with
@@ -15330,6 +19583,11 @@ module Types =
                 IndexNamePrefix = None
                 Locale = None
                 Timezone = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
     and DissectProcessor = {
@@ -15341,6 +19599,16 @@ module Types =
         IgnoreMissing: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("pattern")>]
         Pattern: string
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
+        Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("if")>]
+        If: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_failure")>]
+        IgnoreFailure: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_failure")>]
+        OnFailure: ProcessorContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("tag")>]
+        Tag: string option
     }
 
         with
@@ -15350,6 +19618,11 @@ module Types =
                 Field = Unchecked.defaultof<_>
                 IgnoreMissing = None
                 Pattern = Unchecked.defaultof<_>
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
     and DotExpanderProcessor = {
@@ -15359,6 +19632,16 @@ module Types =
         Override: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("path")>]
         Path: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
+        Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("if")>]
+        If: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_failure")>]
+        IgnoreFailure: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_failure")>]
+        OnFailure: ProcessorContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("tag")>]
+        Tag: string option
     }
 
         with
@@ -15367,9 +19650,35 @@ module Types =
                 Field = Unchecked.defaultof<_>
                 Override = None
                 Path = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
-    and DropProcessor = System.Text.Json.JsonElement
+    and DropProcessor = {
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
+        Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("if")>]
+        If: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_failure")>]
+        IgnoreFailure: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_failure")>]
+        OnFailure: ProcessorContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("tag")>]
+        Tag: string option
+    }
+
+        with
+        static member empty : DropProcessor =
+            {
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
+            }
 
     and EnrichProcessor = {
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
@@ -15386,6 +19695,16 @@ module Types =
         ShapeRelation: GeoShapeRelation option
         [<System.Text.Json.Serialization.JsonPropertyName("target_field")>]
         TargetField: Field
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
+        Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("if")>]
+        If: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_failure")>]
+        IgnoreFailure: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_failure")>]
+        OnFailure: ProcessorContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("tag")>]
+        Tag: string option
     }
 
         with
@@ -15398,17 +19717,37 @@ module Types =
                 PolicyName = Unchecked.defaultof<_>
                 ShapeRelation = None
                 TargetField = Unchecked.defaultof<_>
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
     and FailProcessor = {
         [<System.Text.Json.Serialization.JsonPropertyName("message")>]
         Message: string
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
+        Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("if")>]
+        If: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_failure")>]
+        IgnoreFailure: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_failure")>]
+        OnFailure: ProcessorContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("tag")>]
+        Tag: string option
     }
 
         with
         static member empty : FailProcessor =
             {
                 Message = Unchecked.defaultof<_>
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
     and FingerprintProcessor = {
@@ -15422,6 +19761,16 @@ module Types =
         Method: FingerprintDigest option
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_missing")>]
         IgnoreMissing: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
+        Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("if")>]
+        If: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_failure")>]
+        IgnoreFailure: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_failure")>]
+        OnFailure: ProcessorContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("tag")>]
+        Tag: string option
     }
 
         with
@@ -15432,6 +19781,11 @@ module Types =
                 Salt = None
                 Method = None
                 IgnoreMissing = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
     and ForeachProcessor = {
@@ -15441,6 +19795,16 @@ module Types =
         IgnoreMissing: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("processor")>]
         Processor: ProcessorContainer
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
+        Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("if")>]
+        If: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_failure")>]
+        IgnoreFailure: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_failure")>]
+        OnFailure: ProcessorContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("tag")>]
+        Tag: string option
     }
 
         with
@@ -15449,6 +19813,11 @@ module Types =
                 Field = Unchecked.defaultof<_>
                 IgnoreMissing = None
                 Processor = Unchecked.defaultof<_>
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
     and IpLocationProcessor = {
@@ -15466,6 +19835,16 @@ module Types =
         TargetField: Field option
         [<System.Text.Json.Serialization.JsonPropertyName("download_database_on_pipeline_creation")>]
         DownloadDatabaseOnPipelineCreation: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
+        Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("if")>]
+        If: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_failure")>]
+        IgnoreFailure: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_failure")>]
+        OnFailure: ProcessorContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("tag")>]
+        Tag: string option
     }
 
         with
@@ -15478,6 +19857,11 @@ module Types =
                 Properties = None
                 TargetField = None
                 DownloadDatabaseOnPipelineCreation = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
     and GeoGridProcessor = {
@@ -15499,6 +19883,16 @@ module Types =
         IgnoreMissing: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("target_format")>]
         TargetFormat: GeoGridTargetFormat option
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
+        Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("if")>]
+        If: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_failure")>]
+        IgnoreFailure: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_failure")>]
+        OnFailure: ProcessorContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("tag")>]
+        Tag: string option
     }
 
         with
@@ -15513,6 +19907,11 @@ module Types =
                 PrecisionField = None
                 IgnoreMissing = None
                 TargetFormat = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
     and GeoIpProcessor = {
@@ -15530,6 +19929,16 @@ module Types =
         TargetField: Field option
         [<System.Text.Json.Serialization.JsonPropertyName("download_database_on_pipeline_creation")>]
         DownloadDatabaseOnPipelineCreation: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
+        Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("if")>]
+        If: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_failure")>]
+        IgnoreFailure: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_failure")>]
+        OnFailure: ProcessorContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("tag")>]
+        Tag: string option
     }
 
         with
@@ -15542,6 +19951,11 @@ module Types =
                 Properties = None
                 TargetField = None
                 DownloadDatabaseOnPipelineCreation = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
     and GrokProcessor = {
@@ -15559,6 +19973,16 @@ module Types =
         TraceMatch: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("validate_only")>]
         ValidateOnly: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
+        Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("if")>]
+        If: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_failure")>]
+        IgnoreFailure: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_failure")>]
+        OnFailure: ProcessorContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("tag")>]
+        Tag: string option
     }
 
         with
@@ -15571,6 +19995,11 @@ module Types =
                 Patterns = Unchecked.defaultof<_>
                 TraceMatch = None
                 ValidateOnly = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
     and GsubProcessor = {
@@ -15584,6 +20013,16 @@ module Types =
         Replacement: string
         [<System.Text.Json.Serialization.JsonPropertyName("target_field")>]
         TargetField: Field option
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
+        Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("if")>]
+        If: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_failure")>]
+        IgnoreFailure: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_failure")>]
+        OnFailure: ProcessorContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("tag")>]
+        Tag: string option
     }
 
         with
@@ -15594,6 +20033,11 @@ module Types =
                 Pattern = Unchecked.defaultof<_>
                 Replacement = Unchecked.defaultof<_>
                 TargetField = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
     and HtmlStripProcessor = {
@@ -15603,6 +20047,16 @@ module Types =
         IgnoreMissing: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("target_field")>]
         TargetField: Field option
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
+        Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("if")>]
+        If: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_failure")>]
+        IgnoreFailure: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_failure")>]
+        OnFailure: ProcessorContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("tag")>]
+        Tag: string option
     }
 
         with
@@ -15611,6 +20065,11 @@ module Types =
                 Field = Unchecked.defaultof<_>
                 IgnoreMissing = None
                 TargetField = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
     and InferenceProcessor = {
@@ -15623,9 +20082,19 @@ module Types =
         [<System.Text.Json.Serialization.JsonPropertyName("inference_config")>]
         InferenceConfig: InferenceConfig option
         [<System.Text.Json.Serialization.JsonPropertyName("input_output")>]
-        InputOutput: System.Text.Json.JsonElement option
+        InputOutput: InputConfig list option
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_missing")>]
         IgnoreMissing: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
+        Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("if")>]
+        If: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_failure")>]
+        IgnoreFailure: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_failure")>]
+        OnFailure: ProcessorContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("tag")>]
+        Tag: string option
     }
 
         with
@@ -15637,6 +20106,11 @@ module Types =
                 InferenceConfig = None
                 InputOutput = None
                 IgnoreMissing = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
     and JoinProcessor = {
@@ -15646,6 +20120,16 @@ module Types =
         Separator: string
         [<System.Text.Json.Serialization.JsonPropertyName("target_field")>]
         TargetField: Field option
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
+        Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("if")>]
+        If: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_failure")>]
+        IgnoreFailure: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_failure")>]
+        OnFailure: ProcessorContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("tag")>]
+        Tag: string option
     }
 
         with
@@ -15654,6 +20138,11 @@ module Types =
                 Field = Unchecked.defaultof<_>
                 Separator = Unchecked.defaultof<_>
                 TargetField = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
     and JsonProcessor = {
@@ -15667,6 +20156,16 @@ module Types =
         Field: Field
         [<System.Text.Json.Serialization.JsonPropertyName("target_field")>]
         TargetField: Field option
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
+        Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("if")>]
+        If: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_failure")>]
+        IgnoreFailure: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_failure")>]
+        OnFailure: ProcessorContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("tag")>]
+        Tag: string option
     }
 
         with
@@ -15677,6 +20176,11 @@ module Types =
                 AllowDuplicateKeys = None
                 Field = Unchecked.defaultof<_>
                 TargetField = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
     and KeyValueProcessor = {
@@ -15702,6 +20206,16 @@ module Types =
         TrimValue: string option
         [<System.Text.Json.Serialization.JsonPropertyName("value_split")>]
         ValueSplit: string
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
+        Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("if")>]
+        If: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_failure")>]
+        IgnoreFailure: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_failure")>]
+        OnFailure: ProcessorContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("tag")>]
+        Tag: string option
     }
 
         with
@@ -15718,6 +20232,11 @@ module Types =
                 TrimKey = None
                 TrimValue = None
                 ValueSplit = Unchecked.defaultof<_>
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
     and LowercaseProcessor = {
@@ -15727,6 +20246,16 @@ module Types =
         IgnoreMissing: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("target_field")>]
         TargetField: Field option
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
+        Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("if")>]
+        If: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_failure")>]
+        IgnoreFailure: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_failure")>]
+        OnFailure: ProcessorContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("tag")>]
+        Tag: string option
     }
 
         with
@@ -15735,6 +20264,11 @@ module Types =
                 Field = Unchecked.defaultof<_>
                 IgnoreMissing = None
                 TargetField = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
     and NetworkDirectionProcessor = {
@@ -15750,6 +20284,16 @@ module Types =
         InternalNetworksField: Field option
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_missing")>]
         IgnoreMissing: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
+        Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("if")>]
+        If: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_failure")>]
+        IgnoreFailure: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_failure")>]
+        OnFailure: ProcessorContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("tag")>]
+        Tag: string option
     }
 
         with
@@ -15761,6 +20305,11 @@ module Types =
                 InternalNetworks = None
                 InternalNetworksField = None
                 IgnoreMissing = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
     and PipelineProcessor = {
@@ -15768,6 +20317,16 @@ module Types =
         Name: Name
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_missing_pipeline")>]
         IgnoreMissingPipeline: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
+        Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("if")>]
+        If: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_failure")>]
+        IgnoreFailure: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_failure")>]
+        OnFailure: ProcessorContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("tag")>]
+        Tag: string option
     }
 
         with
@@ -15775,6 +20334,11 @@ module Types =
             {
                 Name = Unchecked.defaultof<_>
                 IgnoreMissingPipeline = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
     and RedactProcessor = {
@@ -15794,6 +20358,16 @@ module Types =
         SkipIfUnlicensed: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("trace_redact")>]
         TraceRedact: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
+        Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("if")>]
+        If: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_failure")>]
+        IgnoreFailure: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_failure")>]
+        OnFailure: ProcessorContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("tag")>]
+        Tag: string option
     }
 
         with
@@ -15807,6 +20381,11 @@ module Types =
                 IgnoreMissing = None
                 SkipIfUnlicensed = None
                 TraceRedact = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
     and RegisteredDomainProcessor = {
@@ -15816,6 +20395,16 @@ module Types =
         TargetField: Field option
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_missing")>]
         IgnoreMissing: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
+        Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("if")>]
+        If: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_failure")>]
+        IgnoreFailure: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_failure")>]
+        OnFailure: ProcessorContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("tag")>]
+        Tag: string option
     }
 
         with
@@ -15824,6 +20413,11 @@ module Types =
                 Field = Unchecked.defaultof<_>
                 TargetField = None
                 IgnoreMissing = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
     and RemoveProcessor = {
@@ -15833,6 +20427,16 @@ module Types =
         Keep: Fields option
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_missing")>]
         IgnoreMissing: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
+        Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("if")>]
+        If: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_failure")>]
+        IgnoreFailure: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_failure")>]
+        OnFailure: ProcessorContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("tag")>]
+        Tag: string option
     }
 
         with
@@ -15841,6 +20445,11 @@ module Types =
                 Field = Unchecked.defaultof<_>
                 Keep = None
                 IgnoreMissing = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
     and RenameProcessor = {
@@ -15850,6 +20459,16 @@ module Types =
         IgnoreMissing: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("target_field")>]
         TargetField: Field
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
+        Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("if")>]
+        If: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_failure")>]
+        IgnoreFailure: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_failure")>]
+        OnFailure: ProcessorContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("tag")>]
+        Tag: string option
     }
 
         with
@@ -15858,15 +20477,30 @@ module Types =
                 Field = Unchecked.defaultof<_>
                 IgnoreMissing = None
                 TargetField = Unchecked.defaultof<_>
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
     and RerouteProcessor = {
         [<System.Text.Json.Serialization.JsonPropertyName("destination")>]
         Destination: string option
         [<System.Text.Json.Serialization.JsonPropertyName("dataset")>]
-        Dataset: System.Text.Json.JsonElement option
+        Dataset: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("namespace")>]
-        Namespace: System.Text.Json.JsonElement option
+        Namespace: string list option
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
+        Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("if")>]
+        If: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_failure")>]
+        IgnoreFailure: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_failure")>]
+        OnFailure: ProcessorContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("tag")>]
+        Tag: string option
     }
 
         with
@@ -15875,6 +20509,11 @@ module Types =
                 Destination = None
                 Dataset = None
                 Namespace = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
     and ScriptProcessor = {
@@ -15886,6 +20525,16 @@ module Types =
         Params: Map<string, System.Text.Json.JsonElement> option
         [<System.Text.Json.Serialization.JsonPropertyName("source")>]
         Source: ScriptSource option
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
+        Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("if")>]
+        If: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_failure")>]
+        IgnoreFailure: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_failure")>]
+        OnFailure: ProcessorContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("tag")>]
+        Tag: string option
     }
 
         with
@@ -15895,6 +20544,11 @@ module Types =
                 Lang = None
                 Params = None
                 Source = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
     and SetProcessor = {
@@ -15910,6 +20564,16 @@ module Types =
         Override: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("value")>]
         Value: System.Text.Json.JsonElement option
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
+        Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("if")>]
+        If: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_failure")>]
+        IgnoreFailure: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_failure")>]
+        OnFailure: ProcessorContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("tag")>]
+        Tag: string option
     }
 
         with
@@ -15921,6 +20585,11 @@ module Types =
                 MediaType = None
                 Override = None
                 Value = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
     and SetSecurityUserProcessor = {
@@ -15928,6 +20597,16 @@ module Types =
         Field: Field
         [<System.Text.Json.Serialization.JsonPropertyName("properties")>]
         Properties: string list option
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
+        Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("if")>]
+        If: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_failure")>]
+        IgnoreFailure: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_failure")>]
+        OnFailure: ProcessorContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("tag")>]
+        Tag: string option
     }
 
         with
@@ -15935,6 +20614,11 @@ module Types =
             {
                 Field = Unchecked.defaultof<_>
                 Properties = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
     and SortProcessor = {
@@ -15944,6 +20628,16 @@ module Types =
         Order: SortOrder option
         [<System.Text.Json.Serialization.JsonPropertyName("target_field")>]
         TargetField: Field option
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
+        Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("if")>]
+        If: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_failure")>]
+        IgnoreFailure: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_failure")>]
+        OnFailure: ProcessorContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("tag")>]
+        Tag: string option
     }
 
         with
@@ -15952,6 +20646,11 @@ module Types =
                 Field = Unchecked.defaultof<_>
                 Order = None
                 TargetField = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
     and SplitProcessor = {
@@ -15965,6 +20664,16 @@ module Types =
         Separator: string
         [<System.Text.Json.Serialization.JsonPropertyName("target_field")>]
         TargetField: Field option
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
+        Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("if")>]
+        If: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_failure")>]
+        IgnoreFailure: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_failure")>]
+        OnFailure: ProcessorContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("tag")>]
+        Tag: string option
     }
 
         with
@@ -15975,9 +20684,35 @@ module Types =
                 PreserveTrailing = None
                 Separator = Unchecked.defaultof<_>
                 TargetField = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
-    and TerminateProcessor = System.Text.Json.JsonElement
+    and TerminateProcessor = {
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
+        Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("if")>]
+        If: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_failure")>]
+        IgnoreFailure: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_failure")>]
+        OnFailure: ProcessorContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("tag")>]
+        Tag: string option
+    }
+
+        with
+        static member empty : TerminateProcessor =
+            {
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
+            }
 
     and TrimProcessor = {
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
@@ -15986,6 +20721,16 @@ module Types =
         IgnoreMissing: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("target_field")>]
         TargetField: Field option
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
+        Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("if")>]
+        If: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_failure")>]
+        IgnoreFailure: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_failure")>]
+        OnFailure: ProcessorContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("tag")>]
+        Tag: string option
     }
 
         with
@@ -15994,6 +20739,11 @@ module Types =
                 Field = Unchecked.defaultof<_>
                 IgnoreMissing = None
                 TargetField = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
     and UppercaseProcessor = {
@@ -16003,6 +20753,16 @@ module Types =
         IgnoreMissing: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("target_field")>]
         TargetField: Field option
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
+        Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("if")>]
+        If: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_failure")>]
+        IgnoreFailure: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_failure")>]
+        OnFailure: ProcessorContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("tag")>]
+        Tag: string option
     }
 
         with
@@ -16011,6 +20771,11 @@ module Types =
                 Field = Unchecked.defaultof<_>
                 IgnoreMissing = None
                 TargetField = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
     and UrlDecodeProcessor = {
@@ -16020,6 +20785,16 @@ module Types =
         IgnoreMissing: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("target_field")>]
         TargetField: Field option
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
+        Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("if")>]
+        If: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_failure")>]
+        IgnoreFailure: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_failure")>]
+        OnFailure: ProcessorContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("tag")>]
+        Tag: string option
     }
 
         with
@@ -16028,6 +20803,11 @@ module Types =
                 Field = Unchecked.defaultof<_>
                 IgnoreMissing = None
                 TargetField = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
     and UriPartsProcessor = {
@@ -16041,6 +20821,16 @@ module Types =
         RemoveIfSuccessful: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("target_field")>]
         TargetField: Field option
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
+        Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("if")>]
+        If: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_failure")>]
+        IgnoreFailure: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_failure")>]
+        OnFailure: ProcessorContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("tag")>]
+        Tag: string option
     }
 
         with
@@ -16051,6 +20841,11 @@ module Types =
                 KeepOriginal = None
                 RemoveIfSuccessful = None
                 TargetField = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
     and UserAgentProcessor = {
@@ -16066,6 +20861,16 @@ module Types =
         Properties: UserAgentProperty list option
         [<System.Text.Json.Serialization.JsonPropertyName("extract_device_type")>]
         ExtractDeviceType: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
+        Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("if")>]
+        If: Script option
+        [<System.Text.Json.Serialization.JsonPropertyName("ignore_failure")>]
+        IgnoreFailure: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("on_failure")>]
+        OnFailure: ProcessorContainer list option
+        [<System.Text.Json.Serialization.JsonPropertyName("tag")>]
+        Tag: string option
     }
 
         with
@@ -16077,6 +20882,11 @@ module Types =
                 TargetField = None
                 Properties = None
                 ExtractDeviceType = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
     type ApplicationPrivilegesCheck = {
@@ -16105,12 +20915,18 @@ module Types =
     type Archive = {
         [<System.Text.Json.Serialization.JsonPropertyName("indices_count")>]
         IndicesCount: Long
+        [<System.Text.Json.Serialization.JsonPropertyName("available")>]
+        Available: bool
+        [<System.Text.Json.Serialization.JsonPropertyName("enabled")>]
+        Enabled: bool
     }
 
         with
         static member empty : Archive =
             {
                 IndicesCount = Unchecked.defaultof<_>
+                Available = Unchecked.defaultof<_>
+                Enabled = Unchecked.defaultof<_>
             }
 
     [<RequireQualifiedAccess>]
@@ -16309,6 +21125,20 @@ module Types =
         Id: string option
         [<System.Text.Json.Serialization.JsonPropertyName("is_running")>]
         IsRunning: bool
+        [<System.Text.Json.Serialization.JsonPropertyName("took")>]
+        Took: DurationValue<UnitMillis> option
+        [<System.Text.Json.Serialization.JsonPropertyName("is_partial")>]
+        IsPartial: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("all_columns")>]
+        AllColumns: EsqlColumnInfo list option
+        [<System.Text.Json.Serialization.JsonPropertyName("columns")>]
+        Columns: EsqlColumnInfo list
+        [<System.Text.Json.Serialization.JsonPropertyName("values")>]
+        Values: FieldValue list list
+        [<System.Text.Json.Serialization.JsonPropertyName("_clusters")>]
+        Clusters: EsqlClusterInfo option
+        [<System.Text.Json.Serialization.JsonPropertyName("profile")>]
+        Profile: System.Text.Json.JsonElement option
     }
 
         with
@@ -16316,6 +21146,13 @@ module Types =
             {
                 Id = None
                 IsRunning = Unchecked.defaultof<_>
+                Took = None
+                IsPartial = None
+                AllColumns = None
+                Columns = Unchecked.defaultof<_>
+                Values = Unchecked.defaultof<_>
+                Clusters = None
+                Profile = None
             }
 
     type ClusterAlias = string
@@ -16947,6 +21784,12 @@ module Types =
     type CompletionSuggest<'TDocument> = {
         [<System.Text.Json.Serialization.JsonPropertyName("options")>]
         Options: System.Text.Json.JsonElement
+        [<System.Text.Json.Serialization.JsonPropertyName("length")>]
+        Length: Integer
+        [<System.Text.Json.Serialization.JsonPropertyName("offset")>]
+        Offset: Integer
+        [<System.Text.Json.Serialization.JsonPropertyName("text")>]
+        Text: string
     }
 
     type PhraseSuggestOption = {
@@ -16971,13 +21814,22 @@ module Types =
 
     type PhraseSuggest = {
         [<System.Text.Json.Serialization.JsonPropertyName("options")>]
-        Options: System.Text.Json.JsonElement
+        Options: PhraseSuggestOption list
+        [<System.Text.Json.Serialization.JsonPropertyName("length")>]
+        Length: Integer
+        [<System.Text.Json.Serialization.JsonPropertyName("offset")>]
+        Offset: Integer
+        [<System.Text.Json.Serialization.JsonPropertyName("text")>]
+        Text: string
     }
 
         with
         static member empty : PhraseSuggest =
             {
                 Options = Unchecked.defaultof<_>
+                Length = Unchecked.defaultof<_>
+                Offset = Unchecked.defaultof<_>
+                Text = Unchecked.defaultof<_>
             }
 
     type TermSuggestOption = {
@@ -17005,13 +21857,22 @@ module Types =
 
     type TermSuggest = {
         [<System.Text.Json.Serialization.JsonPropertyName("options")>]
-        Options: System.Text.Json.JsonElement
+        Options: TermSuggestOption list
+        [<System.Text.Json.Serialization.JsonPropertyName("length")>]
+        Length: Integer
+        [<System.Text.Json.Serialization.JsonPropertyName("offset")>]
+        Offset: Integer
+        [<System.Text.Json.Serialization.JsonPropertyName("text")>]
+        Text: string
     }
 
         with
         static member empty : TermSuggest =
             {
                 Options = Unchecked.defaultof<_>
+                Length = Unchecked.defaultof<_>
+                Offset = Unchecked.defaultof<_>
+                Text = Unchecked.defaultof<_>
             }
 
     [<RequireQualifiedAccess>]
@@ -17092,6 +21953,26 @@ module Types =
     type AsyncSearchDocumentResponseBase<'TDocument> = {
         [<System.Text.Json.Serialization.JsonPropertyName("response")>]
         Response: AsyncSearch<'TDocument>
+        [<System.Text.Json.Serialization.JsonPropertyName("id")>]
+        Id: Id option
+        [<System.Text.Json.Serialization.JsonPropertyName("is_partial")>]
+        IsPartial: bool
+        [<System.Text.Json.Serialization.JsonPropertyName("is_running")>]
+        IsRunning: bool
+        [<System.Text.Json.Serialization.JsonPropertyName("expiration_time")>]
+        ExpirationTime: DateTime option
+        [<System.Text.Json.Serialization.JsonPropertyName("expiration_time_in_millis")>]
+        ExpirationTimeInMillis: EpochTime<UnitMillis>
+        [<System.Text.Json.Serialization.JsonPropertyName("start_time")>]
+        StartTime: DateTime option
+        [<System.Text.Json.Serialization.JsonPropertyName("start_time_in_millis")>]
+        StartTimeInMillis: EpochTime<UnitMillis>
+        [<System.Text.Json.Serialization.JsonPropertyName("completion_time")>]
+        CompletionTime: DateTime option
+        [<System.Text.Json.Serialization.JsonPropertyName("completion_time_in_millis")>]
+        CompletionTimeInMillis: EpochTime<UnitMillis> option
+        [<System.Text.Json.Serialization.JsonPropertyName("error")>]
+        Error: ErrorCause option
     }
 
     type AsyncSearchResponseException<'TDocument> = {
@@ -17131,12 +22012,15 @@ module Types =
     type Audit = {
         [<System.Text.Json.Serialization.JsonPropertyName("outputs")>]
         Outputs: string list option
+        [<System.Text.Json.Serialization.JsonPropertyName("enabled")>]
+        Enabled: bool
     }
 
         with
         static member empty : Audit =
             {
                 Outputs = None
+                Enabled = Unchecked.defaultof<_>
             }
 
     type AuthenticateApiKey = {
@@ -17227,6 +22111,20 @@ module Types =
         AuthenticationProvider: AuthenticationProvider option
         [<System.Text.Json.Serialization.JsonPropertyName("authentication_type")>]
         AuthenticationType: string
+        [<System.Text.Json.Serialization.JsonPropertyName("email")>]
+        Email: string option option
+        [<System.Text.Json.Serialization.JsonPropertyName("full_name")>]
+        FullName: Name option option
+        [<System.Text.Json.Serialization.JsonPropertyName("metadata")>]
+        Metadata: Metadata
+        [<System.Text.Json.Serialization.JsonPropertyName("roles")>]
+        Roles: string list
+        [<System.Text.Json.Serialization.JsonPropertyName("username")>]
+        Username: Username
+        [<System.Text.Json.Serialization.JsonPropertyName("enabled")>]
+        Enabled: bool
+        [<System.Text.Json.Serialization.JsonPropertyName("profile_uid")>]
+        ProfileUid: UserProfileId option
     }
 
         with
@@ -17236,6 +22134,13 @@ module Types =
                 LookupRealm = Unchecked.defaultof<_>
                 AuthenticationProvider = None
                 AuthenticationType = Unchecked.defaultof<_>
+                Email = None
+                FullName = None
+                Metadata = Unchecked.defaultof<_>
+                Roles = Unchecked.defaultof<_>
+                Username = Unchecked.defaultof<_>
+                Enabled = Unchecked.defaultof<_>
+                ProfileUid = None
             }
 
     type AuthenticationRealm = {
@@ -17631,6 +22536,14 @@ module Types =
         MaxConcurrentBatchDeletes: Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("readonly")>]
         Readonly: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("chunk_size")>]
+        ChunkSize: ByteSize option
+        [<System.Text.Json.Serialization.JsonPropertyName("compress")>]
+        Compress: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_restore_bytes_per_sec")>]
+        MaxRestoreBytesPerSec: ByteSize option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_snapshot_bytes_per_sec")>]
+        MaxSnapshotBytesPerSec: ByteSize option
     }
 
         with
@@ -17643,6 +22556,10 @@ module Types =
                 LocationMode = None
                 MaxConcurrentBatchDeletes = None
                 Readonly = None
+                ChunkSize = None
+                Compress = None
+                MaxRestoreBytesPerSec = None
+                MaxSnapshotBytesPerSec = None
             }
 
     type Uuid = string
@@ -17663,6 +22580,8 @@ module Types =
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("settings")>]
         Settings: AzureRepositorySettings option
+        [<System.Text.Json.Serialization.JsonPropertyName("uuid")>]
+        Uuid: Uuid option
     }
 
         with
@@ -17670,6 +22589,7 @@ module Types =
             {
                 Type = "azure"
                 Settings = None
+                Uuid = None
             }
 
     [<RequireQualifiedAccess>]
@@ -19306,6 +24226,10 @@ module Types =
         AutoFollowPatternsCount: Integer
         [<System.Text.Json.Serialization.JsonPropertyName("follower_indices_count")>]
         FollowerIndicesCount: Integer
+        [<System.Text.Json.Serialization.JsonPropertyName("available")>]
+        Available: bool
+        [<System.Text.Json.Serialization.JsonPropertyName("enabled")>]
+        Enabled: bool
     }
 
         with
@@ -19313,6 +24237,8 @@ module Types =
             {
                 AutoFollowPatternsCount = Unchecked.defaultof<_>
                 FollowerIndicesCount = Unchecked.defaultof<_>
+                Available = Unchecked.defaultof<_>
+                Enabled = Unchecked.defaultof<_>
             }
 
     type CertificateInformation = {
@@ -21653,7 +26579,7 @@ module Types =
         [<System.Text.Json.Serialization.JsonPropertyName("error_trace")>]
         ErrorTrace: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("filter_path")>]
-        FilterPath: System.Text.Json.JsonElement option
+        FilterPath: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("human")>]
         Human: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("pretty")>]
@@ -21842,13 +26768,19 @@ module Types =
 
     type CompletionSuggester = {
         [<System.Text.Json.Serialization.JsonPropertyName("contexts")>]
-        Contexts: Map<Field, System.Text.Json.JsonElement> option
+        Contexts: Map<Field, CompletionContext list> option
         [<System.Text.Json.Serialization.JsonPropertyName("fuzzy")>]
         Fuzzy: SuggestFuzziness option
         [<System.Text.Json.Serialization.JsonPropertyName("regex")>]
         Regex: RegexOptions option
         [<System.Text.Json.Serialization.JsonPropertyName("skip_duplicates")>]
         SkipDuplicates: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("field")>]
+        Field: Field
+        [<System.Text.Json.Serialization.JsonPropertyName("analyzer")>]
+        Analyzer: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("size")>]
+        Size: Integer option
     }
 
         with
@@ -21858,6 +26790,9 @@ module Types =
                 Fuzzy = None
                 Regex = None
                 SkipDuplicates = None
+                Field = Unchecked.defaultof<_>
+                Analyzer = None
+                Size = None
             }
 
     /// The completion tool function definition.
@@ -22042,12 +26977,27 @@ module Types =
     type DataStreamLifecycleWithRollover = {
         [<System.Text.Json.Serialization.JsonPropertyName("rollover")>]
         Rollover: DataStreamLifecycleRolloverConditions option
+        [<System.Text.Json.Serialization.JsonPropertyName("data_retention")>]
+        DataRetention: Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("downsampling")>]
+        Downsampling: DownsamplingRound list option
+        [<System.Text.Json.Serialization.JsonPropertyName("downsampling_method")>]
+        DownsamplingMethod: SamplingMethod option
+        [<System.Text.Json.Serialization.JsonPropertyName("enabled")>]
+        Enabled: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("frozen_after")>]
+        FrozenAfter: Duration option
     }
 
         with
         static member empty : DataStreamLifecycleWithRollover =
             {
                 Rollover = None
+                DataRetention = None
+                Downsampling = None
+                DownsamplingMethod = None
+                Enabled = None
+                FrozenAfter = None
             }
 
     type RetentionLease = {
@@ -22094,11 +27044,11 @@ module Types =
         [<System.Text.Json.Serialization.JsonPropertyName("field")>]
         Field: Fields option
         [<System.Text.Json.Serialization.JsonPropertyName("order")>]
-        Order: System.Text.Json.JsonElement option
+        Order: SegmentSortOrder list option
         [<System.Text.Json.Serialization.JsonPropertyName("mode")>]
-        Mode: System.Text.Json.JsonElement option
+        Mode: SegmentSortMode list option
         [<System.Text.Json.Serialization.JsonPropertyName("missing")>]
-        Missing: System.Text.Json.JsonElement option
+        Missing: SegmentSortMissing list option
     }
 
         with
@@ -22944,7 +27894,7 @@ module Types =
         [<System.Text.Json.Serialization.JsonPropertyName("mode")>]
         Mode: string option
         [<System.Text.Json.Serialization.JsonPropertyName("routing_path")>]
-        RoutingPath: System.Text.Json.JsonElement option
+        RoutingPath: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("soft_deletes")>]
         SoftDeletes: SoftDeletes option
         [<System.Text.Json.Serialization.JsonPropertyName("sort")>]
@@ -23126,17 +28076,17 @@ module Types =
 
     and DynamicTemplateMeta = {
         [<System.Text.Json.Serialization.JsonPropertyName("match")>]
-        Match: System.Text.Json.JsonElement option
+        Match: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("path_match")>]
-        PathMatch: System.Text.Json.JsonElement option
+        PathMatch: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("unmatch")>]
-        Unmatch: System.Text.Json.JsonElement option
+        Unmatch: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("path_unmatch")>]
-        PathUnmatch: System.Text.Json.JsonElement option
+        PathUnmatch: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("match_mapping_type")>]
-        MatchMappingType: System.Text.Json.JsonElement option
+        MatchMappingType: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("unmatch_mapping_type")>]
-        UnmatchMappingType: System.Text.Json.JsonElement option
+        UnmatchMappingType: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("match_pattern")>]
         MatchPattern: MatchType option
     }
@@ -24571,6 +29521,20 @@ module Types =
         Pipeline: string option
         [<System.Text.Json.Serialization.JsonPropertyName("require_alias")>]
         RequireAlias: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("_id")>]
+        Id: Id option
+        [<System.Text.Json.Serialization.JsonPropertyName("_index")>]
+        Index: IndexName option
+        [<System.Text.Json.Serialization.JsonPropertyName("routing")>]
+        Routing: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("if_primary_term")>]
+        IfPrimaryTerm: Long option
+        [<System.Text.Json.Serialization.JsonPropertyName("if_seq_no")>]
+        IfSeqNo: SequenceNumber option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionNumber option
+        [<System.Text.Json.Serialization.JsonPropertyName("version_type")>]
+        VersionType: VersionType option
     }
 
         with
@@ -24579,9 +29543,52 @@ module Types =
                 DynamicTemplates = None
                 Pipeline = None
                 RequireAlias = None
+                Id = None
+                Index = None
+                Routing = None
+                IfPrimaryTerm = None
+                IfSeqNo = None
+                Version = None
+                VersionType = None
             }
 
-    type CreateOperation = System.Text.Json.JsonElement
+    type CreateOperation = {
+        [<System.Text.Json.Serialization.JsonPropertyName("_id")>]
+        Id: Id option
+        [<System.Text.Json.Serialization.JsonPropertyName("_index")>]
+        Index: IndexName option
+        [<System.Text.Json.Serialization.JsonPropertyName("routing")>]
+        Routing: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("if_primary_term")>]
+        IfPrimaryTerm: Long option
+        [<System.Text.Json.Serialization.JsonPropertyName("if_seq_no")>]
+        IfSeqNo: SequenceNumber option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionNumber option
+        [<System.Text.Json.Serialization.JsonPropertyName("version_type")>]
+        VersionType: VersionType option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic_templates")>]
+        DynamicTemplates: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("pipeline")>]
+        Pipeline: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("require_alias")>]
+        RequireAlias: bool option
+    }
+
+        with
+        static member empty : CreateOperation =
+            {
+                Id = None
+                Index = None
+                Routing = None
+                IfPrimaryTerm = None
+                IfSeqNo = None
+                Version = None
+                VersionType = None
+                DynamicTemplates = None
+                Pipeline = None
+                RequireAlias = None
+            }
 
     type CreatedStatus = {
         [<System.Text.Json.Serialization.JsonPropertyName("created")>]
@@ -25204,12 +30211,24 @@ module Types =
     type DataStreamLifecycleIndicator = {
         [<System.Text.Json.Serialization.JsonPropertyName("details")>]
         Details: DataStreamLifecycleDetails option
+        [<System.Text.Json.Serialization.JsonPropertyName("status")>]
+        Status: IndicatorHealthStatus
+        [<System.Text.Json.Serialization.JsonPropertyName("symptom")>]
+        Symptom: string
+        [<System.Text.Json.Serialization.JsonPropertyName("impacts")>]
+        Impacts: Impact list option
+        [<System.Text.Json.Serialization.JsonPropertyName("diagnosis")>]
+        Diagnosis: Diagnosis list option
     }
 
         with
         static member empty : DataStreamLifecycleIndicator =
             {
                 Details = None
+                Status = Unchecked.defaultof<_>
+                Symptom = Unchecked.defaultof<_>
+                Impacts = None
+                Diagnosis = None
             }
 
     type DataStreamMappings = {
@@ -25344,6 +30363,10 @@ module Types =
         DataStreams: Long
         [<System.Text.Json.Serialization.JsonPropertyName("indices_count")>]
         IndicesCount: Long
+        [<System.Text.Json.Serialization.JsonPropertyName("available")>]
+        Available: bool
+        [<System.Text.Json.Serialization.JsonPropertyName("enabled")>]
+        Enabled: bool
     }
 
         with
@@ -25351,6 +30374,8 @@ module Types =
             {
                 DataStreams = Unchecked.defaultof<_>
                 IndicesCount = Unchecked.defaultof<_>
+                Available = Unchecked.defaultof<_>
+                Enabled = Unchecked.defaultof<_>
             }
 
     type DataStreamsStatsItem = {
@@ -25425,6 +30450,10 @@ module Types =
         DataContent: DataTierPhaseStatistics
         [<System.Text.Json.Serialization.JsonPropertyName("data_hot")>]
         DataHot: DataTierPhaseStatistics
+        [<System.Text.Json.Serialization.JsonPropertyName("available")>]
+        Available: bool
+        [<System.Text.Json.Serialization.JsonPropertyName("enabled")>]
+        Enabled: bool
     }
 
         with
@@ -25435,6 +30464,8 @@ module Types =
                 DataCold = Unchecked.defaultof<_>
                 DataContent = Unchecked.defaultof<_>
                 DataHot = Unchecked.defaultof<_>
+                Available = Unchecked.defaultof<_>
+                Enabled = Unchecked.defaultof<_>
             }
 
     type Maxmind = {
@@ -26052,6 +31083,42 @@ module Types =
         ClassAssignmentObjective: string option
         [<System.Text.Json.Serialization.JsonPropertyName("num_top_classes")>]
         NumTopClasses: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("alpha")>]
+        Alpha: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("dependent_variable")>]
+        DependentVariable: string
+        [<System.Text.Json.Serialization.JsonPropertyName("downsample_factor")>]
+        DownsampleFactor: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("early_stopping_enabled")>]
+        EarlyStoppingEnabled: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("eta")>]
+        Eta: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("eta_growth_rate_per_tree")>]
+        EtaGrowthRatePerTree: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("feature_bag_fraction")>]
+        FeatureBagFraction: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("feature_processors")>]
+        FeatureProcessors: DataframeAnalysisFeatureProcessor list option
+        [<System.Text.Json.Serialization.JsonPropertyName("gamma")>]
+        Gamma: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("lambda")>]
+        Lambda: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_optimization_rounds_per_hyperparameter")>]
+        MaxOptimizationRoundsPerHyperparameter: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_trees")>]
+        MaxTrees: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("num_top_feature_importance_values")>]
+        NumTopFeatureImportanceValues: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("prediction_field_name")>]
+        PredictionFieldName: Field option
+        [<System.Text.Json.Serialization.JsonPropertyName("randomize_seed")>]
+        RandomizeSeed: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("soft_tree_depth_limit")>]
+        SoftTreeDepthLimit: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("soft_tree_depth_tolerance")>]
+        SoftTreeDepthTolerance: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("training_percent")>]
+        TrainingPercent: Percentage option
     }
 
         with
@@ -26059,6 +31126,24 @@ module Types =
             {
                 ClassAssignmentObjective = None
                 NumTopClasses = None
+                Alpha = None
+                DependentVariable = Unchecked.defaultof<_>
+                DownsampleFactor = None
+                EarlyStoppingEnabled = None
+                Eta = None
+                EtaGrowthRatePerTree = None
+                FeatureBagFraction = None
+                FeatureProcessors = None
+                Gamma = None
+                Lambda = None
+                MaxOptimizationRoundsPerHyperparameter = None
+                MaxTrees = None
+                NumTopFeatureImportanceValues = None
+                PredictionFieldName = None
+                RandomizeSeed = None
+                SoftTreeDepthLimit = None
+                SoftTreeDepthTolerance = None
+                TrainingPercent = None
             }
 
     type DataframeAnalysisOutlierDetection = {
@@ -26092,6 +31177,42 @@ module Types =
         LossFunction: string option
         [<System.Text.Json.Serialization.JsonPropertyName("loss_function_parameter")>]
         LossFunctionParameter: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("alpha")>]
+        Alpha: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("dependent_variable")>]
+        DependentVariable: string
+        [<System.Text.Json.Serialization.JsonPropertyName("downsample_factor")>]
+        DownsampleFactor: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("early_stopping_enabled")>]
+        EarlyStoppingEnabled: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("eta")>]
+        Eta: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("eta_growth_rate_per_tree")>]
+        EtaGrowthRatePerTree: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("feature_bag_fraction")>]
+        FeatureBagFraction: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("feature_processors")>]
+        FeatureProcessors: DataframeAnalysisFeatureProcessor list option
+        [<System.Text.Json.Serialization.JsonPropertyName("gamma")>]
+        Gamma: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("lambda")>]
+        Lambda: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_optimization_rounds_per_hyperparameter")>]
+        MaxOptimizationRoundsPerHyperparameter: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_trees")>]
+        MaxTrees: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("num_top_feature_importance_values")>]
+        NumTopFeatureImportanceValues: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("prediction_field_name")>]
+        PredictionFieldName: Field option
+        [<System.Text.Json.Serialization.JsonPropertyName("randomize_seed")>]
+        RandomizeSeed: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("soft_tree_depth_limit")>]
+        SoftTreeDepthLimit: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("soft_tree_depth_tolerance")>]
+        SoftTreeDepthTolerance: Double option
+        [<System.Text.Json.Serialization.JsonPropertyName("training_percent")>]
+        TrainingPercent: Percentage option
     }
 
         with
@@ -26099,6 +31220,24 @@ module Types =
             {
                 LossFunction = None
                 LossFunctionParameter = None
+                Alpha = None
+                DependentVariable = Unchecked.defaultof<_>
+                DownsampleFactor = None
+                EarlyStoppingEnabled = None
+                Eta = None
+                EtaGrowthRatePerTree = None
+                FeatureBagFraction = None
+                FeatureProcessors = None
+                Gamma = None
+                Lambda = None
+                MaxOptimizationRoundsPerHyperparameter = None
+                MaxTrees = None
+                NumTopFeatureImportanceValues = None
+                PredictionFieldName = None
+                RandomizeSeed = None
+                SoftTreeDepthLimit = None
+                SoftTreeDepthTolerance = None
+                TrainingPercent = None
             }
 
     [<RequireQualifiedAccess>]
@@ -26540,23 +31679,29 @@ module Types =
     type DataframeEvaluationSummaryAucRoc = {
         [<System.Text.Json.Serialization.JsonPropertyName("curve")>]
         Curve: DataframeEvaluationSummaryAucRocCurveItem list option
+        [<System.Text.Json.Serialization.JsonPropertyName("value")>]
+        Value: Double
     }
 
         with
         static member empty : DataframeEvaluationSummaryAucRoc =
             {
                 Curve = None
+                Value = Unchecked.defaultof<_>
             }
 
     type DataframeEvaluationClass = {
         [<System.Text.Json.Serialization.JsonPropertyName("class_name")>]
         ClassName: Name
+        [<System.Text.Json.Serialization.JsonPropertyName("value")>]
+        Value: Double
     }
 
         with
         static member empty : DataframeEvaluationClass =
             {
                 ClassName = Unchecked.defaultof<_>
+                Value = Unchecked.defaultof<_>
             }
 
     type DataframeClassificationSummaryAccuracy = {
@@ -26674,6 +31819,12 @@ module Types =
         Accuracy: Map<string, System.Text.Json.JsonElement> option
         [<System.Text.Json.Serialization.JsonPropertyName("multiclass_confusion_matrix")>]
         MulticlassConfusionMatrix: Map<string, System.Text.Json.JsonElement> option
+        [<System.Text.Json.Serialization.JsonPropertyName("auc_roc")>]
+        AucRoc: DataframeEvaluationClassificationMetricsAucRoc option
+        [<System.Text.Json.Serialization.JsonPropertyName("precision")>]
+        Precision: Map<string, System.Text.Json.JsonElement> option
+        [<System.Text.Json.Serialization.JsonPropertyName("recall")>]
+        Recall: Map<string, System.Text.Json.JsonElement> option
     }
 
         with
@@ -26681,6 +31832,9 @@ module Types =
             {
                 Accuracy = None
                 MulticlassConfusionMatrix = None
+                AucRoc = None
+                Precision = None
+                Recall = None
             }
 
     type DataframeEvaluationClassification = {
@@ -26706,12 +31860,21 @@ module Types =
     type DataframeEvaluationOutlierDetectionMetrics = {
         [<System.Text.Json.Serialization.JsonPropertyName("confusion_matrix")>]
         ConfusionMatrix: Map<string, System.Text.Json.JsonElement> option
+        [<System.Text.Json.Serialization.JsonPropertyName("auc_roc")>]
+        AucRoc: DataframeEvaluationClassificationMetricsAucRoc option
+        [<System.Text.Json.Serialization.JsonPropertyName("precision")>]
+        Precision: Map<string, System.Text.Json.JsonElement> option
+        [<System.Text.Json.Serialization.JsonPropertyName("recall")>]
+        Recall: Map<string, System.Text.Json.JsonElement> option
     }
 
         with
         static member empty : DataframeEvaluationOutlierDetectionMetrics =
             {
                 ConfusionMatrix = None
+                AucRoc = None
+                Precision = None
+                Recall = None
             }
 
     type DataframeEvaluationOutlierDetection = {
@@ -27125,15 +32288,45 @@ module Types =
     type DeleteInferenceEndpointResult = {
         [<System.Text.Json.Serialization.JsonPropertyName("pipelines")>]
         Pipelines: string list
+        [<System.Text.Json.Serialization.JsonPropertyName("acknowledged")>]
+        Acknowledged: bool
     }
 
         with
         static member empty : DeleteInferenceEndpointResult =
             {
                 Pipelines = Unchecked.defaultof<_>
+                Acknowledged = Unchecked.defaultof<_>
             }
 
-    type DeleteOperation = System.Text.Json.JsonElement
+    type DeleteOperation = {
+        [<System.Text.Json.Serialization.JsonPropertyName("_id")>]
+        Id: Id option
+        [<System.Text.Json.Serialization.JsonPropertyName("_index")>]
+        Index: IndexName option
+        [<System.Text.Json.Serialization.JsonPropertyName("routing")>]
+        Routing: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("if_primary_term")>]
+        IfPrimaryTerm: Long option
+        [<System.Text.Json.Serialization.JsonPropertyName("if_seq_no")>]
+        IfSeqNo: SequenceNumber option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionNumber option
+        [<System.Text.Json.Serialization.JsonPropertyName("version_type")>]
+        VersionType: VersionType option
+    }
+
+        with
+        static member empty : DeleteOperation =
+            {
+                Id = None
+                Index = None
+                Routing = None
+                IfPrimaryTerm = None
+                IfSeqNo = None
+                Version = None
+                VersionType = None
+            }
 
     /// Dense Embedding results containing bytes are represented as Dense
     type DenseByteVector = Byte list
@@ -27496,12 +32689,24 @@ module Types =
     type DiskIndicator = {
         [<System.Text.Json.Serialization.JsonPropertyName("details")>]
         Details: DiskIndicatorDetails option
+        [<System.Text.Json.Serialization.JsonPropertyName("status")>]
+        Status: IndicatorHealthStatus
+        [<System.Text.Json.Serialization.JsonPropertyName("symptom")>]
+        Symptom: string
+        [<System.Text.Json.Serialization.JsonPropertyName("impacts")>]
+        Impacts: Impact list option
+        [<System.Text.Json.Serialization.JsonPropertyName("diagnosis")>]
+        Diagnosis: Diagnosis list option
     }
 
         with
         static member empty : DiskIndicator =
             {
                 Details = None
+                Status = Unchecked.defaultof<_>
+                Symptom = Unchecked.defaultof<_>
+                Impacts = None
+                Diagnosis = None
             }
 
     type Document = {
@@ -27861,6 +33066,12 @@ module Types =
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("data")>]
         Data: string
+        [<System.Text.Json.Serialization.JsonPropertyName("format")>]
+        Format: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("id")>]
+        Id: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("index")>]
+        Index: Integer option
     }
 
         with
@@ -27868,6 +33079,9 @@ module Types =
             {
                 Type = "reasoning.encrypted"
                 Data = Unchecked.defaultof<_>
+                Format = None
+                Id = None
+                Index = None
             }
 
     [<RequireQualifiedAccess>]
@@ -28018,6 +33232,10 @@ module Types =
         Features: EqlFeatures
         [<System.Text.Json.Serialization.JsonPropertyName("queries")>]
         Queries: Map<string, Query>
+        [<System.Text.Json.Serialization.JsonPropertyName("available")>]
+        Available: bool
+        [<System.Text.Json.Serialization.JsonPropertyName("enabled")>]
+        Enabled: bool
     }
 
         with
@@ -28025,6 +33243,8 @@ module Types =
             {
                 Features = Unchecked.defaultof<_>
                 Queries = Unchecked.defaultof<_>
+                Available = Unchecked.defaultof<_>
+                Enabled = Unchecked.defaultof<_>
             }
 
     type HitsEvent<'TEvent> = {
@@ -28246,9 +33466,54 @@ module Types =
                 LoggedText = Unchecked.defaultof<_>
             }
 
-    type HttpInputRequestResult = System.Text.Json.JsonElement
+    type HttpInputRequestResult = {
+        [<System.Text.Json.Serialization.JsonPropertyName("auth")>]
+        Auth: HttpInputAuthentication option
+        [<System.Text.Json.Serialization.JsonPropertyName("body")>]
+        Body: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("connection_timeout")>]
+        ConnectionTimeout: Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("headers")>]
+        Headers: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("host")>]
+        Host: Host option
+        [<System.Text.Json.Serialization.JsonPropertyName("method")>]
+        Method: HttpInputMethod option
+        [<System.Text.Json.Serialization.JsonPropertyName("params")>]
+        Params: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("path")>]
+        Path: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("port")>]
+        Port: Uint option
+        [<System.Text.Json.Serialization.JsonPropertyName("proxy")>]
+        Proxy: HttpInputProxy option
+        [<System.Text.Json.Serialization.JsonPropertyName("read_timeout")>]
+        ReadTimeout: Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("scheme")>]
+        Scheme: ConnectionScheme option
+        [<System.Text.Json.Serialization.JsonPropertyName("url")>]
+        Url: string option
+    }
 
-    type HttpHeaders = Map<string, System.Text.Json.JsonElement>
+        with
+        static member empty : HttpInputRequestResult =
+            {
+                Auth = None
+                Body = None
+                ConnectionTimeout = None
+                Headers = None
+                Host = None
+                Method = None
+                Params = None
+                Path = None
+                Port = None
+                Proxy = None
+                ReadTimeout = None
+                Scheme = None
+                Url = None
+            }
+
+    type HttpHeaders = Map<string, string list>
 
     type HttpInputResponseResult = {
         [<System.Text.Json.Serialization.JsonPropertyName("body")>]
@@ -28521,6 +33786,26 @@ module Types =
         FreePercent: Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("used_percent")>]
         UsedPercent: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("adjusted_total_in_bytes")>]
+        AdjustedTotalInBytes: Long option
+        [<System.Text.Json.Serialization.JsonPropertyName("resident")>]
+        Resident: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("resident_in_bytes")>]
+        ResidentInBytes: Long option
+        [<System.Text.Json.Serialization.JsonPropertyName("share")>]
+        Share: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("share_in_bytes")>]
+        ShareInBytes: Long option
+        [<System.Text.Json.Serialization.JsonPropertyName("total_virtual")>]
+        TotalVirtual: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("total_virtual_in_bytes")>]
+        TotalVirtualInBytes: Long option
+        [<System.Text.Json.Serialization.JsonPropertyName("total_in_bytes")>]
+        TotalInBytes: Long option
+        [<System.Text.Json.Serialization.JsonPropertyName("free_in_bytes")>]
+        FreeInBytes: Long option
+        [<System.Text.Json.Serialization.JsonPropertyName("used_in_bytes")>]
+        UsedInBytes: Long option
     }
 
         with
@@ -28528,6 +33813,16 @@ module Types =
             {
                 FreePercent = None
                 UsedPercent = None
+                AdjustedTotalInBytes = None
+                Resident = None
+                ResidentInBytes = None
+                Share = None
+                ShareInBytes = None
+                TotalVirtual = None
+                TotalVirtualInBytes = None
+                TotalInBytes = None
+                FreeInBytes = None
+                UsedInBytes = None
             }
 
     type FailedNodeException = {
@@ -29091,6 +34386,12 @@ module Types =
         Smoothing: SmoothingModelContainer option
         [<System.Text.Json.Serialization.JsonPropertyName("token_limit")>]
         TokenLimit: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("field")>]
+        Field: Field
+        [<System.Text.Json.Serialization.JsonPropertyName("analyzer")>]
+        Analyzer: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("size")>]
+        Size: Integer option
     }
 
         with
@@ -29108,6 +34409,9 @@ module Types =
                 ShardSize = None
                 Smoothing = None
                 TokenLimit = None
+                Field = Unchecked.defaultof<_>
+                Analyzer = None
+                Size = None
             }
 
     [<RequireQualifiedAccess>]
@@ -29146,6 +34450,12 @@ module Types =
         StringDistance: StringDistance option
         [<System.Text.Json.Serialization.JsonPropertyName("suggest_mode")>]
         SuggestMode: SuggestMode option
+        [<System.Text.Json.Serialization.JsonPropertyName("field")>]
+        Field: Field
+        [<System.Text.Json.Serialization.JsonPropertyName("analyzer")>]
+        Analyzer: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("size")>]
+        Size: Integer option
     }
 
         with
@@ -29162,6 +34472,9 @@ module Types =
                 Sort = None
                 StringDistance = None
                 SuggestMode = None
+                Field = Unchecked.defaultof<_>
+                Analyzer = None
+                Size = None
             }
 
     [<RequireQualifiedAccess>]
@@ -29327,12 +34640,24 @@ module Types =
     type FileSettingsIndicator = {
         [<System.Text.Json.Serialization.JsonPropertyName("details")>]
         Details: FileSettingsIndicatorDetails option
+        [<System.Text.Json.Serialization.JsonPropertyName("status")>]
+        Status: IndicatorHealthStatus
+        [<System.Text.Json.Serialization.JsonPropertyName("symptom")>]
+        Symptom: string
+        [<System.Text.Json.Serialization.JsonPropertyName("impacts")>]
+        Impacts: Impact list option
+        [<System.Text.Json.Serialization.JsonPropertyName("diagnosis")>]
+        Diagnosis: Diagnosis list option
     }
 
         with
         static member empty : FileSettingsIndicator =
             {
                 Details = None
+                Status = Unchecked.defaultof<_>
+                Symptom = Unchecked.defaultof<_>
+                Impacts = None
+                Diagnosis = None
             }
 
     type FileSystemTotal = {
@@ -29422,21 +34747,78 @@ module Types =
             }
 
     /// BERT and MPNet tokenization configuration options
-    type NlpBertTokenizationConfig = System.Text.Json.JsonElement
+    type NlpBertTokenizationConfig = {
+        [<System.Text.Json.Serialization.JsonPropertyName("do_lower_case")>]
+        DoLowerCase: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_sequence_length")>]
+        MaxSequenceLength: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("span")>]
+        Span: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("truncate")>]
+        Truncate: TokenizationTruncate option
+        [<System.Text.Json.Serialization.JsonPropertyName("with_special_tokens")>]
+        WithSpecialTokens: bool option
+    }
+
+        with
+        static member empty : NlpBertTokenizationConfig =
+            {
+                DoLowerCase = None
+                MaxSequenceLength = None
+                Span = None
+                Truncate = None
+                WithSpecialTokens = None
+            }
 
     /// RoBERTa tokenization configuration options
     type NlpRobertaTokenizationConfig = {
         [<System.Text.Json.Serialization.JsonPropertyName("add_prefix_space")>]
         AddPrefixSpace: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("do_lower_case")>]
+        DoLowerCase: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_sequence_length")>]
+        MaxSequenceLength: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("span")>]
+        Span: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("truncate")>]
+        Truncate: TokenizationTruncate option
+        [<System.Text.Json.Serialization.JsonPropertyName("with_special_tokens")>]
+        WithSpecialTokens: bool option
     }
 
         with
         static member empty : NlpRobertaTokenizationConfig =
             {
                 AddPrefixSpace = None
+                DoLowerCase = None
+                MaxSequenceLength = None
+                Span = None
+                Truncate = None
+                WithSpecialTokens = None
             }
 
-    type XlmRobertaTokenizationConfig = System.Text.Json.JsonElement
+    type XlmRobertaTokenizationConfig = {
+        [<System.Text.Json.Serialization.JsonPropertyName("do_lower_case")>]
+        DoLowerCase: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_sequence_length")>]
+        MaxSequenceLength: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("span")>]
+        Span: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("truncate")>]
+        Truncate: TokenizationTruncate option
+        [<System.Text.Json.Serialization.JsonPropertyName("with_special_tokens")>]
+        WithSpecialTokens: bool option
+    }
+
+        with
+        static member empty : XlmRobertaTokenizationConfig =
+            {
+                DoLowerCase = None
+                MaxSequenceLength = None
+                Span = None
+                Truncate = None
+                WithSpecialTokens = None
+            }
 
     /// Tokenization options stored in inference configuration
     [<RequireQualifiedAccess>]
@@ -29625,12 +35007,18 @@ module Types =
     type Flattened = {
         [<System.Text.Json.Serialization.JsonPropertyName("field_count")>]
         FieldCount: Integer
+        [<System.Text.Json.Serialization.JsonPropertyName("available")>]
+        Available: bool
+        [<System.Text.Json.Serialization.JsonPropertyName("enabled")>]
+        Enabled: bool
     }
 
         with
         static member empty : Flattened =
             {
                 FieldCount = Unchecked.defaultof<_>
+                Available = Unchecked.defaultof<_>
+                Enabled = Unchecked.defaultof<_>
             }
 
     type FlushStats = {
@@ -29882,12 +35270,15 @@ module Types =
     type ForceMergeResponseBody = {
         [<System.Text.Json.Serialization.JsonPropertyName("task")>]
         Task: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("_shards")>]
+        Shards: ShardStatistics option
     }
 
         with
         static member empty : ForceMergeResponseBody =
             {
                 Task = None
+                Shards = None
             }
 
     [<RequireQualifiedAccess>]
@@ -29947,6 +35338,14 @@ module Types =
         Client: string option
         [<System.Text.Json.Serialization.JsonPropertyName("readonly")>]
         Readonly: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("chunk_size")>]
+        ChunkSize: ByteSize option
+        [<System.Text.Json.Serialization.JsonPropertyName("compress")>]
+        Compress: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_restore_bytes_per_sec")>]
+        MaxRestoreBytesPerSec: ByteSize option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_snapshot_bytes_per_sec")>]
+        MaxSnapshotBytesPerSec: ByteSize option
     }
 
         with
@@ -29957,6 +35356,10 @@ module Types =
                 BasePath = None
                 Client = None
                 Readonly = None
+                ChunkSize = None
+                Compress = None
+                MaxRestoreBytesPerSec = None
+                MaxSnapshotBytesPerSec = None
             }
 
     type GcsRepository = {
@@ -29964,6 +35367,8 @@ module Types =
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("settings")>]
         Settings: GcsRepositorySettings
+        [<System.Text.Json.Serialization.JsonPropertyName("uuid")>]
+        Uuid: Uuid option
     }
 
         with
@@ -29971,6 +35376,7 @@ module Types =
             {
                 Type = "gcs"
                 Settings = Unchecked.defaultof<_>
+                Uuid = None
             }
 
     type GeoIpDownloadStatistics = {
@@ -30275,6 +35681,10 @@ module Types =
         NodesWithGpu: Integer
         [<System.Text.Json.Serialization.JsonPropertyName("nodes")>]
         Nodes: GpuNodeStats list
+        [<System.Text.Json.Serialization.JsonPropertyName("available")>]
+        Available: bool
+        [<System.Text.Json.Serialization.JsonPropertyName("enabled")>]
+        Enabled: bool
     }
 
         with
@@ -30283,6 +35693,8 @@ module Types =
                 IndexBuildCount = Unchecked.defaultof<_>
                 NodesWithGpu = Unchecked.defaultof<_>
                 Nodes = Unchecked.defaultof<_>
+                Available = Unchecked.defaultof<_>
+                Enabled = Unchecked.defaultof<_>
             }
 
     type GrantApiKey = {
@@ -30607,19 +36019,25 @@ module Types =
     type HealthStatistics = {
         [<System.Text.Json.Serialization.JsonPropertyName("invocations")>]
         Invocations: Invocations
+        [<System.Text.Json.Serialization.JsonPropertyName("available")>]
+        Available: bool
+        [<System.Text.Json.Serialization.JsonPropertyName("enabled")>]
+        Enabled: bool
     }
 
         with
         static member empty : HealthStatistics =
             {
                 Invocations = Unchecked.defaultof<_>
+                Available = Unchecked.defaultof<_>
+                Enabled = Unchecked.defaultof<_>
             }
 
     type Hint = {
         [<System.Text.Json.Serialization.JsonPropertyName("uids")>]
         Uids: UserProfileId list option
         [<System.Text.Json.Serialization.JsonPropertyName("labels")>]
-        Labels: Map<string, System.Text.Json.JsonElement> option
+        Labels: Map<string, string list> option
     }
 
         with
@@ -30962,12 +36380,24 @@ module Types =
     type IlmIndicator = {
         [<System.Text.Json.Serialization.JsonPropertyName("details")>]
         Details: IlmIndicatorDetails option
+        [<System.Text.Json.Serialization.JsonPropertyName("status")>]
+        Status: IndicatorHealthStatus
+        [<System.Text.Json.Serialization.JsonPropertyName("symptom")>]
+        Symptom: string
+        [<System.Text.Json.Serialization.JsonPropertyName("impacts")>]
+        Impacts: Impact list option
+        [<System.Text.Json.Serialization.JsonPropertyName("diagnosis")>]
+        Diagnosis: Diagnosis list option
     }
 
         with
         static member empty : IlmIndicator =
             {
                 Details = None
+                Status = Unchecked.defaultof<_>
+                Symptom = Unchecked.defaultof<_>
+                Impacts = None
+                Diagnosis = None
             }
 
     type InProgress = {
@@ -31096,7 +36526,43 @@ module Types =
         | Open
         | Close
 
-    type IndexOperation = System.Text.Json.JsonElement
+    type IndexOperation = {
+        [<System.Text.Json.Serialization.JsonPropertyName("_id")>]
+        Id: Id option
+        [<System.Text.Json.Serialization.JsonPropertyName("_index")>]
+        Index: IndexName option
+        [<System.Text.Json.Serialization.JsonPropertyName("routing")>]
+        Routing: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("if_primary_term")>]
+        IfPrimaryTerm: Long option
+        [<System.Text.Json.Serialization.JsonPropertyName("if_seq_no")>]
+        IfSeqNo: SequenceNumber option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionNumber option
+        [<System.Text.Json.Serialization.JsonPropertyName("version_type")>]
+        VersionType: VersionType option
+        [<System.Text.Json.Serialization.JsonPropertyName("dynamic_templates")>]
+        DynamicTemplates: Map<string, string> option
+        [<System.Text.Json.Serialization.JsonPropertyName("pipeline")>]
+        Pipeline: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("require_alias")>]
+        RequireAlias: bool option
+    }
+
+        with
+        static member empty : IndexOperation =
+            {
+                Id = None
+                Index = None
+                Routing = None
+                IfPrimaryTerm = None
+                IfSeqNo = None
+                Version = None
+                VersionType = None
+                DynamicTemplates = None
+                Pipeline = None
+                RequireAlias = None
+            }
 
     type IndexPrivilegesCheck = {
         [<System.Text.Json.Serialization.JsonPropertyName("names")>]
@@ -31189,7 +36655,7 @@ module Types =
 
     type IndexSegment = {
         [<System.Text.Json.Serialization.JsonPropertyName("shards")>]
-        Shards: Map<string, System.Text.Json.JsonElement>
+        Shards: Map<string, ShardsSegment list>
     }
 
         with
@@ -32162,12 +37628,24 @@ module Types =
     type MasterIsStableIndicator = {
         [<System.Text.Json.Serialization.JsonPropertyName("details")>]
         Details: MasterIsStableIndicatorDetails option
+        [<System.Text.Json.Serialization.JsonPropertyName("status")>]
+        Status: IndicatorHealthStatus
+        [<System.Text.Json.Serialization.JsonPropertyName("symptom")>]
+        Symptom: string
+        [<System.Text.Json.Serialization.JsonPropertyName("impacts")>]
+        Impacts: Impact list option
+        [<System.Text.Json.Serialization.JsonPropertyName("diagnosis")>]
+        Diagnosis: Diagnosis list option
     }
 
         with
         static member empty : MasterIsStableIndicator =
             {
                 Details = None
+                Status = Unchecked.defaultof<_>
+                Symptom = Unchecked.defaultof<_>
+                Impacts = None
+                Diagnosis = None
             }
 
     type ShardsAvailabilityIndicatorDetails = {
@@ -32212,12 +37690,24 @@ module Types =
     type ShardsAvailabilityIndicator = {
         [<System.Text.Json.Serialization.JsonPropertyName("details")>]
         Details: ShardsAvailabilityIndicatorDetails option
+        [<System.Text.Json.Serialization.JsonPropertyName("status")>]
+        Status: IndicatorHealthStatus
+        [<System.Text.Json.Serialization.JsonPropertyName("symptom")>]
+        Symptom: string
+        [<System.Text.Json.Serialization.JsonPropertyName("impacts")>]
+        Impacts: Impact list option
+        [<System.Text.Json.Serialization.JsonPropertyName("diagnosis")>]
+        Diagnosis: Diagnosis list option
     }
 
         with
         static member empty : ShardsAvailabilityIndicator =
             {
                 Details = None
+                Status = Unchecked.defaultof<_>
+                Symptom = Unchecked.defaultof<_>
+                Impacts = None
+                Diagnosis = None
             }
 
     type RepositoryIntegrityIndicatorDetails = {
@@ -32241,12 +37731,24 @@ module Types =
     type RepositoryIntegrityIndicator = {
         [<System.Text.Json.Serialization.JsonPropertyName("details")>]
         Details: RepositoryIntegrityIndicatorDetails option
+        [<System.Text.Json.Serialization.JsonPropertyName("status")>]
+        Status: IndicatorHealthStatus
+        [<System.Text.Json.Serialization.JsonPropertyName("symptom")>]
+        Symptom: string
+        [<System.Text.Json.Serialization.JsonPropertyName("impacts")>]
+        Impacts: Impact list option
+        [<System.Text.Json.Serialization.JsonPropertyName("diagnosis")>]
+        Diagnosis: Diagnosis list option
     }
 
         with
         static member empty : RepositoryIntegrityIndicator =
             {
                 Details = None
+                Status = Unchecked.defaultof<_>
+                Symptom = Unchecked.defaultof<_>
+                Impacts = None
+                Diagnosis = None
             }
 
     type SlmIndicatorUnhealthyPolicies = {
@@ -32284,12 +37786,24 @@ module Types =
     type SlmIndicator = {
         [<System.Text.Json.Serialization.JsonPropertyName("details")>]
         Details: SlmIndicatorDetails option
+        [<System.Text.Json.Serialization.JsonPropertyName("status")>]
+        Status: IndicatorHealthStatus
+        [<System.Text.Json.Serialization.JsonPropertyName("symptom")>]
+        Symptom: string
+        [<System.Text.Json.Serialization.JsonPropertyName("impacts")>]
+        Impacts: Impact list option
+        [<System.Text.Json.Serialization.JsonPropertyName("diagnosis")>]
+        Diagnosis: Diagnosis list option
     }
 
         with
         static member empty : SlmIndicator =
             {
                 Details = None
+                Status = Unchecked.defaultof<_>
+                Symptom = Unchecked.defaultof<_>
+                Impacts = None
+                Diagnosis = None
             }
 
     type ShardsCapacityIndicatorTierDetail = {
@@ -32324,12 +37838,24 @@ module Types =
     type ShardsCapacityIndicator = {
         [<System.Text.Json.Serialization.JsonPropertyName("details")>]
         Details: ShardsCapacityIndicatorDetails option
+        [<System.Text.Json.Serialization.JsonPropertyName("status")>]
+        Status: IndicatorHealthStatus
+        [<System.Text.Json.Serialization.JsonPropertyName("symptom")>]
+        Symptom: string
+        [<System.Text.Json.Serialization.JsonPropertyName("impacts")>]
+        Impacts: Impact list option
+        [<System.Text.Json.Serialization.JsonPropertyName("diagnosis")>]
+        Diagnosis: Diagnosis list option
     }
 
         with
         static member empty : ShardsCapacityIndicator =
             {
                 Details = None
+                Status = Unchecked.defaultof<_>
+                Symptom = Unchecked.defaultof<_>
+                Impacts = None
+                Diagnosis = None
             }
 
     type Indicators = {
@@ -32370,12 +37896,15 @@ module Types =
     type IndicesAliasesResponseBody = {
         [<System.Text.Json.Serialization.JsonPropertyName("errors")>]
         Errors: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("acknowledged")>]
+        Acknowledged: bool
     }
 
         with
         static member empty : IndicesAliasesResponseBody =
             {
                 Errors = None
+                Acknowledged = Unchecked.defaultof<_>
             }
 
     [<RequireQualifiedAccess>]
@@ -32389,7 +37918,7 @@ module Types =
         [<System.Text.Json.Serialization.JsonPropertyName("field_security")>]
         FieldSecurity: FieldSecurity option
         [<System.Text.Json.Serialization.JsonPropertyName("names")>]
-        Names: System.Text.Json.JsonElement
+        Names: IndexName list
         [<System.Text.Json.Serialization.JsonPropertyName("privileges")>]
         Privileges: IndexPrivilege list
         [<System.Text.Json.Serialization.JsonPropertyName("query")>]
@@ -32845,12 +38374,15 @@ module Types =
     type IndicesResponseBase = {
         [<System.Text.Json.Serialization.JsonPropertyName("_shards")>]
         Shards: ShardStatistics option
+        [<System.Text.Json.Serialization.JsonPropertyName("acknowledged")>]
+        Acknowledged: bool
     }
 
         with
         static member empty : IndicesResponseBase =
             {
                 Shards = None
+                Acknowledged = Unchecked.defaultof<_>
             }
 
     [<RequireQualifiedAccess>]
@@ -33316,6 +38848,14 @@ module Types =
         InferenceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("task_type")>]
         TaskType: TaskType
+        [<System.Text.Json.Serialization.JsonPropertyName("chunking_settings")>]
+        ChunkingSettings: InferenceChunkingSettings option
+        [<System.Text.Json.Serialization.JsonPropertyName("service")>]
+        Service: string
+        [<System.Text.Json.Serialization.JsonPropertyName("service_settings")>]
+        ServiceSettings: ServiceSettings
+        [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
+        TaskSettings: TaskSettings option
     }
 
         with
@@ -33323,6 +38863,10 @@ module Types =
             {
                 InferenceId = Unchecked.defaultof<_>
                 TaskType = Unchecked.defaultof<_>
+                ChunkingSettings = None
+                Service = Unchecked.defaultof<_>
+                ServiceSettings = Unchecked.defaultof<_>
+                TaskSettings = None
             }
 
     [<RequireQualifiedAccess>]
@@ -33335,6 +38879,14 @@ module Types =
         InferenceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("task_type")>]
         TaskType: TaskTypeAi21
+        [<System.Text.Json.Serialization.JsonPropertyName("chunking_settings")>]
+        ChunkingSettings: InferenceChunkingSettings option
+        [<System.Text.Json.Serialization.JsonPropertyName("service")>]
+        Service: string
+        [<System.Text.Json.Serialization.JsonPropertyName("service_settings")>]
+        ServiceSettings: ServiceSettings
+        [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
+        TaskSettings: TaskSettings option
     }
 
         with
@@ -33342,6 +38894,10 @@ module Types =
             {
                 InferenceId = Unchecked.defaultof<_>
                 TaskType = Unchecked.defaultof<_>
+                ChunkingSettings = None
+                Service = Unchecked.defaultof<_>
+                ServiceSettings = Unchecked.defaultof<_>
+                TaskSettings = None
             }
 
     [<RequireQualifiedAccess>]
@@ -33356,6 +38912,14 @@ module Types =
         InferenceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("task_type")>]
         TaskType: TaskTypeAlibabaCloudAI
+        [<System.Text.Json.Serialization.JsonPropertyName("chunking_settings")>]
+        ChunkingSettings: InferenceChunkingSettings option
+        [<System.Text.Json.Serialization.JsonPropertyName("service")>]
+        Service: string
+        [<System.Text.Json.Serialization.JsonPropertyName("service_settings")>]
+        ServiceSettings: ServiceSettings
+        [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
+        TaskSettings: TaskSettings option
     }
 
         with
@@ -33363,6 +38927,10 @@ module Types =
             {
                 InferenceId = Unchecked.defaultof<_>
                 TaskType = Unchecked.defaultof<_>
+                ChunkingSettings = None
+                Service = Unchecked.defaultof<_>
+                ServiceSettings = Unchecked.defaultof<_>
+                TaskSettings = None
             }
 
     [<RequireQualifiedAccess>]
@@ -33376,6 +38944,14 @@ module Types =
         InferenceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("task_type")>]
         TaskType: TaskTypeAmazonBedrock
+        [<System.Text.Json.Serialization.JsonPropertyName("chunking_settings")>]
+        ChunkingSettings: InferenceChunkingSettings option
+        [<System.Text.Json.Serialization.JsonPropertyName("service")>]
+        Service: string
+        [<System.Text.Json.Serialization.JsonPropertyName("service_settings")>]
+        ServiceSettings: ServiceSettings
+        [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
+        TaskSettings: TaskSettings option
     }
 
         with
@@ -33383,6 +38959,10 @@ module Types =
             {
                 InferenceId = Unchecked.defaultof<_>
                 TaskType = Unchecked.defaultof<_>
+                ChunkingSettings = None
+                Service = Unchecked.defaultof<_>
+                ServiceSettings = Unchecked.defaultof<_>
+                TaskSettings = None
             }
 
     [<RequireQualifiedAccess>]
@@ -33398,6 +38978,14 @@ module Types =
         InferenceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("task_type")>]
         TaskType: TaskTypeAmazonSageMaker
+        [<System.Text.Json.Serialization.JsonPropertyName("chunking_settings")>]
+        ChunkingSettings: InferenceChunkingSettings option
+        [<System.Text.Json.Serialization.JsonPropertyName("service")>]
+        Service: string
+        [<System.Text.Json.Serialization.JsonPropertyName("service_settings")>]
+        ServiceSettings: ServiceSettings
+        [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
+        TaskSettings: TaskSettings option
     }
 
         with
@@ -33405,6 +38993,10 @@ module Types =
             {
                 InferenceId = Unchecked.defaultof<_>
                 TaskType = Unchecked.defaultof<_>
+                ChunkingSettings = None
+                Service = Unchecked.defaultof<_>
+                ServiceSettings = Unchecked.defaultof<_>
+                TaskSettings = None
             }
 
     [<RequireQualifiedAccess>]
@@ -33416,6 +39008,14 @@ module Types =
         InferenceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("task_type")>]
         TaskType: TaskTypeAnthropic
+        [<System.Text.Json.Serialization.JsonPropertyName("chunking_settings")>]
+        ChunkingSettings: InferenceChunkingSettings option
+        [<System.Text.Json.Serialization.JsonPropertyName("service")>]
+        Service: string
+        [<System.Text.Json.Serialization.JsonPropertyName("service_settings")>]
+        ServiceSettings: ServiceSettings
+        [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
+        TaskSettings: TaskSettings option
     }
 
         with
@@ -33423,6 +39023,10 @@ module Types =
             {
                 InferenceId = Unchecked.defaultof<_>
                 TaskType = Unchecked.defaultof<_>
+                ChunkingSettings = None
+                Service = Unchecked.defaultof<_>
+                ServiceSettings = Unchecked.defaultof<_>
+                TaskSettings = None
             }
 
     [<RequireQualifiedAccess>]
@@ -33436,6 +39040,14 @@ module Types =
         InferenceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("task_type")>]
         TaskType: TaskTypeAzureAIStudio
+        [<System.Text.Json.Serialization.JsonPropertyName("chunking_settings")>]
+        ChunkingSettings: InferenceChunkingSettings option
+        [<System.Text.Json.Serialization.JsonPropertyName("service")>]
+        Service: string
+        [<System.Text.Json.Serialization.JsonPropertyName("service_settings")>]
+        ServiceSettings: ServiceSettings
+        [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
+        TaskSettings: TaskSettings option
     }
 
         with
@@ -33443,6 +39055,10 @@ module Types =
             {
                 InferenceId = Unchecked.defaultof<_>
                 TaskType = Unchecked.defaultof<_>
+                ChunkingSettings = None
+                Service = Unchecked.defaultof<_>
+                ServiceSettings = Unchecked.defaultof<_>
+                TaskSettings = None
             }
 
     [<RequireQualifiedAccess>]
@@ -33456,6 +39072,14 @@ module Types =
         InferenceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("task_type")>]
         TaskType: TaskTypeAzureOpenAI
+        [<System.Text.Json.Serialization.JsonPropertyName("chunking_settings")>]
+        ChunkingSettings: InferenceChunkingSettings option
+        [<System.Text.Json.Serialization.JsonPropertyName("service")>]
+        Service: string
+        [<System.Text.Json.Serialization.JsonPropertyName("service_settings")>]
+        ServiceSettings: ServiceSettings
+        [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
+        TaskSettings: TaskSettings option
     }
 
         with
@@ -33463,6 +39087,10 @@ module Types =
             {
                 InferenceId = Unchecked.defaultof<_>
                 TaskType = Unchecked.defaultof<_>
+                ChunkingSettings = None
+                Service = Unchecked.defaultof<_>
+                ServiceSettings = Unchecked.defaultof<_>
+                TaskSettings = None
             }
 
     [<RequireQualifiedAccess>]
@@ -33476,6 +39104,14 @@ module Types =
         InferenceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("task_type")>]
         TaskType: TaskTypeCohere
+        [<System.Text.Json.Serialization.JsonPropertyName("chunking_settings")>]
+        ChunkingSettings: InferenceChunkingSettings option
+        [<System.Text.Json.Serialization.JsonPropertyName("service")>]
+        Service: string
+        [<System.Text.Json.Serialization.JsonPropertyName("service_settings")>]
+        ServiceSettings: ServiceSettings
+        [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
+        TaskSettings: TaskSettings option
     }
 
         with
@@ -33483,6 +39119,10 @@ module Types =
             {
                 InferenceId = Unchecked.defaultof<_>
                 TaskType = Unchecked.defaultof<_>
+                ChunkingSettings = None
+                Service = Unchecked.defaultof<_>
+                ServiceSettings = Unchecked.defaultof<_>
+                TaskSettings = None
             }
 
     [<RequireQualifiedAccess>]
@@ -33494,6 +39134,14 @@ module Types =
         InferenceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("task_type")>]
         TaskType: TaskTypeContextualAI
+        [<System.Text.Json.Serialization.JsonPropertyName("chunking_settings")>]
+        ChunkingSettings: InferenceChunkingSettings option
+        [<System.Text.Json.Serialization.JsonPropertyName("service")>]
+        Service: string
+        [<System.Text.Json.Serialization.JsonPropertyName("service_settings")>]
+        ServiceSettings: ServiceSettings
+        [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
+        TaskSettings: TaskSettings option
     }
 
         with
@@ -33501,6 +39149,10 @@ module Types =
             {
                 InferenceId = Unchecked.defaultof<_>
                 TaskType = Unchecked.defaultof<_>
+                ChunkingSettings = None
+                Service = Unchecked.defaultof<_>
+                ServiceSettings = Unchecked.defaultof<_>
+                TaskSettings = None
             }
 
     [<RequireQualifiedAccess>]
@@ -33515,6 +39167,14 @@ module Types =
         InferenceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("task_type")>]
         TaskType: TaskTypeCustom
+        [<System.Text.Json.Serialization.JsonPropertyName("chunking_settings")>]
+        ChunkingSettings: InferenceChunkingSettings option
+        [<System.Text.Json.Serialization.JsonPropertyName("service")>]
+        Service: string
+        [<System.Text.Json.Serialization.JsonPropertyName("service_settings")>]
+        ServiceSettings: ServiceSettings
+        [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
+        TaskSettings: TaskSettings option
     }
 
         with
@@ -33522,6 +39182,10 @@ module Types =
             {
                 InferenceId = Unchecked.defaultof<_>
                 TaskType = Unchecked.defaultof<_>
+                ChunkingSettings = None
+                Service = Unchecked.defaultof<_>
+                ServiceSettings = Unchecked.defaultof<_>
+                TaskSettings = None
             }
 
     [<RequireQualifiedAccess>]
@@ -33534,6 +39198,14 @@ module Types =
         InferenceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("task_type")>]
         TaskType: TaskTypeDeepSeek
+        [<System.Text.Json.Serialization.JsonPropertyName("chunking_settings")>]
+        ChunkingSettings: InferenceChunkingSettings option
+        [<System.Text.Json.Serialization.JsonPropertyName("service")>]
+        Service: string
+        [<System.Text.Json.Serialization.JsonPropertyName("service_settings")>]
+        ServiceSettings: ServiceSettings
+        [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
+        TaskSettings: TaskSettings option
     }
 
         with
@@ -33541,6 +39213,10 @@ module Types =
             {
                 InferenceId = Unchecked.defaultof<_>
                 TaskType = Unchecked.defaultof<_>
+                ChunkingSettings = None
+                Service = Unchecked.defaultof<_>
+                ServiceSettings = Unchecked.defaultof<_>
+                TaskSettings = None
             }
 
     [<RequireQualifiedAccess>]
@@ -33552,6 +39228,14 @@ module Types =
         InferenceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("task_type")>]
         TaskType: TaskTypeELSER
+        [<System.Text.Json.Serialization.JsonPropertyName("chunking_settings")>]
+        ChunkingSettings: InferenceChunkingSettings option
+        [<System.Text.Json.Serialization.JsonPropertyName("service")>]
+        Service: string
+        [<System.Text.Json.Serialization.JsonPropertyName("service_settings")>]
+        ServiceSettings: ServiceSettings
+        [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
+        TaskSettings: TaskSettings option
     }
 
         with
@@ -33559,6 +39243,10 @@ module Types =
             {
                 InferenceId = Unchecked.defaultof<_>
                 TaskType = Unchecked.defaultof<_>
+                ChunkingSettings = None
+                Service = Unchecked.defaultof<_>
+                ServiceSettings = Unchecked.defaultof<_>
+                TaskSettings = None
             }
 
     [<RequireQualifiedAccess>]
@@ -33572,6 +39260,14 @@ module Types =
         InferenceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("task_type")>]
         TaskType: TaskTypeElasticsearch
+        [<System.Text.Json.Serialization.JsonPropertyName("chunking_settings")>]
+        ChunkingSettings: InferenceChunkingSettings option
+        [<System.Text.Json.Serialization.JsonPropertyName("service")>]
+        Service: string
+        [<System.Text.Json.Serialization.JsonPropertyName("service_settings")>]
+        ServiceSettings: ServiceSettings
+        [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
+        TaskSettings: TaskSettings option
     }
 
         with
@@ -33579,6 +39275,10 @@ module Types =
             {
                 InferenceId = Unchecked.defaultof<_>
                 TaskType = Unchecked.defaultof<_>
+                ChunkingSettings = None
+                Service = Unchecked.defaultof<_>
+                ServiceSettings = Unchecked.defaultof<_>
+                TaskSettings = None
             }
 
     [<RequireQualifiedAccess>]
@@ -33592,6 +39292,14 @@ module Types =
         InferenceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("task_type")>]
         TaskType: TaskTypeFireworksAI
+        [<System.Text.Json.Serialization.JsonPropertyName("chunking_settings")>]
+        ChunkingSettings: InferenceChunkingSettings option
+        [<System.Text.Json.Serialization.JsonPropertyName("service")>]
+        Service: string
+        [<System.Text.Json.Serialization.JsonPropertyName("service_settings")>]
+        ServiceSettings: ServiceSettings
+        [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
+        TaskSettings: TaskSettings option
     }
 
         with
@@ -33599,6 +39307,10 @@ module Types =
             {
                 InferenceId = Unchecked.defaultof<_>
                 TaskType = Unchecked.defaultof<_>
+                ChunkingSettings = None
+                Service = Unchecked.defaultof<_>
+                ServiceSettings = Unchecked.defaultof<_>
+                TaskSettings = None
             }
 
     [<RequireQualifiedAccess>]
@@ -33611,6 +39323,14 @@ module Types =
         InferenceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("task_type")>]
         TaskType: TaskTypeGoogleAIStudio
+        [<System.Text.Json.Serialization.JsonPropertyName("chunking_settings")>]
+        ChunkingSettings: InferenceChunkingSettings option
+        [<System.Text.Json.Serialization.JsonPropertyName("service")>]
+        Service: string
+        [<System.Text.Json.Serialization.JsonPropertyName("service_settings")>]
+        ServiceSettings: ServiceSettings
+        [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
+        TaskSettings: TaskSettings option
     }
 
         with
@@ -33618,6 +39338,10 @@ module Types =
             {
                 InferenceId = Unchecked.defaultof<_>
                 TaskType = Unchecked.defaultof<_>
+                ChunkingSettings = None
+                Service = Unchecked.defaultof<_>
+                ServiceSettings = Unchecked.defaultof<_>
+                TaskSettings = None
             }
 
     [<RequireQualifiedAccess>]
@@ -33632,6 +39356,14 @@ module Types =
         InferenceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("task_type")>]
         TaskType: TaskTypeGoogleVertexAI
+        [<System.Text.Json.Serialization.JsonPropertyName("chunking_settings")>]
+        ChunkingSettings: InferenceChunkingSettings option
+        [<System.Text.Json.Serialization.JsonPropertyName("service")>]
+        Service: string
+        [<System.Text.Json.Serialization.JsonPropertyName("service_settings")>]
+        ServiceSettings: ServiceSettings
+        [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
+        TaskSettings: TaskSettings option
     }
 
         with
@@ -33639,6 +39371,10 @@ module Types =
             {
                 InferenceId = Unchecked.defaultof<_>
                 TaskType = Unchecked.defaultof<_>
+                ChunkingSettings = None
+                Service = Unchecked.defaultof<_>
+                ServiceSettings = Unchecked.defaultof<_>
+                TaskSettings = None
             }
 
     [<RequireQualifiedAccess>]
@@ -33650,6 +39386,14 @@ module Types =
         InferenceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("task_type")>]
         TaskType: TaskTypeGroq
+        [<System.Text.Json.Serialization.JsonPropertyName("chunking_settings")>]
+        ChunkingSettings: InferenceChunkingSettings option
+        [<System.Text.Json.Serialization.JsonPropertyName("service")>]
+        Service: string
+        [<System.Text.Json.Serialization.JsonPropertyName("service_settings")>]
+        ServiceSettings: ServiceSettings
+        [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
+        TaskSettings: TaskSettings option
     }
 
         with
@@ -33657,6 +39401,10 @@ module Types =
             {
                 InferenceId = Unchecked.defaultof<_>
                 TaskType = Unchecked.defaultof<_>
+                ChunkingSettings = None
+                Service = Unchecked.defaultof<_>
+                ServiceSettings = Unchecked.defaultof<_>
+                TaskSettings = None
             }
 
     [<RequireQualifiedAccess>]
@@ -33671,6 +39419,14 @@ module Types =
         InferenceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("task_type")>]
         TaskType: TaskTypeHuggingFace
+        [<System.Text.Json.Serialization.JsonPropertyName("chunking_settings")>]
+        ChunkingSettings: InferenceChunkingSettings option
+        [<System.Text.Json.Serialization.JsonPropertyName("service")>]
+        Service: string
+        [<System.Text.Json.Serialization.JsonPropertyName("service_settings")>]
+        ServiceSettings: ServiceSettings
+        [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
+        TaskSettings: TaskSettings option
     }
 
         with
@@ -33678,6 +39434,10 @@ module Types =
             {
                 InferenceId = Unchecked.defaultof<_>
                 TaskType = Unchecked.defaultof<_>
+                ChunkingSettings = None
+                Service = Unchecked.defaultof<_>
+                ServiceSettings = Unchecked.defaultof<_>
+                TaskSettings = None
             }
 
     [<RequireQualifiedAccess>]
@@ -33691,6 +39451,14 @@ module Types =
         InferenceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("task_type")>]
         TaskType: TaskTypeJinaAi
+        [<System.Text.Json.Serialization.JsonPropertyName("chunking_settings")>]
+        ChunkingSettings: InferenceChunkingSettings option
+        [<System.Text.Json.Serialization.JsonPropertyName("service")>]
+        Service: string
+        [<System.Text.Json.Serialization.JsonPropertyName("service_settings")>]
+        ServiceSettings: ServiceSettings
+        [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
+        TaskSettings: TaskSettings option
     }
 
         with
@@ -33698,6 +39466,10 @@ module Types =
             {
                 InferenceId = Unchecked.defaultof<_>
                 TaskType = Unchecked.defaultof<_>
+                ChunkingSettings = None
+                Service = Unchecked.defaultof<_>
+                ServiceSettings = Unchecked.defaultof<_>
+                TaskSettings = None
             }
 
     [<RequireQualifiedAccess>]
@@ -33711,6 +39483,14 @@ module Types =
         InferenceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("task_type")>]
         TaskType: TaskTypeLlama
+        [<System.Text.Json.Serialization.JsonPropertyName("chunking_settings")>]
+        ChunkingSettings: InferenceChunkingSettings option
+        [<System.Text.Json.Serialization.JsonPropertyName("service")>]
+        Service: string
+        [<System.Text.Json.Serialization.JsonPropertyName("service_settings")>]
+        ServiceSettings: ServiceSettings
+        [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
+        TaskSettings: TaskSettings option
     }
 
         with
@@ -33718,6 +39498,10 @@ module Types =
             {
                 InferenceId = Unchecked.defaultof<_>
                 TaskType = Unchecked.defaultof<_>
+                ChunkingSettings = None
+                Service = Unchecked.defaultof<_>
+                ServiceSettings = Unchecked.defaultof<_>
+                TaskSettings = None
             }
 
     [<RequireQualifiedAccess>]
@@ -33731,6 +39515,14 @@ module Types =
         InferenceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("task_type")>]
         TaskType: TaskTypeMistral
+        [<System.Text.Json.Serialization.JsonPropertyName("chunking_settings")>]
+        ChunkingSettings: InferenceChunkingSettings option
+        [<System.Text.Json.Serialization.JsonPropertyName("service")>]
+        Service: string
+        [<System.Text.Json.Serialization.JsonPropertyName("service_settings")>]
+        ServiceSettings: ServiceSettings
+        [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
+        TaskSettings: TaskSettings option
     }
 
         with
@@ -33738,6 +39530,10 @@ module Types =
             {
                 InferenceId = Unchecked.defaultof<_>
                 TaskType = Unchecked.defaultof<_>
+                ChunkingSettings = None
+                Service = Unchecked.defaultof<_>
+                ServiceSettings = Unchecked.defaultof<_>
+                TaskSettings = None
             }
 
     [<RequireQualifiedAccess>]
@@ -33752,6 +39548,14 @@ module Types =
         InferenceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("task_type")>]
         TaskType: TaskTypeNvidia
+        [<System.Text.Json.Serialization.JsonPropertyName("chunking_settings")>]
+        ChunkingSettings: InferenceChunkingSettings option
+        [<System.Text.Json.Serialization.JsonPropertyName("service")>]
+        Service: string
+        [<System.Text.Json.Serialization.JsonPropertyName("service_settings")>]
+        ServiceSettings: ServiceSettings
+        [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
+        TaskSettings: TaskSettings option
     }
 
         with
@@ -33759,6 +39563,10 @@ module Types =
             {
                 InferenceId = Unchecked.defaultof<_>
                 TaskType = Unchecked.defaultof<_>
+                ChunkingSettings = None
+                Service = Unchecked.defaultof<_>
+                ServiceSettings = Unchecked.defaultof<_>
+                TaskSettings = None
             }
 
     [<RequireQualifiedAccess>]
@@ -33772,6 +39580,14 @@ module Types =
         InferenceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("task_type")>]
         TaskType: TaskTypeOpenAI
+        [<System.Text.Json.Serialization.JsonPropertyName("chunking_settings")>]
+        ChunkingSettings: InferenceChunkingSettings option
+        [<System.Text.Json.Serialization.JsonPropertyName("service")>]
+        Service: string
+        [<System.Text.Json.Serialization.JsonPropertyName("service_settings")>]
+        ServiceSettings: ServiceSettings
+        [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
+        TaskSettings: TaskSettings option
     }
 
         with
@@ -33779,6 +39595,10 @@ module Types =
             {
                 InferenceId = Unchecked.defaultof<_>
                 TaskType = Unchecked.defaultof<_>
+                ChunkingSettings = None
+                Service = Unchecked.defaultof<_>
+                ServiceSettings = Unchecked.defaultof<_>
+                TaskSettings = None
             }
 
     [<RequireQualifiedAccess>]
@@ -33793,6 +39613,14 @@ module Types =
         InferenceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("task_type")>]
         TaskType: TaskTypeOpenShiftAi
+        [<System.Text.Json.Serialization.JsonPropertyName("chunking_settings")>]
+        ChunkingSettings: InferenceChunkingSettings option
+        [<System.Text.Json.Serialization.JsonPropertyName("service")>]
+        Service: string
+        [<System.Text.Json.Serialization.JsonPropertyName("service_settings")>]
+        ServiceSettings: ServiceSettings
+        [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
+        TaskSettings: TaskSettings option
     }
 
         with
@@ -33800,6 +39628,10 @@ module Types =
             {
                 InferenceId = Unchecked.defaultof<_>
                 TaskType = Unchecked.defaultof<_>
+                ChunkingSettings = None
+                Service = Unchecked.defaultof<_>
+                ServiceSettings = Unchecked.defaultof<_>
+                TaskSettings = None
             }
 
     [<RequireQualifiedAccess>]
@@ -33812,6 +39644,14 @@ module Types =
         InferenceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("task_type")>]
         TaskType: TaskTypeVoyageAI
+        [<System.Text.Json.Serialization.JsonPropertyName("chunking_settings")>]
+        ChunkingSettings: InferenceChunkingSettings option
+        [<System.Text.Json.Serialization.JsonPropertyName("service")>]
+        Service: string
+        [<System.Text.Json.Serialization.JsonPropertyName("service_settings")>]
+        ServiceSettings: ServiceSettings
+        [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
+        TaskSettings: TaskSettings option
     }
 
         with
@@ -33819,6 +39659,10 @@ module Types =
             {
                 InferenceId = Unchecked.defaultof<_>
                 TaskType = Unchecked.defaultof<_>
+                ChunkingSettings = None
+                Service = Unchecked.defaultof<_>
+                ServiceSettings = Unchecked.defaultof<_>
+                TaskSettings = None
             }
 
     [<RequireQualifiedAccess>]
@@ -33832,6 +39676,14 @@ module Types =
         InferenceId: string
         [<System.Text.Json.Serialization.JsonPropertyName("task_type")>]
         TaskType: TaskTypeWatsonx
+        [<System.Text.Json.Serialization.JsonPropertyName("chunking_settings")>]
+        ChunkingSettings: InferenceChunkingSettings option
+        [<System.Text.Json.Serialization.JsonPropertyName("service")>]
+        Service: string
+        [<System.Text.Json.Serialization.JsonPropertyName("service_settings")>]
+        ServiceSettings: ServiceSettings
+        [<System.Text.Json.Serialization.JsonPropertyName("task_settings")>]
+        TaskSettings: TaskSettings option
     }
 
         with
@@ -33839,6 +39691,10 @@ module Types =
             {
                 InferenceId = Unchecked.defaultof<_>
                 TaskType = Unchecked.defaultof<_>
+                ChunkingSettings = None
+                Service = Unchecked.defaultof<_>
+                ServiceSettings = Unchecked.defaultof<_>
+                TaskSettings = None
             }
 
     type TrainedModelEntities = {
@@ -33923,7 +39779,7 @@ module Types =
         [<System.Text.Json.Serialization.JsonPropertyName("is_truncated")>]
         IsTruncated: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("predicted_value")>]
-        PredictedValue: System.Text.Json.JsonElement option
+        PredictedValue: PredictedValue list option
         [<System.Text.Json.Serialization.JsonPropertyName("predicted_value_sequence")>]
         PredictedValueSequence: string option
         [<System.Text.Json.Serialization.JsonPropertyName("prediction_probability")>]
@@ -35723,6 +41579,10 @@ module Types =
         DataFrameAnalyticsJobs: MlDataFrameAnalyticsJobs
         [<System.Text.Json.Serialization.JsonPropertyName("inference")>]
         Inference: MlInference
+        [<System.Text.Json.Serialization.JsonPropertyName("available")>]
+        Available: bool
+        [<System.Text.Json.Serialization.JsonPropertyName("enabled")>]
+        Enabled: bool
     }
 
         with
@@ -35733,6 +41593,8 @@ module Types =
                 NodeCount = Unchecked.defaultof<_>
                 DataFrameAnalyticsJobs = Unchecked.defaultof<_>
                 Inference = Unchecked.defaultof<_>
+                Available = Unchecked.defaultof<_>
+                Enabled = Unchecked.defaultof<_>
             }
 
     type MapboxVectorTiles = byte array
@@ -35927,6 +41789,12 @@ module Types =
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("summary")>]
         Summary: string
+        [<System.Text.Json.Serialization.JsonPropertyName("format")>]
+        Format: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("id")>]
+        Id: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("index")>]
+        Index: Integer option
     }
 
         with
@@ -35934,6 +41802,9 @@ module Types =
             {
                 Type = "reasoning.summary"
                 Summary = Unchecked.defaultof<_>
+                Format = None
+                Id = None
+                Index = None
             }
 
     /// The reasoning text detail includes plaintext reasoning with optional signature verification.
@@ -35944,6 +41815,12 @@ module Types =
         Signature: string option
         [<System.Text.Json.Serialization.JsonPropertyName("text")>]
         Text: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("format")>]
+        Format: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("id")>]
+        Id: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("index")>]
+        Index: Integer option
     }
 
         with
@@ -35952,6 +41829,9 @@ module Types =
                 Type = "reasoning.text"
                 Signature = None
                 Text = None
+                Format = None
+                Id = None
+                Index = None
             }
 
     /// Type representing the different types of reasoning details that can be included in the response from the model.
@@ -36262,6 +42142,10 @@ module Types =
         CollectionEnabled: bool
         [<System.Text.Json.Serialization.JsonPropertyName("enabled_exporters")>]
         EnabledExporters: Map<string, Long>
+        [<System.Text.Json.Serialization.JsonPropertyName("available")>]
+        Available: bool
+        [<System.Text.Json.Serialization.JsonPropertyName("enabled")>]
+        Enabled: bool
     }
 
         with
@@ -36269,6 +42153,8 @@ module Types =
             {
                 CollectionEnabled = Unchecked.defaultof<_>
                 EnabledExporters = Unchecked.defaultof<_>
+                Available = Unchecked.defaultof<_>
+                Enabled = Unchecked.defaultof<_>
             }
 
     [<RequireQualifiedAccess>]
@@ -36783,7 +42669,7 @@ module Types =
         [<System.Text.Json.Serialization.JsonPropertyName("election")>]
         Election: NodeInfoSettingsClusterElection
         [<System.Text.Json.Serialization.JsonPropertyName("initial_master_nodes")>]
-        InitialMasterNodes: System.Text.Json.JsonElement option
+        InitialMasterNodes: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("deprecation_indexing")>]
         DeprecationIndexing: DeprecationIndexing option
     }
@@ -36823,7 +42709,7 @@ module Types =
         [<System.Text.Json.Serialization.JsonPropertyName("repo")>]
         Repo: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("data")>]
-        Data: System.Text.Json.JsonElement option
+        Data: string list option
     }
 
         with
@@ -36859,7 +42745,7 @@ module Types =
 
     type NodeInfoDiscover = {
         [<System.Text.Json.Serialization.JsonPropertyName("seed_hosts")>]
-        SeedHosts: System.Text.Json.JsonElement option
+        SeedHosts: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: string option
         [<System.Text.Json.Serialization.JsonPropertyName("seed_providers")>]
@@ -36982,7 +42868,7 @@ module Types =
 
     type NodeInfoSettingsNetwork = {
         [<System.Text.Json.Serialization.JsonPropertyName("host")>]
-        Host: System.Text.Json.JsonElement option
+        Host: Host list option
     }
 
         with
@@ -38562,6 +44448,20 @@ module Types =
         RequireAlias: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("retry_on_conflict")>]
         RetryOnConflict: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("_id")>]
+        Id: Id option
+        [<System.Text.Json.Serialization.JsonPropertyName("_index")>]
+        Index: IndexName option
+        [<System.Text.Json.Serialization.JsonPropertyName("routing")>]
+        Routing: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("if_primary_term")>]
+        IfPrimaryTerm: Long option
+        [<System.Text.Json.Serialization.JsonPropertyName("if_seq_no")>]
+        IfSeqNo: SequenceNumber option
+        [<System.Text.Json.Serialization.JsonPropertyName("version")>]
+        Version: VersionNumber option
+        [<System.Text.Json.Serialization.JsonPropertyName("version_type")>]
+        VersionType: VersionType option
     }
 
         with
@@ -38569,6 +44469,13 @@ module Types =
             {
                 RequireAlias = None
                 RetryOnConflict = None
+                Id = None
+                Index = None
+                Routing = None
+                IfPrimaryTerm = None
+                IfSeqNo = None
+                Version = None
+                VersionType = None
             }
 
     [<RequireQualifiedAccess>]
@@ -38801,23 +44708,95 @@ module Types =
     type ParentReindexTask = {
         [<System.Text.Json.Serialization.JsonPropertyName("children")>]
         Children: ReindexTask list option
+        [<System.Text.Json.Serialization.JsonPropertyName("action")>]
+        Action: string
+        [<System.Text.Json.Serialization.JsonPropertyName("cancellable")>]
+        Cancellable: bool
+        [<System.Text.Json.Serialization.JsonPropertyName("cancelled")>]
+        Cancelled: bool
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
+        Description: string
+        [<System.Text.Json.Serialization.JsonPropertyName("id")>]
+        Id: Long
+        [<System.Text.Json.Serialization.JsonPropertyName("node")>]
+        Node: Name
+        [<System.Text.Json.Serialization.JsonPropertyName("running_time_in_nanos")>]
+        RunningTimeInNanos: DurationValue<UnitNanos>
+        [<System.Text.Json.Serialization.JsonPropertyName("start_time_in_millis")>]
+        StartTimeInMillis: EpochTime<UnitMillis>
+        [<System.Text.Json.Serialization.JsonPropertyName("status")>]
+        Status: ReindexStatus
+        [<System.Text.Json.Serialization.JsonPropertyName("type")>]
+        Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("headers")>]
+        Headers: HttpHeaders
     }
 
         with
         static member empty : ParentReindexTask =
             {
                 Children = None
+                Action = Unchecked.defaultof<_>
+                Cancellable = Unchecked.defaultof<_>
+                Cancelled = Unchecked.defaultof<_>
+                Description = Unchecked.defaultof<_>
+                Id = Unchecked.defaultof<_>
+                Node = Unchecked.defaultof<_>
+                RunningTimeInNanos = Unchecked.defaultof<_>
+                StartTimeInMillis = Unchecked.defaultof<_>
+                Status = Unchecked.defaultof<_>
+                Type = Unchecked.defaultof<_>
+                Headers = Unchecked.defaultof<_>
             }
 
     type ParentTaskInfo = {
         [<System.Text.Json.Serialization.JsonPropertyName("children")>]
         Children: TaskInfo list option
+        [<System.Text.Json.Serialization.JsonPropertyName("action")>]
+        Action: string
+        [<System.Text.Json.Serialization.JsonPropertyName("cancelled")>]
+        Cancelled: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("cancellable")>]
+        Cancellable: bool
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
+        Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("headers")>]
+        Headers: Map<string, string>
+        [<System.Text.Json.Serialization.JsonPropertyName("id")>]
+        Id: Long
+        [<System.Text.Json.Serialization.JsonPropertyName("node")>]
+        Node: NodeId
+        [<System.Text.Json.Serialization.JsonPropertyName("running_time")>]
+        RunningTime: Duration option
+        [<System.Text.Json.Serialization.JsonPropertyName("running_time_in_nanos")>]
+        RunningTimeInNanos: DurationValue<UnitNanos>
+        [<System.Text.Json.Serialization.JsonPropertyName("start_time_in_millis")>]
+        StartTimeInMillis: EpochTime<UnitMillis>
+        [<System.Text.Json.Serialization.JsonPropertyName("status")>]
+        Status: System.Text.Json.JsonElement option
+        [<System.Text.Json.Serialization.JsonPropertyName("type")>]
+        Type: string
+        [<System.Text.Json.Serialization.JsonPropertyName("parent_task_id")>]
+        ParentTaskId: TaskId option
     }
 
         with
         static member empty : ParentTaskInfo =
             {
                 Children = None
+                Action = Unchecked.defaultof<_>
+                Cancelled = None
+                Cancellable = Unchecked.defaultof<_>
+                Description = None
+                Headers = Unchecked.defaultof<_>
+                Id = Unchecked.defaultof<_>
+                Node = Unchecked.defaultof<_>
+                RunningTime = None
+                RunningTimeInNanos = Unchecked.defaultof<_>
+                StartTimeInMillis = Unchecked.defaultof<_>
+                Status = None
+                Type = Unchecked.defaultof<_>
+                ParentTaskId = None
             }
 
     type PendingTask = {
@@ -39231,6 +45210,28 @@ module Types =
         Sort: SortResults option
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
         Name: string
+        [<System.Text.Json.Serialization.JsonPropertyName("cluster")>]
+        Cluster: ClusterPrivilege list option
+        [<System.Text.Json.Serialization.JsonPropertyName("indices")>]
+        Indices: IndicesPrivileges list option
+        [<System.Text.Json.Serialization.JsonPropertyName("remote_indices")>]
+        RemoteIndices: RemoteIndicesPrivileges list option
+        [<System.Text.Json.Serialization.JsonPropertyName("remote_cluster")>]
+        RemoteCluster: RemoteClusterPrivileges list option
+        [<System.Text.Json.Serialization.JsonPropertyName("global")>]
+        Global: GlobalPrivilege list option
+        [<System.Text.Json.Serialization.JsonPropertyName("applications")>]
+        Applications: ApplicationPrivileges list option
+        [<System.Text.Json.Serialization.JsonPropertyName("metadata")>]
+        Metadata: Metadata option
+        [<System.Text.Json.Serialization.JsonPropertyName("run_as")>]
+        RunAs: string list option
+        [<System.Text.Json.Serialization.JsonPropertyName("description")>]
+        Description: string option
+        [<System.Text.Json.Serialization.JsonPropertyName("restriction")>]
+        Restriction: Restriction option
+        [<System.Text.Json.Serialization.JsonPropertyName("transient_metadata")>]
+        TransientMetadata: Map<string, System.Text.Json.JsonElement> option
     }
 
         with
@@ -39238,6 +45239,17 @@ module Types =
             {
                 Sort = None
                 Name = Unchecked.defaultof<_>
+                Cluster = None
+                Indices = None
+                RemoteIndices = None
+                RemoteCluster = None
+                Global = None
+                Applications = None
+                Metadata = None
+                RunAs = None
+                Description = None
+                Restriction = None
+                TransientMetadata = None
             }
 
     [<RequireQualifiedAccess>]
@@ -39296,7 +45308,7 @@ module Types =
         [<System.Text.Json.Serialization.JsonPropertyName("type")>]
         Type: QueryRuleType
         [<System.Text.Json.Serialization.JsonPropertyName("criteria")>]
-        Criteria: System.Text.Json.JsonElement
+        Criteria: QueryRuleCriteria list
         [<System.Text.Json.Serialization.JsonPropertyName("actions")>]
         Actions: QueryRuleActions
         [<System.Text.Json.Serialization.JsonPropertyName("priority")>]
@@ -39364,12 +45376,33 @@ module Types =
     type QueryUser = {
         [<System.Text.Json.Serialization.JsonPropertyName("_sort")>]
         Sort: SortResults option
+        [<System.Text.Json.Serialization.JsonPropertyName("email")>]
+        Email: string option option
+        [<System.Text.Json.Serialization.JsonPropertyName("full_name")>]
+        FullName: Name option option
+        [<System.Text.Json.Serialization.JsonPropertyName("metadata")>]
+        Metadata: Metadata
+        [<System.Text.Json.Serialization.JsonPropertyName("roles")>]
+        Roles: string list
+        [<System.Text.Json.Serialization.JsonPropertyName("username")>]
+        Username: Username
+        [<System.Text.Json.Serialization.JsonPropertyName("enabled")>]
+        Enabled: bool
+        [<System.Text.Json.Serialization.JsonPropertyName("profile_uid")>]
+        ProfileUid: UserProfileId option
     }
 
         with
         static member empty : QueryUser =
             {
                 Sort = None
+                Email = None
+                FullName = None
+                Metadata = Unchecked.defaultof<_>
+                Roles = Unchecked.defaultof<_>
+                Username = Unchecked.defaultof<_>
+                Enabled = Unchecked.defaultof<_>
+                ProfileUid = None
             }
 
     type WatchStatus = {
@@ -39450,9 +45483,9 @@ module Types =
         | Daily of DailySchedule
         | Hourly of HourlySchedule
         | Interval of Duration
-        | Monthly of System.Text.Json.JsonElement
-        | Weekly of System.Text.Json.JsonElement
-        | Yearly of System.Text.Json.JsonElement
+        | Monthly of TimeOfMonth list
+        | Weekly of TimeOfWeek list
+        | Yearly of TimeOfYear list
 
     [<RequireQualifiedAccess>]
     type TriggerContainer =
@@ -39561,54 +45594,93 @@ module Types =
     type RankEvalMetricRatingTreshold = {
         [<System.Text.Json.Serialization.JsonPropertyName("relevant_rating_threshold")>]
         RelevantRatingThreshold: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("k")>]
+        K: Integer option
     }
 
         with
         static member empty : RankEvalMetricRatingTreshold =
             {
                 RelevantRatingThreshold = None
+                K = None
             }
 
     /// Precision at K (P@k)
     type RankEvalMetricPrecision = {
         [<System.Text.Json.Serialization.JsonPropertyName("ignore_unlabeled")>]
         IgnoreUnlabeled: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("k")>]
+        K: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("relevant_rating_threshold")>]
+        RelevantRatingThreshold: Integer option
     }
 
         with
         static member empty : RankEvalMetricPrecision =
             {
                 IgnoreUnlabeled = None
+                K = None
+                RelevantRatingThreshold = None
             }
 
     /// Recall at K (R@k)
-    type RankEvalMetricRecall = System.Text.Json.JsonElement
+    type RankEvalMetricRecall = {
+        [<System.Text.Json.Serialization.JsonPropertyName("k")>]
+        K: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("relevant_rating_threshold")>]
+        RelevantRatingThreshold: Integer option
+    }
+
+        with
+        static member empty : RankEvalMetricRecall =
+            {
+                K = None
+                RelevantRatingThreshold = None
+            }
 
     /// Mean Reciprocal Rank
-    type RankEvalMetricMeanReciprocalRank = System.Text.Json.JsonElement
+    type RankEvalMetricMeanReciprocalRank = {
+        [<System.Text.Json.Serialization.JsonPropertyName("k")>]
+        K: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("relevant_rating_threshold")>]
+        RelevantRatingThreshold: Integer option
+    }
+
+        with
+        static member empty : RankEvalMetricMeanReciprocalRank =
+            {
+                K = None
+                RelevantRatingThreshold = None
+            }
 
     /// Discounted cumulative gain (DCG)
     type RankEvalMetricDiscountedCumulativeGain = {
         [<System.Text.Json.Serialization.JsonPropertyName("normalize")>]
         Normalize: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("k")>]
+        K: Integer option
     }
 
         with
         static member empty : RankEvalMetricDiscountedCumulativeGain =
             {
                 Normalize = None
+                K = None
             }
 
     /// Expected Reciprocal Rank (ERR)
     type RankEvalMetricExpectedReciprocalRank = {
         [<System.Text.Json.Serialization.JsonPropertyName("maximum_relevance")>]
         MaximumRelevance: Integer
+        [<System.Text.Json.Serialization.JsonPropertyName("k")>]
+        K: Integer option
     }
 
         with
         static member empty : RankEvalMetricExpectedReciprocalRank =
             {
                 MaximumRelevance = Unchecked.defaultof<_>
+                K = None
             }
 
     type RankEvalMetric = {
@@ -39714,6 +45786,14 @@ module Types =
         MaxNumberOfSnapshots: Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("url")>]
         Url: string
+        [<System.Text.Json.Serialization.JsonPropertyName("chunk_size")>]
+        ChunkSize: ByteSize option
+        [<System.Text.Json.Serialization.JsonPropertyName("compress")>]
+        Compress: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_restore_bytes_per_sec")>]
+        MaxRestoreBytesPerSec: ByteSize option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_snapshot_bytes_per_sec")>]
+        MaxSnapshotBytesPerSec: ByteSize option
     }
 
         with
@@ -39723,6 +45803,10 @@ module Types =
                 HttpSocketTimeout = None
                 MaxNumberOfSnapshots = None
                 Url = Unchecked.defaultof<_>
+                ChunkSize = None
+                Compress = None
+                MaxRestoreBytesPerSec = None
+                MaxSnapshotBytesPerSec = None
             }
 
     type ReadOnlyUrlRepository = {
@@ -39730,6 +45814,8 @@ module Types =
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("settings")>]
         Settings: ReadOnlyUrlRepositorySettings
+        [<System.Text.Json.Serialization.JsonPropertyName("uuid")>]
+        Uuid: Uuid option
     }
 
         with
@@ -39737,6 +45823,7 @@ module Types =
             {
                 Type = "url"
                 Settings = Unchecked.defaultof<_>
+                Uuid = None
             }
 
     type ReadSummaryInfo = {
@@ -39808,6 +45895,10 @@ module Types =
         HasTruststore: bool list option
         [<System.Text.Json.Serialization.JsonPropertyName("is_authentication_delegated")>]
         IsAuthenticationDelegated: bool list option
+        [<System.Text.Json.Serialization.JsonPropertyName("available")>]
+        Available: bool
+        [<System.Text.Json.Serialization.JsonPropertyName("enabled")>]
+        Enabled: bool
     }
 
         with
@@ -39821,6 +45912,8 @@ module Types =
                 HasDefaultUsernamePattern = None
                 HasTruststore = None
                 IsAuthenticationDelegated = None
+                Available = Unchecked.defaultof<_>
+                Enabled = Unchecked.defaultof<_>
             }
 
     type RealmInfo = {
@@ -40249,12 +46342,30 @@ module Types =
     type ReindexNode = {
         [<System.Text.Json.Serialization.JsonPropertyName("tasks")>]
         Tasks: Map<TaskId, ReindexTask>
+        [<System.Text.Json.Serialization.JsonPropertyName("attributes")>]
+        Attributes: Map<string, string>
+        [<System.Text.Json.Serialization.JsonPropertyName("host")>]
+        Host: Host
+        [<System.Text.Json.Serialization.JsonPropertyName("ip")>]
+        Ip: Ip
+        [<System.Text.Json.Serialization.JsonPropertyName("name")>]
+        Name: Name
+        [<System.Text.Json.Serialization.JsonPropertyName("roles")>]
+        Roles: NodeRoles option
+        [<System.Text.Json.Serialization.JsonPropertyName("transport_address")>]
+        TransportAddress: TransportAddress
     }
 
         with
         static member empty : ReindexNode =
             {
                 Tasks = Unchecked.defaultof<_>
+                Attributes = Unchecked.defaultof<_>
+                Host = Unchecked.defaultof<_>
+                Ip = Unchecked.defaultof<_>
+                Name = Unchecked.defaultof<_>
+                Roles = None
+                TransportAddress = Unchecked.defaultof<_>
             }
 
     [<RequireQualifiedAccess>]
@@ -40328,7 +46439,7 @@ module Types =
         [<System.Text.Json.Serialization.JsonPropertyName("field_security")>]
         FieldSecurity: FieldSecurity list option
         [<System.Text.Json.Serialization.JsonPropertyName("names")>]
-        Names: System.Text.Json.JsonElement
+        Names: IndexName list
         [<System.Text.Json.Serialization.JsonPropertyName("privileges")>]
         Privileges: IndexPrivilege list
         [<System.Text.Json.Serialization.JsonPropertyName("query")>]
@@ -40410,6 +46521,14 @@ module Types =
         ThrottledDeleteRetryMaximumDelay: Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("throttled_delete_retry.maximum_number_of_retries")>]
         ThrottledDeleteRetryMaximumNumberOfRetries: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("chunk_size")>]
+        ChunkSize: ByteSize option
+        [<System.Text.Json.Serialization.JsonPropertyName("compress")>]
+        Compress: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_restore_bytes_per_sec")>]
+        MaxRestoreBytesPerSec: ByteSize option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_snapshot_bytes_per_sec")>]
+        MaxSnapshotBytesPerSec: ByteSize option
     }
 
         with
@@ -40430,6 +46549,10 @@ module Types =
                 ThrottledDeleteRetryDelayIncrement = None
                 ThrottledDeleteRetryMaximumDelay = None
                 ThrottledDeleteRetryMaximumNumberOfRetries = None
+                ChunkSize = None
+                Compress = None
+                MaxRestoreBytesPerSec = None
+                MaxSnapshotBytesPerSec = None
             }
 
     type S3Repository = {
@@ -40437,6 +46560,8 @@ module Types =
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("settings")>]
         Settings: S3RepositorySettings
+        [<System.Text.Json.Serialization.JsonPropertyName("uuid")>]
+        Uuid: Uuid option
     }
 
         with
@@ -40444,6 +46569,7 @@ module Types =
             {
                 Type = "s3"
                 Settings = Unchecked.defaultof<_>
+                Uuid = None
             }
 
     type SharedFileSystemRepositorySettings = {
@@ -40453,6 +46579,14 @@ module Types =
         MaxNumberOfSnapshots: Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("readonly")>]
         Readonly: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("chunk_size")>]
+        ChunkSize: ByteSize option
+        [<System.Text.Json.Serialization.JsonPropertyName("compress")>]
+        Compress: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_restore_bytes_per_sec")>]
+        MaxRestoreBytesPerSec: ByteSize option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_snapshot_bytes_per_sec")>]
+        MaxSnapshotBytesPerSec: ByteSize option
     }
 
         with
@@ -40461,6 +46595,10 @@ module Types =
                 Location = Unchecked.defaultof<_>
                 MaxNumberOfSnapshots = None
                 Readonly = None
+                ChunkSize = None
+                Compress = None
+                MaxRestoreBytesPerSec = None
+                MaxSnapshotBytesPerSec = None
             }
 
     type SharedFileSystemRepository = {
@@ -40468,6 +46606,8 @@ module Types =
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("settings")>]
         Settings: SharedFileSystemRepositorySettings
+        [<System.Text.Json.Serialization.JsonPropertyName("uuid")>]
+        Uuid: Uuid option
     }
 
         with
@@ -40475,6 +46615,7 @@ module Types =
             {
                 Type = "fs"
                 Settings = Unchecked.defaultof<_>
+                Uuid = None
             }
 
     type SourceOnlyRepositorySettings = {
@@ -40484,6 +46625,14 @@ module Types =
         MaxNumberOfSnapshots: Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("read_only")>]
         ReadOnly: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("chunk_size")>]
+        ChunkSize: ByteSize option
+        [<System.Text.Json.Serialization.JsonPropertyName("compress")>]
+        Compress: bool option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_restore_bytes_per_sec")>]
+        MaxRestoreBytesPerSec: ByteSize option
+        [<System.Text.Json.Serialization.JsonPropertyName("max_snapshot_bytes_per_sec")>]
+        MaxSnapshotBytesPerSec: ByteSize option
     }
 
         with
@@ -40492,6 +46641,10 @@ module Types =
                 DelegateType = None
                 MaxNumberOfSnapshots = None
                 ReadOnly = None
+                ChunkSize = None
+                Compress = None
+                MaxRestoreBytesPerSec = None
+                MaxSnapshotBytesPerSec = None
             }
 
     type SourceOnlyRepository = {
@@ -40499,6 +46652,8 @@ module Types =
         Type: string
         [<System.Text.Json.Serialization.JsonPropertyName("settings")>]
         Settings: SourceOnlyRepositorySettings
+        [<System.Text.Json.Serialization.JsonPropertyName("uuid")>]
+        Uuid: Uuid option
     }
 
         with
@@ -40506,6 +46661,7 @@ module Types =
             {
                 Type = "source"
                 Settings = Unchecked.defaultof<_>
+                Uuid = None
             }
 
     [<RequireQualifiedAccess>]
@@ -40840,6 +46996,8 @@ module Types =
         ClusterName: Name
         [<System.Text.Json.Serialization.JsonPropertyName("nodes")>]
         Nodes: Map<string, RepositoryMeteringInformation>
+        [<System.Text.Json.Serialization.JsonPropertyName("_nodes")>]
+        NodesField: NodeStatistics option
     }
 
         with
@@ -40847,6 +47005,7 @@ module Types =
             {
                 ClusterName = Unchecked.defaultof<_>
                 Nodes = Unchecked.defaultof<_>
+                NodesField = None
             }
 
     type NodesGetRepositoriesMeteringInfoResponseBase = {
@@ -40854,6 +47013,8 @@ module Types =
         ClusterName: Name
         [<System.Text.Json.Serialization.JsonPropertyName("nodes")>]
         Nodes: Map<string, RepositoryMeteringInformation>
+        [<System.Text.Json.Serialization.JsonPropertyName("_nodes")>]
+        NodesField: NodeStatistics option
     }
 
         with
@@ -40861,6 +47022,7 @@ module Types =
             {
                 ClusterName = Unchecked.defaultof<_>
                 Nodes = Unchecked.defaultof<_>
+                NodesField = None
             }
 
     type NodesInfoResponseBase = {
@@ -40868,6 +47030,8 @@ module Types =
         ClusterName: Name
         [<System.Text.Json.Serialization.JsonPropertyName("nodes")>]
         Nodes: Map<string, NodeInfo>
+        [<System.Text.Json.Serialization.JsonPropertyName("_nodes")>]
+        NodesField: NodeStatistics option
     }
 
         with
@@ -40875,6 +47039,7 @@ module Types =
             {
                 ClusterName = Unchecked.defaultof<_>
                 Nodes = Unchecked.defaultof<_>
+                NodesField = None
             }
 
     type NodesReloadSecureSettingsResponseBase = {
@@ -40882,6 +47047,8 @@ module Types =
         ClusterName: Name
         [<System.Text.Json.Serialization.JsonPropertyName("nodes")>]
         Nodes: Map<string, NodeReloadResult>
+        [<System.Text.Json.Serialization.JsonPropertyName("_nodes")>]
+        NodesField: NodeStatistics option
     }
 
         with
@@ -40889,6 +47056,7 @@ module Types =
             {
                 ClusterName = Unchecked.defaultof<_>
                 Nodes = Unchecked.defaultof<_>
+                NodesField = None
             }
 
     type Scripting = {
@@ -41029,7 +47197,7 @@ module Types =
         [<System.Text.Json.Serialization.JsonPropertyName("ingest")>]
         Ingest: NodesTypesIngest option
         [<System.Text.Json.Serialization.JsonPropertyName("ip")>]
-        Ip: System.Text.Json.JsonElement option
+        Ip: Ip list option
         [<System.Text.Json.Serialization.JsonPropertyName("jvm")>]
         Jvm: Jvm option
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
@@ -41043,7 +47211,7 @@ module Types =
         [<System.Text.Json.Serialization.JsonPropertyName("script")>]
         Script: Scripting option
         [<System.Text.Json.Serialization.JsonPropertyName("script_cache")>]
-        ScriptCache: Map<string, System.Text.Json.JsonElement> option
+        ScriptCache: Map<string, ScriptCache list> option
         [<System.Text.Json.Serialization.JsonPropertyName("thread_pool")>]
         ThreadPool: Map<string, ThreadCount> option
         [<System.Text.Json.Serialization.JsonPropertyName("timestamp")>]
@@ -41094,6 +47262,8 @@ module Types =
         ClusterName: Name option
         [<System.Text.Json.Serialization.JsonPropertyName("nodes")>]
         Nodes: Map<string, Stats>
+        [<System.Text.Json.Serialization.JsonPropertyName("_nodes")>]
+        NodesField: NodeStatistics option
     }
 
         with
@@ -41101,6 +47271,7 @@ module Types =
             {
                 ClusterName = None
                 Nodes = Unchecked.defaultof<_>
+                NodesField = None
             }
 
     type NodesUsageResponseBase = {
@@ -41108,6 +47279,8 @@ module Types =
         ClusterName: Name
         [<System.Text.Json.Serialization.JsonPropertyName("nodes")>]
         Nodes: Map<string, NodeUsage>
+        [<System.Text.Json.Serialization.JsonPropertyName("_nodes")>]
+        NodesField: NodeStatistics option
     }
 
         with
@@ -41115,6 +47288,7 @@ module Types =
             {
                 ClusterName = Unchecked.defaultof<_>
                 Nodes = Unchecked.defaultof<_>
+                NodesField = None
             }
 
     type GlobalBulkResponseItem = {
@@ -41267,7 +47441,7 @@ module Types =
         [<System.Text.Json.Serialization.JsonPropertyName("remote_cluster")>]
         RemoteCluster: RemoteClusterPrivileges list option
         [<System.Text.Json.Serialization.JsonPropertyName("global")>]
-        Global: System.Text.Json.JsonElement option
+        Global: GlobalPrivilege list option
         [<System.Text.Json.Serialization.JsonPropertyName("applications")>]
         Applications: ApplicationPrivileges list option
         [<System.Text.Json.Serialization.JsonPropertyName("metadata")>]
@@ -41313,7 +47487,7 @@ module Types =
     type RoleMappingRule =
         | Any of RoleMappingRule list
         | All of RoleMappingRule list
-        | Field of field: string * System.Text.Json.JsonElement
+        | Field of field: string * FieldValue list
         | Except of RoleMappingRule
 
     type SecurityTypesRoleMapping = {
@@ -41642,12 +47816,18 @@ module Types =
     type XpackUsageRuntimeFieldTypes = {
         [<System.Text.Json.Serialization.JsonPropertyName("field_types")>]
         FieldTypes: RuntimeFieldsType list
+        [<System.Text.Json.Serialization.JsonPropertyName("available")>]
+        Available: bool
+        [<System.Text.Json.Serialization.JsonPropertyName("enabled")>]
+        Enabled: bool
     }
 
         with
         static member empty : XpackUsageRuntimeFieldTypes =
             {
                 FieldTypes = Unchecked.defaultof<_>
+                Available = Unchecked.defaultof<_>
+                Enabled = Unchecked.defaultof<_>
             }
 
     type ScheduleTriggerEvent = {
@@ -41702,6 +47882,12 @@ module Types =
         Name: Name
         [<System.Text.Json.Serialization.JsonPropertyName("updated_at_millis")>]
         UpdatedAtMillis: EpochTime<UnitMillis>
+        [<System.Text.Json.Serialization.JsonPropertyName("indices")>]
+        Indices: IndexName list
+        [<System.Text.Json.Serialization.JsonPropertyName("analytics_collection_name")>]
+        AnalyticsCollectionName: Name option
+        [<System.Text.Json.Serialization.JsonPropertyName("template")>]
+        Template: SearchApplicationTemplate option
     }
 
         with
@@ -41709,6 +47895,9 @@ module Types =
             {
                 Name = Unchecked.defaultof<_>
                 UpdatedAtMillis = Unchecked.defaultof<_>
+                Indices = Unchecked.defaultof<_>
+                AnalyticsCollectionName = None
+                Template = None
             }
 
     type SearchShardsNodeAttributes = {
@@ -41753,6 +47942,10 @@ module Types =
         FullCopyIndicesCount: Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("shared_cache_indices_count")>]
         SharedCacheIndicesCount: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("available")>]
+        Available: bool
+        [<System.Text.Json.Serialization.JsonPropertyName("enabled")>]
+        Enabled: bool
     }
 
         with
@@ -41761,6 +47954,8 @@ module Types =
                 IndicesCount = Unchecked.defaultof<_>
                 FullCopyIndicesCount = None
                 SharedCacheIndicesCount = None
+                Available = Unchecked.defaultof<_>
+                Enabled = Unchecked.defaultof<_>
             }
 
     type SecurityRolesNative = {
@@ -41853,6 +48048,10 @@ module Types =
         TokenService: FeatureToggle
         [<System.Text.Json.Serialization.JsonPropertyName("operator_privileges")>]
         OperatorPrivileges: Base
+        [<System.Text.Json.Serialization.JsonPropertyName("available")>]
+        Available: bool
+        [<System.Text.Json.Serialization.JsonPropertyName("enabled")>]
+        Enabled: bool
     }
 
         with
@@ -41870,6 +48069,8 @@ module Types =
                 SystemKey = None
                 TokenService = Unchecked.defaultof<_>
                 OperatorPrivileges = Unchecked.defaultof<_>
+                Available = Unchecked.defaultof<_>
+                Enabled = Unchecked.defaultof<_>
             }
 
     type SecuritySettings = {
@@ -42457,6 +48658,10 @@ module Types =
         PolicyCount: Integer option
         [<System.Text.Json.Serialization.JsonPropertyName("policy_stats")>]
         PolicyStats: Statistics option
+        [<System.Text.Json.Serialization.JsonPropertyName("available")>]
+        Available: bool
+        [<System.Text.Json.Serialization.JsonPropertyName("enabled")>]
+        Enabled: bool
     }
 
         with
@@ -42464,6 +48669,8 @@ module Types =
             {
                 PolicyCount = None
                 PolicyStats = None
+                Available = Unchecked.defaultof<_>
+                Enabled = Unchecked.defaultof<_>
             }
 
     type SnapshotShardsStatus = {
@@ -42855,6 +49062,10 @@ module Types =
         Features: Map<string, Integer>
         [<System.Text.Json.Serialization.JsonPropertyName("queries")>]
         Queries: Map<string, Query>
+        [<System.Text.Json.Serialization.JsonPropertyName("available")>]
+        Available: bool
+        [<System.Text.Json.Serialization.JsonPropertyName("enabled")>]
+        Enabled: bool
     }
 
         with
@@ -42862,6 +49073,8 @@ module Types =
             {
                 Features = Unchecked.defaultof<_>
                 Queries = Unchecked.defaultof<_>
+                Available = Unchecked.defaultof<_>
+                Enabled = Unchecked.defaultof<_>
             }
 
     [<RequireQualifiedAccess>]
@@ -42899,6 +49112,8 @@ module Types =
         Timestamp: Long
         [<System.Text.Json.Serialization.JsonPropertyName("ccs")>]
         Ccs: CCSStats
+        [<System.Text.Json.Serialization.JsonPropertyName("_nodes")>]
+        NodesField: NodeStatistics option
     }
 
         with
@@ -42913,6 +49128,7 @@ module Types =
                 Status = None
                 Timestamp = Unchecked.defaultof<_>
                 Ccs = Unchecked.defaultof<_>
+                NodesField = None
             }
 
     type Status = {
@@ -42985,6 +49201,26 @@ module Types =
         Clusters: ClusterStatistics option
         [<System.Text.Json.Serialization.JsonPropertyName("completion_status")>]
         CompletionStatus: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("id")>]
+        Id: Id option
+        [<System.Text.Json.Serialization.JsonPropertyName("is_partial")>]
+        IsPartial: bool
+        [<System.Text.Json.Serialization.JsonPropertyName("is_running")>]
+        IsRunning: bool
+        [<System.Text.Json.Serialization.JsonPropertyName("expiration_time")>]
+        ExpirationTime: DateTime option
+        [<System.Text.Json.Serialization.JsonPropertyName("expiration_time_in_millis")>]
+        ExpirationTimeInMillis: EpochTime<UnitMillis>
+        [<System.Text.Json.Serialization.JsonPropertyName("start_time")>]
+        StartTime: DateTime option
+        [<System.Text.Json.Serialization.JsonPropertyName("start_time_in_millis")>]
+        StartTimeInMillis: EpochTime<UnitMillis>
+        [<System.Text.Json.Serialization.JsonPropertyName("completion_time")>]
+        CompletionTime: DateTime option
+        [<System.Text.Json.Serialization.JsonPropertyName("completion_time_in_millis")>]
+        CompletionTimeInMillis: EpochTime<UnitMillis> option
+        [<System.Text.Json.Serialization.JsonPropertyName("error")>]
+        Error: ErrorCause option
     }
 
         with
@@ -42993,6 +49229,16 @@ module Types =
                 Shards = Unchecked.defaultof<_>
                 Clusters = None
                 CompletionStatus = None
+                Id = None
+                IsPartial = Unchecked.defaultof<_>
+                IsRunning = Unchecked.defaultof<_>
+                ExpirationTime = None
+                ExpirationTimeInMillis = Unchecked.defaultof<_>
+                StartTime = None
+                StartTimeInMillis = Unchecked.defaultof<_>
+                CompletionTime = None
+                CompletionTimeInMillis = None
+                Error = None
             }
 
     type StepKey = {
@@ -44581,12 +50827,30 @@ module Types =
     type UpdateByQueryRethrottleNode = {
         [<System.Text.Json.Serialization.JsonPropertyName("tasks")>]
         Tasks: Map<TaskId, TaskInfo>
+        [<System.Text.Json.Serialization.JsonPropertyName("attributes")>]
+        Attributes: Map<string, string>
+        [<System.Text.Json.Serialization.JsonPropertyName("host")>]
+        Host: Host
+        [<System.Text.Json.Serialization.JsonPropertyName("ip")>]
+        Ip: Ip
+        [<System.Text.Json.Serialization.JsonPropertyName("name")>]
+        Name: Name
+        [<System.Text.Json.Serialization.JsonPropertyName("roles")>]
+        Roles: NodeRoles option
+        [<System.Text.Json.Serialization.JsonPropertyName("transport_address")>]
+        TransportAddress: TransportAddress
     }
 
         with
         static member empty : UpdateByQueryRethrottleNode =
             {
                 Tasks = Unchecked.defaultof<_>
+                Attributes = Unchecked.defaultof<_>
+                Host = Unchecked.defaultof<_>
+                Ip = Unchecked.defaultof<_>
+                Name = Unchecked.defaultof<_>
+                Roles = None
+                TransportAddress = Unchecked.defaultof<_>
             }
 
     type WriteResponseBase = {
@@ -44627,6 +50891,24 @@ module Types =
     type UpdateWriteResponseBase<'TDocument> = {
         [<System.Text.Json.Serialization.JsonPropertyName("get")>]
         Get: InlineGet<'TDocument> option
+        [<System.Text.Json.Serialization.JsonPropertyName("_id")>]
+        Id: Id
+        [<System.Text.Json.Serialization.JsonPropertyName("_index")>]
+        Index: IndexName
+        [<System.Text.Json.Serialization.JsonPropertyName("_primary_term")>]
+        PrimaryTerm: Long option
+        [<System.Text.Json.Serialization.JsonPropertyName("result")>]
+        Result: Result
+        [<System.Text.Json.Serialization.JsonPropertyName("_seq_no")>]
+        SeqNo: SequenceNumber option
+        [<System.Text.Json.Serialization.JsonPropertyName("_shards")>]
+        Shards: ShardStatistics
+        [<System.Text.Json.Serialization.JsonPropertyName("_version")>]
+        Version: VersionNumber
+        [<System.Text.Json.Serialization.JsonPropertyName("failure_store")>]
+        FailureStore: FailureStoreStatus option
+        [<System.Text.Json.Serialization.JsonPropertyName("forced_refresh")>]
+        ForcedRefresh: bool option
     }
 
     type UpdatedDataStreamMappings = {
@@ -44713,7 +50995,7 @@ module Types =
         [<System.Text.Json.Serialization.JsonPropertyName("field_security")>]
         FieldSecurity: FieldSecurity list option
         [<System.Text.Json.Serialization.JsonPropertyName("names")>]
-        Names: System.Text.Json.JsonElement
+        Names: IndexName list
         [<System.Text.Json.Serialization.JsonPropertyName("privileges")>]
         Privileges: IndexPrivilege list
         [<System.Text.Json.Serialization.JsonPropertyName("query")>]
@@ -44736,7 +51018,7 @@ module Types =
         [<System.Text.Json.Serialization.JsonPropertyName("field_security")>]
         FieldSecurity: FieldSecurity list option
         [<System.Text.Json.Serialization.JsonPropertyName("names")>]
-        Names: System.Text.Json.JsonElement
+        Names: IndexName list
         [<System.Text.Json.Serialization.JsonPropertyName("privileges")>]
         Privileges: IndexPrivilege list
         [<System.Text.Json.Serialization.JsonPropertyName("query")>]
@@ -44823,6 +51105,16 @@ module Types =
         LastSynchronized: Long
         [<System.Text.Json.Serialization.JsonPropertyName("_doc")>]
         Doc: UserProfileHitMetadata
+        [<System.Text.Json.Serialization.JsonPropertyName("uid")>]
+        Uid: UserProfileId
+        [<System.Text.Json.Serialization.JsonPropertyName("user")>]
+        User: UserProfileUser
+        [<System.Text.Json.Serialization.JsonPropertyName("data")>]
+        Data: Map<string, System.Text.Json.JsonElement>
+        [<System.Text.Json.Serialization.JsonPropertyName("labels")>]
+        Labels: Map<string, System.Text.Json.JsonElement>
+        [<System.Text.Json.Serialization.JsonPropertyName("enabled")>]
+        Enabled: bool option
     }
 
         with
@@ -44830,6 +51122,11 @@ module Types =
             {
                 LastSynchronized = Unchecked.defaultof<_>
                 Doc = Unchecked.defaultof<_>
+                Uid = Unchecked.defaultof<_>
+                User = Unchecked.defaultof<_>
+                Data = Unchecked.defaultof<_>
+                Labels = Unchecked.defaultof<_>
+                Enabled = None
             }
 
     [<RequireQualifiedAccess>]
@@ -44854,6 +51151,10 @@ module Types =
         DenseVectorFieldsCount: Integer
         [<System.Text.Json.Serialization.JsonPropertyName("sparse_vector_fields_count")>]
         SparseVectorFieldsCount: Integer option
+        [<System.Text.Json.Serialization.JsonPropertyName("available")>]
+        Available: bool
+        [<System.Text.Json.Serialization.JsonPropertyName("enabled")>]
+        Enabled: bool
     }
 
         with
@@ -44862,6 +51163,8 @@ module Types =
                 DenseVectorDimsAvgCount = Unchecked.defaultof<_>
                 DenseVectorFieldsCount = Unchecked.defaultof<_>
                 SparseVectorFieldsCount = None
+                Available = Unchecked.defaultof<_>
+                Enabled = Unchecked.defaultof<_>
             }
 
     type Vertex = {
@@ -45020,6 +51323,8 @@ module Types =
         WatchId: Id
         [<System.Text.Json.Serialization.JsonPropertyName("watch_record_id")>]
         WatchRecordId: Id
+        [<System.Text.Json.Serialization.JsonPropertyName("execution_time")>]
+        ExecutionTime: DateTime
     }
 
         with
@@ -45030,6 +51335,7 @@ module Types =
                 ExecutedActions = None
                 WatchId = Unchecked.defaultof<_>
                 WatchRecordId = Unchecked.defaultof<_>
+                ExecutionTime = Unchecked.defaultof<_>
             }
 
     type WatcherActionTotals = {
@@ -45062,6 +51368,10 @@ module Types =
         Cron: Counter
         [<System.Text.Json.Serialization.JsonPropertyName("_all")>]
         All: Counter
+        [<System.Text.Json.Serialization.JsonPropertyName("active")>]
+        Active: Long
+        [<System.Text.Json.Serialization.JsonPropertyName("total")>]
+        Total: Long
     }
 
         with
@@ -45069,6 +51379,8 @@ module Types =
             {
                 Cron = Unchecked.defaultof<_>
                 All = Unchecked.defaultof<_>
+                Active = Unchecked.defaultof<_>
+                Total = Unchecked.defaultof<_>
             }
 
     type WatcherWatchTrigger = {
@@ -45112,6 +51424,10 @@ module Types =
         Watch: WatcherWatch
         [<System.Text.Json.Serialization.JsonPropertyName("count")>]
         Count: Counter
+        [<System.Text.Json.Serialization.JsonPropertyName("available")>]
+        Available: bool
+        [<System.Text.Json.Serialization.JsonPropertyName("enabled")>]
+        Enabled: bool
     }
 
         with
@@ -45120,6 +51436,8 @@ module Types =
                 Execution = Unchecked.defaultof<_>
                 Watch = Unchecked.defaultof<_>
                 Count = Unchecked.defaultof<_>
+                Available = Unchecked.defaultof<_>
+                Enabled = Unchecked.defaultof<_>
             }
 
     [<RequireQualifiedAccess>]

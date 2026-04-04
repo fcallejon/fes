@@ -531,9 +531,9 @@ module WatcherOperations =
             { req with MasterTimeout = Some value }
 
     type WatcherStatsRequest = {
-        Metric: System.Text.Json.JsonElement
+        Metric: Types.WatcherMetric list
         EmitStacktraces: bool option
-        queryMetric: System.Text.Json.JsonElement option
+        queryMetric: Types.WatcherMetric list option
     }
 
         with
@@ -562,7 +562,7 @@ module WatcherOperations =
             }
 
         [<CustomOperation("metric")>]
-        member _.Metric(state: WatcherStatsRequest, value: System.Text.Json.JsonElement) =
+        member _.Metric(state: WatcherStatsRequest, value: Types.WatcherMetric list) =
             { state with Metric = value }
 
         [<CustomOperation("emitStacktraces")>]
@@ -570,7 +570,7 @@ module WatcherOperations =
             { state with EmitStacktraces = Some value }
 
         [<CustomOperation("queryMetric")>]
-        member _.QueryMetric(state: WatcherStatsRequest, value: System.Text.Json.JsonElement) =
+        member _.QueryMetric(state: WatcherStatsRequest, value: Types.WatcherMetric list) =
             { state with queryMetric = Some value }
 
     let watcherStatsRequest = WatcherStatsRequestBuilder()
@@ -578,7 +578,7 @@ module WatcherOperations =
     module Stats =
         let withEmitStacktraces (value: bool) (req: WatcherStatsRequest) =
             { req with EmitStacktraces = Some value }
-        let withMetric (value: System.Text.Json.JsonElement) (req: WatcherStatsRequest) =
+        let withMetric (value: Types.WatcherMetric list) (req: WatcherStatsRequest) =
             { req with queryMetric = Some value }
 
     type WatcherStopRequest = {

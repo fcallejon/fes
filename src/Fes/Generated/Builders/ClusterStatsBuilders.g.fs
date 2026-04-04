@@ -745,3 +745,60 @@ module ClusterStatsBuilders =
 
     let remoteClusterInfo = RemoteClusterInfoBuilder()
 
+    type StatsResponseBaseBuilder() =
+        member _.Yield(_: unit) : Types.StatsResponseBase =
+            {
+                ClusterName = Unchecked.defaultof<_>
+                ClusterUuid = Unchecked.defaultof<_>
+                Indices = Unchecked.defaultof<_>
+                Nodes = Unchecked.defaultof<_>
+                Repositories = Unchecked.defaultof<_>
+                Snapshots = Unchecked.defaultof<_>
+                Status = None
+                Timestamp = Unchecked.defaultof<_>
+                Ccs = Unchecked.defaultof<_>
+                NodesField = None
+            }
+
+        [<CustomOperation("clusterName")>]
+        member _.ClusterName(state: Types.StatsResponseBase, value: Types.Name) =
+            { state with ClusterName = value }
+
+        [<CustomOperation("clusterUuid")>]
+        member _.ClusterUuid(state: Types.StatsResponseBase, value: Types.Uuid) =
+            { state with ClusterUuid = value }
+
+        [<CustomOperation("indices")>]
+        member _.Indices(state: Types.StatsResponseBase, value: Types.ClusterIndices) =
+            { state with Indices = value }
+
+        [<CustomOperation("nodes")>]
+        member _.Nodes(state: Types.StatsResponseBase, value: Types.ClusterNodes) =
+            { state with Nodes = value }
+
+        [<CustomOperation("repositories")>]
+        member _.Repositories(state: Types.StatsResponseBase, value: Map<Types.Name, Map<Types.Name, Types.Long>>) =
+            { state with Repositories = value }
+
+        [<CustomOperation("snapshots")>]
+        member _.Snapshots(state: Types.StatsResponseBase, value: Types.ClusterSnapshotStats) =
+            { state with Snapshots = value }
+
+        [<CustomOperation("status")>]
+        member _.Status(state: Types.StatsResponseBase, value: Types.HealthStatus) =
+            { state with Status = Some value }
+
+        [<CustomOperation("timestamp")>]
+        member _.Timestamp(state: Types.StatsResponseBase, value: Types.Long) =
+            { state with Timestamp = value }
+
+        [<CustomOperation("ccs")>]
+        member _.Ccs(state: Types.StatsResponseBase, value: Types.CCSStats) =
+            { state with Ccs = value }
+
+        [<CustomOperation("nodesField")>]
+        member _.NodesField(state: Types.StatsResponseBase, value: Types.NodeStatistics) =
+            { state with NodesField = Some value }
+
+    let statsResponseBase = StatsResponseBaseBuilder()
+

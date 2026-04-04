@@ -41,6 +41,96 @@ module GlobalRankEvalBuilders =
 
     let rankEvalMetric = RankEvalMetricBuilder()
 
+    type RankEvalMetricDiscountedCumulativeGainBuilder() =
+        member _.Yield(_: unit) : Types.RankEvalMetricDiscountedCumulativeGain =
+            {
+                Normalize = None
+                K = None
+            }
+
+        [<CustomOperation("normalize")>]
+        member _.Normalize(state: Types.RankEvalMetricDiscountedCumulativeGain, value: bool) =
+            { state with Normalize = Some value }
+
+        [<CustomOperation("k")>]
+        member _.K(state: Types.RankEvalMetricDiscountedCumulativeGain, value: Types.Integer) =
+            { state with K = Some value }
+
+    let rankEvalMetricDiscountedCumulativeGain = RankEvalMetricDiscountedCumulativeGainBuilder()
+
+    type RankEvalMetricMeanReciprocalRankBuilder() =
+        member _.Yield(_: unit) : Types.RankEvalMetricMeanReciprocalRank =
+            {
+                K = None
+                RelevantRatingThreshold = None
+            }
+
+        [<CustomOperation("k")>]
+        member _.K(state: Types.RankEvalMetricMeanReciprocalRank, value: Types.Integer) =
+            { state with K = Some value }
+
+        [<CustomOperation("relevantRatingThreshold")>]
+        member _.RelevantRatingThreshold(state: Types.RankEvalMetricMeanReciprocalRank, value: Types.Integer) =
+            { state with RelevantRatingThreshold = Some value }
+
+    let rankEvalMetricMeanReciprocalRank = RankEvalMetricMeanReciprocalRankBuilder()
+
+    type RankEvalMetricPrecisionBuilder() =
+        member _.Yield(_: unit) : Types.RankEvalMetricPrecision =
+            {
+                IgnoreUnlabeled = None
+                K = None
+                RelevantRatingThreshold = None
+            }
+
+        [<CustomOperation("ignoreUnlabeled")>]
+        member _.IgnoreUnlabeled(state: Types.RankEvalMetricPrecision, value: bool) =
+            { state with IgnoreUnlabeled = Some value }
+
+        [<CustomOperation("k")>]
+        member _.K(state: Types.RankEvalMetricPrecision, value: Types.Integer) =
+            { state with K = Some value }
+
+        [<CustomOperation("relevantRatingThreshold")>]
+        member _.RelevantRatingThreshold(state: Types.RankEvalMetricPrecision, value: Types.Integer) =
+            { state with RelevantRatingThreshold = Some value }
+
+    let rankEvalMetricPrecision = RankEvalMetricPrecisionBuilder()
+
+    type RankEvalMetricRatingTresholdBuilder() =
+        member _.Yield(_: unit) : Types.RankEvalMetricRatingTreshold =
+            {
+                RelevantRatingThreshold = None
+                K = None
+            }
+
+        [<CustomOperation("relevantRatingThreshold")>]
+        member _.RelevantRatingThreshold(state: Types.RankEvalMetricRatingTreshold, value: Types.Integer) =
+            { state with RelevantRatingThreshold = Some value }
+
+        [<CustomOperation("k")>]
+        member _.K(state: Types.RankEvalMetricRatingTreshold, value: Types.Integer) =
+            { state with K = Some value }
+
+    let rankEvalMetricRatingTreshold = RankEvalMetricRatingTresholdBuilder()
+
+    type RankEvalMetricRecallBuilder() =
+        member _.Yield(_: unit) : Types.RankEvalMetricRecall =
+            {
+                K = None
+                RelevantRatingThreshold = None
+            }
+
+        [<CustomOperation("k")>]
+        member _.K(state: Types.RankEvalMetricRecall, value: Types.Integer) =
+            { state with K = Some value }
+
+        [<CustomOperation("relevantRatingThreshold")>]
+        member _.RelevantRatingThreshold(state: Types.RankEvalMetricRecall, value: Types.Integer) =
+            { state with RelevantRatingThreshold = Some value }
+
+    let rankEvalMetricRecall = RankEvalMetricRecallBuilder()
+
     type RankEvalRequestItemBuilder() =
         member _.Yield(_: unit) : Types.RankEvalRequestItem =
             {

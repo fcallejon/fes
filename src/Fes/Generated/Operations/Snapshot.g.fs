@@ -438,7 +438,7 @@ module SnapshotOperations =
         Size: Types.Integer option
         SlmPolicyFilter: Types.Name option
         Sort: Types.SnapshotSort option
-        State: System.Text.Json.JsonElement option
+        State: Types.SnapshotState list option
         Verbose: bool option
     }
 
@@ -549,7 +549,7 @@ module SnapshotOperations =
             { state with Sort = Some value }
 
         [<CustomOperation("state")>]
-        member _.State(state: SnapshotGetRequest, value: System.Text.Json.JsonElement) =
+        member _.State(state: SnapshotGetRequest, value: Types.SnapshotState list) =
             { state with State = Some value }
 
         [<CustomOperation("verbose")>]
@@ -583,7 +583,7 @@ module SnapshotOperations =
             { req with SlmPolicyFilter = Some value }
         let withSort (value: Types.SnapshotSort) (req: SnapshotGetRequest) =
             { req with Sort = Some value }
-        let withState (value: System.Text.Json.JsonElement) (req: SnapshotGetRequest) =
+        let withState (value: Types.SnapshotState list) (req: SnapshotGetRequest) =
             { req with State = Some value }
         let withVerbose (value: bool) (req: SnapshotGetRequest) =
             { req with Verbose = Some value }

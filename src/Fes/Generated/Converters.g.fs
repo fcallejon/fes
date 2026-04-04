@@ -12978,7 +12978,7 @@ module Converters =
                     reader.Read() |> ignore // StartObject
                     let field = reader.GetString()
                     reader.Read() |> ignore
-                    let v = System.Text.Json.JsonSerializer.Deserialize<System.Text.Json.JsonElement>(&reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<Types.FieldValue list>(&reader, options)
                     reader.Read() |> ignore // EndObject
                     RoleMappingRule.Field (field, v)
                 | "except" ->
@@ -14566,13 +14566,13 @@ module Converters =
                     let v = System.Text.Json.JsonSerializer.Deserialize<Types.Duration>(&reader, options)
                     ScheduleContainer.Interval v
                 | "monthly" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<System.Text.Json.JsonElement>(&reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<Types.TimeOfMonth list>(&reader, options)
                     ScheduleContainer.Monthly v
                 | "weekly" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<System.Text.Json.JsonElement>(&reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<Types.TimeOfWeek list>(&reader, options)
                     ScheduleContainer.Weekly v
                 | "yearly" ->
-                    let v = System.Text.Json.JsonSerializer.Deserialize<System.Text.Json.JsonElement>(&reader, options)
+                    let v = System.Text.Json.JsonSerializer.Deserialize<Types.TimeOfYear list>(&reader, options)
                     ScheduleContainer.Yearly v
                 | other -> raise (System.Text.Json.JsonException($"Unknown property '{other}' for ScheduleContainer"))
             reader.Read() |> ignore // EndObject

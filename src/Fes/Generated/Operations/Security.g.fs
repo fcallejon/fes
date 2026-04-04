@@ -177,7 +177,7 @@ module SecurityOperations =
         [<System.Text.Json.Serialization.JsonPropertyName("expiration")>]
         Expiration: Types.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("ids")>]
-        Ids: System.Text.Json.JsonElement
+        Ids: string list
         [<System.Text.Json.Serialization.JsonPropertyName("metadata")>]
         Metadata: Types.Metadata option
         [<System.Text.Json.Serialization.JsonPropertyName("role_descriptors")>]
@@ -208,7 +208,7 @@ module SecurityOperations =
             { state with Expiration = Some value }
 
         [<CustomOperation("ids")>]
-        member _.Ids(state: SecurityBulkUpdateApiKeysRequest, value: System.Text.Json.JsonElement) =
+        member _.Ids(state: SecurityBulkUpdateApiKeysRequest, value: string list) =
             { state with Ids = value }
 
         [<CustomOperation("metadata")>]
@@ -224,7 +224,7 @@ module SecurityOperations =
     module BulkUpdateApiKeys =
         let withExpiration (value: Types.Duration) (req: SecurityBulkUpdateApiKeysRequest) =
             { req with Expiration = Some value }
-        let withIds (value: System.Text.Json.JsonElement) (req: SecurityBulkUpdateApiKeysRequest) =
+        let withIds (value: string list) (req: SecurityBulkUpdateApiKeysRequest) =
             { req with Ids = value }
         let withMetadata (value: Types.Metadata) (req: SecurityBulkUpdateApiKeysRequest) =
             { req with Metadata = Some value }
@@ -1466,7 +1466,7 @@ module SecurityOperations =
             { req with Username = Some value }
 
     type SecurityGetUserRequest = {
-        Username: System.Text.Json.JsonElement
+        Username: Types.Username list
         WithProfileUid: bool option
     }
 
@@ -1494,7 +1494,7 @@ module SecurityOperations =
             }
 
         [<CustomOperation("username")>]
-        member _.Username(state: SecurityGetUserRequest, value: System.Text.Json.JsonElement) =
+        member _.Username(state: SecurityGetUserRequest, value: Types.Username list) =
             { state with Username = value }
 
         [<CustomOperation("withProfileUid")>]
@@ -1519,8 +1519,8 @@ module SecurityOperations =
     type SecurityGetUserPrivilegesResponse = System.Text.Json.JsonElement
 
     type SecurityGetUserProfileRequest = {
-        Uid: System.Text.Json.JsonElement
-        Data: System.Text.Json.JsonElement option
+        Uid: Types.UserProfileId list
+        Data: string list option
     }
 
         with
@@ -1547,17 +1547,17 @@ module SecurityOperations =
             }
 
         [<CustomOperation("uid")>]
-        member _.Uid(state: SecurityGetUserProfileRequest, value: System.Text.Json.JsonElement) =
+        member _.Uid(state: SecurityGetUserProfileRequest, value: Types.UserProfileId list) =
             { state with Uid = value }
 
         [<CustomOperation("data")>]
-        member _.Data(state: SecurityGetUserProfileRequest, value: System.Text.Json.JsonElement) =
+        member _.Data(state: SecurityGetUserProfileRequest, value: string list) =
             { state with Data = Some value }
 
     let securityGetUserProfileRequest = SecurityGetUserProfileRequestBuilder()
 
     module GetUserProfile =
-        let withData (value: System.Text.Json.JsonElement) (req: SecurityGetUserProfileRequest) =
+        let withData (value: string list) (req: SecurityGetUserProfileRequest) =
             { req with Data = Some value }
 
     type SecurityGrantApiKeyRequest = {
@@ -2962,13 +2962,13 @@ module SecurityOperations =
     let securitySamlServiceProviderMetadataRequest = SecuritySamlServiceProviderMetadataRequestBuilder()
 
     type SecuritySuggestUserProfilesRequest = {
-        Data: System.Text.Json.JsonElement option
+        Data: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("name")>]
         Name: string option
         [<System.Text.Json.Serialization.JsonPropertyName("size")>]
         Size: Types.Long option
         [<System.Text.Json.Serialization.JsonPropertyName("data")>]
-        bodyData: System.Text.Json.JsonElement option
+        bodyData: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("hint")>]
         Hint: Types.Hint option
     }
@@ -3001,7 +3001,7 @@ module SecurityOperations =
             }
 
         [<CustomOperation("data")>]
-        member _.Data(state: SecuritySuggestUserProfilesRequest, value: System.Text.Json.JsonElement) =
+        member _.Data(state: SecuritySuggestUserProfilesRequest, value: string list) =
             { state with Data = Some value }
 
         [<CustomOperation("name")>]
@@ -3013,7 +3013,7 @@ module SecurityOperations =
             { state with Size = Some value }
 
         [<CustomOperation("bodyData")>]
-        member _.BodyData(state: SecuritySuggestUserProfilesRequest, value: System.Text.Json.JsonElement) =
+        member _.BodyData(state: SecuritySuggestUserProfilesRequest, value: string list) =
             { state with bodyData = Some value }
 
         [<CustomOperation("hint")>]
@@ -3023,13 +3023,13 @@ module SecurityOperations =
     let securitySuggestUserProfilesRequest = SecuritySuggestUserProfilesRequestBuilder()
 
     module SuggestUserProfiles =
-        let withData (value: System.Text.Json.JsonElement) (req: SecuritySuggestUserProfilesRequest) =
+        let withData (value: string list) (req: SecuritySuggestUserProfilesRequest) =
             { req with Data = Some value }
         let withName (value: string) (req: SecuritySuggestUserProfilesRequest) =
             { req with Name = Some value }
         let withSize (value: Types.Long) (req: SecuritySuggestUserProfilesRequest) =
             { req with Size = Some value }
-        let withBodyData (value: System.Text.Json.JsonElement) (req: SecuritySuggestUserProfilesRequest) =
+        let withBodyData (value: string list) (req: SecuritySuggestUserProfilesRequest) =
             { req with bodyData = Some value }
         let withHint (value: Types.Hint) (req: SecuritySuggestUserProfilesRequest) =
             { req with Hint = Some value }
