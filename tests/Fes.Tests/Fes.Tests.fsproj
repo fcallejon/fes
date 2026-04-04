@@ -33,6 +33,7 @@
     <Compile Include="QueryBuilderTests.fs" />
     <Compile Include="AggregationBuilderTests.fs" />
     <Compile Include="JsonConverterTests.fs" />
+    <Compile Include="IntegrationTests.fs" />
     <!-- Generated tests: enum round-trips, endpoint method/body, variant discriminators -->
     <Compile Include="Generated/EndpointTests.g.fs" />
     <Compile Include="Generated/EnumRoundTripTests.g.fs" />
