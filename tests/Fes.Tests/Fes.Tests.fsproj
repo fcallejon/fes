@@ -26,6 +26,7 @@
     <Compile Include="RequestBodyTests.fs" />
     <Compile Include="ResponseDeserializationTests.fs" />
     <Compile Include="PipelineTests.fs" />
+    <Compile Include="HttpTests.fs" />
     <!-- Kept from previous: transport config, serializer, basic builder tests -->
     <Compile Include="SerializerTests.fs" />
     <Compile Include="TransportTests.fs" />
