@@ -139,7 +139,7 @@ module EqlOperations =
         [<System.Text.Json.Serialization.JsonPropertyName("fetch_size")>]
         FetchSize: Types.Uint option
         [<System.Text.Json.Serialization.JsonPropertyName("filter")>]
-        Filter: System.Text.Json.JsonElement option
+        Filter: Types.QueryContainer list option
         [<System.Text.Json.Serialization.JsonPropertyName("keep_alive")>]
         bodyKeepAlive: Types.Duration option
         [<System.Text.Json.Serialization.JsonPropertyName("keep_on_completion")>]
@@ -153,7 +153,7 @@ module EqlOperations =
         [<System.Text.Json.Serialization.JsonPropertyName("size")>]
         Size: Types.Uint option
         [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
-        Fields: System.Text.Json.JsonElement option
+        Fields: Types.FieldAndFormat list option
         [<System.Text.Json.Serialization.JsonPropertyName("result_position")>]
         ResultPosition: Types.ResultPosition option
         [<System.Text.Json.Serialization.JsonPropertyName("runtime_mappings")>]
@@ -289,7 +289,7 @@ module EqlOperations =
             { state with FetchSize = Some value }
 
         [<CustomOperation("filter")>]
-        member _.Filter(state: EqlSearchRequest, value: System.Text.Json.JsonElement) =
+        member _.Filter(state: EqlSearchRequest, value: Types.QueryContainer list) =
             { state with Filter = Some value }
 
         [<CustomOperation("bodyKeepAlive")>]
@@ -317,7 +317,7 @@ module EqlOperations =
             { state with Size = Some value }
 
         [<CustomOperation("fields")>]
-        member _.Fields(state: EqlSearchRequest, value: System.Text.Json.JsonElement) =
+        member _.Fields(state: EqlSearchRequest, value: Types.FieldAndFormat list) =
             { state with Fields = Some value }
 
         [<CustomOperation("resultPosition")>]
@@ -367,7 +367,7 @@ module EqlOperations =
             { req with TimestampField = Some value }
         let withFetchSize (value: Types.Uint) (req: EqlSearchRequest) =
             { req with FetchSize = Some value }
-        let withFilter (value: System.Text.Json.JsonElement) (req: EqlSearchRequest) =
+        let withFilter (value: Types.QueryContainer list) (req: EqlSearchRequest) =
             { req with Filter = Some value }
         let withBodyKeepAlive (value: Types.Duration) (req: EqlSearchRequest) =
             { req with bodyKeepAlive = Some value }
@@ -381,7 +381,7 @@ module EqlOperations =
             { req with bodyAllowPartialSequenceResults = Some value }
         let withSize (value: Types.Uint) (req: EqlSearchRequest) =
             { req with Size = Some value }
-        let withFields (value: System.Text.Json.JsonElement) (req: EqlSearchRequest) =
+        let withFields (value: Types.FieldAndFormat list) (req: EqlSearchRequest) =
             { req with Fields = Some value }
         let withResultPosition (value: Types.ResultPosition) (req: EqlSearchRequest) =
             { req with ResultPosition = Some value }

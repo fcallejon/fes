@@ -161,7 +161,7 @@ module Endpoints =
         req
 
     /// Get the cluster health.
-    let healthReport (feature: System.Text.Json.JsonElement) =
+    let healthReport (feature: string list) =
         let mutable req = Unchecked.defaultof<HealthReportRequest>
         req <- { req with Feature = feature }
         req
@@ -310,7 +310,7 @@ module Endpoints =
             req
 
         /// Get circuit breakers statistics.
-        let circuitBreaker (circuitBreakerPatterns: System.Text.Json.JsonElement) =
+        let circuitBreaker (circuitBreakerPatterns: string list) =
             let mutable req = Unchecked.defaultof<CatCircuitBreakerRequest>
             req <- { req with CircuitBreakerPatterns = circuitBreakerPatterns }
             req
@@ -2798,7 +2798,7 @@ module Endpoints =
             Unchecked.defaultof<SecurityGetTokenRequest>
 
         /// Get users.
-        let getUser (username: System.Text.Json.JsonElement) =
+        let getUser (username: Types.Username list) =
             let mutable req = Unchecked.defaultof<SecurityGetUserRequest>
             req <- { req with Username = username }
             req
@@ -2808,7 +2808,7 @@ module Endpoints =
             Unchecked.defaultof<SecurityGetUserPrivilegesRequest>
 
         /// Get a user profile.
-        let getUserProfile (uid: System.Text.Json.JsonElement) =
+        let getUserProfile (uid: Types.UserProfileId list) =
             let mutable req = Unchecked.defaultof<SecurityGetUserProfileRequest>
             req <- { req with Uid = uid }
             req
@@ -3359,7 +3359,7 @@ module Endpoints =
             Unchecked.defaultof<WatcherStartRequest>
 
         /// Get Watcher statistics.
-        let stats (metric: System.Text.Json.JsonElement) =
+        let stats (metric: Types.WatcherMetric list) =
             let mutable req = Unchecked.defaultof<WatcherStatsRequest>
             req <- { req with Metric = metric }
             req

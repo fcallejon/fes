@@ -176,3 +176,65 @@ module Mapping =
     /// IP range field
     let ipRange (name: string) (prop: Types.IpRangeProperty) : string * Types.Property =
         name, Types.Property.IpRangeProperty prop
+
+    // ── Multi-fields ─────────────────────────────────────────────────────────
+
+    /// Attach sub-fields (multi-fields) to any property that supports them.
+    ///
+    /// Example — text field with an unanalyzed .keyword sub-field:
+    ///   Mapping.text "title" Types.TextProperty.empty
+    ///   |> Mapping.withFields [ Mapping.keyword "keyword" Types.KeywordProperty.empty ]
+    let withFields
+            (subFields: (string * Types.Property) list)
+            ((name, prop): string * Types.Property) : string * Types.Property =
+        let fields = Some (subFields |> Map.ofList)
+        let updated =
+            match prop with
+            | Types.Property.TextProperty p ->
+                Types.Property.TextProperty { p with Fields = fields }
+            | Types.Property.KeywordProperty p ->
+                Types.Property.KeywordProperty { p with Fields = fields }
+            | Types.Property.BooleanProperty p ->
+                Types.Property.BooleanProperty { p with Fields = fields }
+            | Types.Property.DateProperty p ->
+                Types.Property.DateProperty { p with Fields = fields }
+            | Types.Property.DateNanosProperty p ->
+                Types.Property.DateNanosProperty { p with Fields = fields }
+            | Types.Property.ObjectProperty p ->
+                Types.Property.ObjectProperty { p with Fields = fields }
+            | Types.Property.NestedProperty p ->
+                Types.Property.NestedProperty { p with Fields = fields }
+            | Types.Property.ByteNumberProperty p ->
+                Types.Property.ByteNumberProperty { p with Fields = fields }
+            | Types.Property.ShortNumberProperty p ->
+                Types.Property.ShortNumberProperty { p with Fields = fields }
+            | Types.Property.IntegerNumberProperty p ->
+                Types.Property.IntegerNumberProperty { p with Fields = fields }
+            | Types.Property.LongNumberProperty p ->
+                Types.Property.LongNumberProperty { p with Fields = fields }
+            | Types.Property.FloatNumberProperty p ->
+                Types.Property.FloatNumberProperty { p with Fields = fields }
+            | Types.Property.DoubleNumberProperty p ->
+                Types.Property.DoubleNumberProperty { p with Fields = fields }
+            | Types.Property.HalfFloatNumberProperty p ->
+                Types.Property.HalfFloatNumberProperty { p with Fields = fields }
+            | Types.Property.ScaledFloatNumberProperty p ->
+                Types.Property.ScaledFloatNumberProperty { p with Fields = fields }
+            | Types.Property.UnsignedLongNumberProperty p ->
+                Types.Property.UnsignedLongNumberProperty { p with Fields = fields }
+            | Types.Property.IpProperty p ->
+                Types.Property.IpProperty { p with Fields = fields }
+            | Types.Property.CompletionProperty p ->
+                Types.Property.CompletionProperty { p with Fields = fields }
+            | Types.Property.TokenCountProperty p ->
+                Types.Property.TokenCountProperty { p with Fields = fields }
+            | Types.Property.GeoPointProperty p ->
+                Types.Property.GeoPointProperty { p with Fields = fields }
+            | Types.Property.GeoShapeProperty p ->
+                Types.Property.GeoShapeProperty { p with Fields = fields }
+            | Types.Property.SearchAsYouTypeProperty p ->
+                Types.Property.SearchAsYouTypeProperty { p with Fields = fields }
+            | Types.Property.WildcardProperty p ->
+                Types.Property.WildcardProperty { p with Fields = fields }
+            | _ -> prop   // types without Fields support — return unchanged
+        name, updated

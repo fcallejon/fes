@@ -192,7 +192,7 @@ module AsyncSearchOperations =
         Q: string option
         Size: Types.Integer option
         From: Types.Integer option
-        Sort: System.Text.Json.JsonElement option
+        Sort: string list option
         [<System.Text.Json.Serialization.JsonPropertyName("aggregations")>]
         Aggregations: Map<string, Types.AggregationContainer> option
         [<System.Text.Json.Serialization.JsonPropertyName("collapse")>]
@@ -212,7 +212,7 @@ module AsyncSearchOperations =
         [<System.Text.Json.Serialization.JsonPropertyName("docvalue_fields")>]
         bodyDocvalueFields: Types.FieldAndFormat list option
         [<System.Text.Json.Serialization.JsonPropertyName("knn")>]
-        Knn: System.Text.Json.JsonElement option
+        Knn: Types.KnnSearch list option
         [<System.Text.Json.Serialization.JsonPropertyName("min_score")>]
         MinScore: Types.Double option
         [<System.Text.Json.Serialization.JsonPropertyName("post_filter")>]
@@ -222,7 +222,7 @@ module AsyncSearchOperations =
         [<System.Text.Json.Serialization.JsonPropertyName("query")>]
         Query: Types.QueryContainer option
         [<System.Text.Json.Serialization.JsonPropertyName("rescore")>]
-        Rescore: System.Text.Json.JsonElement option
+        Rescore: Types.Rescore list option
         [<System.Text.Json.Serialization.JsonPropertyName("script_fields")>]
         ScriptFields: Map<string, Types.ScriptField> option
         [<System.Text.Json.Serialization.JsonPropertyName("search_after")>]
@@ -575,7 +575,7 @@ module AsyncSearchOperations =
             { state with From = Some value }
 
         [<CustomOperation("sort")>]
-        member _.Sort(state: AsyncSearchSubmitRequest, value: System.Text.Json.JsonElement) =
+        member _.Sort(state: AsyncSearchSubmitRequest, value: string list) =
             { state with Sort = Some value }
 
         [<CustomOperation("aggregations")>]
@@ -615,7 +615,7 @@ module AsyncSearchOperations =
             { state with bodyDocvalueFields = Some value }
 
         [<CustomOperation("knn")>]
-        member _.Knn(state: AsyncSearchSubmitRequest, value: System.Text.Json.JsonElement) =
+        member _.Knn(state: AsyncSearchSubmitRequest, value: Types.KnnSearch list) =
             { state with Knn = Some value }
 
         [<CustomOperation("minScore")>]
@@ -635,7 +635,7 @@ module AsyncSearchOperations =
             { state with Query = Some value }
 
         [<CustomOperation("rescore")>]
-        member _.Rescore(state: AsyncSearchSubmitRequest, value: System.Text.Json.JsonElement) =
+        member _.Rescore(state: AsyncSearchSubmitRequest, value: Types.Rescore list) =
             { state with Rescore = Some value }
 
         [<CustomOperation("scriptFields")>]
@@ -797,7 +797,7 @@ module AsyncSearchOperations =
             { req with Size = Some value }
         let withFrom (value: Types.Integer) (req: AsyncSearchSubmitRequest) =
             { req with From = Some value }
-        let withSort (value: System.Text.Json.JsonElement) (req: AsyncSearchSubmitRequest) =
+        let withSort (value: string list) (req: AsyncSearchSubmitRequest) =
             { req with Sort = Some value }
         let withAggregations (value: Map<string, Types.AggregationContainer>) (req: AsyncSearchSubmitRequest) =
             { req with Aggregations = Some value }
@@ -817,7 +817,7 @@ module AsyncSearchOperations =
             { req with IndicesBoost = Some value }
         let withBodyDocvalueFields (value: Types.FieldAndFormat list) (req: AsyncSearchSubmitRequest) =
             { req with bodyDocvalueFields = Some value }
-        let withKnn (value: System.Text.Json.JsonElement) (req: AsyncSearchSubmitRequest) =
+        let withKnn (value: Types.KnnSearch list) (req: AsyncSearchSubmitRequest) =
             { req with Knn = Some value }
         let withMinScore (value: Types.Double) (req: AsyncSearchSubmitRequest) =
             { req with MinScore = Some value }
@@ -827,7 +827,7 @@ module AsyncSearchOperations =
             { req with Profile = Some value }
         let withQuery (value: Types.QueryContainer) (req: AsyncSearchSubmitRequest) =
             { req with Query = Some value }
-        let withRescore (value: System.Text.Json.JsonElement) (req: AsyncSearchSubmitRequest) =
+        let withRescore (value: Types.Rescore list) (req: AsyncSearchSubmitRequest) =
             { req with Rescore = Some value }
         let withScriptFields (value: Map<string, Types.ScriptField>) (req: AsyncSearchSubmitRequest) =
             { req with ScriptFields = Some value }

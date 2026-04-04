@@ -81,10 +81,7 @@ let ``Indices create through in-memory transport`` () =
 
 [<Fact>]
 let ``Query DU serialises correctly in request body`` () =
-    let boolQuery = Types.QueryContainer.Bool {
-        Filter = None; MinimumShouldMatch = None
-        Must = None; MustNot = None; Should = None
-    }
+    let boolQuery = Types.QueryContainer.Bool Types.BoolQuery.empty
     let json = Json.serialize boolQuery
     json |> should haveSubstring "\"bool\""
 

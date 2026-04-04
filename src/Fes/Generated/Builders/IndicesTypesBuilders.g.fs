@@ -350,6 +350,43 @@ module IndicesTypesBuilders =
 
     let dataStreamLifecycleRolloverConditions = DataStreamLifecycleRolloverConditionsBuilder()
 
+    type DataStreamLifecycleWithRolloverBuilder() =
+        member _.Yield(_: unit) : Types.DataStreamLifecycleWithRollover =
+            {
+                Rollover = None
+                DataRetention = None
+                Downsampling = None
+                DownsamplingMethod = None
+                Enabled = None
+                FrozenAfter = None
+            }
+
+        [<CustomOperation("rollover")>]
+        member _.Rollover(state: Types.DataStreamLifecycleWithRollover, value: Types.DataStreamLifecycleRolloverConditions) =
+            { state with Rollover = Some value }
+
+        [<CustomOperation("dataRetention")>]
+        member _.DataRetention(state: Types.DataStreamLifecycleWithRollover, value: Types.Duration) =
+            { state with DataRetention = Some value }
+
+        [<CustomOperation("downsampling")>]
+        member _.Downsampling(state: Types.DataStreamLifecycleWithRollover, value: Types.DownsamplingRound list) =
+            { state with Downsampling = Some value }
+
+        [<CustomOperation("downsamplingMethod")>]
+        member _.DownsamplingMethod(state: Types.DataStreamLifecycleWithRollover, value: Types.SamplingMethod) =
+            { state with DownsamplingMethod = Some value }
+
+        [<CustomOperation("enabled")>]
+        member _.Enabled(state: Types.DataStreamLifecycleWithRollover, value: bool) =
+            { state with Enabled = Some value }
+
+        [<CustomOperation("frozenAfter")>]
+        member _.FrozenAfter(state: Types.DataStreamLifecycleWithRollover, value: Types.Duration) =
+            { state with FrozenAfter = Some value }
+
+    let dataStreamLifecycleWithRollover = DataStreamLifecycleWithRolloverBuilder()
+
     type DataStreamVisibilityBuilder() =
         member _.Yield(_: unit) : Types.DataStreamVisibility =
             {
@@ -481,15 +518,15 @@ module IndicesTypesBuilders =
             { state with Field = Some value }
 
         [<CustomOperation("order")>]
-        member _.Order(state: Types.IndexSegmentSort, value: System.Text.Json.JsonElement) =
+        member _.Order(state: Types.IndexSegmentSort, value: Types.SegmentSortOrder list) =
             { state with Order = Some value }
 
         [<CustomOperation("mode")>]
-        member _.Mode(state: Types.IndexSegmentSort, value: System.Text.Json.JsonElement) =
+        member _.Mode(state: Types.IndexSegmentSort, value: Types.SegmentSortMode list) =
             { state with Mode = Some value }
 
         [<CustomOperation("missing")>]
-        member _.Missing(state: Types.IndexSegmentSort, value: System.Text.Json.JsonElement) =
+        member _.Missing(state: Types.IndexSegmentSort, value: Types.SegmentSortMissing list) =
             { state with Missing = Some value }
 
     let indexSegmentSort = IndexSegmentSortBuilder()
@@ -596,7 +633,7 @@ module IndicesTypesBuilders =
             { state with Mode = Some value }
 
         [<CustomOperation("routingPath")>]
-        member _.RoutingPath(state: Types.IndexSettings, value: System.Text.Json.JsonElement) =
+        member _.RoutingPath(state: Types.IndexSettings, value: string list) =
             { state with RoutingPath = Some value }
 
         [<CustomOperation("softDeletes")>]

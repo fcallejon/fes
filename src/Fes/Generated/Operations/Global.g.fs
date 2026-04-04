@@ -163,8 +163,8 @@ module GlobalOperations =
     type CapabilitiesRequest = {
         Method: Types.RestMethod option
         Path: string option
-        Parameters: System.Text.Json.JsonElement option
-        Capabilities: System.Text.Json.JsonElement option
+        Parameters: string list option
+        Capabilities: string list option
         LocalOnly: bool option
         Timeout: Types.Duration option
     }
@@ -210,11 +210,11 @@ module GlobalOperations =
             { state with Path = Some value }
 
         [<CustomOperation("parameters")>]
-        member _.Parameters(state: CapabilitiesRequest, value: System.Text.Json.JsonElement) =
+        member _.Parameters(state: CapabilitiesRequest, value: string list) =
             { state with Parameters = Some value }
 
         [<CustomOperation("capabilities")>]
-        member _.Capabilities(state: CapabilitiesRequest, value: System.Text.Json.JsonElement) =
+        member _.Capabilities(state: CapabilitiesRequest, value: string list) =
             { state with Capabilities = Some value }
 
         [<CustomOperation("localOnly")>]
@@ -232,9 +232,9 @@ module GlobalOperations =
             { req with Method = Some value }
         let withPath (value: string) (req: CapabilitiesRequest) =
             { req with Path = Some value }
-        let withParameters (value: System.Text.Json.JsonElement) (req: CapabilitiesRequest) =
+        let withParameters (value: string list) (req: CapabilitiesRequest) =
             { req with Parameters = Some value }
-        let withCapabilities (value: System.Text.Json.JsonElement) (req: CapabilitiesRequest) =
+        let withCapabilities (value: string list) (req: CapabilitiesRequest) =
             { req with Capabilities = Some value }
         let withLocalOnly (value: bool) (req: CapabilitiesRequest) =
             { req with LocalOnly = Some value }
@@ -1564,7 +1564,7 @@ module GlobalOperations =
         Fields: Types.Fields option
         IgnoreUnavailable: bool option
         IncludeUnmapped: bool option
-        Filters: System.Text.Json.JsonElement option
+        Filters: string list option
         Types: string list option
         IncludeEmptyFields: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
@@ -1644,7 +1644,7 @@ module GlobalOperations =
             { state with IncludeUnmapped = Some value }
 
         [<CustomOperation("filters")>]
-        member _.Filters(state: FieldCapsRequest, value: System.Text.Json.JsonElement) =
+        member _.Filters(state: FieldCapsRequest, value: string list) =
             { state with Filters = Some value }
 
         [<CustomOperation("types")>]
@@ -1684,7 +1684,7 @@ module GlobalOperations =
             { req with IgnoreUnavailable = Some value }
         let withIncludeUnmapped (value: bool) (req: FieldCapsRequest) =
             { req with IncludeUnmapped = Some value }
-        let withFilters (value: System.Text.Json.JsonElement) (req: FieldCapsRequest) =
+        let withFilters (value: string list) (req: FieldCapsRequest) =
             { req with Filters = Some value }
         let withTypes (value: string list) (req: FieldCapsRequest) =
             { req with Types = Some value }
@@ -2031,7 +2031,7 @@ module GlobalOperations =
             { req with VersionType = Some value }
 
     type HealthReportRequest = {
-        Feature: System.Text.Json.JsonElement
+        Feature: string list
         Timeout: Types.Duration option
         Verbose: bool option
         Size: Types.Integer option
@@ -2065,7 +2065,7 @@ module GlobalOperations =
             }
 
         [<CustomOperation("feature")>]
-        member _.Feature(state: HealthReportRequest, value: System.Text.Json.JsonElement) =
+        member _.Feature(state: HealthReportRequest, value: string list) =
             { state with Feature = value }
 
         [<CustomOperation("timeout")>]
@@ -2276,7 +2276,7 @@ module GlobalOperations =
         [<System.Text.Json.Serialization.JsonPropertyName("fields")>]
         Fields: Types.Fields option
         [<System.Text.Json.Serialization.JsonPropertyName("filter")>]
-        Filter: System.Text.Json.JsonElement option
+        Filter: Types.QueryContainer list option
         [<System.Text.Json.Serialization.JsonPropertyName("knn")>]
         Knn: Types.KnnSearchQuery
     }
@@ -2336,7 +2336,7 @@ module GlobalOperations =
             { state with Fields = Some value }
 
         [<CustomOperation("filter")>]
-        member _.Filter(state: KnnSearchRequest, value: System.Text.Json.JsonElement) =
+        member _.Filter(state: KnnSearchRequest, value: Types.QueryContainer list) =
             { state with Filter = Some value }
 
         [<CustomOperation("knn")>]
@@ -2356,7 +2356,7 @@ module GlobalOperations =
             { req with StoredFields = Some value }
         let withFields (value: Types.Fields) (req: KnnSearchRequest) =
             { req with Fields = Some value }
-        let withFilter (value: System.Text.Json.JsonElement) (req: KnnSearchRequest) =
+        let withFilter (value: Types.QueryContainer list) (req: KnnSearchRequest) =
             { req with Filter = Some value }
         let withKnn (value: Types.KnnSearchQuery) (req: KnnSearchRequest) =
             { req with Knn = value }
@@ -3653,7 +3653,7 @@ module GlobalOperations =
         Q: string option
         Size: Types.Integer option
         From: Types.Integer option
-        Sort: System.Text.Json.JsonElement option
+        Sort: string list option
         ForceSyntheticSource: bool option
         [<System.Text.Json.Serialization.JsonPropertyName("aggregations")>]
         Aggregations: Map<string, Types.AggregationContainer> option
@@ -3674,7 +3674,7 @@ module GlobalOperations =
         [<System.Text.Json.Serialization.JsonPropertyName("docvalue_fields")>]
         bodyDocvalueFields: Types.FieldAndFormat list option
         [<System.Text.Json.Serialization.JsonPropertyName("knn")>]
-        Knn: System.Text.Json.JsonElement option
+        Knn: Types.KnnSearch list option
         [<System.Text.Json.Serialization.JsonPropertyName("rank")>]
         Rank: Types.RankContainer option
         [<System.Text.Json.Serialization.JsonPropertyName("min_score")>]
@@ -3686,7 +3686,7 @@ module GlobalOperations =
         [<System.Text.Json.Serialization.JsonPropertyName("query")>]
         Query: Types.QueryContainer option
         [<System.Text.Json.Serialization.JsonPropertyName("rescore")>]
-        Rescore: System.Text.Json.JsonElement option
+        Rescore: Types.Rescore list option
         [<System.Text.Json.Serialization.JsonPropertyName("retriever")>]
         Retriever: Types.RetrieverContainer option
         [<System.Text.Json.Serialization.JsonPropertyName("script_fields")>]
@@ -4051,7 +4051,7 @@ module GlobalOperations =
             { state with From = Some value }
 
         [<CustomOperation("sort")>]
-        member _.Sort(state: SearchRequest, value: System.Text.Json.JsonElement) =
+        member _.Sort(state: SearchRequest, value: string list) =
             { state with Sort = Some value }
 
         [<CustomOperation("forceSyntheticSource")>]
@@ -4095,7 +4095,7 @@ module GlobalOperations =
             { state with bodyDocvalueFields = Some value }
 
         [<CustomOperation("knn")>]
-        member _.Knn(state: SearchRequest, value: System.Text.Json.JsonElement) =
+        member _.Knn(state: SearchRequest, value: Types.KnnSearch list) =
             { state with Knn = Some value }
 
         [<CustomOperation("rank")>]
@@ -4119,7 +4119,7 @@ module GlobalOperations =
             { state with Query = Some value }
 
         [<CustomOperation("rescore")>]
-        member _.Rescore(state: SearchRequest, value: System.Text.Json.JsonElement) =
+        member _.Rescore(state: SearchRequest, value: Types.Rescore list) =
             { state with Rescore = Some value }
 
         [<CustomOperation("retriever")>]
@@ -4287,7 +4287,7 @@ module GlobalOperations =
             { req with Size = Some value }
         let withFrom (value: Types.Integer) (req: SearchRequest) =
             { req with From = Some value }
-        let withSort (value: System.Text.Json.JsonElement) (req: SearchRequest) =
+        let withSort (value: string list) (req: SearchRequest) =
             { req with Sort = Some value }
         let withForceSyntheticSource (value: bool) (req: SearchRequest) =
             { req with ForceSyntheticSource = Some value }
@@ -4309,7 +4309,7 @@ module GlobalOperations =
             { req with IndicesBoost = Some value }
         let withBodyDocvalueFields (value: Types.FieldAndFormat list) (req: SearchRequest) =
             { req with bodyDocvalueFields = Some value }
-        let withKnn (value: System.Text.Json.JsonElement) (req: SearchRequest) =
+        let withKnn (value: Types.KnnSearch list) (req: SearchRequest) =
             { req with Knn = Some value }
         let withRank (value: Types.RankContainer) (req: SearchRequest) =
             { req with Rank = Some value }
@@ -4321,7 +4321,7 @@ module GlobalOperations =
             { req with Profile = Some value }
         let withQuery (value: Types.QueryContainer) (req: SearchRequest) =
             { req with Query = Some value }
-        let withRescore (value: System.Text.Json.JsonElement) (req: SearchRequest) =
+        let withRescore (value: Types.Rescore list) (req: SearchRequest) =
             { req with Rescore = Some value }
         let withRetriever (value: Types.RetrieverContainer) (req: SearchRequest) =
             { req with Retriever = Some value }

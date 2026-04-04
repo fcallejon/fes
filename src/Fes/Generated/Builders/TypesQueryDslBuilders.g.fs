@@ -17,10 +17,12 @@ module TypesQueryDslBuilders =
                 Must = None
                 MustNot = None
                 Should = None
+                Boost = None
+                query_name = None
             }
 
         [<CustomOperation("filter")>]
-        member _.Filter(state: Types.BoolQuery, value: System.Text.Json.JsonElement) =
+        member _.Filter(state: Types.BoolQuery, value: Types.QueryContainer list) =
             { state with Filter = Some value }
 
         [<CustomOperation("minimumShouldMatch")>]
@@ -28,18 +30,58 @@ module TypesQueryDslBuilders =
             { state with MinimumShouldMatch = Some value }
 
         [<CustomOperation("must")>]
-        member _.Must(state: Types.BoolQuery, value: System.Text.Json.JsonElement) =
+        member _.Must(state: Types.BoolQuery, value: Types.QueryContainer list) =
             { state with Must = Some value }
 
         [<CustomOperation("mustNot")>]
-        member _.MustNot(state: Types.BoolQuery, value: System.Text.Json.JsonElement) =
+        member _.MustNot(state: Types.BoolQuery, value: Types.QueryContainer list) =
             { state with MustNot = Some value }
 
         [<CustomOperation("should")>]
-        member _.Should(state: Types.BoolQuery, value: System.Text.Json.JsonElement) =
+        member _.Should(state: Types.BoolQuery, value: Types.QueryContainer list) =
             { state with Should = Some value }
 
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.BoolQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("queryName")>]
+        member _.QueryName(state: Types.BoolQuery, value: string) =
+            { state with query_name = Some value }
+
     let boolQuery = BoolQueryBuilder()
+
+    type BoostingQueryBuilder() =
+        member _.Yield(_: unit) : Types.BoostingQuery =
+            {
+                NegativeBoost = Unchecked.defaultof<_>
+                Negative = Unchecked.defaultof<_>
+                Positive = Unchecked.defaultof<_>
+                Boost = None
+                query_name = None
+            }
+
+        [<CustomOperation("negativeBoost")>]
+        member _.NegativeBoost(state: Types.BoostingQuery, value: Types.Double) =
+            { state with NegativeBoost = value }
+
+        [<CustomOperation("negative")>]
+        member _.Negative(state: Types.BoostingQuery, value: Types.QueryContainer) =
+            { state with Negative = value }
+
+        [<CustomOperation("positive")>]
+        member _.Positive(state: Types.BoostingQuery, value: Types.QueryContainer) =
+            { state with Positive = value }
+
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.BoostingQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("queryName")>]
+        member _.QueryName(state: Types.BoostingQuery, value: string) =
+            { state with query_name = Some value }
+
+    let boostingQuery = BoostingQueryBuilder()
 
     type CombinedFieldsQueryBuilder() =
         member _.Yield(_: unit) : Types.CombinedFieldsQuery =
@@ -50,6 +92,8 @@ module TypesQueryDslBuilders =
                 Operator = None
                 MinimumShouldMatch = None
                 ZeroTermsQuery = None
+                Boost = None
+                query_name = None
             }
 
         [<CustomOperation("fields")>]
@@ -76,6 +120,14 @@ module TypesQueryDslBuilders =
         member _.ZeroTermsQuery(state: Types.CombinedFieldsQuery, value: Types.CombinedFieldsZeroTerms) =
             { state with ZeroTermsQuery = Some value }
 
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.CombinedFieldsQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("queryName")>]
+        member _.QueryName(state: Types.CombinedFieldsQuery, value: string) =
+            { state with query_name = Some value }
+
     let combinedFieldsQuery = CombinedFieldsQueryBuilder()
 
     type CommonTermsQueryBuilder() =
@@ -87,6 +139,8 @@ module TypesQueryDslBuilders =
                 LowFreqOperator = None
                 MinimumShouldMatch = None
                 Query = Unchecked.defaultof<_>
+                Boost = None
+                query_name = None
             }
 
         [<CustomOperation("analyzer")>]
@@ -113,6 +167,14 @@ module TypesQueryDslBuilders =
         member _.Query(state: Types.CommonTermsQuery, value: string) =
             { state with Query = value }
 
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.CommonTermsQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("queryName")>]
+        member _.QueryName(state: Types.CommonTermsQuery, value: string) =
+            { state with query_name = Some value }
+
     let commonTermsQuery = CommonTermsQueryBuilder()
 
     let createCommonTermsQuery (value: string) : Types.CommonTermsQuery =
@@ -123,7 +185,31 @@ module TypesQueryDslBuilders =
             LowFreqOperator = None
             MinimumShouldMatch = None
             Query = value
+            Boost = None
+            query_name = None
         }
+
+    type ConstantScoreQueryBuilder() =
+        member _.Yield(_: unit) : Types.ConstantScoreQuery =
+            {
+                Filter = Unchecked.defaultof<_>
+                Boost = None
+                query_name = None
+            }
+
+        [<CustomOperation("filter")>]
+        member _.Filter(state: Types.ConstantScoreQuery, value: Types.QueryContainer) =
+            { state with Filter = value }
+
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.ConstantScoreQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("queryName")>]
+        member _.QueryName(state: Types.ConstantScoreQuery, value: string) =
+            { state with query_name = Some value }
+
+    let constantScoreQuery = ConstantScoreQueryBuilder()
 
     type DateRangeQueryBuilder() =
         member _.Yield(_: unit) : Types.DateRangeQuery =
@@ -141,6 +227,55 @@ module TypesQueryDslBuilders =
             { state with TimeZone = Some value }
 
     let dateRangeQuery = DateRangeQueryBuilder()
+
+    type DisMaxQueryBuilder() =
+        member _.Yield(_: unit) : Types.DisMaxQuery =
+            {
+                Queries = Unchecked.defaultof<_>
+                TieBreaker = None
+                Boost = None
+                query_name = None
+            }
+
+        [<CustomOperation("queries")>]
+        member _.Queries(state: Types.DisMaxQuery, value: Types.QueryContainer list) =
+            { state with Queries = value }
+
+        [<CustomOperation("tieBreaker")>]
+        member _.TieBreaker(state: Types.DisMaxQuery, value: Types.Double) =
+            { state with TieBreaker = Some value }
+
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.DisMaxQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("queryName")>]
+        member _.QueryName(state: Types.DisMaxQuery, value: string) =
+            { state with query_name = Some value }
+
+    let disMaxQuery = DisMaxQueryBuilder()
+
+    type ExistsQueryBuilder() =
+        member _.Yield(_: unit) : Types.ExistsQuery =
+            {
+                Field = Unchecked.defaultof<_>
+                Boost = None
+                query_name = None
+            }
+
+        [<CustomOperation("field")>]
+        member _.Field(state: Types.ExistsQuery, value: Types.Field) =
+            { state with Field = value }
+
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.ExistsQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("queryName")>]
+        member _.QueryName(state: Types.ExistsQuery, value: string) =
+            { state with query_name = Some value }
+
+    let existsQuery = ExistsQueryBuilder()
 
     type FieldAndFormatBuilder() =
         member _.Yield(_: unit) : Types.FieldAndFormat =
@@ -254,6 +389,8 @@ module TypesQueryDslBuilders =
                 MinScore = None
                 Query = None
                 ScoreMode = None
+                Boost = None
+                query_name = None
             }
 
         [<CustomOperation("boostMode")>]
@@ -280,6 +417,14 @@ module TypesQueryDslBuilders =
         member _.ScoreMode(state: Types.FunctionScoreQuery, value: Types.FunctionScoreMode) =
             { state with ScoreMode = Some value }
 
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.FunctionScoreQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("queryName")>]
+        member _.QueryName(state: Types.FunctionScoreQuery, value: string) =
+            { state with query_name = Some value }
+
     let functionScoreQuery = FunctionScoreQueryBuilder()
 
     let createFunctionScoreQuery (value: Types.FunctionScoreContainer list) : Types.FunctionScoreQuery =
@@ -290,6 +435,8 @@ module TypesQueryDslBuilders =
             MinScore = None
             Query = None
             ScoreMode = None
+            Boost = None
+            query_name = None
         }
 
     type FuzzyQueryBuilder() =
@@ -301,6 +448,8 @@ module TypesQueryDslBuilders =
                 Transpositions = None
                 Fuzziness = None
                 Value = Unchecked.defaultof<_>
+                Boost = None
+                query_name = None
             }
 
         [<CustomOperation("maxExpansions")>]
@@ -327,6 +476,14 @@ module TypesQueryDslBuilders =
         member _.Value(state: Types.FuzzyQuery, value: System.Text.Json.JsonElement) =
             { state with Value = value }
 
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.FuzzyQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("queryName")>]
+        member _.QueryName(state: Types.FuzzyQuery, value: string) =
+            { state with query_name = Some value }
+
     let fuzzyQuery = FuzzyQueryBuilder()
 
     let createFuzzyQuery (value: System.Text.Json.JsonElement) : Types.FuzzyQuery =
@@ -337,6 +494,8 @@ module TypesQueryDslBuilders =
             Transpositions = None
             Fuzziness = None
             Value = value
+            Boost = None
+            query_name = None
         }
 
     type GeoBoundingBoxQueryBuilder() =
@@ -345,6 +504,8 @@ module TypesQueryDslBuilders =
                 Type = None
                 ValidationMethod = None
                 IgnoreUnmapped = None
+                Boost = None
+                query_name = None
             }
 
         [<CustomOperation("type'")>]
@@ -359,6 +520,14 @@ module TypesQueryDslBuilders =
         member _.IgnoreUnmapped(state: Types.GeoBoundingBoxQuery, value: bool) =
             { state with IgnoreUnmapped = Some value }
 
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.GeoBoundingBoxQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("queryName")>]
+        member _.QueryName(state: Types.GeoBoundingBoxQuery, value: string) =
+            { state with query_name = Some value }
+
     let geoBoundingBoxQuery = GeoBoundingBoxQueryBuilder()
 
     type GeoDistanceQueryBuilder() =
@@ -368,6 +537,8 @@ module TypesQueryDslBuilders =
                 DistanceType = None
                 ValidationMethod = None
                 IgnoreUnmapped = None
+                Boost = None
+                query_name = None
             }
 
         [<CustomOperation("distance")>]
@@ -385,6 +556,14 @@ module TypesQueryDslBuilders =
         [<CustomOperation("ignoreUnmapped")>]
         member _.IgnoreUnmapped(state: Types.GeoDistanceQuery, value: bool) =
             { state with IgnoreUnmapped = Some value }
+
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.GeoDistanceQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("queryName")>]
+        member _.QueryName(state: Types.GeoDistanceQuery, value: string) =
+            { state with query_name = Some value }
 
     let geoDistanceQuery = GeoDistanceQueryBuilder()
 
@@ -404,6 +583,8 @@ module TypesQueryDslBuilders =
             {
                 ValidationMethod = None
                 IgnoreUnmapped = None
+                Boost = None
+                query_name = None
             }
 
         [<CustomOperation("validationMethod")>]
@@ -413,6 +594,14 @@ module TypesQueryDslBuilders =
         [<CustomOperation("ignoreUnmapped")>]
         member _.IgnoreUnmapped(state: Types.GeoPolygonQuery, value: bool) =
             { state with IgnoreUnmapped = Some value }
+
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.GeoPolygonQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("queryName")>]
+        member _.QueryName(state: Types.GeoPolygonQuery, value: string) =
+            { state with query_name = Some value }
 
     let geoPolygonQuery = GeoPolygonQueryBuilder()
 
@@ -438,6 +627,28 @@ module TypesQueryDslBuilders =
 
     let geoShapeFieldQuery = GeoShapeFieldQueryBuilder()
 
+    type GeoShapeQueryBuilder() =
+        member _.Yield(_: unit) : Types.GeoShapeQuery =
+            {
+                IgnoreUnmapped = None
+                Boost = None
+                query_name = None
+            }
+
+        [<CustomOperation("ignoreUnmapped")>]
+        member _.IgnoreUnmapped(state: Types.GeoShapeQuery, value: bool) =
+            { state with IgnoreUnmapped = Some value }
+
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.GeoShapeQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("queryName")>]
+        member _.QueryName(state: Types.GeoShapeQuery, value: string) =
+            { state with query_name = Some value }
+
+    let geoShapeQuery = GeoShapeQueryBuilder()
+
     type HasChildQueryBuilder() =
         member _.Yield(_: unit) : Types.HasChildQuery =
             {
@@ -448,6 +659,8 @@ module TypesQueryDslBuilders =
                 Query = Unchecked.defaultof<_>
                 ScoreMode = None
                 Type = Unchecked.defaultof<_>
+                Boost = None
+                query_name = None
             }
 
         [<CustomOperation("ignoreUnmapped")>]
@@ -478,6 +691,14 @@ module TypesQueryDslBuilders =
         member _.Type(state: Types.HasChildQuery, value: Types.RelationName) =
             { state with Type = value }
 
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.HasChildQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("queryName")>]
+        member _.QueryName(state: Types.HasChildQuery, value: string) =
+            { state with query_name = Some value }
+
     let hasChildQuery = HasChildQueryBuilder()
 
     type HasParentQueryBuilder() =
@@ -488,6 +709,8 @@ module TypesQueryDslBuilders =
                 ParentType = Unchecked.defaultof<_>
                 Query = Unchecked.defaultof<_>
                 Score = None
+                Boost = None
+                query_name = None
             }
 
         [<CustomOperation("ignoreUnmapped")>]
@@ -510,7 +733,37 @@ module TypesQueryDslBuilders =
         member _.Score(state: Types.HasParentQuery, value: bool) =
             { state with Score = Some value }
 
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.HasParentQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("queryName")>]
+        member _.QueryName(state: Types.HasParentQuery, value: string) =
+            { state with query_name = Some value }
+
     let hasParentQuery = HasParentQueryBuilder()
+
+    type IdsQueryBuilder() =
+        member _.Yield(_: unit) : Types.IdsQuery =
+            {
+                Values = None
+                Boost = None
+                query_name = None
+            }
+
+        [<CustomOperation("values")>]
+        member _.Values(state: Types.IdsQuery, value: Types.Ids) =
+            { state with Values = Some value }
+
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.IdsQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("queryName")>]
+        member _.QueryName(state: Types.IdsQuery, value: string) =
+            { state with query_name = Some value }
+
+    let idsQuery = IdsQueryBuilder()
 
     type IntervalsAllOfBuilder() =
         member _.Yield(_: unit) : Types.IntervalsAllOf =
@@ -844,6 +1097,23 @@ module TypesQueryDslBuilders =
 
     let likeDocument = LikeDocumentBuilder()
 
+    type MatchAllQueryBuilder() =
+        member _.Yield(_: unit) : Types.MatchAllQuery =
+            {
+                Boost = None
+                query_name = None
+            }
+
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.MatchAllQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("queryName")>]
+        member _.QueryName(state: Types.MatchAllQuery, value: string) =
+            { state with query_name = Some value }
+
+    let matchAllQuery = MatchAllQueryBuilder()
+
     type MatchBoolPrefixQueryBuilder() =
         member _.Yield(_: unit) : Types.MatchBoolPrefixQuery =
             {
@@ -856,6 +1126,8 @@ module TypesQueryDslBuilders =
                 Operator = None
                 PrefixLength = None
                 Query = Unchecked.defaultof<_>
+                Boost = None
+                query_name = None
             }
 
         [<CustomOperation("analyzer")>]
@@ -894,6 +1166,14 @@ module TypesQueryDslBuilders =
         member _.Query(state: Types.MatchBoolPrefixQuery, value: string) =
             { state with Query = value }
 
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.MatchBoolPrefixQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("queryName")>]
+        member _.QueryName(state: Types.MatchBoolPrefixQuery, value: string) =
+            { state with query_name = Some value }
+
     let matchBoolPrefixQuery = MatchBoolPrefixQueryBuilder()
 
     let createMatchBoolPrefixQuery (value: string) : Types.MatchBoolPrefixQuery =
@@ -907,7 +1187,26 @@ module TypesQueryDslBuilders =
             Operator = None
             PrefixLength = None
             Query = value
+            Boost = None
+            query_name = None
         }
+
+    type MatchNoneQueryBuilder() =
+        member _.Yield(_: unit) : Types.MatchNoneQuery =
+            {
+                Boost = None
+                query_name = None
+            }
+
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.MatchNoneQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("queryName")>]
+        member _.QueryName(state: Types.MatchNoneQuery, value: string) =
+            { state with query_name = Some value }
+
+    let matchNoneQuery = MatchNoneQueryBuilder()
 
     type MatchPhrasePrefixQueryBuilder() =
         member _.Yield(_: unit) : Types.MatchPhrasePrefixQuery =
@@ -917,6 +1216,8 @@ module TypesQueryDslBuilders =
                 Query = Unchecked.defaultof<_>
                 Slop = None
                 ZeroTermsQuery = None
+                Boost = None
+                query_name = None
             }
 
         [<CustomOperation("analyzer")>]
@@ -939,6 +1240,14 @@ module TypesQueryDslBuilders =
         member _.ZeroTermsQuery(state: Types.MatchPhrasePrefixQuery, value: Types.ZeroTermsQuery) =
             { state with ZeroTermsQuery = Some value }
 
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.MatchPhrasePrefixQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("queryName")>]
+        member _.QueryName(state: Types.MatchPhrasePrefixQuery, value: string) =
+            { state with query_name = Some value }
+
     let matchPhrasePrefixQuery = MatchPhrasePrefixQueryBuilder()
 
     let createMatchPhrasePrefixQuery (value: string) : Types.MatchPhrasePrefixQuery =
@@ -948,6 +1257,8 @@ module TypesQueryDslBuilders =
             Query = value
             Slop = None
             ZeroTermsQuery = None
+            Boost = None
+            query_name = None
         }
 
     type MatchPhraseQueryBuilder() =
@@ -957,6 +1268,8 @@ module TypesQueryDslBuilders =
                 Query = Unchecked.defaultof<_>
                 Slop = None
                 ZeroTermsQuery = None
+                Boost = None
+                query_name = None
             }
 
         [<CustomOperation("analyzer")>]
@@ -975,6 +1288,14 @@ module TypesQueryDslBuilders =
         member _.ZeroTermsQuery(state: Types.MatchPhraseQuery, value: Types.ZeroTermsQuery) =
             { state with ZeroTermsQuery = Some value }
 
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.MatchPhraseQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("queryName")>]
+        member _.QueryName(state: Types.MatchPhraseQuery, value: string) =
+            { state with query_name = Some value }
+
     let matchPhraseQuery = MatchPhraseQueryBuilder()
 
     let createMatchPhraseQuery (value: string) : Types.MatchPhraseQuery =
@@ -983,6 +1304,8 @@ module TypesQueryDslBuilders =
             Query = value
             Slop = None
             ZeroTermsQuery = None
+            Boost = None
+            query_name = None
         }
 
     type MatchQueryBuilder() =
@@ -1001,6 +1324,8 @@ module TypesQueryDslBuilders =
                 PrefixLength = None
                 Query = Unchecked.defaultof<_>
                 ZeroTermsQuery = None
+                Boost = None
+                query_name = None
             }
 
         [<CustomOperation("analyzer")>]
@@ -1055,6 +1380,14 @@ module TypesQueryDslBuilders =
         member _.ZeroTermsQuery(state: Types.MatchQuery, value: Types.ZeroTermsQuery) =
             { state with ZeroTermsQuery = Some value }
 
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.MatchQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("queryName")>]
+        member _.QueryName(state: Types.MatchQuery, value: string) =
+            { state with query_name = Some value }
+
     let matchQuery = MatchQueryBuilder()
 
     let createMatchQuery (value: System.Text.Json.JsonElement) : Types.MatchQuery =
@@ -1072,6 +1405,8 @@ module TypesQueryDslBuilders =
             PrefixLength = None
             Query = value
             ZeroTermsQuery = None
+            Boost = None
+            query_name = None
         }
 
     type MoreLikeThisQueryBuilder() =
@@ -1095,6 +1430,8 @@ module TypesQueryDslBuilders =
                 Unlike = None
                 Version = None
                 VersionType = None
+                Boost = None
+                query_name = None
             }
 
         [<CustomOperation("analyzer")>]
@@ -1118,7 +1455,7 @@ module TypesQueryDslBuilders =
             { state with Include = Some value }
 
         [<CustomOperation("like")>]
-        member _.Like(state: Types.MoreLikeThisQuery, value: System.Text.Json.JsonElement) =
+        member _.Like(state: Types.MoreLikeThisQuery, value: Types.Like list) =
             { state with Like = value }
 
         [<CustomOperation("maxDocFreq")>]
@@ -1158,7 +1495,7 @@ module TypesQueryDslBuilders =
             { state with StopWords = Some value }
 
         [<CustomOperation("unlike")>]
-        member _.Unlike(state: Types.MoreLikeThisQuery, value: System.Text.Json.JsonElement) =
+        member _.Unlike(state: Types.MoreLikeThisQuery, value: Types.Like list) =
             { state with Unlike = Some value }
 
         [<CustomOperation("version")>]
@@ -1168,6 +1505,14 @@ module TypesQueryDslBuilders =
         [<CustomOperation("versionType")>]
         member _.VersionType(state: Types.MoreLikeThisQuery, value: Types.VersionType) =
             { state with VersionType = Some value }
+
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.MoreLikeThisQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("queryName")>]
+        member _.QueryName(state: Types.MoreLikeThisQuery, value: string) =
+            { state with query_name = Some value }
 
     let moreLikeThisQuery = MoreLikeThisQueryBuilder()
 
@@ -1191,6 +1536,8 @@ module TypesQueryDslBuilders =
                 TieBreaker = None
                 Type = None
                 ZeroTermsQuery = None
+                Boost = None
+                query_name = None
             }
 
         [<CustomOperation("analyzer")>]
@@ -1261,6 +1608,14 @@ module TypesQueryDslBuilders =
         member _.ZeroTermsQuery(state: Types.MultiMatchQuery, value: Types.ZeroTermsQuery) =
             { state with ZeroTermsQuery = Some value }
 
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.MultiMatchQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("queryName")>]
+        member _.QueryName(state: Types.MultiMatchQuery, value: string) =
+            { state with query_name = Some value }
+
     let multiMatchQuery = MultiMatchQueryBuilder()
 
     type NestedQueryBuilder() =
@@ -1271,6 +1626,8 @@ module TypesQueryDslBuilders =
                 Path = Unchecked.defaultof<_>
                 Query = Unchecked.defaultof<_>
                 ScoreMode = None
+                Boost = None
+                query_name = None
             }
 
         [<CustomOperation("ignoreUnmapped")>]
@@ -1293,6 +1650,14 @@ module TypesQueryDslBuilders =
         member _.ScoreMode(state: Types.NestedQuery, value: Types.ChildScoreMode) =
             { state with ScoreMode = Some value }
 
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.NestedQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("queryName")>]
+        member _.QueryName(state: Types.NestedQuery, value: string) =
+            { state with query_name = Some value }
+
     let nestedQuery = NestedQueryBuilder()
 
     type ParentIdQueryBuilder() =
@@ -1301,6 +1666,8 @@ module TypesQueryDslBuilders =
                 Id = None
                 IgnoreUnmapped = None
                 Type = None
+                Boost = None
+                query_name = None
             }
 
         [<CustomOperation("id")>]
@@ -1314,6 +1681,14 @@ module TypesQueryDslBuilders =
         [<CustomOperation("type'")>]
         member _.Type(state: Types.ParentIdQuery, value: Types.RelationName) =
             { state with Type = Some value }
+
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.ParentIdQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("queryName")>]
+        member _.QueryName(state: Types.ParentIdQuery, value: string) =
+            { state with query_name = Some value }
 
     let parentIdQuery = ParentIdQueryBuilder()
 
@@ -1329,6 +1704,8 @@ module TypesQueryDslBuilders =
                 Preference = None
                 Routing = None
                 Version = None
+                Boost = None
+                NameField = None
             }
 
         [<CustomOperation("document")>]
@@ -1367,6 +1744,14 @@ module TypesQueryDslBuilders =
         member _.Version(state: Types.PercolateQuery, value: Types.VersionNumber) =
             { state with Version = Some value }
 
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.PercolateQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("nameField")>]
+        member _.NameField(state: Types.PercolateQuery, value: string) =
+            { state with NameField = Some value }
+
     let percolateQuery = PercolateQueryBuilder()
 
     module PinnedQuery =
@@ -1383,6 +1768,8 @@ module TypesQueryDslBuilders =
                 Rewrite = None
                 Value = Unchecked.defaultof<_>
                 CaseInsensitive = None
+                Boost = None
+                query_name = None
             }
 
         [<CustomOperation("rewrite")>]
@@ -1397,6 +1784,14 @@ module TypesQueryDslBuilders =
         member _.CaseInsensitive(state: Types.PrefixQuery, value: bool) =
             { state with CaseInsensitive = Some value }
 
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.PrefixQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("queryName")>]
+        member _.QueryName(state: Types.PrefixQuery, value: string) =
+            { state with query_name = Some value }
+
     let prefixQuery = PrefixQueryBuilder()
 
     let createPrefixQuery (value: string) : Types.PrefixQuery =
@@ -1404,6 +1799,8 @@ module TypesQueryDslBuilders =
             Rewrite = None
             Value = value
             CaseInsensitive = None
+            Boost = None
+            query_name = None
         }
 
     type QueryBaseBuilder() =
@@ -1636,6 +2033,8 @@ module TypesQueryDslBuilders =
                 TieBreaker = None
                 TimeZone = None
                 Type = None
+                Boost = None
+                query_name = None
             }
 
         [<CustomOperation("allowLeadingWildcard")>]
@@ -1738,6 +2137,14 @@ module TypesQueryDslBuilders =
         member _.Type(state: Types.QueryStringQuery, value: Types.TextQueryType) =
             { state with Type = Some value }
 
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.QueryStringQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("queryName")>]
+        member _.QueryName(state: Types.QueryStringQuery, value: string) =
+            { state with query_name = Some value }
+
     let queryStringQuery = QueryStringQueryBuilder()
 
     type RandomScoreFunctionBuilder() =
@@ -1765,6 +2172,8 @@ module TypesQueryDslBuilders =
                 Log = None
                 Linear = None
                 Sigmoid = None
+                Boost = None
+                query_name = None
             }
 
         [<CustomOperation("field")>]
@@ -1787,6 +2196,14 @@ module TypesQueryDslBuilders =
         member _.Sigmoid(state: Types.RankFeatureQuery, value: Types.RankFeatureFunctionSigmoid) =
             { state with Sigmoid = Some value }
 
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.RankFeatureQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("queryName")>]
+        member _.QueryName(state: Types.RankFeatureQuery, value: string) =
+            { state with query_name = Some value }
+
     let rankFeatureQuery = RankFeatureQueryBuilder()
 
     type RegexpQueryBuilder() =
@@ -1797,6 +2214,8 @@ module TypesQueryDslBuilders =
                 MaxDeterminizedStates = None
                 Rewrite = None
                 Value = Unchecked.defaultof<_>
+                Boost = None
+                query_name = None
             }
 
         [<CustomOperation("caseInsensitive")>]
@@ -1819,6 +2238,14 @@ module TypesQueryDslBuilders =
         member _.Value(state: Types.RegexpQuery, value: string) =
             { state with Value = value }
 
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.RegexpQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("queryName")>]
+        member _.QueryName(state: Types.RegexpQuery, value: string) =
+            { state with query_name = Some value }
+
     let regexpQuery = RegexpQueryBuilder()
 
     let createRegexpQuery (value: string) : Types.RegexpQuery =
@@ -1828,6 +2255,8 @@ module TypesQueryDslBuilders =
             MaxDeterminizedStates = None
             Rewrite = None
             Value = value
+            Boost = None
+            query_name = None
         }
 
     type RuleQueryBuilder() =
@@ -1837,6 +2266,8 @@ module TypesQueryDslBuilders =
                 RulesetIds = None
                 RulesetId = None
                 MatchCriteria = Unchecked.defaultof<_>
+                Boost = None
+                query_name = None
             }
 
         [<CustomOperation("organic")>]
@@ -1844,7 +2275,7 @@ module TypesQueryDslBuilders =
             { state with Organic = value }
 
         [<CustomOperation("rulesetIds")>]
-        member _.RulesetIds(state: Types.RuleQuery, value: System.Text.Json.JsonElement) =
+        member _.RulesetIds(state: Types.RuleQuery, value: Types.Id list) =
             { state with RulesetIds = Some value }
 
         [<CustomOperation("rulesetId")>]
@@ -1855,7 +2286,96 @@ module TypesQueryDslBuilders =
         member _.MatchCriteria(state: Types.RuleQuery, value: System.Text.Json.JsonElement) =
             { state with MatchCriteria = value }
 
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.RuleQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("queryName")>]
+        member _.QueryName(state: Types.RuleQuery, value: string) =
+            { state with query_name = Some value }
+
     let ruleQuery = RuleQueryBuilder()
+
+    type ScriptQueryBuilder() =
+        member _.Yield(_: unit) : Types.ScriptQuery =
+            {
+                Script = Unchecked.defaultof<_>
+                Boost = None
+                query_name = None
+            }
+
+        [<CustomOperation("script")>]
+        member _.Script(state: Types.ScriptQuery, value: Types.Script) =
+            { state with Script = value }
+
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.ScriptQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("queryName")>]
+        member _.QueryName(state: Types.ScriptQuery, value: string) =
+            { state with query_name = Some value }
+
+    let scriptQuery = ScriptQueryBuilder()
+
+    type ScriptScoreQueryBuilder() =
+        member _.Yield(_: unit) : Types.ScriptScoreQuery =
+            {
+                MinScore = None
+                Query = Unchecked.defaultof<_>
+                Script = Unchecked.defaultof<_>
+                Boost = None
+                query_name = None
+            }
+
+        [<CustomOperation("minScore")>]
+        member _.MinScore(state: Types.ScriptScoreQuery, value: Types.Float) =
+            { state with MinScore = Some value }
+
+        [<CustomOperation("query")>]
+        member _.Query(state: Types.ScriptScoreQuery, value: Types.QueryContainer) =
+            { state with Query = value }
+
+        [<CustomOperation("script")>]
+        member _.Script(state: Types.ScriptScoreQuery, value: Types.Script) =
+            { state with Script = value }
+
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.ScriptScoreQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("queryName")>]
+        member _.QueryName(state: Types.ScriptScoreQuery, value: string) =
+            { state with query_name = Some value }
+
+    let scriptScoreQuery = ScriptScoreQueryBuilder()
+
+    type SemanticQueryBuilder() =
+        member _.Yield(_: unit) : Types.SemanticQuery =
+            {
+                Field = Unchecked.defaultof<_>
+                Query = Unchecked.defaultof<_>
+                Boost = None
+                query_name = None
+            }
+
+        [<CustomOperation("field")>]
+        member _.Field(state: Types.SemanticQuery, value: string) =
+            { state with Field = value }
+
+        [<CustomOperation("query")>]
+        member _.Query(state: Types.SemanticQuery, value: string) =
+            { state with Query = value }
+
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.SemanticQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("queryName")>]
+        member _.QueryName(state: Types.SemanticQuery, value: string) =
+            { state with query_name = Some value }
+
+    let semanticQuery = SemanticQueryBuilder()
 
     type ShapeFieldQueryBuilder() =
         member _.Yield(_: unit) : Types.ShapeFieldQuery =
@@ -1879,6 +2399,28 @@ module TypesQueryDslBuilders =
 
     let shapeFieldQuery = ShapeFieldQueryBuilder()
 
+    type ShapeQueryBuilder() =
+        member _.Yield(_: unit) : Types.ShapeQuery =
+            {
+                IgnoreUnmapped = None
+                Boost = None
+                query_name = None
+            }
+
+        [<CustomOperation("ignoreUnmapped")>]
+        member _.IgnoreUnmapped(state: Types.ShapeQuery, value: bool) =
+            { state with IgnoreUnmapped = Some value }
+
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.ShapeQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("queryName")>]
+        member _.QueryName(state: Types.ShapeQuery, value: string) =
+            { state with query_name = Some value }
+
+    let shapeQuery = ShapeQueryBuilder()
+
     type SimpleQueryStringQueryBuilder() =
         member _.Yield(_: unit) : Types.SimpleQueryStringQuery =
             {
@@ -1895,6 +2437,8 @@ module TypesQueryDslBuilders =
                 MinimumShouldMatch = None
                 Query = Unchecked.defaultof<_>
                 QuoteFieldSuffix = None
+                Boost = None
+                query_name = None
             }
 
         [<CustomOperation("analyzer")>]
@@ -1949,7 +2493,118 @@ module TypesQueryDslBuilders =
         member _.QuoteFieldSuffix(state: Types.SimpleQueryStringQuery, value: string) =
             { state with QuoteFieldSuffix = Some value }
 
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.SimpleQueryStringQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("queryName")>]
+        member _.QueryName(state: Types.SimpleQueryStringQuery, value: string) =
+            { state with query_name = Some value }
+
     let simpleQueryStringQuery = SimpleQueryStringQueryBuilder()
+
+    type SpanContainingQueryBuilder() =
+        member _.Yield(_: unit) : Types.SpanContainingQuery =
+            {
+                Big = Unchecked.defaultof<_>
+                Little = Unchecked.defaultof<_>
+                Boost = None
+                query_name = None
+            }
+
+        [<CustomOperation("big")>]
+        member _.Big(state: Types.SpanContainingQuery, value: Types.SpanQuery) =
+            { state with Big = value }
+
+        [<CustomOperation("little")>]
+        member _.Little(state: Types.SpanContainingQuery, value: Types.SpanQuery) =
+            { state with Little = value }
+
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.SpanContainingQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("queryName")>]
+        member _.QueryName(state: Types.SpanContainingQuery, value: string) =
+            { state with query_name = Some value }
+
+    let spanContainingQuery = SpanContainingQueryBuilder()
+
+    type SpanFieldMaskingQueryBuilder() =
+        member _.Yield(_: unit) : Types.SpanFieldMaskingQuery =
+            {
+                Field = Unchecked.defaultof<_>
+                Query = Unchecked.defaultof<_>
+                Boost = None
+                query_name = None
+            }
+
+        [<CustomOperation("field")>]
+        member _.Field(state: Types.SpanFieldMaskingQuery, value: Types.Field) =
+            { state with Field = value }
+
+        [<CustomOperation("query")>]
+        member _.Query(state: Types.SpanFieldMaskingQuery, value: Types.SpanQuery) =
+            { state with Query = value }
+
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.SpanFieldMaskingQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("queryName")>]
+        member _.QueryName(state: Types.SpanFieldMaskingQuery, value: string) =
+            { state with query_name = Some value }
+
+    let spanFieldMaskingQuery = SpanFieldMaskingQueryBuilder()
+
+    type SpanFirstQueryBuilder() =
+        member _.Yield(_: unit) : Types.SpanFirstQuery =
+            {
+                End = Unchecked.defaultof<_>
+                Match = Unchecked.defaultof<_>
+                Boost = None
+                query_name = None
+            }
+
+        [<CustomOperation("end'")>]
+        member _.End(state: Types.SpanFirstQuery, value: Types.Integer) =
+            { state with End = value }
+
+        [<CustomOperation("match'")>]
+        member _.Match(state: Types.SpanFirstQuery, value: Types.SpanQuery) =
+            { state with Match = value }
+
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.SpanFirstQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("queryName")>]
+        member _.QueryName(state: Types.SpanFirstQuery, value: string) =
+            { state with query_name = Some value }
+
+    let spanFirstQuery = SpanFirstQueryBuilder()
+
+    type SpanMultiTermQueryBuilder() =
+        member _.Yield(_: unit) : Types.SpanMultiTermQuery =
+            {
+                Match = Unchecked.defaultof<_>
+                Boost = None
+                query_name = None
+            }
+
+        [<CustomOperation("match'")>]
+        member _.Match(state: Types.SpanMultiTermQuery, value: Types.QueryContainer) =
+            { state with Match = value }
+
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.SpanMultiTermQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("queryName")>]
+        member _.QueryName(state: Types.SpanMultiTermQuery, value: string) =
+            { state with query_name = Some value }
+
+    let spanMultiTermQuery = SpanMultiTermQueryBuilder()
 
     type SpanNearQueryBuilder() =
         member _.Yield(_: unit) : Types.SpanNearQuery =
@@ -1957,6 +2612,8 @@ module TypesQueryDslBuilders =
                 Clauses = Unchecked.defaultof<_>
                 InOrder = None
                 Slop = None
+                Boost = None
+                query_name = None
             }
 
         [<CustomOperation("clauses")>]
@@ -1971,6 +2628,14 @@ module TypesQueryDslBuilders =
         member _.Slop(state: Types.SpanNearQuery, value: Types.Integer) =
             { state with Slop = Some value }
 
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.SpanNearQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("queryName")>]
+        member _.QueryName(state: Types.SpanNearQuery, value: string) =
+            { state with query_name = Some value }
+
     let spanNearQuery = SpanNearQueryBuilder()
 
     type SpanNotQueryBuilder() =
@@ -1981,6 +2646,8 @@ module TypesQueryDslBuilders =
                 Include = Unchecked.defaultof<_>
                 Post = None
                 Pre = None
+                Boost = None
+                query_name = None
             }
 
         [<CustomOperation("dist")>]
@@ -2003,7 +2670,37 @@ module TypesQueryDslBuilders =
         member _.Pre(state: Types.SpanNotQuery, value: Types.Integer) =
             { state with Pre = Some value }
 
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.SpanNotQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("queryName")>]
+        member _.QueryName(state: Types.SpanNotQuery, value: string) =
+            { state with query_name = Some value }
+
     let spanNotQuery = SpanNotQueryBuilder()
+
+    type SpanOrQueryBuilder() =
+        member _.Yield(_: unit) : Types.SpanOrQuery =
+            {
+                Clauses = Unchecked.defaultof<_>
+                Boost = None
+                query_name = None
+            }
+
+        [<CustomOperation("clauses")>]
+        member _.Clauses(state: Types.SpanOrQuery, value: Types.SpanQuery list) =
+            { state with Clauses = value }
+
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.SpanOrQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("queryName")>]
+        member _.QueryName(state: Types.SpanOrQuery, value: string) =
+            { state with query_name = Some value }
+
+    let spanOrQuery = SpanOrQueryBuilder()
 
     module SpanQuery =
 
@@ -2037,6 +2734,62 @@ module TypesQueryDslBuilders =
         let spanWithin (value: Types.SpanWithinQuery) =
             Types.SpanQuery.SpanWithin value
 
+    type SpanTermQueryBuilder() =
+        member _.Yield(_: unit) : Types.SpanTermQuery =
+            {
+                Value = Unchecked.defaultof<_>
+                Boost = None
+                query_name = None
+            }
+
+        [<CustomOperation("value")>]
+        member _.Value(state: Types.SpanTermQuery, value: Types.FieldValue) =
+            { state with Value = value }
+
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.SpanTermQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("queryName")>]
+        member _.QueryName(state: Types.SpanTermQuery, value: string) =
+            { state with query_name = Some value }
+
+    let spanTermQuery = SpanTermQueryBuilder()
+
+    let createSpanTermQuery (value: Types.FieldValue) : Types.SpanTermQuery =
+        {
+            Value = value
+            Boost = None
+            query_name = None
+        }
+
+    type SpanWithinQueryBuilder() =
+        member _.Yield(_: unit) : Types.SpanWithinQuery =
+            {
+                Big = Unchecked.defaultof<_>
+                Little = Unchecked.defaultof<_>
+                Boost = None
+                query_name = None
+            }
+
+        [<CustomOperation("big")>]
+        member _.Big(state: Types.SpanWithinQuery, value: Types.SpanQuery) =
+            { state with Big = value }
+
+        [<CustomOperation("little")>]
+        member _.Little(state: Types.SpanWithinQuery, value: Types.SpanQuery) =
+            { state with Little = value }
+
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.SpanWithinQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("queryName")>]
+        member _.QueryName(state: Types.SpanWithinQuery, value: string) =
+            { state with query_name = Some value }
+
+    let spanWithinQuery = SpanWithinQueryBuilder()
+
     module SparseVectorQuery =
 
         let queryVector (value: Map<string, Types.Float>) =
@@ -2045,6 +2798,58 @@ module TypesQueryDslBuilders =
         let inferenceId (value: Types.Id) =
             Types.SparseVectorQuery.InferenceId value
 
+    type TermQueryBuilder() =
+        member _.Yield(_: unit) : Types.TermQuery =
+            {
+                Value = Unchecked.defaultof<_>
+                CaseInsensitive = None
+                Boost = None
+                query_name = None
+            }
+
+        [<CustomOperation("value")>]
+        member _.Value(state: Types.TermQuery, value: Types.FieldValue) =
+            { state with Value = value }
+
+        [<CustomOperation("caseInsensitive")>]
+        member _.CaseInsensitive(state: Types.TermQuery, value: bool) =
+            { state with CaseInsensitive = Some value }
+
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.TermQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("queryName")>]
+        member _.QueryName(state: Types.TermQuery, value: string) =
+            { state with query_name = Some value }
+
+    let termQuery = TermQueryBuilder()
+
+    let createTermQuery (value: Types.FieldValue) : Types.TermQuery =
+        {
+            Value = value
+            CaseInsensitive = None
+            Boost = None
+            query_name = None
+        }
+
+    type TermsQueryBuilder() =
+        member _.Yield(_: unit) : Types.TermsQuery =
+            {
+                Boost = None
+                query_name = None
+            }
+
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.TermsQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("queryName")>]
+        member _.QueryName(state: Types.TermsQuery, value: string) =
+            { state with query_name = Some value }
+
+    let termsQuery = TermsQueryBuilder()
+
     type TermsSetQueryBuilder() =
         member _.Yield(_: unit) : Types.TermsSetQuery =
             {
@@ -2052,6 +2857,8 @@ module TypesQueryDslBuilders =
                 MinimumShouldMatchField = None
                 MinimumShouldMatchScript = None
                 Terms = Unchecked.defaultof<_>
+                Boost = None
+                query_name = None
             }
 
         [<CustomOperation("minimumShouldMatch")>]
@@ -2070,7 +2877,69 @@ module TypesQueryDslBuilders =
         member _.Terms(state: Types.TermsSetQuery, value: Types.FieldValue list) =
             { state with Terms = value }
 
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.TermsSetQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("queryName")>]
+        member _.QueryName(state: Types.TermsSetQuery, value: string) =
+            { state with query_name = Some value }
+
     let termsSetQuery = TermsSetQueryBuilder()
+
+    type TextExpansionQueryBuilder() =
+        member _.Yield(_: unit) : Types.TextExpansionQuery =
+            {
+                ModelId = Unchecked.defaultof<_>
+                ModelText = Unchecked.defaultof<_>
+                PruningConfig = None
+                Boost = None
+                query_name = None
+            }
+
+        [<CustomOperation("modelId")>]
+        member _.ModelId(state: Types.TextExpansionQuery, value: string) =
+            { state with ModelId = value }
+
+        [<CustomOperation("modelText")>]
+        member _.ModelText(state: Types.TextExpansionQuery, value: string) =
+            { state with ModelText = value }
+
+        [<CustomOperation("pruningConfig")>]
+        member _.PruningConfig(state: Types.TextExpansionQuery, value: Types.TokenPruningConfig) =
+            { state with PruningConfig = Some value }
+
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.TextExpansionQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("queryName")>]
+        member _.QueryName(state: Types.TextExpansionQuery, value: string) =
+            { state with query_name = Some value }
+
+    let textExpansionQuery = TextExpansionQueryBuilder()
+
+    type TypeQueryBuilder() =
+        member _.Yield(_: unit) : Types.TypeQuery =
+            {
+                Value = Unchecked.defaultof<_>
+                Boost = None
+                query_name = None
+            }
+
+        [<CustomOperation("value")>]
+        member _.Value(state: Types.TypeQuery, value: string) =
+            { state with Value = value }
+
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.TypeQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("queryName")>]
+        member _.QueryName(state: Types.TypeQuery, value: string) =
+            { state with query_name = Some value }
+
+    let typeQuery = TypeQueryBuilder()
 
     type UntypedRangeQueryBuilder() =
         member _.Yield(_: unit) : Types.UntypedRangeQuery =
@@ -2089,6 +2958,33 @@ module TypesQueryDslBuilders =
 
     let untypedRangeQuery = UntypedRangeQueryBuilder()
 
+    type WeightedTokensQueryBuilder() =
+        member _.Yield(_: unit) : Types.WeightedTokensQuery =
+            {
+                Tokens = Unchecked.defaultof<_>
+                PruningConfig = None
+                Boost = None
+                query_name = None
+            }
+
+        [<CustomOperation("tokens")>]
+        member _.Tokens(state: Types.WeightedTokensQuery, value: System.Text.Json.JsonElement) =
+            { state with Tokens = value }
+
+        [<CustomOperation("pruningConfig")>]
+        member _.PruningConfig(state: Types.WeightedTokensQuery, value: Types.TokenPruningConfig) =
+            { state with PruningConfig = Some value }
+
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.WeightedTokensQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("queryName")>]
+        member _.QueryName(state: Types.WeightedTokensQuery, value: string) =
+            { state with query_name = Some value }
+
+    let weightedTokensQuery = WeightedTokensQueryBuilder()
+
     type WildcardQueryBuilder() =
         member _.Yield(_: unit) : Types.WildcardQuery =
             {
@@ -2096,6 +2992,8 @@ module TypesQueryDslBuilders =
                 Rewrite = None
                 Value = None
                 Wildcard = None
+                Boost = None
+                query_name = None
             }
 
         [<CustomOperation("caseInsensitive")>]
@@ -2114,6 +3012,14 @@ module TypesQueryDslBuilders =
         member _.Wildcard(state: Types.WildcardQuery, value: string) =
             { state with Wildcard = Some value }
 
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.WildcardQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("queryName")>]
+        member _.QueryName(state: Types.WildcardQuery, value: string) =
+            { state with query_name = Some value }
+
     let wildcardQuery = WildcardQueryBuilder()
 
     let createWildcardQuery (value: string) : Types.WildcardQuery =
@@ -2122,5 +3028,29 @@ module TypesQueryDslBuilders =
             Rewrite = None
             Value = Some value
             Wildcard = None
+            Boost = None
+            query_name = None
         }
+
+    type WrapperQueryBuilder() =
+        member _.Yield(_: unit) : Types.WrapperQuery =
+            {
+                Query = Unchecked.defaultof<_>
+                Boost = None
+                query_name = None
+            }
+
+        [<CustomOperation("query")>]
+        member _.Query(state: Types.WrapperQuery, value: string) =
+            { state with Query = value }
+
+        [<CustomOperation("boost")>]
+        member _.Boost(state: Types.WrapperQuery, value: Types.Float) =
+            { state with Boost = Some value }
+
+        [<CustomOperation("queryName")>]
+        member _.QueryName(state: Types.WrapperQuery, value: string) =
+            { state with query_name = Some value }
+
+    let wrapperQuery = WrapperQueryBuilder()
 

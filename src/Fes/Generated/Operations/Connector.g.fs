@@ -820,7 +820,7 @@ module ConnectorOperations =
         Size: Types.Integer option
         Status: Types.SyncStatus option
         ConnectorId: Types.Id option
-        JobType: System.Text.Json.JsonElement option
+        JobType: Types.SyncJobType list option
     }
 
         with
@@ -870,7 +870,7 @@ module ConnectorOperations =
             { state with ConnectorId = Some value }
 
         [<CustomOperation("jobType")>]
-        member _.JobType(state: ConnectorSyncJobListRequest, value: System.Text.Json.JsonElement) =
+        member _.JobType(state: ConnectorSyncJobListRequest, value: Types.SyncJobType list) =
             { state with JobType = Some value }
 
     let connectorSyncJobListRequest = ConnectorSyncJobListRequestBuilder()
@@ -884,7 +884,7 @@ module ConnectorOperations =
             { req with Status = Some value }
         let withConnectorId (value: Types.Id) (req: ConnectorSyncJobListRequest) =
             { req with ConnectorId = Some value }
-        let withJobType (value: System.Text.Json.JsonElement) (req: ConnectorSyncJobListRequest) =
+        let withJobType (value: Types.SyncJobType list) (req: ConnectorSyncJobListRequest) =
             { req with JobType = Some value }
 
     type ConnectorSyncJobPostRequest = {

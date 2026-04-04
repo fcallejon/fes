@@ -151,7 +151,7 @@ module CatOperations =
             { req with MasterTimeout = Some value }
 
     type CatCircuitBreakerRequest = {
-        CircuitBreakerPatterns: System.Text.Json.JsonElement
+        CircuitBreakerPatterns: string list
         H: Types.CatCircuitBreakerColumns option
         S: Types.Names option
         Local: bool option
@@ -188,7 +188,7 @@ module CatOperations =
             }
 
         [<CustomOperation("circuitBreakerPatterns")>]
-        member _.CircuitBreakerPatterns(state: CatCircuitBreakerRequest, value: System.Text.Json.JsonElement) =
+        member _.CircuitBreakerPatterns(state: CatCircuitBreakerRequest, value: string list) =
             { state with CircuitBreakerPatterns = value }
 
         [<CustomOperation("h")>]

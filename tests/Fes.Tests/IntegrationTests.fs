@@ -296,24 +296,20 @@ let ``Search with bool query combining must and filter`` () =
             (ES.sendAsync<System.Text.Json.JsonElement, _> t req).GetAwaiter().GetResult() |> ignore
 
         // Bool query: must match "Wireless" AND filter category = "electronics"
-        let mustJson = Json.serialize [
-            Types.QueryContainer.Match ("title", {
-                Types.MatchQuery.empty with
-                    Query = jsonElement "\"Wireless\""
-            })
-        ]
-        let filterJson = Json.serialize [
-            Types.QueryContainer.Term ("category", {
-                Value = Types.FieldValue.String "electronics"
-                CaseInsensitive = None
-            })
-        ]
         let boolQuery = Types.QueryContainer.Bool {
-            Must = Some (jsonElement mustJson)
-            Filter = Some (jsonElement filterJson)
-            Should = None
-            MustNot = None
-            MinimumShouldMatch = None
+            Types.BoolQuery.empty with
+                Must = Some [
+                    Types.QueryContainer.Match ("title", {
+                        Types.MatchQuery.empty with
+                            Query = jsonElement "\"Wireless\""
+                    })
+                ]
+                Filter = Some [
+                    Types.QueryContainer.Term ("category", {
+                        Types.TermQuery.empty with
+                            Value = Types.FieldValue.String "electronics"
+                    })
+                ]
         }
         let searchReq = searchRequest {
             index (Types.Indices.IndexName idx)

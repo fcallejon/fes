@@ -9,6 +9,58 @@ open Fes.Generated
 [<AutoOpen>]
 module EsqlTypesBuilders =
 
+    type AsyncEsqlResultBuilder() =
+        member _.Yield(_: unit) : Types.AsyncEsqlResult =
+            {
+                Id = None
+                IsRunning = Unchecked.defaultof<_>
+                Took = None
+                IsPartial = None
+                AllColumns = None
+                Columns = Unchecked.defaultof<_>
+                Values = Unchecked.defaultof<_>
+                Clusters = None
+                Profile = None
+            }
+
+        [<CustomOperation("id")>]
+        member _.Id(state: Types.AsyncEsqlResult, value: string) =
+            { state with Id = Some value }
+
+        [<CustomOperation("isRunning")>]
+        member _.IsRunning(state: Types.AsyncEsqlResult, value: bool) =
+            { state with IsRunning = value }
+
+        [<CustomOperation("took")>]
+        member _.Took(state: Types.AsyncEsqlResult, value: Types.DurationValue<Types.UnitMillis>) =
+            { state with Took = Some value }
+
+        [<CustomOperation("isPartial")>]
+        member _.IsPartial(state: Types.AsyncEsqlResult, value: bool) =
+            { state with IsPartial = Some value }
+
+        [<CustomOperation("allColumns")>]
+        member _.AllColumns(state: Types.AsyncEsqlResult, value: Types.EsqlColumnInfo list) =
+            { state with AllColumns = Some value }
+
+        [<CustomOperation("columns")>]
+        member _.Columns(state: Types.AsyncEsqlResult, value: Types.EsqlColumnInfo list) =
+            { state with Columns = value }
+
+        [<CustomOperation("values")>]
+        member _.Values(state: Types.AsyncEsqlResult, value: Types.FieldValue list list) =
+            { state with Values = value }
+
+        [<CustomOperation("clusters")>]
+        member _.Clusters(state: Types.AsyncEsqlResult, value: Types.EsqlClusterInfo) =
+            { state with Clusters = Some value }
+
+        [<CustomOperation("profile")>]
+        member _.Profile(state: Types.AsyncEsqlResult, value: System.Text.Json.JsonElement) =
+            { state with Profile = Some value }
+
+    let asyncEsqlResult = AsyncEsqlResultBuilder()
+
     type EsqlClusterDetailsBuilder() =
         member _.Yield(_: unit) : Types.EsqlClusterDetails =
             {

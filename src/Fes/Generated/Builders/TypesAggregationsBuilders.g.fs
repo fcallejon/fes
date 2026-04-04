@@ -345,6 +345,77 @@ module TypesAggregationsBuilders =
 
     let autoDateHistogramAggregation = AutoDateHistogramAggregationBuilder()
 
+    type AverageAggregationBuilder() =
+        member _.Yield(_: unit) : Types.AverageAggregation =
+            {
+                Field = None
+                Missing = None
+                Script = None
+                Format = None
+            }
+
+        [<CustomOperation("field")>]
+        member _.Field(state: Types.AverageAggregation, value: Types.Field) =
+            { state with Field = Some value }
+
+        [<CustomOperation("missing")>]
+        member _.Missing(state: Types.AverageAggregation, value: Types.Missing) =
+            { state with Missing = Some value }
+
+        [<CustomOperation("script")>]
+        member _.Script(state: Types.AverageAggregation, value: Types.Script) =
+            { state with Script = Some value }
+
+        [<CustomOperation("format")>]
+        member _.Format(state: Types.AverageAggregation, value: string) =
+            { state with Format = Some value }
+
+    let averageAggregation = AverageAggregationBuilder()
+
+    type AverageBucketAggregationBuilder() =
+        member _.Yield(_: unit) : Types.AverageBucketAggregation =
+            {
+                BucketsPath = None
+                Format = None
+                GapPolicy = None
+            }
+
+        [<CustomOperation("bucketsPath")>]
+        member _.BucketsPath(state: Types.AverageBucketAggregation, value: Types.BucketsPath) =
+            { state with BucketsPath = Some value }
+
+        [<CustomOperation("format")>]
+        member _.Format(state: Types.AverageBucketAggregation, value: string) =
+            { state with Format = Some value }
+
+        [<CustomOperation("gapPolicy")>]
+        member _.GapPolicy(state: Types.AverageBucketAggregation, value: Types.GapPolicy) =
+            { state with GapPolicy = Some value }
+
+    let averageBucketAggregation = AverageBucketAggregationBuilder()
+
+    type AvgAggregateBuilder() =
+        member _.Yield(_: unit) : Types.AvgAggregate =
+            {
+                Meta = None
+                Value = Unchecked.defaultof<_>
+                ValueAsString = None
+            }
+
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.AvgAggregate, value: Types.Metadata) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("value")>]
+        member _.Value(state: Types.AvgAggregate, value: Types.Double option) =
+            { state with Value = value }
+
+        [<CustomOperation("valueAsString")>]
+        member _.ValueAsString(state: Types.AvgAggregate, value: string) =
+            { state with ValueAsString = Some value }
+
+    let avgAggregate = AvgAggregateBuilder()
+
     type BoxPlotAggregateBuilder() =
         member _.Yield(_: unit) : Types.BoxPlotAggregate =
             {
@@ -362,6 +433,7 @@ module TypesAggregationsBuilders =
                 Q3AsString = None
                 LowerAsString = None
                 UpperAsString = None
+                Meta = None
             }
 
         [<CustomOperation("min")>]
@@ -420,6 +492,10 @@ module TypesAggregationsBuilders =
         member _.UpperAsString(state: Types.BoxPlotAggregate, value: string) =
             { state with UpperAsString = Some value }
 
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.BoxPlotAggregate, value: Types.Metadata) =
+            { state with Meta = Some value }
+
     let boxPlotAggregate = BoxPlotAggregateBuilder()
 
     type BoxplotAggregationBuilder() =
@@ -427,6 +503,9 @@ module TypesAggregationsBuilders =
             {
                 Compression = None
                 ExecutionHint = None
+                Field = None
+                Missing = None
+                Script = None
             }
 
         [<CustomOperation("compression")>]
@@ -437,6 +516,18 @@ module TypesAggregationsBuilders =
         member _.ExecutionHint(state: Types.BoxplotAggregation, value: Types.TDigestExecutionHint) =
             { state with ExecutionHint = Some value }
 
+        [<CustomOperation("field")>]
+        member _.Field(state: Types.BoxplotAggregation, value: Types.Field) =
+            { state with Field = Some value }
+
+        [<CustomOperation("missing")>]
+        member _.Missing(state: Types.BoxplotAggregation, value: Types.Missing) =
+            { state with Missing = Some value }
+
+        [<CustomOperation("script")>]
+        member _.Script(state: Types.BoxplotAggregation, value: Types.Script) =
+            { state with Script = Some value }
+
     let boxplotAggregation = BoxplotAggregationBuilder()
 
     type BucketKsAggregationBuilder() =
@@ -445,6 +536,7 @@ module TypesAggregationsBuilders =
                 Alternative = None
                 Fractions = None
                 SamplingMethod = None
+                BucketsPath = None
             }
 
         [<CustomOperation("alternative")>]
@@ -459,7 +551,92 @@ module TypesAggregationsBuilders =
         member _.SamplingMethod(state: Types.BucketKsAggregation, value: string) =
             { state with SamplingMethod = Some value }
 
+        [<CustomOperation("bucketsPath")>]
+        member _.BucketsPath(state: Types.BucketKsAggregation, value: Types.BucketsPath) =
+            { state with BucketsPath = Some value }
+
     let bucketKsAggregation = BucketKsAggregationBuilder()
+
+    type BucketMetricValueAggregateBuilder() =
+        member _.Yield(_: unit) : Types.BucketMetricValueAggregate =
+            {
+                Keys = Unchecked.defaultof<_>
+                Meta = None
+                Value = Unchecked.defaultof<_>
+                ValueAsString = None
+            }
+
+        [<CustomOperation("keys")>]
+        member _.Keys(state: Types.BucketMetricValueAggregate, value: string list) =
+            { state with Keys = value }
+
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.BucketMetricValueAggregate, value: Types.Metadata) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("value")>]
+        member _.Value(state: Types.BucketMetricValueAggregate, value: Types.Double option) =
+            { state with Value = value }
+
+        [<CustomOperation("valueAsString")>]
+        member _.ValueAsString(state: Types.BucketMetricValueAggregate, value: string) =
+            { state with ValueAsString = Some value }
+
+    let bucketMetricValueAggregate = BucketMetricValueAggregateBuilder()
+
+    type BucketScriptAggregationBuilder() =
+        member _.Yield(_: unit) : Types.BucketScriptAggregation =
+            {
+                Script = None
+                BucketsPath = None
+                Format = None
+                GapPolicy = None
+            }
+
+        [<CustomOperation("script")>]
+        member _.Script(state: Types.BucketScriptAggregation, value: Types.Script) =
+            { state with Script = Some value }
+
+        [<CustomOperation("bucketsPath")>]
+        member _.BucketsPath(state: Types.BucketScriptAggregation, value: Types.BucketsPath) =
+            { state with BucketsPath = Some value }
+
+        [<CustomOperation("format")>]
+        member _.Format(state: Types.BucketScriptAggregation, value: string) =
+            { state with Format = Some value }
+
+        [<CustomOperation("gapPolicy")>]
+        member _.GapPolicy(state: Types.BucketScriptAggregation, value: Types.GapPolicy) =
+            { state with GapPolicy = Some value }
+
+    let bucketScriptAggregation = BucketScriptAggregationBuilder()
+
+    type BucketSelectorAggregationBuilder() =
+        member _.Yield(_: unit) : Types.BucketSelectorAggregation =
+            {
+                Script = None
+                BucketsPath = None
+                Format = None
+                GapPolicy = None
+            }
+
+        [<CustomOperation("script")>]
+        member _.Script(state: Types.BucketSelectorAggregation, value: Types.Script) =
+            { state with Script = Some value }
+
+        [<CustomOperation("bucketsPath")>]
+        member _.BucketsPath(state: Types.BucketSelectorAggregation, value: Types.BucketsPath) =
+            { state with BucketsPath = Some value }
+
+        [<CustomOperation("format")>]
+        member _.Format(state: Types.BucketSelectorAggregation, value: string) =
+            { state with Format = Some value }
+
+        [<CustomOperation("gapPolicy")>]
+        member _.GapPolicy(state: Types.BucketSelectorAggregation, value: Types.GapPolicy) =
+            { state with GapPolicy = Some value }
+
+    let bucketSelectorAggregation = BucketSelectorAggregationBuilder()
 
     type BucketSortAggregationBuilder() =
         member _.Yield(_: unit) : Types.BucketSortAggregation =
@@ -494,6 +671,9 @@ module TypesAggregationsBuilders =
                 PrecisionThreshold = None
                 Rehash = None
                 ExecutionHint = None
+                Field = None
+                Missing = None
+                Script = None
             }
 
         [<CustomOperation("precisionThreshold")>]
@@ -508,7 +688,102 @@ module TypesAggregationsBuilders =
         member _.ExecutionHint(state: Types.CardinalityAggregation, value: Types.CardinalityExecutionMode) =
             { state with ExecutionHint = Some value }
 
+        [<CustomOperation("field")>]
+        member _.Field(state: Types.CardinalityAggregation, value: Types.Field) =
+            { state with Field = Some value }
+
+        [<CustomOperation("missing")>]
+        member _.Missing(state: Types.CardinalityAggregation, value: Types.Missing) =
+            { state with Missing = Some value }
+
+        [<CustomOperation("script")>]
+        member _.Script(state: Types.CardinalityAggregation, value: Types.Script) =
+            { state with Script = Some value }
+
     let cardinalityAggregation = CardinalityAggregationBuilder()
+
+    type CartesianBoundsAggregateBuilder() =
+        member _.Yield(_: unit) : Types.CartesianBoundsAggregate =
+            {
+                Bounds = None
+                Meta = None
+            }
+
+        [<CustomOperation("bounds")>]
+        member _.Bounds(state: Types.CartesianBoundsAggregate, value: Types.TopLeftBottomRightGeoBounds) =
+            { state with Bounds = Some value }
+
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.CartesianBoundsAggregate, value: Types.Metadata) =
+            { state with Meta = Some value }
+
+    let cartesianBoundsAggregate = CartesianBoundsAggregateBuilder()
+
+    type CartesianBoundsAggregationBuilder() =
+        member _.Yield(_: unit) : Types.CartesianBoundsAggregation =
+            {
+                Field = None
+                Missing = None
+                Script = None
+            }
+
+        [<CustomOperation("field")>]
+        member _.Field(state: Types.CartesianBoundsAggregation, value: Types.Field) =
+            { state with Field = Some value }
+
+        [<CustomOperation("missing")>]
+        member _.Missing(state: Types.CartesianBoundsAggregation, value: Types.Missing) =
+            { state with Missing = Some value }
+
+        [<CustomOperation("script")>]
+        member _.Script(state: Types.CartesianBoundsAggregation, value: Types.Script) =
+            { state with Script = Some value }
+
+    let cartesianBoundsAggregation = CartesianBoundsAggregationBuilder()
+
+    type CartesianCentroidAggregateBuilder() =
+        member _.Yield(_: unit) : Types.CartesianCentroidAggregate =
+            {
+                Count = Unchecked.defaultof<_>
+                Location = None
+                Meta = None
+            }
+
+        [<CustomOperation("count")>]
+        member _.Count(state: Types.CartesianCentroidAggregate, value: Types.Long) =
+            { state with Count = value }
+
+        [<CustomOperation("location")>]
+        member _.Location(state: Types.CartesianCentroidAggregate, value: Types.CartesianPoint) =
+            { state with Location = Some value }
+
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.CartesianCentroidAggregate, value: Types.Metadata) =
+            { state with Meta = Some value }
+
+    let cartesianCentroidAggregate = CartesianCentroidAggregateBuilder()
+
+    type CartesianCentroidAggregationBuilder() =
+        member _.Yield(_: unit) : Types.CartesianCentroidAggregation =
+            {
+                Field = None
+                Missing = None
+                Script = None
+            }
+
+        [<CustomOperation("field")>]
+        member _.Field(state: Types.CartesianCentroidAggregation, value: Types.Field) =
+            { state with Field = Some value }
+
+        [<CustomOperation("missing")>]
+        member _.Missing(state: Types.CartesianCentroidAggregation, value: Types.Missing) =
+            { state with Missing = Some value }
+
+        [<CustomOperation("script")>]
+        member _.Script(state: Types.CartesianCentroidAggregation, value: Types.Script) =
+            { state with Script = Some value }
+
+    let cartesianCentroidAggregation = CartesianCentroidAggregationBuilder()
 
     type CategorizeTextAggregationBuilder() =
         member _.Yield(_: unit) : Types.CategorizeTextAggregation =
@@ -566,6 +841,50 @@ module TypesAggregationsBuilders =
             { state with ShardMinDocCount = Some value }
 
     let categorizeTextAggregation = CategorizeTextAggregationBuilder()
+
+    type ChangePointAggregateBuilder() =
+        member _.Yield(_: unit) : Types.ChangePointAggregate =
+            {
+                Type = Unchecked.defaultof<_>
+                Bucket = None
+                Meta = None
+            }
+
+        [<CustomOperation("type'")>]
+        member _.Type(state: Types.ChangePointAggregate, value: Types.ChangeType) =
+            { state with Type = value }
+
+        [<CustomOperation("bucket")>]
+        member _.Bucket(state: Types.ChangePointAggregate, value: Types.ChangePointBucket) =
+            { state with Bucket = Some value }
+
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.ChangePointAggregate, value: Types.Metadata) =
+            { state with Meta = Some value }
+
+    let changePointAggregate = ChangePointAggregateBuilder()
+
+    type ChangePointAggregationBuilder() =
+        member _.Yield(_: unit) : Types.ChangePointAggregation =
+            {
+                BucketsPath = None
+                Format = None
+                GapPolicy = None
+            }
+
+        [<CustomOperation("bucketsPath")>]
+        member _.BucketsPath(state: Types.ChangePointAggregation, value: Types.BucketsPath) =
+            { state with BucketsPath = Some value }
+
+        [<CustomOperation("format")>]
+        member _.Format(state: Types.ChangePointAggregation, value: string) =
+            { state with Format = Some value }
+
+        [<CustomOperation("gapPolicy")>]
+        member _.GapPolicy(state: Types.ChangePointAggregation, value: Types.GapPolicy) =
+            { state with GapPolicy = Some value }
+
+    let changePointAggregation = ChangePointAggregationBuilder()
 
     module ChangeType =
 
@@ -674,6 +993,12 @@ module TypesAggregationsBuilders =
                 FixedInterval = None
                 Offset = None
                 TimeZone = None
+                Field = None
+                MissingBucket = None
+                MissingOrder = None
+                Script = None
+                ValueType = None
+                Order = None
             }
 
         [<CustomOperation("format")>]
@@ -696,6 +1021,30 @@ module TypesAggregationsBuilders =
         member _.TimeZone(state: Types.CompositeDateHistogramAggregation, value: Types.TimeZone) =
             { state with TimeZone = Some value }
 
+        [<CustomOperation("field")>]
+        member _.Field(state: Types.CompositeDateHistogramAggregation, value: Types.Field) =
+            { state with Field = Some value }
+
+        [<CustomOperation("missingBucket")>]
+        member _.MissingBucket(state: Types.CompositeDateHistogramAggregation, value: bool) =
+            { state with MissingBucket = Some value }
+
+        [<CustomOperation("missingOrder")>]
+        member _.MissingOrder(state: Types.CompositeDateHistogramAggregation, value: Types.MissingOrder) =
+            { state with MissingOrder = Some value }
+
+        [<CustomOperation("script")>]
+        member _.Script(state: Types.CompositeDateHistogramAggregation, value: Types.Script) =
+            { state with Script = Some value }
+
+        [<CustomOperation("valueType")>]
+        member _.ValueType(state: Types.CompositeDateHistogramAggregation, value: Types.ValueType) =
+            { state with ValueType = Some value }
+
+        [<CustomOperation("order")>]
+        member _.Order(state: Types.CompositeDateHistogramAggregation, value: Types.SortOrder) =
+            { state with Order = Some value }
+
     let compositeDateHistogramAggregation = CompositeDateHistogramAggregationBuilder()
 
     type CompositeGeoTileGridAggregationBuilder() =
@@ -703,6 +1052,12 @@ module TypesAggregationsBuilders =
             {
                 Precision = None
                 Bounds = None
+                Field = None
+                MissingBucket = None
+                MissingOrder = None
+                Script = None
+                ValueType = None
+                Order = None
             }
 
         [<CustomOperation("precision")>]
@@ -713,7 +1068,176 @@ module TypesAggregationsBuilders =
         member _.Bounds(state: Types.CompositeGeoTileGridAggregation, value: Types.GeoBounds) =
             { state with Bounds = Some value }
 
+        [<CustomOperation("field")>]
+        member _.Field(state: Types.CompositeGeoTileGridAggregation, value: Types.Field) =
+            { state with Field = Some value }
+
+        [<CustomOperation("missingBucket")>]
+        member _.MissingBucket(state: Types.CompositeGeoTileGridAggregation, value: bool) =
+            { state with MissingBucket = Some value }
+
+        [<CustomOperation("missingOrder")>]
+        member _.MissingOrder(state: Types.CompositeGeoTileGridAggregation, value: Types.MissingOrder) =
+            { state with MissingOrder = Some value }
+
+        [<CustomOperation("script")>]
+        member _.Script(state: Types.CompositeGeoTileGridAggregation, value: Types.Script) =
+            { state with Script = Some value }
+
+        [<CustomOperation("valueType")>]
+        member _.ValueType(state: Types.CompositeGeoTileGridAggregation, value: Types.ValueType) =
+            { state with ValueType = Some value }
+
+        [<CustomOperation("order")>]
+        member _.Order(state: Types.CompositeGeoTileGridAggregation, value: Types.SortOrder) =
+            { state with Order = Some value }
+
     let compositeGeoTileGridAggregation = CompositeGeoTileGridAggregationBuilder()
+
+    type CompositeHistogramAggregationBuilder() =
+        member _.Yield(_: unit) : Types.CompositeHistogramAggregation =
+            {
+                Interval = Unchecked.defaultof<_>
+                Field = None
+                MissingBucket = None
+                MissingOrder = None
+                Script = None
+                ValueType = None
+                Order = None
+            }
+
+        [<CustomOperation("interval")>]
+        member _.Interval(state: Types.CompositeHistogramAggregation, value: Types.Double) =
+            { state with Interval = value }
+
+        [<CustomOperation("field")>]
+        member _.Field(state: Types.CompositeHistogramAggregation, value: Types.Field) =
+            { state with Field = Some value }
+
+        [<CustomOperation("missingBucket")>]
+        member _.MissingBucket(state: Types.CompositeHistogramAggregation, value: bool) =
+            { state with MissingBucket = Some value }
+
+        [<CustomOperation("missingOrder")>]
+        member _.MissingOrder(state: Types.CompositeHistogramAggregation, value: Types.MissingOrder) =
+            { state with MissingOrder = Some value }
+
+        [<CustomOperation("script")>]
+        member _.Script(state: Types.CompositeHistogramAggregation, value: Types.Script) =
+            { state with Script = Some value }
+
+        [<CustomOperation("valueType")>]
+        member _.ValueType(state: Types.CompositeHistogramAggregation, value: Types.ValueType) =
+            { state with ValueType = Some value }
+
+        [<CustomOperation("order")>]
+        member _.Order(state: Types.CompositeHistogramAggregation, value: Types.SortOrder) =
+            { state with Order = Some value }
+
+    let compositeHistogramAggregation = CompositeHistogramAggregationBuilder()
+
+    type CompositeTermsAggregationBuilder() =
+        member _.Yield(_: unit) : Types.CompositeTermsAggregation =
+            {
+                Field = None
+                MissingBucket = None
+                MissingOrder = None
+                Script = None
+                ValueType = None
+                Order = None
+            }
+
+        [<CustomOperation("field")>]
+        member _.Field(state: Types.CompositeTermsAggregation, value: Types.Field) =
+            { state with Field = Some value }
+
+        [<CustomOperation("missingBucket")>]
+        member _.MissingBucket(state: Types.CompositeTermsAggregation, value: bool) =
+            { state with MissingBucket = Some value }
+
+        [<CustomOperation("missingOrder")>]
+        member _.MissingOrder(state: Types.CompositeTermsAggregation, value: Types.MissingOrder) =
+            { state with MissingOrder = Some value }
+
+        [<CustomOperation("script")>]
+        member _.Script(state: Types.CompositeTermsAggregation, value: Types.Script) =
+            { state with Script = Some value }
+
+        [<CustomOperation("valueType")>]
+        member _.ValueType(state: Types.CompositeTermsAggregation, value: Types.ValueType) =
+            { state with ValueType = Some value }
+
+        [<CustomOperation("order")>]
+        member _.Order(state: Types.CompositeTermsAggregation, value: Types.SortOrder) =
+            { state with Order = Some value }
+
+    let compositeTermsAggregation = CompositeTermsAggregationBuilder()
+
+    type CumulativeCardinalityAggregateBuilder() =
+        member _.Yield(_: unit) : Types.CumulativeCardinalityAggregate =
+            {
+                Value = Unchecked.defaultof<_>
+                ValueAsString = None
+                Meta = None
+            }
+
+        [<CustomOperation("value")>]
+        member _.Value(state: Types.CumulativeCardinalityAggregate, value: Types.Long) =
+            { state with Value = value }
+
+        [<CustomOperation("valueAsString")>]
+        member _.ValueAsString(state: Types.CumulativeCardinalityAggregate, value: string) =
+            { state with ValueAsString = Some value }
+
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.CumulativeCardinalityAggregate, value: Types.Metadata) =
+            { state with Meta = Some value }
+
+    let cumulativeCardinalityAggregate = CumulativeCardinalityAggregateBuilder()
+
+    type CumulativeCardinalityAggregationBuilder() =
+        member _.Yield(_: unit) : Types.CumulativeCardinalityAggregation =
+            {
+                BucketsPath = None
+                Format = None
+                GapPolicy = None
+            }
+
+        [<CustomOperation("bucketsPath")>]
+        member _.BucketsPath(state: Types.CumulativeCardinalityAggregation, value: Types.BucketsPath) =
+            { state with BucketsPath = Some value }
+
+        [<CustomOperation("format")>]
+        member _.Format(state: Types.CumulativeCardinalityAggregation, value: string) =
+            { state with Format = Some value }
+
+        [<CustomOperation("gapPolicy")>]
+        member _.GapPolicy(state: Types.CumulativeCardinalityAggregation, value: Types.GapPolicy) =
+            { state with GapPolicy = Some value }
+
+    let cumulativeCardinalityAggregation = CumulativeCardinalityAggregationBuilder()
+
+    type CumulativeSumAggregationBuilder() =
+        member _.Yield(_: unit) : Types.CumulativeSumAggregation =
+            {
+                BucketsPath = None
+                Format = None
+                GapPolicy = None
+            }
+
+        [<CustomOperation("bucketsPath")>]
+        member _.BucketsPath(state: Types.CumulativeSumAggregation, value: Types.BucketsPath) =
+            { state with BucketsPath = Some value }
+
+        [<CustomOperation("format")>]
+        member _.Format(state: Types.CumulativeSumAggregation, value: string) =
+            { state with Format = Some value }
+
+        [<CustomOperation("gapPolicy")>]
+        member _.GapPolicy(state: Types.CumulativeSumAggregation, value: Types.GapPolicy) =
+            { state with GapPolicy = Some value }
+
+    let cumulativeSumAggregation = CumulativeSumAggregationBuilder()
 
     type CustomCategorizeTextAnalyzerBuilder() =
         member _.Yield(_: unit) : Types.CustomCategorizeTextAnalyzer =
@@ -883,6 +1407,9 @@ module TypesAggregationsBuilders =
             {
                 NormalizedValue = None
                 NormalizedValueAsString = None
+                Meta = None
+                Value = Unchecked.defaultof<_>
+                ValueAsString = None
             }
 
         [<CustomOperation("normalizedValue")>]
@@ -893,7 +1420,41 @@ module TypesAggregationsBuilders =
         member _.NormalizedValueAsString(state: Types.DerivativeAggregate, value: string) =
             { state with NormalizedValueAsString = Some value }
 
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.DerivativeAggregate, value: Types.Metadata) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("value")>]
+        member _.Value(state: Types.DerivativeAggregate, value: Types.Double option) =
+            { state with Value = value }
+
+        [<CustomOperation("valueAsString")>]
+        member _.ValueAsString(state: Types.DerivativeAggregate, value: string) =
+            { state with ValueAsString = Some value }
+
     let derivativeAggregate = DerivativeAggregateBuilder()
+
+    type DerivativeAggregationBuilder() =
+        member _.Yield(_: unit) : Types.DerivativeAggregation =
+            {
+                BucketsPath = None
+                Format = None
+                GapPolicy = None
+            }
+
+        [<CustomOperation("bucketsPath")>]
+        member _.BucketsPath(state: Types.DerivativeAggregation, value: Types.BucketsPath) =
+            { state with BucketsPath = Some value }
+
+        [<CustomOperation("format")>]
+        member _.Format(state: Types.DerivativeAggregation, value: string) =
+            { state with Format = Some value }
+
+        [<CustomOperation("gapPolicy")>]
+        member _.GapPolicy(state: Types.DerivativeAggregation, value: Types.GapPolicy) =
+            { state with GapPolicy = Some value }
+
+    let derivativeAggregation = DerivativeAggregationBuilder()
 
     type DiversifiedSamplerAggregationBuilder() =
         member _.Yield(_: unit) : Types.DiversifiedSamplerAggregation =
@@ -927,6 +1488,80 @@ module TypesAggregationsBuilders =
 
     let diversifiedSamplerAggregation = DiversifiedSamplerAggregationBuilder()
 
+    type DoubleTermsBucketBuilder() =
+        member _.Yield(_: unit) : Types.DoubleTermsBucket =
+            {
+                Key = Unchecked.defaultof<_>
+                KeyAsString = None
+                DocCount = Unchecked.defaultof<_>
+                DocCountErrorUpperBound = None
+            }
+
+        [<CustomOperation("key")>]
+        member _.Key(state: Types.DoubleTermsBucket, value: Types.Double) =
+            { state with Key = value }
+
+        [<CustomOperation("keyAsString")>]
+        member _.KeyAsString(state: Types.DoubleTermsBucket, value: string) =
+            { state with KeyAsString = Some value }
+
+        [<CustomOperation("docCount")>]
+        member _.DocCount(state: Types.DoubleTermsBucket, value: Types.Long) =
+            { state with DocCount = value }
+
+        [<CustomOperation("docCountErrorUpperBound")>]
+        member _.DocCountErrorUpperBound(state: Types.DoubleTermsBucket, value: Types.Long) =
+            { state with DocCountErrorUpperBound = Some value }
+
+    let doubleTermsBucket = DoubleTermsBucketBuilder()
+
+    type EwmaMovingAverageAggregationBuilder() =
+        member _.Yield(_: unit) : Types.EwmaMovingAverageAggregation =
+            {
+                Model = "ewma"
+                Settings = Unchecked.defaultof<_>
+                BucketsPath = None
+                Format = None
+                GapPolicy = None
+                Minimize = None
+                Predict = None
+                Window = None
+            }
+
+        [<CustomOperation("model")>]
+        member _.Model(state: Types.EwmaMovingAverageAggregation, value: string) =
+            { state with Model = value }
+
+        [<CustomOperation("settings")>]
+        member _.Settings(state: Types.EwmaMovingAverageAggregation, value: Types.EwmaModelSettings) =
+            { state with Settings = value }
+
+        [<CustomOperation("bucketsPath")>]
+        member _.BucketsPath(state: Types.EwmaMovingAverageAggregation, value: Types.BucketsPath) =
+            { state with BucketsPath = Some value }
+
+        [<CustomOperation("format")>]
+        member _.Format(state: Types.EwmaMovingAverageAggregation, value: string) =
+            { state with Format = Some value }
+
+        [<CustomOperation("gapPolicy")>]
+        member _.GapPolicy(state: Types.EwmaMovingAverageAggregation, value: Types.GapPolicy) =
+            { state with GapPolicy = Some value }
+
+        [<CustomOperation("minimize")>]
+        member _.Minimize(state: Types.EwmaMovingAverageAggregation, value: bool) =
+            { state with Minimize = Some value }
+
+        [<CustomOperation("predict")>]
+        member _.Predict(state: Types.EwmaMovingAverageAggregation, value: Types.Integer) =
+            { state with Predict = Some value }
+
+        [<CustomOperation("window")>]
+        member _.Window(state: Types.EwmaMovingAverageAggregation, value: Types.Integer) =
+            { state with Window = Some value }
+
+    let ewmaMovingAverageAggregation = EwmaMovingAverageAggregationBuilder()
+
     type ExtendedStatsAggregateBuilder() =
         member _.Yield(_: unit) : Types.ExtendedStatsAggregate =
             {
@@ -944,6 +1579,16 @@ module TypesAggregationsBuilders =
                 VarianceSamplingAsString = None
                 StdDeviationAsString = None
                 StdDeviationBoundsAsString = None
+                Meta = None
+                Count = Unchecked.defaultof<_>
+                Min = Unchecked.defaultof<_>
+                Max = Unchecked.defaultof<_>
+                Avg = Unchecked.defaultof<_>
+                Sum = Unchecked.defaultof<_>
+                MinAsString = None
+                MaxAsString = None
+                AvgAsString = None
+                SumAsString = None
             }
 
         [<CustomOperation("sumOfSquares")>]
@@ -1002,7 +1647,233 @@ module TypesAggregationsBuilders =
         member _.StdDeviationBoundsAsString(state: Types.ExtendedStatsAggregate, value: Types.StandardDeviationBoundsAsString) =
             { state with StdDeviationBoundsAsString = Some value }
 
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.ExtendedStatsAggregate, value: Types.Metadata) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("count")>]
+        member _.Count(state: Types.ExtendedStatsAggregate, value: Types.Long) =
+            { state with Count = value }
+
+        [<CustomOperation("min")>]
+        member _.Min(state: Types.ExtendedStatsAggregate, value: Types.Double option) =
+            { state with Min = value }
+
+        [<CustomOperation("max")>]
+        member _.Max(state: Types.ExtendedStatsAggregate, value: Types.Double option) =
+            { state with Max = value }
+
+        [<CustomOperation("avg")>]
+        member _.Avg(state: Types.ExtendedStatsAggregate, value: Types.Double option) =
+            { state with Avg = value }
+
+        [<CustomOperation("sum")>]
+        member _.Sum(state: Types.ExtendedStatsAggregate, value: Types.Double) =
+            { state with Sum = value }
+
+        [<CustomOperation("minAsString")>]
+        member _.MinAsString(state: Types.ExtendedStatsAggregate, value: string) =
+            { state with MinAsString = Some value }
+
+        [<CustomOperation("maxAsString")>]
+        member _.MaxAsString(state: Types.ExtendedStatsAggregate, value: string) =
+            { state with MaxAsString = Some value }
+
+        [<CustomOperation("avgAsString")>]
+        member _.AvgAsString(state: Types.ExtendedStatsAggregate, value: string) =
+            { state with AvgAsString = Some value }
+
+        [<CustomOperation("sumAsString")>]
+        member _.SumAsString(state: Types.ExtendedStatsAggregate, value: string) =
+            { state with SumAsString = Some value }
+
     let extendedStatsAggregate = ExtendedStatsAggregateBuilder()
+
+    type ExtendedStatsAggregationBuilder() =
+        member _.Yield(_: unit) : Types.ExtendedStatsAggregation =
+            {
+                Sigma = None
+                Field = None
+                Missing = None
+                Script = None
+                Format = None
+            }
+
+        [<CustomOperation("sigma")>]
+        member _.Sigma(state: Types.ExtendedStatsAggregation, value: Types.Double) =
+            { state with Sigma = Some value }
+
+        [<CustomOperation("field")>]
+        member _.Field(state: Types.ExtendedStatsAggregation, value: Types.Field) =
+            { state with Field = Some value }
+
+        [<CustomOperation("missing")>]
+        member _.Missing(state: Types.ExtendedStatsAggregation, value: Types.Missing) =
+            { state with Missing = Some value }
+
+        [<CustomOperation("script")>]
+        member _.Script(state: Types.ExtendedStatsAggregation, value: Types.Script) =
+            { state with Script = Some value }
+
+        [<CustomOperation("format")>]
+        member _.Format(state: Types.ExtendedStatsAggregation, value: string) =
+            { state with Format = Some value }
+
+    let extendedStatsAggregation = ExtendedStatsAggregationBuilder()
+
+    type ExtendedStatsBucketAggregateBuilder() =
+        member _.Yield(_: unit) : Types.ExtendedStatsBucketAggregate =
+            {
+                Meta = None
+                Count = Unchecked.defaultof<_>
+                Min = Unchecked.defaultof<_>
+                Max = Unchecked.defaultof<_>
+                Avg = Unchecked.defaultof<_>
+                Sum = Unchecked.defaultof<_>
+                MinAsString = None
+                MaxAsString = None
+                AvgAsString = None
+                SumAsString = None
+                SumOfSquares = Unchecked.defaultof<_>
+                Variance = Unchecked.defaultof<_>
+                VariancePopulation = Unchecked.defaultof<_>
+                VarianceSampling = Unchecked.defaultof<_>
+                StdDeviation = Unchecked.defaultof<_>
+                StdDeviationPopulation = Unchecked.defaultof<_>
+                StdDeviationSampling = Unchecked.defaultof<_>
+                StdDeviationBounds = None
+                SumOfSquaresAsString = None
+                VarianceAsString = None
+                VariancePopulationAsString = None
+                VarianceSamplingAsString = None
+                StdDeviationAsString = None
+                StdDeviationBoundsAsString = None
+            }
+
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.ExtendedStatsBucketAggregate, value: Types.Metadata) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("count")>]
+        member _.Count(state: Types.ExtendedStatsBucketAggregate, value: Types.Long) =
+            { state with Count = value }
+
+        [<CustomOperation("min")>]
+        member _.Min(state: Types.ExtendedStatsBucketAggregate, value: Types.Double option) =
+            { state with Min = value }
+
+        [<CustomOperation("max")>]
+        member _.Max(state: Types.ExtendedStatsBucketAggregate, value: Types.Double option) =
+            { state with Max = value }
+
+        [<CustomOperation("avg")>]
+        member _.Avg(state: Types.ExtendedStatsBucketAggregate, value: Types.Double option) =
+            { state with Avg = value }
+
+        [<CustomOperation("sum")>]
+        member _.Sum(state: Types.ExtendedStatsBucketAggregate, value: Types.Double) =
+            { state with Sum = value }
+
+        [<CustomOperation("minAsString")>]
+        member _.MinAsString(state: Types.ExtendedStatsBucketAggregate, value: string) =
+            { state with MinAsString = Some value }
+
+        [<CustomOperation("maxAsString")>]
+        member _.MaxAsString(state: Types.ExtendedStatsBucketAggregate, value: string) =
+            { state with MaxAsString = Some value }
+
+        [<CustomOperation("avgAsString")>]
+        member _.AvgAsString(state: Types.ExtendedStatsBucketAggregate, value: string) =
+            { state with AvgAsString = Some value }
+
+        [<CustomOperation("sumAsString")>]
+        member _.SumAsString(state: Types.ExtendedStatsBucketAggregate, value: string) =
+            { state with SumAsString = Some value }
+
+        [<CustomOperation("sumOfSquares")>]
+        member _.SumOfSquares(state: Types.ExtendedStatsBucketAggregate, value: Types.Double option) =
+            { state with SumOfSquares = value }
+
+        [<CustomOperation("variance")>]
+        member _.Variance(state: Types.ExtendedStatsBucketAggregate, value: Types.Double option) =
+            { state with Variance = value }
+
+        [<CustomOperation("variancePopulation")>]
+        member _.VariancePopulation(state: Types.ExtendedStatsBucketAggregate, value: Types.Double option) =
+            { state with VariancePopulation = value }
+
+        [<CustomOperation("varianceSampling")>]
+        member _.VarianceSampling(state: Types.ExtendedStatsBucketAggregate, value: Types.Double option) =
+            { state with VarianceSampling = value }
+
+        [<CustomOperation("stdDeviation")>]
+        member _.StdDeviation(state: Types.ExtendedStatsBucketAggregate, value: Types.Double option) =
+            { state with StdDeviation = value }
+
+        [<CustomOperation("stdDeviationPopulation")>]
+        member _.StdDeviationPopulation(state: Types.ExtendedStatsBucketAggregate, value: Types.Double option) =
+            { state with StdDeviationPopulation = value }
+
+        [<CustomOperation("stdDeviationSampling")>]
+        member _.StdDeviationSampling(state: Types.ExtendedStatsBucketAggregate, value: Types.Double option) =
+            { state with StdDeviationSampling = value }
+
+        [<CustomOperation("stdDeviationBounds")>]
+        member _.StdDeviationBounds(state: Types.ExtendedStatsBucketAggregate, value: Types.StandardDeviationBounds) =
+            { state with StdDeviationBounds = Some value }
+
+        [<CustomOperation("sumOfSquaresAsString")>]
+        member _.SumOfSquaresAsString(state: Types.ExtendedStatsBucketAggregate, value: string) =
+            { state with SumOfSquaresAsString = Some value }
+
+        [<CustomOperation("varianceAsString")>]
+        member _.VarianceAsString(state: Types.ExtendedStatsBucketAggregate, value: string) =
+            { state with VarianceAsString = Some value }
+
+        [<CustomOperation("variancePopulationAsString")>]
+        member _.VariancePopulationAsString(state: Types.ExtendedStatsBucketAggregate, value: string) =
+            { state with VariancePopulationAsString = Some value }
+
+        [<CustomOperation("varianceSamplingAsString")>]
+        member _.VarianceSamplingAsString(state: Types.ExtendedStatsBucketAggregate, value: string) =
+            { state with VarianceSamplingAsString = Some value }
+
+        [<CustomOperation("stdDeviationAsString")>]
+        member _.StdDeviationAsString(state: Types.ExtendedStatsBucketAggregate, value: string) =
+            { state with StdDeviationAsString = Some value }
+
+        [<CustomOperation("stdDeviationBoundsAsString")>]
+        member _.StdDeviationBoundsAsString(state: Types.ExtendedStatsBucketAggregate, value: Types.StandardDeviationBoundsAsString) =
+            { state with StdDeviationBoundsAsString = Some value }
+
+    let extendedStatsBucketAggregate = ExtendedStatsBucketAggregateBuilder()
+
+    type ExtendedStatsBucketAggregationBuilder() =
+        member _.Yield(_: unit) : Types.ExtendedStatsBucketAggregation =
+            {
+                Sigma = None
+                BucketsPath = None
+                Format = None
+                GapPolicy = None
+            }
+
+        [<CustomOperation("sigma")>]
+        member _.Sigma(state: Types.ExtendedStatsBucketAggregation, value: Types.Double) =
+            { state with Sigma = Some value }
+
+        [<CustomOperation("bucketsPath")>]
+        member _.BucketsPath(state: Types.ExtendedStatsBucketAggregation, value: Types.BucketsPath) =
+            { state with BucketsPath = Some value }
+
+        [<CustomOperation("format")>]
+        member _.Format(state: Types.ExtendedStatsBucketAggregation, value: string) =
+            { state with Format = Some value }
+
+        [<CustomOperation("gapPolicy")>]
+        member _.GapPolicy(state: Types.ExtendedStatsBucketAggregation, value: Types.GapPolicy) =
+            { state with GapPolicy = Some value }
+
+    let extendedStatsBucketAggregation = ExtendedStatsBucketAggregationBuilder()
 
     type FiltersAggregationBuilder() =
         member _.Yield(_: unit) : Types.FiltersAggregation =
@@ -1030,6 +1901,60 @@ module TypesAggregationsBuilders =
             { state with Keyed = Some value }
 
     let filtersAggregation = FiltersAggregationBuilder()
+
+    type FormatMetricAggregationBaseBuilder() =
+        member _.Yield(_: unit) : Types.FormatMetricAggregationBase =
+            {
+                Format = None
+                Field = None
+                Missing = None
+                Script = None
+            }
+
+        [<CustomOperation("format")>]
+        member _.Format(state: Types.FormatMetricAggregationBase, value: string) =
+            { state with Format = Some value }
+
+        [<CustomOperation("field")>]
+        member _.Field(state: Types.FormatMetricAggregationBase, value: Types.Field) =
+            { state with Field = Some value }
+
+        [<CustomOperation("missing")>]
+        member _.Missing(state: Types.FormatMetricAggregationBase, value: Types.Missing) =
+            { state with Missing = Some value }
+
+        [<CustomOperation("script")>]
+        member _.Script(state: Types.FormatMetricAggregationBase, value: Types.Script) =
+            { state with Script = Some value }
+
+    let formatMetricAggregationBase = FormatMetricAggregationBaseBuilder()
+
+    type FormattableMetricAggregationBuilder() =
+        member _.Yield(_: unit) : Types.FormattableMetricAggregation =
+            {
+                Format = None
+                Field = None
+                Missing = None
+                Script = None
+            }
+
+        [<CustomOperation("format")>]
+        member _.Format(state: Types.FormattableMetricAggregation, value: string) =
+            { state with Format = Some value }
+
+        [<CustomOperation("field")>]
+        member _.Field(state: Types.FormattableMetricAggregation, value: Types.Field) =
+            { state with Field = Some value }
+
+        [<CustomOperation("missing")>]
+        member _.Missing(state: Types.FormattableMetricAggregation, value: Types.Missing) =
+            { state with Missing = Some value }
+
+        [<CustomOperation("script")>]
+        member _.Script(state: Types.FormattableMetricAggregation, value: Types.Script) =
+            { state with Script = Some value }
+
+    let formattableMetricAggregation = FormattableMetricAggregationBuilder()
 
     type FrequentItemSetsAggregationBuilder() =
         member _.Yield(_: unit) : Types.FrequentItemSetsAggregation =
@@ -1085,11 +2010,80 @@ module TypesAggregationsBuilders =
 
     let frequentItemSetsField = FrequentItemSetsFieldBuilder()
 
+    type GeoBoundsAggregateBuilder() =
+        member _.Yield(_: unit) : Types.GeoBoundsAggregate =
+            {
+                Bounds = None
+                Meta = None
+            }
+
+        [<CustomOperation("bounds")>]
+        member _.Bounds(state: Types.GeoBoundsAggregate, value: Types.GeoBounds) =
+            { state with Bounds = Some value }
+
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.GeoBoundsAggregate, value: Types.Metadata) =
+            { state with Meta = Some value }
+
+    let geoBoundsAggregate = GeoBoundsAggregateBuilder()
+
+    type GeoBoundsAggregationBuilder() =
+        member _.Yield(_: unit) : Types.GeoBoundsAggregation =
+            {
+                WrapLongitude = None
+                Field = None
+                Missing = None
+                Script = None
+            }
+
+        [<CustomOperation("wrapLongitude")>]
+        member _.WrapLongitude(state: Types.GeoBoundsAggregation, value: bool) =
+            { state with WrapLongitude = Some value }
+
+        [<CustomOperation("field")>]
+        member _.Field(state: Types.GeoBoundsAggregation, value: Types.Field) =
+            { state with Field = Some value }
+
+        [<CustomOperation("missing")>]
+        member _.Missing(state: Types.GeoBoundsAggregation, value: Types.Missing) =
+            { state with Missing = Some value }
+
+        [<CustomOperation("script")>]
+        member _.Script(state: Types.GeoBoundsAggregation, value: Types.Script) =
+            { state with Script = Some value }
+
+    let geoBoundsAggregation = GeoBoundsAggregationBuilder()
+
+    type GeoCentroidAggregateBuilder() =
+        member _.Yield(_: unit) : Types.GeoCentroidAggregate =
+            {
+                Count = Unchecked.defaultof<_>
+                Location = None
+                Meta = None
+            }
+
+        [<CustomOperation("count")>]
+        member _.Count(state: Types.GeoCentroidAggregate, value: Types.Long) =
+            { state with Count = value }
+
+        [<CustomOperation("location")>]
+        member _.Location(state: Types.GeoCentroidAggregate, value: Types.GeoLocation) =
+            { state with Location = Some value }
+
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.GeoCentroidAggregate, value: Types.Metadata) =
+            { state with Meta = Some value }
+
+    let geoCentroidAggregate = GeoCentroidAggregateBuilder()
+
     type GeoCentroidAggregationBuilder() =
         member _.Yield(_: unit) : Types.GeoCentroidAggregation =
             {
                 Count = None
                 Location = None
+                Field = None
+                Missing = None
+                Script = None
             }
 
         [<CustomOperation("count")>]
@@ -1099,6 +2093,18 @@ module TypesAggregationsBuilders =
         [<CustomOperation("location")>]
         member _.Location(state: Types.GeoCentroidAggregation, value: Types.GeoLocation) =
             { state with Location = Some value }
+
+        [<CustomOperation("field")>]
+        member _.Field(state: Types.GeoCentroidAggregation, value: Types.Field) =
+            { state with Field = Some value }
+
+        [<CustomOperation("missing")>]
+        member _.Missing(state: Types.GeoCentroidAggregation, value: Types.Missing) =
+            { state with Missing = Some value }
+
+        [<CustomOperation("script")>]
+        member _.Script(state: Types.GeoCentroidAggregation, value: Types.Script) =
+            { state with Script = Some value }
 
     let geoCentroidAggregation = GeoCentroidAggregationBuilder()
 
@@ -1341,6 +2347,53 @@ module TypesAggregationsBuilders =
 
     let holtLinearModelSettings = HoltLinearModelSettingsBuilder()
 
+    type HoltMovingAverageAggregationBuilder() =
+        member _.Yield(_: unit) : Types.HoltMovingAverageAggregation =
+            {
+                Model = "holt"
+                Settings = Unchecked.defaultof<_>
+                BucketsPath = None
+                Format = None
+                GapPolicy = None
+                Minimize = None
+                Predict = None
+                Window = None
+            }
+
+        [<CustomOperation("model")>]
+        member _.Model(state: Types.HoltMovingAverageAggregation, value: string) =
+            { state with Model = value }
+
+        [<CustomOperation("settings")>]
+        member _.Settings(state: Types.HoltMovingAverageAggregation, value: Types.HoltLinearModelSettings) =
+            { state with Settings = value }
+
+        [<CustomOperation("bucketsPath")>]
+        member _.BucketsPath(state: Types.HoltMovingAverageAggregation, value: Types.BucketsPath) =
+            { state with BucketsPath = Some value }
+
+        [<CustomOperation("format")>]
+        member _.Format(state: Types.HoltMovingAverageAggregation, value: string) =
+            { state with Format = Some value }
+
+        [<CustomOperation("gapPolicy")>]
+        member _.GapPolicy(state: Types.HoltMovingAverageAggregation, value: Types.GapPolicy) =
+            { state with GapPolicy = Some value }
+
+        [<CustomOperation("minimize")>]
+        member _.Minimize(state: Types.HoltMovingAverageAggregation, value: bool) =
+            { state with Minimize = Some value }
+
+        [<CustomOperation("predict")>]
+        member _.Predict(state: Types.HoltMovingAverageAggregation, value: Types.Integer) =
+            { state with Predict = Some value }
+
+        [<CustomOperation("window")>]
+        member _.Window(state: Types.HoltMovingAverageAggregation, value: Types.Integer) =
+            { state with Window = Some value }
+
+    let holtMovingAverageAggregation = HoltMovingAverageAggregationBuilder()
+
     type HoltWintersModelSettingsBuilder() =
         member _.Yield(_: unit) : Types.HoltWintersModelSettings =
             {
@@ -1378,6 +2431,53 @@ module TypesAggregationsBuilders =
 
     let holtWintersModelSettings = HoltWintersModelSettingsBuilder()
 
+    type HoltWintersMovingAverageAggregationBuilder() =
+        member _.Yield(_: unit) : Types.HoltWintersMovingAverageAggregation =
+            {
+                Model = "holt_winters"
+                Settings = Unchecked.defaultof<_>
+                BucketsPath = None
+                Format = None
+                GapPolicy = None
+                Minimize = None
+                Predict = None
+                Window = None
+            }
+
+        [<CustomOperation("model")>]
+        member _.Model(state: Types.HoltWintersMovingAverageAggregation, value: string) =
+            { state with Model = value }
+
+        [<CustomOperation("settings")>]
+        member _.Settings(state: Types.HoltWintersMovingAverageAggregation, value: Types.HoltWintersModelSettings) =
+            { state with Settings = value }
+
+        [<CustomOperation("bucketsPath")>]
+        member _.BucketsPath(state: Types.HoltWintersMovingAverageAggregation, value: Types.BucketsPath) =
+            { state with BucketsPath = Some value }
+
+        [<CustomOperation("format")>]
+        member _.Format(state: Types.HoltWintersMovingAverageAggregation, value: string) =
+            { state with Format = Some value }
+
+        [<CustomOperation("gapPolicy")>]
+        member _.GapPolicy(state: Types.HoltWintersMovingAverageAggregation, value: Types.GapPolicy) =
+            { state with GapPolicy = Some value }
+
+        [<CustomOperation("minimize")>]
+        member _.Minimize(state: Types.HoltWintersMovingAverageAggregation, value: bool) =
+            { state with Minimize = Some value }
+
+        [<CustomOperation("predict")>]
+        member _.Predict(state: Types.HoltWintersMovingAverageAggregation, value: Types.Integer) =
+            { state with Predict = Some value }
+
+        [<CustomOperation("window")>]
+        member _.Window(state: Types.HoltWintersMovingAverageAggregation, value: Types.Integer) =
+            { state with Window = Some value }
+
+    let holtWintersMovingAverageAggregation = HoltWintersMovingAverageAggregationBuilder()
+
     type InferenceAggregateBuilder() =
         member _.Yield(_: unit) : Types.InferenceAggregate =
             {
@@ -1385,6 +2485,7 @@ module TypesAggregationsBuilders =
                 FeatureImportance = None
                 TopClasses = None
                 Warning = None
+                Meta = None
             }
 
         [<CustomOperation("value")>]
@@ -1403,7 +2504,43 @@ module TypesAggregationsBuilders =
         member _.Warning(state: Types.InferenceAggregate, value: string) =
             { state with Warning = Some value }
 
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.InferenceAggregate, value: Types.Metadata) =
+            { state with Meta = Some value }
+
     let inferenceAggregate = InferenceAggregateBuilder()
+
+    type InferenceAggregationBuilder() =
+        member _.Yield(_: unit) : Types.InferenceAggregation =
+            {
+                ModelId = Unchecked.defaultof<_>
+                InferenceConfig = None
+                BucketsPath = None
+                Format = None
+                GapPolicy = None
+            }
+
+        [<CustomOperation("modelId")>]
+        member _.ModelId(state: Types.InferenceAggregation, value: Types.Name) =
+            { state with ModelId = value }
+
+        [<CustomOperation("inferenceConfig")>]
+        member _.InferenceConfig(state: Types.InferenceAggregation, value: Types.InferenceConfigContainer) =
+            { state with InferenceConfig = Some value }
+
+        [<CustomOperation("bucketsPath")>]
+        member _.BucketsPath(state: Types.InferenceAggregation, value: Types.BucketsPath) =
+            { state with BucketsPath = Some value }
+
+        [<CustomOperation("format")>]
+        member _.Format(state: Types.InferenceAggregation, value: string) =
+            { state with Format = Some value }
+
+        [<CustomOperation("gapPolicy")>]
+        member _.GapPolicy(state: Types.InferenceAggregation, value: Types.GapPolicy) =
+            { state with GapPolicy = Some value }
+
+    let inferenceAggregation = InferenceAggregationBuilder()
 
     module InferenceConfig =
 
@@ -1517,6 +2654,7 @@ module TypesAggregationsBuilders =
                 Key = None
                 From = None
                 To = None
+                DocCount = Unchecked.defaultof<_>
             }
 
         [<CustomOperation("key")>]
@@ -1531,7 +2669,85 @@ module TypesAggregationsBuilders =
         member _.To(state: Types.IpRangeBucket, value: string) =
             { state with To = Some value }
 
+        [<CustomOperation("docCount")>]
+        member _.DocCount(state: Types.IpRangeBucket, value: Types.Long) =
+            { state with DocCount = value }
+
     let ipRangeBucket = IpRangeBucketBuilder()
+
+    type LinearMovingAverageAggregationBuilder() =
+        member _.Yield(_: unit) : Types.LinearMovingAverageAggregation =
+            {
+                Model = "linear"
+                Settings = Unchecked.defaultof<_>
+                BucketsPath = None
+                Format = None
+                GapPolicy = None
+                Minimize = None
+                Predict = None
+                Window = None
+            }
+
+        [<CustomOperation("model")>]
+        member _.Model(state: Types.LinearMovingAverageAggregation, value: string) =
+            { state with Model = value }
+
+        [<CustomOperation("settings")>]
+        member _.Settings(state: Types.LinearMovingAverageAggregation, value: Types.EmptyObject) =
+            { state with Settings = value }
+
+        [<CustomOperation("bucketsPath")>]
+        member _.BucketsPath(state: Types.LinearMovingAverageAggregation, value: Types.BucketsPath) =
+            { state with BucketsPath = Some value }
+
+        [<CustomOperation("format")>]
+        member _.Format(state: Types.LinearMovingAverageAggregation, value: string) =
+            { state with Format = Some value }
+
+        [<CustomOperation("gapPolicy")>]
+        member _.GapPolicy(state: Types.LinearMovingAverageAggregation, value: Types.GapPolicy) =
+            { state with GapPolicy = Some value }
+
+        [<CustomOperation("minimize")>]
+        member _.Minimize(state: Types.LinearMovingAverageAggregation, value: bool) =
+            { state with Minimize = Some value }
+
+        [<CustomOperation("predict")>]
+        member _.Predict(state: Types.LinearMovingAverageAggregation, value: Types.Integer) =
+            { state with Predict = Some value }
+
+        [<CustomOperation("window")>]
+        member _.Window(state: Types.LinearMovingAverageAggregation, value: Types.Integer) =
+            { state with Window = Some value }
+
+    let linearMovingAverageAggregation = LinearMovingAverageAggregationBuilder()
+
+    type LongTermsBucketBuilder() =
+        member _.Yield(_: unit) : Types.LongTermsBucket =
+            {
+                Key = Unchecked.defaultof<_>
+                KeyAsString = None
+                DocCount = Unchecked.defaultof<_>
+                DocCountErrorUpperBound = None
+            }
+
+        [<CustomOperation("key")>]
+        member _.Key(state: Types.LongTermsBucket, value: Types.Long) =
+            { state with Key = value }
+
+        [<CustomOperation("keyAsString")>]
+        member _.KeyAsString(state: Types.LongTermsBucket, value: string) =
+            { state with KeyAsString = Some value }
+
+        [<CustomOperation("docCount")>]
+        member _.DocCount(state: Types.LongTermsBucket, value: Types.Long) =
+            { state with DocCount = value }
+
+        [<CustomOperation("docCountErrorUpperBound")>]
+        member _.DocCountErrorUpperBound(state: Types.LongTermsBucket, value: Types.Long) =
+            { state with DocCountErrorUpperBound = Some value }
+
+    let longTermsBucket = LongTermsBucketBuilder()
 
     type MatrixAggregationBuilder() =
         member _.Yield(_: unit) : Types.MatrixAggregation =
@@ -1550,11 +2766,152 @@ module TypesAggregationsBuilders =
 
     let matrixAggregation = MatrixAggregationBuilder()
 
+    type MatrixStatsAggregateBuilder() =
+        member _.Yield(_: unit) : Types.MatrixStatsAggregate =
+            {
+                DocCount = Unchecked.defaultof<_>
+                Fields = None
+                Meta = None
+            }
+
+        [<CustomOperation("docCount")>]
+        member _.DocCount(state: Types.MatrixStatsAggregate, value: Types.Long) =
+            { state with DocCount = value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.MatrixStatsAggregate, value: Types.MatrixStatsFields list) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.MatrixStatsAggregate, value: Types.Metadata) =
+            { state with Meta = Some value }
+
+    let matrixStatsAggregate = MatrixStatsAggregateBuilder()
+
+    type MatrixStatsAggregationBuilder() =
+        member _.Yield(_: unit) : Types.MatrixStatsAggregation =
+            {
+                Mode = None
+                Fields = None
+                Missing = None
+            }
+
+        [<CustomOperation("mode")>]
+        member _.Mode(state: Types.MatrixStatsAggregation, value: Types.SortMode) =
+            { state with Mode = Some value }
+
+        [<CustomOperation("fields")>]
+        member _.Fields(state: Types.MatrixStatsAggregation, value: Types.Fields) =
+            { state with Fields = Some value }
+
+        [<CustomOperation("missing")>]
+        member _.Missing(state: Types.MatrixStatsAggregation, value: Map<Types.Field, Types.Double>) =
+            { state with Missing = Some value }
+
+    let matrixStatsAggregation = MatrixStatsAggregationBuilder()
+
+    type MaxAggregateBuilder() =
+        member _.Yield(_: unit) : Types.MaxAggregate =
+            {
+                Meta = None
+                Value = Unchecked.defaultof<_>
+                ValueAsString = None
+            }
+
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.MaxAggregate, value: Types.Metadata) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("value")>]
+        member _.Value(state: Types.MaxAggregate, value: Types.Double option) =
+            { state with Value = value }
+
+        [<CustomOperation("valueAsString")>]
+        member _.ValueAsString(state: Types.MaxAggregate, value: string) =
+            { state with ValueAsString = Some value }
+
+    let maxAggregate = MaxAggregateBuilder()
+
+    type MaxAggregationBuilder() =
+        member _.Yield(_: unit) : Types.MaxAggregation =
+            {
+                Field = None
+                Missing = None
+                Script = None
+                Format = None
+            }
+
+        [<CustomOperation("field")>]
+        member _.Field(state: Types.MaxAggregation, value: Types.Field) =
+            { state with Field = Some value }
+
+        [<CustomOperation("missing")>]
+        member _.Missing(state: Types.MaxAggregation, value: Types.Missing) =
+            { state with Missing = Some value }
+
+        [<CustomOperation("script")>]
+        member _.Script(state: Types.MaxAggregation, value: Types.Script) =
+            { state with Script = Some value }
+
+        [<CustomOperation("format")>]
+        member _.Format(state: Types.MaxAggregation, value: string) =
+            { state with Format = Some value }
+
+    let maxAggregation = MaxAggregationBuilder()
+
+    type MaxBucketAggregationBuilder() =
+        member _.Yield(_: unit) : Types.MaxBucketAggregation =
+            {
+                BucketsPath = None
+                Format = None
+                GapPolicy = None
+            }
+
+        [<CustomOperation("bucketsPath")>]
+        member _.BucketsPath(state: Types.MaxBucketAggregation, value: Types.BucketsPath) =
+            { state with BucketsPath = Some value }
+
+        [<CustomOperation("format")>]
+        member _.Format(state: Types.MaxBucketAggregation, value: string) =
+            { state with Format = Some value }
+
+        [<CustomOperation("gapPolicy")>]
+        member _.GapPolicy(state: Types.MaxBucketAggregation, value: Types.GapPolicy) =
+            { state with GapPolicy = Some value }
+
+    let maxBucketAggregation = MaxBucketAggregationBuilder()
+
+    type MedianAbsoluteDeviationAggregateBuilder() =
+        member _.Yield(_: unit) : Types.MedianAbsoluteDeviationAggregate =
+            {
+                Meta = None
+                Value = Unchecked.defaultof<_>
+                ValueAsString = None
+            }
+
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.MedianAbsoluteDeviationAggregate, value: Types.Metadata) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("value")>]
+        member _.Value(state: Types.MedianAbsoluteDeviationAggregate, value: Types.Double option) =
+            { state with Value = value }
+
+        [<CustomOperation("valueAsString")>]
+        member _.ValueAsString(state: Types.MedianAbsoluteDeviationAggregate, value: string) =
+            { state with ValueAsString = Some value }
+
+    let medianAbsoluteDeviationAggregate = MedianAbsoluteDeviationAggregateBuilder()
+
     type MedianAbsoluteDeviationAggregationBuilder() =
         member _.Yield(_: unit) : Types.MedianAbsoluteDeviationAggregation =
             {
                 Compression = None
                 ExecutionHint = None
+                Field = None
+                Missing = None
+                Script = None
+                Format = None
             }
 
         [<CustomOperation("compression")>]
@@ -1564,6 +2921,22 @@ module TypesAggregationsBuilders =
         [<CustomOperation("executionHint")>]
         member _.ExecutionHint(state: Types.MedianAbsoluteDeviationAggregation, value: Types.TDigestExecutionHint) =
             { state with ExecutionHint = Some value }
+
+        [<CustomOperation("field")>]
+        member _.Field(state: Types.MedianAbsoluteDeviationAggregation, value: Types.Field) =
+            { state with Field = Some value }
+
+        [<CustomOperation("missing")>]
+        member _.Missing(state: Types.MedianAbsoluteDeviationAggregation, value: Types.Missing) =
+            { state with Missing = Some value }
+
+        [<CustomOperation("script")>]
+        member _.Script(state: Types.MedianAbsoluteDeviationAggregation, value: Types.Script) =
+            { state with Script = Some value }
+
+        [<CustomOperation("format")>]
+        member _.Format(state: Types.MedianAbsoluteDeviationAggregation, value: string) =
+            { state with Format = Some value }
 
     let medianAbsoluteDeviationAggregation = MedianAbsoluteDeviationAggregationBuilder()
 
@@ -1589,6 +2962,77 @@ module TypesAggregationsBuilders =
 
     let metricAggregationBase = MetricAggregationBaseBuilder()
 
+    type MinAggregateBuilder() =
+        member _.Yield(_: unit) : Types.MinAggregate =
+            {
+                Meta = None
+                Value = Unchecked.defaultof<_>
+                ValueAsString = None
+            }
+
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.MinAggregate, value: Types.Metadata) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("value")>]
+        member _.Value(state: Types.MinAggregate, value: Types.Double option) =
+            { state with Value = value }
+
+        [<CustomOperation("valueAsString")>]
+        member _.ValueAsString(state: Types.MinAggregate, value: string) =
+            { state with ValueAsString = Some value }
+
+    let minAggregate = MinAggregateBuilder()
+
+    type MinAggregationBuilder() =
+        member _.Yield(_: unit) : Types.MinAggregation =
+            {
+                Field = None
+                Missing = None
+                Script = None
+                Format = None
+            }
+
+        [<CustomOperation("field")>]
+        member _.Field(state: Types.MinAggregation, value: Types.Field) =
+            { state with Field = Some value }
+
+        [<CustomOperation("missing")>]
+        member _.Missing(state: Types.MinAggregation, value: Types.Missing) =
+            { state with Missing = Some value }
+
+        [<CustomOperation("script")>]
+        member _.Script(state: Types.MinAggregation, value: Types.Script) =
+            { state with Script = Some value }
+
+        [<CustomOperation("format")>]
+        member _.Format(state: Types.MinAggregation, value: string) =
+            { state with Format = Some value }
+
+    let minAggregation = MinAggregationBuilder()
+
+    type MinBucketAggregationBuilder() =
+        member _.Yield(_: unit) : Types.MinBucketAggregation =
+            {
+                BucketsPath = None
+                Format = None
+                GapPolicy = None
+            }
+
+        [<CustomOperation("bucketsPath")>]
+        member _.BucketsPath(state: Types.MinBucketAggregation, value: Types.BucketsPath) =
+            { state with BucketsPath = Some value }
+
+        [<CustomOperation("format")>]
+        member _.Format(state: Types.MinBucketAggregation, value: string) =
+            { state with Format = Some value }
+
+        [<CustomOperation("gapPolicy")>]
+        member _.GapPolicy(state: Types.MinBucketAggregation, value: Types.GapPolicy) =
+            { state with GapPolicy = Some value }
+
+    let minBucketAggregation = MinBucketAggregationBuilder()
+
     type MissingAggregationBuilder() =
         member _.Yield(_: unit) : Types.MissingAggregation =
             {
@@ -1612,6 +3056,9 @@ module TypesAggregationsBuilders =
                 Minimize = None
                 Predict = None
                 Window = None
+                BucketsPath = None
+                Format = None
+                GapPolicy = None
             }
 
         [<CustomOperation("minimize")>]
@@ -1626,6 +3073,18 @@ module TypesAggregationsBuilders =
         member _.Window(state: Types.MovingAverageAggregationBase, value: Types.Integer) =
             { state with Window = Some value }
 
+        [<CustomOperation("bucketsPath")>]
+        member _.BucketsPath(state: Types.MovingAverageAggregationBase, value: Types.BucketsPath) =
+            { state with BucketsPath = Some value }
+
+        [<CustomOperation("format")>]
+        member _.Format(state: Types.MovingAverageAggregationBase, value: string) =
+            { state with Format = Some value }
+
+        [<CustomOperation("gapPolicy")>]
+        member _.GapPolicy(state: Types.MovingAverageAggregationBase, value: Types.GapPolicy) =
+            { state with GapPolicy = Some value }
+
     let movingAverageAggregationBase = MovingAverageAggregationBaseBuilder()
 
     type MovingFunctionAggregationBuilder() =
@@ -1634,6 +3093,9 @@ module TypesAggregationsBuilders =
                 Script = None
                 Shift = None
                 Window = None
+                BucketsPath = None
+                Format = None
+                GapPolicy = None
             }
 
         [<CustomOperation("script")>]
@@ -1648,6 +3110,18 @@ module TypesAggregationsBuilders =
         member _.Window(state: Types.MovingFunctionAggregation, value: Types.Integer) =
             { state with Window = Some value }
 
+        [<CustomOperation("bucketsPath")>]
+        member _.BucketsPath(state: Types.MovingFunctionAggregation, value: Types.BucketsPath) =
+            { state with BucketsPath = Some value }
+
+        [<CustomOperation("format")>]
+        member _.Format(state: Types.MovingFunctionAggregation, value: string) =
+            { state with Format = Some value }
+
+        [<CustomOperation("gapPolicy")>]
+        member _.GapPolicy(state: Types.MovingFunctionAggregation, value: Types.GapPolicy) =
+            { state with GapPolicy = Some value }
+
     let movingFunctionAggregation = MovingFunctionAggregationBuilder()
 
     type MovingPercentilesAggregationBuilder() =
@@ -1656,6 +3130,9 @@ module TypesAggregationsBuilders =
                 Window = None
                 Shift = None
                 Keyed = None
+                BucketsPath = None
+                Format = None
+                GapPolicy = None
             }
 
         [<CustomOperation("window")>]
@@ -1669,6 +3146,18 @@ module TypesAggregationsBuilders =
         [<CustomOperation("keyed")>]
         member _.Keyed(state: Types.MovingPercentilesAggregation, value: bool) =
             { state with Keyed = Some value }
+
+        [<CustomOperation("bucketsPath")>]
+        member _.BucketsPath(state: Types.MovingPercentilesAggregation, value: Types.BucketsPath) =
+            { state with BucketsPath = Some value }
+
+        [<CustomOperation("format")>]
+        member _.Format(state: Types.MovingPercentilesAggregation, value: string) =
+            { state with Format = Some value }
+
+        [<CustomOperation("gapPolicy")>]
+        member _.GapPolicy(state: Types.MovingPercentilesAggregation, value: Types.GapPolicy) =
+            { state with GapPolicy = Some value }
 
     let movingPercentilesAggregation = MovingPercentilesAggregationBuilder()
 
@@ -1733,6 +3222,7 @@ module TypesAggregationsBuilders =
                 Key = Unchecked.defaultof<_>
                 KeyAsString = None
                 DocCountErrorUpperBound = None
+                DocCount = Unchecked.defaultof<_>
             }
 
         [<CustomOperation("key")>]
@@ -1746,6 +3236,10 @@ module TypesAggregationsBuilders =
         [<CustomOperation("docCountErrorUpperBound")>]
         member _.DocCountErrorUpperBound(state: Types.MultiTermsBucket, value: Types.Long) =
             { state with DocCountErrorUpperBound = Some value }
+
+        [<CustomOperation("docCount")>]
+        member _.DocCount(state: Types.MultiTermsBucket, value: Types.Long) =
+            { state with DocCount = value }
 
     let multiTermsBucket = MultiTermsBucketBuilder()
 
@@ -1765,6 +3259,33 @@ module TypesAggregationsBuilders =
             { state with IncludeNegatives = Some value }
 
     let mutualInformationHeuristic = MutualInformationHeuristicBuilder()
+
+    type NormalizeAggregationBuilder() =
+        member _.Yield(_: unit) : Types.NormalizeAggregation =
+            {
+                Method = None
+                BucketsPath = None
+                Format = None
+                GapPolicy = None
+            }
+
+        [<CustomOperation("method")>]
+        member _.Method(state: Types.NormalizeAggregation, value: Types.NormalizeMethod) =
+            { state with Method = Some value }
+
+        [<CustomOperation("bucketsPath")>]
+        member _.BucketsPath(state: Types.NormalizeAggregation, value: Types.BucketsPath) =
+            { state with BucketsPath = Some value }
+
+        [<CustomOperation("format")>]
+        member _.Format(state: Types.NormalizeAggregation, value: string) =
+            { state with Format = Some value }
+
+        [<CustomOperation("gapPolicy")>]
+        member _.GapPolicy(state: Types.NormalizeAggregation, value: Types.GapPolicy) =
+            { state with GapPolicy = Some value }
+
+    let normalizeAggregation = NormalizeAggregationBuilder()
 
     type PValueHeuristicBuilder() =
         member _.Yield(_: unit) : Types.PValueHeuristic =
@@ -1790,6 +3311,10 @@ module TypesAggregationsBuilders =
                 Values = None
                 Hdr = None
                 Tdigest = None
+                Field = None
+                Missing = None
+                Script = None
+                Format = None
             }
 
         [<CustomOperation("keyed")>]
@@ -1808,6 +3333,22 @@ module TypesAggregationsBuilders =
         member _.Tdigest(state: Types.PercentileRanksAggregation, value: Types.TDigest) =
             { state with Tdigest = Some value }
 
+        [<CustomOperation("field")>]
+        member _.Field(state: Types.PercentileRanksAggregation, value: Types.Field) =
+            { state with Field = Some value }
+
+        [<CustomOperation("missing")>]
+        member _.Missing(state: Types.PercentileRanksAggregation, value: Types.Missing) =
+            { state with Missing = Some value }
+
+        [<CustomOperation("script")>]
+        member _.Script(state: Types.PercentileRanksAggregation, value: Types.Script) =
+            { state with Script = Some value }
+
+        [<CustomOperation("format")>]
+        member _.Format(state: Types.PercentileRanksAggregation, value: string) =
+            { state with Format = Some value }
+
     let percentileRanksAggregation = PercentileRanksAggregationBuilder()
 
     type PercentilesAggregationBuilder() =
@@ -1817,6 +3358,10 @@ module TypesAggregationsBuilders =
                 Percents = None
                 Hdr = None
                 Tdigest = None
+                Field = None
+                Missing = None
+                Script = None
+                Format = None
             }
 
         [<CustomOperation("keyed")>]
@@ -1824,7 +3369,7 @@ module TypesAggregationsBuilders =
             { state with Keyed = Some value }
 
         [<CustomOperation("percents")>]
-        member _.Percents(state: Types.PercentilesAggregation, value: System.Text.Json.JsonElement) =
+        member _.Percents(state: Types.PercentilesAggregation, value: Types.Double list) =
             { state with Percents = Some value }
 
         [<CustomOperation("hdr")>]
@@ -1835,13 +3380,57 @@ module TypesAggregationsBuilders =
         member _.Tdigest(state: Types.PercentilesAggregation, value: Types.TDigest) =
             { state with Tdigest = Some value }
 
+        [<CustomOperation("field")>]
+        member _.Field(state: Types.PercentilesAggregation, value: Types.Field) =
+            { state with Field = Some value }
+
+        [<CustomOperation("missing")>]
+        member _.Missing(state: Types.PercentilesAggregation, value: Types.Missing) =
+            { state with Missing = Some value }
+
+        [<CustomOperation("script")>]
+        member _.Script(state: Types.PercentilesAggregation, value: Types.Script) =
+            { state with Script = Some value }
+
+        [<CustomOperation("format")>]
+        member _.Format(state: Types.PercentilesAggregation, value: string) =
+            { state with Format = Some value }
+
     let percentilesAggregation = PercentilesAggregationBuilder()
+
+    type PercentilesBucketAggregationBuilder() =
+        member _.Yield(_: unit) : Types.PercentilesBucketAggregation =
+            {
+                Percents = None
+                BucketsPath = None
+                Format = None
+                GapPolicy = None
+            }
+
+        [<CustomOperation("percents")>]
+        member _.Percents(state: Types.PercentilesBucketAggregation, value: Types.Double list) =
+            { state with Percents = Some value }
+
+        [<CustomOperation("bucketsPath")>]
+        member _.BucketsPath(state: Types.PercentilesBucketAggregation, value: Types.BucketsPath) =
+            { state with BucketsPath = Some value }
+
+        [<CustomOperation("format")>]
+        member _.Format(state: Types.PercentilesBucketAggregation, value: string) =
+            { state with Format = Some value }
+
+        [<CustomOperation("gapPolicy")>]
+        member _.GapPolicy(state: Types.PercentilesBucketAggregation, value: Types.GapPolicy) =
+            { state with GapPolicy = Some value }
+
+    let percentilesBucketAggregation = PercentilesBucketAggregationBuilder()
 
     type PipelineAggregationBaseBuilder() =
         member _.Yield(_: unit) : Types.PipelineAggregationBase =
             {
                 Format = None
                 GapPolicy = None
+                BucketsPath = None
             }
 
         [<CustomOperation("format")>]
@@ -1851,6 +3440,10 @@ module TypesAggregationsBuilders =
         [<CustomOperation("gapPolicy")>]
         member _.GapPolicy(state: Types.PipelineAggregationBase, value: Types.GapPolicy) =
             { state with GapPolicy = Some value }
+
+        [<CustomOperation("bucketsPath")>]
+        member _.BucketsPath(state: Types.PipelineAggregationBase, value: Types.BucketsPath) =
+            { state with BucketsPath = Some value }
 
     let pipelineAggregationBase = PipelineAggregationBaseBuilder()
 
@@ -1921,6 +3514,7 @@ module TypesAggregationsBuilders =
                 FromAsString = None
                 ToAsString = None
                 Key = None
+                DocCount = Unchecked.defaultof<_>
             }
 
         [<CustomOperation("from")>]
@@ -1942,6 +3536,10 @@ module TypesAggregationsBuilders =
         [<CustomOperation("key")>]
         member _.Key(state: Types.RangeBucket, value: string) =
             { state with Key = Some value }
+
+        [<CustomOperation("docCount")>]
+        member _.DocCount(state: Types.RangeBucket, value: Types.Long) =
+            { state with DocCount = value }
 
     let rangeBucket = RangeBucketBuilder()
 
@@ -1987,11 +3585,37 @@ module TypesAggregationsBuilders =
 
     let rareTermsAggregation = RareTermsAggregationBuilder()
 
+    type RateAggregateBuilder() =
+        member _.Yield(_: unit) : Types.RateAggregate =
+            {
+                Value = Unchecked.defaultof<_>
+                ValueAsString = None
+                Meta = None
+            }
+
+        [<CustomOperation("value")>]
+        member _.Value(state: Types.RateAggregate, value: Types.Double) =
+            { state with Value = value }
+
+        [<CustomOperation("valueAsString")>]
+        member _.ValueAsString(state: Types.RateAggregate, value: string) =
+            { state with ValueAsString = Some value }
+
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.RateAggregate, value: Types.Metadata) =
+            { state with Meta = Some value }
+
+    let rateAggregate = RateAggregateBuilder()
+
     type RateAggregationBuilder() =
         member _.Yield(_: unit) : Types.RateAggregation =
             {
                 Unit = None
                 Mode = None
+                Field = None
+                Missing = None
+                Script = None
+                Format = None
             }
 
         [<CustomOperation("unit")>]
@@ -2001,6 +3625,22 @@ module TypesAggregationsBuilders =
         [<CustomOperation("mode")>]
         member _.Mode(state: Types.RateAggregation, value: Types.RateMode) =
             { state with Mode = Some value }
+
+        [<CustomOperation("field")>]
+        member _.Field(state: Types.RateAggregation, value: Types.Field) =
+            { state with Field = Some value }
+
+        [<CustomOperation("missing")>]
+        member _.Missing(state: Types.RateAggregation, value: Types.Missing) =
+            { state with Missing = Some value }
+
+        [<CustomOperation("script")>]
+        member _.Script(state: Types.RateAggregation, value: Types.Script) =
+            { state with Script = Some value }
+
+        [<CustomOperation("format")>]
+        member _.Format(state: Types.RateAggregation, value: string) =
+            { state with Format = Some value }
 
     let rateAggregation = RateAggregationBuilder()
 
@@ -2012,6 +3652,9 @@ module TypesAggregationsBuilders =
                 MapScript = None
                 Params = None
                 ReduceScript = None
+                Field = None
+                Missing = None
+                Script = None
             }
 
         [<CustomOperation("combineScript")>]
@@ -2034,7 +3677,46 @@ module TypesAggregationsBuilders =
         member _.ReduceScript(state: Types.ScriptedMetricAggregation, value: Types.Script) =
             { state with ReduceScript = Some value }
 
+        [<CustomOperation("field")>]
+        member _.Field(state: Types.ScriptedMetricAggregation, value: Types.Field) =
+            { state with Field = Some value }
+
+        [<CustomOperation("missing")>]
+        member _.Missing(state: Types.ScriptedMetricAggregation, value: Types.Missing) =
+            { state with Missing = Some value }
+
+        [<CustomOperation("script")>]
+        member _.Script(state: Types.ScriptedMetricAggregation, value: Types.Script) =
+            { state with Script = Some value }
+
     let scriptedMetricAggregation = ScriptedMetricAggregationBuilder()
+
+    type SerialDifferencingAggregationBuilder() =
+        member _.Yield(_: unit) : Types.SerialDifferencingAggregation =
+            {
+                Lag = None
+                BucketsPath = None
+                Format = None
+                GapPolicy = None
+            }
+
+        [<CustomOperation("lag")>]
+        member _.Lag(state: Types.SerialDifferencingAggregation, value: Types.Integer) =
+            { state with Lag = Some value }
+
+        [<CustomOperation("bucketsPath")>]
+        member _.BucketsPath(state: Types.SerialDifferencingAggregation, value: Types.BucketsPath) =
+            { state with BucketsPath = Some value }
+
+        [<CustomOperation("format")>]
+        member _.Format(state: Types.SerialDifferencingAggregation, value: string) =
+            { state with Format = Some value }
+
+        [<CustomOperation("gapPolicy")>]
+        member _.GapPolicy(state: Types.SerialDifferencingAggregation, value: Types.GapPolicy) =
+            { state with GapPolicy = Some value }
+
+    let serialDifferencingAggregation = SerialDifferencingAggregationBuilder()
 
     type SignificantTermsAggregationBuilder() =
         member _.Yield(_: unit) : Types.SignificantTermsAggregation =
@@ -2215,6 +3897,97 @@ module TypesAggregationsBuilders =
 
     let significantTextAggregation = SignificantTextAggregationBuilder()
 
+    type SimpleMovingAverageAggregationBuilder() =
+        member _.Yield(_: unit) : Types.SimpleMovingAverageAggregation =
+            {
+                Model = "simple"
+                Settings = Unchecked.defaultof<_>
+                BucketsPath = None
+                Format = None
+                GapPolicy = None
+                Minimize = None
+                Predict = None
+                Window = None
+            }
+
+        [<CustomOperation("model")>]
+        member _.Model(state: Types.SimpleMovingAverageAggregation, value: string) =
+            { state with Model = value }
+
+        [<CustomOperation("settings")>]
+        member _.Settings(state: Types.SimpleMovingAverageAggregation, value: Types.EmptyObject) =
+            { state with Settings = value }
+
+        [<CustomOperation("bucketsPath")>]
+        member _.BucketsPath(state: Types.SimpleMovingAverageAggregation, value: Types.BucketsPath) =
+            { state with BucketsPath = Some value }
+
+        [<CustomOperation("format")>]
+        member _.Format(state: Types.SimpleMovingAverageAggregation, value: string) =
+            { state with Format = Some value }
+
+        [<CustomOperation("gapPolicy")>]
+        member _.GapPolicy(state: Types.SimpleMovingAverageAggregation, value: Types.GapPolicy) =
+            { state with GapPolicy = Some value }
+
+        [<CustomOperation("minimize")>]
+        member _.Minimize(state: Types.SimpleMovingAverageAggregation, value: bool) =
+            { state with Minimize = Some value }
+
+        [<CustomOperation("predict")>]
+        member _.Predict(state: Types.SimpleMovingAverageAggregation, value: Types.Integer) =
+            { state with Predict = Some value }
+
+        [<CustomOperation("window")>]
+        member _.Window(state: Types.SimpleMovingAverageAggregation, value: Types.Integer) =
+            { state with Window = Some value }
+
+    let simpleMovingAverageAggregation = SimpleMovingAverageAggregationBuilder()
+
+    type SimpleValueAggregateBuilder() =
+        member _.Yield(_: unit) : Types.SimpleValueAggregate =
+            {
+                Meta = None
+                Value = Unchecked.defaultof<_>
+                ValueAsString = None
+            }
+
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.SimpleValueAggregate, value: Types.Metadata) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("value")>]
+        member _.Value(state: Types.SimpleValueAggregate, value: Types.Double option) =
+            { state with Value = value }
+
+        [<CustomOperation("valueAsString")>]
+        member _.ValueAsString(state: Types.SimpleValueAggregate, value: string) =
+            { state with ValueAsString = Some value }
+
+    let simpleValueAggregate = SimpleValueAggregateBuilder()
+
+    type SingleMetricAggregateBaseBuilder() =
+        member _.Yield(_: unit) : Types.SingleMetricAggregateBase =
+            {
+                Value = Unchecked.defaultof<_>
+                ValueAsString = None
+                Meta = None
+            }
+
+        [<CustomOperation("value")>]
+        member _.Value(state: Types.SingleMetricAggregateBase, value: Types.Double option) =
+            { state with Value = value }
+
+        [<CustomOperation("valueAsString")>]
+        member _.ValueAsString(state: Types.SingleMetricAggregateBase, value: string) =
+            { state with ValueAsString = Some value }
+
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.SingleMetricAggregateBase, value: Types.Metadata) =
+            { state with Meta = Some value }
+
+    let singleMetricAggregateBase = SingleMetricAggregateBaseBuilder()
+
     type StatsAggregateBuilder() =
         member _.Yield(_: unit) : Types.StatsAggregate =
             {
@@ -2227,6 +4000,7 @@ module TypesAggregationsBuilders =
                 MaxAsString = None
                 AvgAsString = None
                 SumAsString = None
+                Meta = None
             }
 
         [<CustomOperation("count")>]
@@ -2265,7 +4039,117 @@ module TypesAggregationsBuilders =
         member _.SumAsString(state: Types.StatsAggregate, value: string) =
             { state with SumAsString = Some value }
 
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.StatsAggregate, value: Types.Metadata) =
+            { state with Meta = Some value }
+
     let statsAggregate = StatsAggregateBuilder()
+
+    type StatsAggregationBuilder() =
+        member _.Yield(_: unit) : Types.StatsAggregation =
+            {
+                Field = None
+                Missing = None
+                Script = None
+                Format = None
+            }
+
+        [<CustomOperation("field")>]
+        member _.Field(state: Types.StatsAggregation, value: Types.Field) =
+            { state with Field = Some value }
+
+        [<CustomOperation("missing")>]
+        member _.Missing(state: Types.StatsAggregation, value: Types.Missing) =
+            { state with Missing = Some value }
+
+        [<CustomOperation("script")>]
+        member _.Script(state: Types.StatsAggregation, value: Types.Script) =
+            { state with Script = Some value }
+
+        [<CustomOperation("format")>]
+        member _.Format(state: Types.StatsAggregation, value: string) =
+            { state with Format = Some value }
+
+    let statsAggregation = StatsAggregationBuilder()
+
+    type StatsBucketAggregateBuilder() =
+        member _.Yield(_: unit) : Types.StatsBucketAggregate =
+            {
+                Meta = None
+                Count = Unchecked.defaultof<_>
+                Min = Unchecked.defaultof<_>
+                Max = Unchecked.defaultof<_>
+                Avg = Unchecked.defaultof<_>
+                Sum = Unchecked.defaultof<_>
+                MinAsString = None
+                MaxAsString = None
+                AvgAsString = None
+                SumAsString = None
+            }
+
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.StatsBucketAggregate, value: Types.Metadata) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("count")>]
+        member _.Count(state: Types.StatsBucketAggregate, value: Types.Long) =
+            { state with Count = value }
+
+        [<CustomOperation("min")>]
+        member _.Min(state: Types.StatsBucketAggregate, value: Types.Double option) =
+            { state with Min = value }
+
+        [<CustomOperation("max")>]
+        member _.Max(state: Types.StatsBucketAggregate, value: Types.Double option) =
+            { state with Max = value }
+
+        [<CustomOperation("avg")>]
+        member _.Avg(state: Types.StatsBucketAggregate, value: Types.Double option) =
+            { state with Avg = value }
+
+        [<CustomOperation("sum")>]
+        member _.Sum(state: Types.StatsBucketAggregate, value: Types.Double) =
+            { state with Sum = value }
+
+        [<CustomOperation("minAsString")>]
+        member _.MinAsString(state: Types.StatsBucketAggregate, value: string) =
+            { state with MinAsString = Some value }
+
+        [<CustomOperation("maxAsString")>]
+        member _.MaxAsString(state: Types.StatsBucketAggregate, value: string) =
+            { state with MaxAsString = Some value }
+
+        [<CustomOperation("avgAsString")>]
+        member _.AvgAsString(state: Types.StatsBucketAggregate, value: string) =
+            { state with AvgAsString = Some value }
+
+        [<CustomOperation("sumAsString")>]
+        member _.SumAsString(state: Types.StatsBucketAggregate, value: string) =
+            { state with SumAsString = Some value }
+
+    let statsBucketAggregate = StatsBucketAggregateBuilder()
+
+    type StatsBucketAggregationBuilder() =
+        member _.Yield(_: unit) : Types.StatsBucketAggregation =
+            {
+                BucketsPath = None
+                Format = None
+                GapPolicy = None
+            }
+
+        [<CustomOperation("bucketsPath")>]
+        member _.BucketsPath(state: Types.StatsBucketAggregation, value: Types.BucketsPath) =
+            { state with BucketsPath = Some value }
+
+        [<CustomOperation("format")>]
+        member _.Format(state: Types.StatsBucketAggregation, value: string) =
+            { state with Format = Some value }
+
+        [<CustomOperation("gapPolicy")>]
+        member _.GapPolicy(state: Types.StatsBucketAggregation, value: Types.GapPolicy) =
+            { state with GapPolicy = Some value }
+
+    let statsBucketAggregation = StatsBucketAggregationBuilder()
 
     type StringStatsAggregateBuilder() =
         member _.Yield(_: unit) : Types.StringStatsAggregate =
@@ -2279,6 +4163,7 @@ module TypesAggregationsBuilders =
                 MinLengthAsString = None
                 MaxLengthAsString = None
                 AvgLengthAsString = None
+                Meta = None
             }
 
         [<CustomOperation("count")>]
@@ -2317,7 +4202,109 @@ module TypesAggregationsBuilders =
         member _.AvgLengthAsString(state: Types.StringStatsAggregate, value: string) =
             { state with AvgLengthAsString = Some value }
 
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.StringStatsAggregate, value: Types.Metadata) =
+            { state with Meta = Some value }
+
     let stringStatsAggregate = StringStatsAggregateBuilder()
+
+    type StringStatsAggregationBuilder() =
+        member _.Yield(_: unit) : Types.StringStatsAggregation =
+            {
+                ShowDistribution = None
+                Field = None
+                Missing = None
+                Script = None
+            }
+
+        [<CustomOperation("showDistribution")>]
+        member _.ShowDistribution(state: Types.StringStatsAggregation, value: bool) =
+            { state with ShowDistribution = Some value }
+
+        [<CustomOperation("field")>]
+        member _.Field(state: Types.StringStatsAggregation, value: Types.Field) =
+            { state with Field = Some value }
+
+        [<CustomOperation("missing")>]
+        member _.Missing(state: Types.StringStatsAggregation, value: Types.Missing) =
+            { state with Missing = Some value }
+
+        [<CustomOperation("script")>]
+        member _.Script(state: Types.StringStatsAggregation, value: Types.Script) =
+            { state with Script = Some value }
+
+    let stringStatsAggregation = StringStatsAggregationBuilder()
+
+    type SumAggregateBuilder() =
+        member _.Yield(_: unit) : Types.SumAggregate =
+            {
+                Meta = None
+                Value = Unchecked.defaultof<_>
+                ValueAsString = None
+            }
+
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.SumAggregate, value: Types.Metadata) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("value")>]
+        member _.Value(state: Types.SumAggregate, value: Types.Double option) =
+            { state with Value = value }
+
+        [<CustomOperation("valueAsString")>]
+        member _.ValueAsString(state: Types.SumAggregate, value: string) =
+            { state with ValueAsString = Some value }
+
+    let sumAggregate = SumAggregateBuilder()
+
+    type SumAggregationBuilder() =
+        member _.Yield(_: unit) : Types.SumAggregation =
+            {
+                Field = None
+                Missing = None
+                Script = None
+                Format = None
+            }
+
+        [<CustomOperation("field")>]
+        member _.Field(state: Types.SumAggregation, value: Types.Field) =
+            { state with Field = Some value }
+
+        [<CustomOperation("missing")>]
+        member _.Missing(state: Types.SumAggregation, value: Types.Missing) =
+            { state with Missing = Some value }
+
+        [<CustomOperation("script")>]
+        member _.Script(state: Types.SumAggregation, value: Types.Script) =
+            { state with Script = Some value }
+
+        [<CustomOperation("format")>]
+        member _.Format(state: Types.SumAggregation, value: string) =
+            { state with Format = Some value }
+
+    let sumAggregation = SumAggregationBuilder()
+
+    type SumBucketAggregationBuilder() =
+        member _.Yield(_: unit) : Types.SumBucketAggregation =
+            {
+                BucketsPath = None
+                Format = None
+                GapPolicy = None
+            }
+
+        [<CustomOperation("bucketsPath")>]
+        member _.BucketsPath(state: Types.SumBucketAggregation, value: Types.BucketsPath) =
+            { state with BucketsPath = Some value }
+
+        [<CustomOperation("format")>]
+        member _.Format(state: Types.SumBucketAggregation, value: string) =
+            { state with Format = Some value }
+
+        [<CustomOperation("gapPolicy")>]
+        member _.GapPolicy(state: Types.SumBucketAggregation, value: Types.GapPolicy) =
+            { state with GapPolicy = Some value }
+
+    let sumBucketAggregation = SumBucketAggregationBuilder()
 
     type TDigestBuilder() =
         member _.Yield(_: unit) : Types.TDigest =
@@ -2335,6 +4322,28 @@ module TypesAggregationsBuilders =
             { state with ExecutionHint = Some value }
 
     let tDigest = TDigestBuilder()
+
+    type TTestAggregateBuilder() =
+        member _.Yield(_: unit) : Types.TTestAggregate =
+            {
+                Value = Unchecked.defaultof<_>
+                ValueAsString = None
+                Meta = None
+            }
+
+        [<CustomOperation("value")>]
+        member _.Value(state: Types.TTestAggregate, value: Types.Double option) =
+            { state with Value = value }
+
+        [<CustomOperation("valueAsString")>]
+        member _.ValueAsString(state: Types.TTestAggregate, value: string) =
+            { state with ValueAsString = Some value }
+
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.TTestAggregate, value: Types.Metadata) =
+            { state with Meta = Some value }
+
+    let tTestAggregate = TTestAggregateBuilder()
 
     type TTestAggregationBuilder() =
         member _.Yield(_: unit) : Types.TTestAggregation =
@@ -2505,6 +4514,9 @@ module TypesAggregationsBuilders =
                 TrackScores = None
                 Version = None
                 SeqNoPrimaryTerm = None
+                Field = None
+                Missing = None
+                Script = None
             }
 
         [<CustomOperation("docvalueFields")>]
@@ -2559,6 +4571,18 @@ module TypesAggregationsBuilders =
         member _.SeqNoPrimaryTerm(state: Types.TopHitsAggregation, value: bool) =
             { state with SeqNoPrimaryTerm = Some value }
 
+        [<CustomOperation("field")>]
+        member _.Field(state: Types.TopHitsAggregation, value: Types.Field) =
+            { state with Field = Some value }
+
+        [<CustomOperation("missing")>]
+        member _.Missing(state: Types.TopHitsAggregation, value: Types.Missing) =
+            { state with Missing = Some value }
+
+        [<CustomOperation("script")>]
+        member _.Script(state: Types.TopHitsAggregation, value: Types.Script) =
+            { state with Script = Some value }
+
     let topHitsAggregation = TopHitsAggregationBuilder()
 
     type TopMetricsAggregationBuilder() =
@@ -2567,10 +4591,13 @@ module TypesAggregationsBuilders =
                 Metrics = None
                 Size = None
                 Sort = None
+                Field = None
+                Missing = None
+                Script = None
             }
 
         [<CustomOperation("metrics")>]
-        member _.Metrics(state: Types.TopMetricsAggregation, value: System.Text.Json.JsonElement) =
+        member _.Metrics(state: Types.TopMetricsAggregation, value: Types.TopMetricsValue list) =
             { state with Metrics = Some value }
 
         [<CustomOperation("size")>]
@@ -2581,7 +4608,68 @@ module TypesAggregationsBuilders =
         member _.Sort(state: Types.TopMetricsAggregation, value: Types.Sort) =
             { state with Sort = Some value }
 
+        [<CustomOperation("field")>]
+        member _.Field(state: Types.TopMetricsAggregation, value: Types.Field) =
+            { state with Field = Some value }
+
+        [<CustomOperation("missing")>]
+        member _.Missing(state: Types.TopMetricsAggregation, value: Types.Missing) =
+            { state with Missing = Some value }
+
+        [<CustomOperation("script")>]
+        member _.Script(state: Types.TopMetricsAggregation, value: Types.Script) =
+            { state with Script = Some value }
+
     let topMetricsAggregation = TopMetricsAggregationBuilder()
+
+    type ValueCountAggregateBuilder() =
+        member _.Yield(_: unit) : Types.ValueCountAggregate =
+            {
+                Meta = None
+                Value = Unchecked.defaultof<_>
+                ValueAsString = None
+            }
+
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.ValueCountAggregate, value: Types.Metadata) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("value")>]
+        member _.Value(state: Types.ValueCountAggregate, value: Types.Double option) =
+            { state with Value = value }
+
+        [<CustomOperation("valueAsString")>]
+        member _.ValueAsString(state: Types.ValueCountAggregate, value: string) =
+            { state with ValueAsString = Some value }
+
+    let valueCountAggregate = ValueCountAggregateBuilder()
+
+    type ValueCountAggregationBuilder() =
+        member _.Yield(_: unit) : Types.ValueCountAggregation =
+            {
+                Field = None
+                Missing = None
+                Script = None
+                Format = None
+            }
+
+        [<CustomOperation("field")>]
+        member _.Field(state: Types.ValueCountAggregation, value: Types.Field) =
+            { state with Field = Some value }
+
+        [<CustomOperation("missing")>]
+        member _.Missing(state: Types.ValueCountAggregation, value: Types.Missing) =
+            { state with Missing = Some value }
+
+        [<CustomOperation("script")>]
+        member _.Script(state: Types.ValueCountAggregation, value: Types.Script) =
+            { state with Script = Some value }
+
+        [<CustomOperation("format")>]
+        member _.Format(state: Types.ValueCountAggregation, value: string) =
+            { state with Format = Some value }
+
+    let valueCountAggregation = ValueCountAggregationBuilder()
 
     type VariableWidthHistogramAggregationBuilder() =
         member _.Yield(_: unit) : Types.VariableWidthHistogramAggregation =
@@ -2624,6 +4712,7 @@ module TypesAggregationsBuilders =
                 MinAsString = None
                 KeyAsString = None
                 MaxAsString = None
+                DocCount = Unchecked.defaultof<_>
             }
 
         [<CustomOperation("min")>]
@@ -2649,6 +4738,10 @@ module TypesAggregationsBuilders =
         [<CustomOperation("maxAsString")>]
         member _.MaxAsString(state: Types.VariableWidthHistogramBucket, value: string) =
             { state with MaxAsString = Some value }
+
+        [<CustomOperation("docCount")>]
+        member _.DocCount(state: Types.VariableWidthHistogramBucket, value: Types.Long) =
+            { state with DocCount = value }
 
     let variableWidthHistogramBucket = VariableWidthHistogramBucketBuilder()
 
@@ -2700,4 +4793,26 @@ module TypesAggregationsBuilders =
             { state with Script = Some value }
 
     let weightedAverageValue = WeightedAverageValueBuilder()
+
+    type WeightedAvgAggregateBuilder() =
+        member _.Yield(_: unit) : Types.WeightedAvgAggregate =
+            {
+                Meta = None
+                Value = Unchecked.defaultof<_>
+                ValueAsString = None
+            }
+
+        [<CustomOperation("meta")>]
+        member _.Meta(state: Types.WeightedAvgAggregate, value: Types.Metadata) =
+            { state with Meta = Some value }
+
+        [<CustomOperation("value")>]
+        member _.Value(state: Types.WeightedAvgAggregate, value: Types.Double option) =
+            { state with Value = value }
+
+        [<CustomOperation("valueAsString")>]
+        member _.ValueAsString(state: Types.WeightedAvgAggregate, value: string) =
+            { state with ValueAsString = Some value }
+
+    let weightedAvgAggregate = WeightedAvgAggregateBuilder()
 

@@ -151,7 +151,7 @@ module WatcherTypesBuilders =
             { state with Id = Some value }
 
         [<CustomOperation("bcc")>]
-        member _.Bcc(state: Types.Email, value: System.Text.Json.JsonElement) =
+        member _.Bcc(state: Types.Email, value: string list) =
             { state with Bcc = Some value }
 
         [<CustomOperation("body")>]
@@ -159,7 +159,7 @@ module WatcherTypesBuilders =
             { state with Body = Some value }
 
         [<CustomOperation("cc")>]
-        member _.Cc(state: Types.Email, value: System.Text.Json.JsonElement) =
+        member _.Cc(state: Types.Email, value: string list) =
             { state with Cc = Some value }
 
         [<CustomOperation("from")>]
@@ -171,7 +171,7 @@ module WatcherTypesBuilders =
             { state with Priority = Some value }
 
         [<CustomOperation("replyTo")>]
-        member _.ReplyTo(state: Types.Email, value: System.Text.Json.JsonElement) =
+        member _.ReplyTo(state: Types.Email, value: string list) =
             { state with ReplyTo = Some value }
 
         [<CustomOperation("sentDate")>]
@@ -183,7 +183,7 @@ module WatcherTypesBuilders =
             { state with Subject = value }
 
         [<CustomOperation("to'")>]
-        member _.To(state: Types.Email, value: System.Text.Json.JsonElement) =
+        member _.To(state: Types.Email, value: string list) =
             { state with To = value }
 
         [<CustomOperation("attachments")>]
@@ -191,6 +191,68 @@ module WatcherTypesBuilders =
             { state with Attachments = Some value }
 
     let email = EmailBuilder()
+
+    type EmailActionBuilder() =
+        member _.Yield(_: unit) : Types.EmailAction =
+            {
+                Id = None
+                Bcc = None
+                Body = None
+                Cc = None
+                From = None
+                Priority = None
+                ReplyTo = None
+                SentDate = None
+                Subject = Unchecked.defaultof<_>
+                To = Unchecked.defaultof<_>
+                Attachments = None
+            }
+
+        [<CustomOperation("id")>]
+        member _.Id(state: Types.EmailAction, value: Types.Id) =
+            { state with Id = Some value }
+
+        [<CustomOperation("bcc")>]
+        member _.Bcc(state: Types.EmailAction, value: string list) =
+            { state with Bcc = Some value }
+
+        [<CustomOperation("body")>]
+        member _.Body(state: Types.EmailAction, value: Types.EmailBody) =
+            { state with Body = Some value }
+
+        [<CustomOperation("cc")>]
+        member _.Cc(state: Types.EmailAction, value: string list) =
+            { state with Cc = Some value }
+
+        [<CustomOperation("from")>]
+        member _.From(state: Types.EmailAction, value: string) =
+            { state with From = Some value }
+
+        [<CustomOperation("priority")>]
+        member _.Priority(state: Types.EmailAction, value: Types.EmailPriority) =
+            { state with Priority = Some value }
+
+        [<CustomOperation("replyTo")>]
+        member _.ReplyTo(state: Types.EmailAction, value: string list) =
+            { state with ReplyTo = Some value }
+
+        [<CustomOperation("sentDate")>]
+        member _.SentDate(state: Types.EmailAction, value: Types.DateTime) =
+            { state with SentDate = Some value }
+
+        [<CustomOperation("subject")>]
+        member _.Subject(state: Types.EmailAction, value: string) =
+            { state with Subject = value }
+
+        [<CustomOperation("to'")>]
+        member _.To(state: Types.EmailAction, value: string list) =
+            { state with To = value }
+
+        [<CustomOperation("attachments")>]
+        member _.Attachments(state: Types.EmailAction, value: Map<string, Types.EmailAttachmentContainer>) =
+            { state with Attachments = Some value }
+
+    let emailAction = EmailActionBuilder()
 
     module EmailAttachment =
 
@@ -420,6 +482,78 @@ module WatcherTypesBuilders =
 
     let httpInputRequestDefinition = HttpInputRequestDefinitionBuilder()
 
+    type HttpInputRequestResultBuilder() =
+        member _.Yield(_: unit) : Types.HttpInputRequestResult =
+            {
+                Auth = None
+                Body = None
+                ConnectionTimeout = None
+                Headers = None
+                Host = None
+                Method = None
+                Params = None
+                Path = None
+                Port = None
+                Proxy = None
+                ReadTimeout = None
+                Scheme = None
+                Url = None
+            }
+
+        [<CustomOperation("auth")>]
+        member _.Auth(state: Types.HttpInputRequestResult, value: Types.HttpInputAuthentication) =
+            { state with Auth = Some value }
+
+        [<CustomOperation("body")>]
+        member _.Body(state: Types.HttpInputRequestResult, value: string) =
+            { state with Body = Some value }
+
+        [<CustomOperation("connectionTimeout")>]
+        member _.ConnectionTimeout(state: Types.HttpInputRequestResult, value: Types.Duration) =
+            { state with ConnectionTimeout = Some value }
+
+        [<CustomOperation("headers")>]
+        member _.Headers(state: Types.HttpInputRequestResult, value: Map<string, string>) =
+            { state with Headers = Some value }
+
+        [<CustomOperation("host")>]
+        member _.Host(state: Types.HttpInputRequestResult, value: Types.Host) =
+            { state with Host = Some value }
+
+        [<CustomOperation("method")>]
+        member _.Method(state: Types.HttpInputRequestResult, value: Types.HttpInputMethod) =
+            { state with Method = Some value }
+
+        [<CustomOperation("params")>]
+        member _.Params(state: Types.HttpInputRequestResult, value: Map<string, string>) =
+            { state with Params = Some value }
+
+        [<CustomOperation("path")>]
+        member _.Path(state: Types.HttpInputRequestResult, value: string) =
+            { state with Path = Some value }
+
+        [<CustomOperation("port")>]
+        member _.Port(state: Types.HttpInputRequestResult, value: Types.Uint) =
+            { state with Port = Some value }
+
+        [<CustomOperation("proxy")>]
+        member _.Proxy(state: Types.HttpInputRequestResult, value: Types.HttpInputProxy) =
+            { state with Proxy = Some value }
+
+        [<CustomOperation("readTimeout")>]
+        member _.ReadTimeout(state: Types.HttpInputRequestResult, value: Types.Duration) =
+            { state with ReadTimeout = Some value }
+
+        [<CustomOperation("scheme")>]
+        member _.Scheme(state: Types.HttpInputRequestResult, value: Types.ConnectionScheme) =
+            { state with Scheme = Some value }
+
+        [<CustomOperation("url")>]
+        member _.Url(state: Types.HttpInputRequestResult, value: string) =
+            { state with Url = Some value }
+
+    let httpInputRequestResult = HttpInputRequestResultBuilder()
+
     type IndexActionBuilder() =
         member _.Yield(_: unit) : Types.IndexAction =
             {
@@ -492,6 +626,58 @@ module WatcherTypesBuilders =
             { state with Category = Some value }
 
     let loggingAction = LoggingActionBuilder()
+
+    type PagerDutyActionBuilder() =
+        member _.Yield(_: unit) : Types.PagerDutyAction =
+            {
+                Account = None
+                AttachPayload = Unchecked.defaultof<_>
+                Client = None
+                ClientUrl = None
+                Contexts = None
+                Description = Unchecked.defaultof<_>
+                EventType = None
+                IncidentKey = Unchecked.defaultof<_>
+                Proxy = None
+            }
+
+        [<CustomOperation("account")>]
+        member _.Account(state: Types.PagerDutyAction, value: string) =
+            { state with Account = Some value }
+
+        [<CustomOperation("attachPayload")>]
+        member _.AttachPayload(state: Types.PagerDutyAction, value: bool) =
+            { state with AttachPayload = value }
+
+        [<CustomOperation("client")>]
+        member _.Client(state: Types.PagerDutyAction, value: string) =
+            { state with Client = Some value }
+
+        [<CustomOperation("clientUrl")>]
+        member _.ClientUrl(state: Types.PagerDutyAction, value: string) =
+            { state with ClientUrl = Some value }
+
+        [<CustomOperation("contexts")>]
+        member _.Contexts(state: Types.PagerDutyAction, value: Types.PagerDutyContext list) =
+            { state with Contexts = Some value }
+
+        [<CustomOperation("description")>]
+        member _.Description(state: Types.PagerDutyAction, value: string) =
+            { state with Description = value }
+
+        [<CustomOperation("eventType")>]
+        member _.EventType(state: Types.PagerDutyAction, value: Types.PagerDutyEventType) =
+            { state with EventType = Some value }
+
+        [<CustomOperation("incidentKey")>]
+        member _.IncidentKey(state: Types.PagerDutyAction, value: string) =
+            { state with IncidentKey = value }
+
+        [<CustomOperation("proxy")>]
+        member _.Proxy(state: Types.PagerDutyAction, value: Types.PagerDutyEventProxy) =
+            { state with Proxy = Some value }
+
+    let pagerDutyAction = PagerDutyActionBuilder()
 
     type PagerDutyContextBuilder() =
         member _.Yield(_: unit) : Types.PagerDutyContext =
@@ -692,13 +878,13 @@ module WatcherTypesBuilders =
         let interval (value: Types.Duration) =
             Types.ScheduleContainer.Interval value
 
-        let monthly (value: System.Text.Json.JsonElement) =
+        let monthly (value: Types.TimeOfMonth list) =
             Types.ScheduleContainer.Monthly value
 
-        let weekly (value: System.Text.Json.JsonElement) =
+        let weekly (value: Types.TimeOfWeek list) =
             Types.ScheduleContainer.Weekly value
 
-        let yearly (value: System.Text.Json.JsonElement) =
+        let yearly (value: Types.TimeOfYear list) =
             Types.ScheduleContainer.Yearly value
 
     type ScriptConditionBuilder() =
@@ -1036,4 +1222,76 @@ module WatcherTypesBuilders =
             { state with ExecutionState = Some value }
 
     let watchStatus = WatchStatusBuilder()
+
+    type WebhookActionBuilder() =
+        member _.Yield(_: unit) : Types.WebhookAction =
+            {
+                Auth = None
+                Body = None
+                ConnectionTimeout = None
+                Headers = None
+                Host = None
+                Method = None
+                Params = None
+                Path = None
+                Port = None
+                Proxy = None
+                ReadTimeout = None
+                Scheme = None
+                Url = None
+            }
+
+        [<CustomOperation("auth")>]
+        member _.Auth(state: Types.WebhookAction, value: Types.HttpInputAuthentication) =
+            { state with Auth = Some value }
+
+        [<CustomOperation("body")>]
+        member _.Body(state: Types.WebhookAction, value: string) =
+            { state with Body = Some value }
+
+        [<CustomOperation("connectionTimeout")>]
+        member _.ConnectionTimeout(state: Types.WebhookAction, value: Types.Duration) =
+            { state with ConnectionTimeout = Some value }
+
+        [<CustomOperation("headers")>]
+        member _.Headers(state: Types.WebhookAction, value: Map<string, string>) =
+            { state with Headers = Some value }
+
+        [<CustomOperation("host")>]
+        member _.Host(state: Types.WebhookAction, value: Types.Host) =
+            { state with Host = Some value }
+
+        [<CustomOperation("method")>]
+        member _.Method(state: Types.WebhookAction, value: Types.HttpInputMethod) =
+            { state with Method = Some value }
+
+        [<CustomOperation("params")>]
+        member _.Params(state: Types.WebhookAction, value: Map<string, string>) =
+            { state with Params = Some value }
+
+        [<CustomOperation("path")>]
+        member _.Path(state: Types.WebhookAction, value: string) =
+            { state with Path = Some value }
+
+        [<CustomOperation("port")>]
+        member _.Port(state: Types.WebhookAction, value: Types.Uint) =
+            { state with Port = Some value }
+
+        [<CustomOperation("proxy")>]
+        member _.Proxy(state: Types.WebhookAction, value: Types.HttpInputProxy) =
+            { state with Proxy = Some value }
+
+        [<CustomOperation("readTimeout")>]
+        member _.ReadTimeout(state: Types.WebhookAction, value: Types.Duration) =
+            { state with ReadTimeout = Some value }
+
+        [<CustomOperation("scheme")>]
+        member _.Scheme(state: Types.WebhookAction, value: Types.ConnectionScheme) =
+            { state with Scheme = Some value }
+
+        [<CustomOperation("url")>]
+        member _.Url(state: Types.WebhookAction, value: string) =
+            { state with Url = Some value }
+
+    let webhookAction = WebhookActionBuilder()
 

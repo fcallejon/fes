@@ -18,6 +18,11 @@ module IngestTypesBuilders =
                 CopyFrom = None
                 AllowDuplicates = None
                 IgnoreEmptyValues = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
         [<CustomOperation("field")>]
@@ -44,6 +49,26 @@ module IngestTypesBuilders =
         member _.IgnoreEmptyValues(state: Types.AppendProcessor, value: bool) =
             { state with IgnoreEmptyValues = Some value }
 
+        [<CustomOperation("description")>]
+        member _.Description(state: Types.AppendProcessor, value: string) =
+            { state with Description = Some value }
+
+        [<CustomOperation("if'")>]
+        member _.If(state: Types.AppendProcessor, value: Types.Script) =
+            { state with If = Some value }
+
+        [<CustomOperation("ignoreFailure")>]
+        member _.IgnoreFailure(state: Types.AppendProcessor, value: bool) =
+            { state with IgnoreFailure = Some value }
+
+        [<CustomOperation("onFailure")>]
+        member _.OnFailure(state: Types.AppendProcessor, value: Types.ProcessorContainer list) =
+            { state with OnFailure = Some value }
+
+        [<CustomOperation("tag")>]
+        member _.Tag(state: Types.AppendProcessor, value: string) =
+            { state with Tag = Some value }
+
     let appendProcessor = AppendProcessorBuilder()
 
     type AttachmentProcessorBuilder() =
@@ -57,6 +82,11 @@ module IngestTypesBuilders =
                 TargetField = None
                 RemoveBinary = None
                 ResourceName = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
         [<CustomOperation("field")>]
@@ -91,6 +121,26 @@ module IngestTypesBuilders =
         member _.ResourceName(state: Types.AttachmentProcessor, value: string) =
             { state with ResourceName = Some value }
 
+        [<CustomOperation("description")>]
+        member _.Description(state: Types.AttachmentProcessor, value: string) =
+            { state with Description = Some value }
+
+        [<CustomOperation("if'")>]
+        member _.If(state: Types.AttachmentProcessor, value: Types.Script) =
+            { state with If = Some value }
+
+        [<CustomOperation("ignoreFailure")>]
+        member _.IgnoreFailure(state: Types.AttachmentProcessor, value: bool) =
+            { state with IgnoreFailure = Some value }
+
+        [<CustomOperation("onFailure")>]
+        member _.OnFailure(state: Types.AttachmentProcessor, value: Types.ProcessorContainer list) =
+            { state with OnFailure = Some value }
+
+        [<CustomOperation("tag")>]
+        member _.Tag(state: Types.AttachmentProcessor, value: string) =
+            { state with Tag = Some value }
+
     let attachmentProcessor = AttachmentProcessorBuilder()
 
     type BytesProcessorBuilder() =
@@ -99,6 +149,11 @@ module IngestTypesBuilders =
                 Field = Unchecked.defaultof<_>
                 IgnoreMissing = None
                 TargetField = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
         [<CustomOperation("field")>]
@@ -113,6 +168,26 @@ module IngestTypesBuilders =
         member _.TargetField(state: Types.BytesProcessor, value: Types.Field) =
             { state with TargetField = Some value }
 
+        [<CustomOperation("description")>]
+        member _.Description(state: Types.BytesProcessor, value: string) =
+            { state with Description = Some value }
+
+        [<CustomOperation("if'")>]
+        member _.If(state: Types.BytesProcessor, value: Types.Script) =
+            { state with If = Some value }
+
+        [<CustomOperation("ignoreFailure")>]
+        member _.IgnoreFailure(state: Types.BytesProcessor, value: bool) =
+            { state with IgnoreFailure = Some value }
+
+        [<CustomOperation("onFailure")>]
+        member _.OnFailure(state: Types.BytesProcessor, value: Types.ProcessorContainer list) =
+            { state with OnFailure = Some value }
+
+        [<CustomOperation("tag")>]
+        member _.Tag(state: Types.BytesProcessor, value: string) =
+            { state with Tag = Some value }
+
     let bytesProcessor = BytesProcessorBuilder()
 
     type CefProcessorBuilder() =
@@ -123,6 +198,11 @@ module IngestTypesBuilders =
                 TargetField = None
                 IgnoreEmptyValues = None
                 Timezone = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
         [<CustomOperation("field")>]
@@ -145,6 +225,26 @@ module IngestTypesBuilders =
         member _.Timezone(state: Types.CefProcessor, value: string) =
             { state with Timezone = Some value }
 
+        [<CustomOperation("description")>]
+        member _.Description(state: Types.CefProcessor, value: string) =
+            { state with Description = Some value }
+
+        [<CustomOperation("if'")>]
+        member _.If(state: Types.CefProcessor, value: Types.Script) =
+            { state with If = Some value }
+
+        [<CustomOperation("ignoreFailure")>]
+        member _.IgnoreFailure(state: Types.CefProcessor, value: bool) =
+            { state with IgnoreFailure = Some value }
+
+        [<CustomOperation("onFailure")>]
+        member _.OnFailure(state: Types.CefProcessor, value: Types.ProcessorContainer list) =
+            { state with OnFailure = Some value }
+
+        [<CustomOperation("tag")>]
+        member _.Tag(state: Types.CefProcessor, value: string) =
+            { state with Tag = Some value }
+
     let cefProcessor = CefProcessorBuilder()
 
     type CircleProcessorBuilder() =
@@ -155,6 +255,11 @@ module IngestTypesBuilders =
                 IgnoreMissing = None
                 ShapeType = Unchecked.defaultof<_>
                 TargetField = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
         [<CustomOperation("errorDistance")>]
@@ -177,6 +282,26 @@ module IngestTypesBuilders =
         member _.TargetField(state: Types.CircleProcessor, value: Types.Field) =
             { state with TargetField = Some value }
 
+        [<CustomOperation("description")>]
+        member _.Description(state: Types.CircleProcessor, value: string) =
+            { state with Description = Some value }
+
+        [<CustomOperation("if'")>]
+        member _.If(state: Types.CircleProcessor, value: Types.Script) =
+            { state with If = Some value }
+
+        [<CustomOperation("ignoreFailure")>]
+        member _.IgnoreFailure(state: Types.CircleProcessor, value: bool) =
+            { state with IgnoreFailure = Some value }
+
+        [<CustomOperation("onFailure")>]
+        member _.OnFailure(state: Types.CircleProcessor, value: Types.ProcessorContainer list) =
+            { state with OnFailure = Some value }
+
+        [<CustomOperation("tag")>]
+        member _.Tag(state: Types.CircleProcessor, value: string) =
+            { state with Tag = Some value }
+
     let circleProcessor = CircleProcessorBuilder()
 
     type CommunityIDProcessorBuilder() =
@@ -193,6 +318,11 @@ module IngestTypesBuilders =
                 TargetField = None
                 Seed = None
                 IgnoreMissing = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
         [<CustomOperation("sourceIp")>]
@@ -239,6 +369,26 @@ module IngestTypesBuilders =
         member _.IgnoreMissing(state: Types.CommunityIDProcessor, value: bool) =
             { state with IgnoreMissing = Some value }
 
+        [<CustomOperation("description")>]
+        member _.Description(state: Types.CommunityIDProcessor, value: string) =
+            { state with Description = Some value }
+
+        [<CustomOperation("if'")>]
+        member _.If(state: Types.CommunityIDProcessor, value: Types.Script) =
+            { state with If = Some value }
+
+        [<CustomOperation("ignoreFailure")>]
+        member _.IgnoreFailure(state: Types.CommunityIDProcessor, value: bool) =
+            { state with IgnoreFailure = Some value }
+
+        [<CustomOperation("onFailure")>]
+        member _.OnFailure(state: Types.CommunityIDProcessor, value: Types.ProcessorContainer list) =
+            { state with OnFailure = Some value }
+
+        [<CustomOperation("tag")>]
+        member _.Tag(state: Types.CommunityIDProcessor, value: string) =
+            { state with Tag = Some value }
+
     let communityIDProcessor = CommunityIDProcessorBuilder()
 
     type ConvertProcessorBuilder() =
@@ -248,6 +398,11 @@ module IngestTypesBuilders =
                 IgnoreMissing = None
                 TargetField = None
                 Type = Unchecked.defaultof<_>
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
         [<CustomOperation("field")>]
@@ -266,6 +421,26 @@ module IngestTypesBuilders =
         member _.Type(state: Types.ConvertProcessor, value: Types.ConvertType) =
             { state with Type = value }
 
+        [<CustomOperation("description")>]
+        member _.Description(state: Types.ConvertProcessor, value: string) =
+            { state with Description = Some value }
+
+        [<CustomOperation("if'")>]
+        member _.If(state: Types.ConvertProcessor, value: Types.Script) =
+            { state with If = Some value }
+
+        [<CustomOperation("ignoreFailure")>]
+        member _.IgnoreFailure(state: Types.ConvertProcessor, value: bool) =
+            { state with IgnoreFailure = Some value }
+
+        [<CustomOperation("onFailure")>]
+        member _.OnFailure(state: Types.ConvertProcessor, value: Types.ProcessorContainer list) =
+            { state with OnFailure = Some value }
+
+        [<CustomOperation("tag")>]
+        member _.Tag(state: Types.ConvertProcessor, value: string) =
+            { state with Tag = Some value }
+
     let convertProcessor = ConvertProcessorBuilder()
 
     type CsvProcessorBuilder() =
@@ -278,6 +453,11 @@ module IngestTypesBuilders =
                 Separator = None
                 TargetFields = Unchecked.defaultof<_>
                 Trim = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
         [<CustomOperation("emptyValue")>]
@@ -307,6 +487,26 @@ module IngestTypesBuilders =
         [<CustomOperation("trim")>]
         member _.Trim(state: Types.CsvProcessor, value: bool) =
             { state with Trim = Some value }
+
+        [<CustomOperation("description")>]
+        member _.Description(state: Types.CsvProcessor, value: string) =
+            { state with Description = Some value }
+
+        [<CustomOperation("if'")>]
+        member _.If(state: Types.CsvProcessor, value: Types.Script) =
+            { state with If = Some value }
+
+        [<CustomOperation("ignoreFailure")>]
+        member _.IgnoreFailure(state: Types.CsvProcessor, value: bool) =
+            { state with IgnoreFailure = Some value }
+
+        [<CustomOperation("onFailure")>]
+        member _.OnFailure(state: Types.CsvProcessor, value: Types.ProcessorContainer list) =
+            { state with OnFailure = Some value }
+
+        [<CustomOperation("tag")>]
+        member _.Tag(state: Types.CsvProcessor, value: string) =
+            { state with Tag = Some value }
 
     let csvProcessor = CsvProcessorBuilder()
 
@@ -342,6 +542,11 @@ module IngestTypesBuilders =
                 IndexNamePrefix = None
                 Locale = None
                 Timezone = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
         [<CustomOperation("dateFormats")>]
@@ -372,6 +577,26 @@ module IngestTypesBuilders =
         member _.Timezone(state: Types.DateIndexNameProcessor, value: string) =
             { state with Timezone = Some value }
 
+        [<CustomOperation("description")>]
+        member _.Description(state: Types.DateIndexNameProcessor, value: string) =
+            { state with Description = Some value }
+
+        [<CustomOperation("if'")>]
+        member _.If(state: Types.DateIndexNameProcessor, value: Types.Script) =
+            { state with If = Some value }
+
+        [<CustomOperation("ignoreFailure")>]
+        member _.IgnoreFailure(state: Types.DateIndexNameProcessor, value: bool) =
+            { state with IgnoreFailure = Some value }
+
+        [<CustomOperation("onFailure")>]
+        member _.OnFailure(state: Types.DateIndexNameProcessor, value: Types.ProcessorContainer list) =
+            { state with OnFailure = Some value }
+
+        [<CustomOperation("tag")>]
+        member _.Tag(state: Types.DateIndexNameProcessor, value: string) =
+            { state with Tag = Some value }
+
     let dateIndexNameProcessor = DateIndexNameProcessorBuilder()
 
     type DateProcessorBuilder() =
@@ -383,6 +608,11 @@ module IngestTypesBuilders =
                 TargetField = None
                 Timezone = None
                 OutputFormat = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
         [<CustomOperation("field")>]
@@ -409,6 +639,26 @@ module IngestTypesBuilders =
         member _.OutputFormat(state: Types.DateProcessor, value: string) =
             { state with OutputFormat = Some value }
 
+        [<CustomOperation("description")>]
+        member _.Description(state: Types.DateProcessor, value: string) =
+            { state with Description = Some value }
+
+        [<CustomOperation("if'")>]
+        member _.If(state: Types.DateProcessor, value: Types.Script) =
+            { state with If = Some value }
+
+        [<CustomOperation("ignoreFailure")>]
+        member _.IgnoreFailure(state: Types.DateProcessor, value: bool) =
+            { state with IgnoreFailure = Some value }
+
+        [<CustomOperation("onFailure")>]
+        member _.OnFailure(state: Types.DateProcessor, value: Types.ProcessorContainer list) =
+            { state with OnFailure = Some value }
+
+        [<CustomOperation("tag")>]
+        member _.Tag(state: Types.DateProcessor, value: string) =
+            { state with Tag = Some value }
+
     let dateProcessor = DateProcessorBuilder()
 
     type DissectProcessorBuilder() =
@@ -418,6 +668,11 @@ module IngestTypesBuilders =
                 Field = Unchecked.defaultof<_>
                 IgnoreMissing = None
                 Pattern = Unchecked.defaultof<_>
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
         [<CustomOperation("appendSeparator")>]
@@ -435,6 +690,26 @@ module IngestTypesBuilders =
         [<CustomOperation("pattern")>]
         member _.Pattern(state: Types.DissectProcessor, value: string) =
             { state with Pattern = value }
+
+        [<CustomOperation("description")>]
+        member _.Description(state: Types.DissectProcessor, value: string) =
+            { state with Description = Some value }
+
+        [<CustomOperation("if'")>]
+        member _.If(state: Types.DissectProcessor, value: Types.Script) =
+            { state with If = Some value }
+
+        [<CustomOperation("ignoreFailure")>]
+        member _.IgnoreFailure(state: Types.DissectProcessor, value: bool) =
+            { state with IgnoreFailure = Some value }
+
+        [<CustomOperation("onFailure")>]
+        member _.OnFailure(state: Types.DissectProcessor, value: Types.ProcessorContainer list) =
+            { state with OnFailure = Some value }
+
+        [<CustomOperation("tag")>]
+        member _.Tag(state: Types.DissectProcessor, value: string) =
+            { state with Tag = Some value }
 
     let dissectProcessor = DissectProcessorBuilder()
 
@@ -508,6 +783,11 @@ module IngestTypesBuilders =
                 Field = Unchecked.defaultof<_>
                 Override = None
                 Path = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
         [<CustomOperation("field")>]
@@ -522,7 +802,59 @@ module IngestTypesBuilders =
         member _.Path(state: Types.DotExpanderProcessor, value: string) =
             { state with Path = Some value }
 
+        [<CustomOperation("description")>]
+        member _.Description(state: Types.DotExpanderProcessor, value: string) =
+            { state with Description = Some value }
+
+        [<CustomOperation("if'")>]
+        member _.If(state: Types.DotExpanderProcessor, value: Types.Script) =
+            { state with If = Some value }
+
+        [<CustomOperation("ignoreFailure")>]
+        member _.IgnoreFailure(state: Types.DotExpanderProcessor, value: bool) =
+            { state with IgnoreFailure = Some value }
+
+        [<CustomOperation("onFailure")>]
+        member _.OnFailure(state: Types.DotExpanderProcessor, value: Types.ProcessorContainer list) =
+            { state with OnFailure = Some value }
+
+        [<CustomOperation("tag")>]
+        member _.Tag(state: Types.DotExpanderProcessor, value: string) =
+            { state with Tag = Some value }
+
     let dotExpanderProcessor = DotExpanderProcessorBuilder()
+
+    type DropProcessorBuilder() =
+        member _.Yield(_: unit) : Types.DropProcessor =
+            {
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
+            }
+
+        [<CustomOperation("description")>]
+        member _.Description(state: Types.DropProcessor, value: string) =
+            { state with Description = Some value }
+
+        [<CustomOperation("if'")>]
+        member _.If(state: Types.DropProcessor, value: Types.Script) =
+            { state with If = Some value }
+
+        [<CustomOperation("ignoreFailure")>]
+        member _.IgnoreFailure(state: Types.DropProcessor, value: bool) =
+            { state with IgnoreFailure = Some value }
+
+        [<CustomOperation("onFailure")>]
+        member _.OnFailure(state: Types.DropProcessor, value: Types.ProcessorContainer list) =
+            { state with OnFailure = Some value }
+
+        [<CustomOperation("tag")>]
+        member _.Tag(state: Types.DropProcessor, value: string) =
+            { state with Tag = Some value }
+
+    let dropProcessor = DropProcessorBuilder()
 
     type EnrichProcessorBuilder() =
         member _.Yield(_: unit) : Types.EnrichProcessor =
@@ -534,6 +866,11 @@ module IngestTypesBuilders =
                 PolicyName = Unchecked.defaultof<_>
                 ShapeRelation = None
                 TargetField = Unchecked.defaultof<_>
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
         [<CustomOperation("field")>]
@@ -564,7 +901,64 @@ module IngestTypesBuilders =
         member _.TargetField(state: Types.EnrichProcessor, value: Types.Field) =
             { state with TargetField = value }
 
+        [<CustomOperation("description")>]
+        member _.Description(state: Types.EnrichProcessor, value: string) =
+            { state with Description = Some value }
+
+        [<CustomOperation("if'")>]
+        member _.If(state: Types.EnrichProcessor, value: Types.Script) =
+            { state with If = Some value }
+
+        [<CustomOperation("ignoreFailure")>]
+        member _.IgnoreFailure(state: Types.EnrichProcessor, value: bool) =
+            { state with IgnoreFailure = Some value }
+
+        [<CustomOperation("onFailure")>]
+        member _.OnFailure(state: Types.EnrichProcessor, value: Types.ProcessorContainer list) =
+            { state with OnFailure = Some value }
+
+        [<CustomOperation("tag")>]
+        member _.Tag(state: Types.EnrichProcessor, value: string) =
+            { state with Tag = Some value }
+
     let enrichProcessor = EnrichProcessorBuilder()
+
+    type FailProcessorBuilder() =
+        member _.Yield(_: unit) : Types.FailProcessor =
+            {
+                Message = Unchecked.defaultof<_>
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
+            }
+
+        [<CustomOperation("message")>]
+        member _.Message(state: Types.FailProcessor, value: string) =
+            { state with Message = value }
+
+        [<CustomOperation("description")>]
+        member _.Description(state: Types.FailProcessor, value: string) =
+            { state with Description = Some value }
+
+        [<CustomOperation("if'")>]
+        member _.If(state: Types.FailProcessor, value: Types.Script) =
+            { state with If = Some value }
+
+        [<CustomOperation("ignoreFailure")>]
+        member _.IgnoreFailure(state: Types.FailProcessor, value: bool) =
+            { state with IgnoreFailure = Some value }
+
+        [<CustomOperation("onFailure")>]
+        member _.OnFailure(state: Types.FailProcessor, value: Types.ProcessorContainer list) =
+            { state with OnFailure = Some value }
+
+        [<CustomOperation("tag")>]
+        member _.Tag(state: Types.FailProcessor, value: string) =
+            { state with Tag = Some value }
+
+    let failProcessor = FailProcessorBuilder()
 
     type FingerprintProcessorBuilder() =
         member _.Yield(_: unit) : Types.FingerprintProcessor =
@@ -574,6 +968,11 @@ module IngestTypesBuilders =
                 Salt = None
                 Method = None
                 IgnoreMissing = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
         [<CustomOperation("fields")>]
@@ -596,7 +995,74 @@ module IngestTypesBuilders =
         member _.IgnoreMissing(state: Types.FingerprintProcessor, value: bool) =
             { state with IgnoreMissing = Some value }
 
+        [<CustomOperation("description")>]
+        member _.Description(state: Types.FingerprintProcessor, value: string) =
+            { state with Description = Some value }
+
+        [<CustomOperation("if'")>]
+        member _.If(state: Types.FingerprintProcessor, value: Types.Script) =
+            { state with If = Some value }
+
+        [<CustomOperation("ignoreFailure")>]
+        member _.IgnoreFailure(state: Types.FingerprintProcessor, value: bool) =
+            { state with IgnoreFailure = Some value }
+
+        [<CustomOperation("onFailure")>]
+        member _.OnFailure(state: Types.FingerprintProcessor, value: Types.ProcessorContainer list) =
+            { state with OnFailure = Some value }
+
+        [<CustomOperation("tag")>]
+        member _.Tag(state: Types.FingerprintProcessor, value: string) =
+            { state with Tag = Some value }
+
     let fingerprintProcessor = FingerprintProcessorBuilder()
+
+    type ForeachProcessorBuilder() =
+        member _.Yield(_: unit) : Types.ForeachProcessor =
+            {
+                Field = Unchecked.defaultof<_>
+                IgnoreMissing = None
+                Processor = Unchecked.defaultof<_>
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
+            }
+
+        [<CustomOperation("field")>]
+        member _.Field(state: Types.ForeachProcessor, value: Types.Field) =
+            { state with Field = value }
+
+        [<CustomOperation("ignoreMissing")>]
+        member _.IgnoreMissing(state: Types.ForeachProcessor, value: bool) =
+            { state with IgnoreMissing = Some value }
+
+        [<CustomOperation("processor")>]
+        member _.Processor(state: Types.ForeachProcessor, value: Types.ProcessorContainer) =
+            { state with Processor = value }
+
+        [<CustomOperation("description")>]
+        member _.Description(state: Types.ForeachProcessor, value: string) =
+            { state with Description = Some value }
+
+        [<CustomOperation("if'")>]
+        member _.If(state: Types.ForeachProcessor, value: Types.Script) =
+            { state with If = Some value }
+
+        [<CustomOperation("ignoreFailure")>]
+        member _.IgnoreFailure(state: Types.ForeachProcessor, value: bool) =
+            { state with IgnoreFailure = Some value }
+
+        [<CustomOperation("onFailure")>]
+        member _.OnFailure(state: Types.ForeachProcessor, value: Types.ProcessorContainer list) =
+            { state with OnFailure = Some value }
+
+        [<CustomOperation("tag")>]
+        member _.Tag(state: Types.ForeachProcessor, value: string) =
+            { state with Tag = Some value }
+
+    let foreachProcessor = ForeachProcessorBuilder()
 
     type GeoGridProcessorBuilder() =
         member _.Yield(_: unit) : Types.GeoGridProcessor =
@@ -610,6 +1076,11 @@ module IngestTypesBuilders =
                 PrecisionField = None
                 IgnoreMissing = None
                 TargetFormat = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
         [<CustomOperation("field")>]
@@ -648,6 +1119,26 @@ module IngestTypesBuilders =
         member _.TargetFormat(state: Types.GeoGridProcessor, value: Types.GeoGridTargetFormat) =
             { state with TargetFormat = Some value }
 
+        [<CustomOperation("description")>]
+        member _.Description(state: Types.GeoGridProcessor, value: string) =
+            { state with Description = Some value }
+
+        [<CustomOperation("if'")>]
+        member _.If(state: Types.GeoGridProcessor, value: Types.Script) =
+            { state with If = Some value }
+
+        [<CustomOperation("ignoreFailure")>]
+        member _.IgnoreFailure(state: Types.GeoGridProcessor, value: bool) =
+            { state with IgnoreFailure = Some value }
+
+        [<CustomOperation("onFailure")>]
+        member _.OnFailure(state: Types.GeoGridProcessor, value: Types.ProcessorContainer list) =
+            { state with OnFailure = Some value }
+
+        [<CustomOperation("tag")>]
+        member _.Tag(state: Types.GeoGridProcessor, value: string) =
+            { state with Tag = Some value }
+
     let geoGridProcessor = GeoGridProcessorBuilder()
 
     type GeoIpProcessorBuilder() =
@@ -660,6 +1151,11 @@ module IngestTypesBuilders =
                 Properties = None
                 TargetField = None
                 DownloadDatabaseOnPipelineCreation = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
         [<CustomOperation("databaseFile")>]
@@ -690,6 +1186,26 @@ module IngestTypesBuilders =
         member _.DownloadDatabaseOnPipelineCreation(state: Types.GeoIpProcessor, value: bool) =
             { state with DownloadDatabaseOnPipelineCreation = Some value }
 
+        [<CustomOperation("description")>]
+        member _.Description(state: Types.GeoIpProcessor, value: string) =
+            { state with Description = Some value }
+
+        [<CustomOperation("if'")>]
+        member _.If(state: Types.GeoIpProcessor, value: Types.Script) =
+            { state with If = Some value }
+
+        [<CustomOperation("ignoreFailure")>]
+        member _.IgnoreFailure(state: Types.GeoIpProcessor, value: bool) =
+            { state with IgnoreFailure = Some value }
+
+        [<CustomOperation("onFailure")>]
+        member _.OnFailure(state: Types.GeoIpProcessor, value: Types.ProcessorContainer list) =
+            { state with OnFailure = Some value }
+
+        [<CustomOperation("tag")>]
+        member _.Tag(state: Types.GeoIpProcessor, value: string) =
+            { state with Tag = Some value }
+
     let geoIpProcessor = GeoIpProcessorBuilder()
 
     type GrokProcessorBuilder() =
@@ -702,6 +1218,11 @@ module IngestTypesBuilders =
                 Patterns = Unchecked.defaultof<_>
                 TraceMatch = None
                 ValidateOnly = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
         [<CustomOperation("ecsCompatibility")>]
@@ -732,6 +1253,26 @@ module IngestTypesBuilders =
         member _.ValidateOnly(state: Types.GrokProcessor, value: bool) =
             { state with ValidateOnly = Some value }
 
+        [<CustomOperation("description")>]
+        member _.Description(state: Types.GrokProcessor, value: string) =
+            { state with Description = Some value }
+
+        [<CustomOperation("if'")>]
+        member _.If(state: Types.GrokProcessor, value: Types.Script) =
+            { state with If = Some value }
+
+        [<CustomOperation("ignoreFailure")>]
+        member _.IgnoreFailure(state: Types.GrokProcessor, value: bool) =
+            { state with IgnoreFailure = Some value }
+
+        [<CustomOperation("onFailure")>]
+        member _.OnFailure(state: Types.GrokProcessor, value: Types.ProcessorContainer list) =
+            { state with OnFailure = Some value }
+
+        [<CustomOperation("tag")>]
+        member _.Tag(state: Types.GrokProcessor, value: string) =
+            { state with Tag = Some value }
+
     let grokProcessor = GrokProcessorBuilder()
 
     type GsubProcessorBuilder() =
@@ -742,6 +1283,11 @@ module IngestTypesBuilders =
                 Pattern = Unchecked.defaultof<_>
                 Replacement = Unchecked.defaultof<_>
                 TargetField = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
         [<CustomOperation("field")>]
@@ -764,6 +1310,26 @@ module IngestTypesBuilders =
         member _.TargetField(state: Types.GsubProcessor, value: Types.Field) =
             { state with TargetField = Some value }
 
+        [<CustomOperation("description")>]
+        member _.Description(state: Types.GsubProcessor, value: string) =
+            { state with Description = Some value }
+
+        [<CustomOperation("if'")>]
+        member _.If(state: Types.GsubProcessor, value: Types.Script) =
+            { state with If = Some value }
+
+        [<CustomOperation("ignoreFailure")>]
+        member _.IgnoreFailure(state: Types.GsubProcessor, value: bool) =
+            { state with IgnoreFailure = Some value }
+
+        [<CustomOperation("onFailure")>]
+        member _.OnFailure(state: Types.GsubProcessor, value: Types.ProcessorContainer list) =
+            { state with OnFailure = Some value }
+
+        [<CustomOperation("tag")>]
+        member _.Tag(state: Types.GsubProcessor, value: string) =
+            { state with Tag = Some value }
+
     let gsubProcessor = GsubProcessorBuilder()
 
     type HtmlStripProcessorBuilder() =
@@ -772,6 +1338,11 @@ module IngestTypesBuilders =
                 Field = Unchecked.defaultof<_>
                 IgnoreMissing = None
                 TargetField = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
         [<CustomOperation("field")>]
@@ -785,6 +1356,26 @@ module IngestTypesBuilders =
         [<CustomOperation("targetField")>]
         member _.TargetField(state: Types.HtmlStripProcessor, value: Types.Field) =
             { state with TargetField = Some value }
+
+        [<CustomOperation("description")>]
+        member _.Description(state: Types.HtmlStripProcessor, value: string) =
+            { state with Description = Some value }
+
+        [<CustomOperation("if'")>]
+        member _.If(state: Types.HtmlStripProcessor, value: Types.Script) =
+            { state with If = Some value }
+
+        [<CustomOperation("ignoreFailure")>]
+        member _.IgnoreFailure(state: Types.HtmlStripProcessor, value: bool) =
+            { state with IgnoreFailure = Some value }
+
+        [<CustomOperation("onFailure")>]
+        member _.OnFailure(state: Types.HtmlStripProcessor, value: Types.ProcessorContainer list) =
+            { state with OnFailure = Some value }
+
+        [<CustomOperation("tag")>]
+        member _.Tag(state: Types.HtmlStripProcessor, value: string) =
+            { state with Tag = Some value }
 
     let htmlStripProcessor = HtmlStripProcessorBuilder()
 
@@ -854,6 +1445,11 @@ module IngestTypesBuilders =
                 InferenceConfig = None
                 InputOutput = None
                 IgnoreMissing = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
         [<CustomOperation("modelId")>]
@@ -873,12 +1469,32 @@ module IngestTypesBuilders =
             { state with InferenceConfig = Some value }
 
         [<CustomOperation("inputOutput")>]
-        member _.InputOutput(state: Types.InferenceProcessor, value: System.Text.Json.JsonElement) =
+        member _.InputOutput(state: Types.InferenceProcessor, value: Types.InputConfig list) =
             { state with InputOutput = Some value }
 
         [<CustomOperation("ignoreMissing")>]
         member _.IgnoreMissing(state: Types.InferenceProcessor, value: bool) =
             { state with IgnoreMissing = Some value }
+
+        [<CustomOperation("description")>]
+        member _.Description(state: Types.InferenceProcessor, value: string) =
+            { state with Description = Some value }
+
+        [<CustomOperation("if'")>]
+        member _.If(state: Types.InferenceProcessor, value: Types.Script) =
+            { state with If = Some value }
+
+        [<CustomOperation("ignoreFailure")>]
+        member _.IgnoreFailure(state: Types.InferenceProcessor, value: bool) =
+            { state with IgnoreFailure = Some value }
+
+        [<CustomOperation("onFailure")>]
+        member _.OnFailure(state: Types.InferenceProcessor, value: Types.ProcessorContainer list) =
+            { state with OnFailure = Some value }
+
+        [<CustomOperation("tag")>]
+        member _.Tag(state: Types.InferenceProcessor, value: string) =
+            { state with Tag = Some value }
 
     let inferenceProcessor = InferenceProcessorBuilder()
 
@@ -914,6 +1530,11 @@ module IngestTypesBuilders =
                 Properties = None
                 TargetField = None
                 DownloadDatabaseOnPipelineCreation = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
         [<CustomOperation("databaseFile")>]
@@ -944,7 +1565,74 @@ module IngestTypesBuilders =
         member _.DownloadDatabaseOnPipelineCreation(state: Types.IpLocationProcessor, value: bool) =
             { state with DownloadDatabaseOnPipelineCreation = Some value }
 
+        [<CustomOperation("description")>]
+        member _.Description(state: Types.IpLocationProcessor, value: string) =
+            { state with Description = Some value }
+
+        [<CustomOperation("if'")>]
+        member _.If(state: Types.IpLocationProcessor, value: Types.Script) =
+            { state with If = Some value }
+
+        [<CustomOperation("ignoreFailure")>]
+        member _.IgnoreFailure(state: Types.IpLocationProcessor, value: bool) =
+            { state with IgnoreFailure = Some value }
+
+        [<CustomOperation("onFailure")>]
+        member _.OnFailure(state: Types.IpLocationProcessor, value: Types.ProcessorContainer list) =
+            { state with OnFailure = Some value }
+
+        [<CustomOperation("tag")>]
+        member _.Tag(state: Types.IpLocationProcessor, value: string) =
+            { state with Tag = Some value }
+
     let ipLocationProcessor = IpLocationProcessorBuilder()
+
+    type JoinProcessorBuilder() =
+        member _.Yield(_: unit) : Types.JoinProcessor =
+            {
+                Field = Unchecked.defaultof<_>
+                Separator = Unchecked.defaultof<_>
+                TargetField = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
+            }
+
+        [<CustomOperation("field")>]
+        member _.Field(state: Types.JoinProcessor, value: Types.Field) =
+            { state with Field = value }
+
+        [<CustomOperation("separator")>]
+        member _.Separator(state: Types.JoinProcessor, value: string) =
+            { state with Separator = value }
+
+        [<CustomOperation("targetField")>]
+        member _.TargetField(state: Types.JoinProcessor, value: Types.Field) =
+            { state with TargetField = Some value }
+
+        [<CustomOperation("description")>]
+        member _.Description(state: Types.JoinProcessor, value: string) =
+            { state with Description = Some value }
+
+        [<CustomOperation("if'")>]
+        member _.If(state: Types.JoinProcessor, value: Types.Script) =
+            { state with If = Some value }
+
+        [<CustomOperation("ignoreFailure")>]
+        member _.IgnoreFailure(state: Types.JoinProcessor, value: bool) =
+            { state with IgnoreFailure = Some value }
+
+        [<CustomOperation("onFailure")>]
+        member _.OnFailure(state: Types.JoinProcessor, value: Types.ProcessorContainer list) =
+            { state with OnFailure = Some value }
+
+        [<CustomOperation("tag")>]
+        member _.Tag(state: Types.JoinProcessor, value: string) =
+            { state with Tag = Some value }
+
+    let joinProcessor = JoinProcessorBuilder()
 
     type JsonProcessorBuilder() =
         member _.Yield(_: unit) : Types.JsonProcessor =
@@ -954,6 +1642,11 @@ module IngestTypesBuilders =
                 AllowDuplicateKeys = None
                 Field = Unchecked.defaultof<_>
                 TargetField = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
         [<CustomOperation("addToRoot")>]
@@ -976,6 +1669,26 @@ module IngestTypesBuilders =
         member _.TargetField(state: Types.JsonProcessor, value: Types.Field) =
             { state with TargetField = Some value }
 
+        [<CustomOperation("description")>]
+        member _.Description(state: Types.JsonProcessor, value: string) =
+            { state with Description = Some value }
+
+        [<CustomOperation("if'")>]
+        member _.If(state: Types.JsonProcessor, value: Types.Script) =
+            { state with If = Some value }
+
+        [<CustomOperation("ignoreFailure")>]
+        member _.IgnoreFailure(state: Types.JsonProcessor, value: bool) =
+            { state with IgnoreFailure = Some value }
+
+        [<CustomOperation("onFailure")>]
+        member _.OnFailure(state: Types.JsonProcessor, value: Types.ProcessorContainer list) =
+            { state with OnFailure = Some value }
+
+        [<CustomOperation("tag")>]
+        member _.Tag(state: Types.JsonProcessor, value: string) =
+            { state with Tag = Some value }
+
     let jsonProcessor = JsonProcessorBuilder()
 
     type KeyValueProcessorBuilder() =
@@ -992,6 +1705,11 @@ module IngestTypesBuilders =
                 TrimKey = None
                 TrimValue = None
                 ValueSplit = Unchecked.defaultof<_>
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
         [<CustomOperation("excludeKeys")>]
@@ -1038,6 +1756,26 @@ module IngestTypesBuilders =
         member _.ValueSplit(state: Types.KeyValueProcessor, value: string) =
             { state with ValueSplit = value }
 
+        [<CustomOperation("description")>]
+        member _.Description(state: Types.KeyValueProcessor, value: string) =
+            { state with Description = Some value }
+
+        [<CustomOperation("if'")>]
+        member _.If(state: Types.KeyValueProcessor, value: Types.Script) =
+            { state with If = Some value }
+
+        [<CustomOperation("ignoreFailure")>]
+        member _.IgnoreFailure(state: Types.KeyValueProcessor, value: bool) =
+            { state with IgnoreFailure = Some value }
+
+        [<CustomOperation("onFailure")>]
+        member _.OnFailure(state: Types.KeyValueProcessor, value: Types.ProcessorContainer list) =
+            { state with OnFailure = Some value }
+
+        [<CustomOperation("tag")>]
+        member _.Tag(state: Types.KeyValueProcessor, value: string) =
+            { state with Tag = Some value }
+
     let keyValueProcessor = KeyValueProcessorBuilder()
 
     type LowercaseProcessorBuilder() =
@@ -1046,6 +1784,11 @@ module IngestTypesBuilders =
                 Field = Unchecked.defaultof<_>
                 IgnoreMissing = None
                 TargetField = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
         [<CustomOperation("field")>]
@@ -1060,6 +1803,26 @@ module IngestTypesBuilders =
         member _.TargetField(state: Types.LowercaseProcessor, value: Types.Field) =
             { state with TargetField = Some value }
 
+        [<CustomOperation("description")>]
+        member _.Description(state: Types.LowercaseProcessor, value: string) =
+            { state with Description = Some value }
+
+        [<CustomOperation("if'")>]
+        member _.If(state: Types.LowercaseProcessor, value: Types.Script) =
+            { state with If = Some value }
+
+        [<CustomOperation("ignoreFailure")>]
+        member _.IgnoreFailure(state: Types.LowercaseProcessor, value: bool) =
+            { state with IgnoreFailure = Some value }
+
+        [<CustomOperation("onFailure")>]
+        member _.OnFailure(state: Types.LowercaseProcessor, value: Types.ProcessorContainer list) =
+            { state with OnFailure = Some value }
+
+        [<CustomOperation("tag")>]
+        member _.Tag(state: Types.LowercaseProcessor, value: string) =
+            { state with Tag = Some value }
+
     let lowercaseProcessor = LowercaseProcessorBuilder()
 
     type NetworkDirectionProcessorBuilder() =
@@ -1071,6 +1834,11 @@ module IngestTypesBuilders =
                 InternalNetworks = None
                 InternalNetworksField = None
                 IgnoreMissing = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
         [<CustomOperation("sourceIp")>]
@@ -1096,6 +1864,26 @@ module IngestTypesBuilders =
         [<CustomOperation("ignoreMissing")>]
         member _.IgnoreMissing(state: Types.NetworkDirectionProcessor, value: bool) =
             { state with IgnoreMissing = Some value }
+
+        [<CustomOperation("description")>]
+        member _.Description(state: Types.NetworkDirectionProcessor, value: string) =
+            { state with Description = Some value }
+
+        [<CustomOperation("if'")>]
+        member _.If(state: Types.NetworkDirectionProcessor, value: Types.Script) =
+            { state with If = Some value }
+
+        [<CustomOperation("ignoreFailure")>]
+        member _.IgnoreFailure(state: Types.NetworkDirectionProcessor, value: bool) =
+            { state with IgnoreFailure = Some value }
+
+        [<CustomOperation("onFailure")>]
+        member _.OnFailure(state: Types.NetworkDirectionProcessor, value: Types.ProcessorContainer list) =
+            { state with OnFailure = Some value }
+
+        [<CustomOperation("tag")>]
+        member _.Tag(state: Types.NetworkDirectionProcessor, value: string) =
+            { state with Tag = Some value }
 
     let networkDirectionProcessor = NetworkDirectionProcessorBuilder()
 
@@ -1182,6 +1970,48 @@ module IngestTypesBuilders =
             { state with Processors = value }
 
     let pipelineConfig = PipelineConfigBuilder()
+
+    type PipelineProcessorBuilder() =
+        member _.Yield(_: unit) : Types.PipelineProcessor =
+            {
+                Name = Unchecked.defaultof<_>
+                IgnoreMissingPipeline = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
+            }
+
+        [<CustomOperation("name")>]
+        member _.Name(state: Types.PipelineProcessor, value: Types.Name) =
+            { state with Name = value }
+
+        [<CustomOperation("ignoreMissingPipeline")>]
+        member _.IgnoreMissingPipeline(state: Types.PipelineProcessor, value: bool) =
+            { state with IgnoreMissingPipeline = Some value }
+
+        [<CustomOperation("description")>]
+        member _.Description(state: Types.PipelineProcessor, value: string) =
+            { state with Description = Some value }
+
+        [<CustomOperation("if'")>]
+        member _.If(state: Types.PipelineProcessor, value: Types.Script) =
+            { state with If = Some value }
+
+        [<CustomOperation("ignoreFailure")>]
+        member _.IgnoreFailure(state: Types.PipelineProcessor, value: bool) =
+            { state with IgnoreFailure = Some value }
+
+        [<CustomOperation("onFailure")>]
+        member _.OnFailure(state: Types.PipelineProcessor, value: Types.ProcessorContainer list) =
+            { state with OnFailure = Some value }
+
+        [<CustomOperation("tag")>]
+        member _.Tag(state: Types.PipelineProcessor, value: string) =
+            { state with Tag = Some value }
+
+    let pipelineProcessor = PipelineProcessorBuilder()
 
     type PipelineProcessorResultBuilder() =
         member _.Yield(_: unit) : Types.PipelineProcessorResult =
@@ -1408,6 +2238,11 @@ module IngestTypesBuilders =
                 IgnoreMissing = None
                 SkipIfUnlicensed = None
                 TraceRedact = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
         [<CustomOperation("field")>]
@@ -1442,6 +2277,26 @@ module IngestTypesBuilders =
         member _.TraceRedact(state: Types.RedactProcessor, value: bool) =
             { state with TraceRedact = Some value }
 
+        [<CustomOperation("description")>]
+        member _.Description(state: Types.RedactProcessor, value: string) =
+            { state with Description = Some value }
+
+        [<CustomOperation("if'")>]
+        member _.If(state: Types.RedactProcessor, value: Types.Script) =
+            { state with If = Some value }
+
+        [<CustomOperation("ignoreFailure")>]
+        member _.IgnoreFailure(state: Types.RedactProcessor, value: bool) =
+            { state with IgnoreFailure = Some value }
+
+        [<CustomOperation("onFailure")>]
+        member _.OnFailure(state: Types.RedactProcessor, value: Types.ProcessorContainer list) =
+            { state with OnFailure = Some value }
+
+        [<CustomOperation("tag")>]
+        member _.Tag(state: Types.RedactProcessor, value: string) =
+            { state with Tag = Some value }
+
     let redactProcessor = RedactProcessorBuilder()
 
     type RegisteredDomainProcessorBuilder() =
@@ -1450,6 +2305,11 @@ module IngestTypesBuilders =
                 Field = Unchecked.defaultof<_>
                 TargetField = None
                 IgnoreMissing = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
         [<CustomOperation("field")>]
@@ -1464,6 +2324,26 @@ module IngestTypesBuilders =
         member _.IgnoreMissing(state: Types.RegisteredDomainProcessor, value: bool) =
             { state with IgnoreMissing = Some value }
 
+        [<CustomOperation("description")>]
+        member _.Description(state: Types.RegisteredDomainProcessor, value: string) =
+            { state with Description = Some value }
+
+        [<CustomOperation("if'")>]
+        member _.If(state: Types.RegisteredDomainProcessor, value: Types.Script) =
+            { state with If = Some value }
+
+        [<CustomOperation("ignoreFailure")>]
+        member _.IgnoreFailure(state: Types.RegisteredDomainProcessor, value: bool) =
+            { state with IgnoreFailure = Some value }
+
+        [<CustomOperation("onFailure")>]
+        member _.OnFailure(state: Types.RegisteredDomainProcessor, value: Types.ProcessorContainer list) =
+            { state with OnFailure = Some value }
+
+        [<CustomOperation("tag")>]
+        member _.Tag(state: Types.RegisteredDomainProcessor, value: string) =
+            { state with Tag = Some value }
+
     let registeredDomainProcessor = RegisteredDomainProcessorBuilder()
 
     type RemoveProcessorBuilder() =
@@ -1472,6 +2352,11 @@ module IngestTypesBuilders =
                 Field = Unchecked.defaultof<_>
                 Keep = None
                 IgnoreMissing = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
         [<CustomOperation("field")>]
@@ -1486,7 +2371,74 @@ module IngestTypesBuilders =
         member _.IgnoreMissing(state: Types.RemoveProcessor, value: bool) =
             { state with IgnoreMissing = Some value }
 
+        [<CustomOperation("description")>]
+        member _.Description(state: Types.RemoveProcessor, value: string) =
+            { state with Description = Some value }
+
+        [<CustomOperation("if'")>]
+        member _.If(state: Types.RemoveProcessor, value: Types.Script) =
+            { state with If = Some value }
+
+        [<CustomOperation("ignoreFailure")>]
+        member _.IgnoreFailure(state: Types.RemoveProcessor, value: bool) =
+            { state with IgnoreFailure = Some value }
+
+        [<CustomOperation("onFailure")>]
+        member _.OnFailure(state: Types.RemoveProcessor, value: Types.ProcessorContainer list) =
+            { state with OnFailure = Some value }
+
+        [<CustomOperation("tag")>]
+        member _.Tag(state: Types.RemoveProcessor, value: string) =
+            { state with Tag = Some value }
+
     let removeProcessor = RemoveProcessorBuilder()
+
+    type RenameProcessorBuilder() =
+        member _.Yield(_: unit) : Types.RenameProcessor =
+            {
+                Field = Unchecked.defaultof<_>
+                IgnoreMissing = None
+                TargetField = Unchecked.defaultof<_>
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
+            }
+
+        [<CustomOperation("field")>]
+        member _.Field(state: Types.RenameProcessor, value: Types.Field) =
+            { state with Field = value }
+
+        [<CustomOperation("ignoreMissing")>]
+        member _.IgnoreMissing(state: Types.RenameProcessor, value: bool) =
+            { state with IgnoreMissing = Some value }
+
+        [<CustomOperation("targetField")>]
+        member _.TargetField(state: Types.RenameProcessor, value: Types.Field) =
+            { state with TargetField = value }
+
+        [<CustomOperation("description")>]
+        member _.Description(state: Types.RenameProcessor, value: string) =
+            { state with Description = Some value }
+
+        [<CustomOperation("if'")>]
+        member _.If(state: Types.RenameProcessor, value: Types.Script) =
+            { state with If = Some value }
+
+        [<CustomOperation("ignoreFailure")>]
+        member _.IgnoreFailure(state: Types.RenameProcessor, value: bool) =
+            { state with IgnoreFailure = Some value }
+
+        [<CustomOperation("onFailure")>]
+        member _.OnFailure(state: Types.RenameProcessor, value: Types.ProcessorContainer list) =
+            { state with OnFailure = Some value }
+
+        [<CustomOperation("tag")>]
+        member _.Tag(state: Types.RenameProcessor, value: string) =
+            { state with Tag = Some value }
+
+    let renameProcessor = RenameProcessorBuilder()
 
     type RerouteProcessorBuilder() =
         member _.Yield(_: unit) : Types.RerouteProcessor =
@@ -1494,6 +2446,11 @@ module IngestTypesBuilders =
                 Destination = None
                 Dataset = None
                 Namespace = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
         [<CustomOperation("destination")>]
@@ -1501,12 +2458,32 @@ module IngestTypesBuilders =
             { state with Destination = Some value }
 
         [<CustomOperation("dataset")>]
-        member _.Dataset(state: Types.RerouteProcessor, value: System.Text.Json.JsonElement) =
+        member _.Dataset(state: Types.RerouteProcessor, value: string list) =
             { state with Dataset = Some value }
 
         [<CustomOperation("namespace'")>]
-        member _.Namespace(state: Types.RerouteProcessor, value: System.Text.Json.JsonElement) =
+        member _.Namespace(state: Types.RerouteProcessor, value: string list) =
             { state with Namespace = Some value }
+
+        [<CustomOperation("description")>]
+        member _.Description(state: Types.RerouteProcessor, value: string) =
+            { state with Description = Some value }
+
+        [<CustomOperation("if'")>]
+        member _.If(state: Types.RerouteProcessor, value: Types.Script) =
+            { state with If = Some value }
+
+        [<CustomOperation("ignoreFailure")>]
+        member _.IgnoreFailure(state: Types.RerouteProcessor, value: bool) =
+            { state with IgnoreFailure = Some value }
+
+        [<CustomOperation("onFailure")>]
+        member _.OnFailure(state: Types.RerouteProcessor, value: Types.ProcessorContainer list) =
+            { state with OnFailure = Some value }
+
+        [<CustomOperation("tag")>]
+        member _.Tag(state: Types.RerouteProcessor, value: string) =
+            { state with Tag = Some value }
 
     let rerouteProcessor = RerouteProcessorBuilder()
 
@@ -1517,6 +2494,11 @@ module IngestTypesBuilders =
                 Lang = None
                 Params = None
                 Source = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
         [<CustomOperation("id")>]
@@ -1535,6 +2517,26 @@ module IngestTypesBuilders =
         member _.Source(state: Types.ScriptProcessor, value: Types.ScriptSource) =
             { state with Source = Some value }
 
+        [<CustomOperation("description")>]
+        member _.Description(state: Types.ScriptProcessor, value: string) =
+            { state with Description = Some value }
+
+        [<CustomOperation("if'")>]
+        member _.If(state: Types.ScriptProcessor, value: Types.Script) =
+            { state with If = Some value }
+
+        [<CustomOperation("ignoreFailure")>]
+        member _.IgnoreFailure(state: Types.ScriptProcessor, value: bool) =
+            { state with IgnoreFailure = Some value }
+
+        [<CustomOperation("onFailure")>]
+        member _.OnFailure(state: Types.ScriptProcessor, value: Types.ProcessorContainer list) =
+            { state with OnFailure = Some value }
+
+        [<CustomOperation("tag")>]
+        member _.Tag(state: Types.ScriptProcessor, value: string) =
+            { state with Tag = Some value }
+
     let scriptProcessor = ScriptProcessorBuilder()
 
     type SetProcessorBuilder() =
@@ -1546,6 +2548,11 @@ module IngestTypesBuilders =
                 MediaType = None
                 Override = None
                 Value = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
         [<CustomOperation("copyFrom")>]
@@ -1572,7 +2579,69 @@ module IngestTypesBuilders =
         member _.Value(state: Types.SetProcessor, value: System.Text.Json.JsonElement) =
             { state with Value = Some value }
 
+        [<CustomOperation("description")>]
+        member _.Description(state: Types.SetProcessor, value: string) =
+            { state with Description = Some value }
+
+        [<CustomOperation("if'")>]
+        member _.If(state: Types.SetProcessor, value: Types.Script) =
+            { state with If = Some value }
+
+        [<CustomOperation("ignoreFailure")>]
+        member _.IgnoreFailure(state: Types.SetProcessor, value: bool) =
+            { state with IgnoreFailure = Some value }
+
+        [<CustomOperation("onFailure")>]
+        member _.OnFailure(state: Types.SetProcessor, value: Types.ProcessorContainer list) =
+            { state with OnFailure = Some value }
+
+        [<CustomOperation("tag")>]
+        member _.Tag(state: Types.SetProcessor, value: string) =
+            { state with Tag = Some value }
+
     let setProcessor = SetProcessorBuilder()
+
+    type SetSecurityUserProcessorBuilder() =
+        member _.Yield(_: unit) : Types.SetSecurityUserProcessor =
+            {
+                Field = Unchecked.defaultof<_>
+                Properties = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
+            }
+
+        [<CustomOperation("field")>]
+        member _.Field(state: Types.SetSecurityUserProcessor, value: Types.Field) =
+            { state with Field = value }
+
+        [<CustomOperation("properties")>]
+        member _.Properties(state: Types.SetSecurityUserProcessor, value: string list) =
+            { state with Properties = Some value }
+
+        [<CustomOperation("description")>]
+        member _.Description(state: Types.SetSecurityUserProcessor, value: string) =
+            { state with Description = Some value }
+
+        [<CustomOperation("if'")>]
+        member _.If(state: Types.SetSecurityUserProcessor, value: Types.Script) =
+            { state with If = Some value }
+
+        [<CustomOperation("ignoreFailure")>]
+        member _.IgnoreFailure(state: Types.SetSecurityUserProcessor, value: bool) =
+            { state with IgnoreFailure = Some value }
+
+        [<CustomOperation("onFailure")>]
+        member _.OnFailure(state: Types.SetSecurityUserProcessor, value: Types.ProcessorContainer list) =
+            { state with OnFailure = Some value }
+
+        [<CustomOperation("tag")>]
+        member _.Tag(state: Types.SetSecurityUserProcessor, value: string) =
+            { state with Tag = Some value }
+
+    let setSecurityUserProcessor = SetSecurityUserProcessorBuilder()
 
     type SimulateDocumentResultBuilder() =
         member _.Yield(_: unit) : Types.SimulateDocumentResult =
@@ -1602,6 +2671,11 @@ module IngestTypesBuilders =
                 Field = Unchecked.defaultof<_>
                 Order = None
                 TargetField = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
         [<CustomOperation("field")>]
@@ -1616,6 +2690,26 @@ module IngestTypesBuilders =
         member _.TargetField(state: Types.SortProcessor, value: Types.Field) =
             { state with TargetField = Some value }
 
+        [<CustomOperation("description")>]
+        member _.Description(state: Types.SortProcessor, value: string) =
+            { state with Description = Some value }
+
+        [<CustomOperation("if'")>]
+        member _.If(state: Types.SortProcessor, value: Types.Script) =
+            { state with If = Some value }
+
+        [<CustomOperation("ignoreFailure")>]
+        member _.IgnoreFailure(state: Types.SortProcessor, value: bool) =
+            { state with IgnoreFailure = Some value }
+
+        [<CustomOperation("onFailure")>]
+        member _.OnFailure(state: Types.SortProcessor, value: Types.ProcessorContainer list) =
+            { state with OnFailure = Some value }
+
+        [<CustomOperation("tag")>]
+        member _.Tag(state: Types.SortProcessor, value: string) =
+            { state with Tag = Some value }
+
     let sortProcessor = SortProcessorBuilder()
 
     type SplitProcessorBuilder() =
@@ -1626,6 +2720,11 @@ module IngestTypesBuilders =
                 PreserveTrailing = None
                 Separator = Unchecked.defaultof<_>
                 TargetField = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
         [<CustomOperation("field")>]
@@ -1648,7 +2747,59 @@ module IngestTypesBuilders =
         member _.TargetField(state: Types.SplitProcessor, value: Types.Field) =
             { state with TargetField = Some value }
 
+        [<CustomOperation("description")>]
+        member _.Description(state: Types.SplitProcessor, value: string) =
+            { state with Description = Some value }
+
+        [<CustomOperation("if'")>]
+        member _.If(state: Types.SplitProcessor, value: Types.Script) =
+            { state with If = Some value }
+
+        [<CustomOperation("ignoreFailure")>]
+        member _.IgnoreFailure(state: Types.SplitProcessor, value: bool) =
+            { state with IgnoreFailure = Some value }
+
+        [<CustomOperation("onFailure")>]
+        member _.OnFailure(state: Types.SplitProcessor, value: Types.ProcessorContainer list) =
+            { state with OnFailure = Some value }
+
+        [<CustomOperation("tag")>]
+        member _.Tag(state: Types.SplitProcessor, value: string) =
+            { state with Tag = Some value }
+
     let splitProcessor = SplitProcessorBuilder()
+
+    type TerminateProcessorBuilder() =
+        member _.Yield(_: unit) : Types.TerminateProcessor =
+            {
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
+            }
+
+        [<CustomOperation("description")>]
+        member _.Description(state: Types.TerminateProcessor, value: string) =
+            { state with Description = Some value }
+
+        [<CustomOperation("if'")>]
+        member _.If(state: Types.TerminateProcessor, value: Types.Script) =
+            { state with If = Some value }
+
+        [<CustomOperation("ignoreFailure")>]
+        member _.IgnoreFailure(state: Types.TerminateProcessor, value: bool) =
+            { state with IgnoreFailure = Some value }
+
+        [<CustomOperation("onFailure")>]
+        member _.OnFailure(state: Types.TerminateProcessor, value: Types.ProcessorContainer list) =
+            { state with OnFailure = Some value }
+
+        [<CustomOperation("tag")>]
+        member _.Tag(state: Types.TerminateProcessor, value: string) =
+            { state with Tag = Some value }
+
+    let terminateProcessor = TerminateProcessorBuilder()
 
     type TrimProcessorBuilder() =
         member _.Yield(_: unit) : Types.TrimProcessor =
@@ -1656,6 +2807,11 @@ module IngestTypesBuilders =
                 Field = Unchecked.defaultof<_>
                 IgnoreMissing = None
                 TargetField = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
         [<CustomOperation("field")>]
@@ -1670,6 +2826,26 @@ module IngestTypesBuilders =
         member _.TargetField(state: Types.TrimProcessor, value: Types.Field) =
             { state with TargetField = Some value }
 
+        [<CustomOperation("description")>]
+        member _.Description(state: Types.TrimProcessor, value: string) =
+            { state with Description = Some value }
+
+        [<CustomOperation("if'")>]
+        member _.If(state: Types.TrimProcessor, value: Types.Script) =
+            { state with If = Some value }
+
+        [<CustomOperation("ignoreFailure")>]
+        member _.IgnoreFailure(state: Types.TrimProcessor, value: bool) =
+            { state with IgnoreFailure = Some value }
+
+        [<CustomOperation("onFailure")>]
+        member _.OnFailure(state: Types.TrimProcessor, value: Types.ProcessorContainer list) =
+            { state with OnFailure = Some value }
+
+        [<CustomOperation("tag")>]
+        member _.Tag(state: Types.TrimProcessor, value: string) =
+            { state with Tag = Some value }
+
     let trimProcessor = TrimProcessorBuilder()
 
     type UppercaseProcessorBuilder() =
@@ -1678,6 +2854,11 @@ module IngestTypesBuilders =
                 Field = Unchecked.defaultof<_>
                 IgnoreMissing = None
                 TargetField = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
         [<CustomOperation("field")>]
@@ -1692,6 +2873,26 @@ module IngestTypesBuilders =
         member _.TargetField(state: Types.UppercaseProcessor, value: Types.Field) =
             { state with TargetField = Some value }
 
+        [<CustomOperation("description")>]
+        member _.Description(state: Types.UppercaseProcessor, value: string) =
+            { state with Description = Some value }
+
+        [<CustomOperation("if'")>]
+        member _.If(state: Types.UppercaseProcessor, value: Types.Script) =
+            { state with If = Some value }
+
+        [<CustomOperation("ignoreFailure")>]
+        member _.IgnoreFailure(state: Types.UppercaseProcessor, value: bool) =
+            { state with IgnoreFailure = Some value }
+
+        [<CustomOperation("onFailure")>]
+        member _.OnFailure(state: Types.UppercaseProcessor, value: Types.ProcessorContainer list) =
+            { state with OnFailure = Some value }
+
+        [<CustomOperation("tag")>]
+        member _.Tag(state: Types.UppercaseProcessor, value: string) =
+            { state with Tag = Some value }
+
     let uppercaseProcessor = UppercaseProcessorBuilder()
 
     type UriPartsProcessorBuilder() =
@@ -1702,6 +2903,11 @@ module IngestTypesBuilders =
                 KeepOriginal = None
                 RemoveIfSuccessful = None
                 TargetField = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
         [<CustomOperation("field")>]
@@ -1724,6 +2930,26 @@ module IngestTypesBuilders =
         member _.TargetField(state: Types.UriPartsProcessor, value: Types.Field) =
             { state with TargetField = Some value }
 
+        [<CustomOperation("description")>]
+        member _.Description(state: Types.UriPartsProcessor, value: string) =
+            { state with Description = Some value }
+
+        [<CustomOperation("if'")>]
+        member _.If(state: Types.UriPartsProcessor, value: Types.Script) =
+            { state with If = Some value }
+
+        [<CustomOperation("ignoreFailure")>]
+        member _.IgnoreFailure(state: Types.UriPartsProcessor, value: bool) =
+            { state with IgnoreFailure = Some value }
+
+        [<CustomOperation("onFailure")>]
+        member _.OnFailure(state: Types.UriPartsProcessor, value: Types.ProcessorContainer list) =
+            { state with OnFailure = Some value }
+
+        [<CustomOperation("tag")>]
+        member _.Tag(state: Types.UriPartsProcessor, value: string) =
+            { state with Tag = Some value }
+
     let uriPartsProcessor = UriPartsProcessorBuilder()
 
     type UrlDecodeProcessorBuilder() =
@@ -1732,6 +2958,11 @@ module IngestTypesBuilders =
                 Field = Unchecked.defaultof<_>
                 IgnoreMissing = None
                 TargetField = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
         [<CustomOperation("field")>]
@@ -1746,6 +2977,26 @@ module IngestTypesBuilders =
         member _.TargetField(state: Types.UrlDecodeProcessor, value: Types.Field) =
             { state with TargetField = Some value }
 
+        [<CustomOperation("description")>]
+        member _.Description(state: Types.UrlDecodeProcessor, value: string) =
+            { state with Description = Some value }
+
+        [<CustomOperation("if'")>]
+        member _.If(state: Types.UrlDecodeProcessor, value: Types.Script) =
+            { state with If = Some value }
+
+        [<CustomOperation("ignoreFailure")>]
+        member _.IgnoreFailure(state: Types.UrlDecodeProcessor, value: bool) =
+            { state with IgnoreFailure = Some value }
+
+        [<CustomOperation("onFailure")>]
+        member _.OnFailure(state: Types.UrlDecodeProcessor, value: Types.ProcessorContainer list) =
+            { state with OnFailure = Some value }
+
+        [<CustomOperation("tag")>]
+        member _.Tag(state: Types.UrlDecodeProcessor, value: string) =
+            { state with Tag = Some value }
+
     let urlDecodeProcessor = UrlDecodeProcessorBuilder()
 
     type UserAgentProcessorBuilder() =
@@ -1757,6 +3008,11 @@ module IngestTypesBuilders =
                 TargetField = None
                 Properties = None
                 ExtractDeviceType = None
+                Description = None
+                If = None
+                IgnoreFailure = None
+                OnFailure = None
+                Tag = None
             }
 
         [<CustomOperation("field")>]
@@ -1782,6 +3038,26 @@ module IngestTypesBuilders =
         [<CustomOperation("extractDeviceType")>]
         member _.ExtractDeviceType(state: Types.UserAgentProcessor, value: bool) =
             { state with ExtractDeviceType = Some value }
+
+        [<CustomOperation("description")>]
+        member _.Description(state: Types.UserAgentProcessor, value: string) =
+            { state with Description = Some value }
+
+        [<CustomOperation("if'")>]
+        member _.If(state: Types.UserAgentProcessor, value: Types.Script) =
+            { state with If = Some value }
+
+        [<CustomOperation("ignoreFailure")>]
+        member _.IgnoreFailure(state: Types.UserAgentProcessor, value: bool) =
+            { state with IgnoreFailure = Some value }
+
+        [<CustomOperation("onFailure")>]
+        member _.OnFailure(state: Types.UserAgentProcessor, value: Types.ProcessorContainer list) =
+            { state with OnFailure = Some value }
+
+        [<CustomOperation("tag")>]
+        member _.Tag(state: Types.UserAgentProcessor, value: string) =
+            { state with Tag = Some value }
 
     let userAgentProcessor = UserAgentProcessorBuilder()
 

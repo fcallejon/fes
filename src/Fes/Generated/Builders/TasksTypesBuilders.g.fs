@@ -51,6 +51,83 @@ module TasksTypesBuilders =
 
     let nodeTasks = NodeTasksBuilder()
 
+    type ParentTaskInfoBuilder() =
+        member _.Yield(_: unit) : Types.ParentTaskInfo =
+            {
+                Children = None
+                Action = Unchecked.defaultof<_>
+                Cancelled = None
+                Cancellable = Unchecked.defaultof<_>
+                Description = None
+                Headers = Unchecked.defaultof<_>
+                Id = Unchecked.defaultof<_>
+                Node = Unchecked.defaultof<_>
+                RunningTime = None
+                RunningTimeInNanos = Unchecked.defaultof<_>
+                StartTimeInMillis = Unchecked.defaultof<_>
+                Status = None
+                Type = Unchecked.defaultof<_>
+                ParentTaskId = None
+            }
+
+        [<CustomOperation("children")>]
+        member _.Children(state: Types.ParentTaskInfo, value: Types.TaskInfo list) =
+            { state with Children = Some value }
+
+        [<CustomOperation("action")>]
+        member _.Action(state: Types.ParentTaskInfo, value: string) =
+            { state with Action = value }
+
+        [<CustomOperation("cancelled")>]
+        member _.Cancelled(state: Types.ParentTaskInfo, value: bool) =
+            { state with Cancelled = Some value }
+
+        [<CustomOperation("cancellable")>]
+        member _.Cancellable(state: Types.ParentTaskInfo, value: bool) =
+            { state with Cancellable = value }
+
+        [<CustomOperation("description")>]
+        member _.Description(state: Types.ParentTaskInfo, value: string) =
+            { state with Description = Some value }
+
+        [<CustomOperation("headers")>]
+        member _.Headers(state: Types.ParentTaskInfo, value: Map<string, string>) =
+            { state with Headers = value }
+
+        [<CustomOperation("id")>]
+        member _.Id(state: Types.ParentTaskInfo, value: Types.Long) =
+            { state with Id = value }
+
+        [<CustomOperation("node")>]
+        member _.Node(state: Types.ParentTaskInfo, value: Types.NodeId) =
+            { state with Node = value }
+
+        [<CustomOperation("runningTime")>]
+        member _.RunningTime(state: Types.ParentTaskInfo, value: Types.Duration) =
+            { state with RunningTime = Some value }
+
+        [<CustomOperation("runningTimeInNanos")>]
+        member _.RunningTimeInNanos(state: Types.ParentTaskInfo, value: Types.DurationValue<Types.UnitNanos>) =
+            { state with RunningTimeInNanos = value }
+
+        [<CustomOperation("startTimeInMillis")>]
+        member _.StartTimeInMillis(state: Types.ParentTaskInfo, value: Types.EpochTime<Types.UnitMillis>) =
+            { state with StartTimeInMillis = value }
+
+        [<CustomOperation("status")>]
+        member _.Status(state: Types.ParentTaskInfo, value: System.Text.Json.JsonElement) =
+            { state with Status = Some value }
+
+        [<CustomOperation("type'")>]
+        member _.Type(state: Types.ParentTaskInfo, value: string) =
+            { state with Type = value }
+
+        [<CustomOperation("parentTaskId")>]
+        member _.ParentTaskId(state: Types.ParentTaskInfo, value: Types.TaskId) =
+            { state with ParentTaskId = Some value }
+
+    let parentTaskInfo = ParentTaskInfoBuilder()
+
     type TaskInfoBuilder() =
         member _.Yield(_: unit) : Types.TaskInfo =
             {
