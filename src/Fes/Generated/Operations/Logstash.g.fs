@@ -64,7 +64,7 @@ module LogstashOperations =
 
     type LogstashPutPipelineRequest = {
         Id: Types.Id
-        Document: obj
+        Document: Types.LogstashTypesPipeline
     }
 
         with

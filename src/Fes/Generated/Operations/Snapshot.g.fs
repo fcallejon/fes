@@ -253,7 +253,7 @@ module SnapshotOperations =
         MasterTimeout: Types.Duration option
         Timeout: Types.Duration option
         Verify: bool option
-        Document: obj
+        Document: Types.Repository
     }
 
         with

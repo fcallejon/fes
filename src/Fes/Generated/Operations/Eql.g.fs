@@ -58,7 +58,7 @@ module EqlOperations =
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.GET, fullPath)
             endpoint, ValueNone
 
-    type EqlGetResponse<'tEvent> = Types.EqlSearchResponseBase<'tEvent>
+    type EqlGetResponse<'TEvent> = Types.EqlSearchResponseBase<'TEvent>
 
     type EqlGetRequestBuilder() =
         member _.Yield(_: unit) : EqlGetRequest =
@@ -185,7 +185,7 @@ module EqlOperations =
             let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req)
             endpoint, ValueSome postData
 
-    type EqlSearchResponse<'tEvent> = Types.EqlSearchResponseBase<'tEvent>
+    type EqlSearchResponse<'TEvent> = Types.EqlSearchResponseBase<'TEvent>
 
     type EqlSearchRequestBuilder() =
         member _.Yield(_: unit) : EqlSearchRequest =

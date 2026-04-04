@@ -45,7 +45,7 @@ let rec resolveValueOf (ctx: ResolveContext) (v: ValueOf) : string =
         if isBuiltin tn then
             resolveBuiltin tn
         elif isGenericParam ctx tn then
-            $"'{toCamelCase tn.Name}"
+            $"'{tn.Name}"
         else
             // Look up the disambiguated name from the name map
             let resolvedName =

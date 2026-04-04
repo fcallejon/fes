@@ -15,7 +15,7 @@ module InferenceOperations =
     type InferenceChatCompletionUnifiedRequest = {
         InferenceId: Types.Id
         Timeout: Types.Duration option
-        Document: obj
+        Document: Types.RequestChatCompletion
     }
 
         with
@@ -182,7 +182,7 @@ module InferenceOperations =
     type InferenceEmbeddingRequest = {
         InferenceId: Types.Id
         Timeout: Types.Duration option
-        Document: obj
+        Document: Types.RequestEmbedding
     }
 
         with
@@ -348,7 +348,7 @@ module InferenceOperations =
         TaskType: Types.TaskType
         InferenceId: Types.Id
         Timeout: Types.Duration option
-        Document: obj
+        Document: Types.InferenceEndpoint
     }
 
         with
@@ -2760,7 +2760,7 @@ module InferenceOperations =
     type InferenceUpdateRequest = {
         InferenceId: Types.Id
         TaskType: Types.TaskType
-        Document: obj
+        Document: Types.InferenceEndpoint
     }
 
         with

@@ -15,11 +15,11 @@ let filterUsedGenerics (generics: TypeName list) (bodyText: string) =
     | gs ->
         let used =
             gs |> List.filter (fun g ->
-                let paramStr = $"'{Namespacing.toCamelCase g.Name}"
+                let paramStr = $"'{g.Name}"
                 bodyText.Contains(paramStr))
         match used with
         | [] -> ""
-        | us -> "<" + (us |> List.map (fun g -> $"'{Namespacing.toCamelCase g.Name}") |> String.concat ", ") + ">"
+        | us -> "<" + (us |> List.map (fun g -> $"'{g.Name}") |> String.concat ", ") + ">"
 
 /// Deduplicate record field names — returns properties with CodegenName set for collisions
 let dedupRecordFields (properties: Property list) : Property list =
@@ -100,7 +100,7 @@ let emitRecord (w: Writer) (isFirst: bool) (ctx: TypeResolver.ResolveContext) (n
         let genericParams =
             match generics with
             | [] -> ""
-            | gs -> "<" + (gs |> List.map (fun g -> $"'{Namespacing.toCamelCase g.Name}") |> String.concat ", ") + ">"
+            | gs -> "<" + (gs |> List.map (fun g -> $"'{g.Name}") |> String.concat ", ") + ">"
 
         let dedupedProperties = dedupRecordFields properties
 

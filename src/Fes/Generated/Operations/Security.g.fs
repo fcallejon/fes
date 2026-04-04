@@ -2047,7 +2047,7 @@ module SecurityOperations =
 
     type SecurityPutPrivilegesRequest = {
         Refresh: Types.Refresh option
-        Document: obj
+        Document: Map<string, Map<string, Types.SecurityPutPrivilegesActions>>
     }
 
         with
