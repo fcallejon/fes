@@ -125,9 +125,6 @@ let ``Index request through in-memory transport returns Ok`` () =
 
 [<Fact>]
 let ``Index request serialises document as body`` () =
-    let responseJson = """{"_index":"products","_id":"1","_version":1,"result":"created","_shards":{"total":2,"successful":1,"failed":0},"_seq_no":0,"_primary_term":1}"""
-    let transport = TestTransport.withOkResponse responseJson
-
     let doc = {| name = "wireless mouse"; category = "electronics"; price = 29.99 |}
     let req = indexRequest {
         index "products"

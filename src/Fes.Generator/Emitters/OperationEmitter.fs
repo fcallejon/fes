@@ -169,19 +169,55 @@ let private emitToEndpoint (w: Writer) (reqTypeName: string) (endpoint: Endpoint
         $"$\"{p}\""
     w.Line $"let path = {pathExpr}"
 
-    // Build query string from optional query params
-    let queryProps = request.Query |> List.filter (fun p -> not p.Required)
-    if not queryProps.IsEmpty then
-        w.Line "let queryParams ="
-        w.Indent()
-        w.Line "["
-        w.Indent()
-        for p in queryProps do
-            let fieldName = getFieldName fnm "query" p
-            w.Line $"req.{fieldName} |> Option.map (fun v -> \"{p.Name}\", Fes.Http.toQueryValue v)"
-        w.Dedent()
-        w.Line "] |> List.choose id"
-        w.Dedent()
+    // Build query string from query params (required + optional)
+    let requiredQueryProps = request.Query |> List.filter (fun p -> p.Required)
+    let optionalQueryProps = request.Query |> List.filter (fun p -> not p.Required)
+    if not requiredQueryProps.IsEmpty || not optionalQueryProps.IsEmpty then
+        match requiredQueryProps.IsEmpty, optionalQueryProps.IsEmpty with
+        | false, true ->
+            // Only required params — no Option.map needed
+            w.Line "let queryParams ="
+            w.Indent()
+            w.Line "["
+            w.Indent()
+            for p in requiredQueryProps do
+                let fieldName = getFieldName fnm "query" p
+                w.Line $"\"{p.Name}\", Fes.Http.toQueryValue req.{fieldName}"
+            w.Dedent()
+            w.Line "]"
+            w.Dedent()
+        | true, false ->
+            // Only optional params — original behavior
+            w.Line "let queryParams ="
+            w.Indent()
+            w.Line "["
+            w.Indent()
+            for p in optionalQueryProps do
+                let fieldName = getFieldName fnm "query" p
+                w.Line $"req.{fieldName} |> Option.map (fun v -> \"{p.Name}\", Fes.Http.toQueryValue v)"
+            w.Dedent()
+            w.Line "] |> List.choose id"
+            w.Dedent()
+        | false, false ->
+            // Both required and optional params
+            w.Line "let queryParams ="
+            w.Indent()
+            w.Line "["
+            w.Indent()
+            for p in requiredQueryProps do
+                let fieldName = getFieldName fnm "query" p
+                w.Line $"\"{p.Name}\", Fes.Http.toQueryValue req.{fieldName}"
+            w.Dedent()
+            w.Line "] @"
+            w.Line "(["
+            w.Indent()
+            for p in optionalQueryProps do
+                let fieldName = getFieldName fnm "query" p
+                w.Line $"req.{fieldName} |> Option.map (fun v -> \"{p.Name}\", Fes.Http.toQueryValue v)"
+            w.Dedent()
+            w.Line "] |> List.choose id)"
+            w.Dedent()
+        | true, true -> () // impossible — outer if guards this
         w.Line "let queryString ="
         w.Indent()
         w.Line "if List.isEmpty queryParams then \"\""
@@ -317,8 +353,8 @@ let private emitPipeFunctions (w: Writer) (ctx: TypeResolver.ResolveContext) (re
     w.Indent()
 
     for p in queryProps do
-        let funcName = $"with{Namespacing.toPascalCase p.Name}"
         let fieldName = getFieldName fnm "query" p
+        let funcName = $"with{Namespacing.toPascalCase fieldName}"
         let fieldType = TypeResolver.resolveValueOf ctx p.Type
         if p.Required then
             w.Line $"let {funcName} (value: {fieldType}) (req: {fullTypeName}) ="
