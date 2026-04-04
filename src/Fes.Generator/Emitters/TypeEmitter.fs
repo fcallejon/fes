@@ -87,6 +87,17 @@ let emitRecordField (w: Writer) (ctx: TypeResolver.ResolveContext) (p: Property)
 
     w.Line $"{fieldName}: {finalType}"
 
+/// Generate the default value expression for a required field.
+/// LiteralValue fields produce their fixed value; others fall back to Unchecked.defaultof.
+let defaultValueExpr (p: Property) : string =
+    match p.Type with
+    | ValueOf.LiteralValue (LiteralValue.String s) -> $"\"{s}\""
+    | ValueOf.LiteralValue (LiteralValue.Bool b) -> if b then "true" else "false"
+    | ValueOf.LiteralValue (LiteralValue.Number n) ->
+        let s = n.ToString(System.Globalization.CultureInfo.InvariantCulture)
+        if s.Contains('.') then s else $"{s}.0"
+    | _ -> "Unchecked.defaultof<_>"
+
 let emitRecord (w: Writer) (isFirst: bool) (ctx: TypeResolver.ResolveContext) (name: string) (properties: Property list) (generics: TypeName list) (description: string option) =
     w.DocComment description
     let keyword = w.TypeKeyword isFirst
@@ -118,6 +129,26 @@ let emitRecord (w: Writer) (isFirst: bool) (ctx: TypeResolver.ResolveContext) (n
                 emitRecordField w ctx p
         w.Dedent()
         w.Line "}"
+
+        // Generate static member empty for non-generic records
+        if generics.IsEmpty then
+            w.BlankLine()
+            w.Indent()
+            w.Line "with"
+            w.Line $"static member empty : {name} ="
+            w.Indent()
+            w.Line "{"
+            w.Indent()
+            for p in dedupedProperties do
+                let fieldName = getRecordFieldName p
+                if p.Required then
+                    w.Line $"{fieldName} = {defaultValueExpr p}"
+                else
+                    w.Line $"{fieldName} = None"
+            w.Dedent()
+            w.Line "}"
+            w.Dedent()
+            w.Dedent()
 
     w.BlankLine()
 

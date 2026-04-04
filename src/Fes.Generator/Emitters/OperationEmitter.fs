@@ -233,11 +233,11 @@ let private emitCeBuilder (w: Writer) (ctx: TypeResolver.ResolveContext) (reqTyp
         w.Line $"{fieldName} = Unchecked.defaultof<_>"
     for p in queryProps do
         let fieldName = getFieldName fnm "query" p
-        if p.Required then w.Line $"{fieldName} = Unchecked.defaultof<_>"
+        if p.Required then w.Line $"{fieldName} = {TypeEmitter.defaultValueExpr p}"
         else w.Line $"{fieldName} = None"
     for p in bodyProps do
         let fieldName = getFieldName fnm "body" p
-        if p.Required then w.Line $"{fieldName} = Unchecked.defaultof<_>"
+        if p.Required then w.Line $"{fieldName} = {TypeEmitter.defaultValueExpr p}"
         else w.Line $"{fieldName} = None"
     if hasValueBody then
         w.Line "Document = Unchecked.defaultof<_>"

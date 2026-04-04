@@ -12,7 +12,7 @@ module TypesMappingBuilders =
     type AggregateMetricDoublePropertyBuilder() =
         member _.Yield(_: unit) : Types.AggregateMetricDoubleProperty =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "aggregate_metric_double"
                 DefaultMetric = Unchecked.defaultof<_>
                 IgnoreMalformed = None
                 Metrics = Unchecked.defaultof<_>
@@ -52,7 +52,7 @@ module TypesMappingBuilders =
                 Script = None
                 OnScriptError = None
                 TimeSeriesDimension = None
-                Type = Unchecked.defaultof<_>
+                Type = "boolean"
             }
 
         [<CustomOperation("boost")>]
@@ -176,7 +176,7 @@ module TypesMappingBuilders =
                 PreservePositionIncrements = None
                 PreserveSeparators = None
                 SearchAnalyzer = None
-                Type = Unchecked.defaultof<_>
+                Type = "completion"
             }
 
         [<CustomOperation("analyzer")>]
@@ -237,7 +237,7 @@ module TypesMappingBuilders =
                 OnScriptError = None
                 NullValue = None
                 PrecisionStep = None
-                Type = Unchecked.defaultof<_>
+                Type = "date_nanos"
             }
 
         [<CustomOperation("boost")>]
@@ -291,7 +291,7 @@ module TypesMappingBuilders =
                 NullValue = None
                 PrecisionStep = None
                 Locale = None
-                Type = Unchecked.defaultof<_>
+                Type = "date"
             }
 
         [<CustomOperation("boost")>]
@@ -380,7 +380,7 @@ module TypesMappingBuilders =
     type DenseVectorPropertyBuilder() =
         member _.Yield(_: unit) : Types.DenseVectorProperty =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "dense_vector"
                 Dims = None
                 ElementType = None
                 Index = None
@@ -417,7 +417,7 @@ module TypesMappingBuilders =
     type DynamicPropertyBuilder() =
         member _.Yield(_: unit) : Types.DynamicProperty =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "{dynamic_type}"
                 Enabled = None
                 NullValue = None
                 Boost = None
@@ -557,7 +557,7 @@ module TypesMappingBuilders =
                 Similarity = None
                 SplitQueriesOnWhitespace = None
                 TimeSeriesDimensions = None
-                Type = Unchecked.defaultof<_>
+                Type = "flattened"
             }
 
         [<CustomOperation("boost")>]
@@ -615,7 +615,7 @@ module TypesMappingBuilders =
                 Index = None
                 OnScriptError = None
                 Script = None
-                Type = Unchecked.defaultof<_>
+                Type = "geo_point"
                 TimeSeriesMetric = None
             }
 
@@ -662,7 +662,7 @@ module TypesMappingBuilders =
                 Index = None
                 Orientation = None
                 Strategy = None
-                Type = Unchecked.defaultof<_>
+                Type = "geo_shape"
             }
 
         [<CustomOperation("coerce")>]
@@ -700,7 +700,7 @@ module TypesMappingBuilders =
             {
                 IgnoreMalformed = None
                 TimeSeriesMetric = None
-                Type = Unchecked.defaultof<_>
+                Type = "histogram"
             }
 
         [<CustomOperation("ignoreMalformed")>]
@@ -720,7 +720,7 @@ module TypesMappingBuilders =
     type IcuCollationPropertyBuilder() =
         member _.Yield(_: unit) : Types.IcuCollationProperty =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "icu_collation_keyword"
                 Norms = None
                 IndexOptions = None
                 Index = None
@@ -819,7 +819,7 @@ module TypesMappingBuilders =
                 OnScriptError = None
                 Script = None
                 TimeSeriesDimension = None
-                Type = Unchecked.defaultof<_>
+                Type = "ip"
             }
 
         [<CustomOperation("boost")>]
@@ -861,7 +861,7 @@ module TypesMappingBuilders =
             {
                 Relations = None
                 EagerGlobalOrdinals = None
-                Type = Unchecked.defaultof<_>
+                Type = "join"
             }
 
         [<CustomOperation("relations")>]
@@ -893,7 +893,7 @@ module TypesMappingBuilders =
                 Similarity = None
                 SplitQueriesOnWhitespace = None
                 TimeSeriesDimension = None
-                Type = Unchecked.defaultof<_>
+                Type = "keyword"
             }
 
         [<CustomOperation("boost")>]
@@ -953,7 +953,7 @@ module TypesMappingBuilders =
     type MatchOnlyTextPropertyBuilder() =
         member _.Yield(_: unit) : Types.MatchOnlyTextProperty =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "match_only_text"
                 Fields = None
                 Meta = None
                 CopyTo = None
@@ -983,7 +983,7 @@ module TypesMappingBuilders =
                 Enabled = None
                 IncludeInParent = None
                 IncludeInRoot = None
-                Type = Unchecked.defaultof<_>
+                Type = "nested"
             }
 
         [<CustomOperation("enabled")>]
@@ -1106,7 +1106,7 @@ module TypesMappingBuilders =
                 IgnoreMalformed = None
                 IgnoreZValue = None
                 NullValue = None
-                Type = Unchecked.defaultof<_>
+                Type = "point"
             }
 
         [<CustomOperation("ignoreMalformed")>]
@@ -1189,7 +1189,7 @@ module TypesMappingBuilders =
     type RankVectorPropertyBuilder() =
         member _.Yield(_: unit) : Types.RankVectorProperty =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "rank_vectors"
                 ElementType = None
                 Dims = None
             }
@@ -1258,7 +1258,7 @@ module TypesMappingBuilders =
     type ScaledFloatNumberPropertyBuilder() =
         member _.Yield(_: unit) : Types.ScaledFloatNumberProperty =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "scaled_float"
                 NullValue = None
                 ScalingFactor = None
             }
@@ -1289,7 +1289,7 @@ module TypesMappingBuilders =
                 SearchQuoteAnalyzer = None
                 Similarity = None
                 TermVector = None
-                Type = Unchecked.defaultof<_>
+                Type = "search_as_you_type"
             }
 
         [<CustomOperation("analyzer")>]
@@ -1354,7 +1354,7 @@ module TypesMappingBuilders =
     type SemanticTextPropertyBuilder() =
         member _.Yield(_: unit) : Types.SemanticTextProperty =
             {
-                Type = Unchecked.defaultof<_>
+                Type = "semantic_text"
                 Meta = None
                 InferenceId = None
                 SearchInferenceId = None
@@ -1400,7 +1400,7 @@ module TypesMappingBuilders =
                 IgnoreMalformed = None
                 IgnoreZValue = None
                 Orientation = None
-                Type = Unchecked.defaultof<_>
+                Type = "shape"
             }
 
         [<CustomOperation("coerce")>]
@@ -1483,7 +1483,7 @@ module TypesMappingBuilders =
         member _.Yield(_: unit) : Types.SparseVectorProperty =
             {
                 Store = None
-                Type = Unchecked.defaultof<_>
+                Type = "sparse_vector"
                 IndexOptions = None
             }
 
@@ -1546,7 +1546,7 @@ module TypesMappingBuilders =
                 SearchQuoteAnalyzer = None
                 Similarity = None
                 TermVector = None
-                Type = Unchecked.defaultof<_>
+                Type = "text"
             }
 
         [<CustomOperation("analyzer")>]
@@ -1623,7 +1623,7 @@ module TypesMappingBuilders =
                 Index = None
                 NullValue = None
                 EnablePositionIncrements = None
-                Type = Unchecked.defaultof<_>
+                Type = "token_count"
             }
 
         [<CustomOperation("analyzer")>]

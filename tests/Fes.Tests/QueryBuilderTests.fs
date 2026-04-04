@@ -31,10 +31,7 @@ let ``Query.match' creates Match case with field`` () =
 
 [<Fact>]
 let ``Query.term wraps TermQuery with field name`` () =
-    let tq : Types.TermQuery = {
-        CaseInsensitive = None
-        Value = Unchecked.defaultof<_>
-    }
+    let tq = Types.TermQuery.empty
     let q = Query.term "status" tq
     let json = Fes.Json.serialize q
     json |> should haveSubstring "\"term\""
@@ -55,7 +52,7 @@ let ``matchQuery CE sets query field`` () =
 [<Fact>]
 let ``matchQuery CE sets optional fields`` () =
     let mq : Types.MatchQuery = matchQuery {
-        query (Unchecked.defaultof<_>)
+        query (System.Text.Json.JsonDocument.Parse("\"test\"").RootElement)
         analyzer "english"
     }
     mq.Analyzer |> should equal (Some "english")
