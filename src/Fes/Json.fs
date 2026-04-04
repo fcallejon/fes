@@ -78,3 +78,9 @@ module JsonRes =
             TaskResult.retn result
         with ex ->
             Task.FromResult(Result.Error ex)
+
+    /// Deserializes JSON directly from a stream, avoiding an intermediate string allocation.
+    /// Preferred over ofString for large HTTP responses.
+    let inline ofStream<'a> (stream: System.IO.Stream) : TaskResult<'a, exn> =
+        JsonSerializer.DeserializeAsync<'a>(stream, JsonSettings.options).AsTask()
+        |> TaskResult.ofTask

@@ -64,12 +64,12 @@ module Http =
             |> TaskResult.ofTask
 
         let inline toResult (response: ResponseMsg) =
-            let body = asString response
             if response.IsSuccessStatusCode then
-                body
-                |> TaskResult.bind JsonRes.ofString
+                response.Content.ReadAsStreamAsync()
+                |> TaskResult.ofTask
+                |> TaskResult.bind JsonRes.ofStream
             else
-                body
+                asString response
                 |> TaskHelpers.map (Result.bind ElasticsearchException.ofString)
                 |> TaskHelpers.map (function | Ok e -> e :> exn |> Error | Error e -> Error e)
 
