@@ -30,6 +30,7 @@
         <Compile Include="Json.fs"/>
         <Compile Include="Http.fs"/>
         <Compile Include="Transport.fs"/>
+        <Compile Include="Mapping.fs"/>
     </ItemGroup>
     <ItemGroup>
         <!-- Generated builders -->
