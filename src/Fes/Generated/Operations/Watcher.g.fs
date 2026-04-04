@@ -680,4 +680,3 @@ module WatcherOperations =
             { req with IndexAutoExpandReplicas = Some value }
         let withIndexNumberOfReplicas (value: Types.Integer) (req: WatcherUpdateSettingsRequest) =
             { req with IndexNumberOfReplicas = Some value }
-
