@@ -7,15 +7,15 @@ module Prelude =
     let inline konst x _ = x
 
     let inline teeOk f r =
-        (function
-        | Ok x -> f x
-        | Error _ -> ()) |> ignore
+        match r with
+        | Ok x -> f x |> ignore
+        | Error _ -> ()
         r
 
     let inline teeError f r =
-        (function
+        match r with
         | Ok _ -> ()
-        | Error x -> f x) |> ignore
+        | Error x -> f x |> ignore
         r
 
 [<AutoOpen>]
