@@ -102,3 +102,60 @@ let ``Aggregation DU serialises correctly`` () =
     json |> should haveSubstring "\"terms\""
     json |> should haveSubstring "\"category\""
     json |> should haveSubstring "10"
+
+// ============================================================================
+// Index (document indexing) pipeline tests
+// ============================================================================
+
+[<Fact>]
+let ``Index request through in-memory transport returns Ok`` () =
+    let responseJson = """{"_index":"products","_id":"1","_version":1,"result":"created","_shards":{"total":2,"successful":1,"failed":0},"_seq_no":0,"_primary_term":1}"""
+    let transport = TestTransport.withOkResponse responseJson
+
+    let req = indexRequest {
+        index "products"
+        id "1"
+        document {| name = "laptop"; price = 999.99 |}
+    }
+
+    let result : TaskResult<System.Text.Json.JsonElement, exn> = ES.sendAsync transport req
+    let taskResult = result.GetAwaiter().GetResult()
+
+    match taskResult with
+    | Ok json ->
+        json.GetProperty("result").GetString() |> should equal "created"
+    | Error e -> failwith $"Expected Ok but got Error: {e.Message}"
+
+[<Fact>]
+let ``Index request serialises document as body`` () =
+    let responseJson = """{"_index":"products","_id":"1","_version":1,"result":"created","_shards":{"total":2,"successful":1,"failed":0},"_seq_no":0,"_primary_term":1}"""
+    let transport = TestTransport.withOkResponse responseJson
+
+    let doc = {| name = "wireless mouse"; category = "electronics"; price = 29.99 |}
+    let req = indexRequest {
+        index "products"
+        id "1"
+        document doc
+    }
+
+    let (_, postData) = IndexRequest.ToEndpoint(req)
+    postData.IsSome |> should be True
+
+[<Fact>]
+let ``Index request with complex document`` () =
+    let responseJson = """{"_index":"products","_id":"1","_version":1,"result":"created","_shards":{"total":2,"successful":1,"failed":0},"_seq_no":0,"_primary_term":1}"""
+    let transport = TestTransport.withOkResponse responseJson
+
+    let doc = {| name = "laptop"; specs = {| ram = 16; cpu = "i7" |}; tags = [| "electronics"; "sale" |] |}
+    let req = indexRequest {
+        index "products"
+        id "complex-1"
+        document doc
+    }
+
+    let result : TaskResult<System.Text.Json.JsonElement, exn> = ES.sendAsync transport req
+    let taskResult = result.GetAwaiter().GetResult()
+
+    match taskResult with
+    | Ok _ -> ()
+    | Error e -> failwith $"Expected Ok but got Error: {e.Message}"

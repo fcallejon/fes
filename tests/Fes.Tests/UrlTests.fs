@@ -86,3 +86,32 @@ let ``GET /_cat/indices/products`` () =
     let (ep, _) = CatIndicesRequest.ToEndpoint(req)
     ep.Method |> should equal HttpMethod.GET
     ep.PathAndQuery |> should startWith "/_cat/indices/products"
+
+// ============================================================================
+// Index (document indexing)
+// ============================================================================
+
+[<Fact>]
+let ``POST /products/_doc/1 for index request`` () =
+    let req = indexRequest {
+        index "products"
+        id "1"
+        document {| name = "laptop" |}
+    }
+    let (ep, body) = IndexRequest.ToEndpoint(req)
+    ep.Method |> should equal HttpMethod.POST
+    ep.PathAndQuery |> should equal "/products/_doc/1"
+    body.IsSome |> should be True
+
+[<Fact>]
+let ``Index request includes query params`` () =
+    let req = indexRequest {
+        index "products"
+        id "1"
+        document {| name = "laptop" |}
+        refresh Types.Refresh.True
+        pipeline "my-pipeline"
+    }
+    let (ep, _) = IndexRequest.ToEndpoint(req)
+    ep.PathAndQuery |> should haveSubstring "refresh="
+    ep.PathAndQuery |> should haveSubstring "pipeline=my-pipeline"
