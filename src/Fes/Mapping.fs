@@ -236,5 +236,64 @@ module Mapping =
                 Types.Property.SearchAsYouTypeProperty { p with Fields = fields }
             | Types.Property.WildcardProperty p ->
                 Types.Property.WildcardProperty { p with Fields = fields }
-            | _ -> prop   // types without Fields support — return unchanged
+            | Types.Property.BinaryProperty p ->
+                Types.Property.BinaryProperty { p with Fields = fields }
+            | Types.Property.JoinProperty p ->
+                Types.Property.JoinProperty { p with Fields = fields }
+            | Types.Property.MatchOnlyTextProperty p ->
+                Types.Property.MatchOnlyTextProperty { p with Fields = fields }
+            | Types.Property.PercolatorProperty p ->
+                Types.Property.PercolatorProperty { p with Fields = fields }
+            | Types.Property.RankFeatureProperty p ->
+                Types.Property.RankFeatureProperty { p with Fields = fields }
+            | Types.Property.RankFeaturesProperty p ->
+                Types.Property.RankFeaturesProperty { p with Fields = fields }
+            | Types.Property.VersionProperty p ->
+                Types.Property.VersionProperty { p with Fields = fields }
+            | Types.Property.AggregateMetricDoubleProperty p ->
+                Types.Property.AggregateMetricDoubleProperty { p with Fields = fields }
+            | Types.Property.DenseVectorProperty p ->
+                Types.Property.DenseVectorProperty { p with Fields = fields }
+            | Types.Property.FlattenedProperty p ->
+                Types.Property.FlattenedProperty { p with Fields = fields }
+            | Types.Property.PassthroughObjectProperty p ->
+                Types.Property.PassthroughObjectProperty { p with Fields = fields }
+            | Types.Property.RankVectorProperty p ->
+                Types.Property.RankVectorProperty { p with Fields = fields }
+            | Types.Property.SemanticTextProperty p ->
+                Types.Property.SemanticTextProperty { p with Fields = fields }
+            | Types.Property.SparseVectorProperty p ->
+                Types.Property.SparseVectorProperty { p with Fields = fields }
+            | Types.Property.ConstantKeywordProperty p ->
+                Types.Property.ConstantKeywordProperty { p with Fields = fields }
+            | Types.Property.CountedKeywordProperty p ->
+                Types.Property.CountedKeywordProperty { p with Fields = fields }
+            | Types.Property.FieldAliasProperty p ->
+                Types.Property.FieldAliasProperty { p with Fields = fields }
+            | Types.Property.HistogramProperty p ->
+                Types.Property.HistogramProperty { p with Fields = fields }
+            | Types.Property.ExponentialHistogramProperty p ->
+                Types.Property.ExponentialHistogramProperty { p with Fields = fields }
+            | Types.Property.Murmur3HashProperty p ->
+                Types.Property.Murmur3HashProperty { p with Fields = fields }
+            | Types.Property.PointProperty p ->
+                Types.Property.PointProperty { p with Fields = fields }
+            | Types.Property.ShapeProperty p ->
+                Types.Property.ShapeProperty { p with Fields = fields }
+            | Types.Property.IcuCollationProperty p ->
+                Types.Property.IcuCollationProperty { p with Fields = fields }
+            | Types.Property.DateRangeProperty p ->
+                Types.Property.DateRangeProperty { p with Fields = fields }
+            | Types.Property.DoubleRangeProperty p ->
+                Types.Property.DoubleRangeProperty { p with Fields = fields }
+            | Types.Property.FloatRangeProperty p ->
+                Types.Property.FloatRangeProperty { p with Fields = fields }
+            | Types.Property.IntegerRangeProperty p ->
+                Types.Property.IntegerRangeProperty { p with Fields = fields }
+            | Types.Property.IpRangeProperty p ->
+                Types.Property.IpRangeProperty { p with Fields = fields }
+            | Types.Property.LongRangeProperty p ->
+                Types.Property.LongRangeProperty { p with Fields = fields }
+            | Types.Property.DynamicProperty _
+            | Types.Property.Unknown _ -> prop
         name, updated

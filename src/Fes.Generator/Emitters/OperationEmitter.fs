@@ -237,7 +237,8 @@ let private emitToEndpoint (w: Writer) (reqTypeName: string) (endpoint: Endpoint
     | Body.Value _ ->
         w.Line "let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req.Document)"
         w.Line "endpoint, ValueSome postData"
-    | _ ->
+    | Body.Properties _ // empty properties — no body
+    | Body.NoBody ->
         w.Line "endpoint, ValueNone"
 
     w.Dedent()
@@ -451,7 +452,10 @@ let emitEndpoint (w: Writer) (index: TypeIndex.TypeIndex) (endpoint: Endpoint) =
             | Body.NoBody ->
                 w.Line $"type {respTN} = unit"
             w.BlankLine()
-        | _ -> ()
+        | TypeDefinition.Interface _
+        | TypeDefinition.Request _
+        | TypeDefinition.Enum _
+        | TypeDefinition.TypeAlias _ -> ()
 
         // CE builder — skip for empty request types (marker DUs)
         let hasAnyProps = not pathProps.IsEmpty || not queryProps.IsEmpty || not bodyProps.IsEmpty || hasValueBody
@@ -463,7 +467,10 @@ let emitEndpoint (w: Writer) (index: TypeIndex.TypeIndex) (endpoint: Endpoint) =
         if not queryProps.IsEmpty || not bodyProps.IsEmpty then
             emitPipeFunctions w ctx reqTN pipeModuleName fnm queryProps bodyProps request.Generics
 
-    | _ ->
+    | TypeDefinition.Interface _
+    | TypeDefinition.Response _
+    | TypeDefinition.Enum _
+    | TypeDefinition.TypeAlias _ ->
         w.Line $"// Skipping endpoint {endpoint.Name}: request type is not a Request definition"
         w.BlankLine()
 

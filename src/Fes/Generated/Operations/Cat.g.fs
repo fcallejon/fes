@@ -402,7 +402,7 @@ module CatOperations =
     let catFielddataRequest = CatFielddataRequestBuilder()
 
     module Fielddata =
-        let withFields (value: Types.Fields) (req: CatFielddataRequest) =
+        let withQueryFields (value: Types.Fields) (req: CatFielddataRequest) =
             { req with queryFields = Some value }
         let withH (value: Types.CatFieldDataColumns) (req: CatFielddataRequest) =
             { req with H = Some value }
@@ -1232,7 +1232,7 @@ module CatOperations =
             { req with ActiveOnly = Some value }
         let withDetailed (value: bool) (req: CatRecoveryRequest) =
             { req with Detailed = Some value }
-        let withIndex (value: Types.Indices) (req: CatRecoveryRequest) =
+        let withQueryIndex (value: Types.Indices) (req: CatRecoveryRequest) =
             { req with queryIndex = Some value }
         let withH (value: Types.CatRecoveryColumns) (req: CatRecoveryRequest) =
             { req with H = Some value }

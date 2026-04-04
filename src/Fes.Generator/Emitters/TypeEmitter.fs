@@ -96,7 +96,11 @@ let defaultValueExpr (p: Property) : string =
     | ValueOf.LiteralValue (LiteralValue.Number n) ->
         let s = n.ToString(System.Globalization.CultureInfo.InvariantCulture)
         if s.Contains('.') then s else $"{s}.0"
-    | _ -> "Unchecked.defaultof<_>"
+    | ValueOf.InstanceOf _
+    | ValueOf.ArrayOf _
+    | ValueOf.UnionOf _
+    | ValueOf.DictionaryOf _
+    | ValueOf.UserDefinedValue -> "Unchecked.defaultof<_>"
 
 let emitRecord (w: Writer) (isFirst: bool) (ctx: TypeResolver.ResolveContext) (name: string) (properties: Property list) (generics: TypeName list) (description: string option) =
     w.DocComment description

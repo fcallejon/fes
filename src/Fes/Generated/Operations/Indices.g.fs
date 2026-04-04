@@ -199,7 +199,7 @@ module IndicesOperations =
     let indicesAnalyzeRequest = IndicesAnalyzeRequestBuilder()
 
     module Analyze =
-        let withIndex (value: Types.IndexName) (req: IndicesAnalyzeRequest) =
+        let withQueryIndex (value: Types.IndexName) (req: IndicesAnalyzeRequest) =
             { req with queryIndex = Some value }
         let withAnalyzer (value: string) (req: IndicesAnalyzeRequest) =
             { req with Analyzer = Some value }
@@ -333,7 +333,7 @@ module IndicesOperations =
     let indicesClearCacheRequest = IndicesClearCacheRequestBuilder()
 
     module ClearCache =
-        let withIndex (value: Types.Indices) (req: IndicesClearCacheRequest) =
+        let withQueryIndex (value: Types.Indices) (req: IndicesClearCacheRequest) =
             { req with queryIndex = Some value }
         let withAllowNoIndices (value: bool) (req: IndicesClearCacheRequest) =
             { req with AllowNoIndices = Some value }

@@ -578,7 +578,7 @@ module WatcherOperations =
     module Stats =
         let withEmitStacktraces (value: bool) (req: WatcherStatsRequest) =
             { req with EmitStacktraces = Some value }
-        let withMetric (value: Types.WatcherMetric list) (req: WatcherStatsRequest) =
+        let withQueryMetric (value: Types.WatcherMetric list) (req: WatcherStatsRequest) =
             { req with queryMetric = Some value }
 
     type WatcherStopRequest = {
