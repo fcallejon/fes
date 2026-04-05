@@ -20,7 +20,11 @@ let rec private collectInheritedProps (index: TypeIndex.TypeIndex) (inh: Inherit
         | Some (TypeDefinition.Interface d) ->
             // grandparent properties first, then parent's own
             collectInheritedProps index d.Inherits @ d.Properties
-        | _ -> []
+        | Some (TypeDefinition.Request _)
+        | Some (TypeDefinition.Response _)
+        | Some (TypeDefinition.Enum _)
+        | Some (TypeDefinition.TypeAlias _)
+        | None -> []
 
 let private flattenInterface (index: TypeIndex.TypeIndex) (def: InterfaceDefinition) : InterfaceDefinition =
     match def.Variants with
@@ -36,7 +40,10 @@ let private flattenInheritance (index: TypeIndex.TypeIndex) (types: TypeDefiniti
     types |> List.map (fun td ->
         match td with
         | TypeDefinition.Interface def -> TypeDefinition.Interface (flattenInterface index def)
-        | _ -> td)
+        | TypeDefinition.Request _
+        | TypeDefinition.Response _
+        | TypeDefinition.Enum _
+        | TypeDefinition.TypeAlias _ -> td)
 
 [<EntryPoint>]
 let main args =
@@ -97,7 +104,10 @@ let main args =
             interfaceCount <- interfaceCount + 1
             match d.Variants with
             | Some (VariantKind.Container _) -> containerVariantCount <- containerVariantCount + 1
-            | _ -> ()
+            | Some (VariantKind.InternalTag _)
+            | Some (VariantKind.ExternalTag)
+            | Some (VariantKind.Untagged _)
+            | None -> ()
         | TypeDefinition.Request _ -> requestCount <- requestCount + 1
         | TypeDefinition.Response _ -> responseCount <- responseCount + 1
         | TypeDefinition.Enum _ -> enumCount <- enumCount + 1
@@ -105,7 +115,10 @@ let main args =
             typeAliasCount <- typeAliasCount + 1
             match d.Variants with
             | Some (VariantKind.InternalTag _) -> internalTagCount <- internalTagCount + 1
-            | _ -> ()
+            | Some (VariantKind.Container _)
+            | Some (VariantKind.ExternalTag)
+            | Some (VariantKind.Untagged _)
+            | None -> ()
 
     printfn ""
     printfn $"Schema: {model.Endpoints.Length} endpoints ({endpointsToGenerate} to generate), {model.Types.Length} types"
