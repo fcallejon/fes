@@ -56,7 +56,8 @@ let rec resolveValueOf (ctx: ResolveContext) (v: ValueOf) : string =
             let baseName =
                 match ctx.CurrentNamespace with
                 | Some "__all__" -> resolvedName
-                | _ -> $"Types.{resolvedName}"
+                | Some _
+                | None -> $"Types.{resolvedName}"
             match generics with
             | [] -> baseName
             | gs ->
@@ -90,7 +91,12 @@ let rec resolveValueOf (ctx: ResolveContext) (v: ValueOf) : string =
 and private isNullType (v: ValueOf) =
     match v with
     | ValueOf.InstanceOf (tn, _) when tn.Namespace = "_builtins" && tn.Name = "null" -> true
-    | _ -> false
+    | ValueOf.InstanceOf _
+    | ValueOf.ArrayOf _
+    | ValueOf.UnionOf _
+    | ValueOf.DictionaryOf _
+    | ValueOf.UserDefinedValue
+    | ValueOf.LiteralValue _ -> false
 
 /// Create a resolve context from generic parameters
 let makeContext (index: TypeIndex.TypeIndex) (generics: TypeName list) : ResolveContext =
