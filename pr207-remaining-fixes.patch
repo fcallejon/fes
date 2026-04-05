@@ -1,0 +1,109 @@
+diff --git a/src/Fes/Generated/Operations/Cat.g.fs b/src/Fes/Generated/Operations/Cat.g.fs
+index 5a92754..2f10066 100644
+--- a/src/Fes/Generated/Operations/Cat.g.fs
++++ b/src/Fes/Generated/Operations/Cat.g.fs
+@@ -402,7 +402,7 @@ module CatOperations =
+     let catFielddataRequest = CatFielddataRequestBuilder()
+ 
+     module Fielddata =
+-        let withFields (value: Types.Fields) (req: CatFielddataRequest) =
++        let withQueryFields (value: Types.Fields) (req: CatFielddataRequest) =
+             { req with queryFields = Some value }
+         let withH (value: Types.CatFieldDataColumns) (req: CatFielddataRequest) =
+             { req with H = Some value }
+@@ -1232,7 +1232,7 @@ module CatOperations =
+             { req with ActiveOnly = Some value }
+         let withDetailed (value: bool) (req: CatRecoveryRequest) =
+             { req with Detailed = Some value }
+-        let withIndex (value: Types.Indices) (req: CatRecoveryRequest) =
++        let withQueryIndex (value: Types.Indices) (req: CatRecoveryRequest) =
+             { req with queryIndex = Some value }
+         let withH (value: Types.CatRecoveryColumns) (req: CatRecoveryRequest) =
+             { req with H = Some value }
+diff --git a/src/Fes/Generated/Operations/Monitoring.g.fs b/src/Fes/Generated/Operations/Monitoring.g.fs
+index 1528e51..950a8dc 100644
+--- a/src/Fes/Generated/Operations/Monitoring.g.fs
++++ b/src/Fes/Generated/Operations/Monitoring.g.fs
+@@ -22,7 +22,16 @@ module MonitoringOperations =
+         with
+         static member ToEndpoint(req: MonitoringBulkRequest<'TDocument, 'TPartialDocument>) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
+             let path = $"/_monitoring/bulk"
+-            let fullPath = path
++            let queryParams =
++                [
++                    "system_id", Fes.Http.toQueryValue req.SystemId
++                    "system_api_version", Fes.Http.toQueryValue req.SystemApiVersion
++                    "interval", Fes.Http.toQueryValue req.Interval
++                ]
++            let queryString =
++                if List.isEmpty queryParams then ""
++                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
++            let fullPath = path + queryString
+             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
+             let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req.Document)
+             endpoint, ValueSome postData
+@@ -63,3 +72,4 @@ module MonitoringOperations =
+             { req with SystemApiVersion = value }
+         let withInterval (value: Types.Duration) (req: MonitoringBulkRequest<_, _>) =
+             { req with Interval = value }
++
+diff --git a/src/Fes/Generated/Operations/TextStructure.g.fs b/src/Fes/Generated/Operations/TextStructure.g.fs
+index 0bbb411..89a0e20 100644
+--- a/src/Fes/Generated/Operations/TextStructure.g.fs
++++ b/src/Fes/Generated/Operations/TextStructure.g.fs
+@@ -35,6 +35,10 @@ module TextStructureOperations =
+             let path = $"/_text_structure/find_field_structure"
+             let queryParams =
+                 [
++                    "field", Fes.Http.toQueryValue req.Field
++                    "index", Fes.Http.toQueryValue req.Index
++                ] @
++                ([
+                     req.ColumnNames |> Option.map (fun v -> "column_names", Fes.Http.toQueryValue v)
+                     req.Delimiter |> Option.map (fun v -> "delimiter", Fes.Http.toQueryValue v)
+                     req.DocumentsToSample |> Option.map (fun v -> "documents_to_sample", Fes.Http.toQueryValue v)
+@@ -48,7 +52,7 @@ module TextStructureOperations =
+                     req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
+                     req.TimestampField |> Option.map (fun v -> "timestamp_field", Fes.Http.toQueryValue v)
+                     req.TimestampFormat |> Option.map (fun v -> "timestamp_format", Fes.Http.toQueryValue v)
+-                ] |> List.choose id
++                ] |> List.choose id)
+             let queryString =
+                 if List.isEmpty queryParams then ""
+                 else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+@@ -549,3 +553,4 @@ module TextStructureOperations =
+             { req with GrokPattern = value }
+         let withText (value: string list) (req: TextStructureTestGrokPatternRequest) =
+             { req with Text = value }
++
+diff --git a/src/Fes/Generated/Operations/Watcher.g.fs b/src/Fes/Generated/Operations/Watcher.g.fs
+index 73787ef..595afc9 100644
+--- a/src/Fes/Generated/Operations/Watcher.g.fs
++++ b/src/Fes/Generated/Operations/Watcher.g.fs
+@@ -578,7 +578,7 @@ module WatcherOperations =
+     module Stats =
+         let withEmitStacktraces (value: bool) (req: WatcherStatsRequest) =
+             { req with EmitStacktraces = Some value }
+-        let withMetric (value: Types.WatcherMetric list) (req: WatcherStatsRequest) =
++        let withQueryMetric (value: Types.WatcherMetric list) (req: WatcherStatsRequest) =
+             { req with queryMetric = Some value }
+ 
+     type WatcherStopRequest = {
+@@ -680,3 +680,4 @@ module WatcherOperations =
+             { req with IndexAutoExpandReplicas = Some value }
+         let withIndexNumberOfReplicas (value: Types.Integer) (req: WatcherUpdateSettingsRequest) =
+             { req with IndexNumberOfReplicas = Some value }
++
+diff --git a/src/Fes/Mapping.fs b/src/Fes/Mapping.fs
+index c60a8e6..a752b06 100644
+--- a/src/Fes/Mapping.fs
++++ b/src/Fes/Mapping.fs
+@@ -181,7 +181,7 @@ module Mapping =
+ 
+     /// Attach sub-fields (multi-fields) to any property that supports them.
+     ///
+-    /// Example — text field with an unanalysed .keyword sub-field:
++    /// Example — text field with an unanalyzed .keyword sub-field:
+     ///   Mapping.text "title" Types.TextProperty.empty
+     ///   |> Mapping.withFields [ Mapping.keyword "keyword" Types.KeywordProperty.empty ]
+     let withFields
