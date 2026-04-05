@@ -47,10 +47,7 @@ let main _ =
     printfn "\nQuery DSL examples..."
 
     // Bool query
-    let boolQ = Query.bool {
-        Filter = None; MinimumShouldMatch = None
-        Must = None; MustNot = None; Should = None
-    }
+    let boolQ = Query.bool Types.BoolQuery.empty
     let boolJson = Json.serialize boolQ
     printfn $"  Bool query: {boolJson}"
 
