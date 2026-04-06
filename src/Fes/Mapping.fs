@@ -181,7 +181,7 @@ module Mapping =
 
     /// Attach sub-fields (multi-fields) to any property that supports them.
     ///
-    /// Example — text field with an unanalysed .keyword sub-field:
+    /// Example — text field with an unanalyzed .keyword sub-field:
     ///   Mapping.text "title" Types.TextProperty.empty
     ///   |> Mapping.withFields [ Mapping.keyword "keyword" Types.KeywordProperty.empty ]
     let withFields

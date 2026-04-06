@@ -22,7 +22,16 @@ module MonitoringOperations =
         with
         static member ToEndpoint(req: MonitoringBulkRequest<'TDocument, 'TPartialDocument>) : Elastic.Transport.EndpointPath * Elastic.Transport.PostData voption =
             let path = $"/_monitoring/bulk"
-            let fullPath = path
+            let queryParams =
+                [
+                    "system_id", Fes.Http.toQueryValue req.SystemId
+                    "system_api_version", Fes.Http.toQueryValue req.SystemApiVersion
+                    "interval", Fes.Http.toQueryValue req.Interval
+                ]
+            let queryString =
+                if List.isEmpty queryParams then ""
+                else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
+            let fullPath = path + queryString
             let endpoint = Elastic.Transport.EndpointPath(Elastic.Transport.HttpMethod.POST, fullPath)
             let postData = Elastic.Transport.PostData.String(Fes.Json.serialize req.Document)
             endpoint, ValueSome postData
@@ -63,3 +72,4 @@ module MonitoringOperations =
             { req with SystemApiVersion = value }
         let withInterval (value: Types.Duration) (req: MonitoringBulkRequest<_, _>) =
             { req with Interval = value }
+
