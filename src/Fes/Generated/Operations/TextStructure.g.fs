@@ -35,6 +35,10 @@ module TextStructureOperations =
             let path = $"/_text_structure/find_field_structure"
             let queryParams =
                 [
+                    "field", Fes.Http.toQueryValue req.Field
+                    "index", Fes.Http.toQueryValue req.Index
+                ] @
+                ([
                     req.ColumnNames |> Option.map (fun v -> "column_names", Fes.Http.toQueryValue v)
                     req.Delimiter |> Option.map (fun v -> "delimiter", Fes.Http.toQueryValue v)
                     req.DocumentsToSample |> Option.map (fun v -> "documents_to_sample", Fes.Http.toQueryValue v)
@@ -48,7 +52,7 @@ module TextStructureOperations =
                     req.Timeout |> Option.map (fun v -> "timeout", Fes.Http.toQueryValue v)
                     req.TimestampField |> Option.map (fun v -> "timestamp_field", Fes.Http.toQueryValue v)
                     req.TimestampFormat |> Option.map (fun v -> "timestamp_format", Fes.Http.toQueryValue v)
-                ] |> List.choose id
+                ] |> List.choose id)
             let queryString =
                 if List.isEmpty queryParams then ""
                 else "?" + (queryParams |> List.map (fun (k, v) -> k + "=" + v) |> String.concat "&")
@@ -549,3 +553,4 @@ module TextStructureOperations =
             { req with GrokPattern = value }
         let withText (value: string list) (req: TextStructureTestGrokPatternRequest) =
             { req with Text = value }
+
