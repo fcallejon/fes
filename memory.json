@@ -1,12 +1,15 @@
 {
-  "r": "24028539782",
+  "r": "24339707554",
   "m": "2026-04",
-  "mi": "aw_ma2604d",
-  "n": "CIcachePRadded.MicrosoftTestSdk18.3.AlltypesOOMpreexisting",
+  "mi": "new_created_this_run",
+  "n": "PR210open(CopilotNuGetCache+TestSdk18.3).NewCIpr(splitTests+GCConservative)created.",
   "prs": {
-    "ci_cache": "repo-assist/eng-ci-cache-nuget-20260406"
+    "ci_split_gc": "repo-assist/eng-split-ci-tests-20260413"
   },
-  "oom": "AllTypes.g.fs 27k lines causes fsc exit 137 on build",
-  "pending": "Check PR #207 (Copilot generator ergonomics) - needs merge review",
-  "future": "FSharp.Core 10.0->10.1 and coverlet 6->8 major updates pending stability check"
+  "oom": "AllTypes.g.fs 51k lines. GCConservativeMode=1 included in new PR. Long-term fix: generator chunking.",
+  "open_prs": {
+    "210": "Copilot: NuGet cache + Test.Sdk 18.3.0 - open, CI action_required",
+    "new": "[Repo Assist] ci: split test steps and add conservative GC mode - draft"
+  },
+  "future": "FSharp.Core 10.0->11.0 and coverlet 6->8 major updates pending stability. AllTypes split investigation."
 }
