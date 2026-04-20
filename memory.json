@@ -1,15 +1,22 @@
 {
-  "r": "24339707554",
+  "r": "24662806611",
   "m": "2026-04",
-  "mi": "new_created_this_run",
-  "n": "PR210open(CopilotNuGetCache+TestSdk18.3).NewCIpr(splitTests+GCConservative)created.",
+  "mi": "212",
+  "n": "IMPORTANT: Branch repo-assist/improve-chunked-type-generation committed locally but NOT pushed (no auth). Next run: push + create PR. Issue #211 (CI split) still open. PR #210 (NuGet) still open.",
   "prs": {
-    "ci_split_gc": "repo-assist/eng-split-ci-tests-20260413"
+    "chunked_types_branch": "repo-assist/improve-chunked-type-generation (local commit only, needs push)"
   },
-  "oom": "AllTypes.g.fs 51k lines. GCConservativeMode=1 included in new PR. Long-term fix: generator chunking.",
+  "oom": "AllTypes.g.fs split into 6 chunks (~8-10k each). Build still OOMs on runner (resource limit). Code changes complete, commit ready. PR needs to be created.",
   "open_prs": {
-    "210": "Copilot: NuGet cache + Test.Sdk 18.3.0 - open, CI action_required",
-    "new": "[Repo Assist] ci: split test steps and add conservative GC mode - draft"
+    "210": "Copilot: NuGet cache + Test.Sdk 18.3.0 - open draft"
   },
-  "future": "FSharp.Core 10.0->11.0 and coverlet 6->8 major updates pending stability. AllTypes split investigation."
+  "open_issues": {
+    "211": "[Repo Assist] ci: split test steps and add conservative GC mode - manual patch for human",
+    "212": "[Repo Assist] Monthly Activity 2026-04"
+  },
+  "backlog": [
+    "PUSH branch repo-assist/improve-chunked-type-generation and create draft PR",
+    "Update monthly activity issue #212 with this run's activity",
+    "FSharp.Core 10->11 and coverlet 6->8 major updates pending stability"
+  ]
 }
