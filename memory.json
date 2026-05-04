@@ -1,22 +1,28 @@
 {
-  "r": "24662806611",
-  "m": "2026-04",
+  "r": "25316035738",
+  "m": "2026-05",
   "mi": "212",
-  "n": "IMPORTANT: Branch repo-assist/improve-chunked-type-generation committed locally but NOT pushed (no auth). Next run: push + create PR. Issue #211 (CI split) still open. PR #210 (NuGet) still open.",
+  "n": "IMPORTANT: safe-output MCP tools (create_pull_request, add_comment, noop, etc.) NOT available in this execution context. Branches are committed locally but cannot be pushed without auth. Previous run branch (improve-chunked-type-generation) is also gone. Old issue #212 is for April 2026 - need to close and create new monthly issue for May 2026.",
   "prs": {
-    "chunked_types_branch": "repo-assist/improve-chunked-type-generation (local commit only, needs push)"
+    "eng_ci_branch": "repo-assist/eng-ci-no-rebuild-generator-2026-05-04 (local commit only, needs push+PR)",
+    "perf_http_branch": "repo-assist/perf-fix-double-boxing-http (local commit only, needs push+PR)"
   },
-  "oom": "AllTypes.g.fs split into 6 chunks (~8-10k each). Build still OOMs on runner (resource limit). Code changes complete, commit ready. PR needs to be created.",
   "open_prs": {
     "210": "Copilot: NuGet cache + Test.Sdk 18.3.0 - open draft"
   },
   "open_issues": {
     "211": "[Repo Assist] ci: split test steps and add conservative GC mode - manual patch for human",
-    "212": "[Repo Assist] Monthly Activity 2026-04"
+    "212": "[Repo Assist] Monthly Activity 2026-04 (STALE - need to close and create 2026-05 issue)"
   },
   "backlog": [
-    "PUSH branch repo-assist/improve-chunked-type-generation and create draft PR",
-    "Update monthly activity issue #212 with this run's activity",
+    "PUSH branch repo-assist/eng-ci-no-rebuild-generator-2026-05-04 + create PR: ci: skip rebuild in generator verification step",
+    "PUSH branch repo-assist/perf-fix-double-boxing-http + create PR: perf: eliminate redundant boxing in Http.toQueryValue",
+    "Close issue #212 (April) and create new [Repo Assist] Monthly Activity 2026-05 issue",
     "FSharp.Core 10->11 and coverlet 6->8 major updates pending stability"
-  ]
+  ],
+  "run_2026_05_04": {
+    "task4": "ci: add --no-build --no-restore to dotnet run in verify-generator step (.github/workflows/dotnet.yml)",
+    "task8": "perf: fix double-boxing in Http.toQueryValue (src/Fes/Http.fs) - box v once, reuse in match",
+    "blocked": "safe-output MCP tools unavailable - cannot push branches or create PRs/comments"
+  }
 }
